@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## CreateV2ServiceAccount
 
-> V2ServiceAccount CreateV2ServiceAccount(ctx).UNKNOWNBASETYPE(uNKNOWNBASETYPE).Execute()
+> V2ServiceAccount CreateV2ServiceAccount(ctx).V2ServiceAccount(v2ServiceAccount).Execute()
 
 Create a Service Account
 
@@ -31,7 +31,7 @@ Other parameters are passed through a pointer to a apiCreateV2ServiceAccountRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **uNKNOWNBASETYPE** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md) |  | 
+ **v2ServiceAccount** | [**V2ServiceAccount**](V2ServiceAccount.md) |  | 
 
 ### Return type
 

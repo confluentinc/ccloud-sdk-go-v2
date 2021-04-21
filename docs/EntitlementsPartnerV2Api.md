@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## CreatePartnerV2Entitlement
 
-> PartnerV2Entitlement CreatePartnerV2Entitlement(ctx).UNKNOWNBASETYPE(uNKNOWNBASETYPE).Execute()
+> PartnerV2Entitlement CreatePartnerV2Entitlement(ctx).PartnerV2Entitlement(partnerV2Entitlement).Execute()
 
 Create an Entitlement
 
@@ -29,7 +29,7 @@ Other parameters are passed through a pointer to a apiCreatePartnerV2Entitlement
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **uNKNOWNBASETYPE** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md) |  | 
+ **partnerV2Entitlement** | [**PartnerV2Entitlement**](PartnerV2Entitlement.md) |  | 
 
 ### Return type
 

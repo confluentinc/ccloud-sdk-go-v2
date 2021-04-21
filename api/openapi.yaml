@@ -2645,11 +2645,7 @@ paths:
         content:
           application/json:
             schema:
-              allOf:
-              - $ref: '#/components/schemas/v2.ServiceAccount'
-              - required:
-                - display_name
-                type: object
+              $ref: '#/components/schemas/v2.ServiceAccount'
       responses:
         "201":
           content:
@@ -5226,14 +5222,7 @@ paths:
         content:
           application/json:
             schema:
-              allOf:
-              - $ref: '#/components/schemas/partner.v2.Entitlement'
-              - required:
-                - external_id
-                - name
-                - plan_id
-                - product_id
-                type: object
+              $ref: '#/components/schemas/partner.v2.Entitlement'
       responses:
         "201":
           content:
