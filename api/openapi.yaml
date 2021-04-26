@@ -31,8 +31,8 @@ info:
     \ tells\nConfluent the _desired state_ (specification) of the resource. The object\
     \ may not be\nimmediately available or changes may not be immediately applied.\
     \ For this reason,\nmany objects also have a\_`status` property that provides\
-    \ info about the current\n_actual state_ of the resource. Confluent Cloud is continuously\
-    \ and actively managing\neach resource's actual state to match it's desired state.\n\
+    \ info about the\n_current state_ of the resource. Confluent Cloud is continuously\
+    \ and actively managing\neach resource's current state to match it's desired state.\n\
     \nAll Confluent objects share a set of common properties:\n\n* **api_version**\_\
     –\_API objects have an `api_version`\_field indicating their API version.\n* **kind**\_\
     –\_API objects have a\_`kind`\_field indicating the kind of\_object it is.\n*\
@@ -4683,24 +4683,22 @@ paths:
       requestBody:
         content:
           application/json:
-            examples:
-              GCS_connector_invalid_body:
-                value:
-                  cloud.environment: prod
-                  cloud.provider: aws
-                  connector.class: GcsSink
-                  data.format: BYTES
-                  flush.size: "500"
-                  gcs.bucket.name: APILogsBucket
-                  gcs.credentials.config: '****************'
-                  kafka.api.key: '****************'
-                  kafka.api.secret: '****************'
-                  kafka.endpoint: SASL_SSL://pkc-xxxxx.us-west-2.aws.confluent.cloud:9092
-                  kafka.region: us-west-2
-                  name: MyGcsLogsBucketConnector
-                  tasks.max: "2"
-                  time.interval: DAILY
-                  topics: APILogsTopic
+            example:
+              cloud.environment: prod
+              cloud.provider: aws
+              connector.class: GcsSink
+              data.format: BYTES
+              flush.size: "500"
+              gcs.bucket.name: APILogsBucket
+              gcs.credentials.config: '****************'
+              kafka.api.key: '****************'
+              kafka.api.secret: '****************'
+              kafka.endpoint: SASL_SSL://pkc-xxxxx.us-west-2.aws.confluent.cloud:9092
+              kafka.region: us-west-2
+              name: MyGcsLogsBucketConnector
+              tasks.max: "2"
+              time.interval: DAILY
+              topics: APILogsTopic
             schema:
               additionalProperties:
                 description: Other configuration parameters for the connector. All

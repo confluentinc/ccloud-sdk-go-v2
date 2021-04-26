@@ -1,4 +1,4 @@
-# Go API client for v1
+# Go API client for ccloud
 
 <div class=\"status-info\">
 <p class=\"status-info-title\">Note</p>
@@ -39,9 +39,9 @@ Confluent APIs represent objects in JSON with media-type `application/json`.
 Many objects follow a model consisting of `spec` and `status`. An object's `spec` tells
 Confluent the _desired state_ (specification) of the resource. The object may not be
 immediately available or changes may not be immediately applied. For this reason,
-many objects also have a `status` property that provides info about the current
-_actual state_ of the resource. Confluent Cloud is continuously and actively managing
-each resource's actual state to match it's desired state.
+many objects also have a `status` property that provides info about the
+_current state_ of the resource. Confluent Cloud is continuously and actively managing
+each resource's current state to match it's desired state.
 
 All Confluent objects share a set of common properties:
 
@@ -598,7 +598,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```golang
-import sw "./v1"
+import sw "./ccloud"
 ```
 
 ## Configuration of Server URL
