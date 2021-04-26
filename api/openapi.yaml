@@ -243,11 +243,11 @@ info:
     | **total_size**   | The total count of items in the list irrespective of pagination.\
     \ See [Pagination](#section/Pagination).\n| **spec**         | The _desired state_\
     \ specification of the resource, as observed by Confluent Cloud.\n| **status**\
-    \       | The current _actual state_ of the resource, as observed by Confluent\
-    \ Cloud.\n\n# Versioning\n\nConfluent APIs ensure stability for your integrations\
-    \ by avoiding the introduction\nof breaking changes to customers unexpectedly.\
-    \ Confluent will make non-breaking\nAPI changes without advance notice. Thus,\
-    \ API clients **must**  follow the\n[Compatibility Policy](#section/Versioning/Compatibility-Policy)\
+    \       | The _current state_ of the resource, as observed by Confluent Cloud.\n\
+    \n# Versioning\n\nConfluent APIs ensure stability for your integrations by avoiding\
+    \ the introduction\nof breaking changes to customers unexpectedly. Confluent will\
+    \ make non-breaking\nAPI changes without advance notice. Thus, API clients **must**\
+    \  follow the\n[Compatibility Policy](#section/Versioning/Compatibility-Policy)\
     \ below to ensure your\ningtegration remains stable. All APIs follow the API Lifecycle\
     \ Policy described below,\nwhich describes the guarantees API clients can rely\
     \ on.\n\nBreaking changes will be [widely communicated](#communication) in advance\
@@ -7265,10 +7265,10 @@ components:
           discriminator:
             propertyName: kind
           oneOf:
-          - $ref: '#/components/schemas/AzureSSOConfig'
+          - $ref: '#/components/schemas/partner.v2.AzureSSOConfig'
           x-oneOf-name: PartnerV2OrganizationSsoConfigOneOf
       type: object
-    AzureSSOConfig:
+    partner.v2.AzureSSOConfig:
       properties:
         kind:
           example: AzureSSOConfig

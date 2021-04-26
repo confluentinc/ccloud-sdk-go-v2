@@ -14,63 +14,34 @@ import (
 	"encoding/json"
 )
 
-// V2EnvironmentList `Environment` objects represent an isolated namespace for your Confluent resources
-type V2EnvironmentList struct {
-	// APIVersion defines the schema version of this representation of a resource.
-	ApiVersion string `json:"api_version"`
-	// Kind defines the object this REST resource represents.
+// PartnerV2AzureSSOConfig struct for PartnerV2AzureSSOConfig
+type PartnerV2AzureSSOConfig struct {
 	Kind string `json:"kind"`
-	Metadata ListMeta `json:"metadata"`
-	Data []V2Environment `json:"data"`
+	// The Azure AD tenant ID
+	TenantId string `json:"tenant_id"`
 }
 
-// NewV2EnvironmentList instantiates a new V2EnvironmentList object
+// NewPartnerV2AzureSSOConfig instantiates a new PartnerV2AzureSSOConfig object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2EnvironmentList(apiVersion string, kind string, metadata ListMeta, data []V2Environment, ) *V2EnvironmentList {
-	this := V2EnvironmentList{}
-	this.ApiVersion = apiVersion
+func NewPartnerV2AzureSSOConfig(kind string, tenantId string, ) *PartnerV2AzureSSOConfig {
+	this := PartnerV2AzureSSOConfig{}
 	this.Kind = kind
-	this.Metadata = metadata
-	this.Data = data
+	this.TenantId = tenantId
 	return &this
 }
 
-// NewV2EnvironmentListWithDefaults instantiates a new V2EnvironmentList object
+// NewPartnerV2AzureSSOConfigWithDefaults instantiates a new PartnerV2AzureSSOConfig object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewV2EnvironmentListWithDefaults() *V2EnvironmentList {
-	this := V2EnvironmentList{}
+func NewPartnerV2AzureSSOConfigWithDefaults() *PartnerV2AzureSSOConfig {
+	this := PartnerV2AzureSSOConfig{}
 	return &this
-}
-
-// GetApiVersion returns the ApiVersion field value
-func (o *V2EnvironmentList) GetApiVersion() string {
-	if o == nil  {
-		var ret string
-		return ret
-	}
-
-	return o.ApiVersion
-}
-
-// GetApiVersionOk returns a tuple with the ApiVersion field value
-// and a boolean to check if the value has been set.
-func (o *V2EnvironmentList) GetApiVersionOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.ApiVersion, true
-}
-
-// SetApiVersion sets field value
-func (o *V2EnvironmentList) SetApiVersion(v string) {
-	o.ApiVersion = v
 }
 
 // GetKind returns the Kind field value
-func (o *V2EnvironmentList) GetKind() string {
+func (o *PartnerV2AzureSSOConfig) GetKind() string {
 	if o == nil  {
 		var ret string
 		return ret
@@ -81,7 +52,7 @@ func (o *V2EnvironmentList) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *V2EnvironmentList) GetKindOk() (*string, bool) {
+func (o *PartnerV2AzureSSOConfig) GetKindOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -89,107 +60,81 @@ func (o *V2EnvironmentList) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *V2EnvironmentList) SetKind(v string) {
+func (o *PartnerV2AzureSSOConfig) SetKind(v string) {
 	o.Kind = v
 }
 
-// GetMetadata returns the Metadata field value
-func (o *V2EnvironmentList) GetMetadata() ListMeta {
+// GetTenantId returns the TenantId field value
+func (o *PartnerV2AzureSSOConfig) GetTenantId() string {
 	if o == nil  {
-		var ret ListMeta
+		var ret string
 		return ret
 	}
 
-	return o.Metadata
+	return o.TenantId
 }
 
-// GetMetadataOk returns a tuple with the Metadata field value
+// GetTenantIdOk returns a tuple with the TenantId field value
 // and a boolean to check if the value has been set.
-func (o *V2EnvironmentList) GetMetadataOk() (*ListMeta, bool) {
+func (o *PartnerV2AzureSSOConfig) GetTenantIdOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.Metadata, true
+	return &o.TenantId, true
 }
 
-// SetMetadata sets field value
-func (o *V2EnvironmentList) SetMetadata(v ListMeta) {
-	o.Metadata = v
+// SetTenantId sets field value
+func (o *PartnerV2AzureSSOConfig) SetTenantId(v string) {
+	o.TenantId = v
 }
 
-// GetData returns the Data field value
-func (o *V2EnvironmentList) GetData() []V2Environment {
-	if o == nil  {
-		var ret []V2Environment
-		return ret
-	}
-
-	return o.Data
-}
-
-// GetDataOk returns a tuple with the Data field value
-// and a boolean to check if the value has been set.
-func (o *V2EnvironmentList) GetDataOk() (*[]V2Environment, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.Data, true
-}
-
-// SetData sets field value
-func (o *V2EnvironmentList) SetData(v []V2Environment) {
-	o.Data = v
-}
-
-func (o V2EnvironmentList) MarshalJSON() ([]byte, error) {
+func (o PartnerV2AzureSSOConfig) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["api_version"] = o.ApiVersion
-	}
 	if true {
 		toSerialize["kind"] = o.Kind
 	}
 	if true {
-		toSerialize["metadata"] = o.Metadata
-	}
-	if true {
-		toSerialize["data"] = o.Data
+		toSerialize["tenant_id"] = o.TenantId
 	}
 	return json.Marshal(toSerialize)
 }
 
-type NullableV2EnvironmentList struct {
-	value *V2EnvironmentList
+// AsPartnerV2OrganizationSsoConfigOneOf wraps this instance of PartnerV2AzureSSOConfig in PartnerV2OrganizationSsoConfigOneOf
+func (s *PartnerV2AzureSSOConfig) AsPartnerV2OrganizationSsoConfigOneOf() PartnerV2OrganizationSsoConfigOneOf {
+	return PartnerV2OrganizationSsoConfigOneOf{ PartnerV2OrganizationSsoConfigOneOfInterface: s }
+}
+type NullablePartnerV2AzureSSOConfig struct {
+	value *PartnerV2AzureSSOConfig
 	isSet bool
 }
 
-func (v NullableV2EnvironmentList) Get() *V2EnvironmentList {
+func (v NullablePartnerV2AzureSSOConfig) Get() *PartnerV2AzureSSOConfig {
 	return v.value
 }
 
-func (v *NullableV2EnvironmentList) Set(val *V2EnvironmentList) {
+func (v *NullablePartnerV2AzureSSOConfig) Set(val *PartnerV2AzureSSOConfig) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableV2EnvironmentList) IsSet() bool {
+func (v NullablePartnerV2AzureSSOConfig) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableV2EnvironmentList) Unset() {
+func (v *NullablePartnerV2AzureSSOConfig) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableV2EnvironmentList(val *V2EnvironmentList) *NullableV2EnvironmentList {
-	return &NullableV2EnvironmentList{value: val, isSet: true}
+func NewNullablePartnerV2AzureSSOConfig(val *PartnerV2AzureSSOConfig) *NullablePartnerV2AzureSSOConfig {
+	return &NullablePartnerV2AzureSSOConfig{value: val, isSet: true}
 }
 
-func (v NullableV2EnvironmentList) MarshalJSON() ([]byte, error) {
+func (v NullablePartnerV2AzureSSOConfig) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableV2EnvironmentList) UnmarshalJSON(src []byte) error {
+func (v *NullablePartnerV2AzureSSOConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
