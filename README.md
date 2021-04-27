@@ -333,7 +333,7 @@ the same name and semantics across different APIs.
 | **page_size**    | The pagination size in the List request. See [Pagination](#section/Pagination).
 | **total_size**   | The total count of items in the list irrespective of pagination. See [Pagination](#section/Pagination).
 | **spec**         | The _desired state_ specification of the resource, as observed by Confluent Cloud.
-| **status**       | The current _actual state_ of the resource, as observed by Confluent Cloud.
+| **status**       | The _current state_ of the resource, as observed by Confluent Cloud.
 
 # Versioning
 
@@ -686,7 +686,6 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [ActivatePartnerSignupRequest](docs/ActivatePartnerSignupRequest.md)
- - [AzureSSOConfig](docs/AzureSSOConfig.md)
  - [ConnectV1Connector](docs/ConnectV1Connector.md)
  - [ConnectV1ConnectorError](docs/ConnectV1ConnectorError.md)
  - [ConnectV1ConnectorErrorError](docs/ConnectV1ConnectorErrorError.md)
@@ -712,6 +711,7 @@ Class | Method | HTTP request | Description
  - [PartnerSignupRequest](docs/PartnerSignupRequest.md)
  - [PartnerSignupRequestEntitlementOneOf](docs/PartnerSignupRequestEntitlementOneOf.md)
  - [PartnerSignupResponse](docs/PartnerSignupResponse.md)
+ - [PartnerV2AzureSSOConfig](docs/PartnerV2AzureSSOConfig.md)
  - [PartnerV2Entitlement](docs/PartnerV2Entitlement.md)
  - [PartnerV2EntitlementList](docs/PartnerV2EntitlementList.md)
  - [PartnerV2Organization](docs/PartnerV2Organization.md)
