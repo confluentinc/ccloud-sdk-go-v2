@@ -49,6 +49,26 @@ type APIClient struct {
 
 	// API Services
 
+	ConnectorsV1Api *ConnectorsV1ApiService
+
+	EntitlementsPartnerV2Api *EntitlementsPartnerV2ApiService
+
+	EnvironmentsV2Api *EnvironmentsV2ApiService
+
+	LifecycleV1Api *LifecycleV1ApiService
+
+	OrganizationsPartnerV2Api *OrganizationsPartnerV2ApiService
+
+	PluginsV1Api *PluginsV1ApiService
+
+	ServiceAccountsV2Api *ServiceAccountsV2ApiService
+
+	SignupPartnerV2Api *SignupPartnerV2ApiService
+
+	StatusV1Api *StatusV1ApiService
+
+	UsersV2Api *UsersV2ApiService
+
 	NetworksNetworkingV1Api *NetworksNetworkingV1ApiService
 
 	PeeringsNetworkingV1Api *PeeringsNetworkingV1ApiService
@@ -74,6 +94,16 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
+	c.ConnectorsV1Api = (*ConnectorsV1ApiService)(&c.common)
+	c.EntitlementsPartnerV2Api = (*EntitlementsPartnerV2ApiService)(&c.common)
+	c.EnvironmentsV2Api = (*EnvironmentsV2ApiService)(&c.common)
+	c.LifecycleV1Api = (*LifecycleV1ApiService)(&c.common)
+	c.OrganizationsPartnerV2Api = (*OrganizationsPartnerV2ApiService)(&c.common)
+	c.PluginsV1Api = (*PluginsV1ApiService)(&c.common)
+	c.ServiceAccountsV2Api = (*ServiceAccountsV2ApiService)(&c.common)
+	c.SignupPartnerV2Api = (*SignupPartnerV2ApiService)(&c.common)
+	c.StatusV1Api = (*StatusV1ApiService)(&c.common)
+	c.UsersV2Api = (*UsersV2ApiService)(&c.common)
 	c.NetworksNetworkingV1Api = (*NetworksNetworkingV1ApiService)(&c.common)
 	c.PeeringsNetworkingV1Api = (*PeeringsNetworkingV1ApiService)(&c.common)
 	c.PrivateLinkAccessesNetworkingV1Api = (*PrivateLinkAccessesNetworkingV1ApiService)(&c.common)
