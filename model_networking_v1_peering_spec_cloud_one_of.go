@@ -49,42 +49,6 @@ func (dst *NetworkingV1PeeringSpecCloudOneOf) UnmarshalJSON(data []byte) error {
 		return fmt.Errorf("Failed to unmarshal JSON into map for the discrimintor lookup.")
 	}
 
-	// check if the discriminator value is 'AWS'
-	if jsonDict["kind"] == "AWS" {
-		// try to unmarshal JSON data into NetworkingV1AwsPeering
-		err = json.Unmarshal(data, &dst.NetworkingV1AwsPeering)
-		if err == nil {
-			return nil // data stored in dst.NetworkingV1AwsPeering, return on the first match
-		} else {
-			dst.NetworkingV1AwsPeering = nil
-			return fmt.Errorf("Failed to unmarshal NetworkingV1PeeringSpecCloudOneOf as NetworkingV1AwsPeering: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'AZURE'
-	if jsonDict["kind"] == "AZURE" {
-		// try to unmarshal JSON data into NetworkingV1AzurePeering
-		err = json.Unmarshal(data, &dst.NetworkingV1AzurePeering)
-		if err == nil {
-			return nil // data stored in dst.NetworkingV1AzurePeering, return on the first match
-		} else {
-			dst.NetworkingV1AzurePeering = nil
-			return fmt.Errorf("Failed to unmarshal NetworkingV1PeeringSpecCloudOneOf as NetworkingV1AzurePeering: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'GCP'
-	if jsonDict["kind"] == "GCP" {
-		// try to unmarshal JSON data into NetworkingV1GcpPeering
-		err = json.Unmarshal(data, &dst.NetworkingV1GcpPeering)
-		if err == nil {
-			return nil // data stored in dst.NetworkingV1GcpPeering, return on the first match
-		} else {
-			dst.NetworkingV1GcpPeering = nil
-			return fmt.Errorf("Failed to unmarshal NetworkingV1PeeringSpecCloudOneOf as NetworkingV1GcpPeering: %s", err.Error())
-		}
-	}
-
 	// check if the discriminator value is 'networking.v1.AwsPeering'
 	if jsonDict["kind"] == "networking.v1.AwsPeering" {
 		// try to unmarshal JSON data into NetworkingV1AwsPeering

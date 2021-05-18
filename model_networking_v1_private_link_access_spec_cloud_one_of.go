@@ -43,30 +43,6 @@ func (dst *NetworkingV1PrivateLinkAccessSpecCloudOneOf) UnmarshalJSON(data []byt
 		return fmt.Errorf("Failed to unmarshal JSON into map for the discrimintor lookup.")
 	}
 
-	// check if the discriminator value is 'AWS'
-	if jsonDict["kind"] == "AWS" {
-		// try to unmarshal JSON data into NetworkingV1AwsPrivateLinkAccess
-		err = json.Unmarshal(data, &dst.NetworkingV1AwsPrivateLinkAccess)
-		if err == nil {
-			return nil // data stored in dst.NetworkingV1AwsPrivateLinkAccess, return on the first match
-		} else {
-			dst.NetworkingV1AwsPrivateLinkAccess = nil
-			return fmt.Errorf("Failed to unmarshal NetworkingV1PrivateLinkAccessSpecCloudOneOf as NetworkingV1AwsPrivateLinkAccess: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'AZURE'
-	if jsonDict["kind"] == "AZURE" {
-		// try to unmarshal JSON data into NetworkingV1AzurePrivateLinkAccess
-		err = json.Unmarshal(data, &dst.NetworkingV1AzurePrivateLinkAccess)
-		if err == nil {
-			return nil // data stored in dst.NetworkingV1AzurePrivateLinkAccess, return on the first match
-		} else {
-			dst.NetworkingV1AzurePrivateLinkAccess = nil
-			return fmt.Errorf("Failed to unmarshal NetworkingV1PrivateLinkAccessSpecCloudOneOf as NetworkingV1AzurePrivateLinkAccess: %s", err.Error())
-		}
-	}
-
 	// check if the discriminator value is 'networking.v1.AwsPrivateLinkAccess'
 	if jsonDict["kind"] == "networking.v1.AwsPrivateLinkAccess" {
 		// try to unmarshal JSON data into NetworkingV1AwsPrivateLinkAccess
