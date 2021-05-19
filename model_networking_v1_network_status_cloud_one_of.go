@@ -18,81 +18,74 @@ import (
 
 // NetworkingV1NetworkStatusCloudOneOf - struct for NetworkingV1NetworkStatusCloudOneOf
 type NetworkingV1NetworkStatusCloudOneOf struct {
-	NetworkingV1AwsNetwork   *NetworkingV1AwsNetwork
+	NetworkingV1AwsNetwork *NetworkingV1AwsNetwork
 	NetworkingV1AzureNetwork *NetworkingV1AzureNetwork
-	NetworkingV1GcpNetwork   *NetworkingV1GcpNetwork
+	NetworkingV1GcpNetwork *NetworkingV1GcpNetwork
 }
 
 // NetworkingV1AwsNetworkAsNetworkingV1NetworkStatusCloudOneOf is a convenience function that returns NetworkingV1AwsNetwork wrapped in NetworkingV1NetworkStatusCloudOneOf
 func NetworkingV1AwsNetworkAsNetworkingV1NetworkStatusCloudOneOf(v *NetworkingV1AwsNetwork) NetworkingV1NetworkStatusCloudOneOf {
-	return NetworkingV1NetworkStatusCloudOneOf{NetworkingV1AwsNetwork: v}
+	return NetworkingV1NetworkStatusCloudOneOf{ NetworkingV1AwsNetwork: v}
 }
 
 // NetworkingV1AzureNetworkAsNetworkingV1NetworkStatusCloudOneOf is a convenience function that returns NetworkingV1AzureNetwork wrapped in NetworkingV1NetworkStatusCloudOneOf
 func NetworkingV1AzureNetworkAsNetworkingV1NetworkStatusCloudOneOf(v *NetworkingV1AzureNetwork) NetworkingV1NetworkStatusCloudOneOf {
-	return NetworkingV1NetworkStatusCloudOneOf{NetworkingV1AzureNetwork: v}
+	return NetworkingV1NetworkStatusCloudOneOf{ NetworkingV1AzureNetwork: v}
 }
 
 // NetworkingV1GcpNetworkAsNetworkingV1NetworkStatusCloudOneOf is a convenience function that returns NetworkingV1GcpNetwork wrapped in NetworkingV1NetworkStatusCloudOneOf
 func NetworkingV1GcpNetworkAsNetworkingV1NetworkStatusCloudOneOf(v *NetworkingV1GcpNetwork) NetworkingV1NetworkStatusCloudOneOf {
-	return NetworkingV1NetworkStatusCloudOneOf{NetworkingV1GcpNetwork: v}
+	return NetworkingV1NetworkStatusCloudOneOf{ NetworkingV1GcpNetwork: v}
 }
+
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *NetworkingV1NetworkStatusCloudOneOf) UnmarshalJSON(data []byte) error {
 	var err error
-	match := 0
-	// try to unmarshal data into NetworkingV1AwsNetwork
-	err = json.Unmarshal(data, &dst.NetworkingV1AwsNetwork)
-	if err == nil {
-		jsonNetworkingV1AwsNetwork, _ := json.Marshal(dst.NetworkingV1AwsNetwork)
-		if string(jsonNetworkingV1AwsNetwork) == "{}" { // empty struct
+	// use discriminator value to speed up the lookup
+	var jsonDict map[string]interface{}
+	err = json.Unmarshal(data, &jsonDict)
+	if err != nil {
+		return fmt.Errorf("Failed to unmarshal JSON into map for the discrimintor lookup.")
+	}
+
+	// check if the discriminator value is 'networking.v1.AwsNetwork'
+	if jsonDict["kind"] == "networking.v1.AwsNetwork" {
+		// try to unmarshal JSON data into NetworkingV1AwsNetwork
+		err = json.Unmarshal(data, &dst.NetworkingV1AwsNetwork)
+		if err == nil {
+			return nil // data stored in dst.NetworkingV1AwsNetwork, return on the first match
+		} else {
 			dst.NetworkingV1AwsNetwork = nil
-		} else {
-			match++
+			return fmt.Errorf("Failed to unmarshal NetworkingV1NetworkStatusCloudOneOf as NetworkingV1AwsNetwork: %s", err.Error())
 		}
-	} else {
-		dst.NetworkingV1AwsNetwork = nil
 	}
 
-	// try to unmarshal data into NetworkingV1AzureNetwork
-	err = json.Unmarshal(data, &dst.NetworkingV1AzureNetwork)
-	if err == nil {
-		jsonNetworkingV1AzureNetwork, _ := json.Marshal(dst.NetworkingV1AzureNetwork)
-		if string(jsonNetworkingV1AzureNetwork) == "{}" { // empty struct
+	// check if the discriminator value is 'networking.v1.AzureNetwork'
+	if jsonDict["kind"] == "networking.v1.AzureNetwork" {
+		// try to unmarshal JSON data into NetworkingV1AzureNetwork
+		err = json.Unmarshal(data, &dst.NetworkingV1AzureNetwork)
+		if err == nil {
+			return nil // data stored in dst.NetworkingV1AzureNetwork, return on the first match
+		} else {
 			dst.NetworkingV1AzureNetwork = nil
-		} else {
-			match++
+			return fmt.Errorf("Failed to unmarshal NetworkingV1NetworkStatusCloudOneOf as NetworkingV1AzureNetwork: %s", err.Error())
 		}
-	} else {
-		dst.NetworkingV1AzureNetwork = nil
 	}
 
-	// try to unmarshal data into NetworkingV1GcpNetwork
-	err = json.Unmarshal(data, &dst.NetworkingV1GcpNetwork)
-	if err == nil {
-		jsonNetworkingV1GcpNetwork, _ := json.Marshal(dst.NetworkingV1GcpNetwork)
-		if string(jsonNetworkingV1GcpNetwork) == "{}" { // empty struct
+	// check if the discriminator value is 'networking.v1.GcpNetwork'
+	if jsonDict["kind"] == "networking.v1.GcpNetwork" {
+		// try to unmarshal JSON data into NetworkingV1GcpNetwork
+		err = json.Unmarshal(data, &dst.NetworkingV1GcpNetwork)
+		if err == nil {
+			return nil // data stored in dst.NetworkingV1GcpNetwork, return on the first match
+		} else {
 			dst.NetworkingV1GcpNetwork = nil
-		} else {
-			match++
+			return fmt.Errorf("Failed to unmarshal NetworkingV1NetworkStatusCloudOneOf as NetworkingV1GcpNetwork: %s", err.Error())
 		}
-	} else {
-		dst.NetworkingV1GcpNetwork = nil
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.NetworkingV1AwsNetwork = nil
-		dst.NetworkingV1AzureNetwork = nil
-		dst.NetworkingV1GcpNetwork = nil
-
-		return fmt.Errorf("Data matches more than one schema in oneOf(NetworkingV1NetworkStatusCloudOneOf)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match
-		return fmt.Errorf("Data failed to match schemas in oneOf(NetworkingV1NetworkStatusCloudOneOf)")
-	}
+	return nil
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
@@ -113,7 +106,7 @@ func (src NetworkingV1NetworkStatusCloudOneOf) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *NetworkingV1NetworkStatusCloudOneOf) GetActualInstance() interface{} {
+func (obj *NetworkingV1NetworkStatusCloudOneOf) GetActualInstance() (interface{}) {
 	if obj.NetworkingV1AwsNetwork != nil {
 		return obj.NetworkingV1AwsNetwork
 	}
@@ -165,3 +158,5 @@ func (v *NullableNetworkingV1NetworkStatusCloudOneOf) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
