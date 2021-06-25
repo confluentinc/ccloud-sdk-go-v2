@@ -21,12 +21,12 @@ tags:
 - description: |-
     [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To CMK API v2](https://img.shields.io/badge/-Request%20Access%20To%20CMK%20API%20v2-%23bc8540)](mailto:ccloud-api-access+cmk-v2-early-access@confluent.io?subject=Request%20to%20join%20cmk/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20cmk/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-    `KafkaCluster` objects represent Apache Kafka Clusters on Confluent Cloud.
+    `Clusters` objects represent Apache Kafka Clusters on Confluent Cloud.
 
     The API allows you to list, create, read, update, and delete your Kafka clusters.
 
 
-    Related guide: [Public APIs to manage Apache Kafka clusters on Confluent Cloud.](https://docs.confluent.cloud).
+    Related guide: [Confluent Cloud Cluster Management for Apache Kafka APIs](https://docs.confluent.io/cloud/current/clusters/cluster-api.html).
 
     ## Quotas and Limits
     This resource is subject to the following quotas:
@@ -34,15 +34,15 @@ tags:
     | Quota | Description |
     | --- | --- |
     | `kafka_clusters_per_environment` | Number of clusters in one Confluent Cloud environment |
-  name: Kafka Clusters (cmk/v2)
+  name: Clusters (cmk/v2)
 paths:
   /cmk/v2/clusters:
     get:
       description: |-
         [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To CMK API v2](https://img.shields.io/badge/-Request%20Access%20To%20CMK%20API%20v2-%23bc8540)](mailto:ccloud-api-access+cmk-v2-early-access@confluent.io?subject=Request%20to%20join%20cmk/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20cmk/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-        Retrieve a sorted, filtered, paginated list of all kafka clusters.
-      operationId: listCmkV2KafkaClusters
+        Retrieve a sorted, filtered, paginated list of all clusters.
+      operationId: listCmkV2Clusters
       parameters:
       - description: Filter the results by exact match for environment.
         example: env-00000
@@ -86,8 +86,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/cmk.v2.KafkaClusterList'
-          description: Kafka Cluster.
+                $ref: '#/components/schemas/cmk.v2.ClusterList'
+          description: Cluster.
         "400":
           content:
             application/json:
@@ -161,31 +161,32 @@ paths:
           description: Oops, something went wrong!
       security:
       - api-key: []
-      summary: List of Kafka Clusters
+      summary: List of Clusters
       tags:
-      - Kafka Clusters (cmk/v2)
+      - Clusters (cmk/v2)
       x-lifecycle-stage: Early Access
       x-request-access-name: CMK API v2
     post:
       description: |-
         [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To CMK API v2](https://img.shields.io/badge/-Request%20Access%20To%20CMK%20API%20v2-%23bc8540)](mailto:ccloud-api-access+cmk-v2-early-access@confluent.io?subject=Request%20to%20join%20cmk/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20cmk/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-        Make a request to create a kafka cluster.
-      operationId: createCmkV2KafkaCluster
+        Make a request to create a cluster.
+      operationId: createCmkV2Cluster
       requestBody:
         content:
           application/json:
             schema:
               allOf:
-              - $ref: '#/components/schemas/cmk.v2.KafkaCluster'
+              - $ref: '#/components/schemas/cmk.v2.Cluster'
               - properties:
                   spec:
                     required:
                     - availability
-                    - cluster_type
+                    - cloud
+                    - config
                     - display_name
                     - environment
-                    - placement
+                    - region
                     type: object
                 required:
                 - spec
@@ -196,24 +197,25 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/cmk.v2.KafkaCluster'
+                - $ref: '#/components/schemas/cmk.v2.Cluster'
                 - properties:
                     spec:
                       required:
                       - availability
-                      - cluster_type
+                      - cloud
+                      - config
                       - display_name
                       - environment
-                      - placement
+                      - region
                       type: object
                   required:
                   - spec
                   - status
                   type: object
-          description: A Kafka Cluster is being created.
+          description: A Cluster is being created.
           headers:
             Location:
-              description: KafkaCluster resource uri
+              description: Cluster resource uri
               explode: false
               schema:
                 example: https://api.confluent.cloud/cmk/v2/clusters/{id}
@@ -331,9 +333,9 @@ paths:
           description: Oops, something went wrong!
       security:
       - api-key: []
-      summary: Create a Kafka Cluster
+      summary: Create a Cluster
       tags:
-      - Kafka Clusters (cmk/v2)
+      - Clusters (cmk/v2)
       x-lifecycle-stage: Early Access
       x-request-access-name: CMK API v2
     x-lifecycle-stage: Early Access
@@ -343,8 +345,8 @@ paths:
       description: |-
         [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To CMK API v2](https://img.shields.io/badge/-Request%20Access%20To%20CMK%20API%20v2-%23bc8540)](mailto:ccloud-api-access+cmk-v2-early-access@confluent.io?subject=Request%20to%20join%20cmk/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20cmk/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-        Make a request to delete a kafka cluster.
-      operationId: deleteCmkV2KafkaCluster
+        Make a request to delete a cluster.
+      operationId: deleteCmkV2Cluster
       parameters:
       - description: Scope the operation to the given environment.
         example: env-00000
@@ -355,7 +357,7 @@ paths:
         schema:
           $ref: '#/components/schemas/SearchFilter'
         style: form
-      - description: The unique identifier for the kafka cluster.
+      - description: The unique identifier for the cluster.
         explode: false
         in: path
         name: id
@@ -365,7 +367,7 @@ paths:
         style: simple
       responses:
         "204":
-          description: A Kafka Cluster is being deleted.
+          description: A Cluster is being deleted.
         "400":
           content:
             application/json:
@@ -450,17 +452,17 @@ paths:
           description: Oops, something went wrong!
       security:
       - api-key: []
-      summary: Delete a Kafka Cluster
+      summary: Delete a Cluster
       tags:
-      - Kafka Clusters (cmk/v2)
+      - Clusters (cmk/v2)
       x-lifecycle-stage: Early Access
       x-request-access-name: CMK API v2
     get:
       description: |-
         [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To CMK API v2](https://img.shields.io/badge/-Request%20Access%20To%20CMK%20API%20v2-%23bc8540)](mailto:ccloud-api-access+cmk-v2-early-access@confluent.io?subject=Request%20to%20join%20cmk/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20cmk/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-        Make a request to read a kafka cluster.
-      operationId: getCmkV2KafkaCluster
+        Make a request to read a cluster.
+      operationId: getCmkV2Cluster
       parameters:
       - description: Scope the operation to the given environment.
         example: env-00000
@@ -471,7 +473,7 @@ paths:
         schema:
           $ref: '#/components/schemas/SearchFilter'
         style: form
-      - description: The unique identifier for the kafka cluster.
+      - description: The unique identifier for the cluster.
         explode: false
         in: path
         name: id
@@ -485,15 +487,16 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/cmk.v2.KafkaCluster'
+                - $ref: '#/components/schemas/cmk.v2.Cluster'
                 - properties:
                     spec:
                       required:
                       - availability
-                      - cluster_type
+                      - cloud
+                      - config
                       - display_name
                       - environment
-                      - placement
+                      - region
                       type: object
                   required:
                   - api_version
@@ -502,7 +505,7 @@ paths:
                   - spec
                   - status
                   type: object
-          description: Kafka Cluster.
+          description: Cluster.
         "400":
           content:
             application/json:
@@ -587,20 +590,20 @@ paths:
           description: Oops, something went wrong!
       security:
       - api-key: []
-      summary: Read a Kafka Cluster
+      summary: Read a Cluster
       tags:
-      - Kafka Clusters (cmk/v2)
+      - Clusters (cmk/v2)
       x-lifecycle-stage: Early Access
       x-request-access-name: CMK API v2
     patch:
       description: |+
         [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To CMK API v2](https://img.shields.io/badge/-Request%20Access%20To%20CMK%20API%20v2-%23bc8540)](mailto:ccloud-api-access+cmk-v2-early-access@confluent.io?subject=Request%20to%20join%20cmk/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20cmk/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-        Make a request to update a kafka cluster.
+        Make a request to update a cluster.
 
-      operationId: updateCmkV2KafkaCluster
+      operationId: updateCmkV2Cluster
       parameters:
-      - description: The unique identifier for the kafka cluster.
+      - description: The unique identifier for the cluster.
         explode: false
         in: path
         name: id
@@ -613,7 +616,7 @@ paths:
           application/json:
             schema:
               allOf:
-              - $ref: '#/components/schemas/cmk.v2.KafkaCluster'
+              - $ref: '#/components/schemas/cmk.v2.Cluster'
               - properties:
                   spec:
                     required:
@@ -628,15 +631,16 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/cmk.v2.KafkaCluster'
+                - $ref: '#/components/schemas/cmk.v2.Cluster'
                 - properties:
                     spec:
                       required:
                       - availability
-                      - cluster_type
+                      - cloud
+                      - config
                       - display_name
                       - environment
-                      - placement
+                      - region
                       type: object
                   required:
                   - api_version
@@ -645,7 +649,7 @@ paths:
                   - spec
                   - status
                   type: object
-          description: Kafka Cluster.
+          description: Cluster.
         "400":
           content:
             application/json:
@@ -744,9 +748,9 @@ paths:
           description: Oops, something went wrong!
       security:
       - api-key: []
-      summary: Update a Kafka Cluster
+      summary: Update a Cluster
       tags:
-      - Kafka Clusters (cmk/v2)
+      - Clusters (cmk/v2)
       x-lifecycle-stage: Early Access
       x-request-access-name: CMK API v2
     x-lifecycle-stage: Early Access
@@ -871,9 +875,9 @@ components:
             $ref: '#/components/schemas/Failure'
       description: Oops, something went wrong!
   schemas:
-    cmk.v2.KafkaCluster:
+    cmk.v2.Cluster:
       additionalProperties: false
-      description: '`KafkaCluster` objects represent Apache Kafka Clusters on Confluent
+      description: '`Clusters` objects represent Apache Kafka Clusters on Confluent
         Cloud.'
       properties:
         api_version:
@@ -886,7 +890,7 @@ components:
         kind:
           description: Kind defines the object this REST resource represents.
           enum:
-          - KafkaCluster
+          - Cluster
           readOnly: true
           type: string
         id:
@@ -901,13 +905,13 @@ components:
         metadata:
           $ref: '#/components/schemas/ObjectMeta'
         spec:
-          $ref: '#/components/schemas/cmk.v2.KafkaClusterSpec'
+          $ref: '#/components/schemas/cmk.v2.ClusterSpec'
         status:
-          $ref: '#/components/schemas/cmk.v2.KafkaClusterStatus'
+          $ref: '#/components/schemas/cmk.v2.ClusterStatus'
       type: object
-    cmk.v2.KafkaClusterStatus:
+    cmk.v2.ClusterStatus:
       additionalProperties: false
-      description: The status of the Kafka Cluster
+      description: The status of the Cluster
       properties:
         phase:
           description: |
@@ -926,36 +930,34 @@ components:
       required:
       - phase
       type: object
-    cmk.v2.Location:
+    cmk.v2.Basic:
+      description: |
+        The basic cluster type.
       properties:
         kind:
-          description: Kind defines the object this REST resource represents.
           enum:
-          - Location
-          type: string
-        cloud:
-          description: The cloud service provider in which the cluster is running.
-          example: GCP
-          type: string
-          x-extensible-enum:
-          - AWS
-          - GCP
-          - AZURE
-        region:
-          description: The cloud service provider region where the cluster is running.
-          example: us-east4
+          - Basic
           type: string
       required:
-      - cloud
       - kind
-      - region
+      type: object
+    cmk.v2.Standard:
+      description: |
+        The standard cluster type.
+      properties:
+        kind:
+          enum:
+          - Standard
+          type: string
+      required:
+      - kind
       type: object
     SearchFilter:
       description: Filter a collection by a string search
       type: string
-    cmk.v2.KafkaClusterList:
+    cmk.v2.ClusterList:
       additionalProperties: false
-      description: '`KafkaCluster` objects represent Apache Kafka Clusters on Confluent
+      description: '`Clusters` objects represent Apache Kafka Clusters on Confluent
         Cloud.'
       example:
         metadata:
@@ -967,7 +969,7 @@ components:
         data:
         - ""
         - ""
-        kind: KafkaClusterList
+        kind: ClusterList
         api_version: cmk/v2
       properties:
         api_version:
@@ -980,7 +982,7 @@ components:
         kind:
           description: Kind defines the object this REST resource represents.
           enum:
-          - KafkaClusterList
+          - ClusterList
           readOnly: true
           type: string
         metadata:
@@ -988,15 +990,16 @@ components:
         data:
           items:
             allOf:
-            - $ref: '#/components/schemas/cmk.v2.KafkaCluster'
+            - $ref: '#/components/schemas/cmk.v2.Cluster'
             - properties:
                 spec:
                   required:
                   - availability
-                  - cluster_type
+                  - cloud
+                  - config
                   - display_name
                   - environment
-                  - placement
+                  - region
                   type: object
               required:
               - id
@@ -1012,9 +1015,9 @@ components:
       - kind
       - metadata
       type: object
-    cmk.v2.KafkaClusterSpec:
+    cmk.v2.ClusterSpec:
       additionalProperties: false
-      description: The desired state of the Kafka Cluster
+      description: The desired state of the Cluster
       properties:
         display_name:
           description: The name of the cluster.
@@ -1029,27 +1032,36 @@ components:
           - MULTI_ZONE
           - SINGLE_ZONE
           x-immutable: true
-        placement:
-          description: The geographical location where to place the Kafka cluster.
-          discriminator:
-            mapping:
-              Location: '#/components/schemas/cmk.v2.Location'
-            propertyName: kind
-          oneOf:
-          - $ref: '#/components/schemas/cmk.v2.Location'
-          x-immutable: true
-          x-one-of-name: CmkV2KafkaClusterSpecPlacementOneOf
-        cluster_type:
-          default: BASIC
-          description: |
-            The type of cluster.
-
-            Note: Clusters can only be upgraded from BASIC to STANDARD but cannot be downgraded from STANDARD to BASIC.
-          example: BASIC
+        cloud:
+          description: The cloud service provider in which the cluster is running.
+          example: GCP
           type: string
           x-extensible-enum:
-          - BASIC
-          - STANDARD
+          - AWS
+          - GCP
+          - AZURE
+          x-immutable: true
+        region:
+          description: The cloud service provider region where the cluster is running.
+          example: us-east4
+          type: string
+          x-immutable: true
+        config:
+          description: |
+            The configuration of the Kafka cluster.
+
+            Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.
+          discriminator:
+            mapping:
+              Basic: '#/components/schemas/cmk.v2.Basic'
+              Standard: '#/components/schemas/cmk.v2.Standard'
+            propertyName: kind
+          example:
+            kind: Basic
+          oneOf:
+          - $ref: '#/components/schemas/cmk.v2.Basic'
+          - $ref: '#/components/schemas/cmk.v2.Standard'
+          x-one-of-name: CmkV2ClusterSpecConfigOneOf
         kafka_bootstrap_endpoint:
           description: The bootstrap endpoint used by Kafka clients to connect to
             the cluster.
@@ -1072,7 +1084,6 @@ components:
             id: env-00000
             related: https://api.confluent.cloud/v2/environments/env-00000
             resource_name: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
-          x-immutable: true
       type: object
     ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have,

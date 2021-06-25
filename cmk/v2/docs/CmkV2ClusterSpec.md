@@ -1,4 +1,4 @@
-# CmkV2KafkaClusterSpec
+# CmkV2ClusterSpec
 
 ## Properties
 
@@ -6,203 +6,229 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the cluster. | [optional] 
 **Availability** | Pointer to **string** | The availability zone configuration of the cluster. | [optional] [default to "SINGLE_ZONE"]
-**Placement** | Pointer to [**CmkV2KafkaClusterSpecPlacementOneOf**](CmkV2KafkaClusterSpecPlacementOneOf.md) | The geographical location where to place the Kafka cluster. | [optional] 
-**ClusterType** | Pointer to **string** | The type of cluster.  Note: Clusters can only be upgraded from BASIC to STANDARD but cannot be downgraded from STANDARD to BASIC.  | [optional] [default to "BASIC"]
+**Cloud** | Pointer to **string** | The cloud service provider in which the cluster is running. | [optional] 
+**Region** | Pointer to **string** | The cloud service provider region where the cluster is running. | [optional] 
+**Config** | Pointer to [**CmkV2ClusterSpecConfigOneOf**](CmkV2ClusterSpecConfigOneOf.md) | The configuration of the Kafka cluster.  Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.  | [optional] 
 **KafkaBootstrapEndpoint** | Pointer to **string** | The bootstrap endpoint used by Kafka clients to connect to the cluster. | [optional] [readonly] 
 **HttpEndpoint** | Pointer to **string** | The cluster HTTP request URL. | [optional] [readonly] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
 
-### NewCmkV2KafkaClusterSpec
+### NewCmkV2ClusterSpec
 
-`func NewCmkV2KafkaClusterSpec() *CmkV2KafkaClusterSpec`
+`func NewCmkV2ClusterSpec() *CmkV2ClusterSpec`
 
-NewCmkV2KafkaClusterSpec instantiates a new CmkV2KafkaClusterSpec object
+NewCmkV2ClusterSpec instantiates a new CmkV2ClusterSpec object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewCmkV2KafkaClusterSpecWithDefaults
+### NewCmkV2ClusterSpecWithDefaults
 
-`func NewCmkV2KafkaClusterSpecWithDefaults() *CmkV2KafkaClusterSpec`
+`func NewCmkV2ClusterSpecWithDefaults() *CmkV2ClusterSpec`
 
-NewCmkV2KafkaClusterSpecWithDefaults instantiates a new CmkV2KafkaClusterSpec object
+NewCmkV2ClusterSpecWithDefaults instantiates a new CmkV2ClusterSpec object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetDisplayName
 
-`func (o *CmkV2KafkaClusterSpec) GetDisplayName() string`
+`func (o *CmkV2ClusterSpec) GetDisplayName() string`
 
 GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
 
 ### GetDisplayNameOk
 
-`func (o *CmkV2KafkaClusterSpec) GetDisplayNameOk() (*string, bool)`
+`func (o *CmkV2ClusterSpec) GetDisplayNameOk() (*string, bool)`
 
 GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDisplayName
 
-`func (o *CmkV2KafkaClusterSpec) SetDisplayName(v string)`
+`func (o *CmkV2ClusterSpec) SetDisplayName(v string)`
 
 SetDisplayName sets DisplayName field to given value.
 
 ### HasDisplayName
 
-`func (o *CmkV2KafkaClusterSpec) HasDisplayName() bool`
+`func (o *CmkV2ClusterSpec) HasDisplayName() bool`
 
 HasDisplayName returns a boolean if a field has been set.
 
 ### GetAvailability
 
-`func (o *CmkV2KafkaClusterSpec) GetAvailability() string`
+`func (o *CmkV2ClusterSpec) GetAvailability() string`
 
 GetAvailability returns the Availability field if non-nil, zero value otherwise.
 
 ### GetAvailabilityOk
 
-`func (o *CmkV2KafkaClusterSpec) GetAvailabilityOk() (*string, bool)`
+`func (o *CmkV2ClusterSpec) GetAvailabilityOk() (*string, bool)`
 
 GetAvailabilityOk returns a tuple with the Availability field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAvailability
 
-`func (o *CmkV2KafkaClusterSpec) SetAvailability(v string)`
+`func (o *CmkV2ClusterSpec) SetAvailability(v string)`
 
 SetAvailability sets Availability field to given value.
 
 ### HasAvailability
 
-`func (o *CmkV2KafkaClusterSpec) HasAvailability() bool`
+`func (o *CmkV2ClusterSpec) HasAvailability() bool`
 
 HasAvailability returns a boolean if a field has been set.
 
-### GetPlacement
+### GetCloud
 
-`func (o *CmkV2KafkaClusterSpec) GetPlacement() CmkV2KafkaClusterSpecPlacementOneOf`
+`func (o *CmkV2ClusterSpec) GetCloud() string`
 
-GetPlacement returns the Placement field if non-nil, zero value otherwise.
+GetCloud returns the Cloud field if non-nil, zero value otherwise.
 
-### GetPlacementOk
+### GetCloudOk
 
-`func (o *CmkV2KafkaClusterSpec) GetPlacementOk() (*CmkV2KafkaClusterSpecPlacementOneOf, bool)`
+`func (o *CmkV2ClusterSpec) GetCloudOk() (*string, bool)`
 
-GetPlacementOk returns a tuple with the Placement field if it's non-nil, zero value otherwise
+GetCloudOk returns a tuple with the Cloud field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPlacement
+### SetCloud
 
-`func (o *CmkV2KafkaClusterSpec) SetPlacement(v CmkV2KafkaClusterSpecPlacementOneOf)`
+`func (o *CmkV2ClusterSpec) SetCloud(v string)`
 
-SetPlacement sets Placement field to given value.
+SetCloud sets Cloud field to given value.
 
-### HasPlacement
+### HasCloud
 
-`func (o *CmkV2KafkaClusterSpec) HasPlacement() bool`
+`func (o *CmkV2ClusterSpec) HasCloud() bool`
 
-HasPlacement returns a boolean if a field has been set.
+HasCloud returns a boolean if a field has been set.
 
-### GetClusterType
+### GetRegion
 
-`func (o *CmkV2KafkaClusterSpec) GetClusterType() string`
+`func (o *CmkV2ClusterSpec) GetRegion() string`
 
-GetClusterType returns the ClusterType field if non-nil, zero value otherwise.
+GetRegion returns the Region field if non-nil, zero value otherwise.
 
-### GetClusterTypeOk
+### GetRegionOk
 
-`func (o *CmkV2KafkaClusterSpec) GetClusterTypeOk() (*string, bool)`
+`func (o *CmkV2ClusterSpec) GetRegionOk() (*string, bool)`
 
-GetClusterTypeOk returns a tuple with the ClusterType field if it's non-nil, zero value otherwise
+GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetClusterType
+### SetRegion
 
-`func (o *CmkV2KafkaClusterSpec) SetClusterType(v string)`
+`func (o *CmkV2ClusterSpec) SetRegion(v string)`
 
-SetClusterType sets ClusterType field to given value.
+SetRegion sets Region field to given value.
 
-### HasClusterType
+### HasRegion
 
-`func (o *CmkV2KafkaClusterSpec) HasClusterType() bool`
+`func (o *CmkV2ClusterSpec) HasRegion() bool`
 
-HasClusterType returns a boolean if a field has been set.
+HasRegion returns a boolean if a field has been set.
+
+### GetConfig
+
+`func (o *CmkV2ClusterSpec) GetConfig() CmkV2ClusterSpecConfigOneOf`
+
+GetConfig returns the Config field if non-nil, zero value otherwise.
+
+### GetConfigOk
+
+`func (o *CmkV2ClusterSpec) GetConfigOk() (*CmkV2ClusterSpecConfigOneOf, bool)`
+
+GetConfigOk returns a tuple with the Config field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfig
+
+`func (o *CmkV2ClusterSpec) SetConfig(v CmkV2ClusterSpecConfigOneOf)`
+
+SetConfig sets Config field to given value.
+
+### HasConfig
+
+`func (o *CmkV2ClusterSpec) HasConfig() bool`
+
+HasConfig returns a boolean if a field has been set.
 
 ### GetKafkaBootstrapEndpoint
 
-`func (o *CmkV2KafkaClusterSpec) GetKafkaBootstrapEndpoint() string`
+`func (o *CmkV2ClusterSpec) GetKafkaBootstrapEndpoint() string`
 
 GetKafkaBootstrapEndpoint returns the KafkaBootstrapEndpoint field if non-nil, zero value otherwise.
 
 ### GetKafkaBootstrapEndpointOk
 
-`func (o *CmkV2KafkaClusterSpec) GetKafkaBootstrapEndpointOk() (*string, bool)`
+`func (o *CmkV2ClusterSpec) GetKafkaBootstrapEndpointOk() (*string, bool)`
 
 GetKafkaBootstrapEndpointOk returns a tuple with the KafkaBootstrapEndpoint field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetKafkaBootstrapEndpoint
 
-`func (o *CmkV2KafkaClusterSpec) SetKafkaBootstrapEndpoint(v string)`
+`func (o *CmkV2ClusterSpec) SetKafkaBootstrapEndpoint(v string)`
 
 SetKafkaBootstrapEndpoint sets KafkaBootstrapEndpoint field to given value.
 
 ### HasKafkaBootstrapEndpoint
 
-`func (o *CmkV2KafkaClusterSpec) HasKafkaBootstrapEndpoint() bool`
+`func (o *CmkV2ClusterSpec) HasKafkaBootstrapEndpoint() bool`
 
 HasKafkaBootstrapEndpoint returns a boolean if a field has been set.
 
 ### GetHttpEndpoint
 
-`func (o *CmkV2KafkaClusterSpec) GetHttpEndpoint() string`
+`func (o *CmkV2ClusterSpec) GetHttpEndpoint() string`
 
 GetHttpEndpoint returns the HttpEndpoint field if non-nil, zero value otherwise.
 
 ### GetHttpEndpointOk
 
-`func (o *CmkV2KafkaClusterSpec) GetHttpEndpointOk() (*string, bool)`
+`func (o *CmkV2ClusterSpec) GetHttpEndpointOk() (*string, bool)`
 
 GetHttpEndpointOk returns a tuple with the HttpEndpoint field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHttpEndpoint
 
-`func (o *CmkV2KafkaClusterSpec) SetHttpEndpoint(v string)`
+`func (o *CmkV2ClusterSpec) SetHttpEndpoint(v string)`
 
 SetHttpEndpoint sets HttpEndpoint field to given value.
 
 ### HasHttpEndpoint
 
-`func (o *CmkV2KafkaClusterSpec) HasHttpEndpoint() bool`
+`func (o *CmkV2ClusterSpec) HasHttpEndpoint() bool`
 
 HasHttpEndpoint returns a boolean if a field has been set.
 
 ### GetEnvironment
 
-`func (o *CmkV2KafkaClusterSpec) GetEnvironment() ObjectReference`
+`func (o *CmkV2ClusterSpec) GetEnvironment() ObjectReference`
 
 GetEnvironment returns the Environment field if non-nil, zero value otherwise.
 
 ### GetEnvironmentOk
 
-`func (o *CmkV2KafkaClusterSpec) GetEnvironmentOk() (*ObjectReference, bool)`
+`func (o *CmkV2ClusterSpec) GetEnvironmentOk() (*ObjectReference, bool)`
 
 GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnvironment
 
-`func (o *CmkV2KafkaClusterSpec) SetEnvironment(v ObjectReference)`
+`func (o *CmkV2ClusterSpec) SetEnvironment(v ObjectReference)`
 
 SetEnvironment sets Environment field to given value.
 
 ### HasEnvironment
 
-`func (o *CmkV2KafkaClusterSpec) HasEnvironment() bool`
+`func (o *CmkV2ClusterSpec) HasEnvironment() bool`
 
 HasEnvironment returns a boolean if a field has been set.
 
