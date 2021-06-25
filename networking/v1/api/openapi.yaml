@@ -7,6 +7,7 @@ info:
   title: Network API
   version: 0.0.1-alpha1
   x-api-id: c1259878-7b77-11eb-9439-0242ac130002
+  x-api-group: networking/v1
   x-audience: external-public
   x-tag-group: Networking (%s)
 servers:
