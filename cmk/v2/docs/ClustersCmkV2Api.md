@@ -1,22 +1,22 @@
-# \KafkaClustersCmkV2Api
+# \ClustersCmkV2Api
 
 All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateCmkV2KafkaCluster**](KafkaClustersCmkV2Api.md#CreateCmkV2KafkaCluster) | **Post** /cmk/v2/clusters | Create a Kafka Cluster
-[**DeleteCmkV2KafkaCluster**](KafkaClustersCmkV2Api.md#DeleteCmkV2KafkaCluster) | **Delete** /cmk/v2/clusters/{id} | Delete a Kafka Cluster
-[**GetCmkV2KafkaCluster**](KafkaClustersCmkV2Api.md#GetCmkV2KafkaCluster) | **Get** /cmk/v2/clusters/{id} | Read a Kafka Cluster
-[**ListCmkV2KafkaClusters**](KafkaClustersCmkV2Api.md#ListCmkV2KafkaClusters) | **Get** /cmk/v2/clusters | List of Kafka Clusters
-[**UpdateCmkV2KafkaCluster**](KafkaClustersCmkV2Api.md#UpdateCmkV2KafkaCluster) | **Patch** /cmk/v2/clusters/{id} | Update a Kafka Cluster
+[**CreateCmkV2Cluster**](ClustersCmkV2Api.md#CreateCmkV2Cluster) | **Post** /cmk/v2/clusters | Create a Cluster
+[**DeleteCmkV2Cluster**](ClustersCmkV2Api.md#DeleteCmkV2Cluster) | **Delete** /cmk/v2/clusters/{id} | Delete a Cluster
+[**GetCmkV2Cluster**](ClustersCmkV2Api.md#GetCmkV2Cluster) | **Get** /cmk/v2/clusters/{id} | Read a Cluster
+[**ListCmkV2Clusters**](ClustersCmkV2Api.md#ListCmkV2Clusters) | **Get** /cmk/v2/clusters | List of Clusters
+[**UpdateCmkV2Cluster**](ClustersCmkV2Api.md#UpdateCmkV2Cluster) | **Patch** /cmk/v2/clusters/{id} | Update a Cluster
 
 
 
-## CreateCmkV2KafkaCluster
+## CreateCmkV2Cluster
 
-> CmkV2KafkaCluster CreateCmkV2KafkaCluster(ctx).CmkV2KafkaCluster(cmkV2KafkaCluster).Execute()
+> CmkV2Cluster CreateCmkV2Cluster(ctx).CmkV2Cluster(cmkV2Cluster).Execute()
 
-Create a Kafka Cluster
+Create a Cluster
 
 
 
@@ -33,17 +33,17 @@ import (
 )
 
 func main() {
-    cmkV2KafkaCluster := *openapiclient.NewCmkV2KafkaCluster() // CmkV2KafkaCluster |  (optional)
+    cmkV2Cluster := *openapiclient.NewCmkV2Cluster() // CmkV2Cluster |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.KafkaClustersCmkV2Api.CreateCmkV2KafkaCluster(context.Background()).CmkV2KafkaCluster(cmkV2KafkaCluster).Execute()
+    resp, r, err := api_client.ClustersCmkV2Api.CreateCmkV2Cluster(context.Background()).CmkV2Cluster(cmkV2Cluster).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `KafkaClustersCmkV2Api.CreateCmkV2KafkaCluster``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClustersCmkV2Api.CreateCmkV2Cluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateCmkV2KafkaCluster`: CmkV2KafkaCluster
-    fmt.Fprintf(os.Stdout, "Response from `KafkaClustersCmkV2Api.CreateCmkV2KafkaCluster`: %v\n", resp)
+    // response from `CreateCmkV2Cluster`: CmkV2Cluster
+    fmt.Fprintf(os.Stdout, "Response from `ClustersCmkV2Api.CreateCmkV2Cluster`: %v\n", resp)
 }
 ```
 
@@ -53,16 +53,16 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateCmkV2KafkaClusterRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateCmkV2ClusterRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cmkV2KafkaCluster** | [**CmkV2KafkaCluster**](CmkV2KafkaCluster.md) |  | 
+ **cmkV2Cluster** | [**CmkV2Cluster**](CmkV2Cluster.md) |  | 
 
 ### Return type
 
-[**CmkV2KafkaCluster**](cmk.v2.KafkaCluster.md)
+[**CmkV2Cluster**](cmk.v2.Cluster.md)
 
 ### Authorization
 
@@ -78,11 +78,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteCmkV2KafkaCluster
+## DeleteCmkV2Cluster
 
-> DeleteCmkV2KafkaCluster(ctx, id).Environment(environment).Execute()
+> DeleteCmkV2Cluster(ctx, id).Environment(environment).Execute()
 
-Delete a Kafka Cluster
+Delete a Cluster
 
 
 
@@ -100,13 +100,13 @@ import (
 
 func main() {
     environment := "env-00000" // string | Scope the operation to the given environment.
-    id := "id_example" // string | The unique identifier for the kafka cluster.
+    id := "id_example" // string | The unique identifier for the cluster.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.KafkaClustersCmkV2Api.DeleteCmkV2KafkaCluster(context.Background(), id).Environment(environment).Execute()
+    resp, r, err := api_client.ClustersCmkV2Api.DeleteCmkV2Cluster(context.Background(), id).Environment(environment).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `KafkaClustersCmkV2Api.DeleteCmkV2KafkaCluster``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClustersCmkV2Api.DeleteCmkV2Cluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -118,11 +118,11 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the kafka cluster. | 
+**id** | **string** | The unique identifier for the cluster. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteCmkV2KafkaClusterRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteCmkV2ClusterRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -148,11 +148,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetCmkV2KafkaCluster
+## GetCmkV2Cluster
 
-> CmkV2KafkaCluster GetCmkV2KafkaCluster(ctx, id).Environment(environment).Execute()
+> CmkV2Cluster GetCmkV2Cluster(ctx, id).Environment(environment).Execute()
 
-Read a Kafka Cluster
+Read a Cluster
 
 
 
@@ -170,17 +170,17 @@ import (
 
 func main() {
     environment := "env-00000" // string | Scope the operation to the given environment.
-    id := "id_example" // string | The unique identifier for the kafka cluster.
+    id := "id_example" // string | The unique identifier for the cluster.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.KafkaClustersCmkV2Api.GetCmkV2KafkaCluster(context.Background(), id).Environment(environment).Execute()
+    resp, r, err := api_client.ClustersCmkV2Api.GetCmkV2Cluster(context.Background(), id).Environment(environment).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `KafkaClustersCmkV2Api.GetCmkV2KafkaCluster``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClustersCmkV2Api.GetCmkV2Cluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetCmkV2KafkaCluster`: CmkV2KafkaCluster
-    fmt.Fprintf(os.Stdout, "Response from `KafkaClustersCmkV2Api.GetCmkV2KafkaCluster`: %v\n", resp)
+    // response from `GetCmkV2Cluster`: CmkV2Cluster
+    fmt.Fprintf(os.Stdout, "Response from `ClustersCmkV2Api.GetCmkV2Cluster`: %v\n", resp)
 }
 ```
 
@@ -190,11 +190,11 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the kafka cluster. | 
+**id** | **string** | The unique identifier for the cluster. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetCmkV2KafkaClusterRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetCmkV2ClusterRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -204,7 +204,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CmkV2KafkaCluster**](cmk.v2.KafkaCluster.md)
+[**CmkV2Cluster**](cmk.v2.Cluster.md)
 
 ### Authorization
 
@@ -220,11 +220,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ListCmkV2KafkaClusters
+## ListCmkV2Clusters
 
-> CmkV2KafkaClusterList ListCmkV2KafkaClusters(ctx).Environment(environment).Phase(phase).PageSize(pageSize).PageToken(pageToken).Execute()
+> CmkV2ClusterList ListCmkV2Clusters(ctx).Environment(environment).Phase(phase).PageSize(pageSize).PageToken(pageToken).Execute()
 
-List of Kafka Clusters
+List of Clusters
 
 
 
@@ -248,13 +248,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.KafkaClustersCmkV2Api.ListCmkV2KafkaClusters(context.Background()).Environment(environment).Phase(phase).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.ClustersCmkV2Api.ListCmkV2Clusters(context.Background()).Environment(environment).Phase(phase).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `KafkaClustersCmkV2Api.ListCmkV2KafkaClusters``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClustersCmkV2Api.ListCmkV2Clusters``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListCmkV2KafkaClusters`: CmkV2KafkaClusterList
-    fmt.Fprintf(os.Stdout, "Response from `KafkaClustersCmkV2Api.ListCmkV2KafkaClusters`: %v\n", resp)
+    // response from `ListCmkV2Clusters`: CmkV2ClusterList
+    fmt.Fprintf(os.Stdout, "Response from `ClustersCmkV2Api.ListCmkV2Clusters`: %v\n", resp)
 }
 ```
 
@@ -264,7 +264,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListCmkV2KafkaClustersRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListCmkV2ClustersRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -276,7 +276,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CmkV2KafkaClusterList**](CmkV2KafkaClusterList.md)
+[**CmkV2ClusterList**](CmkV2ClusterList.md)
 
 ### Authorization
 
@@ -292,11 +292,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UpdateCmkV2KafkaCluster
+## UpdateCmkV2Cluster
 
-> CmkV2KafkaCluster UpdateCmkV2KafkaCluster(ctx, id).CmkV2KafkaCluster(cmkV2KafkaCluster).Execute()
+> CmkV2Cluster UpdateCmkV2Cluster(ctx, id).CmkV2Cluster(cmkV2Cluster).Execute()
 
-Update a Kafka Cluster
+Update a Cluster
 
 
 
@@ -313,18 +313,18 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | The unique identifier for the kafka cluster.
-    cmkV2KafkaCluster := *openapiclient.NewCmkV2KafkaCluster() // CmkV2KafkaCluster |  (optional)
+    id := "id_example" // string | The unique identifier for the cluster.
+    cmkV2Cluster := *openapiclient.NewCmkV2Cluster() // CmkV2Cluster |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.KafkaClustersCmkV2Api.UpdateCmkV2KafkaCluster(context.Background(), id).CmkV2KafkaCluster(cmkV2KafkaCluster).Execute()
+    resp, r, err := api_client.ClustersCmkV2Api.UpdateCmkV2Cluster(context.Background(), id).CmkV2Cluster(cmkV2Cluster).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `KafkaClustersCmkV2Api.UpdateCmkV2KafkaCluster``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClustersCmkV2Api.UpdateCmkV2Cluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UpdateCmkV2KafkaCluster`: CmkV2KafkaCluster
-    fmt.Fprintf(os.Stdout, "Response from `KafkaClustersCmkV2Api.UpdateCmkV2KafkaCluster`: %v\n", resp)
+    // response from `UpdateCmkV2Cluster`: CmkV2Cluster
+    fmt.Fprintf(os.Stdout, "Response from `ClustersCmkV2Api.UpdateCmkV2Cluster`: %v\n", resp)
 }
 ```
 
@@ -334,21 +334,21 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the kafka cluster. | 
+**id** | **string** | The unique identifier for the cluster. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUpdateCmkV2KafkaClusterRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiUpdateCmkV2ClusterRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **cmkV2KafkaCluster** | [**CmkV2KafkaCluster**](CmkV2KafkaCluster.md) |  | 
+ **cmkV2Cluster** | [**CmkV2Cluster**](CmkV2Cluster.md) |  | 
 
 ### Return type
 
-[**CmkV2KafkaCluster**](cmk.v2.KafkaCluster.md)
+[**CmkV2Cluster**](cmk.v2.Cluster.md)
 
 ### Authorization
 

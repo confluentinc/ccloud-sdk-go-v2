@@ -1,10 +1,10 @@
-# CmkV2KafkaClusterSpecPlacementOneOf
+# CmkV2ClusterSpecConfigOneOf
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CmkV2KafkaClusterSpecPlacementOneOfInterface** | **interface { GetKind() string }** | An interface that can hold any of the proper implementing types |
+**CmkV2ClusterSpecConfigOneOfInterface** | **interface { GetKind() string }** | An interface that can hold any of the proper implementing types |
 
 ## Methods
 
