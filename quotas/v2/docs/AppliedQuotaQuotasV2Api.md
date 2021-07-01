@@ -4,16 +4,16 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetQuotasV2AppliedQuotum**](AppliedQuotaQuotasV2Api.md#GetQuotasV2AppliedQuotum) | **Get** /quotas/v2/applied-quotas/{id} | Read an Applied Quotum
+[**GetQuotasV2AppliedQuota**](AppliedQuotaQuotasV2Api.md#GetQuotasV2AppliedQuota) | **Get** /quotas/v2/applied-quotas/{id} | Read an Applied Quota
 [**ListQuotasV2AppliedQuota**](AppliedQuotaQuotasV2Api.md#ListQuotasV2AppliedQuota) | **Get** /quotas/v2/applied-quotas | List of Applied Quota
 
 
 
-## GetQuotasV2AppliedQuotum
+## GetQuotasV2AppliedQuota
 
-> QuotasV2AppliedQuota GetQuotasV2AppliedQuotum(ctx, id).Scope(scope).User(user).Organization(organization).Environment(environment).Cluster(cluster).Execute()
+> QuotasV2AppliedQuota GetQuotasV2AppliedQuota(ctx, id).Scope(scope).User(user).Organization(organization).Environment(environment).Cluster(cluster).Execute()
 
-Read an Applied Quotum
+Read an Applied Quota
 
 
 
@@ -39,13 +39,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AppliedQuotaQuotasV2Api.GetQuotasV2AppliedQuotum(context.Background(), id).Scope(scope).User(user).Organization(organization).Environment(environment).Cluster(cluster).Execute()
+    resp, r, err := api_client.AppliedQuotaQuotasV2Api.GetQuotasV2AppliedQuota(context.Background(), id).Scope(scope).User(user).Organization(organization).Environment(environment).Cluster(cluster).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppliedQuotaQuotasV2Api.GetQuotasV2AppliedQuotum``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `AppliedQuotaQuotasV2Api.GetQuotasV2AppliedQuota``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetQuotasV2AppliedQuotum`: QuotasV2AppliedQuota
-    fmt.Fprintf(os.Stdout, "Response from `AppliedQuotaQuotasV2Api.GetQuotasV2AppliedQuotum`: %v\n", resp)
+    // response from `GetQuotasV2AppliedQuota`: QuotasV2AppliedQuota
+    fmt.Fprintf(os.Stdout, "Response from `AppliedQuotaQuotasV2Api.GetQuotasV2AppliedQuota`: %v\n", resp)
 }
 ```
 
@@ -59,7 +59,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetQuotasV2AppliedQuotumRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetQuotasV2AppliedQuotaRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

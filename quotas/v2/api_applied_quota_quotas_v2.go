@@ -28,7 +28,7 @@ var (
 // AppliedQuotaQuotasV2ApiService AppliedQuotaQuotasV2Api service
 type AppliedQuotaQuotasV2ApiService service
 
-type ApiGetQuotasV2AppliedQuotumRequest struct {
+type ApiGetQuotasV2AppliedQuotaRequest struct {
 	ctx _context.Context
 	ApiService *AppliedQuotaQuotasV2ApiService
 	scope *string
@@ -39,42 +39,42 @@ type ApiGetQuotasV2AppliedQuotumRequest struct {
 	cluster *string
 }
 
-func (r ApiGetQuotasV2AppliedQuotumRequest) Scope(scope string) ApiGetQuotasV2AppliedQuotumRequest {
+func (r ApiGetQuotasV2AppliedQuotaRequest) Scope(scope string) ApiGetQuotasV2AppliedQuotaRequest {
 	r.scope = &scope
 	return r
 }
-func (r ApiGetQuotasV2AppliedQuotumRequest) User(user string) ApiGetQuotasV2AppliedQuotumRequest {
+func (r ApiGetQuotasV2AppliedQuotaRequest) User(user string) ApiGetQuotasV2AppliedQuotaRequest {
 	r.user = &user
 	return r
 }
-func (r ApiGetQuotasV2AppliedQuotumRequest) Organization(organization string) ApiGetQuotasV2AppliedQuotumRequest {
+func (r ApiGetQuotasV2AppliedQuotaRequest) Organization(organization string) ApiGetQuotasV2AppliedQuotaRequest {
 	r.organization = &organization
 	return r
 }
-func (r ApiGetQuotasV2AppliedQuotumRequest) Environment(environment string) ApiGetQuotasV2AppliedQuotumRequest {
+func (r ApiGetQuotasV2AppliedQuotaRequest) Environment(environment string) ApiGetQuotasV2AppliedQuotaRequest {
 	r.environment = &environment
 	return r
 }
-func (r ApiGetQuotasV2AppliedQuotumRequest) Cluster(cluster string) ApiGetQuotasV2AppliedQuotumRequest {
+func (r ApiGetQuotasV2AppliedQuotaRequest) Cluster(cluster string) ApiGetQuotasV2AppliedQuotaRequest {
 	r.cluster = &cluster
 	return r
 }
 
-func (r ApiGetQuotasV2AppliedQuotumRequest) Execute() (QuotasV2AppliedQuota, *_nethttp.Response, error) {
-	return r.ApiService.GetQuotasV2AppliedQuotumExecute(r)
+func (r ApiGetQuotasV2AppliedQuotaRequest) Execute() (QuotasV2AppliedQuota, *_nethttp.Response, error) {
+	return r.ApiService.GetQuotasV2AppliedQuotaExecute(r)
 }
 
 /*
- * GetQuotasV2AppliedQuotum Read an Applied Quotum
+ * GetQuotasV2AppliedQuota Read an Applied Quota
  * [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Quotas v2](https://img.shields.io/badge/-Request%20Access%20To%20Quotas%20v2-%23bc8540)](mailto:ccloud-api-access+quotas-v2-early-access@confluent.io?subject=Request%20to%20join%20quotas/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20quotas/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to read an applied quotum.
+Make a request to read an applied quota.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id The unique identifier for the applied quota.
- * @return ApiGetQuotasV2AppliedQuotumRequest
+ * @return ApiGetQuotasV2AppliedQuotaRequest
  */
-func (a *AppliedQuotaQuotasV2ApiService) GetQuotasV2AppliedQuotum(ctx _context.Context, id string) ApiGetQuotasV2AppliedQuotumRequest {
-	return ApiGetQuotasV2AppliedQuotumRequest{
+func (a *AppliedQuotaQuotasV2ApiService) GetQuotasV2AppliedQuota(ctx _context.Context, id string) ApiGetQuotasV2AppliedQuotaRequest {
+	return ApiGetQuotasV2AppliedQuotaRequest{
 		ApiService: a,
 		ctx: ctx,
 		id: id,
@@ -85,7 +85,7 @@ func (a *AppliedQuotaQuotasV2ApiService) GetQuotasV2AppliedQuotum(ctx _context.C
  * Execute executes the request
  * @return QuotasV2AppliedQuota
  */
-func (a *AppliedQuotaQuotasV2ApiService) GetQuotasV2AppliedQuotumExecute(r ApiGetQuotasV2AppliedQuotumRequest) (QuotasV2AppliedQuota, *_nethttp.Response, error) {
+func (a *AppliedQuotaQuotasV2ApiService) GetQuotasV2AppliedQuotaExecute(r ApiGetQuotasV2AppliedQuotaRequest) (QuotasV2AppliedQuota, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -95,7 +95,7 @@ func (a *AppliedQuotaQuotasV2ApiService) GetQuotasV2AppliedQuotumExecute(r ApiGe
 		localVarReturnValue  QuotasV2AppliedQuota
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AppliedQuotaQuotasV2ApiService.GetQuotasV2AppliedQuotum")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AppliedQuotaQuotasV2ApiService.GetQuotasV2AppliedQuota")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}

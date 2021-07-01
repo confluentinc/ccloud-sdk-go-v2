@@ -79,7 +79,7 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AppliedQuotaQuotasV2Api* | [**GetQuotasV2AppliedQuotum**](docs/AppliedQuotaQuotasV2Api.md#getquotasv2appliedquotum) | **Get** /quotas/v2/applied-quotas/{id} | Read an Applied Quotum
+*AppliedQuotaQuotasV2Api* | [**GetQuotasV2AppliedQuota**](docs/AppliedQuotaQuotasV2Api.md#getquotasv2appliedquota) | **Get** /quotas/v2/applied-quotas/{id} | Read an Applied Quota
 *AppliedQuotaQuotasV2Api* | [**ListQuotasV2AppliedQuota**](docs/AppliedQuotaQuotasV2Api.md#listquotasv2appliedquota) | **Get** /quotas/v2/applied-quotas | List of Applied Quota
 
 

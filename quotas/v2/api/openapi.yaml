@@ -257,8 +257,8 @@ paths:
       description: |-
         [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Quotas v2](https://img.shields.io/badge/-Request%20Access%20To%20Quotas%20v2-%23bc8540)](mailto:ccloud-api-access+quotas-v2-early-access@confluent.io?subject=Request%20to%20join%20quotas/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20quotas/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-        Make a request to read an applied quotum.
-      operationId: getQuotasV2AppliedQuotum
+        Make a request to read an applied quota.
+      operationId: getQuotasV2AppliedQuota
       parameters:
       - description: Scope the operation to the given scope.
         example: cluster
@@ -417,7 +417,7 @@ paths:
           description: Oops, something went wrong!
       security:
       - api-key: []
-      summary: Read an Applied Quotum
+      summary: Read an Applied Quota
       tags:
       - Applied Quota (quotas/v2)
       x-lifecycle-stage: Early Access
@@ -656,7 +656,11 @@ components:
           readOnly: true
           type: string
         metadata:
-          $ref: '#/components/schemas/ObjectMeta'
+          allOf:
+          - $ref: '#/components/schemas/ObjectMeta'
+          - properties:
+              self:
+                example: https://api.confluent.cloud/v2/kafka-clusters/lkc-f3a90de
         scope:
           description: The applied scope that this quota belongs to
           example: cluster
@@ -728,12 +732,7 @@ components:
       description: A `quota` object represent a specific quotas config for confluent
         cloud resources.
       example:
-        metadata:
-          next: https://api.confluent.cloud/v2/resourcekinds?page_token=UvmDWOB1iwfAIBPj6EYb
-          last: https://api.confluent.cloud/v2/resourcekinds?page_token=bcAOehAY8F16YD84Z1wT
-          prev: https://api.confluent.cloud/v2/resourcekinds?page_token=YIXRY97wWYmwzrax4dld
-          total_size: 123
-          first: https://api.confluent.cloud/v2/resourcekinds
+        metadata: ""
         data:
         - ""
         - ""
@@ -754,7 +753,17 @@ components:
           readOnly: true
           type: string
         metadata:
-          $ref: '#/components/schemas/ListMeta'
+          allOf:
+          - $ref: '#/components/schemas/ListMeta'
+          - properties:
+              first:
+                example: https://api.confluent.cloud/v2/resourcekinds
+              last:
+                example: https://api.confluent.cloud/v2/resourcekinds?page_token=bcAOehAY8F16YD84Z1wT
+              prev:
+                example: https://api.confluent.cloud/v2/resourcekinds?page_token=YIXRY97wWYmwzrax4dld
+              next:
+                example: https://api.confluent.cloud/v2/resourcekinds?page_token=UvmDWOB1iwfAIBPj6EYb
         data:
           items:
             allOf:
@@ -824,12 +833,6 @@ components:
       - self
     ListMeta:
       description: ListMeta describes metadata that resource collections may have
-      example:
-        next: https://api.confluent.cloud/v2/resourcekinds?page_token=UvmDWOB1iwfAIBPj6EYb
-        last: https://api.confluent.cloud/v2/resourcekinds?page_token=bcAOehAY8F16YD84Z1wT
-        prev: https://api.confluent.cloud/v2/resourcekinds?page_token=YIXRY97wWYmwzrax4dld
-        total_size: 123
-        first: https://api.confluent.cloud/v2/resourcekinds
       properties:
         first:
           description: A link to the first page of results. If a response does not
