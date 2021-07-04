@@ -1,4 +1,4 @@
-module github.com/confluentinc/ccloud-sdk-go-v2/quotas/v2
+module github.com/confluentinc/ccloud-sdk-go-v2/quotas
 
 go 1.13
 
