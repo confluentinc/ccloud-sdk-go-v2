@@ -53,15 +53,6 @@ paths:
         schema:
           $ref: '#/components/schemas/SearchFilter'
         style: form
-      - description: Filter the results by exact match for phase.
-        example: PROVISIONED
-        explode: true
-        in: query
-        name: phase
-        required: false
-        schema:
-          $ref: '#/components/schemas/SearchFilter'
-        style: form
       - description: A pagination size for collection requests.
         explode: true
         in: query
@@ -166,6 +157,90 @@ paths:
       - Clusters (cmk/v2)
       x-lifecycle-stage: Early Access
       x-request-access-name: CMK API v2
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.confluent.cloud/cmk/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/cmk/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cmk/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/cmk/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/cmk/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cmk/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/cmk/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
     post:
       description: |-
         [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To CMK API v2](https://img.shields.io/badge/-Request%20Access%20To%20CMK%20API%20v2-%23bc8540)](mailto:ccloud-api-access+cmk-v2-early-access@confluent.io?subject=Request%20to%20join%20cmk/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20cmk/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
@@ -338,6 +413,127 @@ paths:
       - Clusters (cmk/v2)
       x-lifecycle-stage: Early Access
       x-request-access-name: CMK API v2
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://api.confluent.cloud/cmk/v2/clusters \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"spec":{"display_name":"ProdKafkaCluster","availability":"SINGLE_ZONE","cloud":"GCP","region":"us-east4","config":{"kind":"Basic"},"environment":{"id":"env-00000","related":"https://api.confluent.cloud/v2/environments/env-00000","resource_name":"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000"}}}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}");
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/cmk/v2/clusters")
+            .post(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cmk/v2/clusters\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
+          :\\\"ProdKafkaCluster\\\",\\\"availability\\\":\\\"SINGLE_ZONE\\\",\\\"\
+          cloud\\\":\\\"GCP\\\",\\\"region\\\":\\\"us-east4\\\",\\\"config\\\":{\\\
+          \"kind\\\":\\\"Basic\\\"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
+          \",\\\"related\\\":\\\"https://api.confluent.cloud/v2/environments/env-00000\\\
+          \",\\\"resource_name\\\":\\\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\\\
+          \"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          payload = "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("POST", "/cmk/v2/clusters", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/cmk/v2/clusters",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            spec: {
+              display_name: 'ProdKafkaCluster',
+              availability: 'SINGLE_ZONE',
+              cloud: 'GCP',
+              region: 'us-east4',
+              config: {kind: 'Basic'},
+              environment: {
+                id: 'env-00000',
+                related: 'https://api.confluent.cloud/v2/environments/env-00000',
+                resource_name: 'crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000'
+              }
+            }
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cmk/v2/clusters");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/cmk/v2/clusters");
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
     x-lifecycle-stage: Early Access
     x-request-access-name: CMK API v2
   /cmk/v2/clusters/{id}:
@@ -457,6 +653,90 @@ paths:
       - Clusters (cmk/v2)
       x-lifecycle-stage: Early Access
       x-request-access-name: CMK API v2
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request DELETE \
+            --url 'https://api.confluent.cloud/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE")
+            .delete(null)
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE\"\
+          \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("DELETE", "/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "DELETE",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE");
+          var request = new RestRequest(Method.DELETE);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
     get:
       description: |-
         [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To CMK API v2](https://img.shields.io/badge/-Request%20Access%20To%20CMK%20API%20v2-%23bc8540)](mailto:ccloud-api-access+cmk-v2-early-access@confluent.io?subject=Request%20to%20join%20cmk/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20cmk/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
@@ -595,6 +875,90 @@ paths:
       - Clusters (cmk/v2)
       x-lifecycle-stage: Early Access
       x-request-access-name: CMK API v2
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.confluent.cloud/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
     patch:
       description: |+
         [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To CMK API v2](https://img.shields.io/badge/-Request%20Access%20To%20CMK%20API%20v2-%23bc8540)](mailto:ccloud-api-access+cmk-v2-early-access@confluent.io?subject=Request%20to%20join%20cmk/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20cmk/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
@@ -616,7 +980,7 @@ paths:
           application/json:
             schema:
               allOf:
-              - $ref: '#/components/schemas/cmk.v2.Cluster'
+              - $ref: '#/components/schemas/cmk.v2.ClusterUpdate'
               - properties:
                   spec:
                     required:
@@ -753,6 +1117,127 @@ paths:
       - Clusters (cmk/v2)
       x-lifecycle-stage: Early Access
       x-request-access-name: CMK API v2
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request PATCH \
+            --url 'https://api.confluent.cloud/cmk/v2/clusters/{id}' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"spec":{"display_name":"ProdKafkaCluster","availability":"SINGLE_ZONE","cloud":"GCP","region":"us-east4","config":{"kind":"Basic"},"environment":{"id":"env-00000","related":"https://api.confluent.cloud/v2/environments/env-00000","resource_name":"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000"}}}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}");
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/cmk/v2/clusters/{id}")
+            .patch(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cmk/v2/clusters/{id}\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
+          :\\\"ProdKafkaCluster\\\",\\\"availability\\\":\\\"SINGLE_ZONE\\\",\\\"\
+          cloud\\\":\\\"GCP\\\",\\\"region\\\":\\\"us-east4\\\",\\\"config\\\":{\\\
+          \"kind\\\":\\\"Basic\\\"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
+          \",\\\"related\\\":\\\"https://api.confluent.cloud/v2/environments/env-00000\\\
+          \",\\\"resource_name\\\":\\\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\\\
+          \"}}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          payload = "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("PATCH", "/cmk/v2/clusters/{id}", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "PATCH",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/cmk/v2/clusters/{id}",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            spec: {
+              display_name: 'ProdKafkaCluster',
+              availability: 'SINGLE_ZONE',
+              cloud: 'GCP',
+              region: 'us-east4',
+              config: {kind: 'Basic'},
+              environment: {
+                id: 'env-00000',
+                related: 'https://api.confluent.cloud/v2/environments/env-00000',
+                resource_name: 'crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000'
+              }
+            }
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cmk/v2/clusters/{id}");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/cmk/v2/clusters/{id}");
+          var request = new RestRequest(Method.PATCH);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
     x-lifecycle-stage: Early Access
     x-request-access-name: CMK API v2
 components:
@@ -903,7 +1388,11 @@ components:
           readOnly: true
           type: string
         metadata:
-          $ref: '#/components/schemas/ObjectMeta'
+          allOf:
+          - $ref: '#/components/schemas/ObjectMeta'
+          - properties:
+              self:
+                example: https://api.confluent.cloud/v2/kafka-clusters/lkc-f3a90de
         spec:
           $ref: '#/components/schemas/cmk.v2.ClusterSpec'
         status:
@@ -926,10 +1415,20 @@ components:
           - PROVISIONING
           - PROVISIONED
           - FAILED
+        cku:
+          allOf:
+          - $ref: '#/components/schemas/cmk.v2.Cku'
+          description: The number of Confluent Kafka Units (CKUs) the Dedicated cluster
+            currently has.
+          readOnly: true
       readOnly: true
       required:
       - phase
       type: object
+    cmk.v2.Cku:
+      example: 2
+      minimum: 1
+      type: integer
     cmk.v2.Basic:
       description: |
         The basic cluster type.
@@ -952,6 +1451,24 @@ components:
       required:
       - kind
       type: object
+    cmk.v2.Dedicated:
+      description: |
+        A dedicated cluster with its parameters.
+      properties:
+        kind:
+          enum:
+          - Dedicated
+          type: string
+        cku:
+          allOf:
+          - $ref: '#/components/schemas/cmk.v2.Cku'
+          description: |
+            The number of Confluent Kafka Units (CKUs) for Dedicated cluster types.
+            MULTI_ZONE dedicated clusters must have more than two CKUs.
+      required:
+      - cku
+      - kind
+      type: object
     SearchFilter:
       description: Filter a collection by a string search
       type: string
@@ -960,12 +1477,7 @@ components:
       description: '`Clusters` objects represent Apache Kafka Clusters on Confluent
         Cloud.'
       example:
-        metadata:
-          next: https://api.confluent.cloud/v2/resourcekinds?page_token=UvmDWOB1iwfAIBPj6EYb
-          last: https://api.confluent.cloud/v2/resourcekinds?page_token=bcAOehAY8F16YD84Z1wT
-          prev: https://api.confluent.cloud/v2/resourcekinds?page_token=YIXRY97wWYmwzrax4dld
-          total_size: 123
-          first: https://api.confluent.cloud/v2/resourcekinds
+        metadata: ""
         data:
         - ""
         - ""
@@ -986,7 +1498,17 @@ components:
           readOnly: true
           type: string
         metadata:
-          $ref: '#/components/schemas/ListMeta'
+          allOf:
+          - $ref: '#/components/schemas/ListMeta'
+          - properties:
+              first:
+                example: https://api.confluent.cloud/v2/resourcekinds
+              last:
+                example: https://api.confluent.cloud/v2/resourcekinds?page_token=bcAOehAY8F16YD84Z1wT
+              prev:
+                example: https://api.confluent.cloud/v2/resourcekinds?page_token=YIXRY97wWYmwzrax4dld
+              next:
+                example: https://api.confluent.cloud/v2/resourcekinds?page_token=UvmDWOB1iwfAIBPj6EYb
         data:
           items:
             allOf:
@@ -1055,12 +1577,12 @@ components:
             mapping:
               Basic: '#/components/schemas/cmk.v2.Basic'
               Standard: '#/components/schemas/cmk.v2.Standard'
+              Dedicated: '#/components/schemas/cmk.v2.Dedicated'
             propertyName: kind
-          example:
-            kind: Basic
           oneOf:
           - $ref: '#/components/schemas/cmk.v2.Basic'
           - $ref: '#/components/schemas/cmk.v2.Standard'
+          - $ref: '#/components/schemas/cmk.v2.Dedicated'
           x-one-of-name: CmkV2ClusterSpecConfigOneOf
         kafka_bootstrap_endpoint:
           description: The bootstrap endpoint used by Kafka clients to connect to
@@ -1068,12 +1590,14 @@ components:
           example: lkc-00000-00000.us-central1.gcp.glb.confluent.cloud:9092
           readOnly: true
           type: string
+          x-immutable: true
         http_endpoint:
           description: The cluster HTTP request URL.
           example: https://lkc-00000-00000.us-central1.gcp.glb.confluent.cloud
           format: uri
           readOnly: true
           type: string
+          x-immutable: true
         environment:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
@@ -1085,6 +1609,9 @@ components:
             related: https://api.confluent.cloud/v2/environments/env-00000
             resource_name: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
       type: object
+      x-enable-id: true
+      x-enable-listmeta: true
+      x-enable-objectmeta: true
     ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have,
         which includes all objects users must create.
@@ -1131,12 +1658,6 @@ components:
       - self
     ListMeta:
       description: ListMeta describes metadata that resource collections may have
-      example:
-        next: https://api.confluent.cloud/v2/resourcekinds?page_token=UvmDWOB1iwfAIBPj6EYb
-        last: https://api.confluent.cloud/v2/resourcekinds?page_token=bcAOehAY8F16YD84Z1wT
-        prev: https://api.confluent.cloud/v2/resourcekinds?page_token=YIXRY97wWYmwzrax4dld
-        total_size: 123
-        first: https://api.confluent.cloud/v2/resourcekinds
       properties:
         first:
           description: A link to the first page of results. If a response does not
@@ -1249,6 +1770,82 @@ components:
           type: string
         source:
           $ref: '#/components/schemas/Error_source'
+      type: object
+    cmk.v2.ClusterSpecUpdate:
+      additionalProperties: false
+      description: The desired state of the Cluster
+      properties:
+        display_name:
+          description: The name of the cluster.
+          example: ProdKafkaCluster
+          type: string
+        config:
+          description: |
+            The configuration of the Kafka cluster.
+
+            Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.
+          discriminator:
+            mapping:
+              Basic: '#/components/schemas/cmk.v2.Basic'
+              Standard: '#/components/schemas/cmk.v2.Standard'
+              Dedicated: '#/components/schemas/cmk.v2.Dedicated'
+            propertyName: kind
+          oneOf:
+          - $ref: '#/components/schemas/cmk.v2.Basic'
+          - $ref: '#/components/schemas/cmk.v2.Standard'
+          - $ref: '#/components/schemas/cmk.v2.Dedicated'
+          x-one-of-name: CmkV2ClusterSpecUpdateConfigOneOf
+        environment:
+          allOf:
+          - $ref: '#/components/schemas/ObjectReference'
+          - required:
+            - related
+          description: The environment to which this belongs.
+          example:
+            id: env-00000
+            related: https://api.confluent.cloud/v2/environments/env-00000
+            resource_name: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
+      type: object
+      x-enable-id: true
+      x-enable-listmeta: true
+      x-enable-objectmeta: true
+    cmk.v2.ClusterUpdate:
+      additionalProperties: false
+      description: '`Clusters` objects represent Apache Kafka Clusters on Confluent
+        Cloud.'
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - cmk/v2
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - Cluster
+          readOnly: true
+          type: string
+        id:
+          description: ID is the "natural identifier" for an object within its scope/namespace;
+            it is normally unique across time but not space. That is, you can assume
+            that the ID will not be reclaimed and reused after an object is deleted
+            ("time"); however, it may collide with IDs for other object `kinds` or
+            objects of the same `kind` within a different scope/namespace ("space").
+          example: dlz-f3a90de
+          readOnly: true
+          type: string
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/ObjectMeta'
+          - properties:
+              self:
+                example: https://api.confluent.cloud/v2/kafka-clusters/lkc-f3a90de
+        spec:
+          $ref: '#/components/schemas/cmk.v2.ClusterSpecUpdate'
+        status:
+          $ref: '#/components/schemas/cmk.v2.ClusterStatus'
       type: object
     Error_source:
       properties:

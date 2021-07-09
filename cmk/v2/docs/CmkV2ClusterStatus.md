@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Phase** | **string** | The lifecyle phase of the cluster:   PROVISIONED:  cluster is provisioned;   PROVISIONING:  cluster provisioning is in progress;   FAILED:  provisioning failed  | [readonly] 
+**Cku** | Pointer to **int32** | The number of Confluent Kafka Units (CKUs) the Dedicated cluster currently has. | [optional] [readonly] 
 
 ## Methods
 
@@ -44,6 +45,31 @@ and a boolean to check if the value has been set.
 
 SetPhase sets Phase field to given value.
 
+
+### GetCku
+
+`func (o *CmkV2ClusterStatus) GetCku() int32`
+
+GetCku returns the Cku field if non-nil, zero value otherwise.
+
+### GetCkuOk
+
+`func (o *CmkV2ClusterStatus) GetCkuOk() (*int32, bool)`
+
+GetCkuOk returns a tuple with the Cku field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCku
+
+`func (o *CmkV2ClusterStatus) SetCku(v int32)`
+
+SetCku sets Cku field to given value.
+
+### HasCku
+
+`func (o *CmkV2ClusterStatus) HasCku() bool`
+
+HasCku returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

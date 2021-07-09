@@ -523,17 +523,12 @@ type ApiListCmkV2ClustersRequest struct {
 	ctx _context.Context
 	ApiService *ClustersCmkV2ApiService
 	environment *string
-	phase *string
 	pageSize *int32
 	pageToken *string
 }
 
 func (r ApiListCmkV2ClustersRequest) Environment(environment string) ApiListCmkV2ClustersRequest {
 	r.environment = &environment
-	return r
-}
-func (r ApiListCmkV2ClustersRequest) Phase(phase string) ApiListCmkV2ClustersRequest {
-	r.phase = &phase
 	return r
 }
 func (r ApiListCmkV2ClustersRequest) PageSize(pageSize int32) ApiListCmkV2ClustersRequest {
@@ -593,9 +588,6 @@ func (a *ClustersCmkV2ApiService) ListCmkV2ClustersExecute(r ApiListCmkV2Cluster
 	}
 
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
-	if r.phase != nil {
-		localVarQueryParams.Add("phase", parameterToString(*r.phase, ""))
-	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}
@@ -699,11 +691,11 @@ type ApiUpdateCmkV2ClusterRequest struct {
 	ctx _context.Context
 	ApiService *ClustersCmkV2ApiService
 	id string
-	cmkV2Cluster *CmkV2Cluster
+	cmkV2ClusterUpdate *CmkV2ClusterUpdate
 }
 
-func (r ApiUpdateCmkV2ClusterRequest) CmkV2Cluster(cmkV2Cluster CmkV2Cluster) ApiUpdateCmkV2ClusterRequest {
-	r.cmkV2Cluster = &cmkV2Cluster
+func (r ApiUpdateCmkV2ClusterRequest) CmkV2ClusterUpdate(cmkV2ClusterUpdate CmkV2ClusterUpdate) ApiUpdateCmkV2ClusterRequest {
+	r.cmkV2ClusterUpdate = &cmkV2ClusterUpdate
 	return r
 }
 
@@ -774,7 +766,7 @@ func (a *ClustersCmkV2ApiService) UpdateCmkV2ClusterExecute(r ApiUpdateCmkV2Clus
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.cmkV2Cluster
+	localVarPostBody = r.cmkV2ClusterUpdate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
