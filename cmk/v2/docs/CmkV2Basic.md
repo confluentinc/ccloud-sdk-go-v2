@@ -52,6 +52,12 @@ SetKind sets Kind field to given value.
 
 Convenience method to wrap this instance of CmkV2Basic in CmkV2ClusterSpecConfigOneOf
 
+### AsCmkV2ClusterSpecUpdateConfigOneOf
+
+`func (s *CmkV2Basic) AsCmkV2ClusterSpecUpdateConfigOneOf() CmkV2ClusterSpecUpdateConfigOneOf`
+
+Convenience method to wrap this instance of CmkV2Basic in CmkV2ClusterSpecUpdateConfigOneOf
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

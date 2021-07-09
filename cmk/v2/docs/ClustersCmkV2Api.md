@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 
 ## ListCmkV2Clusters
 
-> CmkV2ClusterList ListCmkV2Clusters(ctx).Environment(environment).Phase(phase).PageSize(pageSize).PageToken(pageToken).Execute()
+> CmkV2ClusterList ListCmkV2Clusters(ctx).Environment(environment).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Clusters
 
@@ -242,13 +242,12 @@ import (
 
 func main() {
     environment := "env-00000" // string | Filter the results by exact match for environment.
-    phase := "PROVISIONED" // string | Filter the results by exact match for phase. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClustersCmkV2Api.ListCmkV2Clusters(context.Background()).Environment(environment).Phase(phase).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.ClustersCmkV2Api.ListCmkV2Clusters(context.Background()).Environment(environment).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ClustersCmkV2Api.ListCmkV2Clusters``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -270,7 +269,6 @@ Other parameters are passed through a pointer to a apiListCmkV2ClustersRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **environment** | **string** | Filter the results by exact match for environment. | 
- **phase** | **string** | Filter the results by exact match for phase. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 
@@ -294,7 +292,7 @@ Name | Type | Description  | Notes
 
 ## UpdateCmkV2Cluster
 
-> CmkV2Cluster UpdateCmkV2Cluster(ctx, id).CmkV2Cluster(cmkV2Cluster).Execute()
+> CmkV2Cluster UpdateCmkV2Cluster(ctx, id).CmkV2ClusterUpdate(cmkV2ClusterUpdate).Execute()
 
 Update a Cluster
 
@@ -314,11 +312,11 @@ import (
 
 func main() {
     id := "id_example" // string | The unique identifier for the cluster.
-    cmkV2Cluster := *openapiclient.NewCmkV2Cluster() // CmkV2Cluster |  (optional)
+    cmkV2ClusterUpdate := *openapiclient.NewCmkV2ClusterUpdate() // CmkV2ClusterUpdate |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClustersCmkV2Api.UpdateCmkV2Cluster(context.Background(), id).CmkV2Cluster(cmkV2Cluster).Execute()
+    resp, r, err := api_client.ClustersCmkV2Api.UpdateCmkV2Cluster(context.Background(), id).CmkV2ClusterUpdate(cmkV2ClusterUpdate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ClustersCmkV2Api.UpdateCmkV2Cluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -344,7 +342,7 @@ Other parameters are passed through a pointer to a apiUpdateCmkV2ClusterRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **cmkV2Cluster** | [**CmkV2Cluster**](CmkV2Cluster.md) |  | 
+ **cmkV2ClusterUpdate** | [**CmkV2ClusterUpdate**](CmkV2ClusterUpdate.md) |  | 
 
 ### Return type
 

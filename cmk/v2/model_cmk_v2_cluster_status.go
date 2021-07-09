@@ -19,6 +19,8 @@ import (
 type CmkV2ClusterStatus struct {
 	// The lifecyle phase of the cluster:   PROVISIONED:  cluster is provisioned;   PROVISIONING:  cluster provisioning is in progress;   FAILED:  provisioning failed 
 	Phase string `json:"phase"`
+	// The number of Confluent Kafka Units (CKUs) the Dedicated cluster currently has.
+	Cku *int32 `json:"cku,omitempty"`
 }
 
 // NewCmkV2ClusterStatus instantiates a new CmkV2ClusterStatus object
@@ -63,10 +65,45 @@ func (o *CmkV2ClusterStatus) SetPhase(v string) {
 	o.Phase = v
 }
 
+// GetCku returns the Cku field value if set, zero value otherwise.
+func (o *CmkV2ClusterStatus) GetCku() int32 {
+	if o == nil || o.Cku == nil {
+		var ret int32
+		return ret
+	}
+	return *o.Cku
+}
+
+// GetCkuOk returns a tuple with the Cku field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CmkV2ClusterStatus) GetCkuOk() (*int32, bool) {
+	if o == nil || o.Cku == nil {
+		return nil, false
+	}
+	return o.Cku, true
+}
+
+// HasCku returns a boolean if a field has been set.
+func (o *CmkV2ClusterStatus) HasCku() bool {
+	if o != nil && o.Cku != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCku gets a reference to the given int32 and assigns it to the Cku field.
+func (o *CmkV2ClusterStatus) SetCku(v int32) {
+	o.Cku = &v
+}
+
 func (o CmkV2ClusterStatus) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["phase"] = o.Phase
+	}
+	if o.Cku != nil {
+		toSerialize["cku"] = o.Cku
 	}
 	return json.Marshal(toSerialize)
 }
