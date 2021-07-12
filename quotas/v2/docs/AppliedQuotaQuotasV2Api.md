@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## GetQuotasV2AppliedQuota
 
-> QuotasV2AppliedQuota GetQuotasV2AppliedQuota(ctx, id).Scope(scope).User(user).Organization(organization).Environment(environment).Cluster(cluster).Execute()
+> QuotasV2AppliedQuota GetQuotasV2AppliedQuota(ctx, id).Scope(scope).Environment(environment).Cluster(cluster).Execute()
 
 Read an Applied Quota
 
@@ -30,16 +30,14 @@ import (
 )
 
 func main() {
-    scope := "cluster" // string | Scope the operation to the given scope.
+    scope := "cluster" // string | The applied scope that quota/quotas belong to
     id := "id_example" // string | The unique identifier for the applied quota.
-    user := "u-4r6rk7" // string | Scope the operation to the given user. (optional)
-    organization := "b3a17773-05cc-4431-9560-433fb4613da8" // string | Scope the operation to the given organization. (optional)
-    environment := "env-00000" // string | Scope the operation to the given environment. (optional)
-    cluster := "lkc-00000" // string | Scope the operation to the given cluster. (optional)
+    environment := "env-00000" // string | A unique environment id to associate a specific environment to this quota. This field is required only if scope is set to \"environment\" or \"cluster\" and it is doing a single quota query.  (optional)
+    cluster := "lkc-00000" // string | A unique cluster id to associate a specific cluster to this quota. This field is required only if scope is set to \"cluster\" and it is doing a single quota query.  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AppliedQuotaQuotasV2Api.GetQuotasV2AppliedQuota(context.Background(), id).Scope(scope).User(user).Organization(organization).Environment(environment).Cluster(cluster).Execute()
+    resp, r, err := api_client.AppliedQuotaQuotasV2Api.GetQuotasV2AppliedQuota(context.Background(), id).Scope(scope).Environment(environment).Cluster(cluster).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AppliedQuotaQuotasV2Api.GetQuotasV2AppliedQuota``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -64,12 +62,10 @@ Other parameters are passed through a pointer to a apiGetQuotasV2AppliedQuotaReq
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **string** | Scope the operation to the given scope. | 
+ **scope** | **string** | The applied scope that quota/quotas belong to | 
 
- **user** | **string** | Scope the operation to the given user. | 
- **organization** | **string** | Scope the operation to the given organization. | 
- **environment** | **string** | Scope the operation to the given environment. | 
- **cluster** | **string** | Scope the operation to the given cluster. | 
+ **environment** | **string** | A unique environment id to associate a specific environment to this quota. This field is required only if scope is set to \&quot;environment\&quot; or \&quot;cluster\&quot; and it is doing a single quota query.  | 
+ **cluster** | **string** | A unique cluster id to associate a specific cluster to this quota. This field is required only if scope is set to \&quot;cluster\&quot; and it is doing a single quota query.  | 
 
 ### Return type
 
@@ -91,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## ListQuotasV2AppliedQuota
 
-> QuotasV2AppliedQuotaList ListQuotasV2AppliedQuota(ctx).Scope(scope).User(user).Organization(organization).Environment(environment).Cluster(cluster).Execute()
+> QuotasV2AppliedQuotaList ListQuotasV2AppliedQuota(ctx).Scope(scope).Environment(environment).Cluster(cluster).Execute()
 
 List of Applied Quota
 
@@ -110,15 +106,13 @@ import (
 )
 
 func main() {
-    scope := "cluster" // string | Filter the results by exact match for scope.
-    user := "u-4r6rk7" // string | Filter the results by exact match for user. (optional)
-    organization := "b3a17773-05cc-4431-9560-433fb4613da8" // string | Filter the results by exact match for organization. (optional)
-    environment := "env-00000" // string | Filter the results by exact match for environment. (optional)
-    cluster := "lkc-00000" // string | Filter the results by exact match for cluster. (optional)
+    scope := "cluster" // string | The applied scope that quota/quotas belong to
+    environment := "env-00000" // string | A unique environment id to associate a specific environment to this quota. This field is required only if scope is set to \"environment\" or \"cluster\" and it is doing a single quota query.  (optional)
+    cluster := "lkc-00000" // string | A unique cluster id to associate a specific cluster to this quota. This field is required only if scope is set to \"cluster\" and it is doing a single quota query.  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AppliedQuotaQuotasV2Api.ListQuotasV2AppliedQuota(context.Background()).Scope(scope).User(user).Organization(organization).Environment(environment).Cluster(cluster).Execute()
+    resp, r, err := api_client.AppliedQuotaQuotasV2Api.ListQuotasV2AppliedQuota(context.Background()).Scope(scope).Environment(environment).Cluster(cluster).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AppliedQuotaQuotasV2Api.ListQuotasV2AppliedQuota``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -139,11 +133,9 @@ Other parameters are passed through a pointer to a apiListQuotasV2AppliedQuotaRe
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **string** | Filter the results by exact match for scope. | 
- **user** | **string** | Filter the results by exact match for user. | 
- **organization** | **string** | Filter the results by exact match for organization. | 
- **environment** | **string** | Filter the results by exact match for environment. | 
- **cluster** | **string** | Filter the results by exact match for cluster. | 
+ **scope** | **string** | The applied scope that quota/quotas belong to | 
+ **environment** | **string** | A unique environment id to associate a specific environment to this quota. This field is required only if scope is set to \&quot;environment\&quot; or \&quot;cluster\&quot; and it is doing a single quota query.  | 
+ **cluster** | **string** | A unique cluster id to associate a specific cluster to this quota. This field is required only if scope is set to \&quot;cluster\&quot; and it is doing a single quota query.  | 
 
 ### Return type
 

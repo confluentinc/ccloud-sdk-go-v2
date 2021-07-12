@@ -24,21 +24,19 @@ type QuotasV2AppliedQuota struct {
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
 	Id *string `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
-	// The applied scope that this quota belongs to
+	// The applied scope that this quota belongs to. Could be set to \"user\", \"organization\", \"environment\" or \"cluster\".
 	Scope *string `json:"scope,omitempty"`
 	// A human-readable name for the quota type name
 	DisplayName *string `json:"display_name,omitempty"`
-	// The single quota type id that user want to query. If you only want to query a single specific quota, this is required. 
-	Code *string `json:"code,omitempty"`
 	// The latest applied service quota value, taking into account any limit adjustments. 
 	AppliedLimit *int32 `json:"applied_limit,omitempty"`
 	// The user to which this belongs.
 	User *ObjectReference `json:"user,omitempty"`
-	// The organization associated with this object.
+	// A unique organization id to associate a specific organization to this quota
 	Organization *ObjectReference `json:"organization,omitempty"`
-	// The environment to which this belongs.
+	// A unique environment id to associate a specific environment to this quota. 
 	Environment *ObjectReference `json:"environment,omitempty"`
-	// The cluster to which this belongs.
+	// A unique cluster id to associate a specific cluster to this quota. 
 	Cluster *ObjectReference `json:"cluster,omitempty"`
 }
 
@@ -251,38 +249,6 @@ func (o *QuotasV2AppliedQuota) SetDisplayName(v string) {
 	o.DisplayName = &v
 }
 
-// GetCode returns the Code field value if set, zero value otherwise.
-func (o *QuotasV2AppliedQuota) GetCode() string {
-	if o == nil || o.Code == nil {
-		var ret string
-		return ret
-	}
-	return *o.Code
-}
-
-// GetCodeOk returns a tuple with the Code field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *QuotasV2AppliedQuota) GetCodeOk() (*string, bool) {
-	if o == nil || o.Code == nil {
-		return nil, false
-	}
-	return o.Code, true
-}
-
-// HasCode returns a boolean if a field has been set.
-func (o *QuotasV2AppliedQuota) HasCode() bool {
-	if o != nil && o.Code != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetCode gets a reference to the given string and assigns it to the Code field.
-func (o *QuotasV2AppliedQuota) SetCode(v string) {
-	o.Code = &v
-}
-
 // GetAppliedLimit returns the AppliedLimit field value if set, zero value otherwise.
 func (o *QuotasV2AppliedQuota) GetAppliedLimit() int32 {
 	if o == nil || o.AppliedLimit == nil {
@@ -462,9 +428,6 @@ func (o QuotasV2AppliedQuota) MarshalJSON() ([]byte, error) {
 	}
 	if o.DisplayName != nil {
 		toSerialize["display_name"] = o.DisplayName
-	}
-	if o.Code != nil {
-		toSerialize["code"] = o.Code
 	}
 	if o.AppliedLimit != nil {
 		toSerialize["applied_limit"] = o.AppliedLimit

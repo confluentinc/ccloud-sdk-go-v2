@@ -8,14 +8,13 @@ Name | Type | Description | Notes
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
-**Scope** | Pointer to **string** | The applied scope that this quota belongs to | [optional] 
+**Scope** | Pointer to **string** | The applied scope that this quota belongs to. Could be set to \&quot;user\&quot;, \&quot;organization\&quot;, \&quot;environment\&quot; or \&quot;cluster\&quot;. | [optional] 
 **DisplayName** | Pointer to **string** | A human-readable name for the quota type name | [optional] 
-**Code** | Pointer to **string** | The single quota type id that user want to query. If you only want to query a single specific quota, this is required.  | [optional] 
 **AppliedLimit** | Pointer to **int32** | The latest applied service quota value, taking into account any limit adjustments.  | [optional] 
 **User** | Pointer to [**ObjectReference**](ObjectReference.md) | The user to which this belongs. | [optional] 
-**Organization** | Pointer to [**ObjectReference**](ObjectReference.md) | The organization associated with this object. | [optional] 
-**Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
-**Cluster** | Pointer to [**ObjectReference**](ObjectReference.md) | The cluster to which this belongs. | [optional] 
+**Organization** | Pointer to [**ObjectReference**](ObjectReference.md) | A unique organization id to associate a specific organization to this quota | [optional] 
+**Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | A unique environment id to associate a specific environment to this quota.  | [optional] 
+**Cluster** | Pointer to [**ObjectReference**](ObjectReference.md) | A unique cluster id to associate a specific cluster to this quota.  | [optional] 
 
 ## Methods
 
@@ -185,31 +184,6 @@ SetDisplayName sets DisplayName field to given value.
 `func (o *QuotasV2AppliedQuota) HasDisplayName() bool`
 
 HasDisplayName returns a boolean if a field has been set.
-
-### GetCode
-
-`func (o *QuotasV2AppliedQuota) GetCode() string`
-
-GetCode returns the Code field if non-nil, zero value otherwise.
-
-### GetCodeOk
-
-`func (o *QuotasV2AppliedQuota) GetCodeOk() (*string, bool)`
-
-GetCodeOk returns a tuple with the Code field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCode
-
-`func (o *QuotasV2AppliedQuota) SetCode(v string)`
-
-SetCode sets Code field to given value.
-
-### HasCode
-
-`func (o *QuotasV2AppliedQuota) HasCode() bool`
-
-HasCode returns a boolean if a field has been set.
 
 ### GetAppliedLimit
 

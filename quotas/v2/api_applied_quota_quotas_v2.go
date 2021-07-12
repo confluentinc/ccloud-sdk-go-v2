@@ -33,22 +33,12 @@ type ApiGetQuotasV2AppliedQuotaRequest struct {
 	ApiService *AppliedQuotaQuotasV2ApiService
 	scope *string
 	id string
-	user *string
-	organization *string
 	environment *string
 	cluster *string
 }
 
 func (r ApiGetQuotasV2AppliedQuotaRequest) Scope(scope string) ApiGetQuotasV2AppliedQuotaRequest {
 	r.scope = &scope
-	return r
-}
-func (r ApiGetQuotasV2AppliedQuotaRequest) User(user string) ApiGetQuotasV2AppliedQuotaRequest {
-	r.user = &user
-	return r
-}
-func (r ApiGetQuotasV2AppliedQuotaRequest) Organization(organization string) ApiGetQuotasV2AppliedQuotaRequest {
-	r.organization = &organization
 	return r
 }
 func (r ApiGetQuotasV2AppliedQuotaRequest) Environment(environment string) ApiGetQuotasV2AppliedQuotaRequest {
@@ -111,12 +101,6 @@ func (a *AppliedQuotaQuotasV2ApiService) GetQuotasV2AppliedQuotaExecute(r ApiGet
 	}
 
 	localVarQueryParams.Add("scope", parameterToString(*r.scope, ""))
-	if r.user != nil {
-		localVarQueryParams.Add("user", parameterToString(*r.user, ""))
-	}
-	if r.organization != nil {
-		localVarQueryParams.Add("organization", parameterToString(*r.organization, ""))
-	}
 	if r.environment != nil {
 		localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	}
@@ -230,22 +214,12 @@ type ApiListQuotasV2AppliedQuotaRequest struct {
 	ctx _context.Context
 	ApiService *AppliedQuotaQuotasV2ApiService
 	scope *string
-	user *string
-	organization *string
 	environment *string
 	cluster *string
 }
 
 func (r ApiListQuotasV2AppliedQuotaRequest) Scope(scope string) ApiListQuotasV2AppliedQuotaRequest {
 	r.scope = &scope
-	return r
-}
-func (r ApiListQuotasV2AppliedQuotaRequest) User(user string) ApiListQuotasV2AppliedQuotaRequest {
-	r.user = &user
-	return r
-}
-func (r ApiListQuotasV2AppliedQuotaRequest) Organization(organization string) ApiListQuotasV2AppliedQuotaRequest {
-	r.organization = &organization
 	return r
 }
 func (r ApiListQuotasV2AppliedQuotaRequest) Environment(environment string) ApiListQuotasV2AppliedQuotaRequest {
@@ -308,12 +282,6 @@ func (a *AppliedQuotaQuotasV2ApiService) ListQuotasV2AppliedQuotaExecute(r ApiLi
 	}
 
 	localVarQueryParams.Add("scope", parameterToString(*r.scope, ""))
-	if r.user != nil {
-		localVarQueryParams.Add("user", parameterToString(*r.user, ""))
-	}
-	if r.organization != nil {
-		localVarQueryParams.Add("organization", parameterToString(*r.organization, ""))
-	}
 	if r.environment != nil {
 		localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	}
