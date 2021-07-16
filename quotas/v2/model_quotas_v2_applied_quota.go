@@ -24,15 +24,15 @@ type QuotasV2AppliedQuota struct {
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
 	Id *string `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
-	// The applied scope that this quota belongs to. Could be set to \"user\", \"organization\", \"environment\" or \"cluster\".
+	// The applied scope that this quota belongs to.
 	Scope *string `json:"scope,omitempty"`
-	// A human-readable name for the quota type name
+	// A human-readable name for the quota type name.
 	DisplayName *string `json:"display_name,omitempty"`
 	// The latest applied service quota value, taking into account any limit adjustments. 
 	AppliedLimit *int32 `json:"applied_limit,omitempty"`
 	// The user to which this belongs.
 	User *ObjectReference `json:"user,omitempty"`
-	// A unique organization id to associate a specific organization to this quota
+	// A unique organization id to associate a specific organization to this quota.
 	Organization *ObjectReference `json:"organization,omitempty"`
 	// A unique environment id to associate a specific environment to this quota. 
 	Environment *ObjectReference `json:"environment,omitempty"`

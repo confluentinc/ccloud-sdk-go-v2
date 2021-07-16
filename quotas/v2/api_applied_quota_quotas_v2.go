@@ -31,16 +31,11 @@ type AppliedQuotaQuotasV2ApiService service
 type ApiGetQuotasV2AppliedQuotaRequest struct {
 	ctx _context.Context
 	ApiService *AppliedQuotaQuotasV2ApiService
-	scope *string
 	id string
 	environment *string
 	cluster *string
 }
 
-func (r ApiGetQuotasV2AppliedQuotaRequest) Scope(scope string) ApiGetQuotasV2AppliedQuotaRequest {
-	r.scope = &scope
-	return r
-}
 func (r ApiGetQuotasV2AppliedQuotaRequest) Environment(environment string) ApiGetQuotasV2AppliedQuotaRequest {
 	r.environment = &environment
 	return r
@@ -96,11 +91,7 @@ func (a *AppliedQuotaQuotasV2ApiService) GetQuotasV2AppliedQuotaExecute(r ApiGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.scope == nil {
-		return localVarReturnValue, nil, reportError("scope is required and must be specified")
-	}
 
-	localVarQueryParams.Add("scope", parameterToString(*r.scope, ""))
 	if r.environment != nil {
 		localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	}
@@ -241,7 +232,7 @@ func (r ApiListQuotasV2AppliedQuotaRequest) Execute() (QuotasV2AppliedQuotaList,
 
 Retrieve a sorted, filtered, paginated list of all applied quota.
 
-This can show all quotas for a given quotas scope (in env, org, or user).
+This can show all quotas for a given quotas scope (in organization, user, environment or cluster).
 
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return ApiListQuotasV2AppliedQuotaRequest
