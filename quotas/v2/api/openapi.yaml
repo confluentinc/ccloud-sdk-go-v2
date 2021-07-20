@@ -36,8 +36,9 @@ paths:
         This can show all quotas for a given quotas scope (in organization, user, environment or cluster).
       operationId: listQuotasV2AppliedQuota
       parameters:
-      - description: The applied scope that the quota belong to. Could be set to "user",
-          "organization", "environment" or "cluster".
+      - description: |
+          The applied scope that the quota belong to.
+          Could be set to "user", "organization", "environment" or "cluster".
         example: cluster
         explode: true
         in: query
@@ -48,7 +49,8 @@ paths:
         style: form
       - description: |
           A unique environment id to associate a specific environment to this quota.
-          This field is required only if scope is set to "environment" or "cluster" and it is doing a single quota query.
+          This field is required only if scope is set to "environment" or "cluster"
+          and it is doing a single quota query.
         example: env-00000
         explode: true
         in: query
@@ -249,7 +251,8 @@ paths:
       parameters:
       - description: |
           A unique environment id to associate a specific environment to this quota.
-          This field is required only if scope is set to "environment" or "cluster" and it is doing a single quota query.
+          This field is required only if scope is set to "environment" or "cluster"
+          and it is doing a single quota query.
         example: env-00000
         explode: true
         in: query
@@ -623,16 +626,18 @@ components:
           - $ref: '#/components/schemas/ObjectMeta'
           - properties:
               self:
-                example: https://api.confluent.cloud/v2/kafka-clusters/lkc-f3a90de
+                example: https://api.confluent.cloud/quotas/v2/applied-quota/aq-12345
+              resource_name:
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/appliedquota=aq-12345
         scope:
           description: The applied scope that this quota belongs to.
           example: cluster
           type: string
           x-extensible-enum:
-          - user
-          - organization
-          - environment
-          - cluster
+          - USER
+          - ORGANIZATION
+          - ENVIRONMENT
+          - CLUSTER
         display_name:
           description: A human-readable name for the quota type name.
           example: Kafka Cluster Per Organization
@@ -760,7 +765,7 @@ components:
             can be addressed. This URL encodes the service location, API version,
             and other particulars necessary to locate the resource at a point in time
           example: https://api.confluent.cloud/v2/kafka-clusters/lkc-f3a90de
-          format: uri-reference
+          format: uri
           readOnly: true
           type: string
         resource_name:
@@ -803,14 +808,14 @@ components:
             contain a first link, then direct navigation to the first page is not
             supported.
           example: https://api.confluent.cloud/v2/resourcekinds
-          format: uri-reference
+          format: uri
           nullable: true
           type: string
         last:
           description: A link to the last page of results. If a response does not
             contain a last link, then direct navigation to the last page is not supported.
           example: https://api.confluent.cloud/v2/resourcekinds?page_token=bcAOehAY8F16YD84Z1wT
-          format: uri-reference
+          format: uri
           nullable: true
           type: string
         prev:
@@ -818,14 +823,14 @@ components:
             not contain a prev link, then either there is no previous data or backwards
             traversal through the result set is not supported.
           example: https://api.confluent.cloud/v2/resourcekinds?page_token=YIXRY97wWYmwzrax4dld
-          format: uri-reference
+          format: uri
           nullable: true
           type: string
         next:
           description: A link to the next page of results. If a response does not
             contain a next link, then there is no more data available.
           example: https://api.confluent.cloud/v2/resourcekinds?page_token=UvmDWOB1iwfAIBPj6EYb
-          format: uri-reference
+          format: uri
           nullable: true
           type: string
         total_size:
@@ -847,7 +852,7 @@ components:
           type: string
         related:
           description: API URL for accessing or modifying the referred object
-          format: uri-reference
+          format: uri
           minLength: 1
           readOnly: true
           type: string

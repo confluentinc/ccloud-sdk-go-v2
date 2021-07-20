@@ -104,7 +104,7 @@ import (
 )
 
 func main() {
-    scope := "cluster" // string | The applied scope that the quota belong to. Could be set to \"user\", \"organization\", \"environment\" or \"cluster\".
+    scope := "cluster" // string | The applied scope that the quota belong to. Could be set to \"user\", \"organization\", \"environment\" or \"cluster\". 
     environment := "env-00000" // string | A unique environment id to associate a specific environment to this quota. This field is required only if scope is set to \"environment\" or \"cluster\" and it is doing a single quota query.  (optional)
     cluster := "lkc-00000" // string | A unique cluster id to associate a specific cluster to this quota. This field is required only if scope is set to \"cluster\" and it is doing a single quota query.  (optional)
 
@@ -131,7 +131,7 @@ Other parameters are passed through a pointer to a apiListQuotasV2AppliedQuotaRe
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **string** | The applied scope that the quota belong to. Could be set to \&quot;user\&quot;, \&quot;organization\&quot;, \&quot;environment\&quot; or \&quot;cluster\&quot;. | 
+ **scope** | **string** | The applied scope that the quota belong to. Could be set to \&quot;user\&quot;, \&quot;organization\&quot;, \&quot;environment\&quot; or \&quot;cluster\&quot;.  | 
  **environment** | **string** | A unique environment id to associate a specific environment to this quota. This field is required only if scope is set to \&quot;environment\&quot; or \&quot;cluster\&quot; and it is doing a single quota query.  | 
  **cluster** | **string** | A unique cluster id to associate a specific cluster to this quota. This field is required only if scope is set to \&quot;cluster\&quot; and it is doing a single quota query.  | 
 
