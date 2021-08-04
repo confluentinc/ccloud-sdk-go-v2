@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **User** | Pointer to [**ObjectReference**](ObjectReference.md) | The user to which this belongs. | [optional] 
 **Organization** | Pointer to [**ObjectReference**](ObjectReference.md) | A unique organization id to associate a specific organization to this quota. | [optional] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | A unique environment id to associate a specific environment to this quota.  | [optional] 
-**Cluster** | Pointer to [**ObjectReference**](ObjectReference.md) | A unique cluster id to associate a specific cluster to this quota.  | [optional] 
+**KafkaCluster** | Pointer to [**ObjectReference**](ObjectReference.md) | A unique Kafka cluster id to associate a specific cluster to this quota.  | [optional] 
 
 ## Methods
 
@@ -285,30 +285,30 @@ SetEnvironment sets Environment field to given value.
 
 HasEnvironment returns a boolean if a field has been set.
 
-### GetCluster
+### GetKafkaCluster
 
-`func (o *QuotasV2AppliedQuota) GetCluster() ObjectReference`
+`func (o *QuotasV2AppliedQuota) GetKafkaCluster() ObjectReference`
 
-GetCluster returns the Cluster field if non-nil, zero value otherwise.
+GetKafkaCluster returns the KafkaCluster field if non-nil, zero value otherwise.
 
-### GetClusterOk
+### GetKafkaClusterOk
 
-`func (o *QuotasV2AppliedQuota) GetClusterOk() (*ObjectReference, bool)`
+`func (o *QuotasV2AppliedQuota) GetKafkaClusterOk() (*ObjectReference, bool)`
 
-GetClusterOk returns a tuple with the Cluster field if it's non-nil, zero value otherwise
+GetKafkaClusterOk returns a tuple with the KafkaCluster field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCluster
+### SetKafkaCluster
 
-`func (o *QuotasV2AppliedQuota) SetCluster(v ObjectReference)`
+`func (o *QuotasV2AppliedQuota) SetKafkaCluster(v ObjectReference)`
 
-SetCluster sets Cluster field to given value.
+SetKafkaCluster sets KafkaCluster field to given value.
 
-### HasCluster
+### HasKafkaCluster
 
-`func (o *QuotasV2AppliedQuota) HasCluster() bool`
+`func (o *QuotasV2AppliedQuota) HasKafkaCluster() bool`
 
-HasCluster returns a boolean if a field has been set.
+HasKafkaCluster returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

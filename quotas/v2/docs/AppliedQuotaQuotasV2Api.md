@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## GetQuotasV2AppliedQuota
 
-> QuotasV2AppliedQuota GetQuotasV2AppliedQuota(ctx, id).Environment(environment).Cluster(cluster).Execute()
+> QuotasV2AppliedQuota GetQuotasV2AppliedQuota(ctx, id).Environment(environment).KafkaCluster(kafkaCluster).Execute()
 
 Read an Applied Quota
 
@@ -31,12 +31,12 @@ import (
 
 func main() {
     id := "id_example" // string | The unique identifier for the applied quota.
-    environment := "env-00000" // string | A unique environment id to associate a specific environment to this quota. This field is required only if scope is set to \"environment\" or \"cluster\" and it is doing a single quota query.  (optional)
-    cluster := "lkc-00000" // string | A unique cluster id to associate a specific cluster to this quota. This field is required only if scope is set to \"cluster\" and it is doing a single quota query.  (optional)
+    environment := "env-00000" // string | A unique environment id to associate a specific environment to this quota. This field is required only if scope is set to \"ENVIRONMENT\" or \"KAFKA-CLUSTER\" and it is doing a single quota query.  (optional)
+    kafkaCluster := "lkc-00000" // string | A unique Kafka cluster id to associate a specific kafka cluster to this quota. This field is required only if scope is set to \"KAFKA-CLUSTER\" and it is doing a single quota query.  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AppliedQuotaQuotasV2Api.GetQuotasV2AppliedQuota(context.Background(), id).Environment(environment).Cluster(cluster).Execute()
+    resp, r, err := api_client.AppliedQuotaQuotasV2Api.GetQuotasV2AppliedQuota(context.Background(), id).Environment(environment).KafkaCluster(kafkaCluster).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AppliedQuotaQuotasV2Api.GetQuotasV2AppliedQuota``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -62,8 +62,8 @@ Other parameters are passed through a pointer to a apiGetQuotasV2AppliedQuotaReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **environment** | **string** | A unique environment id to associate a specific environment to this quota. This field is required only if scope is set to \&quot;environment\&quot; or \&quot;cluster\&quot; and it is doing a single quota query.  | 
- **cluster** | **string** | A unique cluster id to associate a specific cluster to this quota. This field is required only if scope is set to \&quot;cluster\&quot; and it is doing a single quota query.  | 
+ **environment** | **string** | A unique environment id to associate a specific environment to this quota. This field is required only if scope is set to \&quot;ENVIRONMENT\&quot; or \&quot;KAFKA-CLUSTER\&quot; and it is doing a single quota query.  | 
+ **kafkaCluster** | **string** | A unique Kafka cluster id to associate a specific kafka cluster to this quota. This field is required only if scope is set to \&quot;KAFKA-CLUSTER\&quot; and it is doing a single quota query.  | 
 
 ### Return type
 
@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 
 ## ListQuotasV2AppliedQuota
 
-> QuotasV2AppliedQuotaList ListQuotasV2AppliedQuota(ctx).Scope(scope).Environment(environment).Cluster(cluster).Execute()
+> QuotasV2AppliedQuotaList ListQuotasV2AppliedQuota(ctx).Scope(scope).Environment(environment).KafkaCluster(kafkaCluster).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Applied Quota
 
@@ -104,13 +104,15 @@ import (
 )
 
 func main() {
-    scope := "cluster" // string | The applied scope that the quota belong to. Could be set to \"user\", \"organization\", \"environment\" or \"cluster\". 
-    environment := "env-00000" // string | A unique environment id to associate a specific environment to this quota. This field is required only if scope is set to \"environment\" or \"cluster\" and it is doing a single quota query.  (optional)
-    cluster := "lkc-00000" // string | A unique cluster id to associate a specific cluster to this quota. This field is required only if scope is set to \"cluster\" and it is doing a single quota query.  (optional)
+    scope := "ORGANIZATION" // string | The applied scope that the quota belong to. 
+    environment := "env-00000" // string | A unique environment id to associate a specific environment to this quota. This field is required only if scope is set to \"ENVIRONMENT\" or \"KAFKA-CLUSTER\" and it is doing a single quota query.  (optional)
+    kafkaCluster := "lkc-00000" // string | A unique Kafka cluster id to associate a specific kafka cluster to this quota. This field is required only if scope is set to \"KAFKA-CLUSTER\" and it is doing a single quota query.  (optional)
+    pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
+    pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AppliedQuotaQuotasV2Api.ListQuotasV2AppliedQuota(context.Background()).Scope(scope).Environment(environment).Cluster(cluster).Execute()
+    resp, r, err := api_client.AppliedQuotaQuotasV2Api.ListQuotasV2AppliedQuota(context.Background()).Scope(scope).Environment(environment).KafkaCluster(kafkaCluster).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AppliedQuotaQuotasV2Api.ListQuotasV2AppliedQuota``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -131,9 +133,11 @@ Other parameters are passed through a pointer to a apiListQuotasV2AppliedQuotaRe
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **string** | The applied scope that the quota belong to. Could be set to \&quot;user\&quot;, \&quot;organization\&quot;, \&quot;environment\&quot; or \&quot;cluster\&quot;.  | 
- **environment** | **string** | A unique environment id to associate a specific environment to this quota. This field is required only if scope is set to \&quot;environment\&quot; or \&quot;cluster\&quot; and it is doing a single quota query.  | 
- **cluster** | **string** | A unique cluster id to associate a specific cluster to this quota. This field is required only if scope is set to \&quot;cluster\&quot; and it is doing a single quota query.  | 
+ **scope** | **string** | The applied scope that the quota belong to.  | 
+ **environment** | **string** | A unique environment id to associate a specific environment to this quota. This field is required only if scope is set to \&quot;ENVIRONMENT\&quot; or \&quot;KAFKA-CLUSTER\&quot; and it is doing a single quota query.  | 
+ **kafkaCluster** | **string** | A unique Kafka cluster id to associate a specific kafka cluster to this quota. This field is required only if scope is set to \&quot;KAFKA-CLUSTER\&quot; and it is doing a single quota query.  | 
+ **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
+ **pageToken** | **string** | An opaque pagination token for collection requests. | 
 
 ### Return type
 

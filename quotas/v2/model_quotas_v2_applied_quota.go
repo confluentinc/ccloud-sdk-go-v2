@@ -36,8 +36,8 @@ type QuotasV2AppliedQuota struct {
 	Organization *ObjectReference `json:"organization,omitempty"`
 	// A unique environment id to associate a specific environment to this quota. 
 	Environment *ObjectReference `json:"environment,omitempty"`
-	// A unique cluster id to associate a specific cluster to this quota. 
-	Cluster *ObjectReference `json:"cluster,omitempty"`
+	// A unique Kafka cluster id to associate a specific cluster to this quota. 
+	KafkaCluster *ObjectReference `json:"kafka_cluster,omitempty"`
 }
 
 // NewQuotasV2AppliedQuota instantiates a new QuotasV2AppliedQuota object
@@ -377,36 +377,36 @@ func (o *QuotasV2AppliedQuota) SetEnvironment(v ObjectReference) {
 	o.Environment = &v
 }
 
-// GetCluster returns the Cluster field value if set, zero value otherwise.
-func (o *QuotasV2AppliedQuota) GetCluster() ObjectReference {
-	if o == nil || o.Cluster == nil {
+// GetKafkaCluster returns the KafkaCluster field value if set, zero value otherwise.
+func (o *QuotasV2AppliedQuota) GetKafkaCluster() ObjectReference {
+	if o == nil || o.KafkaCluster == nil {
 		var ret ObjectReference
 		return ret
 	}
-	return *o.Cluster
+	return *o.KafkaCluster
 }
 
-// GetClusterOk returns a tuple with the Cluster field value if set, nil otherwise
+// GetKafkaClusterOk returns a tuple with the KafkaCluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QuotasV2AppliedQuota) GetClusterOk() (*ObjectReference, bool) {
-	if o == nil || o.Cluster == nil {
+func (o *QuotasV2AppliedQuota) GetKafkaClusterOk() (*ObjectReference, bool) {
+	if o == nil || o.KafkaCluster == nil {
 		return nil, false
 	}
-	return o.Cluster, true
+	return o.KafkaCluster, true
 }
 
-// HasCluster returns a boolean if a field has been set.
-func (o *QuotasV2AppliedQuota) HasCluster() bool {
-	if o != nil && o.Cluster != nil {
+// HasKafkaCluster returns a boolean if a field has been set.
+func (o *QuotasV2AppliedQuota) HasKafkaCluster() bool {
+	if o != nil && o.KafkaCluster != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetCluster gets a reference to the given ObjectReference and assigns it to the Cluster field.
-func (o *QuotasV2AppliedQuota) SetCluster(v ObjectReference) {
-	o.Cluster = &v
+// SetKafkaCluster gets a reference to the given ObjectReference and assigns it to the KafkaCluster field.
+func (o *QuotasV2AppliedQuota) SetKafkaCluster(v ObjectReference) {
+	o.KafkaCluster = &v
 }
 
 func (o QuotasV2AppliedQuota) MarshalJSON() ([]byte, error) {
@@ -441,8 +441,8 @@ func (o QuotasV2AppliedQuota) MarshalJSON() ([]byte, error) {
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
 	}
-	if o.Cluster != nil {
-		toSerialize["cluster"] = o.Cluster
+	if o.KafkaCluster != nil {
+		toSerialize["kafka_cluster"] = o.KafkaCluster
 	}
 	return json.Marshal(toSerialize)
 }

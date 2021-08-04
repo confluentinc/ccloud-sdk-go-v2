@@ -33,15 +33,15 @@ type ApiGetQuotasV2AppliedQuotaRequest struct {
 	ApiService *AppliedQuotaQuotasV2ApiService
 	id string
 	environment *string
-	cluster *string
+	kafkaCluster *string
 }
 
 func (r ApiGetQuotasV2AppliedQuotaRequest) Environment(environment string) ApiGetQuotasV2AppliedQuotaRequest {
 	r.environment = &environment
 	return r
 }
-func (r ApiGetQuotasV2AppliedQuotaRequest) Cluster(cluster string) ApiGetQuotasV2AppliedQuotaRequest {
-	r.cluster = &cluster
+func (r ApiGetQuotasV2AppliedQuotaRequest) KafkaCluster(kafkaCluster string) ApiGetQuotasV2AppliedQuotaRequest {
+	r.kafkaCluster = &kafkaCluster
 	return r
 }
 
@@ -95,8 +95,8 @@ func (a *AppliedQuotaQuotasV2ApiService) GetQuotasV2AppliedQuotaExecute(r ApiGet
 	if r.environment != nil {
 		localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	}
-	if r.cluster != nil {
-		localVarQueryParams.Add("cluster", parameterToString(*r.cluster, ""))
+	if r.kafkaCluster != nil {
+		localVarQueryParams.Add("kafka_cluster", parameterToString(*r.kafkaCluster, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -206,7 +206,9 @@ type ApiListQuotasV2AppliedQuotaRequest struct {
 	ApiService *AppliedQuotaQuotasV2ApiService
 	scope *string
 	environment *string
-	cluster *string
+	kafkaCluster *string
+	pageSize *int32
+	pageToken *string
 }
 
 func (r ApiListQuotasV2AppliedQuotaRequest) Scope(scope string) ApiListQuotasV2AppliedQuotaRequest {
@@ -217,8 +219,16 @@ func (r ApiListQuotasV2AppliedQuotaRequest) Environment(environment string) ApiL
 	r.environment = &environment
 	return r
 }
-func (r ApiListQuotasV2AppliedQuotaRequest) Cluster(cluster string) ApiListQuotasV2AppliedQuotaRequest {
-	r.cluster = &cluster
+func (r ApiListQuotasV2AppliedQuotaRequest) KafkaCluster(kafkaCluster string) ApiListQuotasV2AppliedQuotaRequest {
+	r.kafkaCluster = &kafkaCluster
+	return r
+}
+func (r ApiListQuotasV2AppliedQuotaRequest) PageSize(pageSize int32) ApiListQuotasV2AppliedQuotaRequest {
+	r.pageSize = &pageSize
+	return r
+}
+func (r ApiListQuotasV2AppliedQuotaRequest) PageToken(pageToken string) ApiListQuotasV2AppliedQuotaRequest {
+	r.pageToken = &pageToken
 	return r
 }
 
@@ -232,7 +242,7 @@ func (r ApiListQuotasV2AppliedQuotaRequest) Execute() (QuotasV2AppliedQuotaList,
 
 Retrieve a sorted, filtered, paginated list of all applied quota.
 
-This can show all quotas for a given quotas scope (in organization, user, environment or cluster).
+This can show all quotas from a given quotas scope.
 
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return ApiListQuotasV2AppliedQuotaRequest
@@ -276,8 +286,14 @@ func (a *AppliedQuotaQuotasV2ApiService) ListQuotasV2AppliedQuotaExecute(r ApiLi
 	if r.environment != nil {
 		localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	}
-	if r.cluster != nil {
-		localVarQueryParams.Add("cluster", parameterToString(*r.cluster, ""))
+	if r.kafkaCluster != nil {
+		localVarQueryParams.Add("kafka_cluster", parameterToString(*r.kafkaCluster, ""))
+	}
+	if r.pageSize != nil {
+		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
+	}
+	if r.pageToken != nil {
+		localVarQueryParams.Add("page_token", parameterToString(*r.pageToken, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
