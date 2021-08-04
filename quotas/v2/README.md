@@ -81,6 +81,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AppliedQuotaQuotasV2Api* | [**GetQuotasV2AppliedQuota**](docs/AppliedQuotaQuotasV2Api.md#getquotasv2appliedquota) | **Get** /quotas/v2/applied-quotas/{id} | Read an Applied Quota
 *AppliedQuotaQuotasV2Api* | [**ListQuotasV2AppliedQuota**](docs/AppliedQuotaQuotasV2Api.md#listquotasv2appliedquota) | **Get** /quotas/v2/applied-quotas | List of Applied Quota
+*ScopesQuotasV2Api* | [**ListQuotasV2Scopes**](docs/ScopesQuotasV2Api.md#listquotasv2scopes) | **Get** /quotas/v2/scopes | List of Scopes
 
 
 ## Documentation For Models
@@ -93,6 +94,8 @@ Class | Method | HTTP request | Description
  - [ObjectReference](docs/ObjectReference.md)
  - [QuotasV2AppliedQuota](docs/QuotasV2AppliedQuota.md)
  - [QuotasV2AppliedQuotaList](docs/QuotasV2AppliedQuotaList.md)
+ - [QuotasV2Scopes](docs/QuotasV2Scopes.md)
+ - [QuotasV2ScopesList](docs/QuotasV2ScopesList.md)
 
 
 ## Documentation For Authorization
