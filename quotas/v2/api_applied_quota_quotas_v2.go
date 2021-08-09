@@ -242,7 +242,7 @@ func (r ApiListQuotasV2AppliedQuotaRequest) Execute() (QuotasV2AppliedQuotaList,
 
 Retrieve a sorted, filtered, paginated list of all applied quota.
 
-This can show all quotas from a given quotas scope.
+Shows all quotas for a given quotas scope.
 
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return ApiListQuotasV2AppliedQuotaRequest
