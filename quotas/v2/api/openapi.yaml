@@ -28,7 +28,7 @@ tags:
 - description: |
     [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Quotas v2](https://img.shields.io/badge/-Request%20Access%20To%20Quotas%20v2-%23bc8540)](mailto:ccloud-api-access+quotas-v2-early-access@confluent.io?subject=Request%20to%20join%20quotas/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20quotas/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-    A scopes endpoint to get a list of all available scopes for applied quotas.
+    Gets a list of all available scopes for applied quotas.
   name: Scopes (quotas/v2)
 paths:
   /quotas/v2/applied-quotas:
@@ -38,7 +38,7 @@ paths:
 
         Retrieve a sorted, filtered, paginated list of all applied quota.
 
-        This can show all quotas from a given quotas scope.
+        Shows all quotas for a given quotas scope.
       operationId: listQuotasV2AppliedQuota
       parameters:
       - description: |
@@ -53,7 +53,7 @@ paths:
         style: form
       - description: |
           A unique environment id to associate a specific environment to this quota.
-          This field is required only if scope is set to "ENVIRONMENT" or "KAFKA-CLUSTER"
+          This field is required only if scope is set to "ENVIRONMENT" or "KAFKA_CLUSTER"
           and it is doing a single quota query.
         example: env-00000
         explode: true
@@ -65,7 +65,7 @@ paths:
         style: form
       - description: |
           A unique Kafka cluster id to associate a specific kafka cluster to this quota.
-          This field is required only if scope is set to "KAFKA-CLUSTER" and it is doing a single quota query.
+          This field is required only if scope is set to "KAFKA_CLUSTER" and it is doing a single quota query.
         example: lkc-00000
         explode: true
         in: query
@@ -274,7 +274,7 @@ paths:
       parameters:
       - description: |
           A unique environment id to associate a specific environment to this quota.
-          This field is required only if scope is set to "ENVIRONMENT" or "KAFKA-CLUSTER"
+          This field is required only if scope is set to "ENVIRONMENT" or "KAFKA_CLUSTER"
           and it is doing a single quota query.
         example: env-00000
         explode: true
@@ -286,7 +286,7 @@ paths:
         style: form
       - description: |
           A unique Kafka cluster id to associate a specific kafka cluster to this quota.
-          This field is required only if scope is set to "KAFKA-CLUSTER" and it is doing a single quota query.
+          This field is required only if scope is set to "KAFKA_CLUSTER" and it is doing a single quota query.
         example: lkc-00000
         explode: true
         in: query
@@ -529,8 +529,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/quotas.v2.ScopesList'
-          description: Scopes.
+                $ref: '#/components/schemas/quotas.v2.ScopeList'
+          description: Scope.
         "400":
           content:
             application/json:
@@ -690,6 +690,210 @@ paths:
       - lang: C#
         source: |-
           var client = new RestClient("https://api.confluent.cloud/quotas/v2/scopes?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+    x-lifecycle-stage: Early Access
+    x-request-access-name: Quotas v2
+  /quotas/v2/scopes/{id}:
+    get:
+      description: |-
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Quotas v2](https://img.shields.io/badge/-Request%20Access%20To%20Quotas%20v2-%23bc8540)](mailto:ccloud-api-access+quotas-v2-early-access@confluent.io?subject=Request%20to%20join%20quotas/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20quotas/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+        Make a request to read a scope.
+      operationId: getQuotasV2Scope
+      parameters:
+      - description: The unique identifier for the scope.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/quotas.v2.Scope'
+                - required:
+                  - api_version
+                  - id
+                  - kind
+                  type: object
+          description: Scope.
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+        "429":
+          description: Rate Limit Exceeded
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+      security:
+      - api-key: []
+      summary: Read a Scope
+      tags:
+      - Scopes (quotas/v2)
+      x-lifecycle-stage: Early Access
+      x-request-access-name: Quotas v2
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.confluent.cloud/quotas/v2/scopes/{id}' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/quotas/v2/scopes/{id}")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/quotas/v2/scopes/{id}\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/quotas/v2/scopes/{id}", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/quotas/v2/scopes/{id}",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/quotas/v2/scopes/{id}");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/quotas/v2/scopes/{id}");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -857,9 +1061,9 @@ components:
           x-extensible-enum:
           - ORGANIZATION
           - ENVIRONMENT
-          - KAFKA-CLUSTER
-          - SERVICE-ACCOUNT
-          - USER-ACCOUNT
+          - KAFKA_CLUSTER
+          - SERVICE_ACCOUNT
+          - USER_ACCOUNT
         display_name:
           description: A human-readable name for the quota type name.
           example: Kafka Cluster Per Organization
@@ -916,10 +1120,9 @@ components:
             resource_name: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/cluster=lkc-00000
           x-immutable: true
       type: object
-    quotas.v2.Scopes:
+    quotas.v2.Scope:
       additionalProperties: false
-      description: A scopes endpoint to get a list of all available scopes for applied
-        quotas.
+      description: Gets a list of all available scopes for applied quotas.
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -931,7 +1134,7 @@ components:
         kind:
           description: Kind defines the object this REST resource represents.
           enum:
-          - Scopes
+          - Scope
           readOnly: true
           type: string
         id:
@@ -950,13 +1153,11 @@ components:
               self:
                 example: https://api.confluent.cloud/quotas/v2/scopes/s-12345
               resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/scopes=s-12345
-        name:
-          description: the quota scope which could be used to do listing quotas query
-          example: ORGANIZATION
-          items:
-            type: string
-          type: array
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/scope=s-12345
+        description:
+          description: the quota scope for listing quotas queries
+          example: ORGANIZATION scope that quotas would be applied to
+          type: string
       type: object
     SearchFilter:
       description: Filter a collection by a string search
@@ -1020,16 +1221,15 @@ components:
       - kind
       - metadata
       type: object
-    quotas.v2.ScopesList:
+    quotas.v2.ScopeList:
       additionalProperties: false
-      description: A scopes endpoint to get a list of all available scopes for applied
-        quotas.
+      description: Gets a list of all available scopes for applied quotas.
       example:
         metadata: ""
         data:
         - ""
         - ""
-        kind: ScopesList
+        kind: ScopeList
         api_version: quotas/v2
       properties:
         api_version:
@@ -1042,7 +1242,7 @@ components:
         kind:
           description: Kind defines the object this REST resource represents.
           enum:
-          - ScopesList
+          - ScopeList
           readOnly: true
           type: string
         metadata:
@@ -1060,7 +1260,7 @@ components:
         data:
           items:
             allOf:
-            - $ref: '#/components/schemas/quotas.v2.Scopes'
+            - $ref: '#/components/schemas/quotas.v2.Scope'
             - required:
               - id
               - metadata

@@ -31,8 +31,8 @@ import (
 
 func main() {
     id := "id_example" // string | The unique identifier for the applied quota.
-    environment := "env-00000" // string | A unique environment id to associate a specific environment to this quota. This field is required only if scope is set to \"ENVIRONMENT\" or \"KAFKA-CLUSTER\" and it is doing a single quota query.  (optional)
-    kafkaCluster := "lkc-00000" // string | A unique Kafka cluster id to associate a specific kafka cluster to this quota. This field is required only if scope is set to \"KAFKA-CLUSTER\" and it is doing a single quota query.  (optional)
+    environment := "env-00000" // string | A unique environment id to associate a specific environment to this quota. This field is required only if scope is set to \"ENVIRONMENT\" or \"KAFKA_CLUSTER\" and it is doing a single quota query.  (optional)
+    kafkaCluster := "lkc-00000" // string | A unique Kafka cluster id to associate a specific kafka cluster to this quota. This field is required only if scope is set to \"KAFKA_CLUSTER\" and it is doing a single quota query.  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -62,8 +62,8 @@ Other parameters are passed through a pointer to a apiGetQuotasV2AppliedQuotaReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **environment** | **string** | A unique environment id to associate a specific environment to this quota. This field is required only if scope is set to \&quot;ENVIRONMENT\&quot; or \&quot;KAFKA-CLUSTER\&quot; and it is doing a single quota query.  | 
- **kafkaCluster** | **string** | A unique Kafka cluster id to associate a specific kafka cluster to this quota. This field is required only if scope is set to \&quot;KAFKA-CLUSTER\&quot; and it is doing a single quota query.  | 
+ **environment** | **string** | A unique environment id to associate a specific environment to this quota. This field is required only if scope is set to \&quot;ENVIRONMENT\&quot; or \&quot;KAFKA_CLUSTER\&quot; and it is doing a single quota query.  | 
+ **kafkaCluster** | **string** | A unique Kafka cluster id to associate a specific kafka cluster to this quota. This field is required only if scope is set to \&quot;KAFKA_CLUSTER\&quot; and it is doing a single quota query.  | 
 
 ### Return type
 
@@ -105,8 +105,8 @@ import (
 
 func main() {
     scope := "ORGANIZATION" // string | The applied scope that the quota belong to. 
-    environment := "env-00000" // string | A unique environment id to associate a specific environment to this quota. This field is required only if scope is set to \"ENVIRONMENT\" or \"KAFKA-CLUSTER\" and it is doing a single quota query.  (optional)
-    kafkaCluster := "lkc-00000" // string | A unique Kafka cluster id to associate a specific kafka cluster to this quota. This field is required only if scope is set to \"KAFKA-CLUSTER\" and it is doing a single quota query.  (optional)
+    environment := "env-00000" // string | A unique environment id to associate a specific environment to this quota. This field is required only if scope is set to \"ENVIRONMENT\" or \"KAFKA_CLUSTER\" and it is doing a single quota query.  (optional)
+    kafkaCluster := "lkc-00000" // string | A unique Kafka cluster id to associate a specific kafka cluster to this quota. This field is required only if scope is set to \"KAFKA_CLUSTER\" and it is doing a single quota query.  (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
@@ -134,8 +134,8 @@ Other parameters are passed through a pointer to a apiListQuotasV2AppliedQuotaRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **string** | The applied scope that the quota belong to.  | 
- **environment** | **string** | A unique environment id to associate a specific environment to this quota. This field is required only if scope is set to \&quot;ENVIRONMENT\&quot; or \&quot;KAFKA-CLUSTER\&quot; and it is doing a single quota query.  | 
- **kafkaCluster** | **string** | A unique Kafka cluster id to associate a specific kafka cluster to this quota. This field is required only if scope is set to \&quot;KAFKA-CLUSTER\&quot; and it is doing a single quota query.  | 
+ **environment** | **string** | A unique environment id to associate a specific environment to this quota. This field is required only if scope is set to \&quot;ENVIRONMENT\&quot; or \&quot;KAFKA_CLUSTER\&quot; and it is doing a single quota query.  | 
+ **kafkaCluster** | **string** | A unique Kafka cluster id to associate a specific kafka cluster to this quota. This field is required only if scope is set to \&quot;KAFKA_CLUSTER\&quot; and it is doing a single quota query.  | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 
