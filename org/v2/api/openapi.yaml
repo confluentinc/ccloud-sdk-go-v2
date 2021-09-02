@@ -62,6 +62,7 @@ paths:
         name: page_token
         required: false
         schema:
+          maxLength: 255
           type: string
         style: form
       responses:
@@ -71,6 +72,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/v2.EnvironmentList'
           description: Environment.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "400":
           content:
             application/json:
@@ -86,6 +94,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "401":
           content:
             application/json:
@@ -101,6 +116,12 @@ paths:
           description: The request lacks valid authentication credentials for this
             resource.
           headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
             WWW-Authenticate:
               description: The unique identifier for the API request.
               example: Basic error="invalid_key", error_description="The API Key is
@@ -125,9 +146,23 @@ paths:
                 $ref: '#/components/schemas/Failure'
           description: The access credentials were considered insufficient to grant
             access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
           x-summary: Forbidden
         "429":
           description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "500":
           content:
             application/json:
@@ -142,12 +177,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
       security:
       - api-key: []
       summary: List of Environments
       tags:
       - Environments (v2)
-      x-lifecycle-stage: Early Access
       x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
@@ -252,6 +293,12 @@ paths:
                 $ref: '#/components/schemas/v2.Environment'
           description: An Environment was created.
           headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
             Location:
               description: Environment resource uri
               explode: false
@@ -275,6 +322,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "401":
           content:
             application/json:
@@ -290,6 +344,12 @@ paths:
           description: The request lacks valid authentication credentials for this
             resource.
           headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
             WWW-Authenticate:
               description: The unique identifier for the API request.
               example: Basic error="invalid_key", error_description="The API Key is
@@ -312,6 +372,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: The request would exceed one or more quotas.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
           x-summary: Over Quota
         "403":
           content:
@@ -328,6 +395,13 @@ paths:
                 $ref: '#/components/schemas/Failure'
           description: The access credentials were considered insufficient to grant
             access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
           x-summary: Forbidden
         "409":
           content:
@@ -344,6 +418,12 @@ paths:
                 $ref: '#/components/schemas/Failure'
           description: The request is in conflict with the current server state
           headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
             Location:
               description: Resource URI of conflicting resource
               explode: false
@@ -355,6 +435,13 @@ paths:
           x-summary: Conflict
         "429":
           description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "500":
           content:
             application/json:
@@ -369,12 +456,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
       security:
       - api-key: []
       summary: Create an Environment
       tags:
       - Environments (v2)
-      x-lifecycle-stage: Early Access
       x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
@@ -479,7 +572,6 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"display_name\":\"prod-finance01\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-lifecycle-stage: Early Access
     x-request-access-name: Cloud v2
   /v2/environments/{id}:
     delete:
@@ -503,6 +595,13 @@ paths:
       responses:
         "204":
           description: An Environment is being deleted.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "400":
           content:
             application/json:
@@ -518,6 +617,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "401":
           content:
             application/json:
@@ -533,6 +639,12 @@ paths:
           description: The request lacks valid authentication credentials for this
             resource.
           headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
             WWW-Authenticate:
               description: The unique identifier for the API request.
               example: Basic error="invalid_key", error_description="The API Key is
@@ -557,6 +669,13 @@ paths:
                 $ref: '#/components/schemas/Failure'
           description: The access credentials were considered insufficient to grant
             access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
           x-summary: Forbidden
         "404":
           content:
@@ -569,8 +688,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "429":
           description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "500":
           content:
             application/json:
@@ -585,12 +718,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
       security:
       - api-key: []
       summary: Delete an Environment
       tags:
       - Environments (v2)
-      x-lifecycle-stage: Early Access
       x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
@@ -704,6 +843,13 @@ paths:
                   - kind
                   type: object
           description: Environment.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "400":
           content:
             application/json:
@@ -719,6 +865,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "401":
           content:
             application/json:
@@ -734,6 +887,12 @@ paths:
           description: The request lacks valid authentication credentials for this
             resource.
           headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
             WWW-Authenticate:
               description: The unique identifier for the API request.
               example: Basic error="invalid_key", error_description="The API Key is
@@ -758,6 +917,13 @@ paths:
                 $ref: '#/components/schemas/Failure'
           description: The access credentials were considered insufficient to grant
             access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
           x-summary: Forbidden
         "404":
           content:
@@ -770,8 +936,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "429":
           description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "500":
           content:
             application/json:
@@ -786,12 +966,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
       security:
       - api-key: []
       summary: Read an Environment
       tags:
       - Environments (v2)
-      x-lifecycle-stage: Early Access
       x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
@@ -911,6 +1097,13 @@ paths:
                   - kind
                   type: object
           description: Environment.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "400":
           content:
             application/json:
@@ -926,6 +1119,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "401":
           content:
             application/json:
@@ -941,6 +1141,12 @@ paths:
           description: The request lacks valid authentication credentials for this
             resource.
           headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
             WWW-Authenticate:
               description: The unique identifier for the API request.
               example: Basic error="invalid_key", error_description="The API Key is
@@ -963,6 +1169,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: The request would exceed one or more quotas.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
           x-summary: Over Quota
         "403":
           content:
@@ -979,6 +1192,13 @@ paths:
                 $ref: '#/components/schemas/Failure'
           description: The access credentials were considered insufficient to grant
             access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
           x-summary: Forbidden
         "404":
           content:
@@ -991,8 +1211,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "429":
           description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "500":
           content:
             application/json:
@@ -1007,12 +1241,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
       security:
       - api-key: []
       summary: Update an Environment
       tags:
       - Environments (v2)
-      x-lifecycle-stage: Early Access
       x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
@@ -1117,7 +1357,6 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"display_name\":\"prod-finance01\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-lifecycle-stage: Early Access
     x-request-access-name: Cloud v2
 components:
   responses:
@@ -1136,6 +1375,13 @@ components:
           schema:
             $ref: '#/components/schemas/Failure'
       description: Bad Request
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
     UnauthenticatedError:
       content:
         application/json:
@@ -1150,6 +1396,12 @@ components:
             $ref: '#/components/schemas/Failure'
       description: The request lacks valid authentication credentials for this resource.
       headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
         WWW-Authenticate:
           description: The unique identifier for the API request.
           example: Basic error="invalid_key", error_description="The API Key is invalid"
@@ -1171,6 +1423,13 @@ components:
           schema:
             $ref: '#/components/schemas/Failure'
       description: The request would exceed one or more quotas.
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
       x-summary: Over Quota
     UnauthorizedError:
       content:
@@ -1186,6 +1445,13 @@ components:
           schema:
             $ref: '#/components/schemas/Failure'
       description: The access credentials were considered insufficient to grant access
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
       x-summary: Forbidden
     ConflictError:
       content:
@@ -1202,6 +1468,12 @@ components:
             $ref: '#/components/schemas/Failure'
       description: The request is in conflict with the current server state
       headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
         Location:
           description: Resource URI of conflicting resource
           explode: false
@@ -1222,8 +1494,22 @@ components:
           schema:
             $ref: '#/components/schemas/Failure'
       description: Not Found
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
     RateLimitError:
       description: Rate Limit Exceeded
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
     DefaultSystemError:
       content:
         application/json:
@@ -1238,6 +1524,13 @@ components:
           schema:
             $ref: '#/components/schemas/Failure'
       description: Oops, something went wrong!
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
   schemas:
     v2.Environment:
       additionalProperties: false
@@ -1270,6 +1563,7 @@ components:
             ("time"); however, it may collide with IDs for other object `kinds` or
             objects of the same `kind` within a different scope/namespace ("space").
           example: dlz-f3a90de
+          maxLength: 255
           readOnly: true
           type: string
         metadata:
@@ -1431,10 +1725,12 @@ components:
       properties:
         id:
           description: ID of the referred resource
+          maxLength: 255
           minLength: 1
           type: string
         environment:
           description: Environment of the referred resource, if env-scoped
+          maxLength: 255
           minLength: 1
           type: string
         related:
@@ -1483,6 +1779,7 @@ components:
       properties:
         id:
           description: A unique identifier for this particular occurrence of the problem.
+          maxLength: 255
           type: string
         status:
           description: The HTTP status code applicable to this problem, expressed
