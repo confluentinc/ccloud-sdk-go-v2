@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Phase** | **string** | The lifecyle phase of the cluster:   PROVISIONED:  cluster is provisioned;   PROVISIONING:  cluster provisioning is in progress;   FAILED:  provisioning failed  | [readonly] 
-**Cku** | Pointer to **int32** | The number of Confluent Kafka Units (CKUs) the Dedicated cluster currently has. | [optional] [readonly] 
+**Cku** | Pointer to **int32** | This field is in Early Access with the use of Dedicated Cluster.  The number of Confluent Kafka Units (CKUs) the Dedicated cluster currently has.  | [optional] [readonly] 
 
 ## Methods
 

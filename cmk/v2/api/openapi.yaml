@@ -19,7 +19,7 @@ servers:
   url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To CMK API v2](https://img.shields.io/badge/-Request%20Access%20To%20CMK%20API%20v2-%23bc8540)](mailto:ccloud-api-access+cmk-v2-early-access@confluent.io?subject=Request%20to%20join%20cmk/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20cmk/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `Clusters` objects represent Apache Kafka Clusters on Confluent Cloud.
 
@@ -39,7 +39,7 @@ paths:
   /cmk/v2/clusters:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To CMK API v2](https://img.shields.io/badge/-Request%20Access%20To%20CMK%20API%20v2-%23bc8540)](mailto:ccloud-api-access+cmk-v2-early-access@confluent.io?subject=Request%20to%20join%20cmk/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20cmk/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all clusters.
       operationId: listCmkV2Clusters
@@ -70,6 +70,7 @@ paths:
         name: page_token
         required: false
         schema:
+          maxLength: 255
           type: string
         style: form
       responses:
@@ -79,6 +80,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/cmk.v2.ClusterList'
           description: Cluster.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "400":
           content:
             application/json:
@@ -94,6 +102,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "401":
           content:
             application/json:
@@ -109,6 +124,12 @@ paths:
           description: The request lacks valid authentication credentials for this
             resource.
           headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
             WWW-Authenticate:
               description: The unique identifier for the API request.
               example: Basic error="invalid_key", error_description="The API Key is
@@ -133,9 +154,23 @@ paths:
                 $ref: '#/components/schemas/Failure'
           description: The access credentials were considered insufficient to grant
             access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
           x-summary: Forbidden
         "429":
           description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "500":
           content:
             application/json:
@@ -150,13 +185,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
       security:
       - api-key: []
       summary: List of Clusters
       tags:
       - Clusters (cmk/v2)
-      x-lifecycle-stage: Early Access
-      x-request-access-name: CMK API v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -243,7 +283,7 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To CMK API v2](https://img.shields.io/badge/-Request%20Access%20To%20CMK%20API%20v2-%23bc8540)](mailto:ccloud-api-access+cmk-v2-early-access@confluent.io?subject=Request%20to%20join%20cmk/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20cmk/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create a cluster.
       operationId: createCmkV2Cluster
@@ -289,6 +329,12 @@ paths:
                   type: object
           description: A Cluster is being created.
           headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
             Location:
               description: Cluster resource uri
               explode: false
@@ -312,6 +358,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "401":
           content:
             application/json:
@@ -327,6 +380,12 @@ paths:
           description: The request lacks valid authentication credentials for this
             resource.
           headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
             WWW-Authenticate:
               description: The unique identifier for the API request.
               example: Basic error="invalid_key", error_description="The API Key is
@@ -349,6 +408,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: The request would exceed one or more quotas.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
           x-summary: Over Quota
         "403":
           content:
@@ -365,6 +431,13 @@ paths:
                 $ref: '#/components/schemas/Failure'
           description: The access credentials were considered insufficient to grant
             access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
           x-summary: Forbidden
         "409":
           content:
@@ -381,6 +454,12 @@ paths:
                 $ref: '#/components/schemas/Failure'
           description: The request is in conflict with the current server state
           headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
             Location:
               description: Resource URI of conflicting resource
               explode: false
@@ -392,6 +471,13 @@ paths:
           x-summary: Conflict
         "429":
           description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "500":
           content:
             application/json:
@@ -406,13 +492,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
       security:
       - api-key: []
       summary: Create a Cluster
       tags:
       - Clusters (cmk/v2)
-      x-lifecycle-stage: Early Access
-      x-request-access-name: CMK API v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -534,12 +625,10 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-lifecycle-stage: Early Access
-    x-request-access-name: CMK API v2
   /cmk/v2/clusters/{id}:
     delete:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To CMK API v2](https://img.shields.io/badge/-Request%20Access%20To%20CMK%20API%20v2-%23bc8540)](mailto:ccloud-api-access+cmk-v2-early-access@confluent.io?subject=Request%20to%20join%20cmk/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20cmk/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete a cluster.
       operationId: deleteCmkV2Cluster
@@ -564,6 +653,13 @@ paths:
       responses:
         "204":
           description: A Cluster is being deleted.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "400":
           content:
             application/json:
@@ -579,6 +675,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "401":
           content:
             application/json:
@@ -594,6 +697,12 @@ paths:
           description: The request lacks valid authentication credentials for this
             resource.
           headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
             WWW-Authenticate:
               description: The unique identifier for the API request.
               example: Basic error="invalid_key", error_description="The API Key is
@@ -618,6 +727,13 @@ paths:
                 $ref: '#/components/schemas/Failure'
           description: The access credentials were considered insufficient to grant
             access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
           x-summary: Forbidden
         "404":
           content:
@@ -630,8 +746,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "429":
           description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "500":
           content:
             application/json:
@@ -646,13 +776,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
       security:
       - api-key: []
       summary: Delete a Cluster
       tags:
       - Clusters (cmk/v2)
-      x-lifecycle-stage: Early Access
-      x-request-access-name: CMK API v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -739,7 +874,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To CMK API v2](https://img.shields.io/badge/-Request%20Access%20To%20CMK%20API%20v2-%23bc8540)](mailto:ccloud-api-access+cmk-v2-early-access@confluent.io?subject=Request%20to%20join%20cmk/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20cmk/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a cluster.
       operationId: getCmkV2Cluster
@@ -786,6 +921,13 @@ paths:
                   - status
                   type: object
           description: Cluster.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "400":
           content:
             application/json:
@@ -801,6 +943,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "401":
           content:
             application/json:
@@ -816,6 +965,12 @@ paths:
           description: The request lacks valid authentication credentials for this
             resource.
           headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
             WWW-Authenticate:
               description: The unique identifier for the API request.
               example: Basic error="invalid_key", error_description="The API Key is
@@ -840,6 +995,13 @@ paths:
                 $ref: '#/components/schemas/Failure'
           description: The access credentials were considered insufficient to grant
             access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
           x-summary: Forbidden
         "404":
           content:
@@ -852,8 +1014,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "429":
           description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "500":
           content:
             application/json:
@@ -868,13 +1044,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
       security:
       - api-key: []
       summary: Read a Cluster
       tags:
       - Clusters (cmk/v2)
-      x-lifecycle-stage: Early Access
-      x-request-access-name: CMK API v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -961,7 +1142,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To CMK API v2](https://img.shields.io/badge/-Request%20Access%20To%20CMK%20API%20v2-%23bc8540)](mailto:ccloud-api-access+cmk-v2-early-access@confluent.io?subject=Request%20to%20join%20cmk/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20cmk/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update a cluster.
 
@@ -1014,6 +1195,13 @@ paths:
                   - status
                   type: object
           description: Cluster.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "400":
           content:
             application/json:
@@ -1029,6 +1217,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "401":
           content:
             application/json:
@@ -1044,6 +1239,12 @@ paths:
           description: The request lacks valid authentication credentials for this
             resource.
           headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
             WWW-Authenticate:
               description: The unique identifier for the API request.
               example: Basic error="invalid_key", error_description="The API Key is
@@ -1066,6 +1267,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: The request would exceed one or more quotas.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
           x-summary: Over Quota
         "403":
           content:
@@ -1082,6 +1290,13 @@ paths:
                 $ref: '#/components/schemas/Failure'
           description: The access credentials were considered insufficient to grant
             access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
           x-summary: Forbidden
         "404":
           content:
@@ -1094,8 +1309,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "429":
           description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "500":
           content:
             application/json:
@@ -1110,13 +1339,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Failure'
           description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
       security:
       - api-key: []
       summary: Update a Cluster
       tags:
       - Clusters (cmk/v2)
-      x-lifecycle-stage: Early Access
-      x-request-access-name: CMK API v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1238,8 +1472,6 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-lifecycle-stage: Early Access
-    x-request-access-name: CMK API v2
 components:
   responses:
     BadRequestError:
@@ -1257,6 +1489,13 @@ components:
           schema:
             $ref: '#/components/schemas/Failure'
       description: Bad Request
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
     UnauthenticatedError:
       content:
         application/json:
@@ -1271,6 +1510,12 @@ components:
             $ref: '#/components/schemas/Failure'
       description: The request lacks valid authentication credentials for this resource.
       headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
         WWW-Authenticate:
           description: The unique identifier for the API request.
           example: Basic error="invalid_key", error_description="The API Key is invalid"
@@ -1292,6 +1537,13 @@ components:
           schema:
             $ref: '#/components/schemas/Failure'
       description: The request would exceed one or more quotas.
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
       x-summary: Over Quota
     UnauthorizedError:
       content:
@@ -1307,6 +1559,13 @@ components:
           schema:
             $ref: '#/components/schemas/Failure'
       description: The access credentials were considered insufficient to grant access
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
       x-summary: Forbidden
     ConflictError:
       content:
@@ -1323,6 +1582,12 @@ components:
             $ref: '#/components/schemas/Failure'
       description: The request is in conflict with the current server state
       headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
         Location:
           description: Resource URI of conflicting resource
           explode: false
@@ -1343,8 +1608,22 @@ components:
           schema:
             $ref: '#/components/schemas/Failure'
       description: Not Found
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
     RateLimitError:
       description: Rate Limit Exceeded
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
     DefaultSystemError:
       content:
         application/json:
@@ -1359,6 +1638,13 @@ components:
           schema:
             $ref: '#/components/schemas/Failure'
       description: Oops, something went wrong!
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
   schemas:
     cmk.v2.Cluster:
       additionalProperties: false
@@ -1385,6 +1671,7 @@ components:
             ("time"); however, it may collide with IDs for other object `kinds` or
             objects of the same `kind` within a different scope/namespace ("space").
           example: dlz-f3a90de
+          maxLength: 255
           readOnly: true
           type: string
         metadata:
@@ -1392,7 +1679,9 @@ components:
           - $ref: '#/components/schemas/ObjectMeta'
           - properties:
               self:
-                example: https://api.confluent.cloud/v2/kafka-clusters/lkc-f3a90de
+                example: https://api.confluent.cloud/cmk/v2/clusters/lkc-12345
+              resource_name:
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/cluster=lkc-12345
         spec:
           $ref: '#/components/schemas/cmk.v2.ClusterSpec'
         status:
@@ -1418,8 +1707,10 @@ components:
         cku:
           allOf:
           - $ref: '#/components/schemas/cmk.v2.Cku'
-          description: The number of Confluent Kafka Units (CKUs) the Dedicated cluster
-            currently has.
+          description: |
+            This field is in Early Access with the use of Dedicated Cluster.
+
+            The number of Confluent Kafka Units (CKUs) the Dedicated cluster currently has.
           readOnly: true
       readOnly: true
       required:
@@ -1456,6 +1747,8 @@ components:
         A dedicated cluster with its parameters.
       properties:
         kind:
+          description: |
+            Dedicated cluster is in Early Access.
           enum:
           - Dedicated
           type: string
@@ -1502,13 +1795,13 @@ components:
           - $ref: '#/components/schemas/ListMeta'
           - properties:
               first:
-                example: https://api.confluent.cloud/v2/resourcekinds
+                example: https://api.confluent.cloud/cmk/v2/clusters
               last:
-                example: https://api.confluent.cloud/v2/resourcekinds?page_token=bcAOehAY8F16YD84Z1wT
+                example: https://api.confluent.cloud/cmk/v2/clusters?page_token=bcAOehAY8F16YD84Z1wT
               prev:
-                example: https://api.confluent.cloud/v2/resourcekinds?page_token=YIXRY97wWYmwzrax4dld
+                example: https://api.confluent.cloud/cmk/v2/clusters?page_token=YIXRY97wWYmwzrax4dld
               next:
-                example: https://api.confluent.cloud/v2/resourcekinds?page_token=UvmDWOB1iwfAIBPj6EYb
+                example: https://api.confluent.cloud/cmk/v2/clusters?page_token=UvmDWOB1iwfAIBPj6EYb
         data:
           items:
             allOf:
@@ -1579,6 +1872,8 @@ components:
               Standard: '#/components/schemas/cmk.v2.Standard'
               Dedicated: '#/components/schemas/cmk.v2.Dedicated'
             propertyName: kind
+          example:
+            kind: Basic
           oneOf:
           - $ref: '#/components/schemas/cmk.v2.Basic'
           - $ref: '#/components/schemas/cmk.v2.Standard'
@@ -1613,6 +1908,7 @@ components:
       x-enable-listmeta: true
       x-enable-objectmeta: true
     ObjectMeta:
+      additionalProperties: false
       description: ObjectMeta is metadata that all persisted resources must have,
         which includes all objects users must create.
       properties:
@@ -1621,7 +1917,7 @@ components:
             can be addressed. This URL encodes the service location, API version,
             and other particulars necessary to locate the resource at a point in time
           example: https://api.confluent.cloud/v2/kafka-clusters/lkc-f3a90de
-          format: uri-reference
+          format: uri
           readOnly: true
           type: string
         resource_name:
@@ -1656,7 +1952,9 @@ components:
       readOnly: true
       required:
       - self
+      type: object
     ListMeta:
+      additionalProperties: false
       description: ListMeta describes metadata that resource collections may have
       properties:
         first:
@@ -1664,14 +1962,14 @@ components:
             contain a first link, then direct navigation to the first page is not
             supported.
           example: https://api.confluent.cloud/v2/resourcekinds
-          format: uri-reference
+          format: uri
           nullable: true
           type: string
         last:
           description: A link to the last page of results. If a response does not
             contain a last link, then direct navigation to the last page is not supported.
           example: https://api.confluent.cloud/v2/resourcekinds?page_token=bcAOehAY8F16YD84Z1wT
-          format: uri-reference
+          format: uri
           nullable: true
           type: string
         prev:
@@ -1679,36 +1977,40 @@ components:
             not contain a prev link, then either there is no previous data or backwards
             traversal through the result set is not supported.
           example: https://api.confluent.cloud/v2/resourcekinds?page_token=YIXRY97wWYmwzrax4dld
-          format: uri-reference
+          format: uri
           nullable: true
           type: string
         next:
           description: A link to the next page of results. If a response does not
             contain a next link, then there is no more data available.
           example: https://api.confluent.cloud/v2/resourcekinds?page_token=UvmDWOB1iwfAIBPj6EYb
-          format: uri-reference
+          format: uri
           nullable: true
           type: string
         total_size:
           example: 123
+          format: int32
           minimum: 0
           type: integer
       type: object
     ObjectReference:
+      additionalProperties: false
       description: ObjectReference provides information for you to locate the referred
         object
       properties:
         id:
           description: ID of the referred resource
+          maxLength: 255
           minLength: 1
           type: string
         environment:
           description: Environment of the referred resource, if env-scoped
+          maxLength: 255
           minLength: 1
           type: string
         related:
           description: API URL for accessing or modifying the referred object
-          format: uri-reference
+          format: uri
           minLength: 1
           readOnly: true
           type: string
@@ -1734,6 +2036,7 @@ components:
       - resource_name
       type: object
     Failure:
+      additionalProperties: false
       description: Provides information about problems encountered while performing
         an operation.
       properties:
@@ -1751,6 +2054,7 @@ components:
       properties:
         id:
           description: A unique identifier for this particular occurrence of the problem.
+          maxLength: 255
           type: string
         status:
           description: The HTTP status code applicable to this problem, expressed
@@ -1790,6 +2094,8 @@ components:
               Standard: '#/components/schemas/cmk.v2.Standard'
               Dedicated: '#/components/schemas/cmk.v2.Dedicated'
             propertyName: kind
+          example:
+            kind: Basic
           oneOf:
           - $ref: '#/components/schemas/cmk.v2.Basic'
           - $ref: '#/components/schemas/cmk.v2.Standard'
@@ -1834,6 +2140,7 @@ components:
             ("time"); however, it may collide with IDs for other object `kinds` or
             objects of the same `kind` within a different scope/namespace ("space").
           example: dlz-f3a90de
+          maxLength: 255
           readOnly: true
           type: string
         metadata:
@@ -1841,7 +2148,9 @@ components:
           - $ref: '#/components/schemas/ObjectMeta'
           - properties:
               self:
-                example: https://api.confluent.cloud/v2/kafka-clusters/lkc-f3a90de
+                example: https://api.confluent.cloud/cmk/v2/clusters/lkc-12345
+              resource_name:
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/cluster=lkc-12345
         spec:
           $ref: '#/components/schemas/cmk.v2.ClusterSpecUpdate'
         status:
