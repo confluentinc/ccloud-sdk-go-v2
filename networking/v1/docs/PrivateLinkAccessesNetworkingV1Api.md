@@ -4,11 +4,11 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateNetworkingV1PrivateLinkAccess**](PrivateLinkAccessesNetworkingV1Api.md#CreateNetworkingV1PrivateLinkAccess) | **Post** /networking/v1/privatelink-access | Create a Private Link Access
-[**DeleteNetworkingV1PrivateLinkAccess**](PrivateLinkAccessesNetworkingV1Api.md#DeleteNetworkingV1PrivateLinkAccess) | **Delete** /networking/v1/privatelink-access/{id} | Delete a Private Link Access
-[**GetNetworkingV1PrivateLinkAccess**](PrivateLinkAccessesNetworkingV1Api.md#GetNetworkingV1PrivateLinkAccess) | **Get** /networking/v1/privatelink-access/{id} | Read a Private Link Access
-[**ListNetworkingV1PrivateLinkAccesses**](PrivateLinkAccessesNetworkingV1Api.md#ListNetworkingV1PrivateLinkAccesses) | **Get** /networking/v1/privatelink-access | List of Private Link Accesses
-[**UpdateNetworkingV1PrivateLinkAccess**](PrivateLinkAccessesNetworkingV1Api.md#UpdateNetworkingV1PrivateLinkAccess) | **Patch** /networking/v1/privatelink-access/{id} | Update a Private Link Access
+[**CreateNetworkingV1PrivateLinkAccess**](PrivateLinkAccessesNetworkingV1Api.md#CreateNetworkingV1PrivateLinkAccess) | **Post** /networking/v1/private-link-accesses | Create a Private Link Access
+[**DeleteNetworkingV1PrivateLinkAccess**](PrivateLinkAccessesNetworkingV1Api.md#DeleteNetworkingV1PrivateLinkAccess) | **Delete** /networking/v1/private-link-accesses/{id} | Delete a Private Link Access
+[**GetNetworkingV1PrivateLinkAccess**](PrivateLinkAccessesNetworkingV1Api.md#GetNetworkingV1PrivateLinkAccess) | **Get** /networking/v1/private-link-accesses/{id} | Read a Private Link Access
+[**ListNetworkingV1PrivateLinkAccesses**](PrivateLinkAccessesNetworkingV1Api.md#ListNetworkingV1PrivateLinkAccesses) | **Get** /networking/v1/private-link-accesses | List of Private Link Accesses
+[**UpdateNetworkingV1PrivateLinkAccess**](PrivateLinkAccessesNetworkingV1Api.md#UpdateNetworkingV1PrivateLinkAccess) | **Patch** /networking/v1/private-link-accesses/{id} | Update a Private Link Access
 
 
 
@@ -298,7 +298,7 @@ Name | Type | Description  | Notes
 
 ## UpdateNetworkingV1PrivateLinkAccess
 
-> NetworkingV1PrivateLinkAccess UpdateNetworkingV1PrivateLinkAccess(ctx, id).NetworkingV1PrivateLinkAccess(networkingV1PrivateLinkAccess).Execute()
+> NetworkingV1PrivateLinkAccess UpdateNetworkingV1PrivateLinkAccess(ctx, id).NetworkingV1PrivateLinkAccessUpdate(networkingV1PrivateLinkAccessUpdate).Execute()
 
 Update a Private Link Access
 
@@ -318,11 +318,11 @@ import (
 
 func main() {
     id := "id_example" // string | The unique identifier for the private link access.
-    networkingV1PrivateLinkAccess := *openapiclient.NewNetworkingV1PrivateLinkAccess() // NetworkingV1PrivateLinkAccess |  (optional)
+    networkingV1PrivateLinkAccessUpdate := *openapiclient.NewNetworkingV1PrivateLinkAccessUpdate() // NetworkingV1PrivateLinkAccessUpdate |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PrivateLinkAccessesNetworkingV1Api.UpdateNetworkingV1PrivateLinkAccess(context.Background(), id).NetworkingV1PrivateLinkAccess(networkingV1PrivateLinkAccess).Execute()
+    resp, r, err := api_client.PrivateLinkAccessesNetworkingV1Api.UpdateNetworkingV1PrivateLinkAccess(context.Background(), id).NetworkingV1PrivateLinkAccessUpdate(networkingV1PrivateLinkAccessUpdate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PrivateLinkAccessesNetworkingV1Api.UpdateNetworkingV1PrivateLinkAccess``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -348,7 +348,7 @@ Other parameters are passed through a pointer to a apiUpdateNetworkingV1PrivateL
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **networkingV1PrivateLinkAccess** | [**NetworkingV1PrivateLinkAccess**](NetworkingV1PrivateLinkAccess.md) |  | 
+ **networkingV1PrivateLinkAccessUpdate** | [**NetworkingV1PrivateLinkAccessUpdate**](NetworkingV1PrivateLinkAccessUpdate.md) |  | 
 
 ### Return type
 

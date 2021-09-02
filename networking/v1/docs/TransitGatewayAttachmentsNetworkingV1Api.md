@@ -4,8 +4,8 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetNetworkingV1TransitGatewayAttachment**](TransitGatewayAttachmentsNetworkingV1Api.md#GetNetworkingV1TransitGatewayAttachment) | **Get** /networking/v1/tgw-attachments/{id} | Read a Transit Gateway Attachment
-[**ListNetworkingV1TransitGatewayAttachments**](TransitGatewayAttachmentsNetworkingV1Api.md#ListNetworkingV1TransitGatewayAttachments) | **Get** /networking/v1/tgw-attachments | List of Transit Gateway Attachments
+[**GetNetworkingV1TransitGatewayAttachment**](TransitGatewayAttachmentsNetworkingV1Api.md#GetNetworkingV1TransitGatewayAttachment) | **Get** /networking/v1/transit-gateway-attachments/{id} | Read a Transit Gateway Attachment
+[**ListNetworkingV1TransitGatewayAttachments**](TransitGatewayAttachmentsNetworkingV1Api.md#ListNetworkingV1TransitGatewayAttachments) | **Get** /networking/v1/transit-gateway-attachments | List of Transit Gateway Attachments
 
 
 

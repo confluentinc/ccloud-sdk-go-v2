@@ -304,7 +304,7 @@ Name | Type | Description  | Notes
 
 ## UpdateNetworkingV1Network
 
-> NetworkingV1Network UpdateNetworkingV1Network(ctx, id).NetworkingV1Network(networkingV1Network).Execute()
+> NetworkingV1Network UpdateNetworkingV1Network(ctx, id).NetworkingV1NetworkUpdate(networkingV1NetworkUpdate).Execute()
 
 Update a Network
 
@@ -324,11 +324,11 @@ import (
 
 func main() {
     id := "id_example" // string | The unique identifier for the network.
-    networkingV1Network := *openapiclient.NewNetworkingV1Network() // NetworkingV1Network |  (optional)
+    networkingV1NetworkUpdate := *openapiclient.NewNetworkingV1NetworkUpdate() // NetworkingV1NetworkUpdate |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.NetworksNetworkingV1Api.UpdateNetworkingV1Network(context.Background(), id).NetworkingV1Network(networkingV1Network).Execute()
+    resp, r, err := api_client.NetworksNetworkingV1Api.UpdateNetworkingV1Network(context.Background(), id).NetworkingV1NetworkUpdate(networkingV1NetworkUpdate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `NetworksNetworkingV1Api.UpdateNetworkingV1Network``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -354,7 +354,7 @@ Other parameters are passed through a pointer to a apiUpdateNetworkingV1NetworkR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **networkingV1Network** | [**NetworkingV1Network**](NetworkingV1Network.md) |  | 
+ **networkingV1NetworkUpdate** | [**NetworkingV1NetworkUpdate**](NetworkingV1NetworkUpdate.md) |  | 
 
 ### Return type
 

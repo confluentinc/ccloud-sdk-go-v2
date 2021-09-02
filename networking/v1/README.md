@@ -59,7 +59,7 @@ Note, enum values are always validated and all unused variables are silently ign
 ### URLs Configuration per Operation
 
 Each operation can use different server URL defined using `OperationServers` map in the `Configuration`.
-An operation is uniquely identifield by `"{classname}Service.{nickname}"` string.
+An operation is uniquely identified by `"{classname}Service.{nickname}"` string.
 Similar rules for overriding default operation server index and variables applies by using `sw.ContextOperationServerIndices` and `sw.ContextOperationServerVariables` context maps.
 
 ```
@@ -89,13 +89,13 @@ Class | Method | HTTP request | Description
 *PeeringsNetworkingV1Api* | [**GetNetworkingV1Peering**](docs/PeeringsNetworkingV1Api.md#getnetworkingv1peering) | **Get** /networking/v1/peerings/{id} | Read a Peering
 *PeeringsNetworkingV1Api* | [**ListNetworkingV1Peerings**](docs/PeeringsNetworkingV1Api.md#listnetworkingv1peerings) | **Get** /networking/v1/peerings | List of Peerings
 *PeeringsNetworkingV1Api* | [**UpdateNetworkingV1Peering**](docs/PeeringsNetworkingV1Api.md#updatenetworkingv1peering) | **Patch** /networking/v1/peerings/{id} | Update a Peering
-*PrivateLinkAccessesNetworkingV1Api* | [**CreateNetworkingV1PrivateLinkAccess**](docs/PrivateLinkAccessesNetworkingV1Api.md#createnetworkingv1privatelinkaccess) | **Post** /networking/v1/privatelink-access | Create a Private Link Access
-*PrivateLinkAccessesNetworkingV1Api* | [**DeleteNetworkingV1PrivateLinkAccess**](docs/PrivateLinkAccessesNetworkingV1Api.md#deletenetworkingv1privatelinkaccess) | **Delete** /networking/v1/privatelink-access/{id} | Delete a Private Link Access
-*PrivateLinkAccessesNetworkingV1Api* | [**GetNetworkingV1PrivateLinkAccess**](docs/PrivateLinkAccessesNetworkingV1Api.md#getnetworkingv1privatelinkaccess) | **Get** /networking/v1/privatelink-access/{id} | Read a Private Link Access
-*PrivateLinkAccessesNetworkingV1Api* | [**ListNetworkingV1PrivateLinkAccesses**](docs/PrivateLinkAccessesNetworkingV1Api.md#listnetworkingv1privatelinkaccesses) | **Get** /networking/v1/privatelink-access | List of Private Link Accesses
-*PrivateLinkAccessesNetworkingV1Api* | [**UpdateNetworkingV1PrivateLinkAccess**](docs/PrivateLinkAccessesNetworkingV1Api.md#updatenetworkingv1privatelinkaccess) | **Patch** /networking/v1/privatelink-access/{id} | Update a Private Link Access
-*TransitGatewayAttachmentsNetworkingV1Api* | [**GetNetworkingV1TransitGatewayAttachment**](docs/TransitGatewayAttachmentsNetworkingV1Api.md#getnetworkingv1transitgatewayattachment) | **Get** /networking/v1/tgw-attachments/{id} | Read a Transit Gateway Attachment
-*TransitGatewayAttachmentsNetworkingV1Api* | [**ListNetworkingV1TransitGatewayAttachments**](docs/TransitGatewayAttachmentsNetworkingV1Api.md#listnetworkingv1transitgatewayattachments) | **Get** /networking/v1/tgw-attachments | List of Transit Gateway Attachments
+*PrivateLinkAccessesNetworkingV1Api* | [**CreateNetworkingV1PrivateLinkAccess**](docs/PrivateLinkAccessesNetworkingV1Api.md#createnetworkingv1privatelinkaccess) | **Post** /networking/v1/private-link-accesses | Create a Private Link Access
+*PrivateLinkAccessesNetworkingV1Api* | [**DeleteNetworkingV1PrivateLinkAccess**](docs/PrivateLinkAccessesNetworkingV1Api.md#deletenetworkingv1privatelinkaccess) | **Delete** /networking/v1/private-link-accesses/{id} | Delete a Private Link Access
+*PrivateLinkAccessesNetworkingV1Api* | [**GetNetworkingV1PrivateLinkAccess**](docs/PrivateLinkAccessesNetworkingV1Api.md#getnetworkingv1privatelinkaccess) | **Get** /networking/v1/private-link-accesses/{id} | Read a Private Link Access
+*PrivateLinkAccessesNetworkingV1Api* | [**ListNetworkingV1PrivateLinkAccesses**](docs/PrivateLinkAccessesNetworkingV1Api.md#listnetworkingv1privatelinkaccesses) | **Get** /networking/v1/private-link-accesses | List of Private Link Accesses
+*PrivateLinkAccessesNetworkingV1Api* | [**UpdateNetworkingV1PrivateLinkAccess**](docs/PrivateLinkAccessesNetworkingV1Api.md#updatenetworkingv1privatelinkaccess) | **Patch** /networking/v1/private-link-accesses/{id} | Update a Private Link Access
+*TransitGatewayAttachmentsNetworkingV1Api* | [**GetNetworkingV1TransitGatewayAttachment**](docs/TransitGatewayAttachmentsNetworkingV1Api.md#getnetworkingv1transitgatewayattachment) | **Get** /networking/v1/transit-gateway-attachments/{id} | Read a Transit Gateway Attachment
+*TransitGatewayAttachmentsNetworkingV1Api* | [**ListNetworkingV1TransitGatewayAttachments**](docs/TransitGatewayAttachmentsNetworkingV1Api.md#listnetworkingv1transitgatewayattachments) | **Get** /networking/v1/transit-gateway-attachments | List of Transit Gateway Attachments
 
 
 ## Documentation For Models
@@ -117,18 +117,24 @@ Class | Method | HTTP request | Description
  - [NetworkingV1Network](docs/NetworkingV1Network.md)
  - [NetworkingV1NetworkList](docs/NetworkingV1NetworkList.md)
  - [NetworkingV1NetworkSpec](docs/NetworkingV1NetworkSpec.md)
+ - [NetworkingV1NetworkSpecUpdate](docs/NetworkingV1NetworkSpecUpdate.md)
  - [NetworkingV1NetworkStatus](docs/NetworkingV1NetworkStatus.md)
  - [NetworkingV1NetworkStatusCloudOneOf](docs/NetworkingV1NetworkStatusCloudOneOf.md)
+ - [NetworkingV1NetworkUpdate](docs/NetworkingV1NetworkUpdate.md)
  - [NetworkingV1Peering](docs/NetworkingV1Peering.md)
  - [NetworkingV1PeeringList](docs/NetworkingV1PeeringList.md)
  - [NetworkingV1PeeringSpec](docs/NetworkingV1PeeringSpec.md)
  - [NetworkingV1PeeringSpecCloudOneOf](docs/NetworkingV1PeeringSpecCloudOneOf.md)
+ - [NetworkingV1PeeringSpecUpdate](docs/NetworkingV1PeeringSpecUpdate.md)
  - [NetworkingV1PeeringStatus](docs/NetworkingV1PeeringStatus.md)
+ - [NetworkingV1PeeringUpdate](docs/NetworkingV1PeeringUpdate.md)
  - [NetworkingV1PrivateLinkAccess](docs/NetworkingV1PrivateLinkAccess.md)
  - [NetworkingV1PrivateLinkAccessList](docs/NetworkingV1PrivateLinkAccessList.md)
  - [NetworkingV1PrivateLinkAccessSpec](docs/NetworkingV1PrivateLinkAccessSpec.md)
  - [NetworkingV1PrivateLinkAccessSpecCloudOneOf](docs/NetworkingV1PrivateLinkAccessSpecCloudOneOf.md)
+ - [NetworkingV1PrivateLinkAccessSpecUpdate](docs/NetworkingV1PrivateLinkAccessSpecUpdate.md)
  - [NetworkingV1PrivateLinkAccessStatus](docs/NetworkingV1PrivateLinkAccessStatus.md)
+ - [NetworkingV1PrivateLinkAccessUpdate](docs/NetworkingV1PrivateLinkAccessUpdate.md)
  - [NetworkingV1TransitGatewayAttachment](docs/NetworkingV1TransitGatewayAttachment.md)
  - [NetworkingV1TransitGatewayAttachmentList](docs/NetworkingV1TransitGatewayAttachmentList.md)
  - [NetworkingV1TransitGatewayAttachmentSpec](docs/NetworkingV1TransitGatewayAttachmentSpec.md)

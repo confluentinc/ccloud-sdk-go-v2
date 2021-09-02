@@ -298,7 +298,7 @@ Name | Type | Description  | Notes
 
 ## UpdateNetworkingV1Peering
 
-> NetworkingV1Peering UpdateNetworkingV1Peering(ctx, id).NetworkingV1Peering(networkingV1Peering).Execute()
+> NetworkingV1Peering UpdateNetworkingV1Peering(ctx, id).NetworkingV1PeeringUpdate(networkingV1PeeringUpdate).Execute()
 
 Update a Peering
 
@@ -318,11 +318,11 @@ import (
 
 func main() {
     id := "id_example" // string | The unique identifier for the peering.
-    networkingV1Peering := *openapiclient.NewNetworkingV1Peering() // NetworkingV1Peering |  (optional)
+    networkingV1PeeringUpdate := *openapiclient.NewNetworkingV1PeeringUpdate() // NetworkingV1PeeringUpdate |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PeeringsNetworkingV1Api.UpdateNetworkingV1Peering(context.Background(), id).NetworkingV1Peering(networkingV1Peering).Execute()
+    resp, r, err := api_client.PeeringsNetworkingV1Api.UpdateNetworkingV1Peering(context.Background(), id).NetworkingV1PeeringUpdate(networkingV1PeeringUpdate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PeeringsNetworkingV1Api.UpdateNetworkingV1Peering``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -348,7 +348,7 @@ Other parameters are passed through a pointer to a apiUpdateNetworkingV1PeeringR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **networkingV1Peering** | [**NetworkingV1Peering**](NetworkingV1Peering.md) |  | 
+ **networkingV1PeeringUpdate** | [**NetworkingV1PeeringUpdate**](NetworkingV1PeeringUpdate.md) |  | 
 
 ### Return type
 
