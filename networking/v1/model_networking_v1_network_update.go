@@ -29,8 +29,8 @@ import (
 	"encoding/json"
 )
 
-// NetworkingV1Peering VPC Peering Connections
-type NetworkingV1Peering struct {
+// NetworkingV1NetworkUpdate `Network` represents a network (VPC) in Confluent Cloud. All Networks exist within Confluent-managed cloud
+type NetworkingV1NetworkUpdate struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
@@ -38,29 +38,29 @@ type NetworkingV1Peering struct {
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
 	Id *string `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
-	Spec *NetworkingV1PeeringSpec `json:"spec,omitempty"`
-	Status *NetworkingV1PeeringStatus `json:"status,omitempty"`
+	Spec *NetworkingV1NetworkSpecUpdate `json:"spec,omitempty"`
+	Status *NetworkingV1NetworkStatus `json:"status,omitempty"`
 }
 
-// NewNetworkingV1Peering instantiates a new NetworkingV1Peering object
+// NewNetworkingV1NetworkUpdate instantiates a new NetworkingV1NetworkUpdate object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1Peering() *NetworkingV1Peering {
-	this := NetworkingV1Peering{}
+func NewNetworkingV1NetworkUpdate() *NetworkingV1NetworkUpdate {
+	this := NetworkingV1NetworkUpdate{}
 	return &this
 }
 
-// NewNetworkingV1PeeringWithDefaults instantiates a new NetworkingV1Peering object
+// NewNetworkingV1NetworkUpdateWithDefaults instantiates a new NetworkingV1NetworkUpdate object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewNetworkingV1PeeringWithDefaults() *NetworkingV1Peering {
-	this := NetworkingV1Peering{}
+func NewNetworkingV1NetworkUpdateWithDefaults() *NetworkingV1NetworkUpdate {
+	this := NetworkingV1NetworkUpdate{}
 	return &this
 }
 
 // GetApiVersion returns the ApiVersion field value if set, zero value otherwise.
-func (o *NetworkingV1Peering) GetApiVersion() string {
+func (o *NetworkingV1NetworkUpdate) GetApiVersion() string {
 	if o == nil || o.ApiVersion == nil {
 		var ret string
 		return ret
@@ -70,7 +70,7 @@ func (o *NetworkingV1Peering) GetApiVersion() string {
 
 // GetApiVersionOk returns a tuple with the ApiVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1Peering) GetApiVersionOk() (*string, bool) {
+func (o *NetworkingV1NetworkUpdate) GetApiVersionOk() (*string, bool) {
 	if o == nil || o.ApiVersion == nil {
 		return nil, false
 	}
@@ -78,7 +78,7 @@ func (o *NetworkingV1Peering) GetApiVersionOk() (*string, bool) {
 }
 
 // HasApiVersion returns a boolean if a field has been set.
-func (o *NetworkingV1Peering) HasApiVersion() bool {
+func (o *NetworkingV1NetworkUpdate) HasApiVersion() bool {
 	if o != nil && o.ApiVersion != nil {
 		return true
 	}
@@ -87,12 +87,12 @@ func (o *NetworkingV1Peering) HasApiVersion() bool {
 }
 
 // SetApiVersion gets a reference to the given string and assigns it to the ApiVersion field.
-func (o *NetworkingV1Peering) SetApiVersion(v string) {
+func (o *NetworkingV1NetworkUpdate) SetApiVersion(v string) {
 	o.ApiVersion = &v
 }
 
 // GetKind returns the Kind field value if set, zero value otherwise.
-func (o *NetworkingV1Peering) GetKind() string {
+func (o *NetworkingV1NetworkUpdate) GetKind() string {
 	if o == nil || o.Kind == nil {
 		var ret string
 		return ret
@@ -102,7 +102,7 @@ func (o *NetworkingV1Peering) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1Peering) GetKindOk() (*string, bool) {
+func (o *NetworkingV1NetworkUpdate) GetKindOk() (*string, bool) {
 	if o == nil || o.Kind == nil {
 		return nil, false
 	}
@@ -110,7 +110,7 @@ func (o *NetworkingV1Peering) GetKindOk() (*string, bool) {
 }
 
 // HasKind returns a boolean if a field has been set.
-func (o *NetworkingV1Peering) HasKind() bool {
+func (o *NetworkingV1NetworkUpdate) HasKind() bool {
 	if o != nil && o.Kind != nil {
 		return true
 	}
@@ -119,12 +119,12 @@ func (o *NetworkingV1Peering) HasKind() bool {
 }
 
 // SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *NetworkingV1Peering) SetKind(v string) {
+func (o *NetworkingV1NetworkUpdate) SetKind(v string) {
 	o.Kind = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *NetworkingV1Peering) GetId() string {
+func (o *NetworkingV1NetworkUpdate) GetId() string {
 	if o == nil || o.Id == nil {
 		var ret string
 		return ret
@@ -134,7 +134,7 @@ func (o *NetworkingV1Peering) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1Peering) GetIdOk() (*string, bool) {
+func (o *NetworkingV1NetworkUpdate) GetIdOk() (*string, bool) {
 	if o == nil || o.Id == nil {
 		return nil, false
 	}
@@ -142,7 +142,7 @@ func (o *NetworkingV1Peering) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *NetworkingV1Peering) HasId() bool {
+func (o *NetworkingV1NetworkUpdate) HasId() bool {
 	if o != nil && o.Id != nil {
 		return true
 	}
@@ -151,12 +151,12 @@ func (o *NetworkingV1Peering) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *NetworkingV1Peering) SetId(v string) {
+func (o *NetworkingV1NetworkUpdate) SetId(v string) {
 	o.Id = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *NetworkingV1Peering) GetMetadata() ObjectMeta {
+func (o *NetworkingV1NetworkUpdate) GetMetadata() ObjectMeta {
 	if o == nil || o.Metadata == nil {
 		var ret ObjectMeta
 		return ret
@@ -166,7 +166,7 @@ func (o *NetworkingV1Peering) GetMetadata() ObjectMeta {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1Peering) GetMetadataOk() (*ObjectMeta, bool) {
+func (o *NetworkingV1NetworkUpdate) GetMetadataOk() (*ObjectMeta, bool) {
 	if o == nil || o.Metadata == nil {
 		return nil, false
 	}
@@ -174,7 +174,7 @@ func (o *NetworkingV1Peering) GetMetadataOk() (*ObjectMeta, bool) {
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *NetworkingV1Peering) HasMetadata() bool {
+func (o *NetworkingV1NetworkUpdate) HasMetadata() bool {
 	if o != nil && o.Metadata != nil {
 		return true
 	}
@@ -183,14 +183,14 @@ func (o *NetworkingV1Peering) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given ObjectMeta and assigns it to the Metadata field.
-func (o *NetworkingV1Peering) SetMetadata(v ObjectMeta) {
+func (o *NetworkingV1NetworkUpdate) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
 // GetSpec returns the Spec field value if set, zero value otherwise.
-func (o *NetworkingV1Peering) GetSpec() NetworkingV1PeeringSpec {
+func (o *NetworkingV1NetworkUpdate) GetSpec() NetworkingV1NetworkSpecUpdate {
 	if o == nil || o.Spec == nil {
-		var ret NetworkingV1PeeringSpec
+		var ret NetworkingV1NetworkSpecUpdate
 		return ret
 	}
 	return *o.Spec
@@ -198,7 +198,7 @@ func (o *NetworkingV1Peering) GetSpec() NetworkingV1PeeringSpec {
 
 // GetSpecOk returns a tuple with the Spec field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1Peering) GetSpecOk() (*NetworkingV1PeeringSpec, bool) {
+func (o *NetworkingV1NetworkUpdate) GetSpecOk() (*NetworkingV1NetworkSpecUpdate, bool) {
 	if o == nil || o.Spec == nil {
 		return nil, false
 	}
@@ -206,7 +206,7 @@ func (o *NetworkingV1Peering) GetSpecOk() (*NetworkingV1PeeringSpec, bool) {
 }
 
 // HasSpec returns a boolean if a field has been set.
-func (o *NetworkingV1Peering) HasSpec() bool {
+func (o *NetworkingV1NetworkUpdate) HasSpec() bool {
 	if o != nil && o.Spec != nil {
 		return true
 	}
@@ -214,15 +214,15 @@ func (o *NetworkingV1Peering) HasSpec() bool {
 	return false
 }
 
-// SetSpec gets a reference to the given NetworkingV1PeeringSpec and assigns it to the Spec field.
-func (o *NetworkingV1Peering) SetSpec(v NetworkingV1PeeringSpec) {
+// SetSpec gets a reference to the given NetworkingV1NetworkSpecUpdate and assigns it to the Spec field.
+func (o *NetworkingV1NetworkUpdate) SetSpec(v NetworkingV1NetworkSpecUpdate) {
 	o.Spec = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *NetworkingV1Peering) GetStatus() NetworkingV1PeeringStatus {
+func (o *NetworkingV1NetworkUpdate) GetStatus() NetworkingV1NetworkStatus {
 	if o == nil || o.Status == nil {
-		var ret NetworkingV1PeeringStatus
+		var ret NetworkingV1NetworkStatus
 		return ret
 	}
 	return *o.Status
@@ -230,7 +230,7 @@ func (o *NetworkingV1Peering) GetStatus() NetworkingV1PeeringStatus {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1Peering) GetStatusOk() (*NetworkingV1PeeringStatus, bool) {
+func (o *NetworkingV1NetworkUpdate) GetStatusOk() (*NetworkingV1NetworkStatus, bool) {
 	if o == nil || o.Status == nil {
 		return nil, false
 	}
@@ -238,7 +238,7 @@ func (o *NetworkingV1Peering) GetStatusOk() (*NetworkingV1PeeringStatus, bool) {
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *NetworkingV1Peering) HasStatus() bool {
+func (o *NetworkingV1NetworkUpdate) HasStatus() bool {
 	if o != nil && o.Status != nil {
 		return true
 	}
@@ -246,12 +246,12 @@ func (o *NetworkingV1Peering) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given NetworkingV1PeeringStatus and assigns it to the Status field.
-func (o *NetworkingV1Peering) SetStatus(v NetworkingV1PeeringStatus) {
+// SetStatus gets a reference to the given NetworkingV1NetworkStatus and assigns it to the Status field.
+func (o *NetworkingV1NetworkUpdate) SetStatus(v NetworkingV1NetworkStatus) {
 	o.Status = &v
 }
 
-func (o NetworkingV1Peering) MarshalJSON() ([]byte, error) {
+func (o NetworkingV1NetworkUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ApiVersion != nil {
 		toSerialize["api_version"] = o.ApiVersion
@@ -274,38 +274,38 @@ func (o NetworkingV1Peering) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableNetworkingV1Peering struct {
-	value *NetworkingV1Peering
+type NullableNetworkingV1NetworkUpdate struct {
+	value *NetworkingV1NetworkUpdate
 	isSet bool
 }
 
-func (v NullableNetworkingV1Peering) Get() *NetworkingV1Peering {
+func (v NullableNetworkingV1NetworkUpdate) Get() *NetworkingV1NetworkUpdate {
 	return v.value
 }
 
-func (v *NullableNetworkingV1Peering) Set(val *NetworkingV1Peering) {
+func (v *NullableNetworkingV1NetworkUpdate) Set(val *NetworkingV1NetworkUpdate) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableNetworkingV1Peering) IsSet() bool {
+func (v NullableNetworkingV1NetworkUpdate) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableNetworkingV1Peering) Unset() {
+func (v *NullableNetworkingV1NetworkUpdate) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableNetworkingV1Peering(val *NetworkingV1Peering) *NullableNetworkingV1Peering {
-	return &NullableNetworkingV1Peering{value: val, isSet: true}
+func NewNullableNetworkingV1NetworkUpdate(val *NetworkingV1NetworkUpdate) *NullableNetworkingV1NetworkUpdate {
+	return &NullableNetworkingV1NetworkUpdate{value: val, isSet: true}
 }
 
-func (v NullableNetworkingV1Peering) MarshalJSON() ([]byte, error) {
+func (v NullableNetworkingV1NetworkUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableNetworkingV1Peering) UnmarshalJSON(src []byte) error {
+func (v *NullableNetworkingV1NetworkUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
