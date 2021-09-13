@@ -34,7 +34,7 @@ type ClusterConfigData struct {
 	IsDefault   bool                `json:"is_default"`
 	IsReadOnly  bool                `json:"is_read_only"`
 	IsSensitive bool                `json:"is_sensitive"`
-	Source      string              `json:"source"`
+	Source      ConfigSource        `json:"source"`
 	Synonyms    []ConfigSynonymData `json:"synonyms"`
-	ConfigType  string              `json:"config_type"`
+	ConfigType  ClusterConfigType   `json:"config_type"`
 }

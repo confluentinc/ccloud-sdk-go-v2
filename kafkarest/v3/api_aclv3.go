@@ -62,11 +62,11 @@ type ACLV3Api interface {
 	 * @param optional nil or *DeleteKafkaV3AclsOpts - Optional Parameters:
 	 * @param "ResourceType" (optional.Interface of AclResourceType) -  The ACL resource type.
 	 * @param "ResourceName" (optional.String) -  The ACL resource name.
-	 * @param "PatternType" (optional.String) -  The ACL pattern type.
+	 * @param "PatternType" (optional.Interface of AclPatternType) -  The ACL pattern type.
 	 * @param "Principal" (optional.String) -  The ACL principal.
 	 * @param "Host" (optional.String) -  The ACL host.
-	 * @param "Operation" (optional.String) -  The ACL operation.
-	 * @param "Permission" (optional.String) -  The ACL permission.
+	 * @param "Operation" (optional.Interface of AclOperation) -  The ACL operation.
+	 * @param "Permission" (optional.Interface of AclPermission) -  The ACL permission.
 	 * @return InlineResponse200
 	 */
 	DeleteKafkaV3Acls(ctx _context.Context, clusterId string, localVarOptionals *DeleteKafkaV3AclsOpts) (InlineResponse200, *_nethttp.Response, error)
@@ -81,11 +81,11 @@ type ACLV3Api interface {
 	 * @param optional nil or *GetKafkaV3AclsOpts - Optional Parameters:
 	 * @param "ResourceType" (optional.Interface of AclResourceType) -  The ACL resource type.
 	 * @param "ResourceName" (optional.String) -  The ACL resource name.
-	 * @param "PatternType" (optional.String) -  The ACL pattern type.
+	 * @param "PatternType" (optional.Interface of AclPatternType) -  The ACL pattern type.
 	 * @param "Principal" (optional.String) -  The ACL principal.
 	 * @param "Host" (optional.String) -  The ACL host.
-	 * @param "Operation" (optional.String) -  The ACL operation.
-	 * @param "Permission" (optional.String) -  The ACL permission.
+	 * @param "Operation" (optional.Interface of AclOperation) -  The ACL operation.
+	 * @param "Permission" (optional.Interface of AclPermission) -  The ACL permission.
 	 * @return AclDataList
 	 */
 	GetKafkaV3Acls(ctx _context.Context, clusterId string, localVarOptionals *GetKafkaV3AclsOpts) (AclDataList, *_nethttp.Response, error)
@@ -222,11 +222,11 @@ func (a *ACLV3ApiService) CreateKafkaV3Acls(ctx _context.Context, clusterId stri
 type DeleteKafkaV3AclsOpts struct {
 	ResourceType optional.Interface
 	ResourceName optional.String
-	PatternType  optional.String
+	PatternType  optional.Interface
 	Principal    optional.String
 	Host         optional.String
-	Operation    optional.String
-	Permission   optional.String
+	Operation    optional.Interface
+	Permission   optional.Interface
 }
 
 /*
@@ -239,11 +239,11 @@ type DeleteKafkaV3AclsOpts struct {
  * @param optional nil or *DeleteKafkaV3AclsOpts - Optional Parameters:
  * @param "ResourceType" (optional.Interface of AclResourceType) -  The ACL resource type.
  * @param "ResourceName" (optional.String) -  The ACL resource name.
- * @param "PatternType" (optional.String) -  The ACL pattern type.
+ * @param "PatternType" (optional.Interface of AclPatternType) -  The ACL pattern type.
  * @param "Principal" (optional.String) -  The ACL principal.
  * @param "Host" (optional.String) -  The ACL host.
- * @param "Operation" (optional.String) -  The ACL operation.
- * @param "Permission" (optional.String) -  The ACL permission.
+ * @param "Operation" (optional.Interface of AclOperation) -  The ACL operation.
+ * @param "Permission" (optional.Interface of AclPermission) -  The ACL permission.
  * @return InlineResponse200
  */
 func (a *ACLV3ApiService) DeleteKafkaV3Acls(ctx _context.Context, clusterId string, localVarOptionals *DeleteKafkaV3AclsOpts) (InlineResponse200, *_nethttp.Response, error) {
@@ -381,11 +381,11 @@ func (a *ACLV3ApiService) DeleteKafkaV3Acls(ctx _context.Context, clusterId stri
 type GetKafkaV3AclsOpts struct {
 	ResourceType optional.Interface
 	ResourceName optional.String
-	PatternType  optional.String
+	PatternType  optional.Interface
 	Principal    optional.String
 	Host         optional.String
-	Operation    optional.String
-	Permission   optional.String
+	Operation    optional.Interface
+	Permission   optional.Interface
 }
 
 /*
@@ -398,11 +398,11 @@ type GetKafkaV3AclsOpts struct {
  * @param optional nil or *GetKafkaV3AclsOpts - Optional Parameters:
  * @param "ResourceType" (optional.Interface of AclResourceType) -  The ACL resource type.
  * @param "ResourceName" (optional.String) -  The ACL resource name.
- * @param "PatternType" (optional.String) -  The ACL pattern type.
+ * @param "PatternType" (optional.Interface of AclPatternType) -  The ACL pattern type.
  * @param "Principal" (optional.String) -  The ACL principal.
  * @param "Host" (optional.String) -  The ACL host.
- * @param "Operation" (optional.String) -  The ACL operation.
- * @param "Permission" (optional.String) -  The ACL permission.
+ * @param "Operation" (optional.Interface of AclOperation) -  The ACL operation.
+ * @param "Permission" (optional.Interface of AclPermission) -  The ACL permission.
  * @return AclDataList
  */
 func (a *ACLV3ApiService) GetKafkaV3Acls(ctx _context.Context, clusterId string, localVarOptionals *GetKafkaV3AclsOpts) (AclDataList, *_nethttp.Response, error) {

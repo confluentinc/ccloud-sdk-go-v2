@@ -30,9 +30,9 @@ import (
 
 // AnyUnevenLoadDataAllOf struct for AnyUnevenLoadDataAllOf
 type AnyUnevenLoadDataAllOf struct {
-	ClusterId      string `json:"cluster_id"`
-	Status         string `json:"status"`
-	PreviousStatus string `json:"previous_status"`
+	ClusterId      string              `json:"cluster_id"`
+	Status         AnyUnevenLoadStatus `json:"status"`
+	PreviousStatus AnyUnevenLoadStatus `json:"previous_status"`
 	// The date and time at which this task was created.
 	StatusUpdatedAt time.Time `json:"status_updated_at"`
 	// The date and time at which this task was created.

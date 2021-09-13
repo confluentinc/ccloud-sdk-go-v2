@@ -30,11 +30,11 @@ import (
 
 // AnyUnevenLoadData struct for AnyUnevenLoadData
 type AnyUnevenLoadData struct {
-	Kind           string           `json:"kind"`
-	Metadata       ResourceMetadata `json:"metadata"`
-	ClusterId      string           `json:"cluster_id"`
-	Status         string           `json:"status"`
-	PreviousStatus string           `json:"previous_status"`
+	Kind           string              `json:"kind"`
+	Metadata       ResourceMetadata    `json:"metadata"`
+	ClusterId      string              `json:"cluster_id"`
+	Status         AnyUnevenLoadStatus `json:"status"`
+	PreviousStatus AnyUnevenLoadStatus `json:"previous_status"`
 	// The date and time at which this task was created.
 	StatusUpdatedAt time.Time `json:"status_updated_at"`
 	// The date and time at which this task was created.

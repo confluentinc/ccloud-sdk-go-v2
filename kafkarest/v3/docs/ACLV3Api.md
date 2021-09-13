@@ -82,11 +82,11 @@ Name | Type | Description  | Notes
 
  **resourceType** | [**optional.Interface of AclResourceType**](.md)| The ACL resource type. | 
  **resourceName** | **optional.String**| The ACL resource name. | 
- **patternType** | **optional.String**| The ACL pattern type. | 
+ **patternType** | [**optional.Interface of AclPatternType**](.md)| The ACL pattern type. | 
  **principal** | **optional.String**| The ACL principal. | 
  **host** | **optional.String**| The ACL host. | 
- **operation** | **optional.String**| The ACL operation. | 
- **permission** | **optional.String**| The ACL permission. | 
+ **operation** | [**optional.Interface of AclOperation**](.md)| The ACL operation. | 
+ **permission** | [**optional.Interface of AclPermission**](.md)| The ACL permission. | 
 
 ### Return type
 
@@ -133,11 +133,11 @@ Name | Type | Description  | Notes
 
  **resourceType** | [**optional.Interface of AclResourceType**](.md)| The ACL resource type. | 
  **resourceName** | **optional.String**| The ACL resource name. | 
- **patternType** | **optional.String**| The ACL pattern type. | 
+ **patternType** | [**optional.Interface of AclPatternType**](.md)| The ACL pattern type. | 
  **principal** | **optional.String**| The ACL principal. | 
  **host** | **optional.String**| The ACL host. | 
- **operation** | **optional.String**| The ACL operation. | 
- **permission** | **optional.String**| The ACL permission. | 
+ **operation** | [**optional.Interface of AclOperation**](.md)| The ACL operation. | 
+ **permission** | [**optional.Interface of AclPermission**](.md)| The ACL permission. | 
 
 ### Return type
 

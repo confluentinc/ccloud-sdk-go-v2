@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ConsumerGroupId** | **string** |  | 
 **IsSimple** | **bool** |  | 
 **PartitionAssignor** | **string** |  | 
-**State** | **string** |  | 
+**State** | [**ConsumerGroupState**](ConsumerGroupState.md) |  | 
 **Coordinator** | [**Relationship**](Relationship.md) |  | 
 **Consumer** | [**Relationship**](Relationship.md) |  | [optional] 
 **LagSummary** | [**Relationship**](Relationship.md) |  | 

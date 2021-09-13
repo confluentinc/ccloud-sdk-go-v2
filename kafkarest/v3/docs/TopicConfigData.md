@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **IsDefault** | **bool** |  | 
 **IsReadOnly** | **bool** |  | 
 **IsSensitive** | **bool** |  | 
-**Source** | **string** |  | 
+**Source** | [**ConfigSource**](ConfigSource.md) |  | 
 **Synonyms** | [**[]ConfigSynonymData**](ConfigSynonymData.md) |  | 
 **TopicName** | **string** |  | 
 

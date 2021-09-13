@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Metadata** | [**ResourceMetadata**](ResourceMetadata.md) |  | 
 **ClusterId** | **string** |  | 
 **BrokerId** | **int32** |  | 
-**Exclusion** | **string** |  | 
+**Exclusion** | [**ExclusionOp**](ExclusionOp.md) |  | 
 **Reason** | **string** |  | 
 **ErrorCode** | Pointer to **int32** |  | [optional] 
 **ErrorMessage** | Pointer to **string** |  | [optional] 

@@ -26,5 +26,5 @@ package v3
 
 // ClusterConfigDataAllOf struct for ClusterConfigDataAllOf
 type ClusterConfigDataAllOf struct {
-	ConfigType string `json:"config_type"`
+	ConfigType ClusterConfigType `json:"config_type"`
 }

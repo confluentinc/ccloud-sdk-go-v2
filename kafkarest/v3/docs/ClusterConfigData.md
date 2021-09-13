@@ -12,9 +12,9 @@ Name | Type | Description | Notes
 **IsDefault** | **bool** |  | 
 **IsReadOnly** | **bool** |  | 
 **IsSensitive** | **bool** |  | 
-**Source** | **string** |  | 
+**Source** | [**ConfigSource**](ConfigSource.md) |  | 
 **Synonyms** | [**[]ConfigSynonymData**](ConfigSynonymData.md) |  | 
-**ConfigType** | **string** |  | 
+**ConfigType** | [**ClusterConfigType**](ClusterConfigType.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -35,7 +35,7 @@ type BrokerTaskData struct {
 	ClusterId         string            `json:"cluster_id"`
 	BrokerId          int32             `json:"broker_id"`
 	TaskType          BrokerTaskType    `json:"task_type"`
-	TaskStatus        string            `json:"task_status"`
+	TaskStatus        BrokerTaskStatus  `json:"task_status"`
 	ShutdownScheduled *bool             `json:"shutdown_scheduled,omitempty"`
 	SubTaskStatuses   map[string]string `json:"sub_task_statuses"`
 	// The date and time at which this task was created.

@@ -9482,8 +9482,7 @@ components:
       - $ref: '#/components/schemas/ResourceCollection'
       - $ref: '#/components/schemas/inline_response_200'
     AclOperation:
-      type: string
-      x-extensible-enum:
+      enum:
       - UNKNOWN
       - ANY
       - ALL
@@ -9497,21 +9496,22 @@ components:
       - DESCRIBE_CONFIGS
       - ALTER_CONFIGS
       - IDEMPOTENT_WRITE
-    AclPatternType:
       type: string
-      x-extensible-enum:
+    AclPatternType:
+      enum:
       - UNKNOWN
       - ANY
       - MATCH
       - LITERAL
       - PREFIXED
-    AclPermission:
       type: string
-      x-extensible-enum:
+    AclPermission:
+      enum:
       - UNKNOWN
       - ANY
       - DENY
       - ALLOW
+      type: string
     AclResourceType:
       enum:
       - UNKNOWN
@@ -9527,10 +9527,10 @@ components:
         data:
         - name: name
           value: value
-          operation: operation
+          operation: SET
         - name: name
           value: value
-          operation: operation
+          operation: SET
       properties:
         data:
           items:
@@ -9566,9 +9566,9 @@ components:
       - $ref: '#/components/schemas/ResourceCollection'
       - $ref: '#/components/schemas/ClusterConfigDataList_allOf'
     ClusterConfigType:
-      type: string
-      x-extensible-enum:
+      enum:
       - BROKER
+      type: string
     ClusterData:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -9580,51 +9580,23 @@ components:
     CreateAclRequestData:
       example:
         principal: principal
-        pattern_type: pattern_type
         host: host
-        permission: permission
         resource_name: resource_name
-        operation: operation
       properties:
         resource_type:
           $ref: '#/components/schemas/AclResourceType'
         resource_name:
           type: string
         pattern_type:
-          type: string
-          x-extensible-enum:
-          - UNKNOWN
-          - ANY
-          - MATCH
-          - LITERAL
-          - PREFIXED
+          $ref: '#/components/schemas/AclPatternType'
         principal:
           type: string
         host:
           type: string
         operation:
-          type: string
-          x-extensible-enum:
-          - UNKNOWN
-          - ANY
-          - ALL
-          - READ
-          - WRITE
-          - CREATE
-          - DELETE
-          - ALTER
-          - DESCRIBE
-          - CLUSTER_ACTION
-          - DESCRIBE_CONFIGS
-          - ALTER_CONFIGS
-          - IDEMPOTENT_WRITE
+          $ref: '#/components/schemas/AclOperation'
         permission:
-          type: string
-          x-extensible-enum:
-          - UNKNOWN
-          - ANY
-          - DENY
-          - ALLOW
+          $ref: '#/components/schemas/AclPermission'
       required:
       - host
       - operation
@@ -9672,8 +9644,7 @@ components:
       - topic_name
       type: object
     ConfigSource:
-      type: string
-      x-extensible-enum:
+      enum:
       - DYNAMIC_CLUSTER_LINK_CONFIG
       - DYNAMIC_TOPIC_CONFIG
       - DYNAMIC_BROKER_LOGGER_CONFIG
@@ -9682,6 +9653,7 @@ components:
       - STATIC_BROKER_CONFIG
       - DEFAULT_CONFIG
       - UNKNOWN
+      type: string
     ConfigSynonymData:
       properties:
         name:
@@ -9690,16 +9662,7 @@ components:
           nullable: true
           type: string
         source:
-          type: string
-          x-extensible-enum:
-          - DYNAMIC_CLUSTER_LINK_CONFIG
-          - DYNAMIC_TOPIC_CONFIG
-          - DYNAMIC_BROKER_LOGGER_CONFIG
-          - DYNAMIC_BROKER_CONFIG
-          - DYNAMIC_DEFAULT_BROKER_CONFIG
-          - STATIC_BROKER_CONFIG
-          - DEFAULT_CONFIG
-          - UNKNOWN
+          $ref: '#/components/schemas/ConfigSource'
       required:
       - name
       - source
@@ -9729,14 +9692,14 @@ components:
       - $ref: '#/components/schemas/ResourceCollection'
       - $ref: '#/components/schemas/ConsumerGroupDataList_allOf'
     ConsumerGroupState:
-      type: string
-      x-extensible-enum:
+      enum:
       - UNKNOWN
       - PREPARING_REBALANCE
       - COMPLETING_REBALANCE
       - STABLE
       - DEAD
       - EMPTY
+      type: string
     ConsumerLagData:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -9799,14 +9762,14 @@ components:
         size:
           type: integer
         type:
-          nullable: true
-          type: string
-          x-extensible-enum:
+          enum:
           - BINARY
           - JSON
           - AVRO
           - JSONSCHEMA
           - PROTOBUF
+          nullable: true
+          type: string
         subject:
           nullable: true
           type: string
@@ -9841,23 +9804,23 @@ components:
       nullable: true
       properties:
         type:
-          type: string
-          x-extensible-enum:
+          enum:
           - BINARY
           - JSON
           - AVRO
           - JSONSCHEMA
           - PROTOBUF
+          type: string
         subject:
           nullable: true
           type: string
         subject_name_strategy:
-          nullable: true
-          type: string
-          x-extensible-enum:
+          enum:
           - TOPIC_NAME
           - RECORD_NAME
           - TOPIC_RECORD_NAME
+          nullable: true
+          type: string
         schema_id:
           nullable: true
           type: integer
@@ -10199,8 +10162,7 @@ components:
       - topics
       type: object
     AnyUnevenLoadStatus:
-      type: string
-      x-extensible-enum:
+      enum:
       - STARTING
       - BALANCING
       - BALANCED
@@ -10208,9 +10170,9 @@ components:
       - DISABLED
       - ABORTED
       - UNKNOWN
-    BalancerStatus:
       type: string
-      x-extensible-enum:
+    BalancerStatus:
+      enum:
       - BOOTSTRAPPING
       - STARTING
       - ENABLED
@@ -10219,27 +10181,27 @@ components:
       - FAILOVER
       - LOAD_FAILURE
       - UNKNOWN
+      type: string
     BrokerTaskType:
       enum:
       - add-broker
       - remove-broker
       type: string
     BrokerTaskStatus:
-      type: string
-      x-extensible-enum:
+      enum:
       - FAILED
       - IN_PROGRESS
       - SUCCESS
       - UNKNOWN
-    ExclusionOp:
       type: string
-      x-extensible-enum:
+    ExclusionOp:
+      enum:
       - SET
       - DELETE
       - UNKNOWN
-    BrokerReplicaExclusionStatus:
       type: string
-      x-extensible-enum:
+    BrokerReplicaExclusionStatus:
+      enum:
       - PENDING
       - IN_PROGRESS
       - EXCLUDED
@@ -10248,39 +10210,40 @@ components:
       - CANCELED
       - COMPLETED
       - UNKNOWN
+      type: string
     PartitionReassignmentStatus:
-      type: string
-      x-extensible-enum:
+      enum:
       - CANCELED
       - ERROR
       - PENDING
       - IN_PROGRESS
       - COMPLETED
       - UNKNOWN
+      type: string
     BrokerShutdownStatus:
-      type: string
-      x-extensible-enum:
+      enum:
       - ERROR
       - CANCELED
       - PENDING
       - IN_PROGRESS
       - COMPLETED
       - UNKNOWN
-    DeprecatedPartitionReassignmentStatus:
       type: string
-      x-extensible-enum:
+    DeprecatedPartitionReassignmentStatus:
+      enum:
       - CANCELED
       - FAILED
       - PENDING
       - IN_PROGRESS
       - COMPLETE
-    DeprecatedBrokerShutdownStatus:
       type: string
-      x-extensible-enum:
+    DeprecatedBrokerShutdownStatus:
+      enum:
       - FAILED
       - CANCELED
       - PENDING
       - COMPLETE
+      type: string
     inline_response_200:
       example:
         data:
@@ -10309,16 +10272,7 @@ components:
         is_sensitive:
           type: boolean
         source:
-          type: string
-          x-extensible-enum:
-          - DYNAMIC_CLUSTER_LINK_CONFIG
-          - DYNAMIC_TOPIC_CONFIG
-          - DYNAMIC_BROKER_LOGGER_CONFIG
-          - DYNAMIC_BROKER_CONFIG
-          - DYNAMIC_DEFAULT_BROKER_CONFIG
-          - STATIC_BROKER_CONFIG
-          - DEFAULT_CONFIG
-          - UNKNOWN
+          $ref: '#/components/schemas/ConfigSource'
         synonyms:
           items:
             $ref: '#/components/schemas/ConfigSynonymData'
@@ -10340,40 +10294,15 @@ components:
         resource_name:
           type: string
         pattern_type:
-          type: string
-          x-extensible-enum:
-          - UNKNOWN
-          - ANY
-          - MATCH
-          - LITERAL
-          - PREFIXED
+          $ref: '#/components/schemas/AclPatternType'
         principal:
           type: string
         host:
           type: string
         operation:
-          type: string
-          x-extensible-enum:
-          - UNKNOWN
-          - ANY
-          - ALL
-          - READ
-          - WRITE
-          - CREATE
-          - DELETE
-          - ALTER
-          - DESCRIBE
-          - CLUSTER_ACTION
-          - DESCRIBE_CONFIGS
-          - ALTER_CONFIGS
-          - IDEMPOTENT_WRITE
+          $ref: '#/components/schemas/AclOperation'
         permission:
-          type: string
-          x-extensible-enum:
-          - UNKNOWN
-          - ANY
-          - DENY
-          - ALLOW
+          $ref: '#/components/schemas/AclPermission'
       required:
       - cluster_id
       - host
@@ -10387,7 +10316,7 @@ components:
       example:
         name: name
         value: value
-        operation: operation
+        operation: SET
       properties:
         name:
           type: string
@@ -10395,11 +10324,11 @@ components:
           nullable: true
           type: string
         operation:
-          nullable: true
-          type: string
-          x-extensible-enum:
+          enum:
           - SET
           - DELETE
+          nullable: true
+          type: string
       required:
       - name
     BrokerConfigData_allOf:
@@ -10451,9 +10380,7 @@ components:
     ClusterConfigData_allOf:
       properties:
         config_type:
-          type: string
-          x-extensible-enum:
-          - BROKER
+          $ref: '#/components/schemas/ClusterConfigType'
       required:
       - config_type
     ClusterConfigDataList_allOf:
@@ -10598,14 +10525,7 @@ components:
         partition_assignor:
           type: string
         state:
-          type: string
-          x-extensible-enum:
-          - UNKNOWN
-          - PREPARING_REBALANCE
-          - COMPLETING_REBALANCE
-          - STABLE
-          - DEAD
-          - EMPTY
+          $ref: '#/components/schemas/ConsumerGroupState'
         coordinator:
           $ref: '#/components/schemas/Relationship'
         consumer:
@@ -10910,25 +10830,9 @@ components:
         cluster_id:
           type: string
         status:
-          type: string
-          x-extensible-enum:
-          - STARTING
-          - BALANCING
-          - BALANCED
-          - BALANCING_FAILED
-          - DISABLED
-          - ABORTED
-          - UNKNOWN
+          $ref: '#/components/schemas/AnyUnevenLoadStatus'
         previous_status:
-          type: string
-          x-extensible-enum:
-          - STARTING
-          - BALANCING
-          - BALANCED
-          - BALANCING_FAILED
-          - DISABLED
-          - ABORTED
-          - UNKNOWN
+          $ref: '#/components/schemas/AnyUnevenLoadStatus'
         status_updated_at:
           description: The date and time at which this task was created.
           example: 2019-10-12T07:20:50Z
@@ -10961,16 +10865,7 @@ components:
         cluster_id:
           type: string
         status:
-          type: string
-          x-extensible-enum:
-          - BOOTSTRAPPING
-          - STARTING
-          - ENABLED
-          - ERROR
-          - DISABLED
-          - FAILOVER
-          - LOAD_FAILURE
-          - UNKNOWN
+          $ref: '#/components/schemas/BalancerStatus'
         error_code:
           nullable: true
           type: integer
@@ -11018,12 +10913,7 @@ components:
         task_type:
           $ref: '#/components/schemas/BrokerTaskType'
         task_status:
-          type: string
-          x-extensible-enum:
-          - FAILED
-          - IN_PROGRESS
-          - SUCCESS
-          - UNKNOWN
+          $ref: '#/components/schemas/BrokerTaskStatus'
         shutdown_scheduled:
           nullable: true
           type: boolean
@@ -11098,11 +10988,7 @@ components:
         broker_id:
           type: integer
         exclusion:
-          type: string
-          x-extensible-enum:
-          - SET
-          - DELETE
-          - UNKNOWN
+          $ref: '#/components/schemas/ExclusionOp'
         reason:
           type: string
         error_code:
@@ -11136,31 +11022,11 @@ components:
         shutdown_scheduled:
           type: boolean
         broker_replica_exclusion_status:
-          type: string
-          x-extensible-enum:
-          - PENDING
-          - IN_PROGRESS
-          - EXCLUDED
-          - REMOVING
-          - ERROR
-          - CANCELED
-          - COMPLETED
-          - UNKNOWN
+          $ref: '#/components/schemas/BrokerReplicaExclusionStatus'
         partition_reassignment_status:
-          type: string
-          x-extensible-enum:
-          - CANCELED
-          - FAILED
-          - PENDING
-          - IN_PROGRESS
-          - COMPLETE
+          $ref: '#/components/schemas/DeprecatedPartitionReassignmentStatus'
         broker_shutdown_status:
-          type: string
-          x-extensible-enum:
-          - FAILED
-          - CANCELED
-          - PENDING
-          - COMPLETE
+          $ref: '#/components/schemas/DeprecatedBrokerShutdownStatus'
         error_code:
           nullable: true
           type: integer
@@ -11223,9 +11089,9 @@ components:
         sensitive:
           type: boolean
         source:
-          type: string
-          x-extensible-enum:
+          enum:
           - DYNAMIC_CLUSTER_LINK_CONFIG
+          type: string
         synonyms:
           items:
             type: string
