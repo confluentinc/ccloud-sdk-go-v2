@@ -1,4 +1,4 @@
-module github.com/confluentinc/ccloud-sdk-go-v2/kafkarest
+module github.com/confluentinc/ccloud-sdk-go-v2-public/kafkarest
 
 go 1.15
 
