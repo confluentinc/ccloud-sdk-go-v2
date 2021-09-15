@@ -1,4 +1,4 @@
-module github.com/confluentinc/ccloud-sdk-go-v2-public/cmk
+module github.com/confluentinc/ccloud-sdk-go-v2/cmk
 
 go 1.13
 
