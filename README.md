@@ -1,4 +1,4 @@
-# ccloud-sdk-go-v2-public
+# ccloud-sdk-go-v2
 
 ## Compatibility
 
