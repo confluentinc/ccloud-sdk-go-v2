@@ -1,4 +1,4 @@
-module github.com/confluentinc/ccloud-sdk-go-v2/networking
+module github.com/confluentinc/ccloud-sdk-go-v2-internal/networking
 
 go 1.13
 

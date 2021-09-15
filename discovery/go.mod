@@ -1,4 +1,4 @@
-module github.com/confluentinc/ccloud-sdk-go-v2/discovery
+module github.com/confluentinc/ccloud-sdk-go-v2-internal/discovery
 
 go 1.13
 

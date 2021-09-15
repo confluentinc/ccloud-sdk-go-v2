@@ -1,4 +1,4 @@
-module github.com/confluentinc/ccloud-sdk-go-v2/iam
+module github.com/confluentinc/ccloud-sdk-go-v2-internal/iam
 
 go 1.13
 
