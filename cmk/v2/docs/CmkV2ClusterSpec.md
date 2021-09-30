@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **KafkaBootstrapEndpoint** | Pointer to **string** | The bootstrap endpoint used by Kafka clients to connect to the cluster. | [optional] [readonly] 
 **HttpEndpoint** | Pointer to **string** | The cluster HTTP request URL. | [optional] [readonly] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
+**Network** | Pointer to [**ObjectReference**](ObjectReference.md) | The network to which this belongs. | [optional] 
 
 ## Methods
 
@@ -231,6 +232,31 @@ SetEnvironment sets Environment field to given value.
 `func (o *CmkV2ClusterSpec) HasEnvironment() bool`
 
 HasEnvironment returns a boolean if a field has been set.
+
+### GetNetwork
+
+`func (o *CmkV2ClusterSpec) GetNetwork() ObjectReference`
+
+GetNetwork returns the Network field if non-nil, zero value otherwise.
+
+### GetNetworkOk
+
+`func (o *CmkV2ClusterSpec) GetNetworkOk() (*ObjectReference, bool)`
+
+GetNetworkOk returns a tuple with the Network field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetwork
+
+`func (o *CmkV2ClusterSpec) SetNetwork(v ObjectReference)`
+
+SetNetwork sets Network field to given value.
+
+### HasNetwork
+
+`func (o *CmkV2ClusterSpec) HasNetwork() bool`
+
+HasNetwork returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
