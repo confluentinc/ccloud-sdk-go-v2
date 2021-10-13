@@ -1,0 +1,1957 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: observability-team@confluent.io
+    name: Observability Team
+    url: https://confluent.slack.com/app_redirect?channel=observability-eng
+  description: |
+    # Introduction
+
+    Notifications Admin API provides resources/API which are generally not applicable for
+    normal users, in order to access these API user must have super user access for your access token
+
+    # Authorization
+    Currently only confluent okta uses are only able to access these API.
+
+    All API requests must be made over HTTPS. Calls made over plain HTTP will fail.
+    API requests without authentication will also fail.
+
+    The broad categories of Admin API for notification-service are categorises in below sections.
+    * **Templates** -
+       Internal users like billing team will be able to add/modify the templates for notifications
+       in self service manner. Individual API will describe these operations in more details.
+    * **Manual Notifications** -
+       To allow internal users to manually send out a notification to a given list of orgs.
+  title: Notification System Admin APIs
+  version: 0.1.0-alpha0
+  x-api-id: b4a1cf2b-d49f-4050-a344-55ded693d66d
+  x-api-group: notifications-admin/v1
+  x-tag-group: Notifications API (%s)
+  x-audience: company-internal
+servers:
+- description: Confluent Cloud production
+  url: https://api.confluent.cloud
+- description: Confluent Cloud staging
+  url: https://api.stag.cpdev.cloud
+- description: Confluent Cloud development
+  url: https://api.devel.cpdev.cloud
+tags:
+- description: |
+    End point to send a notification to end customers.
+  name: Manual Notifications (notifications-admin/v1)
+- description: |
+    You can add/modify a `template` for a given unique pair of `notification_type` and
+    `integration_type`, example: upload a template for `notification_type=notification.credit_card.expired`
+    and `integration_type=EMAIL`, so that when ever notification-service get's the Notification
+    of type `notification_type` and EMAIL will be sent using this template rather than default template
+  name: Templates (notifications-admin/v1)
+paths:
+  /notifications-admin/v1/notifications/send:
+    post:
+      description: Send out the notification to end customers manually.
+      operationId: sendNotificationsAdminV1ManualNotification
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object'
+        content:
+          application/json:
+            schema:
+              properties:
+                message:
+                  description: Message to be shown in the notification to the customer.
+                  example: There is a problem with Kafka cluster lkc-23ds8.
+                  type: string
+                org_ids:
+                  items:
+                    description: List of organization Ids to which the notification
+                      will be sent.
+                    format: int32
+                    type: integer
+                  maxItems: 5
+                  minItems: 1
+                  type: array
+                dry_run:
+                  description: |
+                    Indicates the intent of caller whether to send the notification to actual customers
+                    (if it's false) or to just see the output shown to the customers (if it's true).
+                  example: false
+                  type: boolean
+              required:
+              - dry_run
+              - message
+              - org_ids
+              type: object
+      responses:
+        "207":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_207'
+          description: |
+            Response to manual trigger will be multi-status, individual status is embeded inside
+            each element of `data` array with respective status-code and resource indicating
+            org-id and integration. The individual status-code indicates whether notification was
+            successfully sent or not.
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+        "429":
+          description: Rate Limit Exceeded
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+      security:
+      - api-key: []
+      summary: Send manual notification.
+      tags:
+      - Manual Notifications (notifications-admin/v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://api.confluent.cloud/notifications-admin/v1/notifications/send \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"message":"There is a problem with Kafka cluster lkc-23ds8.","org_ids":[0],"dry_run":false}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"message\":\"There is a problem with Kafka cluster lkc-23ds8.\",\"org_ids\":[0],\"dry_run\":false}");
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/notifications-admin/v1/notifications/send")
+            .post(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/notifications-admin/v1/notifications/send\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"message\\\":\\\"There is a problem\
+          \ with Kafka cluster lkc-23ds8.\\\",\\\"org_ids\\\":[0],\\\"dry_run\\\"\
+          :false}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\t\
+          req.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          payload = "{\"message\":\"There is a problem with Kafka cluster lkc-23ds8.\",\"org_ids\":[0],\"dry_run\":false}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("POST", "/notifications-admin/v1/notifications/send", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/notifications-admin/v1/notifications/send",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            message: 'There is a problem with Kafka cluster lkc-23ds8.',
+            org_ids: [0],
+            dry_run: false
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/notifications-admin/v1/notifications/send");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"message\":\"There is a problem with Kafka cluster lkc-23ds8.\",\"org_ids\":[0],\"dry_run\":false}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/notifications-admin/v1/notifications/send");
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"message\":\"There is a problem with Kafka cluster lkc-23ds8.\",\"org_ids\":[0],\"dry_run\":false}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+  /notifications-admin/v1/templates/{id}:
+    delete:
+      description: Make a request to delete a template.
+      operationId: deleteNotificationsAdminV1Template
+      parameters:
+      - description: The unique identifier for the template.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: A Template is being deleted.
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+        "429":
+          description: Rate Limit Exceeded
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+      security:
+      - api-key: []
+      summary: Delete a Template
+      tags:
+      - Templates (notifications-admin/v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request DELETE \
+            --url 'https://api.confluent.cloud/notifications-admin/v1/templates/{id}' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/notifications-admin/v1/templates/{id}")
+            .delete(null)
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/notifications-admin/v1/templates/{id}\"\
+          \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("DELETE", "/notifications-admin/v1/templates/{id}", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "DELETE",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/notifications-admin/v1/templates/{id}",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/notifications-admin/v1/templates/{id}");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/notifications-admin/v1/templates/{id}");
+          var request = new RestRequest(Method.DELETE);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+    get:
+      description: Make a request to read a template.
+      operationId: getNotificationsAdminV1Template
+      parameters:
+      - description: The unique identifier for the template.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/notifications-admin.v1.Template'
+                - required:
+                  - api_version
+                  - id
+                  - integration_type
+                  - kind
+                  - notification_type
+                  - template_source
+                  type: object
+          description: Template.
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+        "429":
+          description: Rate Limit Exceeded
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+      security:
+      - api-key: []
+      summary: Read a Template
+      tags:
+      - Templates (notifications-admin/v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.confluent.cloud/notifications-admin/v1/templates/{id}' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/notifications-admin/v1/templates/{id}")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/notifications-admin/v1/templates/{id}\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/notifications-admin/v1/templates/{id}", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/notifications-admin/v1/templates/{id}",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/notifications-admin/v1/templates/{id}");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/notifications-admin/v1/templates/{id}");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+    patch:
+      description: |+
+        Make a request to update a template.
+
+      operationId: updateNotificationsAdminV1Template
+      parameters:
+      - description: The unique identifier for the template.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/notifications-admin.v1.Template'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/notifications-admin.v1.Template'
+                - required:
+                  - api_version
+                  - id
+                  - integration_type
+                  - kind
+                  - notification_type
+                  - template_source
+                  type: object
+          description: Template.
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+        "429":
+          description: Rate Limit Exceeded
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+      security:
+      - api-key: []
+      summary: Update a Template
+      tags:
+      - Templates (notifications-admin/v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request PATCH \
+            --url 'https://api.confluent.cloud/notifications-admin/v1/templates/{id}' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"template_source":{"message":"${labels.metric.name} falls under the threshold ${labels.metric.thresholdParams.min}
+          Current Value = ${alert.metric.value}
+          Action Recommended - ${alert.metadata.actionRecommended}.
+          ","title":"Health+ Intelligent Alert - Severity ${labels.severity}, Status ${labels.status}"},"notification_type":"alert.disk_full","integration_type":"SLACK"}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"template_source\":{\"message\":\"${labels.metric.name} falls under the threshold ${labels.metric.thresholdParams.min}\
+          Current Value = ${alert.metric.value}\
+          Action Recommended - ${alert.metadata.actionRecommended}.\
+          \",\"title\":\"Health+ Intelligent Alert - Severity ${labels.severity}, Status ${labels.status}\"},\"notification_type\":\"alert.disk_full\",\"integration_type\":\"SLACK\"}");
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/notifications-admin/v1/templates/{id}")
+            .patch(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/notifications-admin/v1/templates/{id}\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"template_source\\\":{\\\"message\\\
+          \":\\\"${labels.metric.name} falls under the threshold ${labels.metric.thresholdParams.min}\\\
+          \nCurrent Value = ${alert.metric.value}\\\nAction Recommended - ${alert.metadata.actionRecommended}.\\\
+          \n\\\",\\\"title\\\":\\\"Health+ Intelligent Alert - Severity ${labels.severity},\
+          \ Status ${labels.status}\\\"},\\\"notification_type\\\":\\\"alert.disk_full\\\
+          \",\\\"integration_type\\\":\\\"SLACK\\\"}\")\n\n\treq, _ := http.NewRequest(\"\
+          PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          payload = "{\"template_source\":{\"message\":\"${labels.metric.name} falls under the threshold ${labels.metric.thresholdParams.min}\
+          Current Value = ${alert.metric.value}\
+          Action Recommended - ${alert.metadata.actionRecommended}.\
+          \",\"title\":\"Health+ Intelligent Alert - Severity ${labels.severity}, Status ${labels.status}\"},\"notification_type\":\"alert.disk_full\",\"integration_type\":\"SLACK\"}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("PATCH", "/notifications-admin/v1/templates/{id}", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "PATCH",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/notifications-admin/v1/templates/{id}",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            template_source: {
+              message: '${labels.metric.name} falls under the threshold ${labels.metric.thresholdParams.min}
+          Current Value = ${alert.metric.value}
+          Action Recommended - ${alert.metadata.actionRecommended}.
+          ',
+              title: 'Health+ Intelligent Alert - Severity ${labels.severity}, Status ${labels.status}'
+            },
+            notification_type: 'alert.disk_full',
+            integration_type: 'SLACK'
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/notifications-admin/v1/templates/{id}");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"template_source\":{\"message\":\"${labels.metric.name} falls under the threshold ${labels.metric.thresholdParams.min}\
+          Current Value = ${alert.metric.value}\
+          Action Recommended - ${alert.metadata.actionRecommended}.\
+          \",\"title\":\"Health+ Intelligent Alert - Severity ${labels.severity}, Status ${labels.status}\"},\"notification_type\":\"alert.disk_full\",\"integration_type\":\"SLACK\"}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/notifications-admin/v1/templates/{id}");
+          var request = new RestRequest(Method.PATCH);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"template_source\":{\"message\":\"${labels.metric.name} falls under the threshold ${labels.metric.thresholdParams.min}\
+          Current Value = ${alert.metric.value}\
+          Action Recommended - ${alert.metadata.actionRecommended}.\
+          \",\"title\":\"Health+ Intelligent Alert - Severity ${labels.severity}, Status ${labels.status}\"},\"notification_type\":\"alert.disk_full\",\"integration_type\":\"SLACK\"}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+  /notifications-admin/v1/templates:
+    get:
+      description: Retrieve a sorted, filtered, paginated list of all templates.
+      operationId: listNotificationsAdminV1Templates
+      parameters:
+      - description: Filter the results by exact match for notification_type.
+        example: alert.disk_full
+        explode: true
+        in: query
+        name: notification_type
+        required: false
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: Filter the results by exact match for integration_type.
+        example: SLACK
+        explode: true
+        in: query
+        name: integration_type
+        required: false
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: A pagination size for collection requests.
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 10
+          maximum: 100
+          type: integer
+          x-max-page-items: 500
+        style: form
+      - description: An opaque pagination token for collection requests.
+        explode: true
+        in: query
+        name: page_token
+        required: false
+        schema:
+          maxLength: 255
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notifications-admin.v1.TemplateList'
+          description: Template.
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
+        "429":
+          description: Rate Limit Exceeded
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+      security:
+      - api-key: []
+      summary: List of Templates
+      tags:
+      - Templates (notifications-admin/v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.confluent.cloud/notifications-admin/v1/templates?notification_type=SOME_STRING_VALUE&integration_type=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/notifications-admin/v1/templates?notification_type=SOME_STRING_VALUE&integration_type=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/notifications-admin/v1/templates?notification_type=SOME_STRING_VALUE&integration_type=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/notifications-admin/v1/templates?notification_type=SOME_STRING_VALUE&integration_type=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/notifications-admin/v1/templates?notification_type=SOME_STRING_VALUE&integration_type=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/notifications-admin/v1/templates?notification_type=SOME_STRING_VALUE&integration_type=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/notifications-admin/v1/templates?notification_type=SOME_STRING_VALUE&integration_type=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+    post:
+      description: Make a request to create a template.
+      operationId: createNotificationsAdminV1Template
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/notifications-admin.v1.Template'
+              - required:
+                - integration_type
+                - notification_type
+                - template_source
+                type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/notifications-admin.v1.Template'
+                - required:
+                  - integration_type
+                  - notification_type
+                  - template_source
+                  type: object
+          description: A Template was created.
+          headers:
+            Location:
+              description: Template resource uri
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/notifications-admin/v1/templates/{id}
+                format: uri
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "409"
+                  code: resource_already_exists
+                  title: Resource Already exists
+                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                    exists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request is in conflict with the current server state
+          headers:
+            Location:
+              description: Resource URI of conflicting resource
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/{object}/{id}
+                format: uri
+                type: string
+              style: simple
+          x-summary: Conflict
+        "429":
+          description: Rate Limit Exceeded
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+      security:
+      - api-key: []
+      summary: Create a Template
+      tags:
+      - Templates (notifications-admin/v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://api.confluent.cloud/notifications-admin/v1/templates \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"template_source":{"message":"${labels.metric.name} falls under the threshold ${labels.metric.thresholdParams.min}
+          Current Value = ${alert.metric.value}
+          Action Recommended - ${alert.metadata.actionRecommended}.
+          ","title":"Health+ Intelligent Alert - Severity ${labels.severity}, Status ${labels.status}"},"notification_type":"alert.disk_full","integration_type":"SLACK"}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"template_source\":{\"message\":\"${labels.metric.name} falls under the threshold ${labels.metric.thresholdParams.min}\
+          Current Value = ${alert.metric.value}\
+          Action Recommended - ${alert.metadata.actionRecommended}.\
+          \",\"title\":\"Health+ Intelligent Alert - Severity ${labels.severity}, Status ${labels.status}\"},\"notification_type\":\"alert.disk_full\",\"integration_type\":\"SLACK\"}");
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/notifications-admin/v1/templates")
+            .post(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/notifications-admin/v1/templates\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"template_source\\\":{\\\"message\\\
+          \":\\\"${labels.metric.name} falls under the threshold ${labels.metric.thresholdParams.min}\\\
+          \nCurrent Value = ${alert.metric.value}\\\nAction Recommended - ${alert.metadata.actionRecommended}.\\\
+          \n\\\",\\\"title\\\":\\\"Health+ Intelligent Alert - Severity ${labels.severity},\
+          \ Status ${labels.status}\\\"},\\\"notification_type\\\":\\\"alert.disk_full\\\
+          \",\\\"integration_type\\\":\\\"SLACK\\\"}\")\n\n\treq, _ := http.NewRequest(\"\
+          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          payload = "{\"template_source\":{\"message\":\"${labels.metric.name} falls under the threshold ${labels.metric.thresholdParams.min}\
+          Current Value = ${alert.metric.value}\
+          Action Recommended - ${alert.metadata.actionRecommended}.\
+          \",\"title\":\"Health+ Intelligent Alert - Severity ${labels.severity}, Status ${labels.status}\"},\"notification_type\":\"alert.disk_full\",\"integration_type\":\"SLACK\"}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("POST", "/notifications-admin/v1/templates", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/notifications-admin/v1/templates",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            template_source: {
+              message: '${labels.metric.name} falls under the threshold ${labels.metric.thresholdParams.min}
+          Current Value = ${alert.metric.value}
+          Action Recommended - ${alert.metadata.actionRecommended}.
+          ',
+              title: 'Health+ Intelligent Alert - Severity ${labels.severity}, Status ${labels.status}'
+            },
+            notification_type: 'alert.disk_full',
+            integration_type: 'SLACK'
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/notifications-admin/v1/templates");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"template_source\":{\"message\":\"${labels.metric.name} falls under the threshold ${labels.metric.thresholdParams.min}\
+          Current Value = ${alert.metric.value}\
+          Action Recommended - ${alert.metadata.actionRecommended}.\
+          \",\"title\":\"Health+ Intelligent Alert - Severity ${labels.severity}, Status ${labels.status}\"},\"notification_type\":\"alert.disk_full\",\"integration_type\":\"SLACK\"}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/notifications-admin/v1/templates");
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"template_source\":{\"message\":\"${labels.metric.name} falls under the threshold ${labels.metric.thresholdParams.min}\
+          Current Value = ${alert.metric.value}\
+          Action Recommended - ${alert.metadata.actionRecommended}.\
+          \",\"title\":\"Health+ Intelligent Alert - Severity ${labels.severity}, Status ${labels.status}\"},\"notification_type\":\"alert.disk_full\",\"integration_type\":\"SLACK\"}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+components:
+  requestBodies:
+    inline_object:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_object'
+  responses:
+    BadRequestError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "400"
+              code: invalid_filter
+              title: Invalid Filter
+              detail: The 'delorean' resource can't be filtered by 'num_doors'
+              source:
+                parameter: num_doors
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: Bad Request
+    UnauthenticatedError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "401"
+              code: user_unauthenticated
+              title: Authentication Required
+              detail: Valid authentication credentials must be provided
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: The request lacks valid authentication credentials for this resource.
+      headers:
+        WWW-Authenticate:
+          description: The unique identifier for the API request.
+          example: Basic error="invalid_key", error_description="The API Key is invalid"
+          explode: false
+          schema:
+            type: string
+          style: simple
+      x-summary: Unauthorized
+    OverQuotaError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "402"
+              code: quota_exceeded
+              title: Kafka Clusters Per Org Quota Exceeded
+              detail: 'The request would exceed the quota: kafka_clusters_per_environment'
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: The request would exceed one or more quotas.
+      x-summary: Over Quota
+    UnauthorizedError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "403"
+              code: user_unauthorized
+              title: User Access Unauthorized
+              detail: The user 'mcfly' is not allowed to access the 'delorean' resource
+                without the 'plutonium' role.
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: The access credentials were considered insufficient to grant access
+      x-summary: Forbidden
+    ConflictError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "409"
+              code: resource_already_exists
+              title: Resource Already exists
+              detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                exists.
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: The request is in conflict with the current server state
+      headers:
+        Location:
+          description: Resource URI of conflicting resource
+          explode: false
+          schema:
+            example: https://api.confluent.cloud/{object}/{id}
+            format: uri
+            type: string
+          style: simple
+      x-summary: Conflict
+    NotFoundError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "404"
+              title: Not Found
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: Not Found
+    RateLimitError:
+      description: Rate Limit Exceeded
+    DefaultSystemError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "500"
+              code: out_of_gas
+              title: DeLorean Out Of Gas
+              detail: The DeLorean has run out of gas, but Doc Brown will fill 'er
+                up for you asap
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: Oops, something went wrong!
+  schemas:
+    notifications-admin.v1.Template:
+      additionalProperties: false
+      description: |
+        You can add/modify a `template` for a given unique pair of `notification_type` and
+        `integration_type`, example: upload a template for `notification_type=notification.credit_card.expired`
+        and `integration_type=EMAIL`, so that when ever notification-service get's the Notification
+        of type `notification_type` and EMAIL will be sent using this template rather than default template
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - notifications-admin/v1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - Template
+          readOnly: true
+          type: string
+        id:
+          description: ID is the "natural identifier" for an object within its scope/namespace;
+            it is normally unique across time but not space. That is, you can assume
+            that the ID will not be reclaimed and reused after an object is deleted
+            ("time"); however, it may collide with IDs for other object `kinds` or
+            objects of the same `kind` within a different scope/namespace ("space").
+          example: dlz-f3a90de
+          maxLength: 255
+          readOnly: true
+          type: string
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/ObjectMeta'
+          - properties:
+              self:
+                example: https://api.confluent.cloud/notifications-admin/v1/templates/83a2c449-fab8-450c-881e-d0fdd4d51ab4
+              resource_name:
+                example: crn://confluent.cloud/notification-template=83a2c449-fab8-450c-881e-d0fdd4d51ab4
+        template_source:
+          allOf:
+          - $ref: '#/components/schemas/notifications-admin.v1.TemplateSource'
+          description: Contains message and title template for the notification with
+            placeholders
+          type: object
+        notification_type:
+          description: |
+            Type of the notification - Similar to the type in cloud event
+            sent to the notification service while triggering notification.
+          example: alert.disk_full
+          type: string
+        integration_type:
+          description: |
+            The type of the target system where alerts and notifications need to be delivered
+          example: SLACK
+          type: string
+          x-extensible-enum:
+          - SLACK
+          - EMAIL
+          - WEBHOOK
+      type: object
+    notifications-admin.v1.TemplateSource:
+      description: Contains message and title template for the notification with placeholders
+      properties:
+        message:
+          description: The template for notification message or email body
+          example: |
+            ${labels.metric.name} falls under the threshold ${labels.metric.thresholdParams.min}
+            Current Value = ${alert.metric.value}
+            Action Recommended - ${alert.metadata.actionRecommended}.
+          type: string
+        title:
+          description: The template for notification message title or email subject
+          example: Health+ Intelligent Alert - Severity ${labels.severity}, Status
+            ${labels.status}
+          type: string
+      required:
+      - message
+      type: object
+    SearchFilter:
+      description: Filter a collection by a string search
+      type: string
+    notifications-admin.v1.TemplateList:
+      additionalProperties: false
+      description: |
+        You can add/modify a `template` for a given unique pair of `notification_type` and
+        `integration_type`, example: upload a template for `notification_type=notification.credit_card.expired`
+        and `integration_type=EMAIL`, so that when ever notification-service get's the Notification
+        of type `notification_type` and EMAIL will be sent using this template rather than default template
+      example:
+        metadata: ""
+        data:
+        - ""
+        - ""
+        kind: TemplateList
+        api_version: notifications-admin/v1
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - notifications-admin/v1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - TemplateList
+          readOnly: true
+          type: string
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/ListMeta'
+          - properties:
+              first:
+                example: https://api.confluent.cloud/notifications-admin/v1/templates
+              last:
+                example: https://api.confluent.cloud/notifications-admin/v1/templates?page_token=bcAOehAY8F16YD84Z1wT
+              prev:
+                example: https://api.confluent.cloud/notifications-admin/v1/templates?page_token=YIXRY97wWYmwzrax4dld
+              next:
+                example: https://api.confluent.cloud/notifications-admin/v1/templates?page_token=UvmDWOB1iwfAIBPj6EYb
+        data:
+          items:
+            allOf:
+            - $ref: '#/components/schemas/notifications-admin.v1.Template'
+            - required:
+              - id
+              - integration_type
+              - metadata
+              - notification_type
+              - template_source
+              type: object
+          type: array
+          uniqueItems: true
+      required:
+      - api_version
+      - data
+      - kind
+      - metadata
+      type: object
+    ObjectMeta:
+      additionalProperties: false
+      description: ObjectMeta is metadata that all persisted resources must have,
+        which includes all objects users must create.
+      properties:
+        self:
+          description: Self is a Uniform Resource Locator (URL) at which an object
+            can be addressed. This URL encodes the service location, API version,
+            and other particulars necessary to locate the resource at a point in time
+          example: https://api.confluent.cloud/v2/kafka-clusters/lkc-f3a90de
+          format: uri
+          readOnly: true
+          type: string
+        resource_name:
+          description: Resource Name is a Uniform Resource Identifier (URI) that is
+            globally unique across space and time. It is represented as a Confluent
+            Resource Name
+          example: crn://confluent.cloud/kafka=lkc-f3a90de
+          format: uri
+          readOnly: true
+          type: string
+        created_at:
+          description: The date and time at which this object was created. It is represented
+            in RFC3339 format and is in UTC.
+          example: 2006-01-02T15:04:05-07:00
+          format: date-time
+          readOnly: true
+          type: string
+        updated_at:
+          description: The date and time at which this object was last updated. It
+            is represented in RFC3339 format and is in UTC.
+          example: 2006-01-02T15:04:05-07:00
+          format: date-time
+          readOnly: true
+          type: string
+        deleted_at:
+          description: The date and time at which this object was (or will be) deleted.
+            It is represented in RFC3339 format and is in UTC.
+          example: 2006-01-02T15:04:05-07:00
+          format: date-time
+          readOnly: true
+          type: string
+      readOnly: true
+      required:
+      - self
+      type: object
+    ListMeta:
+      additionalProperties: false
+      description: ListMeta describes metadata that resource collections may have
+      properties:
+        first:
+          description: A link to the first page of results. If a response does not
+            contain a first link, then direct navigation to the first page is not
+            supported.
+          example: https://api.confluent.cloud/v2/resourcekinds
+          format: uri
+          nullable: true
+          type: string
+        last:
+          description: A link to the last page of results. If a response does not
+            contain a last link, then direct navigation to the last page is not supported.
+          example: https://api.confluent.cloud/v2/resourcekinds?page_token=bcAOehAY8F16YD84Z1wT
+          format: uri
+          nullable: true
+          type: string
+        prev:
+          description: A link to the previous page of results. If a response does
+            not contain a prev link, then either there is no previous data or backwards
+            traversal through the result set is not supported.
+          example: https://api.confluent.cloud/v2/resourcekinds?page_token=YIXRY97wWYmwzrax4dld
+          format: uri
+          nullable: true
+          type: string
+        next:
+          description: A link to the next page of results. If a response does not
+            contain a next link, then there is no more data available.
+          example: https://api.confluent.cloud/v2/resourcekinds?page_token=UvmDWOB1iwfAIBPj6EYb
+          format: uri
+          nullable: true
+          type: string
+        total_size:
+          example: 123
+          format: int32
+          minimum: 0
+          type: integer
+      type: object
+    ObjectReference:
+      additionalProperties: false
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        environment:
+          description: Environment of the referred resource, if env-scoped
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        api_version:
+          description: API group and version of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
+    Failure:
+      additionalProperties: false
+      description: Provides information about problems encountered while performing
+        an operation.
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+          uniqueItems: true
+      required:
+      - errors
+      type: object
+    Error:
+      additionalProperties: false
+      description: Describes a particular error encountered while performing an operation.
+      properties:
+        id:
+          description: A unique identifier for this particular occurrence of the problem.
+          maxLength: 255
+          type: string
+        status:
+          description: The HTTP status code applicable to this problem, expressed
+            as a string value.
+          type: string
+        code:
+          description: An application-specific error code, expressed as a string value.
+          type: string
+        title:
+          description: A short, human-readable summary of the problem. It **SHOULD
+            NOT** change from occurrence to occurrence of the problem, except for
+            purposes of localization.
+          type: string
+        detail:
+          description: A human-readable explanation specific to this occurrence of
+            the problem.
+          type: string
+        source:
+          $ref: '#/components/schemas/Error_source'
+      type: object
+    inline_object:
+      properties:
+        message:
+          description: Message to be shown in the notification to the customer.
+          example: There is a problem with Kafka cluster lkc-23ds8.
+          type: string
+        org_ids:
+          items:
+            description: List of organization Ids to which the notification will be
+              sent.
+            format: int32
+            type: integer
+          maxItems: 5
+          minItems: 1
+          type: array
+        dry_run:
+          description: |
+            Indicates the intent of caller whether to send the notification to actual customers
+            (if it's false) or to just see the output shown to the customers (if it's true).
+          example: false
+          type: boolean
+      required:
+      - dry_run
+      - message
+      - org_ids
+      type: object
+    inline_response_207_results:
+      description: Notification Delivery Status for an Organization Id.
+      example:
+        org_id: 6
+        integration_kind: SLACK
+        status: 0
+      properties:
+        status:
+          description: Status code of message sent to specified integration.
+          format: int32
+          type: integer
+        org_id:
+          description: Organization Id for which the notification is sent.
+          format: int32
+          type: integer
+        integration_kind:
+          description: The type of the target system where notification is delivered.
+          example: SLACK
+          type: string
+          x-extensible-enum:
+          - SLACK
+          - EMAIL
+          - WEBHOOK
+      type: object
+    inline_response_207_metadata:
+      description: |
+        Metadata of the overall status of multi status response with information like
+        success count, failure count and total.
+      example:
+        total: 4
+        success: 3
+        failure: 1
+      properties:
+        success:
+          description: The number of notifications sent successfully.
+          example: 3
+          format: int32
+          type: integer
+        failure:
+          description: The number of notifications failed to send.
+          example: 1
+          format: int32
+          type: integer
+        total:
+          description: Total number of notifications attempted to send.
+          example: 4
+          format: int32
+          type: integer
+      type: object
+    inline_response_207:
+      example:
+        metadata:
+          total: 4
+          success: 3
+          failure: 1
+        results:
+        - org_id: 6
+          integration_kind: SLACK
+          status: 0
+        - org_id: 6
+          integration_kind: SLACK
+          status: 0
+      properties:
+        results:
+          description: Data for individual response of overall multi-status response.
+          items:
+            $ref: '#/components/schemas/inline_response_207_results'
+          type: array
+        metadata:
+          $ref: '#/components/schemas/inline_response_207_metadata'
+      type: object
+    Error_source:
+      properties:
+        pointer:
+          description: A JSON Pointer [RFC6901] to the associated entity in the request
+            document [e.g. "/spec" for a spec object, or "/spec/title" for a specific
+            field].
+          type: string
+        parameter:
+          description: A string indicating which query parameter caused the error.
+          type: string
+      type: object
+  securitySchemes:
+    api-key:
+      description: Authenticate with API Keys using HTTP Basic Auth. Treat the API
+        Key ID as the username and API Key Secret as the password.
+      scheme: basic
+      type: http
