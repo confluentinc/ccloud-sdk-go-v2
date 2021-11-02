@@ -4,10 +4,12 @@ info:
     email: cloud-rbac-eng@confluent.io
     name: Cloud RBAC Team
     url: https://confluentinc.atlassian.net/wiki/spaces/SECENG/pages/1179027097/CCloud+RBAC+Index
+  description: RBAC Public API
   title: Metadata Service API
-  version: v2
-  x-api-group: v2
+  version: iam/v2
+  x-api-group: iam/v2
   x-audience: external-public
+  x-tag-group: Identity Access Management (%s)
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
@@ -16,21 +18,24 @@ servers:
 - description: Confluent Cloud development
   url: https://api.devel.cpdev.cloud
 tags:
-- description: |
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To RBAC v2](https://img.shields.io/badge/-Request%20Access%20To%20RBAC%20v2-%23bc8540)](mailto:ccloud-api-access+v2-early-access@confluent.io?subject=Request%20to%20join%20v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+- description: |-
+    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     A role binding grants a Principal a role on resources that match a pattern.
 
     The API allows you to perform create, delete, and list operations on role bindings.
-  name: Role Bindings (v2)
+
+
+    Related guide: [Role-Based Access Control (RBAC)](https://docs.confluent.io/cloud/current/access-management/access-control/cloud-rbac.html).
+  name: Role Bindings (iam/v2)
 paths:
-  /v2/role-bindings:
+  /iam/v2/role-bindings:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To RBAC v2](https://img.shields.io/badge/-Request%20Access%20To%20RBAC%20v2-%23bc8540)](mailto:ccloud-api-access+v2-early-access@confluent.io?subject=Request%20to%20join%20v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all role bindings.
-      operationId: listV2RoleBindings
+      operationId: listIamV2RoleBindings
       parameters:
       - description: Filter the results by exact match for principal.
         example: User:u-111aaa
@@ -84,7 +89,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/v2.RoleBindingList'
+                $ref: '#/components/schemas/iam.v2.RoleBindingList'
           description: Role Binding.
           headers:
             X-Request-Id:
@@ -202,20 +207,20 @@ paths:
       - api-key: []
       summary: List of Role Bindings
       tags:
-      - Role Bindings (v2)
+      - Role Bindings (iam/v2)
       x-request-access-name: RBAC v2
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/v2/role-bindings?principal=SOME_STRING_VALUE&role_name=SOME_STRING_VALUE&crn_pattern=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/iam/v2/role-bindings?principal=SOME_STRING_VALUE&role_name=SOME_STRING_VALUE&crn_pattern=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/v2/role-bindings?principal=SOME_STRING_VALUE&role_name=SOME_STRING_VALUE&crn_pattern=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/iam/v2/role-bindings?principal=SOME_STRING_VALUE&role_name=SOME_STRING_VALUE&crn_pattern=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -223,7 +228,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/v2/role-bindings?principal=SOME_STRING_VALUE&role_name=SOME_STRING_VALUE&crn_pattern=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/role-bindings?principal=SOME_STRING_VALUE&role_name=SOME_STRING_VALUE&crn_pattern=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -236,7 +241,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/v2/role-bindings?principal=SOME_STRING_VALUE&role_name=SOME_STRING_VALUE&crn_pattern=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/iam/v2/role-bindings?principal=SOME_STRING_VALUE&role_name=SOME_STRING_VALUE&crn_pattern=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -250,7 +255,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/v2/role-bindings?principal=SOME_STRING_VALUE&role_name=SOME_STRING_VALUE&crn_pattern=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/iam/v2/role-bindings?principal=SOME_STRING_VALUE&role_name=SOME_STRING_VALUE&crn_pattern=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -275,7 +280,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/v2/role-bindings?principal=SOME_STRING_VALUE&role_name=SOME_STRING_VALUE&crn_pattern=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/role-bindings?principal=SOME_STRING_VALUE&role_name=SOME_STRING_VALUE&crn_pattern=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -284,22 +289,22 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/v2/role-bindings?principal=SOME_STRING_VALUE&role_name=SOME_STRING_VALUE&crn_pattern=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/role-bindings?principal=SOME_STRING_VALUE&role_name=SOME_STRING_VALUE&crn_pattern=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To RBAC v2](https://img.shields.io/badge/-Request%20Access%20To%20RBAC%20v2-%23bc8540)](mailto:ccloud-api-access+v2-early-access@confluent.io?subject=Request%20to%20join%20v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create a role binding.
-      operationId: createV2RoleBinding
+      operationId: createIamV2RoleBinding
       requestBody:
         content:
           application/json:
             schema:
               allOf:
-              - $ref: '#/components/schemas/v2.RoleBinding'
+              - $ref: '#/components/schemas/iam.v2.RoleBinding'
               - required:
                 - crn_pattern
                 - principal
@@ -311,7 +316,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/v2.RoleBinding'
+                - $ref: '#/components/schemas/iam.v2.RoleBinding'
                 - required:
                   - crn_pattern
                   - principal
@@ -329,7 +334,7 @@ paths:
               description: RoleBinding resource uri
               explode: false
               schema:
-                example: https://api.confluent.cloud/v2/role-bindings/{id}
+                example: https://api.confluent.cloud/iam/v2/role-bindings/{id}
                 format: uri
                 type: string
               style: simple
@@ -472,13 +477,13 @@ paths:
       - api-key: []
       summary: Create a Role Binding
       tags:
-      - Role Bindings (v2)
+      - Role Bindings (iam/v2)
       x-request-access-name: RBAC v2
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url https://api.confluent.cloud/v2/role-bindings \
+            --url https://api.confluent.cloud/iam/v2/role-bindings \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"principal":"User:u-111aaa","role_name":"CloudClusterAdmin","crn_pattern":"crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=t-38nbaz/cloud-cluster=lkc-1111aaa"}'
@@ -489,7 +494,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"principal\":\"User:u-111aaa\",\"role_name\":\"CloudClusterAdmin\",\"crn_pattern\":\"crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=t-38nbaz/cloud-cluster=lkc-1111aaa\"}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/v2/role-bindings")
+            .url("https://api.confluent.cloud/iam/v2/role-bindings")
             .post(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -498,7 +503,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/v2/role-bindings\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/role-bindings\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"principal\\\":\\\"User:u-111aaa\\\
           \",\\\"role_name\\\":\\\"CloudClusterAdmin\\\",\\\"crn_pattern\\\":\\\"\
           crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=t-38nbaz/cloud-cluster=lkc-1111aaa\\\
@@ -520,7 +525,7 @@ paths:
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("POST", "/v2/role-bindings", payload, headers)
+          conn.request("POST", "/iam/v2/role-bindings", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -534,7 +539,7 @@ paths:
             "method": "POST",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/v2/role-bindings",
+            "path": "/iam/v2/role-bindings",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -565,7 +570,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/v2/role-bindings");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/role-bindings");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -577,20 +582,20 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/v2/role-bindings");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/role-bindings");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"principal\":\"User:u-111aaa\",\"role_name\":\"CloudClusterAdmin\",\"crn_pattern\":\"crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=t-38nbaz/cloud-cluster=lkc-1111aaa\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: RBAC v2
-  /v2/role-bindings/{id}:
+  /iam/v2/role-bindings/{id}:
     delete:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To RBAC v2](https://img.shields.io/badge/-Request%20Access%20To%20RBAC%20v2-%23bc8540)](mailto:ccloud-api-access+v2-early-access@confluent.io?subject=Request%20to%20join%20v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete a role binding.
-      operationId: deleteV2RoleBinding
+      operationId: deleteIamV2RoleBinding
       parameters:
       - description: The unique identifier for the role binding.
         explode: false
@@ -737,20 +742,20 @@ paths:
       - api-key: []
       summary: Delete a Role Binding
       tags:
-      - Role Bindings (v2)
+      - Role Bindings (iam/v2)
       x-request-access-name: RBAC v2
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/v2/role-bindings/{id}' \
+            --url 'https://api.confluent.cloud/iam/v2/role-bindings/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/v2/role-bindings/{id}")
+            .url("https://api.confluent.cloud/iam/v2/role-bindings/{id}")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -758,7 +763,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/v2/role-bindings/{id}\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/role-bindings/{id}\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -771,7 +776,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/v2/role-bindings/{id}", headers=headers)
+          conn.request("DELETE", "/iam/v2/role-bindings/{id}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -785,7 +790,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/v2/role-bindings/{id}",
+            "path": "/iam/v2/role-bindings/{id}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -810,7 +815,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/v2/role-bindings/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/role-bindings/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -819,16 +824,16 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/v2/role-bindings/{id}");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/role-bindings/{id}");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To RBAC v2](https://img.shields.io/badge/-Request%20Access%20To%20RBAC%20v2-%23bc8540)](mailto:ccloud-api-access+v2-early-access@confluent.io?subject=Request%20to%20join%20v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a role binding.
-      operationId: getV2RoleBinding
+      operationId: getIamV2RoleBinding
       parameters:
       - description: The unique identifier for the role binding.
         explode: false
@@ -844,7 +849,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/v2.RoleBinding'
+                - $ref: '#/components/schemas/iam.v2.RoleBinding'
                 - required:
                   - api_version
                   - crn_pattern
@@ -988,20 +993,20 @@ paths:
       - api-key: []
       summary: Read a Role Binding
       tags:
-      - Role Bindings (v2)
+      - Role Bindings (iam/v2)
       x-request-access-name: RBAC v2
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/v2/role-bindings/{id}' \
+            --url 'https://api.confluent.cloud/iam/v2/role-bindings/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/v2/role-bindings/{id}")
+            .url("https://api.confluent.cloud/iam/v2/role-bindings/{id}")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1009,7 +1014,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/v2/role-bindings/{id}\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/role-bindings/{id}\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1022,7 +1027,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/v2/role-bindings/{id}", headers=headers)
+          conn.request("GET", "/iam/v2/role-bindings/{id}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1036,7 +1041,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/v2/role-bindings/{id}",
+            "path": "/iam/v2/role-bindings/{id}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1061,7 +1066,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/v2/role-bindings/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/role-bindings/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1070,7 +1075,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/v2/role-bindings/{id}");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/role-bindings/{id}");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1249,18 +1254,21 @@ components:
             type: string
           style: simple
   schemas:
-    v2.RoleBinding:
+    iam.v2.RoleBinding:
       additionalProperties: false
-      description: |
+      description: |-
         A role binding grants a Principal a role on resources that match a pattern.
 
         The API allows you to perform create, delete, and list operations on role bindings.
+
+
+        Related guide: [Role-Based Access Control (RBAC)](https://docs.confluent.io/cloud/current/access-management/access-control/cloud-rbac.html).
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
             of a resource.
           enum:
-          - v2
+          - iam/v2
           readOnly: true
           type: string
         kind:
@@ -1284,7 +1292,7 @@ components:
           - $ref: '#/components/schemas/ObjectMeta'
           - properties:
               self:
-                example: https://api.confluent.cloud/v2/role-bindings/rb-12345
+                example: https://api.confluent.cloud/iam/v2/role-bindings/rb-12345
               resource_name:
                 example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/rolebinding=rb-12345
         principal:
@@ -1304,98 +1312,31 @@ components:
           pattern: ^crn://.+$
           type: string
       type: object
-    v2.ResourceOperation:
-      example:
-        resourceType: Topic
-        operations:
-        - Read
-        - Write
-        - Describe
-        - DescribeConfigs
-      properties:
-        resource_type:
-          description: What type of resource these operations are allowed on ("Cluster",
-            "Topic", "Group", "Subject", etc.)
-          type: string
-          x-extensible-enum:
-          - ALL
-          - CLUSTER
-          - CLUSTER_REGISTRY
-          - CONNECTOR
-          - CONTROL_CENTER_ALERTS
-          - CONTROL_CENTER_BROKER_METRICS
-          - DELEGATION_TOKEN
-          - GROUP
-          - KSQL_CLUSTER
-          - SECRET
-          - SECURITY_METADATA
-          - SUBJECT
-          - TOPIC
-          - TRANSACTION_ID
-        operations:
-          description: List of allowed operations on this resourceType
-          items:
-            type: string
-            x-extensible-enum:
-            - ALL
-            - ALTER
-            - ALTER_ACCESS
-            - ALTER_CONFIGS
-            - CONFIGURE
-            - CONTRIBUTE
-            - CONTROL_CENTER_TRIGGER_WRITE
-            - CREATE
-            - CREATE_CLOUD_CLUSTER
-            - CREATE_ENVIRONMENT
-            - CREATE_KAFKA_CLUSTER
-            - CREATE_KSQL_CLUSTER
-            - CREATE_SR_CLUSTER
-            - DELETE
-            - DESCRIBE
-            - DESCRIBE_ACCESS
-            - DESCRIBE_CONFIGS
-            - DESCRIBE_METRICS
-            - DESCRIBE_PLUGINS
-            - IDEMPOTENT_WRITE
-            - INVITE
-            - PAUSE
-            - READ
-            - READ_ACTIVE_TOPICS
-            - READ_COMPATIBILITY
-            - READ_CONFIG
-            - READ_STATUS
-            - READ_TASKS
-            - RESET_ACTIVE_TOPICS
-            - RESUME
-            - SCALE
-            - TERMINATE
-            - VALIDATE_CONFIG
-            - WRITE
-            - WRITE_COMPATIBILITY
-          type: array
-      type: object
     SearchFilter:
       description: Filter a collection by a string search
       type: string
-    v2.RoleBindingList:
+    iam.v2.RoleBindingList:
       additionalProperties: false
-      description: |
+      description: |-
         A role binding grants a Principal a role on resources that match a pattern.
 
         The API allows you to perform create, delete, and list operations on role bindings.
+
+
+        Related guide: [Role-Based Access Control (RBAC)](https://docs.confluent.io/cloud/current/access-management/access-control/cloud-rbac.html).
       example:
         metadata: ""
         data:
         - ""
         - ""
         kind: RoleBindingList
-        api_version: v2
+        api_version: iam/v2
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
             of a resource.
           enum:
-          - v2
+          - iam/v2
           readOnly: true
           type: string
         kind:
@@ -1409,17 +1350,17 @@ components:
           - $ref: '#/components/schemas/ListMeta'
           - properties:
               first:
-                example: https://api.confluent.cloud/v2/role-bindings
+                example: https://api.confluent.cloud/iam/v2/role-bindings
               last:
-                example: https://api.confluent.cloud/v2/role-bindings?page_token=bcAOehAY8F16YD84Z1wT
+                example: https://api.confluent.cloud/iam/v2/role-bindings?page_token=bcAOehAY8F16YD84Z1wT
               prev:
-                example: https://api.confluent.cloud/v2/role-bindings?page_token=YIXRY97wWYmwzrax4dld
+                example: https://api.confluent.cloud/iam/v2/role-bindings?page_token=YIXRY97wWYmwzrax4dld
               next:
-                example: https://api.confluent.cloud/v2/role-bindings?page_token=UvmDWOB1iwfAIBPj6EYb
+                example: https://api.confluent.cloud/iam/v2/role-bindings?page_token=UvmDWOB1iwfAIBPj6EYb
         data:
           items:
             allOf:
-            - $ref: '#/components/schemas/v2.RoleBinding'
+            - $ref: '#/components/schemas/iam.v2.RoleBinding'
             - required:
               - crn_pattern
               - id
@@ -1544,7 +1485,7 @@ components:
           type: string
         resource_name:
           description: CRN reference to the referred resource
-          format: crn
+          format: uri
           minLength: 1
           readOnly: true
           type: string
