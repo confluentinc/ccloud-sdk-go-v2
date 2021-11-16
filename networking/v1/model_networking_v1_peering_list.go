@@ -29,7 +29,7 @@ import (
 	"encoding/json"
 )
 
-// NetworkingV1PeeringList VPC Peering Connections
+// NetworkingV1PeeringList VPC Peering Connections  Related guide: [APIs to manage VPC peering connections.](https://docs.confluent.cloud).  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `peerings_per_network` | Number of peerings per network |
 type NetworkingV1PeeringList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version"`

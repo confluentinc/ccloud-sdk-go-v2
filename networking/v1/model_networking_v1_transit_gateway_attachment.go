@@ -29,7 +29,7 @@ import (
 	"encoding/json"
 )
 
-// NetworkingV1TransitGatewayAttachment AWS Transit Gateway Attachments
+// NetworkingV1TransitGatewayAttachment AWS Transit Gateway Attachments  Related guide: [APIs to manage AWS Transit Gateway Attachments.](https://docs.confluent.cloud).  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `tgw_attachments_per_network` | Number of TGW attachments per network |
 type NetworkingV1TransitGatewayAttachment struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`

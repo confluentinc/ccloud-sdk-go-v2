@@ -29,7 +29,7 @@ import (
 	"encoding/json"
 )
 
-// NetworkingV1PrivateLinkAccessUpdate Add or remove access to PrivateLink endpoints by AWS account or Azure subscription.
+// NetworkingV1PrivateLinkAccessUpdate Add or remove access to PrivateLink endpoints by AWS account or Azure subscription.  Related guide: [APIs to manage PrivateLink access.](https://docs.confluent.cloud).  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `privatelink_accounts_per_network` | Number of AWS accounts per network | | `privatelink_subscriptions_per_network` | Number of Azure subscriptions per network |
 type NetworkingV1PrivateLinkAccessUpdate struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`

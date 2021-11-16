@@ -5206,8 +5206,23 @@ components:
   schemas:
     networking.v1.Network:
       additionalProperties: false
-      description: '`Network` represents a network (VPC) in Confluent Cloud. All Networks
-        exist within Confluent-managed cloud'
+      description: |-
+        `Network` represents a network (VPC) in Confluent Cloud. All Networks exist within Confluent-managed cloud
+        provider accounts. Dedicated networks support more networking options but can only contain Dedicated clusters.
+        Shared networks can contain any cluster type.
+
+        The API allows you to list, create, read, update, and delete your networks.
+
+
+        Related guide: [APIs to manage networks in Confluent Cloud.](https://docs.confluent.cloud).
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `dedicated_networks_per_organization` | Number of dedicated networks per Confluent Cloud organization |
+        | `dedicated_networks_per_environment` | Number of dedicated networks per Confluent Cloud environment |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -5316,7 +5331,17 @@ components:
       type: object
     networking.v1.Peering:
       additionalProperties: false
-      description: VPC Peering Connections
+      description: |-
+        VPC Peering Connections
+
+        Related guide: [APIs to manage VPC peering connections.](https://docs.confluent.cloud).
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `peerings_per_network` | Number of peerings per network |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -5390,7 +5415,17 @@ components:
       type: object
     networking.v1.TransitGatewayAttachment:
       additionalProperties: false
-      description: AWS Transit Gateway Attachments
+      description: |-
+        AWS Transit Gateway Attachments
+
+        Related guide: [APIs to manage AWS Transit Gateway Attachments.](https://docs.confluent.cloud).
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `tgw_attachments_per_network` | Number of TGW attachments per network |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -5465,8 +5500,18 @@ components:
       type: object
     networking.v1.PrivateLinkAccess:
       additionalProperties: false
-      description: Add or remove access to PrivateLink endpoints by AWS account or
-        Azure subscription.
+      description: |-
+        Add or remove access to PrivateLink endpoints by AWS account or Azure subscription.
+
+        Related guide: [APIs to manage PrivateLink access.](https://docs.confluent.cloud).
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `privatelink_accounts_per_network` | Number of AWS accounts per network |
+        | `privatelink_subscriptions_per_network` | Number of Azure subscriptions per network |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -5780,8 +5825,23 @@ components:
       type: string
     networking.v1.NetworkList:
       additionalProperties: false
-      description: '`Network` represents a network (VPC) in Confluent Cloud. All Networks
-        exist within Confluent-managed cloud'
+      description: |-
+        `Network` represents a network (VPC) in Confluent Cloud. All Networks exist within Confluent-managed cloud
+        provider accounts. Dedicated networks support more networking options but can only contain Dedicated clusters.
+        Shared networks can contain any cluster type.
+
+        The API allows you to list, create, read, update, and delete your networks.
+
+
+        Related guide: [APIs to manage networks in Confluent Cloud.](https://docs.confluent.cloud).
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `dedicated_networks_per_organization` | Number of dedicated networks per Confluent Cloud organization |
+        | `dedicated_networks_per_environment` | Number of dedicated networks per Confluent Cloud environment |
       example:
         metadata: ""
         data:
@@ -5912,7 +5972,17 @@ components:
       x-enable-objectmeta: true
     networking.v1.PeeringList:
       additionalProperties: false
-      description: VPC Peering Connections
+      description: |-
+        VPC Peering Connections
+
+        Related guide: [APIs to manage VPC peering connections.](https://docs.confluent.cloud).
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `peerings_per_network` | Number of peerings per network |
       example:
         metadata: ""
         data:
@@ -6012,7 +6082,17 @@ components:
       x-enable-objectmeta: true
     networking.v1.TransitGatewayAttachmentList:
       additionalProperties: false
-      description: AWS Transit Gateway Attachments
+      description: |-
+        AWS Transit Gateway Attachments
+
+        Related guide: [APIs to manage AWS Transit Gateway Attachments.](https://docs.confluent.cloud).
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `tgw_attachments_per_network` | Number of TGW attachments per network |
       example:
         metadata: ""
         data:
@@ -6104,8 +6184,18 @@ components:
       x-enable-objectmeta: true
     networking.v1.PrivateLinkAccessList:
       additionalProperties: false
-      description: Add or remove access to PrivateLink endpoints by AWS account or
-        Azure subscription.
+      description: |-
+        Add or remove access to PrivateLink endpoints by AWS account or Azure subscription.
+
+        Related guide: [APIs to manage PrivateLink access.](https://docs.confluent.cloud).
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `privatelink_accounts_per_network` | Number of AWS accounts per network |
+        | `privatelink_subscriptions_per_network` | Number of Azure subscriptions per network |
       example:
         metadata: ""
         data:
@@ -6310,7 +6400,7 @@ components:
           type: string
         resource_name:
           description: CRN reference to the referred resource
-          format: crn
+          format: uri
           minLength: 1
           readOnly: true
           type: string
@@ -6385,8 +6475,23 @@ components:
       x-enable-objectmeta: true
     networking.v1.NetworkUpdate:
       additionalProperties: false
-      description: '`Network` represents a network (VPC) in Confluent Cloud. All Networks
-        exist within Confluent-managed cloud'
+      description: |-
+        `Network` represents a network (VPC) in Confluent Cloud. All Networks exist within Confluent-managed cloud
+        provider accounts. Dedicated networks support more networking options but can only contain Dedicated clusters.
+        Shared networks can contain any cluster type.
+
+        The API allows you to list, create, read, update, and delete your networks.
+
+
+        Related guide: [APIs to manage networks in Confluent Cloud.](https://docs.confluent.cloud).
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `dedicated_networks_per_organization` | Number of dedicated networks per Confluent Cloud organization |
+        | `dedicated_networks_per_environment` | Number of dedicated networks per Confluent Cloud environment |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -6439,7 +6544,17 @@ components:
       x-enable-objectmeta: true
     networking.v1.PeeringUpdate:
       additionalProperties: false
-      description: VPC Peering Connections
+      description: |-
+        VPC Peering Connections
+
+        Related guide: [APIs to manage VPC peering connections.](https://docs.confluent.cloud).
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `peerings_per_network` | Number of peerings per network |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -6492,8 +6607,18 @@ components:
       x-enable-objectmeta: true
     networking.v1.PrivateLinkAccessUpdate:
       additionalProperties: false
-      description: Add or remove access to PrivateLink endpoints by AWS account or
-        Azure subscription.
+      description: |-
+        Add or remove access to PrivateLink endpoints by AWS account or Azure subscription.
+
+        Related guide: [APIs to manage PrivateLink access.](https://docs.confluent.cloud).
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `privatelink_accounts_per_network` | Number of AWS accounts per network |
+        | `privatelink_subscriptions_per_network` | Number of Azure subscriptions per network |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
