@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DisplayName** | Pointer to **string** | The name of the TGW attachment. | [optional] 
+**DisplayName** | Pointer to **string** | The name of the TGW attachment | [optional] 
 **RamShareArn** | Pointer to **string** | The full AWS Resource Name (ARN) for the AWS Resource Access Manager (RAM) Share of the Transit Gateways that you want Confluent Cloud attached to | [optional] 
 **Network** | Pointer to **string** | The network to use for the Transit Gateway | [optional] 
-**Environment** | Pointer to **string** | The environment for the Transit Gateway | [optional] 
+**Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
 
@@ -105,20 +105,20 @@ HasNetwork returns a boolean if a field has been set.
 
 ### GetEnvironment
 
-`func (o *NetworkingV1TransitGatewayAttachmentSpec) GetEnvironment() string`
+`func (o *NetworkingV1TransitGatewayAttachmentSpec) GetEnvironment() ObjectReference`
 
 GetEnvironment returns the Environment field if non-nil, zero value otherwise.
 
 ### GetEnvironmentOk
 
-`func (o *NetworkingV1TransitGatewayAttachmentSpec) GetEnvironmentOk() (*string, bool)`
+`func (o *NetworkingV1TransitGatewayAttachmentSpec) GetEnvironmentOk() (*ObjectReference, bool)`
 
 GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnvironment
 
-`func (o *NetworkingV1TransitGatewayAttachmentSpec) SetEnvironment(v string)`
+`func (o *NetworkingV1TransitGatewayAttachmentSpec) SetEnvironment(v ObjectReference)`
 
 SetEnvironment sets Environment field to given value.
 

@@ -654,10 +654,10 @@ func (a *NetworksNetworkingV1ApiService) ListNetworkingV1NetworksExecute(r ApiLi
 	if r.cidr != nil {
 		localVarQueryParams.Add("cidr", parameterToString(*r.cidr, ""))
 	}
-	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.phase != nil {
 		localVarQueryParams.Add("phase", parameterToString(*r.phase, ""))
 	}
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.connectionType != nil {
 		localVarQueryParams.Add("connection_type", parameterToString(*r.connectionType, ""))
 	}

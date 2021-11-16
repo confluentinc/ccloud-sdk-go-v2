@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DisplayName** | Pointer to **string** | The name of the peering. | [optional] 
+**DisplayName** | Pointer to **string** | The name of the Peering | [optional] 
 **Cloud** | Pointer to [**NetworkingV1PeeringSpecCloudOneOf**](NetworkingV1PeeringSpecCloudOneOf.md) | The cloud-specific peering details. | [optional] 
 **Network** | Pointer to **string** | The network to use for the peering | [optional] 
-**Environment** | Pointer to **string** | The environment for the peering | [optional] 
+**Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
 
@@ -105,20 +105,20 @@ HasNetwork returns a boolean if a field has been set.
 
 ### GetEnvironment
 
-`func (o *NetworkingV1PeeringSpec) GetEnvironment() string`
+`func (o *NetworkingV1PeeringSpec) GetEnvironment() ObjectReference`
 
 GetEnvironment returns the Environment field if non-nil, zero value otherwise.
 
 ### GetEnvironmentOk
 
-`func (o *NetworkingV1PeeringSpec) GetEnvironmentOk() (*string, bool)`
+`func (o *NetworkingV1PeeringSpec) GetEnvironmentOk() (*ObjectReference, bool)`
 
 GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnvironment
 
-`func (o *NetworkingV1PeeringSpec) SetEnvironment(v string)`
+`func (o *NetworkingV1PeeringSpec) SetEnvironment(v ObjectReference)`
 
 SetEnvironment sets Environment field to given value.
 

@@ -99,7 +99,7 @@ import (
 )
 
 func main() {
-    environment := "env-000000" // string | Scope the operation to the given environment.
+    environment := "env-00000" // string | Scope the operation to the given environment.
     id := "id_example" // string | The unique identifier for the network.
 
     configuration := openapiclient.NewConfiguration()
@@ -169,7 +169,7 @@ import (
 )
 
 func main() {
-    environment := "env-000000" // string | Scope the operation to the given environment.
+    environment := "env-00000" // string | Scope the operation to the given environment.
     id := "id_example" // string | The unique identifier for the network.
 
     configuration := openapiclient.NewConfiguration()
@@ -241,7 +241,7 @@ import (
 )
 
 func main() {
-    environment := "env-000000" // string | Filter the results by exact match for environment.
+    environment := "env-00000" // string | Filter the results by exact match for environment.
     displayName := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for display_name. Pass multiple times to see results matching any of the values. (optional)
     cloud := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for cloud. Pass multiple times to see results matching any of the values. (optional)
     region :=  // MultipleSearchFilter | Filter the results by exact match for region. Pass multiple times to see results matching any of the values. (optional)

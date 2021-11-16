@@ -31,7 +31,7 @@ import (
 
 // NetworkingV1NetworkSpec The desired state of the Network
 type NetworkingV1NetworkSpec struct {
-	// The name of the Network.  Must be unique per Confluent Cloud environment.
+	// The name of the Network
 	DisplayName *string `json:"display_name,omitempty"`
 	// The cloud service provider in which the network exists.
 	Cloud *string `json:"cloud,omitempty"`
@@ -42,8 +42,8 @@ type NetworkingV1NetworkSpec struct {
 	Cidr *string `json:"cidr,omitempty"`
 	// The 3 availability zones for this network. They can optionally be specified for AWS networks used with PrivateLink. Otherwise, they are automatically chosen by Confluent Cloud.  On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3)  On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c).  On Azure, zones are Confluent-chosen names (e.g. 1, 2, 3) since Azure does not  have universal zone identifiers. 
 	Zones *[]string `json:"zones,omitempty"`
-	// The environment to use for this network
-	Environment *string `json:"environment,omitempty"`
+	// The environment to which this belongs.
+	Environment *ObjectReference `json:"environment,omitempty"`
 }
 
 // NewNetworkingV1NetworkSpec instantiates a new NetworkingV1NetworkSpec object
@@ -256,9 +256,9 @@ func (o *NetworkingV1NetworkSpec) SetZones(v []string) {
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *NetworkingV1NetworkSpec) GetEnvironment() string {
+func (o *NetworkingV1NetworkSpec) GetEnvironment() ObjectReference {
 	if o == nil || o.Environment == nil {
-		var ret string
+		var ret ObjectReference
 		return ret
 	}
 	return *o.Environment
@@ -266,7 +266,7 @@ func (o *NetworkingV1NetworkSpec) GetEnvironment() string {
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1NetworkSpec) GetEnvironmentOk() (*string, bool) {
+func (o *NetworkingV1NetworkSpec) GetEnvironmentOk() (*ObjectReference, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -282,8 +282,8 @@ func (o *NetworkingV1NetworkSpec) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *NetworkingV1NetworkSpec) SetEnvironment(v string) {
+// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
+func (o *NetworkingV1NetworkSpec) SetEnvironment(v ObjectReference) {
 	o.Environment = &v
 }
 

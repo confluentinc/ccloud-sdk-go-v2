@@ -304,10 +304,10 @@ func (a *TransitGatewayAttachmentsNetworkingV1ApiService) ListNetworkingV1Transi
 	if r.network != nil {
 		localVarQueryParams.Add("network", parameterToString(*r.network, ""))
 	}
-	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.phase != nil {
 		localVarQueryParams.Add("phase", parameterToString(*r.phase, ""))
 	}
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}

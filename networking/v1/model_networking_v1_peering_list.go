@@ -36,6 +36,7 @@ type NetworkingV1PeeringList struct {
 	// Kind defines the object this REST resource represents.
 	Kind string `json:"kind"`
 	Metadata ListMeta `json:"metadata"`
+	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
 	Data []NetworkingV1Peering `json:"data"`
 }
 

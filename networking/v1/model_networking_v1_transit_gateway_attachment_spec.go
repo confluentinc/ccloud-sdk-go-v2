@@ -31,14 +31,14 @@ import (
 
 // NetworkingV1TransitGatewayAttachmentSpec The desired state of the Transit Gateway Attachment
 type NetworkingV1TransitGatewayAttachmentSpec struct {
-	// The name of the TGW attachment.
+	// The name of the TGW attachment
 	DisplayName *string `json:"display_name,omitempty"`
 	// The full AWS Resource Name (ARN) for the AWS Resource Access Manager (RAM) Share of the Transit Gateways that you want Confluent Cloud attached to
 	RamShareArn *string `json:"ram_share_arn,omitempty"`
 	// The network to use for the Transit Gateway
 	Network *string `json:"network,omitempty"`
-	// The environment for the Transit Gateway
-	Environment *string `json:"environment,omitempty"`
+	// The environment to which this belongs.
+	Environment *ObjectReference `json:"environment,omitempty"`
 }
 
 // NewNetworkingV1TransitGatewayAttachmentSpec instantiates a new NetworkingV1TransitGatewayAttachmentSpec object
@@ -155,9 +155,9 @@ func (o *NetworkingV1TransitGatewayAttachmentSpec) SetNetwork(v string) {
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) GetEnvironment() string {
+func (o *NetworkingV1TransitGatewayAttachmentSpec) GetEnvironment() ObjectReference {
 	if o == nil || o.Environment == nil {
-		var ret string
+		var ret ObjectReference
 		return ret
 	}
 	return *o.Environment
@@ -165,7 +165,7 @@ func (o *NetworkingV1TransitGatewayAttachmentSpec) GetEnvironment() string {
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) GetEnvironmentOk() (*string, bool) {
+func (o *NetworkingV1TransitGatewayAttachmentSpec) GetEnvironmentOk() (*ObjectReference, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -181,8 +181,8 @@ func (o *NetworkingV1TransitGatewayAttachmentSpec) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) SetEnvironment(v string) {
+// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
+func (o *NetworkingV1TransitGatewayAttachmentSpec) SetEnvironment(v ObjectReference) {
 	o.Environment = &v
 }
 

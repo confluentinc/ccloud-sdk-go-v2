@@ -31,8 +31,10 @@ import (
 
 // NetworkingV1PrivateLinkAccessSpecUpdate The desired state of the Private Link Access
 type NetworkingV1PrivateLinkAccessSpecUpdate struct {
-	// The name of the PrivateLink access.
+	// The name of the PrivateLink access
 	DisplayName *string `json:"display_name,omitempty"`
+	// The environment to which this belongs.
+	Environment *ObjectReference `json:"environment,omitempty"`
 }
 
 // NewNetworkingV1PrivateLinkAccessSpecUpdate instantiates a new NetworkingV1PrivateLinkAccessSpecUpdate object
@@ -84,10 +86,45 @@ func (o *NetworkingV1PrivateLinkAccessSpecUpdate) SetDisplayName(v string) {
 	o.DisplayName = &v
 }
 
+// GetEnvironment returns the Environment field value if set, zero value otherwise.
+func (o *NetworkingV1PrivateLinkAccessSpecUpdate) GetEnvironment() ObjectReference {
+	if o == nil || o.Environment == nil {
+		var ret ObjectReference
+		return ret
+	}
+	return *o.Environment
+}
+
+// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1PrivateLinkAccessSpecUpdate) GetEnvironmentOk() (*ObjectReference, bool) {
+	if o == nil || o.Environment == nil {
+		return nil, false
+	}
+	return o.Environment, true
+}
+
+// HasEnvironment returns a boolean if a field has been set.
+func (o *NetworkingV1PrivateLinkAccessSpecUpdate) HasEnvironment() bool {
+	if o != nil && o.Environment != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
+func (o *NetworkingV1PrivateLinkAccessSpecUpdate) SetEnvironment(v ObjectReference) {
+	o.Environment = &v
+}
+
 func (o NetworkingV1PrivateLinkAccessSpecUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.DisplayName != nil {
 		toSerialize["display_name"] = o.DisplayName
+	}
+	if o.Environment != nil {
+		toSerialize["environment"] = o.Environment
 	}
 	return json.Marshal(toSerialize)
 }

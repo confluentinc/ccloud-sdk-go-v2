@@ -31,14 +31,14 @@ import (
 
 // NetworkingV1PeeringSpec The desired state of the Peering
 type NetworkingV1PeeringSpec struct {
-	// The name of the peering.
+	// The name of the Peering
 	DisplayName *string `json:"display_name,omitempty"`
 	// The cloud-specific peering details.
 	Cloud *NetworkingV1PeeringSpecCloudOneOf `json:"cloud,omitempty"`
 	// The network to use for the peering
 	Network *string `json:"network,omitempty"`
-	// The environment for the peering
-	Environment *string `json:"environment,omitempty"`
+	// The environment to which this belongs.
+	Environment *ObjectReference `json:"environment,omitempty"`
 }
 
 // NewNetworkingV1PeeringSpec instantiates a new NetworkingV1PeeringSpec object
@@ -155,9 +155,9 @@ func (o *NetworkingV1PeeringSpec) SetNetwork(v string) {
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *NetworkingV1PeeringSpec) GetEnvironment() string {
+func (o *NetworkingV1PeeringSpec) GetEnvironment() ObjectReference {
 	if o == nil || o.Environment == nil {
-		var ret string
+		var ret ObjectReference
 		return ret
 	}
 	return *o.Environment
@@ -165,7 +165,7 @@ func (o *NetworkingV1PeeringSpec) GetEnvironment() string {
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1PeeringSpec) GetEnvironmentOk() (*string, bool) {
+func (o *NetworkingV1PeeringSpec) GetEnvironmentOk() (*ObjectReference, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -181,8 +181,8 @@ func (o *NetworkingV1PeeringSpec) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *NetworkingV1PeeringSpec) SetEnvironment(v string) {
+// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
+func (o *NetworkingV1PeeringSpec) SetEnvironment(v ObjectReference) {
 	o.Environment = &v
 }
 

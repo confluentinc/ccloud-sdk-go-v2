@@ -30,7 +30,7 @@ import (
 )
 
 func main() {
-    environment := "env-000000" // string | Scope the operation to the given environment.
+    environment := "env-00000" // string | Scope the operation to the given environment.
     id := "id_example" // string | The unique identifier for the transit gateway attachment.
 
     configuration := openapiclient.NewConfiguration()
@@ -102,7 +102,7 @@ import (
 )
 
 func main() {
-    environment := "env-000000" // string | Filter the results by exact match for environment.
+    environment := "env-00000" // string | Filter the results by exact match for environment.
     displayName := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for display_name. Pass multiple times to see results matching any of the values. (optional)
     network := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for network. Pass multiple times to see results matching any of the values. (optional)
     phase :=  // MultipleSearchFilter | Filter the results by exact match for phase. Pass multiple times to see results matching any of the values. (optional)

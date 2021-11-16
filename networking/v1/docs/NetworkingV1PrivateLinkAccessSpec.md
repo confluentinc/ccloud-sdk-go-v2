@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DisplayName** | Pointer to **string** | The name of the PrivateLink access. | [optional] 
+**DisplayName** | Pointer to **string** | The name of the PrivateLink access | [optional] 
 **Cloud** | Pointer to [**NetworkingV1PrivateLinkAccessSpecCloudOneOf**](NetworkingV1PrivateLinkAccessSpecCloudOneOf.md) | The cloud-specific PrivateLink details. | [optional] 
 **Network** | Pointer to **string** | The network for the PrivateLink access | [optional] 
-**Environment** | Pointer to **string** | The environment for the PrivateLink access | [optional] 
+**Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
 
@@ -105,20 +105,20 @@ HasNetwork returns a boolean if a field has been set.
 
 ### GetEnvironment
 
-`func (o *NetworkingV1PrivateLinkAccessSpec) GetEnvironment() string`
+`func (o *NetworkingV1PrivateLinkAccessSpec) GetEnvironment() ObjectReference`
 
 GetEnvironment returns the Environment field if non-nil, zero value otherwise.
 
 ### GetEnvironmentOk
 
-`func (o *NetworkingV1PrivateLinkAccessSpec) GetEnvironmentOk() (*string, bool)`
+`func (o *NetworkingV1PrivateLinkAccessSpec) GetEnvironmentOk() (*ObjectReference, bool)`
 
 GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnvironment
 
-`func (o *NetworkingV1PrivateLinkAccessSpec) SetEnvironment(v string)`
+`func (o *NetworkingV1PrivateLinkAccessSpec) SetEnvironment(v ObjectReference)`
 
 SetEnvironment sets Environment field to given value.
 

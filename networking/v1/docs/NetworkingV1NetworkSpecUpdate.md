@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DisplayName** | Pointer to **string** | The name of the Network.  Must be unique per Confluent Cloud environment. | [optional] 
+**DisplayName** | Pointer to **string** | The name of the Network | [optional] 
+**Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
 
@@ -49,6 +50,31 @@ SetDisplayName sets DisplayName field to given value.
 `func (o *NetworkingV1NetworkSpecUpdate) HasDisplayName() bool`
 
 HasDisplayName returns a boolean if a field has been set.
+
+### GetEnvironment
+
+`func (o *NetworkingV1NetworkSpecUpdate) GetEnvironment() ObjectReference`
+
+GetEnvironment returns the Environment field if non-nil, zero value otherwise.
+
+### GetEnvironmentOk
+
+`func (o *NetworkingV1NetworkSpecUpdate) GetEnvironmentOk() (*ObjectReference, bool)`
+
+GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnvironment
+
+`func (o *NetworkingV1NetworkSpecUpdate) SetEnvironment(v ObjectReference)`
+
+SetEnvironment sets Environment field to given value.
+
+### HasEnvironment
+
+`func (o *NetworkingV1NetworkSpecUpdate) HasEnvironment() bool`
+
+HasEnvironment returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

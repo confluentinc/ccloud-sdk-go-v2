@@ -31,14 +31,14 @@ import (
 
 // NetworkingV1PrivateLinkAccessSpec The desired state of the Private Link Access
 type NetworkingV1PrivateLinkAccessSpec struct {
-	// The name of the PrivateLink access.
+	// The name of the PrivateLink access
 	DisplayName *string `json:"display_name,omitempty"`
 	// The cloud-specific PrivateLink details.
 	Cloud *NetworkingV1PrivateLinkAccessSpecCloudOneOf `json:"cloud,omitempty"`
 	// The network for the PrivateLink access
 	Network *string `json:"network,omitempty"`
-	// The environment for the PrivateLink access
-	Environment *string `json:"environment,omitempty"`
+	// The environment to which this belongs.
+	Environment *ObjectReference `json:"environment,omitempty"`
 }
 
 // NewNetworkingV1PrivateLinkAccessSpec instantiates a new NetworkingV1PrivateLinkAccessSpec object
@@ -155,9 +155,9 @@ func (o *NetworkingV1PrivateLinkAccessSpec) SetNetwork(v string) {
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *NetworkingV1PrivateLinkAccessSpec) GetEnvironment() string {
+func (o *NetworkingV1PrivateLinkAccessSpec) GetEnvironment() ObjectReference {
 	if o == nil || o.Environment == nil {
-		var ret string
+		var ret ObjectReference
 		return ret
 	}
 	return *o.Environment
@@ -165,7 +165,7 @@ func (o *NetworkingV1PrivateLinkAccessSpec) GetEnvironment() string {
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1PrivateLinkAccessSpec) GetEnvironmentOk() (*string, bool) {
+func (o *NetworkingV1PrivateLinkAccessSpec) GetEnvironmentOk() (*ObjectReference, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -181,8 +181,8 @@ func (o *NetworkingV1PrivateLinkAccessSpec) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *NetworkingV1PrivateLinkAccessSpec) SetEnvironment(v string) {
+// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
+func (o *NetworkingV1PrivateLinkAccessSpec) SetEnvironment(v ObjectReference) {
 	o.Environment = &v
 }
 

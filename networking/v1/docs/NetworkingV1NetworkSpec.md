@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DisplayName** | Pointer to **string** | The name of the Network.  Must be unique per Confluent Cloud environment. | [optional] 
+**DisplayName** | Pointer to **string** | The name of the Network | [optional] 
 **Cloud** | Pointer to **string** | The cloud service provider in which the network exists. | [optional] 
 **Region** | Pointer to **string** | The service provider region where the cluster is running. | [optional] 
 **ConnectionTypes** | Pointer to [**NetworkingV1ConnectionTypes**](networking.v1.ConnectionTypes.md) |  | [optional] 
 **Cidr** | Pointer to **string** | The IPv4 CIDR block to used for this network.  Must be /16. Required for VPC peering and AWS TransitGateway. | [optional] 
 **Zones** | Pointer to **[]string** | The 3 availability zones for this network. They can optionally be specified for AWS networks used with PrivateLink. Otherwise, they are automatically chosen by Confluent Cloud.  On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3)  On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c).  On Azure, zones are Confluent-chosen names (e.g. 1, 2, 3) since Azure does not  have universal zone identifiers.  | [optional] 
-**Environment** | Pointer to **string** | The environment to use for this network | [optional] 
+**Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
 
@@ -183,20 +183,20 @@ HasZones returns a boolean if a field has been set.
 
 ### GetEnvironment
 
-`func (o *NetworkingV1NetworkSpec) GetEnvironment() string`
+`func (o *NetworkingV1NetworkSpec) GetEnvironment() ObjectReference`
 
 GetEnvironment returns the Environment field if non-nil, zero value otherwise.
 
 ### GetEnvironmentOk
 
-`func (o *NetworkingV1NetworkSpec) GetEnvironmentOk() (*string, bool)`
+`func (o *NetworkingV1NetworkSpec) GetEnvironmentOk() (*ObjectReference, bool)`
 
 GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnvironment
 
-`func (o *NetworkingV1NetworkSpec) SetEnvironment(v string)`
+`func (o *NetworkingV1NetworkSpec) SetEnvironment(v ObjectReference)`
 
 SetEnvironment sets Environment field to given value.
 
