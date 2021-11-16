@@ -540,8 +540,8 @@ type ApiListNetworkingV1PrivateLinkAccessesRequest struct {
 	ApiService *PrivateLinkAccessesNetworkingV1ApiService
 	environment *string
 	displayName *MultipleSearchFilter
-	network *MultipleSearchFilter
 	phase *MultipleSearchFilter
+	network *MultipleSearchFilter
 	pageSize *int32
 	pageToken *string
 }
@@ -556,14 +556,14 @@ func (r ApiListNetworkingV1PrivateLinkAccessesRequest) DisplayName(displayName M
 	r.displayName = &displayName
 	return r
 }
-// Filter the results by exact match for network. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PrivateLinkAccessesRequest) Network(network MultipleSearchFilter) ApiListNetworkingV1PrivateLinkAccessesRequest {
-	r.network = &network
-	return r
-}
 // Filter the results by exact match for phase. Pass multiple times to see results matching any of the values.
 func (r ApiListNetworkingV1PrivateLinkAccessesRequest) Phase(phase MultipleSearchFilter) ApiListNetworkingV1PrivateLinkAccessesRequest {
 	r.phase = &phase
+	return r
+}
+// Filter the results by exact match for network. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1PrivateLinkAccessesRequest) Network(network MultipleSearchFilter) ApiListNetworkingV1PrivateLinkAccessesRequest {
+	r.network = &network
 	return r
 }
 // A pagination size for collection requests.
@@ -627,13 +627,13 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) ListNetworkingV1PrivateLinkA
 	if r.displayName != nil {
 		localVarQueryParams.Add("display_name", parameterToString(*r.displayName, ""))
 	}
-	if r.network != nil {
-		localVarQueryParams.Add("network", parameterToString(*r.network, ""))
-	}
 	if r.phase != nil {
 		localVarQueryParams.Add("phase", parameterToString(*r.phase, ""))
 	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
+	if r.network != nil {
+		localVarQueryParams.Add("network", parameterToString(*r.network, ""))
+	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}

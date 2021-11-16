@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the TGW attachment | [optional] 
 **RamShareArn** | Pointer to **string** | The full AWS Resource Name (ARN) for the AWS Resource Access Manager (RAM) Share of the Transit Gateways that you want Confluent Cloud attached to | [optional] 
-**Network** | Pointer to **string** | The network to use for the Transit Gateway | [optional] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
+**Network** | Pointer to [**ObjectReference**](ObjectReference.md) | The network to which this belongs. | [optional] 
 
 ## Methods
 
@@ -78,31 +78,6 @@ SetRamShareArn sets RamShareArn field to given value.
 
 HasRamShareArn returns a boolean if a field has been set.
 
-### GetNetwork
-
-`func (o *NetworkingV1TransitGatewayAttachmentSpec) GetNetwork() string`
-
-GetNetwork returns the Network field if non-nil, zero value otherwise.
-
-### GetNetworkOk
-
-`func (o *NetworkingV1TransitGatewayAttachmentSpec) GetNetworkOk() (*string, bool)`
-
-GetNetworkOk returns a tuple with the Network field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNetwork
-
-`func (o *NetworkingV1TransitGatewayAttachmentSpec) SetNetwork(v string)`
-
-SetNetwork sets Network field to given value.
-
-### HasNetwork
-
-`func (o *NetworkingV1TransitGatewayAttachmentSpec) HasNetwork() bool`
-
-HasNetwork returns a boolean if a field has been set.
-
 ### GetEnvironment
 
 `func (o *NetworkingV1TransitGatewayAttachmentSpec) GetEnvironment() ObjectReference`
@@ -127,6 +102,31 @@ SetEnvironment sets Environment field to given value.
 `func (o *NetworkingV1TransitGatewayAttachmentSpec) HasEnvironment() bool`
 
 HasEnvironment returns a boolean if a field has been set.
+
+### GetNetwork
+
+`func (o *NetworkingV1TransitGatewayAttachmentSpec) GetNetwork() ObjectReference`
+
+GetNetwork returns the Network field if non-nil, zero value otherwise.
+
+### GetNetworkOk
+
+`func (o *NetworkingV1TransitGatewayAttachmentSpec) GetNetworkOk() (*ObjectReference, bool)`
+
+GetNetworkOk returns a tuple with the Network field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetwork
+
+`func (o *NetworkingV1TransitGatewayAttachmentSpec) SetNetwork(v ObjectReference)`
+
+SetNetwork sets Network field to given value.
+
+### HasNetwork
+
+`func (o *NetworkingV1TransitGatewayAttachmentSpec) HasNetwork() bool`
+
+HasNetwork returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

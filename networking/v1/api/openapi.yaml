@@ -35,7 +35,6 @@ tags:
 
     | Quota | Description |
     | --- | --- |
-    | `dedicated_networks_per_organization` | Number of dedicated networks per Confluent Cloud organization |
     | `dedicated_networks_per_environment` | Number of dedicated networks per Confluent Cloud environment |
   name: Networks (networking/v1)
 - description: |-
@@ -1612,17 +1611,6 @@ paths:
         schema:
           $ref: '#/components/schemas/MultipleSearchFilter'
         style: form
-      - description: Filter the results by exact match for network. Pass multiple
-          times to see results matching any of the values.
-        example:
-        - n-000000
-        explode: true
-        in: query
-        name: network
-        required: false
-        schema:
-          $ref: '#/components/schemas/MultipleSearchFilter'
-        style: form
       - description: Filter the results by exact match for phase. Pass multiple times
           to see results matching any of the values.
         example:
@@ -1643,6 +1631,18 @@ paths:
         required: true
         schema:
           $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: Filter the results by exact match for network. Pass multiple
+          times to see results matching any of the values.
+        example:
+        - n-00000
+        - n-00001
+        explode: true
+        in: query
+        name: network
+        required: false
+        schema:
+          $ref: '#/components/schemas/MultipleSearchFilter'
         style: form
       - description: A pagination size for collection requests.
         explode: true
@@ -1793,14 +1793,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/peerings?display_name=SOME_ARRAY_VALUE&network=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/networking/v1/peerings?display_name=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/peerings?display_name=SOME_ARRAY_VALUE&network=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/networking/v1/peerings?display_name=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1808,7 +1808,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/peerings?display_name=SOME_ARRAY_VALUE&network=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/peerings?display_name=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1821,7 +1821,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/peerings?display_name=SOME_ARRAY_VALUE&network=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/networking/v1/peerings?display_name=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1835,7 +1835,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/peerings?display_name=SOME_ARRAY_VALUE&network=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/networking/v1/peerings?display_name=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1860,7 +1860,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/peerings?display_name=SOME_ARRAY_VALUE&network=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/peerings?display_name=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1869,7 +1869,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/peerings?display_name=SOME_ARRAY_VALUE&network=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/peerings?display_name=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -2098,13 +2098,13 @@ paths:
             --url https://api.confluent.cloud/networking/v1/peerings \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-peering-use1","cloud":{"kind":"AwsPeering","account":"000000000000","vpc":"vpc-00000000000000000","routes":["10.108.16.0/21"],"customer_region":"us-east-1"},"network":"n-000000","environment":{"id":"env-00000","related":"https://api.confluent.cloud/v2/environments/env-00000","resource_name":"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000"}}}'
+            --data '{"spec":{"display_name":"prod-peering-use1","cloud":{"kind":"AwsPeering","account":"000000000000","vpc":"vpc-00000000000000000","routes":["10.108.16.0/21"],"customer_region":"us-east-1"},"environment":{"id":"env-00000","related":"https://api.confluent.cloud/v2/environments/env-00000","resource_name":"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000"},"network":{"id":"n-00000","related":"https://api.confluent.cloud/networking/v1/networks/n-00000","resource_name":"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"network\":\"n-000000\",\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"},\"network\":{\"id\":\"n-00000\",\"related\":\"https://api.confluent.cloud/networking/v1/networks/n-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/peerings")
             .post(body)
@@ -2120,9 +2120,11 @@ paths:
           :\\\"prod-peering-use1\\\",\\\"cloud\\\":{\\\"kind\\\":\\\"AwsPeering\\\"\
           ,\\\"account\\\":\\\"000000000000\\\",\\\"vpc\\\":\\\"vpc-00000000000000000\\\
           \",\\\"routes\\\":[\\\"10.108.16.0/21\\\"],\\\"customer_region\\\":\\\"\
-          us-east-1\\\"},\\\"network\\\":\\\"n-000000\\\",\\\"environment\\\":{\\\"\
-          id\\\":\\\"env-00000\\\",\\\"related\\\":\\\"https://api.confluent.cloud/v2/environments/env-00000\\\
-          \",\\\"resource_name\\\":\\\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\\\
+          us-east-1\\\"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"related\\\
+          \":\\\"https://api.confluent.cloud/v2/environments/env-00000\\\",\\\"resource_name\\\
+          \":\\\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\\\
+          \"},\\\"network\\\":{\\\"id\\\":\\\"n-00000\\\",\\\"related\\\":\\\"https://api.confluent.cloud/networking/v1/networks/n-00000\\\
+          \",\\\"resource_name\\\":\\\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000\\\
           \"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
           content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
           , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
@@ -2134,7 +2136,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"network\":\"n-000000\",\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"},\"network\":{\"id\":\"n-00000\",\"related\":\"https://api.confluent.cloud/networking/v1/networks/n-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -2185,11 +2187,15 @@ paths:
                 routes: ['10.108.16.0/21'],
                 customer_region: 'us-east-1'
               },
-              network: 'n-000000',
               environment: {
                 id: 'env-00000',
                 related: 'https://api.confluent.cloud/v2/environments/env-00000',
                 resource_name: 'crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000'
+              },
+              network: {
+                id: 'n-00000',
+                related: 'https://api.confluent.cloud/networking/v1/networks/n-00000',
+                resource_name: 'crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000'
               }
             }
           }));
@@ -2206,7 +2212,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"network\":\"n-000000\",\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"},\"network\":{\"id\":\"n-00000\",\"related\":\"https://api.confluent.cloud/networking/v1/networks/n-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -2215,7 +2221,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"network\":\"n-000000\",\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"},\"network\":{\"id\":\"n-00000\",\"related\":\"https://api.confluent.cloud/networking/v1/networks/n-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Networking v1
   /networking/v1/peerings/{id}:
@@ -2948,13 +2954,13 @@ paths:
             --url 'https://api.confluent.cloud/networking/v1/peerings/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-peering-use1","cloud":{"kind":"AwsPeering","account":"000000000000","vpc":"vpc-00000000000000000","routes":["10.108.16.0/21"],"customer_region":"us-east-1"},"network":"n-000000","environment":{"id":"env-00000","related":"https://api.confluent.cloud/v2/environments/env-00000","resource_name":"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000"}}}'
+            --data '{"spec":{"display_name":"prod-peering-use1","cloud":{"kind":"AwsPeering","account":"000000000000","vpc":"vpc-00000000000000000","routes":["10.108.16.0/21"],"customer_region":"us-east-1"},"environment":{"id":"env-00000","related":"https://api.confluent.cloud/v2/environments/env-00000","resource_name":"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000"},"network":{"id":"n-00000","related":"https://api.confluent.cloud/networking/v1/networks/n-00000","resource_name":"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"network\":\"n-000000\",\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"},\"network\":{\"id\":\"n-00000\",\"related\":\"https://api.confluent.cloud/networking/v1/networks/n-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/peerings/{id}")
             .patch(body)
@@ -2970,9 +2976,11 @@ paths:
           :\\\"prod-peering-use1\\\",\\\"cloud\\\":{\\\"kind\\\":\\\"AwsPeering\\\"\
           ,\\\"account\\\":\\\"000000000000\\\",\\\"vpc\\\":\\\"vpc-00000000000000000\\\
           \",\\\"routes\\\":[\\\"10.108.16.0/21\\\"],\\\"customer_region\\\":\\\"\
-          us-east-1\\\"},\\\"network\\\":\\\"n-000000\\\",\\\"environment\\\":{\\\"\
-          id\\\":\\\"env-00000\\\",\\\"related\\\":\\\"https://api.confluent.cloud/v2/environments/env-00000\\\
-          \",\\\"resource_name\\\":\\\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\\\
+          us-east-1\\\"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"related\\\
+          \":\\\"https://api.confluent.cloud/v2/environments/env-00000\\\",\\\"resource_name\\\
+          \":\\\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\\\
+          \"},\\\"network\\\":{\\\"id\\\":\\\"n-00000\\\",\\\"related\\\":\\\"https://api.confluent.cloud/networking/v1/networks/n-00000\\\
+          \",\\\"resource_name\\\":\\\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000\\\
           \"}}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
           content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
           , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
@@ -2984,7 +2992,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"network\":\"n-000000\",\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"},\"network\":{\"id\":\"n-00000\",\"related\":\"https://api.confluent.cloud/networking/v1/networks/n-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -3035,11 +3043,15 @@ paths:
                 routes: ['10.108.16.0/21'],
                 customer_region: 'us-east-1'
               },
-              network: 'n-000000',
               environment: {
                 id: 'env-00000',
                 related: 'https://api.confluent.cloud/v2/environments/env-00000',
                 resource_name: 'crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000'
+              },
+              network: {
+                id: 'n-00000',
+                related: 'https://api.confluent.cloud/networking/v1/networks/n-00000',
+                resource_name: 'crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000'
               }
             }
           }));
@@ -3056,7 +3068,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"network\":\"n-000000\",\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"},\"network\":{\"id\":\"n-00000\",\"related\":\"https://api.confluent.cloud/networking/v1/networks/n-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -3065,7 +3077,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"network\":\"n-000000\",\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"},\"network\":{\"id\":\"n-00000\",\"related\":\"https://api.confluent.cloud/networking/v1/networks/n-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Networking v1
   /networking/v1/transit-gateway-attachments:
@@ -3084,17 +3096,6 @@ paths:
         explode: true
         in: query
         name: display_name
-        required: false
-        schema:
-          $ref: '#/components/schemas/MultipleSearchFilter'
-        style: form
-      - description: Filter the results by exact match for network. Pass multiple
-          times to see results matching any of the values.
-        example:
-        - n-000000
-        explode: true
-        in: query
-        name: network
         required: false
         schema:
           $ref: '#/components/schemas/MultipleSearchFilter'
@@ -3119,6 +3120,18 @@ paths:
         required: true
         schema:
           $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: Filter the results by exact match for network. Pass multiple
+          times to see results matching any of the values.
+        example:
+        - n-00000
+        - n-00001
+        explode: true
+        in: query
+        name: network
+        required: false
+        schema:
+          $ref: '#/components/schemas/MultipleSearchFilter'
         style: form
       - description: A pagination size for collection requests.
         explode: true
@@ -3269,14 +3282,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/transit-gateway-attachments?display_name=SOME_ARRAY_VALUE&network=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/networking/v1/transit-gateway-attachments?display_name=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/transit-gateway-attachments?display_name=SOME_ARRAY_VALUE&network=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/networking/v1/transit-gateway-attachments?display_name=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -3284,7 +3297,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/transit-gateway-attachments?display_name=SOME_ARRAY_VALUE&network=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/transit-gateway-attachments?display_name=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -3297,7 +3310,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/transit-gateway-attachments?display_name=SOME_ARRAY_VALUE&network=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/networking/v1/transit-gateway-attachments?display_name=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -3311,7 +3324,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/transit-gateway-attachments?display_name=SOME_ARRAY_VALUE&network=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/networking/v1/transit-gateway-attachments?display_name=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -3336,7 +3349,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/transit-gateway-attachments?display_name=SOME_ARRAY_VALUE&network=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/transit-gateway-attachments?display_name=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -3345,7 +3358,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/transit-gateway-attachments?display_name=SOME_ARRAY_VALUE&network=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/transit-gateway-attachments?display_name=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -3638,17 +3651,6 @@ paths:
         schema:
           $ref: '#/components/schemas/MultipleSearchFilter'
         style: form
-      - description: Filter the results by exact match for network. Pass multiple
-          times to see results matching any of the values.
-        example:
-        - n-000000
-        explode: true
-        in: query
-        name: network
-        required: false
-        schema:
-          $ref: '#/components/schemas/MultipleSearchFilter'
-        style: form
       - description: Filter the results by exact match for phase. Pass multiple times
           to see results matching any of the values.
         example:
@@ -3669,6 +3671,18 @@ paths:
         required: true
         schema:
           $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: Filter the results by exact match for network. Pass multiple
+          times to see results matching any of the values.
+        example:
+        - n-00000
+        - n-00001
+        explode: true
+        in: query
+        name: network
+        required: false
+        schema:
+          $ref: '#/components/schemas/MultipleSearchFilter'
         style: form
       - description: A pagination size for collection requests.
         explode: true
@@ -3819,14 +3833,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/private-link-accesses?display_name=SOME_ARRAY_VALUE&network=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/networking/v1/private-link-accesses?display_name=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/private-link-accesses?display_name=SOME_ARRAY_VALUE&network=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/networking/v1/private-link-accesses?display_name=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -3834,7 +3848,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-accesses?display_name=SOME_ARRAY_VALUE&network=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-accesses?display_name=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -3847,7 +3861,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/private-link-accesses?display_name=SOME_ARRAY_VALUE&network=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/networking/v1/private-link-accesses?display_name=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -3861,7 +3875,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/private-link-accesses?display_name=SOME_ARRAY_VALUE&network=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/networking/v1/private-link-accesses?display_name=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -3886,7 +3900,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-accesses?display_name=SOME_ARRAY_VALUE&network=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-accesses?display_name=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -3895,7 +3909,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-accesses?display_name=SOME_ARRAY_VALUE&network=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-accesses?display_name=SOME_ARRAY_VALUE&phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -4124,13 +4138,13 @@ paths:
             --url https://api.confluent.cloud/networking/v1/private-link-accesses \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-pl-use1","cloud":{"kind":"AwsPrivateLinkAccess","account":"000000000000"},"network":"n-000000","environment":{"id":"env-00000","related":"https://api.confluent.cloud/v2/environments/env-00000","resource_name":"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000"}}}'
+            --data '{"spec":{"display_name":"prod-pl-use1","cloud":{"kind":"AwsPrivateLinkAccess","account":"000000000000"},"environment":{"id":"env-00000","related":"https://api.confluent.cloud/v2/environments/env-00000","resource_name":"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000"},"network":{"id":"n-00000","related":"https://api.confluent.cloud/networking/v1/networks/n-00000","resource_name":"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"network\":\"n-000000\",\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"},\"network\":{\"id\":\"n-00000\",\"related\":\"https://api.confluent.cloud/networking/v1/networks/n-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/private-link-accesses")
             .post(body)
@@ -4144,10 +4158,11 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-accesses\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"prod-pl-use1\\\",\\\"cloud\\\":{\\\"kind\\\":\\\"AwsPrivateLinkAccess\\\
-          \",\\\"account\\\":\\\"000000000000\\\"},\\\"network\\\":\\\"n-000000\\\"\
-          ,\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"related\\\":\\\"\
-          https://api.confluent.cloud/v2/environments/env-00000\\\",\\\"resource_name\\\
-          \":\\\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\\\
+          \",\\\"account\\\":\\\"000000000000\\\"},\\\"environment\\\":{\\\"id\\\"\
+          :\\\"env-00000\\\",\\\"related\\\":\\\"https://api.confluent.cloud/v2/environments/env-00000\\\
+          \",\\\"resource_name\\\":\\\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\\\
+          \"},\\\"network\\\":{\\\"id\\\":\\\"n-00000\\\",\\\"related\\\":\\\"https://api.confluent.cloud/networking/v1/networks/n-00000\\\
+          \",\\\"resource_name\\\":\\\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000\\\
           \"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
           content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
           , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
@@ -4159,7 +4174,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"network\":\"n-000000\",\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"},\"network\":{\"id\":\"n-00000\",\"related\":\"https://api.confluent.cloud/networking/v1/networks/n-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -4204,11 +4219,15 @@ paths:
             spec: {
               display_name: 'prod-pl-use1',
               cloud: {kind: 'AwsPrivateLinkAccess', account: '000000000000'},
-              network: 'n-000000',
               environment: {
                 id: 'env-00000',
                 related: 'https://api.confluent.cloud/v2/environments/env-00000',
                 resource_name: 'crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000'
+              },
+              network: {
+                id: 'n-00000',
+                related: 'https://api.confluent.cloud/networking/v1/networks/n-00000',
+                resource_name: 'crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000'
               }
             }
           }));
@@ -4225,7 +4244,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"network\":\"n-000000\",\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"},\"network\":{\"id\":\"n-00000\",\"related\":\"https://api.confluent.cloud/networking/v1/networks/n-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -4234,7 +4253,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"network\":\"n-000000\",\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"},\"network\":{\"id\":\"n-00000\",\"related\":\"https://api.confluent.cloud/networking/v1/networks/n-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Networking v1
   /networking/v1/private-link-accesses/{id}:
@@ -4967,13 +4986,13 @@ paths:
             --url 'https://api.confluent.cloud/networking/v1/private-link-accesses/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-pl-use1","cloud":{"kind":"AwsPrivateLinkAccess","account":"000000000000"},"network":"n-000000","environment":{"id":"env-00000","related":"https://api.confluent.cloud/v2/environments/env-00000","resource_name":"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000"}}}'
+            --data '{"spec":{"display_name":"prod-pl-use1","cloud":{"kind":"AwsPrivateLinkAccess","account":"000000000000"},"environment":{"id":"env-00000","related":"https://api.confluent.cloud/v2/environments/env-00000","resource_name":"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000"},"network":{"id":"n-00000","related":"https://api.confluent.cloud/networking/v1/networks/n-00000","resource_name":"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"network\":\"n-000000\",\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"},\"network\":{\"id\":\"n-00000\",\"related\":\"https://api.confluent.cloud/networking/v1/networks/n-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/private-link-accesses/{id}")
             .patch(body)
@@ -4987,10 +5006,11 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-accesses/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"prod-pl-use1\\\",\\\"cloud\\\":{\\\"kind\\\":\\\"AwsPrivateLinkAccess\\\
-          \",\\\"account\\\":\\\"000000000000\\\"},\\\"network\\\":\\\"n-000000\\\"\
-          ,\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"related\\\":\\\"\
-          https://api.confluent.cloud/v2/environments/env-00000\\\",\\\"resource_name\\\
-          \":\\\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\\\
+          \",\\\"account\\\":\\\"000000000000\\\"},\\\"environment\\\":{\\\"id\\\"\
+          :\\\"env-00000\\\",\\\"related\\\":\\\"https://api.confluent.cloud/v2/environments/env-00000\\\
+          \",\\\"resource_name\\\":\\\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\\\
+          \"},\\\"network\\\":{\\\"id\\\":\\\"n-00000\\\",\\\"related\\\":\\\"https://api.confluent.cloud/networking/v1/networks/n-00000\\\
+          \",\\\"resource_name\\\":\\\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000\\\
           \"}}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
           content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
           , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
@@ -5002,7 +5022,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"network\":\"n-000000\",\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"},\"network\":{\"id\":\"n-00000\",\"related\":\"https://api.confluent.cloud/networking/v1/networks/n-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -5047,11 +5067,15 @@ paths:
             spec: {
               display_name: 'prod-pl-use1',
               cloud: {kind: 'AwsPrivateLinkAccess', account: '000000000000'},
-              network: 'n-000000',
               environment: {
                 id: 'env-00000',
                 related: 'https://api.confluent.cloud/v2/environments/env-00000',
                 resource_name: 'crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000'
+              },
+              network: {
+                id: 'n-00000',
+                related: 'https://api.confluent.cloud/networking/v1/networks/n-00000',
+                resource_name: 'crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000'
               }
             }
           }));
@@ -5068,7 +5092,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"network\":\"n-000000\",\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"},\"network\":{\"id\":\"n-00000\",\"related\":\"https://api.confluent.cloud/networking/v1/networks/n-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -5077,7 +5101,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"network\":\"n-000000\",\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"},\"network\":{\"id\":\"n-00000\",\"related\":\"https://api.confluent.cloud/networking/v1/networks/n-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Networking v1
 components:
@@ -5271,7 +5295,6 @@ components:
 
         | Quota | Description |
         | --- | --- |
-        | `dedicated_networks_per_organization` | Number of dedicated networks per Confluent Cloud organization |
         | `dedicated_networks_per_environment` | Number of dedicated networks per Confluent Cloud environment |
       properties:
         api_version:
@@ -5890,7 +5913,6 @@ components:
 
         | Quota | Description |
         | --- | --- |
-        | `dedicated_networks_per_organization` | Number of dedicated networks per Confluent Cloud organization |
         | `dedicated_networks_per_environment` | Number of dedicated networks per Confluent Cloud environment |
       example:
         metadata: ""
@@ -6120,11 +6142,6 @@ components:
           type: object
           x-immutable: true
           x-one-of-name: NetworkingV1PeeringSpecCloudOneOf
-        network:
-          description: The network to use for the peering
-          example: n-000000
-          type: string
-          x-immutable: true
         environment:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
@@ -6135,6 +6152,17 @@ components:
             id: env-00000
             related: https://api.confluent.cloud/v2/environments/env-00000
             resource_name: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
+        network:
+          allOf:
+          - $ref: '#/components/schemas/ObjectReference'
+          - required:
+            - related
+          description: The network to which this belongs.
+          example:
+            id: n-00000
+            related: https://api.confluent.cloud/networking/v1/networks/n-00000
+            resource_name: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000
+          x-immutable: true
       type: object
       x-enable-id: true
       x-enable-listmeta: true
@@ -6227,11 +6255,6 @@ components:
           example: arn:aws:ram:eu-west-1:000000000000:resource-share/000000000
           minLength: 1
           type: string
-        network:
-          description: The network to use for the Transit Gateway
-          example: n-000000
-          type: string
-          x-immutable: true
         environment:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
@@ -6242,6 +6265,17 @@ components:
             id: env-00000
             related: https://api.confluent.cloud/v2/environments/env-00000
             resource_name: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
+        network:
+          allOf:
+          - $ref: '#/components/schemas/ObjectReference'
+          - required:
+            - related
+          description: The network to which this belongs.
+          example:
+            id: n-00000
+            related: https://api.confluent.cloud/networking/v1/networks/n-00000
+            resource_name: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000
+          x-immutable: true
       type: object
       x-enable-id: true
       x-enable-listmeta: true
@@ -6341,11 +6375,6 @@ components:
           type: object
           x-immutable: true
           x-one-of-name: NetworkingV1PrivateLinkAccessSpecCloudOneOf
-        network:
-          description: The network for the PrivateLink access
-          example: n-000000
-          type: string
-          x-immutable: true
         environment:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
@@ -6356,6 +6385,17 @@ components:
             id: env-00000
             related: https://api.confluent.cloud/v2/environments/env-00000
             resource_name: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
+        network:
+          allOf:
+          - $ref: '#/components/schemas/ObjectReference'
+          - required:
+            - related
+          description: The network to which this belongs.
+          example:
+            id: n-00000
+            related: https://api.confluent.cloud/networking/v1/networks/n-00000
+            resource_name: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000
+          x-immutable: true
       type: object
       x-enable-id: true
       x-enable-listmeta: true
@@ -6570,7 +6610,6 @@ components:
 
         | Quota | Description |
         | --- | --- |
-        | `dedicated_networks_per_organization` | Number of dedicated networks per Confluent Cloud organization |
         | `dedicated_networks_per_environment` | Number of dedicated networks per Confluent Cloud environment |
       properties:
         api_version:

@@ -540,8 +540,8 @@ type ApiListNetworkingV1PeeringsRequest struct {
 	ApiService *PeeringsNetworkingV1ApiService
 	environment *string
 	displayName *MultipleSearchFilter
-	network *MultipleSearchFilter
 	phase *MultipleSearchFilter
+	network *MultipleSearchFilter
 	pageSize *int32
 	pageToken *string
 }
@@ -556,14 +556,14 @@ func (r ApiListNetworkingV1PeeringsRequest) DisplayName(displayName MultipleSear
 	r.displayName = &displayName
 	return r
 }
-// Filter the results by exact match for network. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PeeringsRequest) Network(network MultipleSearchFilter) ApiListNetworkingV1PeeringsRequest {
-	r.network = &network
-	return r
-}
 // Filter the results by exact match for phase. Pass multiple times to see results matching any of the values.
 func (r ApiListNetworkingV1PeeringsRequest) Phase(phase MultipleSearchFilter) ApiListNetworkingV1PeeringsRequest {
 	r.phase = &phase
+	return r
+}
+// Filter the results by exact match for network. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1PeeringsRequest) Network(network MultipleSearchFilter) ApiListNetworkingV1PeeringsRequest {
+	r.network = &network
 	return r
 }
 // A pagination size for collection requests.
@@ -627,13 +627,13 @@ func (a *PeeringsNetworkingV1ApiService) ListNetworkingV1PeeringsExecute(r ApiLi
 	if r.displayName != nil {
 		localVarQueryParams.Add("display_name", parameterToString(*r.displayName, ""))
 	}
-	if r.network != nil {
-		localVarQueryParams.Add("network", parameterToString(*r.network, ""))
-	}
 	if r.phase != nil {
 		localVarQueryParams.Add("phase", parameterToString(*r.phase, ""))
 	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
+	if r.network != nil {
+		localVarQueryParams.Add("network", parameterToString(*r.network, ""))
+	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}

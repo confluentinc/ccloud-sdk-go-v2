@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the Peering | [optional] 
 **Cloud** | Pointer to [**NetworkingV1PeeringSpecCloudOneOf**](NetworkingV1PeeringSpecCloudOneOf.md) | The cloud-specific peering details. | [optional] 
-**Network** | Pointer to **string** | The network to use for the peering | [optional] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
+**Network** | Pointer to [**ObjectReference**](ObjectReference.md) | The network to which this belongs. | [optional] 
 
 ## Methods
 
@@ -78,31 +78,6 @@ SetCloud sets Cloud field to given value.
 
 HasCloud returns a boolean if a field has been set.
 
-### GetNetwork
-
-`func (o *NetworkingV1PeeringSpec) GetNetwork() string`
-
-GetNetwork returns the Network field if non-nil, zero value otherwise.
-
-### GetNetworkOk
-
-`func (o *NetworkingV1PeeringSpec) GetNetworkOk() (*string, bool)`
-
-GetNetworkOk returns a tuple with the Network field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNetwork
-
-`func (o *NetworkingV1PeeringSpec) SetNetwork(v string)`
-
-SetNetwork sets Network field to given value.
-
-### HasNetwork
-
-`func (o *NetworkingV1PeeringSpec) HasNetwork() bool`
-
-HasNetwork returns a boolean if a field has been set.
-
 ### GetEnvironment
 
 `func (o *NetworkingV1PeeringSpec) GetEnvironment() ObjectReference`
@@ -127,6 +102,31 @@ SetEnvironment sets Environment field to given value.
 `func (o *NetworkingV1PeeringSpec) HasEnvironment() bool`
 
 HasEnvironment returns a boolean if a field has been set.
+
+### GetNetwork
+
+`func (o *NetworkingV1PeeringSpec) GetNetwork() ObjectReference`
+
+GetNetwork returns the Network field if non-nil, zero value otherwise.
+
+### GetNetworkOk
+
+`func (o *NetworkingV1PeeringSpec) GetNetworkOk() (*ObjectReference, bool)`
+
+GetNetworkOk returns a tuple with the Network field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetwork
+
+`func (o *NetworkingV1PeeringSpec) SetNetwork(v ObjectReference)`
+
+SetNetwork sets Network field to given value.
+
+### HasNetwork
+
+`func (o *NetworkingV1PeeringSpec) HasNetwork() bool`
+
+HasNetwork returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

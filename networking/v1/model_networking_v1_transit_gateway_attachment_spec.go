@@ -35,10 +35,10 @@ type NetworkingV1TransitGatewayAttachmentSpec struct {
 	DisplayName *string `json:"display_name,omitempty"`
 	// The full AWS Resource Name (ARN) for the AWS Resource Access Manager (RAM) Share of the Transit Gateways that you want Confluent Cloud attached to
 	RamShareArn *string `json:"ram_share_arn,omitempty"`
-	// The network to use for the Transit Gateway
-	Network *string `json:"network,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
+	// The network to which this belongs.
+	Network *ObjectReference `json:"network,omitempty"`
 }
 
 // NewNetworkingV1TransitGatewayAttachmentSpec instantiates a new NetworkingV1TransitGatewayAttachmentSpec object
@@ -122,38 +122,6 @@ func (o *NetworkingV1TransitGatewayAttachmentSpec) SetRamShareArn(v string) {
 	o.RamShareArn = &v
 }
 
-// GetNetwork returns the Network field value if set, zero value otherwise.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) GetNetwork() string {
-	if o == nil || o.Network == nil {
-		var ret string
-		return ret
-	}
-	return *o.Network
-}
-
-// GetNetworkOk returns a tuple with the Network field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) GetNetworkOk() (*string, bool) {
-	if o == nil || o.Network == nil {
-		return nil, false
-	}
-	return o.Network, true
-}
-
-// HasNetwork returns a boolean if a field has been set.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) HasNetwork() bool {
-	if o != nil && o.Network != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetNetwork gets a reference to the given string and assigns it to the Network field.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) SetNetwork(v string) {
-	o.Network = &v
-}
-
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
 func (o *NetworkingV1TransitGatewayAttachmentSpec) GetEnvironment() ObjectReference {
 	if o == nil || o.Environment == nil {
@@ -186,6 +154,38 @@ func (o *NetworkingV1TransitGatewayAttachmentSpec) SetEnvironment(v ObjectRefere
 	o.Environment = &v
 }
 
+// GetNetwork returns the Network field value if set, zero value otherwise.
+func (o *NetworkingV1TransitGatewayAttachmentSpec) GetNetwork() ObjectReference {
+	if o == nil || o.Network == nil {
+		var ret ObjectReference
+		return ret
+	}
+	return *o.Network
+}
+
+// GetNetworkOk returns a tuple with the Network field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1TransitGatewayAttachmentSpec) GetNetworkOk() (*ObjectReference, bool) {
+	if o == nil || o.Network == nil {
+		return nil, false
+	}
+	return o.Network, true
+}
+
+// HasNetwork returns a boolean if a field has been set.
+func (o *NetworkingV1TransitGatewayAttachmentSpec) HasNetwork() bool {
+	if o != nil && o.Network != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNetwork gets a reference to the given ObjectReference and assigns it to the Network field.
+func (o *NetworkingV1TransitGatewayAttachmentSpec) SetNetwork(v ObjectReference) {
+	o.Network = &v
+}
+
 func (o NetworkingV1TransitGatewayAttachmentSpec) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.DisplayName != nil {
@@ -194,11 +194,11 @@ func (o NetworkingV1TransitGatewayAttachmentSpec) MarshalJSON() ([]byte, error) 
 	if o.RamShareArn != nil {
 		toSerialize["ram_share_arn"] = o.RamShareArn
 	}
-	if o.Network != nil {
-		toSerialize["network"] = o.Network
-	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
+	}
+	if o.Network != nil {
+		toSerialize["network"] = o.Network
 	}
 	return json.Marshal(toSerialize)
 }
