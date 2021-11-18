@@ -201,7 +201,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V2UserList**](V2UserList.md)
+[**V2UserList**](v2.UserList.md)
 
 ### Authorization
 

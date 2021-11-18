@@ -89,7 +89,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/v2.UserList'
+                allOf:
+                - $ref: '#/components/schemas/v2.UserList'
           description: User.
           headers:
             X-Request-Id:
@@ -984,13 +985,13 @@ paths:
             --url 'https://api.confluent.cloud/v2/users/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"email":"marty.mcfly@example.com","given_name":"Marty","family_name":"McFly"}'
+            --data '{"email":"marty.mcfly@example.com","full_name":"Marty McFly"}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"email\":\"marty.mcfly@example.com\",\"given_name\":\"Marty\",\"family_name\":\"McFly\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"email\":\"marty.mcfly@example.com\",\"full_name\":\"Marty McFly\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/v2/users/{id}")
             .patch(body)
@@ -1003,19 +1004,19 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/v2/users/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"email\\\":\\\"marty.mcfly@example.com\\\
-          \",\\\"given_name\\\":\\\"Marty\\\",\\\"family_name\\\":\\\"McFly\\\"}\"\
-          )\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \",\\\"full_name\\\":\\\"Marty McFly\\\"}\")\n\n\treq, _ := http.NewRequest(\"\
+          PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"email\":\"marty.mcfly@example.com\",\"given_name\":\"Marty\",\"family_name\":\"McFly\"}"
+          payload = "{\"email\":\"marty.mcfly@example.com\",\"full_name\":\"Marty McFly\"}"
 
           headers = {
               'content-type': "application/json",
@@ -1056,7 +1057,7 @@ paths:
             });
           });
 
-          req.write(JSON.stringify({email: 'marty.mcfly@example.com', given_name: 'Marty', family_name: 'McFly'}));
+          req.write(JSON.stringify({email: 'marty.mcfly@example.com', full_name: 'Marty McFly'}));
           req.end();
       - lang: C
         source: |-
@@ -1070,7 +1071,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"email\":\"marty.mcfly@example.com\",\"given_name\":\"Marty\",\"family_name\":\"McFly\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"email\":\"marty.mcfly@example.com\",\"full_name\":\"Marty McFly\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1079,7 +1080,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"email\":\"marty.mcfly@example.com\",\"given_name\":\"Marty\",\"family_name\":\"McFly\"}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"email\":\"marty.mcfly@example.com\",\"full_name\":\"Marty McFly\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Cloud v2
   /v2/service-accounts:
@@ -1115,7 +1116,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/v2.ServiceAccountList'
+                allOf:
+                - $ref: '#/components/schemas/v2.ServiceAccountList'
           description: Service Account.
           headers:
             X-Request-Id:
@@ -2597,8 +2599,21 @@ components:
   schemas:
     v2.User:
       additionalProperties: false
-      description: '`User` objects represent individuals who may access your Confluent
-        resources.'
+      description: |-
+        `User` objects represent individuals who may access your Confluent resources.
+
+        The API allows you to retrieve, update, and delete individual users, as well as list of all your
+        users. This API cannot be used to create new user accounts.
+
+
+        Related guide: [Users in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/user-account.html).
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `users_per_org` | Users in one Confluent Cloud organization |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -2637,19 +2652,29 @@ components:
           format: email
           type: string
           x-immutable: true
-        given_name:
-          description: The user's given name
-          example: Marty
-          type: string
-        family_name:
-          description: The user's family name
-          example: McFly
+        full_name:
+          description: The user's full name
+          example: Marty McFly
           type: string
       type: object
     v2.ServiceAccount:
       additionalProperties: false
-      description: '`ServiceAccount` objects are typically used to represent applications
-        and other non-human principals'
+      description: |-
+        `ServiceAccount` objects are typically used to represent applications and other non-human principals
+        that may access your Confluent resources.
+
+        The API allows you to create, retrieve, update, and delete individual service accounts, as well as
+        list all your service accounts.
+
+
+        Related guide: [Service Accounts in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/service-account.html).
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `service_accounts_per_org` | Service Accounts in one Confluent Cloud organization |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -2694,15 +2719,21 @@ components:
       type: object
     v2.UserList:
       additionalProperties: false
-      description: '`User` objects represent individuals who may access your Confluent
-        resources.'
-      example:
-        metadata: ""
-        data:
-        - ""
-        - ""
-        kind: UserList
-        api_version: v2
+      description: |-
+        `User` objects represent individuals who may access your Confluent resources.
+
+        The API allows you to retrieve, update, and delete individual users, as well as list of all your
+        users. This API cannot be used to create new user accounts.
+
+
+        Related guide: [Users in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/user-account.html).
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `users_per_org` | Users in one Confluent Cloud organization |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -2730,6 +2761,8 @@ components:
               next:
                 example: https://api.confluent.cloud/v2/users?page_token=UvmDWOB1iwfAIBPj6EYb
         data:
+          description: A data property that contains an array of resource items. Each
+            entry in the array is a separate resource.
           items:
             allOf:
             - $ref: '#/components/schemas/v2.User'
@@ -2748,15 +2781,22 @@ components:
       type: object
     v2.ServiceAccountList:
       additionalProperties: false
-      description: '`ServiceAccount` objects are typically used to represent applications
-        and other non-human principals'
-      example:
-        metadata: ""
-        data:
-        - ""
-        - ""
-        kind: ServiceAccountList
-        api_version: v2
+      description: |-
+        `ServiceAccount` objects are typically used to represent applications and other non-human principals
+        that may access your Confluent resources.
+
+        The API allows you to create, retrieve, update, and delete individual service accounts, as well as
+        list all your service accounts.
+
+
+        Related guide: [Service Accounts in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/service-account.html).
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `service_accounts_per_org` | Service Accounts in one Confluent Cloud organization |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -2784,6 +2824,8 @@ components:
               next:
                 example: https://api.confluent.cloud/v2/service-accounts?page_token=UvmDWOB1iwfAIBPj6EYb
         data:
+          description: A data property that contains an array of resource items. Each
+            entry in the array is a separate resource.
           items:
             allOf:
             - $ref: '#/components/schemas/v2.ServiceAccount'
@@ -2881,6 +2923,8 @@ components:
           nullable: true
           type: string
         total_size:
+          description: Number of records in the full result set. This response may
+            be paginated and have a smaller number of records.
           example: 123
           format: int32
           minimum: 0
@@ -2909,7 +2953,7 @@ components:
           type: string
         resource_name:
           description: CRN reference to the referred resource
-          format: crn
+          format: uri
           minLength: 1
           readOnly: true
           type: string
@@ -2934,6 +2978,7 @@ components:
         an operation.
       properties:
         errors:
+          description: List of errors which caused this operation to fail
           items:
             $ref: '#/components/schemas/Error'
           type: array
@@ -2970,8 +3015,21 @@ components:
       type: object
     v2.UserUpdate:
       additionalProperties: false
-      description: '`User` objects represent individuals who may access your Confluent
-        resources.'
+      description: |-
+        `User` objects represent individuals who may access your Confluent resources.
+
+        The API allows you to retrieve, update, and delete individual users, as well as list of all your
+        users. This API cannot be used to create new user accounts.
+
+
+        Related guide: [Users in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/user-account.html).
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `users_per_org` | Users in one Confluent Cloud organization |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -3004,19 +3062,29 @@ components:
                 example: https://api.confluent.cloud/v2/users/u-12345
               resource_name:
                 example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/user=u-12345
-        given_name:
-          description: The user's given name
-          example: Marty
-          type: string
-        family_name:
-          description: The user's family name
-          example: McFly
+        full_name:
+          description: The user's full name
+          example: Marty McFly
           type: string
       type: object
     v2.ServiceAccountUpdate:
       additionalProperties: false
-      description: '`ServiceAccount` objects are typically used to represent applications
-        and other non-human principals'
+      description: |-
+        `ServiceAccount` objects are typically used to represent applications and other non-human principals
+        that may access your Confluent resources.
+
+        The API allows you to create, retrieve, update, and delete individual service accounts, as well as
+        list all your service accounts.
+
+
+        Related guide: [Service Accounts in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/service-account.html).
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `service_accounts_per_org` | Service Accounts in one Confluent Cloud organization |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -3055,6 +3123,9 @@ components:
           type: string
       type: object
     Error_source:
+      description: If this error was caused by a particular part of the API request,
+        the source will point to the query string parameter or request body property
+        that caused it.
       properties:
         pointer:
           description: A JSON Pointer [RFC6901] to the associated entity in the request

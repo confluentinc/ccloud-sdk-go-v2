@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Errors** | [**[]Error**](Error.md) |  | 
+**Errors** | [**[]Error**](Error.md) | List of errors which caused this operation to fail | 
 
 ## Methods
 

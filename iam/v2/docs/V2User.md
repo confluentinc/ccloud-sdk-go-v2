@@ -9,8 +9,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
 **Email** | Pointer to **string** | The user&#39;s email address | [optional] 
-**GivenName** | Pointer to **string** | The user&#39;s given name | [optional] 
-**FamilyName** | Pointer to **string** | The user&#39;s family name | [optional] 
+**FullName** | Pointer to **string** | The user&#39;s full name | [optional] 
 
 ## Methods
 
@@ -156,55 +155,30 @@ SetEmail sets Email field to given value.
 
 HasEmail returns a boolean if a field has been set.
 
-### GetGivenName
+### GetFullName
 
-`func (o *V2User) GetGivenName() string`
+`func (o *V2User) GetFullName() string`
 
-GetGivenName returns the GivenName field if non-nil, zero value otherwise.
+GetFullName returns the FullName field if non-nil, zero value otherwise.
 
-### GetGivenNameOk
+### GetFullNameOk
 
-`func (o *V2User) GetGivenNameOk() (*string, bool)`
+`func (o *V2User) GetFullNameOk() (*string, bool)`
 
-GetGivenNameOk returns a tuple with the GivenName field if it's non-nil, zero value otherwise
+GetFullNameOk returns a tuple with the FullName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetGivenName
+### SetFullName
 
-`func (o *V2User) SetGivenName(v string)`
+`func (o *V2User) SetFullName(v string)`
 
-SetGivenName sets GivenName field to given value.
+SetFullName sets FullName field to given value.
 
-### HasGivenName
+### HasFullName
 
-`func (o *V2User) HasGivenName() bool`
+`func (o *V2User) HasFullName() bool`
 
-HasGivenName returns a boolean if a field has been set.
-
-### GetFamilyName
-
-`func (o *V2User) GetFamilyName() string`
-
-GetFamilyName returns the FamilyName field if non-nil, zero value otherwise.
-
-### GetFamilyNameOk
-
-`func (o *V2User) GetFamilyNameOk() (*string, bool)`
-
-GetFamilyNameOk returns a tuple with the FamilyName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFamilyName
-
-`func (o *V2User) SetFamilyName(v string)`
-
-SetFamilyName sets FamilyName field to given value.
-
-### HasFamilyName
-
-`func (o *V2User) HasFamilyName() bool`
-
-HasFamilyName returns a boolean if a field has been set.
+HasFullName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

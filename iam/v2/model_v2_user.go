@@ -29,7 +29,7 @@ import (
 	"encoding/json"
 )
 
-// V2User `User` objects represent individuals who may access your Confluent resources.
+// V2User `User` objects represent individuals who may access your Confluent resources.  The API allows you to retrieve, update, and delete individual users, as well as list of all your users. This API cannot be used to create new user accounts.   Related guide: [Users in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/user-account.html).  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `users_per_org` | Users in one Confluent Cloud organization |
 type V2User struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
@@ -40,10 +40,8 @@ type V2User struct {
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
 	// The user's email address
 	Email *string `json:"email,omitempty"`
-	// The user's given name
-	GivenName *string `json:"given_name,omitempty"`
-	// The user's family name
-	FamilyName *string `json:"family_name,omitempty"`
+	// The user's full name
+	FullName *string `json:"full_name,omitempty"`
 }
 
 // NewV2User instantiates a new V2User object
@@ -223,68 +221,36 @@ func (o *V2User) SetEmail(v string) {
 	o.Email = &v
 }
 
-// GetGivenName returns the GivenName field value if set, zero value otherwise.
-func (o *V2User) GetGivenName() string {
-	if o == nil || o.GivenName == nil {
+// GetFullName returns the FullName field value if set, zero value otherwise.
+func (o *V2User) GetFullName() string {
+	if o == nil || o.FullName == nil {
 		var ret string
 		return ret
 	}
-	return *o.GivenName
+	return *o.FullName
 }
 
-// GetGivenNameOk returns a tuple with the GivenName field value if set, nil otherwise
+// GetFullNameOk returns a tuple with the FullName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V2User) GetGivenNameOk() (*string, bool) {
-	if o == nil || o.GivenName == nil {
+func (o *V2User) GetFullNameOk() (*string, bool) {
+	if o == nil || o.FullName == nil {
 		return nil, false
 	}
-	return o.GivenName, true
+	return o.FullName, true
 }
 
-// HasGivenName returns a boolean if a field has been set.
-func (o *V2User) HasGivenName() bool {
-	if o != nil && o.GivenName != nil {
+// HasFullName returns a boolean if a field has been set.
+func (o *V2User) HasFullName() bool {
+	if o != nil && o.FullName != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetGivenName gets a reference to the given string and assigns it to the GivenName field.
-func (o *V2User) SetGivenName(v string) {
-	o.GivenName = &v
-}
-
-// GetFamilyName returns the FamilyName field value if set, zero value otherwise.
-func (o *V2User) GetFamilyName() string {
-	if o == nil || o.FamilyName == nil {
-		var ret string
-		return ret
-	}
-	return *o.FamilyName
-}
-
-// GetFamilyNameOk returns a tuple with the FamilyName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *V2User) GetFamilyNameOk() (*string, bool) {
-	if o == nil || o.FamilyName == nil {
-		return nil, false
-	}
-	return o.FamilyName, true
-}
-
-// HasFamilyName returns a boolean if a field has been set.
-func (o *V2User) HasFamilyName() bool {
-	if o != nil && o.FamilyName != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetFamilyName gets a reference to the given string and assigns it to the FamilyName field.
-func (o *V2User) SetFamilyName(v string) {
-	o.FamilyName = &v
+// SetFullName gets a reference to the given string and assigns it to the FullName field.
+func (o *V2User) SetFullName(v string) {
+	o.FullName = &v
 }
 
 func (o V2User) MarshalJSON() ([]byte, error) {
@@ -304,11 +270,8 @@ func (o V2User) MarshalJSON() ([]byte, error) {
 	if o.Email != nil {
 		toSerialize["email"] = o.Email
 	}
-	if o.GivenName != nil {
-		toSerialize["given_name"] = o.GivenName
-	}
-	if o.FamilyName != nil {
-		toSerialize["family_name"] = o.FamilyName
+	if o.FullName != nil {
+		toSerialize["full_name"] = o.FullName
 	}
 	return json.Marshal(toSerialize)
 }

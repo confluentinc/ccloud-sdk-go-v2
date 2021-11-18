@@ -29,13 +29,14 @@ import (
 	"encoding/json"
 )
 
-// V2UserList `User` objects represent individuals who may access your Confluent resources.
+// V2UserList `User` objects represent individuals who may access your Confluent resources.  The API allows you to retrieve, update, and delete individual users, as well as list of all your users. This API cannot be used to create new user accounts.   Related guide: [Users in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/user-account.html).  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `users_per_org` | Users in one Confluent Cloud organization |
 type V2UserList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version"`
 	// Kind defines the object this REST resource represents.
 	Kind string `json:"kind"`
 	Metadata ListMeta `json:"metadata"`
+	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
 	Data []V2User `json:"data"`
 }
 

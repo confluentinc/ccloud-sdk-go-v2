@@ -268,7 +268,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V2ServiceAccountList**](V2ServiceAccountList.md)
+[**V2ServiceAccountList**](v2.ServiceAccountList.md)
 
 ### Authorization
 

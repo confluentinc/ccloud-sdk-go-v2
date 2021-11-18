@@ -29,7 +29,7 @@ import (
 	"encoding/json"
 )
 
-// V2UserUpdate `User` objects represent individuals who may access your Confluent resources.
+// V2UserUpdate `User` objects represent individuals who may access your Confluent resources.  The API allows you to retrieve, update, and delete individual users, as well as list of all your users. This API cannot be used to create new user accounts.   Related guide: [Users in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/user-account.html).  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `users_per_org` | Users in one Confluent Cloud organization |
 type V2UserUpdate struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
@@ -38,10 +38,8 @@ type V2UserUpdate struct {
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
 	Id *string `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
-	// The user's given name
-	GivenName *string `json:"given_name,omitempty"`
-	// The user's family name
-	FamilyName *string `json:"family_name,omitempty"`
+	// The user's full name
+	FullName *string `json:"full_name,omitempty"`
 }
 
 // NewV2UserUpdate instantiates a new V2UserUpdate object
@@ -189,68 +187,36 @@ func (o *V2UserUpdate) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
-// GetGivenName returns the GivenName field value if set, zero value otherwise.
-func (o *V2UserUpdate) GetGivenName() string {
-	if o == nil || o.GivenName == nil {
+// GetFullName returns the FullName field value if set, zero value otherwise.
+func (o *V2UserUpdate) GetFullName() string {
+	if o == nil || o.FullName == nil {
 		var ret string
 		return ret
 	}
-	return *o.GivenName
+	return *o.FullName
 }
 
-// GetGivenNameOk returns a tuple with the GivenName field value if set, nil otherwise
+// GetFullNameOk returns a tuple with the FullName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V2UserUpdate) GetGivenNameOk() (*string, bool) {
-	if o == nil || o.GivenName == nil {
+func (o *V2UserUpdate) GetFullNameOk() (*string, bool) {
+	if o == nil || o.FullName == nil {
 		return nil, false
 	}
-	return o.GivenName, true
+	return o.FullName, true
 }
 
-// HasGivenName returns a boolean if a field has been set.
-func (o *V2UserUpdate) HasGivenName() bool {
-	if o != nil && o.GivenName != nil {
+// HasFullName returns a boolean if a field has been set.
+func (o *V2UserUpdate) HasFullName() bool {
+	if o != nil && o.FullName != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetGivenName gets a reference to the given string and assigns it to the GivenName field.
-func (o *V2UserUpdate) SetGivenName(v string) {
-	o.GivenName = &v
-}
-
-// GetFamilyName returns the FamilyName field value if set, zero value otherwise.
-func (o *V2UserUpdate) GetFamilyName() string {
-	if o == nil || o.FamilyName == nil {
-		var ret string
-		return ret
-	}
-	return *o.FamilyName
-}
-
-// GetFamilyNameOk returns a tuple with the FamilyName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *V2UserUpdate) GetFamilyNameOk() (*string, bool) {
-	if o == nil || o.FamilyName == nil {
-		return nil, false
-	}
-	return o.FamilyName, true
-}
-
-// HasFamilyName returns a boolean if a field has been set.
-func (o *V2UserUpdate) HasFamilyName() bool {
-	if o != nil && o.FamilyName != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetFamilyName gets a reference to the given string and assigns it to the FamilyName field.
-func (o *V2UserUpdate) SetFamilyName(v string) {
-	o.FamilyName = &v
+// SetFullName gets a reference to the given string and assigns it to the FullName field.
+func (o *V2UserUpdate) SetFullName(v string) {
+	o.FullName = &v
 }
 
 func (o V2UserUpdate) MarshalJSON() ([]byte, error) {
@@ -267,11 +233,8 @@ func (o V2UserUpdate) MarshalJSON() ([]byte, error) {
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if o.GivenName != nil {
-		toSerialize["given_name"] = o.GivenName
-	}
-	if o.FamilyName != nil {
-		toSerialize["family_name"] = o.FamilyName
+	if o.FullName != nil {
+		toSerialize["full_name"] = o.FullName
 	}
 	return json.Marshal(toSerialize)
 }
