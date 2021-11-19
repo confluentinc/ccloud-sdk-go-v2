@@ -39,6 +39,7 @@ type ListMeta struct {
 	Prev NullableString `json:"prev,omitempty"`
 	// A link to the next page of results. If a response does not contain a next link, then there is no more data available.
 	Next NullableString `json:"next,omitempty"`
+	// Number of records in the full result set. This response may be paginated and have a smaller number of records.
 	TotalSize *int32 `json:"total_size,omitempty"`
 }
 

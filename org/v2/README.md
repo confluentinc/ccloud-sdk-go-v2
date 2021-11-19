@@ -79,11 +79,11 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*EnvironmentsV2Api* | [**CreateV2Environment**](docs/EnvironmentsV2Api.md#createv2environment) | **Post** /v2/environments | Create an Environment
-*EnvironmentsV2Api* | [**DeleteV2Environment**](docs/EnvironmentsV2Api.md#deletev2environment) | **Delete** /v2/environments/{id} | Delete an Environment
-*EnvironmentsV2Api* | [**GetV2Environment**](docs/EnvironmentsV2Api.md#getv2environment) | **Get** /v2/environments/{id} | Read an Environment
-*EnvironmentsV2Api* | [**ListV2Environments**](docs/EnvironmentsV2Api.md#listv2environments) | **Get** /v2/environments | List of Environments
-*EnvironmentsV2Api* | [**UpdateV2Environment**](docs/EnvironmentsV2Api.md#updatev2environment) | **Patch** /v2/environments/{id} | Update an Environment
+*EnvironmentsOrgV2Api* | [**CreateOrgV2Environment**](docs/EnvironmentsOrgV2Api.md#createorgv2environment) | **Post** /org/v2/environments | Create an Environment
+*EnvironmentsOrgV2Api* | [**DeleteOrgV2Environment**](docs/EnvironmentsOrgV2Api.md#deleteorgv2environment) | **Delete** /org/v2/environments/{id} | Delete an Environment
+*EnvironmentsOrgV2Api* | [**GetOrgV2Environment**](docs/EnvironmentsOrgV2Api.md#getorgv2environment) | **Get** /org/v2/environments/{id} | Read an Environment
+*EnvironmentsOrgV2Api* | [**ListOrgV2Environments**](docs/EnvironmentsOrgV2Api.md#listorgv2environments) | **Get** /org/v2/environments | List of Environments
+*EnvironmentsOrgV2Api* | [**UpdateOrgV2Environment**](docs/EnvironmentsOrgV2Api.md#updateorgv2environment) | **Patch** /org/v2/environments/{id} | Update an Environment
 
 
 ## Documentation For Models
@@ -94,8 +94,8 @@ Class | Method | HTTP request | Description
  - [ListMeta](docs/ListMeta.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
- - [V2Environment](docs/V2Environment.md)
- - [V2EnvironmentList](docs/V2EnvironmentList.md)
+ - [OrgV2Environment](docs/OrgV2Environment.md)
+ - [OrgV2EnvironmentList](docs/OrgV2EnvironmentList.md)
 
 
 ## Documentation For Authorization

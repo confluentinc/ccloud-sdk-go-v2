@@ -1,4 +1,4 @@
-# V2Environment
+# OrgV2Environment
 
 ## Properties
 
@@ -12,145 +12,145 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewV2Environment
+### NewOrgV2Environment
 
-`func NewV2Environment() *V2Environment`
+`func NewOrgV2Environment() *OrgV2Environment`
 
-NewV2Environment instantiates a new V2Environment object
+NewOrgV2Environment instantiates a new OrgV2Environment object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewV2EnvironmentWithDefaults
+### NewOrgV2EnvironmentWithDefaults
 
-`func NewV2EnvironmentWithDefaults() *V2Environment`
+`func NewOrgV2EnvironmentWithDefaults() *OrgV2Environment`
 
-NewV2EnvironmentWithDefaults instantiates a new V2Environment object
+NewOrgV2EnvironmentWithDefaults instantiates a new OrgV2Environment object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetApiVersion
 
-`func (o *V2Environment) GetApiVersion() string`
+`func (o *OrgV2Environment) GetApiVersion() string`
 
 GetApiVersion returns the ApiVersion field if non-nil, zero value otherwise.
 
 ### GetApiVersionOk
 
-`func (o *V2Environment) GetApiVersionOk() (*string, bool)`
+`func (o *OrgV2Environment) GetApiVersionOk() (*string, bool)`
 
 GetApiVersionOk returns a tuple with the ApiVersion field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetApiVersion
 
-`func (o *V2Environment) SetApiVersion(v string)`
+`func (o *OrgV2Environment) SetApiVersion(v string)`
 
 SetApiVersion sets ApiVersion field to given value.
 
 ### HasApiVersion
 
-`func (o *V2Environment) HasApiVersion() bool`
+`func (o *OrgV2Environment) HasApiVersion() bool`
 
 HasApiVersion returns a boolean if a field has been set.
 
 ### GetKind
 
-`func (o *V2Environment) GetKind() string`
+`func (o *OrgV2Environment) GetKind() string`
 
 GetKind returns the Kind field if non-nil, zero value otherwise.
 
 ### GetKindOk
 
-`func (o *V2Environment) GetKindOk() (*string, bool)`
+`func (o *OrgV2Environment) GetKindOk() (*string, bool)`
 
 GetKindOk returns a tuple with the Kind field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetKind
 
-`func (o *V2Environment) SetKind(v string)`
+`func (o *OrgV2Environment) SetKind(v string)`
 
 SetKind sets Kind field to given value.
 
 ### HasKind
 
-`func (o *V2Environment) HasKind() bool`
+`func (o *OrgV2Environment) HasKind() bool`
 
 HasKind returns a boolean if a field has been set.
 
 ### GetId
 
-`func (o *V2Environment) GetId() string`
+`func (o *OrgV2Environment) GetId() string`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *V2Environment) GetIdOk() (*string, bool)`
+`func (o *OrgV2Environment) GetIdOk() (*string, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *V2Environment) SetId(v string)`
+`func (o *OrgV2Environment) SetId(v string)`
 
 SetId sets Id field to given value.
 
 ### HasId
 
-`func (o *V2Environment) HasId() bool`
+`func (o *OrgV2Environment) HasId() bool`
 
 HasId returns a boolean if a field has been set.
 
 ### GetMetadata
 
-`func (o *V2Environment) GetMetadata() ObjectMeta`
+`func (o *OrgV2Environment) GetMetadata() ObjectMeta`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *V2Environment) GetMetadataOk() (*ObjectMeta, bool)`
+`func (o *OrgV2Environment) GetMetadataOk() (*ObjectMeta, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *V2Environment) SetMetadata(v ObjectMeta)`
+`func (o *OrgV2Environment) SetMetadata(v ObjectMeta)`
 
 SetMetadata sets Metadata field to given value.
 
 ### HasMetadata
 
-`func (o *V2Environment) HasMetadata() bool`
+`func (o *OrgV2Environment) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
 
 ### GetDisplayName
 
-`func (o *V2Environment) GetDisplayName() string`
+`func (o *OrgV2Environment) GetDisplayName() string`
 
 GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
 
 ### GetDisplayNameOk
 
-`func (o *V2Environment) GetDisplayNameOk() (*string, bool)`
+`func (o *OrgV2Environment) GetDisplayNameOk() (*string, bool)`
 
 GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDisplayName
 
-`func (o *V2Environment) SetDisplayName(v string)`
+`func (o *OrgV2Environment) SetDisplayName(v string)`
 
 SetDisplayName sets DisplayName field to given value.
 
 ### HasDisplayName
 
-`func (o *V2Environment) HasDisplayName() bool`
+`func (o *OrgV2Environment) HasDisplayName() bool`
 
 HasDisplayName returns a boolean if a field has been set.
 
