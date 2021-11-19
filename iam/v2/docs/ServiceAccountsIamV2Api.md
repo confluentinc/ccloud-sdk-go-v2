@@ -1,20 +1,20 @@
-# \ServiceAccountsV2Api
+# \ServiceAccountsIamV2Api
 
 All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateV2ServiceAccount**](ServiceAccountsV2Api.md#CreateV2ServiceAccount) | **Post** /v2/service-accounts | Create a Service Account
-[**DeleteV2ServiceAccount**](ServiceAccountsV2Api.md#DeleteV2ServiceAccount) | **Delete** /v2/service-accounts/{id} | Delete a Service Account
-[**GetV2ServiceAccount**](ServiceAccountsV2Api.md#GetV2ServiceAccount) | **Get** /v2/service-accounts/{id} | Read a Service Account
-[**ListV2ServiceAccounts**](ServiceAccountsV2Api.md#ListV2ServiceAccounts) | **Get** /v2/service-accounts | List of Service Accounts
-[**UpdateV2ServiceAccount**](ServiceAccountsV2Api.md#UpdateV2ServiceAccount) | **Patch** /v2/service-accounts/{id} | Update a Service Account
+[**CreateIamV2ServiceAccount**](ServiceAccountsIamV2Api.md#CreateIamV2ServiceAccount) | **Post** /iam/v2/service-accounts | Create a Service Account
+[**DeleteIamV2ServiceAccount**](ServiceAccountsIamV2Api.md#DeleteIamV2ServiceAccount) | **Delete** /iam/v2/service-accounts/{id} | Delete a Service Account
+[**GetIamV2ServiceAccount**](ServiceAccountsIamV2Api.md#GetIamV2ServiceAccount) | **Get** /iam/v2/service-accounts/{id} | Read a Service Account
+[**ListIamV2ServiceAccounts**](ServiceAccountsIamV2Api.md#ListIamV2ServiceAccounts) | **Get** /iam/v2/service-accounts | List of Service Accounts
+[**UpdateIamV2ServiceAccount**](ServiceAccountsIamV2Api.md#UpdateIamV2ServiceAccount) | **Patch** /iam/v2/service-accounts/{id} | Update a Service Account
 
 
 
-## CreateV2ServiceAccount
+## CreateIamV2ServiceAccount
 
-> V2ServiceAccount CreateV2ServiceAccount(ctx).V2ServiceAccount(v2ServiceAccount).Execute()
+> IamV2ServiceAccount CreateIamV2ServiceAccount(ctx).IamV2ServiceAccount(iamV2ServiceAccount).Execute()
 
 Create a Service Account
 
@@ -33,17 +33,17 @@ import (
 )
 
 func main() {
-    v2ServiceAccount := *openapiclient.NewV2ServiceAccount() // V2ServiceAccount |  (optional)
+    iamV2ServiceAccount := *openapiclient.NewIamV2ServiceAccount() // IamV2ServiceAccount |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ServiceAccountsV2Api.CreateV2ServiceAccount(context.Background()).V2ServiceAccount(v2ServiceAccount).Execute()
+    resp, r, err := api_client.ServiceAccountsIamV2Api.CreateIamV2ServiceAccount(context.Background()).IamV2ServiceAccount(iamV2ServiceAccount).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ServiceAccountsV2Api.CreateV2ServiceAccount``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ServiceAccountsIamV2Api.CreateIamV2ServiceAccount``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateV2ServiceAccount`: V2ServiceAccount
-    fmt.Fprintf(os.Stdout, "Response from `ServiceAccountsV2Api.CreateV2ServiceAccount`: %v\n", resp)
+    // response from `CreateIamV2ServiceAccount`: IamV2ServiceAccount
+    fmt.Fprintf(os.Stdout, "Response from `ServiceAccountsIamV2Api.CreateIamV2ServiceAccount`: %v\n", resp)
 }
 ```
 
@@ -53,16 +53,16 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateV2ServiceAccountRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateIamV2ServiceAccountRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **v2ServiceAccount** | [**V2ServiceAccount**](V2ServiceAccount.md) |  | 
+ **iamV2ServiceAccount** | [**IamV2ServiceAccount**](IamV2ServiceAccount.md) |  | 
 
 ### Return type
 
-[**V2ServiceAccount**](v2.ServiceAccount.md)
+[**IamV2ServiceAccount**](iam.v2.ServiceAccount.md)
 
 ### Authorization
 
@@ -78,9 +78,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteV2ServiceAccount
+## DeleteIamV2ServiceAccount
 
-> DeleteV2ServiceAccount(ctx, id).Execute()
+> DeleteIamV2ServiceAccount(ctx, id).Execute()
 
 Delete a Service Account
 
@@ -103,9 +103,9 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ServiceAccountsV2Api.DeleteV2ServiceAccount(context.Background(), id).Execute()
+    resp, r, err := api_client.ServiceAccountsIamV2Api.DeleteIamV2ServiceAccount(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ServiceAccountsV2Api.DeleteV2ServiceAccount``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ServiceAccountsIamV2Api.DeleteIamV2ServiceAccount``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -121,7 +121,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteV2ServiceAccountRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteIamV2ServiceAccountRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -146,9 +146,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetV2ServiceAccount
+## GetIamV2ServiceAccount
 
-> V2ServiceAccount GetV2ServiceAccount(ctx, id).Execute()
+> IamV2ServiceAccount GetIamV2ServiceAccount(ctx, id).Execute()
 
 Read a Service Account
 
@@ -171,13 +171,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ServiceAccountsV2Api.GetV2ServiceAccount(context.Background(), id).Execute()
+    resp, r, err := api_client.ServiceAccountsIamV2Api.GetIamV2ServiceAccount(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ServiceAccountsV2Api.GetV2ServiceAccount``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ServiceAccountsIamV2Api.GetIamV2ServiceAccount``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetV2ServiceAccount`: V2ServiceAccount
-    fmt.Fprintf(os.Stdout, "Response from `ServiceAccountsV2Api.GetV2ServiceAccount`: %v\n", resp)
+    // response from `GetIamV2ServiceAccount`: IamV2ServiceAccount
+    fmt.Fprintf(os.Stdout, "Response from `ServiceAccountsIamV2Api.GetIamV2ServiceAccount`: %v\n", resp)
 }
 ```
 
@@ -191,7 +191,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetV2ServiceAccountRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetIamV2ServiceAccountRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -200,7 +200,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V2ServiceAccount**](v2.ServiceAccount.md)
+[**IamV2ServiceAccount**](iam.v2.ServiceAccount.md)
 
 ### Authorization
 
@@ -216,9 +216,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ListV2ServiceAccounts
+## ListIamV2ServiceAccounts
 
-> V2ServiceAccountList ListV2ServiceAccounts(ctx).PageSize(pageSize).PageToken(pageToken).Execute()
+> IamV2ServiceAccountList ListIamV2ServiceAccounts(ctx).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Service Accounts
 
@@ -242,13 +242,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ServiceAccountsV2Api.ListV2ServiceAccounts(context.Background()).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.ServiceAccountsIamV2Api.ListIamV2ServiceAccounts(context.Background()).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ServiceAccountsV2Api.ListV2ServiceAccounts``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ServiceAccountsIamV2Api.ListIamV2ServiceAccounts``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListV2ServiceAccounts`: V2ServiceAccountList
-    fmt.Fprintf(os.Stdout, "Response from `ServiceAccountsV2Api.ListV2ServiceAccounts`: %v\n", resp)
+    // response from `ListIamV2ServiceAccounts`: IamV2ServiceAccountList
+    fmt.Fprintf(os.Stdout, "Response from `ServiceAccountsIamV2Api.ListIamV2ServiceAccounts`: %v\n", resp)
 }
 ```
 
@@ -258,7 +258,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListV2ServiceAccountsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListIamV2ServiceAccountsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -268,7 +268,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V2ServiceAccountList**](v2.ServiceAccountList.md)
+[**IamV2ServiceAccountList**](iam.v2.ServiceAccountList.md)
 
 ### Authorization
 
@@ -284,9 +284,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UpdateV2ServiceAccount
+## UpdateIamV2ServiceAccount
 
-> V2ServiceAccount UpdateV2ServiceAccount(ctx, id).V2ServiceAccountUpdate(v2ServiceAccountUpdate).Execute()
+> IamV2ServiceAccount UpdateIamV2ServiceAccount(ctx, id).IamV2ServiceAccountUpdate(iamV2ServiceAccountUpdate).Execute()
 
 Update a Service Account
 
@@ -306,17 +306,17 @@ import (
 
 func main() {
     id := "id_example" // string | The unique identifier for the service account.
-    v2ServiceAccountUpdate := *openapiclient.NewV2ServiceAccountUpdate() // V2ServiceAccountUpdate |  (optional)
+    iamV2ServiceAccountUpdate := *openapiclient.NewIamV2ServiceAccountUpdate() // IamV2ServiceAccountUpdate |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ServiceAccountsV2Api.UpdateV2ServiceAccount(context.Background(), id).V2ServiceAccountUpdate(v2ServiceAccountUpdate).Execute()
+    resp, r, err := api_client.ServiceAccountsIamV2Api.UpdateIamV2ServiceAccount(context.Background(), id).IamV2ServiceAccountUpdate(iamV2ServiceAccountUpdate).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ServiceAccountsV2Api.UpdateV2ServiceAccount``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ServiceAccountsIamV2Api.UpdateIamV2ServiceAccount``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UpdateV2ServiceAccount`: V2ServiceAccount
-    fmt.Fprintf(os.Stdout, "Response from `ServiceAccountsV2Api.UpdateV2ServiceAccount`: %v\n", resp)
+    // response from `UpdateIamV2ServiceAccount`: IamV2ServiceAccount
+    fmt.Fprintf(os.Stdout, "Response from `ServiceAccountsIamV2Api.UpdateIamV2ServiceAccount`: %v\n", resp)
 }
 ```
 
@@ -330,17 +330,17 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUpdateV2ServiceAccountRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiUpdateIamV2ServiceAccountRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **v2ServiceAccountUpdate** | [**V2ServiceAccountUpdate**](V2ServiceAccountUpdate.md) |  | 
+ **iamV2ServiceAccountUpdate** | [**IamV2ServiceAccountUpdate**](IamV2ServiceAccountUpdate.md) |  | 
 
 ### Return type
 
-[**V2ServiceAccount**](v2.ServiceAccount.md)
+[**IamV2ServiceAccount**](iam.v2.ServiceAccount.md)
 
 ### Authorization
 
