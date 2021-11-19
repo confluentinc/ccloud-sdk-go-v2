@@ -79,15 +79,15 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ServiceAccountsV2Api* | [**CreateV2ServiceAccount**](docs/ServiceAccountsV2Api.md#createv2serviceaccount) | **Post** /v2/service-accounts | Create a Service Account
-*ServiceAccountsV2Api* | [**DeleteV2ServiceAccount**](docs/ServiceAccountsV2Api.md#deletev2serviceaccount) | **Delete** /v2/service-accounts/{id} | Delete a Service Account
-*ServiceAccountsV2Api* | [**GetV2ServiceAccount**](docs/ServiceAccountsV2Api.md#getv2serviceaccount) | **Get** /v2/service-accounts/{id} | Read a Service Account
-*ServiceAccountsV2Api* | [**ListV2ServiceAccounts**](docs/ServiceAccountsV2Api.md#listv2serviceaccounts) | **Get** /v2/service-accounts | List of Service Accounts
-*ServiceAccountsV2Api* | [**UpdateV2ServiceAccount**](docs/ServiceAccountsV2Api.md#updatev2serviceaccount) | **Patch** /v2/service-accounts/{id} | Update a Service Account
-*UsersV2Api* | [**DeleteV2User**](docs/UsersV2Api.md#deletev2user) | **Delete** /v2/users/{id} | Delete a User
-*UsersV2Api* | [**GetV2User**](docs/UsersV2Api.md#getv2user) | **Get** /v2/users/{id} | Read a User
-*UsersV2Api* | [**ListV2Users**](docs/UsersV2Api.md#listv2users) | **Get** /v2/users | List of Users
-*UsersV2Api* | [**UpdateV2User**](docs/UsersV2Api.md#updatev2user) | **Patch** /v2/users/{id} | Update a User
+*ServiceAccountsIamV2Api* | [**CreateIamV2ServiceAccount**](docs/ServiceAccountsIamV2Api.md#createiamv2serviceaccount) | **Post** /iam/v2/service-accounts | Create a Service Account
+*ServiceAccountsIamV2Api* | [**DeleteIamV2ServiceAccount**](docs/ServiceAccountsIamV2Api.md#deleteiamv2serviceaccount) | **Delete** /iam/v2/service-accounts/{id} | Delete a Service Account
+*ServiceAccountsIamV2Api* | [**GetIamV2ServiceAccount**](docs/ServiceAccountsIamV2Api.md#getiamv2serviceaccount) | **Get** /iam/v2/service-accounts/{id} | Read a Service Account
+*ServiceAccountsIamV2Api* | [**ListIamV2ServiceAccounts**](docs/ServiceAccountsIamV2Api.md#listiamv2serviceaccounts) | **Get** /iam/v2/service-accounts | List of Service Accounts
+*ServiceAccountsIamV2Api* | [**UpdateIamV2ServiceAccount**](docs/ServiceAccountsIamV2Api.md#updateiamv2serviceaccount) | **Patch** /iam/v2/service-accounts/{id} | Update a Service Account
+*UsersIamV2Api* | [**DeleteIamV2User**](docs/UsersIamV2Api.md#deleteiamv2user) | **Delete** /iam/v2/users/{id} | Delete a User
+*UsersIamV2Api* | [**GetIamV2User**](docs/UsersIamV2Api.md#getiamv2user) | **Get** /iam/v2/users/{id} | Read a User
+*UsersIamV2Api* | [**ListIamV2Users**](docs/UsersIamV2Api.md#listiamv2users) | **Get** /iam/v2/users | List of Users
+*UsersIamV2Api* | [**UpdateIamV2User**](docs/UsersIamV2Api.md#updateiamv2user) | **Patch** /iam/v2/users/{id} | Update a User
 
 
 ## Documentation For Models
@@ -95,15 +95,15 @@ Class | Method | HTTP request | Description
  - [Error](docs/Error.md)
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
+ - [IamV2ServiceAccount](docs/IamV2ServiceAccount.md)
+ - [IamV2ServiceAccountList](docs/IamV2ServiceAccountList.md)
+ - [IamV2ServiceAccountUpdate](docs/IamV2ServiceAccountUpdate.md)
+ - [IamV2User](docs/IamV2User.md)
+ - [IamV2UserList](docs/IamV2UserList.md)
+ - [IamV2UserUpdate](docs/IamV2UserUpdate.md)
  - [ListMeta](docs/ListMeta.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
- - [V2ServiceAccount](docs/V2ServiceAccount.md)
- - [V2ServiceAccountList](docs/V2ServiceAccountList.md)
- - [V2ServiceAccountUpdate](docs/V2ServiceAccountUpdate.md)
- - [V2User](docs/V2User.md)
- - [V2UserList](docs/V2UserList.md)
- - [V2UserUpdate](docs/V2UserUpdate.md)
 
 
 ## Documentation For Authorization

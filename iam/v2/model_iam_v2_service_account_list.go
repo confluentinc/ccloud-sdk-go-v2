@@ -29,22 +29,23 @@ import (
 	"encoding/json"
 )
 
-// V2UserList `User` objects represent individuals who may access your Confluent resources.
-type V2UserList struct {
+// IamV2ServiceAccountList `ServiceAccount` objects are typically used to represent applications and other non-human principals that may access your Confluent resources.  The API allows you to create, retrieve, update, and delete individual service accounts, as well as list all your service accounts.   Related guide: [Service Accounts in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/service-account.html).  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `service_accounts_per_org` | Service Accounts in one Confluent Cloud organization |
+type IamV2ServiceAccountList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version"`
 	// Kind defines the object this REST resource represents.
 	Kind string `json:"kind"`
 	Metadata ListMeta `json:"metadata"`
-	Data []V2User `json:"data"`
+	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
+	Data []IamV2ServiceAccount `json:"data"`
 }
 
-// NewV2UserList instantiates a new V2UserList object
+// NewIamV2ServiceAccountList instantiates a new IamV2ServiceAccountList object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2UserList(apiVersion string, kind string, metadata ListMeta, data []V2User) *V2UserList {
-	this := V2UserList{}
+func NewIamV2ServiceAccountList(apiVersion string, kind string, metadata ListMeta, data []IamV2ServiceAccount) *IamV2ServiceAccountList {
+	this := IamV2ServiceAccountList{}
 	this.ApiVersion = apiVersion
 	this.Kind = kind
 	this.Metadata = metadata
@@ -52,16 +53,16 @@ func NewV2UserList(apiVersion string, kind string, metadata ListMeta, data []V2U
 	return &this
 }
 
-// NewV2UserListWithDefaults instantiates a new V2UserList object
+// NewIamV2ServiceAccountListWithDefaults instantiates a new IamV2ServiceAccountList object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewV2UserListWithDefaults() *V2UserList {
-	this := V2UserList{}
+func NewIamV2ServiceAccountListWithDefaults() *IamV2ServiceAccountList {
+	this := IamV2ServiceAccountList{}
 	return &this
 }
 
 // GetApiVersion returns the ApiVersion field value
-func (o *V2UserList) GetApiVersion() string {
+func (o *IamV2ServiceAccountList) GetApiVersion() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -72,7 +73,7 @@ func (o *V2UserList) GetApiVersion() string {
 
 // GetApiVersionOk returns a tuple with the ApiVersion field value
 // and a boolean to check if the value has been set.
-func (o *V2UserList) GetApiVersionOk() (*string, bool) {
+func (o *IamV2ServiceAccountList) GetApiVersionOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -80,12 +81,12 @@ func (o *V2UserList) GetApiVersionOk() (*string, bool) {
 }
 
 // SetApiVersion sets field value
-func (o *V2UserList) SetApiVersion(v string) {
+func (o *IamV2ServiceAccountList) SetApiVersion(v string) {
 	o.ApiVersion = v
 }
 
 // GetKind returns the Kind field value
-func (o *V2UserList) GetKind() string {
+func (o *IamV2ServiceAccountList) GetKind() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -96,7 +97,7 @@ func (o *V2UserList) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *V2UserList) GetKindOk() (*string, bool) {
+func (o *IamV2ServiceAccountList) GetKindOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -104,12 +105,12 @@ func (o *V2UserList) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *V2UserList) SetKind(v string) {
+func (o *IamV2ServiceAccountList) SetKind(v string) {
 	o.Kind = v
 }
 
 // GetMetadata returns the Metadata field value
-func (o *V2UserList) GetMetadata() ListMeta {
+func (o *IamV2ServiceAccountList) GetMetadata() ListMeta {
 	if o == nil {
 		var ret ListMeta
 		return ret
@@ -120,7 +121,7 @@ func (o *V2UserList) GetMetadata() ListMeta {
 
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
-func (o *V2UserList) GetMetadataOk() (*ListMeta, bool) {
+func (o *IamV2ServiceAccountList) GetMetadataOk() (*ListMeta, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -128,14 +129,14 @@ func (o *V2UserList) GetMetadataOk() (*ListMeta, bool) {
 }
 
 // SetMetadata sets field value
-func (o *V2UserList) SetMetadata(v ListMeta) {
+func (o *IamV2ServiceAccountList) SetMetadata(v ListMeta) {
 	o.Metadata = v
 }
 
 // GetData returns the Data field value
-func (o *V2UserList) GetData() []V2User {
+func (o *IamV2ServiceAccountList) GetData() []IamV2ServiceAccount {
 	if o == nil {
-		var ret []V2User
+		var ret []IamV2ServiceAccount
 		return ret
 	}
 
@@ -144,7 +145,7 @@ func (o *V2UserList) GetData() []V2User {
 
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
-func (o *V2UserList) GetDataOk() (*[]V2User, bool) {
+func (o *IamV2ServiceAccountList) GetDataOk() (*[]IamV2ServiceAccount, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -152,11 +153,11 @@ func (o *V2UserList) GetDataOk() (*[]V2User, bool) {
 }
 
 // SetData sets field value
-func (o *V2UserList) SetData(v []V2User) {
+func (o *IamV2ServiceAccountList) SetData(v []IamV2ServiceAccount) {
 	o.Data = v
 }
 
-func (o V2UserList) MarshalJSON() ([]byte, error) {
+func (o IamV2ServiceAccountList) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["api_version"] = o.ApiVersion
@@ -173,38 +174,38 @@ func (o V2UserList) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableV2UserList struct {
-	value *V2UserList
+type NullableIamV2ServiceAccountList struct {
+	value *IamV2ServiceAccountList
 	isSet bool
 }
 
-func (v NullableV2UserList) Get() *V2UserList {
+func (v NullableIamV2ServiceAccountList) Get() *IamV2ServiceAccountList {
 	return v.value
 }
 
-func (v *NullableV2UserList) Set(val *V2UserList) {
+func (v *NullableIamV2ServiceAccountList) Set(val *IamV2ServiceAccountList) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableV2UserList) IsSet() bool {
+func (v NullableIamV2ServiceAccountList) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableV2UserList) Unset() {
+func (v *NullableIamV2ServiceAccountList) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableV2UserList(val *V2UserList) *NullableV2UserList {
-	return &NullableV2UserList{value: val, isSet: true}
+func NewNullableIamV2ServiceAccountList(val *IamV2ServiceAccountList) *NullableIamV2ServiceAccountList {
+	return &NullableIamV2ServiceAccountList{value: val, isSet: true}
 }
 
-func (v NullableV2UserList) MarshalJSON() ([]byte, error) {
+func (v NullableIamV2ServiceAccountList) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableV2UserList) UnmarshalJSON(src []byte) error {
+func (v *NullableIamV2ServiceAccountList) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

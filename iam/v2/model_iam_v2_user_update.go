@@ -29,8 +29,8 @@ import (
 	"encoding/json"
 )
 
-// V2ServiceAccount `ServiceAccount` objects are typically used to represent applications and other non-human principals
-type V2ServiceAccount struct {
+// IamV2UserUpdate `User` objects represent individuals who may access your Confluent resources.  The API allows you to retrieve, update, and delete individual users, as well as list of all your users. This API cannot be used to create new user accounts.   Related guide: [Users in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/user-account.html).  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `users_per_org` | Users in one Confluent Cloud organization |
+type IamV2UserUpdate struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
@@ -38,31 +38,29 @@ type V2ServiceAccount struct {
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
 	Id *string `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
-	// A human-readable name for the Service Account
-	DisplayName *string `json:"display_name,omitempty"`
-	// A free-form description of the Service Account
-	Description *string `json:"description,omitempty"`
+	// The user's full name
+	FullName *string `json:"full_name,omitempty"`
 }
 
-// NewV2ServiceAccount instantiates a new V2ServiceAccount object
+// NewIamV2UserUpdate instantiates a new IamV2UserUpdate object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2ServiceAccount() *V2ServiceAccount {
-	this := V2ServiceAccount{}
+func NewIamV2UserUpdate() *IamV2UserUpdate {
+	this := IamV2UserUpdate{}
 	return &this
 }
 
-// NewV2ServiceAccountWithDefaults instantiates a new V2ServiceAccount object
+// NewIamV2UserUpdateWithDefaults instantiates a new IamV2UserUpdate object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewV2ServiceAccountWithDefaults() *V2ServiceAccount {
-	this := V2ServiceAccount{}
+func NewIamV2UserUpdateWithDefaults() *IamV2UserUpdate {
+	this := IamV2UserUpdate{}
 	return &this
 }
 
 // GetApiVersion returns the ApiVersion field value if set, zero value otherwise.
-func (o *V2ServiceAccount) GetApiVersion() string {
+func (o *IamV2UserUpdate) GetApiVersion() string {
 	if o == nil || o.ApiVersion == nil {
 		var ret string
 		return ret
@@ -72,7 +70,7 @@ func (o *V2ServiceAccount) GetApiVersion() string {
 
 // GetApiVersionOk returns a tuple with the ApiVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V2ServiceAccount) GetApiVersionOk() (*string, bool) {
+func (o *IamV2UserUpdate) GetApiVersionOk() (*string, bool) {
 	if o == nil || o.ApiVersion == nil {
 		return nil, false
 	}
@@ -80,7 +78,7 @@ func (o *V2ServiceAccount) GetApiVersionOk() (*string, bool) {
 }
 
 // HasApiVersion returns a boolean if a field has been set.
-func (o *V2ServiceAccount) HasApiVersion() bool {
+func (o *IamV2UserUpdate) HasApiVersion() bool {
 	if o != nil && o.ApiVersion != nil {
 		return true
 	}
@@ -89,12 +87,12 @@ func (o *V2ServiceAccount) HasApiVersion() bool {
 }
 
 // SetApiVersion gets a reference to the given string and assigns it to the ApiVersion field.
-func (o *V2ServiceAccount) SetApiVersion(v string) {
+func (o *IamV2UserUpdate) SetApiVersion(v string) {
 	o.ApiVersion = &v
 }
 
 // GetKind returns the Kind field value if set, zero value otherwise.
-func (o *V2ServiceAccount) GetKind() string {
+func (o *IamV2UserUpdate) GetKind() string {
 	if o == nil || o.Kind == nil {
 		var ret string
 		return ret
@@ -104,7 +102,7 @@ func (o *V2ServiceAccount) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V2ServiceAccount) GetKindOk() (*string, bool) {
+func (o *IamV2UserUpdate) GetKindOk() (*string, bool) {
 	if o == nil || o.Kind == nil {
 		return nil, false
 	}
@@ -112,7 +110,7 @@ func (o *V2ServiceAccount) GetKindOk() (*string, bool) {
 }
 
 // HasKind returns a boolean if a field has been set.
-func (o *V2ServiceAccount) HasKind() bool {
+func (o *IamV2UserUpdate) HasKind() bool {
 	if o != nil && o.Kind != nil {
 		return true
 	}
@@ -121,12 +119,12 @@ func (o *V2ServiceAccount) HasKind() bool {
 }
 
 // SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *V2ServiceAccount) SetKind(v string) {
+func (o *IamV2UserUpdate) SetKind(v string) {
 	o.Kind = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *V2ServiceAccount) GetId() string {
+func (o *IamV2UserUpdate) GetId() string {
 	if o == nil || o.Id == nil {
 		var ret string
 		return ret
@@ -136,7 +134,7 @@ func (o *V2ServiceAccount) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V2ServiceAccount) GetIdOk() (*string, bool) {
+func (o *IamV2UserUpdate) GetIdOk() (*string, bool) {
 	if o == nil || o.Id == nil {
 		return nil, false
 	}
@@ -144,7 +142,7 @@ func (o *V2ServiceAccount) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *V2ServiceAccount) HasId() bool {
+func (o *IamV2UserUpdate) HasId() bool {
 	if o != nil && o.Id != nil {
 		return true
 	}
@@ -153,12 +151,12 @@ func (o *V2ServiceAccount) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *V2ServiceAccount) SetId(v string) {
+func (o *IamV2UserUpdate) SetId(v string) {
 	o.Id = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *V2ServiceAccount) GetMetadata() ObjectMeta {
+func (o *IamV2UserUpdate) GetMetadata() ObjectMeta {
 	if o == nil || o.Metadata == nil {
 		var ret ObjectMeta
 		return ret
@@ -168,7 +166,7 @@ func (o *V2ServiceAccount) GetMetadata() ObjectMeta {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V2ServiceAccount) GetMetadataOk() (*ObjectMeta, bool) {
+func (o *IamV2UserUpdate) GetMetadataOk() (*ObjectMeta, bool) {
 	if o == nil || o.Metadata == nil {
 		return nil, false
 	}
@@ -176,7 +174,7 @@ func (o *V2ServiceAccount) GetMetadataOk() (*ObjectMeta, bool) {
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *V2ServiceAccount) HasMetadata() bool {
+func (o *IamV2UserUpdate) HasMetadata() bool {
 	if o != nil && o.Metadata != nil {
 		return true
 	}
@@ -185,75 +183,43 @@ func (o *V2ServiceAccount) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given ObjectMeta and assigns it to the Metadata field.
-func (o *V2ServiceAccount) SetMetadata(v ObjectMeta) {
+func (o *IamV2UserUpdate) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
-// GetDisplayName returns the DisplayName field value if set, zero value otherwise.
-func (o *V2ServiceAccount) GetDisplayName() string {
-	if o == nil || o.DisplayName == nil {
+// GetFullName returns the FullName field value if set, zero value otherwise.
+func (o *IamV2UserUpdate) GetFullName() string {
+	if o == nil || o.FullName == nil {
 		var ret string
 		return ret
 	}
-	return *o.DisplayName
+	return *o.FullName
 }
 
-// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
+// GetFullNameOk returns a tuple with the FullName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V2ServiceAccount) GetDisplayNameOk() (*string, bool) {
-	if o == nil || o.DisplayName == nil {
+func (o *IamV2UserUpdate) GetFullNameOk() (*string, bool) {
+	if o == nil || o.FullName == nil {
 		return nil, false
 	}
-	return o.DisplayName, true
+	return o.FullName, true
 }
 
-// HasDisplayName returns a boolean if a field has been set.
-func (o *V2ServiceAccount) HasDisplayName() bool {
-	if o != nil && o.DisplayName != nil {
+// HasFullName returns a boolean if a field has been set.
+func (o *IamV2UserUpdate) HasFullName() bool {
+	if o != nil && o.FullName != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
-func (o *V2ServiceAccount) SetDisplayName(v string) {
-	o.DisplayName = &v
+// SetFullName gets a reference to the given string and assigns it to the FullName field.
+func (o *IamV2UserUpdate) SetFullName(v string) {
+	o.FullName = &v
 }
 
-// GetDescription returns the Description field value if set, zero value otherwise.
-func (o *V2ServiceAccount) GetDescription() string {
-	if o == nil || o.Description == nil {
-		var ret string
-		return ret
-	}
-	return *o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *V2ServiceAccount) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
-	}
-	return o.Description, true
-}
-
-// HasDescription returns a boolean if a field has been set.
-func (o *V2ServiceAccount) HasDescription() bool {
-	if o != nil && o.Description != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *V2ServiceAccount) SetDescription(v string) {
-	o.Description = &v
-}
-
-func (o V2ServiceAccount) MarshalJSON() ([]byte, error) {
+func (o IamV2UserUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ApiVersion != nil {
 		toSerialize["api_version"] = o.ApiVersion
@@ -267,47 +233,44 @@ func (o V2ServiceAccount) MarshalJSON() ([]byte, error) {
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if o.DisplayName != nil {
-		toSerialize["display_name"] = o.DisplayName
-	}
-	if o.Description != nil {
-		toSerialize["description"] = o.Description
+	if o.FullName != nil {
+		toSerialize["full_name"] = o.FullName
 	}
 	return json.Marshal(toSerialize)
 }
 
-type NullableV2ServiceAccount struct {
-	value *V2ServiceAccount
+type NullableIamV2UserUpdate struct {
+	value *IamV2UserUpdate
 	isSet bool
 }
 
-func (v NullableV2ServiceAccount) Get() *V2ServiceAccount {
+func (v NullableIamV2UserUpdate) Get() *IamV2UserUpdate {
 	return v.value
 }
 
-func (v *NullableV2ServiceAccount) Set(val *V2ServiceAccount) {
+func (v *NullableIamV2UserUpdate) Set(val *IamV2UserUpdate) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableV2ServiceAccount) IsSet() bool {
+func (v NullableIamV2UserUpdate) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableV2ServiceAccount) Unset() {
+func (v *NullableIamV2UserUpdate) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableV2ServiceAccount(val *V2ServiceAccount) *NullableV2ServiceAccount {
-	return &NullableV2ServiceAccount{value: val, isSet: true}
+func NewNullableIamV2UserUpdate(val *IamV2UserUpdate) *NullableIamV2UserUpdate {
+	return &NullableIamV2UserUpdate{value: val, isSet: true}
 }
 
-func (v NullableV2ServiceAccount) MarshalJSON() ([]byte, error) {
+func (v NullableIamV2UserUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableV2ServiceAccount) UnmarshalJSON(src []byte) error {
+func (v *NullableIamV2UserUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
