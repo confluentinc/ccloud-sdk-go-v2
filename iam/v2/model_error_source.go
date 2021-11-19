@@ -29,7 +29,7 @@ import (
 	"encoding/json"
 )
 
-// ErrorSource struct for ErrorSource
+// ErrorSource If this error was caused by a particular part of the API request, the source will point to the query string parameter or request body property that caused it.
 type ErrorSource struct {
 	// A JSON Pointer [RFC6901] to the associated entity in the request document [e.g. \"/spec\" for a spec object, or \"/spec/title\" for a specific field].
 	Pointer *string `json:"pointer,omitempty"`
