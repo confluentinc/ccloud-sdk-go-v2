@@ -7,8 +7,9 @@ info:
   title: Organization Management API
   version: 0.0.1-alpha0
   x-api-id: 01c617d8-2acd-4920-8567-045bf3b224db
-  x-api-group: v2
+  x-api-group: org/v2
   x-audience: external-public
+  x-tag-group: Org API (%s)
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
@@ -18,7 +19,7 @@ servers:
   url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+v2-early-access@confluent.io?subject=Request%20to%20join%20v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
     `Environment` objects represent an isolated namespace for your Confluent resources
     for organizational purposes.
@@ -35,15 +36,15 @@ tags:
     | Quota | Description |
     | --- | --- |
     | `environments_per_org` | Environments in one Confluent Cloud organization |
-  name: Environments (v2)
+  name: Environments (org/v2)
 paths:
-  /v2/environments:
+  /org/v2/environments:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+v2-early-access@confluent.io?subject=Request%20to%20join%20v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Retrieve a sorted, filtered, paginated list of all environments.
-      operationId: listV2Environments
+      operationId: listOrgV2Environments
       parameters:
       - description: A pagination size for collection requests.
         explode: true
@@ -70,7 +71,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/v2.EnvironmentList'
+                allOf:
+                - $ref: '#/components/schemas/org.v2.EnvironmentList'
           description: Environment.
           headers:
             X-Request-Id:
@@ -188,20 +190,20 @@ paths:
       - api-key: []
       summary: List of Environments
       tags:
-      - Environments (v2)
+      - Environments (org/v2)
       x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/v2/environments?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/org/v2/environments?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/v2/environments?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/org/v2/environments?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -209,7 +211,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/v2/environments?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/environments?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -222,7 +224,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/v2/environments?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/org/v2/environments?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -236,7 +238,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/v2/environments?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/org/v2/environments?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -261,7 +263,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/v2/environments?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/environments?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -270,27 +272,35 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/v2/environments?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/org/v2/environments?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+v2-early-access@confluent.io?subject=Request%20to%20join%20v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to create an environment.
-      operationId: createV2Environment
+      operationId: createOrgV2Environment
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/v2.Environment'
+              allOf:
+              - $ref: '#/components/schemas/org.v2.Environment'
+              - required:
+                - display_name
+                type: object
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/v2.Environment'
+                allOf:
+                - $ref: '#/components/schemas/org.v2.Environment'
+                - required:
+                  - display_name
+                  type: object
           description: An Environment was created.
           headers:
             X-Request-Id:
@@ -303,7 +313,7 @@ paths:
               description: Environment resource uri
               explode: false
               schema:
-                example: https://api.confluent.cloud/v2/environments/{id}
+                example: https://api.confluent.cloud/org/v2/environments/{id}
                 format: uri
                 type: string
               style: simple
@@ -467,13 +477,13 @@ paths:
       - api-key: []
       summary: Create an Environment
       tags:
-      - Environments (v2)
+      - Environments (org/v2)
       x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url https://api.confluent.cloud/v2/environments \
+            --url https://api.confluent.cloud/org/v2/environments \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"display_name":"prod-finance01"}'
@@ -484,7 +494,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"prod-finance01\"}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/v2/environments")
+            .url("https://api.confluent.cloud/org/v2/environments")
             .post(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -493,7 +503,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/v2/environments\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/environments\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"prod-finance01\\\
           \"}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
           content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
@@ -513,7 +523,7 @@ paths:
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("POST", "/v2/environments", payload, headers)
+          conn.request("POST", "/org/v2/environments", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -527,7 +537,7 @@ paths:
             "method": "POST",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/v2/environments",
+            "path": "/org/v2/environments",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -554,7 +564,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/v2/environments");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/environments");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -566,23 +576,23 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/v2/environments");
+          var client = new RestClient("https://api.confluent.cloud/org/v2/environments");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"display_name\":\"prod-finance01\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Cloud v2
-  /v2/environments/{id}:
+  /org/v2/environments/{id}:
     delete:
       description: |
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+v2-early-access@confluent.io?subject=Request%20to%20join%20v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to delete an environment.
 
         If successful, this request will also recursively delete all of the environment's associated resources,
         including all Kafka clusters, connectors, etc.
-      operationId: deleteV2Environment
+      operationId: deleteOrgV2Environment
       parameters:
       - description: The unique identifier for the environment.
         explode: false
@@ -729,20 +739,20 @@ paths:
       - api-key: []
       summary: Delete an Environment
       tags:
-      - Environments (v2)
+      - Environments (org/v2)
       x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/v2/environments/{id}' \
+            --url 'https://api.confluent.cloud/org/v2/environments/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/v2/environments/{id}")
+            .url("https://api.confluent.cloud/org/v2/environments/{id}")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -750,7 +760,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/v2/environments/{id}\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/environments/{id}\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -763,7 +773,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/v2/environments/{id}", headers=headers)
+          conn.request("DELETE", "/org/v2/environments/{id}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -777,7 +787,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/v2/environments/{id}",
+            "path": "/org/v2/environments/{id}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -802,7 +812,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/v2/environments/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/environments/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -811,16 +821,16 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/v2/environments/{id}");
+          var client = new RestClient("https://api.confluent.cloud/org/v2/environments/{id}");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+v2-early-access@confluent.io?subject=Request%20to%20join%20v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to read an environment.
-      operationId: getV2Environment
+      operationId: getOrgV2Environment
       parameters:
       - description: The unique identifier for the environment.
         explode: false
@@ -836,9 +846,10 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/v2.Environment'
+                - $ref: '#/components/schemas/org.v2.Environment'
                 - required:
                   - api_version
+                  - display_name
                   - id
                   - kind
                   type: object
@@ -977,20 +988,20 @@ paths:
       - api-key: []
       summary: Read an Environment
       tags:
-      - Environments (v2)
+      - Environments (org/v2)
       x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/v2/environments/{id}' \
+            --url 'https://api.confluent.cloud/org/v2/environments/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/v2/environments/{id}")
+            .url("https://api.confluent.cloud/org/v2/environments/{id}")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -998,7 +1009,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/v2/environments/{id}\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/environments/{id}\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1011,7 +1022,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/v2/environments/{id}", headers=headers)
+          conn.request("GET", "/org/v2/environments/{id}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1025,7 +1036,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/v2/environments/{id}",
+            "path": "/org/v2/environments/{id}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1050,7 +1061,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/v2/environments/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/environments/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1059,17 +1070,17 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/v2/environments/{id}");
+          var client = new RestClient("https://api.confluent.cloud/org/v2/environments/{id}");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+v2-early-access@confluent.io?subject=Request%20to%20join%20v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to update an environment.
 
-      operationId: updateV2Environment
+      operationId: updateOrgV2Environment
       parameters:
       - description: The unique identifier for the environment.
         explode: false
@@ -1083,16 +1094,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/v2.Environment'
+              $ref: '#/components/schemas/org.v2.Environment'
       responses:
         "200":
           content:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/v2.Environment'
+                - $ref: '#/components/schemas/org.v2.Environment'
                 - required:
                   - api_version
+                  - display_name
                   - id
                   - kind
                   type: object
@@ -1252,13 +1264,13 @@ paths:
       - api-key: []
       summary: Update an Environment
       tags:
-      - Environments (v2)
+      - Environments (org/v2)
       x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url 'https://api.confluent.cloud/v2/environments/{id}' \
+            --url 'https://api.confluent.cloud/org/v2/environments/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"display_name":"prod-finance01"}'
@@ -1269,7 +1281,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"prod-finance01\"}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/v2/environments/{id}")
+            .url("https://api.confluent.cloud/org/v2/environments/{id}")
             .patch(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -1278,7 +1290,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/v2/environments/{id}\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/environments/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"prod-finance01\\\
           \"}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
           content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
@@ -1298,7 +1310,7 @@ paths:
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/v2/environments/{id}", payload, headers)
+          conn.request("PATCH", "/org/v2/environments/{id}", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1312,7 +1324,7 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/v2/environments/{id}",
+            "path": "/org/v2/environments/{id}",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -1339,7 +1351,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/v2/environments/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/environments/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -1351,7 +1363,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/v2/environments/{id}");
+          var client = new RestClient("https://api.confluent.cloud/org/v2/environments/{id}");
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
@@ -1532,22 +1544,30 @@ components:
             type: string
           style: simple
   schemas:
-    v2.Environment:
+    org.v2.Environment:
       additionalProperties: false
-      description: '`Environment` objects represent an isolated namespace for your
-        Confluent resources'
-      example:
-        metadata: ""
-        kind: Environment
-        id: dlz-f3a90de
-        api_version: v2
-        display_name: prod-finance01
+      description: |-
+        `Environment` objects represent an isolated namespace for your Confluent resources
+        for organizational purposes.
+
+        The API allows you to create, delete, and update your environments. You can retrieve
+        individual environments as well as a list of all your environments.
+
+
+        Related guide: [Environments in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/environments.html).
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `environments_per_org` | Environments in one Confluent Cloud organization |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
             of a resource.
           enum:
-          - v2
+          - org/v2
           readOnly: true
           type: string
         kind:
@@ -1571,7 +1591,7 @@ components:
           - $ref: '#/components/schemas/ObjectMeta'
           - properties:
               self:
-                example: https://api.confluent.cloud/v2/environments/e-12345
+                example: https://api.confluent.cloud/org/v2/environments/e-12345
               resource_name:
                 example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=e-12345
         display_name:
@@ -1579,23 +1599,30 @@ components:
           example: prod-finance01
           type: string
       type: object
-    v2.EnvironmentList:
+    org.v2.EnvironmentList:
       additionalProperties: false
-      description: '`Environment` objects represent an isolated namespace for your
-        Confluent resources'
-      example:
-        metadata: ""
-        data:
-        - ""
-        - ""
-        kind: EnvironmentList
-        api_version: v2
+      description: |-
+        `Environment` objects represent an isolated namespace for your Confluent resources
+        for organizational purposes.
+
+        The API allows you to create, delete, and update your environments. You can retrieve
+        individual environments as well as a list of all your environments.
+
+
+        Related guide: [Environments in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/environments.html).
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `environments_per_org` | Environments in one Confluent Cloud organization |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
             of a resource.
           enum:
-          - v2
+          - org/v2
           readOnly: true
           type: string
         kind:
@@ -1609,18 +1636,21 @@ components:
           - $ref: '#/components/schemas/ListMeta'
           - properties:
               first:
-                example: https://api.confluent.cloud/v2/environments
+                example: https://api.confluent.cloud/org/v2/environments
               last:
-                example: https://api.confluent.cloud/v2/environments?page_token=bcAOehAY8F16YD84Z1wT
+                example: https://api.confluent.cloud/org/v2/environments?page_token=bcAOehAY8F16YD84Z1wT
               prev:
-                example: https://api.confluent.cloud/v2/environments?page_token=YIXRY97wWYmwzrax4dld
+                example: https://api.confluent.cloud/org/v2/environments?page_token=YIXRY97wWYmwzrax4dld
               next:
-                example: https://api.confluent.cloud/v2/environments?page_token=UvmDWOB1iwfAIBPj6EYb
+                example: https://api.confluent.cloud/org/v2/environments?page_token=UvmDWOB1iwfAIBPj6EYb
         data:
+          description: A data property that contains an array of resource items. Each
+            entry in the array is a separate resource.
           items:
             allOf:
-            - $ref: '#/components/schemas/v2.Environment'
+            - $ref: '#/components/schemas/org.v2.Environment'
             - required:
+              - display_name
               - id
               - metadata
               type: object
@@ -1713,6 +1743,8 @@ components:
           nullable: true
           type: string
         total_size:
+          description: Number of records in the full result set. This response may
+            be paginated and have a smaller number of records.
           example: 123
           format: int32
           minimum: 0
@@ -1741,7 +1773,7 @@ components:
           type: string
         resource_name:
           description: CRN reference to the referred resource
-          format: crn
+          format: uri
           minLength: 1
           readOnly: true
           type: string
@@ -1766,6 +1798,7 @@ components:
         an operation.
       properties:
         errors:
+          description: List of errors which caused this operation to fail
           items:
             $ref: '#/components/schemas/Error'
           type: array
@@ -1801,6 +1834,9 @@ components:
           $ref: '#/components/schemas/Error_source'
       type: object
     Error_source:
+      description: If this error was caused by a particular part of the API request,
+        the source will point to the query string parameter or request body property
+        that caused it.
       properties:
         pointer:
           description: A JSON Pointer [RFC6901] to the associated entity in the request

@@ -29,8 +29,8 @@ import (
 	"encoding/json"
 )
 
-// V2Environment `Environment` objects represent an isolated namespace for your Confluent resources
-type V2Environment struct {
+// OrgV2Environment `Environment` objects represent an isolated namespace for your Confluent resources for organizational purposes.  The API allows you to create, delete, and update your environments. You can retrieve individual environments as well as a list of all your environments.   Related guide: [Environments in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/environments.html).  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `environments_per_org` | Environments in one Confluent Cloud organization |
+type OrgV2Environment struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
@@ -42,25 +42,25 @@ type V2Environment struct {
 	DisplayName *string `json:"display_name,omitempty"`
 }
 
-// NewV2Environment instantiates a new V2Environment object
+// NewOrgV2Environment instantiates a new OrgV2Environment object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2Environment() *V2Environment {
-	this := V2Environment{}
+func NewOrgV2Environment() *OrgV2Environment {
+	this := OrgV2Environment{}
 	return &this
 }
 
-// NewV2EnvironmentWithDefaults instantiates a new V2Environment object
+// NewOrgV2EnvironmentWithDefaults instantiates a new OrgV2Environment object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewV2EnvironmentWithDefaults() *V2Environment {
-	this := V2Environment{}
+func NewOrgV2EnvironmentWithDefaults() *OrgV2Environment {
+	this := OrgV2Environment{}
 	return &this
 }
 
 // GetApiVersion returns the ApiVersion field value if set, zero value otherwise.
-func (o *V2Environment) GetApiVersion() string {
+func (o *OrgV2Environment) GetApiVersion() string {
 	if o == nil || o.ApiVersion == nil {
 		var ret string
 		return ret
@@ -70,7 +70,7 @@ func (o *V2Environment) GetApiVersion() string {
 
 // GetApiVersionOk returns a tuple with the ApiVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V2Environment) GetApiVersionOk() (*string, bool) {
+func (o *OrgV2Environment) GetApiVersionOk() (*string, bool) {
 	if o == nil || o.ApiVersion == nil {
 		return nil, false
 	}
@@ -78,7 +78,7 @@ func (o *V2Environment) GetApiVersionOk() (*string, bool) {
 }
 
 // HasApiVersion returns a boolean if a field has been set.
-func (o *V2Environment) HasApiVersion() bool {
+func (o *OrgV2Environment) HasApiVersion() bool {
 	if o != nil && o.ApiVersion != nil {
 		return true
 	}
@@ -87,12 +87,12 @@ func (o *V2Environment) HasApiVersion() bool {
 }
 
 // SetApiVersion gets a reference to the given string and assigns it to the ApiVersion field.
-func (o *V2Environment) SetApiVersion(v string) {
+func (o *OrgV2Environment) SetApiVersion(v string) {
 	o.ApiVersion = &v
 }
 
 // GetKind returns the Kind field value if set, zero value otherwise.
-func (o *V2Environment) GetKind() string {
+func (o *OrgV2Environment) GetKind() string {
 	if o == nil || o.Kind == nil {
 		var ret string
 		return ret
@@ -102,7 +102,7 @@ func (o *V2Environment) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V2Environment) GetKindOk() (*string, bool) {
+func (o *OrgV2Environment) GetKindOk() (*string, bool) {
 	if o == nil || o.Kind == nil {
 		return nil, false
 	}
@@ -110,7 +110,7 @@ func (o *V2Environment) GetKindOk() (*string, bool) {
 }
 
 // HasKind returns a boolean if a field has been set.
-func (o *V2Environment) HasKind() bool {
+func (o *OrgV2Environment) HasKind() bool {
 	if o != nil && o.Kind != nil {
 		return true
 	}
@@ -119,12 +119,12 @@ func (o *V2Environment) HasKind() bool {
 }
 
 // SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *V2Environment) SetKind(v string) {
+func (o *OrgV2Environment) SetKind(v string) {
 	o.Kind = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *V2Environment) GetId() string {
+func (o *OrgV2Environment) GetId() string {
 	if o == nil || o.Id == nil {
 		var ret string
 		return ret
@@ -134,7 +134,7 @@ func (o *V2Environment) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V2Environment) GetIdOk() (*string, bool) {
+func (o *OrgV2Environment) GetIdOk() (*string, bool) {
 	if o == nil || o.Id == nil {
 		return nil, false
 	}
@@ -142,7 +142,7 @@ func (o *V2Environment) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *V2Environment) HasId() bool {
+func (o *OrgV2Environment) HasId() bool {
 	if o != nil && o.Id != nil {
 		return true
 	}
@@ -151,12 +151,12 @@ func (o *V2Environment) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *V2Environment) SetId(v string) {
+func (o *OrgV2Environment) SetId(v string) {
 	o.Id = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *V2Environment) GetMetadata() ObjectMeta {
+func (o *OrgV2Environment) GetMetadata() ObjectMeta {
 	if o == nil || o.Metadata == nil {
 		var ret ObjectMeta
 		return ret
@@ -166,7 +166,7 @@ func (o *V2Environment) GetMetadata() ObjectMeta {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V2Environment) GetMetadataOk() (*ObjectMeta, bool) {
+func (o *OrgV2Environment) GetMetadataOk() (*ObjectMeta, bool) {
 	if o == nil || o.Metadata == nil {
 		return nil, false
 	}
@@ -174,7 +174,7 @@ func (o *V2Environment) GetMetadataOk() (*ObjectMeta, bool) {
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *V2Environment) HasMetadata() bool {
+func (o *OrgV2Environment) HasMetadata() bool {
 	if o != nil && o.Metadata != nil {
 		return true
 	}
@@ -183,12 +183,12 @@ func (o *V2Environment) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given ObjectMeta and assigns it to the Metadata field.
-func (o *V2Environment) SetMetadata(v ObjectMeta) {
+func (o *OrgV2Environment) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
 // GetDisplayName returns the DisplayName field value if set, zero value otherwise.
-func (o *V2Environment) GetDisplayName() string {
+func (o *OrgV2Environment) GetDisplayName() string {
 	if o == nil || o.DisplayName == nil {
 		var ret string
 		return ret
@@ -198,7 +198,7 @@ func (o *V2Environment) GetDisplayName() string {
 
 // GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V2Environment) GetDisplayNameOk() (*string, bool) {
+func (o *OrgV2Environment) GetDisplayNameOk() (*string, bool) {
 	if o == nil || o.DisplayName == nil {
 		return nil, false
 	}
@@ -206,7 +206,7 @@ func (o *V2Environment) GetDisplayNameOk() (*string, bool) {
 }
 
 // HasDisplayName returns a boolean if a field has been set.
-func (o *V2Environment) HasDisplayName() bool {
+func (o *OrgV2Environment) HasDisplayName() bool {
 	if o != nil && o.DisplayName != nil {
 		return true
 	}
@@ -215,11 +215,11 @@ func (o *V2Environment) HasDisplayName() bool {
 }
 
 // SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
-func (o *V2Environment) SetDisplayName(v string) {
+func (o *OrgV2Environment) SetDisplayName(v string) {
 	o.DisplayName = &v
 }
 
-func (o V2Environment) MarshalJSON() ([]byte, error) {
+func (o OrgV2Environment) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ApiVersion != nil {
 		toSerialize["api_version"] = o.ApiVersion
@@ -239,38 +239,38 @@ func (o V2Environment) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableV2Environment struct {
-	value *V2Environment
+type NullableOrgV2Environment struct {
+	value *OrgV2Environment
 	isSet bool
 }
 
-func (v NullableV2Environment) Get() *V2Environment {
+func (v NullableOrgV2Environment) Get() *OrgV2Environment {
 	return v.value
 }
 
-func (v *NullableV2Environment) Set(val *V2Environment) {
+func (v *NullableOrgV2Environment) Set(val *OrgV2Environment) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableV2Environment) IsSet() bool {
+func (v NullableOrgV2Environment) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableV2Environment) Unset() {
+func (v *NullableOrgV2Environment) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableV2Environment(val *V2Environment) *NullableV2Environment {
-	return &NullableV2Environment{value: val, isSet: true}
+func NewNullableOrgV2Environment(val *OrgV2Environment) *NullableOrgV2Environment {
+	return &NullableOrgV2Environment{value: val, isSet: true}
 }
 
-func (v NullableV2Environment) MarshalJSON() ([]byte, error) {
+func (v NullableOrgV2Environment) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableV2Environment) UnmarshalJSON(src []byte) error {
+func (v *NullableOrgV2Environment) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

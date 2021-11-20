@@ -39,59 +39,59 @@ var (
 	_ _context.Context
 )
 
-// EnvironmentsV2ApiService EnvironmentsV2Api service
-type EnvironmentsV2ApiService service
+// EnvironmentsOrgV2ApiService EnvironmentsOrgV2Api service
+type EnvironmentsOrgV2ApiService service
 
-type ApiCreateV2EnvironmentRequest struct {
+type ApiCreateOrgV2EnvironmentRequest struct {
 	ctx _context.Context
-	ApiService *EnvironmentsV2ApiService
-	v2Environment *V2Environment
+	ApiService *EnvironmentsOrgV2ApiService
+	orgV2Environment *OrgV2Environment
 }
 
-func (r ApiCreateV2EnvironmentRequest) V2Environment(v2Environment V2Environment) ApiCreateV2EnvironmentRequest {
-	r.v2Environment = &v2Environment
+func (r ApiCreateOrgV2EnvironmentRequest) OrgV2Environment(orgV2Environment OrgV2Environment) ApiCreateOrgV2EnvironmentRequest {
+	r.orgV2Environment = &orgV2Environment
 	return r
 }
 
-func (r ApiCreateV2EnvironmentRequest) Execute() (V2Environment, *_nethttp.Response, error) {
-	return r.ApiService.CreateV2EnvironmentExecute(r)
+func (r ApiCreateOrgV2EnvironmentRequest) Execute() (OrgV2Environment, *_nethttp.Response, error) {
+	return r.ApiService.CreateOrgV2EnvironmentExecute(r)
 }
 
 /*
-CreateV2Environment Create an Environment
+CreateOrgV2Environment Create an Environment
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+v2-early-access@confluent.io?subject=Request%20to%20join%20v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
 Make a request to create an environment.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateV2EnvironmentRequest
+ @return ApiCreateOrgV2EnvironmentRequest
 */
-func (a *EnvironmentsV2ApiService) CreateV2Environment(ctx _context.Context) ApiCreateV2EnvironmentRequest {
-	return ApiCreateV2EnvironmentRequest{
+func (a *EnvironmentsOrgV2ApiService) CreateOrgV2Environment(ctx _context.Context) ApiCreateOrgV2EnvironmentRequest {
+	return ApiCreateOrgV2EnvironmentRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return V2Environment
-func (a *EnvironmentsV2ApiService) CreateV2EnvironmentExecute(r ApiCreateV2EnvironmentRequest) (V2Environment, *_nethttp.Response, error) {
+//  @return OrgV2Environment
+func (a *EnvironmentsOrgV2ApiService) CreateOrgV2EnvironmentExecute(r ApiCreateOrgV2EnvironmentRequest) (OrgV2Environment, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  V2Environment
+		localVarReturnValue  OrgV2Environment
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsV2ApiService.CreateV2Environment")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsOrgV2ApiService.CreateOrgV2Environment")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/environments"
+	localVarPath := localBasePath + "/org/v2/environments"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -115,7 +115,7 @@ func (a *EnvironmentsV2ApiService) CreateV2EnvironmentExecute(r ApiCreateV2Envir
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.v2Environment
+	localVarPostBody = r.orgV2Environment
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -212,21 +212,21 @@ func (a *EnvironmentsV2ApiService) CreateV2EnvironmentExecute(r ApiCreateV2Envir
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteV2EnvironmentRequest struct {
+type ApiDeleteOrgV2EnvironmentRequest struct {
 	ctx _context.Context
-	ApiService *EnvironmentsV2ApiService
+	ApiService *EnvironmentsOrgV2ApiService
 	id string
 }
 
 
-func (r ApiDeleteV2EnvironmentRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.DeleteV2EnvironmentExecute(r)
+func (r ApiDeleteOrgV2EnvironmentRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteOrgV2EnvironmentExecute(r)
 }
 
 /*
-DeleteV2Environment Delete an Environment
+DeleteOrgV2Environment Delete an Environment
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+v2-early-access@confluent.io?subject=Request%20to%20join%20v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
 Make a request to delete an environment.
 
@@ -236,10 +236,10 @@ including all Kafka clusters, connectors, etc.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id The unique identifier for the environment.
- @return ApiDeleteV2EnvironmentRequest
+ @return ApiDeleteOrgV2EnvironmentRequest
 */
-func (a *EnvironmentsV2ApiService) DeleteV2Environment(ctx _context.Context, id string) ApiDeleteV2EnvironmentRequest {
-	return ApiDeleteV2EnvironmentRequest{
+func (a *EnvironmentsOrgV2ApiService) DeleteOrgV2Environment(ctx _context.Context, id string) ApiDeleteOrgV2EnvironmentRequest {
+	return ApiDeleteOrgV2EnvironmentRequest{
 		ApiService: a,
 		ctx: ctx,
 		id: id,
@@ -247,7 +247,7 @@ func (a *EnvironmentsV2ApiService) DeleteV2Environment(ctx _context.Context, id 
 }
 
 // Execute executes the request
-func (a *EnvironmentsV2ApiService) DeleteV2EnvironmentExecute(r ApiDeleteV2EnvironmentRequest) (*_nethttp.Response, error) {
+func (a *EnvironmentsOrgV2ApiService) DeleteOrgV2EnvironmentExecute(r ApiDeleteOrgV2EnvironmentRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
@@ -256,12 +256,12 @@ func (a *EnvironmentsV2ApiService) DeleteV2EnvironmentExecute(r ApiDeleteV2Envir
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsV2ApiService.DeleteV2Environment")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsOrgV2ApiService.DeleteOrgV2Environment")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/environments/{id}"
+	localVarPath := localBasePath + "/org/v2/environments/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -362,30 +362,30 @@ func (a *EnvironmentsV2ApiService) DeleteV2EnvironmentExecute(r ApiDeleteV2Envir
 	return localVarHTTPResponse, nil
 }
 
-type ApiGetV2EnvironmentRequest struct {
+type ApiGetOrgV2EnvironmentRequest struct {
 	ctx _context.Context
-	ApiService *EnvironmentsV2ApiService
+	ApiService *EnvironmentsOrgV2ApiService
 	id string
 }
 
 
-func (r ApiGetV2EnvironmentRequest) Execute() (V2Environment, *_nethttp.Response, error) {
-	return r.ApiService.GetV2EnvironmentExecute(r)
+func (r ApiGetOrgV2EnvironmentRequest) Execute() (OrgV2Environment, *_nethttp.Response, error) {
+	return r.ApiService.GetOrgV2EnvironmentExecute(r)
 }
 
 /*
-GetV2Environment Read an Environment
+GetOrgV2Environment Read an Environment
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+v2-early-access@confluent.io?subject=Request%20to%20join%20v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
 Make a request to read an environment.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id The unique identifier for the environment.
- @return ApiGetV2EnvironmentRequest
+ @return ApiGetOrgV2EnvironmentRequest
 */
-func (a *EnvironmentsV2ApiService) GetV2Environment(ctx _context.Context, id string) ApiGetV2EnvironmentRequest {
-	return ApiGetV2EnvironmentRequest{
+func (a *EnvironmentsOrgV2ApiService) GetOrgV2Environment(ctx _context.Context, id string) ApiGetOrgV2EnvironmentRequest {
+	return ApiGetOrgV2EnvironmentRequest{
 		ApiService: a,
 		ctx: ctx,
 		id: id,
@@ -393,23 +393,23 @@ func (a *EnvironmentsV2ApiService) GetV2Environment(ctx _context.Context, id str
 }
 
 // Execute executes the request
-//  @return V2Environment
-func (a *EnvironmentsV2ApiService) GetV2EnvironmentExecute(r ApiGetV2EnvironmentRequest) (V2Environment, *_nethttp.Response, error) {
+//  @return OrgV2Environment
+func (a *EnvironmentsOrgV2ApiService) GetOrgV2EnvironmentExecute(r ApiGetOrgV2EnvironmentRequest) (OrgV2Environment, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  V2Environment
+		localVarReturnValue  OrgV2Environment
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsV2ApiService.GetV2Environment")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsOrgV2ApiService.GetOrgV2Environment")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/environments/{id}"
+	localVarPath := localBasePath + "/org/v2/environments/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -519,63 +519,63 @@ func (a *EnvironmentsV2ApiService) GetV2EnvironmentExecute(r ApiGetV2Environment
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListV2EnvironmentsRequest struct {
+type ApiListOrgV2EnvironmentsRequest struct {
 	ctx _context.Context
-	ApiService *EnvironmentsV2ApiService
+	ApiService *EnvironmentsOrgV2ApiService
 	pageSize *int32
 	pageToken *string
 }
 
 // A pagination size for collection requests.
-func (r ApiListV2EnvironmentsRequest) PageSize(pageSize int32) ApiListV2EnvironmentsRequest {
+func (r ApiListOrgV2EnvironmentsRequest) PageSize(pageSize int32) ApiListOrgV2EnvironmentsRequest {
 	r.pageSize = &pageSize
 	return r
 }
 // An opaque pagination token for collection requests.
-func (r ApiListV2EnvironmentsRequest) PageToken(pageToken string) ApiListV2EnvironmentsRequest {
+func (r ApiListOrgV2EnvironmentsRequest) PageToken(pageToken string) ApiListOrgV2EnvironmentsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-func (r ApiListV2EnvironmentsRequest) Execute() (V2EnvironmentList, *_nethttp.Response, error) {
-	return r.ApiService.ListV2EnvironmentsExecute(r)
+func (r ApiListOrgV2EnvironmentsRequest) Execute() (OrgV2EnvironmentList, *_nethttp.Response, error) {
+	return r.ApiService.ListOrgV2EnvironmentsExecute(r)
 }
 
 /*
-ListV2Environments List of Environments
+ListOrgV2Environments List of Environments
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+v2-early-access@confluent.io?subject=Request%20to%20join%20v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
 Retrieve a sorted, filtered, paginated list of all environments.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListV2EnvironmentsRequest
+ @return ApiListOrgV2EnvironmentsRequest
 */
-func (a *EnvironmentsV2ApiService) ListV2Environments(ctx _context.Context) ApiListV2EnvironmentsRequest {
-	return ApiListV2EnvironmentsRequest{
+func (a *EnvironmentsOrgV2ApiService) ListOrgV2Environments(ctx _context.Context) ApiListOrgV2EnvironmentsRequest {
+	return ApiListOrgV2EnvironmentsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return V2EnvironmentList
-func (a *EnvironmentsV2ApiService) ListV2EnvironmentsExecute(r ApiListV2EnvironmentsRequest) (V2EnvironmentList, *_nethttp.Response, error) {
+//  @return OrgV2EnvironmentList
+func (a *EnvironmentsOrgV2ApiService) ListOrgV2EnvironmentsExecute(r ApiListOrgV2EnvironmentsRequest) (OrgV2EnvironmentList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  V2EnvironmentList
+		localVarReturnValue  OrgV2EnvironmentList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsV2ApiService.ListV2Environments")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsOrgV2ApiService.ListOrgV2Environments")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/environments"
+	localVarPath := localBasePath + "/org/v2/environments"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -680,26 +680,26 @@ func (a *EnvironmentsV2ApiService) ListV2EnvironmentsExecute(r ApiListV2Environm
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateV2EnvironmentRequest struct {
+type ApiUpdateOrgV2EnvironmentRequest struct {
 	ctx _context.Context
-	ApiService *EnvironmentsV2ApiService
+	ApiService *EnvironmentsOrgV2ApiService
 	id string
-	v2Environment *V2Environment
+	orgV2Environment *OrgV2Environment
 }
 
-func (r ApiUpdateV2EnvironmentRequest) V2Environment(v2Environment V2Environment) ApiUpdateV2EnvironmentRequest {
-	r.v2Environment = &v2Environment
+func (r ApiUpdateOrgV2EnvironmentRequest) OrgV2Environment(orgV2Environment OrgV2Environment) ApiUpdateOrgV2EnvironmentRequest {
+	r.orgV2Environment = &orgV2Environment
 	return r
 }
 
-func (r ApiUpdateV2EnvironmentRequest) Execute() (V2Environment, *_nethttp.Response, error) {
-	return r.ApiService.UpdateV2EnvironmentExecute(r)
+func (r ApiUpdateOrgV2EnvironmentRequest) Execute() (OrgV2Environment, *_nethttp.Response, error) {
+	return r.ApiService.UpdateOrgV2EnvironmentExecute(r)
 }
 
 /*
-UpdateV2Environment Update an Environment
+UpdateOrgV2Environment Update an Environment
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+v2-early-access@confluent.io?subject=Request%20to%20join%20v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
 Make a request to update an environment.
 
@@ -707,10 +707,10 @@ Make a request to update an environment.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id The unique identifier for the environment.
- @return ApiUpdateV2EnvironmentRequest
+ @return ApiUpdateOrgV2EnvironmentRequest
 */
-func (a *EnvironmentsV2ApiService) UpdateV2Environment(ctx _context.Context, id string) ApiUpdateV2EnvironmentRequest {
-	return ApiUpdateV2EnvironmentRequest{
+func (a *EnvironmentsOrgV2ApiService) UpdateOrgV2Environment(ctx _context.Context, id string) ApiUpdateOrgV2EnvironmentRequest {
+	return ApiUpdateOrgV2EnvironmentRequest{
 		ApiService: a,
 		ctx: ctx,
 		id: id,
@@ -718,23 +718,23 @@ func (a *EnvironmentsV2ApiService) UpdateV2Environment(ctx _context.Context, id 
 }
 
 // Execute executes the request
-//  @return V2Environment
-func (a *EnvironmentsV2ApiService) UpdateV2EnvironmentExecute(r ApiUpdateV2EnvironmentRequest) (V2Environment, *_nethttp.Response, error) {
+//  @return OrgV2Environment
+func (a *EnvironmentsOrgV2ApiService) UpdateOrgV2EnvironmentExecute(r ApiUpdateOrgV2EnvironmentRequest) (OrgV2Environment, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  V2Environment
+		localVarReturnValue  OrgV2Environment
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsV2ApiService.UpdateV2Environment")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsOrgV2ApiService.UpdateOrgV2Environment")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/environments/{id}"
+	localVarPath := localBasePath + "/org/v2/environments/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -759,7 +759,7 @@ func (a *EnvironmentsV2ApiService) UpdateV2EnvironmentExecute(r ApiUpdateV2Envir
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.v2Environment
+	localVarPostBody = r.orgV2Environment
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

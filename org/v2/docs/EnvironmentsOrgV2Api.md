@@ -1,20 +1,20 @@
-# \EnvironmentsV2Api
+# \EnvironmentsOrgV2Api
 
 All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateV2Environment**](EnvironmentsV2Api.md#CreateV2Environment) | **Post** /v2/environments | Create an Environment
-[**DeleteV2Environment**](EnvironmentsV2Api.md#DeleteV2Environment) | **Delete** /v2/environments/{id} | Delete an Environment
-[**GetV2Environment**](EnvironmentsV2Api.md#GetV2Environment) | **Get** /v2/environments/{id} | Read an Environment
-[**ListV2Environments**](EnvironmentsV2Api.md#ListV2Environments) | **Get** /v2/environments | List of Environments
-[**UpdateV2Environment**](EnvironmentsV2Api.md#UpdateV2Environment) | **Patch** /v2/environments/{id} | Update an Environment
+[**CreateOrgV2Environment**](EnvironmentsOrgV2Api.md#CreateOrgV2Environment) | **Post** /org/v2/environments | Create an Environment
+[**DeleteOrgV2Environment**](EnvironmentsOrgV2Api.md#DeleteOrgV2Environment) | **Delete** /org/v2/environments/{id} | Delete an Environment
+[**GetOrgV2Environment**](EnvironmentsOrgV2Api.md#GetOrgV2Environment) | **Get** /org/v2/environments/{id} | Read an Environment
+[**ListOrgV2Environments**](EnvironmentsOrgV2Api.md#ListOrgV2Environments) | **Get** /org/v2/environments | List of Environments
+[**UpdateOrgV2Environment**](EnvironmentsOrgV2Api.md#UpdateOrgV2Environment) | **Patch** /org/v2/environments/{id} | Update an Environment
 
 
 
-## CreateV2Environment
+## CreateOrgV2Environment
 
-> V2Environment CreateV2Environment(ctx).V2Environment(v2Environment).Execute()
+> OrgV2Environment CreateOrgV2Environment(ctx).OrgV2Environment(orgV2Environment).Execute()
 
 Create an Environment
 
@@ -33,17 +33,17 @@ import (
 )
 
 func main() {
-    v2Environment := *openapiclient.NewV2Environment() // V2Environment |  (optional)
+    orgV2Environment := *openapiclient.NewOrgV2Environment() // OrgV2Environment |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EnvironmentsV2Api.CreateV2Environment(context.Background()).V2Environment(v2Environment).Execute()
+    resp, r, err := api_client.EnvironmentsOrgV2Api.CreateOrgV2Environment(context.Background()).OrgV2Environment(orgV2Environment).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsV2Api.CreateV2Environment``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsOrgV2Api.CreateOrgV2Environment``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateV2Environment`: V2Environment
-    fmt.Fprintf(os.Stdout, "Response from `EnvironmentsV2Api.CreateV2Environment`: %v\n", resp)
+    // response from `CreateOrgV2Environment`: OrgV2Environment
+    fmt.Fprintf(os.Stdout, "Response from `EnvironmentsOrgV2Api.CreateOrgV2Environment`: %v\n", resp)
 }
 ```
 
@@ -53,16 +53,16 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateV2EnvironmentRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateOrgV2EnvironmentRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **v2Environment** | [**V2Environment**](V2Environment.md) |  | 
+ **orgV2Environment** | [**OrgV2Environment**](OrgV2Environment.md) |  | 
 
 ### Return type
 
-[**V2Environment**](V2Environment.md)
+[**OrgV2Environment**](org.v2.Environment.md)
 
 ### Authorization
 
@@ -78,9 +78,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteV2Environment
+## DeleteOrgV2Environment
 
-> DeleteV2Environment(ctx, id).Execute()
+> DeleteOrgV2Environment(ctx, id).Execute()
 
 Delete an Environment
 
@@ -103,9 +103,9 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EnvironmentsV2Api.DeleteV2Environment(context.Background(), id).Execute()
+    resp, r, err := api_client.EnvironmentsOrgV2Api.DeleteOrgV2Environment(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsV2Api.DeleteV2Environment``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsOrgV2Api.DeleteOrgV2Environment``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -121,7 +121,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteV2EnvironmentRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteOrgV2EnvironmentRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -146,9 +146,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetV2Environment
+## GetOrgV2Environment
 
-> V2Environment GetV2Environment(ctx, id).Execute()
+> OrgV2Environment GetOrgV2Environment(ctx, id).Execute()
 
 Read an Environment
 
@@ -171,13 +171,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EnvironmentsV2Api.GetV2Environment(context.Background(), id).Execute()
+    resp, r, err := api_client.EnvironmentsOrgV2Api.GetOrgV2Environment(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsV2Api.GetV2Environment``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsOrgV2Api.GetOrgV2Environment``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetV2Environment`: V2Environment
-    fmt.Fprintf(os.Stdout, "Response from `EnvironmentsV2Api.GetV2Environment`: %v\n", resp)
+    // response from `GetOrgV2Environment`: OrgV2Environment
+    fmt.Fprintf(os.Stdout, "Response from `EnvironmentsOrgV2Api.GetOrgV2Environment`: %v\n", resp)
 }
 ```
 
@@ -191,7 +191,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetV2EnvironmentRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetOrgV2EnvironmentRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -200,7 +200,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V2Environment**](v2.Environment.md)
+[**OrgV2Environment**](org.v2.Environment.md)
 
 ### Authorization
 
@@ -216,9 +216,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ListV2Environments
+## ListOrgV2Environments
 
-> V2EnvironmentList ListV2Environments(ctx).PageSize(pageSize).PageToken(pageToken).Execute()
+> OrgV2EnvironmentList ListOrgV2Environments(ctx).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Environments
 
@@ -242,13 +242,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EnvironmentsV2Api.ListV2Environments(context.Background()).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.EnvironmentsOrgV2Api.ListOrgV2Environments(context.Background()).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsV2Api.ListV2Environments``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsOrgV2Api.ListOrgV2Environments``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListV2Environments`: V2EnvironmentList
-    fmt.Fprintf(os.Stdout, "Response from `EnvironmentsV2Api.ListV2Environments`: %v\n", resp)
+    // response from `ListOrgV2Environments`: OrgV2EnvironmentList
+    fmt.Fprintf(os.Stdout, "Response from `EnvironmentsOrgV2Api.ListOrgV2Environments`: %v\n", resp)
 }
 ```
 
@@ -258,7 +258,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListV2EnvironmentsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListOrgV2EnvironmentsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -268,7 +268,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V2EnvironmentList**](V2EnvironmentList.md)
+[**OrgV2EnvironmentList**](org.v2.EnvironmentList.md)
 
 ### Authorization
 
@@ -284,9 +284,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UpdateV2Environment
+## UpdateOrgV2Environment
 
-> V2Environment UpdateV2Environment(ctx, id).V2Environment(v2Environment).Execute()
+> OrgV2Environment UpdateOrgV2Environment(ctx, id).OrgV2Environment(orgV2Environment).Execute()
 
 Update an Environment
 
@@ -306,17 +306,17 @@ import (
 
 func main() {
     id := "id_example" // string | The unique identifier for the environment.
-    v2Environment := *openapiclient.NewV2Environment() // V2Environment |  (optional)
+    orgV2Environment := *openapiclient.NewOrgV2Environment() // OrgV2Environment |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EnvironmentsV2Api.UpdateV2Environment(context.Background(), id).V2Environment(v2Environment).Execute()
+    resp, r, err := api_client.EnvironmentsOrgV2Api.UpdateOrgV2Environment(context.Background(), id).OrgV2Environment(orgV2Environment).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsV2Api.UpdateV2Environment``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsOrgV2Api.UpdateOrgV2Environment``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UpdateV2Environment`: V2Environment
-    fmt.Fprintf(os.Stdout, "Response from `EnvironmentsV2Api.UpdateV2Environment`: %v\n", resp)
+    // response from `UpdateOrgV2Environment`: OrgV2Environment
+    fmt.Fprintf(os.Stdout, "Response from `EnvironmentsOrgV2Api.UpdateOrgV2Environment`: %v\n", resp)
 }
 ```
 
@@ -330,17 +330,17 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUpdateV2EnvironmentRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiUpdateOrgV2EnvironmentRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **v2Environment** | [**V2Environment**](V2Environment.md) |  | 
+ **orgV2Environment** | [**OrgV2Environment**](OrgV2Environment.md) |  | 
 
 ### Return type
 
-[**V2Environment**](v2.Environment.md)
+[**OrgV2Environment**](org.v2.Environment.md)
 
 ### Authorization
 
