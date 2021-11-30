@@ -39,6 +39,7 @@ type ListMeta struct {
 	Prev NullableString `json:"prev,omitempty"`
 	// A link to the next page of results. If a response does not contain a next link, then there is no more data available.
 	Next NullableString `json:"next,omitempty"`
+	// Number of records in the full result set. This response may be paginated and have a smaller number of records.
 	TotalSize *int32 `json:"total_size,omitempty"`
 }
 
@@ -257,6 +258,45 @@ func (o *ListMeta) HasTotalSize() bool {
 // SetTotalSize gets a reference to the given int32 and assigns it to the TotalSize field.
 func (o *ListMeta) SetTotalSize(v int32) {
 	o.TotalSize = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *ListMeta) Redact() {
+    recurseRedact(o.First)
+    recurseRedact(o.Last)
+    recurseRedact(o.Prev)
+    recurseRedact(o.Next)
+    recurseRedact(o.TotalSize)
+}
+
+func recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ListMeta) MarshalJSON() ([]byte, error) {

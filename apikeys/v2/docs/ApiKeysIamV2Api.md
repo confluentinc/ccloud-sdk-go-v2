@@ -237,7 +237,7 @@ import (
 )
 
 func main() {
-    owner := "u-a83k9b" // string | Filter the results by exact match for owner. (optional)
+    owner := "owner_example" // string | Filter the results by exact match for owner. (optional)
     resource := "resource_example" // string | Filter the results by exact match for resource. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
@@ -272,7 +272,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IamV2ApiKeyList**](IamV2ApiKeyList.md)
+[**IamV2ApiKeyList**](iam.v2.ApiKeyList.md)
 
 ### Authorization
 

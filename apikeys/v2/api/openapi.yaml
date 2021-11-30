@@ -8,8 +8,9 @@ info:
   title: API Keys Management API
   version: 0.0.1-alpha0
   x-api-id: 415d113b-2126-4765-89e0-0b7d0a54db8c
-  x-api-group: v2
+  x-api-group: iam/v2
   x-audience: external-public
+  x-tag-group: Identity Access Management (%s)
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
@@ -50,7 +51,6 @@ paths:
       operationId: listIamV2ApiKeys
       parameters:
       - description: Filter the results by exact match for owner.
-        example: u-a83k9b
         explode: true
         in: query
         name: owner
@@ -91,7 +91,24 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/iam.v2.ApiKeyList'
+                allOf:
+                - $ref: '#/components/schemas/iam.v2.ApiKeyList'
+                - properties:
+                    data:
+                      items:
+                        properties:
+                          owner:
+                            example:
+                              id: u-a83k9b
+                              related: https://api.confluent.cloud/iam/v2/users/u-a83k9b
+                              resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/user=u-a83k9b
+                          resource:
+                            example:
+                              id: lkc-c29js0
+                              related: https://api.confluent.cloud/cmk/v2/kafka-clusters/lkc-c29js0
+                              resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/kafka=lkc-c29js0
+                      type: array
+                  type: object
           description: Api Key.
           headers:
             X-Request-Id:
@@ -310,6 +327,14 @@ paths:
               - required:
                 - owner
                 type: object
+              - properties:
+                  owner:
+                    example:
+                      id: u-a83k9b
+                  resource:
+                    example:
+                      id: lkc-c29js0
+                type: object
       responses:
         "201":
           content:
@@ -319,6 +344,18 @@ paths:
                 - $ref: '#/components/schemas/iam.v2.ApiKey'
                 - required:
                   - owner
+                  type: object
+                - properties:
+                    owner:
+                      example:
+                        id: u-a83k9b
+                        related: https://api.confluent.cloud/iam/v2/users/u-a83k9b
+                        resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/user=u-a83k9b
+                    resource:
+                      example:
+                        id: lkc-c29js0
+                        related: https://api.confluent.cloud/cmk/v2/kafka-clusters/lkc-c29js0
+                        resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/kafka=lkc-c29js0
                   type: object
           description: An Api Key was created.
           headers:
@@ -484,13 +521,13 @@ paths:
             --url https://api.confluent.cloud/iam/v2/api-keys \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"CI kafka access key","description":"This API key provides kafka access to cluster x","owner":{"id":"string","environment":"string"},"resource":{"id":"lkc-c29js0","related":"https://api.confluent.cloud/cmk/v2/kafka-clusters/lkc-c29js0","resource_name":"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/kafka=lkc-c29js0"}}'
+            --data '{"display_name":"CI kafka access key","description":"This API key provides kafka access to cluster x","owner":{"id":"u-a83k9b","environment":"string"},"resource":{"id":"lkc-c29js0","environment":"string"}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"string\",\"environment\":\"string\"},\"resource\":{\"id\":\"lkc-c29js0\",\"related\":\"https://api.confluent.cloud/cmk/v2/kafka-clusters/lkc-c29js0\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/kafka=lkc-c29js0\"}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"resource\":{\"id\":\"lkc-c29js0\",\"environment\":\"string\"}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/iam/v2/api-keys")
             .post(body)
@@ -504,22 +541,21 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/api-keys\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"CI kafka\
           \ access key\\\",\\\"description\\\":\\\"This API key provides kafka access\
-          \ to cluster x\\\",\\\"owner\\\":{\\\"id\\\":\\\"string\\\",\\\"environment\\\
+          \ to cluster x\\\",\\\"owner\\\":{\\\"id\\\":\\\"u-a83k9b\\\",\\\"environment\\\
           \":\\\"string\\\"},\\\"resource\\\":{\\\"id\\\":\\\"lkc-c29js0\\\",\\\"\
-          related\\\":\\\"https://api.confluent.cloud/cmk/v2/kafka-clusters/lkc-c29js0\\\
-          \",\\\"resource_name\\\":\\\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/kafka=lkc-c29js0\\\
-          \"}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          environment\\\":\\\"string\\\"}}\")\n\n\treq, _ := http.NewRequest(\"POST\"\
+          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"string\",\"environment\":\"string\"},\"resource\":{\"id\":\"lkc-c29js0\",\"related\":\"https://api.confluent.cloud/cmk/v2/kafka-clusters/lkc-c29js0\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/kafka=lkc-c29js0\"}}"
+          payload = "{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"resource\":{\"id\":\"lkc-c29js0\",\"environment\":\"string\"}}"
 
           headers = {
               'content-type': "application/json",
@@ -563,12 +599,8 @@ paths:
           req.write(JSON.stringify({
             display_name: 'CI kafka access key',
             description: 'This API key provides kafka access to cluster x',
-            owner: {id: 'string', environment: 'string'},
-            resource: {
-              id: 'lkc-c29js0',
-              related: 'https://api.confluent.cloud/cmk/v2/kafka-clusters/lkc-c29js0',
-              resource_name: 'crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/kafka=lkc-c29js0'
-            }
+            owner: {id: 'u-a83k9b', environment: 'string'},
+            resource: {id: 'lkc-c29js0', environment: 'string'}
           }));
           req.end();
       - lang: C
@@ -583,7 +615,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"string\",\"environment\":\"string\"},\"resource\":{\"id\":\"lkc-c29js0\",\"related\":\"https://api.confluent.cloud/cmk/v2/kafka-clusters/lkc-c29js0\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/kafka=lkc-c29js0\"}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"resource\":{\"id\":\"lkc-c29js0\",\"environment\":\"string\"}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -592,7 +624,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"string\",\"environment\":\"string\"},\"resource\":{\"id\":\"lkc-c29js0\",\"related\":\"https://api.confluent.cloud/cmk/v2/kafka-clusters/lkc-c29js0\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/kafka=lkc-c29js0\"}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"resource\":{\"id\":\"lkc-c29js0\",\"environment\":\"string\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Cloud V2
   /iam/v2/api-keys/{id}:
@@ -862,6 +894,18 @@ paths:
                   - kind
                   - owner
                   type: object
+                - properties:
+                    owner:
+                      example:
+                        id: u-a83k9b
+                        related: https://api.confluent.cloud/iam/v2/users/u-a83k9b
+                        resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/user=u-a83k9b
+                    resource:
+                      example:
+                        id: lkc-c29js0
+                        related: https://api.confluent.cloud/cmk/v2/kafka-clusters/lkc-c29js0
+                        resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/kafka=lkc-c29js0
+                  type: object
           description: Api Key.
           headers:
             X-Request-Id:
@@ -1117,6 +1161,18 @@ paths:
                   - kind
                   - owner
                   type: object
+                - properties:
+                    owner:
+                      example:
+                        id: u-a83k9b
+                        related: https://api.confluent.cloud/iam/v2/users/u-a83k9b
+                        resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/user=u-a83k9b
+                    resource:
+                      example:
+                        id: lkc-c29js0
+                        related: https://api.confluent.cloud/cmk/v2/kafka-clusters/lkc-c29js0
+                        resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/kafka=lkc-c29js0
+                  type: object
           description: Api Key.
           headers:
             X-Request-Id:
@@ -1261,13 +1317,13 @@ paths:
             --url 'https://api.confluent.cloud/iam/v2/api-keys/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"CI kafka access key","description":"This API key provides kafka access to cluster x","owner":{"id":"string","environment":"string"},"resource":{"id":"lkc-c29js0","related":"https://api.confluent.cloud/cmk/v2/kafka-clusters/lkc-c29js0","resource_name":"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/kafka=lkc-c29js0"}}'
+            --data '{"display_name":"CI kafka access key","description":"This API key provides kafka access to cluster x","owner":{"id":"string","environment":"string"},"resource":{"id":"string","environment":"string"}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"string\",\"environment\":\"string\"},\"resource\":{\"id\":\"lkc-c29js0\",\"related\":\"https://api.confluent.cloud/cmk/v2/kafka-clusters/lkc-c29js0\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/kafka=lkc-c29js0\"}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"string\",\"environment\":\"string\"},\"resource\":{\"id\":\"string\",\"environment\":\"string\"}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/iam/v2/api-keys/{id}")
             .patch(body)
@@ -1282,12 +1338,10 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"CI kafka\
           \ access key\\\",\\\"description\\\":\\\"This API key provides kafka access\
           \ to cluster x\\\",\\\"owner\\\":{\\\"id\\\":\\\"string\\\",\\\"environment\\\
-          \":\\\"string\\\"},\\\"resource\\\":{\\\"id\\\":\\\"lkc-c29js0\\\",\\\"\
-          related\\\":\\\"https://api.confluent.cloud/cmk/v2/kafka-clusters/lkc-c29js0\\\
-          \",\\\"resource_name\\\":\\\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/kafka=lkc-c29js0\\\
-          \"}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \":\\\"string\\\"},\\\"resource\\\":{\\\"id\\\":\\\"string\\\",\\\"environment\\\
+          \":\\\"string\\\"}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -1296,7 +1350,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"string\",\"environment\":\"string\"},\"resource\":{\"id\":\"lkc-c29js0\",\"related\":\"https://api.confluent.cloud/cmk/v2/kafka-clusters/lkc-c29js0\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/kafka=lkc-c29js0\"}}"
+          payload = "{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"string\",\"environment\":\"string\"},\"resource\":{\"id\":\"string\",\"environment\":\"string\"}}"
 
           headers = {
               'content-type': "application/json",
@@ -1341,11 +1395,7 @@ paths:
             display_name: 'CI kafka access key',
             description: 'This API key provides kafka access to cluster x',
             owner: {id: 'string', environment: 'string'},
-            resource: {
-              id: 'lkc-c29js0',
-              related: 'https://api.confluent.cloud/cmk/v2/kafka-clusters/lkc-c29js0',
-              resource_name: 'crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/kafka=lkc-c29js0'
-            }
+            resource: {id: 'string', environment: 'string'}
           }));
           req.end();
       - lang: C
@@ -1360,7 +1410,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"string\",\"environment\":\"string\"},\"resource\":{\"id\":\"lkc-c29js0\",\"related\":\"https://api.confluent.cloud/cmk/v2/kafka-clusters/lkc-c29js0\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/kafka=lkc-c29js0\"}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"string\",\"environment\":\"string\"},\"resource\":{\"id\":\"string\",\"environment\":\"string\"}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1369,7 +1419,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"string\",\"environment\":\"string\"},\"resource\":{\"id\":\"lkc-c29js0\",\"related\":\"https://api.confluent.cloud/cmk/v2/kafka-clusters/lkc-c29js0\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/kafka=lkc-c29js0\"}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"string\",\"environment\":\"string\"},\"resource\":{\"id\":\"string\",\"environment\":\"string\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Cloud V2
 components:
@@ -1600,6 +1650,7 @@ components:
           example: R15hoiDIq8Nxu/lY4mPO3DwAVIfU5W7OI+efsB607mLgHTnVW5XJGVqX2ysDx987
           readOnly: true
           type: string
+          x-redact: true
         display_name:
           description: A human readable name for the API key
           example: CI kafka access key
@@ -1611,22 +1662,14 @@ components:
         owner:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
-          - required:
-            - related
           description: The owner to which this belongs. The owner can be one of iam.v2.User,
             iam.v2.ServiceAccount.
           x-immutable: true
         resource:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
-          - required:
-            - related
           description: The resource associated with this object. The resource can
             be one of cmk.v2.KafkaCluster, apikeys.v2.SchemaRegistry, apikeys.v2.ksqlDB.
-          example:
-            id: lkc-c29js0
-            related: https://api.confluent.cloud/cmk/v2/kafka-clusters/lkc-c29js0
-            resource_name: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/kafka=lkc-c29js0
           x-immutable: true
       type: object
     SearchFilter:
@@ -1648,13 +1691,6 @@ components:
 
 
         Related guide: [API Keys in Confluent Cloud](https://docs.confluent.io/cloud/current/client-apps/api-keys.html).
-      example:
-        metadata: ""
-        data:
-        - ""
-        - ""
-        kind: ApiKeyList
-        api_version: iam/v2
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -1682,6 +1718,8 @@ components:
               next:
                 example: https://api.confluent.cloud/iam/v2/api-keys?page_token=UvmDWOB1iwfAIBPj6EYb
         data:
+          description: A data property that contains an array of resource items. Each
+            entry in the array is a separate resource.
           items:
             allOf:
             - $ref: '#/components/schemas/iam.v2.ApiKey'
@@ -1779,6 +1817,8 @@ components:
           nullable: true
           type: string
         total_size:
+          description: Number of records in the full result set. This response may
+            be paginated and have a smaller number of records.
           example: 123
           format: int32
           minimum: 0
@@ -1807,7 +1847,7 @@ components:
           type: string
         resource_name:
           description: CRN reference to the referred resource
-          format: crn
+          format: uri
           minLength: 1
           readOnly: true
           type: string
@@ -1832,6 +1872,7 @@ components:
         an operation.
       properties:
         errors:
+          description: List of errors which caused this operation to fail
           items:
             $ref: '#/components/schemas/Error'
           type: array
@@ -1920,6 +1961,7 @@ components:
           example: R15hoiDIq8Nxu/lY4mPO3DwAVIfU5W7OI+efsB607mLgHTnVW5XJGVqX2ysDx987
           readOnly: true
           type: string
+          x-redact: true
         display_name:
           description: A human readable name for the API key
           example: CI kafka access key
@@ -1930,6 +1972,9 @@ components:
           type: string
       type: object
     Error_source:
+      description: If this error was caused by a particular part of the API request,
+        the source will point to the query string parameter or request body property
+        that caused it.
       properties:
         pointer:
           description: A JSON Pointer [RFC6901] to the associated entity in the request

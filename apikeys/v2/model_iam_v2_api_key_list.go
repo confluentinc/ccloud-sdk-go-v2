@@ -36,6 +36,7 @@ type IamV2ApiKeyList struct {
 	// Kind defines the object this REST resource represents.
 	Kind string `json:"kind"`
 	Metadata ListMeta `json:"metadata"`
+	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
 	Data []IamV2ApiKey `json:"data"`
 }
 
@@ -154,6 +155,44 @@ func (o *IamV2ApiKeyList) GetDataOk() (*[]IamV2ApiKey, bool) {
 // SetData sets field value
 func (o *IamV2ApiKeyList) SetData(v []IamV2ApiKey) {
 	o.Data = v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *IamV2ApiKeyList) Redact() {
+    recurseRedact(&o.ApiVersion)
+    recurseRedact(&o.Kind)
+    recurseRedact(&o.Metadata)
+    recurseRedact(&o.Data)
+}
+
+func recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o IamV2ApiKeyList) MarshalJSON() ([]byte, error) {
