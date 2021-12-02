@@ -29,7 +29,7 @@ import (
 	"encoding/json"
 )
 
-// IamV2ApiKeyUpdate `ApiKey` objects represent access to different parts of Confluent Cloud. Some types of API keys represent access to a single cluster/resource such as a Kafka cluster or Schema Registry. Cloud API Keys represent access to resources within an organization that are not tied to a specific cluster, such as the Metrics API or Connect API.  The `ApiKey` resource specifically represents API keys for Users, rather than Service Accounts. Please see the `ServiceAccountKey` API reference on this page to see how to manage API keys for Service Accounts.  The API allows you to list, create, and delete your API Keys.   Related guide: [API Keys in Confluent Cloud](https://docs.confluent.io/cloud/current/client-apps/api-keys.html).
+// IamV2ApiKeyUpdate `ApiKey` objects represent access to different parts of Confluent Cloud. Some types of API keys represent access to a single cluster/resource such as a Kafka cluster or Schema Registry. Cloud API Keys represent access to resources within an organization that are not tied to a specific cluster, such as the Metrics API or Connect API.  The `ApiKey` resource specifically represents API keys for Users, rather than Service Accounts. Please see the `ServiceAccountKey` API reference on this page to see how to manage API keys for Service Accounts.  The API allows you to list, create, and delete your API Keys.   Related guide: [API Keys in Confluent Cloud](https://docs.confluent.io/cloud/current/client-apps/api-keys.html).  ## The Api Keys Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.ApiKey\" />
 type IamV2ApiKeyUpdate struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
@@ -285,47 +285,6 @@ func (o *IamV2ApiKeyUpdate) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *IamV2ApiKeyUpdate) SetDescription(v string) {
 	o.Description = &v
-}
-
-// Redact resets all sensitive fields to their zero value.
-func (o *IamV2ApiKeyUpdate) Redact() {
-    recurseRedact(o.ApiVersion)
-    recurseRedact(o.Kind)
-    recurseRedact(o.Id)
-    recurseRedact(o.Metadata)
-    o.Secret = nil
-    recurseRedact(o.DisplayName)
-    recurseRedact(o.Description)
-}
-
-func recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
-}
-
-func zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o IamV2ApiKeyUpdate) MarshalJSON() ([]byte, error) {

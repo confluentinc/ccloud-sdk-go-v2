@@ -20,7 +20,7 @@ servers:
   url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud V2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20V2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
     `ApiKey` objects represent access to different parts of Confluent Cloud. Some types
     of API keys represent access to a single cluster/resource such as a Kafka cluster or
@@ -35,12 +35,15 @@ tags:
 
 
     Related guide: [API Keys in Confluent Cloud](https://docs.confluent.io/cloud/current/client-apps/api-keys.html).
+
+    ## The Api Keys Model
+    <SchemaDefinition schemaRef="#/components/schemas/iam.v2.ApiKey" />
   name: Api Keys (iam/v2)
 paths:
   /iam/v2/api-keys:
     get:
       description: |
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud V2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20V2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all api keys.
 
@@ -101,7 +104,7 @@ paths:
                             example:
                               id: u-a83k9b
                               related: https://api.confluent.cloud/iam/v2/users/u-a83k9b
-                              resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/user=u-a83k9b
+                              resource_name: https://api.confluent.cloud/user=u-a83k9b
                           resource:
                             example:
                               id: lkc-c29js0
@@ -227,7 +230,6 @@ paths:
       summary: List of Api Keys
       tags:
       - Api Keys (iam/v2)
-      x-request-access-name: Cloud V2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -314,7 +316,7 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud V2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20V2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create an api key.
       operationId: createIamV2ApiKey
@@ -350,7 +352,7 @@ paths:
                       example:
                         id: u-a83k9b
                         related: https://api.confluent.cloud/iam/v2/users/u-a83k9b
-                        resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/user=u-a83k9b
+                        resource_name: https://api.confluent.cloud/user=u-a83k9b
                     resource:
                       example:
                         id: lkc-c29js0
@@ -513,7 +515,6 @@ paths:
       summary: Create an Api Key
       tags:
       - Api Keys (iam/v2)
-      x-request-access-name: Cloud V2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -626,11 +627,10 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"resource\":{\"id\":\"lkc-c29js0\",\"environment\":\"string\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Cloud V2
   /iam/v2/api-keys/{id}:
     delete:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud V2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20V2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete an api key.
       operationId: deleteIamV2ApiKey
@@ -781,7 +781,6 @@ paths:
       summary: Delete an Api Key
       tags:
       - Api Keys (iam/v2)
-      x-request-access-name: Cloud V2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -868,7 +867,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud V2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20V2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read an api key.
       operationId: getIamV2ApiKey
@@ -899,7 +898,7 @@ paths:
                       example:
                         id: u-a83k9b
                         related: https://api.confluent.cloud/iam/v2/users/u-a83k9b
-                        resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/user=u-a83k9b
+                        resource_name: https://api.confluent.cloud/user=u-a83k9b
                     resource:
                       example:
                         id: lkc-c29js0
@@ -1042,7 +1041,6 @@ paths:
       summary: Read an Api Key
       tags:
       - Api Keys (iam/v2)
-      x-request-access-name: Cloud V2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1129,7 +1127,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud V2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20V2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update an api key.
 
@@ -1166,7 +1164,7 @@ paths:
                       example:
                         id: u-a83k9b
                         related: https://api.confluent.cloud/iam/v2/users/u-a83k9b
-                        resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/user=u-a83k9b
+                        resource_name: https://api.confluent.cloud/user=u-a83k9b
                     resource:
                       example:
                         id: lkc-c29js0
@@ -1309,7 +1307,6 @@ paths:
       summary: Update an Api Key
       tags:
       - Api Keys (iam/v2)
-      x-request-access-name: Cloud V2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1421,7 +1418,6 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"string\",\"environment\":\"string\"},\"resource\":{\"id\":\"string\",\"environment\":\"string\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Cloud V2
 components:
   responses:
     BadRequestError:
@@ -1612,6 +1608,9 @@ components:
 
 
         Related guide: [API Keys in Confluent Cloud](https://docs.confluent.io/cloud/current/client-apps/api-keys.html).
+
+        ## The Api Keys Model
+        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.ApiKey" />
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -1650,7 +1649,6 @@ components:
           example: R15hoiDIq8Nxu/lY4mPO3DwAVIfU5W7OI+efsB607mLgHTnVW5XJGVqX2ysDx987
           readOnly: true
           type: string
-          x-redact: true
         display_name:
           description: A human readable name for the API key
           example: CI kafka access key
@@ -1691,6 +1689,9 @@ components:
 
 
         Related guide: [API Keys in Confluent Cloud](https://docs.confluent.io/cloud/current/client-apps/api-keys.html).
+
+        ## The Api Keys Model
+        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.ApiKey" />
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -1923,6 +1924,9 @@ components:
 
 
         Related guide: [API Keys in Confluent Cloud](https://docs.confluent.io/cloud/current/client-apps/api-keys.html).
+
+        ## The Api Keys Model
+        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.ApiKey" />
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -1961,7 +1965,6 @@ components:
           example: R15hoiDIq8Nxu/lY4mPO3DwAVIfU5W7OI+efsB607mLgHTnVW5XJGVqX2ysDx987
           readOnly: true
           type: string
-          x-redact: true
         display_name:
           description: A human readable name for the API key
           example: CI kafka access key
