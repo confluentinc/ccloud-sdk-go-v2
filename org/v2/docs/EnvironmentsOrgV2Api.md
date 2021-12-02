@@ -1,22 +1,22 @@
-# \ServiceAccountsV2Api
+# \EnvironmentsOrgV2Api
 
 All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateV2ServiceAccount**](ServiceAccountsV2Api.md#CreateV2ServiceAccount) | **Post** /v2/service-accounts | Create a Service Account
-[**DeleteV2ServiceAccount**](ServiceAccountsV2Api.md#DeleteV2ServiceAccount) | **Delete** /v2/service-accounts/{id} | Delete a Service Account
-[**GetV2ServiceAccount**](ServiceAccountsV2Api.md#GetV2ServiceAccount) | **Get** /v2/service-accounts/{id} | Read a Service Account
-[**ListV2ServiceAccounts**](ServiceAccountsV2Api.md#ListV2ServiceAccounts) | **Get** /v2/service-accounts | List of Service Accounts
-[**UpdateV2ServiceAccount**](ServiceAccountsV2Api.md#UpdateV2ServiceAccount) | **Patch** /v2/service-accounts/{id} | Update a Service Account
+[**CreateOrgV2Environment**](EnvironmentsOrgV2Api.md#CreateOrgV2Environment) | **Post** /org/v2/environments | Create an Environment
+[**DeleteOrgV2Environment**](EnvironmentsOrgV2Api.md#DeleteOrgV2Environment) | **Delete** /org/v2/environments/{id} | Delete an Environment
+[**GetOrgV2Environment**](EnvironmentsOrgV2Api.md#GetOrgV2Environment) | **Get** /org/v2/environments/{id} | Read an Environment
+[**ListOrgV2Environments**](EnvironmentsOrgV2Api.md#ListOrgV2Environments) | **Get** /org/v2/environments | List of Environments
+[**UpdateOrgV2Environment**](EnvironmentsOrgV2Api.md#UpdateOrgV2Environment) | **Patch** /org/v2/environments/{id} | Update an Environment
 
 
 
-## CreateV2ServiceAccount
+## CreateOrgV2Environment
 
-> V2ServiceAccount CreateV2ServiceAccount(ctx).V2ServiceAccount(v2ServiceAccount).Execute()
+> OrgV2Environment CreateOrgV2Environment(ctx).OrgV2Environment(orgV2Environment).Execute()
 
-Create a Service Account
+Create an Environment
 
 
 
@@ -33,17 +33,17 @@ import (
 )
 
 func main() {
-    v2ServiceAccount := *openapiclient.NewV2ServiceAccount() // V2ServiceAccount |  (optional)
+    orgV2Environment := *openapiclient.NewOrgV2Environment() // OrgV2Environment |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ServiceAccountsV2Api.CreateV2ServiceAccount(context.Background()).V2ServiceAccount(v2ServiceAccount).Execute()
+    resp, r, err := api_client.EnvironmentsOrgV2Api.CreateOrgV2Environment(context.Background()).OrgV2Environment(orgV2Environment).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ServiceAccountsV2Api.CreateV2ServiceAccount``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsOrgV2Api.CreateOrgV2Environment``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateV2ServiceAccount`: V2ServiceAccount
-    fmt.Fprintf(os.Stdout, "Response from `ServiceAccountsV2Api.CreateV2ServiceAccount`: %v\n", resp)
+    // response from `CreateOrgV2Environment`: OrgV2Environment
+    fmt.Fprintf(os.Stdout, "Response from `EnvironmentsOrgV2Api.CreateOrgV2Environment`: %v\n", resp)
 }
 ```
 
@@ -53,16 +53,16 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateV2ServiceAccountRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateOrgV2EnvironmentRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **v2ServiceAccount** | [**V2ServiceAccount**](V2ServiceAccount.md) |  | 
+ **orgV2Environment** | [**OrgV2Environment**](OrgV2Environment.md) |  | 
 
 ### Return type
 
-[**V2ServiceAccount**](v2.ServiceAccount.md)
+[**OrgV2Environment**](org.v2.Environment.md)
 
 ### Authorization
 
@@ -78,11 +78,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteV2ServiceAccount
+## DeleteOrgV2Environment
 
-> DeleteV2ServiceAccount(ctx, id).Execute()
+> DeleteOrgV2Environment(ctx, id).Execute()
 
-Delete a Service Account
+Delete an Environment
 
 
 
@@ -99,13 +99,13 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | The unique identifier for the service account.
+    id := "id_example" // string | The unique identifier for the environment.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ServiceAccountsV2Api.DeleteV2ServiceAccount(context.Background(), id).Execute()
+    resp, r, err := api_client.EnvironmentsOrgV2Api.DeleteOrgV2Environment(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ServiceAccountsV2Api.DeleteV2ServiceAccount``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsOrgV2Api.DeleteOrgV2Environment``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -117,11 +117,11 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the service account. | 
+**id** | **string** | The unique identifier for the environment. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteV2ServiceAccountRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteOrgV2EnvironmentRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -146,11 +146,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetV2ServiceAccount
+## GetOrgV2Environment
 
-> V2ServiceAccount GetV2ServiceAccount(ctx, id).Execute()
+> OrgV2Environment GetOrgV2Environment(ctx, id).Execute()
 
-Read a Service Account
+Read an Environment
 
 
 
@@ -167,17 +167,17 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | The unique identifier for the service account.
+    id := "id_example" // string | The unique identifier for the environment.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ServiceAccountsV2Api.GetV2ServiceAccount(context.Background(), id).Execute()
+    resp, r, err := api_client.EnvironmentsOrgV2Api.GetOrgV2Environment(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ServiceAccountsV2Api.GetV2ServiceAccount``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsOrgV2Api.GetOrgV2Environment``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetV2ServiceAccount`: V2ServiceAccount
-    fmt.Fprintf(os.Stdout, "Response from `ServiceAccountsV2Api.GetV2ServiceAccount`: %v\n", resp)
+    // response from `GetOrgV2Environment`: OrgV2Environment
+    fmt.Fprintf(os.Stdout, "Response from `EnvironmentsOrgV2Api.GetOrgV2Environment`: %v\n", resp)
 }
 ```
 
@@ -187,11 +187,11 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the service account. | 
+**id** | **string** | The unique identifier for the environment. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetV2ServiceAccountRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetOrgV2EnvironmentRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -200,7 +200,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V2ServiceAccount**](v2.ServiceAccount.md)
+[**OrgV2Environment**](org.v2.Environment.md)
 
 ### Authorization
 
@@ -216,11 +216,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ListV2ServiceAccounts
+## ListOrgV2Environments
 
-> V2ServiceAccountList ListV2ServiceAccounts(ctx).PageSize(pageSize).PageToken(pageToken).Execute()
+> OrgV2EnvironmentList ListOrgV2Environments(ctx).PageSize(pageSize).PageToken(pageToken).Execute()
 
-List of Service Accounts
+List of Environments
 
 
 
@@ -242,13 +242,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ServiceAccountsV2Api.ListV2ServiceAccounts(context.Background()).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.EnvironmentsOrgV2Api.ListOrgV2Environments(context.Background()).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ServiceAccountsV2Api.ListV2ServiceAccounts``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsOrgV2Api.ListOrgV2Environments``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListV2ServiceAccounts`: V2ServiceAccountList
-    fmt.Fprintf(os.Stdout, "Response from `ServiceAccountsV2Api.ListV2ServiceAccounts`: %v\n", resp)
+    // response from `ListOrgV2Environments`: OrgV2EnvironmentList
+    fmt.Fprintf(os.Stdout, "Response from `EnvironmentsOrgV2Api.ListOrgV2Environments`: %v\n", resp)
 }
 ```
 
@@ -258,7 +258,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListV2ServiceAccountsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListOrgV2EnvironmentsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -268,7 +268,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V2ServiceAccountList**](V2ServiceAccountList.md)
+[**OrgV2EnvironmentList**](org.v2.EnvironmentList.md)
 
 ### Authorization
 
@@ -284,11 +284,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UpdateV2ServiceAccount
+## UpdateOrgV2Environment
 
-> V2ServiceAccount UpdateV2ServiceAccount(ctx, id).V2ServiceAccountUpdate(v2ServiceAccountUpdate).Execute()
+> OrgV2Environment UpdateOrgV2Environment(ctx, id).OrgV2Environment(orgV2Environment).Execute()
 
-Update a Service Account
+Update an Environment
 
 
 
@@ -305,18 +305,18 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | The unique identifier for the service account.
-    v2ServiceAccountUpdate := *openapiclient.NewV2ServiceAccountUpdate() // V2ServiceAccountUpdate |  (optional)
+    id := "id_example" // string | The unique identifier for the environment.
+    orgV2Environment := *openapiclient.NewOrgV2Environment() // OrgV2Environment |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ServiceAccountsV2Api.UpdateV2ServiceAccount(context.Background(), id).V2ServiceAccountUpdate(v2ServiceAccountUpdate).Execute()
+    resp, r, err := api_client.EnvironmentsOrgV2Api.UpdateOrgV2Environment(context.Background(), id).OrgV2Environment(orgV2Environment).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ServiceAccountsV2Api.UpdateV2ServiceAccount``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsOrgV2Api.UpdateOrgV2Environment``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UpdateV2ServiceAccount`: V2ServiceAccount
-    fmt.Fprintf(os.Stdout, "Response from `ServiceAccountsV2Api.UpdateV2ServiceAccount`: %v\n", resp)
+    // response from `UpdateOrgV2Environment`: OrgV2Environment
+    fmt.Fprintf(os.Stdout, "Response from `EnvironmentsOrgV2Api.UpdateOrgV2Environment`: %v\n", resp)
 }
 ```
 
@@ -326,21 +326,21 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the service account. | 
+**id** | **string** | The unique identifier for the environment. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUpdateV2ServiceAccountRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiUpdateOrgV2EnvironmentRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **v2ServiceAccountUpdate** | [**V2ServiceAccountUpdate**](V2ServiceAccountUpdate.md) |  | 
+ **orgV2Environment** | [**OrgV2Environment**](OrgV2Environment.md) |  | 
 
 ### Return type
 
-[**V2ServiceAccount**](v2.ServiceAccount.md)
+[**OrgV2Environment**](org.v2.Environment.md)
 
 ### Authorization
 
