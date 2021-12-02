@@ -39,207 +39,37 @@ var (
 	_ _context.Context
 )
 
-// ServiceAccountsV2ApiService ServiceAccountsV2Api service
-type ServiceAccountsV2ApiService service
+// UsersIamV2ApiService UsersIamV2Api service
+type UsersIamV2ApiService service
 
-type ApiCreateV2ServiceAccountRequest struct {
+type ApiDeleteIamV2UserRequest struct {
 	ctx _context.Context
-	ApiService *ServiceAccountsV2ApiService
-	v2ServiceAccount *V2ServiceAccount
-}
-
-func (r ApiCreateV2ServiceAccountRequest) V2ServiceAccount(v2ServiceAccount V2ServiceAccount) ApiCreateV2ServiceAccountRequest {
-	r.v2ServiceAccount = &v2ServiceAccount
-	return r
-}
-
-func (r ApiCreateV2ServiceAccountRequest) Execute() (V2ServiceAccount, *_nethttp.Response, error) {
-	return r.ApiService.CreateV2ServiceAccountExecute(r)
-}
-
-/*
-CreateV2ServiceAccount Create a Service Account
-
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+v2-early-access@confluent.io?subject=Request%20to%20join%20v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-
-Make a request to create a service account.
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateV2ServiceAccountRequest
-*/
-func (a *ServiceAccountsV2ApiService) CreateV2ServiceAccount(ctx _context.Context) ApiCreateV2ServiceAccountRequest {
-	return ApiCreateV2ServiceAccountRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-// Execute executes the request
-//  @return V2ServiceAccount
-func (a *ServiceAccountsV2ApiService) CreateV2ServiceAccountExecute(r ApiCreateV2ServiceAccountRequest) (V2ServiceAccount, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  V2ServiceAccount
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceAccountsV2ApiService.CreateV2ServiceAccount")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v2/service-accounts"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.v2ServiceAccount
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 402 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 409 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiDeleteV2ServiceAccountRequest struct {
-	ctx _context.Context
-	ApiService *ServiceAccountsV2ApiService
+	ApiService *UsersIamV2ApiService
 	id string
 }
 
 
-func (r ApiDeleteV2ServiceAccountRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.DeleteV2ServiceAccountExecute(r)
+func (r ApiDeleteIamV2UserRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteIamV2UserExecute(r)
 }
 
 /*
-DeleteV2ServiceAccount Delete a Service Account
+DeleteIamV2User Delete a User
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+v2-early-access@confluent.io?subject=Request%20to%20join%20v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to delete a service account.
+Make a request to delete a user.
 
-If successful, this request will also recursively delete all of the service account's associated resources,
+If successful, this request will also recursively delete all of the user's associated resources,
 including its cloud and cluster API keys.
 
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the service account.
- @return ApiDeleteV2ServiceAccountRequest
+ @param id The unique identifier for the user.
+ @return ApiDeleteIamV2UserRequest
 */
-func (a *ServiceAccountsV2ApiService) DeleteV2ServiceAccount(ctx _context.Context, id string) ApiDeleteV2ServiceAccountRequest {
-	return ApiDeleteV2ServiceAccountRequest{
+func (a *UsersIamV2ApiService) DeleteIamV2User(ctx _context.Context, id string) ApiDeleteIamV2UserRequest {
+	return ApiDeleteIamV2UserRequest{
 		ApiService: a,
 		ctx: ctx,
 		id: id,
@@ -247,7 +77,7 @@ func (a *ServiceAccountsV2ApiService) DeleteV2ServiceAccount(ctx _context.Contex
 }
 
 // Execute executes the request
-func (a *ServiceAccountsV2ApiService) DeleteV2ServiceAccountExecute(r ApiDeleteV2ServiceAccountRequest) (*_nethttp.Response, error) {
+func (a *UsersIamV2ApiService) DeleteIamV2UserExecute(r ApiDeleteIamV2UserRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
@@ -256,12 +86,12 @@ func (a *ServiceAccountsV2ApiService) DeleteV2ServiceAccountExecute(r ApiDeleteV
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceAccountsV2ApiService.DeleteV2ServiceAccount")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersIamV2ApiService.DeleteIamV2User")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/service-accounts/{id}"
+	localVarPath := localBasePath + "/iam/v2/users/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -362,30 +192,30 @@ func (a *ServiceAccountsV2ApiService) DeleteV2ServiceAccountExecute(r ApiDeleteV
 	return localVarHTTPResponse, nil
 }
 
-type ApiGetV2ServiceAccountRequest struct {
+type ApiGetIamV2UserRequest struct {
 	ctx _context.Context
-	ApiService *ServiceAccountsV2ApiService
+	ApiService *UsersIamV2ApiService
 	id string
 }
 
 
-func (r ApiGetV2ServiceAccountRequest) Execute() (V2ServiceAccount, *_nethttp.Response, error) {
-	return r.ApiService.GetV2ServiceAccountExecute(r)
+func (r ApiGetIamV2UserRequest) Execute() (IamV2User, *_nethttp.Response, error) {
+	return r.ApiService.GetIamV2UserExecute(r)
 }
 
 /*
-GetV2ServiceAccount Read a Service Account
+GetIamV2User Read a User
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+v2-early-access@confluent.io?subject=Request%20to%20join%20v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to read a service account.
+Make a request to read a user.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the service account.
- @return ApiGetV2ServiceAccountRequest
+ @param id The unique identifier for the user.
+ @return ApiGetIamV2UserRequest
 */
-func (a *ServiceAccountsV2ApiService) GetV2ServiceAccount(ctx _context.Context, id string) ApiGetV2ServiceAccountRequest {
-	return ApiGetV2ServiceAccountRequest{
+func (a *UsersIamV2ApiService) GetIamV2User(ctx _context.Context, id string) ApiGetIamV2UserRequest {
+	return ApiGetIamV2UserRequest{
 		ApiService: a,
 		ctx: ctx,
 		id: id,
@@ -393,23 +223,23 @@ func (a *ServiceAccountsV2ApiService) GetV2ServiceAccount(ctx _context.Context, 
 }
 
 // Execute executes the request
-//  @return V2ServiceAccount
-func (a *ServiceAccountsV2ApiService) GetV2ServiceAccountExecute(r ApiGetV2ServiceAccountRequest) (V2ServiceAccount, *_nethttp.Response, error) {
+//  @return IamV2User
+func (a *UsersIamV2ApiService) GetIamV2UserExecute(r ApiGetIamV2UserRequest) (IamV2User, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  V2ServiceAccount
+		localVarReturnValue  IamV2User
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceAccountsV2ApiService.GetV2ServiceAccount")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersIamV2ApiService.GetIamV2User")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/service-accounts/{id}"
+	localVarPath := localBasePath + "/iam/v2/users/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -519,63 +349,63 @@ func (a *ServiceAccountsV2ApiService) GetV2ServiceAccountExecute(r ApiGetV2Servi
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListV2ServiceAccountsRequest struct {
+type ApiListIamV2UsersRequest struct {
 	ctx _context.Context
-	ApiService *ServiceAccountsV2ApiService
+	ApiService *UsersIamV2ApiService
 	pageSize *int32
 	pageToken *string
 }
 
 // A pagination size for collection requests.
-func (r ApiListV2ServiceAccountsRequest) PageSize(pageSize int32) ApiListV2ServiceAccountsRequest {
+func (r ApiListIamV2UsersRequest) PageSize(pageSize int32) ApiListIamV2UsersRequest {
 	r.pageSize = &pageSize
 	return r
 }
 // An opaque pagination token for collection requests.
-func (r ApiListV2ServiceAccountsRequest) PageToken(pageToken string) ApiListV2ServiceAccountsRequest {
+func (r ApiListIamV2UsersRequest) PageToken(pageToken string) ApiListIamV2UsersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-func (r ApiListV2ServiceAccountsRequest) Execute() (V2ServiceAccountList, *_nethttp.Response, error) {
-	return r.ApiService.ListV2ServiceAccountsExecute(r)
+func (r ApiListIamV2UsersRequest) Execute() (IamV2UserList, *_nethttp.Response, error) {
+	return r.ApiService.ListIamV2UsersExecute(r)
 }
 
 /*
-ListV2ServiceAccounts List of Service Accounts
+ListIamV2Users List of Users
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+v2-early-access@confluent.io?subject=Request%20to%20join%20v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Retrieve a sorted, filtered, paginated list of all service accounts.
+Retrieve a sorted, filtered, paginated list of all users.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListV2ServiceAccountsRequest
+ @return ApiListIamV2UsersRequest
 */
-func (a *ServiceAccountsV2ApiService) ListV2ServiceAccounts(ctx _context.Context) ApiListV2ServiceAccountsRequest {
-	return ApiListV2ServiceAccountsRequest{
+func (a *UsersIamV2ApiService) ListIamV2Users(ctx _context.Context) ApiListIamV2UsersRequest {
+	return ApiListIamV2UsersRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return V2ServiceAccountList
-func (a *ServiceAccountsV2ApiService) ListV2ServiceAccountsExecute(r ApiListV2ServiceAccountsRequest) (V2ServiceAccountList, *_nethttp.Response, error) {
+//  @return IamV2UserList
+func (a *UsersIamV2ApiService) ListIamV2UsersExecute(r ApiListIamV2UsersRequest) (IamV2UserList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  V2ServiceAccountList
+		localVarReturnValue  IamV2UserList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceAccountsV2ApiService.ListV2ServiceAccounts")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersIamV2ApiService.ListIamV2Users")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/service-accounts"
+	localVarPath := localBasePath + "/iam/v2/users"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -680,37 +510,37 @@ func (a *ServiceAccountsV2ApiService) ListV2ServiceAccountsExecute(r ApiListV2Se
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateV2ServiceAccountRequest struct {
+type ApiUpdateIamV2UserRequest struct {
 	ctx _context.Context
-	ApiService *ServiceAccountsV2ApiService
+	ApiService *UsersIamV2ApiService
 	id string
-	v2ServiceAccountUpdate *V2ServiceAccountUpdate
+	iamV2UserUpdate *IamV2UserUpdate
 }
 
-func (r ApiUpdateV2ServiceAccountRequest) V2ServiceAccountUpdate(v2ServiceAccountUpdate V2ServiceAccountUpdate) ApiUpdateV2ServiceAccountRequest {
-	r.v2ServiceAccountUpdate = &v2ServiceAccountUpdate
+func (r ApiUpdateIamV2UserRequest) IamV2UserUpdate(iamV2UserUpdate IamV2UserUpdate) ApiUpdateIamV2UserRequest {
+	r.iamV2UserUpdate = &iamV2UserUpdate
 	return r
 }
 
-func (r ApiUpdateV2ServiceAccountRequest) Execute() (V2ServiceAccount, *_nethttp.Response, error) {
-	return r.ApiService.UpdateV2ServiceAccountExecute(r)
+func (r ApiUpdateIamV2UserRequest) Execute() (IamV2User, *_nethttp.Response, error) {
+	return r.ApiService.UpdateIamV2UserExecute(r)
 }
 
 /*
-UpdateV2ServiceAccount Update a Service Account
+UpdateIamV2User Update a User
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+v2-early-access@confluent.io?subject=Request%20to%20join%20v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to update a service account.
+Make a request to update a user.
 
 
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the service account.
- @return ApiUpdateV2ServiceAccountRequest
+ @param id The unique identifier for the user.
+ @return ApiUpdateIamV2UserRequest
 */
-func (a *ServiceAccountsV2ApiService) UpdateV2ServiceAccount(ctx _context.Context, id string) ApiUpdateV2ServiceAccountRequest {
-	return ApiUpdateV2ServiceAccountRequest{
+func (a *UsersIamV2ApiService) UpdateIamV2User(ctx _context.Context, id string) ApiUpdateIamV2UserRequest {
+	return ApiUpdateIamV2UserRequest{
 		ApiService: a,
 		ctx: ctx,
 		id: id,
@@ -718,23 +548,23 @@ func (a *ServiceAccountsV2ApiService) UpdateV2ServiceAccount(ctx _context.Contex
 }
 
 // Execute executes the request
-//  @return V2ServiceAccount
-func (a *ServiceAccountsV2ApiService) UpdateV2ServiceAccountExecute(r ApiUpdateV2ServiceAccountRequest) (V2ServiceAccount, *_nethttp.Response, error) {
+//  @return IamV2User
+func (a *UsersIamV2ApiService) UpdateIamV2UserExecute(r ApiUpdateIamV2UserRequest) (IamV2User, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  V2ServiceAccount
+		localVarReturnValue  IamV2User
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceAccountsV2ApiService.UpdateV2ServiceAccount")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersIamV2ApiService.UpdateIamV2User")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/service-accounts/{id}"
+	localVarPath := localBasePath + "/iam/v2/users/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -759,7 +589,7 @@ func (a *ServiceAccountsV2ApiService) UpdateV2ServiceAccountExecute(r ApiUpdateV
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.v2ServiceAccountUpdate
+	localVarPostBody = r.iamV2UserUpdate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

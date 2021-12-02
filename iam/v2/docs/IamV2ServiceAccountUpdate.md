@@ -1,4 +1,4 @@
-# V2Environment
+# IamV2ServiceAccountUpdate
 
 ## Properties
 
@@ -8,151 +8,151 @@ Name | Type | Description | Notes
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
-**DisplayName** | Pointer to **string** | A human-readable name for the Environment | [optional] 
+**Description** | Pointer to **string** | A free-form description of the Service Account | [optional] 
 
 ## Methods
 
-### NewV2Environment
+### NewIamV2ServiceAccountUpdate
 
-`func NewV2Environment() *V2Environment`
+`func NewIamV2ServiceAccountUpdate() *IamV2ServiceAccountUpdate`
 
-NewV2Environment instantiates a new V2Environment object
+NewIamV2ServiceAccountUpdate instantiates a new IamV2ServiceAccountUpdate object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewV2EnvironmentWithDefaults
+### NewIamV2ServiceAccountUpdateWithDefaults
 
-`func NewV2EnvironmentWithDefaults() *V2Environment`
+`func NewIamV2ServiceAccountUpdateWithDefaults() *IamV2ServiceAccountUpdate`
 
-NewV2EnvironmentWithDefaults instantiates a new V2Environment object
+NewIamV2ServiceAccountUpdateWithDefaults instantiates a new IamV2ServiceAccountUpdate object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetApiVersion
 
-`func (o *V2Environment) GetApiVersion() string`
+`func (o *IamV2ServiceAccountUpdate) GetApiVersion() string`
 
 GetApiVersion returns the ApiVersion field if non-nil, zero value otherwise.
 
 ### GetApiVersionOk
 
-`func (o *V2Environment) GetApiVersionOk() (*string, bool)`
+`func (o *IamV2ServiceAccountUpdate) GetApiVersionOk() (*string, bool)`
 
 GetApiVersionOk returns a tuple with the ApiVersion field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetApiVersion
 
-`func (o *V2Environment) SetApiVersion(v string)`
+`func (o *IamV2ServiceAccountUpdate) SetApiVersion(v string)`
 
 SetApiVersion sets ApiVersion field to given value.
 
 ### HasApiVersion
 
-`func (o *V2Environment) HasApiVersion() bool`
+`func (o *IamV2ServiceAccountUpdate) HasApiVersion() bool`
 
 HasApiVersion returns a boolean if a field has been set.
 
 ### GetKind
 
-`func (o *V2Environment) GetKind() string`
+`func (o *IamV2ServiceAccountUpdate) GetKind() string`
 
 GetKind returns the Kind field if non-nil, zero value otherwise.
 
 ### GetKindOk
 
-`func (o *V2Environment) GetKindOk() (*string, bool)`
+`func (o *IamV2ServiceAccountUpdate) GetKindOk() (*string, bool)`
 
 GetKindOk returns a tuple with the Kind field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetKind
 
-`func (o *V2Environment) SetKind(v string)`
+`func (o *IamV2ServiceAccountUpdate) SetKind(v string)`
 
 SetKind sets Kind field to given value.
 
 ### HasKind
 
-`func (o *V2Environment) HasKind() bool`
+`func (o *IamV2ServiceAccountUpdate) HasKind() bool`
 
 HasKind returns a boolean if a field has been set.
 
 ### GetId
 
-`func (o *V2Environment) GetId() string`
+`func (o *IamV2ServiceAccountUpdate) GetId() string`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *V2Environment) GetIdOk() (*string, bool)`
+`func (o *IamV2ServiceAccountUpdate) GetIdOk() (*string, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *V2Environment) SetId(v string)`
+`func (o *IamV2ServiceAccountUpdate) SetId(v string)`
 
 SetId sets Id field to given value.
 
 ### HasId
 
-`func (o *V2Environment) HasId() bool`
+`func (o *IamV2ServiceAccountUpdate) HasId() bool`
 
 HasId returns a boolean if a field has been set.
 
 ### GetMetadata
 
-`func (o *V2Environment) GetMetadata() ObjectMeta`
+`func (o *IamV2ServiceAccountUpdate) GetMetadata() ObjectMeta`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *V2Environment) GetMetadataOk() (*ObjectMeta, bool)`
+`func (o *IamV2ServiceAccountUpdate) GetMetadataOk() (*ObjectMeta, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *V2Environment) SetMetadata(v ObjectMeta)`
+`func (o *IamV2ServiceAccountUpdate) SetMetadata(v ObjectMeta)`
 
 SetMetadata sets Metadata field to given value.
 
 ### HasMetadata
 
-`func (o *V2Environment) HasMetadata() bool`
+`func (o *IamV2ServiceAccountUpdate) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
 
-### GetDisplayName
+### GetDescription
 
-`func (o *V2Environment) GetDisplayName() string`
+`func (o *IamV2ServiceAccountUpdate) GetDescription() string`
 
-GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
+GetDescription returns the Description field if non-nil, zero value otherwise.
 
-### GetDisplayNameOk
+### GetDescriptionOk
 
-`func (o *V2Environment) GetDisplayNameOk() (*string, bool)`
+`func (o *IamV2ServiceAccountUpdate) GetDescriptionOk() (*string, bool)`
 
-GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDisplayName
+### SetDescription
 
-`func (o *V2Environment) SetDisplayName(v string)`
+`func (o *IamV2ServiceAccountUpdate) SetDescription(v string)`
 
-SetDisplayName sets DisplayName field to given value.
+SetDescription sets Description field to given value.
 
-### HasDisplayName
+### HasDescription
 
-`func (o *V2Environment) HasDisplayName() bool`
+`func (o *IamV2ServiceAccountUpdate) HasDescription() bool`
 
-HasDisplayName returns a boolean if a field has been set.
+HasDescription returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

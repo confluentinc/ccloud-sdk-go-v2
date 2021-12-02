@@ -1,19 +1,19 @@
-# \UsersV2Api
+# \UsersIamV2Api
 
 All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeleteV2User**](UsersV2Api.md#DeleteV2User) | **Delete** /v2/users/{id} | Delete a User
-[**GetV2User**](UsersV2Api.md#GetV2User) | **Get** /v2/users/{id} | Read a User
-[**ListV2Users**](UsersV2Api.md#ListV2Users) | **Get** /v2/users | List of Users
-[**UpdateV2User**](UsersV2Api.md#UpdateV2User) | **Patch** /v2/users/{id} | Update a User
+[**DeleteIamV2User**](UsersIamV2Api.md#DeleteIamV2User) | **Delete** /iam/v2/users/{id} | Delete a User
+[**GetIamV2User**](UsersIamV2Api.md#GetIamV2User) | **Get** /iam/v2/users/{id} | Read a User
+[**ListIamV2Users**](UsersIamV2Api.md#ListIamV2Users) | **Get** /iam/v2/users | List of Users
+[**UpdateIamV2User**](UsersIamV2Api.md#UpdateIamV2User) | **Patch** /iam/v2/users/{id} | Update a User
 
 
 
-## DeleteV2User
+## DeleteIamV2User
 
-> DeleteV2User(ctx, id).Execute()
+> DeleteIamV2User(ctx, id).Execute()
 
 Delete a User
 
@@ -36,9 +36,9 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UsersV2Api.DeleteV2User(context.Background(), id).Execute()
+    resp, r, err := api_client.UsersIamV2Api.DeleteIamV2User(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersV2Api.DeleteV2User``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersIamV2Api.DeleteIamV2User``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -54,7 +54,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteV2UserRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteIamV2UserRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -79,9 +79,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetV2User
+## GetIamV2User
 
-> V2User GetV2User(ctx, id).Execute()
+> IamV2User GetIamV2User(ctx, id).Execute()
 
 Read a User
 
@@ -104,13 +104,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UsersV2Api.GetV2User(context.Background(), id).Execute()
+    resp, r, err := api_client.UsersIamV2Api.GetIamV2User(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersV2Api.GetV2User``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersIamV2Api.GetIamV2User``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetV2User`: V2User
-    fmt.Fprintf(os.Stdout, "Response from `UsersV2Api.GetV2User`: %v\n", resp)
+    // response from `GetIamV2User`: IamV2User
+    fmt.Fprintf(os.Stdout, "Response from `UsersIamV2Api.GetIamV2User`: %v\n", resp)
 }
 ```
 
@@ -124,7 +124,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetV2UserRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetIamV2UserRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -133,7 +133,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V2User**](v2.User.md)
+[**IamV2User**](iam.v2.User.md)
 
 ### Authorization
 
@@ -149,9 +149,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ListV2Users
+## ListIamV2Users
 
-> V2UserList ListV2Users(ctx).PageSize(pageSize).PageToken(pageToken).Execute()
+> IamV2UserList ListIamV2Users(ctx).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Users
 
@@ -175,13 +175,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UsersV2Api.ListV2Users(context.Background()).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.UsersIamV2Api.ListIamV2Users(context.Background()).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersV2Api.ListV2Users``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersIamV2Api.ListIamV2Users``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListV2Users`: V2UserList
-    fmt.Fprintf(os.Stdout, "Response from `UsersV2Api.ListV2Users`: %v\n", resp)
+    // response from `ListIamV2Users`: IamV2UserList
+    fmt.Fprintf(os.Stdout, "Response from `UsersIamV2Api.ListIamV2Users`: %v\n", resp)
 }
 ```
 
@@ -191,7 +191,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListV2UsersRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListIamV2UsersRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -201,7 +201,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V2UserList**](V2UserList.md)
+[**IamV2UserList**](iam.v2.UserList.md)
 
 ### Authorization
 
@@ -217,9 +217,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UpdateV2User
+## UpdateIamV2User
 
-> V2User UpdateV2User(ctx, id).V2UserUpdate(v2UserUpdate).Execute()
+> IamV2User UpdateIamV2User(ctx, id).IamV2UserUpdate(iamV2UserUpdate).Execute()
 
 Update a User
 
@@ -239,17 +239,17 @@ import (
 
 func main() {
     id := "id_example" // string | The unique identifier for the user.
-    v2UserUpdate := *openapiclient.NewV2UserUpdate() // V2UserUpdate |  (optional)
+    iamV2UserUpdate := *openapiclient.NewIamV2UserUpdate() // IamV2UserUpdate |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UsersV2Api.UpdateV2User(context.Background(), id).V2UserUpdate(v2UserUpdate).Execute()
+    resp, r, err := api_client.UsersIamV2Api.UpdateIamV2User(context.Background(), id).IamV2UserUpdate(iamV2UserUpdate).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersV2Api.UpdateV2User``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersIamV2Api.UpdateIamV2User``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UpdateV2User`: V2User
-    fmt.Fprintf(os.Stdout, "Response from `UsersV2Api.UpdateV2User`: %v\n", resp)
+    // response from `UpdateIamV2User`: IamV2User
+    fmt.Fprintf(os.Stdout, "Response from `UsersIamV2Api.UpdateIamV2User`: %v\n", resp)
 }
 ```
 
@@ -263,17 +263,17 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUpdateV2UserRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiUpdateIamV2UserRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **v2UserUpdate** | [**V2UserUpdate**](V2UserUpdate.md) |  | 
+ **iamV2UserUpdate** | [**IamV2UserUpdate**](IamV2UserUpdate.md) |  | 
 
 ### Return type
 
-[**V2User**](v2.User.md)
+[**IamV2User**](iam.v2.User.md)
 
 ### Authorization
 
