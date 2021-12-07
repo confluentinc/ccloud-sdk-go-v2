@@ -1,0 +1,571 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: monetization-eng@confluent.io
+    name: Monetization Team
+    url: https://confluent.slack.com/app_redirect?channel=billing-eng
+  description: |
+    Confluent Cloud Billing API
+  title: Billing API
+  version: 0.0.1-alpha0
+  x-api-id: 21c65edb-5671-44b4-a916-4e29d71b32fe
+  x-api-group: billing/v1alpha
+  x-audience: external-public
+  x-tag-group: Billing API (%s)
+servers:
+- description: Confluent Cloud production
+  url: https://api.confluent.cloud
+- description: Confluent Cloud staging
+  url: https://api.stag.cpdev.cloud
+- description: Confluent Cloud development
+  url: https://api.devel.cpdev.cloud
+tags:
+- description: |-
+    `Profile` objects represent the billing profile to your organization.
+
+
+    ## The Profiles Model
+    <SchemaDefinition schemaRef="#/components/schemas/billing.v1alpha.Profile" />
+  name: Profiles (billing/v1alpha)
+- description: |-
+    `SupportPlan` objects represent an organization's support plan and any relevant support info.
+
+
+    ## The Support Plans Model
+    <SchemaDefinition schemaRef="#/components/schemas/billing.v1alpha.SupportPlan" />
+  name: Support Plans (billing/v1alpha)
+- description: |-
+    `PromoCode` objects represent a promo code and details of the claim for that code.
+
+
+    ## The Promo Codes Model
+    <SchemaDefinition schemaRef="#/components/schemas/billing.v1alpha.PromoCode" />
+  name: Promo Codes (billing/v1alpha)
+paths: {}
+components:
+  responses:
+    BadRequestError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "400"
+              code: invalid_filter
+              title: Invalid Filter
+              detail: The 'delorean' resource can't be filtered by 'num_doors'
+              source:
+                parameter: num_doors
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: Bad Request
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+    UnauthenticatedError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "401"
+              code: user_unauthenticated
+              title: Authentication Required
+              detail: Valid authentication credentials must be provided
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: The request lacks valid authentication credentials for this resource.
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+        WWW-Authenticate:
+          description: The unique identifier for the API request.
+          example: Basic error="invalid_key", error_description="The API Key is invalid"
+          explode: false
+          schema:
+            type: string
+          style: simple
+      x-summary: Unauthorized
+    OverQuotaError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "402"
+              code: quota_exceeded
+              title: Kafka Clusters Per Org Quota Exceeded
+              detail: 'The request would exceed the quota: kafka_clusters_per_environment'
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: The request would exceed one or more quotas.
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+      x-summary: Over Quota
+    UnauthorizedError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "403"
+              code: user_unauthorized
+              title: User Access Unauthorized
+              detail: The user 'mcfly' is not allowed to access the 'delorean' resource
+                without the 'plutonium' role.
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: The access credentials were considered insufficient to grant access
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+      x-summary: Forbidden
+    ConflictError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "409"
+              code: resource_already_exists
+              title: Resource Already exists
+              detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                exists.
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: The request is in conflict with the current server state
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+        Location:
+          description: Resource URI of conflicting resource
+          explode: false
+          schema:
+            example: https://api.confluent.cloud/{object}/{id}
+            format: uri
+            type: string
+          style: simple
+      x-summary: Conflict
+    NotFoundError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "404"
+              title: Not Found
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: Not Found
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+    RateLimitError:
+      description: Rate Limit Exceeded
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+    DefaultSystemError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "500"
+              code: out_of_gas
+              title: DeLorean Out Of Gas
+              detail: The DeLorean has run out of gas, but Doc Brown will fill 'er
+                up for you asap
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: Oops, something went wrong!
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+  schemas:
+    billing.v1alpha.Profile:
+      description: |
+        `Profile` objects represent the billing profile to your organization.
+      properties:
+        email:
+          description: The organization's billing email address.
+          example: marty.mcfly@example.com
+          format: email
+          type: string
+        tax:
+          allOf:
+          - $ref: '#/components/schemas/billing.v1alpha.Tax'
+          description: The organization's tax information.
+      type: object
+      x-declarative: false
+      x-enable-id: true
+      x-enable-listmeta: true
+      x-enable-objectmeta: true
+    billing.v1alpha.SupportPlan:
+      description: |
+        `SupportPlan` objects represent an organization's support plan and any relevant support info.
+      properties:
+        subscription_type:
+          description: Support plan subscription type.
+          example: BUSINESS
+          type: string
+          x-extensible-enum:
+          - BASIC
+          - DEVELOPER
+          - BUSINESS
+          - PREMIER
+          x-immutable: true
+        effective_at:
+          description: Effective date of support plan.
+          example: 2006-01-02T15:04:05-07:00
+          format: date-time
+          type: string
+      type: object
+      x-declarative: false
+      x-enable-id: true
+      x-enable-listmeta: true
+      x-enable-objectmeta: true
+    billing.v1alpha.PromoCode:
+      description: |
+        `PromoCode` objects represent a promo code and details of the claim for that code.
+      properties:
+        code:
+          description: The promotional code.
+          example: EXAMPLEPROMOCODE
+          type: string
+        amount:
+          description: Total value of promo code in dollars.
+          example: 99.95
+          format: double
+          type: number
+        claim:
+          allOf:
+          - $ref: '#/components/schemas/billing.v1alpha.PromoCodeClaim'
+          description: The promo code's claim details.
+      type: object
+      x-declarative: false
+      x-enable-id: true
+      x-enable-listmeta: true
+      x-enable-objectmeta: true
+    billing.v1alpha.Tax:
+      description: Billing tax info.
+      properties:
+        line_1:
+          description: Address line 1 (e.g., street, PO Box, or company name).
+          type: string
+        line_2:
+          description: Address line 2 (e.g., apartment, suite, unit, or building).
+          type: string
+        city:
+          description: City, district, suburb, town, or village..
+          type: string
+        state:
+          description: State, county, province, or region.
+          type: string
+        country:
+          description: Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+          type: string
+        postal_code:
+          description: ZIP or postal code.
+          type: string
+        tax_ids:
+          description: The list of tax ID objects.
+          items:
+            $ref: '#/components/schemas/billing.v1alpha.TaxId'
+          minItems: 1
+          type: array
+      required:
+      - city
+      - country
+      - line_1
+      - postal_code
+      - state
+      type: object
+    billing.v1alpha.TaxId:
+      description: |
+        Tax ID object.
+      properties:
+        type:
+          description: Tax type based on region (https://stripe.com/docs/billing/customer/tax-ids).
+          type: string
+          x-extensible-enum:
+          - ae_trn
+          - au_abn
+          - au_arn
+          - br_cnpj
+          - br_cpf
+          - ca_bn
+          - ca_qst
+          - ch_vat
+          - cl_tin
+          - es_cif
+          - eu_vat
+          - gb_vat
+          - hk_br
+          - id_npwp
+          - in_gst
+          - jp_cn
+          - jp_rn
+          - kr_brn
+          - li_uid
+          - mx_rfc
+          - my_frp
+          - my_itn
+          - my_sst
+          - no_vat
+          - nz_gst
+          - ru_inn
+          - ru_kpp
+          - sa_vat
+          - sg_gst
+          - sg_uen
+          - th_vat
+          - tw_vat
+          - us_ein
+          - za_vat
+        identifier:
+          description: Tax identifier based on the region.
+          type: string
+      required:
+      - identifier
+      - type
+      type: object
+    billing.v1alpha.PromoCodeClaim:
+      description: |
+        Promo code claim.
+      properties:
+        balance:
+          description: Remaining amount of promo code in dollars.
+          example: 99.95
+          format: double
+          type: number
+        claimed_at:
+          description: Claim date of promo code.
+          example: 2006-01-02T15:04:05-07:00
+          format: date-time
+          type: string
+        expires_at:
+          description: Expiration date of promo code.
+          example: 2006-01-02T15:04:05-07:00
+          format: date-time
+          type: string
+      type: object
+    ObjectMeta:
+      additionalProperties: false
+      description: ObjectMeta is metadata that all persisted resources must have,
+        which includes all objects users must create.
+      properties:
+        self:
+          description: Self is a Uniform Resource Locator (URL) at which an object
+            can be addressed. This URL encodes the service location, API version,
+            and other particulars necessary to locate the resource at a point in time
+          example: https://api.confluent.cloud/v2/kafka-clusters/lkc-f3a90de
+          format: uri
+          readOnly: true
+          type: string
+        resource_name:
+          description: Resource Name is a Uniform Resource Identifier (URI) that is
+            globally unique across space and time. It is represented as a Confluent
+            Resource Name
+          example: crn://confluent.cloud/kafka=lkc-f3a90de
+          format: uri
+          readOnly: true
+          type: string
+        created_at:
+          description: The date and time at which this object was created. It is represented
+            in RFC3339 format and is in UTC.
+          example: 2006-01-02T15:04:05-07:00
+          format: date-time
+          readOnly: true
+          type: string
+        updated_at:
+          description: The date and time at which this object was last updated. It
+            is represented in RFC3339 format and is in UTC.
+          example: 2006-01-02T15:04:05-07:00
+          format: date-time
+          readOnly: true
+          type: string
+        deleted_at:
+          description: The date and time at which this object was (or will be) deleted.
+            It is represented in RFC3339 format and is in UTC.
+          example: 2006-01-02T15:04:05-07:00
+          format: date-time
+          readOnly: true
+          type: string
+      readOnly: true
+      required:
+      - self
+      type: object
+    ListMeta:
+      additionalProperties: false
+      description: ListMeta describes metadata that resource collections may have
+      properties:
+        first:
+          description: A link to the first page of results. If a response does not
+            contain a first link, then direct navigation to the first page is not
+            supported.
+          example: https://api.confluent.cloud/v2/resourcekinds
+          format: uri
+          nullable: true
+          type: string
+        last:
+          description: A link to the last page of results. If a response does not
+            contain a last link, then direct navigation to the last page is not supported.
+          example: https://api.confluent.cloud/v2/resourcekinds?page_token=bcAOehAY8F16YD84Z1wT
+          format: uri
+          nullable: true
+          type: string
+        prev:
+          description: A link to the previous page of results. If a response does
+            not contain a prev link, then either there is no previous data or backwards
+            traversal through the result set is not supported.
+          example: https://api.confluent.cloud/v2/resourcekinds?page_token=YIXRY97wWYmwzrax4dld
+          format: uri
+          nullable: true
+          type: string
+        next:
+          description: A link to the next page of results. If a response does not
+            contain a next link, then there is no more data available.
+          example: https://api.confluent.cloud/v2/resourcekinds?page_token=UvmDWOB1iwfAIBPj6EYb
+          format: uri
+          nullable: true
+          type: string
+        total_size:
+          description: Number of records in the full result set. This response may
+            be paginated and have a smaller number of records.
+          example: 123
+          format: int32
+          minimum: 0
+          type: integer
+      type: object
+    ObjectReference:
+      additionalProperties: false
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        environment:
+          description: Environment of the referred resource, if env-scoped
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        api_version:
+          description: API group and version of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
+    Failure:
+      additionalProperties: false
+      description: Provides information about problems encountered while performing
+        an operation.
+      properties:
+        errors:
+          description: List of errors which caused this operation to fail
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+          uniqueItems: true
+      required:
+      - errors
+      type: object
+    Error:
+      additionalProperties: false
+      description: Describes a particular error encountered while performing an operation.
+      properties:
+        id:
+          description: A unique identifier for this particular occurrence of the problem.
+          maxLength: 255
+          type: string
+        status:
+          description: The HTTP status code applicable to this problem, expressed
+            as a string value.
+          type: string
+        code:
+          description: An application-specific error code, expressed as a string value.
+          type: string
+        title:
+          description: A short, human-readable summary of the problem. It **SHOULD
+            NOT** change from occurrence to occurrence of the problem, except for
+            purposes of localization.
+          type: string
+        detail:
+          description: A human-readable explanation specific to this occurrence of
+            the problem.
+          type: string
+        source:
+          $ref: '#/components/schemas/Error_source'
+      type: object
+    Error_source:
+      description: If this error was caused by a particular part of the API request,
+        the source will point to the query string parameter or request body property
+        that caused it.
+      properties:
+        pointer:
+          description: A JSON Pointer [RFC6901] to the associated entity in the request
+            document [e.g. "/spec" for a spec object, or "/spec/title" for a specific
+            field].
+          type: string
+        parameter:
+          description: A string indicating which query parameter caused the error.
+          type: string
+      type: object
+  securitySchemes: {}
