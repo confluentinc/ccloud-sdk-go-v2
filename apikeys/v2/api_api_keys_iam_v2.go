@@ -546,10 +546,9 @@ ListIamV2ApiKeys List of Api Keys
 
 Retrieve a sorted, filtered, paginated list of all api keys.
 
-This can show all keys for a single owner (across resources - Kafka clusters,  Schema Registries, ksqlDB
-clusters and cloud access), or all keys for a single resource (across owners). If no `owner` or `resource`
-filters are specified, returns all API Keys in the organization. You will only see the keys that are
-accessible to the account making the API request.
+This can show all keys for a single owner (across resources - Kafka clusters), or all keys for a single
+resource (across owners). If no `owner` or `resource` filters are specified, returns all API Keys in the
+organization. You will only see the keys that are accessible to the account making the API request.
 
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

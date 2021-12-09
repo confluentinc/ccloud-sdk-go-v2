@@ -36,9 +36,9 @@ type ObjectReference struct {
 	// Environment of the referred resource, if env-scoped
 	Environment *string `json:"environment,omitempty"`
 	// API URL for accessing or modifying the referred object
-	Related string `json:"related"`
+	Related *string `json:"related,omitempty"`
 	// CRN reference to the referred resource
-	ResourceName string `json:"resource_name"`
+	ResourceName *string `json:"resource_name,omitempty"`
 	// API group and version of the referred resource
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind of the referred resource
@@ -49,11 +49,9 @@ type ObjectReference struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewObjectReference(id string, related string, resourceName string) *ObjectReference {
+func NewObjectReference(id string) *ObjectReference {
 	this := ObjectReference{}
 	this.Id = id
-	this.Related = related
-	this.ResourceName = resourceName
 	return &this
 }
 
@@ -121,52 +119,68 @@ func (o *ObjectReference) SetEnvironment(v string) {
 	o.Environment = &v
 }
 
-// GetRelated returns the Related field value
+// GetRelated returns the Related field value if set, zero value otherwise.
 func (o *ObjectReference) GetRelated() string {
-	if o == nil {
+	if o == nil || o.Related == nil {
 		var ret string
 		return ret
 	}
-
-	return o.Related
+	return *o.Related
 }
 
-// GetRelatedOk returns a tuple with the Related field value
+// GetRelatedOk returns a tuple with the Related field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ObjectReference) GetRelatedOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.Related == nil {
 		return nil, false
 	}
-	return &o.Related, true
+	return o.Related, true
 }
 
-// SetRelated sets field value
+// HasRelated returns a boolean if a field has been set.
+func (o *ObjectReference) HasRelated() bool {
+	if o != nil && o.Related != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRelated gets a reference to the given string and assigns it to the Related field.
 func (o *ObjectReference) SetRelated(v string) {
-	o.Related = v
+	o.Related = &v
 }
 
-// GetResourceName returns the ResourceName field value
+// GetResourceName returns the ResourceName field value if set, zero value otherwise.
 func (o *ObjectReference) GetResourceName() string {
-	if o == nil {
+	if o == nil || o.ResourceName == nil {
 		var ret string
 		return ret
 	}
-
-	return o.ResourceName
+	return *o.ResourceName
 }
 
-// GetResourceNameOk returns a tuple with the ResourceName field value
+// GetResourceNameOk returns a tuple with the ResourceName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ObjectReference) GetResourceNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.ResourceName == nil {
 		return nil, false
 	}
-	return &o.ResourceName, true
+	return o.ResourceName, true
 }
 
-// SetResourceName sets field value
+// HasResourceName returns a boolean if a field has been set.
+func (o *ObjectReference) HasResourceName() bool {
+	if o != nil && o.ResourceName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetResourceName gets a reference to the given string and assigns it to the ResourceName field.
 func (o *ObjectReference) SetResourceName(v string) {
-	o.ResourceName = v
+	o.ResourceName = &v
 }
 
 // GetApiVersion returns the ApiVersion field value if set, zero value otherwise.
@@ -241,10 +255,10 @@ func (o ObjectReference) MarshalJSON() ([]byte, error) {
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
 	}
-	if true {
+	if o.Related != nil {
 		toSerialize["related"] = o.Related
 	}
-	if true {
+	if o.ResourceName != nil {
 		toSerialize["resource_name"] = o.ResourceName
 	}
 	if o.ApiVersion != nil {

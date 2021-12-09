@@ -47,10 +47,9 @@ paths:
 
         Retrieve a sorted, filtered, paginated list of all api keys.
 
-        This can show all keys for a single owner (across resources - Kafka clusters,  Schema Registries, ksqlDB
-        clusters and cloud access), or all keys for a single resource (across owners). If no `owner` or `resource`
-        filters are specified, returns all API Keys in the organization. You will only see the keys that are
-        accessible to the account making the API request.
+        This can show all keys for a single owner (across resources - Kafka clusters), or all keys for a single
+        resource (across owners). If no `owner` or `resource` filters are specified, returns all API Keys in the
+        organization. You will only see the keys that are accessible to the account making the API request.
       operationId: listIamV2ApiKeys
       parameters:
       - description: Filter the results by exact match for owner.
@@ -1649,6 +1648,7 @@ components:
           example: R15hoiDIq8Nxu/lY4mPO3DwAVIfU5W7OI+efsB607mLgHTnVW5XJGVqX2ysDx987
           readOnly: true
           type: string
+          x-redact: true
         display_name:
           description: A human readable name for the API key
           example: CI kafka access key
@@ -1667,7 +1667,7 @@ components:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
           description: The resource associated with this object. The resource can
-            be one of cmk.v2.KafkaCluster, apikeys.v2.SchemaRegistry, apikeys.v2.ksqlDB.
+            be one of cmk.v2.KafkaCluster.
           x-immutable: true
       type: object
     SearchFilter:
@@ -1864,8 +1864,6 @@ components:
           type: string
       required:
       - id
-      - related
-      - resource_name
       type: object
     Failure:
       additionalProperties: false
@@ -1965,6 +1963,7 @@ components:
           example: R15hoiDIq8Nxu/lY4mPO3DwAVIfU5W7OI+efsB607mLgHTnVW5XJGVqX2ysDx987
           readOnly: true
           type: string
+          x-redact: true
         display_name:
           description: A human readable name for the API key
           example: CI kafka access key

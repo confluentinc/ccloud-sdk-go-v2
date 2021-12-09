@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **DisplayName** | Pointer to **string** | A human readable name for the API key | [optional] 
 **Description** | Pointer to **string** | A human readable description for the API key | [optional] 
 **Owner** | Pointer to [**ObjectReference**](ObjectReference.md) | The owner to which this belongs. The owner can be one of iam.v2.User, iam.v2.ServiceAccount. | [optional] 
-**Resource** | Pointer to [**ObjectReference**](ObjectReference.md) | The resource associated with this object. The resource can be one of cmk.v2.KafkaCluster, apikeys.v2.SchemaRegistry, apikeys.v2.ksqlDB. | [optional] 
+**Resource** | Pointer to [**ObjectReference**](ObjectReference.md) | The resource associated with this object. The resource can be one of cmk.v2.KafkaCluster. | [optional] 
 
 ## Methods
 
