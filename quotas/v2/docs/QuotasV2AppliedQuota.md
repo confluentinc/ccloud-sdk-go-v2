@@ -11,10 +11,11 @@ Name | Type | Description | Notes
 **Scope** | Pointer to **string** | The applied scope that this quota belongs to. | [optional] 
 **DisplayName** | Pointer to **string** | A human-readable name for the quota type name. | [optional] 
 **AppliedLimit** | Pointer to **int32** | The latest applied service quota value, taking into account any limit adjustments.  | [optional] 
-**User** | Pointer to [**ObjectReference**](ObjectReference.md) | The user to which this belongs. | [optional] 
+**User** | Pointer to [**ObjectReference**](ObjectReference.md) | The user associated with this object. | [optional] 
 **Organization** | Pointer to [**ObjectReference**](ObjectReference.md) | A unique organization id to associate a specific organization to this quota. | [optional] 
-**Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | A unique environment id to associate a specific environment to this quota.  | [optional] 
-**KafkaCluster** | Pointer to [**ObjectReference**](ObjectReference.md) | A unique Kafka cluster id to associate a specific cluster to this quota.  | [optional] 
+**Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment ID the quota is associated with.  | [optional] 
+**Network** | Pointer to [**ObjectReference**](ObjectReference.md) | The network ID the quota is associated with.  | [optional] 
+**KafkaCluster** | Pointer to [**ObjectReference**](ObjectReference.md) | The kafka cluster ID the quota is associated with.  | [optional] 
 
 ## Methods
 
@@ -284,6 +285,31 @@ SetEnvironment sets Environment field to given value.
 `func (o *QuotasV2AppliedQuota) HasEnvironment() bool`
 
 HasEnvironment returns a boolean if a field has been set.
+
+### GetNetwork
+
+`func (o *QuotasV2AppliedQuota) GetNetwork() ObjectReference`
+
+GetNetwork returns the Network field if non-nil, zero value otherwise.
+
+### GetNetworkOk
+
+`func (o *QuotasV2AppliedQuota) GetNetworkOk() (*ObjectReference, bool)`
+
+GetNetworkOk returns a tuple with the Network field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetwork
+
+`func (o *QuotasV2AppliedQuota) SetNetwork(v ObjectReference)`
+
+SetNetwork sets Network field to given value.
+
+### HasNetwork
+
+`func (o *QuotasV2AppliedQuota) HasNetwork() bool`
+
+HasNetwork returns a boolean if a field has been set.
 
 ### GetKafkaCluster
 

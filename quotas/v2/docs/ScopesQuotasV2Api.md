@@ -131,7 +131,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**QuotasV2ScopeList**](QuotasV2ScopeList.md)
+[**QuotasV2ScopeList**](quotas.v2.ScopeList.md)
 
 ### Authorization
 
