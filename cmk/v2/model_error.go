@@ -29,6 +29,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // Error Describes a particular error encountered while performing an operation.
 type Error struct {
 	// A unique identifier for this particular occurrence of the problem.
@@ -251,6 +255,46 @@ func (o *Error) HasSource() bool {
 // SetSource gets a reference to the given ErrorSource and assigns it to the Source field.
 func (o *Error) SetSource(v ErrorSource) {
 	o.Source = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *Error) Redact() {
+    o.recurseRedact(o.Id)
+    o.recurseRedact(o.Status)
+    o.recurseRedact(o.Code)
+    o.recurseRedact(o.Title)
+    o.recurseRedact(o.Detail)
+    o.recurseRedact(o.Source)
+}
+
+func (o *Error) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o Error) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o Error) MarshalJSON() ([]byte, error) {

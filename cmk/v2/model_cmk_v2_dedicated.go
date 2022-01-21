@@ -29,12 +29,18 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // CmkV2Dedicated A dedicated cluster with its parameters. 
 type CmkV2Dedicated struct {
-	// Dedicated cluster is in Early Access. 
+	// Dedicated cluster type. 
 	Kind string `json:"kind"`
-	// The number of Confluent Kafka Units (CKUs) for Dedicated cluster types. MULTI_ZONE dedicated clusters must have more than two CKUs. 
+	// The number of Confluent Kafka Units (CKUs) for Dedicated cluster types. MULTI_ZONE dedicated clusters must have at least two CKUs. 
 	Cku int32 `json:"cku"`
+	// The id of the encryption key that is used to encrypt the data in the Kafka cluster. (e.g. for Amazon Web Services, the Amazon Resource Name of the key). 
+	EncryptionKey *string `json:"encryption_key,omitempty"`
 }
 
 // NewCmkV2Dedicated instantiates a new CmkV2Dedicated object
@@ -104,6 +110,75 @@ func (o *CmkV2Dedicated) SetCku(v int32) {
 	o.Cku = v
 }
 
+// GetEncryptionKey returns the EncryptionKey field value if set, zero value otherwise.
+func (o *CmkV2Dedicated) GetEncryptionKey() string {
+	if o == nil || o.EncryptionKey == nil {
+		var ret string
+		return ret
+	}
+	return *o.EncryptionKey
+}
+
+// GetEncryptionKeyOk returns a tuple with the EncryptionKey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CmkV2Dedicated) GetEncryptionKeyOk() (*string, bool) {
+	if o == nil || o.EncryptionKey == nil {
+		return nil, false
+	}
+	return o.EncryptionKey, true
+}
+
+// HasEncryptionKey returns a boolean if a field has been set.
+func (o *CmkV2Dedicated) HasEncryptionKey() bool {
+	if o != nil && o.EncryptionKey != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEncryptionKey gets a reference to the given string and assigns it to the EncryptionKey field.
+func (o *CmkV2Dedicated) SetEncryptionKey(v string) {
+	o.EncryptionKey = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *CmkV2Dedicated) Redact() {
+    o.recurseRedact(&o.Kind)
+    o.recurseRedact(&o.Cku)
+    o.recurseRedact(o.EncryptionKey)
+}
+
+func (o *CmkV2Dedicated) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o CmkV2Dedicated) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
+}
+
 func (o CmkV2Dedicated) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -111,6 +186,9 @@ func (o CmkV2Dedicated) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["cku"] = o.Cku
+	}
+	if o.EncryptionKey != nil {
+		toSerialize["encryption_key"] = o.EncryptionKey
 	}
 	return json.Marshal(toSerialize)
 }

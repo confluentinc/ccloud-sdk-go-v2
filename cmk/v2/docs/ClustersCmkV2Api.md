@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 
 ## ListCmkV2Clusters
 
-> CmkV2ClusterList ListCmkV2Clusters(ctx).Environment(environment).Network(network).PageSize(pageSize).PageToken(pageToken).Execute()
+> CmkV2ClusterList ListCmkV2Clusters(ctx).Environment(environment).SpecNetwork(specNetwork).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Clusters
 
@@ -242,13 +242,13 @@ import (
 
 func main() {
     environment := "env-00000" // string | Filter the results by exact match for environment.
-    network := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for network. Pass multiple times to see results matching any of the values. (optional)
+    specNetwork := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClustersCmkV2Api.ListCmkV2Clusters(context.Background()).Environment(environment).Network(network).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.ClustersCmkV2Api.ListCmkV2Clusters(context.Background()).Environment(environment).SpecNetwork(specNetwork).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ClustersCmkV2Api.ListCmkV2Clusters``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -270,13 +270,13 @@ Other parameters are passed through a pointer to a apiListCmkV2ClustersRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **environment** | **string** | Filter the results by exact match for environment. | 
- **network** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for network. Pass multiple times to see results matching any of the values. | 
+ **specNetwork** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 
 ### Return type
 
-[**CmkV2ClusterList**](CmkV2ClusterList.md)
+[**CmkV2ClusterList**](cmk.v2.ClusterList.md)
 
 ### Authorization
 

@@ -539,7 +539,7 @@ type ApiListCmkV2ClustersRequest struct {
 	ctx _context.Context
 	ApiService *ClustersCmkV2ApiService
 	environment *string
-	network *MultipleSearchFilter
+	specNetwork *MultipleSearchFilter
 	pageSize *int32
 	pageToken *string
 }
@@ -549,9 +549,9 @@ func (r ApiListCmkV2ClustersRequest) Environment(environment string) ApiListCmkV
 	r.environment = &environment
 	return r
 }
-// Filter the results by exact match for network. Pass multiple times to see results matching any of the values.
-func (r ApiListCmkV2ClustersRequest) Network(network MultipleSearchFilter) ApiListCmkV2ClustersRequest {
-	r.network = &network
+// Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values.
+func (r ApiListCmkV2ClustersRequest) SpecNetwork(specNetwork MultipleSearchFilter) ApiListCmkV2ClustersRequest {
+	r.specNetwork = &specNetwork
 	return r
 }
 // A pagination size for collection requests.
@@ -613,8 +613,8 @@ func (a *ClustersCmkV2ApiService) ListCmkV2ClustersExecute(r ApiListCmkV2Cluster
 	}
 
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
-	if r.network != nil {
-		localVarQueryParams.Add("network", parameterToString(*r.network, ""))
+	if r.specNetwork != nil {
+		localVarQueryParams.Add("spec.network", parameterToString(*r.specNetwork, ""))
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))

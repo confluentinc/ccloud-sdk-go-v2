@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ApiVersion** | **string** | APIVersion defines the schema version of this representation of a resource. | [readonly] 
 **Kind** | **string** | Kind defines the object this REST resource represents. | [readonly] 
 **Metadata** | [**ListMeta**](ListMeta.md) |  | 
-**Data** | [**[]CmkV2Cluster**](CmkV2Cluster.md) |  | 
+**Data** | [**[]CmkV2Cluster**](CmkV2Cluster.md) | A data property that contains an array of resource items. Each entry in the array is a separate resource. | 
 
 ## Methods
 

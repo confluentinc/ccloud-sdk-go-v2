@@ -29,6 +29,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // CmkV2ClusterSpec The desired state of the Cluster
 type CmkV2ClusterSpec struct {
 	// The name of the cluster.
@@ -47,7 +51,7 @@ type CmkV2ClusterSpec struct {
 	HttpEndpoint *string `json:"http_endpoint,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
-	// The network to which this belongs.
+	// The network associated with this object.
 	Network *ObjectReference `json:"network,omitempty"`
 }
 
@@ -358,6 +362,49 @@ func (o *CmkV2ClusterSpec) HasNetwork() bool {
 // SetNetwork gets a reference to the given ObjectReference and assigns it to the Network field.
 func (o *CmkV2ClusterSpec) SetNetwork(v ObjectReference) {
 	o.Network = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *CmkV2ClusterSpec) Redact() {
+    o.recurseRedact(o.DisplayName)
+    o.recurseRedact(o.Availability)
+    o.recurseRedact(o.Cloud)
+    o.recurseRedact(o.Region)
+    o.recurseRedact(o.Config)
+    o.recurseRedact(o.KafkaBootstrapEndpoint)
+    o.recurseRedact(o.HttpEndpoint)
+    o.recurseRedact(o.Environment)
+    o.recurseRedact(o.Network)
+}
+
+func (o *CmkV2ClusterSpec) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o CmkV2ClusterSpec) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o CmkV2ClusterSpec) MarshalJSON() ([]byte, error) {
