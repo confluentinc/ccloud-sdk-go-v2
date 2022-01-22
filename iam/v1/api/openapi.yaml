@@ -1,0 +1,250 @@
+openapi: 3.0.0
+info:
+  title: Deprecated API v1
+  version: 0.0.1-alpha0
+  x-api-id: 3bd28786-25ed-4da8-b44f-7ecd12e7e740
+  x-api-group: v1
+servers:
+- description: Confluent Cloud production
+  url: https://api.confluent.cloud
+- description: Confluent Cloud staging
+  url: https://api.stag.cpdev.cloud
+- description: Confluent Cloud development
+  url: https://api.devel.cpdev.cloud
+paths:
+  /v1/service_accounts:
+    get:
+      description: Retrieve a sorted, filtered, paginated list of all service accounts.
+      operationId: listV1ServiceAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/v1.ServiceAccountList'
+          description: Service Account.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The request lacks valid authentication credentials for this
+            resource.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The access credentials were considered insufficient to grant
+            access
+        "429":
+          description: Rate Limit Exceeded
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Oops, something went wrong!
+      security:
+      - api-key: []
+      summary: List of Service Accounts
+      tags:
+      - Service Accounts (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://api.confluent.cloud/v1/service_accounts \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/v1/service_accounts")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/v1/service_accounts\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/v1/service_accounts", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/v1/service_accounts",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/v1/service_accounts");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/v1/service_accounts");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+components:
+  responses:
+    BadRequestError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Bad Request
+    UnauthenticatedError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The request lacks valid authentication credentials for this resource.
+    OverQuotaError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The request would exceed one or more quotas.
+    UnauthorizedError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The access credentials were considered insufficient to grant access
+    ConflictError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The request is in conflict with the current server state
+    NotFoundError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Not Found
+    RateLimitError:
+      description: Rate Limit Exceeded
+    DefaultSystemError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Oops, something went wrong!
+  schemas:
+    v1.ServiceAccount:
+      description: |-
+        `ServiceAccount` objects are typically used to represent applications and other non-human principals
+        that may access your Confluent resources.
+
+        The API allows you to list all your service accounts.
+
+
+        ## The Service Accounts Model
+        <SchemaDefinition schemaRef="#/components/schemas/v1.ServiceAccount" />
+      properties:
+        id:
+          type: integer
+        resource_id:
+          example: sa-12345
+          type: string
+      type: object
+    v1.ServiceAccountList:
+      description: |-
+        `ServiceAccount` objects are typically used to represent applications and other non-human principals
+        that may access your Confluent resources.
+
+        The API allows you to list all your service accounts.
+
+
+        ## The Service Accounts Model
+        <SchemaDefinition schemaRef="#/components/schemas/v1.ServiceAccount" />
+      properties:
+        users:
+          description: A data property that contains an array of resource items. Each
+            entry in the array is a separate resource.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/v1.ServiceAccount'
+            - required:
+              - id
+              type: object
+          type: array
+          uniqueItems: true
+      required:
+      - users
+      type: object
+    Error:
+      description: Describes a particular error encountered while performing an operation.
+      properties:
+        code:
+          description: An application-specific error code, expressed as a string value.
+          type: string
+        message:
+          description: A short, human-readable summary of the problem. It **SHOULD
+            NOT** change from occurrence to occurrence of the problem, except for
+            purposes of localization.
+          type: string
+      type: object
+  securitySchemes:
+    api-key:
+      description: Authenticate with API Keys using HTTP Basic Auth. Treat the API
+        Key ID as the username and API Key Secret as the password.
+      scheme: basic
+      type: http
