@@ -37,52 +37,52 @@ var (
 	_ _context.Context
 )
 
-// ServiceAccountsV1ApiService ServiceAccountsV1Api service
-type ServiceAccountsV1ApiService service
+// UsersV1ApiService UsersV1Api service
+type UsersV1ApiService service
 
-type ApiListV1ServiceAccountsRequest struct {
+type ApiListV1UsersRequest struct {
 	ctx _context.Context
-	ApiService *ServiceAccountsV1ApiService
+	ApiService *UsersV1ApiService
 }
 
 
-func (r ApiListV1ServiceAccountsRequest) Execute() (V1ServiceAccountList, *_nethttp.Response, error) {
-	return r.ApiService.ListV1ServiceAccountsExecute(r)
+func (r ApiListV1UsersRequest) Execute() (V1UserList, *_nethttp.Response, error) {
+	return r.ApiService.ListV1UsersExecute(r)
 }
 
 /*
-ListV1ServiceAccounts List of Service Accounts
+ListV1Users List of Users
 
-Retrieve a sorted, filtered, paginated list of all service accounts.
+Retrieve a sorted, filtered, paginated list of all users.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListV1ServiceAccountsRequest
+ @return ApiListV1UsersRequest
 */
-func (a *ServiceAccountsV1ApiService) ListV1ServiceAccounts(ctx _context.Context) ApiListV1ServiceAccountsRequest {
-	return ApiListV1ServiceAccountsRequest{
+func (a *UsersV1ApiService) ListV1Users(ctx _context.Context) ApiListV1UsersRequest {
+	return ApiListV1UsersRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return V1ServiceAccountList
-func (a *ServiceAccountsV1ApiService) ListV1ServiceAccountsExecute(r ApiListV1ServiceAccountsRequest) (V1ServiceAccountList, *_nethttp.Response, error) {
+//  @return V1UserList
+func (a *UsersV1ApiService) ListV1UsersExecute(r ApiListV1UsersRequest) (V1UserList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  V1ServiceAccountList
+		localVarReturnValue  V1UserList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceAccountsV1ApiService.ListV1ServiceAccounts")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersV1ApiService.ListV1Users")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/service_accounts"
+	localVarPath := localBasePath + "/users"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}

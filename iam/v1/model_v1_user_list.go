@@ -32,34 +32,34 @@ import (
 	"reflect"
 )
 
-// V1ServiceAccountList `ServiceAccount` objects are typically used to represent applications and other non-human principals that may access your Confluent resources.  The API allows you to list all your service accounts.   ## The Service Accounts Model <SchemaDefinition schemaRef=\"#/components/schemas/v1.ServiceAccount\" />
-type V1ServiceAccountList struct {
+// V1UserList `User` objects represent individuals who may access your Confluent resources.  The API allows you to retrieve, update, and delete individual users, as well as list of all your users. This API cannot be used to create new user accounts.   ## The Users Model <SchemaDefinition schemaRef=\"#/components/schemas/v1.User\" />
+type V1UserList struct {
 	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
-	Users []V1ServiceAccount `json:"users"`
+	Users []V1User `json:"users"`
 }
 
-// NewV1ServiceAccountList instantiates a new V1ServiceAccountList object
+// NewV1UserList instantiates a new V1UserList object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV1ServiceAccountList(users []V1ServiceAccount) *V1ServiceAccountList {
-	this := V1ServiceAccountList{}
+func NewV1UserList(users []V1User) *V1UserList {
+	this := V1UserList{}
 	this.Users = users
 	return &this
 }
 
-// NewV1ServiceAccountListWithDefaults instantiates a new V1ServiceAccountList object
+// NewV1UserListWithDefaults instantiates a new V1UserList object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewV1ServiceAccountListWithDefaults() *V1ServiceAccountList {
-	this := V1ServiceAccountList{}
+func NewV1UserListWithDefaults() *V1UserList {
+	this := V1UserList{}
 	return &this
 }
 
 // GetUsers returns the Users field value
-func (o *V1ServiceAccountList) GetUsers() []V1ServiceAccount {
+func (o *V1UserList) GetUsers() []V1User {
 	if o == nil {
-		var ret []V1ServiceAccount
+		var ret []V1User
 		return ret
 	}
 
@@ -68,7 +68,7 @@ func (o *V1ServiceAccountList) GetUsers() []V1ServiceAccount {
 
 // GetUsersOk returns a tuple with the Users field value
 // and a boolean to check if the value has been set.
-func (o *V1ServiceAccountList) GetUsersOk() (*[]V1ServiceAccount, bool) {
+func (o *V1UserList) GetUsersOk() (*[]V1User, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -76,16 +76,16 @@ func (o *V1ServiceAccountList) GetUsersOk() (*[]V1ServiceAccount, bool) {
 }
 
 // SetUsers sets field value
-func (o *V1ServiceAccountList) SetUsers(v []V1ServiceAccount) {
+func (o *V1UserList) SetUsers(v []V1User) {
 	o.Users = v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *V1ServiceAccountList) Redact() {
+func (o *V1UserList) Redact() {
     o.recurseRedact(&o.Users)
 }
 
-func (o *V1ServiceAccountList) recurseRedact(v interface{}) {
+func (o *V1UserList) recurseRedact(v interface{}) {
     type redactor interface {
         Redact()
     }
@@ -110,12 +110,12 @@ func (o *V1ServiceAccountList) recurseRedact(v interface{}) {
     }
 }
 
-func (o V1ServiceAccountList) zeroField(v interface{}) {
+func (o V1UserList) zeroField(v interface{}) {
     p := reflect.ValueOf(v).Elem()
     p.Set(reflect.Zero(p.Type()))
 }
 
-func (o V1ServiceAccountList) MarshalJSON() ([]byte, error) {
+func (o V1UserList) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["users"] = o.Users
@@ -123,38 +123,38 @@ func (o V1ServiceAccountList) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableV1ServiceAccountList struct {
-	value *V1ServiceAccountList
+type NullableV1UserList struct {
+	value *V1UserList
 	isSet bool
 }
 
-func (v NullableV1ServiceAccountList) Get() *V1ServiceAccountList {
+func (v NullableV1UserList) Get() *V1UserList {
 	return v.value
 }
 
-func (v *NullableV1ServiceAccountList) Set(val *V1ServiceAccountList) {
+func (v *NullableV1UserList) Set(val *V1UserList) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableV1ServiceAccountList) IsSet() bool {
+func (v NullableV1UserList) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableV1ServiceAccountList) Unset() {
+func (v *NullableV1UserList) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableV1ServiceAccountList(val *V1ServiceAccountList) *NullableV1ServiceAccountList {
-	return &NullableV1ServiceAccountList{value: val, isSet: true}
+func NewNullableV1UserList(val *V1UserList) *NullableV1UserList {
+	return &NullableV1UserList{value: val, isSet: true}
 }
 
-func (v NullableV1ServiceAccountList) MarshalJSON() ([]byte, error) {
+func (v NullableV1UserList) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableV1ServiceAccountList) UnmarshalJSON(src []byte) error {
+func (v *NullableV1UserList) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

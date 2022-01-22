@@ -1,18 +1,18 @@
-# \ServiceAccountsV1Api
+# \UsersV1Api
 
 All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ListV1ServiceAccounts**](ServiceAccountsV1Api.md#ListV1ServiceAccounts) | **Get** /service_accounts | List of Service Accounts
+[**ListV1Users**](UsersV1Api.md#ListV1Users) | **Get** /users | List of Users
 
 
 
-## ListV1ServiceAccounts
+## ListV1Users
 
-> V1ServiceAccountList ListV1ServiceAccounts(ctx).Execute()
+> V1UserList ListV1Users(ctx).Execute()
 
-List of Service Accounts
+List of Users
 
 
 
@@ -32,13 +32,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ServiceAccountsV1Api.ListV1ServiceAccounts(context.Background()).Execute()
+    resp, r, err := api_client.UsersV1Api.ListV1Users(context.Background()).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ServiceAccountsV1Api.ListV1ServiceAccounts``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersV1Api.ListV1Users``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListV1ServiceAccounts`: V1ServiceAccountList
-    fmt.Fprintf(os.Stdout, "Response from `ServiceAccountsV1Api.ListV1ServiceAccounts`: %v\n", resp)
+    // response from `ListV1Users`: V1UserList
+    fmt.Fprintf(os.Stdout, "Response from `UsersV1Api.ListV1Users`: %v\n", resp)
 }
 ```
 
@@ -48,12 +48,12 @@ This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListV1ServiceAccountsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListV1UsersRequest struct via the builder pattern
 
 
 ### Return type
 
-[**V1ServiceAccountList**](v1.ServiceAccountList.md)
+[**V1UserList**](v1.UserList.md)
 
 ### Authorization
 

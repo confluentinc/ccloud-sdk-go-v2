@@ -32,102 +32,100 @@ import (
 	"reflect"
 )
 
-// Error Describes a particular error encountered while performing an operation.
-type Error struct {
-	// An application-specific error code, expressed as a string value.
-	Code *string `json:"code,omitempty"`
-	// A short, human-readable summary of the problem. It **SHOULD NOT** change from occurrence to occurrence of the problem, except for purposes of localization.
-	Message *string `json:"message,omitempty"`
+// V1User `User` objects represent individuals who may access your Confluent resources.  The API allows you to retrieve, update, and delete individual users, as well as list of all your users. This API cannot be used to create new user accounts.   ## The Users Model <SchemaDefinition schemaRef=\"#/components/schemas/v1.User\" />
+type V1User struct {
+	Id *int32 `json:"id,omitempty"`
+	ResourceId *string `json:"resource_id,omitempty"`
 }
 
-// NewError instantiates a new Error object
+// NewV1User instantiates a new V1User object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewError() *Error {
-	this := Error{}
+func NewV1User() *V1User {
+	this := V1User{}
 	return &this
 }
 
-// NewErrorWithDefaults instantiates a new Error object
+// NewV1UserWithDefaults instantiates a new V1User object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewErrorWithDefaults() *Error {
-	this := Error{}
+func NewV1UserWithDefaults() *V1User {
+	this := V1User{}
 	return &this
 }
 
-// GetCode returns the Code field value if set, zero value otherwise.
-func (o *Error) GetCode() string {
-	if o == nil || o.Code == nil {
-		var ret string
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *V1User) GetId() int32 {
+	if o == nil || o.Id == nil {
+		var ret int32
 		return ret
 	}
-	return *o.Code
+	return *o.Id
 }
 
-// GetCodeOk returns a tuple with the Code field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Error) GetCodeOk() (*string, bool) {
-	if o == nil || o.Code == nil {
+func (o *V1User) GetIdOk() (*int32, bool) {
+	if o == nil || o.Id == nil {
 		return nil, false
 	}
-	return o.Code, true
+	return o.Id, true
 }
 
-// HasCode returns a boolean if a field has been set.
-func (o *Error) HasCode() bool {
-	if o != nil && o.Code != nil {
+// HasId returns a boolean if a field has been set.
+func (o *V1User) HasId() bool {
+	if o != nil && o.Id != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetCode gets a reference to the given string and assigns it to the Code field.
-func (o *Error) SetCode(v string) {
-	o.Code = &v
+// SetId gets a reference to the given int32 and assigns it to the Id field.
+func (o *V1User) SetId(v int32) {
+	o.Id = &v
 }
 
-// GetMessage returns the Message field value if set, zero value otherwise.
-func (o *Error) GetMessage() string {
-	if o == nil || o.Message == nil {
+// GetResourceId returns the ResourceId field value if set, zero value otherwise.
+func (o *V1User) GetResourceId() string {
+	if o == nil || o.ResourceId == nil {
 		var ret string
 		return ret
 	}
-	return *o.Message
+	return *o.ResourceId
 }
 
-// GetMessageOk returns a tuple with the Message field value if set, nil otherwise
+// GetResourceIdOk returns a tuple with the ResourceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Error) GetMessageOk() (*string, bool) {
-	if o == nil || o.Message == nil {
+func (o *V1User) GetResourceIdOk() (*string, bool) {
+	if o == nil || o.ResourceId == nil {
 		return nil, false
 	}
-	return o.Message, true
+	return o.ResourceId, true
 }
 
-// HasMessage returns a boolean if a field has been set.
-func (o *Error) HasMessage() bool {
-	if o != nil && o.Message != nil {
+// HasResourceId returns a boolean if a field has been set.
+func (o *V1User) HasResourceId() bool {
+	if o != nil && o.ResourceId != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetMessage gets a reference to the given string and assigns it to the Message field.
-func (o *Error) SetMessage(v string) {
-	o.Message = &v
+// SetResourceId gets a reference to the given string and assigns it to the ResourceId field.
+func (o *V1User) SetResourceId(v string) {
+	o.ResourceId = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *Error) Redact() {
-    o.recurseRedact(o.Code)
-    o.recurseRedact(o.Message)
+func (o *V1User) Redact() {
+    o.recurseRedact(o.Id)
+    o.recurseRedact(o.ResourceId)
 }
 
-func (o *Error) recurseRedact(v interface{}) {
+func (o *V1User) recurseRedact(v interface{}) {
     type redactor interface {
         Redact()
     }
@@ -152,54 +150,54 @@ func (o *Error) recurseRedact(v interface{}) {
     }
 }
 
-func (o Error) zeroField(v interface{}) {
+func (o V1User) zeroField(v interface{}) {
     p := reflect.ValueOf(v).Elem()
     p.Set(reflect.Zero(p.Type()))
 }
 
-func (o Error) MarshalJSON() ([]byte, error) {
+func (o V1User) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Code != nil {
-		toSerialize["code"] = o.Code
+	if o.Id != nil {
+		toSerialize["id"] = o.Id
 	}
-	if o.Message != nil {
-		toSerialize["message"] = o.Message
+	if o.ResourceId != nil {
+		toSerialize["resource_id"] = o.ResourceId
 	}
 	return json.Marshal(toSerialize)
 }
 
-type NullableError struct {
-	value *Error
+type NullableV1User struct {
+	value *V1User
 	isSet bool
 }
 
-func (v NullableError) Get() *Error {
+func (v NullableV1User) Get() *V1User {
 	return v.value
 }
 
-func (v *NullableError) Set(val *Error) {
+func (v *NullableV1User) Set(val *V1User) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableError) IsSet() bool {
+func (v NullableV1User) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableError) Unset() {
+func (v *NullableV1User) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableError(val *Error) *NullableError {
-	return &NullableError{value: val, isSet: true}
+func NewNullableV1User(val *V1User) *NullableV1User {
+	return &NullableV1User{value: val, isSet: true}
 }
 
-func (v NullableError) MarshalJSON() ([]byte, error) {
+func (v NullableV1User) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableError) UnmarshalJSON(src []byte) error {
+func (v *NullableV1User) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
