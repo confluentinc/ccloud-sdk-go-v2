@@ -78,7 +78,7 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ServiceAccountsV1Api* | [**ListV1ServiceAccounts**](docs/ServiceAccountsV1Api.md#listv1serviceaccounts) | **Get** /v1/service_accounts | List of Service Accounts
+*ServiceAccountsV1Api* | [**ListV1ServiceAccounts**](docs/ServiceAccountsV1Api.md#listv1serviceaccounts) | **Get** /service_accounts | List of Service Accounts
 
 
 ## Documentation For Models

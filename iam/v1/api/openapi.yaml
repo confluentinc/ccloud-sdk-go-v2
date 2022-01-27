@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Deprecated API v1
+  title: IAM API v1
   version: 0.0.1-alpha0
   x-api-id: 3bd28786-25ed-4da8-b44f-7ecd12e7e740
   x-api-group: v1
@@ -12,7 +12,7 @@ servers:
 - description: Confluent Cloud development
   url: https://api.devel.cpdev.cloud
 paths:
-  /v1/service_accounts:
+  /service_accounts:
     get:
       description: Retrieve a sorted, filtered, paginated list of all service accounts.
       operationId: listV1ServiceAccounts
@@ -61,14 +61,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://api.confluent.cloud/v1/service_accounts \
+            --url https://api.confluent.cloud/service_accounts \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/v1/service_accounts")
+            .url("https://api.confluent.cloud/service_accounts")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -76,7 +76,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/v1/service_accounts\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/service_accounts\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -89,7 +89,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/v1/service_accounts", headers=headers)
+          conn.request("GET", "/service_accounts", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -103,7 +103,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/v1/service_accounts",
+            "path": "/service_accounts",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -128,7 +128,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/v1/service_accounts");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/service_accounts");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -137,7 +137,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/v1/service_accounts");
+          var client = new RestClient("https://api.confluent.cloud/service_accounts");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
