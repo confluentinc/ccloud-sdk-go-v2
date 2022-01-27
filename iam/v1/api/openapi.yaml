@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: IAM API v1
+  title: Deprecated API v1
   version: 0.0.1-alpha0
   x-api-id: 3bd28786-25ed-4da8-b44f-7ecd12e7e740
   x-api-group: v1
@@ -12,7 +12,7 @@ servers:
 - description: Confluent Cloud development
   url: https://api.devel.cpdev.cloud
 paths:
-  /service_accounts:
+  /v1/service_accounts:
     get:
       description: Retrieve a sorted, filtered, paginated list of all service accounts.
       operationId: listV1ServiceAccounts
@@ -61,14 +61,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://api.confluent.cloud/service_accounts \
+            --url https://api.confluent.cloud/v1/service_accounts \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/service_accounts")
+            .url("https://api.confluent.cloud/v1/service_accounts")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -76,7 +76,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/service_accounts\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/v1/service_accounts\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -89,7 +89,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/service_accounts", headers=headers)
+          conn.request("GET", "/v1/service_accounts", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -103,7 +103,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/service_accounts",
+            "path": "/v1/service_accounts",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -128,7 +128,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/service_accounts");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/v1/service_accounts");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -137,136 +137,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/service_accounts");
-          var request = new RestRequest(Method.GET);
-          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          IRestResponse response = client.Execute(request);
-  /users:
-    get:
-      description: Retrieve a sorted, filtered, paginated list of all users.
-      operationId: listV1Users
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/v1.UserList'
-          description: User.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: The request lacks valid authentication credentials for this
-            resource.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: The access credentials were considered insufficient to grant
-            access
-        "429":
-          description: Rate Limit Exceeded
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Oops, something went wrong!
-      security:
-      - api-key: []
-      summary: List of Users
-      tags:
-      - Users (v1)
-      x-codeSamples:
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url https://api.confluent.cloud/users \
-            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
-      - lang: Java
-        source: |-
-          OkHttpClient client = new OkHttpClient();
-
-          Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/users")
-            .get()
-            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
-            .build();
-
-          Response response = client.newCall(request).execute();
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/users\"\n\
-          \n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
-      - lang: Python
-        source: |-
-          import http.client
-
-          conn = http.client.HTTPSConnection("api.confluent.cloud")
-
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
-
-          conn.request("GET", "/users", headers=headers)
-
-          res = conn.getresponse()
-          data = res.read()
-
-          print(data.decode("utf-8"))
-      - lang: Node
-        source: |-
-          const http = require("https");
-
-          const options = {
-            "method": "GET",
-            "hostname": "api.confluent.cloud",
-            "port": null,
-            "path": "/users",
-            "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
-            }
-          };
-
-          const req = http.request(options, function (res) {
-            const chunks = [];
-
-            res.on("data", function (chunk) {
-              chunks.push(chunk);
-            });
-
-            res.on("end", function () {
-              const body = Buffer.concat(chunks);
-              console.log(body.toString());
-            });
-          });
-
-          req.end();
-      - lang: C
-        source: |-
-          CURL *hnd = curl_easy_init();
-
-          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/users");
-
-          struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
-          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
-
-          CURLcode ret = curl_easy_perform(hnd);
-      - lang: C#
-        source: |-
-          var client = new RestClient("https://api.confluent.cloud/users");
+          var client = new RestClient("https://api.confluent.cloud/v1/service_accounts");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -351,48 +222,6 @@ components:
           items:
             allOf:
             - $ref: '#/components/schemas/v1.ServiceAccount'
-            - required:
-              - id
-              type: object
-          type: array
-          uniqueItems: true
-      required:
-      - users
-      type: object
-    v1.User:
-      description: |-
-        `User` objects represent individuals who may access your Confluent resources.
-
-        The API allows you to retrieve, update, and delete individual users, as well as list of all your
-        users. This API cannot be used to create new user accounts.
-
-
-        ## The Users Model
-        <SchemaDefinition schemaRef="#/components/schemas/v1.User" />
-      properties:
-        id:
-          type: integer
-        resource_id:
-          example: u-12345
-          type: string
-      type: object
-    v1.UserList:
-      description: |-
-        `User` objects represent individuals who may access your Confluent resources.
-
-        The API allows you to retrieve, update, and delete individual users, as well as list of all your
-        users. This API cannot be used to create new user accounts.
-
-
-        ## The Users Model
-        <SchemaDefinition schemaRef="#/components/schemas/v1.User" />
-      properties:
-        users:
-          description: A data property that contains an array of resource items. Each
-            entry in the array is a separate resource.
-          items:
-            allOf:
-            - $ref: '#/components/schemas/v1.User'
             - required:
               - id
               type: object

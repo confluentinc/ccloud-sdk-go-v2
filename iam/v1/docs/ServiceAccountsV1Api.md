@@ -4,7 +4,7 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ListV1ServiceAccounts**](ServiceAccountsV1Api.md#ListV1ServiceAccounts) | **Get** /service_accounts | List of Service Accounts
+[**ListV1ServiceAccounts**](ServiceAccountsV1Api.md#ListV1ServiceAccounts) | **Get** /v1/service_accounts | List of Service Accounts
 
 
 
