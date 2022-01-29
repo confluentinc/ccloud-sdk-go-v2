@@ -1869,6 +1869,27 @@ components:
           example: arn:aws:kms:us-west-2:000000000000:key/0000xxxx-00xx-00xx-00xx-0000000000xx
           type: string
           x-immutable: true
+        zones:
+          description: |
+            The list of zones the cluster is in.
+
+            On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)
+             (e.g. use1-az3)
+
+            On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)
+             (e.g. us-central1-c).
+          example:
+          - us-central1-a
+          - us-central1-b
+          - us-central1-c
+          items:
+            type: string
+          maxItems: 3
+          minItems: 1
+          readOnly: true
+          type: array
+          uniqueItems: true
+          x-immutable: true
       required:
       - cku
       - kind

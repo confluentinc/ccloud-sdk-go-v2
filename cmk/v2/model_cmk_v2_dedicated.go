@@ -41,6 +41,8 @@ type CmkV2Dedicated struct {
 	Cku int32 `json:"cku"`
 	// The id of the encryption key that is used to encrypt the data in the Kafka cluster. (e.g. for Amazon Web Services, the Amazon Resource Name of the key). 
 	EncryptionKey *string `json:"encryption_key,omitempty"`
+	// The list of zones the cluster is in.  On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3)  On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c). 
+	Zones *[]string `json:"zones,omitempty"`
 }
 
 // NewCmkV2Dedicated instantiates a new CmkV2Dedicated object
@@ -142,11 +144,44 @@ func (o *CmkV2Dedicated) SetEncryptionKey(v string) {
 	o.EncryptionKey = &v
 }
 
+// GetZones returns the Zones field value if set, zero value otherwise.
+func (o *CmkV2Dedicated) GetZones() []string {
+	if o == nil || o.Zones == nil {
+		var ret []string
+		return ret
+	}
+	return *o.Zones
+}
+
+// GetZonesOk returns a tuple with the Zones field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CmkV2Dedicated) GetZonesOk() (*[]string, bool) {
+	if o == nil || o.Zones == nil {
+		return nil, false
+	}
+	return o.Zones, true
+}
+
+// HasZones returns a boolean if a field has been set.
+func (o *CmkV2Dedicated) HasZones() bool {
+	if o != nil && o.Zones != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetZones gets a reference to the given []string and assigns it to the Zones field.
+func (o *CmkV2Dedicated) SetZones(v []string) {
+	o.Zones = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *CmkV2Dedicated) Redact() {
     o.recurseRedact(&o.Kind)
     o.recurseRedact(&o.Cku)
     o.recurseRedact(o.EncryptionKey)
+    o.recurseRedact(o.Zones)
 }
 
 func (o *CmkV2Dedicated) recurseRedact(v interface{}) {
@@ -189,6 +224,9 @@ func (o CmkV2Dedicated) MarshalJSON() ([]byte, error) {
 	}
 	if o.EncryptionKey != nil {
 		toSerialize["encryption_key"] = o.EncryptionKey
+	}
+	if o.Zones != nil {
+		toSerialize["zones"] = o.Zones
 	}
 	return json.Marshal(toSerialize)
 }
