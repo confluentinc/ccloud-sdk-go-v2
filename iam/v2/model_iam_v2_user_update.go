@@ -29,7 +29,11 @@ import (
 	"encoding/json"
 )
 
-// IamV2UserUpdate `User` objects represent individuals who may access your Confluent resources.  The API allows you to retrieve, update, and delete individual users, as well as list of all your users. This API cannot be used to create new user accounts.   Related guide: [Users in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/user-account.html).  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `users_per_org` | Users in one Confluent Cloud organization |
+import (
+	"reflect"
+)
+
+// IamV2UserUpdate `User` objects represent individuals who may access your Confluent resources.  The API allows you to retrieve, update, and delete individual users, as well as list of all your users. This API cannot be used to create new user accounts.   Related guide: [Users in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/user-account.html).  ## The Users Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.User\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `users_per_org` | Users in one Confluent Cloud organization |
 type IamV2UserUpdate struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
@@ -217,6 +221,45 @@ func (o *IamV2UserUpdate) HasFullName() bool {
 // SetFullName gets a reference to the given string and assigns it to the FullName field.
 func (o *IamV2UserUpdate) SetFullName(v string) {
 	o.FullName = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *IamV2UserUpdate) Redact() {
+    o.recurseRedact(o.ApiVersion)
+    o.recurseRedact(o.Kind)
+    o.recurseRedact(o.Id)
+    o.recurseRedact(o.Metadata)
+    o.recurseRedact(o.FullName)
+}
+
+func (o *IamV2UserUpdate) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o IamV2UserUpdate) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o IamV2UserUpdate) MarshalJSON() ([]byte, error) {

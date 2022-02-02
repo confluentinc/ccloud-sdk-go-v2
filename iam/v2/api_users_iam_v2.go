@@ -39,12 +39,87 @@ var (
 	_ _context.Context
 )
 
+type UsersIamV2Api interface {
+
+	/*
+	DeleteIamV2User Delete a User
+
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to delete a user.
+
+If successful, this request will also recursively delete all of the user's associated resources,
+including its cloud and cluster API keys.
+
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the user.
+	 @return ApiDeleteIamV2UserRequest
+	*/
+	DeleteIamV2User(ctx _context.Context, id string) ApiDeleteIamV2UserRequest
+
+	// DeleteIamV2UserExecute executes the request
+	DeleteIamV2UserExecute(r ApiDeleteIamV2UserRequest) (*_nethttp.Response, error)
+
+	/*
+	GetIamV2User Read a User
+
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to read a user.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the user.
+	 @return ApiGetIamV2UserRequest
+	*/
+	GetIamV2User(ctx _context.Context, id string) ApiGetIamV2UserRequest
+
+	// GetIamV2UserExecute executes the request
+	//  @return IamV2User
+	GetIamV2UserExecute(r ApiGetIamV2UserRequest) (IamV2User, *_nethttp.Response, error)
+
+	/*
+	ListIamV2Users List of Users
+
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Retrieve a sorted, filtered, paginated list of all users.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiListIamV2UsersRequest
+	*/
+	ListIamV2Users(ctx _context.Context) ApiListIamV2UsersRequest
+
+	// ListIamV2UsersExecute executes the request
+	//  @return IamV2UserList
+	ListIamV2UsersExecute(r ApiListIamV2UsersRequest) (IamV2UserList, *_nethttp.Response, error)
+
+	/*
+	UpdateIamV2User Update a User
+
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to update a user.
+
+
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the user.
+	 @return ApiUpdateIamV2UserRequest
+	*/
+	UpdateIamV2User(ctx _context.Context, id string) ApiUpdateIamV2UserRequest
+
+	// UpdateIamV2UserExecute executes the request
+	//  @return IamV2User
+	UpdateIamV2UserExecute(r ApiUpdateIamV2UserRequest) (IamV2User, *_nethttp.Response, error)
+}
+
 // UsersIamV2ApiService UsersIamV2Api service
 type UsersIamV2ApiService service
 
 type ApiDeleteIamV2UserRequest struct {
 	ctx _context.Context
-	ApiService *UsersIamV2ApiService
+	ApiService UsersIamV2Api
 	id string
 }
 
@@ -56,7 +131,7 @@ func (r ApiDeleteIamV2UserRequest) Execute() (*_nethttp.Response, error) {
 /*
 DeleteIamV2User Delete a User
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete a user.
 
@@ -194,7 +269,7 @@ func (a *UsersIamV2ApiService) DeleteIamV2UserExecute(r ApiDeleteIamV2UserReques
 
 type ApiGetIamV2UserRequest struct {
 	ctx _context.Context
-	ApiService *UsersIamV2ApiService
+	ApiService UsersIamV2Api
 	id string
 }
 
@@ -206,7 +281,7 @@ func (r ApiGetIamV2UserRequest) Execute() (IamV2User, *_nethttp.Response, error)
 /*
 GetIamV2User Read a User
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a user.
 
@@ -351,7 +426,7 @@ func (a *UsersIamV2ApiService) GetIamV2UserExecute(r ApiGetIamV2UserRequest) (Ia
 
 type ApiListIamV2UsersRequest struct {
 	ctx _context.Context
-	ApiService *UsersIamV2ApiService
+	ApiService UsersIamV2Api
 	pageSize *int32
 	pageToken *string
 }
@@ -374,7 +449,7 @@ func (r ApiListIamV2UsersRequest) Execute() (IamV2UserList, *_nethttp.Response, 
 /*
 ListIamV2Users List of Users
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all users.
 
@@ -512,7 +587,7 @@ func (a *UsersIamV2ApiService) ListIamV2UsersExecute(r ApiListIamV2UsersRequest)
 
 type ApiUpdateIamV2UserRequest struct {
 	ctx _context.Context
-	ApiService *UsersIamV2ApiService
+	ApiService UsersIamV2Api
 	id string
 	iamV2UserUpdate *IamV2UserUpdate
 }
@@ -529,7 +604,7 @@ func (r ApiUpdateIamV2UserRequest) Execute() (IamV2User, *_nethttp.Response, err
 /*
 UpdateIamV2User Update a User
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update a user.
 

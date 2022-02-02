@@ -9,13 +9,13 @@ info:
   x-api-id: 4e42a919-0a1d-44a1-a25c-ef40d6d5961a
   x-api-group: iam/v2
   x-audience: external-public
-  x-tag-group: Core API (%s)
+  x-tag-group: Identity Access Management (%s)
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
 tags:
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `User` objects represent individuals who may access your Confluent resources.
 
@@ -25,6 +25,9 @@ tags:
 
     Related guide: [Users in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/user-account.html).
 
+    ## The Users Model
+    <SchemaDefinition schemaRef="#/components/schemas/iam.v2.User" />
+
     ## Quotas and Limits
     This resource is subject to the following quotas:
 
@@ -33,7 +36,7 @@ tags:
     | `users_per_org` | Users in one Confluent Cloud organization |
   name: Users (iam/v2)
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `ServiceAccount` objects are typically used to represent applications and other non-human principals
     that may access your Confluent resources.
@@ -43,6 +46,9 @@ tags:
 
 
     Related guide: [Service Accounts in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/service-account.html).
+
+    ## The Service Accounts Model
+    <SchemaDefinition schemaRef="#/components/schemas/iam.v2.ServiceAccount" />
 
     ## Quotas and Limits
     This resource is subject to the following quotas:
@@ -55,7 +61,7 @@ paths:
   /iam/v2/users:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all users.
       operationId: listIamV2Users
@@ -205,7 +211,6 @@ paths:
       summary: List of Users
       tags:
       - Users (iam/v2)
-      x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -290,11 +295,10 @@ paths:
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Cloud v2
   /iam/v2/users/{id}:
     delete:
       description: |
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete a user.
 
@@ -448,7 +452,6 @@ paths:
       summary: Delete a User
       tags:
       - Users (iam/v2)
-      x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -535,7 +538,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a user.
       operationId: getIamV2User
@@ -697,7 +700,6 @@ paths:
       summary: Read a User
       tags:
       - Users (iam/v2)
-      x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -784,7 +786,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update a user.
 
@@ -973,7 +975,6 @@ paths:
       summary: Update a User
       tags:
       - Users (iam/v2)
-      x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1078,11 +1079,10 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"email\":\"marty.mcfly@example.com\",\"full_name\":\"Marty McFly\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Cloud v2
   /iam/v2/service-accounts:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all service accounts.
       operationId: listIamV2ServiceAccounts
@@ -1232,7 +1232,6 @@ paths:
       summary: List of Service Accounts
       tags:
       - Service Accounts (iam/v2)
-      x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1319,7 +1318,7 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create a service account.
       operationId: createIamV2ServiceAccount
@@ -1519,7 +1518,6 @@ paths:
       summary: Create a Service Account
       tags:
       - Service Accounts (iam/v2)
-      x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1627,11 +1625,10 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"display_name\":\"DeLorean_auto_repair\",\"description\":\"Doc's repair bot for the DeLorean\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Cloud v2
   /iam/v2/service-accounts/{id}:
     delete:
       description: |
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete a service account.
 
@@ -1785,7 +1782,6 @@ paths:
       summary: Delete a Service Account
       tags:
       - Service Accounts (iam/v2)
-      x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1872,7 +1868,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a service account.
       operationId: getIamV2ServiceAccount
@@ -2034,7 +2030,6 @@ paths:
       summary: Read a Service Account
       tags:
       - Service Accounts (iam/v2)
-      x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -2121,7 +2116,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update a service account.
 
@@ -2310,7 +2305,6 @@ paths:
       summary: Update a Service Account
       tags:
       - Service Accounts (iam/v2)
-      x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -2418,7 +2412,6 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"display_name\":\"DeLorean_auto_repair\",\"description\":\"Doc's repair bot for the DeLorean\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Cloud v2
 components:
   responses:
     BadRequestError:
@@ -2594,7 +2587,6 @@ components:
           style: simple
   schemas:
     iam.v2.User:
-      additionalProperties: false
       description: |-
         `User` objects represent individuals who may access your Confluent resources.
 
@@ -2603,6 +2595,9 @@ components:
 
 
         Related guide: [Users in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/user-account.html).
+
+        ## The Users Model
+        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.User" />
 
         ## Quotas and Limits
         This resource is subject to the following quotas:
@@ -2641,7 +2636,7 @@ components:
               self:
                 example: https://api.confluent.cloud/iam/v2/users/u-12345
               resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/user=u-12345
+                example: crn://confluent.cloud/user=u-12345
         email:
           description: The user's email address
           example: marty.mcfly@example.com
@@ -2654,7 +2649,6 @@ components:
           type: string
       type: object
     iam.v2.ServiceAccount:
-      additionalProperties: false
       description: |-
         `ServiceAccount` objects are typically used to represent applications and other non-human principals
         that may access your Confluent resources.
@@ -2664,6 +2658,9 @@ components:
 
 
         Related guide: [Service Accounts in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/service-account.html).
+
+        ## The Service Accounts Model
+        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.ServiceAccount" />
 
         ## Quotas and Limits
         This resource is subject to the following quotas:
@@ -2702,7 +2699,7 @@ components:
               self:
                 example: https://api.confluent.cloud/iam/v2/service-accounts/sa-12345
               resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/serviceaccount=sa-12345
+                example: crn://confluent.cloud/service-account=sa-12345
         display_name:
           description: A human-readable name for the Service Account
           example: DeLorean_auto_repair
@@ -2714,7 +2711,6 @@ components:
           type: string
       type: object
     iam.v2.UserList:
-      additionalProperties: false
       description: |-
         `User` objects represent individuals who may access your Confluent resources.
 
@@ -2723,6 +2719,9 @@ components:
 
 
         Related guide: [Users in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/user-account.html).
+
+        ## The Users Model
+        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.User" />
 
         ## Quotas and Limits
         This resource is subject to the following quotas:
@@ -2776,7 +2775,6 @@ components:
       - metadata
       type: object
     iam.v2.ServiceAccountList:
-      additionalProperties: false
       description: |-
         `ServiceAccount` objects are typically used to represent applications and other non-human principals
         that may access your Confluent resources.
@@ -2786,6 +2784,9 @@ components:
 
 
         Related guide: [Service Accounts in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/service-account.html).
+
+        ## The Service Accounts Model
+        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.ServiceAccount" />
 
         ## Quotas and Limits
         This resource is subject to the following quotas:
@@ -2839,7 +2840,6 @@ components:
       - metadata
       type: object
     ObjectMeta:
-      additionalProperties: false
       description: ObjectMeta is metadata that all persisted resources must have,
         which includes all objects users must create.
       properties:
@@ -2883,9 +2883,7 @@ components:
       readOnly: true
       required:
       - self
-      type: object
     ListMeta:
-      additionalProperties: false
       description: ListMeta describes metadata that resource collections may have
       properties:
         first:
@@ -2927,7 +2925,6 @@ components:
           type: integer
       type: object
     ObjectReference:
-      additionalProperties: false
       description: ObjectReference provides information for you to locate the referred
         object
       properties:
@@ -2969,7 +2966,6 @@ components:
       - resource_name
       type: object
     Failure:
-      additionalProperties: false
       description: Provides information about problems encountered while performing
         an operation.
       properties:
@@ -2983,7 +2979,6 @@ components:
       - errors
       type: object
     Error:
-      additionalProperties: false
       description: Describes a particular error encountered while performing an operation.
       properties:
         id:
@@ -3010,7 +3005,6 @@ components:
           $ref: '#/components/schemas/Error_source'
       type: object
     iam.v2.UserUpdate:
-      additionalProperties: false
       description: |-
         `User` objects represent individuals who may access your Confluent resources.
 
@@ -3019,6 +3013,9 @@ components:
 
 
         Related guide: [Users in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/user-account.html).
+
+        ## The Users Model
+        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.User" />
 
         ## Quotas and Limits
         This resource is subject to the following quotas:
@@ -3057,14 +3054,13 @@ components:
               self:
                 example: https://api.confluent.cloud/iam/v2/users/u-12345
               resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/user=u-12345
+                example: crn://confluent.cloud/user=u-12345
         full_name:
           description: The user's full name
           example: Marty McFly
           type: string
       type: object
     iam.v2.ServiceAccountUpdate:
-      additionalProperties: false
       description: |-
         `ServiceAccount` objects are typically used to represent applications and other non-human principals
         that may access your Confluent resources.
@@ -3074,6 +3070,9 @@ components:
 
 
         Related guide: [Service Accounts in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/service-account.html).
+
+        ## The Service Accounts Model
+        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.ServiceAccount" />
 
         ## Quotas and Limits
         This resource is subject to the following quotas:
@@ -3112,7 +3111,7 @@ components:
               self:
                 example: https://api.confluent.cloud/iam/v2/service-accounts/sa-12345
               resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/serviceaccount=sa-12345
+                example: crn://confluent.cloud/service-account=sa-12345
         description:
           description: A free-form description of the Service Account
           example: Doc's repair bot for the DeLorean
