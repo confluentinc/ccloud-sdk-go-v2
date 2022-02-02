@@ -64,7 +64,7 @@ type APIClient struct {
 
 	// API Services
 
-	ClustersCmkV2Api *ClustersCmkV2ApiService
+	ClustersCmkV2Api ClustersCmkV2Api
 }
 
 type service struct {

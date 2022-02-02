@@ -274,7 +274,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CmkV2ClusterList**](CmkV2ClusterList.md)
+[**CmkV2ClusterList**](cmk.v2.ClusterList.md)
 
 ### Authorization
 

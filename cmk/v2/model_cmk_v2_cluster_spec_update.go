@@ -29,6 +29,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // CmkV2ClusterSpecUpdate The desired state of the Cluster
 type CmkV2ClusterSpecUpdate struct {
 	// The name of the cluster.
@@ -150,6 +154,43 @@ func (o *CmkV2ClusterSpecUpdate) HasEnvironment() bool {
 // SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
 func (o *CmkV2ClusterSpecUpdate) SetEnvironment(v ObjectReference) {
 	o.Environment = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *CmkV2ClusterSpecUpdate) Redact() {
+    o.recurseRedact(o.DisplayName)
+    o.recurseRedact(o.Config)
+    o.recurseRedact(o.Environment)
+}
+
+func (o *CmkV2ClusterSpecUpdate) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o CmkV2ClusterSpecUpdate) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o CmkV2ClusterSpecUpdate) MarshalJSON() ([]byte, error) {

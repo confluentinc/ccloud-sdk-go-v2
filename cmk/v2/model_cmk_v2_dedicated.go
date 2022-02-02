@@ -29,11 +29,15 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // CmkV2Dedicated A dedicated cluster with its parameters. 
 type CmkV2Dedicated struct {
-	// Dedicated cluster is in Early Access. 
+	// Dedicated cluster type. 
 	Kind string `json:"kind"`
-	// The number of Confluent Kafka Units (CKUs) for Dedicated cluster types. MULTI_ZONE dedicated clusters must have more than two CKUs. 
+	// The number of Confluent Kafka Units (CKUs) for Dedicated cluster types. MULTI_ZONE dedicated clusters must have at least two CKUs. 
 	Cku int32 `json:"cku"`
 }
 
@@ -102,6 +106,42 @@ func (o *CmkV2Dedicated) GetCkuOk() (*int32, bool) {
 // SetCku sets field value
 func (o *CmkV2Dedicated) SetCku(v int32) {
 	o.Cku = v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *CmkV2Dedicated) Redact() {
+    o.recurseRedact(&o.Kind)
+    o.recurseRedact(&o.Cku)
+}
+
+func (o *CmkV2Dedicated) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o CmkV2Dedicated) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o CmkV2Dedicated) MarshalJSON() ([]byte, error) {

@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | **string** | Dedicated cluster is in Early Access.  | 
-**Cku** | **int32** | The number of Confluent Kafka Units (CKUs) for Dedicated cluster types. MULTI_ZONE dedicated clusters must have more than two CKUs.  | 
+**Kind** | **string** | Dedicated cluster type.  | 
+**Cku** | **int32** | The number of Confluent Kafka Units (CKUs) for Dedicated cluster types. MULTI_ZONE dedicated clusters must have at least two CKUs.  | 
 
 ## Methods
 

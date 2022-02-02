@@ -29,6 +29,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // CmkV2Standard The standard cluster type. 
 type CmkV2Standard struct {
 	Kind string `json:"kind"`
@@ -74,6 +78,41 @@ func (o *CmkV2Standard) GetKindOk() (*string, bool) {
 // SetKind sets field value
 func (o *CmkV2Standard) SetKind(v string) {
 	o.Kind = v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *CmkV2Standard) Redact() {
+    o.recurseRedact(&o.Kind)
+}
+
+func (o *CmkV2Standard) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o CmkV2Standard) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o CmkV2Standard) MarshalJSON() ([]byte, error) {
