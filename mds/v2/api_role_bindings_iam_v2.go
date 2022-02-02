@@ -39,12 +39,81 @@ var (
 	_ _context.Context
 )
 
+type RoleBindingsIamV2Api interface {
+
+	/*
+	CreateIamV2RoleBinding Create a Role Binding
+
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to create a role binding.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiCreateIamV2RoleBindingRequest
+	*/
+	CreateIamV2RoleBinding(ctx _context.Context) ApiCreateIamV2RoleBindingRequest
+
+	// CreateIamV2RoleBindingExecute executes the request
+	//  @return IamV2RoleBinding
+	CreateIamV2RoleBindingExecute(r ApiCreateIamV2RoleBindingRequest) (IamV2RoleBinding, *_nethttp.Response, error)
+
+	/*
+	DeleteIamV2RoleBinding Delete a Role Binding
+
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to delete a role binding.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the role binding.
+	 @return ApiDeleteIamV2RoleBindingRequest
+	*/
+	DeleteIamV2RoleBinding(ctx _context.Context, id string) ApiDeleteIamV2RoleBindingRequest
+
+	// DeleteIamV2RoleBindingExecute executes the request
+	//  @return IamV2RoleBinding
+	DeleteIamV2RoleBindingExecute(r ApiDeleteIamV2RoleBindingRequest) (IamV2RoleBinding, *_nethttp.Response, error)
+
+	/*
+	GetIamV2RoleBinding Read a Role Binding
+
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to read a role binding.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the role binding.
+	 @return ApiGetIamV2RoleBindingRequest
+	*/
+	GetIamV2RoleBinding(ctx _context.Context, id string) ApiGetIamV2RoleBindingRequest
+
+	// GetIamV2RoleBindingExecute executes the request
+	//  @return IamV2RoleBinding
+	GetIamV2RoleBindingExecute(r ApiGetIamV2RoleBindingRequest) (IamV2RoleBinding, *_nethttp.Response, error)
+
+	/*
+	ListIamV2RoleBindings List of Role Bindings
+
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Retrieve a sorted, filtered, paginated list of all role bindings.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiListIamV2RoleBindingsRequest
+	*/
+	ListIamV2RoleBindings(ctx _context.Context) ApiListIamV2RoleBindingsRequest
+
+	// ListIamV2RoleBindingsExecute executes the request
+	//  @return IamV2RoleBindingList
+	ListIamV2RoleBindingsExecute(r ApiListIamV2RoleBindingsRequest) (IamV2RoleBindingList, *_nethttp.Response, error)
+}
+
 // RoleBindingsIamV2ApiService RoleBindingsIamV2Api service
 type RoleBindingsIamV2ApiService service
 
 type ApiCreateIamV2RoleBindingRequest struct {
 	ctx _context.Context
-	ApiService *RoleBindingsIamV2ApiService
+	ApiService RoleBindingsIamV2Api
 	iamV2RoleBinding *IamV2RoleBinding
 }
 
@@ -204,12 +273,12 @@ func (a *RoleBindingsIamV2ApiService) CreateIamV2RoleBindingExecute(r ApiCreateI
 
 type ApiDeleteIamV2RoleBindingRequest struct {
 	ctx _context.Context
-	ApiService *RoleBindingsIamV2ApiService
+	ApiService RoleBindingsIamV2Api
 	id string
 }
 
 
-func (r ApiDeleteIamV2RoleBindingRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamV2RoleBindingRequest) Execute() (IamV2RoleBinding, *_nethttp.Response, error) {
 	return r.ApiService.DeleteIamV2RoleBindingExecute(r)
 }
 
@@ -233,18 +302,20 @@ func (a *RoleBindingsIamV2ApiService) DeleteIamV2RoleBinding(ctx _context.Contex
 }
 
 // Execute executes the request
-func (a *RoleBindingsIamV2ApiService) DeleteIamV2RoleBindingExecute(r ApiDeleteIamV2RoleBindingRequest) (*_nethttp.Response, error) {
+//  @return IamV2RoleBinding
+func (a *RoleBindingsIamV2ApiService) DeleteIamV2RoleBindingExecute(r ApiDeleteIamV2RoleBindingRequest) (IamV2RoleBinding, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		localVarReturnValue  IamV2RoleBinding
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RoleBindingsIamV2ApiService.DeleteIamV2RoleBinding")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/iam/v2/role-bindings/{id}"
@@ -273,19 +344,19 @@ func (a *RoleBindingsIamV2ApiService) DeleteIamV2RoleBindingExecute(r ApiDeleteI
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -298,59 +369,68 @@ func (a *RoleBindingsIamV2ApiService) DeleteIamV2RoleBindingExecute(r ApiDeleteI
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarHTTPResponse, newErr
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarHTTPResponse, newErr
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarHTTPResponse, newErr
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarHTTPResponse, newErr
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 			newErr.model = v
 		}
-		return localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetIamV2RoleBindingRequest struct {
 	ctx _context.Context
-	ApiService *RoleBindingsIamV2ApiService
+	ApiService RoleBindingsIamV2Api
 	id string
 }
 
@@ -507,7 +587,7 @@ func (a *RoleBindingsIamV2ApiService) GetIamV2RoleBindingExecute(r ApiGetIamV2Ro
 
 type ApiListIamV2RoleBindingsRequest struct {
 	ctx _context.Context
-	ApiService *RoleBindingsIamV2ApiService
+	ApiService RoleBindingsIamV2Api
 	crnPattern *string
 	principal *string
 	roleName *string

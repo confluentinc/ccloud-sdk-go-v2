@@ -29,7 +29,11 @@ import (
 	"encoding/json"
 )
 
-// IamV2RoleBinding A role binding grants a Principal a role on resources that match a pattern.  The API allows you to perform create, delete, and list operations on role bindings.   Related guide: [Role-Based Access Control (RBAC)](https://docs.confluent.io/cloud/current/access-management/access-control/cloud-rbac.html).
+import (
+	"reflect"
+)
+
+// IamV2RoleBinding A role binding grants a Principal a role on resources that match a pattern.  The API allows you to perform create, delete, and list operations on role bindings.   Related guide: [Role-Based Access Control (RBAC)](https://docs.confluent.io/cloud/current/access-management/access-control/cloud-rbac.html).  ## The Role Bindings Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.RoleBinding\" />
 type IamV2RoleBinding struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
@@ -285,6 +289,47 @@ func (o *IamV2RoleBinding) HasCrnPattern() bool {
 // SetCrnPattern gets a reference to the given string and assigns it to the CrnPattern field.
 func (o *IamV2RoleBinding) SetCrnPattern(v string) {
 	o.CrnPattern = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *IamV2RoleBinding) Redact() {
+    o.recurseRedact(o.ApiVersion)
+    o.recurseRedact(o.Kind)
+    o.recurseRedact(o.Id)
+    o.recurseRedact(o.Metadata)
+    o.recurseRedact(o.Principal)
+    o.recurseRedact(o.RoleName)
+    o.recurseRedact(o.CrnPattern)
+}
+
+func (o *IamV2RoleBinding) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o IamV2RoleBinding) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o IamV2RoleBinding) MarshalJSON() ([]byte, error) {

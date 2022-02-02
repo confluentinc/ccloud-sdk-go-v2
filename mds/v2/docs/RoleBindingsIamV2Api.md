@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 
 ## DeleteIamV2RoleBinding
 
-> DeleteIamV2RoleBinding(ctx, id).Execute()
+> IamV2RoleBinding DeleteIamV2RoleBinding(ctx, id).Execute()
 
 Delete a Role Binding
 
@@ -107,6 +107,8 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RoleBindingsIamV2Api.DeleteIamV2RoleBinding``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
+    // response from `DeleteIamV2RoleBinding`: IamV2RoleBinding
+    fmt.Fprintf(os.Stdout, "Response from `RoleBindingsIamV2Api.DeleteIamV2RoleBinding`: %v\n", resp)
 }
 ```
 
@@ -129,7 +131,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**IamV2RoleBinding**](iam.v2.RoleBinding.md)
 
 ### Authorization
 
@@ -236,7 +238,7 @@ import (
 )
 
 func main() {
-    crnPattern := "crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=t-38nbaz/cloud-cluster=lkc-1111aaa" // string | Filter the results by a partial search of crn_pattern.
+    crnPattern := "crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=env-aaa1111/cloud-cluster=lkc-1111aaa" // string | Filter the results by a partial search of crn_pattern.
     principal := "User:u-111aaa" // string | Filter the results by exact match for principal. (optional)
     roleName := "CloudClusterAdmin" // string | Filter the results by exact match for role_name. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
@@ -273,7 +275,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IamV2RoleBindingList**](IamV2RoleBindingList.md)
+[**IamV2RoleBindingList**](iam.v2.RoleBindingList.md)
 
 ### Authorization
 
