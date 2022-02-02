@@ -15,21 +15,61 @@ Method | HTTP request | Description
 
 ## GetKafkaV3Consumer
 
-> ConsumerData GetKafkaV3Consumer(ctx, clusterId, consumerGroupId, consumerId)
+> ConsumerData GetKafkaV3Consumer(ctx, clusterId, consumerGroupId, consumerId).Execute()
 
 Get Consumer
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cluster Admin for Kafka (v3)](https://img.shields.io/badge/-Request%20Access%20To%20Cluster%20Admin%20For%20Kafka%20v3-%23bc8540)](mailto:ccloud-rest-api+consumer-lag-earlyaccess@confluent.io?subject=Request%20to%20join%20v3%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cluster%20Admin%20For%20Kafka%20v3%20Early%20Access%20to%20provide%20early%20feedback%20on%20consumer%20lag%20apis%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)  Returns the consumer specified by the ``consumer_id``.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    clusterId := "cluster-1" // string | The Kafka cluster ID.
+    consumerGroupId := "consumer-group-1" // string | The consumer group ID.
+    consumerId := "consumer-1" // string | The consumer ID.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.ConsumerGroupV3Api.GetKafkaV3Consumer(context.Background(), clusterId, consumerGroupId, consumerId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ConsumerGroupV3Api.GetKafkaV3Consumer``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetKafkaV3Consumer`: ConsumerData
+    fmt.Fprintf(os.Stdout, "Response from `ConsumerGroupV3Api.GetKafkaV3Consumer`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **string**| The Kafka cluster ID. | 
-**consumerGroupId** | **string**| The consumer group ID. | 
-**consumerId** | **string**| The consumer ID. | 
+**clusterId** | **string** | The Kafka cluster ID. | 
+**consumerGroupId** | **string** | The consumer group ID. | 
+**consumerId** | **string** | The consumer ID. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetKafkaV3ConsumerRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
 
 ### Return type
 
@@ -37,12 +77,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[api-key](../README.md#api-key)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -51,20 +91,58 @@ No authorization required
 
 ## GetKafkaV3ConsumerGroup
 
-> ConsumerGroupData GetKafkaV3ConsumerGroup(ctx, clusterId, consumerGroupId)
+> ConsumerGroupData GetKafkaV3ConsumerGroup(ctx, clusterId, consumerGroupId).Execute()
 
 Get Consumer Group
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)  Returns the consumer group specified by the ``consumer_group_id``.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    clusterId := "cluster-1" // string | The Kafka cluster ID.
+    consumerGroupId := "consumer-group-1" // string | The consumer group ID.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.ConsumerGroupV3Api.GetKafkaV3ConsumerGroup(context.Background(), clusterId, consumerGroupId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ConsumerGroupV3Api.GetKafkaV3ConsumerGroup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetKafkaV3ConsumerGroup`: ConsumerGroupData
+    fmt.Fprintf(os.Stdout, "Response from `ConsumerGroupV3Api.GetKafkaV3ConsumerGroup`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **string**| The Kafka cluster ID. | 
-**consumerGroupId** | **string**| The consumer group ID. | 
+**clusterId** | **string** | The Kafka cluster ID. | 
+**consumerGroupId** | **string** | The consumer group ID. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetKafkaV3ConsumerGroupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
 
 ### Return type
 
@@ -72,12 +150,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[api-key](../README.md#api-key)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -86,20 +164,58 @@ No authorization required
 
 ## GetKafkaV3ConsumerGroupLagSummary
 
-> ConsumerGroupLagSummaryData GetKafkaV3ConsumerGroupLagSummary(ctx, clusterId, consumerGroupId)
+> ConsumerGroupLagSummaryData GetKafkaV3ConsumerGroupLagSummary(ctx, clusterId, consumerGroupId).Execute()
 
 Get Consumer Group Lag Summary.
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cluster Admin for Kafka (v3)](https://img.shields.io/badge/-Request%20Access%20To%20Cluster%20Admin%20For%20Kafka%20v3-%23bc8540)](mailto:ccloud-rest-api+consumer-lag-earlyaccess@confluent.io?subject=Request%20to%20join%20v3%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cluster%20Admin%20For%20Kafka%20v3%20Early%20Access%20to%20provide%20early%20feedback%20on%20consumer%20lag%20apis%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)  Returns the max and total lag of the consumers belonging to the specified consumer group.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    clusterId := "cluster-1" // string | The Kafka cluster ID.
+    consumerGroupId := "consumer-group-1" // string | The consumer group ID.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.ConsumerGroupV3Api.GetKafkaV3ConsumerGroupLagSummary(context.Background(), clusterId, consumerGroupId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ConsumerGroupV3Api.GetKafkaV3ConsumerGroupLagSummary``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetKafkaV3ConsumerGroupLagSummary`: ConsumerGroupLagSummaryData
+    fmt.Fprintf(os.Stdout, "Response from `ConsumerGroupV3Api.GetKafkaV3ConsumerGroupLagSummary`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **string**| The Kafka cluster ID. | 
-**consumerGroupId** | **string**| The consumer group ID. | 
+**clusterId** | **string** | The Kafka cluster ID. | 
+**consumerGroupId** | **string** | The consumer group ID. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetKafkaV3ConsumerGroupLagSummaryRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
 
 ### Return type
 
@@ -107,12 +223,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[api-key](../README.md#api-key)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -121,19 +237,55 @@ No authorization required
 
 ## ListKafkaV3ConsumerGroups
 
-> ConsumerGroupDataList ListKafkaV3ConsumerGroups(ctx, clusterId)
+> ConsumerGroupDataList ListKafkaV3ConsumerGroups(ctx, clusterId).Execute()
 
 List Consumer Groups
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)  Returns the list of consumer groups that belong to the specified Kafka cluster.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    clusterId := "cluster-1" // string | The Kafka cluster ID.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.ConsumerGroupV3Api.ListKafkaV3ConsumerGroups(context.Background(), clusterId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ConsumerGroupV3Api.ListKafkaV3ConsumerGroups``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListKafkaV3ConsumerGroups`: ConsumerGroupDataList
+    fmt.Fprintf(os.Stdout, "Response from `ConsumerGroupV3Api.ListKafkaV3ConsumerGroups`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **string**| The Kafka cluster ID. | 
+**clusterId** | **string** | The Kafka cluster ID. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListKafkaV3ConsumerGroupsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
@@ -141,12 +293,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[api-key](../README.md#api-key)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -155,20 +307,58 @@ No authorization required
 
 ## ListKafkaV3ConsumerLags
 
-> ConsumerLagDataList ListKafkaV3ConsumerLags(ctx, clusterId, consumerGroupId)
+> ConsumerLagDataList ListKafkaV3ConsumerLags(ctx, clusterId, consumerGroupId).Execute()
 
 List Consumer Lags
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cluster Admin for Kafka (v3)](https://img.shields.io/badge/-Request%20Access%20To%20Cluster%20Admin%20For%20Kafka%20v3-%23bc8540)](mailto:ccloud-rest-api+consumer-lag-earlyaccess@confluent.io?subject=Request%20to%20join%20v3%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cluster%20Admin%20For%20Kafka%20v3%20Early%20Access%20to%20provide%20early%20feedback%20on%20consumer%20lag%20apis%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)  Returns a list of consumer lags of the consumers belonging to the specified consumer group.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    clusterId := "cluster-1" // string | The Kafka cluster ID.
+    consumerGroupId := "consumer-group-1" // string | The consumer group ID.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.ConsumerGroupV3Api.ListKafkaV3ConsumerLags(context.Background(), clusterId, consumerGroupId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ConsumerGroupV3Api.ListKafkaV3ConsumerLags``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListKafkaV3ConsumerLags`: ConsumerLagDataList
+    fmt.Fprintf(os.Stdout, "Response from `ConsumerGroupV3Api.ListKafkaV3ConsumerLags`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **string**| The Kafka cluster ID. | 
-**consumerGroupId** | **string**| The consumer group ID. | 
+**clusterId** | **string** | The Kafka cluster ID. | 
+**consumerGroupId** | **string** | The consumer group ID. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListKafkaV3ConsumerLagsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
 
 ### Return type
 
@@ -176,12 +366,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[api-key](../README.md#api-key)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -190,20 +380,58 @@ No authorization required
 
 ## ListKafkaV3Consumers
 
-> ConsumerDataList ListKafkaV3Consumers(ctx, clusterId, consumerGroupId)
+> ConsumerDataList ListKafkaV3Consumers(ctx, clusterId, consumerGroupId).Execute()
 
 List Consumers
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)  Returns a list of consumers that belong to the specified consumer group.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    clusterId := "cluster-1" // string | The Kafka cluster ID.
+    consumerGroupId := "consumer-group-1" // string | The consumer group ID.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.ConsumerGroupV3Api.ListKafkaV3Consumers(context.Background(), clusterId, consumerGroupId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ConsumerGroupV3Api.ListKafkaV3Consumers``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListKafkaV3Consumers`: ConsumerDataList
+    fmt.Fprintf(os.Stdout, "Response from `ConsumerGroupV3Api.ListKafkaV3Consumers`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **string**| The Kafka cluster ID. | 
-**consumerGroupId** | **string**| The consumer group ID. | 
+**clusterId** | **string** | The Kafka cluster ID. | 
+**consumerGroupId** | **string** | The consumer group ID. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListKafkaV3ConsumersRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
 
 ### Return type
 
@@ -211,12 +439,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[api-key](../README.md#api-key)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
