@@ -29,6 +29,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // ObjectReference ObjectReference provides information for you to locate the referred object
 type ObjectReference struct {
 	// ID of the referred resource
@@ -231,6 +235,46 @@ func (o *ObjectReference) HasKind() bool {
 // SetKind gets a reference to the given string and assigns it to the Kind field.
 func (o *ObjectReference) SetKind(v string) {
 	o.Kind = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *ObjectReference) Redact() {
+    o.recurseRedact(&o.Id)
+    o.recurseRedact(o.Environment)
+    o.recurseRedact(&o.Related)
+    o.recurseRedact(&o.ResourceName)
+    o.recurseRedact(o.ApiVersion)
+    o.recurseRedact(o.Kind)
+}
+
+func (o *ObjectReference) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o ObjectReference) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ObjectReference) MarshalJSON() ([]byte, error) {

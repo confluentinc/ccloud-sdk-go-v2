@@ -64,9 +64,9 @@ type APIClient struct {
 
 	// API Services
 
-	ServiceAccountsIamV2Api *ServiceAccountsIamV2ApiService
+	ServiceAccountsIamV2Api ServiceAccountsIamV2Api
 
-	UsersIamV2Api *UsersIamV2ApiService
+	UsersIamV2Api UsersIamV2Api
 }
 
 type service struct {
