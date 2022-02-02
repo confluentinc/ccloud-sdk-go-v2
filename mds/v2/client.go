@@ -64,7 +64,7 @@ type APIClient struct {
 
 	// API Services
 
-	RoleBindingsIamV2Api *RoleBindingsIamV2ApiService
+	RoleBindingsIamV2Api RoleBindingsIamV2Api
 }
 
 type service struct {
@@ -368,9 +368,6 @@ func (c *APIClient) prepareRequest(
 }
 
 func (c *APIClient) decode(v interface{}, b []byte, contentType string) (err error) {
-	// override contentType to "application/json" until https://confluent.slack.com/archives/CQ5870E3F/p1637257053469100 is fixed
-	contentType = "application/json"
-
 	if len(b) == 0 {
 		return nil
 	}

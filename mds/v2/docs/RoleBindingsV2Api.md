@@ -1,19 +1,19 @@
-# \RoleBindingsIamV2Api
+# \RoleBindingsV2Api
 
 All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateIamV2RoleBinding**](RoleBindingsIamV2Api.md#CreateIamV2RoleBinding) | **Post** /iam/v2/role-bindings | Create a Role Binding
-[**DeleteIamV2RoleBinding**](RoleBindingsIamV2Api.md#DeleteIamV2RoleBinding) | **Delete** /iam/v2/role-bindings/{id} | Delete a Role Binding
-[**GetIamV2RoleBinding**](RoleBindingsIamV2Api.md#GetIamV2RoleBinding) | **Get** /iam/v2/role-bindings/{id} | Read a Role Binding
-[**ListIamV2RoleBindings**](RoleBindingsIamV2Api.md#ListIamV2RoleBindings) | **Get** /iam/v2/role-bindings | List of Role Bindings
+[**CreateV2RoleBinding**](RoleBindingsV2Api.md#CreateV2RoleBinding) | **Post** /v2/role-bindings | Create a Role Binding
+[**DeleteV2RoleBinding**](RoleBindingsV2Api.md#DeleteV2RoleBinding) | **Delete** /v2/role-bindings/{id} | Delete a Role Binding
+[**GetV2RoleBinding**](RoleBindingsV2Api.md#GetV2RoleBinding) | **Get** /v2/role-bindings/{id} | Read a Role Binding
+[**ListV2RoleBindings**](RoleBindingsV2Api.md#ListV2RoleBindings) | **Get** /v2/role-bindings | List of Role Bindings
 
 
 
-## CreateIamV2RoleBinding
+## CreateV2RoleBinding
 
-> IamV2RoleBinding CreateIamV2RoleBinding(ctx).IamV2RoleBinding(iamV2RoleBinding).Execute()
+> V2RoleBinding CreateV2RoleBinding(ctx).V2RoleBinding(v2RoleBinding).Execute()
 
 Create a Role Binding
 
@@ -32,17 +32,17 @@ import (
 )
 
 func main() {
-    iamV2RoleBinding := *openapiclient.NewIamV2RoleBinding() // IamV2RoleBinding |  (optional)
+    v2RoleBinding := *openapiclient.NewV2RoleBinding() // V2RoleBinding |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.RoleBindingsIamV2Api.CreateIamV2RoleBinding(context.Background()).IamV2RoleBinding(iamV2RoleBinding).Execute()
+    resp, r, err := api_client.RoleBindingsV2Api.CreateV2RoleBinding(context.Background()).V2RoleBinding(v2RoleBinding).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RoleBindingsIamV2Api.CreateIamV2RoleBinding``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `RoleBindingsV2Api.CreateV2RoleBinding``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateIamV2RoleBinding`: IamV2RoleBinding
-    fmt.Fprintf(os.Stdout, "Response from `RoleBindingsIamV2Api.CreateIamV2RoleBinding`: %v\n", resp)
+    // response from `CreateV2RoleBinding`: V2RoleBinding
+    fmt.Fprintf(os.Stdout, "Response from `RoleBindingsV2Api.CreateV2RoleBinding`: %v\n", resp)
 }
 ```
 
@@ -52,16 +52,16 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateIamV2RoleBindingRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateV2RoleBindingRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **iamV2RoleBinding** | [**IamV2RoleBinding**](IamV2RoleBinding.md) |  | 
+ **v2RoleBinding** | [**V2RoleBinding**](V2RoleBinding.md) |  | 
 
 ### Return type
 
-[**IamV2RoleBinding**](iam.v2.RoleBinding.md)
+[**V2RoleBinding**](v2.RoleBinding.md)
 
 ### Authorization
 
@@ -77,9 +77,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteIamV2RoleBinding
+## DeleteV2RoleBinding
 
-> IamV2RoleBinding DeleteIamV2RoleBinding(ctx, id).Execute()
+> DeleteV2RoleBinding(ctx, id).Execute()
 
 Delete a Role Binding
 
@@ -102,13 +102,11 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.RoleBindingsIamV2Api.DeleteIamV2RoleBinding(context.Background(), id).Execute()
+    resp, r, err := api_client.RoleBindingsV2Api.DeleteV2RoleBinding(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RoleBindingsIamV2Api.DeleteIamV2RoleBinding``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `RoleBindingsV2Api.DeleteV2RoleBinding``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `DeleteIamV2RoleBinding`: IamV2RoleBinding
-    fmt.Fprintf(os.Stdout, "Response from `RoleBindingsIamV2Api.DeleteIamV2RoleBinding`: %v\n", resp)
 }
 ```
 
@@ -122,7 +120,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteIamV2RoleBindingRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteV2RoleBindingRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -131,7 +129,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IamV2RoleBinding**](iam.v2.RoleBinding.md)
+ (empty response body)
 
 ### Authorization
 
@@ -147,9 +145,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetIamV2RoleBinding
+## GetV2RoleBinding
 
-> IamV2RoleBinding GetIamV2RoleBinding(ctx, id).Execute()
+> V2RoleBinding GetV2RoleBinding(ctx, id).Execute()
 
 Read a Role Binding
 
@@ -172,13 +170,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.RoleBindingsIamV2Api.GetIamV2RoleBinding(context.Background(), id).Execute()
+    resp, r, err := api_client.RoleBindingsV2Api.GetV2RoleBinding(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RoleBindingsIamV2Api.GetIamV2RoleBinding``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `RoleBindingsV2Api.GetV2RoleBinding``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetIamV2RoleBinding`: IamV2RoleBinding
-    fmt.Fprintf(os.Stdout, "Response from `RoleBindingsIamV2Api.GetIamV2RoleBinding`: %v\n", resp)
+    // response from `GetV2RoleBinding`: V2RoleBinding
+    fmt.Fprintf(os.Stdout, "Response from `RoleBindingsV2Api.GetV2RoleBinding`: %v\n", resp)
 }
 ```
 
@@ -192,7 +190,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetIamV2RoleBindingRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetV2RoleBindingRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -201,7 +199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IamV2RoleBinding**](iam.v2.RoleBinding.md)
+[**V2RoleBinding**](v2.RoleBinding.md)
 
 ### Authorization
 
@@ -217,9 +215,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ListIamV2RoleBindings
+## ListV2RoleBindings
 
-> IamV2RoleBindingList ListIamV2RoleBindings(ctx).CrnPattern(crnPattern).Principal(principal).RoleName(roleName).PageSize(pageSize).PageToken(pageToken).Execute()
+> V2RoleBindingList ListV2RoleBindings(ctx).CrnPattern(crnPattern).Principal(principal).RoleName(roleName).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Role Bindings
 
@@ -238,7 +236,7 @@ import (
 )
 
 func main() {
-    crnPattern := "crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=env-aaa1111/cloud-cluster=lkc-1111aaa" // string | Filter the results by a partial search of crn_pattern.
+    crnPattern := "crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=t-38nbaz/cloud-cluster=lkc-1111aaa" // string | Filter the results by a partial search of crn_pattern.
     principal := "User:u-111aaa" // string | Filter the results by exact match for principal. (optional)
     roleName := "CloudClusterAdmin" // string | Filter the results by exact match for role_name. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
@@ -246,13 +244,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.RoleBindingsIamV2Api.ListIamV2RoleBindings(context.Background()).CrnPattern(crnPattern).Principal(principal).RoleName(roleName).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.RoleBindingsV2Api.ListV2RoleBindings(context.Background()).CrnPattern(crnPattern).Principal(principal).RoleName(roleName).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RoleBindingsIamV2Api.ListIamV2RoleBindings``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `RoleBindingsV2Api.ListV2RoleBindings``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListIamV2RoleBindings`: IamV2RoleBindingList
-    fmt.Fprintf(os.Stdout, "Response from `RoleBindingsIamV2Api.ListIamV2RoleBindings`: %v\n", resp)
+    // response from `ListV2RoleBindings`: V2RoleBindingList
+    fmt.Fprintf(os.Stdout, "Response from `RoleBindingsV2Api.ListV2RoleBindings`: %v\n", resp)
 }
 ```
 
@@ -262,7 +260,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListIamV2RoleBindingsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListV2RoleBindingsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -275,7 +273,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IamV2RoleBindingList**](iam.v2.RoleBindingList.md)
+[**V2RoleBindingList**](V2RoleBindingList.md)
 
 ### Authorization
 

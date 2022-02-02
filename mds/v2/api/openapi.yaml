@@ -27,6 +27,9 @@ tags:
 
 
     Related guide: [Role-Based Access Control (RBAC)](https://docs.confluent.io/cloud/current/access-management/access-control/cloud-rbac.html).
+
+    ## The Role Bindings Model
+    <SchemaDefinition schemaRef="#/components/schemas/iam.v2.RoleBinding" />
   name: Role Bindings (iam/v2)
 paths:
   /iam/v2/role-bindings:
@@ -56,7 +59,7 @@ paths:
           $ref: '#/components/schemas/SearchFilter'
         style: form
       - description: Filter the results by a partial search of crn_pattern.
-        example: crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=t-38nbaz/cloud-cluster=lkc-1111aaa
+        example: crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=env-aaa1111/cloud-cluster=lkc-1111aaa
         explode: true
         in: query
         name: crn_pattern
@@ -89,7 +92,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/iam.v2.RoleBindingList'
+                allOf:
+                - $ref: '#/components/schemas/iam.v2.RoleBindingList'
           description: Role Binding.
           headers:
             X-Request-Id:
@@ -486,13 +490,13 @@ paths:
             --url https://api.confluent.cloud/iam/v2/role-bindings \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"principal":"User:u-111aaa","role_name":"CloudClusterAdmin","crn_pattern":"crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=t-38nbaz/cloud-cluster=lkc-1111aaa"}'
+            --data '{"principal":"User:u-111aaa","role_name":"CloudClusterAdmin","crn_pattern":"crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=env-aaa1111/cloud-cluster=lkc-1111aaa"}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"principal\":\"User:u-111aaa\",\"role_name\":\"CloudClusterAdmin\",\"crn_pattern\":\"crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=t-38nbaz/cloud-cluster=lkc-1111aaa\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"principal\":\"User:u-111aaa\",\"role_name\":\"CloudClusterAdmin\",\"crn_pattern\":\"crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=env-aaa1111/cloud-cluster=lkc-1111aaa\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/iam/v2/role-bindings")
             .post(body)
@@ -506,7 +510,7 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/role-bindings\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"principal\\\":\\\"User:u-111aaa\\\
           \",\\\"role_name\\\":\\\"CloudClusterAdmin\\\",\\\"crn_pattern\\\":\\\"\
-          crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=t-38nbaz/cloud-cluster=lkc-1111aaa\\\
+          crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=env-aaa1111/cloud-cluster=lkc-1111aaa\\\
           \"}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
           content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
           , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
@@ -518,7 +522,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"principal\":\"User:u-111aaa\",\"role_name\":\"CloudClusterAdmin\",\"crn_pattern\":\"crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=t-38nbaz/cloud-cluster=lkc-1111aaa\"}"
+          payload = "{\"principal\":\"User:u-111aaa\",\"role_name\":\"CloudClusterAdmin\",\"crn_pattern\":\"crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=env-aaa1111/cloud-cluster=lkc-1111aaa\"}"
 
           headers = {
               'content-type': "application/json",
@@ -562,7 +566,7 @@ paths:
           req.write(JSON.stringify({
             principal: 'User:u-111aaa',
             role_name: 'CloudClusterAdmin',
-            crn_pattern: 'crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=t-38nbaz/cloud-cluster=lkc-1111aaa'
+            crn_pattern: 'crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=env-aaa1111/cloud-cluster=lkc-1111aaa'
           }));
           req.end();
       - lang: C
@@ -577,7 +581,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"principal\":\"User:u-111aaa\",\"role_name\":\"CloudClusterAdmin\",\"crn_pattern\":\"crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=t-38nbaz/cloud-cluster=lkc-1111aaa\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"principal\":\"User:u-111aaa\",\"role_name\":\"CloudClusterAdmin\",\"crn_pattern\":\"crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=env-aaa1111/cloud-cluster=lkc-1111aaa\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -586,7 +590,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"principal\":\"User:u-111aaa\",\"role_name\":\"CloudClusterAdmin\",\"crn_pattern\":\"crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=t-38nbaz/cloud-cluster=lkc-1111aaa\"}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"principal\":\"User:u-111aaa\",\"role_name\":\"CloudClusterAdmin\",\"crn_pattern\":\"crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=env-aaa1111/cloud-cluster=lkc-1111aaa\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: RBAC v2
   /iam/v2/role-bindings/{id}:
@@ -606,7 +610,20 @@ paths:
           type: string
         style: simple
       responses:
-        "204":
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/iam.v2.RoleBinding'
+                - required:
+                  - api_version
+                  - crn_pattern
+                  - id
+                  - kind
+                  - principal
+                  - role_name
+                  type: object
           description: A Role Binding is being deleted.
           headers:
             X-Request-Id:
@@ -1255,7 +1272,6 @@ components:
           style: simple
   schemas:
     iam.v2.RoleBinding:
-      additionalProperties: false
       description: |-
         A role binding grants a Principal a role on resources that match a pattern.
 
@@ -1263,6 +1279,9 @@ components:
 
 
         Related guide: [Role-Based Access Control (RBAC)](https://docs.confluent.io/cloud/current/access-management/access-control/cloud-rbac.html).
+
+        ## The Role Bindings Model
+        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.RoleBinding" />
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -1294,7 +1313,7 @@ components:
               self:
                 example: https://api.confluent.cloud/iam/v2/role-bindings/rb-12345
               resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/rolebinding=rb-12345
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/role-binding=rb-12345
         principal:
           description: The principal User or Group to bind the role to
           example: User:u-111aaa
@@ -1307,7 +1326,7 @@ components:
         crn_pattern:
           description: A CRN that specifies the scope and resource patterns necessary
             for the role to bind
-          example: crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=t-38nbaz/cloud-cluster=lkc-1111aaa
+          example: crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=env-aaa1111/cloud-cluster=lkc-1111aaa
           format: uri
           pattern: ^crn://.+$
           type: string
@@ -1316,7 +1335,6 @@ components:
       description: Filter a collection by a string search
       type: string
     iam.v2.RoleBindingList:
-      additionalProperties: false
       description: |-
         A role binding grants a Principal a role on resources that match a pattern.
 
@@ -1324,13 +1342,9 @@ components:
 
 
         Related guide: [Role-Based Access Control (RBAC)](https://docs.confluent.io/cloud/current/access-management/access-control/cloud-rbac.html).
-      example:
-        metadata: ""
-        data:
-        - ""
-        - ""
-        kind: RoleBindingList
-        api_version: iam/v2
+
+        ## The Role Bindings Model
+        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.RoleBinding" />
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -1358,6 +1372,8 @@ components:
               next:
                 example: https://api.confluent.cloud/iam/v2/role-bindings?page_token=UvmDWOB1iwfAIBPj6EYb
         data:
+          description: A data property that contains an array of resource items. Each
+            entry in the array is a separate resource.
           items:
             allOf:
             - $ref: '#/components/schemas/iam.v2.RoleBinding'
@@ -1377,7 +1393,6 @@ components:
       - metadata
       type: object
     ObjectMeta:
-      additionalProperties: false
       description: ObjectMeta is metadata that all persisted resources must have,
         which includes all objects users must create.
       properties:
@@ -1421,9 +1436,7 @@ components:
       readOnly: true
       required:
       - self
-      type: object
     ListMeta:
-      additionalProperties: false
       description: ListMeta describes metadata that resource collections may have
       properties:
         first:
@@ -1457,13 +1470,14 @@ components:
           nullable: true
           type: string
         total_size:
+          description: Number of records in the full result set. This response may
+            be paginated and have a smaller number of records.
           example: 123
           format: int32
           minimum: 0
           type: integer
       type: object
     ObjectReference:
-      additionalProperties: false
       description: ObjectReference provides information for you to locate the referred
         object
       properties:
@@ -1505,11 +1519,11 @@ components:
       - resource_name
       type: object
     Failure:
-      additionalProperties: false
       description: Provides information about problems encountered while performing
         an operation.
       properties:
         errors:
+          description: List of errors which caused this operation to fail
           items:
             $ref: '#/components/schemas/Error'
           type: array
@@ -1518,7 +1532,6 @@ components:
       - errors
       type: object
     Error:
-      additionalProperties: false
       description: Describes a particular error encountered while performing an operation.
       properties:
         id:
@@ -1545,6 +1558,9 @@ components:
           $ref: '#/components/schemas/Error_source'
       type: object
     Error_source:
+      description: If this error was caused by a particular part of the API request,
+        the source will point to the query string parameter or request body property
+        that caused it.
       properties:
         pointer:
           description: A JSON Pointer [RFC6901] to the associated entity in the request
