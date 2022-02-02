@@ -29,7 +29,11 @@ import (
 	"encoding/json"
 )
 
-// OrgV2Environment `Environment` objects represent an isolated namespace for your Confluent resources for organizational purposes.  The API allows you to create, delete, and update your environments. You can retrieve individual environments as well as a list of all your environments.   Related guide: [Environments in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/environments.html).  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `environments_per_org` | Environments in one Confluent Cloud organization |
+import (
+	"reflect"
+)
+
+// OrgV2Environment `Environment` objects represent an isolated namespace for your Confluent resources for organizational purposes.  The API allows you to create, delete, and update your environments. You can retrieve individual environments as well as a list of all your environments.   Related guide: [Environments in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/environments.html).  ## The Environments Model <SchemaDefinition schemaRef=\"#/components/schemas/org.v2.Environment\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `environments_per_org` | Environments in one Confluent Cloud organization |
 type OrgV2Environment struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
@@ -217,6 +221,45 @@ func (o *OrgV2Environment) HasDisplayName() bool {
 // SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
 func (o *OrgV2Environment) SetDisplayName(v string) {
 	o.DisplayName = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *OrgV2Environment) Redact() {
+    o.recurseRedact(o.ApiVersion)
+    o.recurseRedact(o.Kind)
+    o.recurseRedact(o.Id)
+    o.recurseRedact(o.Metadata)
+    o.recurseRedact(o.DisplayName)
+}
+
+func (o *OrgV2Environment) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o OrgV2Environment) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o OrgV2Environment) MarshalJSON() ([]byte, error) {
