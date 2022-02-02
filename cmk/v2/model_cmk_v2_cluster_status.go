@@ -29,11 +29,15 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // CmkV2ClusterStatus The status of the Cluster
 type CmkV2ClusterStatus struct {
 	// The lifecyle phase of the cluster:   PROVISIONED:  cluster is provisioned;   PROVISIONING:  cluster provisioning is in progress;   FAILED:  provisioning failed 
 	Phase string `json:"phase"`
-	// This field is in Early Access with the use of Dedicated Cluster.  The number of Confluent Kafka Units (CKUs) the Dedicated cluster currently has. 
+	// The number of Confluent Kafka Units (CKUs) the Dedicated cluster currently has. 
 	Cku *int32 `json:"cku,omitempty"`
 }
 
@@ -109,6 +113,42 @@ func (o *CmkV2ClusterStatus) HasCku() bool {
 // SetCku gets a reference to the given int32 and assigns it to the Cku field.
 func (o *CmkV2ClusterStatus) SetCku(v int32) {
 	o.Cku = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *CmkV2ClusterStatus) Redact() {
+    o.recurseRedact(&o.Phase)
+    o.recurseRedact(o.Cku)
+}
+
+func (o *CmkV2ClusterStatus) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o CmkV2ClusterStatus) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o CmkV2ClusterStatus) MarshalJSON() ([]byte, error) {

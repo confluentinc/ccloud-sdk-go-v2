@@ -24,6 +24,9 @@ tags:
 
     Related guide: [Confluent Cloud Cluster Management for Apache Kafka APIs](https://docs.confluent.io/cloud/current/clusters/cluster-api.html).
 
+    ## The Clusters Model
+    <SchemaDefinition schemaRef="#/components/schemas/cmk.v2.Cluster" />
+
     ## Quotas and Limits
     This resource is subject to the following quotas:
 
@@ -74,7 +77,22 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/cmk.v2.ClusterList'
+                allOf:
+                - $ref: '#/components/schemas/cmk.v2.ClusterList'
+                - properties:
+                    data:
+                      items:
+                        properties:
+                          spec:
+                            properties:
+                              environment:
+                                example:
+                                  id: env-00000
+                                  related: https://api.confluent.cloud/v2/environments/env-00000
+                                  resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
+                            type: object
+                      type: array
+                  type: object
           description: Cluster.
           headers:
             X-Request-Id:
@@ -302,6 +320,14 @@ paths:
                 required:
                 - spec
                 type: object
+              - properties:
+                  spec:
+                    properties:
+                      environment:
+                        example:
+                          id: env-00000
+                    type: object
+                type: object
       responses:
         "202":
           content:
@@ -322,6 +348,16 @@ paths:
                   required:
                   - spec
                   - status
+                  type: object
+                - properties:
+                    spec:
+                      properties:
+                        environment:
+                          example:
+                            id: env-00000
+                            related: https://api.confluent.cloud/v2/environments/env-00000
+                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
+                      type: object
                   type: object
           description: A Cluster is being created.
           headers:
@@ -507,13 +543,13 @@ paths:
             --url https://api.confluent.cloud/cmk/v2/clusters \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"ProdKafkaCluster","availability":"SINGLE_ZONE","cloud":"GCP","region":"us-east4","config":{"kind":"Basic"},"environment":{"id":"env-00000","related":"https://api.confluent.cloud/v2/environments/env-00000","resource_name":"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000"}}}'
+            --data '{"spec":{"display_name":"ProdKafkaCluster","availability":"SINGLE_ZONE","cloud":"GCP","region":"us-east4","config":{"kind":"Basic"},"environment":{"id":"env-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/cmk/v2/clusters")
             .post(body)
@@ -529,20 +565,19 @@ paths:
           :\\\"ProdKafkaCluster\\\",\\\"availability\\\":\\\"SINGLE_ZONE\\\",\\\"\
           cloud\\\":\\\"GCP\\\",\\\"region\\\":\\\"us-east4\\\",\\\"config\\\":{\\\
           \"kind\\\":\\\"Basic\\\"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
-          \",\\\"related\\\":\\\"https://api.confluent.cloud/v2/environments/env-00000\\\
-          \",\\\"resource_name\\\":\\\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\\\
-          \"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
+          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -590,11 +625,7 @@ paths:
               cloud: 'GCP',
               region: 'us-east4',
               config: {kind: 'Basic'},
-              environment: {
-                id: 'env-00000',
-                related: 'https://api.confluent.cloud/v2/environments/env-00000',
-                resource_name: 'crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000'
-              }
+              environment: {id: 'env-00000', environment: 'string'}
             }
           }));
           req.end();
@@ -610,7 +641,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -619,7 +650,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /cmk/v2/clusters/{id}:
     delete:
@@ -916,6 +947,16 @@ paths:
                   - spec
                   - status
                   type: object
+                - properties:
+                    spec:
+                      properties:
+                        environment:
+                          example:
+                            id: env-00000
+                            related: https://api.confluent.cloud/v2/environments/env-00000
+                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
+                      type: object
+                  type: object
           description: Cluster.
           headers:
             X-Request-Id:
@@ -1160,6 +1201,10 @@ paths:
               - $ref: '#/components/schemas/cmk.v2.ClusterUpdate'
               - properties:
                   spec:
+                    properties:
+                      environment:
+                        example:
+                          id: env-00000
                     required:
                     - environment
                     type: object
@@ -1189,6 +1234,16 @@ paths:
                   - kind
                   - spec
                   - status
+                  type: object
+                - properties:
+                    spec:
+                      properties:
+                        environment:
+                          example:
+                            id: env-00000
+                            related: https://api.confluent.cloud/v2/environments/env-00000
+                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
+                      type: object
                   type: object
           description: Cluster.
           headers:
@@ -1354,13 +1409,13 @@ paths:
             --url 'https://api.confluent.cloud/cmk/v2/clusters/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"ProdKafkaCluster","availability":"SINGLE_ZONE","cloud":"GCP","region":"us-east4","config":{"kind":"Basic"},"environment":{"id":"env-00000","related":"https://api.confluent.cloud/v2/environments/env-00000","resource_name":"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000"}}}'
+            --data '{"spec":{"display_name":"ProdKafkaCluster","availability":"SINGLE_ZONE","cloud":"GCP","region":"us-east4","config":{"kind":"Basic"},"environment":{"id":"env-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/cmk/v2/clusters/{id}")
             .patch(body)
@@ -1376,20 +1431,19 @@ paths:
           :\\\"ProdKafkaCluster\\\",\\\"availability\\\":\\\"SINGLE_ZONE\\\",\\\"\
           cloud\\\":\\\"GCP\\\",\\\"region\\\":\\\"us-east4\\\",\\\"config\\\":{\\\
           \"kind\\\":\\\"Basic\\\"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
-          \",\\\"related\\\":\\\"https://api.confluent.cloud/v2/environments/env-00000\\\
-          \",\\\"resource_name\\\":\\\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\\\
-          \"}}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
+          PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -1437,11 +1491,7 @@ paths:
               cloud: 'GCP',
               region: 'us-east4',
               config: {kind: 'Basic'},
-              environment: {
-                id: 'env-00000',
-                related: 'https://api.confluent.cloud/v2/environments/env-00000',
-                resource_name: 'crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000'
-              }
+              environment: {id: 'env-00000', environment: 'string'}
             }
           }));
           req.end();
@@ -1457,7 +1507,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1466,7 +1516,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"related\":\"https://api.confluent.cloud/v2/environments/env-00000\",\"resource_name\":\"crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
 components:
   responses:
@@ -1643,9 +1693,23 @@ components:
           style: simple
   schemas:
     cmk.v2.Cluster:
-      additionalProperties: false
-      description: '`Clusters` objects represent Apache Kafka Clusters on Confluent
-        Cloud.'
+      description: |-
+        `Clusters` objects represent Apache Kafka Clusters on Confluent Cloud.
+
+        The API allows you to list, create, read, update, and delete your Kafka clusters.
+
+
+        Related guide: [Confluent Cloud Cluster Management for Apache Kafka APIs](https://docs.confluent.io/cloud/current/clusters/cluster-api.html).
+
+        ## The Clusters Model
+        <SchemaDefinition schemaRef="#/components/schemas/cmk.v2.Cluster" />
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `kafka_clusters_per_environment` | Number of clusters in one Confluent Cloud environment |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -1677,14 +1741,13 @@ components:
               self:
                 example: https://api.confluent.cloud/cmk/v2/clusters/lkc-12345
               resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/cluster=lkc-12345
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lkc-12345
         spec:
           $ref: '#/components/schemas/cmk.v2.ClusterSpec'
         status:
           $ref: '#/components/schemas/cmk.v2.ClusterStatus'
       type: object
     cmk.v2.ClusterStatus:
-      additionalProperties: false
       description: The status of the Cluster
       properties:
         phase:
@@ -1704,8 +1767,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/cmk.v2.Cku'
           description: |
-            This field is in Early Access with the use of Dedicated Cluster.
-
             The number of Confluent Kafka Units (CKUs) the Dedicated cluster currently has.
           readOnly: true
       readOnly: true
@@ -1744,7 +1805,7 @@ components:
       properties:
         kind:
           description: |
-            Dedicated cluster is in Early Access.
+            Dedicated cluster type.
           enum:
           - Dedicated
           type: string
@@ -1753,7 +1814,7 @@ components:
           - $ref: '#/components/schemas/cmk.v2.Cku'
           description: |
             The number of Confluent Kafka Units (CKUs) for Dedicated cluster types.
-            MULTI_ZONE dedicated clusters must have more than two CKUs.
+            MULTI_ZONE dedicated clusters must have at least two CKUs.
       required:
       - cku
       - kind
@@ -1762,16 +1823,23 @@ components:
       description: Filter a collection by a string search
       type: string
     cmk.v2.ClusterList:
-      additionalProperties: false
-      description: '`Clusters` objects represent Apache Kafka Clusters on Confluent
-        Cloud.'
-      example:
-        metadata: ""
-        data:
-        - ""
-        - ""
-        kind: ClusterList
-        api_version: cmk/v2
+      description: |-
+        `Clusters` objects represent Apache Kafka Clusters on Confluent Cloud.
+
+        The API allows you to list, create, read, update, and delete your Kafka clusters.
+
+
+        Related guide: [Confluent Cloud Cluster Management for Apache Kafka APIs](https://docs.confluent.io/cloud/current/clusters/cluster-api.html).
+
+        ## The Clusters Model
+        <SchemaDefinition schemaRef="#/components/schemas/cmk.v2.Cluster" />
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `kafka_clusters_per_environment` | Number of clusters in one Confluent Cloud environment |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -1799,6 +1867,8 @@ components:
               next:
                 example: https://api.confluent.cloud/cmk/v2/clusters?page_token=UvmDWOB1iwfAIBPj6EYb
         data:
+          description: A data property that contains an array of resource items. Each
+            entry in the array is a separate resource.
           items:
             allOf:
             - $ref: '#/components/schemas/cmk.v2.Cluster'
@@ -1827,7 +1897,6 @@ components:
       - metadata
       type: object
     cmk.v2.ClusterSpec:
-      additionalProperties: false
       description: The desired state of the Cluster
       properties:
         display_name:
@@ -1892,19 +1961,12 @@ components:
         environment:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
-          - required:
-            - related
           description: The environment to which this belongs.
-          example:
-            id: env-00000
-            related: https://api.confluent.cloud/v2/environments/env-00000
-            resource_name: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
       type: object
       x-enable-id: true
       x-enable-listmeta: true
       x-enable-objectmeta: true
     ObjectMeta:
-      additionalProperties: false
       description: ObjectMeta is metadata that all persisted resources must have,
         which includes all objects users must create.
       properties:
@@ -1948,9 +2010,7 @@ components:
       readOnly: true
       required:
       - self
-      type: object
     ListMeta:
-      additionalProperties: false
       description: ListMeta describes metadata that resource collections may have
       properties:
         first:
@@ -1984,13 +2044,14 @@ components:
           nullable: true
           type: string
         total_size:
+          description: Number of records in the full result set. This response may
+            be paginated and have a smaller number of records.
           example: 123
           format: int32
           minimum: 0
           type: integer
       type: object
     ObjectReference:
-      additionalProperties: false
       description: ObjectReference provides information for you to locate the referred
         object
       properties:
@@ -2012,7 +2073,7 @@ components:
           type: string
         resource_name:
           description: CRN reference to the referred resource
-          format: crn
+          format: uri
           minLength: 1
           readOnly: true
           type: string
@@ -2032,11 +2093,11 @@ components:
       - resource_name
       type: object
     Failure:
-      additionalProperties: false
       description: Provides information about problems encountered while performing
         an operation.
       properties:
         errors:
+          description: List of errors which caused this operation to fail
           items:
             $ref: '#/components/schemas/Error'
           type: array
@@ -2045,7 +2106,6 @@ components:
       - errors
       type: object
     Error:
-      additionalProperties: false
       description: Describes a particular error encountered while performing an operation.
       properties:
         id:
@@ -2072,7 +2132,6 @@ components:
           $ref: '#/components/schemas/Error_source'
       type: object
     cmk.v2.ClusterSpecUpdate:
-      additionalProperties: false
       description: The desired state of the Cluster
       properties:
         display_name:
@@ -2100,21 +2159,29 @@ components:
         environment:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
-          - required:
-            - related
           description: The environment to which this belongs.
-          example:
-            id: env-00000
-            related: https://api.confluent.cloud/v2/environments/env-00000
-            resource_name: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
       type: object
       x-enable-id: true
       x-enable-listmeta: true
       x-enable-objectmeta: true
     cmk.v2.ClusterUpdate:
-      additionalProperties: false
-      description: '`Clusters` objects represent Apache Kafka Clusters on Confluent
-        Cloud.'
+      description: |-
+        `Clusters` objects represent Apache Kafka Clusters on Confluent Cloud.
+
+        The API allows you to list, create, read, update, and delete your Kafka clusters.
+
+
+        Related guide: [Confluent Cloud Cluster Management for Apache Kafka APIs](https://docs.confluent.io/cloud/current/clusters/cluster-api.html).
+
+        ## The Clusters Model
+        <SchemaDefinition schemaRef="#/components/schemas/cmk.v2.Cluster" />
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `kafka_clusters_per_environment` | Number of clusters in one Confluent Cloud environment |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -2146,13 +2213,16 @@ components:
               self:
                 example: https://api.confluent.cloud/cmk/v2/clusters/lkc-12345
               resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/cluster=lkc-12345
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lkc-12345
         spec:
           $ref: '#/components/schemas/cmk.v2.ClusterSpecUpdate'
         status:
           $ref: '#/components/schemas/cmk.v2.ClusterStatus'
       type: object
     Error_source:
+      description: If this error was caused by a particular part of the API request,
+        the source will point to the query string parameter or request body property
+        that caused it.
       properties:
         pointer:
           description: A JSON Pointer [RFC6901] to the associated entity in the request
