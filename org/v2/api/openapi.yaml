@@ -15,7 +15,7 @@ servers:
   url: https://api.confluent.cloud
 tags:
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `Environment` objects represent an isolated namespace for your Confluent resources
     for organizational purposes.
@@ -25,6 +25,9 @@ tags:
 
 
     Related guide: [Environments in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/environments.html).
+
+    ## The Environments Model
+    <SchemaDefinition schemaRef="#/components/schemas/org.v2.Environment" />
 
     ## Quotas and Limits
     This resource is subject to the following quotas:
@@ -37,7 +40,7 @@ paths:
   /org/v2/environments:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all environments.
       operationId: listOrgV2Environments
@@ -187,7 +190,6 @@ paths:
       summary: List of Environments
       tags:
       - Environments (org/v2)
-      x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -274,7 +276,7 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create an environment.
       operationId: createOrgV2Environment
@@ -474,7 +476,6 @@ paths:
       summary: Create an Environment
       tags:
       - Environments (org/v2)
-      x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -578,11 +579,10 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"display_name\":\"prod-finance01\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Cloud v2
   /org/v2/environments/{id}:
     delete:
       description: |
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete an environment.
 
@@ -736,7 +736,6 @@ paths:
       summary: Delete an Environment
       tags:
       - Environments (org/v2)
-      x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -823,7 +822,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read an environment.
       operationId: getOrgV2Environment
@@ -985,7 +984,6 @@ paths:
       summary: Read an Environment
       tags:
       - Environments (org/v2)
-      x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1072,7 +1070,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update an environment.
 
@@ -1261,7 +1259,6 @@ paths:
       summary: Update an Environment
       tags:
       - Environments (org/v2)
-      x-request-access-name: Cloud v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1365,7 +1362,6 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"display_name\":\"prod-finance01\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Cloud v2
 components:
   responses:
     BadRequestError:
@@ -1541,7 +1537,6 @@ components:
           style: simple
   schemas:
     org.v2.Environment:
-      additionalProperties: false
       description: |-
         `Environment` objects represent an isolated namespace for your Confluent resources
         for organizational purposes.
@@ -1551,6 +1546,9 @@ components:
 
 
         Related guide: [Environments in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/environments.html).
+
+        ## The Environments Model
+        <SchemaDefinition schemaRef="#/components/schemas/org.v2.Environment" />
 
         ## Quotas and Limits
         This resource is subject to the following quotas:
@@ -1596,7 +1594,6 @@ components:
           type: string
       type: object
     org.v2.EnvironmentList:
-      additionalProperties: false
       description: |-
         `Environment` objects represent an isolated namespace for your Confluent resources
         for organizational purposes.
@@ -1606,6 +1603,9 @@ components:
 
 
         Related guide: [Environments in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/environments.html).
+
+        ## The Environments Model
+        <SchemaDefinition schemaRef="#/components/schemas/org.v2.Environment" />
 
         ## Quotas and Limits
         This resource is subject to the following quotas:
@@ -1659,7 +1659,6 @@ components:
       - metadata
       type: object
     ObjectMeta:
-      additionalProperties: false
       description: ObjectMeta is metadata that all persisted resources must have,
         which includes all objects users must create.
       properties:
@@ -1703,9 +1702,7 @@ components:
       readOnly: true
       required:
       - self
-      type: object
     ListMeta:
-      additionalProperties: false
       description: ListMeta describes metadata that resource collections may have
       properties:
         first:
@@ -1747,7 +1744,6 @@ components:
           type: integer
       type: object
     ObjectReference:
-      additionalProperties: false
       description: ObjectReference provides information for you to locate the referred
         object
       properties:
@@ -1789,7 +1785,6 @@ components:
       - resource_name
       type: object
     Failure:
-      additionalProperties: false
       description: Provides information about problems encountered while performing
         an operation.
       properties:
@@ -1803,7 +1798,6 @@ components:
       - errors
       type: object
     Error:
-      additionalProperties: false
       description: Describes a particular error encountered while performing an operation.
       properties:
         id:

@@ -39,12 +39,103 @@ var (
 	_ _context.Context
 )
 
+type EnvironmentsOrgV2Api interface {
+
+	/*
+	CreateOrgV2Environment Create an Environment
+
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to create an environment.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiCreateOrgV2EnvironmentRequest
+	*/
+	CreateOrgV2Environment(ctx _context.Context) ApiCreateOrgV2EnvironmentRequest
+
+	// CreateOrgV2EnvironmentExecute executes the request
+	//  @return OrgV2Environment
+	CreateOrgV2EnvironmentExecute(r ApiCreateOrgV2EnvironmentRequest) (OrgV2Environment, *_nethttp.Response, error)
+
+	/*
+	DeleteOrgV2Environment Delete an Environment
+
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to delete an environment.
+
+If successful, this request will also recursively delete all of the environment's associated resources,
+including all Kafka clusters, connectors, etc.
+
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the environment.
+	 @return ApiDeleteOrgV2EnvironmentRequest
+	*/
+	DeleteOrgV2Environment(ctx _context.Context, id string) ApiDeleteOrgV2EnvironmentRequest
+
+	// DeleteOrgV2EnvironmentExecute executes the request
+	DeleteOrgV2EnvironmentExecute(r ApiDeleteOrgV2EnvironmentRequest) (*_nethttp.Response, error)
+
+	/*
+	GetOrgV2Environment Read an Environment
+
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to read an environment.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the environment.
+	 @return ApiGetOrgV2EnvironmentRequest
+	*/
+	GetOrgV2Environment(ctx _context.Context, id string) ApiGetOrgV2EnvironmentRequest
+
+	// GetOrgV2EnvironmentExecute executes the request
+	//  @return OrgV2Environment
+	GetOrgV2EnvironmentExecute(r ApiGetOrgV2EnvironmentRequest) (OrgV2Environment, *_nethttp.Response, error)
+
+	/*
+	ListOrgV2Environments List of Environments
+
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Retrieve a sorted, filtered, paginated list of all environments.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiListOrgV2EnvironmentsRequest
+	*/
+	ListOrgV2Environments(ctx _context.Context) ApiListOrgV2EnvironmentsRequest
+
+	// ListOrgV2EnvironmentsExecute executes the request
+	//  @return OrgV2EnvironmentList
+	ListOrgV2EnvironmentsExecute(r ApiListOrgV2EnvironmentsRequest) (OrgV2EnvironmentList, *_nethttp.Response, error)
+
+	/*
+	UpdateOrgV2Environment Update an Environment
+
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to update an environment.
+
+
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the environment.
+	 @return ApiUpdateOrgV2EnvironmentRequest
+	*/
+	UpdateOrgV2Environment(ctx _context.Context, id string) ApiUpdateOrgV2EnvironmentRequest
+
+	// UpdateOrgV2EnvironmentExecute executes the request
+	//  @return OrgV2Environment
+	UpdateOrgV2EnvironmentExecute(r ApiUpdateOrgV2EnvironmentRequest) (OrgV2Environment, *_nethttp.Response, error)
+}
+
 // EnvironmentsOrgV2ApiService EnvironmentsOrgV2Api service
 type EnvironmentsOrgV2ApiService service
 
 type ApiCreateOrgV2EnvironmentRequest struct {
 	ctx _context.Context
-	ApiService *EnvironmentsOrgV2ApiService
+	ApiService EnvironmentsOrgV2Api
 	orgV2Environment *OrgV2Environment
 }
 
@@ -60,7 +151,7 @@ func (r ApiCreateOrgV2EnvironmentRequest) Execute() (OrgV2Environment, *_nethttp
 /*
 CreateOrgV2Environment Create an Environment
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create an environment.
 
@@ -214,7 +305,7 @@ func (a *EnvironmentsOrgV2ApiService) CreateOrgV2EnvironmentExecute(r ApiCreateO
 
 type ApiDeleteOrgV2EnvironmentRequest struct {
 	ctx _context.Context
-	ApiService *EnvironmentsOrgV2ApiService
+	ApiService EnvironmentsOrgV2Api
 	id string
 }
 
@@ -226,7 +317,7 @@ func (r ApiDeleteOrgV2EnvironmentRequest) Execute() (*_nethttp.Response, error) 
 /*
 DeleteOrgV2Environment Delete an Environment
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete an environment.
 
@@ -364,7 +455,7 @@ func (a *EnvironmentsOrgV2ApiService) DeleteOrgV2EnvironmentExecute(r ApiDeleteO
 
 type ApiGetOrgV2EnvironmentRequest struct {
 	ctx _context.Context
-	ApiService *EnvironmentsOrgV2ApiService
+	ApiService EnvironmentsOrgV2Api
 	id string
 }
 
@@ -376,7 +467,7 @@ func (r ApiGetOrgV2EnvironmentRequest) Execute() (OrgV2Environment, *_nethttp.Re
 /*
 GetOrgV2Environment Read an Environment
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read an environment.
 
@@ -521,7 +612,7 @@ func (a *EnvironmentsOrgV2ApiService) GetOrgV2EnvironmentExecute(r ApiGetOrgV2En
 
 type ApiListOrgV2EnvironmentsRequest struct {
 	ctx _context.Context
-	ApiService *EnvironmentsOrgV2ApiService
+	ApiService EnvironmentsOrgV2Api
 	pageSize *int32
 	pageToken *string
 }
@@ -544,7 +635,7 @@ func (r ApiListOrgV2EnvironmentsRequest) Execute() (OrgV2EnvironmentList, *_neth
 /*
 ListOrgV2Environments List of Environments
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all environments.
 
@@ -682,7 +773,7 @@ func (a *EnvironmentsOrgV2ApiService) ListOrgV2EnvironmentsExecute(r ApiListOrgV
 
 type ApiUpdateOrgV2EnvironmentRequest struct {
 	ctx _context.Context
-	ApiService *EnvironmentsOrgV2ApiService
+	ApiService EnvironmentsOrgV2Api
 	id string
 	orgV2Environment *OrgV2Environment
 }
@@ -699,7 +790,7 @@ func (r ApiUpdateOrgV2EnvironmentRequest) Execute() (OrgV2Environment, *_nethttp
 /*
 UpdateOrgV2Environment Update an Environment
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update an environment.
 
