@@ -64,7 +64,7 @@ type APIClient struct {
 
 	// API Services
 
-	EnvironmentsOrgV2Api *EnvironmentsOrgV2ApiService
+	EnvironmentsOrgV2Api EnvironmentsOrgV2Api
 }
 
 type service struct {
