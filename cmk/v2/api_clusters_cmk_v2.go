@@ -39,12 +39,99 @@ var (
 	_ _context.Context
 )
 
+type ClustersCmkV2Api interface {
+
+	/*
+	CreateCmkV2Cluster Create a Cluster
+
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to create a cluster.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiCreateCmkV2ClusterRequest
+	*/
+	CreateCmkV2Cluster(ctx _context.Context) ApiCreateCmkV2ClusterRequest
+
+	// CreateCmkV2ClusterExecute executes the request
+	//  @return CmkV2Cluster
+	CreateCmkV2ClusterExecute(r ApiCreateCmkV2ClusterRequest) (CmkV2Cluster, *_nethttp.Response, error)
+
+	/*
+	DeleteCmkV2Cluster Delete a Cluster
+
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to delete a cluster.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the cluster.
+	 @return ApiDeleteCmkV2ClusterRequest
+	*/
+	DeleteCmkV2Cluster(ctx _context.Context, id string) ApiDeleteCmkV2ClusterRequest
+
+	// DeleteCmkV2ClusterExecute executes the request
+	DeleteCmkV2ClusterExecute(r ApiDeleteCmkV2ClusterRequest) (*_nethttp.Response, error)
+
+	/*
+	GetCmkV2Cluster Read a Cluster
+
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to read a cluster.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the cluster.
+	 @return ApiGetCmkV2ClusterRequest
+	*/
+	GetCmkV2Cluster(ctx _context.Context, id string) ApiGetCmkV2ClusterRequest
+
+	// GetCmkV2ClusterExecute executes the request
+	//  @return CmkV2Cluster
+	GetCmkV2ClusterExecute(r ApiGetCmkV2ClusterRequest) (CmkV2Cluster, *_nethttp.Response, error)
+
+	/*
+	ListCmkV2Clusters List of Clusters
+
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Retrieve a sorted, filtered, paginated list of all clusters.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiListCmkV2ClustersRequest
+	*/
+	ListCmkV2Clusters(ctx _context.Context) ApiListCmkV2ClustersRequest
+
+	// ListCmkV2ClustersExecute executes the request
+	//  @return CmkV2ClusterList
+	ListCmkV2ClustersExecute(r ApiListCmkV2ClustersRequest) (CmkV2ClusterList, *_nethttp.Response, error)
+
+	/*
+	UpdateCmkV2Cluster Update a Cluster
+
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to update a cluster.
+
+
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the cluster.
+	 @return ApiUpdateCmkV2ClusterRequest
+	*/
+	UpdateCmkV2Cluster(ctx _context.Context, id string) ApiUpdateCmkV2ClusterRequest
+
+	// UpdateCmkV2ClusterExecute executes the request
+	//  @return CmkV2Cluster
+	UpdateCmkV2ClusterExecute(r ApiUpdateCmkV2ClusterRequest) (CmkV2Cluster, *_nethttp.Response, error)
+}
+
 // ClustersCmkV2ApiService ClustersCmkV2Api service
 type ClustersCmkV2ApiService service
 
 type ApiCreateCmkV2ClusterRequest struct {
 	ctx _context.Context
-	ApiService *ClustersCmkV2ApiService
+	ApiService ClustersCmkV2Api
 	cmkV2Cluster *CmkV2Cluster
 }
 
@@ -214,7 +301,7 @@ func (a *ClustersCmkV2ApiService) CreateCmkV2ClusterExecute(r ApiCreateCmkV2Clus
 
 type ApiDeleteCmkV2ClusterRequest struct {
 	ctx _context.Context
-	ApiService *ClustersCmkV2ApiService
+	ApiService ClustersCmkV2Api
 	environment *string
 	id string
 }
@@ -370,7 +457,7 @@ func (a *ClustersCmkV2ApiService) DeleteCmkV2ClusterExecute(r ApiDeleteCmkV2Clus
 
 type ApiGetCmkV2ClusterRequest struct {
 	ctx _context.Context
-	ApiService *ClustersCmkV2ApiService
+	ApiService ClustersCmkV2Api
 	environment *string
 	id string
 }
@@ -537,7 +624,7 @@ func (a *ClustersCmkV2ApiService) GetCmkV2ClusterExecute(r ApiGetCmkV2ClusterReq
 
 type ApiListCmkV2ClustersRequest struct {
 	ctx _context.Context
-	ApiService *ClustersCmkV2ApiService
+	ApiService ClustersCmkV2Api
 	environment *string
 	specNetwork *MultipleSearchFilter
 	pageSize *int32
@@ -717,7 +804,7 @@ func (a *ClustersCmkV2ApiService) ListCmkV2ClustersExecute(r ApiListCmkV2Cluster
 
 type ApiUpdateCmkV2ClusterRequest struct {
 	ctx _context.Context
-	ApiService *ClustersCmkV2ApiService
+	ApiService ClustersCmkV2Api
 	id string
 	cmkV2ClusterUpdate *CmkV2ClusterUpdate
 }

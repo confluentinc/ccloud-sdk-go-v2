@@ -1784,7 +1784,7 @@ components:
               self:
                 example: https://api.confluent.cloud/cmk/v2/clusters/lkc-12345
               resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/cluster=lkc-12345
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lkc-12345
         spec:
           $ref: '#/components/schemas/cmk.v2.ClusterSpec'
         status:
@@ -2298,7 +2298,7 @@ components:
               self:
                 example: https://api.confluent.cloud/cmk/v2/clusters/lkc-12345
               resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/cluster=lkc-12345
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lkc-12345
         spec:
           $ref: '#/components/schemas/cmk.v2.ClusterSpecUpdate'
         status:
