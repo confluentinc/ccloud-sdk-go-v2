@@ -12,22 +12,64 @@ Method | HTTP request | Description
 
 ## GetKafkaV3ConsumerLag
 
-> ConsumerLagData GetKafkaV3ConsumerLag(ctx, clusterId, consumerGroupId, topicName, partitionId)
+> ConsumerLagData GetKafkaV3ConsumerLag(ctx, clusterId, consumerGroupId, topicName, partitionId).Execute()
 
 Get Consumer Lag
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cluster Admin for Kafka (v3)](https://img.shields.io/badge/-Request%20Access%20To%20Cluster%20Admin%20For%20Kafka%20v3-%23bc8540)](mailto:ccloud-rest-api+consumer-lag-earlyaccess@confluent.io?subject=Request%20to%20join%20v3%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cluster%20Admin%20For%20Kafka%20v3%20Early%20Access%20to%20provide%20early%20feedback%20on%20consumer%20lag%20apis%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)  Returns the consumer lag on a partition with the given `partition_id`.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    clusterId := "cluster-1" // string | The Kafka cluster ID.
+    consumerGroupId := "consumer-group-1" // string | The consumer group ID.
+    topicName := "topic-1" // string | The topic name.
+    partitionId := int32(0) // int32 | The partition ID.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PartitionV3Api.GetKafkaV3ConsumerLag(context.Background(), clusterId, consumerGroupId, topicName, partitionId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PartitionV3Api.GetKafkaV3ConsumerLag``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetKafkaV3ConsumerLag`: ConsumerLagData
+    fmt.Fprintf(os.Stdout, "Response from `PartitionV3Api.GetKafkaV3ConsumerLag`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **string**| The Kafka cluster ID. | 
-**consumerGroupId** | **string**| The consumer group ID. | 
-**topicName** | **string**| The topic name. | 
-**partitionId** | **int32**| The partition ID. | 
+**clusterId** | **string** | The Kafka cluster ID. | 
+**consumerGroupId** | **string** | The consumer group ID. | 
+**topicName** | **string** | The topic name. | 
+**partitionId** | **int32** | The partition ID. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetKafkaV3ConsumerLagRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
 
 ### Return type
 
@@ -35,12 +77,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[api-key](../README.md#api-key)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -49,21 +91,61 @@ No authorization required
 
 ## GetKafkaV3Partition
 
-> PartitionData GetKafkaV3Partition(ctx, clusterId, topicName, partitionId)
+> PartitionData GetKafkaV3Partition(ctx, clusterId, topicName, partitionId).Execute()
 
 Get Partition
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)  Returns the partition with the given `partition_id`.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    clusterId := "cluster-1" // string | The Kafka cluster ID.
+    topicName := "topic-1" // string | The topic name.
+    partitionId := int32(0) // int32 | The partition ID.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PartitionV3Api.GetKafkaV3Partition(context.Background(), clusterId, topicName, partitionId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PartitionV3Api.GetKafkaV3Partition``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetKafkaV3Partition`: PartitionData
+    fmt.Fprintf(os.Stdout, "Response from `PartitionV3Api.GetKafkaV3Partition`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **string**| The Kafka cluster ID. | 
-**topicName** | **string**| The topic name. | 
-**partitionId** | **int32**| The partition ID. | 
+**clusterId** | **string** | The Kafka cluster ID. | 
+**topicName** | **string** | The topic name. | 
+**partitionId** | **int32** | The partition ID. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetKafkaV3PartitionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
 
 ### Return type
 
@@ -71,12 +153,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[api-key](../README.md#api-key)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -85,20 +167,58 @@ No authorization required
 
 ## ListKafkaV3Partitions
 
-> PartitionDataList ListKafkaV3Partitions(ctx, clusterId, topicName)
+> PartitionDataList ListKafkaV3Partitions(ctx, clusterId, topicName).Execute()
 
 List Partitions
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)  Returns the list of partitions that belong to the specified topic.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    clusterId := "cluster-1" // string | The Kafka cluster ID.
+    topicName := "topic-1" // string | The topic name.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PartitionV3Api.ListKafkaV3Partitions(context.Background(), clusterId, topicName).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PartitionV3Api.ListKafkaV3Partitions``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListKafkaV3Partitions`: PartitionDataList
+    fmt.Fprintf(os.Stdout, "Response from `PartitionV3Api.ListKafkaV3Partitions`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **string**| The Kafka cluster ID. | 
-**topicName** | **string**| The topic name. | 
+**clusterId** | **string** | The Kafka cluster ID. | 
+**topicName** | **string** | The topic name. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListKafkaV3PartitionsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
 
 ### Return type
 
@@ -106,12 +226,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[api-key](../README.md#api-key)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

@@ -13,30 +13,57 @@ Method | HTTP request | Description
 
 ## CreateKafkaV3Topic
 
-> TopicData CreateKafkaV3Topic(ctx, clusterId, optional)
+> TopicData CreateKafkaV3Topic(ctx, clusterId).CreateTopicRequestData(createTopicRequestData).Execute()
 
 Create Topic
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)  Creates a topic.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    clusterId := "cluster-1" // string | The Kafka cluster ID.
+    createTopicRequestData := *openapiclient.NewCreateTopicRequestData("TopicName_example") // CreateTopicRequestData | The topic creation request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.TopicV3Api.CreateKafkaV3Topic(context.Background(), clusterId).CreateTopicRequestData(createTopicRequestData).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TopicV3Api.CreateKafkaV3Topic``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateKafkaV3Topic`: TopicData
+    fmt.Fprintf(os.Stdout, "Response from `TopicV3Api.CreateKafkaV3Topic`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **string**| The Kafka cluster ID. | 
- **optional** | ***CreateKafkaV3TopicOpts** | optional parameters | nil if no parameters
+**clusterId** | **string** | The Kafka cluster ID. | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a CreateKafkaV3TopicOpts struct
+Other parameters are passed through a pointer to a apiCreateKafkaV3TopicRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **createTopicRequestData** | [**optional.Interface of CreateTopicRequestData**](CreateTopicRequestData.md)| The topic creation request. | 
+ **createTopicRequestData** | [**CreateTopicRequestData**](CreateTopicRequestData.md) | The topic creation request. | 
 
 ### Return type
 
@@ -44,12 +71,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[api-key](../README.md#api-key)
 
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -58,20 +85,56 @@ No authorization required
 
 ## DeleteKafkaV3Topic
 
-> DeleteKafkaV3Topic(ctx, clusterId, topicName)
+> DeleteKafkaV3Topic(ctx, clusterId, topicName).Execute()
 
 Delete Topic
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)  Deletes the topic with the given `topic_name`.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    clusterId := "cluster-1" // string | The Kafka cluster ID.
+    topicName := "topic-1" // string | The topic name.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.TopicV3Api.DeleteKafkaV3Topic(context.Background(), clusterId, topicName).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TopicV3Api.DeleteKafkaV3Topic``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **string**| The Kafka cluster ID. | 
-**topicName** | **string**| The topic name. | 
+**clusterId** | **string** | The Kafka cluster ID. | 
+**topicName** | **string** | The topic name. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteKafkaV3TopicRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
 
 ### Return type
 
@@ -79,12 +142,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[api-key](../README.md#api-key)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -93,20 +156,58 @@ No authorization required
 
 ## GetKafkaV3Topic
 
-> TopicData GetKafkaV3Topic(ctx, clusterId, topicName)
+> TopicData GetKafkaV3Topic(ctx, clusterId, topicName).Execute()
 
 Get Topic
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)  Returns the topic with the given `topic_name`.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    clusterId := "cluster-1" // string | The Kafka cluster ID.
+    topicName := "topic-1" // string | The topic name.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.TopicV3Api.GetKafkaV3Topic(context.Background(), clusterId, topicName).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TopicV3Api.GetKafkaV3Topic``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetKafkaV3Topic`: TopicData
+    fmt.Fprintf(os.Stdout, "Response from `TopicV3Api.GetKafkaV3Topic`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **string**| The Kafka cluster ID. | 
-**topicName** | **string**| The topic name. | 
+**clusterId** | **string** | The Kafka cluster ID. | 
+**topicName** | **string** | The topic name. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetKafkaV3TopicRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
 
 ### Return type
 
@@ -114,12 +215,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[api-key](../README.md#api-key)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -128,19 +229,55 @@ No authorization required
 
 ## ListKafkaV3Topics
 
-> TopicDataList ListKafkaV3Topics(ctx, clusterId)
+> TopicDataList ListKafkaV3Topics(ctx, clusterId).Execute()
 
 List Topics
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)  Returns the list of topics that belong to the specified Kafka cluster.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    clusterId := "cluster-1" // string | The Kafka cluster ID.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.TopicV3Api.ListKafkaV3Topics(context.Background(), clusterId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TopicV3Api.ListKafkaV3Topics``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListKafkaV3Topics`: TopicDataList
+    fmt.Fprintf(os.Stdout, "Response from `TopicV3Api.ListKafkaV3Topics`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **string**| The Kafka cluster ID. | 
+**clusterId** | **string** | The Kafka cluster ID. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListKafkaV3TopicsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
@@ -148,12 +285,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[api-key](../README.md#api-key)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
