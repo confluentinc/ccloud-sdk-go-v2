@@ -18,13 +18,59 @@ Install the following dependencies:
 go get github.com/stretchr/testify/assert
 go get golang.org/x/oauth2
 go get golang.org/x/net/context
-go get github.com/antihax/optional
 ```
 
 Put the package under your project folder and add the following in import:
 
 ```golang
-import "./v3"
+import sw "./v3"
+```
+
+To use a proxy, set the environment variable `HTTP_PROXY`:
+
+```golang
+os.Setenv("HTTP_PROXY", "http://proxy_name:proxy_port")
+```
+
+## Configuration of Server URL
+
+Default configuration comes with `Servers` field that contains server objects as defined in the OpenAPI specification.
+
+### Select Server Configuration
+
+For using other server than the one defined on index 0 set context value `sw.ContextServerIndex` of type `int`.
+
+```golang
+ctx := context.WithValue(context.Background(), sw.ContextServerIndex, 1)
+```
+
+### Templated Server URL
+
+Templated server URL is formatted using default variables from configuration or from context value `sw.ContextServerVariables` of type `map[string]string`.
+
+```golang
+ctx := context.WithValue(context.Background(), sw.ContextServerVariables, map[string]string{
+	"basePath": "v2",
+})
+```
+
+Note, enum values are always validated and all unused variables are silently ignored.
+
+### URLs Configuration per Operation
+
+Each operation can use different server URL defined using `OperationServers` map in the `Configuration`.
+An operation is uniquely identified by `"{classname}Service.{nickname}"` string.
+Similar rules for overriding default operation server index and variables applies by using `sw.ContextOperationServerIndices` and `sw.ContextOperationServerVariables` context maps.
+
+```
+ctx := context.WithValue(context.Background(), sw.ContextOperationServerIndices, map[string]int{
+	"{classname}Service.{nickname}": 2,
+})
+ctx = context.WithValue(context.Background(), sw.ContextOperationServerVariables, map[string]map[string]string{
+	"{classname}Service.{nickname}": {
+		"port": "8443",
+	},
+})
 ```
 
 ## Documentation for API Endpoints
@@ -54,7 +100,6 @@ Class | Method | HTTP request | Description
 *ClusterLinkingV3Api* | [**UpdateKafkaV3MirrorTopicsPromote**](docs/ClusterLinkingV3Api.md#updatekafkav3mirrortopicspromote) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:promote | Promote the mirror topics
 *ClusterLinkingV3Api* | [**UpdateKafkaV3MirrorTopicsResume**](docs/ClusterLinkingV3Api.md#updatekafkav3mirrortopicsresume) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:resume | Resume the mirror topics
 *ClusterV3Api* | [**GetKafkaV3Cluster**](docs/ClusterV3Api.md#getkafkav3cluster) | **Get** /kafka/v3/clusters/{cluster_id} | Get Cluster
-*ConfigsApi* | [**ListKafkaV3DefaultTopicConfigs**](docs/ConfigsApi.md#listkafkav3defaulttopicconfigs) | **Get** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/default-configs | List Default Topic Configs
 *ConfigsV3Api* | [**DeleteKafkaV3ClusterConfig**](docs/ConfigsV3Api.md#deletekafkav3clusterconfig) | **Delete** /kafka/v3/clusters/{cluster_id}/broker-configs/{name} | Reset Cluster Config
 *ConfigsV3Api* | [**DeleteKafkaV3TopicConfig**](docs/ConfigsV3Api.md#deletekafkav3topicconfig) | **Delete** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs/{name} | Reset Topic Config
 *ConfigsV3Api* | [**GetKafkaV3ClusterConfig**](docs/ConfigsV3Api.md#getkafkav3clusterconfig) | **Get** /kafka/v3/clusters/{cluster_id}/broker-configs/{name} | Get Cluster Config
@@ -88,9 +133,6 @@ Class | Method | HTTP request | Description
  - [AclData](docs/AclData.md)
  - [AclDataAllOf](docs/AclDataAllOf.md)
  - [AclDataList](docs/AclDataList.md)
- - [AclOperation](docs/AclOperation.md)
- - [AclPatternType](docs/AclPatternType.md)
- - [AclPermission](docs/AclPermission.md)
  - [AclResourceType](docs/AclResourceType.md)
  - [AlterBrokerReplicaExclusionData](docs/AlterBrokerReplicaExclusionData.md)
  - [AlterBrokerReplicaExclusionDataAllOf](docs/AlterBrokerReplicaExclusionDataAllOf.md)
@@ -105,8 +147,6 @@ Class | Method | HTTP request | Description
  - [AlterMirrorsRequestData](docs/AlterMirrorsRequestData.md)
  - [AnyUnevenLoadData](docs/AnyUnevenLoadData.md)
  - [AnyUnevenLoadDataAllOf](docs/AnyUnevenLoadDataAllOf.md)
- - [AnyUnevenLoadStatus](docs/AnyUnevenLoadStatus.md)
- - [BalancerStatus](docs/BalancerStatus.md)
  - [BalancerStatusData](docs/BalancerStatusData.md)
  - [BalancerStatusDataAllOf](docs/BalancerStatusDataAllOf.md)
  - [BrokerConfigData](docs/BrokerConfigData.md)
@@ -127,25 +167,20 @@ Class | Method | HTTP request | Description
  - [BrokerReplicaExclusionDataList](docs/BrokerReplicaExclusionDataList.md)
  - [BrokerReplicaExclusionDataListAllOf](docs/BrokerReplicaExclusionDataListAllOf.md)
  - [BrokerReplicaExclusionRequestData](docs/BrokerReplicaExclusionRequestData.md)
- - [BrokerReplicaExclusionStatus](docs/BrokerReplicaExclusionStatus.md)
- - [BrokerShutdownStatus](docs/BrokerShutdownStatus.md)
  - [BrokerTaskData](docs/BrokerTaskData.md)
  - [BrokerTaskDataAllOf](docs/BrokerTaskDataAllOf.md)
  - [BrokerTaskDataList](docs/BrokerTaskDataList.md)
  - [BrokerTaskDataListAllOf](docs/BrokerTaskDataListAllOf.md)
- - [BrokerTaskStatus](docs/BrokerTaskStatus.md)
  - [BrokerTaskType](docs/BrokerTaskType.md)
  - [ClusterConfigData](docs/ClusterConfigData.md)
  - [ClusterConfigDataAllOf](docs/ClusterConfigDataAllOf.md)
  - [ClusterConfigDataList](docs/ClusterConfigDataList.md)
  - [ClusterConfigDataListAllOf](docs/ClusterConfigDataListAllOf.md)
- - [ClusterConfigType](docs/ClusterConfigType.md)
  - [ClusterData](docs/ClusterData.md)
  - [ClusterDataAllOf](docs/ClusterDataAllOf.md)
  - [ClusterDataList](docs/ClusterDataList.md)
  - [ClusterDataListAllOf](docs/ClusterDataListAllOf.md)
  - [ConfigData](docs/ConfigData.md)
- - [ConfigSource](docs/ConfigSource.md)
  - [ConfigSynonymData](docs/ConfigSynonymData.md)
  - [ConsumerAssignmentData](docs/ConsumerAssignmentData.md)
  - [ConsumerAssignmentDataAllOf](docs/ConsumerAssignmentDataAllOf.md)
@@ -161,7 +196,6 @@ Class | Method | HTTP request | Description
  - [ConsumerGroupDataListAllOf](docs/ConsumerGroupDataListAllOf.md)
  - [ConsumerGroupLagSummaryData](docs/ConsumerGroupLagSummaryData.md)
  - [ConsumerGroupLagSummaryDataAllOf](docs/ConsumerGroupLagSummaryDataAllOf.md)
- - [ConsumerGroupState](docs/ConsumerGroupState.md)
  - [ConsumerLagData](docs/ConsumerLagData.md)
  - [ConsumerLagDataAllOf](docs/ConsumerLagDataAllOf.md)
  - [ConsumerLagDataList](docs/ConsumerLagDataList.md)
@@ -172,10 +206,7 @@ Class | Method | HTTP request | Description
  - [CreateTopicRequestData](docs/CreateTopicRequestData.md)
  - [CreateTopicRequestDataConfigs](docs/CreateTopicRequestDataConfigs.md)
  - [CreateTopicRequestDataReplicasAssignments](docs/CreateTopicRequestDataReplicasAssignments.md)
- - [DeprecatedBrokerShutdownStatus](docs/DeprecatedBrokerShutdownStatus.md)
- - [DeprecatedPartitionReassignmentStatus](docs/DeprecatedPartitionReassignmentStatus.md)
  - [Error](docs/Error.md)
- - [ExclusionOp](docs/ExclusionOp.md)
  - [InlineResponse200](docs/InlineResponse200.md)
  - [ListLinkConfigsResponseData](docs/ListLinkConfigsResponseData.md)
  - [ListLinkConfigsResponseDataAllOf](docs/ListLinkConfigsResponseDataAllOf.md)
@@ -196,7 +227,6 @@ Class | Method | HTTP request | Description
  - [PartitionDataAllOf](docs/PartitionDataAllOf.md)
  - [PartitionDataList](docs/PartitionDataList.md)
  - [PartitionDataListAllOf](docs/PartitionDataListAllOf.md)
- - [PartitionReassignmentStatus](docs/PartitionReassignmentStatus.md)
  - [ProduceRequest](docs/ProduceRequest.md)
  - [ProduceRequestData](docs/ProduceRequestData.md)
  - [ProduceRequestHeader](docs/ProduceRequestHeader.md)
@@ -239,9 +269,38 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
- Endpoints do not require authorization.
 
 
+### api-key
+
+- **Type**: HTTP basic authentication
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextBasicAuth, sw.BasicAuth{
+    UserName: "username",
+    Password: "password",
+})
+r, err := client.Service.Operation(auth, args)
+```
+
+
+## Documentation for Utility Methods
+
+Due to the fact that model structure members are all pointers, this package contains
+a number of utility functions to easily obtain pointers to values of basic types.
+Each of these functions takes a value of the given basic type and returns a pointer to it:
+
+* `PtrBool`
+* `PtrInt`
+* `PtrInt32`
+* `PtrInt64`
+* `PtrFloat`
+* `PtrFloat32`
+* `PtrFloat64`
+* `PtrString`
+* `PtrTime`
 
 ## Author
 
