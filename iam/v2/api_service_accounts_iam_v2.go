@@ -39,12 +39,103 @@ var (
 	_ _context.Context
 )
 
+type ServiceAccountsIamV2Api interface {
+
+	/*
+	CreateIamV2ServiceAccount Create a Service Account
+
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to create a service account.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiCreateIamV2ServiceAccountRequest
+	*/
+	CreateIamV2ServiceAccount(ctx _context.Context) ApiCreateIamV2ServiceAccountRequest
+
+	// CreateIamV2ServiceAccountExecute executes the request
+	//  @return IamV2ServiceAccount
+	CreateIamV2ServiceAccountExecute(r ApiCreateIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error)
+
+	/*
+	DeleteIamV2ServiceAccount Delete a Service Account
+
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to delete a service account.
+
+If successful, this request will also recursively delete all of the service account's associated resources,
+including its cloud and cluster API keys.
+
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the service account.
+	 @return ApiDeleteIamV2ServiceAccountRequest
+	*/
+	DeleteIamV2ServiceAccount(ctx _context.Context, id string) ApiDeleteIamV2ServiceAccountRequest
+
+	// DeleteIamV2ServiceAccountExecute executes the request
+	DeleteIamV2ServiceAccountExecute(r ApiDeleteIamV2ServiceAccountRequest) (*_nethttp.Response, error)
+
+	/*
+	GetIamV2ServiceAccount Read a Service Account
+
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to read a service account.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the service account.
+	 @return ApiGetIamV2ServiceAccountRequest
+	*/
+	GetIamV2ServiceAccount(ctx _context.Context, id string) ApiGetIamV2ServiceAccountRequest
+
+	// GetIamV2ServiceAccountExecute executes the request
+	//  @return IamV2ServiceAccount
+	GetIamV2ServiceAccountExecute(r ApiGetIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error)
+
+	/*
+	ListIamV2ServiceAccounts List of Service Accounts
+
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Retrieve a sorted, filtered, paginated list of all service accounts.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiListIamV2ServiceAccountsRequest
+	*/
+	ListIamV2ServiceAccounts(ctx _context.Context) ApiListIamV2ServiceAccountsRequest
+
+	// ListIamV2ServiceAccountsExecute executes the request
+	//  @return IamV2ServiceAccountList
+	ListIamV2ServiceAccountsExecute(r ApiListIamV2ServiceAccountsRequest) (IamV2ServiceAccountList, *_nethttp.Response, error)
+
+	/*
+	UpdateIamV2ServiceAccount Update a Service Account
+
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to update a service account.
+
+
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the service account.
+	 @return ApiUpdateIamV2ServiceAccountRequest
+	*/
+	UpdateIamV2ServiceAccount(ctx _context.Context, id string) ApiUpdateIamV2ServiceAccountRequest
+
+	// UpdateIamV2ServiceAccountExecute executes the request
+	//  @return IamV2ServiceAccount
+	UpdateIamV2ServiceAccountExecute(r ApiUpdateIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error)
+}
+
 // ServiceAccountsIamV2ApiService ServiceAccountsIamV2Api service
 type ServiceAccountsIamV2ApiService service
 
 type ApiCreateIamV2ServiceAccountRequest struct {
 	ctx _context.Context
-	ApiService *ServiceAccountsIamV2ApiService
+	ApiService ServiceAccountsIamV2Api
 	iamV2ServiceAccount *IamV2ServiceAccount
 }
 
@@ -60,7 +151,7 @@ func (r ApiCreateIamV2ServiceAccountRequest) Execute() (IamV2ServiceAccount, *_n
 /*
 CreateIamV2ServiceAccount Create a Service Account
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create a service account.
 
@@ -214,7 +305,7 @@ func (a *ServiceAccountsIamV2ApiService) CreateIamV2ServiceAccountExecute(r ApiC
 
 type ApiDeleteIamV2ServiceAccountRequest struct {
 	ctx _context.Context
-	ApiService *ServiceAccountsIamV2ApiService
+	ApiService ServiceAccountsIamV2Api
 	id string
 }
 
@@ -226,7 +317,7 @@ func (r ApiDeleteIamV2ServiceAccountRequest) Execute() (*_nethttp.Response, erro
 /*
 DeleteIamV2ServiceAccount Delete a Service Account
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete a service account.
 
@@ -364,7 +455,7 @@ func (a *ServiceAccountsIamV2ApiService) DeleteIamV2ServiceAccountExecute(r ApiD
 
 type ApiGetIamV2ServiceAccountRequest struct {
 	ctx _context.Context
-	ApiService *ServiceAccountsIamV2ApiService
+	ApiService ServiceAccountsIamV2Api
 	id string
 }
 
@@ -376,7 +467,7 @@ func (r ApiGetIamV2ServiceAccountRequest) Execute() (IamV2ServiceAccount, *_neth
 /*
 GetIamV2ServiceAccount Read a Service Account
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a service account.
 
@@ -521,7 +612,7 @@ func (a *ServiceAccountsIamV2ApiService) GetIamV2ServiceAccountExecute(r ApiGetI
 
 type ApiListIamV2ServiceAccountsRequest struct {
 	ctx _context.Context
-	ApiService *ServiceAccountsIamV2ApiService
+	ApiService ServiceAccountsIamV2Api
 	pageSize *int32
 	pageToken *string
 }
@@ -544,7 +635,7 @@ func (r ApiListIamV2ServiceAccountsRequest) Execute() (IamV2ServiceAccountList, 
 /*
 ListIamV2ServiceAccounts List of Service Accounts
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all service accounts.
 
@@ -682,7 +773,7 @@ func (a *ServiceAccountsIamV2ApiService) ListIamV2ServiceAccountsExecute(r ApiLi
 
 type ApiUpdateIamV2ServiceAccountRequest struct {
 	ctx _context.Context
-	ApiService *ServiceAccountsIamV2ApiService
+	ApiService ServiceAccountsIamV2Api
 	id string
 	iamV2ServiceAccountUpdate *IamV2ServiceAccountUpdate
 }
@@ -699,7 +790,7 @@ func (r ApiUpdateIamV2ServiceAccountRequest) Execute() (IamV2ServiceAccount, *_n
 /*
 UpdateIamV2ServiceAccount Update a Service Account
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cloud v2](https://img.shields.io/badge/-Request%20Access%20To%20Cloud%20v2-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update a service account.
 
