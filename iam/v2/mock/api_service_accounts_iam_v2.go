@@ -9,80 +9,80 @@ import (
 	net_http "net/http"
 	sync "sync"
 
-	github_com_confluentinc_ccloud_sdk_go_v2 "github.com/confluentinc/ccloud-sdk-go-v2"
+	github_com_confluentinc_ccloud_sdk_go_v2_iam_v2 "github.com/confluentinc/ccloud-sdk-go-v2/iam/v2"
 )
 
 // ServiceAccountsIamV2Api is a mock of ServiceAccountsIamV2Api interface
 type ServiceAccountsIamV2Api struct {
 	lockCreateIamV2ServiceAccount sync.Mutex
-	CreateIamV2ServiceAccountFunc func(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateIamV2ServiceAccountRequest
+	CreateIamV2ServiceAccountFunc func(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiCreateIamV2ServiceAccountRequest
 
 	lockCreateIamV2ServiceAccountExecute sync.Mutex
-	CreateIamV2ServiceAccountExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateIamV2ServiceAccountRequest) (github_com_confluentinc_ccloud_sdk_go_v2.IamV2ServiceAccount, *net_http.Response, error)
+	CreateIamV2ServiceAccountExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiCreateIamV2ServiceAccountRequest) (github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.IamV2ServiceAccount, *net_http.Response, error)
 
 	lockDeleteIamV2ServiceAccount sync.Mutex
-	DeleteIamV2ServiceAccountFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteIamV2ServiceAccountRequest
+	DeleteIamV2ServiceAccountFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiDeleteIamV2ServiceAccountRequest
 
 	lockDeleteIamV2ServiceAccountExecute sync.Mutex
-	DeleteIamV2ServiceAccountExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteIamV2ServiceAccountRequest) (*net_http.Response, error)
+	DeleteIamV2ServiceAccountExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiDeleteIamV2ServiceAccountRequest) (*net_http.Response, error)
 
 	lockGetIamV2ServiceAccount sync.Mutex
-	GetIamV2ServiceAccountFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2.ApiGetIamV2ServiceAccountRequest
+	GetIamV2ServiceAccountFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiGetIamV2ServiceAccountRequest
 
 	lockGetIamV2ServiceAccountExecute sync.Mutex
-	GetIamV2ServiceAccountExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2.ApiGetIamV2ServiceAccountRequest) (github_com_confluentinc_ccloud_sdk_go_v2.IamV2ServiceAccount, *net_http.Response, error)
+	GetIamV2ServiceAccountExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiGetIamV2ServiceAccountRequest) (github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.IamV2ServiceAccount, *net_http.Response, error)
 
 	lockListIamV2ServiceAccounts sync.Mutex
-	ListIamV2ServiceAccountsFunc func(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2.ApiListIamV2ServiceAccountsRequest
+	ListIamV2ServiceAccountsFunc func(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiListIamV2ServiceAccountsRequest
 
 	lockListIamV2ServiceAccountsExecute sync.Mutex
-	ListIamV2ServiceAccountsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2.ApiListIamV2ServiceAccountsRequest) (github_com_confluentinc_ccloud_sdk_go_v2.IamV2ServiceAccountList, *net_http.Response, error)
+	ListIamV2ServiceAccountsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiListIamV2ServiceAccountsRequest) (github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.IamV2ServiceAccountList, *net_http.Response, error)
 
 	lockUpdateIamV2ServiceAccount sync.Mutex
-	UpdateIamV2ServiceAccountFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2.ApiUpdateIamV2ServiceAccountRequest
+	UpdateIamV2ServiceAccountFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiUpdateIamV2ServiceAccountRequest
 
 	lockUpdateIamV2ServiceAccountExecute sync.Mutex
-	UpdateIamV2ServiceAccountExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2.ApiUpdateIamV2ServiceAccountRequest) (github_com_confluentinc_ccloud_sdk_go_v2.IamV2ServiceAccount, *net_http.Response, error)
+	UpdateIamV2ServiceAccountExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiUpdateIamV2ServiceAccountRequest) (github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.IamV2ServiceAccount, *net_http.Response, error)
 
 	calls struct {
 		CreateIamV2ServiceAccount []struct {
 			Ctx context.Context
 		}
 		CreateIamV2ServiceAccountExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateIamV2ServiceAccountRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiCreateIamV2ServiceAccountRequest
 		}
 		DeleteIamV2ServiceAccount []struct {
 			Ctx context.Context
 			Id  string
 		}
 		DeleteIamV2ServiceAccountExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteIamV2ServiceAccountRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiDeleteIamV2ServiceAccountRequest
 		}
 		GetIamV2ServiceAccount []struct {
 			Ctx context.Context
 			Id  string
 		}
 		GetIamV2ServiceAccountExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2.ApiGetIamV2ServiceAccountRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiGetIamV2ServiceAccountRequest
 		}
 		ListIamV2ServiceAccounts []struct {
 			Ctx context.Context
 		}
 		ListIamV2ServiceAccountsExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2.ApiListIamV2ServiceAccountsRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiListIamV2ServiceAccountsRequest
 		}
 		UpdateIamV2ServiceAccount []struct {
 			Ctx context.Context
 			Id  string
 		}
 		UpdateIamV2ServiceAccountExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2.ApiUpdateIamV2ServiceAccountRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiUpdateIamV2ServiceAccountRequest
 		}
 	}
 }
 
 // CreateIamV2ServiceAccount mocks base method by wrapping the associated func.
-func (m *ServiceAccountsIamV2Api) CreateIamV2ServiceAccount(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateIamV2ServiceAccountRequest {
+func (m *ServiceAccountsIamV2Api) CreateIamV2ServiceAccount(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiCreateIamV2ServiceAccountRequest {
 	m.lockCreateIamV2ServiceAccount.Lock()
 	defer m.lockCreateIamV2ServiceAccount.Unlock()
 
@@ -120,7 +120,7 @@ func (m *ServiceAccountsIamV2Api) CreateIamV2ServiceAccountCalls() []struct {
 }
 
 // CreateIamV2ServiceAccountExecute mocks base method by wrapping the associated func.
-func (m *ServiceAccountsIamV2Api) CreateIamV2ServiceAccountExecute(r github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateIamV2ServiceAccountRequest) (github_com_confluentinc_ccloud_sdk_go_v2.IamV2ServiceAccount, *net_http.Response, error) {
+func (m *ServiceAccountsIamV2Api) CreateIamV2ServiceAccountExecute(r github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiCreateIamV2ServiceAccountRequest) (github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.IamV2ServiceAccount, *net_http.Response, error) {
 	m.lockCreateIamV2ServiceAccountExecute.Lock()
 	defer m.lockCreateIamV2ServiceAccountExecute.Unlock()
 
@@ -129,7 +129,7 @@ func (m *ServiceAccountsIamV2Api) CreateIamV2ServiceAccountExecute(r github_com_
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateIamV2ServiceAccountRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiCreateIamV2ServiceAccountRequest
 	}{
 		R: r,
 	}
@@ -149,7 +149,7 @@ func (m *ServiceAccountsIamV2Api) CreateIamV2ServiceAccountExecuteCalled() bool 
 
 // CreateIamV2ServiceAccountExecuteCalls returns the calls made to CreateIamV2ServiceAccountExecute.
 func (m *ServiceAccountsIamV2Api) CreateIamV2ServiceAccountExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateIamV2ServiceAccountRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiCreateIamV2ServiceAccountRequest
 } {
 	m.lockCreateIamV2ServiceAccountExecute.Lock()
 	defer m.lockCreateIamV2ServiceAccountExecute.Unlock()
@@ -158,7 +158,7 @@ func (m *ServiceAccountsIamV2Api) CreateIamV2ServiceAccountExecuteCalls() []stru
 }
 
 // DeleteIamV2ServiceAccount mocks base method by wrapping the associated func.
-func (m *ServiceAccountsIamV2Api) DeleteIamV2ServiceAccount(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteIamV2ServiceAccountRequest {
+func (m *ServiceAccountsIamV2Api) DeleteIamV2ServiceAccount(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiDeleteIamV2ServiceAccountRequest {
 	m.lockDeleteIamV2ServiceAccount.Lock()
 	defer m.lockDeleteIamV2ServiceAccount.Unlock()
 
@@ -199,7 +199,7 @@ func (m *ServiceAccountsIamV2Api) DeleteIamV2ServiceAccountCalls() []struct {
 }
 
 // DeleteIamV2ServiceAccountExecute mocks base method by wrapping the associated func.
-func (m *ServiceAccountsIamV2Api) DeleteIamV2ServiceAccountExecute(r github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteIamV2ServiceAccountRequest) (*net_http.Response, error) {
+func (m *ServiceAccountsIamV2Api) DeleteIamV2ServiceAccountExecute(r github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiDeleteIamV2ServiceAccountRequest) (*net_http.Response, error) {
 	m.lockDeleteIamV2ServiceAccountExecute.Lock()
 	defer m.lockDeleteIamV2ServiceAccountExecute.Unlock()
 
@@ -208,7 +208,7 @@ func (m *ServiceAccountsIamV2Api) DeleteIamV2ServiceAccountExecute(r github_com_
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteIamV2ServiceAccountRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiDeleteIamV2ServiceAccountRequest
 	}{
 		R: r,
 	}
@@ -228,7 +228,7 @@ func (m *ServiceAccountsIamV2Api) DeleteIamV2ServiceAccountExecuteCalled() bool 
 
 // DeleteIamV2ServiceAccountExecuteCalls returns the calls made to DeleteIamV2ServiceAccountExecute.
 func (m *ServiceAccountsIamV2Api) DeleteIamV2ServiceAccountExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteIamV2ServiceAccountRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiDeleteIamV2ServiceAccountRequest
 } {
 	m.lockDeleteIamV2ServiceAccountExecute.Lock()
 	defer m.lockDeleteIamV2ServiceAccountExecute.Unlock()
@@ -237,7 +237,7 @@ func (m *ServiceAccountsIamV2Api) DeleteIamV2ServiceAccountExecuteCalls() []stru
 }
 
 // GetIamV2ServiceAccount mocks base method by wrapping the associated func.
-func (m *ServiceAccountsIamV2Api) GetIamV2ServiceAccount(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2.ApiGetIamV2ServiceAccountRequest {
+func (m *ServiceAccountsIamV2Api) GetIamV2ServiceAccount(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiGetIamV2ServiceAccountRequest {
 	m.lockGetIamV2ServiceAccount.Lock()
 	defer m.lockGetIamV2ServiceAccount.Unlock()
 
@@ -278,7 +278,7 @@ func (m *ServiceAccountsIamV2Api) GetIamV2ServiceAccountCalls() []struct {
 }
 
 // GetIamV2ServiceAccountExecute mocks base method by wrapping the associated func.
-func (m *ServiceAccountsIamV2Api) GetIamV2ServiceAccountExecute(r github_com_confluentinc_ccloud_sdk_go_v2.ApiGetIamV2ServiceAccountRequest) (github_com_confluentinc_ccloud_sdk_go_v2.IamV2ServiceAccount, *net_http.Response, error) {
+func (m *ServiceAccountsIamV2Api) GetIamV2ServiceAccountExecute(r github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiGetIamV2ServiceAccountRequest) (github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.IamV2ServiceAccount, *net_http.Response, error) {
 	m.lockGetIamV2ServiceAccountExecute.Lock()
 	defer m.lockGetIamV2ServiceAccountExecute.Unlock()
 
@@ -287,7 +287,7 @@ func (m *ServiceAccountsIamV2Api) GetIamV2ServiceAccountExecute(r github_com_con
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2.ApiGetIamV2ServiceAccountRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiGetIamV2ServiceAccountRequest
 	}{
 		R: r,
 	}
@@ -307,7 +307,7 @@ func (m *ServiceAccountsIamV2Api) GetIamV2ServiceAccountExecuteCalled() bool {
 
 // GetIamV2ServiceAccountExecuteCalls returns the calls made to GetIamV2ServiceAccountExecute.
 func (m *ServiceAccountsIamV2Api) GetIamV2ServiceAccountExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2.ApiGetIamV2ServiceAccountRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiGetIamV2ServiceAccountRequest
 } {
 	m.lockGetIamV2ServiceAccountExecute.Lock()
 	defer m.lockGetIamV2ServiceAccountExecute.Unlock()
@@ -316,7 +316,7 @@ func (m *ServiceAccountsIamV2Api) GetIamV2ServiceAccountExecuteCalls() []struct 
 }
 
 // ListIamV2ServiceAccounts mocks base method by wrapping the associated func.
-func (m *ServiceAccountsIamV2Api) ListIamV2ServiceAccounts(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2.ApiListIamV2ServiceAccountsRequest {
+func (m *ServiceAccountsIamV2Api) ListIamV2ServiceAccounts(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiListIamV2ServiceAccountsRequest {
 	m.lockListIamV2ServiceAccounts.Lock()
 	defer m.lockListIamV2ServiceAccounts.Unlock()
 
@@ -354,7 +354,7 @@ func (m *ServiceAccountsIamV2Api) ListIamV2ServiceAccountsCalls() []struct {
 }
 
 // ListIamV2ServiceAccountsExecute mocks base method by wrapping the associated func.
-func (m *ServiceAccountsIamV2Api) ListIamV2ServiceAccountsExecute(r github_com_confluentinc_ccloud_sdk_go_v2.ApiListIamV2ServiceAccountsRequest) (github_com_confluentinc_ccloud_sdk_go_v2.IamV2ServiceAccountList, *net_http.Response, error) {
+func (m *ServiceAccountsIamV2Api) ListIamV2ServiceAccountsExecute(r github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiListIamV2ServiceAccountsRequest) (github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.IamV2ServiceAccountList, *net_http.Response, error) {
 	m.lockListIamV2ServiceAccountsExecute.Lock()
 	defer m.lockListIamV2ServiceAccountsExecute.Unlock()
 
@@ -363,7 +363,7 @@ func (m *ServiceAccountsIamV2Api) ListIamV2ServiceAccountsExecute(r github_com_c
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2.ApiListIamV2ServiceAccountsRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiListIamV2ServiceAccountsRequest
 	}{
 		R: r,
 	}
@@ -383,7 +383,7 @@ func (m *ServiceAccountsIamV2Api) ListIamV2ServiceAccountsExecuteCalled() bool {
 
 // ListIamV2ServiceAccountsExecuteCalls returns the calls made to ListIamV2ServiceAccountsExecute.
 func (m *ServiceAccountsIamV2Api) ListIamV2ServiceAccountsExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2.ApiListIamV2ServiceAccountsRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiListIamV2ServiceAccountsRequest
 } {
 	m.lockListIamV2ServiceAccountsExecute.Lock()
 	defer m.lockListIamV2ServiceAccountsExecute.Unlock()
@@ -392,7 +392,7 @@ func (m *ServiceAccountsIamV2Api) ListIamV2ServiceAccountsExecuteCalls() []struc
 }
 
 // UpdateIamV2ServiceAccount mocks base method by wrapping the associated func.
-func (m *ServiceAccountsIamV2Api) UpdateIamV2ServiceAccount(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2.ApiUpdateIamV2ServiceAccountRequest {
+func (m *ServiceAccountsIamV2Api) UpdateIamV2ServiceAccount(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiUpdateIamV2ServiceAccountRequest {
 	m.lockUpdateIamV2ServiceAccount.Lock()
 	defer m.lockUpdateIamV2ServiceAccount.Unlock()
 
@@ -433,7 +433,7 @@ func (m *ServiceAccountsIamV2Api) UpdateIamV2ServiceAccountCalls() []struct {
 }
 
 // UpdateIamV2ServiceAccountExecute mocks base method by wrapping the associated func.
-func (m *ServiceAccountsIamV2Api) UpdateIamV2ServiceAccountExecute(r github_com_confluentinc_ccloud_sdk_go_v2.ApiUpdateIamV2ServiceAccountRequest) (github_com_confluentinc_ccloud_sdk_go_v2.IamV2ServiceAccount, *net_http.Response, error) {
+func (m *ServiceAccountsIamV2Api) UpdateIamV2ServiceAccountExecute(r github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiUpdateIamV2ServiceAccountRequest) (github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.IamV2ServiceAccount, *net_http.Response, error) {
 	m.lockUpdateIamV2ServiceAccountExecute.Lock()
 	defer m.lockUpdateIamV2ServiceAccountExecute.Unlock()
 
@@ -442,7 +442,7 @@ func (m *ServiceAccountsIamV2Api) UpdateIamV2ServiceAccountExecute(r github_com_
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2.ApiUpdateIamV2ServiceAccountRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiUpdateIamV2ServiceAccountRequest
 	}{
 		R: r,
 	}
@@ -462,7 +462,7 @@ func (m *ServiceAccountsIamV2Api) UpdateIamV2ServiceAccountExecuteCalled() bool 
 
 // UpdateIamV2ServiceAccountExecuteCalls returns the calls made to UpdateIamV2ServiceAccountExecute.
 func (m *ServiceAccountsIamV2Api) UpdateIamV2ServiceAccountExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2.ApiUpdateIamV2ServiceAccountRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiUpdateIamV2ServiceAccountRequest
 } {
 	m.lockUpdateIamV2ServiceAccountExecute.Lock()
 	defer m.lockUpdateIamV2ServiceAccountExecute.Unlock()

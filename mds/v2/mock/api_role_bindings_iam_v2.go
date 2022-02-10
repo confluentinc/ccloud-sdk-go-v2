@@ -9,67 +9,67 @@ import (
 	net_http "net/http"
 	sync "sync"
 
-	github_com_confluentinc_ccloud_sdk_go_v2 "github.com/confluentinc/ccloud-sdk-go-v2"
+	github_com_confluentinc_ccloud_sdk_go_v2_mds_v2 "github.com/confluentinc/ccloud-sdk-go-v2/mds/v2"
 )
 
 // RoleBindingsIamV2Api is a mock of RoleBindingsIamV2Api interface
 type RoleBindingsIamV2Api struct {
 	lockCreateIamV2RoleBinding sync.Mutex
-	CreateIamV2RoleBindingFunc func(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateIamV2RoleBindingRequest
+	CreateIamV2RoleBindingFunc func(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiCreateIamV2RoleBindingRequest
 
 	lockCreateIamV2RoleBindingExecute sync.Mutex
-	CreateIamV2RoleBindingExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateIamV2RoleBindingRequest) (github_com_confluentinc_ccloud_sdk_go_v2.IamV2RoleBinding, *net_http.Response, error)
+	CreateIamV2RoleBindingExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiCreateIamV2RoleBindingRequest) (github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.IamV2RoleBinding, *net_http.Response, error)
 
 	lockDeleteIamV2RoleBinding sync.Mutex
-	DeleteIamV2RoleBindingFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteIamV2RoleBindingRequest
+	DeleteIamV2RoleBindingFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiDeleteIamV2RoleBindingRequest
 
 	lockDeleteIamV2RoleBindingExecute sync.Mutex
-	DeleteIamV2RoleBindingExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteIamV2RoleBindingRequest) (github_com_confluentinc_ccloud_sdk_go_v2.IamV2RoleBinding, *net_http.Response, error)
+	DeleteIamV2RoleBindingExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiDeleteIamV2RoleBindingRequest) (github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.IamV2RoleBinding, *net_http.Response, error)
 
 	lockGetIamV2RoleBinding sync.Mutex
-	GetIamV2RoleBindingFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2.ApiGetIamV2RoleBindingRequest
+	GetIamV2RoleBindingFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiGetIamV2RoleBindingRequest
 
 	lockGetIamV2RoleBindingExecute sync.Mutex
-	GetIamV2RoleBindingExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2.ApiGetIamV2RoleBindingRequest) (github_com_confluentinc_ccloud_sdk_go_v2.IamV2RoleBinding, *net_http.Response, error)
+	GetIamV2RoleBindingExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiGetIamV2RoleBindingRequest) (github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.IamV2RoleBinding, *net_http.Response, error)
 
 	lockListIamV2RoleBindings sync.Mutex
-	ListIamV2RoleBindingsFunc func(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2.ApiListIamV2RoleBindingsRequest
+	ListIamV2RoleBindingsFunc func(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiListIamV2RoleBindingsRequest
 
 	lockListIamV2RoleBindingsExecute sync.Mutex
-	ListIamV2RoleBindingsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2.ApiListIamV2RoleBindingsRequest) (github_com_confluentinc_ccloud_sdk_go_v2.IamV2RoleBindingList, *net_http.Response, error)
+	ListIamV2RoleBindingsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiListIamV2RoleBindingsRequest) (github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.IamV2RoleBindingList, *net_http.Response, error)
 
 	calls struct {
 		CreateIamV2RoleBinding []struct {
 			Ctx context.Context
 		}
 		CreateIamV2RoleBindingExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateIamV2RoleBindingRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiCreateIamV2RoleBindingRequest
 		}
 		DeleteIamV2RoleBinding []struct {
 			Ctx context.Context
 			Id  string
 		}
 		DeleteIamV2RoleBindingExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteIamV2RoleBindingRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiDeleteIamV2RoleBindingRequest
 		}
 		GetIamV2RoleBinding []struct {
 			Ctx context.Context
 			Id  string
 		}
 		GetIamV2RoleBindingExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2.ApiGetIamV2RoleBindingRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiGetIamV2RoleBindingRequest
 		}
 		ListIamV2RoleBindings []struct {
 			Ctx context.Context
 		}
 		ListIamV2RoleBindingsExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2.ApiListIamV2RoleBindingsRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiListIamV2RoleBindingsRequest
 		}
 	}
 }
 
 // CreateIamV2RoleBinding mocks base method by wrapping the associated func.
-func (m *RoleBindingsIamV2Api) CreateIamV2RoleBinding(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateIamV2RoleBindingRequest {
+func (m *RoleBindingsIamV2Api) CreateIamV2RoleBinding(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiCreateIamV2RoleBindingRequest {
 	m.lockCreateIamV2RoleBinding.Lock()
 	defer m.lockCreateIamV2RoleBinding.Unlock()
 
@@ -107,7 +107,7 @@ func (m *RoleBindingsIamV2Api) CreateIamV2RoleBindingCalls() []struct {
 }
 
 // CreateIamV2RoleBindingExecute mocks base method by wrapping the associated func.
-func (m *RoleBindingsIamV2Api) CreateIamV2RoleBindingExecute(r github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateIamV2RoleBindingRequest) (github_com_confluentinc_ccloud_sdk_go_v2.IamV2RoleBinding, *net_http.Response, error) {
+func (m *RoleBindingsIamV2Api) CreateIamV2RoleBindingExecute(r github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiCreateIamV2RoleBindingRequest) (github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.IamV2RoleBinding, *net_http.Response, error) {
 	m.lockCreateIamV2RoleBindingExecute.Lock()
 	defer m.lockCreateIamV2RoleBindingExecute.Unlock()
 
@@ -116,7 +116,7 @@ func (m *RoleBindingsIamV2Api) CreateIamV2RoleBindingExecute(r github_com_conflu
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateIamV2RoleBindingRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiCreateIamV2RoleBindingRequest
 	}{
 		R: r,
 	}
@@ -136,7 +136,7 @@ func (m *RoleBindingsIamV2Api) CreateIamV2RoleBindingExecuteCalled() bool {
 
 // CreateIamV2RoleBindingExecuteCalls returns the calls made to CreateIamV2RoleBindingExecute.
 func (m *RoleBindingsIamV2Api) CreateIamV2RoleBindingExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateIamV2RoleBindingRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiCreateIamV2RoleBindingRequest
 } {
 	m.lockCreateIamV2RoleBindingExecute.Lock()
 	defer m.lockCreateIamV2RoleBindingExecute.Unlock()
@@ -145,7 +145,7 @@ func (m *RoleBindingsIamV2Api) CreateIamV2RoleBindingExecuteCalls() []struct {
 }
 
 // DeleteIamV2RoleBinding mocks base method by wrapping the associated func.
-func (m *RoleBindingsIamV2Api) DeleteIamV2RoleBinding(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteIamV2RoleBindingRequest {
+func (m *RoleBindingsIamV2Api) DeleteIamV2RoleBinding(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiDeleteIamV2RoleBindingRequest {
 	m.lockDeleteIamV2RoleBinding.Lock()
 	defer m.lockDeleteIamV2RoleBinding.Unlock()
 
@@ -186,7 +186,7 @@ func (m *RoleBindingsIamV2Api) DeleteIamV2RoleBindingCalls() []struct {
 }
 
 // DeleteIamV2RoleBindingExecute mocks base method by wrapping the associated func.
-func (m *RoleBindingsIamV2Api) DeleteIamV2RoleBindingExecute(r github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteIamV2RoleBindingRequest) (github_com_confluentinc_ccloud_sdk_go_v2.IamV2RoleBinding, *net_http.Response, error) {
+func (m *RoleBindingsIamV2Api) DeleteIamV2RoleBindingExecute(r github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiDeleteIamV2RoleBindingRequest) (github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.IamV2RoleBinding, *net_http.Response, error) {
 	m.lockDeleteIamV2RoleBindingExecute.Lock()
 	defer m.lockDeleteIamV2RoleBindingExecute.Unlock()
 
@@ -195,7 +195,7 @@ func (m *RoleBindingsIamV2Api) DeleteIamV2RoleBindingExecute(r github_com_conflu
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteIamV2RoleBindingRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiDeleteIamV2RoleBindingRequest
 	}{
 		R: r,
 	}
@@ -215,7 +215,7 @@ func (m *RoleBindingsIamV2Api) DeleteIamV2RoleBindingExecuteCalled() bool {
 
 // DeleteIamV2RoleBindingExecuteCalls returns the calls made to DeleteIamV2RoleBindingExecute.
 func (m *RoleBindingsIamV2Api) DeleteIamV2RoleBindingExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteIamV2RoleBindingRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiDeleteIamV2RoleBindingRequest
 } {
 	m.lockDeleteIamV2RoleBindingExecute.Lock()
 	defer m.lockDeleteIamV2RoleBindingExecute.Unlock()
@@ -224,7 +224,7 @@ func (m *RoleBindingsIamV2Api) DeleteIamV2RoleBindingExecuteCalls() []struct {
 }
 
 // GetIamV2RoleBinding mocks base method by wrapping the associated func.
-func (m *RoleBindingsIamV2Api) GetIamV2RoleBinding(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2.ApiGetIamV2RoleBindingRequest {
+func (m *RoleBindingsIamV2Api) GetIamV2RoleBinding(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiGetIamV2RoleBindingRequest {
 	m.lockGetIamV2RoleBinding.Lock()
 	defer m.lockGetIamV2RoleBinding.Unlock()
 
@@ -265,7 +265,7 @@ func (m *RoleBindingsIamV2Api) GetIamV2RoleBindingCalls() []struct {
 }
 
 // GetIamV2RoleBindingExecute mocks base method by wrapping the associated func.
-func (m *RoleBindingsIamV2Api) GetIamV2RoleBindingExecute(r github_com_confluentinc_ccloud_sdk_go_v2.ApiGetIamV2RoleBindingRequest) (github_com_confluentinc_ccloud_sdk_go_v2.IamV2RoleBinding, *net_http.Response, error) {
+func (m *RoleBindingsIamV2Api) GetIamV2RoleBindingExecute(r github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiGetIamV2RoleBindingRequest) (github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.IamV2RoleBinding, *net_http.Response, error) {
 	m.lockGetIamV2RoleBindingExecute.Lock()
 	defer m.lockGetIamV2RoleBindingExecute.Unlock()
 
@@ -274,7 +274,7 @@ func (m *RoleBindingsIamV2Api) GetIamV2RoleBindingExecute(r github_com_confluent
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2.ApiGetIamV2RoleBindingRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiGetIamV2RoleBindingRequest
 	}{
 		R: r,
 	}
@@ -294,7 +294,7 @@ func (m *RoleBindingsIamV2Api) GetIamV2RoleBindingExecuteCalled() bool {
 
 // GetIamV2RoleBindingExecuteCalls returns the calls made to GetIamV2RoleBindingExecute.
 func (m *RoleBindingsIamV2Api) GetIamV2RoleBindingExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2.ApiGetIamV2RoleBindingRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiGetIamV2RoleBindingRequest
 } {
 	m.lockGetIamV2RoleBindingExecute.Lock()
 	defer m.lockGetIamV2RoleBindingExecute.Unlock()
@@ -303,7 +303,7 @@ func (m *RoleBindingsIamV2Api) GetIamV2RoleBindingExecuteCalls() []struct {
 }
 
 // ListIamV2RoleBindings mocks base method by wrapping the associated func.
-func (m *RoleBindingsIamV2Api) ListIamV2RoleBindings(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2.ApiListIamV2RoleBindingsRequest {
+func (m *RoleBindingsIamV2Api) ListIamV2RoleBindings(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiListIamV2RoleBindingsRequest {
 	m.lockListIamV2RoleBindings.Lock()
 	defer m.lockListIamV2RoleBindings.Unlock()
 
@@ -341,7 +341,7 @@ func (m *RoleBindingsIamV2Api) ListIamV2RoleBindingsCalls() []struct {
 }
 
 // ListIamV2RoleBindingsExecute mocks base method by wrapping the associated func.
-func (m *RoleBindingsIamV2Api) ListIamV2RoleBindingsExecute(r github_com_confluentinc_ccloud_sdk_go_v2.ApiListIamV2RoleBindingsRequest) (github_com_confluentinc_ccloud_sdk_go_v2.IamV2RoleBindingList, *net_http.Response, error) {
+func (m *RoleBindingsIamV2Api) ListIamV2RoleBindingsExecute(r github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiListIamV2RoleBindingsRequest) (github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.IamV2RoleBindingList, *net_http.Response, error) {
 	m.lockListIamV2RoleBindingsExecute.Lock()
 	defer m.lockListIamV2RoleBindingsExecute.Unlock()
 
@@ -350,7 +350,7 @@ func (m *RoleBindingsIamV2Api) ListIamV2RoleBindingsExecute(r github_com_conflue
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2.ApiListIamV2RoleBindingsRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiListIamV2RoleBindingsRequest
 	}{
 		R: r,
 	}
@@ -370,7 +370,7 @@ func (m *RoleBindingsIamV2Api) ListIamV2RoleBindingsExecuteCalled() bool {
 
 // ListIamV2RoleBindingsExecuteCalls returns the calls made to ListIamV2RoleBindingsExecute.
 func (m *RoleBindingsIamV2Api) ListIamV2RoleBindingsExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2.ApiListIamV2RoleBindingsRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_mds_v2.ApiListIamV2RoleBindingsRequest
 } {
 	m.lockListIamV2RoleBindingsExecute.Lock()
 	defer m.lockListIamV2RoleBindingsExecute.Unlock()

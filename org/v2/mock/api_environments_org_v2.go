@@ -9,80 +9,80 @@ import (
 	net_http "net/http"
 	sync "sync"
 
-	github_com_confluentinc_ccloud_sdk_go_v2 "github.com/confluentinc/ccloud-sdk-go-v2"
+	github_com_confluentinc_ccloud_sdk_go_v2_org_v2 "github.com/confluentinc/ccloud-sdk-go-v2/org/v2"
 )
 
 // EnvironmentsOrgV2Api is a mock of EnvironmentsOrgV2Api interface
 type EnvironmentsOrgV2Api struct {
 	lockCreateOrgV2Environment sync.Mutex
-	CreateOrgV2EnvironmentFunc func(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateOrgV2EnvironmentRequest
+	CreateOrgV2EnvironmentFunc func(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiCreateOrgV2EnvironmentRequest
 
 	lockCreateOrgV2EnvironmentExecute sync.Mutex
-	CreateOrgV2EnvironmentExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateOrgV2EnvironmentRequest) (github_com_confluentinc_ccloud_sdk_go_v2.OrgV2Environment, *net_http.Response, error)
+	CreateOrgV2EnvironmentExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiCreateOrgV2EnvironmentRequest) (github_com_confluentinc_ccloud_sdk_go_v2_org_v2.OrgV2Environment, *net_http.Response, error)
 
 	lockDeleteOrgV2Environment sync.Mutex
-	DeleteOrgV2EnvironmentFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteOrgV2EnvironmentRequest
+	DeleteOrgV2EnvironmentFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiDeleteOrgV2EnvironmentRequest
 
 	lockDeleteOrgV2EnvironmentExecute sync.Mutex
-	DeleteOrgV2EnvironmentExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteOrgV2EnvironmentRequest) (*net_http.Response, error)
+	DeleteOrgV2EnvironmentExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiDeleteOrgV2EnvironmentRequest) (*net_http.Response, error)
 
 	lockGetOrgV2Environment sync.Mutex
-	GetOrgV2EnvironmentFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2.ApiGetOrgV2EnvironmentRequest
+	GetOrgV2EnvironmentFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiGetOrgV2EnvironmentRequest
 
 	lockGetOrgV2EnvironmentExecute sync.Mutex
-	GetOrgV2EnvironmentExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2.ApiGetOrgV2EnvironmentRequest) (github_com_confluentinc_ccloud_sdk_go_v2.OrgV2Environment, *net_http.Response, error)
+	GetOrgV2EnvironmentExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiGetOrgV2EnvironmentRequest) (github_com_confluentinc_ccloud_sdk_go_v2_org_v2.OrgV2Environment, *net_http.Response, error)
 
 	lockListOrgV2Environments sync.Mutex
-	ListOrgV2EnvironmentsFunc func(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2.ApiListOrgV2EnvironmentsRequest
+	ListOrgV2EnvironmentsFunc func(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiListOrgV2EnvironmentsRequest
 
 	lockListOrgV2EnvironmentsExecute sync.Mutex
-	ListOrgV2EnvironmentsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2.ApiListOrgV2EnvironmentsRequest) (github_com_confluentinc_ccloud_sdk_go_v2.OrgV2EnvironmentList, *net_http.Response, error)
+	ListOrgV2EnvironmentsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiListOrgV2EnvironmentsRequest) (github_com_confluentinc_ccloud_sdk_go_v2_org_v2.OrgV2EnvironmentList, *net_http.Response, error)
 
 	lockUpdateOrgV2Environment sync.Mutex
-	UpdateOrgV2EnvironmentFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2.ApiUpdateOrgV2EnvironmentRequest
+	UpdateOrgV2EnvironmentFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiUpdateOrgV2EnvironmentRequest
 
 	lockUpdateOrgV2EnvironmentExecute sync.Mutex
-	UpdateOrgV2EnvironmentExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2.ApiUpdateOrgV2EnvironmentRequest) (github_com_confluentinc_ccloud_sdk_go_v2.OrgV2Environment, *net_http.Response, error)
+	UpdateOrgV2EnvironmentExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiUpdateOrgV2EnvironmentRequest) (github_com_confluentinc_ccloud_sdk_go_v2_org_v2.OrgV2Environment, *net_http.Response, error)
 
 	calls struct {
 		CreateOrgV2Environment []struct {
 			Ctx context.Context
 		}
 		CreateOrgV2EnvironmentExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateOrgV2EnvironmentRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiCreateOrgV2EnvironmentRequest
 		}
 		DeleteOrgV2Environment []struct {
 			Ctx context.Context
 			Id  string
 		}
 		DeleteOrgV2EnvironmentExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteOrgV2EnvironmentRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiDeleteOrgV2EnvironmentRequest
 		}
 		GetOrgV2Environment []struct {
 			Ctx context.Context
 			Id  string
 		}
 		GetOrgV2EnvironmentExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2.ApiGetOrgV2EnvironmentRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiGetOrgV2EnvironmentRequest
 		}
 		ListOrgV2Environments []struct {
 			Ctx context.Context
 		}
 		ListOrgV2EnvironmentsExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2.ApiListOrgV2EnvironmentsRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiListOrgV2EnvironmentsRequest
 		}
 		UpdateOrgV2Environment []struct {
 			Ctx context.Context
 			Id  string
 		}
 		UpdateOrgV2EnvironmentExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2.ApiUpdateOrgV2EnvironmentRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiUpdateOrgV2EnvironmentRequest
 		}
 	}
 }
 
 // CreateOrgV2Environment mocks base method by wrapping the associated func.
-func (m *EnvironmentsOrgV2Api) CreateOrgV2Environment(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateOrgV2EnvironmentRequest {
+func (m *EnvironmentsOrgV2Api) CreateOrgV2Environment(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiCreateOrgV2EnvironmentRequest {
 	m.lockCreateOrgV2Environment.Lock()
 	defer m.lockCreateOrgV2Environment.Unlock()
 
@@ -120,7 +120,7 @@ func (m *EnvironmentsOrgV2Api) CreateOrgV2EnvironmentCalls() []struct {
 }
 
 // CreateOrgV2EnvironmentExecute mocks base method by wrapping the associated func.
-func (m *EnvironmentsOrgV2Api) CreateOrgV2EnvironmentExecute(r github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateOrgV2EnvironmentRequest) (github_com_confluentinc_ccloud_sdk_go_v2.OrgV2Environment, *net_http.Response, error) {
+func (m *EnvironmentsOrgV2Api) CreateOrgV2EnvironmentExecute(r github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiCreateOrgV2EnvironmentRequest) (github_com_confluentinc_ccloud_sdk_go_v2_org_v2.OrgV2Environment, *net_http.Response, error) {
 	m.lockCreateOrgV2EnvironmentExecute.Lock()
 	defer m.lockCreateOrgV2EnvironmentExecute.Unlock()
 
@@ -129,7 +129,7 @@ func (m *EnvironmentsOrgV2Api) CreateOrgV2EnvironmentExecute(r github_com_conflu
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateOrgV2EnvironmentRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiCreateOrgV2EnvironmentRequest
 	}{
 		R: r,
 	}
@@ -149,7 +149,7 @@ func (m *EnvironmentsOrgV2Api) CreateOrgV2EnvironmentExecuteCalled() bool {
 
 // CreateOrgV2EnvironmentExecuteCalls returns the calls made to CreateOrgV2EnvironmentExecute.
 func (m *EnvironmentsOrgV2Api) CreateOrgV2EnvironmentExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateOrgV2EnvironmentRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiCreateOrgV2EnvironmentRequest
 } {
 	m.lockCreateOrgV2EnvironmentExecute.Lock()
 	defer m.lockCreateOrgV2EnvironmentExecute.Unlock()
@@ -158,7 +158,7 @@ func (m *EnvironmentsOrgV2Api) CreateOrgV2EnvironmentExecuteCalls() []struct {
 }
 
 // DeleteOrgV2Environment mocks base method by wrapping the associated func.
-func (m *EnvironmentsOrgV2Api) DeleteOrgV2Environment(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteOrgV2EnvironmentRequest {
+func (m *EnvironmentsOrgV2Api) DeleteOrgV2Environment(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiDeleteOrgV2EnvironmentRequest {
 	m.lockDeleteOrgV2Environment.Lock()
 	defer m.lockDeleteOrgV2Environment.Unlock()
 
@@ -199,7 +199,7 @@ func (m *EnvironmentsOrgV2Api) DeleteOrgV2EnvironmentCalls() []struct {
 }
 
 // DeleteOrgV2EnvironmentExecute mocks base method by wrapping the associated func.
-func (m *EnvironmentsOrgV2Api) DeleteOrgV2EnvironmentExecute(r github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteOrgV2EnvironmentRequest) (*net_http.Response, error) {
+func (m *EnvironmentsOrgV2Api) DeleteOrgV2EnvironmentExecute(r github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiDeleteOrgV2EnvironmentRequest) (*net_http.Response, error) {
 	m.lockDeleteOrgV2EnvironmentExecute.Lock()
 	defer m.lockDeleteOrgV2EnvironmentExecute.Unlock()
 
@@ -208,7 +208,7 @@ func (m *EnvironmentsOrgV2Api) DeleteOrgV2EnvironmentExecute(r github_com_conflu
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteOrgV2EnvironmentRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiDeleteOrgV2EnvironmentRequest
 	}{
 		R: r,
 	}
@@ -228,7 +228,7 @@ func (m *EnvironmentsOrgV2Api) DeleteOrgV2EnvironmentExecuteCalled() bool {
 
 // DeleteOrgV2EnvironmentExecuteCalls returns the calls made to DeleteOrgV2EnvironmentExecute.
 func (m *EnvironmentsOrgV2Api) DeleteOrgV2EnvironmentExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteOrgV2EnvironmentRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiDeleteOrgV2EnvironmentRequest
 } {
 	m.lockDeleteOrgV2EnvironmentExecute.Lock()
 	defer m.lockDeleteOrgV2EnvironmentExecute.Unlock()
@@ -237,7 +237,7 @@ func (m *EnvironmentsOrgV2Api) DeleteOrgV2EnvironmentExecuteCalls() []struct {
 }
 
 // GetOrgV2Environment mocks base method by wrapping the associated func.
-func (m *EnvironmentsOrgV2Api) GetOrgV2Environment(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2.ApiGetOrgV2EnvironmentRequest {
+func (m *EnvironmentsOrgV2Api) GetOrgV2Environment(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiGetOrgV2EnvironmentRequest {
 	m.lockGetOrgV2Environment.Lock()
 	defer m.lockGetOrgV2Environment.Unlock()
 
@@ -278,7 +278,7 @@ func (m *EnvironmentsOrgV2Api) GetOrgV2EnvironmentCalls() []struct {
 }
 
 // GetOrgV2EnvironmentExecute mocks base method by wrapping the associated func.
-func (m *EnvironmentsOrgV2Api) GetOrgV2EnvironmentExecute(r github_com_confluentinc_ccloud_sdk_go_v2.ApiGetOrgV2EnvironmentRequest) (github_com_confluentinc_ccloud_sdk_go_v2.OrgV2Environment, *net_http.Response, error) {
+func (m *EnvironmentsOrgV2Api) GetOrgV2EnvironmentExecute(r github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiGetOrgV2EnvironmentRequest) (github_com_confluentinc_ccloud_sdk_go_v2_org_v2.OrgV2Environment, *net_http.Response, error) {
 	m.lockGetOrgV2EnvironmentExecute.Lock()
 	defer m.lockGetOrgV2EnvironmentExecute.Unlock()
 
@@ -287,7 +287,7 @@ func (m *EnvironmentsOrgV2Api) GetOrgV2EnvironmentExecute(r github_com_confluent
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2.ApiGetOrgV2EnvironmentRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiGetOrgV2EnvironmentRequest
 	}{
 		R: r,
 	}
@@ -307,7 +307,7 @@ func (m *EnvironmentsOrgV2Api) GetOrgV2EnvironmentExecuteCalled() bool {
 
 // GetOrgV2EnvironmentExecuteCalls returns the calls made to GetOrgV2EnvironmentExecute.
 func (m *EnvironmentsOrgV2Api) GetOrgV2EnvironmentExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2.ApiGetOrgV2EnvironmentRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiGetOrgV2EnvironmentRequest
 } {
 	m.lockGetOrgV2EnvironmentExecute.Lock()
 	defer m.lockGetOrgV2EnvironmentExecute.Unlock()
@@ -316,7 +316,7 @@ func (m *EnvironmentsOrgV2Api) GetOrgV2EnvironmentExecuteCalls() []struct {
 }
 
 // ListOrgV2Environments mocks base method by wrapping the associated func.
-func (m *EnvironmentsOrgV2Api) ListOrgV2Environments(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2.ApiListOrgV2EnvironmentsRequest {
+func (m *EnvironmentsOrgV2Api) ListOrgV2Environments(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiListOrgV2EnvironmentsRequest {
 	m.lockListOrgV2Environments.Lock()
 	defer m.lockListOrgV2Environments.Unlock()
 
@@ -354,7 +354,7 @@ func (m *EnvironmentsOrgV2Api) ListOrgV2EnvironmentsCalls() []struct {
 }
 
 // ListOrgV2EnvironmentsExecute mocks base method by wrapping the associated func.
-func (m *EnvironmentsOrgV2Api) ListOrgV2EnvironmentsExecute(r github_com_confluentinc_ccloud_sdk_go_v2.ApiListOrgV2EnvironmentsRequest) (github_com_confluentinc_ccloud_sdk_go_v2.OrgV2EnvironmentList, *net_http.Response, error) {
+func (m *EnvironmentsOrgV2Api) ListOrgV2EnvironmentsExecute(r github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiListOrgV2EnvironmentsRequest) (github_com_confluentinc_ccloud_sdk_go_v2_org_v2.OrgV2EnvironmentList, *net_http.Response, error) {
 	m.lockListOrgV2EnvironmentsExecute.Lock()
 	defer m.lockListOrgV2EnvironmentsExecute.Unlock()
 
@@ -363,7 +363,7 @@ func (m *EnvironmentsOrgV2Api) ListOrgV2EnvironmentsExecute(r github_com_conflue
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2.ApiListOrgV2EnvironmentsRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiListOrgV2EnvironmentsRequest
 	}{
 		R: r,
 	}
@@ -383,7 +383,7 @@ func (m *EnvironmentsOrgV2Api) ListOrgV2EnvironmentsExecuteCalled() bool {
 
 // ListOrgV2EnvironmentsExecuteCalls returns the calls made to ListOrgV2EnvironmentsExecute.
 func (m *EnvironmentsOrgV2Api) ListOrgV2EnvironmentsExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2.ApiListOrgV2EnvironmentsRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiListOrgV2EnvironmentsRequest
 } {
 	m.lockListOrgV2EnvironmentsExecute.Lock()
 	defer m.lockListOrgV2EnvironmentsExecute.Unlock()
@@ -392,7 +392,7 @@ func (m *EnvironmentsOrgV2Api) ListOrgV2EnvironmentsExecuteCalls() []struct {
 }
 
 // UpdateOrgV2Environment mocks base method by wrapping the associated func.
-func (m *EnvironmentsOrgV2Api) UpdateOrgV2Environment(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2.ApiUpdateOrgV2EnvironmentRequest {
+func (m *EnvironmentsOrgV2Api) UpdateOrgV2Environment(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiUpdateOrgV2EnvironmentRequest {
 	m.lockUpdateOrgV2Environment.Lock()
 	defer m.lockUpdateOrgV2Environment.Unlock()
 
@@ -433,7 +433,7 @@ func (m *EnvironmentsOrgV2Api) UpdateOrgV2EnvironmentCalls() []struct {
 }
 
 // UpdateOrgV2EnvironmentExecute mocks base method by wrapping the associated func.
-func (m *EnvironmentsOrgV2Api) UpdateOrgV2EnvironmentExecute(r github_com_confluentinc_ccloud_sdk_go_v2.ApiUpdateOrgV2EnvironmentRequest) (github_com_confluentinc_ccloud_sdk_go_v2.OrgV2Environment, *net_http.Response, error) {
+func (m *EnvironmentsOrgV2Api) UpdateOrgV2EnvironmentExecute(r github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiUpdateOrgV2EnvironmentRequest) (github_com_confluentinc_ccloud_sdk_go_v2_org_v2.OrgV2Environment, *net_http.Response, error) {
 	m.lockUpdateOrgV2EnvironmentExecute.Lock()
 	defer m.lockUpdateOrgV2EnvironmentExecute.Unlock()
 
@@ -442,7 +442,7 @@ func (m *EnvironmentsOrgV2Api) UpdateOrgV2EnvironmentExecute(r github_com_conflu
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2.ApiUpdateOrgV2EnvironmentRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiUpdateOrgV2EnvironmentRequest
 	}{
 		R: r,
 	}
@@ -462,7 +462,7 @@ func (m *EnvironmentsOrgV2Api) UpdateOrgV2EnvironmentExecuteCalled() bool {
 
 // UpdateOrgV2EnvironmentExecuteCalls returns the calls made to UpdateOrgV2EnvironmentExecute.
 func (m *EnvironmentsOrgV2Api) UpdateOrgV2EnvironmentExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2.ApiUpdateOrgV2EnvironmentRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_org_v2.ApiUpdateOrgV2EnvironmentRequest
 } {
 	m.lockUpdateOrgV2EnvironmentExecute.Lock()
 	defer m.lockUpdateOrgV2EnvironmentExecute.Unlock()

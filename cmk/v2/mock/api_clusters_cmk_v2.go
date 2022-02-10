@@ -9,80 +9,80 @@ import (
 	net_http "net/http"
 	sync "sync"
 
-	github_com_confluentinc_ccloud_sdk_go_v2 "github.com/confluentinc/ccloud-sdk-go-v2"
+	github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2 "github.com/confluentinc/ccloud-sdk-go-v2/cmk/v2"
 )
 
 // ClustersCmkV2Api is a mock of ClustersCmkV2Api interface
 type ClustersCmkV2Api struct {
 	lockCreateCmkV2Cluster sync.Mutex
-	CreateCmkV2ClusterFunc func(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateCmkV2ClusterRequest
+	CreateCmkV2ClusterFunc func(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiCreateCmkV2ClusterRequest
 
 	lockCreateCmkV2ClusterExecute sync.Mutex
-	CreateCmkV2ClusterExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateCmkV2ClusterRequest) (github_com_confluentinc_ccloud_sdk_go_v2.CmkV2Cluster, *net_http.Response, error)
+	CreateCmkV2ClusterExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiCreateCmkV2ClusterRequest) (github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.CmkV2Cluster, *net_http.Response, error)
 
 	lockDeleteCmkV2Cluster sync.Mutex
-	DeleteCmkV2ClusterFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteCmkV2ClusterRequest
+	DeleteCmkV2ClusterFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiDeleteCmkV2ClusterRequest
 
 	lockDeleteCmkV2ClusterExecute sync.Mutex
-	DeleteCmkV2ClusterExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteCmkV2ClusterRequest) (*net_http.Response, error)
+	DeleteCmkV2ClusterExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiDeleteCmkV2ClusterRequest) (*net_http.Response, error)
 
 	lockGetCmkV2Cluster sync.Mutex
-	GetCmkV2ClusterFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2.ApiGetCmkV2ClusterRequest
+	GetCmkV2ClusterFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiGetCmkV2ClusterRequest
 
 	lockGetCmkV2ClusterExecute sync.Mutex
-	GetCmkV2ClusterExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2.ApiGetCmkV2ClusterRequest) (github_com_confluentinc_ccloud_sdk_go_v2.CmkV2Cluster, *net_http.Response, error)
+	GetCmkV2ClusterExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiGetCmkV2ClusterRequest) (github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.CmkV2Cluster, *net_http.Response, error)
 
 	lockListCmkV2Clusters sync.Mutex
-	ListCmkV2ClustersFunc func(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2.ApiListCmkV2ClustersRequest
+	ListCmkV2ClustersFunc func(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiListCmkV2ClustersRequest
 
 	lockListCmkV2ClustersExecute sync.Mutex
-	ListCmkV2ClustersExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2.ApiListCmkV2ClustersRequest) (github_com_confluentinc_ccloud_sdk_go_v2.CmkV2ClusterList, *net_http.Response, error)
+	ListCmkV2ClustersExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiListCmkV2ClustersRequest) (github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.CmkV2ClusterList, *net_http.Response, error)
 
 	lockUpdateCmkV2Cluster sync.Mutex
-	UpdateCmkV2ClusterFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2.ApiUpdateCmkV2ClusterRequest
+	UpdateCmkV2ClusterFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiUpdateCmkV2ClusterRequest
 
 	lockUpdateCmkV2ClusterExecute sync.Mutex
-	UpdateCmkV2ClusterExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2.ApiUpdateCmkV2ClusterRequest) (github_com_confluentinc_ccloud_sdk_go_v2.CmkV2Cluster, *net_http.Response, error)
+	UpdateCmkV2ClusterExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiUpdateCmkV2ClusterRequest) (github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.CmkV2Cluster, *net_http.Response, error)
 
 	calls struct {
 		CreateCmkV2Cluster []struct {
 			Ctx context.Context
 		}
 		CreateCmkV2ClusterExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateCmkV2ClusterRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiCreateCmkV2ClusterRequest
 		}
 		DeleteCmkV2Cluster []struct {
 			Ctx context.Context
 			Id  string
 		}
 		DeleteCmkV2ClusterExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteCmkV2ClusterRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiDeleteCmkV2ClusterRequest
 		}
 		GetCmkV2Cluster []struct {
 			Ctx context.Context
 			Id  string
 		}
 		GetCmkV2ClusterExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2.ApiGetCmkV2ClusterRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiGetCmkV2ClusterRequest
 		}
 		ListCmkV2Clusters []struct {
 			Ctx context.Context
 		}
 		ListCmkV2ClustersExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2.ApiListCmkV2ClustersRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiListCmkV2ClustersRequest
 		}
 		UpdateCmkV2Cluster []struct {
 			Ctx context.Context
 			Id  string
 		}
 		UpdateCmkV2ClusterExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2.ApiUpdateCmkV2ClusterRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiUpdateCmkV2ClusterRequest
 		}
 	}
 }
 
 // CreateCmkV2Cluster mocks base method by wrapping the associated func.
-func (m *ClustersCmkV2Api) CreateCmkV2Cluster(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateCmkV2ClusterRequest {
+func (m *ClustersCmkV2Api) CreateCmkV2Cluster(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiCreateCmkV2ClusterRequest {
 	m.lockCreateCmkV2Cluster.Lock()
 	defer m.lockCreateCmkV2Cluster.Unlock()
 
@@ -120,7 +120,7 @@ func (m *ClustersCmkV2Api) CreateCmkV2ClusterCalls() []struct {
 }
 
 // CreateCmkV2ClusterExecute mocks base method by wrapping the associated func.
-func (m *ClustersCmkV2Api) CreateCmkV2ClusterExecute(r github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateCmkV2ClusterRequest) (github_com_confluentinc_ccloud_sdk_go_v2.CmkV2Cluster, *net_http.Response, error) {
+func (m *ClustersCmkV2Api) CreateCmkV2ClusterExecute(r github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiCreateCmkV2ClusterRequest) (github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.CmkV2Cluster, *net_http.Response, error) {
 	m.lockCreateCmkV2ClusterExecute.Lock()
 	defer m.lockCreateCmkV2ClusterExecute.Unlock()
 
@@ -129,7 +129,7 @@ func (m *ClustersCmkV2Api) CreateCmkV2ClusterExecute(r github_com_confluentinc_c
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateCmkV2ClusterRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiCreateCmkV2ClusterRequest
 	}{
 		R: r,
 	}
@@ -149,7 +149,7 @@ func (m *ClustersCmkV2Api) CreateCmkV2ClusterExecuteCalled() bool {
 
 // CreateCmkV2ClusterExecuteCalls returns the calls made to CreateCmkV2ClusterExecute.
 func (m *ClustersCmkV2Api) CreateCmkV2ClusterExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2.ApiCreateCmkV2ClusterRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiCreateCmkV2ClusterRequest
 } {
 	m.lockCreateCmkV2ClusterExecute.Lock()
 	defer m.lockCreateCmkV2ClusterExecute.Unlock()
@@ -158,7 +158,7 @@ func (m *ClustersCmkV2Api) CreateCmkV2ClusterExecuteCalls() []struct {
 }
 
 // DeleteCmkV2Cluster mocks base method by wrapping the associated func.
-func (m *ClustersCmkV2Api) DeleteCmkV2Cluster(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteCmkV2ClusterRequest {
+func (m *ClustersCmkV2Api) DeleteCmkV2Cluster(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiDeleteCmkV2ClusterRequest {
 	m.lockDeleteCmkV2Cluster.Lock()
 	defer m.lockDeleteCmkV2Cluster.Unlock()
 
@@ -199,7 +199,7 @@ func (m *ClustersCmkV2Api) DeleteCmkV2ClusterCalls() []struct {
 }
 
 // DeleteCmkV2ClusterExecute mocks base method by wrapping the associated func.
-func (m *ClustersCmkV2Api) DeleteCmkV2ClusterExecute(r github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteCmkV2ClusterRequest) (*net_http.Response, error) {
+func (m *ClustersCmkV2Api) DeleteCmkV2ClusterExecute(r github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiDeleteCmkV2ClusterRequest) (*net_http.Response, error) {
 	m.lockDeleteCmkV2ClusterExecute.Lock()
 	defer m.lockDeleteCmkV2ClusterExecute.Unlock()
 
@@ -208,7 +208,7 @@ func (m *ClustersCmkV2Api) DeleteCmkV2ClusterExecute(r github_com_confluentinc_c
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteCmkV2ClusterRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiDeleteCmkV2ClusterRequest
 	}{
 		R: r,
 	}
@@ -228,7 +228,7 @@ func (m *ClustersCmkV2Api) DeleteCmkV2ClusterExecuteCalled() bool {
 
 // DeleteCmkV2ClusterExecuteCalls returns the calls made to DeleteCmkV2ClusterExecute.
 func (m *ClustersCmkV2Api) DeleteCmkV2ClusterExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2.ApiDeleteCmkV2ClusterRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiDeleteCmkV2ClusterRequest
 } {
 	m.lockDeleteCmkV2ClusterExecute.Lock()
 	defer m.lockDeleteCmkV2ClusterExecute.Unlock()
@@ -237,7 +237,7 @@ func (m *ClustersCmkV2Api) DeleteCmkV2ClusterExecuteCalls() []struct {
 }
 
 // GetCmkV2Cluster mocks base method by wrapping the associated func.
-func (m *ClustersCmkV2Api) GetCmkV2Cluster(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2.ApiGetCmkV2ClusterRequest {
+func (m *ClustersCmkV2Api) GetCmkV2Cluster(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiGetCmkV2ClusterRequest {
 	m.lockGetCmkV2Cluster.Lock()
 	defer m.lockGetCmkV2Cluster.Unlock()
 
@@ -278,7 +278,7 @@ func (m *ClustersCmkV2Api) GetCmkV2ClusterCalls() []struct {
 }
 
 // GetCmkV2ClusterExecute mocks base method by wrapping the associated func.
-func (m *ClustersCmkV2Api) GetCmkV2ClusterExecute(r github_com_confluentinc_ccloud_sdk_go_v2.ApiGetCmkV2ClusterRequest) (github_com_confluentinc_ccloud_sdk_go_v2.CmkV2Cluster, *net_http.Response, error) {
+func (m *ClustersCmkV2Api) GetCmkV2ClusterExecute(r github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiGetCmkV2ClusterRequest) (github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.CmkV2Cluster, *net_http.Response, error) {
 	m.lockGetCmkV2ClusterExecute.Lock()
 	defer m.lockGetCmkV2ClusterExecute.Unlock()
 
@@ -287,7 +287,7 @@ func (m *ClustersCmkV2Api) GetCmkV2ClusterExecute(r github_com_confluentinc_cclo
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2.ApiGetCmkV2ClusterRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiGetCmkV2ClusterRequest
 	}{
 		R: r,
 	}
@@ -307,7 +307,7 @@ func (m *ClustersCmkV2Api) GetCmkV2ClusterExecuteCalled() bool {
 
 // GetCmkV2ClusterExecuteCalls returns the calls made to GetCmkV2ClusterExecute.
 func (m *ClustersCmkV2Api) GetCmkV2ClusterExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2.ApiGetCmkV2ClusterRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiGetCmkV2ClusterRequest
 } {
 	m.lockGetCmkV2ClusterExecute.Lock()
 	defer m.lockGetCmkV2ClusterExecute.Unlock()
@@ -316,7 +316,7 @@ func (m *ClustersCmkV2Api) GetCmkV2ClusterExecuteCalls() []struct {
 }
 
 // ListCmkV2Clusters mocks base method by wrapping the associated func.
-func (m *ClustersCmkV2Api) ListCmkV2Clusters(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2.ApiListCmkV2ClustersRequest {
+func (m *ClustersCmkV2Api) ListCmkV2Clusters(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiListCmkV2ClustersRequest {
 	m.lockListCmkV2Clusters.Lock()
 	defer m.lockListCmkV2Clusters.Unlock()
 
@@ -354,7 +354,7 @@ func (m *ClustersCmkV2Api) ListCmkV2ClustersCalls() []struct {
 }
 
 // ListCmkV2ClustersExecute mocks base method by wrapping the associated func.
-func (m *ClustersCmkV2Api) ListCmkV2ClustersExecute(r github_com_confluentinc_ccloud_sdk_go_v2.ApiListCmkV2ClustersRequest) (github_com_confluentinc_ccloud_sdk_go_v2.CmkV2ClusterList, *net_http.Response, error) {
+func (m *ClustersCmkV2Api) ListCmkV2ClustersExecute(r github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiListCmkV2ClustersRequest) (github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.CmkV2ClusterList, *net_http.Response, error) {
 	m.lockListCmkV2ClustersExecute.Lock()
 	defer m.lockListCmkV2ClustersExecute.Unlock()
 
@@ -363,7 +363,7 @@ func (m *ClustersCmkV2Api) ListCmkV2ClustersExecute(r github_com_confluentinc_cc
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2.ApiListCmkV2ClustersRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiListCmkV2ClustersRequest
 	}{
 		R: r,
 	}
@@ -383,7 +383,7 @@ func (m *ClustersCmkV2Api) ListCmkV2ClustersExecuteCalled() bool {
 
 // ListCmkV2ClustersExecuteCalls returns the calls made to ListCmkV2ClustersExecute.
 func (m *ClustersCmkV2Api) ListCmkV2ClustersExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2.ApiListCmkV2ClustersRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiListCmkV2ClustersRequest
 } {
 	m.lockListCmkV2ClustersExecute.Lock()
 	defer m.lockListCmkV2ClustersExecute.Unlock()
@@ -392,7 +392,7 @@ func (m *ClustersCmkV2Api) ListCmkV2ClustersExecuteCalls() []struct {
 }
 
 // UpdateCmkV2Cluster mocks base method by wrapping the associated func.
-func (m *ClustersCmkV2Api) UpdateCmkV2Cluster(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2.ApiUpdateCmkV2ClusterRequest {
+func (m *ClustersCmkV2Api) UpdateCmkV2Cluster(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiUpdateCmkV2ClusterRequest {
 	m.lockUpdateCmkV2Cluster.Lock()
 	defer m.lockUpdateCmkV2Cluster.Unlock()
 
@@ -433,7 +433,7 @@ func (m *ClustersCmkV2Api) UpdateCmkV2ClusterCalls() []struct {
 }
 
 // UpdateCmkV2ClusterExecute mocks base method by wrapping the associated func.
-func (m *ClustersCmkV2Api) UpdateCmkV2ClusterExecute(r github_com_confluentinc_ccloud_sdk_go_v2.ApiUpdateCmkV2ClusterRequest) (github_com_confluentinc_ccloud_sdk_go_v2.CmkV2Cluster, *net_http.Response, error) {
+func (m *ClustersCmkV2Api) UpdateCmkV2ClusterExecute(r github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiUpdateCmkV2ClusterRequest) (github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.CmkV2Cluster, *net_http.Response, error) {
 	m.lockUpdateCmkV2ClusterExecute.Lock()
 	defer m.lockUpdateCmkV2ClusterExecute.Unlock()
 
@@ -442,7 +442,7 @@ func (m *ClustersCmkV2Api) UpdateCmkV2ClusterExecute(r github_com_confluentinc_c
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2.ApiUpdateCmkV2ClusterRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiUpdateCmkV2ClusterRequest
 	}{
 		R: r,
 	}
@@ -462,7 +462,7 @@ func (m *ClustersCmkV2Api) UpdateCmkV2ClusterExecuteCalled() bool {
 
 // UpdateCmkV2ClusterExecuteCalls returns the calls made to UpdateCmkV2ClusterExecute.
 func (m *ClustersCmkV2Api) UpdateCmkV2ClusterExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2.ApiUpdateCmkV2ClusterRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_cmk_v2.ApiUpdateCmkV2ClusterRequest
 } {
 	m.lockUpdateCmkV2ClusterExecute.Lock()
 	defer m.lockUpdateCmkV2ClusterExecute.Unlock()
