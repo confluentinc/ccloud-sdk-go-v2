@@ -39,12 +39,48 @@ var (
 	_ _context.Context
 )
 
+type ScopesQuotasV2Api interface {
+
+	/*
+	GetQuotasV2Scope Read a Scope
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Quotas v2](https://img.shields.io/badge/-Request%20Access%20To%20Quotas%20v2-%23bc8540)](mailto:ccloud-api-access+quotas-v2-early-access@confluent.io?subject=Request%20to%20join%20quotas/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20quotas/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Make a request to read a scope.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the scope.
+	 @return ApiGetQuotasV2ScopeRequest
+	*/
+	GetQuotasV2Scope(ctx _context.Context, id string) ApiGetQuotasV2ScopeRequest
+
+	// GetQuotasV2ScopeExecute executes the request
+	//  @return QuotasV2Scope
+	GetQuotasV2ScopeExecute(r ApiGetQuotasV2ScopeRequest) (QuotasV2Scope, *_nethttp.Response, error)
+
+	/*
+	ListQuotasV2Scopes List of Scopes
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Quotas v2](https://img.shields.io/badge/-Request%20Access%20To%20Quotas%20v2-%23bc8540)](mailto:ccloud-api-access+quotas-v2-early-access@confluent.io?subject=Request%20to%20join%20quotas/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20quotas/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Retrieve a sorted, filtered, paginated list of all scopes.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiListQuotasV2ScopesRequest
+	*/
+	ListQuotasV2Scopes(ctx _context.Context) ApiListQuotasV2ScopesRequest
+
+	// ListQuotasV2ScopesExecute executes the request
+	//  @return QuotasV2ScopeList
+	ListQuotasV2ScopesExecute(r ApiListQuotasV2ScopesRequest) (QuotasV2ScopeList, *_nethttp.Response, error)
+}
+
 // ScopesQuotasV2ApiService ScopesQuotasV2Api service
 type ScopesQuotasV2ApiService service
 
 type ApiGetQuotasV2ScopeRequest struct {
 	ctx _context.Context
-	ApiService *ScopesQuotasV2ApiService
+	ApiService ScopesQuotasV2Api
 	id string
 }
 
@@ -201,7 +237,7 @@ func (a *ScopesQuotasV2ApiService) GetQuotasV2ScopeExecute(r ApiGetQuotasV2Scope
 
 type ApiListQuotasV2ScopesRequest struct {
 	ctx _context.Context
-	ApiService *ScopesQuotasV2ApiService
+	ApiService ScopesQuotasV2Api
 	pageSize *int32
 	pageToken *string
 }

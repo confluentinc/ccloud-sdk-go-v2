@@ -1,11 +1,11 @@
-# \AppliedQuotaQuotasV2Api
+# \AppliedQuotasQuotasV2Api
 
 All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetQuotasV2AppliedQuota**](AppliedQuotaQuotasV2Api.md#GetQuotasV2AppliedQuota) | **Get** /quotas/v2/applied-quotas/{id} | Read an Applied Quota
-[**ListQuotasV2AppliedQuota**](AppliedQuotaQuotasV2Api.md#ListQuotasV2AppliedQuota) | **Get** /quotas/v2/applied-quotas | List of Applied Quota
+[**GetQuotasV2AppliedQuota**](AppliedQuotasQuotasV2Api.md#GetQuotasV2AppliedQuota) | **Get** /quotas/v2/applied-quotas/{id} | Read an Applied Quota
+[**ListQuotasV2AppliedQuotas**](AppliedQuotasQuotasV2Api.md#ListQuotasV2AppliedQuotas) | **Get** /quotas/v2/applied-quotas | List of Applied Quotas
 
 
 
@@ -37,13 +37,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AppliedQuotaQuotasV2Api.GetQuotasV2AppliedQuota(context.Background(), id).Environment(environment).Network(network).KafkaCluster(kafkaCluster).Execute()
+    resp, r, err := api_client.AppliedQuotasQuotasV2Api.GetQuotasV2AppliedQuota(context.Background(), id).Environment(environment).Network(network).KafkaCluster(kafkaCluster).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppliedQuotaQuotasV2Api.GetQuotasV2AppliedQuota``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `AppliedQuotasQuotasV2Api.GetQuotasV2AppliedQuota``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `GetQuotasV2AppliedQuota`: QuotasV2AppliedQuota
-    fmt.Fprintf(os.Stdout, "Response from `AppliedQuotaQuotasV2Api.GetQuotasV2AppliedQuota`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `AppliedQuotasQuotasV2Api.GetQuotasV2AppliedQuota`: %v\n", resp)
 }
 ```
 
@@ -85,11 +85,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ListQuotasV2AppliedQuota
+## ListQuotasV2AppliedQuotas
 
-> QuotasV2AppliedQuotaList ListQuotasV2AppliedQuota(ctx).Scope(scope).Environment(environment).Network(network).KafkaCluster(kafkaCluster).PageSize(pageSize).PageToken(pageToken).Execute()
+> QuotasV2AppliedQuotaList ListQuotasV2AppliedQuotas(ctx).Scope(scope).Environment(environment).Network(network).KafkaCluster(kafkaCluster).QuotaCode(quotaCode).PageSize(pageSize).PageToken(pageToken).Execute()
 
-List of Applied Quota
+List of Applied Quotas
 
 
 
@@ -110,18 +110,19 @@ func main() {
     environment := "env-00000" // string | The environment ID the quota is associated with.  (optional)
     network := "n-12034" // string | The network ID the quota is associated with.  (optional)
     kafkaCluster := "lkc-00000" // string | The kafka cluster ID the quota is associated with.  (optional)
+    quotaCode := "iam.max_environments.per_org" // string | The quota code that this quota belongs to.  (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AppliedQuotaQuotasV2Api.ListQuotasV2AppliedQuota(context.Background()).Scope(scope).Environment(environment).Network(network).KafkaCluster(kafkaCluster).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.AppliedQuotasQuotasV2Api.ListQuotasV2AppliedQuotas(context.Background()).Scope(scope).Environment(environment).Network(network).KafkaCluster(kafkaCluster).QuotaCode(quotaCode).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppliedQuotaQuotasV2Api.ListQuotasV2AppliedQuota``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `AppliedQuotasQuotasV2Api.ListQuotasV2AppliedQuotas``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListQuotasV2AppliedQuota`: QuotasV2AppliedQuotaList
-    fmt.Fprintf(os.Stdout, "Response from `AppliedQuotaQuotasV2Api.ListQuotasV2AppliedQuota`: %v\n", resp)
+    // response from `ListQuotasV2AppliedQuotas`: QuotasV2AppliedQuotaList
+    fmt.Fprintf(os.Stdout, "Response from `AppliedQuotasQuotasV2Api.ListQuotasV2AppliedQuotas`: %v\n", resp)
 }
 ```
 
@@ -131,7 +132,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListQuotasV2AppliedQuotaRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListQuotasV2AppliedQuotasRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -140,6 +141,7 @@ Name | Type | Description  | Notes
  **environment** | **string** | The environment ID the quota is associated with.  | 
  **network** | **string** | The network ID the quota is associated with.  | 
  **kafkaCluster** | **string** | The kafka cluster ID the quota is associated with.  | 
+ **quotaCode** | **string** | The quota code that this quota belongs to.  | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 

@@ -39,12 +39,51 @@ var (
 	_ _context.Context
 )
 
-// AppliedQuotaQuotasV2ApiService AppliedQuotaQuotasV2Api service
-type AppliedQuotaQuotasV2ApiService service
+type AppliedQuotasQuotasV2Api interface {
+
+	/*
+	GetQuotasV2AppliedQuota Read an Applied Quota
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Quotas v2](https://img.shields.io/badge/-Request%20Access%20To%20Quotas%20v2-%23bc8540)](mailto:ccloud-api-access+quotas-v2-early-access@confluent.io?subject=Request%20to%20join%20quotas/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20quotas/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Make a request to read an applied quota.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the applied quota.
+	 @return ApiGetQuotasV2AppliedQuotaRequest
+	*/
+	GetQuotasV2AppliedQuota(ctx _context.Context, id string) ApiGetQuotasV2AppliedQuotaRequest
+
+	// GetQuotasV2AppliedQuotaExecute executes the request
+	//  @return QuotasV2AppliedQuota
+	GetQuotasV2AppliedQuotaExecute(r ApiGetQuotasV2AppliedQuotaRequest) (QuotasV2AppliedQuota, *_nethttp.Response, error)
+
+	/*
+	ListQuotasV2AppliedQuotas List of Applied Quotas
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Quotas v2](https://img.shields.io/badge/-Request%20Access%20To%20Quotas%20v2-%23bc8540)](mailto:ccloud-api-access+quotas-v2-early-access@confluent.io?subject=Request%20to%20join%20quotas/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20quotas/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Retrieve a sorted, filtered, paginated list of all applied quotas.
+
+Shows all quotas for a given scope.
+
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiListQuotasV2AppliedQuotasRequest
+	*/
+	ListQuotasV2AppliedQuotas(ctx _context.Context) ApiListQuotasV2AppliedQuotasRequest
+
+	// ListQuotasV2AppliedQuotasExecute executes the request
+	//  @return QuotasV2AppliedQuotaList
+	ListQuotasV2AppliedQuotasExecute(r ApiListQuotasV2AppliedQuotasRequest) (QuotasV2AppliedQuotaList, *_nethttp.Response, error)
+}
+
+// AppliedQuotasQuotasV2ApiService AppliedQuotasQuotasV2Api service
+type AppliedQuotasQuotasV2ApiService service
 
 type ApiGetQuotasV2AppliedQuotaRequest struct {
 	ctx _context.Context
-	ApiService *AppliedQuotaQuotasV2ApiService
+	ApiService AppliedQuotasQuotasV2Api
 	id string
 	environment *string
 	network *string
@@ -82,7 +121,7 @@ Make a request to read an applied quota.
  @param id The unique identifier for the applied quota.
  @return ApiGetQuotasV2AppliedQuotaRequest
 */
-func (a *AppliedQuotaQuotasV2ApiService) GetQuotasV2AppliedQuota(ctx _context.Context, id string) ApiGetQuotasV2AppliedQuotaRequest {
+func (a *AppliedQuotasQuotasV2ApiService) GetQuotasV2AppliedQuota(ctx _context.Context, id string) ApiGetQuotasV2AppliedQuotaRequest {
 	return ApiGetQuotasV2AppliedQuotaRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -92,7 +131,7 @@ func (a *AppliedQuotaQuotasV2ApiService) GetQuotasV2AppliedQuota(ctx _context.Co
 
 // Execute executes the request
 //  @return QuotasV2AppliedQuota
-func (a *AppliedQuotaQuotasV2ApiService) GetQuotasV2AppliedQuotaExecute(r ApiGetQuotasV2AppliedQuotaRequest) (QuotasV2AppliedQuota, *_nethttp.Response, error) {
+func (a *AppliedQuotasQuotasV2ApiService) GetQuotasV2AppliedQuotaExecute(r ApiGetQuotasV2AppliedQuotaRequest) (QuotasV2AppliedQuota, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -102,7 +141,7 @@ func (a *AppliedQuotaQuotasV2ApiService) GetQuotasV2AppliedQuotaExecute(r ApiGet
 		localVarReturnValue  QuotasV2AppliedQuota
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AppliedQuotaQuotasV2ApiService.GetQuotasV2AppliedQuota")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AppliedQuotasQuotasV2ApiService.GetQuotasV2AppliedQuota")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -226,67 +265,73 @@ func (a *AppliedQuotaQuotasV2ApiService) GetQuotasV2AppliedQuotaExecute(r ApiGet
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListQuotasV2AppliedQuotaRequest struct {
+type ApiListQuotasV2AppliedQuotasRequest struct {
 	ctx _context.Context
-	ApiService *AppliedQuotaQuotasV2ApiService
+	ApiService AppliedQuotasQuotasV2Api
 	scope *string
 	environment *string
 	network *string
 	kafkaCluster *string
+	quotaCode *string
 	pageSize *int32
 	pageToken *string
 }
 
 // The applied scope the quota belongs to. 
-func (r ApiListQuotasV2AppliedQuotaRequest) Scope(scope string) ApiListQuotasV2AppliedQuotaRequest {
+func (r ApiListQuotasV2AppliedQuotasRequest) Scope(scope string) ApiListQuotasV2AppliedQuotasRequest {
 	r.scope = &scope
 	return r
 }
 // The environment ID the quota is associated with. 
-func (r ApiListQuotasV2AppliedQuotaRequest) Environment(environment string) ApiListQuotasV2AppliedQuotaRequest {
+func (r ApiListQuotasV2AppliedQuotasRequest) Environment(environment string) ApiListQuotasV2AppliedQuotasRequest {
 	r.environment = &environment
 	return r
 }
 // The network ID the quota is associated with. 
-func (r ApiListQuotasV2AppliedQuotaRequest) Network(network string) ApiListQuotasV2AppliedQuotaRequest {
+func (r ApiListQuotasV2AppliedQuotasRequest) Network(network string) ApiListQuotasV2AppliedQuotasRequest {
 	r.network = &network
 	return r
 }
 // The kafka cluster ID the quota is associated with. 
-func (r ApiListQuotasV2AppliedQuotaRequest) KafkaCluster(kafkaCluster string) ApiListQuotasV2AppliedQuotaRequest {
+func (r ApiListQuotasV2AppliedQuotasRequest) KafkaCluster(kafkaCluster string) ApiListQuotasV2AppliedQuotasRequest {
 	r.kafkaCluster = &kafkaCluster
 	return r
 }
+// The quota code that this quota belongs to. 
+func (r ApiListQuotasV2AppliedQuotasRequest) QuotaCode(quotaCode string) ApiListQuotasV2AppliedQuotasRequest {
+	r.quotaCode = &quotaCode
+	return r
+}
 // A pagination size for collection requests.
-func (r ApiListQuotasV2AppliedQuotaRequest) PageSize(pageSize int32) ApiListQuotasV2AppliedQuotaRequest {
+func (r ApiListQuotasV2AppliedQuotasRequest) PageSize(pageSize int32) ApiListQuotasV2AppliedQuotasRequest {
 	r.pageSize = &pageSize
 	return r
 }
 // An opaque pagination token for collection requests.
-func (r ApiListQuotasV2AppliedQuotaRequest) PageToken(pageToken string) ApiListQuotasV2AppliedQuotaRequest {
+func (r ApiListQuotasV2AppliedQuotasRequest) PageToken(pageToken string) ApiListQuotasV2AppliedQuotasRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-func (r ApiListQuotasV2AppliedQuotaRequest) Execute() (QuotasV2AppliedQuotaList, *_nethttp.Response, error) {
-	return r.ApiService.ListQuotasV2AppliedQuotaExecute(r)
+func (r ApiListQuotasV2AppliedQuotasRequest) Execute() (QuotasV2AppliedQuotaList, *_nethttp.Response, error) {
+	return r.ApiService.ListQuotasV2AppliedQuotasExecute(r)
 }
 
 /*
-ListQuotasV2AppliedQuota List of Applied Quota
+ListQuotasV2AppliedQuotas List of Applied Quotas
 
 [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Quotas v2](https://img.shields.io/badge/-Request%20Access%20To%20Quotas%20v2-%23bc8540)](mailto:ccloud-api-access+quotas-v2-early-access@confluent.io?subject=Request%20to%20join%20quotas/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20quotas/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Retrieve a sorted, filtered, paginated list of all applied quota.
+Retrieve a sorted, filtered, paginated list of all applied quotas.
 
 Shows all quotas for a given scope.
 
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListQuotasV2AppliedQuotaRequest
+ @return ApiListQuotasV2AppliedQuotasRequest
 */
-func (a *AppliedQuotaQuotasV2ApiService) ListQuotasV2AppliedQuota(ctx _context.Context) ApiListQuotasV2AppliedQuotaRequest {
-	return ApiListQuotasV2AppliedQuotaRequest{
+func (a *AppliedQuotasQuotasV2ApiService) ListQuotasV2AppliedQuotas(ctx _context.Context) ApiListQuotasV2AppliedQuotasRequest {
+	return ApiListQuotasV2AppliedQuotasRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -294,7 +339,7 @@ func (a *AppliedQuotaQuotasV2ApiService) ListQuotasV2AppliedQuota(ctx _context.C
 
 // Execute executes the request
 //  @return QuotasV2AppliedQuotaList
-func (a *AppliedQuotaQuotasV2ApiService) ListQuotasV2AppliedQuotaExecute(r ApiListQuotasV2AppliedQuotaRequest) (QuotasV2AppliedQuotaList, *_nethttp.Response, error) {
+func (a *AppliedQuotasQuotasV2ApiService) ListQuotasV2AppliedQuotasExecute(r ApiListQuotasV2AppliedQuotasRequest) (QuotasV2AppliedQuotaList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -304,7 +349,7 @@ func (a *AppliedQuotaQuotasV2ApiService) ListQuotasV2AppliedQuotaExecute(r ApiLi
 		localVarReturnValue  QuotasV2AppliedQuotaList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AppliedQuotaQuotasV2ApiService.ListQuotasV2AppliedQuota")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AppliedQuotasQuotasV2ApiService.ListQuotasV2AppliedQuotas")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -327,6 +372,9 @@ func (a *AppliedQuotaQuotasV2ApiService) ListQuotasV2AppliedQuotaExecute(r ApiLi
 	}
 	if r.kafkaCluster != nil {
 		localVarQueryParams.Add("kafka_cluster", parameterToString(*r.kafkaCluster, ""))
+	}
+	if r.quotaCode != nil {
+		localVarQueryParams.Add("quota_code", parameterToString(*r.quotaCode, ""))
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))

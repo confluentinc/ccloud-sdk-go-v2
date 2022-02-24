@@ -29,7 +29,11 @@ import (
 	"encoding/json"
 )
 
-// QuotasV2AppliedQuota A `quota` object represents a quota configuration for a specific Confluent Cloud resource. Use this API to retrieve an individual quota or list of quotas for a given scope.   Related guide: [Service Quotas for Confluent Cloud](https://docs.confluent.io/cloud/current/quotas/index.html).  ## The Applied Quota Model <SchemaDefinition schemaRef=\"#/components/schemas/quotas.v2.AppliedQuota\" />
+import (
+	"reflect"
+)
+
+// QuotasV2AppliedQuota A `quota` object represents a quota configuration for a specific Confluent Cloud resource. Use this API to retrieve an individual quota or list of quotas for a given scope.   Related guide: [Service Quotas for Confluent Cloud](https://docs.confluent.io/cloud/current/quotas/index.html).  ## The Applied Quotas Model <SchemaDefinition schemaRef=\"#/components/schemas/quotas.v2.AppliedQuota\" />
 type QuotasV2AppliedQuota struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
@@ -42,17 +46,21 @@ type QuotasV2AppliedQuota struct {
 	Scope *string `json:"scope,omitempty"`
 	// A human-readable name for the quota type name.
 	DisplayName *string `json:"display_name,omitempty"`
+	// The default service quota value. 
+	DefaultLimit *int32 `json:"default_limit,omitempty"`
 	// The latest applied service quota value, taking into account any limit adjustments. 
 	AppliedLimit *int32 `json:"applied_limit,omitempty"`
+	// Show the quota usage value if the quota usage is available for this quota. 
+	Usage *int32 `json:"usage,omitempty"`
 	// The user associated with this object.
 	User *ObjectReference `json:"user,omitempty"`
-	// A unique organization id to associate a specific organization to this quota.
+	// A unique organization id to associate a specific organization to this quota. May be `null` if not associated with a organization.
 	Organization *ObjectReference `json:"organization,omitempty"`
-	// The environment ID the quota is associated with. 
+	// The environment ID the quota is associated with.  May be `null` if not associated with a environment.
 	Environment *ObjectReference `json:"environment,omitempty"`
-	// The network ID the quota is associated with. 
+	// The network ID the quota is associated with.  May be `null` if not associated with a network.
 	Network *ObjectReference `json:"network,omitempty"`
-	// The kafka cluster ID the quota is associated with. 
+	// The kafka cluster ID the quota is associated with.  May be `null` if not associated with a kafka_cluster.
 	KafkaCluster *ObjectReference `json:"kafka_cluster,omitempty"`
 }
 
@@ -265,6 +273,38 @@ func (o *QuotasV2AppliedQuota) SetDisplayName(v string) {
 	o.DisplayName = &v
 }
 
+// GetDefaultLimit returns the DefaultLimit field value if set, zero value otherwise.
+func (o *QuotasV2AppliedQuota) GetDefaultLimit() int32 {
+	if o == nil || o.DefaultLimit == nil {
+		var ret int32
+		return ret
+	}
+	return *o.DefaultLimit
+}
+
+// GetDefaultLimitOk returns a tuple with the DefaultLimit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QuotasV2AppliedQuota) GetDefaultLimitOk() (*int32, bool) {
+	if o == nil || o.DefaultLimit == nil {
+		return nil, false
+	}
+	return o.DefaultLimit, true
+}
+
+// HasDefaultLimit returns a boolean if a field has been set.
+func (o *QuotasV2AppliedQuota) HasDefaultLimit() bool {
+	if o != nil && o.DefaultLimit != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultLimit gets a reference to the given int32 and assigns it to the DefaultLimit field.
+func (o *QuotasV2AppliedQuota) SetDefaultLimit(v int32) {
+	o.DefaultLimit = &v
+}
+
 // GetAppliedLimit returns the AppliedLimit field value if set, zero value otherwise.
 func (o *QuotasV2AppliedQuota) GetAppliedLimit() int32 {
 	if o == nil || o.AppliedLimit == nil {
@@ -295,6 +335,38 @@ func (o *QuotasV2AppliedQuota) HasAppliedLimit() bool {
 // SetAppliedLimit gets a reference to the given int32 and assigns it to the AppliedLimit field.
 func (o *QuotasV2AppliedQuota) SetAppliedLimit(v int32) {
 	o.AppliedLimit = &v
+}
+
+// GetUsage returns the Usage field value if set, zero value otherwise.
+func (o *QuotasV2AppliedQuota) GetUsage() int32 {
+	if o == nil || o.Usage == nil {
+		var ret int32
+		return ret
+	}
+	return *o.Usage
+}
+
+// GetUsageOk returns a tuple with the Usage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QuotasV2AppliedQuota) GetUsageOk() (*int32, bool) {
+	if o == nil || o.Usage == nil {
+		return nil, false
+	}
+	return o.Usage, true
+}
+
+// HasUsage returns a boolean if a field has been set.
+func (o *QuotasV2AppliedQuota) HasUsage() bool {
+	if o != nil && o.Usage != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUsage gets a reference to the given int32 and assigns it to the Usage field.
+func (o *QuotasV2AppliedQuota) SetUsage(v int32) {
+	o.Usage = &v
 }
 
 // GetUser returns the User field value if set, zero value otherwise.
@@ -457,6 +529,54 @@ func (o *QuotasV2AppliedQuota) SetKafkaCluster(v ObjectReference) {
 	o.KafkaCluster = &v
 }
 
+// Redact resets all sensitive fields to their zero value.
+func (o *QuotasV2AppliedQuota) Redact() {
+    o.recurseRedact(o.ApiVersion)
+    o.recurseRedact(o.Kind)
+    o.recurseRedact(o.Id)
+    o.recurseRedact(o.Metadata)
+    o.recurseRedact(o.Scope)
+    o.recurseRedact(o.DisplayName)
+    o.recurseRedact(o.DefaultLimit)
+    o.recurseRedact(o.AppliedLimit)
+    o.recurseRedact(o.Usage)
+    o.recurseRedact(o.User)
+    o.recurseRedact(o.Organization)
+    o.recurseRedact(o.Environment)
+    o.recurseRedact(o.Network)
+    o.recurseRedact(o.KafkaCluster)
+}
+
+func (o *QuotasV2AppliedQuota) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o QuotasV2AppliedQuota) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
+}
+
 func (o QuotasV2AppliedQuota) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ApiVersion != nil {
@@ -477,8 +597,14 @@ func (o QuotasV2AppliedQuota) MarshalJSON() ([]byte, error) {
 	if o.DisplayName != nil {
 		toSerialize["display_name"] = o.DisplayName
 	}
+	if o.DefaultLimit != nil {
+		toSerialize["default_limit"] = o.DefaultLimit
+	}
 	if o.AppliedLimit != nil {
 		toSerialize["applied_limit"] = o.AppliedLimit
+	}
+	if o.Usage != nil {
+		toSerialize["usage"] = o.Usage
 	}
 	if o.User != nil {
 		toSerialize["user"] = o.User

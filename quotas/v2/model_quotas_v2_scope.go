@@ -29,6 +29,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // QuotasV2Scope Gets a list of all available scopes for applied quotas.   Related guide: [Quota Scopes](https://docs.confluent.io/cloud/current/quotas/quotas.html#query-for-scopes).  ## The Scopes Model <SchemaDefinition schemaRef=\"#/components/schemas/quotas.v2.Scope\" />
 type QuotasV2Scope struct {
 	// APIVersion defines the schema version of this representation of a resource.
@@ -217,6 +221,45 @@ func (o *QuotasV2Scope) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *QuotasV2Scope) SetDescription(v string) {
 	o.Description = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *QuotasV2Scope) Redact() {
+    o.recurseRedact(o.ApiVersion)
+    o.recurseRedact(o.Kind)
+    o.recurseRedact(o.Id)
+    o.recurseRedact(o.Metadata)
+    o.recurseRedact(o.Description)
+}
+
+func (o *QuotasV2Scope) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o QuotasV2Scope) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o QuotasV2Scope) MarshalJSON() ([]byte, error) {

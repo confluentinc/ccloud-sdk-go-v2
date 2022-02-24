@@ -29,7 +29,11 @@ import (
 	"encoding/json"
 )
 
-// QuotasV2AppliedQuotaList A `quota` object represents a quota configuration for a specific Confluent Cloud resource. Use this API to retrieve an individual quota or list of quotas for a given scope.   Related guide: [Service Quotas for Confluent Cloud](https://docs.confluent.io/cloud/current/quotas/index.html).  ## The Applied Quota Model <SchemaDefinition schemaRef=\"#/components/schemas/quotas.v2.AppliedQuota\" />
+import (
+	"reflect"
+)
+
+// QuotasV2AppliedQuotaList A `quota` object represents a quota configuration for a specific Confluent Cloud resource. Use this API to retrieve an individual quota or list of quotas for a given scope.   Related guide: [Service Quotas for Confluent Cloud](https://docs.confluent.io/cloud/current/quotas/index.html).  ## The Applied Quotas Model <SchemaDefinition schemaRef=\"#/components/schemas/quotas.v2.AppliedQuota\" />
 type QuotasV2AppliedQuotaList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version"`
@@ -155,6 +159,44 @@ func (o *QuotasV2AppliedQuotaList) GetDataOk() (*[]QuotasV2AppliedQuota, bool) {
 // SetData sets field value
 func (o *QuotasV2AppliedQuotaList) SetData(v []QuotasV2AppliedQuota) {
 	o.Data = v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *QuotasV2AppliedQuotaList) Redact() {
+    o.recurseRedact(&o.ApiVersion)
+    o.recurseRedact(&o.Kind)
+    o.recurseRedact(&o.Metadata)
+    o.recurseRedact(&o.Data)
+}
+
+func (o *QuotasV2AppliedQuotaList) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o QuotasV2AppliedQuotaList) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o QuotasV2AppliedQuotaList) MarshalJSON() ([]byte, error) {

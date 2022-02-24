@@ -30,6 +30,10 @@ import (
 	"time"
 )
 
+import (
+	"reflect"
+)
+
 // ObjectMeta ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
 type ObjectMeta struct {
 	// Self is a Uniform Resource Locator (URL) at which an object can be addressed. This URL encodes the service location, API version, and other particulars necessary to locate the resource at a point in time
@@ -212,6 +216,45 @@ func (o *ObjectMeta) HasDeletedAt() bool {
 // SetDeletedAt gets a reference to the given time.Time and assigns it to the DeletedAt field.
 func (o *ObjectMeta) SetDeletedAt(v time.Time) {
 	o.DeletedAt = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *ObjectMeta) Redact() {
+    o.recurseRedact(&o.Self)
+    o.recurseRedact(o.ResourceName)
+    o.recurseRedact(o.CreatedAt)
+    o.recurseRedact(o.UpdatedAt)
+    o.recurseRedact(o.DeletedAt)
+}
+
+func (o *ObjectMeta) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o ObjectMeta) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ObjectMeta) MarshalJSON() ([]byte, error) {

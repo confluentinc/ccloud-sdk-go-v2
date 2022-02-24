@@ -79,8 +79,8 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AppliedQuotaQuotasV2Api* | [**GetQuotasV2AppliedQuota**](docs/AppliedQuotaQuotasV2Api.md#getquotasv2appliedquota) | **Get** /quotas/v2/applied-quotas/{id} | Read an Applied Quota
-*AppliedQuotaQuotasV2Api* | [**ListQuotasV2AppliedQuota**](docs/AppliedQuotaQuotasV2Api.md#listquotasv2appliedquota) | **Get** /quotas/v2/applied-quotas | List of Applied Quota
+*AppliedQuotasQuotasV2Api* | [**GetQuotasV2AppliedQuota**](docs/AppliedQuotasQuotasV2Api.md#getquotasv2appliedquota) | **Get** /quotas/v2/applied-quotas/{id} | Read an Applied Quota
+*AppliedQuotasQuotasV2Api* | [**ListQuotasV2AppliedQuotas**](docs/AppliedQuotasQuotasV2Api.md#listquotasv2appliedquotas) | **Get** /quotas/v2/applied-quotas | List of Applied Quotas
 *ScopesQuotasV2Api* | [**GetQuotasV2Scope**](docs/ScopesQuotasV2Api.md#getquotasv2scope) | **Get** /quotas/v2/scopes/{id} | Read a Scope
 *ScopesQuotasV2Api* | [**ListQuotasV2Scopes**](docs/ScopesQuotasV2Api.md#listquotasv2scopes) | **Get** /quotas/v2/scopes | List of Scopes
 

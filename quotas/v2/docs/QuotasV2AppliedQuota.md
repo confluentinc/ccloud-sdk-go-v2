@@ -10,12 +10,14 @@ Name | Type | Description | Notes
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
 **Scope** | Pointer to **string** | The applied scope that this quota belongs to. | [optional] 
 **DisplayName** | Pointer to **string** | A human-readable name for the quota type name. | [optional] 
+**DefaultLimit** | Pointer to **int32** | The default service quota value.  | [optional] 
 **AppliedLimit** | Pointer to **int32** | The latest applied service quota value, taking into account any limit adjustments.  | [optional] 
+**Usage** | Pointer to **int32** | Show the quota usage value if the quota usage is available for this quota.  | [optional] 
 **User** | Pointer to [**ObjectReference**](ObjectReference.md) | The user associated with this object. | [optional] 
-**Organization** | Pointer to [**ObjectReference**](ObjectReference.md) | A unique organization id to associate a specific organization to this quota. | [optional] 
-**Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment ID the quota is associated with.  | [optional] 
-**Network** | Pointer to [**ObjectReference**](ObjectReference.md) | The network ID the quota is associated with.  | [optional] 
-**KafkaCluster** | Pointer to [**ObjectReference**](ObjectReference.md) | The kafka cluster ID the quota is associated with.  | [optional] 
+**Organization** | Pointer to [**ObjectReference**](ObjectReference.md) | A unique organization id to associate a specific organization to this quota. May be &#x60;null&#x60; if not associated with a organization. | [optional] 
+**Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment ID the quota is associated with.  May be &#x60;null&#x60; if not associated with a environment. | [optional] 
+**Network** | Pointer to [**ObjectReference**](ObjectReference.md) | The network ID the quota is associated with.  May be &#x60;null&#x60; if not associated with a network. | [optional] 
+**KafkaCluster** | Pointer to [**ObjectReference**](ObjectReference.md) | The kafka cluster ID the quota is associated with.  May be &#x60;null&#x60; if not associated with a kafka_cluster. | [optional] 
 
 ## Methods
 
@@ -186,6 +188,31 @@ SetDisplayName sets DisplayName field to given value.
 
 HasDisplayName returns a boolean if a field has been set.
 
+### GetDefaultLimit
+
+`func (o *QuotasV2AppliedQuota) GetDefaultLimit() int32`
+
+GetDefaultLimit returns the DefaultLimit field if non-nil, zero value otherwise.
+
+### GetDefaultLimitOk
+
+`func (o *QuotasV2AppliedQuota) GetDefaultLimitOk() (*int32, bool)`
+
+GetDefaultLimitOk returns a tuple with the DefaultLimit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDefaultLimit
+
+`func (o *QuotasV2AppliedQuota) SetDefaultLimit(v int32)`
+
+SetDefaultLimit sets DefaultLimit field to given value.
+
+### HasDefaultLimit
+
+`func (o *QuotasV2AppliedQuota) HasDefaultLimit() bool`
+
+HasDefaultLimit returns a boolean if a field has been set.
+
 ### GetAppliedLimit
 
 `func (o *QuotasV2AppliedQuota) GetAppliedLimit() int32`
@@ -210,6 +237,31 @@ SetAppliedLimit sets AppliedLimit field to given value.
 `func (o *QuotasV2AppliedQuota) HasAppliedLimit() bool`
 
 HasAppliedLimit returns a boolean if a field has been set.
+
+### GetUsage
+
+`func (o *QuotasV2AppliedQuota) GetUsage() int32`
+
+GetUsage returns the Usage field if non-nil, zero value otherwise.
+
+### GetUsageOk
+
+`func (o *QuotasV2AppliedQuota) GetUsageOk() (*int32, bool)`
+
+GetUsageOk returns a tuple with the Usage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsage
+
+`func (o *QuotasV2AppliedQuota) SetUsage(v int32)`
+
+SetUsage sets Usage field to given value.
+
+### HasUsage
+
+`func (o *QuotasV2AppliedQuota) HasUsage() bool`
+
+HasUsage returns a boolean if a field has been set.
 
 ### GetUser
 

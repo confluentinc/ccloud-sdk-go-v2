@@ -64,9 +64,9 @@ type APIClient struct {
 
 	// API Services
 
-	AppliedQuotaQuotasV2Api *AppliedQuotaQuotasV2ApiService
+	AppliedQuotasQuotasV2Api AppliedQuotasQuotasV2Api
 
-	ScopesQuotasV2Api *ScopesQuotasV2ApiService
+	ScopesQuotasV2Api ScopesQuotasV2Api
 }
 
 type service struct {
@@ -85,7 +85,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
-	c.AppliedQuotaQuotasV2Api = (*AppliedQuotaQuotasV2ApiService)(&c.common)
+	c.AppliedQuotasQuotasV2Api = (*AppliedQuotasQuotasV2ApiService)(&c.common)
 	c.ScopesQuotasV2Api = (*ScopesQuotasV2ApiService)(&c.common)
 
 	return c

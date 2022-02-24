@@ -27,9 +27,9 @@ tags:
 
     Related guide: [Service Quotas for Confluent Cloud](https://docs.confluent.io/cloud/current/quotas/index.html).
 
-    ## The Applied Quota Model
+    ## The Applied Quotas Model
     <SchemaDefinition schemaRef="#/components/schemas/quotas.v2.AppliedQuota" />
-  name: Applied Quota (quotas/v2)
+  name: Applied Quotas (quotas/v2)
 - description: |-
     [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Quotas v2](https://img.shields.io/badge/-Request%20Access%20To%20Quotas%20v2-%23bc8540)](mailto:ccloud-api-access+quotas-v2-early-access@confluent.io?subject=Request%20to%20join%20quotas/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20quotas/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
@@ -47,10 +47,10 @@ paths:
       description: |
         [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Quotas v2](https://img.shields.io/badge/-Request%20Access%20To%20Quotas%20v2-%23bc8540)](mailto:ccloud-api-access+quotas-v2-early-access@confluent.io?subject=Request%20to%20join%20quotas/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20quotas/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-        Retrieve a sorted, filtered, paginated list of all applied quota.
+        Retrieve a sorted, filtered, paginated list of all applied quotas.
 
         Shows all quotas for a given scope.
-      operationId: listQuotasV2AppliedQuota
+      operationId: listQuotasV2AppliedQuotas
       parameters:
       - description: |
           The applied scope the quota belongs to.
@@ -88,6 +88,16 @@ paths:
         explode: true
         in: query
         name: kafka_cluster
+        required: false
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: |
+          The quota code that this quota belongs to.
+        example: iam.max_environments.per_org
+        explode: true
+        in: query
+        name: quota_code
         required: false
         schema:
           $ref: '#/components/schemas/SearchFilter'
@@ -136,7 +146,7 @@ paths:
                           environment:
                             example:
                               id: env-00000
-                              related: https://api.confluent.cloud/v2/environments/env-00000
+                              related: https://api.confluent.cloud/org/v2/environments/env-00000
                               resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
                           network:
                             example:
@@ -147,7 +157,7 @@ paths:
                             example:
                               id: lkc-00000
                               related: https://api.confluent.cloud/cmk/v2/clusters/lkc-00000
-                              resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/cluster=lkc-00000
+                              resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lkc-00000
                       type: array
                   type: object
           description: Applied Quota.
@@ -265,22 +275,22 @@ paths:
               style: simple
       security:
       - api-key: []
-      summary: List of Applied Quota
+      summary: List of Applied Quotas
       tags:
-      - Applied Quota (quotas/v2)
+      - Applied Quotas (quotas/v2)
       x-request-access-name: Quotas v2
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/quotas/v2/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/quotas/v2/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&quota_code=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/quotas/v2/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/quotas/v2/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&quota_code=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -288,7 +298,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/quotas/v2/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/quotas/v2/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&quota_code=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -301,7 +311,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/quotas/v2/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/quotas/v2/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&quota_code=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -315,7 +325,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/quotas/v2/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/quotas/v2/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&quota_code=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -340,7 +350,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/quotas/v2/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/quotas/v2/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&quota_code=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -349,7 +359,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/quotas/v2/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/quotas/v2/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&quota_code=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -415,6 +425,7 @@ paths:
                 - required:
                   - api_version
                   - applied_limit
+                  - default_limit
                   - display_name
                   - id
                   - kind
@@ -434,7 +445,7 @@ paths:
                     environment:
                       example:
                         id: env-00000
-                        related: https://api.confluent.cloud/v2/environments/env-00000
+                        related: https://api.confluent.cloud/org/v2/environments/env-00000
                         resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
                     network:
                       example:
@@ -445,7 +456,7 @@ paths:
                       example:
                         id: lkc-00000
                         related: https://api.confluent.cloud/cmk/v2/clusters/lkc-00000
-                        resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/cluster=lkc-00000
+                        resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lkc-00000
                   type: object
           description: Applied Quota.
           headers:
@@ -582,7 +593,7 @@ paths:
       - api-key: []
       summary: Read an Applied Quota
       tags:
-      - Applied Quota (quotas/v2)
+      - Applied Quotas (quotas/v2)
       x-request-access-name: Quotas v2
       x-codeSamples:
       - lang: Shell
@@ -1334,7 +1345,6 @@ components:
           style: simple
   schemas:
     quotas.v2.AppliedQuota:
-      additionalProperties: false
       description: |-
         A `quota` object represents a quota configuration for a specific Confluent Cloud resource.
         Use this API to retrieve an individual quota or list of quotas for a given scope.
@@ -1342,7 +1352,7 @@ components:
 
         Related guide: [Service Quotas for Confluent Cloud](https://docs.confluent.io/cloud/current/quotas/index.html).
 
-        ## The Applied Quota Model
+        ## The Applied Quotas Model
         <SchemaDefinition schemaRef="#/components/schemas/quotas.v2.AppliedQuota" />
       properties:
         api_version:
@@ -1373,9 +1383,9 @@ components:
           - $ref: '#/components/schemas/ObjectMeta'
           - properties:
               self:
-                example: https://api.confluent.cloud/quotas/v2/applied-quota/aq-12345
+                example: https://api.confluent.cloud/quotas/v2/applied-quotas/aq-12345
               resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/appliedquota=aq-12345
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/applied-quota=aq-12345
         scope:
           description: The applied scope that this quota belongs to.
           example: ORGANIZATION
@@ -1392,9 +1402,19 @@ components:
           example: Kafka Cluster Per Organization
           type: string
           x-immutable: true
+        default_limit:
+          description: |
+            The default service quota value.
+          format: int32
+          type: integer
         applied_limit:
           description: |
             The latest applied service quota value, taking into account any limit adjustments.
+          format: int32
+          type: integer
+        usage:
+          description: |
+            Show the quota usage value if the quota usage is available for this quota.
           format: int32
           type: integer
         user:
@@ -1405,29 +1425,35 @@ components:
         organization:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
+          - nullable: true
           description: A unique organization id to associate a specific organization
-            to this quota.
+            to this quota. May be `null` if not associated with a organization.
         environment:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
-          description: |
+          - nullable: true
+          description: |-
             The environment ID the quota is associated with.
+             May be `null` if not associated with a environment.
           x-immutable: true
         network:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
-          description: |
+          - nullable: true
+          description: |-
             The network ID the quota is associated with.
+             May be `null` if not associated with a network.
           x-immutable: true
         kafka_cluster:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
-          description: |
+          - nullable: true
+          description: |-
             The kafka cluster ID the quota is associated with.
+             May be `null` if not associated with a kafka_cluster.
           x-immutable: true
       type: object
     quotas.v2.Scope:
-      additionalProperties: false
       description: |-
         Gets a list of all available scopes for applied quotas.
 
@@ -1477,7 +1503,6 @@ components:
       description: Filter a collection by a string search
       type: string
     quotas.v2.AppliedQuotaList:
-      additionalProperties: false
       description: |-
         A `quota` object represents a quota configuration for a specific Confluent Cloud resource.
         Use this API to retrieve an individual quota or list of quotas for a given scope.
@@ -1485,7 +1510,7 @@ components:
 
         Related guide: [Service Quotas for Confluent Cloud](https://docs.confluent.io/cloud/current/quotas/index.html).
 
-        ## The Applied Quota Model
+        ## The Applied Quotas Model
         <SchemaDefinition schemaRef="#/components/schemas/quotas.v2.AppliedQuota" />
       properties:
         api_version:
@@ -1506,13 +1531,13 @@ components:
           - $ref: '#/components/schemas/ListMeta'
           - properties:
               first:
-                example: https://api.confluent.cloud/quotas/v2/applied-quota
+                example: https://api.confluent.cloud/quotas/v2/applied-quotas
               last:
-                example: https://api.confluent.cloud/quotas/v2/applied-quota?page_token=bcAOehAY8F16YD84Z1wT
+                example: https://api.confluent.cloud/quotas/v2/applied-quotas?page_token=bcAOehAY8F16YD84Z1wT
               prev:
-                example: https://api.confluent.cloud/quotas/v2/applied-quota?page_token=YIXRY97wWYmwzrax4dld
+                example: https://api.confluent.cloud/quotas/v2/applied-quotas?page_token=YIXRY97wWYmwzrax4dld
               next:
-                example: https://api.confluent.cloud/quotas/v2/applied-quota?page_token=UvmDWOB1iwfAIBPj6EYb
+                example: https://api.confluent.cloud/quotas/v2/applied-quotas?page_token=UvmDWOB1iwfAIBPj6EYb
         data:
           description: A data property that contains an array of resource items. Each
             entry in the array is a separate resource.
@@ -1521,6 +1546,7 @@ components:
             - $ref: '#/components/schemas/quotas.v2.AppliedQuota'
             - required:
               - applied_limit
+              - default_limit
               - display_name
               - id
               - metadata
@@ -1535,7 +1561,6 @@ components:
       - metadata
       type: object
     quotas.v2.ScopeList:
-      additionalProperties: false
       description: |-
         Gets a list of all available scopes for applied quotas.
 
@@ -1590,7 +1615,6 @@ components:
       - metadata
       type: object
     ObjectMeta:
-      additionalProperties: false
       description: ObjectMeta is metadata that all persisted resources must have,
         which includes all objects users must create.
       properties:
@@ -1634,9 +1658,7 @@ components:
       readOnly: true
       required:
       - self
-      type: object
     ListMeta:
-      additionalProperties: false
       description: ListMeta describes metadata that resource collections may have
       properties:
         first:
@@ -1678,7 +1700,6 @@ components:
           type: integer
       type: object
     ObjectReference:
-      additionalProperties: false
       description: ObjectReference provides information for you to locate the referred
         object
       properties:
@@ -1720,7 +1741,6 @@ components:
       - resource_name
       type: object
     Failure:
-      additionalProperties: false
       description: Provides information about problems encountered while performing
         an operation.
       properties:
@@ -1734,7 +1754,6 @@ components:
       - errors
       type: object
     Error:
-      additionalProperties: false
       description: Describes a particular error encountered while performing an operation.
       properties:
         id:
