@@ -35,6 +35,7 @@ import (
 
 // CmkV2Basic The basic cluster type. 
 type CmkV2Basic struct {
+	// Basic cluster type. 
 	Kind string `json:"kind"`
 }
 
