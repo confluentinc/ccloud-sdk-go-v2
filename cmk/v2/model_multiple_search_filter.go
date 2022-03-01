@@ -33,60 +33,33 @@ import (
 	"reflect"
 )
 
-// CmkV2Standard The standard cluster type. 
-type CmkV2Standard struct {
-	// Standard cluster type. 
-	Kind string `json:"kind"`
+// MultipleSearchFilter Filter a collection by a string search for one or more values
+type MultipleSearchFilter struct {
+	Items []string
 }
 
-// NewCmkV2Standard instantiates a new CmkV2Standard object
+// NewMultipleSearchFilter instantiates a new MultipleSearchFilter object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCmkV2Standard(kind string) *CmkV2Standard {
-	this := CmkV2Standard{}
-	this.Kind = kind
+func NewMultipleSearchFilter() *MultipleSearchFilter {
+	this := MultipleSearchFilter{}
 	return &this
 }
 
-// NewCmkV2StandardWithDefaults instantiates a new CmkV2Standard object
+// NewMultipleSearchFilterWithDefaults instantiates a new MultipleSearchFilter object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCmkV2StandardWithDefaults() *CmkV2Standard {
-	this := CmkV2Standard{}
+func NewMultipleSearchFilterWithDefaults() *MultipleSearchFilter {
+	this := MultipleSearchFilter{}
 	return &this
-}
-
-// GetKind returns the Kind field value
-func (o *CmkV2Standard) GetKind() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Kind
-}
-
-// GetKindOk returns a tuple with the Kind field value
-// and a boolean to check if the value has been set.
-func (o *CmkV2Standard) GetKindOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.Kind, true
-}
-
-// SetKind sets field value
-func (o *CmkV2Standard) SetKind(v string) {
-	o.Kind = v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *CmkV2Standard) Redact() {
-    o.recurseRedact(&o.Kind)
+func (o *MultipleSearchFilter) Redact() {
 }
 
-func (o *CmkV2Standard) recurseRedact(v interface{}) {
+func (o *MultipleSearchFilter) recurseRedact(v interface{}) {
     type redactor interface {
         Redact()
     }
@@ -111,51 +84,55 @@ func (o *CmkV2Standard) recurseRedact(v interface{}) {
     }
 }
 
-func (o CmkV2Standard) zeroField(v interface{}) {
+func (o MultipleSearchFilter) zeroField(v interface{}) {
     p := reflect.ValueOf(v).Elem()
     p.Set(reflect.Zero(p.Type()))
 }
 
-func (o CmkV2Standard) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["kind"] = o.Kind
+func (o MultipleSearchFilter) MarshalJSON() ([]byte, error) {
+	toSerialize := make([]interface{}, len(o.Items))
+	for i, item := range o.Items {
+		toSerialize[i] = item
 	}
 	return json.Marshal(toSerialize)
 }
 
-type NullableCmkV2Standard struct {
-	value *CmkV2Standard
+func (o *MultipleSearchFilter) UnmarshalJSON(bytes []byte) (err error) {
+	return json.Unmarshal(bytes, &o.Items)
+}
+
+type NullableMultipleSearchFilter struct {
+	value *MultipleSearchFilter
 	isSet bool
 }
 
-func (v NullableCmkV2Standard) Get() *CmkV2Standard {
+func (v NullableMultipleSearchFilter) Get() *MultipleSearchFilter {
 	return v.value
 }
 
-func (v *NullableCmkV2Standard) Set(val *CmkV2Standard) {
+func (v *NullableMultipleSearchFilter) Set(val *MultipleSearchFilter) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCmkV2Standard) IsSet() bool {
+func (v NullableMultipleSearchFilter) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCmkV2Standard) Unset() {
+func (v *NullableMultipleSearchFilter) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCmkV2Standard(val *CmkV2Standard) *NullableCmkV2Standard {
-	return &NullableCmkV2Standard{value: val, isSet: true}
+func NewNullableMultipleSearchFilter(val *MultipleSearchFilter) *NullableMultipleSearchFilter {
+	return &NullableMultipleSearchFilter{value: val, isSet: true}
 }
 
-func (v NullableCmkV2Standard) MarshalJSON() ([]byte, error) {
+func (v NullableMultipleSearchFilter) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCmkV2Standard) UnmarshalJSON(src []byte) error {
+func (v *NullableMultipleSearchFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

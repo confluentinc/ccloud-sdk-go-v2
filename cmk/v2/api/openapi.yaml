@@ -52,6 +52,18 @@ paths:
         schema:
           $ref: '#/components/schemas/SearchFilter'
         style: form
+      - description: Filter the results by exact match for spec.network. Pass multiple
+          times to see results matching any of the values.
+        example:
+        - n-00000
+        - n-00001
+        explode: true
+        in: query
+        name: spec.network
+        required: false
+        schema:
+          $ref: '#/components/schemas/MultipleSearchFilter'
+        style: form
       - description: A pagination size for collection requests.
         explode: true
         in: query
@@ -90,6 +102,11 @@ paths:
                                   id: env-00000
                                   related: https://api.confluent.cloud/v2/environments/env-00000
                                   resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
+                              network:
+                                example:
+                                  id: n-00000
+                                  related: https://api.confluent.cloud/networking/v1/networks/n-00000
+                                  resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000
                             type: object
                       type: array
                   type: object
@@ -215,14 +232,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/cmk/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/cmk/v2/clusters?environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/cmk/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/cmk/v2/clusters?environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -230,7 +247,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cmk/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cmk/v2/clusters?environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -243,7 +260,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/cmk/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/cmk/v2/clusters?environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -257,7 +274,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/cmk/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/cmk/v2/clusters?environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -282,7 +299,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cmk/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cmk/v2/clusters?environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -291,7 +308,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/cmk/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/cmk/v2/clusters?environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -326,6 +343,9 @@ paths:
                       environment:
                         example:
                           id: env-00000
+                      network:
+                        example:
+                          id: n-00000
                     type: object
                 type: object
       responses:
@@ -357,6 +377,11 @@ paths:
                             id: env-00000
                             related: https://api.confluent.cloud/v2/environments/env-00000
                             resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
+                        network:
+                          example:
+                            id: n-00000
+                            related: https://api.confluent.cloud/networking/v1/networks/n-00000
+                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000
                       type: object
                   type: object
           description: A Cluster is being created.
@@ -543,13 +568,13 @@ paths:
             --url https://api.confluent.cloud/cmk/v2/clusters \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"ProdKafkaCluster","availability":"SINGLE_ZONE","cloud":"GCP","region":"us-east4","config":{"kind":"Basic"},"environment":{"id":"env-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"ProdKafkaCluster","availability":"SINGLE_ZONE","cloud":"GCP","region":"us-east4","config":{"kind":"Basic"},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"n-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/cmk/v2/clusters")
             .post(body)
@@ -565,7 +590,8 @@ paths:
           :\\\"ProdKafkaCluster\\\",\\\"availability\\\":\\\"SINGLE_ZONE\\\",\\\"\
           cloud\\\":\\\"GCP\\\",\\\"region\\\":\\\"us-east4\\\",\\\"config\\\":{\\\
           \"kind\\\":\\\"Basic\\\"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
-          \",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
+          \",\\\"environment\\\":\\\"string\\\"},\\\"network\\\":{\\\"id\\\":\\\"\
+          n-00000\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
           POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
           )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
           \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
@@ -577,7 +603,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -625,7 +651,8 @@ paths:
               cloud: 'GCP',
               region: 'us-east4',
               config: {kind: 'Basic'},
-              environment: {id: 'env-00000', environment: 'string'}
+              environment: {id: 'env-00000', environment: 'string'},
+              network: {id: 'n-00000', environment: 'string'}
             }
           }));
           req.end();
@@ -641,7 +668,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -650,7 +677,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /cmk/v2/clusters/{id}:
     delete:
@@ -955,6 +982,11 @@ paths:
                             id: env-00000
                             related: https://api.confluent.cloud/v2/environments/env-00000
                             resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
+                        network:
+                          example:
+                            id: n-00000
+                            related: https://api.confluent.cloud/networking/v1/networks/n-00000
+                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000
                       type: object
                   type: object
           description: Cluster.
@@ -1243,6 +1275,11 @@ paths:
                             id: env-00000
                             related: https://api.confluent.cloud/v2/environments/env-00000
                             resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
+                        network:
+                          example:
+                            id: n-00000
+                            related: https://api.confluent.cloud/networking/v1/networks/n-00000
+                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000
                       type: object
                   type: object
           description: Cluster.
@@ -1409,13 +1446,13 @@ paths:
             --url 'https://api.confluent.cloud/cmk/v2/clusters/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"ProdKafkaCluster","availability":"SINGLE_ZONE","cloud":"GCP","region":"us-east4","config":{"kind":"Basic"},"environment":{"id":"env-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"ProdKafkaCluster","availability":"SINGLE_ZONE","cloud":"GCP","region":"us-east4","config":{"kind":"Basic"},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"string","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/cmk/v2/clusters/{id}")
             .patch(body)
@@ -1431,7 +1468,8 @@ paths:
           :\\\"ProdKafkaCluster\\\",\\\"availability\\\":\\\"SINGLE_ZONE\\\",\\\"\
           cloud\\\":\\\"GCP\\\",\\\"region\\\":\\\"us-east4\\\",\\\"config\\\":{\\\
           \"kind\\\":\\\"Basic\\\"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
-          \",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
+          \",\\\"environment\\\":\\\"string\\\"},\\\"network\\\":{\\\"id\\\":\\\"\
+          string\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
           PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
           )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
           \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
@@ -1443,7 +1481,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -1491,7 +1529,8 @@ paths:
               cloud: 'GCP',
               region: 'us-east4',
               config: {kind: 'Basic'},
-              environment: {id: 'env-00000', environment: 'string'}
+              environment: {id: 'env-00000', environment: 'string'},
+              network: {id: 'string', environment: 'string'}
             }
           }));
           req.end();
@@ -1507,7 +1546,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1516,7 +1555,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
 components:
   responses:
@@ -1782,6 +1821,8 @@ components:
         The basic cluster type.
       properties:
         kind:
+          description: |
+            Basic cluster type.
           enum:
           - Basic
           type: string
@@ -1793,6 +1834,8 @@ components:
         The standard cluster type.
       properties:
         kind:
+          description: |
+            Standard cluster type.
           enum:
           - Standard
           type: string
@@ -1815,6 +1858,34 @@ components:
           description: |
             The number of Confluent Kafka Units (CKUs) for Dedicated cluster types.
             MULTI_ZONE dedicated clusters must have at least two CKUs.
+        encryption_key:
+          description: |
+            The id of the encryption key that is used to encrypt the data in the Kafka cluster.
+            (e.g. for Amazon Web Services, the Amazon Resource Name of the key).
+          example: arn:aws:kms:us-west-2:000000000000:key/0000xxxx-00xx-00xx-00xx-0000000000xx
+          type: string
+          x-immutable: true
+        zones:
+          description: |
+            The list of zones the cluster is in.
+
+            On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)
+             (e.g. use1-az3)
+
+            On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)
+             (e.g. us-central1-c).
+          example:
+          - us-central1-a
+          - us-central1-b
+          - us-central1-c
+          items:
+            type: string
+          maxItems: 3
+          minItems: 1
+          readOnly: true
+          type: array
+          uniqueItems: true
+          x-immutable: true
       required:
       - cku
       - kind
@@ -1822,6 +1893,11 @@ components:
     SearchFilter:
       description: Filter a collection by a string search
       type: string
+    MultipleSearchFilter:
+      description: Filter a collection by a string search for one or more values
+      items:
+        type: string
+      type: array
     cmk.v2.ClusterList:
       description: |-
         `Clusters` objects represent Apache Kafka Clusters on Confluent Cloud.
@@ -1962,6 +2038,11 @@ components:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
           description: The environment to which this belongs.
+        network:
+          allOf:
+          - $ref: '#/components/schemas/ObjectReference'
+          description: The network associated with this object.
+          x-immutable: true
       type: object
       x-enable-id: true
       x-enable-listmeta: true

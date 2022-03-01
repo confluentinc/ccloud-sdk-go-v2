@@ -51,6 +51,8 @@ type CmkV2ClusterSpec struct {
 	HttpEndpoint *string `json:"http_endpoint,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
+	// The network associated with this object.
+	Network *ObjectReference `json:"network,omitempty"`
 }
 
 // NewCmkV2ClusterSpec instantiates a new CmkV2ClusterSpec object
@@ -330,6 +332,38 @@ func (o *CmkV2ClusterSpec) SetEnvironment(v ObjectReference) {
 	o.Environment = &v
 }
 
+// GetNetwork returns the Network field value if set, zero value otherwise.
+func (o *CmkV2ClusterSpec) GetNetwork() ObjectReference {
+	if o == nil || o.Network == nil {
+		var ret ObjectReference
+		return ret
+	}
+	return *o.Network
+}
+
+// GetNetworkOk returns a tuple with the Network field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CmkV2ClusterSpec) GetNetworkOk() (*ObjectReference, bool) {
+	if o == nil || o.Network == nil {
+		return nil, false
+	}
+	return o.Network, true
+}
+
+// HasNetwork returns a boolean if a field has been set.
+func (o *CmkV2ClusterSpec) HasNetwork() bool {
+	if o != nil && o.Network != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNetwork gets a reference to the given ObjectReference and assigns it to the Network field.
+func (o *CmkV2ClusterSpec) SetNetwork(v ObjectReference) {
+	o.Network = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *CmkV2ClusterSpec) Redact() {
     o.recurseRedact(o.DisplayName)
@@ -340,6 +374,7 @@ func (o *CmkV2ClusterSpec) Redact() {
     o.recurseRedact(o.KafkaBootstrapEndpoint)
     o.recurseRedact(o.HttpEndpoint)
     o.recurseRedact(o.Environment)
+    o.recurseRedact(o.Network)
 }
 
 func (o *CmkV2ClusterSpec) recurseRedact(v interface{}) {
@@ -397,6 +432,9 @@ func (o CmkV2ClusterSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
+	}
+	if o.Network != nil {
+		toSerialize["network"] = o.Network
 	}
 	return json.Marshal(toSerialize)
 }

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | **string** |  | 
+**Kind** | **string** | Basic cluster type.  | 
 
 ## Methods
 
