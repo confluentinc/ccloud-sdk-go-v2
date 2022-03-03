@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | ID of the referred resource | 
 **Environment** | Pointer to **string** | Environment of the referred resource, if env-scoped | [optional] 
-**Related** | Pointer to **string** | API URL for accessing or modifying the referred object | [optional] [readonly] 
-**ResourceName** | Pointer to **string** | CRN reference to the referred resource | [optional] [readonly] 
+**Related** | **string** | API URL for accessing or modifying the referred object | [readonly] 
+**ResourceName** | **string** | CRN reference to the referred resource | [readonly] 
 **ApiVersion** | Pointer to **string** | API group and version of the referred resource | [optional] [readonly] 
 **Kind** | Pointer to **string** | Kind of the referred resource | [optional] [readonly] 
 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewObjectReference
 
-`func NewObjectReference(id string, ) *ObjectReference`
+`func NewObjectReference(id string, related string, resourceName string, ) *ObjectReference`
 
 NewObjectReference instantiates a new ObjectReference object
 This constructor will assign default values to properties that have it defined,
@@ -94,11 +94,6 @@ and a boolean to check if the value has been set.
 
 SetRelated sets Related field to given value.
 
-### HasRelated
-
-`func (o *ObjectReference) HasRelated() bool`
-
-HasRelated returns a boolean if a field has been set.
 
 ### GetResourceName
 
@@ -119,11 +114,6 @@ and a boolean to check if the value has been set.
 
 SetResourceName sets ResourceName field to given value.
 
-### HasResourceName
-
-`func (o *ObjectReference) HasResourceName() bool`
-
-HasResourceName returns a boolean if a field has been set.
 
 ### GetApiVersion
 

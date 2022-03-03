@@ -8,11 +8,7 @@ Name | Type | Description | Notes
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
-**Secret** | Pointer to **string** | The API key secret. Only provided in &#x60;create&#x60; responses, not in &#x60;get&#x60; or &#x60;list&#x60;. | [optional] [readonly] 
-**DisplayName** | Pointer to **string** | A human readable name for the API key | [optional] 
-**Description** | Pointer to **string** | A human readable description for the API key | [optional] 
-**Owner** | Pointer to [**ObjectReference**](ObjectReference.md) | The owner to which this belongs. The owner can be one of iam.v2.User, iam.v2.ServiceAccount. | [optional] 
-**Resource** | Pointer to [**ObjectReference**](ObjectReference.md) | The resource associated with this object. The resource can be one of cmk.v2.KafkaCluster. | [optional] 
+**Spec** | Pointer to [**IamV2ApiKeySpec**](IamV2ApiKeySpec.md) |  | [optional] 
 
 ## Methods
 
@@ -133,130 +129,30 @@ SetMetadata sets Metadata field to given value.
 
 HasMetadata returns a boolean if a field has been set.
 
-### GetSecret
+### GetSpec
 
-`func (o *IamV2ApiKey) GetSecret() string`
+`func (o *IamV2ApiKey) GetSpec() IamV2ApiKeySpec`
 
-GetSecret returns the Secret field if non-nil, zero value otherwise.
+GetSpec returns the Spec field if non-nil, zero value otherwise.
 
-### GetSecretOk
+### GetSpecOk
 
-`func (o *IamV2ApiKey) GetSecretOk() (*string, bool)`
+`func (o *IamV2ApiKey) GetSpecOk() (*IamV2ApiKeySpec, bool)`
 
-GetSecretOk returns a tuple with the Secret field if it's non-nil, zero value otherwise
+GetSpecOk returns a tuple with the Spec field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSecret
+### SetSpec
 
-`func (o *IamV2ApiKey) SetSecret(v string)`
+`func (o *IamV2ApiKey) SetSpec(v IamV2ApiKeySpec)`
 
-SetSecret sets Secret field to given value.
+SetSpec sets Spec field to given value.
 
-### HasSecret
+### HasSpec
 
-`func (o *IamV2ApiKey) HasSecret() bool`
+`func (o *IamV2ApiKey) HasSpec() bool`
 
-HasSecret returns a boolean if a field has been set.
-
-### GetDisplayName
-
-`func (o *IamV2ApiKey) GetDisplayName() string`
-
-GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
-
-### GetDisplayNameOk
-
-`func (o *IamV2ApiKey) GetDisplayNameOk() (*string, bool)`
-
-GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDisplayName
-
-`func (o *IamV2ApiKey) SetDisplayName(v string)`
-
-SetDisplayName sets DisplayName field to given value.
-
-### HasDisplayName
-
-`func (o *IamV2ApiKey) HasDisplayName() bool`
-
-HasDisplayName returns a boolean if a field has been set.
-
-### GetDescription
-
-`func (o *IamV2ApiKey) GetDescription() string`
-
-GetDescription returns the Description field if non-nil, zero value otherwise.
-
-### GetDescriptionOk
-
-`func (o *IamV2ApiKey) GetDescriptionOk() (*string, bool)`
-
-GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDescription
-
-`func (o *IamV2ApiKey) SetDescription(v string)`
-
-SetDescription sets Description field to given value.
-
-### HasDescription
-
-`func (o *IamV2ApiKey) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
-
-### GetOwner
-
-`func (o *IamV2ApiKey) GetOwner() ObjectReference`
-
-GetOwner returns the Owner field if non-nil, zero value otherwise.
-
-### GetOwnerOk
-
-`func (o *IamV2ApiKey) GetOwnerOk() (*ObjectReference, bool)`
-
-GetOwnerOk returns a tuple with the Owner field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOwner
-
-`func (o *IamV2ApiKey) SetOwner(v ObjectReference)`
-
-SetOwner sets Owner field to given value.
-
-### HasOwner
-
-`func (o *IamV2ApiKey) HasOwner() bool`
-
-HasOwner returns a boolean if a field has been set.
-
-### GetResource
-
-`func (o *IamV2ApiKey) GetResource() ObjectReference`
-
-GetResource returns the Resource field if non-nil, zero value otherwise.
-
-### GetResourceOk
-
-`func (o *IamV2ApiKey) GetResourceOk() (*ObjectReference, bool)`
-
-GetResourceOk returns a tuple with the Resource field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResource
-
-`func (o *IamV2ApiKey) SetResource(v ObjectReference)`
-
-SetResource sets Resource field to given value.
-
-### HasResource
-
-`func (o *IamV2ApiKey) HasResource() bool`
-
-HasResource returns a boolean if a field has been set.
+HasSpec returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

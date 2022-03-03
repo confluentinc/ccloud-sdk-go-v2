@@ -29,7 +29,11 @@ import (
 	"encoding/json"
 )
 
-// IamV2ApiKey `ApiKey` objects represent access to different parts of Confluent Cloud. Some types of API keys represent access to a single cluster/resource such as a Kafka cluster or Schema Registry. Cloud API Keys represent access to resources within an organization that are not tied to a specific cluster, such as the Metrics API or Connect API.  The `ApiKey` resource specifically represents API keys for Users, rather than Service Accounts. Please see the `ServiceAccountKey` API reference on this page to see how to manage API keys for Service Accounts.  The API allows you to list, create, and delete your API Keys.   Related guide: [API Keys in Confluent Cloud](https://docs.confluent.io/cloud/current/client-apps/api-keys.html).  ## The Api Keys Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.ApiKey\" />
+import (
+	"reflect"
+)
+
+// IamV2ApiKey `ApiKey` objects represent access to different parts of Confluent Cloud. Some types of API keys represent access to a single cluster/resource such as a Kafka cluster or Schema Registry. Cloud API Keys represent access to resources within an organization that are not tied to a specific cluster, such as the Org API, IAM API, Metrics API or Connect API.  The API allows you to list, create, update and delete your API Keys.   Related guide: [API Keys in Confluent Cloud](https://docs.confluent.io/cloud/current/client-apps/api-keys.html).  ## The API Keys Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.ApiKey\" />
 type IamV2ApiKey struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
@@ -38,16 +42,7 @@ type IamV2ApiKey struct {
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
 	Id *string `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
-	// The API key secret. Only provided in `create` responses, not in `get` or `list`.
-	Secret *string `json:"secret,omitempty"`
-	// A human readable name for the API key
-	DisplayName *string `json:"display_name,omitempty"`
-	// A human readable description for the API key
-	Description *string `json:"description,omitempty"`
-	// The owner to which this belongs. The owner can be one of iam.v2.User, iam.v2.ServiceAccount.
-	Owner *ObjectReference `json:"owner,omitempty"`
-	// The resource associated with this object. The resource can be one of cmk.v2.KafkaCluster.
-	Resource *ObjectReference `json:"resource,omitempty"`
+	Spec *IamV2ApiKeySpec `json:"spec,omitempty"`
 }
 
 // NewIamV2ApiKey instantiates a new IamV2ApiKey object
@@ -195,164 +190,75 @@ func (o *IamV2ApiKey) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
-// GetSecret returns the Secret field value if set, zero value otherwise.
-func (o *IamV2ApiKey) GetSecret() string {
-	if o == nil || o.Secret == nil {
-		var ret string
+// GetSpec returns the Spec field value if set, zero value otherwise.
+func (o *IamV2ApiKey) GetSpec() IamV2ApiKeySpec {
+	if o == nil || o.Spec == nil {
+		var ret IamV2ApiKeySpec
 		return ret
 	}
-	return *o.Secret
+	return *o.Spec
 }
 
-// GetSecretOk returns a tuple with the Secret field value if set, nil otherwise
+// GetSpecOk returns a tuple with the Spec field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IamV2ApiKey) GetSecretOk() (*string, bool) {
-	if o == nil || o.Secret == nil {
+func (o *IamV2ApiKey) GetSpecOk() (*IamV2ApiKeySpec, bool) {
+	if o == nil || o.Spec == nil {
 		return nil, false
 	}
-	return o.Secret, true
+	return o.Spec, true
 }
 
-// HasSecret returns a boolean if a field has been set.
-func (o *IamV2ApiKey) HasSecret() bool {
-	if o != nil && o.Secret != nil {
+// HasSpec returns a boolean if a field has been set.
+func (o *IamV2ApiKey) HasSpec() bool {
+	if o != nil && o.Spec != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetSecret gets a reference to the given string and assigns it to the Secret field.
-func (o *IamV2ApiKey) SetSecret(v string) {
-	o.Secret = &v
+// SetSpec gets a reference to the given IamV2ApiKeySpec and assigns it to the Spec field.
+func (o *IamV2ApiKey) SetSpec(v IamV2ApiKeySpec) {
+	o.Spec = &v
 }
 
-// GetDisplayName returns the DisplayName field value if set, zero value otherwise.
-func (o *IamV2ApiKey) GetDisplayName() string {
-	if o == nil || o.DisplayName == nil {
-		var ret string
-		return ret
-	}
-	return *o.DisplayName
+// Redact resets all sensitive fields to their zero value.
+func (o *IamV2ApiKey) Redact() {
+    o.recurseRedact(o.ApiVersion)
+    o.recurseRedact(o.Kind)
+    o.recurseRedact(o.Id)
+    o.recurseRedact(o.Metadata)
+    o.recurseRedact(o.Spec)
 }
 
-// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IamV2ApiKey) GetDisplayNameOk() (*string, bool) {
-	if o == nil || o.DisplayName == nil {
-		return nil, false
-	}
-	return o.DisplayName, true
+func (o *IamV2ApiKey) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
 }
 
-// HasDisplayName returns a boolean if a field has been set.
-func (o *IamV2ApiKey) HasDisplayName() bool {
-	if o != nil && o.DisplayName != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
-func (o *IamV2ApiKey) SetDisplayName(v string) {
-	o.DisplayName = &v
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise.
-func (o *IamV2ApiKey) GetDescription() string {
-	if o == nil || o.Description == nil {
-		var ret string
-		return ret
-	}
-	return *o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IamV2ApiKey) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
-	}
-	return o.Description, true
-}
-
-// HasDescription returns a boolean if a field has been set.
-func (o *IamV2ApiKey) HasDescription() bool {
-	if o != nil && o.Description != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *IamV2ApiKey) SetDescription(v string) {
-	o.Description = &v
-}
-
-// GetOwner returns the Owner field value if set, zero value otherwise.
-func (o *IamV2ApiKey) GetOwner() ObjectReference {
-	if o == nil || o.Owner == nil {
-		var ret ObjectReference
-		return ret
-	}
-	return *o.Owner
-}
-
-// GetOwnerOk returns a tuple with the Owner field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IamV2ApiKey) GetOwnerOk() (*ObjectReference, bool) {
-	if o == nil || o.Owner == nil {
-		return nil, false
-	}
-	return o.Owner, true
-}
-
-// HasOwner returns a boolean if a field has been set.
-func (o *IamV2ApiKey) HasOwner() bool {
-	if o != nil && o.Owner != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetOwner gets a reference to the given ObjectReference and assigns it to the Owner field.
-func (o *IamV2ApiKey) SetOwner(v ObjectReference) {
-	o.Owner = &v
-}
-
-// GetResource returns the Resource field value if set, zero value otherwise.
-func (o *IamV2ApiKey) GetResource() ObjectReference {
-	if o == nil || o.Resource == nil {
-		var ret ObjectReference
-		return ret
-	}
-	return *o.Resource
-}
-
-// GetResourceOk returns a tuple with the Resource field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IamV2ApiKey) GetResourceOk() (*ObjectReference, bool) {
-	if o == nil || o.Resource == nil {
-		return nil, false
-	}
-	return o.Resource, true
-}
-
-// HasResource returns a boolean if a field has been set.
-func (o *IamV2ApiKey) HasResource() bool {
-	if o != nil && o.Resource != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetResource gets a reference to the given ObjectReference and assigns it to the Resource field.
-func (o *IamV2ApiKey) SetResource(v ObjectReference) {
-	o.Resource = &v
+func (o IamV2ApiKey) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o IamV2ApiKey) MarshalJSON() ([]byte, error) {
@@ -369,20 +275,8 @@ func (o IamV2ApiKey) MarshalJSON() ([]byte, error) {
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if o.Secret != nil {
-		toSerialize["secret"] = o.Secret
-	}
-	if o.DisplayName != nil {
-		toSerialize["display_name"] = o.DisplayName
-	}
-	if o.Description != nil {
-		toSerialize["description"] = o.Description
-	}
-	if o.Owner != nil {
-		toSerialize["owner"] = o.Owner
-	}
-	if o.Resource != nil {
-		toSerialize["resource"] = o.Resource
+	if o.Spec != nil {
+		toSerialize["spec"] = o.Spec
 	}
 	return json.Marshal(toSerialize)
 }

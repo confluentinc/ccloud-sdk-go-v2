@@ -79,11 +79,11 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ApiKeysIamV2Api* | [**CreateIamV2ApiKey**](docs/ApiKeysIamV2Api.md#createiamv2apikey) | **Post** /iam/v2/api-keys | Create an Api Key
-*ApiKeysIamV2Api* | [**DeleteIamV2ApiKey**](docs/ApiKeysIamV2Api.md#deleteiamv2apikey) | **Delete** /iam/v2/api-keys/{id} | Delete an Api Key
-*ApiKeysIamV2Api* | [**GetIamV2ApiKey**](docs/ApiKeysIamV2Api.md#getiamv2apikey) | **Get** /iam/v2/api-keys/{id} | Read an Api Key
-*ApiKeysIamV2Api* | [**ListIamV2ApiKeys**](docs/ApiKeysIamV2Api.md#listiamv2apikeys) | **Get** /iam/v2/api-keys | List of Api Keys
-*ApiKeysIamV2Api* | [**UpdateIamV2ApiKey**](docs/ApiKeysIamV2Api.md#updateiamv2apikey) | **Patch** /iam/v2/api-keys/{id} | Update an Api Key
+*APIKeysIamV2Api* | [**CreateIamV2ApiKey**](docs/APIKeysIamV2Api.md#createiamv2apikey) | **Post** /iam/v2/api-keys | Create an API Key
+*APIKeysIamV2Api* | [**DeleteIamV2ApiKey**](docs/APIKeysIamV2Api.md#deleteiamv2apikey) | **Delete** /iam/v2/api-keys/{id} | Delete an API Key
+*APIKeysIamV2Api* | [**GetIamV2ApiKey**](docs/APIKeysIamV2Api.md#getiamv2apikey) | **Get** /iam/v2/api-keys/{id} | Read an API Key
+*APIKeysIamV2Api* | [**ListIamV2ApiKeys**](docs/APIKeysIamV2Api.md#listiamv2apikeys) | **Get** /iam/v2/api-keys | List of API Keys
+*APIKeysIamV2Api* | [**UpdateIamV2ApiKey**](docs/APIKeysIamV2Api.md#updateiamv2apikey) | **Patch** /iam/v2/api-keys/{id} | Update an API Key
 
 
 ## Documentation For Models
@@ -93,6 +93,8 @@ Class | Method | HTTP request | Description
  - [Failure](docs/Failure.md)
  - [IamV2ApiKey](docs/IamV2ApiKey.md)
  - [IamV2ApiKeyList](docs/IamV2ApiKeyList.md)
+ - [IamV2ApiKeySpec](docs/IamV2ApiKeySpec.md)
+ - [IamV2ApiKeySpecUpdate](docs/IamV2ApiKeySpecUpdate.md)
  - [IamV2ApiKeyUpdate](docs/IamV2ApiKeyUpdate.md)
  - [ListMeta](docs/ListMeta.md)
  - [ObjectMeta](docs/ObjectMeta.md)

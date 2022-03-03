@@ -39,12 +39,104 @@ var (
 	_ _context.Context
 )
 
-// ApiKeysIamV2ApiService ApiKeysIamV2Api service
-type ApiKeysIamV2ApiService service
+type APIKeysIamV2Api interface {
+
+	/*
+	CreateIamV2ApiKey Create an API Key
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Make a request to create an API key.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiCreateIamV2ApiKeyRequest
+	*/
+	CreateIamV2ApiKey(ctx _context.Context) ApiCreateIamV2ApiKeyRequest
+
+	// CreateIamV2ApiKeyExecute executes the request
+	//  @return IamV2ApiKey
+	CreateIamV2ApiKeyExecute(r ApiCreateIamV2ApiKeyRequest) (IamV2ApiKey, *_nethttp.Response, error)
+
+	/*
+	DeleteIamV2ApiKey Delete an API Key
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Make a request to delete an API key.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the API key.
+	 @return ApiDeleteIamV2ApiKeyRequest
+	*/
+	DeleteIamV2ApiKey(ctx _context.Context, id string) ApiDeleteIamV2ApiKeyRequest
+
+	// DeleteIamV2ApiKeyExecute executes the request
+	DeleteIamV2ApiKeyExecute(r ApiDeleteIamV2ApiKeyRequest) (*_nethttp.Response, error)
+
+	/*
+	GetIamV2ApiKey Read an API Key
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Make a request to read an API key.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the API key.
+	 @return ApiGetIamV2ApiKeyRequest
+	*/
+	GetIamV2ApiKey(ctx _context.Context, id string) ApiGetIamV2ApiKeyRequest
+
+	// GetIamV2ApiKeyExecute executes the request
+	//  @return IamV2ApiKey
+	GetIamV2ApiKeyExecute(r ApiGetIamV2ApiKeyRequest) (IamV2ApiKey, *_nethttp.Response, error)
+
+	/*
+	ListIamV2ApiKeys List of API Keys
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Retrieve a sorted, filtered, paginated list of all API keys.
+
+This can show all keys for a single owner (across resources - Kafka clusters), or all keys for a single
+resource (across owners). If no `owner` or `resource` filters are specified, returns all API Keys in the
+organization. You will only see the keys that are accessible to the account making the API request.
+
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiListIamV2ApiKeysRequest
+	*/
+	ListIamV2ApiKeys(ctx _context.Context) ApiListIamV2ApiKeysRequest
+
+	// ListIamV2ApiKeysExecute executes the request
+	//  @return IamV2ApiKeyList
+	ListIamV2ApiKeysExecute(r ApiListIamV2ApiKeysRequest) (IamV2ApiKeyList, *_nethttp.Response, error)
+
+	/*
+	UpdateIamV2ApiKey Update an API Key
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Make a request to update an API key.
+
+
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the API key.
+	 @return ApiUpdateIamV2ApiKeyRequest
+	*/
+	UpdateIamV2ApiKey(ctx _context.Context, id string) ApiUpdateIamV2ApiKeyRequest
+
+	// UpdateIamV2ApiKeyExecute executes the request
+	//  @return IamV2ApiKey
+	UpdateIamV2ApiKeyExecute(r ApiUpdateIamV2ApiKeyRequest) (IamV2ApiKey, *_nethttp.Response, error)
+}
+
+// APIKeysIamV2ApiService APIKeysIamV2Api service
+type APIKeysIamV2ApiService service
 
 type ApiCreateIamV2ApiKeyRequest struct {
 	ctx _context.Context
-	ApiService *ApiKeysIamV2ApiService
+	ApiService APIKeysIamV2Api
 	iamV2ApiKey *IamV2ApiKey
 }
 
@@ -58,16 +150,16 @@ func (r ApiCreateIamV2ApiKeyRequest) Execute() (IamV2ApiKey, *_nethttp.Response,
 }
 
 /*
-CreateIamV2ApiKey Create an Api Key
+CreateIamV2ApiKey Create an API Key
 
-[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to create an api key.
+Make a request to create an API key.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamV2ApiKeyRequest
 */
-func (a *ApiKeysIamV2ApiService) CreateIamV2ApiKey(ctx _context.Context) ApiCreateIamV2ApiKeyRequest {
+func (a *APIKeysIamV2ApiService) CreateIamV2ApiKey(ctx _context.Context) ApiCreateIamV2ApiKeyRequest {
 	return ApiCreateIamV2ApiKeyRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -76,7 +168,7 @@ func (a *ApiKeysIamV2ApiService) CreateIamV2ApiKey(ctx _context.Context) ApiCrea
 
 // Execute executes the request
 //  @return IamV2ApiKey
-func (a *ApiKeysIamV2ApiService) CreateIamV2ApiKeyExecute(r ApiCreateIamV2ApiKeyRequest) (IamV2ApiKey, *_nethttp.Response, error) {
+func (a *APIKeysIamV2ApiService) CreateIamV2ApiKeyExecute(r ApiCreateIamV2ApiKeyRequest) (IamV2ApiKey, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -86,7 +178,7 @@ func (a *ApiKeysIamV2ApiService) CreateIamV2ApiKeyExecute(r ApiCreateIamV2ApiKey
 		localVarReturnValue  IamV2ApiKey
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApiKeysIamV2ApiService.CreateIamV2ApiKey")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "APIKeysIamV2ApiService.CreateIamV2ApiKey")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -178,6 +270,16 @@ func (a *ApiKeysIamV2ApiService) CreateIamV2ApiKeyExecute(r ApiCreateIamV2ApiKey
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -204,7 +306,7 @@ func (a *ApiKeysIamV2ApiService) CreateIamV2ApiKeyExecute(r ApiCreateIamV2ApiKey
 
 type ApiDeleteIamV2ApiKeyRequest struct {
 	ctx _context.Context
-	ApiService *ApiKeysIamV2ApiService
+	ApiService APIKeysIamV2Api
 	id string
 }
 
@@ -214,17 +316,17 @@ func (r ApiDeleteIamV2ApiKeyRequest) Execute() (*_nethttp.Response, error) {
 }
 
 /*
-DeleteIamV2ApiKey Delete an Api Key
+DeleteIamV2ApiKey Delete an API Key
 
-[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to delete an api key.
+Make a request to delete an API key.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the api key.
+ @param id The unique identifier for the API key.
  @return ApiDeleteIamV2ApiKeyRequest
 */
-func (a *ApiKeysIamV2ApiService) DeleteIamV2ApiKey(ctx _context.Context, id string) ApiDeleteIamV2ApiKeyRequest {
+func (a *APIKeysIamV2ApiService) DeleteIamV2ApiKey(ctx _context.Context, id string) ApiDeleteIamV2ApiKeyRequest {
 	return ApiDeleteIamV2ApiKeyRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -233,7 +335,7 @@ func (a *ApiKeysIamV2ApiService) DeleteIamV2ApiKey(ctx _context.Context, id stri
 }
 
 // Execute executes the request
-func (a *ApiKeysIamV2ApiService) DeleteIamV2ApiKeyExecute(r ApiDeleteIamV2ApiKeyRequest) (*_nethttp.Response, error) {
+func (a *APIKeysIamV2ApiService) DeleteIamV2ApiKeyExecute(r ApiDeleteIamV2ApiKeyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
@@ -242,7 +344,7 @@ func (a *ApiKeysIamV2ApiService) DeleteIamV2ApiKeyExecute(r ApiDeleteIamV2ApiKey
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApiKeysIamV2ApiService.DeleteIamV2ApiKey")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "APIKeysIamV2ApiService.DeleteIamV2ApiKey")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -350,7 +452,7 @@ func (a *ApiKeysIamV2ApiService) DeleteIamV2ApiKeyExecute(r ApiDeleteIamV2ApiKey
 
 type ApiGetIamV2ApiKeyRequest struct {
 	ctx _context.Context
-	ApiService *ApiKeysIamV2ApiService
+	ApiService APIKeysIamV2Api
 	id string
 }
 
@@ -360,17 +462,17 @@ func (r ApiGetIamV2ApiKeyRequest) Execute() (IamV2ApiKey, *_nethttp.Response, er
 }
 
 /*
-GetIamV2ApiKey Read an Api Key
+GetIamV2ApiKey Read an API Key
 
-[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to read an api key.
+Make a request to read an API key.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the api key.
+ @param id The unique identifier for the API key.
  @return ApiGetIamV2ApiKeyRequest
 */
-func (a *ApiKeysIamV2ApiService) GetIamV2ApiKey(ctx _context.Context, id string) ApiGetIamV2ApiKeyRequest {
+func (a *APIKeysIamV2ApiService) GetIamV2ApiKey(ctx _context.Context, id string) ApiGetIamV2ApiKeyRequest {
 	return ApiGetIamV2ApiKeyRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -380,7 +482,7 @@ func (a *ApiKeysIamV2ApiService) GetIamV2ApiKey(ctx _context.Context, id string)
 
 // Execute executes the request
 //  @return IamV2ApiKey
-func (a *ApiKeysIamV2ApiService) GetIamV2ApiKeyExecute(r ApiGetIamV2ApiKeyRequest) (IamV2ApiKey, *_nethttp.Response, error) {
+func (a *APIKeysIamV2ApiService) GetIamV2ApiKeyExecute(r ApiGetIamV2ApiKeyRequest) (IamV2ApiKey, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -390,7 +492,7 @@ func (a *ApiKeysIamV2ApiService) GetIamV2ApiKeyExecute(r ApiGetIamV2ApiKeyReques
 		localVarReturnValue  IamV2ApiKey
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApiKeysIamV2ApiService.GetIamV2ApiKey")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "APIKeysIamV2ApiService.GetIamV2ApiKey")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -507,21 +609,21 @@ func (a *ApiKeysIamV2ApiService) GetIamV2ApiKeyExecute(r ApiGetIamV2ApiKeyReques
 
 type ApiListIamV2ApiKeysRequest struct {
 	ctx _context.Context
-	ApiService *ApiKeysIamV2ApiService
-	owner *string
-	resource *string
+	ApiService APIKeysIamV2Api
+	specOwner *string
+	specResource *string
 	pageSize *int32
 	pageToken *string
 }
 
-// Filter the results by exact match for owner.
-func (r ApiListIamV2ApiKeysRequest) Owner(owner string) ApiListIamV2ApiKeysRequest {
-	r.owner = &owner
+// Filter the results by exact match for spec.owner.
+func (r ApiListIamV2ApiKeysRequest) SpecOwner(specOwner string) ApiListIamV2ApiKeysRequest {
+	r.specOwner = &specOwner
 	return r
 }
-// Filter the results by exact match for resource.
-func (r ApiListIamV2ApiKeysRequest) Resource(resource string) ApiListIamV2ApiKeysRequest {
-	r.resource = &resource
+// Filter the results by exact match for spec.resource.
+func (r ApiListIamV2ApiKeysRequest) SpecResource(specResource string) ApiListIamV2ApiKeysRequest {
+	r.specResource = &specResource
 	return r
 }
 // A pagination size for collection requests.
@@ -540,11 +642,11 @@ func (r ApiListIamV2ApiKeysRequest) Execute() (IamV2ApiKeyList, *_nethttp.Respon
 }
 
 /*
-ListIamV2ApiKeys List of Api Keys
+ListIamV2ApiKeys List of API Keys
 
-[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Retrieve a sorted, filtered, paginated list of all api keys.
+Retrieve a sorted, filtered, paginated list of all API keys.
 
 This can show all keys for a single owner (across resources - Kafka clusters), or all keys for a single
 resource (across owners). If no `owner` or `resource` filters are specified, returns all API Keys in the
@@ -554,7 +656,7 @@ organization. You will only see the keys that are accessible to the account maki
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiListIamV2ApiKeysRequest
 */
-func (a *ApiKeysIamV2ApiService) ListIamV2ApiKeys(ctx _context.Context) ApiListIamV2ApiKeysRequest {
+func (a *APIKeysIamV2ApiService) ListIamV2ApiKeys(ctx _context.Context) ApiListIamV2ApiKeysRequest {
 	return ApiListIamV2ApiKeysRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -563,7 +665,7 @@ func (a *ApiKeysIamV2ApiService) ListIamV2ApiKeys(ctx _context.Context) ApiListI
 
 // Execute executes the request
 //  @return IamV2ApiKeyList
-func (a *ApiKeysIamV2ApiService) ListIamV2ApiKeysExecute(r ApiListIamV2ApiKeysRequest) (IamV2ApiKeyList, *_nethttp.Response, error) {
+func (a *APIKeysIamV2ApiService) ListIamV2ApiKeysExecute(r ApiListIamV2ApiKeysRequest) (IamV2ApiKeyList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -573,7 +675,7 @@ func (a *ApiKeysIamV2ApiService) ListIamV2ApiKeysExecute(r ApiListIamV2ApiKeysRe
 		localVarReturnValue  IamV2ApiKeyList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApiKeysIamV2ApiService.ListIamV2ApiKeys")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "APIKeysIamV2ApiService.ListIamV2ApiKeys")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -584,11 +686,11 @@ func (a *ApiKeysIamV2ApiService) ListIamV2ApiKeysExecute(r ApiListIamV2ApiKeysRe
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
-	if r.owner != nil {
-		localVarQueryParams.Add("owner", parameterToString(*r.owner, ""))
+	if r.specOwner != nil {
+		localVarQueryParams.Add("spec.owner", parameterToString(*r.specOwner, ""))
 	}
-	if r.resource != nil {
-		localVarQueryParams.Add("resource", parameterToString(*r.resource, ""))
+	if r.specResource != nil {
+		localVarQueryParams.Add("spec.resource", parameterToString(*r.specResource, ""))
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
@@ -691,7 +793,7 @@ func (a *ApiKeysIamV2ApiService) ListIamV2ApiKeysExecute(r ApiListIamV2ApiKeysRe
 
 type ApiUpdateIamV2ApiKeyRequest struct {
 	ctx _context.Context
-	ApiService *ApiKeysIamV2ApiService
+	ApiService APIKeysIamV2Api
 	id string
 	iamV2ApiKeyUpdate *IamV2ApiKeyUpdate
 }
@@ -706,19 +808,19 @@ func (r ApiUpdateIamV2ApiKeyRequest) Execute() (IamV2ApiKey, *_nethttp.Response,
 }
 
 /*
-UpdateIamV2ApiKey Update an Api Key
+UpdateIamV2ApiKey Update an API Key
 
-[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to update an api key.
+Make a request to update an API key.
 
 
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the api key.
+ @param id The unique identifier for the API key.
  @return ApiUpdateIamV2ApiKeyRequest
 */
-func (a *ApiKeysIamV2ApiService) UpdateIamV2ApiKey(ctx _context.Context, id string) ApiUpdateIamV2ApiKeyRequest {
+func (a *APIKeysIamV2ApiService) UpdateIamV2ApiKey(ctx _context.Context, id string) ApiUpdateIamV2ApiKeyRequest {
 	return ApiUpdateIamV2ApiKeyRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -728,7 +830,7 @@ func (a *ApiKeysIamV2ApiService) UpdateIamV2ApiKey(ctx _context.Context, id stri
 
 // Execute executes the request
 //  @return IamV2ApiKey
-func (a *ApiKeysIamV2ApiService) UpdateIamV2ApiKeyExecute(r ApiUpdateIamV2ApiKeyRequest) (IamV2ApiKey, *_nethttp.Response, error) {
+func (a *APIKeysIamV2ApiService) UpdateIamV2ApiKeyExecute(r ApiUpdateIamV2ApiKeyRequest) (IamV2ApiKey, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
@@ -738,7 +840,7 @@ func (a *ApiKeysIamV2ApiService) UpdateIamV2ApiKeyExecute(r ApiUpdateIamV2ApiKey
 		localVarReturnValue  IamV2ApiKey
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApiKeysIamV2ApiService.UpdateIamV2ApiKey")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "APIKeysIamV2ApiService.UpdateIamV2ApiKey")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -822,6 +924,16 @@ func (a *ApiKeysIamV2ApiService) UpdateIamV2ApiKeyExecute(r ApiUpdateIamV2ApiKey
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

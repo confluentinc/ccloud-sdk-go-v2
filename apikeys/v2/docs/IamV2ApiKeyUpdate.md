@@ -8,9 +8,7 @@ Name | Type | Description | Notes
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
-**Secret** | Pointer to **string** | The API key secret. Only provided in &#x60;create&#x60; responses, not in &#x60;get&#x60; or &#x60;list&#x60;. | [optional] [readonly] 
-**DisplayName** | Pointer to **string** | A human readable name for the API key | [optional] 
-**Description** | Pointer to **string** | A human readable description for the API key | [optional] 
+**Spec** | Pointer to [**IamV2ApiKeySpecUpdate**](IamV2ApiKeySpecUpdate.md) |  | [optional] 
 
 ## Methods
 
@@ -131,80 +129,30 @@ SetMetadata sets Metadata field to given value.
 
 HasMetadata returns a boolean if a field has been set.
 
-### GetSecret
+### GetSpec
 
-`func (o *IamV2ApiKeyUpdate) GetSecret() string`
+`func (o *IamV2ApiKeyUpdate) GetSpec() IamV2ApiKeySpecUpdate`
 
-GetSecret returns the Secret field if non-nil, zero value otherwise.
+GetSpec returns the Spec field if non-nil, zero value otherwise.
 
-### GetSecretOk
+### GetSpecOk
 
-`func (o *IamV2ApiKeyUpdate) GetSecretOk() (*string, bool)`
+`func (o *IamV2ApiKeyUpdate) GetSpecOk() (*IamV2ApiKeySpecUpdate, bool)`
 
-GetSecretOk returns a tuple with the Secret field if it's non-nil, zero value otherwise
+GetSpecOk returns a tuple with the Spec field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSecret
+### SetSpec
 
-`func (o *IamV2ApiKeyUpdate) SetSecret(v string)`
+`func (o *IamV2ApiKeyUpdate) SetSpec(v IamV2ApiKeySpecUpdate)`
 
-SetSecret sets Secret field to given value.
+SetSpec sets Spec field to given value.
 
-### HasSecret
+### HasSpec
 
-`func (o *IamV2ApiKeyUpdate) HasSecret() bool`
+`func (o *IamV2ApiKeyUpdate) HasSpec() bool`
 
-HasSecret returns a boolean if a field has been set.
-
-### GetDisplayName
-
-`func (o *IamV2ApiKeyUpdate) GetDisplayName() string`
-
-GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
-
-### GetDisplayNameOk
-
-`func (o *IamV2ApiKeyUpdate) GetDisplayNameOk() (*string, bool)`
-
-GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDisplayName
-
-`func (o *IamV2ApiKeyUpdate) SetDisplayName(v string)`
-
-SetDisplayName sets DisplayName field to given value.
-
-### HasDisplayName
-
-`func (o *IamV2ApiKeyUpdate) HasDisplayName() bool`
-
-HasDisplayName returns a boolean if a field has been set.
-
-### GetDescription
-
-`func (o *IamV2ApiKeyUpdate) GetDescription() string`
-
-GetDescription returns the Description field if non-nil, zero value otherwise.
-
-### GetDescriptionOk
-
-`func (o *IamV2ApiKeyUpdate) GetDescriptionOk() (*string, bool)`
-
-GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDescription
-
-`func (o *IamV2ApiKeyUpdate) SetDescription(v string)`
-
-SetDescription sets Description field to given value.
-
-### HasDescription
-
-`func (o *IamV2ApiKeyUpdate) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
+HasSpec returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

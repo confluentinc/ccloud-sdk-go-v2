@@ -29,7 +29,11 @@ import (
 	"encoding/json"
 )
 
-// IamV2ApiKeyList `ApiKey` objects represent access to different parts of Confluent Cloud. Some types of API keys represent access to a single cluster/resource such as a Kafka cluster or Schema Registry. Cloud API Keys represent access to resources within an organization that are not tied to a specific cluster, such as the Metrics API or Connect API.  The `ApiKey` resource specifically represents API keys for Users, rather than Service Accounts. Please see the `ServiceAccountKey` API reference on this page to see how to manage API keys for Service Accounts.  The API allows you to list, create, and delete your API Keys.   Related guide: [API Keys in Confluent Cloud](https://docs.confluent.io/cloud/current/client-apps/api-keys.html).  ## The Api Keys Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.ApiKey\" />
+import (
+	"reflect"
+)
+
+// IamV2ApiKeyList `ApiKey` objects represent access to different parts of Confluent Cloud. Some types of API keys represent access to a single cluster/resource such as a Kafka cluster or Schema Registry. Cloud API Keys represent access to resources within an organization that are not tied to a specific cluster, such as the Org API, IAM API, Metrics API or Connect API.  The API allows you to list, create, update and delete your API Keys.   Related guide: [API Keys in Confluent Cloud](https://docs.confluent.io/cloud/current/client-apps/api-keys.html).  ## The API Keys Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.ApiKey\" />
 type IamV2ApiKeyList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version"`
@@ -155,6 +159,44 @@ func (o *IamV2ApiKeyList) GetDataOk() (*[]IamV2ApiKey, bool) {
 // SetData sets field value
 func (o *IamV2ApiKeyList) SetData(v []IamV2ApiKey) {
 	o.Data = v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *IamV2ApiKeyList) Redact() {
+    o.recurseRedact(&o.ApiVersion)
+    o.recurseRedact(&o.Kind)
+    o.recurseRedact(&o.Metadata)
+    o.recurseRedact(&o.Data)
+}
+
+func (o *IamV2ApiKeyList) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o IamV2ApiKeyList) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o IamV2ApiKeyList) MarshalJSON() ([]byte, error) {

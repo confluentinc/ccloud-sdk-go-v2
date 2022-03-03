@@ -29,6 +29,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // ObjectReference ObjectReference provides information for you to locate the referred object
 type ObjectReference struct {
 	// ID of the referred resource
@@ -36,9 +40,9 @@ type ObjectReference struct {
 	// Environment of the referred resource, if env-scoped
 	Environment *string `json:"environment,omitempty"`
 	// API URL for accessing or modifying the referred object
-	Related *string `json:"related,omitempty"`
+	Related string `json:"related"`
 	// CRN reference to the referred resource
-	ResourceName *string `json:"resource_name,omitempty"`
+	ResourceName string `json:"resource_name"`
 	// API group and version of the referred resource
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind of the referred resource
@@ -49,9 +53,11 @@ type ObjectReference struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewObjectReference(id string) *ObjectReference {
+func NewObjectReference(id string, related string, resourceName string) *ObjectReference {
 	this := ObjectReference{}
 	this.Id = id
+	this.Related = related
+	this.ResourceName = resourceName
 	return &this
 }
 
@@ -119,68 +125,52 @@ func (o *ObjectReference) SetEnvironment(v string) {
 	o.Environment = &v
 }
 
-// GetRelated returns the Related field value if set, zero value otherwise.
+// GetRelated returns the Related field value
 func (o *ObjectReference) GetRelated() string {
-	if o == nil || o.Related == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Related
+
+	return o.Related
 }
 
-// GetRelatedOk returns a tuple with the Related field value if set, nil otherwise
+// GetRelatedOk returns a tuple with the Related field value
 // and a boolean to check if the value has been set.
 func (o *ObjectReference) GetRelatedOk() (*string, bool) {
-	if o == nil || o.Related == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Related, true
+	return &o.Related, true
 }
 
-// HasRelated returns a boolean if a field has been set.
-func (o *ObjectReference) HasRelated() bool {
-	if o != nil && o.Related != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetRelated gets a reference to the given string and assigns it to the Related field.
+// SetRelated sets field value
 func (o *ObjectReference) SetRelated(v string) {
-	o.Related = &v
+	o.Related = v
 }
 
-// GetResourceName returns the ResourceName field value if set, zero value otherwise.
+// GetResourceName returns the ResourceName field value
 func (o *ObjectReference) GetResourceName() string {
-	if o == nil || o.ResourceName == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ResourceName
+
+	return o.ResourceName
 }
 
-// GetResourceNameOk returns a tuple with the ResourceName field value if set, nil otherwise
+// GetResourceNameOk returns a tuple with the ResourceName field value
 // and a boolean to check if the value has been set.
 func (o *ObjectReference) GetResourceNameOk() (*string, bool) {
-	if o == nil || o.ResourceName == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.ResourceName, true
+	return &o.ResourceName, true
 }
 
-// HasResourceName returns a boolean if a field has been set.
-func (o *ObjectReference) HasResourceName() bool {
-	if o != nil && o.ResourceName != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetResourceName gets a reference to the given string and assigns it to the ResourceName field.
+// SetResourceName sets field value
 func (o *ObjectReference) SetResourceName(v string) {
-	o.ResourceName = &v
+	o.ResourceName = v
 }
 
 // GetApiVersion returns the ApiVersion field value if set, zero value otherwise.
@@ -247,6 +237,46 @@ func (o *ObjectReference) SetKind(v string) {
 	o.Kind = &v
 }
 
+// Redact resets all sensitive fields to their zero value.
+func (o *ObjectReference) Redact() {
+    o.recurseRedact(&o.Id)
+    o.recurseRedact(o.Environment)
+    o.recurseRedact(&o.Related)
+    o.recurseRedact(&o.ResourceName)
+    o.recurseRedact(o.ApiVersion)
+    o.recurseRedact(o.Kind)
+}
+
+func (o *ObjectReference) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o ObjectReference) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
+}
+
 func (o ObjectReference) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -255,10 +285,10 @@ func (o ObjectReference) MarshalJSON() ([]byte, error) {
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
 	}
-	if o.Related != nil {
+	if true {
 		toSerialize["related"] = o.Related
 	}
-	if o.ResourceName != nil {
+	if true {
 		toSerialize["resource_name"] = o.ResourceName
 	}
 	if o.ApiVersion != nil {
