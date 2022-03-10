@@ -35,22 +35,22 @@ import (
 
 // ListMirrorTopicsResponseData struct for ListMirrorTopicsResponseData
 type ListMirrorTopicsResponseData struct {
-	Kind string `json:"kind"`
-	Metadata ResourceMetadata `json:"metadata"`
-	LinkName string `json:"link_name"`
-	MirrorTopicName string `json:"mirror_topic_name"`
-	SourceTopicName string `json:"source_topic_name"`
-	NumPartitions int32 `json:"num_partitions"`
-	MirrorLags MirrorLags `json:"mirror_lags"`
-	MirrorTopicStatus MirrorTopicStatus `json:"mirror_topic_status"`
-	StateTimeMs int32 `json:"state_time_ms"`
+	Kind            string            `json:"kind"`
+	Metadata        ResourceMetadata  `json:"metadata"`
+	LinkName        string            `json:"link_name"`
+	MirrorTopicName string            `json:"mirror_topic_name"`
+	SourceTopicName string            `json:"source_topic_name"`
+	NumPartitions   int32             `json:"num_partitions"`
+	MirrorLags      MirrorLags        `json:"mirror_lags"`
+	MirrorStatus    MirrorTopicStatus `json:"mirror_status"`
+	StateTimeMs     int64             `json:"state_time_ms"`
 }
 
 // NewListMirrorTopicsResponseData instantiates a new ListMirrorTopicsResponseData object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListMirrorTopicsResponseData(kind string, metadata ResourceMetadata, linkName string, mirrorTopicName string, sourceTopicName string, numPartitions int32, mirrorLags MirrorLags, mirrorTopicStatus MirrorTopicStatus, stateTimeMs int32) *ListMirrorTopicsResponseData {
+func NewListMirrorTopicsResponseData(kind string, metadata ResourceMetadata, linkName string, mirrorTopicName string, sourceTopicName string, numPartitions int32, mirrorLags MirrorLags, mirrorStatus MirrorTopicStatus, stateTimeMs int64) *ListMirrorTopicsResponseData {
 	this := ListMirrorTopicsResponseData{}
 	this.Kind = kind
 	this.Metadata = metadata
@@ -59,7 +59,7 @@ func NewListMirrorTopicsResponseData(kind string, metadata ResourceMetadata, lin
 	this.SourceTopicName = sourceTopicName
 	this.NumPartitions = numPartitions
 	this.MirrorLags = mirrorLags
-	this.MirrorTopicStatus = mirrorTopicStatus
+	this.MirrorStatus = mirrorStatus
 	this.StateTimeMs = stateTimeMs
 	return &this
 }
@@ -85,7 +85,7 @@ func (o *ListMirrorTopicsResponseData) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *ListMirrorTopicsResponseData) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -109,7 +109,7 @@ func (o *ListMirrorTopicsResponseData) GetMetadata() ResourceMetadata {
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *ListMirrorTopicsResponseData) GetMetadataOk() (*ResourceMetadata, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Metadata, true
@@ -133,7 +133,7 @@ func (o *ListMirrorTopicsResponseData) GetLinkName() string {
 // GetLinkNameOk returns a tuple with the LinkName field value
 // and a boolean to check if the value has been set.
 func (o *ListMirrorTopicsResponseData) GetLinkNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.LinkName, true
@@ -157,7 +157,7 @@ func (o *ListMirrorTopicsResponseData) GetMirrorTopicName() string {
 // GetMirrorTopicNameOk returns a tuple with the MirrorTopicName field value
 // and a boolean to check if the value has been set.
 func (o *ListMirrorTopicsResponseData) GetMirrorTopicNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.MirrorTopicName, true
@@ -181,7 +181,7 @@ func (o *ListMirrorTopicsResponseData) GetSourceTopicName() string {
 // GetSourceTopicNameOk returns a tuple with the SourceTopicName field value
 // and a boolean to check if the value has been set.
 func (o *ListMirrorTopicsResponseData) GetSourceTopicNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.SourceTopicName, true
@@ -205,7 +205,7 @@ func (o *ListMirrorTopicsResponseData) GetNumPartitions() int32 {
 // GetNumPartitionsOk returns a tuple with the NumPartitions field value
 // and a boolean to check if the value has been set.
 func (o *ListMirrorTopicsResponseData) GetNumPartitionsOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.NumPartitions, true
@@ -229,7 +229,7 @@ func (o *ListMirrorTopicsResponseData) GetMirrorLags() MirrorLags {
 // GetMirrorLagsOk returns a tuple with the MirrorLags field value
 // and a boolean to check if the value has been set.
 func (o *ListMirrorTopicsResponseData) GetMirrorLagsOk() (*MirrorLags, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.MirrorLags, true
@@ -240,34 +240,34 @@ func (o *ListMirrorTopicsResponseData) SetMirrorLags(v MirrorLags) {
 	o.MirrorLags = v
 }
 
-// GetMirrorTopicStatus returns the MirrorTopicStatus field value
-func (o *ListMirrorTopicsResponseData) GetMirrorTopicStatus() MirrorTopicStatus {
+// GetMirrorStatus returns the MirrorStatus field value
+func (o *ListMirrorTopicsResponseData) GetMirrorStatus() MirrorTopicStatus {
 	if o == nil {
 		var ret MirrorTopicStatus
 		return ret
 	}
 
-	return o.MirrorTopicStatus
+	return o.MirrorStatus
 }
 
-// GetMirrorTopicStatusOk returns a tuple with the MirrorTopicStatus field value
+// GetMirrorStatusOk returns a tuple with the MirrorStatus field value
 // and a boolean to check if the value has been set.
-func (o *ListMirrorTopicsResponseData) GetMirrorTopicStatusOk() (*MirrorTopicStatus, bool) {
-	if o == nil  {
+func (o *ListMirrorTopicsResponseData) GetMirrorStatusOk() (*MirrorTopicStatus, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return &o.MirrorTopicStatus, true
+	return &o.MirrorStatus, true
 }
 
-// SetMirrorTopicStatus sets field value
-func (o *ListMirrorTopicsResponseData) SetMirrorTopicStatus(v MirrorTopicStatus) {
-	o.MirrorTopicStatus = v
+// SetMirrorStatus sets field value
+func (o *ListMirrorTopicsResponseData) SetMirrorStatus(v MirrorTopicStatus) {
+	o.MirrorStatus = v
 }
 
 // GetStateTimeMs returns the StateTimeMs field value
-func (o *ListMirrorTopicsResponseData) GetStateTimeMs() int32 {
+func (o *ListMirrorTopicsResponseData) GetStateTimeMs() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -276,59 +276,59 @@ func (o *ListMirrorTopicsResponseData) GetStateTimeMs() int32 {
 
 // GetStateTimeMsOk returns a tuple with the StateTimeMs field value
 // and a boolean to check if the value has been set.
-func (o *ListMirrorTopicsResponseData) GetStateTimeMsOk() (*int32, bool) {
-	if o == nil  {
+func (o *ListMirrorTopicsResponseData) GetStateTimeMsOk() (*int64, bool) {
+	if o == nil {
 		return nil, false
 	}
 	return &o.StateTimeMs, true
 }
 
 // SetStateTimeMs sets field value
-func (o *ListMirrorTopicsResponseData) SetStateTimeMs(v int32) {
+func (o *ListMirrorTopicsResponseData) SetStateTimeMs(v int64) {
 	o.StateTimeMs = v
 }
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ListMirrorTopicsResponseData) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Metadata)
-    o.recurseRedact(&o.LinkName)
-    o.recurseRedact(&o.MirrorTopicName)
-    o.recurseRedact(&o.SourceTopicName)
-    o.recurseRedact(&o.NumPartitions)
-    o.recurseRedact(&o.MirrorLags)
-    o.recurseRedact(&o.MirrorTopicStatus)
-    o.recurseRedact(&o.StateTimeMs)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Metadata)
+	o.recurseRedact(&o.LinkName)
+	o.recurseRedact(&o.MirrorTopicName)
+	o.recurseRedact(&o.SourceTopicName)
+	o.recurseRedact(&o.NumPartitions)
+	o.recurseRedact(&o.MirrorLags)
+	o.recurseRedact(&o.MirrorStatus)
+	o.recurseRedact(&o.StateTimeMs)
 }
 
 func (o *ListMirrorTopicsResponseData) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ListMirrorTopicsResponseData) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ListMirrorTopicsResponseData) MarshalJSON() ([]byte, error) {
@@ -355,7 +355,7 @@ func (o ListMirrorTopicsResponseData) MarshalJSON() ([]byte, error) {
 		toSerialize["mirror_lags"] = o.MirrorLags
 	}
 	if true {
-		toSerialize["mirror_topic_status"] = o.MirrorTopicStatus
+		toSerialize["mirror_status"] = o.MirrorStatus
 	}
 	if true {
 		toSerialize["state_time_ms"] = o.StateTimeMs
@@ -398,5 +398,3 @@ func (v *NullableListMirrorTopicsResponseData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -35,9 +35,9 @@ import (
 
 // ListMirrorTopicsResponseDataList struct for ListMirrorTopicsResponseDataList
 type ListMirrorTopicsResponseDataList struct {
-	Kind string `json:"kind"`
-	Metadata ResourceCollectionMetadata `json:"metadata"`
-	Data []ListMirrorTopicsResponseData `json:"data"`
+	Kind     string                         `json:"kind"`
+	Metadata ResourceCollectionMetadata     `json:"metadata"`
+	Data     []ListMirrorTopicsResponseData `json:"data"`
 }
 
 // NewListMirrorTopicsResponseDataList instantiates a new ListMirrorTopicsResponseDataList object
@@ -73,7 +73,7 @@ func (o *ListMirrorTopicsResponseDataList) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *ListMirrorTopicsResponseDataList) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -97,7 +97,7 @@ func (o *ListMirrorTopicsResponseDataList) GetMetadata() ResourceCollectionMetad
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *ListMirrorTopicsResponseDataList) GetMetadataOk() (*ResourceCollectionMetadata, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Metadata, true
@@ -121,7 +121,7 @@ func (o *ListMirrorTopicsResponseDataList) GetData() []ListMirrorTopicsResponseD
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
 func (o *ListMirrorTopicsResponseDataList) GetDataOk() (*[]ListMirrorTopicsResponseData, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Data, true
@@ -134,39 +134,39 @@ func (o *ListMirrorTopicsResponseDataList) SetData(v []ListMirrorTopicsResponseD
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ListMirrorTopicsResponseDataList) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Metadata)
-    o.recurseRedact(&o.Data)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Metadata)
+	o.recurseRedact(&o.Data)
 }
 
 func (o *ListMirrorTopicsResponseDataList) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ListMirrorTopicsResponseDataList) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ListMirrorTopicsResponseDataList) MarshalJSON() ([]byte, error) {
@@ -218,5 +218,3 @@ func (v *NullableListMirrorTopicsResponseDataList) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

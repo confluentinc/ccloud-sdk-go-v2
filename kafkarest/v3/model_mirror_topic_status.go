@@ -35,19 +35,19 @@ type MirrorTopicStatus string
 
 // List of MirrorTopicStatus
 const (
-	ACTIVE MirrorTopicStatus = "active"
-	FAILED MirrorTopicStatus = "failed"
-	PAUSED MirrorTopicStatus = "paused"
-	STOPPED MirrorTopicStatus = "stopped"
-	PENDING_STOPPED MirrorTopicStatus = "pending_stopped"
+	ACTIVE          MirrorTopicStatus = "ACTIVE"
+	FAILED          MirrorTopicStatus = "FAILED"
+	PAUSED          MirrorTopicStatus = "PAUSED"
+	STOPPED         MirrorTopicStatus = "STOPPED"
+	PENDING_STOPPED MirrorTopicStatus = "PENDING_STOPPED"
 )
 
 var allowedMirrorTopicStatusEnumValues = []MirrorTopicStatus{
-	"active",
-	"failed",
-	"paused",
-	"stopped",
-	"pending_stopped",
+	"ACTIVE",
+	"FAILED",
+	"PAUSED",
+	"STOPPED",
+	"PENDING_STOPPED",
 }
 
 func (v *MirrorTopicStatus) UnmarshalJSON(src []byte) error {
@@ -128,4 +128,3 @@ func (v *NullableMirrorTopicStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

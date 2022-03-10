@@ -35,13 +35,13 @@ import (
 
 // AlterBrokerReplicaExclusionDataAllOf struct for AlterBrokerReplicaExclusionDataAllOf
 type AlterBrokerReplicaExclusionDataAllOf struct {
-	ClusterId string `json:"cluster_id"`
-	BrokerId int32 `json:"broker_id"`
-	Exclusion string `json:"exclusion"`
-	Reason string `json:"reason"`
-	ErrorCode NullableInt32 `json:"error_code,omitempty"`
+	ClusterId    string         `json:"cluster_id"`
+	BrokerId     int32          `json:"broker_id"`
+	Exclusion    string         `json:"exclusion"`
+	Reason       string         `json:"reason"`
+	ErrorCode    NullableInt32  `json:"error_code,omitempty"`
 	ErrorMessage NullableString `json:"error_message,omitempty"`
-	Broker Relationship `json:"broker"`
+	Broker       Relationship   `json:"broker"`
 }
 
 // NewAlterBrokerReplicaExclusionDataAllOf instantiates a new AlterBrokerReplicaExclusionDataAllOf object
@@ -79,7 +79,7 @@ func (o *AlterBrokerReplicaExclusionDataAllOf) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *AlterBrokerReplicaExclusionDataAllOf) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -103,7 +103,7 @@ func (o *AlterBrokerReplicaExclusionDataAllOf) GetBrokerId() int32 {
 // GetBrokerIdOk returns a tuple with the BrokerId field value
 // and a boolean to check if the value has been set.
 func (o *AlterBrokerReplicaExclusionDataAllOf) GetBrokerIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.BrokerId, true
@@ -127,7 +127,7 @@ func (o *AlterBrokerReplicaExclusionDataAllOf) GetExclusion() string {
 // GetExclusionOk returns a tuple with the Exclusion field value
 // and a boolean to check if the value has been set.
 func (o *AlterBrokerReplicaExclusionDataAllOf) GetExclusionOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Exclusion, true
@@ -151,7 +151,7 @@ func (o *AlterBrokerReplicaExclusionDataAllOf) GetReason() string {
 // GetReasonOk returns a tuple with the Reason field value
 // and a boolean to check if the value has been set.
 func (o *AlterBrokerReplicaExclusionDataAllOf) GetReasonOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Reason, true
@@ -175,7 +175,7 @@ func (o *AlterBrokerReplicaExclusionDataAllOf) GetErrorCode() int32 {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AlterBrokerReplicaExclusionDataAllOf) GetErrorCodeOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.ErrorCode.Get(), o.ErrorCode.IsSet()
@@ -194,6 +194,7 @@ func (o *AlterBrokerReplicaExclusionDataAllOf) HasErrorCode() bool {
 func (o *AlterBrokerReplicaExclusionDataAllOf) SetErrorCode(v int32) {
 	o.ErrorCode.Set(&v)
 }
+
 // SetErrorCodeNil sets the value for ErrorCode to be an explicit nil
 func (o *AlterBrokerReplicaExclusionDataAllOf) SetErrorCodeNil() {
 	o.ErrorCode.Set(nil)
@@ -217,7 +218,7 @@ func (o *AlterBrokerReplicaExclusionDataAllOf) GetErrorMessage() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AlterBrokerReplicaExclusionDataAllOf) GetErrorMessageOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.ErrorMessage.Get(), o.ErrorMessage.IsSet()
@@ -236,6 +237,7 @@ func (o *AlterBrokerReplicaExclusionDataAllOf) HasErrorMessage() bool {
 func (o *AlterBrokerReplicaExclusionDataAllOf) SetErrorMessage(v string) {
 	o.ErrorMessage.Set(&v)
 }
+
 // SetErrorMessageNil sets the value for ErrorMessage to be an explicit nil
 func (o *AlterBrokerReplicaExclusionDataAllOf) SetErrorMessageNil() {
 	o.ErrorMessage.Set(nil)
@@ -259,7 +261,7 @@ func (o *AlterBrokerReplicaExclusionDataAllOf) GetBroker() Relationship {
 // GetBrokerOk returns a tuple with the Broker field value
 // and a boolean to check if the value has been set.
 func (o *AlterBrokerReplicaExclusionDataAllOf) GetBrokerOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Broker, true
@@ -272,43 +274,43 @@ func (o *AlterBrokerReplicaExclusionDataAllOf) SetBroker(v Relationship) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *AlterBrokerReplicaExclusionDataAllOf) Redact() {
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.BrokerId)
-    o.recurseRedact(&o.Exclusion)
-    o.recurseRedact(&o.Reason)
-    o.recurseRedact(o.ErrorCode)
-    o.recurseRedact(o.ErrorMessage)
-    o.recurseRedact(&o.Broker)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.BrokerId)
+	o.recurseRedact(&o.Exclusion)
+	o.recurseRedact(&o.Reason)
+	o.recurseRedact(o.ErrorCode)
+	o.recurseRedact(o.ErrorMessage)
+	o.recurseRedact(&o.Broker)
 }
 
 func (o *AlterBrokerReplicaExclusionDataAllOf) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o AlterBrokerReplicaExclusionDataAllOf) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o AlterBrokerReplicaExclusionDataAllOf) MarshalJSON() ([]byte, error) {
@@ -372,5 +374,3 @@ func (v *NullableAlterBrokerReplicaExclusionDataAllOf) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -35,16 +35,16 @@ import (
 
 // ListLinkConfigsResponseData struct for ListLinkConfigsResponseData
 type ListLinkConfigsResponseData struct {
-	Kind string `json:"kind"`
-	Metadata ResourceMetadata `json:"metadata"`
-	ClusterId string `json:"cluster_id"`
-	Name string `json:"name"`
-	Value string `json:"value"`
-	ReadOnly bool `json:"read_only"`
-	Sensitive bool `json:"sensitive"`
-	Source string `json:"source"`
-	Synonyms []string `json:"synonyms"`
-	LinkName string `json:"link_name"`
+	Kind      string           `json:"kind"`
+	Metadata  ResourceMetadata `json:"metadata"`
+	ClusterId string           `json:"cluster_id"`
+	Name      string           `json:"name"`
+	Value     string           `json:"value"`
+	ReadOnly  bool             `json:"read_only"`
+	Sensitive bool             `json:"sensitive"`
+	Source    string           `json:"source"`
+	Synonyms  []string         `json:"synonyms"`
+	LinkName  string           `json:"link_name"`
 }
 
 // NewListLinkConfigsResponseData instantiates a new ListLinkConfigsResponseData object
@@ -87,7 +87,7 @@ func (o *ListLinkConfigsResponseData) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *ListLinkConfigsResponseData) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -111,7 +111,7 @@ func (o *ListLinkConfigsResponseData) GetMetadata() ResourceMetadata {
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *ListLinkConfigsResponseData) GetMetadataOk() (*ResourceMetadata, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Metadata, true
@@ -135,7 +135,7 @@ func (o *ListLinkConfigsResponseData) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *ListLinkConfigsResponseData) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -159,7 +159,7 @@ func (o *ListLinkConfigsResponseData) GetName() string {
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *ListLinkConfigsResponseData) GetNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Name, true
@@ -183,7 +183,7 @@ func (o *ListLinkConfigsResponseData) GetValue() string {
 // GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
 func (o *ListLinkConfigsResponseData) GetValueOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Value, true
@@ -207,7 +207,7 @@ func (o *ListLinkConfigsResponseData) GetReadOnly() bool {
 // GetReadOnlyOk returns a tuple with the ReadOnly field value
 // and a boolean to check if the value has been set.
 func (o *ListLinkConfigsResponseData) GetReadOnlyOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ReadOnly, true
@@ -231,7 +231,7 @@ func (o *ListLinkConfigsResponseData) GetSensitive() bool {
 // GetSensitiveOk returns a tuple with the Sensitive field value
 // and a boolean to check if the value has been set.
 func (o *ListLinkConfigsResponseData) GetSensitiveOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Sensitive, true
@@ -255,7 +255,7 @@ func (o *ListLinkConfigsResponseData) GetSource() string {
 // GetSourceOk returns a tuple with the Source field value
 // and a boolean to check if the value has been set.
 func (o *ListLinkConfigsResponseData) GetSourceOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Source, true
@@ -279,7 +279,7 @@ func (o *ListLinkConfigsResponseData) GetSynonyms() []string {
 // GetSynonymsOk returns a tuple with the Synonyms field value
 // and a boolean to check if the value has been set.
 func (o *ListLinkConfigsResponseData) GetSynonymsOk() (*[]string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Synonyms, true
@@ -303,7 +303,7 @@ func (o *ListLinkConfigsResponseData) GetLinkName() string {
 // GetLinkNameOk returns a tuple with the LinkName field value
 // and a boolean to check if the value has been set.
 func (o *ListLinkConfigsResponseData) GetLinkNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.LinkName, true
@@ -316,46 +316,46 @@ func (o *ListLinkConfigsResponseData) SetLinkName(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ListLinkConfigsResponseData) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Metadata)
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.Name)
-    o.recurseRedact(&o.Value)
-    o.recurseRedact(&o.ReadOnly)
-    o.recurseRedact(&o.Sensitive)
-    o.recurseRedact(&o.Source)
-    o.recurseRedact(&o.Synonyms)
-    o.recurseRedact(&o.LinkName)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Metadata)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.Name)
+	o.recurseRedact(&o.Value)
+	o.recurseRedact(&o.ReadOnly)
+	o.recurseRedact(&o.Sensitive)
+	o.recurseRedact(&o.Source)
+	o.recurseRedact(&o.Synonyms)
+	o.recurseRedact(&o.LinkName)
 }
 
 func (o *ListLinkConfigsResponseData) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ListLinkConfigsResponseData) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ListLinkConfigsResponseData) MarshalJSON() ([]byte, error) {
@@ -428,5 +428,3 @@ func (v *NullableListLinkConfigsResponseData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

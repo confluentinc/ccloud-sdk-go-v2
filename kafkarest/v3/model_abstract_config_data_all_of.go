@@ -35,14 +35,14 @@ import (
 
 // AbstractConfigDataAllOf struct for AbstractConfigDataAllOf
 type AbstractConfigDataAllOf struct {
-	ClusterId string `json:"cluster_id"`
-	Name string `json:"name"`
-	Value NullableString `json:"value,omitempty"`
-	IsDefault bool `json:"is_default"`
-	IsReadOnly bool `json:"is_read_only"`
-	IsSensitive bool `json:"is_sensitive"`
-	Source string `json:"source"`
-	Synonyms []ConfigSynonymData `json:"synonyms"`
+	ClusterId   string              `json:"cluster_id"`
+	Name        string              `json:"name"`
+	Value       NullableString      `json:"value,omitempty"`
+	IsDefault   bool                `json:"is_default"`
+	IsReadOnly  bool                `json:"is_read_only"`
+	IsSensitive bool                `json:"is_sensitive"`
+	Source      string              `json:"source"`
+	Synonyms    []ConfigSynonymData `json:"synonyms"`
 }
 
 // NewAbstractConfigDataAllOf instantiates a new AbstractConfigDataAllOf object
@@ -82,7 +82,7 @@ func (o *AbstractConfigDataAllOf) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *AbstractConfigDataAllOf) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -106,7 +106,7 @@ func (o *AbstractConfigDataAllOf) GetName() string {
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *AbstractConfigDataAllOf) GetNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Name, true
@@ -130,7 +130,7 @@ func (o *AbstractConfigDataAllOf) GetValue() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AbstractConfigDataAllOf) GetValueOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Value.Get(), o.Value.IsSet()
@@ -149,6 +149,7 @@ func (o *AbstractConfigDataAllOf) HasValue() bool {
 func (o *AbstractConfigDataAllOf) SetValue(v string) {
 	o.Value.Set(&v)
 }
+
 // SetValueNil sets the value for Value to be an explicit nil
 func (o *AbstractConfigDataAllOf) SetValueNil() {
 	o.Value.Set(nil)
@@ -172,7 +173,7 @@ func (o *AbstractConfigDataAllOf) GetIsDefault() bool {
 // GetIsDefaultOk returns a tuple with the IsDefault field value
 // and a boolean to check if the value has been set.
 func (o *AbstractConfigDataAllOf) GetIsDefaultOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.IsDefault, true
@@ -196,7 +197,7 @@ func (o *AbstractConfigDataAllOf) GetIsReadOnly() bool {
 // GetIsReadOnlyOk returns a tuple with the IsReadOnly field value
 // and a boolean to check if the value has been set.
 func (o *AbstractConfigDataAllOf) GetIsReadOnlyOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.IsReadOnly, true
@@ -220,7 +221,7 @@ func (o *AbstractConfigDataAllOf) GetIsSensitive() bool {
 // GetIsSensitiveOk returns a tuple with the IsSensitive field value
 // and a boolean to check if the value has been set.
 func (o *AbstractConfigDataAllOf) GetIsSensitiveOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.IsSensitive, true
@@ -244,7 +245,7 @@ func (o *AbstractConfigDataAllOf) GetSource() string {
 // GetSourceOk returns a tuple with the Source field value
 // and a boolean to check if the value has been set.
 func (o *AbstractConfigDataAllOf) GetSourceOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Source, true
@@ -268,7 +269,7 @@ func (o *AbstractConfigDataAllOf) GetSynonyms() []ConfigSynonymData {
 // GetSynonymsOk returns a tuple with the Synonyms field value
 // and a boolean to check if the value has been set.
 func (o *AbstractConfigDataAllOf) GetSynonymsOk() (*[]ConfigSynonymData, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Synonyms, true
@@ -281,44 +282,44 @@ func (o *AbstractConfigDataAllOf) SetSynonyms(v []ConfigSynonymData) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *AbstractConfigDataAllOf) Redact() {
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.Name)
-    o.recurseRedact(o.Value)
-    o.recurseRedact(&o.IsDefault)
-    o.recurseRedact(&o.IsReadOnly)
-    o.recurseRedact(&o.IsSensitive)
-    o.recurseRedact(&o.Source)
-    o.recurseRedact(&o.Synonyms)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.Name)
+	o.recurseRedact(o.Value)
+	o.recurseRedact(&o.IsDefault)
+	o.recurseRedact(&o.IsReadOnly)
+	o.recurseRedact(&o.IsSensitive)
+	o.recurseRedact(&o.Source)
+	o.recurseRedact(&o.Synonyms)
 }
 
 func (o *AbstractConfigDataAllOf) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o AbstractConfigDataAllOf) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o AbstractConfigDataAllOf) MarshalJSON() ([]byte, error) {
@@ -385,5 +386,3 @@ func (v *NullableAbstractConfigDataAllOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

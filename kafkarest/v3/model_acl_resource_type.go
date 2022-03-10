@@ -35,11 +35,11 @@ type AclResourceType string
 
 // List of AclResourceType
 const (
-	UNKNOWN AclResourceType = "UNKNOWN"
-	ANY AclResourceType = "ANY"
-	TOPIC AclResourceType = "TOPIC"
-	GROUP AclResourceType = "GROUP"
-	CLUSTER AclResourceType = "CLUSTER"
+	UNKNOWN          AclResourceType = "UNKNOWN"
+	ANY              AclResourceType = "ANY"
+	TOPIC            AclResourceType = "TOPIC"
+	GROUP            AclResourceType = "GROUP"
+	CLUSTER          AclResourceType = "CLUSTER"
 	TRANSACTIONAL_ID AclResourceType = "TRANSACTIONAL_ID"
 	DELEGATION_TOKEN AclResourceType = "DELEGATION_TOKEN"
 )
@@ -132,4 +132,3 @@ func (v *NullableAclResourceType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

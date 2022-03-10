@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SourceClusterId** | **string** |  | 
+**SourceClusterId** | Pointer to **string** |  | [optional] 
 **LinkName** | **string** |  | 
 **LinkId** | **string** |  | 
 **TopicsNames** | Pointer to **[]string** |  | [optional] 
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewListLinksResponseDataAllOf
 
-`func NewListLinksResponseDataAllOf(sourceClusterId string, linkName string, linkId string, ) *ListLinksResponseDataAllOf`
+`func NewListLinksResponseDataAllOf(linkName string, linkId string, ) *ListLinksResponseDataAllOf`
 
 NewListLinksResponseDataAllOf instantiates a new ListLinksResponseDataAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -47,6 +47,11 @@ and a boolean to check if the value has been set.
 
 SetSourceClusterId sets SourceClusterId field to given value.
 
+### HasSourceClusterId
+
+`func (o *ListLinksResponseDataAllOf) HasSourceClusterId() bool`
+
+HasSourceClusterId returns a boolean if a field has been set.
 
 ### GetLinkName
 

@@ -35,14 +35,14 @@ import (
 
 // ConsumerGroupDataAllOf struct for ConsumerGroupDataAllOf
 type ConsumerGroupDataAllOf struct {
-	ClusterId string `json:"cluster_id"`
-	ConsumerGroupId string `json:"consumer_group_id"`
-	IsSimple bool `json:"is_simple"`
-	PartitionAssignor string `json:"partition_assignor"`
-	State string `json:"state"`
-	Coordinator Relationship `json:"coordinator"`
-	Consumer *Relationship `json:"consumer,omitempty"`
-	LagSummary Relationship `json:"lag_summary"`
+	ClusterId         string        `json:"cluster_id"`
+	ConsumerGroupId   string        `json:"consumer_group_id"`
+	IsSimple          bool          `json:"is_simple"`
+	PartitionAssignor string        `json:"partition_assignor"`
+	State             string        `json:"state"`
+	Coordinator       Relationship  `json:"coordinator"`
+	Consumer          *Relationship `json:"consumer,omitempty"`
+	LagSummary        Relationship  `json:"lag_summary"`
 }
 
 // NewConsumerGroupDataAllOf instantiates a new ConsumerGroupDataAllOf object
@@ -82,7 +82,7 @@ func (o *ConsumerGroupDataAllOf) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerGroupDataAllOf) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -106,7 +106,7 @@ func (o *ConsumerGroupDataAllOf) GetConsumerGroupId() string {
 // GetConsumerGroupIdOk returns a tuple with the ConsumerGroupId field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerGroupDataAllOf) GetConsumerGroupIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ConsumerGroupId, true
@@ -130,7 +130,7 @@ func (o *ConsumerGroupDataAllOf) GetIsSimple() bool {
 // GetIsSimpleOk returns a tuple with the IsSimple field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerGroupDataAllOf) GetIsSimpleOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.IsSimple, true
@@ -154,7 +154,7 @@ func (o *ConsumerGroupDataAllOf) GetPartitionAssignor() string {
 // GetPartitionAssignorOk returns a tuple with the PartitionAssignor field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerGroupDataAllOf) GetPartitionAssignorOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PartitionAssignor, true
@@ -178,7 +178,7 @@ func (o *ConsumerGroupDataAllOf) GetState() string {
 // GetStateOk returns a tuple with the State field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerGroupDataAllOf) GetStateOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.State, true
@@ -202,7 +202,7 @@ func (o *ConsumerGroupDataAllOf) GetCoordinator() Relationship {
 // GetCoordinatorOk returns a tuple with the Coordinator field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerGroupDataAllOf) GetCoordinatorOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Coordinator, true
@@ -258,7 +258,7 @@ func (o *ConsumerGroupDataAllOf) GetLagSummary() Relationship {
 // GetLagSummaryOk returns a tuple with the LagSummary field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerGroupDataAllOf) GetLagSummaryOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.LagSummary, true
@@ -271,44 +271,44 @@ func (o *ConsumerGroupDataAllOf) SetLagSummary(v Relationship) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ConsumerGroupDataAllOf) Redact() {
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.ConsumerGroupId)
-    o.recurseRedact(&o.IsSimple)
-    o.recurseRedact(&o.PartitionAssignor)
-    o.recurseRedact(&o.State)
-    o.recurseRedact(&o.Coordinator)
-    o.recurseRedact(o.Consumer)
-    o.recurseRedact(&o.LagSummary)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.ConsumerGroupId)
+	o.recurseRedact(&o.IsSimple)
+	o.recurseRedact(&o.PartitionAssignor)
+	o.recurseRedact(&o.State)
+	o.recurseRedact(&o.Coordinator)
+	o.recurseRedact(o.Consumer)
+	o.recurseRedact(&o.LagSummary)
 }
 
 func (o *ConsumerGroupDataAllOf) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ConsumerGroupDataAllOf) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ConsumerGroupDataAllOf) MarshalJSON() ([]byte, error) {
@@ -375,5 +375,3 @@ func (v *NullableConsumerGroupDataAllOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

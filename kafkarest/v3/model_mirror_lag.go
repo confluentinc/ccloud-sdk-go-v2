@@ -35,8 +35,8 @@ import (
 
 // MirrorLag struct for MirrorLag
 type MirrorLag struct {
-	Partition int32 `json:"partition"`
-	Lag int32 `json:"lag"`
+	Partition             int32 `json:"partition"`
+	Lag                   int64 `json:"lag"`
 	LastSourceFetchOffset int64 `json:"last_source_fetch_offset"`
 }
 
@@ -44,7 +44,7 @@ type MirrorLag struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMirrorLag(partition int32, lag int32, lastSourceFetchOffset int64) *MirrorLag {
+func NewMirrorLag(partition int32, lag int64, lastSourceFetchOffset int64) *MirrorLag {
 	this := MirrorLag{}
 	this.Partition = partition
 	this.Lag = lag
@@ -73,7 +73,7 @@ func (o *MirrorLag) GetPartition() int32 {
 // GetPartitionOk returns a tuple with the Partition field value
 // and a boolean to check if the value has been set.
 func (o *MirrorLag) GetPartitionOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Partition, true
@@ -85,9 +85,9 @@ func (o *MirrorLag) SetPartition(v int32) {
 }
 
 // GetLag returns the Lag field value
-func (o *MirrorLag) GetLag() int32 {
+func (o *MirrorLag) GetLag() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -96,15 +96,15 @@ func (o *MirrorLag) GetLag() int32 {
 
 // GetLagOk returns a tuple with the Lag field value
 // and a boolean to check if the value has been set.
-func (o *MirrorLag) GetLagOk() (*int32, bool) {
-	if o == nil  {
+func (o *MirrorLag) GetLagOk() (*int64, bool) {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Lag, true
 }
 
 // SetLag sets field value
-func (o *MirrorLag) SetLag(v int32) {
+func (o *MirrorLag) SetLag(v int64) {
 	o.Lag = v
 }
 
@@ -121,7 +121,7 @@ func (o *MirrorLag) GetLastSourceFetchOffset() int64 {
 // GetLastSourceFetchOffsetOk returns a tuple with the LastSourceFetchOffset field value
 // and a boolean to check if the value has been set.
 func (o *MirrorLag) GetLastSourceFetchOffsetOk() (*int64, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.LastSourceFetchOffset, true
@@ -134,39 +134,39 @@ func (o *MirrorLag) SetLastSourceFetchOffset(v int64) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *MirrorLag) Redact() {
-    o.recurseRedact(&o.Partition)
-    o.recurseRedact(&o.Lag)
-    o.recurseRedact(&o.LastSourceFetchOffset)
+	o.recurseRedact(&o.Partition)
+	o.recurseRedact(&o.Lag)
+	o.recurseRedact(&o.LastSourceFetchOffset)
 }
 
 func (o *MirrorLag) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o MirrorLag) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o MirrorLag) MarshalJSON() ([]byte, error) {
@@ -218,5 +218,3 @@ func (v *NullableMirrorLag) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

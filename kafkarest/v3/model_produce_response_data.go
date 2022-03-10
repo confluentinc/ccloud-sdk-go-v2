@@ -35,20 +35,18 @@ import (
 
 // ProduceResponseData struct for ProduceResponseData
 type ProduceResponseData struct {
-	Size int32 `json:"size"`
-	Type NullableString `json:"type,omitempty"`
-	Subject NullableString `json:"subject,omitempty"`
-	SchemaId NullableInt32 `json:"schema_id,omitempty"`
-	SchemaVersion NullableInt32 `json:"schema_version,omitempty"`
+	Size int32  `json:"size"`
+	Type string `json:"type"`
 }
 
 // NewProduceResponseData instantiates a new ProduceResponseData object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProduceResponseData(size int32) *ProduceResponseData {
+func NewProduceResponseData(size int32, type_ string) *ProduceResponseData {
 	this := ProduceResponseData{}
 	this.Size = size
+	this.Type = type_
 	return &this
 }
 
@@ -73,7 +71,7 @@ func (o *ProduceResponseData) GetSize() int32 {
 // GetSizeOk returns a tuple with the Size field value
 // and a boolean to check if the value has been set.
 func (o *ProduceResponseData) GetSizeOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Size, true
@@ -84,211 +82,64 @@ func (o *ProduceResponseData) SetSize(v int32) {
 	o.Size = v
 }
 
-// GetType returns the Type field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetType returns the Type field value
 func (o *ProduceResponseData) GetType() string {
-	if o == nil || o.Type.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Type.Get()
+
+	return o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ProduceResponseData) GetTypeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
-	return o.Type.Get(), o.Type.IsSet()
+	return &o.Type, true
 }
 
-// HasType returns a boolean if a field has been set.
-func (o *ProduceResponseData) HasType() bool {
-	if o != nil && o.Type.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetType gets a reference to the given NullableString and assigns it to the Type field.
+// SetType sets field value
 func (o *ProduceResponseData) SetType(v string) {
-	o.Type.Set(&v)
-}
-// SetTypeNil sets the value for Type to be an explicit nil
-func (o *ProduceResponseData) SetTypeNil() {
-	o.Type.Set(nil)
-}
-
-// UnsetType ensures that no value is present for Type, not even an explicit nil
-func (o *ProduceResponseData) UnsetType() {
-	o.Type.Unset()
-}
-
-// GetSubject returns the Subject field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ProduceResponseData) GetSubject() string {
-	if o == nil || o.Subject.Get() == nil {
-		var ret string
-		return ret
-	}
-	return *o.Subject.Get()
-}
-
-// GetSubjectOk returns a tuple with the Subject field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ProduceResponseData) GetSubjectOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return o.Subject.Get(), o.Subject.IsSet()
-}
-
-// HasSubject returns a boolean if a field has been set.
-func (o *ProduceResponseData) HasSubject() bool {
-	if o != nil && o.Subject.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSubject gets a reference to the given NullableString and assigns it to the Subject field.
-func (o *ProduceResponseData) SetSubject(v string) {
-	o.Subject.Set(&v)
-}
-// SetSubjectNil sets the value for Subject to be an explicit nil
-func (o *ProduceResponseData) SetSubjectNil() {
-	o.Subject.Set(nil)
-}
-
-// UnsetSubject ensures that no value is present for Subject, not even an explicit nil
-func (o *ProduceResponseData) UnsetSubject() {
-	o.Subject.Unset()
-}
-
-// GetSchemaId returns the SchemaId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ProduceResponseData) GetSchemaId() int32 {
-	if o == nil || o.SchemaId.Get() == nil {
-		var ret int32
-		return ret
-	}
-	return *o.SchemaId.Get()
-}
-
-// GetSchemaIdOk returns a tuple with the SchemaId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ProduceResponseData) GetSchemaIdOk() (*int32, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return o.SchemaId.Get(), o.SchemaId.IsSet()
-}
-
-// HasSchemaId returns a boolean if a field has been set.
-func (o *ProduceResponseData) HasSchemaId() bool {
-	if o != nil && o.SchemaId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSchemaId gets a reference to the given NullableInt32 and assigns it to the SchemaId field.
-func (o *ProduceResponseData) SetSchemaId(v int32) {
-	o.SchemaId.Set(&v)
-}
-// SetSchemaIdNil sets the value for SchemaId to be an explicit nil
-func (o *ProduceResponseData) SetSchemaIdNil() {
-	o.SchemaId.Set(nil)
-}
-
-// UnsetSchemaId ensures that no value is present for SchemaId, not even an explicit nil
-func (o *ProduceResponseData) UnsetSchemaId() {
-	o.SchemaId.Unset()
-}
-
-// GetSchemaVersion returns the SchemaVersion field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ProduceResponseData) GetSchemaVersion() int32 {
-	if o == nil || o.SchemaVersion.Get() == nil {
-		var ret int32
-		return ret
-	}
-	return *o.SchemaVersion.Get()
-}
-
-// GetSchemaVersionOk returns a tuple with the SchemaVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ProduceResponseData) GetSchemaVersionOk() (*int32, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return o.SchemaVersion.Get(), o.SchemaVersion.IsSet()
-}
-
-// HasSchemaVersion returns a boolean if a field has been set.
-func (o *ProduceResponseData) HasSchemaVersion() bool {
-	if o != nil && o.SchemaVersion.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSchemaVersion gets a reference to the given NullableInt32 and assigns it to the SchemaVersion field.
-func (o *ProduceResponseData) SetSchemaVersion(v int32) {
-	o.SchemaVersion.Set(&v)
-}
-// SetSchemaVersionNil sets the value for SchemaVersion to be an explicit nil
-func (o *ProduceResponseData) SetSchemaVersionNil() {
-	o.SchemaVersion.Set(nil)
-}
-
-// UnsetSchemaVersion ensures that no value is present for SchemaVersion, not even an explicit nil
-func (o *ProduceResponseData) UnsetSchemaVersion() {
-	o.SchemaVersion.Unset()
+	o.Type = v
 }
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ProduceResponseData) Redact() {
-    o.recurseRedact(&o.Size)
-    o.recurseRedact(o.Type)
-    o.recurseRedact(o.Subject)
-    o.recurseRedact(o.SchemaId)
-    o.recurseRedact(o.SchemaVersion)
+	o.recurseRedact(&o.Size)
+	o.recurseRedact(&o.Type)
 }
 
 func (o *ProduceResponseData) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ProduceResponseData) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ProduceResponseData) MarshalJSON() ([]byte, error) {
@@ -296,17 +147,8 @@ func (o ProduceResponseData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["size"] = o.Size
 	}
-	if o.Type.IsSet() {
-		toSerialize["type"] = o.Type.Get()
-	}
-	if o.Subject.IsSet() {
-		toSerialize["subject"] = o.Subject.Get()
-	}
-	if o.SchemaId.IsSet() {
-		toSerialize["schema_id"] = o.SchemaId.Get()
-	}
-	if o.SchemaVersion.IsSet() {
-		toSerialize["schema_version"] = o.SchemaVersion.Get()
+	if true {
+		toSerialize["type"] = o.Type
 	}
 	return json.Marshal(toSerialize)
 }
@@ -346,5 +188,3 @@ func (v *NullableProduceResponseData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

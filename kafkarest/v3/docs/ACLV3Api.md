@@ -4,15 +4,15 @@ All URIs are relative to *https://pkc-00000.region.provider.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateKafkaV3Acls**](ACLV3Api.md#CreateKafkaV3Acls) | **Post** /kafka/v3/clusters/{cluster_id}/acls | Create ACLs
-[**DeleteKafkaV3Acls**](ACLV3Api.md#DeleteKafkaV3Acls) | **Delete** /kafka/v3/clusters/{cluster_id}/acls | Delete ACLs
-[**GetKafkaV3Acls**](ACLV3Api.md#GetKafkaV3Acls) | **Get** /kafka/v3/clusters/{cluster_id}/acls | Search ACLs
+[**CreateKafkaAcls**](ACLV3Api.md#CreateKafkaAcls) | **Post** /kafka/v3/clusters/{cluster_id}/acls | Create ACLs
+[**DeleteKafkaAcls**](ACLV3Api.md#DeleteKafkaAcls) | **Delete** /kafka/v3/clusters/{cluster_id}/acls | Delete ACLs
+[**GetKafkaAcls**](ACLV3Api.md#GetKafkaAcls) | **Get** /kafka/v3/clusters/{cluster_id}/acls | Search ACLs
 
 
 
-## CreateKafkaV3Acls
+## CreateKafkaAcls
 
-> CreateKafkaV3Acls(ctx, clusterId).CreateAclRequestData(createAclRequestData).Execute()
+> CreateKafkaAcls(ctx, clusterId).CreateAclRequestData(createAclRequestData).Execute()
 
 Create ACLs
 
@@ -36,9 +36,9 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ACLV3Api.CreateKafkaV3Acls(context.Background(), clusterId).CreateAclRequestData(createAclRequestData).Execute()
+    resp, r, err := api_client.ACLV3Api.CreateKafkaAcls(context.Background(), clusterId).CreateAclRequestData(createAclRequestData).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ACLV3Api.CreateKafkaV3Acls``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ACLV3Api.CreateKafkaAcls``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -54,7 +54,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateKafkaV3AclsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateKafkaAclsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -73,16 +73,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## DeleteKafkaV3Acls
+## DeleteKafkaAcls
 
-> InlineResponse200 DeleteKafkaV3Acls(ctx, clusterId).ResourceType(resourceType).ResourceName(resourceName).PatternType(patternType).Principal(principal).Host(host).Operation(operation).Permission(permission).Execute()
+> InlineResponse200 DeleteKafkaAcls(ctx, clusterId).ResourceType(resourceType).ResourceName(resourceName).PatternType(patternType).Principal(principal).Host(host).Operation(operation).Permission(permission).Execute()
 
 Delete ACLs
 
@@ -112,13 +112,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ACLV3Api.DeleteKafkaV3Acls(context.Background(), clusterId).ResourceType(resourceType).ResourceName(resourceName).PatternType(patternType).Principal(principal).Host(host).Operation(operation).Permission(permission).Execute()
+    resp, r, err := api_client.ACLV3Api.DeleteKafkaAcls(context.Background(), clusterId).ResourceType(resourceType).ResourceName(resourceName).PatternType(patternType).Principal(principal).Host(host).Operation(operation).Permission(permission).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ACLV3Api.DeleteKafkaV3Acls``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ACLV3Api.DeleteKafkaAcls``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `DeleteKafkaV3Acls`: InlineResponse200
-    fmt.Fprintf(os.Stdout, "Response from `ACLV3Api.DeleteKafkaV3Acls`: %v\n", resp)
+    // response from `DeleteKafkaAcls`: InlineResponse200
+    fmt.Fprintf(os.Stdout, "Response from `ACLV3Api.DeleteKafkaAcls`: %v\n", resp)
 }
 ```
 
@@ -132,7 +132,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteKafkaV3AclsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteKafkaAclsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -157,16 +157,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## GetKafkaV3Acls
+## GetKafkaAcls
 
-> AclDataList GetKafkaV3Acls(ctx, clusterId).ResourceType(resourceType).ResourceName(resourceName).PatternType(patternType).Principal(principal).Host(host).Operation(operation).Permission(permission).Execute()
+> AclDataList GetKafkaAcls(ctx, clusterId).ResourceType(resourceType).ResourceName(resourceName).PatternType(patternType).Principal(principal).Host(host).Operation(operation).Permission(permission).Execute()
 
 Search ACLs
 
@@ -196,13 +196,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ACLV3Api.GetKafkaV3Acls(context.Background(), clusterId).ResourceType(resourceType).ResourceName(resourceName).PatternType(patternType).Principal(principal).Host(host).Operation(operation).Permission(permission).Execute()
+    resp, r, err := api_client.ACLV3Api.GetKafkaAcls(context.Background(), clusterId).ResourceType(resourceType).ResourceName(resourceName).PatternType(patternType).Principal(principal).Host(host).Operation(operation).Permission(permission).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ACLV3Api.GetKafkaV3Acls``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ACLV3Api.GetKafkaAcls``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetKafkaV3Acls`: AclDataList
-    fmt.Fprintf(os.Stdout, "Response from `ACLV3Api.GetKafkaV3Acls`: %v\n", resp)
+    // response from `GetKafkaAcls`: AclDataList
+    fmt.Fprintf(os.Stdout, "Response from `ACLV3Api.GetKafkaAcls`: %v\n", resp)
 }
 ```
 
@@ -216,7 +216,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetKafkaV3AclsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetKafkaAclsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -241,7 +241,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

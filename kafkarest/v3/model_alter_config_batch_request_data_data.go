@@ -35,8 +35,8 @@ import (
 
 // AlterConfigBatchRequestDataData struct for AlterConfigBatchRequestDataData
 type AlterConfigBatchRequestDataData struct {
-	Name string `json:"name"`
-	Value NullableString `json:"value,omitempty"`
+	Name      string         `json:"name"`
+	Value     NullableString `json:"value,omitempty"`
 	Operation NullableString `json:"operation,omitempty"`
 }
 
@@ -71,7 +71,7 @@ func (o *AlterConfigBatchRequestDataData) GetName() string {
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *AlterConfigBatchRequestDataData) GetNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Name, true
@@ -95,7 +95,7 @@ func (o *AlterConfigBatchRequestDataData) GetValue() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AlterConfigBatchRequestDataData) GetValueOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Value.Get(), o.Value.IsSet()
@@ -114,6 +114,7 @@ func (o *AlterConfigBatchRequestDataData) HasValue() bool {
 func (o *AlterConfigBatchRequestDataData) SetValue(v string) {
 	o.Value.Set(&v)
 }
+
 // SetValueNil sets the value for Value to be an explicit nil
 func (o *AlterConfigBatchRequestDataData) SetValueNil() {
 	o.Value.Set(nil)
@@ -137,7 +138,7 @@ func (o *AlterConfigBatchRequestDataData) GetOperation() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AlterConfigBatchRequestDataData) GetOperationOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Operation.Get(), o.Operation.IsSet()
@@ -156,6 +157,7 @@ func (o *AlterConfigBatchRequestDataData) HasOperation() bool {
 func (o *AlterConfigBatchRequestDataData) SetOperation(v string) {
 	o.Operation.Set(&v)
 }
+
 // SetOperationNil sets the value for Operation to be an explicit nil
 func (o *AlterConfigBatchRequestDataData) SetOperationNil() {
 	o.Operation.Set(nil)
@@ -168,39 +170,39 @@ func (o *AlterConfigBatchRequestDataData) UnsetOperation() {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *AlterConfigBatchRequestDataData) Redact() {
-    o.recurseRedact(&o.Name)
-    o.recurseRedact(o.Value)
-    o.recurseRedact(o.Operation)
+	o.recurseRedact(&o.Name)
+	o.recurseRedact(o.Value)
+	o.recurseRedact(o.Operation)
 }
 
 func (o *AlterConfigBatchRequestDataData) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o AlterConfigBatchRequestDataData) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o AlterConfigBatchRequestDataData) MarshalJSON() ([]byte, error) {
@@ -252,5 +254,3 @@ func (v *NullableAlterConfigBatchRequestDataData) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** |  | 
 **Metadata** | [**ResourceMetadata**](ResourceMetadata.md) |  | 
-**SourceClusterId** | **string** |  | 
+**SourceClusterId** | Pointer to **string** |  | [optional] 
 **LinkName** | **string** |  | 
 **LinkId** | **string** |  | 
 **TopicsNames** | Pointer to **[]string** |  | [optional] 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewListLinksResponseData
 
-`func NewListLinksResponseData(kind string, metadata ResourceMetadata, sourceClusterId string, linkName string, linkId string, ) *ListLinksResponseData`
+`func NewListLinksResponseData(kind string, metadata ResourceMetadata, linkName string, linkId string, ) *ListLinksResponseData`
 
 NewListLinksResponseData instantiates a new ListLinksResponseData object
 This constructor will assign default values to properties that have it defined,
@@ -89,6 +89,11 @@ and a boolean to check if the value has been set.
 
 SetSourceClusterId sets SourceClusterId field to given value.
 
+### HasSourceClusterId
+
+`func (o *ListLinksResponseData) HasSourceClusterId() bool`
+
+HasSourceClusterId returns a boolean if a field has been set.
 
 ### GetLinkName
 

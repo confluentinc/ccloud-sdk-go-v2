@@ -4,29 +4,29 @@ All URIs are relative to *https://pkc-00000.region.provider.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateKafkaV3Link**](ClusterLinkingV3Api.md#CreateKafkaV3Link) | **Post** /kafka/v3/clusters/{cluster_id}/links | Create a cluster link
-[**CreateKafkaV3MirrorTopic**](ClusterLinkingV3Api.md#CreateKafkaV3MirrorTopic) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors | Create a mirror topic
-[**DeleteKafkaV3Link**](ClusterLinkingV3Api.md#DeleteKafkaV3Link) | **Delete** /kafka/v3/clusters/{cluster_id}/links/{link_name} | Delete the cluster link
-[**DeleteKafkaV3LinkConfig**](ClusterLinkingV3Api.md#DeleteKafkaV3LinkConfig) | **Delete** /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs/{config_name} | Reset the given config to default value
-[**GetKafkaV3Link**](ClusterLinkingV3Api.md#GetKafkaV3Link) | **Get** /kafka/v3/clusters/{cluster_id}/links/{link_name} | Describe the cluster link
-[**GetKafkaV3LinkConfigs**](ClusterLinkingV3Api.md#GetKafkaV3LinkConfigs) | **Get** /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs/{config_name} | Describe the config under the cluster link
-[**ListKafkaV3LinkConfigs**](ClusterLinkingV3Api.md#ListKafkaV3LinkConfigs) | **Get** /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs | List all configs of the cluster link
-[**ListKafkaV3Links**](ClusterLinkingV3Api.md#ListKafkaV3Links) | **Get** /kafka/v3/clusters/{cluster_id}/links | List all cluster links in the dest cluster
-[**ListKafkaV3MirrorTopics**](ClusterLinkingV3Api.md#ListKafkaV3MirrorTopics) | **Get** /kafka/v3/clusters/{cluster_id}/links/-/mirrors | List mirror topics
-[**ListKafkaV3MirrorTopicsUnderLink**](ClusterLinkingV3Api.md#ListKafkaV3MirrorTopicsUnderLink) | **Get** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors | List mirror topics
-[**ReadKafkaV3MirrorTopic**](ClusterLinkingV3Api.md#ReadKafkaV3MirrorTopic) | **Get** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors/{mirror_topic_name} | Describe the mirror topic
-[**UpdateKafkaV3LinkConfig**](ClusterLinkingV3Api.md#UpdateKafkaV3LinkConfig) | **Put** /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs/{config_name} | Alter the config under the cluster link
-[**UpdateKafkaV3LinkConfigBatch**](ClusterLinkingV3Api.md#UpdateKafkaV3LinkConfigBatch) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs:alter | Batch Alter Topic Configs
-[**UpdateKafkaV3MirrorTopicsFailover**](ClusterLinkingV3Api.md#UpdateKafkaV3MirrorTopicsFailover) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:failover | Failover the mirror topics
-[**UpdateKafkaV3MirrorTopicsPause**](ClusterLinkingV3Api.md#UpdateKafkaV3MirrorTopicsPause) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:pause | Pause the mirror topics
-[**UpdateKafkaV3MirrorTopicsPromote**](ClusterLinkingV3Api.md#UpdateKafkaV3MirrorTopicsPromote) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:promote | Promote the mirror topics
-[**UpdateKafkaV3MirrorTopicsResume**](ClusterLinkingV3Api.md#UpdateKafkaV3MirrorTopicsResume) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:resume | Resume the mirror topics
+[**CreateKafkaLink**](ClusterLinkingV3Api.md#CreateKafkaLink) | **Post** /kafka/v3/clusters/{cluster_id}/links | Create a cluster link
+[**CreateKafkaMirrorTopic**](ClusterLinkingV3Api.md#CreateKafkaMirrorTopic) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors | Create a mirror topic
+[**DeleteKafkaLink**](ClusterLinkingV3Api.md#DeleteKafkaLink) | **Delete** /kafka/v3/clusters/{cluster_id}/links/{link_name} | Delete the cluster link
+[**DeleteKafkaLinkConfig**](ClusterLinkingV3Api.md#DeleteKafkaLinkConfig) | **Delete** /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs/{config_name} | Reset the given config to default value
+[**GetKafkaLink**](ClusterLinkingV3Api.md#GetKafkaLink) | **Get** /kafka/v3/clusters/{cluster_id}/links/{link_name} | Describe the cluster link
+[**GetKafkaLinkConfigs**](ClusterLinkingV3Api.md#GetKafkaLinkConfigs) | **Get** /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs/{config_name} | Describe the config under the cluster link
+[**ListKafkaLinkConfigs**](ClusterLinkingV3Api.md#ListKafkaLinkConfigs) | **Get** /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs | List all configs of the cluster link
+[**ListKafkaLinks**](ClusterLinkingV3Api.md#ListKafkaLinks) | **Get** /kafka/v3/clusters/{cluster_id}/links | List all cluster links in the dest cluster
+[**ListKafkaMirrorTopics**](ClusterLinkingV3Api.md#ListKafkaMirrorTopics) | **Get** /kafka/v3/clusters/{cluster_id}/links/-/mirrors | List mirror topics
+[**ListKafkaMirrorTopicsUnderLink**](ClusterLinkingV3Api.md#ListKafkaMirrorTopicsUnderLink) | **Get** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors | List mirror topics
+[**ReadKafkaMirrorTopic**](ClusterLinkingV3Api.md#ReadKafkaMirrorTopic) | **Get** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors/{mirror_topic_name} | Describe the mirror topic
+[**UpdateKafkaLinkConfig**](ClusterLinkingV3Api.md#UpdateKafkaLinkConfig) | **Put** /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs/{config_name} | Alter the config under the cluster link
+[**UpdateKafkaLinkConfigBatch**](ClusterLinkingV3Api.md#UpdateKafkaLinkConfigBatch) | **Put** /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs:alter | Batch Alter Topic Configs
+[**UpdateKafkaMirrorTopicsFailover**](ClusterLinkingV3Api.md#UpdateKafkaMirrorTopicsFailover) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:failover | Failover the mirror topics
+[**UpdateKafkaMirrorTopicsPause**](ClusterLinkingV3Api.md#UpdateKafkaMirrorTopicsPause) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:pause | Pause the mirror topics
+[**UpdateKafkaMirrorTopicsPromote**](ClusterLinkingV3Api.md#UpdateKafkaMirrorTopicsPromote) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:promote | Promote the mirror topics
+[**UpdateKafkaMirrorTopicsResume**](ClusterLinkingV3Api.md#UpdateKafkaMirrorTopicsResume) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:resume | Resume the mirror topics
 
 
 
-## CreateKafkaV3Link
+## CreateKafkaLink
 
-> CreateKafkaV3Link(ctx, clusterId).CreateLinkRequestData(createLinkRequestData).Execute()
+> CreateKafkaLink(ctx, clusterId).LinkName(linkName).ValidateOnly(validateOnly).ValidateLink(validateLink).CreateLinkRequestData(createLinkRequestData).Execute()
 
 Create a cluster link
 
@@ -46,13 +46,16 @@ import (
 
 func main() {
     clusterId := "cluster-1" // string | The Kafka cluster ID.
-    createLinkRequestData := *openapiclient.NewCreateLinkRequestData("SourceClusterId_example") // CreateLinkRequestData | Create a cluster link (optional)
+    linkName := "link-sb1" // string | The link name
+    validateOnly := false // bool | To validate the action can be performed successfully or not. Default: false (optional)
+    validateLink := false // bool | To synchronously validate that the source cluster ID is expected and the dest cluster has the permission to read topics in the source cluster. Default: true (optional)
+    createLinkRequestData := *openapiclient.NewCreateLinkRequestData() // CreateLinkRequestData | Create a cluster link (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClusterLinkingV3Api.CreateKafkaV3Link(context.Background(), clusterId).CreateLinkRequestData(createLinkRequestData).Execute()
+    resp, r, err := api_client.ClusterLinkingV3Api.CreateKafkaLink(context.Background(), clusterId).LinkName(linkName).ValidateOnly(validateOnly).ValidateLink(validateLink).CreateLinkRequestData(createLinkRequestData).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.CreateKafkaV3Link``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.CreateKafkaLink``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -68,12 +71,15 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateKafkaV3LinkRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateKafkaLinkRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **linkName** | **string** | The link name | 
+ **validateOnly** | **bool** | To validate the action can be performed successfully or not. Default: false | 
+ **validateLink** | **bool** | To synchronously validate that the source cluster ID is expected and the dest cluster has the permission to read topics in the source cluster. Default: true | 
  **createLinkRequestData** | [**CreateLinkRequestData**](CreateLinkRequestData.md) | Create a cluster link | 
 
 ### Return type
@@ -87,16 +93,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## CreateKafkaV3MirrorTopic
+## CreateKafkaMirrorTopic
 
-> CreateKafkaV3MirrorTopic(ctx, clusterId, linkName).CreateMirrorTopicRequestData(createMirrorTopicRequestData).Execute()
+> CreateKafkaMirrorTopic(ctx, clusterId, linkName).CreateMirrorTopicRequestData(createMirrorTopicRequestData).Execute()
 
 Create a mirror topic
 
@@ -121,9 +127,9 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClusterLinkingV3Api.CreateKafkaV3MirrorTopic(context.Background(), clusterId, linkName).CreateMirrorTopicRequestData(createMirrorTopicRequestData).Execute()
+    resp, r, err := api_client.ClusterLinkingV3Api.CreateKafkaMirrorTopic(context.Background(), clusterId, linkName).CreateMirrorTopicRequestData(createMirrorTopicRequestData).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.CreateKafkaV3MirrorTopic``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.CreateKafkaMirrorTopic``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -140,7 +146,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateKafkaV3MirrorTopicRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateKafkaMirrorTopicRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -160,16 +166,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## DeleteKafkaV3Link
+## DeleteKafkaLink
 
-> DeleteKafkaV3Link(ctx, clusterId, linkName).Execute()
+> DeleteKafkaLink(ctx, clusterId, linkName).Force(force).ValidateOnly(validateOnly).Execute()
 
 Delete the cluster link
 
@@ -190,12 +196,14 @@ import (
 func main() {
     clusterId := "cluster-1" // string | The Kafka cluster ID.
     linkName := "link-sb1" // string | The link name
+    force := false // bool | Force the action. Default: false (optional)
+    validateOnly := false // bool | To validate the action can be performed successfully or not. Default: false (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClusterLinkingV3Api.DeleteKafkaV3Link(context.Background(), clusterId, linkName).Execute()
+    resp, r, err := api_client.ClusterLinkingV3Api.DeleteKafkaLink(context.Background(), clusterId, linkName).Force(force).ValidateOnly(validateOnly).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.DeleteKafkaV3Link``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.DeleteKafkaLink``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -212,13 +220,15 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteKafkaV3LinkRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteKafkaLinkRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **force** | **bool** | Force the action. Default: false | 
+ **validateOnly** | **bool** | To validate the action can be performed successfully or not. Default: false | 
 
 ### Return type
 
@@ -231,16 +241,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## DeleteKafkaV3LinkConfig
+## DeleteKafkaLinkConfig
 
-> DeleteKafkaV3LinkConfig(ctx, clusterId, linkName, configName).Execute()
+> DeleteKafkaLinkConfig(ctx, clusterId, linkName, configName).Execute()
 
 Reset the given config to default value
 
@@ -265,9 +275,9 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClusterLinkingV3Api.DeleteKafkaV3LinkConfig(context.Background(), clusterId, linkName, configName).Execute()
+    resp, r, err := api_client.ClusterLinkingV3Api.DeleteKafkaLinkConfig(context.Background(), clusterId, linkName, configName).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.DeleteKafkaV3LinkConfig``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.DeleteKafkaLinkConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -285,7 +295,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteKafkaV3LinkConfigRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteKafkaLinkConfigRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -305,16 +315,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## GetKafkaV3Link
+## GetKafkaLink
 
-> ListLinksResponseData GetKafkaV3Link(ctx, clusterId, linkName).Execute()
+> ListLinksResponseData GetKafkaLink(ctx, clusterId, linkName).Execute()
 
 Describe the cluster link
 
@@ -338,13 +348,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClusterLinkingV3Api.GetKafkaV3Link(context.Background(), clusterId, linkName).Execute()
+    resp, r, err := api_client.ClusterLinkingV3Api.GetKafkaLink(context.Background(), clusterId, linkName).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.GetKafkaV3Link``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.GetKafkaLink``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetKafkaV3Link`: ListLinksResponseData
-    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.GetKafkaV3Link`: %v\n", resp)
+    // response from `GetKafkaLink`: ListLinksResponseData
+    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.GetKafkaLink`: %v\n", resp)
 }
 ```
 
@@ -359,7 +369,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetKafkaV3LinkRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetKafkaLinkRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -378,16 +388,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## GetKafkaV3LinkConfigs
+## GetKafkaLinkConfigs
 
-> ListLinkConfigsResponseData GetKafkaV3LinkConfigs(ctx, clusterId, linkName, configName).Execute()
+> ListLinkConfigsResponseData GetKafkaLinkConfigs(ctx, clusterId, linkName, configName).Execute()
 
 Describe the config under the cluster link
 
@@ -412,13 +422,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClusterLinkingV3Api.GetKafkaV3LinkConfigs(context.Background(), clusterId, linkName, configName).Execute()
+    resp, r, err := api_client.ClusterLinkingV3Api.GetKafkaLinkConfigs(context.Background(), clusterId, linkName, configName).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.GetKafkaV3LinkConfigs``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.GetKafkaLinkConfigs``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetKafkaV3LinkConfigs`: ListLinkConfigsResponseData
-    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.GetKafkaV3LinkConfigs`: %v\n", resp)
+    // response from `GetKafkaLinkConfigs`: ListLinkConfigsResponseData
+    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.GetKafkaLinkConfigs`: %v\n", resp)
 }
 ```
 
@@ -434,7 +444,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetKafkaV3LinkConfigsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetKafkaLinkConfigsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -454,16 +464,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## ListKafkaV3LinkConfigs
+## ListKafkaLinkConfigs
 
-> ListLinkConfigsResponseDataList ListKafkaV3LinkConfigs(ctx, clusterId, linkName).Execute()
+> ListLinkConfigsResponseDataList ListKafkaLinkConfigs(ctx, clusterId, linkName).Execute()
 
 List all configs of the cluster link
 
@@ -487,13 +497,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClusterLinkingV3Api.ListKafkaV3LinkConfigs(context.Background(), clusterId, linkName).Execute()
+    resp, r, err := api_client.ClusterLinkingV3Api.ListKafkaLinkConfigs(context.Background(), clusterId, linkName).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.ListKafkaV3LinkConfigs``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.ListKafkaLinkConfigs``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListKafkaV3LinkConfigs`: ListLinkConfigsResponseDataList
-    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.ListKafkaV3LinkConfigs`: %v\n", resp)
+    // response from `ListKafkaLinkConfigs`: ListLinkConfigsResponseDataList
+    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.ListKafkaLinkConfigs`: %v\n", resp)
 }
 ```
 
@@ -508,7 +518,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListKafkaV3LinkConfigsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListKafkaLinkConfigsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -527,16 +537,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## ListKafkaV3Links
+## ListKafkaLinks
 
-> ListLinksResponseDataList ListKafkaV3Links(ctx, clusterId).Execute()
+> ListLinksResponseDataList ListKafkaLinks(ctx, clusterId).Execute()
 
 List all cluster links in the dest cluster
 
@@ -559,13 +569,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClusterLinkingV3Api.ListKafkaV3Links(context.Background(), clusterId).Execute()
+    resp, r, err := api_client.ClusterLinkingV3Api.ListKafkaLinks(context.Background(), clusterId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.ListKafkaV3Links``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.ListKafkaLinks``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListKafkaV3Links`: ListLinksResponseDataList
-    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.ListKafkaV3Links`: %v\n", resp)
+    // response from `ListKafkaLinks`: ListLinksResponseDataList
+    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.ListKafkaLinks`: %v\n", resp)
 }
 ```
 
@@ -579,7 +589,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListKafkaV3LinksRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListKafkaLinksRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -597,16 +607,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## ListKafkaV3MirrorTopics
+## ListKafkaMirrorTopics
 
-> ListMirrorTopicsResponseDataList ListKafkaV3MirrorTopics(ctx, clusterId).MirrorStatus(mirrorStatus).Execute()
+> ListMirrorTopicsResponseDataList ListKafkaMirrorTopics(ctx, clusterId).MirrorStatus(mirrorStatus).Execute()
 
 List mirror topics
 
@@ -626,17 +636,17 @@ import (
 
 func main() {
     clusterId := "cluster-1" // string | The Kafka cluster ID.
-    mirrorStatus := openapiclient.MirrorTopicStatus("active") // MirrorTopicStatus | The status of the mirror topic. If not specified, all mirror topics will be returned. (optional)
+    mirrorStatus := openapiclient.MirrorTopicStatus("ACTIVE") // MirrorTopicStatus | The status of the mirror topic. If not specified, all mirror topics will be returned. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClusterLinkingV3Api.ListKafkaV3MirrorTopics(context.Background(), clusterId).MirrorStatus(mirrorStatus).Execute()
+    resp, r, err := api_client.ClusterLinkingV3Api.ListKafkaMirrorTopics(context.Background(), clusterId).MirrorStatus(mirrorStatus).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.ListKafkaV3MirrorTopics``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.ListKafkaMirrorTopics``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListKafkaV3MirrorTopics`: ListMirrorTopicsResponseDataList
-    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.ListKafkaV3MirrorTopics`: %v\n", resp)
+    // response from `ListKafkaMirrorTopics`: ListMirrorTopicsResponseDataList
+    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.ListKafkaMirrorTopics`: %v\n", resp)
 }
 ```
 
@@ -650,7 +660,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListKafkaV3MirrorTopicsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListKafkaMirrorTopicsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -669,16 +679,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## ListKafkaV3MirrorTopicsUnderLink
+## ListKafkaMirrorTopicsUnderLink
 
-> ListMirrorTopicsResponseDataList ListKafkaV3MirrorTopicsUnderLink(ctx, clusterId, linkName).MirrorStatus(mirrorStatus).Execute()
+> ListMirrorTopicsResponseDataList ListKafkaMirrorTopicsUnderLink(ctx, clusterId, linkName).MirrorStatus(mirrorStatus).Execute()
 
 List mirror topics
 
@@ -699,17 +709,17 @@ import (
 func main() {
     clusterId := "cluster-1" // string | The Kafka cluster ID.
     linkName := "link-sb1" // string | The link name
-    mirrorStatus := openapiclient.MirrorTopicStatus("active") // MirrorTopicStatus | The status of the mirror topic. If not specified, all mirror topics will be returned. (optional)
+    mirrorStatus := openapiclient.MirrorTopicStatus("ACTIVE") // MirrorTopicStatus | The status of the mirror topic. If not specified, all mirror topics will be returned. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClusterLinkingV3Api.ListKafkaV3MirrorTopicsUnderLink(context.Background(), clusterId, linkName).MirrorStatus(mirrorStatus).Execute()
+    resp, r, err := api_client.ClusterLinkingV3Api.ListKafkaMirrorTopicsUnderLink(context.Background(), clusterId, linkName).MirrorStatus(mirrorStatus).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.ListKafkaV3MirrorTopicsUnderLink``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.ListKafkaMirrorTopicsUnderLink``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListKafkaV3MirrorTopicsUnderLink`: ListMirrorTopicsResponseDataList
-    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.ListKafkaV3MirrorTopicsUnderLink`: %v\n", resp)
+    // response from `ListKafkaMirrorTopicsUnderLink`: ListMirrorTopicsResponseDataList
+    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.ListKafkaMirrorTopicsUnderLink`: %v\n", resp)
 }
 ```
 
@@ -724,7 +734,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListKafkaV3MirrorTopicsUnderLinkRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListKafkaMirrorTopicsUnderLinkRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -744,16 +754,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## ReadKafkaV3MirrorTopic
+## ReadKafkaMirrorTopic
 
-> ListMirrorTopicsResponseData ReadKafkaV3MirrorTopic(ctx, clusterId, linkName, mirrorTopicName).Execute()
+> ListMirrorTopicsResponseData ReadKafkaMirrorTopic(ctx, clusterId, linkName, mirrorTopicName).Execute()
 
 Describe the mirror topic
 
@@ -778,13 +788,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClusterLinkingV3Api.ReadKafkaV3MirrorTopic(context.Background(), clusterId, linkName, mirrorTopicName).Execute()
+    resp, r, err := api_client.ClusterLinkingV3Api.ReadKafkaMirrorTopic(context.Background(), clusterId, linkName, mirrorTopicName).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.ReadKafkaV3MirrorTopic``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.ReadKafkaMirrorTopic``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReadKafkaV3MirrorTopic`: ListMirrorTopicsResponseData
-    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.ReadKafkaV3MirrorTopic`: %v\n", resp)
+    // response from `ReadKafkaMirrorTopic`: ListMirrorTopicsResponseData
+    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.ReadKafkaMirrorTopic`: %v\n", resp)
 }
 ```
 
@@ -800,7 +810,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiReadKafkaV3MirrorTopicRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiReadKafkaMirrorTopicRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -820,16 +830,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## UpdateKafkaV3LinkConfig
+## UpdateKafkaLinkConfig
 
-> UpdateKafkaV3LinkConfig(ctx, clusterId, linkName, configName).UpdateLinkConfigRequestData(updateLinkConfigRequestData).Execute()
+> UpdateKafkaLinkConfig(ctx, clusterId, linkName, configName).UpdateLinkConfigRequestData(updateLinkConfigRequestData).Execute()
 
 Alter the config under the cluster link
 
@@ -855,9 +865,9 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClusterLinkingV3Api.UpdateKafkaV3LinkConfig(context.Background(), clusterId, linkName, configName).UpdateLinkConfigRequestData(updateLinkConfigRequestData).Execute()
+    resp, r, err := api_client.ClusterLinkingV3Api.UpdateKafkaLinkConfig(context.Background(), clusterId, linkName, configName).UpdateLinkConfigRequestData(updateLinkConfigRequestData).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.UpdateKafkaV3LinkConfig``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.UpdateKafkaLinkConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -875,7 +885,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUpdateKafkaV3LinkConfigRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiUpdateKafkaLinkConfigRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -896,16 +906,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## UpdateKafkaV3LinkConfigBatch
+## UpdateKafkaLinkConfigBatch
 
-> UpdateKafkaV3LinkConfigBatch(ctx, clusterId, linkName).AlterConfigBatchRequestData(alterConfigBatchRequestData).Execute()
+> UpdateKafkaLinkConfigBatch(ctx, clusterId, linkName).ValidateOnly(validateOnly).AlterConfigBatchRequestData(alterConfigBatchRequestData).Execute()
 
 Batch Alter Topic Configs
 
@@ -926,13 +936,14 @@ import (
 func main() {
     clusterId := "cluster-1" // string | The Kafka cluster ID.
     linkName := "link-sb1" // string | The link name
+    validateOnly := false // bool | To validate the action can be performed successfully or not. Default: false (optional)
     alterConfigBatchRequestData := *openapiclient.NewAlterConfigBatchRequestData([]openapiclient.AlterConfigBatchRequestDataData{*openapiclient.NewAlterConfigBatchRequestDataData("Name_example")}) // AlterConfigBatchRequestData |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClusterLinkingV3Api.UpdateKafkaV3LinkConfigBatch(context.Background(), clusterId, linkName).AlterConfigBatchRequestData(alterConfigBatchRequestData).Execute()
+    resp, r, err := api_client.ClusterLinkingV3Api.UpdateKafkaLinkConfigBatch(context.Background(), clusterId, linkName).ValidateOnly(validateOnly).AlterConfigBatchRequestData(alterConfigBatchRequestData).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.UpdateKafkaV3LinkConfigBatch``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.UpdateKafkaLinkConfigBatch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -949,13 +960,14 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUpdateKafkaV3LinkConfigBatchRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiUpdateKafkaLinkConfigBatchRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **validateOnly** | **bool** | To validate the action can be performed successfully or not. Default: false | 
  **alterConfigBatchRequestData** | [**AlterConfigBatchRequestData**](AlterConfigBatchRequestData.md) |  | 
 
 ### Return type
@@ -969,16 +981,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## UpdateKafkaV3MirrorTopicsFailover
+## UpdateKafkaMirrorTopicsFailover
 
-> AlterMirrorStatusResponseDataList UpdateKafkaV3MirrorTopicsFailover(ctx, clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
+> AlterMirrorStatusResponseDataList UpdateKafkaMirrorTopicsFailover(ctx, clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
 
 Failover the mirror topics
 
@@ -999,18 +1011,18 @@ import (
 func main() {
     clusterId := "cluster-1" // string | The Kafka cluster ID.
     linkName := "link-sb1" // string | The link name
-    validateOnly := false // bool | To validate if the link can be created or not, but not to create it. Default: false (optional)
+    validateOnly := false // bool | To validate the action can be performed successfully or not. Default: false (optional)
     alterMirrorsRequestData := *openapiclient.NewAlterMirrorsRequestData([]string{"MirrorTopicNames_example"}) // AlterMirrorsRequestData | Name of the topics to apply the changes (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClusterLinkingV3Api.UpdateKafkaV3MirrorTopicsFailover(context.Background(), clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
+    resp, r, err := api_client.ClusterLinkingV3Api.UpdateKafkaMirrorTopicsFailover(context.Background(), clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.UpdateKafkaV3MirrorTopicsFailover``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.UpdateKafkaMirrorTopicsFailover``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UpdateKafkaV3MirrorTopicsFailover`: AlterMirrorStatusResponseDataList
-    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.UpdateKafkaV3MirrorTopicsFailover`: %v\n", resp)
+    // response from `UpdateKafkaMirrorTopicsFailover`: AlterMirrorStatusResponseDataList
+    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.UpdateKafkaMirrorTopicsFailover`: %v\n", resp)
 }
 ```
 
@@ -1025,14 +1037,14 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUpdateKafkaV3MirrorTopicsFailoverRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiUpdateKafkaMirrorTopicsFailoverRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **validateOnly** | **bool** | To validate if the link can be created or not, but not to create it. Default: false | 
+ **validateOnly** | **bool** | To validate the action can be performed successfully or not. Default: false | 
  **alterMirrorsRequestData** | [**AlterMirrorsRequestData**](AlterMirrorsRequestData.md) | Name of the topics to apply the changes | 
 
 ### Return type
@@ -1046,16 +1058,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## UpdateKafkaV3MirrorTopicsPause
+## UpdateKafkaMirrorTopicsPause
 
-> AlterMirrorStatusResponseDataList UpdateKafkaV3MirrorTopicsPause(ctx, clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
+> AlterMirrorStatusResponseDataList UpdateKafkaMirrorTopicsPause(ctx, clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
 
 Pause the mirror topics
 
@@ -1076,18 +1088,18 @@ import (
 func main() {
     clusterId := "cluster-1" // string | The Kafka cluster ID.
     linkName := "link-sb1" // string | The link name
-    validateOnly := false // bool | To validate if the link can be created or not, but not to create it. Default: false (optional)
+    validateOnly := false // bool | To validate the action can be performed successfully or not. Default: false (optional)
     alterMirrorsRequestData := *openapiclient.NewAlterMirrorsRequestData([]string{"MirrorTopicNames_example"}) // AlterMirrorsRequestData | Name of the topics to apply the changes (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClusterLinkingV3Api.UpdateKafkaV3MirrorTopicsPause(context.Background(), clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
+    resp, r, err := api_client.ClusterLinkingV3Api.UpdateKafkaMirrorTopicsPause(context.Background(), clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.UpdateKafkaV3MirrorTopicsPause``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.UpdateKafkaMirrorTopicsPause``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UpdateKafkaV3MirrorTopicsPause`: AlterMirrorStatusResponseDataList
-    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.UpdateKafkaV3MirrorTopicsPause`: %v\n", resp)
+    // response from `UpdateKafkaMirrorTopicsPause`: AlterMirrorStatusResponseDataList
+    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.UpdateKafkaMirrorTopicsPause`: %v\n", resp)
 }
 ```
 
@@ -1102,14 +1114,14 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUpdateKafkaV3MirrorTopicsPauseRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiUpdateKafkaMirrorTopicsPauseRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **validateOnly** | **bool** | To validate if the link can be created or not, but not to create it. Default: false | 
+ **validateOnly** | **bool** | To validate the action can be performed successfully or not. Default: false | 
  **alterMirrorsRequestData** | [**AlterMirrorsRequestData**](AlterMirrorsRequestData.md) | Name of the topics to apply the changes | 
 
 ### Return type
@@ -1123,16 +1135,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## UpdateKafkaV3MirrorTopicsPromote
+## UpdateKafkaMirrorTopicsPromote
 
-> AlterMirrorStatusResponseDataList UpdateKafkaV3MirrorTopicsPromote(ctx, clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
+> AlterMirrorStatusResponseDataList UpdateKafkaMirrorTopicsPromote(ctx, clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
 
 Promote the mirror topics
 
@@ -1153,18 +1165,18 @@ import (
 func main() {
     clusterId := "cluster-1" // string | The Kafka cluster ID.
     linkName := "link-sb1" // string | The link name
-    validateOnly := false // bool | To validate if the link can be created or not, but not to create it. Default: false (optional)
+    validateOnly := false // bool | To validate the action can be performed successfully or not. Default: false (optional)
     alterMirrorsRequestData := *openapiclient.NewAlterMirrorsRequestData([]string{"MirrorTopicNames_example"}) // AlterMirrorsRequestData | Name of the topics to apply the changes (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClusterLinkingV3Api.UpdateKafkaV3MirrorTopicsPromote(context.Background(), clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
+    resp, r, err := api_client.ClusterLinkingV3Api.UpdateKafkaMirrorTopicsPromote(context.Background(), clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.UpdateKafkaV3MirrorTopicsPromote``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.UpdateKafkaMirrorTopicsPromote``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UpdateKafkaV3MirrorTopicsPromote`: AlterMirrorStatusResponseDataList
-    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.UpdateKafkaV3MirrorTopicsPromote`: %v\n", resp)
+    // response from `UpdateKafkaMirrorTopicsPromote`: AlterMirrorStatusResponseDataList
+    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.UpdateKafkaMirrorTopicsPromote`: %v\n", resp)
 }
 ```
 
@@ -1179,14 +1191,14 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUpdateKafkaV3MirrorTopicsPromoteRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiUpdateKafkaMirrorTopicsPromoteRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **validateOnly** | **bool** | To validate if the link can be created or not, but not to create it. Default: false | 
+ **validateOnly** | **bool** | To validate the action can be performed successfully or not. Default: false | 
  **alterMirrorsRequestData** | [**AlterMirrorsRequestData**](AlterMirrorsRequestData.md) | Name of the topics to apply the changes | 
 
 ### Return type
@@ -1200,16 +1212,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## UpdateKafkaV3MirrorTopicsResume
+## UpdateKafkaMirrorTopicsResume
 
-> AlterMirrorStatusResponseDataList UpdateKafkaV3MirrorTopicsResume(ctx, clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
+> AlterMirrorStatusResponseDataList UpdateKafkaMirrorTopicsResume(ctx, clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
 
 Resume the mirror topics
 
@@ -1230,18 +1242,18 @@ import (
 func main() {
     clusterId := "cluster-1" // string | The Kafka cluster ID.
     linkName := "link-sb1" // string | The link name
-    validateOnly := false // bool | To validate if the link can be created or not, but not to create it. Default: false (optional)
+    validateOnly := false // bool | To validate the action can be performed successfully or not. Default: false (optional)
     alterMirrorsRequestData := *openapiclient.NewAlterMirrorsRequestData([]string{"MirrorTopicNames_example"}) // AlterMirrorsRequestData | Name of the topics to apply the changes (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClusterLinkingV3Api.UpdateKafkaV3MirrorTopicsResume(context.Background(), clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
+    resp, r, err := api_client.ClusterLinkingV3Api.UpdateKafkaMirrorTopicsResume(context.Background(), clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.UpdateKafkaV3MirrorTopicsResume``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.UpdateKafkaMirrorTopicsResume``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UpdateKafkaV3MirrorTopicsResume`: AlterMirrorStatusResponseDataList
-    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.UpdateKafkaV3MirrorTopicsResume`: %v\n", resp)
+    // response from `UpdateKafkaMirrorTopicsResume`: AlterMirrorStatusResponseDataList
+    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.UpdateKafkaMirrorTopicsResume`: %v\n", resp)
 }
 ```
 
@@ -1256,14 +1268,14 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUpdateKafkaV3MirrorTopicsResumeRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiUpdateKafkaMirrorTopicsResumeRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **validateOnly** | **bool** | To validate if the link can be created or not, but not to create it. Default: false | 
+ **validateOnly** | **bool** | To validate the action can be performed successfully or not. Default: false | 
  **alterMirrorsRequestData** | [**AlterMirrorsRequestData**](AlterMirrorsRequestData.md) | Name of the topics to apply the changes | 
 
 ### Return type
@@ -1277,7 +1289,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
