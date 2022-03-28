@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ErrorCode** | **int32** |  | 
-**Message** | **string** |  | 
+**Message** | **NullableString** |  | 
 
 ## Methods
 
 ### NewError
 
-`func NewError(errorCode int32, message string, ) *Error`
+`func NewError(errorCode int32, message NullableString, ) *Error`
 
 NewError instantiates a new Error object
 This constructor will assign default values to properties that have it defined,
@@ -66,6 +66,16 @@ and a boolean to check if the value has been set.
 SetMessage sets Message field to given value.
 
 
+### SetMessageNil
+
+`func (o *Error) SetMessageNil(b bool)`
+
+ SetMessageNil sets the value for Message to be an explicit nil
+
+### UnsetMessage
+`func (o *Error) UnsetMessage()`
+
+UnsetMessage ensures that no value is present for Message, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

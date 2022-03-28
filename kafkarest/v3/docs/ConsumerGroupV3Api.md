@@ -4,18 +4,18 @@ All URIs are relative to *https://pkc-00000.region.provider.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetKafkaV3Consumer**](ConsumerGroupV3Api.md#GetKafkaV3Consumer) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/consumers/{consumer_id} | Get Consumer
-[**GetKafkaV3ConsumerGroup**](ConsumerGroupV3Api.md#GetKafkaV3ConsumerGroup) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id} | Get Consumer Group
-[**GetKafkaV3ConsumerGroupLagSummary**](ConsumerGroupV3Api.md#GetKafkaV3ConsumerGroupLagSummary) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lag-summary | Get Consumer Group Lag Summary.
-[**ListKafkaV3ConsumerGroups**](ConsumerGroupV3Api.md#ListKafkaV3ConsumerGroups) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups | List Consumer Groups
-[**ListKafkaV3ConsumerLags**](ConsumerGroupV3Api.md#ListKafkaV3ConsumerLags) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lags | List Consumer Lags
-[**ListKafkaV3Consumers**](ConsumerGroupV3Api.md#ListKafkaV3Consumers) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/consumers | List Consumers
+[**GetKafkaConsumer**](ConsumerGroupV3Api.md#GetKafkaConsumer) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/consumers/{consumer_id} | Get Consumer
+[**GetKafkaConsumerGroup**](ConsumerGroupV3Api.md#GetKafkaConsumerGroup) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id} | Get Consumer Group
+[**GetKafkaConsumerGroupLagSummary**](ConsumerGroupV3Api.md#GetKafkaConsumerGroupLagSummary) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lag-summary | Get Consumer Group Lag Summary.
+[**ListKafkaConsumerGroups**](ConsumerGroupV3Api.md#ListKafkaConsumerGroups) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups | List Consumer Groups
+[**ListKafkaConsumerLags**](ConsumerGroupV3Api.md#ListKafkaConsumerLags) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lags | List Consumer Lags
+[**ListKafkaConsumers**](ConsumerGroupV3Api.md#ListKafkaConsumers) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/consumers | List Consumers
 
 
 
-## GetKafkaV3Consumer
+## GetKafkaConsumer
 
-> ConsumerData GetKafkaV3Consumer(ctx, clusterId, consumerGroupId, consumerId).Execute()
+> ConsumerData GetKafkaConsumer(ctx, clusterId, consumerGroupId, consumerId).Execute()
 
 Get Consumer
 
@@ -40,13 +40,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ConsumerGroupV3Api.GetKafkaV3Consumer(context.Background(), clusterId, consumerGroupId, consumerId).Execute()
+    resp, r, err := api_client.ConsumerGroupV3Api.GetKafkaConsumer(context.Background(), clusterId, consumerGroupId, consumerId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConsumerGroupV3Api.GetKafkaV3Consumer``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ConsumerGroupV3Api.GetKafkaConsumer``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetKafkaV3Consumer`: ConsumerData
-    fmt.Fprintf(os.Stdout, "Response from `ConsumerGroupV3Api.GetKafkaV3Consumer`: %v\n", resp)
+    // response from `GetKafkaConsumer`: ConsumerData
+    fmt.Fprintf(os.Stdout, "Response from `ConsumerGroupV3Api.GetKafkaConsumer`: %v\n", resp)
 }
 ```
 
@@ -62,7 +62,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetKafkaV3ConsumerRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetKafkaConsumerRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -82,16 +82,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## GetKafkaV3ConsumerGroup
+## GetKafkaConsumerGroup
 
-> ConsumerGroupData GetKafkaV3ConsumerGroup(ctx, clusterId, consumerGroupId).Execute()
+> ConsumerGroupData GetKafkaConsumerGroup(ctx, clusterId, consumerGroupId).Execute()
 
 Get Consumer Group
 
@@ -115,13 +115,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ConsumerGroupV3Api.GetKafkaV3ConsumerGroup(context.Background(), clusterId, consumerGroupId).Execute()
+    resp, r, err := api_client.ConsumerGroupV3Api.GetKafkaConsumerGroup(context.Background(), clusterId, consumerGroupId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConsumerGroupV3Api.GetKafkaV3ConsumerGroup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ConsumerGroupV3Api.GetKafkaConsumerGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetKafkaV3ConsumerGroup`: ConsumerGroupData
-    fmt.Fprintf(os.Stdout, "Response from `ConsumerGroupV3Api.GetKafkaV3ConsumerGroup`: %v\n", resp)
+    // response from `GetKafkaConsumerGroup`: ConsumerGroupData
+    fmt.Fprintf(os.Stdout, "Response from `ConsumerGroupV3Api.GetKafkaConsumerGroup`: %v\n", resp)
 }
 ```
 
@@ -136,7 +136,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetKafkaV3ConsumerGroupRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetKafkaConsumerGroupRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -155,16 +155,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## GetKafkaV3ConsumerGroupLagSummary
+## GetKafkaConsumerGroupLagSummary
 
-> ConsumerGroupLagSummaryData GetKafkaV3ConsumerGroupLagSummary(ctx, clusterId, consumerGroupId).Execute()
+> ConsumerGroupLagSummaryData GetKafkaConsumerGroupLagSummary(ctx, clusterId, consumerGroupId).Execute()
 
 Get Consumer Group Lag Summary.
 
@@ -188,13 +188,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ConsumerGroupV3Api.GetKafkaV3ConsumerGroupLagSummary(context.Background(), clusterId, consumerGroupId).Execute()
+    resp, r, err := api_client.ConsumerGroupV3Api.GetKafkaConsumerGroupLagSummary(context.Background(), clusterId, consumerGroupId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConsumerGroupV3Api.GetKafkaV3ConsumerGroupLagSummary``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ConsumerGroupV3Api.GetKafkaConsumerGroupLagSummary``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetKafkaV3ConsumerGroupLagSummary`: ConsumerGroupLagSummaryData
-    fmt.Fprintf(os.Stdout, "Response from `ConsumerGroupV3Api.GetKafkaV3ConsumerGroupLagSummary`: %v\n", resp)
+    // response from `GetKafkaConsumerGroupLagSummary`: ConsumerGroupLagSummaryData
+    fmt.Fprintf(os.Stdout, "Response from `ConsumerGroupV3Api.GetKafkaConsumerGroupLagSummary`: %v\n", resp)
 }
 ```
 
@@ -209,7 +209,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetKafkaV3ConsumerGroupLagSummaryRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetKafkaConsumerGroupLagSummaryRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -228,16 +228,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## ListKafkaV3ConsumerGroups
+## ListKafkaConsumerGroups
 
-> ConsumerGroupDataList ListKafkaV3ConsumerGroups(ctx, clusterId).Execute()
+> ConsumerGroupDataList ListKafkaConsumerGroups(ctx, clusterId).Execute()
 
 List Consumer Groups
 
@@ -260,13 +260,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ConsumerGroupV3Api.ListKafkaV3ConsumerGroups(context.Background(), clusterId).Execute()
+    resp, r, err := api_client.ConsumerGroupV3Api.ListKafkaConsumerGroups(context.Background(), clusterId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConsumerGroupV3Api.ListKafkaV3ConsumerGroups``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ConsumerGroupV3Api.ListKafkaConsumerGroups``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListKafkaV3ConsumerGroups`: ConsumerGroupDataList
-    fmt.Fprintf(os.Stdout, "Response from `ConsumerGroupV3Api.ListKafkaV3ConsumerGroups`: %v\n", resp)
+    // response from `ListKafkaConsumerGroups`: ConsumerGroupDataList
+    fmt.Fprintf(os.Stdout, "Response from `ConsumerGroupV3Api.ListKafkaConsumerGroups`: %v\n", resp)
 }
 ```
 
@@ -280,7 +280,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListKafkaV3ConsumerGroupsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListKafkaConsumerGroupsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -298,16 +298,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## ListKafkaV3ConsumerLags
+## ListKafkaConsumerLags
 
-> ConsumerLagDataList ListKafkaV3ConsumerLags(ctx, clusterId, consumerGroupId).Execute()
+> ConsumerLagDataList ListKafkaConsumerLags(ctx, clusterId, consumerGroupId).Execute()
 
 List Consumer Lags
 
@@ -331,13 +331,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ConsumerGroupV3Api.ListKafkaV3ConsumerLags(context.Background(), clusterId, consumerGroupId).Execute()
+    resp, r, err := api_client.ConsumerGroupV3Api.ListKafkaConsumerLags(context.Background(), clusterId, consumerGroupId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConsumerGroupV3Api.ListKafkaV3ConsumerLags``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ConsumerGroupV3Api.ListKafkaConsumerLags``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListKafkaV3ConsumerLags`: ConsumerLagDataList
-    fmt.Fprintf(os.Stdout, "Response from `ConsumerGroupV3Api.ListKafkaV3ConsumerLags`: %v\n", resp)
+    // response from `ListKafkaConsumerLags`: ConsumerLagDataList
+    fmt.Fprintf(os.Stdout, "Response from `ConsumerGroupV3Api.ListKafkaConsumerLags`: %v\n", resp)
 }
 ```
 
@@ -352,7 +352,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListKafkaV3ConsumerLagsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListKafkaConsumerLagsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -371,16 +371,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## ListKafkaV3Consumers
+## ListKafkaConsumers
 
-> ConsumerDataList ListKafkaV3Consumers(ctx, clusterId, consumerGroupId).Execute()
+> ConsumerDataList ListKafkaConsumers(ctx, clusterId, consumerGroupId).Execute()
 
 List Consumers
 
@@ -404,13 +404,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ConsumerGroupV3Api.ListKafkaV3Consumers(context.Background(), clusterId, consumerGroupId).Execute()
+    resp, r, err := api_client.ConsumerGroupV3Api.ListKafkaConsumers(context.Background(), clusterId, consumerGroupId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConsumerGroupV3Api.ListKafkaV3Consumers``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ConsumerGroupV3Api.ListKafkaConsumers``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListKafkaV3Consumers`: ConsumerDataList
-    fmt.Fprintf(os.Stdout, "Response from `ConsumerGroupV3Api.ListKafkaV3Consumers`: %v\n", resp)
+    // response from `ListKafkaConsumers`: ConsumerDataList
+    fmt.Fprintf(os.Stdout, "Response from `ConsumerGroupV3Api.ListKafkaConsumers`: %v\n", resp)
 }
 ```
 
@@ -425,7 +425,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListKafkaV3ConsumersRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListKafkaConsumersRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -444,7 +444,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

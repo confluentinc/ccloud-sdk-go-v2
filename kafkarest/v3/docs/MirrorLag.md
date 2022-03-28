@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Partition** | **int32** |  | 
-**Lag** | **int32** |  | 
+**Lag** | **int64** |  | 
 **LastSourceFetchOffset** | **int64** |  | 
 
 ## Methods
 
 ### NewMirrorLag
 
-`func NewMirrorLag(partition int32, lag int32, lastSourceFetchOffset int64, ) *MirrorLag`
+`func NewMirrorLag(partition int32, lag int64, lastSourceFetchOffset int64, ) *MirrorLag`
 
 NewMirrorLag instantiates a new MirrorLag object
 This constructor will assign default values to properties that have it defined,
@@ -49,20 +49,20 @@ SetPartition sets Partition field to given value.
 
 ### GetLag
 
-`func (o *MirrorLag) GetLag() int32`
+`func (o *MirrorLag) GetLag() int64`
 
 GetLag returns the Lag field if non-nil, zero value otherwise.
 
 ### GetLagOk
 
-`func (o *MirrorLag) GetLagOk() (*int32, bool)`
+`func (o *MirrorLag) GetLagOk() (*int64, bool)`
 
 GetLagOk returns a tuple with the Lag field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLag
 
-`func (o *MirrorLag) SetLag(v int32)`
+`func (o *MirrorLag) SetLag(v int64)`
 
 SetLag sets Lag field to given value.
 

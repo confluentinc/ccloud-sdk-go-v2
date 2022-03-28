@@ -3,15 +3,15 @@
 ## Enum
 
 
-* `ACTIVE` (value: `"active"`)
+* `ACTIVE` (value: `"ACTIVE"`)
 
-* `FAILED` (value: `"failed"`)
+* `FAILED` (value: `"FAILED"`)
 
-* `PAUSED` (value: `"paused"`)
+* `PAUSED` (value: `"PAUSED"`)
 
-* `STOPPED` (value: `"stopped"`)
+* `STOPPED` (value: `"STOPPED"`)
 
-* `PENDING_STOPPED` (value: `"pending_stopped"`)
+* `PENDING_STOPPED` (value: `"PENDING_STOPPED"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

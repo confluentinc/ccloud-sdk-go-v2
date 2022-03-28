@@ -36,18 +36,18 @@ import (
 
 // AnyUnevenLoadData struct for AnyUnevenLoadData
 type AnyUnevenLoadData struct {
-	Kind string `json:"kind"`
-	Metadata ResourceMetadata `json:"metadata"`
-	ClusterId string `json:"cluster_id"`
-	Status string `json:"status"`
-	PreviousStatus string `json:"previous_status"`
+	Kind           string           `json:"kind"`
+	Metadata       ResourceMetadata `json:"metadata"`
+	ClusterId      string           `json:"cluster_id"`
+	Status         string           `json:"status"`
+	PreviousStatus string           `json:"previous_status"`
 	// The date and time at which this task was created.
 	StatusUpdatedAt time.Time `json:"status_updated_at"`
 	// The date and time at which this task was created.
-	PreviousStatusUpdatedAt time.Time `json:"previous_status_updated_at"`
-	ErrorCode NullableInt32 `json:"error_code,omitempty"`
-	ErrorMessage NullableString `json:"error_message,omitempty"`
-	BrokerTasks Relationship `json:"broker_tasks"`
+	PreviousStatusUpdatedAt time.Time      `json:"previous_status_updated_at"`
+	ErrorCode               NullableInt32  `json:"error_code,omitempty"`
+	ErrorMessage            NullableString `json:"error_message,omitempty"`
+	BrokerTasks             Relationship   `json:"broker_tasks"`
 }
 
 // NewAnyUnevenLoadData instantiates a new AnyUnevenLoadData object
@@ -88,7 +88,7 @@ func (o *AnyUnevenLoadData) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *AnyUnevenLoadData) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -112,7 +112,7 @@ func (o *AnyUnevenLoadData) GetMetadata() ResourceMetadata {
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *AnyUnevenLoadData) GetMetadataOk() (*ResourceMetadata, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Metadata, true
@@ -136,7 +136,7 @@ func (o *AnyUnevenLoadData) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *AnyUnevenLoadData) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -160,7 +160,7 @@ func (o *AnyUnevenLoadData) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
 func (o *AnyUnevenLoadData) GetStatusOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Status, true
@@ -184,7 +184,7 @@ func (o *AnyUnevenLoadData) GetPreviousStatus() string {
 // GetPreviousStatusOk returns a tuple with the PreviousStatus field value
 // and a boolean to check if the value has been set.
 func (o *AnyUnevenLoadData) GetPreviousStatusOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PreviousStatus, true
@@ -208,7 +208,7 @@ func (o *AnyUnevenLoadData) GetStatusUpdatedAt() time.Time {
 // GetStatusUpdatedAtOk returns a tuple with the StatusUpdatedAt field value
 // and a boolean to check if the value has been set.
 func (o *AnyUnevenLoadData) GetStatusUpdatedAtOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.StatusUpdatedAt, true
@@ -232,7 +232,7 @@ func (o *AnyUnevenLoadData) GetPreviousStatusUpdatedAt() time.Time {
 // GetPreviousStatusUpdatedAtOk returns a tuple with the PreviousStatusUpdatedAt field value
 // and a boolean to check if the value has been set.
 func (o *AnyUnevenLoadData) GetPreviousStatusUpdatedAtOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PreviousStatusUpdatedAt, true
@@ -256,7 +256,7 @@ func (o *AnyUnevenLoadData) GetErrorCode() int32 {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AnyUnevenLoadData) GetErrorCodeOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.ErrorCode.Get(), o.ErrorCode.IsSet()
@@ -275,6 +275,7 @@ func (o *AnyUnevenLoadData) HasErrorCode() bool {
 func (o *AnyUnevenLoadData) SetErrorCode(v int32) {
 	o.ErrorCode.Set(&v)
 }
+
 // SetErrorCodeNil sets the value for ErrorCode to be an explicit nil
 func (o *AnyUnevenLoadData) SetErrorCodeNil() {
 	o.ErrorCode.Set(nil)
@@ -298,7 +299,7 @@ func (o *AnyUnevenLoadData) GetErrorMessage() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AnyUnevenLoadData) GetErrorMessageOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.ErrorMessage.Get(), o.ErrorMessage.IsSet()
@@ -317,6 +318,7 @@ func (o *AnyUnevenLoadData) HasErrorMessage() bool {
 func (o *AnyUnevenLoadData) SetErrorMessage(v string) {
 	o.ErrorMessage.Set(&v)
 }
+
 // SetErrorMessageNil sets the value for ErrorMessage to be an explicit nil
 func (o *AnyUnevenLoadData) SetErrorMessageNil() {
 	o.ErrorMessage.Set(nil)
@@ -340,7 +342,7 @@ func (o *AnyUnevenLoadData) GetBrokerTasks() Relationship {
 // GetBrokerTasksOk returns a tuple with the BrokerTasks field value
 // and a boolean to check if the value has been set.
 func (o *AnyUnevenLoadData) GetBrokerTasksOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.BrokerTasks, true
@@ -353,46 +355,46 @@ func (o *AnyUnevenLoadData) SetBrokerTasks(v Relationship) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *AnyUnevenLoadData) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Metadata)
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.Status)
-    o.recurseRedact(&o.PreviousStatus)
-    o.recurseRedact(&o.StatusUpdatedAt)
-    o.recurseRedact(&o.PreviousStatusUpdatedAt)
-    o.recurseRedact(o.ErrorCode)
-    o.recurseRedact(o.ErrorMessage)
-    o.recurseRedact(&o.BrokerTasks)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Metadata)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.Status)
+	o.recurseRedact(&o.PreviousStatus)
+	o.recurseRedact(&o.StatusUpdatedAt)
+	o.recurseRedact(&o.PreviousStatusUpdatedAt)
+	o.recurseRedact(o.ErrorCode)
+	o.recurseRedact(o.ErrorMessage)
+	o.recurseRedact(&o.BrokerTasks)
 }
 
 func (o *AnyUnevenLoadData) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o AnyUnevenLoadData) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o AnyUnevenLoadData) MarshalJSON() ([]byte, error) {
@@ -465,5 +467,3 @@ func (v *NullableAnyUnevenLoadData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

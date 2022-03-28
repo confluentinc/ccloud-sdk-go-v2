@@ -4,15 +4,15 @@ All URIs are relative to *https://pkc-00000.region.provider.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetKafkaV3ConsumerLag**](PartitionV3Api.md#GetKafkaV3ConsumerLag) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lags/{topic_name}/partitions/{partition_id} | Get Consumer Lag
-[**GetKafkaV3Partition**](PartitionV3Api.md#GetKafkaV3Partition) | **Get** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/partitions/{partition_id} | Get Partition
-[**ListKafkaV3Partitions**](PartitionV3Api.md#ListKafkaV3Partitions) | **Get** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/partitions | List Partitions
+[**GetKafkaConsumerLag**](PartitionV3Api.md#GetKafkaConsumerLag) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lags/{topic_name}/partitions/{partition_id} | Get Consumer Lag
+[**GetKafkaPartition**](PartitionV3Api.md#GetKafkaPartition) | **Get** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/partitions/{partition_id} | Get Partition
+[**ListKafkaPartitions**](PartitionV3Api.md#ListKafkaPartitions) | **Get** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/partitions | List Partitions
 
 
 
-## GetKafkaV3ConsumerLag
+## GetKafkaConsumerLag
 
-> ConsumerLagData GetKafkaV3ConsumerLag(ctx, clusterId, consumerGroupId, topicName, partitionId).Execute()
+> ConsumerLagData GetKafkaConsumerLag(ctx, clusterId, consumerGroupId, topicName, partitionId).Execute()
 
 Get Consumer Lag
 
@@ -38,13 +38,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PartitionV3Api.GetKafkaV3ConsumerLag(context.Background(), clusterId, consumerGroupId, topicName, partitionId).Execute()
+    resp, r, err := api_client.PartitionV3Api.GetKafkaConsumerLag(context.Background(), clusterId, consumerGroupId, topicName, partitionId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PartitionV3Api.GetKafkaV3ConsumerLag``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PartitionV3Api.GetKafkaConsumerLag``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetKafkaV3ConsumerLag`: ConsumerLagData
-    fmt.Fprintf(os.Stdout, "Response from `PartitionV3Api.GetKafkaV3ConsumerLag`: %v\n", resp)
+    // response from `GetKafkaConsumerLag`: ConsumerLagData
+    fmt.Fprintf(os.Stdout, "Response from `PartitionV3Api.GetKafkaConsumerLag`: %v\n", resp)
 }
 ```
 
@@ -61,7 +61,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetKafkaV3ConsumerLagRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetKafkaConsumerLagRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -82,16 +82,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## GetKafkaV3Partition
+## GetKafkaPartition
 
-> PartitionData GetKafkaV3Partition(ctx, clusterId, topicName, partitionId).Execute()
+> PartitionData GetKafkaPartition(ctx, clusterId, topicName, partitionId).Execute()
 
 Get Partition
 
@@ -116,13 +116,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PartitionV3Api.GetKafkaV3Partition(context.Background(), clusterId, topicName, partitionId).Execute()
+    resp, r, err := api_client.PartitionV3Api.GetKafkaPartition(context.Background(), clusterId, topicName, partitionId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PartitionV3Api.GetKafkaV3Partition``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PartitionV3Api.GetKafkaPartition``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetKafkaV3Partition`: PartitionData
-    fmt.Fprintf(os.Stdout, "Response from `PartitionV3Api.GetKafkaV3Partition`: %v\n", resp)
+    // response from `GetKafkaPartition`: PartitionData
+    fmt.Fprintf(os.Stdout, "Response from `PartitionV3Api.GetKafkaPartition`: %v\n", resp)
 }
 ```
 
@@ -138,7 +138,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetKafkaV3PartitionRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetKafkaPartitionRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -158,16 +158,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## ListKafkaV3Partitions
+## ListKafkaPartitions
 
-> PartitionDataList ListKafkaV3Partitions(ctx, clusterId, topicName).Execute()
+> PartitionDataList ListKafkaPartitions(ctx, clusterId, topicName).Execute()
 
 List Partitions
 
@@ -191,13 +191,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PartitionV3Api.ListKafkaV3Partitions(context.Background(), clusterId, topicName).Execute()
+    resp, r, err := api_client.PartitionV3Api.ListKafkaPartitions(context.Background(), clusterId, topicName).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PartitionV3Api.ListKafkaV3Partitions``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PartitionV3Api.ListKafkaPartitions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListKafkaV3Partitions`: PartitionDataList
-    fmt.Fprintf(os.Stdout, "Response from `PartitionV3Api.ListKafkaV3Partitions`: %v\n", resp)
+    // response from `ListKafkaPartitions`: PartitionDataList
+    fmt.Fprintf(os.Stdout, "Response from `PartitionV3Api.ListKafkaPartitions`: %v\n", resp)
 }
 ```
 
@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListKafkaV3PartitionsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListKafkaPartitionsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -231,7 +231,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

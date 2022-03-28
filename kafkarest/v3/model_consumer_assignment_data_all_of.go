@@ -35,13 +35,13 @@ import (
 
 // ConsumerAssignmentDataAllOf struct for ConsumerAssignmentDataAllOf
 type ConsumerAssignmentDataAllOf struct {
-	ClusterId string `json:"cluster_id"`
-	ConsumerGroupId string `json:"consumer_group_id"`
-	ConsumerId string `json:"consumer_id"`
-	TopicName string `json:"topic_name"`
-	PartitionId int32 `json:"partition_id"`
-	Partition Relationship `json:"partition"`
-	Lag Relationship `json:"lag"`
+	ClusterId       string       `json:"cluster_id"`
+	ConsumerGroupId string       `json:"consumer_group_id"`
+	ConsumerId      string       `json:"consumer_id"`
+	TopicName       string       `json:"topic_name"`
+	PartitionId     int32        `json:"partition_id"`
+	Partition       Relationship `json:"partition"`
+	Lag             Relationship `json:"lag"`
 }
 
 // NewConsumerAssignmentDataAllOf instantiates a new ConsumerAssignmentDataAllOf object
@@ -81,7 +81,7 @@ func (o *ConsumerAssignmentDataAllOf) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerAssignmentDataAllOf) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -105,7 +105,7 @@ func (o *ConsumerAssignmentDataAllOf) GetConsumerGroupId() string {
 // GetConsumerGroupIdOk returns a tuple with the ConsumerGroupId field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerAssignmentDataAllOf) GetConsumerGroupIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ConsumerGroupId, true
@@ -129,7 +129,7 @@ func (o *ConsumerAssignmentDataAllOf) GetConsumerId() string {
 // GetConsumerIdOk returns a tuple with the ConsumerId field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerAssignmentDataAllOf) GetConsumerIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ConsumerId, true
@@ -153,7 +153,7 @@ func (o *ConsumerAssignmentDataAllOf) GetTopicName() string {
 // GetTopicNameOk returns a tuple with the TopicName field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerAssignmentDataAllOf) GetTopicNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.TopicName, true
@@ -177,7 +177,7 @@ func (o *ConsumerAssignmentDataAllOf) GetPartitionId() int32 {
 // GetPartitionIdOk returns a tuple with the PartitionId field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerAssignmentDataAllOf) GetPartitionIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PartitionId, true
@@ -201,7 +201,7 @@ func (o *ConsumerAssignmentDataAllOf) GetPartition() Relationship {
 // GetPartitionOk returns a tuple with the Partition field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerAssignmentDataAllOf) GetPartitionOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Partition, true
@@ -225,7 +225,7 @@ func (o *ConsumerAssignmentDataAllOf) GetLag() Relationship {
 // GetLagOk returns a tuple with the Lag field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerAssignmentDataAllOf) GetLagOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Lag, true
@@ -238,43 +238,43 @@ func (o *ConsumerAssignmentDataAllOf) SetLag(v Relationship) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ConsumerAssignmentDataAllOf) Redact() {
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.ConsumerGroupId)
-    o.recurseRedact(&o.ConsumerId)
-    o.recurseRedact(&o.TopicName)
-    o.recurseRedact(&o.PartitionId)
-    o.recurseRedact(&o.Partition)
-    o.recurseRedact(&o.Lag)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.ConsumerGroupId)
+	o.recurseRedact(&o.ConsumerId)
+	o.recurseRedact(&o.TopicName)
+	o.recurseRedact(&o.PartitionId)
+	o.recurseRedact(&o.Partition)
+	o.recurseRedact(&o.Lag)
 }
 
 func (o *ConsumerAssignmentDataAllOf) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ConsumerAssignmentDataAllOf) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ConsumerAssignmentDataAllOf) MarshalJSON() ([]byte, error) {
@@ -338,5 +338,3 @@ func (v *NullableConsumerAssignmentDataAllOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClusterId** | **string** |  | 
 **TopicName** | **string** |  | 
 **PartitionId** | **int32** |  | 
-**Offset** | **int32** |  | 
+**Offset** | **int64** |  | 
 **Timestamp** | Pointer to **NullableTime** |  | [optional] 
 **Key** | Pointer to [**NullableProduceResponseData**](ProduceResponseData.md) |  | [optional] 
 **Value** | Pointer to [**NullableProduceResponseData**](ProduceResponseData.md) |  | [optional] 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewProduceResponse
 
-`func NewProduceResponse(clusterId string, topicName string, partitionId int32, offset int32, ) *ProduceResponse`
+`func NewProduceResponse(clusterId string, topicName string, partitionId int32, offset int64, ) *ProduceResponse`
 
 NewProduceResponse instantiates a new ProduceResponse object
 This constructor will assign default values to properties that have it defined,
@@ -93,20 +93,20 @@ SetPartitionId sets PartitionId field to given value.
 
 ### GetOffset
 
-`func (o *ProduceResponse) GetOffset() int32`
+`func (o *ProduceResponse) GetOffset() int64`
 
 GetOffset returns the Offset field if non-nil, zero value otherwise.
 
 ### GetOffsetOk
 
-`func (o *ProduceResponse) GetOffsetOk() (*int32, bool)`
+`func (o *ProduceResponse) GetOffsetOk() (*int64, bool)`
 
 GetOffsetOk returns a tuple with the Offset field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOffset
 
-`func (o *ProduceResponse) SetOffset(v int32)`
+`func (o *ProduceResponse) SetOffset(v int64)`
 
 SetOffset sets Offset field to given value.
 

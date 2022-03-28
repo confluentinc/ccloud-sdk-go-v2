@@ -35,17 +35,17 @@ import (
 
 // TopicConfigData struct for TopicConfigData
 type TopicConfigData struct {
-	Kind string `json:"kind"`
-	Metadata ResourceMetadata `json:"metadata"`
-	ClusterId string `json:"cluster_id"`
-	Name string `json:"name"`
-	Value NullableString `json:"value,omitempty"`
-	IsDefault bool `json:"is_default"`
-	IsReadOnly bool `json:"is_read_only"`
-	IsSensitive bool `json:"is_sensitive"`
-	Source string `json:"source"`
-	Synonyms []ConfigSynonymData `json:"synonyms"`
-	TopicName string `json:"topic_name"`
+	Kind        string              `json:"kind"`
+	Metadata    ResourceMetadata    `json:"metadata"`
+	ClusterId   string              `json:"cluster_id"`
+	Name        string              `json:"name"`
+	Value       NullableString      `json:"value,omitempty"`
+	IsDefault   bool                `json:"is_default"`
+	IsReadOnly  bool                `json:"is_read_only"`
+	IsSensitive bool                `json:"is_sensitive"`
+	Source      string              `json:"source"`
+	Synonyms    []ConfigSynonymData `json:"synonyms"`
+	TopicName   string              `json:"topic_name"`
 }
 
 // NewTopicConfigData instantiates a new TopicConfigData object
@@ -88,7 +88,7 @@ func (o *TopicConfigData) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *TopicConfigData) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -112,7 +112,7 @@ func (o *TopicConfigData) GetMetadata() ResourceMetadata {
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *TopicConfigData) GetMetadataOk() (*ResourceMetadata, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Metadata, true
@@ -136,7 +136,7 @@ func (o *TopicConfigData) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *TopicConfigData) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -160,7 +160,7 @@ func (o *TopicConfigData) GetName() string {
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *TopicConfigData) GetNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Name, true
@@ -184,7 +184,7 @@ func (o *TopicConfigData) GetValue() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TopicConfigData) GetValueOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Value.Get(), o.Value.IsSet()
@@ -203,6 +203,7 @@ func (o *TopicConfigData) HasValue() bool {
 func (o *TopicConfigData) SetValue(v string) {
 	o.Value.Set(&v)
 }
+
 // SetValueNil sets the value for Value to be an explicit nil
 func (o *TopicConfigData) SetValueNil() {
 	o.Value.Set(nil)
@@ -226,7 +227,7 @@ func (o *TopicConfigData) GetIsDefault() bool {
 // GetIsDefaultOk returns a tuple with the IsDefault field value
 // and a boolean to check if the value has been set.
 func (o *TopicConfigData) GetIsDefaultOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.IsDefault, true
@@ -250,7 +251,7 @@ func (o *TopicConfigData) GetIsReadOnly() bool {
 // GetIsReadOnlyOk returns a tuple with the IsReadOnly field value
 // and a boolean to check if the value has been set.
 func (o *TopicConfigData) GetIsReadOnlyOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.IsReadOnly, true
@@ -274,7 +275,7 @@ func (o *TopicConfigData) GetIsSensitive() bool {
 // GetIsSensitiveOk returns a tuple with the IsSensitive field value
 // and a boolean to check if the value has been set.
 func (o *TopicConfigData) GetIsSensitiveOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.IsSensitive, true
@@ -298,7 +299,7 @@ func (o *TopicConfigData) GetSource() string {
 // GetSourceOk returns a tuple with the Source field value
 // and a boolean to check if the value has been set.
 func (o *TopicConfigData) GetSourceOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Source, true
@@ -322,7 +323,7 @@ func (o *TopicConfigData) GetSynonyms() []ConfigSynonymData {
 // GetSynonymsOk returns a tuple with the Synonyms field value
 // and a boolean to check if the value has been set.
 func (o *TopicConfigData) GetSynonymsOk() (*[]ConfigSynonymData, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Synonyms, true
@@ -346,7 +347,7 @@ func (o *TopicConfigData) GetTopicName() string {
 // GetTopicNameOk returns a tuple with the TopicName field value
 // and a boolean to check if the value has been set.
 func (o *TopicConfigData) GetTopicNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.TopicName, true
@@ -359,47 +360,47 @@ func (o *TopicConfigData) SetTopicName(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *TopicConfigData) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Metadata)
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.Name)
-    o.recurseRedact(o.Value)
-    o.recurseRedact(&o.IsDefault)
-    o.recurseRedact(&o.IsReadOnly)
-    o.recurseRedact(&o.IsSensitive)
-    o.recurseRedact(&o.Source)
-    o.recurseRedact(&o.Synonyms)
-    o.recurseRedact(&o.TopicName)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Metadata)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.Name)
+	o.recurseRedact(o.Value)
+	o.recurseRedact(&o.IsDefault)
+	o.recurseRedact(&o.IsReadOnly)
+	o.recurseRedact(&o.IsSensitive)
+	o.recurseRedact(&o.Source)
+	o.recurseRedact(&o.Synonyms)
+	o.recurseRedact(&o.TopicName)
 }
 
 func (o *TopicConfigData) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o TopicConfigData) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o TopicConfigData) MarshalJSON() ([]byte, error) {
@@ -475,5 +476,3 @@ func (v *NullableTopicConfigData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

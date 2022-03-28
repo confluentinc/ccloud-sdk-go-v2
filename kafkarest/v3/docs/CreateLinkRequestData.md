@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SourceClusterId** | **string** |  | 
+**SourceClusterId** | Pointer to **string** |  | [optional] 
 **Configs** | Pointer to [**[]ConfigData**](ConfigData.md) |  | [optional] 
 
 ## Methods
 
 ### NewCreateLinkRequestData
 
-`func NewCreateLinkRequestData(sourceClusterId string, ) *CreateLinkRequestData`
+`func NewCreateLinkRequestData() *CreateLinkRequestData`
 
 NewCreateLinkRequestData instantiates a new CreateLinkRequestData object
 This constructor will assign default values to properties that have it defined,
@@ -45,6 +45,11 @@ and a boolean to check if the value has been set.
 
 SetSourceClusterId sets SourceClusterId field to given value.
 
+### HasSourceClusterId
+
+`func (o *CreateLinkRequestData) HasSourceClusterId() bool`
+
+HasSourceClusterId returns a boolean if a field has been set.
 
 ### GetConfigs
 

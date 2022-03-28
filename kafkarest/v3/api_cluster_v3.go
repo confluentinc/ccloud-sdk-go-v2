@@ -42,39 +42,38 @@ var (
 type ClusterV3Api interface {
 
 	/*
-	GetKafkaV3Cluster Get Cluster
+			GetKafkaCluster Get Cluster
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Returns the Kafka cluster with the specified ``cluster_id``.
+		Returns the Kafka cluster with the specified ``cluster_id``.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param clusterId The Kafka cluster ID.
-	 @return ApiGetKafkaV3ClusterRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @return ApiGetKafkaClusterRequest
 	*/
-	GetKafkaV3Cluster(ctx _context.Context, clusterId string) ApiGetKafkaV3ClusterRequest
+	GetKafkaCluster(ctx _context.Context, clusterId string) ApiGetKafkaClusterRequest
 
-	// GetKafkaV3ClusterExecute executes the request
+	// GetKafkaClusterExecute executes the request
 	//  @return ClusterData
-	GetKafkaV3ClusterExecute(r ApiGetKafkaV3ClusterRequest) (ClusterData, *_nethttp.Response, error)
+	GetKafkaClusterExecute(r ApiGetKafkaClusterRequest) (ClusterData, *_nethttp.Response, error)
 }
 
 // ClusterV3ApiService ClusterV3Api service
 type ClusterV3ApiService service
 
-type ApiGetKafkaV3ClusterRequest struct {
-	ctx _context.Context
+type ApiGetKafkaClusterRequest struct {
+	ctx        _context.Context
 	ApiService ClusterV3Api
-	clusterId string
+	clusterId  string
 }
 
-
-func (r ApiGetKafkaV3ClusterRequest) Execute() (ClusterData, *_nethttp.Response, error) {
-	return r.ApiService.GetKafkaV3ClusterExecute(r)
+func (r ApiGetKafkaClusterRequest) Execute() (ClusterData, *_nethttp.Response, error) {
+	return r.ApiService.GetKafkaClusterExecute(r)
 }
 
 /*
-GetKafkaV3Cluster Get Cluster
+GetKafkaCluster Get Cluster
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
@@ -82,19 +81,19 @@ Returns the Kafka cluster with the specified ``cluster_id``.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
- @return ApiGetKafkaV3ClusterRequest
+ @return ApiGetKafkaClusterRequest
 */
-func (a *ClusterV3ApiService) GetKafkaV3Cluster(ctx _context.Context, clusterId string) ApiGetKafkaV3ClusterRequest {
-	return ApiGetKafkaV3ClusterRequest{
+func (a *ClusterV3ApiService) GetKafkaCluster(ctx _context.Context, clusterId string) ApiGetKafkaClusterRequest {
+	return ApiGetKafkaClusterRequest{
 		ApiService: a,
-		ctx: ctx,
-		clusterId: clusterId,
+		ctx:        ctx,
+		clusterId:  clusterId,
 	}
 }
 
 // Execute executes the request
 //  @return ClusterData
-func (a *ClusterV3ApiService) GetKafkaV3ClusterExecute(r ApiGetKafkaV3ClusterRequest) (ClusterData, *_nethttp.Response, error) {
+func (a *ClusterV3ApiService) GetKafkaClusterExecute(r ApiGetKafkaClusterRequest) (ClusterData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -104,7 +103,7 @@ func (a *ClusterV3ApiService) GetKafkaV3ClusterExecute(r ApiGetKafkaV3ClusterReq
 		localVarReturnValue  ClusterData
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ClusterV3ApiService.GetKafkaV3Cluster")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ClusterV3ApiService.GetKafkaCluster")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -126,7 +125,7 @@ func (a *ClusterV3ApiService) GetKafkaV3ClusterExecute(r ApiGetKafkaV3ClusterReq
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -154,6 +153,45 @@ func (a *ClusterV3ApiService) GetKafkaV3ClusterExecute(r ApiGetKafkaV3ClusterReq
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
