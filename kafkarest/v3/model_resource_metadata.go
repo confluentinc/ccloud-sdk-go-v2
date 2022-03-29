@@ -35,7 +35,7 @@ import (
 
 // ResourceMetadata struct for ResourceMetadata
 type ResourceMetadata struct {
-	Self string `json:"self"`
+	Self         string         `json:"self"`
 	ResourceName NullableString `json:"resource_name,omitempty"`
 }
 
@@ -70,7 +70,7 @@ func (o *ResourceMetadata) GetSelf() string {
 // GetSelfOk returns a tuple with the Self field value
 // and a boolean to check if the value has been set.
 func (o *ResourceMetadata) GetSelfOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Self, true
@@ -94,7 +94,7 @@ func (o *ResourceMetadata) GetResourceName() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceMetadata) GetResourceNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.ResourceName.Get(), o.ResourceName.IsSet()
@@ -113,6 +113,7 @@ func (o *ResourceMetadata) HasResourceName() bool {
 func (o *ResourceMetadata) SetResourceName(v string) {
 	o.ResourceName.Set(&v)
 }
+
 // SetResourceNameNil sets the value for ResourceName to be an explicit nil
 func (o *ResourceMetadata) SetResourceNameNil() {
 	o.ResourceName.Set(nil)
@@ -125,38 +126,38 @@ func (o *ResourceMetadata) UnsetResourceName() {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ResourceMetadata) Redact() {
-    o.recurseRedact(&o.Self)
-    o.recurseRedact(o.ResourceName)
+	o.recurseRedact(&o.Self)
+	o.recurseRedact(o.ResourceName)
 }
 
 func (o *ResourceMetadata) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ResourceMetadata) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ResourceMetadata) MarshalJSON() ([]byte, error) {
@@ -205,5 +206,3 @@ func (v *NullableResourceMetadata) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

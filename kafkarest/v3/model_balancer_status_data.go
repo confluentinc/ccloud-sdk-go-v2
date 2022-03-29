@@ -35,14 +35,14 @@ import (
 
 // BalancerStatusData struct for BalancerStatusData
 type BalancerStatusData struct {
-	Kind string `json:"kind"`
-	Metadata ResourceMetadata `json:"metadata"`
-	ClusterId string `json:"cluster_id"`
-	Status string `json:"status"`
-	ErrorCode NullableInt32 `json:"error_code,omitempty"`
-	ErrorMessage NullableString `json:"error_message,omitempty"`
-	AnyUnevenLoad Relationship `json:"any_uneven_load"`
-	BrokerTasks Relationship `json:"broker_tasks"`
+	Kind          string           `json:"kind"`
+	Metadata      ResourceMetadata `json:"metadata"`
+	ClusterId     string           `json:"cluster_id"`
+	Status        string           `json:"status"`
+	ErrorCode     NullableInt32    `json:"error_code,omitempty"`
+	ErrorMessage  NullableString   `json:"error_message,omitempty"`
+	AnyUnevenLoad Relationship     `json:"any_uneven_load"`
+	BrokerTasks   Relationship     `json:"broker_tasks"`
 }
 
 // NewBalancerStatusData instantiates a new BalancerStatusData object
@@ -81,7 +81,7 @@ func (o *BalancerStatusData) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *BalancerStatusData) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -105,7 +105,7 @@ func (o *BalancerStatusData) GetMetadata() ResourceMetadata {
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *BalancerStatusData) GetMetadataOk() (*ResourceMetadata, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Metadata, true
@@ -129,7 +129,7 @@ func (o *BalancerStatusData) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *BalancerStatusData) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -153,7 +153,7 @@ func (o *BalancerStatusData) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
 func (o *BalancerStatusData) GetStatusOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Status, true
@@ -177,7 +177,7 @@ func (o *BalancerStatusData) GetErrorCode() int32 {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BalancerStatusData) GetErrorCodeOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.ErrorCode.Get(), o.ErrorCode.IsSet()
@@ -196,6 +196,7 @@ func (o *BalancerStatusData) HasErrorCode() bool {
 func (o *BalancerStatusData) SetErrorCode(v int32) {
 	o.ErrorCode.Set(&v)
 }
+
 // SetErrorCodeNil sets the value for ErrorCode to be an explicit nil
 func (o *BalancerStatusData) SetErrorCodeNil() {
 	o.ErrorCode.Set(nil)
@@ -219,7 +220,7 @@ func (o *BalancerStatusData) GetErrorMessage() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BalancerStatusData) GetErrorMessageOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.ErrorMessage.Get(), o.ErrorMessage.IsSet()
@@ -238,6 +239,7 @@ func (o *BalancerStatusData) HasErrorMessage() bool {
 func (o *BalancerStatusData) SetErrorMessage(v string) {
 	o.ErrorMessage.Set(&v)
 }
+
 // SetErrorMessageNil sets the value for ErrorMessage to be an explicit nil
 func (o *BalancerStatusData) SetErrorMessageNil() {
 	o.ErrorMessage.Set(nil)
@@ -261,7 +263,7 @@ func (o *BalancerStatusData) GetAnyUnevenLoad() Relationship {
 // GetAnyUnevenLoadOk returns a tuple with the AnyUnevenLoad field value
 // and a boolean to check if the value has been set.
 func (o *BalancerStatusData) GetAnyUnevenLoadOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AnyUnevenLoad, true
@@ -285,7 +287,7 @@ func (o *BalancerStatusData) GetBrokerTasks() Relationship {
 // GetBrokerTasksOk returns a tuple with the BrokerTasks field value
 // and a boolean to check if the value has been set.
 func (o *BalancerStatusData) GetBrokerTasksOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.BrokerTasks, true
@@ -298,44 +300,44 @@ func (o *BalancerStatusData) SetBrokerTasks(v Relationship) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *BalancerStatusData) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Metadata)
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.Status)
-    o.recurseRedact(o.ErrorCode)
-    o.recurseRedact(o.ErrorMessage)
-    o.recurseRedact(&o.AnyUnevenLoad)
-    o.recurseRedact(&o.BrokerTasks)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Metadata)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.Status)
+	o.recurseRedact(o.ErrorCode)
+	o.recurseRedact(o.ErrorMessage)
+	o.recurseRedact(&o.AnyUnevenLoad)
+	o.recurseRedact(&o.BrokerTasks)
 }
 
 func (o *BalancerStatusData) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o BalancerStatusData) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o BalancerStatusData) MarshalJSON() ([]byte, error) {
@@ -402,5 +404,3 @@ func (v *NullableBalancerStatusData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

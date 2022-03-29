@@ -42,218 +42,233 @@ var (
 type ConfigsV3Api interface {
 
 	/*
-	DeleteKafkaV3ClusterConfig Reset Cluster Config
+			DeleteKafkaClusterConfig Reset Cluster Config
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Resets the configuration parameter specified by ``name`` to its
-default value.
+		Resets the configuration parameter specified by ``name`` to its
+		default value.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param clusterId The Kafka cluster ID.
-	 @param name The configuration parameter name.
-	 @return ApiDeleteKafkaV3ClusterConfigRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @param name The configuration parameter name.
+			 @return ApiDeleteKafkaClusterConfigRequest
 	*/
-	DeleteKafkaV3ClusterConfig(ctx _context.Context, clusterId string, name string) ApiDeleteKafkaV3ClusterConfigRequest
+	DeleteKafkaClusterConfig(ctx _context.Context, clusterId string, name string) ApiDeleteKafkaClusterConfigRequest
 
-	// DeleteKafkaV3ClusterConfigExecute executes the request
-	DeleteKafkaV3ClusterConfigExecute(r ApiDeleteKafkaV3ClusterConfigRequest) (*_nethttp.Response, error)
+	// DeleteKafkaClusterConfigExecute executes the request
+	DeleteKafkaClusterConfigExecute(r ApiDeleteKafkaClusterConfigRequest) (*_nethttp.Response, error)
 
 	/*
-	DeleteKafkaV3TopicConfig Reset Topic Config
+			DeleteKafkaTopicConfig Reset Topic Config
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Resets the config with given `name` to its default value.
+		Resets the config with given `name` to its default value.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param clusterId The Kafka cluster ID.
-	 @param topicName The topic name.
-	 @param name The configuration parameter name.
-	 @return ApiDeleteKafkaV3TopicConfigRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @param topicName The topic name.
+			 @param name The configuration parameter name.
+			 @return ApiDeleteKafkaTopicConfigRequest
 	*/
-	DeleteKafkaV3TopicConfig(ctx _context.Context, clusterId string, topicName string, name string) ApiDeleteKafkaV3TopicConfigRequest
+	DeleteKafkaTopicConfig(ctx _context.Context, clusterId string, topicName string, name string) ApiDeleteKafkaTopicConfigRequest
 
-	// DeleteKafkaV3TopicConfigExecute executes the request
-	DeleteKafkaV3TopicConfigExecute(r ApiDeleteKafkaV3TopicConfigRequest) (*_nethttp.Response, error)
+	// DeleteKafkaTopicConfigExecute executes the request
+	DeleteKafkaTopicConfigExecute(r ApiDeleteKafkaTopicConfigRequest) (*_nethttp.Response, error)
 
 	/*
-	GetKafkaV3ClusterConfig Get Cluster Config
+			GetKafkaClusterConfig Get Cluster Config
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Returns the configuration parameter specified by ``name``.
+		Returns the configuration parameter specified by ``name``.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param clusterId The Kafka cluster ID.
-	 @param name The configuration parameter name.
-	 @return ApiGetKafkaV3ClusterConfigRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @param name The configuration parameter name.
+			 @return ApiGetKafkaClusterConfigRequest
 	*/
-	GetKafkaV3ClusterConfig(ctx _context.Context, clusterId string, name string) ApiGetKafkaV3ClusterConfigRequest
+	GetKafkaClusterConfig(ctx _context.Context, clusterId string, name string) ApiGetKafkaClusterConfigRequest
 
-	// GetKafkaV3ClusterConfigExecute executes the request
+	// GetKafkaClusterConfigExecute executes the request
 	//  @return ClusterConfigData
-	GetKafkaV3ClusterConfigExecute(r ApiGetKafkaV3ClusterConfigRequest) (ClusterConfigData, *_nethttp.Response, error)
+	GetKafkaClusterConfigExecute(r ApiGetKafkaClusterConfigRequest) (ClusterConfigData, *_nethttp.Response, error)
 
 	/*
-	GetKafkaV3TopicConfig Get Topic Config
+			GetKafkaTopicConfig Get Topic Config
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Return the config with the given `name`.
+		Return the config with the given `name`.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param clusterId The Kafka cluster ID.
-	 @param topicName The topic name.
-	 @param name The configuration parameter name.
-	 @return ApiGetKafkaV3TopicConfigRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @param topicName The topic name.
+			 @param name The configuration parameter name.
+			 @return ApiGetKafkaTopicConfigRequest
 	*/
-	GetKafkaV3TopicConfig(ctx _context.Context, clusterId string, topicName string, name string) ApiGetKafkaV3TopicConfigRequest
+	GetKafkaTopicConfig(ctx _context.Context, clusterId string, topicName string, name string) ApiGetKafkaTopicConfigRequest
 
-	// GetKafkaV3TopicConfigExecute executes the request
+	// GetKafkaTopicConfigExecute executes the request
 	//  @return TopicConfigData
-	GetKafkaV3TopicConfigExecute(r ApiGetKafkaV3TopicConfigRequest) (TopicConfigData, *_nethttp.Response, error)
+	GetKafkaTopicConfigExecute(r ApiGetKafkaTopicConfigRequest) (TopicConfigData, *_nethttp.Response, error)
 
 	/*
-	ListKafkaV3AllTopicConfigs Get All Topic Configs
+			ListKafkaAllTopicConfigs Get All Topic Configs
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Returns all topic configurations for topics hosted by the specified
-cluster.
+		Returns all topic configurations for topics hosted by the specified
+		cluster.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param clusterId The Kafka cluster ID.
-	 @return ApiListKafkaV3AllTopicConfigsRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @return ApiListKafkaAllTopicConfigsRequest
 	*/
-	ListKafkaV3AllTopicConfigs(ctx _context.Context, clusterId string) ApiListKafkaV3AllTopicConfigsRequest
+	ListKafkaAllTopicConfigs(ctx _context.Context, clusterId string) ApiListKafkaAllTopicConfigsRequest
 
-	// ListKafkaV3AllTopicConfigsExecute executes the request
+	// ListKafkaAllTopicConfigsExecute executes the request
 	//  @return TopicConfigDataList
-	ListKafkaV3AllTopicConfigsExecute(r ApiListKafkaV3AllTopicConfigsRequest) (TopicConfigDataList, *_nethttp.Response, error)
+	ListKafkaAllTopicConfigsExecute(r ApiListKafkaAllTopicConfigsRequest) (TopicConfigDataList, *_nethttp.Response, error)
 
 	/*
-	ListKafkaV3ClusterConfigs List Cluster Configs
+			ListKafkaClusterConfigs List Cluster Configs
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Returns a list of configuration parameters for the specified Kafka
-cluster.
+		Returns a list of configuration parameters for the specified Kafka
+		cluster.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param clusterId The Kafka cluster ID.
-	 @return ApiListKafkaV3ClusterConfigsRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @return ApiListKafkaClusterConfigsRequest
 	*/
-	ListKafkaV3ClusterConfigs(ctx _context.Context, clusterId string) ApiListKafkaV3ClusterConfigsRequest
+	ListKafkaClusterConfigs(ctx _context.Context, clusterId string) ApiListKafkaClusterConfigsRequest
 
-	// ListKafkaV3ClusterConfigsExecute executes the request
+	// ListKafkaClusterConfigsExecute executes the request
 	//  @return ClusterConfigDataList
-	ListKafkaV3ClusterConfigsExecute(r ApiListKafkaV3ClusterConfigsRequest) (ClusterConfigDataList, *_nethttp.Response, error)
+	ListKafkaClusterConfigsExecute(r ApiListKafkaClusterConfigsRequest) (ClusterConfigDataList, *_nethttp.Response, error)
 
 	/*
-	ListKafkaV3TopicConfigs List Topic Configs
+		ListKafkaDefaultTopicConfigs List Default Topic Configs
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Return the list of configs that belong to the specified topic.
-
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param clusterId The Kafka cluster ID.
-	 @param topicName The topic name.
-	 @return ApiListKafkaV3TopicConfigsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param topicName The topic name.
+		 @return ApiListKafkaDefaultTopicConfigsRequest
 	*/
-	ListKafkaV3TopicConfigs(ctx _context.Context, clusterId string, topicName string) ApiListKafkaV3TopicConfigsRequest
+	ListKafkaDefaultTopicConfigs(ctx _context.Context, clusterId string, topicName string) ApiListKafkaDefaultTopicConfigsRequest
 
-	// ListKafkaV3TopicConfigsExecute executes the request
+	// ListKafkaDefaultTopicConfigsExecute executes the request
 	//  @return TopicConfigDataList
-	ListKafkaV3TopicConfigsExecute(r ApiListKafkaV3TopicConfigsRequest) (TopicConfigDataList, *_nethttp.Response, error)
+	ListKafkaDefaultTopicConfigsExecute(r ApiListKafkaDefaultTopicConfigsRequest) (TopicConfigDataList, *_nethttp.Response, error)
 
 	/*
-	UpdateKafkaV3ClusterConfig Update Cluster Config
+			ListKafkaTopicConfigs List Topic Configs
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Updates the configuration parameter specified by ``name``.
+		Return the list of configs that belong to the specified topic.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param clusterId The Kafka cluster ID.
-	 @param name The configuration parameter name.
-	 @return ApiUpdateKafkaV3ClusterConfigRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @param topicName The topic name.
+			 @return ApiListKafkaTopicConfigsRequest
 	*/
-	UpdateKafkaV3ClusterConfig(ctx _context.Context, clusterId string, name string) ApiUpdateKafkaV3ClusterConfigRequest
+	ListKafkaTopicConfigs(ctx _context.Context, clusterId string, topicName string) ApiListKafkaTopicConfigsRequest
 
-	// UpdateKafkaV3ClusterConfigExecute executes the request
-	UpdateKafkaV3ClusterConfigExecute(r ApiUpdateKafkaV3ClusterConfigRequest) (*_nethttp.Response, error)
+	// ListKafkaTopicConfigsExecute executes the request
+	//  @return TopicConfigDataList
+	ListKafkaTopicConfigsExecute(r ApiListKafkaTopicConfigsRequest) (TopicConfigDataList, *_nethttp.Response, error)
 
 	/*
-	UpdateKafkaV3ClusterConfigs Batch Alter Cluster Configs
+			UpdateKafkaClusterConfig Update Cluster Config
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Updates or deletes a set of Kafka cluster configuration parameters.
+		Updates the configuration parameter specified by ``name``.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param clusterId The Kafka cluster ID.
-	 @return ApiUpdateKafkaV3ClusterConfigsRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @param name The configuration parameter name.
+			 @return ApiUpdateKafkaClusterConfigRequest
 	*/
-	UpdateKafkaV3ClusterConfigs(ctx _context.Context, clusterId string) ApiUpdateKafkaV3ClusterConfigsRequest
+	UpdateKafkaClusterConfig(ctx _context.Context, clusterId string, name string) ApiUpdateKafkaClusterConfigRequest
 
-	// UpdateKafkaV3ClusterConfigsExecute executes the request
-	UpdateKafkaV3ClusterConfigsExecute(r ApiUpdateKafkaV3ClusterConfigsRequest) (*_nethttp.Response, error)
+	// UpdateKafkaClusterConfigExecute executes the request
+	UpdateKafkaClusterConfigExecute(r ApiUpdateKafkaClusterConfigRequest) (*_nethttp.Response, error)
 
 	/*
-	UpdateKafkaV3TopicConfig Update Topic Config
+			UpdateKafkaClusterConfigs Batch Alter Cluster Configs
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Updates the config with given `name`.
+		Updates or deletes a set of Kafka cluster configuration parameters.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param clusterId The Kafka cluster ID.
-	 @param topicName The topic name.
-	 @param name The configuration parameter name.
-	 @return ApiUpdateKafkaV3TopicConfigRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @return ApiUpdateKafkaClusterConfigsRequest
 	*/
-	UpdateKafkaV3TopicConfig(ctx _context.Context, clusterId string, topicName string, name string) ApiUpdateKafkaV3TopicConfigRequest
+	UpdateKafkaClusterConfigs(ctx _context.Context, clusterId string) ApiUpdateKafkaClusterConfigsRequest
 
-	// UpdateKafkaV3TopicConfigExecute executes the request
-	UpdateKafkaV3TopicConfigExecute(r ApiUpdateKafkaV3TopicConfigRequest) (*_nethttp.Response, error)
+	// UpdateKafkaClusterConfigsExecute executes the request
+	UpdateKafkaClusterConfigsExecute(r ApiUpdateKafkaClusterConfigsRequest) (*_nethttp.Response, error)
 
 	/*
-	UpdateKafkaV3TopicConfigBatch Batch Alter Topic Configs
+			UpdateKafkaTopicConfig Update Topic Config
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Updates or deletes a set of topic configs.
+		Updates the config with given `name`.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param clusterId The Kafka cluster ID.
-	 @param topicName The topic name.
-	 @return ApiUpdateKafkaV3TopicConfigBatchRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @param topicName The topic name.
+			 @param name The configuration parameter name.
+			 @return ApiUpdateKafkaTopicConfigRequest
 	*/
-	UpdateKafkaV3TopicConfigBatch(ctx _context.Context, clusterId string, topicName string) ApiUpdateKafkaV3TopicConfigBatchRequest
+	UpdateKafkaTopicConfig(ctx _context.Context, clusterId string, topicName string, name string) ApiUpdateKafkaTopicConfigRequest
 
-	// UpdateKafkaV3TopicConfigBatchExecute executes the request
-	UpdateKafkaV3TopicConfigBatchExecute(r ApiUpdateKafkaV3TopicConfigBatchRequest) (*_nethttp.Response, error)
+	// UpdateKafkaTopicConfigExecute executes the request
+	UpdateKafkaTopicConfigExecute(r ApiUpdateKafkaTopicConfigRequest) (*_nethttp.Response, error)
+
+	/*
+			UpdateKafkaTopicConfigBatch Batch Alter Topic Configs
+
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+		Updates or deletes a set of topic configs.
+
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @param topicName The topic name.
+			 @return ApiUpdateKafkaTopicConfigBatchRequest
+	*/
+	UpdateKafkaTopicConfigBatch(ctx _context.Context, clusterId string, topicName string) ApiUpdateKafkaTopicConfigBatchRequest
+
+	// UpdateKafkaTopicConfigBatchExecute executes the request
+	UpdateKafkaTopicConfigBatchExecute(r ApiUpdateKafkaTopicConfigBatchRequest) (*_nethttp.Response, error)
 }
 
 // ConfigsV3ApiService ConfigsV3Api service
 type ConfigsV3ApiService service
 
-type ApiDeleteKafkaV3ClusterConfigRequest struct {
-	ctx _context.Context
+type ApiDeleteKafkaClusterConfigRequest struct {
+	ctx        _context.Context
 	ApiService ConfigsV3Api
-	clusterId string
-	name string
+	clusterId  string
+	name       string
 }
 
-
-func (r ApiDeleteKafkaV3ClusterConfigRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.DeleteKafkaV3ClusterConfigExecute(r)
+func (r ApiDeleteKafkaClusterConfigRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteKafkaClusterConfigExecute(r)
 }
 
 /*
-DeleteKafkaV3ClusterConfig Reset Cluster Config
+DeleteKafkaClusterConfig Reset Cluster Config
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
@@ -263,19 +278,19 @@ default value.
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
  @param name The configuration parameter name.
- @return ApiDeleteKafkaV3ClusterConfigRequest
+ @return ApiDeleteKafkaClusterConfigRequest
 */
-func (a *ConfigsV3ApiService) DeleteKafkaV3ClusterConfig(ctx _context.Context, clusterId string, name string) ApiDeleteKafkaV3ClusterConfigRequest {
-	return ApiDeleteKafkaV3ClusterConfigRequest{
+func (a *ConfigsV3ApiService) DeleteKafkaClusterConfig(ctx _context.Context, clusterId string, name string) ApiDeleteKafkaClusterConfigRequest {
+	return ApiDeleteKafkaClusterConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		clusterId: clusterId,
-		name: name,
+		ctx:        ctx,
+		clusterId:  clusterId,
+		name:       name,
 	}
 }
 
 // Execute executes the request
-func (a *ConfigsV3ApiService) DeleteKafkaV3ClusterConfigExecute(r ApiDeleteKafkaV3ClusterConfigRequest) (*_nethttp.Response, error) {
+func (a *ConfigsV3ApiService) DeleteKafkaClusterConfigExecute(r ApiDeleteKafkaClusterConfigRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
@@ -284,7 +299,7 @@ func (a *ConfigsV3ApiService) DeleteKafkaV3ClusterConfigExecute(r ApiDeleteKafka
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsV3ApiService.DeleteKafkaV3ClusterConfig")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsV3ApiService.DeleteKafkaClusterConfig")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -307,7 +322,7 @@ func (a *ConfigsV3ApiService) DeleteKafkaV3ClusterConfigExecute(r ApiDeleteKafka
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -336,27 +351,65 @@ func (a *ConfigsV3ApiService) DeleteKafkaV3ClusterConfigExecute(r ApiDeleteKafka
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
 		return localVarHTTPResponse, newErr
 	}
 
 	return localVarHTTPResponse, nil
 }
 
-type ApiDeleteKafkaV3TopicConfigRequest struct {
-	ctx _context.Context
+type ApiDeleteKafkaTopicConfigRequest struct {
+	ctx        _context.Context
 	ApiService ConfigsV3Api
-	clusterId string
-	topicName string
-	name string
+	clusterId  string
+	topicName  string
+	name       string
 }
 
-
-func (r ApiDeleteKafkaV3TopicConfigRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.DeleteKafkaV3TopicConfigExecute(r)
+func (r ApiDeleteKafkaTopicConfigRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteKafkaTopicConfigExecute(r)
 }
 
 /*
-DeleteKafkaV3TopicConfig Reset Topic Config
+DeleteKafkaTopicConfig Reset Topic Config
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
@@ -366,20 +419,20 @@ Resets the config with given `name` to its default value.
  @param clusterId The Kafka cluster ID.
  @param topicName The topic name.
  @param name The configuration parameter name.
- @return ApiDeleteKafkaV3TopicConfigRequest
+ @return ApiDeleteKafkaTopicConfigRequest
 */
-func (a *ConfigsV3ApiService) DeleteKafkaV3TopicConfig(ctx _context.Context, clusterId string, topicName string, name string) ApiDeleteKafkaV3TopicConfigRequest {
-	return ApiDeleteKafkaV3TopicConfigRequest{
+func (a *ConfigsV3ApiService) DeleteKafkaTopicConfig(ctx _context.Context, clusterId string, topicName string, name string) ApiDeleteKafkaTopicConfigRequest {
+	return ApiDeleteKafkaTopicConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		clusterId: clusterId,
-		topicName: topicName,
-		name: name,
+		ctx:        ctx,
+		clusterId:  clusterId,
+		topicName:  topicName,
+		name:       name,
 	}
 }
 
 // Execute executes the request
-func (a *ConfigsV3ApiService) DeleteKafkaV3TopicConfigExecute(r ApiDeleteKafkaV3TopicConfigRequest) (*_nethttp.Response, error) {
+func (a *ConfigsV3ApiService) DeleteKafkaTopicConfigExecute(r ApiDeleteKafkaTopicConfigRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
@@ -388,7 +441,7 @@ func (a *ConfigsV3ApiService) DeleteKafkaV3TopicConfigExecute(r ApiDeleteKafkaV3
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsV3ApiService.DeleteKafkaV3TopicConfig")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsV3ApiService.DeleteKafkaTopicConfig")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -412,7 +465,7 @@ func (a *ConfigsV3ApiService) DeleteKafkaV3TopicConfigExecute(r ApiDeleteKafkaV3
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -441,26 +494,74 @@ func (a *ConfigsV3ApiService) DeleteKafkaV3TopicConfigExecute(r ApiDeleteKafkaV3
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
 		return localVarHTTPResponse, newErr
 	}
 
 	return localVarHTTPResponse, nil
 }
 
-type ApiGetKafkaV3ClusterConfigRequest struct {
-	ctx _context.Context
+type ApiGetKafkaClusterConfigRequest struct {
+	ctx        _context.Context
 	ApiService ConfigsV3Api
-	clusterId string
-	name string
+	clusterId  string
+	name       string
 }
 
-
-func (r ApiGetKafkaV3ClusterConfigRequest) Execute() (ClusterConfigData, *_nethttp.Response, error) {
-	return r.ApiService.GetKafkaV3ClusterConfigExecute(r)
+func (r ApiGetKafkaClusterConfigRequest) Execute() (ClusterConfigData, *_nethttp.Response, error) {
+	return r.ApiService.GetKafkaClusterConfigExecute(r)
 }
 
 /*
-GetKafkaV3ClusterConfig Get Cluster Config
+GetKafkaClusterConfig Get Cluster Config
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
@@ -469,20 +570,20 @@ Returns the configuration parameter specified by ``name``.
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
  @param name The configuration parameter name.
- @return ApiGetKafkaV3ClusterConfigRequest
+ @return ApiGetKafkaClusterConfigRequest
 */
-func (a *ConfigsV3ApiService) GetKafkaV3ClusterConfig(ctx _context.Context, clusterId string, name string) ApiGetKafkaV3ClusterConfigRequest {
-	return ApiGetKafkaV3ClusterConfigRequest{
+func (a *ConfigsV3ApiService) GetKafkaClusterConfig(ctx _context.Context, clusterId string, name string) ApiGetKafkaClusterConfigRequest {
+	return ApiGetKafkaClusterConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		clusterId: clusterId,
-		name: name,
+		ctx:        ctx,
+		clusterId:  clusterId,
+		name:       name,
 	}
 }
 
 // Execute executes the request
 //  @return ClusterConfigData
-func (a *ConfigsV3ApiService) GetKafkaV3ClusterConfigExecute(r ApiGetKafkaV3ClusterConfigRequest) (ClusterConfigData, *_nethttp.Response, error) {
+func (a *ConfigsV3ApiService) GetKafkaClusterConfigExecute(r ApiGetKafkaClusterConfigRequest) (ClusterConfigData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -492,7 +593,7 @@ func (a *ConfigsV3ApiService) GetKafkaV3ClusterConfigExecute(r ApiGetKafkaV3Clus
 		localVarReturnValue  ClusterConfigData
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsV3ApiService.GetKafkaV3ClusterConfig")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsV3ApiService.GetKafkaClusterConfig")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -515,7 +616,7 @@ func (a *ConfigsV3ApiService) GetKafkaV3ClusterConfigExecute(r ApiGetKafkaV3Clus
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -544,6 +645,45 @@ func (a *ConfigsV3ApiService) GetKafkaV3ClusterConfigExecute(r ApiGetKafkaV3Clus
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -559,21 +699,20 @@ func (a *ConfigsV3ApiService) GetKafkaV3ClusterConfigExecute(r ApiGetKafkaV3Clus
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetKafkaV3TopicConfigRequest struct {
-	ctx _context.Context
+type ApiGetKafkaTopicConfigRequest struct {
+	ctx        _context.Context
 	ApiService ConfigsV3Api
-	clusterId string
-	topicName string
-	name string
+	clusterId  string
+	topicName  string
+	name       string
 }
 
-
-func (r ApiGetKafkaV3TopicConfigRequest) Execute() (TopicConfigData, *_nethttp.Response, error) {
-	return r.ApiService.GetKafkaV3TopicConfigExecute(r)
+func (r ApiGetKafkaTopicConfigRequest) Execute() (TopicConfigData, *_nethttp.Response, error) {
+	return r.ApiService.GetKafkaTopicConfigExecute(r)
 }
 
 /*
-GetKafkaV3TopicConfig Get Topic Config
+GetKafkaTopicConfig Get Topic Config
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
@@ -583,21 +722,21 @@ Return the config with the given `name`.
  @param clusterId The Kafka cluster ID.
  @param topicName The topic name.
  @param name The configuration parameter name.
- @return ApiGetKafkaV3TopicConfigRequest
+ @return ApiGetKafkaTopicConfigRequest
 */
-func (a *ConfigsV3ApiService) GetKafkaV3TopicConfig(ctx _context.Context, clusterId string, topicName string, name string) ApiGetKafkaV3TopicConfigRequest {
-	return ApiGetKafkaV3TopicConfigRequest{
+func (a *ConfigsV3ApiService) GetKafkaTopicConfig(ctx _context.Context, clusterId string, topicName string, name string) ApiGetKafkaTopicConfigRequest {
+	return ApiGetKafkaTopicConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		clusterId: clusterId,
-		topicName: topicName,
-		name: name,
+		ctx:        ctx,
+		clusterId:  clusterId,
+		topicName:  topicName,
+		name:       name,
 	}
 }
 
 // Execute executes the request
 //  @return TopicConfigData
-func (a *ConfigsV3ApiService) GetKafkaV3TopicConfigExecute(r ApiGetKafkaV3TopicConfigRequest) (TopicConfigData, *_nethttp.Response, error) {
+func (a *ConfigsV3ApiService) GetKafkaTopicConfigExecute(r ApiGetKafkaTopicConfigRequest) (TopicConfigData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -607,7 +746,7 @@ func (a *ConfigsV3ApiService) GetKafkaV3TopicConfigExecute(r ApiGetKafkaV3TopicC
 		localVarReturnValue  TopicConfigData
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsV3ApiService.GetKafkaV3TopicConfig")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsV3ApiService.GetKafkaTopicConfig")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -631,7 +770,7 @@ func (a *ConfigsV3ApiService) GetKafkaV3TopicConfigExecute(r ApiGetKafkaV3TopicC
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -660,6 +799,55 @@ func (a *ConfigsV3ApiService) GetKafkaV3TopicConfigExecute(r ApiGetKafkaV3TopicC
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -675,19 +863,18 @@ func (a *ConfigsV3ApiService) GetKafkaV3TopicConfigExecute(r ApiGetKafkaV3TopicC
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListKafkaV3AllTopicConfigsRequest struct {
-	ctx _context.Context
+type ApiListKafkaAllTopicConfigsRequest struct {
+	ctx        _context.Context
 	ApiService ConfigsV3Api
-	clusterId string
+	clusterId  string
 }
 
-
-func (r ApiListKafkaV3AllTopicConfigsRequest) Execute() (TopicConfigDataList, *_nethttp.Response, error) {
-	return r.ApiService.ListKafkaV3AllTopicConfigsExecute(r)
+func (r ApiListKafkaAllTopicConfigsRequest) Execute() (TopicConfigDataList, *_nethttp.Response, error) {
+	return r.ApiService.ListKafkaAllTopicConfigsExecute(r)
 }
 
 /*
-ListKafkaV3AllTopicConfigs Get All Topic Configs
+ListKafkaAllTopicConfigs Get All Topic Configs
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
@@ -696,19 +883,19 @@ cluster.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
- @return ApiListKafkaV3AllTopicConfigsRequest
+ @return ApiListKafkaAllTopicConfigsRequest
 */
-func (a *ConfigsV3ApiService) ListKafkaV3AllTopicConfigs(ctx _context.Context, clusterId string) ApiListKafkaV3AllTopicConfigsRequest {
-	return ApiListKafkaV3AllTopicConfigsRequest{
+func (a *ConfigsV3ApiService) ListKafkaAllTopicConfigs(ctx _context.Context, clusterId string) ApiListKafkaAllTopicConfigsRequest {
+	return ApiListKafkaAllTopicConfigsRequest{
 		ApiService: a,
-		ctx: ctx,
-		clusterId: clusterId,
+		ctx:        ctx,
+		clusterId:  clusterId,
 	}
 }
 
 // Execute executes the request
 //  @return TopicConfigDataList
-func (a *ConfigsV3ApiService) ListKafkaV3AllTopicConfigsExecute(r ApiListKafkaV3AllTopicConfigsRequest) (TopicConfigDataList, *_nethttp.Response, error) {
+func (a *ConfigsV3ApiService) ListKafkaAllTopicConfigsExecute(r ApiListKafkaAllTopicConfigsRequest) (TopicConfigDataList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -718,7 +905,7 @@ func (a *ConfigsV3ApiService) ListKafkaV3AllTopicConfigsExecute(r ApiListKafkaV3
 		localVarReturnValue  TopicConfigDataList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsV3ApiService.ListKafkaV3AllTopicConfigs")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsV3ApiService.ListKafkaAllTopicConfigs")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -740,7 +927,7 @@ func (a *ConfigsV3ApiService) ListKafkaV3AllTopicConfigsExecute(r ApiListKafkaV3
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -769,6 +956,45 @@ func (a *ConfigsV3ApiService) ListKafkaV3AllTopicConfigsExecute(r ApiListKafkaV3
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -784,19 +1010,18 @@ func (a *ConfigsV3ApiService) ListKafkaV3AllTopicConfigsExecute(r ApiListKafkaV3
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListKafkaV3ClusterConfigsRequest struct {
-	ctx _context.Context
+type ApiListKafkaClusterConfigsRequest struct {
+	ctx        _context.Context
 	ApiService ConfigsV3Api
-	clusterId string
+	clusterId  string
 }
 
-
-func (r ApiListKafkaV3ClusterConfigsRequest) Execute() (ClusterConfigDataList, *_nethttp.Response, error) {
-	return r.ApiService.ListKafkaV3ClusterConfigsExecute(r)
+func (r ApiListKafkaClusterConfigsRequest) Execute() (ClusterConfigDataList, *_nethttp.Response, error) {
+	return r.ApiService.ListKafkaClusterConfigsExecute(r)
 }
 
 /*
-ListKafkaV3ClusterConfigs List Cluster Configs
+ListKafkaClusterConfigs List Cluster Configs
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
@@ -805,19 +1030,19 @@ cluster.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
- @return ApiListKafkaV3ClusterConfigsRequest
+ @return ApiListKafkaClusterConfigsRequest
 */
-func (a *ConfigsV3ApiService) ListKafkaV3ClusterConfigs(ctx _context.Context, clusterId string) ApiListKafkaV3ClusterConfigsRequest {
-	return ApiListKafkaV3ClusterConfigsRequest{
+func (a *ConfigsV3ApiService) ListKafkaClusterConfigs(ctx _context.Context, clusterId string) ApiListKafkaClusterConfigsRequest {
+	return ApiListKafkaClusterConfigsRequest{
 		ApiService: a,
-		ctx: ctx,
-		clusterId: clusterId,
+		ctx:        ctx,
+		clusterId:  clusterId,
 	}
 }
 
 // Execute executes the request
 //  @return ClusterConfigDataList
-func (a *ConfigsV3ApiService) ListKafkaV3ClusterConfigsExecute(r ApiListKafkaV3ClusterConfigsRequest) (ClusterConfigDataList, *_nethttp.Response, error) {
+func (a *ConfigsV3ApiService) ListKafkaClusterConfigsExecute(r ApiListKafkaClusterConfigsRequest) (ClusterConfigDataList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -827,7 +1052,7 @@ func (a *ConfigsV3ApiService) ListKafkaV3ClusterConfigsExecute(r ApiListKafkaV3C
 		localVarReturnValue  ClusterConfigDataList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsV3ApiService.ListKafkaV3ClusterConfigs")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsV3ApiService.ListKafkaClusterConfigs")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -849,7 +1074,7 @@ func (a *ConfigsV3ApiService) ListKafkaV3ClusterConfigsExecute(r ApiListKafkaV3C
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -878,6 +1103,45 @@ func (a *ConfigsV3ApiService) ListKafkaV3ClusterConfigsExecute(r ApiListKafkaV3C
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -893,42 +1157,39 @@ func (a *ConfigsV3ApiService) ListKafkaV3ClusterConfigsExecute(r ApiListKafkaV3C
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListKafkaV3TopicConfigsRequest struct {
-	ctx _context.Context
+type ApiListKafkaDefaultTopicConfigsRequest struct {
+	ctx        _context.Context
 	ApiService ConfigsV3Api
-	clusterId string
-	topicName string
+	clusterId  string
+	topicName  string
 }
 
-
-func (r ApiListKafkaV3TopicConfigsRequest) Execute() (TopicConfigDataList, *_nethttp.Response, error) {
-	return r.ApiService.ListKafkaV3TopicConfigsExecute(r)
+func (r ApiListKafkaDefaultTopicConfigsRequest) Execute() (TopicConfigDataList, *_nethttp.Response, error) {
+	return r.ApiService.ListKafkaDefaultTopicConfigsExecute(r)
 }
 
 /*
-ListKafkaV3TopicConfigs List Topic Configs
+ListKafkaDefaultTopicConfigs List Default Topic Configs
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-Return the list of configs that belong to the specified topic.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
  @param topicName The topic name.
- @return ApiListKafkaV3TopicConfigsRequest
+ @return ApiListKafkaDefaultTopicConfigsRequest
 */
-func (a *ConfigsV3ApiService) ListKafkaV3TopicConfigs(ctx _context.Context, clusterId string, topicName string) ApiListKafkaV3TopicConfigsRequest {
-	return ApiListKafkaV3TopicConfigsRequest{
+func (a *ConfigsV3ApiService) ListKafkaDefaultTopicConfigs(ctx _context.Context, clusterId string, topicName string) ApiListKafkaDefaultTopicConfigsRequest {
+	return ApiListKafkaDefaultTopicConfigsRequest{
 		ApiService: a,
-		ctx: ctx,
-		clusterId: clusterId,
-		topicName: topicName,
+		ctx:        ctx,
+		clusterId:  clusterId,
+		topicName:  topicName,
 	}
 }
 
 // Execute executes the request
 //  @return TopicConfigDataList
-func (a *ConfigsV3ApiService) ListKafkaV3TopicConfigsExecute(r ApiListKafkaV3TopicConfigsRequest) (TopicConfigDataList, *_nethttp.Response, error) {
+func (a *ConfigsV3ApiService) ListKafkaDefaultTopicConfigsExecute(r ApiListKafkaDefaultTopicConfigsRequest) (TopicConfigDataList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -938,7 +1199,167 @@ func (a *ConfigsV3ApiService) ListKafkaV3TopicConfigsExecute(r ApiListKafkaV3Top
 		localVarReturnValue  TopicConfigDataList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsV3ApiService.ListKafkaV3TopicConfigs")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsV3ApiService.ListKafkaDefaultTopicConfigs")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/kafka/v3/clusters/{cluster_id}/topics/{topic_name}/default-configs"
+	localVarPath = strings.Replace(localVarPath, "{"+"cluster_id"+"}", _neturl.PathEscape(parameterToString(r.clusterId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"topic_name"+"}", _neturl.PathEscape(parameterToString(r.topicName, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListKafkaTopicConfigsRequest struct {
+	ctx        _context.Context
+	ApiService ConfigsV3Api
+	clusterId  string
+	topicName  string
+}
+
+func (r ApiListKafkaTopicConfigsRequest) Execute() (TopicConfigDataList, *_nethttp.Response, error) {
+	return r.ApiService.ListKafkaTopicConfigsExecute(r)
+}
+
+/*
+ListKafkaTopicConfigs List Topic Configs
+
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Return the list of configs that belong to the specified topic.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param topicName The topic name.
+ @return ApiListKafkaTopicConfigsRequest
+*/
+func (a *ConfigsV3ApiService) ListKafkaTopicConfigs(ctx _context.Context, clusterId string, topicName string) ApiListKafkaTopicConfigsRequest {
+	return ApiListKafkaTopicConfigsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		clusterId:  clusterId,
+		topicName:  topicName,
+	}
+}
+
+// Execute executes the request
+//  @return TopicConfigDataList
+func (a *ConfigsV3ApiService) ListKafkaTopicConfigsExecute(r ApiListKafkaTopicConfigsRequest) (TopicConfigDataList, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  TopicConfigDataList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsV3ApiService.ListKafkaTopicConfigs")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -961,7 +1382,7 @@ func (a *ConfigsV3ApiService) ListKafkaV3TopicConfigsExecute(r ApiListKafkaV3Top
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -990,6 +1411,55 @@ func (a *ConfigsV3ApiService) ListKafkaV3TopicConfigsExecute(r ApiListKafkaV3Top
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1005,26 +1475,26 @@ func (a *ConfigsV3ApiService) ListKafkaV3TopicConfigsExecute(r ApiListKafkaV3Top
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateKafkaV3ClusterConfigRequest struct {
-	ctx _context.Context
-	ApiService ConfigsV3Api
-	clusterId string
-	name string
+type ApiUpdateKafkaClusterConfigRequest struct {
+	ctx                     _context.Context
+	ApiService              ConfigsV3Api
+	clusterId               string
+	name                    string
 	updateConfigRequestData *UpdateConfigRequestData
 }
 
 // The cluster configuration parameter update request.
-func (r ApiUpdateKafkaV3ClusterConfigRequest) UpdateConfigRequestData(updateConfigRequestData UpdateConfigRequestData) ApiUpdateKafkaV3ClusterConfigRequest {
+func (r ApiUpdateKafkaClusterConfigRequest) UpdateConfigRequestData(updateConfigRequestData UpdateConfigRequestData) ApiUpdateKafkaClusterConfigRequest {
 	r.updateConfigRequestData = &updateConfigRequestData
 	return r
 }
 
-func (r ApiUpdateKafkaV3ClusterConfigRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.UpdateKafkaV3ClusterConfigExecute(r)
+func (r ApiUpdateKafkaClusterConfigRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.UpdateKafkaClusterConfigExecute(r)
 }
 
 /*
-UpdateKafkaV3ClusterConfig Update Cluster Config
+UpdateKafkaClusterConfig Update Cluster Config
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
@@ -1033,19 +1503,19 @@ Updates the configuration parameter specified by ``name``.
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
  @param name The configuration parameter name.
- @return ApiUpdateKafkaV3ClusterConfigRequest
+ @return ApiUpdateKafkaClusterConfigRequest
 */
-func (a *ConfigsV3ApiService) UpdateKafkaV3ClusterConfig(ctx _context.Context, clusterId string, name string) ApiUpdateKafkaV3ClusterConfigRequest {
-	return ApiUpdateKafkaV3ClusterConfigRequest{
+func (a *ConfigsV3ApiService) UpdateKafkaClusterConfig(ctx _context.Context, clusterId string, name string) ApiUpdateKafkaClusterConfigRequest {
+	return ApiUpdateKafkaClusterConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		clusterId: clusterId,
-		name: name,
+		ctx:        ctx,
+		clusterId:  clusterId,
+		name:       name,
 	}
 }
 
 // Execute executes the request
-func (a *ConfigsV3ApiService) UpdateKafkaV3ClusterConfigExecute(r ApiUpdateKafkaV3ClusterConfigRequest) (*_nethttp.Response, error) {
+func (a *ConfigsV3ApiService) UpdateKafkaClusterConfigExecute(r ApiUpdateKafkaClusterConfigRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
 		localVarPostBody     interface{}
@@ -1054,7 +1524,7 @@ func (a *ConfigsV3ApiService) UpdateKafkaV3ClusterConfigExecute(r ApiUpdateKafka
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsV3ApiService.UpdateKafkaV3ClusterConfig")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsV3ApiService.UpdateKafkaClusterConfig")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -1077,7 +1547,7 @@ func (a *ConfigsV3ApiService) UpdateKafkaV3ClusterConfigExecute(r ApiUpdateKafka
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1108,31 +1578,70 @@ func (a *ConfigsV3ApiService) UpdateKafkaV3ClusterConfigExecute(r ApiUpdateKafka
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
 		return localVarHTTPResponse, newErr
 	}
 
 	return localVarHTTPResponse, nil
 }
 
-type ApiUpdateKafkaV3ClusterConfigsRequest struct {
-	ctx _context.Context
-	ApiService ConfigsV3Api
-	clusterId string
+type ApiUpdateKafkaClusterConfigsRequest struct {
+	ctx                         _context.Context
+	ApiService                  ConfigsV3Api
+	clusterId                   string
 	alterConfigBatchRequestData *AlterConfigBatchRequestData
 }
 
 // The alter cluster configuration parameter batch request.
-func (r ApiUpdateKafkaV3ClusterConfigsRequest) AlterConfigBatchRequestData(alterConfigBatchRequestData AlterConfigBatchRequestData) ApiUpdateKafkaV3ClusterConfigsRequest {
+func (r ApiUpdateKafkaClusterConfigsRequest) AlterConfigBatchRequestData(alterConfigBatchRequestData AlterConfigBatchRequestData) ApiUpdateKafkaClusterConfigsRequest {
 	r.alterConfigBatchRequestData = &alterConfigBatchRequestData
 	return r
 }
 
-func (r ApiUpdateKafkaV3ClusterConfigsRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.UpdateKafkaV3ClusterConfigsExecute(r)
+func (r ApiUpdateKafkaClusterConfigsRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.UpdateKafkaClusterConfigsExecute(r)
 }
 
 /*
-UpdateKafkaV3ClusterConfigs Batch Alter Cluster Configs
+UpdateKafkaClusterConfigs Batch Alter Cluster Configs
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
@@ -1140,18 +1649,18 @@ Updates or deletes a set of Kafka cluster configuration parameters.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
- @return ApiUpdateKafkaV3ClusterConfigsRequest
+ @return ApiUpdateKafkaClusterConfigsRequest
 */
-func (a *ConfigsV3ApiService) UpdateKafkaV3ClusterConfigs(ctx _context.Context, clusterId string) ApiUpdateKafkaV3ClusterConfigsRequest {
-	return ApiUpdateKafkaV3ClusterConfigsRequest{
+func (a *ConfigsV3ApiService) UpdateKafkaClusterConfigs(ctx _context.Context, clusterId string) ApiUpdateKafkaClusterConfigsRequest {
+	return ApiUpdateKafkaClusterConfigsRequest{
 		ApiService: a,
-		ctx: ctx,
-		clusterId: clusterId,
+		ctx:        ctx,
+		clusterId:  clusterId,
 	}
 }
 
 // Execute executes the request
-func (a *ConfigsV3ApiService) UpdateKafkaV3ClusterConfigsExecute(r ApiUpdateKafkaV3ClusterConfigsRequest) (*_nethttp.Response, error) {
+func (a *ConfigsV3ApiService) UpdateKafkaClusterConfigsExecute(r ApiUpdateKafkaClusterConfigsRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -1160,7 +1669,7 @@ func (a *ConfigsV3ApiService) UpdateKafkaV3ClusterConfigsExecute(r ApiUpdateKafk
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsV3ApiService.UpdateKafkaV3ClusterConfigs")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsV3ApiService.UpdateKafkaClusterConfigs")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -1182,7 +1691,7 @@ func (a *ConfigsV3ApiService) UpdateKafkaV3ClusterConfigsExecute(r ApiUpdateKafk
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1213,33 +1722,72 @@ func (a *ConfigsV3ApiService) UpdateKafkaV3ClusterConfigsExecute(r ApiUpdateKafk
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
 		return localVarHTTPResponse, newErr
 	}
 
 	return localVarHTTPResponse, nil
 }
 
-type ApiUpdateKafkaV3TopicConfigRequest struct {
-	ctx _context.Context
-	ApiService ConfigsV3Api
-	clusterId string
-	topicName string
-	name string
+type ApiUpdateKafkaTopicConfigRequest struct {
+	ctx                     _context.Context
+	ApiService              ConfigsV3Api
+	clusterId               string
+	topicName               string
+	name                    string
 	updateConfigRequestData *UpdateConfigRequestData
 }
 
 // The topic configuration parameter update request.
-func (r ApiUpdateKafkaV3TopicConfigRequest) UpdateConfigRequestData(updateConfigRequestData UpdateConfigRequestData) ApiUpdateKafkaV3TopicConfigRequest {
+func (r ApiUpdateKafkaTopicConfigRequest) UpdateConfigRequestData(updateConfigRequestData UpdateConfigRequestData) ApiUpdateKafkaTopicConfigRequest {
 	r.updateConfigRequestData = &updateConfigRequestData
 	return r
 }
 
-func (r ApiUpdateKafkaV3TopicConfigRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.UpdateKafkaV3TopicConfigExecute(r)
+func (r ApiUpdateKafkaTopicConfigRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.UpdateKafkaTopicConfigExecute(r)
 }
 
 /*
-UpdateKafkaV3TopicConfig Update Topic Config
+UpdateKafkaTopicConfig Update Topic Config
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
@@ -1249,20 +1797,20 @@ Updates the config with given `name`.
  @param clusterId The Kafka cluster ID.
  @param topicName The topic name.
  @param name The configuration parameter name.
- @return ApiUpdateKafkaV3TopicConfigRequest
+ @return ApiUpdateKafkaTopicConfigRequest
 */
-func (a *ConfigsV3ApiService) UpdateKafkaV3TopicConfig(ctx _context.Context, clusterId string, topicName string, name string) ApiUpdateKafkaV3TopicConfigRequest {
-	return ApiUpdateKafkaV3TopicConfigRequest{
+func (a *ConfigsV3ApiService) UpdateKafkaTopicConfig(ctx _context.Context, clusterId string, topicName string, name string) ApiUpdateKafkaTopicConfigRequest {
+	return ApiUpdateKafkaTopicConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		clusterId: clusterId,
-		topicName: topicName,
-		name: name,
+		ctx:        ctx,
+		clusterId:  clusterId,
+		topicName:  topicName,
+		name:       name,
 	}
 }
 
 // Execute executes the request
-func (a *ConfigsV3ApiService) UpdateKafkaV3TopicConfigExecute(r ApiUpdateKafkaV3TopicConfigRequest) (*_nethttp.Response, error) {
+func (a *ConfigsV3ApiService) UpdateKafkaTopicConfigExecute(r ApiUpdateKafkaTopicConfigRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
 		localVarPostBody     interface{}
@@ -1271,7 +1819,7 @@ func (a *ConfigsV3ApiService) UpdateKafkaV3TopicConfigExecute(r ApiUpdateKafkaV3
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsV3ApiService.UpdateKafkaV3TopicConfig")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsV3ApiService.UpdateKafkaTopicConfig")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -1295,7 +1843,7 @@ func (a *ConfigsV3ApiService) UpdateKafkaV3TopicConfigExecute(r ApiUpdateKafkaV3
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1326,32 +1874,81 @@ func (a *ConfigsV3ApiService) UpdateKafkaV3TopicConfigExecute(r ApiUpdateKafkaV3
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
 		return localVarHTTPResponse, newErr
 	}
 
 	return localVarHTTPResponse, nil
 }
 
-type ApiUpdateKafkaV3TopicConfigBatchRequest struct {
-	ctx _context.Context
-	ApiService ConfigsV3Api
-	clusterId string
-	topicName string
+type ApiUpdateKafkaTopicConfigBatchRequest struct {
+	ctx                         _context.Context
+	ApiService                  ConfigsV3Api
+	clusterId                   string
+	topicName                   string
 	alterConfigBatchRequestData *AlterConfigBatchRequestData
 }
 
 // The alter topic configuration parameter batch request.
-func (r ApiUpdateKafkaV3TopicConfigBatchRequest) AlterConfigBatchRequestData(alterConfigBatchRequestData AlterConfigBatchRequestData) ApiUpdateKafkaV3TopicConfigBatchRequest {
+func (r ApiUpdateKafkaTopicConfigBatchRequest) AlterConfigBatchRequestData(alterConfigBatchRequestData AlterConfigBatchRequestData) ApiUpdateKafkaTopicConfigBatchRequest {
 	r.alterConfigBatchRequestData = &alterConfigBatchRequestData
 	return r
 }
 
-func (r ApiUpdateKafkaV3TopicConfigBatchRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.UpdateKafkaV3TopicConfigBatchExecute(r)
+func (r ApiUpdateKafkaTopicConfigBatchRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.UpdateKafkaTopicConfigBatchExecute(r)
 }
 
 /*
-UpdateKafkaV3TopicConfigBatch Batch Alter Topic Configs
+UpdateKafkaTopicConfigBatch Batch Alter Topic Configs
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
@@ -1360,19 +1957,19 @@ Updates or deletes a set of topic configs.
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
  @param topicName The topic name.
- @return ApiUpdateKafkaV3TopicConfigBatchRequest
+ @return ApiUpdateKafkaTopicConfigBatchRequest
 */
-func (a *ConfigsV3ApiService) UpdateKafkaV3TopicConfigBatch(ctx _context.Context, clusterId string, topicName string) ApiUpdateKafkaV3TopicConfigBatchRequest {
-	return ApiUpdateKafkaV3TopicConfigBatchRequest{
+func (a *ConfigsV3ApiService) UpdateKafkaTopicConfigBatch(ctx _context.Context, clusterId string, topicName string) ApiUpdateKafkaTopicConfigBatchRequest {
+	return ApiUpdateKafkaTopicConfigBatchRequest{
 		ApiService: a,
-		ctx: ctx,
-		clusterId: clusterId,
-		topicName: topicName,
+		ctx:        ctx,
+		clusterId:  clusterId,
+		topicName:  topicName,
 	}
 }
 
 // Execute executes the request
-func (a *ConfigsV3ApiService) UpdateKafkaV3TopicConfigBatchExecute(r ApiUpdateKafkaV3TopicConfigBatchRequest) (*_nethttp.Response, error) {
+func (a *ConfigsV3ApiService) UpdateKafkaTopicConfigBatchExecute(r ApiUpdateKafkaTopicConfigBatchRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -1381,7 +1978,7 @@ func (a *ConfigsV3ApiService) UpdateKafkaV3TopicConfigBatchExecute(r ApiUpdateKa
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsV3ApiService.UpdateKafkaV3TopicConfigBatch")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsV3ApiService.UpdateKafkaTopicConfigBatch")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -1404,7 +2001,7 @@ func (a *ConfigsV3ApiService) UpdateKafkaV3TopicConfigBatchExecute(r ApiUpdateKa
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1434,6 +2031,55 @@ func (a *ConfigsV3ApiService) UpdateKafkaV3TopicConfigBatchExecute(r ApiUpdateKa
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
 	}

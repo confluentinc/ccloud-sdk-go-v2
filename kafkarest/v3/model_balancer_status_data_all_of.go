@@ -35,12 +35,12 @@ import (
 
 // BalancerStatusDataAllOf struct for BalancerStatusDataAllOf
 type BalancerStatusDataAllOf struct {
-	ClusterId string `json:"cluster_id"`
-	Status string `json:"status"`
-	ErrorCode NullableInt32 `json:"error_code,omitempty"`
-	ErrorMessage NullableString `json:"error_message,omitempty"`
-	AnyUnevenLoad Relationship `json:"any_uneven_load"`
-	BrokerTasks Relationship `json:"broker_tasks"`
+	ClusterId     string         `json:"cluster_id"`
+	Status        string         `json:"status"`
+	ErrorCode     NullableInt32  `json:"error_code,omitempty"`
+	ErrorMessage  NullableString `json:"error_message,omitempty"`
+	AnyUnevenLoad Relationship   `json:"any_uneven_load"`
+	BrokerTasks   Relationship   `json:"broker_tasks"`
 }
 
 // NewBalancerStatusDataAllOf instantiates a new BalancerStatusDataAllOf object
@@ -77,7 +77,7 @@ func (o *BalancerStatusDataAllOf) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *BalancerStatusDataAllOf) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -101,7 +101,7 @@ func (o *BalancerStatusDataAllOf) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
 func (o *BalancerStatusDataAllOf) GetStatusOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Status, true
@@ -125,7 +125,7 @@ func (o *BalancerStatusDataAllOf) GetErrorCode() int32 {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BalancerStatusDataAllOf) GetErrorCodeOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.ErrorCode.Get(), o.ErrorCode.IsSet()
@@ -144,6 +144,7 @@ func (o *BalancerStatusDataAllOf) HasErrorCode() bool {
 func (o *BalancerStatusDataAllOf) SetErrorCode(v int32) {
 	o.ErrorCode.Set(&v)
 }
+
 // SetErrorCodeNil sets the value for ErrorCode to be an explicit nil
 func (o *BalancerStatusDataAllOf) SetErrorCodeNil() {
 	o.ErrorCode.Set(nil)
@@ -167,7 +168,7 @@ func (o *BalancerStatusDataAllOf) GetErrorMessage() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BalancerStatusDataAllOf) GetErrorMessageOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.ErrorMessage.Get(), o.ErrorMessage.IsSet()
@@ -186,6 +187,7 @@ func (o *BalancerStatusDataAllOf) HasErrorMessage() bool {
 func (o *BalancerStatusDataAllOf) SetErrorMessage(v string) {
 	o.ErrorMessage.Set(&v)
 }
+
 // SetErrorMessageNil sets the value for ErrorMessage to be an explicit nil
 func (o *BalancerStatusDataAllOf) SetErrorMessageNil() {
 	o.ErrorMessage.Set(nil)
@@ -209,7 +211,7 @@ func (o *BalancerStatusDataAllOf) GetAnyUnevenLoad() Relationship {
 // GetAnyUnevenLoadOk returns a tuple with the AnyUnevenLoad field value
 // and a boolean to check if the value has been set.
 func (o *BalancerStatusDataAllOf) GetAnyUnevenLoadOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AnyUnevenLoad, true
@@ -233,7 +235,7 @@ func (o *BalancerStatusDataAllOf) GetBrokerTasks() Relationship {
 // GetBrokerTasksOk returns a tuple with the BrokerTasks field value
 // and a boolean to check if the value has been set.
 func (o *BalancerStatusDataAllOf) GetBrokerTasksOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.BrokerTasks, true
@@ -246,42 +248,42 @@ func (o *BalancerStatusDataAllOf) SetBrokerTasks(v Relationship) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *BalancerStatusDataAllOf) Redact() {
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.Status)
-    o.recurseRedact(o.ErrorCode)
-    o.recurseRedact(o.ErrorMessage)
-    o.recurseRedact(&o.AnyUnevenLoad)
-    o.recurseRedact(&o.BrokerTasks)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.Status)
+	o.recurseRedact(o.ErrorCode)
+	o.recurseRedact(o.ErrorMessage)
+	o.recurseRedact(&o.AnyUnevenLoad)
+	o.recurseRedact(&o.BrokerTasks)
 }
 
 func (o *BalancerStatusDataAllOf) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o BalancerStatusDataAllOf) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o BalancerStatusDataAllOf) MarshalJSON() ([]byte, error) {
@@ -342,5 +344,3 @@ func (v *NullableBalancerStatusDataAllOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

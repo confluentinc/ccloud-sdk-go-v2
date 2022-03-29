@@ -35,13 +35,13 @@ import (
 
 // ReplicaDataAllOf struct for ReplicaDataAllOf
 type ReplicaDataAllOf struct {
-	ClusterId string `json:"cluster_id"`
-	TopicName string `json:"topic_name"`
-	PartitionId int32 `json:"partition_id"`
-	BrokerId int32 `json:"broker_id"`
-	IsLeader bool `json:"is_leader"`
-	IsInSync bool `json:"is_in_sync"`
-	Broker Relationship `json:"broker"`
+	ClusterId   string       `json:"cluster_id"`
+	TopicName   string       `json:"topic_name"`
+	PartitionId int32        `json:"partition_id"`
+	BrokerId    int32        `json:"broker_id"`
+	IsLeader    bool         `json:"is_leader"`
+	IsInSync    bool         `json:"is_in_sync"`
+	Broker      Relationship `json:"broker"`
 }
 
 // NewReplicaDataAllOf instantiates a new ReplicaDataAllOf object
@@ -81,7 +81,7 @@ func (o *ReplicaDataAllOf) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *ReplicaDataAllOf) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -105,7 +105,7 @@ func (o *ReplicaDataAllOf) GetTopicName() string {
 // GetTopicNameOk returns a tuple with the TopicName field value
 // and a boolean to check if the value has been set.
 func (o *ReplicaDataAllOf) GetTopicNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.TopicName, true
@@ -129,7 +129,7 @@ func (o *ReplicaDataAllOf) GetPartitionId() int32 {
 // GetPartitionIdOk returns a tuple with the PartitionId field value
 // and a boolean to check if the value has been set.
 func (o *ReplicaDataAllOf) GetPartitionIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PartitionId, true
@@ -153,7 +153,7 @@ func (o *ReplicaDataAllOf) GetBrokerId() int32 {
 // GetBrokerIdOk returns a tuple with the BrokerId field value
 // and a boolean to check if the value has been set.
 func (o *ReplicaDataAllOf) GetBrokerIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.BrokerId, true
@@ -177,7 +177,7 @@ func (o *ReplicaDataAllOf) GetIsLeader() bool {
 // GetIsLeaderOk returns a tuple with the IsLeader field value
 // and a boolean to check if the value has been set.
 func (o *ReplicaDataAllOf) GetIsLeaderOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.IsLeader, true
@@ -201,7 +201,7 @@ func (o *ReplicaDataAllOf) GetIsInSync() bool {
 // GetIsInSyncOk returns a tuple with the IsInSync field value
 // and a boolean to check if the value has been set.
 func (o *ReplicaDataAllOf) GetIsInSyncOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.IsInSync, true
@@ -225,7 +225,7 @@ func (o *ReplicaDataAllOf) GetBroker() Relationship {
 // GetBrokerOk returns a tuple with the Broker field value
 // and a boolean to check if the value has been set.
 func (o *ReplicaDataAllOf) GetBrokerOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Broker, true
@@ -238,43 +238,43 @@ func (o *ReplicaDataAllOf) SetBroker(v Relationship) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ReplicaDataAllOf) Redact() {
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.TopicName)
-    o.recurseRedact(&o.PartitionId)
-    o.recurseRedact(&o.BrokerId)
-    o.recurseRedact(&o.IsLeader)
-    o.recurseRedact(&o.IsInSync)
-    o.recurseRedact(&o.Broker)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.TopicName)
+	o.recurseRedact(&o.PartitionId)
+	o.recurseRedact(&o.BrokerId)
+	o.recurseRedact(&o.IsLeader)
+	o.recurseRedact(&o.IsInSync)
+	o.recurseRedact(&o.Broker)
 }
 
 func (o *ReplicaDataAllOf) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ReplicaDataAllOf) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ReplicaDataAllOf) MarshalJSON() ([]byte, error) {
@@ -338,5 +338,3 @@ func (v *NullableReplicaDataAllOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

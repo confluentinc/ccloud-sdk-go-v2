@@ -35,16 +35,16 @@ import (
 
 // AclData struct for AclData
 type AclData struct {
-	Kind string `json:"kind"`
-	Metadata ResourceMetadata `json:"metadata"`
-	ClusterId string `json:"cluster_id"`
-	ResourceType AclResourceType `json:"resource_type"`
-	ResourceName string `json:"resource_name"`
-	PatternType string `json:"pattern_type"`
-	Principal string `json:"principal"`
-	Host string `json:"host"`
-	Operation string `json:"operation"`
-	Permission string `json:"permission"`
+	Kind         string           `json:"kind"`
+	Metadata     ResourceMetadata `json:"metadata"`
+	ClusterId    string           `json:"cluster_id"`
+	ResourceType AclResourceType  `json:"resource_type"`
+	ResourceName string           `json:"resource_name"`
+	PatternType  string           `json:"pattern_type"`
+	Principal    string           `json:"principal"`
+	Host         string           `json:"host"`
+	Operation    string           `json:"operation"`
+	Permission   string           `json:"permission"`
 }
 
 // NewAclData instantiates a new AclData object
@@ -87,7 +87,7 @@ func (o *AclData) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *AclData) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -111,7 +111,7 @@ func (o *AclData) GetMetadata() ResourceMetadata {
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *AclData) GetMetadataOk() (*ResourceMetadata, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Metadata, true
@@ -135,7 +135,7 @@ func (o *AclData) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *AclData) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -159,7 +159,7 @@ func (o *AclData) GetResourceType() AclResourceType {
 // GetResourceTypeOk returns a tuple with the ResourceType field value
 // and a boolean to check if the value has been set.
 func (o *AclData) GetResourceTypeOk() (*AclResourceType, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ResourceType, true
@@ -183,7 +183,7 @@ func (o *AclData) GetResourceName() string {
 // GetResourceNameOk returns a tuple with the ResourceName field value
 // and a boolean to check if the value has been set.
 func (o *AclData) GetResourceNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ResourceName, true
@@ -207,7 +207,7 @@ func (o *AclData) GetPatternType() string {
 // GetPatternTypeOk returns a tuple with the PatternType field value
 // and a boolean to check if the value has been set.
 func (o *AclData) GetPatternTypeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PatternType, true
@@ -231,7 +231,7 @@ func (o *AclData) GetPrincipal() string {
 // GetPrincipalOk returns a tuple with the Principal field value
 // and a boolean to check if the value has been set.
 func (o *AclData) GetPrincipalOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Principal, true
@@ -255,7 +255,7 @@ func (o *AclData) GetHost() string {
 // GetHostOk returns a tuple with the Host field value
 // and a boolean to check if the value has been set.
 func (o *AclData) GetHostOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Host, true
@@ -279,7 +279,7 @@ func (o *AclData) GetOperation() string {
 // GetOperationOk returns a tuple with the Operation field value
 // and a boolean to check if the value has been set.
 func (o *AclData) GetOperationOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Operation, true
@@ -303,7 +303,7 @@ func (o *AclData) GetPermission() string {
 // GetPermissionOk returns a tuple with the Permission field value
 // and a boolean to check if the value has been set.
 func (o *AclData) GetPermissionOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Permission, true
@@ -316,46 +316,46 @@ func (o *AclData) SetPermission(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *AclData) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Metadata)
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.ResourceType)
-    o.recurseRedact(&o.ResourceName)
-    o.recurseRedact(&o.PatternType)
-    o.recurseRedact(&o.Principal)
-    o.recurseRedact(&o.Host)
-    o.recurseRedact(&o.Operation)
-    o.recurseRedact(&o.Permission)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Metadata)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.ResourceType)
+	o.recurseRedact(&o.ResourceName)
+	o.recurseRedact(&o.PatternType)
+	o.recurseRedact(&o.Principal)
+	o.recurseRedact(&o.Host)
+	o.recurseRedact(&o.Operation)
+	o.recurseRedact(&o.Permission)
 }
 
 func (o *AclData) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o AclData) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o AclData) MarshalJSON() ([]byte, error) {
@@ -428,5 +428,3 @@ func (v *NullableAclData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

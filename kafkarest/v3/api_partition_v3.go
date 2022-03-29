@@ -42,84 +42,83 @@ var (
 type PartitionV3Api interface {
 
 	/*
-	GetKafkaV3ConsumerLag Get Consumer Lag
+			GetKafkaConsumerLag Get Consumer Lag
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cluster Admin for Kafka (v3)](https://img.shields.io/badge/-Request%20Access%20To%20Cluster%20Admin%20For%20Kafka%20v3-%23bc8540)](mailto:ccloud-rest-api+consumer-lag-earlyaccess@confluent.io?subject=Request%20to%20join%20v3%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cluster%20Admin%20For%20Kafka%20v3%20Early%20Access%20to%20provide%20early%20feedback%20on%20consumer%20lag%20apis%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Returns the consumer lag on a partition with the given `partition_id`.
+		Returns the consumer lag on a partition with the given `partition_id`.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param clusterId The Kafka cluster ID.
-	 @param consumerGroupId The consumer group ID.
-	 @param topicName The topic name.
-	 @param partitionId The partition ID.
-	 @return ApiGetKafkaV3ConsumerLagRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @param consumerGroupId The consumer group ID.
+			 @param topicName The topic name.
+			 @param partitionId The partition ID.
+			 @return ApiGetKafkaConsumerLagRequest
 	*/
-	GetKafkaV3ConsumerLag(ctx _context.Context, clusterId string, consumerGroupId string, topicName string, partitionId int32) ApiGetKafkaV3ConsumerLagRequest
+	GetKafkaConsumerLag(ctx _context.Context, clusterId string, consumerGroupId string, topicName string, partitionId int32) ApiGetKafkaConsumerLagRequest
 
-	// GetKafkaV3ConsumerLagExecute executes the request
+	// GetKafkaConsumerLagExecute executes the request
 	//  @return ConsumerLagData
-	GetKafkaV3ConsumerLagExecute(r ApiGetKafkaV3ConsumerLagRequest) (ConsumerLagData, *_nethttp.Response, error)
+	GetKafkaConsumerLagExecute(r ApiGetKafkaConsumerLagRequest) (ConsumerLagData, *_nethttp.Response, error)
 
 	/*
-	GetKafkaV3Partition Get Partition
+			GetKafkaPartition Get Partition
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Returns the partition with the given `partition_id`.
+		Returns the partition with the given `partition_id`.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param clusterId The Kafka cluster ID.
-	 @param topicName The topic name.
-	 @param partitionId The partition ID.
-	 @return ApiGetKafkaV3PartitionRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @param topicName The topic name.
+			 @param partitionId The partition ID.
+			 @return ApiGetKafkaPartitionRequest
 	*/
-	GetKafkaV3Partition(ctx _context.Context, clusterId string, topicName string, partitionId int32) ApiGetKafkaV3PartitionRequest
+	GetKafkaPartition(ctx _context.Context, clusterId string, topicName string, partitionId int32) ApiGetKafkaPartitionRequest
 
-	// GetKafkaV3PartitionExecute executes the request
+	// GetKafkaPartitionExecute executes the request
 	//  @return PartitionData
-	GetKafkaV3PartitionExecute(r ApiGetKafkaV3PartitionRequest) (PartitionData, *_nethttp.Response, error)
+	GetKafkaPartitionExecute(r ApiGetKafkaPartitionRequest) (PartitionData, *_nethttp.Response, error)
 
 	/*
-	ListKafkaV3Partitions List Partitions
+			ListKafkaPartitions List Partitions
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Returns the list of partitions that belong to the specified topic.
+		Returns the list of partitions that belong to the specified topic.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param clusterId The Kafka cluster ID.
-	 @param topicName The topic name.
-	 @return ApiListKafkaV3PartitionsRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @param topicName The topic name.
+			 @return ApiListKafkaPartitionsRequest
 	*/
-	ListKafkaV3Partitions(ctx _context.Context, clusterId string, topicName string) ApiListKafkaV3PartitionsRequest
+	ListKafkaPartitions(ctx _context.Context, clusterId string, topicName string) ApiListKafkaPartitionsRequest
 
-	// ListKafkaV3PartitionsExecute executes the request
+	// ListKafkaPartitionsExecute executes the request
 	//  @return PartitionDataList
-	ListKafkaV3PartitionsExecute(r ApiListKafkaV3PartitionsRequest) (PartitionDataList, *_nethttp.Response, error)
+	ListKafkaPartitionsExecute(r ApiListKafkaPartitionsRequest) (PartitionDataList, *_nethttp.Response, error)
 }
 
 // PartitionV3ApiService PartitionV3Api service
 type PartitionV3ApiService service
 
-type ApiGetKafkaV3ConsumerLagRequest struct {
-	ctx _context.Context
-	ApiService PartitionV3Api
-	clusterId string
+type ApiGetKafkaConsumerLagRequest struct {
+	ctx             _context.Context
+	ApiService      PartitionV3Api
+	clusterId       string
 	consumerGroupId string
-	topicName string
-	partitionId int32
+	topicName       string
+	partitionId     int32
 }
 
-
-func (r ApiGetKafkaV3ConsumerLagRequest) Execute() (ConsumerLagData, *_nethttp.Response, error) {
-	return r.ApiService.GetKafkaV3ConsumerLagExecute(r)
+func (r ApiGetKafkaConsumerLagRequest) Execute() (ConsumerLagData, *_nethttp.Response, error) {
+	return r.ApiService.GetKafkaConsumerLagExecute(r)
 }
 
 /*
-GetKafkaV3ConsumerLag Get Consumer Lag
+GetKafkaConsumerLag Get Consumer Lag
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cluster Admin for Kafka (v3)](https://img.shields.io/badge/-Request%20Access%20To%20Cluster%20Admin%20For%20Kafka%20v3-%23bc8540)](mailto:ccloud-rest-api+consumer-lag-earlyaccess@confluent.io?subject=Request%20to%20join%20v3%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cluster%20Admin%20For%20Kafka%20v3%20Early%20Access%20to%20provide%20early%20feedback%20on%20consumer%20lag%20apis%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Returns the consumer lag on a partition with the given `partition_id`.
 
@@ -128,22 +127,22 @@ Returns the consumer lag on a partition with the given `partition_id`.
  @param consumerGroupId The consumer group ID.
  @param topicName The topic name.
  @param partitionId The partition ID.
- @return ApiGetKafkaV3ConsumerLagRequest
+ @return ApiGetKafkaConsumerLagRequest
 */
-func (a *PartitionV3ApiService) GetKafkaV3ConsumerLag(ctx _context.Context, clusterId string, consumerGroupId string, topicName string, partitionId int32) ApiGetKafkaV3ConsumerLagRequest {
-	return ApiGetKafkaV3ConsumerLagRequest{
-		ApiService: a,
-		ctx: ctx,
-		clusterId: clusterId,
+func (a *PartitionV3ApiService) GetKafkaConsumerLag(ctx _context.Context, clusterId string, consumerGroupId string, topicName string, partitionId int32) ApiGetKafkaConsumerLagRequest {
+	return ApiGetKafkaConsumerLagRequest{
+		ApiService:      a,
+		ctx:             ctx,
+		clusterId:       clusterId,
 		consumerGroupId: consumerGroupId,
-		topicName: topicName,
-		partitionId: partitionId,
+		topicName:       topicName,
+		partitionId:     partitionId,
 	}
 }
 
 // Execute executes the request
 //  @return ConsumerLagData
-func (a *PartitionV3ApiService) GetKafkaV3ConsumerLagExecute(r ApiGetKafkaV3ConsumerLagRequest) (ConsumerLagData, *_nethttp.Response, error) {
+func (a *PartitionV3ApiService) GetKafkaConsumerLagExecute(r ApiGetKafkaConsumerLagRequest) (ConsumerLagData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -153,7 +152,7 @@ func (a *PartitionV3ApiService) GetKafkaV3ConsumerLagExecute(r ApiGetKafkaV3Cons
 		localVarReturnValue  ConsumerLagData
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PartitionV3ApiService.GetKafkaV3ConsumerLag")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PartitionV3ApiService.GetKafkaConsumerLag")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -178,7 +177,7 @@ func (a *PartitionV3ApiService) GetKafkaV3ConsumerLagExecute(r ApiGetKafkaV3Cons
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -207,6 +206,45 @@ func (a *PartitionV3ApiService) GetKafkaV3ConsumerLagExecute(r ApiGetKafkaV3Cons
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -222,21 +260,20 @@ func (a *PartitionV3ApiService) GetKafkaV3ConsumerLagExecute(r ApiGetKafkaV3Cons
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetKafkaV3PartitionRequest struct {
-	ctx _context.Context
-	ApiService PartitionV3Api
-	clusterId string
-	topicName string
+type ApiGetKafkaPartitionRequest struct {
+	ctx         _context.Context
+	ApiService  PartitionV3Api
+	clusterId   string
+	topicName   string
 	partitionId int32
 }
 
-
-func (r ApiGetKafkaV3PartitionRequest) Execute() (PartitionData, *_nethttp.Response, error) {
-	return r.ApiService.GetKafkaV3PartitionExecute(r)
+func (r ApiGetKafkaPartitionRequest) Execute() (PartitionData, *_nethttp.Response, error) {
+	return r.ApiService.GetKafkaPartitionExecute(r)
 }
 
 /*
-GetKafkaV3Partition Get Partition
+GetKafkaPartition Get Partition
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
@@ -246,21 +283,21 @@ Returns the partition with the given `partition_id`.
  @param clusterId The Kafka cluster ID.
  @param topicName The topic name.
  @param partitionId The partition ID.
- @return ApiGetKafkaV3PartitionRequest
+ @return ApiGetKafkaPartitionRequest
 */
-func (a *PartitionV3ApiService) GetKafkaV3Partition(ctx _context.Context, clusterId string, topicName string, partitionId int32) ApiGetKafkaV3PartitionRequest {
-	return ApiGetKafkaV3PartitionRequest{
-		ApiService: a,
-		ctx: ctx,
-		clusterId: clusterId,
-		topicName: topicName,
+func (a *PartitionV3ApiService) GetKafkaPartition(ctx _context.Context, clusterId string, topicName string, partitionId int32) ApiGetKafkaPartitionRequest {
+	return ApiGetKafkaPartitionRequest{
+		ApiService:  a,
+		ctx:         ctx,
+		clusterId:   clusterId,
+		topicName:   topicName,
 		partitionId: partitionId,
 	}
 }
 
 // Execute executes the request
 //  @return PartitionData
-func (a *PartitionV3ApiService) GetKafkaV3PartitionExecute(r ApiGetKafkaV3PartitionRequest) (PartitionData, *_nethttp.Response, error) {
+func (a *PartitionV3ApiService) GetKafkaPartitionExecute(r ApiGetKafkaPartitionRequest) (PartitionData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -270,7 +307,7 @@ func (a *PartitionV3ApiService) GetKafkaV3PartitionExecute(r ApiGetKafkaV3Partit
 		localVarReturnValue  PartitionData
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PartitionV3ApiService.GetKafkaV3Partition")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PartitionV3ApiService.GetKafkaPartition")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -294,7 +331,7 @@ func (a *PartitionV3ApiService) GetKafkaV3PartitionExecute(r ApiGetKafkaV3Partit
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -323,6 +360,55 @@ func (a *PartitionV3ApiService) GetKafkaV3PartitionExecute(r ApiGetKafkaV3Partit
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -338,20 +424,19 @@ func (a *PartitionV3ApiService) GetKafkaV3PartitionExecute(r ApiGetKafkaV3Partit
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListKafkaV3PartitionsRequest struct {
-	ctx _context.Context
+type ApiListKafkaPartitionsRequest struct {
+	ctx        _context.Context
 	ApiService PartitionV3Api
-	clusterId string
-	topicName string
+	clusterId  string
+	topicName  string
 }
 
-
-func (r ApiListKafkaV3PartitionsRequest) Execute() (PartitionDataList, *_nethttp.Response, error) {
-	return r.ApiService.ListKafkaV3PartitionsExecute(r)
+func (r ApiListKafkaPartitionsRequest) Execute() (PartitionDataList, *_nethttp.Response, error) {
+	return r.ApiService.ListKafkaPartitionsExecute(r)
 }
 
 /*
-ListKafkaV3Partitions List Partitions
+ListKafkaPartitions List Partitions
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
@@ -360,20 +445,20 @@ Returns the list of partitions that belong to the specified topic.
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
  @param topicName The topic name.
- @return ApiListKafkaV3PartitionsRequest
+ @return ApiListKafkaPartitionsRequest
 */
-func (a *PartitionV3ApiService) ListKafkaV3Partitions(ctx _context.Context, clusterId string, topicName string) ApiListKafkaV3PartitionsRequest {
-	return ApiListKafkaV3PartitionsRequest{
+func (a *PartitionV3ApiService) ListKafkaPartitions(ctx _context.Context, clusterId string, topicName string) ApiListKafkaPartitionsRequest {
+	return ApiListKafkaPartitionsRequest{
 		ApiService: a,
-		ctx: ctx,
-		clusterId: clusterId,
-		topicName: topicName,
+		ctx:        ctx,
+		clusterId:  clusterId,
+		topicName:  topicName,
 	}
 }
 
 // Execute executes the request
 //  @return PartitionDataList
-func (a *PartitionV3ApiService) ListKafkaV3PartitionsExecute(r ApiListKafkaV3PartitionsRequest) (PartitionDataList, *_nethttp.Response, error) {
+func (a *PartitionV3ApiService) ListKafkaPartitionsExecute(r ApiListKafkaPartitionsRequest) (PartitionDataList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -383,7 +468,7 @@ func (a *PartitionV3ApiService) ListKafkaV3PartitionsExecute(r ApiListKafkaV3Par
 		localVarReturnValue  PartitionDataList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PartitionV3ApiService.ListKafkaV3Partitions")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PartitionV3ApiService.ListKafkaPartitions")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -406,7 +491,7 @@ func (a *PartitionV3ApiService) ListKafkaV3PartitionsExecute(r ApiListKafkaV3Par
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -434,6 +519,55 @@ func (a *PartitionV3ApiService) ListKafkaV3PartitionsExecute(r ApiListKafkaV3Par
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

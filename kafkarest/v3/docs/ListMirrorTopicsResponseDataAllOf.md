@@ -9,14 +9,14 @@ Name | Type | Description | Notes
 **SourceTopicName** | **string** |  | 
 **NumPartitions** | **int32** |  | 
 **MirrorLags** | [**MirrorLags**](MirrorLags.md) |  | 
-**MirrorTopicStatus** | [**MirrorTopicStatus**](MirrorTopicStatus.md) |  | 
-**StateTimeMs** | **int32** |  | 
+**MirrorStatus** | [**MirrorTopicStatus**](MirrorTopicStatus.md) |  | 
+**StateTimeMs** | **int64** |  | 
 
 ## Methods
 
 ### NewListMirrorTopicsResponseDataAllOf
 
-`func NewListMirrorTopicsResponseDataAllOf(linkName string, mirrorTopicName string, sourceTopicName string, numPartitions int32, mirrorLags MirrorLags, mirrorTopicStatus MirrorTopicStatus, stateTimeMs int32, ) *ListMirrorTopicsResponseDataAllOf`
+`func NewListMirrorTopicsResponseDataAllOf(linkName string, mirrorTopicName string, sourceTopicName string, numPartitions int32, mirrorLags MirrorLags, mirrorStatus MirrorTopicStatus, stateTimeMs int64, ) *ListMirrorTopicsResponseDataAllOf`
 
 NewListMirrorTopicsResponseDataAllOf instantiates a new ListMirrorTopicsResponseDataAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -131,42 +131,42 @@ and a boolean to check if the value has been set.
 SetMirrorLags sets MirrorLags field to given value.
 
 
-### GetMirrorTopicStatus
+### GetMirrorStatus
 
-`func (o *ListMirrorTopicsResponseDataAllOf) GetMirrorTopicStatus() MirrorTopicStatus`
+`func (o *ListMirrorTopicsResponseDataAllOf) GetMirrorStatus() MirrorTopicStatus`
 
-GetMirrorTopicStatus returns the MirrorTopicStatus field if non-nil, zero value otherwise.
+GetMirrorStatus returns the MirrorStatus field if non-nil, zero value otherwise.
 
-### GetMirrorTopicStatusOk
+### GetMirrorStatusOk
 
-`func (o *ListMirrorTopicsResponseDataAllOf) GetMirrorTopicStatusOk() (*MirrorTopicStatus, bool)`
+`func (o *ListMirrorTopicsResponseDataAllOf) GetMirrorStatusOk() (*MirrorTopicStatus, bool)`
 
-GetMirrorTopicStatusOk returns a tuple with the MirrorTopicStatus field if it's non-nil, zero value otherwise
+GetMirrorStatusOk returns a tuple with the MirrorStatus field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMirrorTopicStatus
+### SetMirrorStatus
 
-`func (o *ListMirrorTopicsResponseDataAllOf) SetMirrorTopicStatus(v MirrorTopicStatus)`
+`func (o *ListMirrorTopicsResponseDataAllOf) SetMirrorStatus(v MirrorTopicStatus)`
 
-SetMirrorTopicStatus sets MirrorTopicStatus field to given value.
+SetMirrorStatus sets MirrorStatus field to given value.
 
 
 ### GetStateTimeMs
 
-`func (o *ListMirrorTopicsResponseDataAllOf) GetStateTimeMs() int32`
+`func (o *ListMirrorTopicsResponseDataAllOf) GetStateTimeMs() int64`
 
 GetStateTimeMs returns the StateTimeMs field if non-nil, zero value otherwise.
 
 ### GetStateTimeMsOk
 
-`func (o *ListMirrorTopicsResponseDataAllOf) GetStateTimeMsOk() (*int32, bool)`
+`func (o *ListMirrorTopicsResponseDataAllOf) GetStateTimeMsOk() (*int64, bool)`
 
 GetStateTimeMsOk returns a tuple with the StateTimeMs field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStateTimeMs
 
-`func (o *ListMirrorTopicsResponseDataAllOf) SetStateTimeMs(v int32)`
+`func (o *ListMirrorTopicsResponseDataAllOf) SetStateTimeMs(v int64)`
 
 SetStateTimeMs sets StateTimeMs field to given value.
 

@@ -4,13 +4,13 @@ All URIs are relative to *https://pkc-00000.region.provider.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetKafkaV3Cluster**](ClusterV3Api.md#GetKafkaV3Cluster) | **Get** /kafka/v3/clusters/{cluster_id} | Get Cluster
+[**GetKafkaCluster**](ClusterV3Api.md#GetKafkaCluster) | **Get** /kafka/v3/clusters/{cluster_id} | Get Cluster
 
 
 
-## GetKafkaV3Cluster
+## GetKafkaCluster
 
-> ClusterData GetKafkaV3Cluster(ctx, clusterId).Execute()
+> ClusterData GetKafkaCluster(ctx, clusterId).Execute()
 
 Get Cluster
 
@@ -33,13 +33,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClusterV3Api.GetKafkaV3Cluster(context.Background(), clusterId).Execute()
+    resp, r, err := api_client.ClusterV3Api.GetKafkaCluster(context.Background(), clusterId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClusterV3Api.GetKafkaV3Cluster``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClusterV3Api.GetKafkaCluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetKafkaV3Cluster`: ClusterData
-    fmt.Fprintf(os.Stdout, "Response from `ClusterV3Api.GetKafkaV3Cluster`: %v\n", resp)
+    // response from `GetKafkaCluster`: ClusterData
+    fmt.Fprintf(os.Stdout, "Response from `ClusterV3Api.GetKafkaCluster`: %v\n", resp)
 }
 ```
 
@@ -53,7 +53,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetKafkaV3ClusterRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetKafkaClusterRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

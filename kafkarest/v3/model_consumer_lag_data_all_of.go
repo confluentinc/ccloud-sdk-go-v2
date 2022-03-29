@@ -35,16 +35,16 @@ import (
 
 // ConsumerLagDataAllOf struct for ConsumerLagDataAllOf
 type ConsumerLagDataAllOf struct {
-	ClusterId string `json:"cluster_id"`
-	ConsumerGroupId string `json:"consumer_group_id"`
-	TopicName string `json:"topic_name"`
-	PartitionId int32 `json:"partition_id"`
-	CurrentOffset int64 `json:"current_offset"`
-	LogEndOffset int64 `json:"log_end_offset"`
-	Lag int64 `json:"lag"`
-	ConsumerId string `json:"consumer_id"`
-	InstanceId NullableString `json:"instance_id,omitempty"`
-	ClientId string `json:"client_id"`
+	ClusterId       string         `json:"cluster_id"`
+	ConsumerGroupId string         `json:"consumer_group_id"`
+	TopicName       string         `json:"topic_name"`
+	PartitionId     int32          `json:"partition_id"`
+	CurrentOffset   int64          `json:"current_offset"`
+	LogEndOffset    int64          `json:"log_end_offset"`
+	Lag             int64          `json:"lag"`
+	ConsumerId      string         `json:"consumer_id"`
+	InstanceId      NullableString `json:"instance_id,omitempty"`
+	ClientId        string         `json:"client_id"`
 }
 
 // NewConsumerLagDataAllOf instantiates a new ConsumerLagDataAllOf object
@@ -86,7 +86,7 @@ func (o *ConsumerLagDataAllOf) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerLagDataAllOf) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -110,7 +110,7 @@ func (o *ConsumerLagDataAllOf) GetConsumerGroupId() string {
 // GetConsumerGroupIdOk returns a tuple with the ConsumerGroupId field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerLagDataAllOf) GetConsumerGroupIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ConsumerGroupId, true
@@ -134,7 +134,7 @@ func (o *ConsumerLagDataAllOf) GetTopicName() string {
 // GetTopicNameOk returns a tuple with the TopicName field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerLagDataAllOf) GetTopicNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.TopicName, true
@@ -158,7 +158,7 @@ func (o *ConsumerLagDataAllOf) GetPartitionId() int32 {
 // GetPartitionIdOk returns a tuple with the PartitionId field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerLagDataAllOf) GetPartitionIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PartitionId, true
@@ -182,7 +182,7 @@ func (o *ConsumerLagDataAllOf) GetCurrentOffset() int64 {
 // GetCurrentOffsetOk returns a tuple with the CurrentOffset field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerLagDataAllOf) GetCurrentOffsetOk() (*int64, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.CurrentOffset, true
@@ -206,7 +206,7 @@ func (o *ConsumerLagDataAllOf) GetLogEndOffset() int64 {
 // GetLogEndOffsetOk returns a tuple with the LogEndOffset field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerLagDataAllOf) GetLogEndOffsetOk() (*int64, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.LogEndOffset, true
@@ -230,7 +230,7 @@ func (o *ConsumerLagDataAllOf) GetLag() int64 {
 // GetLagOk returns a tuple with the Lag field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerLagDataAllOf) GetLagOk() (*int64, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Lag, true
@@ -254,7 +254,7 @@ func (o *ConsumerLagDataAllOf) GetConsumerId() string {
 // GetConsumerIdOk returns a tuple with the ConsumerId field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerLagDataAllOf) GetConsumerIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ConsumerId, true
@@ -278,7 +278,7 @@ func (o *ConsumerLagDataAllOf) GetInstanceId() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConsumerLagDataAllOf) GetInstanceIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.InstanceId.Get(), o.InstanceId.IsSet()
@@ -297,6 +297,7 @@ func (o *ConsumerLagDataAllOf) HasInstanceId() bool {
 func (o *ConsumerLagDataAllOf) SetInstanceId(v string) {
 	o.InstanceId.Set(&v)
 }
+
 // SetInstanceIdNil sets the value for InstanceId to be an explicit nil
 func (o *ConsumerLagDataAllOf) SetInstanceIdNil() {
 	o.InstanceId.Set(nil)
@@ -320,7 +321,7 @@ func (o *ConsumerLagDataAllOf) GetClientId() string {
 // GetClientIdOk returns a tuple with the ClientId field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerLagDataAllOf) GetClientIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClientId, true
@@ -333,46 +334,46 @@ func (o *ConsumerLagDataAllOf) SetClientId(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ConsumerLagDataAllOf) Redact() {
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.ConsumerGroupId)
-    o.recurseRedact(&o.TopicName)
-    o.recurseRedact(&o.PartitionId)
-    o.recurseRedact(&o.CurrentOffset)
-    o.recurseRedact(&o.LogEndOffset)
-    o.recurseRedact(&o.Lag)
-    o.recurseRedact(&o.ConsumerId)
-    o.recurseRedact(o.InstanceId)
-    o.recurseRedact(&o.ClientId)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.ConsumerGroupId)
+	o.recurseRedact(&o.TopicName)
+	o.recurseRedact(&o.PartitionId)
+	o.recurseRedact(&o.CurrentOffset)
+	o.recurseRedact(&o.LogEndOffset)
+	o.recurseRedact(&o.Lag)
+	o.recurseRedact(&o.ConsumerId)
+	o.recurseRedact(o.InstanceId)
+	o.recurseRedact(&o.ClientId)
 }
 
 func (o *ConsumerLagDataAllOf) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ConsumerLagDataAllOf) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ConsumerLagDataAllOf) MarshalJSON() ([]byte, error) {
@@ -445,5 +446,3 @@ func (v *NullableConsumerLagDataAllOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

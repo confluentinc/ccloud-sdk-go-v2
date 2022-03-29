@@ -35,16 +35,16 @@ import (
 
 // ClusterData struct for ClusterData
 type ClusterData struct {
-	Kind string `json:"kind"`
-	Metadata ResourceMetadata `json:"metadata"`
-	ClusterId string `json:"cluster_id"`
-	Controller *Relationship `json:"controller,omitempty"`
-	Acls Relationship `json:"acls"`
-	Brokers Relationship `json:"brokers"`
-	BrokerConfigs Relationship `json:"broker_configs"`
-	ConsumerGroups Relationship `json:"consumer_groups"`
-	Topics Relationship `json:"topics"`
-	PartitionReassignments Relationship `json:"partition_reassignments"`
+	Kind                   string           `json:"kind"`
+	Metadata               ResourceMetadata `json:"metadata"`
+	ClusterId              string           `json:"cluster_id"`
+	Controller             *Relationship    `json:"controller,omitempty"`
+	Acls                   Relationship     `json:"acls"`
+	Brokers                Relationship     `json:"brokers"`
+	BrokerConfigs          Relationship     `json:"broker_configs"`
+	ConsumerGroups         Relationship     `json:"consumer_groups"`
+	Topics                 Relationship     `json:"topics"`
+	PartitionReassignments Relationship     `json:"partition_reassignments"`
 }
 
 // NewClusterData instantiates a new ClusterData object
@@ -86,7 +86,7 @@ func (o *ClusterData) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *ClusterData) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -110,7 +110,7 @@ func (o *ClusterData) GetMetadata() ResourceMetadata {
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *ClusterData) GetMetadataOk() (*ResourceMetadata, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Metadata, true
@@ -134,7 +134,7 @@ func (o *ClusterData) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *ClusterData) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -190,7 +190,7 @@ func (o *ClusterData) GetAcls() Relationship {
 // GetAclsOk returns a tuple with the Acls field value
 // and a boolean to check if the value has been set.
 func (o *ClusterData) GetAclsOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Acls, true
@@ -214,7 +214,7 @@ func (o *ClusterData) GetBrokers() Relationship {
 // GetBrokersOk returns a tuple with the Brokers field value
 // and a boolean to check if the value has been set.
 func (o *ClusterData) GetBrokersOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Brokers, true
@@ -238,7 +238,7 @@ func (o *ClusterData) GetBrokerConfigs() Relationship {
 // GetBrokerConfigsOk returns a tuple with the BrokerConfigs field value
 // and a boolean to check if the value has been set.
 func (o *ClusterData) GetBrokerConfigsOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.BrokerConfigs, true
@@ -262,7 +262,7 @@ func (o *ClusterData) GetConsumerGroups() Relationship {
 // GetConsumerGroupsOk returns a tuple with the ConsumerGroups field value
 // and a boolean to check if the value has been set.
 func (o *ClusterData) GetConsumerGroupsOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ConsumerGroups, true
@@ -286,7 +286,7 @@ func (o *ClusterData) GetTopics() Relationship {
 // GetTopicsOk returns a tuple with the Topics field value
 // and a boolean to check if the value has been set.
 func (o *ClusterData) GetTopicsOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Topics, true
@@ -310,7 +310,7 @@ func (o *ClusterData) GetPartitionReassignments() Relationship {
 // GetPartitionReassignmentsOk returns a tuple with the PartitionReassignments field value
 // and a boolean to check if the value has been set.
 func (o *ClusterData) GetPartitionReassignmentsOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PartitionReassignments, true
@@ -323,46 +323,46 @@ func (o *ClusterData) SetPartitionReassignments(v Relationship) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ClusterData) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Metadata)
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(o.Controller)
-    o.recurseRedact(&o.Acls)
-    o.recurseRedact(&o.Brokers)
-    o.recurseRedact(&o.BrokerConfigs)
-    o.recurseRedact(&o.ConsumerGroups)
-    o.recurseRedact(&o.Topics)
-    o.recurseRedact(&o.PartitionReassignments)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Metadata)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(o.Controller)
+	o.recurseRedact(&o.Acls)
+	o.recurseRedact(&o.Brokers)
+	o.recurseRedact(&o.BrokerConfigs)
+	o.recurseRedact(&o.ConsumerGroups)
+	o.recurseRedact(&o.Topics)
+	o.recurseRedact(&o.PartitionReassignments)
 }
 
 func (o *ClusterData) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ClusterData) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ClusterData) MarshalJSON() ([]byte, error) {
@@ -435,5 +435,3 @@ func (v *NullableClusterData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

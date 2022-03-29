@@ -35,11 +35,11 @@ import (
 
 // CreateTopicRequestData struct for CreateTopicRequestData
 type CreateTopicRequestData struct {
-	TopicName string `json:"topic_name"`
-	PartitionsCount *int32 `json:"partitions_count,omitempty"`
-	ReplicationFactor *int32 `json:"replication_factor,omitempty"`
+	TopicName           string                                       `json:"topic_name"`
+	PartitionsCount     *int32                                       `json:"partitions_count,omitempty"`
+	ReplicationFactor   *int32                                       `json:"replication_factor,omitempty"`
 	ReplicasAssignments *[]CreateTopicRequestDataReplicasAssignments `json:"replicas_assignments,omitempty"`
-	Configs *[]CreateTopicRequestDataConfigs `json:"configs,omitempty"`
+	Configs             *[]CreateTopicRequestDataConfigs             `json:"configs,omitempty"`
 }
 
 // NewCreateTopicRequestData instantiates a new CreateTopicRequestData object
@@ -73,7 +73,7 @@ func (o *CreateTopicRequestData) GetTopicName() string {
 // GetTopicNameOk returns a tuple with the TopicName field value
 // and a boolean to check if the value has been set.
 func (o *CreateTopicRequestData) GetTopicNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.TopicName, true
@@ -214,41 +214,41 @@ func (o *CreateTopicRequestData) SetConfigs(v []CreateTopicRequestDataConfigs) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *CreateTopicRequestData) Redact() {
-    o.recurseRedact(&o.TopicName)
-    o.recurseRedact(o.PartitionsCount)
-    o.recurseRedact(o.ReplicationFactor)
-    o.recurseRedact(o.ReplicasAssignments)
-    o.recurseRedact(o.Configs)
+	o.recurseRedact(&o.TopicName)
+	o.recurseRedact(o.PartitionsCount)
+	o.recurseRedact(o.ReplicationFactor)
+	o.recurseRedact(o.ReplicasAssignments)
+	o.recurseRedact(o.Configs)
 }
 
 func (o *CreateTopicRequestData) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o CreateTopicRequestData) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o CreateTopicRequestData) MarshalJSON() ([]byte, error) {
@@ -306,5 +306,3 @@ func (v *NullableCreateTopicRequestData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

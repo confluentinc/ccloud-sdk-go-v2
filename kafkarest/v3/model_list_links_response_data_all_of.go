@@ -35,19 +35,18 @@ import (
 
 // ListLinksResponseDataAllOf struct for ListLinksResponseDataAllOf
 type ListLinksResponseDataAllOf struct {
-	SourceClusterId string `json:"source_cluster_id"`
-	LinkName string `json:"link_name"`
-	LinkId string `json:"link_id"`
-	TopicsNames *[]string `json:"topics_names,omitempty"`
+	SourceClusterId *string   `json:"source_cluster_id,omitempty"`
+	LinkName        string    `json:"link_name"`
+	LinkId          string    `json:"link_id"`
+	TopicsNames     *[]string `json:"topics_names,omitempty"`
 }
 
 // NewListLinksResponseDataAllOf instantiates a new ListLinksResponseDataAllOf object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListLinksResponseDataAllOf(sourceClusterId string, linkName string, linkId string) *ListLinksResponseDataAllOf {
+func NewListLinksResponseDataAllOf(linkName string, linkId string) *ListLinksResponseDataAllOf {
 	this := ListLinksResponseDataAllOf{}
-	this.SourceClusterId = sourceClusterId
 	this.LinkName = linkName
 	this.LinkId = linkId
 	return &this
@@ -61,28 +60,36 @@ func NewListLinksResponseDataAllOfWithDefaults() *ListLinksResponseDataAllOf {
 	return &this
 }
 
-// GetSourceClusterId returns the SourceClusterId field value
+// GetSourceClusterId returns the SourceClusterId field value if set, zero value otherwise.
 func (o *ListLinksResponseDataAllOf) GetSourceClusterId() string {
-	if o == nil {
+	if o == nil || o.SourceClusterId == nil {
 		var ret string
 		return ret
 	}
-
-	return o.SourceClusterId
+	return *o.SourceClusterId
 }
 
-// GetSourceClusterIdOk returns a tuple with the SourceClusterId field value
+// GetSourceClusterIdOk returns a tuple with the SourceClusterId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ListLinksResponseDataAllOf) GetSourceClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.SourceClusterId == nil {
 		return nil, false
 	}
-	return &o.SourceClusterId, true
+	return o.SourceClusterId, true
 }
 
-// SetSourceClusterId sets field value
+// HasSourceClusterId returns a boolean if a field has been set.
+func (o *ListLinksResponseDataAllOf) HasSourceClusterId() bool {
+	if o != nil && o.SourceClusterId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceClusterId gets a reference to the given string and assigns it to the SourceClusterId field.
 func (o *ListLinksResponseDataAllOf) SetSourceClusterId(v string) {
-	o.SourceClusterId = v
+	o.SourceClusterId = &v
 }
 
 // GetLinkName returns the LinkName field value
@@ -98,7 +105,7 @@ func (o *ListLinksResponseDataAllOf) GetLinkName() string {
 // GetLinkNameOk returns a tuple with the LinkName field value
 // and a boolean to check if the value has been set.
 func (o *ListLinksResponseDataAllOf) GetLinkNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.LinkName, true
@@ -122,7 +129,7 @@ func (o *ListLinksResponseDataAllOf) GetLinkId() string {
 // GetLinkIdOk returns a tuple with the LinkId field value
 // and a boolean to check if the value has been set.
 func (o *ListLinksResponseDataAllOf) GetLinkIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.LinkId, true
@@ -167,45 +174,45 @@ func (o *ListLinksResponseDataAllOf) SetTopicsNames(v []string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ListLinksResponseDataAllOf) Redact() {
-    o.recurseRedact(&o.SourceClusterId)
-    o.recurseRedact(&o.LinkName)
-    o.recurseRedact(&o.LinkId)
-    o.recurseRedact(o.TopicsNames)
+	o.recurseRedact(o.SourceClusterId)
+	o.recurseRedact(&o.LinkName)
+	o.recurseRedact(&o.LinkId)
+	o.recurseRedact(o.TopicsNames)
 }
 
 func (o *ListLinksResponseDataAllOf) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ListLinksResponseDataAllOf) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ListLinksResponseDataAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
+	if o.SourceClusterId != nil {
 		toSerialize["source_cluster_id"] = o.SourceClusterId
 	}
 	if true {
@@ -255,5 +262,3 @@ func (v *NullableListLinksResponseDataAllOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -42,138 +42,137 @@ var (
 type ConsumerGroupV3Api interface {
 
 	/*
-	GetKafkaV3Consumer Get Consumer
+			GetKafkaConsumer Get Consumer
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cluster Admin for Kafka (v3)](https://img.shields.io/badge/-Request%20Access%20To%20Cluster%20Admin%20For%20Kafka%20v3-%23bc8540)](mailto:ccloud-rest-api+consumer-lag-earlyaccess@confluent.io?subject=Request%20to%20join%20v3%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cluster%20Admin%20For%20Kafka%20v3%20Early%20Access%20to%20provide%20early%20feedback%20on%20consumer%20lag%20apis%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Returns the consumer specified by the ``consumer_id``.
+		Returns the consumer specified by the ``consumer_id``.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param clusterId The Kafka cluster ID.
-	 @param consumerGroupId The consumer group ID.
-	 @param consumerId The consumer ID.
-	 @return ApiGetKafkaV3ConsumerRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @param consumerGroupId The consumer group ID.
+			 @param consumerId The consumer ID.
+			 @return ApiGetKafkaConsumerRequest
 	*/
-	GetKafkaV3Consumer(ctx _context.Context, clusterId string, consumerGroupId string, consumerId string) ApiGetKafkaV3ConsumerRequest
+	GetKafkaConsumer(ctx _context.Context, clusterId string, consumerGroupId string, consumerId string) ApiGetKafkaConsumerRequest
 
-	// GetKafkaV3ConsumerExecute executes the request
+	// GetKafkaConsumerExecute executes the request
 	//  @return ConsumerData
-	GetKafkaV3ConsumerExecute(r ApiGetKafkaV3ConsumerRequest) (ConsumerData, *_nethttp.Response, error)
+	GetKafkaConsumerExecute(r ApiGetKafkaConsumerRequest) (ConsumerData, *_nethttp.Response, error)
 
 	/*
-	GetKafkaV3ConsumerGroup Get Consumer Group
+			GetKafkaConsumerGroup Get Consumer Group
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Returns the consumer group specified by the ``consumer_group_id``.
+		Returns the consumer group specified by the ``consumer_group_id``.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param clusterId The Kafka cluster ID.
-	 @param consumerGroupId The consumer group ID.
-	 @return ApiGetKafkaV3ConsumerGroupRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @param consumerGroupId The consumer group ID.
+			 @return ApiGetKafkaConsumerGroupRequest
 	*/
-	GetKafkaV3ConsumerGroup(ctx _context.Context, clusterId string, consumerGroupId string) ApiGetKafkaV3ConsumerGroupRequest
+	GetKafkaConsumerGroup(ctx _context.Context, clusterId string, consumerGroupId string) ApiGetKafkaConsumerGroupRequest
 
-	// GetKafkaV3ConsumerGroupExecute executes the request
+	// GetKafkaConsumerGroupExecute executes the request
 	//  @return ConsumerGroupData
-	GetKafkaV3ConsumerGroupExecute(r ApiGetKafkaV3ConsumerGroupRequest) (ConsumerGroupData, *_nethttp.Response, error)
+	GetKafkaConsumerGroupExecute(r ApiGetKafkaConsumerGroupRequest) (ConsumerGroupData, *_nethttp.Response, error)
 
 	/*
-	GetKafkaV3ConsumerGroupLagSummary Get Consumer Group Lag Summary.
+			GetKafkaConsumerGroupLagSummary Get Consumer Group Lag Summary.
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cluster Admin for Kafka (v3)](https://img.shields.io/badge/-Request%20Access%20To%20Cluster%20Admin%20For%20Kafka%20v3-%23bc8540)](mailto:ccloud-rest-api+consumer-lag-earlyaccess@confluent.io?subject=Request%20to%20join%20v3%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cluster%20Admin%20For%20Kafka%20v3%20Early%20Access%20to%20provide%20early%20feedback%20on%20consumer%20lag%20apis%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Returns the max and total lag of the consumers belonging to the
-specified consumer group.
+		Returns the max and total lag of the consumers belonging to the
+		specified consumer group.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param clusterId The Kafka cluster ID.
-	 @param consumerGroupId The consumer group ID.
-	 @return ApiGetKafkaV3ConsumerGroupLagSummaryRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @param consumerGroupId The consumer group ID.
+			 @return ApiGetKafkaConsumerGroupLagSummaryRequest
 	*/
-	GetKafkaV3ConsumerGroupLagSummary(ctx _context.Context, clusterId string, consumerGroupId string) ApiGetKafkaV3ConsumerGroupLagSummaryRequest
+	GetKafkaConsumerGroupLagSummary(ctx _context.Context, clusterId string, consumerGroupId string) ApiGetKafkaConsumerGroupLagSummaryRequest
 
-	// GetKafkaV3ConsumerGroupLagSummaryExecute executes the request
+	// GetKafkaConsumerGroupLagSummaryExecute executes the request
 	//  @return ConsumerGroupLagSummaryData
-	GetKafkaV3ConsumerGroupLagSummaryExecute(r ApiGetKafkaV3ConsumerGroupLagSummaryRequest) (ConsumerGroupLagSummaryData, *_nethttp.Response, error)
+	GetKafkaConsumerGroupLagSummaryExecute(r ApiGetKafkaConsumerGroupLagSummaryRequest) (ConsumerGroupLagSummaryData, *_nethttp.Response, error)
 
 	/*
-	ListKafkaV3ConsumerGroups List Consumer Groups
+			ListKafkaConsumerGroups List Consumer Groups
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Returns the list of consumer groups that belong to the specified
-Kafka cluster.
+		Returns the list of consumer groups that belong to the specified
+		Kafka cluster.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param clusterId The Kafka cluster ID.
-	 @return ApiListKafkaV3ConsumerGroupsRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @return ApiListKafkaConsumerGroupsRequest
 	*/
-	ListKafkaV3ConsumerGroups(ctx _context.Context, clusterId string) ApiListKafkaV3ConsumerGroupsRequest
+	ListKafkaConsumerGroups(ctx _context.Context, clusterId string) ApiListKafkaConsumerGroupsRequest
 
-	// ListKafkaV3ConsumerGroupsExecute executes the request
+	// ListKafkaConsumerGroupsExecute executes the request
 	//  @return ConsumerGroupDataList
-	ListKafkaV3ConsumerGroupsExecute(r ApiListKafkaV3ConsumerGroupsRequest) (ConsumerGroupDataList, *_nethttp.Response, error)
+	ListKafkaConsumerGroupsExecute(r ApiListKafkaConsumerGroupsRequest) (ConsumerGroupDataList, *_nethttp.Response, error)
 
 	/*
-	ListKafkaV3ConsumerLags List Consumer Lags
+			ListKafkaConsumerLags List Consumer Lags
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cluster Admin for Kafka (v3)](https://img.shields.io/badge/-Request%20Access%20To%20Cluster%20Admin%20For%20Kafka%20v3-%23bc8540)](mailto:ccloud-rest-api+consumer-lag-earlyaccess@confluent.io?subject=Request%20to%20join%20v3%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cluster%20Admin%20For%20Kafka%20v3%20Early%20Access%20to%20provide%20early%20feedback%20on%20consumer%20lag%20apis%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Returns a list of consumer lags of the consumers belonging to the
-specified consumer group.
+		Returns a list of consumer lags of the consumers belonging to the
+		specified consumer group.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param clusterId The Kafka cluster ID.
-	 @param consumerGroupId The consumer group ID.
-	 @return ApiListKafkaV3ConsumerLagsRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @param consumerGroupId The consumer group ID.
+			 @return ApiListKafkaConsumerLagsRequest
 	*/
-	ListKafkaV3ConsumerLags(ctx _context.Context, clusterId string, consumerGroupId string) ApiListKafkaV3ConsumerLagsRequest
+	ListKafkaConsumerLags(ctx _context.Context, clusterId string, consumerGroupId string) ApiListKafkaConsumerLagsRequest
 
-	// ListKafkaV3ConsumerLagsExecute executes the request
+	// ListKafkaConsumerLagsExecute executes the request
 	//  @return ConsumerLagDataList
-	ListKafkaV3ConsumerLagsExecute(r ApiListKafkaV3ConsumerLagsRequest) (ConsumerLagDataList, *_nethttp.Response, error)
+	ListKafkaConsumerLagsExecute(r ApiListKafkaConsumerLagsRequest) (ConsumerLagDataList, *_nethttp.Response, error)
 
 	/*
-	ListKafkaV3Consumers List Consumers
+			ListKafkaConsumers List Consumers
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Returns a list of consumers that belong to the specified consumer
-group.
+		Returns a list of consumers that belong to the specified consumer
+		group.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param clusterId The Kafka cluster ID.
-	 @param consumerGroupId The consumer group ID.
-	 @return ApiListKafkaV3ConsumersRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @param consumerGroupId The consumer group ID.
+			 @return ApiListKafkaConsumersRequest
 	*/
-	ListKafkaV3Consumers(ctx _context.Context, clusterId string, consumerGroupId string) ApiListKafkaV3ConsumersRequest
+	ListKafkaConsumers(ctx _context.Context, clusterId string, consumerGroupId string) ApiListKafkaConsumersRequest
 
-	// ListKafkaV3ConsumersExecute executes the request
+	// ListKafkaConsumersExecute executes the request
 	//  @return ConsumerDataList
-	ListKafkaV3ConsumersExecute(r ApiListKafkaV3ConsumersRequest) (ConsumerDataList, *_nethttp.Response, error)
+	ListKafkaConsumersExecute(r ApiListKafkaConsumersRequest) (ConsumerDataList, *_nethttp.Response, error)
 }
 
 // ConsumerGroupV3ApiService ConsumerGroupV3Api service
 type ConsumerGroupV3ApiService service
 
-type ApiGetKafkaV3ConsumerRequest struct {
-	ctx _context.Context
-	ApiService ConsumerGroupV3Api
-	clusterId string
+type ApiGetKafkaConsumerRequest struct {
+	ctx             _context.Context
+	ApiService      ConsumerGroupV3Api
+	clusterId       string
 	consumerGroupId string
-	consumerId string
+	consumerId      string
 }
 
-
-func (r ApiGetKafkaV3ConsumerRequest) Execute() (ConsumerData, *_nethttp.Response, error) {
-	return r.ApiService.GetKafkaV3ConsumerExecute(r)
+func (r ApiGetKafkaConsumerRequest) Execute() (ConsumerData, *_nethttp.Response, error) {
+	return r.ApiService.GetKafkaConsumerExecute(r)
 }
 
 /*
-GetKafkaV3Consumer Get Consumer
+GetKafkaConsumer Get Consumer
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cluster Admin for Kafka (v3)](https://img.shields.io/badge/-Request%20Access%20To%20Cluster%20Admin%20For%20Kafka%20v3-%23bc8540)](mailto:ccloud-rest-api+consumer-lag-earlyaccess@confluent.io?subject=Request%20to%20join%20v3%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cluster%20Admin%20For%20Kafka%20v3%20Early%20Access%20to%20provide%20early%20feedback%20on%20consumer%20lag%20apis%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Returns the consumer specified by the ``consumer_id``.
 
@@ -181,21 +180,21 @@ Returns the consumer specified by the ``consumer_id``.
  @param clusterId The Kafka cluster ID.
  @param consumerGroupId The consumer group ID.
  @param consumerId The consumer ID.
- @return ApiGetKafkaV3ConsumerRequest
+ @return ApiGetKafkaConsumerRequest
 */
-func (a *ConsumerGroupV3ApiService) GetKafkaV3Consumer(ctx _context.Context, clusterId string, consumerGroupId string, consumerId string) ApiGetKafkaV3ConsumerRequest {
-	return ApiGetKafkaV3ConsumerRequest{
-		ApiService: a,
-		ctx: ctx,
-		clusterId: clusterId,
+func (a *ConsumerGroupV3ApiService) GetKafkaConsumer(ctx _context.Context, clusterId string, consumerGroupId string, consumerId string) ApiGetKafkaConsumerRequest {
+	return ApiGetKafkaConsumerRequest{
+		ApiService:      a,
+		ctx:             ctx,
+		clusterId:       clusterId,
 		consumerGroupId: consumerGroupId,
-		consumerId: consumerId,
+		consumerId:      consumerId,
 	}
 }
 
 // Execute executes the request
 //  @return ConsumerData
-func (a *ConsumerGroupV3ApiService) GetKafkaV3ConsumerExecute(r ApiGetKafkaV3ConsumerRequest) (ConsumerData, *_nethttp.Response, error) {
+func (a *ConsumerGroupV3ApiService) GetKafkaConsumerExecute(r ApiGetKafkaConsumerRequest) (ConsumerData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -205,7 +204,7 @@ func (a *ConsumerGroupV3ApiService) GetKafkaV3ConsumerExecute(r ApiGetKafkaV3Con
 		localVarReturnValue  ConsumerData
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConsumerGroupV3ApiService.GetKafkaV3Consumer")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConsumerGroupV3ApiService.GetKafkaConsumer")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -229,7 +228,7 @@ func (a *ConsumerGroupV3ApiService) GetKafkaV3ConsumerExecute(r ApiGetKafkaV3Con
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -258,6 +257,45 @@ func (a *ConsumerGroupV3ApiService) GetKafkaV3ConsumerExecute(r ApiGetKafkaV3Con
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -273,20 +311,19 @@ func (a *ConsumerGroupV3ApiService) GetKafkaV3ConsumerExecute(r ApiGetKafkaV3Con
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetKafkaV3ConsumerGroupRequest struct {
-	ctx _context.Context
-	ApiService ConsumerGroupV3Api
-	clusterId string
+type ApiGetKafkaConsumerGroupRequest struct {
+	ctx             _context.Context
+	ApiService      ConsumerGroupV3Api
+	clusterId       string
 	consumerGroupId string
 }
 
-
-func (r ApiGetKafkaV3ConsumerGroupRequest) Execute() (ConsumerGroupData, *_nethttp.Response, error) {
-	return r.ApiService.GetKafkaV3ConsumerGroupExecute(r)
+func (r ApiGetKafkaConsumerGroupRequest) Execute() (ConsumerGroupData, *_nethttp.Response, error) {
+	return r.ApiService.GetKafkaConsumerGroupExecute(r)
 }
 
 /*
-GetKafkaV3ConsumerGroup Get Consumer Group
+GetKafkaConsumerGroup Get Consumer Group
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
@@ -295,20 +332,20 @@ Returns the consumer group specified by the ``consumer_group_id``.
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
  @param consumerGroupId The consumer group ID.
- @return ApiGetKafkaV3ConsumerGroupRequest
+ @return ApiGetKafkaConsumerGroupRequest
 */
-func (a *ConsumerGroupV3ApiService) GetKafkaV3ConsumerGroup(ctx _context.Context, clusterId string, consumerGroupId string) ApiGetKafkaV3ConsumerGroupRequest {
-	return ApiGetKafkaV3ConsumerGroupRequest{
-		ApiService: a,
-		ctx: ctx,
-		clusterId: clusterId,
+func (a *ConsumerGroupV3ApiService) GetKafkaConsumerGroup(ctx _context.Context, clusterId string, consumerGroupId string) ApiGetKafkaConsumerGroupRequest {
+	return ApiGetKafkaConsumerGroupRequest{
+		ApiService:      a,
+		ctx:             ctx,
+		clusterId:       clusterId,
 		consumerGroupId: consumerGroupId,
 	}
 }
 
 // Execute executes the request
 //  @return ConsumerGroupData
-func (a *ConsumerGroupV3ApiService) GetKafkaV3ConsumerGroupExecute(r ApiGetKafkaV3ConsumerGroupRequest) (ConsumerGroupData, *_nethttp.Response, error) {
+func (a *ConsumerGroupV3ApiService) GetKafkaConsumerGroupExecute(r ApiGetKafkaConsumerGroupRequest) (ConsumerGroupData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -318,7 +355,7 @@ func (a *ConsumerGroupV3ApiService) GetKafkaV3ConsumerGroupExecute(r ApiGetKafka
 		localVarReturnValue  ConsumerGroupData
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConsumerGroupV3ApiService.GetKafkaV3ConsumerGroup")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConsumerGroupV3ApiService.GetKafkaConsumerGroup")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -341,7 +378,7 @@ func (a *ConsumerGroupV3ApiService) GetKafkaV3ConsumerGroupExecute(r ApiGetKafka
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -370,6 +407,45 @@ func (a *ConsumerGroupV3ApiService) GetKafkaV3ConsumerGroupExecute(r ApiGetKafka
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -385,22 +461,21 @@ func (a *ConsumerGroupV3ApiService) GetKafkaV3ConsumerGroupExecute(r ApiGetKafka
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetKafkaV3ConsumerGroupLagSummaryRequest struct {
-	ctx _context.Context
-	ApiService ConsumerGroupV3Api
-	clusterId string
+type ApiGetKafkaConsumerGroupLagSummaryRequest struct {
+	ctx             _context.Context
+	ApiService      ConsumerGroupV3Api
+	clusterId       string
 	consumerGroupId string
 }
 
-
-func (r ApiGetKafkaV3ConsumerGroupLagSummaryRequest) Execute() (ConsumerGroupLagSummaryData, *_nethttp.Response, error) {
-	return r.ApiService.GetKafkaV3ConsumerGroupLagSummaryExecute(r)
+func (r ApiGetKafkaConsumerGroupLagSummaryRequest) Execute() (ConsumerGroupLagSummaryData, *_nethttp.Response, error) {
+	return r.ApiService.GetKafkaConsumerGroupLagSummaryExecute(r)
 }
 
 /*
-GetKafkaV3ConsumerGroupLagSummary Get Consumer Group Lag Summary.
+GetKafkaConsumerGroupLagSummary Get Consumer Group Lag Summary.
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cluster Admin for Kafka (v3)](https://img.shields.io/badge/-Request%20Access%20To%20Cluster%20Admin%20For%20Kafka%20v3-%23bc8540)](mailto:ccloud-rest-api+consumer-lag-earlyaccess@confluent.io?subject=Request%20to%20join%20v3%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cluster%20Admin%20For%20Kafka%20v3%20Early%20Access%20to%20provide%20early%20feedback%20on%20consumer%20lag%20apis%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Returns the max and total lag of the consumers belonging to the
 specified consumer group.
@@ -408,20 +483,20 @@ specified consumer group.
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
  @param consumerGroupId The consumer group ID.
- @return ApiGetKafkaV3ConsumerGroupLagSummaryRequest
+ @return ApiGetKafkaConsumerGroupLagSummaryRequest
 */
-func (a *ConsumerGroupV3ApiService) GetKafkaV3ConsumerGroupLagSummary(ctx _context.Context, clusterId string, consumerGroupId string) ApiGetKafkaV3ConsumerGroupLagSummaryRequest {
-	return ApiGetKafkaV3ConsumerGroupLagSummaryRequest{
-		ApiService: a,
-		ctx: ctx,
-		clusterId: clusterId,
+func (a *ConsumerGroupV3ApiService) GetKafkaConsumerGroupLagSummary(ctx _context.Context, clusterId string, consumerGroupId string) ApiGetKafkaConsumerGroupLagSummaryRequest {
+	return ApiGetKafkaConsumerGroupLagSummaryRequest{
+		ApiService:      a,
+		ctx:             ctx,
+		clusterId:       clusterId,
 		consumerGroupId: consumerGroupId,
 	}
 }
 
 // Execute executes the request
 //  @return ConsumerGroupLagSummaryData
-func (a *ConsumerGroupV3ApiService) GetKafkaV3ConsumerGroupLagSummaryExecute(r ApiGetKafkaV3ConsumerGroupLagSummaryRequest) (ConsumerGroupLagSummaryData, *_nethttp.Response, error) {
+func (a *ConsumerGroupV3ApiService) GetKafkaConsumerGroupLagSummaryExecute(r ApiGetKafkaConsumerGroupLagSummaryRequest) (ConsumerGroupLagSummaryData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -431,7 +506,7 @@ func (a *ConsumerGroupV3ApiService) GetKafkaV3ConsumerGroupLagSummaryExecute(r A
 		localVarReturnValue  ConsumerGroupLagSummaryData
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConsumerGroupV3ApiService.GetKafkaV3ConsumerGroupLagSummary")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConsumerGroupV3ApiService.GetKafkaConsumerGroupLagSummary")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -454,7 +529,7 @@ func (a *ConsumerGroupV3ApiService) GetKafkaV3ConsumerGroupLagSummaryExecute(r A
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -483,6 +558,45 @@ func (a *ConsumerGroupV3ApiService) GetKafkaV3ConsumerGroupLagSummaryExecute(r A
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -498,19 +612,18 @@ func (a *ConsumerGroupV3ApiService) GetKafkaV3ConsumerGroupLagSummaryExecute(r A
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListKafkaV3ConsumerGroupsRequest struct {
-	ctx _context.Context
+type ApiListKafkaConsumerGroupsRequest struct {
+	ctx        _context.Context
 	ApiService ConsumerGroupV3Api
-	clusterId string
+	clusterId  string
 }
 
-
-func (r ApiListKafkaV3ConsumerGroupsRequest) Execute() (ConsumerGroupDataList, *_nethttp.Response, error) {
-	return r.ApiService.ListKafkaV3ConsumerGroupsExecute(r)
+func (r ApiListKafkaConsumerGroupsRequest) Execute() (ConsumerGroupDataList, *_nethttp.Response, error) {
+	return r.ApiService.ListKafkaConsumerGroupsExecute(r)
 }
 
 /*
-ListKafkaV3ConsumerGroups List Consumer Groups
+ListKafkaConsumerGroups List Consumer Groups
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
@@ -519,19 +632,19 @@ Kafka cluster.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
- @return ApiListKafkaV3ConsumerGroupsRequest
+ @return ApiListKafkaConsumerGroupsRequest
 */
-func (a *ConsumerGroupV3ApiService) ListKafkaV3ConsumerGroups(ctx _context.Context, clusterId string) ApiListKafkaV3ConsumerGroupsRequest {
-	return ApiListKafkaV3ConsumerGroupsRequest{
+func (a *ConsumerGroupV3ApiService) ListKafkaConsumerGroups(ctx _context.Context, clusterId string) ApiListKafkaConsumerGroupsRequest {
+	return ApiListKafkaConsumerGroupsRequest{
 		ApiService: a,
-		ctx: ctx,
-		clusterId: clusterId,
+		ctx:        ctx,
+		clusterId:  clusterId,
 	}
 }
 
 // Execute executes the request
 //  @return ConsumerGroupDataList
-func (a *ConsumerGroupV3ApiService) ListKafkaV3ConsumerGroupsExecute(r ApiListKafkaV3ConsumerGroupsRequest) (ConsumerGroupDataList, *_nethttp.Response, error) {
+func (a *ConsumerGroupV3ApiService) ListKafkaConsumerGroupsExecute(r ApiListKafkaConsumerGroupsRequest) (ConsumerGroupDataList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -541,7 +654,7 @@ func (a *ConsumerGroupV3ApiService) ListKafkaV3ConsumerGroupsExecute(r ApiListKa
 		localVarReturnValue  ConsumerGroupDataList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConsumerGroupV3ApiService.ListKafkaV3ConsumerGroups")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConsumerGroupV3ApiService.ListKafkaConsumerGroups")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -563,7 +676,7 @@ func (a *ConsumerGroupV3ApiService) ListKafkaV3ConsumerGroupsExecute(r ApiListKa
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -592,6 +705,45 @@ func (a *ConsumerGroupV3ApiService) ListKafkaV3ConsumerGroupsExecute(r ApiListKa
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -607,22 +759,21 @@ func (a *ConsumerGroupV3ApiService) ListKafkaV3ConsumerGroupsExecute(r ApiListKa
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListKafkaV3ConsumerLagsRequest struct {
-	ctx _context.Context
-	ApiService ConsumerGroupV3Api
-	clusterId string
+type ApiListKafkaConsumerLagsRequest struct {
+	ctx             _context.Context
+	ApiService      ConsumerGroupV3Api
+	clusterId       string
 	consumerGroupId string
 }
 
-
-func (r ApiListKafkaV3ConsumerLagsRequest) Execute() (ConsumerLagDataList, *_nethttp.Response, error) {
-	return r.ApiService.ListKafkaV3ConsumerLagsExecute(r)
+func (r ApiListKafkaConsumerLagsRequest) Execute() (ConsumerLagDataList, *_nethttp.Response, error) {
+	return r.ApiService.ListKafkaConsumerLagsExecute(r)
 }
 
 /*
-ListKafkaV3ConsumerLags List Consumer Lags
+ListKafkaConsumerLags List Consumer Lags
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cluster Admin for Kafka (v3)](https://img.shields.io/badge/-Request%20Access%20To%20Cluster%20Admin%20For%20Kafka%20v3-%23bc8540)](mailto:ccloud-rest-api+consumer-lag-earlyaccess@confluent.io?subject=Request%20to%20join%20v3%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cluster%20Admin%20For%20Kafka%20v3%20Early%20Access%20to%20provide%20early%20feedback%20on%20consumer%20lag%20apis%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Returns a list of consumer lags of the consumers belonging to the
 specified consumer group.
@@ -630,20 +781,20 @@ specified consumer group.
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
  @param consumerGroupId The consumer group ID.
- @return ApiListKafkaV3ConsumerLagsRequest
+ @return ApiListKafkaConsumerLagsRequest
 */
-func (a *ConsumerGroupV3ApiService) ListKafkaV3ConsumerLags(ctx _context.Context, clusterId string, consumerGroupId string) ApiListKafkaV3ConsumerLagsRequest {
-	return ApiListKafkaV3ConsumerLagsRequest{
-		ApiService: a,
-		ctx: ctx,
-		clusterId: clusterId,
+func (a *ConsumerGroupV3ApiService) ListKafkaConsumerLags(ctx _context.Context, clusterId string, consumerGroupId string) ApiListKafkaConsumerLagsRequest {
+	return ApiListKafkaConsumerLagsRequest{
+		ApiService:      a,
+		ctx:             ctx,
+		clusterId:       clusterId,
 		consumerGroupId: consumerGroupId,
 	}
 }
 
 // Execute executes the request
 //  @return ConsumerLagDataList
-func (a *ConsumerGroupV3ApiService) ListKafkaV3ConsumerLagsExecute(r ApiListKafkaV3ConsumerLagsRequest) (ConsumerLagDataList, *_nethttp.Response, error) {
+func (a *ConsumerGroupV3ApiService) ListKafkaConsumerLagsExecute(r ApiListKafkaConsumerLagsRequest) (ConsumerLagDataList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -653,7 +804,7 @@ func (a *ConsumerGroupV3ApiService) ListKafkaV3ConsumerLagsExecute(r ApiListKafk
 		localVarReturnValue  ConsumerLagDataList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConsumerGroupV3ApiService.ListKafkaV3ConsumerLags")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConsumerGroupV3ApiService.ListKafkaConsumerLags")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -676,7 +827,7 @@ func (a *ConsumerGroupV3ApiService) ListKafkaV3ConsumerLagsExecute(r ApiListKafk
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -705,6 +856,45 @@ func (a *ConsumerGroupV3ApiService) ListKafkaV3ConsumerLagsExecute(r ApiListKafk
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -720,20 +910,19 @@ func (a *ConsumerGroupV3ApiService) ListKafkaV3ConsumerLagsExecute(r ApiListKafk
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListKafkaV3ConsumersRequest struct {
-	ctx _context.Context
-	ApiService ConsumerGroupV3Api
-	clusterId string
+type ApiListKafkaConsumersRequest struct {
+	ctx             _context.Context
+	ApiService      ConsumerGroupV3Api
+	clusterId       string
 	consumerGroupId string
 }
 
-
-func (r ApiListKafkaV3ConsumersRequest) Execute() (ConsumerDataList, *_nethttp.Response, error) {
-	return r.ApiService.ListKafkaV3ConsumersExecute(r)
+func (r ApiListKafkaConsumersRequest) Execute() (ConsumerDataList, *_nethttp.Response, error) {
+	return r.ApiService.ListKafkaConsumersExecute(r)
 }
 
 /*
-ListKafkaV3Consumers List Consumers
+ListKafkaConsumers List Consumers
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
@@ -743,20 +932,20 @@ group.
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
  @param consumerGroupId The consumer group ID.
- @return ApiListKafkaV3ConsumersRequest
+ @return ApiListKafkaConsumersRequest
 */
-func (a *ConsumerGroupV3ApiService) ListKafkaV3Consumers(ctx _context.Context, clusterId string, consumerGroupId string) ApiListKafkaV3ConsumersRequest {
-	return ApiListKafkaV3ConsumersRequest{
-		ApiService: a,
-		ctx: ctx,
-		clusterId: clusterId,
+func (a *ConsumerGroupV3ApiService) ListKafkaConsumers(ctx _context.Context, clusterId string, consumerGroupId string) ApiListKafkaConsumersRequest {
+	return ApiListKafkaConsumersRequest{
+		ApiService:      a,
+		ctx:             ctx,
+		clusterId:       clusterId,
 		consumerGroupId: consumerGroupId,
 	}
 }
 
 // Execute executes the request
 //  @return ConsumerDataList
-func (a *ConsumerGroupV3ApiService) ListKafkaV3ConsumersExecute(r ApiListKafkaV3ConsumersRequest) (ConsumerDataList, *_nethttp.Response, error) {
+func (a *ConsumerGroupV3ApiService) ListKafkaConsumersExecute(r ApiListKafkaConsumersRequest) (ConsumerDataList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -766,7 +955,7 @@ func (a *ConsumerGroupV3ApiService) ListKafkaV3ConsumersExecute(r ApiListKafkaV3
 		localVarReturnValue  ConsumerDataList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConsumerGroupV3ApiService.ListKafkaV3Consumers")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConsumerGroupV3ApiService.ListKafkaConsumers")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -789,7 +978,7 @@ func (a *ConsumerGroupV3ApiService) ListKafkaV3ConsumersExecute(r ApiListKafkaV3
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -817,6 +1006,45 @@ func (a *ConsumerGroupV3ApiService) ListKafkaV3ConsumersExecute(r ApiListKafkaV3
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

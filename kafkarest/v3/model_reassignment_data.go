@@ -35,14 +35,14 @@ import (
 
 // ReassignmentData struct for ReassignmentData
 type ReassignmentData struct {
-	Kind string `json:"kind"`
-	Metadata ResourceMetadata `json:"metadata"`
-	ClusterId string `json:"cluster_id"`
-	TopicName string `json:"topic_name"`
-	PartitionId int32 `json:"partition_id"`
-	AddingReplicas []int32 `json:"adding_replicas"`
-	RemovingReplicas []int32 `json:"removing_replicas"`
-	Replicas Relationship `json:"replicas"`
+	Kind             string           `json:"kind"`
+	Metadata         ResourceMetadata `json:"metadata"`
+	ClusterId        string           `json:"cluster_id"`
+	TopicName        string           `json:"topic_name"`
+	PartitionId      int32            `json:"partition_id"`
+	AddingReplicas   []int32          `json:"adding_replicas"`
+	RemovingReplicas []int32          `json:"removing_replicas"`
+	Replicas         Relationship     `json:"replicas"`
 }
 
 // NewReassignmentData instantiates a new ReassignmentData object
@@ -83,7 +83,7 @@ func (o *ReassignmentData) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *ReassignmentData) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -107,7 +107,7 @@ func (o *ReassignmentData) GetMetadata() ResourceMetadata {
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *ReassignmentData) GetMetadataOk() (*ResourceMetadata, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Metadata, true
@@ -131,7 +131,7 @@ func (o *ReassignmentData) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *ReassignmentData) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -155,7 +155,7 @@ func (o *ReassignmentData) GetTopicName() string {
 // GetTopicNameOk returns a tuple with the TopicName field value
 // and a boolean to check if the value has been set.
 func (o *ReassignmentData) GetTopicNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.TopicName, true
@@ -179,7 +179,7 @@ func (o *ReassignmentData) GetPartitionId() int32 {
 // GetPartitionIdOk returns a tuple with the PartitionId field value
 // and a boolean to check if the value has been set.
 func (o *ReassignmentData) GetPartitionIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PartitionId, true
@@ -203,7 +203,7 @@ func (o *ReassignmentData) GetAddingReplicas() []int32 {
 // GetAddingReplicasOk returns a tuple with the AddingReplicas field value
 // and a boolean to check if the value has been set.
 func (o *ReassignmentData) GetAddingReplicasOk() (*[]int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AddingReplicas, true
@@ -227,7 +227,7 @@ func (o *ReassignmentData) GetRemovingReplicas() []int32 {
 // GetRemovingReplicasOk returns a tuple with the RemovingReplicas field value
 // and a boolean to check if the value has been set.
 func (o *ReassignmentData) GetRemovingReplicasOk() (*[]int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.RemovingReplicas, true
@@ -251,7 +251,7 @@ func (o *ReassignmentData) GetReplicas() Relationship {
 // GetReplicasOk returns a tuple with the Replicas field value
 // and a boolean to check if the value has been set.
 func (o *ReassignmentData) GetReplicasOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Replicas, true
@@ -264,44 +264,44 @@ func (o *ReassignmentData) SetReplicas(v Relationship) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ReassignmentData) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Metadata)
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.TopicName)
-    o.recurseRedact(&o.PartitionId)
-    o.recurseRedact(&o.AddingReplicas)
-    o.recurseRedact(&o.RemovingReplicas)
-    o.recurseRedact(&o.Replicas)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Metadata)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.TopicName)
+	o.recurseRedact(&o.PartitionId)
+	o.recurseRedact(&o.AddingReplicas)
+	o.recurseRedact(&o.RemovingReplicas)
+	o.recurseRedact(&o.Replicas)
 }
 
 func (o *ReassignmentData) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ReassignmentData) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ReassignmentData) MarshalJSON() ([]byte, error) {
@@ -368,5 +368,3 @@ func (v *NullableReassignmentData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

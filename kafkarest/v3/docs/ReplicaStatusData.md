@@ -10,22 +10,22 @@ Name | Type | Description | Notes
 **TopicName** | **string** |  | 
 **BrokerId** | **int32** |  | 
 **PartitionId** | **int32** |  | 
-**Leader** | **bool** |  | 
-**Observer** | **bool** |  | 
-**IsrEligible** | **bool** |  | 
-**InIsr** | **bool** |  | 
-**CaughtUp** | **bool** |  | 
-**LogStartOffset** | **int32** |  | 
-**LogEndOffset** | **int32** |  | 
-**LastCaughtUpTimeMs** | **int32** |  | 
-**LastFetchTimeMs** | **int32** |  | 
+**IsLeader** | **bool** |  | 
+**IsObserver** | **bool** |  | 
+**IsIsrEligible** | **bool** |  | 
+**IsInIsr** | **bool** |  | 
+**IsCaughtUp** | **bool** |  | 
+**LogStartOffset** | **int64** |  | 
+**LogEndOffset** | **int64** |  | 
+**LastCaughtUpTimeMs** | **int64** |  | 
+**LastFetchTimeMs** | **int64** |  | 
 **LinkName** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewReplicaStatusData
 
-`func NewReplicaStatusData(kind string, metadata ResourceMetadata, clusterId string, topicName string, brokerId int32, partitionId int32, leader bool, observer bool, isrEligible bool, inIsr bool, caughtUp bool, logStartOffset int32, logEndOffset int32, lastCaughtUpTimeMs int32, lastFetchTimeMs int32, ) *ReplicaStatusData`
+`func NewReplicaStatusData(kind string, metadata ResourceMetadata, clusterId string, topicName string, brokerId int32, partitionId int32, isLeader bool, isObserver bool, isIsrEligible bool, isInIsr bool, isCaughtUp bool, logStartOffset int64, logEndOffset int64, lastCaughtUpTimeMs int64, lastFetchTimeMs int64, ) *ReplicaStatusData`
 
 NewReplicaStatusData instantiates a new ReplicaStatusData object
 This constructor will assign default values to properties that have it defined,
@@ -160,182 +160,182 @@ and a boolean to check if the value has been set.
 SetPartitionId sets PartitionId field to given value.
 
 
-### GetLeader
+### GetIsLeader
 
-`func (o *ReplicaStatusData) GetLeader() bool`
+`func (o *ReplicaStatusData) GetIsLeader() bool`
 
-GetLeader returns the Leader field if non-nil, zero value otherwise.
+GetIsLeader returns the IsLeader field if non-nil, zero value otherwise.
 
-### GetLeaderOk
+### GetIsLeaderOk
 
-`func (o *ReplicaStatusData) GetLeaderOk() (*bool, bool)`
+`func (o *ReplicaStatusData) GetIsLeaderOk() (*bool, bool)`
 
-GetLeaderOk returns a tuple with the Leader field if it's non-nil, zero value otherwise
+GetIsLeaderOk returns a tuple with the IsLeader field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetLeader
+### SetIsLeader
 
-`func (o *ReplicaStatusData) SetLeader(v bool)`
+`func (o *ReplicaStatusData) SetIsLeader(v bool)`
 
-SetLeader sets Leader field to given value.
+SetIsLeader sets IsLeader field to given value.
 
 
-### GetObserver
+### GetIsObserver
 
-`func (o *ReplicaStatusData) GetObserver() bool`
+`func (o *ReplicaStatusData) GetIsObserver() bool`
 
-GetObserver returns the Observer field if non-nil, zero value otherwise.
+GetIsObserver returns the IsObserver field if non-nil, zero value otherwise.
 
-### GetObserverOk
+### GetIsObserverOk
 
-`func (o *ReplicaStatusData) GetObserverOk() (*bool, bool)`
+`func (o *ReplicaStatusData) GetIsObserverOk() (*bool, bool)`
 
-GetObserverOk returns a tuple with the Observer field if it's non-nil, zero value otherwise
+GetIsObserverOk returns a tuple with the IsObserver field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetObserver
+### SetIsObserver
 
-`func (o *ReplicaStatusData) SetObserver(v bool)`
+`func (o *ReplicaStatusData) SetIsObserver(v bool)`
 
-SetObserver sets Observer field to given value.
+SetIsObserver sets IsObserver field to given value.
 
 
-### GetIsrEligible
+### GetIsIsrEligible
 
-`func (o *ReplicaStatusData) GetIsrEligible() bool`
+`func (o *ReplicaStatusData) GetIsIsrEligible() bool`
 
-GetIsrEligible returns the IsrEligible field if non-nil, zero value otherwise.
+GetIsIsrEligible returns the IsIsrEligible field if non-nil, zero value otherwise.
 
-### GetIsrEligibleOk
+### GetIsIsrEligibleOk
 
-`func (o *ReplicaStatusData) GetIsrEligibleOk() (*bool, bool)`
+`func (o *ReplicaStatusData) GetIsIsrEligibleOk() (*bool, bool)`
 
-GetIsrEligibleOk returns a tuple with the IsrEligible field if it's non-nil, zero value otherwise
+GetIsIsrEligibleOk returns a tuple with the IsIsrEligible field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIsrEligible
+### SetIsIsrEligible
 
-`func (o *ReplicaStatusData) SetIsrEligible(v bool)`
+`func (o *ReplicaStatusData) SetIsIsrEligible(v bool)`
 
-SetIsrEligible sets IsrEligible field to given value.
+SetIsIsrEligible sets IsIsrEligible field to given value.
 
 
-### GetInIsr
+### GetIsInIsr
 
-`func (o *ReplicaStatusData) GetInIsr() bool`
+`func (o *ReplicaStatusData) GetIsInIsr() bool`
 
-GetInIsr returns the InIsr field if non-nil, zero value otherwise.
+GetIsInIsr returns the IsInIsr field if non-nil, zero value otherwise.
 
-### GetInIsrOk
+### GetIsInIsrOk
 
-`func (o *ReplicaStatusData) GetInIsrOk() (*bool, bool)`
+`func (o *ReplicaStatusData) GetIsInIsrOk() (*bool, bool)`
 
-GetInIsrOk returns a tuple with the InIsr field if it's non-nil, zero value otherwise
+GetIsInIsrOk returns a tuple with the IsInIsr field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetInIsr
+### SetIsInIsr
 
-`func (o *ReplicaStatusData) SetInIsr(v bool)`
+`func (o *ReplicaStatusData) SetIsInIsr(v bool)`
 
-SetInIsr sets InIsr field to given value.
+SetIsInIsr sets IsInIsr field to given value.
 
 
-### GetCaughtUp
+### GetIsCaughtUp
 
-`func (o *ReplicaStatusData) GetCaughtUp() bool`
+`func (o *ReplicaStatusData) GetIsCaughtUp() bool`
 
-GetCaughtUp returns the CaughtUp field if non-nil, zero value otherwise.
+GetIsCaughtUp returns the IsCaughtUp field if non-nil, zero value otherwise.
 
-### GetCaughtUpOk
+### GetIsCaughtUpOk
 
-`func (o *ReplicaStatusData) GetCaughtUpOk() (*bool, bool)`
+`func (o *ReplicaStatusData) GetIsCaughtUpOk() (*bool, bool)`
 
-GetCaughtUpOk returns a tuple with the CaughtUp field if it's non-nil, zero value otherwise
+GetIsCaughtUpOk returns a tuple with the IsCaughtUp field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCaughtUp
+### SetIsCaughtUp
 
-`func (o *ReplicaStatusData) SetCaughtUp(v bool)`
+`func (o *ReplicaStatusData) SetIsCaughtUp(v bool)`
 
-SetCaughtUp sets CaughtUp field to given value.
+SetIsCaughtUp sets IsCaughtUp field to given value.
 
 
 ### GetLogStartOffset
 
-`func (o *ReplicaStatusData) GetLogStartOffset() int32`
+`func (o *ReplicaStatusData) GetLogStartOffset() int64`
 
 GetLogStartOffset returns the LogStartOffset field if non-nil, zero value otherwise.
 
 ### GetLogStartOffsetOk
 
-`func (o *ReplicaStatusData) GetLogStartOffsetOk() (*int32, bool)`
+`func (o *ReplicaStatusData) GetLogStartOffsetOk() (*int64, bool)`
 
 GetLogStartOffsetOk returns a tuple with the LogStartOffset field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLogStartOffset
 
-`func (o *ReplicaStatusData) SetLogStartOffset(v int32)`
+`func (o *ReplicaStatusData) SetLogStartOffset(v int64)`
 
 SetLogStartOffset sets LogStartOffset field to given value.
 
 
 ### GetLogEndOffset
 
-`func (o *ReplicaStatusData) GetLogEndOffset() int32`
+`func (o *ReplicaStatusData) GetLogEndOffset() int64`
 
 GetLogEndOffset returns the LogEndOffset field if non-nil, zero value otherwise.
 
 ### GetLogEndOffsetOk
 
-`func (o *ReplicaStatusData) GetLogEndOffsetOk() (*int32, bool)`
+`func (o *ReplicaStatusData) GetLogEndOffsetOk() (*int64, bool)`
 
 GetLogEndOffsetOk returns a tuple with the LogEndOffset field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLogEndOffset
 
-`func (o *ReplicaStatusData) SetLogEndOffset(v int32)`
+`func (o *ReplicaStatusData) SetLogEndOffset(v int64)`
 
 SetLogEndOffset sets LogEndOffset field to given value.
 
 
 ### GetLastCaughtUpTimeMs
 
-`func (o *ReplicaStatusData) GetLastCaughtUpTimeMs() int32`
+`func (o *ReplicaStatusData) GetLastCaughtUpTimeMs() int64`
 
 GetLastCaughtUpTimeMs returns the LastCaughtUpTimeMs field if non-nil, zero value otherwise.
 
 ### GetLastCaughtUpTimeMsOk
 
-`func (o *ReplicaStatusData) GetLastCaughtUpTimeMsOk() (*int32, bool)`
+`func (o *ReplicaStatusData) GetLastCaughtUpTimeMsOk() (*int64, bool)`
 
 GetLastCaughtUpTimeMsOk returns a tuple with the LastCaughtUpTimeMs field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLastCaughtUpTimeMs
 
-`func (o *ReplicaStatusData) SetLastCaughtUpTimeMs(v int32)`
+`func (o *ReplicaStatusData) SetLastCaughtUpTimeMs(v int64)`
 
 SetLastCaughtUpTimeMs sets LastCaughtUpTimeMs field to given value.
 
 
 ### GetLastFetchTimeMs
 
-`func (o *ReplicaStatusData) GetLastFetchTimeMs() int32`
+`func (o *ReplicaStatusData) GetLastFetchTimeMs() int64`
 
 GetLastFetchTimeMs returns the LastFetchTimeMs field if non-nil, zero value otherwise.
 
 ### GetLastFetchTimeMsOk
 
-`func (o *ReplicaStatusData) GetLastFetchTimeMsOk() (*int32, bool)`
+`func (o *ReplicaStatusData) GetLastFetchTimeMsOk() (*int64, bool)`
 
 GetLastFetchTimeMsOk returns a tuple with the LastFetchTimeMs field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLastFetchTimeMs
 
-`func (o *ReplicaStatusData) SetLastFetchTimeMs(v int32)`
+`func (o *ReplicaStatusData) SetLastFetchTimeMs(v int64)`
 
 SetLastFetchTimeMs sets LastFetchTimeMs field to given value.
 
