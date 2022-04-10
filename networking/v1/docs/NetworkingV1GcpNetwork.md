@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | **string** |  | 
+**Kind** | **string** | Network kind type. | 
 **Project** | **string** | The GCP project. | [readonly] 
 **VpcNetwork** | **string** | The GCP VPC network name. | [readonly] 
 

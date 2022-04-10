@@ -29,7 +29,11 @@ import (
 	"encoding/json"
 )
 
-// NetworkingV1PrivateLinkAccessList Add or remove access to PrivateLink endpoints by AWS account or Azure subscription.  Related guide: [APIs to manage PrivateLink access.](https://docs.confluent.cloud).  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `privatelink_accounts_per_network` | Number of AWS accounts per network | | `privatelink_subscriptions_per_network` | Number of Azure subscriptions per network |
+import (
+	"reflect"
+)
+
+// NetworkingV1PrivateLinkAccessList Add or remove access to PrivateLink endpoints by AWS account or Azure subscription.  Related guide: [APIs to manage PrivateLink access.](https://docs.confluent.cloud).  ## The Private Link Accesses Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.PrivateLinkAccess\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `privatelink_accounts_per_network` | Number of AWS accounts per network | | `privatelink_subscriptions_per_network` | Number of Azure subscriptions per network |
 type NetworkingV1PrivateLinkAccessList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version"`
@@ -155,6 +159,44 @@ func (o *NetworkingV1PrivateLinkAccessList) GetDataOk() (*[]NetworkingV1PrivateL
 // SetData sets field value
 func (o *NetworkingV1PrivateLinkAccessList) SetData(v []NetworkingV1PrivateLinkAccess) {
 	o.Data = v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *NetworkingV1PrivateLinkAccessList) Redact() {
+    o.recurseRedact(&o.ApiVersion)
+    o.recurseRedact(&o.Kind)
+    o.recurseRedact(&o.Metadata)
+    o.recurseRedact(&o.Data)
+}
+
+func (o *NetworkingV1PrivateLinkAccessList) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o NetworkingV1PrivateLinkAccessList) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1PrivateLinkAccessList) MarshalJSON() ([]byte, error) {

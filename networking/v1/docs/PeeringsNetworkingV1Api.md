@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 
 ## ListNetworkingV1Peerings
 
-> NetworkingV1PeeringList ListNetworkingV1Peerings(ctx).Environment(environment).DisplayName(displayName).Phase(phase).Network(network).PageSize(pageSize).PageToken(pageToken).Execute()
+> NetworkingV1PeeringList ListNetworkingV1Peerings(ctx).Environment(environment).SpecDisplayName(specDisplayName).StatusPhase(statusPhase).SpecNetwork(specNetwork).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Peerings
 
@@ -242,15 +242,15 @@ import (
 
 func main() {
     environment := "env-00000" // string | Filter the results by exact match for environment.
-    displayName := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for display_name. Pass multiple times to see results matching any of the values. (optional)
-    phase := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for phase. Pass multiple times to see results matching any of the values. (optional)
-    network :=  // MultipleSearchFilter | Filter the results by exact match for network. Pass multiple times to see results matching any of the values. (optional)
+    specDisplayName := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. (optional)
+    statusPhase := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values. (optional)
+    specNetwork :=  // MultipleSearchFilter | Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PeeringsNetworkingV1Api.ListNetworkingV1Peerings(context.Background()).Environment(environment).DisplayName(displayName).Phase(phase).Network(network).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.PeeringsNetworkingV1Api.ListNetworkingV1Peerings(context.Background()).Environment(environment).SpecDisplayName(specDisplayName).StatusPhase(statusPhase).SpecNetwork(specNetwork).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PeeringsNetworkingV1Api.ListNetworkingV1Peerings``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -272,15 +272,15 @@ Other parameters are passed through a pointer to a apiListNetworkingV1PeeringsRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **environment** | **string** | Filter the results by exact match for environment. | 
- **displayName** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for display_name. Pass multiple times to see results matching any of the values. | 
- **phase** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for phase. Pass multiple times to see results matching any of the values. | 
- **network** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for network. Pass multiple times to see results matching any of the values. | 
+ **specDisplayName** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. | 
+ **statusPhase** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values. | 
+ **specNetwork** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 
 ### Return type
 
-[**NetworkingV1PeeringList**](NetworkingV1PeeringList.md)
+[**NetworkingV1PeeringList**](networking.v1.PeeringList.md)
 
 ### Authorization
 

@@ -39,12 +39,99 @@ var (
 	_ _context.Context
 )
 
+type PeeringsNetworkingV1Api interface {
+
+	/*
+	CreateNetworkingV1Peering Create a Peering
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Make a request to create a peering.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiCreateNetworkingV1PeeringRequest
+	*/
+	CreateNetworkingV1Peering(ctx _context.Context) ApiCreateNetworkingV1PeeringRequest
+
+	// CreateNetworkingV1PeeringExecute executes the request
+	//  @return NetworkingV1Peering
+	CreateNetworkingV1PeeringExecute(r ApiCreateNetworkingV1PeeringRequest) (NetworkingV1Peering, *_nethttp.Response, error)
+
+	/*
+	DeleteNetworkingV1Peering Delete a Peering
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Make a request to delete a peering.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the peering.
+	 @return ApiDeleteNetworkingV1PeeringRequest
+	*/
+	DeleteNetworkingV1Peering(ctx _context.Context, id string) ApiDeleteNetworkingV1PeeringRequest
+
+	// DeleteNetworkingV1PeeringExecute executes the request
+	DeleteNetworkingV1PeeringExecute(r ApiDeleteNetworkingV1PeeringRequest) (*_nethttp.Response, error)
+
+	/*
+	GetNetworkingV1Peering Read a Peering
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Make a request to read a peering.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the peering.
+	 @return ApiGetNetworkingV1PeeringRequest
+	*/
+	GetNetworkingV1Peering(ctx _context.Context, id string) ApiGetNetworkingV1PeeringRequest
+
+	// GetNetworkingV1PeeringExecute executes the request
+	//  @return NetworkingV1Peering
+	GetNetworkingV1PeeringExecute(r ApiGetNetworkingV1PeeringRequest) (NetworkingV1Peering, *_nethttp.Response, error)
+
+	/*
+	ListNetworkingV1Peerings List of Peerings
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Retrieve a sorted, filtered, paginated list of all peerings.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiListNetworkingV1PeeringsRequest
+	*/
+	ListNetworkingV1Peerings(ctx _context.Context) ApiListNetworkingV1PeeringsRequest
+
+	// ListNetworkingV1PeeringsExecute executes the request
+	//  @return NetworkingV1PeeringList
+	ListNetworkingV1PeeringsExecute(r ApiListNetworkingV1PeeringsRequest) (NetworkingV1PeeringList, *_nethttp.Response, error)
+
+	/*
+	UpdateNetworkingV1Peering Update a Peering
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Make a request to update a peering.
+
+
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the peering.
+	 @return ApiUpdateNetworkingV1PeeringRequest
+	*/
+	UpdateNetworkingV1Peering(ctx _context.Context, id string) ApiUpdateNetworkingV1PeeringRequest
+
+	// UpdateNetworkingV1PeeringExecute executes the request
+	//  @return NetworkingV1Peering
+	UpdateNetworkingV1PeeringExecute(r ApiUpdateNetworkingV1PeeringRequest) (NetworkingV1Peering, *_nethttp.Response, error)
+}
+
 // PeeringsNetworkingV1ApiService PeeringsNetworkingV1Api service
 type PeeringsNetworkingV1ApiService service
 
 type ApiCreateNetworkingV1PeeringRequest struct {
 	ctx _context.Context
-	ApiService *PeeringsNetworkingV1ApiService
+	ApiService PeeringsNetworkingV1Api
 	networkingV1Peering *NetworkingV1Peering
 }
 
@@ -188,6 +275,16 @@ func (a *PeeringsNetworkingV1ApiService) CreateNetworkingV1PeeringExecute(r ApiC
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -214,7 +311,7 @@ func (a *PeeringsNetworkingV1ApiService) CreateNetworkingV1PeeringExecute(r ApiC
 
 type ApiDeleteNetworkingV1PeeringRequest struct {
 	ctx _context.Context
-	ApiService *PeeringsNetworkingV1ApiService
+	ApiService PeeringsNetworkingV1Api
 	environment *string
 	id string
 }
@@ -370,7 +467,7 @@ func (a *PeeringsNetworkingV1ApiService) DeleteNetworkingV1PeeringExecute(r ApiD
 
 type ApiGetNetworkingV1PeeringRequest struct {
 	ctx _context.Context
-	ApiService *PeeringsNetworkingV1ApiService
+	ApiService PeeringsNetworkingV1Api
 	environment *string
 	id string
 }
@@ -537,11 +634,11 @@ func (a *PeeringsNetworkingV1ApiService) GetNetworkingV1PeeringExecute(r ApiGetN
 
 type ApiListNetworkingV1PeeringsRequest struct {
 	ctx _context.Context
-	ApiService *PeeringsNetworkingV1ApiService
+	ApiService PeeringsNetworkingV1Api
 	environment *string
-	displayName *MultipleSearchFilter
-	phase *MultipleSearchFilter
-	network *MultipleSearchFilter
+	specDisplayName *MultipleSearchFilter
+	statusPhase *MultipleSearchFilter
+	specNetwork *MultipleSearchFilter
 	pageSize *int32
 	pageToken *string
 }
@@ -551,19 +648,19 @@ func (r ApiListNetworkingV1PeeringsRequest) Environment(environment string) ApiL
 	r.environment = &environment
 	return r
 }
-// Filter the results by exact match for display_name. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PeeringsRequest) DisplayName(displayName MultipleSearchFilter) ApiListNetworkingV1PeeringsRequest {
-	r.displayName = &displayName
+// Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1PeeringsRequest) SpecDisplayName(specDisplayName MultipleSearchFilter) ApiListNetworkingV1PeeringsRequest {
+	r.specDisplayName = &specDisplayName
 	return r
 }
-// Filter the results by exact match for phase. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PeeringsRequest) Phase(phase MultipleSearchFilter) ApiListNetworkingV1PeeringsRequest {
-	r.phase = &phase
+// Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1PeeringsRequest) StatusPhase(statusPhase MultipleSearchFilter) ApiListNetworkingV1PeeringsRequest {
+	r.statusPhase = &statusPhase
 	return r
 }
-// Filter the results by exact match for network. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PeeringsRequest) Network(network MultipleSearchFilter) ApiListNetworkingV1PeeringsRequest {
-	r.network = &network
+// Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1PeeringsRequest) SpecNetwork(specNetwork MultipleSearchFilter) ApiListNetworkingV1PeeringsRequest {
+	r.specNetwork = &specNetwork
 	return r
 }
 // A pagination size for collection requests.
@@ -624,15 +721,15 @@ func (a *PeeringsNetworkingV1ApiService) ListNetworkingV1PeeringsExecute(r ApiLi
 		return localVarReturnValue, nil, reportError("environment is required and must be specified")
 	}
 
-	if r.displayName != nil {
-		localVarQueryParams.Add("display_name", parameterToString(*r.displayName, ""))
+	if r.specDisplayName != nil {
+		localVarQueryParams.Add("spec.display_name", parameterToString(*r.specDisplayName, ""))
 	}
-	if r.phase != nil {
-		localVarQueryParams.Add("phase", parameterToString(*r.phase, ""))
+	if r.statusPhase != nil {
+		localVarQueryParams.Add("status.phase", parameterToString(*r.statusPhase, ""))
 	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
-	if r.network != nil {
-		localVarQueryParams.Add("network", parameterToString(*r.network, ""))
+	if r.specNetwork != nil {
+		localVarQueryParams.Add("spec.network", parameterToString(*r.specNetwork, ""))
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
@@ -735,7 +832,7 @@ func (a *PeeringsNetworkingV1ApiService) ListNetworkingV1PeeringsExecute(r ApiLi
 
 type ApiUpdateNetworkingV1PeeringRequest struct {
 	ctx _context.Context
-	ApiService *PeeringsNetworkingV1ApiService
+	ApiService PeeringsNetworkingV1Api
 	id string
 	networkingV1PeeringUpdate *NetworkingV1PeeringUpdate
 }
@@ -876,6 +973,16 @@ func (a *PeeringsNetworkingV1ApiService) UpdateNetworkingV1PeeringExecute(r ApiU
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

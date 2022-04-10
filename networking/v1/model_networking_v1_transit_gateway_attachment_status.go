@@ -29,6 +29,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // NetworkingV1TransitGatewayAttachmentStatus The status of the Transit Gateway Attachment
 type NetworkingV1TransitGatewayAttachmentStatus struct {
 	// The lifecycle phase of the TGW attachment:   PROVISIONING: attachment provisioning is in progress;   PENDING_ACCEPT: attachment request is pending acceptance by the customer;   READY:  attachment is ready;   FAILED: attachment is in a failed state;   DEPROVISIONING: attachment deprovisioning is in progress; 
@@ -143,6 +147,43 @@ func (o *NetworkingV1TransitGatewayAttachmentStatus) HasErrorMessage() bool {
 // SetErrorMessage gets a reference to the given string and assigns it to the ErrorMessage field.
 func (o *NetworkingV1TransitGatewayAttachmentStatus) SetErrorMessage(v string) {
 	o.ErrorMessage = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *NetworkingV1TransitGatewayAttachmentStatus) Redact() {
+    o.recurseRedact(&o.Phase)
+    o.recurseRedact(o.ErrorCode)
+    o.recurseRedact(o.ErrorMessage)
+}
+
+func (o *NetworkingV1TransitGatewayAttachmentStatus) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o NetworkingV1TransitGatewayAttachmentStatus) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1TransitGatewayAttachmentStatus) MarshalJSON() ([]byte, error) {

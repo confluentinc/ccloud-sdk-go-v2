@@ -29,7 +29,11 @@ import (
 	"encoding/json"
 )
 
-// NetworkingV1PeeringList VPC Peering Connections  Related guide: [APIs to manage VPC peering connections.](https://docs.confluent.cloud).  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `peerings_per_network` | Number of peerings per network |
+import (
+	"reflect"
+)
+
+// NetworkingV1PeeringList VPC Peering Connections  Related guide: [APIs to manage VPC peering connections.](https://docs.confluent.cloud).  ## The Peerings Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.Peering\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `peerings_per_network` | Number of peerings per network |
 type NetworkingV1PeeringList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version"`
@@ -155,6 +159,44 @@ func (o *NetworkingV1PeeringList) GetDataOk() (*[]NetworkingV1Peering, bool) {
 // SetData sets field value
 func (o *NetworkingV1PeeringList) SetData(v []NetworkingV1Peering) {
 	o.Data = v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *NetworkingV1PeeringList) Redact() {
+    o.recurseRedact(&o.ApiVersion)
+    o.recurseRedact(&o.Kind)
+    o.recurseRedact(&o.Metadata)
+    o.recurseRedact(&o.Data)
+}
+
+func (o *NetworkingV1PeeringList) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o NetworkingV1PeeringList) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1PeeringList) MarshalJSON() ([]byte, error) {

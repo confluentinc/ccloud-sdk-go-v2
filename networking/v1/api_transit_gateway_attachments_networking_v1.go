@@ -39,12 +39,48 @@ var (
 	_ _context.Context
 )
 
+type TransitGatewayAttachmentsNetworkingV1Api interface {
+
+	/*
+	GetNetworkingV1TransitGatewayAttachment Read a Transit Gateway Attachment
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Make a request to read a transit gateway attachment.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the transit gateway attachment.
+	 @return ApiGetNetworkingV1TransitGatewayAttachmentRequest
+	*/
+	GetNetworkingV1TransitGatewayAttachment(ctx _context.Context, id string) ApiGetNetworkingV1TransitGatewayAttachmentRequest
+
+	// GetNetworkingV1TransitGatewayAttachmentExecute executes the request
+	//  @return NetworkingV1TransitGatewayAttachment
+	GetNetworkingV1TransitGatewayAttachmentExecute(r ApiGetNetworkingV1TransitGatewayAttachmentRequest) (NetworkingV1TransitGatewayAttachment, *_nethttp.Response, error)
+
+	/*
+	ListNetworkingV1TransitGatewayAttachments List of Transit Gateway Attachments
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Retrieve a sorted, filtered, paginated list of all transit gateway attachments.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiListNetworkingV1TransitGatewayAttachmentsRequest
+	*/
+	ListNetworkingV1TransitGatewayAttachments(ctx _context.Context) ApiListNetworkingV1TransitGatewayAttachmentsRequest
+
+	// ListNetworkingV1TransitGatewayAttachmentsExecute executes the request
+	//  @return NetworkingV1TransitGatewayAttachmentList
+	ListNetworkingV1TransitGatewayAttachmentsExecute(r ApiListNetworkingV1TransitGatewayAttachmentsRequest) (NetworkingV1TransitGatewayAttachmentList, *_nethttp.Response, error)
+}
+
 // TransitGatewayAttachmentsNetworkingV1ApiService TransitGatewayAttachmentsNetworkingV1Api service
 type TransitGatewayAttachmentsNetworkingV1ApiService service
 
 type ApiGetNetworkingV1TransitGatewayAttachmentRequest struct {
 	ctx _context.Context
-	ApiService *TransitGatewayAttachmentsNetworkingV1ApiService
+	ApiService TransitGatewayAttachmentsNetworkingV1Api
 	environment *string
 	id string
 }
@@ -211,11 +247,11 @@ func (a *TransitGatewayAttachmentsNetworkingV1ApiService) GetNetworkingV1Transit
 
 type ApiListNetworkingV1TransitGatewayAttachmentsRequest struct {
 	ctx _context.Context
-	ApiService *TransitGatewayAttachmentsNetworkingV1ApiService
+	ApiService TransitGatewayAttachmentsNetworkingV1Api
 	environment *string
-	displayName *MultipleSearchFilter
-	phase *MultipleSearchFilter
-	network *MultipleSearchFilter
+	specDisplayName *MultipleSearchFilter
+	statusPhase *MultipleSearchFilter
+	specNetwork *MultipleSearchFilter
 	pageSize *int32
 	pageToken *string
 }
@@ -225,19 +261,19 @@ func (r ApiListNetworkingV1TransitGatewayAttachmentsRequest) Environment(environ
 	r.environment = &environment
 	return r
 }
-// Filter the results by exact match for display_name. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1TransitGatewayAttachmentsRequest) DisplayName(displayName MultipleSearchFilter) ApiListNetworkingV1TransitGatewayAttachmentsRequest {
-	r.displayName = &displayName
+// Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1TransitGatewayAttachmentsRequest) SpecDisplayName(specDisplayName MultipleSearchFilter) ApiListNetworkingV1TransitGatewayAttachmentsRequest {
+	r.specDisplayName = &specDisplayName
 	return r
 }
-// Filter the results by exact match for phase. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1TransitGatewayAttachmentsRequest) Phase(phase MultipleSearchFilter) ApiListNetworkingV1TransitGatewayAttachmentsRequest {
-	r.phase = &phase
+// Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1TransitGatewayAttachmentsRequest) StatusPhase(statusPhase MultipleSearchFilter) ApiListNetworkingV1TransitGatewayAttachmentsRequest {
+	r.statusPhase = &statusPhase
 	return r
 }
-// Filter the results by exact match for network. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1TransitGatewayAttachmentsRequest) Network(network MultipleSearchFilter) ApiListNetworkingV1TransitGatewayAttachmentsRequest {
-	r.network = &network
+// Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1TransitGatewayAttachmentsRequest) SpecNetwork(specNetwork MultipleSearchFilter) ApiListNetworkingV1TransitGatewayAttachmentsRequest {
+	r.specNetwork = &specNetwork
 	return r
 }
 // A pagination size for collection requests.
@@ -298,15 +334,15 @@ func (a *TransitGatewayAttachmentsNetworkingV1ApiService) ListNetworkingV1Transi
 		return localVarReturnValue, nil, reportError("environment is required and must be specified")
 	}
 
-	if r.displayName != nil {
-		localVarQueryParams.Add("display_name", parameterToString(*r.displayName, ""))
+	if r.specDisplayName != nil {
+		localVarQueryParams.Add("spec.display_name", parameterToString(*r.specDisplayName, ""))
 	}
-	if r.phase != nil {
-		localVarQueryParams.Add("phase", parameterToString(*r.phase, ""))
+	if r.statusPhase != nil {
+		localVarQueryParams.Add("status.phase", parameterToString(*r.statusPhase, ""))
 	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
-	if r.network != nil {
-		localVarQueryParams.Add("network", parameterToString(*r.network, ""))
+	if r.specNetwork != nil {
+		localVarQueryParams.Add("spec.network", parameterToString(*r.specNetwork, ""))
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))

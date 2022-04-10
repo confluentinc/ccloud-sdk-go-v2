@@ -64,13 +64,13 @@ type APIClient struct {
 
 	// API Services
 
-	NetworksNetworkingV1Api *NetworksNetworkingV1ApiService
+	NetworksNetworkingV1Api NetworksNetworkingV1Api
 
-	PeeringsNetworkingV1Api *PeeringsNetworkingV1ApiService
+	PeeringsNetworkingV1Api PeeringsNetworkingV1Api
 
-	PrivateLinkAccessesNetworkingV1Api *PrivateLinkAccessesNetworkingV1ApiService
+	PrivateLinkAccessesNetworkingV1Api PrivateLinkAccessesNetworkingV1Api
 
-	TransitGatewayAttachmentsNetworkingV1Api *TransitGatewayAttachmentsNetworkingV1ApiService
+	TransitGatewayAttachmentsNetworkingV1Api TransitGatewayAttachmentsNetworkingV1Api
 }
 
 type service struct {

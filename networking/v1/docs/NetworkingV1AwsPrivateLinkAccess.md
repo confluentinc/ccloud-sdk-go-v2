@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | **string** |  | 
+**Kind** | **string** | PrivateLink kind type. | 
 **Account** | **string** | AWS account to allow for PrivateLink access. | 
 
 ## Methods
