@@ -29,8 +29,13 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // NetworkingV1AzureNetwork The Azure network details.
 type NetworkingV1AzureNetwork struct {
+	// Network kind type.
 	Kind string `json:"kind"`
 	// The Azure Virtual Network.
 	Vnet string `json:"vnet"`
@@ -162,6 +167,44 @@ func (o *NetworkingV1AzureNetwork) HasPrivateLinkServiceAliases() bool {
 // SetPrivateLinkServiceAliases gets a reference to the given map[string]string and assigns it to the PrivateLinkServiceAliases field.
 func (o *NetworkingV1AzureNetwork) SetPrivateLinkServiceAliases(v map[string]string) {
 	o.PrivateLinkServiceAliases = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *NetworkingV1AzureNetwork) Redact() {
+    o.recurseRedact(&o.Kind)
+    o.recurseRedact(&o.Vnet)
+    o.recurseRedact(&o.Subscription)
+    o.recurseRedact(o.PrivateLinkServiceAliases)
+}
+
+func (o *NetworkingV1AzureNetwork) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o NetworkingV1AzureNetwork) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1AzureNetwork) MarshalJSON() ([]byte, error) {

@@ -39,12 +39,99 @@ var (
 	_ _context.Context
 )
 
+type PrivateLinkAccessesNetworkingV1Api interface {
+
+	/*
+	CreateNetworkingV1PrivateLinkAccess Create a Private Link Access
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Make a request to create a private link access.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiCreateNetworkingV1PrivateLinkAccessRequest
+	*/
+	CreateNetworkingV1PrivateLinkAccess(ctx _context.Context) ApiCreateNetworkingV1PrivateLinkAccessRequest
+
+	// CreateNetworkingV1PrivateLinkAccessExecute executes the request
+	//  @return NetworkingV1PrivateLinkAccess
+	CreateNetworkingV1PrivateLinkAccessExecute(r ApiCreateNetworkingV1PrivateLinkAccessRequest) (NetworkingV1PrivateLinkAccess, *_nethttp.Response, error)
+
+	/*
+	DeleteNetworkingV1PrivateLinkAccess Delete a Private Link Access
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Make a request to delete a private link access.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the private link access.
+	 @return ApiDeleteNetworkingV1PrivateLinkAccessRequest
+	*/
+	DeleteNetworkingV1PrivateLinkAccess(ctx _context.Context, id string) ApiDeleteNetworkingV1PrivateLinkAccessRequest
+
+	// DeleteNetworkingV1PrivateLinkAccessExecute executes the request
+	DeleteNetworkingV1PrivateLinkAccessExecute(r ApiDeleteNetworkingV1PrivateLinkAccessRequest) (*_nethttp.Response, error)
+
+	/*
+	GetNetworkingV1PrivateLinkAccess Read a Private Link Access
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Make a request to read a private link access.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the private link access.
+	 @return ApiGetNetworkingV1PrivateLinkAccessRequest
+	*/
+	GetNetworkingV1PrivateLinkAccess(ctx _context.Context, id string) ApiGetNetworkingV1PrivateLinkAccessRequest
+
+	// GetNetworkingV1PrivateLinkAccessExecute executes the request
+	//  @return NetworkingV1PrivateLinkAccess
+	GetNetworkingV1PrivateLinkAccessExecute(r ApiGetNetworkingV1PrivateLinkAccessRequest) (NetworkingV1PrivateLinkAccess, *_nethttp.Response, error)
+
+	/*
+	ListNetworkingV1PrivateLinkAccesses List of Private Link Accesses
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Retrieve a sorted, filtered, paginated list of all private link accesses.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiListNetworkingV1PrivateLinkAccessesRequest
+	*/
+	ListNetworkingV1PrivateLinkAccesses(ctx _context.Context) ApiListNetworkingV1PrivateLinkAccessesRequest
+
+	// ListNetworkingV1PrivateLinkAccessesExecute executes the request
+	//  @return NetworkingV1PrivateLinkAccessList
+	ListNetworkingV1PrivateLinkAccessesExecute(r ApiListNetworkingV1PrivateLinkAccessesRequest) (NetworkingV1PrivateLinkAccessList, *_nethttp.Response, error)
+
+	/*
+	UpdateNetworkingV1PrivateLinkAccess Update a Private Link Access
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Make a request to update a private link access.
+
+
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the private link access.
+	 @return ApiUpdateNetworkingV1PrivateLinkAccessRequest
+	*/
+	UpdateNetworkingV1PrivateLinkAccess(ctx _context.Context, id string) ApiUpdateNetworkingV1PrivateLinkAccessRequest
+
+	// UpdateNetworkingV1PrivateLinkAccessExecute executes the request
+	//  @return NetworkingV1PrivateLinkAccess
+	UpdateNetworkingV1PrivateLinkAccessExecute(r ApiUpdateNetworkingV1PrivateLinkAccessRequest) (NetworkingV1PrivateLinkAccess, *_nethttp.Response, error)
+}
+
 // PrivateLinkAccessesNetworkingV1ApiService PrivateLinkAccessesNetworkingV1Api service
 type PrivateLinkAccessesNetworkingV1ApiService service
 
 type ApiCreateNetworkingV1PrivateLinkAccessRequest struct {
 	ctx _context.Context
-	ApiService *PrivateLinkAccessesNetworkingV1ApiService
+	ApiService PrivateLinkAccessesNetworkingV1Api
 	networkingV1PrivateLinkAccess *NetworkingV1PrivateLinkAccess
 }
 
@@ -188,6 +275,16 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) CreateNetworkingV1PrivateLin
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -214,7 +311,7 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) CreateNetworkingV1PrivateLin
 
 type ApiDeleteNetworkingV1PrivateLinkAccessRequest struct {
 	ctx _context.Context
-	ApiService *PrivateLinkAccessesNetworkingV1ApiService
+	ApiService PrivateLinkAccessesNetworkingV1Api
 	environment *string
 	id string
 }
@@ -370,7 +467,7 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) DeleteNetworkingV1PrivateLin
 
 type ApiGetNetworkingV1PrivateLinkAccessRequest struct {
 	ctx _context.Context
-	ApiService *PrivateLinkAccessesNetworkingV1ApiService
+	ApiService PrivateLinkAccessesNetworkingV1Api
 	environment *string
 	id string
 }
@@ -537,11 +634,11 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) GetNetworkingV1PrivateLinkAc
 
 type ApiListNetworkingV1PrivateLinkAccessesRequest struct {
 	ctx _context.Context
-	ApiService *PrivateLinkAccessesNetworkingV1ApiService
+	ApiService PrivateLinkAccessesNetworkingV1Api
 	environment *string
-	displayName *MultipleSearchFilter
-	phase *MultipleSearchFilter
-	network *MultipleSearchFilter
+	specDisplayName *MultipleSearchFilter
+	statusPhase *MultipleSearchFilter
+	specNetwork *MultipleSearchFilter
 	pageSize *int32
 	pageToken *string
 }
@@ -551,19 +648,19 @@ func (r ApiListNetworkingV1PrivateLinkAccessesRequest) Environment(environment s
 	r.environment = &environment
 	return r
 }
-// Filter the results by exact match for display_name. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PrivateLinkAccessesRequest) DisplayName(displayName MultipleSearchFilter) ApiListNetworkingV1PrivateLinkAccessesRequest {
-	r.displayName = &displayName
+// Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1PrivateLinkAccessesRequest) SpecDisplayName(specDisplayName MultipleSearchFilter) ApiListNetworkingV1PrivateLinkAccessesRequest {
+	r.specDisplayName = &specDisplayName
 	return r
 }
-// Filter the results by exact match for phase. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PrivateLinkAccessesRequest) Phase(phase MultipleSearchFilter) ApiListNetworkingV1PrivateLinkAccessesRequest {
-	r.phase = &phase
+// Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1PrivateLinkAccessesRequest) StatusPhase(statusPhase MultipleSearchFilter) ApiListNetworkingV1PrivateLinkAccessesRequest {
+	r.statusPhase = &statusPhase
 	return r
 }
-// Filter the results by exact match for network. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PrivateLinkAccessesRequest) Network(network MultipleSearchFilter) ApiListNetworkingV1PrivateLinkAccessesRequest {
-	r.network = &network
+// Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1PrivateLinkAccessesRequest) SpecNetwork(specNetwork MultipleSearchFilter) ApiListNetworkingV1PrivateLinkAccessesRequest {
+	r.specNetwork = &specNetwork
 	return r
 }
 // A pagination size for collection requests.
@@ -624,15 +721,15 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) ListNetworkingV1PrivateLinkA
 		return localVarReturnValue, nil, reportError("environment is required and must be specified")
 	}
 
-	if r.displayName != nil {
-		localVarQueryParams.Add("display_name", parameterToString(*r.displayName, ""))
+	if r.specDisplayName != nil {
+		localVarQueryParams.Add("spec.display_name", parameterToString(*r.specDisplayName, ""))
 	}
-	if r.phase != nil {
-		localVarQueryParams.Add("phase", parameterToString(*r.phase, ""))
+	if r.statusPhase != nil {
+		localVarQueryParams.Add("status.phase", parameterToString(*r.statusPhase, ""))
 	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
-	if r.network != nil {
-		localVarQueryParams.Add("network", parameterToString(*r.network, ""))
+	if r.specNetwork != nil {
+		localVarQueryParams.Add("spec.network", parameterToString(*r.specNetwork, ""))
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
@@ -735,7 +832,7 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) ListNetworkingV1PrivateLinkA
 
 type ApiUpdateNetworkingV1PrivateLinkAccessRequest struct {
 	ctx _context.Context
-	ApiService *PrivateLinkAccessesNetworkingV1ApiService
+	ApiService PrivateLinkAccessesNetworkingV1Api
 	id string
 	networkingV1PrivateLinkAccessUpdate *NetworkingV1PrivateLinkAccessUpdate
 }
@@ -876,6 +973,16 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) UpdateNetworkingV1PrivateLin
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

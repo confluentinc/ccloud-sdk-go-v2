@@ -29,8 +29,13 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // NetworkingV1AzurePrivateLinkAccess Azure PrivateLink access configuration.
 type NetworkingV1AzurePrivateLinkAccess struct {
+	// PrivateLink kind type.
 	Kind string `json:"kind"`
 	// Azure subscription to allow for PrivateLink access.
 	Subscription string `json:"subscription"`
@@ -101,6 +106,42 @@ func (o *NetworkingV1AzurePrivateLinkAccess) GetSubscriptionOk() (*string, bool)
 // SetSubscription sets field value
 func (o *NetworkingV1AzurePrivateLinkAccess) SetSubscription(v string) {
 	o.Subscription = v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *NetworkingV1AzurePrivateLinkAccess) Redact() {
+    o.recurseRedact(&o.Kind)
+    o.recurseRedact(&o.Subscription)
+}
+
+func (o *NetworkingV1AzurePrivateLinkAccess) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o NetworkingV1AzurePrivateLinkAccess) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1AzurePrivateLinkAccess) MarshalJSON() ([]byte, error) {

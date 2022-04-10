@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | **string** |  | 
+**Kind** | **string** | Peering kind type. | 
 **Project** | **string** | The name of the GCP project. | 
 **VpcNetwork** | **string** | The name of the GCP VPC network to peer with. | 
 **ImportCustomRoutes** | Pointer to **bool** | Enable customer route import. | [optional] [default to false]

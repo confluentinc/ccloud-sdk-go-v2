@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Phase** | **string** | The lifecyle phase of the network:  PROVISIONING:  network provisioning is in progress;  READY:  network is ready;  FAILED: provisioning failed  | [readonly] 
+**SupportedConnectionTypes** | [**NetworkingV1StatusConnectionTypes**](networking.v1.StatusConnectionTypes.md) |  | [readonly] 
 **ErrorCode** | Pointer to **string** | Error code if network is in a failed state. May be used for programmatic error checking. | [optional] [readonly] 
 **ErrorMessage** | Pointer to **string** | Displayable error message if network is in a failed state | [optional] [readonly] 
 **DnsDomain** | Pointer to **string** | The root DNS domain for the network if applicable. Present on networks that support PrivateLink. | [optional] [readonly] 
@@ -15,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewNetworkingV1NetworkStatus
 
-`func NewNetworkingV1NetworkStatus(phase string, ) *NetworkingV1NetworkStatus`
+`func NewNetworkingV1NetworkStatus(phase string, supportedConnectionTypes NetworkingV1StatusConnectionTypes, ) *NetworkingV1NetworkStatus`
 
 NewNetworkingV1NetworkStatus instantiates a new NetworkingV1NetworkStatus object
 This constructor will assign default values to properties that have it defined,
@@ -48,6 +49,26 @@ and a boolean to check if the value has been set.
 `func (o *NetworkingV1NetworkStatus) SetPhase(v string)`
 
 SetPhase sets Phase field to given value.
+
+
+### GetSupportedConnectionTypes
+
+`func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypes() NetworkingV1StatusConnectionTypes`
+
+GetSupportedConnectionTypes returns the SupportedConnectionTypes field if non-nil, zero value otherwise.
+
+### GetSupportedConnectionTypesOk
+
+`func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypesOk() (*NetworkingV1StatusConnectionTypes, bool)`
+
+GetSupportedConnectionTypesOk returns a tuple with the SupportedConnectionTypes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSupportedConnectionTypes
+
+`func (o *NetworkingV1NetworkStatus) SetSupportedConnectionTypes(v NetworkingV1StatusConnectionTypes)`
+
+SetSupportedConnectionTypes sets SupportedConnectionTypes field to given value.
 
 
 ### GetErrorCode

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | **string** |  | 
+**Kind** | **string** | Peering kind type. | 
 **Account** | **string** | AWS account for VPC to peer with the network | 
 **Vpc** | **string** | The id of the AWS VPC to peer with | 
 **Routes** | **[]string** | List of routes for the peering | 

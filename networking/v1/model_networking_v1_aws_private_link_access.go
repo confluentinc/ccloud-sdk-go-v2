@@ -29,8 +29,13 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // NetworkingV1AwsPrivateLinkAccess AWS PrivateLink access configuration.
 type NetworkingV1AwsPrivateLinkAccess struct {
+	// PrivateLink kind type.
 	Kind string `json:"kind"`
 	// AWS account to allow for PrivateLink access.
 	Account string `json:"account"`
@@ -101,6 +106,42 @@ func (o *NetworkingV1AwsPrivateLinkAccess) GetAccountOk() (*string, bool) {
 // SetAccount sets field value
 func (o *NetworkingV1AwsPrivateLinkAccess) SetAccount(v string) {
 	o.Account = v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *NetworkingV1AwsPrivateLinkAccess) Redact() {
+    o.recurseRedact(&o.Kind)
+    o.recurseRedact(&o.Account)
+}
+
+func (o *NetworkingV1AwsPrivateLinkAccess) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o NetworkingV1AwsPrivateLinkAccess) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1AwsPrivateLinkAccess) MarshalJSON() ([]byte, error) {
