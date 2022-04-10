@@ -29,6 +29,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // NetworkingV1PeeringSpec The desired state of the Peering
 type NetworkingV1PeeringSpec struct {
 	// The name of the Peering
@@ -184,6 +188,44 @@ func (o *NetworkingV1PeeringSpec) HasNetwork() bool {
 // SetNetwork gets a reference to the given ObjectReference and assigns it to the Network field.
 func (o *NetworkingV1PeeringSpec) SetNetwork(v ObjectReference) {
 	o.Network = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *NetworkingV1PeeringSpec) Redact() {
+    o.recurseRedact(o.DisplayName)
+    o.recurseRedact(o.Cloud)
+    o.recurseRedact(o.Environment)
+    o.recurseRedact(o.Network)
+}
+
+func (o *NetworkingV1PeeringSpec) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o NetworkingV1PeeringSpec) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1PeeringSpec) MarshalJSON() ([]byte, error) {

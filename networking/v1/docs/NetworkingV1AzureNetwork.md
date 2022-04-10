@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | **string** |  | 
+**Kind** | **string** | Network kind type. | 
 **Vnet** | **string** | The Azure Virtual Network. | [readonly] 
 **Subscription** | **string** | The Azure subscription. | [readonly] 
 **PrivateLinkServiceAliases** | Pointer to **map[string]string** | The mapping of zones to PrivateLink Service Aliases if available.  Keys are zones and values are [Azure PrivateLink Service Aliases](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#share-your-service)  | [optional] [readonly] 

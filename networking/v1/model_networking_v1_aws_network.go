@@ -29,8 +29,13 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // NetworkingV1AwsNetwork The AWS network details.
 type NetworkingV1AwsNetwork struct {
+	// Network kind type.
 	Kind string `json:"kind"`
 	// The AWS VPC id for the network.
 	Vpc string `json:"vpc"`
@@ -162,6 +167,44 @@ func (o *NetworkingV1AwsNetwork) HasPrivateLinkEndpointService() bool {
 // SetPrivateLinkEndpointService gets a reference to the given string and assigns it to the PrivateLinkEndpointService field.
 func (o *NetworkingV1AwsNetwork) SetPrivateLinkEndpointService(v string) {
 	o.PrivateLinkEndpointService = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *NetworkingV1AwsNetwork) Redact() {
+    o.recurseRedact(&o.Kind)
+    o.recurseRedact(&o.Vpc)
+    o.recurseRedact(&o.Account)
+    o.recurseRedact(o.PrivateLinkEndpointService)
+}
+
+func (o *NetworkingV1AwsNetwork) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o NetworkingV1AwsNetwork) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1AwsNetwork) MarshalJSON() ([]byte, error) {

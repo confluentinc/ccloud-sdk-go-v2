@@ -29,10 +29,15 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // NetworkingV1NetworkStatus The status of the Network
 type NetworkingV1NetworkStatus struct {
 	// The lifecyle phase of the network:  PROVISIONING:  network provisioning is in progress;  READY:  network is ready;  FAILED: provisioning failed 
 	Phase string `json:"phase"`
+	SupportedConnectionTypes NetworkingV1StatusConnectionTypes `json:"supported_connection_types"`
 	// Error code if network is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`
 	// Displayable error message if network is in a failed state
@@ -49,9 +54,10 @@ type NetworkingV1NetworkStatus struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1NetworkStatus(phase string) *NetworkingV1NetworkStatus {
+func NewNetworkingV1NetworkStatus(phase string, supportedConnectionTypes NetworkingV1StatusConnectionTypes) *NetworkingV1NetworkStatus {
 	this := NetworkingV1NetworkStatus{}
 	this.Phase = phase
+	this.SupportedConnectionTypes = supportedConnectionTypes
 	return &this
 }
 
@@ -85,6 +91,30 @@ func (o *NetworkingV1NetworkStatus) GetPhaseOk() (*string, bool) {
 // SetPhase sets field value
 func (o *NetworkingV1NetworkStatus) SetPhase(v string) {
 	o.Phase = v
+}
+
+// GetSupportedConnectionTypes returns the SupportedConnectionTypes field value
+func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypes() NetworkingV1StatusConnectionTypes {
+	if o == nil {
+		var ret NetworkingV1StatusConnectionTypes
+		return ret
+	}
+
+	return o.SupportedConnectionTypes
+}
+
+// GetSupportedConnectionTypesOk returns a tuple with the SupportedConnectionTypes field value
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypesOk() (*NetworkingV1StatusConnectionTypes, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.SupportedConnectionTypes, true
+}
+
+// SetSupportedConnectionTypes sets field value
+func (o *NetworkingV1NetworkStatus) SetSupportedConnectionTypes(v NetworkingV1StatusConnectionTypes) {
+	o.SupportedConnectionTypes = v
 }
 
 // GetErrorCode returns the ErrorCode field value if set, zero value otherwise.
@@ -247,10 +277,54 @@ func (o *NetworkingV1NetworkStatus) SetCloud(v NetworkingV1NetworkStatusCloudOne
 	o.Cloud = &v
 }
 
+// Redact resets all sensitive fields to their zero value.
+func (o *NetworkingV1NetworkStatus) Redact() {
+    o.recurseRedact(&o.Phase)
+    o.recurseRedact(&o.SupportedConnectionTypes)
+    o.recurseRedact(o.ErrorCode)
+    o.recurseRedact(o.ErrorMessage)
+    o.recurseRedact(o.DnsDomain)
+    o.recurseRedact(o.ZonalSubdomains)
+    o.recurseRedact(o.Cloud)
+}
+
+func (o *NetworkingV1NetworkStatus) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o NetworkingV1NetworkStatus) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
+}
+
 func (o NetworkingV1NetworkStatus) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["phase"] = o.Phase
+	}
+	if true {
+		toSerialize["supported_connection_types"] = o.SupportedConnectionTypes
 	}
 	if o.ErrorCode != nil {
 		toSerialize["error_code"] = o.ErrorCode

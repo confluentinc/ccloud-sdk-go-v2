@@ -29,7 +29,11 @@ import (
 	"encoding/json"
 )
 
-// NetworkingV1TransitGatewayAttachmentList AWS Transit Gateway Attachments  Related guide: [APIs to manage AWS Transit Gateway Attachments.](https://docs.confluent.cloud).  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `tgw_attachments_per_network` | Number of TGW attachments per network |
+import (
+	"reflect"
+)
+
+// NetworkingV1TransitGatewayAttachmentList AWS Transit Gateway Attachments  Related guide: [APIs to manage AWS Transit Gateway Attachments.](https://docs.confluent.cloud).  ## The Transit Gateway Attachments Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.TransitGatewayAttachment\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `tgw_attachments_per_network` | Number of TGW attachments per network |
 type NetworkingV1TransitGatewayAttachmentList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version"`
@@ -155,6 +159,44 @@ func (o *NetworkingV1TransitGatewayAttachmentList) GetDataOk() (*[]NetworkingV1T
 // SetData sets field value
 func (o *NetworkingV1TransitGatewayAttachmentList) SetData(v []NetworkingV1TransitGatewayAttachment) {
 	o.Data = v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *NetworkingV1TransitGatewayAttachmentList) Redact() {
+    o.recurseRedact(&o.ApiVersion)
+    o.recurseRedact(&o.Kind)
+    o.recurseRedact(&o.Metadata)
+    o.recurseRedact(&o.Data)
+}
+
+func (o *NetworkingV1TransitGatewayAttachmentList) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o NetworkingV1TransitGatewayAttachmentList) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1TransitGatewayAttachmentList) MarshalJSON() ([]byte, error) {
