@@ -29,8 +29,13 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // NetworkingV1GcpNetwork The GCP network details.
 type NetworkingV1GcpNetwork struct {
+	// Network kind type.
 	Kind string `json:"kind"`
 	// The GCP project.
 	Project string `json:"project"`
@@ -128,6 +133,43 @@ func (o *NetworkingV1GcpNetwork) GetVpcNetworkOk() (*string, bool) {
 // SetVpcNetwork sets field value
 func (o *NetworkingV1GcpNetwork) SetVpcNetwork(v string) {
 	o.VpcNetwork = v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *NetworkingV1GcpNetwork) Redact() {
+    o.recurseRedact(&o.Kind)
+    o.recurseRedact(&o.Project)
+    o.recurseRedact(&o.VpcNetwork)
+}
+
+func (o *NetworkingV1GcpNetwork) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o NetworkingV1GcpNetwork) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1GcpNetwork) MarshalJSON() ([]byte, error) {

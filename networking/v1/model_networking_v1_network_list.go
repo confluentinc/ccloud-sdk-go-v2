@@ -29,7 +29,11 @@ import (
 	"encoding/json"
 )
 
-// NetworkingV1NetworkList `Network` represents a network (VPC) in Confluent Cloud. All Networks exist within Confluent-managed cloud provider accounts. Dedicated networks support more networking options but can only contain Dedicated clusters. Shared networks can contain any cluster type.  The API allows you to list, create, read, update, and delete your networks.   Related guide: [APIs to manage networks in Confluent Cloud.](https://docs.confluent.cloud).  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `dedicated_networks_per_environment` | Number of dedicated networks per Confluent Cloud environment |
+import (
+	"reflect"
+)
+
+// NetworkingV1NetworkList `Network` represents a network (VPC) in Confluent Cloud. All Networks exist within Confluent-managed cloud provider accounts. Dedicated networks support more networking options but can only contain Dedicated clusters. Shared networks can contain any cluster type.  The API allows you to list, create, read, update, and delete your networks.   Related guide: [APIs to manage networks in Confluent Cloud.](https://docs.confluent.cloud).  ## The Networks Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.Network\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `dedicated_networks_per_environment` | Number of dedicated networks per Confluent Cloud environment |
 type NetworkingV1NetworkList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version"`
@@ -155,6 +159,44 @@ func (o *NetworkingV1NetworkList) GetDataOk() (*[]NetworkingV1Network, bool) {
 // SetData sets field value
 func (o *NetworkingV1NetworkList) SetData(v []NetworkingV1Network) {
 	o.Data = v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *NetworkingV1NetworkList) Redact() {
+    o.recurseRedact(&o.ApiVersion)
+    o.recurseRedact(&o.Kind)
+    o.recurseRedact(&o.Metadata)
+    o.recurseRedact(&o.Data)
+}
+
+func (o *NetworkingV1NetworkList) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o NetworkingV1NetworkList) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1NetworkList) MarshalJSON() ([]byte, error) {

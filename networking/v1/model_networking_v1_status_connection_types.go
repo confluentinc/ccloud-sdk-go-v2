@@ -33,33 +33,33 @@ import (
 	"reflect"
 )
 
-// NetworkingV1ConnectionTypes The connection types requested for use with the network.
-type NetworkingV1ConnectionTypes struct {
+// NetworkingV1StatusConnectionTypes The connection types this network supports.
+type NetworkingV1StatusConnectionTypes struct {
 	Items []string
 }
 
-// NewNetworkingV1ConnectionTypes instantiates a new NetworkingV1ConnectionTypes object
+// NewNetworkingV1StatusConnectionTypes instantiates a new NetworkingV1StatusConnectionTypes object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1ConnectionTypes() *NetworkingV1ConnectionTypes {
-	this := NetworkingV1ConnectionTypes{}
+func NewNetworkingV1StatusConnectionTypes() *NetworkingV1StatusConnectionTypes {
+	this := NetworkingV1StatusConnectionTypes{}
 	return &this
 }
 
-// NewNetworkingV1ConnectionTypesWithDefaults instantiates a new NetworkingV1ConnectionTypes object
+// NewNetworkingV1StatusConnectionTypesWithDefaults instantiates a new NetworkingV1StatusConnectionTypes object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewNetworkingV1ConnectionTypesWithDefaults() *NetworkingV1ConnectionTypes {
-	this := NetworkingV1ConnectionTypes{}
+func NewNetworkingV1StatusConnectionTypesWithDefaults() *NetworkingV1StatusConnectionTypes {
+	this := NetworkingV1StatusConnectionTypes{}
 	return &this
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *NetworkingV1ConnectionTypes) Redact() {
+func (o *NetworkingV1StatusConnectionTypes) Redact() {
 }
 
-func (o *NetworkingV1ConnectionTypes) recurseRedact(v interface{}) {
+func (o *NetworkingV1StatusConnectionTypes) recurseRedact(v interface{}) {
     type redactor interface {
         Redact()
     }
@@ -84,12 +84,12 @@ func (o *NetworkingV1ConnectionTypes) recurseRedact(v interface{}) {
     }
 }
 
-func (o NetworkingV1ConnectionTypes) zeroField(v interface{}) {
+func (o NetworkingV1StatusConnectionTypes) zeroField(v interface{}) {
     p := reflect.ValueOf(v).Elem()
     p.Set(reflect.Zero(p.Type()))
 }
 
-func (o NetworkingV1ConnectionTypes) MarshalJSON() ([]byte, error) {
+func (o NetworkingV1StatusConnectionTypes) MarshalJSON() ([]byte, error) {
 	toSerialize := make([]interface{}, len(o.Items))
 	for i, item := range o.Items {
 		toSerialize[i] = item
@@ -97,42 +97,42 @@ func (o NetworkingV1ConnectionTypes) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *NetworkingV1ConnectionTypes) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NetworkingV1StatusConnectionTypes) UnmarshalJSON(bytes []byte) (err error) {
 	return json.Unmarshal(bytes, &o.Items)
 }
 
-type NullableNetworkingV1ConnectionTypes struct {
-	value *NetworkingV1ConnectionTypes
+type NullableNetworkingV1StatusConnectionTypes struct {
+	value *NetworkingV1StatusConnectionTypes
 	isSet bool
 }
 
-func (v NullableNetworkingV1ConnectionTypes) Get() *NetworkingV1ConnectionTypes {
+func (v NullableNetworkingV1StatusConnectionTypes) Get() *NetworkingV1StatusConnectionTypes {
 	return v.value
 }
 
-func (v *NullableNetworkingV1ConnectionTypes) Set(val *NetworkingV1ConnectionTypes) {
+func (v *NullableNetworkingV1StatusConnectionTypes) Set(val *NetworkingV1StatusConnectionTypes) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableNetworkingV1ConnectionTypes) IsSet() bool {
+func (v NullableNetworkingV1StatusConnectionTypes) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableNetworkingV1ConnectionTypes) Unset() {
+func (v *NullableNetworkingV1StatusConnectionTypes) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableNetworkingV1ConnectionTypes(val *NetworkingV1ConnectionTypes) *NullableNetworkingV1ConnectionTypes {
-	return &NullableNetworkingV1ConnectionTypes{value: val, isSet: true}
+func NewNullableNetworkingV1StatusConnectionTypes(val *NetworkingV1StatusConnectionTypes) *NullableNetworkingV1StatusConnectionTypes {
+	return &NullableNetworkingV1StatusConnectionTypes{value: val, isSet: true}
 }
 
-func (v NullableNetworkingV1ConnectionTypes) MarshalJSON() ([]byte, error) {
+func (v NullableNetworkingV1StatusConnectionTypes) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableNetworkingV1ConnectionTypes) UnmarshalJSON(src []byte) error {
+func (v *NullableNetworkingV1StatusConnectionTypes) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 
 ## ListNetworkingV1Networks
 
-> NetworkingV1NetworkList ListNetworkingV1Networks(ctx).Environment(environment).DisplayName(displayName).Cloud(cloud).Region(region).Cidr(cidr).Phase(phase).ConnectionType(connectionType).PageSize(pageSize).PageToken(pageToken).Execute()
+> NetworkingV1NetworkList ListNetworkingV1Networks(ctx).Environment(environment).SpecDisplayName(specDisplayName).SpecCloud(specCloud).SpecRegion(specRegion).SpecCidr(specCidr).StatusPhase(statusPhase).ConnectionType(connectionType).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Networks
 
@@ -242,18 +242,18 @@ import (
 
 func main() {
     environment := "env-00000" // string | Filter the results by exact match for environment.
-    displayName := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for display_name. Pass multiple times to see results matching any of the values. (optional)
-    cloud := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for cloud. Pass multiple times to see results matching any of the values. (optional)
-    region :=  // MultipleSearchFilter | Filter the results by exact match for region. Pass multiple times to see results matching any of the values. (optional)
-    cidr :=  // MultipleSearchFilter | Filter the results by exact match for cidr. Pass multiple times to see results matching any of the values. (optional)
-    phase :=  // MultipleSearchFilter | Filter the results by exact match for phase. Pass multiple times to see results matching any of the values. (optional)
+    specDisplayName := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. (optional)
+    specCloud := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for spec.cloud. Pass multiple times to see results matching any of the values. (optional)
+    specRegion :=  // MultipleSearchFilter | Filter the results by exact match for spec.region. Pass multiple times to see results matching any of the values. (optional)
+    specCidr :=  // MultipleSearchFilter | Filter the results by exact match for spec.cidr. Pass multiple times to see results matching any of the values. (optional)
+    statusPhase :=  // MultipleSearchFilter | Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values. (optional)
     connectionType :=  // MultipleSearchFilter | Filter the results by exact match for connection_type. Pass multiple times to see results matching any of the values. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.NetworksNetworkingV1Api.ListNetworkingV1Networks(context.Background()).Environment(environment).DisplayName(displayName).Cloud(cloud).Region(region).Cidr(cidr).Phase(phase).ConnectionType(connectionType).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.NetworksNetworkingV1Api.ListNetworkingV1Networks(context.Background()).Environment(environment).SpecDisplayName(specDisplayName).SpecCloud(specCloud).SpecRegion(specRegion).SpecCidr(specCidr).StatusPhase(statusPhase).ConnectionType(connectionType).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `NetworksNetworkingV1Api.ListNetworkingV1Networks``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -275,18 +275,18 @@ Other parameters are passed through a pointer to a apiListNetworkingV1NetworksRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **environment** | **string** | Filter the results by exact match for environment. | 
- **displayName** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for display_name. Pass multiple times to see results matching any of the values. | 
- **cloud** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for cloud. Pass multiple times to see results matching any of the values. | 
- **region** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for region. Pass multiple times to see results matching any of the values. | 
- **cidr** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for cidr. Pass multiple times to see results matching any of the values. | 
- **phase** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for phase. Pass multiple times to see results matching any of the values. | 
+ **specDisplayName** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. | 
+ **specCloud** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for spec.cloud. Pass multiple times to see results matching any of the values. | 
+ **specRegion** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for spec.region. Pass multiple times to see results matching any of the values. | 
+ **specCidr** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for spec.cidr. Pass multiple times to see results matching any of the values. | 
+ **statusPhase** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values. | 
  **connectionType** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for connection_type. Pass multiple times to see results matching any of the values. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 
 ### Return type
 
-[**NetworkingV1NetworkList**](NetworkingV1NetworkList.md)
+[**NetworkingV1NetworkList**](networking.v1.NetworkList.md)
 
 ### Authorization
 

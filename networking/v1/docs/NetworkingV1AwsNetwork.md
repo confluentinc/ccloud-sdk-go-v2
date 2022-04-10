@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | **string** |  | 
+**Kind** | **string** | Network kind type. | 
 **Vpc** | **string** | The AWS VPC id for the network. | [readonly] 
 **Account** | **string** | The AWS account id for the network. | [readonly] 
 **PrivateLinkEndpointService** | Pointer to **string** | The AWS VPC endpoint service for the network (used for PrivateLink) if available. | [optional] [readonly] 

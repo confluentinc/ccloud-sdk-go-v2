@@ -39,12 +39,99 @@ var (
 	_ _context.Context
 )
 
+type NetworksNetworkingV1Api interface {
+
+	/*
+	CreateNetworkingV1Network Create a Network
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Make a request to create a network.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiCreateNetworkingV1NetworkRequest
+	*/
+	CreateNetworkingV1Network(ctx _context.Context) ApiCreateNetworkingV1NetworkRequest
+
+	// CreateNetworkingV1NetworkExecute executes the request
+	//  @return NetworkingV1Network
+	CreateNetworkingV1NetworkExecute(r ApiCreateNetworkingV1NetworkRequest) (NetworkingV1Network, *_nethttp.Response, error)
+
+	/*
+	DeleteNetworkingV1Network Delete a Network
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Make a request to delete a network.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the network.
+	 @return ApiDeleteNetworkingV1NetworkRequest
+	*/
+	DeleteNetworkingV1Network(ctx _context.Context, id string) ApiDeleteNetworkingV1NetworkRequest
+
+	// DeleteNetworkingV1NetworkExecute executes the request
+	DeleteNetworkingV1NetworkExecute(r ApiDeleteNetworkingV1NetworkRequest) (*_nethttp.Response, error)
+
+	/*
+	GetNetworkingV1Network Read a Network
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Make a request to read a network.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the network.
+	 @return ApiGetNetworkingV1NetworkRequest
+	*/
+	GetNetworkingV1Network(ctx _context.Context, id string) ApiGetNetworkingV1NetworkRequest
+
+	// GetNetworkingV1NetworkExecute executes the request
+	//  @return NetworkingV1Network
+	GetNetworkingV1NetworkExecute(r ApiGetNetworkingV1NetworkRequest) (NetworkingV1Network, *_nethttp.Response, error)
+
+	/*
+	ListNetworkingV1Networks List of Networks
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Retrieve a sorted, filtered, paginated list of all networks.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiListNetworkingV1NetworksRequest
+	*/
+	ListNetworkingV1Networks(ctx _context.Context) ApiListNetworkingV1NetworksRequest
+
+	// ListNetworkingV1NetworksExecute executes the request
+	//  @return NetworkingV1NetworkList
+	ListNetworkingV1NetworksExecute(r ApiListNetworkingV1NetworksRequest) (NetworkingV1NetworkList, *_nethttp.Response, error)
+
+	/*
+	UpdateNetworkingV1Network Update a Network
+
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Make a request to update a network.
+
+
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the network.
+	 @return ApiUpdateNetworkingV1NetworkRequest
+	*/
+	UpdateNetworkingV1Network(ctx _context.Context, id string) ApiUpdateNetworkingV1NetworkRequest
+
+	// UpdateNetworkingV1NetworkExecute executes the request
+	//  @return NetworkingV1Network
+	UpdateNetworkingV1NetworkExecute(r ApiUpdateNetworkingV1NetworkRequest) (NetworkingV1Network, *_nethttp.Response, error)
+}
+
 // NetworksNetworkingV1ApiService NetworksNetworkingV1Api service
 type NetworksNetworkingV1ApiService service
 
 type ApiCreateNetworkingV1NetworkRequest struct {
 	ctx _context.Context
-	ApiService *NetworksNetworkingV1ApiService
+	ApiService NetworksNetworkingV1Api
 	networkingV1Network *NetworkingV1Network
 }
 
@@ -188,6 +275,16 @@ func (a *NetworksNetworkingV1ApiService) CreateNetworkingV1NetworkExecute(r ApiC
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -214,7 +311,7 @@ func (a *NetworksNetworkingV1ApiService) CreateNetworkingV1NetworkExecute(r ApiC
 
 type ApiDeleteNetworkingV1NetworkRequest struct {
 	ctx _context.Context
-	ApiService *NetworksNetworkingV1ApiService
+	ApiService NetworksNetworkingV1Api
 	environment *string
 	id string
 }
@@ -370,7 +467,7 @@ func (a *NetworksNetworkingV1ApiService) DeleteNetworkingV1NetworkExecute(r ApiD
 
 type ApiGetNetworkingV1NetworkRequest struct {
 	ctx _context.Context
-	ApiService *NetworksNetworkingV1ApiService
+	ApiService NetworksNetworkingV1Api
 	environment *string
 	id string
 }
@@ -537,13 +634,13 @@ func (a *NetworksNetworkingV1ApiService) GetNetworkingV1NetworkExecute(r ApiGetN
 
 type ApiListNetworkingV1NetworksRequest struct {
 	ctx _context.Context
-	ApiService *NetworksNetworkingV1ApiService
+	ApiService NetworksNetworkingV1Api
 	environment *string
-	displayName *MultipleSearchFilter
-	cloud *MultipleSearchFilter
-	region *MultipleSearchFilter
-	cidr *MultipleSearchFilter
-	phase *MultipleSearchFilter
+	specDisplayName *MultipleSearchFilter
+	specCloud *MultipleSearchFilter
+	specRegion *MultipleSearchFilter
+	specCidr *MultipleSearchFilter
+	statusPhase *MultipleSearchFilter
 	connectionType *MultipleSearchFilter
 	pageSize *int32
 	pageToken *string
@@ -554,29 +651,29 @@ func (r ApiListNetworkingV1NetworksRequest) Environment(environment string) ApiL
 	r.environment = &environment
 	return r
 }
-// Filter the results by exact match for display_name. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworksRequest) DisplayName(displayName MultipleSearchFilter) ApiListNetworkingV1NetworksRequest {
-	r.displayName = &displayName
+// Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1NetworksRequest) SpecDisplayName(specDisplayName MultipleSearchFilter) ApiListNetworkingV1NetworksRequest {
+	r.specDisplayName = &specDisplayName
 	return r
 }
-// Filter the results by exact match for cloud. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworksRequest) Cloud(cloud MultipleSearchFilter) ApiListNetworkingV1NetworksRequest {
-	r.cloud = &cloud
+// Filter the results by exact match for spec.cloud. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1NetworksRequest) SpecCloud(specCloud MultipleSearchFilter) ApiListNetworkingV1NetworksRequest {
+	r.specCloud = &specCloud
 	return r
 }
-// Filter the results by exact match for region. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworksRequest) Region(region MultipleSearchFilter) ApiListNetworkingV1NetworksRequest {
-	r.region = &region
+// Filter the results by exact match for spec.region. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1NetworksRequest) SpecRegion(specRegion MultipleSearchFilter) ApiListNetworkingV1NetworksRequest {
+	r.specRegion = &specRegion
 	return r
 }
-// Filter the results by exact match for cidr. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworksRequest) Cidr(cidr MultipleSearchFilter) ApiListNetworkingV1NetworksRequest {
-	r.cidr = &cidr
+// Filter the results by exact match for spec.cidr. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1NetworksRequest) SpecCidr(specCidr MultipleSearchFilter) ApiListNetworkingV1NetworksRequest {
+	r.specCidr = &specCidr
 	return r
 }
-// Filter the results by exact match for phase. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworksRequest) Phase(phase MultipleSearchFilter) ApiListNetworkingV1NetworksRequest {
-	r.phase = &phase
+// Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1NetworksRequest) StatusPhase(statusPhase MultipleSearchFilter) ApiListNetworkingV1NetworksRequest {
+	r.statusPhase = &statusPhase
 	return r
 }
 // Filter the results by exact match for connection_type. Pass multiple times to see results matching any of the values.
@@ -642,20 +739,20 @@ func (a *NetworksNetworkingV1ApiService) ListNetworkingV1NetworksExecute(r ApiLi
 		return localVarReturnValue, nil, reportError("environment is required and must be specified")
 	}
 
-	if r.displayName != nil {
-		localVarQueryParams.Add("display_name", parameterToString(*r.displayName, ""))
+	if r.specDisplayName != nil {
+		localVarQueryParams.Add("spec.display_name", parameterToString(*r.specDisplayName, ""))
 	}
-	if r.cloud != nil {
-		localVarQueryParams.Add("cloud", parameterToString(*r.cloud, ""))
+	if r.specCloud != nil {
+		localVarQueryParams.Add("spec.cloud", parameterToString(*r.specCloud, ""))
 	}
-	if r.region != nil {
-		localVarQueryParams.Add("region", parameterToString(*r.region, ""))
+	if r.specRegion != nil {
+		localVarQueryParams.Add("spec.region", parameterToString(*r.specRegion, ""))
 	}
-	if r.cidr != nil {
-		localVarQueryParams.Add("cidr", parameterToString(*r.cidr, ""))
+	if r.specCidr != nil {
+		localVarQueryParams.Add("spec.cidr", parameterToString(*r.specCidr, ""))
 	}
-	if r.phase != nil {
-		localVarQueryParams.Add("phase", parameterToString(*r.phase, ""))
+	if r.statusPhase != nil {
+		localVarQueryParams.Add("status.phase", parameterToString(*r.statusPhase, ""))
 	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.connectionType != nil {
@@ -762,7 +859,7 @@ func (a *NetworksNetworkingV1ApiService) ListNetworkingV1NetworksExecute(r ApiLi
 
 type ApiUpdateNetworkingV1NetworkRequest struct {
 	ctx _context.Context
-	ApiService *NetworksNetworkingV1ApiService
+	ApiService NetworksNetworkingV1Api
 	id string
 	networkingV1NetworkUpdate *NetworkingV1NetworkUpdate
 }
@@ -903,6 +1000,16 @@ func (a *NetworksNetworkingV1ApiService) UpdateNetworkingV1NetworkExecute(r ApiU
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

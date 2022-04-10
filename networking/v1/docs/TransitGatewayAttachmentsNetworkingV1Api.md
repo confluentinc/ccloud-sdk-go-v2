@@ -83,7 +83,7 @@ Name | Type | Description  | Notes
 
 ## ListNetworkingV1TransitGatewayAttachments
 
-> NetworkingV1TransitGatewayAttachmentList ListNetworkingV1TransitGatewayAttachments(ctx).Environment(environment).DisplayName(displayName).Phase(phase).Network(network).PageSize(pageSize).PageToken(pageToken).Execute()
+> NetworkingV1TransitGatewayAttachmentList ListNetworkingV1TransitGatewayAttachments(ctx).Environment(environment).SpecDisplayName(specDisplayName).StatusPhase(statusPhase).SpecNetwork(specNetwork).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Transit Gateway Attachments
 
@@ -103,15 +103,15 @@ import (
 
 func main() {
     environment := "env-00000" // string | Filter the results by exact match for environment.
-    displayName := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for display_name. Pass multiple times to see results matching any of the values. (optional)
-    phase := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for phase. Pass multiple times to see results matching any of the values. (optional)
-    network :=  // MultipleSearchFilter | Filter the results by exact match for network. Pass multiple times to see results matching any of the values. (optional)
+    specDisplayName := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. (optional)
+    statusPhase := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values. (optional)
+    specNetwork :=  // MultipleSearchFilter | Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TransitGatewayAttachmentsNetworkingV1Api.ListNetworkingV1TransitGatewayAttachments(context.Background()).Environment(environment).DisplayName(displayName).Phase(phase).Network(network).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.TransitGatewayAttachmentsNetworkingV1Api.ListNetworkingV1TransitGatewayAttachments(context.Background()).Environment(environment).SpecDisplayName(specDisplayName).StatusPhase(statusPhase).SpecNetwork(specNetwork).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TransitGatewayAttachmentsNetworkingV1Api.ListNetworkingV1TransitGatewayAttachments``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -133,15 +133,15 @@ Other parameters are passed through a pointer to a apiListNetworkingV1TransitGat
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **environment** | **string** | Filter the results by exact match for environment. | 
- **displayName** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for display_name. Pass multiple times to see results matching any of the values. | 
- **phase** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for phase. Pass multiple times to see results matching any of the values. | 
- **network** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for network. Pass multiple times to see results matching any of the values. | 
+ **specDisplayName** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. | 
+ **statusPhase** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values. | 
+ **specNetwork** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 
 ### Return type
 
-[**NetworkingV1TransitGatewayAttachmentList**](NetworkingV1TransitGatewayAttachmentList.md)
+[**NetworkingV1TransitGatewayAttachmentList**](networking.v1.TransitGatewayAttachmentList.md)
 
 ### Authorization
 
