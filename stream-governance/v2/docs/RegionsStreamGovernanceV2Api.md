@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 ## ListStreamGovernanceV2Regions
 
-> StreamGovernanceV2RegionList ListStreamGovernanceV2Regions(ctx).SpecCloud(specCloud).SpecPackages(specPackages).PageSize(pageSize).PageToken(pageToken).Execute()
+> StreamGovernanceV2RegionList ListStreamGovernanceV2Regions(ctx).SpecCloud(specCloud).SpecRegionName(specRegionName).SpecPackages(specPackages).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Regions
 
@@ -101,13 +101,14 @@ import (
 
 func main() {
     specCloud := "AWS" // string | Filter the results by exact match for spec.cloud. (optional)
+    specRegionName := "us-east-2" // string | Filter the results by exact match for spec.region_name. (optional)
     specPackages := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for spec.packages. Pass multiple times to see results matching any of the values. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.RegionsStreamGovernanceV2Api.ListStreamGovernanceV2Regions(context.Background()).SpecCloud(specCloud).SpecPackages(specPackages).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.RegionsStreamGovernanceV2Api.ListStreamGovernanceV2Regions(context.Background()).SpecCloud(specCloud).SpecRegionName(specRegionName).SpecPackages(specPackages).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `RegionsStreamGovernanceV2Api.ListStreamGovernanceV2Regions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -129,6 +130,7 @@ Other parameters are passed through a pointer to a apiListStreamGovernanceV2Regi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **specCloud** | **string** | Filter the results by exact match for spec.cloud. | 
+ **specRegionName** | **string** | Filter the results by exact match for spec.region_name. | 
  **specPackages** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for spec.packages. Pass multiple times to see results matching any of the values. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 

@@ -239,6 +239,7 @@ type ApiListStreamGovernanceV2RegionsRequest struct {
 	ctx _context.Context
 	ApiService RegionsStreamGovernanceV2Api
 	specCloud *string
+	specRegionName *string
 	specPackages *MultipleSearchFilter
 	pageSize *int32
 	pageToken *string
@@ -247,6 +248,11 @@ type ApiListStreamGovernanceV2RegionsRequest struct {
 // Filter the results by exact match for spec.cloud.
 func (r ApiListStreamGovernanceV2RegionsRequest) SpecCloud(specCloud string) ApiListStreamGovernanceV2RegionsRequest {
 	r.specCloud = &specCloud
+	return r
+}
+// Filter the results by exact match for spec.region_name.
+func (r ApiListStreamGovernanceV2RegionsRequest) SpecRegionName(specRegionName string) ApiListStreamGovernanceV2RegionsRequest {
+	r.specRegionName = &specRegionName
 	return r
 }
 // Filter the results by exact match for spec.packages. Pass multiple times to see results matching any of the values.
@@ -311,6 +317,9 @@ func (a *RegionsStreamGovernanceV2ApiService) ListStreamGovernanceV2RegionsExecu
 
 	if r.specCloud != nil {
 		localVarQueryParams.Add("spec.cloud", parameterToString(*r.specCloud, ""))
+	}
+	if r.specRegionName != nil {
+		localVarQueryParams.Add("spec.region_name", parameterToString(*r.specRegionName, ""))
 	}
 	if r.specPackages != nil {
 		localVarQueryParams.Add("spec.packages", parameterToString(*r.specPackages, ""))
