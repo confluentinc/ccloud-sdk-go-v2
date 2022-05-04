@@ -1,4 +1,4 @@
-module github.com/confluentinc/ccloud-sdk-go-v2-internal/cli
+module github.com/confluentinc/ccloud-sdk-go-v2/cli
 
 go 1.13
 
