@@ -84,6 +84,7 @@ Class | Method | HTTP request | Description
 *ConnectorsV1Api* | [**DeleteConnectv1Connector**](docs/ConnectorsV1Api.md#deleteconnectv1connector) | **Delete** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name} | Delete a Connector
 *ConnectorsV1Api* | [**GetConnectv1ConnectorConfig**](docs/ConnectorsV1Api.md#getconnectv1connectorconfig) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config | Read a Connector Configuration
 *ConnectorsV1Api* | [**ListConnectv1Connectors**](docs/ConnectorsV1Api.md#listconnectv1connectors) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors | List of Connectors
+*ConnectorsV1Api* | [**ListConnectv1ConnectorsWithExpansions**](docs/ConnectorsV1Api.md#listconnectv1connectorswithexpansions) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand&#x3D;info,status,id | List of Connectors with Expansions
 *ConnectorsV1Api* | [**ReadConnectv1Connector**](docs/ConnectorsV1Api.md#readconnectv1connector) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name} | Read a Connector
 *LifecycleV1Api* | [**PauseConnectv1Connector**](docs/LifecycleV1Api.md#pauseconnectv1connector) | **Put** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/pause | Pause a Connector
 *LifecycleV1Api* | [**ResumeConnectv1Connector**](docs/LifecycleV1Api.md#resumeconnectv1connector) | **Put** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/resume | Resume a Connector
@@ -98,6 +99,13 @@ Class | Method | HTTP request | Description
  - [ConnectV1Connector](docs/ConnectV1Connector.md)
  - [ConnectV1ConnectorError](docs/ConnectV1ConnectorError.md)
  - [ConnectV1ConnectorErrorError](docs/ConnectV1ConnectorErrorError.md)
+ - [ConnectV1ConnectorExpansion](docs/ConnectV1ConnectorExpansion.md)
+ - [ConnectV1ConnectorExpansionName](docs/ConnectV1ConnectorExpansionName.md)
+ - [ConnectV1ConnectorExpansionNameId](docs/ConnectV1ConnectorExpansionNameId.md)
+ - [ConnectV1ConnectorExpansionNameInfo](docs/ConnectV1ConnectorExpansionNameInfo.md)
+ - [ConnectV1ConnectorExpansionNameStatus](docs/ConnectV1ConnectorExpansionNameStatus.md)
+ - [ConnectV1ConnectorExpansionNameStatusConnector](docs/ConnectV1ConnectorExpansionNameStatusConnector.md)
+ - [ConnectV1ConnectorExpansionNameStatusTasks](docs/ConnectV1ConnectorExpansionNameStatusTasks.md)
  - [ConnectV1ConnectorTasks](docs/ConnectV1ConnectorTasks.md)
  - [InlineObject](docs/InlineObject.md)
  - [InlineResponse200](docs/InlineResponse200.md)

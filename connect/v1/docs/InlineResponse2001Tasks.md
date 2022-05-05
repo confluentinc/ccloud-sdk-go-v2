@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **int32** | The ID of task. | 
-**State** | **string** | The state of the connector. | 
-**WorkerId** | **string** | The worker ID of the connector. | 
+**State** | **string** | The state of the task. | 
+**WorkerId** | **string** | The worker ID of the task. | 
 **Msg** | Pointer to **string** |  | [optional] 
 
 ## Methods

@@ -72,6 +72,8 @@ paths:
             application/json:
               example:
               - MyGcsLogsBucketConnector
+              - MyS3BucketConnector
+              - MyDatagenConnector
               schema:
                 description: List of connector names
                 items:
@@ -474,6 +476,293 @@ paths:
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"property1\":\"string\",\"property2\":\"string\"}}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+  /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info,status,id:
+    get:
+      description: |-
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Retrieve an object with the queried expansions of all connectors. Without `expand` query parameter, this list connector’s endpoint will return a [list of only the connector names](#operation/listConnectv1Connectors).
+      operationId: listConnectv1ConnectorsWithExpansions
+      parameters:
+      - description: The unique identifier of the environment this resource belongs
+          to.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the Kafka cluster.
+        explode: false
+        in: path
+        name: kafka_cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: |-
+          - id : Returns metadata of each connector such as id and id type.
+          - info : Returns metadata of each connector such as the configuration, task
+          information, and type of connector.
+          - status : Returns additional state information of each connector including their status and tasks.
+        explode: true
+        in: query
+        name: expand
+        required: false
+        schema:
+          enum:
+          - id
+          - info
+          - status
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                MyGcsLogsBucketConnector:
+                  id:
+                    id: lcc-xxxxx
+                    id_type: ID
+                  info:
+                    name: MyGcsLogsBucketConnector
+                    config:
+                      cloud.environment: prod
+                      cloud.provider: aws
+                      connector.class: GcsSink
+                      data.format: BYTES
+                      flush.size: "1000"
+                      gcs.bucket.name: APILogsBucket
+                      gcs.credentials.config: '****************'
+                      kafka.api.key: '****************'
+                      kafka.api.secret: '****************'
+                      kafka.endpoint: SASL_SSL://pkc-xxxxx.us-west-2.aws.confluent.cloud:9092
+                      kafka.region: us-west-2
+                      name: MyGcsLogsBucketConnector
+                      tasks.max: "1"
+                      time.interval: DAILY
+                      topics: APILogsTopic
+                      tasks:
+                      - connector: MyGcsLogsBucketConnector
+                        task: 0
+                      type: sink
+                  status:
+                    name: MyGcsLogsBucketConnector
+                    connector:
+                      state: PROVISIONING
+                      worker_id: MyGcsLogsBucketConnector
+                      trace: ""
+                    tasks: []
+                    type: sink
+                MyS3BucketConnector:
+                  id:
+                    id: lcc-xxxxx
+                    id_type: ID
+                  info:
+                    name: MyS3BucketConnector
+                    config:
+                      cloud.environment: prod
+                      cloud.provider: aws
+                      connector.class: S3Sink
+                      data.format: BYTES
+                      flush.size: "1000"
+                      s3.bucket: APILogsBucket
+                      aws.access.key.id: '************'
+                      aws.secret.access.key: '**********'
+                      kafka.api.key: '****************'
+                      kafka.api.secret: '****************'
+                      kafka.endpoint: SASL_SSL://pkc-xxxxx.us-west-2.aws.confluent.cloud:9092
+                      kafka.region: us-west-2
+                      name: MyS3BucketConnector
+                      tasks.max: "1"
+                      time.interval: DAILY
+                      topics: APILogsTopic
+                      tasks:
+                      - connector: MyS3BucketConnector
+                        task: 0
+                      type: source
+                  status:
+                    name: MyS3BucketConnector
+                    connector:
+                      state: FAILED
+                      worker_id: MyS3BucketConnector
+                      trace: |
+                        There were some errors with your configuration:
+                        topics: Provided Kafka ApiKey is invalid
+                        kafka.api.secret: Provided Kafka ApiKey is invalid
+                    tasks: []
+                    type: sink
+                MyDatagenConnector:
+                  id:
+                    id: lcc-xxxxx
+                    id_type: ID
+                  info:
+                    name: MyDatagenConnector
+                    config:
+                      cloud.environment: prod
+                      cloud.provider: aws
+                      connector.class: DatagenSource
+                      data.format: BYTES
+                      flush.size: "1000"
+                      quickstart: ORDERS
+                      kafka.api.key: '****************'
+                      kafka.api.secret: '****************'
+                      kafka.endpoint: SASL_SSL://pkc-xxxxx.us-west-2.aws.confluent.cloud:9092
+                      kafka.region: us-west-2
+                      name: MyDatagenConnector
+                      tasks.max: "1"
+                      time.interval: DAILY
+                      topics: APILogsTopic
+                      tasks:
+                      - connector: MyDatagenConnector
+                        task: 0
+                      type: source
+                  status:
+                    name: MyDatagenConnector
+                    connector:
+                      state: RUNNING
+                      worker_id: MyDatagenConnector
+                      trace: ""
+                    tasks:
+                    - id: 0
+                      msg: ""
+                      state: RUNNING
+                      worker_id: MyDatagenConnector
+                    type: source
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorExpansion'
+          description: Connector.
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 401
+                  message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 404
+                  message: account not found
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Not Found
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 500
+                  message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Internal Server Error
+      security:
+      - api-key: []
+      summary: List of Connectors with Expansions
+      tags:
+      - Connectors (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info%2Cstatus%2Cid' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info%2Cstatus%2Cid")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info%2Cstatus%2Cid\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info%2Cstatus%2Cid", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info%2Cstatus%2Cid",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info%2Cstatus%2Cid");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info%2Cstatus%2Cid");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
   /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config:
     get:
@@ -2784,15 +3073,25 @@ components:
         config:
           additionalProperties:
             type: string
-          description: "Configuration parameters for the connector. These configurations\n\
-            are the minimum set of key-value pairs (KVP) which can be used to \ndefine\
-            \ how the connector connects Kafka to the external system.\nSome of these\
-            \ KVPs are common to all the connectors, such as \nconnection parameters\
-            \ to Kafka, connector metadata, etc. The list\nof common connector configurations\
-            \ is as follows\n\n- cloud.environment\n- cloud.provider\n- connector.class\n\
-            - kafka.api.key\n- kafka.api.secret\n- kafka.endpoint\n- kafka.region\n\
-            - name\n\nA specific connector such as `GcsSink` would have additional\n\
-            parameters such as `gcs.bucket.name`, `flush.size`, etc."
+          description: |-
+            Configuration parameters for the connector. These configurations
+            are the minimum set of key-value pairs (KVP) which can be used to
+            define how the connector connects Kafka to the external system.
+            Some of these KVPs are common to all the connectors, such as
+            connection parameters to Kafka, connector metadata, etc. The list
+            of common connector configurations is as follows
+
+            - cloud.environment
+            - cloud.provider
+            - connector.class
+            - kafka.api.key
+            - kafka.api.secret
+            - kafka.endpoint
+            - kafka.region
+            - name
+
+            A specific connector such as `GcsSink` would have additional
+            parameters such as `gcs.bucket.name`, `flush.size`, etc.
           properties:
             cloud.environment:
               description: The cloud environment type.
@@ -2858,28 +3157,37 @@ components:
       items:
         properties:
           id:
-            description: The ID of task
+            description: The ID of task.
             properties:
               connector:
-                description: The name of the connector the task belongs to
+                description: The name of the connector the task belongs to.
                 type: string
               task:
-                description: Task ID within the connector
+                description: Task ID within the connector.
                 type: integer
             type: object
           config:
             additionalProperties:
               type: string
-            description: "Configuration parameters for the connector. These configurations\n\
-              are the minimum set of key-value pairs (KVP) which can be used to \n\
-              define how the connector connects Kafka to the external system.\nSome\
-              \ of these KVPs are common to all the connectors, such as \nconnection\
-              \ parameters to Kafka, connector metadata, etc. The list\nof common\
-              \ connector configurations is as follows\n\n  - cloud.environment\n\
-              \  - cloud.provider\n  - connector.class\n  - kafka.api.key\n  - kafka.api.secret\n\
-              \  - kafka.endpoint\n  - kafka.region\n  - name\n\nA specific connector\
-              \ such as `GcsSink` would have additional\nparameters such as `gcs.bucket.name`,\
-              \ `flush.size`, etc."
+            description: |-
+              Configuration parameters for the connector. These configurations
+              are the minimum set of key-value pairs (KVP) which can be used to
+              define how the connector connects Kafka to the external system.
+              Some of these KVPs are common to all the connectors, such as
+              connection parameters to Kafka, connector metadata, etc. The list
+              of common connector configurations is as follows
+
+                - cloud.environment
+                - cloud.provider
+                - connector.class
+                - kafka.api.key
+                - kafka.api.secret
+                - kafka.endpoint
+                - kafka.region
+                - name
+
+              A specific connector such as `GcsSink` would have additional
+              parameters such as `gcs.bucket.name`, `flush.size`, etc.
             properties:
               cloud.environment:
                 description: The cloud environment type.
@@ -2928,6 +3236,37 @@ components:
             type: object
         type: object
       type: array
+    connect.v1.ConnectorExpansion:
+      description: List of active connectors with the expansions requested.
+      example:
+        name:
+          id:
+            id_type: id_type
+            id: id
+          info:
+            name: name
+            config:
+              key: config
+          status:
+            connector:
+              trace: trace
+              state: NONE
+              worker_id: worker_id
+            name: name
+            type: sink
+            tasks:
+            - msg: msg
+              id: id
+              state: state
+              worker_id: worker_id
+            - msg: msg
+              id: id
+              state: state
+              worker_id: worker_id
+      properties:
+        name:
+          $ref: '#/components/schemas/connect_v1_ConnectorExpansion_name'
+      type: object
     inline_object:
       properties:
         name:
@@ -3023,10 +3362,10 @@ components:
           description: The ID of task.
           type: integer
         state:
-          description: The state of the connector.
+          description: The state of the task.
           type: string
         worker_id:
-          description: The worker ID of the connector.
+          description: The worker ID of the task.
           type: string
         msg:
           type: string
@@ -3351,6 +3690,222 @@ components:
       required:
       - connector
       - task
+      type: object
+    connect_v1_ConnectorExpansion_name_id:
+      description: The ID of connector.
+      example:
+        id_type: id_type
+        id: id
+      properties:
+        id:
+          description: The ID of the connector.
+          type: string
+        id_type:
+          description: Type of the value in the `id` property.
+          type: string
+      type: object
+    connect_v1_ConnectorExpansion_name_info:
+      description: Metadata of the connector.
+      example:
+        name: name
+        config:
+          key: config
+      properties:
+        name:
+          description: Name of the connector.
+          type: string
+        config:
+          additionalProperties:
+            type: string
+          description: |-
+            Configuration parameters for the connector. These configurations
+            are the minimum set of key-value pairs (KVP) which are used to
+            define how the connector connects Kafka to the external system.
+            Some of these KVPs are common to all the connectors, such as
+            connection parameters to Kafka, connector metadata, etc. The list
+            of common connector configurations is as follows
+
+              - cloud.environment
+              - cloud.provider
+              - connector.class
+              - kafka.api.key
+              - kafka.api.secret
+              - kafka.endpoint
+              - kafka.region
+              - name
+
+            For example, a connector like `GcsSink` would have additional
+            parameters such as `gcs.bucket.name`, `flush.size`, etc.
+          properties:
+            cloud.environment:
+              description: The cloud environment type.
+              enum:
+              - private
+              - devel
+              - stag
+              - prod
+              type: string
+            cloud.provider:
+              description: The cloud service provider, e.g. aws, azure, etc.
+              type: string
+              x-extensible-enum:
+              - aws
+              - azure
+              - gcp
+            connector.class:
+              description: The connector class name. E.g. BigQuerySink, GcsSink, etc.
+              type: string
+            name:
+              description: Name or alias of the class (plugin) for this connector.
+              type: string
+            kafka.endpoint:
+              description: The kafka cluster endpoint.
+              type: string
+            kafka.region:
+              description: The kafka cluster region.
+              type: string
+            kafka.api.key:
+              description: The kafka cluster api key.
+              type: string
+            kafka.api.secret:
+              description: The kafka cluster api secret key.
+              type: string
+              x-redact: true
+          required:
+          - cloud.environment
+          - cloud.provider
+          - connector.class
+          - kafka.api.key
+          - kafka.api.secret
+          - kafka.endpoint
+          - kafka.region
+          - name
+          type: object
+      type: object
+    connect_v1_ConnectorExpansion_name_status_connector:
+      description: A map containing connector status.
+      example:
+        trace: trace
+        state: NONE
+        worker_id: worker_id
+      properties:
+        state:
+          description: The state of the connector.
+          enum:
+          - NONE
+          - PROVISIONING
+          - RUNNING
+          - DEGRADED
+          - FAILED
+          - PAUSED
+          - DELETED
+          type: string
+        worker_id:
+          description: The worker ID of the connector.
+          type: string
+        trace:
+          description: Exception message in case of an error.
+          type: string
+      required:
+      - state
+      - worker_id
+      type: object
+    connect_v1_ConnectorExpansion_name_status_tasks:
+      example:
+        msg: msg
+        id: id
+        state: state
+        worker_id: worker_id
+      properties:
+        id:
+          description: The ID of task.
+          type: string
+        state:
+          description: The state of the task.
+          type: string
+        worker_id:
+          description: The worker ID of the task.
+          type: string
+        msg:
+          type: string
+      required:
+      - id
+      - state
+      - worker_id
+      type: object
+    connect_v1_ConnectorExpansion_name_status:
+      description: Status of the connector and its tasks.
+      example:
+        connector:
+          trace: trace
+          state: NONE
+          worker_id: worker_id
+        name: name
+        type: sink
+        tasks:
+        - msg: msg
+          id: id
+          state: state
+          worker_id: worker_id
+        - msg: msg
+          id: id
+          state: state
+          worker_id: worker_id
+      properties:
+        name:
+          description: The name of the connector.
+          type: string
+        type:
+          description: Type of connector, sink or source.
+          enum:
+          - sink
+          - source
+          type: string
+        connector:
+          $ref: '#/components/schemas/connect_v1_ConnectorExpansion_name_status_connector'
+        tasks:
+          description: A map containing the task status.
+          items:
+            $ref: '#/components/schemas/connect_v1_ConnectorExpansion_name_status_tasks'
+          type: array
+      required:
+      - connector
+      - name
+      - type
+      type: object
+    connect_v1_ConnectorExpansion_name:
+      description: Name of the connector.
+      example:
+        id:
+          id_type: id_type
+          id: id
+        info:
+          name: name
+          config:
+            key: config
+        status:
+          connector:
+            trace: trace
+            state: NONE
+            worker_id: worker_id
+          name: name
+          type: sink
+          tasks:
+          - msg: msg
+            id: id
+            state: state
+            worker_id: worker_id
+          - msg: msg
+            id: id
+            state: state
+            worker_id: worker_id
+      properties:
+        id:
+          $ref: '#/components/schemas/connect_v1_ConnectorExpansion_name_id'
+        info:
+          $ref: '#/components/schemas/connect_v1_ConnectorExpansion_name_info'
+        status:
+          $ref: '#/components/schemas/connect_v1_ConnectorExpansion_name_status'
       type: object
   securitySchemes:
     api-key:

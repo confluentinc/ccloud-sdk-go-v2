@@ -33,10 +33,10 @@ import (
 	"reflect"
 )
 
-// InlineResponse2001Tasks struct for InlineResponse2001Tasks
-type InlineResponse2001Tasks struct {
+// ConnectV1ConnectorExpansionNameStatusTasks struct for ConnectV1ConnectorExpansionNameStatusTasks
+type ConnectV1ConnectorExpansionNameStatusTasks struct {
 	// The ID of task.
-	Id int32 `json:"id"`
+	Id string `json:"id"`
 	// The state of the task.
 	State string `json:"state"`
 	// The worker ID of the task.
@@ -44,30 +44,30 @@ type InlineResponse2001Tasks struct {
 	Msg *string `json:"msg,omitempty"`
 }
 
-// NewInlineResponse2001Tasks instantiates a new InlineResponse2001Tasks object
+// NewConnectV1ConnectorExpansionNameStatusTasks instantiates a new ConnectV1ConnectorExpansionNameStatusTasks object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInlineResponse2001Tasks(id int32, state string, workerId string) *InlineResponse2001Tasks {
-	this := InlineResponse2001Tasks{}
+func NewConnectV1ConnectorExpansionNameStatusTasks(id string, state string, workerId string) *ConnectV1ConnectorExpansionNameStatusTasks {
+	this := ConnectV1ConnectorExpansionNameStatusTasks{}
 	this.Id = id
 	this.State = state
 	this.WorkerId = workerId
 	return &this
 }
 
-// NewInlineResponse2001TasksWithDefaults instantiates a new InlineResponse2001Tasks object
+// NewConnectV1ConnectorExpansionNameStatusTasksWithDefaults instantiates a new ConnectV1ConnectorExpansionNameStatusTasks object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewInlineResponse2001TasksWithDefaults() *InlineResponse2001Tasks {
-	this := InlineResponse2001Tasks{}
+func NewConnectV1ConnectorExpansionNameStatusTasksWithDefaults() *ConnectV1ConnectorExpansionNameStatusTasks {
+	this := ConnectV1ConnectorExpansionNameStatusTasks{}
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *InlineResponse2001Tasks) GetId() int32 {
+func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetId() string {
 	if o == nil {
-		var ret int32
+		var ret string
 		return ret
 	}
 
@@ -76,7 +76,7 @@ func (o *InlineResponse2001Tasks) GetId() int32 {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *InlineResponse2001Tasks) GetIdOk() (*int32, bool) {
+func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetIdOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -84,12 +84,12 @@ func (o *InlineResponse2001Tasks) GetIdOk() (*int32, bool) {
 }
 
 // SetId sets field value
-func (o *InlineResponse2001Tasks) SetId(v int32) {
+func (o *ConnectV1ConnectorExpansionNameStatusTasks) SetId(v string) {
 	o.Id = v
 }
 
 // GetState returns the State field value
-func (o *InlineResponse2001Tasks) GetState() string {
+func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetState() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -100,7 +100,7 @@ func (o *InlineResponse2001Tasks) GetState() string {
 
 // GetStateOk returns a tuple with the State field value
 // and a boolean to check if the value has been set.
-func (o *InlineResponse2001Tasks) GetStateOk() (*string, bool) {
+func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetStateOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -108,12 +108,12 @@ func (o *InlineResponse2001Tasks) GetStateOk() (*string, bool) {
 }
 
 // SetState sets field value
-func (o *InlineResponse2001Tasks) SetState(v string) {
+func (o *ConnectV1ConnectorExpansionNameStatusTasks) SetState(v string) {
 	o.State = v
 }
 
 // GetWorkerId returns the WorkerId field value
-func (o *InlineResponse2001Tasks) GetWorkerId() string {
+func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetWorkerId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -124,7 +124,7 @@ func (o *InlineResponse2001Tasks) GetWorkerId() string {
 
 // GetWorkerIdOk returns a tuple with the WorkerId field value
 // and a boolean to check if the value has been set.
-func (o *InlineResponse2001Tasks) GetWorkerIdOk() (*string, bool) {
+func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetWorkerIdOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -132,12 +132,12 @@ func (o *InlineResponse2001Tasks) GetWorkerIdOk() (*string, bool) {
 }
 
 // SetWorkerId sets field value
-func (o *InlineResponse2001Tasks) SetWorkerId(v string) {
+func (o *ConnectV1ConnectorExpansionNameStatusTasks) SetWorkerId(v string) {
 	o.WorkerId = v
 }
 
 // GetMsg returns the Msg field value if set, zero value otherwise.
-func (o *InlineResponse2001Tasks) GetMsg() string {
+func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetMsg() string {
 	if o == nil || o.Msg == nil {
 		var ret string
 		return ret
@@ -147,7 +147,7 @@ func (o *InlineResponse2001Tasks) GetMsg() string {
 
 // GetMsgOk returns a tuple with the Msg field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InlineResponse2001Tasks) GetMsgOk() (*string, bool) {
+func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetMsgOk() (*string, bool) {
 	if o == nil || o.Msg == nil {
 		return nil, false
 	}
@@ -155,7 +155,7 @@ func (o *InlineResponse2001Tasks) GetMsgOk() (*string, bool) {
 }
 
 // HasMsg returns a boolean if a field has been set.
-func (o *InlineResponse2001Tasks) HasMsg() bool {
+func (o *ConnectV1ConnectorExpansionNameStatusTasks) HasMsg() bool {
 	if o != nil && o.Msg != nil {
 		return true
 	}
@@ -164,19 +164,19 @@ func (o *InlineResponse2001Tasks) HasMsg() bool {
 }
 
 // SetMsg gets a reference to the given string and assigns it to the Msg field.
-func (o *InlineResponse2001Tasks) SetMsg(v string) {
+func (o *ConnectV1ConnectorExpansionNameStatusTasks) SetMsg(v string) {
 	o.Msg = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *InlineResponse2001Tasks) Redact() {
+func (o *ConnectV1ConnectorExpansionNameStatusTasks) Redact() {
     o.recurseRedact(&o.Id)
     o.recurseRedact(&o.State)
     o.recurseRedact(&o.WorkerId)
     o.recurseRedact(o.Msg)
 }
 
-func (o *InlineResponse2001Tasks) recurseRedact(v interface{}) {
+func (o *ConnectV1ConnectorExpansionNameStatusTasks) recurseRedact(v interface{}) {
     type redactor interface {
         Redact()
     }
@@ -201,12 +201,12 @@ func (o *InlineResponse2001Tasks) recurseRedact(v interface{}) {
     }
 }
 
-func (o InlineResponse2001Tasks) zeroField(v interface{}) {
+func (o ConnectV1ConnectorExpansionNameStatusTasks) zeroField(v interface{}) {
     p := reflect.ValueOf(v).Elem()
     p.Set(reflect.Zero(p.Type()))
 }
 
-func (o InlineResponse2001Tasks) MarshalJSON() ([]byte, error) {
+func (o ConnectV1ConnectorExpansionNameStatusTasks) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["id"] = o.Id
@@ -223,38 +223,38 @@ func (o InlineResponse2001Tasks) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableInlineResponse2001Tasks struct {
-	value *InlineResponse2001Tasks
+type NullableConnectV1ConnectorExpansionNameStatusTasks struct {
+	value *ConnectV1ConnectorExpansionNameStatusTasks
 	isSet bool
 }
 
-func (v NullableInlineResponse2001Tasks) Get() *InlineResponse2001Tasks {
+func (v NullableConnectV1ConnectorExpansionNameStatusTasks) Get() *ConnectV1ConnectorExpansionNameStatusTasks {
 	return v.value
 }
 
-func (v *NullableInlineResponse2001Tasks) Set(val *InlineResponse2001Tasks) {
+func (v *NullableConnectV1ConnectorExpansionNameStatusTasks) Set(val *ConnectV1ConnectorExpansionNameStatusTasks) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableInlineResponse2001Tasks) IsSet() bool {
+func (v NullableConnectV1ConnectorExpansionNameStatusTasks) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableInlineResponse2001Tasks) Unset() {
+func (v *NullableConnectV1ConnectorExpansionNameStatusTasks) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableInlineResponse2001Tasks(val *InlineResponse2001Tasks) *NullableInlineResponse2001Tasks {
-	return &NullableInlineResponse2001Tasks{value: val, isSet: true}
+func NewNullableConnectV1ConnectorExpansionNameStatusTasks(val *ConnectV1ConnectorExpansionNameStatusTasks) *NullableConnectV1ConnectorExpansionNameStatusTasks {
+	return &NullableConnectV1ConnectorExpansionNameStatusTasks{value: val, isSet: true}
 }
 
-func (v NullableInlineResponse2001Tasks) MarshalJSON() ([]byte, error) {
+func (v NullableConnectV1ConnectorExpansionNameStatusTasks) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableInlineResponse2001Tasks) UnmarshalJSON(src []byte) error {
+func (v *NullableConnectV1ConnectorExpansionNameStatusTasks) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

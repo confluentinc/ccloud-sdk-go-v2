@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**DeleteConnectv1Connector**](ConnectorsV1Api.md#DeleteConnectv1Connector) | **Delete** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name} | Delete a Connector
 [**GetConnectv1ConnectorConfig**](ConnectorsV1Api.md#GetConnectv1ConnectorConfig) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config | Read a Connector Configuration
 [**ListConnectv1Connectors**](ConnectorsV1Api.md#ListConnectv1Connectors) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors | List of Connectors
+[**ListConnectv1ConnectorsWithExpansions**](ConnectorsV1Api.md#ListConnectv1ConnectorsWithExpansions) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand&#x3D;info,status,id | List of Connectors with Expansions
 [**ReadConnectv1Connector**](ConnectorsV1Api.md#ReadConnectv1Connector) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name} | Read a Connector
 
 
@@ -376,6 +377,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 **[]string**
+
+### Authorization
+
+[api-key](../README.md#api-key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListConnectv1ConnectorsWithExpansions
+
+> ConnectV1ConnectorExpansion ListConnectv1ConnectorsWithExpansions(ctx, environmentId, kafkaClusterId).Expand(expand).Execute()
+
+List of Connectors with Expansions
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    environmentId := "environmentId_example" // string | The unique identifier of the environment this resource belongs to.
+    kafkaClusterId := "kafkaClusterId_example" // string | The unique identifier for the Kafka cluster.
+    expand := "expand_example" // string | - id : Returns metadata of each connector such as id and id type. - info : Returns metadata of each connector such as the configuration, task information, and type of connector. - status : Returns additional state information of each connector including their status and tasks. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.ConnectorsV1Api.ListConnectv1ConnectorsWithExpansions(context.Background(), environmentId, kafkaClusterId).Expand(expand).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ConnectorsV1Api.ListConnectv1ConnectorsWithExpansions``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListConnectv1ConnectorsWithExpansions`: ConnectV1ConnectorExpansion
+    fmt.Fprintf(os.Stdout, "Response from `ConnectorsV1Api.ListConnectv1ConnectorsWithExpansions`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**environmentId** | **string** | The unique identifier of the environment this resource belongs to. | 
+**kafkaClusterId** | **string** | The unique identifier for the Kafka cluster. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListConnectv1ConnectorsWithExpansionsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **expand** | **string** | - id : Returns metadata of each connector such as id and id type. - info : Returns metadata of each connector such as the configuration, task information, and type of connector. - status : Returns additional state information of each connector including their status and tasks. | 
+
+### Return type
+
+[**ConnectV1ConnectorExpansion**](ConnectV1ConnectorExpansion.md)
 
 ### Authorization
 
