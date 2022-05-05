@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 
 ## DeleteKsqldbcmV1Cluster
 
-> DeleteKsqldbcmV1Cluster(ctx, id).Execute()
+> DeleteKsqldbcmV1Cluster(ctx, id).Environment(environment).Execute()
 
 Delete a Cluster
 
@@ -98,11 +98,12 @@ import (
 )
 
 func main() {
+    environment := "env-00000" // string | Scope the operation to the given environment.
     id := "id_example" // string | The unique identifier for the cluster.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClustersKsqldbcmV1Api.DeleteKsqldbcmV1Cluster(context.Background(), id).Execute()
+    resp, r, err := api_client.ClustersKsqldbcmV1Api.DeleteKsqldbcmV1Cluster(context.Background(), id).Environment(environment).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ClustersKsqldbcmV1Api.DeleteKsqldbcmV1Cluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -125,6 +126,7 @@ Other parameters are passed through a pointer to a apiDeleteKsqldbcmV1ClusterReq
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **environment** | **string** | Scope the operation to the given environment. | 
 
 
 ### Return type
@@ -147,7 +149,7 @@ Name | Type | Description  | Notes
 
 ## GetKsqldbcmV1Cluster
 
-> KsqldbcmV1Cluster GetKsqldbcmV1Cluster(ctx, id).Execute()
+> KsqldbcmV1Cluster GetKsqldbcmV1Cluster(ctx, id).Environment(environment).Execute()
 
 Read a Cluster
 
@@ -166,11 +168,12 @@ import (
 )
 
 func main() {
+    environment := "env-00000" // string | Scope the operation to the given environment.
     id := "id_example" // string | The unique identifier for the cluster.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClustersKsqldbcmV1Api.GetKsqldbcmV1Cluster(context.Background(), id).Execute()
+    resp, r, err := api_client.ClustersKsqldbcmV1Api.GetKsqldbcmV1Cluster(context.Background(), id).Environment(environment).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ClustersKsqldbcmV1Api.GetKsqldbcmV1Cluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -195,6 +198,7 @@ Other parameters are passed through a pointer to a apiGetKsqldbcmV1ClusterReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **environment** | **string** | Scope the operation to the given environment. | 
 
 
 ### Return type
@@ -217,7 +221,7 @@ Name | Type | Description  | Notes
 
 ## ListKsqldbcmV1Clusters
 
-> KsqldbcmV1ClusterList ListKsqldbcmV1Clusters(ctx).Execute()
+> KsqldbcmV1ClusterList ListKsqldbcmV1Clusters(ctx).Environment(environment).Execute()
 
 List of Clusters
 
@@ -236,10 +240,11 @@ import (
 )
 
 func main() {
+    environment := "env-00000" // string | Filter the results by exact match for environment.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClustersKsqldbcmV1Api.ListKsqldbcmV1Clusters(context.Background()).Execute()
+    resp, r, err := api_client.ClustersKsqldbcmV1Api.ListKsqldbcmV1Clusters(context.Background()).Environment(environment).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ClustersKsqldbcmV1Api.ListKsqldbcmV1Clusters``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -251,12 +256,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListKsqldbcmV1ClustersRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **environment** | **string** | Filter the results by exact match for environment. | 
 
 ### Return type
 

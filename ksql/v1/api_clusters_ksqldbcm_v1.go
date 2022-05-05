@@ -293,9 +293,15 @@ func (a *ClustersKsqldbcmV1ApiService) CreateKsqldbcmV1ClusterExecute(r ApiCreat
 type ApiDeleteKsqldbcmV1ClusterRequest struct {
 	ctx _context.Context
 	ApiService ClustersKsqldbcmV1Api
+	environment *string
 	id string
 }
 
+// Scope the operation to the given environment.
+func (r ApiDeleteKsqldbcmV1ClusterRequest) Environment(environment string) ApiDeleteKsqldbcmV1ClusterRequest {
+	r.environment = &environment
+	return r
+}
 
 func (r ApiDeleteKsqldbcmV1ClusterRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKsqldbcmV1ClusterExecute(r)
@@ -341,7 +347,11 @@ func (a *ClustersKsqldbcmV1ApiService) DeleteKsqldbcmV1ClusterExecute(r ApiDelet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.environment == nil {
+		return nil, reportError("environment is required and must be specified")
+	}
 
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -439,9 +449,15 @@ func (a *ClustersKsqldbcmV1ApiService) DeleteKsqldbcmV1ClusterExecute(r ApiDelet
 type ApiGetKsqldbcmV1ClusterRequest struct {
 	ctx _context.Context
 	ApiService ClustersKsqldbcmV1Api
+	environment *string
 	id string
 }
 
+// Scope the operation to the given environment.
+func (r ApiGetKsqldbcmV1ClusterRequest) Environment(environment string) ApiGetKsqldbcmV1ClusterRequest {
+	r.environment = &environment
+	return r
+}
 
 func (r ApiGetKsqldbcmV1ClusterRequest) Execute() (KsqldbcmV1Cluster, *_nethttp.Response, error) {
 	return r.ApiService.GetKsqldbcmV1ClusterExecute(r)
@@ -489,7 +505,11 @@ func (a *ClustersKsqldbcmV1ApiService) GetKsqldbcmV1ClusterExecute(r ApiGetKsqld
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.environment == nil {
+		return localVarReturnValue, nil, reportError("environment is required and must be specified")
+	}
 
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -596,8 +616,14 @@ func (a *ClustersKsqldbcmV1ApiService) GetKsqldbcmV1ClusterExecute(r ApiGetKsqld
 type ApiListKsqldbcmV1ClustersRequest struct {
 	ctx _context.Context
 	ApiService ClustersKsqldbcmV1Api
+	environment *string
 }
 
+// Filter the results by exact match for environment.
+func (r ApiListKsqldbcmV1ClustersRequest) Environment(environment string) ApiListKsqldbcmV1ClustersRequest {
+	r.environment = &environment
+	return r
+}
 
 func (r ApiListKsqldbcmV1ClustersRequest) Execute() (KsqldbcmV1ClusterList, *_nethttp.Response, error) {
 	return r.ApiService.ListKsqldbcmV1ClustersExecute(r)
@@ -642,7 +668,11 @@ func (a *ClustersKsqldbcmV1ApiService) ListKsqldbcmV1ClustersExecute(r ApiListKs
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.environment == nil {
+		return localVarReturnValue, nil, reportError("environment is required and must be specified")
+	}
 
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
