@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **DisplayName** | Pointer to **string** | The name of the &#x60;IdentityPool&#x60;. | [optional] 
 **Description** | Pointer to **string** | A description of how this &#x60;IdentityPool&#x60; is used | [optional] 
 **PrincipalClaim** | Pointer to **string** | The JWT claim to extract the authenticating principal to Confluent resources | [optional] 
-**Filter** | Pointer to **string** | A filter expression that must be evaluated to be true to use this identity pool | [optional] 
+**Policy** | Pointer to **string** | A filter expression that must be evaluated to be true to use this identity pool | [optional] 
 **Deactivated** | Pointer to **bool** | Indicates whether the current identity pool is disabled. | [optional] [default to false]
 
 ## Methods
@@ -208,30 +208,30 @@ SetPrincipalClaim sets PrincipalClaim field to given value.
 
 HasPrincipalClaim returns a boolean if a field has been set.
 
-### GetFilter
+### GetPolicy
 
-`func (o *IamV2IdentityPool) GetFilter() string`
+`func (o *IamV2IdentityPool) GetPolicy() string`
 
-GetFilter returns the Filter field if non-nil, zero value otherwise.
+GetPolicy returns the Policy field if non-nil, zero value otherwise.
 
-### GetFilterOk
+### GetPolicyOk
 
-`func (o *IamV2IdentityPool) GetFilterOk() (*string, bool)`
+`func (o *IamV2IdentityPool) GetPolicyOk() (*string, bool)`
 
-GetFilterOk returns a tuple with the Filter field if it's non-nil, zero value otherwise
+GetPolicyOk returns a tuple with the Policy field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetFilter
+### SetPolicy
 
-`func (o *IamV2IdentityPool) SetFilter(v string)`
+`func (o *IamV2IdentityPool) SetPolicy(v string)`
 
-SetFilter sets Filter field to given value.
+SetPolicy sets Policy field to given value.
 
-### HasFilter
+### HasPolicy
 
-`func (o *IamV2IdentityPool) HasFilter() bool`
+`func (o *IamV2IdentityPool) HasPolicy() bool`
 
-HasFilter returns a boolean if a field has been set.
+HasPolicy returns a boolean if a field has been set.
 
 ### GetDeactivated
 

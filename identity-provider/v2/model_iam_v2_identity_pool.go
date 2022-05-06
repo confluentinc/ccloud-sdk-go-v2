@@ -49,7 +49,7 @@ type IamV2IdentityPool struct {
 	// The JWT claim to extract the authenticating principal to Confluent resources
 	PrincipalClaim *string `json:"principal_claim,omitempty"`
 	// A filter expression that must be evaluated to be true to use this identity pool
-	Filter *string `json:"filter,omitempty"`
+	Policy *string `json:"policy,omitempty"`
 	// Indicates whether the current identity pool is disabled.
 	Deactivated *bool `json:"deactivated,omitempty"`
 }
@@ -299,36 +299,36 @@ func (o *IamV2IdentityPool) SetPrincipalClaim(v string) {
 	o.PrincipalClaim = &v
 }
 
-// GetFilter returns the Filter field value if set, zero value otherwise.
-func (o *IamV2IdentityPool) GetFilter() string {
-	if o == nil || o.Filter == nil {
+// GetPolicy returns the Policy field value if set, zero value otherwise.
+func (o *IamV2IdentityPool) GetPolicy() string {
+	if o == nil || o.Policy == nil {
 		var ret string
 		return ret
 	}
-	return *o.Filter
+	return *o.Policy
 }
 
-// GetFilterOk returns a tuple with the Filter field value if set, nil otherwise
+// GetPolicyOk returns a tuple with the Policy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IamV2IdentityPool) GetFilterOk() (*string, bool) {
-	if o == nil || o.Filter == nil {
+func (o *IamV2IdentityPool) GetPolicyOk() (*string, bool) {
+	if o == nil || o.Policy == nil {
 		return nil, false
 	}
-	return o.Filter, true
+	return o.Policy, true
 }
 
-// HasFilter returns a boolean if a field has been set.
-func (o *IamV2IdentityPool) HasFilter() bool {
-	if o != nil && o.Filter != nil {
+// HasPolicy returns a boolean if a field has been set.
+func (o *IamV2IdentityPool) HasPolicy() bool {
+	if o != nil && o.Policy != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetFilter gets a reference to the given string and assigns it to the Filter field.
-func (o *IamV2IdentityPool) SetFilter(v string) {
-	o.Filter = &v
+// SetPolicy gets a reference to the given string and assigns it to the Policy field.
+func (o *IamV2IdentityPool) SetPolicy(v string) {
+	o.Policy = &v
 }
 
 // GetDeactivated returns the Deactivated field value if set, zero value otherwise.
@@ -372,7 +372,7 @@ func (o *IamV2IdentityPool) Redact() {
     o.recurseRedact(o.DisplayName)
     o.recurseRedact(o.Description)
     o.recurseRedact(o.PrincipalClaim)
-    o.recurseRedact(o.Filter)
+    o.recurseRedact(o.Policy)
     o.recurseRedact(o.Deactivated)
 }
 
@@ -429,8 +429,8 @@ func (o IamV2IdentityPool) MarshalJSON() ([]byte, error) {
 	if o.PrincipalClaim != nil {
 		toSerialize["principal_claim"] = o.PrincipalClaim
 	}
-	if o.Filter != nil {
-		toSerialize["filter"] = o.Filter
+	if o.Policy != nil {
+		toSerialize["policy"] = o.Policy
 	}
 	if o.Deactivated != nil {
 		toSerialize["deactivated"] = o.Deactivated
