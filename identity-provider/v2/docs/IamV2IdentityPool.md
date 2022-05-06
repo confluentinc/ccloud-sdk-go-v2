@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
 **DisplayName** | Pointer to **string** | The name of the &#x60;IdentityPool&#x60;. | [optional] 
-**Description** | Pointer to **string** | A description of how this &#x60;IdentityPool&#x60; is used | [optional] 
-**PrincipalClaim** | Pointer to **string** | The JWT claim to extract the authenticating principal to Confluent resources | [optional] 
+**Description** | Pointer to **string** | A description of how this &#x60;IdentityPool&#x60; is used | [optional]
+**SubjectClaim** | Pointer to **string** | The JWT claim to extract the authenticating principal to Confluent resources | [optional]
 **Policy** | Pointer to **string** | A filter expression that must be evaluated to be true to use this identity pool | [optional] 
 **Deactivated** | Pointer to **bool** | Indicates whether the current identity pool is disabled. | [optional] [default to false]
 
@@ -183,30 +183,30 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
-### GetPrincipalClaim
+### GetSubjectClaim
 
-`func (o *IamV2IdentityPool) GetPrincipalClaim() string`
+`func (o *IamV2IdentityPool) GetSubjectClaim() string`
 
-GetPrincipalClaim returns the PrincipalClaim field if non-nil, zero value otherwise.
+GetSubjectClaim returns the SubjectClaim field if non-nil, zero value otherwise.
 
-### GetPrincipalClaimOk
+### GetSubjectClaimOk
 
-`func (o *IamV2IdentityPool) GetPrincipalClaimOk() (*string, bool)`
+`func (o *IamV2IdentityPool) GetSubjectClaimOk() (*string, bool)`
 
-GetPrincipalClaimOk returns a tuple with the PrincipalClaim field if it's non-nil, zero value otherwise
+GetSubjectClaimOk returns a tuple with the SubjectClaim field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPrincipalClaim
+### SetSubjectClaim
 
-`func (o *IamV2IdentityPool) SetPrincipalClaim(v string)`
+`func (o *IamV2IdentityPool) SetSubjectClaim(v string)`
 
-SetPrincipalClaim sets PrincipalClaim field to given value.
+SetSubjectClaim sets SubjectClaim field to given value.
 
-### HasPrincipalClaim
+### HasSubjectClaim
 
-`func (o *IamV2IdentityPool) HasPrincipalClaim() bool`
+`func (o *IamV2IdentityPool) HasSubjectClaim() bool`
 
-HasPrincipalClaim returns a boolean if a field has been set.
+HasSubjectClaim returns a boolean if a field has been set.
 
 ### GetPolicy
 

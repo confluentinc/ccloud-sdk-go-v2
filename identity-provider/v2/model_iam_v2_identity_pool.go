@@ -47,7 +47,7 @@ type IamV2IdentityPool struct {
 	// A description of how this `IdentityPool` is used
 	Description *string `json:"description,omitempty"`
 	// The JWT claim to extract the authenticating principal to Confluent resources
-	PrincipalClaim *string `json:"principal_claim,omitempty"`
+	SubjectClaim *string `json:"subject_claim,omitempty"`
 	// A filter expression that must be evaluated to be true to use this identity pool
 	Policy *string `json:"policy,omitempty"`
 	// Indicates whether the current identity pool is disabled.
@@ -267,36 +267,36 @@ func (o *IamV2IdentityPool) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetPrincipalClaim returns the PrincipalClaim field value if set, zero value otherwise.
-func (o *IamV2IdentityPool) GetPrincipalClaim() string {
-	if o == nil || o.PrincipalClaim == nil {
+// GetSubjectClaim returns the SubjectClaim field value if set, zero value otherwise.
+func (o *IamV2IdentityPool) GetSubjectClaim() string {
+	if o == nil || o.SubjectClaim == nil {
 		var ret string
 		return ret
 	}
-	return *o.PrincipalClaim
+	return *o.SubjectClaim
 }
 
-// GetPrincipalClaimOk returns a tuple with the PrincipalClaim field value if set, nil otherwise
+// GetSubjectClaimOk returns a tuple with the SubjectClaim field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IamV2IdentityPool) GetPrincipalClaimOk() (*string, bool) {
-	if o == nil || o.PrincipalClaim == nil {
+func (o *IamV2IdentityPool) GetSubjectClaimOk() (*string, bool) {
+	if o == nil || o.SubjectClaim == nil {
 		return nil, false
 	}
-	return o.PrincipalClaim, true
+	return o.SubjectClaim, true
 }
 
-// HasPrincipalClaim returns a boolean if a field has been set.
-func (o *IamV2IdentityPool) HasPrincipalClaim() bool {
-	if o != nil && o.PrincipalClaim != nil {
+// HasSubjectClaim returns a boolean if a field has been set.
+func (o *IamV2IdentityPool) HasSubjectClaim() bool {
+	if o != nil && o.SubjectClaim != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetPrincipalClaim gets a reference to the given string and assigns it to the PrincipalClaim field.
-func (o *IamV2IdentityPool) SetPrincipalClaim(v string) {
-	o.PrincipalClaim = &v
+// SetSubjectClaim gets a reference to the given string and assigns it to the SubjectClaim field.
+func (o *IamV2IdentityPool) SetSubjectClaim(v string) {
+	o.SubjectClaim = &v
 }
 
 // GetPolicy returns the Policy field value if set, zero value otherwise.
@@ -371,7 +371,7 @@ func (o *IamV2IdentityPool) Redact() {
     o.recurseRedact(o.Metadata)
     o.recurseRedact(o.DisplayName)
     o.recurseRedact(o.Description)
-    o.recurseRedact(o.PrincipalClaim)
+    o.recurseRedact(o.SubjectClaim)
     o.recurseRedact(o.Policy)
     o.recurseRedact(o.Deactivated)
 }
@@ -426,8 +426,8 @@ func (o IamV2IdentityPool) MarshalJSON() ([]byte, error) {
 	if o.Description != nil {
 		toSerialize["description"] = o.Description
 	}
-	if o.PrincipalClaim != nil {
-		toSerialize["principal_claim"] = o.PrincipalClaim
+	if o.SubjectClaim != nil {
+		toSerialize["subject_claim"] = o.SubjectClaim
 	}
 	if o.Policy != nil {
 		toSerialize["policy"] = o.Policy

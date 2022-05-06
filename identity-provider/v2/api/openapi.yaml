@@ -1755,7 +1755,7 @@ paths:
               - required:
                 - description
                 - display_name
-                - principal_claim
+                - subject_claim
                 type: object
       responses:
         "201":
@@ -1767,7 +1767,7 @@ paths:
                 - required:
                   - description
                   - display_name
-                  - principal_claim
+                  - subject_claim
                   type: object
           description: An Identity Pool was created.
           headers:
@@ -1977,13 +1977,13 @@ paths:
             --url 'https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"My Identity Pool","description":"Prod Access to Kafka clusters to Release Engineering","principal_claim":"sub","policy":"claims.aud=\"confluent\" && claims.group!=\"invalid_group\"","deactivated":false}'
+            --data '{"display_name":"My Identity Pool","description":"Prod Access to Kafka clusters to Release Engineering","subject_claim":"sub","policy":"claims.aud=\"confluent\" && claims.group!=\"invalid_group\"","deactivated":false}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"principal_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"subject_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools")
             .post(body)
@@ -1997,7 +1997,7 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"My Identity\
           \ Pool\\\",\\\"description\\\":\\\"Prod Access to Kafka clusters to Release\
-          \ Engineering\\\",\\\"principal_claim\\\":\\\"sub\\\",\\\"policy\\\":\\\"\
+          \ Engineering\\\",\\\"subject_claim\\\":\\\"sub\\\",\\\"policy\\\":\\\"\
           claims.aud=\\\\\\\"confluent\\\\\\\" && claims.group!=\\\\\\\"invalid_group\\\
           \\\\\"\\\",\\\"deactivated\\\":false}\")\n\n\treq, _ := http.NewRequest(\"\
           POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
@@ -2011,7 +2011,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"principal_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}"
+          payload = "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"subject_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}"
 
           headers = {
               'content-type': "application/json",
@@ -2055,7 +2055,7 @@ paths:
           req.write(JSON.stringify({
             display_name: 'My Identity Pool',
             description: 'Prod Access to Kafka clusters to Release Engineering',
-            principal_claim: 'sub',
+            subject_claim: 'sub',
             policy: 'claims.aud="confluent" && claims.group!="invalid_group"',
             deactivated: false
           }));
@@ -2072,7 +2072,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"principal_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"subject_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -2081,7 +2081,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"principal_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"subject_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: OAuth API
   /iam/v2/identity-providers/{provider_id}/identity-pools/{id}:
@@ -2367,7 +2367,7 @@ paths:
                   - display_name
                   - id
                   - kind
-                  - principal_claim
+                  - subject_claim
                   type: object
           description: Identity Pool.
           headers:
@@ -2632,7 +2632,7 @@ paths:
                   - display_name
                   - id
                   - kind
-                  - principal_claim
+                  - subject_claim
                   type: object
           description: Identity Pool.
           headers:
@@ -2822,13 +2822,13 @@ paths:
             --url 'https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"My Identity Pool","description":"Prod Access to Kafka clusters to Release Engineering","principal_claim":"sub","policy":"claims.aud=\"confluent\" && claims.group!=\"invalid_group\"","deactivated":false}'
+            --data '{"display_name":"My Identity Pool","description":"Prod Access to Kafka clusters to Release Engineering","subject_claim":"sub","policy":"claims.aud=\"confluent\" && claims.group!=\"invalid_group\"","deactivated":false}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"principal_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"subject_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools/{id}")
             .patch(body)
@@ -2842,7 +2842,7 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"My Identity\
           \ Pool\\\",\\\"description\\\":\\\"Prod Access to Kafka clusters to Release\
-          \ Engineering\\\",\\\"principal_claim\\\":\\\"sub\\\",\\\"policy\\\":\\\"\
+          \ Engineering\\\",\\\"subject_claim\\\":\\\"sub\\\",\\\"policy\\\":\\\"\
           claims.aud=\\\\\\\"confluent\\\\\\\" && claims.group!=\\\\\\\"invalid_group\\\
           \\\\\"\\\",\\\"deactivated\\\":false}\")\n\n\treq, _ := http.NewRequest(\"\
           PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
@@ -2856,7 +2856,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"principal_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}"
+          payload = "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"subject_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}"
 
           headers = {
               'content-type': "application/json",
@@ -2900,7 +2900,7 @@ paths:
           req.write(JSON.stringify({
             display_name: 'My Identity Pool',
             description: 'Prod Access to Kafka clusters to Release Engineering',
-            principal_claim: 'sub',
+            subject_claim: 'sub',
             policy: 'claims.aud="confluent" && claims.group!="invalid_group"',
             deactivated: false
           }));
@@ -2917,7 +2917,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"principal_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"subject_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -2926,7 +2926,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"principal_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"subject_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: OAuth API
 components:
@@ -3273,7 +3273,7 @@ components:
           description: A description of how this `IdentityPool` is used
           example: Prod Access to Kafka clusters to Release Engineering
           type: string
-        principal_claim:
+        subject_claim:
           description: The JWT claim to extract the authenticating principal to Confluent
             resources
           example: sub
@@ -3450,7 +3450,7 @@ components:
               - display_name
               - id
               - metadata
-              - principal_claim
+              - subject_claim
               type: object
           type: array
           uniqueItems: true
