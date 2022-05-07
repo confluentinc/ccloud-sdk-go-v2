@@ -394,7 +394,7 @@ Name | Type | Description  | Notes
 
 ## ListConnectv1ConnectorsWithExpansions
 
-> ConnectV1ConnectorExpansion ListConnectv1ConnectorsWithExpansions(ctx, environmentId, kafkaClusterId).Expand(expand).Execute()
+> map[string]ConnectV1ConnectorExpansion ListConnectv1ConnectorsWithExpansions(ctx, environmentId, kafkaClusterId).Expand(expand).Execute()
 
 List of Connectors with Expansions
 
@@ -424,7 +424,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ConnectorsV1Api.ListConnectv1ConnectorsWithExpansions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListConnectv1ConnectorsWithExpansions`: ConnectV1ConnectorExpansion
+    // response from `ListConnectv1ConnectorsWithExpansions`: map[string]ConnectV1ConnectorExpansion
     fmt.Fprintf(os.Stdout, "Response from `ConnectorsV1Api.ListConnectv1ConnectorsWithExpansions`: %v\n", resp)
 }
 ```
@@ -451,7 +451,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ConnectV1ConnectorExpansion**](ConnectV1ConnectorExpansion.md)
+[**map[string]ConnectV1ConnectorExpansion**](ConnectV1ConnectorExpansion.md)
 
 ### Authorization
 

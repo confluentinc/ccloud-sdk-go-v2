@@ -147,8 +147,8 @@ Retrieve an object with the queried expansions of all connectors. Without `expan
 	ListConnectv1ConnectorsWithExpansions(ctx _context.Context, environmentId string, kafkaClusterId string) ApiListConnectv1ConnectorsWithExpansionsRequest
 
 	// ListConnectv1ConnectorsWithExpansionsExecute executes the request
-	//  @return ConnectV1ConnectorExpansion
-	ListConnectv1ConnectorsWithExpansionsExecute(r ApiListConnectv1ConnectorsWithExpansionsRequest) (ConnectV1ConnectorExpansion, *_nethttp.Response, error)
+	//  @return map[string]ConnectV1ConnectorExpansion
+	ListConnectv1ConnectorsWithExpansionsExecute(r ApiListConnectv1ConnectorsWithExpansionsRequest) (map[string]ConnectV1ConnectorExpansion, *_nethttp.Response, error)
 
 	/*
 	ReadConnectv1Connector Read a Connector
@@ -927,7 +927,7 @@ func (r ApiListConnectv1ConnectorsWithExpansionsRequest) Expand(expand string) A
 	return r
 }
 
-func (r ApiListConnectv1ConnectorsWithExpansionsRequest) Execute() (ConnectV1ConnectorExpansion, *_nethttp.Response, error) {
+func (r ApiListConnectv1ConnectorsWithExpansionsRequest) Execute() (map[string]ConnectV1ConnectorExpansion, *_nethttp.Response, error) {
 	return r.ApiService.ListConnectv1ConnectorsWithExpansionsExecute(r)
 }
 
@@ -953,15 +953,15 @@ func (a *ConnectorsV1ApiService) ListConnectv1ConnectorsWithExpansions(ctx _cont
 }
 
 // Execute executes the request
-//  @return ConnectV1ConnectorExpansion
-func (a *ConnectorsV1ApiService) ListConnectv1ConnectorsWithExpansionsExecute(r ApiListConnectv1ConnectorsWithExpansionsRequest) (ConnectV1ConnectorExpansion, *_nethttp.Response, error) {
+//  @return map[string]ConnectV1ConnectorExpansion
+func (a *ConnectorsV1ApiService) ListConnectv1ConnectorsWithExpansionsExecute(r ApiListConnectv1ConnectorsWithExpansionsRequest) (map[string]ConnectV1ConnectorExpansion, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ConnectV1ConnectorExpansion
+		localVarReturnValue  map[string]ConnectV1ConnectorExpansion
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectorsV1ApiService.ListConnectv1ConnectorsWithExpansions")

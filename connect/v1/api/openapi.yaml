@@ -633,7 +633,7 @@ paths:
                       worker_id: MyDatagenConnector
                     type: source
               schema:
-                $ref: '#/components/schemas/connect.v1.ConnectorExpansion'
+                $ref: '#/components/schemas/connect.v1.ConnectorExpansionMap'
           description: Connector.
         "401":
           content:
@@ -3236,33 +3236,12 @@ components:
             type: object
         type: object
       type: array
+    connect.v1.ConnectorExpansionMap:
+      additionalProperties:
+        $ref: '#/components/schemas/connect.v1.ConnectorExpansion'
+      type: object
     connect.v1.ConnectorExpansion:
       description: List of active connectors with the expansions requested.
-      example:
-        name:
-          id:
-            id_type: id_type
-            id: id
-          info:
-            name: name
-            config:
-              key: config
-          status:
-            connector:
-              trace: trace
-              state: NONE
-              worker_id: worker_id
-            name: name
-            type: sink
-            tasks:
-            - msg: msg
-              id: id
-              state: state
-              worker_id: worker_id
-            - msg: msg
-              id: id
-              state: state
-              worker_id: worker_id
       properties:
         name:
           $ref: '#/components/schemas/connect_v1_ConnectorExpansion_name'
@@ -3693,9 +3672,6 @@ components:
       type: object
     connect_v1_ConnectorExpansion_name_id:
       description: The ID of connector.
-      example:
-        id_type: id_type
-        id: id
       properties:
         id:
           description: The ID of the connector.
@@ -3706,10 +3682,6 @@ components:
       type: object
     connect_v1_ConnectorExpansion_name_info:
       description: Metadata of the connector.
-      example:
-        name: name
-        config:
-          key: config
       properties:
         name:
           description: Name of the connector.
@@ -3784,10 +3756,6 @@ components:
       type: object
     connect_v1_ConnectorExpansion_name_status_connector:
       description: A map containing connector status.
-      example:
-        trace: trace
-        state: NONE
-        worker_id: worker_id
       properties:
         state:
           description: The state of the connector.
@@ -3811,11 +3779,6 @@ components:
       - worker_id
       type: object
     connect_v1_ConnectorExpansion_name_status_tasks:
-      example:
-        msg: msg
-        id: id
-        state: state
-        worker_id: worker_id
       properties:
         id:
           description: The ID of task.
@@ -3835,22 +3798,6 @@ components:
       type: object
     connect_v1_ConnectorExpansion_name_status:
       description: Status of the connector and its tasks.
-      example:
-        connector:
-          trace: trace
-          state: NONE
-          worker_id: worker_id
-        name: name
-        type: sink
-        tasks:
-        - msg: msg
-          id: id
-          state: state
-          worker_id: worker_id
-        - msg: msg
-          id: id
-          state: state
-          worker_id: worker_id
       properties:
         name:
           description: The name of the connector.
@@ -3875,30 +3822,6 @@ components:
       type: object
     connect_v1_ConnectorExpansion_name:
       description: Name of the connector.
-      example:
-        id:
-          id_type: id_type
-          id: id
-        info:
-          name: name
-          config:
-            key: config
-        status:
-          connector:
-            trace: trace
-            state: NONE
-            worker_id: worker_id
-          name: name
-          type: sink
-          tasks:
-          - msg: msg
-            id: id
-            state: state
-            worker_id: worker_id
-          - msg: msg
-            id: id
-            state: state
-            worker_id: worker_id
       properties:
         id:
           $ref: '#/components/schemas/connect_v1_ConnectorExpansion_name_id'
