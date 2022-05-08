@@ -4,7 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to [**ConnectV1ConnectorExpansionName**](ConnectV1ConnectorExpansionName.md) |  | [optional] 
+**Id** | Pointer to [**ConnectV1ConnectorExpansionId**](ConnectV1ConnectorExpansionId.md) |  | [optional] 
+**Info** | Pointer to [**ConnectV1ConnectorExpansionInfo**](ConnectV1ConnectorExpansionInfo.md) |  | [optional] 
+**Status** | Pointer to [**ConnectV1ConnectorExpansionStatus**](ConnectV1ConnectorExpansionStatus.md) |  | [optional] 
 
 ## Methods
 
@@ -25,30 +27,80 @@ NewConnectV1ConnectorExpansionWithDefaults instantiates a new ConnectV1Connector
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetName
+### GetId
 
-`func (o *ConnectV1ConnectorExpansion) GetName() ConnectV1ConnectorExpansionName`
+`func (o *ConnectV1ConnectorExpansion) GetId() ConnectV1ConnectorExpansionId`
 
-GetName returns the Name field if non-nil, zero value otherwise.
+GetId returns the Id field if non-nil, zero value otherwise.
 
-### GetNameOk
+### GetIdOk
 
-`func (o *ConnectV1ConnectorExpansion) GetNameOk() (*ConnectV1ConnectorExpansionName, bool)`
+`func (o *ConnectV1ConnectorExpansion) GetIdOk() (*ConnectV1ConnectorExpansionId, bool)`
 
-GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetName
+### SetId
 
-`func (o *ConnectV1ConnectorExpansion) SetName(v ConnectV1ConnectorExpansionName)`
+`func (o *ConnectV1ConnectorExpansion) SetId(v ConnectV1ConnectorExpansionId)`
 
-SetName sets Name field to given value.
+SetId sets Id field to given value.
 
-### HasName
+### HasId
 
-`func (o *ConnectV1ConnectorExpansion) HasName() bool`
+`func (o *ConnectV1ConnectorExpansion) HasId() bool`
 
-HasName returns a boolean if a field has been set.
+HasId returns a boolean if a field has been set.
+
+### GetInfo
+
+`func (o *ConnectV1ConnectorExpansion) GetInfo() ConnectV1ConnectorExpansionInfo`
+
+GetInfo returns the Info field if non-nil, zero value otherwise.
+
+### GetInfoOk
+
+`func (o *ConnectV1ConnectorExpansion) GetInfoOk() (*ConnectV1ConnectorExpansionInfo, bool)`
+
+GetInfoOk returns a tuple with the Info field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInfo
+
+`func (o *ConnectV1ConnectorExpansion) SetInfo(v ConnectV1ConnectorExpansionInfo)`
+
+SetInfo sets Info field to given value.
+
+### HasInfo
+
+`func (o *ConnectV1ConnectorExpansion) HasInfo() bool`
+
+HasInfo returns a boolean if a field has been set.
+
+### GetStatus
+
+`func (o *ConnectV1ConnectorExpansion) GetStatus() ConnectV1ConnectorExpansionStatus`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *ConnectV1ConnectorExpansion) GetStatusOk() (*ConnectV1ConnectorExpansionStatus, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *ConnectV1ConnectorExpansion) SetStatus(v ConnectV1ConnectorExpansionStatus)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *ConnectV1ConnectorExpansion) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

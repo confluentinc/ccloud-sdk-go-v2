@@ -3243,8 +3243,12 @@ components:
     connect.v1.ConnectorExpansion:
       description: List of active connectors with the expansions requested.
       properties:
-        name:
-          $ref: '#/components/schemas/connect_v1_ConnectorExpansion_name'
+        id:
+          $ref: '#/components/schemas/connect_v1_ConnectorExpansion_id'
+        info:
+          $ref: '#/components/schemas/connect_v1_ConnectorExpansion_info'
+        status:
+          $ref: '#/components/schemas/connect_v1_ConnectorExpansion_status'
       type: object
     inline_object:
       properties:
@@ -3670,7 +3674,7 @@ components:
       - connector
       - task
       type: object
-    connect_v1_ConnectorExpansion_name_id:
+    connect_v1_ConnectorExpansion_id:
       description: The ID of connector.
       properties:
         id:
@@ -3680,7 +3684,7 @@ components:
           description: Type of the value in the `id` property.
           type: string
       type: object
-    connect_v1_ConnectorExpansion_name_info:
+    connect_v1_ConnectorExpansion_info:
       description: Metadata of the connector.
       properties:
         name:
@@ -3754,7 +3758,7 @@ components:
           - name
           type: object
       type: object
-    connect_v1_ConnectorExpansion_name_status_connector:
+    connect_v1_ConnectorExpansion_status_connector:
       description: A map containing connector status.
       properties:
         state:
@@ -3778,7 +3782,7 @@ components:
       - state
       - worker_id
       type: object
-    connect_v1_ConnectorExpansion_name_status_tasks:
+    connect_v1_ConnectorExpansion_status_tasks:
       properties:
         id:
           description: The ID of task.
@@ -3796,7 +3800,7 @@ components:
       - state
       - worker_id
       type: object
-    connect_v1_ConnectorExpansion_name_status:
+    connect_v1_ConnectorExpansion_status:
       description: Status of the connector and its tasks.
       properties:
         name:
@@ -3809,26 +3813,16 @@ components:
           - source
           type: string
         connector:
-          $ref: '#/components/schemas/connect_v1_ConnectorExpansion_name_status_connector'
+          $ref: '#/components/schemas/connect_v1_ConnectorExpansion_status_connector'
         tasks:
           description: A map containing the task status.
           items:
-            $ref: '#/components/schemas/connect_v1_ConnectorExpansion_name_status_tasks'
+            $ref: '#/components/schemas/connect_v1_ConnectorExpansion_status_tasks'
           type: array
       required:
       - connector
       - name
       - type
-      type: object
-    connect_v1_ConnectorExpansion_name:
-      description: Name of the connector.
-      properties:
-        id:
-          $ref: '#/components/schemas/connect_v1_ConnectorExpansion_name_id'
-        info:
-          $ref: '#/components/schemas/connect_v1_ConnectorExpansion_name_info'
-        status:
-          $ref: '#/components/schemas/connect_v1_ConnectorExpansion_name_status'
       type: object
   securitySchemes:
     api-key:

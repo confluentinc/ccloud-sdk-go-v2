@@ -35,7 +35,9 @@ import (
 
 // ConnectV1ConnectorExpansion List of active connectors with the expansions requested.
 type ConnectV1ConnectorExpansion struct {
-	Name *ConnectV1ConnectorExpansionName `json:"name,omitempty"`
+	Id *ConnectV1ConnectorExpansionId `json:"id,omitempty"`
+	Info *ConnectV1ConnectorExpansionInfo `json:"info,omitempty"`
+	Status *ConnectV1ConnectorExpansionStatus `json:"status,omitempty"`
 }
 
 // NewConnectV1ConnectorExpansion instantiates a new ConnectV1ConnectorExpansion object
@@ -55,41 +57,107 @@ func NewConnectV1ConnectorExpansionWithDefaults() *ConnectV1ConnectorExpansion {
 	return &this
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *ConnectV1ConnectorExpansion) GetName() ConnectV1ConnectorExpansionName {
-	if o == nil || o.Name == nil {
-		var ret ConnectV1ConnectorExpansionName
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *ConnectV1ConnectorExpansion) GetId() ConnectV1ConnectorExpansionId {
+	if o == nil || o.Id == nil {
+		var ret ConnectV1ConnectorExpansionId
 		return ret
 	}
-	return *o.Name
+	return *o.Id
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConnectV1ConnectorExpansion) GetNameOk() (*ConnectV1ConnectorExpansionName, bool) {
-	if o == nil || o.Name == nil {
+func (o *ConnectV1ConnectorExpansion) GetIdOk() (*ConnectV1ConnectorExpansionId, bool) {
+	if o == nil || o.Id == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return o.Id, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *ConnectV1ConnectorExpansion) HasName() bool {
-	if o != nil && o.Name != nil {
+// HasId returns a boolean if a field has been set.
+func (o *ConnectV1ConnectorExpansion) HasId() bool {
+	if o != nil && o.Id != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given ConnectV1ConnectorExpansionName and assigns it to the Name field.
-func (o *ConnectV1ConnectorExpansion) SetName(v ConnectV1ConnectorExpansionName) {
-	o.Name = &v
+// SetId gets a reference to the given ConnectV1ConnectorExpansionId and assigns it to the Id field.
+func (o *ConnectV1ConnectorExpansion) SetId(v ConnectV1ConnectorExpansionId) {
+	o.Id = &v
+}
+
+// GetInfo returns the Info field value if set, zero value otherwise.
+func (o *ConnectV1ConnectorExpansion) GetInfo() ConnectV1ConnectorExpansionInfo {
+	if o == nil || o.Info == nil {
+		var ret ConnectV1ConnectorExpansionInfo
+		return ret
+	}
+	return *o.Info
+}
+
+// GetInfoOk returns a tuple with the Info field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectV1ConnectorExpansion) GetInfoOk() (*ConnectV1ConnectorExpansionInfo, bool) {
+	if o == nil || o.Info == nil {
+		return nil, false
+	}
+	return o.Info, true
+}
+
+// HasInfo returns a boolean if a field has been set.
+func (o *ConnectV1ConnectorExpansion) HasInfo() bool {
+	if o != nil && o.Info != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInfo gets a reference to the given ConnectV1ConnectorExpansionInfo and assigns it to the Info field.
+func (o *ConnectV1ConnectorExpansion) SetInfo(v ConnectV1ConnectorExpansionInfo) {
+	o.Info = &v
+}
+
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *ConnectV1ConnectorExpansion) GetStatus() ConnectV1ConnectorExpansionStatus {
+	if o == nil || o.Status == nil {
+		var ret ConnectV1ConnectorExpansionStatus
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectV1ConnectorExpansion) GetStatusOk() (*ConnectV1ConnectorExpansionStatus, bool) {
+	if o == nil || o.Status == nil {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *ConnectV1ConnectorExpansion) HasStatus() bool {
+	if o != nil && o.Status != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given ConnectV1ConnectorExpansionStatus and assigns it to the Status field.
+func (o *ConnectV1ConnectorExpansion) SetStatus(v ConnectV1ConnectorExpansionStatus) {
+	o.Status = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ConnectV1ConnectorExpansion) Redact() {
-    o.recurseRedact(o.Name)
+    o.recurseRedact(o.Id)
+    o.recurseRedact(o.Info)
+    o.recurseRedact(o.Status)
 }
 
 func (o *ConnectV1ConnectorExpansion) recurseRedact(v interface{}) {
@@ -124,8 +192,14 @@ func (o ConnectV1ConnectorExpansion) zeroField(v interface{}) {
 
 func (o ConnectV1ConnectorExpansion) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Name != nil {
-		toSerialize["name"] = o.Name
+	if o.Id != nil {
+		toSerialize["id"] = o.Id
+	}
+	if o.Info != nil {
+		toSerialize["info"] = o.Info
+	}
+	if o.Status != nil {
+		toSerialize["status"] = o.Status
 	}
 	return json.Marshal(toSerialize)
 }

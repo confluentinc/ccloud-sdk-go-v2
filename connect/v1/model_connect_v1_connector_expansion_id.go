@@ -33,33 +33,33 @@ import (
 	"reflect"
 )
 
-// ConnectV1ConnectorExpansionNameId The ID of connector.
-type ConnectV1ConnectorExpansionNameId struct {
+// ConnectV1ConnectorExpansionId The ID of connector.
+type ConnectV1ConnectorExpansionId struct {
 	// The ID of the connector.
 	Id *string `json:"id,omitempty"`
 	// Type of the value in the `id` property.
 	IdType *string `json:"id_type,omitempty"`
 }
 
-// NewConnectV1ConnectorExpansionNameId instantiates a new ConnectV1ConnectorExpansionNameId object
+// NewConnectV1ConnectorExpansionId instantiates a new ConnectV1ConnectorExpansionId object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConnectV1ConnectorExpansionNameId() *ConnectV1ConnectorExpansionNameId {
-	this := ConnectV1ConnectorExpansionNameId{}
+func NewConnectV1ConnectorExpansionId() *ConnectV1ConnectorExpansionId {
+	this := ConnectV1ConnectorExpansionId{}
 	return &this
 }
 
-// NewConnectV1ConnectorExpansionNameIdWithDefaults instantiates a new ConnectV1ConnectorExpansionNameId object
+// NewConnectV1ConnectorExpansionIdWithDefaults instantiates a new ConnectV1ConnectorExpansionId object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewConnectV1ConnectorExpansionNameIdWithDefaults() *ConnectV1ConnectorExpansionNameId {
-	this := ConnectV1ConnectorExpansionNameId{}
+func NewConnectV1ConnectorExpansionIdWithDefaults() *ConnectV1ConnectorExpansionId {
+	this := ConnectV1ConnectorExpansionId{}
 	return &this
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *ConnectV1ConnectorExpansionNameId) GetId() string {
+func (o *ConnectV1ConnectorExpansionId) GetId() string {
 	if o == nil || o.Id == nil {
 		var ret string
 		return ret
@@ -69,7 +69,7 @@ func (o *ConnectV1ConnectorExpansionNameId) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConnectV1ConnectorExpansionNameId) GetIdOk() (*string, bool) {
+func (o *ConnectV1ConnectorExpansionId) GetIdOk() (*string, bool) {
 	if o == nil || o.Id == nil {
 		return nil, false
 	}
@@ -77,7 +77,7 @@ func (o *ConnectV1ConnectorExpansionNameId) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *ConnectV1ConnectorExpansionNameId) HasId() bool {
+func (o *ConnectV1ConnectorExpansionId) HasId() bool {
 	if o != nil && o.Id != nil {
 		return true
 	}
@@ -86,12 +86,12 @@ func (o *ConnectV1ConnectorExpansionNameId) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *ConnectV1ConnectorExpansionNameId) SetId(v string) {
+func (o *ConnectV1ConnectorExpansionId) SetId(v string) {
 	o.Id = &v
 }
 
 // GetIdType returns the IdType field value if set, zero value otherwise.
-func (o *ConnectV1ConnectorExpansionNameId) GetIdType() string {
+func (o *ConnectV1ConnectorExpansionId) GetIdType() string {
 	if o == nil || o.IdType == nil {
 		var ret string
 		return ret
@@ -101,7 +101,7 @@ func (o *ConnectV1ConnectorExpansionNameId) GetIdType() string {
 
 // GetIdTypeOk returns a tuple with the IdType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConnectV1ConnectorExpansionNameId) GetIdTypeOk() (*string, bool) {
+func (o *ConnectV1ConnectorExpansionId) GetIdTypeOk() (*string, bool) {
 	if o == nil || o.IdType == nil {
 		return nil, false
 	}
@@ -109,7 +109,7 @@ func (o *ConnectV1ConnectorExpansionNameId) GetIdTypeOk() (*string, bool) {
 }
 
 // HasIdType returns a boolean if a field has been set.
-func (o *ConnectV1ConnectorExpansionNameId) HasIdType() bool {
+func (o *ConnectV1ConnectorExpansionId) HasIdType() bool {
 	if o != nil && o.IdType != nil {
 		return true
 	}
@@ -118,17 +118,17 @@ func (o *ConnectV1ConnectorExpansionNameId) HasIdType() bool {
 }
 
 // SetIdType gets a reference to the given string and assigns it to the IdType field.
-func (o *ConnectV1ConnectorExpansionNameId) SetIdType(v string) {
+func (o *ConnectV1ConnectorExpansionId) SetIdType(v string) {
 	o.IdType = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *ConnectV1ConnectorExpansionNameId) Redact() {
+func (o *ConnectV1ConnectorExpansionId) Redact() {
     o.recurseRedact(o.Id)
     o.recurseRedact(o.IdType)
 }
 
-func (o *ConnectV1ConnectorExpansionNameId) recurseRedact(v interface{}) {
+func (o *ConnectV1ConnectorExpansionId) recurseRedact(v interface{}) {
     type redactor interface {
         Redact()
     }
@@ -153,12 +153,12 @@ func (o *ConnectV1ConnectorExpansionNameId) recurseRedact(v interface{}) {
     }
 }
 
-func (o ConnectV1ConnectorExpansionNameId) zeroField(v interface{}) {
+func (o ConnectV1ConnectorExpansionId) zeroField(v interface{}) {
     p := reflect.ValueOf(v).Elem()
     p.Set(reflect.Zero(p.Type()))
 }
 
-func (o ConnectV1ConnectorExpansionNameId) MarshalJSON() ([]byte, error) {
+func (o ConnectV1ConnectorExpansionId) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
@@ -169,38 +169,38 @@ func (o ConnectV1ConnectorExpansionNameId) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableConnectV1ConnectorExpansionNameId struct {
-	value *ConnectV1ConnectorExpansionNameId
+type NullableConnectV1ConnectorExpansionId struct {
+	value *ConnectV1ConnectorExpansionId
 	isSet bool
 }
 
-func (v NullableConnectV1ConnectorExpansionNameId) Get() *ConnectV1ConnectorExpansionNameId {
+func (v NullableConnectV1ConnectorExpansionId) Get() *ConnectV1ConnectorExpansionId {
 	return v.value
 }
 
-func (v *NullableConnectV1ConnectorExpansionNameId) Set(val *ConnectV1ConnectorExpansionNameId) {
+func (v *NullableConnectV1ConnectorExpansionId) Set(val *ConnectV1ConnectorExpansionId) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableConnectV1ConnectorExpansionNameId) IsSet() bool {
+func (v NullableConnectV1ConnectorExpansionId) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableConnectV1ConnectorExpansionNameId) Unset() {
+func (v *NullableConnectV1ConnectorExpansionId) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableConnectV1ConnectorExpansionNameId(val *ConnectV1ConnectorExpansionNameId) *NullableConnectV1ConnectorExpansionNameId {
-	return &NullableConnectV1ConnectorExpansionNameId{value: val, isSet: true}
+func NewNullableConnectV1ConnectorExpansionId(val *ConnectV1ConnectorExpansionId) *NullableConnectV1ConnectorExpansionId {
+	return &NullableConnectV1ConnectorExpansionId{value: val, isSet: true}
 }
 
-func (v NullableConnectV1ConnectorExpansionNameId) MarshalJSON() ([]byte, error) {
+func (v NullableConnectV1ConnectorExpansionId) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableConnectV1ConnectorExpansionNameId) UnmarshalJSON(src []byte) error {
+func (v *NullableConnectV1ConnectorExpansionId) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

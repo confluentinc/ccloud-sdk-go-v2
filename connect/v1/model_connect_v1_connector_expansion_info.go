@@ -33,33 +33,33 @@ import (
 	"reflect"
 )
 
-// ConnectV1ConnectorExpansionNameInfo Metadata of the connector.
-type ConnectV1ConnectorExpansionNameInfo struct {
+// ConnectV1ConnectorExpansionInfo Metadata of the connector.
+type ConnectV1ConnectorExpansionInfo struct {
 	// Name of the connector.
 	Name *string `json:"name,omitempty"`
 	// Configuration parameters for the connector. These configurations are the minimum set of key-value pairs (KVP) which are used to define how the connector connects Kafka to the external system. Some of these KVPs are common to all the connectors, such as connection parameters to Kafka, connector metadata, etc. The list of common connector configurations is as follows    - cloud.environment   - cloud.provider   - connector.class   - kafka.api.key   - kafka.api.secret   - kafka.endpoint   - kafka.region   - name  For example, a connector like `GcsSink` would have additional parameters such as `gcs.bucket.name`, `flush.size`, etc.
 	Config *map[string]string `json:"config,omitempty"`
 }
 
-// NewConnectV1ConnectorExpansionNameInfo instantiates a new ConnectV1ConnectorExpansionNameInfo object
+// NewConnectV1ConnectorExpansionInfo instantiates a new ConnectV1ConnectorExpansionInfo object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConnectV1ConnectorExpansionNameInfo() *ConnectV1ConnectorExpansionNameInfo {
-	this := ConnectV1ConnectorExpansionNameInfo{}
+func NewConnectV1ConnectorExpansionInfo() *ConnectV1ConnectorExpansionInfo {
+	this := ConnectV1ConnectorExpansionInfo{}
 	return &this
 }
 
-// NewConnectV1ConnectorExpansionNameInfoWithDefaults instantiates a new ConnectV1ConnectorExpansionNameInfo object
+// NewConnectV1ConnectorExpansionInfoWithDefaults instantiates a new ConnectV1ConnectorExpansionInfo object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewConnectV1ConnectorExpansionNameInfoWithDefaults() *ConnectV1ConnectorExpansionNameInfo {
-	this := ConnectV1ConnectorExpansionNameInfo{}
+func NewConnectV1ConnectorExpansionInfoWithDefaults() *ConnectV1ConnectorExpansionInfo {
+	this := ConnectV1ConnectorExpansionInfo{}
 	return &this
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *ConnectV1ConnectorExpansionNameInfo) GetName() string {
+func (o *ConnectV1ConnectorExpansionInfo) GetName() string {
 	if o == nil || o.Name == nil {
 		var ret string
 		return ret
@@ -69,7 +69,7 @@ func (o *ConnectV1ConnectorExpansionNameInfo) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConnectV1ConnectorExpansionNameInfo) GetNameOk() (*string, bool) {
+func (o *ConnectV1ConnectorExpansionInfo) GetNameOk() (*string, bool) {
 	if o == nil || o.Name == nil {
 		return nil, false
 	}
@@ -77,7 +77,7 @@ func (o *ConnectV1ConnectorExpansionNameInfo) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *ConnectV1ConnectorExpansionNameInfo) HasName() bool {
+func (o *ConnectV1ConnectorExpansionInfo) HasName() bool {
 	if o != nil && o.Name != nil {
 		return true
 	}
@@ -86,12 +86,12 @@ func (o *ConnectV1ConnectorExpansionNameInfo) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *ConnectV1ConnectorExpansionNameInfo) SetName(v string) {
+func (o *ConnectV1ConnectorExpansionInfo) SetName(v string) {
 	o.Name = &v
 }
 
 // GetConfig returns the Config field value if set, zero value otherwise.
-func (o *ConnectV1ConnectorExpansionNameInfo) GetConfig() map[string]string {
+func (o *ConnectV1ConnectorExpansionInfo) GetConfig() map[string]string {
 	if o == nil || o.Config == nil {
 		var ret map[string]string
 		return ret
@@ -101,7 +101,7 @@ func (o *ConnectV1ConnectorExpansionNameInfo) GetConfig() map[string]string {
 
 // GetConfigOk returns a tuple with the Config field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConnectV1ConnectorExpansionNameInfo) GetConfigOk() (*map[string]string, bool) {
+func (o *ConnectV1ConnectorExpansionInfo) GetConfigOk() (*map[string]string, bool) {
 	if o == nil || o.Config == nil {
 		return nil, false
 	}
@@ -109,7 +109,7 @@ func (o *ConnectV1ConnectorExpansionNameInfo) GetConfigOk() (*map[string]string,
 }
 
 // HasConfig returns a boolean if a field has been set.
-func (o *ConnectV1ConnectorExpansionNameInfo) HasConfig() bool {
+func (o *ConnectV1ConnectorExpansionInfo) HasConfig() bool {
 	if o != nil && o.Config != nil {
 		return true
 	}
@@ -118,17 +118,17 @@ func (o *ConnectV1ConnectorExpansionNameInfo) HasConfig() bool {
 }
 
 // SetConfig gets a reference to the given map[string]string and assigns it to the Config field.
-func (o *ConnectV1ConnectorExpansionNameInfo) SetConfig(v map[string]string) {
+func (o *ConnectV1ConnectorExpansionInfo) SetConfig(v map[string]string) {
 	o.Config = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *ConnectV1ConnectorExpansionNameInfo) Redact() {
+func (o *ConnectV1ConnectorExpansionInfo) Redact() {
     o.recurseRedact(o.Name)
     o.recurseRedact(o.Config)
 }
 
-func (o *ConnectV1ConnectorExpansionNameInfo) recurseRedact(v interface{}) {
+func (o *ConnectV1ConnectorExpansionInfo) recurseRedact(v interface{}) {
     type redactor interface {
         Redact()
     }
@@ -153,12 +153,12 @@ func (o *ConnectV1ConnectorExpansionNameInfo) recurseRedact(v interface{}) {
     }
 }
 
-func (o ConnectV1ConnectorExpansionNameInfo) zeroField(v interface{}) {
+func (o ConnectV1ConnectorExpansionInfo) zeroField(v interface{}) {
     p := reflect.ValueOf(v).Elem()
     p.Set(reflect.Zero(p.Type()))
 }
 
-func (o ConnectV1ConnectorExpansionNameInfo) MarshalJSON() ([]byte, error) {
+func (o ConnectV1ConnectorExpansionInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
@@ -169,38 +169,38 @@ func (o ConnectV1ConnectorExpansionNameInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableConnectV1ConnectorExpansionNameInfo struct {
-	value *ConnectV1ConnectorExpansionNameInfo
+type NullableConnectV1ConnectorExpansionInfo struct {
+	value *ConnectV1ConnectorExpansionInfo
 	isSet bool
 }
 
-func (v NullableConnectV1ConnectorExpansionNameInfo) Get() *ConnectV1ConnectorExpansionNameInfo {
+func (v NullableConnectV1ConnectorExpansionInfo) Get() *ConnectV1ConnectorExpansionInfo {
 	return v.value
 }
 
-func (v *NullableConnectV1ConnectorExpansionNameInfo) Set(val *ConnectV1ConnectorExpansionNameInfo) {
+func (v *NullableConnectV1ConnectorExpansionInfo) Set(val *ConnectV1ConnectorExpansionInfo) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableConnectV1ConnectorExpansionNameInfo) IsSet() bool {
+func (v NullableConnectV1ConnectorExpansionInfo) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableConnectV1ConnectorExpansionNameInfo) Unset() {
+func (v *NullableConnectV1ConnectorExpansionInfo) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableConnectV1ConnectorExpansionNameInfo(val *ConnectV1ConnectorExpansionNameInfo) *NullableConnectV1ConnectorExpansionNameInfo {
-	return &NullableConnectV1ConnectorExpansionNameInfo{value: val, isSet: true}
+func NewNullableConnectV1ConnectorExpansionInfo(val *ConnectV1ConnectorExpansionInfo) *NullableConnectV1ConnectorExpansionInfo {
+	return &NullableConnectV1ConnectorExpansionInfo{value: val, isSet: true}
 }
 
-func (v NullableConnectV1ConnectorExpansionNameInfo) MarshalJSON() ([]byte, error) {
+func (v NullableConnectV1ConnectorExpansionInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableConnectV1ConnectorExpansionNameInfo) UnmarshalJSON(src []byte) error {
+func (v *NullableConnectV1ConnectorExpansionInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

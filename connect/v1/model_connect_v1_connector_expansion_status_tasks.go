@@ -33,8 +33,8 @@ import (
 	"reflect"
 )
 
-// ConnectV1ConnectorExpansionNameStatusTasks struct for ConnectV1ConnectorExpansionNameStatusTasks
-type ConnectV1ConnectorExpansionNameStatusTasks struct {
+// ConnectV1ConnectorExpansionStatusTasks struct for ConnectV1ConnectorExpansionStatusTasks
+type ConnectV1ConnectorExpansionStatusTasks struct {
 	// The ID of task.
 	Id string `json:"id"`
 	// The state of the task.
@@ -44,28 +44,28 @@ type ConnectV1ConnectorExpansionNameStatusTasks struct {
 	Msg *string `json:"msg,omitempty"`
 }
 
-// NewConnectV1ConnectorExpansionNameStatusTasks instantiates a new ConnectV1ConnectorExpansionNameStatusTasks object
+// NewConnectV1ConnectorExpansionStatusTasks instantiates a new ConnectV1ConnectorExpansionStatusTasks object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConnectV1ConnectorExpansionNameStatusTasks(id string, state string, workerId string) *ConnectV1ConnectorExpansionNameStatusTasks {
-	this := ConnectV1ConnectorExpansionNameStatusTasks{}
+func NewConnectV1ConnectorExpansionStatusTasks(id string, state string, workerId string) *ConnectV1ConnectorExpansionStatusTasks {
+	this := ConnectV1ConnectorExpansionStatusTasks{}
 	this.Id = id
 	this.State = state
 	this.WorkerId = workerId
 	return &this
 }
 
-// NewConnectV1ConnectorExpansionNameStatusTasksWithDefaults instantiates a new ConnectV1ConnectorExpansionNameStatusTasks object
+// NewConnectV1ConnectorExpansionStatusTasksWithDefaults instantiates a new ConnectV1ConnectorExpansionStatusTasks object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewConnectV1ConnectorExpansionNameStatusTasksWithDefaults() *ConnectV1ConnectorExpansionNameStatusTasks {
-	this := ConnectV1ConnectorExpansionNameStatusTasks{}
+func NewConnectV1ConnectorExpansionStatusTasksWithDefaults() *ConnectV1ConnectorExpansionStatusTasks {
+	this := ConnectV1ConnectorExpansionStatusTasks{}
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetId() string {
+func (o *ConnectV1ConnectorExpansionStatusTasks) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -76,7 +76,7 @@ func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetIdOk() (*string, bool) {
+func (o *ConnectV1ConnectorExpansionStatusTasks) GetIdOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -84,12 +84,12 @@ func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *ConnectV1ConnectorExpansionNameStatusTasks) SetId(v string) {
+func (o *ConnectV1ConnectorExpansionStatusTasks) SetId(v string) {
 	o.Id = v
 }
 
 // GetState returns the State field value
-func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetState() string {
+func (o *ConnectV1ConnectorExpansionStatusTasks) GetState() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -100,7 +100,7 @@ func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetState() string {
 
 // GetStateOk returns a tuple with the State field value
 // and a boolean to check if the value has been set.
-func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetStateOk() (*string, bool) {
+func (o *ConnectV1ConnectorExpansionStatusTasks) GetStateOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -108,12 +108,12 @@ func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetStateOk() (*string, bool
 }
 
 // SetState sets field value
-func (o *ConnectV1ConnectorExpansionNameStatusTasks) SetState(v string) {
+func (o *ConnectV1ConnectorExpansionStatusTasks) SetState(v string) {
 	o.State = v
 }
 
 // GetWorkerId returns the WorkerId field value
-func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetWorkerId() string {
+func (o *ConnectV1ConnectorExpansionStatusTasks) GetWorkerId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -124,7 +124,7 @@ func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetWorkerId() string {
 
 // GetWorkerIdOk returns a tuple with the WorkerId field value
 // and a boolean to check if the value has been set.
-func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetWorkerIdOk() (*string, bool) {
+func (o *ConnectV1ConnectorExpansionStatusTasks) GetWorkerIdOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -132,12 +132,12 @@ func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetWorkerIdOk() (*string, b
 }
 
 // SetWorkerId sets field value
-func (o *ConnectV1ConnectorExpansionNameStatusTasks) SetWorkerId(v string) {
+func (o *ConnectV1ConnectorExpansionStatusTasks) SetWorkerId(v string) {
 	o.WorkerId = v
 }
 
 // GetMsg returns the Msg field value if set, zero value otherwise.
-func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetMsg() string {
+func (o *ConnectV1ConnectorExpansionStatusTasks) GetMsg() string {
 	if o == nil || o.Msg == nil {
 		var ret string
 		return ret
@@ -147,7 +147,7 @@ func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetMsg() string {
 
 // GetMsgOk returns a tuple with the Msg field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetMsgOk() (*string, bool) {
+func (o *ConnectV1ConnectorExpansionStatusTasks) GetMsgOk() (*string, bool) {
 	if o == nil || o.Msg == nil {
 		return nil, false
 	}
@@ -155,7 +155,7 @@ func (o *ConnectV1ConnectorExpansionNameStatusTasks) GetMsgOk() (*string, bool) 
 }
 
 // HasMsg returns a boolean if a field has been set.
-func (o *ConnectV1ConnectorExpansionNameStatusTasks) HasMsg() bool {
+func (o *ConnectV1ConnectorExpansionStatusTasks) HasMsg() bool {
 	if o != nil && o.Msg != nil {
 		return true
 	}
@@ -164,19 +164,19 @@ func (o *ConnectV1ConnectorExpansionNameStatusTasks) HasMsg() bool {
 }
 
 // SetMsg gets a reference to the given string and assigns it to the Msg field.
-func (o *ConnectV1ConnectorExpansionNameStatusTasks) SetMsg(v string) {
+func (o *ConnectV1ConnectorExpansionStatusTasks) SetMsg(v string) {
 	o.Msg = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *ConnectV1ConnectorExpansionNameStatusTasks) Redact() {
+func (o *ConnectV1ConnectorExpansionStatusTasks) Redact() {
     o.recurseRedact(&o.Id)
     o.recurseRedact(&o.State)
     o.recurseRedact(&o.WorkerId)
     o.recurseRedact(o.Msg)
 }
 
-func (o *ConnectV1ConnectorExpansionNameStatusTasks) recurseRedact(v interface{}) {
+func (o *ConnectV1ConnectorExpansionStatusTasks) recurseRedact(v interface{}) {
     type redactor interface {
         Redact()
     }
@@ -201,12 +201,12 @@ func (o *ConnectV1ConnectorExpansionNameStatusTasks) recurseRedact(v interface{}
     }
 }
 
-func (o ConnectV1ConnectorExpansionNameStatusTasks) zeroField(v interface{}) {
+func (o ConnectV1ConnectorExpansionStatusTasks) zeroField(v interface{}) {
     p := reflect.ValueOf(v).Elem()
     p.Set(reflect.Zero(p.Type()))
 }
 
-func (o ConnectV1ConnectorExpansionNameStatusTasks) MarshalJSON() ([]byte, error) {
+func (o ConnectV1ConnectorExpansionStatusTasks) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["id"] = o.Id
@@ -223,38 +223,38 @@ func (o ConnectV1ConnectorExpansionNameStatusTasks) MarshalJSON() ([]byte, error
 	return json.Marshal(toSerialize)
 }
 
-type NullableConnectV1ConnectorExpansionNameStatusTasks struct {
-	value *ConnectV1ConnectorExpansionNameStatusTasks
+type NullableConnectV1ConnectorExpansionStatusTasks struct {
+	value *ConnectV1ConnectorExpansionStatusTasks
 	isSet bool
 }
 
-func (v NullableConnectV1ConnectorExpansionNameStatusTasks) Get() *ConnectV1ConnectorExpansionNameStatusTasks {
+func (v NullableConnectV1ConnectorExpansionStatusTasks) Get() *ConnectV1ConnectorExpansionStatusTasks {
 	return v.value
 }
 
-func (v *NullableConnectV1ConnectorExpansionNameStatusTasks) Set(val *ConnectV1ConnectorExpansionNameStatusTasks) {
+func (v *NullableConnectV1ConnectorExpansionStatusTasks) Set(val *ConnectV1ConnectorExpansionStatusTasks) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableConnectV1ConnectorExpansionNameStatusTasks) IsSet() bool {
+func (v NullableConnectV1ConnectorExpansionStatusTasks) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableConnectV1ConnectorExpansionNameStatusTasks) Unset() {
+func (v *NullableConnectV1ConnectorExpansionStatusTasks) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableConnectV1ConnectorExpansionNameStatusTasks(val *ConnectV1ConnectorExpansionNameStatusTasks) *NullableConnectV1ConnectorExpansionNameStatusTasks {
-	return &NullableConnectV1ConnectorExpansionNameStatusTasks{value: val, isSet: true}
+func NewNullableConnectV1ConnectorExpansionStatusTasks(val *ConnectV1ConnectorExpansionStatusTasks) *NullableConnectV1ConnectorExpansionStatusTasks {
+	return &NullableConnectV1ConnectorExpansionStatusTasks{value: val, isSet: true}
 }
 
-func (v NullableConnectV1ConnectorExpansionNameStatusTasks) MarshalJSON() ([]byte, error) {
+func (v NullableConnectV1ConnectorExpansionStatusTasks) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableConnectV1ConnectorExpansionNameStatusTasks) UnmarshalJSON(src []byte) error {
+func (v *NullableConnectV1ConnectorExpansionStatusTasks) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

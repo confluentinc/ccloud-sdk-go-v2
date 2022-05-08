@@ -1,4 +1,4 @@
-# ConnectV1ConnectorExpansionNameInfo
+# ConnectV1ConnectorExpansionInfo
 
 ## Properties
 
@@ -9,70 +9,70 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewConnectV1ConnectorExpansionNameInfo
+### NewConnectV1ConnectorExpansionInfo
 
-`func NewConnectV1ConnectorExpansionNameInfo() *ConnectV1ConnectorExpansionNameInfo`
+`func NewConnectV1ConnectorExpansionInfo() *ConnectV1ConnectorExpansionInfo`
 
-NewConnectV1ConnectorExpansionNameInfo instantiates a new ConnectV1ConnectorExpansionNameInfo object
+NewConnectV1ConnectorExpansionInfo instantiates a new ConnectV1ConnectorExpansionInfo object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewConnectV1ConnectorExpansionNameInfoWithDefaults
+### NewConnectV1ConnectorExpansionInfoWithDefaults
 
-`func NewConnectV1ConnectorExpansionNameInfoWithDefaults() *ConnectV1ConnectorExpansionNameInfo`
+`func NewConnectV1ConnectorExpansionInfoWithDefaults() *ConnectV1ConnectorExpansionInfo`
 
-NewConnectV1ConnectorExpansionNameInfoWithDefaults instantiates a new ConnectV1ConnectorExpansionNameInfo object
+NewConnectV1ConnectorExpansionInfoWithDefaults instantiates a new ConnectV1ConnectorExpansionInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetName
 
-`func (o *ConnectV1ConnectorExpansionNameInfo) GetName() string`
+`func (o *ConnectV1ConnectorExpansionInfo) GetName() string`
 
 GetName returns the Name field if non-nil, zero value otherwise.
 
 ### GetNameOk
 
-`func (o *ConnectV1ConnectorExpansionNameInfo) GetNameOk() (*string, bool)`
+`func (o *ConnectV1ConnectorExpansionInfo) GetNameOk() (*string, bool)`
 
 GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetName
 
-`func (o *ConnectV1ConnectorExpansionNameInfo) SetName(v string)`
+`func (o *ConnectV1ConnectorExpansionInfo) SetName(v string)`
 
 SetName sets Name field to given value.
 
 ### HasName
 
-`func (o *ConnectV1ConnectorExpansionNameInfo) HasName() bool`
+`func (o *ConnectV1ConnectorExpansionInfo) HasName() bool`
 
 HasName returns a boolean if a field has been set.
 
 ### GetConfig
 
-`func (o *ConnectV1ConnectorExpansionNameInfo) GetConfig() map[string]string`
+`func (o *ConnectV1ConnectorExpansionInfo) GetConfig() map[string]string`
 
 GetConfig returns the Config field if non-nil, zero value otherwise.
 
 ### GetConfigOk
 
-`func (o *ConnectV1ConnectorExpansionNameInfo) GetConfigOk() (*map[string]string, bool)`
+`func (o *ConnectV1ConnectorExpansionInfo) GetConfigOk() (*map[string]string, bool)`
 
 GetConfigOk returns a tuple with the Config field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetConfig
 
-`func (o *ConnectV1ConnectorExpansionNameInfo) SetConfig(v map[string]string)`
+`func (o *ConnectV1ConnectorExpansionInfo) SetConfig(v map[string]string)`
 
 SetConfig sets Config field to given value.
 
 ### HasConfig
 
-`func (o *ConnectV1ConnectorExpansionNameInfo) HasConfig() bool`
+`func (o *ConnectV1ConnectorExpansionInfo) HasConfig() bool`
 
 HasConfig returns a boolean if a field has been set.
 
