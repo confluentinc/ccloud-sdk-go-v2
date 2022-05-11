@@ -617,11 +617,23 @@ type ApiListKsqldbcmV1ClustersRequest struct {
 	ctx _context.Context
 	ApiService ClustersKsqldbcmV1Api
 	environment *string
+	pageSize *int32
+	pageToken *string
 }
 
 // Filter the results by exact match for environment.
 func (r ApiListKsqldbcmV1ClustersRequest) Environment(environment string) ApiListKsqldbcmV1ClustersRequest {
 	r.environment = &environment
+	return r
+}
+// A pagination size for collection requests.
+func (r ApiListKsqldbcmV1ClustersRequest) PageSize(pageSize int32) ApiListKsqldbcmV1ClustersRequest {
+	r.pageSize = &pageSize
+	return r
+}
+// An opaque pagination token for collection requests.
+func (r ApiListKsqldbcmV1ClustersRequest) PageToken(pageToken string) ApiListKsqldbcmV1ClustersRequest {
+	r.pageToken = &pageToken
 	return r
 }
 
@@ -673,6 +685,12 @@ func (a *ClustersKsqldbcmV1ApiService) ListKsqldbcmV1ClustersExecute(r ApiListKs
 	}
 
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
+	if r.pageSize != nil {
+		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
+	}
+	if r.pageToken != nil {
+		localVarQueryParams.Add("page_token", parameterToString(*r.pageToken, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

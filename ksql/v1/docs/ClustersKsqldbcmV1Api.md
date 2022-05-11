@@ -221,7 +221,7 @@ Name | Type | Description  | Notes
 
 ## ListKsqldbcmV1Clusters
 
-> KsqldbcmV1ClusterList ListKsqldbcmV1Clusters(ctx).Environment(environment).Execute()
+> KsqldbcmV1ClusterList ListKsqldbcmV1Clusters(ctx).Environment(environment).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Clusters
 
@@ -241,10 +241,12 @@ import (
 
 func main() {
     environment := "env-00000" // string | Filter the results by exact match for environment.
+    pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
+    pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClustersKsqldbcmV1Api.ListKsqldbcmV1Clusters(context.Background()).Environment(environment).Execute()
+    resp, r, err := api_client.ClustersKsqldbcmV1Api.ListKsqldbcmV1Clusters(context.Background()).Environment(environment).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ClustersKsqldbcmV1Api.ListKsqldbcmV1Clusters``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -266,6 +268,8 @@ Other parameters are passed through a pointer to a apiListKsqldbcmV1ClustersRequ
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **environment** | **string** | Filter the results by exact match for environment. | 
+ **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
+ **pageToken** | **string** | An opaque pagination token for collection requests. | 
 
 ### Return type
 
