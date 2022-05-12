@@ -236,57 +236,6 @@ paths:
         style: simple
       requestBody:
         $ref: '#/components/requestBodies/inline_object'
-        content:
-          application/json:
-            example:
-              name: MyGcsLogsBucketConnector
-              config:
-                connector.class: GcsSink
-                data.format: BYTES
-                flush.size: "1000"
-                gcs.bucket.name: APILogsBucket
-                gcs.credentials.config: '****************'
-                kafka.api.key: '****************'
-                kafka.api.secret: '****************'
-                name: MyGcsLogsBucketConnector
-                tasks.max: "2"
-                time.interval: DAILY
-                topics: APILogsTopic
-            schema:
-              properties:
-                name:
-                  description: Name of the connector to create.
-                  type: string
-                config:
-                  additionalProperties:
-                    description: Other configuration parameters for the connector.
-                      All values should be strings. See the connector's docs for details.
-                    type: string
-                  description: Configuration parameters for the connector. All values
-                    should be strings.
-                  properties:
-                    connector.class:
-                      description: The connector class name. E.g. BigQuerySink, GcsSink,
-                        etc.
-                      type: string
-                    name:
-                      description: Name or alias of the class (plugin) for this connector.
-                      type: string
-                    kafka.api.key:
-                      description: The kafka cluster api key.
-                      type: string
-                    kafka.api.secret:
-                      description: The kafka cluster api secret key.
-                      type: string
-                      x-redact: true
-                  required:
-                  - connector.class
-                  - kafka.api.key
-                  - kafka.api.secret
-                  - name
-                  type: object
-                  x-redact: true
-              type: object
       responses:
         "201":
           content:
@@ -3786,7 +3735,7 @@ components:
       properties:
         id:
           description: The ID of task.
-          type: string
+          type: integer
         state:
           description: The state of the task.
           type: string
