@@ -1,0 +1,3832 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: connect@confluent.io
+    name: Kafka Connect Team
+    url: https://confluent.slack.com/app_redirect?channel=connect-eng
+  description: REST API for managing connectors
+  title: Kafka Connect APIs
+  version: "1.0"
+  x-api-id: 8cfeac21-c0f5-49af-9efe-a18976183046
+  x-api-group: connect/v1
+  x-tag-group: Connect API (%s)
+servers:
+- description: Confluent Platform or Cloud Server
+  url: https://api.confluent.cloud
+tags:
+- description: |-
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+    API for managing connectors.
+
+    The API allows you to list, create, get, update and delete your connectors.
+
+    Connect metrics are available through [Metrics v2 API](https://api.telemetry.confluent.cloud/docs#tag/Version-2).
+
+    Related guide: [Confluent Cloud API and Fully-Managed Connectors](https://docs.confluent.io/cloud/current/connectors/connect-api-section.html).
+  name: Connectors (v1)
+- description: |-
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+    API for managing lifecycle of connectors. Operations currently supported are Pause and Resume.
+  name: Lifecycle (v1)
+- description: |-
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+    API for requesting the status of a connector or the tasks of a connector.
+  name: Status (v1)
+- description: |-
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+    API for managing connector plugins.
+  name: Plugins (v1)
+paths:
+  /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors:
+    get:
+      description: |-
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Retrieve a list of "names" of the active connectors. You can then make a [read request](#operation/readConnectv1Connector) for a specific connector by name.
+      operationId: listConnectv1Connectors
+      parameters:
+      - description: The unique identifier of the environment this resource belongs
+          to.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the Kafka cluster.
+        explode: false
+        in: path
+        name: kafka_cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+              - MyGcsLogsBucketConnector
+              - MyS3BucketConnector
+              - MyDatagenConnector
+              schema:
+                description: List of connector names
+                items:
+                  description: Connector name
+                  type: string
+                type: array
+          description: Connector.
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 401
+                  message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 404
+                  message: account not found
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Not Found
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 500
+                  message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Internal Server Error
+      security:
+      - api-key: []
+      summary: List of Connectors
+      tags:
+      - Connectors (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+    post:
+      description: |-
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Create a new connector. Returns the new connector information if successful.
+      operationId: createConnectv1Connector
+      parameters:
+      - description: The unique identifier of the environment this resource belongs
+          to.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the Kafka cluster.
+        explode: false
+        in: path
+        name: kafka_cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object'
+        content:
+          application/json:
+            example:
+              name: MyGcsLogsBucketConnector
+              config:
+                connector.class: GcsSink
+                data.format: BYTES
+                flush.size: "1000"
+                gcs.bucket.name: APILogsBucket
+                gcs.credentials.config: '****************'
+                kafka.api.key: '****************'
+                kafka.api.secret: '****************'
+                name: MyGcsLogsBucketConnector
+                tasks.max: "2"
+                time.interval: DAILY
+                topics: APILogsTopic
+            schema:
+              properties:
+                name:
+                  description: Name of the connector to create.
+                  type: string
+                config:
+                  additionalProperties:
+                    description: Other configuration parameters for the connector.
+                      All values should be strings. See the connector's docs for details.
+                    type: string
+                  description: Configuration parameters for the connector. All values
+                    should be strings.
+                  properties:
+                    connector.class:
+                      description: The connector class name. E.g. BigQuerySink, GcsSink,
+                        etc.
+                      type: string
+                    name:
+                      description: Name or alias of the class (plugin) for this connector.
+                      type: string
+                    kafka.api.key:
+                      description: The kafka cluster api key.
+                      type: string
+                    kafka.api.secret:
+                      description: The kafka cluster api secret key.
+                      type: string
+                      x-redact: true
+                  required:
+                  - connector.class
+                  - kafka.api.key
+                  - kafka.api.secret
+                  - name
+                  type: object
+                  x-redact: true
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                name: MyGcsLogsBucketConnector
+                config:
+                  cloud.environment: prod
+                  cloud.provider: aws
+                  connector.class: GcsSink
+                  data.format: BYTES
+                  flush.size: "1000"
+                  gcs.bucket.name: APILogsBucket
+                  gcs.credentials.config: '****************'
+                  kafka.api.key: '****************'
+                  kafka.api.secret: '****************'
+                  kafka.endpoint: SASL_SSL://pkc-xxxxx.us-west-2.aws.confluent.cloud:9092
+                  kafka.region: us-west-2
+                  name: MyGcsLogsBucketConnector
+                  tasks.max: "1"
+                  time.interval: DAILY
+                  topics: APILogsTopic
+                tasks:
+                - connector: MyGcsLogsBucketConnector
+                  task: 0
+                type: sink
+              schema:
+                $ref: '#/components/schemas/connect.v1.Connector'
+          description: Created
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 400
+                  message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 401
+                  message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Unauthorized
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Failed to find any class that implements Connector and which
+                  name matches io.confluent.connect.<connector-class>...
+              schema:
+                $ref: '#/components/schemas/inline_response_500'
+          description: Internal Server Error
+      security:
+      - api-key: []
+      summary: Create a Connector
+      tags:
+      - Connectors (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"name":"string","config":{"connector.class":"string","name":"string","kafka.api.key":"string","kafka.api.secret":"string","property1":"string","property2":"string"}}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"property1\":\"string\",\"property2\":\"string\"}}");
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors")
+            .post(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"name\\\":\\\"string\\\",\\\"config\\\
+          \":{\\\"connector.class\\\":\\\"string\\\",\\\"name\\\":\\\"string\\\",\\\
+          \"kafka.api.key\\\":\\\"string\\\",\\\"kafka.api.secret\\\":\\\"string\\\
+          \",\\\"property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\"}}\"\
+          )\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          payload = "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"property1\":\"string\",\"property2\":\"string\"}}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("POST", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            name: 'string',
+            config: {
+              'connector.class': 'string',
+              name: 'string',
+              'kafka.api.key': 'string',
+              'kafka.api.secret': 'string',
+              property1: 'string',
+              property2: 'string'
+            }
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"property1\":\"string\",\"property2\":\"string\"}}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors");
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"property1\":\"string\",\"property2\":\"string\"}}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+  /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info,status,id:
+    get:
+      description: |-
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Retrieve an object with the queried expansions of all connectors. Without `expand` query parameter, this list connector’s endpoint will return a [list of only the connector names](#operation/listConnectv1Connectors).
+      operationId: listConnectv1ConnectorsWithExpansions
+      parameters:
+      - description: The unique identifier of the environment this resource belongs
+          to.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the Kafka cluster.
+        explode: false
+        in: path
+        name: kafka_cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: |-
+          - id : Returns metadata of each connector such as id and id type.
+          - info : Returns metadata of each connector such as the configuration, task
+          information, and type of connector.
+          - status : Returns additional state information of each connector including their status and tasks.
+        explode: true
+        in: query
+        name: expand
+        required: false
+        schema:
+          enum:
+          - id
+          - info
+          - status
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                MyGcsLogsBucketConnector:
+                  id:
+                    id: lcc-xxxxx
+                    id_type: ID
+                  info:
+                    name: MyGcsLogsBucketConnector
+                    config:
+                      cloud.environment: prod
+                      cloud.provider: aws
+                      connector.class: GcsSink
+                      data.format: BYTES
+                      flush.size: "1000"
+                      gcs.bucket.name: APILogsBucket
+                      gcs.credentials.config: '****************'
+                      kafka.api.key: '****************'
+                      kafka.api.secret: '****************'
+                      kafka.endpoint: SASL_SSL://pkc-xxxxx.us-west-2.aws.confluent.cloud:9092
+                      kafka.region: us-west-2
+                      name: MyGcsLogsBucketConnector
+                      tasks.max: "1"
+                      time.interval: DAILY
+                      topics: APILogsTopic
+                      tasks:
+                      - connector: MyGcsLogsBucketConnector
+                        task: 0
+                      type: sink
+                  status:
+                    name: MyGcsLogsBucketConnector
+                    connector:
+                      state: PROVISIONING
+                      worker_id: MyGcsLogsBucketConnector
+                      trace: ""
+                    tasks: []
+                    type: sink
+                MyS3BucketConnector:
+                  id:
+                    id: lcc-xxxxx
+                    id_type: ID
+                  info:
+                    name: MyS3BucketConnector
+                    config:
+                      cloud.environment: prod
+                      cloud.provider: aws
+                      connector.class: S3Sink
+                      data.format: BYTES
+                      flush.size: "1000"
+                      s3.bucket: APILogsBucket
+                      aws.access.key.id: '************'
+                      aws.secret.access.key: '**********'
+                      kafka.api.key: '****************'
+                      kafka.api.secret: '****************'
+                      kafka.endpoint: SASL_SSL://pkc-xxxxx.us-west-2.aws.confluent.cloud:9092
+                      kafka.region: us-west-2
+                      name: MyS3BucketConnector
+                      tasks.max: "1"
+                      time.interval: DAILY
+                      topics: APILogsTopic
+                      tasks:
+                      - connector: MyS3BucketConnector
+                        task: 0
+                      type: source
+                  status:
+                    name: MyS3BucketConnector
+                    connector:
+                      state: FAILED
+                      worker_id: MyS3BucketConnector
+                      trace: |
+                        There were some errors with your configuration:
+                        topics: Provided Kafka ApiKey is invalid
+                        kafka.api.secret: Provided Kafka ApiKey is invalid
+                    tasks: []
+                    type: sink
+                MyDatagenConnector:
+                  id:
+                    id: lcc-xxxxx
+                    id_type: ID
+                  info:
+                    name: MyDatagenConnector
+                    config:
+                      cloud.environment: prod
+                      cloud.provider: aws
+                      connector.class: DatagenSource
+                      data.format: BYTES
+                      flush.size: "1000"
+                      quickstart: ORDERS
+                      kafka.api.key: '****************'
+                      kafka.api.secret: '****************'
+                      kafka.endpoint: SASL_SSL://pkc-xxxxx.us-west-2.aws.confluent.cloud:9092
+                      kafka.region: us-west-2
+                      name: MyDatagenConnector
+                      tasks.max: "1"
+                      time.interval: DAILY
+                      topics: APILogsTopic
+                      tasks:
+                      - connector: MyDatagenConnector
+                        task: 0
+                      type: source
+                  status:
+                    name: MyDatagenConnector
+                    connector:
+                      state: RUNNING
+                      worker_id: MyDatagenConnector
+                      trace: ""
+                    tasks:
+                    - id: 0
+                      msg: ""
+                      state: RUNNING
+                      worker_id: MyDatagenConnector
+                    type: source
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorExpansionMap'
+          description: Connector.
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 401
+                  message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 404
+                  message: account not found
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Not Found
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 500
+                  message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Internal Server Error
+      security:
+      - api-key: []
+      summary: List of Connectors with Expansions
+      tags:
+      - Connectors (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info%2Cstatus%2Cid' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info%2Cstatus%2Cid")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info%2Cstatus%2Cid\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info%2Cstatus%2Cid", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info%2Cstatus%2Cid",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info%2Cstatus%2Cid");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info%2Cstatus%2Cid");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+  /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config:
+    get:
+      description: |-
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Get the configuration for the connector.
+      operationId: getConnectv1ConnectorConfig
+      parameters:
+      - description: The unique name of the connector.
+        explode: false
+        in: path
+        name: connector_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier of the environment this resource belongs
+          to.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the Kafka cluster.
+        explode: false
+        in: path
+        name: kafka_cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                cloud.environment: prod
+                cloud.provider: aws
+                connector.class: GcsSink
+                data.format: BYTES
+                flush.size: "1000"
+                gcs.bucket.name: APILogsBucket
+                gcs.credentials.config: '****************'
+                kafka.api.key: '****************'
+                kafka.api.secret: '****************'
+                kafka.endpoint: SASL_SSL://pkc-xxxxx.us-west-2.aws.confluent.cloud:9092
+                kafka.region: us-west-2
+                name: MyGcsLogsBucketConnector
+                tasks.max: "2"
+                time.interval: DAILY
+                topics: APILogsTopic
+              schema:
+                additionalProperties:
+                  description: Other configuration parameters for the connector. See
+                    the connector's docs for the list of options.
+                  type: string
+                description: Configuration parameters for the connector.
+                properties:
+                  cloud.environment:
+                    description: The cloud environment type.
+                    enum:
+                    - private
+                    - devel
+                    - stag
+                    - prod
+                    type: string
+                  cloud.provider:
+                    description: The cloud service provider, e.g. aws, azure, etc.
+                    type: string
+                    x-extensible-enum:
+                    - aws
+                    - azure
+                    - gcp
+                  connector.class:
+                    description: The connector class name. E.g. BigQuerySink, GcsSink,
+                      etc.
+                    type: string
+                  name:
+                    description: Name or alias of the class (plugin) for this connector.
+                    type: string
+                  kafka.endpoint:
+                    description: The kafka cluster endpoint.
+                    type: string
+                  kafka.region:
+                    description: The kafka cluster region.
+                    type: string
+                  kafka.api.key:
+                    description: The kafka cluster api key.
+                    type: string
+                  kafka.api.secret:
+                    description: The kafka cluster api secret key.
+                    type: string
+                    x-redact: true
+                required:
+                - cloud.environment
+                - cloud.provider
+                - connector.class
+                - kafka.api.key
+                - kafka.api.secret
+                - kafka.endpoint
+                - kafka.region
+                - name
+                type: object
+          description: Connector.
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 401
+                  message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 404
+                  message: account not found
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Not Found
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 500
+                  message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Internal Server Error
+      security:
+      - api-key: []
+      summary: Read a Connector Configuration
+      tags:
+      - Connectors (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+    put:
+      description: Create a new connector using the given configuration, or update
+        the configuration for an existing connector. Returns information about the
+        connector after the change has been made.
+      operationId: createOrUpdateConnectv1ConnectorConfig
+      parameters:
+      - description: The unique name of the connector.
+        explode: false
+        in: path
+        name: connector_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier of the environment this resource belongs
+          to.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the Kafka cluster.
+        explode: false
+        in: path
+        name: kafka_cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              connector.class: GcsSink
+              data.format: BYTES
+              flush.size: "1000"
+              gcs.bucket.name: APILogsBucket
+              gcs.credentials.config: '****************'
+              kafka.api.key: '****************'
+              kafka.api.secret: '****************'
+              name: MyGcsLogsBucketConnector
+              tasks.max: "2"
+              time.interval: DAILY
+              topics: APILogsTopic
+            schema:
+              additionalProperties:
+                description: Other configuration parameters for the connector. All
+                  values should be strings. See the connector's docs for details.
+                type: string
+              description: Configuration parameters for the connector.
+              properties:
+                connector.class:
+                  description: The connector class name. E.g. BigQuerySink, GcsSink,
+                    etc.
+                  type: string
+                name:
+                  description: Name or alias of the class (plugin) for this connector.
+                  type: string
+                kafka.api.key:
+                  description: The kafka cluster api key.
+                  type: string
+                kafka.api.secret:
+                  description: The kafka cluster api secret key.
+                  type: string
+                  x-redact: true
+              required:
+              - connector.class
+              - kafka.api.key
+              - kafka.api.secret
+              - name
+              type: object
+        description: Configuration parameters for the connector. All values should
+          be strings.
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                name: MyGcsLogsBucketConnector
+                config:
+                  cloud.environment: prod
+                  cloud.provider: aws
+                  connector.class: GcsSink
+                  data.format: BYTES
+                  flush.size: "1000"
+                  gcs.bucket.name: APILogsBucket
+                  gcs.credentials.config: '****************'
+                  kafka.api.key: '****************'
+                  kafka.api.secret: '****************'
+                  kafka.endpoint: SASL_SSL://pkc-xxxxx.us-west-2.aws.confluent.cloud:9092
+                  kafka.region: us-west-2
+                  name: MyGcsLogsBucketConnector
+                  tasks.max: "2"
+                  time.interval: DAILY
+                  topics: APILogsTopic
+                tasks:
+                - connector: MyGcsLogsBucketConnector
+                  task: 0
+                - connector: MyGcsLogsBucketConnector
+                  task: 1
+                type: sink
+              schema:
+                $ref: '#/components/schemas/connect.v1.Connector'
+          description: Created
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 400
+                  message: Bad Request
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 401
+                  message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 404
+                  message: account not found
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Not Found
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Failed to find any class that implements Connector and which
+                  name matches io.confluent.connect.<connector-class>...
+              schema:
+                $ref: '#/components/schemas/inline_response_500'
+          description: Internal Server Error
+      security:
+      - api-key: []
+      summary: Create or Update a Connector Configuration
+      tags:
+      - Connectors (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request PUT \
+            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"connector.class":"string","name":"string","kafka.api.key":"string","kafka.api.secret":"string","property1":"string","property2":"string"}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"property1\":\"string\",\"property2\":\"string\"}");
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config")
+            .put(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"connector.class\\\":\\\"string\\\
+          \",\\\"name\\\":\\\"string\\\",\\\"kafka.api.key\\\":\\\"string\\\",\\\"\
+          kafka.api.secret\\\":\\\"string\\\",\\\"property1\\\":\\\"string\\\",\\\"\
+          property2\\\":\\\"string\\\"}\")\n\n\treq, _ := http.NewRequest(\"PUT\"\
+          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          payload = "{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"property1\":\"string\",\"property2\":\"string\"}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("PUT", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "PUT",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            'connector.class': 'string',
+            name: 'string',
+            'kafka.api.key': 'string',
+            'kafka.api.secret': 'string',
+            property1: 'string',
+            property2: 'string'
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PUT");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"property1\":\"string\",\"property2\":\"string\"}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config");
+          var request = new RestRequest(Method.PUT);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"property1\":\"string\",\"property2\":\"string\"}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+  /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}:
+    delete:
+      description: |-
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Delete a connector. Halts all tasks and deletes the connector configuration.
+      operationId: deleteConnectv1Connector
+      parameters:
+      - description: The unique name of the connector.
+        explode: false
+        in: path
+        name: connector_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier of the environment this resource belongs
+          to.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the Kafka cluster.
+        explode: false
+        in: path
+        name: kafka_cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                error: null
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+          description: OK
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 401
+                  message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 404
+                  message: resource not found
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Not Found
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 500
+                  message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Internal Server Error
+      security:
+      - api-key: []
+      summary: Delete a Connector
+      tags:
+      - Connectors (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request DELETE \
+            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}")
+            .delete(null)
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}\"\
+          \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("DELETE", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "DELETE",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}");
+          var request = new RestRequest(Method.DELETE);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+    get:
+      description: |-
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Get information about the connector.
+      operationId: readConnectv1Connector
+      parameters:
+      - description: The unique name of the connector.
+        explode: false
+        in: path
+        name: connector_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier of the environment this resource belongs
+          to.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the Kafka cluster.
+        explode: false
+        in: path
+        name: kafka_cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                name: MyGcsLogsBucketConnector
+                config:
+                  cloud.environment: prod
+                  cloud.provider: aws
+                  connector.class: GcsSink
+                  data.format: BYTES
+                  flush.size: "1000"
+                  gcs.bucket.name: APILogsBucket
+                  gcs.credentials.config: '****************'
+                  kafka.api.key: '****************'
+                  kafka.api.secret: '****************'
+                  kafka.endpoint: SASL_SSL://pkc-xxxxx.us-west-2.aws.confluent.cloud:9092
+                  kafka.region: us-west-2
+                  name: MyGcsLogsBucketConnector
+                  tasks.max: "1"
+                  time.interval: DAILY
+                  topics: APILogsTopic
+                tasks:
+                - connector: MyGcsLogsBucketConnector
+                  task: 0
+                type: sink
+              schema:
+                $ref: '#/components/schemas/connect.v1.Connector'
+          description: Connector.
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 401
+                  message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 404
+                  message: account not found
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Not Found
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 500
+                  message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Internal Server Error
+      security:
+      - api-key: []
+      summary: Read a Connector
+      tags:
+      - Connectors (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+  /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/pause:
+    put:
+      description: |-
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Pause the connector and its tasks. Stops message processing until the connector is resumed. This call is asynchronous and the tasks will not transition to PAUSED state at the same time.
+      operationId: pauseConnectv1Connector
+      parameters:
+      - description: The unique name of the connector.
+        explode: false
+        in: path
+        name: connector_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier of the environment this resource belongs
+          to.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the Kafka cluster.
+        explode: false
+        in: path
+        name: kafka_cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "202":
+          description: Accepted
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 401
+                  message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 404
+                  message: resource not found
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Not Found
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 500
+                  message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Internal Server Error
+      security:
+      - api-key: []
+      summary: Pause a Connector
+      tags:
+      - Lifecycle (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request PUT \
+            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/pause' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/pause")
+            .put(null)
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/pause\"\
+          \n\n\treq, _ := http.NewRequest(\"PUT\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("PUT", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/pause", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "PUT",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/pause",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PUT");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/pause");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/pause");
+          var request = new RestRequest(Method.PUT);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+  /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/resume:
+    put:
+      description: |-
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Resume a paused connector or do nothing if the connector is not paused. This call is asynchronous and the tasks will not transition to RUNNING state at the same time.
+      operationId: resumeConnectv1Connector
+      parameters:
+      - description: The unique name of the connector.
+        explode: false
+        in: path
+        name: connector_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier of the environment this resource belongs
+          to.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the Kafka cluster.
+        explode: false
+        in: path
+        name: kafka_cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "202":
+          description: Accepted
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 401
+                  message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 404
+                  message: resource not found
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Not Found
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 500
+                  message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Internal Server Error
+      security:
+      - api-key: []
+      summary: Resume a Connector
+      tags:
+      - Lifecycle (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request PUT \
+            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/resume' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/resume")
+            .put(null)
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/resume\"\
+          \n\n\treq, _ := http.NewRequest(\"PUT\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("PUT", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/resume", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "PUT",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/resume",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PUT");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/resume");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/resume");
+          var request = new RestRequest(Method.PUT);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+  /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/status:
+    get:
+      description: Get current status of the connector. This includes whether it is
+        running, failed, or paused. Also includes which worker it is assigned to,
+        error information if it has failed, and the state of all its tasks.
+      operationId: readConnectv1ConnectorStatus
+      parameters:
+      - description: The unique name of the connector.
+        explode: false
+        in: path
+        name: connector_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier of the environment this resource belongs
+          to.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the Kafka cluster.
+        explode: false
+        in: path
+        name: kafka_cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                name: MyGcsLogsBucketConnector
+                connector:
+                  state: PROVISIONING
+                  worker_id: MyGcsLogsBucketConnector
+                  trace: ""
+                tasks: []
+                type: source
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+          description: Connector.
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 401
+                  message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 404
+                  message: account not found
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Not Found
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 500
+                  message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Internal Server Error
+      security:
+      - api-key: []
+      summary: Read a Connector Status
+      tags:
+      - Status (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/status' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/status")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/status\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/status", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/status",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/status");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/status");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+  /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/tasks:
+    get:
+      description: |-
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Get a list of tasks currently running for the connector.
+      operationId: listConnectv1ConnectorTasks
+      parameters:
+      - description: The unique name of the connector.
+        explode: false
+        in: path
+        name: connector_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier of the environment this resource belongs
+          to.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the Kafka cluster.
+        explode: false
+        in: path
+        name: kafka_cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+              - id:
+                  connector: MyGcsLogsBucketConnector
+                  task: 2
+                config:
+                  cloud.environment: prod
+                  cloud.provider: aws
+                  connector.class: GcsSink
+                  data.format: BYTES
+                  flush.size: "1000"
+                  gcs.bucket.name: APILogsBucket
+                  gcs.credentials.config: '****************'
+                  kafka.api.key: '****************'
+                  kafka.api.secret: '****************'
+                  kafka.endpoint: SASL_SSL://pkc-xxxxx.us-west-2.aws.confluent.cloud:9092
+                  kafka.region: us-west-2
+                  name: MyGcsLogsBucketConnector
+                  tasks.max: "2"
+                  time.interval: DAILY
+                  topics: APILogsTopic
+              schema:
+                $ref: '#/components/schemas/connect.v1.Connectors'
+          description: Connector Task.
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 401
+                  message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 404
+                  message: account not found
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Not Found
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 500
+                  message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Internal Server Error
+      security:
+      - api-key: []
+      summary: List of Connector Tasks
+      tags:
+      - Status (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/tasks' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/tasks")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/tasks\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/tasks", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/tasks",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/tasks");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/tasks");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+  /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins:
+    get:
+      description: |-
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Return a list of connector plugins installed in the Kafka Connect cluster.
+      operationId: listConnectv1ConnectorPlugins
+      parameters:
+      - description: The unique identifier of the environment this resource belongs
+          to.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the Kafka cluster.
+        explode: false
+        in: path
+        name: kafka_cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+              - class: BigQuerySink
+                type: sink
+              - class: KinesisSource
+                type: source
+                version: 0.1.0
+              - class: PostgresSource
+                type: source
+                version: 0.1.0
+              - class: S3_SINK
+                type: sink
+              - class: GcsSink
+                type: sink
+                version: 0.2.0
+              schema:
+                items:
+                  $ref: '#/components/schemas/inline_response_200_2'
+                type: array
+          description: Connector Plugin.
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 401
+                  message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 404
+                  message: resource not found
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Not Found
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 500
+                  message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Internal Server Error
+      security:
+      - api-key: []
+      summary: List of Connector Plugins
+      tags:
+      - Plugins (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+  /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate:
+    put:
+      description: |-
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Validate the provided configuration values against the configuration definition. This API performs per config validation and returns suggested values and validation error messages.
+      operationId: validateConnectv1ConnectorPlugin
+      parameters:
+      - description: The unique name of the connector plugin.
+        explode: false
+        in: path
+        name: plugin_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier of the environment this resource belongs
+          to.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the Kafka cluster.
+        explode: false
+        in: path
+        name: kafka_cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              cloud.environment: prod
+              cloud.provider: aws
+              connector.class: GcsSink
+              data.format: BYTES
+              flush.size: "500"
+              gcs.bucket.name: APILogsBucket
+              gcs.credentials.config: '****************'
+              kafka.api.key: '****************'
+              kafka.api.secret: '****************'
+              kafka.endpoint: SASL_SSL://pkc-xxxxx.us-west-2.aws.confluent.cloud:9092
+              kafka.region: us-west-2
+              name: MyGcsLogsBucketConnector
+              tasks.max: "2"
+              time.interval: DAILY
+              topics: APILogsTopic
+            schema:
+              additionalProperties:
+                description: Other configuration parameters for the connector. All
+                  values should be strings. See the connector's docs for the list
+                  of options.
+                type: string
+              description: Configuration parameters for the connector. All values
+                should be strings.
+              type: object
+        description: Configuration parameters for the connector. All values should
+          be strings.
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                name: io.confluent.connect.gcs.GcsSinkConnector
+                groups:
+                - Organize my data by...
+                - Which topics do you want to get data from?
+                - Messages
+                - How should we connect to your data?
+                - Google Cloud Storage details
+                - Kafka Cluster credentials
+                - Number of tasks for this connector
+                error_count: 1
+                configs:
+                - definition:
+                    name: name
+                    type: STRING
+                    required: true
+                    default_value: ""
+                    importance: HIGH
+                    documentation: Sets a name for your connector.
+                    group: How should we connect to your data?
+                    width: NONE
+                    display_name: Connector name
+                    dependents: []
+                    order: 2
+                    alias: ""
+                  value:
+                    name: name
+                    value: '{{.logicalClusterId}}'
+                    recommended_values: []
+                    errors: []
+                    visible: true
+                  metadata: {}
+                - definition:
+                    name: connector.class
+                    type: STRING
+                    required: true
+                    default_value: ""
+                    importance: HIGH
+                    documentation: ""
+                    group: How should we connect to your data?
+                    width: NONE
+                    display_name: Connector class
+                    dependents: []
+                    order: 1
+                    alias: ""
+                  value:
+                    name: connector.class
+                    value: io.confluent.connect.gcs.GcsSinkConnector
+                    recommended_values: []
+                    errors: []
+                    visible: true
+                  metadata: {}
+                - definition:
+                    name: kafka.api.key
+                    type: PASSWORD
+                    required: true
+                    default_value: ""
+                    importance: HIGH
+                    documentation: ""
+                    group: Kafka Cluster credentials
+                    width: NONE
+                    display_name: Kafka API Key
+                    dependents: []
+                    order: 1
+                    alias: ""
+                  value:
+                    name: kafka.api.key
+                    value: ""
+                    recommended_values: []
+                    errors: []
+                    visible: true
+                  metadata: {}
+                - definition:
+                    name: kafka.api.secret
+                    type: PASSWORD
+                    required: true
+                    default_value: ""
+                    importance: HIGH
+                    documentation: ""
+                    group: Kafka Cluster credentials
+                    width: NONE
+                    display_name: Kafka API Secret
+                    dependents:
+                    - kafka.api.key
+                    order: 2
+                    alias: ""
+                  value:
+                    name: kafka.api.secret
+                    value: ""
+                    recommended_values: []
+                    errors: []
+                    visible: true
+                  metadata: {}
+                - definition:
+                    name: topics
+                    type: LIST
+                    required: true
+                    default_value: ""
+                    importance: HIGH
+                    documentation: Identifies the topic name or a comma-separated
+                      list of topic names.
+                    group: Which topics do you want to get data from?
+                    width: NONE
+                    display_name: Topic names
+                    dependents: []
+                    order: 1
+                    alias: ""
+                  value:
+                    name: topics
+                    value: test1
+                    recommended_values: []
+                    errors: []
+                    visible: true
+                  metadata: {}
+                - definition:
+                    name: data.format
+                    type: STRING
+                    required: true
+                    default_value: ""
+                    importance: HIGH
+                    documentation: Sets the input/output message format. Valid entries
+                      are AVRO, JSON, or BYTES
+                    group: Messages
+                    width: NONE
+                    display_name: Message format
+                    dependents: []
+                    order: 1
+                    alias: ""
+                  value:
+                    name: data.format
+                    value: BYTES
+                    recommended_values:
+                    - BYTES
+                    - JSON
+                    - AVRO
+                    errors: []
+                    visible: true
+                  metadata: {}
+                - definition:
+                    name: gcs.credentials.config
+                    type: PASSWORD
+                    required: true
+                    default_value: ""
+                    importance: HIGH
+                    documentation: Contents of the downloaded GCP service account
+                      JSON file.
+                    group: Google Cloud Storage details
+                    width: NONE
+                    display_name: Google Cloud Storage credentials.
+                    dependents: []
+                    order: 1
+                    alias: ""
+                  value:
+                    name: gcs.credentials.config
+                    value: ""
+                    recommended_values: []
+                    errors: []
+                    visible: true
+                  metadata: {}
+                - definition:
+                    name: gcs.bucket.name
+                    type: STRING
+                    required: true
+                    default_value: ""
+                    importance: HIGH
+                    documentation: A Google Cloud Storage bucket must be in the same
+                      region as your Confluent Cloud cluster.
+                    group: Google Cloud Storage details
+                    width: NONE
+                    display_name: Bucket name.
+                    dependents: []
+                    order: 2
+                    alias: ""
+                  value:
+                    name: gcs.bucket.name
+                    value: gmagare
+                    recommended_values: []
+                    errors: []
+                    visible: true
+                  metadata: {}
+                - definition:
+                    name: time.interval
+                    type: STRING
+                    required: true
+                    default_value: ""
+                    importance: HIGH
+                    documentation: Sets how your messages grouped in storage. Valid
+                      entries are DAILY or HOURLY.
+                    group: Organize my data by...
+                    width: NONE
+                    display_name: Time interval
+                    dependents: []
+                    order: 1
+                    alias: ""
+                  value:
+                    name: time.interval
+                    value: DAILY
+                    recommended_values:
+                    - DAILY
+                    - HOURLY
+                    errors: []
+                    visible: true
+                  metadata: {}
+                - definition:
+                    name: tasks.max
+                    type: INT
+                    required: true
+                    default_value: ""
+                    importance: HIGH
+                    documentation: ""
+                    group: Number of tasks for this connector
+                    width: NONE
+                    display_name: Tasks
+                    dependents: []
+                    order: 1
+                    alias: ""
+                  value:
+                    name: tasks.max
+                    value: "1"
+                    recommended_values: []
+                    errors: []
+                    visible: true
+                  metadata: {}
+                - definition:
+                    name: flush.size
+                    type: INT
+                    required: true
+                    default_value: "1000"
+                    importance: HIGH
+                    documentation: This value defaults to 1000. For example, if you
+                      use the default setting of 1000 and your topic has six partitions,
+                      files start to be created in the storage bucket after more than
+                      1000 records exist in each partition. Note that the default
+                      value of 1000 can be increased if needed.
+                    group: Organize my data by...
+                    width: NONE
+                    display_name: Flush size
+                    dependents: []
+                    order: 2
+                    alias: ""
+                  value:
+                    name: flush.size
+                    value: "1"
+                    recommended_values: []
+                    errors:
+                    - '"flush.size" should be greater than or equal to 1000'
+                    visible: true
+                  metadata: {}
+              schema:
+                $ref: '#/components/schemas/inline_response_200_3'
+          description: Connector Plugin.
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 401
+                  message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 404
+                  message: resource not found
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Not Found
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 500
+                  message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Internal Server Error
+      security:
+      - api-key: []
+      summary: Validate a Connector Plugin
+      tags:
+      - Plugins (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request PUT \
+            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"property1":"string","property2":"string"}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"property1\":\"string\",\"property2\":\"string\"}");
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate")
+            .put(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"property1\\\":\\\"string\\\",\\\
+          \"property2\\\":\\\"string\\\"}\")\n\n\treq, _ := http.NewRequest(\"PUT\"\
+          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          payload = "{\"property1\":\"string\",\"property2\":\"string\"}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("PUT", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "PUT",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({property1: 'string', property2: 'string'}));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PUT");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"property1\":\"string\",\"property2\":\"string\"}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate");
+          var request = new RestRequest(Method.PUT);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"property1\":\"string\",\"property2\":\"string\"}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+components:
+  requestBodies:
+    inline_object:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_object'
+  responses:
+    connect.v1.UnauthenticatedError:
+      content:
+        application/json:
+          example:
+            error:
+              code: 401
+              message: Unauthorized
+          schema:
+            $ref: '#/components/schemas/connect.v1.ConnectorError'
+      description: Unauthorized
+    connect.v1.AccountNotFoundError:
+      content:
+        application/json:
+          example:
+            error:
+              code: 404
+              message: account not found
+          schema:
+            $ref: '#/components/schemas/connect.v1.ConnectorError'
+      description: Not Found
+    connect.v1.ResourceNotFoundError:
+      content:
+        application/json:
+          example:
+            error:
+              code: 404
+              message: resource not found
+          schema:
+            $ref: '#/components/schemas/connect.v1.ConnectorError'
+      description: Not Found
+    connect.v1.DefaultSystemError:
+      content:
+        application/json:
+          example:
+            error:
+              code: 500
+              message: Oops, something went wrong
+          schema:
+            $ref: '#/components/schemas/connect.v1.ConnectorError'
+      description: Internal Server Error
+    connect.v1.BadRequestError:
+      content:
+        application/json:
+          example:
+            error:
+              code: 400
+              message: Bad Request
+          schema:
+            $ref: '#/components/schemas/connect.v1.ConnectorError'
+      description: Bad Request
+    RateLimitError:
+      description: Rate Limit Exceeded
+      headers:
+        Retry-After:
+          description: The number of seconds to wait until the rate limit window resets.
+            Only sent when the rate limit is reached.
+          explode: false
+          schema:
+            type: integer
+          style: simple
+    connect.v1.OK:
+      content:
+        application/json:
+          example:
+            error: null
+          schema:
+            $ref: '#/components/schemas/inline_response_200'
+      description: OK
+  schemas:
+    connect.v1.ConnectorError:
+      properties:
+        error:
+          $ref: '#/components/schemas/connect_v1_ConnectorError_error'
+      type: object
+    connect.v1.Connector:
+      example:
+        name: name
+        type: sink
+        config:
+          key: config
+        tasks:
+        - task: 0
+          connector: connector
+        - task: 0
+          connector: connector
+      properties:
+        name:
+          description: Name of the connector
+          type: string
+        config:
+          additionalProperties:
+            type: string
+          description: |-
+            Configuration parameters for the connector. These configurations
+            are the minimum set of key-value pairs (KVP) which can be used to
+            define how the connector connects Kafka to the external system.
+            Some of these KVPs are common to all the connectors, such as
+            connection parameters to Kafka, connector metadata, etc. The list
+            of common connector configurations is as follows
+
+            - cloud.environment
+            - cloud.provider
+            - connector.class
+            - kafka.api.key
+            - kafka.api.secret
+            - kafka.endpoint
+            - kafka.region
+            - name
+
+            A specific connector such as `GcsSink` would have additional
+            parameters such as `gcs.bucket.name`, `flush.size`, etc.
+          properties:
+            cloud.environment:
+              description: The cloud environment type.
+              enum:
+              - private
+              - devel
+              - stag
+              - prod
+              type: string
+            cloud.provider:
+              description: The cloud service provider, e.g. aws, azure, etc.
+              type: string
+              x-extensible-enum:
+              - aws
+              - azure
+              - gcp
+            connector.class:
+              description: The connector class name. E.g. BigQuerySink, GcsSink, etc.
+              type: string
+            name:
+              description: Name or alias of the class (plugin) for this connector.
+              type: string
+            kafka.endpoint:
+              description: The kafka cluster endpoint.
+              type: string
+            kafka.region:
+              description: The kafka cluster region.
+              type: string
+            kafka.api.key:
+              description: The kafka cluster api key.
+              type: string
+            kafka.api.secret:
+              description: The kafka cluster api secret key.
+              type: string
+              x-redact: true
+          required:
+          - cloud.environment
+          - cloud.provider
+          - connector.class
+          - kafka.api.key
+          - kafka.api.secret
+          - kafka.endpoint
+          - kafka.region
+          - name
+          type: object
+        tasks:
+          description: List of active tasks generated by the connector
+          items:
+            $ref: '#/components/schemas/connect_v1_Connector_tasks'
+          type: array
+        type:
+          description: Type of connector, sink or source
+          enum:
+          - sink
+          - source
+          type: string
+      required:
+      - config
+      - name
+      type: object
+    connect.v1.Connectors:
+      description: List of active task configs that have been created by the connector
+      items:
+        properties:
+          id:
+            description: The ID of task.
+            properties:
+              connector:
+                description: The name of the connector the task belongs to.
+                type: string
+              task:
+                description: Task ID within the connector.
+                type: integer
+            type: object
+          config:
+            additionalProperties:
+              type: string
+            description: |-
+              Configuration parameters for the connector. These configurations
+              are the minimum set of key-value pairs (KVP) which can be used to
+              define how the connector connects Kafka to the external system.
+              Some of these KVPs are common to all the connectors, such as
+              connection parameters to Kafka, connector metadata, etc. The list
+              of common connector configurations is as follows
+
+                - cloud.environment
+                - cloud.provider
+                - connector.class
+                - kafka.api.key
+                - kafka.api.secret
+                - kafka.endpoint
+                - kafka.region
+                - name
+
+              A specific connector such as `GcsSink` would have additional
+              parameters such as `gcs.bucket.name`, `flush.size`, etc.
+            properties:
+              cloud.environment:
+                description: The cloud environment type.
+                enum:
+                - private
+                - devel
+                - stag
+                - prod
+                type: string
+              cloud.provider:
+                description: The cloud service provider, e.g. aws, azure, etc.
+                type: string
+                x-extensible-enum:
+                - aws
+                - azure
+                - gcp
+              connector.class:
+                description: The connector class name. E.g. BigQuerySink, GcsSink,
+                  etc.
+                type: string
+              name:
+                description: Name or alias of the class (plugin) for this connector.
+                type: string
+              kafka.endpoint:
+                description: The kafka cluster endpoint.
+                type: string
+              kafka.region:
+                description: The kafka cluster region.
+                type: string
+              kafka.api.key:
+                description: The kafka cluster api key.
+                type: string
+              kafka.api.secret:
+                description: The kafka cluster api secret key.
+                type: string
+                x-redact: true
+            required:
+            - cloud.environment
+            - cloud.provider
+            - connector.class
+            - kafka.api.key
+            - kafka.api.secret
+            - kafka.endpoint
+            - kafka.region
+            - name
+            type: object
+        type: object
+      type: array
+    connect.v1.ConnectorExpansionMap:
+      additionalProperties:
+        $ref: '#/components/schemas/connect.v1.ConnectorExpansion'
+      type: object
+    connect.v1.ConnectorExpansion:
+      description: List of active connectors with the expansions requested.
+      properties:
+        id:
+          $ref: '#/components/schemas/connect_v1_ConnectorExpansion_id'
+        info:
+          $ref: '#/components/schemas/connect_v1_ConnectorExpansion_info'
+        status:
+          $ref: '#/components/schemas/connect_v1_ConnectorExpansion_status'
+      type: object
+    inline_object:
+      properties:
+        name:
+          description: Name of the connector to create.
+          type: string
+        config:
+          additionalProperties:
+            description: Other configuration parameters for the connector. All values
+              should be strings. See the connector's docs for details.
+            type: string
+          description: Configuration parameters for the connector. All values should
+            be strings.
+          properties:
+            connector.class:
+              description: The connector class name. E.g. BigQuerySink, GcsSink, etc.
+              type: string
+            name:
+              description: Name or alias of the class (plugin) for this connector.
+              type: string
+            kafka.api.key:
+              description: The kafka cluster api key.
+              type: string
+            kafka.api.secret:
+              description: The kafka cluster api secret key.
+              type: string
+              x-redact: true
+          required:
+          - connector.class
+          - kafka.api.key
+          - kafka.api.secret
+          - name
+          type: object
+          x-redact: true
+      type: object
+    inline_response_400:
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      type: object
+    inline_response_500:
+      properties:
+        error_code:
+          type: integer
+        message:
+          type: string
+      type: object
+    inline_response_200:
+      example:
+        error: '{}'
+      properties:
+        error:
+          nullable: true
+          type: object
+      type: object
+    inline_response_200_1_connector:
+      description: The map containing connector status.
+      example:
+        trace: trace
+        state: NONE
+        worker_id: worker_id
+      properties:
+        state:
+          description: The state of the connector.
+          enum:
+          - NONE
+          - PROVISIONING
+          - RUNNING
+          - DEGRADED
+          - FAILED
+          - PAUSED
+          - DELETED
+          type: string
+        worker_id:
+          description: The worker ID of the connector.
+          type: string
+        trace:
+          description: The exception name in case of error.
+          type: string
+      required:
+      - state
+      - worker_id
+      type: object
+    inline_response_200_1_tasks:
+      example:
+        msg: msg
+        id: 0
+        state: state
+        worker_id: worker_id
+      properties:
+        id:
+          description: The ID of task.
+          type: integer
+        state:
+          description: The state of the task.
+          type: string
+        worker_id:
+          description: The worker ID of the task.
+          type: string
+        msg:
+          type: string
+      required:
+      - id
+      - state
+      - worker_id
+      type: object
+    inline_response_200_1:
+      example:
+        connector:
+          trace: trace
+          state: NONE
+          worker_id: worker_id
+        name: name
+        type: sink
+        tasks:
+        - msg: msg
+          id: 0
+          state: state
+          worker_id: worker_id
+        - msg: msg
+          id: 0
+          state: state
+          worker_id: worker_id
+      properties:
+        name:
+          description: The name of the connector.
+          type: string
+        type:
+          description: Type of connector, sink or source.
+          enum:
+          - sink
+          - source
+          type: string
+        connector:
+          $ref: '#/components/schemas/inline_response_200_1_connector'
+        tasks:
+          description: The map containing the task status.
+          items:
+            $ref: '#/components/schemas/inline_response_200_1_tasks'
+          type: array
+      required:
+      - connector
+      - name
+      - type
+      type: object
+    inline_response_200_2:
+      example:
+        type: sink
+        class: class
+        version: version
+      properties:
+        class:
+          description: The connector class name. E.g. BigQuerySink.
+          type: string
+        type:
+          description: Type of connector, sink or source.
+          enum:
+          - sink
+          - source
+          type: string
+        version:
+          description: The version string for the connector available.
+          type: string
+      required:
+      - class
+      - type
+      type: object
+    inline_response_200_3_definition:
+      description: The definition for a config in the connector plugin, which includes
+        the name, type, importance, etc.
+      example:
+        importance: NONE
+        documentation: documentation
+        name: name
+        width: NONE
+        alias: alias
+        default_value: default_value
+        dependents:
+        - dependents
+        - dependents
+        type: NONE
+        display_name: display_name
+        required: true
+        group: group
+        order: 6
+      properties:
+        name:
+          description: The name of the configuration
+          type: string
+        type:
+          description: The config types
+          enum:
+          - NONE
+          - BOOLEAN
+          - INT
+          - SHORT
+          - LONG
+          - DOUBLE
+          - STRING
+          - LIST
+          - ENUM
+          - PASSWORD
+          type: string
+        required:
+          description: Whether this configuration is required
+          type: boolean
+        default_value:
+          description: Default value for this configuration
+          type: string
+        importance:
+          description: The importance level for a configuration
+          enum:
+          - NONE
+          - HIGH
+          - MEDIUM
+          - LOW
+          type: string
+        documentation:
+          description: The documentation for the configuration
+          type: string
+        group:
+          description: The UI group to which the configuration belongs to
+          type: string
+        width:
+          description: The width of a configuration value
+          enum:
+          - NONE
+          - SHORT
+          - MEDIUM
+          - LONG
+          type: string
+        display_name:
+          type: string
+        dependents:
+          description: Other configurations on which this configuration is dependent
+          items:
+            type: string
+          type: array
+        order:
+          description: The order of configuration in specified group
+          type: integer
+        alias:
+          type: string
+      type: object
+    inline_response_200_3_value:
+      description: The current value for a config, which includes the name, value,
+        recommended values, etc.
+      example:
+        recommended_values:
+        - recommended_values
+        - recommended_values
+        visible: true
+        name: name
+        value: value
+        errors:
+        - errors
+        - errors
+      properties:
+        name:
+          description: The name of the configuration
+          type: string
+        value:
+          description: The value for the configuration
+          type: string
+        recommended_values:
+          description: The list of valid values for the configuration
+          items:
+            type: string
+          type: array
+        errors:
+          description: Errors, if any, in the configuration value
+          items:
+            type: string
+          type: array
+        visible:
+          description: |-
+            The visibility of the configuration. Based on the values of other configuration
+            fields, this visibility boolean value points out if the current field should be
+            visible or not.
+          type: boolean
+      type: object
+    inline_response_200_3_configs:
+      example:
+        metadata: '{}'
+        definition:
+          importance: NONE
+          documentation: documentation
+          name: name
+          width: NONE
+          alias: alias
+          default_value: default_value
+          dependents:
+          - dependents
+          - dependents
+          type: NONE
+          display_name: display_name
+          required: true
+          group: group
+          order: 6
+        value:
+          recommended_values:
+          - recommended_values
+          - recommended_values
+          visible: true
+          name: name
+          value: value
+          errors:
+          - errors
+          - errors
+      properties:
+        definition:
+          $ref: '#/components/schemas/inline_response_200_3_definition'
+        value:
+          $ref: '#/components/schemas/inline_response_200_3_value'
+        metadata:
+          description: |-
+            Map of metadata details about the connector configuration, such as type of
+            input, etc.
+          type: object
+      type: object
+    inline_response_200_3:
+      example:
+        configs:
+        - metadata: '{}'
+          definition:
+            importance: NONE
+            documentation: documentation
+            name: name
+            width: NONE
+            alias: alias
+            default_value: default_value
+            dependents:
+            - dependents
+            - dependents
+            type: NONE
+            display_name: display_name
+            required: true
+            group: group
+            order: 6
+          value:
+            recommended_values:
+            - recommended_values
+            - recommended_values
+            visible: true
+            name: name
+            value: value
+            errors:
+            - errors
+            - errors
+        - metadata: '{}'
+          definition:
+            importance: NONE
+            documentation: documentation
+            name: name
+            width: NONE
+            alias: alias
+            default_value: default_value
+            dependents:
+            - dependents
+            - dependents
+            type: NONE
+            display_name: display_name
+            required: true
+            group: group
+            order: 6
+          value:
+            recommended_values:
+            - recommended_values
+            - recommended_values
+            visible: true
+            name: name
+            value: value
+            errors:
+            - errors
+            - errors
+        name: name
+        groups:
+        - groups
+        - groups
+        error_count: 0
+      properties:
+        name:
+          description: The class name of the connector plugin.
+          type: string
+        groups:
+          description: The list of groups used in configuration definitions.
+          items:
+            type: string
+          type: array
+        error_count:
+          description: The total number of errors encountered during configuration
+            validation.
+          type: integer
+        configs:
+          items:
+            $ref: '#/components/schemas/inline_response_200_3_configs'
+          type: array
+      type: object
+    connect_v1_ConnectorError_error:
+      description: Connector Error with error code and message.
+      properties:
+        code:
+          description: Error code for the type of error
+          type: integer
+        message:
+          description: Human readable error message
+          type: string
+      type: object
+    connect_v1_Connector_tasks:
+      example:
+        task: 0
+        connector: connector
+      properties:
+        connector:
+          description: The name of the connector the task belongs to
+          type: string
+        task:
+          description: Task ID within the connector
+          type: integer
+      required:
+      - connector
+      - task
+      type: object
+    connect_v1_ConnectorExpansion_id:
+      description: The ID of connector.
+      properties:
+        id:
+          description: The ID of the connector.
+          type: string
+        id_type:
+          description: Type of the value in the `id` property.
+          type: string
+      type: object
+    connect_v1_ConnectorExpansion_info:
+      description: Metadata of the connector.
+      properties:
+        name:
+          description: Name of the connector.
+          type: string
+        config:
+          additionalProperties:
+            type: string
+          description: |-
+            Configuration parameters for the connector. These configurations
+            are the minimum set of key-value pairs (KVP) which are used to
+            define how the connector connects Kafka to the external system.
+            Some of these KVPs are common to all the connectors, such as
+            connection parameters to Kafka, connector metadata, etc. The list
+            of common connector configurations is as follows
+
+              - cloud.environment
+              - cloud.provider
+              - connector.class
+              - kafka.api.key
+              - kafka.api.secret
+              - kafka.endpoint
+              - kafka.region
+              - name
+
+            For example, a connector like `GcsSink` would have additional
+            parameters such as `gcs.bucket.name`, `flush.size`, etc.
+          properties:
+            cloud.environment:
+              description: The cloud environment type.
+              enum:
+              - private
+              - devel
+              - stag
+              - prod
+              type: string
+            cloud.provider:
+              description: The cloud service provider, e.g. aws, azure, etc.
+              type: string
+              x-extensible-enum:
+              - aws
+              - azure
+              - gcp
+            connector.class:
+              description: The connector class name. E.g. BigQuerySink, GcsSink, etc.
+              type: string
+            name:
+              description: Name or alias of the class (plugin) for this connector.
+              type: string
+            kafka.endpoint:
+              description: The kafka cluster endpoint.
+              type: string
+            kafka.region:
+              description: The kafka cluster region.
+              type: string
+            kafka.api.key:
+              description: The kafka cluster api key.
+              type: string
+            kafka.api.secret:
+              description: The kafka cluster api secret key.
+              type: string
+              x-redact: true
+          required:
+          - cloud.environment
+          - cloud.provider
+          - connector.class
+          - kafka.api.key
+          - kafka.api.secret
+          - kafka.endpoint
+          - kafka.region
+          - name
+          type: object
+      type: object
+    connect_v1_ConnectorExpansion_status_connector:
+      description: A map containing connector status.
+      properties:
+        state:
+          description: The state of the connector.
+          enum:
+          - NONE
+          - PROVISIONING
+          - RUNNING
+          - DEGRADED
+          - FAILED
+          - PAUSED
+          - DELETED
+          type: string
+        worker_id:
+          description: The worker ID of the connector.
+          type: string
+        trace:
+          description: Exception message in case of an error.
+          type: string
+      required:
+      - state
+      - worker_id
+      type: object
+    connect_v1_ConnectorExpansion_status_tasks:
+      properties:
+        id:
+          description: The ID of task.
+          type: string
+        state:
+          description: The state of the task.
+          type: string
+        worker_id:
+          description: The worker ID of the task.
+          type: string
+        msg:
+          type: string
+      required:
+      - id
+      - state
+      - worker_id
+      type: object
+    connect_v1_ConnectorExpansion_status:
+      description: Status of the connector and its tasks.
+      properties:
+        name:
+          description: The name of the connector.
+          type: string
+        type:
+          description: Type of connector, sink or source.
+          enum:
+          - sink
+          - source
+          type: string
+        connector:
+          $ref: '#/components/schemas/connect_v1_ConnectorExpansion_status_connector'
+        tasks:
+          description: A map containing the task status.
+          items:
+            $ref: '#/components/schemas/connect_v1_ConnectorExpansion_status_tasks'
+          type: array
+      required:
+      - connector
+      - name
+      - type
+      type: object
+  securitySchemes:
+    api-key:
+      description: Authenticate with API Keys using HTTP Basic Auth. Treat the API
+        Key ID as the username and API Key Secret as the password.
+      scheme: basic
+      type: http
