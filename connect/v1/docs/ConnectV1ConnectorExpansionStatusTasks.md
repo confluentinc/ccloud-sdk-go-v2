@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | The ID of task. | 
+**Id** | **int32** | The ID of task. | 
 **State** | **string** | The state of the task. | 
 **WorkerId** | **string** | The worker ID of the task. | 
 **Msg** | Pointer to **string** |  | [optional] 
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewConnectV1ConnectorExpansionStatusTasks
 
-`func NewConnectV1ConnectorExpansionStatusTasks(id string, state string, workerId string, ) *ConnectV1ConnectorExpansionStatusTasks`
+`func NewConnectV1ConnectorExpansionStatusTasks(id int32, state string, workerId string, ) *ConnectV1ConnectorExpansionStatusTasks`
 
 NewConnectV1ConnectorExpansionStatusTasks instantiates a new ConnectV1ConnectorExpansionStatusTasks object
 This constructor will assign default values to properties that have it defined,
@@ -30,20 +30,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *ConnectV1ConnectorExpansionStatusTasks) GetId() string`
+`func (o *ConnectV1ConnectorExpansionStatusTasks) GetId() int32`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *ConnectV1ConnectorExpansionStatusTasks) GetIdOk() (*string, bool)`
+`func (o *ConnectV1ConnectorExpansionStatusTasks) GetIdOk() (*int32, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *ConnectV1ConnectorExpansionStatusTasks) SetId(v string)`
+`func (o *ConnectV1ConnectorExpansionStatusTasks) SetId(v int32)`
 
 SetId sets Id field to given value.
 

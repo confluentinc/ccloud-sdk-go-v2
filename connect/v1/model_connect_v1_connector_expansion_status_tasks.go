@@ -36,7 +36,7 @@ import (
 // ConnectV1ConnectorExpansionStatusTasks struct for ConnectV1ConnectorExpansionStatusTasks
 type ConnectV1ConnectorExpansionStatusTasks struct {
 	// The ID of task.
-	Id string `json:"id"`
+	Id int32 `json:"id"`
 	// The state of the task.
 	State string `json:"state"`
 	// The worker ID of the task.
@@ -48,7 +48,7 @@ type ConnectV1ConnectorExpansionStatusTasks struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConnectV1ConnectorExpansionStatusTasks(id string, state string, workerId string) *ConnectV1ConnectorExpansionStatusTasks {
+func NewConnectV1ConnectorExpansionStatusTasks(id int32, state string, workerId string) *ConnectV1ConnectorExpansionStatusTasks {
 	this := ConnectV1ConnectorExpansionStatusTasks{}
 	this.Id = id
 	this.State = state
@@ -65,9 +65,9 @@ func NewConnectV1ConnectorExpansionStatusTasksWithDefaults() *ConnectV1Connector
 }
 
 // GetId returns the Id field value
-func (o *ConnectV1ConnectorExpansionStatusTasks) GetId() string {
+func (o *ConnectV1ConnectorExpansionStatusTasks) GetId() int32 {
 	if o == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 
@@ -76,7 +76,7 @@ func (o *ConnectV1ConnectorExpansionStatusTasks) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *ConnectV1ConnectorExpansionStatusTasks) GetIdOk() (*string, bool) {
+func (o *ConnectV1ConnectorExpansionStatusTasks) GetIdOk() (*int32, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -84,7 +84,7 @@ func (o *ConnectV1ConnectorExpansionStatusTasks) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *ConnectV1ConnectorExpansionStatusTasks) SetId(v string) {
+func (o *ConnectV1ConnectorExpansionStatusTasks) SetId(v int32) {
 	o.Id = v
 }
 
