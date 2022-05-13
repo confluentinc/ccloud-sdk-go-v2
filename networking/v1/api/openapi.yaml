@@ -19,7 +19,7 @@ servers:
   url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `Network` represents a network (VPC) in Confluent Cloud. All Networks exist within Confluent-managed cloud
     provider accounts. Dedicated networks support more networking options but can only contain Dedicated clusters.
@@ -28,7 +28,7 @@ tags:
     The API allows you to list, create, read, update, and delete your networks.
 
 
-    Related guide: [APIs to manage networks in Confluent Cloud.](https://docs.confluent.cloud).
+    Related guide: [APIs to manage networks in Confluent Cloud](https://docs.confluent.io/cloud/current/networking/overview.html).
 
     ## The Networks Model
     <SchemaDefinition schemaRef="#/components/schemas/networking.v1.Network" />
@@ -41,11 +41,11 @@ tags:
     | `dedicated_networks_per_environment` | Number of dedicated networks per Confluent Cloud environment |
   name: Networks (networking/v1)
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-    VPC Peering Connections
+    Add or remove VPC/VNet peering connections between your VPC/VNet and Confluent Cloud.
 
-    Related guide: [APIs to manage VPC peering connections.](https://docs.confluent.cloud).
+    Related guide: [Peering Connections Overview](https://docs.confluent.io/cloud/current/networking/peering/overview.html).
 
     ## The Peerings Model
     <SchemaDefinition schemaRef="#/components/schemas/networking.v1.Peering" />
@@ -58,11 +58,11 @@ tags:
     | `peerings_per_network` | Number of peerings per network |
   name: Peerings (networking/v1)
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     AWS Transit Gateway Attachments
 
-    Related guide: [APIs to manage AWS Transit Gateway Attachments.](https://docs.confluent.cloud).
+    Related guide: [APIs to manage AWS Transit Gateway Attachments](https://docs.confluent.io/cloud/current/networking/aws-transit-gateway.html).
 
     ## The Transit Gateway Attachments Model
     <SchemaDefinition schemaRef="#/components/schemas/networking.v1.TransitGatewayAttachment" />
@@ -75,11 +75,11 @@ tags:
     | `tgw_attachments_per_network` | Number of TGW attachments per network |
   name: Transit Gateway Attachments (networking/v1)
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-    Add or remove access to PrivateLink endpoints by AWS account or Azure subscription.
+    Add or remove access to PrivateLink endpoints by AWS account, Azure subscription and GCP project.
 
-    Related guide: [APIs to manage PrivateLink access.](https://docs.confluent.cloud).
+    Related guide: [Private Links Overview](https://docs.confluent.io/cloud/current/networking/private-links/index.html).
 
     ## The Private Link Accesses Model
     <SchemaDefinition schemaRef="#/components/schemas/networking.v1.PrivateLinkAccess" />
@@ -91,12 +91,13 @@ tags:
     | --- | --- |
     | `privatelink_accounts_per_network` | Number of AWS accounts per network |
     | `privatelink_subscriptions_per_network` | Number of Azure subscriptions per network |
+    | `privatelink_project_per_network` | Number of GCP project per network |
   name: Private Link Accesses (networking/v1)
 paths:
   /networking/v1/networks:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all networks.
       operationId: listNetworkingV1Networks
@@ -427,7 +428,7 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create a network.
       operationId: createNetworkingV1Network
@@ -693,13 +694,13 @@ paths:
             --url https://api.confluent.cloud/networking/v1/networks \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-gcp-us-central1","cloud":"GCP","region":"us-central1","connection_types":["PRIVATELINK"],"cidr":"10.200.0.0/16","zones":["us-central1-a","us-central1-b","us-central1-c"],"environment":{"id":"env-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"prod-aws-us-east1","cloud":"AWS","region":"us-east-1","connection_types":["PRIVATELINK"],"cidr":"10.200.0.0/16","zones":["use1-az1","use1-az2","use1-az3"],"environment":{"id":"env-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-gcp-us-central1\",\"cloud\":\"GCP\",\"region\":\"us-central1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"us-central1-a\",\"us-central1-b\",\"us-central1-c\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/networks")
             .post(body)
@@ -712,12 +713,12 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/networks\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
-          :\\\"prod-gcp-us-central1\\\",\\\"cloud\\\":\\\"GCP\\\",\\\"region\\\":\\\
-          \"us-central1\\\",\\\"connection_types\\\":[\\\"PRIVATELINK\\\"],\\\"cidr\\\
-          \":\\\"10.200.0.0/16\\\",\\\"zones\\\":[\\\"us-central1-a\\\",\\\"us-central1-b\\\
-          \",\\\"us-central1-c\\\"],\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
-          \",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
-          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          :\\\"prod-aws-us-east1\\\",\\\"cloud\\\":\\\"AWS\\\",\\\"region\\\":\\\"\
+          us-east-1\\\",\\\"connection_types\\\":[\\\"PRIVATELINK\\\"],\\\"cidr\\\"\
+          :\\\"10.200.0.0/16\\\",\\\"zones\\\":[\\\"use1-az1\\\",\\\"use1-az2\\\"\
+          ,\\\"use1-az3\\\"],\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"\
+          environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\"\
+          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
           )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
           \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
           \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
@@ -728,7 +729,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-gcp-us-central1\",\"cloud\":\"GCP\",\"region\":\"us-central1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"us-central1-a\",\"us-central1-b\",\"us-central1-c\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -771,12 +772,12 @@ paths:
 
           req.write(JSON.stringify({
             spec: {
-              display_name: 'prod-gcp-us-central1',
-              cloud: 'GCP',
-              region: 'us-central1',
+              display_name: 'prod-aws-us-east1',
+              cloud: 'AWS',
+              region: 'us-east-1',
               connection_types: ['PRIVATELINK'],
               cidr: '10.200.0.0/16',
-              zones: ['us-central1-a', 'us-central1-b', 'us-central1-c'],
+              zones: ['use1-az1', 'use1-az2', 'use1-az3'],
               environment: {id: 'env-00000', environment: 'string'}
             }
           }));
@@ -793,7 +794,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-gcp-us-central1\",\"cloud\":\"GCP\",\"region\":\"us-central1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"us-central1-a\",\"us-central1-b\",\"us-central1-c\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -802,13 +803,13 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-gcp-us-central1\",\"cloud\":\"GCP\",\"region\":\"us-central1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"us-central1-a\",\"us-central1-b\",\"us-central1-c\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Networking v1
   /networking/v1/networks/{id}:
     delete:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete a network.
       operationId: deleteNetworkingV1Network
@@ -1055,7 +1056,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a network.
       operationId: getNetworkingV1Network
@@ -1332,7 +1333,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update a network.
 
@@ -1584,13 +1585,13 @@ paths:
             --url 'https://api.confluent.cloud/networking/v1/networks/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-gcp-us-central1","cloud":"GCP","region":"us-central1","connection_types":["PRIVATELINK"],"cidr":"10.200.0.0/16","zones":["us-central1-a","us-central1-b","us-central1-c"],"environment":{"id":"env-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"prod-aws-us-east1","cloud":"AWS","region":"us-east-1","connection_types":["PRIVATELINK"],"cidr":"10.200.0.0/16","zones":["use1-az1","use1-az2","use1-az3"],"environment":{"id":"env-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-gcp-us-central1\",\"cloud\":\"GCP\",\"region\":\"us-central1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"us-central1-a\",\"us-central1-b\",\"us-central1-c\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/networks/{id}")
             .patch(body)
@@ -1603,12 +1604,12 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/networks/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
-          :\\\"prod-gcp-us-central1\\\",\\\"cloud\\\":\\\"GCP\\\",\\\"region\\\":\\\
-          \"us-central1\\\",\\\"connection_types\\\":[\\\"PRIVATELINK\\\"],\\\"cidr\\\
-          \":\\\"10.200.0.0/16\\\",\\\"zones\\\":[\\\"us-central1-a\\\",\\\"us-central1-b\\\
-          \",\\\"us-central1-c\\\"],\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
-          \",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
-          PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          :\\\"prod-aws-us-east1\\\",\\\"cloud\\\":\\\"AWS\\\",\\\"region\\\":\\\"\
+          us-east-1\\\",\\\"connection_types\\\":[\\\"PRIVATELINK\\\"],\\\"cidr\\\"\
+          :\\\"10.200.0.0/16\\\",\\\"zones\\\":[\\\"use1-az1\\\",\\\"use1-az2\\\"\
+          ,\\\"use1-az3\\\"],\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"\
+          environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\"\
+          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
           )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
           \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
           \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
@@ -1619,7 +1620,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-gcp-us-central1\",\"cloud\":\"GCP\",\"region\":\"us-central1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"us-central1-a\",\"us-central1-b\",\"us-central1-c\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -1662,12 +1663,12 @@ paths:
 
           req.write(JSON.stringify({
             spec: {
-              display_name: 'prod-gcp-us-central1',
-              cloud: 'GCP',
-              region: 'us-central1',
+              display_name: 'prod-aws-us-east1',
+              cloud: 'AWS',
+              region: 'us-east-1',
               connection_types: ['PRIVATELINK'],
               cidr: '10.200.0.0/16',
-              zones: ['us-central1-a', 'us-central1-b', 'us-central1-c'],
+              zones: ['use1-az1', 'use1-az2', 'use1-az3'],
               environment: {id: 'env-00000', environment: 'string'}
             }
           }));
@@ -1684,7 +1685,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-gcp-us-central1\",\"cloud\":\"GCP\",\"region\":\"us-central1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"us-central1-a\",\"us-central1-b\",\"us-central1-c\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1693,13 +1694,13 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-gcp-us-central1\",\"cloud\":\"GCP\",\"region\":\"us-central1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"us-central1-a\",\"us-central1-b\",\"us-central1-c\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Networking v1
   /networking/v1/peerings:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all peerings.
       operationId: listNetworkingV1Peerings
@@ -2000,7 +2001,7 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create a peering.
       operationId: createNetworkingV1Peering
@@ -2390,7 +2391,7 @@ paths:
   /networking/v1/peerings/{id}:
     delete:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete a peering.
       operationId: deleteNetworkingV1Peering
@@ -2637,7 +2638,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a peering.
       operationId: getNetworkingV1Peering
@@ -2918,7 +2919,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update a peering.
 
@@ -3292,7 +3293,7 @@ paths:
   /networking/v1/transit-gateway-attachments:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all transit gateway attachments.
       operationId: listNetworkingV1TransitGatewayAttachments
@@ -3595,7 +3596,7 @@ paths:
   /networking/v1/transit-gateway-attachments/{id}:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a transit gateway attachment.
       operationId: getNetworkingV1TransitGatewayAttachment
@@ -3878,7 +3879,7 @@ paths:
   /networking/v1/private-link-accesses:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all private link accesses.
       operationId: listNetworkingV1PrivateLinkAccesses
@@ -4179,7 +4180,7 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create a private link access.
       operationId: createNetworkingV1PrivateLinkAccess
@@ -4562,7 +4563,7 @@ paths:
   /networking/v1/private-link-accesses/{id}:
     delete:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete a private link access.
       operationId: deleteNetworkingV1PrivateLinkAccess
@@ -4809,7 +4810,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a private link access.
       operationId: getNetworkingV1PrivateLinkAccess
@@ -5090,7 +5091,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update a private link access.
 
@@ -5660,7 +5661,7 @@ components:
         The API allows you to list, create, read, update, and delete your networks.
 
 
-        Related guide: [APIs to manage networks in Confluent Cloud.](https://docs.confluent.cloud).
+        Related guide: [APIs to manage networks in Confluent Cloud](https://docs.confluent.io/cloud/current/networking/overview.html).
 
         ## The Networks Model
         <SchemaDefinition schemaRef="#/components/schemas/networking.v1.Network" />
@@ -5719,7 +5720,9 @@ components:
 
             READY:  network is ready;
 
-            FAILED: provisioning failed
+            FAILED: provisioning failed;
+
+            DEPROVISIONING: network deprovisioning is in progress;
           example: READY
           readOnly: true
           type: string
@@ -5727,6 +5730,7 @@ components:
           - PROVISIONING
           - READY
           - FAILED
+          - DEPROVISIONING
         supported_connection_types:
           allOf:
           - $ref: '#/components/schemas/networking.v1.StatusConnectionTypes'
@@ -5783,9 +5787,9 @@ components:
       type: object
     networking.v1.Peering:
       description: |-
-        VPC Peering Connections
+        Add or remove VPC/VNet peering connections between your VPC/VNet and Confluent Cloud.
 
-        Related guide: [APIs to manage VPC peering connections.](https://docs.confluent.cloud).
+        Related guide: [Peering Connections Overview](https://docs.confluent.io/cloud/current/networking/peering/overview.html).
 
         ## The Peerings Model
         <SchemaDefinition schemaRef="#/components/schemas/networking.v1.Peering" />
@@ -5870,7 +5874,7 @@ components:
       description: |-
         AWS Transit Gateway Attachments
 
-        Related guide: [APIs to manage AWS Transit Gateway Attachments.](https://docs.confluent.cloud).
+        Related guide: [APIs to manage AWS Transit Gateway Attachments](https://docs.confluent.io/cloud/current/networking/aws-transit-gateway.html).
 
         ## The Transit Gateway Attachments Model
         <SchemaDefinition schemaRef="#/components/schemas/networking.v1.TransitGatewayAttachment" />
@@ -5954,9 +5958,9 @@ components:
       type: object
     networking.v1.PrivateLinkAccess:
       description: |-
-        Add or remove access to PrivateLink endpoints by AWS account or Azure subscription.
+        Add or remove access to PrivateLink endpoints by AWS account, Azure subscription and GCP project.
 
-        Related guide: [APIs to manage PrivateLink access.](https://docs.confluent.cloud).
+        Related guide: [Private Links Overview](https://docs.confluent.io/cloud/current/networking/private-links/index.html).
 
         ## The Private Link Accesses Model
         <SchemaDefinition schemaRef="#/components/schemas/networking.v1.PrivateLinkAccess" />
@@ -5968,6 +5972,7 @@ components:
         | --- | --- |
         | `privatelink_accounts_per_network` | Number of AWS accounts per network |
         | `privatelink_subscriptions_per_network` | Number of Azure subscriptions per network |
+        | `privatelink_project_per_network` | Number of GCP project per network |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -6236,7 +6241,7 @@ components:
           minLength: 1
           type: string
         vnet:
-          description: Customer vnet to peer with.
+          description: Customer VNet resource ID.
           example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.Network/virtualNetworks/my-vnet
           minLength: 1
           type: string
@@ -6285,6 +6290,23 @@ components:
       - subscription
       title: AZURE
       type: object
+    networking.v1.GcpPrivateLinkAccess:
+      description: GCP PrivateLink access configuration.
+      properties:
+        kind:
+          description: PrivateLink kind type.
+          enum:
+          - GcpPrivateLinkAccess
+          type: string
+        project:
+          description: GCP project to allow for PrivateLink access.
+          minLength: 1
+          type: string
+      required:
+      - kind
+      - project
+      title: GCP
+      type: object
     MultipleSearchFilter:
       description: Filter a collection by a string search for one or more values
       items:
@@ -6302,7 +6324,7 @@ components:
         The API allows you to list, create, read, update, and delete your networks.
 
 
-        Related guide: [APIs to manage networks in Confluent Cloud.](https://docs.confluent.cloud).
+        Related guide: [APIs to manage networks in Confluent Cloud](https://docs.confluent.io/cloud/current/networking/overview.html).
 
         ## The Networks Model
         <SchemaDefinition schemaRef="#/components/schemas/networking.v1.Network" />
@@ -6371,12 +6393,12 @@ components:
       description: The desired state of the Network
       properties:
         display_name:
-          description: The name of the Network
-          example: prod-gcp-us-central1
+          description: The name of the network
+          example: prod-aws-us-east1
           type: string
         cloud:
           description: The cloud service provider in which the network exists.
-          example: GCP
+          example: AWS
           type: string
           x-extensible-enum:
           - AWS
@@ -6384,8 +6406,8 @@ components:
           - AZURE
           x-immutable: true
         region:
-          description: The service provider region where the cluster is running.
-          example: us-central1
+          description: The cloud service provider region in which the network exists.
+          example: us-east-1
           type: string
           x-immutable: true
         connection_types:
@@ -6413,9 +6435,9 @@ components:
             On Azure, zones are Confluent-chosen names (e.g. 1, 2, 3) since Azure does not
              have universal zone identifiers.
           example:
-          - us-central1-a
-          - us-central1-b
-          - us-central1-c
+          - use1-az1
+          - use1-az2
+          - use1-az3
           items:
             type: string
           maxItems: 3
@@ -6433,9 +6455,9 @@ components:
       x-enable-objectmeta: true
     networking.v1.PeeringList:
       description: |-
-        VPC Peering Connections
+        Add or remove VPC/VNet peering connections between your VPC/VNet and Confluent Cloud.
 
-        Related guide: [APIs to manage VPC peering connections.](https://docs.confluent.cloud).
+        Related guide: [Peering Connections Overview](https://docs.confluent.io/cloud/current/networking/peering/overview.html).
 
         ## The Peerings Model
         <SchemaDefinition schemaRef="#/components/schemas/networking.v1.Peering" />
@@ -6503,7 +6525,7 @@ components:
       description: The desired state of the Peering
       properties:
         display_name:
-          description: The name of the Peering
+          description: The name of the peering
           example: prod-peering-use1
           type: string
         cloud:
@@ -6538,7 +6560,7 @@ components:
       description: |-
         AWS Transit Gateway Attachments
 
-        Related guide: [APIs to manage AWS Transit Gateway Attachments.](https://docs.confluent.cloud).
+        Related guide: [APIs to manage AWS Transit Gateway Attachments](https://docs.confluent.io/cloud/current/networking/aws-transit-gateway.html).
 
         ## The Transit Gateway Attachments Model
         <SchemaDefinition schemaRef="#/components/schemas/networking.v1.TransitGatewayAttachment" />
@@ -6631,9 +6653,9 @@ components:
       x-enable-objectmeta: true
     networking.v1.PrivateLinkAccessList:
       description: |-
-        Add or remove access to PrivateLink endpoints by AWS account or Azure subscription.
+        Add or remove access to PrivateLink endpoints by AWS account, Azure subscription and GCP project.
 
-        Related guide: [APIs to manage PrivateLink access.](https://docs.confluent.cloud).
+        Related guide: [Private Links Overview](https://docs.confluent.io/cloud/current/networking/private-links/index.html).
 
         ## The Private Link Accesses Model
         <SchemaDefinition schemaRef="#/components/schemas/networking.v1.PrivateLinkAccess" />
@@ -6645,6 +6667,7 @@ components:
         | --- | --- |
         | `privatelink_accounts_per_network` | Number of AWS accounts per network |
         | `privatelink_subscriptions_per_network` | Number of Azure subscriptions per network |
+        | `privatelink_project_per_network` | Number of GCP project per network |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -6711,10 +6734,12 @@ components:
             mapping:
               AwsPrivateLinkAccess: '#/components/schemas/networking.v1.AwsPrivateLinkAccess'
               AzurePrivateLinkAccess: '#/components/schemas/networking.v1.AzurePrivateLinkAccess'
+              GcpPrivateLinkAccess: '#/components/schemas/networking.v1.GcpPrivateLinkAccess'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking.v1.AwsPrivateLinkAccess'
           - $ref: '#/components/schemas/networking.v1.AzurePrivateLinkAccess'
+          - $ref: '#/components/schemas/networking.v1.GcpPrivateLinkAccess'
           type: object
           x-immutable: true
           x-one-of-name: NetworkingV1PrivateLinkAccessSpecCloudOneOf
@@ -6900,8 +6925,8 @@ components:
       description: The desired state of the Network
       properties:
         display_name:
-          description: The name of the Network
-          example: prod-gcp-us-central1
+          description: The name of the network
+          example: prod-aws-us-east1
           type: string
         environment:
           allOf:
@@ -6920,7 +6945,7 @@ components:
         The API allows you to list, create, read, update, and delete your networks.
 
 
-        Related guide: [APIs to manage networks in Confluent Cloud.](https://docs.confluent.cloud).
+        Related guide: [APIs to manage networks in Confluent Cloud](https://docs.confluent.io/cloud/current/networking/overview.html).
 
         ## The Networks Model
         <SchemaDefinition schemaRef="#/components/schemas/networking.v1.Network" />
@@ -6972,7 +6997,7 @@ components:
       description: The desired state of the Peering
       properties:
         display_name:
-          description: The name of the Peering
+          description: The name of the peering
           example: prod-peering-use1
           type: string
         environment:
@@ -6985,9 +7010,9 @@ components:
       x-enable-objectmeta: true
     networking.v1.PeeringUpdate:
       description: |-
-        VPC Peering Connections
+        Add or remove VPC/VNet peering connections between your VPC/VNet and Confluent Cloud.
 
-        Related guide: [APIs to manage VPC peering connections.](https://docs.confluent.cloud).
+        Related guide: [Peering Connections Overview](https://docs.confluent.io/cloud/current/networking/peering/overview.html).
 
         ## The Peerings Model
         <SchemaDefinition schemaRef="#/components/schemas/networking.v1.Peering" />
@@ -7052,9 +7077,9 @@ components:
       x-enable-objectmeta: true
     networking.v1.PrivateLinkAccessUpdate:
       description: |-
-        Add or remove access to PrivateLink endpoints by AWS account or Azure subscription.
+        Add or remove access to PrivateLink endpoints by AWS account, Azure subscription and GCP project.
 
-        Related guide: [APIs to manage PrivateLink access.](https://docs.confluent.cloud).
+        Related guide: [Private Links Overview](https://docs.confluent.io/cloud/current/networking/private-links/index.html).
 
         ## The Private Link Accesses Model
         <SchemaDefinition schemaRef="#/components/schemas/networking.v1.PrivateLinkAccess" />
@@ -7066,6 +7091,7 @@ components:
         | --- | --- |
         | `privatelink_accounts_per_network` | Number of AWS accounts per network |
         | `privatelink_subscriptions_per_network` | Number of Azure subscriptions per network |
+        | `privatelink_project_per_network` | Number of GCP project per network |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation

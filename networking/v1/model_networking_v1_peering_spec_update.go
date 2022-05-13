@@ -35,7 +35,7 @@ import (
 
 // NetworkingV1PeeringSpecUpdate The desired state of the Peering
 type NetworkingV1PeeringSpecUpdate struct {
-	// The name of the Peering
+	// The name of the peering
 	DisplayName *string `json:"display_name,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`

@@ -35,7 +35,7 @@ import (
 
 // NetworkingV1PeeringSpec The desired state of the Peering
 type NetworkingV1PeeringSpec struct {
-	// The name of the Peering
+	// The name of the peering
 	DisplayName *string `json:"display_name,omitempty"`
 	// The cloud-specific peering details.
 	Cloud *NetworkingV1PeeringSpecCloudOneOf `json:"cloud,omitempty"`

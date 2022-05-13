@@ -114,6 +114,7 @@ Class | Method | HTTP request | Description
  - [NetworkingV1ConnectionTypes](docs/NetworkingV1ConnectionTypes.md)
  - [NetworkingV1GcpNetwork](docs/NetworkingV1GcpNetwork.md)
  - [NetworkingV1GcpPeering](docs/NetworkingV1GcpPeering.md)
+ - [NetworkingV1GcpPrivateLinkAccess](docs/NetworkingV1GcpPrivateLinkAccess.md)
  - [NetworkingV1Network](docs/NetworkingV1Network.md)
  - [NetworkingV1NetworkList](docs/NetworkingV1NetworkList.md)
  - [NetworkingV1NetworkSpec](docs/NetworkingV1NetworkSpec.md)

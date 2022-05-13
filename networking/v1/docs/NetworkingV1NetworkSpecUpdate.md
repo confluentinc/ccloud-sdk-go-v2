@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DisplayName** | Pointer to **string** | The name of the Network | [optional] 
+**DisplayName** | Pointer to **string** | The name of the network | [optional] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods

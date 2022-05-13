@@ -34,6 +34,7 @@ import (
 type NetworkingV1PrivateLinkAccessSpecCloudOneOf struct {
 	NetworkingV1AwsPrivateLinkAccess *NetworkingV1AwsPrivateLinkAccess
 	NetworkingV1AzurePrivateLinkAccess *NetworkingV1AzurePrivateLinkAccess
+	NetworkingV1GcpPrivateLinkAccess *NetworkingV1GcpPrivateLinkAccess
 }
 
 // NetworkingV1AwsPrivateLinkAccessAsNetworkingV1PrivateLinkAccessSpecCloudOneOf is a convenience function that returns NetworkingV1AwsPrivateLinkAccess wrapped in NetworkingV1PrivateLinkAccessSpecCloudOneOf
@@ -44,6 +45,11 @@ func NetworkingV1AwsPrivateLinkAccessAsNetworkingV1PrivateLinkAccessSpecCloudOne
 // NetworkingV1AzurePrivateLinkAccessAsNetworkingV1PrivateLinkAccessSpecCloudOneOf is a convenience function that returns NetworkingV1AzurePrivateLinkAccess wrapped in NetworkingV1PrivateLinkAccessSpecCloudOneOf
 func NetworkingV1AzurePrivateLinkAccessAsNetworkingV1PrivateLinkAccessSpecCloudOneOf(v *NetworkingV1AzurePrivateLinkAccess) NetworkingV1PrivateLinkAccessSpecCloudOneOf {
 	return NetworkingV1PrivateLinkAccessSpecCloudOneOf{ NetworkingV1AzurePrivateLinkAccess: v}
+}
+
+// NetworkingV1GcpPrivateLinkAccessAsNetworkingV1PrivateLinkAccessSpecCloudOneOf is a convenience function that returns NetworkingV1GcpPrivateLinkAccess wrapped in NetworkingV1PrivateLinkAccessSpecCloudOneOf
+func NetworkingV1GcpPrivateLinkAccessAsNetworkingV1PrivateLinkAccessSpecCloudOneOf(v *NetworkingV1GcpPrivateLinkAccess) NetworkingV1PrivateLinkAccessSpecCloudOneOf {
+	return NetworkingV1PrivateLinkAccessSpecCloudOneOf{ NetworkingV1GcpPrivateLinkAccess: v}
 }
 
 
@@ -81,6 +87,18 @@ func (dst *NetworkingV1PrivateLinkAccessSpecCloudOneOf) UnmarshalJSON(data []byt
 		}
 	}
 
+	// check if the discriminator value is 'GcpPrivateLinkAccess'
+	if jsonDict["kind"] == "GcpPrivateLinkAccess" {
+		// try to unmarshal JSON data into NetworkingV1GcpPrivateLinkAccess
+		err = json.Unmarshal(data, &dst.NetworkingV1GcpPrivateLinkAccess)
+		if err == nil {
+			return nil // data stored in dst.NetworkingV1GcpPrivateLinkAccess, return on the first match
+		} else {
+			dst.NetworkingV1GcpPrivateLinkAccess = nil
+			return fmt.Errorf("Failed to unmarshal NetworkingV1PrivateLinkAccessSpecCloudOneOf as NetworkingV1GcpPrivateLinkAccess: %s", err.Error())
+		}
+	}
+
 	// check if the discriminator value is 'networking.v1.AwsPrivateLinkAccess'
 	if jsonDict["kind"] == "networking.v1.AwsPrivateLinkAccess" {
 		// try to unmarshal JSON data into NetworkingV1AwsPrivateLinkAccess
@@ -105,6 +123,18 @@ func (dst *NetworkingV1PrivateLinkAccessSpecCloudOneOf) UnmarshalJSON(data []byt
 		}
 	}
 
+	// check if the discriminator value is 'networking.v1.GcpPrivateLinkAccess'
+	if jsonDict["kind"] == "networking.v1.GcpPrivateLinkAccess" {
+		// try to unmarshal JSON data into NetworkingV1GcpPrivateLinkAccess
+		err = json.Unmarshal(data, &dst.NetworkingV1GcpPrivateLinkAccess)
+		if err == nil {
+			return nil // data stored in dst.NetworkingV1GcpPrivateLinkAccess, return on the first match
+		} else {
+			dst.NetworkingV1GcpPrivateLinkAccess = nil
+			return fmt.Errorf("Failed to unmarshal NetworkingV1PrivateLinkAccessSpecCloudOneOf as NetworkingV1GcpPrivateLinkAccess: %s", err.Error())
+		}
+	}
+
 	return nil
 }
 
@@ -118,6 +148,10 @@ func (src NetworkingV1PrivateLinkAccessSpecCloudOneOf) MarshalJSON() ([]byte, er
 		return json.Marshal(&src.NetworkingV1AzurePrivateLinkAccess)
 	}
 
+	if src.NetworkingV1GcpPrivateLinkAccess != nil {
+		return json.Marshal(&src.NetworkingV1GcpPrivateLinkAccess)
+	}
+
 	return nil, nil // no data in oneOf schemas
 }
 
@@ -129,6 +163,10 @@ func (obj *NetworkingV1PrivateLinkAccessSpecCloudOneOf) GetActualInstance() (int
 
 	if obj.NetworkingV1AzurePrivateLinkAccess != nil {
 		return obj.NetworkingV1AzurePrivateLinkAccess
+	}
+
+	if obj.NetworkingV1GcpPrivateLinkAccess != nil {
+		return obj.NetworkingV1GcpPrivateLinkAccess
 	}
 
 	// all schemas are nil
