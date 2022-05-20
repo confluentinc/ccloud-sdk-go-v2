@@ -7,7 +7,7 @@ info:
   title: ksqlDB Cluster Management API
   version: 0.0.1
   x-api-id: 6dfe8977-3286-4727-ac78-883e0fcba8c0
-  x-api-group: ksqldbcm/v1
+  x-api-group: ksqldbcm/v2
   x-audience: external-public
   x-tag-group: ksqlDB cluster Mgmt API (%s)
 servers:
@@ -19,7 +19,7 @@ servers:
   url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To ksqlDB API](https://img.shields.io/badge/-Request%20Access%20To%20ksqlDB%20API-%23bc8540)](mailto:ccloud-api-access+ksqldbcm-v1-early-access@confluent.io?subject=Request%20to%20join%20ksqldbcm/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ksqldbcm/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To ksqlDB API](https://img.shields.io/badge/-Request%20Access%20To%20ksqlDB%20API-%23bc8540)](mailto:ccloud-api-access+ksqldbcm-v2-early-access@confluent.io?subject=Request%20to%20join%20ksqldbcm/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ksqldbcm/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
     `Cluster` represents a ksqlDB runtime that you can issue queries to using its API endpoint.
     It executes SQL statements and queries which under the hood get built into corresponding
@@ -29,7 +29,7 @@ tags:
     Related guide: [ksqlDB in Confluent Cloud](https://docs.confluent.io/cloud/current/ksqldb/index.html).
 
     ## The Clusters Model
-    <SchemaDefinition schemaRef="#/components/schemas/ksqldbcm.v1.Cluster" />
+    <SchemaDefinition schemaRef="#/components/schemas/ksqldbcm.v2.Cluster" />
 
     ## Quotas and Limits
     This resource is subject to the following quotas:
@@ -37,15 +37,15 @@ tags:
     | Quota | Description |
     | --- | --- |
     | `ksql.limits.max_apps_per_cluster` | Clusters in one Confluent Cloud Kafka Cluster. |
-  name: Clusters (ksqldbcm/v1)
+  name: Clusters (ksqldbcm/v2)
 paths:
-  /ksqldbcm/v1/clusters:
+  /ksqldbcm/v2/clusters:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To ksqlDB API](https://img.shields.io/badge/-Request%20Access%20To%20ksqlDB%20API-%23bc8540)](mailto:ccloud-api-access+ksqldbcm-v1-early-access@confluent.io?subject=Request%20to%20join%20ksqldbcm/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ksqldbcm/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To ksqlDB API](https://img.shields.io/badge/-Request%20Access%20To%20ksqlDB%20API-%23bc8540)](mailto:ccloud-api-access+ksqldbcm-v2-early-access@confluent.io?subject=Request%20to%20join%20ksqldbcm/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ksqldbcm/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Retrieve a sorted, filtered, paginated list of all clusters.
-      operationId: listKsqldbcmV1Clusters
+      operationId: listKsqldbcmV2Clusters
       parameters:
       - description: Filter the results by exact match for environment.
         example: env-00000
@@ -82,7 +82,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/ksqldbcm.v1.ClusterList'
+                - $ref: '#/components/schemas/ksqldbcm.v2.ClusterList'
                 - properties:
                     data:
                       items:
@@ -219,20 +219,20 @@ paths:
       - api-key: []
       summary: List of Clusters
       tags:
-      - Clusters (ksqldbcm/v1)
+      - Clusters (ksqldbcm/v2)
       x-request-access-name: ksqlDB API
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/ksqldbcm/v1/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/ksqldbcm/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/ksqldbcm/v1/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/ksqldbcm/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -240,7 +240,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ksqldbcm/v1/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ksqldbcm/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -253,7 +253,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/ksqldbcm/v1/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/ksqldbcm/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -267,7 +267,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/ksqldbcm/v1/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/ksqldbcm/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -292,7 +292,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ksqldbcm/v1/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ksqldbcm/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -301,22 +301,22 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/ksqldbcm/v1/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/ksqldbcm/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To ksqlDB API](https://img.shields.io/badge/-Request%20Access%20To%20ksqlDB%20API-%23bc8540)](mailto:ccloud-api-access+ksqldbcm-v1-early-access@confluent.io?subject=Request%20to%20join%20ksqldbcm/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ksqldbcm/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To ksqlDB API](https://img.shields.io/badge/-Request%20Access%20To%20ksqlDB%20API-%23bc8540)](mailto:ccloud-api-access+ksqldbcm-v2-early-access@confluent.io?subject=Request%20to%20join%20ksqldbcm/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ksqldbcm/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to create a cluster.
-      operationId: createKsqldbcmV1Cluster
+      operationId: createKsqldbcmV2Cluster
       requestBody:
         content:
           application/json:
             schema:
               allOf:
-              - $ref: '#/components/schemas/ksqldbcm.v1.Cluster'
+              - $ref: '#/components/schemas/ksqldbcm.v2.Cluster'
               - properties:
                   spec:
                     required:
@@ -345,7 +345,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/ksqldbcm.v1.Cluster'
+                - $ref: '#/components/schemas/ksqldbcm.v2.Cluster'
                 - properties:
                     spec:
                       required:
@@ -385,7 +385,7 @@ paths:
               description: Cluster resource uri
               explode: false
               schema:
-                example: https://api.confluent.cloud/ksqldbcm/v1/clusters/{id}
+                example: https://api.confluent.cloud/ksqldbcm/v2/clusters/{id}
                 format: uri
                 type: string
               style: simple
@@ -572,13 +572,13 @@ paths:
       - api-key: []
       summary: Create a Cluster
       tags:
-      - Clusters (ksqldbcm/v1)
+      - Clusters (ksqldbcm/v2)
       x-request-access-name: ksqlDB API
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url https://api.confluent.cloud/ksqldbcm/v1/clusters \
+            --url https://api.confluent.cloud/ksqldbcm/v2/clusters \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"spec":{"display_name":"ksqlDB_cluster_0","csu":4,"kafka_cluster":{"id":"lkc-c29js0","environment":"string"},"environment":{"id":"env-00000","environment":"string"}}}'
@@ -589,7 +589,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-c29js0\",\"environment\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/ksqldbcm/v1/clusters")
+            .url("https://api.confluent.cloud/ksqldbcm/v2/clusters")
             .post(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -598,7 +598,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ksqldbcm/v1/clusters\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ksqldbcm/v2/clusters\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"ksqlDB_cluster_0\\\",\\\"csu\\\":4,\\\"kafka_cluster\\\":{\\\"id\\\"\
           :\\\"lkc-c29js0\\\",\\\"environment\\\":\\\"string\\\"},\\\"environment\\\
@@ -621,7 +621,7 @@ paths:
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("POST", "/ksqldbcm/v1/clusters", payload, headers)
+          conn.request("POST", "/ksqldbcm/v2/clusters", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -635,7 +635,7 @@ paths:
             "method": "POST",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/ksqldbcm/v1/clusters",
+            "path": "/ksqldbcm/v2/clusters",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -669,7 +669,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ksqldbcm/v1/clusters");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ksqldbcm/v2/clusters");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -681,20 +681,20 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/ksqldbcm/v1/clusters");
+          var client = new RestClient("https://api.confluent.cloud/ksqldbcm/v2/clusters");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-c29js0\",\"environment\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: ksqlDB API
-  /ksqldbcm/v1/clusters/{id}:
+  /ksqldbcm/v2/clusters/{id}:
     delete:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To ksqlDB API](https://img.shields.io/badge/-Request%20Access%20To%20ksqlDB%20API-%23bc8540)](mailto:ccloud-api-access+ksqldbcm-v1-early-access@confluent.io?subject=Request%20to%20join%20ksqldbcm/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ksqldbcm/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To ksqlDB API](https://img.shields.io/badge/-Request%20Access%20To%20ksqlDB%20API-%23bc8540)](mailto:ccloud-api-access+ksqldbcm-v2-early-access@confluent.io?subject=Request%20to%20join%20ksqldbcm/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ksqldbcm/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to delete a cluster.
-      operationId: deleteKsqldbcmV1Cluster
+      operationId: deleteKsqldbcmV2Cluster
       parameters:
       - description: Scope the operation to the given environment.
         example: env-00000
@@ -850,20 +850,20 @@ paths:
       - api-key: []
       summary: Delete a Cluster
       tags:
-      - Clusters (ksqldbcm/v1)
+      - Clusters (ksqldbcm/v2)
       x-request-access-name: ksqlDB API
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/ksqldbcm/v1/clusters/{id}?environment=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/ksqldbcm/v2/clusters/{id}?environment=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/ksqldbcm/v1/clusters/{id}?environment=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/ksqldbcm/v2/clusters/{id}?environment=SOME_STRING_VALUE")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -871,7 +871,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ksqldbcm/v1/clusters/{id}?environment=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ksqldbcm/v2/clusters/{id}?environment=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -884,7 +884,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/ksqldbcm/v1/clusters/{id}?environment=SOME_STRING_VALUE", headers=headers)
+          conn.request("DELETE", "/ksqldbcm/v2/clusters/{id}?environment=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -898,7 +898,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/ksqldbcm/v1/clusters/{id}?environment=SOME_STRING_VALUE",
+            "path": "/ksqldbcm/v2/clusters/{id}?environment=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -923,7 +923,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ksqldbcm/v1/clusters/{id}?environment=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ksqldbcm/v2/clusters/{id}?environment=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -932,16 +932,16 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/ksqldbcm/v1/clusters/{id}?environment=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/ksqldbcm/v2/clusters/{id}?environment=SOME_STRING_VALUE");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To ksqlDB API](https://img.shields.io/badge/-Request%20Access%20To%20ksqlDB%20API-%23bc8540)](mailto:ccloud-api-access+ksqldbcm-v1-early-access@confluent.io?subject=Request%20to%20join%20ksqldbcm/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ksqldbcm/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To ksqlDB API](https://img.shields.io/badge/-Request%20Access%20To%20ksqlDB%20API-%23bc8540)](mailto:ccloud-api-access+ksqldbcm-v2-early-access@confluent.io?subject=Request%20to%20join%20ksqldbcm/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ksqldbcm/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to read a cluster.
-      operationId: getKsqldbcmV1Cluster
+      operationId: getKsqldbcmV2Cluster
       parameters:
       - description: Scope the operation to the given environment.
         example: env-00000
@@ -966,7 +966,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/ksqldbcm.v1.Cluster'
+                - $ref: '#/components/schemas/ksqldbcm.v2.Cluster'
                 - properties:
                     spec:
                       required:
@@ -1132,20 +1132,20 @@ paths:
       - api-key: []
       summary: Read a Cluster
       tags:
-      - Clusters (ksqldbcm/v1)
+      - Clusters (ksqldbcm/v2)
       x-request-access-name: ksqlDB API
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/ksqldbcm/v1/clusters/{id}?environment=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/ksqldbcm/v2/clusters/{id}?environment=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/ksqldbcm/v1/clusters/{id}?environment=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/ksqldbcm/v2/clusters/{id}?environment=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1153,7 +1153,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ksqldbcm/v1/clusters/{id}?environment=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ksqldbcm/v2/clusters/{id}?environment=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1166,7 +1166,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/ksqldbcm/v1/clusters/{id}?environment=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/ksqldbcm/v2/clusters/{id}?environment=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1180,7 +1180,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/ksqldbcm/v1/clusters/{id}?environment=SOME_STRING_VALUE",
+            "path": "/ksqldbcm/v2/clusters/{id}?environment=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1205,7 +1205,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ksqldbcm/v1/clusters/{id}?environment=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ksqldbcm/v2/clusters/{id}?environment=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1214,7 +1214,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/ksqldbcm/v1/clusters/{id}?environment=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/ksqldbcm/v2/clusters/{id}?environment=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1416,7 +1416,7 @@ components:
             type: string
           style: simple
   schemas:
-    ksqldbcm.v1.Cluster:
+    ksqldbcm.v2.Cluster:
       description: |-
         `Cluster` represents a ksqlDB runtime that you can issue queries to using its API endpoint.
         It executes SQL statements and queries which under the hood get built into corresponding
@@ -1426,7 +1426,7 @@ components:
         Related guide: [ksqlDB in Confluent Cloud](https://docs.confluent.io/cloud/current/ksqldb/index.html).
 
         ## The Clusters Model
-        <SchemaDefinition schemaRef="#/components/schemas/ksqldbcm.v1.Cluster" />
+        <SchemaDefinition schemaRef="#/components/schemas/ksqldbcm.v2.Cluster" />
 
         ## Quotas and Limits
         This resource is subject to the following quotas:
@@ -1439,7 +1439,7 @@ components:
           description: APIVersion defines the schema version of this representation
             of a resource.
           enum:
-          - ksqldbcm/v1
+          - ksqldbcm/v2
           readOnly: true
           type: string
         kind:
@@ -1463,15 +1463,15 @@ components:
           - $ref: '#/components/schemas/ObjectMeta'
           - properties:
               self:
-                example: https://api.confluent.cloud/ksqldbcm/v1/clusters/lksqlc-12345
+                example: https://api.confluent.cloud/ksqldbcm/v2/clusters/lksqlc-12345
               resource_name:
                 example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lksqlc-12345
         spec:
-          $ref: '#/components/schemas/ksqldbcm.v1.ClusterSpec'
+          $ref: '#/components/schemas/ksqldbcm.v2.ClusterSpec'
         status:
-          $ref: '#/components/schemas/ksqldbcm.v1.ClusterStatus'
+          $ref: '#/components/schemas/ksqldbcm.v2.ClusterStatus'
       type: object
-    ksqldbcm.v1.ClusterStatus:
+    ksqldbcm.v2.ClusterStatus:
       description: The status of the Cluster
       properties:
         phase:
@@ -1490,7 +1490,7 @@ components:
     SearchFilter:
       description: Filter a collection by a string search
       type: string
-    ksqldbcm.v1.ClusterList:
+    ksqldbcm.v2.ClusterList:
       description: |-
         `Cluster` represents a ksqlDB runtime that you can issue queries to using its API endpoint.
         It executes SQL statements and queries which under the hood get built into corresponding
@@ -1500,7 +1500,7 @@ components:
         Related guide: [ksqlDB in Confluent Cloud](https://docs.confluent.io/cloud/current/ksqldb/index.html).
 
         ## The Clusters Model
-        <SchemaDefinition schemaRef="#/components/schemas/ksqldbcm.v1.Cluster" />
+        <SchemaDefinition schemaRef="#/components/schemas/ksqldbcm.v2.Cluster" />
 
         ## Quotas and Limits
         This resource is subject to the following quotas:
@@ -1513,7 +1513,7 @@ components:
           description: APIVersion defines the schema version of this representation
             of a resource.
           enum:
-          - ksqldbcm/v1
+          - ksqldbcm/v2
           readOnly: true
           type: string
         kind:
@@ -1527,19 +1527,19 @@ components:
           - $ref: '#/components/schemas/ListMeta'
           - properties:
               first:
-                example: https://api.confluent.cloud/ksqldbcm/v1/clusters
+                example: https://api.confluent.cloud/ksqldbcm/v2/clusters
               last:
-                example: https://api.confluent.cloud/ksqldbcm/v1/clusters?page_token=bcAOehAY8F16YD84Z1wT
+                example: https://api.confluent.cloud/ksqldbcm/v2/clusters?page_token=bcAOehAY8F16YD84Z1wT
               prev:
-                example: https://api.confluent.cloud/ksqldbcm/v1/clusters?page_token=YIXRY97wWYmwzrax4dld
+                example: https://api.confluent.cloud/ksqldbcm/v2/clusters?page_token=YIXRY97wWYmwzrax4dld
               next:
-                example: https://api.confluent.cloud/ksqldbcm/v1/clusters?page_token=UvmDWOB1iwfAIBPj6EYb
+                example: https://api.confluent.cloud/ksqldbcm/v2/clusters?page_token=UvmDWOB1iwfAIBPj6EYb
         data:
           description: A data property that contains an array of resource items. Each
             entry in the array is a separate resource.
           items:
             allOf:
-            - $ref: '#/components/schemas/ksqldbcm.v1.Cluster'
+            - $ref: '#/components/schemas/ksqldbcm.v2.Cluster'
             - properties:
                 spec:
                   required:
@@ -1562,7 +1562,7 @@ components:
       - kind
       - metadata
       type: object
-    ksqldbcm.v1.ClusterSpec:
+    ksqldbcm.v2.ClusterSpec:
       description: The desired state of the Cluster
       properties:
         display_name:

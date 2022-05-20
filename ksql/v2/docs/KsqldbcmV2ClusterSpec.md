@@ -1,4 +1,4 @@
-# KsqldbcmV1ClusterSpec
+# KsqldbcmV2ClusterSpec
 
 ## Properties
 
@@ -12,145 +12,145 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewKsqldbcmV1ClusterSpec
+### NewKsqldbcmV2ClusterSpec
 
-`func NewKsqldbcmV1ClusterSpec() *KsqldbcmV1ClusterSpec`
+`func NewKsqldbcmV2ClusterSpec() *KsqldbcmV2ClusterSpec`
 
-NewKsqldbcmV1ClusterSpec instantiates a new KsqldbcmV1ClusterSpec object
+NewKsqldbcmV2ClusterSpec instantiates a new KsqldbcmV2ClusterSpec object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewKsqldbcmV1ClusterSpecWithDefaults
+### NewKsqldbcmV2ClusterSpecWithDefaults
 
-`func NewKsqldbcmV1ClusterSpecWithDefaults() *KsqldbcmV1ClusterSpec`
+`func NewKsqldbcmV2ClusterSpecWithDefaults() *KsqldbcmV2ClusterSpec`
 
-NewKsqldbcmV1ClusterSpecWithDefaults instantiates a new KsqldbcmV1ClusterSpec object
+NewKsqldbcmV2ClusterSpecWithDefaults instantiates a new KsqldbcmV2ClusterSpec object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetDisplayName
 
-`func (o *KsqldbcmV1ClusterSpec) GetDisplayName() string`
+`func (o *KsqldbcmV2ClusterSpec) GetDisplayName() string`
 
 GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
 
 ### GetDisplayNameOk
 
-`func (o *KsqldbcmV1ClusterSpec) GetDisplayNameOk() (*string, bool)`
+`func (o *KsqldbcmV2ClusterSpec) GetDisplayNameOk() (*string, bool)`
 
 GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDisplayName
 
-`func (o *KsqldbcmV1ClusterSpec) SetDisplayName(v string)`
+`func (o *KsqldbcmV2ClusterSpec) SetDisplayName(v string)`
 
 SetDisplayName sets DisplayName field to given value.
 
 ### HasDisplayName
 
-`func (o *KsqldbcmV1ClusterSpec) HasDisplayName() bool`
+`func (o *KsqldbcmV2ClusterSpec) HasDisplayName() bool`
 
 HasDisplayName returns a boolean if a field has been set.
 
 ### GetCsu
 
-`func (o *KsqldbcmV1ClusterSpec) GetCsu() int32`
+`func (o *KsqldbcmV2ClusterSpec) GetCsu() int32`
 
 GetCsu returns the Csu field if non-nil, zero value otherwise.
 
 ### GetCsuOk
 
-`func (o *KsqldbcmV1ClusterSpec) GetCsuOk() (*int32, bool)`
+`func (o *KsqldbcmV2ClusterSpec) GetCsuOk() (*int32, bool)`
 
 GetCsuOk returns a tuple with the Csu field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCsu
 
-`func (o *KsqldbcmV1ClusterSpec) SetCsu(v int32)`
+`func (o *KsqldbcmV2ClusterSpec) SetCsu(v int32)`
 
 SetCsu sets Csu field to given value.
 
 ### HasCsu
 
-`func (o *KsqldbcmV1ClusterSpec) HasCsu() bool`
+`func (o *KsqldbcmV2ClusterSpec) HasCsu() bool`
 
 HasCsu returns a boolean if a field has been set.
 
 ### GetHttpEndpoint
 
-`func (o *KsqldbcmV1ClusterSpec) GetHttpEndpoint() string`
+`func (o *KsqldbcmV2ClusterSpec) GetHttpEndpoint() string`
 
 GetHttpEndpoint returns the HttpEndpoint field if non-nil, zero value otherwise.
 
 ### GetHttpEndpointOk
 
-`func (o *KsqldbcmV1ClusterSpec) GetHttpEndpointOk() (*string, bool)`
+`func (o *KsqldbcmV2ClusterSpec) GetHttpEndpointOk() (*string, bool)`
 
 GetHttpEndpointOk returns a tuple with the HttpEndpoint field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHttpEndpoint
 
-`func (o *KsqldbcmV1ClusterSpec) SetHttpEndpoint(v string)`
+`func (o *KsqldbcmV2ClusterSpec) SetHttpEndpoint(v string)`
 
 SetHttpEndpoint sets HttpEndpoint field to given value.
 
 ### HasHttpEndpoint
 
-`func (o *KsqldbcmV1ClusterSpec) HasHttpEndpoint() bool`
+`func (o *KsqldbcmV2ClusterSpec) HasHttpEndpoint() bool`
 
 HasHttpEndpoint returns a boolean if a field has been set.
 
 ### GetKafkaCluster
 
-`func (o *KsqldbcmV1ClusterSpec) GetKafkaCluster() ObjectReference`
+`func (o *KsqldbcmV2ClusterSpec) GetKafkaCluster() ObjectReference`
 
 GetKafkaCluster returns the KafkaCluster field if non-nil, zero value otherwise.
 
 ### GetKafkaClusterOk
 
-`func (o *KsqldbcmV1ClusterSpec) GetKafkaClusterOk() (*ObjectReference, bool)`
+`func (o *KsqldbcmV2ClusterSpec) GetKafkaClusterOk() (*ObjectReference, bool)`
 
 GetKafkaClusterOk returns a tuple with the KafkaCluster field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetKafkaCluster
 
-`func (o *KsqldbcmV1ClusterSpec) SetKafkaCluster(v ObjectReference)`
+`func (o *KsqldbcmV2ClusterSpec) SetKafkaCluster(v ObjectReference)`
 
 SetKafkaCluster sets KafkaCluster field to given value.
 
 ### HasKafkaCluster
 
-`func (o *KsqldbcmV1ClusterSpec) HasKafkaCluster() bool`
+`func (o *KsqldbcmV2ClusterSpec) HasKafkaCluster() bool`
 
 HasKafkaCluster returns a boolean if a field has been set.
 
 ### GetEnvironment
 
-`func (o *KsqldbcmV1ClusterSpec) GetEnvironment() ObjectReference`
+`func (o *KsqldbcmV2ClusterSpec) GetEnvironment() ObjectReference`
 
 GetEnvironment returns the Environment field if non-nil, zero value otherwise.
 
 ### GetEnvironmentOk
 
-`func (o *KsqldbcmV1ClusterSpec) GetEnvironmentOk() (*ObjectReference, bool)`
+`func (o *KsqldbcmV2ClusterSpec) GetEnvironmentOk() (*ObjectReference, bool)`
 
 GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnvironment
 
-`func (o *KsqldbcmV1ClusterSpec) SetEnvironment(v ObjectReference)`
+`func (o *KsqldbcmV2ClusterSpec) SetEnvironment(v ObjectReference)`
 
 SetEnvironment sets Environment field to given value.
 
 ### HasEnvironment
 
-`func (o *KsqldbcmV1ClusterSpec) HasEnvironment() bool`
+`func (o *KsqldbcmV2ClusterSpec) HasEnvironment() bool`
 
 HasEnvironment returns a boolean if a field has been set.
 

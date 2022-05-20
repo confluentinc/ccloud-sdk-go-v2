@@ -1,19 +1,19 @@
-# \ClustersKsqldbcmV1Api
+# \ClustersKsqldbcmV2Api
 
 All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateKsqldbcmV1Cluster**](ClustersKsqldbcmV1Api.md#CreateKsqldbcmV1Cluster) | **Post** /ksqldbcm/v1/clusters | Create a Cluster
-[**DeleteKsqldbcmV1Cluster**](ClustersKsqldbcmV1Api.md#DeleteKsqldbcmV1Cluster) | **Delete** /ksqldbcm/v1/clusters/{id} | Delete a Cluster
-[**GetKsqldbcmV1Cluster**](ClustersKsqldbcmV1Api.md#GetKsqldbcmV1Cluster) | **Get** /ksqldbcm/v1/clusters/{id} | Read a Cluster
-[**ListKsqldbcmV1Clusters**](ClustersKsqldbcmV1Api.md#ListKsqldbcmV1Clusters) | **Get** /ksqldbcm/v1/clusters | List of Clusters
+[**CreateKsqldbcmV2Cluster**](ClustersKsqldbcmV2Api.md#CreateKsqldbcmV2Cluster) | **Post** /ksqldbcm/v2/clusters | Create a Cluster
+[**DeleteKsqldbcmV2Cluster**](ClustersKsqldbcmV2Api.md#DeleteKsqldbcmV2Cluster) | **Delete** /ksqldbcm/v2/clusters/{id} | Delete a Cluster
+[**GetKsqldbcmV2Cluster**](ClustersKsqldbcmV2Api.md#GetKsqldbcmV2Cluster) | **Get** /ksqldbcm/v2/clusters/{id} | Read a Cluster
+[**ListKsqldbcmV2Clusters**](ClustersKsqldbcmV2Api.md#ListKsqldbcmV2Clusters) | **Get** /ksqldbcm/v2/clusters | List of Clusters
 
 
 
-## CreateKsqldbcmV1Cluster
+## CreateKsqldbcmV2Cluster
 
-> KsqldbcmV1Cluster CreateKsqldbcmV1Cluster(ctx).KsqldbcmV1Cluster(ksqldbcmV1Cluster).Execute()
+> KsqldbcmV2Cluster CreateKsqldbcmV2Cluster(ctx).KsqldbcmV2Cluster(ksqldbcmV2Cluster).Execute()
 
 Create a Cluster
 
@@ -32,17 +32,17 @@ import (
 )
 
 func main() {
-    ksqldbcmV1Cluster := *openapiclient.NewKsqldbcmV1Cluster() // KsqldbcmV1Cluster |  (optional)
+    ksqldbcmV2Cluster := *openapiclient.NewKsqldbcmV2Cluster() // KsqldbcmV2Cluster |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClustersKsqldbcmV1Api.CreateKsqldbcmV1Cluster(context.Background()).KsqldbcmV1Cluster(ksqldbcmV1Cluster).Execute()
+    resp, r, err := api_client.ClustersKsqldbcmV2Api.CreateKsqldbcmV2Cluster(context.Background()).KsqldbcmV2Cluster(ksqldbcmV2Cluster).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClustersKsqldbcmV1Api.CreateKsqldbcmV1Cluster``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClustersKsqldbcmV2Api.CreateKsqldbcmV2Cluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateKsqldbcmV1Cluster`: KsqldbcmV1Cluster
-    fmt.Fprintf(os.Stdout, "Response from `ClustersKsqldbcmV1Api.CreateKsqldbcmV1Cluster`: %v\n", resp)
+    // response from `CreateKsqldbcmV2Cluster`: KsqldbcmV2Cluster
+    fmt.Fprintf(os.Stdout, "Response from `ClustersKsqldbcmV2Api.CreateKsqldbcmV2Cluster`: %v\n", resp)
 }
 ```
 
@@ -52,16 +52,16 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateKsqldbcmV1ClusterRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateKsqldbcmV2ClusterRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ksqldbcmV1Cluster** | [**KsqldbcmV1Cluster**](KsqldbcmV1Cluster.md) |  | 
+ **ksqldbcmV2Cluster** | [**KsqldbcmV2Cluster**](KsqldbcmV2Cluster.md) |  | 
 
 ### Return type
 
-[**KsqldbcmV1Cluster**](ksqldbcm.v1.Cluster.md)
+[**KsqldbcmV2Cluster**](ksqldbcm.v2.Cluster.md)
 
 ### Authorization
 
@@ -77,9 +77,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteKsqldbcmV1Cluster
+## DeleteKsqldbcmV2Cluster
 
-> DeleteKsqldbcmV1Cluster(ctx, id).Environment(environment).Execute()
+> DeleteKsqldbcmV2Cluster(ctx, id).Environment(environment).Execute()
 
 Delete a Cluster
 
@@ -103,9 +103,9 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClustersKsqldbcmV1Api.DeleteKsqldbcmV1Cluster(context.Background(), id).Environment(environment).Execute()
+    resp, r, err := api_client.ClustersKsqldbcmV2Api.DeleteKsqldbcmV2Cluster(context.Background(), id).Environment(environment).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClustersKsqldbcmV1Api.DeleteKsqldbcmV1Cluster``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClustersKsqldbcmV2Api.DeleteKsqldbcmV2Cluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -121,7 +121,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteKsqldbcmV1ClusterRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteKsqldbcmV2ClusterRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -147,9 +147,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetKsqldbcmV1Cluster
+## GetKsqldbcmV2Cluster
 
-> KsqldbcmV1Cluster GetKsqldbcmV1Cluster(ctx, id).Environment(environment).Execute()
+> KsqldbcmV2Cluster GetKsqldbcmV2Cluster(ctx, id).Environment(environment).Execute()
 
 Read a Cluster
 
@@ -173,13 +173,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClustersKsqldbcmV1Api.GetKsqldbcmV1Cluster(context.Background(), id).Environment(environment).Execute()
+    resp, r, err := api_client.ClustersKsqldbcmV2Api.GetKsqldbcmV2Cluster(context.Background(), id).Environment(environment).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClustersKsqldbcmV1Api.GetKsqldbcmV1Cluster``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClustersKsqldbcmV2Api.GetKsqldbcmV2Cluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetKsqldbcmV1Cluster`: KsqldbcmV1Cluster
-    fmt.Fprintf(os.Stdout, "Response from `ClustersKsqldbcmV1Api.GetKsqldbcmV1Cluster`: %v\n", resp)
+    // response from `GetKsqldbcmV2Cluster`: KsqldbcmV2Cluster
+    fmt.Fprintf(os.Stdout, "Response from `ClustersKsqldbcmV2Api.GetKsqldbcmV2Cluster`: %v\n", resp)
 }
 ```
 
@@ -193,7 +193,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetKsqldbcmV1ClusterRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetKsqldbcmV2ClusterRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -203,7 +203,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KsqldbcmV1Cluster**](ksqldbcm.v1.Cluster.md)
+[**KsqldbcmV2Cluster**](ksqldbcm.v2.Cluster.md)
 
 ### Authorization
 
@@ -219,9 +219,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ListKsqldbcmV1Clusters
+## ListKsqldbcmV2Clusters
 
-> KsqldbcmV1ClusterList ListKsqldbcmV1Clusters(ctx).Environment(environment).PageSize(pageSize).PageToken(pageToken).Execute()
+> KsqldbcmV2ClusterList ListKsqldbcmV2Clusters(ctx).Environment(environment).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Clusters
 
@@ -246,13 +246,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClustersKsqldbcmV1Api.ListKsqldbcmV1Clusters(context.Background()).Environment(environment).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.ClustersKsqldbcmV2Api.ListKsqldbcmV2Clusters(context.Background()).Environment(environment).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClustersKsqldbcmV1Api.ListKsqldbcmV1Clusters``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ClustersKsqldbcmV2Api.ListKsqldbcmV2Clusters``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListKsqldbcmV1Clusters`: KsqldbcmV1ClusterList
-    fmt.Fprintf(os.Stdout, "Response from `ClustersKsqldbcmV1Api.ListKsqldbcmV1Clusters`: %v\n", resp)
+    // response from `ListKsqldbcmV2Clusters`: KsqldbcmV2ClusterList
+    fmt.Fprintf(os.Stdout, "Response from `ClustersKsqldbcmV2Api.ListKsqldbcmV2Clusters`: %v\n", resp)
 }
 ```
 
@@ -262,7 +262,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListKsqldbcmV1ClustersRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListKsqldbcmV2ClustersRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -273,7 +273,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KsqldbcmV1ClusterList**](ksqldbcm.v1.ClusterList.md)
+[**KsqldbcmV2ClusterList**](ksqldbcm.v2.ClusterList.md)
 
 ### Authorization
 
