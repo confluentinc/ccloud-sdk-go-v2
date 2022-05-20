@@ -30,6 +30,10 @@ import (
 	"time"
 )
 
+import (
+	"reflect"
+)
+
 // BillingV1alphaPromoCodeClaim Promo code claim. 
 type BillingV1alphaPromoCodeClaim struct {
 	// Remaining amount of promo code in dollars.
@@ -151,6 +155,43 @@ func (o *BillingV1alphaPromoCodeClaim) HasExpiresAt() bool {
 // SetExpiresAt gets a reference to the given time.Time and assigns it to the ExpiresAt field.
 func (o *BillingV1alphaPromoCodeClaim) SetExpiresAt(v time.Time) {
 	o.ExpiresAt = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *BillingV1alphaPromoCodeClaim) Redact() {
+    o.recurseRedact(o.Balance)
+    o.recurseRedact(o.ClaimedAt)
+    o.recurseRedact(o.ExpiresAt)
+}
+
+func (o *BillingV1alphaPromoCodeClaim) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o BillingV1alphaPromoCodeClaim) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o BillingV1alphaPromoCodeClaim) MarshalJSON() ([]byte, error) {

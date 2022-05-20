@@ -30,6 +30,10 @@ import (
 	"time"
 )
 
+import (
+	"reflect"
+)
+
 // BillingV1alphaSupportPlan `SupportPlan` objects represent an organization's support plan and any relevant support info. 
 type BillingV1alphaSupportPlan struct {
 	// Support plan subscription type.
@@ -117,6 +121,42 @@ func (o *BillingV1alphaSupportPlan) HasEffectiveAt() bool {
 // SetEffectiveAt gets a reference to the given time.Time and assigns it to the EffectiveAt field.
 func (o *BillingV1alphaSupportPlan) SetEffectiveAt(v time.Time) {
 	o.EffectiveAt = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *BillingV1alphaSupportPlan) Redact() {
+    o.recurseRedact(o.SubscriptionType)
+    o.recurseRedact(o.EffectiveAt)
+}
+
+func (o *BillingV1alphaSupportPlan) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o BillingV1alphaSupportPlan) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o BillingV1alphaSupportPlan) MarshalJSON() ([]byte, error) {

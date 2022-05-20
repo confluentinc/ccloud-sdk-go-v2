@@ -84,12 +84,15 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [BillingV1alphaProduct](docs/BillingV1alphaProduct.md)
+ - [BillingV1alphaProductTier](docs/BillingV1alphaProductTier.md)
  - [BillingV1alphaProfile](docs/BillingV1alphaProfile.md)
  - [BillingV1alphaPromoCode](docs/BillingV1alphaPromoCode.md)
  - [BillingV1alphaPromoCodeClaim](docs/BillingV1alphaPromoCodeClaim.md)
  - [BillingV1alphaSupportPlan](docs/BillingV1alphaSupportPlan.md)
  - [BillingV1alphaTax](docs/BillingV1alphaTax.md)
  - [BillingV1alphaTaxId](docs/BillingV1alphaTaxId.md)
+ - [BillingV1alphaTier](docs/BillingV1alphaTier.md)
  - [Error](docs/Error.md)
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)

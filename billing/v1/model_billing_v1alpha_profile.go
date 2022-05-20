@@ -29,6 +29,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // BillingV1alphaProfile `Profile` objects represent the billing profile to your organization. 
 type BillingV1alphaProfile struct {
 	// The organization's billing email address.
@@ -116,6 +120,42 @@ func (o *BillingV1alphaProfile) HasTax() bool {
 // SetTax gets a reference to the given BillingV1alphaTax and assigns it to the Tax field.
 func (o *BillingV1alphaProfile) SetTax(v BillingV1alphaTax) {
 	o.Tax = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *BillingV1alphaProfile) Redact() {
+    o.recurseRedact(o.Email)
+    o.recurseRedact(o.Tax)
+}
+
+func (o *BillingV1alphaProfile) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o BillingV1alphaProfile) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o BillingV1alphaProfile) MarshalJSON() ([]byte, error) {

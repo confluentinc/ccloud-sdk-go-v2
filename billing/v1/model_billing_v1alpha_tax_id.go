@@ -29,6 +29,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // BillingV1alphaTaxId Tax ID object. 
 type BillingV1alphaTaxId struct {
 	// Tax type based on region (https://stripe.com/docs/billing/customer/tax-ids).
@@ -102,6 +106,42 @@ func (o *BillingV1alphaTaxId) GetIdentifierOk() (*string, bool) {
 // SetIdentifier sets field value
 func (o *BillingV1alphaTaxId) SetIdentifier(v string) {
 	o.Identifier = v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *BillingV1alphaTaxId) Redact() {
+    o.recurseRedact(&o.Type)
+    o.recurseRedact(&o.Identifier)
+}
+
+func (o *BillingV1alphaTaxId) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o BillingV1alphaTaxId) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o BillingV1alphaTaxId) MarshalJSON() ([]byte, error) {

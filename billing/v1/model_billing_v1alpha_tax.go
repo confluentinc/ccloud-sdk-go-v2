@@ -29,6 +29,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // BillingV1alphaTax Billing tax info.
 type BillingV1alphaTax struct {
 	// Address line 1 (e.g., street, PO Box, or company name).
@@ -251,6 +255,47 @@ func (o *BillingV1alphaTax) HasTaxIds() bool {
 // SetTaxIds gets a reference to the given []BillingV1alphaTaxId and assigns it to the TaxIds field.
 func (o *BillingV1alphaTax) SetTaxIds(v []BillingV1alphaTaxId) {
 	o.TaxIds = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *BillingV1alphaTax) Redact() {
+    o.recurseRedact(&o.Line1)
+    o.recurseRedact(o.Line2)
+    o.recurseRedact(&o.City)
+    o.recurseRedact(&o.State)
+    o.recurseRedact(&o.Country)
+    o.recurseRedact(&o.PostalCode)
+    o.recurseRedact(o.TaxIds)
+}
+
+func (o *BillingV1alphaTax) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o BillingV1alphaTax) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o BillingV1alphaTax) MarshalJSON() ([]byte, error) {

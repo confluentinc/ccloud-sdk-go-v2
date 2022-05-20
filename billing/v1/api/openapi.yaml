@@ -41,6 +41,13 @@ tags:
     ## The Promo Codes Model
     <SchemaDefinition schemaRef="#/components/schemas/billing.v1alpha.PromoCode" />
   name: Promo Codes (billing/v1alpha)
+- description: |-
+    `ProductTier` objects represent the billing tier selected for a product
+
+
+    ## The Product Tiers Model
+    <SchemaDefinition schemaRef="#/components/schemas/billing.v1alpha.ProductTier" />
+  name: Product Tiers (billing/v1alpha)
 paths: {}
 components:
   responses:
@@ -185,6 +192,29 @@ components:
           schema:
             type: string
           style: simple
+    ValidationError:
+      content:
+        application/json:
+          example:
+            errors:
+            - status: "422"
+              code: invalid_configuration
+              id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              title: Validation Failed
+              detail: 'The property ''/cluster/storage_size'' of type string did not
+                match the following type: integer'
+              source:
+                pointer: /cluster/storage_size
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: Validation Failed
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
     RateLimitError:
       description: Rate Limit Exceeded
       headers:
@@ -275,6 +305,28 @@ components:
           allOf:
           - $ref: '#/components/schemas/billing.v1alpha.PromoCodeClaim'
           description: The promo code's claim details.
+      type: object
+      x-declarative: false
+      x-enable-id: true
+      x-enable-listmeta: true
+      x-enable-objectmeta: true
+    billing.v1alpha.ProductTier:
+      description: |
+        `ProductTier` objects represent the billing tier selected for a product
+      properties:
+        product:
+          allOf:
+          - $ref: '#/components/schemas/billing.v1alpha.Product'
+          description: Billable product details.
+        tier:
+          allOf:
+          - $ref: '#/components/schemas/billing.v1alpha.Tier'
+          description: Billable tier details.
+        effective_at:
+          description: effective date for billing the selected product tier.
+          example: 2006-01-02T15:04:05-07:00
+          format: date-time
+          type: string
       type: object
       x-declarative: false
       x-enable-id: true
@@ -383,8 +435,33 @@ components:
           format: date-time
           type: string
       type: object
+    billing.v1alpha.Product:
+      description: |
+        Billing details for a Product.
+      properties:
+        sku:
+          description: Billing sku of the product.
+          example: stream-governance
+          type: string
+        display_name:
+          description: Billing display name of the product.
+          example: Stream Governance
+          type: string
+      type: object
+    billing.v1alpha.Tier:
+      description: |
+        Billing details for a Tier.
+      properties:
+        sku:
+          description: Billing sku of the tier.
+          example: free
+          type: string
+        display_name:
+          description: Billing display name of the tier.
+          example: Free
+          type: string
+      type: object
     ObjectMeta:
-      additionalProperties: false
       description: ObjectMeta is metadata that all persisted resources must have,
         which includes all objects users must create.
       properties:
@@ -428,9 +505,7 @@ components:
       readOnly: true
       required:
       - self
-      type: object
     ListMeta:
-      additionalProperties: false
       description: ListMeta describes metadata that resource collections may have
       properties:
         first:
@@ -472,7 +547,6 @@ components:
           type: integer
       type: object
     ObjectReference:
-      additionalProperties: false
       description: ObjectReference provides information for you to locate the referred
         object
       properties:
@@ -514,7 +588,6 @@ components:
       - resource_name
       type: object
     Failure:
-      additionalProperties: false
       description: Provides information about problems encountered while performing
         an operation.
       properties:
@@ -528,7 +601,6 @@ components:
       - errors
       type: object
     Error:
-      additionalProperties: false
       description: Describes a particular error encountered while performing an operation.
       properties:
         id:
