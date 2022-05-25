@@ -42,16 +42,18 @@ type KafkaQuotasV1ClientQuota struct {
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
 	Id *string `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
-	// The name of the quota object.
+	// The name of the client quota.
 	DisplayName *string `json:"display_name,omitempty"`
-	// A human readable description for the Client Quota
+	// A human readable description for the client quota.
 	Description *string `json:"description,omitempty"`
-	// throughput related quotas
+	// Throughput for the client quota.
 	Throughput *KafkaQuotasV1Throughput `json:"throughput,omitempty"`
 	// The cluster to which this belongs.
 	Cluster *ObjectReference `json:"cluster,omitempty"`
-	// a list of service accounts. Special name \"default\" can be used to represent the default quota for all users and service accounts. 
+	// A list of service accounts. Special name \"default\" can be used to represent the default quota for all users and service accounts. 
 	Principals *[]ObjectReference `json:"principals,omitempty"`
+	// The environment to which this belongs.
+	Environment *ObjectReference `json:"environment,omitempty"`
 }
 
 // NewKafkaQuotasV1ClientQuota instantiates a new KafkaQuotasV1ClientQuota object
@@ -359,6 +361,38 @@ func (o *KafkaQuotasV1ClientQuota) SetPrincipals(v []ObjectReference) {
 	o.Principals = &v
 }
 
+// GetEnvironment returns the Environment field value if set, zero value otherwise.
+func (o *KafkaQuotasV1ClientQuota) GetEnvironment() ObjectReference {
+	if o == nil || o.Environment == nil {
+		var ret ObjectReference
+		return ret
+	}
+	return *o.Environment
+}
+
+// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KafkaQuotasV1ClientQuota) GetEnvironmentOk() (*ObjectReference, bool) {
+	if o == nil || o.Environment == nil {
+		return nil, false
+	}
+	return o.Environment, true
+}
+
+// HasEnvironment returns a boolean if a field has been set.
+func (o *KafkaQuotasV1ClientQuota) HasEnvironment() bool {
+	if o != nil && o.Environment != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
+func (o *KafkaQuotasV1ClientQuota) SetEnvironment(v ObjectReference) {
+	o.Environment = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *KafkaQuotasV1ClientQuota) Redact() {
     o.recurseRedact(o.ApiVersion)
@@ -370,6 +404,7 @@ func (o *KafkaQuotasV1ClientQuota) Redact() {
     o.recurseRedact(o.Throughput)
     o.recurseRedact(o.Cluster)
     o.recurseRedact(o.Principals)
+    o.recurseRedact(o.Environment)
 }
 
 func (o *KafkaQuotasV1ClientQuota) recurseRedact(v interface{}) {
@@ -430,6 +465,9 @@ func (o KafkaQuotasV1ClientQuota) MarshalJSON() ([]byte, error) {
 	}
 	if o.Principals != nil {
 		toSerialize["principals"] = o.Principals
+	}
+	if o.Environment != nil {
+		toSerialize["environment"] = o.Environment
 	}
 	return json.Marshal(toSerialize)
 }

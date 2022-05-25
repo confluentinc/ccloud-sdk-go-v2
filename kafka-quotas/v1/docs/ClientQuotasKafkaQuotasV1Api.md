@@ -218,7 +218,7 @@ Name | Type | Description  | Notes
 
 ## ListKafkaQuotasV1ClientQuotas
 
-> KafkaQuotasV1ClientQuotaList ListKafkaQuotasV1ClientQuotas(ctx).Cluster(cluster).PageSize(pageSize).PageToken(pageToken).Execute()
+> KafkaQuotasV1ClientQuotaList ListKafkaQuotasV1ClientQuotas(ctx).Cluster(cluster).Environment(environment).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Client Quotas
 
@@ -238,12 +238,13 @@ import (
 
 func main() {
     cluster := "lkc-xxxxx" // string | Filter the results by exact match for cluster.
+    environment := "env-xxxxx" // string | Filter the results by exact match for environment.
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClientQuotasKafkaQuotasV1Api.ListKafkaQuotasV1ClientQuotas(context.Background()).Cluster(cluster).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.ClientQuotasKafkaQuotasV1Api.ListKafkaQuotasV1ClientQuotas(context.Background()).Cluster(cluster).Environment(environment).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ClientQuotasKafkaQuotasV1Api.ListKafkaQuotasV1ClientQuotas``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -265,6 +266,7 @@ Other parameters are passed through a pointer to a apiListKafkaQuotasV1ClientQuo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cluster** | **string** | Filter the results by exact match for cluster. | 
+ **environment** | **string** | Filter the results by exact match for environment. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 

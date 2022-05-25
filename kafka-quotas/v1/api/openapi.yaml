@@ -50,6 +50,15 @@ paths:
         schema:
           $ref: '#/components/schemas/SearchFilter'
         style: form
+      - description: Filter the results by exact match for environment.
+        example: env-xxxxx
+        explode: true
+        in: query
+        name: environment
+        required: true
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
       - description: A pagination size for collection requests.
         explode: true
         in: query
@@ -86,6 +95,11 @@ paths:
                               id: lkc-xxxxx
                               related: https://api.confluent.cloud/cmk/v2/clusters/lkc-xxxxx
                               resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lkc-xxxxx
+                          environment:
+                            example:
+                              id: env-xxxxx
+                              related: https://api.confluent.cloud/v2/environments/env-xxxxx
+                              resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-xxxxx
                       type: array
                   type: object
           description: Client Quota.
@@ -211,14 +225,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/kafka-quotas/v1/client-quotas?cluster=lkc-xxxxx&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/kafka-quotas/v1/client-quotas?cluster=lkc-xxxxx&environment=env-xxxxx&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/kafka-quotas/v1/client-quotas?cluster=lkc-xxxxx&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/kafka-quotas/v1/client-quotas?cluster=lkc-xxxxx&environment=env-xxxxx&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -226,7 +240,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/kafka-quotas/v1/client-quotas?cluster=lkc-xxxxx&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/kafka-quotas/v1/client-quotas?cluster=lkc-xxxxx&environment=env-xxxxx&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -239,7 +253,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/kafka-quotas/v1/client-quotas?cluster=lkc-xxxxx&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/kafka-quotas/v1/client-quotas?cluster=lkc-xxxxx&environment=env-xxxxx&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -253,7 +267,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/kafka-quotas/v1/client-quotas?cluster=lkc-xxxxx&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/kafka-quotas/v1/client-quotas?cluster=lkc-xxxxx&environment=env-xxxxx&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -278,7 +292,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/kafka-quotas/v1/client-quotas?cluster=lkc-xxxxx&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/kafka-quotas/v1/client-quotas?cluster=lkc-xxxxx&environment=env-xxxxx&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -287,7 +301,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/kafka-quotas/v1/client-quotas?cluster=lkc-xxxxx&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/kafka-quotas/v1/client-quotas?cluster=lkc-xxxxx&environment=env-xxxxx&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -306,12 +320,17 @@ paths:
               - required:
                 - cluster
                 - display_name
+                - environment
                 - principals
+                - throughput
                 type: object
               - properties:
                   cluster:
                     example:
                       id: lkc-xxxxx
+                  environment:
+                    example:
+                      id: env-xxxxx
                 type: object
       responses:
         "201":
@@ -323,7 +342,9 @@ paths:
                 - required:
                   - cluster
                   - display_name
+                  - environment
                   - principals
+                  - throughput
                   type: object
                 - properties:
                     cluster:
@@ -331,6 +352,11 @@ paths:
                         id: lkc-xxxxx
                         related: https://api.confluent.cloud/cmk/v2/clusters/lkc-xxxxx
                         resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lkc-xxxxx
+                    environment:
+                      example:
+                        id: env-xxxxx
+                        related: https://api.confluent.cloud/v2/environments/env-xxxxx
+                        resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-xxxxx
                   type: object
           description: A Client Quota was created.
           headers:
@@ -519,13 +545,13 @@ paths:
             --url https://api.confluent.cloud/kafka-quotas/v1/client-quotas \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"QuotaForSA1","description":"This quota defines limits on how much the target principals can use cluster x","throughput":{"ingress_byte_rate":"string","egress_byte_rate":"string"},"cluster":{"id":"lkc-xxxxx","environment":"string"},"principals":[{"id":"string","environment":"string"}]}'
+            --data '{"display_name":"QuotaForSA1","description":"This quota defines limits on how much the target principals can use cluster lkc-xxxxx","throughput":{"ingress_byte_rate":"string","egress_byte_rate":"string"},"cluster":{"id":"lkc-xxxxx","environment":"string"},"principals":[{"id":"string","environment":"string"}],"environment":{"id":"env-xxxxx","environment":"string"}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster x\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"lkc-xxxxx\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}]}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"lkc-xxxxx\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}],\"environment\":{\"id\":\"env-xxxxx\",\"environment\":\"string\"}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/kafka-quotas/v1/client-quotas")
             .post(body)
@@ -539,22 +565,23 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/kafka-quotas/v1/client-quotas\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"QuotaForSA1\\\
           \",\\\"description\\\":\\\"This quota defines limits on how much the target\
-          \ principals can use cluster x\\\",\\\"throughput\\\":{\\\"ingress_byte_rate\\\
+          \ principals can use cluster lkc-xxxxx\\\",\\\"throughput\\\":{\\\"ingress_byte_rate\\\
           \":\\\"string\\\",\\\"egress_byte_rate\\\":\\\"string\\\"},\\\"cluster\\\
           \":{\\\"id\\\":\\\"lkc-xxxxx\\\",\\\"environment\\\":\\\"string\\\"},\\\"\
           principals\\\":[{\\\"id\\\":\\\"string\\\",\\\"environment\\\":\\\"string\\\
-          \"}]}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\"\
-          , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
-          defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
-          \tfmt.Println(string(body))\n\n}"
+          \"}],\\\"environment\\\":{\\\"id\\\":\\\"env-xxxxx\\\",\\\"environment\\\
+          \":\\\"string\\\"}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
+          \n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\t\
+          req.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster x\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"lkc-xxxxx\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}]}"
+          payload = "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"lkc-xxxxx\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}],\"environment\":{\"id\":\"env-xxxxx\",\"environment\":\"string\"}}"
 
           headers = {
               'Authorization': "Basic REPLACE_BASIC_AUTH",
@@ -597,10 +624,11 @@ paths:
 
           req.write(JSON.stringify({
             display_name: 'QuotaForSA1',
-            description: 'This quota defines limits on how much the target principals can use cluster x',
+            description: 'This quota defines limits on how much the target principals can use cluster lkc-xxxxx',
             throughput: {ingress_byte_rate: 'string', egress_byte_rate: 'string'},
             cluster: {id: 'lkc-xxxxx', environment: 'string'},
-            principals: [{id: 'string', environment: 'string'}]
+            principals: [{id: 'string', environment: 'string'}],
+            environment: {id: 'env-xxxxx', environment: 'string'}
           }));
           req.end();
       - lang: C
@@ -615,7 +643,7 @@ paths:
           headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster x\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"lkc-xxxxx\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}]}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"lkc-xxxxx\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}],\"environment\":{\"id\":\"env-xxxxx\",\"environment\":\"string\"}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -624,7 +652,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddHeader("content-type", "application/json");
-          request.AddParameter("application/json", "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster x\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"lkc-xxxxx\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}]}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"lkc-xxxxx\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}],\"environment\":{\"id\":\"env-xxxxx\",\"environment\":\"string\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Kafka Quota v1
   /kafka-quotas/v1/client-quotas/{id}:
@@ -892,9 +920,11 @@ paths:
                   - api_version
                   - cluster
                   - display_name
+                  - environment
                   - id
                   - kind
                   - principals
+                  - throughput
                   type: object
                 - properties:
                     cluster:
@@ -902,6 +932,11 @@ paths:
                         id: lkc-xxxxx
                         related: https://api.confluent.cloud/cmk/v2/clusters/lkc-xxxxx
                         resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lkc-xxxxx
+                    environment:
+                      example:
+                        id: env-xxxxx
+                        related: https://api.confluent.cloud/v2/environments/env-xxxxx
+                        resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-xxxxx
                   type: object
           description: Client Quota.
           headers:
@@ -1144,7 +1179,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/kafka-quotas.v1.ClientQuotaUpdate'
+              allOf:
+              - $ref: '#/components/schemas/kafka-quotas.v1.ClientQuotaUpdate'
+              - properties:
+                  spec:
+                    properties:
+                      environment:
+                        example:
+                          id: env-00000
+                    required:
+                    - environment
+                    type: object
+                required:
+                - spec
+                type: object
       responses:
         "200":
           content:
@@ -1156,9 +1204,11 @@ paths:
                   - api_version
                   - cluster
                   - display_name
+                  - environment
                   - id
                   - kind
                   - principals
+                  - throughput
                   type: object
                 - properties:
                     cluster:
@@ -1166,6 +1216,11 @@ paths:
                         id: lkc-xxxxx
                         related: https://api.confluent.cloud/cmk/v2/clusters/lkc-xxxxx
                         resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lkc-xxxxx
+                    environment:
+                      example:
+                        id: env-xxxxx
+                        related: https://api.confluent.cloud/v2/environments/env-xxxxx
+                        resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-xxxxx
                   type: object
           description: Client Quota.
           headers:
@@ -1334,13 +1389,13 @@ paths:
             --url https://api.confluent.cloud/kafka-quotas/v1/client-quotas/%7Bid%7D \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"QuotaForSA1","description":"This quota defines limits on how much the target principals can use cluster x","throughput":{"ingress_byte_rate":"string","egress_byte_rate":"string"},"cluster":{"id":"string","environment":"string"},"principals":[{"id":"string","environment":"string"}]}'
+            --data '{"display_name":"QuotaForSA1","description":"This quota defines limits on how much the target principals can use cluster lkc-xxxxx","throughput":{"ingress_byte_rate":"string","egress_byte_rate":"string"},"cluster":{"id":"string","environment":"string"},"principals":[{"id":"string","environment":"string"}],"environment":{"id":"string","environment":"string"},"spec":{"environment":{"id":"env-00000"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster x\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}]}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}],\"environment\":{\"id\":\"string\",\"environment\":\"string\"},\"spec\":{\"environment\":{\"id\":\"env-00000\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/kafka-quotas/v1/client-quotas/%7Bid%7D")
             .patch(body)
@@ -1354,11 +1409,13 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/kafka-quotas/v1/client-quotas/%7Bid%7D\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"QuotaForSA1\\\
           \",\\\"description\\\":\\\"This quota defines limits on how much the target\
-          \ principals can use cluster x\\\",\\\"throughput\\\":{\\\"ingress_byte_rate\\\
+          \ principals can use cluster lkc-xxxxx\\\",\\\"throughput\\\":{\\\"ingress_byte_rate\\\
           \":\\\"string\\\",\\\"egress_byte_rate\\\":\\\"string\\\"},\\\"cluster\\\
           \":{\\\"id\\\":\\\"string\\\",\\\"environment\\\":\\\"string\\\"},\\\"principals\\\
-          \":[{\\\"id\\\":\\\"string\\\",\\\"environment\\\":\\\"string\\\"}]}\")\n\
-          \n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
+          \":[{\\\"id\\\":\\\"string\\\",\\\"environment\\\":\\\"string\\\"}],\\\"\
+          environment\\\":{\\\"id\\\":\\\"string\\\",\\\"environment\\\":\\\"string\\\
+          \"},\\\"spec\\\":{\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\"}}}\"\
+          )\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\"\
           , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
           defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
@@ -1369,7 +1426,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster x\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}]}"
+          payload = "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}],\"environment\":{\"id\":\"string\",\"environment\":\"string\"},\"spec\":{\"environment\":{\"id\":\"env-00000\"}}}"
 
           headers = {
               'Authorization': "Basic REPLACE_BASIC_AUTH",
@@ -1412,10 +1469,12 @@ paths:
 
           req.write(JSON.stringify({
             display_name: 'QuotaForSA1',
-            description: 'This quota defines limits on how much the target principals can use cluster x',
+            description: 'This quota defines limits on how much the target principals can use cluster lkc-xxxxx',
             throughput: {ingress_byte_rate: 'string', egress_byte_rate: 'string'},
             cluster: {id: 'string', environment: 'string'},
-            principals: [{id: 'string', environment: 'string'}]
+            principals: [{id: 'string', environment: 'string'}],
+            environment: {id: 'string', environment: 'string'},
+            spec: {environment: {id: 'env-00000'}}
           }));
           req.end();
       - lang: C
@@ -1430,7 +1489,7 @@ paths:
           headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster x\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}]}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}],\"environment\":{\"id\":\"string\",\"environment\":\"string\"},\"spec\":{\"environment\":{\"id\":\"env-00000\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1439,7 +1498,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddHeader("content-type", "application/json");
-          request.AddParameter("application/json", "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster x\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}]}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}],\"environment\":{\"id\":\"string\",\"environment\":\"string\"},\"spec\":{\"environment\":{\"id\":\"env-00000\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Kafka Quota v1
 components:
@@ -1683,18 +1742,18 @@ components:
               resource_name:
                 example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/client-quota=cq-12345
         display_name:
-          description: The name of the quota object.
+          description: The name of the client quota.
           example: QuotaForSA1
           type: string
         description:
-          description: A human readable description for the Client Quota
+          description: A human readable description for the client quota.
           example: This quota defines limits on how much the target principals can
-            use cluster x
+            use cluster lkc-xxxxx
           type: string
         throughput:
           allOf:
           - $ref: '#/components/schemas/kafka-quotas.v1.Throughput'
-          description: throughput related quotas
+          description: Throughput for the client quota.
           type: object
         cluster:
           allOf:
@@ -1703,12 +1762,17 @@ components:
           x-immutable: true
         principals:
           description: |
-            a list of service accounts. Special name "default" can be used to represent the default quota for
+            A list of service accounts. Special name "default" can be used to represent the default quota for
             all users and service accounts.
           items:
             $ref: '#/components/schemas/ObjectReference'
           minItems: 1
           type: array
+        environment:
+          allOf:
+          - $ref: '#/components/schemas/ObjectReference'
+          description: The environment to which this belongs.
+          x-immutable: false
       type: object
     kafka-quotas.v1.Throughput:
       description: Quotas on maximum throughput
@@ -1770,9 +1834,11 @@ components:
             - required:
               - cluster
               - display_name
+              - environment
               - id
               - metadata
               - principals
+              - throughput
               type: object
           type: array
           uniqueItems: true
@@ -1991,27 +2057,32 @@ components:
               resource_name:
                 example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/client-quota=cq-12345
         display_name:
-          description: The name of the quota object.
+          description: The name of the client quota.
           example: QuotaForSA1
           type: string
         description:
-          description: A human readable description for the Client Quota
+          description: A human readable description for the client quota.
           example: This quota defines limits on how much the target principals can
-            use cluster x
+            use cluster lkc-xxxxx
           type: string
         throughput:
           allOf:
           - $ref: '#/components/schemas/kafka-quotas.v1.Throughput'
-          description: throughput related quotas
+          description: Throughput for the client quota.
           type: object
         principals:
           description: |
-            a list of service accounts. Special name "default" can be used to represent the default quota for
+            A list of service accounts. Special name "default" can be used to represent the default quota for
             all users and service accounts.
           items:
             $ref: '#/components/schemas/ObjectReference'
           minItems: 1
           type: array
+        environment:
+          allOf:
+          - $ref: '#/components/schemas/ObjectReference'
+          description: The environment to which this belongs.
+          x-immutable: false
       type: object
     Error_source:
       description: If this error was caused by a particular part of the API request,

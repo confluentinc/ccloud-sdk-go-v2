@@ -606,6 +606,7 @@ type ApiListKafkaQuotasV1ClientQuotasRequest struct {
 	ctx _context.Context
 	ApiService ClientQuotasKafkaQuotasV1Api
 	cluster *string
+	environment *string
 	pageSize *int32
 	pageToken *string
 }
@@ -613,6 +614,11 @@ type ApiListKafkaQuotasV1ClientQuotasRequest struct {
 // Filter the results by exact match for cluster.
 func (r ApiListKafkaQuotasV1ClientQuotasRequest) Cluster(cluster string) ApiListKafkaQuotasV1ClientQuotasRequest {
 	r.cluster = &cluster
+	return r
+}
+// Filter the results by exact match for environment.
+func (r ApiListKafkaQuotasV1ClientQuotasRequest) Environment(environment string) ApiListKafkaQuotasV1ClientQuotasRequest {
+	r.environment = &environment
 	return r
 }
 // A pagination size for collection requests.
@@ -672,8 +678,12 @@ func (a *ClientQuotasKafkaQuotasV1ApiService) ListKafkaQuotasV1ClientQuotasExecu
 	if r.cluster == nil {
 		return localVarReturnValue, nil, reportError("cluster is required and must be specified")
 	}
+	if r.environment == nil {
+		return localVarReturnValue, nil, reportError("environment is required and must be specified")
+	}
 
 	localVarQueryParams.Add("cluster", parameterToString(*r.cluster, ""))
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}
