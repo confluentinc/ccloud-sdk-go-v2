@@ -44,7 +44,7 @@ type APIKeysIamV2Api interface {
 	/*
 	CreateIamV2ApiKey Create an API Key
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create an API key.
 
@@ -60,7 +60,7 @@ Make a request to create an API key.
 	/*
 	DeleteIamV2ApiKey Delete an API Key
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete an API key.
 
@@ -76,7 +76,7 @@ Make a request to delete an API key.
 	/*
 	GetIamV2ApiKey Read an API Key
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read an API key.
 
@@ -93,7 +93,7 @@ Make a request to read an API key.
 	/*
 	ListIamV2ApiKeys List of API Keys
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all API keys.
 
@@ -114,7 +114,7 @@ organization. You will only see the keys that are accessible to the account maki
 	/*
 	UpdateIamV2ApiKey Update an API Key
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update an API key.
 
@@ -152,7 +152,7 @@ func (r ApiCreateIamV2ApiKeyRequest) Execute() (IamV2ApiKey, *_nethttp.Response,
 /*
 CreateIamV2ApiKey Create an API Key
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create an API key.
 
@@ -250,6 +250,16 @@ func (a *APIKeysIamV2ApiService) CreateIamV2ApiKeyExecute(r ApiCreateIamV2ApiKey
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 402 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -318,7 +328,7 @@ func (r ApiDeleteIamV2ApiKeyRequest) Execute() (*_nethttp.Response, error) {
 /*
 DeleteIamV2ApiKey Delete an API Key
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete an API key.
 
@@ -464,7 +474,7 @@ func (r ApiGetIamV2ApiKeyRequest) Execute() (IamV2ApiKey, *_nethttp.Response, er
 /*
 GetIamV2ApiKey Read an API Key
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read an API key.
 
@@ -644,7 +654,7 @@ func (r ApiListIamV2ApiKeysRequest) Execute() (IamV2ApiKeyList, *_nethttp.Respon
 /*
 ListIamV2ApiKeys List of API Keys
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all API keys.
 
@@ -810,7 +820,7 @@ func (r ApiUpdateIamV2ApiKeyRequest) Execute() (IamV2ApiKey, *_nethttp.Response,
 /*
 UpdateIamV2ApiKey Update an API Key
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update an API key.
 
@@ -904,6 +914,16 @@ func (a *APIKeysIamV2ApiService) UpdateIamV2ApiKeyExecute(r ApiUpdateIamV2ApiKey
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 402 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
