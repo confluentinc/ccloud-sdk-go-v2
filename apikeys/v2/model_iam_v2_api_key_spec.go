@@ -43,7 +43,7 @@ type IamV2ApiKeySpec struct {
 	Description *string `json:"description,omitempty"`
 	// The owner to which this belongs. The owner can be one of iam.v2.User, iam.v2.ServiceAccount.
 	Owner *ObjectReference `json:"owner,omitempty"`
-	// The resource associated with this object. The resource can be one of cmk.v2.Cluster, apikeys.v2.SchemaRegistry, apikeys.v2.ksqlDB. May be `null` if not associated with a resource.
+	// The resource associated with this object. The resource can be one of cmk.v2.Cluster. May be `null` if not associated with a resource.
 	Resource *ObjectReference `json:"resource,omitempty"`
 }
 
