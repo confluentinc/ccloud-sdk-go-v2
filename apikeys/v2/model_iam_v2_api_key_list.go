@@ -33,7 +33,7 @@ import (
 	"reflect"
 )
 
-// IamV2ApiKeyList `ApiKey` objects represent access to different parts of Confluent Cloud. Some types of API keys represent access to a single cluster/resource such as a Kafka cluster or Schema Registry. Cloud API Keys represent access to resources within an organization that are not tied to a specific cluster, such as the Org API, IAM API, Metrics API or Connect API.  The API allows you to list, create, update and delete your API Keys.   Related guide: [API Keys in Confluent Cloud](https://docs.confluent.io/cloud/current/client-apps/api-keys.html).  ## The API Keys Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.ApiKey\" />
+// IamV2ApiKeyList `ApiKey` objects represent access to different parts of Confluent Cloud. Some types of API keys represent access to a single cluster/resource such as a Kafka cluster or Schema Registry. Cloud API Keys represent access to resources within an organization that are not tied to a specific cluster, such as the Org API, IAM API, Metrics API or Connect API.  The API allows you to list, create, update and delete your API Keys.   Related guide: [API Keys in Confluent Cloud](https://docs.confluent.io/cloud/current/client-apps/api-keys.html).  ## The API Keys Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.ApiKey\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `apikeys_per_org` | API Keys in one Confluent Cloud organization |
 type IamV2ApiKeyList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version"`

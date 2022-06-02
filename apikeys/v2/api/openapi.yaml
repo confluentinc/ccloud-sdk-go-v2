@@ -16,7 +16,7 @@ servers:
   url: https://api.confluent.cloud
 tags:
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `ApiKey` objects represent access to different parts of Confluent Cloud. Some types
     of API keys represent access to a single cluster/resource such as a Kafka cluster or
@@ -30,12 +30,19 @@ tags:
 
     ## The API Keys Model
     <SchemaDefinition schemaRef="#/components/schemas/iam.v2.ApiKey" />
+
+    ## Quotas and Limits
+    This resource is subject to the following quotas:
+
+    | Quota | Description |
+    | --- | --- |
+    | `apikeys_per_org` | API Keys in one Confluent Cloud organization |
   name: API Keys (iam/v2)
 paths:
   /iam/v2/api-keys:
     get:
       description: |
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all API keys.
 
@@ -224,7 +231,6 @@ paths:
       summary: List of API Keys
       tags:
       - API Keys (iam/v2)
-      x-request-access-name: API Keys Management API v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -311,7 +317,7 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create an API key.
       operationId: createIamV2ApiKey
@@ -438,6 +444,27 @@ paths:
                 type: string
               style: simple
           x-summary: Unauthorized
+        "402":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "402"
+                  code: quota_exceeded
+                  title: Kafka Clusters Per Org Quota Exceeded
+                  detail: 'The request would exceed the quota: kafka_clusters_per_environment'
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request would exceed one or more quotas.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Over Quota
         "403":
           content:
             application/json:
@@ -549,7 +576,6 @@ paths:
       summary: Create an API Key
       tags:
       - API Keys (iam/v2)
-      x-request-access-name: API Keys Management API v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -664,11 +690,10 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"resource\":{\"id\":\"lkc-c29js0\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: API Keys Management API v2
   /iam/v2/api-keys/{id}:
     delete:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete an API key.
       operationId: deleteIamV2ApiKey
@@ -819,7 +844,6 @@ paths:
       summary: Delete an API Key
       tags:
       - API Keys (iam/v2)
-      x-request-access-name: API Keys Management API v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -906,7 +930,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read an API key.
       operationId: getIamV2ApiKey
@@ -1088,7 +1112,6 @@ paths:
       summary: Read an API Key
       tags:
       - API Keys (iam/v2)
-      x-request-access-name: API Keys Management API v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1175,7 +1198,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To API Keys Management API v2](https://img.shields.io/badge/-Request%20Access%20To%20API%20Keys%20Management%20API%20v2-%23bc8540)](mailto:apikeys-earlyaccess@confluent.io?subject=Request%20to%20join%20API%20Keys%20Mgmt%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update an API key.
 
@@ -1287,6 +1310,27 @@ paths:
                 type: string
               style: simple
           x-summary: Unauthorized
+        "402":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "402"
+                  code: quota_exceeded
+                  title: Kafka Clusters Per Org Quota Exceeded
+                  detail: 'The request would exceed the quota: kafka_clusters_per_environment'
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request would exceed one or more quotas.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Over Quota
         "403":
           content:
             application/json:
@@ -1386,7 +1430,6 @@ paths:
       summary: Update an API Key
       tags:
       - API Keys (iam/v2)
-      x-request-access-name: API Keys Management API v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1501,7 +1544,6 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"string\",\"environment\":\"string\"},\"resource\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: API Keys Management API v2
 components:
   responses:
     BadRequestError:
@@ -1713,6 +1755,13 @@ components:
 
         ## The API Keys Model
         <SchemaDefinition schemaRef="#/components/schemas/iam.v2.ApiKey" />
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `apikeys_per_org` | API Keys in one Confluent Cloud organization |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -1765,6 +1814,13 @@ components:
 
         ## The API Keys Model
         <SchemaDefinition schemaRef="#/components/schemas/iam.v2.ApiKey" />
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `apikeys_per_org` | API Keys in one Confluent Cloud organization |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -1845,8 +1901,7 @@ components:
           - $ref: '#/components/schemas/ObjectReference'
           - nullable: true
           description: The resource associated with this object. The resource can
-            be one of cmk.v2.Cluster, apikeys.v2.SchemaRegistry, apikeys.v2.ksqlDB.
-            May be `null` if not associated with a resource.
+            be one of cmk.v2.Cluster. May be `null` if not associated with a resource.
           x-immutable: true
       type: object
       x-enable-id: true
@@ -2046,6 +2101,13 @@ components:
 
         ## The API Keys Model
         <SchemaDefinition schemaRef="#/components/schemas/iam.v2.ApiKey" />
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `apikeys_per_org` | API Keys in one Confluent Cloud organization |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
