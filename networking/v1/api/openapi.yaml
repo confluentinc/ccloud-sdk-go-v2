@@ -91,7 +91,7 @@ tags:
     | --- | --- |
     | `privatelink_accounts_per_network` | Number of AWS accounts per network |
     | `privatelink_subscriptions_per_network` | Number of Azure subscriptions per network |
-    | `privatelink_project_per_network` | Number of GCP project per network |
+    | `privateserviceconnect_projects_per_network` | Number of GCP projects per network |
   name: Private Link Accesses (networking/v1)
 paths:
   /networking/v1/networks:
@@ -5972,7 +5972,7 @@ components:
         | --- | --- |
         | `privatelink_accounts_per_network` | Number of AWS accounts per network |
         | `privatelink_subscriptions_per_network` | Number of Azure subscriptions per network |
-        | `privatelink_project_per_network` | Number of GCP project per network |
+        | `privateserviceconnect_projects_per_network` | Number of GCP projects per network |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -6121,6 +6121,20 @@ components:
           example: prod-network
           readOnly: true
           type: string
+        privateserviceconnect_service_attachments:
+          additionalProperties:
+            type: string
+          description: |
+            The mapping of zones to Private Service Connect Service
+            Attachments if available. Keys are zones and values are
+            [GCP Private Service Connect Service
+            Attachment](https://cloud.google.com/vpc/docs/configure-private-service-connect-producer#api_7)
+          example:
+            us-central1-a: projects/cc-prod/regions/us-central1/serviceAttachments/s-7jjm9-service-attachment-us-central1-a
+            us-central1-b: projects/cc-prod/regions/us-central1/serviceAttachments/s-7jjm9-service-attachment-us-central1-b
+            us-central1-c: projects/cc-prod/regions/us-central1/serviceAttachments/s-7jjm9-service-attachment-us-central1-c
+          readOnly: true
+          type: object
       required:
       - kind
       - project
@@ -6290,16 +6304,16 @@ components:
       - subscription
       title: AZURE
       type: object
-    networking.v1.GcpPrivateLinkAccess:
-      description: GCP PrivateLink access configuration.
+    networking.v1.GcpPrivateServiceConnectAccess:
+      description: GCP Private Service Connect access configuration.
       properties:
         kind:
           description: PrivateLink kind type.
           enum:
-          - GcpPrivateLinkAccess
+          - GcpPrivateServiceConnectAccess
           type: string
         project:
-          description: GCP project to allow for PrivateLink access.
+          description: GCP project to allow for Private Service Connect access.
           minLength: 1
           type: string
       required:
@@ -6667,7 +6681,7 @@ components:
         | --- | --- |
         | `privatelink_accounts_per_network` | Number of AWS accounts per network |
         | `privatelink_subscriptions_per_network` | Number of Azure subscriptions per network |
-        | `privatelink_project_per_network` | Number of GCP project per network |
+        | `privateserviceconnect_projects_per_network` | Number of GCP projects per network |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -6734,12 +6748,12 @@ components:
             mapping:
               AwsPrivateLinkAccess: '#/components/schemas/networking.v1.AwsPrivateLinkAccess'
               AzurePrivateLinkAccess: '#/components/schemas/networking.v1.AzurePrivateLinkAccess'
-              GcpPrivateLinkAccess: '#/components/schemas/networking.v1.GcpPrivateLinkAccess'
+              GcpPrivateServiceConnectAccess: '#/components/schemas/networking.v1.GcpPrivateServiceConnectAccess'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking.v1.AwsPrivateLinkAccess'
           - $ref: '#/components/schemas/networking.v1.AzurePrivateLinkAccess'
-          - $ref: '#/components/schemas/networking.v1.GcpPrivateLinkAccess'
+          - $ref: '#/components/schemas/networking.v1.GcpPrivateServiceConnectAccess'
           type: object
           x-immutable: true
           x-one-of-name: NetworkingV1PrivateLinkAccessSpecCloudOneOf
@@ -7091,7 +7105,7 @@ components:
         | --- | --- |
         | `privatelink_accounts_per_network` | Number of AWS accounts per network |
         | `privatelink_subscriptions_per_network` | Number of Azure subscriptions per network |
-        | `privatelink_project_per_network` | Number of GCP project per network |
+        | `privateserviceconnect_projects_per_network` | Number of GCP projects per network |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation

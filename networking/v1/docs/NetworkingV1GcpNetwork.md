@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Kind** | **string** | Network kind type. | 
 **Project** | **string** | The GCP project. | [readonly] 
 **VpcNetwork** | **string** | The GCP VPC network name. | [readonly] 
+**PrivateserviceconnectServiceAttachments** | Pointer to **map[string]string** | The mapping of zones to Private Service Connect Service Attachments if available. Keys are zones and values are [GCP Private Service Connect Service Attachment](https://cloud.google.com/vpc/docs/configure-private-service-connect-producer#api_7)  | [optional] [readonly] 
 
 ## Methods
 
@@ -86,6 +87,31 @@ and a boolean to check if the value has been set.
 
 SetVpcNetwork sets VpcNetwork field to given value.
 
+
+### GetPrivateserviceconnectServiceAttachments
+
+`func (o *NetworkingV1GcpNetwork) GetPrivateserviceconnectServiceAttachments() map[string]string`
+
+GetPrivateserviceconnectServiceAttachments returns the PrivateserviceconnectServiceAttachments field if non-nil, zero value otherwise.
+
+### GetPrivateserviceconnectServiceAttachmentsOk
+
+`func (o *NetworkingV1GcpNetwork) GetPrivateserviceconnectServiceAttachmentsOk() (*map[string]string, bool)`
+
+GetPrivateserviceconnectServiceAttachmentsOk returns a tuple with the PrivateserviceconnectServiceAttachments field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrivateserviceconnectServiceAttachments
+
+`func (o *NetworkingV1GcpNetwork) SetPrivateserviceconnectServiceAttachments(v map[string]string)`
+
+SetPrivateserviceconnectServiceAttachments sets PrivateserviceconnectServiceAttachments field to given value.
+
+### HasPrivateserviceconnectServiceAttachments
+
+`func (o *NetworkingV1GcpNetwork) HasPrivateserviceconnectServiceAttachments() bool`
+
+HasPrivateserviceconnectServiceAttachments returns a boolean if a field has been set.
 
 
 ### AsNetworkingV1NetworkStatusCloudOneOf

@@ -33,7 +33,7 @@ import (
 	"reflect"
 )
 
-// NetworkingV1PrivateLinkAccess Add or remove access to PrivateLink endpoints by AWS account, Azure subscription and GCP project.  Related guide: [Private Links Overview](https://docs.confluent.io/cloud/current/networking/private-links/index.html).  ## The Private Link Accesses Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.PrivateLinkAccess\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `privatelink_accounts_per_network` | Number of AWS accounts per network | | `privatelink_subscriptions_per_network` | Number of Azure subscriptions per network | | `privatelink_project_per_network` | Number of GCP project per network |
+// NetworkingV1PrivateLinkAccess Add or remove access to PrivateLink endpoints by AWS account, Azure subscription and GCP project.  Related guide: [Private Links Overview](https://docs.confluent.io/cloud/current/networking/private-links/index.html).  ## The Private Link Accesses Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.PrivateLinkAccess\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `privatelink_accounts_per_network` | Number of AWS accounts per network | | `privatelink_subscriptions_per_network` | Number of Azure subscriptions per network | | `privateserviceconnect_projects_per_network` | Number of GCP projects per network |
 type NetworkingV1PrivateLinkAccess struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
