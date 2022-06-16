@@ -93,7 +93,6 @@ Class | Method | HTTP request | Description
  - [Failure](docs/Failure.md)
  - [KafkaQuotasV1ClientQuota](docs/KafkaQuotasV1ClientQuota.md)
  - [KafkaQuotasV1ClientQuotaList](docs/KafkaQuotasV1ClientQuotaList.md)
- - [KafkaQuotasV1ClientQuotaUpdate](docs/KafkaQuotasV1ClientQuotaUpdate.md)
  - [KafkaQuotasV1Throughput](docs/KafkaQuotasV1Throughput.md)
  - [ListMeta](docs/ListMeta.md)
  - [ObjectMeta](docs/ObjectMeta.md)

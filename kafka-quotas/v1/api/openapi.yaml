@@ -1180,7 +1180,7 @@ paths:
           application/json:
             schema:
               allOf:
-              - $ref: '#/components/schemas/kafka-quotas.v1.ClientQuotaUpdate'
+              - $ref: '#/components/schemas/kafka-quotas.v1.ClientQuota'
               - properties:
                   spec:
                     properties:
@@ -1759,7 +1759,7 @@ components:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
           description: The cluster to which this belongs.
-          x-immutable: true
+          x-immutable: false
         principals:
           description: |
             A list of service accounts. Special name "default" can be used to represent the default quota for
@@ -2012,77 +2012,6 @@ components:
           type: string
         source:
           $ref: '#/components/schemas/Error_source'
-      type: object
-    kafka-quotas.v1.ClientQuotaUpdate:
-      description: |-
-        `ClientQuota` objects represent Client Quotas you can set at the service account level.
-
-        The API allows you to list, create, read, update, and delete your client quotas.
-
-
-        Related guide: [Client Quotas in Confluent Cloud](https://docs.confluent.io/cloud/current/clusters/client-quotas.html).
-
-        ## The Client Quotas Model
-        <SchemaDefinition schemaRef="#/components/schemas/kafka-quotas.v1.ClientQuota" />
-      properties:
-        api_version:
-          description: APIVersion defines the schema version of this representation
-            of a resource.
-          enum:
-          - kafka-quotas/v1
-          readOnly: true
-          type: string
-        kind:
-          description: Kind defines the object this REST resource represents.
-          enum:
-          - ClientQuota
-          readOnly: true
-          type: string
-        id:
-          description: ID is the "natural identifier" for an object within its scope/namespace;
-            it is normally unique across time but not space. That is, you can assume
-            that the ID will not be reclaimed and reused after an object is deleted
-            ("time"); however, it may collide with IDs for other object `kinds` or
-            objects of the same `kind` within a different scope/namespace ("space").
-          example: dlz-f3a90de
-          maxLength: 255
-          readOnly: true
-          type: string
-        metadata:
-          allOf:
-          - $ref: '#/components/schemas/ObjectMeta'
-          - properties:
-              self:
-                example: https://api.confluent.cloud/kafka-quotas/v1/client-quotas/cq-12345
-              resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/client-quota=cq-12345
-        display_name:
-          description: The name of the client quota.
-          example: QuotaForSA1
-          type: string
-        description:
-          description: A human readable description for the client quota.
-          example: This quota defines limits on how much the target principals can
-            use cluster lkc-xxxxx
-          type: string
-        throughput:
-          allOf:
-          - $ref: '#/components/schemas/kafka-quotas.v1.Throughput'
-          description: Throughput for the client quota.
-          type: object
-        principals:
-          description: |
-            A list of service accounts. Special name "default" can be used to represent the default quota for
-            all users and service accounts.
-          items:
-            $ref: '#/components/schemas/ObjectReference'
-          minItems: 1
-          type: array
-        environment:
-          allOf:
-          - $ref: '#/components/schemas/ObjectReference'
-          description: The environment to which this belongs.
-          x-immutable: false
       type: object
     Error_source:
       description: If this error was caused by a particular part of the API request,
