@@ -1,17 +1,17 @@
-# \ScopesServiceQuotaV2Api
+# \ScopesServiceQuotaV1Api
 
 All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetServiceQuotaV2Scope**](ScopesServiceQuotaV2Api.md#GetServiceQuotaV2Scope) | **Get** /service-quota/v2/scopes/{id} | Read a Scope
-[**ListServiceQuotaV2Scopes**](ScopesServiceQuotaV2Api.md#ListServiceQuotaV2Scopes) | **Get** /service-quota/v2/scopes | List of Scopes
+[**GetServiceQuotaV1Scope**](ScopesServiceQuotaV1Api.md#GetServiceQuotaV1Scope) | **Get** /service-quota/v1/scopes/{id} | Read a Scope
+[**ListServiceQuotaV1Scopes**](ScopesServiceQuotaV1Api.md#ListServiceQuotaV1Scopes) | **Get** /service-quota/v1/scopes | List of Scopes
 
 
 
-## GetServiceQuotaV2Scope
+## GetServiceQuotaV1Scope
 
-> ServiceQuotaV2Scope GetServiceQuotaV2Scope(ctx, id).Execute()
+> ServiceQuotaV1Scope GetServiceQuotaV1Scope(ctx, id).Execute()
 
 Read a Scope
 
@@ -34,13 +34,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ScopesServiceQuotaV2Api.GetServiceQuotaV2Scope(context.Background(), id).Execute()
+    resp, r, err := api_client.ScopesServiceQuotaV1Api.GetServiceQuotaV1Scope(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ScopesServiceQuotaV2Api.GetServiceQuotaV2Scope``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ScopesServiceQuotaV1Api.GetServiceQuotaV1Scope``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetServiceQuotaV2Scope`: ServiceQuotaV2Scope
-    fmt.Fprintf(os.Stdout, "Response from `ScopesServiceQuotaV2Api.GetServiceQuotaV2Scope`: %v\n", resp)
+    // response from `GetServiceQuotaV1Scope`: ServiceQuotaV1Scope
+    fmt.Fprintf(os.Stdout, "Response from `ScopesServiceQuotaV1Api.GetServiceQuotaV1Scope`: %v\n", resp)
 }
 ```
 
@@ -54,7 +54,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetServiceQuotaV2ScopeRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetServiceQuotaV1ScopeRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServiceQuotaV2Scope**](service-quota.v2.Scope.md)
+[**ServiceQuotaV1Scope**](service-quota.v1.Scope.md)
 
 ### Authorization
 
@@ -79,9 +79,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ListServiceQuotaV2Scopes
+## ListServiceQuotaV1Scopes
 
-> ServiceQuotaV2ScopeList ListServiceQuotaV2Scopes(ctx).PageSize(pageSize).PageToken(pageToken).Execute()
+> ServiceQuotaV1ScopeList ListServiceQuotaV1Scopes(ctx).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Scopes
 
@@ -105,13 +105,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ScopesServiceQuotaV2Api.ListServiceQuotaV2Scopes(context.Background()).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.ScopesServiceQuotaV1Api.ListServiceQuotaV1Scopes(context.Background()).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ScopesServiceQuotaV2Api.ListServiceQuotaV2Scopes``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ScopesServiceQuotaV1Api.ListServiceQuotaV1Scopes``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListServiceQuotaV2Scopes`: ServiceQuotaV2ScopeList
-    fmt.Fprintf(os.Stdout, "Response from `ScopesServiceQuotaV2Api.ListServiceQuotaV2Scopes`: %v\n", resp)
+    // response from `ListServiceQuotaV1Scopes`: ServiceQuotaV1ScopeList
+    fmt.Fprintf(os.Stdout, "Response from `ScopesServiceQuotaV1Api.ListServiceQuotaV1Scopes`: %v\n", resp)
 }
 ```
 
@@ -121,7 +121,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListServiceQuotaV2ScopesRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListServiceQuotaV1ScopesRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -131,7 +131,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServiceQuotaV2ScopeList**](service-quota.v2.ScopeList.md)
+[**ServiceQuotaV1ScopeList**](service-quota.v1.ScopeList.md)
 
 ### Authorization
 
