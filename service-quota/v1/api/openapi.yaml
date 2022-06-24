@@ -7,15 +7,19 @@ info:
   title: Service Quota API
   version: 0.0.1-alpha0
   x-api-id: f4e1da55-fe1b-4f21-9134-bd4d2fb13ed6
-  x-api-group: v2
+  x-api-group: v1
   x-tag-group: Service Quota API (%s)
   x-audience: external-public
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
+- description: Confluent Cloud staging
+  url: https://api.stag.cpdev.cloud
+- description: Confluent Cloud development
+  url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Service Quota v2](https://img.shields.io/badge/-Request%20Access%20To%20Service%20Quota%20v2-%23bc8540)](mailto:ccloud-api-access+service-quota-v2-early-access@confluent.io?subject=Request%20to%20join%20service-quota/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20service-quota/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
     A `quota` object represents a quota configuration for a specific Confluent Cloud resource.
     Use this API to retrieve an individual quota or list of quotas for a given scope.
@@ -24,10 +28,10 @@ tags:
     Related guide: [Service Quotas for Confluent Cloud](https://docs.confluent.io/cloud/current/quotas/index.html).
 
     ## The Applied Quotas Model
-    <SchemaDefinition schemaRef="#/components/schemas/service-quota.v2.AppliedQuota" />
-  name: Applied Quotas (service-quota/v2)
+    <SchemaDefinition schemaRef="#/components/schemas/service-quota.v1.AppliedQuota" />
+  name: Applied Quotas (service-quota/v1)
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Service Quota v2](https://img.shields.io/badge/-Request%20Access%20To%20Service%20Quota%20v2-%23bc8540)](mailto:ccloud-api-access+service-quota-v2-early-access@confluent.io?subject=Request%20to%20join%20service-quota/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20service-quota/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
     Gets a list of all available scopes for applied quotas.
 
@@ -35,18 +39,18 @@ tags:
     Related guide: [Quota Scopes](https://docs.confluent.io/cloud/current/quotas/quotas.html#query-for-scopes).
 
     ## The Scopes Model
-    <SchemaDefinition schemaRef="#/components/schemas/service-quota.v2.Scope" />
-  name: Scopes (service-quota/v2)
+    <SchemaDefinition schemaRef="#/components/schemas/service-quota.v1.Scope" />
+  name: Scopes (service-quota/v1)
 paths:
-  /service-quota/v2/applied-quotas:
+  /service-quota/v1/applied-quotas:
     get:
       description: |
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Service Quota v2](https://img.shields.io/badge/-Request%20Access%20To%20Service%20Quota%20v2-%23bc8540)](mailto:ccloud-api-access+service-quota-v2-early-access@confluent.io?subject=Request%20to%20join%20service-quota/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20service-quota/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all applied quotas.
 
         Shows all quotas for a given scope.
-      operationId: listServiceQuotaV2AppliedQuotas
+      operationId: listServiceQuotaV1AppliedQuotas
       parameters:
       - description: |
           The applied scope the quota belongs to.
@@ -89,11 +93,11 @@ paths:
           $ref: '#/components/schemas/SearchFilter'
         style: form
       - description: |
-          The quota code that this quota belongs to.
+          The id (quota code) that this quota belongs to.
         example: iam.max_environments.per_org
         explode: true
         in: query
-        name: quota_code
+        name: id
         required: false
         schema:
           $ref: '#/components/schemas/SearchFilter'
@@ -124,7 +128,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/service-quota.v2.AppliedQuotaList'
+                - $ref: '#/components/schemas/service-quota.v1.AppliedQuotaList'
                 - properties:
                     data:
                       items:
@@ -273,20 +277,20 @@ paths:
       - api-key: []
       summary: List of Applied Quotas
       tags:
-      - Applied Quotas (service-quota/v2)
-      x-request-access-name: Service Quota v2
+      - Applied Quotas (service-quota/v1)
+      x-request-access-name: Service Quota v1
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/service-quota/v2/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&quota_code=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/service-quota/v1/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/service-quota/v2/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&quota_code=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/service-quota/v1/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -294,7 +298,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/service-quota/v2/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&quota_code=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/service-quota/v1/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -307,7 +311,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/service-quota/v2/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&quota_code=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/service-quota/v1/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -321,7 +325,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/service-quota/v2/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&quota_code=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/service-quota/v1/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -346,7 +350,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/service-quota/v2/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&quota_code=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/service-quota/v1/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -355,18 +359,18 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/service-quota/v2/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&quota_code=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/service-quota/v1/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Service Quota v2
-  /service-quota/v2/applied-quotas/{id}:
+    x-request-access-name: Service Quota v1
+  /service-quota/v1/applied-quotas/{id}:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Service Quota v2](https://img.shields.io/badge/-Request%20Access%20To%20Service%20Quota%20v2-%23bc8540)](mailto:ccloud-api-access+service-quota-v2-early-access@confluent.io?subject=Request%20to%20join%20service-quota/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20service-quota/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read an applied quota.
-      operationId: getServiceQuotaV2AppliedQuota
+      operationId: getServiceQuotaV1AppliedQuota
       parameters:
       - description: |
           The environment ID the quota is associated with.
@@ -417,7 +421,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/service-quota.v2.AppliedQuota'
+                - $ref: '#/components/schemas/service-quota.v1.AppliedQuota'
                 - required:
                   - api_version
                   - applied_limit
@@ -589,20 +593,20 @@ paths:
       - api-key: []
       summary: Read an Applied Quota
       tags:
-      - Applied Quotas (service-quota/v2)
-      x-request-access-name: Service Quota v2
+      - Applied Quotas (service-quota/v1)
+      x-request-access-name: Service Quota v1
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/service-quota/v2/applied-quotas/{id}?environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/service-quota/v1/applied-quotas/{id}?environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/service-quota/v2/applied-quotas/{id}?environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/service-quota/v1/applied-quotas/{id}?environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -610,7 +614,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/service-quota/v2/applied-quotas/{id}?environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/service-quota/v1/applied-quotas/{id}?environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -623,7 +627,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/service-quota/v2/applied-quotas/{id}?environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/service-quota/v1/applied-quotas/{id}?environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -637,7 +641,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/service-quota/v2/applied-quotas/{id}?environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE",
+            "path": "/service-quota/v1/applied-quotas/{id}?environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -662,7 +666,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/service-quota/v2/applied-quotas/{id}?environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/service-quota/v1/applied-quotas/{id}?environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -671,18 +675,18 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/service-quota/v2/applied-quotas/{id}?environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/service-quota/v1/applied-quotas/{id}?environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Service Quota v2
-  /service-quota/v2/scopes:
+    x-request-access-name: Service Quota v1
+  /service-quota/v1/scopes:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Service Quota v2](https://img.shields.io/badge/-Request%20Access%20To%20Service%20Quota%20v2-%23bc8540)](mailto:ccloud-api-access+service-quota-v2-early-access@confluent.io?subject=Request%20to%20join%20service-quota/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20service-quota/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all scopes.
-      operationId: listServiceQuotaV2Scopes
+      operationId: listServiceQuotaV1Scopes
       parameters:
       - description: A pagination size for collection requests.
         explode: true
@@ -710,7 +714,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/service-quota.v2.ScopeList'
+                - $ref: '#/components/schemas/service-quota.v1.ScopeList'
           description: Scope.
           headers:
             X-Request-Id:
@@ -828,20 +832,20 @@ paths:
       - api-key: []
       summary: List of Scopes
       tags:
-      - Scopes (service-quota/v2)
-      x-request-access-name: Service Quota v2
+      - Scopes (service-quota/v1)
+      x-request-access-name: Service Quota v1
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/service-quota/v2/scopes?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/service-quota/v1/scopes?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/service-quota/v2/scopes?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/service-quota/v1/scopes?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -849,7 +853,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/service-quota/v2/scopes?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/service-quota/v1/scopes?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -862,7 +866,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/service-quota/v2/scopes?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/service-quota/v1/scopes?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -876,7 +880,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/service-quota/v2/scopes?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/service-quota/v1/scopes?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -901,7 +905,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/service-quota/v2/scopes?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/service-quota/v1/scopes?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -910,18 +914,18 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/service-quota/v2/scopes?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/service-quota/v1/scopes?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Service Quota v2
-  /service-quota/v2/scopes/{id}:
+    x-request-access-name: Service Quota v1
+  /service-quota/v1/scopes/{id}:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Service Quota v2](https://img.shields.io/badge/-Request%20Access%20To%20Service%20Quota%20v2-%23bc8540)](mailto:ccloud-api-access+service-quota-v2-early-access@confluent.io?subject=Request%20to%20join%20service-quota/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20service-quota/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a scope.
-      operationId: getServiceQuotaV2Scope
+      operationId: getServiceQuotaV1Scope
       parameters:
       - description: The unique identifier for the scope.
         explode: false
@@ -937,7 +941,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/service-quota.v2.Scope'
+                - $ref: '#/components/schemas/service-quota.v1.Scope'
                 - required:
                   - api_version
                   - description
@@ -1079,20 +1083,20 @@ paths:
       - api-key: []
       summary: Read a Scope
       tags:
-      - Scopes (service-quota/v2)
-      x-request-access-name: Service Quota v2
+      - Scopes (service-quota/v1)
+      x-request-access-name: Service Quota v1
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/service-quota/v2/scopes/{id}' \
+            --url 'https://api.confluent.cloud/service-quota/v1/scopes/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/service-quota/v2/scopes/{id}")
+            .url("https://api.confluent.cloud/service-quota/v1/scopes/{id}")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1100,7 +1104,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/service-quota/v2/scopes/{id}\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/service-quota/v1/scopes/{id}\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1113,7 +1117,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/service-quota/v2/scopes/{id}", headers=headers)
+          conn.request("GET", "/service-quota/v1/scopes/{id}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1127,7 +1131,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/service-quota/v2/scopes/{id}",
+            "path": "/service-quota/v1/scopes/{id}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1152,7 +1156,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/service-quota/v2/scopes/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/service-quota/v1/scopes/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1161,11 +1165,11 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/service-quota/v2/scopes/{id}");
+          var client = new RestClient("https://api.confluent.cloud/service-quota/v1/scopes/{id}");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Service Quota v2
+    x-request-access-name: Service Quota v1
 components:
   responses:
     BadRequestError:
@@ -1363,7 +1367,7 @@ components:
             type: string
           style: simple
   schemas:
-    service-quota.v2.AppliedQuota:
+    service-quota.v1.AppliedQuota:
       description: |-
         A `quota` object represents a quota configuration for a specific Confluent Cloud resource.
         Use this API to retrieve an individual quota or list of quotas for a given scope.
@@ -1372,13 +1376,13 @@ components:
         Related guide: [Service Quotas for Confluent Cloud](https://docs.confluent.io/cloud/current/quotas/index.html).
 
         ## The Applied Quotas Model
-        <SchemaDefinition schemaRef="#/components/schemas/service-quota.v2.AppliedQuota" />
+        <SchemaDefinition schemaRef="#/components/schemas/service-quota.v1.AppliedQuota" />
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
             of a resource.
           enum:
-          - service-quota/v2
+          - service-quota/v1
           readOnly: true
           type: string
         kind:
@@ -1402,7 +1406,7 @@ components:
           - $ref: '#/components/schemas/ObjectMeta'
           - properties:
               self:
-                example: https://api.confluent.cloud/service-quota/v2/applied-quotas/aq-12345
+                example: https://api.confluent.cloud/service-quota/v1/applied-quotas/aq-12345
               resource_name:
                 example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/applied-quota=aq-12345
         scope:
@@ -1472,7 +1476,7 @@ components:
              May be `null` if not associated with a kafka_cluster.
           x-immutable: true
       type: object
-    service-quota.v2.Scope:
+    service-quota.v1.Scope:
       description: |-
         Gets a list of all available scopes for applied quotas.
 
@@ -1480,13 +1484,13 @@ components:
         Related guide: [Quota Scopes](https://docs.confluent.io/cloud/current/quotas/quotas.html#query-for-scopes).
 
         ## The Scopes Model
-        <SchemaDefinition schemaRef="#/components/schemas/service-quota.v2.Scope" />
+        <SchemaDefinition schemaRef="#/components/schemas/service-quota.v1.Scope" />
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
             of a resource.
           enum:
-          - service-quota/v2
+          - service-quota/v1
           readOnly: true
           type: string
         kind:
@@ -1510,7 +1514,7 @@ components:
           - $ref: '#/components/schemas/ObjectMeta'
           - properties:
               self:
-                example: https://api.confluent.cloud/service-quota/v2/scopes/s-12345
+                example: https://api.confluent.cloud/service-quota/v1/scopes/s-12345
               resource_name:
                 example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/scope=s-12345
         description:
@@ -1521,7 +1525,7 @@ components:
     SearchFilter:
       description: Filter a collection by a string search
       type: string
-    service-quota.v2.AppliedQuotaList:
+    service-quota.v1.AppliedQuotaList:
       description: |-
         A `quota` object represents a quota configuration for a specific Confluent Cloud resource.
         Use this API to retrieve an individual quota or list of quotas for a given scope.
@@ -1530,13 +1534,13 @@ components:
         Related guide: [Service Quotas for Confluent Cloud](https://docs.confluent.io/cloud/current/quotas/index.html).
 
         ## The Applied Quotas Model
-        <SchemaDefinition schemaRef="#/components/schemas/service-quota.v2.AppliedQuota" />
+        <SchemaDefinition schemaRef="#/components/schemas/service-quota.v1.AppliedQuota" />
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
             of a resource.
           enum:
-          - service-quota/v2
+          - service-quota/v1
           readOnly: true
           type: string
         kind:
@@ -1550,19 +1554,19 @@ components:
           - $ref: '#/components/schemas/ListMeta'
           - properties:
               first:
-                example: https://api.confluent.cloud/service-quota/v2/applied-quotas
+                example: https://api.confluent.cloud/service-quota/v1/applied-quotas
               last:
-                example: https://api.confluent.cloud/service-quota/v2/applied-quotas?page_token=bcAOehAY8F16YD84Z1wT
+                example: https://api.confluent.cloud/service-quota/v1/applied-quotas?page_token=bcAOehAY8F16YD84Z1wT
               prev:
-                example: https://api.confluent.cloud/service-quota/v2/applied-quotas?page_token=YIXRY97wWYmwzrax4dld
+                example: https://api.confluent.cloud/service-quota/v1/applied-quotas?page_token=YIXRY97wWYmwzrax4dld
               next:
-                example: https://api.confluent.cloud/service-quota/v2/applied-quotas?page_token=UvmDWOB1iwfAIBPj6EYb
+                example: https://api.confluent.cloud/service-quota/v1/applied-quotas?page_token=UvmDWOB1iwfAIBPj6EYb
         data:
           description: A data property that contains an array of resource items. Each
             entry in the array is a separate resource.
           items:
             allOf:
-            - $ref: '#/components/schemas/service-quota.v2.AppliedQuota'
+            - $ref: '#/components/schemas/service-quota.v1.AppliedQuota'
             - required:
               - applied_limit
               - default_limit
@@ -1579,7 +1583,7 @@ components:
       - kind
       - metadata
       type: object
-    service-quota.v2.ScopeList:
+    service-quota.v1.ScopeList:
       description: |-
         Gets a list of all available scopes for applied quotas.
 
@@ -1587,13 +1591,13 @@ components:
         Related guide: [Quota Scopes](https://docs.confluent.io/cloud/current/quotas/quotas.html#query-for-scopes).
 
         ## The Scopes Model
-        <SchemaDefinition schemaRef="#/components/schemas/service-quota.v2.Scope" />
+        <SchemaDefinition schemaRef="#/components/schemas/service-quota.v1.Scope" />
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
             of a resource.
           enum:
-          - service-quota/v2
+          - service-quota/v1
           readOnly: true
           type: string
         kind:
@@ -1607,19 +1611,19 @@ components:
           - $ref: '#/components/schemas/ListMeta'
           - properties:
               first:
-                example: https://api.confluent.cloud/service-quota/v2/scopes
+                example: https://api.confluent.cloud/service-quota/v1/scopes
               last:
-                example: https://api.confluent.cloud/service-quota/v2/scopes?page_token=bcAOehAY8F16YD84Z1wT
+                example: https://api.confluent.cloud/service-quota/v1/scopes?page_token=bcAOehAY8F16YD84Z1wT
               prev:
-                example: https://api.confluent.cloud/service-quota/v2/scopes?page_token=YIXRY97wWYmwzrax4dld
+                example: https://api.confluent.cloud/service-quota/v1/scopes?page_token=YIXRY97wWYmwzrax4dld
               next:
-                example: https://api.confluent.cloud/service-quota/v2/scopes?page_token=UvmDWOB1iwfAIBPj6EYb
+                example: https://api.confluent.cloud/service-quota/v1/scopes?page_token=UvmDWOB1iwfAIBPj6EYb
         data:
           description: A data property that contains an array of resource items. Each
             entry in the array is a separate resource.
           items:
             allOf:
-            - $ref: '#/components/schemas/service-quota.v2.Scope'
+            - $ref: '#/components/schemas/service-quota.v1.Scope'
             - required:
               - description
               - id

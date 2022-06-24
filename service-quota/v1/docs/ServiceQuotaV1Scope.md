@@ -1,4 +1,4 @@
-# ServiceQuotaV2Scope
+# ServiceQuotaV1Scope
 
 ## Properties
 
@@ -12,145 +12,145 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewServiceQuotaV2Scope
+### NewServiceQuotaV1Scope
 
-`func NewServiceQuotaV2Scope() *ServiceQuotaV2Scope`
+`func NewServiceQuotaV1Scope() *ServiceQuotaV1Scope`
 
-NewServiceQuotaV2Scope instantiates a new ServiceQuotaV2Scope object
+NewServiceQuotaV1Scope instantiates a new ServiceQuotaV1Scope object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewServiceQuotaV2ScopeWithDefaults
+### NewServiceQuotaV1ScopeWithDefaults
 
-`func NewServiceQuotaV2ScopeWithDefaults() *ServiceQuotaV2Scope`
+`func NewServiceQuotaV1ScopeWithDefaults() *ServiceQuotaV1Scope`
 
-NewServiceQuotaV2ScopeWithDefaults instantiates a new ServiceQuotaV2Scope object
+NewServiceQuotaV1ScopeWithDefaults instantiates a new ServiceQuotaV1Scope object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetApiVersion
 
-`func (o *ServiceQuotaV2Scope) GetApiVersion() string`
+`func (o *ServiceQuotaV1Scope) GetApiVersion() string`
 
 GetApiVersion returns the ApiVersion field if non-nil, zero value otherwise.
 
 ### GetApiVersionOk
 
-`func (o *ServiceQuotaV2Scope) GetApiVersionOk() (*string, bool)`
+`func (o *ServiceQuotaV1Scope) GetApiVersionOk() (*string, bool)`
 
 GetApiVersionOk returns a tuple with the ApiVersion field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetApiVersion
 
-`func (o *ServiceQuotaV2Scope) SetApiVersion(v string)`
+`func (o *ServiceQuotaV1Scope) SetApiVersion(v string)`
 
 SetApiVersion sets ApiVersion field to given value.
 
 ### HasApiVersion
 
-`func (o *ServiceQuotaV2Scope) HasApiVersion() bool`
+`func (o *ServiceQuotaV1Scope) HasApiVersion() bool`
 
 HasApiVersion returns a boolean if a field has been set.
 
 ### GetKind
 
-`func (o *ServiceQuotaV2Scope) GetKind() string`
+`func (o *ServiceQuotaV1Scope) GetKind() string`
 
 GetKind returns the Kind field if non-nil, zero value otherwise.
 
 ### GetKindOk
 
-`func (o *ServiceQuotaV2Scope) GetKindOk() (*string, bool)`
+`func (o *ServiceQuotaV1Scope) GetKindOk() (*string, bool)`
 
 GetKindOk returns a tuple with the Kind field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetKind
 
-`func (o *ServiceQuotaV2Scope) SetKind(v string)`
+`func (o *ServiceQuotaV1Scope) SetKind(v string)`
 
 SetKind sets Kind field to given value.
 
 ### HasKind
 
-`func (o *ServiceQuotaV2Scope) HasKind() bool`
+`func (o *ServiceQuotaV1Scope) HasKind() bool`
 
 HasKind returns a boolean if a field has been set.
 
 ### GetId
 
-`func (o *ServiceQuotaV2Scope) GetId() string`
+`func (o *ServiceQuotaV1Scope) GetId() string`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *ServiceQuotaV2Scope) GetIdOk() (*string, bool)`
+`func (o *ServiceQuotaV1Scope) GetIdOk() (*string, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *ServiceQuotaV2Scope) SetId(v string)`
+`func (o *ServiceQuotaV1Scope) SetId(v string)`
 
 SetId sets Id field to given value.
 
 ### HasId
 
-`func (o *ServiceQuotaV2Scope) HasId() bool`
+`func (o *ServiceQuotaV1Scope) HasId() bool`
 
 HasId returns a boolean if a field has been set.
 
 ### GetMetadata
 
-`func (o *ServiceQuotaV2Scope) GetMetadata() ObjectMeta`
+`func (o *ServiceQuotaV1Scope) GetMetadata() ObjectMeta`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *ServiceQuotaV2Scope) GetMetadataOk() (*ObjectMeta, bool)`
+`func (o *ServiceQuotaV1Scope) GetMetadataOk() (*ObjectMeta, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *ServiceQuotaV2Scope) SetMetadata(v ObjectMeta)`
+`func (o *ServiceQuotaV1Scope) SetMetadata(v ObjectMeta)`
 
 SetMetadata sets Metadata field to given value.
 
 ### HasMetadata
 
-`func (o *ServiceQuotaV2Scope) HasMetadata() bool`
+`func (o *ServiceQuotaV1Scope) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
 
 ### GetDescription
 
-`func (o *ServiceQuotaV2Scope) GetDescription() string`
+`func (o *ServiceQuotaV1Scope) GetDescription() string`
 
 GetDescription returns the Description field if non-nil, zero value otherwise.
 
 ### GetDescriptionOk
 
-`func (o *ServiceQuotaV2Scope) GetDescriptionOk() (*string, bool)`
+`func (o *ServiceQuotaV1Scope) GetDescriptionOk() (*string, bool)`
 
 GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDescription
 
-`func (o *ServiceQuotaV2Scope) SetDescription(v string)`
+`func (o *ServiceQuotaV1Scope) SetDescription(v string)`
 
 SetDescription sets Description field to given value.
 
 ### HasDescription
 
-`func (o *ServiceQuotaV2Scope) HasDescription() bool`
+`func (o *ServiceQuotaV1Scope) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
 
