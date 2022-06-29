@@ -1,0 +1,2302 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: support@confluent.io
+    name: Confluent
+    url: https://confluent.io
+  description: "# Introduction\n\nThe Confluent Cloud Metrics API provides actionable\
+    \ operational metrics about your Confluent\nCloud deployment. This is a queryable\
+    \ HTTP API in which the user will `POST` a query written in\nJSON and get back\
+    \ a time series of metrics specified by the query.\n\nComprehensive documentation\
+    \ is available on\n[docs.confluent.io](https://docs.confluent.io/current/cloud/metrics-api.html).\n\
+    \n# Available Metrics Reference\n\n<h3 style=\"margin-top: 0;\">Please see the\
+    \ <a href=\"/docs/descriptors\">Metrics Reference</a> for\na list of available\
+    \ metrics.</h3>\n\nThis information is also available programmatically via the\n\
+    [descriptors endpoint](#tag/Version-2/paths/~1v2~1metrics~1{dataset}~1descriptors~1metrics/get).\n\
+    \n# Authentication\nConfluent uses API keys for integrating with Confluent Cloud.\
+    \ Applications must be\nauthorized and authenticated before they can access or\
+    \ manage resources in Confluent Cloud.\nYou can manage your API keys in the Confluent\
+    \ Cloud Dashboard or Confluent Cloud CLI.\n\nAn API key is owned by a User or\
+    \ Service Account and inherits the permissions granted\nto the owner.\n\nToday,\
+    \ you can divide API keys into two classes:\n\n* **Cloud API Keys** - These grant\
+    \ access to the Confluent Cloud Control Plane APIs,\n  such as for Provisioning\
+    \ and Metrics integrations.\n* **Cluster API Keys** - These grant access to a\
+    \ single Confluent cluster, such as a specific\n  Kafka or Schema Registry cluster.\n\
+    \n**Cloud API Keys are required for the Metrics API**. Cloud API Keys can be created\
+    \ using the\n[Confluent Cloud CLI](https://docs.confluent.io/current/cloud/cli/).\n\
+    \n```\nccloud api-key create --resource cloud\n```\n\nAll API requests must be\
+    \ made over HTTPS. Calls made over plain HTTP will fail. API requests\nwithout\
+    \ authentication will also fail.\n\n# Versioning\n\nConfluent APIs ensure stability\
+    \ for your integrations by avoiding the introduction\nof breaking changes to customers\
+    \ unexpectedly. Confluent will make non-breaking\nAPI changes without advance\
+    \ notice. Thus, API clients **must** follow the\n[Compatibility Policy](#section/Versioning/Compatibility-Policy)\
+    \ below to ensure your\ningtegration remains stable. All APIs follow the API Lifecycle\
+    \ Policy described below,\nwhich describes the guarantees API clients can rely\
+    \ on.\n\nBreaking changes will be [widely communicated](#communication) in advance\
+    \ in accordance\nwith our [Deprecation Policy](#section/Versioning/Deprecation-Policy).\
+    \ Confluent will provide\ntimelines and a migration path for all API changes,\
+    \ where available. Be sure to subscribe\nto one or more [communication channels](#communication)\
+    \ so you don't miss any updates!\n\nOne exception to these guidelines is for critical\
+    \ security issues. We will take any necessary\nactions to mitigate any critical\
+    \ security issue as soon as possible, which may include disabling\nthe vulnerable\
+    \ functionality until a proper solution is available.\n\nDo not consume any Confluent\
+    \ API unless it is documented in the API Reference. All undocumented\nendpoints\
+    \ should be considered private, subject to change without notice, and not covered\
+    \ by any\nagreements.\n\n> Note: The \"v1\" in the URL is not a \"major version\"\
+    \ in the\n[Semantic Versioning](https://semver.org/) sense. It is a \"generational\
+    \ version\" or\n\"meta version\", as seen in other APIs like\n<a href=\"https://developer.github.com/v3/versions/\"\
+    \ target=\"_blank\">Github API</a> or the\n<a href=\"https://stripe.com/docs/api/versioning\"\
+    \ target=\"_blank\">Stripe API</a>.\n\n## Changelog\n\n### 2021-09-23\n\n####\
+    \ API Version 1 is now deprecated\nAll API Version 1 endpoints are now deprecated\
+    \ and will be removed on 2022-04-04. API users\nshould migrate to API [Version\
+    \ 2](#tag/Version-2).\n\n### 2021-08-24\n\n#### Metric-specific aggregation functions\n\
+    New metrics are being introduced that require alternative aggregation functions\
+    \ (e.g. `MAX`).\nWhen querying those metrics, using `agg: \"SUM\"` will return\
+    \ an error.\nIt is recommended that clients **omit the `agg` field in the request**\
+    \ such that the required\naggregation function for the specific metric is automatically\
+    \ applied on the backend.\n\n> Note: The initial version of Metrics API required\
+    \ clients to effectively hardcode `agg: \"SUM\"`\n> in all queries.  In early\
+    \ 2021, the `agg` field was made optional, but many clients have not\n> been updated\
+    \ to omit the `agg` field.\n\n#### Cursor-based pagination for `/query` endpoint\n\
+    The `/query` endpoint now supports cursor-based pagination similar to the `/descriptors`\
+    \ and\n`/attributes` endpoints.\n\n### 2021-02-10\n\n#### API Version 2 is now\
+    \ Generally Available (GA)\nSee the [Version 2](#tag/Version-2) section below\
+    \ for a detailed description of changes and\nmigration guide.\n\n### 2020-12-04\n\
+    \n#### API Version 2 *(Preview)*\nVersion 2 of the Metrics API is now available\
+    \ in Preview. See the [Version 2](#tag/Version-2)\nsection below for a detailed\
+    \ description of changes.\n\n### 2020-07-08\n\n#### Correction for `active_connection_count`\
+    \ metric\nA bug in the `active_connection_count` metric that affected a subset\
+    \ of customers was fixed.\nCustomers exporting the metric to an external monitoring\
+    \ system may observe a discontinuity\nbetween historical results and current results\
+    \ due to this one-time correction.\n\n### 2020-04-01\nThis release includes the\
+    \ following changes from the preview release:\n\n#### New `format` request attribute\n\
+    The `/query` request now includes a `format` attribute which controls the result\
+    \ structuring in\nthe response body.  See the `/query` endpoint definition for\
+    \ more details.\n\n#### New `/available` endpoint\nThe new `/available` endpoint\
+    \ allows determining which metrics are available for a set of\nresources (defined\
+    \ by labels). This endpoint can be used to determine which subset of metrics\n\
+    are currently available for a specific resource (e.g. a Confluent Cloud Kafka\
+    \ cluster).\n\n#### Metric type changes\nThe `CUMULATIVE_(INT|DOUBLE)` metric\
+    \ type enumeration was changed to `COUNTER_(INT|DOUBLE)`.\nThis was done to better\
+    \ align with OpenTelemetry conventions. In tandem with this change,\nseveral metrics\
+    \ that were improperly classified as `GAUGE`s were re-classified as `COUNTER`s.\n\
+    \n### Metric name changes\nThe `/delta` suffix has been removed from the following\
+    \ metrics:\n* `io.confluent.kafka.server/received_bytes/delta`\n* `io.confluent.kafka.server/sent_bytes/delta`\n\
+    * `io.confluent.kafka.server/request_count/delta`\n\n### 2020-09-15\n\n#### Retire\
+    \ `/available` endpoint\nThe `/available` endpoint (which was in _Preview_ status)\
+    \ has been removed from the API.\nThe `/descriptors` endpoint can still be used\
+    \ to determine the universe of available\nmetrics for Metrics API.\n\n**The legacy\
+    \ metric names are deprecated and will stop functioning on 2020-07-01.**\n\n##\
+    \ API Lifecycle Policy\n\nThe following status labels are applicable to APIs,\
+    \ features, and SDK versions, based on\nthe current support status of each:\n\n\
+    * **Early Access** – May change at any time. Not recommended for production usage.\
+    \ Not\n  officially supported by Confluent. Intended for user feedback only. Users\
+    \ must\nbe granted\n  explicit access to the API by Confluent.\n* **Preview**\
+    \ – Unlikely to change between Preview and General Availability. Not recommended\n\
+    \  for production usage. Officially supported by Confluent for non-production\
+    \ usage.\n  For Closed Previews, users must be granted explicit access to the\
+    \ API by Confluent.\n* **Generally Available (GA)** – Will not change at short\
+    \ notice. Recommended for production\n  usage. Officially supported by Confluent\
+    \ for non-production and production usage.\n* **Deprecated** – No longer supported.\
+    \ Will be removed in the future at the announced date.\n  Use is discouraged and\
+    \ migration following the upgrade guide is recommended.\n* **Sunset** – Removed,\
+    \ and no longer supported or available.\n\nResources, operations, and individual\
+    \ fields in the\n<a href=\"./api.yaml\" target=\"_blank\">OpenAPI spec</a> will\
+    \ be annotated with\n`x-lifecycle-stage`, `x-deprecated-at`, and `x-sunset-at`.\
+    \ These annotations will appear in the\ncorresponding API Reference Documentation.\
+    \ An API is \"Generally Available\" unless explicitly\nmarked otherwise.\n\n##\
+    \ Compatibility Policy\n\nConfluent APIs are governed by\n<a href=\"https://docs.confluent.io/current/cloud/limits.html#upgrade-policy\"\
+    \ target=\"_blank\">\nConfluent Cloud Upgrade Policy</a> in which we will make\
+    \ backward incompatible changes and\ndeprecations approximately once per year,\
+    \ and will provide 180 days notice via email to all\nregistered Confluent Cloud\
+    \ users.\n\n### Backward Compatibility\n\n> *An API version is backwards-compatible\
+    \ if a program written against the previous version of\n> the API will continue\
+    \ to work the same way, without modification, against this version of the\n> API.*\n\
+    \nConfluent considers the following changes to be backwards-compatible:\n\n* Adding\
+    \ new API resources.\n* Adding new optional parameters to existing API requests\
+    \ (e.g., query string or body).\n* Adding new properties to existing API responses.\n\
+    * Changing the order of properties in existing API responses.\n* Changing the\
+    \ length or format of object IDs or other opaque strings.\n  * Unless otherwise\
+    \ documented, you can safely assume object IDs we generate\nwill never exceed\n\
+    \    255 characters, but you should be able to handle IDs of up to that length.\n\
+    \    If you're using MySQL, for example, you should store IDs in a\n    `VARCHAR(255)\
+    \ COLLATE utf8_bin` column.\n  * This includes adding or removing fixed prefixes\
+    \ (such as `lkc-` on kafka cluster\nIDs).\n  * This includes API keys, API tokens,\
+    \ and similar authentication mechanisms.\n  * This includes all strings described\
+    \ as \"opaque\" in the docs, such as pagination\ncursors. * Omitting properties\
+    \ with null values from existing API responses.\n\n### Client Responsibilities\n\
+    \n* Resource and rate limits, and the default and maximum sizes of paginated data\
+    \ **are not**\n  considered part of the API contract and may change (possibly\
+    \ dynamically). It\nis the client's\n  responsibility to read the road signs and\
+    \ obey the speed limit.\n* If a property has a primitive type and the API documentation\
+    \ does not explicitly limit its\n  possible values, clients **must not** assume\
+    \ the values are constrained to a\nparticular set\n  of possible responses.\n\
+    * If a property of an object is not explicitly declared as mandatory in the API,\
+    \ clients\n  **must not** assume it will be present.\n* A resource **may** be\
+    \ modified to return a \"redirection\" response (e.g. `301`, `307`) instead\n\
+    \  of directly returning the resource. Clients **must** handle HTTP-level redirects,\n\
+    and respect\n  HTTP headers (e.g. `Location`).\n\n## Deprecation Policy\n\nConfluent\
+    \ will announce deprecations at least 180 days in advance of a breaking change\n\
+    and we will continue to maintain the deprecated APIs in their original form during\
+    \ this time.\n\nExceptions to this policy apply in case of critical security vulnerabilities\
+    \ or functional\ndefects.\n\n### Communication\n\nWhen a deprecation is announced,\
+    \ the details and any relevant migration\ninformation will be available on the\
+    \ following channels:\n\n* Publication in the [API Changelog](#section/Versioning/Changelog)\n\
+    * Lifecycle, deprecation and \"x-deprecated-at\" annotations in the\n  <a href=\"\
+    /docs/api.yaml\" target=\"_blank\">OpenAPI spec</a>\n* Announcements on the\n\
+    \  <a href=\"https://www.confluent.io/blog/\" target=\"_blank\">Developer Blog</a>,\n\
+    \  <a href=\"https://confluentcommunity.slack.com\" target=\"_blank\">Community\
+    \ Slack</a>\n  (<a href=\"https://slackpass.io/confluentcommunity\" target=\"\
+    _blank\">join!</a>),\n  <a href=\"https://groups.google.com/forum/#!forum/confluent-platform\"\
+    \ target=\"_blank\">\n  Google Group</a>,\n  the <a href=\"https://twitter.com/ConfluentInc\"\
+    \ target=\"_blank\">@ConfluentInc\ntwitter</a>\n  account, and similar channels\n\
+    * Enterprise customers may receive information by email to their specified Confluent\
+    \ contact,\n  if applicable.\n\n# Object Model\nThe object model for the Metrics\
+    \ API is designed similarly to the\n[OpenTelemetry](https://opentelemetry.io/)\
+    \ standard.\n\n## Metrics\nA _metric_ is a numeric attribute of a resource, measured\
+    \ at a specific point in time, labeled\nwith contextual metadata gathered at the\
+    \ point of instrumentation.\n\nThere are two types of metrics:\n* `GAUGE`: An\
+    \ instantaneous measurement of a value.\n  Gauge metrics are implicitly averaged\
+    \ when aggregating over time.\n  > Example: `io.confluent.kafka.server/retained_bytes`\n\
+    * `COUNTER`: The count of occurrences in a _single (one minute) sampling\n  interval_\
+    \ (unless otherwise stated in the metric description).\n  Counter metrics are\
+    \ implicitly summed when aggregating over time.\n  > Example: `io.confluent.kafka.server/received_bytes`\n\
+    \nThe list of metrics and their labels is available at [/docs/descriptors](/docs/descriptors).\n\
+    \n## Resources\nA _resource_ represents an entity against which metrics are collected.\
+    \  For example, a Kafka\ncluster, a Kafka Connector, a ksqlDB application, etc.\n\
+    \nEach metric _descriptor_ is associated with one or more resource _descriptors_,\
+    \ representing\nthe resource types to which that metric can apply.  A metric _data\
+    \ point_ is associated with a\nsingle resource _instance_, identified by the resource\
+    \ labels on that metric data point.\n\nFor example, metrics emitted by Kafka Connect\
+    \ are associated to the `connector` resource type.\nData points for those metrics\
+    \ include resource labels identifying the specific `connector`\ninstance that\
+    \ emitted the metric.\n\nThe list of resource types and labels are discoverable\
+    \ via the `/descriptors/resources`\nendpoint.\n\n## Labels\nA _label_ is a key-value\
+    \ attribute associated with a metric data point.\n\nLabels can be used in queries\
+    \ to filter or group the results.  Labels must be prefixed when\nused in queries:\n\
+    * `metric.<label>` (for metric labels), for example `metric.topic`\n* `resource.<resource-type>.<label>`\
+    \ (for resource labels), for example `resource.kafka.id`.\n\nThe set of valid\
+    \ label keys for a metric include:\n* The label keys defined on that metric's\
+    \ descriptor itself\n* The label keys defined on the resource descriptor for the\
+    \ metric's associated resource type\n\nFor example, the `io.confluent.kafka.server/received_bytes`\
+    \ metric has the following labels:\n* `resource.kafka.id` - The Kafka cluster\
+    \ to which the metric pertains\n* `metric.topic` - The Kafka topic to which the\
+    \ bytes were produced\n* `metric.partition` - The partition to which the bytes\
+    \ were produced\n\n## Datasets\nA _dataset_ is a logical collection of metrics\
+    \ that can be queried together.  The `dataset` is\na required URL template parameter\
+    \ for every endpoint in this API.  The following datasets are\ncurrently available:\n\
+    \n<table>\n<thead>\n  <tr>\n    <th style=\"width: 250px;\">Dataset</th>\n   \
+    \ <th>Description</th>\n  </tr>\n</thead>\n<tbody>\n  <tr>\n    <td>\n      <code>cloud</code>\n\
+    \      <p><img\n          src=\"https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%230074A2\"\
+    \n          alt=\"generally-available\">\n    </td>\n    <td>\n      Metrics originating\
+    \ from Confluent Cloud resources.\n      <p>Requests to this dataset require a\
+    \ resource <code>filter</code>\n         (e.g. Kafka cluster ID, Connector ID,\
+    \ etc.) in the query for authorization\npurposes.\n         The client's API key\
+    \ must be authorized for the resource referenced in\nthe filter.\n    </td>\n\
+    \  </tr>\n</tbody>\n</table>\n\n# Client Considerations and Best Practices\n\n\
+    ## Rate Limiting\nTo protect the stability of the API and keep it available to\
+    \ all users, Confluent employs\nmultiple safeguards. Users who send many requests\
+    \ in quick succession or perform too many\nconcurrent operations may be throttled\
+    \ or have their requested rejected with an error.\nWhen a rate limit is breached,\
+    \ an HTTP `429 Too Many Requests` error is returned.\n\nRate limits are enforced\
+    \ at multiple scopes.\n\n### Global Rate Limits\nA global rate limit of **60 requests\
+    \ per IP address, per minute** is enforced.\n\n### Per-endpoint Rate Limits\n\
+    Additionally, some endpoint-specific rate limits are enforced.\n\n| Endpoint \
+    \ | Rate limit |\n| --------- | ---------- |\n| `/v2/metrics/{dataset}/export`\
+    \ | 80 requests per resource, per hour, per principal.<br/>See the [export endpoint\
+    \ documentation](#tag/Version-2/paths/~1v2~1metrics~1{dataset}~1export/get) for\
+    \ details. |\n\n## Retries\nImplement retry logic in your client to gracefully\
+    \ handle transient API failures.\nThis should be done by watching for error responses\
+    \ and building in a retry mechanism.\nThis mechanism should follow a capped exponential\
+    \ backoff policy to prevent retry\namplification (\"retry storms\") and also introduce\
+    \ some randomness (\"jitter\") to avoid the\n[thundering herd effect](https://en.wikipedia.org/wiki/Thundering_herd_problem).\n\
+    \n## Metric Data Latency\nMetric data points are typically available for query\
+    \ in the API within **5 minutes** of their\norigination at the source.  This latency\
+    \ can vary based on network conditions and processing\noverhead.  Clients that\
+    \ are polling (or \"scraping\") metrics into an external monitoring system\nshould\
+    \ account for this latency in their polling requests.  API requests that fail\
+    \ to\nincorporate the latency into the query `interval` may have incomplete data\
+    \ in the response.\n\n## Pagination\nCursors, tokens, and corresponding pagination\
+    \ links may expire after a short amount of time.\nIn this case, the API will return\
+    \ a `400 Bad Request` error and the client will need to restart\nfrom the beginning.\n\
+    \nThe client should have no trouble pausing between rate limiting windows, but\
+    \ persisting cursors\nfor hours or days is not recommended.\n"
+  title: Confluent Cloud Metrics API
+  version: ""
+  x-api-group: v2
+  x-api-id: 4be9bd3c-ea9b-4efe-89aa-946c36b50161
+  x-audience: external-public
+  x-logo:
+    url: https://assets.confluent.io/m/5ec23aa91903c00b/
+servers:
+- url: https://api.telemetry.confluent.cloud
+security:
+- api-key: []
+tags:
+- description: "![deprecated](https://img.shields.io/badge/lifecycle%20stage-Deprecated-%23F26135)\n\
+    \nVersion 1 of Metrics API supports querying metrics for Kafka clusters.\n"
+  name: Version 1
+- description: "![generally-available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%230074A2)\n\
+    \nVersion 2 of the Metrics API adds the ability to query metrics for Kafka Connect,\
+    \ ksqlDB,\nand Schema Registry.\n\nThis capability is enabled by the introduction\
+    \ of a [Resource](#section/Object-Model/Resources)\nabstraction into the API object\
+    \ model. Resources represent the entity against which metrics\nare collected.\n\
+    \n### Migration Guide\nThe following endpoint URLs have changed in version 2:\n\
+    \n| Endpoint                | Version 1                        | Version 2   \
+    \                             |\n| ----------------------- | --------------------------------\
+    \ | ---------------------------------------- |\n| Metrics discovery       | `/metrics/{dataset}/descriptors`\
+    \ | `/metrics/{dataset}/descriptors/metrics` |\n\nThe label prefix syntax has\
+    \ changed in version 2:\n\n| Label                   | Version 1             \
+    \       | Version 2               |\n| ----------------------- | ----------------------------\
+    \ | ----------------------- |\n| Resource labels *(new)* | *N/A*             \
+    \           | `resource.<label>`      |\n| Kafka cluster ID        | `metric.label.cluster_id`\
+    \    | `resource.kafka.id`     |\n| All other metric labels | `metric.label.<label>`\
+    \       | `metric.<label>`        |\n\nThis example shows a request to `/v1/metrics/cloud/query`\
+    \ migrated into the new `v2` syntax\n\n#### Version 1 Request\n```json\n{\n  \"\
+    group_by\": [\n    \"metric.label.topic\"\n  ],\n  \"aggregations\": [{\n    \"\
+    metric\": \"io.confluent.kafka.server/received_bytes\",\n    \"agg\": \"SUM\"\n\
+    \  }],\n  \"filter\": {\n    \"field\": \"metric.label.cluster_id\",\n    \"op\"\
+    : \"EQ\",\n    \"value\": \"lkc-00000\"\n  },\n  \"granularity\": \"ALL\",\n \
+    \ \"intervals\" : [\n    \"2020-01-01T00:00:00Z/PT1H\"\n  ]\n}\n```\n\n#### Version\
+    \ 2 Request\n```json\n{\n  \"group_by\": [\n    \"metric.topic\"\n  ],\n  \"aggregations\"\
+    : [{\n    \"metric\": \"io.confluent.kafka.server/received_bytes\",\n    \"agg\"\
+    : \"SUM\"\n  }],\n  \"filter\": {\n    \"field\": \"resource.kafka.id\",\n   \
+    \ \"op\": \"EQ\",\n    \"value\": \"lkc-00000\"\n  },\n  \"granularity\": \"ALL\"\
+    ,\n  \"intervals\" : [\n    \"2020-01-01T00:00:00Z/PT1H\"\n  ]\n}\n```\n"
+  name: Version 2
+paths:
+  /v1/metrics/{dataset}/descriptors:
+    get:
+      deprecated: true
+      description: "Lists all the metric descriptors for a dataset.\n\nA metric descriptor\
+        \ represents metadata for a metric, including its data type and labels.\n\
+        This metadata is provided programmatically to enable clients to dynamically\
+        \ adjust as new\nmetrics are added to the dataset, rather than hardcoding\
+        \ metric names in client code.\n"
+      parameters:
+      - description: "The dataset to list metric descriptors for. Currently the only\
+          \ supported dataset name is `cloud`. See [here](#section/Object-Model/Datasets)."
+        explode: false
+        in: path
+        name: dataset
+        required: true
+        schema:
+          $ref: '#/components/schemas/Dataset'
+        style: simple
+      - description: The maximum number of results to return. The page size is an
+          integer in the range from 1 through 1000.
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 100
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      - description: The next page token. The token is returned by the previous request
+          as part of `meta.pagination`.
+        explode: true
+        in: query
+        name: page_token
+        required: false
+        schema:
+          $ref: '#/components/schemas/PageToken'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                listResponse:
+                  value:
+                    data:
+                    - description: The delta count of bytes received from the network.
+                        Each sample is the number of bytes received since the previous
+                        data sample. The count is sampled every 60 seconds.
+                      labels:
+                      - description: The name of the Kafka topic.
+                        key: topic
+                      name: io.confluent.kafka.server/received_bytes
+                      type: COUNTER_INT64
+                      exportable: true
+                      unit: By
+                      lifecycle_stage: GENERAL_AVAILABILITY
+                      resources:
+                      - kafka
+                    - description: The delta count of bytes sent over the network.
+                        Each sample is the number of bytes sent since the previous
+                        data point. The count is sampled every 60 seconds.
+                      labels:
+                      - description: The name of the Kafka topic.
+                        key: topic
+                      name: io.confluent.kafka.server/sent_bytes
+                      type: COUNTER_INT64
+                      exportable: true
+                      unit: By
+                      lifecycle_stage: GENERAL_AVAILABILITY
+                      resources:
+                      - kafka
+                    links: null
+                    meta:
+                      pagination:
+                        page_size: 3
+                        total_size: 3
+              schema:
+                $ref: '#/components/schemas/ListMetricDescriptorsResponse'
+          description: Successful response
+        "429":
+          description: Rate Limit Exceeded
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Error
+      summary: List all metric descriptors
+      tags:
+      - Version 1
+      x-deprecated-at: 2021-09-25T00:00:00Z
+      x-sunset-at: 2022-04-25T00:00:00Z
+      x-codeSamples:
+      - lang: Shell
+        source: "curl --request GET \\\n  --url 'https://api.telemetry.confluent.cloud/v1/metrics/{dataset}/descriptors?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE'\
+          \ \\\n  --header 'Authorization: Basic REPLACE_BASIC_AUTH'"
+      - lang: Java
+        source: "OkHttpClient client = new OkHttpClient();\n\nRequest request = new\
+          \ Request.Builder()\n  .url(\"https://api.telemetry.confluent.cloud/v1/metrics/{dataset}/descriptors?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          )\n  .get()\n  .addHeader(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n  .build();\n\nResponse response = client.newCall(request).execute();"
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.telemetry.confluent.cloud/v1/metrics/{dataset}/descriptors?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: "import http.client\n\nconn = http.client.HTTPSConnection(\"api.telemetry.confluent.cloud\"\
+          )\n\nheaders = { 'Authorization': \"Basic REPLACE_BASIC_AUTH\" }\n\nconn.request(\"\
+          GET\", \"/v1/metrics/{dataset}/descriptors?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          , headers=headers)\n\nres = conn.getresponse()\ndata = res.read()\n\nprint(data.decode(\"\
+          utf-8\"))"
+      - lang: Node
+        source: "const http = require(\"https\");\n\nconst options = {\n  \"method\"\
+          : \"GET\",\n  \"hostname\": \"api.telemetry.confluent.cloud\",\n  \"port\"\
+          : null,\n  \"path\": \"/v1/metrics/{dataset}/descriptors?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          ,\n  \"headers\": {\n    \"Authorization\": \"Basic REPLACE_BASIC_AUTH\"\
+          \n  }\n};\n\nconst req = http.request(options, function (res) {\n  const\
+          \ chunks = [];\n\n  res.on(\"data\", function (chunk) {\n    chunks.push(chunk);\n\
+          \  });\n\n  res.on(\"end\", function () {\n    const body = Buffer.concat(chunks);\n\
+          \    console.log(body.toString());\n  });\n});\n\nreq.end();"
+      - lang: C
+        source: "CURL *hnd = curl_easy_init();\n\ncurl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST,\
+          \ \"GET\");\ncurl_easy_setopt(hnd, CURLOPT_URL, \"https://api.telemetry.confluent.cloud/v1/metrics/{dataset}/descriptors?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          );\n\nstruct curl_slist *headers = NULL;\nheaders = curl_slist_append(headers,\
+          \ \"Authorization: Basic REPLACE_BASIC_AUTH\");\ncurl_easy_setopt(hnd, CURLOPT_HTTPHEADER,\
+          \ headers);\n\nCURLcode ret = curl_easy_perform(hnd);"
+      - lang: C#
+        source: "var client = new RestClient(\"https://api.telemetry.confluent.cloud/v1/metrics/{dataset}/descriptors?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          );\nvar request = new RestRequest(Method.GET);\nrequest.AddHeader(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\");\nIRestResponse response = client.Execute(request);"
+  /v1/metrics/{dataset}/query:
+    post:
+      deprecated: true
+      description: Queries metrics in a dataset.
+      parameters:
+      - description: "The dataset to query. Currently the only supported dataset name\
+          \ is `cloud`. See [here](#section/Object-Model/Datasets)."
+        explode: false
+        in: path
+        name: dataset
+        required: true
+        schema:
+          $ref: '#/components/schemas/Dataset'
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              query:
+                value:
+                  group_by:
+                  - metric.label.topic
+                  aggregations:
+                  - metric: io.confluent.kafka.server/sent_bytes
+                    agg: SUM
+                  filter:
+                    op: AND
+                    filters:
+                    - field: metric.label.cluster_id
+                      op: EQ
+                      value: lkc-1234
+                    - op: NOT
+                      filter:
+                        field: metric.label.topic
+                        op: EQ
+                        value: topicA
+                  order_by:
+                  - metric: io.confluent.kafka.server/sent_bytes
+                    agg: SUM
+                    order: DESCENDING
+                  granularity: PT1H
+                  intervals:
+                  - 2019-10-17T20:17:00.000Z/PT2H
+                  limit: 5
+                x-path-override: /v1/metrics/cloud/query
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                flatResponse:
+                  value:
+                    data:
+                    - timestamp: 2019-10-17T20:17:00Z
+                      metric.label.topic: foo
+                      value: 9741
+                    - timestamp: 2019-10-17T20:18:00Z
+                      metric.label.topic: foo
+                      value: 9246
+                    - timestamp: 2019-10-17T20:17:00Z
+                      metric.label.topic: bar
+                      value: 844.1
+                    - timestamp: 2019-10-17T20:18:00Z
+                      metric.label.topic: bar
+                      value: 821.1
+                groupedResponse:
+                  value:
+                    data:
+                    - metric.label.topic: foo
+                      points:
+                      - timestamp: 2019-10-17T20:17:00Z
+                        value: 9741
+                      - timestamp: 2019-10-17T20:18:00Z
+                        value: 9246
+                    - metric.label.topic: bar
+                      points:
+                      - timestamp: 2019-10-17T20:17:00Z
+                        value: 844.1
+                      - timestamp: 2019-10-17T20:18:00Z
+                        value: 821.1
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+          description: Successful response
+        "429":
+          description: Rate Limit Exceeded
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Error
+      summary: Query metric values
+      tags:
+      - Version 1
+      x-deprecated-at: 2021-09-25T00:00:00Z
+      x-sunset-at: 2022-04-25T00:00:00Z
+      x-codeSamples:
+      - lang: Shell
+        source: "curl --request POST \\\n  --url 'https://api.telemetry.confluent.cloud/v1/metrics/{dataset}/query'\
+          \ \\\n  --header 'Authorization: Basic REPLACE_BASIC_AUTH' \\\n  --header\
+          \ 'content-type: application/json' \\\n  --data '{\"aggregations\":[{\"\
+          metric\":\"io.confluent.kafka.server/bytes_in\",\"agg\":\"SUM\"}],\"group_by\"\
+          :[\"string\"],\"granularity\":\"PT1H\",\"filter\":{\"op\":\"EQ\",\"field\"\
+          :\"resource.kafka.id\",\"value\":\"lkc-1234\"},\"order_by\":[{\"metric\"\
+          :\"io.confluent.kafka.server/bytes_in\",\"agg\":\"SUM\",\"order\":\"DESCENDING\"\
+          }],\"intervals\":[\"string\"],\"limit\":100,\"format\":\"FLAT\"}'"
+      - lang: Java
+        source: "OkHttpClient client = new OkHttpClient();\n\nMediaType mediaType\
+          \ = MediaType.parse(\"application/json\");\nRequestBody body = RequestBody.create(mediaType,\
+          \ \"{\\\"aggregations\\\":[{\\\"metric\\\":\\\"io.confluent.kafka.server/bytes_in\\\
+          \",\\\"agg\\\":\\\"SUM\\\"}],\\\"group_by\\\":[\\\"string\\\"],\\\"granularity\\\
+          \":\\\"PT1H\\\",\\\"filter\\\":{\\\"op\\\":\\\"EQ\\\",\\\"field\\\":\\\"\
+          resource.kafka.id\\\",\\\"value\\\":\\\"lkc-1234\\\"},\\\"order_by\\\":[{\\\
+          \"metric\\\":\\\"io.confluent.kafka.server/bytes_in\\\",\\\"agg\\\":\\\"\
+          SUM\\\",\\\"order\\\":\\\"DESCENDING\\\"}],\\\"intervals\\\":[\\\"string\\\
+          \"],\\\"limit\\\":100,\\\"format\\\":\\\"FLAT\\\"}\");\nRequest request\
+          \ = new Request.Builder()\n  .url(\"https://api.telemetry.confluent.cloud/v1/metrics/{dataset}/query\"\
+          )\n  .post(body)\n  .addHeader(\"content-type\", \"application/json\")\n\
+          \  .addHeader(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n  .build();\n\
+          \nResponse response = client.newCall(request).execute();"
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.telemetry.confluent.cloud/v1/metrics/{dataset}/query\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"aggregations\\\":[{\\\"metric\\\
+          \":\\\"io.confluent.kafka.server/bytes_in\\\",\\\"agg\\\":\\\"SUM\\\"}],\\\
+          \"group_by\\\":[\\\"string\\\"],\\\"granularity\\\":\\\"PT1H\\\",\\\"filter\\\
+          \":{\\\"op\\\":\\\"EQ\\\",\\\"field\\\":\\\"resource.kafka.id\\\",\\\"value\\\
+          \":\\\"lkc-1234\\\"},\\\"order_by\\\":[{\\\"metric\\\":\\\"io.confluent.kafka.server/bytes_in\\\
+          \",\\\"agg\\\":\\\"SUM\\\",\\\"order\\\":\\\"DESCENDING\\\"}],\\\"intervals\\\
+          \":[\\\"string\\\"],\\\"limit\\\":100,\\\"format\\\":\\\"FLAT\\\"}\")\n\n\
+          \treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: "import http.client\n\nconn = http.client.HTTPSConnection(\"api.telemetry.confluent.cloud\"\
+          )\n\npayload = \"{\\\"aggregations\\\":[{\\\"metric\\\":\\\"io.confluent.kafka.server/bytes_in\\\
+          \",\\\"agg\\\":\\\"SUM\\\"}],\\\"group_by\\\":[\\\"string\\\"],\\\"granularity\\\
+          \":\\\"PT1H\\\",\\\"filter\\\":{\\\"op\\\":\\\"EQ\\\",\\\"field\\\":\\\"\
+          resource.kafka.id\\\",\\\"value\\\":\\\"lkc-1234\\\"},\\\"order_by\\\":[{\\\
+          \"metric\\\":\\\"io.confluent.kafka.server/bytes_in\\\",\\\"agg\\\":\\\"\
+          SUM\\\",\\\"order\\\":\\\"DESCENDING\\\"}],\\\"intervals\\\":[\\\"string\\\
+          \"],\\\"limit\\\":100,\\\"format\\\":\\\"FLAT\\\"}\"\n\nheaders = {\n  \
+          \  'content-type': \"application/json\",\n    'Authorization': \"Basic REPLACE_BASIC_AUTH\"\
+          \n    }\n\nconn.request(\"POST\", \"/v1/metrics/{dataset}/query\", payload,\
+          \ headers)\n\nres = conn.getresponse()\ndata = res.read()\n\nprint(data.decode(\"\
+          utf-8\"))"
+      - lang: Node
+        source: "const http = require(\"https\");\n\nconst options = {\n  \"method\"\
+          : \"POST\",\n  \"hostname\": \"api.telemetry.confluent.cloud\",\n  \"port\"\
+          : null,\n  \"path\": \"/v1/metrics/{dataset}/query\",\n  \"headers\": {\n\
+          \    \"content-type\": \"application/json\",\n    \"Authorization\": \"\
+          Basic REPLACE_BASIC_AUTH\"\n  }\n};\n\nconst req = http.request(options,\
+          \ function (res) {\n  const chunks = [];\n\n  res.on(\"data\", function\
+          \ (chunk) {\n    chunks.push(chunk);\n  });\n\n  res.on(\"end\", function\
+          \ () {\n    const body = Buffer.concat(chunks);\n    console.log(body.toString());\n\
+          \  });\n});\n\nreq.write(JSON.stringify({\n  aggregations: [{metric: 'io.confluent.kafka.server/bytes_in',\
+          \ agg: 'SUM'}],\n  group_by: ['string'],\n  granularity: 'PT1H',\n  filter:\
+          \ {op: 'EQ', field: 'resource.kafka.id', value: 'lkc-1234'},\n  order_by:\
+          \ [\n    {metric: 'io.confluent.kafka.server/bytes_in', agg: 'SUM', order:\
+          \ 'DESCENDING'}\n  ],\n  intervals: ['string'],\n  limit: 100,\n  format:\
+          \ 'FLAT'\n}));\nreq.end();"
+      - lang: C
+        source: "CURL *hnd = curl_easy_init();\n\ncurl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST,\
+          \ \"POST\");\ncurl_easy_setopt(hnd, CURLOPT_URL, \"https://api.telemetry.confluent.cloud/v1/metrics/{dataset}/query\"\
+          );\n\nstruct curl_slist *headers = NULL;\nheaders = curl_slist_append(headers,\
+          \ \"content-type: application/json\");\nheaders = curl_slist_append(headers,\
+          \ \"Authorization: Basic REPLACE_BASIC_AUTH\");\ncurl_easy_setopt(hnd, CURLOPT_HTTPHEADER,\
+          \ headers);\n\ncurl_easy_setopt(hnd, CURLOPT_POSTFIELDS, \"{\\\"aggregations\\\
+          \":[{\\\"metric\\\":\\\"io.confluent.kafka.server/bytes_in\\\",\\\"agg\\\
+          \":\\\"SUM\\\"}],\\\"group_by\\\":[\\\"string\\\"],\\\"granularity\\\":\\\
+          \"PT1H\\\",\\\"filter\\\":{\\\"op\\\":\\\"EQ\\\",\\\"field\\\":\\\"resource.kafka.id\\\
+          \",\\\"value\\\":\\\"lkc-1234\\\"},\\\"order_by\\\":[{\\\"metric\\\":\\\"\
+          io.confluent.kafka.server/bytes_in\\\",\\\"agg\\\":\\\"SUM\\\",\\\"order\\\
+          \":\\\"DESCENDING\\\"}],\\\"intervals\\\":[\\\"string\\\"],\\\"limit\\\"\
+          :100,\\\"format\\\":\\\"FLAT\\\"}\");\n\nCURLcode ret = curl_easy_perform(hnd);"
+      - lang: C#
+        source: "var client = new RestClient(\"https://api.telemetry.confluent.cloud/v1/metrics/{dataset}/query\"\
+          );\nvar request = new RestRequest(Method.POST);\nrequest.AddHeader(\"content-type\"\
+          , \"application/json\");\nrequest.AddHeader(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          );\nrequest.AddParameter(\"application/json\", \"{\\\"aggregations\\\":[{\\\
+          \"metric\\\":\\\"io.confluent.kafka.server/bytes_in\\\",\\\"agg\\\":\\\"\
+          SUM\\\"}],\\\"group_by\\\":[\\\"string\\\"],\\\"granularity\\\":\\\"PT1H\\\
+          \",\\\"filter\\\":{\\\"op\\\":\\\"EQ\\\",\\\"field\\\":\\\"resource.kafka.id\\\
+          \",\\\"value\\\":\\\"lkc-1234\\\"},\\\"order_by\\\":[{\\\"metric\\\":\\\"\
+          io.confluent.kafka.server/bytes_in\\\",\\\"agg\\\":\\\"SUM\\\",\\\"order\\\
+          \":\\\"DESCENDING\\\"}],\\\"intervals\\\":[\\\"string\\\"],\\\"limit\\\"\
+          :100,\\\"format\\\":\\\"FLAT\\\"}\", ParameterType.RequestBody);\nIRestResponse\
+          \ response = client.Execute(request);"
+  /v1/metrics/{dataset}/attributes:
+    post:
+      deprecated: true
+      description: |
+        Enumerates label values for a single metric.
+      parameters:
+      - description: The dataset to query.
+        explode: false
+        in: path
+        name: dataset
+        required: true
+        schema:
+          $ref: '#/components/schemas/Dataset'
+        style: simple
+      - description: The next page token. The token is returned by the previous request
+          as part of `meta.pagination`.
+        explode: true
+        in: query
+        name: page_token
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  metric: io.confluent.kafka.server/sent_bytes
+                  group_by:
+                  - metric.label.topic
+                  filter:
+                    field: metric.label.cluster_id
+                    op: EQ
+                    value: lkc-09d19
+                  limit: 3
+                  intervals:
+                  - 2019-10-16T16:30:20Z/2019-10-24T18:57:00Z
+                x-path-override: /v1/metrics/cloud/attributes
+            schema:
+              $ref: '#/components/schemas/_v1_metrics__dataset__attributes_post_request'
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                    - metric.label.topic: bar
+                    - metric.label.topic: baz
+                    - metric.label.topic: foo
+                    meta:
+                      pagination:
+                        page_size: 3
+                        next_page_token: dG9waWNC
+              schema:
+                $ref: '#/components/schemas/AttributesResponse'
+          description: Successful response
+        "429":
+          description: Rate Limit Exceeded
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Error
+      summary: Query label values
+      tags:
+      - Version 1
+      x-deprecated-at: 2021-09-25T00:00:00Z
+      x-sunset-at: 2022-04-25T00:00:00Z
+      x-codeSamples:
+      - lang: Shell
+        source: "curl --request POST \\\n  --url 'https://api.telemetry.confluent.cloud/v1/metrics/{dataset}/attributes?page_token=SOME_STRING_VALUE'\
+          \ \\\n  --header 'Authorization: Basic REPLACE_BASIC_AUTH' \\\n  --header\
+          \ 'content-type: application/json' \\\n  --data '{\"metric\":\"string\"\
+          ,\"group_by\":[\"string\"],\"filter\":{\"op\":\"EQ\",\"field\":\"resource.kafka.id\"\
+          ,\"value\":\"lkc-1234\"},\"intervals\":[\"string\"],\"limit\":100}'"
+      - lang: Java
+        source: "OkHttpClient client = new OkHttpClient();\n\nMediaType mediaType\
+          \ = MediaType.parse(\"application/json\");\nRequestBody body = RequestBody.create(mediaType,\
+          \ \"{\\\"metric\\\":\\\"string\\\",\\\"group_by\\\":[\\\"string\\\"],\\\"\
+          filter\\\":{\\\"op\\\":\\\"EQ\\\",\\\"field\\\":\\\"resource.kafka.id\\\"\
+          ,\\\"value\\\":\\\"lkc-1234\\\"},\\\"intervals\\\":[\\\"string\\\"],\\\"\
+          limit\\\":100}\");\nRequest request = new Request.Builder()\n  .url(\"https://api.telemetry.confluent.cloud/v1/metrics/{dataset}/attributes?page_token=SOME_STRING_VALUE\"\
+          )\n  .post(body)\n  .addHeader(\"content-type\", \"application/json\")\n\
+          \  .addHeader(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n  .build();\n\
+          \nResponse response = client.newCall(request).execute();"
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.telemetry.confluent.cloud/v1/metrics/{dataset}/attributes?page_token=SOME_STRING_VALUE\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"metric\\\":\\\"string\\\",\\\"\
+          group_by\\\":[\\\"string\\\"],\\\"filter\\\":{\\\"op\\\":\\\"EQ\\\",\\\"\
+          field\\\":\\\"resource.kafka.id\\\",\\\"value\\\":\\\"lkc-1234\\\"},\\\"\
+          intervals\\\":[\\\"string\\\"],\\\"limit\\\":100}\")\n\n\treq, _ := http.NewRequest(\"\
+          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
+      - lang: Python
+        source: "import http.client\n\nconn = http.client.HTTPSConnection(\"api.telemetry.confluent.cloud\"\
+          )\n\npayload = \"{\\\"metric\\\":\\\"string\\\",\\\"group_by\\\":[\\\"string\\\
+          \"],\\\"filter\\\":{\\\"op\\\":\\\"EQ\\\",\\\"field\\\":\\\"resource.kafka.id\\\
+          \",\\\"value\\\":\\\"lkc-1234\\\"},\\\"intervals\\\":[\\\"string\\\"],\\\
+          \"limit\\\":100}\"\n\nheaders = {\n    'content-type': \"application/json\"\
+          ,\n    'Authorization': \"Basic REPLACE_BASIC_AUTH\"\n    }\n\nconn.request(\"\
+          POST\", \"/v1/metrics/{dataset}/attributes?page_token=SOME_STRING_VALUE\"\
+          , payload, headers)\n\nres = conn.getresponse()\ndata = res.read()\n\nprint(data.decode(\"\
+          utf-8\"))"
+      - lang: Node
+        source: "const http = require(\"https\");\n\nconst options = {\n  \"method\"\
+          : \"POST\",\n  \"hostname\": \"api.telemetry.confluent.cloud\",\n  \"port\"\
+          : null,\n  \"path\": \"/v1/metrics/{dataset}/attributes?page_token=SOME_STRING_VALUE\"\
+          ,\n  \"headers\": {\n    \"content-type\": \"application/json\",\n    \"\
+          Authorization\": \"Basic REPLACE_BASIC_AUTH\"\n  }\n};\n\nconst req = http.request(options,\
+          \ function (res) {\n  const chunks = [];\n\n  res.on(\"data\", function\
+          \ (chunk) {\n    chunks.push(chunk);\n  });\n\n  res.on(\"end\", function\
+          \ () {\n    const body = Buffer.concat(chunks);\n    console.log(body.toString());\n\
+          \  });\n});\n\nreq.write(JSON.stringify({\n  metric: 'string',\n  group_by:\
+          \ ['string'],\n  filter: {op: 'EQ', field: 'resource.kafka.id', value: 'lkc-1234'},\n\
+          \  intervals: ['string'],\n  limit: 100\n}));\nreq.end();"
+      - lang: C
+        source: "CURL *hnd = curl_easy_init();\n\ncurl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST,\
+          \ \"POST\");\ncurl_easy_setopt(hnd, CURLOPT_URL, \"https://api.telemetry.confluent.cloud/v1/metrics/{dataset}/attributes?page_token=SOME_STRING_VALUE\"\
+          );\n\nstruct curl_slist *headers = NULL;\nheaders = curl_slist_append(headers,\
+          \ \"content-type: application/json\");\nheaders = curl_slist_append(headers,\
+          \ \"Authorization: Basic REPLACE_BASIC_AUTH\");\ncurl_easy_setopt(hnd, CURLOPT_HTTPHEADER,\
+          \ headers);\n\ncurl_easy_setopt(hnd, CURLOPT_POSTFIELDS, \"{\\\"metric\\\
+          \":\\\"string\\\",\\\"group_by\\\":[\\\"string\\\"],\\\"filter\\\":{\\\"\
+          op\\\":\\\"EQ\\\",\\\"field\\\":\\\"resource.kafka.id\\\",\\\"value\\\"\
+          :\\\"lkc-1234\\\"},\\\"intervals\\\":[\\\"string\\\"],\\\"limit\\\":100}\"\
+          );\n\nCURLcode ret = curl_easy_perform(hnd);"
+      - lang: C#
+        source: "var client = new RestClient(\"https://api.telemetry.confluent.cloud/v1/metrics/{dataset}/attributes?page_token=SOME_STRING_VALUE\"\
+          );\nvar request = new RestRequest(Method.POST);\nrequest.AddHeader(\"content-type\"\
+          , \"application/json\");\nrequest.AddHeader(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          );\nrequest.AddParameter(\"application/json\", \"{\\\"metric\\\":\\\"string\\\
+          \",\\\"group_by\\\":[\\\"string\\\"],\\\"filter\\\":{\\\"op\\\":\\\"EQ\\\
+          \",\\\"field\\\":\\\"resource.kafka.id\\\",\\\"value\\\":\\\"lkc-1234\\\"\
+          },\\\"intervals\\\":[\\\"string\\\"],\\\"limit\\\":100}\", ParameterType.RequestBody);\n\
+          IRestResponse response = client.Execute(request);"
+  /v2/metrics/{dataset}/descriptors/metrics:
+    get:
+      description: "Lists all the metric descriptors for a dataset.\n\nA metric descriptor\
+        \ represents metadata for a metric, including its data type and labels.\n\
+        This metadata is provided programmatically to enable clients to dynamically\
+        \ adjust as new\nmetrics are added to the dataset, rather than hardcoding\
+        \ metric names in client code.\n"
+      parameters:
+      - description: "The dataset to list metric descriptors for. Currently the only\
+          \ supported dataset name is `cloud`. See [here](#section/Object-Model/Datasets)."
+        explode: false
+        in: path
+        name: dataset
+        required: true
+        schema:
+          $ref: '#/components/schemas/Dataset'
+        style: simple
+      - description: The maximum number of results to return. The page size is an
+          integer in the range from 1 through 1000.
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 100
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      - description: The next page token. The token is returned by the previous request
+          as part of `meta.pagination`.
+        explode: true
+        in: query
+        name: page_token
+        required: false
+        schema:
+          $ref: '#/components/schemas/PageToken'
+        style: form
+      - description: The type of the resource to list metric descriptors for.
+        explode: true
+        in: query
+        name: resource_type
+        required: false
+        schema:
+          $ref: '#/components/schemas/ResourceType'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                listResponse:
+                  value:
+                    data:
+                    - description: The delta count of bytes received from the network.
+                        Each sample is the number of bytes received since the previous
+                        data sample. The count is sampled every 60 seconds.
+                      labels:
+                      - description: The name of the Kafka topic.
+                        key: topic
+                        exportable: true
+                      name: io.confluent.kafka.server/received_bytes
+                      type: COUNTER_INT64
+                      exportable: true
+                      unit: By
+                      lifecycle_stage: GENERAL_AVAILABILITY
+                      resources:
+                      - kafka
+                    - description: The delta count of bytes sent over the network.
+                        Each sample is the number of bytes sent since the previous
+                        data point. The count is sampled every 60 seconds.
+                      labels:
+                      - description: The name of the Kafka topic.
+                        key: topic
+                        exportable: true
+                      name: io.confluent.kafka.server/sent_bytes
+                      type: COUNTER_INT64
+                      exportable: true
+                      unit: By
+                      lifecycle_stage: GENERAL_AVAILABILITY
+                      resources:
+                      - kafka
+                    links: null
+                    meta:
+                      pagination:
+                        page_size: 3
+                        total_size: 3
+              schema:
+                $ref: '#/components/schemas/ListMetricDescriptorsResponse'
+          description: Successful response
+        "429":
+          description: Rate Limit Exceeded
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Error
+      summary: List metric descriptors
+      tags:
+      - Version 2
+      x-codeSamples:
+      - lang: Shell
+        source: "curl --request GET \\\n  --url 'https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/descriptors/metrics?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE&resource_type=SOME_STRING_VALUE'\
+          \ \\\n  --header 'Authorization: Basic REPLACE_BASIC_AUTH'"
+      - lang: Java
+        source: "OkHttpClient client = new OkHttpClient();\n\nRequest request = new\
+          \ Request.Builder()\n  .url(\"https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/descriptors/metrics?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE&resource_type=SOME_STRING_VALUE\"\
+          )\n  .get()\n  .addHeader(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n  .build();\n\nResponse response = client.newCall(request).execute();"
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/descriptors/metrics?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE&resource_type=SOME_STRING_VALUE\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: "import http.client\n\nconn = http.client.HTTPSConnection(\"api.telemetry.confluent.cloud\"\
+          )\n\nheaders = { 'Authorization': \"Basic REPLACE_BASIC_AUTH\" }\n\nconn.request(\"\
+          GET\", \"/v2/metrics/{dataset}/descriptors/metrics?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE&resource_type=SOME_STRING_VALUE\"\
+          , headers=headers)\n\nres = conn.getresponse()\ndata = res.read()\n\nprint(data.decode(\"\
+          utf-8\"))"
+      - lang: Node
+        source: "const http = require(\"https\");\n\nconst options = {\n  \"method\"\
+          : \"GET\",\n  \"hostname\": \"api.telemetry.confluent.cloud\",\n  \"port\"\
+          : null,\n  \"path\": \"/v2/metrics/{dataset}/descriptors/metrics?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE&resource_type=SOME_STRING_VALUE\"\
+          ,\n  \"headers\": {\n    \"Authorization\": \"Basic REPLACE_BASIC_AUTH\"\
+          \n  }\n};\n\nconst req = http.request(options, function (res) {\n  const\
+          \ chunks = [];\n\n  res.on(\"data\", function (chunk) {\n    chunks.push(chunk);\n\
+          \  });\n\n  res.on(\"end\", function () {\n    const body = Buffer.concat(chunks);\n\
+          \    console.log(body.toString());\n  });\n});\n\nreq.end();"
+      - lang: C
+        source: "CURL *hnd = curl_easy_init();\n\ncurl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST,\
+          \ \"GET\");\ncurl_easy_setopt(hnd, CURLOPT_URL, \"https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/descriptors/metrics?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE&resource_type=SOME_STRING_VALUE\"\
+          );\n\nstruct curl_slist *headers = NULL;\nheaders = curl_slist_append(headers,\
+          \ \"Authorization: Basic REPLACE_BASIC_AUTH\");\ncurl_easy_setopt(hnd, CURLOPT_HTTPHEADER,\
+          \ headers);\n\nCURLcode ret = curl_easy_perform(hnd);"
+      - lang: C#
+        source: "var client = new RestClient(\"https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/descriptors/metrics?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE&resource_type=SOME_STRING_VALUE\"\
+          );\nvar request = new RestRequest(Method.GET);\nrequest.AddHeader(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\");\nIRestResponse response = client.Execute(request);"
+  /v2/metrics/{dataset}/descriptors/resources:
+    get:
+      description: |
+        Lists all the resource descriptors for a dataset.
+      parameters:
+      - description: "The dataset to list resource descriptors for. Currently the\
+          \ only supported dataset name is `cloud`. See [here](#section/Object-Model/Datasets)."
+        explode: false
+        in: path
+        name: dataset
+        required: true
+        schema:
+          $ref: '#/components/schemas/Dataset'
+        style: simple
+      - description: The maximum number of results to return. The page size is an
+          integer in the range from 1 through 1000.
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 100
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      - description: The next page token. The token is returned by the previous request
+          as part of `meta.pagination`.
+        explode: true
+        in: query
+        name: page_token
+        required: false
+        schema:
+          $ref: '#/components/schemas/PageToken'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResourceDescriptorsResponse'
+          description: Successful response
+        "429":
+          description: Rate Limit Exceeded
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Error
+      summary: List resource descriptors
+      tags:
+      - Version 2
+      x-codeSamples:
+      - lang: Shell
+        source: "curl --request GET \\\n  --url 'https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/descriptors/resources?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE'\
+          \ \\\n  --header 'Authorization: Basic REPLACE_BASIC_AUTH'"
+      - lang: Java
+        source: "OkHttpClient client = new OkHttpClient();\n\nRequest request = new\
+          \ Request.Builder()\n  .url(\"https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/descriptors/resources?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          )\n  .get()\n  .addHeader(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n  .build();\n\nResponse response = client.newCall(request).execute();"
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/descriptors/resources?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: "import http.client\n\nconn = http.client.HTTPSConnection(\"api.telemetry.confluent.cloud\"\
+          )\n\nheaders = { 'Authorization': \"Basic REPLACE_BASIC_AUTH\" }\n\nconn.request(\"\
+          GET\", \"/v2/metrics/{dataset}/descriptors/resources?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          , headers=headers)\n\nres = conn.getresponse()\ndata = res.read()\n\nprint(data.decode(\"\
+          utf-8\"))"
+      - lang: Node
+        source: "const http = require(\"https\");\n\nconst options = {\n  \"method\"\
+          : \"GET\",\n  \"hostname\": \"api.telemetry.confluent.cloud\",\n  \"port\"\
+          : null,\n  \"path\": \"/v2/metrics/{dataset}/descriptors/resources?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          ,\n  \"headers\": {\n    \"Authorization\": \"Basic REPLACE_BASIC_AUTH\"\
+          \n  }\n};\n\nconst req = http.request(options, function (res) {\n  const\
+          \ chunks = [];\n\n  res.on(\"data\", function (chunk) {\n    chunks.push(chunk);\n\
+          \  });\n\n  res.on(\"end\", function () {\n    const body = Buffer.concat(chunks);\n\
+          \    console.log(body.toString());\n  });\n});\n\nreq.end();"
+      - lang: C
+        source: "CURL *hnd = curl_easy_init();\n\ncurl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST,\
+          \ \"GET\");\ncurl_easy_setopt(hnd, CURLOPT_URL, \"https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/descriptors/resources?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          );\n\nstruct curl_slist *headers = NULL;\nheaders = curl_slist_append(headers,\
+          \ \"Authorization: Basic REPLACE_BASIC_AUTH\");\ncurl_easy_setopt(hnd, CURLOPT_HTTPHEADER,\
+          \ headers);\n\nCURLcode ret = curl_easy_perform(hnd);"
+      - lang: C#
+        source: "var client = new RestClient(\"https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/descriptors/resources?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          );\nvar request = new RestRequest(Method.GET);\nrequest.AddHeader(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\");\nIRestResponse response = client.Execute(request);"
+  /v2/metrics/{dataset}/query:
+    post:
+      description: |
+        Query for metric values in a dataset.
+      parameters:
+      - description: "The dataset to query. Currently the only supported dataset name\
+          \ is `cloud`. See [here](#section/Object-Model/Datasets)."
+        explode: false
+        in: path
+        name: dataset
+        required: true
+        schema:
+          $ref: '#/components/schemas/Dataset'
+        style: simple
+      - description: The next page token. The token is returned by the previous request
+          as part of `meta.pagination`. Pagination is only supported for requests
+          containing a `group_by` element.
+        explode: true
+        in: query
+        name: page_token
+        required: false
+        schema:
+          $ref: '#/components/schemas/PageToken'
+        style: form
+      requestBody:
+        content:
+          application/json:
+            examples:
+              query:
+                value:
+                  group_by:
+                  - metric.topic
+                  aggregations:
+                  - metric: io.confluent.kafka.server/sent_bytes
+                    agg: SUM
+                  filter:
+                    op: AND
+                    filters:
+                    - field: resource.kafka.id
+                      op: EQ
+                      value: lkc-1234
+                    - op: NOT
+                      filter:
+                        field: metric.topic
+                        op: EQ
+                        value: topicA
+                  order_by:
+                  - metric: io.confluent.kafka.server/sent_bytes
+                    agg: SUM
+                    order: DESCENDING
+                  granularity: PT1H
+                  intervals:
+                  - 2019-10-17T20:17:00.000Z/PT2H
+                  limit: 5
+                x-path-override: /v1/metrics/cloud/query
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                flatResponse:
+                  value:
+                    data:
+                    - timestamp: 2019-10-17T20:17:00Z
+                      metric.topic: foo
+                      value: 9741
+                    - timestamp: 2019-10-17T20:18:00Z
+                      metric.topic: foo
+                      value: 9246
+                    - timestamp: 2019-10-17T20:17:00Z
+                      metric.topic: bar
+                      value: 844.1
+                    - timestamp: 2019-10-17T20:18:00Z
+                      metric.topic: bar
+                      value: 821.1
+                groupedResponse:
+                  value:
+                    data:
+                    - metric.topic: foo
+                      points:
+                      - timestamp: 2019-10-17T20:17:00Z
+                        value: 9741
+                      - timestamp: 2019-10-17T20:18:00Z
+                        value: 9246
+                    - metric.topic: bar
+                      points:
+                      - timestamp: 2019-10-17T20:17:00Z
+                        value: 844.1
+                      - timestamp: 2019-10-17T20:18:00Z
+                        value: 821.1
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+          description: Successful response
+        "429":
+          description: Rate Limit Exceeded
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Error
+      summary: Query metric values
+      tags:
+      - Version 2
+      x-codeSamples:
+      - lang: Shell
+        source: "curl --request POST \\\n  --url 'https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/query?page_token=SOME_STRING_VALUE'\
+          \ \\\n  --header 'Authorization: Basic REPLACE_BASIC_AUTH' \\\n  --header\
+          \ 'content-type: application/json' \\\n  --data '{\"aggregations\":[{\"\
+          metric\":\"io.confluent.kafka.server/bytes_in\",\"agg\":\"SUM\"}],\"group_by\"\
+          :[\"string\"],\"granularity\":\"PT1H\",\"filter\":{\"op\":\"EQ\",\"field\"\
+          :\"resource.kafka.id\",\"value\":\"lkc-1234\"},\"order_by\":[{\"metric\"\
+          :\"io.confluent.kafka.server/bytes_in\",\"agg\":\"SUM\",\"order\":\"DESCENDING\"\
+          }],\"intervals\":[\"string\"],\"limit\":100,\"format\":\"FLAT\"}'"
+      - lang: Java
+        source: "OkHttpClient client = new OkHttpClient();\n\nMediaType mediaType\
+          \ = MediaType.parse(\"application/json\");\nRequestBody body = RequestBody.create(mediaType,\
+          \ \"{\\\"aggregations\\\":[{\\\"metric\\\":\\\"io.confluent.kafka.server/bytes_in\\\
+          \",\\\"agg\\\":\\\"SUM\\\"}],\\\"group_by\\\":[\\\"string\\\"],\\\"granularity\\\
+          \":\\\"PT1H\\\",\\\"filter\\\":{\\\"op\\\":\\\"EQ\\\",\\\"field\\\":\\\"\
+          resource.kafka.id\\\",\\\"value\\\":\\\"lkc-1234\\\"},\\\"order_by\\\":[{\\\
+          \"metric\\\":\\\"io.confluent.kafka.server/bytes_in\\\",\\\"agg\\\":\\\"\
+          SUM\\\",\\\"order\\\":\\\"DESCENDING\\\"}],\\\"intervals\\\":[\\\"string\\\
+          \"],\\\"limit\\\":100,\\\"format\\\":\\\"FLAT\\\"}\");\nRequest request\
+          \ = new Request.Builder()\n  .url(\"https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/query?page_token=SOME_STRING_VALUE\"\
+          )\n  .post(body)\n  .addHeader(\"content-type\", \"application/json\")\n\
+          \  .addHeader(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n  .build();\n\
+          \nResponse response = client.newCall(request).execute();"
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/query?page_token=SOME_STRING_VALUE\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"aggregations\\\":[{\\\"metric\\\
+          \":\\\"io.confluent.kafka.server/bytes_in\\\",\\\"agg\\\":\\\"SUM\\\"}],\\\
+          \"group_by\\\":[\\\"string\\\"],\\\"granularity\\\":\\\"PT1H\\\",\\\"filter\\\
+          \":{\\\"op\\\":\\\"EQ\\\",\\\"field\\\":\\\"resource.kafka.id\\\",\\\"value\\\
+          \":\\\"lkc-1234\\\"},\\\"order_by\\\":[{\\\"metric\\\":\\\"io.confluent.kafka.server/bytes_in\\\
+          \",\\\"agg\\\":\\\"SUM\\\",\\\"order\\\":\\\"DESCENDING\\\"}],\\\"intervals\\\
+          \":[\\\"string\\\"],\\\"limit\\\":100,\\\"format\\\":\\\"FLAT\\\"}\")\n\n\
+          \treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: "import http.client\n\nconn = http.client.HTTPSConnection(\"api.telemetry.confluent.cloud\"\
+          )\n\npayload = \"{\\\"aggregations\\\":[{\\\"metric\\\":\\\"io.confluent.kafka.server/bytes_in\\\
+          \",\\\"agg\\\":\\\"SUM\\\"}],\\\"group_by\\\":[\\\"string\\\"],\\\"granularity\\\
+          \":\\\"PT1H\\\",\\\"filter\\\":{\\\"op\\\":\\\"EQ\\\",\\\"field\\\":\\\"\
+          resource.kafka.id\\\",\\\"value\\\":\\\"lkc-1234\\\"},\\\"order_by\\\":[{\\\
+          \"metric\\\":\\\"io.confluent.kafka.server/bytes_in\\\",\\\"agg\\\":\\\"\
+          SUM\\\",\\\"order\\\":\\\"DESCENDING\\\"}],\\\"intervals\\\":[\\\"string\\\
+          \"],\\\"limit\\\":100,\\\"format\\\":\\\"FLAT\\\"}\"\n\nheaders = {\n  \
+          \  'content-type': \"application/json\",\n    'Authorization': \"Basic REPLACE_BASIC_AUTH\"\
+          \n    }\n\nconn.request(\"POST\", \"/v2/metrics/{dataset}/query?page_token=SOME_STRING_VALUE\"\
+          , payload, headers)\n\nres = conn.getresponse()\ndata = res.read()\n\nprint(data.decode(\"\
+          utf-8\"))"
+      - lang: Node
+        source: "const http = require(\"https\");\n\nconst options = {\n  \"method\"\
+          : \"POST\",\n  \"hostname\": \"api.telemetry.confluent.cloud\",\n  \"port\"\
+          : null,\n  \"path\": \"/v2/metrics/{dataset}/query?page_token=SOME_STRING_VALUE\"\
+          ,\n  \"headers\": {\n    \"content-type\": \"application/json\",\n    \"\
+          Authorization\": \"Basic REPLACE_BASIC_AUTH\"\n  }\n};\n\nconst req = http.request(options,\
+          \ function (res) {\n  const chunks = [];\n\n  res.on(\"data\", function\
+          \ (chunk) {\n    chunks.push(chunk);\n  });\n\n  res.on(\"end\", function\
+          \ () {\n    const body = Buffer.concat(chunks);\n    console.log(body.toString());\n\
+          \  });\n});\n\nreq.write(JSON.stringify({\n  aggregations: [{metric: 'io.confluent.kafka.server/bytes_in',\
+          \ agg: 'SUM'}],\n  group_by: ['string'],\n  granularity: 'PT1H',\n  filter:\
+          \ {op: 'EQ', field: 'resource.kafka.id', value: 'lkc-1234'},\n  order_by:\
+          \ [\n    {metric: 'io.confluent.kafka.server/bytes_in', agg: 'SUM', order:\
+          \ 'DESCENDING'}\n  ],\n  intervals: ['string'],\n  limit: 100,\n  format:\
+          \ 'FLAT'\n}));\nreq.end();"
+      - lang: C
+        source: "CURL *hnd = curl_easy_init();\n\ncurl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST,\
+          \ \"POST\");\ncurl_easy_setopt(hnd, CURLOPT_URL, \"https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/query?page_token=SOME_STRING_VALUE\"\
+          );\n\nstruct curl_slist *headers = NULL;\nheaders = curl_slist_append(headers,\
+          \ \"content-type: application/json\");\nheaders = curl_slist_append(headers,\
+          \ \"Authorization: Basic REPLACE_BASIC_AUTH\");\ncurl_easy_setopt(hnd, CURLOPT_HTTPHEADER,\
+          \ headers);\n\ncurl_easy_setopt(hnd, CURLOPT_POSTFIELDS, \"{\\\"aggregations\\\
+          \":[{\\\"metric\\\":\\\"io.confluent.kafka.server/bytes_in\\\",\\\"agg\\\
+          \":\\\"SUM\\\"}],\\\"group_by\\\":[\\\"string\\\"],\\\"granularity\\\":\\\
+          \"PT1H\\\",\\\"filter\\\":{\\\"op\\\":\\\"EQ\\\",\\\"field\\\":\\\"resource.kafka.id\\\
+          \",\\\"value\\\":\\\"lkc-1234\\\"},\\\"order_by\\\":[{\\\"metric\\\":\\\"\
+          io.confluent.kafka.server/bytes_in\\\",\\\"agg\\\":\\\"SUM\\\",\\\"order\\\
+          \":\\\"DESCENDING\\\"}],\\\"intervals\\\":[\\\"string\\\"],\\\"limit\\\"\
+          :100,\\\"format\\\":\\\"FLAT\\\"}\");\n\nCURLcode ret = curl_easy_perform(hnd);"
+      - lang: C#
+        source: "var client = new RestClient(\"https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/query?page_token=SOME_STRING_VALUE\"\
+          );\nvar request = new RestRequest(Method.POST);\nrequest.AddHeader(\"content-type\"\
+          , \"application/json\");\nrequest.AddHeader(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          );\nrequest.AddParameter(\"application/json\", \"{\\\"aggregations\\\":[{\\\
+          \"metric\\\":\\\"io.confluent.kafka.server/bytes_in\\\",\\\"agg\\\":\\\"\
+          SUM\\\"}],\\\"group_by\\\":[\\\"string\\\"],\\\"granularity\\\":\\\"PT1H\\\
+          \",\\\"filter\\\":{\\\"op\\\":\\\"EQ\\\",\\\"field\\\":\\\"resource.kafka.id\\\
+          \",\\\"value\\\":\\\"lkc-1234\\\"},\\\"order_by\\\":[{\\\"metric\\\":\\\"\
+          io.confluent.kafka.server/bytes_in\\\",\\\"agg\\\":\\\"SUM\\\",\\\"order\\\
+          \":\\\"DESCENDING\\\"}],\\\"intervals\\\":[\\\"string\\\"],\\\"limit\\\"\
+          :100,\\\"format\\\":\\\"FLAT\\\"}\", ParameterType.RequestBody);\nIRestResponse\
+          \ response = client.Execute(request);"
+  /v2/metrics/{dataset}/export:
+    get:
+      description: "Export current metric values in [OpenMetrics format](https://github.com/OpenObservability/OpenMetrics/blob/main/specification/OpenMetrics.md)\n\
+        or [Prometheus format](https://prometheus.io/docs/instrumenting/exposition_formats/#text-based-format),\n\
+        suitable for import into an external monitoring system. Returns the single\
+        \ most recent\ndata point for each metric, for each distinct combination of\
+        \ labels.\n\n#### Supported datasets and metrics\nOnly the `cloud` dataset\
+        \ is supported for this endpoint.\n\nOnly a subset of metrics and labels from\
+        \ the dataset are included in the export response. To request\na particular\
+        \ metric or label be added, please contact [Confluent Support](https://support.confluent.io).\n\
+        \n#### Metric translation\nMetric and label names are translated to adhere\
+        \ to [Prometheus restrictions](https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels).\n\
+        The `resource.` and `metric.` prefixes from label names are also dropped to\
+        \ simplify consumption in downstream systems.\n\nCounter metrics are classified\
+        \ as the Prometheus `gauge` type to conform to required semantics.\n> The\
+        \ `counter` type in Prometheus must be monotonically increasing, whereas Confluent\n\
+        Metrics API counters are represented as deltas.\n\n#### Timestamp offset\n\
+        To account for [metric data latency](#section/Client-Considerations-and-Best-Practices/Metric-Data-Latency),\n\
+        this endpoint returns metrics from the current timestamp minus a fixed offset.\
+        \ The current\noffset is 5 minutes rounded down to the start of the minute.\
+        \ For example, if a request is\nreceived at `12:06:41`, the returned metrics\
+        \ will have the timestamp `12:01:00` and represent the\ndata for the interval\
+        \ `12:01:00` through `12:02:00` (exclusive).\n\n> **NOTE:** Confluent may\
+        \ choose to lengthen or shorten this offset based on operational\nconsiderations.\
+        \ _Doing so is considered a backwards-compatible change_.\n\nTo accommodate\
+        \ this offset, the timestamps in the response should be honored when importing\n\
+        the metrics. For example, in prometheus this can be controlled using the `honor_timestamps`\n\
+        flag.\n\n#### Rate limits\nSince metrics are available at minute granularity,\
+        \ it is expected that clients scrape this\nendpoint at most once per minute.\
+        \ To allow for ad-hoc testing, the rate limit is enforced\nat hourly granularity.\
+        \ To accommodate retries, the rate limit is 80 requests per hour\nrather than\
+        \ 60 per hour.\n\nThe rate limit is evaluated on a per-resource basis. For\
+        \ example, the following requests would\neach be allowed an 80-requests-per-hour\
+        \ rate:\n* `GET /v2/metrics/cloud/export?resource.kafka.id=lkc-1&resource.kafka.id=lkc-2`\n\
+        * `GET /v2/metrics/cloud/export?resource.kafka.id=lkc-3`\n\nRate limits for\
+        \ this endpoint are also scoped to the authentication principal. This allows\
+        \ multiple systems\nto export metrics for the same resources by configuring\
+        \ each with a separate service account.\n\nIf the rate limit is exceeded,\
+        \ the response body will include a message indicating which\nresource exceeded\
+        \ the limit.\n```json\n{\n  \"errors\": [\n    {\n      \"status\": \"429\"\
+        ,\n      \"detail\": \"Too many requests have been made for the following\
+        \ resources:\nkafka.id:lkc-12345. Please see the documentation for current\
+        \ rate limits.\"\n    }\n  ]\n}\n```\n\n#### Example Prometheus scrape configuration\n\
+        Here is an example [prometheus configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/)\n\
+        for scraping this endpoint:\n\n```yaml\nscrape_configs:\n  - job_name: Confluent\
+        \ Cloud\n    scrape_interval: 1m\n    scrape_timeout: 1m\n    honor_timestamps:\
+        \ true\n    static_configs:\n      - targets:\n        - api.telemetry.confluent.cloud\n\
+        \    scheme: https\n    basic_auth:\n      username: <Cloud API Key>\n   \
+        \   password: <Cloud API Secret>\n    metrics_path: /v2/metrics/cloud/export\n\
+        \    params:\n      \"resource.kafka.id\":\n        - lkc-1\n        - lkc-2\n\
+        ```\n"
+      parameters:
+      - description: "The dataset to export metrics for. Currently the only supported\
+          \ dataset name is `cloud`. See [here](#section/Object-Model/Datasets)."
+        explode: false
+        in: path
+        name: dataset
+        required: true
+        schema:
+          $ref: '#/components/schemas/Dataset'
+        style: simple
+      - description: The ID of the Kafka cluster to export metrics for. This parameter
+          can be specified multiple times (e.g. `?resource.kafka.id=lkc-1&resource.kafka.id=lkc-2`).
+        explode: true
+        in: query
+        name: resource.kafka.id
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: The ID of the Connector to export metrics for. This parameter
+          can be specified multiple times.
+        explode: true
+        in: query
+        name: resource.connector.id
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: The ID of the ksqlDB application to export metrics for. This
+          parameter can be specified multiple times.
+        explode: true
+        in: query
+        name: resource.ksql.id
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: The ID of the Schema Registry to export metrics for. This parameter
+          can be specified multiple times.
+        explode: true
+        in: query
+        name: resource.schema_registry.id
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: "The metric to export. If this parameter is not specified, all\
+          \ metrics for the resource will be exported. This parameter can be specified\
+          \ multiple times."
+        explode: true
+        in: query
+        name: metric
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+        x-hidden: true
+      responses:
+        "200":
+          content:
+            text/plain;version=0.0.4:
+              example: "# HELP confluent_kafka_server_received_bytes The delta count\
+                \ of bytes of the customer's data received from the network. Each\
+                \ sample is the number of bytes received since the previous data sample.\
+                \ The count is sampled every 60 seconds.\n# TYPE confluent_kafka_server_received_bytes\
+                \ gauge\nconfluent_kafka_server_received_bytes{kafka_id=\"lkc-1\"\
+                ,topic=\"topicA\"} 10.0 1609459200\nconfluent_kafka_server_received_bytes{kafka_id=\"\
+                lkc-1\",topic=\"topicB\"} 20.0 1609459200\nconfluent_kafka_server_received_bytes{kafka_id=\"\
+                lkc-2\",topic=\"topicA\"} 30.0 1609459200\n\n# HELP confluent_kafka_server_sent_bytes\
+                \ The delta count of bytes of the customer's data sent to the network.\
+                \ Each sample is the number of bytes sent since the previous data\
+                \ sample. The count is sampled every 60 seconds.\n# TYPE confluent_kafka_server_sent_bytes\
+                \ gauge\nconfluent_kafka_server_sent_bytes{kafka_id=\"lkc-1\",topic=\"\
+                topicA\"} 90.0 1609459200\nconfluent_kafka_server_sent_bytes{kafka_id=\"\
+                lkc-1\",topic=\"topicB\"} 80.0 1609459200\nconfluent_kafka_server_sent_bytes{kafka_id=\"\
+                lkc-2\",topic=\"topicA\"} 70.0 1609459200\n"
+              schema:
+                description: "Metric values formatted in [Prometheus text-based format](https://prometheus.io/docs/instrumenting/exposition_formats/#text-based-format)."
+                type: string
+            application/openmetrics-text;version=1.0.0;charset=utf-8:
+              example: "# TYPE confluent_kafka_server_received_bytes gauge\n# UNIT\
+                \ confluent_kafka_server_received_bytes bytes\n# HELP confluent_kafka_server_received_bytes\
+                \ The delta count of bytes of the customer's data received from the\
+                \ network. Each sample is the number of bytes received since the previous\
+                \ data sample. The count is sampled every 60 seconds.\nconfluent_kafka_server_received_bytes{kafka_id=\"\
+                lkc-1\",topic=\"topicA\"} 30.0 1609459200.000\nconfluent_kafka_server_received_bytes{kafka_id=\"\
+                lkc-1\",topic=\"topicB\"} 70.0 1609459200.000\nconfluent_kafka_server_received_bytes{kafka_id=\"\
+                lkc-2\",topic=\"topicA\"} 230.0 1609459200.000\nconfluent_kafka_server_received_bytes{kafka_id=\"\
+                lkc-2\",topic=\"topicB\"} 270.0 1609459200.000\n# TYPE confluent_kafka_server_sent_bytes\
+                \ gauge\n# UNIT confluent_kafka_server_received_bytes bytes\n# HELP\
+                \ confluent_kafka_server_sent_bytes The delta count of bytes of the\
+                \ customer's data sent over the network. Each sample is the number\
+                \ of bytes sent since the previous data point. The count is sampled\
+                \ every 60 seconds.\nconfluent_kafka_server_sent_bytes{kafka_id=\"\
+                lkc-1\",topic=\"topicA\"} 34.0 1609459200.000\nconfluent_kafka_server_sent_bytes{kafka_id=\"\
+                lkc-1\",topic=\"topicB\"} 74.0 1609459200.000\n#EOF\n"
+              schema:
+                description: "Metric values formatted in [OpenMetrics text format](https://github.com/OpenObservability/OpenMetrics/blob/main/specification/OpenMetrics.md)."
+                type: string
+          description: Successful response
+        "429":
+          description: Rate Limit Exceeded
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Error
+      summary: Export metric values
+      tags:
+      - Version 2
+      x-codeSamples:
+      - lang: Shell
+        source: "curl --request GET \\\n  --url 'https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/export?resource.kafka.id=SOME_ARRAY_VALUE&resource.connector.id=SOME_ARRAY_VALUE&resource.ksql.id=SOME_ARRAY_VALUE&resource.schema_registry.id=SOME_ARRAY_VALUE&metric=SOME_ARRAY_VALUE'\
+          \ \\\n  --header 'Authorization: Basic REPLACE_BASIC_AUTH'"
+      - lang: Java
+        source: "OkHttpClient client = new OkHttpClient();\n\nRequest request = new\
+          \ Request.Builder()\n  .url(\"https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/export?resource.kafka.id=SOME_ARRAY_VALUE&resource.connector.id=SOME_ARRAY_VALUE&resource.ksql.id=SOME_ARRAY_VALUE&resource.schema_registry.id=SOME_ARRAY_VALUE&metric=SOME_ARRAY_VALUE\"\
+          )\n  .get()\n  .addHeader(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n  .build();\n\nResponse response = client.newCall(request).execute();"
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/export?resource.kafka.id=SOME_ARRAY_VALUE&resource.connector.id=SOME_ARRAY_VALUE&resource.ksql.id=SOME_ARRAY_VALUE&resource.schema_registry.id=SOME_ARRAY_VALUE&metric=SOME_ARRAY_VALUE\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: "import http.client\n\nconn = http.client.HTTPSConnection(\"api.telemetry.confluent.cloud\"\
+          )\n\nheaders = { 'Authorization': \"Basic REPLACE_BASIC_AUTH\" }\n\nconn.request(\"\
+          GET\", \"/v2/metrics/{dataset}/export?resource.kafka.id=SOME_ARRAY_VALUE&resource.connector.id=SOME_ARRAY_VALUE&resource.ksql.id=SOME_ARRAY_VALUE&resource.schema_registry.id=SOME_ARRAY_VALUE&metric=SOME_ARRAY_VALUE\"\
+          , headers=headers)\n\nres = conn.getresponse()\ndata = res.read()\n\nprint(data.decode(\"\
+          utf-8\"))"
+      - lang: Node
+        source: "const http = require(\"https\");\n\nconst options = {\n  \"method\"\
+          : \"GET\",\n  \"hostname\": \"api.telemetry.confluent.cloud\",\n  \"port\"\
+          : null,\n  \"path\": \"/v2/metrics/{dataset}/export?resource.kafka.id=SOME_ARRAY_VALUE&resource.connector.id=SOME_ARRAY_VALUE&resource.ksql.id=SOME_ARRAY_VALUE&resource.schema_registry.id=SOME_ARRAY_VALUE&metric=SOME_ARRAY_VALUE\"\
+          ,\n  \"headers\": {\n    \"Authorization\": \"Basic REPLACE_BASIC_AUTH\"\
+          \n  }\n};\n\nconst req = http.request(options, function (res) {\n  const\
+          \ chunks = [];\n\n  res.on(\"data\", function (chunk) {\n    chunks.push(chunk);\n\
+          \  });\n\n  res.on(\"end\", function () {\n    const body = Buffer.concat(chunks);\n\
+          \    console.log(body.toString());\n  });\n});\n\nreq.end();"
+      - lang: C
+        source: "CURL *hnd = curl_easy_init();\n\ncurl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST,\
+          \ \"GET\");\ncurl_easy_setopt(hnd, CURLOPT_URL, \"https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/export?resource.kafka.id=SOME_ARRAY_VALUE&resource.connector.id=SOME_ARRAY_VALUE&resource.ksql.id=SOME_ARRAY_VALUE&resource.schema_registry.id=SOME_ARRAY_VALUE&metric=SOME_ARRAY_VALUE\"\
+          );\n\nstruct curl_slist *headers = NULL;\nheaders = curl_slist_append(headers,\
+          \ \"Authorization: Basic REPLACE_BASIC_AUTH\");\ncurl_easy_setopt(hnd, CURLOPT_HTTPHEADER,\
+          \ headers);\n\nCURLcode ret = curl_easy_perform(hnd);"
+      - lang: C#
+        source: "var client = new RestClient(\"https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/export?resource.kafka.id=SOME_ARRAY_VALUE&resource.connector.id=SOME_ARRAY_VALUE&resource.ksql.id=SOME_ARRAY_VALUE&resource.schema_registry.id=SOME_ARRAY_VALUE&metric=SOME_ARRAY_VALUE\"\
+          );\nvar request = new RestRequest(Method.GET);\nrequest.AddHeader(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\");\nIRestResponse response = client.Execute(request);"
+  /v2/metrics/{dataset}/attributes:
+    post:
+      description: |
+        Enumerates label values for a single metric.
+      parameters:
+      - description: The dataset to query.
+        explode: false
+        in: path
+        name: dataset
+        required: true
+        schema:
+          $ref: '#/components/schemas/Dataset'
+        style: simple
+      - description: The next page token. The token is returned by the previous request
+          as part of `meta.pagination`.
+        explode: true
+        in: query
+        name: page_token
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            examples:
+              request:
+                value:
+                  metric: io.confluent.kafka.server/sent_bytes
+                  group_by:
+                  - metric.topic
+                  filter:
+                    field: resource.kafka.id
+                    op: EQ
+                    value: lkc-09d19
+                  limit: 3
+                  intervals:
+                  - 2019-10-16T16:30:20Z/2019-10-24T18:57:00Z
+                x-path-override: /v1/metrics/cloud/attributes
+            schema:
+              $ref: '#/components/schemas/AttributesRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                    - metric.topic: bar
+                    - metric.topic: baz
+                    - metric.topic: foo
+                    meta:
+                      pagination:
+                        page_size: 3
+                        next_page_token: dG9waWNC
+              schema:
+                $ref: '#/components/schemas/AttributesResponse'
+          description: Successful response
+        "429":
+          description: Rate Limit Exceeded
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Error
+      summary: Query label values
+      tags:
+      - Version 2
+      x-codeSamples:
+      - lang: Shell
+        source: "curl --request POST \\\n  --url 'https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/attributes?page_token=SOME_STRING_VALUE'\
+          \ \\\n  --header 'Authorization: Basic REPLACE_BASIC_AUTH' \\\n  --header\
+          \ 'content-type: application/json' \\\n  --data '{\"metric\":\"string\"\
+          ,\"group_by\":[\"string\"],\"filter\":{\"op\":\"EQ\",\"field\":\"resource.kafka.id\"\
+          ,\"value\":\"lkc-1234\"},\"intervals\":[\"string\"],\"limit\":100}'"
+      - lang: Java
+        source: "OkHttpClient client = new OkHttpClient();\n\nMediaType mediaType\
+          \ = MediaType.parse(\"application/json\");\nRequestBody body = RequestBody.create(mediaType,\
+          \ \"{\\\"metric\\\":\\\"string\\\",\\\"group_by\\\":[\\\"string\\\"],\\\"\
+          filter\\\":{\\\"op\\\":\\\"EQ\\\",\\\"field\\\":\\\"resource.kafka.id\\\"\
+          ,\\\"value\\\":\\\"lkc-1234\\\"},\\\"intervals\\\":[\\\"string\\\"],\\\"\
+          limit\\\":100}\");\nRequest request = new Request.Builder()\n  .url(\"https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/attributes?page_token=SOME_STRING_VALUE\"\
+          )\n  .post(body)\n  .addHeader(\"content-type\", \"application/json\")\n\
+          \  .addHeader(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n  .build();\n\
+          \nResponse response = client.newCall(request).execute();"
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/attributes?page_token=SOME_STRING_VALUE\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"metric\\\":\\\"string\\\",\\\"\
+          group_by\\\":[\\\"string\\\"],\\\"filter\\\":{\\\"op\\\":\\\"EQ\\\",\\\"\
+          field\\\":\\\"resource.kafka.id\\\",\\\"value\\\":\\\"lkc-1234\\\"},\\\"\
+          intervals\\\":[\\\"string\\\"],\\\"limit\\\":100}\")\n\n\treq, _ := http.NewRequest(\"\
+          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
+      - lang: Python
+        source: "import http.client\n\nconn = http.client.HTTPSConnection(\"api.telemetry.confluent.cloud\"\
+          )\n\npayload = \"{\\\"metric\\\":\\\"string\\\",\\\"group_by\\\":[\\\"string\\\
+          \"],\\\"filter\\\":{\\\"op\\\":\\\"EQ\\\",\\\"field\\\":\\\"resource.kafka.id\\\
+          \",\\\"value\\\":\\\"lkc-1234\\\"},\\\"intervals\\\":[\\\"string\\\"],\\\
+          \"limit\\\":100}\"\n\nheaders = {\n    'content-type': \"application/json\"\
+          ,\n    'Authorization': \"Basic REPLACE_BASIC_AUTH\"\n    }\n\nconn.request(\"\
+          POST\", \"/v2/metrics/{dataset}/attributes?page_token=SOME_STRING_VALUE\"\
+          , payload, headers)\n\nres = conn.getresponse()\ndata = res.read()\n\nprint(data.decode(\"\
+          utf-8\"))"
+      - lang: Node
+        source: "const http = require(\"https\");\n\nconst options = {\n  \"method\"\
+          : \"POST\",\n  \"hostname\": \"api.telemetry.confluent.cloud\",\n  \"port\"\
+          : null,\n  \"path\": \"/v2/metrics/{dataset}/attributes?page_token=SOME_STRING_VALUE\"\
+          ,\n  \"headers\": {\n    \"content-type\": \"application/json\",\n    \"\
+          Authorization\": \"Basic REPLACE_BASIC_AUTH\"\n  }\n};\n\nconst req = http.request(options,\
+          \ function (res) {\n  const chunks = [];\n\n  res.on(\"data\", function\
+          \ (chunk) {\n    chunks.push(chunk);\n  });\n\n  res.on(\"end\", function\
+          \ () {\n    const body = Buffer.concat(chunks);\n    console.log(body.toString());\n\
+          \  });\n});\n\nreq.write(JSON.stringify({\n  metric: 'string',\n  group_by:\
+          \ ['string'],\n  filter: {op: 'EQ', field: 'resource.kafka.id', value: 'lkc-1234'},\n\
+          \  intervals: ['string'],\n  limit: 100\n}));\nreq.end();"
+      - lang: C
+        source: "CURL *hnd = curl_easy_init();\n\ncurl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST,\
+          \ \"POST\");\ncurl_easy_setopt(hnd, CURLOPT_URL, \"https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/attributes?page_token=SOME_STRING_VALUE\"\
+          );\n\nstruct curl_slist *headers = NULL;\nheaders = curl_slist_append(headers,\
+          \ \"content-type: application/json\");\nheaders = curl_slist_append(headers,\
+          \ \"Authorization: Basic REPLACE_BASIC_AUTH\");\ncurl_easy_setopt(hnd, CURLOPT_HTTPHEADER,\
+          \ headers);\n\ncurl_easy_setopt(hnd, CURLOPT_POSTFIELDS, \"{\\\"metric\\\
+          \":\\\"string\\\",\\\"group_by\\\":[\\\"string\\\"],\\\"filter\\\":{\\\"\
+          op\\\":\\\"EQ\\\",\\\"field\\\":\\\"resource.kafka.id\\\",\\\"value\\\"\
+          :\\\"lkc-1234\\\"},\\\"intervals\\\":[\\\"string\\\"],\\\"limit\\\":100}\"\
+          );\n\nCURLcode ret = curl_easy_perform(hnd);"
+      - lang: C#
+        source: "var client = new RestClient(\"https://api.telemetry.confluent.cloud/v2/metrics/{dataset}/attributes?page_token=SOME_STRING_VALUE\"\
+          );\nvar request = new RestRequest(Method.POST);\nrequest.AddHeader(\"content-type\"\
+          , \"application/json\");\nrequest.AddHeader(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          );\nrequest.AddParameter(\"application/json\", \"{\\\"metric\\\":\\\"string\\\
+          \",\\\"group_by\\\":[\\\"string\\\"],\\\"filter\\\":{\\\"op\\\":\\\"EQ\\\
+          \",\\\"field\\\":\\\"resource.kafka.id\\\",\\\"value\\\":\\\"lkc-1234\\\"\
+          },\\\"intervals\\\":[\\\"string\\\"],\\\"limit\\\":100}\", ParameterType.RequestBody);\n\
+          IRestResponse response = client.Execute(request);"
+components:
+  responses:
+    RateLimitError:
+      description: Rate Limit Exceeded
+  schemas:
+    Dataset:
+      description: "A logical collection of metrics that can be described and queried.\
+        \ Currently the only supported dataset name is `cloud`. See [here](#section/Object-Model/Datasets)."
+      type: string
+    PageToken:
+      description: An opaque token that you use to get the next page of results.
+      type: string
+    Pagination:
+      description: The pagination information.
+      example:
+        page_size: 10
+        total_size: 25
+      properties:
+        page_size:
+          description: The page size requested by the user.
+          format: int32
+          type: integer
+        total_size:
+          description: "The total number of items, if the total size can be determined\
+            \ in advance; otherwise, `total_size` is not included."
+          format: int32
+          type: integer
+        next_page_token:
+          description: An opaque token that you use to get the next page of results.
+          type: string
+      required:
+      - page_size
+    Meta:
+      description: Meta object
+      example:
+        pagination:
+          page_size: 10
+          total_size: 25
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - pagination
+      type: object
+    Links:
+      description: link information
+      example:
+        next: next
+      properties:
+        next:
+          description: The next page of resources in a collection. The link is present
+            only if the current document is part of a collection.
+          type: string
+    ErrorResponse:
+      example:
+        errors:
+        - detail: fieldA must not be null
+        - detail: fieldB must not be null
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorResponse_errors_inner'
+          type: array
+      required:
+      - errors
+      type: object
+    LabelDescriptor:
+      description: The description of a label.
+      example:
+        key: topic
+        description: The name of the Kafka topic.
+        exportable: true
+      properties:
+        description:
+          description: The description of the metric.
+          type: string
+        key:
+          description: The key of the label.
+          type: string
+        exportable:
+          description: Is this label included in the `/export` endpoint response?
+          type: boolean
+      required:
+      - description
+      - key
+      type: object
+    MetricDescriptor:
+      description: Defines a metric type and its schema.
+      example:
+        description: The delta count of bytes received from the network. The count
+          is sampled every 60 seconds.
+        name: io.confluent.kafka.server/received_bytes
+        unit: By
+        type: GAUGE_INT64
+        exportable: true
+        lifecycle_stage: GENERAL_AVAILABILITY
+        resources:
+        - kafka
+        labels:
+        - key: topic
+          description: The name of the Kafka topic.
+          exportable: true
+      properties:
+        description:
+          description: The description of the metric.
+          type: string
+        labels:
+          description: "Labels for filtering and aggregating this metric. For example,\
+            \ you can\nfilter the `io.confluent.kafka.server/received_bytes` metric\
+            \ by the\n`topic` label.\n"
+          items:
+            $ref: '#/components/schemas/LabelDescriptor'
+          type: array
+        name:
+          description: "The unique name of the metric, for example,\n`io.confluent.kafka.server/received_bytes`.\n"
+          type: string
+        unit:
+          description: "The unit that the metric value is reported in. Units follow\
+            \ the format described in\n[the Unified Code for Units of Measure](http://unitsofmeasure.org/ucum.html).\n\
+            For example, `By` for bytes and `By/s` for bytes per second.\n"
+          type: string
+        type:
+          description: "The type of the measurement. The metric type follows the\n\
+            [OpenTelemetry](https://opentelemetry.io/) exposition format.\n* `GAUGE_(INT64|DOUBLE)`:\
+            \ An instantaneous measurement of a value.\n  Gauge metrics are implicitly\
+            \ averaged when aggregating over time.\n* `COUNTER_(INT64|DOUBLE)`: The\
+            \ count of occurrences in a _single (one minute) sampling\n  interval_\
+            \ (unless otherwise stated in the metric description).\n  Counter metrics\
+            \ are implicitly summed when aggregating over time.\n"
+          type: string
+          x-extensible-enum:
+          - GAUGE_INT64
+          - GAUGE_DOUBLE
+          - COUNTER_INT64
+          - COUNTER_DOUBLE
+        lifecycle_stage:
+          description: "The support lifecycle stage for this metric:\n* `PREVIEW`:\
+            \ May change at any time\n* `GENERAL_AVAILABILITY`: Fully released and\
+            \ stable. Will not change without notice.\n* `DEPRECATED`: No longer supported.\
+            \ Will be removed in the future at the annouced date.\n"
+          type: string
+          x-extensible-enum:
+          - PREVIEW
+          - GENERAL_AVAILABILITY
+          - DEPRECATED
+        exportable:
+          description: Is this metric included in the `/export` endpoint response?
+          type: boolean
+        resources:
+          description: The resource types to which this metric pertains.
+          items:
+            type: string
+          type: array
+      required:
+      - description
+      - exportable
+      - labels
+      - lifecycle_stage
+      - name
+      - resources
+      - type
+      - unit
+      type: object
+    ListMetricDescriptorsResponse:
+      description: The ListMetricDescriptors response.
+      example:
+        data:
+        - description: The delta count of bytes received from the network. The count
+            is sampled every 60 seconds.
+          name: io.confluent.kafka.server/received_bytes
+          unit: By
+          type: GAUGE_INT64
+          exportable: true
+          lifecycle_stage: GENERAL_AVAILABILITY
+          resources:
+          - kafka
+          labels:
+          - key: topic
+            description: The name of the Kafka topic.
+            exportable: true
+        - description: The delta count of bytes received from the network. The count
+            is sampled every 60 seconds.
+          name: io.confluent.kafka.server/received_bytes
+          unit: By
+          type: GAUGE_INT64
+          exportable: true
+          lifecycle_stage: GENERAL_AVAILABILITY
+          resources:
+          - kafka
+          labels:
+          - key: topic
+            description: The name of the Kafka topic.
+            exportable: true
+        meta:
+          pagination:
+            page_size: 10
+            total_size: 25
+        links:
+          next: next
+      properties:
+        data:
+          description: The metric descriptors for the specified dataset.
+          items:
+            $ref: '#/components/schemas/MetricDescriptor'
+          type: array
+        meta:
+          $ref: '#/components/schemas/Meta'
+        links:
+          $ref: '#/components/schemas/Links'
+      required:
+      - data
+      - meta
+      type: object
+    AggregationFunction:
+      enum:
+      - SUM
+      type: string
+    Aggregation:
+      example:
+        metric: io.confluent.kafka.server/bytes_in
+        agg: SUM
+      properties:
+        metric:
+          description: The metric to aggregate.
+          type: string
+        agg:
+          allOf:
+          - $ref: '#/components/schemas/AggregationFunction'
+          description: The aggregation function for the label buckets defined in `group_by`.
+      required:
+      - metric
+      type: object
+      x-java-class: io.confluent.observability.metricsquery.api.Aggregation
+    Granularity:
+      description: "Defines the time buckets that the aggregation is performed for.\n\
+        Buckets are specified in\n[ISO-8601 duration syntax](https://en.wikipedia.org/wiki/ISO_8601#Durations),\
+        \ but\nonly the enumerated values are supported. Buckets are aligned to UTC\
+        \ boundaries.\nThe special `ALL` value defines a single bucket for all intervals.\n\
+        \nThe allowed granularity for a query is restricted by the length of that\
+        \ query's `interval`.\n\n| Granularity          | Maximum Interval Length\
+        \  |\n|----------------------|--------------------------|\n| `PT1M` (1 minute)\
+        \    | 6 hours                  |\n| `PT5M` (5 minutes)   | 1 day        \
+        \            |\n| `PT15M` (15 minutes) | 4 days                   |\n| `PT30M`\
+        \ (30 minutes) | 7 days                   |\n| `PT1H` (1 hour)      | Unlimited\
+        \                |\n| `PT4H` (4 hours)     | Unlimited                |\n\
+        | `PT6H` (6 hours)     | Unlimited                |\n| `PT12H` (12 hours)\
+        \   | Unlimited                |\n| `P1D` (1 day)        | Unlimited     \
+        \           |\n| `ALL`                | Unlimited                |\n"
+      enum:
+      - PT1M
+      - PT5M
+      - PT15M
+      - PT30M
+      - PT1H
+      - PT4H
+      - PT6H
+      - PT12H
+      - P1D
+      - ALL
+      example: PT1H
+      format: ISO-8601 duration (PnDTnHnMn.nS) or ALL
+      type: string
+    FieldFilter:
+      example:
+        op: EQ
+        field: resource.kafka.id
+        value: lkc-1234
+      properties:
+        op:
+          description: |
+            The comparison operator for the filter.
+            Note that labels are compared _lexicographically_.
+
+            The `GT` or `GTE` operators can be used to page through grouped result sets that exceed
+            the query limit.
+          enum:
+          - EQ
+          - GT
+          - GTE
+          type: string
+        field:
+          description: "The field to filter on; see [here](#section/Object-Model/Labels)\
+            \ on using labels as\nfilter fields.\n"
+          example: metric.topic
+          type: string
+        value:
+          $ref: '#/components/schemas/FieldFilter_value'
+      required:
+      - op
+      - value
+      title: Field Filter
+      type: object
+      x-java-class: io.confluent.observability.metricsquery.api.Filter
+    Filter:
+      description: Metric filter.
+      oneOf:
+      - $ref: '#/components/schemas/FieldFilter'
+      - $ref: '#/components/schemas/CompoundFilter'
+      - $ref: '#/components/schemas/UnaryFilter'
+    CompoundFilter:
+      example:
+        op: OR
+        filters:
+        - field: resource.kafka.id
+          op: EQ
+          value: lkc-1234
+        - field: resource.kafka.id
+          op: EQ
+          value: lkc-5678
+      properties:
+        op:
+          enum:
+          - AND
+          - OR
+          type: string
+        filters:
+          items:
+            $ref: '#/components/schemas/Filter'
+          type: array
+      required:
+      - filters
+      - op
+      title: Compound Filter
+      type: object
+      x-java-class: io.confluent.observability.metricsquery.api.Filter
+    UnaryFilter:
+      example:
+        op: NOT
+        filter:
+          field: metric.topic
+          op: EQ
+          value: topicA
+      properties:
+        op:
+          enum:
+          - NOT
+          type: string
+        filter:
+          $ref: '#/components/schemas/Filter'
+      required:
+      - filter
+      - op
+      title: Unary Filter
+      type: object
+      x-java-class: io.confluent.observability.metricsquery.api.Filter
+    OrderBy:
+      example:
+        metric: io.confluent.kafka.server/bytes_in
+        agg: SUM
+        order: DESCENDING
+      properties:
+        metric:
+          type: string
+        agg:
+          $ref: '#/components/schemas/AggregationFunction'
+        order:
+          default: DESCENDING
+          enum:
+          - ASCENDING
+          - DESCENDING
+          type: string
+      required:
+      - metric
+      type: object
+    Interval:
+      format: ISO-8601 interval (<start>/<end> | <start>/<duration> | <duration>/<end>)
+      type: string
+    ResponseFormat:
+      default: FLAT
+      description: "Desired response format for query results.\n* `FLAT` (default):\
+        \ Each item in the response `data` array represents a data point in the\n\
+        \  timeseries. Each data point contains the `timestamp`, metric aggregation\n\
+        `value` and\n  attributes for the `group_by` labels.\n* `GROUPED`: Each item\
+        \ in the response `data` array represents a group. Each group contains\n \
+        \ attributes for the `group_by` labels and an array of `points` for the metric\n\
+        aggregation\n  timeseries. **Only allowed when `group_by` is non-empty.**\n\
+        \nPlease see the response schema and accompanying examples for more details.\n"
+      enum:
+      - FLAT
+      - GROUPED
+      type: string
+    QueryRequest:
+      example:
+        filter: null
+        intervals:
+        - null
+        - null
+        granularity: PT1H
+        limit: 81
+        format: null
+        group_by:
+        - group_by
+        - group_by
+        order_by:
+        - metric: io.confluent.kafka.server/bytes_in
+          agg: SUM
+          order: DESCENDING
+        - metric: io.confluent.kafka.server/bytes_in
+          agg: SUM
+          order: DESCENDING
+        aggregations:
+        - metric: io.confluent.kafka.server/bytes_in
+          agg: SUM
+      properties:
+        aggregations:
+          description: "Specifies which metrics to query and the aggregation operator\
+            \ to apply across the `group_by` labels. **Currently, only one aggregation\
+            \ per request is supported.**"
+          items:
+            $ref: '#/components/schemas/Aggregation'
+          maxItems: 1
+          minItems: 1
+          type: array
+        group_by:
+          description: "Specifies how data gets bucketed by label(s); see [here](#section/Object-Model/Labels)\n\
+            on using labels for grouping query results.\n"
+          items:
+            type: string
+          type: array
+        granularity:
+          $ref: '#/components/schemas/Granularity'
+        filter:
+          $ref: '#/components/schemas/Filter'
+        order_by:
+          description: "Sort ordering for result groups. **Only valid for `granularity:\
+            \ \"ALL\"`.**\nIf not specified, defaults to the first `aggregation` in\
+            \ descending order.\n\nNote that this ordering applies to the groups.\n\
+            Within a group (or for ungrouped results), data points are always ordered\
+            \ by `timestamp`\nin descending order.\n"
+          items:
+            $ref: '#/components/schemas/OrderBy'
+          minItems: 1
+          type: array
+        intervals:
+          description: "Defines the time range(s) that the query runs over.\nA time\
+            \ range is an ISO-8601 interval.\n\nThe keyword `now` can be used in place\
+            \ of a timestamp to refer to the current time.\nOffset and truncation\
+            \ modifiers can be also be applied to the `now` expression:\n\n| Modifier\
+            \ | Syntax | Examples |\n| --- | --- | --- |\n| Offset | `(+\\|-)<amount>(m\\\
+            |h\\|d)` | `-2m` (minus 2 minutes)<br/>`-1h` (minus 1 hour) |\n| Truncation\
+            \ | `\\|(m\\|h\\|d)` | `\\|m` (round down to start of minute)<br/>`\\\
+            |h` (round down to start of hour) |\n\nAll hour/day truncation is performed\
+            \ against the UTC timezone.\n\nIf `now` is `2020-01-01T02:13:27Z`, some\
+            \ examples are:\n* `now-2m|m`: `now` minus 2 minutes, truncated to start\
+            \ of minute.\n<br/>Resolves to `2020-01-01T02:11:00Z`\n* `now|h`: `now`\
+            \ truncated to start of hour.\n<br/>Resolves to `2020-01-01T02:00:00Z`\n\
+            * `now-1d|d`: `now` minus 1 day, truncated to start of day.\n<br/>Resolves\
+            \ to `2019-12-31T00:00:00Z`\n\nWhen using `now`, it is recommended to\
+            \ apply a negative offset to avoid incomplete data\n(see [metric availability\
+            \ delays](#section/Client-Considerations-and-Best-Practices/Metric-Data-Latency))\n\
+            and align to minute boundaries (e.g. `now-2m|m`).\n"
+          items:
+            $ref: '#/components/schemas/Interval'
+          minItems: 1
+          type: array
+        limit:
+          default: 100
+          description: "The maximum number of _groups_ to return. The maximum number\
+            \ of data points in the response is equal to `limit * (interval / granularity)`.\
+            \ For example, with an interval of 1 day, granularity of `PT1H`, and limit\
+            \ of `2` there will be a maximum of 48 data points in the response (24\
+            \ for each group)."
+          maximum: 1000
+          minimum: 1
+          type: integer
+        format:
+          $ref: '#/components/schemas/ResponseFormat'
+      required:
+      - aggregations
+      - granularity
+      - intervals
+      type: object
+      x-java-class: io.confluent.observability.metricsquery.api.MetricsQueryRequest
+    Point:
+      additionalProperties: true
+      example:
+        timestamp: 2019-10-17T20:17:00Z
+        resource.kafka.id: lkc-12345entry
+        metric.topic: foo
+        value: 9741
+      properties:
+        timestamp:
+          description: "The timestamp for this time bucket, aligned to UTC boundaries."
+          format: date-time
+          type: string
+        value:
+          description: The value for the requested aggregation for this time bucket.
+          type: number
+      required:
+      - timestamp
+      - value
+      type: object
+    FlatQueryResponse:
+      example:
+        data:
+        - timestamp: 2019-10-17T20:17:00Z
+          metric.topic: foo
+          value: 9741
+        - timestamp: 2019-10-17T20:18:00Z
+          metric.topic: foo
+          value: 9246
+        - timestamp: 2019-10-17T20:17:00Z
+          metric.topic: bar
+          value: 844.1
+        - timestamp: 2019-10-17T20:18:00Z
+          metric.topic: bar
+          value: 821.1
+      properties:
+        data:
+          description: "An array of results for this query. Each item includes `timestamp`,\
+            \ `value`, and an attribute for each label specified in the request's\
+            \ `group_by`."
+          items:
+            $ref: '#/components/schemas/Point'
+          type: array
+      required:
+      - data
+      title: Flat Response
+      type: object
+    GroupedQueryResponse:
+      example:
+        data:
+        - metric.topic: foo
+          points:
+          - timestamp: 2019-10-17T20:17:00Z
+            value: 9741
+          - timestamp: 2019-10-17T20:18:00Z
+            value: 9246
+        - metric.topic: bar
+          points:
+          - timestamp: 2019-10-17T20:17:00Z
+            value: 844.1
+          - timestamp: 2019-10-17T20:18:00Z
+            value: 821.1
+      properties:
+        data:
+          description: An array of results for this query. Each item represents a
+            group bucket having a distinct set of label values for the request's `group_by`.  The
+            groups are ordered lexicographically by the label values for that group.
+          items:
+            $ref: '#/components/schemas/GroupedQueryResponse_data_inner'
+          type: array
+      required:
+      - data
+      title: Grouped Response
+      type: object
+    QueryResponse:
+      oneOf:
+      - $ref: '#/components/schemas/FlatQueryResponse'
+      - $ref: '#/components/schemas/GroupedQueryResponse'
+    AttributesResponse:
+      example:
+        data:
+        - metric.label.topic: foo
+        - metric.label.topic: bar
+        - metric.label.topic: baz
+        meta:
+          pagination:
+            page_size: 3
+            total_size: 3
+      properties:
+        data:
+          description: "The enumerated labels, as an array of key/value pairs."
+          items:
+            additionalProperties:
+              type: string
+            description: A key/value pair for the label.
+            example:
+              topic: foo
+            type: object
+          type: array
+        meta:
+          $ref: '#/components/schemas/Meta'
+        links:
+          $ref: '#/components/schemas/Links'
+      required:
+      - data
+      - meta
+      type: object
+    ResourceType:
+      description: "A named type for a resource (e.g. `kafka`, `connector`)."
+      type: string
+    ResourceDescriptor:
+      description: "A Resource represents the entity producing metrics.\nFor example:\
+        \ a Kafka cluster a Kafka Connector, etc.\n"
+      example:
+        type: kafka
+        description: A Kafka cluster.
+        labels:
+        - key: kafka.id
+          description: ID of the kafka cluster
+          exportable: true
+      properties:
+        type:
+          description: "A named type for a resource (e.g. `kafka`, `connector`)."
+          type: string
+        description:
+          description: The description of the resource.
+          type: string
+        labels:
+          description: |
+            Labels for the resource.
+            Resource labels can be used for filtering and aggregating metrics
+            associated with a resource.
+          items:
+            $ref: '#/components/schemas/LabelDescriptor'
+          type: array
+      required:
+      - description
+      - labels
+      - type
+      type: object
+    ListResourceDescriptorsResponse:
+      description: The list of resource descriptors for a dataset
+      example:
+        data:
+        - type: kafka
+          description: A Kafka cluster.
+          labels:
+          - key: kafka.id
+            description: ID of the kafka cluster
+            exportable: true
+        - type: kafka
+          description: A Kafka cluster.
+          labels:
+          - key: kafka.id
+            description: ID of the kafka cluster
+            exportable: true
+        meta:
+          pagination:
+            page_size: 10
+            total_size: 25
+        links:
+          next: next
+      properties:
+        data:
+          description: The resource descriptors for the specified dataset.
+          items:
+            $ref: '#/components/schemas/ResourceDescriptor'
+          type: array
+        meta:
+          $ref: '#/components/schemas/Meta'
+        links:
+          $ref: '#/components/schemas/Links'
+      required:
+      - data
+      - meta
+      type: object
+    AttributesRequest:
+      example:
+        filter: null
+        intervals:
+        - null
+        - null
+        metric: metric
+        limit: 81
+        group_by:
+        - group_by
+      properties:
+        metric:
+          description: The metric that the label values are enumerated for.
+          type: string
+        group_by:
+          description: The label(s) that the values are enumerated for.
+          items:
+            type: string
+          maxItems: 1
+          minItems: 1
+          type: array
+        filter:
+          $ref: '#/components/schemas/Filter'
+        intervals:
+          description: "Defines the time range(s) for which available metrics will\
+            \ be listed. A time range is an ISO-8601 interval. When unspecified, the\
+            \ value defaults to the last hour before the request was made"
+          items:
+            $ref: '#/components/schemas/Interval'
+          minItems: 1
+          type: array
+        limit:
+          default: 100
+          maximum: 1000
+          minimum: 1
+          type: integer
+      required:
+      - group_by
+      type: object
+      x-java-class: io.confluent.observability.metricsquery.attributes.AttributesRequest
+    _v1_metrics__dataset__attributes_post_request:
+      properties:
+        metric:
+          description: The metric that the label values are enumerated for.
+          type: string
+        group_by:
+          description: The label(s) that the values are enumerated for.
+          items:
+            type: string
+          maxItems: 1
+          minItems: 1
+          type: array
+        filter:
+          $ref: '#/components/schemas/Filter'
+        intervals:
+          description: "Defines the time range(s) for which available metrics will\
+            \ be listed. A time range is an ISO-8601 interval. When unspecified, the\
+            \ value defaults to the last hour before the request was made"
+          items:
+            $ref: '#/components/schemas/Interval'
+          minItems: 1
+          type: array
+        limit:
+          default: 100
+          maximum: 1000
+          minimum: 1
+          type: integer
+      required:
+      - group_by
+      - metric
+      type: object
+      x-java-class: io.confluent.observability.metricsquery.attributes.AttributesRequest
+    ErrorResponse_errors_inner:
+      properties:
+        id:
+          description: A unique identifier for this particular occurrence of the problem.
+          type: string
+        status:
+          description: "The HTTP status code applicable to this problem, expressed\
+            \ as a string value."
+          type: string
+        code:
+          description: "An application-specific error code, expressed as a string\
+            \ value."
+          type: string
+        detail:
+          description: A human-readable explanation specific to this occurrence of
+            the problem.
+          type: string
+        meta:
+          $ref: '#/components/schemas/Meta'
+        links:
+          $ref: '#/components/schemas/Links'
+      type: object
+    FieldFilter_value:
+      oneOf:
+      - type: string
+      - type: integer
+    GroupedQueryResponse_data_inner:
+      additionalProperties: true
+      properties:
+        points:
+          items:
+            $ref: '#/components/schemas/Point'
+          type: array
+      required:
+      - points
+      type: object
+  securitySchemes:
+    api-key:
+      description: "API keys must be sent as an `Authorization: Basic {key}` header\
+        \ with the Key ID as the\nusername and the Key Secret as the password. Remember\
+        \ that HTTP Basic authorization\nrequires you to colon-separate and base64\
+        \ encode your key. For example, if your API Key ID\nis `ABCDEFGH123456789`\
+        \ and the corresponding API Key Secret is\n`XNCIW93I2L1SQPJSJ823K1LS902KLDFMCZPWEO`,\
+        \ then the authorization header will be\n\n    Authorization: Basic QUJDREVGR0gxMjM0NTY3ODk6WE5DSVc5M0kyTDFTUVBKU0o4MjNLMUxTOTAyS0xERk1DWlBXRU8=\n\
+        \nThis example header can be generated (using Mac OS X syntax) from the API\
+        \ key with\n\n    $ echo -n \"ABCDEFGH123456789:XNCIW93I2L1SQPJSJ823K1LS902KLDFMCZPWEO\"\
+        \ |\nbase64\n"
+      scheme: basic
+      type: http
+x-tagGroups:
+- name: API Endpoints
+  tags:
+  - Version 2
+  - Version 1
