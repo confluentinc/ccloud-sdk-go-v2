@@ -1568,6 +1568,7 @@ components:
         display_name:
           description: The name of the ksqlDB cluster.
           example: ksqlDB_cluster_0
+          pattern: ^(?:[0-9A-Za-z\-])[\w-]{0,31}$
           type: string
           x-immutable: true
         csu:
