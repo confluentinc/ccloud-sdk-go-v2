@@ -42,15 +42,15 @@ var (
 type TopicV3Api interface {
 
 	/*
-			CreateKafkaTopic Create Topic
+		CreateKafkaTopic Create Topic
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Creates a topic.
+	Creates a topic.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @return ApiCreateKafkaTopicRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @return ApiCreateKafkaTopicRequest
 	*/
 	CreateKafkaTopic(ctx _context.Context, clusterId string) ApiCreateKafkaTopicRequest
 
@@ -59,16 +59,16 @@ type TopicV3Api interface {
 	CreateKafkaTopicExecute(r ApiCreateKafkaTopicRequest) (TopicData, *_nethttp.Response, error)
 
 	/*
-			DeleteKafkaTopic Delete Topic
+		DeleteKafkaTopic Delete Topic
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Deletes the topic with the given `topic_name`.
+	Deletes the topic with the given `topic_name`.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @param topicName The topic name.
-			 @return ApiDeleteKafkaTopicRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param topicName The topic name.
+		 @return ApiDeleteKafkaTopicRequest
 	*/
 	DeleteKafkaTopic(ctx _context.Context, clusterId string, topicName string) ApiDeleteKafkaTopicRequest
 
@@ -76,16 +76,16 @@ type TopicV3Api interface {
 	DeleteKafkaTopicExecute(r ApiDeleteKafkaTopicRequest) (*_nethttp.Response, error)
 
 	/*
-			GetKafkaTopic Get Topic
+		GetKafkaTopic Get Topic
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Returns the topic with the given `topic_name`.
+	Returns the topic with the given `topic_name`.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @param topicName The topic name.
-			 @return ApiGetKafkaTopicRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param topicName The topic name.
+		 @return ApiGetKafkaTopicRequest
 	*/
 	GetKafkaTopic(ctx _context.Context, clusterId string, topicName string) ApiGetKafkaTopicRequest
 
@@ -94,15 +94,15 @@ type TopicV3Api interface {
 	GetKafkaTopicExecute(r ApiGetKafkaTopicRequest) (TopicData, *_nethttp.Response, error)
 
 	/*
-			ListKafkaTopics List Topics
+		ListKafkaTopics List Topics
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Returns the list of topics that belong to the specified Kafka cluster.
+	Returns the list of topics that belong to the specified Kafka cluster.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @return ApiListKafkaTopicsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @return ApiListKafkaTopicsRequest
 	*/
 	ListKafkaTopics(ctx _context.Context, clusterId string) ApiListKafkaTopicsRequest
 

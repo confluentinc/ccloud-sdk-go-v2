@@ -56,17 +56,17 @@ type ClusterLinkingV3Api interface {
 	CreateKafkaLinkExecute(r ApiCreateKafkaLinkRequest) (*_nethttp.Response, error)
 
 	/*
-			CreateKafkaMirrorTopic Create a mirror topic
+		CreateKafkaMirrorTopic Create a mirror topic
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Create a topic in the destination cluster mirroring a topic in
-		the source cluster
+	Create a topic in the destination cluster mirroring a topic in
+	the source cluster
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @param linkName The link name
-			 @return ApiCreateKafkaMirrorTopicRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param linkName The link name
+		 @return ApiCreateKafkaMirrorTopicRequest
 	*/
 	CreateKafkaMirrorTopic(ctx _context.Context, clusterId string, linkName string) ApiCreateKafkaMirrorTopicRequest
 
@@ -169,15 +169,15 @@ type ClusterLinkingV3Api interface {
 	ListKafkaLinksExecute(r ApiListKafkaLinksRequest) (ListLinksResponseDataList, *_nethttp.Response, error)
 
 	/*
-			ListKafkaMirrorTopics List mirror topics
+		ListKafkaMirrorTopics List mirror topics
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		List all mirror topics in the cluster
+	List all mirror topics in the cluster
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @return ApiListKafkaMirrorTopicsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @return ApiListKafkaMirrorTopicsRequest
 	*/
 	ListKafkaMirrorTopics(ctx _context.Context, clusterId string) ApiListKafkaMirrorTopicsRequest
 
@@ -186,16 +186,16 @@ type ClusterLinkingV3Api interface {
 	ListKafkaMirrorTopicsExecute(r ApiListKafkaMirrorTopicsRequest) (ListMirrorTopicsResponseDataList, *_nethttp.Response, error)
 
 	/*
-			ListKafkaMirrorTopicsUnderLink List mirror topics
+		ListKafkaMirrorTopicsUnderLink List mirror topics
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		List all mirror topics under the link
+	List all mirror topics under the link
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @param linkName The link name
-			 @return ApiListKafkaMirrorTopicsUnderLinkRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param linkName The link name
+		 @return ApiListKafkaMirrorTopicsUnderLinkRequest
 	*/
 	ListKafkaMirrorTopicsUnderLink(ctx _context.Context, clusterId string, linkName string) ApiListKafkaMirrorTopicsUnderLinkRequest
 
@@ -237,16 +237,16 @@ type ClusterLinkingV3Api interface {
 	UpdateKafkaLinkConfigExecute(r ApiUpdateKafkaLinkConfigRequest) (*_nethttp.Response, error)
 
 	/*
-			UpdateKafkaLinkConfigBatch Batch Alter Topic Configs
+		UpdateKafkaLinkConfigBatch Batch Alter Cluster Link Configs
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Batch Alter Link Configs
+	Batch Alter Cluster Link Configs
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @param linkName The link name
-			 @return ApiUpdateKafkaLinkConfigBatchRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param linkName The link name
+		 @return ApiUpdateKafkaLinkConfigBatchRequest
 	*/
 	UpdateKafkaLinkConfigBatch(ctx _context.Context, clusterId string, linkName string) ApiUpdateKafkaLinkConfigBatchRequest
 
@@ -2175,11 +2175,11 @@ func (r ApiUpdateKafkaLinkConfigBatchRequest) Execute() (*_nethttp.Response, err
 }
 
 /*
-UpdateKafkaLinkConfigBatch Batch Alter Topic Configs
+UpdateKafkaLinkConfigBatch Batch Alter Cluster Link Configs
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Batch Alter Link Configs
+Batch Alter Cluster Link Configs
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.

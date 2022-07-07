@@ -42,22 +42,22 @@ var (
 type RecordsV3Api interface {
 
 	/*
-			ProduceRecords Produce records to the given topic.
+		ProduceRecords Produce records to the given topic.
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Available in dedicated clusters](https://img.shields.io/badge/-Available%20in%20dedicated%20clusters-%23bc8540)](#section/Versioning/API-Lifecycle-Policy)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Available in dedicated clusters](https://img.shields.io/badge/-Available%20in%20dedicated%20clusters-%23bc8540)](#section/Versioning/API-Lifecycle-Policy)
 
-		Produce records to the given topic, returning delivery reports for each
-		record produced. This API can be used in streaming mode by setting "Transfer-Encoding:
-		chunked" header. For as long as the connection is kept open, the server will
-		keep accepting records. For each record sent to the server, the server will
-		asynchronously send back a delivery report, in the same order. Records are
-		streamed to and from the server as Concatenated JSON. Errors are reported per
-		record. The HTTP status code will be HTTP 200 OK as long as the connection is successfully established.
+	Produce records to the given topic, returning delivery reports for each
+	record produced. This API can be used in streaming mode by setting "Transfer-Encoding:
+	chunked" header. For as long as the connection is kept open, the server will
+	keep accepting records. For each record sent to the server, the server will
+	asynchronously send back a delivery report, in the same order. Records are
+	streamed to and from the server as Concatenated JSON. Errors are reported per
+	record. The HTTP status code will be HTTP 200 OK as long as the connection is successfully established.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @param topicName The topic name.
-			 @return ApiProduceRecordsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param topicName The topic name.
+		 @return ApiProduceRecordsRequest
 	*/
 	ProduceRecords(ctx _context.Context, clusterId string, topicName string) ApiProduceRecordsRequest
 
