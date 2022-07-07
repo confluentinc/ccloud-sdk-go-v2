@@ -13,10 +13,6 @@ info:
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
-- description: Confluent Cloud staging
-  url: https://api.stag.cpdev.cloud
-- description: Confluent Cloud development
-  url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
     [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
