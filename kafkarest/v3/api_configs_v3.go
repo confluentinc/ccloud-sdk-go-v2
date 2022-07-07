@@ -42,17 +42,17 @@ var (
 type ConfigsV3Api interface {
 
 	/*
-			DeleteKafkaClusterConfig Reset Cluster Config
+		DeleteKafkaClusterConfig Reset Cluster Config
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Resets the configuration parameter specified by ``name`` to its
-		default value.
+	Resets the configuration parameter specified by ``name`` to its
+	default value.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @param name The configuration parameter name.
-			 @return ApiDeleteKafkaClusterConfigRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param name The configuration parameter name.
+		 @return ApiDeleteKafkaClusterConfigRequest
 	*/
 	DeleteKafkaClusterConfig(ctx _context.Context, clusterId string, name string) ApiDeleteKafkaClusterConfigRequest
 
@@ -60,17 +60,17 @@ type ConfigsV3Api interface {
 	DeleteKafkaClusterConfigExecute(r ApiDeleteKafkaClusterConfigRequest) (*_nethttp.Response, error)
 
 	/*
-			DeleteKafkaTopicConfig Reset Topic Config
+		DeleteKafkaTopicConfig Reset Topic Config
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Resets the config with given `name` to its default value.
+	Resets the config with given `name` to its default value.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @param topicName The topic name.
-			 @param name The configuration parameter name.
-			 @return ApiDeleteKafkaTopicConfigRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param topicName The topic name.
+		 @param name The configuration parameter name.
+		 @return ApiDeleteKafkaTopicConfigRequest
 	*/
 	DeleteKafkaTopicConfig(ctx _context.Context, clusterId string, topicName string, name string) ApiDeleteKafkaTopicConfigRequest
 
@@ -78,16 +78,16 @@ type ConfigsV3Api interface {
 	DeleteKafkaTopicConfigExecute(r ApiDeleteKafkaTopicConfigRequest) (*_nethttp.Response, error)
 
 	/*
-			GetKafkaClusterConfig Get Cluster Config
+		GetKafkaClusterConfig Get Cluster Config
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Returns the configuration parameter specified by ``name``.
+	Returns the configuration parameter specified by ``name``.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @param name The configuration parameter name.
-			 @return ApiGetKafkaClusterConfigRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param name The configuration parameter name.
+		 @return ApiGetKafkaClusterConfigRequest
 	*/
 	GetKafkaClusterConfig(ctx _context.Context, clusterId string, name string) ApiGetKafkaClusterConfigRequest
 
@@ -96,17 +96,17 @@ type ConfigsV3Api interface {
 	GetKafkaClusterConfigExecute(r ApiGetKafkaClusterConfigRequest) (ClusterConfigData, *_nethttp.Response, error)
 
 	/*
-			GetKafkaTopicConfig Get Topic Config
+		GetKafkaTopicConfig Get Topic Config
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Return the config with the given `name`.
+	Return the config with the given `name`.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @param topicName The topic name.
-			 @param name The configuration parameter name.
-			 @return ApiGetKafkaTopicConfigRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param topicName The topic name.
+		 @param name The configuration parameter name.
+		 @return ApiGetKafkaTopicConfigRequest
 	*/
 	GetKafkaTopicConfig(ctx _context.Context, clusterId string, topicName string, name string) ApiGetKafkaTopicConfigRequest
 
@@ -115,16 +115,16 @@ type ConfigsV3Api interface {
 	GetKafkaTopicConfigExecute(r ApiGetKafkaTopicConfigRequest) (TopicConfigData, *_nethttp.Response, error)
 
 	/*
-			ListKafkaAllTopicConfigs Get All Topic Configs
+		ListKafkaAllTopicConfigs Get All Topic Configs
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Returns all topic configurations for topics hosted by the specified
-		cluster.
+	Returns all topic configurations for topics hosted by the specified
+	cluster.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @return ApiListKafkaAllTopicConfigsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @return ApiListKafkaAllTopicConfigsRequest
 	*/
 	ListKafkaAllTopicConfigs(ctx _context.Context, clusterId string) ApiListKafkaAllTopicConfigsRequest
 
@@ -133,16 +133,16 @@ type ConfigsV3Api interface {
 	ListKafkaAllTopicConfigsExecute(r ApiListKafkaAllTopicConfigsRequest) (TopicConfigDataList, *_nethttp.Response, error)
 
 	/*
-			ListKafkaClusterConfigs List Cluster Configs
+		ListKafkaClusterConfigs List Cluster Configs
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Returns a list of configuration parameters for the specified Kafka
-		cluster.
+	Returns a list of configuration parameters for the specified Kafka
+	cluster.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @return ApiListKafkaClusterConfigsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @return ApiListKafkaClusterConfigsRequest
 	*/
 	ListKafkaClusterConfigs(ctx _context.Context, clusterId string) ApiListKafkaClusterConfigsRequest
 
@@ -167,16 +167,16 @@ type ConfigsV3Api interface {
 	ListKafkaDefaultTopicConfigsExecute(r ApiListKafkaDefaultTopicConfigsRequest) (TopicConfigDataList, *_nethttp.Response, error)
 
 	/*
-			ListKafkaTopicConfigs List Topic Configs
+		ListKafkaTopicConfigs List Topic Configs
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Return the list of configs that belong to the specified topic.
+	Return the list of configs that belong to the specified topic.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @param topicName The topic name.
-			 @return ApiListKafkaTopicConfigsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param topicName The topic name.
+		 @return ApiListKafkaTopicConfigsRequest
 	*/
 	ListKafkaTopicConfigs(ctx _context.Context, clusterId string, topicName string) ApiListKafkaTopicConfigsRequest
 
@@ -185,16 +185,16 @@ type ConfigsV3Api interface {
 	ListKafkaTopicConfigsExecute(r ApiListKafkaTopicConfigsRequest) (TopicConfigDataList, *_nethttp.Response, error)
 
 	/*
-			UpdateKafkaClusterConfig Update Cluster Config
+		UpdateKafkaClusterConfig Update Cluster Config
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Updates the configuration parameter specified by ``name``.
+	Updates the configuration parameter specified by ``name``.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @param name The configuration parameter name.
-			 @return ApiUpdateKafkaClusterConfigRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param name The configuration parameter name.
+		 @return ApiUpdateKafkaClusterConfigRequest
 	*/
 	UpdateKafkaClusterConfig(ctx _context.Context, clusterId string, name string) ApiUpdateKafkaClusterConfigRequest
 
@@ -202,15 +202,15 @@ type ConfigsV3Api interface {
 	UpdateKafkaClusterConfigExecute(r ApiUpdateKafkaClusterConfigRequest) (*_nethttp.Response, error)
 
 	/*
-			UpdateKafkaClusterConfigs Batch Alter Cluster Configs
+		UpdateKafkaClusterConfigs Batch Alter Cluster Configs
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Updates or deletes a set of Kafka cluster configuration parameters.
+	Updates or deletes a set of Kafka cluster configuration parameters.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @return ApiUpdateKafkaClusterConfigsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @return ApiUpdateKafkaClusterConfigsRequest
 	*/
 	UpdateKafkaClusterConfigs(ctx _context.Context, clusterId string) ApiUpdateKafkaClusterConfigsRequest
 
@@ -218,17 +218,17 @@ type ConfigsV3Api interface {
 	UpdateKafkaClusterConfigsExecute(r ApiUpdateKafkaClusterConfigsRequest) (*_nethttp.Response, error)
 
 	/*
-			UpdateKafkaTopicConfig Update Topic Config
+		UpdateKafkaTopicConfig Update Topic Config
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Updates the config with given `name`.
+	Updates the config with given `name`.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @param topicName The topic name.
-			 @param name The configuration parameter name.
-			 @return ApiUpdateKafkaTopicConfigRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param topicName The topic name.
+		 @param name The configuration parameter name.
+		 @return ApiUpdateKafkaTopicConfigRequest
 	*/
 	UpdateKafkaTopicConfig(ctx _context.Context, clusterId string, topicName string, name string) ApiUpdateKafkaTopicConfigRequest
 
@@ -236,16 +236,16 @@ type ConfigsV3Api interface {
 	UpdateKafkaTopicConfigExecute(r ApiUpdateKafkaTopicConfigRequest) (*_nethttp.Response, error)
 
 	/*
-			UpdateKafkaTopicConfigBatch Batch Alter Topic Configs
+		UpdateKafkaTopicConfigBatch Batch Alter Topic Configs
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Updates or deletes a set of topic configs.
+	Updates or deletes a set of topic configs.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @param topicName The topic name.
-			 @return ApiUpdateKafkaTopicConfigBatchRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param topicName The topic name.
+		 @return ApiUpdateKafkaTopicConfigBatchRequest
 	*/
 	UpdateKafkaTopicConfigBatch(ctx _context.Context, clusterId string, topicName string) ApiUpdateKafkaTopicConfigBatchRequest
 
