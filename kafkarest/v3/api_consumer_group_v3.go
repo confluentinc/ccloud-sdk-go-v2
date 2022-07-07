@@ -42,17 +42,17 @@ var (
 type ConsumerGroupV3Api interface {
 
 	/*
-			GetKafkaConsumer Get Consumer
+		GetKafkaConsumer Get Consumer
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Returns the consumer specified by the ``consumer_id``.
+	Returns the consumer specified by the ``consumer_id``.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @param consumerGroupId The consumer group ID.
-			 @param consumerId The consumer ID.
-			 @return ApiGetKafkaConsumerRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param consumerGroupId The consumer group ID.
+		 @param consumerId The consumer ID.
+		 @return ApiGetKafkaConsumerRequest
 	*/
 	GetKafkaConsumer(ctx _context.Context, clusterId string, consumerGroupId string, consumerId string) ApiGetKafkaConsumerRequest
 
@@ -61,16 +61,16 @@ type ConsumerGroupV3Api interface {
 	GetKafkaConsumerExecute(r ApiGetKafkaConsumerRequest) (ConsumerData, *_nethttp.Response, error)
 
 	/*
-			GetKafkaConsumerGroup Get Consumer Group
+		GetKafkaConsumerGroup Get Consumer Group
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Returns the consumer group specified by the ``consumer_group_id``.
+	Returns the consumer group specified by the ``consumer_group_id``.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @param consumerGroupId The consumer group ID.
-			 @return ApiGetKafkaConsumerGroupRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param consumerGroupId The consumer group ID.
+		 @return ApiGetKafkaConsumerGroupRequest
 	*/
 	GetKafkaConsumerGroup(ctx _context.Context, clusterId string, consumerGroupId string) ApiGetKafkaConsumerGroupRequest
 
@@ -79,17 +79,17 @@ type ConsumerGroupV3Api interface {
 	GetKafkaConsumerGroupExecute(r ApiGetKafkaConsumerGroupRequest) (ConsumerGroupData, *_nethttp.Response, error)
 
 	/*
-			GetKafkaConsumerGroupLagSummary Get Consumer Group Lag Summary.
+		GetKafkaConsumerGroupLagSummary Get Consumer Group Lag Summary.
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Returns the max and total lag of the consumers belonging to the
-		specified consumer group.
+	Returns the max and total lag of the consumers belonging to the
+	specified consumer group.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @param consumerGroupId The consumer group ID.
-			 @return ApiGetKafkaConsumerGroupLagSummaryRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param consumerGroupId The consumer group ID.
+		 @return ApiGetKafkaConsumerGroupLagSummaryRequest
 	*/
 	GetKafkaConsumerGroupLagSummary(ctx _context.Context, clusterId string, consumerGroupId string) ApiGetKafkaConsumerGroupLagSummaryRequest
 
@@ -98,16 +98,16 @@ type ConsumerGroupV3Api interface {
 	GetKafkaConsumerGroupLagSummaryExecute(r ApiGetKafkaConsumerGroupLagSummaryRequest) (ConsumerGroupLagSummaryData, *_nethttp.Response, error)
 
 	/*
-			ListKafkaConsumerGroups List Consumer Groups
+		ListKafkaConsumerGroups List Consumer Groups
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Returns the list of consumer groups that belong to the specified
-		Kafka cluster.
+	Returns the list of consumer groups that belong to the specified
+	Kafka cluster.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @return ApiListKafkaConsumerGroupsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @return ApiListKafkaConsumerGroupsRequest
 	*/
 	ListKafkaConsumerGroups(ctx _context.Context, clusterId string) ApiListKafkaConsumerGroupsRequest
 
@@ -116,17 +116,17 @@ type ConsumerGroupV3Api interface {
 	ListKafkaConsumerGroupsExecute(r ApiListKafkaConsumerGroupsRequest) (ConsumerGroupDataList, *_nethttp.Response, error)
 
 	/*
-			ListKafkaConsumerLags List Consumer Lags
+		ListKafkaConsumerLags List Consumer Lags
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Returns a list of consumer lags of the consumers belonging to the
-		specified consumer group.
+	Returns a list of consumer lags of the consumers belonging to the
+	specified consumer group.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @param consumerGroupId The consumer group ID.
-			 @return ApiListKafkaConsumerLagsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param consumerGroupId The consumer group ID.
+		 @return ApiListKafkaConsumerLagsRequest
 	*/
 	ListKafkaConsumerLags(ctx _context.Context, clusterId string, consumerGroupId string) ApiListKafkaConsumerLagsRequest
 
@@ -135,17 +135,17 @@ type ConsumerGroupV3Api interface {
 	ListKafkaConsumerLagsExecute(r ApiListKafkaConsumerLagsRequest) (ConsumerLagDataList, *_nethttp.Response, error)
 
 	/*
-			ListKafkaConsumers List Consumers
+		ListKafkaConsumers List Consumers
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Returns a list of consumers that belong to the specified consumer
-		group.
+	Returns a list of consumers that belong to the specified consumer
+	group.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @param consumerGroupId The consumer group ID.
-			 @return ApiListKafkaConsumersRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param consumerGroupId The consumer group ID.
+		 @return ApiListKafkaConsumersRequest
 	*/
 	ListKafkaConsumers(ctx _context.Context, clusterId string, consumerGroupId string) ApiListKafkaConsumersRequest
 

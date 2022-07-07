@@ -8678,7 +8678,7 @@ paths:
       description: |-
         [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-        Batch Alter Link Configs
+        Batch Alter Cluster Link Configs
       operationId: updateKafkaLinkConfigBatch
       parameters:
       - description: The Kafka cluster ID.
@@ -8799,7 +8799,7 @@ paths:
             response body.
       security:
       - api-key: []
-      summary: Batch Alter Topic Configs
+      summary: Batch Alter Cluster Link Configs
       tags:
       - Cluster Linking (v3)
       x-codeSamples:

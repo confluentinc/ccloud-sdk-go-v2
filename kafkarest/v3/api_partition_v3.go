@@ -42,18 +42,18 @@ var (
 type PartitionV3Api interface {
 
 	/*
-			GetKafkaConsumerLag Get Consumer Lag
+		GetKafkaConsumerLag Get Consumer Lag
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Returns the consumer lag on a partition with the given `partition_id`.
+	Returns the consumer lag on a partition with the given `partition_id`.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @param consumerGroupId The consumer group ID.
-			 @param topicName The topic name.
-			 @param partitionId The partition ID.
-			 @return ApiGetKafkaConsumerLagRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param consumerGroupId The consumer group ID.
+		 @param topicName The topic name.
+		 @param partitionId The partition ID.
+		 @return ApiGetKafkaConsumerLagRequest
 	*/
 	GetKafkaConsumerLag(ctx _context.Context, clusterId string, consumerGroupId string, topicName string, partitionId int32) ApiGetKafkaConsumerLagRequest
 
@@ -62,17 +62,17 @@ type PartitionV3Api interface {
 	GetKafkaConsumerLagExecute(r ApiGetKafkaConsumerLagRequest) (ConsumerLagData, *_nethttp.Response, error)
 
 	/*
-			GetKafkaPartition Get Partition
+		GetKafkaPartition Get Partition
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Returns the partition with the given `partition_id`.
+	Returns the partition with the given `partition_id`.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @param topicName The topic name.
-			 @param partitionId The partition ID.
-			 @return ApiGetKafkaPartitionRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param topicName The topic name.
+		 @param partitionId The partition ID.
+		 @return ApiGetKafkaPartitionRequest
 	*/
 	GetKafkaPartition(ctx _context.Context, clusterId string, topicName string, partitionId int32) ApiGetKafkaPartitionRequest
 
@@ -81,16 +81,16 @@ type PartitionV3Api interface {
 	GetKafkaPartitionExecute(r ApiGetKafkaPartitionRequest) (PartitionData, *_nethttp.Response, error)
 
 	/*
-			ListKafkaPartitions List Partitions
+		ListKafkaPartitions List Partitions
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Returns the list of partitions that belong to the specified topic.
+	Returns the list of partitions that belong to the specified topic.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @param topicName The topic name.
-			 @return ApiListKafkaPartitionsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param topicName The topic name.
+		 @return ApiListKafkaPartitionsRequest
 	*/
 	ListKafkaPartitions(ctx _context.Context, clusterId string, topicName string) ApiListKafkaPartitionsRequest
 
