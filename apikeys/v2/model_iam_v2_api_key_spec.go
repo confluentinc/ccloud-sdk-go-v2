@@ -45,6 +45,8 @@ type IamV2ApiKeySpec struct {
 	Owner *ObjectReference `json:"owner,omitempty"`
 	// The resource associated with this object. The resource can be one of cmk.v2.Cluster. May be `null` if not associated with a resource.
 	Resource *ObjectReference `json:"resource,omitempty"`
+	// The cmk.v2.clusters which this owns
+	Resources *[]ObjectReference `json:"resources,omitempty"`
 }
 
 // NewIamV2ApiKeySpec instantiates a new IamV2ApiKeySpec object
@@ -224,6 +226,38 @@ func (o *IamV2ApiKeySpec) SetResource(v ObjectReference) {
 	o.Resource = &v
 }
 
+// GetResources returns the Resources field value if set, zero value otherwise.
+func (o *IamV2ApiKeySpec) GetResources() []ObjectReference {
+	if o == nil || o.Resources == nil {
+		var ret []ObjectReference
+		return ret
+	}
+	return *o.Resources
+}
+
+// GetResourcesOk returns a tuple with the Resources field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamV2ApiKeySpec) GetResourcesOk() (*[]ObjectReference, bool) {
+	if o == nil || o.Resources == nil {
+		return nil, false
+	}
+	return o.Resources, true
+}
+
+// HasResources returns a boolean if a field has been set.
+func (o *IamV2ApiKeySpec) HasResources() bool {
+	if o != nil && o.Resources != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetResources gets a reference to the given []ObjectReference and assigns it to the Resources field.
+func (o *IamV2ApiKeySpec) SetResources(v []ObjectReference) {
+	o.Resources = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *IamV2ApiKeySpec) Redact() {
     o.Secret = nil
@@ -231,6 +265,7 @@ func (o *IamV2ApiKeySpec) Redact() {
     o.recurseRedact(o.Description)
     o.recurseRedact(o.Owner)
     o.recurseRedact(o.Resource)
+    o.recurseRedact(o.Resources)
 }
 
 func (o *IamV2ApiKeySpec) recurseRedact(v interface{}) {
@@ -279,6 +314,9 @@ func (o IamV2ApiKeySpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.Resource != nil {
 		toSerialize["resource"] = o.Resource
+	}
+	if o.Resources != nil {
+		toSerialize["resources"] = o.Resources
 	}
 	return json.Marshal(toSerialize)
 }

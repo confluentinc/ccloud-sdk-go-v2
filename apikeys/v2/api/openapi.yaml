@@ -14,6 +14,10 @@ info:
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
+- description: Confluent Cloud staging
+  url: https://api.stag.cpdev.cloud
+- description: Confluent Cloud development
+  url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
     [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
@@ -583,13 +587,13 @@ paths:
             --url https://api.confluent.cloud/iam/v2/api-keys \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"CI kafka access key","description":"This API key provides kafka access to cluster x","owner":{"id":"u-a83k9b","environment":"string"},"resource":{"id":"lkc-c29js0","environment":"string"}}}'
+            --data '{"spec":{"display_name":"CI kafka access key","description":"This API key provides kafka access to cluster x","owner":{"id":"u-a83k9b","environment":"string"},"resource":{"id":"lkc-c29js0","environment":"string"},"resources":[{"id":"lkc-c29js0"}]}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"resource\":{\"id\":\"lkc-c29js0\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"resource\":{\"id\":\"lkc-c29js0\",\"environment\":\"string\"},\"resources\":[{\"id\":\"lkc-c29js0\"}]}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/iam/v2/api-keys")
             .post(body)
@@ -605,8 +609,9 @@ paths:
           :\\\"CI kafka access key\\\",\\\"description\\\":\\\"This API key provides\
           \ kafka access to cluster x\\\",\\\"owner\\\":{\\\"id\\\":\\\"u-a83k9b\\\
           \",\\\"environment\\\":\\\"string\\\"},\\\"resource\\\":{\\\"id\\\":\\\"\
-          lkc-c29js0\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
-          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          lkc-c29js0\\\",\\\"environment\\\":\\\"string\\\"},\\\"resources\\\":[{\\\
+          \"id\\\":\\\"lkc-c29js0\\\"}]}}\")\n\n\treq, _ := http.NewRequest(\"POST\"\
+          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
           )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
           \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
           \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
@@ -617,7 +622,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"resource\":{\"id\":\"lkc-c29js0\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"resource\":{\"id\":\"lkc-c29js0\",\"environment\":\"string\"},\"resources\":[{\"id\":\"lkc-c29js0\"}]}}"
 
           headers = {
               'content-type': "application/json",
@@ -663,7 +668,8 @@ paths:
               display_name: 'CI kafka access key',
               description: 'This API key provides kafka access to cluster x',
               owner: {id: 'u-a83k9b', environment: 'string'},
-              resource: {id: 'lkc-c29js0', environment: 'string'}
+              resource: {id: 'lkc-c29js0', environment: 'string'},
+              resources: [{id: 'lkc-c29js0'}]
             }
           }));
           req.end();
@@ -679,7 +685,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"resource\":{\"id\":\"lkc-c29js0\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"resource\":{\"id\":\"lkc-c29js0\",\"environment\":\"string\"},\"resources\":[{\"id\":\"lkc-c29js0\"}]}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -688,7 +694,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"resource\":{\"id\":\"lkc-c29js0\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"resource\":{\"id\":\"lkc-c29js0\",\"environment\":\"string\"},\"resources\":[{\"id\":\"lkc-c29js0\"}]}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /iam/v2/api-keys/{id}:
     delete:
@@ -1437,13 +1443,13 @@ paths:
             --url 'https://api.confluent.cloud/iam/v2/api-keys/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"CI kafka access key","description":"This API key provides kafka access to cluster x","owner":{"id":"string","environment":"string"},"resource":{"id":"string","environment":"string"}}}'
+            --data '{"spec":{"display_name":"CI kafka access key","description":"This API key provides kafka access to cluster x","owner":{"id":"string","environment":"string"},"resource":{"id":"string","environment":"string"},"resources":[{"id":"lkc-c29js0"}]}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"string\",\"environment\":\"string\"},\"resource\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"string\",\"environment\":\"string\"},\"resource\":{\"id\":\"string\",\"environment\":\"string\"},\"resources\":[{\"id\":\"lkc-c29js0\"}]}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/iam/v2/api-keys/{id}")
             .patch(body)
@@ -1459,19 +1465,19 @@ paths:
           :\\\"CI kafka access key\\\",\\\"description\\\":\\\"This API key provides\
           \ kafka access to cluster x\\\",\\\"owner\\\":{\\\"id\\\":\\\"string\\\"\
           ,\\\"environment\\\":\\\"string\\\"},\\\"resource\\\":{\\\"id\\\":\\\"string\\\
-          \",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
-          PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          \",\\\"environment\\\":\\\"string\\\"},\\\"resources\\\":[{\\\"id\\\":\\\
+          \"lkc-c29js0\\\"}]}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"string\",\"environment\":\"string\"},\"resource\":{\"id\":\"string\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"string\",\"environment\":\"string\"},\"resource\":{\"id\":\"string\",\"environment\":\"string\"},\"resources\":[{\"id\":\"lkc-c29js0\"}]}}"
 
           headers = {
               'content-type': "application/json",
@@ -1517,7 +1523,8 @@ paths:
               display_name: 'CI kafka access key',
               description: 'This API key provides kafka access to cluster x',
               owner: {id: 'string', environment: 'string'},
-              resource: {id: 'string', environment: 'string'}
+              resource: {id: 'string', environment: 'string'},
+              resources: [{id: 'lkc-c29js0'}]
             }
           }));
           req.end();
@@ -1533,7 +1540,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"string\",\"environment\":\"string\"},\"resource\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"string\",\"environment\":\"string\"},\"resource\":{\"id\":\"string\",\"environment\":\"string\"},\"resources\":[{\"id\":\"lkc-c29js0\"}]}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1542,7 +1549,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"string\",\"environment\":\"string\"},\"resource\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"CI kafka access key\",\"description\":\"This API key provides kafka access to cluster x\",\"owner\":{\"id\":\"string\",\"environment\":\"string\"},\"resource\":{\"id\":\"string\",\"environment\":\"string\"},\"resources\":[{\"id\":\"lkc-c29js0\"}]}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
 components:
   responses:
@@ -1902,6 +1909,14 @@ components:
           - nullable: true
           description: The resource associated with this object. The resource can
             be one of cmk.v2.Cluster. May be `null` if not associated with a resource.
+          x-immutable: true
+        resources:
+          description: The cmk.v2.clusters which this owns
+          example:
+          - id: lkc-c29js0
+          items:
+            $ref: '#/components/schemas/ObjectReference'
+          type: array
           x-immutable: true
       type: object
       x-enable-id: true
