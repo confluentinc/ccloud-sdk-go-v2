@@ -39,10 +39,10 @@ type KsqldbcmV2ClusterSpec struct {
 	DisplayName *string `json:"display_name,omitempty"`
 	// The number of CSUs (Confluent Streaming Units) in a ksqlDB cluster.
 	Csu *int32 `json:"csu,omitempty"`
-	// The dataplane endpoint of the ksqlDB cluster.
-	HttpEndpoint *string `json:"http_endpoint,omitempty"`
-	// The kafka_cluster to which this belongs. The kafka_cluster can be one of cmk.v2.Cluster.
+	// The kafka_cluster to which this belongs.
 	KafkaCluster *ObjectReference `json:"kafka_cluster,omitempty"`
+	// The credential_identity to which this belongs. The credential_identity can be one of iam.v2.User, iam.v2.ServiceAccount.
+	CredentialIdentity *ObjectReference `json:"credential_identity,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
 }
@@ -128,38 +128,6 @@ func (o *KsqldbcmV2ClusterSpec) SetCsu(v int32) {
 	o.Csu = &v
 }
 
-// GetHttpEndpoint returns the HttpEndpoint field value if set, zero value otherwise.
-func (o *KsqldbcmV2ClusterSpec) GetHttpEndpoint() string {
-	if o == nil || o.HttpEndpoint == nil {
-		var ret string
-		return ret
-	}
-	return *o.HttpEndpoint
-}
-
-// GetHttpEndpointOk returns a tuple with the HttpEndpoint field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *KsqldbcmV2ClusterSpec) GetHttpEndpointOk() (*string, bool) {
-	if o == nil || o.HttpEndpoint == nil {
-		return nil, false
-	}
-	return o.HttpEndpoint, true
-}
-
-// HasHttpEndpoint returns a boolean if a field has been set.
-func (o *KsqldbcmV2ClusterSpec) HasHttpEndpoint() bool {
-	if o != nil && o.HttpEndpoint != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetHttpEndpoint gets a reference to the given string and assigns it to the HttpEndpoint field.
-func (o *KsqldbcmV2ClusterSpec) SetHttpEndpoint(v string) {
-	o.HttpEndpoint = &v
-}
-
 // GetKafkaCluster returns the KafkaCluster field value if set, zero value otherwise.
 func (o *KsqldbcmV2ClusterSpec) GetKafkaCluster() ObjectReference {
 	if o == nil || o.KafkaCluster == nil {
@@ -190,6 +158,38 @@ func (o *KsqldbcmV2ClusterSpec) HasKafkaCluster() bool {
 // SetKafkaCluster gets a reference to the given ObjectReference and assigns it to the KafkaCluster field.
 func (o *KsqldbcmV2ClusterSpec) SetKafkaCluster(v ObjectReference) {
 	o.KafkaCluster = &v
+}
+
+// GetCredentialIdentity returns the CredentialIdentity field value if set, zero value otherwise.
+func (o *KsqldbcmV2ClusterSpec) GetCredentialIdentity() ObjectReference {
+	if o == nil || o.CredentialIdentity == nil {
+		var ret ObjectReference
+		return ret
+	}
+	return *o.CredentialIdentity
+}
+
+// GetCredentialIdentityOk returns a tuple with the CredentialIdentity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KsqldbcmV2ClusterSpec) GetCredentialIdentityOk() (*ObjectReference, bool) {
+	if o == nil || o.CredentialIdentity == nil {
+		return nil, false
+	}
+	return o.CredentialIdentity, true
+}
+
+// HasCredentialIdentity returns a boolean if a field has been set.
+func (o *KsqldbcmV2ClusterSpec) HasCredentialIdentity() bool {
+	if o != nil && o.CredentialIdentity != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCredentialIdentity gets a reference to the given ObjectReference and assigns it to the CredentialIdentity field.
+func (o *KsqldbcmV2ClusterSpec) SetCredentialIdentity(v ObjectReference) {
+	o.CredentialIdentity = &v
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
@@ -228,8 +228,8 @@ func (o *KsqldbcmV2ClusterSpec) SetEnvironment(v ObjectReference) {
 func (o *KsqldbcmV2ClusterSpec) Redact() {
     o.recurseRedact(o.DisplayName)
     o.recurseRedact(o.Csu)
-    o.recurseRedact(o.HttpEndpoint)
     o.recurseRedact(o.KafkaCluster)
+    o.recurseRedact(o.CredentialIdentity)
     o.recurseRedact(o.Environment)
 }
 
@@ -271,11 +271,11 @@ func (o KsqldbcmV2ClusterSpec) MarshalJSON() ([]byte, error) {
 	if o.Csu != nil {
 		toSerialize["csu"] = o.Csu
 	}
-	if o.HttpEndpoint != nil {
-		toSerialize["http_endpoint"] = o.HttpEndpoint
-	}
 	if o.KafkaCluster != nil {
 		toSerialize["kafka_cluster"] = o.KafkaCluster
+	}
+	if o.CredentialIdentity != nil {
+		toSerialize["credential_identity"] = o.CredentialIdentity
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment

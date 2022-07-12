@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the ksqlDB cluster. | [optional] 
 **Csu** | Pointer to **int32** | The number of CSUs (Confluent Streaming Units) in a ksqlDB cluster. | [optional] 
-**HttpEndpoint** | Pointer to **string** | The dataplane endpoint of the ksqlDB cluster. | [optional] [readonly] 
-**KafkaCluster** | Pointer to [**ObjectReference**](ObjectReference.md) | The kafka_cluster to which this belongs. The kafka_cluster can be one of cmk.v2.Cluster. | [optional] 
+**KafkaCluster** | Pointer to [**ObjectReference**](ObjectReference.md) | The kafka_cluster to which this belongs. | [optional] 
+**CredentialIdentity** | Pointer to [**ObjectReference**](ObjectReference.md) | The credential_identity to which this belongs. The credential_identity can be one of iam.v2.User, iam.v2.ServiceAccount. | [optional] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
@@ -79,31 +79,6 @@ SetCsu sets Csu field to given value.
 
 HasCsu returns a boolean if a field has been set.
 
-### GetHttpEndpoint
-
-`func (o *KsqldbcmV2ClusterSpec) GetHttpEndpoint() string`
-
-GetHttpEndpoint returns the HttpEndpoint field if non-nil, zero value otherwise.
-
-### GetHttpEndpointOk
-
-`func (o *KsqldbcmV2ClusterSpec) GetHttpEndpointOk() (*string, bool)`
-
-GetHttpEndpointOk returns a tuple with the HttpEndpoint field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHttpEndpoint
-
-`func (o *KsqldbcmV2ClusterSpec) SetHttpEndpoint(v string)`
-
-SetHttpEndpoint sets HttpEndpoint field to given value.
-
-### HasHttpEndpoint
-
-`func (o *KsqldbcmV2ClusterSpec) HasHttpEndpoint() bool`
-
-HasHttpEndpoint returns a boolean if a field has been set.
-
 ### GetKafkaCluster
 
 `func (o *KsqldbcmV2ClusterSpec) GetKafkaCluster() ObjectReference`
@@ -128,6 +103,31 @@ SetKafkaCluster sets KafkaCluster field to given value.
 `func (o *KsqldbcmV2ClusterSpec) HasKafkaCluster() bool`
 
 HasKafkaCluster returns a boolean if a field has been set.
+
+### GetCredentialIdentity
+
+`func (o *KsqldbcmV2ClusterSpec) GetCredentialIdentity() ObjectReference`
+
+GetCredentialIdentity returns the CredentialIdentity field if non-nil, zero value otherwise.
+
+### GetCredentialIdentityOk
+
+`func (o *KsqldbcmV2ClusterSpec) GetCredentialIdentityOk() (*ObjectReference, bool)`
+
+GetCredentialIdentityOk returns a tuple with the CredentialIdentity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCredentialIdentity
+
+`func (o *KsqldbcmV2ClusterSpec) SetCredentialIdentity(v ObjectReference)`
+
+SetCredentialIdentity sets CredentialIdentity field to given value.
+
+### HasCredentialIdentity
+
+`func (o *KsqldbcmV2ClusterSpec) HasCredentialIdentity() bool`
+
+HasCredentialIdentity returns a boolean if a field has been set.
 
 ### GetEnvironment
 

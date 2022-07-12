@@ -91,9 +91,14 @@ paths:
                             properties:
                               kafka_cluster:
                                 example:
-                                  id: lkc-c29js0
-                                  related: https://api.confluent.cloud/cmk/v2/clusters/lkc-c29js0
-                                  resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lkc-c29js0
+                                  id: lkc-00000
+                                  related: https://api.confluent.cloud/cmk/v2/clusters/lkc-00000
+                                  resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lkc-00000
+                              credential_identity:
+                                example:
+                                  id: u-a83k9b
+                                  related: https://api.confluent.cloud/iam/v2/users/u-a83k9b
+                                  resource_name: https://api.confluent.cloud/user=u-a83k9b
                               environment:
                                 example:
                                   id: env-00000
@@ -320,6 +325,7 @@ paths:
               - properties:
                   spec:
                     required:
+                    - credential_identity
                     - csu
                     - display_name
                     - environment
@@ -333,7 +339,10 @@ paths:
                     properties:
                       kafka_cluster:
                         example:
-                          id: lkc-c29js0
+                          id: lkc-00000
+                      credential_identity:
+                        example:
+                          id: u-a83k9b
                       environment:
                         example:
                           id: env-00000
@@ -349,6 +358,7 @@ paths:
                 - properties:
                     spec:
                       required:
+                      - credential_identity
                       - csu
                       - display_name
                       - environment
@@ -363,9 +373,14 @@ paths:
                       properties:
                         kafka_cluster:
                           example:
-                            id: lkc-c29js0
-                            related: https://api.confluent.cloud/cmk/v2/clusters/lkc-c29js0
-                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lkc-c29js0
+                            id: lkc-00000
+                            related: https://api.confluent.cloud/cmk/v2/clusters/lkc-00000
+                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lkc-00000
+                        credential_identity:
+                          example:
+                            id: u-a83k9b
+                            related: https://api.confluent.cloud/iam/v2/users/u-a83k9b
+                            resource_name: https://api.confluent.cloud/user=u-a83k9b
                         environment:
                           example:
                             id: env-00000
@@ -581,13 +596,13 @@ paths:
             --url https://api.confluent.cloud/ksqldbcm/v2/clusters \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"ksqlDB_cluster_0","csu":4,"kafka_cluster":{"id":"lkc-c29js0","environment":"string"},"environment":{"id":"env-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"ksqlDB_cluster_0","csu":4,"kafka_cluster":{"id":"lkc-00000","environment":"string"},"credential_identity":{"id":"u-a83k9b","environment":"string"},"environment":{"id":"env-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-c29js0\",\"environment\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"credential_identity\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/ksqldbcm/v2/clusters")
             .post(body)
@@ -601,9 +616,10 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ksqldbcm/v2/clusters\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"ksqlDB_cluster_0\\\",\\\"csu\\\":4,\\\"kafka_cluster\\\":{\\\"id\\\"\
-          :\\\"lkc-c29js0\\\",\\\"environment\\\":\\\"string\\\"},\\\"environment\\\
-          \":{\\\"id\\\":\\\"env-00000\\\",\\\"environment\\\":\\\"string\\\"}}}\"\
-          )\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          :\\\"lkc-00000\\\",\\\"environment\\\":\\\"string\\\"},\\\"credential_identity\\\
+          \":{\\\"id\\\":\\\"u-a83k9b\\\",\\\"environment\\\":\\\"string\\\"},\\\"\
+          environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"environment\\\":\\\"string\\\
+          \"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
           content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
           , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -614,7 +630,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-c29js0\",\"environment\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"credential_identity\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -659,7 +675,8 @@ paths:
             spec: {
               display_name: 'ksqlDB_cluster_0',
               csu: 4,
-              kafka_cluster: {id: 'lkc-c29js0', environment: 'string'},
+              kafka_cluster: {id: 'lkc-00000', environment: 'string'},
+              credential_identity: {id: 'u-a83k9b', environment: 'string'},
               environment: {id: 'env-00000', environment: 'string'}
             }
           }));
@@ -676,7 +693,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-c29js0\",\"environment\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"credential_identity\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -685,7 +702,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-c29js0\",\"environment\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"credential_identity\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: ksqlDB API
   /ksqldbcm/v2/clusters/{id}:
@@ -970,6 +987,7 @@ paths:
                 - properties:
                     spec:
                       required:
+                      - credential_identity
                       - csu
                       - display_name
                       - environment
@@ -987,9 +1005,14 @@ paths:
                       properties:
                         kafka_cluster:
                           example:
-                            id: lkc-c29js0
-                            related: https://api.confluent.cloud/cmk/v2/clusters/lkc-c29js0
-                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lkc-c29js0
+                            id: lkc-00000
+                            related: https://api.confluent.cloud/cmk/v2/clusters/lkc-00000
+                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lkc-00000
+                        credential_identity:
+                          example:
+                            id: u-a83k9b
+                            related: https://api.confluent.cloud/iam/v2/users/u-a83k9b
+                            resource_name: https://api.confluent.cloud/user=u-a83k9b
                         environment:
                           example:
                             id: env-00000
@@ -1474,6 +1497,11 @@ components:
     ksqldbcm.v2.ClusterStatus:
       description: The status of the Cluster
       properties:
+        http_endpoint:
+          description: The dataplane endpoint of the ksqlDB cluster.
+          example: https://pksqlc-00000.us-central1.gcp.glb.confluent.cloud
+          readOnly: true
+          type: string
         phase:
           description: Status of the ksqlDB cluster.
           example: PROVISIONING
@@ -1483,6 +1511,12 @@ components:
           - PROVISIONING
           - PROVISIONED
           - FAILED
+        topic_prefix:
+          description: Topic name prefix used by this ksqlDB cluster. Used to assign
+            ACLs for this ksqlDB cluster to use.
+          example: pksqlc-00000
+          readOnly: true
+          type: string
       readOnly: true
       required:
       - phase
@@ -1543,6 +1577,7 @@ components:
             - properties:
                 spec:
                   required:
+                  - credential_identity
                   - csu
                   - display_name
                   - environment
@@ -1584,16 +1619,16 @@ components:
           - 8
           - 12
           x-immutable: false
-        http_endpoint:
-          description: The dataplane endpoint of the ksqlDB cluster.
-          example: https://pksqlc-00000.us-central1.gcp.glb.confluent.cloud
-          readOnly: true
-          type: string
         kafka_cluster:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
-          description: The kafka_cluster to which this belongs. The kafka_cluster
-            can be one of cmk.v2.Cluster.
+          description: The kafka_cluster to which this belongs.
+          x-immutable: true
+        credential_identity:
+          allOf:
+          - $ref: '#/components/schemas/ObjectReference'
+          description: The credential_identity to which this belongs. The credential_identity
+            can be one of iam.v2.User, iam.v2.ServiceAccount.
           x-immutable: true
         environment:
           allOf:

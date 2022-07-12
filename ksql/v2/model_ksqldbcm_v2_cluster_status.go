@@ -35,8 +35,12 @@ import (
 
 // KsqldbcmV2ClusterStatus The status of the Cluster
 type KsqldbcmV2ClusterStatus struct {
+	// The dataplane endpoint of the ksqlDB cluster.
+	HttpEndpoint *string `json:"http_endpoint,omitempty"`
 	// Status of the ksqlDB cluster.
 	Phase string `json:"phase"`
+	// Topic name prefix used by this ksqlDB cluster. Used to assign ACLs for this ksqlDB cluster to use.
+	TopicPrefix *string `json:"topic_prefix,omitempty"`
 }
 
 // NewKsqldbcmV2ClusterStatus instantiates a new KsqldbcmV2ClusterStatus object
@@ -55,6 +59,38 @@ func NewKsqldbcmV2ClusterStatus(phase string) *KsqldbcmV2ClusterStatus {
 func NewKsqldbcmV2ClusterStatusWithDefaults() *KsqldbcmV2ClusterStatus {
 	this := KsqldbcmV2ClusterStatus{}
 	return &this
+}
+
+// GetHttpEndpoint returns the HttpEndpoint field value if set, zero value otherwise.
+func (o *KsqldbcmV2ClusterStatus) GetHttpEndpoint() string {
+	if o == nil || o.HttpEndpoint == nil {
+		var ret string
+		return ret
+	}
+	return *o.HttpEndpoint
+}
+
+// GetHttpEndpointOk returns a tuple with the HttpEndpoint field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KsqldbcmV2ClusterStatus) GetHttpEndpointOk() (*string, bool) {
+	if o == nil || o.HttpEndpoint == nil {
+		return nil, false
+	}
+	return o.HttpEndpoint, true
+}
+
+// HasHttpEndpoint returns a boolean if a field has been set.
+func (o *KsqldbcmV2ClusterStatus) HasHttpEndpoint() bool {
+	if o != nil && o.HttpEndpoint != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHttpEndpoint gets a reference to the given string and assigns it to the HttpEndpoint field.
+func (o *KsqldbcmV2ClusterStatus) SetHttpEndpoint(v string) {
+	o.HttpEndpoint = &v
 }
 
 // GetPhase returns the Phase field value
@@ -81,9 +117,43 @@ func (o *KsqldbcmV2ClusterStatus) SetPhase(v string) {
 	o.Phase = v
 }
 
+// GetTopicPrefix returns the TopicPrefix field value if set, zero value otherwise.
+func (o *KsqldbcmV2ClusterStatus) GetTopicPrefix() string {
+	if o == nil || o.TopicPrefix == nil {
+		var ret string
+		return ret
+	}
+	return *o.TopicPrefix
+}
+
+// GetTopicPrefixOk returns a tuple with the TopicPrefix field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KsqldbcmV2ClusterStatus) GetTopicPrefixOk() (*string, bool) {
+	if o == nil || o.TopicPrefix == nil {
+		return nil, false
+	}
+	return o.TopicPrefix, true
+}
+
+// HasTopicPrefix returns a boolean if a field has been set.
+func (o *KsqldbcmV2ClusterStatus) HasTopicPrefix() bool {
+	if o != nil && o.TopicPrefix != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTopicPrefix gets a reference to the given string and assigns it to the TopicPrefix field.
+func (o *KsqldbcmV2ClusterStatus) SetTopicPrefix(v string) {
+	o.TopicPrefix = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *KsqldbcmV2ClusterStatus) Redact() {
+    o.recurseRedact(o.HttpEndpoint)
     o.recurseRedact(&o.Phase)
+    o.recurseRedact(o.TopicPrefix)
 }
 
 func (o *KsqldbcmV2ClusterStatus) recurseRedact(v interface{}) {
@@ -118,8 +188,14 @@ func (o KsqldbcmV2ClusterStatus) zeroField(v interface{}) {
 
 func (o KsqldbcmV2ClusterStatus) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.HttpEndpoint != nil {
+		toSerialize["http_endpoint"] = o.HttpEndpoint
+	}
 	if true {
 		toSerialize["phase"] = o.Phase
+	}
+	if o.TopicPrefix != nil {
+		toSerialize["topic_prefix"] = o.TopicPrefix
 	}
 	return json.Marshal(toSerialize)
 }
