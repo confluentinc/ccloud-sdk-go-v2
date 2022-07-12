@@ -1,4 +1,4 @@
-module github.com/confluentinc/ccloud-sdk-go-v2-internal
+module github.com/confluentinc/ccloud-sdk-go-v2-internal/apikeys
 
 go 1.13
 
