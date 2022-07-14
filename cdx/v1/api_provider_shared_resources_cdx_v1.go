@@ -15,7 +15,7 @@
 /*
 Stream Share APIs
 
-# Introduction
+# Introduction 
 
 API version: 0.1.0-alpha0
 Contact: cdx@confluent.io
@@ -31,8 +31,8 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
-	"os"
 	"strings"
+	"os"
 )
 
 // Linger please
@@ -43,14 +43,14 @@ var (
 type ProviderSharedResourcesCdxV1Api interface {
 
 	/*
-		DeleteImageCdxV1ProviderSharedResource Delete_Image a Provider Shared Resource
+	DeleteImageCdxV1ProviderSharedResource Delete_Image a Provider Shared Resource
 
-		Deletes the image file for the shared resource
+	Deletes the image file for the shared resource
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the provider shared resource.
-		 @param fileName The File Name
-		 @return ApiDeleteImageCdxV1ProviderSharedResourceRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the provider shared resource.
+	 @param fileName The File Name
+	 @return ApiDeleteImageCdxV1ProviderSharedResourceRequest
 	*/
 	DeleteImageCdxV1ProviderSharedResource(ctx _context.Context, id string, fileName string) ApiDeleteImageCdxV1ProviderSharedResourceRequest
 
@@ -58,13 +58,13 @@ type ProviderSharedResourcesCdxV1Api interface {
 	DeleteImageCdxV1ProviderSharedResourceExecute(r ApiDeleteImageCdxV1ProviderSharedResourceRequest) (*_nethttp.Response, error)
 
 	/*
-		GetCdxV1ProviderSharedResource Read a Provider Shared Resource
+	GetCdxV1ProviderSharedResource Read a Provider Shared Resource
 
-		Make a request to read a provider shared resource.
+	Make a request to read a provider shared resource.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the provider shared resource.
-		 @return ApiGetCdxV1ProviderSharedResourceRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the provider shared resource.
+	 @return ApiGetCdxV1ProviderSharedResourceRequest
 	*/
 	GetCdxV1ProviderSharedResource(ctx _context.Context, id string) ApiGetCdxV1ProviderSharedResourceRequest
 
@@ -73,12 +73,12 @@ type ProviderSharedResourcesCdxV1Api interface {
 	GetCdxV1ProviderSharedResourceExecute(r ApiGetCdxV1ProviderSharedResourceRequest) (CdxV1ProviderSharedResource, *_nethttp.Response, error)
 
 	/*
-		ListCdxV1ProviderSharedResources List of Provider Shared Resources
+	ListCdxV1ProviderSharedResources List of Provider Shared Resources
 
-		Retrieve a sorted, filtered, paginated list of all provider shared resources.
+	Retrieve a sorted, filtered, paginated list of all provider shared resources.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListCdxV1ProviderSharedResourcesRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiListCdxV1ProviderSharedResourcesRequest
 	*/
 	ListCdxV1ProviderSharedResources(ctx _context.Context) ApiListCdxV1ProviderSharedResourcesRequest
 
@@ -87,15 +87,15 @@ type ProviderSharedResourcesCdxV1Api interface {
 	ListCdxV1ProviderSharedResourcesExecute(r ApiListCdxV1ProviderSharedResourcesRequest) (CdxV1ProviderSharedResourceList, *_nethttp.Response, error)
 
 	/*
-		UpdateCdxV1ProviderSharedResource Update a Provider Shared Resource
+	UpdateCdxV1ProviderSharedResource Update a Provider Shared Resource
 
-		Make a request to update a provider shared resource.
+	Make a request to update a provider shared resource.
 
 
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the provider shared resource.
-		 @return ApiUpdateCdxV1ProviderSharedResourceRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the provider shared resource.
+	 @return ApiUpdateCdxV1ProviderSharedResourceRequest
 	*/
 	UpdateCdxV1ProviderSharedResource(ctx _context.Context, id string) ApiUpdateCdxV1ProviderSharedResourceRequest
 
@@ -104,14 +104,14 @@ type ProviderSharedResourcesCdxV1Api interface {
 	UpdateCdxV1ProviderSharedResourceExecute(r ApiUpdateCdxV1ProviderSharedResourceRequest) (CdxV1ProviderSharedResource, *_nethttp.Response, error)
 
 	/*
-		UploadImageCdxV1ProviderSharedResource Upload_Image a Provider Shared Resource
+	UploadImageCdxV1ProviderSharedResource Upload_Image a Provider Shared Resource
 
-		Upload the image file for the shared resource
+	Upload the image file for the shared resource
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the provider shared resource.
-		 @param fileName The File Name
-		 @return ApiUploadImageCdxV1ProviderSharedResourceRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the provider shared resource.
+	 @param fileName The File Name
+	 @return ApiUploadImageCdxV1ProviderSharedResourceRequest
 	*/
 	UploadImageCdxV1ProviderSharedResource(ctx _context.Context, id string, fileName string) ApiUploadImageCdxV1ProviderSharedResourceRequest
 
@@ -119,14 +119,14 @@ type ProviderSharedResourcesCdxV1Api interface {
 	UploadImageCdxV1ProviderSharedResourceExecute(r ApiUploadImageCdxV1ProviderSharedResourceRequest) (*_nethttp.Response, error)
 
 	/*
-		ViewImageCdxV1ProviderSharedResource View_Image a Provider Shared Resource
+	ViewImageCdxV1ProviderSharedResource View_Image a Provider Shared Resource
 
-		Returns the image file for the shared resource
+	Returns the image file for the shared resource
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the provider shared resource.
-		 @param fileName The File Name
-		 @return ApiViewImageCdxV1ProviderSharedResourceRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the provider shared resource.
+	 @param fileName The File Name
+	 @return ApiViewImageCdxV1ProviderSharedResourceRequest
 	*/
 	ViewImageCdxV1ProviderSharedResource(ctx _context.Context, id string, fileName string) ApiViewImageCdxV1ProviderSharedResourceRequest
 
@@ -139,11 +139,12 @@ type ProviderSharedResourcesCdxV1Api interface {
 type ProviderSharedResourcesCdxV1ApiService service
 
 type ApiDeleteImageCdxV1ProviderSharedResourceRequest struct {
-	ctx        _context.Context
+	ctx _context.Context
 	ApiService ProviderSharedResourcesCdxV1Api
-	id         string
-	fileName   string
+	id string
+	fileName string
 }
+
 
 func (r ApiDeleteImageCdxV1ProviderSharedResourceRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteImageCdxV1ProviderSharedResourceExecute(r)
@@ -162,9 +163,9 @@ Deletes the image file for the shared resource
 func (a *ProviderSharedResourcesCdxV1ApiService) DeleteImageCdxV1ProviderSharedResource(ctx _context.Context, id string, fileName string) ApiDeleteImageCdxV1ProviderSharedResourceRequest {
 	return ApiDeleteImageCdxV1ProviderSharedResourceRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
-		fileName:   fileName,
+		ctx: ctx,
+		id: id,
+		fileName: fileName,
 	}
 }
 
@@ -286,10 +287,11 @@ func (a *ProviderSharedResourcesCdxV1ApiService) DeleteImageCdxV1ProviderSharedR
 }
 
 type ApiGetCdxV1ProviderSharedResourceRequest struct {
-	ctx        _context.Context
+	ctx _context.Context
 	ApiService ProviderSharedResourcesCdxV1Api
-	id         string
+	id string
 }
+
 
 func (r ApiGetCdxV1ProviderSharedResourceRequest) Execute() (CdxV1ProviderSharedResource, *_nethttp.Response, error) {
 	return r.ApiService.GetCdxV1ProviderSharedResourceExecute(r)
@@ -307,8 +309,8 @@ Make a request to read a provider shared resource.
 func (a *ProviderSharedResourcesCdxV1ApiService) GetCdxV1ProviderSharedResource(ctx _context.Context, id string) ApiGetCdxV1ProviderSharedResourceRequest {
 	return ApiGetCdxV1ProviderSharedResourceRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
@@ -440,11 +442,11 @@ func (a *ProviderSharedResourcesCdxV1ApiService) GetCdxV1ProviderSharedResourceE
 }
 
 type ApiListCdxV1ProviderSharedResourcesRequest struct {
-	ctx        _context.Context
+	ctx _context.Context
 	ApiService ProviderSharedResourcesCdxV1Api
-	crn        *string
-	pageSize   *int32
-	pageToken  *string
+	crn *string
+	pageSize *int32
+	pageToken *string
 }
 
 // Filter the results by exact match for crn.
@@ -452,13 +454,11 @@ func (r ApiListCdxV1ProviderSharedResourcesRequest) Crn(crn string) ApiListCdxV1
 	r.crn = &crn
 	return r
 }
-
 // A pagination size for collection requests.
 func (r ApiListCdxV1ProviderSharedResourcesRequest) PageSize(pageSize int32) ApiListCdxV1ProviderSharedResourcesRequest {
 	r.pageSize = &pageSize
 	return r
 }
-
 // An opaque pagination token for collection requests.
 func (r ApiListCdxV1ProviderSharedResourcesRequest) PageToken(pageToken string) ApiListCdxV1ProviderSharedResourcesRequest {
 	r.pageToken = &pageToken
@@ -480,7 +480,7 @@ Retrieve a sorted, filtered, paginated list of all provider shared resources.
 func (a *ProviderSharedResourcesCdxV1ApiService) ListCdxV1ProviderSharedResources(ctx _context.Context) ApiListCdxV1ProviderSharedResourcesRequest {
 	return ApiListCdxV1ProviderSharedResourcesRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
@@ -610,9 +610,9 @@ func (a *ProviderSharedResourcesCdxV1ApiService) ListCdxV1ProviderSharedResource
 }
 
 type ApiUpdateCdxV1ProviderSharedResourceRequest struct {
-	ctx                               _context.Context
-	ApiService                        ProviderSharedResourcesCdxV1Api
-	id                                string
+	ctx _context.Context
+	ApiService ProviderSharedResourcesCdxV1Api
+	id string
 	cdxV1ProviderSharedResourceUpdate *CdxV1ProviderSharedResourceUpdate
 }
 
@@ -639,8 +639,8 @@ Make a request to update a provider shared resource.
 func (a *ProviderSharedResourcesCdxV1ApiService) UpdateCdxV1ProviderSharedResource(ctx _context.Context, id string) ApiUpdateCdxV1ProviderSharedResourceRequest {
 	return ApiUpdateCdxV1ProviderSharedResourceRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
@@ -784,11 +784,11 @@ func (a *ProviderSharedResourcesCdxV1ApiService) UpdateCdxV1ProviderSharedResour
 }
 
 type ApiUploadImageCdxV1ProviderSharedResourceRequest struct {
-	ctx        _context.Context
+	ctx _context.Context
 	ApiService ProviderSharedResourcesCdxV1Api
-	id         string
-	fileName   string
-	file       **os.File
+	id string
+	fileName string
+	file **os.File
 }
 
 func (r ApiUploadImageCdxV1ProviderSharedResourceRequest) File(file *os.File) ApiUploadImageCdxV1ProviderSharedResourceRequest {
@@ -813,9 +813,9 @@ Upload the image file for the shared resource
 func (a *ProviderSharedResourcesCdxV1ApiService) UploadImageCdxV1ProviderSharedResource(ctx _context.Context, id string, fileName string) ApiUploadImageCdxV1ProviderSharedResourceRequest {
 	return ApiUploadImageCdxV1ProviderSharedResourceRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
-		fileName:   fileName,
+		ctx: ctx,
+		id: id,
+		fileName: fileName,
 	}
 }
 
@@ -948,11 +948,12 @@ func (a *ProviderSharedResourcesCdxV1ApiService) UploadImageCdxV1ProviderSharedR
 }
 
 type ApiViewImageCdxV1ProviderSharedResourceRequest struct {
-	ctx        _context.Context
+	ctx _context.Context
 	ApiService ProviderSharedResourcesCdxV1Api
-	id         string
-	fileName   string
+	id string
+	fileName string
 }
+
 
 func (r ApiViewImageCdxV1ProviderSharedResourceRequest) Execute() (*os.File, *_nethttp.Response, error) {
 	return r.ApiService.ViewImageCdxV1ProviderSharedResourceExecute(r)
@@ -971,9 +972,9 @@ Returns the image file for the shared resource
 func (a *ProviderSharedResourcesCdxV1ApiService) ViewImageCdxV1ProviderSharedResource(ctx _context.Context, id string, fileName string) ApiViewImageCdxV1ProviderSharedResourceRequest {
 	return ApiViewImageCdxV1ProviderSharedResourceRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
-		fileName:   fileName,
+		ctx: ctx,
+		id: id,
+		fileName: fileName,
 	}
 }
 

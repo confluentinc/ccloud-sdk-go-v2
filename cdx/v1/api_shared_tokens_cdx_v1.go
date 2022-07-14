@@ -15,7 +15,7 @@
 /*
 Stream Share APIs
 
-# Introduction
+# Introduction 
 
 API version: 0.1.0-alpha0
 Contact: cdx@confluent.io
@@ -41,26 +41,26 @@ var (
 type SharedTokensCdxV1Api interface {
 
 	/*
-		RedeemCdxV1SharedToken Redeem a Shared Token
+	RedeemCdxV1SharedToken Redeem a Shared Token
 
-		Validate and decrypt the invite token for the consumer to connect and access
+	Validate and decrypt the invite token for the consumer to connect and access
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiRedeemCdxV1SharedTokenRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiRedeemCdxV1SharedTokenRequest
 	*/
 	RedeemCdxV1SharedToken(ctx _context.Context) ApiRedeemCdxV1SharedTokenRequest
 
 	// RedeemCdxV1SharedTokenExecute executes the request
-	//  @return CdxV1RedeemShare
-	RedeemCdxV1SharedTokenExecute(r ApiRedeemCdxV1SharedTokenRequest) (CdxV1RedeemShare, *_nethttp.Response, error)
+	//  @return CdxV1RedeemTokenResponse
+	RedeemCdxV1SharedTokenExecute(r ApiRedeemCdxV1SharedTokenRequest) (CdxV1RedeemTokenResponse, *_nethttp.Response, error)
 
 	/*
-		ResourcesCdxV1SharedToken Resources a Shared Token
+	ResourcesCdxV1SharedToken Resources a Shared Token
 
-		Validate and decrypt the invite token to view the consumer resources
+	Validate and decrypt the invite token to view the consumer resources
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiResourcesCdxV1SharedTokenRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiResourcesCdxV1SharedTokenRequest
 	*/
 	ResourcesCdxV1SharedToken(ctx _context.Context) ApiResourcesCdxV1SharedTokenRequest
 
@@ -73,17 +73,17 @@ type SharedTokensCdxV1Api interface {
 type SharedTokensCdxV1ApiService service
 
 type ApiRedeemCdxV1SharedTokenRequest struct {
-	ctx              _context.Context
-	ApiService       SharedTokensCdxV1Api
-	cdxV1SharedToken *CdxV1SharedToken
+	ctx _context.Context
+	ApiService SharedTokensCdxV1Api
+	cdxV1RedeemTokenRequest *CdxV1RedeemTokenRequest
 }
 
-func (r ApiRedeemCdxV1SharedTokenRequest) CdxV1SharedToken(cdxV1SharedToken CdxV1SharedToken) ApiRedeemCdxV1SharedTokenRequest {
-	r.cdxV1SharedToken = &cdxV1SharedToken
+func (r ApiRedeemCdxV1SharedTokenRequest) CdxV1RedeemTokenRequest(cdxV1RedeemTokenRequest CdxV1RedeemTokenRequest) ApiRedeemCdxV1SharedTokenRequest {
+	r.cdxV1RedeemTokenRequest = &cdxV1RedeemTokenRequest
 	return r
 }
 
-func (r ApiRedeemCdxV1SharedTokenRequest) Execute() (CdxV1RedeemShare, *_nethttp.Response, error) {
+func (r ApiRedeemCdxV1SharedTokenRequest) Execute() (CdxV1RedeemTokenResponse, *_nethttp.Response, error) {
 	return r.ApiService.RedeemCdxV1SharedTokenExecute(r)
 }
 
@@ -98,20 +98,20 @@ Validate and decrypt the invite token for the consumer to connect and access
 func (a *SharedTokensCdxV1ApiService) RedeemCdxV1SharedToken(ctx _context.Context) ApiRedeemCdxV1SharedTokenRequest {
 	return ApiRedeemCdxV1SharedTokenRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CdxV1RedeemShare
-func (a *SharedTokensCdxV1ApiService) RedeemCdxV1SharedTokenExecute(r ApiRedeemCdxV1SharedTokenRequest) (CdxV1RedeemShare, *_nethttp.Response, error) {
+//  @return CdxV1RedeemTokenResponse
+func (a *SharedTokensCdxV1ApiService) RedeemCdxV1SharedTokenExecute(r ApiRedeemCdxV1SharedTokenRequest) (CdxV1RedeemTokenResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  CdxV1RedeemShare
+		localVarReturnValue  CdxV1RedeemTokenResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SharedTokensCdxV1ApiService.RedeemCdxV1SharedToken")
@@ -143,7 +143,7 @@ func (a *SharedTokensCdxV1ApiService) RedeemCdxV1SharedTokenExecute(r ApiRedeemC
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.cdxV1SharedToken
+	localVarPostBody = r.cdxV1RedeemTokenRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -241,8 +241,8 @@ func (a *SharedTokensCdxV1ApiService) RedeemCdxV1SharedTokenExecute(r ApiRedeemC
 }
 
 type ApiResourcesCdxV1SharedTokenRequest struct {
-	ctx              _context.Context
-	ApiService       SharedTokensCdxV1Api
+	ctx _context.Context
+	ApiService SharedTokensCdxV1Api
 	cdxV1SharedToken *CdxV1SharedToken
 }
 
@@ -266,7 +266,7 @@ Validate and decrypt the invite token to view the consumer resources
 func (a *SharedTokensCdxV1ApiService) ResourcesCdxV1SharedToken(ctx _context.Context) ApiResourcesCdxV1SharedTokenRequest {
 	return ApiResourcesCdxV1SharedTokenRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 

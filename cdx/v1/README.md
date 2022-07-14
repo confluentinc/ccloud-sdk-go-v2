@@ -83,6 +83,7 @@ Class | Method | HTTP request | Description
 *ConsumerSharedResourcesCdxV1Api* | [**GetCdxV1ConsumerSharedResource**](docs/ConsumerSharedResourcesCdxV1Api.md#getcdxv1consumersharedresource) | **Get** /cdx/v1/consumer-shared-resources/{id} | Read a Consumer Shared Resource
 *ConsumerSharedResourcesCdxV1Api* | [**ImageCdxV1ConsumerSharedResource**](docs/ConsumerSharedResourcesCdxV1Api.md#imagecdxv1consumersharedresource) | **Get** /cdx/v1/consumer-shared-resources/{id}/images/{file_name} | Image a Consumer Shared Resource
 *ConsumerSharedResourcesCdxV1Api* | [**ListCdxV1ConsumerSharedResources**](docs/ConsumerSharedResourcesCdxV1Api.md#listcdxv1consumersharedresources) | **Get** /cdx/v1/consumer-shared-resources | List of Consumer Shared Resources
+*ConsumerSharedResourcesCdxV1Api* | [**NetworkCdxV1ConsumerSharedResource**](docs/ConsumerSharedResourcesCdxV1Api.md#networkcdxv1consumersharedresource) | **Get** /cdx/v1/consumer-shared-resources/{id}:network | Network a Consumer Shared Resource
 *ConsumerSharesCdxV1Api* | [**DeleteCdxV1ConsumerShare**](docs/ConsumerSharesCdxV1Api.md#deletecdxv1consumershare) | **Delete** /cdx/v1/consumer-shares/{id} | Delete a Consumer Share
 *ConsumerSharesCdxV1Api* | [**GetCdxV1ConsumerShare**](docs/ConsumerSharesCdxV1Api.md#getcdxv1consumershare) | **Get** /cdx/v1/consumer-shares/{id} | Read a Consumer Share
 *ConsumerSharesCdxV1Api* | [**ListCdxV1ConsumerShares**](docs/ConsumerSharesCdxV1Api.md#listcdxv1consumershares) | **Get** /cdx/v1/consumer-shares | List of Consumer Shares
@@ -103,6 +104,9 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [CdxV1AwsNetwork](docs/CdxV1AwsNetwork.md)
+ - [CdxV1AzureNetwork](docs/CdxV1AzureNetwork.md)
+ - [CdxV1ConnectionTypes](docs/CdxV1ConnectionTypes.md)
  - [CdxV1ConsumerShare](docs/CdxV1ConsumerShare.md)
  - [CdxV1ConsumerShareList](docs/CdxV1ConsumerShareList.md)
  - [CdxV1ConsumerSharedResource](docs/CdxV1ConsumerSharedResource.md)
@@ -110,13 +114,16 @@ Class | Method | HTTP request | Description
  - [CdxV1CreateShareRequest](docs/CdxV1CreateShareRequest.md)
  - [CdxV1CreateShareRequestConsumerRestrictionOneOf](docs/CdxV1CreateShareRequestConsumerRestrictionOneOf.md)
  - [CdxV1EmailConsumerRestriction](docs/CdxV1EmailConsumerRestriction.md)
+ - [CdxV1Network](docs/CdxV1Network.md)
+ - [CdxV1NetworkCloudOneOf](docs/CdxV1NetworkCloudOneOf.md)
  - [CdxV1ProviderShare](docs/CdxV1ProviderShare.md)
  - [CdxV1ProviderShareList](docs/CdxV1ProviderShareList.md)
  - [CdxV1ProviderSharedResource](docs/CdxV1ProviderSharedResource.md)
  - [CdxV1ProviderSharedResourceList](docs/CdxV1ProviderSharedResourceList.md)
  - [CdxV1ProviderSharedResourceUpdate](docs/CdxV1ProviderSharedResourceUpdate.md)
- - [CdxV1RedeemShare](docs/CdxV1RedeemShare.md)
- - [CdxV1RedeemShareResourcesOneOf](docs/CdxV1RedeemShareResourcesOneOf.md)
+ - [CdxV1RedeemTokenRequest](docs/CdxV1RedeemTokenRequest.md)
+ - [CdxV1RedeemTokenResponse](docs/CdxV1RedeemTokenResponse.md)
+ - [CdxV1RedeemTokenResponseResourcesOneOf](docs/CdxV1RedeemTokenResponseResourcesOneOf.md)
  - [CdxV1SharedGroup](docs/CdxV1SharedGroup.md)
  - [CdxV1SharedToken](docs/CdxV1SharedToken.md)
  - [CdxV1SharedTopic](docs/CdxV1SharedTopic.md)

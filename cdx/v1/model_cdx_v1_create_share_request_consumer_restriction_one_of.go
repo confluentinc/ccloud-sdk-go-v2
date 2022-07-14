@@ -15,7 +15,7 @@
 /*
 Stream Share APIs
 
-# Introduction
+# Introduction 
 
 API version: 0.1.0-alpha0
 Contact: cdx@confluent.io
@@ -37,8 +37,9 @@ type CdxV1CreateShareRequestConsumerRestrictionOneOf struct {
 
 // CdxV1EmailConsumerRestrictionAsCdxV1CreateShareRequestConsumerRestrictionOneOf is a convenience function that returns CdxV1EmailConsumerRestriction wrapped in CdxV1CreateShareRequestConsumerRestrictionOneOf
 func CdxV1EmailConsumerRestrictionAsCdxV1CreateShareRequestConsumerRestrictionOneOf(v *CdxV1EmailConsumerRestriction) CdxV1CreateShareRequestConsumerRestrictionOneOf {
-	return CdxV1CreateShareRequestConsumerRestrictionOneOf{CdxV1EmailConsumerRestriction: v}
+	return CdxV1CreateShareRequestConsumerRestrictionOneOf{ CdxV1EmailConsumerRestriction: v}
 }
+
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *CdxV1CreateShareRequestConsumerRestrictionOneOf) UnmarshalJSON(data []byte) error {
@@ -87,7 +88,7 @@ func (src CdxV1CreateShareRequestConsumerRestrictionOneOf) MarshalJSON() ([]byte
 }
 
 // Get the actual instance
-func (obj *CdxV1CreateShareRequestConsumerRestrictionOneOf) GetActualInstance() interface{} {
+func (obj *CdxV1CreateShareRequestConsumerRestrictionOneOf) GetActualInstance() (interface{}) {
 	if obj.CdxV1EmailConsumerRestriction != nil {
 		return obj.CdxV1EmailConsumerRestriction
 	}
@@ -131,3 +132,5 @@ func (v *NullableCdxV1CreateShareRequestConsumerRestrictionOneOf) UnmarshalJSON(
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

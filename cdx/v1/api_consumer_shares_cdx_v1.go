@@ -15,7 +15,7 @@
 /*
 Stream Share APIs
 
-# Introduction
+# Introduction 
 
 API version: 0.1.0-alpha0
 Contact: cdx@confluent.io
@@ -42,13 +42,13 @@ var (
 type ConsumerSharesCdxV1Api interface {
 
 	/*
-		DeleteCdxV1ConsumerShare Delete a Consumer Share
+	DeleteCdxV1ConsumerShare Delete a Consumer Share
 
-		Make a request to delete a consumer share.
+	Make a request to delete a consumer share.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the consumer share.
-		 @return ApiDeleteCdxV1ConsumerShareRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the consumer share.
+	 @return ApiDeleteCdxV1ConsumerShareRequest
 	*/
 	DeleteCdxV1ConsumerShare(ctx _context.Context, id string) ApiDeleteCdxV1ConsumerShareRequest
 
@@ -56,13 +56,13 @@ type ConsumerSharesCdxV1Api interface {
 	DeleteCdxV1ConsumerShareExecute(r ApiDeleteCdxV1ConsumerShareRequest) (*_nethttp.Response, error)
 
 	/*
-		GetCdxV1ConsumerShare Read a Consumer Share
+	GetCdxV1ConsumerShare Read a Consumer Share
 
-		Make a request to read a consumer share.
+	Make a request to read a consumer share.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the consumer share.
-		 @return ApiGetCdxV1ConsumerShareRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the consumer share.
+	 @return ApiGetCdxV1ConsumerShareRequest
 	*/
 	GetCdxV1ConsumerShare(ctx _context.Context, id string) ApiGetCdxV1ConsumerShareRequest
 
@@ -71,12 +71,12 @@ type ConsumerSharesCdxV1Api interface {
 	GetCdxV1ConsumerShareExecute(r ApiGetCdxV1ConsumerShareRequest) (CdxV1ConsumerShare, *_nethttp.Response, error)
 
 	/*
-		ListCdxV1ConsumerShares List of Consumer Shares
+	ListCdxV1ConsumerShares List of Consumer Shares
 
-		Retrieve a sorted, filtered, paginated list of all consumer shares.
+	Retrieve a sorted, filtered, paginated list of all consumer shares.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListCdxV1ConsumerSharesRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiListCdxV1ConsumerSharesRequest
 	*/
 	ListCdxV1ConsumerShares(ctx _context.Context) ApiListCdxV1ConsumerSharesRequest
 
@@ -89,10 +89,11 @@ type ConsumerSharesCdxV1Api interface {
 type ConsumerSharesCdxV1ApiService service
 
 type ApiDeleteCdxV1ConsumerShareRequest struct {
-	ctx        _context.Context
+	ctx _context.Context
 	ApiService ConsumerSharesCdxV1Api
-	id         string
+	id string
 }
+
 
 func (r ApiDeleteCdxV1ConsumerShareRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteCdxV1ConsumerShareExecute(r)
@@ -110,8 +111,8 @@ Make a request to delete a consumer share.
 func (a *ConsumerSharesCdxV1ApiService) DeleteCdxV1ConsumerShare(ctx _context.Context, id string) ApiDeleteCdxV1ConsumerShareRequest {
 	return ApiDeleteCdxV1ConsumerShareRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
@@ -232,10 +233,11 @@ func (a *ConsumerSharesCdxV1ApiService) DeleteCdxV1ConsumerShareExecute(r ApiDel
 }
 
 type ApiGetCdxV1ConsumerShareRequest struct {
-	ctx        _context.Context
+	ctx _context.Context
 	ApiService ConsumerSharesCdxV1Api
-	id         string
+	id string
 }
+
 
 func (r ApiGetCdxV1ConsumerShareRequest) Execute() (CdxV1ConsumerShare, *_nethttp.Response, error) {
 	return r.ApiService.GetCdxV1ConsumerShareExecute(r)
@@ -253,8 +255,8 @@ Make a request to read a consumer share.
 func (a *ConsumerSharesCdxV1ApiService) GetCdxV1ConsumerShare(ctx _context.Context, id string) ApiGetCdxV1ConsumerShareRequest {
 	return ApiGetCdxV1ConsumerShareRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
@@ -386,11 +388,11 @@ func (a *ConsumerSharesCdxV1ApiService) GetCdxV1ConsumerShareExecute(r ApiGetCdx
 }
 
 type ApiListCdxV1ConsumerSharesRequest struct {
-	ctx            _context.Context
-	ApiService     ConsumerSharesCdxV1Api
+	ctx _context.Context
+	ApiService ConsumerSharesCdxV1Api
 	sharedResource *string
-	pageSize       *int32
-	pageToken      *string
+	pageSize *int32
+	pageToken *string
 }
 
 // Filter the results by exact match for shared_resource.
@@ -398,13 +400,11 @@ func (r ApiListCdxV1ConsumerSharesRequest) SharedResource(sharedResource string)
 	r.sharedResource = &sharedResource
 	return r
 }
-
 // A pagination size for collection requests.
 func (r ApiListCdxV1ConsumerSharesRequest) PageSize(pageSize int32) ApiListCdxV1ConsumerSharesRequest {
 	r.pageSize = &pageSize
 	return r
 }
-
 // An opaque pagination token for collection requests.
 func (r ApiListCdxV1ConsumerSharesRequest) PageToken(pageToken string) ApiListCdxV1ConsumerSharesRequest {
 	r.pageToken = &pageToken
@@ -426,7 +426,7 @@ Retrieve a sorted, filtered, paginated list of all consumer shares.
 func (a *ConsumerSharesCdxV1ApiService) ListCdxV1ConsumerShares(ctx _context.Context) ApiListCdxV1ConsumerSharesRequest {
 	return ApiListCdxV1ConsumerSharesRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 

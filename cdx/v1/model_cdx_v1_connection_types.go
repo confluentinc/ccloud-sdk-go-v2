@@ -33,60 +33,33 @@ import (
 	"reflect"
 )
 
-// Failure Provides information about problems encountered while performing an operation.
-type Failure struct {
-	// List of errors which caused this operation to fail
-	Errors []Error `json:"errors"`
+// CdxV1ConnectionTypes The network connection types of the provider shared cluster. If the shared cluster is on public internet, then the list will be empty 
+type CdxV1ConnectionTypes struct {
+	Items []string
 }
 
-// NewFailure instantiates a new Failure object
+// NewCdxV1ConnectionTypes instantiates a new CdxV1ConnectionTypes object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFailure(errors []Error) *Failure {
-	this := Failure{}
-	this.Errors = errors
+func NewCdxV1ConnectionTypes() *CdxV1ConnectionTypes {
+	this := CdxV1ConnectionTypes{}
 	return &this
 }
 
-// NewFailureWithDefaults instantiates a new Failure object
+// NewCdxV1ConnectionTypesWithDefaults instantiates a new CdxV1ConnectionTypes object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFailureWithDefaults() *Failure {
-	this := Failure{}
+func NewCdxV1ConnectionTypesWithDefaults() *CdxV1ConnectionTypes {
+	this := CdxV1ConnectionTypes{}
 	return &this
-}
-
-// GetErrors returns the Errors field value
-func (o *Failure) GetErrors() []Error {
-	if o == nil {
-		var ret []Error
-		return ret
-	}
-
-	return o.Errors
-}
-
-// GetErrorsOk returns a tuple with the Errors field value
-// and a boolean to check if the value has been set.
-func (o *Failure) GetErrorsOk() (*[]Error, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.Errors, true
-}
-
-// SetErrors sets field value
-func (o *Failure) SetErrors(v []Error) {
-	o.Errors = v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *Failure) Redact() {
-    o.recurseRedact(&o.Errors)
+func (o *CdxV1ConnectionTypes) Redact() {
 }
 
-func (o *Failure) recurseRedact(v interface{}) {
+func (o *CdxV1ConnectionTypes) recurseRedact(v interface{}) {
     type redactor interface {
         Redact()
     }
@@ -111,51 +84,55 @@ func (o *Failure) recurseRedact(v interface{}) {
     }
 }
 
-func (o Failure) zeroField(v interface{}) {
+func (o CdxV1ConnectionTypes) zeroField(v interface{}) {
     p := reflect.ValueOf(v).Elem()
     p.Set(reflect.Zero(p.Type()))
 }
 
-func (o Failure) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["errors"] = o.Errors
+func (o CdxV1ConnectionTypes) MarshalJSON() ([]byte, error) {
+	toSerialize := make([]interface{}, len(o.Items))
+	for i, item := range o.Items {
+		toSerialize[i] = item
 	}
 	return json.Marshal(toSerialize)
 }
 
-type NullableFailure struct {
-	value *Failure
+func (o *CdxV1ConnectionTypes) UnmarshalJSON(bytes []byte) (err error) {
+	return json.Unmarshal(bytes, &o.Items)
+}
+
+type NullableCdxV1ConnectionTypes struct {
+	value *CdxV1ConnectionTypes
 	isSet bool
 }
 
-func (v NullableFailure) Get() *Failure {
+func (v NullableCdxV1ConnectionTypes) Get() *CdxV1ConnectionTypes {
 	return v.value
 }
 
-func (v *NullableFailure) Set(val *Failure) {
+func (v *NullableCdxV1ConnectionTypes) Set(val *CdxV1ConnectionTypes) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFailure) IsSet() bool {
+func (v NullableCdxV1ConnectionTypes) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFailure) Unset() {
+func (v *NullableCdxV1ConnectionTypes) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFailure(val *Failure) *NullableFailure {
-	return &NullableFailure{value: val, isSet: true}
+func NewNullableCdxV1ConnectionTypes(val *CdxV1ConnectionTypes) *NullableCdxV1ConnectionTypes {
+	return &NullableCdxV1ConnectionTypes{value: val, isSet: true}
 }
 
-func (v NullableFailure) MarshalJSON() ([]byte, error) {
+func (v NullableCdxV1ConnectionTypes) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFailure) UnmarshalJSON(src []byte) error {
+func (v *NullableCdxV1ConnectionTypes) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

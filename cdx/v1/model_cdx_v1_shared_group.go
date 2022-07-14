@@ -15,7 +15,7 @@
 /*
 Stream Share APIs
 
-# Introduction
+# Introduction 
 
 API version: 0.1.0-alpha0
 Contact: cdx@confluent.io
@@ -35,7 +35,7 @@ import (
 
 // CdxV1SharedGroup The shared consumer group
 type CdxV1SharedGroup struct {
-	// The resouce kind
+	// The resource kind
 	Kind string `json:"kind"`
 	// The consumer group prefix
 	GroupPrefix string `json:"group_prefix"`
@@ -73,7 +73,7 @@ func (o *CdxV1SharedGroup) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *CdxV1SharedGroup) GetKindOk() (*string, bool) {
-	if o == nil {
+	if o == nil  {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -97,7 +97,7 @@ func (o *CdxV1SharedGroup) GetGroupPrefix() string {
 // GetGroupPrefixOk returns a tuple with the GroupPrefix field value
 // and a boolean to check if the value has been set.
 func (o *CdxV1SharedGroup) GetGroupPrefixOk() (*string, bool) {
-	if o == nil {
+	if o == nil  {
 		return nil, false
 	}
 	return &o.GroupPrefix, true
@@ -110,38 +110,38 @@ func (o *CdxV1SharedGroup) SetGroupPrefix(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *CdxV1SharedGroup) Redact() {
-	o.recurseRedact(&o.Kind)
-	o.recurseRedact(&o.GroupPrefix)
+    o.recurseRedact(&o.Kind)
+    o.recurseRedact(&o.GroupPrefix)
 }
 
 func (o *CdxV1SharedGroup) recurseRedact(v interface{}) {
-	type redactor interface {
-		Redact()
-	}
-	if r, ok := v.(redactor); ok {
-		r.Redact()
-	} else {
-		val := reflect.ValueOf(v)
-		if val.Kind() == reflect.Ptr {
-			val = val.Elem()
-		}
-		switch val.Kind() {
-		case reflect.Slice, reflect.Array:
-			for i := 0; i < val.Len(); i++ {
-				// support data types declared without pointers
-				o.recurseRedact(val.Index(i).Interface())
-				// ... and data types that were declared without but need pointers (for Redact)
-				if val.Index(i).CanAddr() {
-					o.recurseRedact(val.Index(i).Addr().Interface())
-				}
-			}
-		}
-	}
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
 }
 
 func (o CdxV1SharedGroup) zeroField(v interface{}) {
-	p := reflect.ValueOf(v).Elem()
-	p.Set(reflect.Zero(p.Type()))
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o CdxV1SharedGroup) MarshalJSON() ([]byte, error) {
@@ -190,3 +190,5 @@ func (v *NullableCdxV1SharedGroup) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -15,7 +15,7 @@
 /*
 Stream Share APIs
 
-# Introduction
+# Introduction 
 
 API version: 0.1.0-alpha0
 Contact: cdx@confluent.io
@@ -31,8 +31,8 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
-	"os"
 	"strings"
+	"os"
 )
 
 // Linger please
@@ -43,13 +43,13 @@ var (
 type ConsumerSharedResourcesCdxV1Api interface {
 
 	/*
-		GetCdxV1ConsumerSharedResource Read a Consumer Shared Resource
+	GetCdxV1ConsumerSharedResource Read a Consumer Shared Resource
 
-		Make a request to read a consumer shared resource.
+	Make a request to read a consumer shared resource.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the consumer shared resource.
-		 @return ApiGetCdxV1ConsumerSharedResourceRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the consumer shared resource.
+	 @return ApiGetCdxV1ConsumerSharedResourceRequest
 	*/
 	GetCdxV1ConsumerSharedResource(ctx _context.Context, id string) ApiGetCdxV1ConsumerSharedResourceRequest
 
@@ -58,14 +58,14 @@ type ConsumerSharedResourcesCdxV1Api interface {
 	GetCdxV1ConsumerSharedResourceExecute(r ApiGetCdxV1ConsumerSharedResourceRequest) (CdxV1ConsumerSharedResource, *_nethttp.Response, error)
 
 	/*
-		ImageCdxV1ConsumerSharedResource Image a Consumer Shared Resource
+	ImageCdxV1ConsumerSharedResource Image a Consumer Shared Resource
 
-		Returns the image file for the shared resource
+	Returns the image file for the shared resource
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the consumer shared resource.
-		 @param fileName The File Name
-		 @return ApiImageCdxV1ConsumerSharedResourceRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the consumer shared resource.
+	 @param fileName The File Name
+	 @return ApiImageCdxV1ConsumerSharedResourceRequest
 	*/
 	ImageCdxV1ConsumerSharedResource(ctx _context.Context, id string, fileName string) ApiImageCdxV1ConsumerSharedResourceRequest
 
@@ -74,28 +74,44 @@ type ConsumerSharedResourcesCdxV1Api interface {
 	ImageCdxV1ConsumerSharedResourceExecute(r ApiImageCdxV1ConsumerSharedResourceRequest) (*os.File, *_nethttp.Response, error)
 
 	/*
-		ListCdxV1ConsumerSharedResources List of Consumer Shared Resources
+	ListCdxV1ConsumerSharedResources List of Consumer Shared Resources
 
-		Retrieve a sorted, filtered, paginated list of all consumer shared resources.
+	Retrieve a sorted, filtered, paginated list of all consumer shared resources.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListCdxV1ConsumerSharedResourcesRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiListCdxV1ConsumerSharedResourcesRequest
 	*/
 	ListCdxV1ConsumerSharedResources(ctx _context.Context) ApiListCdxV1ConsumerSharedResourcesRequest
 
 	// ListCdxV1ConsumerSharedResourcesExecute executes the request
 	//  @return CdxV1ConsumerSharedResourceList
 	ListCdxV1ConsumerSharedResourcesExecute(r ApiListCdxV1ConsumerSharedResourcesRequest) (CdxV1ConsumerSharedResourceList, *_nethttp.Response, error)
+
+	/*
+	NetworkCdxV1ConsumerSharedResource Network a Consumer Shared Resource
+
+	Returns network information of the shared resource
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the consumer shared resource.
+	 @return ApiNetworkCdxV1ConsumerSharedResourceRequest
+	*/
+	NetworkCdxV1ConsumerSharedResource(ctx _context.Context, id string) ApiNetworkCdxV1ConsumerSharedResourceRequest
+
+	// NetworkCdxV1ConsumerSharedResourceExecute executes the request
+	//  @return CdxV1Network
+	NetworkCdxV1ConsumerSharedResourceExecute(r ApiNetworkCdxV1ConsumerSharedResourceRequest) (CdxV1Network, *_nethttp.Response, error)
 }
 
 // ConsumerSharedResourcesCdxV1ApiService ConsumerSharedResourcesCdxV1Api service
 type ConsumerSharedResourcesCdxV1ApiService service
 
 type ApiGetCdxV1ConsumerSharedResourceRequest struct {
-	ctx        _context.Context
+	ctx _context.Context
 	ApiService ConsumerSharedResourcesCdxV1Api
-	id         string
+	id string
 }
+
 
 func (r ApiGetCdxV1ConsumerSharedResourceRequest) Execute() (CdxV1ConsumerSharedResource, *_nethttp.Response, error) {
 	return r.ApiService.GetCdxV1ConsumerSharedResourceExecute(r)
@@ -113,8 +129,8 @@ Make a request to read a consumer shared resource.
 func (a *ConsumerSharedResourcesCdxV1ApiService) GetCdxV1ConsumerSharedResource(ctx _context.Context, id string) ApiGetCdxV1ConsumerSharedResourceRequest {
 	return ApiGetCdxV1ConsumerSharedResourceRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
@@ -246,11 +262,12 @@ func (a *ConsumerSharedResourcesCdxV1ApiService) GetCdxV1ConsumerSharedResourceE
 }
 
 type ApiImageCdxV1ConsumerSharedResourceRequest struct {
-	ctx        _context.Context
+	ctx _context.Context
 	ApiService ConsumerSharedResourcesCdxV1Api
-	id         string
-	fileName   string
+	id string
+	fileName string
 }
+
 
 func (r ApiImageCdxV1ConsumerSharedResourceRequest) Execute() (*os.File, *_nethttp.Response, error) {
 	return r.ApiService.ImageCdxV1ConsumerSharedResourceExecute(r)
@@ -269,9 +286,9 @@ Returns the image file for the shared resource
 func (a *ConsumerSharedResourcesCdxV1ApiService) ImageCdxV1ConsumerSharedResource(ctx _context.Context, id string, fileName string) ApiImageCdxV1ConsumerSharedResourceRequest {
 	return ApiImageCdxV1ConsumerSharedResourceRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
-		fileName:   fileName,
+		ctx: ctx,
+		id: id,
+		fileName: fileName,
 	}
 }
 
@@ -404,10 +421,10 @@ func (a *ConsumerSharedResourcesCdxV1ApiService) ImageCdxV1ConsumerSharedResourc
 }
 
 type ApiListCdxV1ConsumerSharedResourcesRequest struct {
-	ctx        _context.Context
+	ctx _context.Context
 	ApiService ConsumerSharedResourcesCdxV1Api
-	pageSize   *int32
-	pageToken  *string
+	pageSize *int32
+	pageToken *string
 }
 
 // A pagination size for collection requests.
@@ -415,7 +432,6 @@ func (r ApiListCdxV1ConsumerSharedResourcesRequest) PageSize(pageSize int32) Api
 	r.pageSize = &pageSize
 	return r
 }
-
 // An opaque pagination token for collection requests.
 func (r ApiListCdxV1ConsumerSharedResourcesRequest) PageToken(pageToken string) ApiListCdxV1ConsumerSharedResourcesRequest {
 	r.pageToken = &pageToken
@@ -437,7 +453,7 @@ Retrieve a sorted, filtered, paginated list of all consumer shared resources.
 func (a *ConsumerSharedResourcesCdxV1ApiService) ListCdxV1ConsumerSharedResources(ctx _context.Context) ApiListCdxV1ConsumerSharedResourcesRequest {
 	return ApiListCdxV1ConsumerSharedResourcesRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
@@ -530,6 +546,161 @@ func (a *ConsumerSharedResourcesCdxV1ApiService) ListCdxV1ConsumerSharedResource
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiNetworkCdxV1ConsumerSharedResourceRequest struct {
+	ctx _context.Context
+	ApiService ConsumerSharedResourcesCdxV1Api
+	id string
+}
+
+
+func (r ApiNetworkCdxV1ConsumerSharedResourceRequest) Execute() (CdxV1Network, *_nethttp.Response, error) {
+	return r.ApiService.NetworkCdxV1ConsumerSharedResourceExecute(r)
+}
+
+/*
+NetworkCdxV1ConsumerSharedResource Network a Consumer Shared Resource
+
+Returns network information of the shared resource
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the consumer shared resource.
+ @return ApiNetworkCdxV1ConsumerSharedResourceRequest
+*/
+func (a *ConsumerSharedResourcesCdxV1ApiService) NetworkCdxV1ConsumerSharedResource(ctx _context.Context, id string) ApiNetworkCdxV1ConsumerSharedResourceRequest {
+	return ApiNetworkCdxV1ConsumerSharedResourceRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return CdxV1Network
+func (a *ConsumerSharedResourcesCdxV1ApiService) NetworkCdxV1ConsumerSharedResourceExecute(r ApiNetworkCdxV1ConsumerSharedResourceRequest) (CdxV1Network, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  CdxV1Network
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConsumerSharedResourcesCdxV1ApiService.NetworkCdxV1ConsumerSharedResource")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/cdx/v1/consumer-shared-resources/{id}:network"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

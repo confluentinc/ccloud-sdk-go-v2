@@ -15,7 +15,7 @@
 /*
 Stream Share APIs
 
-# Introduction
+# Introduction 
 
 API version: 0.1.0-alpha0
 Contact: cdx@confluent.io
@@ -33,14 +33,14 @@ import (
 	"reflect"
 )
 
-// CdxV1RedeemShare Share details for the consumer org or user
-type CdxV1RedeemShare struct {
+// CdxV1RedeemTokenResponse Share details for the consumer org or user
+type CdxV1RedeemTokenResponse struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
 	Kind *string `json:"kind,omitempty"`
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
-	Id       *string     `json:"id,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
 	// The api key
 	Apikey *string `json:"apikey,omitempty"`
@@ -49,28 +49,28 @@ type CdxV1RedeemShare struct {
 	// The cluster connection url
 	KafkaBootstrapUrl *string `json:"kafka_bootstrap_url,omitempty"`
 	// List of shared resources
-	Resources *[]CdxV1RedeemShareResourcesOneOf `json:"resources,omitempty"`
+	Resources *[]CdxV1RedeemTokenResponseResourcesOneOf `json:"resources,omitempty"`
 }
 
-// NewCdxV1RedeemShare instantiates a new CdxV1RedeemShare object
+// NewCdxV1RedeemTokenResponse instantiates a new CdxV1RedeemTokenResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCdxV1RedeemShare() *CdxV1RedeemShare {
-	this := CdxV1RedeemShare{}
+func NewCdxV1RedeemTokenResponse() *CdxV1RedeemTokenResponse {
+	this := CdxV1RedeemTokenResponse{}
 	return &this
 }
 
-// NewCdxV1RedeemShareWithDefaults instantiates a new CdxV1RedeemShare object
+// NewCdxV1RedeemTokenResponseWithDefaults instantiates a new CdxV1RedeemTokenResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCdxV1RedeemShareWithDefaults() *CdxV1RedeemShare {
-	this := CdxV1RedeemShare{}
+func NewCdxV1RedeemTokenResponseWithDefaults() *CdxV1RedeemTokenResponse {
+	this := CdxV1RedeemTokenResponse{}
 	return &this
 }
 
 // GetApiVersion returns the ApiVersion field value if set, zero value otherwise.
-func (o *CdxV1RedeemShare) GetApiVersion() string {
+func (o *CdxV1RedeemTokenResponse) GetApiVersion() string {
 	if o == nil || o.ApiVersion == nil {
 		var ret string
 		return ret
@@ -80,7 +80,7 @@ func (o *CdxV1RedeemShare) GetApiVersion() string {
 
 // GetApiVersionOk returns a tuple with the ApiVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1RedeemShare) GetApiVersionOk() (*string, bool) {
+func (o *CdxV1RedeemTokenResponse) GetApiVersionOk() (*string, bool) {
 	if o == nil || o.ApiVersion == nil {
 		return nil, false
 	}
@@ -88,7 +88,7 @@ func (o *CdxV1RedeemShare) GetApiVersionOk() (*string, bool) {
 }
 
 // HasApiVersion returns a boolean if a field has been set.
-func (o *CdxV1RedeemShare) HasApiVersion() bool {
+func (o *CdxV1RedeemTokenResponse) HasApiVersion() bool {
 	if o != nil && o.ApiVersion != nil {
 		return true
 	}
@@ -97,12 +97,12 @@ func (o *CdxV1RedeemShare) HasApiVersion() bool {
 }
 
 // SetApiVersion gets a reference to the given string and assigns it to the ApiVersion field.
-func (o *CdxV1RedeemShare) SetApiVersion(v string) {
+func (o *CdxV1RedeemTokenResponse) SetApiVersion(v string) {
 	o.ApiVersion = &v
 }
 
 // GetKind returns the Kind field value if set, zero value otherwise.
-func (o *CdxV1RedeemShare) GetKind() string {
+func (o *CdxV1RedeemTokenResponse) GetKind() string {
 	if o == nil || o.Kind == nil {
 		var ret string
 		return ret
@@ -112,7 +112,7 @@ func (o *CdxV1RedeemShare) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1RedeemShare) GetKindOk() (*string, bool) {
+func (o *CdxV1RedeemTokenResponse) GetKindOk() (*string, bool) {
 	if o == nil || o.Kind == nil {
 		return nil, false
 	}
@@ -120,7 +120,7 @@ func (o *CdxV1RedeemShare) GetKindOk() (*string, bool) {
 }
 
 // HasKind returns a boolean if a field has been set.
-func (o *CdxV1RedeemShare) HasKind() bool {
+func (o *CdxV1RedeemTokenResponse) HasKind() bool {
 	if o != nil && o.Kind != nil {
 		return true
 	}
@@ -129,12 +129,12 @@ func (o *CdxV1RedeemShare) HasKind() bool {
 }
 
 // SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *CdxV1RedeemShare) SetKind(v string) {
+func (o *CdxV1RedeemTokenResponse) SetKind(v string) {
 	o.Kind = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *CdxV1RedeemShare) GetId() string {
+func (o *CdxV1RedeemTokenResponse) GetId() string {
 	if o == nil || o.Id == nil {
 		var ret string
 		return ret
@@ -144,7 +144,7 @@ func (o *CdxV1RedeemShare) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1RedeemShare) GetIdOk() (*string, bool) {
+func (o *CdxV1RedeemTokenResponse) GetIdOk() (*string, bool) {
 	if o == nil || o.Id == nil {
 		return nil, false
 	}
@@ -152,7 +152,7 @@ func (o *CdxV1RedeemShare) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *CdxV1RedeemShare) HasId() bool {
+func (o *CdxV1RedeemTokenResponse) HasId() bool {
 	if o != nil && o.Id != nil {
 		return true
 	}
@@ -161,12 +161,12 @@ func (o *CdxV1RedeemShare) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *CdxV1RedeemShare) SetId(v string) {
+func (o *CdxV1RedeemTokenResponse) SetId(v string) {
 	o.Id = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *CdxV1RedeemShare) GetMetadata() ObjectMeta {
+func (o *CdxV1RedeemTokenResponse) GetMetadata() ObjectMeta {
 	if o == nil || o.Metadata == nil {
 		var ret ObjectMeta
 		return ret
@@ -176,7 +176,7 @@ func (o *CdxV1RedeemShare) GetMetadata() ObjectMeta {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1RedeemShare) GetMetadataOk() (*ObjectMeta, bool) {
+func (o *CdxV1RedeemTokenResponse) GetMetadataOk() (*ObjectMeta, bool) {
 	if o == nil || o.Metadata == nil {
 		return nil, false
 	}
@@ -184,7 +184,7 @@ func (o *CdxV1RedeemShare) GetMetadataOk() (*ObjectMeta, bool) {
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *CdxV1RedeemShare) HasMetadata() bool {
+func (o *CdxV1RedeemTokenResponse) HasMetadata() bool {
 	if o != nil && o.Metadata != nil {
 		return true
 	}
@@ -193,12 +193,12 @@ func (o *CdxV1RedeemShare) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given ObjectMeta and assigns it to the Metadata field.
-func (o *CdxV1RedeemShare) SetMetadata(v ObjectMeta) {
+func (o *CdxV1RedeemTokenResponse) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
 // GetApikey returns the Apikey field value if set, zero value otherwise.
-func (o *CdxV1RedeemShare) GetApikey() string {
+func (o *CdxV1RedeemTokenResponse) GetApikey() string {
 	if o == nil || o.Apikey == nil {
 		var ret string
 		return ret
@@ -208,7 +208,7 @@ func (o *CdxV1RedeemShare) GetApikey() string {
 
 // GetApikeyOk returns a tuple with the Apikey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1RedeemShare) GetApikeyOk() (*string, bool) {
+func (o *CdxV1RedeemTokenResponse) GetApikeyOk() (*string, bool) {
 	if o == nil || o.Apikey == nil {
 		return nil, false
 	}
@@ -216,7 +216,7 @@ func (o *CdxV1RedeemShare) GetApikeyOk() (*string, bool) {
 }
 
 // HasApikey returns a boolean if a field has been set.
-func (o *CdxV1RedeemShare) HasApikey() bool {
+func (o *CdxV1RedeemTokenResponse) HasApikey() bool {
 	if o != nil && o.Apikey != nil {
 		return true
 	}
@@ -225,12 +225,12 @@ func (o *CdxV1RedeemShare) HasApikey() bool {
 }
 
 // SetApikey gets a reference to the given string and assigns it to the Apikey field.
-func (o *CdxV1RedeemShare) SetApikey(v string) {
+func (o *CdxV1RedeemTokenResponse) SetApikey(v string) {
 	o.Apikey = &v
 }
 
 // GetSecret returns the Secret field value if set, zero value otherwise.
-func (o *CdxV1RedeemShare) GetSecret() string {
+func (o *CdxV1RedeemTokenResponse) GetSecret() string {
 	if o == nil || o.Secret == nil {
 		var ret string
 		return ret
@@ -240,7 +240,7 @@ func (o *CdxV1RedeemShare) GetSecret() string {
 
 // GetSecretOk returns a tuple with the Secret field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1RedeemShare) GetSecretOk() (*string, bool) {
+func (o *CdxV1RedeemTokenResponse) GetSecretOk() (*string, bool) {
 	if o == nil || o.Secret == nil {
 		return nil, false
 	}
@@ -248,7 +248,7 @@ func (o *CdxV1RedeemShare) GetSecretOk() (*string, bool) {
 }
 
 // HasSecret returns a boolean if a field has been set.
-func (o *CdxV1RedeemShare) HasSecret() bool {
+func (o *CdxV1RedeemTokenResponse) HasSecret() bool {
 	if o != nil && o.Secret != nil {
 		return true
 	}
@@ -257,12 +257,12 @@ func (o *CdxV1RedeemShare) HasSecret() bool {
 }
 
 // SetSecret gets a reference to the given string and assigns it to the Secret field.
-func (o *CdxV1RedeemShare) SetSecret(v string) {
+func (o *CdxV1RedeemTokenResponse) SetSecret(v string) {
 	o.Secret = &v
 }
 
 // GetKafkaBootstrapUrl returns the KafkaBootstrapUrl field value if set, zero value otherwise.
-func (o *CdxV1RedeemShare) GetKafkaBootstrapUrl() string {
+func (o *CdxV1RedeemTokenResponse) GetKafkaBootstrapUrl() string {
 	if o == nil || o.KafkaBootstrapUrl == nil {
 		var ret string
 		return ret
@@ -272,7 +272,7 @@ func (o *CdxV1RedeemShare) GetKafkaBootstrapUrl() string {
 
 // GetKafkaBootstrapUrlOk returns a tuple with the KafkaBootstrapUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1RedeemShare) GetKafkaBootstrapUrlOk() (*string, bool) {
+func (o *CdxV1RedeemTokenResponse) GetKafkaBootstrapUrlOk() (*string, bool) {
 	if o == nil || o.KafkaBootstrapUrl == nil {
 		return nil, false
 	}
@@ -280,7 +280,7 @@ func (o *CdxV1RedeemShare) GetKafkaBootstrapUrlOk() (*string, bool) {
 }
 
 // HasKafkaBootstrapUrl returns a boolean if a field has been set.
-func (o *CdxV1RedeemShare) HasKafkaBootstrapUrl() bool {
+func (o *CdxV1RedeemTokenResponse) HasKafkaBootstrapUrl() bool {
 	if o != nil && o.KafkaBootstrapUrl != nil {
 		return true
 	}
@@ -289,14 +289,14 @@ func (o *CdxV1RedeemShare) HasKafkaBootstrapUrl() bool {
 }
 
 // SetKafkaBootstrapUrl gets a reference to the given string and assigns it to the KafkaBootstrapUrl field.
-func (o *CdxV1RedeemShare) SetKafkaBootstrapUrl(v string) {
+func (o *CdxV1RedeemTokenResponse) SetKafkaBootstrapUrl(v string) {
 	o.KafkaBootstrapUrl = &v
 }
 
 // GetResources returns the Resources field value if set, zero value otherwise.
-func (o *CdxV1RedeemShare) GetResources() []CdxV1RedeemShareResourcesOneOf {
+func (o *CdxV1RedeemTokenResponse) GetResources() []CdxV1RedeemTokenResponseResourcesOneOf {
 	if o == nil || o.Resources == nil {
-		var ret []CdxV1RedeemShareResourcesOneOf
+		var ret []CdxV1RedeemTokenResponseResourcesOneOf
 		return ret
 	}
 	return *o.Resources
@@ -304,7 +304,7 @@ func (o *CdxV1RedeemShare) GetResources() []CdxV1RedeemShareResourcesOneOf {
 
 // GetResourcesOk returns a tuple with the Resources field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1RedeemShare) GetResourcesOk() (*[]CdxV1RedeemShareResourcesOneOf, bool) {
+func (o *CdxV1RedeemTokenResponse) GetResourcesOk() (*[]CdxV1RedeemTokenResponseResourcesOneOf, bool) {
 	if o == nil || o.Resources == nil {
 		return nil, false
 	}
@@ -312,7 +312,7 @@ func (o *CdxV1RedeemShare) GetResourcesOk() (*[]CdxV1RedeemShareResourcesOneOf, 
 }
 
 // HasResources returns a boolean if a field has been set.
-func (o *CdxV1RedeemShare) HasResources() bool {
+func (o *CdxV1RedeemTokenResponse) HasResources() bool {
 	if o != nil && o.Resources != nil {
 		return true
 	}
@@ -320,54 +320,54 @@ func (o *CdxV1RedeemShare) HasResources() bool {
 	return false
 }
 
-// SetResources gets a reference to the given []CdxV1RedeemShareResourcesOneOf and assigns it to the Resources field.
-func (o *CdxV1RedeemShare) SetResources(v []CdxV1RedeemShareResourcesOneOf) {
+// SetResources gets a reference to the given []CdxV1RedeemTokenResponseResourcesOneOf and assigns it to the Resources field.
+func (o *CdxV1RedeemTokenResponse) SetResources(v []CdxV1RedeemTokenResponseResourcesOneOf) {
 	o.Resources = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *CdxV1RedeemShare) Redact() {
-	o.recurseRedact(o.ApiVersion)
-	o.recurseRedact(o.Kind)
-	o.recurseRedact(o.Id)
-	o.recurseRedact(o.Metadata)
-	o.recurseRedact(o.Apikey)
-	o.Secret = nil
-	o.recurseRedact(o.KafkaBootstrapUrl)
-	o.recurseRedact(o.Resources)
+func (o *CdxV1RedeemTokenResponse) Redact() {
+    o.recurseRedact(o.ApiVersion)
+    o.recurseRedact(o.Kind)
+    o.recurseRedact(o.Id)
+    o.recurseRedact(o.Metadata)
+    o.recurseRedact(o.Apikey)
+    o.Secret = nil
+    o.recurseRedact(o.KafkaBootstrapUrl)
+    o.recurseRedact(o.Resources)
 }
 
-func (o *CdxV1RedeemShare) recurseRedact(v interface{}) {
-	type redactor interface {
-		Redact()
-	}
-	if r, ok := v.(redactor); ok {
-		r.Redact()
-	} else {
-		val := reflect.ValueOf(v)
-		if val.Kind() == reflect.Ptr {
-			val = val.Elem()
-		}
-		switch val.Kind() {
-		case reflect.Slice, reflect.Array:
-			for i := 0; i < val.Len(); i++ {
-				// support data types declared without pointers
-				o.recurseRedact(val.Index(i).Interface())
-				// ... and data types that were declared without but need pointers (for Redact)
-				if val.Index(i).CanAddr() {
-					o.recurseRedact(val.Index(i).Addr().Interface())
-				}
-			}
-		}
-	}
+func (o *CdxV1RedeemTokenResponse) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
 }
 
-func (o CdxV1RedeemShare) zeroField(v interface{}) {
-	p := reflect.ValueOf(v).Elem()
-	p.Set(reflect.Zero(p.Type()))
+func (o CdxV1RedeemTokenResponse) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
-func (o CdxV1RedeemShare) MarshalJSON() ([]byte, error) {
+func (o CdxV1RedeemTokenResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ApiVersion != nil {
 		toSerialize["api_version"] = o.ApiVersion
@@ -396,38 +396,40 @@ func (o CdxV1RedeemShare) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableCdxV1RedeemShare struct {
-	value *CdxV1RedeemShare
+type NullableCdxV1RedeemTokenResponse struct {
+	value *CdxV1RedeemTokenResponse
 	isSet bool
 }
 
-func (v NullableCdxV1RedeemShare) Get() *CdxV1RedeemShare {
+func (v NullableCdxV1RedeemTokenResponse) Get() *CdxV1RedeemTokenResponse {
 	return v.value
 }
 
-func (v *NullableCdxV1RedeemShare) Set(val *CdxV1RedeemShare) {
+func (v *NullableCdxV1RedeemTokenResponse) Set(val *CdxV1RedeemTokenResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCdxV1RedeemShare) IsSet() bool {
+func (v NullableCdxV1RedeemTokenResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCdxV1RedeemShare) Unset() {
+func (v *NullableCdxV1RedeemTokenResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCdxV1RedeemShare(val *CdxV1RedeemShare) *NullableCdxV1RedeemShare {
-	return &NullableCdxV1RedeemShare{value: val, isSet: true}
+func NewNullableCdxV1RedeemTokenResponse(val *CdxV1RedeemTokenResponse) *NullableCdxV1RedeemTokenResponse {
+	return &NullableCdxV1RedeemTokenResponse{value: val, isSet: true}
 }
 
-func (v NullableCdxV1RedeemShare) MarshalJSON() ([]byte, error) {
+func (v NullableCdxV1RedeemTokenResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCdxV1RedeemShare) UnmarshalJSON(src []byte) error {
+func (v *NullableCdxV1RedeemTokenResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -15,7 +15,7 @@
 /*
 Stream Share APIs
 
-# Introduction
+# Introduction 
 
 API version: 0.1.0-alpha0
 Contact: cdx@confluent.io
@@ -42,12 +42,12 @@ var (
 type ProviderSharesCdxV1Api interface {
 
 	/*
-		CreateCdxV1ProviderShare Create a share
+	CreateCdxV1ProviderShare Create a share
 
-		Creates a share based on delivery method.
+	Creates a share based on delivery method.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiCreateCdxV1ProviderShareRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiCreateCdxV1ProviderShareRequest
 	*/
 	CreateCdxV1ProviderShare(ctx _context.Context) ApiCreateCdxV1ProviderShareRequest
 
@@ -56,13 +56,13 @@ type ProviderSharesCdxV1Api interface {
 	CreateCdxV1ProviderShareExecute(r ApiCreateCdxV1ProviderShareRequest) (CdxV1ProviderShare, *_nethttp.Response, error)
 
 	/*
-		DeleteCdxV1ProviderShare Delete a Provider Share
+	DeleteCdxV1ProviderShare Delete a Provider Share
 
-		Make a request to delete a provider share.
+	Make a request to delete a provider share.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the provider share.
-		 @return ApiDeleteCdxV1ProviderShareRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the provider share.
+	 @return ApiDeleteCdxV1ProviderShareRequest
 	*/
 	DeleteCdxV1ProviderShare(ctx _context.Context, id string) ApiDeleteCdxV1ProviderShareRequest
 
@@ -70,13 +70,13 @@ type ProviderSharesCdxV1Api interface {
 	DeleteCdxV1ProviderShareExecute(r ApiDeleteCdxV1ProviderShareRequest) (*_nethttp.Response, error)
 
 	/*
-		GetCdxV1ProviderShare Read a Provider Share
+	GetCdxV1ProviderShare Read a Provider Share
 
-		Make a request to read a provider share.
+	Make a request to read a provider share.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the provider share.
-		 @return ApiGetCdxV1ProviderShareRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the provider share.
+	 @return ApiGetCdxV1ProviderShareRequest
 	*/
 	GetCdxV1ProviderShare(ctx _context.Context, id string) ApiGetCdxV1ProviderShareRequest
 
@@ -85,12 +85,12 @@ type ProviderSharesCdxV1Api interface {
 	GetCdxV1ProviderShareExecute(r ApiGetCdxV1ProviderShareRequest) (CdxV1ProviderShare, *_nethttp.Response, error)
 
 	/*
-		ListCdxV1ProviderShares List of Provider Shares
+	ListCdxV1ProviderShares List of Provider Shares
 
-		Retrieve a sorted, filtered, paginated list of all provider shares.
+	Retrieve a sorted, filtered, paginated list of all provider shares.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListCdxV1ProviderSharesRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiListCdxV1ProviderSharesRequest
 	*/
 	ListCdxV1ProviderShares(ctx _context.Context) ApiListCdxV1ProviderSharesRequest
 
@@ -99,13 +99,13 @@ type ProviderSharesCdxV1Api interface {
 	ListCdxV1ProviderSharesExecute(r ApiListCdxV1ProviderSharesRequest) (CdxV1ProviderShareList, *_nethttp.Response, error)
 
 	/*
-		ResendCdxV1ProviderShare Resend
+	ResendCdxV1ProviderShare Resend
 
-		Resend provider share
+	Resend provider share
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the provider share.
-		 @return ApiResendCdxV1ProviderShareRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the provider share.
+	 @return ApiResendCdxV1ProviderShareRequest
 	*/
 	ResendCdxV1ProviderShare(ctx _context.Context, id string) ApiResendCdxV1ProviderShareRequest
 
@@ -117,8 +117,8 @@ type ProviderSharesCdxV1Api interface {
 type ProviderSharesCdxV1ApiService service
 
 type ApiCreateCdxV1ProviderShareRequest struct {
-	ctx                     _context.Context
-	ApiService              ProviderSharesCdxV1Api
+	ctx _context.Context
+	ApiService ProviderSharesCdxV1Api
 	cdxV1CreateShareRequest *CdxV1CreateShareRequest
 }
 
@@ -142,7 +142,7 @@ Creates a share based on delivery method.
 func (a *ProviderSharesCdxV1ApiService) CreateCdxV1ProviderShare(ctx _context.Context) ApiCreateCdxV1ProviderShareRequest {
 	return ApiCreateCdxV1ProviderShareRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
@@ -285,10 +285,11 @@ func (a *ProviderSharesCdxV1ApiService) CreateCdxV1ProviderShareExecute(r ApiCre
 }
 
 type ApiDeleteCdxV1ProviderShareRequest struct {
-	ctx        _context.Context
+	ctx _context.Context
 	ApiService ProviderSharesCdxV1Api
-	id         string
+	id string
 }
+
 
 func (r ApiDeleteCdxV1ProviderShareRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteCdxV1ProviderShareExecute(r)
@@ -306,8 +307,8 @@ Make a request to delete a provider share.
 func (a *ProviderSharesCdxV1ApiService) DeleteCdxV1ProviderShare(ctx _context.Context, id string) ApiDeleteCdxV1ProviderShareRequest {
 	return ApiDeleteCdxV1ProviderShareRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
@@ -428,10 +429,11 @@ func (a *ProviderSharesCdxV1ApiService) DeleteCdxV1ProviderShareExecute(r ApiDel
 }
 
 type ApiGetCdxV1ProviderShareRequest struct {
-	ctx        _context.Context
+	ctx _context.Context
 	ApiService ProviderSharesCdxV1Api
-	id         string
+	id string
 }
+
 
 func (r ApiGetCdxV1ProviderShareRequest) Execute() (CdxV1ProviderShare, *_nethttp.Response, error) {
 	return r.ApiService.GetCdxV1ProviderShareExecute(r)
@@ -449,8 +451,8 @@ Make a request to read a provider share.
 func (a *ProviderSharesCdxV1ApiService) GetCdxV1ProviderShare(ctx _context.Context, id string) ApiGetCdxV1ProviderShareRequest {
 	return ApiGetCdxV1ProviderShareRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
@@ -582,11 +584,11 @@ func (a *ProviderSharesCdxV1ApiService) GetCdxV1ProviderShareExecute(r ApiGetCdx
 }
 
 type ApiListCdxV1ProviderSharesRequest struct {
-	ctx            _context.Context
-	ApiService     ProviderSharesCdxV1Api
+	ctx _context.Context
+	ApiService ProviderSharesCdxV1Api
 	sharedResource *string
-	pageSize       *int32
-	pageToken      *string
+	pageSize *int32
+	pageToken *string
 }
 
 // Filter the results by exact match for shared_resource.
@@ -594,13 +596,11 @@ func (r ApiListCdxV1ProviderSharesRequest) SharedResource(sharedResource string)
 	r.sharedResource = &sharedResource
 	return r
 }
-
 // A pagination size for collection requests.
 func (r ApiListCdxV1ProviderSharesRequest) PageSize(pageSize int32) ApiListCdxV1ProviderSharesRequest {
 	r.pageSize = &pageSize
 	return r
 }
-
 // An opaque pagination token for collection requests.
 func (r ApiListCdxV1ProviderSharesRequest) PageToken(pageToken string) ApiListCdxV1ProviderSharesRequest {
 	r.pageToken = &pageToken
@@ -622,7 +622,7 @@ Retrieve a sorted, filtered, paginated list of all provider shares.
 func (a *ProviderSharesCdxV1ApiService) ListCdxV1ProviderShares(ctx _context.Context) ApiListCdxV1ProviderSharesRequest {
 	return ApiListCdxV1ProviderSharesRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
@@ -752,10 +752,11 @@ func (a *ProviderSharesCdxV1ApiService) ListCdxV1ProviderSharesExecute(r ApiList
 }
 
 type ApiResendCdxV1ProviderShareRequest struct {
-	ctx        _context.Context
+	ctx _context.Context
 	ApiService ProviderSharesCdxV1Api
-	id         string
+	id string
 }
+
 
 func (r ApiResendCdxV1ProviderShareRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.ResendCdxV1ProviderShareExecute(r)
@@ -773,8 +774,8 @@ Resend provider share
 func (a *ProviderSharesCdxV1ApiService) ResendCdxV1ProviderShare(ctx _context.Context, id string) ApiResendCdxV1ProviderShareRequest {
 	return ApiResendCdxV1ProviderShareRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 

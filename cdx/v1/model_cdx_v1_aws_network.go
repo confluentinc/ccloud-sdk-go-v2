@@ -33,35 +33,34 @@ import (
 	"reflect"
 )
 
-// CdxV1EmailConsumerRestriction Consumer restrictions limits by authenticated user's email
-type CdxV1EmailConsumerRestriction struct {
-	// The resource kind
+// CdxV1AwsNetwork The AWS network details.
+type CdxV1AwsNetwork struct {
+	// Network kind type.
 	Kind string `json:"kind"`
-	// Email based matching for the consumers
-	Email string `json:"email"`
+	// The AWS VPC endpoint service for the network (used for PrivateLink) if available.
+	PrivateLinkEndpointService *string `json:"private_link_endpoint_service,omitempty"`
 }
 
-// NewCdxV1EmailConsumerRestriction instantiates a new CdxV1EmailConsumerRestriction object
+// NewCdxV1AwsNetwork instantiates a new CdxV1AwsNetwork object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCdxV1EmailConsumerRestriction(kind string, email string) *CdxV1EmailConsumerRestriction {
-	this := CdxV1EmailConsumerRestriction{}
+func NewCdxV1AwsNetwork(kind string) *CdxV1AwsNetwork {
+	this := CdxV1AwsNetwork{}
 	this.Kind = kind
-	this.Email = email
 	return &this
 }
 
-// NewCdxV1EmailConsumerRestrictionWithDefaults instantiates a new CdxV1EmailConsumerRestriction object
+// NewCdxV1AwsNetworkWithDefaults instantiates a new CdxV1AwsNetwork object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCdxV1EmailConsumerRestrictionWithDefaults() *CdxV1EmailConsumerRestriction {
-	this := CdxV1EmailConsumerRestriction{}
+func NewCdxV1AwsNetworkWithDefaults() *CdxV1AwsNetwork {
+	this := CdxV1AwsNetwork{}
 	return &this
 }
 
 // GetKind returns the Kind field value
-func (o *CdxV1EmailConsumerRestriction) GetKind() string {
+func (o *CdxV1AwsNetwork) GetKind() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -72,7 +71,7 @@ func (o *CdxV1EmailConsumerRestriction) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *CdxV1EmailConsumerRestriction) GetKindOk() (*string, bool) {
+func (o *CdxV1AwsNetwork) GetKindOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -80,41 +79,49 @@ func (o *CdxV1EmailConsumerRestriction) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *CdxV1EmailConsumerRestriction) SetKind(v string) {
+func (o *CdxV1AwsNetwork) SetKind(v string) {
 	o.Kind = v
 }
 
-// GetEmail returns the Email field value
-func (o *CdxV1EmailConsumerRestriction) GetEmail() string {
-	if o == nil {
+// GetPrivateLinkEndpointService returns the PrivateLinkEndpointService field value if set, zero value otherwise.
+func (o *CdxV1AwsNetwork) GetPrivateLinkEndpointService() string {
+	if o == nil || o.PrivateLinkEndpointService == nil {
 		var ret string
 		return ret
 	}
-
-	return o.Email
+	return *o.PrivateLinkEndpointService
 }
 
-// GetEmailOk returns a tuple with the Email field value
+// GetPrivateLinkEndpointServiceOk returns a tuple with the PrivateLinkEndpointService field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1EmailConsumerRestriction) GetEmailOk() (*string, bool) {
-	if o == nil  {
+func (o *CdxV1AwsNetwork) GetPrivateLinkEndpointServiceOk() (*string, bool) {
+	if o == nil || o.PrivateLinkEndpointService == nil {
 		return nil, false
 	}
-	return &o.Email, true
+	return o.PrivateLinkEndpointService, true
 }
 
-// SetEmail sets field value
-func (o *CdxV1EmailConsumerRestriction) SetEmail(v string) {
-	o.Email = v
+// HasPrivateLinkEndpointService returns a boolean if a field has been set.
+func (o *CdxV1AwsNetwork) HasPrivateLinkEndpointService() bool {
+	if o != nil && o.PrivateLinkEndpointService != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPrivateLinkEndpointService gets a reference to the given string and assigns it to the PrivateLinkEndpointService field.
+func (o *CdxV1AwsNetwork) SetPrivateLinkEndpointService(v string) {
+	o.PrivateLinkEndpointService = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *CdxV1EmailConsumerRestriction) Redact() {
+func (o *CdxV1AwsNetwork) Redact() {
     o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Email)
+    o.recurseRedact(o.PrivateLinkEndpointService)
 }
 
-func (o *CdxV1EmailConsumerRestriction) recurseRedact(v interface{}) {
+func (o *CdxV1AwsNetwork) recurseRedact(v interface{}) {
     type redactor interface {
         Redact()
     }
@@ -139,54 +146,54 @@ func (o *CdxV1EmailConsumerRestriction) recurseRedact(v interface{}) {
     }
 }
 
-func (o CdxV1EmailConsumerRestriction) zeroField(v interface{}) {
+func (o CdxV1AwsNetwork) zeroField(v interface{}) {
     p := reflect.ValueOf(v).Elem()
     p.Set(reflect.Zero(p.Type()))
 }
 
-func (o CdxV1EmailConsumerRestriction) MarshalJSON() ([]byte, error) {
+func (o CdxV1AwsNetwork) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["kind"] = o.Kind
 	}
-	if true {
-		toSerialize["email"] = o.Email
+	if o.PrivateLinkEndpointService != nil {
+		toSerialize["private_link_endpoint_service"] = o.PrivateLinkEndpointService
 	}
 	return json.Marshal(toSerialize)
 }
 
-type NullableCdxV1EmailConsumerRestriction struct {
-	value *CdxV1EmailConsumerRestriction
+type NullableCdxV1AwsNetwork struct {
+	value *CdxV1AwsNetwork
 	isSet bool
 }
 
-func (v NullableCdxV1EmailConsumerRestriction) Get() *CdxV1EmailConsumerRestriction {
+func (v NullableCdxV1AwsNetwork) Get() *CdxV1AwsNetwork {
 	return v.value
 }
 
-func (v *NullableCdxV1EmailConsumerRestriction) Set(val *CdxV1EmailConsumerRestriction) {
+func (v *NullableCdxV1AwsNetwork) Set(val *CdxV1AwsNetwork) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCdxV1EmailConsumerRestriction) IsSet() bool {
+func (v NullableCdxV1AwsNetwork) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCdxV1EmailConsumerRestriction) Unset() {
+func (v *NullableCdxV1AwsNetwork) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCdxV1EmailConsumerRestriction(val *CdxV1EmailConsumerRestriction) *NullableCdxV1EmailConsumerRestriction {
-	return &NullableCdxV1EmailConsumerRestriction{value: val, isSet: true}
+func NewNullableCdxV1AwsNetwork(val *CdxV1AwsNetwork) *NullableCdxV1AwsNetwork {
+	return &NullableCdxV1AwsNetwork{value: val, isSet: true}
 }
 
-func (v NullableCdxV1EmailConsumerRestriction) MarshalJSON() ([]byte, error) {
+func (v NullableCdxV1AwsNetwork) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCdxV1EmailConsumerRestriction) UnmarshalJSON(src []byte) error {
+func (v *NullableCdxV1AwsNetwork) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

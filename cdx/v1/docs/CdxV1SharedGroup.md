@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | **string** | The resouce kind | 
+**Kind** | **string** | The resource kind | 
 **GroupPrefix** | **string** | The consumer group prefix | 
 
 ## Methods
@@ -67,11 +67,11 @@ SetGroupPrefix sets GroupPrefix field to given value.
 
 
 
-### AsCdxV1RedeemShareResourcesOneOf
+### AsCdxV1RedeemTokenResponseResourcesOneOf
 
-`func (s *CdxV1SharedGroup) AsCdxV1RedeemShareResourcesOneOf() CdxV1RedeemShareResourcesOneOf`
+`func (s *CdxV1SharedGroup) AsCdxV1RedeemTokenResponseResourcesOneOf() CdxV1RedeemTokenResponseResourcesOneOf`
 
-Convenience method to wrap this instance of CdxV1SharedGroup in CdxV1RedeemShareResourcesOneOf
+Convenience method to wrap this instance of CdxV1SharedGroup in CdxV1RedeemTokenResponseResourcesOneOf
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
