@@ -530,6 +530,29 @@ paths:
                 type: string
               style: simple
           x-summary: Conflict
+        "422":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "422"
+                  code: invalid_configuration
+                  id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  title: Validation Failed
+                  detail: 'The property ''/cluster/storage_size'' of type string did
+                    not match the following type: integer'
+                  source:
+                    pointer: /cluster/storage_size
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Validation Failed
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "429":
           description: Rate Limit Exceeded
           headers:
@@ -1408,6 +1431,29 @@ paths:
               schema:
                 type: string
               style: simple
+        "422":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "422"
+                  code: invalid_configuration
+                  id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  title: Validation Failed
+                  detail: 'The property ''/cluster/storage_size'' of type string did
+                    not match the following type: integer'
+                  source:
+                    pointer: /cluster/storage_size
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Validation Failed
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
         "429":
           description: Rate Limit Exceeded
           headers:
@@ -1697,6 +1743,29 @@ components:
           schema:
             $ref: '#/components/schemas/Failure'
       description: Not Found
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+    ValidationError:
+      content:
+        application/json:
+          example:
+            errors:
+            - status: "422"
+              code: invalid_configuration
+              id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              title: Validation Failed
+              detail: 'The property ''/cluster/storage_size'' of type string did not
+                match the following type: integer'
+              source:
+                pointer: /cluster/storage_size
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: Validation Failed
       headers:
         X-Request-Id:
           description: The unique identifier for the API request.
@@ -2035,6 +2104,13 @@ components:
           description: The cluster HTTP request URL.
           example: https://lkc-00000-00000.us-central1.gcp.glb.confluent.cloud
           format: uri
+          readOnly: true
+          type: string
+          x-immutable: true
+        api_endpoint:
+          description: The Kafka API cluster endpoint used by Kafka clients to connect
+            to the cluster.
+          example: https://pkac-00000.us-west-2.aws.confluent.cloud
           readOnly: true
           type: string
           x-immutable: true

@@ -49,6 +49,8 @@ type CmkV2ClusterSpec struct {
 	KafkaBootstrapEndpoint *string `json:"kafka_bootstrap_endpoint,omitempty"`
 	// The cluster HTTP request URL.
 	HttpEndpoint *string `json:"http_endpoint,omitempty"`
+	// The Kafka API cluster endpoint used by Kafka clients to connect to the cluster.
+	ApiEndpoint *string `json:"api_endpoint,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
 	// The network associated with this object.
@@ -300,6 +302,38 @@ func (o *CmkV2ClusterSpec) SetHttpEndpoint(v string) {
 	o.HttpEndpoint = &v
 }
 
+// GetApiEndpoint returns the ApiEndpoint field value if set, zero value otherwise.
+func (o *CmkV2ClusterSpec) GetApiEndpoint() string {
+	if o == nil || o.ApiEndpoint == nil {
+		var ret string
+		return ret
+	}
+	return *o.ApiEndpoint
+}
+
+// GetApiEndpointOk returns a tuple with the ApiEndpoint field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CmkV2ClusterSpec) GetApiEndpointOk() (*string, bool) {
+	if o == nil || o.ApiEndpoint == nil {
+		return nil, false
+	}
+	return o.ApiEndpoint, true
+}
+
+// HasApiEndpoint returns a boolean if a field has been set.
+func (o *CmkV2ClusterSpec) HasApiEndpoint() bool {
+	if o != nil && o.ApiEndpoint != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetApiEndpoint gets a reference to the given string and assigns it to the ApiEndpoint field.
+func (o *CmkV2ClusterSpec) SetApiEndpoint(v string) {
+	o.ApiEndpoint = &v
+}
+
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
 func (o *CmkV2ClusterSpec) GetEnvironment() ObjectReference {
 	if o == nil || o.Environment == nil {
@@ -373,6 +407,7 @@ func (o *CmkV2ClusterSpec) Redact() {
     o.recurseRedact(o.Config)
     o.recurseRedact(o.KafkaBootstrapEndpoint)
     o.recurseRedact(o.HttpEndpoint)
+    o.recurseRedact(o.ApiEndpoint)
     o.recurseRedact(o.Environment)
     o.recurseRedact(o.Network)
 }
@@ -429,6 +464,9 @@ func (o CmkV2ClusterSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.HttpEndpoint != nil {
 		toSerialize["http_endpoint"] = o.HttpEndpoint
+	}
+	if o.ApiEndpoint != nil {
+		toSerialize["api_endpoint"] = o.ApiEndpoint
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment

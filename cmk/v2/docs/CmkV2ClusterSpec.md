@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Config** | Pointer to [**CmkV2ClusterSpecConfigOneOf**](CmkV2ClusterSpecConfigOneOf.md) | The configuration of the Kafka cluster.  Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.  | [optional] 
 **KafkaBootstrapEndpoint** | Pointer to **string** | The bootstrap endpoint used by Kafka clients to connect to the cluster. | [optional] [readonly] 
 **HttpEndpoint** | Pointer to **string** | The cluster HTTP request URL. | [optional] [readonly] 
+**ApiEndpoint** | Pointer to **string** | The Kafka API cluster endpoint used by Kafka clients to connect to the cluster. | [optional] [readonly] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 **Network** | Pointer to [**ObjectReference**](ObjectReference.md) | The network associated with this object. | [optional] 
 
@@ -207,6 +208,31 @@ SetHttpEndpoint sets HttpEndpoint field to given value.
 `func (o *CmkV2ClusterSpec) HasHttpEndpoint() bool`
 
 HasHttpEndpoint returns a boolean if a field has been set.
+
+### GetApiEndpoint
+
+`func (o *CmkV2ClusterSpec) GetApiEndpoint() string`
+
+GetApiEndpoint returns the ApiEndpoint field if non-nil, zero value otherwise.
+
+### GetApiEndpointOk
+
+`func (o *CmkV2ClusterSpec) GetApiEndpointOk() (*string, bool)`
+
+GetApiEndpointOk returns a tuple with the ApiEndpoint field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApiEndpoint
+
+`func (o *CmkV2ClusterSpec) SetApiEndpoint(v string)`
+
+SetApiEndpoint sets ApiEndpoint field to given value.
+
+### HasApiEndpoint
+
+`func (o *CmkV2ClusterSpec) HasApiEndpoint() bool`
+
+HasApiEndpoint returns a boolean if a field has been set.
 
 ### GetEnvironment
 
