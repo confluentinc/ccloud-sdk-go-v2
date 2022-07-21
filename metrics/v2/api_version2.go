@@ -28,6 +28,7 @@ package v2
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -932,6 +933,7 @@ Query for metric values in a dataset.
  @return ApiV2MetricsDatasetQueryPostRequest
 */
 func (a *Version2ApiService) V2MetricsDatasetQueryPost(ctx context.Context, dataset string) ApiV2MetricsDatasetQueryPostRequest {
+	fmt.Println("Hello World")
 	return ApiV2MetricsDatasetQueryPostRequest{
 		ApiService: a,
 		ctx: ctx,
