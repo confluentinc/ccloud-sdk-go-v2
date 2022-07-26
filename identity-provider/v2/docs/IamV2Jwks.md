@@ -7,8 +7,9 @@ Name | Type | Description | Notes
 **Kty** | **string** | Specifies the cryptographic algorithm family used with the key | 
 **Kid** | **string** | Specifies the key-id issued by the OpenIDProvider for the particular tenant | 
 **Alg** | **string** | Specifies the algorithm to be used to generate the public key | 
-**Use** | Pointer to **string** | Specifies the intended use of the public key | [optional] 
-**KeyOps** | Pointer to **string** | Identifies the operation(s) for which the key is intended to be used | [optional] 
+**Use** | Pointer to **string** | Specifies the intended usage of the key | [optional] 
+**N** | Pointer to **string** | Specifies the modulus of the RSA public key. Represented as a Base64urlUInt-encoded value | [optional] 
+**E** | Pointer to **string** | Specifies the exponent of the RSA public key. | [optional] 
 
 ## Methods
 
@@ -114,30 +115,55 @@ SetUse sets Use field to given value.
 
 HasUse returns a boolean if a field has been set.
 
-### GetKeyOps
+### GetN
 
-`func (o *IamV2Jwks) GetKeyOps() string`
+`func (o *IamV2Jwks) GetN() string`
 
-GetKeyOps returns the KeyOps field if non-nil, zero value otherwise.
+GetN returns the N field if non-nil, zero value otherwise.
 
-### GetKeyOpsOk
+### GetNOk
 
-`func (o *IamV2Jwks) GetKeyOpsOk() (*string, bool)`
+`func (o *IamV2Jwks) GetNOk() (*string, bool)`
 
-GetKeyOpsOk returns a tuple with the KeyOps field if it's non-nil, zero value otherwise
+GetNOk returns a tuple with the N field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetKeyOps
+### SetN
 
-`func (o *IamV2Jwks) SetKeyOps(v string)`
+`func (o *IamV2Jwks) SetN(v string)`
 
-SetKeyOps sets KeyOps field to given value.
+SetN sets N field to given value.
 
-### HasKeyOps
+### HasN
 
-`func (o *IamV2Jwks) HasKeyOps() bool`
+`func (o *IamV2Jwks) HasN() bool`
 
-HasKeyOps returns a boolean if a field has been set.
+HasN returns a boolean if a field has been set.
+
+### GetE
+
+`func (o *IamV2Jwks) GetE() string`
+
+GetE returns the E field if non-nil, zero value otherwise.
+
+### GetEOk
+
+`func (o *IamV2Jwks) GetEOk() (*string, bool)`
+
+GetEOk returns a tuple with the E field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetE
+
+`func (o *IamV2Jwks) SetE(v string)`
+
+SetE sets E field to given value.
+
+### HasE
+
+`func (o *IamV2Jwks) HasE() bool`
+
+HasE returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

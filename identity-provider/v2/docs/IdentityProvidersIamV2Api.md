@@ -218,7 +218,7 @@ Name | Type | Description  | Notes
 
 ## ListIamV2IdentityProviders
 
-> IamV2IdentityProviderList ListIamV2IdentityProviders(ctx).Deactivated(deactivated).PageSize(pageSize).PageToken(pageToken).Execute()
+> IamV2IdentityProviderList ListIamV2IdentityProviders(ctx).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Identity Providers
 
@@ -237,13 +237,12 @@ import (
 )
 
 func main() {
-    deactivated := "deactivated_example" // string | Filter the results by exact match for deactivated. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.IdentityProvidersIamV2Api.ListIamV2IdentityProviders(context.Background()).Deactivated(deactivated).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.IdentityProvidersIamV2Api.ListIamV2IdentityProviders(context.Background()).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `IdentityProvidersIamV2Api.ListIamV2IdentityProviders``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -264,7 +263,6 @@ Other parameters are passed through a pointer to a apiListIamV2IdentityProviders
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **deactivated** | **string** | Filter the results by exact match for deactivated. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 
