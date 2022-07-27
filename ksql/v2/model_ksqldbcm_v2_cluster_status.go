@@ -39,6 +39,10 @@ type KsqldbcmV2ClusterStatus struct {
 	HttpEndpoint *string `json:"http_endpoint,omitempty"`
 	// Status of the ksqlDB cluster.
 	Phase string `json:"phase"`
+	// Tells you if the cluster has been paused
+	IsPaused bool `json:"is_paused"`
+	// Amount of storage (in GB) provisioned to this cluster
+	Storage int32 `json:"storage"`
 	// Topic name prefix used by this ksqlDB cluster. Used to assign ACLs for this ksqlDB cluster to use.
 	TopicPrefix *string `json:"topic_prefix,omitempty"`
 }
@@ -47,9 +51,11 @@ type KsqldbcmV2ClusterStatus struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewKsqldbcmV2ClusterStatus(phase string) *KsqldbcmV2ClusterStatus {
+func NewKsqldbcmV2ClusterStatus(phase string, isPaused bool, storage int32) *KsqldbcmV2ClusterStatus {
 	this := KsqldbcmV2ClusterStatus{}
 	this.Phase = phase
+	this.IsPaused = isPaused
+	this.Storage = storage
 	return &this
 }
 
@@ -117,6 +123,54 @@ func (o *KsqldbcmV2ClusterStatus) SetPhase(v string) {
 	o.Phase = v
 }
 
+// GetIsPaused returns the IsPaused field value
+func (o *KsqldbcmV2ClusterStatus) GetIsPaused() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsPaused
+}
+
+// GetIsPausedOk returns a tuple with the IsPaused field value
+// and a boolean to check if the value has been set.
+func (o *KsqldbcmV2ClusterStatus) GetIsPausedOk() (*bool, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.IsPaused, true
+}
+
+// SetIsPaused sets field value
+func (o *KsqldbcmV2ClusterStatus) SetIsPaused(v bool) {
+	o.IsPaused = v
+}
+
+// GetStorage returns the Storage field value
+func (o *KsqldbcmV2ClusterStatus) GetStorage() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Storage
+}
+
+// GetStorageOk returns a tuple with the Storage field value
+// and a boolean to check if the value has been set.
+func (o *KsqldbcmV2ClusterStatus) GetStorageOk() (*int32, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.Storage, true
+}
+
+// SetStorage sets field value
+func (o *KsqldbcmV2ClusterStatus) SetStorage(v int32) {
+	o.Storage = v
+}
+
 // GetTopicPrefix returns the TopicPrefix field value if set, zero value otherwise.
 func (o *KsqldbcmV2ClusterStatus) GetTopicPrefix() string {
 	if o == nil || o.TopicPrefix == nil {
@@ -153,6 +207,8 @@ func (o *KsqldbcmV2ClusterStatus) SetTopicPrefix(v string) {
 func (o *KsqldbcmV2ClusterStatus) Redact() {
     o.recurseRedact(o.HttpEndpoint)
     o.recurseRedact(&o.Phase)
+    o.recurseRedact(&o.IsPaused)
+    o.recurseRedact(&o.Storage)
     o.recurseRedact(o.TopicPrefix)
 }
 
@@ -193,6 +249,12 @@ func (o KsqldbcmV2ClusterStatus) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["phase"] = o.Phase
+	}
+	if true {
+		toSerialize["is_paused"] = o.IsPaused
+	}
+	if true {
+		toSerialize["storage"] = o.Storage
 	}
 	if o.TopicPrefix != nil {
 		toSerialize["topic_prefix"] = o.TopicPrefix

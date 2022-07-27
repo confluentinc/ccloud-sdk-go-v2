@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the ksqlDB cluster. | [optional] 
+**UseDetailedProcessingLog** | Pointer to **bool** | This flag controls whether you want to include the row data in the processing log topic. Turn it off if you don&#39;t want to emit sensitive information to the processing log  | [optional] [default to true]
 **Csu** | Pointer to **int32** | The number of CSUs (Confluent Streaming Units) in a ksqlDB cluster. | [optional] 
 **KafkaCluster** | Pointer to [**ObjectReference**](ObjectReference.md) | The kafka_cluster to which this belongs. | [optional] 
 **CredentialIdentity** | Pointer to [**ObjectReference**](ObjectReference.md) | The credential_identity to which this belongs. The credential_identity can be one of iam.v2.User, iam.v2.ServiceAccount. | [optional] 
@@ -53,6 +54,31 @@ SetDisplayName sets DisplayName field to given value.
 `func (o *KsqldbcmV2ClusterSpec) HasDisplayName() bool`
 
 HasDisplayName returns a boolean if a field has been set.
+
+### GetUseDetailedProcessingLog
+
+`func (o *KsqldbcmV2ClusterSpec) GetUseDetailedProcessingLog() bool`
+
+GetUseDetailedProcessingLog returns the UseDetailedProcessingLog field if non-nil, zero value otherwise.
+
+### GetUseDetailedProcessingLogOk
+
+`func (o *KsqldbcmV2ClusterSpec) GetUseDetailedProcessingLogOk() (*bool, bool)`
+
+GetUseDetailedProcessingLogOk returns a tuple with the UseDetailedProcessingLog field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseDetailedProcessingLog
+
+`func (o *KsqldbcmV2ClusterSpec) SetUseDetailedProcessingLog(v bool)`
+
+SetUseDetailedProcessingLog sets UseDetailedProcessingLog field to given value.
+
+### HasUseDetailedProcessingLog
+
+`func (o *KsqldbcmV2ClusterSpec) HasUseDetailedProcessingLog() bool`
+
+HasUseDetailedProcessingLog returns a boolean if a field has been set.
 
 ### GetCsu
 

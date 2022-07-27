@@ -37,6 +37,8 @@ import (
 type KsqldbcmV2ClusterSpec struct {
 	// The name of the ksqlDB cluster.
 	DisplayName *string `json:"display_name,omitempty"`
+	// This flag controls whether you want to include the row data in the processing log topic. Turn it off if you don't want to emit sensitive information to the processing log 
+	UseDetailedProcessingLog *bool `json:"use_detailed_processing_log,omitempty"`
 	// The number of CSUs (Confluent Streaming Units) in a ksqlDB cluster.
 	Csu *int32 `json:"csu,omitempty"`
 	// The kafka_cluster to which this belongs.
@@ -53,6 +55,8 @@ type KsqldbcmV2ClusterSpec struct {
 // will change when the set of required properties is changed
 func NewKsqldbcmV2ClusterSpec() *KsqldbcmV2ClusterSpec {
 	this := KsqldbcmV2ClusterSpec{}
+	var useDetailedProcessingLog bool = true
+	this.UseDetailedProcessingLog = &useDetailedProcessingLog
 	return &this
 }
 
@@ -61,6 +65,8 @@ func NewKsqldbcmV2ClusterSpec() *KsqldbcmV2ClusterSpec {
 // but it doesn't guarantee that properties required by API are set
 func NewKsqldbcmV2ClusterSpecWithDefaults() *KsqldbcmV2ClusterSpec {
 	this := KsqldbcmV2ClusterSpec{}
+	var useDetailedProcessingLog bool = true
+	this.UseDetailedProcessingLog = &useDetailedProcessingLog
 	return &this
 }
 
@@ -94,6 +100,38 @@ func (o *KsqldbcmV2ClusterSpec) HasDisplayName() bool {
 // SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
 func (o *KsqldbcmV2ClusterSpec) SetDisplayName(v string) {
 	o.DisplayName = &v
+}
+
+// GetUseDetailedProcessingLog returns the UseDetailedProcessingLog field value if set, zero value otherwise.
+func (o *KsqldbcmV2ClusterSpec) GetUseDetailedProcessingLog() bool {
+	if o == nil || o.UseDetailedProcessingLog == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UseDetailedProcessingLog
+}
+
+// GetUseDetailedProcessingLogOk returns a tuple with the UseDetailedProcessingLog field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KsqldbcmV2ClusterSpec) GetUseDetailedProcessingLogOk() (*bool, bool) {
+	if o == nil || o.UseDetailedProcessingLog == nil {
+		return nil, false
+	}
+	return o.UseDetailedProcessingLog, true
+}
+
+// HasUseDetailedProcessingLog returns a boolean if a field has been set.
+func (o *KsqldbcmV2ClusterSpec) HasUseDetailedProcessingLog() bool {
+	if o != nil && o.UseDetailedProcessingLog != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUseDetailedProcessingLog gets a reference to the given bool and assigns it to the UseDetailedProcessingLog field.
+func (o *KsqldbcmV2ClusterSpec) SetUseDetailedProcessingLog(v bool) {
+	o.UseDetailedProcessingLog = &v
 }
 
 // GetCsu returns the Csu field value if set, zero value otherwise.
@@ -227,6 +265,7 @@ func (o *KsqldbcmV2ClusterSpec) SetEnvironment(v ObjectReference) {
 // Redact resets all sensitive fields to their zero value.
 func (o *KsqldbcmV2ClusterSpec) Redact() {
     o.recurseRedact(o.DisplayName)
+    o.recurseRedact(o.UseDetailedProcessingLog)
     o.recurseRedact(o.Csu)
     o.recurseRedact(o.KafkaCluster)
     o.recurseRedact(o.CredentialIdentity)
@@ -267,6 +306,9 @@ func (o KsqldbcmV2ClusterSpec) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.DisplayName != nil {
 		toSerialize["display_name"] = o.DisplayName
+	}
+	if o.UseDetailedProcessingLog != nil {
+		toSerialize["use_detailed_processing_log"] = o.UseDetailedProcessingLog
 	}
 	if o.Csu != nil {
 		toSerialize["csu"] = o.Csu

@@ -596,13 +596,13 @@ paths:
             --url https://api.confluent.cloud/ksqldbcm/v2/clusters \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"ksqlDB_cluster_0","csu":4,"kafka_cluster":{"id":"lkc-00000","environment":"string"},"credential_identity":{"id":"u-a83k9b","environment":"string"},"environment":{"id":"env-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"ksqlDB_cluster_0","use_detailed_processing_log":true,"csu":4,"kafka_cluster":{"id":"lkc-00000","environment":"string"},"credential_identity":{"id":"u-a83k9b","environment":"string"},"environment":{"id":"env-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"credential_identity\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"use_detailed_processing_log\":true,\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"credential_identity\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/ksqldbcm/v2/clusters")
             .post(body)
@@ -615,22 +615,23 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ksqldbcm/v2/clusters\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
-          :\\\"ksqlDB_cluster_0\\\",\\\"csu\\\":4,\\\"kafka_cluster\\\":{\\\"id\\\"\
-          :\\\"lkc-00000\\\",\\\"environment\\\":\\\"string\\\"},\\\"credential_identity\\\
-          \":{\\\"id\\\":\\\"u-a83k9b\\\",\\\"environment\\\":\\\"string\\\"},\\\"\
-          environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"environment\\\":\\\"string\\\
-          \"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          :\\\"ksqlDB_cluster_0\\\",\\\"use_detailed_processing_log\\\":true,\\\"\
+          csu\\\":4,\\\"kafka_cluster\\\":{\\\"id\\\":\\\"lkc-00000\\\",\\\"environment\\\
+          \":\\\"string\\\"},\\\"credential_identity\\\":{\\\"id\\\":\\\"u-a83k9b\\\
+          \",\\\"environment\\\":\\\"string\\\"},\\\"environment\\\":{\\\"id\\\":\\\
+          \"env-00000\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ :=\
+          \ http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
+          , \"application/json\")\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
+          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"credential_identity\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"use_detailed_processing_log\":true,\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"credential_identity\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -674,6 +675,7 @@ paths:
           req.write(JSON.stringify({
             spec: {
               display_name: 'ksqlDB_cluster_0',
+              use_detailed_processing_log: true,
               csu: 4,
               kafka_cluster: {id: 'lkc-00000', environment: 'string'},
               credential_identity: {id: 'u-a83k9b', environment: 'string'},
@@ -693,7 +695,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"credential_identity\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"use_detailed_processing_log\":true,\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"credential_identity\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -702,7 +704,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"credential_identity\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"use_detailed_processing_log\":true,\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"credential_identity\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: ksqlDB API
   /ksqldbcm/v2/clusters/{id}:
@@ -1511,6 +1513,16 @@ components:
           - PROVISIONING
           - PROVISIONED
           - FAILED
+        is_paused:
+          description: Tells you if the cluster has been paused
+          readOnly: true
+          type: boolean
+        storage:
+          description: Amount of storage (in GB) provisioned to this cluster
+          example: 125
+          format: int32
+          readOnly: true
+          type: integer
         topic_prefix:
           description: Topic name prefix used by this ksqlDB cluster. Used to assign
             ACLs for this ksqlDB cluster to use.
@@ -1519,7 +1531,9 @@ components:
           type: string
       readOnly: true
       required:
+      - is_paused
       - phase
+      - storage
       type: object
     SearchFilter:
       description: Filter a collection by a string search
@@ -1605,6 +1619,13 @@ components:
           example: ksqlDB_cluster_0
           pattern: ^(?:[0-9A-Za-z\-])[\w-]{0,31}$
           type: string
+          x-immutable: true
+        use_detailed_processing_log:
+          default: true
+          description: |
+            This flag controls whether you want to include the row data in the processing log topic. Turn it off if you
+            don't want to emit sensitive information to the processing log
+          type: boolean
           x-immutable: true
         csu:
           description: The number of CSUs (Confluent Streaming Units) in a ksqlDB

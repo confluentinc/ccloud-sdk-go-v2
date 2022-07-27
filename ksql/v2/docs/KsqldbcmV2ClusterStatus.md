@@ -6,13 +6,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **HttpEndpoint** | Pointer to **string** | The dataplane endpoint of the ksqlDB cluster. | [optional] [readonly] 
 **Phase** | **string** | Status of the ksqlDB cluster. | [readonly] 
+**IsPaused** | **bool** | Tells you if the cluster has been paused | [readonly] 
+**Storage** | **int32** | Amount of storage (in GB) provisioned to this cluster | [readonly] 
 **TopicPrefix** | Pointer to **string** | Topic name prefix used by this ksqlDB cluster. Used to assign ACLs for this ksqlDB cluster to use. | [optional] [readonly] 
 
 ## Methods
 
 ### NewKsqldbcmV2ClusterStatus
 
-`func NewKsqldbcmV2ClusterStatus(phase string, ) *KsqldbcmV2ClusterStatus`
+`func NewKsqldbcmV2ClusterStatus(phase string, isPaused bool, storage int32, ) *KsqldbcmV2ClusterStatus`
 
 NewKsqldbcmV2ClusterStatus instantiates a new KsqldbcmV2ClusterStatus object
 This constructor will assign default values to properties that have it defined,
@@ -70,6 +72,46 @@ and a boolean to check if the value has been set.
 `func (o *KsqldbcmV2ClusterStatus) SetPhase(v string)`
 
 SetPhase sets Phase field to given value.
+
+
+### GetIsPaused
+
+`func (o *KsqldbcmV2ClusterStatus) GetIsPaused() bool`
+
+GetIsPaused returns the IsPaused field if non-nil, zero value otherwise.
+
+### GetIsPausedOk
+
+`func (o *KsqldbcmV2ClusterStatus) GetIsPausedOk() (*bool, bool)`
+
+GetIsPausedOk returns a tuple with the IsPaused field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPaused
+
+`func (o *KsqldbcmV2ClusterStatus) SetIsPaused(v bool)`
+
+SetIsPaused sets IsPaused field to given value.
+
+
+### GetStorage
+
+`func (o *KsqldbcmV2ClusterStatus) GetStorage() int32`
+
+GetStorage returns the Storage field if non-nil, zero value otherwise.
+
+### GetStorageOk
+
+`func (o *KsqldbcmV2ClusterStatus) GetStorageOk() (*int32, bool)`
+
+GetStorageOk returns a tuple with the Storage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorage
+
+`func (o *KsqldbcmV2ClusterStatus) SetStorage(v int32)`
+
+SetStorage sets Storage field to given value.
 
 
 ### GetTopicPrefix
