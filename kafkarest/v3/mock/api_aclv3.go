@@ -5,31 +5,32 @@
 package mock
 
 import (
-	command_line_arguments "command-line-arguments"
 	context "context"
 	net_http "net/http"
 	sync "sync"
+
+	github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3 "github.com/confluentinc/ccloud-sdk-go-v2/kafkarest/v3"
 )
 
 // ACLV3Api is a mock of ACLV3Api interface
 type ACLV3Api struct {
 	lockCreateKafkaAcls sync.Mutex
-	CreateKafkaAclsFunc func(ctx context.Context, clusterId string) command_line_arguments.ApiCreateKafkaAclsRequest
+	CreateKafkaAclsFunc func(ctx context.Context, clusterId string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiCreateKafkaAclsRequest
 
 	lockCreateKafkaAclsExecute sync.Mutex
-	CreateKafkaAclsExecuteFunc func(r command_line_arguments.ApiCreateKafkaAclsRequest) (*net_http.Response, error)
+	CreateKafkaAclsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiCreateKafkaAclsRequest) (*net_http.Response, error)
 
 	lockDeleteKafkaAcls sync.Mutex
-	DeleteKafkaAclsFunc func(ctx context.Context, clusterId string) command_line_arguments.ApiDeleteKafkaAclsRequest
+	DeleteKafkaAclsFunc func(ctx context.Context, clusterId string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiDeleteKafkaAclsRequest
 
 	lockDeleteKafkaAclsExecute sync.Mutex
-	DeleteKafkaAclsExecuteFunc func(r command_line_arguments.ApiDeleteKafkaAclsRequest) (command_line_arguments.InlineResponse200, *net_http.Response, error)
+	DeleteKafkaAclsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiDeleteKafkaAclsRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.InlineResponse200, *net_http.Response, error)
 
 	lockGetKafkaAcls sync.Mutex
-	GetKafkaAclsFunc func(ctx context.Context, clusterId string) command_line_arguments.ApiGetKafkaAclsRequest
+	GetKafkaAclsFunc func(ctx context.Context, clusterId string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaAclsRequest
 
 	lockGetKafkaAclsExecute sync.Mutex
-	GetKafkaAclsExecuteFunc func(r command_line_arguments.ApiGetKafkaAclsRequest) (command_line_arguments.AclDataList, *net_http.Response, error)
+	GetKafkaAclsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaAclsRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.AclDataList, *net_http.Response, error)
 
 	calls struct {
 		CreateKafkaAcls []struct {
@@ -37,27 +38,27 @@ type ACLV3Api struct {
 			ClusterId string
 		}
 		CreateKafkaAclsExecute []struct {
-			R command_line_arguments.ApiCreateKafkaAclsRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiCreateKafkaAclsRequest
 		}
 		DeleteKafkaAcls []struct {
 			Ctx       context.Context
 			ClusterId string
 		}
 		DeleteKafkaAclsExecute []struct {
-			R command_line_arguments.ApiDeleteKafkaAclsRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiDeleteKafkaAclsRequest
 		}
 		GetKafkaAcls []struct {
 			Ctx       context.Context
 			ClusterId string
 		}
 		GetKafkaAclsExecute []struct {
-			R command_line_arguments.ApiGetKafkaAclsRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaAclsRequest
 		}
 	}
 }
 
 // CreateKafkaAcls mocks base method by wrapping the associated func.
-func (m *ACLV3Api) CreateKafkaAcls(ctx context.Context, clusterId string) command_line_arguments.ApiCreateKafkaAclsRequest {
+func (m *ACLV3Api) CreateKafkaAcls(ctx context.Context, clusterId string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiCreateKafkaAclsRequest {
 	m.lockCreateKafkaAcls.Lock()
 	defer m.lockCreateKafkaAcls.Unlock()
 
@@ -98,7 +99,7 @@ func (m *ACLV3Api) CreateKafkaAclsCalls() []struct {
 }
 
 // CreateKafkaAclsExecute mocks base method by wrapping the associated func.
-func (m *ACLV3Api) CreateKafkaAclsExecute(r command_line_arguments.ApiCreateKafkaAclsRequest) (*net_http.Response, error) {
+func (m *ACLV3Api) CreateKafkaAclsExecute(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiCreateKafkaAclsRequest) (*net_http.Response, error) {
 	m.lockCreateKafkaAclsExecute.Lock()
 	defer m.lockCreateKafkaAclsExecute.Unlock()
 
@@ -107,7 +108,7 @@ func (m *ACLV3Api) CreateKafkaAclsExecute(r command_line_arguments.ApiCreateKafk
 	}
 
 	call := struct {
-		R command_line_arguments.ApiCreateKafkaAclsRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiCreateKafkaAclsRequest
 	}{
 		R: r,
 	}
@@ -127,7 +128,7 @@ func (m *ACLV3Api) CreateKafkaAclsExecuteCalled() bool {
 
 // CreateKafkaAclsExecuteCalls returns the calls made to CreateKafkaAclsExecute.
 func (m *ACLV3Api) CreateKafkaAclsExecuteCalls() []struct {
-	R command_line_arguments.ApiCreateKafkaAclsRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiCreateKafkaAclsRequest
 } {
 	m.lockCreateKafkaAclsExecute.Lock()
 	defer m.lockCreateKafkaAclsExecute.Unlock()
@@ -136,7 +137,7 @@ func (m *ACLV3Api) CreateKafkaAclsExecuteCalls() []struct {
 }
 
 // DeleteKafkaAcls mocks base method by wrapping the associated func.
-func (m *ACLV3Api) DeleteKafkaAcls(ctx context.Context, clusterId string) command_line_arguments.ApiDeleteKafkaAclsRequest {
+func (m *ACLV3Api) DeleteKafkaAcls(ctx context.Context, clusterId string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiDeleteKafkaAclsRequest {
 	m.lockDeleteKafkaAcls.Lock()
 	defer m.lockDeleteKafkaAcls.Unlock()
 
@@ -177,7 +178,7 @@ func (m *ACLV3Api) DeleteKafkaAclsCalls() []struct {
 }
 
 // DeleteKafkaAclsExecute mocks base method by wrapping the associated func.
-func (m *ACLV3Api) DeleteKafkaAclsExecute(r command_line_arguments.ApiDeleteKafkaAclsRequest) (command_line_arguments.InlineResponse200, *net_http.Response, error) {
+func (m *ACLV3Api) DeleteKafkaAclsExecute(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiDeleteKafkaAclsRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.InlineResponse200, *net_http.Response, error) {
 	m.lockDeleteKafkaAclsExecute.Lock()
 	defer m.lockDeleteKafkaAclsExecute.Unlock()
 
@@ -186,7 +187,7 @@ func (m *ACLV3Api) DeleteKafkaAclsExecute(r command_line_arguments.ApiDeleteKafk
 	}
 
 	call := struct {
-		R command_line_arguments.ApiDeleteKafkaAclsRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiDeleteKafkaAclsRequest
 	}{
 		R: r,
 	}
@@ -206,7 +207,7 @@ func (m *ACLV3Api) DeleteKafkaAclsExecuteCalled() bool {
 
 // DeleteKafkaAclsExecuteCalls returns the calls made to DeleteKafkaAclsExecute.
 func (m *ACLV3Api) DeleteKafkaAclsExecuteCalls() []struct {
-	R command_line_arguments.ApiDeleteKafkaAclsRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiDeleteKafkaAclsRequest
 } {
 	m.lockDeleteKafkaAclsExecute.Lock()
 	defer m.lockDeleteKafkaAclsExecute.Unlock()
@@ -215,7 +216,7 @@ func (m *ACLV3Api) DeleteKafkaAclsExecuteCalls() []struct {
 }
 
 // GetKafkaAcls mocks base method by wrapping the associated func.
-func (m *ACLV3Api) GetKafkaAcls(ctx context.Context, clusterId string) command_line_arguments.ApiGetKafkaAclsRequest {
+func (m *ACLV3Api) GetKafkaAcls(ctx context.Context, clusterId string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaAclsRequest {
 	m.lockGetKafkaAcls.Lock()
 	defer m.lockGetKafkaAcls.Unlock()
 
@@ -256,7 +257,7 @@ func (m *ACLV3Api) GetKafkaAclsCalls() []struct {
 }
 
 // GetKafkaAclsExecute mocks base method by wrapping the associated func.
-func (m *ACLV3Api) GetKafkaAclsExecute(r command_line_arguments.ApiGetKafkaAclsRequest) (command_line_arguments.AclDataList, *net_http.Response, error) {
+func (m *ACLV3Api) GetKafkaAclsExecute(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaAclsRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.AclDataList, *net_http.Response, error) {
 	m.lockGetKafkaAclsExecute.Lock()
 	defer m.lockGetKafkaAclsExecute.Unlock()
 
@@ -265,7 +266,7 @@ func (m *ACLV3Api) GetKafkaAclsExecute(r command_line_arguments.ApiGetKafkaAclsR
 	}
 
 	call := struct {
-		R command_line_arguments.ApiGetKafkaAclsRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaAclsRequest
 	}{
 		R: r,
 	}
@@ -285,7 +286,7 @@ func (m *ACLV3Api) GetKafkaAclsExecuteCalled() bool {
 
 // GetKafkaAclsExecuteCalls returns the calls made to GetKafkaAclsExecute.
 func (m *ACLV3Api) GetKafkaAclsExecuteCalls() []struct {
-	R command_line_arguments.ApiGetKafkaAclsRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaAclsRequest
 } {
 	m.lockGetKafkaAclsExecute.Lock()
 	defer m.lockGetKafkaAclsExecute.Unlock()
