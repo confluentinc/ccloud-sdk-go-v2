@@ -3592,8 +3592,647 @@ paths:
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
+    post:
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Make a request to create a transit gateway attachment.
+      operationId: createNetworkingV1TransitGatewayAttachment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/networking.v1.TransitGatewayAttachment'
+              - properties:
+                  spec:
+                    required:
+                    - cloud
+                    - environment
+                    - network
+                    type: object
+                required:
+                - spec
+                type: object
+              - properties:
+                  spec:
+                    properties:
+                      environment:
+                        example:
+                          id: env-00000
+                      network:
+                        example:
+                          id: n-00000
+                    type: object
+                type: object
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/networking.v1.TransitGatewayAttachment'
+                - properties:
+                    spec:
+                      required:
+                      - cloud
+                      - environment
+                      - network
+                      type: object
+                  required:
+                  - spec
+                  - status
+                  type: object
+                - properties:
+                    spec:
+                      properties:
+                        environment:
+                          example:
+                            id: env-00000
+                            related: https://api.confluent.cloud/v2/environments/env-00000
+                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
+                        network:
+                          example:
+                            id: n-00000
+                            related: https://api.confluent.cloud/networking/v1/networks/n-00000
+                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000
+                      type: object
+                  type: object
+          description: A Transit Gateway Attachment is being created.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: TransitGatewayAttachment resource uri
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}
+                format: uri
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "402":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "402"
+                  code: quota_exceeded
+                  title: Kafka Clusters Per Org Quota Exceeded
+                  detail: 'The request would exceed the quota: kafka_clusters_per_environment'
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request would exceed one or more quotas.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Over Quota
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "409"
+                  code: resource_already_exists
+                  title: Resource Already exists
+                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                    exists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request is in conflict with the current server state
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Resource URI of conflicting resource
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/{object}/{id}
+                format: uri
+                type: string
+              style: simple
+          x-summary: Conflict
+        "422":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "422"
+                  code: invalid_configuration
+                  id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  title: Validation Failed
+                  detail: 'The property ''/cluster/storage_size'' of type string did
+                    not match the following type: integer'
+                  source:
+                    pointer: /cluster/storage_size
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Validation Failed
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - api-key: []
+      summary: Create a Transit Gateway Attachment
+      tags:
+      - Transit Gateway Attachments (networking/v1)
+      x-request-access-name: Networking v1
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://api.confluent.cloud/networking/v1/transit-gateway-attachments \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"spec":{"display_name":"prod-tgw-use1","cloud":{"kind":"AwsTransitGatewayAttachment","ram_share_arn":"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx","transit_gateway_id":"tgw-xxxxxxxxxxxxxxxxx","transit_gateway_attachment_id":"tgw-attach-xxxxx","enable_custom_routes":false,"routes":["100.64.0.0/10","10.0.0.0/8","192.168.0.0/16","172.16.0.0/12"]},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"n-00000","environment":"string"}}}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"transit_gateway_attachment_id\":\"tgw-attach-xxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/networking/v1/transit-gateway-attachments")
+            .post(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/transit-gateway-attachments\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
+          :\\\"prod-tgw-use1\\\",\\\"cloud\\\":{\\\"kind\\\":\\\"AwsTransitGatewayAttachment\\\
+          \",\\\"ram_share_arn\\\":\\\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\\\
+          \",\\\"transit_gateway_id\\\":\\\"tgw-xxxxxxxxxxxxxxxxx\\\",\\\"transit_gateway_attachment_id\\\
+          \":\\\"tgw-attach-xxxxx\\\",\\\"enable_custom_routes\\\":false,\\\"routes\\\
+          \":[\\\"100.64.0.0/10\\\",\\\"10.0.0.0/8\\\",\\\"192.168.0.0/16\\\",\\\"\
+          172.16.0.0/12\\\"]},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\
+          \"environment\\\":\\\"string\\\"},\\\"network\\\":{\\\"id\\\":\\\"n-00000\\\
+          \",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
+          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          payload = "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"transit_gateway_attachment_id\":\"tgw-attach-xxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("POST", "/networking/v1/transit-gateway-attachments", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/networking/v1/transit-gateway-attachments",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            spec: {
+              display_name: 'prod-tgw-use1',
+              cloud: {
+                kind: 'AwsTransitGatewayAttachment',
+                ram_share_arn: 'arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx',
+                transit_gateway_id: 'tgw-xxxxxxxxxxxxxxxxx',
+                transit_gateway_attachment_id: 'tgw-attach-xxxxx',
+                enable_custom_routes: false,
+                routes: ['100.64.0.0/10', '10.0.0.0/8', '192.168.0.0/16', '172.16.0.0/12']
+              },
+              environment: {id: 'env-00000', environment: 'string'},
+              network: {id: 'n-00000', environment: 'string'}
+            }
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/transit-gateway-attachments");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"transit_gateway_attachment_id\":\"tgw-attach-xxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/transit-gateway-attachments");
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"transit_gateway_attachment_id\":\"tgw-attach-xxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
     x-request-access-name: Networking v1
   /networking/v1/transit-gateway-attachments/{id}:
+    delete:
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Make a request to delete a transit gateway attachment.
+      operationId: deleteNetworkingV1TransitGatewayAttachment
+      parameters:
+      - description: Scope the operation to the given environment.
+        example: env-00000
+        explode: true
+        in: query
+        name: environment
+        required: true
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: The unique identifier for the transit gateway attachment.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: A Transit Gateway Attachment is being deleted.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - api-key: []
+      summary: Delete a Transit Gateway Attachment
+      tags:
+      - Transit Gateway Attachments (networking/v1)
+      x-request-access-name: Networking v1
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request DELETE \
+            --url 'https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}?environment=SOME_STRING_VALUE' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}?environment=SOME_STRING_VALUE")
+            .delete(null)
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}?environment=SOME_STRING_VALUE\"\
+          \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("DELETE", "/networking/v1/transit-gateway-attachments/{id}?environment=SOME_STRING_VALUE", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "DELETE",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/networking/v1/transit-gateway-attachments/{id}?environment=SOME_STRING_VALUE",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}?environment=SOME_STRING_VALUE");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}?environment=SOME_STRING_VALUE");
+          var request = new RestRequest(Method.DELETE);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
     get:
       description: |-
         [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
@@ -3628,9 +4267,9 @@ paths:
                 - properties:
                     spec:
                       required:
+                      - cloud
                       - environment
                       - network
-                      - ram_share_arn
                       type: object
                   required:
                   - api_version
@@ -3874,6 +4513,382 @@ paths:
           var client = new RestClient("https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}?environment=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+    patch:
+      description: |+
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Make a request to update a transit gateway attachment.
+
+      operationId: updateNetworkingV1TransitGatewayAttachment
+      parameters:
+      - description: The unique identifier for the transit gateway attachment.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/networking.v1.TransitGatewayAttachmentUpdate'
+              - properties:
+                  spec:
+                    properties:
+                      environment:
+                        example:
+                          id: env-00000
+                    required:
+                    - environment
+                    type: object
+                required:
+                - spec
+                type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/networking.v1.TransitGatewayAttachment'
+                - properties:
+                    spec:
+                      required:
+                      - cloud
+                      - environment
+                      - network
+                      type: object
+                  required:
+                  - api_version
+                  - id
+                  - kind
+                  - spec
+                  - status
+                  type: object
+                - properties:
+                    spec:
+                      properties:
+                        environment:
+                          example:
+                            id: env-00000
+                            related: https://api.confluent.cloud/v2/environments/env-00000
+                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
+                        network:
+                          example:
+                            id: n-00000
+                            related: https://api.confluent.cloud/networking/v1/networks/n-00000
+                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000
+                      type: object
+                  type: object
+          description: Transit Gateway Attachment.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "402":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "402"
+                  code: quota_exceeded
+                  title: Kafka Clusters Per Org Quota Exceeded
+                  detail: 'The request would exceed the quota: kafka_clusters_per_environment'
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request would exceed one or more quotas.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Over Quota
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "422":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "422"
+                  code: invalid_configuration
+                  id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  title: Validation Failed
+                  detail: 'The property ''/cluster/storage_size'' of type string did
+                    not match the following type: integer'
+                  source:
+                    pointer: /cluster/storage_size
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Validation Failed
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - api-key: []
+      summary: Update a Transit Gateway Attachment
+      tags:
+      - Transit Gateway Attachments (networking/v1)
+      x-request-access-name: Networking v1
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request PATCH \
+            --url 'https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"spec":{"display_name":"prod-tgw-use1","cloud":{"kind":"AwsTransitGatewayAttachment","ram_share_arn":"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx","transit_gateway_id":"tgw-xxxxxxxxxxxxxxxxx","transit_gateway_attachment_id":"tgw-attach-xxxxx","enable_custom_routes":false,"routes":["100.64.0.0/10","10.0.0.0/8","192.168.0.0/16","172.16.0.0/12"]},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"string","environment":"string"}}}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"transit_gateway_attachment_id\":\"tgw-attach-xxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}")
+            .patch(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
+          :\\\"prod-tgw-use1\\\",\\\"cloud\\\":{\\\"kind\\\":\\\"AwsTransitGatewayAttachment\\\
+          \",\\\"ram_share_arn\\\":\\\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\\\
+          \",\\\"transit_gateway_id\\\":\\\"tgw-xxxxxxxxxxxxxxxxx\\\",\\\"transit_gateway_attachment_id\\\
+          \":\\\"tgw-attach-xxxxx\\\",\\\"enable_custom_routes\\\":false,\\\"routes\\\
+          \":[\\\"100.64.0.0/10\\\",\\\"10.0.0.0/8\\\",\\\"192.168.0.0/16\\\",\\\"\
+          172.16.0.0/12\\\"]},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\
+          \"environment\\\":\\\"string\\\"},\\\"network\\\":{\\\"id\\\":\\\"string\\\
+          \",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
+          PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          payload = "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"transit_gateway_attachment_id\":\"tgw-attach-xxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("PATCH", "/networking/v1/transit-gateway-attachments/{id}", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "PATCH",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/networking/v1/transit-gateway-attachments/{id}",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            spec: {
+              display_name: 'prod-tgw-use1',
+              cloud: {
+                kind: 'AwsTransitGatewayAttachment',
+                ram_share_arn: 'arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx',
+                transit_gateway_id: 'tgw-xxxxxxxxxxxxxxxxx',
+                transit_gateway_attachment_id: 'tgw-attach-xxxxx',
+                enable_custom_routes: false,
+                routes: ['100.64.0.0/10', '10.0.0.0/8', '192.168.0.0/16', '172.16.0.0/12']
+              },
+              environment: {id: 'env-00000', environment: 'string'},
+              network: {id: 'string', environment: 'string'}
+            }
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"transit_gateway_attachment_id\":\"tgw-attach-xxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}");
+          var request = new RestRequest(Method.PATCH);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"transit_gateway_attachment_id\":\"tgw-attach-xxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Networking v1
   /networking/v1/private-link-accesses:
@@ -6270,6 +7285,51 @@ components:
       - vnet
       title: AZURE
       type: object
+    networking.v1.AwsTransitGatewayAttachment:
+      description: AWS Transit Gateway Attachment.
+      properties:
+        kind:
+          description: AWS Transit Gateway Attachment kind type.
+          enum:
+          - AwsTransitGatewayAttachment
+          type: string
+        ram_share_arn:
+          description: The full AWS Resource Name (ARN) for the AWS Resource Access
+            Manager (RAM) Share of the Transit Gateways that you want Confluent Cloud
+            attached to.
+          example: arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx
+          type: string
+        transit_gateway_id:
+          description: The ID for the AWS Transit Gateway that you want Confluent
+            CLoud attached to.
+          example: tgw-xxxxxxxxxxxxxxxxx
+          type: string
+        transit_gateway_attachment_id:
+          description: The ID for the AWS Transit Gateway VPC Attachment that attaches
+            Confluent VPC to Transit Gateway.
+          example: tgw-attach-xxxxx
+          type: string
+        enable_custom_routes:
+          default: false
+          description: Enable custom destination routes in Confluent Cloud.
+          example: false
+          type: boolean
+        routes:
+          description: List of destination routes.
+          example:
+          - 100.64.0.0/10
+          - 10.0.0.0/8
+          - 192.168.0.0/16
+          - 172.16.0.0/12
+          items:
+            $ref: '#/components/schemas/networking.v1.Cidr'
+          type: array
+      required:
+      - kind
+      - ram_share_arn
+      - transit_gateway_id
+      title: AWS
+      type: object
     networking.v1.AwsPrivateLinkAccess:
       description: AWS PrivateLink access configuration.
       properties:
@@ -6620,9 +7680,9 @@ components:
             - properties:
                 spec:
                   required:
+                  - cloud
                   - environment
                   - network
-                  - ram_share_arn
                   type: object
               required:
               - id
@@ -6645,13 +7705,16 @@ components:
           description: The name of the TGW attachment
           example: prod-tgw-use1
           type: string
-        ram_share_arn:
-          description: The full AWS Resource Name (ARN) for the AWS Resource Access
-            Manager (RAM) Share of the Transit Gateways that you want Confluent Cloud
-            attached to
-          example: arn:aws:ram:eu-west-1:000000000000:resource-share/000000000
-          minLength: 1
-          type: string
+        cloud:
+          description: The cloud-specific Transit Gateway details.
+          discriminator:
+            mapping:
+              AwsTransitGatewayAttachment: '#/components/schemas/networking.v1.AwsTransitGatewayAttachment'
+            propertyName: kind
+          oneOf:
+          - $ref: '#/components/schemas/networking.v1.AwsTransitGatewayAttachment'
+          type: object
+          x-one-of-name: NetworkingV1TransitGatewayAttachmentSpecCloudOneOf
         environment:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
@@ -7073,6 +8136,83 @@ components:
           $ref: '#/components/schemas/networking.v1.PeeringSpecUpdate'
         status:
           $ref: '#/components/schemas/networking.v1.PeeringStatus'
+      type: object
+    networking.v1.TransitGatewayAttachmentSpecUpdate:
+      description: The desired state of the Transit Gateway Attachment
+      properties:
+        display_name:
+          description: The name of the TGW attachment
+          example: prod-tgw-use1
+          type: string
+        cloud:
+          description: The cloud-specific Transit Gateway details.
+          discriminator:
+            mapping:
+              AwsTransitGatewayAttachment: '#/components/schemas/networking.v1.AwsTransitGatewayAttachment'
+            propertyName: kind
+          oneOf:
+          - $ref: '#/components/schemas/networking.v1.AwsTransitGatewayAttachment'
+          type: object
+          x-one-of-name: NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf
+        environment:
+          allOf:
+          - $ref: '#/components/schemas/ObjectReference'
+          description: The environment to which this belongs.
+      type: object
+      x-enable-id: true
+      x-enable-listmeta: true
+      x-enable-objectmeta: true
+    networking.v1.TransitGatewayAttachmentUpdate:
+      description: |-
+        AWS Transit Gateway Attachments
+
+        Related guide: [APIs to manage AWS Transit Gateway Attachments](https://docs.confluent.io/cloud/current/networking/aws-transit-gateway.html).
+
+        ## The Transit Gateway Attachments Model
+        <SchemaDefinition schemaRef="#/components/schemas/networking.v1.TransitGatewayAttachment" />
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `tgw_attachments_per_network` | Number of TGW attachments per network |
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - networking/v1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - TransitGatewayAttachment
+          readOnly: true
+          type: string
+        id:
+          description: ID is the "natural identifier" for an object within its scope/namespace;
+            it is normally unique across time but not space. That is, you can assume
+            that the ID will not be reclaimed and reused after an object is deleted
+            ("time"); however, it may collide with IDs for other object `kinds` or
+            objects of the same `kind` within a different scope/namespace ("space").
+          example: dlz-f3a90de
+          maxLength: 255
+          readOnly: true
+          type: string
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/ObjectMeta'
+          - properties:
+              self:
+                example: https://api.confluent.cloud/networking/v1/transit-gateway-attachments/tga-12345
+              resource_name:
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/transit-gateway-attachment=tga-12345
+        spec:
+          $ref: '#/components/schemas/networking.v1.TransitGatewayAttachmentSpecUpdate'
+        status:
+          $ref: '#/components/schemas/networking.v1.TransitGatewayAttachmentStatus'
       type: object
     networking.v1.PrivateLinkAccessSpecUpdate:
       description: The desired state of the Private Link Access

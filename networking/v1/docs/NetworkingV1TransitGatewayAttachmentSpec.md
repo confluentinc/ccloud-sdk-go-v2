@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the TGW attachment | [optional] 
-**RamShareArn** | Pointer to **string** | The full AWS Resource Name (ARN) for the AWS Resource Access Manager (RAM) Share of the Transit Gateways that you want Confluent Cloud attached to | [optional] 
+**Cloud** | Pointer to [**NetworkingV1TransitGatewayAttachmentSpecCloudOneOf**](NetworkingV1TransitGatewayAttachmentSpecCloudOneOf.md) | The cloud-specific Transit Gateway details. | [optional] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 **Network** | Pointer to [**ObjectReference**](ObjectReference.md) | The network to which this belongs. | [optional] 
 
@@ -53,30 +53,30 @@ SetDisplayName sets DisplayName field to given value.
 
 HasDisplayName returns a boolean if a field has been set.
 
-### GetRamShareArn
+### GetCloud
 
-`func (o *NetworkingV1TransitGatewayAttachmentSpec) GetRamShareArn() string`
+`func (o *NetworkingV1TransitGatewayAttachmentSpec) GetCloud() NetworkingV1TransitGatewayAttachmentSpecCloudOneOf`
 
-GetRamShareArn returns the RamShareArn field if non-nil, zero value otherwise.
+GetCloud returns the Cloud field if non-nil, zero value otherwise.
 
-### GetRamShareArnOk
+### GetCloudOk
 
-`func (o *NetworkingV1TransitGatewayAttachmentSpec) GetRamShareArnOk() (*string, bool)`
+`func (o *NetworkingV1TransitGatewayAttachmentSpec) GetCloudOk() (*NetworkingV1TransitGatewayAttachmentSpecCloudOneOf, bool)`
 
-GetRamShareArnOk returns a tuple with the RamShareArn field if it's non-nil, zero value otherwise
+GetCloudOk returns a tuple with the Cloud field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetRamShareArn
+### SetCloud
 
-`func (o *NetworkingV1TransitGatewayAttachmentSpec) SetRamShareArn(v string)`
+`func (o *NetworkingV1TransitGatewayAttachmentSpec) SetCloud(v NetworkingV1TransitGatewayAttachmentSpecCloudOneOf)`
 
-SetRamShareArn sets RamShareArn field to given value.
+SetCloud sets Cloud field to given value.
 
-### HasRamShareArn
+### HasCloud
 
-`func (o *NetworkingV1TransitGatewayAttachmentSpec) HasRamShareArn() bool`
+`func (o *NetworkingV1TransitGatewayAttachmentSpec) HasCloud() bool`
 
-HasRamShareArn returns a boolean if a field has been set.
+HasCloud returns a boolean if a field has been set.
 
 ### GetEnvironment
 

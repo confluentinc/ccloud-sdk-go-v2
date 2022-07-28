@@ -33,37 +33,35 @@ import (
 	"reflect"
 )
 
-// NetworkingV1TransitGatewayAttachmentSpec The desired state of the Transit Gateway Attachment
-type NetworkingV1TransitGatewayAttachmentSpec struct {
+// NetworkingV1TransitGatewayAttachmentSpecUpdate The desired state of the Transit Gateway Attachment
+type NetworkingV1TransitGatewayAttachmentSpecUpdate struct {
 	// The name of the TGW attachment
 	DisplayName *string `json:"display_name,omitempty"`
 	// The cloud-specific Transit Gateway details.
-	Cloud *NetworkingV1TransitGatewayAttachmentSpecCloudOneOf `json:"cloud,omitempty"`
+	Cloud *NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf `json:"cloud,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
-	// The network to which this belongs.
-	Network *ObjectReference `json:"network,omitempty"`
 }
 
-// NewNetworkingV1TransitGatewayAttachmentSpec instantiates a new NetworkingV1TransitGatewayAttachmentSpec object
+// NewNetworkingV1TransitGatewayAttachmentSpecUpdate instantiates a new NetworkingV1TransitGatewayAttachmentSpecUpdate object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1TransitGatewayAttachmentSpec() *NetworkingV1TransitGatewayAttachmentSpec {
-	this := NetworkingV1TransitGatewayAttachmentSpec{}
+func NewNetworkingV1TransitGatewayAttachmentSpecUpdate() *NetworkingV1TransitGatewayAttachmentSpecUpdate {
+	this := NetworkingV1TransitGatewayAttachmentSpecUpdate{}
 	return &this
 }
 
-// NewNetworkingV1TransitGatewayAttachmentSpecWithDefaults instantiates a new NetworkingV1TransitGatewayAttachmentSpec object
+// NewNetworkingV1TransitGatewayAttachmentSpecUpdateWithDefaults instantiates a new NetworkingV1TransitGatewayAttachmentSpecUpdate object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewNetworkingV1TransitGatewayAttachmentSpecWithDefaults() *NetworkingV1TransitGatewayAttachmentSpec {
-	this := NetworkingV1TransitGatewayAttachmentSpec{}
+func NewNetworkingV1TransitGatewayAttachmentSpecUpdateWithDefaults() *NetworkingV1TransitGatewayAttachmentSpecUpdate {
+	this := NetworkingV1TransitGatewayAttachmentSpecUpdate{}
 	return &this
 }
 
 // GetDisplayName returns the DisplayName field value if set, zero value otherwise.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) GetDisplayName() string {
+func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) GetDisplayName() string {
 	if o == nil || o.DisplayName == nil {
 		var ret string
 		return ret
@@ -73,7 +71,7 @@ func (o *NetworkingV1TransitGatewayAttachmentSpec) GetDisplayName() string {
 
 // GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) GetDisplayNameOk() (*string, bool) {
+func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) GetDisplayNameOk() (*string, bool) {
 	if o == nil || o.DisplayName == nil {
 		return nil, false
 	}
@@ -81,7 +79,7 @@ func (o *NetworkingV1TransitGatewayAttachmentSpec) GetDisplayNameOk() (*string, 
 }
 
 // HasDisplayName returns a boolean if a field has been set.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) HasDisplayName() bool {
+func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) HasDisplayName() bool {
 	if o != nil && o.DisplayName != nil {
 		return true
 	}
@@ -90,14 +88,14 @@ func (o *NetworkingV1TransitGatewayAttachmentSpec) HasDisplayName() bool {
 }
 
 // SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) SetDisplayName(v string) {
+func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) SetDisplayName(v string) {
 	o.DisplayName = &v
 }
 
 // GetCloud returns the Cloud field value if set, zero value otherwise.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) GetCloud() NetworkingV1TransitGatewayAttachmentSpecCloudOneOf {
+func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) GetCloud() NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf {
 	if o == nil || o.Cloud == nil {
-		var ret NetworkingV1TransitGatewayAttachmentSpecCloudOneOf
+		var ret NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf
 		return ret
 	}
 	return *o.Cloud
@@ -105,7 +103,7 @@ func (o *NetworkingV1TransitGatewayAttachmentSpec) GetCloud() NetworkingV1Transi
 
 // GetCloudOk returns a tuple with the Cloud field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) GetCloudOk() (*NetworkingV1TransitGatewayAttachmentSpecCloudOneOf, bool) {
+func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) GetCloudOk() (*NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf, bool) {
 	if o == nil || o.Cloud == nil {
 		return nil, false
 	}
@@ -113,7 +111,7 @@ func (o *NetworkingV1TransitGatewayAttachmentSpec) GetCloudOk() (*NetworkingV1Tr
 }
 
 // HasCloud returns a boolean if a field has been set.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) HasCloud() bool {
+func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) HasCloud() bool {
 	if o != nil && o.Cloud != nil {
 		return true
 	}
@@ -121,13 +119,13 @@ func (o *NetworkingV1TransitGatewayAttachmentSpec) HasCloud() bool {
 	return false
 }
 
-// SetCloud gets a reference to the given NetworkingV1TransitGatewayAttachmentSpecCloudOneOf and assigns it to the Cloud field.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) SetCloud(v NetworkingV1TransitGatewayAttachmentSpecCloudOneOf) {
+// SetCloud gets a reference to the given NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf and assigns it to the Cloud field.
+func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) SetCloud(v NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf) {
 	o.Cloud = &v
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) GetEnvironment() ObjectReference {
+func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) GetEnvironment() ObjectReference {
 	if o == nil || o.Environment == nil {
 		var ret ObjectReference
 		return ret
@@ -137,7 +135,7 @@ func (o *NetworkingV1TransitGatewayAttachmentSpec) GetEnvironment() ObjectRefere
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) GetEnvironmentOk() (*ObjectReference, bool) {
+func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) GetEnvironmentOk() (*ObjectReference, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -145,7 +143,7 @@ func (o *NetworkingV1TransitGatewayAttachmentSpec) GetEnvironmentOk() (*ObjectRe
 }
 
 // HasEnvironment returns a boolean if a field has been set.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) HasEnvironment() bool {
+func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) HasEnvironment() bool {
 	if o != nil && o.Environment != nil {
 		return true
 	}
@@ -154,51 +152,18 @@ func (o *NetworkingV1TransitGatewayAttachmentSpec) HasEnvironment() bool {
 }
 
 // SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) SetEnvironment(v ObjectReference) {
+func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) SetEnvironment(v ObjectReference) {
 	o.Environment = &v
 }
 
-// GetNetwork returns the Network field value if set, zero value otherwise.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) GetNetwork() ObjectReference {
-	if o == nil || o.Network == nil {
-		var ret ObjectReference
-		return ret
-	}
-	return *o.Network
-}
-
-// GetNetworkOk returns a tuple with the Network field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) GetNetworkOk() (*ObjectReference, bool) {
-	if o == nil || o.Network == nil {
-		return nil, false
-	}
-	return o.Network, true
-}
-
-// HasNetwork returns a boolean if a field has been set.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) HasNetwork() bool {
-	if o != nil && o.Network != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetNetwork gets a reference to the given ObjectReference and assigns it to the Network field.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) SetNetwork(v ObjectReference) {
-	o.Network = &v
-}
-
 // Redact resets all sensitive fields to their zero value.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) Redact() {
+func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) Redact() {
     o.recurseRedact(o.DisplayName)
     o.recurseRedact(o.Cloud)
     o.recurseRedact(o.Environment)
-    o.recurseRedact(o.Network)
 }
 
-func (o *NetworkingV1TransitGatewayAttachmentSpec) recurseRedact(v interface{}) {
+func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) recurseRedact(v interface{}) {
     type redactor interface {
         Redact()
     }
@@ -223,12 +188,12 @@ func (o *NetworkingV1TransitGatewayAttachmentSpec) recurseRedact(v interface{}) 
     }
 }
 
-func (o NetworkingV1TransitGatewayAttachmentSpec) zeroField(v interface{}) {
+func (o NetworkingV1TransitGatewayAttachmentSpecUpdate) zeroField(v interface{}) {
     p := reflect.ValueOf(v).Elem()
     p.Set(reflect.Zero(p.Type()))
 }
 
-func (o NetworkingV1TransitGatewayAttachmentSpec) MarshalJSON() ([]byte, error) {
+func (o NetworkingV1TransitGatewayAttachmentSpecUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.DisplayName != nil {
 		toSerialize["display_name"] = o.DisplayName
@@ -239,44 +204,41 @@ func (o NetworkingV1TransitGatewayAttachmentSpec) MarshalJSON() ([]byte, error) 
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
 	}
-	if o.Network != nil {
-		toSerialize["network"] = o.Network
-	}
 	return json.Marshal(toSerialize)
 }
 
-type NullableNetworkingV1TransitGatewayAttachmentSpec struct {
-	value *NetworkingV1TransitGatewayAttachmentSpec
+type NullableNetworkingV1TransitGatewayAttachmentSpecUpdate struct {
+	value *NetworkingV1TransitGatewayAttachmentSpecUpdate
 	isSet bool
 }
 
-func (v NullableNetworkingV1TransitGatewayAttachmentSpec) Get() *NetworkingV1TransitGatewayAttachmentSpec {
+func (v NullableNetworkingV1TransitGatewayAttachmentSpecUpdate) Get() *NetworkingV1TransitGatewayAttachmentSpecUpdate {
 	return v.value
 }
 
-func (v *NullableNetworkingV1TransitGatewayAttachmentSpec) Set(val *NetworkingV1TransitGatewayAttachmentSpec) {
+func (v *NullableNetworkingV1TransitGatewayAttachmentSpecUpdate) Set(val *NetworkingV1TransitGatewayAttachmentSpecUpdate) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableNetworkingV1TransitGatewayAttachmentSpec) IsSet() bool {
+func (v NullableNetworkingV1TransitGatewayAttachmentSpecUpdate) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableNetworkingV1TransitGatewayAttachmentSpec) Unset() {
+func (v *NullableNetworkingV1TransitGatewayAttachmentSpecUpdate) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableNetworkingV1TransitGatewayAttachmentSpec(val *NetworkingV1TransitGatewayAttachmentSpec) *NullableNetworkingV1TransitGatewayAttachmentSpec {
-	return &NullableNetworkingV1TransitGatewayAttachmentSpec{value: val, isSet: true}
+func NewNullableNetworkingV1TransitGatewayAttachmentSpecUpdate(val *NetworkingV1TransitGatewayAttachmentSpecUpdate) *NullableNetworkingV1TransitGatewayAttachmentSpecUpdate {
+	return &NullableNetworkingV1TransitGatewayAttachmentSpecUpdate{value: val, isSet: true}
 }
 
-func (v NullableNetworkingV1TransitGatewayAttachmentSpec) MarshalJSON() ([]byte, error) {
+func (v NullableNetworkingV1TransitGatewayAttachmentSpecUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableNetworkingV1TransitGatewayAttachmentSpec) UnmarshalJSON(src []byte) error {
+func (v *NullableNetworkingV1TransitGatewayAttachmentSpecUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
