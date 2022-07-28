@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
 **DisplayName** | Pointer to **string** | The name of the Provider. | [optional] 
 **Description** | Pointer to **string** | A description for your provider | [optional] 
-**Keys** | Pointer to [**[]IamV2Jwks**](IamV2Jwks.md) | The JWKS provided by the Provider. We only express the &#x60;kid&#x60; and &#x60;algorithm&#x60; for each key set | [optional] [readonly] 
-**Deactivated** | Pointer to **bool** | Indicates whether the current provider is disabled. All corresponding &#x60;IdentityPool&#x60; objects would also be disabled  | [optional] [default to false]
+**State** | Pointer to **string** | The current state of the provider | [optional] [readonly] 
+**Keys** | Pointer to [**[]IamV2Jwks**](IamV2Jwks.md) | The JWKS provided by the Provider. We only express the &#x60;kid&#x60; and &#x60;alg&#x60; for each key set | [optional] [readonly] 
 
 ## Methods
 
@@ -182,6 +182,31 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
+### GetState
+
+`func (o *IamV2IdentityProviderUpdate) GetState() string`
+
+GetState returns the State field if non-nil, zero value otherwise.
+
+### GetStateOk
+
+`func (o *IamV2IdentityProviderUpdate) GetStateOk() (*string, bool)`
+
+GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetState
+
+`func (o *IamV2IdentityProviderUpdate) SetState(v string)`
+
+SetState sets State field to given value.
+
+### HasState
+
+`func (o *IamV2IdentityProviderUpdate) HasState() bool`
+
+HasState returns a boolean if a field has been set.
+
 ### GetKeys
 
 `func (o *IamV2IdentityProviderUpdate) GetKeys() []IamV2Jwks`
@@ -206,31 +231,6 @@ SetKeys sets Keys field to given value.
 `func (o *IamV2IdentityProviderUpdate) HasKeys() bool`
 
 HasKeys returns a boolean if a field has been set.
-
-### GetDeactivated
-
-`func (o *IamV2IdentityProviderUpdate) GetDeactivated() bool`
-
-GetDeactivated returns the Deactivated field if non-nil, zero value otherwise.
-
-### GetDeactivatedOk
-
-`func (o *IamV2IdentityProviderUpdate) GetDeactivatedOk() (*bool, bool)`
-
-GetDeactivatedOk returns a tuple with the Deactivated field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDeactivated
-
-`func (o *IamV2IdentityProviderUpdate) SetDeactivated(v bool)`
-
-SetDeactivated sets Deactivated field to given value.
-
-### HasDeactivated
-
-`func (o *IamV2IdentityProviderUpdate) HasDeactivated() bool`
-
-HasDeactivated returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

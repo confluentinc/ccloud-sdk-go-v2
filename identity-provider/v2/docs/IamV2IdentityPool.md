@@ -9,10 +9,11 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
 **DisplayName** | Pointer to **string** | The name of the &#x60;IdentityPool&#x60;. | [optional] 
-**Description** | Pointer to **string** | A description of how this &#x60;IdentityPool&#x60; is used | [optional]
-**SubjectClaim** | Pointer to **string** | The JWT claim to extract the authenticating principal to Confluent resources | [optional]
-**Policy** | Pointer to **string** | A filter expression that must be evaluated to be true to use this identity pool | [optional] 
-**Deactivated** | Pointer to **bool** | Indicates whether the current identity pool is disabled. | [optional] [default to false]
+**Description** | Pointer to **string** | A description of how this &#x60;IdentityPool&#x60; is used | [optional] 
+**IdentityClaim** | Pointer to **string** | The JWT claim to extract the authenticating identity to Confluent resources | [optional] 
+**Filter** | Pointer to **string** | A filter expression that must be evaluated to be true to use this identity pool | [optional] 
+**Principal** | Pointer to **string** | Represents the federated identity associated with this pool. | [optional] [readonly] 
+**State** | Pointer to **string** | The current state of the identity pool | [optional] [readonly] 
 
 ## Methods
 
@@ -183,80 +184,105 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
-### GetSubjectClaim
+### GetIdentityClaim
 
-`func (o *IamV2IdentityPool) GetSubjectClaim() string`
+`func (o *IamV2IdentityPool) GetIdentityClaim() string`
 
-GetSubjectClaim returns the SubjectClaim field if non-nil, zero value otherwise.
+GetIdentityClaim returns the IdentityClaim field if non-nil, zero value otherwise.
 
-### GetSubjectClaimOk
+### GetIdentityClaimOk
 
-`func (o *IamV2IdentityPool) GetSubjectClaimOk() (*string, bool)`
+`func (o *IamV2IdentityPool) GetIdentityClaimOk() (*string, bool)`
 
-GetSubjectClaimOk returns a tuple with the SubjectClaim field if it's non-nil, zero value otherwise
+GetIdentityClaimOk returns a tuple with the IdentityClaim field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSubjectClaim
+### SetIdentityClaim
 
-`func (o *IamV2IdentityPool) SetSubjectClaim(v string)`
+`func (o *IamV2IdentityPool) SetIdentityClaim(v string)`
 
-SetSubjectClaim sets SubjectClaim field to given value.
+SetIdentityClaim sets IdentityClaim field to given value.
 
-### HasSubjectClaim
+### HasIdentityClaim
 
-`func (o *IamV2IdentityPool) HasSubjectClaim() bool`
+`func (o *IamV2IdentityPool) HasIdentityClaim() bool`
 
-HasSubjectClaim returns a boolean if a field has been set.
+HasIdentityClaim returns a boolean if a field has been set.
 
-### GetPolicy
+### GetFilter
 
-`func (o *IamV2IdentityPool) GetPolicy() string`
+`func (o *IamV2IdentityPool) GetFilter() string`
 
-GetPolicy returns the Policy field if non-nil, zero value otherwise.
+GetFilter returns the Filter field if non-nil, zero value otherwise.
 
-### GetPolicyOk
+### GetFilterOk
 
-`func (o *IamV2IdentityPool) GetPolicyOk() (*string, bool)`
+`func (o *IamV2IdentityPool) GetFilterOk() (*string, bool)`
 
-GetPolicyOk returns a tuple with the Policy field if it's non-nil, zero value otherwise
+GetFilterOk returns a tuple with the Filter field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPolicy
+### SetFilter
 
-`func (o *IamV2IdentityPool) SetPolicy(v string)`
+`func (o *IamV2IdentityPool) SetFilter(v string)`
 
-SetPolicy sets Policy field to given value.
+SetFilter sets Filter field to given value.
 
-### HasPolicy
+### HasFilter
 
-`func (o *IamV2IdentityPool) HasPolicy() bool`
+`func (o *IamV2IdentityPool) HasFilter() bool`
 
-HasPolicy returns a boolean if a field has been set.
+HasFilter returns a boolean if a field has been set.
 
-### GetDeactivated
+### GetPrincipal
 
-`func (o *IamV2IdentityPool) GetDeactivated() bool`
+`func (o *IamV2IdentityPool) GetPrincipal() string`
 
-GetDeactivated returns the Deactivated field if non-nil, zero value otherwise.
+GetPrincipal returns the Principal field if non-nil, zero value otherwise.
 
-### GetDeactivatedOk
+### GetPrincipalOk
 
-`func (o *IamV2IdentityPool) GetDeactivatedOk() (*bool, bool)`
+`func (o *IamV2IdentityPool) GetPrincipalOk() (*string, bool)`
 
-GetDeactivatedOk returns a tuple with the Deactivated field if it's non-nil, zero value otherwise
+GetPrincipalOk returns a tuple with the Principal field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDeactivated
+### SetPrincipal
 
-`func (o *IamV2IdentityPool) SetDeactivated(v bool)`
+`func (o *IamV2IdentityPool) SetPrincipal(v string)`
 
-SetDeactivated sets Deactivated field to given value.
+SetPrincipal sets Principal field to given value.
 
-### HasDeactivated
+### HasPrincipal
 
-`func (o *IamV2IdentityPool) HasDeactivated() bool`
+`func (o *IamV2IdentityPool) HasPrincipal() bool`
 
-HasDeactivated returns a boolean if a field has been set.
+HasPrincipal returns a boolean if a field has been set.
+
+### GetState
+
+`func (o *IamV2IdentityPool) GetState() string`
+
+GetState returns the State field if non-nil, zero value otherwise.
+
+### GetStateOk
+
+`func (o *IamV2IdentityPool) GetStateOk() (*string, bool)`
+
+GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetState
+
+`func (o *IamV2IdentityPool) SetState(v string)`
+
+SetState sets State field to given value.
+
+### HasState
+
+`func (o *IamV2IdentityPool) HasState() bool`
+
+HasState returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
