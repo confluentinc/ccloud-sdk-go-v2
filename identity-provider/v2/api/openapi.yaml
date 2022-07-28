@@ -4,26 +4,27 @@ info:
     email: oauth-eng@confluent.io
     name: OAuth Team
     url: https://confluent.slack.com/app_redirect?channel=oauth-eng
+  description: OAuth Public API
   title: OAuth Identity Management API
   version: 0.0.1-alpha1
   x-api-id: fe94c0a0-09e1-4fda-ad39-2eaca5a8e02f
   x-api-group: iam/v2
   x-audience: company-internal
-  x-tag-group: Identity and Access Mgmt (%s)
+  x-tag-group: Identity Access Management (%s)
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
 tags:
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-    `IdentityProvider` objects represent external OAuth/Open ID Connect providers within
+    `IdentityProvider` objects represent external OAuth/OpenID Connect providers within
     Confluent Cloud.
 
     The API allows you to list, create, read, update, and delete your Identity Provider.
 
 
-    Related guide: [Confluent Cloud Cluster Management for Apache Kafka APIs](https://docs.confluent.cloud).
+    Related guide: [Authenticating with OAuth](https://docs.confluent.cloud).
 
     ## The Identity Providers Model
     <SchemaDefinition schemaRef="#/components/schemas/iam.v2.IdentityProvider" />
@@ -37,7 +38,7 @@ tags:
     | `public_keys_per_provider` | Number of public keys saved per Identity Provider |
   name: Identity Providers (iam/v2)
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
     `IdentityPool` objects represent groups of identities tied to a given a `IdentityProvider`
     that authorizes them to Confluent Cloud resources.
@@ -57,25 +58,16 @@ tags:
     | Quota | Description |
     | --- | --- |
     | `identity_pools_per_provider` | Number of Identity Pools per Identity Provider |
-    | `filter_size` | Size of the Identity Pool filter expression, in characters |
   name: Identity Pools (iam/v2)
 paths:
   /iam/v2/identity-providers:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Retrieve a sorted, filtered, paginated list of all identity providers.
       operationId: listIamV2IdentityProviders
       parameters:
-      - description: Filter the results by exact match for deactivated.
-        explode: true
-        in: query
-        name: deactivated
-        required: false
-        schema:
-          $ref: '#/components/schemas/SearchFilter'
-        style: form
       - description: A pagination size for collection requests.
         explode: true
         in: query
@@ -226,14 +218,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/iam/v2/identity-providers?deactivated=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/iam/v2/identity-providers?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/identity-providers?deactivated=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/iam/v2/identity-providers?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -241,7 +233,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/identity-providers?deactivated=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/identity-providers?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -254,7 +246,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/iam/v2/identity-providers?deactivated=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/iam/v2/identity-providers?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -268,7 +260,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/identity-providers?deactivated=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/iam/v2/identity-providers?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -293,7 +285,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/identity-providers?deactivated=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/identity-providers?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -302,13 +294,13 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/identity-providers?deactivated=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/identity-providers?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to create an identity provider.
       operationId: createIamV2IdentityProvider
@@ -545,13 +537,13 @@ paths:
             --url https://api.confluent.cloud/iam/v2/identity-providers \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"My OIDC Provider","description":"string","issuer":"https://login.microsoftonline.com/{tenantid}/v2.0","jwks_uri":"https://login.microsoftonline.com/common/discovery/v2.0/keys","deactivated":false}'
+            --data '{"display_name":"My OIDC Provider","description":"string","issuer":"https://login.microsoftonline.com/{tenantid}/v2.0","jwks_uri":"https://login.microsoftonline.com/common/discovery/v2.0/keys"}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\",\"deactivated\":false}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/iam/v2/identity-providers")
             .post(body)
@@ -566,19 +558,18 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"My OIDC Provider\\\
           \",\\\"description\\\":\\\"string\\\",\\\"issuer\\\":\\\"https://login.microsoftonline.com/{tenantid}/v2.0\\\
           \",\\\"jwks_uri\\\":\\\"https://login.microsoftonline.com/common/discovery/v2.0/keys\\\
-          \",\\\"deactivated\\\":false}\")\n\n\treq, _ := http.NewRequest(\"POST\"\
-          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          \"}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\",\"deactivated\":false}"
+          payload = "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}"
 
           headers = {
               'content-type': "application/json",
@@ -623,8 +614,7 @@ paths:
             display_name: 'My OIDC Provider',
             description: 'string',
             issuer: 'https://login.microsoftonline.com/{tenantid}/v2.0',
-            jwks_uri: 'https://login.microsoftonline.com/common/discovery/v2.0/keys',
-            deactivated: false
+            jwks_uri: 'https://login.microsoftonline.com/common/discovery/v2.0/keys'
           }));
           req.end();
       - lang: C
@@ -639,7 +629,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\",\"deactivated\":false}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -648,13 +638,13 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\",\"deactivated\":false}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: IAM API
   /iam/v2/identity-providers/{id}:
     delete:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to delete an identity provider.
       operationId: deleteIamV2IdentityProvider
@@ -892,7 +882,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to read an identity provider.
       operationId: getIamV2IdentityProvider
@@ -920,6 +910,7 @@ paths:
                   - issuer
                   - jwks_uri
                   - kind
+                  - state
                   type: object
           description: Identity Provider.
           headers:
@@ -1144,7 +1135,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to update an identity provider.
 
@@ -1178,6 +1169,7 @@ paths:
                   - issuer
                   - jwks_uri
                   - kind
+                  - state
                   type: object
           description: Identity Provider.
           headers:
@@ -1367,13 +1359,13 @@ paths:
             --url 'https://api.confluent.cloud/iam/v2/identity-providers/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"My OIDC Provider","description":"string","issuer":"https://login.microsoftonline.com/{tenantid}/v2.0","jwks_uri":"https://login.microsoftonline.com/common/discovery/v2.0/keys","deactivated":false}'
+            --data '{"display_name":"My OIDC Provider","description":"string","issuer":"https://login.microsoftonline.com/{tenantid}/v2.0","jwks_uri":"https://login.microsoftonline.com/common/discovery/v2.0/keys"}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\",\"deactivated\":false}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/iam/v2/identity-providers/{id}")
             .patch(body)
@@ -1388,19 +1380,18 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"My OIDC Provider\\\
           \",\\\"description\\\":\\\"string\\\",\\\"issuer\\\":\\\"https://login.microsoftonline.com/{tenantid}/v2.0\\\
           \",\\\"jwks_uri\\\":\\\"https://login.microsoftonline.com/common/discovery/v2.0/keys\\\
-          \",\\\"deactivated\\\":false}\")\n\n\treq, _ := http.NewRequest(\"PATCH\"\
-          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          \"}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\",\"deactivated\":false}"
+          payload = "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}"
 
           headers = {
               'content-type': "application/json",
@@ -1445,8 +1436,7 @@ paths:
             display_name: 'My OIDC Provider',
             description: 'string',
             issuer: 'https://login.microsoftonline.com/{tenantid}/v2.0',
-            jwks_uri: 'https://login.microsoftonline.com/common/discovery/v2.0/keys',
-            deactivated: false
+            jwks_uri: 'https://login.microsoftonline.com/common/discovery/v2.0/keys'
           }));
           req.end();
       - lang: C
@@ -1461,7 +1451,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\",\"deactivated\":false}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1470,25 +1460,17 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\",\"deactivated\":false}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: IAM API
   /iam/v2/identity-providers/{provider_id}/identity-pools:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Retrieve a sorted, filtered, paginated list of all identity pools.
       operationId: listIamV2IdentityPools
       parameters:
-      - description: Filter the results by exact match for deactivated.
-        explode: true
-        in: query
-        name: deactivated
-        required: false
-        schema:
-          $ref: '#/components/schemas/SearchFilter'
-        style: form
       - description: A pagination size for collection requests.
         explode: true
         in: query
@@ -1647,14 +1629,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools?deactivated=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools?deactivated=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1662,7 +1644,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools?deactivated=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1675,7 +1657,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/iam/v2/identity-providers/{provider_id}/identity-pools?deactivated=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/iam/v2/identity-providers/{provider_id}/identity-pools?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1689,7 +1671,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/identity-providers/{provider_id}/identity-pools?deactivated=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/iam/v2/identity-providers/{provider_id}/identity-pools?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1714,7 +1696,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools?deactivated=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1723,13 +1705,13 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools?deactivated=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to create an identity pool.
       operationId: createIamV2IdentityPool
@@ -1751,7 +1733,8 @@ paths:
               - required:
                 - description
                 - display_name
-                - subject_claim
+                - filter
+                - identity_claim
                 type: object
       responses:
         "201":
@@ -1763,7 +1746,8 @@ paths:
                 - required:
                   - description
                   - display_name
-                  - subject_claim
+                  - filter
+                  - identity_claim
                   type: object
           description: An Identity Pool was created.
           headers:
@@ -1973,13 +1957,13 @@ paths:
             --url 'https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"My Identity Pool","description":"Prod Access to Kafka clusters to Release Engineering","subject_claim":"sub","policy":"claims.aud=\"confluent\" && claims.group!=\"invalid_group\"","deactivated":false}'
+            --data '{"display_name":"My Identity Pool","description":"Prod Access to Kafka clusters to Release Engineering","identity_claim":"sub","filter":"claims.aud==\"confluent\" && claims.group!=\"invalid_group\""}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"subject_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools")
             .post(body)
@@ -1993,21 +1977,20 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"My Identity\
           \ Pool\\\",\\\"description\\\":\\\"Prod Access to Kafka clusters to Release\
-          \ Engineering\\\",\\\"subject_claim\\\":\\\"sub\\\",\\\"policy\\\":\\\"\
-          claims.aud=\\\\\\\"confluent\\\\\\\" && claims.group!=\\\\\\\"invalid_group\\\
-          \\\\\"\\\",\\\"deactivated\\\":false}\")\n\n\treq, _ := http.NewRequest(\"\
-          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          \ Engineering\\\",\\\"identity_claim\\\":\\\"sub\\\",\\\"filter\\\":\\\"\
+          claims.aud==\\\\\\\"confluent\\\\\\\" && claims.group!=\\\\\\\"invalid_group\\\
+          \\\\\"\\\"}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\
+          \treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"subject_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}"
+          payload = "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}"
 
           headers = {
               'content-type': "application/json",
@@ -2051,9 +2034,8 @@ paths:
           req.write(JSON.stringify({
             display_name: 'My Identity Pool',
             description: 'Prod Access to Kafka clusters to Release Engineering',
-            subject_claim: 'sub',
-            policy: 'claims.aud="confluent" && claims.group!="invalid_group"',
-            deactivated: false
+            identity_claim: 'sub',
+            filter: 'claims.aud=="confluent" && claims.group!="invalid_group"'
           }));
           req.end();
       - lang: C
@@ -2068,7 +2050,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"subject_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -2077,13 +2059,13 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"subject_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: OAuth API
   /iam/v2/identity-providers/{provider_id}/identity-pools/{id}:
     delete:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to delete an identity pool.
       operationId: deleteIamV2IdentityPool
@@ -2329,7 +2311,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to read an identity pool.
       operationId: getIamV2IdentityPool
@@ -2361,9 +2343,12 @@ paths:
                   - api_version
                   - description
                   - display_name
+                  - filter
                   - id
+                  - identity_claim
                   - kind
-                  - subject_claim
+                  - principal
+                  - state
                   type: object
           description: Identity Pool.
           headers:
@@ -2588,7 +2573,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to update an identity pool.
 
@@ -2626,9 +2611,12 @@ paths:
                   - api_version
                   - description
                   - display_name
+                  - filter
                   - id
+                  - identity_claim
                   - kind
-                  - subject_claim
+                  - principal
+                  - state
                   type: object
           description: Identity Pool.
           headers:
@@ -2818,13 +2806,13 @@ paths:
             --url 'https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"My Identity Pool","description":"Prod Access to Kafka clusters to Release Engineering","subject_claim":"sub","policy":"claims.aud=\"confluent\" && claims.group!=\"invalid_group\"","deactivated":false}'
+            --data '{"display_name":"My Identity Pool","description":"Prod Access to Kafka clusters to Release Engineering","identity_claim":"sub","filter":"claims.aud==\"confluent\" && claims.group!=\"invalid_group\""}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"subject_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools/{id}")
             .patch(body)
@@ -2838,21 +2826,20 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"My Identity\
           \ Pool\\\",\\\"description\\\":\\\"Prod Access to Kafka clusters to Release\
-          \ Engineering\\\",\\\"subject_claim\\\":\\\"sub\\\",\\\"policy\\\":\\\"\
-          claims.aud=\\\\\\\"confluent\\\\\\\" && claims.group!=\\\\\\\"invalid_group\\\
-          \\\\\"\\\",\\\"deactivated\\\":false}\")\n\n\treq, _ := http.NewRequest(\"\
-          PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          \ Engineering\\\",\\\"identity_claim\\\":\\\"sub\\\",\\\"filter\\\":\\\"\
+          claims.aud==\\\\\\\"confluent\\\\\\\" && claims.group!=\\\\\\\"invalid_group\\\
+          \\\\\"\\\"}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"subject_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}"
+          payload = "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}"
 
           headers = {
               'content-type': "application/json",
@@ -2896,9 +2883,8 @@ paths:
           req.write(JSON.stringify({
             display_name: 'My Identity Pool',
             description: 'Prod Access to Kafka clusters to Release Engineering',
-            subject_claim: 'sub',
-            policy: 'claims.aud="confluent" && claims.group!="invalid_group"',
-            deactivated: false
+            identity_claim: 'sub',
+            filter: 'claims.aud=="confluent" && claims.group!="invalid_group"'
           }));
           req.end();
       - lang: C
@@ -2913,7 +2899,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"subject_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -2922,7 +2908,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"subject_claim\":\"sub\",\"policy\":\"claims.aud=\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\",\"deactivated\":false}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: OAuth API
 components:
@@ -3124,13 +3110,13 @@ components:
   schemas:
     iam.v2.IdentityProvider:
       description: |-
-        `IdentityProvider` objects represent external OAuth/Open ID Connect providers within
+        `IdentityProvider` objects represent external OAuth/OpenID Connect providers within
         Confluent Cloud.
 
         The API allows you to list, create, read, update, and delete your Identity Provider.
 
 
-        Related guide: [Confluent Cloud Cluster Management for Apache Kafka APIs](https://docs.confluent.cloud).
+        Related guide: [Authenticating with OAuth](https://docs.confluent.cloud).
 
         ## The Identity Providers Model
         <SchemaDefinition schemaRef="#/components/schemas/iam.v2.IdentityProvider" />
@@ -3181,6 +3167,13 @@ components:
         description:
           description: A description for your provider
           type: string
+        state:
+          description: The current state of the provider
+          example: ENABLED
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - ENABLED
         issuer:
           description: Publicly reachable issuer URI
           example: https://login.microsoftonline.com/{tenantid}/v2.0
@@ -3188,25 +3181,18 @@ components:
           type: string
           x-immutable: true
         jwks_uri:
-          description: Publicly reachable Jwks URI for the OIDC provider
+          description: Publicly reachable JWKS URI for the OIDC provider
           example: https://login.microsoftonline.com/common/discovery/v2.0/keys
           format: uri
           type: string
           x-immutable: true
         keys:
           description: The JWKS provided by the Provider. We only express the `kid`
-            and `algorithm` for each key set
+            and `alg` for each key set
           items:
             $ref: '#/components/schemas/iam.v2.Jwks'
           readOnly: true
           type: array
-        deactivated:
-          default: false
-          description: |
-            Indicates whether the current provider is disabled.
-            All corresponding `IdentityPool` objects would also be disabled
-          example: false
-          type: boolean
       type: object
     iam.v2.IdentityPool:
       description: |-
@@ -3228,7 +3214,6 @@ components:
         | Quota | Description |
         | --- | --- |
         | `identity_pools_per_provider` | Number of Identity Pools per Identity Provider |
-        | `filter_size` | Size of the Identity Pool filter expression, in characters |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -3269,31 +3254,40 @@ components:
           description: A description of how this `IdentityPool` is used
           example: Prod Access to Kafka clusters to Release Engineering
           type: string
-        subject_claim:
-          description: The JWT claim to extract the authenticating principal to Confluent
+        identity_claim:
+          description: The JWT claim to extract the authenticating identity to Confluent
             resources
           example: sub
           type: string
-        policy:
+        filter:
           description: A filter expression that must be evaluated to be true to use
             this identity pool
-          example: claims.aud="confluent" && claims.group!="invalid_group"
+          example: claims.aud=="confluent" && claims.group!="invalid_group"
+          maxLength: 300
           type: string
-        deactivated:
-          default: false
-          description: Indicates whether the current identity pool is disabled.
-          example: false
-          type: boolean
+        principal:
+          description: Represents the federated identity associated with this pool.
+          example: pool-abc
+          readOnly: true
+          type: string
+        state:
+          description: The current state of the identity pool
+          example: ENABLED
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - ENABLED
       type: object
     iam.v2.Jwks:
-      description: '`JWKS` contains kid and alg for the published keys for the given
-        OpenIDProvider'
+      description: '`JWKS` contains the published keys for the given OpenIDProvider'
       properties:
         kty:
           description: Specifies the cryptographic algorithm family used with the
             key
           example: RSA
           type: string
+          x-extensible-enum:
+          - RSA
         kid:
           description: Specifies the key-id issued by the OpenIDProvider for the particular
             tenant
@@ -3304,31 +3298,31 @@ components:
           example: RS256
           type: string
         use:
-          description: Specifies the intended use of the public key
+          description: Specifies the intended usage of the key
           example: sig
           type: string
-        key_ops:
-          description: Identifies the operation(s) for which the key is intended to
-            be used
-          example: sign
+        n:
+          description: Specifies the modulus of the RSA public key. Represented as
+            a Base64urlUInt-encoded value
+          type: string
+        e:
+          description: Specifies the exponent of the RSA public key.
+          example: AQAB
           type: string
       required:
       - alg
       - kid
       - kty
       type: object
-    SearchFilter:
-      description: Filter a collection by a string search
-      type: string
     iam.v2.IdentityProviderList:
       description: |-
-        `IdentityProvider` objects represent external OAuth/Open ID Connect providers within
+        `IdentityProvider` objects represent external OAuth/OpenID Connect providers within
         Confluent Cloud.
 
         The API allows you to list, create, read, update, and delete your Identity Provider.
 
 
-        Related guide: [Confluent Cloud Cluster Management for Apache Kafka APIs](https://docs.confluent.cloud).
+        Related guide: [Authenticating with OAuth](https://docs.confluent.cloud).
 
         ## The Identity Providers Model
         <SchemaDefinition schemaRef="#/components/schemas/iam.v2.IdentityProvider" />
@@ -3379,6 +3373,7 @@ components:
               - issuer
               - jwks_uri
               - metadata
+              - state
               type: object
           type: array
           uniqueItems: true
@@ -3408,7 +3403,6 @@ components:
         | Quota | Description |
         | --- | --- |
         | `identity_pools_per_provider` | Number of Identity Pools per Identity Provider |
-        | `filter_size` | Size of the Identity Pool filter expression, in characters |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -3444,9 +3438,12 @@ components:
             - required:
               - description
               - display_name
+              - filter
               - id
+              - identity_claim
               - metadata
-              - subject_claim
+              - principal
+              - state
               type: object
           type: array
           uniqueItems: true
@@ -3623,13 +3620,13 @@ components:
       type: object
     iam.v2.IdentityProviderUpdate:
       description: |-
-        `IdentityProvider` objects represent external OAuth/Open ID Connect providers within
+        `IdentityProvider` objects represent external OAuth/OpenID Connect providers within
         Confluent Cloud.
 
         The API allows you to list, create, read, update, and delete your Identity Provider.
 
 
-        Related guide: [Confluent Cloud Cluster Management for Apache Kafka APIs](https://docs.confluent.cloud).
+        Related guide: [Authenticating with OAuth](https://docs.confluent.cloud).
 
         ## The Identity Providers Model
         <SchemaDefinition schemaRef="#/components/schemas/iam.v2.IdentityProvider" />
@@ -3680,20 +3677,20 @@ components:
         description:
           description: A description for your provider
           type: string
+        state:
+          description: The current state of the provider
+          example: ENABLED
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - ENABLED
         keys:
           description: The JWKS provided by the Provider. We only express the `kid`
-            and `algorithm` for each key set
+            and `alg` for each key set
           items:
             $ref: '#/components/schemas/iam.v2.Jwks'
           readOnly: true
           type: array
-        deactivated:
-          default: false
-          description: |
-            Indicates whether the current provider is disabled.
-            All corresponding `IdentityPool` objects would also be disabled
-          example: false
-          type: boolean
       type: object
     Error_source:
       description: If this error was caused by a particular part of the API request,
