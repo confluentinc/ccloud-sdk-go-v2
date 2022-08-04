@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **ConnectionTypes** | Pointer to [**NetworkingV1ConnectionTypes**](networking.v1.ConnectionTypes.md) |  | [optional] 
 **Cidr** | Pointer to **string** | The IPv4 CIDR block to used for this network.  Must be /16. Required for VPC peering and AWS TransitGateway. | [optional] 
 **Zones** | Pointer to **[]string** | The 3 availability zones for this network. They can optionally be specified for AWS networks used with PrivateLink. Otherwise, they are automatically chosen by Confluent Cloud.  On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3)  On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c).  On Azure, zones are Confluent-chosen names (e.g. 1, 2, 3) since Azure does not  have universal zone identifiers.  | [optional] 
+**LegacyPublicDns** | Pointer to **bool** | Enable legacy public DNS for the network. This only applies to Private Link connection type. If enabled, clusters in this network will include &#39;glb&#39; in domain name and require both public   and private DNS to resolve. If disabled, clusters in this network will not include &#39;glb&#39; in domain name and only require private   DNS to resolve  | [optional] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
@@ -180,6 +181,31 @@ SetZones sets Zones field to given value.
 `func (o *NetworkingV1NetworkSpec) HasZones() bool`
 
 HasZones returns a boolean if a field has been set.
+
+### GetLegacyPublicDns
+
+`func (o *NetworkingV1NetworkSpec) GetLegacyPublicDns() bool`
+
+GetLegacyPublicDns returns the LegacyPublicDns field if non-nil, zero value otherwise.
+
+### GetLegacyPublicDnsOk
+
+`func (o *NetworkingV1NetworkSpec) GetLegacyPublicDnsOk() (*bool, bool)`
+
+GetLegacyPublicDnsOk returns a tuple with the LegacyPublicDns field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLegacyPublicDns
+
+`func (o *NetworkingV1NetworkSpec) SetLegacyPublicDns(v bool)`
+
+SetLegacyPublicDns sets LegacyPublicDns field to given value.
+
+### HasLegacyPublicDns
+
+`func (o *NetworkingV1NetworkSpec) HasLegacyPublicDns() bool`
+
+HasLegacyPublicDns returns a boolean if a field has been set.
 
 ### GetEnvironment
 

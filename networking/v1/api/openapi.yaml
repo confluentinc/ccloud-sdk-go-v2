@@ -694,13 +694,13 @@ paths:
             --url https://api.confluent.cloud/networking/v1/networks \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-aws-us-east1","cloud":"AWS","region":"us-east-1","connection_types":["PRIVATELINK"],"cidr":"10.200.0.0/16","zones":["use1-az1","use1-az2","use1-az3"],"environment":{"id":"env-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"prod-aws-us-east1","cloud":"AWS","region":"us-east-1","connection_types":["PRIVATELINK"],"cidr":"10.200.0.0/16","zones":["use1-az1","use1-az2","use1-az3"],"legacy_public_dns":true,"environment":{"id":"env-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/networks")
             .post(body)
@@ -716,20 +716,20 @@ paths:
           :\\\"prod-aws-us-east1\\\",\\\"cloud\\\":\\\"AWS\\\",\\\"region\\\":\\\"\
           us-east-1\\\",\\\"connection_types\\\":[\\\"PRIVATELINK\\\"],\\\"cidr\\\"\
           :\\\"10.200.0.0/16\\\",\\\"zones\\\":[\\\"use1-az1\\\",\\\"use1-az2\\\"\
-          ,\\\"use1-az3\\\"],\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"\
-          environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\"\
-          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          ,\\\"use1-az3\\\"],\\\"legacy_public_dns\\\":true,\\\"environment\\\":{\\\
+          \"id\\\":\\\"env-00000\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\t\
+          req, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -778,6 +778,7 @@ paths:
               connection_types: ['PRIVATELINK'],
               cidr: '10.200.0.0/16',
               zones: ['use1-az1', 'use1-az2', 'use1-az3'],
+              legacy_public_dns: true,
               environment: {id: 'env-00000', environment: 'string'}
             }
           }));
@@ -794,7 +795,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -803,7 +804,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Networking v1
   /networking/v1/networks/{id}:
@@ -1585,13 +1586,13 @@ paths:
             --url 'https://api.confluent.cloud/networking/v1/networks/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-aws-us-east1","cloud":"AWS","region":"us-east-1","connection_types":["PRIVATELINK"],"cidr":"10.200.0.0/16","zones":["use1-az1","use1-az2","use1-az3"],"environment":{"id":"env-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"prod-aws-us-east1","cloud":"AWS","region":"us-east-1","connection_types":["PRIVATELINK"],"cidr":"10.200.0.0/16","zones":["use1-az1","use1-az2","use1-az3"],"legacy_public_dns":true,"environment":{"id":"env-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/networks/{id}")
             .patch(body)
@@ -1607,20 +1608,20 @@ paths:
           :\\\"prod-aws-us-east1\\\",\\\"cloud\\\":\\\"AWS\\\",\\\"region\\\":\\\"\
           us-east-1\\\",\\\"connection_types\\\":[\\\"PRIVATELINK\\\"],\\\"cidr\\\"\
           :\\\"10.200.0.0/16\\\",\\\"zones\\\":[\\\"use1-az1\\\",\\\"use1-az2\\\"\
-          ,\\\"use1-az3\\\"],\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"\
-          environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\"\
-          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          ,\\\"use1-az3\\\"],\\\"legacy_public_dns\\\":true,\\\"environment\\\":{\\\
+          \"id\\\":\\\"env-00000\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\t\
+          req, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -1669,6 +1670,7 @@ paths:
               connection_types: ['PRIVATELINK'],
               cidr: '10.200.0.0/16',
               zones: ['use1-az1', 'use1-az2', 'use1-az3'],
+              legacy_public_dns: true,
               environment: {id: 'env-00000', environment: 'string'}
             }
           }));
@@ -1685,7 +1687,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1694,7 +1696,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Networking v1
   /networking/v1/peerings:
@@ -7067,6 +7069,12 @@ components:
       example: 10.200.0.0/16
       pattern: ^\d+\.\d+\.\d+\.\d+/\d+$
       type: string
+    networking.v1.LegacyPublicDns:
+      default: true
+      description: The network, of private link connection type, uses legacy public
+        dns or not
+      example: true
+      type: boolean
     networking.v1.ConnectionType:
       description: Network connection type.
       example: PRIVATELINK
@@ -7518,6 +7526,17 @@ components:
           minItems: 3
           type: array
           uniqueItems: true
+          x-immutable: true
+        legacy_public_dns:
+          allOf:
+          - $ref: '#/components/schemas/networking.v1.LegacyPublicDns'
+          description: |
+            Enable legacy public DNS for the network. This only applies to Private Link connection type.
+            If enabled, clusters in this network will include 'glb' in domain name and require both public
+              and private DNS to resolve.
+            If disabled, clusters in this network will not include 'glb' in domain name and only require private
+              DNS to resolve
+          example: true
           x-immutable: true
         environment:
           allOf:
