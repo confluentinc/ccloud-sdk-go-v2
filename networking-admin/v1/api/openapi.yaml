@@ -1590,9 +1590,9 @@ paths:
                 - properties:
                     spec:
                       required:
+                      - cloud
                       - environment
                       - network
-                      - ram_share_arn
                       type: object
                   required:
                   - api_version
@@ -3200,6 +3200,51 @@ components:
       - vnet
       title: AZURE
       type: object
+    networking-admin.v1.AwsTransitGatewayAttachment:
+      description: AWS Transit Gateway Attachment.
+      properties:
+        kind:
+          description: AWS Transit Gateway Attachment kind type.
+          enum:
+          - AwsTransitGatewayAttachment
+          type: string
+        ram_share_arn:
+          description: The full AWS Resource Name (ARN) for the AWS Resource Access
+            Manager (RAM) Share of the Transit Gateways that you want Confluent Cloud
+            attached to.
+          example: arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx
+          type: string
+        transit_gateway_id:
+          description: The ID for the AWS Transit Gateway that you want Confluent
+            CLoud attached to.
+          example: tgw-xxxxxxxxxxxxxxxxx
+          type: string
+        transit_gateway_attachment_id:
+          description: The ID for the AWS Transit Gateway VPC Attachment that attaches
+            Confluent VPC to Transit Gateway.
+          example: tgw-attach-xxxxx
+          type: string
+        enable_custom_routes:
+          default: false
+          description: Enable custom destination routes in Confluent Cloud.
+          example: false
+          type: boolean
+        routes:
+          description: List of destination routes.
+          example:
+          - 100.64.0.0/10
+          - 10.0.0.0/8
+          - 192.168.0.0/16
+          - 172.16.0.0/12
+          items:
+            $ref: '#/components/schemas/networking-admin.v1.Cidr'
+          type: array
+      required:
+      - kind
+      - ram_share_arn
+      - transit_gateway_id
+      title: AWS
+      type: object
     networking-admin.v1.AwsPrivateLinkAccess:
       description: AWS PrivateLink access configuration.
       properties:
@@ -3542,9 +3587,9 @@ components:
             - properties:
                 spec:
                   required:
+                  - cloud
                   - environment
                   - network
-                  - ram_share_arn
                   type: object
               required:
               - id
@@ -3567,13 +3612,16 @@ components:
           description: The name of the TGW attachment
           example: prod-tgw-use1
           type: string
-        ram_share_arn:
-          description: The full AWS Resource Name (ARN) for the AWS Resource Access
-            Manager (RAM) Share of the Transit Gateways that you want Confluent Cloud
-            attached to
-          example: arn:aws:ram:eu-west-1:000000000000:resource-share/000000000
-          minLength: 1
-          type: string
+        cloud:
+          description: The cloud-specific Transit Gateway details.
+          discriminator:
+            mapping:
+              AwsTransitGatewayAttachment: '#/components/schemas/networking-admin.v1.AwsTransitGatewayAttachment'
+            propertyName: kind
+          oneOf:
+          - $ref: '#/components/schemas/networking-admin.v1.AwsTransitGatewayAttachment'
+          type: object
+          x-one-of-name: NetworkingAdminV1TransitGatewayAttachmentSpecCloudOneOf
         environment:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
