@@ -67,11 +67,11 @@ SetTopic sets Topic field to given value.
 
 
 
-### AsCdxV1RedeemShareResourcesOneOf
+### AsCdxV1RedeemTokenResponseResourcesOneOf
 
-`func (s *CdxV1SharedTopic) AsCdxV1RedeemShareResourcesOneOf() CdxV1RedeemShareResourcesOneOf`
+`func (s *CdxV1SharedTopic) AsCdxV1RedeemTokenResponseResourcesOneOf() CdxV1RedeemTokenResponseResourcesOneOf`
 
-Convenience method to wrap this instance of CdxV1SharedTopic in CdxV1RedeemShareResourcesOneOf
+Convenience method to wrap this instance of CdxV1SharedTopic in CdxV1RedeemTokenResponseResourcesOneOf
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -30,24 +30,24 @@ import (
 	"fmt"
 )
 
-// CdxV1RedeemShareResourcesOneOf - struct for CdxV1RedeemShareResourcesOneOf
-type CdxV1RedeemShareResourcesOneOf struct {
+// CdxV1RedeemTokenResponseResourcesOneOf - struct for CdxV1RedeemTokenResponseResourcesOneOf
+type CdxV1RedeemTokenResponseResourcesOneOf struct {
 	CdxV1SharedGroup *CdxV1SharedGroup
 	CdxV1SharedTopic *CdxV1SharedTopic
 }
 
-// CdxV1SharedGroupAsCdxV1RedeemShareResourcesOneOf is a convenience function that returns CdxV1SharedGroup wrapped in CdxV1RedeemShareResourcesOneOf
-func CdxV1SharedGroupAsCdxV1RedeemShareResourcesOneOf(v *CdxV1SharedGroup) CdxV1RedeemShareResourcesOneOf {
-	return CdxV1RedeemShareResourcesOneOf{CdxV1SharedGroup: v}
+// CdxV1SharedGroupAsCdxV1RedeemTokenResponseResourcesOneOf is a convenience function that returns CdxV1SharedGroup wrapped in CdxV1RedeemTokenResponseResourcesOneOf
+func CdxV1SharedGroupAsCdxV1RedeemTokenResponseResourcesOneOf(v *CdxV1SharedGroup) CdxV1RedeemTokenResponseResourcesOneOf {
+	return CdxV1RedeemTokenResponseResourcesOneOf{CdxV1SharedGroup: v}
 }
 
-// CdxV1SharedTopicAsCdxV1RedeemShareResourcesOneOf is a convenience function that returns CdxV1SharedTopic wrapped in CdxV1RedeemShareResourcesOneOf
-func CdxV1SharedTopicAsCdxV1RedeemShareResourcesOneOf(v *CdxV1SharedTopic) CdxV1RedeemShareResourcesOneOf {
-	return CdxV1RedeemShareResourcesOneOf{CdxV1SharedTopic: v}
+// CdxV1SharedTopicAsCdxV1RedeemTokenResponseResourcesOneOf is a convenience function that returns CdxV1SharedTopic wrapped in CdxV1RedeemTokenResponseResourcesOneOf
+func CdxV1SharedTopicAsCdxV1RedeemTokenResponseResourcesOneOf(v *CdxV1SharedTopic) CdxV1RedeemTokenResponseResourcesOneOf {
+	return CdxV1RedeemTokenResponseResourcesOneOf{CdxV1SharedTopic: v}
 }
 
 // Unmarshal JSON data into one of the pointers in the struct
-func (dst *CdxV1RedeemShareResourcesOneOf) UnmarshalJSON(data []byte) error {
+func (dst *CdxV1RedeemTokenResponseResourcesOneOf) UnmarshalJSON(data []byte) error {
 	var err error
 	// use discriminator value to speed up the lookup
 	var jsonDict map[string]interface{}
@@ -64,7 +64,7 @@ func (dst *CdxV1RedeemShareResourcesOneOf) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.CdxV1SharedGroup, return on the first match
 		} else {
 			dst.CdxV1SharedGroup = nil
-			return fmt.Errorf("Failed to unmarshal CdxV1RedeemShareResourcesOneOf as CdxV1SharedGroup: %s", err.Error())
+			return fmt.Errorf("Failed to unmarshal CdxV1RedeemTokenResponseResourcesOneOf as CdxV1SharedGroup: %s", err.Error())
 		}
 	}
 
@@ -76,7 +76,7 @@ func (dst *CdxV1RedeemShareResourcesOneOf) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.CdxV1SharedTopic, return on the first match
 		} else {
 			dst.CdxV1SharedTopic = nil
-			return fmt.Errorf("Failed to unmarshal CdxV1RedeemShareResourcesOneOf as CdxV1SharedTopic: %s", err.Error())
+			return fmt.Errorf("Failed to unmarshal CdxV1RedeemTokenResponseResourcesOneOf as CdxV1SharedTopic: %s", err.Error())
 		}
 	}
 
@@ -88,7 +88,7 @@ func (dst *CdxV1RedeemShareResourcesOneOf) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.CdxV1SharedGroup, return on the first match
 		} else {
 			dst.CdxV1SharedGroup = nil
-			return fmt.Errorf("Failed to unmarshal CdxV1RedeemShareResourcesOneOf as CdxV1SharedGroup: %s", err.Error())
+			return fmt.Errorf("Failed to unmarshal CdxV1RedeemTokenResponseResourcesOneOf as CdxV1SharedGroup: %s", err.Error())
 		}
 	}
 
@@ -100,7 +100,7 @@ func (dst *CdxV1RedeemShareResourcesOneOf) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.CdxV1SharedTopic, return on the first match
 		} else {
 			dst.CdxV1SharedTopic = nil
-			return fmt.Errorf("Failed to unmarshal CdxV1RedeemShareResourcesOneOf as CdxV1SharedTopic: %s", err.Error())
+			return fmt.Errorf("Failed to unmarshal CdxV1RedeemTokenResponseResourcesOneOf as CdxV1SharedTopic: %s", err.Error())
 		}
 	}
 
@@ -108,7 +108,7 @@ func (dst *CdxV1RedeemShareResourcesOneOf) UnmarshalJSON(data []byte) error {
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
-func (src CdxV1RedeemShareResourcesOneOf) MarshalJSON() ([]byte, error) {
+func (src CdxV1RedeemTokenResponseResourcesOneOf) MarshalJSON() ([]byte, error) {
 	if src.CdxV1SharedGroup != nil {
 		return json.Marshal(&src.CdxV1SharedGroup)
 	}
@@ -121,7 +121,7 @@ func (src CdxV1RedeemShareResourcesOneOf) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *CdxV1RedeemShareResourcesOneOf) GetActualInstance() interface{} {
+func (obj *CdxV1RedeemTokenResponseResourcesOneOf) GetActualInstance() interface{} {
 	if obj.CdxV1SharedGroup != nil {
 		return obj.CdxV1SharedGroup
 	}
@@ -134,38 +134,38 @@ func (obj *CdxV1RedeemShareResourcesOneOf) GetActualInstance() interface{} {
 	return nil
 }
 
-type NullableCdxV1RedeemShareResourcesOneOf struct {
-	value *CdxV1RedeemShareResourcesOneOf
+type NullableCdxV1RedeemTokenResponseResourcesOneOf struct {
+	value *CdxV1RedeemTokenResponseResourcesOneOf
 	isSet bool
 }
 
-func (v NullableCdxV1RedeemShareResourcesOneOf) Get() *CdxV1RedeemShareResourcesOneOf {
+func (v NullableCdxV1RedeemTokenResponseResourcesOneOf) Get() *CdxV1RedeemTokenResponseResourcesOneOf {
 	return v.value
 }
 
-func (v *NullableCdxV1RedeemShareResourcesOneOf) Set(val *CdxV1RedeemShareResourcesOneOf) {
+func (v *NullableCdxV1RedeemTokenResponseResourcesOneOf) Set(val *CdxV1RedeemTokenResponseResourcesOneOf) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCdxV1RedeemShareResourcesOneOf) IsSet() bool {
+func (v NullableCdxV1RedeemTokenResponseResourcesOneOf) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCdxV1RedeemShareResourcesOneOf) Unset() {
+func (v *NullableCdxV1RedeemTokenResponseResourcesOneOf) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCdxV1RedeemShareResourcesOneOf(val *CdxV1RedeemShareResourcesOneOf) *NullableCdxV1RedeemShareResourcesOneOf {
-	return &NullableCdxV1RedeemShareResourcesOneOf{value: val, isSet: true}
+func NewNullableCdxV1RedeemTokenResponseResourcesOneOf(val *CdxV1RedeemTokenResponseResourcesOneOf) *NullableCdxV1RedeemTokenResponseResourcesOneOf {
+	return &NullableCdxV1RedeemTokenResponseResourcesOneOf{value: val, isSet: true}
 }
 
-func (v NullableCdxV1RedeemShareResourcesOneOf) MarshalJSON() ([]byte, error) {
+func (v NullableCdxV1RedeemTokenResponseResourcesOneOf) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCdxV1RedeemShareResourcesOneOf) UnmarshalJSON(src []byte) error {
+func (v *NullableCdxV1RedeemTokenResponseResourcesOneOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

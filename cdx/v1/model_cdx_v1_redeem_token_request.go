@@ -33,8 +33,8 @@ import (
 	"reflect"
 )
 
-// CdxV1SharedToken Encrypted Token shared with consumer   ## The Shared Tokens Model <SchemaDefinition schemaRef=\"#/components/schemas/cdx.v1.SharedToken\" />
-type CdxV1SharedToken struct {
+// CdxV1RedeemTokenRequest Redeem share with token request parameters
+type CdxV1RedeemTokenRequest struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
@@ -44,27 +44,31 @@ type CdxV1SharedToken struct {
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
 	// The encrypted token
 	Token *string `json:"token,omitempty"`
+	// The AWS account id for the consumer network.
+	AwsAccount *string `json:"aws_account,omitempty"`
+	// The Azure subscription for the consumer network.
+	AzureSubscription *string `json:"azure_subscription,omitempty"`
 }
 
-// NewCdxV1SharedToken instantiates a new CdxV1SharedToken object
+// NewCdxV1RedeemTokenRequest instantiates a new CdxV1RedeemTokenRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCdxV1SharedToken() *CdxV1SharedToken {
-	this := CdxV1SharedToken{}
+func NewCdxV1RedeemTokenRequest() *CdxV1RedeemTokenRequest {
+	this := CdxV1RedeemTokenRequest{}
 	return &this
 }
 
-// NewCdxV1SharedTokenWithDefaults instantiates a new CdxV1SharedToken object
+// NewCdxV1RedeemTokenRequestWithDefaults instantiates a new CdxV1RedeemTokenRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCdxV1SharedTokenWithDefaults() *CdxV1SharedToken {
-	this := CdxV1SharedToken{}
+func NewCdxV1RedeemTokenRequestWithDefaults() *CdxV1RedeemTokenRequest {
+	this := CdxV1RedeemTokenRequest{}
 	return &this
 }
 
 // GetApiVersion returns the ApiVersion field value if set, zero value otherwise.
-func (o *CdxV1SharedToken) GetApiVersion() string {
+func (o *CdxV1RedeemTokenRequest) GetApiVersion() string {
 	if o == nil || o.ApiVersion == nil {
 		var ret string
 		return ret
@@ -74,7 +78,7 @@ func (o *CdxV1SharedToken) GetApiVersion() string {
 
 // GetApiVersionOk returns a tuple with the ApiVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1SharedToken) GetApiVersionOk() (*string, bool) {
+func (o *CdxV1RedeemTokenRequest) GetApiVersionOk() (*string, bool) {
 	if o == nil || o.ApiVersion == nil {
 		return nil, false
 	}
@@ -82,7 +86,7 @@ func (o *CdxV1SharedToken) GetApiVersionOk() (*string, bool) {
 }
 
 // HasApiVersion returns a boolean if a field has been set.
-func (o *CdxV1SharedToken) HasApiVersion() bool {
+func (o *CdxV1RedeemTokenRequest) HasApiVersion() bool {
 	if o != nil && o.ApiVersion != nil {
 		return true
 	}
@@ -91,12 +95,12 @@ func (o *CdxV1SharedToken) HasApiVersion() bool {
 }
 
 // SetApiVersion gets a reference to the given string and assigns it to the ApiVersion field.
-func (o *CdxV1SharedToken) SetApiVersion(v string) {
+func (o *CdxV1RedeemTokenRequest) SetApiVersion(v string) {
 	o.ApiVersion = &v
 }
 
 // GetKind returns the Kind field value if set, zero value otherwise.
-func (o *CdxV1SharedToken) GetKind() string {
+func (o *CdxV1RedeemTokenRequest) GetKind() string {
 	if o == nil || o.Kind == nil {
 		var ret string
 		return ret
@@ -106,7 +110,7 @@ func (o *CdxV1SharedToken) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1SharedToken) GetKindOk() (*string, bool) {
+func (o *CdxV1RedeemTokenRequest) GetKindOk() (*string, bool) {
 	if o == nil || o.Kind == nil {
 		return nil, false
 	}
@@ -114,7 +118,7 @@ func (o *CdxV1SharedToken) GetKindOk() (*string, bool) {
 }
 
 // HasKind returns a boolean if a field has been set.
-func (o *CdxV1SharedToken) HasKind() bool {
+func (o *CdxV1RedeemTokenRequest) HasKind() bool {
 	if o != nil && o.Kind != nil {
 		return true
 	}
@@ -123,12 +127,12 @@ func (o *CdxV1SharedToken) HasKind() bool {
 }
 
 // SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *CdxV1SharedToken) SetKind(v string) {
+func (o *CdxV1RedeemTokenRequest) SetKind(v string) {
 	o.Kind = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *CdxV1SharedToken) GetId() string {
+func (o *CdxV1RedeemTokenRequest) GetId() string {
 	if o == nil || o.Id == nil {
 		var ret string
 		return ret
@@ -138,7 +142,7 @@ func (o *CdxV1SharedToken) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1SharedToken) GetIdOk() (*string, bool) {
+func (o *CdxV1RedeemTokenRequest) GetIdOk() (*string, bool) {
 	if o == nil || o.Id == nil {
 		return nil, false
 	}
@@ -146,7 +150,7 @@ func (o *CdxV1SharedToken) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *CdxV1SharedToken) HasId() bool {
+func (o *CdxV1RedeemTokenRequest) HasId() bool {
 	if o != nil && o.Id != nil {
 		return true
 	}
@@ -155,12 +159,12 @@ func (o *CdxV1SharedToken) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *CdxV1SharedToken) SetId(v string) {
+func (o *CdxV1RedeemTokenRequest) SetId(v string) {
 	o.Id = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *CdxV1SharedToken) GetMetadata() ObjectMeta {
+func (o *CdxV1RedeemTokenRequest) GetMetadata() ObjectMeta {
 	if o == nil || o.Metadata == nil {
 		var ret ObjectMeta
 		return ret
@@ -170,7 +174,7 @@ func (o *CdxV1SharedToken) GetMetadata() ObjectMeta {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1SharedToken) GetMetadataOk() (*ObjectMeta, bool) {
+func (o *CdxV1RedeemTokenRequest) GetMetadataOk() (*ObjectMeta, bool) {
 	if o == nil || o.Metadata == nil {
 		return nil, false
 	}
@@ -178,7 +182,7 @@ func (o *CdxV1SharedToken) GetMetadataOk() (*ObjectMeta, bool) {
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *CdxV1SharedToken) HasMetadata() bool {
+func (o *CdxV1RedeemTokenRequest) HasMetadata() bool {
 	if o != nil && o.Metadata != nil {
 		return true
 	}
@@ -187,12 +191,12 @@ func (o *CdxV1SharedToken) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given ObjectMeta and assigns it to the Metadata field.
-func (o *CdxV1SharedToken) SetMetadata(v ObjectMeta) {
+func (o *CdxV1RedeemTokenRequest) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
 // GetToken returns the Token field value if set, zero value otherwise.
-func (o *CdxV1SharedToken) GetToken() string {
+func (o *CdxV1RedeemTokenRequest) GetToken() string {
 	if o == nil || o.Token == nil {
 		var ret string
 		return ret
@@ -202,7 +206,7 @@ func (o *CdxV1SharedToken) GetToken() string {
 
 // GetTokenOk returns a tuple with the Token field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1SharedToken) GetTokenOk() (*string, bool) {
+func (o *CdxV1RedeemTokenRequest) GetTokenOk() (*string, bool) {
 	if o == nil || o.Token == nil {
 		return nil, false
 	}
@@ -210,7 +214,7 @@ func (o *CdxV1SharedToken) GetTokenOk() (*string, bool) {
 }
 
 // HasToken returns a boolean if a field has been set.
-func (o *CdxV1SharedToken) HasToken() bool {
+func (o *CdxV1RedeemTokenRequest) HasToken() bool {
 	if o != nil && o.Token != nil {
 		return true
 	}
@@ -219,20 +223,86 @@ func (o *CdxV1SharedToken) HasToken() bool {
 }
 
 // SetToken gets a reference to the given string and assigns it to the Token field.
-func (o *CdxV1SharedToken) SetToken(v string) {
+func (o *CdxV1RedeemTokenRequest) SetToken(v string) {
 	o.Token = &v
 }
 
+// GetAwsAccount returns the AwsAccount field value if set, zero value otherwise.
+func (o *CdxV1RedeemTokenRequest) GetAwsAccount() string {
+	if o == nil || o.AwsAccount == nil {
+		var ret string
+		return ret
+	}
+	return *o.AwsAccount
+}
+
+// GetAwsAccountOk returns a tuple with the AwsAccount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CdxV1RedeemTokenRequest) GetAwsAccountOk() (*string, bool) {
+	if o == nil || o.AwsAccount == nil {
+		return nil, false
+	}
+	return o.AwsAccount, true
+}
+
+// HasAwsAccount returns a boolean if a field has been set.
+func (o *CdxV1RedeemTokenRequest) HasAwsAccount() bool {
+	if o != nil && o.AwsAccount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAwsAccount gets a reference to the given string and assigns it to the AwsAccount field.
+func (o *CdxV1RedeemTokenRequest) SetAwsAccount(v string) {
+	o.AwsAccount = &v
+}
+
+// GetAzureSubscription returns the AzureSubscription field value if set, zero value otherwise.
+func (o *CdxV1RedeemTokenRequest) GetAzureSubscription() string {
+	if o == nil || o.AzureSubscription == nil {
+		var ret string
+		return ret
+	}
+	return *o.AzureSubscription
+}
+
+// GetAzureSubscriptionOk returns a tuple with the AzureSubscription field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CdxV1RedeemTokenRequest) GetAzureSubscriptionOk() (*string, bool) {
+	if o == nil || o.AzureSubscription == nil {
+		return nil, false
+	}
+	return o.AzureSubscription, true
+}
+
+// HasAzureSubscription returns a boolean if a field has been set.
+func (o *CdxV1RedeemTokenRequest) HasAzureSubscription() bool {
+	if o != nil && o.AzureSubscription != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAzureSubscription gets a reference to the given string and assigns it to the AzureSubscription field.
+func (o *CdxV1RedeemTokenRequest) SetAzureSubscription(v string) {
+	o.AzureSubscription = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
-func (o *CdxV1SharedToken) Redact() {
+func (o *CdxV1RedeemTokenRequest) Redact() {
 	o.recurseRedact(o.ApiVersion)
 	o.recurseRedact(o.Kind)
 	o.recurseRedact(o.Id)
 	o.recurseRedact(o.Metadata)
 	o.recurseRedact(o.Token)
+	o.recurseRedact(o.AwsAccount)
+	o.recurseRedact(o.AzureSubscription)
 }
 
-func (o *CdxV1SharedToken) recurseRedact(v interface{}) {
+func (o *CdxV1RedeemTokenRequest) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -257,12 +327,12 @@ func (o *CdxV1SharedToken) recurseRedact(v interface{}) {
 	}
 }
 
-func (o CdxV1SharedToken) zeroField(v interface{}) {
+func (o CdxV1RedeemTokenRequest) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o CdxV1SharedToken) MarshalJSON() ([]byte, error) {
+func (o CdxV1RedeemTokenRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ApiVersion != nil {
 		toSerialize["api_version"] = o.ApiVersion
@@ -279,41 +349,47 @@ func (o CdxV1SharedToken) MarshalJSON() ([]byte, error) {
 	if o.Token != nil {
 		toSerialize["token"] = o.Token
 	}
+	if o.AwsAccount != nil {
+		toSerialize["aws_account"] = o.AwsAccount
+	}
+	if o.AzureSubscription != nil {
+		toSerialize["azure_subscription"] = o.AzureSubscription
+	}
 	return json.Marshal(toSerialize)
 }
 
-type NullableCdxV1SharedToken struct {
-	value *CdxV1SharedToken
+type NullableCdxV1RedeemTokenRequest struct {
+	value *CdxV1RedeemTokenRequest
 	isSet bool
 }
 
-func (v NullableCdxV1SharedToken) Get() *CdxV1SharedToken {
+func (v NullableCdxV1RedeemTokenRequest) Get() *CdxV1RedeemTokenRequest {
 	return v.value
 }
 
-func (v *NullableCdxV1SharedToken) Set(val *CdxV1SharedToken) {
+func (v *NullableCdxV1RedeemTokenRequest) Set(val *CdxV1RedeemTokenRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCdxV1SharedToken) IsSet() bool {
+func (v NullableCdxV1RedeemTokenRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCdxV1SharedToken) Unset() {
+func (v *NullableCdxV1RedeemTokenRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCdxV1SharedToken(val *CdxV1SharedToken) *NullableCdxV1SharedToken {
-	return &NullableCdxV1SharedToken{value: val, isSet: true}
+func NewNullableCdxV1RedeemTokenRequest(val *CdxV1RedeemTokenRequest) *NullableCdxV1RedeemTokenRequest {
+	return &NullableCdxV1RedeemTokenRequest{value: val, isSet: true}
 }
 
-func (v NullableCdxV1SharedToken) MarshalJSON() ([]byte, error) {
+func (v NullableCdxV1RedeemTokenRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCdxV1SharedToken) UnmarshalJSON(src []byte) error {
+func (v *NullableCdxV1RedeemTokenRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
