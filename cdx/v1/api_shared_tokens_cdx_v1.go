@@ -51,8 +51,8 @@ type SharedTokensCdxV1Api interface {
 	RedeemCdxV1SharedToken(ctx _context.Context) ApiRedeemCdxV1SharedTokenRequest
 
 	// RedeemCdxV1SharedTokenExecute executes the request
-	//  @return CdxV1RedeemShare
-	RedeemCdxV1SharedTokenExecute(r ApiRedeemCdxV1SharedTokenRequest) (CdxV1RedeemShare, *_nethttp.Response, error)
+	//  @return CdxV1RedeemTokenResponse
+	RedeemCdxV1SharedTokenExecute(r ApiRedeemCdxV1SharedTokenRequest) (CdxV1RedeemTokenResponse, *_nethttp.Response, error)
 
 	/*
 		ResourcesCdxV1SharedToken Resources a Shared Token
@@ -73,17 +73,17 @@ type SharedTokensCdxV1Api interface {
 type SharedTokensCdxV1ApiService service
 
 type ApiRedeemCdxV1SharedTokenRequest struct {
-	ctx              _context.Context
-	ApiService       SharedTokensCdxV1Api
-	cdxV1SharedToken *CdxV1SharedToken
+	ctx                     _context.Context
+	ApiService              SharedTokensCdxV1Api
+	cdxV1RedeemTokenRequest *CdxV1RedeemTokenRequest
 }
 
-func (r ApiRedeemCdxV1SharedTokenRequest) CdxV1SharedToken(cdxV1SharedToken CdxV1SharedToken) ApiRedeemCdxV1SharedTokenRequest {
-	r.cdxV1SharedToken = &cdxV1SharedToken
+func (r ApiRedeemCdxV1SharedTokenRequest) CdxV1RedeemTokenRequest(cdxV1RedeemTokenRequest CdxV1RedeemTokenRequest) ApiRedeemCdxV1SharedTokenRequest {
+	r.cdxV1RedeemTokenRequest = &cdxV1RedeemTokenRequest
 	return r
 }
 
-func (r ApiRedeemCdxV1SharedTokenRequest) Execute() (CdxV1RedeemShare, *_nethttp.Response, error) {
+func (r ApiRedeemCdxV1SharedTokenRequest) Execute() (CdxV1RedeemTokenResponse, *_nethttp.Response, error) {
 	return r.ApiService.RedeemCdxV1SharedTokenExecute(r)
 }
 
@@ -103,15 +103,15 @@ func (a *SharedTokensCdxV1ApiService) RedeemCdxV1SharedToken(ctx _context.Contex
 }
 
 // Execute executes the request
-//  @return CdxV1RedeemShare
-func (a *SharedTokensCdxV1ApiService) RedeemCdxV1SharedTokenExecute(r ApiRedeemCdxV1SharedTokenRequest) (CdxV1RedeemShare, *_nethttp.Response, error) {
+//  @return CdxV1RedeemTokenResponse
+func (a *SharedTokensCdxV1ApiService) RedeemCdxV1SharedTokenExecute(r ApiRedeemCdxV1SharedTokenRequest) (CdxV1RedeemTokenResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  CdxV1RedeemShare
+		localVarReturnValue  CdxV1RedeemTokenResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SharedTokensCdxV1ApiService.RedeemCdxV1SharedToken")
@@ -143,7 +143,7 @@ func (a *SharedTokensCdxV1ApiService) RedeemCdxV1SharedTokenExecute(r ApiRedeemC
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.cdxV1SharedToken
+	localVarPostBody = r.cdxV1RedeemTokenRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -33,35 +33,34 @@ import (
 	"reflect"
 )
 
-// CdxV1SharedGroup The shared consumer group
-type CdxV1SharedGroup struct {
-	// The resource kind
+// CdxV1AwsNetwork The AWS network details.
+type CdxV1AwsNetwork struct {
+	// Network kind type.
 	Kind string `json:"kind"`
-	// The consumer group prefix
-	GroupPrefix string `json:"group_prefix"`
+	// The AWS VPC endpoint service for the network (used for PrivateLink) if available.
+	PrivateLinkEndpointService *string `json:"private_link_endpoint_service,omitempty"`
 }
 
-// NewCdxV1SharedGroup instantiates a new CdxV1SharedGroup object
+// NewCdxV1AwsNetwork instantiates a new CdxV1AwsNetwork object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCdxV1SharedGroup(kind string, groupPrefix string) *CdxV1SharedGroup {
-	this := CdxV1SharedGroup{}
+func NewCdxV1AwsNetwork(kind string) *CdxV1AwsNetwork {
+	this := CdxV1AwsNetwork{}
 	this.Kind = kind
-	this.GroupPrefix = groupPrefix
 	return &this
 }
 
-// NewCdxV1SharedGroupWithDefaults instantiates a new CdxV1SharedGroup object
+// NewCdxV1AwsNetworkWithDefaults instantiates a new CdxV1AwsNetwork object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCdxV1SharedGroupWithDefaults() *CdxV1SharedGroup {
-	this := CdxV1SharedGroup{}
+func NewCdxV1AwsNetworkWithDefaults() *CdxV1AwsNetwork {
+	this := CdxV1AwsNetwork{}
 	return &this
 }
 
 // GetKind returns the Kind field value
-func (o *CdxV1SharedGroup) GetKind() string {
+func (o *CdxV1AwsNetwork) GetKind() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -72,7 +71,7 @@ func (o *CdxV1SharedGroup) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *CdxV1SharedGroup) GetKindOk() (*string, bool) {
+func (o *CdxV1AwsNetwork) GetKindOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -80,41 +79,49 @@ func (o *CdxV1SharedGroup) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *CdxV1SharedGroup) SetKind(v string) {
+func (o *CdxV1AwsNetwork) SetKind(v string) {
 	o.Kind = v
 }
 
-// GetGroupPrefix returns the GroupPrefix field value
-func (o *CdxV1SharedGroup) GetGroupPrefix() string {
-	if o == nil {
+// GetPrivateLinkEndpointService returns the PrivateLinkEndpointService field value if set, zero value otherwise.
+func (o *CdxV1AwsNetwork) GetPrivateLinkEndpointService() string {
+	if o == nil || o.PrivateLinkEndpointService == nil {
 		var ret string
 		return ret
 	}
-
-	return o.GroupPrefix
+	return *o.PrivateLinkEndpointService
 }
 
-// GetGroupPrefixOk returns a tuple with the GroupPrefix field value
+// GetPrivateLinkEndpointServiceOk returns a tuple with the PrivateLinkEndpointService field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1SharedGroup) GetGroupPrefixOk() (*string, bool) {
-	if o == nil {
+func (o *CdxV1AwsNetwork) GetPrivateLinkEndpointServiceOk() (*string, bool) {
+	if o == nil || o.PrivateLinkEndpointService == nil {
 		return nil, false
 	}
-	return &o.GroupPrefix, true
+	return o.PrivateLinkEndpointService, true
 }
 
-// SetGroupPrefix sets field value
-func (o *CdxV1SharedGroup) SetGroupPrefix(v string) {
-	o.GroupPrefix = v
+// HasPrivateLinkEndpointService returns a boolean if a field has been set.
+func (o *CdxV1AwsNetwork) HasPrivateLinkEndpointService() bool {
+	if o != nil && o.PrivateLinkEndpointService != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPrivateLinkEndpointService gets a reference to the given string and assigns it to the PrivateLinkEndpointService field.
+func (o *CdxV1AwsNetwork) SetPrivateLinkEndpointService(v string) {
+	o.PrivateLinkEndpointService = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *CdxV1SharedGroup) Redact() {
+func (o *CdxV1AwsNetwork) Redact() {
 	o.recurseRedact(&o.Kind)
-	o.recurseRedact(&o.GroupPrefix)
+	o.recurseRedact(o.PrivateLinkEndpointService)
 }
 
-func (o *CdxV1SharedGroup) recurseRedact(v interface{}) {
+func (o *CdxV1AwsNetwork) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -139,54 +146,54 @@ func (o *CdxV1SharedGroup) recurseRedact(v interface{}) {
 	}
 }
 
-func (o CdxV1SharedGroup) zeroField(v interface{}) {
+func (o CdxV1AwsNetwork) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o CdxV1SharedGroup) MarshalJSON() ([]byte, error) {
+func (o CdxV1AwsNetwork) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["kind"] = o.Kind
 	}
-	if true {
-		toSerialize["group_prefix"] = o.GroupPrefix
+	if o.PrivateLinkEndpointService != nil {
+		toSerialize["private_link_endpoint_service"] = o.PrivateLinkEndpointService
 	}
 	return json.Marshal(toSerialize)
 }
 
-type NullableCdxV1SharedGroup struct {
-	value *CdxV1SharedGroup
+type NullableCdxV1AwsNetwork struct {
+	value *CdxV1AwsNetwork
 	isSet bool
 }
 
-func (v NullableCdxV1SharedGroup) Get() *CdxV1SharedGroup {
+func (v NullableCdxV1AwsNetwork) Get() *CdxV1AwsNetwork {
 	return v.value
 }
 
-func (v *NullableCdxV1SharedGroup) Set(val *CdxV1SharedGroup) {
+func (v *NullableCdxV1AwsNetwork) Set(val *CdxV1AwsNetwork) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCdxV1SharedGroup) IsSet() bool {
+func (v NullableCdxV1AwsNetwork) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCdxV1SharedGroup) Unset() {
+func (v *NullableCdxV1AwsNetwork) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCdxV1SharedGroup(val *CdxV1SharedGroup) *NullableCdxV1SharedGroup {
-	return &NullableCdxV1SharedGroup{value: val, isSet: true}
+func NewNullableCdxV1AwsNetwork(val *CdxV1AwsNetwork) *NullableCdxV1AwsNetwork {
+	return &NullableCdxV1AwsNetwork{value: val, isSet: true}
 }
 
-func (v NullableCdxV1SharedGroup) MarshalJSON() ([]byte, error) {
+func (v NullableCdxV1AwsNetwork) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCdxV1SharedGroup) UnmarshalJSON(src []byte) error {
+func (v *NullableCdxV1AwsNetwork) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**GetCdxV1ConsumerSharedResource**](ConsumerSharedResourcesCdxV1Api.md#GetCdxV1ConsumerSharedResource) | **Get** /cdx/v1/consumer-shared-resources/{id} | Read a Consumer Shared Resource
 [**ImageCdxV1ConsumerSharedResource**](ConsumerSharedResourcesCdxV1Api.md#ImageCdxV1ConsumerSharedResource) | **Get** /cdx/v1/consumer-shared-resources/{id}/images/{file_name} | Image a Consumer Shared Resource
 [**ListCdxV1ConsumerSharedResources**](ConsumerSharedResourcesCdxV1Api.md#ListCdxV1ConsumerSharedResources) | **Get** /cdx/v1/consumer-shared-resources | List of Consumer Shared Resources
+[**NetworkCdxV1ConsumerSharedResource**](ConsumerSharedResourcesCdxV1Api.md#NetworkCdxV1ConsumerSharedResource) | **Get** /cdx/v1/consumer-shared-resources/{id}:network | Network a Consumer Shared Resource
 
 
 
@@ -206,6 +207,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CdxV1ConsumerSharedResourceList**](cdx.v1.ConsumerSharedResourceList.md)
+
+### Authorization
+
+[api-key](../README.md#api-key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## NetworkCdxV1ConsumerSharedResource
+
+> CdxV1Network NetworkCdxV1ConsumerSharedResource(ctx, id).Execute()
+
+Network a Consumer Shared Resource
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    id := "id_example" // string | The unique identifier for the consumer shared resource.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.ConsumerSharedResourcesCdxV1Api.NetworkCdxV1ConsumerSharedResource(context.Background(), id).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ConsumerSharedResourcesCdxV1Api.NetworkCdxV1ConsumerSharedResource``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `NetworkCdxV1ConsumerSharedResource`: CdxV1Network
+    fmt.Fprintf(os.Stdout, "Response from `ConsumerSharedResourcesCdxV1Api.NetworkCdxV1ConsumerSharedResource`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | The unique identifier for the consumer shared resource. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiNetworkCdxV1ConsumerSharedResourceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**CdxV1Network**](CdxV1Network.md)
 
 ### Authorization
 

@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## RedeemCdxV1SharedToken
 
-> CdxV1RedeemShare RedeemCdxV1SharedToken(ctx).CdxV1SharedToken(cdxV1SharedToken).Execute()
+> CdxV1RedeemTokenResponse RedeemCdxV1SharedToken(ctx).CdxV1RedeemTokenRequest(cdxV1RedeemTokenRequest).Execute()
 
 Redeem a Shared Token
 
@@ -30,16 +30,16 @@ import (
 )
 
 func main() {
-    cdxV1SharedToken := *openapiclient.NewCdxV1SharedToken() // CdxV1SharedToken |  (optional)
+    cdxV1RedeemTokenRequest := *openapiclient.NewCdxV1RedeemTokenRequest() // CdxV1RedeemTokenRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SharedTokensCdxV1Api.RedeemCdxV1SharedToken(context.Background()).CdxV1SharedToken(cdxV1SharedToken).Execute()
+    resp, r, err := api_client.SharedTokensCdxV1Api.RedeemCdxV1SharedToken(context.Background()).CdxV1RedeemTokenRequest(cdxV1RedeemTokenRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SharedTokensCdxV1Api.RedeemCdxV1SharedToken``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `RedeemCdxV1SharedToken`: CdxV1RedeemShare
+    // response from `RedeemCdxV1SharedToken`: CdxV1RedeemTokenResponse
     fmt.Fprintf(os.Stdout, "Response from `SharedTokensCdxV1Api.RedeemCdxV1SharedToken`: %v\n", resp)
 }
 ```
@@ -55,11 +55,11 @@ Other parameters are passed through a pointer to a apiRedeemCdxV1SharedTokenRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cdxV1SharedToken** | [**CdxV1SharedToken**](CdxV1SharedToken.md) |  | 
+ **cdxV1RedeemTokenRequest** | [**CdxV1RedeemTokenRequest**](CdxV1RedeemTokenRequest.md) |  | 
 
 ### Return type
 
-[**CdxV1RedeemShare**](CdxV1RedeemShare.md)
+[**CdxV1RedeemTokenResponse**](CdxV1RedeemTokenResponse.md)
 
 ### Authorization
 

@@ -8,14 +8,16 @@ Name | Type | Description | Notes
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
-**DisplayName** | Pointer to **string** | Consumer resource display name | [optional] 
-**Description** | Pointer to **string** | Description of consumer resource | [optional] 
-**Labels** | Pointer to **[]string** | list of labels | [optional] 
-**Examples** | Pointer to **[]string** | List of example data in JSON format | [optional] 
-**Schemas** | Pointer to **[]string** | List of schemas in JSON format | [optional] 
-**OrganizationName** | Pointer to **string** | Organization to which the shared resource belongs | [optional] 
-**OrganizationDetails** | Pointer to **string** | Details of the organization to which the shared resource belongs | [optional] 
-**OrganizationContact** | Pointer to **string** | Email of contact person from the organization | [optional] 
+**Cloud** | Pointer to **string** |  | [optional] [readonly] 
+**NetworkConnectionTypes** | Pointer to [**CdxV1ConnectionTypes**](cdx.v1.ConnectionTypes.md) |  | [optional] [readonly] 
+**DisplayName** | Pointer to **string** | Consumer resource display name | [optional] [readonly] 
+**Description** | Pointer to **string** | Description of consumer resource | [optional] [readonly] 
+**Labels** | Pointer to **[]string** | list of labels | [optional] [readonly] 
+**Examples** | Pointer to **[]string** | List of example data in JSON format | [optional] [readonly] 
+**Schemas** | Pointer to **[]string** | List of schemas in JSON format | [optional] [readonly] 
+**OrganizationName** | Pointer to **string** | Organization to which the shared resource belongs | [optional] [readonly] 
+**OrganizationDetails** | Pointer to **string** | Details of the organization to which the shared resource belongs | [optional] [readonly] 
+**OrganizationContact** | Pointer to **string** | Email of the provider organization contact | [optional] [readonly] 
 **LogoUrl** | Pointer to **string** | Resource logo url | [optional] [readonly] 
 
 ## Methods
@@ -136,6 +138,56 @@ SetMetadata sets Metadata field to given value.
 `func (o *CdxV1ConsumerSharedResource) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
+
+### GetCloud
+
+`func (o *CdxV1ConsumerSharedResource) GetCloud() string`
+
+GetCloud returns the Cloud field if non-nil, zero value otherwise.
+
+### GetCloudOk
+
+`func (o *CdxV1ConsumerSharedResource) GetCloudOk() (*string, bool)`
+
+GetCloudOk returns a tuple with the Cloud field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCloud
+
+`func (o *CdxV1ConsumerSharedResource) SetCloud(v string)`
+
+SetCloud sets Cloud field to given value.
+
+### HasCloud
+
+`func (o *CdxV1ConsumerSharedResource) HasCloud() bool`
+
+HasCloud returns a boolean if a field has been set.
+
+### GetNetworkConnectionTypes
+
+`func (o *CdxV1ConsumerSharedResource) GetNetworkConnectionTypes() CdxV1ConnectionTypes`
+
+GetNetworkConnectionTypes returns the NetworkConnectionTypes field if non-nil, zero value otherwise.
+
+### GetNetworkConnectionTypesOk
+
+`func (o *CdxV1ConsumerSharedResource) GetNetworkConnectionTypesOk() (*CdxV1ConnectionTypes, bool)`
+
+GetNetworkConnectionTypesOk returns a tuple with the NetworkConnectionTypes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkConnectionTypes
+
+`func (o *CdxV1ConsumerSharedResource) SetNetworkConnectionTypes(v CdxV1ConnectionTypes)`
+
+SetNetworkConnectionTypes sets NetworkConnectionTypes field to given value.
+
+### HasNetworkConnectionTypes
+
+`func (o *CdxV1ConsumerSharedResource) HasNetworkConnectionTypes() bool`
+
+HasNetworkConnectionTypes returns a boolean if a field has been set.
 
 ### GetDisplayName
 

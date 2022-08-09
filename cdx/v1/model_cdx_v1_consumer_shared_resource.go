@@ -40,8 +40,10 @@ type CdxV1ConsumerSharedResource struct {
 	// Kind defines the object this REST resource represents.
 	Kind *string `json:"kind,omitempty"`
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
-	Id       *string     `json:"id,omitempty"`
-	Metadata *ObjectMeta `json:"metadata,omitempty"`
+	Id                     *string               `json:"id,omitempty"`
+	Metadata               *ObjectMeta           `json:"metadata,omitempty"`
+	Cloud                  *string               `json:"cloud,omitempty"`
+	NetworkConnectionTypes *CdxV1ConnectionTypes `json:"network_connection_types,omitempty"`
 	// Consumer resource display name
 	DisplayName *string `json:"display_name,omitempty"`
 	// Description of consumer resource
@@ -56,7 +58,7 @@ type CdxV1ConsumerSharedResource struct {
 	OrganizationName *string `json:"organization_name,omitempty"`
 	// Details of the organization to which the shared resource belongs
 	OrganizationDetails *string `json:"organization_details,omitempty"`
-	// Email of contact person from the organization
+	// Email of the provider organization contact
 	OrganizationContact *string `json:"organization_contact,omitempty"`
 	// Resource logo url
 	LogoUrl *string `json:"logo_url,omitempty"`
@@ -205,6 +207,70 @@ func (o *CdxV1ConsumerSharedResource) HasMetadata() bool {
 // SetMetadata gets a reference to the given ObjectMeta and assigns it to the Metadata field.
 func (o *CdxV1ConsumerSharedResource) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
+}
+
+// GetCloud returns the Cloud field value if set, zero value otherwise.
+func (o *CdxV1ConsumerSharedResource) GetCloud() string {
+	if o == nil || o.Cloud == nil {
+		var ret string
+		return ret
+	}
+	return *o.Cloud
+}
+
+// GetCloudOk returns a tuple with the Cloud field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CdxV1ConsumerSharedResource) GetCloudOk() (*string, bool) {
+	if o == nil || o.Cloud == nil {
+		return nil, false
+	}
+	return o.Cloud, true
+}
+
+// HasCloud returns a boolean if a field has been set.
+func (o *CdxV1ConsumerSharedResource) HasCloud() bool {
+	if o != nil && o.Cloud != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCloud gets a reference to the given string and assigns it to the Cloud field.
+func (o *CdxV1ConsumerSharedResource) SetCloud(v string) {
+	o.Cloud = &v
+}
+
+// GetNetworkConnectionTypes returns the NetworkConnectionTypes field value if set, zero value otherwise.
+func (o *CdxV1ConsumerSharedResource) GetNetworkConnectionTypes() CdxV1ConnectionTypes {
+	if o == nil || o.NetworkConnectionTypes == nil {
+		var ret CdxV1ConnectionTypes
+		return ret
+	}
+	return *o.NetworkConnectionTypes
+}
+
+// GetNetworkConnectionTypesOk returns a tuple with the NetworkConnectionTypes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CdxV1ConsumerSharedResource) GetNetworkConnectionTypesOk() (*CdxV1ConnectionTypes, bool) {
+	if o == nil || o.NetworkConnectionTypes == nil {
+		return nil, false
+	}
+	return o.NetworkConnectionTypes, true
+}
+
+// HasNetworkConnectionTypes returns a boolean if a field has been set.
+func (o *CdxV1ConsumerSharedResource) HasNetworkConnectionTypes() bool {
+	if o != nil && o.NetworkConnectionTypes != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNetworkConnectionTypes gets a reference to the given CdxV1ConnectionTypes and assigns it to the NetworkConnectionTypes field.
+func (o *CdxV1ConsumerSharedResource) SetNetworkConnectionTypes(v CdxV1ConnectionTypes) {
+	o.NetworkConnectionTypes = &v
 }
 
 // GetDisplayName returns the DisplayName field value if set, zero value otherwise.
@@ -501,6 +567,8 @@ func (o *CdxV1ConsumerSharedResource) Redact() {
 	o.recurseRedact(o.Kind)
 	o.recurseRedact(o.Id)
 	o.recurseRedact(o.Metadata)
+	o.recurseRedact(o.Cloud)
+	o.recurseRedact(o.NetworkConnectionTypes)
 	o.recurseRedact(o.DisplayName)
 	o.recurseRedact(o.Description)
 	o.recurseRedact(o.Labels)
@@ -555,6 +623,12 @@ func (o CdxV1ConsumerSharedResource) MarshalJSON() ([]byte, error) {
 	}
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
+	}
+	if o.Cloud != nil {
+		toSerialize["cloud"] = o.Cloud
+	}
+	if o.NetworkConnectionTypes != nil {
+		toSerialize["network_connection_types"] = o.NetworkConnectionTypes
 	}
 	if o.DisplayName != nil {
 		toSerialize["display_name"] = o.DisplayName
