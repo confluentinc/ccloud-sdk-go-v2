@@ -5054,13 +5054,13 @@ paths:
             --url https://api.confluent.cloud/cdx/v1/shared-tokens:redeem \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"token":"string","aws_account":"000000000000","azure_subscription":"00000000-0000-0000-0000-000000000000"}'
+            --data '{"token":"string","aws_account":"000000000000","azure_subscription":"00000000-0000-0000-0000-000000000000","gcp_project":"string"}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"token\":\"string\",\"aws_account\":\"000000000000\",\"azure_subscription\":\"00000000-0000-0000-0000-000000000000\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"token\":\"string\",\"aws_account\":\"000000000000\",\"azure_subscription\":\"00000000-0000-0000-0000-000000000000\",\"gcp_project\":\"string\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/cdx/v1/shared-tokens:redeem")
             .post(body)
@@ -5074,18 +5074,19 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cdx/v1/shared-tokens:redeem\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"token\\\":\\\"string\\\",\\\"\
           aws_account\\\":\\\"000000000000\\\",\\\"azure_subscription\\\":\\\"00000000-0000-0000-0000-000000000000\\\
-          \"}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \",\\\"gcp_project\\\":\\\"string\\\"}\")\n\n\treq, _ := http.NewRequest(\"\
+          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"token\":\"string\",\"aws_account\":\"000000000000\",\"azure_subscription\":\"00000000-0000-0000-0000-000000000000\"}"
+          payload = "{\"token\":\"string\",\"aws_account\":\"000000000000\",\"azure_subscription\":\"00000000-0000-0000-0000-000000000000\",\"gcp_project\":\"string\"}"
 
           headers = {
               'content-type': "application/json",
@@ -5129,7 +5130,8 @@ paths:
           req.write(JSON.stringify({
             token: 'string',
             aws_account: '000000000000',
-            azure_subscription: '00000000-0000-0000-0000-000000000000'
+            azure_subscription: '00000000-0000-0000-0000-000000000000',
+            gcp_project: 'string'
           }));
           req.end();
       - lang: C
@@ -5144,7 +5146,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"token\":\"string\",\"aws_account\":\"000000000000\",\"azure_subscription\":\"00000000-0000-0000-0000-000000000000\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"token\":\"string\",\"aws_account\":\"000000000000\",\"azure_subscription\":\"00000000-0000-0000-0000-000000000000\",\"gcp_project\":\"string\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -5153,7 +5155,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"token\":\"string\",\"aws_account\":\"000000000000\",\"azure_subscription\":\"00000000-0000-0000-0000-000000000000\"}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"token\":\"string\",\"aws_account\":\"000000000000\",\"azure_subscription\":\"00000000-0000-0000-0000-000000000000\",\"gcp_project\":\"string\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
 components:
   requestBodies:
@@ -5932,12 +5934,16 @@ components:
           description: The encrypted token
           type: string
         aws_account:
-          description: The AWS account id for the consumer network.
+          description: Consumer's AWS account ID for PrivateLink access.
           example: "000000000000"
           type: string
         azure_subscription:
-          description: The Azure subscription for the consumer network.
+          description: Consumer's Azure subscription ID for PrivateLink access.
           example: 00000000-0000-0000-0000-000000000000
+          type: string
+        gcp_project:
+          description: Consumer's GCP project ID for Private Service Connect access.
+          minLength: 1
           type: string
       type: object
     cdx.v1.RedeemTokenResponse:
@@ -5951,7 +5957,7 @@ components:
         - '{}'
         id: dlz-f3a90de
         secret: secret
-        kafka_bootstrap_url: https://openapi-generator.tech
+        kafka_bootstrap_url: SASL://pkc-xxxxx.us-west-2.aws.confluent.cloud:9092
         api_version: cdx/v1
       properties:
         api_version:
@@ -5987,15 +5993,20 @@ components:
                 example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/redeem-token-response=rtr-12345
         apikey:
           description: The api key
+          readOnly: true
           type: string
         secret:
           description: The api key secret
+          readOnly: true
           type: string
           x-redact: true
         kafka_bootstrap_url:
-          description: The cluster connection url
+          description: The kafka cluster bootstrap url
+          example: SASL://pkc-xxxxx.us-west-2.aws.confluent.cloud:9092
           format: uri
+          readOnly: true
           type: string
+          x-immutable: true
         resources:
           description: List of shared resources
           items:
@@ -6067,7 +6078,12 @@ components:
         kind: Network
         dns_domain: 00000.us-east-1.aws.glb.confluent.cloud
         id: dlz-f3a90de
+        kafka_bootstrap_url: SASL://pkc-xxxxx.us-west-2.aws.confluent.cloud:9092
         api_version: cdx/v1
+        zones:
+        - use1-az1
+        - use1-az2
+        - use1-az3
         zonal_subdomains:
           use1-az1: use1-az1.00000.us-east-1.aws.confluent.cloud
           use1-az4: use1-az4.00000.us-east-1.aws.confluent.cloud
@@ -6104,6 +6120,37 @@ components:
                 example: https://api.confluent.cloud/cdx/v1/networks/n-12345
               resource_name:
                 example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-12345
+        kafka_bootstrap_url:
+          description: The kafka cluster bootstrap url
+          example: SASL://pkc-xxxxx.us-west-2.aws.confluent.cloud:9092
+          format: uri
+          readOnly: true
+          type: string
+          x-immutable: true
+        zones:
+          description: |
+            The 3 availability zones for this network. They can optionally be specified for AWS networks
+            used with PrivateLink. Otherwise, they are automatically chosen by Confluent Cloud.
+
+            On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)
+             (e.g. use1-az3)
+
+            On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)
+             (e.g. us-central1-c).
+
+            On Azure, zones are Confluent-chosen names (e.g. 1, 2, 3) since Azure does not
+             have universal zone identifiers.
+          example:
+          - use1-az1
+          - use1-az2
+          - use1-az3
+          items:
+            type: string
+          maxItems: 3
+          minItems: 3
+          type: array
+          uniqueItems: true
+          x-immutable: true
         dns_domain:
           description: The root DNS domain for the network if applicable.
           example: 00000.us-east-1.aws.glb.confluent.cloud
@@ -6128,10 +6175,12 @@ components:
             mapping:
               AwsNetwork: '#/components/schemas/cdx.v1.AwsNetwork'
               AzureNetwork: '#/components/schemas/cdx.v1.AzureNetwork'
+              GcpNetwork: '#/components/schemas/cdx.v1.GcpNetwork'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/cdx.v1.AwsNetwork'
           - $ref: '#/components/schemas/cdx.v1.AzureNetwork'
+          - $ref: '#/components/schemas/cdx.v1.GcpNetwork'
           readOnly: true
           x-one-of-name: CdxV1NetworkCloudOneOf
       type: object
@@ -6176,6 +6225,31 @@ components:
       required:
       - kind
       type: object
+    cdx.v1.GcpNetwork:
+      description: The GCP network details.
+      properties:
+        kind:
+          description: Network kind type.
+          enum:
+          - GcpNetwork
+          type: string
+        private_service_connect_service_attachments:
+          additionalProperties:
+            type: string
+          description: |
+            The mapping of zones to Private Service Connect Service
+            Attachments if available. Keys are zones and values are
+            [GCP Private Service Connect Service
+            Attachment](https://cloud.google.com/vpc/docs/configure-private-service-connect-producer#api_7)
+          example:
+            us-central1-a: projects/cc-prod/regions/us-central1/serviceAttachments/s-7jjm9-service-attachment-us-central1-a
+            us-central1-b: projects/cc-prod/regions/us-central1/serviceAttachments/s-7jjm9-service-attachment-us-central1-b
+            us-central1-c: projects/cc-prod/regions/us-central1/serviceAttachments/s-7jjm9-service-attachment-us-central1-c
+          readOnly: true
+          type: object
+      required:
+      - kind
+      type: object
     cdx.v1.ConnectionType:
       description: Network connection type.
       example: PRIVATELINK
@@ -6197,6 +6271,7 @@ components:
       x-extensible-enum:
       - AWS
       - AZURE
+      - GCP
     SearchFilter:
       description: Filter a collection by a string search
       type: string

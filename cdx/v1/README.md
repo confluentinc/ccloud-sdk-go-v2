@@ -114,6 +114,7 @@ Class | Method | HTTP request | Description
  - [CdxV1CreateShareRequest](docs/CdxV1CreateShareRequest.md)
  - [CdxV1CreateShareRequestConsumerRestrictionOneOf](docs/CdxV1CreateShareRequestConsumerRestrictionOneOf.md)
  - [CdxV1EmailConsumerRestriction](docs/CdxV1EmailConsumerRestriction.md)
+ - [CdxV1GcpNetwork](docs/CdxV1GcpNetwork.md)
  - [CdxV1Network](docs/CdxV1Network.md)
  - [CdxV1NetworkCloudOneOf](docs/CdxV1NetworkCloudOneOf.md)
  - [CdxV1ProviderShare](docs/CdxV1ProviderShare.md)

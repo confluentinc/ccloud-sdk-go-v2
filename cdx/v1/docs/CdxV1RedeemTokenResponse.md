@@ -8,9 +8,9 @@ Name | Type | Description | Notes
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
-**Apikey** | Pointer to **string** | The api key | [optional] 
-**Secret** | Pointer to **string** | The api key secret | [optional] 
-**KafkaBootstrapUrl** | Pointer to **string** | The cluster connection url | [optional] 
+**Apikey** | Pointer to **string** | The api key | [optional] [readonly] 
+**Secret** | Pointer to **string** | The api key secret | [optional] [readonly] 
+**KafkaBootstrapUrl** | Pointer to **string** | The kafka cluster bootstrap url | [optional] [readonly] 
 **Resources** | Pointer to [**[]CdxV1RedeemTokenResponseResourcesOneOf**](CdxV1RedeemTokenResponseResourcesOneOf.md) | List of shared resources | [optional] 
 
 ## Methods

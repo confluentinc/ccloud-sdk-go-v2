@@ -42,6 +42,10 @@ type CdxV1Network struct {
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
 	Id *string `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
+	// The kafka cluster bootstrap url
+	KafkaBootstrapUrl *string `json:"kafka_bootstrap_url,omitempty"`
+	// The 3 availability zones for this network. They can optionally be specified for AWS networks used with PrivateLink. Otherwise, they are automatically chosen by Confluent Cloud.  On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3)  On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c).  On Azure, zones are Confluent-chosen names (e.g. 1, 2, 3) since Azure does not  have universal zone identifiers. 
+	Zones *[]string `json:"zones,omitempty"`
 	// The root DNS domain for the network if applicable.
 	DnsDomain *string `json:"dns_domain,omitempty"`
 	// The DNS subdomain for each zone. Present on networks that support PrivateLink. Keys are zones and values are DNS domains. 
@@ -195,6 +199,70 @@ func (o *CdxV1Network) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
+// GetKafkaBootstrapUrl returns the KafkaBootstrapUrl field value if set, zero value otherwise.
+func (o *CdxV1Network) GetKafkaBootstrapUrl() string {
+	if o == nil || o.KafkaBootstrapUrl == nil {
+		var ret string
+		return ret
+	}
+	return *o.KafkaBootstrapUrl
+}
+
+// GetKafkaBootstrapUrlOk returns a tuple with the KafkaBootstrapUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CdxV1Network) GetKafkaBootstrapUrlOk() (*string, bool) {
+	if o == nil || o.KafkaBootstrapUrl == nil {
+		return nil, false
+	}
+	return o.KafkaBootstrapUrl, true
+}
+
+// HasKafkaBootstrapUrl returns a boolean if a field has been set.
+func (o *CdxV1Network) HasKafkaBootstrapUrl() bool {
+	if o != nil && o.KafkaBootstrapUrl != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetKafkaBootstrapUrl gets a reference to the given string and assigns it to the KafkaBootstrapUrl field.
+func (o *CdxV1Network) SetKafkaBootstrapUrl(v string) {
+	o.KafkaBootstrapUrl = &v
+}
+
+// GetZones returns the Zones field value if set, zero value otherwise.
+func (o *CdxV1Network) GetZones() []string {
+	if o == nil || o.Zones == nil {
+		var ret []string
+		return ret
+	}
+	return *o.Zones
+}
+
+// GetZonesOk returns a tuple with the Zones field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CdxV1Network) GetZonesOk() (*[]string, bool) {
+	if o == nil || o.Zones == nil {
+		return nil, false
+	}
+	return o.Zones, true
+}
+
+// HasZones returns a boolean if a field has been set.
+func (o *CdxV1Network) HasZones() bool {
+	if o != nil && o.Zones != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetZones gets a reference to the given []string and assigns it to the Zones field.
+func (o *CdxV1Network) SetZones(v []string) {
+	o.Zones = &v
+}
+
 // GetDnsDomain returns the DnsDomain field value if set, zero value otherwise.
 func (o *CdxV1Network) GetDnsDomain() string {
 	if o == nil || o.DnsDomain == nil {
@@ -297,6 +365,8 @@ func (o *CdxV1Network) Redact() {
     o.recurseRedact(o.Kind)
     o.recurseRedact(o.Id)
     o.recurseRedact(o.Metadata)
+    o.recurseRedact(o.KafkaBootstrapUrl)
+    o.recurseRedact(o.Zones)
     o.recurseRedact(o.DnsDomain)
     o.recurseRedact(o.ZonalSubdomains)
     o.recurseRedact(o.Cloud)
@@ -345,6 +415,12 @@ func (o CdxV1Network) MarshalJSON() ([]byte, error) {
 	}
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
+	}
+	if o.KafkaBootstrapUrl != nil {
+		toSerialize["kafka_bootstrap_url"] = o.KafkaBootstrapUrl
+	}
+	if o.Zones != nil {
+		toSerialize["zones"] = o.Zones
 	}
 	if o.DnsDomain != nil {
 		toSerialize["dns_domain"] = o.DnsDomain

@@ -46,7 +46,7 @@ type CdxV1RedeemTokenResponse struct {
 	Apikey *string `json:"apikey,omitempty"`
 	// The api key secret
 	Secret *string `json:"secret,omitempty"`
-	// The cluster connection url
+	// The kafka cluster bootstrap url
 	KafkaBootstrapUrl *string `json:"kafka_bootstrap_url,omitempty"`
 	// List of shared resources
 	Resources *[]CdxV1RedeemTokenResponseResourcesOneOf `json:"resources,omitempty"`

@@ -34,6 +34,7 @@ import (
 type CdxV1NetworkCloudOneOf struct {
 	CdxV1AwsNetwork *CdxV1AwsNetwork
 	CdxV1AzureNetwork *CdxV1AzureNetwork
+	CdxV1GcpNetwork *CdxV1GcpNetwork
 }
 
 // CdxV1AwsNetworkAsCdxV1NetworkCloudOneOf is a convenience function that returns CdxV1AwsNetwork wrapped in CdxV1NetworkCloudOneOf
@@ -44,6 +45,11 @@ func CdxV1AwsNetworkAsCdxV1NetworkCloudOneOf(v *CdxV1AwsNetwork) CdxV1NetworkClo
 // CdxV1AzureNetworkAsCdxV1NetworkCloudOneOf is a convenience function that returns CdxV1AzureNetwork wrapped in CdxV1NetworkCloudOneOf
 func CdxV1AzureNetworkAsCdxV1NetworkCloudOneOf(v *CdxV1AzureNetwork) CdxV1NetworkCloudOneOf {
 	return CdxV1NetworkCloudOneOf{ CdxV1AzureNetwork: v}
+}
+
+// CdxV1GcpNetworkAsCdxV1NetworkCloudOneOf is a convenience function that returns CdxV1GcpNetwork wrapped in CdxV1NetworkCloudOneOf
+func CdxV1GcpNetworkAsCdxV1NetworkCloudOneOf(v *CdxV1GcpNetwork) CdxV1NetworkCloudOneOf {
+	return CdxV1NetworkCloudOneOf{ CdxV1GcpNetwork: v}
 }
 
 
@@ -81,6 +87,18 @@ func (dst *CdxV1NetworkCloudOneOf) UnmarshalJSON(data []byte) error {
 		}
 	}
 
+	// check if the discriminator value is 'GcpNetwork'
+	if jsonDict["kind"] == "GcpNetwork" {
+		// try to unmarshal JSON data into CdxV1GcpNetwork
+		err = json.Unmarshal(data, &dst.CdxV1GcpNetwork)
+		if err == nil {
+			return nil // data stored in dst.CdxV1GcpNetwork, return on the first match
+		} else {
+			dst.CdxV1GcpNetwork = nil
+			return fmt.Errorf("Failed to unmarshal CdxV1NetworkCloudOneOf as CdxV1GcpNetwork: %s", err.Error())
+		}
+	}
+
 	// check if the discriminator value is 'cdx.v1.AwsNetwork'
 	if jsonDict["kind"] == "cdx.v1.AwsNetwork" {
 		// try to unmarshal JSON data into CdxV1AwsNetwork
@@ -105,6 +123,18 @@ func (dst *CdxV1NetworkCloudOneOf) UnmarshalJSON(data []byte) error {
 		}
 	}
 
+	// check if the discriminator value is 'cdx.v1.GcpNetwork'
+	if jsonDict["kind"] == "cdx.v1.GcpNetwork" {
+		// try to unmarshal JSON data into CdxV1GcpNetwork
+		err = json.Unmarshal(data, &dst.CdxV1GcpNetwork)
+		if err == nil {
+			return nil // data stored in dst.CdxV1GcpNetwork, return on the first match
+		} else {
+			dst.CdxV1GcpNetwork = nil
+			return fmt.Errorf("Failed to unmarshal CdxV1NetworkCloudOneOf as CdxV1GcpNetwork: %s", err.Error())
+		}
+	}
+
 	return nil
 }
 
@@ -118,6 +148,10 @@ func (src CdxV1NetworkCloudOneOf) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.CdxV1AzureNetwork)
 	}
 
+	if src.CdxV1GcpNetwork != nil {
+		return json.Marshal(&src.CdxV1GcpNetwork)
+	}
+
 	return nil, nil // no data in oneOf schemas
 }
 
@@ -129,6 +163,10 @@ func (obj *CdxV1NetworkCloudOneOf) GetActualInstance() (interface{}) {
 
 	if obj.CdxV1AzureNetwork != nil {
 		return obj.CdxV1AzureNetwork
+	}
+
+	if obj.CdxV1GcpNetwork != nil {
+		return obj.CdxV1GcpNetwork
 	}
 
 	// all schemas are nil
