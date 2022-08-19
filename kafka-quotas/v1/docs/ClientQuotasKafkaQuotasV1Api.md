@@ -290,7 +290,7 @@ Name | Type | Description  | Notes
 
 ## UpdateKafkaQuotasV1ClientQuota
 
-> KafkaQuotasV1ClientQuota UpdateKafkaQuotasV1ClientQuota(ctx, id).KafkaQuotasV1ClientQuota(kafkaQuotasV1ClientQuota).Execute()
+> KafkaQuotasV1ClientQuota UpdateKafkaQuotasV1ClientQuota(ctx, id).KafkaQuotasV1ClientQuotaUpdate(kafkaQuotasV1ClientQuotaUpdate).Execute()
 
 Update a Client Quota
 
@@ -310,11 +310,11 @@ import (
 
 func main() {
     id := "id_example" // string | The unique identifier for the client quota.
-    kafkaQuotasV1ClientQuota := *openapiclient.NewKafkaQuotasV1ClientQuota() // KafkaQuotasV1ClientQuota |  (optional)
+    kafkaQuotasV1ClientQuotaUpdate := *openapiclient.NewKafkaQuotasV1ClientQuotaUpdate() // KafkaQuotasV1ClientQuotaUpdate |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClientQuotasKafkaQuotasV1Api.UpdateKafkaQuotasV1ClientQuota(context.Background(), id).KafkaQuotasV1ClientQuota(kafkaQuotasV1ClientQuota).Execute()
+    resp, r, err := api_client.ClientQuotasKafkaQuotasV1Api.UpdateKafkaQuotasV1ClientQuota(context.Background(), id).KafkaQuotasV1ClientQuotaUpdate(kafkaQuotasV1ClientQuotaUpdate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ClientQuotasKafkaQuotasV1Api.UpdateKafkaQuotasV1ClientQuota``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -340,7 +340,7 @@ Other parameters are passed through a pointer to a apiUpdateKafkaQuotasV1ClientQ
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **kafkaQuotasV1ClientQuota** | [**KafkaQuotasV1ClientQuota**](KafkaQuotasV1ClientQuota.md) |  | 
+ **kafkaQuotasV1ClientQuotaUpdate** | [**KafkaQuotasV1ClientQuotaUpdate**](KafkaQuotasV1ClientQuotaUpdate.md) |  | 
 
 ### Return type
 

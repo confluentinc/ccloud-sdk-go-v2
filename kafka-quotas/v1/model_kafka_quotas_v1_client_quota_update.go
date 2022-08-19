@@ -50,8 +50,6 @@ type KafkaQuotasV1ClientQuotaUpdate struct {
 	Throughput *KafkaQuotasV1Throughput `json:"throughput,omitempty"`
 	// A list of service accounts. Special name \"default\" can be used to represent the default quota for all users and service accounts. 
 	Principals *[]ObjectReference `json:"principals,omitempty"`
-	// The environment to which this belongs.
-	Environment *ObjectReference `json:"environment,omitempty"`
 }
 
 // NewKafkaQuotasV1ClientQuotaUpdate instantiates a new KafkaQuotasV1ClientQuotaUpdate object
@@ -327,38 +325,6 @@ func (o *KafkaQuotasV1ClientQuotaUpdate) SetPrincipals(v []ObjectReference) {
 	o.Principals = &v
 }
 
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *KafkaQuotasV1ClientQuotaUpdate) GetEnvironment() ObjectReference {
-	if o == nil || o.Environment == nil {
-		var ret ObjectReference
-		return ret
-	}
-	return *o.Environment
-}
-
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *KafkaQuotasV1ClientQuotaUpdate) GetEnvironmentOk() (*ObjectReference, bool) {
-	if o == nil || o.Environment == nil {
-		return nil, false
-	}
-	return o.Environment, true
-}
-
-// HasEnvironment returns a boolean if a field has been set.
-func (o *KafkaQuotasV1ClientQuotaUpdate) HasEnvironment() bool {
-	if o != nil && o.Environment != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
-func (o *KafkaQuotasV1ClientQuotaUpdate) SetEnvironment(v ObjectReference) {
-	o.Environment = &v
-}
-
 // Redact resets all sensitive fields to their zero value.
 func (o *KafkaQuotasV1ClientQuotaUpdate) Redact() {
     o.recurseRedact(o.ApiVersion)
@@ -369,7 +335,6 @@ func (o *KafkaQuotasV1ClientQuotaUpdate) Redact() {
     o.recurseRedact(o.Description)
     o.recurseRedact(o.Throughput)
     o.recurseRedact(o.Principals)
-    o.recurseRedact(o.Environment)
 }
 
 func (o *KafkaQuotasV1ClientQuotaUpdate) recurseRedact(v interface{}) {
@@ -427,9 +392,6 @@ func (o KafkaQuotasV1ClientQuotaUpdate) MarshalJSON() ([]byte, error) {
 	}
 	if o.Principals != nil {
 		toSerialize["principals"] = o.Principals
-	}
-	if o.Environment != nil {
-		toSerialize["environment"] = o.Environment
 	}
 	return json.Marshal(toSerialize)
 }

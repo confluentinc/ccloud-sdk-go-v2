@@ -787,11 +787,11 @@ type ApiUpdateKafkaQuotasV1ClientQuotaRequest struct {
 	ctx _context.Context
 	ApiService ClientQuotasKafkaQuotasV1Api
 	id string
-	kafkaQuotasV1ClientQuota *KafkaQuotasV1ClientQuota
+	kafkaQuotasV1ClientQuotaUpdate *KafkaQuotasV1ClientQuotaUpdate
 }
 
-func (r ApiUpdateKafkaQuotasV1ClientQuotaRequest) KafkaQuotasV1ClientQuota(kafkaQuotasV1ClientQuota KafkaQuotasV1ClientQuota) ApiUpdateKafkaQuotasV1ClientQuotaRequest {
-	r.kafkaQuotasV1ClientQuota = &kafkaQuotasV1ClientQuota
+func (r ApiUpdateKafkaQuotasV1ClientQuotaRequest) KafkaQuotasV1ClientQuotaUpdate(kafkaQuotasV1ClientQuotaUpdate KafkaQuotasV1ClientQuotaUpdate) ApiUpdateKafkaQuotasV1ClientQuotaRequest {
+	r.kafkaQuotasV1ClientQuotaUpdate = &kafkaQuotasV1ClientQuotaUpdate
 	return r
 }
 
@@ -862,7 +862,7 @@ func (a *ClientQuotasKafkaQuotasV1ApiService) UpdateKafkaQuotasV1ClientQuotaExec
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.kafkaQuotasV1ClientQuota
+	localVarPostBody = r.kafkaQuotasV1ClientQuotaUpdate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
