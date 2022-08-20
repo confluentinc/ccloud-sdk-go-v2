@@ -89,9 +89,9 @@ tags:
 
     | Quota | Description |
     | --- | --- |
-    | `privatelink_accounts_per_network` | Number of AWS accounts per network |
-    | `privatelink_subscriptions_per_network` | Number of Azure subscriptions per network |
-    | `privateserviceconnect_projects_per_network` | Number of GCP projects per network |
+    | `private_link_accounts_per_network` | Number of AWS accounts per network |
+    | `private_link_subscriptions_per_network` | Number of Azure subscriptions per network |
+    | `private_service_connect_projects_per_network` | Number of GCP projects per network |
   name: Private Link Accesses (networking/v1)
 paths:
   /networking/v1/networks:
@@ -6987,9 +6987,9 @@ components:
 
         | Quota | Description |
         | --- | --- |
-        | `privatelink_accounts_per_network` | Number of AWS accounts per network |
-        | `privatelink_subscriptions_per_network` | Number of Azure subscriptions per network |
-        | `privateserviceconnect_projects_per_network` | Number of GCP projects per network |
+        | `private_link_accounts_per_network` | Number of AWS accounts per network |
+        | `private_link_subscriptions_per_network` | Number of Azure subscriptions per network |
+        | `private_service_connect_projects_per_network` | Number of GCP projects per network |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -7144,7 +7144,7 @@ components:
           example: prod-network
           readOnly: true
           type: string
-        privateserviceconnect_service_attachments:
+        private_service_connect_service_attachments:
           additionalProperties:
             type: string
           description: |
@@ -7761,9 +7761,9 @@ components:
 
         | Quota | Description |
         | --- | --- |
-        | `privatelink_accounts_per_network` | Number of AWS accounts per network |
-        | `privatelink_subscriptions_per_network` | Number of Azure subscriptions per network |
-        | `privateserviceconnect_projects_per_network` | Number of GCP projects per network |
+        | `private_link_accounts_per_network` | Number of AWS accounts per network |
+        | `private_link_subscriptions_per_network` | Number of Azure subscriptions per network |
+        | `private_service_connect_projects_per_network` | Number of GCP projects per network |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -8262,9 +8262,9 @@ components:
 
         | Quota | Description |
         | --- | --- |
-        | `privatelink_accounts_per_network` | Number of AWS accounts per network |
-        | `privatelink_subscriptions_per_network` | Number of Azure subscriptions per network |
-        | `privateserviceconnect_projects_per_network` | Number of GCP projects per network |
+        | `private_link_accounts_per_network` | Number of AWS accounts per network |
+        | `private_link_subscriptions_per_network` | Number of Azure subscriptions per network |
+        | `private_service_connect_projects_per_network` | Number of GCP projects per network |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
