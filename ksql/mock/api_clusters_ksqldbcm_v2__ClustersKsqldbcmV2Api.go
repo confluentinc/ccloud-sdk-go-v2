@@ -9,67 +9,67 @@ import (
 	net_http "net/http"
 	sync "sync"
 
-	github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2 "github.com/confluentinc/ccloud-sdk-go-v2-internal/ksql/v2"
+	github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2 "github.com/confluentinc/ccloud-sdk-go-v2/ksql/v2"
 )
 
 // ClustersKsqldbcmV2Api is a mock of ClustersKsqldbcmV2Api interface
 type ClustersKsqldbcmV2Api struct {
 	lockCreateKsqldbcmV2Cluster sync.Mutex
-	CreateKsqldbcmV2ClusterFunc func(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiCreateKsqldbcmV2ClusterRequest
+	CreateKsqldbcmV2ClusterFunc func(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiCreateKsqldbcmV2ClusterRequest
 
 	lockCreateKsqldbcmV2ClusterExecute sync.Mutex
-	CreateKsqldbcmV2ClusterExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiCreateKsqldbcmV2ClusterRequest) (github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.KsqldbcmV2Cluster, *net_http.Response, error)
+	CreateKsqldbcmV2ClusterExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiCreateKsqldbcmV2ClusterRequest) (github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.KsqldbcmV2Cluster, *net_http.Response, error)
 
 	lockDeleteKsqldbcmV2Cluster sync.Mutex
-	DeleteKsqldbcmV2ClusterFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiDeleteKsqldbcmV2ClusterRequest
+	DeleteKsqldbcmV2ClusterFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiDeleteKsqldbcmV2ClusterRequest
 
 	lockDeleteKsqldbcmV2ClusterExecute sync.Mutex
-	DeleteKsqldbcmV2ClusterExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiDeleteKsqldbcmV2ClusterRequest) (*net_http.Response, error)
+	DeleteKsqldbcmV2ClusterExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiDeleteKsqldbcmV2ClusterRequest) (*net_http.Response, error)
 
 	lockGetKsqldbcmV2Cluster sync.Mutex
-	GetKsqldbcmV2ClusterFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiGetKsqldbcmV2ClusterRequest
+	GetKsqldbcmV2ClusterFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiGetKsqldbcmV2ClusterRequest
 
 	lockGetKsqldbcmV2ClusterExecute sync.Mutex
-	GetKsqldbcmV2ClusterExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiGetKsqldbcmV2ClusterRequest) (github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.KsqldbcmV2Cluster, *net_http.Response, error)
+	GetKsqldbcmV2ClusterExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiGetKsqldbcmV2ClusterRequest) (github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.KsqldbcmV2Cluster, *net_http.Response, error)
 
 	lockListKsqldbcmV2Clusters sync.Mutex
-	ListKsqldbcmV2ClustersFunc func(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiListKsqldbcmV2ClustersRequest
+	ListKsqldbcmV2ClustersFunc func(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiListKsqldbcmV2ClustersRequest
 
 	lockListKsqldbcmV2ClustersExecute sync.Mutex
-	ListKsqldbcmV2ClustersExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiListKsqldbcmV2ClustersRequest) (github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.KsqldbcmV2ClusterList, *net_http.Response, error)
+	ListKsqldbcmV2ClustersExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiListKsqldbcmV2ClustersRequest) (github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.KsqldbcmV2ClusterList, *net_http.Response, error)
 
 	calls struct {
 		CreateKsqldbcmV2Cluster []struct {
 			Ctx context.Context
 		}
 		CreateKsqldbcmV2ClusterExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiCreateKsqldbcmV2ClusterRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiCreateKsqldbcmV2ClusterRequest
 		}
 		DeleteKsqldbcmV2Cluster []struct {
 			Ctx context.Context
 			Id  string
 		}
 		DeleteKsqldbcmV2ClusterExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiDeleteKsqldbcmV2ClusterRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiDeleteKsqldbcmV2ClusterRequest
 		}
 		GetKsqldbcmV2Cluster []struct {
 			Ctx context.Context
 			Id  string
 		}
 		GetKsqldbcmV2ClusterExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiGetKsqldbcmV2ClusterRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiGetKsqldbcmV2ClusterRequest
 		}
 		ListKsqldbcmV2Clusters []struct {
 			Ctx context.Context
 		}
 		ListKsqldbcmV2ClustersExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiListKsqldbcmV2ClustersRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiListKsqldbcmV2ClustersRequest
 		}
 	}
 }
 
 // CreateKsqldbcmV2Cluster mocks base method by wrapping the associated func.
-func (m *ClustersKsqldbcmV2Api) CreateKsqldbcmV2Cluster(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiCreateKsqldbcmV2ClusterRequest {
+func (m *ClustersKsqldbcmV2Api) CreateKsqldbcmV2Cluster(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiCreateKsqldbcmV2ClusterRequest {
 	m.lockCreateKsqldbcmV2Cluster.Lock()
 	defer m.lockCreateKsqldbcmV2Cluster.Unlock()
 
@@ -107,7 +107,7 @@ func (m *ClustersKsqldbcmV2Api) CreateKsqldbcmV2ClusterCalls() []struct {
 }
 
 // CreateKsqldbcmV2ClusterExecute mocks base method by wrapping the associated func.
-func (m *ClustersKsqldbcmV2Api) CreateKsqldbcmV2ClusterExecute(r github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiCreateKsqldbcmV2ClusterRequest) (github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.KsqldbcmV2Cluster, *net_http.Response, error) {
+func (m *ClustersKsqldbcmV2Api) CreateKsqldbcmV2ClusterExecute(r github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiCreateKsqldbcmV2ClusterRequest) (github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.KsqldbcmV2Cluster, *net_http.Response, error) {
 	m.lockCreateKsqldbcmV2ClusterExecute.Lock()
 	defer m.lockCreateKsqldbcmV2ClusterExecute.Unlock()
 
@@ -116,7 +116,7 @@ func (m *ClustersKsqldbcmV2Api) CreateKsqldbcmV2ClusterExecute(r github_com_conf
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiCreateKsqldbcmV2ClusterRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiCreateKsqldbcmV2ClusterRequest
 	}{
 		R: r,
 	}
@@ -136,7 +136,7 @@ func (m *ClustersKsqldbcmV2Api) CreateKsqldbcmV2ClusterExecuteCalled() bool {
 
 // CreateKsqldbcmV2ClusterExecuteCalls returns the calls made to CreateKsqldbcmV2ClusterExecute.
 func (m *ClustersKsqldbcmV2Api) CreateKsqldbcmV2ClusterExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiCreateKsqldbcmV2ClusterRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiCreateKsqldbcmV2ClusterRequest
 } {
 	m.lockCreateKsqldbcmV2ClusterExecute.Lock()
 	defer m.lockCreateKsqldbcmV2ClusterExecute.Unlock()
@@ -145,7 +145,7 @@ func (m *ClustersKsqldbcmV2Api) CreateKsqldbcmV2ClusterExecuteCalls() []struct {
 }
 
 // DeleteKsqldbcmV2Cluster mocks base method by wrapping the associated func.
-func (m *ClustersKsqldbcmV2Api) DeleteKsqldbcmV2Cluster(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiDeleteKsqldbcmV2ClusterRequest {
+func (m *ClustersKsqldbcmV2Api) DeleteKsqldbcmV2Cluster(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiDeleteKsqldbcmV2ClusterRequest {
 	m.lockDeleteKsqldbcmV2Cluster.Lock()
 	defer m.lockDeleteKsqldbcmV2Cluster.Unlock()
 
@@ -186,7 +186,7 @@ func (m *ClustersKsqldbcmV2Api) DeleteKsqldbcmV2ClusterCalls() []struct {
 }
 
 // DeleteKsqldbcmV2ClusterExecute mocks base method by wrapping the associated func.
-func (m *ClustersKsqldbcmV2Api) DeleteKsqldbcmV2ClusterExecute(r github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiDeleteKsqldbcmV2ClusterRequest) (*net_http.Response, error) {
+func (m *ClustersKsqldbcmV2Api) DeleteKsqldbcmV2ClusterExecute(r github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiDeleteKsqldbcmV2ClusterRequest) (*net_http.Response, error) {
 	m.lockDeleteKsqldbcmV2ClusterExecute.Lock()
 	defer m.lockDeleteKsqldbcmV2ClusterExecute.Unlock()
 
@@ -195,7 +195,7 @@ func (m *ClustersKsqldbcmV2Api) DeleteKsqldbcmV2ClusterExecute(r github_com_conf
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiDeleteKsqldbcmV2ClusterRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiDeleteKsqldbcmV2ClusterRequest
 	}{
 		R: r,
 	}
@@ -215,7 +215,7 @@ func (m *ClustersKsqldbcmV2Api) DeleteKsqldbcmV2ClusterExecuteCalled() bool {
 
 // DeleteKsqldbcmV2ClusterExecuteCalls returns the calls made to DeleteKsqldbcmV2ClusterExecute.
 func (m *ClustersKsqldbcmV2Api) DeleteKsqldbcmV2ClusterExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiDeleteKsqldbcmV2ClusterRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiDeleteKsqldbcmV2ClusterRequest
 } {
 	m.lockDeleteKsqldbcmV2ClusterExecute.Lock()
 	defer m.lockDeleteKsqldbcmV2ClusterExecute.Unlock()
@@ -224,7 +224,7 @@ func (m *ClustersKsqldbcmV2Api) DeleteKsqldbcmV2ClusterExecuteCalls() []struct {
 }
 
 // GetKsqldbcmV2Cluster mocks base method by wrapping the associated func.
-func (m *ClustersKsqldbcmV2Api) GetKsqldbcmV2Cluster(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiGetKsqldbcmV2ClusterRequest {
+func (m *ClustersKsqldbcmV2Api) GetKsqldbcmV2Cluster(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiGetKsqldbcmV2ClusterRequest {
 	m.lockGetKsqldbcmV2Cluster.Lock()
 	defer m.lockGetKsqldbcmV2Cluster.Unlock()
 
@@ -265,7 +265,7 @@ func (m *ClustersKsqldbcmV2Api) GetKsqldbcmV2ClusterCalls() []struct {
 }
 
 // GetKsqldbcmV2ClusterExecute mocks base method by wrapping the associated func.
-func (m *ClustersKsqldbcmV2Api) GetKsqldbcmV2ClusterExecute(r github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiGetKsqldbcmV2ClusterRequest) (github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.KsqldbcmV2Cluster, *net_http.Response, error) {
+func (m *ClustersKsqldbcmV2Api) GetKsqldbcmV2ClusterExecute(r github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiGetKsqldbcmV2ClusterRequest) (github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.KsqldbcmV2Cluster, *net_http.Response, error) {
 	m.lockGetKsqldbcmV2ClusterExecute.Lock()
 	defer m.lockGetKsqldbcmV2ClusterExecute.Unlock()
 
@@ -274,7 +274,7 @@ func (m *ClustersKsqldbcmV2Api) GetKsqldbcmV2ClusterExecute(r github_com_conflue
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiGetKsqldbcmV2ClusterRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiGetKsqldbcmV2ClusterRequest
 	}{
 		R: r,
 	}
@@ -294,7 +294,7 @@ func (m *ClustersKsqldbcmV2Api) GetKsqldbcmV2ClusterExecuteCalled() bool {
 
 // GetKsqldbcmV2ClusterExecuteCalls returns the calls made to GetKsqldbcmV2ClusterExecute.
 func (m *ClustersKsqldbcmV2Api) GetKsqldbcmV2ClusterExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiGetKsqldbcmV2ClusterRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiGetKsqldbcmV2ClusterRequest
 } {
 	m.lockGetKsqldbcmV2ClusterExecute.Lock()
 	defer m.lockGetKsqldbcmV2ClusterExecute.Unlock()
@@ -303,7 +303,7 @@ func (m *ClustersKsqldbcmV2Api) GetKsqldbcmV2ClusterExecuteCalls() []struct {
 }
 
 // ListKsqldbcmV2Clusters mocks base method by wrapping the associated func.
-func (m *ClustersKsqldbcmV2Api) ListKsqldbcmV2Clusters(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiListKsqldbcmV2ClustersRequest {
+func (m *ClustersKsqldbcmV2Api) ListKsqldbcmV2Clusters(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiListKsqldbcmV2ClustersRequest {
 	m.lockListKsqldbcmV2Clusters.Lock()
 	defer m.lockListKsqldbcmV2Clusters.Unlock()
 
@@ -341,7 +341,7 @@ func (m *ClustersKsqldbcmV2Api) ListKsqldbcmV2ClustersCalls() []struct {
 }
 
 // ListKsqldbcmV2ClustersExecute mocks base method by wrapping the associated func.
-func (m *ClustersKsqldbcmV2Api) ListKsqldbcmV2ClustersExecute(r github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiListKsqldbcmV2ClustersRequest) (github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.KsqldbcmV2ClusterList, *net_http.Response, error) {
+func (m *ClustersKsqldbcmV2Api) ListKsqldbcmV2ClustersExecute(r github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiListKsqldbcmV2ClustersRequest) (github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.KsqldbcmV2ClusterList, *net_http.Response, error) {
 	m.lockListKsqldbcmV2ClustersExecute.Lock()
 	defer m.lockListKsqldbcmV2ClustersExecute.Unlock()
 
@@ -350,7 +350,7 @@ func (m *ClustersKsqldbcmV2Api) ListKsqldbcmV2ClustersExecute(r github_com_confl
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiListKsqldbcmV2ClustersRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiListKsqldbcmV2ClustersRequest
 	}{
 		R: r,
 	}
@@ -370,7 +370,7 @@ func (m *ClustersKsqldbcmV2Api) ListKsqldbcmV2ClustersExecuteCalled() bool {
 
 // ListKsqldbcmV2ClustersExecuteCalls returns the calls made to ListKsqldbcmV2ClustersExecute.
 func (m *ClustersKsqldbcmV2Api) ListKsqldbcmV2ClustersExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2_internal_ksql_v2.ApiListKsqldbcmV2ClustersRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_ksql_v2.ApiListKsqldbcmV2ClustersRequest
 } {
 	m.lockListKsqldbcmV2ClustersExecute.Lock()
 	defer m.lockListKsqldbcmV2ClustersExecute.Unlock()
