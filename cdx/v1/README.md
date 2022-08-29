@@ -87,6 +87,8 @@ Class | Method | HTTP request | Description
 *ConsumerSharesCdxV1Api* | [**DeleteCdxV1ConsumerShare**](docs/ConsumerSharesCdxV1Api.md#deletecdxv1consumershare) | **Delete** /cdx/v1/consumer-shares/{id} | Delete a Consumer Share
 *ConsumerSharesCdxV1Api* | [**GetCdxV1ConsumerShare**](docs/ConsumerSharesCdxV1Api.md#getcdxv1consumershare) | **Get** /cdx/v1/consumer-shares/{id} | Read a Consumer Share
 *ConsumerSharesCdxV1Api* | [**ListCdxV1ConsumerShares**](docs/ConsumerSharesCdxV1Api.md#listcdxv1consumershares) | **Get** /cdx/v1/consumer-shares | List of Consumer Shares
+*OptInsCdxV1Api* | [**GetCdxV1OptIn**](docs/OptInsCdxV1Api.md#getcdxv1optin) | **Get** /cdx/v1/opt-in | Read the organization&#39;s stream sharing opt-in settings
+*OptInsCdxV1Api* | [**UpdateCdxV1OptIn**](docs/OptInsCdxV1Api.md#updatecdxv1optin) | **Patch** /cdx/v1/opt-in | Set the organization&#39;s stream sharing opt-in settings
 *ProviderSharedResourcesCdxV1Api* | [**DeleteImageCdxV1ProviderSharedResource**](docs/ProviderSharedResourcesCdxV1Api.md#deleteimagecdxv1providersharedresource) | **Delete** /cdx/v1/provider-shared-resources/{id}/images/{file_name} | Delete_Image a Provider Shared Resource
 *ProviderSharedResourcesCdxV1Api* | [**GetCdxV1ProviderSharedResource**](docs/ProviderSharedResourcesCdxV1Api.md#getcdxv1providersharedresource) | **Get** /cdx/v1/provider-shared-resources/{id} | Read a Provider Shared Resource
 *ProviderSharedResourcesCdxV1Api* | [**ListCdxV1ProviderSharedResources**](docs/ProviderSharedResourcesCdxV1Api.md#listcdxv1providersharedresources) | **Get** /cdx/v1/provider-shared-resources | List of Provider Shared Resources
@@ -117,6 +119,7 @@ Class | Method | HTTP request | Description
  - [CdxV1GcpNetwork](docs/CdxV1GcpNetwork.md)
  - [CdxV1Network](docs/CdxV1Network.md)
  - [CdxV1NetworkCloudOneOf](docs/CdxV1NetworkCloudOneOf.md)
+ - [CdxV1OptIn](docs/CdxV1OptIn.md)
  - [CdxV1ProviderShare](docs/CdxV1ProviderShare.md)
  - [CdxV1ProviderShareList](docs/CdxV1ProviderShareList.md)
  - [CdxV1ProviderSharedResource](docs/CdxV1ProviderSharedResource.md)

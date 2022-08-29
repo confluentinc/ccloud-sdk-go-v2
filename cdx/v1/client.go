@@ -68,6 +68,8 @@ type APIClient struct {
 
 	ConsumerSharesCdxV1Api ConsumerSharesCdxV1Api
 
+	OptInsCdxV1Api OptInsCdxV1Api
+
 	ProviderSharedResourcesCdxV1Api ProviderSharedResourcesCdxV1Api
 
 	ProviderSharesCdxV1Api ProviderSharesCdxV1Api
@@ -93,6 +95,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	// API Services
 	c.ConsumerSharedResourcesCdxV1Api = (*ConsumerSharedResourcesCdxV1ApiService)(&c.common)
 	c.ConsumerSharesCdxV1Api = (*ConsumerSharesCdxV1ApiService)(&c.common)
+	c.OptInsCdxV1Api = (*OptInsCdxV1ApiService)(&c.common)
 	c.ProviderSharedResourcesCdxV1Api = (*ProviderSharedResourcesCdxV1ApiService)(&c.common)
 	c.ProviderSharesCdxV1Api = (*ProviderSharesCdxV1ApiService)(&c.common)
 	c.SharedTokensCdxV1Api = (*SharedTokensCdxV1ApiService)(&c.common)
