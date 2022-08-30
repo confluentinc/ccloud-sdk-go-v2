@@ -37,8 +37,8 @@ import (
 type NetworkingV1TransitGatewayAttachmentSpec struct {
 	// The name of the TGW attachment
 	DisplayName *string `json:"display_name,omitempty"`
-	// The cloud-specific Transit Gateway details.
-	Cloud *NetworkingV1TransitGatewayAttachmentSpecCloudOneOf `json:"cloud,omitempty"`
+	// The full AWS Resource Name (ARN) for the AWS Resource Access Manager (RAM) Share of the Transit Gateways that you want Confluent Cloud attached to
+	RamShareArn *string `json:"ram_share_arn,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
 	// The network to which this belongs.
@@ -94,36 +94,36 @@ func (o *NetworkingV1TransitGatewayAttachmentSpec) SetDisplayName(v string) {
 	o.DisplayName = &v
 }
 
-// GetCloud returns the Cloud field value if set, zero value otherwise.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) GetCloud() NetworkingV1TransitGatewayAttachmentSpecCloudOneOf {
-	if o == nil || o.Cloud == nil {
-		var ret NetworkingV1TransitGatewayAttachmentSpecCloudOneOf
+// GetRamShareArn returns the RamShareArn field value if set, zero value otherwise.
+func (o *NetworkingV1TransitGatewayAttachmentSpec) GetRamShareArn() string {
+	if o == nil || o.RamShareArn == nil {
+		var ret string
 		return ret
 	}
-	return *o.Cloud
+	return *o.RamShareArn
 }
 
-// GetCloudOk returns a tuple with the Cloud field value if set, nil otherwise
+// GetRamShareArnOk returns a tuple with the RamShareArn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) GetCloudOk() (*NetworkingV1TransitGatewayAttachmentSpecCloudOneOf, bool) {
-	if o == nil || o.Cloud == nil {
+func (o *NetworkingV1TransitGatewayAttachmentSpec) GetRamShareArnOk() (*string, bool) {
+	if o == nil || o.RamShareArn == nil {
 		return nil, false
 	}
-	return o.Cloud, true
+	return o.RamShareArn, true
 }
 
-// HasCloud returns a boolean if a field has been set.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) HasCloud() bool {
-	if o != nil && o.Cloud != nil {
+// HasRamShareArn returns a boolean if a field has been set.
+func (o *NetworkingV1TransitGatewayAttachmentSpec) HasRamShareArn() bool {
+	if o != nil && o.RamShareArn != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetCloud gets a reference to the given NetworkingV1TransitGatewayAttachmentSpecCloudOneOf and assigns it to the Cloud field.
-func (o *NetworkingV1TransitGatewayAttachmentSpec) SetCloud(v NetworkingV1TransitGatewayAttachmentSpecCloudOneOf) {
-	o.Cloud = &v
+// SetRamShareArn gets a reference to the given string and assigns it to the RamShareArn field.
+func (o *NetworkingV1TransitGatewayAttachmentSpec) SetRamShareArn(v string) {
+	o.RamShareArn = &v
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
@@ -193,7 +193,7 @@ func (o *NetworkingV1TransitGatewayAttachmentSpec) SetNetwork(v ObjectReference)
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1TransitGatewayAttachmentSpec) Redact() {
     o.recurseRedact(o.DisplayName)
-    o.recurseRedact(o.Cloud)
+    o.recurseRedact(o.RamShareArn)
     o.recurseRedact(o.Environment)
     o.recurseRedact(o.Network)
 }
@@ -233,8 +233,8 @@ func (o NetworkingV1TransitGatewayAttachmentSpec) MarshalJSON() ([]byte, error) 
 	if o.DisplayName != nil {
 		toSerialize["display_name"] = o.DisplayName
 	}
-	if o.Cloud != nil {
-		toSerialize["cloud"] = o.Cloud
+	if o.RamShareArn != nil {
+		toSerialize["ram_share_arn"] = o.RamShareArn
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
