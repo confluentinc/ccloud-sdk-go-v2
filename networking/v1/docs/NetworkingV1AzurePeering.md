@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | Peering kind type. | 
 **Tenant** | **string** | Customer Azure tenant. | 
-**Vnet** | **string** | Customer vnet to peer with. | 
+**Vnet** | **string** | Customer VNet resource ID. | 
 **CustomerRegion** | **string** | Region of customer VNet | 
 
 ## Methods

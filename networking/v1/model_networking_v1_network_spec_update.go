@@ -35,7 +35,7 @@ import (
 
 // NetworkingV1NetworkSpecUpdate The desired state of the Network
 type NetworkingV1NetworkSpecUpdate struct {
-	// The name of the Network
+	// The name of the network
 	DisplayName *string `json:"display_name,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`

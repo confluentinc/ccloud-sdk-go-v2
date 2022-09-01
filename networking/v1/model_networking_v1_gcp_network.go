@@ -41,6 +41,8 @@ type NetworkingV1GcpNetwork struct {
 	Project string `json:"project"`
 	// The GCP VPC network name.
 	VpcNetwork string `json:"vpc_network"`
+	// The mapping of zones to Private Service Connect Service Attachments if available. Keys are zones and values are [GCP Private Service Connect Service Attachment](https://cloud.google.com/vpc/docs/configure-private-service-connect-producer#api_7) 
+	PrivateServiceConnectServiceAttachments *map[string]string `json:"private_service_connect_service_attachments,omitempty"`
 }
 
 // NewNetworkingV1GcpNetwork instantiates a new NetworkingV1GcpNetwork object
@@ -135,11 +137,44 @@ func (o *NetworkingV1GcpNetwork) SetVpcNetwork(v string) {
 	o.VpcNetwork = v
 }
 
+// GetPrivateServiceConnectServiceAttachments returns the PrivateServiceConnectServiceAttachments field value if set, zero value otherwise.
+func (o *NetworkingV1GcpNetwork) GetPrivateServiceConnectServiceAttachments() map[string]string {
+	if o == nil || o.PrivateServiceConnectServiceAttachments == nil {
+		var ret map[string]string
+		return ret
+	}
+	return *o.PrivateServiceConnectServiceAttachments
+}
+
+// GetPrivateServiceConnectServiceAttachmentsOk returns a tuple with the PrivateServiceConnectServiceAttachments field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1GcpNetwork) GetPrivateServiceConnectServiceAttachmentsOk() (*map[string]string, bool) {
+	if o == nil || o.PrivateServiceConnectServiceAttachments == nil {
+		return nil, false
+	}
+	return o.PrivateServiceConnectServiceAttachments, true
+}
+
+// HasPrivateServiceConnectServiceAttachments returns a boolean if a field has been set.
+func (o *NetworkingV1GcpNetwork) HasPrivateServiceConnectServiceAttachments() bool {
+	if o != nil && o.PrivateServiceConnectServiceAttachments != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPrivateServiceConnectServiceAttachments gets a reference to the given map[string]string and assigns it to the PrivateServiceConnectServiceAttachments field.
+func (o *NetworkingV1GcpNetwork) SetPrivateServiceConnectServiceAttachments(v map[string]string) {
+	o.PrivateServiceConnectServiceAttachments = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1GcpNetwork) Redact() {
     o.recurseRedact(&o.Kind)
     o.recurseRedact(&o.Project)
     o.recurseRedact(&o.VpcNetwork)
+    o.recurseRedact(o.PrivateServiceConnectServiceAttachments)
 }
 
 func (o *NetworkingV1GcpNetwork) recurseRedact(v interface{}) {
@@ -182,6 +217,9 @@ func (o NetworkingV1GcpNetwork) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["vpc_network"] = o.VpcNetwork
+	}
+	if o.PrivateServiceConnectServiceAttachments != nil {
+		toSerialize["private_service_connect_service_attachments"] = o.PrivateServiceConnectServiceAttachments
 	}
 	return json.Marshal(toSerialize)
 }

@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DisplayName** | Pointer to **string** | The name of the Network | [optional] 
+**DisplayName** | Pointer to **string** | The name of the network | [optional] 
 **Cloud** | Pointer to **string** | The cloud service provider in which the network exists. | [optional] 
-**Region** | Pointer to **string** | The service provider region where the cluster is running. | [optional] 
+**Region** | Pointer to **string** | The cloud service provider region in which the network exists. | [optional] 
 **ConnectionTypes** | Pointer to [**NetworkingV1ConnectionTypes**](networking.v1.ConnectionTypes.md) |  | [optional] 
 **Cidr** | Pointer to **string** | The IPv4 CIDR block to used for this network.  Must be /16. Required for VPC peering and AWS TransitGateway. | [optional] 
 **Zones** | Pointer to **[]string** | The 3 availability zones for this network. They can optionally be specified for AWS networks used with PrivateLink. Otherwise, they are automatically chosen by Confluent Cloud.  On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3)  On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c).  On Azure, zones are Confluent-chosen names (e.g. 1, 2, 3) since Azure does not  have universal zone identifiers.  | [optional] 

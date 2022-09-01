@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DisplayName** | Pointer to **string** | The name of the Peering | [optional] 
+**DisplayName** | Pointer to **string** | The name of the peering | [optional] 
 **Cloud** | Pointer to [**NetworkingV1PeeringSpecCloudOneOf**](NetworkingV1PeeringSpecCloudOneOf.md) | The cloud-specific peering details. | [optional] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 **Network** | Pointer to [**ObjectReference**](ObjectReference.md) | The network to which this belongs. | [optional] 

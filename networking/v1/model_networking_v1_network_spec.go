@@ -35,11 +35,11 @@ import (
 
 // NetworkingV1NetworkSpec The desired state of the Network
 type NetworkingV1NetworkSpec struct {
-	// The name of the Network
+	// The name of the network
 	DisplayName *string `json:"display_name,omitempty"`
 	// The cloud service provider in which the network exists.
 	Cloud *string `json:"cloud,omitempty"`
-	// The service provider region where the cluster is running.
+	// The cloud service provider region in which the network exists.
 	Region *string `json:"region,omitempty"`
 	ConnectionTypes *NetworkingV1ConnectionTypes `json:"connection_types,omitempty"`
 	// The IPv4 CIDR block to used for this network.  Must be /16. Required for VPC peering and AWS TransitGateway.

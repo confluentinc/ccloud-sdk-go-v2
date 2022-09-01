@@ -39,7 +39,7 @@ type NetworkingV1AzurePeering struct {
 	Kind string `json:"kind"`
 	// Customer Azure tenant.
 	Tenant string `json:"tenant"`
-	// Customer vnet to peer with.
+	// Customer VNet resource ID.
 	Vnet string `json:"vnet"`
 	// Region of customer VNet
 	CustomerRegion string `json:"customer_region"`
