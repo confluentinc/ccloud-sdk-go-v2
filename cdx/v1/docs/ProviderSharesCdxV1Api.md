@@ -4,7 +4,7 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateCdxV1ProviderShare**](ProviderSharesCdxV1Api.md#CreateCdxV1ProviderShare) | **Post** /cdx/v1/provider-shares | Create a share
+[**CreateCdxV1ProviderShare**](ProviderSharesCdxV1Api.md#CreateCdxV1ProviderShare) | **Post** /cdx/v1/provider-shares | Create a provider share
 [**DeleteCdxV1ProviderShare**](ProviderSharesCdxV1Api.md#DeleteCdxV1ProviderShare) | **Delete** /cdx/v1/provider-shares/{id} | Delete a Provider Share
 [**GetCdxV1ProviderShare**](ProviderSharesCdxV1Api.md#GetCdxV1ProviderShare) | **Get** /cdx/v1/provider-shares/{id} | Read a Provider Share
 [**ListCdxV1ProviderShares**](ProviderSharesCdxV1Api.md#ListCdxV1ProviderShares) | **Get** /cdx/v1/provider-shares | List of Provider Shares
@@ -14,9 +14,9 @@ Method | HTTP request | Description
 
 ## CreateCdxV1ProviderShare
 
-> CdxV1ProviderShare CreateCdxV1ProviderShare(ctx).CdxV1CreateShareRequest(cdxV1CreateShareRequest).Execute()
+> CdxV1ProviderShare CreateCdxV1ProviderShare(ctx).CdxV1CreateProviderShareRequest(cdxV1CreateProviderShareRequest).Execute()
 
-Create a share
+Create a provider share
 
 
 
@@ -33,11 +33,11 @@ import (
 )
 
 func main() {
-    cdxV1CreateShareRequest := *openapiclient.NewCdxV1CreateShareRequest() // CdxV1CreateShareRequest |  (optional)
+    cdxV1CreateProviderShareRequest := *openapiclient.NewCdxV1CreateProviderShareRequest() // CdxV1CreateProviderShareRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProviderSharesCdxV1Api.CreateCdxV1ProviderShare(context.Background()).CdxV1CreateShareRequest(cdxV1CreateShareRequest).Execute()
+    resp, r, err := api_client.ProviderSharesCdxV1Api.CreateCdxV1ProviderShare(context.Background()).CdxV1CreateProviderShareRequest(cdxV1CreateProviderShareRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProviderSharesCdxV1Api.CreateCdxV1ProviderShare``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -58,7 +58,7 @@ Other parameters are passed through a pointer to a apiCreateCdxV1ProviderShareRe
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cdxV1CreateShareRequest** | [**CdxV1CreateShareRequest**](CdxV1CreateShareRequest.md) |  | 
+ **cdxV1CreateProviderShareRequest** | [**CdxV1CreateProviderShareRequest**](CdxV1CreateProviderShareRequest.md) |  | 
 
 ### Return type
 
@@ -218,7 +218,7 @@ Name | Type | Description  | Notes
 
 ## ListCdxV1ProviderShares
 
-> CdxV1ProviderShareList ListCdxV1ProviderShares(ctx).SharedResource(sharedResource).PageSize(pageSize).PageToken(pageToken).Execute()
+> CdxV1ProviderShareList ListCdxV1ProviderShares(ctx).SharedResource(sharedResource).IncludeDeleted(includeDeleted).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Provider Shares
 
@@ -237,13 +237,14 @@ import (
 )
 
 func main() {
-    sharedResource := "sharedResource_example" // string | Filter the results by exact match for shared_resource. (optional)
+    sharedResource := "sr-1234" // string | Filter the results by exact match for shared_resource. (optional)
+    includeDeleted := true // bool | Include deactivated shares (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProviderSharesCdxV1Api.ListCdxV1ProviderShares(context.Background()).SharedResource(sharedResource).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.ProviderSharesCdxV1Api.ListCdxV1ProviderShares(context.Background()).SharedResource(sharedResource).IncludeDeleted(includeDeleted).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProviderSharesCdxV1Api.ListCdxV1ProviderShares``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -265,6 +266,7 @@ Other parameters are passed through a pointer to a apiListCdxV1ProviderSharesReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **sharedResource** | **string** | Filter the results by exact match for shared_resource. | 
+ **includeDeleted** | **bool** | Include deactivated shares | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 

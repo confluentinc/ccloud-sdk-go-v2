@@ -5,9 +5,9 @@ All URIs are relative to *https://api.confluent.cloud*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetCdxV1ConsumerSharedResource**](ConsumerSharedResourcesCdxV1Api.md#GetCdxV1ConsumerSharedResource) | **Get** /cdx/v1/consumer-shared-resources/{id} | Read a Consumer Shared Resource
-[**ImageCdxV1ConsumerSharedResource**](ConsumerSharedResourcesCdxV1Api.md#ImageCdxV1ConsumerSharedResource) | **Get** /cdx/v1/consumer-shared-resources/{id}/images/{file_name} | Image a Consumer Shared Resource
+[**ImageCdxV1ConsumerSharedResource**](ConsumerSharedResourcesCdxV1Api.md#ImageCdxV1ConsumerSharedResource) | **Get** /cdx/v1/consumer-shared-resources/{id}/images/{file_name} | Get image for shared resource
 [**ListCdxV1ConsumerSharedResources**](ConsumerSharedResourcesCdxV1Api.md#ListCdxV1ConsumerSharedResources) | **Get** /cdx/v1/consumer-shared-resources | List of Consumer Shared Resources
-[**NetworkCdxV1ConsumerSharedResource**](ConsumerSharedResourcesCdxV1Api.md#NetworkCdxV1ConsumerSharedResource) | **Get** /cdx/v1/consumer-shared-resources/{id}:network | Network a Consumer Shared Resource
+[**NetworkCdxV1ConsumerSharedResource**](ConsumerSharedResourcesCdxV1Api.md#NetworkCdxV1ConsumerSharedResource) | **Get** /cdx/v1/consumer-shared-resources/{id}:network | Get shared resource&#39;s network configuration
 
 
 
@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 
 > *os.File ImageCdxV1ConsumerSharedResource(ctx, id, fileName).Execute()
 
-Image a Consumer Shared Resource
+Get image for shared resource
 
 
 
@@ -156,7 +156,7 @@ Name | Type | Description  | Notes
 
 ## ListCdxV1ConsumerSharedResources
 
-> CdxV1ConsumerSharedResourceList ListCdxV1ConsumerSharedResources(ctx).PageSize(pageSize).PageToken(pageToken).Execute()
+> CdxV1ConsumerSharedResourceList ListCdxV1ConsumerSharedResources(ctx).StreamShare(streamShare).IncludeDeleted(includeDeleted).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Consumer Shared Resources
 
@@ -175,12 +175,14 @@ import (
 )
 
 func main() {
+    streamShare := "ss-1234" // string | Filter the results by exact match for stream_share. (optional)
+    includeDeleted := true // bool | Include deactivated shared resources (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ConsumerSharedResourcesCdxV1Api.ListCdxV1ConsumerSharedResources(context.Background()).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.ConsumerSharedResourcesCdxV1Api.ListCdxV1ConsumerSharedResources(context.Background()).StreamShare(streamShare).IncludeDeleted(includeDeleted).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConsumerSharedResourcesCdxV1Api.ListCdxV1ConsumerSharedResources``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -201,6 +203,8 @@ Other parameters are passed through a pointer to a apiListCdxV1ConsumerSharedRes
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **streamShare** | **string** | Filter the results by exact match for stream_share. | 
+ **includeDeleted** | **bool** | Include deactivated shared resources | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 
@@ -226,7 +230,7 @@ Name | Type | Description  | Notes
 
 > CdxV1Network NetworkCdxV1ConsumerSharedResource(ctx, id).Execute()
 
-Network a Consumer Shared Resource
+Get shared resource's network configuration
 
 
 

@@ -43,10 +43,10 @@ type CdxV1RedeemTokenResponse struct {
 	Id       *string     `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
 	// The api key
-	Apikey *string `json:"apikey,omitempty"`
+	ApiKey *string `json:"api_key,omitempty"`
 	// The api key secret
 	Secret *string `json:"secret,omitempty"`
-	// The cluster connection url
+	// The kafka cluster bootstrap url
 	KafkaBootstrapUrl *string `json:"kafka_bootstrap_url,omitempty"`
 	// List of shared resources
 	Resources *[]CdxV1RedeemTokenResponseResourcesOneOf `json:"resources,omitempty"`
@@ -197,36 +197,36 @@ func (o *CdxV1RedeemTokenResponse) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
-// GetApikey returns the Apikey field value if set, zero value otherwise.
-func (o *CdxV1RedeemTokenResponse) GetApikey() string {
-	if o == nil || o.Apikey == nil {
+// GetApiKey returns the ApiKey field value if set, zero value otherwise.
+func (o *CdxV1RedeemTokenResponse) GetApiKey() string {
+	if o == nil || o.ApiKey == nil {
 		var ret string
 		return ret
 	}
-	return *o.Apikey
+	return *o.ApiKey
 }
 
-// GetApikeyOk returns a tuple with the Apikey field value if set, nil otherwise
+// GetApiKeyOk returns a tuple with the ApiKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1RedeemTokenResponse) GetApikeyOk() (*string, bool) {
-	if o == nil || o.Apikey == nil {
+func (o *CdxV1RedeemTokenResponse) GetApiKeyOk() (*string, bool) {
+	if o == nil || o.ApiKey == nil {
 		return nil, false
 	}
-	return o.Apikey, true
+	return o.ApiKey, true
 }
 
-// HasApikey returns a boolean if a field has been set.
-func (o *CdxV1RedeemTokenResponse) HasApikey() bool {
-	if o != nil && o.Apikey != nil {
+// HasApiKey returns a boolean if a field has been set.
+func (o *CdxV1RedeemTokenResponse) HasApiKey() bool {
+	if o != nil && o.ApiKey != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetApikey gets a reference to the given string and assigns it to the Apikey field.
-func (o *CdxV1RedeemTokenResponse) SetApikey(v string) {
-	o.Apikey = &v
+// SetApiKey gets a reference to the given string and assigns it to the ApiKey field.
+func (o *CdxV1RedeemTokenResponse) SetApiKey(v string) {
+	o.ApiKey = &v
 }
 
 // GetSecret returns the Secret field value if set, zero value otherwise.
@@ -331,7 +331,7 @@ func (o *CdxV1RedeemTokenResponse) Redact() {
 	o.recurseRedact(o.Kind)
 	o.recurseRedact(o.Id)
 	o.recurseRedact(o.Metadata)
-	o.recurseRedact(o.Apikey)
+	o.recurseRedact(o.ApiKey)
 	o.Secret = nil
 	o.recurseRedact(o.KafkaBootstrapUrl)
 	o.recurseRedact(o.Resources)
@@ -381,8 +381,8 @@ func (o CdxV1RedeemTokenResponse) MarshalJSON() ([]byte, error) {
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if o.Apikey != nil {
-		toSerialize["apikey"] = o.Apikey
+	if o.ApiKey != nil {
+		toSerialize["api_key"] = o.ApiKey
 	}
 	if o.Secret != nil {
 		toSerialize["secret"] = o.Secret

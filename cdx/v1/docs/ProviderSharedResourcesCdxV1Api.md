@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**GetCdxV1ProviderSharedResource**](ProviderSharedResourcesCdxV1Api.md#GetCdxV1ProviderSharedResource) | **Get** /cdx/v1/provider-shared-resources/{id} | Read a Provider Shared Resource
 [**ListCdxV1ProviderSharedResources**](ProviderSharedResourcesCdxV1Api.md#ListCdxV1ProviderSharedResources) | **Get** /cdx/v1/provider-shared-resources | List of Provider Shared Resources
 [**UpdateCdxV1ProviderSharedResource**](ProviderSharedResourcesCdxV1Api.md#UpdateCdxV1ProviderSharedResource) | **Patch** /cdx/v1/provider-shared-resources/{id} | Update a Provider Shared Resource
-[**UploadImageCdxV1ProviderSharedResource**](ProviderSharedResourcesCdxV1Api.md#UploadImageCdxV1ProviderSharedResource) | **Post** /cdx/v1/provider-shared-resources/{id}/images/{file_name} | Upload_Image a Provider Shared Resource
+[**UploadImageCdxV1ProviderSharedResource**](ProviderSharedResourcesCdxV1Api.md#UploadImageCdxV1ProviderSharedResource) | **Post** /cdx/v1/provider-shared-resources/{id}/images/{file_name} | Upload image for shared resource
 [**ViewImageCdxV1ProviderSharedResource**](ProviderSharedResourcesCdxV1Api.md#ViewImageCdxV1ProviderSharedResource) | **Get** /cdx/v1/provider-shared-resources/{id}/images/{file_name} | View_Image a Provider Shared Resource
 
 
@@ -156,7 +156,7 @@ Name | Type | Description  | Notes
 
 ## ListCdxV1ProviderSharedResources
 
-> CdxV1ProviderSharedResourceList ListCdxV1ProviderSharedResources(ctx).Crn(crn).PageSize(pageSize).PageToken(pageToken).Execute()
+> CdxV1ProviderSharedResourceList ListCdxV1ProviderSharedResources(ctx).Crn(crn).StreamShare(streamShare).IncludeDeleted(includeDeleted).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Provider Shared Resources
 
@@ -176,12 +176,14 @@ import (
 
 func main() {
     crn := "crn://confluent.cloud/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic" // string | Filter the results by exact match for crn. (optional)
+    streamShare := "ss-1234" // string | Filter the results by exact match for stream_share. (optional)
+    includeDeleted := true // bool | Include deactivated shared resources (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProviderSharedResourcesCdxV1Api.ListCdxV1ProviderSharedResources(context.Background()).Crn(crn).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.ProviderSharedResourcesCdxV1Api.ListCdxV1ProviderSharedResources(context.Background()).Crn(crn).StreamShare(streamShare).IncludeDeleted(includeDeleted).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProviderSharedResourcesCdxV1Api.ListCdxV1ProviderSharedResources``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -203,6 +205,8 @@ Other parameters are passed through a pointer to a apiListCdxV1ProviderSharedRes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **crn** | **string** | Filter the results by exact match for crn. | 
+ **streamShare** | **string** | Filter the results by exact match for stream_share. | 
+ **includeDeleted** | **bool** | Include deactivated shared resources | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 
@@ -298,9 +302,9 @@ Name | Type | Description  | Notes
 
 ## UploadImageCdxV1ProviderSharedResource
 
-> UploadImageCdxV1ProviderSharedResource(ctx, id, fileName).File(file).Execute()
+> UploadImageCdxV1ProviderSharedResource(ctx, id, fileName).Body(body).Execute()
 
-Upload_Image a Provider Shared Resource
+Upload image for shared resource
 
 
 
@@ -319,11 +323,11 @@ import (
 func main() {
     id := "id_example" // string | The unique identifier for the provider shared resource.
     fileName := "fileName_example" // string | The File Name
-    file := os.NewFile(1234, "some_file") // *os.File |  (optional)
+    body := "body_example" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProviderSharedResourcesCdxV1Api.UploadImageCdxV1ProviderSharedResource(context.Background(), id, fileName).File(file).Execute()
+    resp, r, err := api_client.ProviderSharedResourcesCdxV1Api.UploadImageCdxV1ProviderSharedResource(context.Background(), id, fileName).Body(body).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProviderSharedResourcesCdxV1Api.UploadImageCdxV1ProviderSharedResource``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -349,7 +353,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **file** | ***os.File** |  | 
+ **body** | **string** |  | 
 
 ### Return type
 
@@ -361,7 +365,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: image/_*
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

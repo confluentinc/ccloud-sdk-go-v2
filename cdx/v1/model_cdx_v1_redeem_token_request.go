@@ -44,10 +44,12 @@ type CdxV1RedeemTokenRequest struct {
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
 	// The encrypted token
 	Token *string `json:"token,omitempty"`
-	// The AWS account id for the consumer network.
+	// Consumer's AWS account ID for PrivateLink access.
 	AwsAccount *string `json:"aws_account,omitempty"`
-	// The Azure subscription for the consumer network.
+	// Consumer's Azure subscription ID for PrivateLink access.
 	AzureSubscription *string `json:"azure_subscription,omitempty"`
+	// Consumer's GCP project ID for Private Service Connect access.
+	GcpProject *string `json:"gcp_project,omitempty"`
 }
 
 // NewCdxV1RedeemTokenRequest instantiates a new CdxV1RedeemTokenRequest object
@@ -291,6 +293,38 @@ func (o *CdxV1RedeemTokenRequest) SetAzureSubscription(v string) {
 	o.AzureSubscription = &v
 }
 
+// GetGcpProject returns the GcpProject field value if set, zero value otherwise.
+func (o *CdxV1RedeemTokenRequest) GetGcpProject() string {
+	if o == nil || o.GcpProject == nil {
+		var ret string
+		return ret
+	}
+	return *o.GcpProject
+}
+
+// GetGcpProjectOk returns a tuple with the GcpProject field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CdxV1RedeemTokenRequest) GetGcpProjectOk() (*string, bool) {
+	if o == nil || o.GcpProject == nil {
+		return nil, false
+	}
+	return o.GcpProject, true
+}
+
+// HasGcpProject returns a boolean if a field has been set.
+func (o *CdxV1RedeemTokenRequest) HasGcpProject() bool {
+	if o != nil && o.GcpProject != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetGcpProject gets a reference to the given string and assigns it to the GcpProject field.
+func (o *CdxV1RedeemTokenRequest) SetGcpProject(v string) {
+	o.GcpProject = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *CdxV1RedeemTokenRequest) Redact() {
 	o.recurseRedact(o.ApiVersion)
@@ -300,6 +334,7 @@ func (o *CdxV1RedeemTokenRequest) Redact() {
 	o.recurseRedact(o.Token)
 	o.recurseRedact(o.AwsAccount)
 	o.recurseRedact(o.AzureSubscription)
+	o.recurseRedact(o.GcpProject)
 }
 
 func (o *CdxV1RedeemTokenRequest) recurseRedact(v interface{}) {
@@ -354,6 +389,9 @@ func (o CdxV1RedeemTokenRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.AzureSubscription != nil {
 		toSerialize["azure_subscription"] = o.AzureSubscription
+	}
+	if o.GcpProject != nil {
+		toSerialize["gcp_project"] = o.GcpProject
 	}
 	return json.Marshal(toSerialize)
 }

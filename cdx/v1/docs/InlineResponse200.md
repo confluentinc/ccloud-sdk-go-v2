@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ConsumerResources** | Pointer to [**[]CdxV1ConsumerSharedResource**](CdxV1ConsumerSharedResource.md) |  | [optional] 
+**ConsumerSharedResources** | Pointer to [**[]CdxV1ConsumerSharedResource**](CdxV1ConsumerSharedResource.md) |  | [optional] 
 
 ## Methods
 
@@ -25,30 +25,30 @@ NewInlineResponse200WithDefaults instantiates a new InlineResponse200 object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetConsumerResources
+### GetConsumerSharedResources
 
-`func (o *InlineResponse200) GetConsumerResources() []CdxV1ConsumerSharedResource`
+`func (o *InlineResponse200) GetConsumerSharedResources() []CdxV1ConsumerSharedResource`
 
-GetConsumerResources returns the ConsumerResources field if non-nil, zero value otherwise.
+GetConsumerSharedResources returns the ConsumerSharedResources field if non-nil, zero value otherwise.
 
-### GetConsumerResourcesOk
+### GetConsumerSharedResourcesOk
 
-`func (o *InlineResponse200) GetConsumerResourcesOk() (*[]CdxV1ConsumerSharedResource, bool)`
+`func (o *InlineResponse200) GetConsumerSharedResourcesOk() (*[]CdxV1ConsumerSharedResource, bool)`
 
-GetConsumerResourcesOk returns a tuple with the ConsumerResources field if it's non-nil, zero value otherwise
+GetConsumerSharedResourcesOk returns a tuple with the ConsumerSharedResources field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetConsumerResources
+### SetConsumerSharedResources
 
-`func (o *InlineResponse200) SetConsumerResources(v []CdxV1ConsumerSharedResource)`
+`func (o *InlineResponse200) SetConsumerSharedResources(v []CdxV1ConsumerSharedResource)`
 
-SetConsumerResources sets ConsumerResources field to given value.
+SetConsumerSharedResources sets ConsumerSharedResources field to given value.
 
-### HasConsumerResources
+### HasConsumerSharedResources
 
-`func (o *InlineResponse200) HasConsumerResources() bool`
+`func (o *InlineResponse200) HasConsumerSharedResources() bool`
 
-HasConsumerResources returns a boolean if a field has been set.
+HasConsumerSharedResources returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

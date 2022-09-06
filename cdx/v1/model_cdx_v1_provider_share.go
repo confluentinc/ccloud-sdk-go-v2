@@ -47,22 +47,25 @@ type CdxV1ProviderShare struct {
 	ConsumerUserName *string `json:"consumer_user_name,omitempty"`
 	// Consumer organization name
 	ConsumerOrganizationName *string `json:"consumer_organization_name,omitempty"`
-	// Name of the provider
+	// Name or email of the provider user. Deprecated
 	ProviderUserName *string `json:"provider_user_name,omitempty"`
-	// Status of share
-	Status *string `json:"status,omitempty"`
 	// Method by which the invite will be delivered
 	DeliveryMethod *string `json:"delivery_method,omitempty"`
+	// Restrictions on the consumer that can redeem this token
+	ConsumerRestriction *CdxV1ProviderShareConsumerRestrictionOneOf `json:"consumer_restriction,omitempty"`
 	// The date and time at which consumer was invited
 	InvitedAt *time.Time `json:"invited_at,omitempty"`
 	// The date and time at which the invitation will expire. Only for invited shares
 	InviteExpiresAt *time.Time `json:"invite_expires_at,omitempty"`
 	// The date and time at which the invite was redeemed
 	RedeemedAt *time.Time `json:"redeemed_at,omitempty"`
-	// The shared_resource to which this belongs.
-	SharedResource *ObjectReference `json:"shared_resource,omitempty"`
-	// The service_account associated with this object.
+	// The provider user/inviter
+	ProviderUser *ObjectReference `json:"provider_user,omitempty"`
+	// The service account associated with this object.
 	ServiceAccount *ObjectReference `json:"service_account,omitempty"`
+	// The cloud cluster to which this belongs.
+	CloudCluster *ObjectReference          `json:"cloud_cluster,omitempty"`
+	Status       *CdxV1ProviderShareStatus `json:"status,omitempty"`
 }
 
 // NewCdxV1ProviderShare instantiates a new CdxV1ProviderShare object
@@ -306,38 +309,6 @@ func (o *CdxV1ProviderShare) SetProviderUserName(v string) {
 	o.ProviderUserName = &v
 }
 
-// GetStatus returns the Status field value if set, zero value otherwise.
-func (o *CdxV1ProviderShare) GetStatus() string {
-	if o == nil || o.Status == nil {
-		var ret string
-		return ret
-	}
-	return *o.Status
-}
-
-// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CdxV1ProviderShare) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
-		return nil, false
-	}
-	return o.Status, true
-}
-
-// HasStatus returns a boolean if a field has been set.
-func (o *CdxV1ProviderShare) HasStatus() bool {
-	if o != nil && o.Status != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetStatus gets a reference to the given string and assigns it to the Status field.
-func (o *CdxV1ProviderShare) SetStatus(v string) {
-	o.Status = &v
-}
-
 // GetDeliveryMethod returns the DeliveryMethod field value if set, zero value otherwise.
 func (o *CdxV1ProviderShare) GetDeliveryMethod() string {
 	if o == nil || o.DeliveryMethod == nil {
@@ -368,6 +339,38 @@ func (o *CdxV1ProviderShare) HasDeliveryMethod() bool {
 // SetDeliveryMethod gets a reference to the given string and assigns it to the DeliveryMethod field.
 func (o *CdxV1ProviderShare) SetDeliveryMethod(v string) {
 	o.DeliveryMethod = &v
+}
+
+// GetConsumerRestriction returns the ConsumerRestriction field value if set, zero value otherwise.
+func (o *CdxV1ProviderShare) GetConsumerRestriction() CdxV1ProviderShareConsumerRestrictionOneOf {
+	if o == nil || o.ConsumerRestriction == nil {
+		var ret CdxV1ProviderShareConsumerRestrictionOneOf
+		return ret
+	}
+	return *o.ConsumerRestriction
+}
+
+// GetConsumerRestrictionOk returns a tuple with the ConsumerRestriction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CdxV1ProviderShare) GetConsumerRestrictionOk() (*CdxV1ProviderShareConsumerRestrictionOneOf, bool) {
+	if o == nil || o.ConsumerRestriction == nil {
+		return nil, false
+	}
+	return o.ConsumerRestriction, true
+}
+
+// HasConsumerRestriction returns a boolean if a field has been set.
+func (o *CdxV1ProviderShare) HasConsumerRestriction() bool {
+	if o != nil && o.ConsumerRestriction != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetConsumerRestriction gets a reference to the given CdxV1ProviderShareConsumerRestrictionOneOf and assigns it to the ConsumerRestriction field.
+func (o *CdxV1ProviderShare) SetConsumerRestriction(v CdxV1ProviderShareConsumerRestrictionOneOf) {
+	o.ConsumerRestriction = &v
 }
 
 // GetInvitedAt returns the InvitedAt field value if set, zero value otherwise.
@@ -466,36 +469,36 @@ func (o *CdxV1ProviderShare) SetRedeemedAt(v time.Time) {
 	o.RedeemedAt = &v
 }
 
-// GetSharedResource returns the SharedResource field value if set, zero value otherwise.
-func (o *CdxV1ProviderShare) GetSharedResource() ObjectReference {
-	if o == nil || o.SharedResource == nil {
+// GetProviderUser returns the ProviderUser field value if set, zero value otherwise.
+func (o *CdxV1ProviderShare) GetProviderUser() ObjectReference {
+	if o == nil || o.ProviderUser == nil {
 		var ret ObjectReference
 		return ret
 	}
-	return *o.SharedResource
+	return *o.ProviderUser
 }
 
-// GetSharedResourceOk returns a tuple with the SharedResource field value if set, nil otherwise
+// GetProviderUserOk returns a tuple with the ProviderUser field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1ProviderShare) GetSharedResourceOk() (*ObjectReference, bool) {
-	if o == nil || o.SharedResource == nil {
+func (o *CdxV1ProviderShare) GetProviderUserOk() (*ObjectReference, bool) {
+	if o == nil || o.ProviderUser == nil {
 		return nil, false
 	}
-	return o.SharedResource, true
+	return o.ProviderUser, true
 }
 
-// HasSharedResource returns a boolean if a field has been set.
-func (o *CdxV1ProviderShare) HasSharedResource() bool {
-	if o != nil && o.SharedResource != nil {
+// HasProviderUser returns a boolean if a field has been set.
+func (o *CdxV1ProviderShare) HasProviderUser() bool {
+	if o != nil && o.ProviderUser != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetSharedResource gets a reference to the given ObjectReference and assigns it to the SharedResource field.
-func (o *CdxV1ProviderShare) SetSharedResource(v ObjectReference) {
-	o.SharedResource = &v
+// SetProviderUser gets a reference to the given ObjectReference and assigns it to the ProviderUser field.
+func (o *CdxV1ProviderShare) SetProviderUser(v ObjectReference) {
+	o.ProviderUser = &v
 }
 
 // GetServiceAccount returns the ServiceAccount field value if set, zero value otherwise.
@@ -530,6 +533,70 @@ func (o *CdxV1ProviderShare) SetServiceAccount(v ObjectReference) {
 	o.ServiceAccount = &v
 }
 
+// GetCloudCluster returns the CloudCluster field value if set, zero value otherwise.
+func (o *CdxV1ProviderShare) GetCloudCluster() ObjectReference {
+	if o == nil || o.CloudCluster == nil {
+		var ret ObjectReference
+		return ret
+	}
+	return *o.CloudCluster
+}
+
+// GetCloudClusterOk returns a tuple with the CloudCluster field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CdxV1ProviderShare) GetCloudClusterOk() (*ObjectReference, bool) {
+	if o == nil || o.CloudCluster == nil {
+		return nil, false
+	}
+	return o.CloudCluster, true
+}
+
+// HasCloudCluster returns a boolean if a field has been set.
+func (o *CdxV1ProviderShare) HasCloudCluster() bool {
+	if o != nil && o.CloudCluster != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCloudCluster gets a reference to the given ObjectReference and assigns it to the CloudCluster field.
+func (o *CdxV1ProviderShare) SetCloudCluster(v ObjectReference) {
+	o.CloudCluster = &v
+}
+
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *CdxV1ProviderShare) GetStatus() CdxV1ProviderShareStatus {
+	if o == nil || o.Status == nil {
+		var ret CdxV1ProviderShareStatus
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CdxV1ProviderShare) GetStatusOk() (*CdxV1ProviderShareStatus, bool) {
+	if o == nil || o.Status == nil {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *CdxV1ProviderShare) HasStatus() bool {
+	if o != nil && o.Status != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given CdxV1ProviderShareStatus and assigns it to the Status field.
+func (o *CdxV1ProviderShare) SetStatus(v CdxV1ProviderShareStatus) {
+	o.Status = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *CdxV1ProviderShare) Redact() {
 	o.recurseRedact(o.ApiVersion)
@@ -539,13 +606,15 @@ func (o *CdxV1ProviderShare) Redact() {
 	o.recurseRedact(o.ConsumerUserName)
 	o.recurseRedact(o.ConsumerOrganizationName)
 	o.recurseRedact(o.ProviderUserName)
-	o.recurseRedact(o.Status)
 	o.recurseRedact(o.DeliveryMethod)
+	o.recurseRedact(o.ConsumerRestriction)
 	o.recurseRedact(o.InvitedAt)
 	o.recurseRedact(o.InviteExpiresAt)
 	o.recurseRedact(o.RedeemedAt)
-	o.recurseRedact(o.SharedResource)
+	o.recurseRedact(o.ProviderUser)
 	o.recurseRedact(o.ServiceAccount)
+	o.recurseRedact(o.CloudCluster)
+	o.recurseRedact(o.Status)
 }
 
 func (o *CdxV1ProviderShare) recurseRedact(v interface{}) {
@@ -601,11 +670,11 @@ func (o CdxV1ProviderShare) MarshalJSON() ([]byte, error) {
 	if o.ProviderUserName != nil {
 		toSerialize["provider_user_name"] = o.ProviderUserName
 	}
-	if o.Status != nil {
-		toSerialize["status"] = o.Status
-	}
 	if o.DeliveryMethod != nil {
 		toSerialize["delivery_method"] = o.DeliveryMethod
+	}
+	if o.ConsumerRestriction != nil {
+		toSerialize["consumer_restriction"] = o.ConsumerRestriction
 	}
 	if o.InvitedAt != nil {
 		toSerialize["invited_at"] = o.InvitedAt
@@ -616,11 +685,17 @@ func (o CdxV1ProviderShare) MarshalJSON() ([]byte, error) {
 	if o.RedeemedAt != nil {
 		toSerialize["redeemed_at"] = o.RedeemedAt
 	}
-	if o.SharedResource != nil {
-		toSerialize["shared_resource"] = o.SharedResource
+	if o.ProviderUser != nil {
+		toSerialize["provider_user"] = o.ProviderUser
 	}
 	if o.ServiceAccount != nil {
 		toSerialize["service_account"] = o.ServiceAccount
+	}
+	if o.CloudCluster != nil {
+		toSerialize["cloud_cluster"] = o.CloudCluster
+	}
+	if o.Status != nil {
+		toSerialize["status"] = o.Status
 	}
 	return json.Marshal(toSerialize)
 }

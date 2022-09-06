@@ -67,11 +67,17 @@ SetEmail sets Email field to given value.
 
 
 
-### AsCdxV1CreateShareRequestConsumerRestrictionOneOf
+### AsCdxV1CreateProviderShareRequestConsumerRestrictionOneOf
 
-`func (s *CdxV1EmailConsumerRestriction) AsCdxV1CreateShareRequestConsumerRestrictionOneOf() CdxV1CreateShareRequestConsumerRestrictionOneOf`
+`func (s *CdxV1EmailConsumerRestriction) AsCdxV1CreateProviderShareRequestConsumerRestrictionOneOf() CdxV1CreateProviderShareRequestConsumerRestrictionOneOf`
 
-Convenience method to wrap this instance of CdxV1EmailConsumerRestriction in CdxV1CreateShareRequestConsumerRestrictionOneOf
+Convenience method to wrap this instance of CdxV1EmailConsumerRestriction in CdxV1CreateProviderShareRequestConsumerRestrictionOneOf
+
+### AsCdxV1ProviderShareConsumerRestrictionOneOf
+
+`func (s *CdxV1EmailConsumerRestriction) AsCdxV1ProviderShareConsumerRestrictionOneOf() CdxV1ProviderShareConsumerRestrictionOneOf`
+
+Convenience method to wrap this instance of CdxV1EmailConsumerRestriction in CdxV1ProviderShareConsumerRestrictionOneOf
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

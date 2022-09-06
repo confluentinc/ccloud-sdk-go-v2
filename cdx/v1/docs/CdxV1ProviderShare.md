@@ -8,16 +8,18 @@ Name | Type | Description | Notes
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
-**ConsumerUserName** | Pointer to **string** | Name of the consumer | [optional] 
-**ConsumerOrganizationName** | Pointer to **string** | Consumer organization name | [optional] 
-**ProviderUserName** | Pointer to **string** | Name of the provider | [optional] 
-**Status** | Pointer to **string** | Status of share | [optional] 
+**ConsumerUserName** | Pointer to **string** | Name of the consumer | [optional] [readonly] 
+**ConsumerOrganizationName** | Pointer to **string** | Consumer organization name | [optional] [readonly] 
+**ProviderUserName** | Pointer to **string** | Name or email of the provider user. Deprecated | [optional] [readonly] 
 **DeliveryMethod** | Pointer to **string** | Method by which the invite will be delivered | [optional] 
-**InvitedAt** | Pointer to **time.Time** | The date and time at which consumer was invited | [optional] 
-**InviteExpiresAt** | Pointer to **time.Time** | The date and time at which the invitation will expire. Only for invited shares | [optional] 
-**RedeemedAt** | Pointer to **time.Time** | The date and time at which the invite was redeemed | [optional] 
-**SharedResource** | Pointer to [**ObjectReference**](ObjectReference.md) | The shared_resource to which this belongs. | [optional] 
-**ServiceAccount** | Pointer to [**ObjectReference**](ObjectReference.md) | The service_account associated with this object. | [optional] 
+**ConsumerRestriction** | Pointer to [**CdxV1ProviderShareConsumerRestrictionOneOf**](CdxV1ProviderShareConsumerRestrictionOneOf.md) | Restrictions on the consumer that can redeem this token | [optional] 
+**InvitedAt** | Pointer to **time.Time** | The date and time at which consumer was invited | [optional] [readonly] 
+**InviteExpiresAt** | Pointer to **time.Time** | The date and time at which the invitation will expire. Only for invited shares | [optional] [readonly] 
+**RedeemedAt** | Pointer to **time.Time** | The date and time at which the invite was redeemed | [optional] [readonly] 
+**ProviderUser** | Pointer to [**ObjectReference**](ObjectReference.md) | The provider user/inviter | [optional] [readonly] 
+**ServiceAccount** | Pointer to [**ObjectReference**](ObjectReference.md) | The service account associated with this object. | [optional] 
+**CloudCluster** | Pointer to [**ObjectReference**](ObjectReference.md) | The cloud cluster to which this belongs. | [optional] 
+**Status** | Pointer to [**CdxV1ProviderShareStatus**](CdxV1ProviderShareStatus.md) |  | [optional] 
 
 ## Methods
 
@@ -213,31 +215,6 @@ SetProviderUserName sets ProviderUserName field to given value.
 
 HasProviderUserName returns a boolean if a field has been set.
 
-### GetStatus
-
-`func (o *CdxV1ProviderShare) GetStatus() string`
-
-GetStatus returns the Status field if non-nil, zero value otherwise.
-
-### GetStatusOk
-
-`func (o *CdxV1ProviderShare) GetStatusOk() (*string, bool)`
-
-GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStatus
-
-`func (o *CdxV1ProviderShare) SetStatus(v string)`
-
-SetStatus sets Status field to given value.
-
-### HasStatus
-
-`func (o *CdxV1ProviderShare) HasStatus() bool`
-
-HasStatus returns a boolean if a field has been set.
-
 ### GetDeliveryMethod
 
 `func (o *CdxV1ProviderShare) GetDeliveryMethod() string`
@@ -262,6 +239,31 @@ SetDeliveryMethod sets DeliveryMethod field to given value.
 `func (o *CdxV1ProviderShare) HasDeliveryMethod() bool`
 
 HasDeliveryMethod returns a boolean if a field has been set.
+
+### GetConsumerRestriction
+
+`func (o *CdxV1ProviderShare) GetConsumerRestriction() CdxV1ProviderShareConsumerRestrictionOneOf`
+
+GetConsumerRestriction returns the ConsumerRestriction field if non-nil, zero value otherwise.
+
+### GetConsumerRestrictionOk
+
+`func (o *CdxV1ProviderShare) GetConsumerRestrictionOk() (*CdxV1ProviderShareConsumerRestrictionOneOf, bool)`
+
+GetConsumerRestrictionOk returns a tuple with the ConsumerRestriction field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConsumerRestriction
+
+`func (o *CdxV1ProviderShare) SetConsumerRestriction(v CdxV1ProviderShareConsumerRestrictionOneOf)`
+
+SetConsumerRestriction sets ConsumerRestriction field to given value.
+
+### HasConsumerRestriction
+
+`func (o *CdxV1ProviderShare) HasConsumerRestriction() bool`
+
+HasConsumerRestriction returns a boolean if a field has been set.
 
 ### GetInvitedAt
 
@@ -338,30 +340,30 @@ SetRedeemedAt sets RedeemedAt field to given value.
 
 HasRedeemedAt returns a boolean if a field has been set.
 
-### GetSharedResource
+### GetProviderUser
 
-`func (o *CdxV1ProviderShare) GetSharedResource() ObjectReference`
+`func (o *CdxV1ProviderShare) GetProviderUser() ObjectReference`
 
-GetSharedResource returns the SharedResource field if non-nil, zero value otherwise.
+GetProviderUser returns the ProviderUser field if non-nil, zero value otherwise.
 
-### GetSharedResourceOk
+### GetProviderUserOk
 
-`func (o *CdxV1ProviderShare) GetSharedResourceOk() (*ObjectReference, bool)`
+`func (o *CdxV1ProviderShare) GetProviderUserOk() (*ObjectReference, bool)`
 
-GetSharedResourceOk returns a tuple with the SharedResource field if it's non-nil, zero value otherwise
+GetProviderUserOk returns a tuple with the ProviderUser field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSharedResource
+### SetProviderUser
 
-`func (o *CdxV1ProviderShare) SetSharedResource(v ObjectReference)`
+`func (o *CdxV1ProviderShare) SetProviderUser(v ObjectReference)`
 
-SetSharedResource sets SharedResource field to given value.
+SetProviderUser sets ProviderUser field to given value.
 
-### HasSharedResource
+### HasProviderUser
 
-`func (o *CdxV1ProviderShare) HasSharedResource() bool`
+`func (o *CdxV1ProviderShare) HasProviderUser() bool`
 
-HasSharedResource returns a boolean if a field has been set.
+HasProviderUser returns a boolean if a field has been set.
 
 ### GetServiceAccount
 
@@ -387,6 +389,56 @@ SetServiceAccount sets ServiceAccount field to given value.
 `func (o *CdxV1ProviderShare) HasServiceAccount() bool`
 
 HasServiceAccount returns a boolean if a field has been set.
+
+### GetCloudCluster
+
+`func (o *CdxV1ProviderShare) GetCloudCluster() ObjectReference`
+
+GetCloudCluster returns the CloudCluster field if non-nil, zero value otherwise.
+
+### GetCloudClusterOk
+
+`func (o *CdxV1ProviderShare) GetCloudClusterOk() (*ObjectReference, bool)`
+
+GetCloudClusterOk returns a tuple with the CloudCluster field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCloudCluster
+
+`func (o *CdxV1ProviderShare) SetCloudCluster(v ObjectReference)`
+
+SetCloudCluster sets CloudCluster field to given value.
+
+### HasCloudCluster
+
+`func (o *CdxV1ProviderShare) HasCloudCluster() bool`
+
+HasCloudCluster returns a boolean if a field has been set.
+
+### GetStatus
+
+`func (o *CdxV1ProviderShare) GetStatus() CdxV1ProviderShareStatus`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *CdxV1ProviderShare) GetStatusOk() (*CdxV1ProviderShareStatus, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *CdxV1ProviderShare) SetStatus(v CdxV1ProviderShareStatus)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *CdxV1ProviderShare) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

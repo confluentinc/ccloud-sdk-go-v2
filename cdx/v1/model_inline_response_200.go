@@ -35,7 +35,7 @@ import (
 
 // InlineResponse200 struct for InlineResponse200
 type InlineResponse200 struct {
-	ConsumerResources *[]CdxV1ConsumerSharedResource `json:"consumer_resources,omitempty"`
+	ConsumerSharedResources *[]CdxV1ConsumerSharedResource `json:"consumer_shared_resources,omitempty"`
 }
 
 // NewInlineResponse200 instantiates a new InlineResponse200 object
@@ -55,41 +55,41 @@ func NewInlineResponse200WithDefaults() *InlineResponse200 {
 	return &this
 }
 
-// GetConsumerResources returns the ConsumerResources field value if set, zero value otherwise.
-func (o *InlineResponse200) GetConsumerResources() []CdxV1ConsumerSharedResource {
-	if o == nil || o.ConsumerResources == nil {
+// GetConsumerSharedResources returns the ConsumerSharedResources field value if set, zero value otherwise.
+func (o *InlineResponse200) GetConsumerSharedResources() []CdxV1ConsumerSharedResource {
+	if o == nil || o.ConsumerSharedResources == nil {
 		var ret []CdxV1ConsumerSharedResource
 		return ret
 	}
-	return *o.ConsumerResources
+	return *o.ConsumerSharedResources
 }
 
-// GetConsumerResourcesOk returns a tuple with the ConsumerResources field value if set, nil otherwise
+// GetConsumerSharedResourcesOk returns a tuple with the ConsumerSharedResources field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InlineResponse200) GetConsumerResourcesOk() (*[]CdxV1ConsumerSharedResource, bool) {
-	if o == nil || o.ConsumerResources == nil {
+func (o *InlineResponse200) GetConsumerSharedResourcesOk() (*[]CdxV1ConsumerSharedResource, bool) {
+	if o == nil || o.ConsumerSharedResources == nil {
 		return nil, false
 	}
-	return o.ConsumerResources, true
+	return o.ConsumerSharedResources, true
 }
 
-// HasConsumerResources returns a boolean if a field has been set.
-func (o *InlineResponse200) HasConsumerResources() bool {
-	if o != nil && o.ConsumerResources != nil {
+// HasConsumerSharedResources returns a boolean if a field has been set.
+func (o *InlineResponse200) HasConsumerSharedResources() bool {
+	if o != nil && o.ConsumerSharedResources != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetConsumerResources gets a reference to the given []CdxV1ConsumerSharedResource and assigns it to the ConsumerResources field.
-func (o *InlineResponse200) SetConsumerResources(v []CdxV1ConsumerSharedResource) {
-	o.ConsumerResources = &v
+// SetConsumerSharedResources gets a reference to the given []CdxV1ConsumerSharedResource and assigns it to the ConsumerSharedResources field.
+func (o *InlineResponse200) SetConsumerSharedResources(v []CdxV1ConsumerSharedResource) {
+	o.ConsumerSharedResources = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
 func (o *InlineResponse200) Redact() {
-	o.recurseRedact(o.ConsumerResources)
+	o.recurseRedact(o.ConsumerSharedResources)
 }
 
 func (o *InlineResponse200) recurseRedact(v interface{}) {
@@ -124,8 +124,8 @@ func (o InlineResponse200) zeroField(v interface{}) {
 
 func (o InlineResponse200) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.ConsumerResources != nil {
-		toSerialize["consumer_resources"] = o.ConsumerResources
+	if o.ConsumerSharedResources != nil {
+		toSerialize["consumer_shared_resources"] = o.ConsumerSharedResources
 	}
 	return json.Marshal(toSerialize)
 }

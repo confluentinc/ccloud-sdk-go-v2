@@ -38,95 +38,94 @@ var (
 	_ _context.Context
 )
 
-type SharedTokensCdxV1Api interface {
+type OptInsCdxV1Api interface {
 
 	/*
-		RedeemCdxV1SharedToken Redeem token
+		GetCdxV1OptIn Read the organization's stream sharing opt-in settings
 
-		Redeem the shared token for shared topic and cluster access information
+		Returns the organization's stream sharing opt-in settings.
+
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiRedeemCdxV1SharedTokenRequest
+		 @return ApiGetCdxV1OptInRequest
 	*/
-	RedeemCdxV1SharedToken(ctx _context.Context) ApiRedeemCdxV1SharedTokenRequest
+	GetCdxV1OptIn(ctx _context.Context) ApiGetCdxV1OptInRequest
 
-	// RedeemCdxV1SharedTokenExecute executes the request
-	//  @return CdxV1RedeemTokenResponse
-	RedeemCdxV1SharedTokenExecute(r ApiRedeemCdxV1SharedTokenRequest) (CdxV1RedeemTokenResponse, *_nethttp.Response, error)
+	// GetCdxV1OptInExecute executes the request
+	//  @return CdxV1OptIn
+	GetCdxV1OptInExecute(r ApiGetCdxV1OptInRequest) (CdxV1OptIn, *_nethttp.Response, error)
 
 	/*
-		ResourcesCdxV1SharedToken Validate token to view shared resources
+		UpdateCdxV1OptIn Set the organization's stream sharing opt-in settings
 
-		Validate and decrypt the shared token and view token's shared resources
+		Updates the organization's stream sharing opt-in settings.
+
+
+
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiResourcesCdxV1SharedTokenRequest
+		 @return ApiUpdateCdxV1OptInRequest
 	*/
-	ResourcesCdxV1SharedToken(ctx _context.Context) ApiResourcesCdxV1SharedTokenRequest
+	UpdateCdxV1OptIn(ctx _context.Context) ApiUpdateCdxV1OptInRequest
 
-	// ResourcesCdxV1SharedTokenExecute executes the request
-	//  @return InlineResponse200
-	ResourcesCdxV1SharedTokenExecute(r ApiResourcesCdxV1SharedTokenRequest) (InlineResponse200, *_nethttp.Response, error)
+	// UpdateCdxV1OptInExecute executes the request
+	//  @return CdxV1OptIn
+	UpdateCdxV1OptInExecute(r ApiUpdateCdxV1OptInRequest) (CdxV1OptIn, *_nethttp.Response, error)
 }
 
-// SharedTokensCdxV1ApiService SharedTokensCdxV1Api service
-type SharedTokensCdxV1ApiService service
+// OptInsCdxV1ApiService OptInsCdxV1Api service
+type OptInsCdxV1ApiService service
 
-type ApiRedeemCdxV1SharedTokenRequest struct {
-	ctx                     _context.Context
-	ApiService              SharedTokensCdxV1Api
-	cdxV1RedeemTokenRequest *CdxV1RedeemTokenRequest
+type ApiGetCdxV1OptInRequest struct {
+	ctx        _context.Context
+	ApiService OptInsCdxV1Api
 }
 
-func (r ApiRedeemCdxV1SharedTokenRequest) CdxV1RedeemTokenRequest(cdxV1RedeemTokenRequest CdxV1RedeemTokenRequest) ApiRedeemCdxV1SharedTokenRequest {
-	r.cdxV1RedeemTokenRequest = &cdxV1RedeemTokenRequest
-	return r
-}
-
-func (r ApiRedeemCdxV1SharedTokenRequest) Execute() (CdxV1RedeemTokenResponse, *_nethttp.Response, error) {
-	return r.ApiService.RedeemCdxV1SharedTokenExecute(r)
+func (r ApiGetCdxV1OptInRequest) Execute() (CdxV1OptIn, *_nethttp.Response, error) {
+	return r.ApiService.GetCdxV1OptInExecute(r)
 }
 
 /*
-RedeemCdxV1SharedToken Redeem token
+GetCdxV1OptIn Read the organization's stream sharing opt-in settings
 
-Redeem the shared token for shared topic and cluster access information
+Returns the organization's stream sharing opt-in settings.
+
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiRedeemCdxV1SharedTokenRequest
+ @return ApiGetCdxV1OptInRequest
 */
-func (a *SharedTokensCdxV1ApiService) RedeemCdxV1SharedToken(ctx _context.Context) ApiRedeemCdxV1SharedTokenRequest {
-	return ApiRedeemCdxV1SharedTokenRequest{
+func (a *OptInsCdxV1ApiService) GetCdxV1OptIn(ctx _context.Context) ApiGetCdxV1OptInRequest {
+	return ApiGetCdxV1OptInRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CdxV1RedeemTokenResponse
-func (a *SharedTokensCdxV1ApiService) RedeemCdxV1SharedTokenExecute(r ApiRedeemCdxV1SharedTokenRequest) (CdxV1RedeemTokenResponse, *_nethttp.Response, error) {
+//  @return CdxV1OptIn
+func (a *OptInsCdxV1ApiService) GetCdxV1OptInExecute(r ApiGetCdxV1OptInRequest) (CdxV1OptIn, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  CdxV1RedeemTokenResponse
+		localVarReturnValue  CdxV1OptIn
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SharedTokensCdxV1ApiService.RedeemCdxV1SharedToken")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OptInsCdxV1ApiService.GetCdxV1OptIn")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/cdx/v1/shared-tokens:redeem"
+	localVarPath := localBasePath + "/cdx/v1/opt-in"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -142,8 +141,6 @@ func (a *SharedTokensCdxV1ApiService) RedeemCdxV1SharedTokenExecute(r ApiRedeemC
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.cdxV1RedeemTokenRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -197,16 +194,6 @@ func (a *SharedTokensCdxV1ApiService) RedeemCdxV1SharedTokenExecute(r ApiRedeemC
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 409 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -240,54 +227,57 @@ func (a *SharedTokensCdxV1ApiService) RedeemCdxV1SharedTokenExecute(r ApiRedeemC
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiResourcesCdxV1SharedTokenRequest struct {
-	ctx              _context.Context
-	ApiService       SharedTokensCdxV1Api
-	cdxV1SharedToken *CdxV1SharedToken
+type ApiUpdateCdxV1OptInRequest struct {
+	ctx        _context.Context
+	ApiService OptInsCdxV1Api
+	cdxV1OptIn *CdxV1OptIn
 }
 
-func (r ApiResourcesCdxV1SharedTokenRequest) CdxV1SharedToken(cdxV1SharedToken CdxV1SharedToken) ApiResourcesCdxV1SharedTokenRequest {
-	r.cdxV1SharedToken = &cdxV1SharedToken
+func (r ApiUpdateCdxV1OptInRequest) CdxV1OptIn(cdxV1OptIn CdxV1OptIn) ApiUpdateCdxV1OptInRequest {
+	r.cdxV1OptIn = &cdxV1OptIn
 	return r
 }
 
-func (r ApiResourcesCdxV1SharedTokenRequest) Execute() (InlineResponse200, *_nethttp.Response, error) {
-	return r.ApiService.ResourcesCdxV1SharedTokenExecute(r)
+func (r ApiUpdateCdxV1OptInRequest) Execute() (CdxV1OptIn, *_nethttp.Response, error) {
+	return r.ApiService.UpdateCdxV1OptInExecute(r)
 }
 
 /*
-ResourcesCdxV1SharedToken Validate token to view shared resources
+UpdateCdxV1OptIn Set the organization's stream sharing opt-in settings
 
-Validate and decrypt the shared token and view token's shared resources
+Updates the organization's stream sharing opt-in settings.
+
+
+
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiResourcesCdxV1SharedTokenRequest
+ @return ApiUpdateCdxV1OptInRequest
 */
-func (a *SharedTokensCdxV1ApiService) ResourcesCdxV1SharedToken(ctx _context.Context) ApiResourcesCdxV1SharedTokenRequest {
-	return ApiResourcesCdxV1SharedTokenRequest{
+func (a *OptInsCdxV1ApiService) UpdateCdxV1OptIn(ctx _context.Context) ApiUpdateCdxV1OptInRequest {
+	return ApiUpdateCdxV1OptInRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return InlineResponse200
-func (a *SharedTokensCdxV1ApiService) ResourcesCdxV1SharedTokenExecute(r ApiResourcesCdxV1SharedTokenRequest) (InlineResponse200, *_nethttp.Response, error) {
+//  @return CdxV1OptIn
+func (a *OptInsCdxV1ApiService) UpdateCdxV1OptInExecute(r ApiUpdateCdxV1OptInRequest) (CdxV1OptIn, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  InlineResponse200
+		localVarReturnValue  CdxV1OptIn
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SharedTokensCdxV1ApiService.ResourcesCdxV1SharedToken")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OptInsCdxV1ApiService.UpdateCdxV1OptIn")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/cdx/v1/shared-tokens:resources"
+	localVarPath := localBasePath + "/cdx/v1/opt-in"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -311,7 +301,7 @@ func (a *SharedTokensCdxV1ApiService) ResourcesCdxV1SharedTokenExecute(r ApiReso
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.cdxV1SharedToken
+	localVarPostBody = r.cdxV1OptIn
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -374,7 +364,7 @@ func (a *SharedTokensCdxV1ApiService) ResourcesCdxV1SharedTokenExecute(r ApiReso
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 409 {
+		if localVarHTTPResponse.StatusCode == 422 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
