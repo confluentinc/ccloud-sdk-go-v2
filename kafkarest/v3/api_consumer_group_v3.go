@@ -81,7 +81,7 @@ type ConsumerGroupV3Api interface {
 	/*
 		GetKafkaConsumerGroupLagSummary Get Consumer Group Lag Summary.
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Available in dedicated clusters only](https://img.shields.io/badge/-Available%20in%20dedicated%20clusters%20only-%23bc8540)](https://docs.confluent.io/cloud/current/clusters/cluster-types.html#dedicated-cluster)
 
 	Returns the max and total lag of the consumers belonging to the
 	specified consumer group.
@@ -118,7 +118,7 @@ type ConsumerGroupV3Api interface {
 	/*
 		ListKafkaConsumerLags List Consumer Lags
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Available in dedicated clusters only](https://img.shields.io/badge/-Available%20in%20dedicated%20clusters%20only-%23bc8540)](https://docs.confluent.io/cloud/current/clusters/cluster-types.html#dedicated-cluster)
 
 	Returns a list of consumer lags of the consumers belonging to the
 	specified consumer group.
@@ -475,7 +475,7 @@ func (r ApiGetKafkaConsumerGroupLagSummaryRequest) Execute() (ConsumerGroupLagSu
 /*
 GetKafkaConsumerGroupLagSummary Get Consumer Group Lag Summary.
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Available in dedicated clusters only](https://img.shields.io/badge/-Available%20in%20dedicated%20clusters%20only-%23bc8540)](https://docs.confluent.io/cloud/current/clusters/cluster-types.html#dedicated-cluster)
 
 Returns the max and total lag of the consumers belonging to the
 specified consumer group.
@@ -773,7 +773,7 @@ func (r ApiListKafkaConsumerLagsRequest) Execute() (ConsumerLagDataList, *_netht
 /*
 ListKafkaConsumerLags List Consumer Lags
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Available in dedicated clusters only](https://img.shields.io/badge/-Available%20in%20dedicated%20clusters%20only-%23bc8540)](https://docs.confluent.io/cloud/current/clusters/cluster-types.html#dedicated-cluster)
 
 Returns a list of consumer lags of the consumers belonging to the
 specified consumer group.

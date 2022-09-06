@@ -44,7 +44,7 @@ type RecordsV3Api interface {
 	/*
 		ProduceRecords Produce records to the given topic.
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Available in dedicated clusters](https://img.shields.io/badge/-Available%20in%20dedicated%20clusters-%23bc8540)](#section/Versioning/API-Lifecycle-Policy)
+		[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
 	Produce records to the given topic, returning delivery reports for each
 	record produced. This API can be used in streaming mode by setting "Transfer-Encoding:
@@ -77,7 +77,7 @@ type ApiProduceRecordsRequest struct {
 	produceRequest *ProduceRequest
 }
 
-// A single record to be produced to Kafka. To produce multiple records on the same connection, simply concatenate all the records, e.g.: {\&quot;partition_id\&quot;:1}{\&quot;partition_id\&quot;:2}. Delivery reports will be concatenated on the same order as the records are sent. See examples for the options available.
+// A single record to be produced to Kafka. To produce multiple records on the same connection, simply concatenate all the records, e.g.: {\&quot;partition_id\&quot;: \&quot;1\&quot;, \&quot;value\&quot;: {\&quot;type\&quot;: \&quot;JSON\&quot;, \&quot;data\&quot;: \&quot;Bonjour le monde!\&quot;}} {\&quot;partition_id\&quot;: \&quot;10\&quot;, \&quot;value\&quot;: {\&quot;type\&quot;: \&quot;JSON\&quot;, \&quot;data\&quot;: \&quot;Bonjour le monde, de nouveau!\&quot;}} Delivery reports will be concatenated in the same order as the records are sent. See examples for the options available.
 func (r ApiProduceRecordsRequest) ProduceRequest(produceRequest ProduceRequest) ApiProduceRecordsRequest {
 	r.produceRequest = &produceRequest
 	return r
@@ -90,7 +90,7 @@ func (r ApiProduceRecordsRequest) Execute() (ProduceResponse, *_nethttp.Response
 /*
 ProduceRecords Produce records to the given topic.
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Available in dedicated clusters](https://img.shields.io/badge/-Available%20in%20dedicated%20clusters-%23bc8540)](#section/Versioning/API-Lifecycle-Policy)
+[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
 Produce records to the given topic, returning delivery reports for each
 record produced. This API can be used in streaming mode by setting "Transfer-Encoding:

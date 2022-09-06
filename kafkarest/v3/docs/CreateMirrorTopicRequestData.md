@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **SourceTopicName** | **string** |  | 
+**MirrorTopicName** | Pointer to **string** |  | [optional] 
 **ReplicationFactor** | Pointer to **int32** |  | [optional] 
 **Configs** | Pointer to [**[]ConfigData**](ConfigData.md) |  | [optional] 
 
@@ -46,6 +47,31 @@ and a boolean to check if the value has been set.
 
 SetSourceTopicName sets SourceTopicName field to given value.
 
+
+### GetMirrorTopicName
+
+`func (o *CreateMirrorTopicRequestData) GetMirrorTopicName() string`
+
+GetMirrorTopicName returns the MirrorTopicName field if non-nil, zero value otherwise.
+
+### GetMirrorTopicNameOk
+
+`func (o *CreateMirrorTopicRequestData) GetMirrorTopicNameOk() (*string, bool)`
+
+GetMirrorTopicNameOk returns a tuple with the MirrorTopicName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMirrorTopicName
+
+`func (o *CreateMirrorTopicRequestData) SetMirrorTopicName(v string)`
+
+SetMirrorTopicName sets MirrorTopicName field to given value.
+
+### HasMirrorTopicName
+
+`func (o *CreateMirrorTopicRequestData) HasMirrorTopicName() bool`
+
+HasMirrorTopicName returns a boolean if a field has been set.
 
 ### GetReplicationFactor
 

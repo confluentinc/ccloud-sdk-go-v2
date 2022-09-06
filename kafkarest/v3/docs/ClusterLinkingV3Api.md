@@ -123,7 +123,7 @@ import (
 func main() {
     clusterId := "cluster-1" // string | The Kafka cluster ID.
     linkName := "link-sb1" // string | The link name
-    createMirrorTopicRequestData := *openapiclient.NewCreateMirrorTopicRequestData("SourceTopicName_example") // CreateMirrorTopicRequestData | Name and configs of the topics mirroring from and mirroring to (optional)
+    createMirrorTopicRequestData := *openapiclient.NewCreateMirrorTopicRequestData("SourceTopicName_example") // CreateMirrorTopicRequestData | Name and configs of the topics mirroring from and mirroring to. Note that Confluent Cloud allows only specific replication factor values. Because of that the replication factor field should either be omitted or it should use one of the allowed values (see https://docs.confluent.io/cloud/current/client-apps/optimizing/durability.html). (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -153,7 +153,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **createMirrorTopicRequestData** | [**CreateMirrorTopicRequestData**](CreateMirrorTopicRequestData.md) | Name and configs of the topics mirroring from and mirroring to | 
+ **createMirrorTopicRequestData** | [**CreateMirrorTopicRequestData**](CreateMirrorTopicRequestData.md) | Name and configs of the topics mirroring from and mirroring to. Note that Confluent Cloud allows only specific replication factor values. Because of that the replication factor field should either be omitted or it should use one of the allowed values (see https://docs.confluent.io/cloud/current/client-apps/optimizing/durability.html). | 
 
 ### Return type
 

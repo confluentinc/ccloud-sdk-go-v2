@@ -36,6 +36,7 @@ import (
 // CreateMirrorTopicRequestData struct for CreateMirrorTopicRequestData
 type CreateMirrorTopicRequestData struct {
 	SourceTopicName   string        `json:"source_topic_name"`
+	MirrorTopicName   *string       `json:"mirror_topic_name,omitempty"`
 	ReplicationFactor *int32        `json:"replication_factor,omitempty"`
 	Configs           *[]ConfigData `json:"configs,omitempty"`
 }
@@ -80,6 +81,38 @@ func (o *CreateMirrorTopicRequestData) GetSourceTopicNameOk() (*string, bool) {
 // SetSourceTopicName sets field value
 func (o *CreateMirrorTopicRequestData) SetSourceTopicName(v string) {
 	o.SourceTopicName = v
+}
+
+// GetMirrorTopicName returns the MirrorTopicName field value if set, zero value otherwise.
+func (o *CreateMirrorTopicRequestData) GetMirrorTopicName() string {
+	if o == nil || o.MirrorTopicName == nil {
+		var ret string
+		return ret
+	}
+	return *o.MirrorTopicName
+}
+
+// GetMirrorTopicNameOk returns a tuple with the MirrorTopicName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateMirrorTopicRequestData) GetMirrorTopicNameOk() (*string, bool) {
+	if o == nil || o.MirrorTopicName == nil {
+		return nil, false
+	}
+	return o.MirrorTopicName, true
+}
+
+// HasMirrorTopicName returns a boolean if a field has been set.
+func (o *CreateMirrorTopicRequestData) HasMirrorTopicName() bool {
+	if o != nil && o.MirrorTopicName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMirrorTopicName gets a reference to the given string and assigns it to the MirrorTopicName field.
+func (o *CreateMirrorTopicRequestData) SetMirrorTopicName(v string) {
+	o.MirrorTopicName = &v
 }
 
 // GetReplicationFactor returns the ReplicationFactor field value if set, zero value otherwise.
@@ -149,6 +182,7 @@ func (o *CreateMirrorTopicRequestData) SetConfigs(v []ConfigData) {
 // Redact resets all sensitive fields to their zero value.
 func (o *CreateMirrorTopicRequestData) Redact() {
 	o.recurseRedact(&o.SourceTopicName)
+	o.recurseRedact(o.MirrorTopicName)
 	o.recurseRedact(o.ReplicationFactor)
 	o.recurseRedact(o.Configs)
 }
@@ -187,6 +221,9 @@ func (o CreateMirrorTopicRequestData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["source_topic_name"] = o.SourceTopicName
+	}
+	if o.MirrorTopicName != nil {
+		toSerialize["mirror_topic_name"] = o.MirrorTopicName
 	}
 	if o.ReplicationFactor != nil {
 		toSerialize["replication_factor"] = o.ReplicationFactor

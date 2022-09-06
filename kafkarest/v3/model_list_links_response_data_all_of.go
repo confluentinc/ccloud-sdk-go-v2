@@ -35,10 +35,11 @@ import (
 
 // ListLinksResponseDataAllOf struct for ListLinksResponseDataAllOf
 type ListLinksResponseDataAllOf struct {
-	SourceClusterId *string   `json:"source_cluster_id,omitempty"`
-	LinkName        string    `json:"link_name"`
-	LinkId          string    `json:"link_id"`
-	TopicsNames     *[]string `json:"topics_names,omitempty"`
+	SourceClusterId      NullableString `json:"source_cluster_id,omitempty"`
+	DestinationClusterId NullableString `json:"destination_cluster_id,omitempty"`
+	LinkName             string         `json:"link_name"`
+	LinkId               string         `json:"link_id"`
+	TopicsNames          *[]string      `json:"topics_names,omitempty"`
 }
 
 // NewListLinksResponseDataAllOf instantiates a new ListLinksResponseDataAllOf object
@@ -60,36 +61,90 @@ func NewListLinksResponseDataAllOfWithDefaults() *ListLinksResponseDataAllOf {
 	return &this
 }
 
-// GetSourceClusterId returns the SourceClusterId field value if set, zero value otherwise.
+// GetSourceClusterId returns the SourceClusterId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ListLinksResponseDataAllOf) GetSourceClusterId() string {
-	if o == nil || o.SourceClusterId == nil {
+	if o == nil || o.SourceClusterId.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.SourceClusterId
+	return *o.SourceClusterId.Get()
 }
 
 // GetSourceClusterIdOk returns a tuple with the SourceClusterId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ListLinksResponseDataAllOf) GetSourceClusterIdOk() (*string, bool) {
-	if o == nil || o.SourceClusterId == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SourceClusterId, true
+	return o.SourceClusterId.Get(), o.SourceClusterId.IsSet()
 }
 
 // HasSourceClusterId returns a boolean if a field has been set.
 func (o *ListLinksResponseDataAllOf) HasSourceClusterId() bool {
-	if o != nil && o.SourceClusterId != nil {
+	if o != nil && o.SourceClusterId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSourceClusterId gets a reference to the given string and assigns it to the SourceClusterId field.
+// SetSourceClusterId gets a reference to the given NullableString and assigns it to the SourceClusterId field.
 func (o *ListLinksResponseDataAllOf) SetSourceClusterId(v string) {
-	o.SourceClusterId = &v
+	o.SourceClusterId.Set(&v)
+}
+
+// SetSourceClusterIdNil sets the value for SourceClusterId to be an explicit nil
+func (o *ListLinksResponseDataAllOf) SetSourceClusterIdNil() {
+	o.SourceClusterId.Set(nil)
+}
+
+// UnsetSourceClusterId ensures that no value is present for SourceClusterId, not even an explicit nil
+func (o *ListLinksResponseDataAllOf) UnsetSourceClusterId() {
+	o.SourceClusterId.Unset()
+}
+
+// GetDestinationClusterId returns the DestinationClusterId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ListLinksResponseDataAllOf) GetDestinationClusterId() string {
+	if o == nil || o.DestinationClusterId.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.DestinationClusterId.Get()
+}
+
+// GetDestinationClusterIdOk returns a tuple with the DestinationClusterId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ListLinksResponseDataAllOf) GetDestinationClusterIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DestinationClusterId.Get(), o.DestinationClusterId.IsSet()
+}
+
+// HasDestinationClusterId returns a boolean if a field has been set.
+func (o *ListLinksResponseDataAllOf) HasDestinationClusterId() bool {
+	if o != nil && o.DestinationClusterId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDestinationClusterId gets a reference to the given NullableString and assigns it to the DestinationClusterId field.
+func (o *ListLinksResponseDataAllOf) SetDestinationClusterId(v string) {
+	o.DestinationClusterId.Set(&v)
+}
+
+// SetDestinationClusterIdNil sets the value for DestinationClusterId to be an explicit nil
+func (o *ListLinksResponseDataAllOf) SetDestinationClusterIdNil() {
+	o.DestinationClusterId.Set(nil)
+}
+
+// UnsetDestinationClusterId ensures that no value is present for DestinationClusterId, not even an explicit nil
+func (o *ListLinksResponseDataAllOf) UnsetDestinationClusterId() {
+	o.DestinationClusterId.Unset()
 }
 
 // GetLinkName returns the LinkName field value
@@ -175,6 +230,7 @@ func (o *ListLinksResponseDataAllOf) SetTopicsNames(v []string) {
 // Redact resets all sensitive fields to their zero value.
 func (o *ListLinksResponseDataAllOf) Redact() {
 	o.recurseRedact(o.SourceClusterId)
+	o.recurseRedact(o.DestinationClusterId)
 	o.recurseRedact(&o.LinkName)
 	o.recurseRedact(&o.LinkId)
 	o.recurseRedact(o.TopicsNames)
@@ -212,8 +268,11 @@ func (o ListLinksResponseDataAllOf) zeroField(v interface{}) {
 
 func (o ListLinksResponseDataAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.SourceClusterId != nil {
-		toSerialize["source_cluster_id"] = o.SourceClusterId
+	if o.SourceClusterId.IsSet() {
+		toSerialize["source_cluster_id"] = o.SourceClusterId.Get()
+	}
+	if o.DestinationClusterId.IsSet() {
+		toSerialize["destination_cluster_id"] = o.DestinationClusterId.Get()
 	}
 	if true {
 		toSerialize["link_name"] = o.LinkName

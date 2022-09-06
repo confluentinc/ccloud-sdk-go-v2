@@ -31,7 +31,7 @@ import (
 func main() {
     clusterId := "cluster-1" // string | The Kafka cluster ID.
     topicName := "topic-1" // string | The topic name.
-    produceRequest := *openapiclient.NewProduceRequest() // ProduceRequest | A single record to be produced to Kafka. To produce multiple records on the same connection, simply concatenate all the records, e.g.: {\"partition_id\":1}{\"partition_id\":2}. Delivery reports will be concatenated on the same order as the records are sent. See examples for the options available. (optional)
+    produceRequest := *openapiclient.NewProduceRequest() // ProduceRequest | A single record to be produced to Kafka. To produce multiple records on the same connection, simply concatenate all the records, e.g.: {\"partition_id\": \"1\", \"value\": {\"type\": \"JSON\", \"data\": \"Bonjour le monde!\"}} {\"partition_id\": \"10\", \"value\": {\"type\": \"JSON\", \"data\": \"Bonjour le monde, de nouveau!\"}} Delivery reports will be concatenated in the same order as the records are sent. See examples for the options available. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **produceRequest** | [**ProduceRequest**](ProduceRequest.md) | A single record to be produced to Kafka. To produce multiple records on the same connection, simply concatenate all the records, e.g.: {\&quot;partition_id\&quot;:1}{\&quot;partition_id\&quot;:2}. Delivery reports will be concatenated on the same order as the records are sent. See examples for the options available. | 
+ **produceRequest** | [**ProduceRequest**](ProduceRequest.md) | A single record to be produced to Kafka. To produce multiple records on the same connection, simply concatenate all the records, e.g.: {\&quot;partition_id\&quot;: \&quot;1\&quot;, \&quot;value\&quot;: {\&quot;type\&quot;: \&quot;JSON\&quot;, \&quot;data\&quot;: \&quot;Bonjour le monde!\&quot;}} {\&quot;partition_id\&quot;: \&quot;10\&quot;, \&quot;value\&quot;: {\&quot;type\&quot;: \&quot;JSON\&quot;, \&quot;data\&quot;: \&quot;Bonjour le monde, de nouveau!\&quot;}} Delivery reports will be concatenated in the same order as the records are sent. See examples for the options available. | 
 
 ### Return type
 
