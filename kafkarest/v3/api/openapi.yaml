@@ -29,8 +29,7 @@ tags:
   name: Topic (v3)
 - description: '[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)'
   name: Cluster Linking (v3)
-- description: '[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-    [![Available in dedicated clusters](https://img.shields.io/badge/-Available%20in%20dedicated%20clusters-%23bc8540)](#section/Versioning/API-Lifecycle-Policy)'
+- description: '[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)'
   name: Records (v3)
 paths:
   /kafka/v3/clusters/{cluster_id}:
@@ -2776,7 +2775,7 @@ paths:
   /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lag-summary:
     get:
       description: |-
-        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Available in dedicated clusters only](https://img.shields.io/badge/-Available%20in%20dedicated%20clusters%20only-%23bc8540)](https://docs.confluent.io/cloud/current/clusters/cluster-types.html#dedicated-cluster)
 
         Returns the max and total lag of the consumers belonging to the
         specified consumer group.
@@ -3002,7 +3001,7 @@ paths:
   /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lags:
     get:
       description: |-
-        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Available in dedicated clusters only](https://img.shields.io/badge/-Available%20in%20dedicated%20clusters%20only-%23bc8540)](https://docs.confluent.io/cloud/current/clusters/cluster-types.html#dedicated-cluster)
 
         Returns a list of consumer lags of the consumers belonging to the
         specified consumer group.
@@ -3258,7 +3257,7 @@ paths:
   /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lags/{topic_name}/partitions/{partition_id}:
     get:
       description: |-
-        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Available in dedicated clusters only](https://img.shields.io/badge/-Available%20in%20dedicated%20clusters%20only-%23bc8540)](https://docs.confluent.io/cloud/current/clusters/cluster-types.html#dedicated-cluster)
 
         Returns the consumer lag on a partition with the given `partition_id`.
       operationId: getKafkaConsumerLag
@@ -6681,8 +6680,10 @@ paths:
                     self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/CIL-69l7S1CwoVNAhoQLug/links/my-new-link-1
                     resource_name: null
                   source_cluster_id: src-cluster-id
+                  destination_cluster_id: null
                   link_name: my-new-link-2
                   link_id: 7840644d-f7d8-4844-a577-a10ef3df31df
+                  cluster_link_id: eEBkTffYSESld6EO898x3w
                   topic_names:
                   - topic-sb-1
                   - topic-sb-2
@@ -6691,11 +6692,23 @@ paths:
                     self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/CIL-69l7S1CwoVNAhoQLug/links/my-new-link-2
                     resource_name: null
                   source_cluster_id: src-cluster-id
+                  destination_cluster_id: null
                   link_name: my-new-link-2
                   link_id: abced-f7d8-4844-a577-abcdefghijklmnp
+                  cluster_link_id: 90kRbvhHS9Kx9lxOUYoGeA
                   topic_names:
                   - topic-db-1
                   - topic-db-2
+                - kind: KafkaLinkData
+                  metadata:
+                    self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/CIL-69l7S1CwoVNAhoQLug/links/my-new-link-3
+                    resource_name: null
+                  source_cluster_id: null
+                  destination_cluster_id: dest-cluster-id
+                  link_name: my-new-link-3
+                  link_id: 9cd1711e-a4ef-4390-a35e-dfd758d97a82
+                  cluster_link_id: nNFxHqTvQ5CjXt_XWNl6gg
+                  topic_names: null
               schema:
                 $ref: '#/components/schemas/ListLinksResponseDataList'
           description: A list of link names and properties
@@ -7334,17 +7347,35 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                kind: KafkaLinkData
-                metadata:
-                  self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/Fds7TcT9TTqEXsoRLEKMcQ/links/my-new-link-1
-                  resource_name: null
-                source_cluster_id: src-cluster-id
-                link_name: my-new-link-1
-                link_id: 7840644d-f7d8-4844-a577-a10ef3df31df
-                topic_names:
-                - topic-db-1
-                - topic-db-2
+              examples:
+                link_at_destination_cluster:
+                  description: Link at destination cluster
+                  value:
+                    kind: KafkaLinkData
+                    metadata:
+                      self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/Fds7TcT9TTqEXsoRLEKMcQ/links/my-new-link-1
+                    resource_name: null
+                    source_cluster_id: src-cluster-id
+                    destination_cluster_id: null
+                    link_name: my-new-link-1
+                    link_id: 7840644d-f7d8-4844-a577-a10ef3df31df
+                    cluster_link_id: eEBkTffYSESld6EO898x3w
+                    topic_names:
+                    - topic-db-1
+                    - topic-db-2
+                link_at_source_cluster:
+                  description: Link at source cluster
+                  value:
+                    kind: KafkaLinkData
+                    metadata:
+                      self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/Fds7TcT9TTqEXsoRLEKMcQ/links/my-new-link-1
+                    resource_name: null
+                    source_cluster_id: null
+                    destination_cluster_id: dst-cluster-id
+                    link_name: my-new-link-1
+                    link_id: 7840644d-f7d8-4844-a577-a10ef3df31df
+                    cluster_link_id: eEBkTffYSESld6EO898x3w
+                    topic_names: null
               schema:
                 $ref: '#/components/schemas/ListLinksResponseData'
           description: Single link name and properties
@@ -8914,7 +8945,7 @@ paths:
         style: simple
       - description: The status of the mirror topic. If not specified, all mirror
           topics will be returned.
-        example: active
+        example: ACTIVE
         explode: true
         in: query
         name: mirror_status
@@ -9372,7 +9403,7 @@ paths:
         style: simple
       - description: The status of the mirror topic. If not specified, all mirror
           topics will be returned.
-        example: active
+        example: ACTIVE
         explode: true
         in: query
         name: mirror_status
@@ -10863,7 +10894,7 @@ paths:
   /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/records:
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Available in dedicated clusters](https://img.shields.io/badge/-Available%20in%20dedicated%20clusters-%23bc8540)](#section/Versioning/API-Lifecycle-Policy)
+        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
         Produce records to the given topic, returning delivery reports for each
         record produced. This API can be used in streaming mode by setting "Transfer-Encoding:
@@ -11296,7 +11327,7 @@ components:
     MirrorTopicStatus:
       description: The status of the mirror topic. If not specified, all mirror topics
         will be returned.
-      example: active
+      example: ACTIVE
       explode: true
       in: query
       name: mirror_status
@@ -11389,30 +11420,12 @@ components:
                   value: compact
                 - name: compression.type
                   value: gzip
-            explicit_replicas_assignments:
-              value:
-                topic_name: topic-Y
-                replicas_assignments:
-                - partition_id: 0
-                  broker_ids:
-                  - 1
-                  - 2
-                - partition_id: 1
-                  broker_ids:
-                  - 2
-                  - 3
-                - partition_id: 2
-                  broker_ids:
-                  - 3
-                  - 1
-                configs:
-                - name: cleanup.policy
-                  value: compact
-                - name: compression.type
-                  value: gzip
           schema:
             $ref: '#/components/schemas/CreateTopicRequestData'
-      description: The topic creation request.
+      description: The topic creation request. Note that Confluent Cloud allows only
+        specific replication factor values. Because of that the replication factor
+        field should either be omitted or it should use one of the allowed values
+        (see https://docs.confluent.io/cloud/current/client-apps/optimizing/durability.html).
     ProduceRequest:
       content:
         application/json:
@@ -11442,8 +11455,10 @@ components:
           schema:
             $ref: '#/components/schemas/ProduceRequest'
       description: 'A single record to be produced to Kafka. To produce multiple records
-        on the same connection, simply concatenate all the records, e.g.: {"partition_id":1}{"partition_id":2}.
-        Delivery reports will be concatenated on the same order as the records are
+        on the same connection, simply concatenate all the records, e.g.: {"partition_id":
+        "1", "value": {"type": "JSON", "data": "Bonjour le monde!"}} {"partition_id":
+        "10", "value": {"type": "JSON", "data": "Bonjour le monde, de nouveau!"}}
+        Delivery reports will be concatenated in the same order as the records are
         sent. See examples for the options available.'
     UpdateBrokerConfigRequest:
       content:
@@ -11472,13 +11487,40 @@ components:
     CreateLinkRequest:
       content:
         application/json:
-          example:
-            source_cluster_id: cluster-1
-            configs:
-            - name: acl.sync.enable
-              value: "false"
-            - name: consumer.offset.sync.ms
-              value: "30000"
+          examples:
+            destination_initiated_link:
+              description: Create a destination initiated cluster link
+              value:
+                source_cluster_id: cluster-1
+                configs:
+                - name: bootstrap.servers
+                  value: cluster-1-bootstrap-server
+                - name: acl.sync.enable
+                  value: "false"
+                - name: consumer.offset.sync.ms
+                  value: "30000"
+            source_initiated_link_at_source_cluster:
+              description: Create a source initiated cluster link at source cluster
+              value:
+                destination_cluster_id: cluster-2
+                configs:
+                - name: boostrap.servers
+                  value: cluster-2-bootstrap-server
+                - name: link.mode
+                  value: SOURCE
+            source_initiated_link_at_destination_cluster:
+              description: Create a source initiated cluster link at destination cluster
+              value:
+                source_cluster_id: cluster-1
+                configs:
+                - name: boostrap.servers
+                  value: cluster-1-bootstrap-server
+                - name: link.mode
+                  value: DESTINATION
+                - name: connection.mode
+                  value: INBOUND
+                - name: acl.sync.enable
+                  value: "false"
           schema:
             $ref: '#/components/schemas/CreateLinkRequestData'
       description: Create a cluster link
@@ -11504,15 +11546,30 @@ components:
     CreateMirrorTopicRequest:
       content:
         application/json:
-          example:
-            source_topic_name: topic-1
-            configs:
-            - name: unclean.leader.election.enable
-              value: "true"
-            replication_factor: 1
+          examples:
+            generic_example:
+              description: Generic example of creating a mirror topic
+              value:
+                source_topic_name: topic-1
+                configs:
+                - name: unclean.leader.election.enable
+                  value: "true"
+                replication_factor: 3
+            example_with_mirror_topic_name:
+              description: Example using optional mirror_topic_name flag
+              value:
+                source_topic_name: topic-1
+                mirror_topic_name: link1_topic-1
+                configs:
+                - name: unclean.leader.election.enable
+                  value: "true"
+                replication_factor: 3
           schema:
             $ref: '#/components/schemas/CreateMirrorTopicRequestData'
-      description: Name and configs of the topics mirroring from and mirroring to
+      description: Name and configs of the topics mirroring from and mirroring to.
+        Note that Confluent Cloud allows only specific replication factor values.
+        Because of that the replication factor field should either be omitted or it
+        should use one of the allowed values (see https://docs.confluent.io/cloud/current/client-apps/optimizing/durability.html).
     AlterMirrorsRequest:
       content:
         application/json:
@@ -13344,8 +13401,10 @@ components:
                 self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/CIL-69l7S1CwoVNAhoQLug/links/my-new-link-1
                 resource_name: null
               source_cluster_id: src-cluster-id
+              destination_cluster_id: null
               link_name: my-new-link-2
               link_id: 7840644d-f7d8-4844-a577-a10ef3df31df
+              cluster_link_id: eEBkTffYSESld6EO898x3w
               topic_names:
               - topic-sb-1
               - topic-sb-2
@@ -13354,28 +13413,58 @@ components:
                 self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/CIL-69l7S1CwoVNAhoQLug/links/my-new-link-2
                 resource_name: null
               source_cluster_id: src-cluster-id
+              destination_cluster_id: null
               link_name: my-new-link-2
               link_id: abced-f7d8-4844-a577-abcdefghijklmnp
+              cluster_link_id: 90kRbvhHS9Kx9lxOUYoGeA
               topic_names:
               - topic-db-1
               - topic-db-2
+            - kind: KafkaLinkData
+              metadata:
+                self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/CIL-69l7S1CwoVNAhoQLug/links/my-new-link-3
+                resource_name: null
+              source_cluster_id: null
+              destination_cluster_id: dest-cluster-id
+              link_name: my-new-link-3
+              link_id: 9cd1711e-a4ef-4390-a35e-dfd758d97a82
+              cluster_link_id: nNFxHqTvQ5CjXt_XWNl6gg
+              topic_names: null
           schema:
             $ref: '#/components/schemas/ListLinksResponseDataList'
       description: A list of link names and properties
     GetLinkResponse:
       content:
         application/json:
-          example:
-            kind: KafkaLinkData
-            metadata:
-              self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/Fds7TcT9TTqEXsoRLEKMcQ/links/my-new-link-1
-              resource_name: null
-            source_cluster_id: src-cluster-id
-            link_name: my-new-link-1
-            link_id: 7840644d-f7d8-4844-a577-a10ef3df31df
-            topic_names:
-            - topic-db-1
-            - topic-db-2
+          examples:
+            link_at_destination_cluster:
+              description: Link at destination cluster
+              value:
+                kind: KafkaLinkData
+                metadata:
+                  self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/Fds7TcT9TTqEXsoRLEKMcQ/links/my-new-link-1
+                resource_name: null
+                source_cluster_id: src-cluster-id
+                destination_cluster_id: null
+                link_name: my-new-link-1
+                link_id: 7840644d-f7d8-4844-a577-a10ef3df31df
+                cluster_link_id: eEBkTffYSESld6EO898x3w
+                topic_names:
+                - topic-db-1
+                - topic-db-2
+            link_at_source_cluster:
+              description: Link at source cluster
+              value:
+                kind: KafkaLinkData
+                metadata:
+                  self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/Fds7TcT9TTqEXsoRLEKMcQ/links/my-new-link-1
+                resource_name: null
+                source_cluster_id: null
+                destination_cluster_id: dst-cluster-id
+                link_name: my-new-link-1
+                link_id: 7840644d-f7d8-4844-a577-a10ef3df31df
+                cluster_link_id: eEBkTffYSESld6EO898x3w
+                topic_names: null
           schema:
             $ref: '#/components/schemas/ListLinksResponseData'
       description: Single link name and properties
@@ -13857,15 +13946,6 @@ components:
           value: value
         replication_factor: 6
         topic_name: topic_name
-        replicas_assignments:
-        - partition_id: 1
-          broker_ids:
-          - 5
-          - 5
-        - partition_id: 1
-          broker_ids:
-          - 5
-          - 5
         partitions_count: 0
       properties:
         topic_name:
@@ -13874,10 +13954,6 @@ components:
           type: integer
         replication_factor:
           type: integer
-        replicas_assignments:
-          items:
-            $ref: '#/components/schemas/CreateTopicRequestData_replicas_assignments'
-          type: array
         configs:
           items:
             $ref: '#/components/schemas/CreateTopicRequestData_configs'
@@ -14281,9 +14357,12 @@ components:
           value: value
         - name: name
           value: value
+        destination_cluster_id: destination_cluster_id
         source_cluster_id: source_cluster_id
       properties:
         source_cluster_id:
+          type: string
+        destination_cluster_id:
           type: string
         configs:
           items:
@@ -14324,8 +14403,11 @@ components:
           value: value
         source_topic_name: source_topic_name
         replication_factor: 0
+        mirror_topic_name: mirror_topic_name
       properties:
         source_topic_name:
+          type: string
+        mirror_topic_name:
           type: string
         replication_factor:
           type: integer
@@ -14726,23 +14808,6 @@ components:
           type: array
       required:
       - data
-      type: object
-    CreateTopicRequestData_replicas_assignments:
-      example:
-        partition_id: 1
-        broker_ids:
-        - 5
-        - 5
-      properties:
-        partition_id:
-          type: integer
-        broker_ids:
-          items:
-            type: integer
-          type: array
-      required:
-      - broker_ids
-      - partition_id
       type: object
     CreateTopicRequestData_configs:
       example:
@@ -15458,6 +15523,10 @@ components:
     ListLinksResponseData_allOf:
       properties:
         source_cluster_id:
+          nullable: true
+          type: string
+        destination_cluster_id:
+          nullable: true
           type: string
         link_name:
           type: string

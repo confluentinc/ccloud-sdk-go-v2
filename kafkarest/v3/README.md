@@ -207,7 +207,6 @@ Class | Method | HTTP request | Description
  - [CreateMirrorTopicRequestData](docs/CreateMirrorTopicRequestData.md)
  - [CreateTopicRequestData](docs/CreateTopicRequestData.md)
  - [CreateTopicRequestDataConfigs](docs/CreateTopicRequestDataConfigs.md)
- - [CreateTopicRequestDataReplicasAssignments](docs/CreateTopicRequestDataReplicasAssignments.md)
  - [Error](docs/Error.md)
  - [InlineResponse200](docs/InlineResponse200.md)
  - [ListLinkConfigsResponseData](docs/ListLinkConfigsResponseData.md)
