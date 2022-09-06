@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **SourceClusterId** | Pointer to **string** |  | [optional] 
+**DestinationClusterId** | Pointer to **string** |  | [optional] 
 **Configs** | Pointer to [**[]ConfigData**](ConfigData.md) |  | [optional] 
 
 ## Methods
@@ -50,6 +51,31 @@ SetSourceClusterId sets SourceClusterId field to given value.
 `func (o *CreateLinkRequestData) HasSourceClusterId() bool`
 
 HasSourceClusterId returns a boolean if a field has been set.
+
+### GetDestinationClusterId
+
+`func (o *CreateLinkRequestData) GetDestinationClusterId() string`
+
+GetDestinationClusterId returns the DestinationClusterId field if non-nil, zero value otherwise.
+
+### GetDestinationClusterIdOk
+
+`func (o *CreateLinkRequestData) GetDestinationClusterIdOk() (*string, bool)`
+
+GetDestinationClusterIdOk returns a tuple with the DestinationClusterId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDestinationClusterId
+
+`func (o *CreateLinkRequestData) SetDestinationClusterId(v string)`
+
+SetDestinationClusterId sets DestinationClusterId field to given value.
+
+### HasDestinationClusterId
+
+`func (o *CreateLinkRequestData) HasDestinationClusterId() bool`
+
+HasDestinationClusterId returns a boolean if a field has been set.
 
 ### GetConfigs
 

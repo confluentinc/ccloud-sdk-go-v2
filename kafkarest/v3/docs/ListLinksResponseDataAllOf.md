@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SourceClusterId** | Pointer to **string** |  | [optional] 
+**SourceClusterId** | Pointer to **NullableString** |  | [optional] 
+**DestinationClusterId** | Pointer to **NullableString** |  | [optional] 
 **LinkName** | **string** |  | 
 **LinkId** | **string** |  | 
 **TopicsNames** | Pointer to **[]string** |  | [optional] 
@@ -53,6 +54,51 @@ SetSourceClusterId sets SourceClusterId field to given value.
 
 HasSourceClusterId returns a boolean if a field has been set.
 
+### SetSourceClusterIdNil
+
+`func (o *ListLinksResponseDataAllOf) SetSourceClusterIdNil(b bool)`
+
+ SetSourceClusterIdNil sets the value for SourceClusterId to be an explicit nil
+
+### UnsetSourceClusterId
+`func (o *ListLinksResponseDataAllOf) UnsetSourceClusterId()`
+
+UnsetSourceClusterId ensures that no value is present for SourceClusterId, not even an explicit nil
+### GetDestinationClusterId
+
+`func (o *ListLinksResponseDataAllOf) GetDestinationClusterId() string`
+
+GetDestinationClusterId returns the DestinationClusterId field if non-nil, zero value otherwise.
+
+### GetDestinationClusterIdOk
+
+`func (o *ListLinksResponseDataAllOf) GetDestinationClusterIdOk() (*string, bool)`
+
+GetDestinationClusterIdOk returns a tuple with the DestinationClusterId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDestinationClusterId
+
+`func (o *ListLinksResponseDataAllOf) SetDestinationClusterId(v string)`
+
+SetDestinationClusterId sets DestinationClusterId field to given value.
+
+### HasDestinationClusterId
+
+`func (o *ListLinksResponseDataAllOf) HasDestinationClusterId() bool`
+
+HasDestinationClusterId returns a boolean if a field has been set.
+
+### SetDestinationClusterIdNil
+
+`func (o *ListLinksResponseDataAllOf) SetDestinationClusterIdNil(b bool)`
+
+ SetDestinationClusterIdNil sets the value for DestinationClusterId to be an explicit nil
+
+### UnsetDestinationClusterId
+`func (o *ListLinksResponseDataAllOf) UnsetDestinationClusterId()`
+
+UnsetDestinationClusterId ensures that no value is present for DestinationClusterId, not even an explicit nil
 ### GetLinkName
 
 `func (o *ListLinksResponseDataAllOf) GetLinkName() string`

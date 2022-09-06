@@ -35,11 +35,10 @@ import (
 
 // CreateTopicRequestData struct for CreateTopicRequestData
 type CreateTopicRequestData struct {
-	TopicName           string                                       `json:"topic_name"`
-	PartitionsCount     *int32                                       `json:"partitions_count,omitempty"`
-	ReplicationFactor   *int32                                       `json:"replication_factor,omitempty"`
-	ReplicasAssignments *[]CreateTopicRequestDataReplicasAssignments `json:"replicas_assignments,omitempty"`
-	Configs             *[]CreateTopicRequestDataConfigs             `json:"configs,omitempty"`
+	TopicName         string                           `json:"topic_name"`
+	PartitionsCount   *int32                           `json:"partitions_count,omitempty"`
+	ReplicationFactor *int32                           `json:"replication_factor,omitempty"`
+	Configs           *[]CreateTopicRequestDataConfigs `json:"configs,omitempty"`
 }
 
 // NewCreateTopicRequestData instantiates a new CreateTopicRequestData object
@@ -148,38 +147,6 @@ func (o *CreateTopicRequestData) SetReplicationFactor(v int32) {
 	o.ReplicationFactor = &v
 }
 
-// GetReplicasAssignments returns the ReplicasAssignments field value if set, zero value otherwise.
-func (o *CreateTopicRequestData) GetReplicasAssignments() []CreateTopicRequestDataReplicasAssignments {
-	if o == nil || o.ReplicasAssignments == nil {
-		var ret []CreateTopicRequestDataReplicasAssignments
-		return ret
-	}
-	return *o.ReplicasAssignments
-}
-
-// GetReplicasAssignmentsOk returns a tuple with the ReplicasAssignments field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateTopicRequestData) GetReplicasAssignmentsOk() (*[]CreateTopicRequestDataReplicasAssignments, bool) {
-	if o == nil || o.ReplicasAssignments == nil {
-		return nil, false
-	}
-	return o.ReplicasAssignments, true
-}
-
-// HasReplicasAssignments returns a boolean if a field has been set.
-func (o *CreateTopicRequestData) HasReplicasAssignments() bool {
-	if o != nil && o.ReplicasAssignments != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetReplicasAssignments gets a reference to the given []CreateTopicRequestDataReplicasAssignments and assigns it to the ReplicasAssignments field.
-func (o *CreateTopicRequestData) SetReplicasAssignments(v []CreateTopicRequestDataReplicasAssignments) {
-	o.ReplicasAssignments = &v
-}
-
 // GetConfigs returns the Configs field value if set, zero value otherwise.
 func (o *CreateTopicRequestData) GetConfigs() []CreateTopicRequestDataConfigs {
 	if o == nil || o.Configs == nil {
@@ -217,7 +184,6 @@ func (o *CreateTopicRequestData) Redact() {
 	o.recurseRedact(&o.TopicName)
 	o.recurseRedact(o.PartitionsCount)
 	o.recurseRedact(o.ReplicationFactor)
-	o.recurseRedact(o.ReplicasAssignments)
 	o.recurseRedact(o.Configs)
 }
 
@@ -261,9 +227,6 @@ func (o CreateTopicRequestData) MarshalJSON() ([]byte, error) {
 	}
 	if o.ReplicationFactor != nil {
 		toSerialize["replication_factor"] = o.ReplicationFactor
-	}
-	if o.ReplicasAssignments != nil {
-		toSerialize["replicas_assignments"] = o.ReplicasAssignments
 	}
 	if o.Configs != nil {
 		toSerialize["configs"] = o.Configs

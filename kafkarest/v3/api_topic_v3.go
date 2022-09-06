@@ -121,7 +121,7 @@ type ApiCreateKafkaTopicRequest struct {
 	createTopicRequestData *CreateTopicRequestData
 }
 
-// The topic creation request.
+// The topic creation request. Note that Confluent Cloud allows only specific replication factor values. Because of that the replication factor field should either be omitted or it should use one of the allowed values (see https://docs.confluent.io/cloud/current/client-apps/optimizing/durability.html).
 func (r ApiCreateKafkaTopicRequest) CreateTopicRequestData(createTopicRequestData CreateTopicRequestData) ApiCreateKafkaTopicRequest {
 	r.createTopicRequestData = &createTopicRequestData
 	return r

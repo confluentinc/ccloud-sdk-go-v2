@@ -35,8 +35,9 @@ import (
 
 // CreateLinkRequestData struct for CreateLinkRequestData
 type CreateLinkRequestData struct {
-	SourceClusterId *string       `json:"source_cluster_id,omitempty"`
-	Configs         *[]ConfigData `json:"configs,omitempty"`
+	SourceClusterId      *string       `json:"source_cluster_id,omitempty"`
+	DestinationClusterId *string       `json:"destination_cluster_id,omitempty"`
+	Configs              *[]ConfigData `json:"configs,omitempty"`
 }
 
 // NewCreateLinkRequestData instantiates a new CreateLinkRequestData object
@@ -88,6 +89,38 @@ func (o *CreateLinkRequestData) SetSourceClusterId(v string) {
 	o.SourceClusterId = &v
 }
 
+// GetDestinationClusterId returns the DestinationClusterId field value if set, zero value otherwise.
+func (o *CreateLinkRequestData) GetDestinationClusterId() string {
+	if o == nil || o.DestinationClusterId == nil {
+		var ret string
+		return ret
+	}
+	return *o.DestinationClusterId
+}
+
+// GetDestinationClusterIdOk returns a tuple with the DestinationClusterId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateLinkRequestData) GetDestinationClusterIdOk() (*string, bool) {
+	if o == nil || o.DestinationClusterId == nil {
+		return nil, false
+	}
+	return o.DestinationClusterId, true
+}
+
+// HasDestinationClusterId returns a boolean if a field has been set.
+func (o *CreateLinkRequestData) HasDestinationClusterId() bool {
+	if o != nil && o.DestinationClusterId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDestinationClusterId gets a reference to the given string and assigns it to the DestinationClusterId field.
+func (o *CreateLinkRequestData) SetDestinationClusterId(v string) {
+	o.DestinationClusterId = &v
+}
+
 // GetConfigs returns the Configs field value if set, zero value otherwise.
 func (o *CreateLinkRequestData) GetConfigs() []ConfigData {
 	if o == nil || o.Configs == nil {
@@ -123,6 +156,7 @@ func (o *CreateLinkRequestData) SetConfigs(v []ConfigData) {
 // Redact resets all sensitive fields to their zero value.
 func (o *CreateLinkRequestData) Redact() {
 	o.recurseRedact(o.SourceClusterId)
+	o.recurseRedact(o.DestinationClusterId)
 	o.recurseRedact(o.Configs)
 }
 
@@ -160,6 +194,9 @@ func (o CreateLinkRequestData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.SourceClusterId != nil {
 		toSerialize["source_cluster_id"] = o.SourceClusterId
+	}
+	if o.DestinationClusterId != nil {
+		toSerialize["destination_cluster_id"] = o.DestinationClusterId
 	}
 	if o.Configs != nil {
 		toSerialize["configs"] = o.Configs

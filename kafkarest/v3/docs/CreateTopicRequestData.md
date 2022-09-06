@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **TopicName** | **string** |  | 
 **PartitionsCount** | Pointer to **int32** |  | [optional] 
 **ReplicationFactor** | Pointer to **int32** |  | [optional] 
-**ReplicasAssignments** | Pointer to [**[]CreateTopicRequestDataReplicasAssignments**](CreateTopicRequestDataReplicasAssignments.md) |  | [optional] 
 **Configs** | Pointer to [**[]CreateTopicRequestDataConfigs**](CreateTopicRequestDataConfigs.md) |  | [optional] 
 
 ## Methods
@@ -98,31 +97,6 @@ SetReplicationFactor sets ReplicationFactor field to given value.
 `func (o *CreateTopicRequestData) HasReplicationFactor() bool`
 
 HasReplicationFactor returns a boolean if a field has been set.
-
-### GetReplicasAssignments
-
-`func (o *CreateTopicRequestData) GetReplicasAssignments() []CreateTopicRequestDataReplicasAssignments`
-
-GetReplicasAssignments returns the ReplicasAssignments field if non-nil, zero value otherwise.
-
-### GetReplicasAssignmentsOk
-
-`func (o *CreateTopicRequestData) GetReplicasAssignmentsOk() (*[]CreateTopicRequestDataReplicasAssignments, bool)`
-
-GetReplicasAssignmentsOk returns a tuple with the ReplicasAssignments field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetReplicasAssignments
-
-`func (o *CreateTopicRequestData) SetReplicasAssignments(v []CreateTopicRequestDataReplicasAssignments)`
-
-SetReplicasAssignments sets ReplicasAssignments field to given value.
-
-### HasReplicasAssignments
-
-`func (o *CreateTopicRequestData) HasReplicasAssignments() bool`
-
-HasReplicasAssignments returns a boolean if a field has been set.
 
 ### GetConfigs
 
