@@ -8,12 +8,13 @@ Name | Type | Description | Notes
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
-**ConsumerUserName** | Pointer to **string** | Name of the consumer | [optional] 
-**ConsumerOrganizationName** | Pointer to **string** | Consumer organization name | [optional] 
-**ProviderUserName** | Pointer to **string** | Name of the provider | [optional] 
-**Status** | Pointer to **string** | Status of share | [optional] 
-**InviteExpiresAt** | Pointer to **time.Time** | The date and time at which the invitation will expire. Only for invited shares | [optional] 
-**SharedResource** | Pointer to [**ObjectReference**](ObjectReference.md) | The shared_resource to which this belongs. | [optional] 
+**ProviderOrganizationName** | Pointer to **string** | Provider organization name | [optional] [readonly] 
+**ProviderUserName** | Pointer to **string** | Name or email of the provider user | [optional] [readonly] 
+**InviteExpiresAt** | Pointer to **time.Time** | The date and time at which the invitation will expire. Only for invited shares | [optional] [readonly] 
+**ConsumerOrganizationName** | Pointer to **string** | Consumer organization name. Deprecated | [optional] [readonly] 
+**ConsumerUserName** | Pointer to **string** | Name of the consumer. Deprecated | [optional] [readonly] 
+**ConsumerUser** | Pointer to [**ObjectReference**](ObjectReference.md) | The consumer user/invitee | [optional] [readonly] 
+**Status** | Pointer to [**CdxV1ConsumerShareStatus**](CdxV1ConsumerShareStatus.md) |  | [optional] 
 
 ## Methods
 
@@ -134,55 +135,30 @@ SetMetadata sets Metadata field to given value.
 
 HasMetadata returns a boolean if a field has been set.
 
-### GetConsumerUserName
+### GetProviderOrganizationName
 
-`func (o *CdxV1ConsumerShare) GetConsumerUserName() string`
+`func (o *CdxV1ConsumerShare) GetProviderOrganizationName() string`
 
-GetConsumerUserName returns the ConsumerUserName field if non-nil, zero value otherwise.
+GetProviderOrganizationName returns the ProviderOrganizationName field if non-nil, zero value otherwise.
 
-### GetConsumerUserNameOk
+### GetProviderOrganizationNameOk
 
-`func (o *CdxV1ConsumerShare) GetConsumerUserNameOk() (*string, bool)`
+`func (o *CdxV1ConsumerShare) GetProviderOrganizationNameOk() (*string, bool)`
 
-GetConsumerUserNameOk returns a tuple with the ConsumerUserName field if it's non-nil, zero value otherwise
+GetProviderOrganizationNameOk returns a tuple with the ProviderOrganizationName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetConsumerUserName
+### SetProviderOrganizationName
 
-`func (o *CdxV1ConsumerShare) SetConsumerUserName(v string)`
+`func (o *CdxV1ConsumerShare) SetProviderOrganizationName(v string)`
 
-SetConsumerUserName sets ConsumerUserName field to given value.
+SetProviderOrganizationName sets ProviderOrganizationName field to given value.
 
-### HasConsumerUserName
+### HasProviderOrganizationName
 
-`func (o *CdxV1ConsumerShare) HasConsumerUserName() bool`
+`func (o *CdxV1ConsumerShare) HasProviderOrganizationName() bool`
 
-HasConsumerUserName returns a boolean if a field has been set.
-
-### GetConsumerOrganizationName
-
-`func (o *CdxV1ConsumerShare) GetConsumerOrganizationName() string`
-
-GetConsumerOrganizationName returns the ConsumerOrganizationName field if non-nil, zero value otherwise.
-
-### GetConsumerOrganizationNameOk
-
-`func (o *CdxV1ConsumerShare) GetConsumerOrganizationNameOk() (*string, bool)`
-
-GetConsumerOrganizationNameOk returns a tuple with the ConsumerOrganizationName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetConsumerOrganizationName
-
-`func (o *CdxV1ConsumerShare) SetConsumerOrganizationName(v string)`
-
-SetConsumerOrganizationName sets ConsumerOrganizationName field to given value.
-
-### HasConsumerOrganizationName
-
-`func (o *CdxV1ConsumerShare) HasConsumerOrganizationName() bool`
-
-HasConsumerOrganizationName returns a boolean if a field has been set.
+HasProviderOrganizationName returns a boolean if a field has been set.
 
 ### GetProviderUserName
 
@@ -209,31 +185,6 @@ SetProviderUserName sets ProviderUserName field to given value.
 
 HasProviderUserName returns a boolean if a field has been set.
 
-### GetStatus
-
-`func (o *CdxV1ConsumerShare) GetStatus() string`
-
-GetStatus returns the Status field if non-nil, zero value otherwise.
-
-### GetStatusOk
-
-`func (o *CdxV1ConsumerShare) GetStatusOk() (*string, bool)`
-
-GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStatus
-
-`func (o *CdxV1ConsumerShare) SetStatus(v string)`
-
-SetStatus sets Status field to given value.
-
-### HasStatus
-
-`func (o *CdxV1ConsumerShare) HasStatus() bool`
-
-HasStatus returns a boolean if a field has been set.
-
 ### GetInviteExpiresAt
 
 `func (o *CdxV1ConsumerShare) GetInviteExpiresAt() time.Time`
@@ -259,30 +210,105 @@ SetInviteExpiresAt sets InviteExpiresAt field to given value.
 
 HasInviteExpiresAt returns a boolean if a field has been set.
 
-### GetSharedResource
+### GetConsumerOrganizationName
 
-`func (o *CdxV1ConsumerShare) GetSharedResource() ObjectReference`
+`func (o *CdxV1ConsumerShare) GetConsumerOrganizationName() string`
 
-GetSharedResource returns the SharedResource field if non-nil, zero value otherwise.
+GetConsumerOrganizationName returns the ConsumerOrganizationName field if non-nil, zero value otherwise.
 
-### GetSharedResourceOk
+### GetConsumerOrganizationNameOk
 
-`func (o *CdxV1ConsumerShare) GetSharedResourceOk() (*ObjectReference, bool)`
+`func (o *CdxV1ConsumerShare) GetConsumerOrganizationNameOk() (*string, bool)`
 
-GetSharedResourceOk returns a tuple with the SharedResource field if it's non-nil, zero value otherwise
+GetConsumerOrganizationNameOk returns a tuple with the ConsumerOrganizationName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSharedResource
+### SetConsumerOrganizationName
 
-`func (o *CdxV1ConsumerShare) SetSharedResource(v ObjectReference)`
+`func (o *CdxV1ConsumerShare) SetConsumerOrganizationName(v string)`
 
-SetSharedResource sets SharedResource field to given value.
+SetConsumerOrganizationName sets ConsumerOrganizationName field to given value.
 
-### HasSharedResource
+### HasConsumerOrganizationName
 
-`func (o *CdxV1ConsumerShare) HasSharedResource() bool`
+`func (o *CdxV1ConsumerShare) HasConsumerOrganizationName() bool`
 
-HasSharedResource returns a boolean if a field has been set.
+HasConsumerOrganizationName returns a boolean if a field has been set.
+
+### GetConsumerUserName
+
+`func (o *CdxV1ConsumerShare) GetConsumerUserName() string`
+
+GetConsumerUserName returns the ConsumerUserName field if non-nil, zero value otherwise.
+
+### GetConsumerUserNameOk
+
+`func (o *CdxV1ConsumerShare) GetConsumerUserNameOk() (*string, bool)`
+
+GetConsumerUserNameOk returns a tuple with the ConsumerUserName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConsumerUserName
+
+`func (o *CdxV1ConsumerShare) SetConsumerUserName(v string)`
+
+SetConsumerUserName sets ConsumerUserName field to given value.
+
+### HasConsumerUserName
+
+`func (o *CdxV1ConsumerShare) HasConsumerUserName() bool`
+
+HasConsumerUserName returns a boolean if a field has been set.
+
+### GetConsumerUser
+
+`func (o *CdxV1ConsumerShare) GetConsumerUser() ObjectReference`
+
+GetConsumerUser returns the ConsumerUser field if non-nil, zero value otherwise.
+
+### GetConsumerUserOk
+
+`func (o *CdxV1ConsumerShare) GetConsumerUserOk() (*ObjectReference, bool)`
+
+GetConsumerUserOk returns a tuple with the ConsumerUser field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConsumerUser
+
+`func (o *CdxV1ConsumerShare) SetConsumerUser(v ObjectReference)`
+
+SetConsumerUser sets ConsumerUser field to given value.
+
+### HasConsumerUser
+
+`func (o *CdxV1ConsumerShare) HasConsumerUser() bool`
+
+HasConsumerUser returns a boolean if a field has been set.
+
+### GetStatus
+
+`func (o *CdxV1ConsumerShare) GetStatus() CdxV1ConsumerShareStatus`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *CdxV1ConsumerShare) GetStatusOk() (*CdxV1ConsumerShareStatus, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *CdxV1ConsumerShare) SetStatus(v CdxV1ConsumerShareStatus)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *CdxV1ConsumerShare) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

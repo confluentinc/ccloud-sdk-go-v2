@@ -30,18 +30,18 @@ import (
 	"fmt"
 )
 
-// CdxV1CreateShareRequestConsumerRestrictionOneOf - struct for CdxV1CreateShareRequestConsumerRestrictionOneOf
-type CdxV1CreateShareRequestConsumerRestrictionOneOf struct {
+// CdxV1CreateProviderShareRequestConsumerRestrictionOneOf - struct for CdxV1CreateProviderShareRequestConsumerRestrictionOneOf
+type CdxV1CreateProviderShareRequestConsumerRestrictionOneOf struct {
 	CdxV1EmailConsumerRestriction *CdxV1EmailConsumerRestriction
 }
 
-// CdxV1EmailConsumerRestrictionAsCdxV1CreateShareRequestConsumerRestrictionOneOf is a convenience function that returns CdxV1EmailConsumerRestriction wrapped in CdxV1CreateShareRequestConsumerRestrictionOneOf
-func CdxV1EmailConsumerRestrictionAsCdxV1CreateShareRequestConsumerRestrictionOneOf(v *CdxV1EmailConsumerRestriction) CdxV1CreateShareRequestConsumerRestrictionOneOf {
-	return CdxV1CreateShareRequestConsumerRestrictionOneOf{CdxV1EmailConsumerRestriction: v}
+// CdxV1EmailConsumerRestrictionAsCdxV1CreateProviderShareRequestConsumerRestrictionOneOf is a convenience function that returns CdxV1EmailConsumerRestriction wrapped in CdxV1CreateProviderShareRequestConsumerRestrictionOneOf
+func CdxV1EmailConsumerRestrictionAsCdxV1CreateProviderShareRequestConsumerRestrictionOneOf(v *CdxV1EmailConsumerRestriction) CdxV1CreateProviderShareRequestConsumerRestrictionOneOf {
+	return CdxV1CreateProviderShareRequestConsumerRestrictionOneOf{CdxV1EmailConsumerRestriction: v}
 }
 
 // Unmarshal JSON data into one of the pointers in the struct
-func (dst *CdxV1CreateShareRequestConsumerRestrictionOneOf) UnmarshalJSON(data []byte) error {
+func (dst *CdxV1CreateProviderShareRequestConsumerRestrictionOneOf) UnmarshalJSON(data []byte) error {
 	var err error
 	// use discriminator value to speed up the lookup
 	var jsonDict map[string]interface{}
@@ -58,7 +58,7 @@ func (dst *CdxV1CreateShareRequestConsumerRestrictionOneOf) UnmarshalJSON(data [
 			return nil // data stored in dst.CdxV1EmailConsumerRestriction, return on the first match
 		} else {
 			dst.CdxV1EmailConsumerRestriction = nil
-			return fmt.Errorf("Failed to unmarshal CdxV1CreateShareRequestConsumerRestrictionOneOf as CdxV1EmailConsumerRestriction: %s", err.Error())
+			return fmt.Errorf("Failed to unmarshal CdxV1CreateProviderShareRequestConsumerRestrictionOneOf as CdxV1EmailConsumerRestriction: %s", err.Error())
 		}
 	}
 
@@ -70,7 +70,7 @@ func (dst *CdxV1CreateShareRequestConsumerRestrictionOneOf) UnmarshalJSON(data [
 			return nil // data stored in dst.CdxV1EmailConsumerRestriction, return on the first match
 		} else {
 			dst.CdxV1EmailConsumerRestriction = nil
-			return fmt.Errorf("Failed to unmarshal CdxV1CreateShareRequestConsumerRestrictionOneOf as CdxV1EmailConsumerRestriction: %s", err.Error())
+			return fmt.Errorf("Failed to unmarshal CdxV1CreateProviderShareRequestConsumerRestrictionOneOf as CdxV1EmailConsumerRestriction: %s", err.Error())
 		}
 	}
 
@@ -78,7 +78,7 @@ func (dst *CdxV1CreateShareRequestConsumerRestrictionOneOf) UnmarshalJSON(data [
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
-func (src CdxV1CreateShareRequestConsumerRestrictionOneOf) MarshalJSON() ([]byte, error) {
+func (src CdxV1CreateProviderShareRequestConsumerRestrictionOneOf) MarshalJSON() ([]byte, error) {
 	if src.CdxV1EmailConsumerRestriction != nil {
 		return json.Marshal(&src.CdxV1EmailConsumerRestriction)
 	}
@@ -87,7 +87,7 @@ func (src CdxV1CreateShareRequestConsumerRestrictionOneOf) MarshalJSON() ([]byte
 }
 
 // Get the actual instance
-func (obj *CdxV1CreateShareRequestConsumerRestrictionOneOf) GetActualInstance() interface{} {
+func (obj *CdxV1CreateProviderShareRequestConsumerRestrictionOneOf) GetActualInstance() interface{} {
 	if obj.CdxV1EmailConsumerRestriction != nil {
 		return obj.CdxV1EmailConsumerRestriction
 	}
@@ -96,38 +96,38 @@ func (obj *CdxV1CreateShareRequestConsumerRestrictionOneOf) GetActualInstance() 
 	return nil
 }
 
-type NullableCdxV1CreateShareRequestConsumerRestrictionOneOf struct {
-	value *CdxV1CreateShareRequestConsumerRestrictionOneOf
+type NullableCdxV1CreateProviderShareRequestConsumerRestrictionOneOf struct {
+	value *CdxV1CreateProviderShareRequestConsumerRestrictionOneOf
 	isSet bool
 }
 
-func (v NullableCdxV1CreateShareRequestConsumerRestrictionOneOf) Get() *CdxV1CreateShareRequestConsumerRestrictionOneOf {
+func (v NullableCdxV1CreateProviderShareRequestConsumerRestrictionOneOf) Get() *CdxV1CreateProviderShareRequestConsumerRestrictionOneOf {
 	return v.value
 }
 
-func (v *NullableCdxV1CreateShareRequestConsumerRestrictionOneOf) Set(val *CdxV1CreateShareRequestConsumerRestrictionOneOf) {
+func (v *NullableCdxV1CreateProviderShareRequestConsumerRestrictionOneOf) Set(val *CdxV1CreateProviderShareRequestConsumerRestrictionOneOf) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCdxV1CreateShareRequestConsumerRestrictionOneOf) IsSet() bool {
+func (v NullableCdxV1CreateProviderShareRequestConsumerRestrictionOneOf) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCdxV1CreateShareRequestConsumerRestrictionOneOf) Unset() {
+func (v *NullableCdxV1CreateProviderShareRequestConsumerRestrictionOneOf) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCdxV1CreateShareRequestConsumerRestrictionOneOf(val *CdxV1CreateShareRequestConsumerRestrictionOneOf) *NullableCdxV1CreateShareRequestConsumerRestrictionOneOf {
-	return &NullableCdxV1CreateShareRequestConsumerRestrictionOneOf{value: val, isSet: true}
+func NewNullableCdxV1CreateProviderShareRequestConsumerRestrictionOneOf(val *CdxV1CreateProviderShareRequestConsumerRestrictionOneOf) *NullableCdxV1CreateProviderShareRequestConsumerRestrictionOneOf {
+	return &NullableCdxV1CreateProviderShareRequestConsumerRestrictionOneOf{value: val, isSet: true}
 }
 
-func (v NullableCdxV1CreateShareRequestConsumerRestrictionOneOf) MarshalJSON() ([]byte, error) {
+func (v NullableCdxV1CreateProviderShareRequestConsumerRestrictionOneOf) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCdxV1CreateShareRequestConsumerRestrictionOneOf) UnmarshalJSON(src []byte) error {
+func (v *NullableCdxV1CreateProviderShareRequestConsumerRestrictionOneOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

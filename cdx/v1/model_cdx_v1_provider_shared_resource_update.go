@@ -48,22 +48,22 @@ type CdxV1ProviderSharedResourceUpdate struct {
 	Description *string `json:"description,omitempty"`
 	// list of labels
 	Labels *[]string `json:"labels,omitempty"`
-	// List of example data in JSON format
+	// List of example data in JSON format. This field is work in progress and subject to changes.
 	Examples *[]string `json:"examples,omitempty"`
-	// List of schemas in JSON format
+	// List of schemas in JSON format. This field is work in progress and subject to changes.
 	Schemas *[]string `json:"schemas,omitempty"`
-	// Organization to which the shared resource belongs
-	OrganizationName *string `json:"organization_name,omitempty"`
-	// Details of the organization to which the shared resource belongs
-	OrganizationDetails *string `json:"organization_details,omitempty"`
+	// Shared resource's organization description
+	OrganizationDescription *string `json:"organization_description,omitempty"`
 	// Email of contact person from the organization
 	OrganizationContact *string `json:"organization_contact,omitempty"`
-	// The environment name of the shared resource
-	EnvironmentName *string `json:"environment_name,omitempty"`
-	// The cluster display name of the shared resource
-	ClusterName *string `json:"cluster_name,omitempty"`
 	// Resource logo url
 	LogoUrl *string `json:"logo_url,omitempty"`
+	// Organization to which the shared resource belongs. Deprecated
+	OrganizationName interface{} `json:"organization_name,omitempty"`
+	// The environment name of the shared resource. Deprecated
+	EnvironmentName *string `json:"environment_name,omitempty"`
+	// The cluster display name of the shared resource. Deprecated
+	ClusterName *string `json:"cluster_name,omitempty"`
 }
 
 // NewCdxV1ProviderSharedResourceUpdate instantiates a new CdxV1ProviderSharedResourceUpdate object
@@ -371,68 +371,36 @@ func (o *CdxV1ProviderSharedResourceUpdate) SetSchemas(v []string) {
 	o.Schemas = &v
 }
 
-// GetOrganizationName returns the OrganizationName field value if set, zero value otherwise.
-func (o *CdxV1ProviderSharedResourceUpdate) GetOrganizationName() string {
-	if o == nil || o.OrganizationName == nil {
+// GetOrganizationDescription returns the OrganizationDescription field value if set, zero value otherwise.
+func (o *CdxV1ProviderSharedResourceUpdate) GetOrganizationDescription() string {
+	if o == nil || o.OrganizationDescription == nil {
 		var ret string
 		return ret
 	}
-	return *o.OrganizationName
+	return *o.OrganizationDescription
 }
 
-// GetOrganizationNameOk returns a tuple with the OrganizationName field value if set, nil otherwise
+// GetOrganizationDescriptionOk returns a tuple with the OrganizationDescription field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1ProviderSharedResourceUpdate) GetOrganizationNameOk() (*string, bool) {
-	if o == nil || o.OrganizationName == nil {
+func (o *CdxV1ProviderSharedResourceUpdate) GetOrganizationDescriptionOk() (*string, bool) {
+	if o == nil || o.OrganizationDescription == nil {
 		return nil, false
 	}
-	return o.OrganizationName, true
+	return o.OrganizationDescription, true
 }
 
-// HasOrganizationName returns a boolean if a field has been set.
-func (o *CdxV1ProviderSharedResourceUpdate) HasOrganizationName() bool {
-	if o != nil && o.OrganizationName != nil {
+// HasOrganizationDescription returns a boolean if a field has been set.
+func (o *CdxV1ProviderSharedResourceUpdate) HasOrganizationDescription() bool {
+	if o != nil && o.OrganizationDescription != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganizationName gets a reference to the given string and assigns it to the OrganizationName field.
-func (o *CdxV1ProviderSharedResourceUpdate) SetOrganizationName(v string) {
-	o.OrganizationName = &v
-}
-
-// GetOrganizationDetails returns the OrganizationDetails field value if set, zero value otherwise.
-func (o *CdxV1ProviderSharedResourceUpdate) GetOrganizationDetails() string {
-	if o == nil || o.OrganizationDetails == nil {
-		var ret string
-		return ret
-	}
-	return *o.OrganizationDetails
-}
-
-// GetOrganizationDetailsOk returns a tuple with the OrganizationDetails field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CdxV1ProviderSharedResourceUpdate) GetOrganizationDetailsOk() (*string, bool) {
-	if o == nil || o.OrganizationDetails == nil {
-		return nil, false
-	}
-	return o.OrganizationDetails, true
-}
-
-// HasOrganizationDetails returns a boolean if a field has been set.
-func (o *CdxV1ProviderSharedResourceUpdate) HasOrganizationDetails() bool {
-	if o != nil && o.OrganizationDetails != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganizationDetails gets a reference to the given string and assigns it to the OrganizationDetails field.
-func (o *CdxV1ProviderSharedResourceUpdate) SetOrganizationDetails(v string) {
-	o.OrganizationDetails = &v
+// SetOrganizationDescription gets a reference to the given string and assigns it to the OrganizationDescription field.
+func (o *CdxV1ProviderSharedResourceUpdate) SetOrganizationDescription(v string) {
+	o.OrganizationDescription = &v
 }
 
 // GetOrganizationContact returns the OrganizationContact field value if set, zero value otherwise.
@@ -465,6 +433,71 @@ func (o *CdxV1ProviderSharedResourceUpdate) HasOrganizationContact() bool {
 // SetOrganizationContact gets a reference to the given string and assigns it to the OrganizationContact field.
 func (o *CdxV1ProviderSharedResourceUpdate) SetOrganizationContact(v string) {
 	o.OrganizationContact = &v
+}
+
+// GetLogoUrl returns the LogoUrl field value if set, zero value otherwise.
+func (o *CdxV1ProviderSharedResourceUpdate) GetLogoUrl() string {
+	if o == nil || o.LogoUrl == nil {
+		var ret string
+		return ret
+	}
+	return *o.LogoUrl
+}
+
+// GetLogoUrlOk returns a tuple with the LogoUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CdxV1ProviderSharedResourceUpdate) GetLogoUrlOk() (*string, bool) {
+	if o == nil || o.LogoUrl == nil {
+		return nil, false
+	}
+	return o.LogoUrl, true
+}
+
+// HasLogoUrl returns a boolean if a field has been set.
+func (o *CdxV1ProviderSharedResourceUpdate) HasLogoUrl() bool {
+	if o != nil && o.LogoUrl != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLogoUrl gets a reference to the given string and assigns it to the LogoUrl field.
+func (o *CdxV1ProviderSharedResourceUpdate) SetLogoUrl(v string) {
+	o.LogoUrl = &v
+}
+
+// GetOrganizationName returns the OrganizationName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CdxV1ProviderSharedResourceUpdate) GetOrganizationName() interface{} {
+	if o == nil {
+		var ret interface{}
+		return ret
+	}
+	return o.OrganizationName
+}
+
+// GetOrganizationNameOk returns a tuple with the OrganizationName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CdxV1ProviderSharedResourceUpdate) GetOrganizationNameOk() (*interface{}, bool) {
+	if o == nil || o.OrganizationName == nil {
+		return nil, false
+	}
+	return &o.OrganizationName, true
+}
+
+// HasOrganizationName returns a boolean if a field has been set.
+func (o *CdxV1ProviderSharedResourceUpdate) HasOrganizationName() bool {
+	if o != nil && o.OrganizationName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOrganizationName gets a reference to the given interface{} and assigns it to the OrganizationName field.
+func (o *CdxV1ProviderSharedResourceUpdate) SetOrganizationName(v interface{}) {
+	o.OrganizationName = v
 }
 
 // GetEnvironmentName returns the EnvironmentName field value if set, zero value otherwise.
@@ -531,38 +564,6 @@ func (o *CdxV1ProviderSharedResourceUpdate) SetClusterName(v string) {
 	o.ClusterName = &v
 }
 
-// GetLogoUrl returns the LogoUrl field value if set, zero value otherwise.
-func (o *CdxV1ProviderSharedResourceUpdate) GetLogoUrl() string {
-	if o == nil || o.LogoUrl == nil {
-		var ret string
-		return ret
-	}
-	return *o.LogoUrl
-}
-
-// GetLogoUrlOk returns a tuple with the LogoUrl field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CdxV1ProviderSharedResourceUpdate) GetLogoUrlOk() (*string, bool) {
-	if o == nil || o.LogoUrl == nil {
-		return nil, false
-	}
-	return o.LogoUrl, true
-}
-
-// HasLogoUrl returns a boolean if a field has been set.
-func (o *CdxV1ProviderSharedResourceUpdate) HasLogoUrl() bool {
-	if o != nil && o.LogoUrl != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetLogoUrl gets a reference to the given string and assigns it to the LogoUrl field.
-func (o *CdxV1ProviderSharedResourceUpdate) SetLogoUrl(v string) {
-	o.LogoUrl = &v
-}
-
 // Redact resets all sensitive fields to their zero value.
 func (o *CdxV1ProviderSharedResourceUpdate) Redact() {
 	o.recurseRedact(o.ApiVersion)
@@ -574,12 +575,12 @@ func (o *CdxV1ProviderSharedResourceUpdate) Redact() {
 	o.recurseRedact(o.Labels)
 	o.recurseRedact(o.Examples)
 	o.recurseRedact(o.Schemas)
-	o.recurseRedact(o.OrganizationName)
-	o.recurseRedact(o.OrganizationDetails)
+	o.recurseRedact(o.OrganizationDescription)
 	o.recurseRedact(o.OrganizationContact)
+	o.recurseRedact(o.LogoUrl)
+	o.recurseRedact(o.OrganizationName)
 	o.recurseRedact(o.EnvironmentName)
 	o.recurseRedact(o.ClusterName)
-	o.recurseRedact(o.LogoUrl)
 }
 
 func (o *CdxV1ProviderSharedResourceUpdate) recurseRedact(v interface{}) {
@@ -641,23 +642,23 @@ func (o CdxV1ProviderSharedResourceUpdate) MarshalJSON() ([]byte, error) {
 	if o.Schemas != nil {
 		toSerialize["schemas"] = o.Schemas
 	}
-	if o.OrganizationName != nil {
-		toSerialize["organization_name"] = o.OrganizationName
-	}
-	if o.OrganizationDetails != nil {
-		toSerialize["organization_details"] = o.OrganizationDetails
+	if o.OrganizationDescription != nil {
+		toSerialize["organization_description"] = o.OrganizationDescription
 	}
 	if o.OrganizationContact != nil {
 		toSerialize["organization_contact"] = o.OrganizationContact
+	}
+	if o.LogoUrl != nil {
+		toSerialize["logo_url"] = o.LogoUrl
+	}
+	if o.OrganizationName != nil {
+		toSerialize["organization_name"] = o.OrganizationName
 	}
 	if o.EnvironmentName != nil {
 		toSerialize["environment_name"] = o.EnvironmentName
 	}
 	if o.ClusterName != nil {
 		toSerialize["cluster_name"] = o.ClusterName
-	}
-	if o.LogoUrl != nil {
-		toSerialize["logo_url"] = o.LogoUrl
 	}
 	return json.Marshal(toSerialize)
 }

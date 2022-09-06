@@ -1,10 +1,10 @@
-# CdxV1RedeemShareResourcesOneOf
+# CdxV1CreateProviderShareRequestConsumerRestrictionOneOf
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CdxV1RedeemShareResourcesOneOfInterface** | **interface { GetKind() string }** | An interface that can hold any of the proper implementing types |
+**CdxV1CreateProviderShareRequestConsumerRestrictionOneOfInterface** | **interface { GetKind() string }** | An interface that can hold any of the proper implementing types |
 
 ## Methods
 

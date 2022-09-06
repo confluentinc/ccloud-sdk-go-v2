@@ -58,7 +58,7 @@ type ConsumerSharedResourcesCdxV1Api interface {
 	GetCdxV1ConsumerSharedResourceExecute(r ApiGetCdxV1ConsumerSharedResourceRequest) (CdxV1ConsumerSharedResource, *_nethttp.Response, error)
 
 	/*
-		ImageCdxV1ConsumerSharedResource Image a Consumer Shared Resource
+		ImageCdxV1ConsumerSharedResource Get image for shared resource
 
 		Returns the image file for the shared resource
 
@@ -88,7 +88,7 @@ type ConsumerSharedResourcesCdxV1Api interface {
 	ListCdxV1ConsumerSharedResourcesExecute(r ApiListCdxV1ConsumerSharedResourcesRequest) (CdxV1ConsumerSharedResourceList, *_nethttp.Response, error)
 
 	/*
-		NetworkCdxV1ConsumerSharedResource Network a Consumer Shared Resource
+		NetworkCdxV1ConsumerSharedResource Get shared resource's network configuration
 
 		Returns network information of the shared resource
 
@@ -272,7 +272,7 @@ func (r ApiImageCdxV1ConsumerSharedResourceRequest) Execute() (*os.File, *_netht
 }
 
 /*
-ImageCdxV1ConsumerSharedResource Image a Consumer Shared Resource
+ImageCdxV1ConsumerSharedResource Get image for shared resource
 
 Returns the image file for the shared resource
 
@@ -419,10 +419,24 @@ func (a *ConsumerSharedResourcesCdxV1ApiService) ImageCdxV1ConsumerSharedResourc
 }
 
 type ApiListCdxV1ConsumerSharedResourcesRequest struct {
-	ctx        _context.Context
-	ApiService ConsumerSharedResourcesCdxV1Api
-	pageSize   *int32
-	pageToken  *string
+	ctx            _context.Context
+	ApiService     ConsumerSharedResourcesCdxV1Api
+	streamShare    *string
+	includeDeleted *bool
+	pageSize       *int32
+	pageToken      *string
+}
+
+// Filter the results by exact match for stream_share.
+func (r ApiListCdxV1ConsumerSharedResourcesRequest) StreamShare(streamShare string) ApiListCdxV1ConsumerSharedResourcesRequest {
+	r.streamShare = &streamShare
+	return r
+}
+
+// Include deactivated shared resources
+func (r ApiListCdxV1ConsumerSharedResourcesRequest) IncludeDeleted(includeDeleted bool) ApiListCdxV1ConsumerSharedResourcesRequest {
+	r.includeDeleted = &includeDeleted
+	return r
 }
 
 // A pagination size for collection requests.
@@ -479,6 +493,12 @@ func (a *ConsumerSharedResourcesCdxV1ApiService) ListCdxV1ConsumerSharedResource
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.streamShare != nil {
+		localVarQueryParams.Add("stream_share", parameterToString(*r.streamShare, ""))
+	}
+	if r.includeDeleted != nil {
+		localVarQueryParams.Add("include_deleted", parameterToString(*r.includeDeleted, ""))
+	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}
@@ -589,7 +609,7 @@ func (r ApiNetworkCdxV1ConsumerSharedResourceRequest) Execute() (CdxV1Network, *
 }
 
 /*
-NetworkCdxV1ConsumerSharedResource Network a Consumer Shared Resource
+NetworkCdxV1ConsumerSharedResource Get shared resource's network configuration
 
 Returns network information of the shared resource
 

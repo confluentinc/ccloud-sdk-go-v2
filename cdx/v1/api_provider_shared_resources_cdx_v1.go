@@ -104,7 +104,7 @@ type ProviderSharedResourcesCdxV1Api interface {
 	UpdateCdxV1ProviderSharedResourceExecute(r ApiUpdateCdxV1ProviderSharedResourceRequest) (CdxV1ProviderSharedResource, *_nethttp.Response, error)
 
 	/*
-		UploadImageCdxV1ProviderSharedResource Upload_Image a Provider Shared Resource
+		UploadImageCdxV1ProviderSharedResource Upload image for shared resource
 
 		Upload the image file for the shared resource
 
@@ -440,16 +440,30 @@ func (a *ProviderSharedResourcesCdxV1ApiService) GetCdxV1ProviderSharedResourceE
 }
 
 type ApiListCdxV1ProviderSharedResourcesRequest struct {
-	ctx        _context.Context
-	ApiService ProviderSharedResourcesCdxV1Api
-	crn        *string
-	pageSize   *int32
-	pageToken  *string
+	ctx            _context.Context
+	ApiService     ProviderSharedResourcesCdxV1Api
+	crn            *string
+	streamShare    *string
+	includeDeleted *bool
+	pageSize       *int32
+	pageToken      *string
 }
 
 // Filter the results by exact match for crn.
 func (r ApiListCdxV1ProviderSharedResourcesRequest) Crn(crn string) ApiListCdxV1ProviderSharedResourcesRequest {
 	r.crn = &crn
+	return r
+}
+
+// Filter the results by exact match for stream_share.
+func (r ApiListCdxV1ProviderSharedResourcesRequest) StreamShare(streamShare string) ApiListCdxV1ProviderSharedResourcesRequest {
+	r.streamShare = &streamShare
+	return r
+}
+
+// Include deactivated shared resources
+func (r ApiListCdxV1ProviderSharedResourcesRequest) IncludeDeleted(includeDeleted bool) ApiListCdxV1ProviderSharedResourcesRequest {
+	r.includeDeleted = &includeDeleted
 	return r
 }
 
@@ -509,6 +523,12 @@ func (a *ProviderSharedResourcesCdxV1ApiService) ListCdxV1ProviderSharedResource
 
 	if r.crn != nil {
 		localVarQueryParams.Add("crn", parameterToString(*r.crn, ""))
+	}
+	if r.streamShare != nil {
+		localVarQueryParams.Add("stream_share", parameterToString(*r.streamShare, ""))
+	}
+	if r.includeDeleted != nil {
+		localVarQueryParams.Add("include_deleted", parameterToString(*r.includeDeleted, ""))
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
@@ -788,11 +808,11 @@ type ApiUploadImageCdxV1ProviderSharedResourceRequest struct {
 	ApiService ProviderSharedResourcesCdxV1Api
 	id         string
 	fileName   string
-	file       **os.File
+	body       *string
 }
 
-func (r ApiUploadImageCdxV1ProviderSharedResourceRequest) File(file *os.File) ApiUploadImageCdxV1ProviderSharedResourceRequest {
-	r.file = &file
+func (r ApiUploadImageCdxV1ProviderSharedResourceRequest) Body(body string) ApiUploadImageCdxV1ProviderSharedResourceRequest {
+	r.body = &body
 	return r
 }
 
@@ -801,7 +821,7 @@ func (r ApiUploadImageCdxV1ProviderSharedResourceRequest) Execute() (*_nethttp.R
 }
 
 /*
-UploadImageCdxV1ProviderSharedResource Upload_Image a Provider Shared Resource
+UploadImageCdxV1ProviderSharedResource Upload image for shared resource
 
 Upload the image file for the shared resource
 
@@ -843,7 +863,7 @@ func (a *ProviderSharedResourcesCdxV1ApiService) UploadImageCdxV1ProviderSharedR
 	localVarFormParams := _neturl.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"image/_*"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -859,17 +879,8 @@ func (a *ProviderSharedResourcesCdxV1ApiService) UploadImageCdxV1ProviderSharedR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	localVarFormFileName = "file"
-	var localVarFile *os.File
-	if r.file != nil {
-		localVarFile = *r.file
-	}
-	if localVarFile != nil {
-		fbs, _ := _ioutil.ReadAll(localVarFile)
-		localVarFileBytes = fbs
-		localVarFileName = localVarFile.Name()
-		localVarFile.Close()
-	}
+	// body params
+	localVarPostBody = r.body
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return nil, err

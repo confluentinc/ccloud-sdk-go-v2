@@ -33,8 +33,8 @@ import (
 	"reflect"
 )
 
-// CdxV1CreateShareRequest Create share request
-type CdxV1CreateShareRequest struct {
+// CdxV1CreateProviderShareRequest Create share request
+type CdxV1CreateProviderShareRequest struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
@@ -42,37 +42,33 @@ type CdxV1CreateShareRequest struct {
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
 	Id       *string     `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
-	// Id of ccloud environment
-	Environment *string `json:"environment,omitempty"`
-	// Id of the Kafka cluster
-	KafkaCluster *string `json:"kafka_cluster,omitempty"`
 	// Method by which the invite will be delivered
 	DeliveryMethod *string `json:"delivery_method,omitempty"`
 	// Restrictions on the consumer that can redeem this token
-	ConsumerRestriction *CdxV1CreateShareRequestConsumerRestrictionOneOf `json:"consumer_restriction,omitempty"`
+	ConsumerRestriction *CdxV1CreateProviderShareRequestConsumerRestrictionOneOf `json:"consumer_restriction,omitempty"`
 	// List of resource crns to be shared
 	Resources *[]string `json:"resources,omitempty"`
 }
 
-// NewCdxV1CreateShareRequest instantiates a new CdxV1CreateShareRequest object
+// NewCdxV1CreateProviderShareRequest instantiates a new CdxV1CreateProviderShareRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCdxV1CreateShareRequest() *CdxV1CreateShareRequest {
-	this := CdxV1CreateShareRequest{}
+func NewCdxV1CreateProviderShareRequest() *CdxV1CreateProviderShareRequest {
+	this := CdxV1CreateProviderShareRequest{}
 	return &this
 }
 
-// NewCdxV1CreateShareRequestWithDefaults instantiates a new CdxV1CreateShareRequest object
+// NewCdxV1CreateProviderShareRequestWithDefaults instantiates a new CdxV1CreateProviderShareRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCdxV1CreateShareRequestWithDefaults() *CdxV1CreateShareRequest {
-	this := CdxV1CreateShareRequest{}
+func NewCdxV1CreateProviderShareRequestWithDefaults() *CdxV1CreateProviderShareRequest {
+	this := CdxV1CreateProviderShareRequest{}
 	return &this
 }
 
 // GetApiVersion returns the ApiVersion field value if set, zero value otherwise.
-func (o *CdxV1CreateShareRequest) GetApiVersion() string {
+func (o *CdxV1CreateProviderShareRequest) GetApiVersion() string {
 	if o == nil || o.ApiVersion == nil {
 		var ret string
 		return ret
@@ -82,7 +78,7 @@ func (o *CdxV1CreateShareRequest) GetApiVersion() string {
 
 // GetApiVersionOk returns a tuple with the ApiVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1CreateShareRequest) GetApiVersionOk() (*string, bool) {
+func (o *CdxV1CreateProviderShareRequest) GetApiVersionOk() (*string, bool) {
 	if o == nil || o.ApiVersion == nil {
 		return nil, false
 	}
@@ -90,7 +86,7 @@ func (o *CdxV1CreateShareRequest) GetApiVersionOk() (*string, bool) {
 }
 
 // HasApiVersion returns a boolean if a field has been set.
-func (o *CdxV1CreateShareRequest) HasApiVersion() bool {
+func (o *CdxV1CreateProviderShareRequest) HasApiVersion() bool {
 	if o != nil && o.ApiVersion != nil {
 		return true
 	}
@@ -99,12 +95,12 @@ func (o *CdxV1CreateShareRequest) HasApiVersion() bool {
 }
 
 // SetApiVersion gets a reference to the given string and assigns it to the ApiVersion field.
-func (o *CdxV1CreateShareRequest) SetApiVersion(v string) {
+func (o *CdxV1CreateProviderShareRequest) SetApiVersion(v string) {
 	o.ApiVersion = &v
 }
 
 // GetKind returns the Kind field value if set, zero value otherwise.
-func (o *CdxV1CreateShareRequest) GetKind() string {
+func (o *CdxV1CreateProviderShareRequest) GetKind() string {
 	if o == nil || o.Kind == nil {
 		var ret string
 		return ret
@@ -114,7 +110,7 @@ func (o *CdxV1CreateShareRequest) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1CreateShareRequest) GetKindOk() (*string, bool) {
+func (o *CdxV1CreateProviderShareRequest) GetKindOk() (*string, bool) {
 	if o == nil || o.Kind == nil {
 		return nil, false
 	}
@@ -122,7 +118,7 @@ func (o *CdxV1CreateShareRequest) GetKindOk() (*string, bool) {
 }
 
 // HasKind returns a boolean if a field has been set.
-func (o *CdxV1CreateShareRequest) HasKind() bool {
+func (o *CdxV1CreateProviderShareRequest) HasKind() bool {
 	if o != nil && o.Kind != nil {
 		return true
 	}
@@ -131,12 +127,12 @@ func (o *CdxV1CreateShareRequest) HasKind() bool {
 }
 
 // SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *CdxV1CreateShareRequest) SetKind(v string) {
+func (o *CdxV1CreateProviderShareRequest) SetKind(v string) {
 	o.Kind = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *CdxV1CreateShareRequest) GetId() string {
+func (o *CdxV1CreateProviderShareRequest) GetId() string {
 	if o == nil || o.Id == nil {
 		var ret string
 		return ret
@@ -146,7 +142,7 @@ func (o *CdxV1CreateShareRequest) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1CreateShareRequest) GetIdOk() (*string, bool) {
+func (o *CdxV1CreateProviderShareRequest) GetIdOk() (*string, bool) {
 	if o == nil || o.Id == nil {
 		return nil, false
 	}
@@ -154,7 +150,7 @@ func (o *CdxV1CreateShareRequest) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *CdxV1CreateShareRequest) HasId() bool {
+func (o *CdxV1CreateProviderShareRequest) HasId() bool {
 	if o != nil && o.Id != nil {
 		return true
 	}
@@ -163,12 +159,12 @@ func (o *CdxV1CreateShareRequest) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *CdxV1CreateShareRequest) SetId(v string) {
+func (o *CdxV1CreateProviderShareRequest) SetId(v string) {
 	o.Id = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *CdxV1CreateShareRequest) GetMetadata() ObjectMeta {
+func (o *CdxV1CreateProviderShareRequest) GetMetadata() ObjectMeta {
 	if o == nil || o.Metadata == nil {
 		var ret ObjectMeta
 		return ret
@@ -178,7 +174,7 @@ func (o *CdxV1CreateShareRequest) GetMetadata() ObjectMeta {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1CreateShareRequest) GetMetadataOk() (*ObjectMeta, bool) {
+func (o *CdxV1CreateProviderShareRequest) GetMetadataOk() (*ObjectMeta, bool) {
 	if o == nil || o.Metadata == nil {
 		return nil, false
 	}
@@ -186,7 +182,7 @@ func (o *CdxV1CreateShareRequest) GetMetadataOk() (*ObjectMeta, bool) {
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *CdxV1CreateShareRequest) HasMetadata() bool {
+func (o *CdxV1CreateProviderShareRequest) HasMetadata() bool {
 	if o != nil && o.Metadata != nil {
 		return true
 	}
@@ -195,76 +191,12 @@ func (o *CdxV1CreateShareRequest) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given ObjectMeta and assigns it to the Metadata field.
-func (o *CdxV1CreateShareRequest) SetMetadata(v ObjectMeta) {
+func (o *CdxV1CreateProviderShareRequest) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *CdxV1CreateShareRequest) GetEnvironment() string {
-	if o == nil || o.Environment == nil {
-		var ret string
-		return ret
-	}
-	return *o.Environment
-}
-
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CdxV1CreateShareRequest) GetEnvironmentOk() (*string, bool) {
-	if o == nil || o.Environment == nil {
-		return nil, false
-	}
-	return o.Environment, true
-}
-
-// HasEnvironment returns a boolean if a field has been set.
-func (o *CdxV1CreateShareRequest) HasEnvironment() bool {
-	if o != nil && o.Environment != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *CdxV1CreateShareRequest) SetEnvironment(v string) {
-	o.Environment = &v
-}
-
-// GetKafkaCluster returns the KafkaCluster field value if set, zero value otherwise.
-func (o *CdxV1CreateShareRequest) GetKafkaCluster() string {
-	if o == nil || o.KafkaCluster == nil {
-		var ret string
-		return ret
-	}
-	return *o.KafkaCluster
-}
-
-// GetKafkaClusterOk returns a tuple with the KafkaCluster field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CdxV1CreateShareRequest) GetKafkaClusterOk() (*string, bool) {
-	if o == nil || o.KafkaCluster == nil {
-		return nil, false
-	}
-	return o.KafkaCluster, true
-}
-
-// HasKafkaCluster returns a boolean if a field has been set.
-func (o *CdxV1CreateShareRequest) HasKafkaCluster() bool {
-	if o != nil && o.KafkaCluster != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetKafkaCluster gets a reference to the given string and assigns it to the KafkaCluster field.
-func (o *CdxV1CreateShareRequest) SetKafkaCluster(v string) {
-	o.KafkaCluster = &v
-}
-
 // GetDeliveryMethod returns the DeliveryMethod field value if set, zero value otherwise.
-func (o *CdxV1CreateShareRequest) GetDeliveryMethod() string {
+func (o *CdxV1CreateProviderShareRequest) GetDeliveryMethod() string {
 	if o == nil || o.DeliveryMethod == nil {
 		var ret string
 		return ret
@@ -274,7 +206,7 @@ func (o *CdxV1CreateShareRequest) GetDeliveryMethod() string {
 
 // GetDeliveryMethodOk returns a tuple with the DeliveryMethod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1CreateShareRequest) GetDeliveryMethodOk() (*string, bool) {
+func (o *CdxV1CreateProviderShareRequest) GetDeliveryMethodOk() (*string, bool) {
 	if o == nil || o.DeliveryMethod == nil {
 		return nil, false
 	}
@@ -282,7 +214,7 @@ func (o *CdxV1CreateShareRequest) GetDeliveryMethodOk() (*string, bool) {
 }
 
 // HasDeliveryMethod returns a boolean if a field has been set.
-func (o *CdxV1CreateShareRequest) HasDeliveryMethod() bool {
+func (o *CdxV1CreateProviderShareRequest) HasDeliveryMethod() bool {
 	if o != nil && o.DeliveryMethod != nil {
 		return true
 	}
@@ -291,14 +223,14 @@ func (o *CdxV1CreateShareRequest) HasDeliveryMethod() bool {
 }
 
 // SetDeliveryMethod gets a reference to the given string and assigns it to the DeliveryMethod field.
-func (o *CdxV1CreateShareRequest) SetDeliveryMethod(v string) {
+func (o *CdxV1CreateProviderShareRequest) SetDeliveryMethod(v string) {
 	o.DeliveryMethod = &v
 }
 
 // GetConsumerRestriction returns the ConsumerRestriction field value if set, zero value otherwise.
-func (o *CdxV1CreateShareRequest) GetConsumerRestriction() CdxV1CreateShareRequestConsumerRestrictionOneOf {
+func (o *CdxV1CreateProviderShareRequest) GetConsumerRestriction() CdxV1CreateProviderShareRequestConsumerRestrictionOneOf {
 	if o == nil || o.ConsumerRestriction == nil {
-		var ret CdxV1CreateShareRequestConsumerRestrictionOneOf
+		var ret CdxV1CreateProviderShareRequestConsumerRestrictionOneOf
 		return ret
 	}
 	return *o.ConsumerRestriction
@@ -306,7 +238,7 @@ func (o *CdxV1CreateShareRequest) GetConsumerRestriction() CdxV1CreateShareReque
 
 // GetConsumerRestrictionOk returns a tuple with the ConsumerRestriction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1CreateShareRequest) GetConsumerRestrictionOk() (*CdxV1CreateShareRequestConsumerRestrictionOneOf, bool) {
+func (o *CdxV1CreateProviderShareRequest) GetConsumerRestrictionOk() (*CdxV1CreateProviderShareRequestConsumerRestrictionOneOf, bool) {
 	if o == nil || o.ConsumerRestriction == nil {
 		return nil, false
 	}
@@ -314,7 +246,7 @@ func (o *CdxV1CreateShareRequest) GetConsumerRestrictionOk() (*CdxV1CreateShareR
 }
 
 // HasConsumerRestriction returns a boolean if a field has been set.
-func (o *CdxV1CreateShareRequest) HasConsumerRestriction() bool {
+func (o *CdxV1CreateProviderShareRequest) HasConsumerRestriction() bool {
 	if o != nil && o.ConsumerRestriction != nil {
 		return true
 	}
@@ -322,13 +254,13 @@ func (o *CdxV1CreateShareRequest) HasConsumerRestriction() bool {
 	return false
 }
 
-// SetConsumerRestriction gets a reference to the given CdxV1CreateShareRequestConsumerRestrictionOneOf and assigns it to the ConsumerRestriction field.
-func (o *CdxV1CreateShareRequest) SetConsumerRestriction(v CdxV1CreateShareRequestConsumerRestrictionOneOf) {
+// SetConsumerRestriction gets a reference to the given CdxV1CreateProviderShareRequestConsumerRestrictionOneOf and assigns it to the ConsumerRestriction field.
+func (o *CdxV1CreateProviderShareRequest) SetConsumerRestriction(v CdxV1CreateProviderShareRequestConsumerRestrictionOneOf) {
 	o.ConsumerRestriction = &v
 }
 
 // GetResources returns the Resources field value if set, zero value otherwise.
-func (o *CdxV1CreateShareRequest) GetResources() []string {
+func (o *CdxV1CreateProviderShareRequest) GetResources() []string {
 	if o == nil || o.Resources == nil {
 		var ret []string
 		return ret
@@ -338,7 +270,7 @@ func (o *CdxV1CreateShareRequest) GetResources() []string {
 
 // GetResourcesOk returns a tuple with the Resources field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1CreateShareRequest) GetResourcesOk() (*[]string, bool) {
+func (o *CdxV1CreateProviderShareRequest) GetResourcesOk() (*[]string, bool) {
 	if o == nil || o.Resources == nil {
 		return nil, false
 	}
@@ -346,7 +278,7 @@ func (o *CdxV1CreateShareRequest) GetResourcesOk() (*[]string, bool) {
 }
 
 // HasResources returns a boolean if a field has been set.
-func (o *CdxV1CreateShareRequest) HasResources() bool {
+func (o *CdxV1CreateProviderShareRequest) HasResources() bool {
 	if o != nil && o.Resources != nil {
 		return true
 	}
@@ -355,24 +287,22 @@ func (o *CdxV1CreateShareRequest) HasResources() bool {
 }
 
 // SetResources gets a reference to the given []string and assigns it to the Resources field.
-func (o *CdxV1CreateShareRequest) SetResources(v []string) {
+func (o *CdxV1CreateProviderShareRequest) SetResources(v []string) {
 	o.Resources = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *CdxV1CreateShareRequest) Redact() {
+func (o *CdxV1CreateProviderShareRequest) Redact() {
 	o.recurseRedact(o.ApiVersion)
 	o.recurseRedact(o.Kind)
 	o.recurseRedact(o.Id)
 	o.recurseRedact(o.Metadata)
-	o.recurseRedact(o.Environment)
-	o.recurseRedact(o.KafkaCluster)
 	o.recurseRedact(o.DeliveryMethod)
 	o.recurseRedact(o.ConsumerRestriction)
 	o.recurseRedact(o.Resources)
 }
 
-func (o *CdxV1CreateShareRequest) recurseRedact(v interface{}) {
+func (o *CdxV1CreateProviderShareRequest) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -397,12 +327,12 @@ func (o *CdxV1CreateShareRequest) recurseRedact(v interface{}) {
 	}
 }
 
-func (o CdxV1CreateShareRequest) zeroField(v interface{}) {
+func (o CdxV1CreateProviderShareRequest) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o CdxV1CreateShareRequest) MarshalJSON() ([]byte, error) {
+func (o CdxV1CreateProviderShareRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ApiVersion != nil {
 		toSerialize["api_version"] = o.ApiVersion
@@ -416,12 +346,6 @@ func (o CdxV1CreateShareRequest) MarshalJSON() ([]byte, error) {
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if o.Environment != nil {
-		toSerialize["environment"] = o.Environment
-	}
-	if o.KafkaCluster != nil {
-		toSerialize["kafka_cluster"] = o.KafkaCluster
-	}
 	if o.DeliveryMethod != nil {
 		toSerialize["delivery_method"] = o.DeliveryMethod
 	}
@@ -434,38 +358,38 @@ func (o CdxV1CreateShareRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableCdxV1CreateShareRequest struct {
-	value *CdxV1CreateShareRequest
+type NullableCdxV1CreateProviderShareRequest struct {
+	value *CdxV1CreateProviderShareRequest
 	isSet bool
 }
 
-func (v NullableCdxV1CreateShareRequest) Get() *CdxV1CreateShareRequest {
+func (v NullableCdxV1CreateProviderShareRequest) Get() *CdxV1CreateProviderShareRequest {
 	return v.value
 }
 
-func (v *NullableCdxV1CreateShareRequest) Set(val *CdxV1CreateShareRequest) {
+func (v *NullableCdxV1CreateProviderShareRequest) Set(val *CdxV1CreateProviderShareRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCdxV1CreateShareRequest) IsSet() bool {
+func (v NullableCdxV1CreateProviderShareRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCdxV1CreateShareRequest) Unset() {
+func (v *NullableCdxV1CreateProviderShareRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCdxV1CreateShareRequest(val *CdxV1CreateShareRequest) *NullableCdxV1CreateShareRequest {
-	return &NullableCdxV1CreateShareRequest{value: val, isSet: true}
+func NewNullableCdxV1CreateProviderShareRequest(val *CdxV1CreateProviderShareRequest) *NullableCdxV1CreateProviderShareRequest {
+	return &NullableCdxV1CreateProviderShareRequest{value: val, isSet: true}
 }
 
-func (v NullableCdxV1CreateShareRequest) MarshalJSON() ([]byte, error) {
+func (v NullableCdxV1CreateProviderShareRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCdxV1CreateShareRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableCdxV1CreateProviderShareRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

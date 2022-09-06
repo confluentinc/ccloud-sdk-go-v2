@@ -50,15 +50,15 @@ type CdxV1ConsumerSharedResource struct {
 	Description *string `json:"description,omitempty"`
 	// list of labels
 	Labels *[]string `json:"labels,omitempty"`
-	// List of example data in JSON format
+	// List of example data in JSON format. This field is work in progress and subject to changes.
 	Examples *[]string `json:"examples,omitempty"`
-	// List of schemas in JSON format
+	// List of schemas in JSON format. This field is work in progress and subject to changes.
 	Schemas *[]string `json:"schemas,omitempty"`
-	// Organization to which the shared resource belongs
+	// Shared resource's organization name
 	OrganizationName *string `json:"organization_name,omitempty"`
-	// Details of the organization to which the shared resource belongs
-	OrganizationDetails *string `json:"organization_details,omitempty"`
-	// Email of the provider organization contact
+	// Shared resource's organization description
+	OrganizationDescription *string `json:"organization_description,omitempty"`
+	// Email of the shared resource's organization contact
 	OrganizationContact *string `json:"organization_contact,omitempty"`
 	// Resource logo url
 	LogoUrl *string `json:"logo_url,omitempty"`
@@ -465,36 +465,36 @@ func (o *CdxV1ConsumerSharedResource) SetOrganizationName(v string) {
 	o.OrganizationName = &v
 }
 
-// GetOrganizationDetails returns the OrganizationDetails field value if set, zero value otherwise.
-func (o *CdxV1ConsumerSharedResource) GetOrganizationDetails() string {
-	if o == nil || o.OrganizationDetails == nil {
+// GetOrganizationDescription returns the OrganizationDescription field value if set, zero value otherwise.
+func (o *CdxV1ConsumerSharedResource) GetOrganizationDescription() string {
+	if o == nil || o.OrganizationDescription == nil {
 		var ret string
 		return ret
 	}
-	return *o.OrganizationDetails
+	return *o.OrganizationDescription
 }
 
-// GetOrganizationDetailsOk returns a tuple with the OrganizationDetails field value if set, nil otherwise
+// GetOrganizationDescriptionOk returns a tuple with the OrganizationDescription field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1ConsumerSharedResource) GetOrganizationDetailsOk() (*string, bool) {
-	if o == nil || o.OrganizationDetails == nil {
+func (o *CdxV1ConsumerSharedResource) GetOrganizationDescriptionOk() (*string, bool) {
+	if o == nil || o.OrganizationDescription == nil {
 		return nil, false
 	}
-	return o.OrganizationDetails, true
+	return o.OrganizationDescription, true
 }
 
-// HasOrganizationDetails returns a boolean if a field has been set.
-func (o *CdxV1ConsumerSharedResource) HasOrganizationDetails() bool {
-	if o != nil && o.OrganizationDetails != nil {
+// HasOrganizationDescription returns a boolean if a field has been set.
+func (o *CdxV1ConsumerSharedResource) HasOrganizationDescription() bool {
+	if o != nil && o.OrganizationDescription != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganizationDetails gets a reference to the given string and assigns it to the OrganizationDetails field.
-func (o *CdxV1ConsumerSharedResource) SetOrganizationDetails(v string) {
-	o.OrganizationDetails = &v
+// SetOrganizationDescription gets a reference to the given string and assigns it to the OrganizationDescription field.
+func (o *CdxV1ConsumerSharedResource) SetOrganizationDescription(v string) {
+	o.OrganizationDescription = &v
 }
 
 // GetOrganizationContact returns the OrganizationContact field value if set, zero value otherwise.
@@ -575,7 +575,7 @@ func (o *CdxV1ConsumerSharedResource) Redact() {
 	o.recurseRedact(o.Examples)
 	o.recurseRedact(o.Schemas)
 	o.recurseRedact(o.OrganizationName)
-	o.recurseRedact(o.OrganizationDetails)
+	o.recurseRedact(o.OrganizationDescription)
 	o.recurseRedact(o.OrganizationContact)
 	o.recurseRedact(o.LogoUrl)
 }
@@ -648,8 +648,8 @@ func (o CdxV1ConsumerSharedResource) MarshalJSON() ([]byte, error) {
 	if o.OrganizationName != nil {
 		toSerialize["organization_name"] = o.OrganizationName
 	}
-	if o.OrganizationDetails != nil {
-		toSerialize["organization_details"] = o.OrganizationDetails
+	if o.OrganizationDescription != nil {
+		toSerialize["organization_description"] = o.OrganizationDescription
 	}
 	if o.OrganizationContact != nil {
 		toSerialize["organization_contact"] = o.OrganizationContact

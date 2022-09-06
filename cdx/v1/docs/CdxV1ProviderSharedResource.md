@@ -12,14 +12,15 @@ Name | Type | Description | Notes
 **DisplayName** | Pointer to **string** | Shared resource display name | [optional] 
 **Description** | Pointer to **string** | Description of shared resource | [optional] 
 **Labels** | Pointer to **[]string** | list of labels | [optional] 
-**Examples** | Pointer to **[]string** | List of example data in JSON format | [optional] 
-**Schemas** | Pointer to **[]string** | List of schemas in JSON format | [optional] 
-**OrganizationName** | Pointer to **string** | Organization to which the shared resource belongs | [optional] 
-**OrganizationDetails** | Pointer to **string** | Details of the organization to which the shared resource belongs | [optional] 
+**Examples** | Pointer to **[]string** | List of example data in JSON format. This field is work in progress and subject to changes. | [optional] 
+**Schemas** | Pointer to **[]string** | List of schemas in JSON format. This field is work in progress and subject to changes. | [optional] [readonly] 
+**OrganizationDescription** | Pointer to **string** | Shared resource&#39;s organization description | [optional] 
 **OrganizationContact** | Pointer to **string** | Email of contact person from the organization | [optional] 
-**EnvironmentName** | Pointer to **string** | The environment name of the shared resource | [optional] 
-**ClusterName** | Pointer to **string** | The cluster display name of the shared resource | [optional] 
 **LogoUrl** | Pointer to **string** | Resource logo url | [optional] [readonly] 
+**OrganizationName** | Pointer to **interface{}** | Organization to which the shared resource belongs. Deprecated | [optional] [readonly] 
+**EnvironmentName** | Pointer to **string** | The environment name of the shared resource. Deprecated | [optional] [readonly] 
+**ClusterName** | Pointer to **string** | The cluster display name of the shared resource. Deprecated | [optional] [readonly] 
+**CloudCluster** | Pointer to [**ObjectReference**](ObjectReference.md) | The cloud cluster to which this belongs. | [optional] 
 
 ## Methods
 
@@ -290,55 +291,30 @@ SetSchemas sets Schemas field to given value.
 
 HasSchemas returns a boolean if a field has been set.
 
-### GetOrganizationName
+### GetOrganizationDescription
 
-`func (o *CdxV1ProviderSharedResource) GetOrganizationName() string`
+`func (o *CdxV1ProviderSharedResource) GetOrganizationDescription() string`
 
-GetOrganizationName returns the OrganizationName field if non-nil, zero value otherwise.
+GetOrganizationDescription returns the OrganizationDescription field if non-nil, zero value otherwise.
 
-### GetOrganizationNameOk
+### GetOrganizationDescriptionOk
 
-`func (o *CdxV1ProviderSharedResource) GetOrganizationNameOk() (*string, bool)`
+`func (o *CdxV1ProviderSharedResource) GetOrganizationDescriptionOk() (*string, bool)`
 
-GetOrganizationNameOk returns a tuple with the OrganizationName field if it's non-nil, zero value otherwise
+GetOrganizationDescriptionOk returns a tuple with the OrganizationDescription field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOrganizationName
+### SetOrganizationDescription
 
-`func (o *CdxV1ProviderSharedResource) SetOrganizationName(v string)`
+`func (o *CdxV1ProviderSharedResource) SetOrganizationDescription(v string)`
 
-SetOrganizationName sets OrganizationName field to given value.
+SetOrganizationDescription sets OrganizationDescription field to given value.
 
-### HasOrganizationName
+### HasOrganizationDescription
 
-`func (o *CdxV1ProviderSharedResource) HasOrganizationName() bool`
+`func (o *CdxV1ProviderSharedResource) HasOrganizationDescription() bool`
 
-HasOrganizationName returns a boolean if a field has been set.
-
-### GetOrganizationDetails
-
-`func (o *CdxV1ProviderSharedResource) GetOrganizationDetails() string`
-
-GetOrganizationDetails returns the OrganizationDetails field if non-nil, zero value otherwise.
-
-### GetOrganizationDetailsOk
-
-`func (o *CdxV1ProviderSharedResource) GetOrganizationDetailsOk() (*string, bool)`
-
-GetOrganizationDetailsOk returns a tuple with the OrganizationDetails field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOrganizationDetails
-
-`func (o *CdxV1ProviderSharedResource) SetOrganizationDetails(v string)`
-
-SetOrganizationDetails sets OrganizationDetails field to given value.
-
-### HasOrganizationDetails
-
-`func (o *CdxV1ProviderSharedResource) HasOrganizationDetails() bool`
-
-HasOrganizationDetails returns a boolean if a field has been set.
+HasOrganizationDescription returns a boolean if a field has been set.
 
 ### GetOrganizationContact
 
@@ -365,6 +341,66 @@ SetOrganizationContact sets OrganizationContact field to given value.
 
 HasOrganizationContact returns a boolean if a field has been set.
 
+### GetLogoUrl
+
+`func (o *CdxV1ProviderSharedResource) GetLogoUrl() string`
+
+GetLogoUrl returns the LogoUrl field if non-nil, zero value otherwise.
+
+### GetLogoUrlOk
+
+`func (o *CdxV1ProviderSharedResource) GetLogoUrlOk() (*string, bool)`
+
+GetLogoUrlOk returns a tuple with the LogoUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLogoUrl
+
+`func (o *CdxV1ProviderSharedResource) SetLogoUrl(v string)`
+
+SetLogoUrl sets LogoUrl field to given value.
+
+### HasLogoUrl
+
+`func (o *CdxV1ProviderSharedResource) HasLogoUrl() bool`
+
+HasLogoUrl returns a boolean if a field has been set.
+
+### GetOrganizationName
+
+`func (o *CdxV1ProviderSharedResource) GetOrganizationName() interface{}`
+
+GetOrganizationName returns the OrganizationName field if non-nil, zero value otherwise.
+
+### GetOrganizationNameOk
+
+`func (o *CdxV1ProviderSharedResource) GetOrganizationNameOk() (*interface{}, bool)`
+
+GetOrganizationNameOk returns a tuple with the OrganizationName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrganizationName
+
+`func (o *CdxV1ProviderSharedResource) SetOrganizationName(v interface{})`
+
+SetOrganizationName sets OrganizationName field to given value.
+
+### HasOrganizationName
+
+`func (o *CdxV1ProviderSharedResource) HasOrganizationName() bool`
+
+HasOrganizationName returns a boolean if a field has been set.
+
+### SetOrganizationNameNil
+
+`func (o *CdxV1ProviderSharedResource) SetOrganizationNameNil(b bool)`
+
+ SetOrganizationNameNil sets the value for OrganizationName to be an explicit nil
+
+### UnsetOrganizationName
+`func (o *CdxV1ProviderSharedResource) UnsetOrganizationName()`
+
+UnsetOrganizationName ensures that no value is present for OrganizationName, not even an explicit nil
 ### GetEnvironmentName
 
 `func (o *CdxV1ProviderSharedResource) GetEnvironmentName() string`
@@ -415,30 +451,30 @@ SetClusterName sets ClusterName field to given value.
 
 HasClusterName returns a boolean if a field has been set.
 
-### GetLogoUrl
+### GetCloudCluster
 
-`func (o *CdxV1ProviderSharedResource) GetLogoUrl() string`
+`func (o *CdxV1ProviderSharedResource) GetCloudCluster() ObjectReference`
 
-GetLogoUrl returns the LogoUrl field if non-nil, zero value otherwise.
+GetCloudCluster returns the CloudCluster field if non-nil, zero value otherwise.
 
-### GetLogoUrlOk
+### GetCloudClusterOk
 
-`func (o *CdxV1ProviderSharedResource) GetLogoUrlOk() (*string, bool)`
+`func (o *CdxV1ProviderSharedResource) GetCloudClusterOk() (*ObjectReference, bool)`
 
-GetLogoUrlOk returns a tuple with the LogoUrl field if it's non-nil, zero value otherwise
+GetCloudClusterOk returns a tuple with the CloudCluster field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetLogoUrl
+### SetCloudCluster
 
-`func (o *CdxV1ProviderSharedResource) SetLogoUrl(v string)`
+`func (o *CdxV1ProviderSharedResource) SetCloudCluster(v ObjectReference)`
 
-SetLogoUrl sets LogoUrl field to given value.
+SetCloudCluster sets CloudCluster field to given value.
 
-### HasLogoUrl
+### HasCloudCluster
 
-`func (o *CdxV1ProviderSharedResource) HasLogoUrl() bool`
+`func (o *CdxV1ProviderSharedResource) HasCloudCluster() bool`
 
-HasLogoUrl returns a boolean if a field has been set.
+HasCloudCluster returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

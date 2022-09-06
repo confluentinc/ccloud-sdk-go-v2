@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
+**KafkaBootstrapUrl** | Pointer to **string** | The kafka cluster bootstrap url | [optional] [readonly] 
+**Zones** | Pointer to **[]string** | The 3 availability zones for this network. They can optionally be specified for AWS networks used with PrivateLink. Otherwise, they are automatically chosen by Confluent Cloud.  On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3)  On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c).  On Azure, zones are Confluent-chosen names (e.g. 1, 2, 3) since Azure does not  have universal zone identifiers.  | [optional] 
 **DnsDomain** | Pointer to **string** | The root DNS domain for the network if applicable. | [optional] [readonly] 
 **ZonalSubdomains** | Pointer to **map[string]string** | The DNS subdomain for each zone. Present on networks that support PrivateLink. Keys are zones and values are DNS domains.  | [optional] [readonly] 
 **Cloud** | Pointer to [**CdxV1NetworkCloudOneOf**](CdxV1NetworkCloudOneOf.md) | The cloud-specific network details. These will be populated when the network reaches the READY state. | [optional] [readonly] 
@@ -130,6 +132,56 @@ SetMetadata sets Metadata field to given value.
 `func (o *CdxV1Network) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
+
+### GetKafkaBootstrapUrl
+
+`func (o *CdxV1Network) GetKafkaBootstrapUrl() string`
+
+GetKafkaBootstrapUrl returns the KafkaBootstrapUrl field if non-nil, zero value otherwise.
+
+### GetKafkaBootstrapUrlOk
+
+`func (o *CdxV1Network) GetKafkaBootstrapUrlOk() (*string, bool)`
+
+GetKafkaBootstrapUrlOk returns a tuple with the KafkaBootstrapUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKafkaBootstrapUrl
+
+`func (o *CdxV1Network) SetKafkaBootstrapUrl(v string)`
+
+SetKafkaBootstrapUrl sets KafkaBootstrapUrl field to given value.
+
+### HasKafkaBootstrapUrl
+
+`func (o *CdxV1Network) HasKafkaBootstrapUrl() bool`
+
+HasKafkaBootstrapUrl returns a boolean if a field has been set.
+
+### GetZones
+
+`func (o *CdxV1Network) GetZones() []string`
+
+GetZones returns the Zones field if non-nil, zero value otherwise.
+
+### GetZonesOk
+
+`func (o *CdxV1Network) GetZonesOk() (*[]string, bool)`
+
+GetZonesOk returns a tuple with the Zones field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetZones
+
+`func (o *CdxV1Network) SetZones(v []string)`
+
+SetZones sets Zones field to given value.
+
+### HasZones
+
+`func (o *CdxV1Network) HasZones() bool`
+
+HasZones returns a boolean if a field has been set.
 
 ### GetDnsDomain
 

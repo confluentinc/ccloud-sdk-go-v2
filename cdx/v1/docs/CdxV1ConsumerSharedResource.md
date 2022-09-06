@@ -13,11 +13,11 @@ Name | Type | Description | Notes
 **DisplayName** | Pointer to **string** | Consumer resource display name | [optional] [readonly] 
 **Description** | Pointer to **string** | Description of consumer resource | [optional] [readonly] 
 **Labels** | Pointer to **[]string** | list of labels | [optional] [readonly] 
-**Examples** | Pointer to **[]string** | List of example data in JSON format | [optional] [readonly] 
-**Schemas** | Pointer to **[]string** | List of schemas in JSON format | [optional] [readonly] 
-**OrganizationName** | Pointer to **string** | Organization to which the shared resource belongs | [optional] [readonly] 
-**OrganizationDetails** | Pointer to **string** | Details of the organization to which the shared resource belongs | [optional] [readonly] 
-**OrganizationContact** | Pointer to **string** | Email of the provider organization contact | [optional] [readonly] 
+**Examples** | Pointer to **[]string** | List of example data in JSON format. This field is work in progress and subject to changes. | [optional] [readonly] 
+**Schemas** | Pointer to **[]string** | List of schemas in JSON format. This field is work in progress and subject to changes. | [optional] [readonly] 
+**OrganizationName** | Pointer to **string** | Shared resource&#39;s organization name | [optional] [readonly] 
+**OrganizationDescription** | Pointer to **string** | Shared resource&#39;s organization description | [optional] [readonly] 
+**OrganizationContact** | Pointer to **string** | Email of the shared resource&#39;s organization contact | [optional] [readonly] 
 **LogoUrl** | Pointer to **string** | Resource logo url | [optional] [readonly] 
 
 ## Methods
@@ -339,30 +339,30 @@ SetOrganizationName sets OrganizationName field to given value.
 
 HasOrganizationName returns a boolean if a field has been set.
 
-### GetOrganizationDetails
+### GetOrganizationDescription
 
-`func (o *CdxV1ConsumerSharedResource) GetOrganizationDetails() string`
+`func (o *CdxV1ConsumerSharedResource) GetOrganizationDescription() string`
 
-GetOrganizationDetails returns the OrganizationDetails field if non-nil, zero value otherwise.
+GetOrganizationDescription returns the OrganizationDescription field if non-nil, zero value otherwise.
 
-### GetOrganizationDetailsOk
+### GetOrganizationDescriptionOk
 
-`func (o *CdxV1ConsumerSharedResource) GetOrganizationDetailsOk() (*string, bool)`
+`func (o *CdxV1ConsumerSharedResource) GetOrganizationDescriptionOk() (*string, bool)`
 
-GetOrganizationDetailsOk returns a tuple with the OrganizationDetails field if it's non-nil, zero value otherwise
+GetOrganizationDescriptionOk returns a tuple with the OrganizationDescription field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOrganizationDetails
+### SetOrganizationDescription
 
-`func (o *CdxV1ConsumerSharedResource) SetOrganizationDetails(v string)`
+`func (o *CdxV1ConsumerSharedResource) SetOrganizationDescription(v string)`
 
-SetOrganizationDetails sets OrganizationDetails field to given value.
+SetOrganizationDescription sets OrganizationDescription field to given value.
 
-### HasOrganizationDetails
+### HasOrganizationDescription
 
-`func (o *CdxV1ConsumerSharedResource) HasOrganizationDetails() bool`
+`func (o *CdxV1ConsumerSharedResource) HasOrganizationDescription() bool`
 
-HasOrganizationDetails returns a boolean if a field has been set.
+HasOrganizationDescription returns a boolean if a field has been set.
 
 ### GetOrganizationContact
 

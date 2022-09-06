@@ -389,6 +389,7 @@ type ApiListCdxV1ConsumerSharesRequest struct {
 	ctx            _context.Context
 	ApiService     ConsumerSharesCdxV1Api
 	sharedResource *string
+	includeDeleted *bool
 	pageSize       *int32
 	pageToken      *string
 }
@@ -396,6 +397,12 @@ type ApiListCdxV1ConsumerSharesRequest struct {
 // Filter the results by exact match for shared_resource.
 func (r ApiListCdxV1ConsumerSharesRequest) SharedResource(sharedResource string) ApiListCdxV1ConsumerSharesRequest {
 	r.sharedResource = &sharedResource
+	return r
+}
+
+// Include deactivated shares
+func (r ApiListCdxV1ConsumerSharesRequest) IncludeDeleted(includeDeleted bool) ApiListCdxV1ConsumerSharesRequest {
+	r.includeDeleted = &includeDeleted
 	return r
 }
 
@@ -455,6 +462,9 @@ func (a *ConsumerSharesCdxV1ApiService) ListCdxV1ConsumerSharesExecute(r ApiList
 
 	if r.sharedResource != nil {
 		localVarQueryParams.Add("shared_resource", parameterToString(*r.sharedResource, ""))
+	}
+	if r.includeDeleted != nil {
+		localVarQueryParams.Add("include_deleted", parameterToString(*r.includeDeleted, ""))
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))

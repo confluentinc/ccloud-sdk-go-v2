@@ -4,8 +4,8 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**RedeemCdxV1SharedToken**](SharedTokensCdxV1Api.md#RedeemCdxV1SharedToken) | **Post** /cdx/v1/shared-tokens:redeem | Redeem a Shared Token
-[**ResourcesCdxV1SharedToken**](SharedTokensCdxV1Api.md#ResourcesCdxV1SharedToken) | **Post** /cdx/v1/shared-tokens:resources | Resources a Shared Token
+[**RedeemCdxV1SharedToken**](SharedTokensCdxV1Api.md#RedeemCdxV1SharedToken) | **Post** /cdx/v1/shared-tokens:redeem | Redeem token
+[**ResourcesCdxV1SharedToken**](SharedTokensCdxV1Api.md#ResourcesCdxV1SharedToken) | **Post** /cdx/v1/shared-tokens:resources | Validate token to view shared resources
 
 
 
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 > CdxV1RedeemTokenResponse RedeemCdxV1SharedToken(ctx).CdxV1RedeemTokenRequest(cdxV1RedeemTokenRequest).Execute()
 
-Redeem a Shared Token
+Redeem token
 
 
 
@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 
 > InlineResponse200 ResourcesCdxV1SharedToken(ctx).CdxV1SharedToken(cdxV1SharedToken).Execute()
 
-Resources a Shared Token
+Validate token to view shared resources
 
 
 

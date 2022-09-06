@@ -9,8 +9,9 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
 **Token** | Pointer to **string** | The encrypted token | [optional] 
-**AwsAccount** | Pointer to **string** | The AWS account id for the consumer network. | [optional] 
-**AzureSubscription** | Pointer to **string** | The Azure subscription for the consumer network. | [optional] 
+**AwsAccount** | Pointer to **string** | Consumer&#39;s AWS account ID for PrivateLink access. | [optional] 
+**AzureSubscription** | Pointer to **string** | Consumer&#39;s Azure subscription ID for PrivateLink access. | [optional] 
+**GcpProject** | Pointer to **string** | Consumer&#39;s GCP project ID for Private Service Connect access. | [optional] 
 
 ## Methods
 
@@ -205,6 +206,31 @@ SetAzureSubscription sets AzureSubscription field to given value.
 `func (o *CdxV1RedeemTokenRequest) HasAzureSubscription() bool`
 
 HasAzureSubscription returns a boolean if a field has been set.
+
+### GetGcpProject
+
+`func (o *CdxV1RedeemTokenRequest) GetGcpProject() string`
+
+GetGcpProject returns the GcpProject field if non-nil, zero value otherwise.
+
+### GetGcpProjectOk
+
+`func (o *CdxV1RedeemTokenRequest) GetGcpProjectOk() (*string, bool)`
+
+GetGcpProjectOk returns a tuple with the GcpProject field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGcpProject
+
+`func (o *CdxV1RedeemTokenRequest) SetGcpProject(v string)`
+
+SetGcpProject sets GcpProject field to given value.
+
+### HasGcpProject
+
+`func (o *CdxV1RedeemTokenRequest) HasGcpProject() bool`
+
+HasGcpProject returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

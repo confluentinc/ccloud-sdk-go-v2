@@ -81,25 +81,27 @@ All URIs are relative to *https://api.confluent.cloud*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ConsumerSharedResourcesCdxV1Api* | [**GetCdxV1ConsumerSharedResource**](docs/ConsumerSharedResourcesCdxV1Api.md#getcdxv1consumersharedresource) | **Get** /cdx/v1/consumer-shared-resources/{id} | Read a Consumer Shared Resource
-*ConsumerSharedResourcesCdxV1Api* | [**ImageCdxV1ConsumerSharedResource**](docs/ConsumerSharedResourcesCdxV1Api.md#imagecdxv1consumersharedresource) | **Get** /cdx/v1/consumer-shared-resources/{id}/images/{file_name} | Image a Consumer Shared Resource
+*ConsumerSharedResourcesCdxV1Api* | [**ImageCdxV1ConsumerSharedResource**](docs/ConsumerSharedResourcesCdxV1Api.md#imagecdxv1consumersharedresource) | **Get** /cdx/v1/consumer-shared-resources/{id}/images/{file_name} | Get image for shared resource
 *ConsumerSharedResourcesCdxV1Api* | [**ListCdxV1ConsumerSharedResources**](docs/ConsumerSharedResourcesCdxV1Api.md#listcdxv1consumersharedresources) | **Get** /cdx/v1/consumer-shared-resources | List of Consumer Shared Resources
-*ConsumerSharedResourcesCdxV1Api* | [**NetworkCdxV1ConsumerSharedResource**](docs/ConsumerSharedResourcesCdxV1Api.md#networkcdxv1consumersharedresource) | **Get** /cdx/v1/consumer-shared-resources/{id}:network | Network a Consumer Shared Resource
+*ConsumerSharedResourcesCdxV1Api* | [**NetworkCdxV1ConsumerSharedResource**](docs/ConsumerSharedResourcesCdxV1Api.md#networkcdxv1consumersharedresource) | **Get** /cdx/v1/consumer-shared-resources/{id}:network | Get shared resource&#39;s network configuration
 *ConsumerSharesCdxV1Api* | [**DeleteCdxV1ConsumerShare**](docs/ConsumerSharesCdxV1Api.md#deletecdxv1consumershare) | **Delete** /cdx/v1/consumer-shares/{id} | Delete a Consumer Share
 *ConsumerSharesCdxV1Api* | [**GetCdxV1ConsumerShare**](docs/ConsumerSharesCdxV1Api.md#getcdxv1consumershare) | **Get** /cdx/v1/consumer-shares/{id} | Read a Consumer Share
 *ConsumerSharesCdxV1Api* | [**ListCdxV1ConsumerShares**](docs/ConsumerSharesCdxV1Api.md#listcdxv1consumershares) | **Get** /cdx/v1/consumer-shares | List of Consumer Shares
+*OptInsCdxV1Api* | [**GetCdxV1OptIn**](docs/OptInsCdxV1Api.md#getcdxv1optin) | **Get** /cdx/v1/opt-in | Read the organization&#39;s stream sharing opt-in settings
+*OptInsCdxV1Api* | [**UpdateCdxV1OptIn**](docs/OptInsCdxV1Api.md#updatecdxv1optin) | **Patch** /cdx/v1/opt-in | Set the organization&#39;s stream sharing opt-in settings
 *ProviderSharedResourcesCdxV1Api* | [**DeleteImageCdxV1ProviderSharedResource**](docs/ProviderSharedResourcesCdxV1Api.md#deleteimagecdxv1providersharedresource) | **Delete** /cdx/v1/provider-shared-resources/{id}/images/{file_name} | Delete_Image a Provider Shared Resource
 *ProviderSharedResourcesCdxV1Api* | [**GetCdxV1ProviderSharedResource**](docs/ProviderSharedResourcesCdxV1Api.md#getcdxv1providersharedresource) | **Get** /cdx/v1/provider-shared-resources/{id} | Read a Provider Shared Resource
 *ProviderSharedResourcesCdxV1Api* | [**ListCdxV1ProviderSharedResources**](docs/ProviderSharedResourcesCdxV1Api.md#listcdxv1providersharedresources) | **Get** /cdx/v1/provider-shared-resources | List of Provider Shared Resources
 *ProviderSharedResourcesCdxV1Api* | [**UpdateCdxV1ProviderSharedResource**](docs/ProviderSharedResourcesCdxV1Api.md#updatecdxv1providersharedresource) | **Patch** /cdx/v1/provider-shared-resources/{id} | Update a Provider Shared Resource
-*ProviderSharedResourcesCdxV1Api* | [**UploadImageCdxV1ProviderSharedResource**](docs/ProviderSharedResourcesCdxV1Api.md#uploadimagecdxv1providersharedresource) | **Post** /cdx/v1/provider-shared-resources/{id}/images/{file_name} | Upload_Image a Provider Shared Resource
+*ProviderSharedResourcesCdxV1Api* | [**UploadImageCdxV1ProviderSharedResource**](docs/ProviderSharedResourcesCdxV1Api.md#uploadimagecdxv1providersharedresource) | **Post** /cdx/v1/provider-shared-resources/{id}/images/{file_name} | Upload image for shared resource
 *ProviderSharedResourcesCdxV1Api* | [**ViewImageCdxV1ProviderSharedResource**](docs/ProviderSharedResourcesCdxV1Api.md#viewimagecdxv1providersharedresource) | **Get** /cdx/v1/provider-shared-resources/{id}/images/{file_name} | View_Image a Provider Shared Resource
-*ProviderSharesCdxV1Api* | [**CreateCdxV1ProviderShare**](docs/ProviderSharesCdxV1Api.md#createcdxv1providershare) | **Post** /cdx/v1/provider-shares | Create a share
+*ProviderSharesCdxV1Api* | [**CreateCdxV1ProviderShare**](docs/ProviderSharesCdxV1Api.md#createcdxv1providershare) | **Post** /cdx/v1/provider-shares | Create a provider share
 *ProviderSharesCdxV1Api* | [**DeleteCdxV1ProviderShare**](docs/ProviderSharesCdxV1Api.md#deletecdxv1providershare) | **Delete** /cdx/v1/provider-shares/{id} | Delete a Provider Share
 *ProviderSharesCdxV1Api* | [**GetCdxV1ProviderShare**](docs/ProviderSharesCdxV1Api.md#getcdxv1providershare) | **Get** /cdx/v1/provider-shares/{id} | Read a Provider Share
 *ProviderSharesCdxV1Api* | [**ListCdxV1ProviderShares**](docs/ProviderSharesCdxV1Api.md#listcdxv1providershares) | **Get** /cdx/v1/provider-shares | List of Provider Shares
 *ProviderSharesCdxV1Api* | [**ResendCdxV1ProviderShare**](docs/ProviderSharesCdxV1Api.md#resendcdxv1providershare) | **Post** /cdx/v1/provider-shares/{id}:resend | Resend
-*SharedTokensCdxV1Api* | [**RedeemCdxV1SharedToken**](docs/SharedTokensCdxV1Api.md#redeemcdxv1sharedtoken) | **Post** /cdx/v1/shared-tokens:redeem | Redeem a Shared Token
-*SharedTokensCdxV1Api* | [**ResourcesCdxV1SharedToken**](docs/SharedTokensCdxV1Api.md#resourcescdxv1sharedtoken) | **Post** /cdx/v1/shared-tokens:resources | Resources a Shared Token
+*SharedTokensCdxV1Api* | [**RedeemCdxV1SharedToken**](docs/SharedTokensCdxV1Api.md#redeemcdxv1sharedtoken) | **Post** /cdx/v1/shared-tokens:redeem | Redeem token
+*SharedTokensCdxV1Api* | [**ResourcesCdxV1SharedToken**](docs/SharedTokensCdxV1Api.md#resourcescdxv1sharedtoken) | **Post** /cdx/v1/shared-tokens:resources | Validate token to view shared resources
 
 
 ## Documentation For Models
@@ -109,15 +111,20 @@ Class | Method | HTTP request | Description
  - [CdxV1ConnectionTypes](docs/CdxV1ConnectionTypes.md)
  - [CdxV1ConsumerShare](docs/CdxV1ConsumerShare.md)
  - [CdxV1ConsumerShareList](docs/CdxV1ConsumerShareList.md)
+ - [CdxV1ConsumerShareStatus](docs/CdxV1ConsumerShareStatus.md)
  - [CdxV1ConsumerSharedResource](docs/CdxV1ConsumerSharedResource.md)
  - [CdxV1ConsumerSharedResourceList](docs/CdxV1ConsumerSharedResourceList.md)
- - [CdxV1CreateShareRequest](docs/CdxV1CreateShareRequest.md)
- - [CdxV1CreateShareRequestConsumerRestrictionOneOf](docs/CdxV1CreateShareRequestConsumerRestrictionOneOf.md)
+ - [CdxV1CreateProviderShareRequest](docs/CdxV1CreateProviderShareRequest.md)
+ - [CdxV1CreateProviderShareRequestConsumerRestrictionOneOf](docs/CdxV1CreateProviderShareRequestConsumerRestrictionOneOf.md)
  - [CdxV1EmailConsumerRestriction](docs/CdxV1EmailConsumerRestriction.md)
+ - [CdxV1GcpNetwork](docs/CdxV1GcpNetwork.md)
  - [CdxV1Network](docs/CdxV1Network.md)
  - [CdxV1NetworkCloudOneOf](docs/CdxV1NetworkCloudOneOf.md)
+ - [CdxV1OptIn](docs/CdxV1OptIn.md)
  - [CdxV1ProviderShare](docs/CdxV1ProviderShare.md)
+ - [CdxV1ProviderShareConsumerRestrictionOneOf](docs/CdxV1ProviderShareConsumerRestrictionOneOf.md)
  - [CdxV1ProviderShareList](docs/CdxV1ProviderShareList.md)
+ - [CdxV1ProviderShareStatus](docs/CdxV1ProviderShareStatus.md)
  - [CdxV1ProviderSharedResource](docs/CdxV1ProviderSharedResource.md)
  - [CdxV1ProviderSharedResourceList](docs/CdxV1ProviderSharedResourceList.md)
  - [CdxV1ProviderSharedResourceUpdate](docs/CdxV1ProviderSharedResourceUpdate.md)
@@ -127,13 +134,17 @@ Class | Method | HTTP request | Description
  - [CdxV1SharedGroup](docs/CdxV1SharedGroup.md)
  - [CdxV1SharedToken](docs/CdxV1SharedToken.md)
  - [CdxV1SharedTopic](docs/CdxV1SharedTopic.md)
+ - [EnvScopedObjectReference](docs/EnvScopedObjectReference.md)
  - [Error](docs/Error.md)
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
+ - [GlobalObjectReference](docs/GlobalObjectReference.md)
  - [InlineResponse200](docs/InlineResponse200.md)
  - [ListMeta](docs/ListMeta.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
+ - [TypedEnvScopedObjectReference](docs/TypedEnvScopedObjectReference.md)
+ - [TypedGlobalObjectReference](docs/TypedGlobalObjectReference.md)
 
 
 ## Documentation For Authorization

@@ -150,7 +150,7 @@ Name | Type | Description  | Notes
 
 ## ListCdxV1ConsumerShares
 
-> CdxV1ConsumerShareList ListCdxV1ConsumerShares(ctx).SharedResource(sharedResource).PageSize(pageSize).PageToken(pageToken).Execute()
+> CdxV1ConsumerShareList ListCdxV1ConsumerShares(ctx).SharedResource(sharedResource).IncludeDeleted(includeDeleted).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Consumer Shares
 
@@ -169,13 +169,14 @@ import (
 )
 
 func main() {
-    sharedResource := "sharedResource_example" // string | Filter the results by exact match for shared_resource. (optional)
+    sharedResource := "sr-1234" // string | Filter the results by exact match for shared_resource. (optional)
+    includeDeleted := true // bool | Include deactivated shares (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ConsumerSharesCdxV1Api.ListCdxV1ConsumerShares(context.Background()).SharedResource(sharedResource).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.ConsumerSharesCdxV1Api.ListCdxV1ConsumerShares(context.Background()).SharedResource(sharedResource).IncludeDeleted(includeDeleted).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConsumerSharesCdxV1Api.ListCdxV1ConsumerShares``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -197,6 +198,7 @@ Other parameters are passed through a pointer to a apiListCdxV1ConsumerSharesReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **sharedResource** | **string** | Filter the results by exact match for shared_resource. | 
+ **includeDeleted** | **bool** | Include deactivated shares | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 

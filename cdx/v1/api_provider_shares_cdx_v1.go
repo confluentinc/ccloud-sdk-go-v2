@@ -42,7 +42,7 @@ var (
 type ProviderSharesCdxV1Api interface {
 
 	/*
-		CreateCdxV1ProviderShare Create a share
+		CreateCdxV1ProviderShare Create a provider share
 
 		Creates a share based on delivery method.
 
@@ -117,13 +117,13 @@ type ProviderSharesCdxV1Api interface {
 type ProviderSharesCdxV1ApiService service
 
 type ApiCreateCdxV1ProviderShareRequest struct {
-	ctx                     _context.Context
-	ApiService              ProviderSharesCdxV1Api
-	cdxV1CreateShareRequest *CdxV1CreateShareRequest
+	ctx                             _context.Context
+	ApiService                      ProviderSharesCdxV1Api
+	cdxV1CreateProviderShareRequest *CdxV1CreateProviderShareRequest
 }
 
-func (r ApiCreateCdxV1ProviderShareRequest) CdxV1CreateShareRequest(cdxV1CreateShareRequest CdxV1CreateShareRequest) ApiCreateCdxV1ProviderShareRequest {
-	r.cdxV1CreateShareRequest = &cdxV1CreateShareRequest
+func (r ApiCreateCdxV1ProviderShareRequest) CdxV1CreateProviderShareRequest(cdxV1CreateProviderShareRequest CdxV1CreateProviderShareRequest) ApiCreateCdxV1ProviderShareRequest {
+	r.cdxV1CreateProviderShareRequest = &cdxV1CreateProviderShareRequest
 	return r
 }
 
@@ -132,7 +132,7 @@ func (r ApiCreateCdxV1ProviderShareRequest) Execute() (CdxV1ProviderShare, *_net
 }
 
 /*
-CreateCdxV1ProviderShare Create a share
+CreateCdxV1ProviderShare Create a provider share
 
 Creates a share based on delivery method.
 
@@ -187,7 +187,7 @@ func (a *ProviderSharesCdxV1ApiService) CreateCdxV1ProviderShareExecute(r ApiCre
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.cdxV1CreateShareRequest
+	localVarPostBody = r.cdxV1CreateProviderShareRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -585,6 +585,7 @@ type ApiListCdxV1ProviderSharesRequest struct {
 	ctx            _context.Context
 	ApiService     ProviderSharesCdxV1Api
 	sharedResource *string
+	includeDeleted *bool
 	pageSize       *int32
 	pageToken      *string
 }
@@ -592,6 +593,12 @@ type ApiListCdxV1ProviderSharesRequest struct {
 // Filter the results by exact match for shared_resource.
 func (r ApiListCdxV1ProviderSharesRequest) SharedResource(sharedResource string) ApiListCdxV1ProviderSharesRequest {
 	r.sharedResource = &sharedResource
+	return r
+}
+
+// Include deactivated shares
+func (r ApiListCdxV1ProviderSharesRequest) IncludeDeleted(includeDeleted bool) ApiListCdxV1ProviderSharesRequest {
+	r.includeDeleted = &includeDeleted
 	return r
 }
 
@@ -651,6 +658,9 @@ func (a *ProviderSharesCdxV1ApiService) ListCdxV1ProviderSharesExecute(r ApiList
 
 	if r.sharedResource != nil {
 		localVarQueryParams.Add("shared_resource", parameterToString(*r.sharedResource, ""))
+	}
+	if r.includeDeleted != nil {
+		localVarQueryParams.Add("include_deleted", parameterToString(*r.includeDeleted, ""))
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))

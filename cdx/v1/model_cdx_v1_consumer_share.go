@@ -43,18 +43,19 @@ type CdxV1ConsumerShare struct {
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
 	Id       *string     `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
-	// Name of the consumer
-	ConsumerUserName *string `json:"consumer_user_name,omitempty"`
-	// Consumer organization name
-	ConsumerOrganizationName *string `json:"consumer_organization_name,omitempty"`
-	// Name of the provider
+	// Provider organization name
+	ProviderOrganizationName *string `json:"provider_organization_name,omitempty"`
+	// Name or email of the provider user
 	ProviderUserName *string `json:"provider_user_name,omitempty"`
-	// Status of share
-	Status *string `json:"status,omitempty"`
 	// The date and time at which the invitation will expire. Only for invited shares
 	InviteExpiresAt *time.Time `json:"invite_expires_at,omitempty"`
-	// The shared_resource to which this belongs.
-	SharedResource *ObjectReference `json:"shared_resource,omitempty"`
+	// Consumer organization name. Deprecated
+	ConsumerOrganizationName *string `json:"consumer_organization_name,omitempty"`
+	// Name of the consumer. Deprecated
+	ConsumerUserName *string `json:"consumer_user_name,omitempty"`
+	// The consumer user/invitee
+	ConsumerUser *ObjectReference          `json:"consumer_user,omitempty"`
+	Status       *CdxV1ConsumerShareStatus `json:"status,omitempty"`
 }
 
 // NewCdxV1ConsumerShare instantiates a new CdxV1ConsumerShare object
@@ -202,68 +203,36 @@ func (o *CdxV1ConsumerShare) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
-// GetConsumerUserName returns the ConsumerUserName field value if set, zero value otherwise.
-func (o *CdxV1ConsumerShare) GetConsumerUserName() string {
-	if o == nil || o.ConsumerUserName == nil {
+// GetProviderOrganizationName returns the ProviderOrganizationName field value if set, zero value otherwise.
+func (o *CdxV1ConsumerShare) GetProviderOrganizationName() string {
+	if o == nil || o.ProviderOrganizationName == nil {
 		var ret string
 		return ret
 	}
-	return *o.ConsumerUserName
+	return *o.ProviderOrganizationName
 }
 
-// GetConsumerUserNameOk returns a tuple with the ConsumerUserName field value if set, nil otherwise
+// GetProviderOrganizationNameOk returns a tuple with the ProviderOrganizationName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1ConsumerShare) GetConsumerUserNameOk() (*string, bool) {
-	if o == nil || o.ConsumerUserName == nil {
+func (o *CdxV1ConsumerShare) GetProviderOrganizationNameOk() (*string, bool) {
+	if o == nil || o.ProviderOrganizationName == nil {
 		return nil, false
 	}
-	return o.ConsumerUserName, true
+	return o.ProviderOrganizationName, true
 }
 
-// HasConsumerUserName returns a boolean if a field has been set.
-func (o *CdxV1ConsumerShare) HasConsumerUserName() bool {
-	if o != nil && o.ConsumerUserName != nil {
+// HasProviderOrganizationName returns a boolean if a field has been set.
+func (o *CdxV1ConsumerShare) HasProviderOrganizationName() bool {
+	if o != nil && o.ProviderOrganizationName != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetConsumerUserName gets a reference to the given string and assigns it to the ConsumerUserName field.
-func (o *CdxV1ConsumerShare) SetConsumerUserName(v string) {
-	o.ConsumerUserName = &v
-}
-
-// GetConsumerOrganizationName returns the ConsumerOrganizationName field value if set, zero value otherwise.
-func (o *CdxV1ConsumerShare) GetConsumerOrganizationName() string {
-	if o == nil || o.ConsumerOrganizationName == nil {
-		var ret string
-		return ret
-	}
-	return *o.ConsumerOrganizationName
-}
-
-// GetConsumerOrganizationNameOk returns a tuple with the ConsumerOrganizationName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CdxV1ConsumerShare) GetConsumerOrganizationNameOk() (*string, bool) {
-	if o == nil || o.ConsumerOrganizationName == nil {
-		return nil, false
-	}
-	return o.ConsumerOrganizationName, true
-}
-
-// HasConsumerOrganizationName returns a boolean if a field has been set.
-func (o *CdxV1ConsumerShare) HasConsumerOrganizationName() bool {
-	if o != nil && o.ConsumerOrganizationName != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetConsumerOrganizationName gets a reference to the given string and assigns it to the ConsumerOrganizationName field.
-func (o *CdxV1ConsumerShare) SetConsumerOrganizationName(v string) {
-	o.ConsumerOrganizationName = &v
+// SetProviderOrganizationName gets a reference to the given string and assigns it to the ProviderOrganizationName field.
+func (o *CdxV1ConsumerShare) SetProviderOrganizationName(v string) {
+	o.ProviderOrganizationName = &v
 }
 
 // GetProviderUserName returns the ProviderUserName field value if set, zero value otherwise.
@@ -298,38 +267,6 @@ func (o *CdxV1ConsumerShare) SetProviderUserName(v string) {
 	o.ProviderUserName = &v
 }
 
-// GetStatus returns the Status field value if set, zero value otherwise.
-func (o *CdxV1ConsumerShare) GetStatus() string {
-	if o == nil || o.Status == nil {
-		var ret string
-		return ret
-	}
-	return *o.Status
-}
-
-// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CdxV1ConsumerShare) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
-		return nil, false
-	}
-	return o.Status, true
-}
-
-// HasStatus returns a boolean if a field has been set.
-func (o *CdxV1ConsumerShare) HasStatus() bool {
-	if o != nil && o.Status != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetStatus gets a reference to the given string and assigns it to the Status field.
-func (o *CdxV1ConsumerShare) SetStatus(v string) {
-	o.Status = &v
-}
-
 // GetInviteExpiresAt returns the InviteExpiresAt field value if set, zero value otherwise.
 func (o *CdxV1ConsumerShare) GetInviteExpiresAt() time.Time {
 	if o == nil || o.InviteExpiresAt == nil {
@@ -362,36 +299,132 @@ func (o *CdxV1ConsumerShare) SetInviteExpiresAt(v time.Time) {
 	o.InviteExpiresAt = &v
 }
 
-// GetSharedResource returns the SharedResource field value if set, zero value otherwise.
-func (o *CdxV1ConsumerShare) GetSharedResource() ObjectReference {
-	if o == nil || o.SharedResource == nil {
-		var ret ObjectReference
+// GetConsumerOrganizationName returns the ConsumerOrganizationName field value if set, zero value otherwise.
+func (o *CdxV1ConsumerShare) GetConsumerOrganizationName() string {
+	if o == nil || o.ConsumerOrganizationName == nil {
+		var ret string
 		return ret
 	}
-	return *o.SharedResource
+	return *o.ConsumerOrganizationName
 }
 
-// GetSharedResourceOk returns a tuple with the SharedResource field value if set, nil otherwise
+// GetConsumerOrganizationNameOk returns a tuple with the ConsumerOrganizationName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1ConsumerShare) GetSharedResourceOk() (*ObjectReference, bool) {
-	if o == nil || o.SharedResource == nil {
+func (o *CdxV1ConsumerShare) GetConsumerOrganizationNameOk() (*string, bool) {
+	if o == nil || o.ConsumerOrganizationName == nil {
 		return nil, false
 	}
-	return o.SharedResource, true
+	return o.ConsumerOrganizationName, true
 }
 
-// HasSharedResource returns a boolean if a field has been set.
-func (o *CdxV1ConsumerShare) HasSharedResource() bool {
-	if o != nil && o.SharedResource != nil {
+// HasConsumerOrganizationName returns a boolean if a field has been set.
+func (o *CdxV1ConsumerShare) HasConsumerOrganizationName() bool {
+	if o != nil && o.ConsumerOrganizationName != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetSharedResource gets a reference to the given ObjectReference and assigns it to the SharedResource field.
-func (o *CdxV1ConsumerShare) SetSharedResource(v ObjectReference) {
-	o.SharedResource = &v
+// SetConsumerOrganizationName gets a reference to the given string and assigns it to the ConsumerOrganizationName field.
+func (o *CdxV1ConsumerShare) SetConsumerOrganizationName(v string) {
+	o.ConsumerOrganizationName = &v
+}
+
+// GetConsumerUserName returns the ConsumerUserName field value if set, zero value otherwise.
+func (o *CdxV1ConsumerShare) GetConsumerUserName() string {
+	if o == nil || o.ConsumerUserName == nil {
+		var ret string
+		return ret
+	}
+	return *o.ConsumerUserName
+}
+
+// GetConsumerUserNameOk returns a tuple with the ConsumerUserName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CdxV1ConsumerShare) GetConsumerUserNameOk() (*string, bool) {
+	if o == nil || o.ConsumerUserName == nil {
+		return nil, false
+	}
+	return o.ConsumerUserName, true
+}
+
+// HasConsumerUserName returns a boolean if a field has been set.
+func (o *CdxV1ConsumerShare) HasConsumerUserName() bool {
+	if o != nil && o.ConsumerUserName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetConsumerUserName gets a reference to the given string and assigns it to the ConsumerUserName field.
+func (o *CdxV1ConsumerShare) SetConsumerUserName(v string) {
+	o.ConsumerUserName = &v
+}
+
+// GetConsumerUser returns the ConsumerUser field value if set, zero value otherwise.
+func (o *CdxV1ConsumerShare) GetConsumerUser() ObjectReference {
+	if o == nil || o.ConsumerUser == nil {
+		var ret ObjectReference
+		return ret
+	}
+	return *o.ConsumerUser
+}
+
+// GetConsumerUserOk returns a tuple with the ConsumerUser field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CdxV1ConsumerShare) GetConsumerUserOk() (*ObjectReference, bool) {
+	if o == nil || o.ConsumerUser == nil {
+		return nil, false
+	}
+	return o.ConsumerUser, true
+}
+
+// HasConsumerUser returns a boolean if a field has been set.
+func (o *CdxV1ConsumerShare) HasConsumerUser() bool {
+	if o != nil && o.ConsumerUser != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetConsumerUser gets a reference to the given ObjectReference and assigns it to the ConsumerUser field.
+func (o *CdxV1ConsumerShare) SetConsumerUser(v ObjectReference) {
+	o.ConsumerUser = &v
+}
+
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *CdxV1ConsumerShare) GetStatus() CdxV1ConsumerShareStatus {
+	if o == nil || o.Status == nil {
+		var ret CdxV1ConsumerShareStatus
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CdxV1ConsumerShare) GetStatusOk() (*CdxV1ConsumerShareStatus, bool) {
+	if o == nil || o.Status == nil {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *CdxV1ConsumerShare) HasStatus() bool {
+	if o != nil && o.Status != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given CdxV1ConsumerShareStatus and assigns it to the Status field.
+func (o *CdxV1ConsumerShare) SetStatus(v CdxV1ConsumerShareStatus) {
+	o.Status = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
@@ -400,12 +433,13 @@ func (o *CdxV1ConsumerShare) Redact() {
 	o.recurseRedact(o.Kind)
 	o.recurseRedact(o.Id)
 	o.recurseRedact(o.Metadata)
-	o.recurseRedact(o.ConsumerUserName)
-	o.recurseRedact(o.ConsumerOrganizationName)
+	o.recurseRedact(o.ProviderOrganizationName)
 	o.recurseRedact(o.ProviderUserName)
-	o.recurseRedact(o.Status)
 	o.recurseRedact(o.InviteExpiresAt)
-	o.recurseRedact(o.SharedResource)
+	o.recurseRedact(o.ConsumerOrganizationName)
+	o.recurseRedact(o.ConsumerUserName)
+	o.recurseRedact(o.ConsumerUser)
+	o.recurseRedact(o.Status)
 }
 
 func (o *CdxV1ConsumerShare) recurseRedact(v interface{}) {
@@ -452,23 +486,26 @@ func (o CdxV1ConsumerShare) MarshalJSON() ([]byte, error) {
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if o.ConsumerUserName != nil {
-		toSerialize["consumer_user_name"] = o.ConsumerUserName
-	}
-	if o.ConsumerOrganizationName != nil {
-		toSerialize["consumer_organization_name"] = o.ConsumerOrganizationName
+	if o.ProviderOrganizationName != nil {
+		toSerialize["provider_organization_name"] = o.ProviderOrganizationName
 	}
 	if o.ProviderUserName != nil {
 		toSerialize["provider_user_name"] = o.ProviderUserName
 	}
-	if o.Status != nil {
-		toSerialize["status"] = o.Status
-	}
 	if o.InviteExpiresAt != nil {
 		toSerialize["invite_expires_at"] = o.InviteExpiresAt
 	}
-	if o.SharedResource != nil {
-		toSerialize["shared_resource"] = o.SharedResource
+	if o.ConsumerOrganizationName != nil {
+		toSerialize["consumer_organization_name"] = o.ConsumerOrganizationName
+	}
+	if o.ConsumerUserName != nil {
+		toSerialize["consumer_user_name"] = o.ConsumerUserName
+	}
+	if o.ConsumerUser != nil {
+		toSerialize["consumer_user"] = o.ConsumerUser
+	}
+	if o.Status != nil {
+		toSerialize["status"] = o.Status
 	}
 	return json.Marshal(toSerialize)
 }
