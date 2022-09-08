@@ -15536,9 +15536,31 @@ components:
           items:
             type: string
           type: array
+        link_error:
+          type: string
+          x-extensible-enum:
+          - UNKNOWN
+          - NO_ERROR
+          - AUTHENTICATION_ERROR
+          - UNRESOLVABLE_BOOTSTRAP_ERROR
+          - INVALID_BOOTSTRAP_INTERNAL_ENDPOINT_ERROR
+          - BOOTSTRAP_TCP_CONNECTION_FAILED_ERROR
+          - TIMEOUT_ERROR
+        link_error_message:
+          type: string
+        link_state:
+          type: string
+          x-extensible-enum:
+          - ACTIVE
+          - FAILED
+          - UNAVAILABLE
+          - PAUSED
       required:
+      - link_error
+      - link_error_message
       - link_id
       - link_name
+      - link_state
       - topic_names
       type: object
     ListLinksResponseDataList_allOf:
