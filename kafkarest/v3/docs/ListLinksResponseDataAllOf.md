@@ -9,12 +9,15 @@ Name | Type | Description | Notes
 **LinkName** | **string** |  | 
 **LinkId** | **string** |  | 
 **TopicsNames** | Pointer to **[]string** |  | [optional] 
+**LinkError** | **string** |  | 
+**LinkErrorMessage** | **string** |  | 
+**LinkState** | **string** |  | 
 
 ## Methods
 
 ### NewListLinksResponseDataAllOf
 
-`func NewListLinksResponseDataAllOf(linkName string, linkId string, ) *ListLinksResponseDataAllOf`
+`func NewListLinksResponseDataAllOf(linkName string, linkId string, linkError string, linkErrorMessage string, linkState string, ) *ListLinksResponseDataAllOf`
 
 NewListLinksResponseDataAllOf instantiates a new ListLinksResponseDataAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -163,6 +166,66 @@ SetTopicsNames sets TopicsNames field to given value.
 `func (o *ListLinksResponseDataAllOf) HasTopicsNames() bool`
 
 HasTopicsNames returns a boolean if a field has been set.
+
+### GetLinkError
+
+`func (o *ListLinksResponseDataAllOf) GetLinkError() string`
+
+GetLinkError returns the LinkError field if non-nil, zero value otherwise.
+
+### GetLinkErrorOk
+
+`func (o *ListLinksResponseDataAllOf) GetLinkErrorOk() (*string, bool)`
+
+GetLinkErrorOk returns a tuple with the LinkError field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLinkError
+
+`func (o *ListLinksResponseDataAllOf) SetLinkError(v string)`
+
+SetLinkError sets LinkError field to given value.
+
+
+### GetLinkErrorMessage
+
+`func (o *ListLinksResponseDataAllOf) GetLinkErrorMessage() string`
+
+GetLinkErrorMessage returns the LinkErrorMessage field if non-nil, zero value otherwise.
+
+### GetLinkErrorMessageOk
+
+`func (o *ListLinksResponseDataAllOf) GetLinkErrorMessageOk() (*string, bool)`
+
+GetLinkErrorMessageOk returns a tuple with the LinkErrorMessage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLinkErrorMessage
+
+`func (o *ListLinksResponseDataAllOf) SetLinkErrorMessage(v string)`
+
+SetLinkErrorMessage sets LinkErrorMessage field to given value.
+
+
+### GetLinkState
+
+`func (o *ListLinksResponseDataAllOf) GetLinkState() string`
+
+GetLinkState returns the LinkState field if non-nil, zero value otherwise.
+
+### GetLinkStateOk
+
+`func (o *ListLinksResponseDataAllOf) GetLinkStateOk() (*string, bool)`
+
+GetLinkStateOk returns a tuple with the LinkState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLinkState
+
+`func (o *ListLinksResponseDataAllOf) SetLinkState(v string)`
+
+SetLinkState sets LinkState field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
