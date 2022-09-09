@@ -6687,6 +6687,7 @@ paths:
                   topic_names:
                   - topic-sb-1
                   - topic-sb-2
+                  link_state: ACTIVE
                 - kind: KafkaLinkData
                   metadata:
                     self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/CIL-69l7S1CwoVNAhoQLug/links/my-new-link-2
@@ -6699,6 +6700,9 @@ paths:
                   topic_names:
                   - topic-db-1
                   - topic-db-2
+                  link_state: UNAVAILABLE
+                  link_error: AUTHENTICATION_ERROR
+                  link_error_message: Please check your api key and secret
                 - kind: KafkaLinkData
                   metadata:
                     self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/CIL-69l7S1CwoVNAhoQLug/links/my-new-link-3
@@ -6709,6 +6713,7 @@ paths:
                   link_id: 9cd1711e-a4ef-4390-a35e-dfd758d97a82
                   cluster_link_id: nNFxHqTvQ5CjXt_XWNl6gg
                   topic_names: null
+                  link_state: ACTIVE
               schema:
                 $ref: '#/components/schemas/ListLinksResponseDataList'
           description: A list of link names and properties
@@ -13408,6 +13413,7 @@ components:
               topic_names:
               - topic-sb-1
               - topic-sb-2
+              link_state: ACTIVE
             - kind: KafkaLinkData
               metadata:
                 self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/CIL-69l7S1CwoVNAhoQLug/links/my-new-link-2
@@ -13420,6 +13426,9 @@ components:
               topic_names:
               - topic-db-1
               - topic-db-2
+              link_state: UNAVAILABLE
+              link_error: AUTHENTICATION_ERROR
+              link_error_message: Please check your api key and secret
             - kind: KafkaLinkData
               metadata:
                 self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/CIL-69l7S1CwoVNAhoQLug/links/my-new-link-3
@@ -13430,6 +13439,7 @@ components:
               link_id: 9cd1711e-a4ef-4390-a35e-dfd758d97a82
               cluster_link_id: nNFxHqTvQ5CjXt_XWNl6gg
               topic_names: null
+              link_state: ACTIVE
           schema:
             $ref: '#/components/schemas/ListLinksResponseDataList'
       description: A list of link names and properties
@@ -14378,6 +14388,24 @@ components:
       required:
       - value
       type: object
+    LinkState:
+      type: string
+      x-extensible-enum:
+      - ACTIVE
+      - FAILED
+      - UNAVAILABLE
+      - PAUSED
+      - UNKNOWN
+    LinkError:
+      type: string
+      x-extensible-enum:
+      - UNKNOWN
+      - NO_ERROR
+      - AUTHENTICATION_ERROR
+      - UNRESOLVABLE_BOOTSTRAP_ERROR
+      - INVALID_BOOTSTRAP_INTERNAL_ENDPOINT_ERROR
+      - BOOTSTRAP_TCP_CONNECTION_FAILED_ERROR
+      - TIMEOUT_ERROR
     ListLinksResponseData:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -15547,6 +15575,7 @@ components:
           - BOOTSTRAP_TCP_CONNECTION_FAILED_ERROR
           - TIMEOUT_ERROR
         link_error_message:
+          nullable: true
           type: string
         link_state:
           type: string
@@ -15555,12 +15584,10 @@ components:
           - FAILED
           - UNAVAILABLE
           - PAUSED
+          - UNKNOWN
       required:
-      - link_error
-      - link_error_message
       - link_id
       - link_name
-      - link_state
       - topic_names
       type: object
     ListLinksResponseDataList_allOf:
