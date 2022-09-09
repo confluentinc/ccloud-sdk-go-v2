@@ -9,15 +9,15 @@ Name | Type | Description | Notes
 **LinkName** | **string** |  | 
 **LinkId** | **string** |  | 
 **TopicsNames** | Pointer to **[]string** |  | [optional] 
-**LinkError** | **string** |  | 
-**LinkErrorMessage** | **string** |  | 
-**LinkState** | **string** |  | 
+**LinkError** | Pointer to **string** |  | [optional] 
+**LinkErrorMessage** | Pointer to **NullableString** |  | [optional] 
+**LinkState** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewListLinksResponseDataAllOf
 
-`func NewListLinksResponseDataAllOf(linkName string, linkId string, linkError string, linkErrorMessage string, linkState string, ) *ListLinksResponseDataAllOf`
+`func NewListLinksResponseDataAllOf(linkName string, linkId string, ) *ListLinksResponseDataAllOf`
 
 NewListLinksResponseDataAllOf instantiates a new ListLinksResponseDataAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -186,6 +186,11 @@ and a boolean to check if the value has been set.
 
 SetLinkError sets LinkError field to given value.
 
+### HasLinkError
+
+`func (o *ListLinksResponseDataAllOf) HasLinkError() bool`
+
+HasLinkError returns a boolean if a field has been set.
 
 ### GetLinkErrorMessage
 
@@ -206,7 +211,22 @@ and a boolean to check if the value has been set.
 
 SetLinkErrorMessage sets LinkErrorMessage field to given value.
 
+### HasLinkErrorMessage
 
+`func (o *ListLinksResponseDataAllOf) HasLinkErrorMessage() bool`
+
+HasLinkErrorMessage returns a boolean if a field has been set.
+
+### SetLinkErrorMessageNil
+
+`func (o *ListLinksResponseDataAllOf) SetLinkErrorMessageNil(b bool)`
+
+ SetLinkErrorMessageNil sets the value for LinkErrorMessage to be an explicit nil
+
+### UnsetLinkErrorMessage
+`func (o *ListLinksResponseDataAllOf) UnsetLinkErrorMessage()`
+
+UnsetLinkErrorMessage ensures that no value is present for LinkErrorMessage, not even an explicit nil
 ### GetLinkState
 
 `func (o *ListLinksResponseDataAllOf) GetLinkState() string`
@@ -226,6 +246,11 @@ and a boolean to check if the value has been set.
 
 SetLinkState sets LinkState field to given value.
 
+### HasLinkState
+
+`func (o *ListLinksResponseDataAllOf) HasLinkState() bool`
+
+HasLinkState returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
