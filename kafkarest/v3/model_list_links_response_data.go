@@ -42,24 +42,21 @@ type ListLinksResponseData struct {
 	LinkName             string           `json:"link_name"`
 	LinkId               string           `json:"link_id"`
 	TopicsNames          *[]string        `json:"topics_names,omitempty"`
-	LinkError            string           `json:"link_error"`
-	LinkErrorMessage     string           `json:"link_error_message"`
-	LinkState            string           `json:"link_state"`
+	LinkError            *string          `json:"link_error,omitempty"`
+	LinkErrorMessage     NullableString   `json:"link_error_message,omitempty"`
+	LinkState            *string          `json:"link_state,omitempty"`
 }
 
 // NewListLinksResponseData instantiates a new ListLinksResponseData object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListLinksResponseData(kind string, metadata ResourceMetadata, linkName string, linkId string, linkError string, linkErrorMessage string, linkState string) *ListLinksResponseData {
+func NewListLinksResponseData(kind string, metadata ResourceMetadata, linkName string, linkId string) *ListLinksResponseData {
 	this := ListLinksResponseData{}
 	this.Kind = kind
 	this.Metadata = metadata
 	this.LinkName = linkName
 	this.LinkId = linkId
-	this.LinkError = linkError
-	this.LinkErrorMessage = linkErrorMessage
-	this.LinkState = linkState
 	return &this
 }
 
@@ -285,76 +282,111 @@ func (o *ListLinksResponseData) SetTopicsNames(v []string) {
 	o.TopicsNames = &v
 }
 
-// GetLinkError returns the LinkError field value
+// GetLinkError returns the LinkError field value if set, zero value otherwise.
 func (o *ListLinksResponseData) GetLinkError() string {
-	if o == nil {
+	if o == nil || o.LinkError == nil {
 		var ret string
 		return ret
 	}
-
-	return o.LinkError
+	return *o.LinkError
 }
 
-// GetLinkErrorOk returns a tuple with the LinkError field value
+// GetLinkErrorOk returns a tuple with the LinkError field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ListLinksResponseData) GetLinkErrorOk() (*string, bool) {
-	if o == nil {
+	if o == nil || o.LinkError == nil {
 		return nil, false
 	}
-	return &o.LinkError, true
+	return o.LinkError, true
 }
 
-// SetLinkError sets field value
+// HasLinkError returns a boolean if a field has been set.
+func (o *ListLinksResponseData) HasLinkError() bool {
+	if o != nil && o.LinkError != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLinkError gets a reference to the given string and assigns it to the LinkError field.
 func (o *ListLinksResponseData) SetLinkError(v string) {
-	o.LinkError = v
+	o.LinkError = &v
 }
 
-// GetLinkErrorMessage returns the LinkErrorMessage field value
+// GetLinkErrorMessage returns the LinkErrorMessage field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ListLinksResponseData) GetLinkErrorMessage() string {
-	if o == nil {
+	if o == nil || o.LinkErrorMessage.Get() == nil {
 		var ret string
 		return ret
 	}
-
-	return o.LinkErrorMessage
+	return *o.LinkErrorMessage.Get()
 }
 
-// GetLinkErrorMessageOk returns a tuple with the LinkErrorMessage field value
+// GetLinkErrorMessageOk returns a tuple with the LinkErrorMessage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ListLinksResponseData) GetLinkErrorMessageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.LinkErrorMessage, true
+	return o.LinkErrorMessage.Get(), o.LinkErrorMessage.IsSet()
 }
 
-// SetLinkErrorMessage sets field value
+// HasLinkErrorMessage returns a boolean if a field has been set.
+func (o *ListLinksResponseData) HasLinkErrorMessage() bool {
+	if o != nil && o.LinkErrorMessage.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLinkErrorMessage gets a reference to the given NullableString and assigns it to the LinkErrorMessage field.
 func (o *ListLinksResponseData) SetLinkErrorMessage(v string) {
-	o.LinkErrorMessage = v
+	o.LinkErrorMessage.Set(&v)
 }
 
-// GetLinkState returns the LinkState field value
+// SetLinkErrorMessageNil sets the value for LinkErrorMessage to be an explicit nil
+func (o *ListLinksResponseData) SetLinkErrorMessageNil() {
+	o.LinkErrorMessage.Set(nil)
+}
+
+// UnsetLinkErrorMessage ensures that no value is present for LinkErrorMessage, not even an explicit nil
+func (o *ListLinksResponseData) UnsetLinkErrorMessage() {
+	o.LinkErrorMessage.Unset()
+}
+
+// GetLinkState returns the LinkState field value if set, zero value otherwise.
 func (o *ListLinksResponseData) GetLinkState() string {
-	if o == nil {
+	if o == nil || o.LinkState == nil {
 		var ret string
 		return ret
 	}
-
-	return o.LinkState
+	return *o.LinkState
 }
 
-// GetLinkStateOk returns a tuple with the LinkState field value
+// GetLinkStateOk returns a tuple with the LinkState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ListLinksResponseData) GetLinkStateOk() (*string, bool) {
-	if o == nil {
+	if o == nil || o.LinkState == nil {
 		return nil, false
 	}
-	return &o.LinkState, true
+	return o.LinkState, true
 }
 
-// SetLinkState sets field value
+// HasLinkState returns a boolean if a field has been set.
+func (o *ListLinksResponseData) HasLinkState() bool {
+	if o != nil && o.LinkState != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLinkState gets a reference to the given string and assigns it to the LinkState field.
 func (o *ListLinksResponseData) SetLinkState(v string) {
-	o.LinkState = v
+	o.LinkState = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
@@ -366,9 +398,9 @@ func (o *ListLinksResponseData) Redact() {
 	o.recurseRedact(&o.LinkName)
 	o.recurseRedact(&o.LinkId)
 	o.recurseRedact(o.TopicsNames)
-	o.recurseRedact(&o.LinkError)
-	o.recurseRedact(&o.LinkErrorMessage)
-	o.recurseRedact(&o.LinkState)
+	o.recurseRedact(o.LinkError)
+	o.recurseRedact(o.LinkErrorMessage)
+	o.recurseRedact(o.LinkState)
 }
 
 func (o *ListLinksResponseData) recurseRedact(v interface{}) {
@@ -424,13 +456,13 @@ func (o ListLinksResponseData) MarshalJSON() ([]byte, error) {
 	if o.TopicsNames != nil {
 		toSerialize["topics_names"] = o.TopicsNames
 	}
-	if true {
+	if o.LinkError != nil {
 		toSerialize["link_error"] = o.LinkError
 	}
-	if true {
-		toSerialize["link_error_message"] = o.LinkErrorMessage
+	if o.LinkErrorMessage.IsSet() {
+		toSerialize["link_error_message"] = o.LinkErrorMessage.Get()
 	}
-	if true {
+	if o.LinkState != nil {
 		toSerialize["link_state"] = o.LinkState
 	}
 	return json.Marshal(toSerialize)
