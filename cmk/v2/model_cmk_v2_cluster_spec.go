@@ -55,6 +55,8 @@ type CmkV2ClusterSpec struct {
 	Environment *ObjectReference `json:"environment,omitempty"`
 	// The network associated with this object.
 	Network *ObjectReference `json:"network,omitempty"`
+	// The byok associated with this object.
+	Byok *ObjectReference `json:"byok,omitempty"`
 }
 
 // NewCmkV2ClusterSpec instantiates a new CmkV2ClusterSpec object
@@ -398,6 +400,38 @@ func (o *CmkV2ClusterSpec) SetNetwork(v ObjectReference) {
 	o.Network = &v
 }
 
+// GetByok returns the Byok field value if set, zero value otherwise.
+func (o *CmkV2ClusterSpec) GetByok() ObjectReference {
+	if o == nil || o.Byok == nil {
+		var ret ObjectReference
+		return ret
+	}
+	return *o.Byok
+}
+
+// GetByokOk returns a tuple with the Byok field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CmkV2ClusterSpec) GetByokOk() (*ObjectReference, bool) {
+	if o == nil || o.Byok == nil {
+		return nil, false
+	}
+	return o.Byok, true
+}
+
+// HasByok returns a boolean if a field has been set.
+func (o *CmkV2ClusterSpec) HasByok() bool {
+	if o != nil && o.Byok != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetByok gets a reference to the given ObjectReference and assigns it to the Byok field.
+func (o *CmkV2ClusterSpec) SetByok(v ObjectReference) {
+	o.Byok = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *CmkV2ClusterSpec) Redact() {
     o.recurseRedact(o.DisplayName)
@@ -410,6 +444,7 @@ func (o *CmkV2ClusterSpec) Redact() {
     o.recurseRedact(o.ApiEndpoint)
     o.recurseRedact(o.Environment)
     o.recurseRedact(o.Network)
+    o.recurseRedact(o.Byok)
 }
 
 func (o *CmkV2ClusterSpec) recurseRedact(v interface{}) {
@@ -473,6 +508,9 @@ func (o CmkV2ClusterSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.Network != nil {
 		toSerialize["network"] = o.Network
+	}
+	if o.Byok != nil {
+		toSerialize["byok"] = o.Byok
 	}
 	return json.Marshal(toSerialize)
 }

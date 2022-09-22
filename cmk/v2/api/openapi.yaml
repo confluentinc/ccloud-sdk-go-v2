@@ -111,6 +111,11 @@ paths:
                                   id: n-00000
                                   related: https://api.confluent.cloud/networking/v1/networks/n-00000
                                   resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000
+                              byok:
+                                example:
+                                  id: cck-00000
+                                  related: https://api.confluent.cloud/byok/v1/keys/cck-00000
+                                  resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/key=cck-00000
                             type: object
                       type: array
                   type: object
@@ -350,6 +355,9 @@ paths:
                       network:
                         example:
                           id: n-00000
+                      byok:
+                        example:
+                          id: cck-00000
                     type: object
                 type: object
       responses:
@@ -386,6 +394,11 @@ paths:
                             id: n-00000
                             related: https://api.confluent.cloud/networking/v1/networks/n-00000
                             resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000
+                        byok:
+                          example:
+                            id: cck-00000
+                            related: https://api.confluent.cloud/byok/v1/keys/cck-00000
+                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/key=cck-00000
                       type: object
                   type: object
           description: A Cluster is being created.
@@ -595,13 +608,13 @@ paths:
             --url https://api.confluent.cloud/cmk/v2/clusters \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"ProdKafkaCluster","availability":"SINGLE_ZONE","cloud":"GCP","region":"us-east4","config":{"kind":"Basic"},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"n-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"ProdKafkaCluster","availability":"SINGLE_ZONE","cloud":"GCP","region":"us-east4","config":{"kind":"Basic"},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"n-00000","environment":"string"},"byok":{"id":"cck-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"},\"byok\":{\"id\":\"cck-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/cmk/v2/clusters")
             .post(body)
@@ -618,11 +631,12 @@ paths:
           cloud\\\":\\\"GCP\\\",\\\"region\\\":\\\"us-east4\\\",\\\"config\\\":{\\\
           \"kind\\\":\\\"Basic\\\"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
           \",\\\"environment\\\":\\\"string\\\"},\\\"network\\\":{\\\"id\\\":\\\"\
-          n-00000\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
-          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          n-00000\\\",\\\"environment\\\":\\\"string\\\"},\\\"byok\\\":{\\\"id\\\"\
+          :\\\"cck-00000\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _\
+          \ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
+          , \"application/json\")\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
+          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -630,7 +644,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"},\"byok\":{\"id\":\"cck-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -679,7 +693,8 @@ paths:
               region: 'us-east4',
               config: {kind: 'Basic'},
               environment: {id: 'env-00000', environment: 'string'},
-              network: {id: 'n-00000', environment: 'string'}
+              network: {id: 'n-00000', environment: 'string'},
+              byok: {id: 'cck-00000', environment: 'string'}
             }
           }));
           req.end();
@@ -695,7 +710,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"},\"byok\":{\"id\":\"cck-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -704,7 +719,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"},\"byok\":{\"id\":\"cck-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /cmk/v2/clusters/{id}:
     delete:
@@ -1014,6 +1029,11 @@ paths:
                             id: n-00000
                             related: https://api.confluent.cloud/networking/v1/networks/n-00000
                             resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000
+                        byok:
+                          example:
+                            id: cck-00000
+                            related: https://api.confluent.cloud/byok/v1/keys/cck-00000
+                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/key=cck-00000
                       type: object
                   type: object
           description: Cluster.
@@ -1307,6 +1327,11 @@ paths:
                             id: n-00000
                             related: https://api.confluent.cloud/networking/v1/networks/n-00000
                             resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000
+                        byok:
+                          example:
+                            id: cck-00000
+                            related: https://api.confluent.cloud/byok/v1/keys/cck-00000
+                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/key=cck-00000
                       type: object
                   type: object
           description: Cluster.
@@ -1496,13 +1521,13 @@ paths:
             --url 'https://api.confluent.cloud/cmk/v2/clusters/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"ProdKafkaCluster","availability":"SINGLE_ZONE","cloud":"GCP","region":"us-east4","config":{"kind":"Basic"},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"string","environment":"string"}}}'
+            --data '{"spec":{"display_name":"ProdKafkaCluster","availability":"SINGLE_ZONE","cloud":"GCP","region":"us-east4","config":{"kind":"Basic"},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"string","environment":"string"},"byok":{"id":"string","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"},\"byok\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/cmk/v2/clusters/{id}")
             .patch(body)
@@ -1519,11 +1544,12 @@ paths:
           cloud\\\":\\\"GCP\\\",\\\"region\\\":\\\"us-east4\\\",\\\"config\\\":{\\\
           \"kind\\\":\\\"Basic\\\"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
           \",\\\"environment\\\":\\\"string\\\"},\\\"network\\\":{\\\"id\\\":\\\"\
-          string\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
-          PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          string\\\",\\\"environment\\\":\\\"string\\\"},\\\"byok\\\":{\\\"id\\\"\
+          :\\\"string\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ :=\
+          \ http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
+          , \"application/json\")\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
+          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -1531,7 +1557,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"},\"byok\":{\"id\":\"string\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -1580,7 +1606,8 @@ paths:
               region: 'us-east4',
               config: {kind: 'Basic'},
               environment: {id: 'env-00000', environment: 'string'},
-              network: {id: 'string', environment: 'string'}
+              network: {id: 'string', environment: 'string'},
+              byok: {id: 'string', environment: 'string'}
             }
           }));
           req.end();
@@ -1596,7 +1623,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"},\"byok\":{\"id\":\"string\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1605,7 +1632,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"},\"byok\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
 components:
   responses:
@@ -1932,6 +1959,7 @@ components:
             The number of Confluent Kafka Units (CKUs) for Dedicated cluster types.
             MULTI_ZONE dedicated clusters must have at least two CKUs.
         encryption_key:
+          deprecated: true
           description: |
             The id of the encryption key that is used to encrypt the data in the Kafka cluster.
             (e.g. for Amazon Web Services, the Amazon Resource Name of the key).
@@ -2123,6 +2151,11 @@ components:
           - $ref: '#/components/schemas/ObjectReference'
           description: The network associated with this object.
           x-immutable: true
+        byok:
+          allOf:
+          - $ref: '#/components/schemas/ObjectReference'
+          description: The byok associated with this object.
+          x-immutable: true
       type: object
       x-enable-id: true
       x-enable-listmeta: true
@@ -2223,6 +2256,140 @@ components:
           type: string
         environment:
           description: Environment of the referred resource, if env-scoped
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        api_version:
+          description: API group and version of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
+    TypedEnvScopedObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        environment:
+          description: Environment of the referred resource, if env-scoped
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        api_version:
+          description: API group and version of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
+    GlobalObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
+    EnvScopedObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        environment:
+          description: Environment of the referred resource, if env-scoped
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
+    TypedGlobalObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
           maxLength: 255
           minLength: 1
           type: string

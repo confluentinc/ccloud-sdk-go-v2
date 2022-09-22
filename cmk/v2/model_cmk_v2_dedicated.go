@@ -40,6 +40,7 @@ type CmkV2Dedicated struct {
 	// The number of Confluent Kafka Units (CKUs) for Dedicated cluster types. MULTI_ZONE dedicated clusters must have at least two CKUs. 
 	Cku int32 `json:"cku"`
 	// The id of the encryption key that is used to encrypt the data in the Kafka cluster. (e.g. for Amazon Web Services, the Amazon Resource Name of the key). 
+	// Deprecated
 	EncryptionKey *string `json:"encryption_key,omitempty"`
 	// The list of zones the cluster is in.  On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3)  On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c). 
 	Zones *[]string `json:"zones,omitempty"`
@@ -113,6 +114,7 @@ func (o *CmkV2Dedicated) SetCku(v int32) {
 }
 
 // GetEncryptionKey returns the EncryptionKey field value if set, zero value otherwise.
+// Deprecated
 func (o *CmkV2Dedicated) GetEncryptionKey() string {
 	if o == nil || o.EncryptionKey == nil {
 		var ret string
@@ -123,6 +125,7 @@ func (o *CmkV2Dedicated) GetEncryptionKey() string {
 
 // GetEncryptionKeyOk returns a tuple with the EncryptionKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *CmkV2Dedicated) GetEncryptionKeyOk() (*string, bool) {
 	if o == nil || o.EncryptionKey == nil {
 		return nil, false
@@ -140,6 +143,7 @@ func (o *CmkV2Dedicated) HasEncryptionKey() bool {
 }
 
 // SetEncryptionKey gets a reference to the given string and assigns it to the EncryptionKey field.
+// Deprecated
 func (o *CmkV2Dedicated) SetEncryptionKey(v string) {
 	o.EncryptionKey = &v
 }

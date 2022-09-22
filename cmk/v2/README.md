@@ -99,13 +99,17 @@ Class | Method | HTTP request | Description
  - [CmkV2ClusterUpdate](docs/CmkV2ClusterUpdate.md)
  - [CmkV2Dedicated](docs/CmkV2Dedicated.md)
  - [CmkV2Standard](docs/CmkV2Standard.md)
+ - [EnvScopedObjectReference](docs/EnvScopedObjectReference.md)
  - [Error](docs/Error.md)
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
+ - [GlobalObjectReference](docs/GlobalObjectReference.md)
  - [ListMeta](docs/ListMeta.md)
  - [MultipleSearchFilter](docs/MultipleSearchFilter.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
+ - [TypedEnvScopedObjectReference](docs/TypedEnvScopedObjectReference.md)
+ - [TypedGlobalObjectReference](docs/TypedGlobalObjectReference.md)
 
 
 ## Documentation For Authorization
