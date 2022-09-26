@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | Peering kind type. | 
-**Tenant** | **string** | Customer Azure tenant. | 
-**Vnet** | **string** | Customer VNet resource ID. | 
-**CustomerRegion** | **string** | Region of customer VNet | 
+**Tenant** | **string** | The Azure Tenant ID in which your Azure Subscription exists. Represents an organization in Azure Active Directory. You can find your Azure Tenant ID in the Azure Portal under [Azure Active Directory](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Overview). Must be a valid **32 character UUID string**.  | 
+**Vnet** | **string** | The resource ID of the VNet that you are peering with Confluent Cloud. You can find the name of your Azure VNet in the [Azure Portal on the Overview tab of your Azure Virtual Network](https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Network%2FvirtualNetworks). | 
+**CustomerRegion** | **string** | The region of the VNet you are peering with Confluent Cloud network. | 
 
 ## Methods
 

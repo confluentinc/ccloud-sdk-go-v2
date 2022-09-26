@@ -37,7 +37,7 @@ import (
 type NetworkingV1AwsPrivateLinkAccess struct {
 	// PrivateLink kind type.
 	Kind string `json:"kind"`
-	// AWS account to allow for PrivateLink access.
+	// The AWS account ID for the account containing the VPCs you want to connect from using AWS PrivateLink. You can find your AWS account ID [here] (https://console.aws.amazon.com/billing/home?#/account) under **My Account** in your AWS Management Console. Must be a **12 character string**. 
 	Account string `json:"account"`
 }
 

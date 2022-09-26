@@ -3092,13 +3092,26 @@ components:
           additionalProperties:
             type: string
           description: |
-            The mapping of zones to PrivateLink Service Aliases if available.  Keys are zones
-            and values are [Azure PrivateLink Service
-            Aliases](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#share-your-service)
+            The mapping of zones to Private Link Service Aliases if available. Keys are zones
+            and values are [Azure Private Link Service
+            Aliases](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#share-your-service).
           example:
             "1": 0-00000-privatelink-1.00000000-0000-0000-0000-000000000000.westeurope.azure.privatelinkservice
             "2": 0-00000-privatelink-2.00000000-0000-0000-0000-000000000000.westeurope.azure.privatelinkservice
             "3": 0-00000-privatelink-3.00000000-0000-0000-0000-000000000000.westeurope.azure.privatelinkservice
+          readOnly: true
+          type: object
+        private_link_service_resource_ids:
+          additionalProperties:
+            type: string
+          description: |
+            The mapping of zones to Private Link Service Resource IDs if available. Keys are zones
+            and values are [Azure Private Link Service Resource
+            IDs](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#share-your-service).
+          example:
+            "1": /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/0-00000/providers/Microsoft.Network/privateLinkServices/0-00000-privatelink-1
+            "2": /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/0-00000/providers/Microsoft.Network/privateLinkServices/0-00000-privatelink-2
+            "3": /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/0-00000/providers/Microsoft.Network/privateLinkServices/0-00000-privatelink-3
           readOnly: true
           type: object
       required:
@@ -3834,6 +3847,140 @@ components:
           type: string
         environment:
           description: Environment of the referred resource, if env-scoped
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        api_version:
+          description: API group and version of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
+    TypedEnvScopedObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        environment:
+          description: Environment of the referred resource, if env-scoped
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        api_version:
+          description: API group and version of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
+    GlobalObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
+    EnvScopedObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        environment:
+          description: Environment of the referred resource, if env-scoped
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
+    TypedGlobalObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
           maxLength: 255
           minLength: 1
           type: string

@@ -37,7 +37,7 @@ import (
 type NetworkingV1AzurePrivateLinkAccess struct {
 	// PrivateLink kind type.
 	Kind string `json:"kind"`
-	// Azure subscription to allow for PrivateLink access.
+	// The Azure subscription ID for the account containing the VNets you want to connect from using Azure Private Link. You can find your Azure subscription ID in the subscription section of your [Microsoft Azure Portal](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade). Must be a valid **32 character UUID string**. 
 	Subscription string `json:"subscription"`
 }
 

@@ -37,13 +37,13 @@ import (
 type NetworkingV1AwsPeering struct {
 	// Peering kind type.
 	Kind string `json:"kind"`
-	// AWS account for VPC to peer with the network
+	// The AWS account ID associated with the VPC you are peering with Confluent Cloud network.
 	Account string `json:"account"`
-	// The id of the AWS VPC to peer with
+	// The VPC ID you are peering with Confluent Cloud network.
 	Vpc string `json:"vpc"`
-	// List of routes for the peering
+	// The [CIDR blocks](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) of the VPC you are peering with Confluent Cloud network. This is used by Confluent Cloud network to route traffic back to your network. The CIDR block must be a private range and cannot overlap with the Confluent Cloud CIDR block. 
 	Routes []string `json:"routes"`
-	// Region of customer VPC
+	// The region of the VPC you are peering with Confluent Cloud network.
 	CustomerRegion string `json:"customer_region"`
 }
 

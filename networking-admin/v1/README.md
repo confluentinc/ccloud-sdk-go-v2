@@ -95,9 +95,11 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [EnvScopedObjectReference](docs/EnvScopedObjectReference.md)
  - [Error](docs/Error.md)
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
+ - [GlobalObjectReference](docs/GlobalObjectReference.md)
  - [ListMeta](docs/ListMeta.md)
  - [MultipleSearchFilter](docs/MultipleSearchFilter.md)
  - [NetworkingAdminV1AwsNetwork](docs/NetworkingAdminV1AwsNetwork.md)
@@ -134,6 +136,8 @@ Class | Method | HTTP request | Description
  - [NetworkingAdminV1TransitGatewayAttachmentStatus](docs/NetworkingAdminV1TransitGatewayAttachmentStatus.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
+ - [TypedEnvScopedObjectReference](docs/TypedEnvScopedObjectReference.md)
+ - [TypedGlobalObjectReference](docs/TypedGlobalObjectReference.md)
 
 
 ## Documentation For Authorization

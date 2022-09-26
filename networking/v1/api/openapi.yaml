@@ -13,6 +13,10 @@ info:
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
+- description: Confluent Cloud staging
+  url: https://api.stag.cpdev.cloud
+- description: Confluent Cloud development
+  url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
     [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
@@ -73,7 +77,7 @@ tags:
 - description: |-
     [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-    Add or remove access to PrivateLink endpoints by AWS account, Azure subscription and GCP project.
+    Add or remove access to PrivateLink endpoints by AWS account, Azure subscription and GCP project ID.
 
     Related guide: [Private Links Overview](https://docs.confluent.io/cloud/current/networking/private-links/index.html).
 
@@ -337,7 +341,6 @@ paths:
       summary: List of Networks
       tags:
       - Networks (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -682,7 +685,6 @@ paths:
       summary: Create a Network
       tags:
       - Networks (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -801,7 +803,6 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Networking v1
   /networking/v1/networks/{id}:
     delete:
       description: |-
@@ -965,7 +966,6 @@ paths:
       summary: Delete a Network
       tags:
       - Networks (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1242,7 +1242,6 @@ paths:
       summary: Read a Network
       tags:
       - Networks (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1573,7 +1572,6 @@ paths:
       summary: Update a Network
       tags:
       - Networks (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1692,7 +1690,6 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Networking v1
   /networking/v1/peerings:
     get:
       description: |-
@@ -1910,7 +1907,6 @@ paths:
       summary: List of Peerings
       tags:
       - Peerings (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -2261,7 +2257,6 @@ paths:
       summary: Create a Peering
       tags:
       - Peerings (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -2383,7 +2378,6 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Networking v1
   /networking/v1/peerings/{id}:
     delete:
       description: |-
@@ -2547,7 +2541,6 @@ paths:
       summary: Delete a Peering
       tags:
       - Peerings (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -2828,7 +2821,6 @@ paths:
       summary: Read a Peering
       tags:
       - Peerings (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -3163,7 +3155,6 @@ paths:
       summary: Update a Peering
       tags:
       - Peerings (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -3285,7 +3276,6 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Networking v1
   /networking/v1/transit-gateway-attachments:
     get:
       description: |-
@@ -3503,7 +3493,6 @@ paths:
       summary: List of Transit Gateway Attachments
       tags:
       - Transit Gateway Attachments (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -3588,7 +3577,6 @@ paths:
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Networking v1
   /networking/v1/transit-gateway-attachments/{id}:
     get:
       description: |-
@@ -3786,7 +3774,6 @@ paths:
       summary: Read a Transit Gateway Attachment
       tags:
       - Transit Gateway Attachments (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -3871,7 +3858,6 @@ paths:
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Networking v1
   /networking/v1/private-link-accesses:
     get:
       description: |-
@@ -4089,7 +4075,6 @@ paths:
       summary: List of Private Link Accesses
       tags:
       - Private Link Accesses (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -4440,7 +4425,6 @@ paths:
       summary: Create a Private Link Access
       tags:
       - Private Link Accesses (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -4555,7 +4539,6 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Networking v1
   /networking/v1/private-link-accesses/{id}:
     delete:
       description: |-
@@ -4719,7 +4702,6 @@ paths:
       summary: Delete a Private Link Access
       tags:
       - Private Link Accesses (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -5000,7 +4982,6 @@ paths:
       summary: Read a Private Link Access
       tags:
       - Private Link Accesses (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -5335,7 +5316,6 @@ paths:
       summary: Update a Private Link Access
       tags:
       - Private Link Accesses (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -5450,7 +5430,6 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Networking v1
 components:
   responses:
     BadRequestError:
@@ -5954,7 +5933,7 @@ components:
       type: object
     networking.v1.PrivateLinkAccess:
       description: |-
-        Add or remove access to PrivateLink endpoints by AWS account, Azure subscription and GCP project.
+        Add or remove access to PrivateLink endpoints by AWS account, Azure subscription and GCP project ID.
 
         Related guide: [Private Links Overview](https://docs.confluent.io/cloud/current/networking/private-links/index.html).
 
@@ -6039,7 +6018,7 @@ components:
       - phase
       type: object
     networking.v1.AwsAccount:
-      description: AWS account
+      description: The AWS account ID
       example: "000000000000"
       pattern: ^\d{12}$
       type: string
@@ -6079,18 +6058,18 @@ components:
           - AwsNetwork
           type: string
         vpc:
-          description: The AWS VPC id for the network.
+          description: The Confluent Cloud VPC ID.
           example: vpc-00000000000000000
           readOnly: true
           type: string
         account:
-          description: The AWS account id for the network.
+          description: The AWS account ID associated with the Confluent Cloud VPC.
           example: "000000000000"
           readOnly: true
           type: string
         private_link_endpoint_service:
-          description: The AWS VPC endpoint service for the network (used for PrivateLink)
-            if available.
+          description: The endpoint service of the Confluent Cloud VPC. (used for
+            PrivateLink) if available.
           example: com.amazonaws.vpce.eu-west-3.vpce-00000000000000000
           readOnly: true
           type: string
@@ -6108,12 +6087,12 @@ components:
           - GcpNetwork
           type: string
         project:
-          description: The GCP project.
+          description: The GCP Project ID associated with the Confluent Cloud VPC.
           example: cc-prod-3
           readOnly: true
           type: string
         vpc_network:
-          description: The GCP VPC network name.
+          description: The network name of the Confluent Cloud VPC.
           example: prod-network
           readOnly: true
           type: string
@@ -6145,12 +6124,13 @@ components:
           - AzureNetwork
           type: string
         vnet:
-          description: The Azure Virtual Network.
+          description: The resource ID of the Confluent Cloud VNet.
           example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/prod-group/providers/Microsoft.Network/virtualNetworks/prod-network
           readOnly: true
           type: string
         subscription:
-          description: The Azure subscription.
+          description: The Azure Subscription ID associated with the Confluent Cloud
+            VPC.
           example: 00000000-0000-0000-0000-000000000000
           readOnly: true
           type: string
@@ -6158,13 +6138,26 @@ components:
           additionalProperties:
             type: string
           description: |
-            The mapping of zones to PrivateLink Service Aliases if available.  Keys are zones
-            and values are [Azure PrivateLink Service
-            Aliases](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#share-your-service)
+            The mapping of zones to Private Link Service Aliases if available. Keys are zones
+            and values are [Azure Private Link Service
+            Aliases](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#share-your-service).
           example:
             "1": 0-00000-privatelink-1.00000000-0000-0000-0000-000000000000.westeurope.azure.privatelinkservice
             "2": 0-00000-privatelink-2.00000000-0000-0000-0000-000000000000.westeurope.azure.privatelinkservice
             "3": 0-00000-privatelink-3.00000000-0000-0000-0000-000000000000.westeurope.azure.privatelinkservice
+          readOnly: true
+          type: object
+        private_link_service_resource_ids:
+          additionalProperties:
+            type: string
+          description: |
+            The mapping of zones to Private Link Service Resource IDs if available. Keys are zones
+            and values are [Azure Private Link Service Resource
+            IDs](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#share-your-service).
+          example:
+            "1": /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/0-00000/providers/Microsoft.Network/privateLinkServices/0-00000-privatelink-1
+            "2": /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/0-00000/providers/Microsoft.Network/privateLinkServices/0-00000-privatelink-2
+            "3": /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/0-00000/providers/Microsoft.Network/privateLinkServices/0-00000-privatelink-3
           readOnly: true
           type: object
       required:
@@ -6183,21 +6176,26 @@ components:
         account:
           allOf:
           - $ref: '#/components/schemas/networking.v1.AwsAccount'
-          description: AWS account for VPC to peer with the network
+          description: The AWS account ID associated with the VPC you are peering
+            with Confluent Cloud network.
         vpc:
-          description: The id of the AWS VPC to peer with
+          description: The VPC ID you are peering with Confluent Cloud network.
           example: vpc-00000000000000000
           minLength: 1
           type: string
         routes:
-          description: List of routes for the peering
+          description: |
+            The [CIDR blocks](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) of the VPC you are peering
+            with Confluent Cloud network. This is used by Confluent Cloud network to route traffic back to your network.
+            The CIDR block must be a private range and cannot overlap with the Confluent Cloud CIDR block.
           example:
           - 10.108.16.0/21
           items:
             $ref: '#/components/schemas/networking.v1.Cidr'
           type: array
         customer_region:
-          description: Region of customer VPC
+          description: The region of the VPC you are peering with Confluent Cloud
+            network.
           example: us-east-1
           type: string
       required:
@@ -6218,18 +6216,22 @@ components:
           example: GcpPeering
           type: string
         project:
-          description: The name of the GCP project.
+          description: |
+            The Google Cloud project ID associated with the VPC that you are peering with Confluent Cloud network.
           example: my-gcp-project
           minLength: 1
           type: string
         vpc_network:
-          description: The name of the GCP VPC network to peer with.
+          description: The name of the VPC that you are peering with Confluent Cloud
+            network.
           example: my-gcp-network
           minLength: 1
           type: string
         import_custom_routes:
           default: false
-          description: Enable customer route import.
+          description: |
+            Enable customer route import. For more information, see
+            [Importing custom routes](https://cloud.google.com/vpc/docs/vpc-peering#importing-exporting-routes).
           example: true
           type: boolean
       required:
@@ -6247,16 +6249,24 @@ components:
           - AzurePeering
           type: string
         tenant:
-          description: Customer Azure tenant.
+          description: |
+            The Azure Tenant ID in which your Azure Subscription exists.
+            Represents an organization in Azure Active Directory. You can find your Azure Tenant ID in the Azure Portal
+            under
+            [Azure Active Directory](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Overview).
+            Must be a valid **32 character UUID string**.
           minLength: 1
           type: string
         vnet:
-          description: Customer VNet resource ID.
+          description: The resource ID of the VNet that you are peering with Confluent
+            Cloud. You can find the name of your Azure VNet in the [Azure Portal on
+            the Overview tab of your Azure Virtual Network](https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Network%2FvirtualNetworks).
           example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.Network/virtualNetworks/my-vnet
           minLength: 1
           type: string
         customer_region:
-          description: Region of customer VNet
+          description: The region of the VNet you are peering with Confluent Cloud
+            network.
           example: eastus2
           type: string
       required:
@@ -6277,7 +6287,10 @@ components:
         account:
           allOf:
           - $ref: '#/components/schemas/networking.v1.AwsAccount'
-          description: AWS account to allow for PrivateLink access.
+          description: |
+            The AWS account ID for the account containing the VPCs you want to connect from using AWS PrivateLink.
+            You can find your AWS account ID [here] (https://console.aws.amazon.com/billing/home?#/account)
+            under **My Account** in your AWS Management Console. Must be a **12 character string**.
       required:
       - account
       - kind
@@ -6292,7 +6305,11 @@ components:
           - AzurePrivateLinkAccess
           type: string
         subscription:
-          description: Azure subscription to allow for PrivateLink access.
+          description: |
+            The Azure subscription ID for the account containing the VNets you want to connect from using
+            Azure Private Link. You can find your Azure subscription ID in the subscription section of your
+            [Microsoft Azure Portal](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade).
+            Must be a valid **32 character UUID string**.
           minLength: 1
           type: string
       required:
@@ -6309,7 +6326,10 @@ components:
           - GcpPrivateServiceConnectAccess
           type: string
         project:
-          description: GCP project to allow for Private Service Connect access.
+          description: |
+            The GCP project ID for the account containing the VPCs that you want to connect from
+            using Private Service Connect. You can find your Google Cloud Project ID under **Project ID** section of
+            your [Google Cloud Console dashboard](https://console.cloud.google.com/home/dashboard).
           minLength: 1
           type: string
       required:
@@ -6427,8 +6447,9 @@ components:
         cidr:
           allOf:
           - $ref: '#/components/schemas/networking.v1.Cidr'
-          description: The IPv4 CIDR block to used for this network.  Must be /16.
-            Required for VPC peering and AWS TransitGateway.
+          description: |
+            The IPv4 [CIDR block](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) to used for this network.
+            Must be `/16`. Required for VPC peering and AWS TransitGateway.
           example: 10.200.0.0/16
           x-immutable: true
         zones:
@@ -6663,7 +6684,7 @@ components:
       x-enable-objectmeta: true
     networking.v1.PrivateLinkAccessList:
       description: |-
-        Add or remove access to PrivateLink endpoints by AWS account, Azure subscription and GCP project.
+        Add or remove access to PrivateLink endpoints by AWS account, Azure subscription and GCP project ID.
 
         Related guide: [Private Links Overview](https://docs.confluent.io/cloud/current/networking/private-links/index.html).
 
@@ -6892,6 +6913,140 @@ components:
       - related
       - resource_name
       type: object
+    TypedEnvScopedObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        environment:
+          description: Environment of the referred resource, if env-scoped
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        api_version:
+          description: API group and version of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
+    GlobalObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
+    EnvScopedObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        environment:
+          description: Environment of the referred resource, if env-scoped
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
+    TypedGlobalObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        api_version:
+          description: API group and version of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
     Failure:
       description: Provides information about problems encountered while performing
         an operation.
@@ -7087,7 +7242,7 @@ components:
       x-enable-objectmeta: true
     networking.v1.PrivateLinkAccessUpdate:
       description: |-
-        Add or remove access to PrivateLink endpoints by AWS account, Azure subscription and GCP project.
+        Add or remove access to PrivateLink endpoints by AWS account, Azure subscription and GCP project ID.
 
         Related guide: [Private Links Overview](https://docs.confluent.io/cloud/current/networking/private-links/index.html).
 

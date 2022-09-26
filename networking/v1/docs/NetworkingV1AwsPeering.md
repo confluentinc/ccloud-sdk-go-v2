@@ -5,10 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | Peering kind type. | 
-**Account** | **string** | AWS account for VPC to peer with the network | 
-**Vpc** | **string** | The id of the AWS VPC to peer with | 
-**Routes** | **[]string** | List of routes for the peering | 
-**CustomerRegion** | **string** | Region of customer VPC | 
+**Account** | **string** | The AWS account ID associated with the VPC you are peering with Confluent Cloud network. | 
+**Vpc** | **string** | The VPC ID you are peering with Confluent Cloud network. | 
+**Routes** | **[]string** | The [CIDR blocks](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) of the VPC you are peering with Confluent Cloud network. This is used by Confluent Cloud network to route traffic back to your network. The CIDR block must be a private range and cannot overlap with the Confluent Cloud CIDR block.  | 
+**CustomerRegion** | **string** | The region of the VPC you are peering with Confluent Cloud network. | 
 
 ## Methods
 
