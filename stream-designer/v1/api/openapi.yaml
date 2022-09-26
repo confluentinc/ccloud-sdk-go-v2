@@ -553,13 +553,13 @@ paths:
             --url https://api.confluent.cloud/sd/v1/environments/%7Benvironment-id%7D/clusters/%7Bkafka-cluster-id%7D/pipelines \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"orgId":"37aa295f-1883-4ede-8a06-74fa2872c0d8","name":"MyFirstPipeline","description":"My first pipeline","environmentId":"env-NQyjW","kafkaClusterId":"lkc-yxjBx","ksqlId":"lksqlc-LxwyW","schemaRegistryId":"lsrc-58bsW","state":"draft","kafkaClusterEndpoint":"http://example.com","ksqlEndpoint":"http://example.com","connectEndpoint":"http://example.com","schemaRegistryEndpoint":"http://example.com"}'
+            --data '{"orgId":"37aa295f-1883-4ede-8a06-74fa2872c0d8","name":"MyFirstPipeline","description":"My first pipeline","environmentId":"env-NQyjW","kafkaClusterId":"lkc-yxjBx","ksqlId":"lksqlc-LxwyW","schemaRegistryId":"lsrc-58bsW","state":"draft","activated":true,"kafkaClusterEndpoint":"http://example.com","ksqlEndpoint":"http://example.com","connectEndpoint":"http://example.com","schemaRegistryEndpoint":"http://example.com"}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"orgId\":\"37aa295f-1883-4ede-8a06-74fa2872c0d8\",\"name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"environmentId\":\"env-NQyjW\",\"kafkaClusterId\":\"lkc-yxjBx\",\"ksqlId\":\"lksqlc-LxwyW\",\"schemaRegistryId\":\"lsrc-58bsW\",\"state\":\"draft\",\"kafkaClusterEndpoint\":\"http://example.com\",\"ksqlEndpoint\":\"http://example.com\",\"connectEndpoint\":\"http://example.com\",\"schemaRegistryEndpoint\":\"http://example.com\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"orgId\":\"37aa295f-1883-4ede-8a06-74fa2872c0d8\",\"name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"environmentId\":\"env-NQyjW\",\"kafkaClusterId\":\"lkc-yxjBx\",\"ksqlId\":\"lksqlc-LxwyW\",\"schemaRegistryId\":\"lsrc-58bsW\",\"state\":\"draft\",\"activated\":true,\"kafkaClusterEndpoint\":\"http://example.com\",\"ksqlEndpoint\":\"http://example.com\",\"connectEndpoint\":\"http://example.com\",\"schemaRegistryEndpoint\":\"http://example.com\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/sd/v1/environments/%7Benvironment-id%7D/clusters/%7Bkafka-cluster-id%7D/pipelines")
             .post(body)
@@ -575,14 +575,14 @@ paths:
           \",\\\"name\\\":\\\"MyFirstPipeline\\\",\\\"description\\\":\\\"My first\
           \ pipeline\\\",\\\"environmentId\\\":\\\"env-NQyjW\\\",\\\"kafkaClusterId\\\
           \":\\\"lkc-yxjBx\\\",\\\"ksqlId\\\":\\\"lksqlc-LxwyW\\\",\\\"schemaRegistryId\\\
-          \":\\\"lsrc-58bsW\\\",\\\"state\\\":\\\"draft\\\",\\\"kafkaClusterEndpoint\\\
-          \":\\\"http://example.com\\\",\\\"ksqlEndpoint\\\":\\\"http://example.com\\\
-          \",\\\"connectEndpoint\\\":\\\"http://example.com\\\",\\\"schemaRegistryEndpoint\\\
-          \":\\\"http://example.com\\\"}\")\n\n\treq, _ := http.NewRequest(\"POST\"\
-          , url, payload)\n\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
-          )\n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _\
-          \ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ :=\
-          \ ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \":\\\"lsrc-58bsW\\\",\\\"state\\\":\\\"draft\\\",\\\"activated\\\":true,\\\
+          \"kafkaClusterEndpoint\\\":\\\"http://example.com\\\",\\\"ksqlEndpoint\\\
+          \":\\\"http://example.com\\\",\\\"connectEndpoint\\\":\\\"http://example.com\\\
+          \",\\\"schemaRegistryEndpoint\\\":\\\"http://example.com\\\"}\")\n\n\treq,\
+          \ _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
+          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -590,7 +590,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"orgId\":\"37aa295f-1883-4ede-8a06-74fa2872c0d8\",\"name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"environmentId\":\"env-NQyjW\",\"kafkaClusterId\":\"lkc-yxjBx\",\"ksqlId\":\"lksqlc-LxwyW\",\"schemaRegistryId\":\"lsrc-58bsW\",\"state\":\"draft\",\"kafkaClusterEndpoint\":\"http://example.com\",\"ksqlEndpoint\":\"http://example.com\",\"connectEndpoint\":\"http://example.com\",\"schemaRegistryEndpoint\":\"http://example.com\"}"
+          payload = "{\"orgId\":\"37aa295f-1883-4ede-8a06-74fa2872c0d8\",\"name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"environmentId\":\"env-NQyjW\",\"kafkaClusterId\":\"lkc-yxjBx\",\"ksqlId\":\"lksqlc-LxwyW\",\"schemaRegistryId\":\"lsrc-58bsW\",\"state\":\"draft\",\"activated\":true,\"kafkaClusterEndpoint\":\"http://example.com\",\"ksqlEndpoint\":\"http://example.com\",\"connectEndpoint\":\"http://example.com\",\"schemaRegistryEndpoint\":\"http://example.com\"}"
 
           headers = {
               'Authorization': "Basic REPLACE_BASIC_AUTH",
@@ -640,6 +640,7 @@ paths:
             ksqlId: 'lksqlc-LxwyW',
             schemaRegistryId: 'lsrc-58bsW',
             state: 'draft',
+            activated: true,
             kafkaClusterEndpoint: 'http://example.com',
             ksqlEndpoint: 'http://example.com',
             connectEndpoint: 'http://example.com',
@@ -658,7 +659,7 @@ paths:
           headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"orgId\":\"37aa295f-1883-4ede-8a06-74fa2872c0d8\",\"name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"environmentId\":\"env-NQyjW\",\"kafkaClusterId\":\"lkc-yxjBx\",\"ksqlId\":\"lksqlc-LxwyW\",\"schemaRegistryId\":\"lsrc-58bsW\",\"state\":\"draft\",\"kafkaClusterEndpoint\":\"http://example.com\",\"ksqlEndpoint\":\"http://example.com\",\"connectEndpoint\":\"http://example.com\",\"schemaRegistryEndpoint\":\"http://example.com\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"orgId\":\"37aa295f-1883-4ede-8a06-74fa2872c0d8\",\"name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"environmentId\":\"env-NQyjW\",\"kafkaClusterId\":\"lkc-yxjBx\",\"ksqlId\":\"lksqlc-LxwyW\",\"schemaRegistryId\":\"lsrc-58bsW\",\"state\":\"draft\",\"activated\":true,\"kafkaClusterEndpoint\":\"http://example.com\",\"ksqlEndpoint\":\"http://example.com\",\"connectEndpoint\":\"http://example.com\",\"schemaRegistryEndpoint\":\"http://example.com\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -667,7 +668,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddHeader("content-type", "application/json");
-          request.AddParameter("application/json", "{\"orgId\":\"37aa295f-1883-4ede-8a06-74fa2872c0d8\",\"name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"environmentId\":\"env-NQyjW\",\"kafkaClusterId\":\"lkc-yxjBx\",\"ksqlId\":\"lksqlc-LxwyW\",\"schemaRegistryId\":\"lsrc-58bsW\",\"state\":\"draft\",\"kafkaClusterEndpoint\":\"http://example.com\",\"ksqlEndpoint\":\"http://example.com\",\"connectEndpoint\":\"http://example.com\",\"schemaRegistryEndpoint\":\"http://example.com\"}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"orgId\":\"37aa295f-1883-4ede-8a06-74fa2872c0d8\",\"name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"environmentId\":\"env-NQyjW\",\"kafkaClusterId\":\"lkc-yxjBx\",\"ksqlId\":\"lksqlc-LxwyW\",\"schemaRegistryId\":\"lsrc-58bsW\",\"state\":\"draft\",\"activated\":true,\"kafkaClusterEndpoint\":\"http://example.com\",\"ksqlEndpoint\":\"http://example.com\",\"connectEndpoint\":\"http://example.com\",\"schemaRegistryEndpoint\":\"http://example.com\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /sd/v1/environments/{environment-id}/clusters/{kafka-cluster-id}/pipelines/{id}:
     delete:
@@ -1424,13 +1425,13 @@ paths:
             --url https://api.confluent.cloud/sd/v1/environments/%7Benvironment-id%7D/clusters/%7Bkafka-cluster-id%7D/pipelines/%7Bid%7D \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"orgId":"37aa295f-1883-4ede-8a06-74fa2872c0d8","name":"MyFirstPipeline","description":"My first pipeline","environmentId":"env-NQyjW","kafkaClusterId":"lkc-yxjBx","ksqlId":"lksqlc-LxwyW","schemaRegistryId":"lsrc-58bsW","state":"draft","kafkaClusterEndpoint":"http://example.com","ksqlEndpoint":"http://example.com","connectEndpoint":"http://example.com","schemaRegistryEndpoint":"http://example.com"}'
+            --data '{"orgId":"37aa295f-1883-4ede-8a06-74fa2872c0d8","name":"MyFirstPipeline","description":"My first pipeline","environmentId":"env-NQyjW","kafkaClusterId":"lkc-yxjBx","ksqlId":"lksqlc-LxwyW","schemaRegistryId":"lsrc-58bsW","state":"draft","activated":true,"kafkaClusterEndpoint":"http://example.com","ksqlEndpoint":"http://example.com","connectEndpoint":"http://example.com","schemaRegistryEndpoint":"http://example.com"}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"orgId\":\"37aa295f-1883-4ede-8a06-74fa2872c0d8\",\"name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"environmentId\":\"env-NQyjW\",\"kafkaClusterId\":\"lkc-yxjBx\",\"ksqlId\":\"lksqlc-LxwyW\",\"schemaRegistryId\":\"lsrc-58bsW\",\"state\":\"draft\",\"kafkaClusterEndpoint\":\"http://example.com\",\"ksqlEndpoint\":\"http://example.com\",\"connectEndpoint\":\"http://example.com\",\"schemaRegistryEndpoint\":\"http://example.com\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"orgId\":\"37aa295f-1883-4ede-8a06-74fa2872c0d8\",\"name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"environmentId\":\"env-NQyjW\",\"kafkaClusterId\":\"lkc-yxjBx\",\"ksqlId\":\"lksqlc-LxwyW\",\"schemaRegistryId\":\"lsrc-58bsW\",\"state\":\"draft\",\"activated\":true,\"kafkaClusterEndpoint\":\"http://example.com\",\"ksqlEndpoint\":\"http://example.com\",\"connectEndpoint\":\"http://example.com\",\"schemaRegistryEndpoint\":\"http://example.com\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/sd/v1/environments/%7Benvironment-id%7D/clusters/%7Bkafka-cluster-id%7D/pipelines/%7Bid%7D")
             .patch(body)
@@ -1446,14 +1447,14 @@ paths:
           \",\\\"name\\\":\\\"MyFirstPipeline\\\",\\\"description\\\":\\\"My first\
           \ pipeline\\\",\\\"environmentId\\\":\\\"env-NQyjW\\\",\\\"kafkaClusterId\\\
           \":\\\"lkc-yxjBx\\\",\\\"ksqlId\\\":\\\"lksqlc-LxwyW\\\",\\\"schemaRegistryId\\\
-          \":\\\"lsrc-58bsW\\\",\\\"state\\\":\\\"draft\\\",\\\"kafkaClusterEndpoint\\\
-          \":\\\"http://example.com\\\",\\\"ksqlEndpoint\\\":\\\"http://example.com\\\
-          \",\\\"connectEndpoint\\\":\\\"http://example.com\\\",\\\"schemaRegistryEndpoint\\\
-          \":\\\"http://example.com\\\"}\")\n\n\treq, _ := http.NewRequest(\"PATCH\"\
-          , url, payload)\n\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
-          )\n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _\
-          \ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ :=\
-          \ ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \":\\\"lsrc-58bsW\\\",\\\"state\\\":\\\"draft\\\",\\\"activated\\\":true,\\\
+          \"kafkaClusterEndpoint\\\":\\\"http://example.com\\\",\\\"ksqlEndpoint\\\
+          \":\\\"http://example.com\\\",\\\"connectEndpoint\\\":\\\"http://example.com\\\
+          \",\\\"schemaRegistryEndpoint\\\":\\\"http://example.com\\\"}\")\n\n\treq,\
+          \ _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
+          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -1461,7 +1462,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"orgId\":\"37aa295f-1883-4ede-8a06-74fa2872c0d8\",\"name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"environmentId\":\"env-NQyjW\",\"kafkaClusterId\":\"lkc-yxjBx\",\"ksqlId\":\"lksqlc-LxwyW\",\"schemaRegistryId\":\"lsrc-58bsW\",\"state\":\"draft\",\"kafkaClusterEndpoint\":\"http://example.com\",\"ksqlEndpoint\":\"http://example.com\",\"connectEndpoint\":\"http://example.com\",\"schemaRegistryEndpoint\":\"http://example.com\"}"
+          payload = "{\"orgId\":\"37aa295f-1883-4ede-8a06-74fa2872c0d8\",\"name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"environmentId\":\"env-NQyjW\",\"kafkaClusterId\":\"lkc-yxjBx\",\"ksqlId\":\"lksqlc-LxwyW\",\"schemaRegistryId\":\"lsrc-58bsW\",\"state\":\"draft\",\"activated\":true,\"kafkaClusterEndpoint\":\"http://example.com\",\"ksqlEndpoint\":\"http://example.com\",\"connectEndpoint\":\"http://example.com\",\"schemaRegistryEndpoint\":\"http://example.com\"}"
 
           headers = {
               'Authorization': "Basic REPLACE_BASIC_AUTH",
@@ -1511,6 +1512,7 @@ paths:
             ksqlId: 'lksqlc-LxwyW',
             schemaRegistryId: 'lsrc-58bsW',
             state: 'draft',
+            activated: true,
             kafkaClusterEndpoint: 'http://example.com',
             ksqlEndpoint: 'http://example.com',
             connectEndpoint: 'http://example.com',
@@ -1529,7 +1531,7 @@ paths:
           headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"orgId\":\"37aa295f-1883-4ede-8a06-74fa2872c0d8\",\"name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"environmentId\":\"env-NQyjW\",\"kafkaClusterId\":\"lkc-yxjBx\",\"ksqlId\":\"lksqlc-LxwyW\",\"schemaRegistryId\":\"lsrc-58bsW\",\"state\":\"draft\",\"kafkaClusterEndpoint\":\"http://example.com\",\"ksqlEndpoint\":\"http://example.com\",\"connectEndpoint\":\"http://example.com\",\"schemaRegistryEndpoint\":\"http://example.com\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"orgId\":\"37aa295f-1883-4ede-8a06-74fa2872c0d8\",\"name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"environmentId\":\"env-NQyjW\",\"kafkaClusterId\":\"lkc-yxjBx\",\"ksqlId\":\"lksqlc-LxwyW\",\"schemaRegistryId\":\"lsrc-58bsW\",\"state\":\"draft\",\"activated\":true,\"kafkaClusterEndpoint\":\"http://example.com\",\"ksqlEndpoint\":\"http://example.com\",\"connectEndpoint\":\"http://example.com\",\"schemaRegistryEndpoint\":\"http://example.com\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1538,7 +1540,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddHeader("content-type", "application/json");
-          request.AddParameter("application/json", "{\"orgId\":\"37aa295f-1883-4ede-8a06-74fa2872c0d8\",\"name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"environmentId\":\"env-NQyjW\",\"kafkaClusterId\":\"lkc-yxjBx\",\"ksqlId\":\"lksqlc-LxwyW\",\"schemaRegistryId\":\"lsrc-58bsW\",\"state\":\"draft\",\"kafkaClusterEndpoint\":\"http://example.com\",\"ksqlEndpoint\":\"http://example.com\",\"connectEndpoint\":\"http://example.com\",\"schemaRegistryEndpoint\":\"http://example.com\"}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"orgId\":\"37aa295f-1883-4ede-8a06-74fa2872c0d8\",\"name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"environmentId\":\"env-NQyjW\",\"kafkaClusterId\":\"lkc-yxjBx\",\"ksqlId\":\"lksqlc-LxwyW\",\"schemaRegistryId\":\"lsrc-58bsW\",\"state\":\"draft\",\"activated\":true,\"kafkaClusterEndpoint\":\"http://example.com\",\"ksqlEndpoint\":\"http://example.com\",\"connectEndpoint\":\"http://example.com\",\"schemaRegistryEndpoint\":\"http://example.com\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
 components:
   responses:
@@ -1841,6 +1843,9 @@ components:
           - deleted
           type: string
           x-immutable: true
+        activated:
+          description: The desired state of the pipeline.
+          type: boolean
         kafkaClusterEndpoint:
           description: The endpoint URL of the kafka cluster this pipeline uses.
           format: uri
@@ -2302,6 +2307,9 @@ components:
           example: lsrc-58bsW
           pattern: ^lsrc-[a-zA-Z0-9]{5,10}$
           type: string
+        activated:
+          description: The desired state of the pipeline.
+          type: boolean
         kafkaClusterEndpoint:
           description: The endpoint URL of the kafka cluster this pipeline uses.
           format: uri

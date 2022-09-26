@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **KsqlId** | Pointer to **string** | The unique identifier of the ksqlDB application this pipeline uses. | [optional] 
 **SchemaRegistryId** | Pointer to **string** | The unique identifier of the Schema Registry this pipeline uses. | [optional] 
 **State** | Pointer to **string** | The current state of the pipeline. | [optional] 
+**Activated** | Pointer to **bool** | The desired state of the pipeline. | [optional] 
 **KafkaClusterEndpoint** | Pointer to **string** | The endpoint URL of the kafka cluster this pipeline uses. | [optional] 
 **KsqlEndpoint** | Pointer to **string** | The endpoint URL of the ksqlDB application this pipeline uses. | [optional] 
 **ConnectEndpoint** | Pointer to **string** | The endpoint URL of the CCloud Connect service this pipeline uses. | [optional] 
@@ -339,6 +340,31 @@ SetState sets State field to given value.
 `func (o *SdV1Pipeline) HasState() bool`
 
 HasState returns a boolean if a field has been set.
+
+### GetActivated
+
+`func (o *SdV1Pipeline) GetActivated() bool`
+
+GetActivated returns the Activated field if non-nil, zero value otherwise.
+
+### GetActivatedOk
+
+`func (o *SdV1Pipeline) GetActivatedOk() (*bool, bool)`
+
+GetActivatedOk returns a tuple with the Activated field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActivated
+
+`func (o *SdV1Pipeline) SetActivated(v bool)`
+
+SetActivated sets Activated field to given value.
+
+### HasActivated
+
+`func (o *SdV1Pipeline) HasActivated() bool`
+
+HasActivated returns a boolean if a field has been set.
 
 ### GetKafkaClusterEndpoint
 

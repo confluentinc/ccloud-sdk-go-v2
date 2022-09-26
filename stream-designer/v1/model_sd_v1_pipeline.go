@@ -58,6 +58,8 @@ type SdV1Pipeline struct {
 	SchemaRegistryId *string `json:"schemaRegistryId,omitempty"`
 	// The current state of the pipeline.
 	State *string `json:"state,omitempty"`
+	// The desired state of the pipeline.
+	Activated *bool `json:"activated,omitempty"`
 	// The endpoint URL of the kafka cluster this pipeline uses.
 	KafkaClusterEndpoint *string `json:"kafkaClusterEndpoint,omitempty"`
 	// The endpoint URL of the ksqlDB application this pipeline uses.
@@ -469,6 +471,38 @@ func (o *SdV1Pipeline) SetState(v string) {
 	o.State = &v
 }
 
+// GetActivated returns the Activated field value if set, zero value otherwise.
+func (o *SdV1Pipeline) GetActivated() bool {
+	if o == nil || o.Activated == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Activated
+}
+
+// GetActivatedOk returns a tuple with the Activated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SdV1Pipeline) GetActivatedOk() (*bool, bool) {
+	if o == nil || o.Activated == nil {
+		return nil, false
+	}
+	return o.Activated, true
+}
+
+// HasActivated returns a boolean if a field has been set.
+func (o *SdV1Pipeline) HasActivated() bool {
+	if o != nil && o.Activated != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetActivated gets a reference to the given bool and assigns it to the Activated field.
+func (o *SdV1Pipeline) SetActivated(v bool) {
+	o.Activated = &v
+}
+
 // GetKafkaClusterEndpoint returns the KafkaClusterEndpoint field value if set, zero value otherwise.
 func (o *SdV1Pipeline) GetKafkaClusterEndpoint() string {
 	if o == nil || o.KafkaClusterEndpoint == nil {
@@ -611,6 +645,7 @@ func (o *SdV1Pipeline) Redact() {
     o.recurseRedact(o.KsqlId)
     o.recurseRedact(o.SchemaRegistryId)
     o.recurseRedact(o.State)
+    o.recurseRedact(o.Activated)
     o.recurseRedact(o.KafkaClusterEndpoint)
     o.recurseRedact(o.KsqlEndpoint)
     o.recurseRedact(o.ConnectEndpoint)
@@ -684,6 +719,9 @@ func (o SdV1Pipeline) MarshalJSON() ([]byte, error) {
 	}
 	if o.State != nil {
 		toSerialize["state"] = o.State
+	}
+	if o.Activated != nil {
+		toSerialize["activated"] = o.Activated
 	}
 	if o.KafkaClusterEndpoint != nil {
 		toSerialize["kafkaClusterEndpoint"] = o.KafkaClusterEndpoint
