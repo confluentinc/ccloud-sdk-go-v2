@@ -6075,16 +6075,19 @@ components:
           description: Organization to which the shared resource belongs. Deprecated
           example: ABC Corp
           readOnly: true
+          x-immutable: true
         environment_name:
           description: The environment name of the shared resource. Deprecated
           example: Public Env
           readOnly: true
           type: string
+          x-immutable: true
         cluster_name:
           description: The cluster display name of the shared resource. Deprecated
           example: Published Trades
           readOnly: true
           type: string
+          x-immutable: true
         cloud_cluster:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
@@ -7610,20 +7613,6 @@ components:
           description: Resource logo url
           example: https://confluent.cloud/api/cdx/v1/provider-shared-resources/sr-123/images/logo
           format: uri
-          readOnly: true
-          type: string
-        organization_name:
-          description: Organization to which the shared resource belongs. Deprecated
-          example: ABC Corp
-          readOnly: true
-        environment_name:
-          description: The environment name of the shared resource. Deprecated
-          example: Public Env
-          readOnly: true
-          type: string
-        cluster_name:
-          description: The cluster display name of the shared resource. Deprecated
-          example: Published Trades
           readOnly: true
           type: string
       type: object

@@ -16,9 +16,6 @@ Name | Type | Description | Notes
 **OrganizationDescription** | Pointer to **string** | Shared resource&#39;s organization description | [optional] 
 **OrganizationContact** | Pointer to **string** | Email of contact person from the organization | [optional] 
 **LogoUrl** | Pointer to **string** | Resource logo url | [optional] [readonly] 
-**OrganizationName** | Pointer to **interface{}** | Organization to which the shared resource belongs. Deprecated | [optional] [readonly] 
-**EnvironmentName** | Pointer to **string** | The environment name of the shared resource. Deprecated | [optional] [readonly] 
-**ClusterName** | Pointer to **string** | The cluster display name of the shared resource. Deprecated | [optional] [readonly] 
 
 ## Methods
 
@@ -338,91 +335,6 @@ SetLogoUrl sets LogoUrl field to given value.
 `func (o *CdxV1ProviderSharedResourceUpdate) HasLogoUrl() bool`
 
 HasLogoUrl returns a boolean if a field has been set.
-
-### GetOrganizationName
-
-`func (o *CdxV1ProviderSharedResourceUpdate) GetOrganizationName() interface{}`
-
-GetOrganizationName returns the OrganizationName field if non-nil, zero value otherwise.
-
-### GetOrganizationNameOk
-
-`func (o *CdxV1ProviderSharedResourceUpdate) GetOrganizationNameOk() (*interface{}, bool)`
-
-GetOrganizationNameOk returns a tuple with the OrganizationName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOrganizationName
-
-`func (o *CdxV1ProviderSharedResourceUpdate) SetOrganizationName(v interface{})`
-
-SetOrganizationName sets OrganizationName field to given value.
-
-### HasOrganizationName
-
-`func (o *CdxV1ProviderSharedResourceUpdate) HasOrganizationName() bool`
-
-HasOrganizationName returns a boolean if a field has been set.
-
-### SetOrganizationNameNil
-
-`func (o *CdxV1ProviderSharedResourceUpdate) SetOrganizationNameNil(b bool)`
-
- SetOrganizationNameNil sets the value for OrganizationName to be an explicit nil
-
-### UnsetOrganizationName
-`func (o *CdxV1ProviderSharedResourceUpdate) UnsetOrganizationName()`
-
-UnsetOrganizationName ensures that no value is present for OrganizationName, not even an explicit nil
-### GetEnvironmentName
-
-`func (o *CdxV1ProviderSharedResourceUpdate) GetEnvironmentName() string`
-
-GetEnvironmentName returns the EnvironmentName field if non-nil, zero value otherwise.
-
-### GetEnvironmentNameOk
-
-`func (o *CdxV1ProviderSharedResourceUpdate) GetEnvironmentNameOk() (*string, bool)`
-
-GetEnvironmentNameOk returns a tuple with the EnvironmentName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnvironmentName
-
-`func (o *CdxV1ProviderSharedResourceUpdate) SetEnvironmentName(v string)`
-
-SetEnvironmentName sets EnvironmentName field to given value.
-
-### HasEnvironmentName
-
-`func (o *CdxV1ProviderSharedResourceUpdate) HasEnvironmentName() bool`
-
-HasEnvironmentName returns a boolean if a field has been set.
-
-### GetClusterName
-
-`func (o *CdxV1ProviderSharedResourceUpdate) GetClusterName() string`
-
-GetClusterName returns the ClusterName field if non-nil, zero value otherwise.
-
-### GetClusterNameOk
-
-`func (o *CdxV1ProviderSharedResourceUpdate) GetClusterNameOk() (*string, bool)`
-
-GetClusterNameOk returns a tuple with the ClusterName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetClusterName
-
-`func (o *CdxV1ProviderSharedResourceUpdate) SetClusterName(v string)`
-
-SetClusterName sets ClusterName field to given value.
-
-### HasClusterName
-
-`func (o *CdxV1ProviderSharedResourceUpdate) HasClusterName() bool`
-
-HasClusterName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
