@@ -585,6 +585,7 @@ type ApiListCdxV1ProviderSharesRequest struct {
 	ctx            _context.Context
 	ApiService     ProviderSharesCdxV1Api
 	sharedResource *string
+	crn            *string
 	includeDeleted *bool
 	pageSize       *int32
 	pageToken      *string
@@ -593,6 +594,12 @@ type ApiListCdxV1ProviderSharesRequest struct {
 // Filter the results by exact match for shared_resource.
 func (r ApiListCdxV1ProviderSharesRequest) SharedResource(sharedResource string) ApiListCdxV1ProviderSharesRequest {
 	r.sharedResource = &sharedResource
+	return r
+}
+
+// Filter the results by exact match for crn.
+func (r ApiListCdxV1ProviderSharesRequest) Crn(crn string) ApiListCdxV1ProviderSharesRequest {
+	r.crn = &crn
 	return r
 }
 
@@ -658,6 +665,9 @@ func (a *ProviderSharesCdxV1ApiService) ListCdxV1ProviderSharesExecute(r ApiList
 
 	if r.sharedResource != nil {
 		localVarQueryParams.Add("shared_resource", parameterToString(*r.sharedResource, ""))
+	}
+	if r.crn != nil {
+		localVarQueryParams.Add("crn", parameterToString(*r.crn, ""))
 	}
 	if r.includeDeleted != nil {
 		localVarQueryParams.Add("include_deleted", parameterToString(*r.includeDeleted, ""))

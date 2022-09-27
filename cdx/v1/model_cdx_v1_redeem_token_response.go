@@ -48,6 +48,12 @@ type CdxV1RedeemTokenResponse struct {
 	Secret *string `json:"secret,omitempty"`
 	// The kafka cluster bootstrap url
 	KafkaBootstrapUrl *string `json:"kafka_bootstrap_url,omitempty"`
+	// The api key for schema registry
+	SchemaRegistryApiKey *string `json:"schema_registry_api_key,omitempty"`
+	// The api key secret for schema registry
+	SchemaRegistrySecret *string `json:"schema_registry_secret,omitempty"`
+	// The schema registry endpoint url
+	SchemaRegistryUrl *string `json:"schema_registry_url,omitempty"`
 	// List of shared resources
 	Resources *[]CdxV1RedeemTokenResponseResourcesOneOf `json:"resources,omitempty"`
 }
@@ -293,6 +299,102 @@ func (o *CdxV1RedeemTokenResponse) SetKafkaBootstrapUrl(v string) {
 	o.KafkaBootstrapUrl = &v
 }
 
+// GetSchemaRegistryApiKey returns the SchemaRegistryApiKey field value if set, zero value otherwise.
+func (o *CdxV1RedeemTokenResponse) GetSchemaRegistryApiKey() string {
+	if o == nil || o.SchemaRegistryApiKey == nil {
+		var ret string
+		return ret
+	}
+	return *o.SchemaRegistryApiKey
+}
+
+// GetSchemaRegistryApiKeyOk returns a tuple with the SchemaRegistryApiKey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CdxV1RedeemTokenResponse) GetSchemaRegistryApiKeyOk() (*string, bool) {
+	if o == nil || o.SchemaRegistryApiKey == nil {
+		return nil, false
+	}
+	return o.SchemaRegistryApiKey, true
+}
+
+// HasSchemaRegistryApiKey returns a boolean if a field has been set.
+func (o *CdxV1RedeemTokenResponse) HasSchemaRegistryApiKey() bool {
+	if o != nil && o.SchemaRegistryApiKey != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSchemaRegistryApiKey gets a reference to the given string and assigns it to the SchemaRegistryApiKey field.
+func (o *CdxV1RedeemTokenResponse) SetSchemaRegistryApiKey(v string) {
+	o.SchemaRegistryApiKey = &v
+}
+
+// GetSchemaRegistrySecret returns the SchemaRegistrySecret field value if set, zero value otherwise.
+func (o *CdxV1RedeemTokenResponse) GetSchemaRegistrySecret() string {
+	if o == nil || o.SchemaRegistrySecret == nil {
+		var ret string
+		return ret
+	}
+	return *o.SchemaRegistrySecret
+}
+
+// GetSchemaRegistrySecretOk returns a tuple with the SchemaRegistrySecret field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CdxV1RedeemTokenResponse) GetSchemaRegistrySecretOk() (*string, bool) {
+	if o == nil || o.SchemaRegistrySecret == nil {
+		return nil, false
+	}
+	return o.SchemaRegistrySecret, true
+}
+
+// HasSchemaRegistrySecret returns a boolean if a field has been set.
+func (o *CdxV1RedeemTokenResponse) HasSchemaRegistrySecret() bool {
+	if o != nil && o.SchemaRegistrySecret != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSchemaRegistrySecret gets a reference to the given string and assigns it to the SchemaRegistrySecret field.
+func (o *CdxV1RedeemTokenResponse) SetSchemaRegistrySecret(v string) {
+	o.SchemaRegistrySecret = &v
+}
+
+// GetSchemaRegistryUrl returns the SchemaRegistryUrl field value if set, zero value otherwise.
+func (o *CdxV1RedeemTokenResponse) GetSchemaRegistryUrl() string {
+	if o == nil || o.SchemaRegistryUrl == nil {
+		var ret string
+		return ret
+	}
+	return *o.SchemaRegistryUrl
+}
+
+// GetSchemaRegistryUrlOk returns a tuple with the SchemaRegistryUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CdxV1RedeemTokenResponse) GetSchemaRegistryUrlOk() (*string, bool) {
+	if o == nil || o.SchemaRegistryUrl == nil {
+		return nil, false
+	}
+	return o.SchemaRegistryUrl, true
+}
+
+// HasSchemaRegistryUrl returns a boolean if a field has been set.
+func (o *CdxV1RedeemTokenResponse) HasSchemaRegistryUrl() bool {
+	if o != nil && o.SchemaRegistryUrl != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSchemaRegistryUrl gets a reference to the given string and assigns it to the SchemaRegistryUrl field.
+func (o *CdxV1RedeemTokenResponse) SetSchemaRegistryUrl(v string) {
+	o.SchemaRegistryUrl = &v
+}
+
 // GetResources returns the Resources field value if set, zero value otherwise.
 func (o *CdxV1RedeemTokenResponse) GetResources() []CdxV1RedeemTokenResponseResourcesOneOf {
 	if o == nil || o.Resources == nil {
@@ -334,6 +436,9 @@ func (o *CdxV1RedeemTokenResponse) Redact() {
 	o.recurseRedact(o.ApiKey)
 	o.Secret = nil
 	o.recurseRedact(o.KafkaBootstrapUrl)
+	o.recurseRedact(o.SchemaRegistryApiKey)
+	o.SchemaRegistrySecret = nil
+	o.recurseRedact(o.SchemaRegistryUrl)
 	o.recurseRedact(o.Resources)
 }
 
@@ -389,6 +494,15 @@ func (o CdxV1RedeemTokenResponse) MarshalJSON() ([]byte, error) {
 	}
 	if o.KafkaBootstrapUrl != nil {
 		toSerialize["kafka_bootstrap_url"] = o.KafkaBootstrapUrl
+	}
+	if o.SchemaRegistryApiKey != nil {
+		toSerialize["schema_registry_api_key"] = o.SchemaRegistryApiKey
+	}
+	if o.SchemaRegistrySecret != nil {
+		toSerialize["schema_registry_secret"] = o.SchemaRegistrySecret
+	}
+	if o.SchemaRegistryUrl != nil {
+		toSerialize["schema_registry_url"] = o.SchemaRegistryUrl
 	}
 	if o.Resources != nil {
 		toSerialize["resources"] = o.Resources

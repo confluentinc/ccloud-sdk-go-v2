@@ -156,7 +156,7 @@ Name | Type | Description  | Notes
 
 ## ListCdxV1ProviderSharedResources
 
-> CdxV1ProviderSharedResourceList ListCdxV1ProviderSharedResources(ctx).Crn(crn).StreamShare(streamShare).IncludeDeleted(includeDeleted).PageSize(pageSize).PageToken(pageToken).Execute()
+> CdxV1ProviderSharedResourceList ListCdxV1ProviderSharedResources(ctx).StreamShare(streamShare).Crn(crn).IncludeDeleted(includeDeleted).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Provider Shared Resources
 
@@ -175,15 +175,15 @@ import (
 )
 
 func main() {
-    crn := "crn://confluent.cloud/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic" // string | Filter the results by exact match for crn. (optional)
     streamShare := "ss-1234" // string | Filter the results by exact match for stream_share. (optional)
+    crn := "crn://confluent.cloud/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic" // string | Filter the results by exact match for crn. (optional)
     includeDeleted := true // bool | Include deactivated shared resources (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProviderSharedResourcesCdxV1Api.ListCdxV1ProviderSharedResources(context.Background()).Crn(crn).StreamShare(streamShare).IncludeDeleted(includeDeleted).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.ProviderSharedResourcesCdxV1Api.ListCdxV1ProviderSharedResources(context.Background()).StreamShare(streamShare).Crn(crn).IncludeDeleted(includeDeleted).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProviderSharedResourcesCdxV1Api.ListCdxV1ProviderSharedResources``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -204,8 +204,8 @@ Other parameters are passed through a pointer to a apiListCdxV1ProviderSharedRes
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **crn** | **string** | Filter the results by exact match for crn. | 
  **streamShare** | **string** | Filter the results by exact match for stream_share. | 
+ **crn** | **string** | Filter the results by exact match for crn. | 
  **includeDeleted** | **bool** | Include deactivated shared resources | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
