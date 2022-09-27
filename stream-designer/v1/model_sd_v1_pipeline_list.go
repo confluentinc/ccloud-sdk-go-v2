@@ -15,7 +15,7 @@
 /*
 Stream Designer API
 
-# Introduction  Stream Designer API provides resources/API for defining stream processing pipelines. Each pipeline describes a set of stream processing components, including connectors, topics, streams, tables, queries and schemas. The components in a pipeline need not exist as CCloud resources until the pipeline is activated, or launched.  This API defines operations to create, list, modify, manage and delete pipelines. 
+# Introduction  Stream Designer API provides resources/API for defining stream processing pipelines. Each pipeline describes a set of stream processing components, including connectors, topics, streams, tables, queries and schemas. The components in a pipeline need not exist as Confluent Cloud resources until the pipeline is activated.  This API defines operations to create, list, modify, manage and delete pipelines. 
 
 API version: 0.0.1-alpha0
 Contact: stream-designer@confluent.io
@@ -33,7 +33,7 @@ import (
 	"reflect"
 )
 
-// SdV1PipelineList `Pipeline` objects represent information about a user-defined pipeline of Confluent Cloud components. The pipeline's content is available separately.  The API allows you to create, retrieve, update, and delete individual pipeline graphs, as well as list all of your pipelines for the particular environment and cluster.   Related guide: [Pipelines in Confluent Cloud](https://docs.confluent.io/cloud/current/pipelines).  ## The Pipelines Model <SchemaDefinition schemaRef=\"#/components/schemas/sd.v1.Pipeline\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `pipelines_per_org` | Pipelines in one Confluent Cloud organization | | `pipelines_per_cluster` | Pipelines in one Confluent Cloud cluster |
+// SdV1PipelineList `Pipeline` objects represent information about a user-defined pipeline of Confluent Cloud components. The pipeline's content is available separately.  The API allows you to create, retrieve, update, and delete your pipelines, as well as list all of your pipelines for the particular environment and Kafka cluster.   Related guide: [Pipelines in Confluent Cloud](https://docs.confluent.io/cloud/current/api.html).  ## The Pipelines Model <SchemaDefinition schemaRef=\"#/components/schemas/sd.v1.Pipeline\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `pipelines_per_org` | Pipelines in one Confluent Cloud organization | | `pipelines_per_cluster` | Pipelines in one Confluent Cloud Kafka cluster |
 type SdV1PipelineList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version"`

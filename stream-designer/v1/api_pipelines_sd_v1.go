@@ -15,7 +15,7 @@
 /*
 Stream Designer API
 
-# Introduction  Stream Designer API provides resources/API for defining stream processing pipelines. Each pipeline describes a set of stream processing components, including connectors, topics, streams, tables, queries and schemas. The components in a pipeline need not exist as CCloud resources until the pipeline is activated, or launched.  This API defines operations to create, list, modify, manage and delete pipelines. 
+# Introduction  Stream Designer API provides resources/API for defining stream processing pipelines. Each pipeline describes a set of stream processing components, including connectors, topics, streams, tables, queries and schemas. The components in a pipeline need not exist as Confluent Cloud resources until the pipeline is activated.  This API defines operations to create, list, modify, manage and delete pipelines. 
 
 API version: 0.0.1-alpha0
 Contact: stream-designer@confluent.io
@@ -47,11 +47,10 @@ type PipelinesSdV1Api interface {
 	Make a request to create a pipeline.
 
 	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param environmentId The unique identifier for the pipeline.
 	 @param kafkaClusterId The unique identifier for the pipeline.
 	 @return ApiCreateSdV1PipelineRequest
 	*/
-	CreateSdV1Pipeline(ctx _context.Context, environmentId string, kafkaClusterId string) ApiCreateSdV1PipelineRequest
+	CreateSdV1Pipeline(ctx _context.Context, kafkaClusterId string) ApiCreateSdV1PipelineRequest
 
 	// CreateSdV1PipelineExecute executes the request
 	//  @return SdV1Pipeline
@@ -63,12 +62,11 @@ type PipelinesSdV1Api interface {
 	Make a request to delete a pipeline.
 
 	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param environmentId The unique identifier for the pipeline.
 	 @param kafkaClusterId The unique identifier for the pipeline.
 	 @param id The unique identifier for the pipeline.
 	 @return ApiDeleteSdV1PipelineRequest
 	*/
-	DeleteSdV1Pipeline(ctx _context.Context, environmentId string, kafkaClusterId string, id string) ApiDeleteSdV1PipelineRequest
+	DeleteSdV1Pipeline(ctx _context.Context, kafkaClusterId string, id string) ApiDeleteSdV1PipelineRequest
 
 	// DeleteSdV1PipelineExecute executes the request
 	DeleteSdV1PipelineExecute(r ApiDeleteSdV1PipelineRequest) (*_nethttp.Response, error)
@@ -79,12 +77,11 @@ type PipelinesSdV1Api interface {
 	Make a request to read a pipeline.
 
 	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param environmentId The unique identifier for the pipeline.
 	 @param kafkaClusterId The unique identifier for the pipeline.
 	 @param id The unique identifier for the pipeline.
 	 @return ApiGetSdV1PipelineRequest
 	*/
-	GetSdV1Pipeline(ctx _context.Context, environmentId string, kafkaClusterId string, id string) ApiGetSdV1PipelineRequest
+	GetSdV1Pipeline(ctx _context.Context, kafkaClusterId string, id string) ApiGetSdV1PipelineRequest
 
 	// GetSdV1PipelineExecute executes the request
 	//  @return SdV1Pipeline
@@ -96,11 +93,10 @@ type PipelinesSdV1Api interface {
 	Retrieve a sorted, filtered, paginated list of all pipelines.
 
 	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param environmentId The unique identifier for the pipeline.
 	 @param kafkaClusterId The unique identifier for the pipeline.
 	 @return ApiListSdV1PipelinesRequest
 	*/
-	ListSdV1Pipelines(ctx _context.Context, environmentId string, kafkaClusterId string) ApiListSdV1PipelinesRequest
+	ListSdV1Pipelines(ctx _context.Context, kafkaClusterId string) ApiListSdV1PipelinesRequest
 
 	// ListSdV1PipelinesExecute executes the request
 	//  @return SdV1PipelineList
@@ -114,12 +110,11 @@ type PipelinesSdV1Api interface {
 
 
 	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param environmentId The unique identifier for the pipeline.
 	 @param kafkaClusterId The unique identifier for the pipeline.
 	 @param id The unique identifier for the pipeline.
 	 @return ApiUpdateSdV1PipelineRequest
 	*/
-	UpdateSdV1Pipeline(ctx _context.Context, environmentId string, kafkaClusterId string, id string) ApiUpdateSdV1PipelineRequest
+	UpdateSdV1Pipeline(ctx _context.Context, kafkaClusterId string, id string) ApiUpdateSdV1PipelineRequest
 
 	// UpdateSdV1PipelineExecute executes the request
 	//  @return SdV1Pipeline
@@ -132,7 +127,6 @@ type PipelinesSdV1ApiService service
 type ApiCreateSdV1PipelineRequest struct {
 	ctx _context.Context
 	ApiService PipelinesSdV1Api
-	environmentId string
 	kafkaClusterId string
 	sdV1Pipeline *SdV1Pipeline
 }
@@ -152,15 +146,13 @@ CreateSdV1Pipeline Create a Pipeline
 Make a request to create a pipeline.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param environmentId The unique identifier for the pipeline.
  @param kafkaClusterId The unique identifier for the pipeline.
  @return ApiCreateSdV1PipelineRequest
 */
-func (a *PipelinesSdV1ApiService) CreateSdV1Pipeline(ctx _context.Context, environmentId string, kafkaClusterId string) ApiCreateSdV1PipelineRequest {
+func (a *PipelinesSdV1ApiService) CreateSdV1Pipeline(ctx _context.Context, kafkaClusterId string) ApiCreateSdV1PipelineRequest {
 	return ApiCreateSdV1PipelineRequest{
 		ApiService: a,
 		ctx: ctx,
-		environmentId: environmentId,
 		kafkaClusterId: kafkaClusterId,
 	}
 }
@@ -182,8 +174,7 @@ func (a *PipelinesSdV1ApiService) CreateSdV1PipelineExecute(r ApiCreateSdV1Pipel
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/sd/v1/environments/{environment-id}/clusters/{kafka-cluster-id}/pipelines"
-	localVarPath = strings.Replace(localVarPath, "{"+"environment-id"+"}", _neturl.PathEscape(parameterToString(r.environmentId, "")), -1)
+	localVarPath := localBasePath + "/sd/v1/clusters/{kafka-cluster-id}/pipelines"
 	localVarPath = strings.Replace(localVarPath, "{"+"kafka-cluster-id"+"}", _neturl.PathEscape(parameterToString(r.kafkaClusterId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -318,11 +309,16 @@ func (a *PipelinesSdV1ApiService) CreateSdV1PipelineExecute(r ApiCreateSdV1Pipel
 type ApiDeleteSdV1PipelineRequest struct {
 	ctx _context.Context
 	ApiService PipelinesSdV1Api
-	environmentId string
+	environment *string
 	kafkaClusterId string
 	id string
 }
 
+// Scope the operation to the given environment.
+func (r ApiDeleteSdV1PipelineRequest) Environment(environment string) ApiDeleteSdV1PipelineRequest {
+	r.environment = &environment
+	return r
+}
 
 func (r ApiDeleteSdV1PipelineRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteSdV1PipelineExecute(r)
@@ -334,16 +330,14 @@ DeleteSdV1Pipeline Delete a Pipeline
 Make a request to delete a pipeline.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param environmentId The unique identifier for the pipeline.
  @param kafkaClusterId The unique identifier for the pipeline.
  @param id The unique identifier for the pipeline.
  @return ApiDeleteSdV1PipelineRequest
 */
-func (a *PipelinesSdV1ApiService) DeleteSdV1Pipeline(ctx _context.Context, environmentId string, kafkaClusterId string, id string) ApiDeleteSdV1PipelineRequest {
+func (a *PipelinesSdV1ApiService) DeleteSdV1Pipeline(ctx _context.Context, kafkaClusterId string, id string) ApiDeleteSdV1PipelineRequest {
 	return ApiDeleteSdV1PipelineRequest{
 		ApiService: a,
 		ctx: ctx,
-		environmentId: environmentId,
 		kafkaClusterId: kafkaClusterId,
 		id: id,
 	}
@@ -364,15 +358,18 @@ func (a *PipelinesSdV1ApiService) DeleteSdV1PipelineExecute(r ApiDeleteSdV1Pipel
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/sd/v1/environments/{environment-id}/clusters/{kafka-cluster-id}/pipelines/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"environment-id"+"}", _neturl.PathEscape(parameterToString(r.environmentId, "")), -1)
+	localVarPath := localBasePath + "/sd/v1/clusters/{kafka-cluster-id}/pipelines/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"kafka-cluster-id"+"}", _neturl.PathEscape(parameterToString(r.kafkaClusterId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.environment == nil {
+		return nil, reportError("environment is required and must be specified")
+	}
 
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -470,11 +467,16 @@ func (a *PipelinesSdV1ApiService) DeleteSdV1PipelineExecute(r ApiDeleteSdV1Pipel
 type ApiGetSdV1PipelineRequest struct {
 	ctx _context.Context
 	ApiService PipelinesSdV1Api
-	environmentId string
+	environment *string
 	kafkaClusterId string
 	id string
 }
 
+// Scope the operation to the given environment.
+func (r ApiGetSdV1PipelineRequest) Environment(environment string) ApiGetSdV1PipelineRequest {
+	r.environment = &environment
+	return r
+}
 
 func (r ApiGetSdV1PipelineRequest) Execute() (SdV1Pipeline, *_nethttp.Response, error) {
 	return r.ApiService.GetSdV1PipelineExecute(r)
@@ -486,16 +488,14 @@ GetSdV1Pipeline Read a Pipeline
 Make a request to read a pipeline.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param environmentId The unique identifier for the pipeline.
  @param kafkaClusterId The unique identifier for the pipeline.
  @param id The unique identifier for the pipeline.
  @return ApiGetSdV1PipelineRequest
 */
-func (a *PipelinesSdV1ApiService) GetSdV1Pipeline(ctx _context.Context, environmentId string, kafkaClusterId string, id string) ApiGetSdV1PipelineRequest {
+func (a *PipelinesSdV1ApiService) GetSdV1Pipeline(ctx _context.Context, kafkaClusterId string, id string) ApiGetSdV1PipelineRequest {
 	return ApiGetSdV1PipelineRequest{
 		ApiService: a,
 		ctx: ctx,
-		environmentId: environmentId,
 		kafkaClusterId: kafkaClusterId,
 		id: id,
 	}
@@ -518,15 +518,18 @@ func (a *PipelinesSdV1ApiService) GetSdV1PipelineExecute(r ApiGetSdV1PipelineReq
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/sd/v1/environments/{environment-id}/clusters/{kafka-cluster-id}/pipelines/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"environment-id"+"}", _neturl.PathEscape(parameterToString(r.environmentId, "")), -1)
+	localVarPath := localBasePath + "/sd/v1/clusters/{kafka-cluster-id}/pipelines/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"kafka-cluster-id"+"}", _neturl.PathEscape(parameterToString(r.kafkaClusterId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.environment == nil {
+		return localVarReturnValue, nil, reportError("environment is required and must be specified")
+	}
 
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -633,12 +636,17 @@ func (a *PipelinesSdV1ApiService) GetSdV1PipelineExecute(r ApiGetSdV1PipelineReq
 type ApiListSdV1PipelinesRequest struct {
 	ctx _context.Context
 	ApiService PipelinesSdV1Api
-	environmentId string
+	environment *string
 	kafkaClusterId string
 	pageSize *int32
 	pageToken *string
 }
 
+// Filter the results by exact match for environment.
+func (r ApiListSdV1PipelinesRequest) Environment(environment string) ApiListSdV1PipelinesRequest {
+	r.environment = &environment
+	return r
+}
 // A pagination size for collection requests.
 func (r ApiListSdV1PipelinesRequest) PageSize(pageSize int32) ApiListSdV1PipelinesRequest {
 	r.pageSize = &pageSize
@@ -660,15 +668,13 @@ ListSdV1Pipelines List of Pipelines
 Retrieve a sorted, filtered, paginated list of all pipelines.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param environmentId The unique identifier for the pipeline.
  @param kafkaClusterId The unique identifier for the pipeline.
  @return ApiListSdV1PipelinesRequest
 */
-func (a *PipelinesSdV1ApiService) ListSdV1Pipelines(ctx _context.Context, environmentId string, kafkaClusterId string) ApiListSdV1PipelinesRequest {
+func (a *PipelinesSdV1ApiService) ListSdV1Pipelines(ctx _context.Context, kafkaClusterId string) ApiListSdV1PipelinesRequest {
 	return ApiListSdV1PipelinesRequest{
 		ApiService: a,
 		ctx: ctx,
-		environmentId: environmentId,
 		kafkaClusterId: kafkaClusterId,
 	}
 }
@@ -690,14 +696,17 @@ func (a *PipelinesSdV1ApiService) ListSdV1PipelinesExecute(r ApiListSdV1Pipeline
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/sd/v1/environments/{environment-id}/clusters/{kafka-cluster-id}/pipelines"
-	localVarPath = strings.Replace(localVarPath, "{"+"environment-id"+"}", _neturl.PathEscape(parameterToString(r.environmentId, "")), -1)
+	localVarPath := localBasePath + "/sd/v1/clusters/{kafka-cluster-id}/pipelines"
 	localVarPath = strings.Replace(localVarPath, "{"+"kafka-cluster-id"+"}", _neturl.PathEscape(parameterToString(r.kafkaClusterId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.environment == nil {
+		return localVarReturnValue, nil, reportError("environment is required and must be specified")
+	}
 
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}
@@ -800,12 +809,17 @@ func (a *PipelinesSdV1ApiService) ListSdV1PipelinesExecute(r ApiListSdV1Pipeline
 type ApiUpdateSdV1PipelineRequest struct {
 	ctx _context.Context
 	ApiService PipelinesSdV1Api
-	environmentId string
+	environment *string
 	kafkaClusterId string
 	id string
 	sdV1PipelineUpdate *SdV1PipelineUpdate
 }
 
+// Scope the operation to the given environment.
+func (r ApiUpdateSdV1PipelineRequest) Environment(environment string) ApiUpdateSdV1PipelineRequest {
+	r.environment = &environment
+	return r
+}
 func (r ApiUpdateSdV1PipelineRequest) SdV1PipelineUpdate(sdV1PipelineUpdate SdV1PipelineUpdate) ApiUpdateSdV1PipelineRequest {
 	r.sdV1PipelineUpdate = &sdV1PipelineUpdate
 	return r
@@ -823,16 +837,14 @@ Make a request to update a pipeline.
 
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param environmentId The unique identifier for the pipeline.
  @param kafkaClusterId The unique identifier for the pipeline.
  @param id The unique identifier for the pipeline.
  @return ApiUpdateSdV1PipelineRequest
 */
-func (a *PipelinesSdV1ApiService) UpdateSdV1Pipeline(ctx _context.Context, environmentId string, kafkaClusterId string, id string) ApiUpdateSdV1PipelineRequest {
+func (a *PipelinesSdV1ApiService) UpdateSdV1Pipeline(ctx _context.Context, kafkaClusterId string, id string) ApiUpdateSdV1PipelineRequest {
 	return ApiUpdateSdV1PipelineRequest{
 		ApiService: a,
 		ctx: ctx,
-		environmentId: environmentId,
 		kafkaClusterId: kafkaClusterId,
 		id: id,
 	}
@@ -855,15 +867,18 @@ func (a *PipelinesSdV1ApiService) UpdateSdV1PipelineExecute(r ApiUpdateSdV1Pipel
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/sd/v1/environments/{environment-id}/clusters/{kafka-cluster-id}/pipelines/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"environment-id"+"}", _neturl.PathEscape(parameterToString(r.environmentId, "")), -1)
+	localVarPath := localBasePath + "/sd/v1/clusters/{kafka-cluster-id}/pipelines/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"kafka-cluster-id"+"}", _neturl.PathEscape(parameterToString(r.kafkaClusterId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.environment == nil {
+		return localVarReturnValue, nil, reportError("environment is required and must be specified")
+	}
 
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

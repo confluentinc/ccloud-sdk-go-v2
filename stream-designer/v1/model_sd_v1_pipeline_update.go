@@ -15,7 +15,7 @@
 /*
 Stream Designer API
 
-# Introduction  Stream Designer API provides resources/API for defining stream processing pipelines. Each pipeline describes a set of stream processing components, including connectors, topics, streams, tables, queries and schemas. The components in a pipeline need not exist as CCloud resources until the pipeline is activated, or launched.  This API defines operations to create, list, modify, manage and delete pipelines. 
+# Introduction  Stream Designer API provides resources/API for defining stream processing pipelines. Each pipeline describes a set of stream processing components, including connectors, topics, streams, tables, queries and schemas. The components in a pipeline need not exist as Confluent Cloud resources until the pipeline is activated.  This API defines operations to create, list, modify, manage and delete pipelines. 
 
 API version: 0.0.1-alpha0
 Contact: stream-designer@confluent.io
@@ -33,7 +33,7 @@ import (
 	"reflect"
 )
 
-// SdV1PipelineUpdate `Pipeline` objects represent information about a user-defined pipeline of Confluent Cloud components. The pipeline's content is available separately.  The API allows you to create, retrieve, update, and delete individual pipeline graphs, as well as list all of your pipelines for the particular environment and cluster.   Related guide: [Pipelines in Confluent Cloud](https://docs.confluent.io/cloud/current/pipelines).  ## The Pipelines Model <SchemaDefinition schemaRef=\"#/components/schemas/sd.v1.Pipeline\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `pipelines_per_org` | Pipelines in one Confluent Cloud organization | | `pipelines_per_cluster` | Pipelines in one Confluent Cloud cluster |
+// SdV1PipelineUpdate `Pipeline` objects represent information about a user-defined pipeline of Confluent Cloud components. The pipeline's content is available separately.  The API allows you to create, retrieve, update, and delete your pipelines, as well as list all of your pipelines for the particular environment and Kafka cluster.   Related guide: [Pipelines in Confluent Cloud](https://docs.confluent.io/cloud/current/api.html).  ## The Pipelines Model <SchemaDefinition schemaRef=\"#/components/schemas/sd.v1.Pipeline\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `pipelines_per_org` | Pipelines in one Confluent Cloud organization | | `pipelines_per_cluster` | Pipelines in one Confluent Cloud Kafka cluster |
 type SdV1PipelineUpdate struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
@@ -42,24 +42,8 @@ type SdV1PipelineUpdate struct {
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
 	Id *string `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
-	// The name of this pipeline.
-	Name *string `json:"name,omitempty"`
-	// The description of this pipeline.
-	Description *string `json:"description,omitempty"`
-	// The unique identifier of the ksqlDB application this pipeline uses.
-	KsqlId *string `json:"ksqlId,omitempty"`
-	// The unique identifier of the Schema Registry this pipeline uses.
-	SchemaRegistryId *string `json:"schemaRegistryId,omitempty"`
-	// The desired state of the pipeline.
-	Activated *bool `json:"activated,omitempty"`
-	// The endpoint URL of the kafka cluster this pipeline uses.
-	KafkaClusterEndpoint *string `json:"kafkaClusterEndpoint,omitempty"`
-	// The endpoint URL of the ksqlDB application this pipeline uses.
-	KsqlEndpoint *string `json:"ksqlEndpoint,omitempty"`
-	// The endpoint URL of the CCloud Connect service this pipeline uses.
-	ConnectEndpoint *string `json:"connectEndpoint,omitempty"`
-	// The endpoint URL of the Schema Registry this pipeline uses.
-	SchemaRegistryEndpoint *string `json:"schemaRegistryEndpoint,omitempty"`
+	Spec *SdV1PipelineSpecUpdate `json:"spec,omitempty"`
+	Status *SdV1PipelineStatus `json:"status,omitempty"`
 }
 
 // NewSdV1PipelineUpdate instantiates a new SdV1PipelineUpdate object
@@ -207,292 +191,68 @@ func (o *SdV1PipelineUpdate) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *SdV1PipelineUpdate) GetName() string {
-	if o == nil || o.Name == nil {
-		var ret string
+// GetSpec returns the Spec field value if set, zero value otherwise.
+func (o *SdV1PipelineUpdate) GetSpec() SdV1PipelineSpecUpdate {
+	if o == nil || o.Spec == nil {
+		var ret SdV1PipelineSpecUpdate
 		return ret
 	}
-	return *o.Name
+	return *o.Spec
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetSpecOk returns a tuple with the Spec field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SdV1PipelineUpdate) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+func (o *SdV1PipelineUpdate) GetSpecOk() (*SdV1PipelineSpecUpdate, bool) {
+	if o == nil || o.Spec == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return o.Spec, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *SdV1PipelineUpdate) HasName() bool {
-	if o != nil && o.Name != nil {
+// HasSpec returns a boolean if a field has been set.
+func (o *SdV1PipelineUpdate) HasSpec() bool {
+	if o != nil && o.Spec != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *SdV1PipelineUpdate) SetName(v string) {
-	o.Name = &v
+// SetSpec gets a reference to the given SdV1PipelineSpecUpdate and assigns it to the Spec field.
+func (o *SdV1PipelineUpdate) SetSpec(v SdV1PipelineSpecUpdate) {
+	o.Spec = &v
 }
 
-// GetDescription returns the Description field value if set, zero value otherwise.
-func (o *SdV1PipelineUpdate) GetDescription() string {
-	if o == nil || o.Description == nil {
-		var ret string
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *SdV1PipelineUpdate) GetStatus() SdV1PipelineStatus {
+	if o == nil || o.Status == nil {
+		var ret SdV1PipelineStatus
 		return ret
 	}
-	return *o.Description
+	return *o.Status
 }
 
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SdV1PipelineUpdate) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+func (o *SdV1PipelineUpdate) GetStatusOk() (*SdV1PipelineStatus, bool) {
+	if o == nil || o.Status == nil {
 		return nil, false
 	}
-	return o.Description, true
+	return o.Status, true
 }
 
-// HasDescription returns a boolean if a field has been set.
-func (o *SdV1PipelineUpdate) HasDescription() bool {
-	if o != nil && o.Description != nil {
+// HasStatus returns a boolean if a field has been set.
+func (o *SdV1PipelineUpdate) HasStatus() bool {
+	if o != nil && o.Status != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *SdV1PipelineUpdate) SetDescription(v string) {
-	o.Description = &v
-}
-
-// GetKsqlId returns the KsqlId field value if set, zero value otherwise.
-func (o *SdV1PipelineUpdate) GetKsqlId() string {
-	if o == nil || o.KsqlId == nil {
-		var ret string
-		return ret
-	}
-	return *o.KsqlId
-}
-
-// GetKsqlIdOk returns a tuple with the KsqlId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SdV1PipelineUpdate) GetKsqlIdOk() (*string, bool) {
-	if o == nil || o.KsqlId == nil {
-		return nil, false
-	}
-	return o.KsqlId, true
-}
-
-// HasKsqlId returns a boolean if a field has been set.
-func (o *SdV1PipelineUpdate) HasKsqlId() bool {
-	if o != nil && o.KsqlId != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetKsqlId gets a reference to the given string and assigns it to the KsqlId field.
-func (o *SdV1PipelineUpdate) SetKsqlId(v string) {
-	o.KsqlId = &v
-}
-
-// GetSchemaRegistryId returns the SchemaRegistryId field value if set, zero value otherwise.
-func (o *SdV1PipelineUpdate) GetSchemaRegistryId() string {
-	if o == nil || o.SchemaRegistryId == nil {
-		var ret string
-		return ret
-	}
-	return *o.SchemaRegistryId
-}
-
-// GetSchemaRegistryIdOk returns a tuple with the SchemaRegistryId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SdV1PipelineUpdate) GetSchemaRegistryIdOk() (*string, bool) {
-	if o == nil || o.SchemaRegistryId == nil {
-		return nil, false
-	}
-	return o.SchemaRegistryId, true
-}
-
-// HasSchemaRegistryId returns a boolean if a field has been set.
-func (o *SdV1PipelineUpdate) HasSchemaRegistryId() bool {
-	if o != nil && o.SchemaRegistryId != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSchemaRegistryId gets a reference to the given string and assigns it to the SchemaRegistryId field.
-func (o *SdV1PipelineUpdate) SetSchemaRegistryId(v string) {
-	o.SchemaRegistryId = &v
-}
-
-// GetActivated returns the Activated field value if set, zero value otherwise.
-func (o *SdV1PipelineUpdate) GetActivated() bool {
-	if o == nil || o.Activated == nil {
-		var ret bool
-		return ret
-	}
-	return *o.Activated
-}
-
-// GetActivatedOk returns a tuple with the Activated field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SdV1PipelineUpdate) GetActivatedOk() (*bool, bool) {
-	if o == nil || o.Activated == nil {
-		return nil, false
-	}
-	return o.Activated, true
-}
-
-// HasActivated returns a boolean if a field has been set.
-func (o *SdV1PipelineUpdate) HasActivated() bool {
-	if o != nil && o.Activated != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetActivated gets a reference to the given bool and assigns it to the Activated field.
-func (o *SdV1PipelineUpdate) SetActivated(v bool) {
-	o.Activated = &v
-}
-
-// GetKafkaClusterEndpoint returns the KafkaClusterEndpoint field value if set, zero value otherwise.
-func (o *SdV1PipelineUpdate) GetKafkaClusterEndpoint() string {
-	if o == nil || o.KafkaClusterEndpoint == nil {
-		var ret string
-		return ret
-	}
-	return *o.KafkaClusterEndpoint
-}
-
-// GetKafkaClusterEndpointOk returns a tuple with the KafkaClusterEndpoint field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SdV1PipelineUpdate) GetKafkaClusterEndpointOk() (*string, bool) {
-	if o == nil || o.KafkaClusterEndpoint == nil {
-		return nil, false
-	}
-	return o.KafkaClusterEndpoint, true
-}
-
-// HasKafkaClusterEndpoint returns a boolean if a field has been set.
-func (o *SdV1PipelineUpdate) HasKafkaClusterEndpoint() bool {
-	if o != nil && o.KafkaClusterEndpoint != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetKafkaClusterEndpoint gets a reference to the given string and assigns it to the KafkaClusterEndpoint field.
-func (o *SdV1PipelineUpdate) SetKafkaClusterEndpoint(v string) {
-	o.KafkaClusterEndpoint = &v
-}
-
-// GetKsqlEndpoint returns the KsqlEndpoint field value if set, zero value otherwise.
-func (o *SdV1PipelineUpdate) GetKsqlEndpoint() string {
-	if o == nil || o.KsqlEndpoint == nil {
-		var ret string
-		return ret
-	}
-	return *o.KsqlEndpoint
-}
-
-// GetKsqlEndpointOk returns a tuple with the KsqlEndpoint field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SdV1PipelineUpdate) GetKsqlEndpointOk() (*string, bool) {
-	if o == nil || o.KsqlEndpoint == nil {
-		return nil, false
-	}
-	return o.KsqlEndpoint, true
-}
-
-// HasKsqlEndpoint returns a boolean if a field has been set.
-func (o *SdV1PipelineUpdate) HasKsqlEndpoint() bool {
-	if o != nil && o.KsqlEndpoint != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetKsqlEndpoint gets a reference to the given string and assigns it to the KsqlEndpoint field.
-func (o *SdV1PipelineUpdate) SetKsqlEndpoint(v string) {
-	o.KsqlEndpoint = &v
-}
-
-// GetConnectEndpoint returns the ConnectEndpoint field value if set, zero value otherwise.
-func (o *SdV1PipelineUpdate) GetConnectEndpoint() string {
-	if o == nil || o.ConnectEndpoint == nil {
-		var ret string
-		return ret
-	}
-	return *o.ConnectEndpoint
-}
-
-// GetConnectEndpointOk returns a tuple with the ConnectEndpoint field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SdV1PipelineUpdate) GetConnectEndpointOk() (*string, bool) {
-	if o == nil || o.ConnectEndpoint == nil {
-		return nil, false
-	}
-	return o.ConnectEndpoint, true
-}
-
-// HasConnectEndpoint returns a boolean if a field has been set.
-func (o *SdV1PipelineUpdate) HasConnectEndpoint() bool {
-	if o != nil && o.ConnectEndpoint != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetConnectEndpoint gets a reference to the given string and assigns it to the ConnectEndpoint field.
-func (o *SdV1PipelineUpdate) SetConnectEndpoint(v string) {
-	o.ConnectEndpoint = &v
-}
-
-// GetSchemaRegistryEndpoint returns the SchemaRegistryEndpoint field value if set, zero value otherwise.
-func (o *SdV1PipelineUpdate) GetSchemaRegistryEndpoint() string {
-	if o == nil || o.SchemaRegistryEndpoint == nil {
-		var ret string
-		return ret
-	}
-	return *o.SchemaRegistryEndpoint
-}
-
-// GetSchemaRegistryEndpointOk returns a tuple with the SchemaRegistryEndpoint field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SdV1PipelineUpdate) GetSchemaRegistryEndpointOk() (*string, bool) {
-	if o == nil || o.SchemaRegistryEndpoint == nil {
-		return nil, false
-	}
-	return o.SchemaRegistryEndpoint, true
-}
-
-// HasSchemaRegistryEndpoint returns a boolean if a field has been set.
-func (o *SdV1PipelineUpdate) HasSchemaRegistryEndpoint() bool {
-	if o != nil && o.SchemaRegistryEndpoint != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSchemaRegistryEndpoint gets a reference to the given string and assigns it to the SchemaRegistryEndpoint field.
-func (o *SdV1PipelineUpdate) SetSchemaRegistryEndpoint(v string) {
-	o.SchemaRegistryEndpoint = &v
+// SetStatus gets a reference to the given SdV1PipelineStatus and assigns it to the Status field.
+func (o *SdV1PipelineUpdate) SetStatus(v SdV1PipelineStatus) {
+	o.Status = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
@@ -501,15 +261,8 @@ func (o *SdV1PipelineUpdate) Redact() {
     o.recurseRedact(o.Kind)
     o.recurseRedact(o.Id)
     o.recurseRedact(o.Metadata)
-    o.recurseRedact(o.Name)
-    o.recurseRedact(o.Description)
-    o.recurseRedact(o.KsqlId)
-    o.recurseRedact(o.SchemaRegistryId)
-    o.recurseRedact(o.Activated)
-    o.recurseRedact(o.KafkaClusterEndpoint)
-    o.recurseRedact(o.KsqlEndpoint)
-    o.recurseRedact(o.ConnectEndpoint)
-    o.recurseRedact(o.SchemaRegistryEndpoint)
+    o.recurseRedact(o.Spec)
+    o.recurseRedact(o.Status)
 }
 
 func (o *SdV1PipelineUpdate) recurseRedact(v interface{}) {
@@ -556,32 +309,11 @@ func (o SdV1PipelineUpdate) MarshalJSON() ([]byte, error) {
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if o.Name != nil {
-		toSerialize["name"] = o.Name
+	if o.Spec != nil {
+		toSerialize["spec"] = o.Spec
 	}
-	if o.Description != nil {
-		toSerialize["description"] = o.Description
-	}
-	if o.KsqlId != nil {
-		toSerialize["ksqlId"] = o.KsqlId
-	}
-	if o.SchemaRegistryId != nil {
-		toSerialize["schemaRegistryId"] = o.SchemaRegistryId
-	}
-	if o.Activated != nil {
-		toSerialize["activated"] = o.Activated
-	}
-	if o.KafkaClusterEndpoint != nil {
-		toSerialize["kafkaClusterEndpoint"] = o.KafkaClusterEndpoint
-	}
-	if o.KsqlEndpoint != nil {
-		toSerialize["ksqlEndpoint"] = o.KsqlEndpoint
-	}
-	if o.ConnectEndpoint != nil {
-		toSerialize["connectEndpoint"] = o.ConnectEndpoint
-	}
-	if o.SchemaRegistryEndpoint != nil {
-		toSerialize["schemaRegistryEndpoint"] = o.SchemaRegistryEndpoint
+	if o.Status != nil {
+		toSerialize["status"] = o.Status
 	}
 	return json.Marshal(toSerialize)
 }

@@ -5,7 +5,7 @@
 Stream Designer API provides resources/API for defining stream processing pipelines.
 Each pipeline describes a set of stream processing components,
 including connectors, topics, streams, tables, queries and schemas.
-The components in a pipeline need not exist as CCloud resources until the pipeline is activated, or launched.
+The components in a pipeline need not exist as Confluent Cloud resources until the pipeline is activated.
 
 This API defines operations to create, list, modify, manage and delete pipelines.
 
@@ -87,11 +87,11 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*PipelinesSdV1Api* | [**CreateSdV1Pipeline**](docs/PipelinesSdV1Api.md#createsdv1pipeline) | **Post** /sd/v1/environments/{environment-id}/clusters/{kafka-cluster-id}/pipelines | Create a Pipeline
-*PipelinesSdV1Api* | [**DeleteSdV1Pipeline**](docs/PipelinesSdV1Api.md#deletesdv1pipeline) | **Delete** /sd/v1/environments/{environment-id}/clusters/{kafka-cluster-id}/pipelines/{id} | Delete a Pipeline
-*PipelinesSdV1Api* | [**GetSdV1Pipeline**](docs/PipelinesSdV1Api.md#getsdv1pipeline) | **Get** /sd/v1/environments/{environment-id}/clusters/{kafka-cluster-id}/pipelines/{id} | Read a Pipeline
-*PipelinesSdV1Api* | [**ListSdV1Pipelines**](docs/PipelinesSdV1Api.md#listsdv1pipelines) | **Get** /sd/v1/environments/{environment-id}/clusters/{kafka-cluster-id}/pipelines | List of Pipelines
-*PipelinesSdV1Api* | [**UpdateSdV1Pipeline**](docs/PipelinesSdV1Api.md#updatesdv1pipeline) | **Patch** /sd/v1/environments/{environment-id}/clusters/{kafka-cluster-id}/pipelines/{id} | Update a Pipeline
+*PipelinesSdV1Api* | [**CreateSdV1Pipeline**](docs/PipelinesSdV1Api.md#createsdv1pipeline) | **Post** /sd/v1/clusters/{kafka-cluster-id}/pipelines | Create a Pipeline
+*PipelinesSdV1Api* | [**DeleteSdV1Pipeline**](docs/PipelinesSdV1Api.md#deletesdv1pipeline) | **Delete** /sd/v1/clusters/{kafka-cluster-id}/pipelines/{id} | Delete a Pipeline
+*PipelinesSdV1Api* | [**GetSdV1Pipeline**](docs/PipelinesSdV1Api.md#getsdv1pipeline) | **Get** /sd/v1/clusters/{kafka-cluster-id}/pipelines/{id} | Read a Pipeline
+*PipelinesSdV1Api* | [**ListSdV1Pipelines**](docs/PipelinesSdV1Api.md#listsdv1pipelines) | **Get** /sd/v1/clusters/{kafka-cluster-id}/pipelines | List of Pipelines
+*PipelinesSdV1Api* | [**UpdateSdV1Pipeline**](docs/PipelinesSdV1Api.md#updatesdv1pipeline) | **Patch** /sd/v1/clusters/{kafka-cluster-id}/pipelines/{id} | Update a Pipeline
 
 
 ## Documentation For Models
@@ -106,6 +106,9 @@ Class | Method | HTTP request | Description
  - [ObjectReference](docs/ObjectReference.md)
  - [SdV1Pipeline](docs/SdV1Pipeline.md)
  - [SdV1PipelineList](docs/SdV1PipelineList.md)
+ - [SdV1PipelineSpec](docs/SdV1PipelineSpec.md)
+ - [SdV1PipelineSpecUpdate](docs/SdV1PipelineSpecUpdate.md)
+ - [SdV1PipelineStatus](docs/SdV1PipelineStatus.md)
  - [SdV1PipelineUpdate](docs/SdV1PipelineUpdate.md)
  - [TypedEnvScopedObjectReference](docs/TypedEnvScopedObjectReference.md)
  - [TypedGlobalObjectReference](docs/TypedGlobalObjectReference.md)

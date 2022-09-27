@@ -15,7 +15,7 @@
 /*
 Stream Designer API
 
-# Introduction  Stream Designer API provides resources/API for defining stream processing pipelines. Each pipeline describes a set of stream processing components, including connectors, topics, streams, tables, queries and schemas. The components in a pipeline need not exist as CCloud resources until the pipeline is activated, or launched.  This API defines operations to create, list, modify, manage and delete pipelines. 
+# Introduction  Stream Designer API provides resources/API for defining stream processing pipelines. Each pipeline describes a set of stream processing components, including connectors, topics, streams, tables, queries and schemas. The components in a pipeline need not exist as Confluent Cloud resources until the pipeline is activated.  This API defines operations to create, list, modify, manage and delete pipelines. 
 
 API version: 0.0.1-alpha0
 Contact: stream-designer@confluent.io
