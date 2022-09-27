@@ -800,13 +800,13 @@ paths:
             --url 'https://api.confluent.cloud/cdx/v1/provider-shared-resources/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"crn":"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic","resources":["crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic"],"display_name":"Stock Trades","organization_description":"ABC Corp is the biggest online retailer","organization_contact":"jane.doe@example.com","cloud_cluster":{"id":"string","environment":"string"}}'
+            --data '{"crn":"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic","resources":["crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic"],"display_name":"Stock Trades","description":"This topic provides realtime data for the orders placed through the website","labels":["recent","pending"],"organization_description":"ABC Corp is the biggest online retailer","organization_contact":"jane.doe@example.com","cloud_cluster":{"id":"string","environment":"string"}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"crn\":\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"],\"display_name\":\"Stock Trades\",\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"crn\":\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"],\"display_name\":\"Stock Trades\",\"description\":\"This topic provides realtime data for the orders placed through the website\",\"labels\":[\"recent\",\"pending\"],\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/cdx/v1/provider-shared-resources/{id}")
             .patch(body)
@@ -820,7 +820,9 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cdx/v1/provider-shared-resources/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"crn\\\":\\\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\\\
           \",\\\"resources\\\":[\\\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\\\
-          \"],\\\"display_name\\\":\\\"Stock Trades\\\",\\\"organization_description\\\
+          \"],\\\"display_name\\\":\\\"Stock Trades\\\",\\\"description\\\":\\\"This\
+          \ topic provides realtime data for the orders placed through the website\\\
+          \",\\\"labels\\\":[\\\"recent\\\",\\\"pending\\\"],\\\"organization_description\\\
           \":\\\"ABC Corp is the biggest online retailer\\\",\\\"organization_contact\\\
           \":\\\"jane.doe@example.com\\\",\\\"cloud_cluster\\\":{\\\"id\\\":\\\"string\\\
           \",\\\"environment\\\":\\\"string\\\"}}\")\n\n\treq, _ := http.NewRequest(\"\
@@ -835,7 +837,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"crn\":\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"],\"display_name\":\"Stock Trades\",\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}"
+          payload = "{\"crn\":\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"],\"display_name\":\"Stock Trades\",\"description\":\"This topic provides realtime data for the orders placed through the website\",\"labels\":[\"recent\",\"pending\"],\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}"
 
           headers = {
               'content-type': "application/json",
@@ -882,6 +884,8 @@ paths:
               'crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic'
             ],
             display_name: 'Stock Trades',
+            description: 'This topic provides realtime data for the orders placed through the website',
+            labels: ['recent', 'pending'],
             organization_description: 'ABC Corp is the biggest online retailer',
             organization_contact: 'jane.doe@example.com',
             cloud_cluster: {id: 'string', environment: 'string'}
@@ -899,7 +903,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"crn\":\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"],\"display_name\":\"Stock Trades\",\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"crn\":\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"],\"display_name\":\"Stock Trades\",\"description\":\"This topic provides realtime data for the orders placed through the website\",\"labels\":[\"recent\",\"pending\"],\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -908,7 +912,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"crn\":\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"],\"display_name\":\"Stock Trades\",\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"crn\":\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"],\"display_name\":\"Stock Trades\",\"description\":\"This topic provides realtime data for the orders placed through the website\",\"labels\":[\"recent\",\"pending\"],\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /cdx/v1/provider-shared-resources/{id}/images/{file_name}:
     delete:
@@ -6034,9 +6038,7 @@ components:
           description: Description of shared resource
           example: This topic provides realtime data for the orders placed through
             the website
-          readOnly: true
           type: string
-          x-immutable: true
         labels:
           description: list of labels
           example:
@@ -6044,9 +6046,7 @@ components:
           - pending
           items:
             type: string
-          readOnly: true
           type: array
-          x-immutable: true
         schemas:
           description: List of schemas in JSON format. This field is work in progress
             and subject to changes.
@@ -7575,6 +7575,19 @@ components:
           description: Shared resource display name
           example: Stock Trades
           type: string
+        description:
+          description: Description of shared resource
+          example: This topic provides realtime data for the orders placed through
+            the website
+          type: string
+        labels:
+          description: list of labels
+          example:
+          - recent
+          - pending
+          items:
+            type: string
+          type: array
         schemas:
           description: List of schemas in JSON format. This field is work in progress
             and subject to changes.

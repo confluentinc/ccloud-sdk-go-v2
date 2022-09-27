@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
 **Resources** | Pointer to **[]string** | List of resource crns that are shared together | [optional] 
 **DisplayName** | Pointer to **string** | Shared resource display name | [optional] 
+**Description** | Pointer to **string** | Description of shared resource | [optional] 
+**Labels** | Pointer to **[]string** | list of labels | [optional] 
 **Schemas** | Pointer to **[]string** | List of schemas in JSON format. This field is work in progress and subject to changes. | [optional] [readonly] 
 **OrganizationDescription** | Pointer to **string** | Shared resource&#39;s organization description | [optional] 
 **OrganizationContact** | Pointer to **string** | Email of contact person from the organization | [optional] 
@@ -186,6 +188,56 @@ SetDisplayName sets DisplayName field to given value.
 `func (o *CdxV1ProviderSharedResourceUpdate) HasDisplayName() bool`
 
 HasDisplayName returns a boolean if a field has been set.
+
+### GetDescription
+
+`func (o *CdxV1ProviderSharedResourceUpdate) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *CdxV1ProviderSharedResourceUpdate) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *CdxV1ProviderSharedResourceUpdate) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
+
+### HasDescription
+
+`func (o *CdxV1ProviderSharedResourceUpdate) HasDescription() bool`
+
+HasDescription returns a boolean if a field has been set.
+
+### GetLabels
+
+`func (o *CdxV1ProviderSharedResourceUpdate) GetLabels() []string`
+
+GetLabels returns the Labels field if non-nil, zero value otherwise.
+
+### GetLabelsOk
+
+`func (o *CdxV1ProviderSharedResourceUpdate) GetLabelsOk() (*[]string, bool)`
+
+GetLabelsOk returns a tuple with the Labels field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLabels
+
+`func (o *CdxV1ProviderSharedResourceUpdate) SetLabels(v []string)`
+
+SetLabels sets Labels field to given value.
+
+### HasLabels
+
+`func (o *CdxV1ProviderSharedResourceUpdate) HasLabels() bool`
+
+HasLabels returns a boolean if a field has been set.
 
 ### GetSchemas
 
