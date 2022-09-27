@@ -11,6 +11,9 @@ Name | Type | Description | Notes
 **ApiKey** | Pointer to **string** | The api key | [optional] [readonly] 
 **Secret** | Pointer to **string** | The api key secret | [optional] [readonly] 
 **KafkaBootstrapUrl** | Pointer to **string** | The kafka cluster bootstrap url | [optional] [readonly] 
+**SchemaRegistryApiKey** | Pointer to **string** | The api key for schema registry | [optional] [readonly] 
+**SchemaRegistrySecret** | Pointer to **string** | The api key secret for schema registry | [optional] [readonly] 
+**SchemaRegistryUrl** | Pointer to **string** | The schema registry endpoint url | [optional] [readonly] 
 **Resources** | Pointer to [**[]CdxV1RedeemTokenResponseResourcesOneOf**](CdxV1RedeemTokenResponseResourcesOneOf.md) | List of shared resources | [optional] 
 
 ## Methods
@@ -206,6 +209,81 @@ SetKafkaBootstrapUrl sets KafkaBootstrapUrl field to given value.
 `func (o *CdxV1RedeemTokenResponse) HasKafkaBootstrapUrl() bool`
 
 HasKafkaBootstrapUrl returns a boolean if a field has been set.
+
+### GetSchemaRegistryApiKey
+
+`func (o *CdxV1RedeemTokenResponse) GetSchemaRegistryApiKey() string`
+
+GetSchemaRegistryApiKey returns the SchemaRegistryApiKey field if non-nil, zero value otherwise.
+
+### GetSchemaRegistryApiKeyOk
+
+`func (o *CdxV1RedeemTokenResponse) GetSchemaRegistryApiKeyOk() (*string, bool)`
+
+GetSchemaRegistryApiKeyOk returns a tuple with the SchemaRegistryApiKey field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSchemaRegistryApiKey
+
+`func (o *CdxV1RedeemTokenResponse) SetSchemaRegistryApiKey(v string)`
+
+SetSchemaRegistryApiKey sets SchemaRegistryApiKey field to given value.
+
+### HasSchemaRegistryApiKey
+
+`func (o *CdxV1RedeemTokenResponse) HasSchemaRegistryApiKey() bool`
+
+HasSchemaRegistryApiKey returns a boolean if a field has been set.
+
+### GetSchemaRegistrySecret
+
+`func (o *CdxV1RedeemTokenResponse) GetSchemaRegistrySecret() string`
+
+GetSchemaRegistrySecret returns the SchemaRegistrySecret field if non-nil, zero value otherwise.
+
+### GetSchemaRegistrySecretOk
+
+`func (o *CdxV1RedeemTokenResponse) GetSchemaRegistrySecretOk() (*string, bool)`
+
+GetSchemaRegistrySecretOk returns a tuple with the SchemaRegistrySecret field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSchemaRegistrySecret
+
+`func (o *CdxV1RedeemTokenResponse) SetSchemaRegistrySecret(v string)`
+
+SetSchemaRegistrySecret sets SchemaRegistrySecret field to given value.
+
+### HasSchemaRegistrySecret
+
+`func (o *CdxV1RedeemTokenResponse) HasSchemaRegistrySecret() bool`
+
+HasSchemaRegistrySecret returns a boolean if a field has been set.
+
+### GetSchemaRegistryUrl
+
+`func (o *CdxV1RedeemTokenResponse) GetSchemaRegistryUrl() string`
+
+GetSchemaRegistryUrl returns the SchemaRegistryUrl field if non-nil, zero value otherwise.
+
+### GetSchemaRegistryUrlOk
+
+`func (o *CdxV1RedeemTokenResponse) GetSchemaRegistryUrlOk() (*string, bool)`
+
+GetSchemaRegistryUrlOk returns a tuple with the SchemaRegistryUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSchemaRegistryUrl
+
+`func (o *CdxV1RedeemTokenResponse) SetSchemaRegistryUrl(v string)`
+
+SetSchemaRegistryUrl sets SchemaRegistryUrl field to given value.
+
+### HasSchemaRegistryUrl
+
+`func (o *CdxV1RedeemTokenResponse) HasSchemaRegistryUrl() bool`
+
+HasSchemaRegistryUrl returns a boolean if a field has been set.
 
 ### GetResources
 

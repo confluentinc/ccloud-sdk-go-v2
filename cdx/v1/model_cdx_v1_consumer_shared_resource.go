@@ -50,8 +50,6 @@ type CdxV1ConsumerSharedResource struct {
 	Description *string `json:"description,omitempty"`
 	// list of labels
 	Labels *[]string `json:"labels,omitempty"`
-	// List of example data in JSON format. This field is work in progress and subject to changes.
-	Examples *[]string `json:"examples,omitempty"`
 	// List of schemas in JSON format. This field is work in progress and subject to changes.
 	Schemas *[]string `json:"schemas,omitempty"`
 	// Shared resource's organization name
@@ -369,38 +367,6 @@ func (o *CdxV1ConsumerSharedResource) SetLabels(v []string) {
 	o.Labels = &v
 }
 
-// GetExamples returns the Examples field value if set, zero value otherwise.
-func (o *CdxV1ConsumerSharedResource) GetExamples() []string {
-	if o == nil || o.Examples == nil {
-		var ret []string
-		return ret
-	}
-	return *o.Examples
-}
-
-// GetExamplesOk returns a tuple with the Examples field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CdxV1ConsumerSharedResource) GetExamplesOk() (*[]string, bool) {
-	if o == nil || o.Examples == nil {
-		return nil, false
-	}
-	return o.Examples, true
-}
-
-// HasExamples returns a boolean if a field has been set.
-func (o *CdxV1ConsumerSharedResource) HasExamples() bool {
-	if o != nil && o.Examples != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetExamples gets a reference to the given []string and assigns it to the Examples field.
-func (o *CdxV1ConsumerSharedResource) SetExamples(v []string) {
-	o.Examples = &v
-}
-
 // GetSchemas returns the Schemas field value if set, zero value otherwise.
 func (o *CdxV1ConsumerSharedResource) GetSchemas() []string {
 	if o == nil || o.Schemas == nil {
@@ -572,7 +538,6 @@ func (o *CdxV1ConsumerSharedResource) Redact() {
 	o.recurseRedact(o.DisplayName)
 	o.recurseRedact(o.Description)
 	o.recurseRedact(o.Labels)
-	o.recurseRedact(o.Examples)
 	o.recurseRedact(o.Schemas)
 	o.recurseRedact(o.OrganizationName)
 	o.recurseRedact(o.OrganizationDescription)
@@ -638,9 +603,6 @@ func (o CdxV1ConsumerSharedResource) MarshalJSON() ([]byte, error) {
 	}
 	if o.Labels != nil {
 		toSerialize["labels"] = o.Labels
-	}
-	if o.Examples != nil {
-		toSerialize["examples"] = o.Examples
 	}
 	if o.Schemas != nil {
 		toSerialize["schemas"] = o.Schemas

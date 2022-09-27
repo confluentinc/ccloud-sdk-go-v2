@@ -13,7 +13,6 @@ Name | Type | Description | Notes
 **DisplayName** | Pointer to **string** | Consumer resource display name | [optional] [readonly] 
 **Description** | Pointer to **string** | Description of consumer resource | [optional] [readonly] 
 **Labels** | Pointer to **[]string** | list of labels | [optional] [readonly] 
-**Examples** | Pointer to **[]string** | List of example data in JSON format. This field is work in progress and subject to changes. | [optional] [readonly] 
 **Schemas** | Pointer to **[]string** | List of schemas in JSON format. This field is work in progress and subject to changes. | [optional] [readonly] 
 **OrganizationName** | Pointer to **string** | Shared resource&#39;s organization name | [optional] [readonly] 
 **OrganizationDescription** | Pointer to **string** | Shared resource&#39;s organization description | [optional] [readonly] 
@@ -263,31 +262,6 @@ SetLabels sets Labels field to given value.
 `func (o *CdxV1ConsumerSharedResource) HasLabels() bool`
 
 HasLabels returns a boolean if a field has been set.
-
-### GetExamples
-
-`func (o *CdxV1ConsumerSharedResource) GetExamples() []string`
-
-GetExamples returns the Examples field if non-nil, zero value otherwise.
-
-### GetExamplesOk
-
-`func (o *CdxV1ConsumerSharedResource) GetExamplesOk() (*[]string, bool)`
-
-GetExamplesOk returns a tuple with the Examples field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetExamples
-
-`func (o *CdxV1ConsumerSharedResource) SetExamples(v []string)`
-
-SetExamples sets Examples field to given value.
-
-### HasExamples
-
-`func (o *CdxV1ConsumerSharedResource) HasExamples() bool`
-
-HasExamples returns a boolean if a field has been set.
 
 ### GetSchemas
 

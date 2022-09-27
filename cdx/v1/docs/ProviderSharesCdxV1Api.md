@@ -218,7 +218,7 @@ Name | Type | Description  | Notes
 
 ## ListCdxV1ProviderShares
 
-> CdxV1ProviderShareList ListCdxV1ProviderShares(ctx).SharedResource(sharedResource).IncludeDeleted(includeDeleted).PageSize(pageSize).PageToken(pageToken).Execute()
+> CdxV1ProviderShareList ListCdxV1ProviderShares(ctx).SharedResource(sharedResource).Crn(crn).IncludeDeleted(includeDeleted).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Provider Shares
 
@@ -238,13 +238,14 @@ import (
 
 func main() {
     sharedResource := "sr-1234" // string | Filter the results by exact match for shared_resource. (optional)
+    crn := "crn://confluent.cloud/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic" // string | Filter the results by exact match for crn. (optional)
     includeDeleted := true // bool | Include deactivated shares (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProviderSharesCdxV1Api.ListCdxV1ProviderShares(context.Background()).SharedResource(sharedResource).IncludeDeleted(includeDeleted).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.ProviderSharesCdxV1Api.ListCdxV1ProviderShares(context.Background()).SharedResource(sharedResource).Crn(crn).IncludeDeleted(includeDeleted).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProviderSharesCdxV1Api.ListCdxV1ProviderShares``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -266,6 +267,7 @@ Other parameters are passed through a pointer to a apiListCdxV1ProviderSharesReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **sharedResource** | **string** | Filter the results by exact match for shared_resource. | 
+ **crn** | **string** | Filter the results by exact match for crn. | 
  **includeDeleted** | **bool** | Include deactivated shares | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 

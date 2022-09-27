@@ -442,22 +442,22 @@ func (a *ProviderSharedResourcesCdxV1ApiService) GetCdxV1ProviderSharedResourceE
 type ApiListCdxV1ProviderSharedResourcesRequest struct {
 	ctx            _context.Context
 	ApiService     ProviderSharedResourcesCdxV1Api
-	crn            *string
 	streamShare    *string
+	crn            *string
 	includeDeleted *bool
 	pageSize       *int32
 	pageToken      *string
 }
 
-// Filter the results by exact match for crn.
-func (r ApiListCdxV1ProviderSharedResourcesRequest) Crn(crn string) ApiListCdxV1ProviderSharedResourcesRequest {
-	r.crn = &crn
-	return r
-}
-
 // Filter the results by exact match for stream_share.
 func (r ApiListCdxV1ProviderSharedResourcesRequest) StreamShare(streamShare string) ApiListCdxV1ProviderSharedResourcesRequest {
 	r.streamShare = &streamShare
+	return r
+}
+
+// Filter the results by exact match for crn.
+func (r ApiListCdxV1ProviderSharedResourcesRequest) Crn(crn string) ApiListCdxV1ProviderSharedResourcesRequest {
+	r.crn = &crn
 	return r
 }
 
@@ -521,11 +521,11 @@ func (a *ProviderSharedResourcesCdxV1ApiService) ListCdxV1ProviderSharedResource
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
-	if r.crn != nil {
-		localVarQueryParams.Add("crn", parameterToString(*r.crn, ""))
-	}
 	if r.streamShare != nil {
 		localVarQueryParams.Add("stream_share", parameterToString(*r.streamShare, ""))
+	}
+	if r.crn != nil {
+		localVarQueryParams.Add("crn", parameterToString(*r.crn, ""))
 	}
 	if r.includeDeleted != nil {
 		localVarQueryParams.Add("include_deleted", parameterToString(*r.includeDeleted, ""))

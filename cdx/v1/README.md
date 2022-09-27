@@ -132,6 +132,7 @@ Class | Method | HTTP request | Description
  - [CdxV1RedeemTokenResponse](docs/CdxV1RedeemTokenResponse.md)
  - [CdxV1RedeemTokenResponseResourcesOneOf](docs/CdxV1RedeemTokenResponseResourcesOneOf.md)
  - [CdxV1SharedGroup](docs/CdxV1SharedGroup.md)
+ - [CdxV1SharedSubject](docs/CdxV1SharedSubject.md)
  - [CdxV1SharedToken](docs/CdxV1SharedToken.md)
  - [CdxV1SharedTopic](docs/CdxV1SharedTopic.md)
  - [EnvScopedObjectReference](docs/EnvScopedObjectReference.md)

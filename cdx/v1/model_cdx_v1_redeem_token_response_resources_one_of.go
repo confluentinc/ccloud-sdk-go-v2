@@ -32,13 +32,19 @@ import (
 
 // CdxV1RedeemTokenResponseResourcesOneOf - struct for CdxV1RedeemTokenResponseResourcesOneOf
 type CdxV1RedeemTokenResponseResourcesOneOf struct {
-	CdxV1SharedGroup *CdxV1SharedGroup
-	CdxV1SharedTopic *CdxV1SharedTopic
+	CdxV1SharedGroup   *CdxV1SharedGroup
+	CdxV1SharedSubject *CdxV1SharedSubject
+	CdxV1SharedTopic   *CdxV1SharedTopic
 }
 
 // CdxV1SharedGroupAsCdxV1RedeemTokenResponseResourcesOneOf is a convenience function that returns CdxV1SharedGroup wrapped in CdxV1RedeemTokenResponseResourcesOneOf
 func CdxV1SharedGroupAsCdxV1RedeemTokenResponseResourcesOneOf(v *CdxV1SharedGroup) CdxV1RedeemTokenResponseResourcesOneOf {
 	return CdxV1RedeemTokenResponseResourcesOneOf{CdxV1SharedGroup: v}
+}
+
+// CdxV1SharedSubjectAsCdxV1RedeemTokenResponseResourcesOneOf is a convenience function that returns CdxV1SharedSubject wrapped in CdxV1RedeemTokenResponseResourcesOneOf
+func CdxV1SharedSubjectAsCdxV1RedeemTokenResponseResourcesOneOf(v *CdxV1SharedSubject) CdxV1RedeemTokenResponseResourcesOneOf {
+	return CdxV1RedeemTokenResponseResourcesOneOf{CdxV1SharedSubject: v}
 }
 
 // CdxV1SharedTopicAsCdxV1RedeemTokenResponseResourcesOneOf is a convenience function that returns CdxV1SharedTopic wrapped in CdxV1RedeemTokenResponseResourcesOneOf
@@ -68,6 +74,18 @@ func (dst *CdxV1RedeemTokenResponseResourcesOneOf) UnmarshalJSON(data []byte) er
 		}
 	}
 
+	// check if the discriminator value is 'Subject'
+	if jsonDict["kind"] == "Subject" {
+		// try to unmarshal JSON data into CdxV1SharedSubject
+		err = json.Unmarshal(data, &dst.CdxV1SharedSubject)
+		if err == nil {
+			return nil // data stored in dst.CdxV1SharedSubject, return on the first match
+		} else {
+			dst.CdxV1SharedSubject = nil
+			return fmt.Errorf("Failed to unmarshal CdxV1RedeemTokenResponseResourcesOneOf as CdxV1SharedSubject: %s", err.Error())
+		}
+	}
+
 	// check if the discriminator value is 'Topic'
 	if jsonDict["kind"] == "Topic" {
 		// try to unmarshal JSON data into CdxV1SharedTopic
@@ -92,6 +110,18 @@ func (dst *CdxV1RedeemTokenResponseResourcesOneOf) UnmarshalJSON(data []byte) er
 		}
 	}
 
+	// check if the discriminator value is 'cdx.v1.SharedSubject'
+	if jsonDict["kind"] == "cdx.v1.SharedSubject" {
+		// try to unmarshal JSON data into CdxV1SharedSubject
+		err = json.Unmarshal(data, &dst.CdxV1SharedSubject)
+		if err == nil {
+			return nil // data stored in dst.CdxV1SharedSubject, return on the first match
+		} else {
+			dst.CdxV1SharedSubject = nil
+			return fmt.Errorf("Failed to unmarshal CdxV1RedeemTokenResponseResourcesOneOf as CdxV1SharedSubject: %s", err.Error())
+		}
+	}
+
 	// check if the discriminator value is 'cdx.v1.SharedTopic'
 	if jsonDict["kind"] == "cdx.v1.SharedTopic" {
 		// try to unmarshal JSON data into CdxV1SharedTopic
@@ -113,6 +143,10 @@ func (src CdxV1RedeemTokenResponseResourcesOneOf) MarshalJSON() ([]byte, error) 
 		return json.Marshal(&src.CdxV1SharedGroup)
 	}
 
+	if src.CdxV1SharedSubject != nil {
+		return json.Marshal(&src.CdxV1SharedSubject)
+	}
+
 	if src.CdxV1SharedTopic != nil {
 		return json.Marshal(&src.CdxV1SharedTopic)
 	}
@@ -124,6 +158,10 @@ func (src CdxV1RedeemTokenResponseResourcesOneOf) MarshalJSON() ([]byte, error) 
 func (obj *CdxV1RedeemTokenResponseResourcesOneOf) GetActualInstance() interface{} {
 	if obj.CdxV1SharedGroup != nil {
 		return obj.CdxV1SharedGroup
+	}
+
+	if obj.CdxV1SharedSubject != nil {
+		return obj.CdxV1SharedSubject
 	}
 
 	if obj.CdxV1SharedTopic != nil {

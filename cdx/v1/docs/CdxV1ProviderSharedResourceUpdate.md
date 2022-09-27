@@ -8,10 +8,8 @@ Name | Type | Description | Notes
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
+**Resources** | Pointer to **[]string** | List of resource crns that are shared together | [optional] 
 **DisplayName** | Pointer to **string** | Shared resource display name | [optional] 
-**Description** | Pointer to **string** | Description of shared resource | [optional] 
-**Labels** | Pointer to **[]string** | list of labels | [optional] 
-**Examples** | Pointer to **[]string** | List of example data in JSON format. This field is work in progress and subject to changes. | [optional] 
 **Schemas** | Pointer to **[]string** | List of schemas in JSON format. This field is work in progress and subject to changes. | [optional] [readonly] 
 **OrganizationDescription** | Pointer to **string** | Shared resource&#39;s organization description | [optional] 
 **OrganizationContact** | Pointer to **string** | Email of contact person from the organization | [optional] 
@@ -139,6 +137,31 @@ SetMetadata sets Metadata field to given value.
 
 HasMetadata returns a boolean if a field has been set.
 
+### GetResources
+
+`func (o *CdxV1ProviderSharedResourceUpdate) GetResources() []string`
+
+GetResources returns the Resources field if non-nil, zero value otherwise.
+
+### GetResourcesOk
+
+`func (o *CdxV1ProviderSharedResourceUpdate) GetResourcesOk() (*[]string, bool)`
+
+GetResourcesOk returns a tuple with the Resources field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResources
+
+`func (o *CdxV1ProviderSharedResourceUpdate) SetResources(v []string)`
+
+SetResources sets Resources field to given value.
+
+### HasResources
+
+`func (o *CdxV1ProviderSharedResourceUpdate) HasResources() bool`
+
+HasResources returns a boolean if a field has been set.
+
 ### GetDisplayName
 
 `func (o *CdxV1ProviderSharedResourceUpdate) GetDisplayName() string`
@@ -163,81 +186,6 @@ SetDisplayName sets DisplayName field to given value.
 `func (o *CdxV1ProviderSharedResourceUpdate) HasDisplayName() bool`
 
 HasDisplayName returns a boolean if a field has been set.
-
-### GetDescription
-
-`func (o *CdxV1ProviderSharedResourceUpdate) GetDescription() string`
-
-GetDescription returns the Description field if non-nil, zero value otherwise.
-
-### GetDescriptionOk
-
-`func (o *CdxV1ProviderSharedResourceUpdate) GetDescriptionOk() (*string, bool)`
-
-GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDescription
-
-`func (o *CdxV1ProviderSharedResourceUpdate) SetDescription(v string)`
-
-SetDescription sets Description field to given value.
-
-### HasDescription
-
-`func (o *CdxV1ProviderSharedResourceUpdate) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
-
-### GetLabels
-
-`func (o *CdxV1ProviderSharedResourceUpdate) GetLabels() []string`
-
-GetLabels returns the Labels field if non-nil, zero value otherwise.
-
-### GetLabelsOk
-
-`func (o *CdxV1ProviderSharedResourceUpdate) GetLabelsOk() (*[]string, bool)`
-
-GetLabelsOk returns a tuple with the Labels field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLabels
-
-`func (o *CdxV1ProviderSharedResourceUpdate) SetLabels(v []string)`
-
-SetLabels sets Labels field to given value.
-
-### HasLabels
-
-`func (o *CdxV1ProviderSharedResourceUpdate) HasLabels() bool`
-
-HasLabels returns a boolean if a field has been set.
-
-### GetExamples
-
-`func (o *CdxV1ProviderSharedResourceUpdate) GetExamples() []string`
-
-GetExamples returns the Examples field if non-nil, zero value otherwise.
-
-### GetExamplesOk
-
-`func (o *CdxV1ProviderSharedResourceUpdate) GetExamplesOk() (*[]string, bool)`
-
-GetExamplesOk returns a tuple with the Examples field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetExamples
-
-`func (o *CdxV1ProviderSharedResourceUpdate) SetExamples(v []string)`
-
-SetExamples sets Examples field to given value.
-
-### HasExamples
-
-`func (o *CdxV1ProviderSharedResourceUpdate) HasExamples() bool`
-
-HasExamples returns a boolean if a field has been set.
 
 ### GetSchemas
 

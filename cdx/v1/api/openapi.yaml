@@ -68,20 +68,20 @@ paths:
         resources.
       operationId: listCdxV1ProviderSharedResources
       parameters:
-      - description: Filter the results by exact match for crn.
-        example: crn://confluent.cloud/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic
-        explode: true
-        in: query
-        name: crn
-        required: false
-        schema:
-          $ref: '#/components/schemas/SearchFilter'
-        style: form
       - description: Filter the results by exact match for stream_share.
         example: ss-1234
         explode: true
         in: query
         name: stream_share
+        required: false
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: Filter the results by exact match for crn.
+        example: crn://confluent.cloud/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic
+        explode: true
+        in: query
+        name: crn
         required: false
         schema:
           $ref: '#/components/schemas/SearchFilter'
@@ -254,14 +254,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/cdx/v1/provider-shared-resources?crn=SOME_STRING_VALUE&stream_share=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/cdx/v1/provider-shared-resources?stream_share=SOME_STRING_VALUE&crn=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/cdx/v1/provider-shared-resources?crn=SOME_STRING_VALUE&stream_share=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/cdx/v1/provider-shared-resources?stream_share=SOME_STRING_VALUE&crn=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -269,7 +269,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cdx/v1/provider-shared-resources?crn=SOME_STRING_VALUE&stream_share=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cdx/v1/provider-shared-resources?stream_share=SOME_STRING_VALUE&crn=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -282,7 +282,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/cdx/v1/provider-shared-resources?crn=SOME_STRING_VALUE&stream_share=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/cdx/v1/provider-shared-resources?stream_share=SOME_STRING_VALUE&crn=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -296,7 +296,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/cdx/v1/provider-shared-resources?crn=SOME_STRING_VALUE&stream_share=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/cdx/v1/provider-shared-resources?stream_share=SOME_STRING_VALUE&crn=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -321,7 +321,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cdx/v1/provider-shared-resources?crn=SOME_STRING_VALUE&stream_share=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cdx/v1/provider-shared-resources?stream_share=SOME_STRING_VALUE&crn=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -330,7 +330,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/cdx/v1/provider-shared-resources?crn=SOME_STRING_VALUE&stream_share=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/cdx/v1/provider-shared-resources?stream_share=SOME_STRING_VALUE&crn=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -358,7 +358,6 @@ paths:
                   - api_version
                   - cloud_cluster
                   - cluster_name
-                  - crn
                   - display_name
                   - environment_name
                   - id
@@ -622,7 +621,6 @@ paths:
                   - api_version
                   - cloud_cluster
                   - cluster_name
-                  - crn
                   - display_name
                   - environment_name
                   - id
@@ -802,13 +800,13 @@ paths:
             --url 'https://api.confluent.cloud/cdx/v1/provider-shared-resources/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"crn":"crn://confluent.cloud/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic","display_name":"Stock Trades","description":"This topic provides realtime data for the orders placed through the website","labels":["recent","pending"],"examples":["{\"key_1\": \"val_1\", \"key_2\": \"val_2\"}"],"organization_description":"ABC Corp is the biggest online retailer","organization_contact":"jane.doe@example.com","cloud_cluster":{"id":"string","environment":"string"}}'
+            --data '{"crn":"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic","resources":["crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic"],"display_name":"Stock Trades","organization_description":"ABC Corp is the biggest online retailer","organization_contact":"jane.doe@example.com","cloud_cluster":{"id":"string","environment":"string"}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"crn\":\"crn://confluent.cloud/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"display_name\":\"Stock Trades\",\"description\":\"This topic provides realtime data for the orders placed through the website\",\"labels\":[\"recent\",\"pending\"],\"examples\":[\"{\\\"key_1\\\": \\\"val_1\\\", \\\"key_2\\\": \\\"val_2\\\"}\"],\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"crn\":\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"],\"display_name\":\"Stock Trades\",\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/cdx/v1/provider-shared-resources/{id}")
             .patch(body)
@@ -820,26 +818,24 @@ paths:
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cdx/v1/provider-shared-resources/{id}\"\
-          \n\n\tpayload := strings.NewReader(\"{\\\"crn\\\":\\\"crn://confluent.cloud/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\\\
-          \",\\\"display_name\\\":\\\"Stock Trades\\\",\\\"description\\\":\\\"This\
-          \ topic provides realtime data for the orders placed through the website\\\
-          \",\\\"labels\\\":[\\\"recent\\\",\\\"pending\\\"],\\\"examples\\\":[\\\"\
-          {\\\\\\\"key_1\\\\\\\": \\\\\\\"val_1\\\\\\\", \\\\\\\"key_2\\\\\\\": \\\
-          \\\\\"val_2\\\\\\\"}\\\"],\\\"organization_description\\\":\\\"ABC Corp\
-          \ is the biggest online retailer\\\",\\\"organization_contact\\\":\\\"jane.doe@example.com\\\
-          \",\\\"cloud_cluster\\\":{\\\"id\\\":\\\"string\\\",\\\"environment\\\"\
-          :\\\"string\\\"}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\
-          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \n\n\tpayload := strings.NewReader(\"{\\\"crn\\\":\\\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\\\
+          \",\\\"resources\\\":[\\\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\\\
+          \"],\\\"display_name\\\":\\\"Stock Trades\\\",\\\"organization_description\\\
+          \":\\\"ABC Corp is the biggest online retailer\\\",\\\"organization_contact\\\
+          \":\\\"jane.doe@example.com\\\",\\\"cloud_cluster\\\":{\\\"id\\\":\\\"string\\\
+          \",\\\"environment\\\":\\\"string\\\"}}\")\n\n\treq, _ := http.NewRequest(\"\
+          PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"crn\":\"crn://confluent.cloud/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"display_name\":\"Stock Trades\",\"description\":\"This topic provides realtime data for the orders placed through the website\",\"labels\":[\"recent\",\"pending\"],\"examples\":[\"{\\\"key_1\\\": \\\"val_1\\\", \\\"key_2\\\": \\\"val_2\\\"}\"],\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}"
+          payload = "{\"crn\":\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"],\"display_name\":\"Stock Trades\",\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}"
 
           headers = {
               'content-type': "application/json",
@@ -881,11 +877,11 @@ paths:
           });
 
           req.write(JSON.stringify({
-            crn: 'crn://confluent.cloud/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic',
+            crn: 'crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic',
+            resources: [
+              'crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic'
+            ],
             display_name: 'Stock Trades',
-            description: 'This topic provides realtime data for the orders placed through the website',
-            labels: ['recent', 'pending'],
-            examples: ['{"key_1": "val_1", "key_2": "val_2"}'],
             organization_description: 'ABC Corp is the biggest online retailer',
             organization_contact: 'jane.doe@example.com',
             cloud_cluster: {id: 'string', environment: 'string'}
@@ -903,7 +899,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"crn\":\"crn://confluent.cloud/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"display_name\":\"Stock Trades\",\"description\":\"This topic provides realtime data for the orders placed through the website\",\"labels\":[\"recent\",\"pending\"],\"examples\":[\"{\\\"key_1\\\": \\\"val_1\\\", \\\"key_2\\\": \\\"val_2\\\"}\"],\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"crn\":\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"],\"display_name\":\"Stock Trades\",\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -912,7 +908,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"crn\":\"crn://confluent.cloud/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"display_name\":\"Stock Trades\",\"description\":\"This topic provides realtime data for the orders placed through the website\",\"labels\":[\"recent\",\"pending\"],\"examples\":[\"{\\\"key_1\\\": \\\"val_1\\\", \\\"key_2\\\": \\\"val_2\\\"}\"],\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"crn\":\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"],\"display_name\":\"Stock Trades\",\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /cdx/v1/provider-shared-resources/{id}/images/{file_name}:
     delete:
@@ -1679,6 +1675,15 @@ paths:
         schema:
           $ref: '#/components/schemas/SearchFilter'
         style: form
+      - description: Filter the results by exact match for crn.
+        example: crn://confluent.cloud/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic
+        explode: true
+        in: query
+        name: crn
+        required: false
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
       - description: Include deactivated shares
         explode: true
         in: query
@@ -1852,14 +1857,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/cdx/v1/provider-shares?shared_resource=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/cdx/v1/provider-shares?shared_resource=SOME_STRING_VALUE&crn=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/cdx/v1/provider-shares?shared_resource=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/cdx/v1/provider-shares?shared_resource=SOME_STRING_VALUE&crn=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1867,7 +1872,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cdx/v1/provider-shares?shared_resource=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cdx/v1/provider-shares?shared_resource=SOME_STRING_VALUE&crn=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1880,7 +1885,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/cdx/v1/provider-shares?shared_resource=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/cdx/v1/provider-shares?shared_resource=SOME_STRING_VALUE&crn=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1894,7 +1899,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/cdx/v1/provider-shares?shared_resource=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/cdx/v1/provider-shares?shared_resource=SOME_STRING_VALUE&crn=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1919,7 +1924,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cdx/v1/provider-shares?shared_resource=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cdx/v1/provider-shares?shared_resource=SOME_STRING_VALUE&crn=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1928,7 +1933,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/cdx/v1/provider-shares?shared_resource=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/cdx/v1/provider-shares?shared_resource=SOME_STRING_VALUE&crn=SOME_STRING_VALUE&include_deleted=SOME_BOOLEAN_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1957,7 +1962,7 @@ paths:
           headers:
             Location:
               description: A URL that allows access to the resourced named by the
-                CRN
+                crn
               explode: false
               schema:
                 example: https://some-subdomain.confluent.cloud/path/to/resource
@@ -2140,13 +2145,13 @@ paths:
             --url https://api.confluent.cloud/cdx/v1/provider-shares \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"delivery_method":"EMAIL","consumer_restriction":{"kind":"Email","email":"user@example.com"},"resources":["crn://confluent.cloud/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic"]}'
+            --data '{"delivery_method":"EMAIL","consumer_restriction":{"kind":"Email","email":"user@example.com"},"resources":["crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic"]}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"delivery_method\":\"EMAIL\",\"consumer_restriction\":{\"kind\":\"Email\",\"email\":\"user@example.com\"},\"resources\":[\"crn://confluent.cloud/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"]}");
+          RequestBody body = RequestBody.create(mediaType, "{\"delivery_method\":\"EMAIL\",\"consumer_restriction\":{\"kind\":\"Email\",\"email\":\"user@example.com\"},\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"]}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/cdx/v1/provider-shares")
             .post(body)
@@ -2160,7 +2165,7 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cdx/v1/provider-shares\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"delivery_method\\\":\\\"EMAIL\\\
           \",\\\"consumer_restriction\\\":{\\\"kind\\\":\\\"Email\\\",\\\"email\\\"\
-          :\\\"user@example.com\\\"},\\\"resources\\\":[\\\"crn://confluent.cloud/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\\\
+          :\\\"user@example.com\\\"},\\\"resources\\\":[\\\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\\\
           \"]}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
           content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
           , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
@@ -2172,7 +2177,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"delivery_method\":\"EMAIL\",\"consumer_restriction\":{\"kind\":\"Email\",\"email\":\"user@example.com\"},\"resources\":[\"crn://confluent.cloud/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"]}"
+          payload = "{\"delivery_method\":\"EMAIL\",\"consumer_restriction\":{\"kind\":\"Email\",\"email\":\"user@example.com\"},\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"]}"
 
           headers = {
               'content-type': "application/json",
@@ -2217,7 +2222,7 @@ paths:
             delivery_method: 'EMAIL',
             consumer_restriction: {kind: 'Email', email: 'user@example.com'},
             resources: [
-              'crn://confluent.cloud/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic'
+              'crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic'
             ]
           }));
           req.end();
@@ -2233,7 +2238,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"delivery_method\":\"EMAIL\",\"consumer_restriction\":{\"kind\":\"Email\",\"email\":\"user@example.com\"},\"resources\":[\"crn://confluent.cloud/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"]}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"delivery_method\":\"EMAIL\",\"consumer_restriction\":{\"kind\":\"Email\",\"email\":\"user@example.com\"},\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"]}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -2242,7 +2247,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"delivery_method\":\"EMAIL\",\"consumer_restriction\":{\"kind\":\"Email\",\"email\":\"user@example.com\"},\"resources\":[\"crn://confluent.cloud/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"]}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"delivery_method\":\"EMAIL\",\"consumer_restriction\":{\"kind\":\"Email\",\"email\":\"user@example.com\"},\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"]}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /cdx/v1/provider-shares/{id}:
     delete:
@@ -6005,12 +6010,22 @@ components:
               resource_name:
                 example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/provider-shared-resource=psr-12345
         crn:
-          description: A CRN that specifies the shared resource
-          example: crn://confluent.cloud/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic
+          description: Deprecated please use resources attribute.
+          example: crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic
           format: uri
           pattern: ^crn://.+$
           type: string
           x-immutable: true
+        resources:
+          description: List of resource crns that are shared together
+          items:
+            description: crn that specifies the shared resource
+            example: crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic
+            format: uri
+            pattern: ^crn://.+$
+            type: string
+          minItems: 1
+          type: array
         display_name:
           description: Shared resource display name
           example: Stock Trades
@@ -6019,7 +6034,9 @@ components:
           description: Description of shared resource
           example: This topic provides realtime data for the orders placed through
             the website
+          readOnly: true
           type: string
+          x-immutable: true
         labels:
           description: list of labels
           example:
@@ -6027,15 +6044,9 @@ components:
           - pending
           items:
             type: string
+          readOnly: true
           type: array
-        examples:
-          description: List of example data in JSON format. This field is work in
-            progress and subject to changes.
-          example:
-          - '{"key_1": "val_1", "key_2": "val_2"}'
-          items:
-            type: string
-          type: array
+          x-immutable: true
         schemas:
           description: List of schemas in JSON format. This field is work in progress
             and subject to changes.
@@ -6247,8 +6258,6 @@ components:
         - recent
         - pending
         cloud: ""
-        examples:
-        - '{"key_1": "val_1", "key_2": "val_2"}'
         organization_description: ABC Corp is the biggest online retailer
         schemas:
         - '{"key_1": "val_1", "key_2": "val_2"}'
@@ -6313,16 +6322,6 @@ components:
           example:
           - recent
           - pending
-          items:
-            type: string
-          readOnly: true
-          type: array
-          x-immutable: true
-        examples:
-          description: List of example data in JSON format. This field is work in
-            progress and subject to changes.
-          example:
-          - '{"key_1": "val_1", "key_2": "val_2"}'
           items:
             type: string
           readOnly: true
@@ -6575,8 +6574,8 @@ components:
         resources:
           description: List of resource crns to be shared
           items:
-            description: A CRN that specifies the resource to be shared
-            example: crn://confluent.cloud/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic
+            description: crn that specifies the sharedresource
+            example: crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic
             format: uri
             pattern: ^crn://.+$
             type: string
@@ -6639,6 +6638,8 @@ components:
         metadata: ""
         api_key: api_key
         kind: RedeemTokenResponse
+        schema_registry_api_key: schema_registry_api_key
+        schema_registry_secret: schema_registry_secret
         resources:
         - '{}'
         - '{}'
@@ -6646,6 +6647,7 @@ components:
         secret: secret
         kafka_bootstrap_url: SASL://pkc-xxxxx.us-west-2.aws.confluent.cloud:9092
         api_version: cdx/v1
+        schema_registry_url: https://psrc-xxxxx.us-west-2.aws.confluent.cloud
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -6694,6 +6696,22 @@ components:
           readOnly: true
           type: string
           x-immutable: true
+        schema_registry_api_key:
+          description: The api key for schema registry
+          readOnly: true
+          type: string
+        schema_registry_secret:
+          description: The api key secret for schema registry
+          readOnly: true
+          type: string
+          x-redact: true
+        schema_registry_url:
+          description: The schema registry endpoint url
+          example: https://psrc-xxxxx.us-west-2.aws.confluent.cloud
+          format: uri
+          readOnly: true
+          type: string
+          x-immutable: true
         resources:
           description: List of shared resources
           items:
@@ -6701,10 +6719,12 @@ components:
               mapping:
                 Topic: '#/components/schemas/cdx.v1.SharedTopic'
                 Group: '#/components/schemas/cdx.v1.SharedGroup'
+                Subject: '#/components/schemas/cdx.v1.SharedSubject'
               propertyName: kind
             oneOf:
             - $ref: '#/components/schemas/cdx.v1.SharedTopic'
             - $ref: '#/components/schemas/cdx.v1.SharedGroup'
+            - $ref: '#/components/schemas/cdx.v1.SharedSubject'
             type: object
             x-one-of-name: CdxV1RedeemTokenResponseResourcesOneOf
           minItems: 1
@@ -6755,6 +6775,21 @@ components:
       required:
       - group_prefix
       - kind
+      type: object
+    cdx.v1.SharedSubject:
+      description: The shared resource details
+      properties:
+        kind:
+          description: The shared resource kind
+          enum:
+          - Subject
+          type: string
+        subject:
+          description: The subject name
+          type: string
+      required:
+      - kind
+      - subject
       type: object
     cdx.v1.Network:
       description: The shared cluster's network configurations for consumer to setup
@@ -7007,7 +7042,6 @@ components:
             - required:
               - cloud_cluster
               - cluster_name
-              - crn
               - display_name
               - environment_name
               - id
@@ -7527,31 +7561,20 @@ components:
                 example: https://api.confluent.cloud/cdx/v1/provider-shared-resources/psr-12345
               resource_name:
                 example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/provider-shared-resource=psr-12345
+        resources:
+          description: List of resource crns that are shared together
+          items:
+            description: crn that specifies the shared resource
+            example: crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic
+            format: uri
+            pattern: ^crn://.+$
+            type: string
+          minItems: 1
+          type: array
         display_name:
           description: Shared resource display name
           example: Stock Trades
           type: string
-        description:
-          description: Description of shared resource
-          example: This topic provides realtime data for the orders placed through
-            the website
-          type: string
-        labels:
-          description: list of labels
-          example:
-          - recent
-          - pending
-          items:
-            type: string
-          type: array
-        examples:
-          description: List of example data in JSON format. This field is work in
-            progress and subject to changes.
-          example:
-          - '{"key_1": "val_1", "key_2": "val_2"}'
-          items:
-            type: string
-          type: array
         schemas:
           description: List of schemas in JSON format. This field is work in progress
             and subject to changes.
@@ -7608,8 +7631,6 @@ components:
           - recent
           - pending
           cloud: ""
-          examples:
-          - '{"key_1": "val_1", "key_2": "val_2"}'
           organization_description: ABC Corp is the biggest online retailer
           schemas:
           - '{"key_1": "val_1", "key_2": "val_2"}'
@@ -7628,8 +7649,6 @@ components:
           - recent
           - pending
           cloud: ""
-          examples:
-          - '{"key_1": "val_1", "key_2": "val_2"}'
           organization_description: ABC Corp is the biggest online retailer
           schemas:
           - '{"key_1": "val_1", "key_2": "val_2"}'
