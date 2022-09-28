@@ -42,6 +42,20 @@ var (
 type ACLV3Api interface {
 
 	/*
+		BatchCreateKafkaV3Acls Batch Create ACLs
+
+		Creates ACLs.
+
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @return ApiBatchCreateKafkaV3AclsRequest
+	*/
+	BatchCreateKafkaV3Acls(ctx _context.Context, clusterId string) ApiBatchCreateKafkaV3AclsRequest
+
+	// BatchCreateKafkaV3AclsExecute executes the request
+	BatchCreateKafkaV3AclsExecute(r ApiBatchCreateKafkaV3AclsRequest) (*_nethttp.Response, error)
+
+	/*
 		CreateKafkaAcls Create ACLs
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
@@ -94,6 +108,148 @@ type ACLV3Api interface {
 
 // ACLV3ApiService ACLV3Api service
 type ACLV3ApiService service
+
+type ApiBatchCreateKafkaV3AclsRequest struct {
+	ctx                      _context.Context
+	ApiService               ACLV3Api
+	clusterId                string
+	createAclRequestDataList *CreateAclRequestDataList
+}
+
+// The batch ACL creation request.
+func (r ApiBatchCreateKafkaV3AclsRequest) CreateAclRequestDataList(createAclRequestDataList CreateAclRequestDataList) ApiBatchCreateKafkaV3AclsRequest {
+	r.createAclRequestDataList = &createAclRequestDataList
+	return r
+}
+
+func (r ApiBatchCreateKafkaV3AclsRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.BatchCreateKafkaV3AclsExecute(r)
+}
+
+/*
+BatchCreateKafkaV3Acls Batch Create ACLs
+
+Creates ACLs.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @return ApiBatchCreateKafkaV3AclsRequest
+*/
+func (a *ACLV3ApiService) BatchCreateKafkaV3Acls(ctx _context.Context, clusterId string) ApiBatchCreateKafkaV3AclsRequest {
+	return ApiBatchCreateKafkaV3AclsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		clusterId:  clusterId,
+	}
+}
+
+// Execute executes the request
+func (a *ACLV3ApiService) BatchCreateKafkaV3AclsExecute(r ApiBatchCreateKafkaV3AclsRequest) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ACLV3ApiService.BatchCreateKafkaV3Acls")
+	if err != nil {
+		return nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/clusters/{cluster_id}/acls:batch"
+	localVarPath = strings.Replace(localVarPath, "{"+"cluster_id"+"}", _neturl.PathEscape(parameterToString(r.clusterId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createAclRequestDataList
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
 
 type ApiCreateKafkaAclsRequest struct {
 	ctx                  _context.Context
