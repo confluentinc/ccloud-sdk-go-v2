@@ -4,10 +4,81 @@ All URIs are relative to *https://pkc-00000.region.provider.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**BatchCreateKafkaV3Acls**](ACLV3Api.md#BatchCreateKafkaV3Acls) | **Post** /clusters/{cluster_id}/acls:batch | Batch Create ACLs
 [**CreateKafkaAcls**](ACLV3Api.md#CreateKafkaAcls) | **Post** /kafka/v3/clusters/{cluster_id}/acls | Create ACLs
 [**DeleteKafkaAcls**](ACLV3Api.md#DeleteKafkaAcls) | **Delete** /kafka/v3/clusters/{cluster_id}/acls | Delete ACLs
 [**GetKafkaAcls**](ACLV3Api.md#GetKafkaAcls) | **Get** /kafka/v3/clusters/{cluster_id}/acls | Search ACLs
 
+
+
+## BatchCreateKafkaV3Acls
+
+> BatchCreateKafkaV3Acls(ctx, clusterId).CreateAclRequestDataList(createAclRequestDataList).Execute()
+
+Batch Create ACLs
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    clusterId := "cluster-1" // string | The Kafka cluster ID.
+    createAclRequestDataList := *openapiclient.NewCreateAclRequestDataList([]openapiclient.CreateAclRequestData{*openapiclient.NewCreateAclRequestData(openapiclient.AclResourceType("UNKNOWN"), "ResourceName_example", "PatternType_example", "Principal_example", "Host_example", "Operation_example", "Permission_example")}) // CreateAclRequestDataList | The batch ACL creation request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.ACLV3Api.BatchCreateKafkaV3Acls(context.Background(), clusterId).CreateAclRequestDataList(createAclRequestDataList).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ACLV3Api.BatchCreateKafkaV3Acls``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**clusterId** | **string** | The Kafka cluster ID. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiBatchCreateKafkaV3AclsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **createAclRequestDataList** | [**CreateAclRequestDataList**](CreateAclRequestDataList.md) | The batch ACL creation request. | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json, text/plain, text/html
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## CreateKafkaAcls
