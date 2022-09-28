@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**State** | Pointer to **string** | The current state of the pipeline. | [optional] [readonly] 
+**State** | Pointer to **string** | The current state of the pipeline.:   DRAFT:  the pipeline is a draft and not activated yet;   ACTIVATING:  the pipeline activation is in progress;   DEACTIVATING:  the pipeline deactivation is in progress;   ACTIVE:  the pipeline is actived and running;   FAILED:  the pipeline activation or deactivation failed;   DELETED:  the pipeline is deleted  | [optional] [readonly] 
 **TopicCount** | Pointer to **int32** | The number of Kafka topics defined in the pipeline. | [optional] [readonly] 
 **ConnectorCount** | Pointer to **int32** | The number of connectors defined in the pipeline. | [optional] [readonly] 
 **QueryCount** | Pointer to **int32** | The number of KSQL queries defined in the pipeline. | [optional] [readonly] 

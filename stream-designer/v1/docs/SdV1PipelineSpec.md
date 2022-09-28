@@ -6,12 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the pipeline. | [optional] 
 **Description** | Pointer to **string** | The description of the pipeline. | [optional] 
-**Activated** | Pointer to **bool** | The desired state of the pipeline. | [optional] 
-**ActivationPrivilege** | Pointer to **string** | Whether the pipeline has privileges it needs for activation and deactivation. | [optional] 
+**SourceCode** | Pointer to **string** | A list of KSQL statements that define this pipeline. | [optional] 
+**RetainedTopicNames** | Pointer to **[]string** | A list of Kafka topic names from the activated pipeline to be retained when this pipeline is deactivated. | [optional] 
+**Activated** | Pointer to **bool** | The desired state of the pipeline. | [optional] [default to false]
+**ActivationPrivilege** | Pointer to **bool** | Whether the pipeline has privileges to be activated. | [optional] [default to false]
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 **KafkaCluster** | Pointer to [**ObjectReference**](ObjectReference.md) | The kafka_cluster to which this belongs. | [optional] 
-**KsqlCluster** | Pointer to [**ObjectReference**](ObjectReference.md) | The ksql_cluster to which this belongs. | [optional] 
-**StreamGovernanceCluster** | Pointer to [**ObjectReference**](ObjectReference.md) | The stream_governance_cluster to which this belongs. | [optional] 
+**KsqlCluster** | Pointer to [**ObjectReference**](ObjectReference.md) | The ksql_cluster associated with this object. | [optional] 
+**StreamGovernanceCluster** | Pointer to [**ObjectReference**](ObjectReference.md) | The stream_governance_cluster associated with this object. | [optional] 
 
 ## Methods
 
@@ -82,6 +84,56 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
+### GetSourceCode
+
+`func (o *SdV1PipelineSpec) GetSourceCode() string`
+
+GetSourceCode returns the SourceCode field if non-nil, zero value otherwise.
+
+### GetSourceCodeOk
+
+`func (o *SdV1PipelineSpec) GetSourceCodeOk() (*string, bool)`
+
+GetSourceCodeOk returns a tuple with the SourceCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceCode
+
+`func (o *SdV1PipelineSpec) SetSourceCode(v string)`
+
+SetSourceCode sets SourceCode field to given value.
+
+### HasSourceCode
+
+`func (o *SdV1PipelineSpec) HasSourceCode() bool`
+
+HasSourceCode returns a boolean if a field has been set.
+
+### GetRetainedTopicNames
+
+`func (o *SdV1PipelineSpec) GetRetainedTopicNames() []string`
+
+GetRetainedTopicNames returns the RetainedTopicNames field if non-nil, zero value otherwise.
+
+### GetRetainedTopicNamesOk
+
+`func (o *SdV1PipelineSpec) GetRetainedTopicNamesOk() (*[]string, bool)`
+
+GetRetainedTopicNamesOk returns a tuple with the RetainedTopicNames field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRetainedTopicNames
+
+`func (o *SdV1PipelineSpec) SetRetainedTopicNames(v []string)`
+
+SetRetainedTopicNames sets RetainedTopicNames field to given value.
+
+### HasRetainedTopicNames
+
+`func (o *SdV1PipelineSpec) HasRetainedTopicNames() bool`
+
+HasRetainedTopicNames returns a boolean if a field has been set.
+
 ### GetActivated
 
 `func (o *SdV1PipelineSpec) GetActivated() bool`
@@ -109,20 +161,20 @@ HasActivated returns a boolean if a field has been set.
 
 ### GetActivationPrivilege
 
-`func (o *SdV1PipelineSpec) GetActivationPrivilege() string`
+`func (o *SdV1PipelineSpec) GetActivationPrivilege() bool`
 
 GetActivationPrivilege returns the ActivationPrivilege field if non-nil, zero value otherwise.
 
 ### GetActivationPrivilegeOk
 
-`func (o *SdV1PipelineSpec) GetActivationPrivilegeOk() (*string, bool)`
+`func (o *SdV1PipelineSpec) GetActivationPrivilegeOk() (*bool, bool)`
 
 GetActivationPrivilegeOk returns a tuple with the ActivationPrivilege field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetActivationPrivilege
 
-`func (o *SdV1PipelineSpec) SetActivationPrivilege(v string)`
+`func (o *SdV1PipelineSpec) SetActivationPrivilege(v bool)`
 
 SetActivationPrivilege sets ActivationPrivilege field to given value.
 

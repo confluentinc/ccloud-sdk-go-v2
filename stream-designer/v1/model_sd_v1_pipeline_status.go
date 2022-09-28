@@ -35,7 +35,7 @@ import (
 
 // SdV1PipelineStatus The status of the Pipeline
 type SdV1PipelineStatus struct {
-	// The current state of the pipeline.
+	// The current state of the pipeline.:   DRAFT:  the pipeline is a draft and not activated yet;   ACTIVATING:  the pipeline activation is in progress;   DEACTIVATING:  the pipeline deactivation is in progress;   ACTIVE:  the pipeline is actived and running;   FAILED:  the pipeline activation or deactivation failed;   DELETED:  the pipeline is deleted 
 	State *string `json:"state,omitempty"`
 	// The number of Kafka topics defined in the pipeline.
 	TopicCount *int32 `json:"topic_count,omitempty"`

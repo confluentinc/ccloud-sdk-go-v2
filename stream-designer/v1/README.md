@@ -87,11 +87,11 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*PipelinesSdV1Api* | [**CreateSdV1Pipeline**](docs/PipelinesSdV1Api.md#createsdv1pipeline) | **Post** /sd/v1/clusters/{kafka-cluster-id}/pipelines | Create a Pipeline
-*PipelinesSdV1Api* | [**DeleteSdV1Pipeline**](docs/PipelinesSdV1Api.md#deletesdv1pipeline) | **Delete** /sd/v1/clusters/{kafka-cluster-id}/pipelines/{id} | Delete a Pipeline
-*PipelinesSdV1Api* | [**GetSdV1Pipeline**](docs/PipelinesSdV1Api.md#getsdv1pipeline) | **Get** /sd/v1/clusters/{kafka-cluster-id}/pipelines/{id} | Read a Pipeline
-*PipelinesSdV1Api* | [**ListSdV1Pipelines**](docs/PipelinesSdV1Api.md#listsdv1pipelines) | **Get** /sd/v1/clusters/{kafka-cluster-id}/pipelines | List of Pipelines
-*PipelinesSdV1Api* | [**UpdateSdV1Pipeline**](docs/PipelinesSdV1Api.md#updatesdv1pipeline) | **Patch** /sd/v1/clusters/{kafka-cluster-id}/pipelines/{id} | Update a Pipeline
+*PipelinesSdV1Api* | [**CreateSdV1Pipeline**](docs/PipelinesSdV1Api.md#createsdv1pipeline) | **Post** /sd/v1/pipelines | Create a Pipeline
+*PipelinesSdV1Api* | [**DeleteSdV1Pipeline**](docs/PipelinesSdV1Api.md#deletesdv1pipeline) | **Delete** /sd/v1/pipelines/{id} | Delete a Pipeline
+*PipelinesSdV1Api* | [**GetSdV1Pipeline**](docs/PipelinesSdV1Api.md#getsdv1pipeline) | **Get** /sd/v1/pipelines/{id} | Read a Pipeline
+*PipelinesSdV1Api* | [**ListSdV1Pipelines**](docs/PipelinesSdV1Api.md#listsdv1pipelines) | **Get** /sd/v1/pipelines | List of Pipelines
+*PipelinesSdV1Api* | [**UpdateSdV1Pipeline**](docs/PipelinesSdV1Api.md#updatesdv1pipeline) | **Patch** /sd/v1/pipelines/{id} | Update a Pipeline
 
 
 ## Documentation For Models

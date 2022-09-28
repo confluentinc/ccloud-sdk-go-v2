@@ -39,8 +39,14 @@ type SdV1PipelineSpecUpdate struct {
 	DisplayName *string `json:"display_name,omitempty"`
 	// The description of the pipeline.
 	Description *string `json:"description,omitempty"`
+	// A list of KSQL statements that define this pipeline.
+	SourceCode *string `json:"source_code,omitempty"`
+	// A list of Kafka topic names from the activated pipeline to be retained when this pipeline is deactivated.
+	RetainedTopicNames *[]string `json:"retained_topic_names,omitempty"`
 	// The desired state of the pipeline.
 	Activated *bool `json:"activated,omitempty"`
+	// Whether the pipeline has privileges to be activated.
+	ActivationPrivilege *bool `json:"activation_privilege,omitempty"`
 }
 
 // NewSdV1PipelineSpecUpdate instantiates a new SdV1PipelineSpecUpdate object
@@ -49,6 +55,10 @@ type SdV1PipelineSpecUpdate struct {
 // will change when the set of required properties is changed
 func NewSdV1PipelineSpecUpdate() *SdV1PipelineSpecUpdate {
 	this := SdV1PipelineSpecUpdate{}
+	var activated bool = false
+	this.Activated = &activated
+	var activationPrivilege bool = false
+	this.ActivationPrivilege = &activationPrivilege
 	return &this
 }
 
@@ -57,6 +67,10 @@ func NewSdV1PipelineSpecUpdate() *SdV1PipelineSpecUpdate {
 // but it doesn't guarantee that properties required by API are set
 func NewSdV1PipelineSpecUpdateWithDefaults() *SdV1PipelineSpecUpdate {
 	this := SdV1PipelineSpecUpdate{}
+	var activated bool = false
+	this.Activated = &activated
+	var activationPrivilege bool = false
+	this.ActivationPrivilege = &activationPrivilege
 	return &this
 }
 
@@ -124,6 +138,70 @@ func (o *SdV1PipelineSpecUpdate) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetSourceCode returns the SourceCode field value if set, zero value otherwise.
+func (o *SdV1PipelineSpecUpdate) GetSourceCode() string {
+	if o == nil || o.SourceCode == nil {
+		var ret string
+		return ret
+	}
+	return *o.SourceCode
+}
+
+// GetSourceCodeOk returns a tuple with the SourceCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SdV1PipelineSpecUpdate) GetSourceCodeOk() (*string, bool) {
+	if o == nil || o.SourceCode == nil {
+		return nil, false
+	}
+	return o.SourceCode, true
+}
+
+// HasSourceCode returns a boolean if a field has been set.
+func (o *SdV1PipelineSpecUpdate) HasSourceCode() bool {
+	if o != nil && o.SourceCode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceCode gets a reference to the given string and assigns it to the SourceCode field.
+func (o *SdV1PipelineSpecUpdate) SetSourceCode(v string) {
+	o.SourceCode = &v
+}
+
+// GetRetainedTopicNames returns the RetainedTopicNames field value if set, zero value otherwise.
+func (o *SdV1PipelineSpecUpdate) GetRetainedTopicNames() []string {
+	if o == nil || o.RetainedTopicNames == nil {
+		var ret []string
+		return ret
+	}
+	return *o.RetainedTopicNames
+}
+
+// GetRetainedTopicNamesOk returns a tuple with the RetainedTopicNames field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SdV1PipelineSpecUpdate) GetRetainedTopicNamesOk() (*[]string, bool) {
+	if o == nil || o.RetainedTopicNames == nil {
+		return nil, false
+	}
+	return o.RetainedTopicNames, true
+}
+
+// HasRetainedTopicNames returns a boolean if a field has been set.
+func (o *SdV1PipelineSpecUpdate) HasRetainedTopicNames() bool {
+	if o != nil && o.RetainedTopicNames != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRetainedTopicNames gets a reference to the given []string and assigns it to the RetainedTopicNames field.
+func (o *SdV1PipelineSpecUpdate) SetRetainedTopicNames(v []string) {
+	o.RetainedTopicNames = &v
+}
+
 // GetActivated returns the Activated field value if set, zero value otherwise.
 func (o *SdV1PipelineSpecUpdate) GetActivated() bool {
 	if o == nil || o.Activated == nil {
@@ -156,11 +234,46 @@ func (o *SdV1PipelineSpecUpdate) SetActivated(v bool) {
 	o.Activated = &v
 }
 
+// GetActivationPrivilege returns the ActivationPrivilege field value if set, zero value otherwise.
+func (o *SdV1PipelineSpecUpdate) GetActivationPrivilege() bool {
+	if o == nil || o.ActivationPrivilege == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ActivationPrivilege
+}
+
+// GetActivationPrivilegeOk returns a tuple with the ActivationPrivilege field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SdV1PipelineSpecUpdate) GetActivationPrivilegeOk() (*bool, bool) {
+	if o == nil || o.ActivationPrivilege == nil {
+		return nil, false
+	}
+	return o.ActivationPrivilege, true
+}
+
+// HasActivationPrivilege returns a boolean if a field has been set.
+func (o *SdV1PipelineSpecUpdate) HasActivationPrivilege() bool {
+	if o != nil && o.ActivationPrivilege != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetActivationPrivilege gets a reference to the given bool and assigns it to the ActivationPrivilege field.
+func (o *SdV1PipelineSpecUpdate) SetActivationPrivilege(v bool) {
+	o.ActivationPrivilege = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *SdV1PipelineSpecUpdate) Redact() {
     o.recurseRedact(o.DisplayName)
     o.recurseRedact(o.Description)
+    o.recurseRedact(o.SourceCode)
+    o.recurseRedact(o.RetainedTopicNames)
     o.recurseRedact(o.Activated)
+    o.recurseRedact(o.ActivationPrivilege)
 }
 
 func (o *SdV1PipelineSpecUpdate) recurseRedact(v interface{}) {
@@ -201,8 +314,17 @@ func (o SdV1PipelineSpecUpdate) MarshalJSON() ([]byte, error) {
 	if o.Description != nil {
 		toSerialize["description"] = o.Description
 	}
+	if o.SourceCode != nil {
+		toSerialize["source_code"] = o.SourceCode
+	}
+	if o.RetainedTopicNames != nil {
+		toSerialize["retained_topic_names"] = o.RetainedTopicNames
+	}
 	if o.Activated != nil {
 		toSerialize["activated"] = o.Activated
+	}
+	if o.ActivationPrivilege != nil {
+		toSerialize["activation_privilege"] = o.ActivationPrivilege
 	}
 	return json.Marshal(toSerialize)
 }

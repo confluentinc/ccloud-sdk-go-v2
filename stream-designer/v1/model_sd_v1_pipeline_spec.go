@@ -39,17 +39,21 @@ type SdV1PipelineSpec struct {
 	DisplayName *string `json:"display_name,omitempty"`
 	// The description of the pipeline.
 	Description *string `json:"description,omitempty"`
+	// A list of KSQL statements that define this pipeline.
+	SourceCode *string `json:"source_code,omitempty"`
+	// A list of Kafka topic names from the activated pipeline to be retained when this pipeline is deactivated.
+	RetainedTopicNames *[]string `json:"retained_topic_names,omitempty"`
 	// The desired state of the pipeline.
 	Activated *bool `json:"activated,omitempty"`
-	// Whether the pipeline has privileges it needs for activation and deactivation.
-	ActivationPrivilege *string `json:"activation_privilege,omitempty"`
+	// Whether the pipeline has privileges to be activated.
+	ActivationPrivilege *bool `json:"activation_privilege,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
 	// The kafka_cluster to which this belongs.
 	KafkaCluster *ObjectReference `json:"kafka_cluster,omitempty"`
-	// The ksql_cluster to which this belongs.
+	// The ksql_cluster associated with this object.
 	KsqlCluster *ObjectReference `json:"ksql_cluster,omitempty"`
-	// The stream_governance_cluster to which this belongs.
+	// The stream_governance_cluster associated with this object.
 	StreamGovernanceCluster *ObjectReference `json:"stream_governance_cluster,omitempty"`
 }
 
@@ -59,6 +63,10 @@ type SdV1PipelineSpec struct {
 // will change when the set of required properties is changed
 func NewSdV1PipelineSpec() *SdV1PipelineSpec {
 	this := SdV1PipelineSpec{}
+	var activated bool = false
+	this.Activated = &activated
+	var activationPrivilege bool = false
+	this.ActivationPrivilege = &activationPrivilege
 	return &this
 }
 
@@ -67,6 +75,10 @@ func NewSdV1PipelineSpec() *SdV1PipelineSpec {
 // but it doesn't guarantee that properties required by API are set
 func NewSdV1PipelineSpecWithDefaults() *SdV1PipelineSpec {
 	this := SdV1PipelineSpec{}
+	var activated bool = false
+	this.Activated = &activated
+	var activationPrivilege bool = false
+	this.ActivationPrivilege = &activationPrivilege
 	return &this
 }
 
@@ -134,6 +146,70 @@ func (o *SdV1PipelineSpec) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetSourceCode returns the SourceCode field value if set, zero value otherwise.
+func (o *SdV1PipelineSpec) GetSourceCode() string {
+	if o == nil || o.SourceCode == nil {
+		var ret string
+		return ret
+	}
+	return *o.SourceCode
+}
+
+// GetSourceCodeOk returns a tuple with the SourceCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SdV1PipelineSpec) GetSourceCodeOk() (*string, bool) {
+	if o == nil || o.SourceCode == nil {
+		return nil, false
+	}
+	return o.SourceCode, true
+}
+
+// HasSourceCode returns a boolean if a field has been set.
+func (o *SdV1PipelineSpec) HasSourceCode() bool {
+	if o != nil && o.SourceCode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceCode gets a reference to the given string and assigns it to the SourceCode field.
+func (o *SdV1PipelineSpec) SetSourceCode(v string) {
+	o.SourceCode = &v
+}
+
+// GetRetainedTopicNames returns the RetainedTopicNames field value if set, zero value otherwise.
+func (o *SdV1PipelineSpec) GetRetainedTopicNames() []string {
+	if o == nil || o.RetainedTopicNames == nil {
+		var ret []string
+		return ret
+	}
+	return *o.RetainedTopicNames
+}
+
+// GetRetainedTopicNamesOk returns a tuple with the RetainedTopicNames field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SdV1PipelineSpec) GetRetainedTopicNamesOk() (*[]string, bool) {
+	if o == nil || o.RetainedTopicNames == nil {
+		return nil, false
+	}
+	return o.RetainedTopicNames, true
+}
+
+// HasRetainedTopicNames returns a boolean if a field has been set.
+func (o *SdV1PipelineSpec) HasRetainedTopicNames() bool {
+	if o != nil && o.RetainedTopicNames != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRetainedTopicNames gets a reference to the given []string and assigns it to the RetainedTopicNames field.
+func (o *SdV1PipelineSpec) SetRetainedTopicNames(v []string) {
+	o.RetainedTopicNames = &v
+}
+
 // GetActivated returns the Activated field value if set, zero value otherwise.
 func (o *SdV1PipelineSpec) GetActivated() bool {
 	if o == nil || o.Activated == nil {
@@ -167,9 +243,9 @@ func (o *SdV1PipelineSpec) SetActivated(v bool) {
 }
 
 // GetActivationPrivilege returns the ActivationPrivilege field value if set, zero value otherwise.
-func (o *SdV1PipelineSpec) GetActivationPrivilege() string {
+func (o *SdV1PipelineSpec) GetActivationPrivilege() bool {
 	if o == nil || o.ActivationPrivilege == nil {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.ActivationPrivilege
@@ -177,7 +253,7 @@ func (o *SdV1PipelineSpec) GetActivationPrivilege() string {
 
 // GetActivationPrivilegeOk returns a tuple with the ActivationPrivilege field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SdV1PipelineSpec) GetActivationPrivilegeOk() (*string, bool) {
+func (o *SdV1PipelineSpec) GetActivationPrivilegeOk() (*bool, bool) {
 	if o == nil || o.ActivationPrivilege == nil {
 		return nil, false
 	}
@@ -193,8 +269,8 @@ func (o *SdV1PipelineSpec) HasActivationPrivilege() bool {
 	return false
 }
 
-// SetActivationPrivilege gets a reference to the given string and assigns it to the ActivationPrivilege field.
-func (o *SdV1PipelineSpec) SetActivationPrivilege(v string) {
+// SetActivationPrivilege gets a reference to the given bool and assigns it to the ActivationPrivilege field.
+func (o *SdV1PipelineSpec) SetActivationPrivilege(v bool) {
 	o.ActivationPrivilege = &v
 }
 
@@ -330,6 +406,8 @@ func (o *SdV1PipelineSpec) SetStreamGovernanceCluster(v ObjectReference) {
 func (o *SdV1PipelineSpec) Redact() {
     o.recurseRedact(o.DisplayName)
     o.recurseRedact(o.Description)
+    o.recurseRedact(o.SourceCode)
+    o.recurseRedact(o.RetainedTopicNames)
     o.recurseRedact(o.Activated)
     o.recurseRedact(o.ActivationPrivilege)
     o.recurseRedact(o.Environment)
@@ -375,6 +453,12 @@ func (o SdV1PipelineSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.Description != nil {
 		toSerialize["description"] = o.Description
+	}
+	if o.SourceCode != nil {
+		toSerialize["source_code"] = o.SourceCode
+	}
+	if o.RetainedTopicNames != nil {
+		toSerialize["retained_topic_names"] = o.RetainedTopicNames
 	}
 	if o.Activated != nil {
 		toSerialize["activated"] = o.Activated

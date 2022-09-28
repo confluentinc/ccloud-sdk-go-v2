@@ -6,7 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the pipeline. | [optional] 
 **Description** | Pointer to **string** | The description of the pipeline. | [optional] 
-**Activated** | Pointer to **bool** | The desired state of the pipeline. | [optional] 
+**SourceCode** | Pointer to **string** | A list of KSQL statements that define this pipeline. | [optional] 
+**RetainedTopicNames** | Pointer to **[]string** | A list of Kafka topic names from the activated pipeline to be retained when this pipeline is deactivated. | [optional] 
+**Activated** | Pointer to **bool** | The desired state of the pipeline. | [optional] [default to false]
+**ActivationPrivilege** | Pointer to **bool** | Whether the pipeline has privileges to be activated. | [optional] [default to false]
 
 ## Methods
 
@@ -77,6 +80,56 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
+### GetSourceCode
+
+`func (o *SdV1PipelineSpecUpdate) GetSourceCode() string`
+
+GetSourceCode returns the SourceCode field if non-nil, zero value otherwise.
+
+### GetSourceCodeOk
+
+`func (o *SdV1PipelineSpecUpdate) GetSourceCodeOk() (*string, bool)`
+
+GetSourceCodeOk returns a tuple with the SourceCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceCode
+
+`func (o *SdV1PipelineSpecUpdate) SetSourceCode(v string)`
+
+SetSourceCode sets SourceCode field to given value.
+
+### HasSourceCode
+
+`func (o *SdV1PipelineSpecUpdate) HasSourceCode() bool`
+
+HasSourceCode returns a boolean if a field has been set.
+
+### GetRetainedTopicNames
+
+`func (o *SdV1PipelineSpecUpdate) GetRetainedTopicNames() []string`
+
+GetRetainedTopicNames returns the RetainedTopicNames field if non-nil, zero value otherwise.
+
+### GetRetainedTopicNamesOk
+
+`func (o *SdV1PipelineSpecUpdate) GetRetainedTopicNamesOk() (*[]string, bool)`
+
+GetRetainedTopicNamesOk returns a tuple with the RetainedTopicNames field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRetainedTopicNames
+
+`func (o *SdV1PipelineSpecUpdate) SetRetainedTopicNames(v []string)`
+
+SetRetainedTopicNames sets RetainedTopicNames field to given value.
+
+### HasRetainedTopicNames
+
+`func (o *SdV1PipelineSpecUpdate) HasRetainedTopicNames() bool`
+
+HasRetainedTopicNames returns a boolean if a field has been set.
+
 ### GetActivated
 
 `func (o *SdV1PipelineSpecUpdate) GetActivated() bool`
@@ -101,6 +154,31 @@ SetActivated sets Activated field to given value.
 `func (o *SdV1PipelineSpecUpdate) HasActivated() bool`
 
 HasActivated returns a boolean if a field has been set.
+
+### GetActivationPrivilege
+
+`func (o *SdV1PipelineSpecUpdate) GetActivationPrivilege() bool`
+
+GetActivationPrivilege returns the ActivationPrivilege field if non-nil, zero value otherwise.
+
+### GetActivationPrivilegeOk
+
+`func (o *SdV1PipelineSpecUpdate) GetActivationPrivilegeOk() (*bool, bool)`
+
+GetActivationPrivilegeOk returns a tuple with the ActivationPrivilege field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActivationPrivilege
+
+`func (o *SdV1PipelineSpecUpdate) SetActivationPrivilege(v bool)`
+
+SetActivationPrivilege sets ActivationPrivilege field to given value.
+
+### HasActivationPrivilege
+
+`func (o *SdV1PipelineSpecUpdate) HasActivationPrivilege() bool`
+
+HasActivationPrivilege returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
