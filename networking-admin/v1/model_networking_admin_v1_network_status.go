@@ -35,7 +35,7 @@ import (
 
 // NetworkingAdminV1NetworkStatus The status of the Network
 type NetworkingAdminV1NetworkStatus struct {
-	// The lifecyle phase of the network:   PROVISIONING:  network provisioning is in progress;   READY:  network is ready;   FAILED: provisioning failed;   DEPROVISIONING: network deprovisioning is in progress; 
+	// The lifecyle phase of the network:  PROVISIONING:  network provisioning is in progress;  READY:  network is ready;  FAILED: provisioning failed;  DEPROVISIONING: network deprovisioning is in progress; 
 	Phase string `json:"phase"`
 	SupportedConnectionTypes NetworkingAdminV1StatusConnectionTypes `json:"supported_connection_types"`
 	// Error code if network is in a failed state. May be used for programmatic error checking.

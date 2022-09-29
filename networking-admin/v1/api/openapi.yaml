@@ -24,10 +24,16 @@ servers:
   url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
+    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
     `Network` represents a network (VPC) in Confluent Cloud. All Networks exist within Confluent-managed cloud
     provider accounts. Dedicated networks support more networking options but can only contain Dedicated clusters.
     Shared networks can contain any cluster type.
 
+    The API allows you to list, create, read, update, and delete your networks.
+
+
+    Related guide: [APIs to manage networks in Confluent Cloud](https://docs.confluent.io/cloud/current/networking/overview.html).
 
     ## The Networks Model
     <SchemaDefinition schemaRef="#/components/schemas/networking-admin.v1.Network" />
@@ -40,7 +46,11 @@ tags:
     | `dedicated_networks_per_environment` | Number of dedicated networks per Confluent Cloud environment |
   name: Networks (networking-admin/v1)
 - description: |-
-    Manage VPC/VNet peering connections between your VPC/VNet and Confluent Cloud.
+    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+    Add or remove VPC/VNet peering connections between your VPC/VNet and Confluent Cloud.
+
+    Related guide: [Peering Connections Overview](https://docs.confluent.io/cloud/current/networking/peering/overview.html).
 
     ## The Peerings Model
     <SchemaDefinition schemaRef="#/components/schemas/networking-admin.v1.Peering" />
@@ -53,7 +63,11 @@ tags:
     | `peerings_per_network` | Number of peerings per network |
   name: Peerings (networking-admin/v1)
 - description: |-
+    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
     AWS Transit Gateway Attachments
+
+    Related guide: [APIs to manage AWS Transit Gateway Attachments](https://docs.confluent.io/cloud/current/networking/aws-transit-gateway.html).
 
     ## The Transit Gateway Attachments Model
     <SchemaDefinition schemaRef="#/components/schemas/networking-admin.v1.TransitGatewayAttachment" />
@@ -66,7 +80,11 @@ tags:
     | `tgw_attachments_per_network` | Number of TGW attachments per network |
   name: Transit Gateway Attachments (networking-admin/v1)
 - description: |-
-    Add or remove access to PrivateLink endpoints by AWS account, Azure subscription and GCP project.
+    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+    Add or remove access to PrivateLink endpoints by AWS account, Azure subscription and GCP project ID.
+
+    Related guide: [Private Links Overview](https://docs.confluent.io/cloud/current/networking/private-links/index.html).
 
     ## The Private Link Accesses Model
     <SchemaDefinition schemaRef="#/components/schemas/networking-admin.v1.PrivateLinkAccess" />
@@ -76,14 +94,17 @@ tags:
 
     | Quota | Description |
     | --- | --- |
-    | `privatelink_accounts_per_network` | Number of AWS accounts per network |
-    | `privatelink_subscriptions_per_network` | Number of Azure subscriptions per network |
-    | `privatelink_project_per_network` | Number of GCP project per network |
+    | `private_link_accounts_per_network` | Number of AWS accounts per network |
+    | `private_link_subscriptions_per_network` | Number of Azure subscriptions per network |
+    | `private_service_connect_projects_per_network` | Number of GCP projects per network |
   name: Private Link Accesses (networking-admin/v1)
 paths:
   /networking-admin/v1/networks:
     get:
-      description: Retrieve a sorted, filtered, paginated list of all networks.
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Retrieve a sorted, filtered, paginated list of all networks.
       operationId: listNetworkingAdminV1Networks
       parameters:
       - description: Filter the results by exact match for spec.display_name. Pass
@@ -411,7 +432,10 @@ paths:
           IRestResponse response = client.Execute(request);
   /networking-admin/v1/networks/{id}:
     get:
-      description: Make a request to read a network.
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Make a request to read a network.
       operationId: getNetworkingAdminV1Network
       parameters:
       - description: Scope the operation to the given environment.
@@ -685,7 +709,10 @@ paths:
           IRestResponse response = client.Execute(request);
   /networking-admin/v1/peerings:
     get:
-      description: Retrieve a sorted, filtered, paginated list of all peerings.
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Retrieve a sorted, filtered, paginated list of all peerings.
       operationId: listNetworkingAdminV1Peerings
       parameters:
       - description: Filter the results by exact match for spec.display_name. Pass
@@ -983,7 +1010,10 @@ paths:
           IRestResponse response = client.Execute(request);
   /networking-admin/v1/peerings/{id}:
     get:
-      description: Make a request to read a peering.
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Make a request to read a peering.
       operationId: getNetworkingAdminV1Peering
       parameters:
       - description: Scope the operation to the given environment.
@@ -1261,8 +1291,10 @@ paths:
           IRestResponse response = client.Execute(request);
   /networking-admin/v1/transit-gateway-attachments:
     get:
-      description: Retrieve a sorted, filtered, paginated list of all transit gateway
-        attachments.
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Retrieve a sorted, filtered, paginated list of all transit gateway attachments.
       operationId: listNetworkingAdminV1TransitGatewayAttachments
       parameters:
       - description: Filter the results by exact match for spec.display_name. Pass
@@ -1560,7 +1592,10 @@ paths:
           IRestResponse response = client.Execute(request);
   /networking-admin/v1/transit-gateway-attachments/{id}:
     get:
-      description: Make a request to read a transit gateway attachment.
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Make a request to read a transit gateway attachment.
       operationId: getNetworkingAdminV1TransitGatewayAttachment
       parameters:
       - description: Scope the operation to the given environment.
@@ -1838,8 +1873,10 @@ paths:
           IRestResponse response = client.Execute(request);
   /networking-admin/v1/private-link-accesses:
     get:
-      description: Retrieve a sorted, filtered, paginated list of all private link
-        accesses.
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Retrieve a sorted, filtered, paginated list of all private link accesses.
       operationId: listNetworkingAdminV1PrivateLinkAccesses
       parameters:
       - description: Filter the results by exact match for spec.display_name. Pass
@@ -2137,7 +2174,10 @@ paths:
           IRestResponse response = client.Execute(request);
   /networking-admin/v1/private-link-accesses/{id}:
     get:
-      description: Make a request to read a private link access.
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Make a request to read a private link access.
       operationId: getNetworkingAdminV1PrivateLinkAccess
       parameters:
       - description: Scope the operation to the given environment.
@@ -2616,6 +2656,10 @@ components:
         provider accounts. Dedicated networks support more networking options but can only contain Dedicated clusters.
         Shared networks can contain any cluster type.
 
+        The API allows you to list, create, read, update, and delete your networks.
+
+
+        Related guide: [APIs to manage networks in Confluent Cloud](https://docs.confluent.io/cloud/current/networking/overview.html).
 
         ## The Networks Model
         <SchemaDefinition schemaRef="#/components/schemas/networking-admin.v1.Network" />
@@ -2669,10 +2713,14 @@ components:
         phase:
           description: |
             The lifecyle phase of the network:
-              PROVISIONING:  network provisioning is in progress;
-              READY:  network is ready;
-              FAILED: provisioning failed;
-              DEPROVISIONING: network deprovisioning is in progress;
+
+            PROVISIONING:  network provisioning is in progress;
+
+            READY:  network is ready;
+
+            FAILED: provisioning failed;
+
+            DEPROVISIONING: network deprovisioning is in progress;
           example: READY
           readOnly: true
           type: string
@@ -2737,7 +2785,9 @@ components:
       type: object
     networking-admin.v1.Peering:
       description: |-
-        Manage VPC/VNet peering connections between your VPC/VNet and Confluent Cloud.
+        Add or remove VPC/VNet peering connections between your VPC/VNet and Confluent Cloud.
+
+        Related guide: [Peering Connections Overview](https://docs.confluent.io/cloud/current/networking/peering/overview.html).
 
         ## The Peerings Model
         <SchemaDefinition schemaRef="#/components/schemas/networking-admin.v1.Peering" />
@@ -2822,6 +2872,8 @@ components:
       description: |-
         AWS Transit Gateway Attachments
 
+        Related guide: [APIs to manage AWS Transit Gateway Attachments](https://docs.confluent.io/cloud/current/networking/aws-transit-gateway.html).
+
         ## The Transit Gateway Attachments Model
         <SchemaDefinition schemaRef="#/components/schemas/networking-admin.v1.TransitGatewayAttachment" />
 
@@ -2898,13 +2950,26 @@ components:
             state
           readOnly: true
           type: string
+        cloud:
+          description: The cloud-specific TGW attachment details.
+          discriminator:
+            mapping:
+              AwsTransitGatewayAttachmentStatus: '#/components/schemas/networking-admin.v1.AwsTransitGatewayAttachmentStatus'
+            propertyName: kind
+          oneOf:
+          - $ref: '#/components/schemas/networking-admin.v1.AwsTransitGatewayAttachmentStatus'
+          readOnly: true
+          type: object
+          x-one-of-name: NetworkingAdminV1TransitGatewayAttachmentStatusCloudOneOf
       readOnly: true
       required:
       - phase
       type: object
     networking-admin.v1.PrivateLinkAccess:
       description: |-
-        Add or remove access to PrivateLink endpoints by AWS account, Azure subscription and GCP project.
+        Add or remove access to PrivateLink endpoints by AWS account, Azure subscription and GCP project ID.
+
+        Related guide: [Private Links Overview](https://docs.confluent.io/cloud/current/networking/private-links/index.html).
 
         ## The Private Link Accesses Model
         <SchemaDefinition schemaRef="#/components/schemas/networking-admin.v1.PrivateLinkAccess" />
@@ -2914,9 +2979,9 @@ components:
 
         | Quota | Description |
         | --- | --- |
-        | `privatelink_accounts_per_network` | Number of AWS accounts per network |
-        | `privatelink_subscriptions_per_network` | Number of Azure subscriptions per network |
-        | `privatelink_project_per_network` | Number of GCP project per network |
+        | `private_link_accounts_per_network` | Number of AWS accounts per network |
+        | `private_link_subscriptions_per_network` | Number of Azure subscriptions per network |
+        | `private_service_connect_projects_per_network` | Number of GCP projects per network |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -2987,7 +3052,7 @@ components:
       - phase
       type: object
     networking-admin.v1.AwsAccount:
-      description: AWS account
+      description: The AWS account ID
       example: "000000000000"
       pattern: ^\d{12}$
       type: string
@@ -2996,6 +3061,12 @@ components:
       example: 10.200.0.0/16
       pattern: ^\d+\.\d+\.\d+\.\d+/\d+$
       type: string
+    networking-admin.v1.LegacyPublicDns:
+      default: true
+      description: Whether a network, of private link connection type, uses legacy
+        public DNS.
+      example: true
+      type: boolean
     networking-admin.v1.ConnectionType:
       description: Network connection type.
       example: PRIVATELINK
@@ -3027,18 +3098,18 @@ components:
           - AwsNetwork
           type: string
         vpc:
-          description: The AWS VPC id for the network.
+          description: The Confluent Cloud VPC ID.
           example: vpc-00000000000000000
           readOnly: true
           type: string
         account:
-          description: The AWS account id for the network.
+          description: The AWS account ID associated with the Confluent Cloud VPC.
           example: "000000000000"
           readOnly: true
           type: string
         private_link_endpoint_service:
-          description: The AWS VPC endpoint service for the network (used for PrivateLink)
-            if available.
+          description: The endpoint service of the Confluent Cloud VPC. (used for
+            PrivateLink) if available.
           example: com.amazonaws.vpce.eu-west-3.vpce-00000000000000000
           readOnly: true
           type: string
@@ -3056,15 +3127,29 @@ components:
           - GcpNetwork
           type: string
         project:
-          description: The GCP project.
+          description: The GCP Project ID associated with the Confluent Cloud VPC.
           example: cc-prod-3
           readOnly: true
           type: string
         vpc_network:
-          description: The GCP VPC network name.
+          description: The network name of the Confluent Cloud VPC.
           example: prod-network
           readOnly: true
           type: string
+        private_service_connect_service_attachments:
+          additionalProperties:
+            type: string
+          description: |
+            The mapping of zones to Private Service Connect Service
+            Attachments if available. Keys are zones and values are
+            [GCP Private Service Connect Service
+            Attachment](https://cloud.google.com/vpc/docs/configure-private-service-connect-producer#api_7)
+          example:
+            us-central1-a: projects/cc-prod/regions/us-central1/serviceAttachments/s-7jjm9-service-attachment-us-central1-a
+            us-central1-b: projects/cc-prod/regions/us-central1/serviceAttachments/s-7jjm9-service-attachment-us-central1-b
+            us-central1-c: projects/cc-prod/regions/us-central1/serviceAttachments/s-7jjm9-service-attachment-us-central1-c
+          readOnly: true
+          type: object
       required:
       - kind
       - project
@@ -3079,12 +3164,13 @@ components:
           - AzureNetwork
           type: string
         vnet:
-          description: The Azure Virtual Network.
+          description: The resource ID of the Confluent Cloud VNet.
           example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/prod-group/providers/Microsoft.Network/virtualNetworks/prod-network
           readOnly: true
           type: string
         subscription:
-          description: The Azure subscription.
+          description: The Azure Subscription ID associated with the Confluent Cloud
+            VPC.
           example: 00000000-0000-0000-0000-000000000000
           readOnly: true
           type: string
@@ -3130,21 +3216,26 @@ components:
         account:
           allOf:
           - $ref: '#/components/schemas/networking-admin.v1.AwsAccount'
-          description: AWS account for VPC to peer with the network
+          description: The AWS account ID associated with the VPC you are peering
+            with Confluent Cloud network.
         vpc:
-          description: The id of the AWS VPC to peer with
+          description: The VPC ID you are peering with Confluent Cloud network.
           example: vpc-00000000000000000
           minLength: 1
           type: string
         routes:
-          description: List of routes for the peering
+          description: |
+            The [CIDR blocks](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) of the VPC you are peering
+            with Confluent Cloud network. This is used by Confluent Cloud network to route traffic back to your network.
+            The CIDR block must be a private range and cannot overlap with the Confluent Cloud CIDR block.
           example:
           - 10.108.16.0/21
           items:
             $ref: '#/components/schemas/networking-admin.v1.Cidr'
           type: array
         customer_region:
-          description: Region of customer VPC
+          description: The region of the VPC you are peering with Confluent Cloud
+            network.
           example: us-east-1
           type: string
       required:
@@ -3165,18 +3256,22 @@ components:
           example: GcpPeering
           type: string
         project:
-          description: The name of the GCP project.
+          description: |
+            The Google Cloud project ID associated with the VPC that you are peering with Confluent Cloud network.
           example: my-gcp-project
           minLength: 1
           type: string
         vpc_network:
-          description: The name of the GCP VPC network to peer with.
+          description: The name of the VPC that you are peering with Confluent Cloud
+            network.
           example: my-gcp-network
           minLength: 1
           type: string
         import_custom_routes:
           default: false
-          description: Enable customer route import.
+          description: |
+            Enable customer route import. For more information, see
+            [Importing custom routes](https://cloud.google.com/vpc/docs/vpc-peering#importing-exporting-routes).
           example: true
           type: boolean
       required:
@@ -3194,16 +3289,24 @@ components:
           - AzurePeering
           type: string
         tenant:
-          description: Customer Azure tenant.
+          description: |
+            The Azure Tenant ID in which your Azure Subscription exists.
+            Represents an organization in Azure Active Directory. You can find your Azure Tenant ID in the Azure Portal
+            under
+            [Azure Active Directory](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Overview).
+            Must be a valid **32 character UUID string**.
           minLength: 1
           type: string
         vnet:
-          description: Customer VNet resource ID.
+          description: The resource ID of the VNet that you are peering with Confluent
+            Cloud. You can find the name of your Azure VNet in the [Azure Portal on
+            the Overview tab of your Azure Virtual Network](https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Network%2FvirtualNetworks).
           example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.Network/virtualNetworks/my-vnet
           minLength: 1
           type: string
         customer_region:
-          description: Region of customer VNet
+          description: The region of the VNet you are peering with Confluent Cloud
+            network.
           example: eastus2
           type: string
       required:
@@ -3224,18 +3327,13 @@ components:
         ram_share_arn:
           description: The full AWS Resource Name (ARN) for the AWS Resource Access
             Manager (RAM) Share of the Transit Gateways that you want Confluent Cloud
-            attached to.
+            to be attached to.
           example: arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx
           type: string
         transit_gateway_id:
-          description: The ID for the AWS Transit Gateway that you want Confluent
-            CLoud attached to.
+          description: The ID of the AWS Transit Gateway that you want Confluent CLoud
+            to be attached to.
           example: tgw-xxxxxxxxxxxxxxxxx
-          type: string
-        transit_gateway_attachment_id:
-          description: The ID for the AWS Transit Gateway VPC Attachment that attaches
-            Confluent VPC to Transit Gateway.
-          example: tgw-attach-xxxxx
           type: string
         enable_custom_routes:
           default: false
@@ -3258,6 +3356,24 @@ components:
       - transit_gateway_id
       title: AWS
       type: object
+    networking-admin.v1.AwsTransitGatewayAttachmentStatus:
+      description: AWS Transit Gateway Attachment details generated by AWS.
+      properties:
+        kind:
+          description: AWS Transit Gateway Attachment Status kind type.
+          enum:
+          - AwsTransitGatewayAttachmentStatus
+          type: string
+        transit_gateway_attachment_id:
+          description: The ID of the AWS Transit Gateway VPC Attachment that attaches
+            Confluent VPC to Transit Gateway.
+          example: tgw-attach-xxxxx
+          readOnly: true
+          type: string
+      required:
+      - transit_gateway_attachment_id
+      title: AWS
+      type: object
     networking-admin.v1.AwsPrivateLinkAccess:
       description: AWS PrivateLink access configuration.
       properties:
@@ -3269,7 +3385,10 @@ components:
         account:
           allOf:
           - $ref: '#/components/schemas/networking-admin.v1.AwsAccount'
-          description: AWS account to allow for PrivateLink access.
+          description: |
+            The AWS account ID for the account containing the VPCs you want to connect from using AWS PrivateLink.
+            You can find your AWS account ID [here] (https://console.aws.amazon.com/billing/home?#/account)
+            under **My Account** in your AWS Management Console. Must be a **12 character string**.
       required:
       - account
       - kind
@@ -3284,7 +3403,11 @@ components:
           - AzurePrivateLinkAccess
           type: string
         subscription:
-          description: Azure subscription to allow for PrivateLink access.
+          description: |
+            The Azure subscription ID for the account containing the VNets you want to connect from using
+            Azure Private Link. You can find your Azure subscription ID in the subscription section of your
+            [Microsoft Azure Portal](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade).
+            Must be a valid **32 character UUID string**.
           minLength: 1
           type: string
       required:
@@ -3292,16 +3415,19 @@ components:
       - subscription
       title: AZURE
       type: object
-    networking-admin.v1.GcpPrivateLinkAccess:
-      description: GCP PrivateLink access configuration.
+    networking-admin.v1.GcpPrivateServiceConnectAccess:
+      description: GCP Private Service Connect access configuration.
       properties:
         kind:
           description: PrivateLink kind type.
           enum:
-          - GcpPrivateLinkAccess
+          - GcpPrivateServiceConnectAccess
           type: string
         project:
-          description: GCP project to allow for PrivateLink access.
+          description: |
+            The GCP project ID for the account containing the VPCs that you want to connect from
+            using Private Service Connect. You can find your Google Cloud Project ID under **Project ID** section of
+            your [Google Cloud Console dashboard](https://console.cloud.google.com/home/dashboard).
           minLength: 1
           type: string
       required:
@@ -3323,6 +3449,10 @@ components:
         provider accounts. Dedicated networks support more networking options but can only contain Dedicated clusters.
         Shared networks can contain any cluster type.
 
+        The API allows you to list, create, read, update, and delete your networks.
+
+
+        Related guide: [APIs to manage networks in Confluent Cloud](https://docs.confluent.io/cloud/current/networking/overview.html).
 
         ## The Networks Model
         <SchemaDefinition schemaRef="#/components/schemas/networking-admin.v1.Network" />
@@ -3415,8 +3545,9 @@ components:
         cidr:
           allOf:
           - $ref: '#/components/schemas/networking-admin.v1.Cidr'
-          description: The IPv4 CIDR block to used for this network.  Must be /16.
-            Required for VPC peering and AWS TransitGateway.
+          description: |
+            The IPv4 [CIDR block](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) to used for this network.
+            Must be `/16`. Required for VPC peering and AWS TransitGateway.
           example: 10.200.0.0/16
           x-immutable: true
         zones:
@@ -3443,6 +3574,17 @@ components:
           type: array
           uniqueItems: true
           x-immutable: true
+        legacy_public_dns:
+          allOf:
+          - $ref: '#/components/schemas/networking-admin.v1.LegacyPublicDns'
+          description: |
+            Enable legacy public DNS for the network. This only applies to Private Link connection type.
+            If enabled, clusters in this network will include 'glb' in domain name and require both public
+             and private DNS to resolve.
+            If disabled, clusters in this network will not include 'glb' in domain name and only require private
+             DNS to resolve
+          example: true
+          x-immutable: true
         environment:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
@@ -3453,7 +3595,9 @@ components:
       x-enable-objectmeta: true
     networking-admin.v1.PeeringList:
       description: |-
-        Manage VPC/VNet peering connections between your VPC/VNet and Confluent Cloud.
+        Add or remove VPC/VNet peering connections between your VPC/VNet and Confluent Cloud.
+
+        Related guide: [Peering Connections Overview](https://docs.confluent.io/cloud/current/networking/peering/overview.html).
 
         ## The Peerings Model
         <SchemaDefinition schemaRef="#/components/schemas/networking-admin.v1.Peering" />
@@ -3556,6 +3700,8 @@ components:
       description: |-
         AWS Transit Gateway Attachments
 
+        Related guide: [APIs to manage AWS Transit Gateway Attachments](https://docs.confluent.io/cloud/current/networking/aws-transit-gateway.html).
+
         ## The Transit Gateway Attachments Model
         <SchemaDefinition schemaRef="#/components/schemas/networking-admin.v1.TransitGatewayAttachment" />
 
@@ -3650,7 +3796,9 @@ components:
       x-enable-objectmeta: true
     networking-admin.v1.PrivateLinkAccessList:
       description: |-
-        Add or remove access to PrivateLink endpoints by AWS account, Azure subscription and GCP project.
+        Add or remove access to PrivateLink endpoints by AWS account, Azure subscription and GCP project ID.
+
+        Related guide: [Private Links Overview](https://docs.confluent.io/cloud/current/networking/private-links/index.html).
 
         ## The Private Link Accesses Model
         <SchemaDefinition schemaRef="#/components/schemas/networking-admin.v1.PrivateLinkAccess" />
@@ -3660,9 +3808,9 @@ components:
 
         | Quota | Description |
         | --- | --- |
-        | `privatelink_accounts_per_network` | Number of AWS accounts per network |
-        | `privatelink_subscriptions_per_network` | Number of Azure subscriptions per network |
-        | `privatelink_project_per_network` | Number of GCP project per network |
+        | `private_link_accounts_per_network` | Number of AWS accounts per network |
+        | `private_link_subscriptions_per_network` | Number of Azure subscriptions per network |
+        | `private_service_connect_projects_per_network` | Number of GCP projects per network |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -3729,12 +3877,12 @@ components:
             mapping:
               AwsPrivateLinkAccess: '#/components/schemas/networking-admin.v1.AwsPrivateLinkAccess'
               AzurePrivateLinkAccess: '#/components/schemas/networking-admin.v1.AzurePrivateLinkAccess'
-              GcpPrivateLinkAccess: '#/components/schemas/networking-admin.v1.GcpPrivateLinkAccess'
+              GcpPrivateServiceConnectAccess: '#/components/schemas/networking-admin.v1.GcpPrivateServiceConnectAccess'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking-admin.v1.AwsPrivateLinkAccess'
           - $ref: '#/components/schemas/networking-admin.v1.AzurePrivateLinkAccess'
-          - $ref: '#/components/schemas/networking-admin.v1.GcpPrivateLinkAccess'
+          - $ref: '#/components/schemas/networking-admin.v1.GcpPrivateServiceConnectAccess'
           type: object
           x-immutable: true
           x-one-of-name: NetworkingAdminV1PrivateLinkAccessSpecCloudOneOf

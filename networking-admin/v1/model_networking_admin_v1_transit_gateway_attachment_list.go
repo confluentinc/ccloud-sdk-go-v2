@@ -33,7 +33,7 @@ import (
 	"reflect"
 )
 
-// NetworkingAdminV1TransitGatewayAttachmentList AWS Transit Gateway Attachments  ## The Transit Gateway Attachments Model <SchemaDefinition schemaRef=\"#/components/schemas/networking-admin.v1.TransitGatewayAttachment\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `tgw_attachments_per_network` | Number of TGW attachments per network |
+// NetworkingAdminV1TransitGatewayAttachmentList AWS Transit Gateway Attachments  Related guide: [APIs to manage AWS Transit Gateway Attachments](https://docs.confluent.io/cloud/current/networking/aws-transit-gateway.html).  ## The Transit Gateway Attachments Model <SchemaDefinition schemaRef=\"#/components/schemas/networking-admin.v1.TransitGatewayAttachment\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `tgw_attachments_per_network` | Number of TGW attachments per network |
 type NetworkingAdminV1TransitGatewayAttachmentList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version"`

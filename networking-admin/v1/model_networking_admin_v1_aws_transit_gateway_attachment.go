@@ -37,12 +37,10 @@ import (
 type NetworkingAdminV1AwsTransitGatewayAttachment struct {
 	// AWS Transit Gateway Attachment kind type.
 	Kind string `json:"kind"`
-	// The full AWS Resource Name (ARN) for the AWS Resource Access Manager (RAM) Share of the Transit Gateways that you want Confluent Cloud attached to.
+	// The full AWS Resource Name (ARN) for the AWS Resource Access Manager (RAM) Share of the Transit Gateways that you want Confluent Cloud to be attached to.
 	RamShareArn string `json:"ram_share_arn"`
-	// The ID for the AWS Transit Gateway that you want Confluent CLoud attached to.
+	// The ID of the AWS Transit Gateway that you want Confluent CLoud to be attached to.
 	TransitGatewayId string `json:"transit_gateway_id"`
-	// The ID for the AWS Transit Gateway VPC Attachment that attaches Confluent VPC to Transit Gateway.
-	TransitGatewayAttachmentId *string `json:"transit_gateway_attachment_id,omitempty"`
 	// Enable custom destination routes in Confluent Cloud.
 	EnableCustomRoutes *bool `json:"enable_custom_routes,omitempty"`
 	// List of destination routes.
@@ -145,38 +143,6 @@ func (o *NetworkingAdminV1AwsTransitGatewayAttachment) SetTransitGatewayId(v str
 	o.TransitGatewayId = v
 }
 
-// GetTransitGatewayAttachmentId returns the TransitGatewayAttachmentId field value if set, zero value otherwise.
-func (o *NetworkingAdminV1AwsTransitGatewayAttachment) GetTransitGatewayAttachmentId() string {
-	if o == nil || o.TransitGatewayAttachmentId == nil {
-		var ret string
-		return ret
-	}
-	return *o.TransitGatewayAttachmentId
-}
-
-// GetTransitGatewayAttachmentIdOk returns a tuple with the TransitGatewayAttachmentId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *NetworkingAdminV1AwsTransitGatewayAttachment) GetTransitGatewayAttachmentIdOk() (*string, bool) {
-	if o == nil || o.TransitGatewayAttachmentId == nil {
-		return nil, false
-	}
-	return o.TransitGatewayAttachmentId, true
-}
-
-// HasTransitGatewayAttachmentId returns a boolean if a field has been set.
-func (o *NetworkingAdminV1AwsTransitGatewayAttachment) HasTransitGatewayAttachmentId() bool {
-	if o != nil && o.TransitGatewayAttachmentId != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetTransitGatewayAttachmentId gets a reference to the given string and assigns it to the TransitGatewayAttachmentId field.
-func (o *NetworkingAdminV1AwsTransitGatewayAttachment) SetTransitGatewayAttachmentId(v string) {
-	o.TransitGatewayAttachmentId = &v
-}
-
 // GetEnableCustomRoutes returns the EnableCustomRoutes field value if set, zero value otherwise.
 func (o *NetworkingAdminV1AwsTransitGatewayAttachment) GetEnableCustomRoutes() bool {
 	if o == nil || o.EnableCustomRoutes == nil {
@@ -246,7 +212,6 @@ func (o *NetworkingAdminV1AwsTransitGatewayAttachment) Redact() {
     o.recurseRedact(&o.Kind)
     o.recurseRedact(&o.RamShareArn)
     o.recurseRedact(&o.TransitGatewayId)
-    o.recurseRedact(o.TransitGatewayAttachmentId)
     o.recurseRedact(o.EnableCustomRoutes)
     o.recurseRedact(o.Routes)
 }
@@ -291,9 +256,6 @@ func (o NetworkingAdminV1AwsTransitGatewayAttachment) MarshalJSON() ([]byte, err
 	}
 	if true {
 		toSerialize["transit_gateway_id"] = o.TransitGatewayId
-	}
-	if o.TransitGatewayAttachmentId != nil {
-		toSerialize["transit_gateway_attachment_id"] = o.TransitGatewayAttachmentId
 	}
 	if o.EnableCustomRoutes != nil {
 		toSerialize["enable_custom_routes"] = o.EnableCustomRoutes

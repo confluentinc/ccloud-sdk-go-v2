@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | Network kind type. | 
-**Vnet** | **string** | The Azure Virtual Network. | [readonly] 
-**Subscription** | **string** | The Azure subscription. | [readonly] 
+**Vnet** | **string** | The resource ID of the Confluent Cloud VNet. | [readonly] 
+**Subscription** | **string** | The Azure Subscription ID associated with the Confluent Cloud VPC. | [readonly] 
 **PrivateLinkServiceAliases** | Pointer to **map[string]string** | The mapping of zones to Private Link Service Aliases if available. Keys are zones and values are [Azure Private Link Service Aliases](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#share-your-service).  | [optional] [readonly] 
 **PrivateLinkServiceResourceIds** | Pointer to **map[string]string** | The mapping of zones to Private Link Service Resource IDs if available. Keys are zones and values are [Azure Private Link Service Resource IDs](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#share-your-service).  | [optional] [readonly] 
 

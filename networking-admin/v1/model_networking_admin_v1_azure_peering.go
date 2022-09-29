@@ -37,11 +37,11 @@ import (
 type NetworkingAdminV1AzurePeering struct {
 	// Peering kind type.
 	Kind string `json:"kind"`
-	// Customer Azure tenant.
+	// The Azure Tenant ID in which your Azure Subscription exists. Represents an organization in Azure Active Directory. You can find your Azure Tenant ID in the Azure Portal under [Azure Active Directory](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Overview). Must be a valid **32 character UUID string**. 
 	Tenant string `json:"tenant"`
-	// Customer VNet resource ID.
+	// The resource ID of the VNet that you are peering with Confluent Cloud. You can find the name of your Azure VNet in the [Azure Portal on the Overview tab of your Azure Virtual Network](https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Network%2FvirtualNetworks).
 	Vnet string `json:"vnet"`
-	// Region of customer VNet
+	// The region of the VNet you are peering with Confluent Cloud network.
 	CustomerRegion string `json:"customer_region"`
 }
 

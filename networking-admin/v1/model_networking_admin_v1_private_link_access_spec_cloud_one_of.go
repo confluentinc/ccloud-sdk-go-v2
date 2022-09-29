@@ -34,7 +34,7 @@ import (
 type NetworkingAdminV1PrivateLinkAccessSpecCloudOneOf struct {
 	NetworkingAdminV1AwsPrivateLinkAccess *NetworkingAdminV1AwsPrivateLinkAccess
 	NetworkingAdminV1AzurePrivateLinkAccess *NetworkingAdminV1AzurePrivateLinkAccess
-	NetworkingAdminV1GcpPrivateLinkAccess *NetworkingAdminV1GcpPrivateLinkAccess
+	NetworkingAdminV1GcpPrivateServiceConnectAccess *NetworkingAdminV1GcpPrivateServiceConnectAccess
 }
 
 // NetworkingAdminV1AwsPrivateLinkAccessAsNetworkingAdminV1PrivateLinkAccessSpecCloudOneOf is a convenience function that returns NetworkingAdminV1AwsPrivateLinkAccess wrapped in NetworkingAdminV1PrivateLinkAccessSpecCloudOneOf
@@ -47,9 +47,9 @@ func NetworkingAdminV1AzurePrivateLinkAccessAsNetworkingAdminV1PrivateLinkAccess
 	return NetworkingAdminV1PrivateLinkAccessSpecCloudOneOf{ NetworkingAdminV1AzurePrivateLinkAccess: v}
 }
 
-// NetworkingAdminV1GcpPrivateLinkAccessAsNetworkingAdminV1PrivateLinkAccessSpecCloudOneOf is a convenience function that returns NetworkingAdminV1GcpPrivateLinkAccess wrapped in NetworkingAdminV1PrivateLinkAccessSpecCloudOneOf
-func NetworkingAdminV1GcpPrivateLinkAccessAsNetworkingAdminV1PrivateLinkAccessSpecCloudOneOf(v *NetworkingAdminV1GcpPrivateLinkAccess) NetworkingAdminV1PrivateLinkAccessSpecCloudOneOf {
-	return NetworkingAdminV1PrivateLinkAccessSpecCloudOneOf{ NetworkingAdminV1GcpPrivateLinkAccess: v}
+// NetworkingAdminV1GcpPrivateServiceConnectAccessAsNetworkingAdminV1PrivateLinkAccessSpecCloudOneOf is a convenience function that returns NetworkingAdminV1GcpPrivateServiceConnectAccess wrapped in NetworkingAdminV1PrivateLinkAccessSpecCloudOneOf
+func NetworkingAdminV1GcpPrivateServiceConnectAccessAsNetworkingAdminV1PrivateLinkAccessSpecCloudOneOf(v *NetworkingAdminV1GcpPrivateServiceConnectAccess) NetworkingAdminV1PrivateLinkAccessSpecCloudOneOf {
+	return NetworkingAdminV1PrivateLinkAccessSpecCloudOneOf{ NetworkingAdminV1GcpPrivateServiceConnectAccess: v}
 }
 
 
@@ -87,15 +87,15 @@ func (dst *NetworkingAdminV1PrivateLinkAccessSpecCloudOneOf) UnmarshalJSON(data 
 		}
 	}
 
-	// check if the discriminator value is 'GcpPrivateLinkAccess'
-	if jsonDict["kind"] == "GcpPrivateLinkAccess" {
-		// try to unmarshal JSON data into NetworkingAdminV1GcpPrivateLinkAccess
-		err = json.Unmarshal(data, &dst.NetworkingAdminV1GcpPrivateLinkAccess)
+	// check if the discriminator value is 'GcpPrivateServiceConnectAccess'
+	if jsonDict["kind"] == "GcpPrivateServiceConnectAccess" {
+		// try to unmarshal JSON data into NetworkingAdminV1GcpPrivateServiceConnectAccess
+		err = json.Unmarshal(data, &dst.NetworkingAdminV1GcpPrivateServiceConnectAccess)
 		if err == nil {
-			return nil // data stored in dst.NetworkingAdminV1GcpPrivateLinkAccess, return on the first match
+			return nil // data stored in dst.NetworkingAdminV1GcpPrivateServiceConnectAccess, return on the first match
 		} else {
-			dst.NetworkingAdminV1GcpPrivateLinkAccess = nil
-			return fmt.Errorf("Failed to unmarshal NetworkingAdminV1PrivateLinkAccessSpecCloudOneOf as NetworkingAdminV1GcpPrivateLinkAccess: %s", err.Error())
+			dst.NetworkingAdminV1GcpPrivateServiceConnectAccess = nil
+			return fmt.Errorf("Failed to unmarshal NetworkingAdminV1PrivateLinkAccessSpecCloudOneOf as NetworkingAdminV1GcpPrivateServiceConnectAccess: %s", err.Error())
 		}
 	}
 
@@ -123,15 +123,15 @@ func (dst *NetworkingAdminV1PrivateLinkAccessSpecCloudOneOf) UnmarshalJSON(data 
 		}
 	}
 
-	// check if the discriminator value is 'networking-admin.v1.GcpPrivateLinkAccess'
-	if jsonDict["kind"] == "networking-admin.v1.GcpPrivateLinkAccess" {
-		// try to unmarshal JSON data into NetworkingAdminV1GcpPrivateLinkAccess
-		err = json.Unmarshal(data, &dst.NetworkingAdminV1GcpPrivateLinkAccess)
+	// check if the discriminator value is 'networking-admin.v1.GcpPrivateServiceConnectAccess'
+	if jsonDict["kind"] == "networking-admin.v1.GcpPrivateServiceConnectAccess" {
+		// try to unmarshal JSON data into NetworkingAdminV1GcpPrivateServiceConnectAccess
+		err = json.Unmarshal(data, &dst.NetworkingAdminV1GcpPrivateServiceConnectAccess)
 		if err == nil {
-			return nil // data stored in dst.NetworkingAdminV1GcpPrivateLinkAccess, return on the first match
+			return nil // data stored in dst.NetworkingAdminV1GcpPrivateServiceConnectAccess, return on the first match
 		} else {
-			dst.NetworkingAdminV1GcpPrivateLinkAccess = nil
-			return fmt.Errorf("Failed to unmarshal NetworkingAdminV1PrivateLinkAccessSpecCloudOneOf as NetworkingAdminV1GcpPrivateLinkAccess: %s", err.Error())
+			dst.NetworkingAdminV1GcpPrivateServiceConnectAccess = nil
+			return fmt.Errorf("Failed to unmarshal NetworkingAdminV1PrivateLinkAccessSpecCloudOneOf as NetworkingAdminV1GcpPrivateServiceConnectAccess: %s", err.Error())
 		}
 	}
 
@@ -148,8 +148,8 @@ func (src NetworkingAdminV1PrivateLinkAccessSpecCloudOneOf) MarshalJSON() ([]byt
 		return json.Marshal(&src.NetworkingAdminV1AzurePrivateLinkAccess)
 	}
 
-	if src.NetworkingAdminV1GcpPrivateLinkAccess != nil {
-		return json.Marshal(&src.NetworkingAdminV1GcpPrivateLinkAccess)
+	if src.NetworkingAdminV1GcpPrivateServiceConnectAccess != nil {
+		return json.Marshal(&src.NetworkingAdminV1GcpPrivateServiceConnectAccess)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -165,8 +165,8 @@ func (obj *NetworkingAdminV1PrivateLinkAccessSpecCloudOneOf) GetActualInstance()
 		return obj.NetworkingAdminV1AzurePrivateLinkAccess
 	}
 
-	if obj.NetworkingAdminV1GcpPrivateLinkAccess != nil {
-		return obj.NetworkingAdminV1GcpPrivateLinkAccess
+	if obj.NetworkingAdminV1GcpPrivateServiceConnectAccess != nil {
+		return obj.NetworkingAdminV1GcpPrivateServiceConnectAccess
 	}
 
 	// all schemas are nil

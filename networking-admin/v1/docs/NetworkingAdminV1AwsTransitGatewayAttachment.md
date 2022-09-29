@@ -5,9 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | AWS Transit Gateway Attachment kind type. | 
-**RamShareArn** | **string** | The full AWS Resource Name (ARN) for the AWS Resource Access Manager (RAM) Share of the Transit Gateways that you want Confluent Cloud attached to. | 
-**TransitGatewayId** | **string** | The ID for the AWS Transit Gateway that you want Confluent CLoud attached to. | 
-**TransitGatewayAttachmentId** | Pointer to **string** | The ID for the AWS Transit Gateway VPC Attachment that attaches Confluent VPC to Transit Gateway. | [optional] 
+**RamShareArn** | **string** | The full AWS Resource Name (ARN) for the AWS Resource Access Manager (RAM) Share of the Transit Gateways that you want Confluent Cloud to be attached to. | 
+**TransitGatewayId** | **string** | The ID of the AWS Transit Gateway that you want Confluent CLoud to be attached to. | 
 **EnableCustomRoutes** | Pointer to **bool** | Enable custom destination routes in Confluent Cloud. | [optional] [default to false]
 **Routes** | Pointer to **[]string** | List of destination routes. | [optional] 
 
@@ -89,31 +88,6 @@ and a boolean to check if the value has been set.
 
 SetTransitGatewayId sets TransitGatewayId field to given value.
 
-
-### GetTransitGatewayAttachmentId
-
-`func (o *NetworkingAdminV1AwsTransitGatewayAttachment) GetTransitGatewayAttachmentId() string`
-
-GetTransitGatewayAttachmentId returns the TransitGatewayAttachmentId field if non-nil, zero value otherwise.
-
-### GetTransitGatewayAttachmentIdOk
-
-`func (o *NetworkingAdminV1AwsTransitGatewayAttachment) GetTransitGatewayAttachmentIdOk() (*string, bool)`
-
-GetTransitGatewayAttachmentIdOk returns a tuple with the TransitGatewayAttachmentId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTransitGatewayAttachmentId
-
-`func (o *NetworkingAdminV1AwsTransitGatewayAttachment) SetTransitGatewayAttachmentId(v string)`
-
-SetTransitGatewayAttachmentId sets TransitGatewayAttachmentId field to given value.
-
-### HasTransitGatewayAttachmentId
-
-`func (o *NetworkingAdminV1AwsTransitGatewayAttachment) HasTransitGatewayAttachmentId() bool`
-
-HasTransitGatewayAttachmentId returns a boolean if a field has been set.
 
 ### GetEnableCustomRoutes
 

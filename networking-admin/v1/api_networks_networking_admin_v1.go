@@ -44,7 +44,9 @@ type NetworksNetworkingAdminV1Api interface {
 	/*
 	GetNetworkingAdminV1Network Read a Network
 
-	Make a request to read a network.
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to read a network.
 
 	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 @param id The unique identifier for the network.
@@ -59,7 +61,9 @@ type NetworksNetworkingAdminV1Api interface {
 	/*
 	ListNetworkingAdminV1Networks List of Networks
 
-	Retrieve a sorted, filtered, paginated list of all networks.
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Retrieve a sorted, filtered, paginated list of all networks.
 
 	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 @return ApiListNetworkingAdminV1NetworksRequest
@@ -93,6 +97,8 @@ func (r ApiGetNetworkingAdminV1NetworkRequest) Execute() (NetworkingAdminV1Netwo
 
 /*
 GetNetworkingAdminV1Network Read a Network
+
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a network.
 
@@ -305,6 +311,8 @@ func (r ApiListNetworkingAdminV1NetworksRequest) Execute() (NetworkingAdminV1Net
 
 /*
 ListNetworkingAdminV1Networks List of Networks
+
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all networks.
 

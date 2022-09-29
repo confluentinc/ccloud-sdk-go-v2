@@ -37,9 +37,9 @@ import (
 type NetworkingAdminV1AzureNetwork struct {
 	// Network kind type.
 	Kind string `json:"kind"`
-	// The Azure Virtual Network.
+	// The resource ID of the Confluent Cloud VNet.
 	Vnet string `json:"vnet"`
-	// The Azure subscription.
+	// The Azure Subscription ID associated with the Confluent Cloud VPC.
 	Subscription string `json:"subscription"`
 	// The mapping of zones to Private Link Service Aliases if available. Keys are zones and values are [Azure Private Link Service Aliases](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#share-your-service). 
 	PrivateLinkServiceAliases *map[string]string `json:"private_link_service_aliases,omitempty"`

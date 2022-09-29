@@ -42,10 +42,12 @@ type NetworkingAdminV1NetworkSpec struct {
 	// The cloud service provider region in which the network exists.
 	Region *string `json:"region,omitempty"`
 	ConnectionTypes *NetworkingAdminV1ConnectionTypes `json:"connection_types,omitempty"`
-	// The IPv4 CIDR block to used for this network.  Must be /16. Required for VPC peering and AWS TransitGateway.
+	// The IPv4 [CIDR block](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) to used for this network. Must be `/16`. Required for VPC peering and AWS TransitGateway. 
 	Cidr *string `json:"cidr,omitempty"`
 	// The 3 availability zones for this network. They can optionally be specified for AWS networks used with PrivateLink. Otherwise, they are automatically chosen by Confluent Cloud.  On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3)  On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c).  On Azure, zones are Confluent-chosen names (e.g. 1, 2, 3) since Azure does not  have universal zone identifiers. 
 	Zones *[]string `json:"zones,omitempty"`
+	// Enable legacy public DNS for the network. This only applies to Private Link connection type. If enabled, clusters in this network will include 'glb' in domain name and require both public  and private DNS to resolve. If disabled, clusters in this network will not include 'glb' in domain name and only require private  DNS to resolve 
+	LegacyPublicDns *bool `json:"legacy_public_dns,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
 }
@@ -259,6 +261,38 @@ func (o *NetworkingAdminV1NetworkSpec) SetZones(v []string) {
 	o.Zones = &v
 }
 
+// GetLegacyPublicDns returns the LegacyPublicDns field value if set, zero value otherwise.
+func (o *NetworkingAdminV1NetworkSpec) GetLegacyPublicDns() bool {
+	if o == nil || o.LegacyPublicDns == nil {
+		var ret bool
+		return ret
+	}
+	return *o.LegacyPublicDns
+}
+
+// GetLegacyPublicDnsOk returns a tuple with the LegacyPublicDns field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingAdminV1NetworkSpec) GetLegacyPublicDnsOk() (*bool, bool) {
+	if o == nil || o.LegacyPublicDns == nil {
+		return nil, false
+	}
+	return o.LegacyPublicDns, true
+}
+
+// HasLegacyPublicDns returns a boolean if a field has been set.
+func (o *NetworkingAdminV1NetworkSpec) HasLegacyPublicDns() bool {
+	if o != nil && o.LegacyPublicDns != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLegacyPublicDns gets a reference to the given bool and assigns it to the LegacyPublicDns field.
+func (o *NetworkingAdminV1NetworkSpec) SetLegacyPublicDns(v bool) {
+	o.LegacyPublicDns = &v
+}
+
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
 func (o *NetworkingAdminV1NetworkSpec) GetEnvironment() ObjectReference {
 	if o == nil || o.Environment == nil {
@@ -299,6 +333,7 @@ func (o *NetworkingAdminV1NetworkSpec) Redact() {
     o.recurseRedact(o.ConnectionTypes)
     o.recurseRedact(o.Cidr)
     o.recurseRedact(o.Zones)
+    o.recurseRedact(o.LegacyPublicDns)
     o.recurseRedact(o.Environment)
 }
 
@@ -351,6 +386,9 @@ func (o NetworkingAdminV1NetworkSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.Zones != nil {
 		toSerialize["zones"] = o.Zones
+	}
+	if o.LegacyPublicDns != nil {
+		toSerialize["legacy_public_dns"] = o.LegacyPublicDns
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment

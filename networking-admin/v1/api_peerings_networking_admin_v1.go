@@ -44,7 +44,9 @@ type PeeringsNetworkingAdminV1Api interface {
 	/*
 	GetNetworkingAdminV1Peering Read a Peering
 
-	Make a request to read a peering.
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to read a peering.
 
 	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 @param id The unique identifier for the peering.
@@ -59,7 +61,9 @@ type PeeringsNetworkingAdminV1Api interface {
 	/*
 	ListNetworkingAdminV1Peerings List of Peerings
 
-	Retrieve a sorted, filtered, paginated list of all peerings.
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Retrieve a sorted, filtered, paginated list of all peerings.
 
 	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 @return ApiListNetworkingAdminV1PeeringsRequest
@@ -93,6 +97,8 @@ func (r ApiGetNetworkingAdminV1PeeringRequest) Execute() (NetworkingAdminV1Peeri
 
 /*
 GetNetworkingAdminV1Peering Read a Peering
+
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a peering.
 
@@ -287,6 +293,8 @@ func (r ApiListNetworkingAdminV1PeeringsRequest) Execute() (NetworkingAdminV1Pee
 
 /*
 ListNetworkingAdminV1Peerings List of Peerings
+
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all peerings.
 

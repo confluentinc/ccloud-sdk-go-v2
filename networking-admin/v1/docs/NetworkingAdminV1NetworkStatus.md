@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Phase** | **string** | The lifecyle phase of the network:   PROVISIONING:  network provisioning is in progress;   READY:  network is ready;   FAILED: provisioning failed;   DEPROVISIONING: network deprovisioning is in progress;  | [readonly] 
+**Phase** | **string** | The lifecyle phase of the network:  PROVISIONING:  network provisioning is in progress;  READY:  network is ready;  FAILED: provisioning failed;  DEPROVISIONING: network deprovisioning is in progress;  | [readonly] 
 **SupportedConnectionTypes** | [**NetworkingAdminV1StatusConnectionTypes**](networking-admin.v1.StatusConnectionTypes.md) |  | [readonly] 
 **ErrorCode** | Pointer to **string** | Error code if network is in a failed state. May be used for programmatic error checking. | [optional] [readonly] 
 **ErrorMessage** | Pointer to **string** | Displayable error message if network is in a failed state | [optional] [readonly] 

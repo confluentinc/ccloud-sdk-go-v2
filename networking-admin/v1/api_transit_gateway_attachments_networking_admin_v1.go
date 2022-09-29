@@ -44,7 +44,9 @@ type TransitGatewayAttachmentsNetworkingAdminV1Api interface {
 	/*
 	GetNetworkingAdminV1TransitGatewayAttachment Read a Transit Gateway Attachment
 
-	Make a request to read a transit gateway attachment.
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to read a transit gateway attachment.
 
 	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 @param id The unique identifier for the transit gateway attachment.
@@ -59,7 +61,9 @@ type TransitGatewayAttachmentsNetworkingAdminV1Api interface {
 	/*
 	ListNetworkingAdminV1TransitGatewayAttachments List of Transit Gateway Attachments
 
-	Retrieve a sorted, filtered, paginated list of all transit gateway attachments.
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Retrieve a sorted, filtered, paginated list of all transit gateway attachments.
 
 	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 @return ApiListNetworkingAdminV1TransitGatewayAttachmentsRequest
@@ -93,6 +97,8 @@ func (r ApiGetNetworkingAdminV1TransitGatewayAttachmentRequest) Execute() (Netwo
 
 /*
 GetNetworkingAdminV1TransitGatewayAttachment Read a Transit Gateway Attachment
+
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a transit gateway attachment.
 
@@ -287,6 +293,8 @@ func (r ApiListNetworkingAdminV1TransitGatewayAttachmentsRequest) Execute() (Net
 
 /*
 ListNetworkingAdminV1TransitGatewayAttachments List of Transit Gateway Attachments
+
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all transit gateway attachments.
 

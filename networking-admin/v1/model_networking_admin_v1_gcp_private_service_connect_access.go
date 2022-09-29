@@ -33,35 +33,35 @@ import (
 	"reflect"
 )
 
-// NetworkingAdminV1GcpPrivateLinkAccess GCP PrivateLink access configuration.
-type NetworkingAdminV1GcpPrivateLinkAccess struct {
+// NetworkingAdminV1GcpPrivateServiceConnectAccess GCP Private Service Connect access configuration.
+type NetworkingAdminV1GcpPrivateServiceConnectAccess struct {
 	// PrivateLink kind type.
 	Kind string `json:"kind"`
-	// GCP project to allow for PrivateLink access.
+	// The GCP project ID for the account containing the VPCs that you want to connect from using Private Service Connect. You can find your Google Cloud Project ID under **Project ID** section of your [Google Cloud Console dashboard](https://console.cloud.google.com/home/dashboard). 
 	Project string `json:"project"`
 }
 
-// NewNetworkingAdminV1GcpPrivateLinkAccess instantiates a new NetworkingAdminV1GcpPrivateLinkAccess object
+// NewNetworkingAdminV1GcpPrivateServiceConnectAccess instantiates a new NetworkingAdminV1GcpPrivateServiceConnectAccess object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingAdminV1GcpPrivateLinkAccess(kind string, project string) *NetworkingAdminV1GcpPrivateLinkAccess {
-	this := NetworkingAdminV1GcpPrivateLinkAccess{}
+func NewNetworkingAdminV1GcpPrivateServiceConnectAccess(kind string, project string) *NetworkingAdminV1GcpPrivateServiceConnectAccess {
+	this := NetworkingAdminV1GcpPrivateServiceConnectAccess{}
 	this.Kind = kind
 	this.Project = project
 	return &this
 }
 
-// NewNetworkingAdminV1GcpPrivateLinkAccessWithDefaults instantiates a new NetworkingAdminV1GcpPrivateLinkAccess object
+// NewNetworkingAdminV1GcpPrivateServiceConnectAccessWithDefaults instantiates a new NetworkingAdminV1GcpPrivateServiceConnectAccess object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewNetworkingAdminV1GcpPrivateLinkAccessWithDefaults() *NetworkingAdminV1GcpPrivateLinkAccess {
-	this := NetworkingAdminV1GcpPrivateLinkAccess{}
+func NewNetworkingAdminV1GcpPrivateServiceConnectAccessWithDefaults() *NetworkingAdminV1GcpPrivateServiceConnectAccess {
+	this := NetworkingAdminV1GcpPrivateServiceConnectAccess{}
 	return &this
 }
 
 // GetKind returns the Kind field value
-func (o *NetworkingAdminV1GcpPrivateLinkAccess) GetKind() string {
+func (o *NetworkingAdminV1GcpPrivateServiceConnectAccess) GetKind() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -72,7 +72,7 @@ func (o *NetworkingAdminV1GcpPrivateLinkAccess) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *NetworkingAdminV1GcpPrivateLinkAccess) GetKindOk() (*string, bool) {
+func (o *NetworkingAdminV1GcpPrivateServiceConnectAccess) GetKindOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -80,12 +80,12 @@ func (o *NetworkingAdminV1GcpPrivateLinkAccess) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *NetworkingAdminV1GcpPrivateLinkAccess) SetKind(v string) {
+func (o *NetworkingAdminV1GcpPrivateServiceConnectAccess) SetKind(v string) {
 	o.Kind = v
 }
 
 // GetProject returns the Project field value
-func (o *NetworkingAdminV1GcpPrivateLinkAccess) GetProject() string {
+func (o *NetworkingAdminV1GcpPrivateServiceConnectAccess) GetProject() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -96,7 +96,7 @@ func (o *NetworkingAdminV1GcpPrivateLinkAccess) GetProject() string {
 
 // GetProjectOk returns a tuple with the Project field value
 // and a boolean to check if the value has been set.
-func (o *NetworkingAdminV1GcpPrivateLinkAccess) GetProjectOk() (*string, bool) {
+func (o *NetworkingAdminV1GcpPrivateServiceConnectAccess) GetProjectOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -104,17 +104,17 @@ func (o *NetworkingAdminV1GcpPrivateLinkAccess) GetProjectOk() (*string, bool) {
 }
 
 // SetProject sets field value
-func (o *NetworkingAdminV1GcpPrivateLinkAccess) SetProject(v string) {
+func (o *NetworkingAdminV1GcpPrivateServiceConnectAccess) SetProject(v string) {
 	o.Project = v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *NetworkingAdminV1GcpPrivateLinkAccess) Redact() {
+func (o *NetworkingAdminV1GcpPrivateServiceConnectAccess) Redact() {
     o.recurseRedact(&o.Kind)
     o.recurseRedact(&o.Project)
 }
 
-func (o *NetworkingAdminV1GcpPrivateLinkAccess) recurseRedact(v interface{}) {
+func (o *NetworkingAdminV1GcpPrivateServiceConnectAccess) recurseRedact(v interface{}) {
     type redactor interface {
         Redact()
     }
@@ -139,12 +139,12 @@ func (o *NetworkingAdminV1GcpPrivateLinkAccess) recurseRedact(v interface{}) {
     }
 }
 
-func (o NetworkingAdminV1GcpPrivateLinkAccess) zeroField(v interface{}) {
+func (o NetworkingAdminV1GcpPrivateServiceConnectAccess) zeroField(v interface{}) {
     p := reflect.ValueOf(v).Elem()
     p.Set(reflect.Zero(p.Type()))
 }
 
-func (o NetworkingAdminV1GcpPrivateLinkAccess) MarshalJSON() ([]byte, error) {
+func (o NetworkingAdminV1GcpPrivateServiceConnectAccess) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["kind"] = o.Kind
@@ -155,38 +155,38 @@ func (o NetworkingAdminV1GcpPrivateLinkAccess) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableNetworkingAdminV1GcpPrivateLinkAccess struct {
-	value *NetworkingAdminV1GcpPrivateLinkAccess
+type NullableNetworkingAdminV1GcpPrivateServiceConnectAccess struct {
+	value *NetworkingAdminV1GcpPrivateServiceConnectAccess
 	isSet bool
 }
 
-func (v NullableNetworkingAdminV1GcpPrivateLinkAccess) Get() *NetworkingAdminV1GcpPrivateLinkAccess {
+func (v NullableNetworkingAdminV1GcpPrivateServiceConnectAccess) Get() *NetworkingAdminV1GcpPrivateServiceConnectAccess {
 	return v.value
 }
 
-func (v *NullableNetworkingAdminV1GcpPrivateLinkAccess) Set(val *NetworkingAdminV1GcpPrivateLinkAccess) {
+func (v *NullableNetworkingAdminV1GcpPrivateServiceConnectAccess) Set(val *NetworkingAdminV1GcpPrivateServiceConnectAccess) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableNetworkingAdminV1GcpPrivateLinkAccess) IsSet() bool {
+func (v NullableNetworkingAdminV1GcpPrivateServiceConnectAccess) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableNetworkingAdminV1GcpPrivateLinkAccess) Unset() {
+func (v *NullableNetworkingAdminV1GcpPrivateServiceConnectAccess) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableNetworkingAdminV1GcpPrivateLinkAccess(val *NetworkingAdminV1GcpPrivateLinkAccess) *NullableNetworkingAdminV1GcpPrivateLinkAccess {
-	return &NullableNetworkingAdminV1GcpPrivateLinkAccess{value: val, isSet: true}
+func NewNullableNetworkingAdminV1GcpPrivateServiceConnectAccess(val *NetworkingAdminV1GcpPrivateServiceConnectAccess) *NullableNetworkingAdminV1GcpPrivateServiceConnectAccess {
+	return &NullableNetworkingAdminV1GcpPrivateServiceConnectAccess{value: val, isSet: true}
 }
 
-func (v NullableNetworkingAdminV1GcpPrivateLinkAccess) MarshalJSON() ([]byte, error) {
+func (v NullableNetworkingAdminV1GcpPrivateServiceConnectAccess) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableNetworkingAdminV1GcpPrivateLinkAccess) UnmarshalJSON(src []byte) error {
+func (v *NullableNetworkingAdminV1GcpPrivateServiceConnectAccess) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

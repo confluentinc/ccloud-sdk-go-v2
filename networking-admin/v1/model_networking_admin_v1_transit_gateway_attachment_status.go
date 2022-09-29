@@ -41,6 +41,8 @@ type NetworkingAdminV1TransitGatewayAttachmentStatus struct {
 	ErrorCode *string `json:"error_code,omitempty"`
 	// Displayable error message if TGW attachment is in a failed state
 	ErrorMessage *string `json:"error_message,omitempty"`
+	// The cloud-specific TGW attachment details.
+	Cloud *NetworkingAdminV1TransitGatewayAttachmentStatusCloudOneOf `json:"cloud,omitempty"`
 }
 
 // NewNetworkingAdminV1TransitGatewayAttachmentStatus instantiates a new NetworkingAdminV1TransitGatewayAttachmentStatus object
@@ -149,11 +151,44 @@ func (o *NetworkingAdminV1TransitGatewayAttachmentStatus) SetErrorMessage(v stri
 	o.ErrorMessage = &v
 }
 
+// GetCloud returns the Cloud field value if set, zero value otherwise.
+func (o *NetworkingAdminV1TransitGatewayAttachmentStatus) GetCloud() NetworkingAdminV1TransitGatewayAttachmentStatusCloudOneOf {
+	if o == nil || o.Cloud == nil {
+		var ret NetworkingAdminV1TransitGatewayAttachmentStatusCloudOneOf
+		return ret
+	}
+	return *o.Cloud
+}
+
+// GetCloudOk returns a tuple with the Cloud field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingAdminV1TransitGatewayAttachmentStatus) GetCloudOk() (*NetworkingAdminV1TransitGatewayAttachmentStatusCloudOneOf, bool) {
+	if o == nil || o.Cloud == nil {
+		return nil, false
+	}
+	return o.Cloud, true
+}
+
+// HasCloud returns a boolean if a field has been set.
+func (o *NetworkingAdminV1TransitGatewayAttachmentStatus) HasCloud() bool {
+	if o != nil && o.Cloud != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCloud gets a reference to the given NetworkingAdminV1TransitGatewayAttachmentStatusCloudOneOf and assigns it to the Cloud field.
+func (o *NetworkingAdminV1TransitGatewayAttachmentStatus) SetCloud(v NetworkingAdminV1TransitGatewayAttachmentStatusCloudOneOf) {
+	o.Cloud = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingAdminV1TransitGatewayAttachmentStatus) Redact() {
     o.recurseRedact(&o.Phase)
     o.recurseRedact(o.ErrorCode)
     o.recurseRedact(o.ErrorMessage)
+    o.recurseRedact(o.Cloud)
 }
 
 func (o *NetworkingAdminV1TransitGatewayAttachmentStatus) recurseRedact(v interface{}) {
@@ -196,6 +231,9 @@ func (o NetworkingAdminV1TransitGatewayAttachmentStatus) MarshalJSON() ([]byte, 
 	}
 	if o.ErrorMessage != nil {
 		toSerialize["error_message"] = o.ErrorMessage
+	}
+	if o.Cloud != nil {
+		toSerialize["cloud"] = o.Cloud
 	}
 	return json.Marshal(toSerialize)
 }

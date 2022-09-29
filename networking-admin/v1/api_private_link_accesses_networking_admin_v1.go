@@ -44,7 +44,9 @@ type PrivateLinkAccessesNetworkingAdminV1Api interface {
 	/*
 	GetNetworkingAdminV1PrivateLinkAccess Read a Private Link Access
 
-	Make a request to read a private link access.
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to read a private link access.
 
 	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 @param id The unique identifier for the private link access.
@@ -59,7 +61,9 @@ type PrivateLinkAccessesNetworkingAdminV1Api interface {
 	/*
 	ListNetworkingAdminV1PrivateLinkAccesses List of Private Link Accesses
 
-	Retrieve a sorted, filtered, paginated list of all private link accesses.
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Retrieve a sorted, filtered, paginated list of all private link accesses.
 
 	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 @return ApiListNetworkingAdminV1PrivateLinkAccessesRequest
@@ -93,6 +97,8 @@ func (r ApiGetNetworkingAdminV1PrivateLinkAccessRequest) Execute() (NetworkingAd
 
 /*
 GetNetworkingAdminV1PrivateLinkAccess Read a Private Link Access
+
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a private link access.
 
@@ -287,6 +293,8 @@ func (r ApiListNetworkingAdminV1PrivateLinkAccessesRequest) Execute() (Networkin
 
 /*
 ListNetworkingAdminV1PrivateLinkAccesses List of Private Link Accesses
+
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all private link accesses.
 

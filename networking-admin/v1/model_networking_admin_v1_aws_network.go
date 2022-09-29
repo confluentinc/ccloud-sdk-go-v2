@@ -37,11 +37,11 @@ import (
 type NetworkingAdminV1AwsNetwork struct {
 	// Network kind type.
 	Kind string `json:"kind"`
-	// The AWS VPC id for the network.
+	// The Confluent Cloud VPC ID.
 	Vpc string `json:"vpc"`
-	// The AWS account id for the network.
+	// The AWS account ID associated with the Confluent Cloud VPC.
 	Account string `json:"account"`
-	// The AWS VPC endpoint service for the network (used for PrivateLink) if available.
+	// The endpoint service of the Confluent Cloud VPC. (used for PrivateLink) if available.
 	PrivateLinkEndpointService *string `json:"private_link_endpoint_service,omitempty"`
 }
 

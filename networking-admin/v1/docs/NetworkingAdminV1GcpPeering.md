@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | Peering kind type. | 
-**Project** | **string** | The name of the GCP project. | 
-**VpcNetwork** | **string** | The name of the GCP VPC network to peer with. | 
-**ImportCustomRoutes** | Pointer to **bool** | Enable customer route import. | [optional] [default to false]
+**Project** | **string** | The Google Cloud project ID associated with the VPC that you are peering with Confluent Cloud network.  | 
+**VpcNetwork** | **string** | The name of the VPC that you are peering with Confluent Cloud network. | 
+**ImportCustomRoutes** | Pointer to **bool** | Enable customer route import. For more information, see [Importing custom routes](https://cloud.google.com/vpc/docs/vpc-peering#importing-exporting-routes).  | [optional] [default to false]
 
 ## Methods
 
