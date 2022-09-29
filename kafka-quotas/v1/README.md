@@ -88,9 +88,11 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [EnvScopedObjectReference](docs/EnvScopedObjectReference.md)
  - [Error](docs/Error.md)
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
+ - [GlobalObjectReference](docs/GlobalObjectReference.md)
  - [KafkaQuotasV1ClientQuota](docs/KafkaQuotasV1ClientQuota.md)
  - [KafkaQuotasV1ClientQuotaList](docs/KafkaQuotasV1ClientQuotaList.md)
  - [KafkaQuotasV1ClientQuotaUpdate](docs/KafkaQuotasV1ClientQuotaUpdate.md)
@@ -98,6 +100,8 @@ Class | Method | HTTP request | Description
  - [ListMeta](docs/ListMeta.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
+ - [TypedEnvScopedObjectReference](docs/TypedEnvScopedObjectReference.md)
+ - [TypedGlobalObjectReference](docs/TypedGlobalObjectReference.md)
 
 
 ## Documentation For Authorization

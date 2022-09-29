@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **DisplayName** | Pointer to **string** | The name of the client quota. | [optional] 
 **Description** | Pointer to **string** | A human readable description for the client quota. | [optional] 
 **Throughput** | Pointer to [**KafkaQuotasV1Throughput**](kafka-quotas.v1.Throughput.md) | Throughput for the client quota. | [optional] 
-**Principals** | Pointer to [**[]ObjectReference**](ObjectReference.md) | A list of service accounts. Special name \&quot;default\&quot; can be used to represent the default quota for all users and service accounts.  | [optional] 
+**Principals** | Pointer to [**[]GlobalObjectReference**](GlobalObjectReference.md) | A list of service accounts. Special name \&quot;default\&quot; can be used to represent the default quota for all users and service accounts.  | [optional] 
 
 ## Methods
 
@@ -209,20 +209,20 @@ HasThroughput returns a boolean if a field has been set.
 
 ### GetPrincipals
 
-`func (o *KafkaQuotasV1ClientQuotaUpdate) GetPrincipals() []ObjectReference`
+`func (o *KafkaQuotasV1ClientQuotaUpdate) GetPrincipals() []GlobalObjectReference`
 
 GetPrincipals returns the Principals field if non-nil, zero value otherwise.
 
 ### GetPrincipalsOk
 
-`func (o *KafkaQuotasV1ClientQuotaUpdate) GetPrincipalsOk() (*[]ObjectReference, bool)`
+`func (o *KafkaQuotasV1ClientQuotaUpdate) GetPrincipalsOk() (*[]GlobalObjectReference, bool)`
 
 GetPrincipalsOk returns a tuple with the Principals field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrincipals
 
-`func (o *KafkaQuotasV1ClientQuotaUpdate) SetPrincipals(v []ObjectReference)`
+`func (o *KafkaQuotasV1ClientQuotaUpdate) SetPrincipals(v []GlobalObjectReference)`
 
 SetPrincipals sets Principals field to given value.
 
