@@ -39,9 +39,7 @@ type SdV1PipelineSpec struct {
 	DisplayName *string `json:"display_name,omitempty"`
 	// The description of the pipeline.
 	Description *string `json:"description,omitempty"`
-	// A list of KSQL statements that define this pipeline.
-	SourceCode *string `json:"source_code,omitempty"`
-	// A list of Kafka topic names from the activated pipeline to be retained when this pipeline is deactivated.
+	// A list of Kafka topic names from the activated pipeline to be retained when this pipeline is deactivated. 
 	RetainedTopicNames *[]string `json:"retained_topic_names,omitempty"`
 	// The desired state of the pipeline.
 	Activated *bool `json:"activated,omitempty"`
@@ -144,38 +142,6 @@ func (o *SdV1PipelineSpec) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *SdV1PipelineSpec) SetDescription(v string) {
 	o.Description = &v
-}
-
-// GetSourceCode returns the SourceCode field value if set, zero value otherwise.
-func (o *SdV1PipelineSpec) GetSourceCode() string {
-	if o == nil || o.SourceCode == nil {
-		var ret string
-		return ret
-	}
-	return *o.SourceCode
-}
-
-// GetSourceCodeOk returns a tuple with the SourceCode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SdV1PipelineSpec) GetSourceCodeOk() (*string, bool) {
-	if o == nil || o.SourceCode == nil {
-		return nil, false
-	}
-	return o.SourceCode, true
-}
-
-// HasSourceCode returns a boolean if a field has been set.
-func (o *SdV1PipelineSpec) HasSourceCode() bool {
-	if o != nil && o.SourceCode != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSourceCode gets a reference to the given string and assigns it to the SourceCode field.
-func (o *SdV1PipelineSpec) SetSourceCode(v string) {
-	o.SourceCode = &v
 }
 
 // GetRetainedTopicNames returns the RetainedTopicNames field value if set, zero value otherwise.
@@ -406,7 +372,6 @@ func (o *SdV1PipelineSpec) SetStreamGovernanceCluster(v ObjectReference) {
 func (o *SdV1PipelineSpec) Redact() {
     o.recurseRedact(o.DisplayName)
     o.recurseRedact(o.Description)
-    o.recurseRedact(o.SourceCode)
     o.recurseRedact(o.RetainedTopicNames)
     o.recurseRedact(o.Activated)
     o.recurseRedact(o.ActivationPrivilege)
@@ -453,9 +418,6 @@ func (o SdV1PipelineSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.Description != nil {
 		toSerialize["description"] = o.Description
-	}
-	if o.SourceCode != nil {
-		toSerialize["source_code"] = o.SourceCode
 	}
 	if o.RetainedTopicNames != nil {
 		toSerialize["retained_topic_names"] = o.RetainedTopicNames

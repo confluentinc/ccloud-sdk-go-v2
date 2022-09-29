@@ -6,8 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the pipeline. | [optional] 
 **Description** | Pointer to **string** | The description of the pipeline. | [optional] 
-**SourceCode** | Pointer to **string** | A list of KSQL statements that define this pipeline. | [optional] 
-**RetainedTopicNames** | Pointer to **[]string** | A list of Kafka topic names from the activated pipeline to be retained when this pipeline is deactivated. | [optional] 
+**RetainedTopicNames** | Pointer to **[]string** | A list of Kafka topic names from the activated pipeline to be retained when this pipeline is deactivated.  | [optional] 
 **Activated** | Pointer to **bool** | The desired state of the pipeline. | [optional] [default to false]
 **ActivationPrivilege** | Pointer to **bool** | Whether the pipeline has privileges to be activated. | [optional] [default to false]
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
@@ -83,31 +82,6 @@ SetDescription sets Description field to given value.
 `func (o *SdV1PipelineSpec) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
-
-### GetSourceCode
-
-`func (o *SdV1PipelineSpec) GetSourceCode() string`
-
-GetSourceCode returns the SourceCode field if non-nil, zero value otherwise.
-
-### GetSourceCodeOk
-
-`func (o *SdV1PipelineSpec) GetSourceCodeOk() (*string, bool)`
-
-GetSourceCodeOk returns a tuple with the SourceCode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSourceCode
-
-`func (o *SdV1PipelineSpec) SetSourceCode(v string)`
-
-SetSourceCode sets SourceCode field to given value.
-
-### HasSourceCode
-
-`func (o *SdV1PipelineSpec) HasSourceCode() bool`
-
-HasSourceCode returns a boolean if a field has been set.
 
 ### GetRetainedTopicNames
 

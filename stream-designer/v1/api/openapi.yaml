@@ -17,7 +17,7 @@ info:
   version: 0.0.1-alpha0
   x-api-id: 8b855ec4-820a-4506-82d6-3e50db9582d4
   x-api-group: sd/v1
-  x-audience: external-public
+  x-audience: company-internal
   x-tag-group: Stream Designer API (%s)
 servers:
 - description: Confluent Cloud production
@@ -595,13 +595,13 @@ paths:
             --url https://api.confluent.cloud/sd/v1/pipelines \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"MyFirstPipeline","description":"My first pipeline","source_code":"CREATE STREAM upstream (id integer, name string) WITH (kafka_topic = '\''topic'\'', partitions=1, value_format='\''JSON'\''); CREATE STREAM downstream AS SELECT * FROM upstream;","retained_topic_names":["topic1","topic2"],"activated":false,"activation_privilege":false,"environment":{"id":"env-00000","environment":"string"},"kafka_cluster":{"id":"lkc-00000","environment":"string"},"ksql_cluster":{"id":"string","environment":"string"},"stream_governance_cluster":{"id":"string","environment":"string"}}}'
+            --data '{"spec":{"display_name":"MyFirstPipeline","description":"My first pipeline","retained_topic_names":["topic1","topic2"],"activated":false,"activation_privilege":false,"environment":{"id":"env-00000","environment":"string"},"kafka_cluster":{"id":"lkc-00000","environment":"string"},"ksql_cluster":{"id":"string","environment":"string"},"stream_governance_cluster":{"id":"string","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"source_code\":\"CREATE STREAM upstream (id integer, name string) WITH (kafka_topic = 'topic', partitions=1, value_format='JSON'); CREATE STREAM downstream AS SELECT * FROM upstream;\",\"retained_topic_names\":[\"topic1\",\"topic2\"],\"activated\":false,\"activation_privilege\":false,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"ksql_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"stream_governance_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"retained_topic_names\":[\"topic1\",\"topic2\"],\"activated\":false,\"activation_privilege\":false,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"ksql_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"stream_governance_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/sd/v1/pipelines")
             .post(body)
@@ -615,27 +615,24 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/sd/v1/pipelines\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"MyFirstPipeline\\\",\\\"description\\\":\\\"My first pipeline\\\",\\\
-          \"source_code\\\":\\\"CREATE STREAM upstream (id integer, name string) WITH\
-          \ (kafka_topic = 'topic', partitions=1, value_format='JSON'); CREATE STREAM\
-          \ downstream AS SELECT * FROM upstream;\\\",\\\"retained_topic_names\\\"\
-          :[\\\"topic1\\\",\\\"topic2\\\"],\\\"activated\\\":false,\\\"activation_privilege\\\
-          \":false,\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"environment\\\
-          \":\\\"string\\\"},\\\"kafka_cluster\\\":{\\\"id\\\":\\\"lkc-00000\\\",\\\
-          \"environment\\\":\\\"string\\\"},\\\"ksql_cluster\\\":{\\\"id\\\":\\\"\
-          string\\\",\\\"environment\\\":\\\"string\\\"},\\\"stream_governance_cluster\\\
-          \":{\\\"id\\\":\\\"string\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\
-          \n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\"\
-          , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
-          defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
-          \tfmt.Println(string(body))\n\n}"
+          \"retained_topic_names\\\":[\\\"topic1\\\",\\\"topic2\\\"],\\\"activated\\\
+          \":false,\\\"activation_privilege\\\":false,\\\"environment\\\":{\\\"id\\\
+          \":\\\"env-00000\\\",\\\"environment\\\":\\\"string\\\"},\\\"kafka_cluster\\\
+          \":{\\\"id\\\":\\\"lkc-00000\\\",\\\"environment\\\":\\\"string\\\"},\\\"\
+          ksql_cluster\\\":{\\\"id\\\":\\\"string\\\",\\\"environment\\\":\\\"string\\\
+          \"},\\\"stream_governance_cluster\\\":{\\\"id\\\":\\\"string\\\",\\\"environment\\\
+          \":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
+          \n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\t\
+          req.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"source_code\":\"CREATE STREAM upstream (id integer, name string) WITH (kafka_topic = 'topic', partitions=1, value_format='JSON'); CREATE STREAM downstream AS SELECT * FROM upstream;\",\"retained_topic_names\":[\"topic1\",\"topic2\"],\"activated\":false,\"activation_privilege\":false,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"ksql_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"stream_governance_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"retained_topic_names\":[\"topic1\",\"topic2\"],\"activated\":false,\"activation_privilege\":false,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"ksql_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"stream_governance_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}"
 
           headers = {
               'Authorization': "Basic REPLACE_BASIC_AUTH",
@@ -680,7 +677,6 @@ paths:
             spec: {
               display_name: 'MyFirstPipeline',
               description: 'My first pipeline',
-              source_code: 'CREATE STREAM upstream (id integer, name string) WITH (kafka_topic = \'topic\', partitions=1, value_format=\'JSON\'); CREATE STREAM downstream AS SELECT * FROM upstream;',
               retained_topic_names: ['topic1', 'topic2'],
               activated: false,
               activation_privilege: false,
@@ -703,7 +699,7 @@ paths:
           headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"source_code\":\"CREATE STREAM upstream (id integer, name string) WITH (kafka_topic = 'topic', partitions=1, value_format='JSON'); CREATE STREAM downstream AS SELECT * FROM upstream;\",\"retained_topic_names\":[\"topic1\",\"topic2\"],\"activated\":false,\"activation_privilege\":false,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"ksql_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"stream_governance_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"retained_topic_names\":[\"topic1\",\"topic2\"],\"activated\":false,\"activation_privilege\":false,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"ksql_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"stream_governance_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -712,7 +708,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddHeader("content-type", "application/json");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"source_code\":\"CREATE STREAM upstream (id integer, name string) WITH (kafka_topic = 'topic', partitions=1, value_format='JSON'); CREATE STREAM downstream AS SELECT * FROM upstream;\",\"retained_topic_names\":[\"topic1\",\"topic2\"],\"activated\":false,\"activation_privilege\":false,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"ksql_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"stream_governance_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"retained_topic_names\":[\"topic1\",\"topic2\"],\"activated\":false,\"activation_privilege\":false,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"ksql_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"stream_governance_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /sd/v1/pipelines/{id}:
     delete:
@@ -989,14 +985,6 @@ paths:
         schema:
           $ref: '#/components/schemas/SearchFilter'
         style: form
-      - description: Include source code or not, values can be true or false
-        explode: true
-        in: query
-        name: include_sql
-        required: false
-        schema:
-          $ref: '#/components/schemas/SearchFilter'
-        style: form
       - description: The unique identifier for the pipeline.
         explode: false
         in: path
@@ -1183,14 +1171,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/sd/v1/pipelines/%7Bid%7D?environment=env-00000&spec.kafka_cluster=lkc-00000&include_sql=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/sd/v1/pipelines/%7Bid%7D?environment=env-00000&spec.kafka_cluster=lkc-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/sd/v1/pipelines/%7Bid%7D?environment=env-00000&spec.kafka_cluster=lkc-00000&include_sql=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/sd/v1/pipelines/%7Bid%7D?environment=env-00000&spec.kafka_cluster=lkc-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1198,7 +1186,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/sd/v1/pipelines/%7Bid%7D?environment=env-00000&spec.kafka_cluster=lkc-00000&include_sql=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/sd/v1/pipelines/%7Bid%7D?environment=env-00000&spec.kafka_cluster=lkc-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1211,7 +1199,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/sd/v1/pipelines/%7Bid%7D?environment=env-00000&spec.kafka_cluster=lkc-00000&include_sql=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/sd/v1/pipelines/%7Bid%7D?environment=env-00000&spec.kafka_cluster=lkc-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1225,7 +1213,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/sd/v1/pipelines/%7Bid%7D?environment=env-00000&spec.kafka_cluster=lkc-00000&include_sql=SOME_STRING_VALUE",
+            "path": "/sd/v1/pipelines/%7Bid%7D?environment=env-00000&spec.kafka_cluster=lkc-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1250,7 +1238,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/sd/v1/pipelines/%7Bid%7D?environment=env-00000&spec.kafka_cluster=lkc-00000&include_sql=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/sd/v1/pipelines/%7Bid%7D?environment=env-00000&spec.kafka_cluster=lkc-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1259,7 +1247,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/sd/v1/pipelines/%7Bid%7D?environment=env-00000&spec.kafka_cluster=lkc-00000&include_sql=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/sd/v1/pipelines/%7Bid%7D?environment=env-00000&spec.kafka_cluster=lkc-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1269,24 +1257,6 @@ paths:
 
       operationId: updateSdV1Pipeline
       parameters:
-      - description: Scope the operation to the given environment.
-        example: env-00000
-        explode: true
-        in: query
-        name: environment
-        required: true
-        schema:
-          $ref: '#/components/schemas/SearchFilter'
-        style: form
-      - description: Scope the operation to the given spec.kafka_cluster.
-        example: lkc-00000
-        explode: true
-        in: query
-        name: spec.kafka_cluster
-        required: true
-        schema:
-          $ref: '#/components/schemas/SearchFilter'
-        style: form
       - description: The unique identifier for the pipeline.
         explode: false
         in: path
@@ -1535,18 +1505,18 @@ paths:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url 'https://api.confluent.cloud/sd/v1/pipelines/%7Bid%7D?environment=env-00000&spec.kafka_cluster=lkc-00000' \
+            --url https://api.confluent.cloud/sd/v1/pipelines/%7Bid%7D \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"MyFirstPipeline","description":"My first pipeline","source_code":"CREATE STREAM upstream (id integer, name string) WITH (kafka_topic = '\''topic'\'', partitions=1, value_format='\''JSON'\''); CREATE STREAM downstream AS SELECT * FROM upstream;","retained_topic_names":["topic1","topic2"],"activated":false,"activation_privilege":false,"environment":{"id":"env-00000","environment":"string"},"kafka_cluster":{"id":"string","environment":"string"},"ksql_cluster":{"id":"string","environment":"string"},"stream_governance_cluster":{"id":"string","environment":"string"}}}'
+            --data '{"spec":{"display_name":"MyFirstPipeline","description":"My first pipeline","retained_topic_names":["topic1","topic2"],"activated":false,"activation_privilege":false,"environment":{"id":"env-00000","environment":"string"},"kafka_cluster":{"id":"string","environment":"string"},"ksql_cluster":{"id":"string","environment":"string"},"stream_governance_cluster":{"id":"string","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"source_code\":\"CREATE STREAM upstream (id integer, name string) WITH (kafka_topic = 'topic', partitions=1, value_format='JSON'); CREATE STREAM downstream AS SELECT * FROM upstream;\",\"retained_topic_names\":[\"topic1\",\"topic2\"],\"activated\":false,\"activation_privilege\":false,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"ksql_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"stream_governance_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"retained_topic_names\":[\"topic1\",\"topic2\"],\"activated\":false,\"activation_privilege\":false,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"ksql_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"stream_governance_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/sd/v1/pipelines/%7Bid%7D?environment=env-00000&spec.kafka_cluster=lkc-00000")
+            .url("https://api.confluent.cloud/sd/v1/pipelines/%7Bid%7D")
             .patch(body)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .addHeader("content-type", "application/json")
@@ -1555,19 +1525,16 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/sd/v1/pipelines/%7Bid%7D?environment=env-00000&spec.kafka_cluster=lkc-00000\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/sd/v1/pipelines/%7Bid%7D\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"MyFirstPipeline\\\",\\\"description\\\":\\\"My first pipeline\\\",\\\
-          \"source_code\\\":\\\"CREATE STREAM upstream (id integer, name string) WITH\
-          \ (kafka_topic = 'topic', partitions=1, value_format='JSON'); CREATE STREAM\
-          \ downstream AS SELECT * FROM upstream;\\\",\\\"retained_topic_names\\\"\
-          :[\\\"topic1\\\",\\\"topic2\\\"],\\\"activated\\\":false,\\\"activation_privilege\\\
-          \":false,\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"environment\\\
-          \":\\\"string\\\"},\\\"kafka_cluster\\\":{\\\"id\\\":\\\"string\\\",\\\"\
-          environment\\\":\\\"string\\\"},\\\"ksql_cluster\\\":{\\\"id\\\":\\\"string\\\
-          \",\\\"environment\\\":\\\"string\\\"},\\\"stream_governance_cluster\\\"\
-          :{\\\"id\\\":\\\"string\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\
-          \treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
+          \"retained_topic_names\\\":[\\\"topic1\\\",\\\"topic2\\\"],\\\"activated\\\
+          \":false,\\\"activation_privilege\\\":false,\\\"environment\\\":{\\\"id\\\
+          \":\\\"env-00000\\\",\\\"environment\\\":\\\"string\\\"},\\\"kafka_cluster\\\
+          \":{\\\"id\\\":\\\"string\\\",\\\"environment\\\":\\\"string\\\"},\\\"ksql_cluster\\\
+          \":{\\\"id\\\":\\\"string\\\",\\\"environment\\\":\\\"string\\\"},\\\"stream_governance_cluster\\\
+          \":{\\\"id\\\":\\\"string\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\
+          \n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\"\
           , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
           defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
@@ -1578,14 +1545,14 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"source_code\":\"CREATE STREAM upstream (id integer, name string) WITH (kafka_topic = 'topic', partitions=1, value_format='JSON'); CREATE STREAM downstream AS SELECT * FROM upstream;\",\"retained_topic_names\":[\"topic1\",\"topic2\"],\"activated\":false,\"activation_privilege\":false,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"ksql_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"stream_governance_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"retained_topic_names\":[\"topic1\",\"topic2\"],\"activated\":false,\"activation_privilege\":false,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"ksql_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"stream_governance_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}"
 
           headers = {
               'Authorization': "Basic REPLACE_BASIC_AUTH",
               'content-type': "application/json"
               }
 
-          conn.request("PATCH", "/sd/v1/pipelines/%7Bid%7D?environment=env-00000&spec.kafka_cluster=lkc-00000", payload, headers)
+          conn.request("PATCH", "/sd/v1/pipelines/%7Bid%7D", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1599,7 +1566,7 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/sd/v1/pipelines/%7Bid%7D?environment=env-00000&spec.kafka_cluster=lkc-00000",
+            "path": "/sd/v1/pipelines/%7Bid%7D",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH",
               "content-type": "application/json"
@@ -1623,7 +1590,6 @@ paths:
             spec: {
               display_name: 'MyFirstPipeline',
               description: 'My first pipeline',
-              source_code: 'CREATE STREAM upstream (id integer, name string) WITH (kafka_topic = \'topic\', partitions=1, value_format=\'JSON\'); CREATE STREAM downstream AS SELECT * FROM upstream;',
               retained_topic_names: ['topic1', 'topic2'],
               activated: false,
               activation_privilege: false,
@@ -1639,23 +1605,23 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/sd/v1/pipelines/%7Bid%7D?environment=env-00000&spec.kafka_cluster=lkc-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/sd/v1/pipelines/%7Bid%7D");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"source_code\":\"CREATE STREAM upstream (id integer, name string) WITH (kafka_topic = 'topic', partitions=1, value_format='JSON'); CREATE STREAM downstream AS SELECT * FROM upstream;\",\"retained_topic_names\":[\"topic1\",\"topic2\"],\"activated\":false,\"activation_privilege\":false,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"ksql_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"stream_governance_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"retained_topic_names\":[\"topic1\",\"topic2\"],\"activated\":false,\"activation_privilege\":false,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"ksql_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"stream_governance_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/sd/v1/pipelines/%7Bid%7D?environment=env-00000&spec.kafka_cluster=lkc-00000");
+          var client = new RestClient("https://api.confluent.cloud/sd/v1/pipelines/%7Bid%7D");
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddHeader("content-type", "application/json");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"source_code\":\"CREATE STREAM upstream (id integer, name string) WITH (kafka_topic = 'topic', partitions=1, value_format='JSON'); CREATE STREAM downstream AS SELECT * FROM upstream;\",\"retained_topic_names\":[\"topic1\",\"topic2\"],\"activated\":false,\"activation_privilege\":false,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"ksql_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"stream_governance_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"MyFirstPipeline\",\"description\":\"My first pipeline\",\"retained_topic_names\":[\"topic1\",\"topic2\"],\"activated\":false,\"activation_privilege\":false,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"ksql_cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"stream_governance_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
 components:
   responses:
@@ -2042,15 +2008,10 @@ components:
           description: The description of the pipeline.
           example: My first pipeline
           type: string
-        source_code:
-          description: A list of KSQL statements that define this pipeline.
-          example: CREATE STREAM upstream (id integer, name string) WITH (kafka_topic
-            = 'topic', partitions=1, value_format='JSON'); CREATE STREAM downstream
-            AS SELECT * FROM upstream;
-          type: string
         retained_topic_names:
-          description: A list of Kafka topic names from the activated pipeline to
-            be retained when this pipeline is deactivated.
+          description: |
+            A list of Kafka topic names from the activated pipeline to be retained when
+            this pipeline is deactivated.
           example:
           - topic1
           - topic2
@@ -2069,12 +2030,10 @@ components:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
           description: The environment to which this belongs.
-          x-immutable: true
         kafka_cluster:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
           description: The kafka_cluster to which this belongs.
-          x-immutable: true
         ksql_cluster:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
@@ -2401,15 +2360,10 @@ components:
           description: The description of the pipeline.
           example: My first pipeline
           type: string
-        source_code:
-          description: A list of KSQL statements that define this pipeline.
-          example: CREATE STREAM upstream (id integer, name string) WITH (kafka_topic
-            = 'topic', partitions=1, value_format='JSON'); CREATE STREAM downstream
-            AS SELECT * FROM upstream;
-          type: string
         retained_topic_names:
-          description: A list of Kafka topic names from the activated pipeline to
-            be retained when this pipeline is deactivated.
+          description: |
+            A list of Kafka topic names from the activated pipeline to be retained when
+            this pipeline is deactivated.
           example:
           - topic1
           - topic2
@@ -2424,6 +2378,14 @@ components:
           default: false
           description: Whether the pipeline has privileges to be activated.
           type: boolean
+        environment:
+          allOf:
+          - $ref: '#/components/schemas/ObjectReference'
+          description: The environment to which this belongs.
+        kafka_cluster:
+          allOf:
+          - $ref: '#/components/schemas/ObjectReference'
+          description: The kafka_cluster to which this belongs.
       type: object
       x-enable-id: true
       x-enable-listmeta: true

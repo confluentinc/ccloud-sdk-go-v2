@@ -39,14 +39,16 @@ type SdV1PipelineSpecUpdate struct {
 	DisplayName *string `json:"display_name,omitempty"`
 	// The description of the pipeline.
 	Description *string `json:"description,omitempty"`
-	// A list of KSQL statements that define this pipeline.
-	SourceCode *string `json:"source_code,omitempty"`
-	// A list of Kafka topic names from the activated pipeline to be retained when this pipeline is deactivated.
+	// A list of Kafka topic names from the activated pipeline to be retained when this pipeline is deactivated. 
 	RetainedTopicNames *[]string `json:"retained_topic_names,omitempty"`
 	// The desired state of the pipeline.
 	Activated *bool `json:"activated,omitempty"`
 	// Whether the pipeline has privileges to be activated.
 	ActivationPrivilege *bool `json:"activation_privilege,omitempty"`
+	// The environment to which this belongs.
+	Environment *ObjectReference `json:"environment,omitempty"`
+	// The kafka_cluster to which this belongs.
+	KafkaCluster *ObjectReference `json:"kafka_cluster,omitempty"`
 }
 
 // NewSdV1PipelineSpecUpdate instantiates a new SdV1PipelineSpecUpdate object
@@ -136,38 +138,6 @@ func (o *SdV1PipelineSpecUpdate) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *SdV1PipelineSpecUpdate) SetDescription(v string) {
 	o.Description = &v
-}
-
-// GetSourceCode returns the SourceCode field value if set, zero value otherwise.
-func (o *SdV1PipelineSpecUpdate) GetSourceCode() string {
-	if o == nil || o.SourceCode == nil {
-		var ret string
-		return ret
-	}
-	return *o.SourceCode
-}
-
-// GetSourceCodeOk returns a tuple with the SourceCode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SdV1PipelineSpecUpdate) GetSourceCodeOk() (*string, bool) {
-	if o == nil || o.SourceCode == nil {
-		return nil, false
-	}
-	return o.SourceCode, true
-}
-
-// HasSourceCode returns a boolean if a field has been set.
-func (o *SdV1PipelineSpecUpdate) HasSourceCode() bool {
-	if o != nil && o.SourceCode != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSourceCode gets a reference to the given string and assigns it to the SourceCode field.
-func (o *SdV1PipelineSpecUpdate) SetSourceCode(v string) {
-	o.SourceCode = &v
 }
 
 // GetRetainedTopicNames returns the RetainedTopicNames field value if set, zero value otherwise.
@@ -266,14 +236,79 @@ func (o *SdV1PipelineSpecUpdate) SetActivationPrivilege(v bool) {
 	o.ActivationPrivilege = &v
 }
 
+// GetEnvironment returns the Environment field value if set, zero value otherwise.
+func (o *SdV1PipelineSpecUpdate) GetEnvironment() ObjectReference {
+	if o == nil || o.Environment == nil {
+		var ret ObjectReference
+		return ret
+	}
+	return *o.Environment
+}
+
+// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SdV1PipelineSpecUpdate) GetEnvironmentOk() (*ObjectReference, bool) {
+	if o == nil || o.Environment == nil {
+		return nil, false
+	}
+	return o.Environment, true
+}
+
+// HasEnvironment returns a boolean if a field has been set.
+func (o *SdV1PipelineSpecUpdate) HasEnvironment() bool {
+	if o != nil && o.Environment != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
+func (o *SdV1PipelineSpecUpdate) SetEnvironment(v ObjectReference) {
+	o.Environment = &v
+}
+
+// GetKafkaCluster returns the KafkaCluster field value if set, zero value otherwise.
+func (o *SdV1PipelineSpecUpdate) GetKafkaCluster() ObjectReference {
+	if o == nil || o.KafkaCluster == nil {
+		var ret ObjectReference
+		return ret
+	}
+	return *o.KafkaCluster
+}
+
+// GetKafkaClusterOk returns a tuple with the KafkaCluster field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SdV1PipelineSpecUpdate) GetKafkaClusterOk() (*ObjectReference, bool) {
+	if o == nil || o.KafkaCluster == nil {
+		return nil, false
+	}
+	return o.KafkaCluster, true
+}
+
+// HasKafkaCluster returns a boolean if a field has been set.
+func (o *SdV1PipelineSpecUpdate) HasKafkaCluster() bool {
+	if o != nil && o.KafkaCluster != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetKafkaCluster gets a reference to the given ObjectReference and assigns it to the KafkaCluster field.
+func (o *SdV1PipelineSpecUpdate) SetKafkaCluster(v ObjectReference) {
+	o.KafkaCluster = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *SdV1PipelineSpecUpdate) Redact() {
     o.recurseRedact(o.DisplayName)
     o.recurseRedact(o.Description)
-    o.recurseRedact(o.SourceCode)
     o.recurseRedact(o.RetainedTopicNames)
     o.recurseRedact(o.Activated)
     o.recurseRedact(o.ActivationPrivilege)
+    o.recurseRedact(o.Environment)
+    o.recurseRedact(o.KafkaCluster)
 }
 
 func (o *SdV1PipelineSpecUpdate) recurseRedact(v interface{}) {
@@ -314,9 +349,6 @@ func (o SdV1PipelineSpecUpdate) MarshalJSON() ([]byte, error) {
 	if o.Description != nil {
 		toSerialize["description"] = o.Description
 	}
-	if o.SourceCode != nil {
-		toSerialize["source_code"] = o.SourceCode
-	}
 	if o.RetainedTopicNames != nil {
 		toSerialize["retained_topic_names"] = o.RetainedTopicNames
 	}
@@ -325,6 +357,12 @@ func (o SdV1PipelineSpecUpdate) MarshalJSON() ([]byte, error) {
 	}
 	if o.ActivationPrivilege != nil {
 		toSerialize["activation_privilege"] = o.ActivationPrivilege
+	}
+	if o.Environment != nil {
+		toSerialize["environment"] = o.Environment
+	}
+	if o.KafkaCluster != nil {
+		toSerialize["kafka_cluster"] = o.KafkaCluster
 	}
 	return json.Marshal(toSerialize)
 }

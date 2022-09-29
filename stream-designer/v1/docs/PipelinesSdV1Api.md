@@ -152,7 +152,7 @@ Name | Type | Description  | Notes
 
 ## GetSdV1Pipeline
 
-> SdV1Pipeline GetSdV1Pipeline(ctx, id).Environment(environment).SpecKafkaCluster(specKafkaCluster).IncludeSql(includeSql).Execute()
+> SdV1Pipeline GetSdV1Pipeline(ctx, id).Environment(environment).SpecKafkaCluster(specKafkaCluster).Execute()
 
 Read a Pipeline
 
@@ -174,11 +174,10 @@ func main() {
     environment := "env-00000" // string | Scope the operation to the given environment.
     specKafkaCluster := "lkc-00000" // string | Scope the operation to the given spec.kafka_cluster.
     id := "id_example" // string | The unique identifier for the pipeline.
-    includeSql := "includeSql_example" // string | Include source code or not, values can be true or false (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PipelinesSdV1Api.GetSdV1Pipeline(context.Background(), id).Environment(environment).SpecKafkaCluster(specKafkaCluster).IncludeSql(includeSql).Execute()
+    resp, r, err := api_client.PipelinesSdV1Api.GetSdV1Pipeline(context.Background(), id).Environment(environment).SpecKafkaCluster(specKafkaCluster).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PipelinesSdV1Api.GetSdV1Pipeline``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -206,7 +205,6 @@ Name | Type | Description  | Notes
  **environment** | **string** | Scope the operation to the given environment. | 
  **specKafkaCluster** | **string** | Scope the operation to the given spec.kafka_cluster. | 
 
- **includeSql** | **string** | Include source code or not, values can be true or false | 
 
 ### Return type
 
@@ -300,7 +298,7 @@ Name | Type | Description  | Notes
 
 ## UpdateSdV1Pipeline
 
-> SdV1Pipeline UpdateSdV1Pipeline(ctx, id).Environment(environment).SpecKafkaCluster(specKafkaCluster).SdV1PipelineUpdate(sdV1PipelineUpdate).Execute()
+> SdV1Pipeline UpdateSdV1Pipeline(ctx, id).SdV1PipelineUpdate(sdV1PipelineUpdate).Execute()
 
 Update a Pipeline
 
@@ -319,14 +317,12 @@ import (
 )
 
 func main() {
-    environment := "env-00000" // string | Scope the operation to the given environment.
-    specKafkaCluster := "lkc-00000" // string | Scope the operation to the given spec.kafka_cluster.
     id := "id_example" // string | The unique identifier for the pipeline.
     sdV1PipelineUpdate := *openapiclient.NewSdV1PipelineUpdate() // SdV1PipelineUpdate |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PipelinesSdV1Api.UpdateSdV1Pipeline(context.Background(), id).Environment(environment).SpecKafkaCluster(specKafkaCluster).SdV1PipelineUpdate(sdV1PipelineUpdate).Execute()
+    resp, r, err := api_client.PipelinesSdV1Api.UpdateSdV1Pipeline(context.Background(), id).SdV1PipelineUpdate(sdV1PipelineUpdate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PipelinesSdV1Api.UpdateSdV1Pipeline``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -351,8 +347,6 @@ Other parameters are passed through a pointer to a apiUpdateSdV1PipelineRequest 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **environment** | **string** | Scope the operation to the given environment. | 
- **specKafkaCluster** | **string** | Scope the operation to the given spec.kafka_cluster. | 
 
  **sdV1PipelineUpdate** | [**SdV1PipelineUpdate**](SdV1PipelineUpdate.md) |  | 
 

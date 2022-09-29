@@ -467,7 +467,6 @@ type ApiGetSdV1PipelineRequest struct {
 	environment *string
 	specKafkaCluster *string
 	id string
-	includeSql *string
 }
 
 // Scope the operation to the given environment.
@@ -478,11 +477,6 @@ func (r ApiGetSdV1PipelineRequest) Environment(environment string) ApiGetSdV1Pip
 // Scope the operation to the given spec.kafka_cluster.
 func (r ApiGetSdV1PipelineRequest) SpecKafkaCluster(specKafkaCluster string) ApiGetSdV1PipelineRequest {
 	r.specKafkaCluster = &specKafkaCluster
-	return r
-}
-// Include source code or not, values can be true or false
-func (r ApiGetSdV1PipelineRequest) IncludeSql(includeSql string) ApiGetSdV1PipelineRequest {
-	r.includeSql = &includeSql
 	return r
 }
 
@@ -539,9 +533,6 @@ func (a *PipelinesSdV1ApiService) GetSdV1PipelineExecute(r ApiGetSdV1PipelineReq
 
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	localVarQueryParams.Add("spec.kafka_cluster", parameterToString(*r.specKafkaCluster, ""))
-	if r.includeSql != nil {
-		localVarQueryParams.Add("include_sql", parameterToString(*r.includeSql, ""))
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -827,22 +818,10 @@ func (a *PipelinesSdV1ApiService) ListSdV1PipelinesExecute(r ApiListSdV1Pipeline
 type ApiUpdateSdV1PipelineRequest struct {
 	ctx _context.Context
 	ApiService PipelinesSdV1Api
-	environment *string
-	specKafkaCluster *string
 	id string
 	sdV1PipelineUpdate *SdV1PipelineUpdate
 }
 
-// Scope the operation to the given environment.
-func (r ApiUpdateSdV1PipelineRequest) Environment(environment string) ApiUpdateSdV1PipelineRequest {
-	r.environment = &environment
-	return r
-}
-// Scope the operation to the given spec.kafka_cluster.
-func (r ApiUpdateSdV1PipelineRequest) SpecKafkaCluster(specKafkaCluster string) ApiUpdateSdV1PipelineRequest {
-	r.specKafkaCluster = &specKafkaCluster
-	return r
-}
 func (r ApiUpdateSdV1PipelineRequest) SdV1PipelineUpdate(sdV1PipelineUpdate SdV1PipelineUpdate) ApiUpdateSdV1PipelineRequest {
 	r.sdV1PipelineUpdate = &sdV1PipelineUpdate
 	return r
@@ -894,15 +873,7 @@ func (a *PipelinesSdV1ApiService) UpdateSdV1PipelineExecute(r ApiUpdateSdV1Pipel
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.environment == nil {
-		return localVarReturnValue, nil, reportError("environment is required and must be specified")
-	}
-	if r.specKafkaCluster == nil {
-		return localVarReturnValue, nil, reportError("specKafkaCluster is required and must be specified")
-	}
 
-	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
-	localVarQueryParams.Add("spec.kafka_cluster", parameterToString(*r.specKafkaCluster, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
