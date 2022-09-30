@@ -16,7 +16,7 @@ servers:
   url: https://api.confluent.cloud
 tags:
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Kafka Quota v1](https://img.shields.io/badge/-Request%20Access%20To%20Kafka%20Quota%20v1-%23bc8540)](mailto:ccloud-api-access+kafka-quotas-v1-early-access@confluent.io?subject=Request%20to%20join%20kafka-quotas/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20kafka-quotas/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Kafka Quota v1](https://img.shields.io/badge/-Request%20Access%20To%20Kafka%20Quota%20v1-%23bc8540)](mailto:cloud-client-quotas-ea@confluent.io?subject=Request%20to%20join%20Kafka%20Quotas%20Management%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20kafka-quotas/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
     `ClientQuota` objects represent Client Quotas you can set at the service account level.
 
@@ -32,7 +32,7 @@ paths:
   /kafka-quotas/v1/client-quotas:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Kafka Quota v1](https://img.shields.io/badge/-Request%20Access%20To%20Kafka%20Quota%20v1-%23bc8540)](mailto:ccloud-api-access+kafka-quotas-v1-early-access@confluent.io?subject=Request%20to%20join%20kafka-quotas/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20kafka-quotas/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Kafka Quota v1](https://img.shields.io/badge/-Request%20Access%20To%20Kafka%20Quota%20v1-%23bc8540)](mailto:cloud-client-quotas-ea@confluent.io?subject=Request%20to%20join%20Kafka%20Quotas%20Management%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20kafka-quotas/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Retrieve a sorted, filtered, paginated list of all client quotas.
       operationId: listKafkaQuotasV1ClientQuotas
@@ -303,7 +303,7 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Kafka Quota v1](https://img.shields.io/badge/-Request%20Access%20To%20Kafka%20Quota%20v1-%23bc8540)](mailto:ccloud-api-access+kafka-quotas-v1-early-access@confluent.io?subject=Request%20to%20join%20kafka-quotas/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20kafka-quotas/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Kafka Quota v1](https://img.shields.io/badge/-Request%20Access%20To%20Kafka%20Quota%20v1-%23bc8540)](mailto:cloud-client-quotas-ea@confluent.io?subject=Request%20to%20join%20Kafka%20Quotas%20Management%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20kafka-quotas/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to create a client quota.
       operationId: createKafkaQuotasV1ClientQuota
@@ -541,13 +541,13 @@ paths:
             --url https://api.confluent.cloud/kafka-quotas/v1/client-quotas \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"QuotaForSA1","description":"This quota defines limits on how much the target principals can use cluster lkc-xxxxx","throughput":{"ingress_byte_rate":"string","egress_byte_rate":"string"},"cluster":{"id":"lkc-xxxxx","environment":"string"},"principals":[{"id":"string","environment":"string"}],"environment":[{"id":"env-xxxxx"}]}'
+            --data '{"display_name":"QuotaForSA1","description":"This quota defines limits on how much the target principals can use cluster lkc-xxxxx","throughput":{"ingress_byte_rate":"string","egress_byte_rate":"string"},"cluster":{"id":"lkc-xxxxx","environment":"string"},"principals":[{"id":"string"}],"environment":[{"id":"env-xxxxx"}]}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"lkc-xxxxx\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}],\"environment\":[{\"id\":\"env-xxxxx\"}]}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"lkc-xxxxx\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\"}],\"environment\":[{\"id\":\"env-xxxxx\"}]}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/kafka-quotas/v1/client-quotas")
             .post(body)
@@ -564,12 +564,12 @@ paths:
           \ principals can use cluster lkc-xxxxx\\\",\\\"throughput\\\":{\\\"ingress_byte_rate\\\
           \":\\\"string\\\",\\\"egress_byte_rate\\\":\\\"string\\\"},\\\"cluster\\\
           \":{\\\"id\\\":\\\"lkc-xxxxx\\\",\\\"environment\\\":\\\"string\\\"},\\\"\
-          principals\\\":[{\\\"id\\\":\\\"string\\\",\\\"environment\\\":\\\"string\\\
-          \"}],\\\"environment\\\":[{\\\"id\\\":\\\"env-xxxxx\\\"}]}\")\n\n\treq,\
-          \ _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
-          , \"application/json\")\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
-          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
-          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          principals\\\":[{\\\"id\\\":\\\"string\\\"}],\\\"environment\\\":[{\\\"\
+          id\\\":\\\"env-xxxxx\\\"}]}\")\n\n\treq, _ := http.NewRequest(\"POST\",\
+          \ url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -577,7 +577,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"lkc-xxxxx\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}],\"environment\":[{\"id\":\"env-xxxxx\"}]}"
+          payload = "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"lkc-xxxxx\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\"}],\"environment\":[{\"id\":\"env-xxxxx\"}]}"
 
           headers = {
               'content-type': "application/json",
@@ -623,7 +623,7 @@ paths:
             description: 'This quota defines limits on how much the target principals can use cluster lkc-xxxxx',
             throughput: {ingress_byte_rate: 'string', egress_byte_rate: 'string'},
             cluster: {id: 'lkc-xxxxx', environment: 'string'},
-            principals: [{id: 'string', environment: 'string'}],
+            principals: [{id: 'string'}],
             environment: [{id: 'env-xxxxx'}]
           }));
           req.end();
@@ -639,7 +639,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"lkc-xxxxx\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}],\"environment\":[{\"id\":\"env-xxxxx\"}]}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"lkc-xxxxx\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\"}],\"environment\":[{\"id\":\"env-xxxxx\"}]}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -648,13 +648,13 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"lkc-xxxxx\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}],\"environment\":[{\"id\":\"env-xxxxx\"}]}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"lkc-xxxxx\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\"}],\"environment\":[{\"id\":\"env-xxxxx\"}]}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Kafka Quota v1
   /kafka-quotas/v1/client-quotas/{id}:
     delete:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Kafka Quota v1](https://img.shields.io/badge/-Request%20Access%20To%20Kafka%20Quota%20v1-%23bc8540)](mailto:ccloud-api-access+kafka-quotas-v1-early-access@confluent.io?subject=Request%20to%20join%20kafka-quotas/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20kafka-quotas/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Kafka Quota v1](https://img.shields.io/badge/-Request%20Access%20To%20Kafka%20Quota%20v1-%23bc8540)](mailto:cloud-client-quotas-ea@confluent.io?subject=Request%20to%20join%20Kafka%20Quotas%20Management%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20kafka-quotas/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to delete a client quota.
       operationId: deleteKafkaQuotasV1ClientQuota
@@ -892,7 +892,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Kafka Quota v1](https://img.shields.io/badge/-Request%20Access%20To%20Kafka%20Quota%20v1-%23bc8540)](mailto:ccloud-api-access+kafka-quotas-v1-early-access@confluent.io?subject=Request%20to%20join%20kafka-quotas/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20kafka-quotas/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Kafka Quota v1](https://img.shields.io/badge/-Request%20Access%20To%20Kafka%20Quota%20v1-%23bc8540)](mailto:cloud-client-quotas-ea@confluent.io?subject=Request%20to%20join%20Kafka%20Quotas%20Management%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20kafka-quotas/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to read a client quota.
       operationId: getKafkaQuotasV1ClientQuota
@@ -1157,7 +1157,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Kafka Quota v1](https://img.shields.io/badge/-Request%20Access%20To%20Kafka%20Quota%20v1-%23bc8540)](mailto:ccloud-api-access+kafka-quotas-v1-early-access@confluent.io?subject=Request%20to%20join%20kafka-quotas/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20kafka-quotas/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Kafka Quota v1](https://img.shields.io/badge/-Request%20Access%20To%20Kafka%20Quota%20v1-%23bc8540)](mailto:cloud-client-quotas-ea@confluent.io?subject=Request%20to%20join%20Kafka%20Quotas%20Management%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20kafka-quotas/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to update a client quota.
 
@@ -1178,16 +1178,11 @@ paths:
               allOf:
               - $ref: '#/components/schemas/kafka-quotas.v1.ClientQuotaUpdate'
               - properties:
-                  spec:
-                    properties:
-                      environment:
-                        example:
-                          id: env-00000
-                    required:
-                    - environment
-                    type: object
+                  environment:
+                    example:
+                      id: env-00000
                 required:
-                - spec
+                - environment
                 type: object
       responses:
         "200":
@@ -1385,13 +1380,13 @@ paths:
             --url 'https://api.confluent.cloud/kafka-quotas/v1/client-quotas/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"QuotaForSA1","description":"This quota defines limits on how much the target principals can use cluster lkc-xxxxx","throughput":{"ingress_byte_rate":"string","egress_byte_rate":"string"},"cluster":{"id":"string","environment":"string"},"principals":[{"id":"string","environment":"string"}],"environment":{"id":"string","environment":"string"},"spec":{"environment":{"id":"env-00000"}}}'
+            --data '{"display_name":"QuotaForSA1","description":"This quota defines limits on how much the target principals can use cluster lkc-xxxxx","throughput":{"ingress_byte_rate":"string","egress_byte_rate":"string"},"cluster":{"id":"string","environment":"string"},"principals":[{"id":"string"}],"environment":{"id":"env-00000","environment":"string"}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}],\"environment\":{\"id\":\"string\",\"environment\":\"string\"},\"spec\":{\"environment\":{\"id\":\"env-00000\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\"}],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/kafka-quotas/v1/client-quotas/{id}")
             .patch(body)
@@ -1408,21 +1403,20 @@ paths:
           \ principals can use cluster lkc-xxxxx\\\",\\\"throughput\\\":{\\\"ingress_byte_rate\\\
           \":\\\"string\\\",\\\"egress_byte_rate\\\":\\\"string\\\"},\\\"cluster\\\
           \":{\\\"id\\\":\\\"string\\\",\\\"environment\\\":\\\"string\\\"},\\\"principals\\\
-          \":[{\\\"id\\\":\\\"string\\\",\\\"environment\\\":\\\"string\\\"}],\\\"\
-          environment\\\":{\\\"id\\\":\\\"string\\\",\\\"environment\\\":\\\"string\\\
-          \"},\\\"spec\\\":{\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\"}}}\"\
-          )\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \":[{\\\"id\\\":\\\"string\\\"}],\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
+          \",\\\"environment\\\":\\\"string\\\"}}\")\n\n\treq, _ := http.NewRequest(\"\
+          PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}],\"environment\":{\"id\":\"string\",\"environment\":\"string\"},\"spec\":{\"environment\":{\"id\":\"env-00000\"}}}"
+          payload = "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\"}],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}"
 
           headers = {
               'content-type': "application/json",
@@ -1468,9 +1462,8 @@ paths:
             description: 'This quota defines limits on how much the target principals can use cluster lkc-xxxxx',
             throughput: {ingress_byte_rate: 'string', egress_byte_rate: 'string'},
             cluster: {id: 'string', environment: 'string'},
-            principals: [{id: 'string', environment: 'string'}],
-            environment: {id: 'string', environment: 'string'},
-            spec: {environment: {id: 'env-00000'}}
+            principals: [{id: 'string'}],
+            environment: {id: 'env-00000', environment: 'string'}
           }));
           req.end();
       - lang: C
@@ -1485,7 +1478,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}],\"environment\":{\"id\":\"string\",\"environment\":\"string\"},\"spec\":{\"environment\":{\"id\":\"env-00000\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\"}],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1494,7 +1487,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\",\"environment\":\"string\"}],\"environment\":{\"id\":\"string\",\"environment\":\"string\"},\"spec\":{\"environment\":{\"id\":\"env-00000\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"QuotaForSA1\",\"description\":\"This quota defines limits on how much the target principals can use cluster lkc-xxxxx\",\"throughput\":{\"ingress_byte_rate\":\"string\",\"egress_byte_rate\":\"string\"},\"cluster\":{\"id\":\"string\",\"environment\":\"string\"},\"principals\":[{\"id\":\"string\"}],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Kafka Quota v1
 components:
@@ -1761,7 +1754,7 @@ components:
             A list of service accounts. Special name "default" can be used to represent the default quota for
             all users and service accounts.
           items:
-            $ref: '#/components/schemas/ObjectReference'
+            $ref: '#/components/schemas/GlobalObjectReference'
           minItems: 1
           type: array
         environment:
@@ -1970,6 +1963,140 @@ components:
       - related
       - resource_name
       type: object
+    TypedEnvScopedObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        environment:
+          description: Environment of the referred resource, if env-scoped
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        api_version:
+          description: API group and version of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
+    GlobalObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
+    EnvScopedObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        environment:
+          description: Environment of the referred resource, if env-scoped
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
+    TypedGlobalObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        api_version:
+          description: API group and version of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
     Failure:
       description: Provides information about problems encountered while performing
         an operation.
@@ -2071,7 +2198,7 @@ components:
             A list of service accounts. Special name "default" can be used to represent the default quota for
             all users and service accounts.
           items:
-            $ref: '#/components/schemas/ObjectReference'
+            $ref: '#/components/schemas/GlobalObjectReference'
           minItems: 1
           type: array
       type: object

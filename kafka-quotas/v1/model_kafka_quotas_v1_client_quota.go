@@ -40,7 +40,7 @@ type KafkaQuotasV1ClientQuota struct {
 	// Kind defines the object this REST resource represents.
 	Kind *string `json:"kind,omitempty"`
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
-	Id *string `json:"id,omitempty"`
+	Id       *string     `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
 	// The name of the client quota.
 	DisplayName *string `json:"display_name,omitempty"`
@@ -50,8 +50,8 @@ type KafkaQuotasV1ClientQuota struct {
 	Throughput *KafkaQuotasV1Throughput `json:"throughput,omitempty"`
 	// The cluster to which this belongs.
 	Cluster *ObjectReference `json:"cluster,omitempty"`
-	// A list of service accounts. Special name \"default\" can be used to represent the default quota for all users and service accounts. 
-	Principals *[]ObjectReference `json:"principals,omitempty"`
+	// A list of service accounts. Special name \"default\" can be used to represent the default quota for all users and service accounts.
+	Principals *[]GlobalObjectReference `json:"principals,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
 }
@@ -330,9 +330,9 @@ func (o *KafkaQuotasV1ClientQuota) SetCluster(v ObjectReference) {
 }
 
 // GetPrincipals returns the Principals field value if set, zero value otherwise.
-func (o *KafkaQuotasV1ClientQuota) GetPrincipals() []ObjectReference {
+func (o *KafkaQuotasV1ClientQuota) GetPrincipals() []GlobalObjectReference {
 	if o == nil || o.Principals == nil {
-		var ret []ObjectReference
+		var ret []GlobalObjectReference
 		return ret
 	}
 	return *o.Principals
@@ -340,7 +340,7 @@ func (o *KafkaQuotasV1ClientQuota) GetPrincipals() []ObjectReference {
 
 // GetPrincipalsOk returns a tuple with the Principals field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *KafkaQuotasV1ClientQuota) GetPrincipalsOk() (*[]ObjectReference, bool) {
+func (o *KafkaQuotasV1ClientQuota) GetPrincipalsOk() (*[]GlobalObjectReference, bool) {
 	if o == nil || o.Principals == nil {
 		return nil, false
 	}
@@ -356,8 +356,8 @@ func (o *KafkaQuotasV1ClientQuota) HasPrincipals() bool {
 	return false
 }
 
-// SetPrincipals gets a reference to the given []ObjectReference and assigns it to the Principals field.
-func (o *KafkaQuotasV1ClientQuota) SetPrincipals(v []ObjectReference) {
+// SetPrincipals gets a reference to the given []GlobalObjectReference and assigns it to the Principals field.
+func (o *KafkaQuotasV1ClientQuota) SetPrincipals(v []GlobalObjectReference) {
 	o.Principals = &v
 }
 
@@ -395,46 +395,46 @@ func (o *KafkaQuotasV1ClientQuota) SetEnvironment(v ObjectReference) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *KafkaQuotasV1ClientQuota) Redact() {
-    o.recurseRedact(o.ApiVersion)
-    o.recurseRedact(o.Kind)
-    o.recurseRedact(o.Id)
-    o.recurseRedact(o.Metadata)
-    o.recurseRedact(o.DisplayName)
-    o.recurseRedact(o.Description)
-    o.recurseRedact(o.Throughput)
-    o.recurseRedact(o.Cluster)
-    o.recurseRedact(o.Principals)
-    o.recurseRedact(o.Environment)
+	o.recurseRedact(o.ApiVersion)
+	o.recurseRedact(o.Kind)
+	o.recurseRedact(o.Id)
+	o.recurseRedact(o.Metadata)
+	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.Description)
+	o.recurseRedact(o.Throughput)
+	o.recurseRedact(o.Cluster)
+	o.recurseRedact(o.Principals)
+	o.recurseRedact(o.Environment)
 }
 
 func (o *KafkaQuotasV1ClientQuota) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o KafkaQuotasV1ClientQuota) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o KafkaQuotasV1ClientQuota) MarshalJSON() ([]byte, error) {
@@ -507,5 +507,3 @@ func (v *NullableKafkaQuotasV1ClientQuota) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
