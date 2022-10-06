@@ -39,150 +39,142 @@ var (
 	_ _context.Context
 )
 
-type ServiceAccountsIamV2Api interface {
+type InvitationsIamV2Api interface {
 
 	/*
-		CreateIamV2ServiceAccount Create a Service Account
+		CreateIamV2Invitation Create an Invitation
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to create a service account.
+	Make a request to create an invitation.
+
+	The newly invited user will not have any permissions. Give the user permission by assigning them to one or
+	more roles by creating
+	[role bindings](https://docs.confluent.io/cloud/current/api.html#tag/Role-Bindings-(iamv2))
+	for the created `user`.
+
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiCreateIamV2ServiceAccountRequest
+		 @return ApiCreateIamV2InvitationRequest
 	*/
-	CreateIamV2ServiceAccount(ctx _context.Context) ApiCreateIamV2ServiceAccountRequest
+	CreateIamV2Invitation(ctx _context.Context) ApiCreateIamV2InvitationRequest
 
-	// CreateIamV2ServiceAccountExecute executes the request
-	//  @return IamV2ServiceAccount
-	CreateIamV2ServiceAccountExecute(r ApiCreateIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error)
+	// CreateIamV2InvitationExecute executes the request
+	//  @return IamV2Invitation
+	CreateIamV2InvitationExecute(r ApiCreateIamV2InvitationRequest) (IamV2Invitation, *_nethttp.Response, error)
 
 	/*
-		DeleteIamV2ServiceAccount Delete a Service Account
+		DeleteIamV2Invitation Delete an Invitation
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to delete a service account.
+	Make a request to delete an invitation.
 
-	If successful, this request will also recursively delete all of the service account's associated resources,
-	including its cloud and cluster API keys.
+	Delete will deactivate the user if the user didn't accept the invitation yet.
 
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the service account.
-		 @return ApiDeleteIamV2ServiceAccountRequest
+		 @param id The unique identifier for the invitation.
+		 @return ApiDeleteIamV2InvitationRequest
 	*/
-	DeleteIamV2ServiceAccount(ctx _context.Context, id string) ApiDeleteIamV2ServiceAccountRequest
+	DeleteIamV2Invitation(ctx _context.Context, id string) ApiDeleteIamV2InvitationRequest
 
-	// DeleteIamV2ServiceAccountExecute executes the request
-	DeleteIamV2ServiceAccountExecute(r ApiDeleteIamV2ServiceAccountRequest) (*_nethttp.Response, error)
+	// DeleteIamV2InvitationExecute executes the request
+	DeleteIamV2InvitationExecute(r ApiDeleteIamV2InvitationRequest) (*_nethttp.Response, error)
 
 	/*
-		GetIamV2ServiceAccount Read a Service Account
+		GetIamV2Invitation Read an Invitation
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to read a service account.
+	Make a request to read an invitation.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the service account.
-		 @return ApiGetIamV2ServiceAccountRequest
+		 @param id The unique identifier for the invitation.
+		 @return ApiGetIamV2InvitationRequest
 	*/
-	GetIamV2ServiceAccount(ctx _context.Context, id string) ApiGetIamV2ServiceAccountRequest
+	GetIamV2Invitation(ctx _context.Context, id string) ApiGetIamV2InvitationRequest
 
-	// GetIamV2ServiceAccountExecute executes the request
-	//  @return IamV2ServiceAccount
-	GetIamV2ServiceAccountExecute(r ApiGetIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error)
+	// GetIamV2InvitationExecute executes the request
+	//  @return IamV2Invitation
+	GetIamV2InvitationExecute(r ApiGetIamV2InvitationRequest) (IamV2Invitation, *_nethttp.Response, error)
 
 	/*
-		ListIamV2ServiceAccounts List of Service Accounts
+		ListIamV2Invitations List of Invitations
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Retrieve a sorted, filtered, paginated list of all service accounts.
+	Retrieve a sorted, filtered, paginated list of all invitations.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListIamV2ServiceAccountsRequest
+		 @return ApiListIamV2InvitationsRequest
 	*/
-	ListIamV2ServiceAccounts(ctx _context.Context) ApiListIamV2ServiceAccountsRequest
+	ListIamV2Invitations(ctx _context.Context) ApiListIamV2InvitationsRequest
 
-	// ListIamV2ServiceAccountsExecute executes the request
-	//  @return IamV2ServiceAccountList
-	ListIamV2ServiceAccountsExecute(r ApiListIamV2ServiceAccountsRequest) (IamV2ServiceAccountList, *_nethttp.Response, error)
-
-	/*
-		UpdateIamV2ServiceAccount Update a Service Account
-
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-	Make a request to update a service account.
-
-
-
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the service account.
-		 @return ApiUpdateIamV2ServiceAccountRequest
-	*/
-	UpdateIamV2ServiceAccount(ctx _context.Context, id string) ApiUpdateIamV2ServiceAccountRequest
-
-	// UpdateIamV2ServiceAccountExecute executes the request
-	//  @return IamV2ServiceAccount
-	UpdateIamV2ServiceAccountExecute(r ApiUpdateIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error)
+	// ListIamV2InvitationsExecute executes the request
+	//  @return IamV2InvitationList
+	ListIamV2InvitationsExecute(r ApiListIamV2InvitationsRequest) (IamV2InvitationList, *_nethttp.Response, error)
 }
 
-// ServiceAccountsIamV2ApiService ServiceAccountsIamV2Api service
-type ServiceAccountsIamV2ApiService service
+// InvitationsIamV2ApiService InvitationsIamV2Api service
+type InvitationsIamV2ApiService service
 
-type ApiCreateIamV2ServiceAccountRequest struct {
-	ctx                 _context.Context
-	ApiService          ServiceAccountsIamV2Api
-	iamV2ServiceAccount *IamV2ServiceAccount
+type ApiCreateIamV2InvitationRequest struct {
+	ctx             _context.Context
+	ApiService      InvitationsIamV2Api
+	iamV2Invitation *IamV2Invitation
 }
 
-func (r ApiCreateIamV2ServiceAccountRequest) IamV2ServiceAccount(iamV2ServiceAccount IamV2ServiceAccount) ApiCreateIamV2ServiceAccountRequest {
-	r.iamV2ServiceAccount = &iamV2ServiceAccount
+func (r ApiCreateIamV2InvitationRequest) IamV2Invitation(iamV2Invitation IamV2Invitation) ApiCreateIamV2InvitationRequest {
+	r.iamV2Invitation = &iamV2Invitation
 	return r
 }
 
-func (r ApiCreateIamV2ServiceAccountRequest) Execute() (IamV2ServiceAccount, *_nethttp.Response, error) {
-	return r.ApiService.CreateIamV2ServiceAccountExecute(r)
+func (r ApiCreateIamV2InvitationRequest) Execute() (IamV2Invitation, *_nethttp.Response, error) {
+	return r.ApiService.CreateIamV2InvitationExecute(r)
 }
 
 /*
-CreateIamV2ServiceAccount Create a Service Account
+CreateIamV2Invitation Create an Invitation
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to create a service account.
+Make a request to create an invitation.
+
+The newly invited user will not have any permissions. Give the user permission by assigning them to one or
+more roles by creating
+[role bindings](https://docs.confluent.io/cloud/current/api.html#tag/Role-Bindings-(iamv2))
+for the created `user`.
+
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamV2ServiceAccountRequest
+ @return ApiCreateIamV2InvitationRequest
 */
-func (a *ServiceAccountsIamV2ApiService) CreateIamV2ServiceAccount(ctx _context.Context) ApiCreateIamV2ServiceAccountRequest {
-	return ApiCreateIamV2ServiceAccountRequest{
+func (a *InvitationsIamV2ApiService) CreateIamV2Invitation(ctx _context.Context) ApiCreateIamV2InvitationRequest {
+	return ApiCreateIamV2InvitationRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return IamV2ServiceAccount
-func (a *ServiceAccountsIamV2ApiService) CreateIamV2ServiceAccountExecute(r ApiCreateIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error) {
+//  @return IamV2Invitation
+func (a *InvitationsIamV2ApiService) CreateIamV2InvitationExecute(r ApiCreateIamV2InvitationRequest) (IamV2Invitation, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  IamV2ServiceAccount
+		localVarReturnValue  IamV2Invitation
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceAccountsIamV2ApiService.CreateIamV2ServiceAccount")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InvitationsIamV2ApiService.CreateIamV2Invitation")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/iam/v2/service-accounts"
+	localVarPath := localBasePath + "/iam/v2/invitations"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -206,7 +198,7 @@ func (a *ServiceAccountsIamV2ApiService) CreateIamV2ServiceAccountExecute(r ApiC
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.iamV2ServiceAccount
+	localVarPostBody = r.iamV2Invitation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -313,33 +305,32 @@ func (a *ServiceAccountsIamV2ApiService) CreateIamV2ServiceAccountExecute(r ApiC
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteIamV2ServiceAccountRequest struct {
+type ApiDeleteIamV2InvitationRequest struct {
 	ctx        _context.Context
-	ApiService ServiceAccountsIamV2Api
+	ApiService InvitationsIamV2Api
 	id         string
 }
 
-func (r ApiDeleteIamV2ServiceAccountRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.DeleteIamV2ServiceAccountExecute(r)
+func (r ApiDeleteIamV2InvitationRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteIamV2InvitationExecute(r)
 }
 
 /*
-DeleteIamV2ServiceAccount Delete a Service Account
+DeleteIamV2Invitation Delete an Invitation
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to delete a service account.
+Make a request to delete an invitation.
 
-If successful, this request will also recursively delete all of the service account's associated resources,
-including its cloud and cluster API keys.
+Delete will deactivate the user if the user didn't accept the invitation yet.
 
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the service account.
- @return ApiDeleteIamV2ServiceAccountRequest
+ @param id The unique identifier for the invitation.
+ @return ApiDeleteIamV2InvitationRequest
 */
-func (a *ServiceAccountsIamV2ApiService) DeleteIamV2ServiceAccount(ctx _context.Context, id string) ApiDeleteIamV2ServiceAccountRequest {
-	return ApiDeleteIamV2ServiceAccountRequest{
+func (a *InvitationsIamV2ApiService) DeleteIamV2Invitation(ctx _context.Context, id string) ApiDeleteIamV2InvitationRequest {
+	return ApiDeleteIamV2InvitationRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -347,7 +338,7 @@ func (a *ServiceAccountsIamV2ApiService) DeleteIamV2ServiceAccount(ctx _context.
 }
 
 // Execute executes the request
-func (a *ServiceAccountsIamV2ApiService) DeleteIamV2ServiceAccountExecute(r ApiDeleteIamV2ServiceAccountRequest) (*_nethttp.Response, error) {
+func (a *InvitationsIamV2ApiService) DeleteIamV2InvitationExecute(r ApiDeleteIamV2InvitationRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
@@ -356,12 +347,12 @@ func (a *ServiceAccountsIamV2ApiService) DeleteIamV2ServiceAccountExecute(r ApiD
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceAccountsIamV2ApiService.DeleteIamV2ServiceAccount")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InvitationsIamV2ApiService.DeleteIamV2Invitation")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/iam/v2/service-accounts/{id}"
+	localVarPath := localBasePath + "/iam/v2/invitations/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -462,29 +453,29 @@ func (a *ServiceAccountsIamV2ApiService) DeleteIamV2ServiceAccountExecute(r ApiD
 	return localVarHTTPResponse, nil
 }
 
-type ApiGetIamV2ServiceAccountRequest struct {
+type ApiGetIamV2InvitationRequest struct {
 	ctx        _context.Context
-	ApiService ServiceAccountsIamV2Api
+	ApiService InvitationsIamV2Api
 	id         string
 }
 
-func (r ApiGetIamV2ServiceAccountRequest) Execute() (IamV2ServiceAccount, *_nethttp.Response, error) {
-	return r.ApiService.GetIamV2ServiceAccountExecute(r)
+func (r ApiGetIamV2InvitationRequest) Execute() (IamV2Invitation, *_nethttp.Response, error) {
+	return r.ApiService.GetIamV2InvitationExecute(r)
 }
 
 /*
-GetIamV2ServiceAccount Read a Service Account
+GetIamV2Invitation Read an Invitation
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to read a service account.
+Make a request to read an invitation.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the service account.
- @return ApiGetIamV2ServiceAccountRequest
+ @param id The unique identifier for the invitation.
+ @return ApiGetIamV2InvitationRequest
 */
-func (a *ServiceAccountsIamV2ApiService) GetIamV2ServiceAccount(ctx _context.Context, id string) ApiGetIamV2ServiceAccountRequest {
-	return ApiGetIamV2ServiceAccountRequest{
+func (a *InvitationsIamV2ApiService) GetIamV2Invitation(ctx _context.Context, id string) ApiGetIamV2InvitationRequest {
+	return ApiGetIamV2InvitationRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -492,23 +483,23 @@ func (a *ServiceAccountsIamV2ApiService) GetIamV2ServiceAccount(ctx _context.Con
 }
 
 // Execute executes the request
-//  @return IamV2ServiceAccount
-func (a *ServiceAccountsIamV2ApiService) GetIamV2ServiceAccountExecute(r ApiGetIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error) {
+//  @return IamV2Invitation
+func (a *InvitationsIamV2ApiService) GetIamV2InvitationExecute(r ApiGetIamV2InvitationRequest) (IamV2Invitation, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  IamV2ServiceAccount
+		localVarReturnValue  IamV2Invitation
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceAccountsIamV2ApiService.GetIamV2ServiceAccount")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InvitationsIamV2ApiService.GetIamV2Invitation")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/iam/v2/service-accounts/{id}"
+	localVarPath := localBasePath + "/iam/v2/invitations/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -618,69 +609,109 @@ func (a *ServiceAccountsIamV2ApiService) GetIamV2ServiceAccountExecute(r ApiGetI
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListIamV2ServiceAccountsRequest struct {
+type ApiListIamV2InvitationsRequest struct {
 	ctx        _context.Context
-	ApiService ServiceAccountsIamV2Api
+	ApiService InvitationsIamV2Api
+	email      *string
+	status     *string
+	user       *string
+	creator    *string
 	pageSize   *int32
 	pageToken  *string
 }
 
+// Filter the results by exact match for email.
+func (r ApiListIamV2InvitationsRequest) Email(email string) ApiListIamV2InvitationsRequest {
+	r.email = &email
+	return r
+}
+
+// Filter the results by exact match for status.
+func (r ApiListIamV2InvitationsRequest) Status(status string) ApiListIamV2InvitationsRequest {
+	r.status = &status
+	return r
+}
+
+// Filter the results by exact match for user.
+func (r ApiListIamV2InvitationsRequest) User(user string) ApiListIamV2InvitationsRequest {
+	r.user = &user
+	return r
+}
+
+// Filter the results by exact match for creator.
+func (r ApiListIamV2InvitationsRequest) Creator(creator string) ApiListIamV2InvitationsRequest {
+	r.creator = &creator
+	return r
+}
+
 // A pagination size for collection requests.
-func (r ApiListIamV2ServiceAccountsRequest) PageSize(pageSize int32) ApiListIamV2ServiceAccountsRequest {
+func (r ApiListIamV2InvitationsRequest) PageSize(pageSize int32) ApiListIamV2InvitationsRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
 // An opaque pagination token for collection requests.
-func (r ApiListIamV2ServiceAccountsRequest) PageToken(pageToken string) ApiListIamV2ServiceAccountsRequest {
+func (r ApiListIamV2InvitationsRequest) PageToken(pageToken string) ApiListIamV2InvitationsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-func (r ApiListIamV2ServiceAccountsRequest) Execute() (IamV2ServiceAccountList, *_nethttp.Response, error) {
-	return r.ApiService.ListIamV2ServiceAccountsExecute(r)
+func (r ApiListIamV2InvitationsRequest) Execute() (IamV2InvitationList, *_nethttp.Response, error) {
+	return r.ApiService.ListIamV2InvitationsExecute(r)
 }
 
 /*
-ListIamV2ServiceAccounts List of Service Accounts
+ListIamV2Invitations List of Invitations
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Retrieve a sorted, filtered, paginated list of all service accounts.
+Retrieve a sorted, filtered, paginated list of all invitations.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListIamV2ServiceAccountsRequest
+ @return ApiListIamV2InvitationsRequest
 */
-func (a *ServiceAccountsIamV2ApiService) ListIamV2ServiceAccounts(ctx _context.Context) ApiListIamV2ServiceAccountsRequest {
-	return ApiListIamV2ServiceAccountsRequest{
+func (a *InvitationsIamV2ApiService) ListIamV2Invitations(ctx _context.Context) ApiListIamV2InvitationsRequest {
+	return ApiListIamV2InvitationsRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return IamV2ServiceAccountList
-func (a *ServiceAccountsIamV2ApiService) ListIamV2ServiceAccountsExecute(r ApiListIamV2ServiceAccountsRequest) (IamV2ServiceAccountList, *_nethttp.Response, error) {
+//  @return IamV2InvitationList
+func (a *InvitationsIamV2ApiService) ListIamV2InvitationsExecute(r ApiListIamV2InvitationsRequest) (IamV2InvitationList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  IamV2ServiceAccountList
+		localVarReturnValue  IamV2InvitationList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceAccountsIamV2ApiService.ListIamV2ServiceAccounts")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InvitationsIamV2ApiService.ListIamV2Invitations")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/iam/v2/service-accounts"
+	localVarPath := localBasePath + "/iam/v2/invitations"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.email != nil {
+		localVarQueryParams.Add("email", parameterToString(*r.email, ""))
+	}
+	if r.status != nil {
+		localVarQueryParams.Add("status", parameterToString(*r.status, ""))
+	}
+	if r.user != nil {
+		localVarQueryParams.Add("user", parameterToString(*r.user, ""))
+	}
+	if r.creator != nil {
+		localVarQueryParams.Add("creator", parameterToString(*r.creator, ""))
+	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}
@@ -747,192 +778,6 @@ func (a *ServiceAccountsIamV2ApiService) ListIamV2ServiceAccountsExecute(r ApiLi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateIamV2ServiceAccountRequest struct {
-	ctx                       _context.Context
-	ApiService                ServiceAccountsIamV2Api
-	id                        string
-	iamV2ServiceAccountUpdate *IamV2ServiceAccountUpdate
-}
-
-func (r ApiUpdateIamV2ServiceAccountRequest) IamV2ServiceAccountUpdate(iamV2ServiceAccountUpdate IamV2ServiceAccountUpdate) ApiUpdateIamV2ServiceAccountRequest {
-	r.iamV2ServiceAccountUpdate = &iamV2ServiceAccountUpdate
-	return r
-}
-
-func (r ApiUpdateIamV2ServiceAccountRequest) Execute() (IamV2ServiceAccount, *_nethttp.Response, error) {
-	return r.ApiService.UpdateIamV2ServiceAccountExecute(r)
-}
-
-/*
-UpdateIamV2ServiceAccount Update a Service Account
-
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-Make a request to update a service account.
-
-
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the service account.
- @return ApiUpdateIamV2ServiceAccountRequest
-*/
-func (a *ServiceAccountsIamV2ApiService) UpdateIamV2ServiceAccount(ctx _context.Context, id string) ApiUpdateIamV2ServiceAccountRequest {
-	return ApiUpdateIamV2ServiceAccountRequest{
-		ApiService: a,
-		ctx:        ctx,
-		id:         id,
-	}
-}
-
-// Execute executes the request
-//  @return IamV2ServiceAccount
-func (a *ServiceAccountsIamV2ApiService) UpdateIamV2ServiceAccountExecute(r ApiUpdateIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamV2ServiceAccount
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceAccountsIamV2ApiService.UpdateIamV2ServiceAccount")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/iam/v2/service-accounts/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.iamV2ServiceAccountUpdate
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 402 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

@@ -64,6 +64,8 @@ type APIClient struct {
 
 	// API Services
 
+	InvitationsIamV2Api InvitationsIamV2Api
+
 	ServiceAccountsIamV2Api ServiceAccountsIamV2Api
 
 	UsersIamV2Api UsersIamV2Api
@@ -85,6 +87,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
+	c.InvitationsIamV2Api = (*InvitationsIamV2ApiService)(&c.common)
 	c.ServiceAccountsIamV2Api = (*ServiceAccountsIamV2ApiService)(&c.common)
 	c.UsersIamV2Api = (*UsersIamV2ApiService)(&c.common)
 

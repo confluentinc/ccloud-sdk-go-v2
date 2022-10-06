@@ -42,19 +42,19 @@ var (
 type UsersIamV2Api interface {
 
 	/*
-	DeleteIamV2User Delete a User
+		DeleteIamV2User Delete a User
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to delete a user.
+	Make a request to delete a user.
 
-If successful, this request will also recursively delete all of the user's associated resources,
-including its cloud and cluster API keys.
+	If successful, this request will also recursively delete all of the user's associated resources,
+	including its cloud and cluster API keys.
 
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the user.
-	 @return ApiDeleteIamV2UserRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the user.
+		 @return ApiDeleteIamV2UserRequest
 	*/
 	DeleteIamV2User(ctx _context.Context, id string) ApiDeleteIamV2UserRequest
 
@@ -62,15 +62,15 @@ including its cloud and cluster API keys.
 	DeleteIamV2UserExecute(r ApiDeleteIamV2UserRequest) (*_nethttp.Response, error)
 
 	/*
-	GetIamV2User Read a User
+		GetIamV2User Read a User
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to read a user.
+	Make a request to read a user.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the user.
-	 @return ApiGetIamV2UserRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the user.
+		 @return ApiGetIamV2UserRequest
 	*/
 	GetIamV2User(ctx _context.Context, id string) ApiGetIamV2UserRequest
 
@@ -79,14 +79,14 @@ Make a request to read a user.
 	GetIamV2UserExecute(r ApiGetIamV2UserRequest) (IamV2User, *_nethttp.Response, error)
 
 	/*
-	ListIamV2Users List of Users
+		ListIamV2Users List of Users
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Retrieve a sorted, filtered, paginated list of all users.
+	Retrieve a sorted, filtered, paginated list of all users.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiListIamV2UsersRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListIamV2UsersRequest
 	*/
 	ListIamV2Users(ctx _context.Context) ApiListIamV2UsersRequest
 
@@ -95,17 +95,17 @@ Retrieve a sorted, filtered, paginated list of all users.
 	ListIamV2UsersExecute(r ApiListIamV2UsersRequest) (IamV2UserList, *_nethttp.Response, error)
 
 	/*
-	UpdateIamV2User Update a User
+		UpdateIamV2User Update a User
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to update a user.
+	Make a request to update a user.
 
 
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the user.
-	 @return ApiUpdateIamV2UserRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the user.
+		 @return ApiUpdateIamV2UserRequest
 	*/
 	UpdateIamV2User(ctx _context.Context, id string) ApiUpdateIamV2UserRequest
 
@@ -118,11 +118,10 @@ Make a request to update a user.
 type UsersIamV2ApiService service
 
 type ApiDeleteIamV2UserRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService UsersIamV2Api
-	id string
+	id         string
 }
-
 
 func (r ApiDeleteIamV2UserRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteIamV2UserExecute(r)
@@ -146,8 +145,8 @@ including its cloud and cluster API keys.
 func (a *UsersIamV2ApiService) DeleteIamV2User(ctx _context.Context, id string) ApiDeleteIamV2UserRequest {
 	return ApiDeleteIamV2UserRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
@@ -268,11 +267,10 @@ func (a *UsersIamV2ApiService) DeleteIamV2UserExecute(r ApiDeleteIamV2UserReques
 }
 
 type ApiGetIamV2UserRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService UsersIamV2Api
-	id string
+	id         string
 }
-
 
 func (r ApiGetIamV2UserRequest) Execute() (IamV2User, *_nethttp.Response, error) {
 	return r.ApiService.GetIamV2UserExecute(r)
@@ -292,8 +290,8 @@ Make a request to read a user.
 func (a *UsersIamV2ApiService) GetIamV2User(ctx _context.Context, id string) ApiGetIamV2UserRequest {
 	return ApiGetIamV2UserRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
@@ -425,10 +423,10 @@ func (a *UsersIamV2ApiService) GetIamV2UserExecute(r ApiGetIamV2UserRequest) (Ia
 }
 
 type ApiListIamV2UsersRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService UsersIamV2Api
-	pageSize *int32
-	pageToken *string
+	pageSize   *int32
+	pageToken  *string
 }
 
 // A pagination size for collection requests.
@@ -436,6 +434,7 @@ func (r ApiListIamV2UsersRequest) PageSize(pageSize int32) ApiListIamV2UsersRequ
 	r.pageSize = &pageSize
 	return r
 }
+
 // An opaque pagination token for collection requests.
 func (r ApiListIamV2UsersRequest) PageToken(pageToken string) ApiListIamV2UsersRequest {
 	r.pageToken = &pageToken
@@ -459,7 +458,7 @@ Retrieve a sorted, filtered, paginated list of all users.
 func (a *UsersIamV2ApiService) ListIamV2Users(ctx _context.Context) ApiListIamV2UsersRequest {
 	return ApiListIamV2UsersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
@@ -586,9 +585,9 @@ func (a *UsersIamV2ApiService) ListIamV2UsersExecute(r ApiListIamV2UsersRequest)
 }
 
 type ApiUpdateIamV2UserRequest struct {
-	ctx _context.Context
-	ApiService UsersIamV2Api
-	id string
+	ctx             _context.Context
+	ApiService      UsersIamV2Api
+	id              string
 	iamV2UserUpdate *IamV2UserUpdate
 }
 
@@ -617,8 +616,8 @@ Make a request to update a user.
 func (a *UsersIamV2ApiService) UpdateIamV2User(ctx _context.Context, id string) ApiUpdateIamV2UserRequest {
 	return ApiUpdateIamV2UserRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
@@ -728,6 +727,16 @@ func (a *UsersIamV2ApiService) UpdateIamV2UserExecute(r ApiUpdateIamV2UserReques
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

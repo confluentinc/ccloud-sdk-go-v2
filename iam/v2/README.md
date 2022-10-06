@@ -79,6 +79,10 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*InvitationsIamV2Api* | [**CreateIamV2Invitation**](docs/InvitationsIamV2Api.md#createiamv2invitation) | **Post** /iam/v2/invitations | Create an Invitation
+*InvitationsIamV2Api* | [**DeleteIamV2Invitation**](docs/InvitationsIamV2Api.md#deleteiamv2invitation) | **Delete** /iam/v2/invitations/{id} | Delete an Invitation
+*InvitationsIamV2Api* | [**GetIamV2Invitation**](docs/InvitationsIamV2Api.md#getiamv2invitation) | **Get** /iam/v2/invitations/{id} | Read an Invitation
+*InvitationsIamV2Api* | [**ListIamV2Invitations**](docs/InvitationsIamV2Api.md#listiamv2invitations) | **Get** /iam/v2/invitations | List of Invitations
 *ServiceAccountsIamV2Api* | [**CreateIamV2ServiceAccount**](docs/ServiceAccountsIamV2Api.md#createiamv2serviceaccount) | **Post** /iam/v2/service-accounts | Create a Service Account
 *ServiceAccountsIamV2Api* | [**DeleteIamV2ServiceAccount**](docs/ServiceAccountsIamV2Api.md#deleteiamv2serviceaccount) | **Delete** /iam/v2/service-accounts/{id} | Delete a Service Account
 *ServiceAccountsIamV2Api* | [**GetIamV2ServiceAccount**](docs/ServiceAccountsIamV2Api.md#getiamv2serviceaccount) | **Get** /iam/v2/service-accounts/{id} | Read a Service Account
@@ -95,6 +99,9 @@ Class | Method | HTTP request | Description
  - [Error](docs/Error.md)
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
+ - [GlobalObjectReference](docs/GlobalObjectReference.md)
+ - [IamV2Invitation](docs/IamV2Invitation.md)
+ - [IamV2InvitationList](docs/IamV2InvitationList.md)
  - [IamV2ServiceAccount](docs/IamV2ServiceAccount.md)
  - [IamV2ServiceAccountList](docs/IamV2ServiceAccountList.md)
  - [IamV2ServiceAccountUpdate](docs/IamV2ServiceAccountUpdate.md)
