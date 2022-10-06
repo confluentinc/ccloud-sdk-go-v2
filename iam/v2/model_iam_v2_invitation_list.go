@@ -33,23 +33,23 @@ import (
 	"reflect"
 )
 
-// IamV2UserList `User` objects represent individuals who may access your Confluent resources.  The API allows you to retrieve, update, and delete individual users, as well as list of all your users. This API cannot be used to create new user accounts.   Related guide: [Users in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/user-account.html).  ## The Users Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.User\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `users_per_org` | Users in one Confluent Cloud organization |
-type IamV2UserList struct {
+// IamV2InvitationList `Invitation` objects represent invitations to invite users to join your organizations in Confluent Cloud.  The API allows you to list all your invitations, as well as create, read, and delete a specified invitation.   Related guide: [User invitations in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/identity/user-accounts.html).  ## The Invitations Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.Invitation\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `invitations_per_org` | Invitations in a Confluent Cloud organization |
+type IamV2InvitationList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version"`
 	// Kind defines the object this REST resource represents.
 	Kind     string   `json:"kind"`
 	Metadata ListMeta `json:"metadata"`
 	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
-	Data []IamV2User `json:"data"`
+	Data []IamV2Invitation `json:"data"`
 }
 
-// NewIamV2UserList instantiates a new IamV2UserList object
+// NewIamV2InvitationList instantiates a new IamV2InvitationList object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIamV2UserList(apiVersion string, kind string, metadata ListMeta, data []IamV2User) *IamV2UserList {
-	this := IamV2UserList{}
+func NewIamV2InvitationList(apiVersion string, kind string, metadata ListMeta, data []IamV2Invitation) *IamV2InvitationList {
+	this := IamV2InvitationList{}
 	this.ApiVersion = apiVersion
 	this.Kind = kind
 	this.Metadata = metadata
@@ -57,16 +57,16 @@ func NewIamV2UserList(apiVersion string, kind string, metadata ListMeta, data []
 	return &this
 }
 
-// NewIamV2UserListWithDefaults instantiates a new IamV2UserList object
+// NewIamV2InvitationListWithDefaults instantiates a new IamV2InvitationList object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewIamV2UserListWithDefaults() *IamV2UserList {
-	this := IamV2UserList{}
+func NewIamV2InvitationListWithDefaults() *IamV2InvitationList {
+	this := IamV2InvitationList{}
 	return &this
 }
 
 // GetApiVersion returns the ApiVersion field value
-func (o *IamV2UserList) GetApiVersion() string {
+func (o *IamV2InvitationList) GetApiVersion() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -77,7 +77,7 @@ func (o *IamV2UserList) GetApiVersion() string {
 
 // GetApiVersionOk returns a tuple with the ApiVersion field value
 // and a boolean to check if the value has been set.
-func (o *IamV2UserList) GetApiVersionOk() (*string, bool) {
+func (o *IamV2InvitationList) GetApiVersionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -85,12 +85,12 @@ func (o *IamV2UserList) GetApiVersionOk() (*string, bool) {
 }
 
 // SetApiVersion sets field value
-func (o *IamV2UserList) SetApiVersion(v string) {
+func (o *IamV2InvitationList) SetApiVersion(v string) {
 	o.ApiVersion = v
 }
 
 // GetKind returns the Kind field value
-func (o *IamV2UserList) GetKind() string {
+func (o *IamV2InvitationList) GetKind() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -101,7 +101,7 @@ func (o *IamV2UserList) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *IamV2UserList) GetKindOk() (*string, bool) {
+func (o *IamV2InvitationList) GetKindOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -109,12 +109,12 @@ func (o *IamV2UserList) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *IamV2UserList) SetKind(v string) {
+func (o *IamV2InvitationList) SetKind(v string) {
 	o.Kind = v
 }
 
 // GetMetadata returns the Metadata field value
-func (o *IamV2UserList) GetMetadata() ListMeta {
+func (o *IamV2InvitationList) GetMetadata() ListMeta {
 	if o == nil {
 		var ret ListMeta
 		return ret
@@ -125,7 +125,7 @@ func (o *IamV2UserList) GetMetadata() ListMeta {
 
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
-func (o *IamV2UserList) GetMetadataOk() (*ListMeta, bool) {
+func (o *IamV2InvitationList) GetMetadataOk() (*ListMeta, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -133,14 +133,14 @@ func (o *IamV2UserList) GetMetadataOk() (*ListMeta, bool) {
 }
 
 // SetMetadata sets field value
-func (o *IamV2UserList) SetMetadata(v ListMeta) {
+func (o *IamV2InvitationList) SetMetadata(v ListMeta) {
 	o.Metadata = v
 }
 
 // GetData returns the Data field value
-func (o *IamV2UserList) GetData() []IamV2User {
+func (o *IamV2InvitationList) GetData() []IamV2Invitation {
 	if o == nil {
-		var ret []IamV2User
+		var ret []IamV2Invitation
 		return ret
 	}
 
@@ -149,7 +149,7 @@ func (o *IamV2UserList) GetData() []IamV2User {
 
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
-func (o *IamV2UserList) GetDataOk() (*[]IamV2User, bool) {
+func (o *IamV2InvitationList) GetDataOk() (*[]IamV2Invitation, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -157,19 +157,19 @@ func (o *IamV2UserList) GetDataOk() (*[]IamV2User, bool) {
 }
 
 // SetData sets field value
-func (o *IamV2UserList) SetData(v []IamV2User) {
+func (o *IamV2InvitationList) SetData(v []IamV2Invitation) {
 	o.Data = v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *IamV2UserList) Redact() {
+func (o *IamV2InvitationList) Redact() {
 	o.recurseRedact(&o.ApiVersion)
 	o.recurseRedact(&o.Kind)
 	o.recurseRedact(&o.Metadata)
 	o.recurseRedact(&o.Data)
 }
 
-func (o *IamV2UserList) recurseRedact(v interface{}) {
+func (o *IamV2InvitationList) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -194,12 +194,12 @@ func (o *IamV2UserList) recurseRedact(v interface{}) {
 	}
 }
 
-func (o IamV2UserList) zeroField(v interface{}) {
+func (o IamV2InvitationList) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o IamV2UserList) MarshalJSON() ([]byte, error) {
+func (o IamV2InvitationList) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["api_version"] = o.ApiVersion
@@ -216,38 +216,38 @@ func (o IamV2UserList) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableIamV2UserList struct {
-	value *IamV2UserList
+type NullableIamV2InvitationList struct {
+	value *IamV2InvitationList
 	isSet bool
 }
 
-func (v NullableIamV2UserList) Get() *IamV2UserList {
+func (v NullableIamV2InvitationList) Get() *IamV2InvitationList {
 	return v.value
 }
 
-func (v *NullableIamV2UserList) Set(val *IamV2UserList) {
+func (v *NullableIamV2InvitationList) Set(val *IamV2InvitationList) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableIamV2UserList) IsSet() bool {
+func (v NullableIamV2InvitationList) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableIamV2UserList) Unset() {
+func (v *NullableIamV2InvitationList) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableIamV2UserList(val *IamV2UserList) *NullableIamV2UserList {
-	return &NullableIamV2UserList{value: val, isSet: true}
+func NewNullableIamV2InvitationList(val *IamV2InvitationList) *NullableIamV2InvitationList {
+	return &NullableIamV2InvitationList{value: val, isSet: true}
 }
 
-func (v NullableIamV2UserList) MarshalJSON() ([]byte, error) {
+func (v NullableIamV2InvitationList) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableIamV2UserList) UnmarshalJSON(src []byte) error {
+func (v *NullableIamV2InvitationList) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
