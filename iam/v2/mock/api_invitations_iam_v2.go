@@ -5,70 +5,71 @@
 package mock
 
 import (
-	command_line_arguments "command-line-arguments"
 	context "context"
 	net_http "net/http"
 	sync "sync"
+
+	github_com_confluentinc_ccloud_sdk_go_v2_iam_v2 "github.com/confluentinc/ccloud-sdk-go-v2/iam/v2"
 )
 
 // InvitationsIamV2Api is a mock of InvitationsIamV2Api interface
 type InvitationsIamV2Api struct {
 	lockCreateIamV2Invitation sync.Mutex
-	CreateIamV2InvitationFunc func(ctx context.Context) command_line_arguments.ApiCreateIamV2InvitationRequest
+	CreateIamV2InvitationFunc func(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiCreateIamV2InvitationRequest
 
 	lockCreateIamV2InvitationExecute sync.Mutex
-	CreateIamV2InvitationExecuteFunc func(r command_line_arguments.ApiCreateIamV2InvitationRequest) (command_line_arguments.IamV2Invitation, *net_http.Response, error)
+	CreateIamV2InvitationExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiCreateIamV2InvitationRequest) (github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.IamV2Invitation, *net_http.Response, error)
 
 	lockDeleteIamV2Invitation sync.Mutex
-	DeleteIamV2InvitationFunc func(ctx context.Context, id string) command_line_arguments.ApiDeleteIamV2InvitationRequest
+	DeleteIamV2InvitationFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiDeleteIamV2InvitationRequest
 
 	lockDeleteIamV2InvitationExecute sync.Mutex
-	DeleteIamV2InvitationExecuteFunc func(r command_line_arguments.ApiDeleteIamV2InvitationRequest) (*net_http.Response, error)
+	DeleteIamV2InvitationExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiDeleteIamV2InvitationRequest) (*net_http.Response, error)
 
 	lockGetIamV2Invitation sync.Mutex
-	GetIamV2InvitationFunc func(ctx context.Context, id string) command_line_arguments.ApiGetIamV2InvitationRequest
+	GetIamV2InvitationFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiGetIamV2InvitationRequest
 
 	lockGetIamV2InvitationExecute sync.Mutex
-	GetIamV2InvitationExecuteFunc func(r command_line_arguments.ApiGetIamV2InvitationRequest) (command_line_arguments.IamV2Invitation, *net_http.Response, error)
+	GetIamV2InvitationExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiGetIamV2InvitationRequest) (github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.IamV2Invitation, *net_http.Response, error)
 
 	lockListIamV2Invitations sync.Mutex
-	ListIamV2InvitationsFunc func(ctx context.Context) command_line_arguments.ApiListIamV2InvitationsRequest
+	ListIamV2InvitationsFunc func(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiListIamV2InvitationsRequest
 
 	lockListIamV2InvitationsExecute sync.Mutex
-	ListIamV2InvitationsExecuteFunc func(r command_line_arguments.ApiListIamV2InvitationsRequest) (command_line_arguments.IamV2InvitationList, *net_http.Response, error)
+	ListIamV2InvitationsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiListIamV2InvitationsRequest) (github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.IamV2InvitationList, *net_http.Response, error)
 
 	calls struct {
 		CreateIamV2Invitation []struct {
 			Ctx context.Context
 		}
 		CreateIamV2InvitationExecute []struct {
-			R command_line_arguments.ApiCreateIamV2InvitationRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiCreateIamV2InvitationRequest
 		}
 		DeleteIamV2Invitation []struct {
 			Ctx context.Context
 			Id  string
 		}
 		DeleteIamV2InvitationExecute []struct {
-			R command_line_arguments.ApiDeleteIamV2InvitationRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiDeleteIamV2InvitationRequest
 		}
 		GetIamV2Invitation []struct {
 			Ctx context.Context
 			Id  string
 		}
 		GetIamV2InvitationExecute []struct {
-			R command_line_arguments.ApiGetIamV2InvitationRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiGetIamV2InvitationRequest
 		}
 		ListIamV2Invitations []struct {
 			Ctx context.Context
 		}
 		ListIamV2InvitationsExecute []struct {
-			R command_line_arguments.ApiListIamV2InvitationsRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiListIamV2InvitationsRequest
 		}
 	}
 }
 
 // CreateIamV2Invitation mocks base method by wrapping the associated func.
-func (m *InvitationsIamV2Api) CreateIamV2Invitation(ctx context.Context) command_line_arguments.ApiCreateIamV2InvitationRequest {
+func (m *InvitationsIamV2Api) CreateIamV2Invitation(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiCreateIamV2InvitationRequest {
 	m.lockCreateIamV2Invitation.Lock()
 	defer m.lockCreateIamV2Invitation.Unlock()
 
@@ -106,7 +107,7 @@ func (m *InvitationsIamV2Api) CreateIamV2InvitationCalls() []struct {
 }
 
 // CreateIamV2InvitationExecute mocks base method by wrapping the associated func.
-func (m *InvitationsIamV2Api) CreateIamV2InvitationExecute(r command_line_arguments.ApiCreateIamV2InvitationRequest) (command_line_arguments.IamV2Invitation, *net_http.Response, error) {
+func (m *InvitationsIamV2Api) CreateIamV2InvitationExecute(r github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiCreateIamV2InvitationRequest) (github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.IamV2Invitation, *net_http.Response, error) {
 	m.lockCreateIamV2InvitationExecute.Lock()
 	defer m.lockCreateIamV2InvitationExecute.Unlock()
 
@@ -115,7 +116,7 @@ func (m *InvitationsIamV2Api) CreateIamV2InvitationExecute(r command_line_argume
 	}
 
 	call := struct {
-		R command_line_arguments.ApiCreateIamV2InvitationRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiCreateIamV2InvitationRequest
 	}{
 		R: r,
 	}
@@ -135,7 +136,7 @@ func (m *InvitationsIamV2Api) CreateIamV2InvitationExecuteCalled() bool {
 
 // CreateIamV2InvitationExecuteCalls returns the calls made to CreateIamV2InvitationExecute.
 func (m *InvitationsIamV2Api) CreateIamV2InvitationExecuteCalls() []struct {
-	R command_line_arguments.ApiCreateIamV2InvitationRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiCreateIamV2InvitationRequest
 } {
 	m.lockCreateIamV2InvitationExecute.Lock()
 	defer m.lockCreateIamV2InvitationExecute.Unlock()
@@ -144,7 +145,7 @@ func (m *InvitationsIamV2Api) CreateIamV2InvitationExecuteCalls() []struct {
 }
 
 // DeleteIamV2Invitation mocks base method by wrapping the associated func.
-func (m *InvitationsIamV2Api) DeleteIamV2Invitation(ctx context.Context, id string) command_line_arguments.ApiDeleteIamV2InvitationRequest {
+func (m *InvitationsIamV2Api) DeleteIamV2Invitation(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiDeleteIamV2InvitationRequest {
 	m.lockDeleteIamV2Invitation.Lock()
 	defer m.lockDeleteIamV2Invitation.Unlock()
 
@@ -185,7 +186,7 @@ func (m *InvitationsIamV2Api) DeleteIamV2InvitationCalls() []struct {
 }
 
 // DeleteIamV2InvitationExecute mocks base method by wrapping the associated func.
-func (m *InvitationsIamV2Api) DeleteIamV2InvitationExecute(r command_line_arguments.ApiDeleteIamV2InvitationRequest) (*net_http.Response, error) {
+func (m *InvitationsIamV2Api) DeleteIamV2InvitationExecute(r github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiDeleteIamV2InvitationRequest) (*net_http.Response, error) {
 	m.lockDeleteIamV2InvitationExecute.Lock()
 	defer m.lockDeleteIamV2InvitationExecute.Unlock()
 
@@ -194,7 +195,7 @@ func (m *InvitationsIamV2Api) DeleteIamV2InvitationExecute(r command_line_argume
 	}
 
 	call := struct {
-		R command_line_arguments.ApiDeleteIamV2InvitationRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiDeleteIamV2InvitationRequest
 	}{
 		R: r,
 	}
@@ -214,7 +215,7 @@ func (m *InvitationsIamV2Api) DeleteIamV2InvitationExecuteCalled() bool {
 
 // DeleteIamV2InvitationExecuteCalls returns the calls made to DeleteIamV2InvitationExecute.
 func (m *InvitationsIamV2Api) DeleteIamV2InvitationExecuteCalls() []struct {
-	R command_line_arguments.ApiDeleteIamV2InvitationRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiDeleteIamV2InvitationRequest
 } {
 	m.lockDeleteIamV2InvitationExecute.Lock()
 	defer m.lockDeleteIamV2InvitationExecute.Unlock()
@@ -223,7 +224,7 @@ func (m *InvitationsIamV2Api) DeleteIamV2InvitationExecuteCalls() []struct {
 }
 
 // GetIamV2Invitation mocks base method by wrapping the associated func.
-func (m *InvitationsIamV2Api) GetIamV2Invitation(ctx context.Context, id string) command_line_arguments.ApiGetIamV2InvitationRequest {
+func (m *InvitationsIamV2Api) GetIamV2Invitation(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiGetIamV2InvitationRequest {
 	m.lockGetIamV2Invitation.Lock()
 	defer m.lockGetIamV2Invitation.Unlock()
 
@@ -264,7 +265,7 @@ func (m *InvitationsIamV2Api) GetIamV2InvitationCalls() []struct {
 }
 
 // GetIamV2InvitationExecute mocks base method by wrapping the associated func.
-func (m *InvitationsIamV2Api) GetIamV2InvitationExecute(r command_line_arguments.ApiGetIamV2InvitationRequest) (command_line_arguments.IamV2Invitation, *net_http.Response, error) {
+func (m *InvitationsIamV2Api) GetIamV2InvitationExecute(r github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiGetIamV2InvitationRequest) (github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.IamV2Invitation, *net_http.Response, error) {
 	m.lockGetIamV2InvitationExecute.Lock()
 	defer m.lockGetIamV2InvitationExecute.Unlock()
 
@@ -273,7 +274,7 @@ func (m *InvitationsIamV2Api) GetIamV2InvitationExecute(r command_line_arguments
 	}
 
 	call := struct {
-		R command_line_arguments.ApiGetIamV2InvitationRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiGetIamV2InvitationRequest
 	}{
 		R: r,
 	}
@@ -293,7 +294,7 @@ func (m *InvitationsIamV2Api) GetIamV2InvitationExecuteCalled() bool {
 
 // GetIamV2InvitationExecuteCalls returns the calls made to GetIamV2InvitationExecute.
 func (m *InvitationsIamV2Api) GetIamV2InvitationExecuteCalls() []struct {
-	R command_line_arguments.ApiGetIamV2InvitationRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiGetIamV2InvitationRequest
 } {
 	m.lockGetIamV2InvitationExecute.Lock()
 	defer m.lockGetIamV2InvitationExecute.Unlock()
@@ -302,7 +303,7 @@ func (m *InvitationsIamV2Api) GetIamV2InvitationExecuteCalls() []struct {
 }
 
 // ListIamV2Invitations mocks base method by wrapping the associated func.
-func (m *InvitationsIamV2Api) ListIamV2Invitations(ctx context.Context) command_line_arguments.ApiListIamV2InvitationsRequest {
+func (m *InvitationsIamV2Api) ListIamV2Invitations(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiListIamV2InvitationsRequest {
 	m.lockListIamV2Invitations.Lock()
 	defer m.lockListIamV2Invitations.Unlock()
 
@@ -340,7 +341,7 @@ func (m *InvitationsIamV2Api) ListIamV2InvitationsCalls() []struct {
 }
 
 // ListIamV2InvitationsExecute mocks base method by wrapping the associated func.
-func (m *InvitationsIamV2Api) ListIamV2InvitationsExecute(r command_line_arguments.ApiListIamV2InvitationsRequest) (command_line_arguments.IamV2InvitationList, *net_http.Response, error) {
+func (m *InvitationsIamV2Api) ListIamV2InvitationsExecute(r github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiListIamV2InvitationsRequest) (github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.IamV2InvitationList, *net_http.Response, error) {
 	m.lockListIamV2InvitationsExecute.Lock()
 	defer m.lockListIamV2InvitationsExecute.Unlock()
 
@@ -349,7 +350,7 @@ func (m *InvitationsIamV2Api) ListIamV2InvitationsExecute(r command_line_argumen
 	}
 
 	call := struct {
-		R command_line_arguments.ApiListIamV2InvitationsRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiListIamV2InvitationsRequest
 	}{
 		R: r,
 	}
@@ -369,7 +370,7 @@ func (m *InvitationsIamV2Api) ListIamV2InvitationsExecuteCalled() bool {
 
 // ListIamV2InvitationsExecuteCalls returns the calls made to ListIamV2InvitationsExecute.
 func (m *InvitationsIamV2Api) ListIamV2InvitationsExecuteCalls() []struct {
-	R command_line_arguments.ApiListIamV2InvitationsRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_iam_v2.ApiListIamV2InvitationsRequest
 } {
 	m.lockListIamV2InvitationsExecute.Lock()
 	defer m.lockListIamV2InvitationsExecute.Unlock()
