@@ -8,12 +8,7 @@ Name | Type | Description | Notes
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
-**DisplayName** | Pointer to **string** | The name of the client quota. | [optional] 
-**Description** | Pointer to **string** | A human readable description for the client quota. | [optional] 
-**Throughput** | Pointer to [**KafkaQuotasV1Throughput**](kafka-quotas.v1.Throughput.md) | Throughput for the client quota. | [optional] 
-**Cluster** | Pointer to [**ObjectReference**](ObjectReference.md) | The cluster to which this belongs. | [optional] 
-**Principals** | Pointer to [**[]GlobalObjectReference**](GlobalObjectReference.md) | A list of service accounts. Special name \&quot;default\&quot; can be used to represent the default quota for all users and service accounts.  | [optional] 
-**Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
+**Spec** | Pointer to [**KafkaQuotasV1ClientQuotaSpec**](KafkaQuotasV1ClientQuotaSpec.md) |  | [optional] 
 
 ## Methods
 
@@ -134,155 +129,30 @@ SetMetadata sets Metadata field to given value.
 
 HasMetadata returns a boolean if a field has been set.
 
-### GetDisplayName
+### GetSpec
 
-`func (o *KafkaQuotasV1ClientQuota) GetDisplayName() string`
+`func (o *KafkaQuotasV1ClientQuota) GetSpec() KafkaQuotasV1ClientQuotaSpec`
 
-GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
+GetSpec returns the Spec field if non-nil, zero value otherwise.
 
-### GetDisplayNameOk
+### GetSpecOk
 
-`func (o *KafkaQuotasV1ClientQuota) GetDisplayNameOk() (*string, bool)`
+`func (o *KafkaQuotasV1ClientQuota) GetSpecOk() (*KafkaQuotasV1ClientQuotaSpec, bool)`
 
-GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
+GetSpecOk returns a tuple with the Spec field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDisplayName
+### SetSpec
 
-`func (o *KafkaQuotasV1ClientQuota) SetDisplayName(v string)`
+`func (o *KafkaQuotasV1ClientQuota) SetSpec(v KafkaQuotasV1ClientQuotaSpec)`
 
-SetDisplayName sets DisplayName field to given value.
+SetSpec sets Spec field to given value.
 
-### HasDisplayName
+### HasSpec
 
-`func (o *KafkaQuotasV1ClientQuota) HasDisplayName() bool`
+`func (o *KafkaQuotasV1ClientQuota) HasSpec() bool`
 
-HasDisplayName returns a boolean if a field has been set.
-
-### GetDescription
-
-`func (o *KafkaQuotasV1ClientQuota) GetDescription() string`
-
-GetDescription returns the Description field if non-nil, zero value otherwise.
-
-### GetDescriptionOk
-
-`func (o *KafkaQuotasV1ClientQuota) GetDescriptionOk() (*string, bool)`
-
-GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDescription
-
-`func (o *KafkaQuotasV1ClientQuota) SetDescription(v string)`
-
-SetDescription sets Description field to given value.
-
-### HasDescription
-
-`func (o *KafkaQuotasV1ClientQuota) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
-
-### GetThroughput
-
-`func (o *KafkaQuotasV1ClientQuota) GetThroughput() KafkaQuotasV1Throughput`
-
-GetThroughput returns the Throughput field if non-nil, zero value otherwise.
-
-### GetThroughputOk
-
-`func (o *KafkaQuotasV1ClientQuota) GetThroughputOk() (*KafkaQuotasV1Throughput, bool)`
-
-GetThroughputOk returns a tuple with the Throughput field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetThroughput
-
-`func (o *KafkaQuotasV1ClientQuota) SetThroughput(v KafkaQuotasV1Throughput)`
-
-SetThroughput sets Throughput field to given value.
-
-### HasThroughput
-
-`func (o *KafkaQuotasV1ClientQuota) HasThroughput() bool`
-
-HasThroughput returns a boolean if a field has been set.
-
-### GetCluster
-
-`func (o *KafkaQuotasV1ClientQuota) GetCluster() ObjectReference`
-
-GetCluster returns the Cluster field if non-nil, zero value otherwise.
-
-### GetClusterOk
-
-`func (o *KafkaQuotasV1ClientQuota) GetClusterOk() (*ObjectReference, bool)`
-
-GetClusterOk returns a tuple with the Cluster field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCluster
-
-`func (o *KafkaQuotasV1ClientQuota) SetCluster(v ObjectReference)`
-
-SetCluster sets Cluster field to given value.
-
-### HasCluster
-
-`func (o *KafkaQuotasV1ClientQuota) HasCluster() bool`
-
-HasCluster returns a boolean if a field has been set.
-
-### GetPrincipals
-
-`func (o *KafkaQuotasV1ClientQuota) GetPrincipals() []GlobalObjectReference`
-
-GetPrincipals returns the Principals field if non-nil, zero value otherwise.
-
-### GetPrincipalsOk
-
-`func (o *KafkaQuotasV1ClientQuota) GetPrincipalsOk() (*[]GlobalObjectReference, bool)`
-
-GetPrincipalsOk returns a tuple with the Principals field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPrincipals
-
-`func (o *KafkaQuotasV1ClientQuota) SetPrincipals(v []GlobalObjectReference)`
-
-SetPrincipals sets Principals field to given value.
-
-### HasPrincipals
-
-`func (o *KafkaQuotasV1ClientQuota) HasPrincipals() bool`
-
-HasPrincipals returns a boolean if a field has been set.
-
-### GetEnvironment
-
-`func (o *KafkaQuotasV1ClientQuota) GetEnvironment() ObjectReference`
-
-GetEnvironment returns the Environment field if non-nil, zero value otherwise.
-
-### GetEnvironmentOk
-
-`func (o *KafkaQuotasV1ClientQuota) GetEnvironmentOk() (*ObjectReference, bool)`
-
-GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnvironment
-
-`func (o *KafkaQuotasV1ClientQuota) SetEnvironment(v ObjectReference)`
-
-SetEnvironment sets Environment field to given value.
-
-### HasEnvironment
-
-`func (o *KafkaQuotasV1ClientQuota) HasEnvironment() bool`
-
-HasEnvironment returns a boolean if a field has been set.
+HasSpec returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

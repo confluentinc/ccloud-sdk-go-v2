@@ -42,14 +42,14 @@ var (
 type ClientQuotasKafkaQuotasV1Api interface {
 
 	/*
-			CreateKafkaQuotasV1ClientQuota Create a Client Quota
+		CreateKafkaQuotasV1ClientQuota Create a Client Quota
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Kafka Quota v1](https://img.shields.io/badge/-Request%20Access%20To%20Kafka%20Quota%20v1-%23bc8540)](mailto:cloud-client-quotas-ea@confluent.io?subject=Request%20to%20join%20Kafka%20Quotas%20Management%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20kafka-quotas/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Kafka Quota v1](https://img.shields.io/badge/-Request%20Access%20To%20Kafka%20Quota%20v1-%23bc8540)](mailto:cloud-client-quotas-ea@confluent.io?subject=Request%20to%20join%20Kafka%20Quotas%20Management%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20kafka-quotas/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Make a request to create a client quota.
+	Make a request to create a client quota.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiCreateKafkaQuotasV1ClientQuotaRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateKafkaQuotasV1ClientQuotaRequest
 	*/
 	CreateKafkaQuotasV1ClientQuota(ctx _context.Context) ApiCreateKafkaQuotasV1ClientQuotaRequest
 
@@ -58,15 +58,15 @@ type ClientQuotasKafkaQuotasV1Api interface {
 	CreateKafkaQuotasV1ClientQuotaExecute(r ApiCreateKafkaQuotasV1ClientQuotaRequest) (KafkaQuotasV1ClientQuota, *_nethttp.Response, error)
 
 	/*
-			DeleteKafkaQuotasV1ClientQuota Delete a Client Quota
+		DeleteKafkaQuotasV1ClientQuota Delete a Client Quota
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Kafka Quota v1](https://img.shields.io/badge/-Request%20Access%20To%20Kafka%20Quota%20v1-%23bc8540)](mailto:cloud-client-quotas-ea@confluent.io?subject=Request%20to%20join%20Kafka%20Quotas%20Management%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20kafka-quotas/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Kafka Quota v1](https://img.shields.io/badge/-Request%20Access%20To%20Kafka%20Quota%20v1-%23bc8540)](mailto:cloud-client-quotas-ea@confluent.io?subject=Request%20to%20join%20Kafka%20Quotas%20Management%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20kafka-quotas/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Make a request to delete a client quota.
+	Make a request to delete a client quota.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the client quota.
-			 @return ApiDeleteKafkaQuotasV1ClientQuotaRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the client quota.
+		 @return ApiDeleteKafkaQuotasV1ClientQuotaRequest
 	*/
 	DeleteKafkaQuotasV1ClientQuota(ctx _context.Context, id string) ApiDeleteKafkaQuotasV1ClientQuotaRequest
 
@@ -74,15 +74,15 @@ type ClientQuotasKafkaQuotasV1Api interface {
 	DeleteKafkaQuotasV1ClientQuotaExecute(r ApiDeleteKafkaQuotasV1ClientQuotaRequest) (*_nethttp.Response, error)
 
 	/*
-			GetKafkaQuotasV1ClientQuota Read a Client Quota
+		GetKafkaQuotasV1ClientQuota Read a Client Quota
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Kafka Quota v1](https://img.shields.io/badge/-Request%20Access%20To%20Kafka%20Quota%20v1-%23bc8540)](mailto:cloud-client-quotas-ea@confluent.io?subject=Request%20to%20join%20Kafka%20Quotas%20Management%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20kafka-quotas/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Kafka Quota v1](https://img.shields.io/badge/-Request%20Access%20To%20Kafka%20Quota%20v1-%23bc8540)](mailto:cloud-client-quotas-ea@confluent.io?subject=Request%20to%20join%20Kafka%20Quotas%20Management%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20kafka-quotas/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Make a request to read a client quota.
+	Make a request to read a client quota.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the client quota.
-			 @return ApiGetKafkaQuotasV1ClientQuotaRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the client quota.
+		 @return ApiGetKafkaQuotasV1ClientQuotaRequest
 	*/
 	GetKafkaQuotasV1ClientQuota(ctx _context.Context, id string) ApiGetKafkaQuotasV1ClientQuotaRequest
 
@@ -91,14 +91,14 @@ type ClientQuotasKafkaQuotasV1Api interface {
 	GetKafkaQuotasV1ClientQuotaExecute(r ApiGetKafkaQuotasV1ClientQuotaRequest) (KafkaQuotasV1ClientQuota, *_nethttp.Response, error)
 
 	/*
-			ListKafkaQuotasV1ClientQuotas List of Client Quotas
+		ListKafkaQuotasV1ClientQuotas List of Client Quotas
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Kafka Quota v1](https://img.shields.io/badge/-Request%20Access%20To%20Kafka%20Quota%20v1-%23bc8540)](mailto:cloud-client-quotas-ea@confluent.io?subject=Request%20to%20join%20Kafka%20Quotas%20Management%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20kafka-quotas/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Kafka Quota v1](https://img.shields.io/badge/-Request%20Access%20To%20Kafka%20Quota%20v1-%23bc8540)](mailto:cloud-client-quotas-ea@confluent.io?subject=Request%20to%20join%20Kafka%20Quotas%20Management%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20kafka-quotas/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Retrieve a sorted, filtered, paginated list of all client quotas.
+	Retrieve a sorted, filtered, paginated list of all client quotas.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiListKafkaQuotasV1ClientQuotasRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListKafkaQuotasV1ClientQuotasRequest
 	*/
 	ListKafkaQuotasV1ClientQuotas(ctx _context.Context) ApiListKafkaQuotasV1ClientQuotasRequest
 
@@ -107,17 +107,17 @@ type ClientQuotasKafkaQuotasV1Api interface {
 	ListKafkaQuotasV1ClientQuotasExecute(r ApiListKafkaQuotasV1ClientQuotasRequest) (KafkaQuotasV1ClientQuotaList, *_nethttp.Response, error)
 
 	/*
-			UpdateKafkaQuotasV1ClientQuota Update a Client Quota
+		UpdateKafkaQuotasV1ClientQuota Update a Client Quota
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Kafka Quota v1](https://img.shields.io/badge/-Request%20Access%20To%20Kafka%20Quota%20v1-%23bc8540)](mailto:cloud-client-quotas-ea@confluent.io?subject=Request%20to%20join%20Kafka%20Quotas%20Management%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20kafka-quotas/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Kafka Quota v1](https://img.shields.io/badge/-Request%20Access%20To%20Kafka%20Quota%20v1-%23bc8540)](mailto:cloud-client-quotas-ea@confluent.io?subject=Request%20to%20join%20Kafka%20Quotas%20Management%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20kafka-quotas/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Make a request to update a client quota.
+	Make a request to update a client quota.
 
 
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the client quota.
-			 @return ApiUpdateKafkaQuotasV1ClientQuotaRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the client quota.
+		 @return ApiUpdateKafkaQuotasV1ClientQuotaRequest
 	*/
 	UpdateKafkaQuotasV1ClientQuota(ctx _context.Context, id string) ApiUpdateKafkaQuotasV1ClientQuotaRequest
 
@@ -603,15 +603,15 @@ func (a *ClientQuotasKafkaQuotasV1ApiService) GetKafkaQuotasV1ClientQuotaExecute
 type ApiListKafkaQuotasV1ClientQuotasRequest struct {
 	ctx         _context.Context
 	ApiService  ClientQuotasKafkaQuotasV1Api
-	cluster     *string
+	specCluster *string
 	environment *string
 	pageSize    *int32
 	pageToken   *string
 }
 
-// Filter the results by exact match for cluster.
-func (r ApiListKafkaQuotasV1ClientQuotasRequest) Cluster(cluster string) ApiListKafkaQuotasV1ClientQuotasRequest {
-	r.cluster = &cluster
+// Filter the results by exact match for spec.cluster.
+func (r ApiListKafkaQuotasV1ClientQuotasRequest) SpecCluster(specCluster string) ApiListKafkaQuotasV1ClientQuotasRequest {
+	r.specCluster = &specCluster
 	return r
 }
 
@@ -676,14 +676,14 @@ func (a *ClientQuotasKafkaQuotasV1ApiService) ListKafkaQuotasV1ClientQuotasExecu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.cluster == nil {
-		return localVarReturnValue, nil, reportError("cluster is required and must be specified")
+	if r.specCluster == nil {
+		return localVarReturnValue, nil, reportError("specCluster is required and must be specified")
 	}
 	if r.environment == nil {
 		return localVarReturnValue, nil, reportError("environment is required and must be specified")
 	}
 
-	localVarQueryParams.Add("cluster", parameterToString(*r.cluster, ""))
+	localVarQueryParams.Add("spec.cluster", parameterToString(*r.specCluster, ""))
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))

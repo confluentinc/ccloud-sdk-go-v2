@@ -8,10 +8,7 @@ Name | Type | Description | Notes
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
-**DisplayName** | Pointer to **string** | The name of the client quota. | [optional] 
-**Description** | Pointer to **string** | A human readable description for the client quota. | [optional] 
-**Throughput** | Pointer to [**KafkaQuotasV1Throughput**](kafka-quotas.v1.Throughput.md) | Throughput for the client quota. | [optional] 
-**Principals** | Pointer to [**[]GlobalObjectReference**](GlobalObjectReference.md) | A list of service accounts. Special name \&quot;default\&quot; can be used to represent the default quota for all users and service accounts.  | [optional] 
+**Spec** | Pointer to [**KafkaQuotasV1ClientQuotaSpecUpdate**](KafkaQuotasV1ClientQuotaSpecUpdate.md) |  | [optional] 
 
 ## Methods
 
@@ -132,105 +129,30 @@ SetMetadata sets Metadata field to given value.
 
 HasMetadata returns a boolean if a field has been set.
 
-### GetDisplayName
+### GetSpec
 
-`func (o *KafkaQuotasV1ClientQuotaUpdate) GetDisplayName() string`
+`func (o *KafkaQuotasV1ClientQuotaUpdate) GetSpec() KafkaQuotasV1ClientQuotaSpecUpdate`
 
-GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
+GetSpec returns the Spec field if non-nil, zero value otherwise.
 
-### GetDisplayNameOk
+### GetSpecOk
 
-`func (o *KafkaQuotasV1ClientQuotaUpdate) GetDisplayNameOk() (*string, bool)`
+`func (o *KafkaQuotasV1ClientQuotaUpdate) GetSpecOk() (*KafkaQuotasV1ClientQuotaSpecUpdate, bool)`
 
-GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
+GetSpecOk returns a tuple with the Spec field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDisplayName
+### SetSpec
 
-`func (o *KafkaQuotasV1ClientQuotaUpdate) SetDisplayName(v string)`
+`func (o *KafkaQuotasV1ClientQuotaUpdate) SetSpec(v KafkaQuotasV1ClientQuotaSpecUpdate)`
 
-SetDisplayName sets DisplayName field to given value.
+SetSpec sets Spec field to given value.
 
-### HasDisplayName
+### HasSpec
 
-`func (o *KafkaQuotasV1ClientQuotaUpdate) HasDisplayName() bool`
+`func (o *KafkaQuotasV1ClientQuotaUpdate) HasSpec() bool`
 
-HasDisplayName returns a boolean if a field has been set.
-
-### GetDescription
-
-`func (o *KafkaQuotasV1ClientQuotaUpdate) GetDescription() string`
-
-GetDescription returns the Description field if non-nil, zero value otherwise.
-
-### GetDescriptionOk
-
-`func (o *KafkaQuotasV1ClientQuotaUpdate) GetDescriptionOk() (*string, bool)`
-
-GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDescription
-
-`func (o *KafkaQuotasV1ClientQuotaUpdate) SetDescription(v string)`
-
-SetDescription sets Description field to given value.
-
-### HasDescription
-
-`func (o *KafkaQuotasV1ClientQuotaUpdate) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
-
-### GetThroughput
-
-`func (o *KafkaQuotasV1ClientQuotaUpdate) GetThroughput() KafkaQuotasV1Throughput`
-
-GetThroughput returns the Throughput field if non-nil, zero value otherwise.
-
-### GetThroughputOk
-
-`func (o *KafkaQuotasV1ClientQuotaUpdate) GetThroughputOk() (*KafkaQuotasV1Throughput, bool)`
-
-GetThroughputOk returns a tuple with the Throughput field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetThroughput
-
-`func (o *KafkaQuotasV1ClientQuotaUpdate) SetThroughput(v KafkaQuotasV1Throughput)`
-
-SetThroughput sets Throughput field to given value.
-
-### HasThroughput
-
-`func (o *KafkaQuotasV1ClientQuotaUpdate) HasThroughput() bool`
-
-HasThroughput returns a boolean if a field has been set.
-
-### GetPrincipals
-
-`func (o *KafkaQuotasV1ClientQuotaUpdate) GetPrincipals() []GlobalObjectReference`
-
-GetPrincipals returns the Principals field if non-nil, zero value otherwise.
-
-### GetPrincipalsOk
-
-`func (o *KafkaQuotasV1ClientQuotaUpdate) GetPrincipalsOk() (*[]GlobalObjectReference, bool)`
-
-GetPrincipalsOk returns a tuple with the Principals field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPrincipals
-
-`func (o *KafkaQuotasV1ClientQuotaUpdate) SetPrincipals(v []GlobalObjectReference)`
-
-SetPrincipals sets Principals field to given value.
-
-### HasPrincipals
-
-`func (o *KafkaQuotasV1ClientQuotaUpdate) HasPrincipals() bool`
-
-HasPrincipals returns a boolean if a field has been set.
+HasSpec returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
