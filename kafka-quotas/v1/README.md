@@ -95,13 +95,13 @@ Class | Method | HTTP request | Description
  - [GlobalObjectReference](docs/GlobalObjectReference.md)
  - [KafkaQuotasV1ClientQuota](docs/KafkaQuotasV1ClientQuota.md)
  - [KafkaQuotasV1ClientQuotaList](docs/KafkaQuotasV1ClientQuotaList.md)
+ - [KafkaQuotasV1ClientQuotaSpec](docs/KafkaQuotasV1ClientQuotaSpec.md)
+ - [KafkaQuotasV1ClientQuotaSpecUpdate](docs/KafkaQuotasV1ClientQuotaSpecUpdate.md)
  - [KafkaQuotasV1ClientQuotaUpdate](docs/KafkaQuotasV1ClientQuotaUpdate.md)
  - [KafkaQuotasV1Throughput](docs/KafkaQuotasV1Throughput.md)
  - [ListMeta](docs/ListMeta.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
- - [TypedEnvScopedObjectReference](docs/TypedEnvScopedObjectReference.md)
- - [TypedGlobalObjectReference](docs/TypedGlobalObjectReference.md)
 
 
 ## Documentation For Authorization

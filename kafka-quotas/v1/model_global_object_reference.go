@@ -76,7 +76,7 @@ func (o *GlobalObjectReference) GetId() string {
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *GlobalObjectReference) GetIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil  {
 		return nil, false
 	}
 	return &o.Id, true
@@ -100,7 +100,7 @@ func (o *GlobalObjectReference) GetRelated() string {
 // GetRelatedOk returns a tuple with the Related field value
 // and a boolean to check if the value has been set.
 func (o *GlobalObjectReference) GetRelatedOk() (*string, bool) {
-	if o == nil {
+	if o == nil  {
 		return nil, false
 	}
 	return &o.Related, true
@@ -124,7 +124,7 @@ func (o *GlobalObjectReference) GetResourceName() string {
 // GetResourceNameOk returns a tuple with the ResourceName field value
 // and a boolean to check if the value has been set.
 func (o *GlobalObjectReference) GetResourceNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil  {
 		return nil, false
 	}
 	return &o.ResourceName, true
@@ -137,39 +137,39 @@ func (o *GlobalObjectReference) SetResourceName(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *GlobalObjectReference) Redact() {
-	o.recurseRedact(&o.Id)
-	o.recurseRedact(&o.Related)
-	o.recurseRedact(&o.ResourceName)
+    o.recurseRedact(&o.Id)
+    o.recurseRedact(&o.Related)
+    o.recurseRedact(&o.ResourceName)
 }
 
 func (o *GlobalObjectReference) recurseRedact(v interface{}) {
-	type redactor interface {
-		Redact()
-	}
-	if r, ok := v.(redactor); ok {
-		r.Redact()
-	} else {
-		val := reflect.ValueOf(v)
-		if val.Kind() == reflect.Ptr {
-			val = val.Elem()
-		}
-		switch val.Kind() {
-		case reflect.Slice, reflect.Array:
-			for i := 0; i < val.Len(); i++ {
-				// support data types declared without pointers
-				o.recurseRedact(val.Index(i).Interface())
-				// ... and data types that were declared without but need pointers (for Redact)
-				if val.Index(i).CanAddr() {
-					o.recurseRedact(val.Index(i).Addr().Interface())
-				}
-			}
-		}
-	}
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
 }
 
 func (o GlobalObjectReference) zeroField(v interface{}) {
-	p := reflect.ValueOf(v).Elem()
-	p.Set(reflect.Zero(p.Type()))
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o GlobalObjectReference) MarshalJSON() ([]byte, error) {
@@ -221,3 +221,5 @@ func (v *NullableGlobalObjectReference) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**IngressByteRate** | Pointer to **string** | ingress throughput limit in bytes per sec | [optional] 
-**EgressByteRate** | Pointer to **string** | egress throughput limit in bytes per sec | [optional] 
+**IngressByteRate** | **string** | Ingress throughput limit for principals specified in bytes per second. | 
+**EgressByteRate** | **string** | Egress throughput limit for principals specified in bytes per second. | 
 
 ## Methods
 
 ### NewKafkaQuotasV1Throughput
 
-`func NewKafkaQuotasV1Throughput() *KafkaQuotasV1Throughput`
+`func NewKafkaQuotasV1Throughput(ingressByteRate string, egressByteRate string, ) *KafkaQuotasV1Throughput`
 
 NewKafkaQuotasV1Throughput instantiates a new KafkaQuotasV1Throughput object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetIngressByteRate sets IngressByteRate field to given value.
 
-### HasIngressByteRate
-
-`func (o *KafkaQuotasV1Throughput) HasIngressByteRate() bool`
-
-HasIngressByteRate returns a boolean if a field has been set.
 
 ### GetEgressByteRate
 
@@ -70,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetEgressByteRate sets EgressByteRate field to given value.
 
-### HasEgressByteRate
-
-`func (o *KafkaQuotasV1Throughput) HasEgressByteRate() bool`
-
-HasEgressByteRate returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

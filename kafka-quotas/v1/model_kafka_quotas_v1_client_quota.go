@@ -40,20 +40,9 @@ type KafkaQuotasV1ClientQuota struct {
 	// Kind defines the object this REST resource represents.
 	Kind *string `json:"kind,omitempty"`
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
-	Id       *string     `json:"id,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
-	// The name of the client quota.
-	DisplayName *string `json:"display_name,omitempty"`
-	// A human readable description for the client quota.
-	Description *string `json:"description,omitempty"`
-	// Throughput for the client quota.
-	Throughput *KafkaQuotasV1Throughput `json:"throughput,omitempty"`
-	// The cluster to which this belongs.
-	Cluster *ObjectReference `json:"cluster,omitempty"`
-	// A list of service accounts. Special name \"default\" can be used to represent the default quota for all users and service accounts.
-	Principals *[]GlobalObjectReference `json:"principals,omitempty"`
-	// The environment to which this belongs.
-	Environment *ObjectReference `json:"environment,omitempty"`
+	Spec *KafkaQuotasV1ClientQuotaSpec `json:"spec,omitempty"`
 }
 
 // NewKafkaQuotasV1ClientQuota instantiates a new KafkaQuotasV1ClientQuota object
@@ -201,240 +190,75 @@ func (o *KafkaQuotasV1ClientQuota) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
-// GetDisplayName returns the DisplayName field value if set, zero value otherwise.
-func (o *KafkaQuotasV1ClientQuota) GetDisplayName() string {
-	if o == nil || o.DisplayName == nil {
-		var ret string
+// GetSpec returns the Spec field value if set, zero value otherwise.
+func (o *KafkaQuotasV1ClientQuota) GetSpec() KafkaQuotasV1ClientQuotaSpec {
+	if o == nil || o.Spec == nil {
+		var ret KafkaQuotasV1ClientQuotaSpec
 		return ret
 	}
-	return *o.DisplayName
+	return *o.Spec
 }
 
-// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
+// GetSpecOk returns a tuple with the Spec field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *KafkaQuotasV1ClientQuota) GetDisplayNameOk() (*string, bool) {
-	if o == nil || o.DisplayName == nil {
+func (o *KafkaQuotasV1ClientQuota) GetSpecOk() (*KafkaQuotasV1ClientQuotaSpec, bool) {
+	if o == nil || o.Spec == nil {
 		return nil, false
 	}
-	return o.DisplayName, true
+	return o.Spec, true
 }
 
-// HasDisplayName returns a boolean if a field has been set.
-func (o *KafkaQuotasV1ClientQuota) HasDisplayName() bool {
-	if o != nil && o.DisplayName != nil {
+// HasSpec returns a boolean if a field has been set.
+func (o *KafkaQuotasV1ClientQuota) HasSpec() bool {
+	if o != nil && o.Spec != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
-func (o *KafkaQuotasV1ClientQuota) SetDisplayName(v string) {
-	o.DisplayName = &v
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise.
-func (o *KafkaQuotasV1ClientQuota) GetDescription() string {
-	if o == nil || o.Description == nil {
-		var ret string
-		return ret
-	}
-	return *o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *KafkaQuotasV1ClientQuota) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
-	}
-	return o.Description, true
-}
-
-// HasDescription returns a boolean if a field has been set.
-func (o *KafkaQuotasV1ClientQuota) HasDescription() bool {
-	if o != nil && o.Description != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *KafkaQuotasV1ClientQuota) SetDescription(v string) {
-	o.Description = &v
-}
-
-// GetThroughput returns the Throughput field value if set, zero value otherwise.
-func (o *KafkaQuotasV1ClientQuota) GetThroughput() KafkaQuotasV1Throughput {
-	if o == nil || o.Throughput == nil {
-		var ret KafkaQuotasV1Throughput
-		return ret
-	}
-	return *o.Throughput
-}
-
-// GetThroughputOk returns a tuple with the Throughput field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *KafkaQuotasV1ClientQuota) GetThroughputOk() (*KafkaQuotasV1Throughput, bool) {
-	if o == nil || o.Throughput == nil {
-		return nil, false
-	}
-	return o.Throughput, true
-}
-
-// HasThroughput returns a boolean if a field has been set.
-func (o *KafkaQuotasV1ClientQuota) HasThroughput() bool {
-	if o != nil && o.Throughput != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetThroughput gets a reference to the given KafkaQuotasV1Throughput and assigns it to the Throughput field.
-func (o *KafkaQuotasV1ClientQuota) SetThroughput(v KafkaQuotasV1Throughput) {
-	o.Throughput = &v
-}
-
-// GetCluster returns the Cluster field value if set, zero value otherwise.
-func (o *KafkaQuotasV1ClientQuota) GetCluster() ObjectReference {
-	if o == nil || o.Cluster == nil {
-		var ret ObjectReference
-		return ret
-	}
-	return *o.Cluster
-}
-
-// GetClusterOk returns a tuple with the Cluster field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *KafkaQuotasV1ClientQuota) GetClusterOk() (*ObjectReference, bool) {
-	if o == nil || o.Cluster == nil {
-		return nil, false
-	}
-	return o.Cluster, true
-}
-
-// HasCluster returns a boolean if a field has been set.
-func (o *KafkaQuotasV1ClientQuota) HasCluster() bool {
-	if o != nil && o.Cluster != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetCluster gets a reference to the given ObjectReference and assigns it to the Cluster field.
-func (o *KafkaQuotasV1ClientQuota) SetCluster(v ObjectReference) {
-	o.Cluster = &v
-}
-
-// GetPrincipals returns the Principals field value if set, zero value otherwise.
-func (o *KafkaQuotasV1ClientQuota) GetPrincipals() []GlobalObjectReference {
-	if o == nil || o.Principals == nil {
-		var ret []GlobalObjectReference
-		return ret
-	}
-	return *o.Principals
-}
-
-// GetPrincipalsOk returns a tuple with the Principals field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *KafkaQuotasV1ClientQuota) GetPrincipalsOk() (*[]GlobalObjectReference, bool) {
-	if o == nil || o.Principals == nil {
-		return nil, false
-	}
-	return o.Principals, true
-}
-
-// HasPrincipals returns a boolean if a field has been set.
-func (o *KafkaQuotasV1ClientQuota) HasPrincipals() bool {
-	if o != nil && o.Principals != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPrincipals gets a reference to the given []GlobalObjectReference and assigns it to the Principals field.
-func (o *KafkaQuotasV1ClientQuota) SetPrincipals(v []GlobalObjectReference) {
-	o.Principals = &v
-}
-
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *KafkaQuotasV1ClientQuota) GetEnvironment() ObjectReference {
-	if o == nil || o.Environment == nil {
-		var ret ObjectReference
-		return ret
-	}
-	return *o.Environment
-}
-
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *KafkaQuotasV1ClientQuota) GetEnvironmentOk() (*ObjectReference, bool) {
-	if o == nil || o.Environment == nil {
-		return nil, false
-	}
-	return o.Environment, true
-}
-
-// HasEnvironment returns a boolean if a field has been set.
-func (o *KafkaQuotasV1ClientQuota) HasEnvironment() bool {
-	if o != nil && o.Environment != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
-func (o *KafkaQuotasV1ClientQuota) SetEnvironment(v ObjectReference) {
-	o.Environment = &v
+// SetSpec gets a reference to the given KafkaQuotasV1ClientQuotaSpec and assigns it to the Spec field.
+func (o *KafkaQuotasV1ClientQuota) SetSpec(v KafkaQuotasV1ClientQuotaSpec) {
+	o.Spec = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
 func (o *KafkaQuotasV1ClientQuota) Redact() {
-	o.recurseRedact(o.ApiVersion)
-	o.recurseRedact(o.Kind)
-	o.recurseRedact(o.Id)
-	o.recurseRedact(o.Metadata)
-	o.recurseRedact(o.DisplayName)
-	o.recurseRedact(o.Description)
-	o.recurseRedact(o.Throughput)
-	o.recurseRedact(o.Cluster)
-	o.recurseRedact(o.Principals)
-	o.recurseRedact(o.Environment)
+    o.recurseRedact(o.ApiVersion)
+    o.recurseRedact(o.Kind)
+    o.recurseRedact(o.Id)
+    o.recurseRedact(o.Metadata)
+    o.recurseRedact(o.Spec)
 }
 
 func (o *KafkaQuotasV1ClientQuota) recurseRedact(v interface{}) {
-	type redactor interface {
-		Redact()
-	}
-	if r, ok := v.(redactor); ok {
-		r.Redact()
-	} else {
-		val := reflect.ValueOf(v)
-		if val.Kind() == reflect.Ptr {
-			val = val.Elem()
-		}
-		switch val.Kind() {
-		case reflect.Slice, reflect.Array:
-			for i := 0; i < val.Len(); i++ {
-				// support data types declared without pointers
-				o.recurseRedact(val.Index(i).Interface())
-				// ... and data types that were declared without but need pointers (for Redact)
-				if val.Index(i).CanAddr() {
-					o.recurseRedact(val.Index(i).Addr().Interface())
-				}
-			}
-		}
-	}
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
 }
 
 func (o KafkaQuotasV1ClientQuota) zeroField(v interface{}) {
-	p := reflect.ValueOf(v).Elem()
-	p.Set(reflect.Zero(p.Type()))
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o KafkaQuotasV1ClientQuota) MarshalJSON() ([]byte, error) {
@@ -451,23 +275,8 @@ func (o KafkaQuotasV1ClientQuota) MarshalJSON() ([]byte, error) {
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if o.DisplayName != nil {
-		toSerialize["display_name"] = o.DisplayName
-	}
-	if o.Description != nil {
-		toSerialize["description"] = o.Description
-	}
-	if o.Throughput != nil {
-		toSerialize["throughput"] = o.Throughput
-	}
-	if o.Cluster != nil {
-		toSerialize["cluster"] = o.Cluster
-	}
-	if o.Principals != nil {
-		toSerialize["principals"] = o.Principals
-	}
-	if o.Environment != nil {
-		toSerialize["environment"] = o.Environment
+	if o.Spec != nil {
+		toSerialize["spec"] = o.Spec
 	}
 	return json.Marshal(toSerialize)
 }
@@ -507,3 +316,5 @@ func (v *NullableKafkaQuotasV1ClientQuota) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

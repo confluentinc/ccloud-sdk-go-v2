@@ -35,18 +35,20 @@ import (
 
 // KafkaQuotasV1Throughput Quotas on maximum throughput
 type KafkaQuotasV1Throughput struct {
-	// ingress throughput limit in bytes per sec
-	IngressByteRate *string `json:"ingress_byte_rate,omitempty"`
-	// egress throughput limit in bytes per sec
-	EgressByteRate *string `json:"egress_byte_rate,omitempty"`
+	// Ingress throughput limit for principals specified in bytes per second.
+	IngressByteRate string `json:"ingress_byte_rate"`
+	// Egress throughput limit for principals specified in bytes per second.
+	EgressByteRate string `json:"egress_byte_rate"`
 }
 
 // NewKafkaQuotasV1Throughput instantiates a new KafkaQuotasV1Throughput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewKafkaQuotasV1Throughput() *KafkaQuotasV1Throughput {
+func NewKafkaQuotasV1Throughput(ingressByteRate string, egressByteRate string) *KafkaQuotasV1Throughput {
 	this := KafkaQuotasV1Throughput{}
+	this.IngressByteRate = ingressByteRate
+	this.EgressByteRate = egressByteRate
 	return &this
 }
 
@@ -58,112 +60,96 @@ func NewKafkaQuotasV1ThroughputWithDefaults() *KafkaQuotasV1Throughput {
 	return &this
 }
 
-// GetIngressByteRate returns the IngressByteRate field value if set, zero value otherwise.
+// GetIngressByteRate returns the IngressByteRate field value
 func (o *KafkaQuotasV1Throughput) GetIngressByteRate() string {
-	if o == nil || o.IngressByteRate == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.IngressByteRate
+
+	return o.IngressByteRate
 }
 
-// GetIngressByteRateOk returns a tuple with the IngressByteRate field value if set, nil otherwise
+// GetIngressByteRateOk returns a tuple with the IngressByteRate field value
 // and a boolean to check if the value has been set.
 func (o *KafkaQuotasV1Throughput) GetIngressByteRateOk() (*string, bool) {
-	if o == nil || o.IngressByteRate == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.IngressByteRate, true
+	return &o.IngressByteRate, true
 }
 
-// HasIngressByteRate returns a boolean if a field has been set.
-func (o *KafkaQuotasV1Throughput) HasIngressByteRate() bool {
-	if o != nil && o.IngressByteRate != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetIngressByteRate gets a reference to the given string and assigns it to the IngressByteRate field.
+// SetIngressByteRate sets field value
 func (o *KafkaQuotasV1Throughput) SetIngressByteRate(v string) {
-	o.IngressByteRate = &v
+	o.IngressByteRate = v
 }
 
-// GetEgressByteRate returns the EgressByteRate field value if set, zero value otherwise.
+// GetEgressByteRate returns the EgressByteRate field value
 func (o *KafkaQuotasV1Throughput) GetEgressByteRate() string {
-	if o == nil || o.EgressByteRate == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.EgressByteRate
+
+	return o.EgressByteRate
 }
 
-// GetEgressByteRateOk returns a tuple with the EgressByteRate field value if set, nil otherwise
+// GetEgressByteRateOk returns a tuple with the EgressByteRate field value
 // and a boolean to check if the value has been set.
 func (o *KafkaQuotasV1Throughput) GetEgressByteRateOk() (*string, bool) {
-	if o == nil || o.EgressByteRate == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.EgressByteRate, true
+	return &o.EgressByteRate, true
 }
 
-// HasEgressByteRate returns a boolean if a field has been set.
-func (o *KafkaQuotasV1Throughput) HasEgressByteRate() bool {
-	if o != nil && o.EgressByteRate != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetEgressByteRate gets a reference to the given string and assigns it to the EgressByteRate field.
+// SetEgressByteRate sets field value
 func (o *KafkaQuotasV1Throughput) SetEgressByteRate(v string) {
-	o.EgressByteRate = &v
+	o.EgressByteRate = v
 }
 
 // Redact resets all sensitive fields to their zero value.
 func (o *KafkaQuotasV1Throughput) Redact() {
-	o.recurseRedact(o.IngressByteRate)
-	o.recurseRedact(o.EgressByteRate)
+    o.recurseRedact(&o.IngressByteRate)
+    o.recurseRedact(&o.EgressByteRate)
 }
 
 func (o *KafkaQuotasV1Throughput) recurseRedact(v interface{}) {
-	type redactor interface {
-		Redact()
-	}
-	if r, ok := v.(redactor); ok {
-		r.Redact()
-	} else {
-		val := reflect.ValueOf(v)
-		if val.Kind() == reflect.Ptr {
-			val = val.Elem()
-		}
-		switch val.Kind() {
-		case reflect.Slice, reflect.Array:
-			for i := 0; i < val.Len(); i++ {
-				// support data types declared without pointers
-				o.recurseRedact(val.Index(i).Interface())
-				// ... and data types that were declared without but need pointers (for Redact)
-				if val.Index(i).CanAddr() {
-					o.recurseRedact(val.Index(i).Addr().Interface())
-				}
-			}
-		}
-	}
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
 }
 
 func (o KafkaQuotasV1Throughput) zeroField(v interface{}) {
-	p := reflect.ValueOf(v).Elem()
-	p.Set(reflect.Zero(p.Type()))
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o KafkaQuotasV1Throughput) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.IngressByteRate != nil {
+	if true {
 		toSerialize["ingress_byte_rate"] = o.IngressByteRate
 	}
-	if o.EgressByteRate != nil {
+	if true {
 		toSerialize["egress_byte_rate"] = o.EgressByteRate
 	}
 	return json.Marshal(toSerialize)
@@ -204,3 +190,5 @@ func (v *NullableKafkaQuotasV1Throughput) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
