@@ -42,15 +42,15 @@ var (
 type RegionsStreamGovernanceV2Api interface {
 
 	/*
-	GetStreamGovernanceV2Region Read a Region
+		GetStreamGovernanceV2Region Read a Region
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to read a region.
+	Make a request to read a region.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the region.
-	 @return ApiGetStreamGovernanceV2RegionRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the region.
+		 @return ApiGetStreamGovernanceV2RegionRequest
 	*/
 	GetStreamGovernanceV2Region(ctx _context.Context, id string) ApiGetStreamGovernanceV2RegionRequest
 
@@ -59,14 +59,14 @@ Make a request to read a region.
 	GetStreamGovernanceV2RegionExecute(r ApiGetStreamGovernanceV2RegionRequest) (StreamGovernanceV2Region, *_nethttp.Response, error)
 
 	/*
-	ListStreamGovernanceV2Regions List of Regions
+		ListStreamGovernanceV2Regions List of Regions
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Retrieve a sorted, filtered, paginated list of all regions.
+	Retrieve a sorted, filtered, paginated list of all regions.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiListStreamGovernanceV2RegionsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListStreamGovernanceV2RegionsRequest
 	*/
 	ListStreamGovernanceV2Regions(ctx _context.Context) ApiListStreamGovernanceV2RegionsRequest
 
@@ -79,11 +79,10 @@ Retrieve a sorted, filtered, paginated list of all regions.
 type RegionsStreamGovernanceV2ApiService service
 
 type ApiGetStreamGovernanceV2RegionRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService RegionsStreamGovernanceV2Api
-	id string
+	id         string
 }
-
 
 func (r ApiGetStreamGovernanceV2RegionRequest) Execute() (StreamGovernanceV2Region, *_nethttp.Response, error) {
 	return r.ApiService.GetStreamGovernanceV2RegionExecute(r)
@@ -103,8 +102,8 @@ Make a request to read a region.
 func (a *RegionsStreamGovernanceV2ApiService) GetStreamGovernanceV2Region(ctx _context.Context, id string) ApiGetStreamGovernanceV2RegionRequest {
 	return ApiGetStreamGovernanceV2RegionRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
@@ -236,13 +235,13 @@ func (a *RegionsStreamGovernanceV2ApiService) GetStreamGovernanceV2RegionExecute
 }
 
 type ApiListStreamGovernanceV2RegionsRequest struct {
-	ctx _context.Context
-	ApiService RegionsStreamGovernanceV2Api
-	specCloud *string
+	ctx            _context.Context
+	ApiService     RegionsStreamGovernanceV2Api
+	specCloud      *string
 	specRegionName *string
-	specPackages *MultipleSearchFilter
-	pageSize *int32
-	pageToken *string
+	specPackages   *MultipleSearchFilter
+	pageSize       *int32
+	pageToken      *string
 }
 
 // Filter the results by exact match for spec.cloud.
@@ -250,21 +249,25 @@ func (r ApiListStreamGovernanceV2RegionsRequest) SpecCloud(specCloud string) Api
 	r.specCloud = &specCloud
 	return r
 }
+
 // Filter the results by exact match for spec.region_name.
 func (r ApiListStreamGovernanceV2RegionsRequest) SpecRegionName(specRegionName string) ApiListStreamGovernanceV2RegionsRequest {
 	r.specRegionName = &specRegionName
 	return r
 }
+
 // Filter the results by exact match for spec.packages. Pass multiple times to see results matching any of the values.
 func (r ApiListStreamGovernanceV2RegionsRequest) SpecPackages(specPackages MultipleSearchFilter) ApiListStreamGovernanceV2RegionsRequest {
 	r.specPackages = &specPackages
 	return r
 }
+
 // A pagination size for collection requests.
 func (r ApiListStreamGovernanceV2RegionsRequest) PageSize(pageSize int32) ApiListStreamGovernanceV2RegionsRequest {
 	r.pageSize = &pageSize
 	return r
 }
+
 // An opaque pagination token for collection requests.
 func (r ApiListStreamGovernanceV2RegionsRequest) PageToken(pageToken string) ApiListStreamGovernanceV2RegionsRequest {
 	r.pageToken = &pageToken
@@ -288,7 +291,7 @@ Retrieve a sorted, filtered, paginated list of all regions.
 func (a *RegionsStreamGovernanceV2ApiService) ListStreamGovernanceV2Regions(ctx _context.Context) ApiListStreamGovernanceV2RegionsRequest {
 	return ApiListStreamGovernanceV2RegionsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 

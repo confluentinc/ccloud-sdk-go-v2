@@ -42,14 +42,14 @@ var (
 type ClustersStreamGovernanceV2Api interface {
 
 	/*
-	CreateStreamGovernanceV2Cluster Create a Cluster
+		CreateStreamGovernanceV2Cluster Create a Cluster
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to create a cluster.
+	Make a request to create a cluster.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiCreateStreamGovernanceV2ClusterRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateStreamGovernanceV2ClusterRequest
 	*/
 	CreateStreamGovernanceV2Cluster(ctx _context.Context) ApiCreateStreamGovernanceV2ClusterRequest
 
@@ -58,15 +58,15 @@ Make a request to create a cluster.
 	CreateStreamGovernanceV2ClusterExecute(r ApiCreateStreamGovernanceV2ClusterRequest) (StreamGovernanceV2Cluster, *_nethttp.Response, error)
 
 	/*
-	DeleteStreamGovernanceV2Cluster Delete a Cluster
+		DeleteStreamGovernanceV2Cluster Delete a Cluster
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to delete a cluster.
+	Make a request to delete a cluster.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the cluster.
-	 @return ApiDeleteStreamGovernanceV2ClusterRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the cluster.
+		 @return ApiDeleteStreamGovernanceV2ClusterRequest
 	*/
 	DeleteStreamGovernanceV2Cluster(ctx _context.Context, id string) ApiDeleteStreamGovernanceV2ClusterRequest
 
@@ -74,15 +74,15 @@ Make a request to delete a cluster.
 	DeleteStreamGovernanceV2ClusterExecute(r ApiDeleteStreamGovernanceV2ClusterRequest) (*_nethttp.Response, error)
 
 	/*
-	GetStreamGovernanceV2Cluster Read a Cluster
+		GetStreamGovernanceV2Cluster Read a Cluster
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to read a cluster.
+	Make a request to read a cluster.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the cluster.
-	 @return ApiGetStreamGovernanceV2ClusterRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the cluster.
+		 @return ApiGetStreamGovernanceV2ClusterRequest
 	*/
 	GetStreamGovernanceV2Cluster(ctx _context.Context, id string) ApiGetStreamGovernanceV2ClusterRequest
 
@@ -91,14 +91,14 @@ Make a request to read a cluster.
 	GetStreamGovernanceV2ClusterExecute(r ApiGetStreamGovernanceV2ClusterRequest) (StreamGovernanceV2Cluster, *_nethttp.Response, error)
 
 	/*
-	ListStreamGovernanceV2Clusters List of Clusters
+		ListStreamGovernanceV2Clusters List of Clusters
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Retrieve a sorted, filtered, paginated list of all clusters.
+	Retrieve a sorted, filtered, paginated list of all clusters.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiListStreamGovernanceV2ClustersRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListStreamGovernanceV2ClustersRequest
 	*/
 	ListStreamGovernanceV2Clusters(ctx _context.Context) ApiListStreamGovernanceV2ClustersRequest
 
@@ -107,17 +107,17 @@ Retrieve a sorted, filtered, paginated list of all clusters.
 	ListStreamGovernanceV2ClustersExecute(r ApiListStreamGovernanceV2ClustersRequest) (StreamGovernanceV2ClusterList, *_nethttp.Response, error)
 
 	/*
-	UpdateStreamGovernanceV2Cluster Update a Cluster
+		UpdateStreamGovernanceV2Cluster Update a Cluster
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to update a cluster.
+	Make a request to update a cluster.
 
 
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the cluster.
-	 @return ApiUpdateStreamGovernanceV2ClusterRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the cluster.
+		 @return ApiUpdateStreamGovernanceV2ClusterRequest
 	*/
 	UpdateStreamGovernanceV2Cluster(ctx _context.Context, id string) ApiUpdateStreamGovernanceV2ClusterRequest
 
@@ -130,8 +130,8 @@ Make a request to update a cluster.
 type ClustersStreamGovernanceV2ApiService service
 
 type ApiCreateStreamGovernanceV2ClusterRequest struct {
-	ctx _context.Context
-	ApiService ClustersStreamGovernanceV2Api
+	ctx                       _context.Context
+	ApiService                ClustersStreamGovernanceV2Api
 	streamGovernanceV2Cluster *StreamGovernanceV2Cluster
 }
 
@@ -157,7 +157,7 @@ Make a request to create a cluster.
 func (a *ClustersStreamGovernanceV2ApiService) CreateStreamGovernanceV2Cluster(ctx _context.Context) ApiCreateStreamGovernanceV2ClusterRequest {
 	return ApiCreateStreamGovernanceV2ClusterRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
@@ -300,11 +300,17 @@ func (a *ClustersStreamGovernanceV2ApiService) CreateStreamGovernanceV2ClusterEx
 }
 
 type ApiDeleteStreamGovernanceV2ClusterRequest struct {
-	ctx _context.Context
-	ApiService ClustersStreamGovernanceV2Api
-	id string
+	ctx         _context.Context
+	ApiService  ClustersStreamGovernanceV2Api
+	environment *string
+	id          string
 }
 
+// Scope the operation to the given environment.
+func (r ApiDeleteStreamGovernanceV2ClusterRequest) Environment(environment string) ApiDeleteStreamGovernanceV2ClusterRequest {
+	r.environment = &environment
+	return r
+}
 
 func (r ApiDeleteStreamGovernanceV2ClusterRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteStreamGovernanceV2ClusterExecute(r)
@@ -324,8 +330,8 @@ Make a request to delete a cluster.
 func (a *ClustersStreamGovernanceV2ApiService) DeleteStreamGovernanceV2Cluster(ctx _context.Context, id string) ApiDeleteStreamGovernanceV2ClusterRequest {
 	return ApiDeleteStreamGovernanceV2ClusterRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
@@ -350,7 +356,11 @@ func (a *ClustersStreamGovernanceV2ApiService) DeleteStreamGovernanceV2ClusterEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.environment == nil {
+		return nil, reportError("environment is required and must be specified")
+	}
 
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -446,11 +456,17 @@ func (a *ClustersStreamGovernanceV2ApiService) DeleteStreamGovernanceV2ClusterEx
 }
 
 type ApiGetStreamGovernanceV2ClusterRequest struct {
-	ctx _context.Context
-	ApiService ClustersStreamGovernanceV2Api
-	id string
+	ctx         _context.Context
+	ApiService  ClustersStreamGovernanceV2Api
+	environment *string
+	id          string
 }
 
+// Scope the operation to the given environment.
+func (r ApiGetStreamGovernanceV2ClusterRequest) Environment(environment string) ApiGetStreamGovernanceV2ClusterRequest {
+	r.environment = &environment
+	return r
+}
 
 func (r ApiGetStreamGovernanceV2ClusterRequest) Execute() (StreamGovernanceV2Cluster, *_nethttp.Response, error) {
 	return r.ApiService.GetStreamGovernanceV2ClusterExecute(r)
@@ -470,8 +486,8 @@ Make a request to read a cluster.
 func (a *ClustersStreamGovernanceV2ApiService) GetStreamGovernanceV2Cluster(ctx _context.Context, id string) ApiGetStreamGovernanceV2ClusterRequest {
 	return ApiGetStreamGovernanceV2ClusterRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
@@ -498,7 +514,11 @@ func (a *ClustersStreamGovernanceV2ApiService) GetStreamGovernanceV2ClusterExecu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.environment == nil {
+		return localVarReturnValue, nil, reportError("environment is required and must be specified")
+	}
 
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -603,11 +623,11 @@ func (a *ClustersStreamGovernanceV2ApiService) GetStreamGovernanceV2ClusterExecu
 }
 
 type ApiListStreamGovernanceV2ClustersRequest struct {
-	ctx _context.Context
-	ApiService ClustersStreamGovernanceV2Api
+	ctx         _context.Context
+	ApiService  ClustersStreamGovernanceV2Api
 	environment *string
-	pageSize *int32
-	pageToken *string
+	pageSize    *int32
+	pageToken   *string
 }
 
 // Filter the results by exact match for environment.
@@ -615,11 +635,13 @@ func (r ApiListStreamGovernanceV2ClustersRequest) Environment(environment string
 	r.environment = &environment
 	return r
 }
+
 // A pagination size for collection requests.
 func (r ApiListStreamGovernanceV2ClustersRequest) PageSize(pageSize int32) ApiListStreamGovernanceV2ClustersRequest {
 	r.pageSize = &pageSize
 	return r
 }
+
 // An opaque pagination token for collection requests.
 func (r ApiListStreamGovernanceV2ClustersRequest) PageToken(pageToken string) ApiListStreamGovernanceV2ClustersRequest {
 	r.pageToken = &pageToken
@@ -643,7 +665,7 @@ Retrieve a sorted, filtered, paginated list of all clusters.
 func (a *ClustersStreamGovernanceV2ApiService) ListStreamGovernanceV2Clusters(ctx _context.Context) ApiListStreamGovernanceV2ClustersRequest {
 	return ApiListStreamGovernanceV2ClustersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
@@ -669,10 +691,11 @@ func (a *ClustersStreamGovernanceV2ApiService) ListStreamGovernanceV2ClustersExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-
-	if r.environment != nil {
-		localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
+	if r.environment == nil {
+		return localVarReturnValue, nil, reportError("environment is required and must be specified")
 	}
+
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}
@@ -773,9 +796,9 @@ func (a *ClustersStreamGovernanceV2ApiService) ListStreamGovernanceV2ClustersExe
 }
 
 type ApiUpdateStreamGovernanceV2ClusterRequest struct {
-	ctx _context.Context
-	ApiService ClustersStreamGovernanceV2Api
-	id string
+	ctx                             _context.Context
+	ApiService                      ClustersStreamGovernanceV2Api
+	id                              string
 	streamGovernanceV2ClusterUpdate *StreamGovernanceV2ClusterUpdate
 }
 
@@ -804,8 +827,8 @@ Make a request to update a cluster.
 func (a *ClustersStreamGovernanceV2ApiService) UpdateStreamGovernanceV2Cluster(ctx _context.Context, id string) ApiUpdateStreamGovernanceV2ClusterRequest {
 	return ApiUpdateStreamGovernanceV2ClusterRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 

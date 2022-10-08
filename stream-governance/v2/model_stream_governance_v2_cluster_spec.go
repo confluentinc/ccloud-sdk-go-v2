@@ -226,41 +226,41 @@ func (o *StreamGovernanceV2ClusterSpec) SetRegion(v ObjectReference) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *StreamGovernanceV2ClusterSpec) Redact() {
-    o.recurseRedact(o.DisplayName)
-    o.recurseRedact(o.Package)
-    o.recurseRedact(o.HttpEndpoint)
-    o.recurseRedact(o.Environment)
-    o.recurseRedact(o.Region)
+	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.Package)
+	o.recurseRedact(o.HttpEndpoint)
+	o.recurseRedact(o.Environment)
+	o.recurseRedact(o.Region)
 }
 
 func (o *StreamGovernanceV2ClusterSpec) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o StreamGovernanceV2ClusterSpec) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o StreamGovernanceV2ClusterSpec) MarshalJSON() ([]byte, error) {
@@ -318,5 +318,3 @@ func (v *NullableStreamGovernanceV2ClusterSpec) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

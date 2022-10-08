@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 
 ## DeleteStreamGovernanceV2Cluster
 
-> DeleteStreamGovernanceV2Cluster(ctx, id).Execute()
+> DeleteStreamGovernanceV2Cluster(ctx, id).Environment(environment).Execute()
 
 Delete a Cluster
 
@@ -99,11 +99,12 @@ import (
 )
 
 func main() {
+    environment := "env-00000" // string | Scope the operation to the given environment.
     id := "id_example" // string | The unique identifier for the cluster.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClustersStreamGovernanceV2Api.DeleteStreamGovernanceV2Cluster(context.Background(), id).Execute()
+    resp, r, err := api_client.ClustersStreamGovernanceV2Api.DeleteStreamGovernanceV2Cluster(context.Background(), id).Environment(environment).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ClustersStreamGovernanceV2Api.DeleteStreamGovernanceV2Cluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -126,6 +127,7 @@ Other parameters are passed through a pointer to a apiDeleteStreamGovernanceV2Cl
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **environment** | **string** | Scope the operation to the given environment. | 
 
 
 ### Return type
@@ -148,7 +150,7 @@ Name | Type | Description  | Notes
 
 ## GetStreamGovernanceV2Cluster
 
-> StreamGovernanceV2Cluster GetStreamGovernanceV2Cluster(ctx, id).Execute()
+> StreamGovernanceV2Cluster GetStreamGovernanceV2Cluster(ctx, id).Environment(environment).Execute()
 
 Read a Cluster
 
@@ -167,11 +169,12 @@ import (
 )
 
 func main() {
+    environment := "env-00000" // string | Scope the operation to the given environment.
     id := "id_example" // string | The unique identifier for the cluster.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClustersStreamGovernanceV2Api.GetStreamGovernanceV2Cluster(context.Background(), id).Execute()
+    resp, r, err := api_client.ClustersStreamGovernanceV2Api.GetStreamGovernanceV2Cluster(context.Background(), id).Environment(environment).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ClustersStreamGovernanceV2Api.GetStreamGovernanceV2Cluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -196,6 +199,7 @@ Other parameters are passed through a pointer to a apiGetStreamGovernanceV2Clust
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **environment** | **string** | Scope the operation to the given environment. | 
 
 
 ### Return type
@@ -237,7 +241,7 @@ import (
 )
 
 func main() {
-    environment := "env-00000" // string | Filter the results by exact match for environment. (optional)
+    environment := "env-00000" // string | Filter the results by exact match for environment.
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
