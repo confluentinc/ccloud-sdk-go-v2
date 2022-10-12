@@ -37,7 +37,8 @@ import (
 type NetworkingV1NetworkStatus struct {
 	// The lifecyle phase of the network:  PROVISIONING:  network provisioning is in progress;  READY:  network is ready;  FAILED: provisioning failed;  DEPROVISIONING: network deprovisioning is in progress; 
 	Phase string `json:"phase"`
-	SupportedConnectionTypes NetworkingV1StatusConnectionTypes `json:"supported_connection_types"`
+	SupportedConnectionTypes NetworkingV1SupportedConnectionTypes `json:"supported_connection_types"`
+	ActiveConnectionTypes NetworkingV1ConnectionTypes `json:"active_connection_types"`
 	// Error code if network is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`
 	// Displayable error message if network is in a failed state
@@ -54,10 +55,11 @@ type NetworkingV1NetworkStatus struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1NetworkStatus(phase string, supportedConnectionTypes NetworkingV1StatusConnectionTypes) *NetworkingV1NetworkStatus {
+func NewNetworkingV1NetworkStatus(phase string, supportedConnectionTypes NetworkingV1SupportedConnectionTypes, activeConnectionTypes NetworkingV1ConnectionTypes) *NetworkingV1NetworkStatus {
 	this := NetworkingV1NetworkStatus{}
 	this.Phase = phase
 	this.SupportedConnectionTypes = supportedConnectionTypes
+	this.ActiveConnectionTypes = activeConnectionTypes
 	return &this
 }
 
@@ -94,9 +96,9 @@ func (o *NetworkingV1NetworkStatus) SetPhase(v string) {
 }
 
 // GetSupportedConnectionTypes returns the SupportedConnectionTypes field value
-func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypes() NetworkingV1StatusConnectionTypes {
+func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypes() NetworkingV1SupportedConnectionTypes {
 	if o == nil {
-		var ret NetworkingV1StatusConnectionTypes
+		var ret NetworkingV1SupportedConnectionTypes
 		return ret
 	}
 
@@ -105,7 +107,7 @@ func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypes() NetworkingV1St
 
 // GetSupportedConnectionTypesOk returns a tuple with the SupportedConnectionTypes field value
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypesOk() (*NetworkingV1StatusConnectionTypes, bool) {
+func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypesOk() (*NetworkingV1SupportedConnectionTypes, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -113,8 +115,32 @@ func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypesOk() (*Networking
 }
 
 // SetSupportedConnectionTypes sets field value
-func (o *NetworkingV1NetworkStatus) SetSupportedConnectionTypes(v NetworkingV1StatusConnectionTypes) {
+func (o *NetworkingV1NetworkStatus) SetSupportedConnectionTypes(v NetworkingV1SupportedConnectionTypes) {
 	o.SupportedConnectionTypes = v
+}
+
+// GetActiveConnectionTypes returns the ActiveConnectionTypes field value
+func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypes() NetworkingV1ConnectionTypes {
+	if o == nil {
+		var ret NetworkingV1ConnectionTypes
+		return ret
+	}
+
+	return o.ActiveConnectionTypes
+}
+
+// GetActiveConnectionTypesOk returns a tuple with the ActiveConnectionTypes field value
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypesOk() (*NetworkingV1ConnectionTypes, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.ActiveConnectionTypes, true
+}
+
+// SetActiveConnectionTypes sets field value
+func (o *NetworkingV1NetworkStatus) SetActiveConnectionTypes(v NetworkingV1ConnectionTypes) {
+	o.ActiveConnectionTypes = v
 }
 
 // GetErrorCode returns the ErrorCode field value if set, zero value otherwise.
@@ -281,6 +307,7 @@ func (o *NetworkingV1NetworkStatus) SetCloud(v NetworkingV1NetworkStatusCloudOne
 func (o *NetworkingV1NetworkStatus) Redact() {
     o.recurseRedact(&o.Phase)
     o.recurseRedact(&o.SupportedConnectionTypes)
+    o.recurseRedact(&o.ActiveConnectionTypes)
     o.recurseRedact(o.ErrorCode)
     o.recurseRedact(o.ErrorMessage)
     o.recurseRedact(o.DnsDomain)
@@ -325,6 +352,9 @@ func (o NetworkingV1NetworkStatus) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["supported_connection_types"] = o.SupportedConnectionTypes
+	}
+	if true {
+		toSerialize["active_connection_types"] = o.ActiveConnectionTypes
 	}
 	if o.ErrorCode != nil {
 		toSerialize["error_code"] = o.ErrorCode

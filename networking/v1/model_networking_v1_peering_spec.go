@@ -40,9 +40,9 @@ type NetworkingV1PeeringSpec struct {
 	// The cloud-specific peering details.
 	Cloud *NetworkingV1PeeringSpecCloudOneOf `json:"cloud,omitempty"`
 	// The environment to which this belongs.
-	Environment *ObjectReference `json:"environment,omitempty"`
+	Environment *GlobalObjectReference `json:"environment,omitempty"`
 	// The network to which this belongs.
-	Network *ObjectReference `json:"network,omitempty"`
+	Network *EnvScopedObjectReference `json:"network,omitempty"`
 }
 
 // NewNetworkingV1PeeringSpec instantiates a new NetworkingV1PeeringSpec object
@@ -127,9 +127,9 @@ func (o *NetworkingV1PeeringSpec) SetCloud(v NetworkingV1PeeringSpecCloudOneOf) 
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *NetworkingV1PeeringSpec) GetEnvironment() ObjectReference {
+func (o *NetworkingV1PeeringSpec) GetEnvironment() GlobalObjectReference {
 	if o == nil || o.Environment == nil {
-		var ret ObjectReference
+		var ret GlobalObjectReference
 		return ret
 	}
 	return *o.Environment
@@ -137,7 +137,7 @@ func (o *NetworkingV1PeeringSpec) GetEnvironment() ObjectReference {
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1PeeringSpec) GetEnvironmentOk() (*ObjectReference, bool) {
+func (o *NetworkingV1PeeringSpec) GetEnvironmentOk() (*GlobalObjectReference, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -153,15 +153,15 @@ func (o *NetworkingV1PeeringSpec) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
-func (o *NetworkingV1PeeringSpec) SetEnvironment(v ObjectReference) {
+// SetEnvironment gets a reference to the given GlobalObjectReference and assigns it to the Environment field.
+func (o *NetworkingV1PeeringSpec) SetEnvironment(v GlobalObjectReference) {
 	o.Environment = &v
 }
 
 // GetNetwork returns the Network field value if set, zero value otherwise.
-func (o *NetworkingV1PeeringSpec) GetNetwork() ObjectReference {
+func (o *NetworkingV1PeeringSpec) GetNetwork() EnvScopedObjectReference {
 	if o == nil || o.Network == nil {
-		var ret ObjectReference
+		var ret EnvScopedObjectReference
 		return ret
 	}
 	return *o.Network
@@ -169,7 +169,7 @@ func (o *NetworkingV1PeeringSpec) GetNetwork() ObjectReference {
 
 // GetNetworkOk returns a tuple with the Network field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1PeeringSpec) GetNetworkOk() (*ObjectReference, bool) {
+func (o *NetworkingV1PeeringSpec) GetNetworkOk() (*EnvScopedObjectReference, bool) {
 	if o == nil || o.Network == nil {
 		return nil, false
 	}
@@ -185,8 +185,8 @@ func (o *NetworkingV1PeeringSpec) HasNetwork() bool {
 	return false
 }
 
-// SetNetwork gets a reference to the given ObjectReference and assigns it to the Network field.
-func (o *NetworkingV1PeeringSpec) SetNetwork(v ObjectReference) {
+// SetNetwork gets a reference to the given EnvScopedObjectReference and assigns it to the Network field.
+func (o *NetworkingV1PeeringSpec) SetNetwork(v EnvScopedObjectReference) {
 	o.Network = &v
 }
 

@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the PrivateLink access | [optional] 
 **Cloud** | Pointer to [**NetworkingV1PrivateLinkAccessSpecCloudOneOf**](NetworkingV1PrivateLinkAccessSpecCloudOneOf.md) | The cloud-specific PrivateLink details. | [optional] 
-**Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
-**Network** | Pointer to [**ObjectReference**](ObjectReference.md) | The network to which this belongs. | [optional] 
+**Environment** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which this belongs. | [optional] 
+**Network** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The network to which this belongs. | [optional] 
 
 ## Methods
 
@@ -80,20 +80,20 @@ HasCloud returns a boolean if a field has been set.
 
 ### GetEnvironment
 
-`func (o *NetworkingV1PrivateLinkAccessSpec) GetEnvironment() ObjectReference`
+`func (o *NetworkingV1PrivateLinkAccessSpec) GetEnvironment() GlobalObjectReference`
 
 GetEnvironment returns the Environment field if non-nil, zero value otherwise.
 
 ### GetEnvironmentOk
 
-`func (o *NetworkingV1PrivateLinkAccessSpec) GetEnvironmentOk() (*ObjectReference, bool)`
+`func (o *NetworkingV1PrivateLinkAccessSpec) GetEnvironmentOk() (*GlobalObjectReference, bool)`
 
 GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnvironment
 
-`func (o *NetworkingV1PrivateLinkAccessSpec) SetEnvironment(v ObjectReference)`
+`func (o *NetworkingV1PrivateLinkAccessSpec) SetEnvironment(v GlobalObjectReference)`
 
 SetEnvironment sets Environment field to given value.
 
@@ -105,20 +105,20 @@ HasEnvironment returns a boolean if a field has been set.
 
 ### GetNetwork
 
-`func (o *NetworkingV1PrivateLinkAccessSpec) GetNetwork() ObjectReference`
+`func (o *NetworkingV1PrivateLinkAccessSpec) GetNetwork() EnvScopedObjectReference`
 
 GetNetwork returns the Network field if non-nil, zero value otherwise.
 
 ### GetNetworkOk
 
-`func (o *NetworkingV1PrivateLinkAccessSpec) GetNetworkOk() (*ObjectReference, bool)`
+`func (o *NetworkingV1PrivateLinkAccessSpec) GetNetworkOk() (*EnvScopedObjectReference, bool)`
 
 GetNetworkOk returns a tuple with the Network field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNetwork
 
-`func (o *NetworkingV1PrivateLinkAccessSpec) SetNetwork(v ObjectReference)`
+`func (o *NetworkingV1PrivateLinkAccessSpec) SetNetwork(v EnvScopedObjectReference)`
 
 SetNetwork sets Network field to given value.
 

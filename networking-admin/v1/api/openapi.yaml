@@ -802,7 +802,7 @@ paths:
                                 example:
                                   id: n-00000
                                   related: https://api.confluent.cloud/networking-admin/v1/networks/n-00000
-                                  resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000
+                                  resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-00000
                             type: object
                       type: array
                   type: object
@@ -1066,7 +1066,7 @@ paths:
                           example:
                             id: n-00000
                             related: https://api.confluent.cloud/networking-admin/v1/networks/n-00000
-                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000
+                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-00000
                       type: object
                   type: object
           description: Peering.
@@ -1384,7 +1384,7 @@ paths:
                                 example:
                                   id: n-00000
                                   related: https://api.confluent.cloud/networking-admin/v1/networks/n-00000
-                                  resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000
+                                  resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-00000
                             type: object
                       type: array
                   type: object
@@ -1648,7 +1648,7 @@ paths:
                           example:
                             id: n-00000
                             related: https://api.confluent.cloud/networking-admin/v1/networks/n-00000
-                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000
+                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-00000
                       type: object
                   type: object
           description: Transit Gateway Attachment.
@@ -1966,7 +1966,7 @@ paths:
                                 example:
                                   id: n-00000
                                   related: https://api.confluent.cloud/networking-admin/v1/networks/n-00000
-                                  resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000
+                                  resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-00000
                             type: object
                       type: array
                   type: object
@@ -2230,7 +2230,7 @@ paths:
                           example:
                             id: n-00000
                             related: https://api.confluent.cloud/networking-admin/v1/networks/n-00000
-                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-00000
+                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-00000
                       type: object
                   type: object
           description: Private Link Access.
@@ -2701,7 +2701,7 @@ components:
               self:
                 example: https://api.confluent.cloud/networking-admin/v1/networks/n-12345
               resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-12345
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-12345
         spec:
           $ref: '#/components/schemas/networking-admin.v1.NetworkSpec'
         status:
@@ -2731,7 +2731,11 @@ components:
           - DEPROVISIONING
         supported_connection_types:
           allOf:
-          - $ref: '#/components/schemas/networking-admin.v1.StatusConnectionTypes'
+          - $ref: '#/components/schemas/networking-admin.v1.SupportedConnectionTypes'
+          readOnly: true
+        active_connection_types:
+          allOf:
+          - $ref: '#/components/schemas/networking-admin.v1.ConnectionTypes'
           readOnly: true
         error_code:
           description: Error code if network is in a failed state. May be used for
@@ -2780,6 +2784,7 @@ components:
           x-one-of-name: NetworkingAdminV1NetworkStatusCloudOneOf
       readOnly: true
       required:
+      - active_connection_types
       - phase
       - supported_connection_types
       type: object
@@ -2829,7 +2834,7 @@ components:
               self:
                 example: https://api.confluent.cloud/networking-admin/v1/peerings/p-12345
               resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/peering=p-12345
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-456xyz/peering=p-12345
         spec:
           $ref: '#/components/schemas/networking-admin.v1.PeeringSpec'
         status:
@@ -2914,7 +2919,7 @@ components:
               self:
                 example: https://api.confluent.cloud/networking-admin/v1/transit-gateway-attachments/tga-12345
               resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/transit-gateway-attachment=tga-12345
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-456xyz/transit-gateway-attachment=tga-12345
         spec:
           $ref: '#/components/schemas/networking-admin.v1.TransitGatewayAttachmentSpec'
         status:
@@ -3013,7 +3018,7 @@ components:
               self:
                 example: https://api.confluent.cloud/networking-admin/v1/private-link-accesses/pla-12345
               resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/private-link-access=pla-12345
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-456xyz/private-link-access=pla-12345
         spec:
           $ref: '#/components/schemas/networking-admin.v1.PrivateLinkAccessSpec'
         status:
@@ -3082,7 +3087,7 @@ components:
       minItems: 1
       type: array
       uniqueItems: true
-    networking-admin.v1.StatusConnectionTypes:
+    networking-admin.v1.SupportedConnectionTypes:
       description: The connection types this network supports.
       items:
         $ref: '#/components/schemas/networking-admin.v1.ConnectionType'
@@ -3587,7 +3592,7 @@ components:
           x-immutable: true
         environment:
           allOf:
-          - $ref: '#/components/schemas/ObjectReference'
+          - $ref: '#/components/schemas/GlobalObjectReference'
           description: The environment to which this belongs.
       type: object
       x-enable-id: true
@@ -3685,11 +3690,11 @@ components:
           x-one-of-name: NetworkingAdminV1PeeringSpecCloudOneOf
         environment:
           allOf:
-          - $ref: '#/components/schemas/ObjectReference'
+          - $ref: '#/components/schemas/GlobalObjectReference'
           description: The environment to which this belongs.
         network:
           allOf:
-          - $ref: '#/components/schemas/ObjectReference'
+          - $ref: '#/components/schemas/EnvScopedObjectReference'
           description: The network to which this belongs.
           x-immutable: true
       type: object
@@ -3783,11 +3788,11 @@ components:
           x-one-of-name: NetworkingAdminV1TransitGatewayAttachmentSpecCloudOneOf
         environment:
           allOf:
-          - $ref: '#/components/schemas/ObjectReference'
+          - $ref: '#/components/schemas/GlobalObjectReference'
           description: The environment to which this belongs.
         network:
           allOf:
-          - $ref: '#/components/schemas/ObjectReference'
+          - $ref: '#/components/schemas/EnvScopedObjectReference'
           description: The network to which this belongs.
           x-immutable: true
       type: object
@@ -3888,11 +3893,11 @@ components:
           x-one-of-name: NetworkingAdminV1PrivateLinkAccessSpecCloudOneOf
         environment:
           allOf:
-          - $ref: '#/components/schemas/ObjectReference'
+          - $ref: '#/components/schemas/GlobalObjectReference'
           description: The environment to which this belongs.
         network:
           allOf:
-          - $ref: '#/components/schemas/ObjectReference'
+          - $ref: '#/components/schemas/EnvScopedObjectReference'
           description: The network to which this belongs.
           x-immutable: true
       type: object
@@ -4025,47 +4030,6 @@ components:
       - related
       - resource_name
       type: object
-    TypedEnvScopedObjectReference:
-      description: ObjectReference provides information for you to locate the referred
-        object
-      properties:
-        id:
-          description: ID of the referred resource
-          maxLength: 255
-          minLength: 1
-          type: string
-        environment:
-          description: Environment of the referred resource, if env-scoped
-          maxLength: 255
-          minLength: 1
-          type: string
-        related:
-          description: API URL for accessing or modifying the referred object
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-        resource_name:
-          description: CRN reference to the referred resource
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-        api_version:
-          description: API group and version of the referred resource
-          minLength: 1
-          readOnly: true
-          type: string
-        kind:
-          description: Kind of the referred resource
-          minLength: 1
-          readOnly: true
-          type: string
-      required:
-      - id
-      - related
-      - resource_name
-      type: object
     GlobalObjectReference:
       description: ObjectReference provides information for you to locate the referred
         object
@@ -4115,42 +4079,6 @@ components:
         resource_name:
           description: CRN reference to the referred resource
           format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-      required:
-      - id
-      - related
-      - resource_name
-      type: object
-    TypedGlobalObjectReference:
-      description: ObjectReference provides information for you to locate the referred
-        object
-      properties:
-        id:
-          description: ID of the referred resource
-          maxLength: 255
-          minLength: 1
-          type: string
-        related:
-          description: API URL for accessing or modifying the referred object
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-        resource_name:
-          description: CRN reference to the referred resource
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-        api_version:
-          description: API group and version of the referred resource
-          minLength: 1
-          readOnly: true
-          type: string
-        kind:
-          description: Kind of the referred resource
           minLength: 1
           readOnly: true
           type: string

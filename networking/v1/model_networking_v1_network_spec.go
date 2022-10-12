@@ -44,12 +44,12 @@ type NetworkingV1NetworkSpec struct {
 	ConnectionTypes *NetworkingV1ConnectionTypes `json:"connection_types,omitempty"`
 	// The IPv4 [CIDR block](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) to used for this network. Must be `/16`. Required for VPC peering and AWS TransitGateway. 
 	Cidr *string `json:"cidr,omitempty"`
-	// The 3 availability zones for this network. They can optionally be specified for AWS networks used with PrivateLink. Otherwise, they are automatically chosen by Confluent Cloud.  On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3)  On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c).  On Azure, zones are Confluent-chosen names (e.g. 1, 2, 3) since Azure does not  have universal zone identifiers. 
+	// The 3 availability zones for this network. They can optionally be specified for AWS networks used with PrivateLink, for GCP networks used with Private Service Connect, and for AWS and GCP networks used with Peering. Otherwise, they are automatically chosen by Confluent Cloud.  On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3)  On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c).  On Azure, zones are Confluent-chosen names (e.g. 1, 2, 3) since Azure does not  have universal zone identifiers. 
 	Zones *[]string `json:"zones,omitempty"`
 	// Enable legacy public DNS for the network. This only applies to Private Link connection type. If enabled, clusters in this network will include 'glb' in domain name and require both public  and private DNS to resolve. If disabled, clusters in this network will not include 'glb' in domain name and only require private  DNS to resolve 
 	LegacyPublicDns *bool `json:"legacy_public_dns,omitempty"`
 	// The environment to which this belongs.
-	Environment *ObjectReference `json:"environment,omitempty"`
+	Environment *GlobalObjectReference `json:"environment,omitempty"`
 }
 
 // NewNetworkingV1NetworkSpec instantiates a new NetworkingV1NetworkSpec object
@@ -294,9 +294,9 @@ func (o *NetworkingV1NetworkSpec) SetLegacyPublicDns(v bool) {
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *NetworkingV1NetworkSpec) GetEnvironment() ObjectReference {
+func (o *NetworkingV1NetworkSpec) GetEnvironment() GlobalObjectReference {
 	if o == nil || o.Environment == nil {
-		var ret ObjectReference
+		var ret GlobalObjectReference
 		return ret
 	}
 	return *o.Environment
@@ -304,7 +304,7 @@ func (o *NetworkingV1NetworkSpec) GetEnvironment() ObjectReference {
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1NetworkSpec) GetEnvironmentOk() (*ObjectReference, bool) {
+func (o *NetworkingV1NetworkSpec) GetEnvironmentOk() (*GlobalObjectReference, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -320,8 +320,8 @@ func (o *NetworkingV1NetworkSpec) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
-func (o *NetworkingV1NetworkSpec) SetEnvironment(v ObjectReference) {
+// SetEnvironment gets a reference to the given GlobalObjectReference and assigns it to the Environment field.
+func (o *NetworkingV1NetworkSpec) SetEnvironment(v GlobalObjectReference) {
 	o.Environment = &v
 }
 

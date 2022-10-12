@@ -40,7 +40,7 @@ type NetworkingV1TransitGatewayAttachmentSpecUpdate struct {
 	// The cloud-specific Transit Gateway details.
 	Cloud *NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf `json:"cloud,omitempty"`
 	// The environment to which this belongs.
-	Environment *ObjectReference `json:"environment,omitempty"`
+	Environment *GlobalObjectReference `json:"environment,omitempty"`
 }
 
 // NewNetworkingV1TransitGatewayAttachmentSpecUpdate instantiates a new NetworkingV1TransitGatewayAttachmentSpecUpdate object
@@ -125,9 +125,9 @@ func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) SetCloud(v NetworkingV1
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) GetEnvironment() ObjectReference {
+func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) GetEnvironment() GlobalObjectReference {
 	if o == nil || o.Environment == nil {
-		var ret ObjectReference
+		var ret GlobalObjectReference
 		return ret
 	}
 	return *o.Environment
@@ -135,7 +135,7 @@ func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) GetEnvironment() Object
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) GetEnvironmentOk() (*ObjectReference, bool) {
+func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) GetEnvironmentOk() (*GlobalObjectReference, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -151,8 +151,8 @@ func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
-func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) SetEnvironment(v ObjectReference) {
+// SetEnvironment gets a reference to the given GlobalObjectReference and assigns it to the Environment field.
+func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) SetEnvironment(v GlobalObjectReference) {
 	o.Environment = &v
 }
 

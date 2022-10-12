@@ -38,7 +38,7 @@ type NetworkingV1PrivateLinkAccessSpecUpdate struct {
 	// The name of the PrivateLink access
 	DisplayName *string `json:"display_name,omitempty"`
 	// The environment to which this belongs.
-	Environment *ObjectReference `json:"environment,omitempty"`
+	Environment *GlobalObjectReference `json:"environment,omitempty"`
 }
 
 // NewNetworkingV1PrivateLinkAccessSpecUpdate instantiates a new NetworkingV1PrivateLinkAccessSpecUpdate object
@@ -91,9 +91,9 @@ func (o *NetworkingV1PrivateLinkAccessSpecUpdate) SetDisplayName(v string) {
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *NetworkingV1PrivateLinkAccessSpecUpdate) GetEnvironment() ObjectReference {
+func (o *NetworkingV1PrivateLinkAccessSpecUpdate) GetEnvironment() GlobalObjectReference {
 	if o == nil || o.Environment == nil {
-		var ret ObjectReference
+		var ret GlobalObjectReference
 		return ret
 	}
 	return *o.Environment
@@ -101,7 +101,7 @@ func (o *NetworkingV1PrivateLinkAccessSpecUpdate) GetEnvironment() ObjectReferen
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1PrivateLinkAccessSpecUpdate) GetEnvironmentOk() (*ObjectReference, bool) {
+func (o *NetworkingV1PrivateLinkAccessSpecUpdate) GetEnvironmentOk() (*GlobalObjectReference, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -117,8 +117,8 @@ func (o *NetworkingV1PrivateLinkAccessSpecUpdate) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
-func (o *NetworkingV1PrivateLinkAccessSpecUpdate) SetEnvironment(v ObjectReference) {
+// SetEnvironment gets a reference to the given GlobalObjectReference and assigns it to the Environment field.
+func (o *NetworkingV1PrivateLinkAccessSpecUpdate) SetEnvironment(v GlobalObjectReference) {
 	o.Environment = &v
 }
 

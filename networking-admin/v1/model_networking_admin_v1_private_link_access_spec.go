@@ -40,9 +40,9 @@ type NetworkingAdminV1PrivateLinkAccessSpec struct {
 	// The cloud-specific PrivateLink details.
 	Cloud *NetworkingAdminV1PrivateLinkAccessSpecCloudOneOf `json:"cloud,omitempty"`
 	// The environment to which this belongs.
-	Environment *ObjectReference `json:"environment,omitempty"`
+	Environment *GlobalObjectReference `json:"environment,omitempty"`
 	// The network to which this belongs.
-	Network *ObjectReference `json:"network,omitempty"`
+	Network *EnvScopedObjectReference `json:"network,omitempty"`
 }
 
 // NewNetworkingAdminV1PrivateLinkAccessSpec instantiates a new NetworkingAdminV1PrivateLinkAccessSpec object
@@ -127,9 +127,9 @@ func (o *NetworkingAdminV1PrivateLinkAccessSpec) SetCloud(v NetworkingAdminV1Pri
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *NetworkingAdminV1PrivateLinkAccessSpec) GetEnvironment() ObjectReference {
+func (o *NetworkingAdminV1PrivateLinkAccessSpec) GetEnvironment() GlobalObjectReference {
 	if o == nil || o.Environment == nil {
-		var ret ObjectReference
+		var ret GlobalObjectReference
 		return ret
 	}
 	return *o.Environment
@@ -137,7 +137,7 @@ func (o *NetworkingAdminV1PrivateLinkAccessSpec) GetEnvironment() ObjectReferenc
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingAdminV1PrivateLinkAccessSpec) GetEnvironmentOk() (*ObjectReference, bool) {
+func (o *NetworkingAdminV1PrivateLinkAccessSpec) GetEnvironmentOk() (*GlobalObjectReference, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -153,15 +153,15 @@ func (o *NetworkingAdminV1PrivateLinkAccessSpec) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
-func (o *NetworkingAdminV1PrivateLinkAccessSpec) SetEnvironment(v ObjectReference) {
+// SetEnvironment gets a reference to the given GlobalObjectReference and assigns it to the Environment field.
+func (o *NetworkingAdminV1PrivateLinkAccessSpec) SetEnvironment(v GlobalObjectReference) {
 	o.Environment = &v
 }
 
 // GetNetwork returns the Network field value if set, zero value otherwise.
-func (o *NetworkingAdminV1PrivateLinkAccessSpec) GetNetwork() ObjectReference {
+func (o *NetworkingAdminV1PrivateLinkAccessSpec) GetNetwork() EnvScopedObjectReference {
 	if o == nil || o.Network == nil {
-		var ret ObjectReference
+		var ret EnvScopedObjectReference
 		return ret
 	}
 	return *o.Network
@@ -169,7 +169,7 @@ func (o *NetworkingAdminV1PrivateLinkAccessSpec) GetNetwork() ObjectReference {
 
 // GetNetworkOk returns a tuple with the Network field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingAdminV1PrivateLinkAccessSpec) GetNetworkOk() (*ObjectReference, bool) {
+func (o *NetworkingAdminV1PrivateLinkAccessSpec) GetNetworkOk() (*EnvScopedObjectReference, bool) {
 	if o == nil || o.Network == nil {
 		return nil, false
 	}
@@ -185,8 +185,8 @@ func (o *NetworkingAdminV1PrivateLinkAccessSpec) HasNetwork() bool {
 	return false
 }
 
-// SetNetwork gets a reference to the given ObjectReference and assigns it to the Network field.
-func (o *NetworkingAdminV1PrivateLinkAccessSpec) SetNetwork(v ObjectReference) {
+// SetNetwork gets a reference to the given EnvScopedObjectReference and assigns it to the Network field.
+func (o *NetworkingAdminV1PrivateLinkAccessSpec) SetNetwork(v EnvScopedObjectReference) {
 	o.Network = &v
 }
 

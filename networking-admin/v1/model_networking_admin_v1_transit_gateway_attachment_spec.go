@@ -40,9 +40,9 @@ type NetworkingAdminV1TransitGatewayAttachmentSpec struct {
 	// The cloud-specific Transit Gateway details.
 	Cloud *NetworkingAdminV1TransitGatewayAttachmentSpecCloudOneOf `json:"cloud,omitempty"`
 	// The environment to which this belongs.
-	Environment *ObjectReference `json:"environment,omitempty"`
+	Environment *GlobalObjectReference `json:"environment,omitempty"`
 	// The network to which this belongs.
-	Network *ObjectReference `json:"network,omitempty"`
+	Network *EnvScopedObjectReference `json:"network,omitempty"`
 }
 
 // NewNetworkingAdminV1TransitGatewayAttachmentSpec instantiates a new NetworkingAdminV1TransitGatewayAttachmentSpec object
@@ -127,9 +127,9 @@ func (o *NetworkingAdminV1TransitGatewayAttachmentSpec) SetCloud(v NetworkingAdm
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *NetworkingAdminV1TransitGatewayAttachmentSpec) GetEnvironment() ObjectReference {
+func (o *NetworkingAdminV1TransitGatewayAttachmentSpec) GetEnvironment() GlobalObjectReference {
 	if o == nil || o.Environment == nil {
-		var ret ObjectReference
+		var ret GlobalObjectReference
 		return ret
 	}
 	return *o.Environment
@@ -137,7 +137,7 @@ func (o *NetworkingAdminV1TransitGatewayAttachmentSpec) GetEnvironment() ObjectR
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingAdminV1TransitGatewayAttachmentSpec) GetEnvironmentOk() (*ObjectReference, bool) {
+func (o *NetworkingAdminV1TransitGatewayAttachmentSpec) GetEnvironmentOk() (*GlobalObjectReference, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -153,15 +153,15 @@ func (o *NetworkingAdminV1TransitGatewayAttachmentSpec) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
-func (o *NetworkingAdminV1TransitGatewayAttachmentSpec) SetEnvironment(v ObjectReference) {
+// SetEnvironment gets a reference to the given GlobalObjectReference and assigns it to the Environment field.
+func (o *NetworkingAdminV1TransitGatewayAttachmentSpec) SetEnvironment(v GlobalObjectReference) {
 	o.Environment = &v
 }
 
 // GetNetwork returns the Network field value if set, zero value otherwise.
-func (o *NetworkingAdminV1TransitGatewayAttachmentSpec) GetNetwork() ObjectReference {
+func (o *NetworkingAdminV1TransitGatewayAttachmentSpec) GetNetwork() EnvScopedObjectReference {
 	if o == nil || o.Network == nil {
-		var ret ObjectReference
+		var ret EnvScopedObjectReference
 		return ret
 	}
 	return *o.Network
@@ -169,7 +169,7 @@ func (o *NetworkingAdminV1TransitGatewayAttachmentSpec) GetNetwork() ObjectRefer
 
 // GetNetworkOk returns a tuple with the Network field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingAdminV1TransitGatewayAttachmentSpec) GetNetworkOk() (*ObjectReference, bool) {
+func (o *NetworkingAdminV1TransitGatewayAttachmentSpec) GetNetworkOk() (*EnvScopedObjectReference, bool) {
 	if o == nil || o.Network == nil {
 		return nil, false
 	}
@@ -185,8 +185,8 @@ func (o *NetworkingAdminV1TransitGatewayAttachmentSpec) HasNetwork() bool {
 	return false
 }
 
-// SetNetwork gets a reference to the given ObjectReference and assigns it to the Network field.
-func (o *NetworkingAdminV1TransitGatewayAttachmentSpec) SetNetwork(v ObjectReference) {
+// SetNetwork gets a reference to the given EnvScopedObjectReference and assigns it to the Network field.
+func (o *NetworkingAdminV1TransitGatewayAttachmentSpec) SetNetwork(v EnvScopedObjectReference) {
 	o.Network = &v
 }
 

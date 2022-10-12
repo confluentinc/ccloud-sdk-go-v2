@@ -37,7 +37,8 @@ import (
 type NetworkingAdminV1NetworkStatus struct {
 	// The lifecyle phase of the network:  PROVISIONING:  network provisioning is in progress;  READY:  network is ready;  FAILED: provisioning failed;  DEPROVISIONING: network deprovisioning is in progress; 
 	Phase string `json:"phase"`
-	SupportedConnectionTypes NetworkingAdminV1StatusConnectionTypes `json:"supported_connection_types"`
+	SupportedConnectionTypes NetworkingAdminV1SupportedConnectionTypes `json:"supported_connection_types"`
+	ActiveConnectionTypes NetworkingAdminV1ConnectionTypes `json:"active_connection_types"`
 	// Error code if network is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`
 	// Displayable error message if network is in a failed state
@@ -54,10 +55,11 @@ type NetworkingAdminV1NetworkStatus struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingAdminV1NetworkStatus(phase string, supportedConnectionTypes NetworkingAdminV1StatusConnectionTypes) *NetworkingAdminV1NetworkStatus {
+func NewNetworkingAdminV1NetworkStatus(phase string, supportedConnectionTypes NetworkingAdminV1SupportedConnectionTypes, activeConnectionTypes NetworkingAdminV1ConnectionTypes) *NetworkingAdminV1NetworkStatus {
 	this := NetworkingAdminV1NetworkStatus{}
 	this.Phase = phase
 	this.SupportedConnectionTypes = supportedConnectionTypes
+	this.ActiveConnectionTypes = activeConnectionTypes
 	return &this
 }
 
@@ -94,9 +96,9 @@ func (o *NetworkingAdminV1NetworkStatus) SetPhase(v string) {
 }
 
 // GetSupportedConnectionTypes returns the SupportedConnectionTypes field value
-func (o *NetworkingAdminV1NetworkStatus) GetSupportedConnectionTypes() NetworkingAdminV1StatusConnectionTypes {
+func (o *NetworkingAdminV1NetworkStatus) GetSupportedConnectionTypes() NetworkingAdminV1SupportedConnectionTypes {
 	if o == nil {
-		var ret NetworkingAdminV1StatusConnectionTypes
+		var ret NetworkingAdminV1SupportedConnectionTypes
 		return ret
 	}
 
@@ -105,7 +107,7 @@ func (o *NetworkingAdminV1NetworkStatus) GetSupportedConnectionTypes() Networkin
 
 // GetSupportedConnectionTypesOk returns a tuple with the SupportedConnectionTypes field value
 // and a boolean to check if the value has been set.
-func (o *NetworkingAdminV1NetworkStatus) GetSupportedConnectionTypesOk() (*NetworkingAdminV1StatusConnectionTypes, bool) {
+func (o *NetworkingAdminV1NetworkStatus) GetSupportedConnectionTypesOk() (*NetworkingAdminV1SupportedConnectionTypes, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -113,8 +115,32 @@ func (o *NetworkingAdminV1NetworkStatus) GetSupportedConnectionTypesOk() (*Netwo
 }
 
 // SetSupportedConnectionTypes sets field value
-func (o *NetworkingAdminV1NetworkStatus) SetSupportedConnectionTypes(v NetworkingAdminV1StatusConnectionTypes) {
+func (o *NetworkingAdminV1NetworkStatus) SetSupportedConnectionTypes(v NetworkingAdminV1SupportedConnectionTypes) {
 	o.SupportedConnectionTypes = v
+}
+
+// GetActiveConnectionTypes returns the ActiveConnectionTypes field value
+func (o *NetworkingAdminV1NetworkStatus) GetActiveConnectionTypes() NetworkingAdminV1ConnectionTypes {
+	if o == nil {
+		var ret NetworkingAdminV1ConnectionTypes
+		return ret
+	}
+
+	return o.ActiveConnectionTypes
+}
+
+// GetActiveConnectionTypesOk returns a tuple with the ActiveConnectionTypes field value
+// and a boolean to check if the value has been set.
+func (o *NetworkingAdminV1NetworkStatus) GetActiveConnectionTypesOk() (*NetworkingAdminV1ConnectionTypes, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.ActiveConnectionTypes, true
+}
+
+// SetActiveConnectionTypes sets field value
+func (o *NetworkingAdminV1NetworkStatus) SetActiveConnectionTypes(v NetworkingAdminV1ConnectionTypes) {
+	o.ActiveConnectionTypes = v
 }
 
 // GetErrorCode returns the ErrorCode field value if set, zero value otherwise.
@@ -281,6 +307,7 @@ func (o *NetworkingAdminV1NetworkStatus) SetCloud(v NetworkingAdminV1NetworkStat
 func (o *NetworkingAdminV1NetworkStatus) Redact() {
     o.recurseRedact(&o.Phase)
     o.recurseRedact(&o.SupportedConnectionTypes)
+    o.recurseRedact(&o.ActiveConnectionTypes)
     o.recurseRedact(o.ErrorCode)
     o.recurseRedact(o.ErrorMessage)
     o.recurseRedact(o.DnsDomain)
@@ -325,6 +352,9 @@ func (o NetworkingAdminV1NetworkStatus) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["supported_connection_types"] = o.SupportedConnectionTypes
+	}
+	if true {
+		toSerialize["active_connection_types"] = o.ActiveConnectionTypes
 	}
 	if o.ErrorCode != nil {
 		toSerialize["error_code"] = o.ErrorCode

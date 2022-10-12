@@ -129,7 +129,7 @@ Class | Method | HTTP request | Description
  - [NetworkingAdminV1PrivateLinkAccessSpec](docs/NetworkingAdminV1PrivateLinkAccessSpec.md)
  - [NetworkingAdminV1PrivateLinkAccessSpecCloudOneOf](docs/NetworkingAdminV1PrivateLinkAccessSpecCloudOneOf.md)
  - [NetworkingAdminV1PrivateLinkAccessStatus](docs/NetworkingAdminV1PrivateLinkAccessStatus.md)
- - [NetworkingAdminV1StatusConnectionTypes](docs/NetworkingAdminV1StatusConnectionTypes.md)
+ - [NetworkingAdminV1SupportedConnectionTypes](docs/NetworkingAdminV1SupportedConnectionTypes.md)
  - [NetworkingAdminV1TransitGatewayAttachment](docs/NetworkingAdminV1TransitGatewayAttachment.md)
  - [NetworkingAdminV1TransitGatewayAttachmentList](docs/NetworkingAdminV1TransitGatewayAttachmentList.md)
  - [NetworkingAdminV1TransitGatewayAttachmentSpec](docs/NetworkingAdminV1TransitGatewayAttachmentSpec.md)
@@ -138,8 +138,6 @@ Class | Method | HTTP request | Description
  - [NetworkingAdminV1TransitGatewayAttachmentStatusCloudOneOf](docs/NetworkingAdminV1TransitGatewayAttachmentStatusCloudOneOf.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
- - [TypedEnvScopedObjectReference](docs/TypedEnvScopedObjectReference.md)
- - [TypedGlobalObjectReference](docs/TypedGlobalObjectReference.md)
 
 
 ## Documentation For Authorization

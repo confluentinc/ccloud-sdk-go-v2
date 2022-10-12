@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the peering | [optional] 
 **Cloud** | Pointer to [**NetworkingAdminV1PeeringSpecCloudOneOf**](NetworkingAdminV1PeeringSpecCloudOneOf.md) | The cloud-specific peering details. | [optional] 
-**Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
-**Network** | Pointer to [**ObjectReference**](ObjectReference.md) | The network to which this belongs. | [optional] 
+**Environment** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which this belongs. | [optional] 
+**Network** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The network to which this belongs. | [optional] 
 
 ## Methods
 
@@ -80,20 +80,20 @@ HasCloud returns a boolean if a field has been set.
 
 ### GetEnvironment
 
-`func (o *NetworkingAdminV1PeeringSpec) GetEnvironment() ObjectReference`
+`func (o *NetworkingAdminV1PeeringSpec) GetEnvironment() GlobalObjectReference`
 
 GetEnvironment returns the Environment field if non-nil, zero value otherwise.
 
 ### GetEnvironmentOk
 
-`func (o *NetworkingAdminV1PeeringSpec) GetEnvironmentOk() (*ObjectReference, bool)`
+`func (o *NetworkingAdminV1PeeringSpec) GetEnvironmentOk() (*GlobalObjectReference, bool)`
 
 GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnvironment
 
-`func (o *NetworkingAdminV1PeeringSpec) SetEnvironment(v ObjectReference)`
+`func (o *NetworkingAdminV1PeeringSpec) SetEnvironment(v GlobalObjectReference)`
 
 SetEnvironment sets Environment field to given value.
 
@@ -105,20 +105,20 @@ HasEnvironment returns a boolean if a field has been set.
 
 ### GetNetwork
 
-`func (o *NetworkingAdminV1PeeringSpec) GetNetwork() ObjectReference`
+`func (o *NetworkingAdminV1PeeringSpec) GetNetwork() EnvScopedObjectReference`
 
 GetNetwork returns the Network field if non-nil, zero value otherwise.
 
 ### GetNetworkOk
 
-`func (o *NetworkingAdminV1PeeringSpec) GetNetworkOk() (*ObjectReference, bool)`
+`func (o *NetworkingAdminV1PeeringSpec) GetNetworkOk() (*EnvScopedObjectReference, bool)`
 
 GetNetworkOk returns a tuple with the Network field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNetwork
 
-`func (o *NetworkingAdminV1PeeringSpec) SetNetwork(v ObjectReference)`
+`func (o *NetworkingAdminV1PeeringSpec) SetNetwork(v EnvScopedObjectReference)`
 
 SetNetwork sets Network field to given value.
 

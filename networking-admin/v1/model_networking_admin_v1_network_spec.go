@@ -49,7 +49,7 @@ type NetworkingAdminV1NetworkSpec struct {
 	// Enable legacy public DNS for the network. This only applies to Private Link connection type. If enabled, clusters in this network will include 'glb' in domain name and require both public  and private DNS to resolve. If disabled, clusters in this network will not include 'glb' in domain name and only require private  DNS to resolve 
 	LegacyPublicDns *bool `json:"legacy_public_dns,omitempty"`
 	// The environment to which this belongs.
-	Environment *ObjectReference `json:"environment,omitempty"`
+	Environment *GlobalObjectReference `json:"environment,omitempty"`
 }
 
 // NewNetworkingAdminV1NetworkSpec instantiates a new NetworkingAdminV1NetworkSpec object
@@ -294,9 +294,9 @@ func (o *NetworkingAdminV1NetworkSpec) SetLegacyPublicDns(v bool) {
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *NetworkingAdminV1NetworkSpec) GetEnvironment() ObjectReference {
+func (o *NetworkingAdminV1NetworkSpec) GetEnvironment() GlobalObjectReference {
 	if o == nil || o.Environment == nil {
-		var ret ObjectReference
+		var ret GlobalObjectReference
 		return ret
 	}
 	return *o.Environment
@@ -304,7 +304,7 @@ func (o *NetworkingAdminV1NetworkSpec) GetEnvironment() ObjectReference {
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingAdminV1NetworkSpec) GetEnvironmentOk() (*ObjectReference, bool) {
+func (o *NetworkingAdminV1NetworkSpec) GetEnvironmentOk() (*GlobalObjectReference, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -320,8 +320,8 @@ func (o *NetworkingAdminV1NetworkSpec) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
-func (o *NetworkingAdminV1NetworkSpec) SetEnvironment(v ObjectReference) {
+// SetEnvironment gets a reference to the given GlobalObjectReference and assigns it to the Environment field.
+func (o *NetworkingAdminV1NetworkSpec) SetEnvironment(v GlobalObjectReference) {
 	o.Environment = &v
 }
 

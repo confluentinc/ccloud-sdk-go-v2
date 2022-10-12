@@ -1,4 +1,4 @@
-# NetworkingV1StatusConnectionTypes
+# NetworkingAdminV1SupportedConnectionTypes
 
 ## Properties
 
@@ -7,20 +7,20 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewNetworkingV1StatusConnectionTypes
+### NewNetworkingAdminV1SupportedConnectionTypes
 
-`func NewNetworkingV1StatusConnectionTypes() *NetworkingV1StatusConnectionTypes`
+`func NewNetworkingAdminV1SupportedConnectionTypes() *NetworkingAdminV1SupportedConnectionTypes`
 
-NewNetworkingV1StatusConnectionTypes instantiates a new NetworkingV1StatusConnectionTypes object
+NewNetworkingAdminV1SupportedConnectionTypes instantiates a new NetworkingAdminV1SupportedConnectionTypes object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewNetworkingV1StatusConnectionTypesWithDefaults
+### NewNetworkingAdminV1SupportedConnectionTypesWithDefaults
 
-`func NewNetworkingV1StatusConnectionTypesWithDefaults() *NetworkingV1StatusConnectionTypes`
+`func NewNetworkingAdminV1SupportedConnectionTypesWithDefaults() *NetworkingAdminV1SupportedConnectionTypes`
 
-NewNetworkingV1StatusConnectionTypesWithDefaults instantiates a new NetworkingV1StatusConnectionTypes object
+NewNetworkingAdminV1SupportedConnectionTypesWithDefaults instantiates a new NetworkingAdminV1SupportedConnectionTypes object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
