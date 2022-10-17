@@ -49,7 +49,7 @@ type NetworkingV1NetworkSpec struct {
 	// Enable legacy public DNS for the network. This only applies to Private Link connection type. If enabled, clusters in this network will include 'glb' in domain name and require both public  and private DNS to resolve. If disabled, clusters in this network will not include 'glb' in domain name and only require private  DNS to resolve 
 	LegacyPublicDns *bool `json:"legacy_public_dns,omitempty"`
 	// The environment to which this belongs.
-	Environment *GlobalObjectReference `json:"environment,omitempty"`
+	Environment *ObjectReference `json:"environment,omitempty"`
 }
 
 // NewNetworkingV1NetworkSpec instantiates a new NetworkingV1NetworkSpec object
@@ -294,9 +294,9 @@ func (o *NetworkingV1NetworkSpec) SetLegacyPublicDns(v bool) {
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *NetworkingV1NetworkSpec) GetEnvironment() GlobalObjectReference {
+func (o *NetworkingV1NetworkSpec) GetEnvironment() ObjectReference {
 	if o == nil || o.Environment == nil {
-		var ret GlobalObjectReference
+		var ret ObjectReference
 		return ret
 	}
 	return *o.Environment
@@ -304,7 +304,7 @@ func (o *NetworkingV1NetworkSpec) GetEnvironment() GlobalObjectReference {
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1NetworkSpec) GetEnvironmentOk() (*GlobalObjectReference, bool) {
+func (o *NetworkingV1NetworkSpec) GetEnvironmentOk() (*ObjectReference, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -320,8 +320,8 @@ func (o *NetworkingV1NetworkSpec) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given GlobalObjectReference and assigns it to the Environment field.
-func (o *NetworkingV1NetworkSpec) SetEnvironment(v GlobalObjectReference) {
+// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
+func (o *NetworkingV1NetworkSpec) SetEnvironment(v ObjectReference) {
 	o.Environment = &v
 }
 

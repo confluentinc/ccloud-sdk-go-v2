@@ -38,7 +38,7 @@ type NetworkingV1NetworkSpecUpdate struct {
 	// The name of the network
 	DisplayName *string `json:"display_name,omitempty"`
 	// The environment to which this belongs.
-	Environment *GlobalObjectReference `json:"environment,omitempty"`
+	Environment *ObjectReference `json:"environment,omitempty"`
 }
 
 // NewNetworkingV1NetworkSpecUpdate instantiates a new NetworkingV1NetworkSpecUpdate object
@@ -91,9 +91,9 @@ func (o *NetworkingV1NetworkSpecUpdate) SetDisplayName(v string) {
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *NetworkingV1NetworkSpecUpdate) GetEnvironment() GlobalObjectReference {
+func (o *NetworkingV1NetworkSpecUpdate) GetEnvironment() ObjectReference {
 	if o == nil || o.Environment == nil {
-		var ret GlobalObjectReference
+		var ret ObjectReference
 		return ret
 	}
 	return *o.Environment
@@ -101,7 +101,7 @@ func (o *NetworkingV1NetworkSpecUpdate) GetEnvironment() GlobalObjectReference {
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1NetworkSpecUpdate) GetEnvironmentOk() (*GlobalObjectReference, bool) {
+func (o *NetworkingV1NetworkSpecUpdate) GetEnvironmentOk() (*ObjectReference, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -117,8 +117,8 @@ func (o *NetworkingV1NetworkSpecUpdate) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given GlobalObjectReference and assigns it to the Environment field.
-func (o *NetworkingV1NetworkSpecUpdate) SetEnvironment(v GlobalObjectReference) {
+// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
+func (o *NetworkingV1NetworkSpecUpdate) SetEnvironment(v ObjectReference) {
 	o.Environment = &v
 }
 

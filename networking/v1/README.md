@@ -103,11 +103,9 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
- - [EnvScopedObjectReference](docs/EnvScopedObjectReference.md)
  - [Error](docs/Error.md)
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
- - [GlobalObjectReference](docs/GlobalObjectReference.md)
  - [ListMeta](docs/ListMeta.md)
  - [MultipleSearchFilter](docs/MultipleSearchFilter.md)
  - [NetworkingV1AwsNetwork](docs/NetworkingV1AwsNetwork.md)

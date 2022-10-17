@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the TGW attachment | [optional] 
 **Cloud** | Pointer to [**NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf**](NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf.md) | The cloud-specific Transit Gateway details. | [optional] 
-**Environment** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which this belongs. | [optional] 
+**Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
 
@@ -79,20 +79,20 @@ HasCloud returns a boolean if a field has been set.
 
 ### GetEnvironment
 
-`func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) GetEnvironment() GlobalObjectReference`
+`func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) GetEnvironment() ObjectReference`
 
 GetEnvironment returns the Environment field if non-nil, zero value otherwise.
 
 ### GetEnvironmentOk
 
-`func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) GetEnvironmentOk() (*GlobalObjectReference, bool)`
+`func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) GetEnvironmentOk() (*ObjectReference, bool)`
 
 GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnvironment
 
-`func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) SetEnvironment(v GlobalObjectReference)`
+`func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) SetEnvironment(v ObjectReference)`
 
 SetEnvironment sets Environment field to given value.
 

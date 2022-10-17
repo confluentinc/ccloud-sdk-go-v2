@@ -692,13 +692,13 @@ paths:
             --url https://api.confluent.cloud/networking/v1/networks \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-aws-us-east1","cloud":"AWS","region":"us-east-1","connection_types":["PRIVATELINK"],"cidr":"10.200.0.0/16","zones":["use1-az1","use1-az2","use1-az3"],"legacy_public_dns":true,"environment":{"id":"env-00000"}}}'
+            --data '{"spec":{"display_name":"prod-aws-us-east1","cloud":"AWS","region":"us-east-1","connection_types":["PRIVATELINK"],"cidr":"10.200.0.0/16","zones":["use1-az1","use1-az2","use1-az3"],"legacy_public_dns":true,"environment":{"id":"env-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/networks")
             .post(body)
@@ -715,19 +715,19 @@ paths:
           us-east-1\\\",\\\"connection_types\\\":[\\\"PRIVATELINK\\\"],\\\"cidr\\\"\
           :\\\"10.200.0.0/16\\\",\\\"zones\\\":[\\\"use1-az1\\\",\\\"use1-az2\\\"\
           ,\\\"use1-az3\\\"],\\\"legacy_public_dns\\\":true,\\\"environment\\\":{\\\
-          \"id\\\":\\\"env-00000\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\"\
-          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          \"id\\\":\\\"env-00000\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\t\
+          req, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -777,7 +777,7 @@ paths:
               cidr: '10.200.0.0/16',
               zones: ['use1-az1', 'use1-az2', 'use1-az3'],
               legacy_public_dns: true,
-              environment: {id: 'env-00000'}
+              environment: {id: 'env-00000', environment: 'string'}
             }
           }));
           req.end();
@@ -793,7 +793,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -802,7 +802,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /networking/v1/networks/{id}:
     delete:
@@ -1580,13 +1580,13 @@ paths:
             --url 'https://api.confluent.cloud/networking/v1/networks/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-aws-us-east1","cloud":"AWS","region":"us-east-1","connection_types":["PRIVATELINK"],"cidr":"10.200.0.0/16","zones":["use1-az1","use1-az2","use1-az3"],"legacy_public_dns":true,"environment":{"id":"env-00000"}}}'
+            --data '{"spec":{"display_name":"prod-aws-us-east1","cloud":"AWS","region":"us-east-1","connection_types":["PRIVATELINK"],"cidr":"10.200.0.0/16","zones":["use1-az1","use1-az2","use1-az3"],"legacy_public_dns":true,"environment":{"id":"env-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/networks/{id}")
             .patch(body)
@@ -1603,19 +1603,19 @@ paths:
           us-east-1\\\",\\\"connection_types\\\":[\\\"PRIVATELINK\\\"],\\\"cidr\\\"\
           :\\\"10.200.0.0/16\\\",\\\"zones\\\":[\\\"use1-az1\\\",\\\"use1-az2\\\"\
           ,\\\"use1-az3\\\"],\\\"legacy_public_dns\\\":true,\\\"environment\\\":{\\\
-          \"id\\\":\\\"env-00000\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\"\
-          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          \"id\\\":\\\"env-00000\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\t\
+          req, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -1665,7 +1665,7 @@ paths:
               cidr: '10.200.0.0/16',
               zones: ['use1-az1', 'use1-az2', 'use1-az3'],
               legacy_public_dns: true,
-              environment: {id: 'env-00000'}
+              environment: {id: 'env-00000', environment: 'string'}
             }
           }));
           req.end();
@@ -1681,7 +1681,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1690,7 +1690,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"legacy_public_dns\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /networking/v1/peerings:
     get:
@@ -2266,13 +2266,13 @@ paths:
             --url https://api.confluent.cloud/networking/v1/peerings \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-peering-use1","cloud":{"kind":"AwsPeering","account":"000000000000","vpc":"vpc-00000000000000000","routes":["10.108.16.0/21"],"customer_region":"us-east-1"},"environment":{"id":"env-00000"},"network":{"id":"n-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"prod-peering-use1","cloud":{"kind":"AwsPeering","account":"000000000000","vpc":"vpc-00000000000000000","routes":["10.108.16.0/21"],"customer_region":"us-east-1"},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"n-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/peerings")
             .post(body)
@@ -2288,11 +2288,11 @@ paths:
           :\\\"prod-peering-use1\\\",\\\"cloud\\\":{\\\"kind\\\":\\\"AwsPeering\\\"\
           ,\\\"account\\\":\\\"000000000000\\\",\\\"vpc\\\":\\\"vpc-00000000000000000\\\
           \",\\\"routes\\\":[\\\"10.108.16.0/21\\\"],\\\"customer_region\\\":\\\"\
-          us-east-1\\\"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\"},\\\"network\\\
-          \":{\\\"id\\\":\\\"n-00000\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\
-          \n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          us-east-1\\\"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"environment\\\
+          \":\\\"string\\\"},\\\"network\\\":{\\\"id\\\":\\\"n-00000\\\",\\\"environment\\\
+          \":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -2301,7 +2301,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -2352,7 +2352,7 @@ paths:
                 routes: ['10.108.16.0/21'],
                 customer_region: 'us-east-1'
               },
-              environment: {id: 'env-00000'},
+              environment: {id: 'env-00000', environment: 'string'},
               network: {id: 'n-00000', environment: 'string'}
             }
           }));
@@ -2369,7 +2369,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -2378,7 +2378,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /networking/v1/peerings/{id}:
     delete:
@@ -3164,13 +3164,13 @@ paths:
             --url 'https://api.confluent.cloud/networking/v1/peerings/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-peering-use1","cloud":{"kind":"AwsPeering","account":"000000000000","vpc":"vpc-00000000000000000","routes":["10.108.16.0/21"],"customer_region":"us-east-1"},"environment":{"id":"env-00000"},"network":{"id":"string","environment":"string"}}}'
+            --data '{"spec":{"display_name":"prod-peering-use1","cloud":{"kind":"AwsPeering","account":"000000000000","vpc":"vpc-00000000000000000","routes":["10.108.16.0/21"],"customer_region":"us-east-1"},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"string","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/peerings/{id}")
             .patch(body)
@@ -3186,11 +3186,11 @@ paths:
           :\\\"prod-peering-use1\\\",\\\"cloud\\\":{\\\"kind\\\":\\\"AwsPeering\\\"\
           ,\\\"account\\\":\\\"000000000000\\\",\\\"vpc\\\":\\\"vpc-00000000000000000\\\
           \",\\\"routes\\\":[\\\"10.108.16.0/21\\\"],\\\"customer_region\\\":\\\"\
-          us-east-1\\\"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\"},\\\"network\\\
-          \":{\\\"id\\\":\\\"string\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\
-          \n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          us-east-1\\\"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"environment\\\
+          \":\\\"string\\\"},\\\"network\\\":{\\\"id\\\":\\\"string\\\",\\\"environment\\\
+          \":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -3199,7 +3199,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -3250,7 +3250,7 @@ paths:
                 routes: ['10.108.16.0/21'],
                 customer_region: 'us-east-1'
               },
-              environment: {id: 'env-00000'},
+              environment: {id: 'env-00000', environment: 'string'},
               network: {id: 'string', environment: 'string'}
             }
           }));
@@ -3267,7 +3267,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -3276,7 +3276,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /networking/v1/transit-gateway-attachments:
     get:
@@ -3852,13 +3852,13 @@ paths:
             --url https://api.confluent.cloud/networking/v1/transit-gateway-attachments \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-tgw-use1","cloud":{"kind":"AwsTransitGatewayAttachment","ram_share_arn":"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx","transit_gateway_id":"tgw-xxxxxxxxxxxxxxxxx","enable_custom_routes":false,"routes":["100.64.0.0/10","10.0.0.0/8","192.168.0.0/16","172.16.0.0/12"]},"environment":{"id":"env-00000"},"network":{"id":"n-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"prod-tgw-use1","cloud":{"kind":"AwsTransitGatewayAttachment","ram_share_arn":"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx","transit_gateway_id":"tgw-xxxxxxxxxxxxxxxxx","enable_custom_routes":false,"routes":["100.64.0.0/10","10.0.0.0/8","192.168.0.0/16","172.16.0.0/12"]},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"n-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/transit-gateway-attachments")
             .post(body)
@@ -3876,19 +3876,20 @@ paths:
           \",\\\"transit_gateway_id\\\":\\\"tgw-xxxxxxxxxxxxxxxxx\\\",\\\"enable_custom_routes\\\
           \":false,\\\"routes\\\":[\\\"100.64.0.0/10\\\",\\\"10.0.0.0/8\\\",\\\"192.168.0.0/16\\\
           \",\\\"172.16.0.0/12\\\"]},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
-          \"},\\\"network\\\":{\\\"id\\\":\\\"n-00000\\\",\\\"environment\\\":\\\"\
-          string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
-          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \",\\\"environment\\\":\\\"string\\\"},\\\"network\\\":{\\\"id\\\":\\\"\
+          n-00000\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
+          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -3939,7 +3940,7 @@ paths:
                 enable_custom_routes: false,
                 routes: ['100.64.0.0/10', '10.0.0.0/8', '192.168.0.0/16', '172.16.0.0/12']
               },
-              environment: {id: 'env-00000'},
+              environment: {id: 'env-00000', environment: 'string'},
               network: {id: 'n-00000', environment: 'string'}
             }
           }));
@@ -3956,7 +3957,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -3965,7 +3966,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /networking/v1/transit-gateway-attachments/{id}:
     delete:
@@ -4751,13 +4752,13 @@ paths:
             --url 'https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-tgw-use1","cloud":{"kind":"AwsTransitGatewayAttachment","ram_share_arn":"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx","transit_gateway_id":"tgw-xxxxxxxxxxxxxxxxx","enable_custom_routes":false,"routes":["100.64.0.0/10","10.0.0.0/8","192.168.0.0/16","172.16.0.0/12"]},"environment":{"id":"env-00000"},"network":{"id":"string","environment":"string"}}}'
+            --data '{"spec":{"display_name":"prod-tgw-use1","cloud":{"kind":"AwsTransitGatewayAttachment","ram_share_arn":"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx","transit_gateway_id":"tgw-xxxxxxxxxxxxxxxxx","enable_custom_routes":false,"routes":["100.64.0.0/10","10.0.0.0/8","192.168.0.0/16","172.16.0.0/12"]},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"string","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}")
             .patch(body)
@@ -4775,19 +4776,20 @@ paths:
           \",\\\"transit_gateway_id\\\":\\\"tgw-xxxxxxxxxxxxxxxxx\\\",\\\"enable_custom_routes\\\
           \":false,\\\"routes\\\":[\\\"100.64.0.0/10\\\",\\\"10.0.0.0/8\\\",\\\"192.168.0.0/16\\\
           \",\\\"172.16.0.0/12\\\"]},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
-          \"},\\\"network\\\":{\\\"id\\\":\\\"string\\\",\\\"environment\\\":\\\"\
-          string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\
-          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \",\\\"environment\\\":\\\"string\\\"},\\\"network\\\":{\\\"id\\\":\\\"\
+          string\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
+          PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -4838,7 +4840,7 @@ paths:
                 enable_custom_routes: false,
                 routes: ['100.64.0.0/10', '10.0.0.0/8', '192.168.0.0/16', '172.16.0.0/12']
               },
-              environment: {id: 'env-00000'},
+              environment: {id: 'env-00000', environment: 'string'},
               network: {id: 'string', environment: 'string'}
             }
           }));
@@ -4855,7 +4857,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -4864,7 +4866,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /networking/v1/private-link-accesses:
     get:
@@ -5440,13 +5442,13 @@ paths:
             --url https://api.confluent.cloud/networking/v1/private-link-accesses \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-pl-use1","cloud":{"kind":"AwsPrivateLinkAccess","account":"000000000000"},"environment":{"id":"env-00000"},"network":{"id":"n-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"prod-pl-use1","cloud":{"kind":"AwsPrivateLinkAccess","account":"000000000000"},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"n-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/private-link-accesses")
             .post(body)
@@ -5461,10 +5463,11 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"prod-pl-use1\\\",\\\"cloud\\\":{\\\"kind\\\":\\\"AwsPrivateLinkAccess\\\
           \",\\\"account\\\":\\\"000000000000\\\"},\\\"environment\\\":{\\\"id\\\"\
-          :\\\"env-00000\\\"},\\\"network\\\":{\\\"id\\\":\\\"n-00000\\\",\\\"environment\\\
-          \":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
-          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          :\\\"env-00000\\\",\\\"environment\\\":\\\"string\\\"},\\\"network\\\":{\\\
+          \"id\\\":\\\"n-00000\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\t\
+          req, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -5473,7 +5476,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -5518,7 +5521,7 @@ paths:
             spec: {
               display_name: 'prod-pl-use1',
               cloud: {kind: 'AwsPrivateLinkAccess', account: '000000000000'},
-              environment: {id: 'env-00000'},
+              environment: {id: 'env-00000', environment: 'string'},
               network: {id: 'n-00000', environment: 'string'}
             }
           }));
@@ -5535,7 +5538,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -5544,7 +5547,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /networking/v1/private-link-accesses/{id}:
     delete:
@@ -6330,13 +6333,13 @@ paths:
             --url 'https://api.confluent.cloud/networking/v1/private-link-accesses/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-pl-use1","cloud":{"kind":"AwsPrivateLinkAccess","account":"000000000000"},"environment":{"id":"env-00000"},"network":{"id":"string","environment":"string"}}}'
+            --data '{"spec":{"display_name":"prod-pl-use1","cloud":{"kind":"AwsPrivateLinkAccess","account":"000000000000"},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"string","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/private-link-accesses/{id}")
             .patch(body)
@@ -6351,19 +6354,20 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"prod-pl-use1\\\",\\\"cloud\\\":{\\\"kind\\\":\\\"AwsPrivateLinkAccess\\\
           \",\\\"account\\\":\\\"000000000000\\\"},\\\"environment\\\":{\\\"id\\\"\
-          :\\\"env-00000\\\"},\\\"network\\\":{\\\"id\\\":\\\"string\\\",\\\"environment\\\
-          \":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\
-          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          :\\\"env-00000\\\",\\\"environment\\\":\\\"string\\\"},\\\"network\\\":{\\\
+          \"id\\\":\\\"string\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq,\
+          \ _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
+          , \"application/json\")\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
+          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -6408,7 +6412,7 @@ paths:
             spec: {
               display_name: 'prod-pl-use1',
               cloud: {kind: 'AwsPrivateLinkAccess', account: '000000000000'},
-              environment: {id: 'env-00000'},
+              environment: {id: 'env-00000', environment: 'string'},
               network: {id: 'string', environment: 'string'}
             }
           }));
@@ -6425,7 +6429,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -6434,7 +6438,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
 components:
   responses:
@@ -7577,7 +7581,7 @@ components:
           x-immutable: true
         environment:
           allOf:
-          - $ref: '#/components/schemas/GlobalObjectReference'
+          - $ref: '#/components/schemas/ObjectReference'
           description: The environment to which this belongs.
       type: object
       x-enable-id: true
@@ -7675,11 +7679,11 @@ components:
           x-one-of-name: NetworkingV1PeeringSpecCloudOneOf
         environment:
           allOf:
-          - $ref: '#/components/schemas/GlobalObjectReference'
+          - $ref: '#/components/schemas/ObjectReference'
           description: The environment to which this belongs.
         network:
           allOf:
-          - $ref: '#/components/schemas/EnvScopedObjectReference'
+          - $ref: '#/components/schemas/ObjectReference'
           description: The network to which this belongs.
           x-immutable: true
       type: object
@@ -7773,11 +7777,11 @@ components:
           x-one-of-name: NetworkingV1TransitGatewayAttachmentSpecCloudOneOf
         environment:
           allOf:
-          - $ref: '#/components/schemas/GlobalObjectReference'
+          - $ref: '#/components/schemas/ObjectReference'
           description: The environment to which this belongs.
         network:
           allOf:
-          - $ref: '#/components/schemas/EnvScopedObjectReference'
+          - $ref: '#/components/schemas/ObjectReference'
           description: The network to which this belongs.
           x-immutable: true
       type: object
@@ -7878,11 +7882,11 @@ components:
           x-one-of-name: NetworkingV1PrivateLinkAccessSpecCloudOneOf
         environment:
           allOf:
-          - $ref: '#/components/schemas/GlobalObjectReference'
+          - $ref: '#/components/schemas/ObjectReference'
           description: The environment to which this belongs.
         network:
           allOf:
-          - $ref: '#/components/schemas/EnvScopedObjectReference'
+          - $ref: '#/components/schemas/ObjectReference'
           description: The network to which this belongs.
           x-immutable: true
       type: object
@@ -8015,63 +8019,6 @@ components:
       - related
       - resource_name
       type: object
-    GlobalObjectReference:
-      description: ObjectReference provides information for you to locate the referred
-        object
-      properties:
-        id:
-          description: ID of the referred resource
-          maxLength: 255
-          minLength: 1
-          type: string
-        related:
-          description: API URL for accessing or modifying the referred object
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-        resource_name:
-          description: CRN reference to the referred resource
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-      required:
-      - id
-      - related
-      - resource_name
-      type: object
-    EnvScopedObjectReference:
-      description: ObjectReference provides information for you to locate the referred
-        object
-      properties:
-        id:
-          description: ID of the referred resource
-          maxLength: 255
-          minLength: 1
-          type: string
-        environment:
-          description: Environment of the referred resource, if env-scoped
-          maxLength: 255
-          minLength: 1
-          type: string
-        related:
-          description: API URL for accessing or modifying the referred object
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-        resource_name:
-          description: CRN reference to the referred resource
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-      required:
-      - id
-      - related
-      - resource_name
-      type: object
     Failure:
       description: Provides information about problems encountered while performing
         an operation.
@@ -8120,7 +8067,7 @@ components:
           type: string
         environment:
           allOf:
-          - $ref: '#/components/schemas/GlobalObjectReference'
+          - $ref: '#/components/schemas/ObjectReference'
           description: The environment to which this belongs.
       type: object
       x-enable-id: true
@@ -8192,7 +8139,7 @@ components:
           type: string
         environment:
           allOf:
-          - $ref: '#/components/schemas/GlobalObjectReference'
+          - $ref: '#/components/schemas/ObjectReference'
           description: The environment to which this belongs.
       type: object
       x-enable-id: true
@@ -8269,7 +8216,7 @@ components:
           x-one-of-name: NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf
         environment:
           allOf:
-          - $ref: '#/components/schemas/GlobalObjectReference'
+          - $ref: '#/components/schemas/ObjectReference'
           description: The environment to which this belongs.
       type: object
       x-enable-id: true
@@ -8336,7 +8283,7 @@ components:
           type: string
         environment:
           allOf:
-          - $ref: '#/components/schemas/GlobalObjectReference'
+          - $ref: '#/components/schemas/ObjectReference'
           description: The environment to which this belongs.
       type: object
       x-enable-id: true

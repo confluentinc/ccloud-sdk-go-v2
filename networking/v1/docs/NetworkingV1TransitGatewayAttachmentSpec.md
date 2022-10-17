@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the TGW attachment | [optional] 
 **Cloud** | Pointer to [**NetworkingV1TransitGatewayAttachmentSpecCloudOneOf**](NetworkingV1TransitGatewayAttachmentSpecCloudOneOf.md) | The cloud-specific Transit Gateway details. | [optional] 
-**Environment** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which this belongs. | [optional] 
-**Network** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The network to which this belongs. | [optional] 
+**Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
+**Network** | Pointer to [**ObjectReference**](ObjectReference.md) | The network to which this belongs. | [optional] 
 
 ## Methods
 
@@ -80,20 +80,20 @@ HasCloud returns a boolean if a field has been set.
 
 ### GetEnvironment
 
-`func (o *NetworkingV1TransitGatewayAttachmentSpec) GetEnvironment() GlobalObjectReference`
+`func (o *NetworkingV1TransitGatewayAttachmentSpec) GetEnvironment() ObjectReference`
 
 GetEnvironment returns the Environment field if non-nil, zero value otherwise.
 
 ### GetEnvironmentOk
 
-`func (o *NetworkingV1TransitGatewayAttachmentSpec) GetEnvironmentOk() (*GlobalObjectReference, bool)`
+`func (o *NetworkingV1TransitGatewayAttachmentSpec) GetEnvironmentOk() (*ObjectReference, bool)`
 
 GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnvironment
 
-`func (o *NetworkingV1TransitGatewayAttachmentSpec) SetEnvironment(v GlobalObjectReference)`
+`func (o *NetworkingV1TransitGatewayAttachmentSpec) SetEnvironment(v ObjectReference)`
 
 SetEnvironment sets Environment field to given value.
 
@@ -105,20 +105,20 @@ HasEnvironment returns a boolean if a field has been set.
 
 ### GetNetwork
 
-`func (o *NetworkingV1TransitGatewayAttachmentSpec) GetNetwork() EnvScopedObjectReference`
+`func (o *NetworkingV1TransitGatewayAttachmentSpec) GetNetwork() ObjectReference`
 
 GetNetwork returns the Network field if non-nil, zero value otherwise.
 
 ### GetNetworkOk
 
-`func (o *NetworkingV1TransitGatewayAttachmentSpec) GetNetworkOk() (*EnvScopedObjectReference, bool)`
+`func (o *NetworkingV1TransitGatewayAttachmentSpec) GetNetworkOk() (*ObjectReference, bool)`
 
 GetNetworkOk returns a tuple with the Network field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNetwork
 
-`func (o *NetworkingV1TransitGatewayAttachmentSpec) SetNetwork(v EnvScopedObjectReference)`
+`func (o *NetworkingV1TransitGatewayAttachmentSpec) SetNetwork(v ObjectReference)`
 
 SetNetwork sets Network field to given value.
 
