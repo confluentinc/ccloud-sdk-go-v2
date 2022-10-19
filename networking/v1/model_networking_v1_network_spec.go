@@ -46,8 +46,8 @@ type NetworkingV1NetworkSpec struct {
 	Cidr *string `json:"cidr,omitempty"`
 	// The 3 availability zones for this network. They can optionally be specified for AWS networks used with PrivateLink, for GCP networks used with Private Service Connect, and for AWS and GCP networks used with Peering. Otherwise, they are automatically chosen by Confluent Cloud.  On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3)  On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c).  On Azure, zones are Confluent-chosen names (e.g. 1, 2, 3) since Azure does not  have universal zone identifiers. 
 	Zones *[]string `json:"zones,omitempty"`
-	// Enable legacy public DNS for the network. This only applies to Private Link connection type. If enabled, clusters in this network will include 'glb' in domain name and require both public  and private DNS to resolve. If disabled, clusters in this network will not include 'glb' in domain name and only require private  DNS to resolve 
-	LegacyPublicDns *bool `json:"legacy_public_dns,omitempty"`
+	// DNS config only applies to PrivateLink network connection type. When resolution is CHASED_PRIVATE, clusters in this network require both public and private DNS  to resolve cluster endpoints. When resolution is PRIVATE, clusters in this network only require private DNS  to resolve cluster endpoints. 
+	DnsConfig *NetworkingV1DnsConfig `json:"dns_config,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
 }
@@ -261,36 +261,36 @@ func (o *NetworkingV1NetworkSpec) SetZones(v []string) {
 	o.Zones = &v
 }
 
-// GetLegacyPublicDns returns the LegacyPublicDns field value if set, zero value otherwise.
-func (o *NetworkingV1NetworkSpec) GetLegacyPublicDns() bool {
-	if o == nil || o.LegacyPublicDns == nil {
-		var ret bool
+// GetDnsConfig returns the DnsConfig field value if set, zero value otherwise.
+func (o *NetworkingV1NetworkSpec) GetDnsConfig() NetworkingV1DnsConfig {
+	if o == nil || o.DnsConfig == nil {
+		var ret NetworkingV1DnsConfig
 		return ret
 	}
-	return *o.LegacyPublicDns
+	return *o.DnsConfig
 }
 
-// GetLegacyPublicDnsOk returns a tuple with the LegacyPublicDns field value if set, nil otherwise
+// GetDnsConfigOk returns a tuple with the DnsConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1NetworkSpec) GetLegacyPublicDnsOk() (*bool, bool) {
-	if o == nil || o.LegacyPublicDns == nil {
+func (o *NetworkingV1NetworkSpec) GetDnsConfigOk() (*NetworkingV1DnsConfig, bool) {
+	if o == nil || o.DnsConfig == nil {
 		return nil, false
 	}
-	return o.LegacyPublicDns, true
+	return o.DnsConfig, true
 }
 
-// HasLegacyPublicDns returns a boolean if a field has been set.
-func (o *NetworkingV1NetworkSpec) HasLegacyPublicDns() bool {
-	if o != nil && o.LegacyPublicDns != nil {
+// HasDnsConfig returns a boolean if a field has been set.
+func (o *NetworkingV1NetworkSpec) HasDnsConfig() bool {
+	if o != nil && o.DnsConfig != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetLegacyPublicDns gets a reference to the given bool and assigns it to the LegacyPublicDns field.
-func (o *NetworkingV1NetworkSpec) SetLegacyPublicDns(v bool) {
-	o.LegacyPublicDns = &v
+// SetDnsConfig gets a reference to the given NetworkingV1DnsConfig and assigns it to the DnsConfig field.
+func (o *NetworkingV1NetworkSpec) SetDnsConfig(v NetworkingV1DnsConfig) {
+	o.DnsConfig = &v
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
@@ -333,7 +333,7 @@ func (o *NetworkingV1NetworkSpec) Redact() {
     o.recurseRedact(o.ConnectionTypes)
     o.recurseRedact(o.Cidr)
     o.recurseRedact(o.Zones)
-    o.recurseRedact(o.LegacyPublicDns)
+    o.recurseRedact(o.DnsConfig)
     o.recurseRedact(o.Environment)
 }
 
@@ -387,8 +387,8 @@ func (o NetworkingV1NetworkSpec) MarshalJSON() ([]byte, error) {
 	if o.Zones != nil {
 		toSerialize["zones"] = o.Zones
 	}
-	if o.LegacyPublicDns != nil {
-		toSerialize["legacy_public_dns"] = o.LegacyPublicDns
+	if o.DnsConfig != nil {
+		toSerialize["dns_config"] = o.DnsConfig
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
