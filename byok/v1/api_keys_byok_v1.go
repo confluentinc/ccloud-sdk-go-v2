@@ -435,6 +435,8 @@ type ApiListByokV1KeysRequest struct {
 	ctx _context.Context
 	ApiService KeysByokV1Api
 	environment *string
+	provider *string
+	state *string
 	pageSize *int32
 	pageToken *string
 }
@@ -442,6 +444,16 @@ type ApiListByokV1KeysRequest struct {
 // Filter the results by exact match for environment.
 func (r ApiListByokV1KeysRequest) Environment(environment string) ApiListByokV1KeysRequest {
 	r.environment = &environment
+	return r
+}
+// Filter the results by exact match for provider.
+func (r ApiListByokV1KeysRequest) Provider(provider string) ApiListByokV1KeysRequest {
+	r.provider = &provider
+	return r
+}
+// Filter the results by exact match for state.
+func (r ApiListByokV1KeysRequest) State(state string) ApiListByokV1KeysRequest {
+	r.state = &state
 	return r
 }
 // A pagination size for collection requests.
@@ -502,6 +514,12 @@ func (a *KeysByokV1ApiService) ListByokV1KeysExecute(r ApiListByokV1KeysRequest)
 		return localVarReturnValue, nil, reportError("environment is required and must be specified")
 	}
 
+	if r.provider != nil {
+		localVarQueryParams.Add("provider", parameterToString(*r.provider, ""))
+	}
+	if r.state != nil {
+		localVarQueryParams.Add("state", parameterToString(*r.state, ""))
+	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))

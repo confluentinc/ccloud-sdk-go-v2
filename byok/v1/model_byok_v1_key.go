@@ -42,7 +42,14 @@ type ByokV1Key struct {
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
 	Id *string `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
-	Spec *ByokV1KeySpec `json:"spec,omitempty"`
+	// The cloud-specific key details.  For AWS please provide the corresponding `key_arn`. For Azure please provide the corresponding `key_id`. 
+	Key *ByokV1KeyKeyOneOf `json:"key,omitempty"`
+	// The cloud provider of the Key.
+	Provider *string `json:"provider,omitempty"`
+	// The state of the key:   AVAILABLE: key can be used for a Kafka cluster provisioning   IN_USE: key is already in use by a Kafka cluster provisioning 
+	State *string `json:"state,omitempty"`
+	// The environment to which this belongs.
+	Environment *GlobalObjectReference `json:"environment,omitempty"`
 }
 
 // NewByokV1Key instantiates a new ByokV1Key object
@@ -190,36 +197,132 @@ func (o *ByokV1Key) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
-// GetSpec returns the Spec field value if set, zero value otherwise.
-func (o *ByokV1Key) GetSpec() ByokV1KeySpec {
-	if o == nil || o.Spec == nil {
-		var ret ByokV1KeySpec
+// GetKey returns the Key field value if set, zero value otherwise.
+func (o *ByokV1Key) GetKey() ByokV1KeyKeyOneOf {
+	if o == nil || o.Key == nil {
+		var ret ByokV1KeyKeyOneOf
 		return ret
 	}
-	return *o.Spec
+	return *o.Key
 }
 
-// GetSpecOk returns a tuple with the Spec field value if set, nil otherwise
+// GetKeyOk returns a tuple with the Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ByokV1Key) GetSpecOk() (*ByokV1KeySpec, bool) {
-	if o == nil || o.Spec == nil {
+func (o *ByokV1Key) GetKeyOk() (*ByokV1KeyKeyOneOf, bool) {
+	if o == nil || o.Key == nil {
 		return nil, false
 	}
-	return o.Spec, true
+	return o.Key, true
 }
 
-// HasSpec returns a boolean if a field has been set.
-func (o *ByokV1Key) HasSpec() bool {
-	if o != nil && o.Spec != nil {
+// HasKey returns a boolean if a field has been set.
+func (o *ByokV1Key) HasKey() bool {
+	if o != nil && o.Key != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetSpec gets a reference to the given ByokV1KeySpec and assigns it to the Spec field.
-func (o *ByokV1Key) SetSpec(v ByokV1KeySpec) {
-	o.Spec = &v
+// SetKey gets a reference to the given ByokV1KeyKeyOneOf and assigns it to the Key field.
+func (o *ByokV1Key) SetKey(v ByokV1KeyKeyOneOf) {
+	o.Key = &v
+}
+
+// GetProvider returns the Provider field value if set, zero value otherwise.
+func (o *ByokV1Key) GetProvider() string {
+	if o == nil || o.Provider == nil {
+		var ret string
+		return ret
+	}
+	return *o.Provider
+}
+
+// GetProviderOk returns a tuple with the Provider field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ByokV1Key) GetProviderOk() (*string, bool) {
+	if o == nil || o.Provider == nil {
+		return nil, false
+	}
+	return o.Provider, true
+}
+
+// HasProvider returns a boolean if a field has been set.
+func (o *ByokV1Key) HasProvider() bool {
+	if o != nil && o.Provider != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetProvider gets a reference to the given string and assigns it to the Provider field.
+func (o *ByokV1Key) SetProvider(v string) {
+	o.Provider = &v
+}
+
+// GetState returns the State field value if set, zero value otherwise.
+func (o *ByokV1Key) GetState() string {
+	if o == nil || o.State == nil {
+		var ret string
+		return ret
+	}
+	return *o.State
+}
+
+// GetStateOk returns a tuple with the State field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ByokV1Key) GetStateOk() (*string, bool) {
+	if o == nil || o.State == nil {
+		return nil, false
+	}
+	return o.State, true
+}
+
+// HasState returns a boolean if a field has been set.
+func (o *ByokV1Key) HasState() bool {
+	if o != nil && o.State != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetState gets a reference to the given string and assigns it to the State field.
+func (o *ByokV1Key) SetState(v string) {
+	o.State = &v
+}
+
+// GetEnvironment returns the Environment field value if set, zero value otherwise.
+func (o *ByokV1Key) GetEnvironment() GlobalObjectReference {
+	if o == nil || o.Environment == nil {
+		var ret GlobalObjectReference
+		return ret
+	}
+	return *o.Environment
+}
+
+// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ByokV1Key) GetEnvironmentOk() (*GlobalObjectReference, bool) {
+	if o == nil || o.Environment == nil {
+		return nil, false
+	}
+	return o.Environment, true
+}
+
+// HasEnvironment returns a boolean if a field has been set.
+func (o *ByokV1Key) HasEnvironment() bool {
+	if o != nil && o.Environment != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnvironment gets a reference to the given GlobalObjectReference and assigns it to the Environment field.
+func (o *ByokV1Key) SetEnvironment(v GlobalObjectReference) {
+	o.Environment = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
@@ -228,7 +331,10 @@ func (o *ByokV1Key) Redact() {
     o.recurseRedact(o.Kind)
     o.recurseRedact(o.Id)
     o.recurseRedact(o.Metadata)
-    o.recurseRedact(o.Spec)
+    o.recurseRedact(o.Key)
+    o.recurseRedact(o.Provider)
+    o.recurseRedact(o.State)
+    o.recurseRedact(o.Environment)
 }
 
 func (o *ByokV1Key) recurseRedact(v interface{}) {
@@ -275,8 +381,17 @@ func (o ByokV1Key) MarshalJSON() ([]byte, error) {
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if o.Spec != nil {
-		toSerialize["spec"] = o.Spec
+	if o.Key != nil {
+		toSerialize["key"] = o.Key
+	}
+	if o.Provider != nil {
+		toSerialize["provider"] = o.Provider
+	}
+	if o.State != nil {
+		toSerialize["state"] = o.State
+	}
+	if o.Environment != nil {
+		toSerialize["environment"] = o.Environment
 	}
 	return json.Marshal(toSerialize)
 }

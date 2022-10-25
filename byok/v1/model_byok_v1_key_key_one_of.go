@@ -30,25 +30,25 @@ import (
 	"fmt"
 )
 
-// ByokV1KeySpecKeyOneOf - struct for ByokV1KeySpecKeyOneOf
-type ByokV1KeySpecKeyOneOf struct {
+// ByokV1KeyKeyOneOf - struct for ByokV1KeyKeyOneOf
+type ByokV1KeyKeyOneOf struct {
 	ByokV1AwsKey *ByokV1AwsKey
 	ByokV1AzureKey *ByokV1AzureKey
 }
 
-// ByokV1AwsKeyAsByokV1KeySpecKeyOneOf is a convenience function that returns ByokV1AwsKey wrapped in ByokV1KeySpecKeyOneOf
-func ByokV1AwsKeyAsByokV1KeySpecKeyOneOf(v *ByokV1AwsKey) ByokV1KeySpecKeyOneOf {
-	return ByokV1KeySpecKeyOneOf{ ByokV1AwsKey: v}
+// ByokV1AwsKeyAsByokV1KeyKeyOneOf is a convenience function that returns ByokV1AwsKey wrapped in ByokV1KeyKeyOneOf
+func ByokV1AwsKeyAsByokV1KeyKeyOneOf(v *ByokV1AwsKey) ByokV1KeyKeyOneOf {
+	return ByokV1KeyKeyOneOf{ ByokV1AwsKey: v}
 }
 
-// ByokV1AzureKeyAsByokV1KeySpecKeyOneOf is a convenience function that returns ByokV1AzureKey wrapped in ByokV1KeySpecKeyOneOf
-func ByokV1AzureKeyAsByokV1KeySpecKeyOneOf(v *ByokV1AzureKey) ByokV1KeySpecKeyOneOf {
-	return ByokV1KeySpecKeyOneOf{ ByokV1AzureKey: v}
+// ByokV1AzureKeyAsByokV1KeyKeyOneOf is a convenience function that returns ByokV1AzureKey wrapped in ByokV1KeyKeyOneOf
+func ByokV1AzureKeyAsByokV1KeyKeyOneOf(v *ByokV1AzureKey) ByokV1KeyKeyOneOf {
+	return ByokV1KeyKeyOneOf{ ByokV1AzureKey: v}
 }
 
 
 // Unmarshal JSON data into one of the pointers in the struct
-func (dst *ByokV1KeySpecKeyOneOf) UnmarshalJSON(data []byte) error {
+func (dst *ByokV1KeyKeyOneOf) UnmarshalJSON(data []byte) error {
 	var err error
 	// use discriminator value to speed up the lookup
 	var jsonDict map[string]interface{}
@@ -65,7 +65,7 @@ func (dst *ByokV1KeySpecKeyOneOf) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.ByokV1AwsKey, return on the first match
 		} else {
 			dst.ByokV1AwsKey = nil
-			return fmt.Errorf("Failed to unmarshal ByokV1KeySpecKeyOneOf as ByokV1AwsKey: %s", err.Error())
+			return fmt.Errorf("Failed to unmarshal ByokV1KeyKeyOneOf as ByokV1AwsKey: %s", err.Error())
 		}
 	}
 
@@ -77,7 +77,7 @@ func (dst *ByokV1KeySpecKeyOneOf) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.ByokV1AzureKey, return on the first match
 		} else {
 			dst.ByokV1AzureKey = nil
-			return fmt.Errorf("Failed to unmarshal ByokV1KeySpecKeyOneOf as ByokV1AzureKey: %s", err.Error())
+			return fmt.Errorf("Failed to unmarshal ByokV1KeyKeyOneOf as ByokV1AzureKey: %s", err.Error())
 		}
 	}
 
@@ -89,7 +89,7 @@ func (dst *ByokV1KeySpecKeyOneOf) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.ByokV1AwsKey, return on the first match
 		} else {
 			dst.ByokV1AwsKey = nil
-			return fmt.Errorf("Failed to unmarshal ByokV1KeySpecKeyOneOf as ByokV1AwsKey: %s", err.Error())
+			return fmt.Errorf("Failed to unmarshal ByokV1KeyKeyOneOf as ByokV1AwsKey: %s", err.Error())
 		}
 	}
 
@@ -101,7 +101,7 @@ func (dst *ByokV1KeySpecKeyOneOf) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.ByokV1AzureKey, return on the first match
 		} else {
 			dst.ByokV1AzureKey = nil
-			return fmt.Errorf("Failed to unmarshal ByokV1KeySpecKeyOneOf as ByokV1AzureKey: %s", err.Error())
+			return fmt.Errorf("Failed to unmarshal ByokV1KeyKeyOneOf as ByokV1AzureKey: %s", err.Error())
 		}
 	}
 
@@ -109,7 +109,7 @@ func (dst *ByokV1KeySpecKeyOneOf) UnmarshalJSON(data []byte) error {
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
-func (src ByokV1KeySpecKeyOneOf) MarshalJSON() ([]byte, error) {
+func (src ByokV1KeyKeyOneOf) MarshalJSON() ([]byte, error) {
 	if src.ByokV1AwsKey != nil {
 		return json.Marshal(&src.ByokV1AwsKey)
 	}
@@ -122,7 +122,7 @@ func (src ByokV1KeySpecKeyOneOf) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *ByokV1KeySpecKeyOneOf) GetActualInstance() (interface{}) {
+func (obj *ByokV1KeyKeyOneOf) GetActualInstance() (interface{}) {
 	if obj.ByokV1AwsKey != nil {
 		return obj.ByokV1AwsKey
 	}
@@ -135,38 +135,38 @@ func (obj *ByokV1KeySpecKeyOneOf) GetActualInstance() (interface{}) {
 	return nil
 }
 
-type NullableByokV1KeySpecKeyOneOf struct {
-	value *ByokV1KeySpecKeyOneOf
+type NullableByokV1KeyKeyOneOf struct {
+	value *ByokV1KeyKeyOneOf
 	isSet bool
 }
 
-func (v NullableByokV1KeySpecKeyOneOf) Get() *ByokV1KeySpecKeyOneOf {
+func (v NullableByokV1KeyKeyOneOf) Get() *ByokV1KeyKeyOneOf {
 	return v.value
 }
 
-func (v *NullableByokV1KeySpecKeyOneOf) Set(val *ByokV1KeySpecKeyOneOf) {
+func (v *NullableByokV1KeyKeyOneOf) Set(val *ByokV1KeyKeyOneOf) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableByokV1KeySpecKeyOneOf) IsSet() bool {
+func (v NullableByokV1KeyKeyOneOf) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableByokV1KeySpecKeyOneOf) Unset() {
+func (v *NullableByokV1KeyKeyOneOf) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableByokV1KeySpecKeyOneOf(val *ByokV1KeySpecKeyOneOf) *NullableByokV1KeySpecKeyOneOf {
-	return &NullableByokV1KeySpecKeyOneOf{value: val, isSet: true}
+func NewNullableByokV1KeyKeyOneOf(val *ByokV1KeyKeyOneOf) *NullableByokV1KeyKeyOneOf {
+	return &NullableByokV1KeyKeyOneOf{value: val, isSet: true}
 }
 
-func (v NullableByokV1KeySpecKeyOneOf) MarshalJSON() ([]byte, error) {
+func (v NullableByokV1KeyKeyOneOf) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableByokV1KeySpecKeyOneOf) UnmarshalJSON(src []byte) error {
+func (v *NullableByokV1KeyKeyOneOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
