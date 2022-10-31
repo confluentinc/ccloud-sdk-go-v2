@@ -131,9 +131,9 @@ BatchCreateKafkaV3Acls Batch Create ACLs
 
 Creates ACLs.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param clusterId The Kafka cluster ID.
- @return ApiBatchCreateKafkaV3AclsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param clusterId The Kafka cluster ID.
+	@return ApiBatchCreateKafkaV3AclsRequest
 */
 func (a *ACLV3ApiService) BatchCreateKafkaV3Acls(ctx _context.Context, clusterId string) ApiBatchCreateKafkaV3AclsRequest {
 	return ApiBatchCreateKafkaV3AclsRequest{
@@ -158,7 +158,7 @@ func (a *ACLV3ApiService) BatchCreateKafkaV3AclsExecute(r ApiBatchCreateKafkaV3A
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/clusters/{cluster_id}/acls:batch"
+	localVarPath := localBasePath + "/kafka/v3/clusters/{cluster_id}/acls:batch"
 	localVarPath = strings.Replace(localVarPath, "{"+"cluster_id"+"}", _neturl.PathEscape(parameterToString(r.clusterId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -275,9 +275,9 @@ CreateKafkaAcls Create ACLs
 
 Creates an ACL.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param clusterId The Kafka cluster ID.
- @return ApiCreateKafkaAclsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param clusterId The Kafka cluster ID.
+	@return ApiCreateKafkaAclsRequest
 */
 func (a *ACLV3ApiService) CreateKafkaAcls(ctx _context.Context, clusterId string) ApiCreateKafkaAclsRequest {
 	return ApiCreateKafkaAclsRequest{
@@ -461,9 +461,9 @@ DeleteKafkaAcls Delete ACLs
 
 Deletes the list of ACLs that matches the search criteria.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param clusterId The Kafka cluster ID.
- @return ApiDeleteKafkaAclsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param clusterId The Kafka cluster ID.
+	@return ApiDeleteKafkaAclsRequest
 */
 func (a *ACLV3ApiService) DeleteKafkaAcls(ctx _context.Context, clusterId string) ApiDeleteKafkaAclsRequest {
 	return ApiDeleteKafkaAclsRequest{
@@ -474,7 +474,8 @@ func (a *ACLV3ApiService) DeleteKafkaAcls(ctx _context.Context, clusterId string
 }
 
 // Execute executes the request
-//  @return InlineResponse200
+//
+//	@return InlineResponse200
 func (a *ACLV3ApiService) DeleteKafkaAclsExecute(r ApiDeleteKafkaAclsRequest) (InlineResponse200, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
@@ -677,9 +678,9 @@ GetKafkaAcls Search ACLs
 
 Returns a list of ACLs that match the search criteria.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param clusterId The Kafka cluster ID.
- @return ApiGetKafkaAclsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param clusterId The Kafka cluster ID.
+	@return ApiGetKafkaAclsRequest
 */
 func (a *ACLV3ApiService) GetKafkaAcls(ctx _context.Context, clusterId string) ApiGetKafkaAclsRequest {
 	return ApiGetKafkaAclsRequest{
@@ -690,7 +691,8 @@ func (a *ACLV3ApiService) GetKafkaAcls(ctx _context.Context, clusterId string) A
 }
 
 // Execute executes the request
-//  @return AclDataList
+//
+//	@return AclDataList
 func (a *ACLV3ApiService) GetKafkaAclsExecute(r ApiGetKafkaAclsRequest) (AclDataList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
