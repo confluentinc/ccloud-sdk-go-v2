@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | Network kind type. | 
-**Vpc** | **string** | The AWS VPC id for the network. | [readonly] 
-**Account** | **string** | The AWS account id for the network. | [readonly] 
-**PrivateLinkEndpointService** | Pointer to **string** | The AWS VPC endpoint service for the network (used for PrivateLink) if available. | [optional] [readonly] 
+**Vpc** | **string** | The Confluent Cloud VPC ID. | [readonly] 
+**Account** | **string** | The AWS account ID associated with the Confluent Cloud VPC. | [readonly] 
+**PrivateLinkEndpointService** | Pointer to **string** | The endpoint service of the Confluent Cloud VPC. (used for PrivateLink) if available. | [optional] [readonly] 
 
 ## Methods
 

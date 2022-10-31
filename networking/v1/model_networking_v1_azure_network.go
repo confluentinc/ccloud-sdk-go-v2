@@ -37,12 +37,14 @@ import (
 type NetworkingV1AzureNetwork struct {
 	// Network kind type.
 	Kind string `json:"kind"`
-	// The Azure Virtual Network.
+	// The resource ID of the Confluent Cloud VNet.
 	Vnet string `json:"vnet"`
-	// The Azure subscription.
+	// The Azure Subscription ID associated with the Confluent Cloud VPC.
 	Subscription string `json:"subscription"`
-	// The mapping of zones to PrivateLink Service Aliases if available.  Keys are zones and values are [Azure PrivateLink Service Aliases](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#share-your-service) 
+	// The mapping of zones to Private Link Service Aliases if available. Keys are zones and values are [Azure Private Link Service Aliases](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#share-your-service). 
 	PrivateLinkServiceAliases *map[string]string `json:"private_link_service_aliases,omitempty"`
+	// The mapping of zones to Private Link Service Resource IDs if available. Keys are zones and values are [Azure Private Link Service Resource IDs](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#share-your-service). 
+	PrivateLinkServiceResourceIds *map[string]string `json:"private_link_service_resource_ids,omitempty"`
 }
 
 // NewNetworkingV1AzureNetwork instantiates a new NetworkingV1AzureNetwork object
@@ -169,12 +171,45 @@ func (o *NetworkingV1AzureNetwork) SetPrivateLinkServiceAliases(v map[string]str
 	o.PrivateLinkServiceAliases = &v
 }
 
+// GetPrivateLinkServiceResourceIds returns the PrivateLinkServiceResourceIds field value if set, zero value otherwise.
+func (o *NetworkingV1AzureNetwork) GetPrivateLinkServiceResourceIds() map[string]string {
+	if o == nil || o.PrivateLinkServiceResourceIds == nil {
+		var ret map[string]string
+		return ret
+	}
+	return *o.PrivateLinkServiceResourceIds
+}
+
+// GetPrivateLinkServiceResourceIdsOk returns a tuple with the PrivateLinkServiceResourceIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1AzureNetwork) GetPrivateLinkServiceResourceIdsOk() (*map[string]string, bool) {
+	if o == nil || o.PrivateLinkServiceResourceIds == nil {
+		return nil, false
+	}
+	return o.PrivateLinkServiceResourceIds, true
+}
+
+// HasPrivateLinkServiceResourceIds returns a boolean if a field has been set.
+func (o *NetworkingV1AzureNetwork) HasPrivateLinkServiceResourceIds() bool {
+	if o != nil && o.PrivateLinkServiceResourceIds != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPrivateLinkServiceResourceIds gets a reference to the given map[string]string and assigns it to the PrivateLinkServiceResourceIds field.
+func (o *NetworkingV1AzureNetwork) SetPrivateLinkServiceResourceIds(v map[string]string) {
+	o.PrivateLinkServiceResourceIds = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1AzureNetwork) Redact() {
     o.recurseRedact(&o.Kind)
     o.recurseRedact(&o.Vnet)
     o.recurseRedact(&o.Subscription)
     o.recurseRedact(o.PrivateLinkServiceAliases)
+    o.recurseRedact(o.PrivateLinkServiceResourceIds)
 }
 
 func (o *NetworkingV1AzureNetwork) recurseRedact(v interface{}) {
@@ -220,6 +255,9 @@ func (o NetworkingV1AzureNetwork) MarshalJSON() ([]byte, error) {
 	}
 	if o.PrivateLinkServiceAliases != nil {
 		toSerialize["private_link_service_aliases"] = o.PrivateLinkServiceAliases
+	}
+	if o.PrivateLinkServiceResourceIds != nil {
+		toSerialize["private_link_service_resource_ids"] = o.PrivateLinkServiceResourceIds
 	}
 	return json.Marshal(toSerialize)
 }

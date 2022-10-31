@@ -35,7 +35,7 @@ import (
 
 // NetworkingV1PrivateLinkAccessStatus The status of the Private Link Access
 type NetworkingV1PrivateLinkAccessStatus struct {
-	// The lifecycle phase of the PrivateLink access configuration:   PROVISIONING: PrivateLink access provisioning is in progress;   READY:  PrivateLink access is ready;   FAILED: PrivateLink access is in a failed state;   DEPROVISIONING: PrivateLink access deprovisioning is in progress; 
+	// The lifecycle phase of the PrivateLink access configuration:    PROVISIONING: PrivateLink access provisioning is in progress;    READY:  PrivateLink access is ready;    FAILED: PrivateLink access is in a failed state;    DEPROVISIONING: PrivateLink access deprovisioning is in progress; 
 	Phase string `json:"phase"`
 	// Error code if PrivateLink access is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`

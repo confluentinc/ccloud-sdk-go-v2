@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | Network kind type. | 
-**Project** | **string** | The GCP project. | [readonly] 
-**VpcNetwork** | **string** | The GCP VPC network name. | [readonly] 
+**Project** | **string** | The GCP Project ID associated with the Confluent Cloud VPC. | [readonly] 
+**VpcNetwork** | **string** | The network name of the Confluent Cloud VPC. | [readonly] 
 **PrivateServiceConnectServiceAttachments** | Pointer to **map[string]string** | The mapping of zones to Private Service Connect Service Attachments if available. Keys are zones and values are [GCP Private Service Connect Service Attachment](https://cloud.google.com/vpc/docs/configure-private-service-connect-producer#api_7)  | [optional] [readonly] 
 
 ## Methods

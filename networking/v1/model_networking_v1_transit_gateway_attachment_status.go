@@ -35,12 +35,14 @@ import (
 
 // NetworkingV1TransitGatewayAttachmentStatus The status of the Transit Gateway Attachment
 type NetworkingV1TransitGatewayAttachmentStatus struct {
-	// The lifecycle phase of the TGW attachment:   PROVISIONING: attachment provisioning is in progress;   PENDING_ACCEPT: attachment request is pending acceptance by the customer;   READY:  attachment is ready;   FAILED: attachment is in a failed state;   DEPROVISIONING: attachment deprovisioning is in progress; 
+	// The lifecycle phase of the TGW attachment:    PROVISIONING: attachment provisioning is in progress;    PENDING_ACCEPT: attachment request is pending acceptance by the customer;    READY:  attachment is ready;    FAILED: attachment is in a failed state;    DEPROVISIONING: attachment deprovisioning is in progress; 
 	Phase string `json:"phase"`
 	// Error code if TGW attachment is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`
 	// Displayable error message if TGW attachment is in a failed state
 	ErrorMessage *string `json:"error_message,omitempty"`
+	// The cloud-specific TGW attachment details.
+	Cloud *NetworkingV1TransitGatewayAttachmentStatusCloudOneOf `json:"cloud,omitempty"`
 }
 
 // NewNetworkingV1TransitGatewayAttachmentStatus instantiates a new NetworkingV1TransitGatewayAttachmentStatus object
@@ -149,11 +151,44 @@ func (o *NetworkingV1TransitGatewayAttachmentStatus) SetErrorMessage(v string) {
 	o.ErrorMessage = &v
 }
 
+// GetCloud returns the Cloud field value if set, zero value otherwise.
+func (o *NetworkingV1TransitGatewayAttachmentStatus) GetCloud() NetworkingV1TransitGatewayAttachmentStatusCloudOneOf {
+	if o == nil || o.Cloud == nil {
+		var ret NetworkingV1TransitGatewayAttachmentStatusCloudOneOf
+		return ret
+	}
+	return *o.Cloud
+}
+
+// GetCloudOk returns a tuple with the Cloud field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1TransitGatewayAttachmentStatus) GetCloudOk() (*NetworkingV1TransitGatewayAttachmentStatusCloudOneOf, bool) {
+	if o == nil || o.Cloud == nil {
+		return nil, false
+	}
+	return o.Cloud, true
+}
+
+// HasCloud returns a boolean if a field has been set.
+func (o *NetworkingV1TransitGatewayAttachmentStatus) HasCloud() bool {
+	if o != nil && o.Cloud != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCloud gets a reference to the given NetworkingV1TransitGatewayAttachmentStatusCloudOneOf and assigns it to the Cloud field.
+func (o *NetworkingV1TransitGatewayAttachmentStatus) SetCloud(v NetworkingV1TransitGatewayAttachmentStatusCloudOneOf) {
+	o.Cloud = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1TransitGatewayAttachmentStatus) Redact() {
     o.recurseRedact(&o.Phase)
     o.recurseRedact(o.ErrorCode)
     o.recurseRedact(o.ErrorMessage)
+    o.recurseRedact(o.Cloud)
 }
 
 func (o *NetworkingV1TransitGatewayAttachmentStatus) recurseRedact(v interface{}) {
@@ -196,6 +231,9 @@ func (o NetworkingV1TransitGatewayAttachmentStatus) MarshalJSON() ([]byte, error
 	}
 	if o.ErrorMessage != nil {
 		toSerialize["error_message"] = o.ErrorMessage
+	}
+	if o.Cloud != nil {
+		toSerialize["cloud"] = o.Cloud
 	}
 	return json.Marshal(toSerialize)
 }

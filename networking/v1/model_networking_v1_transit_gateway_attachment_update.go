@@ -33,8 +33,8 @@ import (
 	"reflect"
 )
 
-// NetworkingV1PrivateLinkAccessUpdate Add or remove access to PrivateLink endpoints by AWS account, Azure subscription and GCP project ID.  Related guide: [Private Links Overview](https://docs.confluent.io/cloud/current/networking/private-links/index.html).  ## The Private Link Accesses Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.PrivateLinkAccess\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `private_link_accounts_per_network` | Number of AWS accounts per network | | `private_link_subscriptions_per_network` | Number of Azure subscriptions per network | | `private_service_connect_projects_per_network` | Number of GCP projects per network |
-type NetworkingV1PrivateLinkAccessUpdate struct {
+// NetworkingV1TransitGatewayAttachmentUpdate AWS Transit Gateway Attachments  Related guide: [APIs to manage AWS Transit Gateway Attachments](https://docs.confluent.io/cloud/current/networking/aws-transit-gateway.html).  ## The Transit Gateway Attachments Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.TransitGatewayAttachment\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `tgw_attachments_per_network` | Number of TGW attachments per network |
+type NetworkingV1TransitGatewayAttachmentUpdate struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
@@ -42,29 +42,29 @@ type NetworkingV1PrivateLinkAccessUpdate struct {
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
 	Id *string `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
-	Spec *NetworkingV1PrivateLinkAccessSpecUpdate `json:"spec,omitempty"`
-	Status *NetworkingV1PrivateLinkAccessStatus `json:"status,omitempty"`
+	Spec *NetworkingV1TransitGatewayAttachmentSpecUpdate `json:"spec,omitempty"`
+	Status *NetworkingV1TransitGatewayAttachmentStatus `json:"status,omitempty"`
 }
 
-// NewNetworkingV1PrivateLinkAccessUpdate instantiates a new NetworkingV1PrivateLinkAccessUpdate object
+// NewNetworkingV1TransitGatewayAttachmentUpdate instantiates a new NetworkingV1TransitGatewayAttachmentUpdate object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1PrivateLinkAccessUpdate() *NetworkingV1PrivateLinkAccessUpdate {
-	this := NetworkingV1PrivateLinkAccessUpdate{}
+func NewNetworkingV1TransitGatewayAttachmentUpdate() *NetworkingV1TransitGatewayAttachmentUpdate {
+	this := NetworkingV1TransitGatewayAttachmentUpdate{}
 	return &this
 }
 
-// NewNetworkingV1PrivateLinkAccessUpdateWithDefaults instantiates a new NetworkingV1PrivateLinkAccessUpdate object
+// NewNetworkingV1TransitGatewayAttachmentUpdateWithDefaults instantiates a new NetworkingV1TransitGatewayAttachmentUpdate object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewNetworkingV1PrivateLinkAccessUpdateWithDefaults() *NetworkingV1PrivateLinkAccessUpdate {
-	this := NetworkingV1PrivateLinkAccessUpdate{}
+func NewNetworkingV1TransitGatewayAttachmentUpdateWithDefaults() *NetworkingV1TransitGatewayAttachmentUpdate {
+	this := NetworkingV1TransitGatewayAttachmentUpdate{}
 	return &this
 }
 
 // GetApiVersion returns the ApiVersion field value if set, zero value otherwise.
-func (o *NetworkingV1PrivateLinkAccessUpdate) GetApiVersion() string {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) GetApiVersion() string {
 	if o == nil || o.ApiVersion == nil {
 		var ret string
 		return ret
@@ -74,7 +74,7 @@ func (o *NetworkingV1PrivateLinkAccessUpdate) GetApiVersion() string {
 
 // GetApiVersionOk returns a tuple with the ApiVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1PrivateLinkAccessUpdate) GetApiVersionOk() (*string, bool) {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) GetApiVersionOk() (*string, bool) {
 	if o == nil || o.ApiVersion == nil {
 		return nil, false
 	}
@@ -82,7 +82,7 @@ func (o *NetworkingV1PrivateLinkAccessUpdate) GetApiVersionOk() (*string, bool) 
 }
 
 // HasApiVersion returns a boolean if a field has been set.
-func (o *NetworkingV1PrivateLinkAccessUpdate) HasApiVersion() bool {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) HasApiVersion() bool {
 	if o != nil && o.ApiVersion != nil {
 		return true
 	}
@@ -91,12 +91,12 @@ func (o *NetworkingV1PrivateLinkAccessUpdate) HasApiVersion() bool {
 }
 
 // SetApiVersion gets a reference to the given string and assigns it to the ApiVersion field.
-func (o *NetworkingV1PrivateLinkAccessUpdate) SetApiVersion(v string) {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) SetApiVersion(v string) {
 	o.ApiVersion = &v
 }
 
 // GetKind returns the Kind field value if set, zero value otherwise.
-func (o *NetworkingV1PrivateLinkAccessUpdate) GetKind() string {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) GetKind() string {
 	if o == nil || o.Kind == nil {
 		var ret string
 		return ret
@@ -106,7 +106,7 @@ func (o *NetworkingV1PrivateLinkAccessUpdate) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1PrivateLinkAccessUpdate) GetKindOk() (*string, bool) {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) GetKindOk() (*string, bool) {
 	if o == nil || o.Kind == nil {
 		return nil, false
 	}
@@ -114,7 +114,7 @@ func (o *NetworkingV1PrivateLinkAccessUpdate) GetKindOk() (*string, bool) {
 }
 
 // HasKind returns a boolean if a field has been set.
-func (o *NetworkingV1PrivateLinkAccessUpdate) HasKind() bool {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) HasKind() bool {
 	if o != nil && o.Kind != nil {
 		return true
 	}
@@ -123,12 +123,12 @@ func (o *NetworkingV1PrivateLinkAccessUpdate) HasKind() bool {
 }
 
 // SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *NetworkingV1PrivateLinkAccessUpdate) SetKind(v string) {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) SetKind(v string) {
 	o.Kind = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *NetworkingV1PrivateLinkAccessUpdate) GetId() string {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) GetId() string {
 	if o == nil || o.Id == nil {
 		var ret string
 		return ret
@@ -138,7 +138,7 @@ func (o *NetworkingV1PrivateLinkAccessUpdate) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1PrivateLinkAccessUpdate) GetIdOk() (*string, bool) {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) GetIdOk() (*string, bool) {
 	if o == nil || o.Id == nil {
 		return nil, false
 	}
@@ -146,7 +146,7 @@ func (o *NetworkingV1PrivateLinkAccessUpdate) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *NetworkingV1PrivateLinkAccessUpdate) HasId() bool {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) HasId() bool {
 	if o != nil && o.Id != nil {
 		return true
 	}
@@ -155,12 +155,12 @@ func (o *NetworkingV1PrivateLinkAccessUpdate) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *NetworkingV1PrivateLinkAccessUpdate) SetId(v string) {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) SetId(v string) {
 	o.Id = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *NetworkingV1PrivateLinkAccessUpdate) GetMetadata() ObjectMeta {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) GetMetadata() ObjectMeta {
 	if o == nil || o.Metadata == nil {
 		var ret ObjectMeta
 		return ret
@@ -170,7 +170,7 @@ func (o *NetworkingV1PrivateLinkAccessUpdate) GetMetadata() ObjectMeta {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1PrivateLinkAccessUpdate) GetMetadataOk() (*ObjectMeta, bool) {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) GetMetadataOk() (*ObjectMeta, bool) {
 	if o == nil || o.Metadata == nil {
 		return nil, false
 	}
@@ -178,7 +178,7 @@ func (o *NetworkingV1PrivateLinkAccessUpdate) GetMetadataOk() (*ObjectMeta, bool
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *NetworkingV1PrivateLinkAccessUpdate) HasMetadata() bool {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) HasMetadata() bool {
 	if o != nil && o.Metadata != nil {
 		return true
 	}
@@ -187,14 +187,14 @@ func (o *NetworkingV1PrivateLinkAccessUpdate) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given ObjectMeta and assigns it to the Metadata field.
-func (o *NetworkingV1PrivateLinkAccessUpdate) SetMetadata(v ObjectMeta) {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
 // GetSpec returns the Spec field value if set, zero value otherwise.
-func (o *NetworkingV1PrivateLinkAccessUpdate) GetSpec() NetworkingV1PrivateLinkAccessSpecUpdate {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) GetSpec() NetworkingV1TransitGatewayAttachmentSpecUpdate {
 	if o == nil || o.Spec == nil {
-		var ret NetworkingV1PrivateLinkAccessSpecUpdate
+		var ret NetworkingV1TransitGatewayAttachmentSpecUpdate
 		return ret
 	}
 	return *o.Spec
@@ -202,7 +202,7 @@ func (o *NetworkingV1PrivateLinkAccessUpdate) GetSpec() NetworkingV1PrivateLinkA
 
 // GetSpecOk returns a tuple with the Spec field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1PrivateLinkAccessUpdate) GetSpecOk() (*NetworkingV1PrivateLinkAccessSpecUpdate, bool) {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) GetSpecOk() (*NetworkingV1TransitGatewayAttachmentSpecUpdate, bool) {
 	if o == nil || o.Spec == nil {
 		return nil, false
 	}
@@ -210,7 +210,7 @@ func (o *NetworkingV1PrivateLinkAccessUpdate) GetSpecOk() (*NetworkingV1PrivateL
 }
 
 // HasSpec returns a boolean if a field has been set.
-func (o *NetworkingV1PrivateLinkAccessUpdate) HasSpec() bool {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) HasSpec() bool {
 	if o != nil && o.Spec != nil {
 		return true
 	}
@@ -218,15 +218,15 @@ func (o *NetworkingV1PrivateLinkAccessUpdate) HasSpec() bool {
 	return false
 }
 
-// SetSpec gets a reference to the given NetworkingV1PrivateLinkAccessSpecUpdate and assigns it to the Spec field.
-func (o *NetworkingV1PrivateLinkAccessUpdate) SetSpec(v NetworkingV1PrivateLinkAccessSpecUpdate) {
+// SetSpec gets a reference to the given NetworkingV1TransitGatewayAttachmentSpecUpdate and assigns it to the Spec field.
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) SetSpec(v NetworkingV1TransitGatewayAttachmentSpecUpdate) {
 	o.Spec = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *NetworkingV1PrivateLinkAccessUpdate) GetStatus() NetworkingV1PrivateLinkAccessStatus {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) GetStatus() NetworkingV1TransitGatewayAttachmentStatus {
 	if o == nil || o.Status == nil {
-		var ret NetworkingV1PrivateLinkAccessStatus
+		var ret NetworkingV1TransitGatewayAttachmentStatus
 		return ret
 	}
 	return *o.Status
@@ -234,7 +234,7 @@ func (o *NetworkingV1PrivateLinkAccessUpdate) GetStatus() NetworkingV1PrivateLin
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1PrivateLinkAccessUpdate) GetStatusOk() (*NetworkingV1PrivateLinkAccessStatus, bool) {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) GetStatusOk() (*NetworkingV1TransitGatewayAttachmentStatus, bool) {
 	if o == nil || o.Status == nil {
 		return nil, false
 	}
@@ -242,7 +242,7 @@ func (o *NetworkingV1PrivateLinkAccessUpdate) GetStatusOk() (*NetworkingV1Privat
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *NetworkingV1PrivateLinkAccessUpdate) HasStatus() bool {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) HasStatus() bool {
 	if o != nil && o.Status != nil {
 		return true
 	}
@@ -250,13 +250,13 @@ func (o *NetworkingV1PrivateLinkAccessUpdate) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given NetworkingV1PrivateLinkAccessStatus and assigns it to the Status field.
-func (o *NetworkingV1PrivateLinkAccessUpdate) SetStatus(v NetworkingV1PrivateLinkAccessStatus) {
+// SetStatus gets a reference to the given NetworkingV1TransitGatewayAttachmentStatus and assigns it to the Status field.
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) SetStatus(v NetworkingV1TransitGatewayAttachmentStatus) {
 	o.Status = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *NetworkingV1PrivateLinkAccessUpdate) Redact() {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) Redact() {
     o.recurseRedact(o.ApiVersion)
     o.recurseRedact(o.Kind)
     o.recurseRedact(o.Id)
@@ -265,7 +265,7 @@ func (o *NetworkingV1PrivateLinkAccessUpdate) Redact() {
     o.recurseRedact(o.Status)
 }
 
-func (o *NetworkingV1PrivateLinkAccessUpdate) recurseRedact(v interface{}) {
+func (o *NetworkingV1TransitGatewayAttachmentUpdate) recurseRedact(v interface{}) {
     type redactor interface {
         Redact()
     }
@@ -290,12 +290,12 @@ func (o *NetworkingV1PrivateLinkAccessUpdate) recurseRedact(v interface{}) {
     }
 }
 
-func (o NetworkingV1PrivateLinkAccessUpdate) zeroField(v interface{}) {
+func (o NetworkingV1TransitGatewayAttachmentUpdate) zeroField(v interface{}) {
     p := reflect.ValueOf(v).Elem()
     p.Set(reflect.Zero(p.Type()))
 }
 
-func (o NetworkingV1PrivateLinkAccessUpdate) MarshalJSON() ([]byte, error) {
+func (o NetworkingV1TransitGatewayAttachmentUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ApiVersion != nil {
 		toSerialize["api_version"] = o.ApiVersion
@@ -318,38 +318,38 @@ func (o NetworkingV1PrivateLinkAccessUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableNetworkingV1PrivateLinkAccessUpdate struct {
-	value *NetworkingV1PrivateLinkAccessUpdate
+type NullableNetworkingV1TransitGatewayAttachmentUpdate struct {
+	value *NetworkingV1TransitGatewayAttachmentUpdate
 	isSet bool
 }
 
-func (v NullableNetworkingV1PrivateLinkAccessUpdate) Get() *NetworkingV1PrivateLinkAccessUpdate {
+func (v NullableNetworkingV1TransitGatewayAttachmentUpdate) Get() *NetworkingV1TransitGatewayAttachmentUpdate {
 	return v.value
 }
 
-func (v *NullableNetworkingV1PrivateLinkAccessUpdate) Set(val *NetworkingV1PrivateLinkAccessUpdate) {
+func (v *NullableNetworkingV1TransitGatewayAttachmentUpdate) Set(val *NetworkingV1TransitGatewayAttachmentUpdate) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableNetworkingV1PrivateLinkAccessUpdate) IsSet() bool {
+func (v NullableNetworkingV1TransitGatewayAttachmentUpdate) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableNetworkingV1PrivateLinkAccessUpdate) Unset() {
+func (v *NullableNetworkingV1TransitGatewayAttachmentUpdate) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableNetworkingV1PrivateLinkAccessUpdate(val *NetworkingV1PrivateLinkAccessUpdate) *NullableNetworkingV1PrivateLinkAccessUpdate {
-	return &NullableNetworkingV1PrivateLinkAccessUpdate{value: val, isSet: true}
+func NewNullableNetworkingV1TransitGatewayAttachmentUpdate(val *NetworkingV1TransitGatewayAttachmentUpdate) *NullableNetworkingV1TransitGatewayAttachmentUpdate {
+	return &NullableNetworkingV1TransitGatewayAttachmentUpdate{value: val, isSet: true}
 }
 
-func (v NullableNetworkingV1PrivateLinkAccessUpdate) MarshalJSON() ([]byte, error) {
+func (v NullableNetworkingV1TransitGatewayAttachmentUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableNetworkingV1PrivateLinkAccessUpdate) UnmarshalJSON(src []byte) error {
+func (v *NullableNetworkingV1TransitGatewayAttachmentUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

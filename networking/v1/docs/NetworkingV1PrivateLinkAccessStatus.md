@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Phase** | **string** | The lifecycle phase of the PrivateLink access configuration:   PROVISIONING: PrivateLink access provisioning is in progress;   READY:  PrivateLink access is ready;   FAILED: PrivateLink access is in a failed state;   DEPROVISIONING: PrivateLink access deprovisioning is in progress;  | [readonly] 
+**Phase** | **string** | The lifecycle phase of the PrivateLink access configuration:    PROVISIONING: PrivateLink access provisioning is in progress;    READY:  PrivateLink access is ready;    FAILED: PrivateLink access is in a failed state;    DEPROVISIONING: PrivateLink access deprovisioning is in progress;  | [readonly] 
 **ErrorCode** | Pointer to **string** | Error code if PrivateLink access is in a failed state. May be used for programmatic error checking. | [optional] [readonly] 
 **ErrorMessage** | Pointer to **string** | Displayable error message if PrivateLink access is in a failed state | [optional] [readonly] 
 
