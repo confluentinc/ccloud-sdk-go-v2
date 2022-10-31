@@ -79,7 +79,7 @@ All URIs are relative to *https://pkc-00000.region.provider.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ACLV3Api* | [**BatchCreateKafkaV3Acls**](docs/ACLV3Api.md#batchcreatekafkav3acls) | **Post** /clusters/{cluster_id}/acls:batch | Batch Create ACLs
+*ACLV3Api* | [**BatchCreateKafkaV3Acls**](docs/ACLV3Api.md#batchcreatekafkav3acls) | **Post** /kafka/v3/clusters/{cluster_id}/acls:batch | Batch Create ACLs
 *ACLV3Api* | [**CreateKafkaAcls**](docs/ACLV3Api.md#createkafkaacls) | **Post** /kafka/v3/clusters/{cluster_id}/acls | Create ACLs
 *ACLV3Api* | [**DeleteKafkaAcls**](docs/ACLV3Api.md#deletekafkaacls) | **Delete** /kafka/v3/clusters/{cluster_id}/acls | Delete ACLs
 *ACLV3Api* | [**GetKafkaAcls**](docs/ACLV3Api.md#getkafkaacls) | **Get** /kafka/v3/clusters/{cluster_id}/acls | Search ACLs

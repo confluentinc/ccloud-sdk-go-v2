@@ -248,7 +248,7 @@ paths:
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
-  /clusters/{cluster_id}/acls:batch:
+  /kafka/v3/clusters/{cluster_id}/acls:batch:
     post:
       description: Creates ACLs.
       operationId: batchCreateKafkaV3Acls
@@ -357,20 +357,20 @@ paths:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url 'https://pkc-00000.region.provider.confluent.cloud/clusters/{cluster_id}/acls:batch'
+            --url 'https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/{cluster_id}/acls:batch'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://pkc-00000.region.provider.confluent.cloud/clusters/{cluster_id}/acls:batch")
+            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/{cluster_id}/acls:batch")
             .post(null)
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/clusters/{cluster_id}/acls:batch\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/{cluster_id}/acls:batch\"\
           \n\n\treq, _ := http.NewRequest(\"POST\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
@@ -380,7 +380,7 @@ paths:
 
           conn = http.client.HTTPSConnection("pkc-00000.region.provider.confluent.cloud")
 
-          conn.request("POST", "/clusters/{cluster_id}/acls:batch")
+          conn.request("POST", "/kafka/v3/clusters/{cluster_id}/acls:batch")
 
           res = conn.getresponse()
           data = res.read()
@@ -394,7 +394,7 @@ paths:
             "method": "POST",
             "hostname": "pkc-00000.region.provider.confluent.cloud",
             "port": null,
-            "path": "/clusters/{cluster_id}/acls:batch",
+            "path": "/kafka/v3/clusters/{cluster_id}/acls:batch",
             "headers": {}
           };
 
@@ -417,12 +417,12 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/clusters/{cluster_id}/acls:batch");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/{cluster_id}/acls:batch");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/clusters/{cluster_id}/acls:batch");
+          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/{cluster_id}/acls:batch");
           var request = new RestRequest(Method.POST);
           IRestResponse response = client.Execute(request);
   /kafka/v3/clusters/{cluster_id}/acls:
