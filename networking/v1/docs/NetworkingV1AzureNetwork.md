@@ -5,9 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | Network kind type. | 
-**Vnet** | **string** | The Azure Virtual Network. | [readonly] 
-**Subscription** | **string** | The Azure subscription. | [readonly] 
-**PrivateLinkServiceAliases** | Pointer to **map[string]string** | The mapping of zones to PrivateLink Service Aliases if available.  Keys are zones and values are [Azure PrivateLink Service Aliases](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#share-your-service)  | [optional] [readonly] 
+**Vnet** | **string** | The resource ID of the Confluent Cloud VNet. | [readonly] 
+**Subscription** | **string** | The Azure Subscription ID associated with the Confluent Cloud VPC. | [readonly] 
+**PrivateLinkServiceAliases** | Pointer to **map[string]string** | The mapping of zones to Private Link Service Aliases if available. Keys are zones and values are [Azure Private Link Service Aliases](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#share-your-service).  | [optional] [readonly] 
+**PrivateLinkServiceResourceIds** | Pointer to **map[string]string** | The mapping of zones to Private Link Service Resource IDs if available. Keys are zones and values are [Azure Private Link Service Resource IDs](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#share-your-service).  | [optional] [readonly] 
 
 ## Methods
 
@@ -112,6 +113,31 @@ SetPrivateLinkServiceAliases sets PrivateLinkServiceAliases field to given value
 `func (o *NetworkingV1AzureNetwork) HasPrivateLinkServiceAliases() bool`
 
 HasPrivateLinkServiceAliases returns a boolean if a field has been set.
+
+### GetPrivateLinkServiceResourceIds
+
+`func (o *NetworkingV1AzureNetwork) GetPrivateLinkServiceResourceIds() map[string]string`
+
+GetPrivateLinkServiceResourceIds returns the PrivateLinkServiceResourceIds field if non-nil, zero value otherwise.
+
+### GetPrivateLinkServiceResourceIdsOk
+
+`func (o *NetworkingV1AzureNetwork) GetPrivateLinkServiceResourceIdsOk() (*map[string]string, bool)`
+
+GetPrivateLinkServiceResourceIdsOk returns a tuple with the PrivateLinkServiceResourceIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrivateLinkServiceResourceIds
+
+`func (o *NetworkingV1AzureNetwork) SetPrivateLinkServiceResourceIds(v map[string]string)`
+
+SetPrivateLinkServiceResourceIds sets PrivateLinkServiceResourceIds field to given value.
+
+### HasPrivateLinkServiceResourceIds
+
+`func (o *NetworkingV1AzureNetwork) HasPrivateLinkServiceResourceIds() bool`
+
+HasPrivateLinkServiceResourceIds returns a boolean if a field has been set.
 
 
 ### AsNetworkingV1NetworkStatusCloudOneOf

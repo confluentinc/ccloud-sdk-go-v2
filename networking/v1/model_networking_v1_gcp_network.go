@@ -37,9 +37,9 @@ import (
 type NetworkingV1GcpNetwork struct {
 	// Network kind type.
 	Kind string `json:"kind"`
-	// The GCP project.
+	// The GCP Project ID associated with the Confluent Cloud VPC.
 	Project string `json:"project"`
-	// The GCP VPC network name.
+	// The network name of the Confluent Cloud VPC.
 	VpcNetwork string `json:"vpc_network"`
 	// The mapping of zones to Private Service Connect Service Attachments if available. Keys are zones and values are [GCP Private Service Connect Service Attachment](https://cloud.google.com/vpc/docs/configure-private-service-connect-producer#api_7) 
 	PrivateServiceConnectServiceAttachments *map[string]string `json:"private_service_connect_service_attachments,omitempty"`

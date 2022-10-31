@@ -94,8 +94,11 @@ Class | Method | HTTP request | Description
 *PrivateLinkAccessesNetworkingV1Api* | [**GetNetworkingV1PrivateLinkAccess**](docs/PrivateLinkAccessesNetworkingV1Api.md#getnetworkingv1privatelinkaccess) | **Get** /networking/v1/private-link-accesses/{id} | Read a Private Link Access
 *PrivateLinkAccessesNetworkingV1Api* | [**ListNetworkingV1PrivateLinkAccesses**](docs/PrivateLinkAccessesNetworkingV1Api.md#listnetworkingv1privatelinkaccesses) | **Get** /networking/v1/private-link-accesses | List of Private Link Accesses
 *PrivateLinkAccessesNetworkingV1Api* | [**UpdateNetworkingV1PrivateLinkAccess**](docs/PrivateLinkAccessesNetworkingV1Api.md#updatenetworkingv1privatelinkaccess) | **Patch** /networking/v1/private-link-accesses/{id} | Update a Private Link Access
+*TransitGatewayAttachmentsNetworkingV1Api* | [**CreateNetworkingV1TransitGatewayAttachment**](docs/TransitGatewayAttachmentsNetworkingV1Api.md#createnetworkingv1transitgatewayattachment) | **Post** /networking/v1/transit-gateway-attachments | Create a Transit Gateway Attachment
+*TransitGatewayAttachmentsNetworkingV1Api* | [**DeleteNetworkingV1TransitGatewayAttachment**](docs/TransitGatewayAttachmentsNetworkingV1Api.md#deletenetworkingv1transitgatewayattachment) | **Delete** /networking/v1/transit-gateway-attachments/{id} | Delete a Transit Gateway Attachment
 *TransitGatewayAttachmentsNetworkingV1Api* | [**GetNetworkingV1TransitGatewayAttachment**](docs/TransitGatewayAttachmentsNetworkingV1Api.md#getnetworkingv1transitgatewayattachment) | **Get** /networking/v1/transit-gateway-attachments/{id} | Read a Transit Gateway Attachment
 *TransitGatewayAttachmentsNetworkingV1Api* | [**ListNetworkingV1TransitGatewayAttachments**](docs/TransitGatewayAttachmentsNetworkingV1Api.md#listnetworkingv1transitgatewayattachments) | **Get** /networking/v1/transit-gateway-attachments | List of Transit Gateway Attachments
+*TransitGatewayAttachmentsNetworkingV1Api* | [**UpdateNetworkingV1TransitGatewayAttachment**](docs/TransitGatewayAttachmentsNetworkingV1Api.md#updatenetworkingv1transitgatewayattachment) | **Patch** /networking/v1/transit-gateway-attachments/{id} | Update a Transit Gateway Attachment
 
 
 ## Documentation For Models
@@ -108,6 +111,8 @@ Class | Method | HTTP request | Description
  - [NetworkingV1AwsNetwork](docs/NetworkingV1AwsNetwork.md)
  - [NetworkingV1AwsPeering](docs/NetworkingV1AwsPeering.md)
  - [NetworkingV1AwsPrivateLinkAccess](docs/NetworkingV1AwsPrivateLinkAccess.md)
+ - [NetworkingV1AwsTransitGatewayAttachment](docs/NetworkingV1AwsTransitGatewayAttachment.md)
+ - [NetworkingV1AwsTransitGatewayAttachmentStatus](docs/NetworkingV1AwsTransitGatewayAttachmentStatus.md)
  - [NetworkingV1AzureNetwork](docs/NetworkingV1AzureNetwork.md)
  - [NetworkingV1AzurePeering](docs/NetworkingV1AzurePeering.md)
  - [NetworkingV1AzurePrivateLinkAccess](docs/NetworkingV1AzurePrivateLinkAccess.md)
@@ -136,11 +141,16 @@ Class | Method | HTTP request | Description
  - [NetworkingV1PrivateLinkAccessSpecUpdate](docs/NetworkingV1PrivateLinkAccessSpecUpdate.md)
  - [NetworkingV1PrivateLinkAccessStatus](docs/NetworkingV1PrivateLinkAccessStatus.md)
  - [NetworkingV1PrivateLinkAccessUpdate](docs/NetworkingV1PrivateLinkAccessUpdate.md)
- - [NetworkingV1StatusConnectionTypes](docs/NetworkingV1StatusConnectionTypes.md)
+ - [NetworkingV1SupportedConnectionTypes](docs/NetworkingV1SupportedConnectionTypes.md)
  - [NetworkingV1TransitGatewayAttachment](docs/NetworkingV1TransitGatewayAttachment.md)
  - [NetworkingV1TransitGatewayAttachmentList](docs/NetworkingV1TransitGatewayAttachmentList.md)
  - [NetworkingV1TransitGatewayAttachmentSpec](docs/NetworkingV1TransitGatewayAttachmentSpec.md)
+ - [NetworkingV1TransitGatewayAttachmentSpecCloudOneOf](docs/NetworkingV1TransitGatewayAttachmentSpecCloudOneOf.md)
+ - [NetworkingV1TransitGatewayAttachmentSpecUpdate](docs/NetworkingV1TransitGatewayAttachmentSpecUpdate.md)
+ - [NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf](docs/NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf.md)
  - [NetworkingV1TransitGatewayAttachmentStatus](docs/NetworkingV1TransitGatewayAttachmentStatus.md)
+ - [NetworkingV1TransitGatewayAttachmentStatusCloudOneOf](docs/NetworkingV1TransitGatewayAttachmentStatusCloudOneOf.md)
+ - [NetworkingV1TransitGatewayAttachmentUpdate](docs/NetworkingV1TransitGatewayAttachmentUpdate.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
 

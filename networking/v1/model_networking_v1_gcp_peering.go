@@ -37,11 +37,11 @@ import (
 type NetworkingV1GcpPeering struct {
 	// Peering kind type.
 	Kind string `json:"kind"`
-	// The name of the GCP project.
+	// The Google Cloud project ID associated with the VPC that you are peering with Confluent Cloud network. 
 	Project string `json:"project"`
-	// The name of the GCP VPC network to peer with.
+	// The name of the VPC that you are peering with Confluent Cloud network.
 	VpcNetwork string `json:"vpc_network"`
-	// Enable customer route import.
+	// Enable customer route import. For more information, see [Importing custom routes](https://cloud.google.com/vpc/docs/vpc-peering#importing-exporting-routes). 
 	ImportCustomRoutes *bool `json:"import_custom_routes,omitempty"`
 }
 

@@ -35,7 +35,7 @@ import (
 
 // NetworkingV1PeeringStatus The status of the Peering
 type NetworkingV1PeeringStatus struct {
-	// The lifecycle phase of the peering:   PROVISIONING: peering provisioning is in progress;   PENDING_ACCEPT: peering connection request is pending acceptance by the customer;   READY:  peering is ready;   FAILED: peering is in a failed state;   DEPROVISIONING: peering deprovisioning is in progress; 
+	// The lifecycle phase of the peering:    PROVISIONING: peering provisioning is in progress;    PENDING_ACCEPT: peering connection request is pending acceptance by the customer;    READY:  peering is ready;    FAILED: peering is in a failed state;    DEPROVISIONING: peering deprovisioning is in progress; 
 	Phase string `json:"phase"`
 	// Error code if peering is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`

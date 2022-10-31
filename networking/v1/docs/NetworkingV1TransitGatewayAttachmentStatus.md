@@ -4,9 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Phase** | **string** | The lifecycle phase of the TGW attachment:   PROVISIONING: attachment provisioning is in progress;   PENDING_ACCEPT: attachment request is pending acceptance by the customer;   READY:  attachment is ready;   FAILED: attachment is in a failed state;   DEPROVISIONING: attachment deprovisioning is in progress;  | [readonly] 
+**Phase** | **string** | The lifecycle phase of the TGW attachment:    PROVISIONING: attachment provisioning is in progress;    PENDING_ACCEPT: attachment request is pending acceptance by the customer;    READY:  attachment is ready;    FAILED: attachment is in a failed state;    DEPROVISIONING: attachment deprovisioning is in progress;  | [readonly] 
 **ErrorCode** | Pointer to **string** | Error code if TGW attachment is in a failed state. May be used for programmatic error checking. | [optional] [readonly] 
 **ErrorMessage** | Pointer to **string** | Displayable error message if TGW attachment is in a failed state | [optional] [readonly] 
+**Cloud** | Pointer to [**NetworkingV1TransitGatewayAttachmentStatusCloudOneOf**](NetworkingV1TransitGatewayAttachmentStatusCloudOneOf.md) | The cloud-specific TGW attachment details. | [optional] [readonly] 
 
 ## Methods
 
@@ -96,6 +97,31 @@ SetErrorMessage sets ErrorMessage field to given value.
 `func (o *NetworkingV1TransitGatewayAttachmentStatus) HasErrorMessage() bool`
 
 HasErrorMessage returns a boolean if a field has been set.
+
+### GetCloud
+
+`func (o *NetworkingV1TransitGatewayAttachmentStatus) GetCloud() NetworkingV1TransitGatewayAttachmentStatusCloudOneOf`
+
+GetCloud returns the Cloud field if non-nil, zero value otherwise.
+
+### GetCloudOk
+
+`func (o *NetworkingV1TransitGatewayAttachmentStatus) GetCloudOk() (*NetworkingV1TransitGatewayAttachmentStatusCloudOneOf, bool)`
+
+GetCloudOk returns a tuple with the Cloud field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCloud
+
+`func (o *NetworkingV1TransitGatewayAttachmentStatus) SetCloud(v NetworkingV1TransitGatewayAttachmentStatusCloudOneOf)`
+
+SetCloud sets Cloud field to given value.
+
+### HasCloud
+
+`func (o *NetworkingV1TransitGatewayAttachmentStatus) HasCloud() bool`
+
+HasCloud returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
