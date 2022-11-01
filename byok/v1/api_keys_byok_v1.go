@@ -267,15 +267,9 @@ func (a *KeysByokV1ApiService) CreateByokV1KeyExecute(r ApiCreateByokV1KeyReques
 type ApiGetByokV1KeyRequest struct {
 	ctx _context.Context
 	ApiService KeysByokV1Api
-	environment *string
 	id string
 }
 
-// Scope the operation to the given environment.
-func (r ApiGetByokV1KeyRequest) Environment(environment string) ApiGetByokV1KeyRequest {
-	r.environment = &environment
-	return r
-}
 
 func (r ApiGetByokV1KeyRequest) Execute() (ByokV1Key, *_nethttp.Response, error) {
 	return r.ApiService.GetByokV1KeyExecute(r)
@@ -323,11 +317,7 @@ func (a *KeysByokV1ApiService) GetByokV1KeyExecute(r ApiGetByokV1KeyRequest) (By
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.environment == nil {
-		return localVarReturnValue, nil, reportError("environment is required and must be specified")
-	}
 
-	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -434,18 +424,12 @@ func (a *KeysByokV1ApiService) GetByokV1KeyExecute(r ApiGetByokV1KeyRequest) (By
 type ApiListByokV1KeysRequest struct {
 	ctx _context.Context
 	ApiService KeysByokV1Api
-	environment *string
 	provider *string
 	state *string
 	pageSize *int32
 	pageToken *string
 }
 
-// Filter the results by exact match for environment.
-func (r ApiListByokV1KeysRequest) Environment(environment string) ApiListByokV1KeysRequest {
-	r.environment = &environment
-	return r
-}
 // Filter the results by exact match for provider.
 func (r ApiListByokV1KeysRequest) Provider(provider string) ApiListByokV1KeysRequest {
 	r.provider = &provider
@@ -510,9 +494,6 @@ func (a *KeysByokV1ApiService) ListByokV1KeysExecute(r ApiListByokV1KeysRequest)
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.environment == nil {
-		return localVarReturnValue, nil, reportError("environment is required and must be specified")
-	}
 
 	if r.provider != nil {
 		localVarQueryParams.Add("provider", parameterToString(*r.provider, ""))
@@ -520,7 +501,6 @@ func (a *KeysByokV1ApiService) ListByokV1KeysExecute(r ApiListByokV1KeysRequest)
 	if r.state != nil {
 		localVarQueryParams.Add("state", parameterToString(*r.state, ""))
 	}
-	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}

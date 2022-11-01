@@ -48,8 +48,6 @@ type ByokV1Key struct {
 	Provider *string `json:"provider,omitempty"`
 	// The state of the key:   AVAILABLE: key can be used for a Kafka cluster provisioning   IN_USE: key is already in use by a Kafka cluster provisioning 
 	State *string `json:"state,omitempty"`
-	// The environment to which this belongs.
-	Environment *GlobalObjectReference `json:"environment,omitempty"`
 }
 
 // NewByokV1Key instantiates a new ByokV1Key object
@@ -293,38 +291,6 @@ func (o *ByokV1Key) SetState(v string) {
 	o.State = &v
 }
 
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *ByokV1Key) GetEnvironment() GlobalObjectReference {
-	if o == nil || o.Environment == nil {
-		var ret GlobalObjectReference
-		return ret
-	}
-	return *o.Environment
-}
-
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ByokV1Key) GetEnvironmentOk() (*GlobalObjectReference, bool) {
-	if o == nil || o.Environment == nil {
-		return nil, false
-	}
-	return o.Environment, true
-}
-
-// HasEnvironment returns a boolean if a field has been set.
-func (o *ByokV1Key) HasEnvironment() bool {
-	if o != nil && o.Environment != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given GlobalObjectReference and assigns it to the Environment field.
-func (o *ByokV1Key) SetEnvironment(v GlobalObjectReference) {
-	o.Environment = &v
-}
-
 // Redact resets all sensitive fields to their zero value.
 func (o *ByokV1Key) Redact() {
     o.recurseRedact(o.ApiVersion)
@@ -334,7 +300,6 @@ func (o *ByokV1Key) Redact() {
     o.recurseRedact(o.Key)
     o.recurseRedact(o.Provider)
     o.recurseRedact(o.State)
-    o.recurseRedact(o.Environment)
 }
 
 func (o *ByokV1Key) recurseRedact(v interface{}) {
@@ -389,9 +354,6 @@ func (o ByokV1Key) MarshalJSON() ([]byte, error) {
 	}
 	if o.State != nil {
 		toSerialize["state"] = o.State
-	}
-	if o.Environment != nil {
-		toSerialize["environment"] = o.Environment
 	}
 	return json.Marshal(toSerialize)
 }
