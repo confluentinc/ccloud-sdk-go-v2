@@ -138,9 +138,9 @@ CreateKafkaTopic Create Topic
 
 Creates a topic.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param clusterId The Kafka cluster ID.
- @return ApiCreateKafkaTopicRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param clusterId The Kafka cluster ID.
+	@return ApiCreateKafkaTopicRequest
 */
 func (a *TopicV3ApiService) CreateKafkaTopic(ctx _context.Context, clusterId string) ApiCreateKafkaTopicRequest {
 	return ApiCreateKafkaTopicRequest{
@@ -151,7 +151,8 @@ func (a *TopicV3ApiService) CreateKafkaTopic(ctx _context.Context, clusterId str
 }
 
 // Execute executes the request
-//  @return TopicData
+//
+//	@return TopicData
 func (a *TopicV3ApiService) CreateKafkaTopicExecute(r ApiCreateKafkaTopicRequest) (TopicData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -287,10 +288,10 @@ DeleteKafkaTopic Delete Topic
 
 Deletes the topic with the given `topic_name`.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param clusterId The Kafka cluster ID.
- @param topicName The topic name.
- @return ApiDeleteKafkaTopicRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param clusterId The Kafka cluster ID.
+	@param topicName The topic name.
+	@return ApiDeleteKafkaTopicRequest
 */
 func (a *TopicV3ApiService) DeleteKafkaTopic(ctx _context.Context, clusterId string, topicName string) ApiDeleteKafkaTopicRequest {
 	return ApiDeleteKafkaTopicRequest{
@@ -436,10 +437,10 @@ GetKafkaTopic Get Topic
 
 Returns the topic with the given `topic_name`.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param clusterId The Kafka cluster ID.
- @param topicName The topic name.
- @return ApiGetKafkaTopicRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param clusterId The Kafka cluster ID.
+	@param topicName The topic name.
+	@return ApiGetKafkaTopicRequest
 */
 func (a *TopicV3ApiService) GetKafkaTopic(ctx _context.Context, clusterId string, topicName string) ApiGetKafkaTopicRequest {
 	return ApiGetKafkaTopicRequest{
@@ -451,7 +452,8 @@ func (a *TopicV3ApiService) GetKafkaTopic(ctx _context.Context, clusterId string
 }
 
 // Execute executes the request
-//  @return TopicData
+//
+//	@return TopicData
 func (a *TopicV3ApiService) GetKafkaTopicExecute(r ApiGetKafkaTopicRequest) (TopicData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -595,9 +597,9 @@ ListKafkaTopics List Topics
 
 Returns the list of topics that belong to the specified Kafka cluster.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param clusterId The Kafka cluster ID.
- @return ApiListKafkaTopicsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param clusterId The Kafka cluster ID.
+	@return ApiListKafkaTopicsRequest
 */
 func (a *TopicV3ApiService) ListKafkaTopics(ctx _context.Context, clusterId string) ApiListKafkaTopicsRequest {
 	return ApiListKafkaTopicsRequest{
@@ -608,7 +610,8 @@ func (a *TopicV3ApiService) ListKafkaTopics(ctx _context.Context, clusterId stri
 }
 
 // Execute executes the request
-//  @return TopicDataList
+//
+//	@return TopicDataList
 func (a *TopicV3ApiService) ListKafkaTopicsExecute(r ApiListKafkaTopicsRequest) (TopicDataList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
