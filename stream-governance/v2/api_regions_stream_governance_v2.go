@@ -320,26 +320,10 @@ func (a *RegionsStreamGovernanceV2ApiService) ListStreamGovernanceV2RegionsExecu
 	localVarFormParams := _neturl.Values{}
 
 	if r.specCloud != nil {
-		t := *r.specCloud
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("spec.cloud", parameterToString(s.Index(i), ""))
-			}
-		} else {
-			localVarQueryParams.Add("spec.cloud", parameterToString(t, ""))
-		}
+		localVarQueryParams.Add("spec.cloud", parameterToString(*r.specCloud, ""))
 	}
 	if r.specRegionName != nil {
-		t := *r.specRegionName
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("spec.region_name", parameterToString(s.Index(i), ""))
-			}
-		} else {
-			localVarQueryParams.Add("spec.region_name", parameterToString(t, ""))
-		}
+		localVarQueryParams.Add("spec.region_name", parameterToString(*r.specRegionName, ""))
 	}
 	if r.specPackages != nil {
 		t := *r.specPackages
@@ -353,26 +337,10 @@ func (a *RegionsStreamGovernanceV2ApiService) ListStreamGovernanceV2RegionsExecu
 		}
 	}
 	if r.pageSize != nil {
-		t := *r.pageSize
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("page_size", parameterToString(s.Index(i), ""))
-			}
-		} else {
-			localVarQueryParams.Add("page_size", parameterToString(t, ""))
-		}
+		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}
 	if r.pageToken != nil {
-		t := *r.pageToken
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("page_token", parameterToString(s.Index(i), ""))
-			}
-		} else {
-			localVarQueryParams.Add("page_token", parameterToString(t, ""))
-		}
+		localVarQueryParams.Add("page_token", parameterToString(*r.pageToken, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

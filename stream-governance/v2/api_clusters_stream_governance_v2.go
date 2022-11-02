@@ -31,7 +31,6 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
-	"reflect"
 	"strings"
 )
 
@@ -361,17 +360,7 @@ func (a *ClustersStreamGovernanceV2ApiService) DeleteStreamGovernanceV2ClusterEx
 		return nil, reportError("environment is required and must be specified")
 	}
 
-	{
-		t := *r.environment
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("environment", parameterToString(s.Index(i), ""))
-			}
-		} else {
-			localVarQueryParams.Add("environment", parameterToString(t, ""))
-		}
-	}
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -529,17 +518,7 @@ func (a *ClustersStreamGovernanceV2ApiService) GetStreamGovernanceV2ClusterExecu
 		return localVarReturnValue, nil, reportError("environment is required and must be specified")
 	}
 
-	{
-		t := *r.environment
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("environment", parameterToString(s.Index(i), ""))
-			}
-		} else {
-			localVarQueryParams.Add("environment", parameterToString(t, ""))
-		}
-	}
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -716,38 +695,12 @@ func (a *ClustersStreamGovernanceV2ApiService) ListStreamGovernanceV2ClustersExe
 		return localVarReturnValue, nil, reportError("environment is required and must be specified")
 	}
 
-	{
-		t := *r.environment
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("environment", parameterToString(s.Index(i), ""))
-			}
-		} else {
-			localVarQueryParams.Add("environment", parameterToString(t, ""))
-		}
-	}
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.pageSize != nil {
-		t := *r.pageSize
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("page_size", parameterToString(s.Index(i), ""))
-			}
-		} else {
-			localVarQueryParams.Add("page_size", parameterToString(t, ""))
-		}
+		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}
 	if r.pageToken != nil {
-		t := *r.pageToken
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("page_token", parameterToString(s.Index(i), ""))
-			}
-		} else {
-			localVarQueryParams.Add("page_token", parameterToString(t, ""))
-		}
+		localVarQueryParams.Add("page_token", parameterToString(*r.pageToken, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
