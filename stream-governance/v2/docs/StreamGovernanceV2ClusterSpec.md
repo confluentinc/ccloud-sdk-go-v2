@@ -5,10 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The cluster name. | [optional] [readonly] 
-**Package** | Pointer to **string** | The billing package. | [optional] 
+**Package** | Pointer to **string** | The billing package.  Note: Clusters can be upgraded from ESSENTIALS to ADVANCED, but cannot be downgraded from ADVANCED to ESSENTIALS.  | [optional] 
 **HttpEndpoint** | Pointer to **string** | The cluster HTTP request URL. | [optional] [readonly] 
-**Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
-**Region** | Pointer to [**ObjectReference**](ObjectReference.md) | The region to which this belongs. | [optional] 
+**Environment** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which this belongs. | [optional] 
+**Region** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The region to which this belongs. | [optional] 
 
 ## Methods
 
@@ -106,20 +106,20 @@ HasHttpEndpoint returns a boolean if a field has been set.
 
 ### GetEnvironment
 
-`func (o *StreamGovernanceV2ClusterSpec) GetEnvironment() ObjectReference`
+`func (o *StreamGovernanceV2ClusterSpec) GetEnvironment() GlobalObjectReference`
 
 GetEnvironment returns the Environment field if non-nil, zero value otherwise.
 
 ### GetEnvironmentOk
 
-`func (o *StreamGovernanceV2ClusterSpec) GetEnvironmentOk() (*ObjectReference, bool)`
+`func (o *StreamGovernanceV2ClusterSpec) GetEnvironmentOk() (*GlobalObjectReference, bool)`
 
 GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnvironment
 
-`func (o *StreamGovernanceV2ClusterSpec) SetEnvironment(v ObjectReference)`
+`func (o *StreamGovernanceV2ClusterSpec) SetEnvironment(v GlobalObjectReference)`
 
 SetEnvironment sets Environment field to given value.
 
@@ -131,20 +131,20 @@ HasEnvironment returns a boolean if a field has been set.
 
 ### GetRegion
 
-`func (o *StreamGovernanceV2ClusterSpec) GetRegion() ObjectReference`
+`func (o *StreamGovernanceV2ClusterSpec) GetRegion() GlobalObjectReference`
 
 GetRegion returns the Region field if non-nil, zero value otherwise.
 
 ### GetRegionOk
 
-`func (o *StreamGovernanceV2ClusterSpec) GetRegionOk() (*ObjectReference, bool)`
+`func (o *StreamGovernanceV2ClusterSpec) GetRegionOk() (*GlobalObjectReference, bool)`
 
 GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRegion
 
-`func (o *StreamGovernanceV2ClusterSpec) SetRegion(v ObjectReference)`
+`func (o *StreamGovernanceV2ClusterSpec) SetRegion(v GlobalObjectReference)`
 
 SetRegion sets Region field to given value.
 

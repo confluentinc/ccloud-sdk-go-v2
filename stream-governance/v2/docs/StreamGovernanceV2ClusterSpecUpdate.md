@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Package** | Pointer to **string** | The billing package. | [optional] 
-**Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
+**Package** | Pointer to **string** | The billing package.  Note: Clusters can be upgraded from ESSENTIALS to ADVANCED, but cannot be downgraded from ADVANCED to ESSENTIALS.  | [optional] 
+**Environment** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
 
@@ -53,20 +53,20 @@ HasPackage returns a boolean if a field has been set.
 
 ### GetEnvironment
 
-`func (o *StreamGovernanceV2ClusterSpecUpdate) GetEnvironment() ObjectReference`
+`func (o *StreamGovernanceV2ClusterSpecUpdate) GetEnvironment() GlobalObjectReference`
 
 GetEnvironment returns the Environment field if non-nil, zero value otherwise.
 
 ### GetEnvironmentOk
 
-`func (o *StreamGovernanceV2ClusterSpecUpdate) GetEnvironmentOk() (*ObjectReference, bool)`
+`func (o *StreamGovernanceV2ClusterSpecUpdate) GetEnvironmentOk() (*GlobalObjectReference, bool)`
 
 GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnvironment
 
-`func (o *StreamGovernanceV2ClusterSpecUpdate) SetEnvironment(v ObjectReference)`
+`func (o *StreamGovernanceV2ClusterSpecUpdate) SetEnvironment(v GlobalObjectReference)`
 
 SetEnvironment sets Environment field to given value.
 

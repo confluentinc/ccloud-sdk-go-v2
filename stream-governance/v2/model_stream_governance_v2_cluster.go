@@ -33,7 +33,7 @@ import (
 	"reflect"
 )
 
-// StreamGovernanceV2Cluster `Clusters` objects represent Stream Governance Clusters on Confluent Cloud.  The API allows you to list, create, read, and delete your Stream Governance clusters.   Related guide: [Confluent Cloud Stream Governance Cluster APIs](https://docs.confluent.io/cloud/current/clusters/cluster-api.html).  ## The Clusters Model <SchemaDefinition schemaRef=\"#/components/schemas/stream-governance.v2.Cluster\" />
+// StreamGovernanceV2Cluster `Clusters` objects represent Stream Governance Clusters on Confluent Cloud.  The API allows you to list, create, read, and delete your Stream Governance clusters.   Related guide: [Confluent Cloud Stream Governance Cluster APIs](https://docs.confluent.io/cloud/current/stream-governance/clusters-regions-api.html).  ## The Clusters Model <SchemaDefinition schemaRef=\"#/components/schemas/stream-governance.v2.Cluster\" />
 type StreamGovernanceV2Cluster struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`

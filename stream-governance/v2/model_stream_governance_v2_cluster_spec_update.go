@@ -35,10 +35,10 @@ import (
 
 // StreamGovernanceV2ClusterSpecUpdate The desired state of the Cluster
 type StreamGovernanceV2ClusterSpecUpdate struct {
-	// The billing package.
+	// The billing package.  Note: Clusters can be upgraded from ESSENTIALS to ADVANCED, but cannot be downgraded from ADVANCED to ESSENTIALS.
 	Package *string `json:"package,omitempty"`
 	// The environment to which this belongs.
-	Environment *ObjectReference `json:"environment,omitempty"`
+	Environment *GlobalObjectReference `json:"environment,omitempty"`
 }
 
 // NewStreamGovernanceV2ClusterSpecUpdate instantiates a new StreamGovernanceV2ClusterSpecUpdate object
@@ -91,9 +91,9 @@ func (o *StreamGovernanceV2ClusterSpecUpdate) SetPackage(v string) {
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *StreamGovernanceV2ClusterSpecUpdate) GetEnvironment() ObjectReference {
+func (o *StreamGovernanceV2ClusterSpecUpdate) GetEnvironment() GlobalObjectReference {
 	if o == nil || o.Environment == nil {
-		var ret ObjectReference
+		var ret GlobalObjectReference
 		return ret
 	}
 	return *o.Environment
@@ -101,7 +101,7 @@ func (o *StreamGovernanceV2ClusterSpecUpdate) GetEnvironment() ObjectReference {
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StreamGovernanceV2ClusterSpecUpdate) GetEnvironmentOk() (*ObjectReference, bool) {
+func (o *StreamGovernanceV2ClusterSpecUpdate) GetEnvironmentOk() (*GlobalObjectReference, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -117,8 +117,8 @@ func (o *StreamGovernanceV2ClusterSpecUpdate) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
-func (o *StreamGovernanceV2ClusterSpecUpdate) SetEnvironment(v ObjectReference) {
+// SetEnvironment gets a reference to the given GlobalObjectReference and assigns it to the Environment field.
+func (o *StreamGovernanceV2ClusterSpecUpdate) SetEnvironment(v GlobalObjectReference) {
 	o.Environment = &v
 }
 
