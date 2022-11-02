@@ -37,14 +37,14 @@ import (
 type StreamGovernanceV2ClusterSpec struct {
 	// The cluster name.
 	DisplayName *string `json:"display_name,omitempty"`
-	// The billing package.
+	// The billing package.  Note: Clusters can be upgraded from ESSENTIALS to ADVANCED, but cannot be downgraded from ADVANCED to ESSENTIALS.
 	Package *string `json:"package,omitempty"`
 	// The cluster HTTP request URL.
 	HttpEndpoint *string `json:"http_endpoint,omitempty"`
 	// The environment to which this belongs.
-	Environment *ObjectReference `json:"environment,omitempty"`
+	Environment *GlobalObjectReference `json:"environment,omitempty"`
 	// The region to which this belongs.
-	Region *ObjectReference `json:"region,omitempty"`
+	Region *GlobalObjectReference `json:"region,omitempty"`
 }
 
 // NewStreamGovernanceV2ClusterSpec instantiates a new StreamGovernanceV2ClusterSpec object
@@ -161,9 +161,9 @@ func (o *StreamGovernanceV2ClusterSpec) SetHttpEndpoint(v string) {
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *StreamGovernanceV2ClusterSpec) GetEnvironment() ObjectReference {
+func (o *StreamGovernanceV2ClusterSpec) GetEnvironment() GlobalObjectReference {
 	if o == nil || o.Environment == nil {
-		var ret ObjectReference
+		var ret GlobalObjectReference
 		return ret
 	}
 	return *o.Environment
@@ -171,7 +171,7 @@ func (o *StreamGovernanceV2ClusterSpec) GetEnvironment() ObjectReference {
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StreamGovernanceV2ClusterSpec) GetEnvironmentOk() (*ObjectReference, bool) {
+func (o *StreamGovernanceV2ClusterSpec) GetEnvironmentOk() (*GlobalObjectReference, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -187,15 +187,15 @@ func (o *StreamGovernanceV2ClusterSpec) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
-func (o *StreamGovernanceV2ClusterSpec) SetEnvironment(v ObjectReference) {
+// SetEnvironment gets a reference to the given GlobalObjectReference and assigns it to the Environment field.
+func (o *StreamGovernanceV2ClusterSpec) SetEnvironment(v GlobalObjectReference) {
 	o.Environment = &v
 }
 
 // GetRegion returns the Region field value if set, zero value otherwise.
-func (o *StreamGovernanceV2ClusterSpec) GetRegion() ObjectReference {
+func (o *StreamGovernanceV2ClusterSpec) GetRegion() GlobalObjectReference {
 	if o == nil || o.Region == nil {
-		var ret ObjectReference
+		var ret GlobalObjectReference
 		return ret
 	}
 	return *o.Region
@@ -203,7 +203,7 @@ func (o *StreamGovernanceV2ClusterSpec) GetRegion() ObjectReference {
 
 // GetRegionOk returns a tuple with the Region field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StreamGovernanceV2ClusterSpec) GetRegionOk() (*ObjectReference, bool) {
+func (o *StreamGovernanceV2ClusterSpec) GetRegionOk() (*GlobalObjectReference, bool) {
 	if o == nil || o.Region == nil {
 		return nil, false
 	}
@@ -219,8 +219,8 @@ func (o *StreamGovernanceV2ClusterSpec) HasRegion() bool {
 	return false
 }
 
-// SetRegion gets a reference to the given ObjectReference and assigns it to the Region field.
-func (o *StreamGovernanceV2ClusterSpec) SetRegion(v ObjectReference) {
+// SetRegion gets a reference to the given GlobalObjectReference and assigns it to the Region field.
+func (o *StreamGovernanceV2ClusterSpec) SetRegion(v GlobalObjectReference) {
 	o.Region = &v
 }
 

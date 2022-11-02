@@ -31,6 +31,7 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
+	"reflect"
 	"strings"
 )
 
@@ -44,7 +45,7 @@ type RegionsStreamGovernanceV2Api interface {
 	/*
 		GetStreamGovernanceV2Region Read a Region
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to read a region.
 
@@ -61,7 +62,7 @@ type RegionsStreamGovernanceV2Api interface {
 	/*
 		ListStreamGovernanceV2Regions List of Regions
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
 	Retrieve a sorted, filtered, paginated list of all regions.
 
@@ -91,7 +92,7 @@ func (r ApiGetStreamGovernanceV2RegionRequest) Execute() (StreamGovernanceV2Regi
 /*
 GetStreamGovernanceV2Region Read a Region
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a region.
 
@@ -239,7 +240,7 @@ type ApiListStreamGovernanceV2RegionsRequest struct {
 	ApiService     RegionsStreamGovernanceV2Api
 	specCloud      *string
 	specRegionName *string
-	specPackages   *MultipleSearchFilter
+	specPackages   *[]string
 	pageSize       *int32
 	pageToken      *string
 }
@@ -257,7 +258,7 @@ func (r ApiListStreamGovernanceV2RegionsRequest) SpecRegionName(specRegionName s
 }
 
 // Filter the results by exact match for spec.packages. Pass multiple times to see results matching any of the values.
-func (r ApiListStreamGovernanceV2RegionsRequest) SpecPackages(specPackages MultipleSearchFilter) ApiListStreamGovernanceV2RegionsRequest {
+func (r ApiListStreamGovernanceV2RegionsRequest) SpecPackages(specPackages []string) ApiListStreamGovernanceV2RegionsRequest {
 	r.specPackages = &specPackages
 	return r
 }
@@ -281,7 +282,7 @@ func (r ApiListStreamGovernanceV2RegionsRequest) Execute() (StreamGovernanceV2Re
 /*
 ListStreamGovernanceV2Regions List of Regions
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all regions.
 
@@ -325,7 +326,15 @@ func (a *RegionsStreamGovernanceV2ApiService) ListStreamGovernanceV2RegionsExecu
 		localVarQueryParams.Add("spec.region_name", parameterToString(*r.specRegionName, ""))
 	}
 	if r.specPackages != nil {
-		localVarQueryParams.Add("spec.packages", parameterToString(*r.specPackages, ""))
+		t := *r.specPackages
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.packages", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.packages", parameterToString(t, "multi"))
+		}
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))

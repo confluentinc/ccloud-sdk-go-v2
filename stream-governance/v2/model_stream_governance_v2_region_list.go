@@ -33,7 +33,7 @@ import (
 	"reflect"
 )
 
-// StreamGovernanceV2RegionList `Region` objects represent cloud provider regions available when placing Stream Governance clusters. The API allows you to list Stream Governance regions.   ## The Regions Model <SchemaDefinition schemaRef=\"#/components/schemas/stream-governance.v2.Region\" />
+// StreamGovernanceV2RegionList `Region` objects represent cloud provider regions available when placing Stream Governance clusters. The API allows you to list Stream Governance regions.   Related guide: [Confluent Cloud Stream Governance Regions](https://docs.confluent.io/cloud/current/stream-governance/packages.html#stream-governance-regions).  ## The Regions Model <SchemaDefinition schemaRef=\"#/components/schemas/stream-governance.v2.Region\" />
 type StreamGovernanceV2RegionList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version"`

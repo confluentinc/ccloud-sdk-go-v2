@@ -44,7 +44,7 @@ type ClustersStreamGovernanceV2Api interface {
 	/*
 		CreateStreamGovernanceV2Cluster Create a Cluster
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to create a cluster.
 
@@ -60,7 +60,7 @@ type ClustersStreamGovernanceV2Api interface {
 	/*
 		DeleteStreamGovernanceV2Cluster Delete a Cluster
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to delete a cluster.
 
@@ -76,7 +76,7 @@ type ClustersStreamGovernanceV2Api interface {
 	/*
 		GetStreamGovernanceV2Cluster Read a Cluster
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to read a cluster.
 
@@ -93,7 +93,7 @@ type ClustersStreamGovernanceV2Api interface {
 	/*
 		ListStreamGovernanceV2Clusters List of Clusters
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
 	Retrieve a sorted, filtered, paginated list of all clusters.
 
@@ -109,7 +109,7 @@ type ClustersStreamGovernanceV2Api interface {
 	/*
 		UpdateStreamGovernanceV2Cluster Update a Cluster
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to update a cluster.
 
@@ -147,7 +147,7 @@ func (r ApiCreateStreamGovernanceV2ClusterRequest) Execute() (StreamGovernanceV2
 /*
 CreateStreamGovernanceV2Cluster Create a Cluster
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create a cluster.
 
@@ -319,7 +319,7 @@ func (r ApiDeleteStreamGovernanceV2ClusterRequest) Execute() (*_nethttp.Response
 /*
 DeleteStreamGovernanceV2Cluster Delete a Cluster
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete a cluster.
 
@@ -475,7 +475,7 @@ func (r ApiGetStreamGovernanceV2ClusterRequest) Execute() (StreamGovernanceV2Clu
 /*
 GetStreamGovernanceV2Cluster Read a Cluster
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a cluster.
 
@@ -655,7 +655,7 @@ func (r ApiListStreamGovernanceV2ClustersRequest) Execute() (StreamGovernanceV2C
 /*
 ListStreamGovernanceV2Clusters List of Clusters
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all clusters.
 
@@ -814,7 +814,7 @@ func (r ApiUpdateStreamGovernanceV2ClusterRequest) Execute() (StreamGovernanceV2
 /*
 UpdateStreamGovernanceV2Cluster Update a Cluster
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update a cluster.
 

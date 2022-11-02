@@ -90,13 +90,11 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
- - [EnvScopedObjectReference](docs/EnvScopedObjectReference.md)
  - [Error](docs/Error.md)
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
  - [GlobalObjectReference](docs/GlobalObjectReference.md)
  - [ListMeta](docs/ListMeta.md)
- - [MultipleSearchFilter](docs/MultipleSearchFilter.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
  - [StreamGovernanceV2Cluster](docs/StreamGovernanceV2Cluster.md)
@@ -108,8 +106,6 @@ Class | Method | HTTP request | Description
  - [StreamGovernanceV2Region](docs/StreamGovernanceV2Region.md)
  - [StreamGovernanceV2RegionList](docs/StreamGovernanceV2RegionList.md)
  - [StreamGovernanceV2RegionSpec](docs/StreamGovernanceV2RegionSpec.md)
- - [TypedEnvScopedObjectReference](docs/TypedEnvScopedObjectReference.md)
- - [TypedGlobalObjectReference](docs/TypedGlobalObjectReference.md)
 
 
 ## Documentation For Authorization

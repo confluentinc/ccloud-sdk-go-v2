@@ -16,24 +16,26 @@ servers:
   url: https://api.confluent.cloud
 tags:
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
     `Region` objects represent cloud provider regions available when placing Stream Governance clusters.
     The API allows you to list Stream Governance regions.
 
 
+    Related guide: [Confluent Cloud Stream Governance Regions](https://docs.confluent.io/cloud/current/stream-governance/packages.html#stream-governance-regions).
+
     ## The Regions Model
     <SchemaDefinition schemaRef="#/components/schemas/stream-governance.v2.Region" />
   name: Regions (stream-governance/v2)
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
     `Clusters` objects represent Stream Governance Clusters on Confluent Cloud.
 
     The API allows you to list, create, read, and delete your Stream Governance clusters.
 
 
-    Related guide: [Confluent Cloud Stream Governance Cluster APIs](https://docs.confluent.io/cloud/current/clusters/cluster-api.html).
+    Related guide: [Confluent Cloud Stream Governance Cluster APIs](https://docs.confluent.io/cloud/current/stream-governance/clusters-regions-api.html).
 
     ## The Clusters Model
     <SchemaDefinition schemaRef="#/components/schemas/stream-governance.v2.Cluster" />
@@ -42,7 +44,7 @@ paths:
   /stream-governance/v2/regions:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all regions.
       operationId: listStreamGovernanceV2Regions
@@ -222,7 +224,6 @@ paths:
       summary: List of Regions
       tags:
       - Regions (stream-governance/v2)
-      x-request-access-name: Stream Governance v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -307,11 +308,10 @@ paths:
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Stream Governance v2
   /stream-governance/v2/regions/{id}:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a region.
       operationId: getStreamGovernanceV2Region
@@ -481,7 +481,6 @@ paths:
       summary: Read a Region
       tags:
       - Regions (stream-governance/v2)
-      x-request-access-name: Stream Governance v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -566,11 +565,10 @@ paths:
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Stream Governance v2
   /stream-governance/v2/clusters:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all clusters.
       operationId: listStreamGovernanceV2Clusters
@@ -748,7 +746,6 @@ paths:
       summary: List of Clusters
       tags:
       - Clusters (stream-governance/v2)
-      x-request-access-name: Stream Governance v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -835,7 +832,7 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create a cluster.
       operationId: createStreamGovernanceV2Cluster
@@ -1078,7 +1075,6 @@ paths:
       summary: Create a Cluster
       tags:
       - Clusters (stream-governance/v2)
-      x-request-access-name: Stream Governance v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1086,13 +1082,13 @@ paths:
             --url https://api.confluent.cloud/stream-governance/v2/clusters \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"package":"ESSENTIALS","environment":{"id":"env-00000","environment":"string"},"region":{"id":"sgreg-00000","environment":"string"}}}'
+            --data '{"spec":{"package":"ESSENTIALS","environment":{"id":"env-00000"},"region":{"id":"sgreg-00000"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"region\":{\"id\":\"sgreg-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"sgreg-00000\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/stream-governance/v2/clusters")
             .post(body)
@@ -1105,20 +1101,20 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/stream-governance/v2/clusters\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"package\\\":\\\"\
-          ESSENTIALS\\\",\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"environment\\\
-          \":\\\"string\\\"},\\\"region\\\":{\\\"id\\\":\\\"sgreg-00000\\\",\\\"environment\\\
-          \":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
-          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          ESSENTIALS\\\",\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\"},\\\"region\\\
+          \":{\\\"id\\\":\\\"sgreg-00000\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
+          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"region\":{\"id\":\"sgreg-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"sgreg-00000\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -1162,8 +1158,8 @@ paths:
           req.write(JSON.stringify({
             spec: {
               package: 'ESSENTIALS',
-              environment: {id: 'env-00000', environment: 'string'},
-              region: {id: 'sgreg-00000', environment: 'string'}
+              environment: {id: 'env-00000'},
+              region: {id: 'sgreg-00000'}
             }
           }));
           req.end();
@@ -1179,7 +1175,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"region\":{\"id\":\"sgreg-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"sgreg-00000\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1188,13 +1184,12 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"region\":{\"id\":\"sgreg-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"sgreg-00000\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Stream Governance v2
   /stream-governance/v2/clusters/{id}:
     delete:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete a cluster.
       operationId: deleteStreamGovernanceV2Cluster
@@ -1354,7 +1349,6 @@ paths:
       summary: Delete a Cluster
       tags:
       - Clusters (stream-governance/v2)
-      x-request-access-name: Stream Governance v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1441,7 +1435,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a cluster.
       operationId: getStreamGovernanceV2Cluster
@@ -1635,7 +1629,6 @@ paths:
       summary: Read a Cluster
       tags:
       - Clusters (stream-governance/v2)
-      x-request-access-name: Stream Governance v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1722,7 +1715,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Stream Governance v2](https://img.shields.io/badge/-Request%20Access%20To%20Stream%20Governance%20v2-%23bc8540)](mailto:ccloud-api-access+stream-governance-v2-early-access@confluent.io?subject=Request%20to%20join%20stream-governance/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20stream-governance/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update a cluster.
 
@@ -1949,7 +1942,6 @@ paths:
       summary: Update a Cluster
       tags:
       - Clusters (stream-governance/v2)
-      x-request-access-name: Stream Governance v2
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1957,13 +1949,13 @@ paths:
             --url 'https://api.confluent.cloud/stream-governance/v2/clusters/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"package":"ESSENTIALS","environment":{"id":"env-00000","environment":"string"},"region":{"id":"string","environment":"string"}}}'
+            --data '{"spec":{"package":"ESSENTIALS","environment":{"id":"env-00000"},"region":{"id":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"region\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/stream-governance/v2/clusters/{id}")
             .patch(body)
@@ -1976,20 +1968,20 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/stream-governance/v2/clusters/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"package\\\":\\\"\
-          ESSENTIALS\\\",\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"environment\\\
-          \":\\\"string\\\"},\\\"region\\\":{\\\"id\\\":\\\"string\\\",\\\"environment\\\
-          \":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\
-          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          ESSENTIALS\\\",\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\"},\\\"region\\\
+          \":{\\\"id\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\"\
+          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"region\":{\"id\":\"string\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -2031,11 +2023,7 @@ paths:
           });
 
           req.write(JSON.stringify({
-            spec: {
-              package: 'ESSENTIALS',
-              environment: {id: 'env-00000', environment: 'string'},
-              region: {id: 'string', environment: 'string'}
-            }
+            spec: {package: 'ESSENTIALS', environment: {id: 'env-00000'}, region: {id: 'string'}}
           }));
           req.end();
       - lang: C
@@ -2050,7 +2038,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"region\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -2059,9 +2047,8 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"region\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Stream Governance v2
 components:
   responses:
     BadRequestError:
@@ -2265,6 +2252,8 @@ components:
         The API allows you to list Stream Governance regions.
 
 
+        Related guide: [Confluent Cloud Stream Governance Regions](https://docs.confluent.io/cloud/current/stream-governance/packages.html#stream-governance-regions).
+
         ## The Regions Model
         <SchemaDefinition schemaRef="#/components/schemas/stream-governance.v2.Region" />
       properties:
@@ -2309,7 +2298,7 @@ components:
         The API allows you to list, create, read, and delete your Stream Governance clusters.
 
 
-        Related guide: [Confluent Cloud Stream Governance Cluster APIs](https://docs.confluent.io/cloud/current/clusters/cluster-api.html).
+        Related guide: [Confluent Cloud Stream Governance Cluster APIs](https://docs.confluent.io/cloud/current/stream-governance/clusters-regions-api.html).
 
         ## The Clusters Model
         <SchemaDefinition schemaRef="#/components/schemas/stream-governance.v2.Cluster" />
@@ -2383,6 +2372,8 @@ components:
         `Region` objects represent cloud provider regions available when placing Stream Governance clusters.
         The API allows you to list Stream Governance regions.
 
+
+        Related guide: [Confluent Cloud Stream Governance Regions](https://docs.confluent.io/cloud/current/stream-governance/packages.html#stream-governance-regions).
 
         ## The Regions Model
         <SchemaDefinition schemaRef="#/components/schemas/stream-governance.v2.Region" />
@@ -2489,7 +2480,7 @@ components:
         The API allows you to list, create, read, and delete your Stream Governance clusters.
 
 
-        Related guide: [Confluent Cloud Stream Governance Cluster APIs](https://docs.confluent.io/cloud/current/clusters/cluster-api.html).
+        Related guide: [Confluent Cloud Stream Governance Cluster APIs](https://docs.confluent.io/cloud/current/stream-governance/clusters-regions-api.html).
 
         ## The Clusters Model
         <SchemaDefinition schemaRef="#/components/schemas/stream-governance.v2.Cluster" />
@@ -2556,7 +2547,11 @@ components:
           type: string
           x-immutable: true
         package:
-          description: The billing package.
+          description: |
+            The billing package.
+
+            Note: Clusters can be upgraded from ESSENTIALS to ADVANCED, but cannot be
+            downgraded from ADVANCED to ESSENTIALS.
           example: ESSENTIALS
           type: string
           x-extensible-enum:
@@ -2571,11 +2566,11 @@ components:
           x-immutable: true
         environment:
           allOf:
-          - $ref: '#/components/schemas/ObjectReference'
+          - $ref: '#/components/schemas/GlobalObjectReference'
           description: The environment to which this belongs.
         region:
           allOf:
-          - $ref: '#/components/schemas/ObjectReference'
+          - $ref: '#/components/schemas/GlobalObjectReference'
           description: The region to which this belongs.
           x-immutable: true
       type: object
@@ -2708,47 +2703,6 @@ components:
       - related
       - resource_name
       type: object
-    TypedEnvScopedObjectReference:
-      description: ObjectReference provides information for you to locate the referred
-        object
-      properties:
-        id:
-          description: ID of the referred resource
-          maxLength: 255
-          minLength: 1
-          type: string
-        environment:
-          description: Environment of the referred resource, if env-scoped
-          maxLength: 255
-          minLength: 1
-          type: string
-        related:
-          description: API URL for accessing or modifying the referred object
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-        resource_name:
-          description: CRN reference to the referred resource
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-        api_version:
-          description: API group and version of the referred resource
-          minLength: 1
-          readOnly: true
-          type: string
-        kind:
-          description: Kind of the referred resource
-          minLength: 1
-          readOnly: true
-          type: string
-      required:
-      - id
-      - related
-      - resource_name
-      type: object
     GlobalObjectReference:
       description: ObjectReference provides information for you to locate the referred
         object
@@ -2767,73 +2721,6 @@ components:
         resource_name:
           description: CRN reference to the referred resource
           format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-      required:
-      - id
-      - related
-      - resource_name
-      type: object
-    EnvScopedObjectReference:
-      description: ObjectReference provides information for you to locate the referred
-        object
-      properties:
-        id:
-          description: ID of the referred resource
-          maxLength: 255
-          minLength: 1
-          type: string
-        environment:
-          description: Environment of the referred resource, if env-scoped
-          maxLength: 255
-          minLength: 1
-          type: string
-        related:
-          description: API URL for accessing or modifying the referred object
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-        resource_name:
-          description: CRN reference to the referred resource
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-      required:
-      - id
-      - related
-      - resource_name
-      type: object
-    TypedGlobalObjectReference:
-      description: ObjectReference provides information for you to locate the referred
-        object
-      properties:
-        id:
-          description: ID of the referred resource
-          maxLength: 255
-          minLength: 1
-          type: string
-        related:
-          description: API URL for accessing or modifying the referred object
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-        resource_name:
-          description: CRN reference to the referred resource
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-        api_version:
-          description: API group and version of the referred resource
-          minLength: 1
-          readOnly: true
-          type: string
-        kind:
-          description: Kind of the referred resource
           minLength: 1
           readOnly: true
           type: string
@@ -2885,7 +2772,11 @@ components:
       description: The desired state of the Cluster
       properties:
         package:
-          description: The billing package.
+          description: |
+            The billing package.
+
+            Note: Clusters can be upgraded from ESSENTIALS to ADVANCED, but cannot be
+            downgraded from ADVANCED to ESSENTIALS.
           example: ESSENTIALS
           type: string
           x-extensible-enum:
@@ -2893,7 +2784,7 @@ components:
           - ADVANCED
         environment:
           allOf:
-          - $ref: '#/components/schemas/ObjectReference'
+          - $ref: '#/components/schemas/GlobalObjectReference'
           description: The environment to which this belongs.
       type: object
       x-enable-id: true
@@ -2906,7 +2797,7 @@ components:
         The API allows you to list, create, read, and delete your Stream Governance clusters.
 
 
-        Related guide: [Confluent Cloud Stream Governance Cluster APIs](https://docs.confluent.io/cloud/current/clusters/cluster-api.html).
+        Related guide: [Confluent Cloud Stream Governance Cluster APIs](https://docs.confluent.io/cloud/current/stream-governance/clusters-regions-api.html).
 
         ## The Clusters Model
         <SchemaDefinition schemaRef="#/components/schemas/stream-governance.v2.Cluster" />
