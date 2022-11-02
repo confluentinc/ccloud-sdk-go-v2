@@ -95,7 +95,6 @@ Class | Method | HTTP request | Description
  - [Failure](docs/Failure.md)
  - [GlobalObjectReference](docs/GlobalObjectReference.md)
  - [ListMeta](docs/ListMeta.md)
- - [MultipleSearchFilter](docs/MultipleSearchFilter.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
  - [StreamGovernanceV2Cluster](docs/StreamGovernanceV2Cluster.md)

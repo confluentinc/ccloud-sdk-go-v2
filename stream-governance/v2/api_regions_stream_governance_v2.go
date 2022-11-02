@@ -240,7 +240,7 @@ type ApiListStreamGovernanceV2RegionsRequest struct {
 	ApiService     RegionsStreamGovernanceV2Api
 	specCloud      *string
 	specRegionName *string
-	specPackages   *MultipleSearchFilter
+	specPackages   *[]string
 	pageSize       *int32
 	pageToken      *string
 }
@@ -258,7 +258,7 @@ func (r ApiListStreamGovernanceV2RegionsRequest) SpecRegionName(specRegionName s
 }
 
 // Filter the results by exact match for spec.packages. Pass multiple times to see results matching any of the values.
-func (r ApiListStreamGovernanceV2RegionsRequest) SpecPackages(specPackages MultipleSearchFilter) ApiListStreamGovernanceV2RegionsRequest {
+func (r ApiListStreamGovernanceV2RegionsRequest) SpecPackages(specPackages []string) ApiListStreamGovernanceV2RegionsRequest {
 	r.specPackages = &specPackages
 	return r
 }
@@ -346,10 +346,10 @@ func (a *RegionsStreamGovernanceV2ApiService) ListStreamGovernanceV2RegionsExecu
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("spec.packages", parameterToString(s.Index(i), ""))
+				localVarQueryParams.Add("spec.packages", parameterToString(s.Index(i), "multi"))
 			}
 		} else {
-			localVarQueryParams.Add("spec.packages", parameterToString(t, ""))
+			localVarQueryParams.Add("spec.packages", parameterToString(t, "multi"))
 		}
 	}
 	if r.pageSize != nil {
