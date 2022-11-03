@@ -37,7 +37,7 @@ import (
 type NetworkingV1AwsPrivateLinkAccess struct {
 	// PrivateLink kind type.
 	Kind string `json:"kind"`
-	// The AWS account ID for the account containing the VPCs you want to connect from using AWS PrivateLink. You can find your AWS account ID [here] (https://console.aws.amazon.com/billing/home?#/account) under **My Account** in your AWS Management Console. Must be a **12 character string**. 
+	// The AWS account ID for the account containing the VPCs you want to connect from using AWS PrivateLink. You can find your AWS account ID [here] (https://console.aws.amazon.com/billing/home?#/account) under **My Account** in your AWS Management Console. Must be a **12 character string**.
 	Account string `json:"account"`
 }
 
@@ -73,7 +73,7 @@ func (o *NetworkingV1AwsPrivateLinkAccess) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AwsPrivateLinkAccess) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -97,7 +97,7 @@ func (o *NetworkingV1AwsPrivateLinkAccess) GetAccount() string {
 // GetAccountOk returns a tuple with the Account field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AwsPrivateLinkAccess) GetAccountOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Account, true
@@ -110,38 +110,38 @@ func (o *NetworkingV1AwsPrivateLinkAccess) SetAccount(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1AwsPrivateLinkAccess) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Account)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Account)
 }
 
 func (o *NetworkingV1AwsPrivateLinkAccess) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o NetworkingV1AwsPrivateLinkAccess) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1AwsPrivateLinkAccess) MarshalJSON() ([]byte, error) {
@@ -190,5 +190,3 @@ func (v *NullableNetworkingV1AwsPrivateLinkAccess) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

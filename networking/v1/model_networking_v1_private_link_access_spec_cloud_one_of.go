@@ -32,26 +32,25 @@ import (
 
 // NetworkingV1PrivateLinkAccessSpecCloudOneOf - struct for NetworkingV1PrivateLinkAccessSpecCloudOneOf
 type NetworkingV1PrivateLinkAccessSpecCloudOneOf struct {
-	NetworkingV1AwsPrivateLinkAccess *NetworkingV1AwsPrivateLinkAccess
-	NetworkingV1AzurePrivateLinkAccess *NetworkingV1AzurePrivateLinkAccess
+	NetworkingV1AwsPrivateLinkAccess           *NetworkingV1AwsPrivateLinkAccess
+	NetworkingV1AzurePrivateLinkAccess         *NetworkingV1AzurePrivateLinkAccess
 	NetworkingV1GcpPrivateServiceConnectAccess *NetworkingV1GcpPrivateServiceConnectAccess
 }
 
 // NetworkingV1AwsPrivateLinkAccessAsNetworkingV1PrivateLinkAccessSpecCloudOneOf is a convenience function that returns NetworkingV1AwsPrivateLinkAccess wrapped in NetworkingV1PrivateLinkAccessSpecCloudOneOf
 func NetworkingV1AwsPrivateLinkAccessAsNetworkingV1PrivateLinkAccessSpecCloudOneOf(v *NetworkingV1AwsPrivateLinkAccess) NetworkingV1PrivateLinkAccessSpecCloudOneOf {
-	return NetworkingV1PrivateLinkAccessSpecCloudOneOf{ NetworkingV1AwsPrivateLinkAccess: v}
+	return NetworkingV1PrivateLinkAccessSpecCloudOneOf{NetworkingV1AwsPrivateLinkAccess: v}
 }
 
 // NetworkingV1AzurePrivateLinkAccessAsNetworkingV1PrivateLinkAccessSpecCloudOneOf is a convenience function that returns NetworkingV1AzurePrivateLinkAccess wrapped in NetworkingV1PrivateLinkAccessSpecCloudOneOf
 func NetworkingV1AzurePrivateLinkAccessAsNetworkingV1PrivateLinkAccessSpecCloudOneOf(v *NetworkingV1AzurePrivateLinkAccess) NetworkingV1PrivateLinkAccessSpecCloudOneOf {
-	return NetworkingV1PrivateLinkAccessSpecCloudOneOf{ NetworkingV1AzurePrivateLinkAccess: v}
+	return NetworkingV1PrivateLinkAccessSpecCloudOneOf{NetworkingV1AzurePrivateLinkAccess: v}
 }
 
 // NetworkingV1GcpPrivateServiceConnectAccessAsNetworkingV1PrivateLinkAccessSpecCloudOneOf is a convenience function that returns NetworkingV1GcpPrivateServiceConnectAccess wrapped in NetworkingV1PrivateLinkAccessSpecCloudOneOf
 func NetworkingV1GcpPrivateServiceConnectAccessAsNetworkingV1PrivateLinkAccessSpecCloudOneOf(v *NetworkingV1GcpPrivateServiceConnectAccess) NetworkingV1PrivateLinkAccessSpecCloudOneOf {
-	return NetworkingV1PrivateLinkAccessSpecCloudOneOf{ NetworkingV1GcpPrivateServiceConnectAccess: v}
+	return NetworkingV1PrivateLinkAccessSpecCloudOneOf{NetworkingV1GcpPrivateServiceConnectAccess: v}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *NetworkingV1PrivateLinkAccessSpecCloudOneOf) UnmarshalJSON(data []byte) error {
@@ -156,7 +155,7 @@ func (src NetworkingV1PrivateLinkAccessSpecCloudOneOf) MarshalJSON() ([]byte, er
 }
 
 // Get the actual instance
-func (obj *NetworkingV1PrivateLinkAccessSpecCloudOneOf) GetActualInstance() (interface{}) {
+func (obj *NetworkingV1PrivateLinkAccessSpecCloudOneOf) GetActualInstance() interface{} {
 	if obj.NetworkingV1AwsPrivateLinkAccess != nil {
 		return obj.NetworkingV1AwsPrivateLinkAccess
 	}
@@ -208,5 +207,3 @@ func (v *NullableNetworkingV1PrivateLinkAccessSpecCloudOneOf) UnmarshalJSON(src 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

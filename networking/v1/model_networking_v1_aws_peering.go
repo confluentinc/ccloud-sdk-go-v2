@@ -41,7 +41,7 @@ type NetworkingV1AwsPeering struct {
 	Account string `json:"account"`
 	// The VPC ID you are peering with Confluent Cloud network.
 	Vpc string `json:"vpc"`
-	// The [CIDR blocks](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) of the VPC you are peering with Confluent Cloud network. This is used by Confluent Cloud network to route traffic back to your network. The CIDR block must be a private range and cannot overlap with the Confluent Cloud CIDR block. 
+	// The [CIDR blocks](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) of the VPC you are peering with Confluent Cloud network. This is used by Confluent Cloud network to route traffic back to your network. The CIDR block must be a private range and cannot overlap with the Confluent Cloud CIDR block.
 	Routes []string `json:"routes"`
 	// The region of the VPC you are peering with Confluent Cloud network.
 	CustomerRegion string `json:"customer_region"`
@@ -82,7 +82,7 @@ func (o *NetworkingV1AwsPeering) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AwsPeering) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -106,7 +106,7 @@ func (o *NetworkingV1AwsPeering) GetAccount() string {
 // GetAccountOk returns a tuple with the Account field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AwsPeering) GetAccountOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Account, true
@@ -130,7 +130,7 @@ func (o *NetworkingV1AwsPeering) GetVpc() string {
 // GetVpcOk returns a tuple with the Vpc field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AwsPeering) GetVpcOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Vpc, true
@@ -154,7 +154,7 @@ func (o *NetworkingV1AwsPeering) GetRoutes() []string {
 // GetRoutesOk returns a tuple with the Routes field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AwsPeering) GetRoutesOk() (*[]string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Routes, true
@@ -178,7 +178,7 @@ func (o *NetworkingV1AwsPeering) GetCustomerRegion() string {
 // GetCustomerRegionOk returns a tuple with the CustomerRegion field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AwsPeering) GetCustomerRegionOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.CustomerRegion, true
@@ -191,41 +191,41 @@ func (o *NetworkingV1AwsPeering) SetCustomerRegion(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1AwsPeering) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Account)
-    o.recurseRedact(&o.Vpc)
-    o.recurseRedact(&o.Routes)
-    o.recurseRedact(&o.CustomerRegion)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Account)
+	o.recurseRedact(&o.Vpc)
+	o.recurseRedact(&o.Routes)
+	o.recurseRedact(&o.CustomerRegion)
 }
 
 func (o *NetworkingV1AwsPeering) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o NetworkingV1AwsPeering) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1AwsPeering) MarshalJSON() ([]byte, error) {
@@ -283,5 +283,3 @@ func (v *NullableNetworkingV1AwsPeering) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

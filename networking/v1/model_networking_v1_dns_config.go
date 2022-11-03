@@ -70,7 +70,7 @@ func (o *NetworkingV1DnsConfig) GetResolution() NetworkingV1DnsResolutionTypes {
 // GetResolutionOk returns a tuple with the Resolution field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1DnsConfig) GetResolutionOk() (*NetworkingV1DnsResolutionTypes, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Resolution, true
@@ -83,37 +83,37 @@ func (o *NetworkingV1DnsConfig) SetResolution(v NetworkingV1DnsResolutionTypes) 
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1DnsConfig) Redact() {
-    o.recurseRedact(&o.Resolution)
+	o.recurseRedact(&o.Resolution)
 }
 
 func (o *NetworkingV1DnsConfig) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o NetworkingV1DnsConfig) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1DnsConfig) MarshalJSON() ([]byte, error) {
@@ -159,5 +159,3 @@ func (v *NullableNetworkingV1DnsConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

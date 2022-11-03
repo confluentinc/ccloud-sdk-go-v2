@@ -37,11 +37,11 @@ import (
 type NetworkingV1GcpPeering struct {
 	// Peering kind type.
 	Kind string `json:"kind"`
-	// The Google Cloud project ID associated with the VPC that you are peering with Confluent Cloud network. 
+	// The Google Cloud project ID associated with the VPC that you are peering with Confluent Cloud network.
 	Project string `json:"project"`
 	// The name of the VPC that you are peering with Confluent Cloud network.
 	VpcNetwork string `json:"vpc_network"`
-	// Enable customer route import. For more information, see [Importing custom routes](https://cloud.google.com/vpc/docs/vpc-peering#importing-exporting-routes). 
+	// Enable customer route import. For more information, see [Importing custom routes](https://cloud.google.com/vpc/docs/vpc-peering#importing-exporting-routes).
 	ImportCustomRoutes *bool `json:"import_custom_routes,omitempty"`
 }
 
@@ -82,7 +82,7 @@ func (o *NetworkingV1GcpPeering) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1GcpPeering) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -106,7 +106,7 @@ func (o *NetworkingV1GcpPeering) GetProject() string {
 // GetProjectOk returns a tuple with the Project field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1GcpPeering) GetProjectOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Project, true
@@ -130,7 +130,7 @@ func (o *NetworkingV1GcpPeering) GetVpcNetwork() string {
 // GetVpcNetworkOk returns a tuple with the VpcNetwork field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1GcpPeering) GetVpcNetworkOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.VpcNetwork, true
@@ -175,40 +175,40 @@ func (o *NetworkingV1GcpPeering) SetImportCustomRoutes(v bool) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1GcpPeering) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Project)
-    o.recurseRedact(&o.VpcNetwork)
-    o.recurseRedact(o.ImportCustomRoutes)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Project)
+	o.recurseRedact(&o.VpcNetwork)
+	o.recurseRedact(o.ImportCustomRoutes)
 }
 
 func (o *NetworkingV1GcpPeering) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o NetworkingV1GcpPeering) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1GcpPeering) MarshalJSON() ([]byte, error) {
@@ -263,5 +263,3 @@ func (v *NullableNetworkingV1GcpPeering) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -37,7 +37,7 @@ import (
 type NetworkingV1GcpPrivateServiceConnectAccess struct {
 	// PrivateLink kind type.
 	Kind string `json:"kind"`
-	// The GCP project ID for the account containing the VPCs that you want to connect from using Private Service Connect. You can find your Google Cloud Project ID under **Project ID** section of your [Google Cloud Console dashboard](https://console.cloud.google.com/home/dashboard). 
+	// The GCP project ID for the account containing the VPCs that you want to connect from using Private Service Connect. You can find your Google Cloud Project ID under **Project ID** section of your [Google Cloud Console dashboard](https://console.cloud.google.com/home/dashboard).
 	Project string `json:"project"`
 }
 
@@ -73,7 +73,7 @@ func (o *NetworkingV1GcpPrivateServiceConnectAccess) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1GcpPrivateServiceConnectAccess) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -97,7 +97,7 @@ func (o *NetworkingV1GcpPrivateServiceConnectAccess) GetProject() string {
 // GetProjectOk returns a tuple with the Project field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1GcpPrivateServiceConnectAccess) GetProjectOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Project, true
@@ -110,38 +110,38 @@ func (o *NetworkingV1GcpPrivateServiceConnectAccess) SetProject(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1GcpPrivateServiceConnectAccess) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Project)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Project)
 }
 
 func (o *NetworkingV1GcpPrivateServiceConnectAccess) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o NetworkingV1GcpPrivateServiceConnectAccess) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1GcpPrivateServiceConnectAccess) MarshalJSON() ([]byte, error) {
@@ -190,5 +190,3 @@ func (v *NullableNetworkingV1GcpPrivateServiceConnectAccess) UnmarshalJSON(src [
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

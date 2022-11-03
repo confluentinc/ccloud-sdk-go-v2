@@ -79,6 +79,18 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*NetworkLinkEndpointsNetworkingV1Api* | [**CreateNetworkingV1NetworkLinkEndpoint**](docs/NetworkLinkEndpointsNetworkingV1Api.md#createnetworkingv1networklinkendpoint) | **Post** /networking/v1/network-link-endpoints | Create a Network Link Endpoint
+*NetworkLinkEndpointsNetworkingV1Api* | [**DeleteNetworkingV1NetworkLinkEndpoint**](docs/NetworkLinkEndpointsNetworkingV1Api.md#deletenetworkingv1networklinkendpoint) | **Delete** /networking/v1/network-link-endpoints/{id} | Delete a Network Link Endpoint
+*NetworkLinkEndpointsNetworkingV1Api* | [**GetNetworkingV1NetworkLinkEndpoint**](docs/NetworkLinkEndpointsNetworkingV1Api.md#getnetworkingv1networklinkendpoint) | **Get** /networking/v1/network-link-endpoints/{id} | Read a Network Link Endpoint
+*NetworkLinkEndpointsNetworkingV1Api* | [**ListNetworkingV1NetworkLinkEndpoints**](docs/NetworkLinkEndpointsNetworkingV1Api.md#listnetworkingv1networklinkendpoints) | **Get** /networking/v1/network-link-endpoints | List of Network Link Endpoints
+*NetworkLinkEndpointsNetworkingV1Api* | [**UpdateNetworkingV1NetworkLinkEndpoint**](docs/NetworkLinkEndpointsNetworkingV1Api.md#updatenetworkingv1networklinkendpoint) | **Patch** /networking/v1/network-link-endpoints/{id} | Update a Network Link Endpoint
+*NetworkLinkServiceAssociationsNetworkingV1Api* | [**GetNetworkingV1NetworkLinkServiceAssociation**](docs/NetworkLinkServiceAssociationsNetworkingV1Api.md#getnetworkingv1networklinkserviceassociation) | **Get** /networking/v1/network-link-service-associations/{id} | Read a Network Link Service Association
+*NetworkLinkServiceAssociationsNetworkingV1Api* | [**ListNetworkingV1NetworkLinkServiceAssociations**](docs/NetworkLinkServiceAssociationsNetworkingV1Api.md#listnetworkingv1networklinkserviceassociations) | **Get** /networking/v1/network-link-service-associations | List of Network Link Service Associations
+*NetworkLinkServicesNetworkingV1Api* | [**CreateNetworkingV1NetworkLinkService**](docs/NetworkLinkServicesNetworkingV1Api.md#createnetworkingv1networklinkservice) | **Post** /networking/v1/network-link-services | Create a Network Link Service
+*NetworkLinkServicesNetworkingV1Api* | [**DeleteNetworkingV1NetworkLinkService**](docs/NetworkLinkServicesNetworkingV1Api.md#deletenetworkingv1networklinkservice) | **Delete** /networking/v1/network-link-services/{id} | Delete a Network Link Service
+*NetworkLinkServicesNetworkingV1Api* | [**GetNetworkingV1NetworkLinkService**](docs/NetworkLinkServicesNetworkingV1Api.md#getnetworkingv1networklinkservice) | **Get** /networking/v1/network-link-services/{id} | Read a Network Link Service
+*NetworkLinkServicesNetworkingV1Api* | [**ListNetworkingV1NetworkLinkServices**](docs/NetworkLinkServicesNetworkingV1Api.md#listnetworkingv1networklinkservices) | **Get** /networking/v1/network-link-services | List of Network Link Services
+*NetworkLinkServicesNetworkingV1Api* | [**UpdateNetworkingV1NetworkLinkService**](docs/NetworkLinkServicesNetworkingV1Api.md#updatenetworkingv1networklinkservice) | **Patch** /networking/v1/network-link-services/{id} | Update a Network Link Service
 *NetworksNetworkingV1Api* | [**CreateNetworkingV1Network**](docs/NetworksNetworkingV1Api.md#createnetworkingv1network) | **Post** /networking/v1/networks | Create a Network
 *NetworksNetworkingV1Api* | [**DeleteNetworkingV1Network**](docs/NetworksNetworkingV1Api.md#deletenetworkingv1network) | **Delete** /networking/v1/networks/{id} | Delete a Network
 *NetworksNetworkingV1Api* | [**GetNetworkingV1Network**](docs/NetworksNetworkingV1Api.md#getnetworkingv1network) | **Get** /networking/v1/networks/{id} | Read a Network
@@ -103,9 +115,11 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [EnvScopedObjectReference](docs/EnvScopedObjectReference.md)
  - [Error](docs/Error.md)
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
+ - [GlobalObjectReference](docs/GlobalObjectReference.md)
  - [ListMeta](docs/ListMeta.md)
  - [MultipleSearchFilter](docs/MultipleSearchFilter.md)
  - [NetworkingV1AwsNetwork](docs/NetworkingV1AwsNetwork.md)
@@ -117,10 +131,29 @@ Class | Method | HTTP request | Description
  - [NetworkingV1AzurePeering](docs/NetworkingV1AzurePeering.md)
  - [NetworkingV1AzurePrivateLinkAccess](docs/NetworkingV1AzurePrivateLinkAccess.md)
  - [NetworkingV1ConnectionTypes](docs/NetworkingV1ConnectionTypes.md)
+ - [NetworkingV1DnsConfig](docs/NetworkingV1DnsConfig.md)
+ - [NetworkingV1DnsResolutionTypes](docs/NetworkingV1DnsResolutionTypes.md)
  - [NetworkingV1GcpNetwork](docs/NetworkingV1GcpNetwork.md)
  - [NetworkingV1GcpPeering](docs/NetworkingV1GcpPeering.md)
  - [NetworkingV1GcpPrivateServiceConnectAccess](docs/NetworkingV1GcpPrivateServiceConnectAccess.md)
  - [NetworkingV1Network](docs/NetworkingV1Network.md)
+ - [NetworkingV1NetworkLinkEndpoint](docs/NetworkingV1NetworkLinkEndpoint.md)
+ - [NetworkingV1NetworkLinkEndpointList](docs/NetworkingV1NetworkLinkEndpointList.md)
+ - [NetworkingV1NetworkLinkEndpointSpec](docs/NetworkingV1NetworkLinkEndpointSpec.md)
+ - [NetworkingV1NetworkLinkEndpointSpecUpdate](docs/NetworkingV1NetworkLinkEndpointSpecUpdate.md)
+ - [NetworkingV1NetworkLinkEndpointStatus](docs/NetworkingV1NetworkLinkEndpointStatus.md)
+ - [NetworkingV1NetworkLinkEndpointUpdate](docs/NetworkingV1NetworkLinkEndpointUpdate.md)
+ - [NetworkingV1NetworkLinkService](docs/NetworkingV1NetworkLinkService.md)
+ - [NetworkingV1NetworkLinkServiceAcceptPolicy](docs/NetworkingV1NetworkLinkServiceAcceptPolicy.md)
+ - [NetworkingV1NetworkLinkServiceAssociation](docs/NetworkingV1NetworkLinkServiceAssociation.md)
+ - [NetworkingV1NetworkLinkServiceAssociationList](docs/NetworkingV1NetworkLinkServiceAssociationList.md)
+ - [NetworkingV1NetworkLinkServiceAssociationSpec](docs/NetworkingV1NetworkLinkServiceAssociationSpec.md)
+ - [NetworkingV1NetworkLinkServiceAssociationStatus](docs/NetworkingV1NetworkLinkServiceAssociationStatus.md)
+ - [NetworkingV1NetworkLinkServiceList](docs/NetworkingV1NetworkLinkServiceList.md)
+ - [NetworkingV1NetworkLinkServiceSpec](docs/NetworkingV1NetworkLinkServiceSpec.md)
+ - [NetworkingV1NetworkLinkServiceSpecUpdate](docs/NetworkingV1NetworkLinkServiceSpecUpdate.md)
+ - [NetworkingV1NetworkLinkServiceStatus](docs/NetworkingV1NetworkLinkServiceStatus.md)
+ - [NetworkingV1NetworkLinkServiceUpdate](docs/NetworkingV1NetworkLinkServiceUpdate.md)
  - [NetworkingV1NetworkList](docs/NetworkingV1NetworkList.md)
  - [NetworkingV1NetworkSpec](docs/NetworkingV1NetworkSpec.md)
  - [NetworkingV1NetworkSpecUpdate](docs/NetworkingV1NetworkSpecUpdate.md)

@@ -35,7 +35,7 @@ import (
 
 // NetworkingV1PrivateLinkAccessStatus The status of the Private Link Access
 type NetworkingV1PrivateLinkAccessStatus struct {
-	// The lifecycle phase of the PrivateLink access configuration:   PROVISIONING: PrivateLink access provisioning is in progress;   READY:  PrivateLink access is ready;   FAILED: PrivateLink access is in a failed state;   DEPROVISIONING: PrivateLink access deprovisioning is in progress; 
+	// The lifecycle phase of the PrivateLink access configuration:    PROVISIONING: PrivateLink access provisioning is in progress;    READY:  PrivateLink access is ready;    FAILED: PrivateLink access is in a failed state;    DEPROVISIONING: PrivateLink access deprovisioning is in progress;
 	Phase string `json:"phase"`
 	// Error code if PrivateLink access is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`
@@ -74,7 +74,7 @@ func (o *NetworkingV1PrivateLinkAccessStatus) GetPhase() string {
 // GetPhaseOk returns a tuple with the Phase field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1PrivateLinkAccessStatus) GetPhaseOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Phase, true
@@ -151,39 +151,39 @@ func (o *NetworkingV1PrivateLinkAccessStatus) SetErrorMessage(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1PrivateLinkAccessStatus) Redact() {
-    o.recurseRedact(&o.Phase)
-    o.recurseRedact(o.ErrorCode)
-    o.recurseRedact(o.ErrorMessage)
+	o.recurseRedact(&o.Phase)
+	o.recurseRedact(o.ErrorCode)
+	o.recurseRedact(o.ErrorMessage)
 }
 
 func (o *NetworkingV1PrivateLinkAccessStatus) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o NetworkingV1PrivateLinkAccessStatus) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1PrivateLinkAccessStatus) MarshalJSON() ([]byte, error) {
@@ -235,5 +235,3 @@ func (v *NullableNetworkingV1PrivateLinkAccessStatus) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

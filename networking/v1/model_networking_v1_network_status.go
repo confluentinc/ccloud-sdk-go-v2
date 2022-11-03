@@ -35,17 +35,17 @@ import (
 
 // NetworkingV1NetworkStatus The status of the Network
 type NetworkingV1NetworkStatus struct {
-	// The lifecyle phase of the network:  PROVISIONING:  network provisioning is in progress;  READY:  network is ready;  FAILED: provisioning failed;  DEPROVISIONING: network deprovisioning is in progress; 
-	Phase string `json:"phase"`
+	// The lifecyle phase of the network:  PROVISIONING:  network provisioning is in progress;  READY:  network is ready;  FAILED: provisioning failed;  DEPROVISIONING: network deprovisioning is in progress;
+	Phase                    string                               `json:"phase"`
 	SupportedConnectionTypes NetworkingV1SupportedConnectionTypes `json:"supported_connection_types"`
-	ActiveConnectionTypes NetworkingV1ConnectionTypes `json:"active_connection_types"`
+	ActiveConnectionTypes    NetworkingV1ConnectionTypes          `json:"active_connection_types"`
 	// Error code if network is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`
 	// Displayable error message if network is in a failed state
 	ErrorMessage *string `json:"error_message,omitempty"`
 	// The root DNS domain for the network if applicable. Present on networks that support PrivateLink.
 	DnsDomain *string `json:"dns_domain,omitempty"`
-	// The DNS subdomain for each zone. Present on networks that support PrivateLink. Keys are zones and values are DNS domains. 
+	// The DNS subdomain for each zone. Present on networks that support PrivateLink. Keys are zones and values are DNS domains.
 	ZonalSubdomains *map[string]string `json:"zonal_subdomains,omitempty"`
 	// The cloud-specific network details. These will be populated when the network reaches the READY state.
 	Cloud *NetworkingV1NetworkStatusCloudOneOf `json:"cloud,omitempty"`
@@ -84,7 +84,7 @@ func (o *NetworkingV1NetworkStatus) GetPhase() string {
 // GetPhaseOk returns a tuple with the Phase field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1NetworkStatus) GetPhaseOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Phase, true
@@ -108,7 +108,7 @@ func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypes() NetworkingV1Su
 // GetSupportedConnectionTypesOk returns a tuple with the SupportedConnectionTypes field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypesOk() (*NetworkingV1SupportedConnectionTypes, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.SupportedConnectionTypes, true
@@ -132,7 +132,7 @@ func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypes() NetworkingV1Conne
 // GetActiveConnectionTypesOk returns a tuple with the ActiveConnectionTypes field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypesOk() (*NetworkingV1ConnectionTypes, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ActiveConnectionTypes, true
@@ -305,44 +305,44 @@ func (o *NetworkingV1NetworkStatus) SetCloud(v NetworkingV1NetworkStatusCloudOne
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1NetworkStatus) Redact() {
-    o.recurseRedact(&o.Phase)
-    o.recurseRedact(&o.SupportedConnectionTypes)
-    o.recurseRedact(&o.ActiveConnectionTypes)
-    o.recurseRedact(o.ErrorCode)
-    o.recurseRedact(o.ErrorMessage)
-    o.recurseRedact(o.DnsDomain)
-    o.recurseRedact(o.ZonalSubdomains)
-    o.recurseRedact(o.Cloud)
+	o.recurseRedact(&o.Phase)
+	o.recurseRedact(&o.SupportedConnectionTypes)
+	o.recurseRedact(&o.ActiveConnectionTypes)
+	o.recurseRedact(o.ErrorCode)
+	o.recurseRedact(o.ErrorMessage)
+	o.recurseRedact(o.DnsDomain)
+	o.recurseRedact(o.ZonalSubdomains)
+	o.recurseRedact(o.Cloud)
 }
 
 func (o *NetworkingV1NetworkStatus) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o NetworkingV1NetworkStatus) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1NetworkStatus) MarshalJSON() ([]byte, error) {
@@ -409,5 +409,3 @@ func (v *NullableNetworkingV1NetworkStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
