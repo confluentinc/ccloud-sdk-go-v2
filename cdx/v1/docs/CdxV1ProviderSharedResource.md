@@ -11,16 +11,16 @@ Name | Type | Description | Notes
 **Crn** | Pointer to **string** | Deprecated please use resources attribute. | [optional] 
 **Resources** | Pointer to **[]string** | List of resource crns that are shared together | [optional] 
 **DisplayName** | Pointer to **string** | Shared resource display name | [optional] 
-**Description** | Pointer to **string** | Description of shared resource | [optional] 
-**Labels** | Pointer to **[]string** | list of labels | [optional] 
-**Schemas** | Pointer to **[]string** | List of schemas in JSON format. This field is work in progress and subject to changes. | [optional] [readonly] 
+**Description** | Pointer to **string** | Description of shared resource | [optional] [readonly] 
+**Tags** | Pointer to **[]string** | list of tags | [optional] [readonly] 
+**Schemas** | Pointer to [**[]CdxV1Schema**](CdxV1Schema.md) | List of schemas in JSON format. This field is work in progress and subject to changes. | [optional] [readonly] 
 **OrganizationDescription** | Pointer to **string** | Shared resource&#39;s organization description | [optional] 
 **OrganizationContact** | Pointer to **string** | Email of contact person from the organization | [optional] 
 **LogoUrl** | Pointer to **string** | Resource logo url | [optional] [readonly] 
 **OrganizationName** | Pointer to **interface{}** | Organization to which the shared resource belongs. Deprecated | [optional] [readonly] 
 **EnvironmentName** | Pointer to **string** | The environment name of the shared resource. Deprecated | [optional] [readonly] 
 **ClusterName** | Pointer to **string** | The cluster display name of the shared resource. Deprecated | [optional] [readonly] 
-**CloudCluster** | Pointer to [**ObjectReference**](ObjectReference.md) | The cloud cluster to which this belongs. | [optional] 
+**CloudCluster** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The cloud cluster to which this belongs. | [optional] 
 
 ## Methods
 
@@ -241,47 +241,47 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
-### GetLabels
+### GetTags
 
-`func (o *CdxV1ProviderSharedResource) GetLabels() []string`
+`func (o *CdxV1ProviderSharedResource) GetTags() []string`
 
-GetLabels returns the Labels field if non-nil, zero value otherwise.
+GetTags returns the Tags field if non-nil, zero value otherwise.
 
-### GetLabelsOk
+### GetTagsOk
 
-`func (o *CdxV1ProviderSharedResource) GetLabelsOk() (*[]string, bool)`
+`func (o *CdxV1ProviderSharedResource) GetTagsOk() (*[]string, bool)`
 
-GetLabelsOk returns a tuple with the Labels field if it's non-nil, zero value otherwise
+GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetLabels
+### SetTags
 
-`func (o *CdxV1ProviderSharedResource) SetLabels(v []string)`
+`func (o *CdxV1ProviderSharedResource) SetTags(v []string)`
 
-SetLabels sets Labels field to given value.
+SetTags sets Tags field to given value.
 
-### HasLabels
+### HasTags
 
-`func (o *CdxV1ProviderSharedResource) HasLabels() bool`
+`func (o *CdxV1ProviderSharedResource) HasTags() bool`
 
-HasLabels returns a boolean if a field has been set.
+HasTags returns a boolean if a field has been set.
 
 ### GetSchemas
 
-`func (o *CdxV1ProviderSharedResource) GetSchemas() []string`
+`func (o *CdxV1ProviderSharedResource) GetSchemas() []CdxV1Schema`
 
 GetSchemas returns the Schemas field if non-nil, zero value otherwise.
 
 ### GetSchemasOk
 
-`func (o *CdxV1ProviderSharedResource) GetSchemasOk() (*[]string, bool)`
+`func (o *CdxV1ProviderSharedResource) GetSchemasOk() (*[]CdxV1Schema, bool)`
 
 GetSchemasOk returns a tuple with the Schemas field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSchemas
 
-`func (o *CdxV1ProviderSharedResource) SetSchemas(v []string)`
+`func (o *CdxV1ProviderSharedResource) SetSchemas(v []CdxV1Schema)`
 
 SetSchemas sets Schemas field to given value.
 
@@ -453,20 +453,20 @@ HasClusterName returns a boolean if a field has been set.
 
 ### GetCloudCluster
 
-`func (o *CdxV1ProviderSharedResource) GetCloudCluster() ObjectReference`
+`func (o *CdxV1ProviderSharedResource) GetCloudCluster() EnvScopedObjectReference`
 
 GetCloudCluster returns the CloudCluster field if non-nil, zero value otherwise.
 
 ### GetCloudClusterOk
 
-`func (o *CdxV1ProviderSharedResource) GetCloudClusterOk() (*ObjectReference, bool)`
+`func (o *CdxV1ProviderSharedResource) GetCloudClusterOk() (*EnvScopedObjectReference, bool)`
 
 GetCloudClusterOk returns a tuple with the CloudCluster field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCloudCluster
 
-`func (o *CdxV1ProviderSharedResource) SetCloudCluster(v ObjectReference)`
+`func (o *CdxV1ProviderSharedResource) SetCloudCluster(v EnvScopedObjectReference)`
 
 SetCloudCluster sets CloudCluster field to given value.
 

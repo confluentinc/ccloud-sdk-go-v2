@@ -131,6 +131,7 @@ Class | Method | HTTP request | Description
  - [CdxV1RedeemTokenRequest](docs/CdxV1RedeemTokenRequest.md)
  - [CdxV1RedeemTokenResponse](docs/CdxV1RedeemTokenResponse.md)
  - [CdxV1RedeemTokenResponseResourcesOneOf](docs/CdxV1RedeemTokenResponseResourcesOneOf.md)
+ - [CdxV1Schema](docs/CdxV1Schema.md)
  - [CdxV1SharedGroup](docs/CdxV1SharedGroup.md)
  - [CdxV1SharedSubject](docs/CdxV1SharedSubject.md)
  - [CdxV1SharedToken](docs/CdxV1SharedToken.md)
@@ -144,8 +145,6 @@ Class | Method | HTTP request | Description
  - [ListMeta](docs/ListMeta.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
- - [TypedEnvScopedObjectReference](docs/TypedEnvScopedObjectReference.md)
- - [TypedGlobalObjectReference](docs/TypedGlobalObjectReference.md)
 
 
 ## Documentation For Authorization

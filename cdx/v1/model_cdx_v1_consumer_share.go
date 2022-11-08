@@ -54,7 +54,7 @@ type CdxV1ConsumerShare struct {
 	// Name of the consumer. Deprecated
 	ConsumerUserName *string `json:"consumer_user_name,omitempty"`
 	// The consumer user/invitee
-	ConsumerUser *ObjectReference          `json:"consumer_user,omitempty"`
+	ConsumerUser *GlobalObjectReference    `json:"consumer_user,omitempty"`
 	Status       *CdxV1ConsumerShareStatus `json:"status,omitempty"`
 }
 
@@ -364,9 +364,9 @@ func (o *CdxV1ConsumerShare) SetConsumerUserName(v string) {
 }
 
 // GetConsumerUser returns the ConsumerUser field value if set, zero value otherwise.
-func (o *CdxV1ConsumerShare) GetConsumerUser() ObjectReference {
+func (o *CdxV1ConsumerShare) GetConsumerUser() GlobalObjectReference {
 	if o == nil || o.ConsumerUser == nil {
-		var ret ObjectReference
+		var ret GlobalObjectReference
 		return ret
 	}
 	return *o.ConsumerUser
@@ -374,7 +374,7 @@ func (o *CdxV1ConsumerShare) GetConsumerUser() ObjectReference {
 
 // GetConsumerUserOk returns a tuple with the ConsumerUser field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1ConsumerShare) GetConsumerUserOk() (*ObjectReference, bool) {
+func (o *CdxV1ConsumerShare) GetConsumerUserOk() (*GlobalObjectReference, bool) {
 	if o == nil || o.ConsumerUser == nil {
 		return nil, false
 	}
@@ -390,8 +390,8 @@ func (o *CdxV1ConsumerShare) HasConsumerUser() bool {
 	return false
 }
 
-// SetConsumerUser gets a reference to the given ObjectReference and assigns it to the ConsumerUser field.
-func (o *CdxV1ConsumerShare) SetConsumerUser(v ObjectReference) {
+// SetConsumerUser gets a reference to the given GlobalObjectReference and assigns it to the ConsumerUser field.
+func (o *CdxV1ConsumerShare) SetConsumerUser(v GlobalObjectReference) {
 	o.ConsumerUser = &v
 }
 

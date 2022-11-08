@@ -46,12 +46,6 @@ type CdxV1ProviderSharedResourceUpdate struct {
 	Resources *[]string `json:"resources,omitempty"`
 	// Shared resource display name
 	DisplayName *string `json:"display_name,omitempty"`
-	// Description of shared resource
-	Description *string `json:"description,omitempty"`
-	// list of labels
-	Labels *[]string `json:"labels,omitempty"`
-	// List of schemas in JSON format. This field is work in progress and subject to changes.
-	Schemas *[]string `json:"schemas,omitempty"`
 	// Shared resource's organization description
 	OrganizationDescription *string `json:"organization_description,omitempty"`
 	// Email of contact person from the organization
@@ -269,102 +263,6 @@ func (o *CdxV1ProviderSharedResourceUpdate) SetDisplayName(v string) {
 	o.DisplayName = &v
 }
 
-// GetDescription returns the Description field value if set, zero value otherwise.
-func (o *CdxV1ProviderSharedResourceUpdate) GetDescription() string {
-	if o == nil || o.Description == nil {
-		var ret string
-		return ret
-	}
-	return *o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CdxV1ProviderSharedResourceUpdate) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
-	}
-	return o.Description, true
-}
-
-// HasDescription returns a boolean if a field has been set.
-func (o *CdxV1ProviderSharedResourceUpdate) HasDescription() bool {
-	if o != nil && o.Description != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *CdxV1ProviderSharedResourceUpdate) SetDescription(v string) {
-	o.Description = &v
-}
-
-// GetLabels returns the Labels field value if set, zero value otherwise.
-func (o *CdxV1ProviderSharedResourceUpdate) GetLabels() []string {
-	if o == nil || o.Labels == nil {
-		var ret []string
-		return ret
-	}
-	return *o.Labels
-}
-
-// GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CdxV1ProviderSharedResourceUpdate) GetLabelsOk() (*[]string, bool) {
-	if o == nil || o.Labels == nil {
-		return nil, false
-	}
-	return o.Labels, true
-}
-
-// HasLabels returns a boolean if a field has been set.
-func (o *CdxV1ProviderSharedResourceUpdate) HasLabels() bool {
-	if o != nil && o.Labels != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetLabels gets a reference to the given []string and assigns it to the Labels field.
-func (o *CdxV1ProviderSharedResourceUpdate) SetLabels(v []string) {
-	o.Labels = &v
-}
-
-// GetSchemas returns the Schemas field value if set, zero value otherwise.
-func (o *CdxV1ProviderSharedResourceUpdate) GetSchemas() []string {
-	if o == nil || o.Schemas == nil {
-		var ret []string
-		return ret
-	}
-	return *o.Schemas
-}
-
-// GetSchemasOk returns a tuple with the Schemas field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CdxV1ProviderSharedResourceUpdate) GetSchemasOk() (*[]string, bool) {
-	if o == nil || o.Schemas == nil {
-		return nil, false
-	}
-	return o.Schemas, true
-}
-
-// HasSchemas returns a boolean if a field has been set.
-func (o *CdxV1ProviderSharedResourceUpdate) HasSchemas() bool {
-	if o != nil && o.Schemas != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSchemas gets a reference to the given []string and assigns it to the Schemas field.
-func (o *CdxV1ProviderSharedResourceUpdate) SetSchemas(v []string) {
-	o.Schemas = &v
-}
-
 // GetOrganizationDescription returns the OrganizationDescription field value if set, zero value otherwise.
 func (o *CdxV1ProviderSharedResourceUpdate) GetOrganizationDescription() string {
 	if o == nil || o.OrganizationDescription == nil {
@@ -469,9 +367,6 @@ func (o *CdxV1ProviderSharedResourceUpdate) Redact() {
 	o.recurseRedact(o.Metadata)
 	o.recurseRedact(o.Resources)
 	o.recurseRedact(o.DisplayName)
-	o.recurseRedact(o.Description)
-	o.recurseRedact(o.Labels)
-	o.recurseRedact(o.Schemas)
 	o.recurseRedact(o.OrganizationDescription)
 	o.recurseRedact(o.OrganizationContact)
 	o.recurseRedact(o.LogoUrl)
@@ -526,15 +421,6 @@ func (o CdxV1ProviderSharedResourceUpdate) MarshalJSON() ([]byte, error) {
 	}
 	if o.DisplayName != nil {
 		toSerialize["display_name"] = o.DisplayName
-	}
-	if o.Description != nil {
-		toSerialize["description"] = o.Description
-	}
-	if o.Labels != nil {
-		toSerialize["labels"] = o.Labels
-	}
-	if o.Schemas != nil {
-		toSerialize["schemas"] = o.Schemas
 	}
 	if o.OrganizationDescription != nil {
 		toSerialize["organization_description"] = o.OrganizationDescription
