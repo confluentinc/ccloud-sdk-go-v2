@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **NetworkConnectionTypes** | Pointer to [**CdxV1ConnectionTypes**](cdx.v1.ConnectionTypes.md) |  | [optional] [readonly] 
 **DisplayName** | Pointer to **string** | Consumer resource display name | [optional] [readonly] 
 **Description** | Pointer to **string** | Description of consumer resource | [optional] [readonly] 
-**Labels** | Pointer to **[]string** | list of labels | [optional] [readonly] 
-**Schemas** | Pointer to **[]string** | List of schemas in JSON format. This field is work in progress and subject to changes. | [optional] [readonly] 
+**Tags** | Pointer to **[]string** | list of tags | [optional] [readonly] 
+**Schemas** | Pointer to [**[]CdxV1Schema**](CdxV1Schema.md) | List of schemas in JSON format. This field is work in progress and subject to changes. | [optional] [readonly] 
 **OrganizationName** | Pointer to **string** | Shared resource&#39;s organization name | [optional] [readonly] 
 **OrganizationDescription** | Pointer to **string** | Shared resource&#39;s organization description | [optional] [readonly] 
 **OrganizationContact** | Pointer to **string** | Email of the shared resource&#39;s organization contact | [optional] [readonly] 
@@ -238,47 +238,47 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
-### GetLabels
+### GetTags
 
-`func (o *CdxV1ConsumerSharedResource) GetLabels() []string`
+`func (o *CdxV1ConsumerSharedResource) GetTags() []string`
 
-GetLabels returns the Labels field if non-nil, zero value otherwise.
+GetTags returns the Tags field if non-nil, zero value otherwise.
 
-### GetLabelsOk
+### GetTagsOk
 
-`func (o *CdxV1ConsumerSharedResource) GetLabelsOk() (*[]string, bool)`
+`func (o *CdxV1ConsumerSharedResource) GetTagsOk() (*[]string, bool)`
 
-GetLabelsOk returns a tuple with the Labels field if it's non-nil, zero value otherwise
+GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetLabels
+### SetTags
 
-`func (o *CdxV1ConsumerSharedResource) SetLabels(v []string)`
+`func (o *CdxV1ConsumerSharedResource) SetTags(v []string)`
 
-SetLabels sets Labels field to given value.
+SetTags sets Tags field to given value.
 
-### HasLabels
+### HasTags
 
-`func (o *CdxV1ConsumerSharedResource) HasLabels() bool`
+`func (o *CdxV1ConsumerSharedResource) HasTags() bool`
 
-HasLabels returns a boolean if a field has been set.
+HasTags returns a boolean if a field has been set.
 
 ### GetSchemas
 
-`func (o *CdxV1ConsumerSharedResource) GetSchemas() []string`
+`func (o *CdxV1ConsumerSharedResource) GetSchemas() []CdxV1Schema`
 
 GetSchemas returns the Schemas field if non-nil, zero value otherwise.
 
 ### GetSchemasOk
 
-`func (o *CdxV1ConsumerSharedResource) GetSchemasOk() (*[]string, bool)`
+`func (o *CdxV1ConsumerSharedResource) GetSchemasOk() (*[]CdxV1Schema, bool)`
 
 GetSchemasOk returns a tuple with the Schemas field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSchemas
 
-`func (o *CdxV1ConsumerSharedResource) SetSchemas(v []string)`
+`func (o *CdxV1ConsumerSharedResource) SetSchemas(v []CdxV1Schema)`
 
 SetSchemas sets Schemas field to given value.
 

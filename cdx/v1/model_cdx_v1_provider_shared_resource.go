@@ -50,10 +50,10 @@ type CdxV1ProviderSharedResource struct {
 	DisplayName *string `json:"display_name,omitempty"`
 	// Description of shared resource
 	Description *string `json:"description,omitempty"`
-	// list of labels
-	Labels *[]string `json:"labels,omitempty"`
+	// list of tags
+	Tags *[]string `json:"tags,omitempty"`
 	// List of schemas in JSON format. This field is work in progress and subject to changes.
-	Schemas *[]string `json:"schemas,omitempty"`
+	Schemas *[]CdxV1Schema `json:"schemas,omitempty"`
 	// Shared resource's organization description
 	OrganizationDescription *string `json:"organization_description,omitempty"`
 	// Email of contact person from the organization
@@ -67,7 +67,7 @@ type CdxV1ProviderSharedResource struct {
 	// The cluster display name of the shared resource. Deprecated
 	ClusterName *string `json:"cluster_name,omitempty"`
 	// The cloud cluster to which this belongs.
-	CloudCluster *ObjectReference `json:"cloud_cluster,omitempty"`
+	CloudCluster *EnvScopedObjectReference `json:"cloud_cluster,omitempty"`
 }
 
 // NewCdxV1ProviderSharedResource instantiates a new CdxV1ProviderSharedResource object
@@ -343,42 +343,42 @@ func (o *CdxV1ProviderSharedResource) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetLabels returns the Labels field value if set, zero value otherwise.
-func (o *CdxV1ProviderSharedResource) GetLabels() []string {
-	if o == nil || o.Labels == nil {
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *CdxV1ProviderSharedResource) GetTags() []string {
+	if o == nil || o.Tags == nil {
 		var ret []string
 		return ret
 	}
-	return *o.Labels
+	return *o.Tags
 }
 
-// GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1ProviderSharedResource) GetLabelsOk() (*[]string, bool) {
-	if o == nil || o.Labels == nil {
+func (o *CdxV1ProviderSharedResource) GetTagsOk() (*[]string, bool) {
+	if o == nil || o.Tags == nil {
 		return nil, false
 	}
-	return o.Labels, true
+	return o.Tags, true
 }
 
-// HasLabels returns a boolean if a field has been set.
-func (o *CdxV1ProviderSharedResource) HasLabels() bool {
-	if o != nil && o.Labels != nil {
+// HasTags returns a boolean if a field has been set.
+func (o *CdxV1ProviderSharedResource) HasTags() bool {
+	if o != nil && o.Tags != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetLabels gets a reference to the given []string and assigns it to the Labels field.
-func (o *CdxV1ProviderSharedResource) SetLabels(v []string) {
-	o.Labels = &v
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *CdxV1ProviderSharedResource) SetTags(v []string) {
+	o.Tags = &v
 }
 
 // GetSchemas returns the Schemas field value if set, zero value otherwise.
-func (o *CdxV1ProviderSharedResource) GetSchemas() []string {
+func (o *CdxV1ProviderSharedResource) GetSchemas() []CdxV1Schema {
 	if o == nil || o.Schemas == nil {
-		var ret []string
+		var ret []CdxV1Schema
 		return ret
 	}
 	return *o.Schemas
@@ -386,7 +386,7 @@ func (o *CdxV1ProviderSharedResource) GetSchemas() []string {
 
 // GetSchemasOk returns a tuple with the Schemas field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1ProviderSharedResource) GetSchemasOk() (*[]string, bool) {
+func (o *CdxV1ProviderSharedResource) GetSchemasOk() (*[]CdxV1Schema, bool) {
 	if o == nil || o.Schemas == nil {
 		return nil, false
 	}
@@ -402,8 +402,8 @@ func (o *CdxV1ProviderSharedResource) HasSchemas() bool {
 	return false
 }
 
-// SetSchemas gets a reference to the given []string and assigns it to the Schemas field.
-func (o *CdxV1ProviderSharedResource) SetSchemas(v []string) {
+// SetSchemas gets a reference to the given []CdxV1Schema and assigns it to the Schemas field.
+func (o *CdxV1ProviderSharedResource) SetSchemas(v []CdxV1Schema) {
 	o.Schemas = &v
 }
 
@@ -601,9 +601,9 @@ func (o *CdxV1ProviderSharedResource) SetClusterName(v string) {
 }
 
 // GetCloudCluster returns the CloudCluster field value if set, zero value otherwise.
-func (o *CdxV1ProviderSharedResource) GetCloudCluster() ObjectReference {
+func (o *CdxV1ProviderSharedResource) GetCloudCluster() EnvScopedObjectReference {
 	if o == nil || o.CloudCluster == nil {
-		var ret ObjectReference
+		var ret EnvScopedObjectReference
 		return ret
 	}
 	return *o.CloudCluster
@@ -611,7 +611,7 @@ func (o *CdxV1ProviderSharedResource) GetCloudCluster() ObjectReference {
 
 // GetCloudClusterOk returns a tuple with the CloudCluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1ProviderSharedResource) GetCloudClusterOk() (*ObjectReference, bool) {
+func (o *CdxV1ProviderSharedResource) GetCloudClusterOk() (*EnvScopedObjectReference, bool) {
 	if o == nil || o.CloudCluster == nil {
 		return nil, false
 	}
@@ -627,8 +627,8 @@ func (o *CdxV1ProviderSharedResource) HasCloudCluster() bool {
 	return false
 }
 
-// SetCloudCluster gets a reference to the given ObjectReference and assigns it to the CloudCluster field.
-func (o *CdxV1ProviderSharedResource) SetCloudCluster(v ObjectReference) {
+// SetCloudCluster gets a reference to the given EnvScopedObjectReference and assigns it to the CloudCluster field.
+func (o *CdxV1ProviderSharedResource) SetCloudCluster(v EnvScopedObjectReference) {
 	o.CloudCluster = &v
 }
 
@@ -642,7 +642,7 @@ func (o *CdxV1ProviderSharedResource) Redact() {
 	o.recurseRedact(o.Resources)
 	o.recurseRedact(o.DisplayName)
 	o.recurseRedact(o.Description)
-	o.recurseRedact(o.Labels)
+	o.recurseRedact(o.Tags)
 	o.recurseRedact(o.Schemas)
 	o.recurseRedact(o.OrganizationDescription)
 	o.recurseRedact(o.OrganizationContact)
@@ -709,8 +709,8 @@ func (o CdxV1ProviderSharedResource) MarshalJSON() ([]byte, error) {
 	if o.Description != nil {
 		toSerialize["description"] = o.Description
 	}
-	if o.Labels != nil {
-		toSerialize["labels"] = o.Labels
+	if o.Tags != nil {
+		toSerialize["tags"] = o.Tags
 	}
 	if o.Schemas != nil {
 		toSerialize["schemas"] = o.Schemas

@@ -16,9 +16,9 @@ Name | Type | Description | Notes
 **InvitedAt** | Pointer to **time.Time** | The date and time at which consumer was invited | [optional] [readonly] 
 **InviteExpiresAt** | Pointer to **time.Time** | The date and time at which the invitation will expire. Only for invited shares | [optional] [readonly] 
 **RedeemedAt** | Pointer to **time.Time** | The date and time at which the invite was redeemed | [optional] [readonly] 
-**ProviderUser** | Pointer to [**ObjectReference**](ObjectReference.md) | The provider user/inviter | [optional] [readonly] 
-**ServiceAccount** | Pointer to [**ObjectReference**](ObjectReference.md) | The service account associated with this object. | [optional] 
-**CloudCluster** | Pointer to [**ObjectReference**](ObjectReference.md) | The cloud cluster to which this belongs. | [optional] 
+**ProviderUser** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The provider user/inviter | [optional] [readonly] 
+**ServiceAccount** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The service account associated with this object. | [optional] 
+**CloudCluster** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The cloud cluster to which this belongs. | [optional] 
 **Status** | Pointer to [**CdxV1ProviderShareStatus**](CdxV1ProviderShareStatus.md) |  | [optional] 
 
 ## Methods
@@ -342,20 +342,20 @@ HasRedeemedAt returns a boolean if a field has been set.
 
 ### GetProviderUser
 
-`func (o *CdxV1ProviderShare) GetProviderUser() ObjectReference`
+`func (o *CdxV1ProviderShare) GetProviderUser() GlobalObjectReference`
 
 GetProviderUser returns the ProviderUser field if non-nil, zero value otherwise.
 
 ### GetProviderUserOk
 
-`func (o *CdxV1ProviderShare) GetProviderUserOk() (*ObjectReference, bool)`
+`func (o *CdxV1ProviderShare) GetProviderUserOk() (*GlobalObjectReference, bool)`
 
 GetProviderUserOk returns a tuple with the ProviderUser field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProviderUser
 
-`func (o *CdxV1ProviderShare) SetProviderUser(v ObjectReference)`
+`func (o *CdxV1ProviderShare) SetProviderUser(v GlobalObjectReference)`
 
 SetProviderUser sets ProviderUser field to given value.
 
@@ -367,20 +367,20 @@ HasProviderUser returns a boolean if a field has been set.
 
 ### GetServiceAccount
 
-`func (o *CdxV1ProviderShare) GetServiceAccount() ObjectReference`
+`func (o *CdxV1ProviderShare) GetServiceAccount() GlobalObjectReference`
 
 GetServiceAccount returns the ServiceAccount field if non-nil, zero value otherwise.
 
 ### GetServiceAccountOk
 
-`func (o *CdxV1ProviderShare) GetServiceAccountOk() (*ObjectReference, bool)`
+`func (o *CdxV1ProviderShare) GetServiceAccountOk() (*GlobalObjectReference, bool)`
 
 GetServiceAccountOk returns a tuple with the ServiceAccount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetServiceAccount
 
-`func (o *CdxV1ProviderShare) SetServiceAccount(v ObjectReference)`
+`func (o *CdxV1ProviderShare) SetServiceAccount(v GlobalObjectReference)`
 
 SetServiceAccount sets ServiceAccount field to given value.
 
@@ -392,20 +392,20 @@ HasServiceAccount returns a boolean if a field has been set.
 
 ### GetCloudCluster
 
-`func (o *CdxV1ProviderShare) GetCloudCluster() ObjectReference`
+`func (o *CdxV1ProviderShare) GetCloudCluster() EnvScopedObjectReference`
 
 GetCloudCluster returns the CloudCluster field if non-nil, zero value otherwise.
 
 ### GetCloudClusterOk
 
-`func (o *CdxV1ProviderShare) GetCloudClusterOk() (*ObjectReference, bool)`
+`func (o *CdxV1ProviderShare) GetCloudClusterOk() (*EnvScopedObjectReference, bool)`
 
 GetCloudClusterOk returns a tuple with the CloudCluster field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCloudCluster
 
-`func (o *CdxV1ProviderShare) SetCloudCluster(v ObjectReference)`
+`func (o *CdxV1ProviderShare) SetCloudCluster(v EnvScopedObjectReference)`
 
 SetCloudCluster sets CloudCluster field to given value.
 

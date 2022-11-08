@@ -15,6 +15,10 @@ info:
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
+- description: Confluent Cloud staging
+  url: https://api.stag.cpdev.cloud
+- description: Confluent Cloud development
+  url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
     Resources shared by the provider
@@ -796,13 +800,13 @@ paths:
             --url 'https://api.confluent.cloud/cdx/v1/provider-shared-resources/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"crn":"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic","resources":["crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic"],"display_name":"Stock Trades","description":"This topic provides realtime data for the orders placed through the website","labels":["recent","pending"],"organization_description":"ABC Corp is the biggest online retailer","organization_contact":"jane.doe@example.com","cloud_cluster":{"id":"string","environment":"string"}}'
+            --data '{"crn":"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic","resources":["crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic"],"display_name":"Stock Trades","organization_description":"ABC Corp is the biggest online retailer","organization_contact":"jane.doe@example.com","cloud_cluster":{"id":"string","environment":"string"}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"crn\":\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"],\"display_name\":\"Stock Trades\",\"description\":\"This topic provides realtime data for the orders placed through the website\",\"labels\":[\"recent\",\"pending\"],\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"crn\":\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"],\"display_name\":\"Stock Trades\",\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/cdx/v1/provider-shared-resources/{id}")
             .patch(body)
@@ -816,9 +820,7 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cdx/v1/provider-shared-resources/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"crn\\\":\\\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\\\
           \",\\\"resources\\\":[\\\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\\\
-          \"],\\\"display_name\\\":\\\"Stock Trades\\\",\\\"description\\\":\\\"This\
-          \ topic provides realtime data for the orders placed through the website\\\
-          \",\\\"labels\\\":[\\\"recent\\\",\\\"pending\\\"],\\\"organization_description\\\
+          \"],\\\"display_name\\\":\\\"Stock Trades\\\",\\\"organization_description\\\
           \":\\\"ABC Corp is the biggest online retailer\\\",\\\"organization_contact\\\
           \":\\\"jane.doe@example.com\\\",\\\"cloud_cluster\\\":{\\\"id\\\":\\\"string\\\
           \",\\\"environment\\\":\\\"string\\\"}}\")\n\n\treq, _ := http.NewRequest(\"\
@@ -833,7 +835,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"crn\":\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"],\"display_name\":\"Stock Trades\",\"description\":\"This topic provides realtime data for the orders placed through the website\",\"labels\":[\"recent\",\"pending\"],\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}"
+          payload = "{\"crn\":\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"],\"display_name\":\"Stock Trades\",\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}"
 
           headers = {
               'content-type': "application/json",
@@ -880,8 +882,6 @@ paths:
               'crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic'
             ],
             display_name: 'Stock Trades',
-            description: 'This topic provides realtime data for the orders placed through the website',
-            labels: ['recent', 'pending'],
             organization_description: 'ABC Corp is the biggest online retailer',
             organization_contact: 'jane.doe@example.com',
             cloud_cluster: {id: 'string', environment: 'string'}
@@ -899,7 +899,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"crn\":\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"],\"display_name\":\"Stock Trades\",\"description\":\"This topic provides realtime data for the orders placed through the website\",\"labels\":[\"recent\",\"pending\"],\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"crn\":\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"],\"display_name\":\"Stock Trades\",\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -908,7 +908,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"crn\":\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"],\"display_name\":\"Stock Trades\",\"description\":\"This topic provides realtime data for the orders placed through the website\",\"labels\":[\"recent\",\"pending\"],\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"crn\":\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-1111aaa/kafka=lkc-111aaa/topic=my.topic\",\"resources\":[\"crn://confluent.cloud/environment=env-123/cloud-cluster=lkc-111aaa/kafka=lkc-111aaa/topic=my.topic\"],\"display_name\":\"Stock Trades\",\"organization_description\":\"ABC Corp is the biggest online retailer\",\"organization_contact\":\"jane.doe@example.com\",\"cloud_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /cdx/v1/provider-shared-resources/{id}/images/{file_name}:
     delete:
@@ -1062,6 +1062,7 @@ paths:
       summary: Delete_Image a Provider Shared Resource
       tags:
       - Provider Shared Resources (cdx/v1)
+      x-name: cdx.v1.ProviderSharedResource
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1302,6 +1303,7 @@ paths:
       summary: View_Image a Provider Shared Resource
       tags:
       - Provider Shared Resources (cdx/v1)
+      x-name: cdx.v1.ProviderSharedResource
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1558,6 +1560,7 @@ paths:
       summary: Upload image for shared resource
       tags:
       - Provider Shared Resources (cdx/v1)
+      x-name: cdx.v1.ProviderSharedResource
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -2891,6 +2894,7 @@ paths:
       summary: Resend
       tags:
       - Provider Shares (cdx/v1)
+      x-name: cdx.v1.ProviderShare
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -3632,6 +3636,7 @@ paths:
       summary: Get image for shared resource
       tags:
       - Consumer Shared Resources (cdx/v1)
+      x-name: cdx.v1.ConsumerSharedResource
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -3864,6 +3869,7 @@ paths:
       summary: Get shared resource's network configuration
       tags:
       - Consumer Shared Resources (cdx/v1)
+      x-name: cdx.v1.ConsumerSharedResource
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -4861,6 +4867,7 @@ paths:
       summary: Validate token to view shared resources
       tags:
       - Shared Tokens (cdx/v1)
+      x-name: cdx.v1.SharedToken
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -5143,6 +5150,7 @@ paths:
       summary: Redeem token
       tags:
       - Shared Tokens (cdx/v1)
+      x-name: cdx.v1.SharedToken
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -6034,24 +6042,29 @@ components:
           description: Description of shared resource
           example: This topic provides realtime data for the orders placed through
             the website
+          readOnly: true
           type: string
-        labels:
-          description: list of labels
+          x-immutable: true
+        tags:
+          description: list of tags
           example:
           - recent
           - pending
           items:
             type: string
+          readOnly: true
           type: array
+          x-immutable: true
         schemas:
           description: List of schemas in JSON format. This field is work in progress
             and subject to changes.
-          example:
-          - '{"key_1": "val_1", "key_2": "val_2"}'
           items:
-            type: string
+            allOf:
+            - $ref: '#/components/schemas/cdx.v1.Schema'
+            - type: object
           readOnly: true
           type: array
+          x-immutable: true
         organization_description:
           description: Shared resource's organization description
           example: ABC Corp is the biggest online retailer
@@ -6086,7 +6099,7 @@ components:
           x-immutable: true
         cloud_cluster:
           allOf:
-          - $ref: '#/components/schemas/ObjectReference'
+          - $ref: '#/components/schemas/EnvScopedObjectReference'
           description: The cloud cluster to which this belongs.
           x-immutable: true
       type: object
@@ -6200,17 +6213,17 @@ components:
           type: string
         provider_user:
           allOf:
-          - $ref: '#/components/schemas/ObjectReference'
+          - $ref: '#/components/schemas/GlobalObjectReference'
           description: The provider user/inviter
           readOnly: true
         service_account:
           allOf:
-          - $ref: '#/components/schemas/ObjectReference'
+          - $ref: '#/components/schemas/GlobalObjectReference'
           description: The service account associated with this object.
           x-immutable: true
         cloud_cluster:
           allOf:
-          - $ref: '#/components/schemas/ObjectReference'
+          - $ref: '#/components/schemas/EnvScopedObjectReference'
           description: The cloud cluster to which this belongs.
           x-immutable: true
         status:
@@ -6253,13 +6266,14 @@ components:
         organization_name: ABC Corp
         api_version: cdx/v1
         display_name: Stock Trades
-        labels:
+        tags:
         - recent
         - pending
         cloud: ""
         organization_description: ABC Corp is the biggest online retailer
         schemas:
-        - '{"key_1": "val_1", "key_2": "val_2"}'
+        - ""
+        - ""
         id: dlz-f3a90de
       properties:
         api_version:
@@ -6316,8 +6330,8 @@ components:
           readOnly: true
           type: string
           x-immutable: true
-        labels:
-          description: list of labels
+        tags:
+          description: list of tags
           example:
           - recent
           - pending
@@ -6329,10 +6343,10 @@ components:
         schemas:
           description: List of schemas in JSON format. This field is work in progress
             and subject to changes.
-          example:
-          - '{"key_1": "val_1", "key_2": "val_2"}'
           items:
-            type: string
+            allOf:
+            - $ref: '#/components/schemas/cdx.v1.Schema'
+            - type: object
           readOnly: true
           type: array
           x-immutable: true
@@ -6431,7 +6445,7 @@ components:
           type: string
         consumer_user:
           allOf:
-          - $ref: '#/components/schemas/ObjectReference'
+          - $ref: '#/components/schemas/GlobalObjectReference'
           description: The consumer user/invitee
           readOnly: true
         status:
@@ -6840,7 +6854,7 @@ components:
               self:
                 example: https://api.confluent.cloud/cdx/v1/networks/n-12345
               resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-12345
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-12345
         kafka_bootstrap_url:
           description: The kafka cluster bootstrap url
           example: SASL://pkc-xxxxx.us-west-2.aws.confluent.cloud:9092
@@ -6993,6 +7007,32 @@ components:
       - AWS
       - AZURE
       - GCP
+    cdx.v1.Schema:
+      description: Schema
+      properties:
+        subject:
+          description: Name of the subject
+          example: User
+          type: string
+        version:
+          description: Version number
+          example: 1
+          format: int32
+          type: integer
+        id:
+          description: Globally unique identifier of the schema
+          example: 100001
+          format: int32
+          type: integer
+        schema_type:
+          description: Schema type
+          example: AVRO
+          type: string
+        schema:
+          description: Schema definition string
+          example: '{"schema": "{"type": "string"}"}'
+          type: string
+      type: object
     SearchFilter:
       description: Filter a collection by a string search
       type: string
@@ -7348,47 +7388,6 @@ components:
       - related
       - resource_name
       type: object
-    TypedEnvScopedObjectReference:
-      description: ObjectReference provides information for you to locate the referred
-        object
-      properties:
-        id:
-          description: ID of the referred resource
-          maxLength: 255
-          minLength: 1
-          type: string
-        environment:
-          description: Environment of the referred resource, if env-scoped
-          maxLength: 255
-          minLength: 1
-          type: string
-        related:
-          description: API URL for accessing or modifying the referred object
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-        resource_name:
-          description: CRN reference to the referred resource
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-        api_version:
-          description: API group and version of the referred resource
-          minLength: 1
-          readOnly: true
-          type: string
-        kind:
-          description: Kind of the referred resource
-          minLength: 1
-          readOnly: true
-          type: string
-      required:
-      - id
-      - related
-      - resource_name
-      type: object
     GlobalObjectReference:
       description: ObjectReference provides information for you to locate the referred
         object
@@ -7438,42 +7437,6 @@ components:
         resource_name:
           description: CRN reference to the referred resource
           format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-      required:
-      - id
-      - related
-      - resource_name
-      type: object
-    TypedGlobalObjectReference:
-      description: ObjectReference provides information for you to locate the referred
-        object
-      properties:
-        id:
-          description: ID of the referred resource
-          maxLength: 255
-          minLength: 1
-          type: string
-        related:
-          description: API URL for accessing or modifying the referred object
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-        resource_name:
-          description: CRN reference to the referred resource
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-        api_version:
-          description: API group and version of the referred resource
-          minLength: 1
-          readOnly: true
-          type: string
-        kind:
-          description: Kind of the referred resource
           minLength: 1
           readOnly: true
           type: string
@@ -7574,28 +7537,6 @@ components:
           description: Shared resource display name
           example: Stock Trades
           type: string
-        description:
-          description: Description of shared resource
-          example: This topic provides realtime data for the orders placed through
-            the website
-          type: string
-        labels:
-          description: list of labels
-          example:
-          - recent
-          - pending
-          items:
-            type: string
-          type: array
-        schemas:
-          description: List of schemas in JSON format. This field is work in progress
-            and subject to changes.
-          example:
-          - '{"key_1": "val_1", "key_2": "val_2"}'
-          items:
-            type: string
-          readOnly: true
-          type: array
         organization_description:
           description: Shared resource's organization description
           example: ABC Corp is the biggest online retailer
@@ -7625,13 +7566,14 @@ components:
           organization_name: ABC Corp
           api_version: cdx/v1
           display_name: Stock Trades
-          labels:
+          tags:
           - recent
           - pending
           cloud: ""
           organization_description: ABC Corp is the biggest online retailer
           schemas:
-          - '{"key_1": "val_1", "key_2": "val_2"}'
+          - ""
+          - ""
           id: dlz-f3a90de
         - metadata: ""
           network_connection_types: ""
@@ -7643,13 +7585,14 @@ components:
           organization_name: ABC Corp
           api_version: cdx/v1
           display_name: Stock Trades
-          labels:
+          tags:
           - recent
           - pending
           cloud: ""
           organization_description: ABC Corp is the biggest online retailer
           schemas:
-          - '{"key_1": "val_1", "key_2": "val_2"}'
+          - ""
+          - ""
           id: dlz-f3a90de
       properties:
         consumer_shared_resources:

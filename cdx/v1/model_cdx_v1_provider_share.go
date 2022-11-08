@@ -60,11 +60,11 @@ type CdxV1ProviderShare struct {
 	// The date and time at which the invite was redeemed
 	RedeemedAt *time.Time `json:"redeemed_at,omitempty"`
 	// The provider user/inviter
-	ProviderUser *ObjectReference `json:"provider_user,omitempty"`
+	ProviderUser *GlobalObjectReference `json:"provider_user,omitempty"`
 	// The service account associated with this object.
-	ServiceAccount *ObjectReference `json:"service_account,omitempty"`
+	ServiceAccount *GlobalObjectReference `json:"service_account,omitempty"`
 	// The cloud cluster to which this belongs.
-	CloudCluster *ObjectReference          `json:"cloud_cluster,omitempty"`
+	CloudCluster *EnvScopedObjectReference `json:"cloud_cluster,omitempty"`
 	Status       *CdxV1ProviderShareStatus `json:"status,omitempty"`
 }
 
@@ -470,9 +470,9 @@ func (o *CdxV1ProviderShare) SetRedeemedAt(v time.Time) {
 }
 
 // GetProviderUser returns the ProviderUser field value if set, zero value otherwise.
-func (o *CdxV1ProviderShare) GetProviderUser() ObjectReference {
+func (o *CdxV1ProviderShare) GetProviderUser() GlobalObjectReference {
 	if o == nil || o.ProviderUser == nil {
-		var ret ObjectReference
+		var ret GlobalObjectReference
 		return ret
 	}
 	return *o.ProviderUser
@@ -480,7 +480,7 @@ func (o *CdxV1ProviderShare) GetProviderUser() ObjectReference {
 
 // GetProviderUserOk returns a tuple with the ProviderUser field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1ProviderShare) GetProviderUserOk() (*ObjectReference, bool) {
+func (o *CdxV1ProviderShare) GetProviderUserOk() (*GlobalObjectReference, bool) {
 	if o == nil || o.ProviderUser == nil {
 		return nil, false
 	}
@@ -496,15 +496,15 @@ func (o *CdxV1ProviderShare) HasProviderUser() bool {
 	return false
 }
 
-// SetProviderUser gets a reference to the given ObjectReference and assigns it to the ProviderUser field.
-func (o *CdxV1ProviderShare) SetProviderUser(v ObjectReference) {
+// SetProviderUser gets a reference to the given GlobalObjectReference and assigns it to the ProviderUser field.
+func (o *CdxV1ProviderShare) SetProviderUser(v GlobalObjectReference) {
 	o.ProviderUser = &v
 }
 
 // GetServiceAccount returns the ServiceAccount field value if set, zero value otherwise.
-func (o *CdxV1ProviderShare) GetServiceAccount() ObjectReference {
+func (o *CdxV1ProviderShare) GetServiceAccount() GlobalObjectReference {
 	if o == nil || o.ServiceAccount == nil {
-		var ret ObjectReference
+		var ret GlobalObjectReference
 		return ret
 	}
 	return *o.ServiceAccount
@@ -512,7 +512,7 @@ func (o *CdxV1ProviderShare) GetServiceAccount() ObjectReference {
 
 // GetServiceAccountOk returns a tuple with the ServiceAccount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1ProviderShare) GetServiceAccountOk() (*ObjectReference, bool) {
+func (o *CdxV1ProviderShare) GetServiceAccountOk() (*GlobalObjectReference, bool) {
 	if o == nil || o.ServiceAccount == nil {
 		return nil, false
 	}
@@ -528,15 +528,15 @@ func (o *CdxV1ProviderShare) HasServiceAccount() bool {
 	return false
 }
 
-// SetServiceAccount gets a reference to the given ObjectReference and assigns it to the ServiceAccount field.
-func (o *CdxV1ProviderShare) SetServiceAccount(v ObjectReference) {
+// SetServiceAccount gets a reference to the given GlobalObjectReference and assigns it to the ServiceAccount field.
+func (o *CdxV1ProviderShare) SetServiceAccount(v GlobalObjectReference) {
 	o.ServiceAccount = &v
 }
 
 // GetCloudCluster returns the CloudCluster field value if set, zero value otherwise.
-func (o *CdxV1ProviderShare) GetCloudCluster() ObjectReference {
+func (o *CdxV1ProviderShare) GetCloudCluster() EnvScopedObjectReference {
 	if o == nil || o.CloudCluster == nil {
-		var ret ObjectReference
+		var ret EnvScopedObjectReference
 		return ret
 	}
 	return *o.CloudCluster
@@ -544,7 +544,7 @@ func (o *CdxV1ProviderShare) GetCloudCluster() ObjectReference {
 
 // GetCloudClusterOk returns a tuple with the CloudCluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1ProviderShare) GetCloudClusterOk() (*ObjectReference, bool) {
+func (o *CdxV1ProviderShare) GetCloudClusterOk() (*EnvScopedObjectReference, bool) {
 	if o == nil || o.CloudCluster == nil {
 		return nil, false
 	}
@@ -560,8 +560,8 @@ func (o *CdxV1ProviderShare) HasCloudCluster() bool {
 	return false
 }
 
-// SetCloudCluster gets a reference to the given ObjectReference and assigns it to the CloudCluster field.
-func (o *CdxV1ProviderShare) SetCloudCluster(v ObjectReference) {
+// SetCloudCluster gets a reference to the given EnvScopedObjectReference and assigns it to the CloudCluster field.
+func (o *CdxV1ProviderShare) SetCloudCluster(v EnvScopedObjectReference) {
 	o.CloudCluster = &v
 }
 

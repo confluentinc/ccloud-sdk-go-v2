@@ -48,10 +48,10 @@ type CdxV1ConsumerSharedResource struct {
 	DisplayName *string `json:"display_name,omitempty"`
 	// Description of consumer resource
 	Description *string `json:"description,omitempty"`
-	// list of labels
-	Labels *[]string `json:"labels,omitempty"`
+	// list of tags
+	Tags *[]string `json:"tags,omitempty"`
 	// List of schemas in JSON format. This field is work in progress and subject to changes.
-	Schemas *[]string `json:"schemas,omitempty"`
+	Schemas *[]CdxV1Schema `json:"schemas,omitempty"`
 	// Shared resource's organization name
 	OrganizationName *string `json:"organization_name,omitempty"`
 	// Shared resource's organization description
@@ -335,42 +335,42 @@ func (o *CdxV1ConsumerSharedResource) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetLabels returns the Labels field value if set, zero value otherwise.
-func (o *CdxV1ConsumerSharedResource) GetLabels() []string {
-	if o == nil || o.Labels == nil {
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *CdxV1ConsumerSharedResource) GetTags() []string {
+	if o == nil || o.Tags == nil {
 		var ret []string
 		return ret
 	}
-	return *o.Labels
+	return *o.Tags
 }
 
-// GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1ConsumerSharedResource) GetLabelsOk() (*[]string, bool) {
-	if o == nil || o.Labels == nil {
+func (o *CdxV1ConsumerSharedResource) GetTagsOk() (*[]string, bool) {
+	if o == nil || o.Tags == nil {
 		return nil, false
 	}
-	return o.Labels, true
+	return o.Tags, true
 }
 
-// HasLabels returns a boolean if a field has been set.
-func (o *CdxV1ConsumerSharedResource) HasLabels() bool {
-	if o != nil && o.Labels != nil {
+// HasTags returns a boolean if a field has been set.
+func (o *CdxV1ConsumerSharedResource) HasTags() bool {
+	if o != nil && o.Tags != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetLabels gets a reference to the given []string and assigns it to the Labels field.
-func (o *CdxV1ConsumerSharedResource) SetLabels(v []string) {
-	o.Labels = &v
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *CdxV1ConsumerSharedResource) SetTags(v []string) {
+	o.Tags = &v
 }
 
 // GetSchemas returns the Schemas field value if set, zero value otherwise.
-func (o *CdxV1ConsumerSharedResource) GetSchemas() []string {
+func (o *CdxV1ConsumerSharedResource) GetSchemas() []CdxV1Schema {
 	if o == nil || o.Schemas == nil {
-		var ret []string
+		var ret []CdxV1Schema
 		return ret
 	}
 	return *o.Schemas
@@ -378,7 +378,7 @@ func (o *CdxV1ConsumerSharedResource) GetSchemas() []string {
 
 // GetSchemasOk returns a tuple with the Schemas field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CdxV1ConsumerSharedResource) GetSchemasOk() (*[]string, bool) {
+func (o *CdxV1ConsumerSharedResource) GetSchemasOk() (*[]CdxV1Schema, bool) {
 	if o == nil || o.Schemas == nil {
 		return nil, false
 	}
@@ -394,8 +394,8 @@ func (o *CdxV1ConsumerSharedResource) HasSchemas() bool {
 	return false
 }
 
-// SetSchemas gets a reference to the given []string and assigns it to the Schemas field.
-func (o *CdxV1ConsumerSharedResource) SetSchemas(v []string) {
+// SetSchemas gets a reference to the given []CdxV1Schema and assigns it to the Schemas field.
+func (o *CdxV1ConsumerSharedResource) SetSchemas(v []CdxV1Schema) {
 	o.Schemas = &v
 }
 
@@ -537,7 +537,7 @@ func (o *CdxV1ConsumerSharedResource) Redact() {
 	o.recurseRedact(o.NetworkConnectionTypes)
 	o.recurseRedact(o.DisplayName)
 	o.recurseRedact(o.Description)
-	o.recurseRedact(o.Labels)
+	o.recurseRedact(o.Tags)
 	o.recurseRedact(o.Schemas)
 	o.recurseRedact(o.OrganizationName)
 	o.recurseRedact(o.OrganizationDescription)
@@ -601,8 +601,8 @@ func (o CdxV1ConsumerSharedResource) MarshalJSON() ([]byte, error) {
 	if o.Description != nil {
 		toSerialize["description"] = o.Description
 	}
-	if o.Labels != nil {
-		toSerialize["labels"] = o.Labels
+	if o.Tags != nil {
+		toSerialize["tags"] = o.Tags
 	}
 	if o.Schemas != nil {
 		toSerialize["schemas"] = o.Schemas

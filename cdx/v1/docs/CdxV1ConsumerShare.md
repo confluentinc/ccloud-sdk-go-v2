@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **InviteExpiresAt** | Pointer to **time.Time** | The date and time at which the invitation will expire. Only for invited shares | [optional] [readonly] 
 **ConsumerOrganizationName** | Pointer to **string** | Consumer organization name. Deprecated | [optional] [readonly] 
 **ConsumerUserName** | Pointer to **string** | Name of the consumer. Deprecated | [optional] [readonly] 
-**ConsumerUser** | Pointer to [**ObjectReference**](ObjectReference.md) | The consumer user/invitee | [optional] [readonly] 
+**ConsumerUser** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The consumer user/invitee | [optional] [readonly] 
 **Status** | Pointer to [**CdxV1ConsumerShareStatus**](CdxV1ConsumerShareStatus.md) |  | [optional] 
 
 ## Methods
@@ -262,20 +262,20 @@ HasConsumerUserName returns a boolean if a field has been set.
 
 ### GetConsumerUser
 
-`func (o *CdxV1ConsumerShare) GetConsumerUser() ObjectReference`
+`func (o *CdxV1ConsumerShare) GetConsumerUser() GlobalObjectReference`
 
 GetConsumerUser returns the ConsumerUser field if non-nil, zero value otherwise.
 
 ### GetConsumerUserOk
 
-`func (o *CdxV1ConsumerShare) GetConsumerUserOk() (*ObjectReference, bool)`
+`func (o *CdxV1ConsumerShare) GetConsumerUserOk() (*GlobalObjectReference, bool)`
 
 GetConsumerUserOk returns a tuple with the ConsumerUser field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetConsumerUser
 
-`func (o *CdxV1ConsumerShare) SetConsumerUser(v ObjectReference)`
+`func (o *CdxV1ConsumerShare) SetConsumerUser(v GlobalObjectReference)`
 
 SetConsumerUser sets ConsumerUser field to given value.
 
