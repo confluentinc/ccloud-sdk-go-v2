@@ -41,23 +41,20 @@ type NetworkingV1AwsTransitGatewayAttachment struct {
 	RamShareArn string `json:"ram_share_arn"`
 	// The ID of the AWS Transit Gateway that you want Confluent CLoud to be attached to.
 	TransitGatewayId string `json:"transit_gateway_id"`
-	// Enable custom destination routes in Confluent Cloud.
-	EnableCustomRoutes *bool `json:"enable_custom_routes,omitempty"`
 	// List of destination routes.
-	Routes *[]string `json:"routes,omitempty"`
+	Routes []string `json:"routes"`
 }
 
 // NewNetworkingV1AwsTransitGatewayAttachment instantiates a new NetworkingV1AwsTransitGatewayAttachment object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1AwsTransitGatewayAttachment(kind string, ramShareArn string, transitGatewayId string) *NetworkingV1AwsTransitGatewayAttachment {
+func NewNetworkingV1AwsTransitGatewayAttachment(kind string, ramShareArn string, transitGatewayId string, routes []string) *NetworkingV1AwsTransitGatewayAttachment {
 	this := NetworkingV1AwsTransitGatewayAttachment{}
 	this.Kind = kind
 	this.RamShareArn = ramShareArn
 	this.TransitGatewayId = transitGatewayId
-	var enableCustomRoutes bool = false
-	this.EnableCustomRoutes = &enableCustomRoutes
+	this.Routes = routes
 	return &this
 }
 
@@ -66,8 +63,6 @@ func NewNetworkingV1AwsTransitGatewayAttachment(kind string, ramShareArn string,
 // but it doesn't guarantee that properties required by API are set
 func NewNetworkingV1AwsTransitGatewayAttachmentWithDefaults() *NetworkingV1AwsTransitGatewayAttachment {
 	this := NetworkingV1AwsTransitGatewayAttachment{}
-	var enableCustomRoutes bool = false
-	this.EnableCustomRoutes = &enableCustomRoutes
 	return &this
 }
 
@@ -143,68 +138,28 @@ func (o *NetworkingV1AwsTransitGatewayAttachment) SetTransitGatewayId(v string) 
 	o.TransitGatewayId = v
 }
 
-// GetEnableCustomRoutes returns the EnableCustomRoutes field value if set, zero value otherwise.
-func (o *NetworkingV1AwsTransitGatewayAttachment) GetEnableCustomRoutes() bool {
-	if o == nil || o.EnableCustomRoutes == nil {
-		var ret bool
-		return ret
-	}
-	return *o.EnableCustomRoutes
-}
-
-// GetEnableCustomRoutesOk returns a tuple with the EnableCustomRoutes field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *NetworkingV1AwsTransitGatewayAttachment) GetEnableCustomRoutesOk() (*bool, bool) {
-	if o == nil || o.EnableCustomRoutes == nil {
-		return nil, false
-	}
-	return o.EnableCustomRoutes, true
-}
-
-// HasEnableCustomRoutes returns a boolean if a field has been set.
-func (o *NetworkingV1AwsTransitGatewayAttachment) HasEnableCustomRoutes() bool {
-	if o != nil && o.EnableCustomRoutes != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetEnableCustomRoutes gets a reference to the given bool and assigns it to the EnableCustomRoutes field.
-func (o *NetworkingV1AwsTransitGatewayAttachment) SetEnableCustomRoutes(v bool) {
-	o.EnableCustomRoutes = &v
-}
-
-// GetRoutes returns the Routes field value if set, zero value otherwise.
+// GetRoutes returns the Routes field value
 func (o *NetworkingV1AwsTransitGatewayAttachment) GetRoutes() []string {
-	if o == nil || o.Routes == nil {
+	if o == nil {
 		var ret []string
 		return ret
 	}
-	return *o.Routes
+
+	return o.Routes
 }
 
-// GetRoutesOk returns a tuple with the Routes field value if set, nil otherwise
+// GetRoutesOk returns a tuple with the Routes field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AwsTransitGatewayAttachment) GetRoutesOk() (*[]string, bool) {
-	if o == nil || o.Routes == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Routes, true
+	return &o.Routes, true
 }
 
-// HasRoutes returns a boolean if a field has been set.
-func (o *NetworkingV1AwsTransitGatewayAttachment) HasRoutes() bool {
-	if o != nil && o.Routes != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetRoutes gets a reference to the given []string and assigns it to the Routes field.
+// SetRoutes sets field value
 func (o *NetworkingV1AwsTransitGatewayAttachment) SetRoutes(v []string) {
-	o.Routes = &v
+	o.Routes = v
 }
 
 // Redact resets all sensitive fields to their zero value.
@@ -212,8 +167,7 @@ func (o *NetworkingV1AwsTransitGatewayAttachment) Redact() {
 	o.recurseRedact(&o.Kind)
 	o.recurseRedact(&o.RamShareArn)
 	o.recurseRedact(&o.TransitGatewayId)
-	o.recurseRedact(o.EnableCustomRoutes)
-	o.recurseRedact(o.Routes)
+	o.recurseRedact(&o.Routes)
 }
 
 func (o *NetworkingV1AwsTransitGatewayAttachment) recurseRedact(v interface{}) {
@@ -257,10 +211,7 @@ func (o NetworkingV1AwsTransitGatewayAttachment) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["transit_gateway_id"] = o.TransitGatewayId
 	}
-	if o.EnableCustomRoutes != nil {
-		toSerialize["enable_custom_routes"] = o.EnableCustomRoutes
-	}
-	if o.Routes != nil {
+	if true {
 		toSerialize["routes"] = o.Routes
 	}
 	return json.Marshal(toSerialize)

@@ -7,14 +7,13 @@ Name | Type | Description | Notes
 **Kind** | **string** | AWS Transit Gateway Attachment kind type. | 
 **RamShareArn** | **string** | The full AWS Resource Name (ARN) for the AWS Resource Access Manager (RAM) Share of the Transit Gateways that you want Confluent Cloud to be attached to. | 
 **TransitGatewayId** | **string** | The ID of the AWS Transit Gateway that you want Confluent CLoud to be attached to. | 
-**EnableCustomRoutes** | Pointer to **bool** | Enable custom destination routes in Confluent Cloud. | [optional] [default to false]
-**Routes** | Pointer to **[]string** | List of destination routes. | [optional] 
+**Routes** | **[]string** | List of destination routes. | 
 
 ## Methods
 
 ### NewNetworkingV1AwsTransitGatewayAttachment
 
-`func NewNetworkingV1AwsTransitGatewayAttachment(kind string, ramShareArn string, transitGatewayId string, ) *NetworkingV1AwsTransitGatewayAttachment`
+`func NewNetworkingV1AwsTransitGatewayAttachment(kind string, ramShareArn string, transitGatewayId string, routes []string, ) *NetworkingV1AwsTransitGatewayAttachment`
 
 NewNetworkingV1AwsTransitGatewayAttachment instantiates a new NetworkingV1AwsTransitGatewayAttachment object
 This constructor will assign default values to properties that have it defined,
@@ -89,31 +88,6 @@ and a boolean to check if the value has been set.
 SetTransitGatewayId sets TransitGatewayId field to given value.
 
 
-### GetEnableCustomRoutes
-
-`func (o *NetworkingV1AwsTransitGatewayAttachment) GetEnableCustomRoutes() bool`
-
-GetEnableCustomRoutes returns the EnableCustomRoutes field if non-nil, zero value otherwise.
-
-### GetEnableCustomRoutesOk
-
-`func (o *NetworkingV1AwsTransitGatewayAttachment) GetEnableCustomRoutesOk() (*bool, bool)`
-
-GetEnableCustomRoutesOk returns a tuple with the EnableCustomRoutes field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnableCustomRoutes
-
-`func (o *NetworkingV1AwsTransitGatewayAttachment) SetEnableCustomRoutes(v bool)`
-
-SetEnableCustomRoutes sets EnableCustomRoutes field to given value.
-
-### HasEnableCustomRoutes
-
-`func (o *NetworkingV1AwsTransitGatewayAttachment) HasEnableCustomRoutes() bool`
-
-HasEnableCustomRoutes returns a boolean if a field has been set.
-
 ### GetRoutes
 
 `func (o *NetworkingV1AwsTransitGatewayAttachment) GetRoutes() []string`
@@ -133,11 +107,6 @@ and a boolean to check if the value has been set.
 
 SetRoutes sets Routes field to given value.
 
-### HasRoutes
-
-`func (o *NetworkingV1AwsTransitGatewayAttachment) HasRoutes() bool`
-
-HasRoutes returns a boolean if a field has been set.
 
 
 ### AsNetworkingV1TransitGatewayAttachmentSpecCloudOneOf
