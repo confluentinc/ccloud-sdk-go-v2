@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **DisplayName** | Pointer to **string** | The display name. | [optional] [readonly] 
 **Cloud** | Pointer to **string** | The cloud service provider that hosts the region. | [optional] [readonly] 
 **RegionName** | Pointer to **string** | The region name. | [optional] [readonly] 
-**Packages** | Pointer to **[]string** | List of Schema Registry packages allowing placement in this region. | [optional] [readonly] 
+**Packages** | Pointer to **[]string** | List of Stream Governance packages allowing placement in this region. | [optional] [readonly] 
 
 ## Methods
 

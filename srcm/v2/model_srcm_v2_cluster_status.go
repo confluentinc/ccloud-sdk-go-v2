@@ -35,7 +35,7 @@ import (
 
 // SrcmV2ClusterStatus The status of the Cluster
 type SrcmV2ClusterStatus struct {
-	// The lifecyle phase of the cluster:   PROVISIONED:  cluster is provisioned;   PROVISIONING:  cluster provisioning is in progress;   FAILED:  provisioning failed 
+	// The lifecyle phase of the cluster:    PROVISIONED:  cluster is provisioned;    PROVISIONING:  cluster provisioning is in progress;    FAILED:  provisioning failed 
 	Phase string `json:"phase"`
 }
 

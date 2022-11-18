@@ -41,7 +41,7 @@ type SrcmV2RegionSpec struct {
 	Cloud *string `json:"cloud,omitempty"`
 	// The region name.
 	RegionName *string `json:"region_name,omitempty"`
-	// List of Schema Registry packages allowing placement in this region.
+	// List of Stream Governance packages allowing placement in this region.
 	Packages *[]string `json:"packages,omitempty"`
 }
 

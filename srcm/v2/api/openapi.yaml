@@ -2349,8 +2349,11 @@ components:
         phase:
           description: |
             The lifecyle phase of the cluster:
+
               PROVISIONED:  cluster is provisioned;
+
               PROVISIONING:  cluster provisioning is in progress;
+
               FAILED:  provisioning failed
           example: PROVISIONED
           readOnly: true
@@ -2460,7 +2463,7 @@ components:
           type: string
           x-immutable: true
         packages:
-          description: List of Schema Registry packages allowing placement in this
+          description: List of Stream Governance packages allowing placement in this
             region.
           example:
           - ESSENTIALS
@@ -2546,7 +2549,7 @@ components:
       properties:
         display_name:
           description: The cluster name.
-          example: Schema Registry package
+          example: Stream Governance package
           readOnly: true
           type: string
           x-immutable: true
