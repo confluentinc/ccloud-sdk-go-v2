@@ -32,6 +32,7 @@ import (
 	_nethttp "net/http"
 	_neturl "net/url"
 	"strings"
+	"reflect"
 )
 
 // Linger please
@@ -240,7 +241,7 @@ type ApiListSrcmV2RegionsRequest struct {
 	ApiService RegionsSrcmV2Api
 	specCloud *string
 	specRegionName *string
-	specPackages *MultipleSearchFilter
+	specPackages *[]string
 	pageSize *int32
 	pageToken *string
 }
@@ -256,7 +257,7 @@ func (r ApiListSrcmV2RegionsRequest) SpecRegionName(specRegionName string) ApiLi
 	return r
 }
 // Filter the results by exact match for spec.packages. Pass multiple times to see results matching any of the values.
-func (r ApiListSrcmV2RegionsRequest) SpecPackages(specPackages MultipleSearchFilter) ApiListSrcmV2RegionsRequest {
+func (r ApiListSrcmV2RegionsRequest) SpecPackages(specPackages []string) ApiListSrcmV2RegionsRequest {
 	r.specPackages = &specPackages
 	return r
 }
@@ -322,7 +323,15 @@ func (a *RegionsSrcmV2ApiService) ListSrcmV2RegionsExecute(r ApiListSrcmV2Region
 		localVarQueryParams.Add("spec.region_name", parameterToString(*r.specRegionName, ""))
 	}
 	if r.specPackages != nil {
-		localVarQueryParams.Add("spec.packages", parameterToString(*r.specPackages, ""))
+		t := *r.specPackages
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.packages", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.packages", parameterToString(t, "multi"))
+		}
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
