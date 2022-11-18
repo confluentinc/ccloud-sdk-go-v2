@@ -102,7 +102,7 @@ import (
 func main() {
     specCloud := "AWS" // string | Filter the results by exact match for spec.cloud. (optional)
     specRegionName := "us-east-2" // string | Filter the results by exact match for spec.region_name. (optional)
-    specPackages := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for spec.packages. Pass multiple times to see results matching any of the values. (optional)
+    specPackages := []string{"Inner_example"} // []string | Filter the results by exact match for spec.packages. Pass multiple times to see results matching any of the values. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
@@ -131,7 +131,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **specCloud** | **string** | Filter the results by exact match for spec.cloud. | 
  **specRegionName** | **string** | Filter the results by exact match for spec.region_name. | 
- **specPackages** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for spec.packages. Pass multiple times to see results matching any of the values. | 
+ **specPackages** | **[]string** | Filter the results by exact match for spec.packages. Pass multiple times to see results matching any of the values. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 
