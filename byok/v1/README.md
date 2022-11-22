@@ -81,6 +81,7 @@ All URIs are relative to *https://api.confluent.cloud*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *KeysByokV1Api* | [**CreateByokV1Key**](docs/KeysByokV1Api.md#createbyokv1key) | **Post** /byok/v1/keys | Create a Key
+*KeysByokV1Api* | [**DeleteByokV1Key**](docs/KeysByokV1Api.md#deletebyokv1key) | **Delete** /byok/v1/keys/{id} | Delete a Key
 *KeysByokV1Api* | [**GetByokV1Key**](docs/KeysByokV1Api.md#getbyokv1key) | **Get** /byok/v1/keys/{id} | Read a Key
 *KeysByokV1Api* | [**ListByokV1Keys**](docs/KeysByokV1Api.md#listbyokv1keys) | **Get** /byok/v1/keys | List of Keys
 

@@ -2,4 +2,4 @@ module github.com/confluentinc/ccloud-sdk-go-v2-internal/byok
 
 go 1.13
 
-require golang.org/x/oauth2 v0.1.0
+require golang.org/x/oauth2 v0.2.0

@@ -5,6 +5,7 @@ All URIs are relative to *https://api.confluent.cloud*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateByokV1Key**](KeysByokV1Api.md#CreateByokV1Key) | **Post** /byok/v1/keys | Create a Key
+[**DeleteByokV1Key**](KeysByokV1Api.md#DeleteByokV1Key) | **Delete** /byok/v1/keys/{id} | Delete a Key
 [**GetByokV1Key**](KeysByokV1Api.md#GetByokV1Key) | **Get** /byok/v1/keys/{id} | Read a Key
 [**ListByokV1Keys**](KeysByokV1Api.md#ListByokV1Keys) | **Get** /byok/v1/keys | List of Keys
 
@@ -69,6 +70,74 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteByokV1Key
+
+> DeleteByokV1Key(ctx, id).Execute()
+
+Delete a Key
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    id := "id_example" // string | The unique identifier for the key.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.KeysByokV1Api.DeleteByokV1Key(context.Background(), id).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KeysByokV1Api.DeleteByokV1Key``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | The unique identifier for the key. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteByokV1KeyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[api-key](../README.md#api-key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
