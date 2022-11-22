@@ -242,7 +242,7 @@ import (
 
 func main() {
     environment := "env-00000" // string | Filter the results by exact match for environment.
-    specNetwork := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values. (optional)
+    specNetwork := []string{"Inner_example"} // []string | Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
@@ -270,7 +270,7 @@ Other parameters are passed through a pointer to a apiListCmkV2ClustersRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **environment** | **string** | Filter the results by exact match for environment. | 
- **specNetwork** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values. | 
+ **specNetwork** | **[]string** | Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 

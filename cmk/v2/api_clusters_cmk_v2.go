@@ -32,6 +32,7 @@ import (
 	_nethttp "net/http"
 	_neturl "net/url"
 	"strings"
+	"reflect"
 )
 
 // Linger please
@@ -636,7 +637,7 @@ type ApiListCmkV2ClustersRequest struct {
 	ctx _context.Context
 	ApiService ClustersCmkV2Api
 	environment *string
-	specNetwork *MultipleSearchFilter
+	specNetwork *[]string
 	pageSize *int32
 	pageToken *string
 }
@@ -647,7 +648,7 @@ func (r ApiListCmkV2ClustersRequest) Environment(environment string) ApiListCmkV
 	return r
 }
 // Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values.
-func (r ApiListCmkV2ClustersRequest) SpecNetwork(specNetwork MultipleSearchFilter) ApiListCmkV2ClustersRequest {
+func (r ApiListCmkV2ClustersRequest) SpecNetwork(specNetwork []string) ApiListCmkV2ClustersRequest {
 	r.specNetwork = &specNetwork
 	return r
 }
@@ -711,7 +712,15 @@ func (a *ClustersCmkV2ApiService) ListCmkV2ClustersExecute(r ApiListCmkV2Cluster
 
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.specNetwork != nil {
-		localVarQueryParams.Add("spec.network", parameterToString(*r.specNetwork, ""))
+		t := *r.specNetwork
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.network", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.network", parameterToString(t, "multi"))
+		}
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))

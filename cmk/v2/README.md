@@ -105,11 +105,8 @@ Class | Method | HTTP request | Description
  - [Failure](docs/Failure.md)
  - [GlobalObjectReference](docs/GlobalObjectReference.md)
  - [ListMeta](docs/ListMeta.md)
- - [MultipleSearchFilter](docs/MultipleSearchFilter.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
- - [TypedEnvScopedObjectReference](docs/TypedEnvScopedObjectReference.md)
- - [TypedGlobalObjectReference](docs/TypedGlobalObjectReference.md)
 
 
 ## Documentation For Authorization

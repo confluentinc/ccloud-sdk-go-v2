@@ -5,8 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the cluster. | [optional] 
+**Availability** | Pointer to **string** | The availability zone configuration of the cluster Note: The availability zone can be updated from Single to Multi-Zone for Basic and Standard clusters but cannot be downgraded from Multi-Zone to Single Zone.  | [optional] [default to "SINGLE_ZONE"]
 **Config** | Pointer to [**CmkV2ClusterSpecUpdateConfigOneOf**](CmkV2ClusterSpecUpdateConfigOneOf.md) | The configuration of the Kafka cluster.  Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.  | [optional] 
-**Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
+**Environment** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
 
@@ -52,6 +53,31 @@ SetDisplayName sets DisplayName field to given value.
 
 HasDisplayName returns a boolean if a field has been set.
 
+### GetAvailability
+
+`func (o *CmkV2ClusterSpecUpdate) GetAvailability() string`
+
+GetAvailability returns the Availability field if non-nil, zero value otherwise.
+
+### GetAvailabilityOk
+
+`func (o *CmkV2ClusterSpecUpdate) GetAvailabilityOk() (*string, bool)`
+
+GetAvailabilityOk returns a tuple with the Availability field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvailability
+
+`func (o *CmkV2ClusterSpecUpdate) SetAvailability(v string)`
+
+SetAvailability sets Availability field to given value.
+
+### HasAvailability
+
+`func (o *CmkV2ClusterSpecUpdate) HasAvailability() bool`
+
+HasAvailability returns a boolean if a field has been set.
+
 ### GetConfig
 
 `func (o *CmkV2ClusterSpecUpdate) GetConfig() CmkV2ClusterSpecUpdateConfigOneOf`
@@ -79,20 +105,20 @@ HasConfig returns a boolean if a field has been set.
 
 ### GetEnvironment
 
-`func (o *CmkV2ClusterSpecUpdate) GetEnvironment() ObjectReference`
+`func (o *CmkV2ClusterSpecUpdate) GetEnvironment() EnvScopedObjectReference`
 
 GetEnvironment returns the Environment field if non-nil, zero value otherwise.
 
 ### GetEnvironmentOk
 
-`func (o *CmkV2ClusterSpecUpdate) GetEnvironmentOk() (*ObjectReference, bool)`
+`func (o *CmkV2ClusterSpecUpdate) GetEnvironmentOk() (*EnvScopedObjectReference, bool)`
 
 GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnvironment
 
-`func (o *CmkV2ClusterSpecUpdate) SetEnvironment(v ObjectReference)`
+`func (o *CmkV2ClusterSpecUpdate) SetEnvironment(v EnvScopedObjectReference)`
 
 SetEnvironment sets Environment field to given value.
 

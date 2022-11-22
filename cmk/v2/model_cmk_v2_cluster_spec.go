@@ -37,7 +37,7 @@ import (
 type CmkV2ClusterSpec struct {
 	// The name of the cluster.
 	DisplayName *string `json:"display_name,omitempty"`
-	// The availability zone configuration of the cluster.
+	// The availability zone configuration of the cluster Note: The availability zone can be updated from Single to Multi-Zone for Basic and Standard clusters but cannot be downgraded from Multi-Zone to Single Zone. 
 	Availability *string `json:"availability,omitempty"`
 	// The cloud service provider in which the cluster is running.
 	Cloud *string `json:"cloud,omitempty"`
@@ -52,11 +52,11 @@ type CmkV2ClusterSpec struct {
 	// The Kafka API cluster endpoint used by Kafka clients to connect to the cluster.
 	ApiEndpoint *string `json:"api_endpoint,omitempty"`
 	// The environment to which this belongs.
-	Environment *ObjectReference `json:"environment,omitempty"`
+	Environment *EnvScopedObjectReference `json:"environment,omitempty"`
 	// The network associated with this object.
-	Network *ObjectReference `json:"network,omitempty"`
+	Network *EnvScopedObjectReference `json:"network,omitempty"`
 	// The byok associated with this object.
-	Byok *ObjectReference `json:"byok,omitempty"`
+	Byok *GlobalObjectReference `json:"byok,omitempty"`
 }
 
 // NewCmkV2ClusterSpec instantiates a new CmkV2ClusterSpec object
@@ -337,9 +337,9 @@ func (o *CmkV2ClusterSpec) SetApiEndpoint(v string) {
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *CmkV2ClusterSpec) GetEnvironment() ObjectReference {
+func (o *CmkV2ClusterSpec) GetEnvironment() EnvScopedObjectReference {
 	if o == nil || o.Environment == nil {
-		var ret ObjectReference
+		var ret EnvScopedObjectReference
 		return ret
 	}
 	return *o.Environment
@@ -347,7 +347,7 @@ func (o *CmkV2ClusterSpec) GetEnvironment() ObjectReference {
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CmkV2ClusterSpec) GetEnvironmentOk() (*ObjectReference, bool) {
+func (o *CmkV2ClusterSpec) GetEnvironmentOk() (*EnvScopedObjectReference, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -363,15 +363,15 @@ func (o *CmkV2ClusterSpec) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
-func (o *CmkV2ClusterSpec) SetEnvironment(v ObjectReference) {
+// SetEnvironment gets a reference to the given EnvScopedObjectReference and assigns it to the Environment field.
+func (o *CmkV2ClusterSpec) SetEnvironment(v EnvScopedObjectReference) {
 	o.Environment = &v
 }
 
 // GetNetwork returns the Network field value if set, zero value otherwise.
-func (o *CmkV2ClusterSpec) GetNetwork() ObjectReference {
+func (o *CmkV2ClusterSpec) GetNetwork() EnvScopedObjectReference {
 	if o == nil || o.Network == nil {
-		var ret ObjectReference
+		var ret EnvScopedObjectReference
 		return ret
 	}
 	return *o.Network
@@ -379,7 +379,7 @@ func (o *CmkV2ClusterSpec) GetNetwork() ObjectReference {
 
 // GetNetworkOk returns a tuple with the Network field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CmkV2ClusterSpec) GetNetworkOk() (*ObjectReference, bool) {
+func (o *CmkV2ClusterSpec) GetNetworkOk() (*EnvScopedObjectReference, bool) {
 	if o == nil || o.Network == nil {
 		return nil, false
 	}
@@ -395,15 +395,15 @@ func (o *CmkV2ClusterSpec) HasNetwork() bool {
 	return false
 }
 
-// SetNetwork gets a reference to the given ObjectReference and assigns it to the Network field.
-func (o *CmkV2ClusterSpec) SetNetwork(v ObjectReference) {
+// SetNetwork gets a reference to the given EnvScopedObjectReference and assigns it to the Network field.
+func (o *CmkV2ClusterSpec) SetNetwork(v EnvScopedObjectReference) {
 	o.Network = &v
 }
 
 // GetByok returns the Byok field value if set, zero value otherwise.
-func (o *CmkV2ClusterSpec) GetByok() ObjectReference {
+func (o *CmkV2ClusterSpec) GetByok() GlobalObjectReference {
 	if o == nil || o.Byok == nil {
-		var ret ObjectReference
+		var ret GlobalObjectReference
 		return ret
 	}
 	return *o.Byok
@@ -411,7 +411,7 @@ func (o *CmkV2ClusterSpec) GetByok() ObjectReference {
 
 // GetByokOk returns a tuple with the Byok field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CmkV2ClusterSpec) GetByokOk() (*ObjectReference, bool) {
+func (o *CmkV2ClusterSpec) GetByokOk() (*GlobalObjectReference, bool) {
 	if o == nil || o.Byok == nil {
 		return nil, false
 	}
@@ -427,8 +427,8 @@ func (o *CmkV2ClusterSpec) HasByok() bool {
 	return false
 }
 
-// SetByok gets a reference to the given ObjectReference and assigns it to the Byok field.
-func (o *CmkV2ClusterSpec) SetByok(v ObjectReference) {
+// SetByok gets a reference to the given GlobalObjectReference and assigns it to the Byok field.
+func (o *CmkV2ClusterSpec) SetByok(v GlobalObjectReference) {
 	o.Byok = &v
 }
 

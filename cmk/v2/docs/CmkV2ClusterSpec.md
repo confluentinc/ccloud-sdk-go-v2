@@ -5,16 +5,16 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the cluster. | [optional] 
-**Availability** | Pointer to **string** | The availability zone configuration of the cluster. | [optional] [default to "SINGLE_ZONE"]
+**Availability** | Pointer to **string** | The availability zone configuration of the cluster Note: The availability zone can be updated from Single to Multi-Zone for Basic and Standard clusters but cannot be downgraded from Multi-Zone to Single Zone.  | [optional] [default to "SINGLE_ZONE"]
 **Cloud** | Pointer to **string** | The cloud service provider in which the cluster is running. | [optional] 
 **Region** | Pointer to **string** | The cloud service provider region where the cluster is running. | [optional] 
 **Config** | Pointer to [**CmkV2ClusterSpecConfigOneOf**](CmkV2ClusterSpecConfigOneOf.md) | The configuration of the Kafka cluster.  Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.  | [optional] 
 **KafkaBootstrapEndpoint** | Pointer to **string** | The bootstrap endpoint used by Kafka clients to connect to the cluster. | [optional] [readonly] 
 **HttpEndpoint** | Pointer to **string** | The cluster HTTP request URL. | [optional] [readonly] 
 **ApiEndpoint** | Pointer to **string** | The Kafka API cluster endpoint used by Kafka clients to connect to the cluster. | [optional] [readonly] 
-**Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
-**Network** | Pointer to [**ObjectReference**](ObjectReference.md) | The network associated with this object. | [optional] 
-**Byok** | Pointer to [**ObjectReference**](ObjectReference.md) | The byok associated with this object. | [optional] 
+**Environment** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The environment to which this belongs. | [optional] 
+**Network** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The network associated with this object. | [optional] 
+**Byok** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The byok associated with this object. | [optional] 
 
 ## Methods
 
@@ -237,20 +237,20 @@ HasApiEndpoint returns a boolean if a field has been set.
 
 ### GetEnvironment
 
-`func (o *CmkV2ClusterSpec) GetEnvironment() ObjectReference`
+`func (o *CmkV2ClusterSpec) GetEnvironment() EnvScopedObjectReference`
 
 GetEnvironment returns the Environment field if non-nil, zero value otherwise.
 
 ### GetEnvironmentOk
 
-`func (o *CmkV2ClusterSpec) GetEnvironmentOk() (*ObjectReference, bool)`
+`func (o *CmkV2ClusterSpec) GetEnvironmentOk() (*EnvScopedObjectReference, bool)`
 
 GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnvironment
 
-`func (o *CmkV2ClusterSpec) SetEnvironment(v ObjectReference)`
+`func (o *CmkV2ClusterSpec) SetEnvironment(v EnvScopedObjectReference)`
 
 SetEnvironment sets Environment field to given value.
 
@@ -262,20 +262,20 @@ HasEnvironment returns a boolean if a field has been set.
 
 ### GetNetwork
 
-`func (o *CmkV2ClusterSpec) GetNetwork() ObjectReference`
+`func (o *CmkV2ClusterSpec) GetNetwork() EnvScopedObjectReference`
 
 GetNetwork returns the Network field if non-nil, zero value otherwise.
 
 ### GetNetworkOk
 
-`func (o *CmkV2ClusterSpec) GetNetworkOk() (*ObjectReference, bool)`
+`func (o *CmkV2ClusterSpec) GetNetworkOk() (*EnvScopedObjectReference, bool)`
 
 GetNetworkOk returns a tuple with the Network field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNetwork
 
-`func (o *CmkV2ClusterSpec) SetNetwork(v ObjectReference)`
+`func (o *CmkV2ClusterSpec) SetNetwork(v EnvScopedObjectReference)`
 
 SetNetwork sets Network field to given value.
 
@@ -287,20 +287,20 @@ HasNetwork returns a boolean if a field has been set.
 
 ### GetByok
 
-`func (o *CmkV2ClusterSpec) GetByok() ObjectReference`
+`func (o *CmkV2ClusterSpec) GetByok() GlobalObjectReference`
 
 GetByok returns the Byok field if non-nil, zero value otherwise.
 
 ### GetByokOk
 
-`func (o *CmkV2ClusterSpec) GetByokOk() (*ObjectReference, bool)`
+`func (o *CmkV2ClusterSpec) GetByokOk() (*GlobalObjectReference, bool)`
 
 GetByokOk returns a tuple with the Byok field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetByok
 
-`func (o *CmkV2ClusterSpec) SetByok(v ObjectReference)`
+`func (o *CmkV2ClusterSpec) SetByok(v GlobalObjectReference)`
 
 SetByok sets Byok field to given value.
 
