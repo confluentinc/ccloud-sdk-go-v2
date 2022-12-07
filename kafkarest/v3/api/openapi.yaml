@@ -4149,6 +4149,9 @@ paths:
         [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Creates a topic.
+        Also supports a dry-run mode that only validates whether the topic creation would succeed
+        if the ``validate_only`` request property is explicitly specified and set to true. Note that
+        when dry-run mode is being used the response status would be 200 OK instead of 201 Created.
       operationId: createKafkaTopic
       parameters:
       - description: The Kafka cluster ID.
@@ -4163,6 +4166,28 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/CreateTopicRequest'
       responses:
+        "200":
+          content:
+            application/json:
+              example:
+                kind: KafkaTopic
+                metadata:
+                  self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-X
+                  resource_name: crn:///kafka=cluster-1/topic=topic-X
+                cluster_id: cluster-1
+                topic_name: topic-X
+                is_internal: false
+                replication_factor: 3
+                partitions_count: 1
+                partitions:
+                  related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-X/partitions
+                configs:
+                  related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-X/configs
+                partition_reassignments:
+                  related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-X/partitions/-/reassignments
+              schema:
+                $ref: '#/components/schemas/TopicData'
+          description: The created topic.
         "201":
           content:
             application/json:
@@ -5108,6 +5133,8 @@ paths:
         [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Updates or deletes a set of topic configs.
+        Also supports a dry-run mode that only validates whether the operation would succeed if the
+        ``validate_only`` request property is explicitly specified and set to true.
       operationId: updateKafkaTopicConfigBatch
       parameters:
       - description: The Kafka cluster ID.
@@ -11565,12 +11592,22 @@ components:
     AlterTopicConfigBatchRequest:
       content:
         application/json:
-          example:
-            data:
-            - name: cleanup.policy
-              operation: DELETE
-            - name: compression.type
-              value: gzip
+          examples:
+            batch_alter_topic_configs:
+              value:
+                data:
+                - name: cleanup.policy
+                  operation: DELETE
+                - name: compression.type
+                  value: gzip
+            validate_only_batch_alter_topic_configs:
+              value:
+                data:
+                - name: cleanup.policy
+                  operation: DELETE
+                - name: compression.type
+                  value: gzip
+                validate_only: true
           schema:
             $ref: '#/components/schemas/AlterConfigBatchRequestData'
       description: The alter topic configuration parameter batch request.
@@ -11624,6 +11661,12 @@ components:
                   value: compact
                 - name: compression.type
                   value: gzip
+            dry_run_create_topic:
+              value:
+                topic_name: topic-Z
+                partitions_count: 64
+                replication_factor: 3
+                validate_only: true
           schema:
             $ref: '#/components/schemas/CreateTopicRequestData'
       description: The topic creation request. Note that Confluent Cloud allows only
@@ -14036,6 +14079,7 @@ components:
       type: string
     AlterConfigBatchRequestData:
       example:
+        validate_only: true
         data:
         - name: name
           value: value
@@ -14048,6 +14092,8 @@ components:
           items:
             $ref: '#/components/schemas/AlterConfigBatchRequestData_data'
           type: array
+        validate_only:
+          type: boolean
       required:
       - data
       type: object
@@ -14156,6 +14202,7 @@ components:
           value: value
         - name: name
           value: value
+        validate_only: true
         replication_factor: 6
         topic_name: topic_name
         partitions_count: 0
@@ -14170,6 +14217,8 @@ components:
           items:
             $ref: '#/components/schemas/CreateTopicRequestData_configs'
           type: array
+        validate_only:
+          type: boolean
       required:
       - topic_name
       type: object

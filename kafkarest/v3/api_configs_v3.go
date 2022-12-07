@@ -241,6 +241,8 @@ type ConfigsV3Api interface {
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Updates or deletes a set of topic configs.
+	Also supports a dry-run mode that only validates whether the operation would succeed if the
+	``validate_only`` request property is explicitly specified and set to true.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param clusterId The Kafka cluster ID.
@@ -1959,6 +1961,8 @@ UpdateKafkaTopicConfigBatch Batch Alter Topic Configs
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Updates or deletes a set of topic configs.
+Also supports a dry-run mode that only validates whether the operation would succeed if the
+“validate_only“ request property is explicitly specified and set to true.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param clusterId The Kafka cluster ID.

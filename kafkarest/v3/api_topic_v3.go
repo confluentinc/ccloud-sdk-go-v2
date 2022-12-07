@@ -47,6 +47,9 @@ type TopicV3Api interface {
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Creates a topic.
+	Also supports a dry-run mode that only validates whether the topic creation would succeed
+	if the ``validate_only`` request property is explicitly specified and set to true. Note that
+	when dry-run mode is being used the response status would be 200 OK instead of 201 Created.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param clusterId The Kafka cluster ID.
@@ -137,6 +140,9 @@ CreateKafkaTopic Create Topic
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Creates a topic.
+Also supports a dry-run mode that only validates whether the topic creation would succeed
+if the “validate_only“ request property is explicitly specified and set to true. Note that
+when dry-run mode is being used the response status would be 200 OK instead of 201 Created.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param clusterId The Kafka cluster ID.
