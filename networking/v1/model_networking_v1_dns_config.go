@@ -36,14 +36,14 @@ import (
 // NetworkingV1DnsConfig The network DNS config
 type NetworkingV1DnsConfig struct {
 	// Network DNS resolution
-	Resolution NetworkingV1DnsResolutionTypes `json:"resolution"`
+	Resolution string `json:"resolution"`
 }
 
 // NewNetworkingV1DnsConfig instantiates a new NetworkingV1DnsConfig object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1DnsConfig(resolution NetworkingV1DnsResolutionTypes) *NetworkingV1DnsConfig {
+func NewNetworkingV1DnsConfig(resolution string) *NetworkingV1DnsConfig {
 	this := NetworkingV1DnsConfig{}
 	this.Resolution = resolution
 	return &this
@@ -58,9 +58,9 @@ func NewNetworkingV1DnsConfigWithDefaults() *NetworkingV1DnsConfig {
 }
 
 // GetResolution returns the Resolution field value
-func (o *NetworkingV1DnsConfig) GetResolution() NetworkingV1DnsResolutionTypes {
+func (o *NetworkingV1DnsConfig) GetResolution() string {
 	if o == nil {
-		var ret NetworkingV1DnsResolutionTypes
+		var ret string
 		return ret
 	}
 
@@ -69,7 +69,7 @@ func (o *NetworkingV1DnsConfig) GetResolution() NetworkingV1DnsResolutionTypes {
 
 // GetResolutionOk returns a tuple with the Resolution field value
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1DnsConfig) GetResolutionOk() (*NetworkingV1DnsResolutionTypes, bool) {
+func (o *NetworkingV1DnsConfig) GetResolutionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -77,7 +77,7 @@ func (o *NetworkingV1DnsConfig) GetResolutionOk() (*NetworkingV1DnsResolutionTyp
 }
 
 // SetResolution sets field value
-func (o *NetworkingV1DnsConfig) SetResolution(v NetworkingV1DnsResolutionTypes) {
+func (o *NetworkingV1DnsConfig) SetResolution(v string) {
 	o.Resolution = v
 }
 
