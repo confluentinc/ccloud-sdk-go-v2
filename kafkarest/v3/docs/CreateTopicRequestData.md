@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **PartitionsCount** | Pointer to **int32** |  | [optional] 
 **ReplicationFactor** | Pointer to **int32** |  | [optional] 
 **Configs** | Pointer to [**[]CreateTopicRequestDataConfigs**](CreateTopicRequestDataConfigs.md) |  | [optional] 
+**ValidateOnly** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 
@@ -122,6 +123,31 @@ SetConfigs sets Configs field to given value.
 `func (o *CreateTopicRequestData) HasConfigs() bool`
 
 HasConfigs returns a boolean if a field has been set.
+
+### GetValidateOnly
+
+`func (o *CreateTopicRequestData) GetValidateOnly() bool`
+
+GetValidateOnly returns the ValidateOnly field if non-nil, zero value otherwise.
+
+### GetValidateOnlyOk
+
+`func (o *CreateTopicRequestData) GetValidateOnlyOk() (*bool, bool)`
+
+GetValidateOnlyOk returns a tuple with the ValidateOnly field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetValidateOnly
+
+`func (o *CreateTopicRequestData) SetValidateOnly(v bool)`
+
+SetValidateOnly sets ValidateOnly field to given value.
+
+### HasValidateOnly
+
+`func (o *CreateTopicRequestData) HasValidateOnly() bool`
+
+HasValidateOnly returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

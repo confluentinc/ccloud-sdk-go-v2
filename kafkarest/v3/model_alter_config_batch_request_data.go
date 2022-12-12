@@ -35,7 +35,8 @@ import (
 
 // AlterConfigBatchRequestData struct for AlterConfigBatchRequestData
 type AlterConfigBatchRequestData struct {
-	Data []AlterConfigBatchRequestDataData `json:"data"`
+	Data         []AlterConfigBatchRequestDataData `json:"data"`
+	ValidateOnly *bool                             `json:"validate_only,omitempty"`
 }
 
 // NewAlterConfigBatchRequestData instantiates a new AlterConfigBatchRequestData object
@@ -80,9 +81,42 @@ func (o *AlterConfigBatchRequestData) SetData(v []AlterConfigBatchRequestDataDat
 	o.Data = v
 }
 
+// GetValidateOnly returns the ValidateOnly field value if set, zero value otherwise.
+func (o *AlterConfigBatchRequestData) GetValidateOnly() bool {
+	if o == nil || o.ValidateOnly == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ValidateOnly
+}
+
+// GetValidateOnlyOk returns a tuple with the ValidateOnly field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlterConfigBatchRequestData) GetValidateOnlyOk() (*bool, bool) {
+	if o == nil || o.ValidateOnly == nil {
+		return nil, false
+	}
+	return o.ValidateOnly, true
+}
+
+// HasValidateOnly returns a boolean if a field has been set.
+func (o *AlterConfigBatchRequestData) HasValidateOnly() bool {
+	if o != nil && o.ValidateOnly != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetValidateOnly gets a reference to the given bool and assigns it to the ValidateOnly field.
+func (o *AlterConfigBatchRequestData) SetValidateOnly(v bool) {
+	o.ValidateOnly = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *AlterConfigBatchRequestData) Redact() {
 	o.recurseRedact(&o.Data)
+	o.recurseRedact(o.ValidateOnly)
 }
 
 func (o *AlterConfigBatchRequestData) recurseRedact(v interface{}) {
@@ -119,6 +153,9 @@ func (o AlterConfigBatchRequestData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["data"] = o.Data
+	}
+	if o.ValidateOnly != nil {
+		toSerialize["validate_only"] = o.ValidateOnly
 	}
 	return json.Marshal(toSerialize)
 }
