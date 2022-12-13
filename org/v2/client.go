@@ -65,6 +65,8 @@ type APIClient struct {
 	// API Services
 
 	EnvironmentsOrgV2Api EnvironmentsOrgV2Api
+
+	OrganizationsOrgV2Api OrganizationsOrgV2Api
 }
 
 type service struct {
@@ -84,6 +86,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.EnvironmentsOrgV2Api = (*EnvironmentsOrgV2ApiService)(&c.common)
+	c.OrganizationsOrgV2Api = (*OrganizationsOrgV2ApiService)(&c.common)
 
 	return c
 }

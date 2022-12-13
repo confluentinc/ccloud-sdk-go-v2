@@ -84,6 +84,9 @@ Class | Method | HTTP request | Description
 *EnvironmentsOrgV2Api* | [**GetOrgV2Environment**](docs/EnvironmentsOrgV2Api.md#getorgv2environment) | **Get** /org/v2/environments/{id} | Read an Environment
 *EnvironmentsOrgV2Api* | [**ListOrgV2Environments**](docs/EnvironmentsOrgV2Api.md#listorgv2environments) | **Get** /org/v2/environments | List of Environments
 *EnvironmentsOrgV2Api* | [**UpdateOrgV2Environment**](docs/EnvironmentsOrgV2Api.md#updateorgv2environment) | **Patch** /org/v2/environments/{id} | Update an Environment
+*OrganizationsOrgV2Api* | [**GetOrgV2Organization**](docs/OrganizationsOrgV2Api.md#getorgv2organization) | **Get** /org/v2/organizations/{id} | Read an Organization
+*OrganizationsOrgV2Api* | [**ListOrgV2Organizations**](docs/OrganizationsOrgV2Api.md#listorgv2organizations) | **Get** /org/v2/organizations | List of Organizations
+*OrganizationsOrgV2Api* | [**UpdateOrgV2Organization**](docs/OrganizationsOrgV2Api.md#updateorgv2organization) | **Patch** /org/v2/organizations/{id} | Update an Organization
 
 
 ## Documentation For Models
@@ -96,6 +99,8 @@ Class | Method | HTTP request | Description
  - [ObjectReference](docs/ObjectReference.md)
  - [OrgV2Environment](docs/OrgV2Environment.md)
  - [OrgV2EnvironmentList](docs/OrgV2EnvironmentList.md)
+ - [OrgV2Organization](docs/OrgV2Organization.md)
+ - [OrgV2OrganizationList](docs/OrgV2OrganizationList.md)
 
 
 ## Documentation For Authorization
