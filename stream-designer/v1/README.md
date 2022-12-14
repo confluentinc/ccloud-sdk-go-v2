@@ -96,11 +96,9 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
- - [EnvScopedObjectReference](docs/EnvScopedObjectReference.md)
  - [Error](docs/Error.md)
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
- - [GlobalObjectReference](docs/GlobalObjectReference.md)
  - [ListMeta](docs/ListMeta.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
@@ -110,8 +108,7 @@ Class | Method | HTTP request | Description
  - [SdV1PipelineSpecUpdate](docs/SdV1PipelineSpecUpdate.md)
  - [SdV1PipelineStatus](docs/SdV1PipelineStatus.md)
  - [SdV1PipelineUpdate](docs/SdV1PipelineUpdate.md)
- - [TypedEnvScopedObjectReference](docs/TypedEnvScopedObjectReference.md)
- - [TypedGlobalObjectReference](docs/TypedGlobalObjectReference.md)
+ - [SdV1SourceCodeObject](docs/SdV1SourceCodeObject.md)
 
 
 ## Documentation For Authorization

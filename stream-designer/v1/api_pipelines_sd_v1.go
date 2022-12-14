@@ -44,7 +44,9 @@ type PipelinesSdV1Api interface {
 	/*
 	CreateSdV1Pipeline Create a Pipeline
 
-	Make a request to create a pipeline.
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to create a pipeline.
 
 	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 @return ApiCreateSdV1PipelineRequest
@@ -58,7 +60,9 @@ type PipelinesSdV1Api interface {
 	/*
 	DeleteSdV1Pipeline Delete a Pipeline
 
-	Make a request to delete a pipeline.
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to delete a pipeline.
 
 	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 @param id The unique identifier for the pipeline.
@@ -72,7 +76,9 @@ type PipelinesSdV1Api interface {
 	/*
 	GetSdV1Pipeline Read a Pipeline
 
-	Make a request to read a pipeline.
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to read a pipeline.
 
 	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 @param id The unique identifier for the pipeline.
@@ -87,7 +93,9 @@ type PipelinesSdV1Api interface {
 	/*
 	ListSdV1Pipelines List of Pipelines
 
-	Retrieve a sorted, filtered, paginated list of all pipelines.
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Retrieve a sorted, filtered, paginated list of all pipelines.
 
 	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 @return ApiListSdV1PipelinesRequest
@@ -101,7 +109,9 @@ type PipelinesSdV1Api interface {
 	/*
 	UpdateSdV1Pipeline Update a Pipeline
 
-	Make a request to update a pipeline.
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to update a pipeline.
 
 
 
@@ -136,6 +146,8 @@ func (r ApiCreateSdV1PipelineRequest) Execute() (SdV1Pipeline, *_nethttp.Respons
 
 /*
 CreateSdV1Pipeline Create a Pipeline
+
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create a pipeline.
 
@@ -323,6 +335,8 @@ func (r ApiDeleteSdV1PipelineRequest) Execute() (*_nethttp.Response, error) {
 /*
 DeleteSdV1Pipeline Delete a Pipeline
 
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
 Make a request to delete a pipeline.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -486,6 +500,8 @@ func (r ApiGetSdV1PipelineRequest) Execute() (SdV1Pipeline, *_nethttp.Response, 
 
 /*
 GetSdV1Pipeline Read a Pipeline
+
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a pipeline.
 
@@ -673,6 +689,8 @@ func (r ApiListSdV1PipelinesRequest) Execute() (SdV1PipelineList, *_nethttp.Resp
 /*
 ListSdV1Pipelines List of Pipelines
 
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
 Retrieve a sorted, filtered, paginated list of all pipelines.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -833,6 +851,8 @@ func (r ApiUpdateSdV1PipelineRequest) Execute() (SdV1Pipeline, *_nethttp.Respons
 
 /*
 UpdateSdV1Pipeline Update a Pipeline
+
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update a pipeline.
 
