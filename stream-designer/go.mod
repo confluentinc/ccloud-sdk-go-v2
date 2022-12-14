@@ -1,4 +1,4 @@
-module github.com/confluentinc/ccloud-sdk-go-v2-internal/stream-designer
+module github.com/confluentinc/ccloud-sdk-go-v2/stream-designer
 
 go 1.13
 
