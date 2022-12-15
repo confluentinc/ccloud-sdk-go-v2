@@ -45,6 +45,10 @@ type SdV1PipelineSpecUpdate struct {
 	Activated *bool `json:"activated,omitempty"`
 	// Whether the pipeline has privileges to be activated.
 	ActivationPrivilege *bool `json:"activation_privilege,omitempty"`
+	// A map of source code format and statements that define this pipeline.
+	SourceCode *SdV1SourceCodeObject `json:"source_code,omitempty"`
+	// A map of secrets used in the pipeline source code.
+	Secrets *map[string]string `json:"secrets,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
 	// The kafka_cluster to which this belongs.
@@ -236,6 +240,70 @@ func (o *SdV1PipelineSpecUpdate) SetActivationPrivilege(v bool) {
 	o.ActivationPrivilege = &v
 }
 
+// GetSourceCode returns the SourceCode field value if set, zero value otherwise.
+func (o *SdV1PipelineSpecUpdate) GetSourceCode() SdV1SourceCodeObject {
+	if o == nil || o.SourceCode == nil {
+		var ret SdV1SourceCodeObject
+		return ret
+	}
+	return *o.SourceCode
+}
+
+// GetSourceCodeOk returns a tuple with the SourceCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SdV1PipelineSpecUpdate) GetSourceCodeOk() (*SdV1SourceCodeObject, bool) {
+	if o == nil || o.SourceCode == nil {
+		return nil, false
+	}
+	return o.SourceCode, true
+}
+
+// HasSourceCode returns a boolean if a field has been set.
+func (o *SdV1PipelineSpecUpdate) HasSourceCode() bool {
+	if o != nil && o.SourceCode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceCode gets a reference to the given SdV1SourceCodeObject and assigns it to the SourceCode field.
+func (o *SdV1PipelineSpecUpdate) SetSourceCode(v SdV1SourceCodeObject) {
+	o.SourceCode = &v
+}
+
+// GetSecrets returns the Secrets field value if set, zero value otherwise.
+func (o *SdV1PipelineSpecUpdate) GetSecrets() map[string]string {
+	if o == nil || o.Secrets == nil {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Secrets
+}
+
+// GetSecretsOk returns a tuple with the Secrets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SdV1PipelineSpecUpdate) GetSecretsOk() (*map[string]string, bool) {
+	if o == nil || o.Secrets == nil {
+		return nil, false
+	}
+	return o.Secrets, true
+}
+
+// HasSecrets returns a boolean if a field has been set.
+func (o *SdV1PipelineSpecUpdate) HasSecrets() bool {
+	if o != nil && o.Secrets != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSecrets gets a reference to the given map[string]string and assigns it to the Secrets field.
+func (o *SdV1PipelineSpecUpdate) SetSecrets(v map[string]string) {
+	o.Secrets = &v
+}
+
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
 func (o *SdV1PipelineSpecUpdate) GetEnvironment() ObjectReference {
 	if o == nil || o.Environment == nil {
@@ -307,6 +375,8 @@ func (o *SdV1PipelineSpecUpdate) Redact() {
     o.recurseRedact(o.RetainedTopicNames)
     o.recurseRedact(o.Activated)
     o.recurseRedact(o.ActivationPrivilege)
+    o.recurseRedact(o.SourceCode)
+    o.recurseRedact(o.Secrets)
     o.recurseRedact(o.Environment)
     o.recurseRedact(o.KafkaCluster)
 }
@@ -357,6 +427,12 @@ func (o SdV1PipelineSpecUpdate) MarshalJSON() ([]byte, error) {
 	}
 	if o.ActivationPrivilege != nil {
 		toSerialize["activation_privilege"] = o.ActivationPrivilege
+	}
+	if o.SourceCode != nil {
+		toSerialize["source_code"] = o.SourceCode
+	}
+	if o.Secrets != nil {
+		toSerialize["secrets"] = o.Secrets
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
