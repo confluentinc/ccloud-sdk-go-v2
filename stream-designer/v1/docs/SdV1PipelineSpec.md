@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **RetainedTopicNames** | Pointer to **[]string** | A list of Kafka topic names from the activated pipeline to be retained when this pipeline is deactivated.  | [optional] 
 **Activated** | Pointer to **bool** | The desired state of the pipeline. | [optional] [default to false]
 **ActivationPrivilege** | Pointer to **bool** | Whether the pipeline has privileges to be activated. | [optional] [default to false]
+**SourceCode** | Pointer to [**SdV1SourceCodeObject**](sd.v1.SourceCodeObject.md) | A map of source code format and statements that define this pipeline. | [optional] 
+**Secrets** | Pointer to **map[string]string** | A map of secrets used in the pipeline source code. | [optional] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 **KafkaCluster** | Pointer to [**ObjectReference**](ObjectReference.md) | The kafka_cluster to which this belongs. | [optional] 
 **KsqlCluster** | Pointer to [**ObjectReference**](ObjectReference.md) | The ksql_cluster associated with this object. | [optional] 
@@ -157,6 +159,56 @@ SetActivationPrivilege sets ActivationPrivilege field to given value.
 `func (o *SdV1PipelineSpec) HasActivationPrivilege() bool`
 
 HasActivationPrivilege returns a boolean if a field has been set.
+
+### GetSourceCode
+
+`func (o *SdV1PipelineSpec) GetSourceCode() SdV1SourceCodeObject`
+
+GetSourceCode returns the SourceCode field if non-nil, zero value otherwise.
+
+### GetSourceCodeOk
+
+`func (o *SdV1PipelineSpec) GetSourceCodeOk() (*SdV1SourceCodeObject, bool)`
+
+GetSourceCodeOk returns a tuple with the SourceCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceCode
+
+`func (o *SdV1PipelineSpec) SetSourceCode(v SdV1SourceCodeObject)`
+
+SetSourceCode sets SourceCode field to given value.
+
+### HasSourceCode
+
+`func (o *SdV1PipelineSpec) HasSourceCode() bool`
+
+HasSourceCode returns a boolean if a field has been set.
+
+### GetSecrets
+
+`func (o *SdV1PipelineSpec) GetSecrets() map[string]string`
+
+GetSecrets returns the Secrets field if non-nil, zero value otherwise.
+
+### GetSecretsOk
+
+`func (o *SdV1PipelineSpec) GetSecretsOk() (*map[string]string, bool)`
+
+GetSecretsOk returns a tuple with the Secrets field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSecrets
+
+`func (o *SdV1PipelineSpec) SetSecrets(v map[string]string)`
+
+SetSecrets sets Secrets field to given value.
+
+### HasSecrets
+
+`func (o *SdV1PipelineSpec) HasSecrets() bool`
+
+HasSecrets returns a boolean if a field has been set.
 
 ### GetEnvironment
 
