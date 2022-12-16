@@ -146,9 +146,8 @@ more roles by creating
 [role bindings](https://docs.confluent.io/cloud/current/api.html#tag/Role-Bindings-(iamv2))
 for the created `user`.
 
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamV2InvitationRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamV2InvitationRequest
 */
 func (a *InvitationsIamV2ApiService) CreateIamV2Invitation(ctx _context.Context) ApiCreateIamV2InvitationRequest {
 	return ApiCreateIamV2InvitationRequest{
@@ -158,7 +157,8 @@ func (a *InvitationsIamV2ApiService) CreateIamV2Invitation(ctx _context.Context)
 }
 
 // Execute executes the request
-//  @return IamV2Invitation
+//
+//	@return IamV2Invitation
 func (a *InvitationsIamV2ApiService) CreateIamV2InvitationExecute(r ApiCreateIamV2InvitationRequest) (IamV2Invitation, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -324,10 +324,9 @@ Make a request to delete an invitation.
 
 Delete will deactivate the user if the user didn't accept the invitation yet.
 
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the invitation.
- @return ApiDeleteIamV2InvitationRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the invitation.
+	@return ApiDeleteIamV2InvitationRequest
 */
 func (a *InvitationsIamV2ApiService) DeleteIamV2Invitation(ctx _context.Context, id string) ApiDeleteIamV2InvitationRequest {
 	return ApiDeleteIamV2InvitationRequest{
@@ -470,9 +469,9 @@ GetIamV2Invitation Read an Invitation
 
 Make a request to read an invitation.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the invitation.
- @return ApiGetIamV2InvitationRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the invitation.
+	@return ApiGetIamV2InvitationRequest
 */
 func (a *InvitationsIamV2ApiService) GetIamV2Invitation(ctx _context.Context, id string) ApiGetIamV2InvitationRequest {
 	return ApiGetIamV2InvitationRequest{
@@ -483,7 +482,8 @@ func (a *InvitationsIamV2ApiService) GetIamV2Invitation(ctx _context.Context, id
 }
 
 // Execute executes the request
-//  @return IamV2Invitation
+//
+//	@return IamV2Invitation
 func (a *InvitationsIamV2ApiService) GetIamV2InvitationExecute(r ApiGetIamV2InvitationRequest) (IamV2Invitation, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -667,8 +667,8 @@ ListIamV2Invitations List of Invitations
 
 Retrieve a sorted, filtered, paginated list of all invitations.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListIamV2InvitationsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListIamV2InvitationsRequest
 */
 func (a *InvitationsIamV2ApiService) ListIamV2Invitations(ctx _context.Context) ApiListIamV2InvitationsRequest {
 	return ApiListIamV2InvitationsRequest{
@@ -678,7 +678,8 @@ func (a *InvitationsIamV2ApiService) ListIamV2Invitations(ctx _context.Context) 
 }
 
 // Execute executes the request
-//  @return IamV2InvitationList
+//
+//	@return IamV2InvitationList
 func (a *InvitationsIamV2ApiService) ListIamV2InvitationsExecute(r ApiListIamV2InvitationsRequest) (IamV2InvitationList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
