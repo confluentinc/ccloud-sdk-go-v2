@@ -155,8 +155,8 @@ CreateIamV2ServiceAccount Create a Service Account
 
 Make a request to create a service account.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamV2ServiceAccountRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamV2ServiceAccountRequest
 */
 func (a *ServiceAccountsIamV2ApiService) CreateIamV2ServiceAccount(ctx _context.Context) ApiCreateIamV2ServiceAccountRequest {
 	return ApiCreateIamV2ServiceAccountRequest{
@@ -166,7 +166,8 @@ func (a *ServiceAccountsIamV2ApiService) CreateIamV2ServiceAccount(ctx _context.
 }
 
 // Execute executes the request
-//  @return IamV2ServiceAccount
+//
+//	@return IamV2ServiceAccount
 func (a *ServiceAccountsIamV2ApiService) CreateIamV2ServiceAccountExecute(r ApiCreateIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -333,10 +334,9 @@ Make a request to delete a service account.
 If successful, this request will also recursively delete all of the service account's associated resources,
 including its cloud and cluster API keys.
 
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the service account.
- @return ApiDeleteIamV2ServiceAccountRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the service account.
+	@return ApiDeleteIamV2ServiceAccountRequest
 */
 func (a *ServiceAccountsIamV2ApiService) DeleteIamV2ServiceAccount(ctx _context.Context, id string) ApiDeleteIamV2ServiceAccountRequest {
 	return ApiDeleteIamV2ServiceAccountRequest{
@@ -479,9 +479,9 @@ GetIamV2ServiceAccount Read a Service Account
 
 Make a request to read a service account.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the service account.
- @return ApiGetIamV2ServiceAccountRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the service account.
+	@return ApiGetIamV2ServiceAccountRequest
 */
 func (a *ServiceAccountsIamV2ApiService) GetIamV2ServiceAccount(ctx _context.Context, id string) ApiGetIamV2ServiceAccountRequest {
 	return ApiGetIamV2ServiceAccountRequest{
@@ -492,7 +492,8 @@ func (a *ServiceAccountsIamV2ApiService) GetIamV2ServiceAccount(ctx _context.Con
 }
 
 // Execute executes the request
-//  @return IamV2ServiceAccount
+//
+//	@return IamV2ServiceAccount
 func (a *ServiceAccountsIamV2ApiService) GetIamV2ServiceAccountExecute(r ApiGetIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -648,8 +649,8 @@ ListIamV2ServiceAccounts List of Service Accounts
 
 Retrieve a sorted, filtered, paginated list of all service accounts.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListIamV2ServiceAccountsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListIamV2ServiceAccountsRequest
 */
 func (a *ServiceAccountsIamV2ApiService) ListIamV2ServiceAccounts(ctx _context.Context) ApiListIamV2ServiceAccountsRequest {
 	return ApiListIamV2ServiceAccountsRequest{
@@ -659,7 +660,8 @@ func (a *ServiceAccountsIamV2ApiService) ListIamV2ServiceAccounts(ctx _context.C
 }
 
 // Execute executes the request
-//  @return IamV2ServiceAccountList
+//
+//	@return IamV2ServiceAccountList
 func (a *ServiceAccountsIamV2ApiService) ListIamV2ServiceAccountsExecute(r ApiListIamV2ServiceAccountsRequest) (IamV2ServiceAccountList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -803,11 +805,9 @@ UpdateIamV2ServiceAccount Update a Service Account
 
 Make a request to update a service account.
 
-
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the service account.
- @return ApiUpdateIamV2ServiceAccountRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the service account.
+	@return ApiUpdateIamV2ServiceAccountRequest
 */
 func (a *ServiceAccountsIamV2ApiService) UpdateIamV2ServiceAccount(ctx _context.Context, id string) ApiUpdateIamV2ServiceAccountRequest {
 	return ApiUpdateIamV2ServiceAccountRequest{
@@ -818,7 +818,8 @@ func (a *ServiceAccountsIamV2ApiService) UpdateIamV2ServiceAccount(ctx _context.
 }
 
 // Execute executes the request
-//  @return IamV2ServiceAccount
+//
+//	@return IamV2ServiceAccount
 func (a *ServiceAccountsIamV2ApiService) UpdateIamV2ServiceAccountExecute(r ApiUpdateIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
