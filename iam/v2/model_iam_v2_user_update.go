@@ -44,6 +44,8 @@ type IamV2UserUpdate struct {
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
 	// The user's full name
 	FullName *string `json:"full_name,omitempty"`
+	// The user's authentication method
+	AuthType *string `json:"auth_type,omitempty"`
 }
 
 // NewIamV2UserUpdate instantiates a new IamV2UserUpdate object
@@ -223,6 +225,38 @@ func (o *IamV2UserUpdate) SetFullName(v string) {
 	o.FullName = &v
 }
 
+// GetAuthType returns the AuthType field value if set, zero value otherwise.
+func (o *IamV2UserUpdate) GetAuthType() string {
+	if o == nil || o.AuthType == nil {
+		var ret string
+		return ret
+	}
+	return *o.AuthType
+}
+
+// GetAuthTypeOk returns a tuple with the AuthType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamV2UserUpdate) GetAuthTypeOk() (*string, bool) {
+	if o == nil || o.AuthType == nil {
+		return nil, false
+	}
+	return o.AuthType, true
+}
+
+// HasAuthType returns a boolean if a field has been set.
+func (o *IamV2UserUpdate) HasAuthType() bool {
+	if o != nil && o.AuthType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthType gets a reference to the given string and assigns it to the AuthType field.
+func (o *IamV2UserUpdate) SetAuthType(v string) {
+	o.AuthType = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *IamV2UserUpdate) Redact() {
 	o.recurseRedact(o.ApiVersion)
@@ -230,6 +264,7 @@ func (o *IamV2UserUpdate) Redact() {
 	o.recurseRedact(o.Id)
 	o.recurseRedact(o.Metadata)
 	o.recurseRedact(o.FullName)
+	o.recurseRedact(o.AuthType)
 }
 
 func (o *IamV2UserUpdate) recurseRedact(v interface{}) {
@@ -278,6 +313,9 @@ func (o IamV2UserUpdate) MarshalJSON() ([]byte, error) {
 	}
 	if o.FullName != nil {
 		toSerialize["full_name"] = o.FullName
+	}
+	if o.AuthType != nil {
+		toSerialize["auth_type"] = o.AuthType
 	}
 	return json.Marshal(toSerialize)
 }

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
 **FullName** | Pointer to **string** | The user&#39;s full name | [optional] 
+**AuthType** | Pointer to **string** | The user&#39;s authentication method | [optional] [readonly] 
 
 ## Methods
 
@@ -153,6 +154,31 @@ SetFullName sets FullName field to given value.
 `func (o *IamV2UserUpdate) HasFullName() bool`
 
 HasFullName returns a boolean if a field has been set.
+
+### GetAuthType
+
+`func (o *IamV2UserUpdate) GetAuthType() string`
+
+GetAuthType returns the AuthType field if non-nil, zero value otherwise.
+
+### GetAuthTypeOk
+
+`func (o *IamV2UserUpdate) GetAuthTypeOk() (*string, bool)`
+
+GetAuthTypeOk returns a tuple with the AuthType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuthType
+
+`func (o *IamV2UserUpdate) SetAuthType(v string)`
+
+SetAuthType sets AuthType field to given value.
+
+### HasAuthType
+
+`func (o *IamV2UserUpdate) HasAuthType() bool`
+
+HasAuthType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

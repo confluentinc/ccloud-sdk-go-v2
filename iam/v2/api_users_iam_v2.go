@@ -137,10 +137,9 @@ Make a request to delete a user.
 If successful, this request will also recursively delete all of the user's associated resources,
 including its cloud and cluster API keys.
 
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the user.
- @return ApiDeleteIamV2UserRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the user.
+	@return ApiDeleteIamV2UserRequest
 */
 func (a *UsersIamV2ApiService) DeleteIamV2User(ctx _context.Context, id string) ApiDeleteIamV2UserRequest {
 	return ApiDeleteIamV2UserRequest{
@@ -283,9 +282,9 @@ GetIamV2User Read a User
 
 Make a request to read a user.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the user.
- @return ApiGetIamV2UserRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the user.
+	@return ApiGetIamV2UserRequest
 */
 func (a *UsersIamV2ApiService) GetIamV2User(ctx _context.Context, id string) ApiGetIamV2UserRequest {
 	return ApiGetIamV2UserRequest{
@@ -296,7 +295,8 @@ func (a *UsersIamV2ApiService) GetIamV2User(ctx _context.Context, id string) Api
 }
 
 // Execute executes the request
-//  @return IamV2User
+//
+//	@return IamV2User
 func (a *UsersIamV2ApiService) GetIamV2UserExecute(r ApiGetIamV2UserRequest) (IamV2User, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -452,8 +452,8 @@ ListIamV2Users List of Users
 
 Retrieve a sorted, filtered, paginated list of all users.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListIamV2UsersRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListIamV2UsersRequest
 */
 func (a *UsersIamV2ApiService) ListIamV2Users(ctx _context.Context) ApiListIamV2UsersRequest {
 	return ApiListIamV2UsersRequest{
@@ -463,7 +463,8 @@ func (a *UsersIamV2ApiService) ListIamV2Users(ctx _context.Context) ApiListIamV2
 }
 
 // Execute executes the request
-//  @return IamV2UserList
+//
+//	@return IamV2UserList
 func (a *UsersIamV2ApiService) ListIamV2UsersExecute(r ApiListIamV2UsersRequest) (IamV2UserList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -607,11 +608,9 @@ UpdateIamV2User Update a User
 
 Make a request to update a user.
 
-
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the user.
- @return ApiUpdateIamV2UserRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the user.
+	@return ApiUpdateIamV2UserRequest
 */
 func (a *UsersIamV2ApiService) UpdateIamV2User(ctx _context.Context, id string) ApiUpdateIamV2UserRequest {
 	return ApiUpdateIamV2UserRequest{
@@ -622,7 +621,8 @@ func (a *UsersIamV2ApiService) UpdateIamV2User(ctx _context.Context, id string) 
 }
 
 // Execute executes the request
-//  @return IamV2User
+//
+//	@return IamV2User
 func (a *UsersIamV2ApiService) UpdateIamV2UserExecute(r ApiUpdateIamV2UserRequest) (IamV2User, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch

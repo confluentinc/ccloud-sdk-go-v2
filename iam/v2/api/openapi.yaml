@@ -3858,6 +3858,14 @@ components:
           description: The user's full name
           example: Marty McFly
           type: string
+        auth_type:
+          description: The user's authentication method
+          example: AUTH_TYPE_SSO
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - AUTH_TYPE_LOCAL
+          - AUTH_TYPE_SSO
       type: object
     iam.v2.ServiceAccount:
       description: |-
@@ -4464,6 +4472,14 @@ components:
           description: The user's full name
           example: Marty McFly
           type: string
+        auth_type:
+          description: The user's authentication method
+          example: AUTH_TYPE_SSO
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - AUTH_TYPE_LOCAL
+          - AUTH_TYPE_SSO
       type: object
     iam.v2.ServiceAccountUpdate:
       description: |-

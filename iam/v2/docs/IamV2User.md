@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
 **Email** | Pointer to **string** | The user&#39;s email address | [optional] 
 **FullName** | Pointer to **string** | The user&#39;s full name | [optional] 
+**AuthType** | Pointer to **string** | The user&#39;s authentication method | [optional] [readonly] 
 
 ## Methods
 
@@ -179,6 +180,31 @@ SetFullName sets FullName field to given value.
 `func (o *IamV2User) HasFullName() bool`
 
 HasFullName returns a boolean if a field has been set.
+
+### GetAuthType
+
+`func (o *IamV2User) GetAuthType() string`
+
+GetAuthType returns the AuthType field if non-nil, zero value otherwise.
+
+### GetAuthTypeOk
+
+`func (o *IamV2User) GetAuthTypeOk() (*string, bool)`
+
+GetAuthTypeOk returns a tuple with the AuthType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuthType
+
+`func (o *IamV2User) SetAuthType(v string)`
+
+SetAuthType sets AuthType field to given value.
+
+### HasAuthType
+
+`func (o *IamV2User) HasAuthType() bool`
+
+HasAuthType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
