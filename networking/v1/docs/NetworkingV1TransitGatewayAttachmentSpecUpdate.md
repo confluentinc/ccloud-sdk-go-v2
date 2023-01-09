@@ -5,7 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the TGW attachment | [optional] 
-**Cloud** | Pointer to [**NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf**](NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf.md) | The cloud-specific Transit Gateway details. | [optional] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
@@ -51,31 +50,6 @@ SetDisplayName sets DisplayName field to given value.
 `func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) HasDisplayName() bool`
 
 HasDisplayName returns a boolean if a field has been set.
-
-### GetCloud
-
-`func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) GetCloud() NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf`
-
-GetCloud returns the Cloud field if non-nil, zero value otherwise.
-
-### GetCloudOk
-
-`func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) GetCloudOk() (*NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf, bool)`
-
-GetCloudOk returns a tuple with the Cloud field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCloud
-
-`func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) SetCloud(v NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf)`
-
-SetCloud sets Cloud field to given value.
-
-### HasCloud
-
-`func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) HasCloud() bool`
-
-HasCloud returns a boolean if a field has been set.
 
 ### GetEnvironment
 

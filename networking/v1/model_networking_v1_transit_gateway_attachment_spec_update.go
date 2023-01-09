@@ -37,8 +37,6 @@ import (
 type NetworkingV1TransitGatewayAttachmentSpecUpdate struct {
 	// The name of the TGW attachment
 	DisplayName *string `json:"display_name,omitempty"`
-	// The cloud-specific Transit Gateway details.
-	Cloud *NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf `json:"cloud,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
 }
@@ -92,38 +90,6 @@ func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) SetDisplayName(v string
 	o.DisplayName = &v
 }
 
-// GetCloud returns the Cloud field value if set, zero value otherwise.
-func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) GetCloud() NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf {
-	if o == nil || o.Cloud == nil {
-		var ret NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf
-		return ret
-	}
-	return *o.Cloud
-}
-
-// GetCloudOk returns a tuple with the Cloud field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) GetCloudOk() (*NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf, bool) {
-	if o == nil || o.Cloud == nil {
-		return nil, false
-	}
-	return o.Cloud, true
-}
-
-// HasCloud returns a boolean if a field has been set.
-func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) HasCloud() bool {
-	if o != nil && o.Cloud != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetCloud gets a reference to the given NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf and assigns it to the Cloud field.
-func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) SetCloud(v NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf) {
-	o.Cloud = &v
-}
-
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
 func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) GetEnvironment() ObjectReference {
 	if o == nil || o.Environment == nil {
@@ -159,7 +125,6 @@ func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) SetEnvironment(v Object
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1TransitGatewayAttachmentSpecUpdate) Redact() {
 	o.recurseRedact(o.DisplayName)
-	o.recurseRedact(o.Cloud)
 	o.recurseRedact(o.Environment)
 }
 
@@ -197,9 +162,6 @@ func (o NetworkingV1TransitGatewayAttachmentSpecUpdate) MarshalJSON() ([]byte, e
 	toSerialize := map[string]interface{}{}
 	if o.DisplayName != nil {
 		toSerialize["display_name"] = o.DisplayName
-	}
-	if o.Cloud != nil {
-		toSerialize["cloud"] = o.Cloud
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment

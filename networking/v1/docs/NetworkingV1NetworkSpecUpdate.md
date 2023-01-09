@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the network | [optional] 
+**ZoneInfo** | Pointer to [**NetworkingV1ZoneInfo**](networking.v1.ZoneInfo.md) | Each item represents information related to a single zone.  Note - The attribute is in an [Early Access lifecycle stage]   (https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)  | [optional] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
@@ -50,6 +51,31 @@ SetDisplayName sets DisplayName field to given value.
 `func (o *NetworkingV1NetworkSpecUpdate) HasDisplayName() bool`
 
 HasDisplayName returns a boolean if a field has been set.
+
+### GetZoneInfo
+
+`func (o *NetworkingV1NetworkSpecUpdate) GetZoneInfo() NetworkingV1ZoneInfo`
+
+GetZoneInfo returns the ZoneInfo field if non-nil, zero value otherwise.
+
+### GetZoneInfoOk
+
+`func (o *NetworkingV1NetworkSpecUpdate) GetZoneInfoOk() (*NetworkingV1ZoneInfo, bool)`
+
+GetZoneInfoOk returns a tuple with the ZoneInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetZoneInfo
+
+`func (o *NetworkingV1NetworkSpecUpdate) SetZoneInfo(v NetworkingV1ZoneInfo)`
+
+SetZoneInfo sets ZoneInfo field to given value.
+
+### HasZoneInfo
+
+`func (o *NetworkingV1NetworkSpecUpdate) HasZoneInfo() bool`
+
+HasZoneInfo returns a boolean if a field has been set.
 
 ### GetEnvironment
 

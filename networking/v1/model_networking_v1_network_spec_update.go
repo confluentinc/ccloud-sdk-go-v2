@@ -37,6 +37,8 @@ import (
 type NetworkingV1NetworkSpecUpdate struct {
 	// The name of the network
 	DisplayName *string `json:"display_name,omitempty"`
+	// Each item represents information related to a single zone.  Note - The attribute is in an [Early Access lifecycle stage]   (https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
+	ZoneInfo *NetworkingV1ZoneInfo `json:"zone_info,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
 }
@@ -90,6 +92,38 @@ func (o *NetworkingV1NetworkSpecUpdate) SetDisplayName(v string) {
 	o.DisplayName = &v
 }
 
+// GetZoneInfo returns the ZoneInfo field value if set, zero value otherwise.
+func (o *NetworkingV1NetworkSpecUpdate) GetZoneInfo() NetworkingV1ZoneInfo {
+	if o == nil || o.ZoneInfo == nil {
+		var ret NetworkingV1ZoneInfo
+		return ret
+	}
+	return *o.ZoneInfo
+}
+
+// GetZoneInfoOk returns a tuple with the ZoneInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1NetworkSpecUpdate) GetZoneInfoOk() (*NetworkingV1ZoneInfo, bool) {
+	if o == nil || o.ZoneInfo == nil {
+		return nil, false
+	}
+	return o.ZoneInfo, true
+}
+
+// HasZoneInfo returns a boolean if a field has been set.
+func (o *NetworkingV1NetworkSpecUpdate) HasZoneInfo() bool {
+	if o != nil && o.ZoneInfo != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetZoneInfo gets a reference to the given NetworkingV1ZoneInfo and assigns it to the ZoneInfo field.
+func (o *NetworkingV1NetworkSpecUpdate) SetZoneInfo(v NetworkingV1ZoneInfo) {
+	o.ZoneInfo = &v
+}
+
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
 func (o *NetworkingV1NetworkSpecUpdate) GetEnvironment() ObjectReference {
 	if o == nil || o.Environment == nil {
@@ -125,6 +159,7 @@ func (o *NetworkingV1NetworkSpecUpdate) SetEnvironment(v ObjectReference) {
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1NetworkSpecUpdate) Redact() {
 	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.ZoneInfo)
 	o.recurseRedact(o.Environment)
 }
 
@@ -162,6 +197,9 @@ func (o NetworkingV1NetworkSpecUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.DisplayName != nil {
 		toSerialize["display_name"] = o.DisplayName
+	}
+	if o.ZoneInfo != nil {
+		toSerialize["zone_info"] = o.ZoneInfo
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment

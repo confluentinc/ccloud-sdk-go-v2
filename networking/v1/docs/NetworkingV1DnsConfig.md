@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Resolution** | [**NetworkingV1DnsResolutionTypes**](networking.v1.DnsResolutionTypes.md) | Network DNS resolution | 
+**Resolution** | **string** | Network DNS resolution | 
 
 ## Methods
 
 ### NewNetworkingV1DnsConfig
 
-`func NewNetworkingV1DnsConfig(resolution NetworkingV1DnsResolutionTypes, ) *NetworkingV1DnsConfig`
+`func NewNetworkingV1DnsConfig(resolution string, ) *NetworkingV1DnsConfig`
 
 NewNetworkingV1DnsConfig instantiates a new NetworkingV1DnsConfig object
 This constructor will assign default values to properties that have it defined,
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetResolution
 
-`func (o *NetworkingV1DnsConfig) GetResolution() NetworkingV1DnsResolutionTypes`
+`func (o *NetworkingV1DnsConfig) GetResolution() string`
 
 GetResolution returns the Resolution field if non-nil, zero value otherwise.
 
 ### GetResolutionOk
 
-`func (o *NetworkingV1DnsConfig) GetResolutionOk() (*NetworkingV1DnsResolutionTypes, bool)`
+`func (o *NetworkingV1DnsConfig) GetResolutionOk() (*string, bool)`
 
 GetResolutionOk returns a tuple with the Resolution field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResolution
 
-`func (o *NetworkingV1DnsConfig) SetResolution(v NetworkingV1DnsResolutionTypes)`
+`func (o *NetworkingV1DnsConfig) SetResolution(v string)`
 
 SetResolution sets Resolution field to given value.
 

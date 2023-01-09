@@ -46,8 +46,12 @@ type NetworkingV1NetworkSpec struct {
 	Cidr *string `json:"cidr,omitempty"`
 	// The 3 availability zones for this network. They can optionally be specified for AWS networks used with PrivateLink, for GCP networks used with Private Service Connect, and for AWS and GCP networks used with Peering. Otherwise, they are automatically chosen by Confluent Cloud.  On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3)  On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c).  On Azure, zones are Confluent-chosen names (e.g. 1, 2, 3) since Azure does not  have universal zone identifiers.
 	Zones *[]string `json:"zones,omitempty"`
+	// Each item represents information related to a single zone.  Note - The attribute is in an [Early Access lifecycle stage]   (https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
+	ZoneInfo *NetworkingV1ZoneInfo `json:"zone_info,omitempty"`
 	// DNS config only applies to PrivateLink network connection type.  When resolution is CHASED_PRIVATE, clusters in this network require both public and private DNS  to resolve cluster endpoints.  When resolution is PRIVATE, clusters in this network only require private DNS  to resolve cluster endpoints.  Note - The attribute is in an [Early Access lifecycle stage](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)  and it's available only for AWS networks with PRIVATELINK connection type.
 	DnsConfig *NetworkingV1DnsConfig `json:"dns_config,omitempty"`
+	// The reserved CIDR config is used only by AWS networks with connection_types = Vpc_Peering or Transit_Gateway  An IPv4 [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)   reserved for Confluent Cloud Network. Must be \\24.   If not specified, Confluent Cloud Network uses 172.20.255.0/24  Note - The attribute is in an [Early Access lifecycle stage](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
+	ReservedCidr *string `json:"reserved_cidr,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
 }
@@ -261,6 +265,38 @@ func (o *NetworkingV1NetworkSpec) SetZones(v []string) {
 	o.Zones = &v
 }
 
+// GetZoneInfo returns the ZoneInfo field value if set, zero value otherwise.
+func (o *NetworkingV1NetworkSpec) GetZoneInfo() NetworkingV1ZoneInfo {
+	if o == nil || o.ZoneInfo == nil {
+		var ret NetworkingV1ZoneInfo
+		return ret
+	}
+	return *o.ZoneInfo
+}
+
+// GetZoneInfoOk returns a tuple with the ZoneInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1NetworkSpec) GetZoneInfoOk() (*NetworkingV1ZoneInfo, bool) {
+	if o == nil || o.ZoneInfo == nil {
+		return nil, false
+	}
+	return o.ZoneInfo, true
+}
+
+// HasZoneInfo returns a boolean if a field has been set.
+func (o *NetworkingV1NetworkSpec) HasZoneInfo() bool {
+	if o != nil && o.ZoneInfo != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetZoneInfo gets a reference to the given NetworkingV1ZoneInfo and assigns it to the ZoneInfo field.
+func (o *NetworkingV1NetworkSpec) SetZoneInfo(v NetworkingV1ZoneInfo) {
+	o.ZoneInfo = &v
+}
+
 // GetDnsConfig returns the DnsConfig field value if set, zero value otherwise.
 func (o *NetworkingV1NetworkSpec) GetDnsConfig() NetworkingV1DnsConfig {
 	if o == nil || o.DnsConfig == nil {
@@ -291,6 +327,38 @@ func (o *NetworkingV1NetworkSpec) HasDnsConfig() bool {
 // SetDnsConfig gets a reference to the given NetworkingV1DnsConfig and assigns it to the DnsConfig field.
 func (o *NetworkingV1NetworkSpec) SetDnsConfig(v NetworkingV1DnsConfig) {
 	o.DnsConfig = &v
+}
+
+// GetReservedCidr returns the ReservedCidr field value if set, zero value otherwise.
+func (o *NetworkingV1NetworkSpec) GetReservedCidr() string {
+	if o == nil || o.ReservedCidr == nil {
+		var ret string
+		return ret
+	}
+	return *o.ReservedCidr
+}
+
+// GetReservedCidrOk returns a tuple with the ReservedCidr field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1NetworkSpec) GetReservedCidrOk() (*string, bool) {
+	if o == nil || o.ReservedCidr == nil {
+		return nil, false
+	}
+	return o.ReservedCidr, true
+}
+
+// HasReservedCidr returns a boolean if a field has been set.
+func (o *NetworkingV1NetworkSpec) HasReservedCidr() bool {
+	if o != nil && o.ReservedCidr != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetReservedCidr gets a reference to the given string and assigns it to the ReservedCidr field.
+func (o *NetworkingV1NetworkSpec) SetReservedCidr(v string) {
+	o.ReservedCidr = &v
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
@@ -333,7 +401,9 @@ func (o *NetworkingV1NetworkSpec) Redact() {
 	o.recurseRedact(o.ConnectionTypes)
 	o.recurseRedact(o.Cidr)
 	o.recurseRedact(o.Zones)
+	o.recurseRedact(o.ZoneInfo)
 	o.recurseRedact(o.DnsConfig)
+	o.recurseRedact(o.ReservedCidr)
 	o.recurseRedact(o.Environment)
 }
 
@@ -387,8 +457,14 @@ func (o NetworkingV1NetworkSpec) MarshalJSON() ([]byte, error) {
 	if o.Zones != nil {
 		toSerialize["zones"] = o.Zones
 	}
+	if o.ZoneInfo != nil {
+		toSerialize["zone_info"] = o.ZoneInfo
+	}
 	if o.DnsConfig != nil {
 		toSerialize["dns_config"] = o.DnsConfig
+	}
+	if o.ReservedCidr != nil {
+		toSerialize["reserved_cidr"] = o.ReservedCidr
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment

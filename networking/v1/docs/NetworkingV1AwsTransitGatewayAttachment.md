@@ -115,12 +115,6 @@ SetRoutes sets Routes field to given value.
 
 Convenience method to wrap this instance of NetworkingV1AwsTransitGatewayAttachment in NetworkingV1TransitGatewayAttachmentSpecCloudOneOf
 
-### AsNetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf
-
-`func (s *NetworkingV1AwsTransitGatewayAttachment) AsNetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf() NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf`
-
-Convenience method to wrap this instance of NetworkingV1AwsTransitGatewayAttachment in NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf
-
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 
