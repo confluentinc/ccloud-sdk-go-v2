@@ -35,22 +35,28 @@ import (
 
 // ByokV1AzureKey The Azure BYOK details. 
 type ByokV1AzureKey struct {
-	// The unique Key Object Identifier URL of an Azure Key Vault key. 
-	KeyId string `json:"key_id"`
 	// The Application ID created for this key-environment combination. 
 	ApplicationId *string `json:"application_id,omitempty"`
+	// The unique Key Object Identifier URL of an Azure Key Vault key. 
+	KeyId string `json:"key_id"`
+	// Key Vault ID containing the key 
+	KeyVaultId string `json:"key_vault_id"`
 	// BYOK kind type. 
 	Kind string `json:"kind"`
+	// Tenant ID (uuid) hosting the Key Vault containing the key 
+	TenantId string `json:"tenant_id"`
 }
 
 // NewByokV1AzureKey instantiates a new ByokV1AzureKey object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewByokV1AzureKey(keyId string, kind string) *ByokV1AzureKey {
+func NewByokV1AzureKey(keyId string, keyVaultId string, kind string, tenantId string) *ByokV1AzureKey {
 	this := ByokV1AzureKey{}
 	this.KeyId = keyId
+	this.KeyVaultId = keyVaultId
 	this.Kind = kind
+	this.TenantId = tenantId
 	return &this
 }
 
@@ -60,30 +66,6 @@ func NewByokV1AzureKey(keyId string, kind string) *ByokV1AzureKey {
 func NewByokV1AzureKeyWithDefaults() *ByokV1AzureKey {
 	this := ByokV1AzureKey{}
 	return &this
-}
-
-// GetKeyId returns the KeyId field value
-func (o *ByokV1AzureKey) GetKeyId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.KeyId
-}
-
-// GetKeyIdOk returns a tuple with the KeyId field value
-// and a boolean to check if the value has been set.
-func (o *ByokV1AzureKey) GetKeyIdOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.KeyId, true
-}
-
-// SetKeyId sets field value
-func (o *ByokV1AzureKey) SetKeyId(v string) {
-	o.KeyId = v
 }
 
 // GetApplicationId returns the ApplicationId field value if set, zero value otherwise.
@@ -118,6 +100,54 @@ func (o *ByokV1AzureKey) SetApplicationId(v string) {
 	o.ApplicationId = &v
 }
 
+// GetKeyId returns the KeyId field value
+func (o *ByokV1AzureKey) GetKeyId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.KeyId
+}
+
+// GetKeyIdOk returns a tuple with the KeyId field value
+// and a boolean to check if the value has been set.
+func (o *ByokV1AzureKey) GetKeyIdOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.KeyId, true
+}
+
+// SetKeyId sets field value
+func (o *ByokV1AzureKey) SetKeyId(v string) {
+	o.KeyId = v
+}
+
+// GetKeyVaultId returns the KeyVaultId field value
+func (o *ByokV1AzureKey) GetKeyVaultId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.KeyVaultId
+}
+
+// GetKeyVaultIdOk returns a tuple with the KeyVaultId field value
+// and a boolean to check if the value has been set.
+func (o *ByokV1AzureKey) GetKeyVaultIdOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.KeyVaultId, true
+}
+
+// SetKeyVaultId sets field value
+func (o *ByokV1AzureKey) SetKeyVaultId(v string) {
+	o.KeyVaultId = v
+}
+
 // GetKind returns the Kind field value
 func (o *ByokV1AzureKey) GetKind() string {
 	if o == nil {
@@ -142,11 +172,37 @@ func (o *ByokV1AzureKey) SetKind(v string) {
 	o.Kind = v
 }
 
+// GetTenantId returns the TenantId field value
+func (o *ByokV1AzureKey) GetTenantId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.TenantId
+}
+
+// GetTenantIdOk returns a tuple with the TenantId field value
+// and a boolean to check if the value has been set.
+func (o *ByokV1AzureKey) GetTenantIdOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.TenantId, true
+}
+
+// SetTenantId sets field value
+func (o *ByokV1AzureKey) SetTenantId(v string) {
+	o.TenantId = v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *ByokV1AzureKey) Redact() {
-    o.recurseRedact(&o.KeyId)
     o.recurseRedact(o.ApplicationId)
+    o.recurseRedact(&o.KeyId)
+    o.recurseRedact(&o.KeyVaultId)
     o.recurseRedact(&o.Kind)
+    o.recurseRedact(&o.TenantId)
 }
 
 func (o *ByokV1AzureKey) recurseRedact(v interface{}) {
@@ -181,14 +237,20 @@ func (o ByokV1AzureKey) zeroField(v interface{}) {
 
 func (o ByokV1AzureKey) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["key_id"] = o.KeyId
-	}
 	if o.ApplicationId != nil {
 		toSerialize["application_id"] = o.ApplicationId
 	}
 	if true {
+		toSerialize["key_id"] = o.KeyId
+	}
+	if true {
+		toSerialize["key_vault_id"] = o.KeyVaultId
+	}
+	if true {
 		toSerialize["kind"] = o.Kind
+	}
+	if true {
+		toSerialize["tenant_id"] = o.TenantId
 	}
 	return json.Marshal(toSerialize)
 }

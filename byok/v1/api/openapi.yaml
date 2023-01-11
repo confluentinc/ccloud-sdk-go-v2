@@ -1385,6 +1385,7 @@ components:
             The Amazon Resource Name (ARN) of an AWS KMS key.
           example: arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
           type: string
+          x-immutable: true
         roles:
           description: |
             The Amazon Resource Names (ARNs) of IAM Roles created for this key-environment combination.
@@ -1398,6 +1399,7 @@ components:
           enum:
           - AwsKey
           type: string
+          x-immutable: true
       required:
       - key_arn
       - kind
@@ -1406,25 +1408,41 @@ components:
       description: |
         The Azure BYOK details.
       properties:
-        key_id:
-          description: |
-            The unique Key Object Identifier URL of an Azure Key Vault key.
-          example: https://some-example-vault.vault.azure.net/keys/example-key/1e57b4ccba2542b0beef53bf9ac9342c
-          type: string
         application_id:
           description: |
             The Application ID created for this key-environment combination.
           readOnly: true
           type: string
+        key_id:
+          description: |
+            The unique Key Object Identifier URL of an Azure Key Vault key.
+          example: https://a-vault.vault.azure.net/keys/a-key/00000000000000000000000000000000
+          type: string
+          x-immutable: true
+        key_vault_id:
+          description: |
+            Key Vault ID containing the key
+          example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/a-resourcegroups/providers/Microsoft.KeyVault/vaults/a-vault
+          type: string
+          x-immutable: true
         kind:
           description: |
             BYOK kind type.
           enum:
           - AzureKey
           type: string
+          x-immutable: true
+        tenant_id:
+          description: |
+            Tenant ID (uuid) hosting the Key Vault containing the key
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+          x-immutable: true
       required:
       - key_id
+      - key_vault_id
       - kind
+      - tenant_id
       type: object
     SearchFilter:
       description: Filter a collection by a string search
