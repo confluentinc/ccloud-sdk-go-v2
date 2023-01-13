@@ -44,7 +44,7 @@ type TransitGatewayAttachmentsNetworkingV1Api interface {
 	/*
 	CreateNetworkingV1TransitGatewayAttachment Create a Transit Gateway Attachment
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-generally-available@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Generally%20Available&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Generally%20Available%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create a transit gateway attachment.
 
@@ -60,7 +60,7 @@ Make a request to create a transit gateway attachment.
 	/*
 	DeleteNetworkingV1TransitGatewayAttachment Delete a Transit Gateway Attachment
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-generally-available@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Generally%20Available&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Generally%20Available%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete a transit gateway attachment.
 
@@ -109,7 +109,7 @@ Retrieve a sorted, filtered, paginated list of all transit gateway attachments.
 	/*
 	UpdateNetworkingV1TransitGatewayAttachment Update a Transit Gateway Attachment
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-generally-available@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Generally%20Available&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Generally%20Available%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update a transit gateway attachment.
 
@@ -147,7 +147,7 @@ func (r ApiCreateNetworkingV1TransitGatewayAttachmentRequest) Execute() (Network
 /*
 CreateNetworkingV1TransitGatewayAttachment Create a Transit Gateway Attachment
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-generally-available@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Generally%20Available&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Generally%20Available%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create a transit gateway attachment.
 
@@ -329,7 +329,7 @@ func (r ApiDeleteNetworkingV1TransitGatewayAttachmentRequest) Execute() (*_netht
 /*
 DeleteNetworkingV1TransitGatewayAttachment Delete a Transit Gateway Attachment
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-generally-available@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Generally%20Available&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Generally%20Available%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete a transit gateway attachment.
 
@@ -849,7 +849,7 @@ func (r ApiUpdateNetworkingV1TransitGatewayAttachmentRequest) Execute() (Network
 /*
 UpdateNetworkingV1TransitGatewayAttachment Update a Transit Gateway Attachment
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-generally-available@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Generally%20Available&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Generally%20Available%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update a transit gateway attachment.
 
