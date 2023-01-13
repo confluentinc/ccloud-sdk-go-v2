@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **ConnectionTypes** | Pointer to [**NetworkingV1ConnectionTypes**](networking.v1.ConnectionTypes.md) |  | [optional] 
 **Cidr** | Pointer to **string** | The IPv4 [CIDR block](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) to used for this network. Must be &#x60;/16&#x60;. Required for VPC peering and AWS TransitGateway.  | [optional] 
 **Zones** | Pointer to **[]string** | The 3 availability zones for this network. They can optionally be specified for AWS networks used with PrivateLink, for GCP networks used with Private Service Connect, and for AWS and GCP networks used with Peering. Otherwise, they are automatically chosen by Confluent Cloud.  On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3)  On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c).  On Azure, zones are Confluent-chosen names (e.g. 1, 2, 3) since Azure does not  have universal zone identifiers.  | [optional] 
+**DnsConfig** | Pointer to [**NetworkingV1DnsConfig**](networking.v1.DnsConfig.md) | DNS config only applies to PrivateLink network connection type.  When resolution is CHASED_PRIVATE, clusters in this network require both public and private DNS  to resolve cluster endpoints.  When resolution is PRIVATE, clusters in this network only require private DNS  to resolve cluster endpoints.  Note - The attribute is in an [Early Access lifecycle stage](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)  and it&#39;s available only for AWS networks with PRIVATELINK connection type.  | [optional] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
@@ -180,6 +181,31 @@ SetZones sets Zones field to given value.
 `func (o *NetworkingV1NetworkSpec) HasZones() bool`
 
 HasZones returns a boolean if a field has been set.
+
+### GetDnsConfig
+
+`func (o *NetworkingV1NetworkSpec) GetDnsConfig() NetworkingV1DnsConfig`
+
+GetDnsConfig returns the DnsConfig field if non-nil, zero value otherwise.
+
+### GetDnsConfigOk
+
+`func (o *NetworkingV1NetworkSpec) GetDnsConfigOk() (*NetworkingV1DnsConfig, bool)`
+
+GetDnsConfigOk returns a tuple with the DnsConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDnsConfig
+
+`func (o *NetworkingV1NetworkSpec) SetDnsConfig(v NetworkingV1DnsConfig)`
+
+SetDnsConfig sets DnsConfig field to given value.
+
+### HasDnsConfig
+
+`func (o *NetworkingV1NetworkSpec) HasDnsConfig() bool`
+
+HasDnsConfig returns a boolean if a field has been set.
 
 ### GetEnvironment
 
