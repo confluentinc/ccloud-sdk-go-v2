@@ -47,7 +47,31 @@ type IamV2User struct {
 	// The user's full name
 	FullName *string `json:"full_name,omitempty"`
 	// The user's authentication method
-	AuthType *string `json:"auth_type,omitempty"`
+	AuthType AuthType `json:"auth_type,omitempty"`
+}
+
+type AuthType int32
+
+const (
+	AuthType_AUTH_TYPE_UNKNOWN AuthType = 0
+	AuthType_AUTH_TYPE_LOCAL   AuthType = 1
+	AuthType_AUTH_TYPE_SSO     AuthType = 2
+)
+
+var AuthType_name = map[int32]string{
+	0: "AUTH_TYPE_UNKNOWN",
+	1: "AUTH_TYPE_LOCAL",
+	2: "AUTH_TYPE_SSO",
+}
+
+var AuthType_value = map[string]int32{
+	"AUTH_TYPE_UNKNOWN": 0,
+	"AUTH_TYPE_LOCAL":   1,
+	"AUTH_TYPE_SSO":     2,
+}
+
+func (x AuthType) String() string {
+	return proto.EnumName(AuthType_name, int32(x))
 }
 
 // NewIamV2User instantiates a new IamV2User object
