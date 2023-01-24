@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the network | [optional] 
-**ZoneInfo** | Pointer to [**NetworkingV1ZoneInfo**](networking.v1.ZoneInfo.md) | Each item represents information related to a single zone.  Note - The attribute is in an [Early Access lifecycle stage]   (https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)  | [optional] 
+**ZonesInfo** | Pointer to [**NetworkingV1ZoneInfo**](networking.v1.ZoneInfo.md) | Each item represents information related to a single zone.  Note - The attribute is in an [Early Access lifecycle stage]   (https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)  | [optional] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
@@ -52,30 +52,30 @@ SetDisplayName sets DisplayName field to given value.
 
 HasDisplayName returns a boolean if a field has been set.
 
-### GetZoneInfo
+### GetZonesInfo
 
-`func (o *NetworkingV1NetworkSpecUpdate) GetZoneInfo() NetworkingV1ZoneInfo`
+`func (o *NetworkingV1NetworkSpecUpdate) GetZonesInfo() NetworkingV1ZoneInfo`
 
-GetZoneInfo returns the ZoneInfo field if non-nil, zero value otherwise.
+GetZonesInfo returns the ZonesInfo field if non-nil, zero value otherwise.
 
-### GetZoneInfoOk
+### GetZonesInfoOk
 
-`func (o *NetworkingV1NetworkSpecUpdate) GetZoneInfoOk() (*NetworkingV1ZoneInfo, bool)`
+`func (o *NetworkingV1NetworkSpecUpdate) GetZonesInfoOk() (*NetworkingV1ZoneInfo, bool)`
 
-GetZoneInfoOk returns a tuple with the ZoneInfo field if it's non-nil, zero value otherwise
+GetZonesInfoOk returns a tuple with the ZonesInfo field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetZoneInfo
+### SetZonesInfo
 
-`func (o *NetworkingV1NetworkSpecUpdate) SetZoneInfo(v NetworkingV1ZoneInfo)`
+`func (o *NetworkingV1NetworkSpecUpdate) SetZonesInfo(v NetworkingV1ZoneInfo)`
 
-SetZoneInfo sets ZoneInfo field to given value.
+SetZonesInfo sets ZonesInfo field to given value.
 
-### HasZoneInfo
+### HasZonesInfo
 
-`func (o *NetworkingV1NetworkSpecUpdate) HasZoneInfo() bool`
+`func (o *NetworkingV1NetworkSpecUpdate) HasZonesInfo() bool`
 
-HasZoneInfo returns a boolean if a field has been set.
+HasZonesInfo returns a boolean if a field has been set.
 
 ### GetEnvironment
 
