@@ -11489,7 +11489,7 @@ components:
           uniqueItems: true
       title: Network Link Service
       type: object
-    networking.v1.ZoneInfo:
+    networking.v1.ZonesInfo:
       description: Cloud provider zone metadata.
       items:
         properties:
@@ -11650,7 +11650,7 @@ components:
           x-immutable: true
         zones_info:
           allOf:
-          - $ref: '#/components/schemas/networking.v1.ZoneInfo'
+          - $ref: '#/components/schemas/networking.v1.ZonesInfo'
           description: |
             Each item represents information related to a single zone.
 
@@ -12509,7 +12509,7 @@ components:
           type: string
         zones_info:
           allOf:
-          - $ref: '#/components/schemas/networking.v1.ZoneInfo'
+          - $ref: '#/components/schemas/networking.v1.ZonesInfo'
           description: |
             Each item represents information related to a single zone.
 

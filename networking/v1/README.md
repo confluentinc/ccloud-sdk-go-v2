@@ -182,7 +182,7 @@ Class | Method | HTTP request | Description
  - [NetworkingV1TransitGatewayAttachmentStatus](docs/NetworkingV1TransitGatewayAttachmentStatus.md)
  - [NetworkingV1TransitGatewayAttachmentStatusCloudOneOf](docs/NetworkingV1TransitGatewayAttachmentStatusCloudOneOf.md)
  - [NetworkingV1TransitGatewayAttachmentUpdate](docs/NetworkingV1TransitGatewayAttachmentUpdate.md)
- - [NetworkingV1ZoneInfo](docs/NetworkingV1ZoneInfo.md)
+ - [NetworkingV1ZonesInfo](docs/NetworkingV1ZonesInfo.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
 
