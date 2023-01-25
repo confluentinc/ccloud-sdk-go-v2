@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**DeleteKafkaTopic**](TopicV3Api.md#DeleteKafkaTopic) | **Delete** /kafka/v3/clusters/{cluster_id}/topics/{topic_name} | Delete Topic
 [**GetKafkaTopic**](TopicV3Api.md#GetKafkaTopic) | **Get** /kafka/v3/clusters/{cluster_id}/topics/{topic_name} | Get Topic
 [**ListKafkaTopics**](TopicV3Api.md#ListKafkaTopics) | **Get** /kafka/v3/clusters/{cluster_id}/topics | List Topics
+[**UpdatePartitionCountKafkaTopic**](TopicV3Api.md#UpdatePartitionCountKafkaTopic) | **Patch** /kafka/v3/clusters/{cluster_id}/topics/{topic_name} | Update partition count
 
 
 
@@ -290,6 +291,81 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json, text/plain, text/html
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdatePartitionCountKafkaTopic
+
+> TopicData UpdatePartitionCountKafkaTopic(ctx, clusterId, topicName).UpdatePartitionCountRequestData(updatePartitionCountRequestData).Execute()
+
+Update partition count
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    clusterId := "cluster-1" // string | The Kafka cluster ID.
+    topicName := "topic-1" // string | The topic name.
+    updatePartitionCountRequestData := *openapiclient.NewUpdatePartitionCountRequestData(int32(123)) // UpdatePartitionCountRequestData | The number of partitions to increase the partition count to. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.TopicV3Api.UpdatePartitionCountKafkaTopic(context.Background(), clusterId, topicName).UpdatePartitionCountRequestData(updatePartitionCountRequestData).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TopicV3Api.UpdatePartitionCountKafkaTopic``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdatePartitionCountKafkaTopic`: TopicData
+    fmt.Fprintf(os.Stdout, "Response from `TopicV3Api.UpdatePartitionCountKafkaTopic`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**clusterId** | **string** | The Kafka cluster ID. | 
+**topicName** | **string** | The topic name. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdatePartitionCountKafkaTopicRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **updatePartitionCountRequestData** | [**UpdatePartitionCountRequestData**](UpdatePartitionCountRequestData.md) | The number of partitions to increase the partition count to. | 
+
+### Return type
+
+[**TopicData**](TopicData.md)
+
+### Authorization
+
+[api-key](../README.md#api-key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json, text/plain, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
