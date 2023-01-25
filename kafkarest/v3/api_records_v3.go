@@ -100,10 +100,10 @@ asynchronously send back a delivery report, in the same order. Records are
 streamed to and from the server as Concatenated JSON. Errors are reported per
 record. The HTTP status code will be HTTP 200 OK as long as the connection is successfully established.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param topicName The topic name.
-	@return ApiProduceRecordsRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param topicName The topic name.
+ @return ApiProduceRecordsRequest
 */
 func (a *RecordsV3ApiService) ProduceRecords(ctx _context.Context, clusterId string, topicName string) ApiProduceRecordsRequest {
 	return ApiProduceRecordsRequest{
@@ -115,8 +115,7 @@ func (a *RecordsV3ApiService) ProduceRecords(ctx _context.Context, clusterId str
 }
 
 // Execute executes the request
-//
-//	@return ProduceResponse
+//  @return ProduceResponse
 func (a *RecordsV3ApiService) ProduceRecordsExecute(r ApiProduceRecordsRequest) (ProduceResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost

@@ -39,6 +39,7 @@ type CreateTopicRequestData struct {
 	PartitionsCount   *int32                           `json:"partitions_count,omitempty"`
 	ReplicationFactor *int32                           `json:"replication_factor,omitempty"`
 	Configs           *[]CreateTopicRequestDataConfigs `json:"configs,omitempty"`
+	ValidateOnly      *bool                            `json:"validate_only,omitempty"`
 }
 
 // NewCreateTopicRequestData instantiates a new CreateTopicRequestData object
@@ -179,12 +180,45 @@ func (o *CreateTopicRequestData) SetConfigs(v []CreateTopicRequestDataConfigs) {
 	o.Configs = &v
 }
 
+// GetValidateOnly returns the ValidateOnly field value if set, zero value otherwise.
+func (o *CreateTopicRequestData) GetValidateOnly() bool {
+	if o == nil || o.ValidateOnly == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ValidateOnly
+}
+
+// GetValidateOnlyOk returns a tuple with the ValidateOnly field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateTopicRequestData) GetValidateOnlyOk() (*bool, bool) {
+	if o == nil || o.ValidateOnly == nil {
+		return nil, false
+	}
+	return o.ValidateOnly, true
+}
+
+// HasValidateOnly returns a boolean if a field has been set.
+func (o *CreateTopicRequestData) HasValidateOnly() bool {
+	if o != nil && o.ValidateOnly != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetValidateOnly gets a reference to the given bool and assigns it to the ValidateOnly field.
+func (o *CreateTopicRequestData) SetValidateOnly(v bool) {
+	o.ValidateOnly = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *CreateTopicRequestData) Redact() {
 	o.recurseRedact(&o.TopicName)
 	o.recurseRedact(o.PartitionsCount)
 	o.recurseRedact(o.ReplicationFactor)
 	o.recurseRedact(o.Configs)
+	o.recurseRedact(o.ValidateOnly)
 }
 
 func (o *CreateTopicRequestData) recurseRedact(v interface{}) {
@@ -230,6 +264,9 @@ func (o CreateTopicRequestData) MarshalJSON() ([]byte, error) {
 	}
 	if o.Configs != nil {
 		toSerialize["configs"] = o.Configs
+	}
+	if o.ValidateOnly != nil {
+		toSerialize["validate_only"] = o.ValidateOnly
 	}
 	return json.Marshal(toSerialize)
 }

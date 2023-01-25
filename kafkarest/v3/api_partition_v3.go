@@ -122,12 +122,12 @@ GetKafkaConsumerLag Get Consumer Lag
 
 Returns the consumer lag on a partition with the given `partition_id`.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param consumerGroupId The consumer group ID.
-	@param topicName The topic name.
-	@param partitionId The partition ID.
-	@return ApiGetKafkaConsumerLagRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param consumerGroupId The consumer group ID.
+ @param topicName The topic name.
+ @param partitionId The partition ID.
+ @return ApiGetKafkaConsumerLagRequest
 */
 func (a *PartitionV3ApiService) GetKafkaConsumerLag(ctx _context.Context, clusterId string, consumerGroupId string, topicName string, partitionId int32) ApiGetKafkaConsumerLagRequest {
 	return ApiGetKafkaConsumerLagRequest{
@@ -141,8 +141,7 @@ func (a *PartitionV3ApiService) GetKafkaConsumerLag(ctx _context.Context, cluste
 }
 
 // Execute executes the request
-//
-//	@return ConsumerLagData
+//  @return ConsumerLagData
 func (a *PartitionV3ApiService) GetKafkaConsumerLagExecute(r ApiGetKafkaConsumerLagRequest) (ConsumerLagData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -280,11 +279,11 @@ GetKafkaPartition Get Partition
 
 Returns the partition with the given `partition_id`.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param topicName The topic name.
-	@param partitionId The partition ID.
-	@return ApiGetKafkaPartitionRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param topicName The topic name.
+ @param partitionId The partition ID.
+ @return ApiGetKafkaPartitionRequest
 */
 func (a *PartitionV3ApiService) GetKafkaPartition(ctx _context.Context, clusterId string, topicName string, partitionId int32) ApiGetKafkaPartitionRequest {
 	return ApiGetKafkaPartitionRequest{
@@ -297,8 +296,7 @@ func (a *PartitionV3ApiService) GetKafkaPartition(ctx _context.Context, clusterI
 }
 
 // Execute executes the request
-//
-//	@return PartitionData
+//  @return PartitionData
 func (a *PartitionV3ApiService) GetKafkaPartitionExecute(r ApiGetKafkaPartitionRequest) (PartitionData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -444,10 +442,10 @@ ListKafkaPartitions List Partitions
 
 Returns the list of partitions that belong to the specified topic.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param topicName The topic name.
-	@return ApiListKafkaPartitionsRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param topicName The topic name.
+ @return ApiListKafkaPartitionsRequest
 */
 func (a *PartitionV3ApiService) ListKafkaPartitions(ctx _context.Context, clusterId string, topicName string) ApiListKafkaPartitionsRequest {
 	return ApiListKafkaPartitionsRequest{
@@ -459,8 +457,7 @@ func (a *PartitionV3ApiService) ListKafkaPartitions(ctx _context.Context, cluste
 }
 
 // Execute executes the request
-//
-//	@return PartitionDataList
+//  @return PartitionDataList
 func (a *PartitionV3ApiService) ListKafkaPartitionsExecute(r ApiListKafkaPartitionsRequest) (PartitionDataList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet

@@ -174,13 +174,13 @@ GetKafkaConsumer Get Consumer
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Returns the consumer specified by the “consumer_id“.
+Returns the consumer specified by the ``consumer_id``.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param consumerGroupId The consumer group ID.
-	@param consumerId The consumer ID.
-	@return ApiGetKafkaConsumerRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param consumerGroupId The consumer group ID.
+ @param consumerId The consumer ID.
+ @return ApiGetKafkaConsumerRequest
 */
 func (a *ConsumerGroupV3ApiService) GetKafkaConsumer(ctx _context.Context, clusterId string, consumerGroupId string, consumerId string) ApiGetKafkaConsumerRequest {
 	return ApiGetKafkaConsumerRequest{
@@ -193,8 +193,7 @@ func (a *ConsumerGroupV3ApiService) GetKafkaConsumer(ctx _context.Context, clust
 }
 
 // Execute executes the request
-//
-//	@return ConsumerData
+//  @return ConsumerData
 func (a *ConsumerGroupV3ApiService) GetKafkaConsumerExecute(r ApiGetKafkaConsumerRequest) (ConsumerData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -328,12 +327,12 @@ GetKafkaConsumerGroup Get Consumer Group
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Returns the consumer group specified by the “consumer_group_id“.
+Returns the consumer group specified by the ``consumer_group_id``.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param consumerGroupId The consumer group ID.
-	@return ApiGetKafkaConsumerGroupRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param consumerGroupId The consumer group ID.
+ @return ApiGetKafkaConsumerGroupRequest
 */
 func (a *ConsumerGroupV3ApiService) GetKafkaConsumerGroup(ctx _context.Context, clusterId string, consumerGroupId string) ApiGetKafkaConsumerGroupRequest {
 	return ApiGetKafkaConsumerGroupRequest{
@@ -345,8 +344,7 @@ func (a *ConsumerGroupV3ApiService) GetKafkaConsumerGroup(ctx _context.Context, 
 }
 
 // Execute executes the request
-//
-//	@return ConsumerGroupData
+//  @return ConsumerGroupData
 func (a *ConsumerGroupV3ApiService) GetKafkaConsumerGroupExecute(r ApiGetKafkaConsumerGroupRequest) (ConsumerGroupData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -482,10 +480,10 @@ GetKafkaConsumerGroupLagSummary Get Consumer Group Lag Summary.
 Returns the max and total lag of the consumers belonging to the
 specified consumer group.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param consumerGroupId The consumer group ID.
-	@return ApiGetKafkaConsumerGroupLagSummaryRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param consumerGroupId The consumer group ID.
+ @return ApiGetKafkaConsumerGroupLagSummaryRequest
 */
 func (a *ConsumerGroupV3ApiService) GetKafkaConsumerGroupLagSummary(ctx _context.Context, clusterId string, consumerGroupId string) ApiGetKafkaConsumerGroupLagSummaryRequest {
 	return ApiGetKafkaConsumerGroupLagSummaryRequest{
@@ -497,8 +495,7 @@ func (a *ConsumerGroupV3ApiService) GetKafkaConsumerGroupLagSummary(ctx _context
 }
 
 // Execute executes the request
-//
-//	@return ConsumerGroupLagSummaryData
+//  @return ConsumerGroupLagSummaryData
 func (a *ConsumerGroupV3ApiService) GetKafkaConsumerGroupLagSummaryExecute(r ApiGetKafkaConsumerGroupLagSummaryRequest) (ConsumerGroupLagSummaryData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -633,9 +630,9 @@ ListKafkaConsumerGroups List Consumer Groups
 Returns the list of consumer groups that belong to the specified
 Kafka cluster.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@return ApiListKafkaConsumerGroupsRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @return ApiListKafkaConsumerGroupsRequest
 */
 func (a *ConsumerGroupV3ApiService) ListKafkaConsumerGroups(ctx _context.Context, clusterId string) ApiListKafkaConsumerGroupsRequest {
 	return ApiListKafkaConsumerGroupsRequest{
@@ -646,8 +643,7 @@ func (a *ConsumerGroupV3ApiService) ListKafkaConsumerGroups(ctx _context.Context
 }
 
 // Execute executes the request
-//
-//	@return ConsumerGroupDataList
+//  @return ConsumerGroupDataList
 func (a *ConsumerGroupV3ApiService) ListKafkaConsumerGroupsExecute(r ApiListKafkaConsumerGroupsRequest) (ConsumerGroupDataList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -782,10 +778,10 @@ ListKafkaConsumerLags List Consumer Lags
 Returns a list of consumer lags of the consumers belonging to the
 specified consumer group.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param consumerGroupId The consumer group ID.
-	@return ApiListKafkaConsumerLagsRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param consumerGroupId The consumer group ID.
+ @return ApiListKafkaConsumerLagsRequest
 */
 func (a *ConsumerGroupV3ApiService) ListKafkaConsumerLags(ctx _context.Context, clusterId string, consumerGroupId string) ApiListKafkaConsumerLagsRequest {
 	return ApiListKafkaConsumerLagsRequest{
@@ -797,8 +793,7 @@ func (a *ConsumerGroupV3ApiService) ListKafkaConsumerLags(ctx _context.Context, 
 }
 
 // Execute executes the request
-//
-//	@return ConsumerLagDataList
+//  @return ConsumerLagDataList
 func (a *ConsumerGroupV3ApiService) ListKafkaConsumerLagsExecute(r ApiListKafkaConsumerLagsRequest) (ConsumerLagDataList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -934,10 +929,10 @@ ListKafkaConsumers List Consumers
 Returns a list of consumers that belong to the specified consumer
 group.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param consumerGroupId The consumer group ID.
-	@return ApiListKafkaConsumersRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param consumerGroupId The consumer group ID.
+ @return ApiListKafkaConsumersRequest
 */
 func (a *ConsumerGroupV3ApiService) ListKafkaConsumers(ctx _context.Context, clusterId string, consumerGroupId string) ApiListKafkaConsumersRequest {
 	return ApiListKafkaConsumersRequest{
@@ -949,8 +944,7 @@ func (a *ConsumerGroupV3ApiService) ListKafkaConsumers(ctx _context.Context, clu
 }
 
 // Execute executes the request
-//
-//	@return ConsumerDataList
+//  @return ConsumerDataList
 func (a *ConsumerGroupV3ApiService) ListKafkaConsumersExecute(r ApiListKafkaConsumersRequest) (ConsumerDataList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet

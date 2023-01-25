@@ -127,6 +127,7 @@ Class | Method | HTTP request | Description
 *TopicV3Api* | [**DeleteKafkaTopic**](docs/TopicV3Api.md#deletekafkatopic) | **Delete** /kafka/v3/clusters/{cluster_id}/topics/{topic_name} | Delete Topic
 *TopicV3Api* | [**GetKafkaTopic**](docs/TopicV3Api.md#getkafkatopic) | **Get** /kafka/v3/clusters/{cluster_id}/topics/{topic_name} | Get Topic
 *TopicV3Api* | [**ListKafkaTopics**](docs/TopicV3Api.md#listkafkatopics) | **Get** /kafka/v3/clusters/{cluster_id}/topics | List Topics
+*TopicV3Api* | [**UpdatePartitionCountKafkaTopic**](docs/TopicV3Api.md#updatepartitioncountkafkatopic) | **Patch** /kafka/v3/clusters/{cluster_id}/topics/{topic_name} | Update partition count
 
 
 ## Documentation For Models
@@ -269,6 +270,7 @@ Class | Method | HTTP request | Description
  - [TopicList](docs/TopicList.md)
  - [UpdateConfigRequestData](docs/UpdateConfigRequestData.md)
  - [UpdateLinkConfigRequestData](docs/UpdateLinkConfigRequestData.md)
+ - [UpdatePartitionCountRequestData](docs/UpdatePartitionCountRequestData.md)
 
 
 ## Documentation For Authorization
