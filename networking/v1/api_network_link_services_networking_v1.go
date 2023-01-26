@@ -637,6 +637,7 @@ type ApiListNetworkingV1NetworkLinkServicesRequest struct {
 	ApiService      NetworkLinkServicesNetworkingV1Api
 	environment     *string
 	specDisplayName *MultipleSearchFilter
+	statusPhase     *MultipleSearchFilter
 	specNetwork     *MultipleSearchFilter
 	pageSize        *int32
 	pageToken       *string
@@ -651,6 +652,12 @@ func (r ApiListNetworkingV1NetworkLinkServicesRequest) Environment(environment s
 // Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values.
 func (r ApiListNetworkingV1NetworkLinkServicesRequest) SpecDisplayName(specDisplayName MultipleSearchFilter) ApiListNetworkingV1NetworkLinkServicesRequest {
 	r.specDisplayName = &specDisplayName
+	return r
+}
+
+// Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1NetworkLinkServicesRequest) StatusPhase(statusPhase MultipleSearchFilter) ApiListNetworkingV1NetworkLinkServicesRequest {
+	r.statusPhase = &statusPhase
 	return r
 }
 
@@ -721,6 +728,9 @@ func (a *NetworkLinkServicesNetworkingV1ApiService) ListNetworkingV1NetworkLinkS
 
 	if r.specDisplayName != nil {
 		localVarQueryParams.Add("spec.display_name", parameterToString(*r.specDisplayName, ""))
+	}
+	if r.statusPhase != nil {
+		localVarQueryParams.Add("status.phase", parameterToString(*r.statusPhase, ""))
 	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.specNetwork != nil {

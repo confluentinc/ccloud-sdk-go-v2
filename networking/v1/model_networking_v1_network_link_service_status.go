@@ -35,6 +35,8 @@ import (
 
 // NetworkingV1NetworkLinkServiceStatus The status of the Network Link Service
 type NetworkingV1NetworkLinkServiceStatus struct {
+	// The lifecycle phase of the network link service:  READY:  network link service is ready;
+	Phase string `json:"phase"`
 	// Error code if network link service is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`
 	// Displayable error message if network link service is in a failed state
@@ -45,8 +47,9 @@ type NetworkingV1NetworkLinkServiceStatus struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1NetworkLinkServiceStatus() *NetworkingV1NetworkLinkServiceStatus {
+func NewNetworkingV1NetworkLinkServiceStatus(phase string) *NetworkingV1NetworkLinkServiceStatus {
 	this := NetworkingV1NetworkLinkServiceStatus{}
+	this.Phase = phase
 	return &this
 }
 
@@ -56,6 +59,30 @@ func NewNetworkingV1NetworkLinkServiceStatus() *NetworkingV1NetworkLinkServiceSt
 func NewNetworkingV1NetworkLinkServiceStatusWithDefaults() *NetworkingV1NetworkLinkServiceStatus {
 	this := NetworkingV1NetworkLinkServiceStatus{}
 	return &this
+}
+
+// GetPhase returns the Phase field value
+func (o *NetworkingV1NetworkLinkServiceStatus) GetPhase() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Phase
+}
+
+// GetPhaseOk returns a tuple with the Phase field value
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1NetworkLinkServiceStatus) GetPhaseOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Phase, true
+}
+
+// SetPhase sets field value
+func (o *NetworkingV1NetworkLinkServiceStatus) SetPhase(v string) {
+	o.Phase = v
 }
 
 // GetErrorCode returns the ErrorCode field value if set, zero value otherwise.
@@ -124,6 +151,7 @@ func (o *NetworkingV1NetworkLinkServiceStatus) SetErrorMessage(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1NetworkLinkServiceStatus) Redact() {
+	o.recurseRedact(&o.Phase)
 	o.recurseRedact(o.ErrorCode)
 	o.recurseRedact(o.ErrorMessage)
 }
@@ -160,6 +188,9 @@ func (o NetworkingV1NetworkLinkServiceStatus) zeroField(v interface{}) {
 
 func (o NetworkingV1NetworkLinkServiceStatus) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["phase"] = o.Phase
+	}
 	if o.ErrorCode != nil {
 		toSerialize["error_code"] = o.ErrorCode
 	}

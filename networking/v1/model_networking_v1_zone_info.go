@@ -35,7 +35,10 @@ import (
 
 // NetworkingV1ZoneInfo Cloud provider zone metadata.
 type NetworkingV1ZoneInfo struct {
-	Items []map[string]interface{}
+	// Cloud provider zone id
+	ZoneId *string `json:"zone_id,omitempty"`
+	// The IPv4 [CIDR block](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) to used for this network. Must be a `/27`. Required for VPC peering and AWS TransitGateway.
+	Cidr *string `json:"cidr,omitempty"`
 }
 
 // NewNetworkingV1ZoneInfo instantiates a new NetworkingV1ZoneInfo object
@@ -55,8 +58,74 @@ func NewNetworkingV1ZoneInfoWithDefaults() *NetworkingV1ZoneInfo {
 	return &this
 }
 
+// GetZoneId returns the ZoneId field value if set, zero value otherwise.
+func (o *NetworkingV1ZoneInfo) GetZoneId() string {
+	if o == nil || o.ZoneId == nil {
+		var ret string
+		return ret
+	}
+	return *o.ZoneId
+}
+
+// GetZoneIdOk returns a tuple with the ZoneId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1ZoneInfo) GetZoneIdOk() (*string, bool) {
+	if o == nil || o.ZoneId == nil {
+		return nil, false
+	}
+	return o.ZoneId, true
+}
+
+// HasZoneId returns a boolean if a field has been set.
+func (o *NetworkingV1ZoneInfo) HasZoneId() bool {
+	if o != nil && o.ZoneId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetZoneId gets a reference to the given string and assigns it to the ZoneId field.
+func (o *NetworkingV1ZoneInfo) SetZoneId(v string) {
+	o.ZoneId = &v
+}
+
+// GetCidr returns the Cidr field value if set, zero value otherwise.
+func (o *NetworkingV1ZoneInfo) GetCidr() string {
+	if o == nil || o.Cidr == nil {
+		var ret string
+		return ret
+	}
+	return *o.Cidr
+}
+
+// GetCidrOk returns a tuple with the Cidr field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1ZoneInfo) GetCidrOk() (*string, bool) {
+	if o == nil || o.Cidr == nil {
+		return nil, false
+	}
+	return o.Cidr, true
+}
+
+// HasCidr returns a boolean if a field has been set.
+func (o *NetworkingV1ZoneInfo) HasCidr() bool {
+	if o != nil && o.Cidr != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCidr gets a reference to the given string and assigns it to the Cidr field.
+func (o *NetworkingV1ZoneInfo) SetCidr(v string) {
+	o.Cidr = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1ZoneInfo) Redact() {
+	o.recurseRedact(o.ZoneId)
+	o.recurseRedact(o.Cidr)
 }
 
 func (o *NetworkingV1ZoneInfo) recurseRedact(v interface{}) {
@@ -90,15 +159,14 @@ func (o NetworkingV1ZoneInfo) zeroField(v interface{}) {
 }
 
 func (o NetworkingV1ZoneInfo) MarshalJSON() ([]byte, error) {
-	toSerialize := make([]interface{}, len(o.Items))
-	for i, item := range o.Items {
-		toSerialize[i] = item
+	toSerialize := map[string]interface{}{}
+	if o.ZoneId != nil {
+		toSerialize["zone_id"] = o.ZoneId
+	}
+	if o.Cidr != nil {
+		toSerialize["cidr"] = o.Cidr
 	}
 	return json.Marshal(toSerialize)
-}
-
-func (o *NetworkingV1ZoneInfo) UnmarshalJSON(bytes []byte) (err error) {
-	return json.Unmarshal(bytes, &o.Items)
 }
 
 type NullableNetworkingV1ZoneInfo struct {

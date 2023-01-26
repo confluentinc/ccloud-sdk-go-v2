@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 
 ## ListNetworkingV1NetworkLinkServices
 
-> NetworkingV1NetworkLinkServiceList ListNetworkingV1NetworkLinkServices(ctx).Environment(environment).SpecDisplayName(specDisplayName).SpecNetwork(specNetwork).PageSize(pageSize).PageToken(pageToken).Execute()
+> NetworkingV1NetworkLinkServiceList ListNetworkingV1NetworkLinkServices(ctx).Environment(environment).SpecDisplayName(specDisplayName).StatusPhase(statusPhase).SpecNetwork(specNetwork).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Network Link Services
 
@@ -243,13 +243,14 @@ import (
 func main() {
     environment := "env-00000" // string | Filter the results by exact match for environment.
     specDisplayName := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. (optional)
-    specNetwork := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values. (optional)
+    statusPhase := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values. (optional)
+    specNetwork :=  // MultipleSearchFilter | Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.NetworkLinkServicesNetworkingV1Api.ListNetworkingV1NetworkLinkServices(context.Background()).Environment(environment).SpecDisplayName(specDisplayName).SpecNetwork(specNetwork).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.NetworkLinkServicesNetworkingV1Api.ListNetworkingV1NetworkLinkServices(context.Background()).Environment(environment).SpecDisplayName(specDisplayName).StatusPhase(statusPhase).SpecNetwork(specNetwork).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `NetworkLinkServicesNetworkingV1Api.ListNetworkingV1NetworkLinkServices``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -272,6 +273,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **environment** | **string** | Filter the results by exact match for environment. | 
  **specDisplayName** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. | 
+ **statusPhase** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values. | 
  **specNetwork** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 

@@ -6525,6 +6525,17 @@ paths:
         schema:
           $ref: '#/components/schemas/MultipleSearchFilter'
         style: form
+      - description: Filter the results by exact match for status.phase. Pass multiple
+          times to see results matching any of the values.
+        example:
+        - READY
+        explode: true
+        in: query
+        name: status.phase
+        required: false
+        schema:
+          $ref: '#/components/schemas/MultipleSearchFilter'
+        style: form
       - description: Filter the results by exact match for environment.
         example: env-00000
         explode: true
@@ -6714,14 +6725,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/network-link-services?spec.display_name=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/networking/v1/network-link-services?spec.display_name=SOME_ARRAY_VALUE&status.phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/network-link-services?spec.display_name=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/networking/v1/network-link-services?spec.display_name=SOME_ARRAY_VALUE&status.phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -6729,7 +6740,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/network-link-services?spec.display_name=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/network-link-services?spec.display_name=SOME_ARRAY_VALUE&status.phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -6742,7 +6753,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/network-link-services?spec.display_name=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/networking/v1/network-link-services?spec.display_name=SOME_ARRAY_VALUE&status.phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -6756,7 +6767,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/network-link-services?spec.display_name=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/networking/v1/network-link-services?spec.display_name=SOME_ARRAY_VALUE&status.phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -6781,7 +6792,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/network-link-services?spec.display_name=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/network-link-services?spec.display_name=SOME_ARRAY_VALUE&status.phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -6790,7 +6801,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/network-link-services?spec.display_name=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/network-link-services?spec.display_name=SOME_ARRAY_VALUE&status.phase=SOME_ARRAY_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -6841,6 +6852,7 @@ paths:
                       type: object
                   required:
                   - spec
+                  - status
                   type: object
                 - properties:
                     spec:
@@ -7461,6 +7473,7 @@ paths:
                   - id
                   - kind
                   - spec
+                  - status
                   type: object
                 - properties:
                     spec:
@@ -7749,6 +7762,7 @@ paths:
                   - id
                   - kind
                   - spec
+                  - status
                   type: object
                 - properties:
                     spec:
@@ -10892,6 +10906,16 @@ components:
     networking.v1.NetworkLinkServiceStatus:
       description: The status of the Network Link Service
       properties:
+        phase:
+          description: |
+            The lifecycle phase of the network link service:
+
+            READY:  network link service is ready;
+          example: READY
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - READY
         error_code:
           description: |
             Error code if network link service is in a failed state.
@@ -10904,6 +10928,8 @@ components:
           readOnly: true
           type: string
       readOnly: true
+      required:
+      - phase
       type: object
     networking.v1.NetworkLinkEndpoint:
       description: |-
@@ -10990,6 +11016,13 @@ components:
           type: string
         error_message:
           description: Displayable error message if network link is in a failed state
+          readOnly: true
+          type: string
+        expires_at:
+          description: The date and time when the request expires if it is not accepted
+            by the target network admin.
+          example: 2006-01-02T15:04:05-07:00
+          format: date-time
           readOnly: true
           type: string
       readOnly: true
@@ -11490,23 +11523,27 @@ components:
       title: Network Link Service
       type: object
     networking.v1.ZonesInfo:
-      description: Cloud provider zone metadata.
+      description: Cloud provider zones metadata.
       items:
-        properties:
-          zone_id:
-            description: Cloud provider zone id
-            example: use1-az3
-            type: string
-          cidr:
-            description: |
-              The IPv4 [CIDR block](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) to used for this network.
-              Must be a `/27`. Required for VPC peering and AWS TransitGateway.
-            example: 10.20.0.0/27
-            type: string
+        $ref: '#/components/schemas/networking.v1.ZoneInfo'
       maxItems: 3
       minItems: 3
       type: array
       uniqueItems: true
+    networking.v1.ZoneInfo:
+      description: Cloud provider zone metadata.
+      properties:
+        zone_id:
+          description: Cloud provider zone id
+          example: use1-az3
+          type: string
+        cidr:
+          description: |
+            The IPv4 [CIDR block](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) to used for this network.
+            Must be a `/27`. Required for VPC peering and AWS TransitGateway.
+          example: 10.20.0.0/27
+          type: string
+      type: object
     MultipleSearchFilter:
       description: Filter a collection by a string search for one or more values
       items:
@@ -12047,6 +12084,7 @@ components:
               - id
               - metadata
               - spec
+              - status
               type: object
           type: array
           uniqueItems: true

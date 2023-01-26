@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Phase** | **string** | The lifecycle phase of the network link endpoint:   PROVISIONING: network link endpoint provisioning is in progress;   PENDING_ACCEPT: network link endpoint request is pending acceptance by the the owner of the target;   READY:  network link endpoint is ready;   FAILED: network link endpoint is in a failed state;   DEPROVISIONING: network link endpoint deprovisioning is in progress;   EXPIRED: network link endpoint request is expired, can only be deleted;   DISCONNECTED: network link is in a disconnected state, target owner has removed the permissions;  | [readonly] 
 **ErrorCode** | Pointer to **string** | Error code if network link is in a failed state. May be used for programmatic error checking. | [optional] [readonly] 
 **ErrorMessage** | Pointer to **string** | Displayable error message if network link is in a failed state | [optional] [readonly] 
+**ExpiresAt** | Pointer to **time.Time** | The date and time when the request expires if it is not accepted by the target network admin. | [optional] [readonly] 
 
 ## Methods
 
@@ -96,6 +97,31 @@ SetErrorMessage sets ErrorMessage field to given value.
 `func (o *NetworkingV1NetworkLinkEndpointStatus) HasErrorMessage() bool`
 
 HasErrorMessage returns a boolean if a field has been set.
+
+### GetExpiresAt
+
+`func (o *NetworkingV1NetworkLinkEndpointStatus) GetExpiresAt() time.Time`
+
+GetExpiresAt returns the ExpiresAt field if non-nil, zero value otherwise.
+
+### GetExpiresAtOk
+
+`func (o *NetworkingV1NetworkLinkEndpointStatus) GetExpiresAtOk() (*time.Time, bool)`
+
+GetExpiresAtOk returns a tuple with the ExpiresAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpiresAt
+
+`func (o *NetworkingV1NetworkLinkEndpointStatus) SetExpiresAt(v time.Time)`
+
+SetExpiresAt sets ExpiresAt field to given value.
+
+### HasExpiresAt
+
+`func (o *NetworkingV1NetworkLinkEndpointStatus) HasExpiresAt() bool`
+
+HasExpiresAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

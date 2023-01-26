@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Phase** | **string** | The lifecycle phase of the network link service:  READY:  network link service is ready;  | [readonly] 
 **ErrorCode** | Pointer to **string** | Error code if network link service is in a failed state. May be used for programmatic error checking.  | [optional] [readonly] 
 **ErrorMessage** | Pointer to **string** | Displayable error message if network link service is in a failed state | [optional] [readonly] 
 
@@ -11,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewNetworkingV1NetworkLinkServiceStatus
 
-`func NewNetworkingV1NetworkLinkServiceStatus() *NetworkingV1NetworkLinkServiceStatus`
+`func NewNetworkingV1NetworkLinkServiceStatus(phase string, ) *NetworkingV1NetworkLinkServiceStatus`
 
 NewNetworkingV1NetworkLinkServiceStatus instantiates a new NetworkingV1NetworkLinkServiceStatus object
 This constructor will assign default values to properties that have it defined,
@@ -25,6 +26,26 @@ will change when the set of required properties is changed
 NewNetworkingV1NetworkLinkServiceStatusWithDefaults instantiates a new NetworkingV1NetworkLinkServiceStatus object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetPhase
+
+`func (o *NetworkingV1NetworkLinkServiceStatus) GetPhase() string`
+
+GetPhase returns the Phase field if non-nil, zero value otherwise.
+
+### GetPhaseOk
+
+`func (o *NetworkingV1NetworkLinkServiceStatus) GetPhaseOk() (*string, bool)`
+
+GetPhaseOk returns a tuple with the Phase field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPhase
+
+`func (o *NetworkingV1NetworkLinkServiceStatus) SetPhase(v string)`
+
+SetPhase sets Phase field to given value.
+
 
 ### GetErrorCode
 

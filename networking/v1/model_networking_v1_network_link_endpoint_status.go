@@ -27,6 +27,7 @@ package v1
 
 import (
 	"encoding/json"
+	"time"
 )
 
 import (
@@ -41,6 +42,8 @@ type NetworkingV1NetworkLinkEndpointStatus struct {
 	ErrorCode *string `json:"error_code,omitempty"`
 	// Displayable error message if network link is in a failed state
 	ErrorMessage *string `json:"error_message,omitempty"`
+	// The date and time when the request expires if it is not accepted by the target network admin.
+	ExpiresAt *time.Time `json:"expires_at,omitempty"`
 }
 
 // NewNetworkingV1NetworkLinkEndpointStatus instantiates a new NetworkingV1NetworkLinkEndpointStatus object
@@ -149,11 +152,44 @@ func (o *NetworkingV1NetworkLinkEndpointStatus) SetErrorMessage(v string) {
 	o.ErrorMessage = &v
 }
 
+// GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise.
+func (o *NetworkingV1NetworkLinkEndpointStatus) GetExpiresAt() time.Time {
+	if o == nil || o.ExpiresAt == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.ExpiresAt
+}
+
+// GetExpiresAtOk returns a tuple with the ExpiresAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1NetworkLinkEndpointStatus) GetExpiresAtOk() (*time.Time, bool) {
+	if o == nil || o.ExpiresAt == nil {
+		return nil, false
+	}
+	return o.ExpiresAt, true
+}
+
+// HasExpiresAt returns a boolean if a field has been set.
+func (o *NetworkingV1NetworkLinkEndpointStatus) HasExpiresAt() bool {
+	if o != nil && o.ExpiresAt != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetExpiresAt gets a reference to the given time.Time and assigns it to the ExpiresAt field.
+func (o *NetworkingV1NetworkLinkEndpointStatus) SetExpiresAt(v time.Time) {
+	o.ExpiresAt = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1NetworkLinkEndpointStatus) Redact() {
 	o.recurseRedact(&o.Phase)
 	o.recurseRedact(o.ErrorCode)
 	o.recurseRedact(o.ErrorMessage)
+	o.recurseRedact(o.ExpiresAt)
 }
 
 func (o *NetworkingV1NetworkLinkEndpointStatus) recurseRedact(v interface{}) {
@@ -196,6 +232,9 @@ func (o NetworkingV1NetworkLinkEndpointStatus) MarshalJSON() ([]byte, error) {
 	}
 	if o.ErrorMessage != nil {
 		toSerialize["error_message"] = o.ErrorMessage
+	}
+	if o.ExpiresAt != nil {
+		toSerialize["expires_at"] = o.ExpiresAt
 	}
 	return json.Marshal(toSerialize)
 }
