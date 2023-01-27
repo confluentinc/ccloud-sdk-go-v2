@@ -1,0 +1,3081 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: data-governance@confluent.io
+    name: Data Governance Team
+    url: https://confluent.slack.com/app_redirect?channel=data-governance-eng
+  description: REST API for the Data Catalog
+  title: Confluent Data Catalog
+  version: 1.0.0
+  x-api-id: 863e0284-cbae-44de-86c7-e0ccf50578d1
+  x-api-group: v1
+  x-audience: external-public
+  x-tag-group: Catalog API (%s)
+servers:
+- description: Confluent Cloud Schema Registry Endpoint. For example https://psrc-00000.region.provider.confluent.cloud
+  url: https://psrc-00000.region.provider.confluent.cloud
+tags:
+- description: |-
+    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+    The API allows you to create, retrieve, update, and delete catalog entities.
+
+    Related guide: [Catalog API Documentation](https://docs.confluent.io/cloud/current/stream-governance/stream-catalog.html#catalog-api-documentation).
+  name: Entity (v1)
+- description: |-
+    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+    The API allows you to search for entities.
+
+    Related guide: [Catalog API Documentation](https://docs.confluent.io/cloud/current/stream-governance/stream-catalog.html#catalog-api-documentation).
+  name: Search (v1)
+- description: |-
+    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+    The API allows you to create, retrieve, update, and delete catalog types such as tag definitions.
+
+    Related guide: [Catalog API Documentation](https://docs.confluent.io/cloud/current/stream-governance/stream-catalog.html#catalog-api-documentation).
+  name: Types (v1)
+paths:
+  /catalog/v1/entity/tags:
+    post:
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Bulk API to create multiple tags.
+      operationId: createTags
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Tag'
+              type: array
+        description: The tags
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagResponse'
+                type: array
+          description: The tags. Errored tags will have an additional error property.
+        "400":
+          description: Bad Request
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Bulk Create Tags
+      tags:
+      - Entity (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags \
+            --header 'content-type: application/json' \
+            --data '[{"typeName":"string","attributes":{"property1":{},"property2":{}},"entityGuid":"string","entityStatus":"ACTIVE","propagate":true,"validityPeriods":[{"startTime":"string","endTime":"string","timeZone":"string"}],"removePropagationsOnEntityDelete":true,"entityType":"string","entityName":"string"}]'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]");
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags")
+            .post(body)
+            .addHeader("content-type", "application/json")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags\"\
+          \n\n\tpayload := strings.NewReader(\"[{\\\"typeName\\\":\\\"string\\\",\\\
+          \"attributes\\\":{\\\"property1\\\":{},\\\"property2\\\":{}},\\\"entityGuid\\\
+          \":\\\"string\\\",\\\"entityStatus\\\":\\\"ACTIVE\\\",\\\"propagate\\\"\
+          :true,\\\"validityPeriods\\\":[{\\\"startTime\\\":\\\"string\\\",\\\"endTime\\\
+          \":\\\"string\\\",\\\"timeZone\\\":\\\"string\\\"}],\\\"removePropagationsOnEntityDelete\\\
+          \":true,\\\"entityType\\\":\\\"string\\\",\\\"entityName\\\":\\\"string\\\
+          \"}]\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          payload = "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]"
+
+          headers = { 'content-type': "application/json" }
+
+          conn.request("POST", "/catalog/v1/entity/tags", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/catalog/v1/entity/tags",
+            "headers": {
+              "content-type": "application/json"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify([
+            {
+              typeName: 'string',
+              attributes: {property1: {}, property2: {}},
+              entityGuid: 'string',
+              entityStatus: 'ACTIVE',
+              propagate: true,
+              validityPeriods: [{startTime: 'string', endTime: 'string', timeZone: 'string'}],
+              removePropagationsOnEntityDelete: true,
+              entityType: 'string',
+              entityName: 'string'
+            }
+          ]));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags");
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("content-type", "application/json");
+          request.AddParameter("application/json", "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+    put:
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Bulk API to update multiple tags.
+      operationId: updateTags
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Tag'
+              type: array
+        description: The tags
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagResponse'
+                type: array
+          description: The tags. Errored tags will have an additional error property.
+        "400":
+          description: Bad Request
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Bulk Update Tags
+      tags:
+      - Entity (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request PUT \
+            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags \
+            --header 'content-type: application/json' \
+            --data '[{"typeName":"string","attributes":{"property1":{},"property2":{}},"entityGuid":"string","entityStatus":"ACTIVE","propagate":true,"validityPeriods":[{"startTime":"string","endTime":"string","timeZone":"string"}],"removePropagationsOnEntityDelete":true,"entityType":"string","entityName":"string"}]'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]");
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags")
+            .put(body)
+            .addHeader("content-type", "application/json")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags\"\
+          \n\n\tpayload := strings.NewReader(\"[{\\\"typeName\\\":\\\"string\\\",\\\
+          \"attributes\\\":{\\\"property1\\\":{},\\\"property2\\\":{}},\\\"entityGuid\\\
+          \":\\\"string\\\",\\\"entityStatus\\\":\\\"ACTIVE\\\",\\\"propagate\\\"\
+          :true,\\\"validityPeriods\\\":[{\\\"startTime\\\":\\\"string\\\",\\\"endTime\\\
+          \":\\\"string\\\",\\\"timeZone\\\":\\\"string\\\"}],\\\"removePropagationsOnEntityDelete\\\
+          \":true,\\\"entityType\\\":\\\"string\\\",\\\"entityName\\\":\\\"string\\\
+          \"}]\")\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          payload = "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]"
+
+          headers = { 'content-type': "application/json" }
+
+          conn.request("PUT", "/catalog/v1/entity/tags", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "PUT",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/catalog/v1/entity/tags",
+            "headers": {
+              "content-type": "application/json"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify([
+            {
+              typeName: 'string',
+              attributes: {property1: {}, property2: {}},
+              entityGuid: 'string',
+              entityStatus: 'ACTIVE',
+              propagate: true,
+              validityPeriods: [{startTime: 'string', endTime: 'string', timeZone: 'string'}],
+              removePropagationsOnEntityDelete: true,
+              entityType: 'string',
+              entityName: 'string'
+            }
+          ]));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PUT");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags");
+          var request = new RestRequest(Method.PUT);
+          request.AddHeader("content-type", "application/json");
+          request.AddParameter("application/json", "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+  /catalog/v1/entity/type/{typeName}/name/{qualifiedName}:
+    get:
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Fetch complete definition of an entity given its type and unique attribute.
+      operationId: getByUniqueAttributes
+      parameters:
+      - description: The type of the entity
+        explode: false
+        in: path
+        name: typeName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The qualified name of the entity
+        explode: false
+        in: path
+        name: qualifiedName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Whether to populate on header and schema attributes
+        explode: true
+        in: query
+        name: minExtInfo
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - description: Whether to ignore relationships
+        explode: true
+        in: query
+        name: ignoreRelationships
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityWithExtInfo'
+          description: The entity
+        "400":
+          description: Bad Request
+        "404":
+          description: Entity not found
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Read an Entity
+      tags:
+      - Entity (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}?minExtInfo=SOME_BOOLEAN_VALUE&ignoreRelationships=SOME_BOOLEAN_VALUE'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}?minExtInfo=SOME_BOOLEAN_VALUE&ignoreRelationships=SOME_BOOLEAN_VALUE")
+            .get()
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}?minExtInfo=SOME_BOOLEAN_VALUE&ignoreRelationships=SOME_BOOLEAN_VALUE\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          conn.request("GET", "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}?minExtInfo=SOME_BOOLEAN_VALUE&ignoreRelationships=SOME_BOOLEAN_VALUE")
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}?minExtInfo=SOME_BOOLEAN_VALUE&ignoreRelationships=SOME_BOOLEAN_VALUE",
+            "headers": {}
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}?minExtInfo=SOME_BOOLEAN_VALUE&ignoreRelationships=SOME_BOOLEAN_VALUE");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}?minExtInfo=SOME_BOOLEAN_VALUE&ignoreRelationships=SOME_BOOLEAN_VALUE");
+          var request = new RestRequest(Method.GET);
+          IRestResponse response = client.Execute(request);
+  /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags:
+    get:
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Gets the list of tags for a given entity represented by a qualified name.
+      operationId: getTags
+      parameters:
+      - description: The type of the entity
+        explode: false
+        in: path
+        name: typeName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The qualified name of the entity
+        explode: false
+        in: path
+        name: qualifiedName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagResponse'
+                type: array
+          description: The tags
+        "400":
+          description: Bad Request
+        "404":
+          description: Entity not found
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Read Tags for an Entity
+      tags:
+      - Entity (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags")
+            .get()
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          conn.request("GET", "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags")
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags",
+            "headers": {}
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags");
+          var request = new RestRequest(Method.GET);
+          IRestResponse response = client.Execute(request);
+  /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName}:
+    delete:
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Delete a tag for an entity.
+      operationId: deleteTag
+      parameters:
+      - description: The type of the entity
+        explode: false
+        in: path
+        name: typeName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The qualified name of the entity
+        explode: false
+        in: path
+        name: qualifiedName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The name of the tag
+        explode: false
+        in: path
+        name: tagName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Delete a Tag for an Entity
+      tags:
+      - Entity (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request DELETE \
+            --url 'https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName}")
+            .delete(null)
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName}\"\
+          \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          conn.request("DELETE", "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName}")
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "DELETE",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName}",
+            "headers": {}
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName}");
+          var request = new RestRequest(Method.DELETE);
+          IRestResponse response = client.Execute(request);
+  /catalog/v1/search/attribute:
+    get:
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Retrieve data for the specified attribute search query.
+      operationId: searchUsingAttribute
+      parameters:
+      - description: Limit the result to only entities of specified types
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: One of more additional attributes to return in the response
+        explode: true
+        in: query
+        name: attr
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: The attribute to search
+        explode: true
+        in: query
+        name: attrName
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: The prefix for the attribute value to search
+        explode: true
+        in: query
+        name: attrValuePrefix
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Limit the result to only entities tagged with the given tag
+        explode: true
+        in: query
+        name: tag
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: An attribute to sort by
+        explode: true
+        in: query
+        name: sortBy
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Sort order, either ASCENDING (default) or DESCENDING
+        explode: true
+        in: query
+        name: sortOrder
+        required: false
+        schema:
+          enum:
+          - ASCENDING
+          - DESCENDING
+          type: string
+        style: form
+      - description: Whether to include deleted entities
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Limit the result set to only include the specified number of
+          entries
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Start offset of the result set (useful for pagination)
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResult'
+          description: On successful search query with some results, might return
+            an empty list if execution succeeded without any results
+        "400":
+          description: Invalid wildcard or query parameters
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Search by Attribute
+      tags:
+      - Search (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://psrc-00000.region.provider.confluent.cloud/catalog/v1/search/attribute?type=SOME_ARRAY_VALUE&attr=SOME_ARRAY_VALUE&attrName=SOME_ARRAY_VALUE&attrValuePrefix=SOME_ARRAY_VALUE&tag=SOME_STRING_VALUE&sortBy=SOME_STRING_VALUE&sortOrder=SOME_STRING_VALUE&deleted=SOME_BOOLEAN_VALUE&limit=SOME_INTEGER_VALUE&offset=SOME_INTEGER_VALUE'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/search/attribute?type=SOME_ARRAY_VALUE&attr=SOME_ARRAY_VALUE&attrName=SOME_ARRAY_VALUE&attrValuePrefix=SOME_ARRAY_VALUE&tag=SOME_STRING_VALUE&sortBy=SOME_STRING_VALUE&sortOrder=SOME_STRING_VALUE&deleted=SOME_BOOLEAN_VALUE&limit=SOME_INTEGER_VALUE&offset=SOME_INTEGER_VALUE")
+            .get()
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/search/attribute?type=SOME_ARRAY_VALUE&attr=SOME_ARRAY_VALUE&attrName=SOME_ARRAY_VALUE&attrValuePrefix=SOME_ARRAY_VALUE&tag=SOME_STRING_VALUE&sortBy=SOME_STRING_VALUE&sortOrder=SOME_STRING_VALUE&deleted=SOME_BOOLEAN_VALUE&limit=SOME_INTEGER_VALUE&offset=SOME_INTEGER_VALUE\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          conn.request("GET", "/catalog/v1/search/attribute?type=SOME_ARRAY_VALUE&attr=SOME_ARRAY_VALUE&attrName=SOME_ARRAY_VALUE&attrValuePrefix=SOME_ARRAY_VALUE&tag=SOME_STRING_VALUE&sortBy=SOME_STRING_VALUE&sortOrder=SOME_STRING_VALUE&deleted=SOME_BOOLEAN_VALUE&limit=SOME_INTEGER_VALUE&offset=SOME_INTEGER_VALUE")
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/catalog/v1/search/attribute?type=SOME_ARRAY_VALUE&attr=SOME_ARRAY_VALUE&attrName=SOME_ARRAY_VALUE&attrValuePrefix=SOME_ARRAY_VALUE&tag=SOME_STRING_VALUE&sortBy=SOME_STRING_VALUE&sortOrder=SOME_STRING_VALUE&deleted=SOME_BOOLEAN_VALUE&limit=SOME_INTEGER_VALUE&offset=SOME_INTEGER_VALUE",
+            "headers": {}
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/search/attribute?type=SOME_ARRAY_VALUE&attr=SOME_ARRAY_VALUE&attrName=SOME_ARRAY_VALUE&attrValuePrefix=SOME_ARRAY_VALUE&tag=SOME_STRING_VALUE&sortBy=SOME_STRING_VALUE&sortOrder=SOME_STRING_VALUE&deleted=SOME_BOOLEAN_VALUE&limit=SOME_INTEGER_VALUE&offset=SOME_INTEGER_VALUE");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/search/attribute?type=SOME_ARRAY_VALUE&attr=SOME_ARRAY_VALUE&attrName=SOME_ARRAY_VALUE&attrValuePrefix=SOME_ARRAY_VALUE&tag=SOME_STRING_VALUE&sortBy=SOME_STRING_VALUE&sortOrder=SOME_STRING_VALUE&deleted=SOME_BOOLEAN_VALUE&limit=SOME_INTEGER_VALUE&offset=SOME_INTEGER_VALUE");
+          var request = new RestRequest(Method.GET);
+          IRestResponse response = client.Execute(request);
+  /catalog/v1/search/basic:
+    get:
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Retrieve data for the specified fulltext query.
+      operationId: searchUsingBasic
+      parameters:
+      - description: The full-text query
+        explode: true
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Limit the result to only entities of specified types
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: One of more additional attributes to return in the response
+        explode: true
+        in: query
+        name: attr
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Limit the result to only entities tagged with the given tag
+        explode: true
+        in: query
+        name: tag
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: An attribute to sort by
+        explode: true
+        in: query
+        name: sortBy
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Sort order, either ASCENDING (default) or DESCENDING
+        explode: true
+        in: query
+        name: sortOrder
+        required: false
+        schema:
+          enum:
+          - ASCENDING
+          - DESCENDING
+          type: string
+        style: form
+      - description: Whether to include deleted entities
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Limit the result set to only include the specified number of
+          entries
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Start offset of the result set (useful for pagination)
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResult'
+          description: On successful fulltext query with some results, might return
+            an empty list if execution succeeded without any results
+        "400":
+          description: Invalid fulltext or query parameters
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Search by Fulltext Query
+      tags:
+      - Search (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://psrc-00000.region.provider.confluent.cloud/catalog/v1/search/basic?query=SOME_STRING_VALUE&type=SOME_ARRAY_VALUE&attr=SOME_ARRAY_VALUE&tag=SOME_STRING_VALUE&sortBy=SOME_STRING_VALUE&sortOrder=SOME_STRING_VALUE&deleted=SOME_BOOLEAN_VALUE&limit=SOME_INTEGER_VALUE&offset=SOME_INTEGER_VALUE'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/search/basic?query=SOME_STRING_VALUE&type=SOME_ARRAY_VALUE&attr=SOME_ARRAY_VALUE&tag=SOME_STRING_VALUE&sortBy=SOME_STRING_VALUE&sortOrder=SOME_STRING_VALUE&deleted=SOME_BOOLEAN_VALUE&limit=SOME_INTEGER_VALUE&offset=SOME_INTEGER_VALUE")
+            .get()
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/search/basic?query=SOME_STRING_VALUE&type=SOME_ARRAY_VALUE&attr=SOME_ARRAY_VALUE&tag=SOME_STRING_VALUE&sortBy=SOME_STRING_VALUE&sortOrder=SOME_STRING_VALUE&deleted=SOME_BOOLEAN_VALUE&limit=SOME_INTEGER_VALUE&offset=SOME_INTEGER_VALUE\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          conn.request("GET", "/catalog/v1/search/basic?query=SOME_STRING_VALUE&type=SOME_ARRAY_VALUE&attr=SOME_ARRAY_VALUE&tag=SOME_STRING_VALUE&sortBy=SOME_STRING_VALUE&sortOrder=SOME_STRING_VALUE&deleted=SOME_BOOLEAN_VALUE&limit=SOME_INTEGER_VALUE&offset=SOME_INTEGER_VALUE")
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/catalog/v1/search/basic?query=SOME_STRING_VALUE&type=SOME_ARRAY_VALUE&attr=SOME_ARRAY_VALUE&tag=SOME_STRING_VALUE&sortBy=SOME_STRING_VALUE&sortOrder=SOME_STRING_VALUE&deleted=SOME_BOOLEAN_VALUE&limit=SOME_INTEGER_VALUE&offset=SOME_INTEGER_VALUE",
+            "headers": {}
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/search/basic?query=SOME_STRING_VALUE&type=SOME_ARRAY_VALUE&attr=SOME_ARRAY_VALUE&tag=SOME_STRING_VALUE&sortBy=SOME_STRING_VALUE&sortOrder=SOME_STRING_VALUE&deleted=SOME_BOOLEAN_VALUE&limit=SOME_INTEGER_VALUE&offset=SOME_INTEGER_VALUE");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/search/basic?query=SOME_STRING_VALUE&type=SOME_ARRAY_VALUE&attr=SOME_ARRAY_VALUE&tag=SOME_STRING_VALUE&sortBy=SOME_STRING_VALUE&sortOrder=SOME_STRING_VALUE&deleted=SOME_BOOLEAN_VALUE&limit=SOME_INTEGER_VALUE&offset=SOME_INTEGER_VALUE");
+          var request = new RestRequest(Method.GET);
+          IRestResponse response = client.Execute(request);
+  /catalog/v1/types/tagdefs:
+    get:
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Bulk retrieval API for retrieving tag definitions.
+      operationId: getAllTagDefs
+      parameters:
+      - description: The prefix of a tag definition name
+        explode: true
+        in: query
+        name: prefix
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagDefResponse'
+                type: array
+          description: The tag definitions
+        "400":
+          description: Bad Request
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Bulk Read Tag Definitions
+      tags:
+      - Types (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs?prefix=SOME_STRING_VALUE'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs?prefix=SOME_STRING_VALUE")
+            .get()
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs?prefix=SOME_STRING_VALUE\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          conn.request("GET", "/catalog/v1/types/tagdefs?prefix=SOME_STRING_VALUE")
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/catalog/v1/types/tagdefs?prefix=SOME_STRING_VALUE",
+            "headers": {}
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs?prefix=SOME_STRING_VALUE");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs?prefix=SOME_STRING_VALUE");
+          var request = new RestRequest(Method.GET);
+          IRestResponse response = client.Execute(request);
+    post:
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Bulk create API for tag definitions.
+      operationId: createTagDefs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/TagDef'
+              type: array
+        description: The tag definitions to create
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagDefResponse'
+                type: array
+          description: The tag definitions. Errored tag definitions will have an additional
+            error property.
+        "400":
+          description: Bad Request
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Bulk Create Tag Definitions
+      tags:
+      - Types (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs \
+            --header 'content-type: application/json' \
+            --data '[{"category":"PRIMITIVE","guid":"string","createdBy":"string","updatedBy":"string","createTime":0,"updateTime":0,"version":0,"name":"string","description":"string","typeVersion":"string","serviceType":"string","options":{"property1":"string","property2":"string"},"attributeDefs":[{"name":"string","typeName":"string","isOptional":true,"cardinality":"SINGLE","valuesMinCount":0,"valuesMaxCount":0,"isUnique":true,"isIndexable":true,"includeInNotification":true,"defaultValue":"string","description":"string","searchWeight":0,"indexType":"DEFAULT","constraints":[{"type":"string","params":{"property1":{},"property2":{}}}],"options":{"property1":"string","property2":"string"},"displayName":"string"}],"superTypes":["string"],"entityTypes":["string"],"subTypes":["string"]}]'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]");
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs")
+            .post(body)
+            .addHeader("content-type", "application/json")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs\"\
+          \n\n\tpayload := strings.NewReader(\"[{\\\"category\\\":\\\"PRIMITIVE\\\"\
+          ,\\\"guid\\\":\\\"string\\\",\\\"createdBy\\\":\\\"string\\\",\\\"updatedBy\\\
+          \":\\\"string\\\",\\\"createTime\\\":0,\\\"updateTime\\\":0,\\\"version\\\
+          \":0,\\\"name\\\":\\\"string\\\",\\\"description\\\":\\\"string\\\",\\\"\
+          typeVersion\\\":\\\"string\\\",\\\"serviceType\\\":\\\"string\\\",\\\"options\\\
+          \":{\\\"property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\"},\\\
+          \"attributeDefs\\\":[{\\\"name\\\":\\\"string\\\",\\\"typeName\\\":\\\"\
+          string\\\",\\\"isOptional\\\":true,\\\"cardinality\\\":\\\"SINGLE\\\",\\\
+          \"valuesMinCount\\\":0,\\\"valuesMaxCount\\\":0,\\\"isUnique\\\":true,\\\
+          \"isIndexable\\\":true,\\\"includeInNotification\\\":true,\\\"defaultValue\\\
+          \":\\\"string\\\",\\\"description\\\":\\\"string\\\",\\\"searchWeight\\\"\
+          :0,\\\"indexType\\\":\\\"DEFAULT\\\",\\\"constraints\\\":[{\\\"type\\\"\
+          :\\\"string\\\",\\\"params\\\":{\\\"property1\\\":{},\\\"property2\\\":{}}}],\\\
+          \"options\\\":{\\\"property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\
+          \"},\\\"displayName\\\":\\\"string\\\"}],\\\"superTypes\\\":[\\\"string\\\
+          \"],\\\"entityTypes\\\":[\\\"string\\\"],\\\"subTypes\\\":[\\\"string\\\"\
+          ]}]\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          payload = "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]"
+
+          headers = { 'content-type': "application/json" }
+
+          conn.request("POST", "/catalog/v1/types/tagdefs", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/catalog/v1/types/tagdefs",
+            "headers": {
+              "content-type": "application/json"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify([
+            {
+              category: 'PRIMITIVE',
+              guid: 'string',
+              createdBy: 'string',
+              updatedBy: 'string',
+              createTime: 0,
+              updateTime: 0,
+              version: 0,
+              name: 'string',
+              description: 'string',
+              typeVersion: 'string',
+              serviceType: 'string',
+              options: {property1: 'string', property2: 'string'},
+              attributeDefs: [
+                {
+                  name: 'string',
+                  typeName: 'string',
+                  isOptional: true,
+                  cardinality: 'SINGLE',
+                  valuesMinCount: 0,
+                  valuesMaxCount: 0,
+                  isUnique: true,
+                  isIndexable: true,
+                  includeInNotification: true,
+                  defaultValue: 'string',
+                  description: 'string',
+                  searchWeight: 0,
+                  indexType: 'DEFAULT',
+                  constraints: [{type: 'string', params: {property1: {}, property2: {}}}],
+                  options: {property1: 'string', property2: 'string'},
+                  displayName: 'string'
+                }
+              ],
+              superTypes: ['string'],
+              entityTypes: ['string'],
+              subTypes: ['string']
+            }
+          ]));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs");
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("content-type", "application/json");
+          request.AddParameter("application/json", "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+    put:
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Bulk update API for tag definitions.
+      operationId: updateTagDefs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/TagDef'
+              type: array
+        description: The tag definitions to update
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagDefResponse'
+                type: array
+          description: The tag definitions. Errored tag definitions will have an additional
+            error property.
+        "400":
+          description: Bad Request
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Bulk Update Tag Definitions
+      tags:
+      - Types (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request PUT \
+            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs \
+            --header 'content-type: application/json' \
+            --data '[{"category":"PRIMITIVE","guid":"string","createdBy":"string","updatedBy":"string","createTime":0,"updateTime":0,"version":0,"name":"string","description":"string","typeVersion":"string","serviceType":"string","options":{"property1":"string","property2":"string"},"attributeDefs":[{"name":"string","typeName":"string","isOptional":true,"cardinality":"SINGLE","valuesMinCount":0,"valuesMaxCount":0,"isUnique":true,"isIndexable":true,"includeInNotification":true,"defaultValue":"string","description":"string","searchWeight":0,"indexType":"DEFAULT","constraints":[{"type":"string","params":{"property1":{},"property2":{}}}],"options":{"property1":"string","property2":"string"},"displayName":"string"}],"superTypes":["string"],"entityTypes":["string"],"subTypes":["string"]}]'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]");
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs")
+            .put(body)
+            .addHeader("content-type", "application/json")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs\"\
+          \n\n\tpayload := strings.NewReader(\"[{\\\"category\\\":\\\"PRIMITIVE\\\"\
+          ,\\\"guid\\\":\\\"string\\\",\\\"createdBy\\\":\\\"string\\\",\\\"updatedBy\\\
+          \":\\\"string\\\",\\\"createTime\\\":0,\\\"updateTime\\\":0,\\\"version\\\
+          \":0,\\\"name\\\":\\\"string\\\",\\\"description\\\":\\\"string\\\",\\\"\
+          typeVersion\\\":\\\"string\\\",\\\"serviceType\\\":\\\"string\\\",\\\"options\\\
+          \":{\\\"property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\"},\\\
+          \"attributeDefs\\\":[{\\\"name\\\":\\\"string\\\",\\\"typeName\\\":\\\"\
+          string\\\",\\\"isOptional\\\":true,\\\"cardinality\\\":\\\"SINGLE\\\",\\\
+          \"valuesMinCount\\\":0,\\\"valuesMaxCount\\\":0,\\\"isUnique\\\":true,\\\
+          \"isIndexable\\\":true,\\\"includeInNotification\\\":true,\\\"defaultValue\\\
+          \":\\\"string\\\",\\\"description\\\":\\\"string\\\",\\\"searchWeight\\\"\
+          :0,\\\"indexType\\\":\\\"DEFAULT\\\",\\\"constraints\\\":[{\\\"type\\\"\
+          :\\\"string\\\",\\\"params\\\":{\\\"property1\\\":{},\\\"property2\\\":{}}}],\\\
+          \"options\\\":{\\\"property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\
+          \"},\\\"displayName\\\":\\\"string\\\"}],\\\"superTypes\\\":[\\\"string\\\
+          \"],\\\"entityTypes\\\":[\\\"string\\\"],\\\"subTypes\\\":[\\\"string\\\"\
+          ]}]\")\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          payload = "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]"
+
+          headers = { 'content-type': "application/json" }
+
+          conn.request("PUT", "/catalog/v1/types/tagdefs", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "PUT",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/catalog/v1/types/tagdefs",
+            "headers": {
+              "content-type": "application/json"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify([
+            {
+              category: 'PRIMITIVE',
+              guid: 'string',
+              createdBy: 'string',
+              updatedBy: 'string',
+              createTime: 0,
+              updateTime: 0,
+              version: 0,
+              name: 'string',
+              description: 'string',
+              typeVersion: 'string',
+              serviceType: 'string',
+              options: {property1: 'string', property2: 'string'},
+              attributeDefs: [
+                {
+                  name: 'string',
+                  typeName: 'string',
+                  isOptional: true,
+                  cardinality: 'SINGLE',
+                  valuesMinCount: 0,
+                  valuesMaxCount: 0,
+                  isUnique: true,
+                  isIndexable: true,
+                  includeInNotification: true,
+                  defaultValue: 'string',
+                  description: 'string',
+                  searchWeight: 0,
+                  indexType: 'DEFAULT',
+                  constraints: [{type: 'string', params: {property1: {}, property2: {}}}],
+                  options: {property1: 'string', property2: 'string'},
+                  displayName: 'string'
+                }
+              ],
+              superTypes: ['string'],
+              entityTypes: ['string'],
+              subTypes: ['string']
+            }
+          ]));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PUT");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs");
+          var request = new RestRequest(Method.PUT);
+          request.AddHeader("content-type", "application/json");
+          request.AddParameter("application/json", "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+  /catalog/v1/types/tagdefs/{tagName}:
+    delete:
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Delete API for tag definition identified by its name.
+      operationId: deleteTagDef
+      parameters:
+      - description: The name of the tag definition
+        explode: false
+        in: path
+        name: tagName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Delete Tag Definition
+      tags:
+      - Types (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request DELETE \
+            --url 'https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/{tagName}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/{tagName}")
+            .delete(null)
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/{tagName}\"\
+          \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          conn.request("DELETE", "/catalog/v1/types/tagdefs/{tagName}")
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "DELETE",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/catalog/v1/types/tagdefs/{tagName}",
+            "headers": {}
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/{tagName}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/{tagName}");
+          var request = new RestRequest(Method.DELETE);
+          IRestResponse response = client.Execute(request);
+    get:
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Get the tag definition with the given name.
+      operationId: getTagDefByName
+      parameters:
+      - description: The name of the tag definiton
+        explode: false
+        in: path
+        name: tagName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagDef'
+          description: The tag definition
+        "400":
+          description: Bad Request
+        "404":
+          description: Tag definition not found
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Read Tag Definition
+      tags:
+      - Types (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/{tagName}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/{tagName}")
+            .get()
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/{tagName}\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          conn.request("GET", "/catalog/v1/types/tagdefs/{tagName}")
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/catalog/v1/types/tagdefs/{tagName}",
+            "headers": {}
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/{tagName}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/{tagName}");
+          var request = new RestRequest(Method.GET);
+          IRestResponse response = client.Execute(request);
+components:
+  schemas:
+    Tag:
+      example:
+        removePropagationsOnEntityDelete: true
+        entityStatus: ACTIVE
+        entityType: entityType
+        entityName: entityName
+        typeName: typeName
+        entityGuid: entityGuid
+        propagate: true
+        validityPeriods:
+        - timeZone: timeZone
+          startTime: startTime
+          endTime: endTime
+        - timeZone: timeZone
+          startTime: startTime
+          endTime: endTime
+        attributes:
+          key: '{}'
+      properties:
+        typeName:
+          description: The tag name
+          type: string
+        attributes:
+          additionalProperties:
+            type: object
+          description: The tag attributes
+          type: object
+        entityGuid:
+          description: The internal entity guid
+          type: string
+        entityStatus:
+          description: The entity status
+          enum:
+          - ACTIVE
+          - DELETED
+          - PURGED
+          type: string
+        propagate:
+          description: Whether to propagate the tag
+          type: boolean
+        validityPeriods:
+          description: The validity periods
+          items:
+            $ref: '#/components/schemas/TimeBoundary'
+          type: array
+        removePropagationsOnEntityDelete:
+          description: Whether to remove propagations on entity delete
+          type: boolean
+        entityType:
+          description: The entity type
+          type: string
+        entityName:
+          description: The qualified name of the entity
+          type: string
+      type: object
+    TimeBoundary:
+      example:
+        timeZone: timeZone
+        startTime: startTime
+        endTime: endTime
+      properties:
+        startTime:
+          description: The start time of format yyyy/MM/dd HH:mm:ss
+          type: string
+        endTime:
+          description: The end time of format yyyy/MM/dd HH:mm:ss
+          type: string
+        timeZone:
+          description: The time zone (see java.util.TimeZone)
+          type: string
+      type: object
+    Classification:
+      example:
+        removePropagationsOnEntityDelete: true
+        entityStatus: ACTIVE
+        typeName: typeName
+        entityGuid: entityGuid
+        propagate: true
+        validityPeriods:
+        - timeZone: timeZone
+          startTime: startTime
+          endTime: endTime
+        - timeZone: timeZone
+          startTime: startTime
+          endTime: endTime
+        attributes:
+          key: '{}'
+      properties:
+        typeName:
+          description: The tag name
+          type: string
+        attributes:
+          additionalProperties:
+            type: object
+          description: The tag attributes
+          type: object
+        entityGuid:
+          description: The internal entity guid
+          type: string
+        entityStatus:
+          description: The entity status
+          enum:
+          - ACTIVE
+          - DELETED
+          - PURGED
+          type: string
+        propagate:
+          description: Whether to propagate the tag
+          type: boolean
+        validityPeriods:
+          description: The validity periods
+          items:
+            $ref: '#/components/schemas/TimeBoundary'
+          type: array
+        removePropagationsOnEntityDelete:
+          description: Whether to remove propagations on entity delete
+          type: boolean
+      type: object
+    Entity:
+      description: The entity
+      example:
+        relationshipAttributes:
+          key: '{}'
+        provenanceType: 0
+        updatedBy: updatedBy
+        typeName: typeName
+        updateTime: 1
+        isProxy: true
+        version: 5
+        meanings:
+        - displayText: displayText
+          expression: expression
+          relationGuid: relationGuid
+          createdBy: createdBy
+          steward: steward
+          confidence: 5
+          description: description
+          source: source
+          termGuid: termGuid
+          status: DISCOVERED
+        - displayText: displayText
+          expression: expression
+          relationGuid: relationGuid
+          createdBy: createdBy
+          steward: steward
+          confidence: 5
+          description: description
+          source: source
+          termGuid: termGuid
+          status: DISCOVERED
+        labels:
+        - labels
+        - labels
+        businessAttributes:
+          key:
+            key: '{}'
+        classifications:
+        - removePropagationsOnEntityDelete: true
+          entityStatus: ACTIVE
+          typeName: typeName
+          entityGuid: entityGuid
+          propagate: true
+          validityPeriods:
+          - timeZone: timeZone
+            startTime: startTime
+            endTime: endTime
+          - timeZone: timeZone
+            startTime: startTime
+            endTime: endTime
+          attributes:
+            key: '{}'
+        - removePropagationsOnEntityDelete: true
+          entityStatus: ACTIVE
+          typeName: typeName
+          entityGuid: entityGuid
+          propagate: true
+          validityPeriods:
+          - timeZone: timeZone
+            startTime: startTime
+            endTime: endTime
+          - timeZone: timeZone
+            startTime: startTime
+            endTime: endTime
+          attributes:
+            key: '{}'
+        proxy: true
+        createdBy: createdBy
+        createTime: 6
+        guid: guid
+        attributes:
+          key: '{}'
+        homeId: homeId
+        isIncomplete: true
+        status: ACTIVE
+        customAttributes:
+          key: customAttributes
+      properties:
+        typeName:
+          description: The type name
+          type: string
+        attributes:
+          additionalProperties:
+            type: object
+          description: The type attributes
+          type: object
+        guid:
+          description: The internal guid
+          type: string
+        homeId:
+          description: The home id
+          type: string
+        isProxy:
+          description: Whether is a proxy
+          type: boolean
+          writeOnly: true
+        isIncomplete:
+          description: Whether is incomplete
+          type: boolean
+        provenanceType:
+          description: The provenance type
+          format: int32
+          type: integer
+        status:
+          description: The status
+          enum:
+          - ACTIVE
+          - DELETED
+          - PURGED
+          type: string
+        createdBy:
+          description: The creator
+          type: string
+        updatedBy:
+          description: The updater
+          type: string
+        createTime:
+          description: The create time
+          format: int64
+          type: integer
+        updateTime:
+          description: The update time
+          format: int64
+          type: integer
+        version:
+          description: The version
+          format: int32
+          type: integer
+        relationshipAttributes:
+          additionalProperties:
+            type: object
+          description: The relationship attributes
+          type: object
+        classifications:
+          description: The classifications (tags)
+          items:
+            $ref: '#/components/schemas/Classification'
+          type: array
+        meanings:
+          description: The meanings
+          items:
+            $ref: '#/components/schemas/TermAssignmentHeader'
+          type: array
+        customAttributes:
+          additionalProperties:
+            type: string
+          description: The custom attributes
+          type: object
+        businessAttributes:
+          additionalProperties:
+            additionalProperties:
+              type: object
+            type: object
+          description: The business attributes
+          type: object
+        labels:
+          description: The labels
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        proxy:
+          description: Whether is a proxy
+          type: boolean
+      type: object
+    EntityWithExtInfo:
+      example:
+        referredEntities:
+          key:
+            relationshipAttributes:
+              key: '{}'
+            provenanceType: 0
+            updatedBy: updatedBy
+            typeName: typeName
+            updateTime: 1
+            isProxy: true
+            version: 5
+            meanings:
+            - displayText: displayText
+              expression: expression
+              relationGuid: relationGuid
+              createdBy: createdBy
+              steward: steward
+              confidence: 5
+              description: description
+              source: source
+              termGuid: termGuid
+              status: DISCOVERED
+            - displayText: displayText
+              expression: expression
+              relationGuid: relationGuid
+              createdBy: createdBy
+              steward: steward
+              confidence: 5
+              description: description
+              source: source
+              termGuid: termGuid
+              status: DISCOVERED
+            labels:
+            - labels
+            - labels
+            businessAttributes:
+              key:
+                key: '{}'
+            classifications:
+            - removePropagationsOnEntityDelete: true
+              entityStatus: ACTIVE
+              typeName: typeName
+              entityGuid: entityGuid
+              propagate: true
+              validityPeriods:
+              - timeZone: timeZone
+                startTime: startTime
+                endTime: endTime
+              - timeZone: timeZone
+                startTime: startTime
+                endTime: endTime
+              attributes:
+                key: '{}'
+            - removePropagationsOnEntityDelete: true
+              entityStatus: ACTIVE
+              typeName: typeName
+              entityGuid: entityGuid
+              propagate: true
+              validityPeriods:
+              - timeZone: timeZone
+                startTime: startTime
+                endTime: endTime
+              - timeZone: timeZone
+                startTime: startTime
+                endTime: endTime
+              attributes:
+                key: '{}'
+            proxy: true
+            createdBy: createdBy
+            createTime: 6
+            guid: guid
+            attributes:
+              key: '{}'
+            homeId: homeId
+            isIncomplete: true
+            status: ACTIVE
+            customAttributes:
+              key: customAttributes
+        entity:
+          relationshipAttributes:
+            key: '{}'
+          provenanceType: 0
+          updatedBy: updatedBy
+          typeName: typeName
+          updateTime: 1
+          isProxy: true
+          version: 5
+          meanings:
+          - displayText: displayText
+            expression: expression
+            relationGuid: relationGuid
+            createdBy: createdBy
+            steward: steward
+            confidence: 5
+            description: description
+            source: source
+            termGuid: termGuid
+            status: DISCOVERED
+          - displayText: displayText
+            expression: expression
+            relationGuid: relationGuid
+            createdBy: createdBy
+            steward: steward
+            confidence: 5
+            description: description
+            source: source
+            termGuid: termGuid
+            status: DISCOVERED
+          labels:
+          - labels
+          - labels
+          businessAttributes:
+            key:
+              key: '{}'
+          classifications:
+          - removePropagationsOnEntityDelete: true
+            entityStatus: ACTIVE
+            typeName: typeName
+            entityGuid: entityGuid
+            propagate: true
+            validityPeriods:
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            attributes:
+              key: '{}'
+          - removePropagationsOnEntityDelete: true
+            entityStatus: ACTIVE
+            typeName: typeName
+            entityGuid: entityGuid
+            propagate: true
+            validityPeriods:
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            attributes:
+              key: '{}'
+          proxy: true
+          createdBy: createdBy
+          createTime: 6
+          guid: guid
+          attributes:
+            key: '{}'
+          homeId: homeId
+          isIncomplete: true
+          status: ACTIVE
+          customAttributes:
+            key: customAttributes
+      properties:
+        referredEntities:
+          additionalProperties:
+            $ref: '#/components/schemas/Entity'
+          description: The referred entities
+          type: object
+        entity:
+          $ref: '#/components/schemas/Entity'
+      type: object
+    TermAssignmentHeader:
+      example:
+        displayText: displayText
+        expression: expression
+        relationGuid: relationGuid
+        createdBy: createdBy
+        steward: steward
+        confidence: 5
+        description: description
+        source: source
+        termGuid: termGuid
+        status: DISCOVERED
+      properties:
+        termGuid:
+          description: The term guid
+          type: string
+        relationGuid:
+          description: The relation guid
+          type: string
+        description:
+          description: The description
+          type: string
+        displayText:
+          description: The display text
+          type: string
+        expression:
+          description: The expression
+          type: string
+        createdBy:
+          description: The creator
+          type: string
+        steward:
+          description: The steward
+          type: string
+        source:
+          description: The source
+          type: string
+        confidence:
+          description: The confidence
+          format: int32
+          type: integer
+        status:
+          description: The status
+          enum:
+          - DISCOVERED
+          - PROPOSED
+          - IMPORTED
+          - VALIDATED
+          - DEPRECATED
+          - OBSOLETE
+          - OTHER
+          type: string
+      type: object
+    EntityHeader:
+      example:
+        displayText: displayText
+        classifications:
+        - removePropagationsOnEntityDelete: true
+          entityStatus: ACTIVE
+          typeName: typeName
+          entityGuid: entityGuid
+          propagate: true
+          validityPeriods:
+          - timeZone: timeZone
+            startTime: startTime
+            endTime: endTime
+          - timeZone: timeZone
+            startTime: startTime
+            endTime: endTime
+          attributes:
+            key: '{}'
+        - removePropagationsOnEntityDelete: true
+          entityStatus: ACTIVE
+          typeName: typeName
+          entityGuid: entityGuid
+          propagate: true
+          validityPeriods:
+          - timeZone: timeZone
+            startTime: startTime
+            endTime: endTime
+          - timeZone: timeZone
+            startTime: startTime
+            endTime: endTime
+          attributes:
+            key: '{}'
+        classificationNames:
+        - classificationNames
+        - classificationNames
+        meaningNames:
+        - meaningNames
+        - meaningNames
+        typeName: typeName
+        guid: guid
+        attributes:
+          key: '{}'
+        meanings:
+        - displayText: displayText
+          expression: expression
+          relationGuid: relationGuid
+          createdBy: createdBy
+          steward: steward
+          confidence: 5
+          description: description
+          source: source
+          termGuid: termGuid
+          status: DISCOVERED
+        - displayText: displayText
+          expression: expression
+          relationGuid: relationGuid
+          createdBy: createdBy
+          steward: steward
+          confidence: 5
+          description: description
+          source: source
+          termGuid: termGuid
+          status: DISCOVERED
+        status: ACTIVE
+        isIncomplete: true
+        labels:
+        - labels
+        - labels
+      properties:
+        typeName:
+          description: The type name
+          type: string
+        attributes:
+          additionalProperties:
+            type: object
+          description: The attributes
+          type: object
+        guid:
+          description: The internal guid
+          type: string
+        status:
+          description: The status
+          enum:
+          - ACTIVE
+          - DELETED
+          - PURGED
+          type: string
+        displayText:
+          description: The display text
+          type: string
+        classificationNames:
+          description: The classification (tag) names
+          items:
+            type: string
+          type: array
+        classifications:
+          description: The classifications (tags)
+          items:
+            $ref: '#/components/schemas/Classification'
+          type: array
+        meaningNames:
+          description: The meaning names
+          items:
+            type: string
+          type: array
+        meanings:
+          description: The meanings
+          items:
+            $ref: '#/components/schemas/TermAssignmentHeader'
+          type: array
+        isIncomplete:
+          description: Whether is incomplete
+          type: boolean
+        labels:
+          description: The labels
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+    SearchParams:
+      description: Search paramas to filter results
+      example:
+        offset: 6
+        limit: 0
+        includeDeleted: true
+      properties:
+        includeDeleted:
+          description: Whether to include deleted
+          type: boolean
+        limit:
+          description: The limit
+          format: int32
+          type: integer
+        offset:
+          description: The offset
+          format: int32
+          type: integer
+      type: object
+    SearchResult:
+      example:
+        types:
+        - types
+        - types
+        entities:
+        - displayText: displayText
+          classifications:
+          - removePropagationsOnEntityDelete: true
+            entityStatus: ACTIVE
+            typeName: typeName
+            entityGuid: entityGuid
+            propagate: true
+            validityPeriods:
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            attributes:
+              key: '{}'
+          - removePropagationsOnEntityDelete: true
+            entityStatus: ACTIVE
+            typeName: typeName
+            entityGuid: entityGuid
+            propagate: true
+            validityPeriods:
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            attributes:
+              key: '{}'
+          classificationNames:
+          - classificationNames
+          - classificationNames
+          meaningNames:
+          - meaningNames
+          - meaningNames
+          typeName: typeName
+          guid: guid
+          attributes:
+            key: '{}'
+          meanings:
+          - displayText: displayText
+            expression: expression
+            relationGuid: relationGuid
+            createdBy: createdBy
+            steward: steward
+            confidence: 5
+            description: description
+            source: source
+            termGuid: termGuid
+            status: DISCOVERED
+          - displayText: displayText
+            expression: expression
+            relationGuid: relationGuid
+            createdBy: createdBy
+            steward: steward
+            confidence: 5
+            description: description
+            source: source
+            termGuid: termGuid
+            status: DISCOVERED
+          status: ACTIVE
+          isIncomplete: true
+          labels:
+          - labels
+          - labels
+        - displayText: displayText
+          classifications:
+          - removePropagationsOnEntityDelete: true
+            entityStatus: ACTIVE
+            typeName: typeName
+            entityGuid: entityGuid
+            propagate: true
+            validityPeriods:
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            attributes:
+              key: '{}'
+          - removePropagationsOnEntityDelete: true
+            entityStatus: ACTIVE
+            typeName: typeName
+            entityGuid: entityGuid
+            propagate: true
+            validityPeriods:
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            attributes:
+              key: '{}'
+          classificationNames:
+          - classificationNames
+          - classificationNames
+          meaningNames:
+          - meaningNames
+          - meaningNames
+          typeName: typeName
+          guid: guid
+          attributes:
+            key: '{}'
+          meanings:
+          - displayText: displayText
+            expression: expression
+            relationGuid: relationGuid
+            createdBy: createdBy
+            steward: steward
+            confidence: 5
+            description: description
+            source: source
+            termGuid: termGuid
+            status: DISCOVERED
+          - displayText: displayText
+            expression: expression
+            relationGuid: relationGuid
+            createdBy: createdBy
+            steward: steward
+            confidence: 5
+            description: description
+            source: source
+            termGuid: termGuid
+            status: DISCOVERED
+          status: ACTIVE
+          isIncomplete: true
+          labels:
+          - labels
+          - labels
+        searchParameters:
+          offset: 6
+          limit: 0
+          includeDeleted: true
+        referredEntities:
+          key:
+            displayText: displayText
+            classifications:
+            - removePropagationsOnEntityDelete: true
+              entityStatus: ACTIVE
+              typeName: typeName
+              entityGuid: entityGuid
+              propagate: true
+              validityPeriods:
+              - timeZone: timeZone
+                startTime: startTime
+                endTime: endTime
+              - timeZone: timeZone
+                startTime: startTime
+                endTime: endTime
+              attributes:
+                key: '{}'
+            - removePropagationsOnEntityDelete: true
+              entityStatus: ACTIVE
+              typeName: typeName
+              entityGuid: entityGuid
+              propagate: true
+              validityPeriods:
+              - timeZone: timeZone
+                startTime: startTime
+                endTime: endTime
+              - timeZone: timeZone
+                startTime: startTime
+                endTime: endTime
+              attributes:
+                key: '{}'
+            classificationNames:
+            - classificationNames
+            - classificationNames
+            meaningNames:
+            - meaningNames
+            - meaningNames
+            typeName: typeName
+            guid: guid
+            attributes:
+              key: '{}'
+            meanings:
+            - displayText: displayText
+              expression: expression
+              relationGuid: relationGuid
+              createdBy: createdBy
+              steward: steward
+              confidence: 5
+              description: description
+              source: source
+              termGuid: termGuid
+              status: DISCOVERED
+            - displayText: displayText
+              expression: expression
+              relationGuid: relationGuid
+              createdBy: createdBy
+              steward: steward
+              confidence: 5
+              description: description
+              source: source
+              termGuid: termGuid
+              status: DISCOVERED
+            status: ACTIVE
+            isIncomplete: true
+            labels:
+            - labels
+            - labels
+      properties:
+        searchParameters:
+          $ref: '#/components/schemas/SearchParams'
+        types:
+          description: The types
+          items:
+            type: string
+          type: array
+        entities:
+          description: The entities
+          items:
+            $ref: '#/components/schemas/EntityHeader'
+          type: array
+        referredEntities:
+          additionalProperties:
+            $ref: '#/components/schemas/EntityHeader'
+          description: The referred entities
+          type: object
+      type: object
+    AttributeDef:
+      example:
+        isIndexable: true
+        defaultValue: defaultValue
+        displayName: displayName
+        searchWeight: 2
+        typeName: typeName
+        isUnique: true
+        description: description
+        isOptional: true
+        includeInNotification: true
+        constraints:
+        - type: type
+          params:
+            key: '{}'
+        - type: type
+          params:
+            key: '{}'
+        cardinality: SINGLE
+        valuesMinCount: 5
+        indexType: DEFAULT
+        name: name
+        options:
+          key: options
+        valuesMaxCount: 5
+      properties:
+        name:
+          description: The name
+          type: string
+        typeName:
+          description: The type name
+          type: string
+        isOptional:
+          description: Whether is optional
+          type: boolean
+        cardinality:
+          description: The cardinality
+          enum:
+          - SINGLE
+          - LIST
+          - SET
+          type: string
+        valuesMinCount:
+          description: The values min count
+          format: int32
+          type: integer
+        valuesMaxCount:
+          description: The values max count
+          format: int32
+          type: integer
+        isUnique:
+          description: Whether is unique
+          type: boolean
+        isIndexable:
+          description: Whether is indexable
+          type: boolean
+        includeInNotification:
+          description: Whether to include in notifications
+          type: boolean
+        defaultValue:
+          description: The default value
+          type: string
+        description:
+          description: The description
+          type: string
+        searchWeight:
+          description: The search weight
+          format: int32
+          type: integer
+        indexType:
+          description: The index type
+          enum:
+          - DEFAULT
+          - STRING
+          type: string
+        constraints:
+          description: The constraints
+          items:
+            $ref: '#/components/schemas/ConstraintDef'
+          type: array
+        options:
+          additionalProperties:
+            type: string
+          description: The options
+          type: object
+        displayName:
+          description: The display name
+          type: string
+      type: object
+    ConstraintDef:
+      example:
+        type: type
+        params:
+          key: '{}'
+      properties:
+        type:
+          description: The type
+          type: string
+        params:
+          additionalProperties:
+            type: object
+          description: The params
+          type: object
+      type: object
+    TagDef:
+      example:
+        serviceType: serviceType
+        superTypes:
+        - superTypes
+        - superTypes
+        updatedBy: updatedBy
+        description: description
+        updateTime: 6
+        subTypes:
+        - subTypes
+        - subTypes
+        version: 1
+        typeVersion: typeVersion
+        attributeDefs:
+        - isIndexable: true
+          defaultValue: defaultValue
+          displayName: displayName
+          searchWeight: 2
+          typeName: typeName
+          isUnique: true
+          description: description
+          isOptional: true
+          includeInNotification: true
+          constraints:
+          - type: type
+            params:
+              key: '{}'
+          - type: type
+            params:
+              key: '{}'
+          cardinality: SINGLE
+          valuesMinCount: 5
+          indexType: DEFAULT
+          name: name
+          options:
+            key: options
+          valuesMaxCount: 5
+        - isIndexable: true
+          defaultValue: defaultValue
+          displayName: displayName
+          searchWeight: 2
+          typeName: typeName
+          isUnique: true
+          description: description
+          isOptional: true
+          includeInNotification: true
+          constraints:
+          - type: type
+            params:
+              key: '{}'
+          - type: type
+            params:
+              key: '{}'
+          cardinality: SINGLE
+          valuesMinCount: 5
+          indexType: DEFAULT
+          name: name
+          options:
+            key: options
+          valuesMaxCount: 5
+        createdBy: createdBy
+        createTime: 0
+        name: name
+        options:
+          key: options
+        guid: guid
+        entityTypes:
+        - entityTypes
+        - entityTypes
+        category: PRIMITIVE
+      properties:
+        category:
+          description: The category
+          enum:
+          - PRIMITIVE
+          - OBJECT_ID_TYPE
+          - ENUM
+          - STRUCT
+          - CLASSIFICATION
+          - ENTITY
+          - ARRAY
+          - MAP
+          - RELATIONSHIP
+          - BUSINESS_METADATA
+          type: string
+        guid:
+          description: The internal guid
+          type: string
+        createdBy:
+          description: The creator
+          type: string
+        updatedBy:
+          description: The updater
+          type: string
+        createTime:
+          description: The create time
+          format: int64
+          type: integer
+        updateTime:
+          description: The update time
+          format: int64
+          type: integer
+        version:
+          description: The version
+          format: int32
+          type: integer
+        name:
+          description: The name
+          type: string
+        description:
+          description: The description
+          type: string
+        typeVersion:
+          description: The type version
+          type: string
+        serviceType:
+          description: The service type
+          type: string
+        options:
+          additionalProperties:
+            type: string
+          description: The options
+          type: object
+        attributeDefs:
+          description: The attribute definitions
+          items:
+            $ref: '#/components/schemas/AttributeDef'
+          type: array
+        superTypes:
+          description: The supertypes
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        entityTypes:
+          description: The entity types
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        subTypes:
+          description: The subtypes
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+    ErrorMessage:
+      description: Error message of this operation
+      example:
+        error_code: 0
+        message: message
+      properties:
+        error_code:
+          description: The error code
+          format: int32
+          type: integer
+        message:
+          description: The error message
+          type: string
+      type: object
+    TagResponse:
+      example:
+        removePropagationsOnEntityDelete: true
+        entityStatus: ACTIVE
+        entityType: entityType
+        entityName: entityName
+        typeName: typeName
+        entityGuid: entityGuid
+        propagate: true
+        validityPeriods:
+        - timeZone: timeZone
+          startTime: startTime
+          endTime: endTime
+        - timeZone: timeZone
+          startTime: startTime
+          endTime: endTime
+        attributes:
+          key: '{}'
+        error:
+          error_code: 0
+          message: message
+      properties:
+        typeName:
+          description: The tag name
+          type: string
+        attributes:
+          additionalProperties:
+            type: object
+          description: The tag attributes
+          type: object
+        entityGuid:
+          description: The internal entity guid
+          type: string
+        entityStatus:
+          description: The entity status
+          enum:
+          - ACTIVE
+          - DELETED
+          - PURGED
+          type: string
+        propagate:
+          description: Whether to propagate the tag
+          type: boolean
+        validityPeriods:
+          description: The validity periods
+          items:
+            $ref: '#/components/schemas/TimeBoundary'
+          type: array
+        removePropagationsOnEntityDelete:
+          description: Whether to remove propagations on entity delete
+          type: boolean
+        entityType:
+          description: The entity type
+          type: string
+        entityName:
+          description: The qualified name of the entity
+          type: string
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+      type: object
+    TagDefResponse:
+      example:
+        serviceType: serviceType
+        superTypes:
+        - superTypes
+        - superTypes
+        updatedBy: updatedBy
+        description: description
+        updateTime: 6
+        subTypes:
+        - subTypes
+        - subTypes
+        error:
+          error_code: 0
+          message: message
+        version: 1
+        typeVersion: typeVersion
+        attributeDefs:
+        - isIndexable: true
+          defaultValue: defaultValue
+          displayName: displayName
+          searchWeight: 2
+          typeName: typeName
+          isUnique: true
+          description: description
+          isOptional: true
+          includeInNotification: true
+          constraints:
+          - type: type
+            params:
+              key: '{}'
+          - type: type
+            params:
+              key: '{}'
+          cardinality: SINGLE
+          valuesMinCount: 5
+          indexType: DEFAULT
+          name: name
+          options:
+            key: options
+          valuesMaxCount: 5
+        - isIndexable: true
+          defaultValue: defaultValue
+          displayName: displayName
+          searchWeight: 2
+          typeName: typeName
+          isUnique: true
+          description: description
+          isOptional: true
+          includeInNotification: true
+          constraints:
+          - type: type
+            params:
+              key: '{}'
+          - type: type
+            params:
+              key: '{}'
+          cardinality: SINGLE
+          valuesMinCount: 5
+          indexType: DEFAULT
+          name: name
+          options:
+            key: options
+          valuesMaxCount: 5
+        createdBy: createdBy
+        createTime: 0
+        name: name
+        options:
+          key: options
+        guid: guid
+        entityTypes:
+        - entityTypes
+        - entityTypes
+        category: PRIMITIVE
+      properties:
+        category:
+          description: The category
+          enum:
+          - PRIMITIVE
+          - OBJECT_ID_TYPE
+          - ENUM
+          - STRUCT
+          - CLASSIFICATION
+          - ENTITY
+          - ARRAY
+          - MAP
+          - RELATIONSHIP
+          - BUSINESS_METADATA
+          type: string
+        guid:
+          description: The internal guid
+          type: string
+        createdBy:
+          description: The creator
+          type: string
+        updatedBy:
+          description: The updater
+          type: string
+        createTime:
+          description: The create time
+          format: int64
+          type: integer
+        updateTime:
+          description: The update time
+          format: int64
+          type: integer
+        version:
+          description: The version
+          format: int32
+          type: integer
+        name:
+          description: The name
+          type: string
+        description:
+          description: The description
+          type: string
+        typeVersion:
+          description: The type version
+          type: string
+        serviceType:
+          description: The service type
+          type: string
+        options:
+          additionalProperties:
+            type: string
+          description: The options
+          type: object
+        attributeDefs:
+          description: The attribute definitions
+          items:
+            $ref: '#/components/schemas/AttributeDef'
+          type: array
+        superTypes:
+          description: The supertypes
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        entityTypes:
+          description: The entity types
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        subTypes:
+          description: The subtypes
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+      type: object
