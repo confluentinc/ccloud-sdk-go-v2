@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 **ApiEndpoint** | Pointer to **string** | The Kafka API cluster endpoint used by Kafka clients to connect to the cluster. | [optional] [readonly] 
 **Environment** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The environment to which this belongs. | [optional] 
 **Network** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The network associated with this object. | [optional] 
-**Byok** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The byok associated with this object. | [optional] 
 
 ## Methods
 
@@ -284,31 +283,6 @@ SetNetwork sets Network field to given value.
 `func (o *CmkV2ClusterSpec) HasNetwork() bool`
 
 HasNetwork returns a boolean if a field has been set.
-
-### GetByok
-
-`func (o *CmkV2ClusterSpec) GetByok() GlobalObjectReference`
-
-GetByok returns the Byok field if non-nil, zero value otherwise.
-
-### GetByokOk
-
-`func (o *CmkV2ClusterSpec) GetByokOk() (*GlobalObjectReference, bool)`
-
-GetByokOk returns a tuple with the Byok field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetByok
-
-`func (o *CmkV2ClusterSpec) SetByok(v GlobalObjectReference)`
-
-SetByok sets Byok field to given value.
-
-### HasByok
-
-`func (o *CmkV2ClusterSpec) HasByok() bool`
-
-HasByok returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
