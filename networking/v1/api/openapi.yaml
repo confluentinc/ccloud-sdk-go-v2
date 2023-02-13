@@ -12119,7 +12119,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/GlobalObjectReference'
           description: The environment to which this belongs.
-          x-immutable: true
         network:
           allOf:
           - $ref: '#/components/schemas/EnvScopedObjectReference'
@@ -12214,7 +12213,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/GlobalObjectReference'
           description: The environment to which this belongs.
-          x-immutable: true
         network:
           allOf:
           - $ref: '#/components/schemas/EnvScopedObjectReference'
@@ -12842,6 +12840,10 @@ components:
           allOf:
           - $ref: '#/components/schemas/networking.v1.NetworkLinkServiceAcceptPolicy'
           description: Network Link Service Accept policy
+        environment:
+          allOf:
+          - $ref: '#/components/schemas/GlobalObjectReference'
+          description: The environment to which this belongs.
       type: object
       x-enable-id: true
       x-enable-listmeta: true
@@ -12901,6 +12903,10 @@ components:
           description: The description of the network link endpoint
           example: Connect to Network - analytics hub
           type: string
+        environment:
+          allOf:
+          - $ref: '#/components/schemas/GlobalObjectReference'
+          description: The environment to which this belongs.
       type: object
       x-enable-id: true
       x-enable-listmeta: true

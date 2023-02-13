@@ -41,6 +41,8 @@ type NetworkingV1NetworkLinkServiceSpecUpdate struct {
 	Description *string `json:"description,omitempty"`
 	// Network Link Service Accept policy
 	Accept *NetworkingV1NetworkLinkServiceAcceptPolicy `json:"accept,omitempty"`
+	// The environment to which this belongs.
+	Environment *GlobalObjectReference `json:"environment,omitempty"`
 }
 
 // NewNetworkingV1NetworkLinkServiceSpecUpdate instantiates a new NetworkingV1NetworkLinkServiceSpecUpdate object
@@ -156,11 +158,44 @@ func (o *NetworkingV1NetworkLinkServiceSpecUpdate) SetAccept(v NetworkingV1Netwo
 	o.Accept = &v
 }
 
+// GetEnvironment returns the Environment field value if set, zero value otherwise.
+func (o *NetworkingV1NetworkLinkServiceSpecUpdate) GetEnvironment() GlobalObjectReference {
+	if o == nil || o.Environment == nil {
+		var ret GlobalObjectReference
+		return ret
+	}
+	return *o.Environment
+}
+
+// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1NetworkLinkServiceSpecUpdate) GetEnvironmentOk() (*GlobalObjectReference, bool) {
+	if o == nil || o.Environment == nil {
+		return nil, false
+	}
+	return o.Environment, true
+}
+
+// HasEnvironment returns a boolean if a field has been set.
+func (o *NetworkingV1NetworkLinkServiceSpecUpdate) HasEnvironment() bool {
+	if o != nil && o.Environment != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnvironment gets a reference to the given GlobalObjectReference and assigns it to the Environment field.
+func (o *NetworkingV1NetworkLinkServiceSpecUpdate) SetEnvironment(v GlobalObjectReference) {
+	o.Environment = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1NetworkLinkServiceSpecUpdate) Redact() {
 	o.recurseRedact(o.DisplayName)
 	o.recurseRedact(o.Description)
 	o.recurseRedact(o.Accept)
+	o.recurseRedact(o.Environment)
 }
 
 func (o *NetworkingV1NetworkLinkServiceSpecUpdate) recurseRedact(v interface{}) {
@@ -203,6 +238,9 @@ func (o NetworkingV1NetworkLinkServiceSpecUpdate) MarshalJSON() ([]byte, error) 
 	}
 	if o.Accept != nil {
 		toSerialize["accept"] = o.Accept
+	}
+	if o.Environment != nil {
+		toSerialize["environment"] = o.Environment
 	}
 	return json.Marshal(toSerialize)
 }

@@ -39,6 +39,8 @@ type NetworkingV1NetworkLinkEndpointSpecUpdate struct {
 	DisplayName *string `json:"display_name,omitempty"`
 	// The description of the network link endpoint
 	Description *string `json:"description,omitempty"`
+	// The environment to which this belongs.
+	Environment *GlobalObjectReference `json:"environment,omitempty"`
 }
 
 // NewNetworkingV1NetworkLinkEndpointSpecUpdate instantiates a new NetworkingV1NetworkLinkEndpointSpecUpdate object
@@ -122,10 +124,43 @@ func (o *NetworkingV1NetworkLinkEndpointSpecUpdate) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetEnvironment returns the Environment field value if set, zero value otherwise.
+func (o *NetworkingV1NetworkLinkEndpointSpecUpdate) GetEnvironment() GlobalObjectReference {
+	if o == nil || o.Environment == nil {
+		var ret GlobalObjectReference
+		return ret
+	}
+	return *o.Environment
+}
+
+// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1NetworkLinkEndpointSpecUpdate) GetEnvironmentOk() (*GlobalObjectReference, bool) {
+	if o == nil || o.Environment == nil {
+		return nil, false
+	}
+	return o.Environment, true
+}
+
+// HasEnvironment returns a boolean if a field has been set.
+func (o *NetworkingV1NetworkLinkEndpointSpecUpdate) HasEnvironment() bool {
+	if o != nil && o.Environment != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnvironment gets a reference to the given GlobalObjectReference and assigns it to the Environment field.
+func (o *NetworkingV1NetworkLinkEndpointSpecUpdate) SetEnvironment(v GlobalObjectReference) {
+	o.Environment = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1NetworkLinkEndpointSpecUpdate) Redact() {
 	o.recurseRedact(o.DisplayName)
 	o.recurseRedact(o.Description)
+	o.recurseRedact(o.Environment)
 }
 
 func (o *NetworkingV1NetworkLinkEndpointSpecUpdate) recurseRedact(v interface{}) {
@@ -165,6 +200,9 @@ func (o NetworkingV1NetworkLinkEndpointSpecUpdate) MarshalJSON() ([]byte, error)
 	}
 	if o.Description != nil {
 		toSerialize["description"] = o.Description
+	}
+	if o.Environment != nil {
+		toSerialize["environment"] = o.Environment
 	}
 	return json.Marshal(toSerialize)
 }
