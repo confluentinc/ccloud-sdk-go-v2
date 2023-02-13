@@ -35,7 +35,7 @@ import (
 
 // NetworkingV1TransitGatewayAttachmentStatus The status of the Transit Gateway Attachment
 type NetworkingV1TransitGatewayAttachmentStatus struct {
-	// The lifecycle phase of the TGW attachment:    PROVISIONING: attachment provisioning is in progress;    PENDING_ACCEPT: attachment request is pending acceptance by the customer;    READY:  attachment is ready;    FAILED: attachment is in a failed state;    DEPROVISIONING: attachment deprovisioning is in progress;
+	// The lifecycle phase of the TGW attachment:    PROVISIONING: attachment provisioning is in progress;    PENDING_ACCEPT: attachment request is pending acceptance by the customer;    READY:  attachment is ready;    FAILED: attachment is in a failed state;    DEPROVISIONING: attachment deprovisioning is in progress.
 	Phase string `json:"phase"`
 	// Error code if TGW attachment is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`

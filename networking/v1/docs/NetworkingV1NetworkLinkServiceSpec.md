@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the network link service | [optional] 
-**Description** | Pointer to **string** | The desription of the network link service | [optional] 
+**Description** | Pointer to **string** | The description of the network link service | [optional] 
 **Accept** | Pointer to [**NetworkingV1NetworkLinkServiceAcceptPolicy**](networking.v1.NetworkLinkServiceAcceptPolicy.md) | Network Link Service Accept policy | [optional] 
 **Environment** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which this belongs. | [optional] 
 **Network** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The network to which this belongs. | [optional] 

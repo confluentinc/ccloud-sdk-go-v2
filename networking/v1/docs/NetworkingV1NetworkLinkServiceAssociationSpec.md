@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the network link endpoint | [optional] [readonly] 
-**Description** | Pointer to **string** | The desription of the network link endpoint | [optional] [readonly] 
+**Description** | Pointer to **string** | The description of the network link endpoint | [optional] [readonly] 
 **NetworkLinkEndpoint** | Pointer to **string** | ID of the Network link endpoint. | [optional] [readonly] 
 **NetworkLinkService** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The network_link_service to which this belongs. | [optional] 
 **Environment** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which this belongs. | [optional] 

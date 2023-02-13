@@ -37,7 +37,7 @@ import (
 type NetworkingV1NetworkLinkServiceSpecUpdate struct {
 	// The name of the network link service
 	DisplayName *string `json:"display_name,omitempty"`
-	// The desription of the network link service
+	// The description of the network link service
 	Description *string `json:"description,omitempty"`
 	// Network Link Service Accept policy
 	Accept *NetworkingV1NetworkLinkServiceAcceptPolicy `json:"accept,omitempty"`

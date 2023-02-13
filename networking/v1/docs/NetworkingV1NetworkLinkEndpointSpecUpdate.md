@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the network link endpoint | [optional] 
-**Description** | Pointer to **string** | The desription of the network link endpoint | [optional] 
+**Description** | Pointer to **string** | The description of the network link endpoint | [optional] 
 
 ## Methods
 

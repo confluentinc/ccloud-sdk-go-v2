@@ -37,7 +37,7 @@ import (
 type NetworkingV1NetworkLinkEndpointSpecUpdate struct {
 	// The name of the network link endpoint
 	DisplayName *string `json:"display_name,omitempty"`
-	// The desription of the network link endpoint
+	// The description of the network link endpoint
 	Description *string `json:"description,omitempty"`
 }
 
