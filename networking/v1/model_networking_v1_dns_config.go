@@ -33,33 +33,60 @@ import (
 	"reflect"
 )
 
-// MultipleSearchFilter Filter a collection by a string search for one or more values
-type MultipleSearchFilter struct {
-	Items []string
+// NetworkingV1DnsConfig The network DNS config
+type NetworkingV1DnsConfig struct {
+	// Network DNS resolution
+	Resolution string `json:"resolution"`
 }
 
-// NewMultipleSearchFilter instantiates a new MultipleSearchFilter object
+// NewNetworkingV1DnsConfig instantiates a new NetworkingV1DnsConfig object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMultipleSearchFilter() *MultipleSearchFilter {
-	this := MultipleSearchFilter{}
+func NewNetworkingV1DnsConfig(resolution string) *NetworkingV1DnsConfig {
+	this := NetworkingV1DnsConfig{}
+	this.Resolution = resolution
 	return &this
 }
 
-// NewMultipleSearchFilterWithDefaults instantiates a new MultipleSearchFilter object
+// NewNetworkingV1DnsConfigWithDefaults instantiates a new NetworkingV1DnsConfig object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewMultipleSearchFilterWithDefaults() *MultipleSearchFilter {
-	this := MultipleSearchFilter{}
+func NewNetworkingV1DnsConfigWithDefaults() *NetworkingV1DnsConfig {
+	this := NetworkingV1DnsConfig{}
 	return &this
+}
+
+// GetResolution returns the Resolution field value
+func (o *NetworkingV1DnsConfig) GetResolution() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Resolution
+}
+
+// GetResolutionOk returns a tuple with the Resolution field value
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1DnsConfig) GetResolutionOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.Resolution, true
+}
+
+// SetResolution sets field value
+func (o *NetworkingV1DnsConfig) SetResolution(v string) {
+	o.Resolution = v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *MultipleSearchFilter) Redact() {
+func (o *NetworkingV1DnsConfig) Redact() {
+    o.recurseRedact(&o.Resolution)
 }
 
-func (o *MultipleSearchFilter) recurseRedact(v interface{}) {
+func (o *NetworkingV1DnsConfig) recurseRedact(v interface{}) {
     type redactor interface {
         Redact()
     }
@@ -84,55 +111,51 @@ func (o *MultipleSearchFilter) recurseRedact(v interface{}) {
     }
 }
 
-func (o MultipleSearchFilter) zeroField(v interface{}) {
+func (o NetworkingV1DnsConfig) zeroField(v interface{}) {
     p := reflect.ValueOf(v).Elem()
     p.Set(reflect.Zero(p.Type()))
 }
 
-func (o MultipleSearchFilter) MarshalJSON() ([]byte, error) {
-	toSerialize := make([]interface{}, len(o.Items))
-	for i, item := range o.Items {
-		toSerialize[i] = item
+func (o NetworkingV1DnsConfig) MarshalJSON() ([]byte, error) {
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["resolution"] = o.Resolution
 	}
 	return json.Marshal(toSerialize)
 }
 
-func (o *MultipleSearchFilter) UnmarshalJSON(bytes []byte) (err error) {
-	return json.Unmarshal(bytes, &o.Items)
-}
-
-type NullableMultipleSearchFilter struct {
-	value *MultipleSearchFilter
+type NullableNetworkingV1DnsConfig struct {
+	value *NetworkingV1DnsConfig
 	isSet bool
 }
 
-func (v NullableMultipleSearchFilter) Get() *MultipleSearchFilter {
+func (v NullableNetworkingV1DnsConfig) Get() *NetworkingV1DnsConfig {
 	return v.value
 }
 
-func (v *NullableMultipleSearchFilter) Set(val *MultipleSearchFilter) {
+func (v *NullableNetworkingV1DnsConfig) Set(val *NetworkingV1DnsConfig) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableMultipleSearchFilter) IsSet() bool {
+func (v NullableNetworkingV1DnsConfig) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableMultipleSearchFilter) Unset() {
+func (v *NullableNetworkingV1DnsConfig) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableMultipleSearchFilter(val *MultipleSearchFilter) *NullableMultipleSearchFilter {
-	return &NullableMultipleSearchFilter{value: val, isSet: true}
+func NewNullableNetworkingV1DnsConfig(val *NetworkingV1DnsConfig) *NullableNetworkingV1DnsConfig {
+	return &NullableNetworkingV1DnsConfig{value: val, isSet: true}
 }
 
-func (v NullableMultipleSearchFilter) MarshalJSON() ([]byte, error) {
+func (v NullableNetworkingV1DnsConfig) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableMultipleSearchFilter) UnmarshalJSON(src []byte) error {
+func (v *NullableNetworkingV1DnsConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -33,33 +33,33 @@ import (
 	"reflect"
 )
 
-// MultipleSearchFilter Filter a collection by a string search for one or more values
-type MultipleSearchFilter struct {
-	Items []string
+// NetworkingV1ZonesInfo Cloud provider zones metadata.
+type NetworkingV1ZonesInfo struct {
+	Items []NetworkingV1ZoneInfo
 }
 
-// NewMultipleSearchFilter instantiates a new MultipleSearchFilter object
+// NewNetworkingV1ZonesInfo instantiates a new NetworkingV1ZonesInfo object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMultipleSearchFilter() *MultipleSearchFilter {
-	this := MultipleSearchFilter{}
+func NewNetworkingV1ZonesInfo() *NetworkingV1ZonesInfo {
+	this := NetworkingV1ZonesInfo{}
 	return &this
 }
 
-// NewMultipleSearchFilterWithDefaults instantiates a new MultipleSearchFilter object
+// NewNetworkingV1ZonesInfoWithDefaults instantiates a new NetworkingV1ZonesInfo object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewMultipleSearchFilterWithDefaults() *MultipleSearchFilter {
-	this := MultipleSearchFilter{}
+func NewNetworkingV1ZonesInfoWithDefaults() *NetworkingV1ZonesInfo {
+	this := NetworkingV1ZonesInfo{}
 	return &this
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *MultipleSearchFilter) Redact() {
+func (o *NetworkingV1ZonesInfo) Redact() {
 }
 
-func (o *MultipleSearchFilter) recurseRedact(v interface{}) {
+func (o *NetworkingV1ZonesInfo) recurseRedact(v interface{}) {
     type redactor interface {
         Redact()
     }
@@ -84,12 +84,12 @@ func (o *MultipleSearchFilter) recurseRedact(v interface{}) {
     }
 }
 
-func (o MultipleSearchFilter) zeroField(v interface{}) {
+func (o NetworkingV1ZonesInfo) zeroField(v interface{}) {
     p := reflect.ValueOf(v).Elem()
     p.Set(reflect.Zero(p.Type()))
 }
 
-func (o MultipleSearchFilter) MarshalJSON() ([]byte, error) {
+func (o NetworkingV1ZonesInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := make([]interface{}, len(o.Items))
 	for i, item := range o.Items {
 		toSerialize[i] = item
@@ -97,42 +97,42 @@ func (o MultipleSearchFilter) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *MultipleSearchFilter) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NetworkingV1ZonesInfo) UnmarshalJSON(bytes []byte) (err error) {
 	return json.Unmarshal(bytes, &o.Items)
 }
 
-type NullableMultipleSearchFilter struct {
-	value *MultipleSearchFilter
+type NullableNetworkingV1ZonesInfo struct {
+	value *NetworkingV1ZonesInfo
 	isSet bool
 }
 
-func (v NullableMultipleSearchFilter) Get() *MultipleSearchFilter {
+func (v NullableNetworkingV1ZonesInfo) Get() *NetworkingV1ZonesInfo {
 	return v.value
 }
 
-func (v *NullableMultipleSearchFilter) Set(val *MultipleSearchFilter) {
+func (v *NullableNetworkingV1ZonesInfo) Set(val *NetworkingV1ZonesInfo) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableMultipleSearchFilter) IsSet() bool {
+func (v NullableNetworkingV1ZonesInfo) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableMultipleSearchFilter) Unset() {
+func (v *NullableNetworkingV1ZonesInfo) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableMultipleSearchFilter(val *MultipleSearchFilter) *NullableMultipleSearchFilter {
-	return &NullableMultipleSearchFilter{value: val, isSet: true}
+func NewNullableNetworkingV1ZonesInfo(val *NetworkingV1ZonesInfo) *NullableNetworkingV1ZonesInfo {
+	return &NullableNetworkingV1ZonesInfo{value: val, isSet: true}
 }
 
-func (v NullableMultipleSearchFilter) MarshalJSON() ([]byte, error) {
+func (v NullableNetworkingV1ZonesInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableMultipleSearchFilter) UnmarshalJSON(src []byte) error {
+func (v *NullableNetworkingV1ZonesInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

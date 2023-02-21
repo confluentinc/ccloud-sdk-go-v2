@@ -4853,6 +4853,226 @@ paths:
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
+    patch:
+      description: "[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)\n\
+        \nIncreases number of partitions on a topic.  "
+      operationId: updatePartitionCountKafkaTopic
+      parameters:
+      - description: The Kafka cluster ID.
+        example: cluster-1
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The topic name.
+        example: topic-1
+        explode: false
+        in: path
+        name: topic_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/UpdatePartitionCountRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                kind: KafkaTopic
+                metadata:
+                  self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1
+                  resource_name: crn:///kafka=cluster-1/topic=topic-1
+                cluster_id: cluster-1
+                topic_name: topic-1
+                is_internal: false
+                replication_factor: 3
+                partitions_count: 1
+                partitions:
+                  related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1/partitions
+                configs:
+                  related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1/configs
+                partition_reassignments:
+                  related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1/partitions/-/reassignments
+              schema:
+                $ref: '#/components/schemas/TopicData'
+          description: The topic.
+        "400":
+          content:
+            application/json:
+              examples:
+                create_topic_already_exists:
+                  description: Thrown when trying to create a topic with a name already
+                    used by an existing topic.
+                  value:
+                    error_code: 40002
+                    message: Topic 'my-topic' already exists.
+                produce_message_badly_escaped:
+                  description: Thrown when using unescaped single quotes within a
+                    single-quote-delimited record.
+                  value:
+                    error_code: 400
+                    message: |-
+                      Unexpected character ('k' (code 107)): was expecting double-quote to start field name
+                       at [Source: (org.glassfish.jersey.message.internal.ReaderInterceptorExecutor$UnCloseableInputStream); line: 1, column: 3]
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/plain:
+              example:
+                description: Thrown when trying to create a topic and passing a string
+                  for the replication factor.
+                value: 'Cannot deserialize value of type `java.lang.Integer` from
+                  String "all": not a valid Integer value\n at [Source: (org.glassfish.jersey.message.internal.ReaderInterceptorExecutor$UnCloseableInputStream);
+                  line: 1, column: 53] (through reference chain: io.confluent.kafkarest.entities.v3.CreateTopicRequest["partitions_count"])'
+              schema:
+                type: string
+          description: Indicates a bad request error. It could be caused by an unexpected
+            request body format or other forms of request validation failure. Usually
+            serves application/json content, although in some cases simple text/plain
+            content can be returned.
+        "401":
+          content:
+            application/json:
+              examples:
+                kafka_authentication_failed:
+                  description: Thrown when using Basic authentication with wrong Kafka
+                    credentials.
+                  value:
+                    error_code: 40101
+                    message: Authentication failed
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Indicates a client authentication error. Kafka authentication
+            failures will contain error code 40101 in the response body.
+        "429":
+          content:
+            text/html:
+              example:
+                description: A sample response from Jetty's DoSFilter.
+                value: <html> <head> <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+                  <title>Error 429 Too Many Requests</title> </head> <body> <h2>HTTP
+                  ERROR 429 Too Many Requests</h2> <table> <tr> <th>URI:</th> <td>/v3/clusters/my-cluster</td>
+                  </tr> <tr> <th>STATUS:</th> <td>429</td> </tr> <tr> <th>MESSAGE:</th>
+                  <td>Too Many Requests</td> </tr> <tr> <th>SERVLET:</th> <td>default</td>
+                  </tr> </table> </body> </html>
+              schema:
+                type: string
+          description: Indicates that a rate limit threshold has been reached, and
+            the client should retry again later.
+        "5XX":
+          content:
+            application/json:
+              examples:
+                generic_internal_server_error:
+                  description: Thrown for generic HTTP 500 errors.
+                  value:
+                    error_code: 500
+                    message: Internal Server Error
+                produce_v3_missing_schema:
+                  description: Thrown when the specified schema cannot be fetched
+                    from Schema Registry.
+                  value:
+                    error_code: 50002
+                    message: Error when fetching latest schema version. subject =
+                      my-topic
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: A server-side problem that might not be addressable from the
+            client side. Retriable Kafka errors will contain error code 50003 in the
+            response body.
+      security:
+      - api-key: []
+      summary: Update partition count
+      tags:
+      - Topic (v3)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request PATCH \
+            --url 'https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/{cluster_id}/topics/{topic_name}' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/{cluster_id}/topics/{topic_name}")
+            .patch(null)
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/{cluster_id}/topics/{topic_name}\"\
+          \n\n\treq, _ := http.NewRequest(\"PATCH\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("pkc-00000.region.provider.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("PATCH", "/kafka/v3/clusters/{cluster_id}/topics/{topic_name}", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "PATCH",
+            "hostname": "pkc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/kafka/v3/clusters/{cluster_id}/topics/{topic_name}",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/{cluster_id}/topics/{topic_name}");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/{cluster_id}/topics/{topic_name}");
+          var request = new RestRequest(Method.PATCH);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
   /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs:
     get:
       description: |-
@@ -11731,6 +11951,14 @@ components:
           schema:
             $ref: '#/components/schemas/UpdateConfigRequestData'
       description: The topic configuration parameter update request.
+    UpdatePartitionCountRequest:
+      content:
+        application/json:
+          example:
+            partitions_count: 10
+          schema:
+            $ref: '#/components/schemas/UpdatePartitionCountRequestData'
+      description: The number of partitions to increase the partition count to.
     CreateLinkRequest:
       content:
         application/json:
@@ -14522,6 +14750,16 @@ components:
         value:
           nullable: true
           type: string
+      type: object
+    UpdatePartitionCountRequestData:
+      example:
+        partitions_count: 0
+      properties:
+        partitions_count:
+          format: int32
+          type: integer
+      required:
+      - partitions_count
       type: object
     ReplicaStatusData:
       allOf:

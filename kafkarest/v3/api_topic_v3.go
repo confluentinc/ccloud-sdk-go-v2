@@ -112,6 +112,24 @@ type TopicV3Api interface {
 	// ListKafkaTopicsExecute executes the request
 	//  @return TopicDataList
 	ListKafkaTopicsExecute(r ApiListKafkaTopicsRequest) (TopicDataList, *_nethttp.Response, error)
+
+	/*
+		UpdatePartitionCountKafkaTopic Update partition count
+
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+	Increases number of partitions on a topic.
+
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param topicName The topic name.
+		 @return ApiUpdatePartitionCountKafkaTopicRequest
+	*/
+	UpdatePartitionCountKafkaTopic(ctx _context.Context, clusterId string, topicName string) ApiUpdatePartitionCountKafkaTopicRequest
+
+	// UpdatePartitionCountKafkaTopicExecute executes the request
+	//  @return TopicData
+	UpdatePartitionCountKafkaTopicExecute(r ApiUpdatePartitionCountKafkaTopicRequest) (TopicData, *_nethttp.Response, error)
 }
 
 // TopicV3ApiService TopicV3Api service
@@ -141,12 +159,12 @@ CreateKafkaTopic Create Topic
 
 Creates a topic.
 Also supports a dry-run mode that only validates whether the topic creation would succeed
-if the “validate_only“ request property is explicitly specified and set to true. Note that
+if the ``validate_only`` request property is explicitly specified and set to true. Note that
 when dry-run mode is being used the response status would be 200 OK instead of 201 Created.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@return ApiCreateKafkaTopicRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @return ApiCreateKafkaTopicRequest
 */
 func (a *TopicV3ApiService) CreateKafkaTopic(ctx _context.Context, clusterId string) ApiCreateKafkaTopicRequest {
 	return ApiCreateKafkaTopicRequest{
@@ -157,8 +175,7 @@ func (a *TopicV3ApiService) CreateKafkaTopic(ctx _context.Context, clusterId str
 }
 
 // Execute executes the request
-//
-//	@return TopicData
+//  @return TopicData
 func (a *TopicV3ApiService) CreateKafkaTopicExecute(r ApiCreateKafkaTopicRequest) (TopicData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -294,10 +311,10 @@ DeleteKafkaTopic Delete Topic
 
 Deletes the topic with the given `topic_name`.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param topicName The topic name.
-	@return ApiDeleteKafkaTopicRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param topicName The topic name.
+ @return ApiDeleteKafkaTopicRequest
 */
 func (a *TopicV3ApiService) DeleteKafkaTopic(ctx _context.Context, clusterId string, topicName string) ApiDeleteKafkaTopicRequest {
 	return ApiDeleteKafkaTopicRequest{
@@ -443,10 +460,10 @@ GetKafkaTopic Get Topic
 
 Returns the topic with the given `topic_name`.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param topicName The topic name.
-	@return ApiGetKafkaTopicRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param topicName The topic name.
+ @return ApiGetKafkaTopicRequest
 */
 func (a *TopicV3ApiService) GetKafkaTopic(ctx _context.Context, clusterId string, topicName string) ApiGetKafkaTopicRequest {
 	return ApiGetKafkaTopicRequest{
@@ -458,8 +475,7 @@ func (a *TopicV3ApiService) GetKafkaTopic(ctx _context.Context, clusterId string
 }
 
 // Execute executes the request
-//
-//	@return TopicData
+//  @return TopicData
 func (a *TopicV3ApiService) GetKafkaTopicExecute(r ApiGetKafkaTopicRequest) (TopicData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -603,9 +619,9 @@ ListKafkaTopics List Topics
 
 Returns the list of topics that belong to the specified Kafka cluster.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@return ApiListKafkaTopicsRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @return ApiListKafkaTopicsRequest
 */
 func (a *TopicV3ApiService) ListKafkaTopics(ctx _context.Context, clusterId string) ApiListKafkaTopicsRequest {
 	return ApiListKafkaTopicsRequest{
@@ -616,8 +632,7 @@ func (a *TopicV3ApiService) ListKafkaTopics(ctx _context.Context, clusterId stri
 }
 
 // Execute executes the request
-//
-//	@return TopicDataList
+//  @return TopicDataList
 func (a *TopicV3ApiService) ListKafkaTopicsExecute(r ApiListKafkaTopicsRequest) (TopicDataList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -657,6 +672,165 @@ func (a *TopicV3ApiService) ListKafkaTopicsExecute(r ApiListKafkaTopicsRequest) 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdatePartitionCountKafkaTopicRequest struct {
+	ctx                             _context.Context
+	ApiService                      TopicV3Api
+	clusterId                       string
+	topicName                       string
+	updatePartitionCountRequestData *UpdatePartitionCountRequestData
+}
+
+// The number of partitions to increase the partition count to.
+func (r ApiUpdatePartitionCountKafkaTopicRequest) UpdatePartitionCountRequestData(updatePartitionCountRequestData UpdatePartitionCountRequestData) ApiUpdatePartitionCountKafkaTopicRequest {
+	r.updatePartitionCountRequestData = &updatePartitionCountRequestData
+	return r
+}
+
+func (r ApiUpdatePartitionCountKafkaTopicRequest) Execute() (TopicData, *_nethttp.Response, error) {
+	return r.ApiService.UpdatePartitionCountKafkaTopicExecute(r)
+}
+
+/*
+UpdatePartitionCountKafkaTopic Update partition count
+
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Increases number of partitions on a topic.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param topicName The topic name.
+ @return ApiUpdatePartitionCountKafkaTopicRequest
+*/
+func (a *TopicV3ApiService) UpdatePartitionCountKafkaTopic(ctx _context.Context, clusterId string, topicName string) ApiUpdatePartitionCountKafkaTopicRequest {
+	return ApiUpdatePartitionCountKafkaTopicRequest{
+		ApiService: a,
+		ctx:        ctx,
+		clusterId:  clusterId,
+		topicName:  topicName,
+	}
+}
+
+// Execute executes the request
+//  @return TopicData
+func (a *TopicV3ApiService) UpdatePartitionCountKafkaTopicExecute(r ApiUpdatePartitionCountKafkaTopicRequest) (TopicData, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  TopicData
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TopicV3ApiService.UpdatePartitionCountKafkaTopic")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/kafka/v3/clusters/{cluster_id}/topics/{topic_name}"
+	localVarPath = strings.Replace(localVarPath, "{"+"cluster_id"+"}", _neturl.PathEscape(parameterToString(r.clusterId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"topic_name"+"}", _neturl.PathEscape(parameterToString(r.topicName, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.updatePartitionCountRequestData
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

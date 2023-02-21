@@ -4,6 +4,7 @@ info:
     email: cire-traffic@confluent.io
     name: CIRE Traffic
     url: https://confluent.slack.com/app_redirect?channel=cire-traffic-eng
+  description: Network API
   title: Network API
   version: 0.0.1-alpha1
   x-api-id: c1259878-7b77-11eb-9439-0242ac130002
@@ -688,13 +689,13 @@ paths:
             --url https://api.confluent.cloud/networking/v1/networks \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-aws-us-east1","cloud":"AWS","region":"us-east-1","connection_types":["PRIVATELINK"],"cidr":"10.200.0.0/16","zones":["use1-az1","use1-az2","use1-az3"],"environment":{"id":"env-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"prod-aws-us-east1","cloud":"AWS","region":"us-east-1","connection_types":["PRIVATELINK"],"cidr":"10.200.0.0/16","zones":["use1-az1","use1-az2","use1-az3"],"zones_info":[{"zone_id":"use1-az3","cidr":"10.20.0.0/27"},{"zone_id":"use1-az3","cidr":"10.20.0.0/27"},{"zone_id":"use1-az3","cidr":"10.20.0.0/27"}],"dns_config":{"resolution":"CHASED_PRIVATE"},"reserved_cidr":"172.20.255.0/24","environment":{"id":"env-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"CHASED_PRIVATE\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/networks")
             .post(body)
@@ -710,20 +711,24 @@ paths:
           :\\\"prod-aws-us-east1\\\",\\\"cloud\\\":\\\"AWS\\\",\\\"region\\\":\\\"\
           us-east-1\\\",\\\"connection_types\\\":[\\\"PRIVATELINK\\\"],\\\"cidr\\\"\
           :\\\"10.200.0.0/16\\\",\\\"zones\\\":[\\\"use1-az1\\\",\\\"use1-az2\\\"\
-          ,\\\"use1-az3\\\"],\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"\
-          environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\"\
-          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          ,\\\"use1-az3\\\"],\\\"zones_info\\\":[{\\\"zone_id\\\":\\\"use1-az3\\\"\
+          ,\\\"cidr\\\":\\\"10.20.0.0/27\\\"},{\\\"zone_id\\\":\\\"use1-az3\\\",\\\
+          \"cidr\\\":\\\"10.20.0.0/27\\\"},{\\\"zone_id\\\":\\\"use1-az3\\\",\\\"\
+          cidr\\\":\\\"10.20.0.0/27\\\"}],\\\"dns_config\\\":{\\\"resolution\\\":\\\
+          \"CHASED_PRIVATE\\\"},\\\"reserved_cidr\\\":\\\"172.20.255.0/24\\\",\\\"\
+          environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"environment\\\":\\\"string\\\
+          \"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"CHASED_PRIVATE\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -772,6 +777,13 @@ paths:
               connection_types: ['PRIVATELINK'],
               cidr: '10.200.0.0/16',
               zones: ['use1-az1', 'use1-az2', 'use1-az3'],
+              zones_info: [
+                {zone_id: 'use1-az3', cidr: '10.20.0.0/27'},
+                {zone_id: 'use1-az3', cidr: '10.20.0.0/27'},
+                {zone_id: 'use1-az3', cidr: '10.20.0.0/27'}
+              ],
+              dns_config: {resolution: 'CHASED_PRIVATE'},
+              reserved_cidr: '172.20.255.0/24',
               environment: {id: 'env-00000', environment: 'string'}
             }
           }));
@@ -788,7 +800,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"CHASED_PRIVATE\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -797,7 +809,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"CHASED_PRIVATE\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /networking/v1/networks/{id}:
     delete:
@@ -1575,13 +1587,13 @@ paths:
             --url 'https://api.confluent.cloud/networking/v1/networks/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-aws-us-east1","cloud":"AWS","region":"us-east-1","connection_types":["PRIVATELINK"],"cidr":"10.200.0.0/16","zones":["use1-az1","use1-az2","use1-az3"],"environment":{"id":"env-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"prod-aws-us-east1","cloud":"AWS","region":"us-east-1","connection_types":["PRIVATELINK"],"cidr":"10.200.0.0/16","zones":["use1-az1","use1-az2","use1-az3"],"zones_info":[{"zone_id":"use1-az3","cidr":"10.20.0.0/27"},{"zone_id":"use1-az3","cidr":"10.20.0.0/27"},{"zone_id":"use1-az3","cidr":"10.20.0.0/27"}],"dns_config":{"resolution":"CHASED_PRIVATE"},"reserved_cidr":"172.20.255.0/24","environment":{"id":"env-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"CHASED_PRIVATE\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/networks/{id}")
             .patch(body)
@@ -1597,20 +1609,24 @@ paths:
           :\\\"prod-aws-us-east1\\\",\\\"cloud\\\":\\\"AWS\\\",\\\"region\\\":\\\"\
           us-east-1\\\",\\\"connection_types\\\":[\\\"PRIVATELINK\\\"],\\\"cidr\\\"\
           :\\\"10.200.0.0/16\\\",\\\"zones\\\":[\\\"use1-az1\\\",\\\"use1-az2\\\"\
-          ,\\\"use1-az3\\\"],\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"\
-          environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\"\
-          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          ,\\\"use1-az3\\\"],\\\"zones_info\\\":[{\\\"zone_id\\\":\\\"use1-az3\\\"\
+          ,\\\"cidr\\\":\\\"10.20.0.0/27\\\"},{\\\"zone_id\\\":\\\"use1-az3\\\",\\\
+          \"cidr\\\":\\\"10.20.0.0/27\\\"},{\\\"zone_id\\\":\\\"use1-az3\\\",\\\"\
+          cidr\\\":\\\"10.20.0.0/27\\\"}],\\\"dns_config\\\":{\\\"resolution\\\":\\\
+          \"CHASED_PRIVATE\\\"},\\\"reserved_cidr\\\":\\\"172.20.255.0/24\\\",\\\"\
+          environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"environment\\\":\\\"string\\\
+          \"}}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"CHASED_PRIVATE\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -1659,6 +1675,13 @@ paths:
               connection_types: ['PRIVATELINK'],
               cidr: '10.200.0.0/16',
               zones: ['use1-az1', 'use1-az2', 'use1-az3'],
+              zones_info: [
+                {zone_id: 'use1-az3', cidr: '10.20.0.0/27'},
+                {zone_id: 'use1-az3', cidr: '10.20.0.0/27'},
+                {zone_id: 'use1-az3', cidr: '10.20.0.0/27'}
+              ],
+              dns_config: {resolution: 'CHASED_PRIVATE'},
+              reserved_cidr: '172.20.255.0/24',
               environment: {id: 'env-00000', environment: 'string'}
             }
           }));
@@ -1675,7 +1698,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"CHASED_PRIVATE\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1684,7 +1707,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"CHASED_PRIVATE\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /networking/v1/peerings:
     get:
@@ -3575,7 +3598,7 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-generally-available@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Generally%20Available&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Generally%20Available%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create a transit gateway attachment.
       operationId: createNetworkingV1TransitGatewayAttachment
@@ -3839,7 +3862,6 @@ paths:
       summary: Create a Transit Gateway Attachment
       tags:
       - Transit Gateway Attachments (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -3847,13 +3869,13 @@ paths:
             --url https://api.confluent.cloud/networking/v1/transit-gateway-attachments \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-tgw-use1","cloud":{"kind":"AwsTransitGatewayAttachment","ram_share_arn":"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx","transit_gateway_id":"tgw-xxxxxxxxxxxxxxxxx","enable_custom_routes":false,"routes":["100.64.0.0/10","10.0.0.0/8","192.168.0.0/16","172.16.0.0/12"]},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"n-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"prod-tgw-use1","cloud":{"kind":"AwsTransitGatewayAttachment","ram_share_arn":"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx","transit_gateway_id":"tgw-xxxxxxxxxxxxxxxxx","routes":["100.64.0.0/10","10.0.0.0/8","192.168.0.0/16","172.16.0.0/12"]},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"n-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/transit-gateway-attachments")
             .post(body)
@@ -3868,11 +3890,11 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"prod-tgw-use1\\\",\\\"cloud\\\":{\\\"kind\\\":\\\"AwsTransitGatewayAttachment\\\
           \",\\\"ram_share_arn\\\":\\\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\\\
-          \",\\\"transit_gateway_id\\\":\\\"tgw-xxxxxxxxxxxxxxxxx\\\",\\\"enable_custom_routes\\\
-          \":false,\\\"routes\\\":[\\\"100.64.0.0/10\\\",\\\"10.0.0.0/8\\\",\\\"192.168.0.0/16\\\
-          \",\\\"172.16.0.0/12\\\"]},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
-          \",\\\"environment\\\":\\\"string\\\"},\\\"network\\\":{\\\"id\\\":\\\"\
-          n-00000\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
+          \",\\\"transit_gateway_id\\\":\\\"tgw-xxxxxxxxxxxxxxxxx\\\",\\\"routes\\\
+          \":[\\\"100.64.0.0/10\\\",\\\"10.0.0.0/8\\\",\\\"192.168.0.0/16\\\",\\\"\
+          172.16.0.0/12\\\"]},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\
+          \"environment\\\":\\\"string\\\"},\\\"network\\\":{\\\"id\\\":\\\"n-00000\\\
+          \",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
           POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
           )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
           \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
@@ -3884,7 +3906,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -3932,7 +3954,6 @@ paths:
                 kind: 'AwsTransitGatewayAttachment',
                 ram_share_arn: 'arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx',
                 transit_gateway_id: 'tgw-xxxxxxxxxxxxxxxxx',
-                enable_custom_routes: false,
                 routes: ['100.64.0.0/10', '10.0.0.0/8', '192.168.0.0/16', '172.16.0.0/12']
               },
               environment: {id: 'env-00000', environment: 'string'},
@@ -3952,7 +3973,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -3961,12 +3982,12 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /networking/v1/transit-gateway-attachments/{id}:
     delete:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-generally-available@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Generally%20Available&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Generally%20Available%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete a transit gateway attachment.
       operationId: deleteNetworkingV1TransitGatewayAttachment
@@ -4126,7 +4147,6 @@ paths:
       summary: Delete a Transit Gateway Attachment
       tags:
       - Transit Gateway Attachments (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -4493,7 +4513,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-generally-available@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Generally%20Available&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Generally%20Available%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update a transit gateway attachment.
 
@@ -4741,7 +4761,6 @@ paths:
       summary: Update a Transit Gateway Attachment
       tags:
       - Transit Gateway Attachments (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -4749,13 +4768,13 @@ paths:
             --url 'https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-tgw-use1","cloud":{"kind":"AwsTransitGatewayAttachment","ram_share_arn":"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx","transit_gateway_id":"tgw-xxxxxxxxxxxxxxxxx","enable_custom_routes":false,"routes":["100.64.0.0/10","10.0.0.0/8","192.168.0.0/16","172.16.0.0/12"]},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"string","environment":"string"}}}'
+            --data '{"spec":{"display_name":"prod-tgw-use1","cloud":{"kind":"AwsTransitGatewayAttachment","ram_share_arn":"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx","transit_gateway_id":"tgw-xxxxxxxxxxxxxxxxx","routes":["100.64.0.0/10","10.0.0.0/8","192.168.0.0/16","172.16.0.0/12"]},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"string","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}")
             .patch(body)
@@ -4770,11 +4789,11 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"prod-tgw-use1\\\",\\\"cloud\\\":{\\\"kind\\\":\\\"AwsTransitGatewayAttachment\\\
           \",\\\"ram_share_arn\\\":\\\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\\\
-          \",\\\"transit_gateway_id\\\":\\\"tgw-xxxxxxxxxxxxxxxxx\\\",\\\"enable_custom_routes\\\
-          \":false,\\\"routes\\\":[\\\"100.64.0.0/10\\\",\\\"10.0.0.0/8\\\",\\\"192.168.0.0/16\\\
-          \",\\\"172.16.0.0/12\\\"]},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
-          \",\\\"environment\\\":\\\"string\\\"},\\\"network\\\":{\\\"id\\\":\\\"\
-          string\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
+          \",\\\"transit_gateway_id\\\":\\\"tgw-xxxxxxxxxxxxxxxxx\\\",\\\"routes\\\
+          \":[\\\"100.64.0.0/10\\\",\\\"10.0.0.0/8\\\",\\\"192.168.0.0/16\\\",\\\"\
+          172.16.0.0/12\\\"]},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\
+          \"environment\\\":\\\"string\\\"},\\\"network\\\":{\\\"id\\\":\\\"string\\\
+          \",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
           PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
           )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
           \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
@@ -4786,7 +4805,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -4834,7 +4853,6 @@ paths:
                 kind: 'AwsTransitGatewayAttachment',
                 ram_share_arn: 'arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx',
                 transit_gateway_id: 'tgw-xxxxxxxxxxxxxxxxx',
-                enable_custom_routes: false,
                 routes: ['100.64.0.0/10', '10.0.0.0/8', '192.168.0.0/16', '172.16.0.0/12']
               },
               environment: {id: 'env-00000', environment: 'string'},
@@ -4854,7 +4872,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -4863,7 +4881,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"enable_custom_routes\":false,\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /networking/v1/private-link-accesses:
     get:
@@ -6929,7 +6947,7 @@ components:
 
               FAILED: attachment is in a failed state;
 
-              DEPROVISIONING: attachment deprovisioning is in progress;
+              DEPROVISIONING: attachment deprovisioning is in progress.
           example: READY
           readOnly: true
           type: string
@@ -7064,6 +7082,13 @@ components:
       example: 10.200.0.0/16
       pattern: ^\d+\.\d+\.\d+\.\d+/\d+$
       type: string
+    networking.v1.DnsResolutionType:
+      default: CHASED_PRIVATE
+      description: Network DNS resolution type.
+      type: string
+      x-extensible-enum:
+      - CHASED_PRIVATE
+      - PRIVATE
     networking.v1.ConnectionType:
       description: Network connection type.
       example: PRIVATELINK
@@ -7086,6 +7111,16 @@ components:
       minItems: 1
       type: array
       uniqueItems: true
+    networking.v1.DnsConfig:
+      description: The network DNS config
+      properties:
+        resolution:
+          allOf:
+          - $ref: '#/components/schemas/networking.v1.DnsResolutionType'
+          description: Network DNS resolution
+      required:
+      - resolution
+      type: object
     networking.v1.AwsNetwork:
       description: The AWS network details.
       properties:
@@ -7332,11 +7367,6 @@ components:
             to be attached to.
           example: tgw-xxxxxxxxxxxxxxxxx
           type: string
-        enable_custom_routes:
-          default: false
-          description: Enable custom destination routes in Confluent Cloud.
-          example: false
-          type: boolean
         routes:
           description: List of destination routes.
           example:
@@ -7350,6 +7380,7 @@ components:
       required:
       - kind
       - ram_share_arn
+      - routes
       - transit_gateway_id
       title: AWS
       type: object
@@ -7431,6 +7462,28 @@ components:
       - kind
       - project
       title: GCP
+      type: object
+    networking.v1.ZonesInfo:
+      description: Cloud provider zones metadata.
+      items:
+        $ref: '#/components/schemas/networking.v1.ZoneInfo'
+      maxItems: 3
+      minItems: 3
+      type: array
+      uniqueItems: true
+    networking.v1.ZoneInfo:
+      description: Cloud provider zone metadata.
+      properties:
+        zone_id:
+          description: Cloud provider zone id
+          example: use1-az3
+          type: string
+        cidr:
+          description: |
+            The IPv4 [CIDR block](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) to used for this network.
+            Must be a `/27`. Required for VPC peering and AWS TransitGateway.
+          example: 10.20.0.0/27
+          type: string
       type: object
     MultipleSearchFilter:
       description: Filter a collection by a string search for one or more values
@@ -7572,6 +7625,40 @@ components:
           minItems: 3
           type: array
           uniqueItems: true
+          x-immutable: true
+        zones_info:
+          allOf:
+          - $ref: '#/components/schemas/networking.v1.ZonesInfo'
+          description: |
+            Each item represents information related to a single zone.
+
+            Note - The attribute is in an [Early Access lifecycle stage]
+              (https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
+        dns_config:
+          allOf:
+          - $ref: '#/components/schemas/networking.v1.DnsConfig'
+          description: |
+            DNS config only applies to PrivateLink network connection type.
+
+            When resolution is CHASED_PRIVATE, clusters in this network require both public and private DNS
+             to resolve cluster endpoints.
+
+            When resolution is PRIVATE, clusters in this network only require private DNS
+             to resolve cluster endpoints.
+
+            Note - The value PRIVATE is only available to AWS networks with PRIVATELINK connection type.
+          x-immutable: true
+        reserved_cidr:
+          description: |
+            The reserved CIDR config is used only by AWS networks with connection_types = Vpc_Peering or Transit_Gateway
+
+            An IPv4 [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
+              reserved for Confluent Cloud Network. Must be \24.
+              If not specified, Confluent Cloud Network uses 172.20.255.0/24
+
+            Note - The attribute is in an [Early Access lifecycle stage](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
+          example: 172.20.255.0/24
+          type: string
           x-immutable: true
         environment:
           allOf:
@@ -7768,6 +7855,7 @@ components:
           oneOf:
           - $ref: '#/components/schemas/networking.v1.AwsTransitGatewayAttachment'
           type: object
+          x-immutable: true
           x-one-of-name: NetworkingV1TransitGatewayAttachmentSpecCloudOneOf
         environment:
           allOf:
@@ -8059,6 +8147,14 @@ components:
           description: The name of the network
           example: prod-aws-us-east1
           type: string
+        zones_info:
+          allOf:
+          - $ref: '#/components/schemas/networking.v1.ZonesInfo'
+          description: |
+            Each item represents information related to a single zone.
+
+            Note - The attribute is in an [Early Access lifecycle stage]
+              (https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
         environment:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
@@ -8198,16 +8294,6 @@ components:
           description: The name of the TGW attachment
           example: prod-tgw-use1
           type: string
-        cloud:
-          description: The cloud-specific Transit Gateway details.
-          discriminator:
-            mapping:
-              AwsTransitGatewayAttachment: '#/components/schemas/networking.v1.AwsTransitGatewayAttachment'
-            propertyName: kind
-          oneOf:
-          - $ref: '#/components/schemas/networking.v1.AwsTransitGatewayAttachment'
-          type: object
-          x-one-of-name: NetworkingV1TransitGatewayAttachmentSpecUpdateCloudOneOf
         environment:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
