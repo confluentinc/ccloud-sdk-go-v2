@@ -37,13 +37,13 @@ import (
 type CmkV2ClusterSpec struct {
 	// The name of the cluster.
 	DisplayName *string `json:"display_name,omitempty"`
-	// The availability zone configuration of the cluster Note: The availability zone can be updated from Single to Multi-Zone for Basic and Standard clusters but cannot be downgraded from Multi-Zone to Single Zone. 
+	// The availability zone configuration of the cluster Note: The availability zone can be updated from Single to Multi-Zone for Basic and Standard clusters but cannot be downgraded from Multi-Zone to Single Zone.
 	Availability *string `json:"availability,omitempty"`
 	// The cloud service provider in which the cluster is running.
 	Cloud *string `json:"cloud,omitempty"`
 	// The cloud service provider region where the cluster is running.
 	Region *string `json:"region,omitempty"`
-	// The configuration of the Kafka cluster.  Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic. 
+	// The configuration of the Kafka cluster. Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.
 	Config *CmkV2ClusterSpecConfigOneOf `json:"config,omitempty"`
 	// The bootstrap endpoint used by Kafka clients to connect to the cluster.
 	KafkaBootstrapEndpoint *string `json:"kafka_bootstrap_endpoint,omitempty"`
@@ -434,47 +434,47 @@ func (o *CmkV2ClusterSpec) SetByok(v GlobalObjectReference) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *CmkV2ClusterSpec) Redact() {
-    o.recurseRedact(o.DisplayName)
-    o.recurseRedact(o.Availability)
-    o.recurseRedact(o.Cloud)
-    o.recurseRedact(o.Region)
-    o.recurseRedact(o.Config)
-    o.recurseRedact(o.KafkaBootstrapEndpoint)
-    o.recurseRedact(o.HttpEndpoint)
-    o.recurseRedact(o.ApiEndpoint)
-    o.recurseRedact(o.Environment)
-    o.recurseRedact(o.Network)
-    o.recurseRedact(o.Byok)
+	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.Availability)
+	o.recurseRedact(o.Cloud)
+	o.recurseRedact(o.Region)
+	o.recurseRedact(o.Config)
+	o.recurseRedact(o.KafkaBootstrapEndpoint)
+	o.recurseRedact(o.HttpEndpoint)
+	o.recurseRedact(o.ApiEndpoint)
+	o.recurseRedact(o.Environment)
+	o.recurseRedact(o.Network)
+	o.recurseRedact(o.Byok)
 }
 
 func (o *CmkV2ClusterSpec) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o CmkV2ClusterSpec) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o CmkV2ClusterSpec) MarshalJSON() ([]byte, error) {
@@ -550,5 +550,3 @@ func (v *NullableCmkV2ClusterSpec) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

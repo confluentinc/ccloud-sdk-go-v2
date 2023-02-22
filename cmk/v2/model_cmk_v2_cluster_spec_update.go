@@ -37,9 +37,9 @@ import (
 type CmkV2ClusterSpecUpdate struct {
 	// The name of the cluster.
 	DisplayName *string `json:"display_name,omitempty"`
-	// The availability zone configuration of the cluster Note: The availability zone can be updated from Single to Multi-Zone for Basic and Standard clusters but cannot be downgraded from Multi-Zone to Single Zone. 
+	// The availability zone configuration of the cluster Note: The availability zone can be updated from Single to Multi-Zone for Basic and Standard clusters but cannot be downgraded from Multi-Zone to Single Zone.
 	Availability *string `json:"availability,omitempty"`
-	// The configuration of the Kafka cluster.  Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic. 
+	// The configuration of the Kafka cluster. Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.
 	Config *CmkV2ClusterSpecUpdateConfigOneOf `json:"config,omitempty"`
 	// The environment to which this belongs.
 	Environment *EnvScopedObjectReference `json:"environment,omitempty"`
@@ -196,40 +196,40 @@ func (o *CmkV2ClusterSpecUpdate) SetEnvironment(v EnvScopedObjectReference) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *CmkV2ClusterSpecUpdate) Redact() {
-    o.recurseRedact(o.DisplayName)
-    o.recurseRedact(o.Availability)
-    o.recurseRedact(o.Config)
-    o.recurseRedact(o.Environment)
+	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.Availability)
+	o.recurseRedact(o.Config)
+	o.recurseRedact(o.Environment)
 }
 
 func (o *CmkV2ClusterSpecUpdate) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o CmkV2ClusterSpecUpdate) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o CmkV2ClusterSpecUpdate) MarshalJSON() ([]byte, error) {
@@ -284,5 +284,3 @@ func (v *NullableCmkV2ClusterSpecUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

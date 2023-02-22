@@ -22,7 +22,6 @@ tags:
     [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `Clusters` objects represent Apache Kafka Clusters on Confluent Cloud.
-
     The API allows you to list, create, read, update, and delete your Kafka clusters.
 
 
@@ -241,14 +240,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/cmk/v2/clusters?environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/cmk/v2/clusters?environment=env-00000&spec.network=n-00000%2Cn-00001' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/cmk/v2/clusters?environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/cmk/v2/clusters?environment=env-00000&spec.network=n-00000%2Cn-00001")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -256,7 +255,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cmk/v2/clusters?environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cmk/v2/clusters?environment=env-00000&spec.network=n-00000%2Cn-00001\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -269,7 +268,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/cmk/v2/clusters?environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/cmk/v2/clusters?environment=env-00000&spec.network=n-00000%2Cn-00001", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -283,7 +282,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/cmk/v2/clusters?environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/cmk/v2/clusters?environment=env-00000&spec.network=n-00000%2Cn-00001",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -308,7 +307,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cmk/v2/clusters?environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cmk/v2/clusters?environment=env-00000&spec.network=n-00000%2Cn-00001");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -317,7 +316,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/cmk/v2/clusters?environment=SOME_STRING_VALUE&spec.network=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/cmk/v2/clusters?environment=env-00000&spec.network=n-00000%2Cn-00001");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -887,14 +886,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/cmk/v2/clusters/%7Bid%7D?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/cmk/v2/clusters/%7Bid%7D?environment=env-00000")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -902,7 +901,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cmk/v2/clusters/%7Bid%7D?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -915,7 +914,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE", headers=headers)
+          conn.request("DELETE", "/cmk/v2/clusters/%7Bid%7D?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -929,7 +928,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE",
+            "path": "/cmk/v2/clusters/%7Bid%7D?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -954,7 +953,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cmk/v2/clusters/%7Bid%7D?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -963,7 +962,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/cmk/v2/clusters/%7Bid%7D?environment=env-00000");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1175,14 +1174,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/cmk/v2/clusters/%7Bid%7D?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/cmk/v2/clusters/%7Bid%7D?environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1190,7 +1189,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cmk/v2/clusters/%7Bid%7D?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1203,7 +1202,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/cmk/v2/clusters/%7Bid%7D?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1217,7 +1216,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE",
+            "path": "/cmk/v2/clusters/%7Bid%7D?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1242,7 +1241,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cmk/v2/clusters/%7Bid%7D?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1251,7 +1250,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/cmk/v2/clusters/{id}?environment=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/cmk/v2/clusters/%7Bid%7D?environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1517,7 +1516,7 @@ paths:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url 'https://api.confluent.cloud/cmk/v2/clusters/{id}' \
+            --url https://api.confluent.cloud/cmk/v2/clusters/%7Bid%7D \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"spec":{"display_name":"ProdKafkaCluster","availability":"SINGLE_ZONE","cloud":"GCP","region":"us-east4","config":{"kind":"Basic"},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"string","environment":"string"},"byok":{"id":"string"}}}'
@@ -1528,7 +1527,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"},\"byok\":{\"id\":\"string\"}}}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/cmk/v2/clusters/{id}")
+            .url("https://api.confluent.cloud/cmk/v2/clusters/%7Bid%7D")
             .patch(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -1537,7 +1536,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cmk/v2/clusters/{id}\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cmk/v2/clusters/%7Bid%7D\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"ProdKafkaCluster\\\",\\\"availability\\\":\\\"SINGLE_ZONE\\\",\\\"\
           cloud\\\":\\\"GCP\\\",\\\"region\\\":\\\"us-east4\\\",\\\"config\\\":{\\\
@@ -1562,7 +1561,7 @@ paths:
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/cmk/v2/clusters/{id}", payload, headers)
+          conn.request("PATCH", "/cmk/v2/clusters/%7Bid%7D", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1576,7 +1575,7 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/cmk/v2/clusters/{id}",
+            "path": "/cmk/v2/clusters/%7Bid%7D",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -1614,7 +1613,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cmk/v2/clusters/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cmk/v2/clusters/%7Bid%7D");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -1626,7 +1625,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/cmk/v2/clusters/{id}");
+          var client = new RestClient("https://api.confluent.cloud/cmk/v2/clusters/%7Bid%7D");
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
@@ -1832,7 +1831,6 @@ components:
     cmk.v2.Cluster:
       description: |-
         `Clusters` objects represent Apache Kafka Clusters on Confluent Cloud.
-
         The API allows you to list, create, read, update, and delete your Kafka clusters.
 
 
@@ -1940,19 +1938,6 @@ components:
       required:
       - kind
       type: object
-    cmk.v2.Enterprise:
-      description: |
-        The enterprise cluster type.
-      properties:
-        kind:
-          description: |
-            Enterprise cluster type.
-          enum:
-          - Enterprise
-          type: string
-      required:
-      - kind
-      type: object
     cmk.v2.Dedicated:
       description: |
         A dedicated cluster with its parameters.
@@ -1980,10 +1965,8 @@ components:
         zones:
           description: |
             The list of zones the cluster is in.
-
             On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)
              (e.g. use1-az3)
-
             On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)
              (e.g. us-central1-c).
           example:
@@ -2013,7 +1996,6 @@ components:
     cmk.v2.ClusterList:
       description: |-
         `Clusters` objects represent Apache Kafka Clusters on Confluent Cloud.
-
         The API allows you to list, create, read, update, and delete your Kafka clusters.
 
 
@@ -2119,14 +2101,12 @@ components:
         config:
           description: |
             The configuration of the Kafka cluster.
-
             Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.
           discriminator:
             mapping:
               Basic: '#/components/schemas/cmk.v2.Basic'
               Standard: '#/components/schemas/cmk.v2.Standard'
               Dedicated: '#/components/schemas/cmk.v2.Dedicated'
-              Enterprise: '#/components/schemas/cmk.v2.Enterprise'
             propertyName: kind
           example:
             kind: Basic
@@ -2134,7 +2114,6 @@ components:
           - $ref: '#/components/schemas/cmk.v2.Basic'
           - $ref: '#/components/schemas/cmk.v2.Standard'
           - $ref: '#/components/schemas/cmk.v2.Dedicated'
-          - $ref: '#/components/schemas/cmk.v2.Enterprise'
           x-one-of-name: CmkV2ClusterSpecConfigOneOf
         kafka_bootstrap_endpoint:
           description: The bootstrap endpoint used by Kafka clients to connect to
@@ -2418,14 +2397,12 @@ components:
         config:
           description: |
             The configuration of the Kafka cluster.
-
             Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.
           discriminator:
             mapping:
               Basic: '#/components/schemas/cmk.v2.Basic'
               Standard: '#/components/schemas/cmk.v2.Standard'
               Dedicated: '#/components/schemas/cmk.v2.Dedicated'
-              Enterprise: '#/components/schemas/cmk.v2.Enterprise'
             propertyName: kind
           example:
             kind: Basic
@@ -2433,7 +2410,6 @@ components:
           - $ref: '#/components/schemas/cmk.v2.Basic'
           - $ref: '#/components/schemas/cmk.v2.Standard'
           - $ref: '#/components/schemas/cmk.v2.Dedicated'
-          - $ref: '#/components/schemas/cmk.v2.Enterprise'
           x-one-of-name: CmkV2ClusterSpecUpdateConfigOneOf
         environment:
           allOf:
@@ -2446,7 +2422,6 @@ components:
     cmk.v2.ClusterUpdate:
       description: |-
         `Clusters` objects represent Apache Kafka Clusters on Confluent Cloud.
-
         The API allows you to list, create, read, update, and delete your Kafka clusters.
 
 
