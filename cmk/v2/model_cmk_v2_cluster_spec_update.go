@@ -37,10 +37,12 @@ import (
 type CmkV2ClusterSpecUpdate struct {
 	// The name of the cluster.
 	DisplayName *string `json:"display_name,omitempty"`
-	// The configuration of the Kafka cluster.  Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic. 
+	// The availability zone configuration of the cluster Note: The availability zone can be updated from Single to Multi-Zone for Basic and Standard clusters but cannot be downgraded from Multi-Zone to Single Zone.
+	Availability *string `json:"availability,omitempty"`
+	// The configuration of the Kafka cluster. Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.
 	Config *CmkV2ClusterSpecUpdateConfigOneOf `json:"config,omitempty"`
 	// The environment to which this belongs.
-	Environment *ObjectReference `json:"environment,omitempty"`
+	Environment *EnvScopedObjectReference `json:"environment,omitempty"`
 }
 
 // NewCmkV2ClusterSpecUpdate instantiates a new CmkV2ClusterSpecUpdate object
@@ -49,6 +51,8 @@ type CmkV2ClusterSpecUpdate struct {
 // will change when the set of required properties is changed
 func NewCmkV2ClusterSpecUpdate() *CmkV2ClusterSpecUpdate {
 	this := CmkV2ClusterSpecUpdate{}
+	var availability string = "SINGLE_ZONE"
+	this.Availability = &availability
 	return &this
 }
 
@@ -57,6 +61,8 @@ func NewCmkV2ClusterSpecUpdate() *CmkV2ClusterSpecUpdate {
 // but it doesn't guarantee that properties required by API are set
 func NewCmkV2ClusterSpecUpdateWithDefaults() *CmkV2ClusterSpecUpdate {
 	this := CmkV2ClusterSpecUpdate{}
+	var availability string = "SINGLE_ZONE"
+	this.Availability = &availability
 	return &this
 }
 
@@ -92,6 +98,38 @@ func (o *CmkV2ClusterSpecUpdate) SetDisplayName(v string) {
 	o.DisplayName = &v
 }
 
+// GetAvailability returns the Availability field value if set, zero value otherwise.
+func (o *CmkV2ClusterSpecUpdate) GetAvailability() string {
+	if o == nil || o.Availability == nil {
+		var ret string
+		return ret
+	}
+	return *o.Availability
+}
+
+// GetAvailabilityOk returns a tuple with the Availability field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CmkV2ClusterSpecUpdate) GetAvailabilityOk() (*string, bool) {
+	if o == nil || o.Availability == nil {
+		return nil, false
+	}
+	return o.Availability, true
+}
+
+// HasAvailability returns a boolean if a field has been set.
+func (o *CmkV2ClusterSpecUpdate) HasAvailability() bool {
+	if o != nil && o.Availability != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAvailability gets a reference to the given string and assigns it to the Availability field.
+func (o *CmkV2ClusterSpecUpdate) SetAvailability(v string) {
+	o.Availability = &v
+}
+
 // GetConfig returns the Config field value if set, zero value otherwise.
 func (o *CmkV2ClusterSpecUpdate) GetConfig() CmkV2ClusterSpecUpdateConfigOneOf {
 	if o == nil || o.Config == nil {
@@ -125,9 +163,9 @@ func (o *CmkV2ClusterSpecUpdate) SetConfig(v CmkV2ClusterSpecUpdateConfigOneOf) 
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *CmkV2ClusterSpecUpdate) GetEnvironment() ObjectReference {
+func (o *CmkV2ClusterSpecUpdate) GetEnvironment() EnvScopedObjectReference {
 	if o == nil || o.Environment == nil {
-		var ret ObjectReference
+		var ret EnvScopedObjectReference
 		return ret
 	}
 	return *o.Environment
@@ -135,7 +173,7 @@ func (o *CmkV2ClusterSpecUpdate) GetEnvironment() ObjectReference {
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CmkV2ClusterSpecUpdate) GetEnvironmentOk() (*ObjectReference, bool) {
+func (o *CmkV2ClusterSpecUpdate) GetEnvironmentOk() (*EnvScopedObjectReference, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -151,52 +189,56 @@ func (o *CmkV2ClusterSpecUpdate) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
-func (o *CmkV2ClusterSpecUpdate) SetEnvironment(v ObjectReference) {
+// SetEnvironment gets a reference to the given EnvScopedObjectReference and assigns it to the Environment field.
+func (o *CmkV2ClusterSpecUpdate) SetEnvironment(v EnvScopedObjectReference) {
 	o.Environment = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
 func (o *CmkV2ClusterSpecUpdate) Redact() {
-    o.recurseRedact(o.DisplayName)
-    o.recurseRedact(o.Config)
-    o.recurseRedact(o.Environment)
+	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.Availability)
+	o.recurseRedact(o.Config)
+	o.recurseRedact(o.Environment)
 }
 
 func (o *CmkV2ClusterSpecUpdate) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o CmkV2ClusterSpecUpdate) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o CmkV2ClusterSpecUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.DisplayName != nil {
 		toSerialize["display_name"] = o.DisplayName
+	}
+	if o.Availability != nil {
+		toSerialize["availability"] = o.Availability
 	}
 	if o.Config != nil {
 		toSerialize["config"] = o.Config
@@ -242,5 +284,3 @@ func (v *NullableCmkV2ClusterSpecUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

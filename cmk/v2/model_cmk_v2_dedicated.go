@@ -33,15 +33,16 @@ import (
 	"reflect"
 )
 
-// CmkV2Dedicated A dedicated cluster with its parameters. 
+// CmkV2Dedicated A dedicated cluster with its parameters.
 type CmkV2Dedicated struct {
-	// Dedicated cluster type. 
+	// Dedicated cluster type.
 	Kind string `json:"kind"`
-	// The number of Confluent Kafka Units (CKUs) for Dedicated cluster types. MULTI_ZONE dedicated clusters must have at least two CKUs. 
+	// The number of Confluent Kafka Units (CKUs) for Dedicated cluster types. MULTI_ZONE dedicated clusters must have at least two CKUs.
 	Cku int32 `json:"cku"`
-	// The id of the encryption key that is used to encrypt the data in the Kafka cluster. (e.g. for Amazon Web Services, the Amazon Resource Name of the key). 
+	// The id of the encryption key that is used to encrypt the data in the Kafka cluster. (e.g. for Amazon Web Services, the Amazon Resource Name of the key).
+	// Deprecated
 	EncryptionKey *string `json:"encryption_key,omitempty"`
-	// The list of zones the cluster is in.  On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3)  On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c). 
+	// The list of zones the cluster is in. On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3) On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c).
 	Zones *[]string `json:"zones,omitempty"`
 }
 
@@ -77,7 +78,7 @@ func (o *CmkV2Dedicated) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *CmkV2Dedicated) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -101,7 +102,7 @@ func (o *CmkV2Dedicated) GetCku() int32 {
 // GetCkuOk returns a tuple with the Cku field value
 // and a boolean to check if the value has been set.
 func (o *CmkV2Dedicated) GetCkuOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Cku, true
@@ -113,6 +114,7 @@ func (o *CmkV2Dedicated) SetCku(v int32) {
 }
 
 // GetEncryptionKey returns the EncryptionKey field value if set, zero value otherwise.
+// Deprecated
 func (o *CmkV2Dedicated) GetEncryptionKey() string {
 	if o == nil || o.EncryptionKey == nil {
 		var ret string
@@ -123,6 +125,7 @@ func (o *CmkV2Dedicated) GetEncryptionKey() string {
 
 // GetEncryptionKeyOk returns a tuple with the EncryptionKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *CmkV2Dedicated) GetEncryptionKeyOk() (*string, bool) {
 	if o == nil || o.EncryptionKey == nil {
 		return nil, false
@@ -140,6 +143,7 @@ func (o *CmkV2Dedicated) HasEncryptionKey() bool {
 }
 
 // SetEncryptionKey gets a reference to the given string and assigns it to the EncryptionKey field.
+// Deprecated
 func (o *CmkV2Dedicated) SetEncryptionKey(v string) {
 	o.EncryptionKey = &v
 }
@@ -178,40 +182,40 @@ func (o *CmkV2Dedicated) SetZones(v []string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *CmkV2Dedicated) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Cku)
-    o.recurseRedact(o.EncryptionKey)
-    o.recurseRedact(o.Zones)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Cku)
+	o.recurseRedact(o.EncryptionKey)
+	o.recurseRedact(o.Zones)
 }
 
 func (o *CmkV2Dedicated) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o CmkV2Dedicated) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o CmkV2Dedicated) MarshalJSON() ([]byte, error) {
@@ -266,5 +270,3 @@ func (v *NullableCmkV2Dedicated) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

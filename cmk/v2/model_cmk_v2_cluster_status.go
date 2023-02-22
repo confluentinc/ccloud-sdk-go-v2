@@ -35,9 +35,9 @@ import (
 
 // CmkV2ClusterStatus The status of the Cluster
 type CmkV2ClusterStatus struct {
-	// The lifecyle phase of the cluster:   PROVISIONED:  cluster is provisioned;   PROVISIONING:  cluster provisioning is in progress;   FAILED:  provisioning failed 
+	// The lifecyle phase of the cluster:   PROVISIONED:  cluster is provisioned;   PROVISIONING:  cluster provisioning is in progress;   FAILED:  provisioning failed
 	Phase string `json:"phase"`
-	// The number of Confluent Kafka Units (CKUs) the Dedicated cluster currently has. 
+	// The number of Confluent Kafka Units (CKUs) the Dedicated cluster currently has.
 	Cku *int32 `json:"cku,omitempty"`
 }
 
@@ -72,7 +72,7 @@ func (o *CmkV2ClusterStatus) GetPhase() string {
 // GetPhaseOk returns a tuple with the Phase field value
 // and a boolean to check if the value has been set.
 func (o *CmkV2ClusterStatus) GetPhaseOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Phase, true
@@ -117,38 +117,38 @@ func (o *CmkV2ClusterStatus) SetCku(v int32) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *CmkV2ClusterStatus) Redact() {
-    o.recurseRedact(&o.Phase)
-    o.recurseRedact(o.Cku)
+	o.recurseRedact(&o.Phase)
+	o.recurseRedact(o.Cku)
 }
 
 func (o *CmkV2ClusterStatus) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o CmkV2ClusterStatus) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o CmkV2ClusterStatus) MarshalJSON() ([]byte, error) {
@@ -197,5 +197,3 @@ func (v *NullableCmkV2ClusterStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

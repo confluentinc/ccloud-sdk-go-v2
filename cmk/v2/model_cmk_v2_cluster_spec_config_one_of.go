@@ -32,26 +32,25 @@ import (
 
 // CmkV2ClusterSpecConfigOneOf - struct for CmkV2ClusterSpecConfigOneOf
 type CmkV2ClusterSpecConfigOneOf struct {
-	CmkV2Basic *CmkV2Basic
+	CmkV2Basic     *CmkV2Basic
 	CmkV2Dedicated *CmkV2Dedicated
-	CmkV2Standard *CmkV2Standard
+	CmkV2Standard  *CmkV2Standard
 }
 
 // CmkV2BasicAsCmkV2ClusterSpecConfigOneOf is a convenience function that returns CmkV2Basic wrapped in CmkV2ClusterSpecConfigOneOf
 func CmkV2BasicAsCmkV2ClusterSpecConfigOneOf(v *CmkV2Basic) CmkV2ClusterSpecConfigOneOf {
-	return CmkV2ClusterSpecConfigOneOf{ CmkV2Basic: v}
+	return CmkV2ClusterSpecConfigOneOf{CmkV2Basic: v}
 }
 
 // CmkV2DedicatedAsCmkV2ClusterSpecConfigOneOf is a convenience function that returns CmkV2Dedicated wrapped in CmkV2ClusterSpecConfigOneOf
 func CmkV2DedicatedAsCmkV2ClusterSpecConfigOneOf(v *CmkV2Dedicated) CmkV2ClusterSpecConfigOneOf {
-	return CmkV2ClusterSpecConfigOneOf{ CmkV2Dedicated: v}
+	return CmkV2ClusterSpecConfigOneOf{CmkV2Dedicated: v}
 }
 
 // CmkV2StandardAsCmkV2ClusterSpecConfigOneOf is a convenience function that returns CmkV2Standard wrapped in CmkV2ClusterSpecConfigOneOf
 func CmkV2StandardAsCmkV2ClusterSpecConfigOneOf(v *CmkV2Standard) CmkV2ClusterSpecConfigOneOf {
-	return CmkV2ClusterSpecConfigOneOf{ CmkV2Standard: v}
+	return CmkV2ClusterSpecConfigOneOf{CmkV2Standard: v}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *CmkV2ClusterSpecConfigOneOf) UnmarshalJSON(data []byte) error {
@@ -156,7 +155,7 @@ func (src CmkV2ClusterSpecConfigOneOf) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *CmkV2ClusterSpecConfigOneOf) GetActualInstance() (interface{}) {
+func (obj *CmkV2ClusterSpecConfigOneOf) GetActualInstance() interface{} {
 	if obj.CmkV2Basic != nil {
 		return obj.CmkV2Basic
 	}
@@ -208,5 +207,3 @@ func (v *NullableCmkV2ClusterSpecConfigOneOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
