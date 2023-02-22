@@ -37,22 +37,26 @@ import (
 type CmkV2ClusterSpec struct {
 	// The name of the cluster.
 	DisplayName *string `json:"display_name,omitempty"`
-	// The availability zone configuration of the cluster.
+	// The availability zone configuration of the cluster Note: The availability zone can be updated from Single to Multi-Zone for Basic and Standard clusters but cannot be downgraded from Multi-Zone to Single Zone.
 	Availability *string `json:"availability,omitempty"`
 	// The cloud service provider in which the cluster is running.
 	Cloud *string `json:"cloud,omitempty"`
 	// The cloud service provider region where the cluster is running.
 	Region *string `json:"region,omitempty"`
-	// The configuration of the Kafka cluster.  Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic. 
+	// The configuration of the Kafka cluster. Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.
 	Config *CmkV2ClusterSpecConfigOneOf `json:"config,omitempty"`
 	// The bootstrap endpoint used by Kafka clients to connect to the cluster.
 	KafkaBootstrapEndpoint *string `json:"kafka_bootstrap_endpoint,omitempty"`
 	// The cluster HTTP request URL.
 	HttpEndpoint *string `json:"http_endpoint,omitempty"`
+	// The Kafka API cluster endpoint used by Kafka clients to connect to the cluster.
+	ApiEndpoint *string `json:"api_endpoint,omitempty"`
 	// The environment to which this belongs.
-	Environment *ObjectReference `json:"environment,omitempty"`
+	Environment *EnvScopedObjectReference `json:"environment,omitempty"`
 	// The network associated with this object.
-	Network *ObjectReference `json:"network,omitempty"`
+	Network *EnvScopedObjectReference `json:"network,omitempty"`
+	// The byok associated with this object.
+	Byok *GlobalObjectReference `json:"byok,omitempty"`
 }
 
 // NewCmkV2ClusterSpec instantiates a new CmkV2ClusterSpec object
@@ -300,10 +304,42 @@ func (o *CmkV2ClusterSpec) SetHttpEndpoint(v string) {
 	o.HttpEndpoint = &v
 }
 
+// GetApiEndpoint returns the ApiEndpoint field value if set, zero value otherwise.
+func (o *CmkV2ClusterSpec) GetApiEndpoint() string {
+	if o == nil || o.ApiEndpoint == nil {
+		var ret string
+		return ret
+	}
+	return *o.ApiEndpoint
+}
+
+// GetApiEndpointOk returns a tuple with the ApiEndpoint field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CmkV2ClusterSpec) GetApiEndpointOk() (*string, bool) {
+	if o == nil || o.ApiEndpoint == nil {
+		return nil, false
+	}
+	return o.ApiEndpoint, true
+}
+
+// HasApiEndpoint returns a boolean if a field has been set.
+func (o *CmkV2ClusterSpec) HasApiEndpoint() bool {
+	if o != nil && o.ApiEndpoint != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetApiEndpoint gets a reference to the given string and assigns it to the ApiEndpoint field.
+func (o *CmkV2ClusterSpec) SetApiEndpoint(v string) {
+	o.ApiEndpoint = &v
+}
+
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *CmkV2ClusterSpec) GetEnvironment() ObjectReference {
+func (o *CmkV2ClusterSpec) GetEnvironment() EnvScopedObjectReference {
 	if o == nil || o.Environment == nil {
-		var ret ObjectReference
+		var ret EnvScopedObjectReference
 		return ret
 	}
 	return *o.Environment
@@ -311,7 +347,7 @@ func (o *CmkV2ClusterSpec) GetEnvironment() ObjectReference {
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CmkV2ClusterSpec) GetEnvironmentOk() (*ObjectReference, bool) {
+func (o *CmkV2ClusterSpec) GetEnvironmentOk() (*EnvScopedObjectReference, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -327,15 +363,15 @@ func (o *CmkV2ClusterSpec) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
-func (o *CmkV2ClusterSpec) SetEnvironment(v ObjectReference) {
+// SetEnvironment gets a reference to the given EnvScopedObjectReference and assigns it to the Environment field.
+func (o *CmkV2ClusterSpec) SetEnvironment(v EnvScopedObjectReference) {
 	o.Environment = &v
 }
 
 // GetNetwork returns the Network field value if set, zero value otherwise.
-func (o *CmkV2ClusterSpec) GetNetwork() ObjectReference {
+func (o *CmkV2ClusterSpec) GetNetwork() EnvScopedObjectReference {
 	if o == nil || o.Network == nil {
-		var ret ObjectReference
+		var ret EnvScopedObjectReference
 		return ret
 	}
 	return *o.Network
@@ -343,7 +379,7 @@ func (o *CmkV2ClusterSpec) GetNetwork() ObjectReference {
 
 // GetNetworkOk returns a tuple with the Network field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CmkV2ClusterSpec) GetNetworkOk() (*ObjectReference, bool) {
+func (o *CmkV2ClusterSpec) GetNetworkOk() (*EnvScopedObjectReference, bool) {
 	if o == nil || o.Network == nil {
 		return nil, false
 	}
@@ -359,52 +395,86 @@ func (o *CmkV2ClusterSpec) HasNetwork() bool {
 	return false
 }
 
-// SetNetwork gets a reference to the given ObjectReference and assigns it to the Network field.
-func (o *CmkV2ClusterSpec) SetNetwork(v ObjectReference) {
+// SetNetwork gets a reference to the given EnvScopedObjectReference and assigns it to the Network field.
+func (o *CmkV2ClusterSpec) SetNetwork(v EnvScopedObjectReference) {
 	o.Network = &v
+}
+
+// GetByok returns the Byok field value if set, zero value otherwise.
+func (o *CmkV2ClusterSpec) GetByok() GlobalObjectReference {
+	if o == nil || o.Byok == nil {
+		var ret GlobalObjectReference
+		return ret
+	}
+	return *o.Byok
+}
+
+// GetByokOk returns a tuple with the Byok field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CmkV2ClusterSpec) GetByokOk() (*GlobalObjectReference, bool) {
+	if o == nil || o.Byok == nil {
+		return nil, false
+	}
+	return o.Byok, true
+}
+
+// HasByok returns a boolean if a field has been set.
+func (o *CmkV2ClusterSpec) HasByok() bool {
+	if o != nil && o.Byok != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetByok gets a reference to the given GlobalObjectReference and assigns it to the Byok field.
+func (o *CmkV2ClusterSpec) SetByok(v GlobalObjectReference) {
+	o.Byok = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
 func (o *CmkV2ClusterSpec) Redact() {
-    o.recurseRedact(o.DisplayName)
-    o.recurseRedact(o.Availability)
-    o.recurseRedact(o.Cloud)
-    o.recurseRedact(o.Region)
-    o.recurseRedact(o.Config)
-    o.recurseRedact(o.KafkaBootstrapEndpoint)
-    o.recurseRedact(o.HttpEndpoint)
-    o.recurseRedact(o.Environment)
-    o.recurseRedact(o.Network)
+	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.Availability)
+	o.recurseRedact(o.Cloud)
+	o.recurseRedact(o.Region)
+	o.recurseRedact(o.Config)
+	o.recurseRedact(o.KafkaBootstrapEndpoint)
+	o.recurseRedact(o.HttpEndpoint)
+	o.recurseRedact(o.ApiEndpoint)
+	o.recurseRedact(o.Environment)
+	o.recurseRedact(o.Network)
+	o.recurseRedact(o.Byok)
 }
 
 func (o *CmkV2ClusterSpec) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o CmkV2ClusterSpec) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o CmkV2ClusterSpec) MarshalJSON() ([]byte, error) {
@@ -430,11 +500,17 @@ func (o CmkV2ClusterSpec) MarshalJSON() ([]byte, error) {
 	if o.HttpEndpoint != nil {
 		toSerialize["http_endpoint"] = o.HttpEndpoint
 	}
+	if o.ApiEndpoint != nil {
+		toSerialize["api_endpoint"] = o.ApiEndpoint
+	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
 	}
 	if o.Network != nil {
 		toSerialize["network"] = o.Network
+	}
+	if o.Byok != nil {
+		toSerialize["byok"] = o.Byok
 	}
 	return json.Marshal(toSerialize)
 }
@@ -474,5 +550,3 @@ func (v *NullableCmkV2ClusterSpec) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

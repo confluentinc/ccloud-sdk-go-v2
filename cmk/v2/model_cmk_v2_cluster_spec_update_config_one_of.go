@@ -32,26 +32,25 @@ import (
 
 // CmkV2ClusterSpecUpdateConfigOneOf - struct for CmkV2ClusterSpecUpdateConfigOneOf
 type CmkV2ClusterSpecUpdateConfigOneOf struct {
-	CmkV2Basic *CmkV2Basic
+	CmkV2Basic     *CmkV2Basic
 	CmkV2Dedicated *CmkV2Dedicated
-	CmkV2Standard *CmkV2Standard
+	CmkV2Standard  *CmkV2Standard
 }
 
 // CmkV2BasicAsCmkV2ClusterSpecUpdateConfigOneOf is a convenience function that returns CmkV2Basic wrapped in CmkV2ClusterSpecUpdateConfigOneOf
 func CmkV2BasicAsCmkV2ClusterSpecUpdateConfigOneOf(v *CmkV2Basic) CmkV2ClusterSpecUpdateConfigOneOf {
-	return CmkV2ClusterSpecUpdateConfigOneOf{ CmkV2Basic: v}
+	return CmkV2ClusterSpecUpdateConfigOneOf{CmkV2Basic: v}
 }
 
 // CmkV2DedicatedAsCmkV2ClusterSpecUpdateConfigOneOf is a convenience function that returns CmkV2Dedicated wrapped in CmkV2ClusterSpecUpdateConfigOneOf
 func CmkV2DedicatedAsCmkV2ClusterSpecUpdateConfigOneOf(v *CmkV2Dedicated) CmkV2ClusterSpecUpdateConfigOneOf {
-	return CmkV2ClusterSpecUpdateConfigOneOf{ CmkV2Dedicated: v}
+	return CmkV2ClusterSpecUpdateConfigOneOf{CmkV2Dedicated: v}
 }
 
 // CmkV2StandardAsCmkV2ClusterSpecUpdateConfigOneOf is a convenience function that returns CmkV2Standard wrapped in CmkV2ClusterSpecUpdateConfigOneOf
 func CmkV2StandardAsCmkV2ClusterSpecUpdateConfigOneOf(v *CmkV2Standard) CmkV2ClusterSpecUpdateConfigOneOf {
-	return CmkV2ClusterSpecUpdateConfigOneOf{ CmkV2Standard: v}
+	return CmkV2ClusterSpecUpdateConfigOneOf{CmkV2Standard: v}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *CmkV2ClusterSpecUpdateConfigOneOf) UnmarshalJSON(data []byte) error {
@@ -156,7 +155,7 @@ func (src CmkV2ClusterSpecUpdateConfigOneOf) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *CmkV2ClusterSpecUpdateConfigOneOf) GetActualInstance() (interface{}) {
+func (obj *CmkV2ClusterSpecUpdateConfigOneOf) GetActualInstance() interface{} {
 	if obj.CmkV2Basic != nil {
 		return obj.CmkV2Basic
 	}
@@ -208,5 +207,3 @@ func (v *NullableCmkV2ClusterSpecUpdateConfigOneOf) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

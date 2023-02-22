@@ -33,60 +33,60 @@ import (
 	"reflect"
 )
 
-// Failure Provides information about problems encountered while performing an operation.
-type Failure struct {
-	// List of errors which caused this operation to fail
-	Errors []Error `json:"errors"`
+// CmkV2Enterprise The enterprise cluster type.
+type CmkV2Enterprise struct {
+	// Enterprise cluster type.
+	Kind string `json:"kind"`
 }
 
-// NewFailure instantiates a new Failure object
+// NewCmkV2Enterprise instantiates a new CmkV2Enterprise object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFailure(errors []Error) *Failure {
-	this := Failure{}
-	this.Errors = errors
+func NewCmkV2Enterprise(kind string) *CmkV2Enterprise {
+	this := CmkV2Enterprise{}
+	this.Kind = kind
 	return &this
 }
 
-// NewFailureWithDefaults instantiates a new Failure object
+// NewCmkV2EnterpriseWithDefaults instantiates a new CmkV2Enterprise object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFailureWithDefaults() *Failure {
-	this := Failure{}
+func NewCmkV2EnterpriseWithDefaults() *CmkV2Enterprise {
+	this := CmkV2Enterprise{}
 	return &this
 }
 
-// GetErrors returns the Errors field value
-func (o *Failure) GetErrors() []Error {
+// GetKind returns the Kind field value
+func (o *CmkV2Enterprise) GetKind() string {
 	if o == nil {
-		var ret []Error
+		var ret string
 		return ret
 	}
 
-	return o.Errors
+	return o.Kind
 }
 
-// GetErrorsOk returns a tuple with the Errors field value
+// GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *Failure) GetErrorsOk() (*[]Error, bool) {
+func (o *CmkV2Enterprise) GetKindOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Errors, true
+	return &o.Kind, true
 }
 
-// SetErrors sets field value
-func (o *Failure) SetErrors(v []Error) {
-	o.Errors = v
+// SetKind sets field value
+func (o *CmkV2Enterprise) SetKind(v string) {
+	o.Kind = v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *Failure) Redact() {
-	o.recurseRedact(&o.Errors)
+func (o *CmkV2Enterprise) Redact() {
+	o.recurseRedact(&o.Kind)
 }
 
-func (o *Failure) recurseRedact(v interface{}) {
+func (o *CmkV2Enterprise) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -111,51 +111,51 @@ func (o *Failure) recurseRedact(v interface{}) {
 	}
 }
 
-func (o Failure) zeroField(v interface{}) {
+func (o CmkV2Enterprise) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o Failure) MarshalJSON() ([]byte, error) {
+func (o CmkV2Enterprise) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
-		toSerialize["errors"] = o.Errors
+		toSerialize["kind"] = o.Kind
 	}
 	return json.Marshal(toSerialize)
 }
 
-type NullableFailure struct {
-	value *Failure
+type NullableCmkV2Enterprise struct {
+	value *CmkV2Enterprise
 	isSet bool
 }
 
-func (v NullableFailure) Get() *Failure {
+func (v NullableCmkV2Enterprise) Get() *CmkV2Enterprise {
 	return v.value
 }
 
-func (v *NullableFailure) Set(val *Failure) {
+func (v *NullableCmkV2Enterprise) Set(val *CmkV2Enterprise) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFailure) IsSet() bool {
+func (v NullableCmkV2Enterprise) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFailure) Unset() {
+func (v *NullableCmkV2Enterprise) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFailure(val *Failure) *NullableFailure {
-	return &NullableFailure{value: val, isSet: true}
+func NewNullableCmkV2Enterprise(val *CmkV2Enterprise) *NullableCmkV2Enterprise {
+	return &NullableCmkV2Enterprise{value: val, isSet: true}
 }
 
-func (v NullableFailure) MarshalJSON() ([]byte, error) {
+func (v NullableCmkV2Enterprise) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFailure) UnmarshalJSON(src []byte) error {
+func (v *NullableCmkV2Enterprise) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
