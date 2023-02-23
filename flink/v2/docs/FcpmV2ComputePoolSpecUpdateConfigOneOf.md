@@ -1,10 +1,10 @@
-# FrpmV2ResourcePoolSpecUpdateConfigOneOf
+# FcpmV2ComputePoolSpecUpdateConfigOneOf
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FrpmV2ResourcePoolSpecUpdateConfigOneOfInterface** | **interface { GetKind() string }** | An interface that can hold any of the proper implementing types |
+**FcpmV2ComputePoolSpecUpdateConfigOneOfInterface** | **interface { GetKind() string }** | An interface that can hold any of the proper implementing types |
 
 ## Methods
 

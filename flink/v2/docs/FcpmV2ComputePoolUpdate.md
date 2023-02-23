@@ -1,4 +1,4 @@
-# FrpmV2ResourcePool
+# FcpmV2ComputePoolUpdate
 
 ## Properties
 
@@ -8,175 +8,175 @@ Name | Type | Description | Notes
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
-**Spec** | Pointer to [**FrpmV2ResourcePoolSpec**](FrpmV2ResourcePoolSpec.md) |  | [optional] 
-**Status** | Pointer to [**FrpmV2ResourcePoolStatus**](FrpmV2ResourcePoolStatus.md) |  | [optional] 
+**Spec** | Pointer to [**FcpmV2ComputePoolSpecUpdate**](FcpmV2ComputePoolSpecUpdate.md) |  | [optional] 
+**Status** | Pointer to [**FcpmV2ComputePoolStatus**](FcpmV2ComputePoolStatus.md) |  | [optional] 
 
 ## Methods
 
-### NewFrpmV2ResourcePool
+### NewFcpmV2ComputePoolUpdate
 
-`func NewFrpmV2ResourcePool() *FrpmV2ResourcePool`
+`func NewFcpmV2ComputePoolUpdate() *FcpmV2ComputePoolUpdate`
 
-NewFrpmV2ResourcePool instantiates a new FrpmV2ResourcePool object
+NewFcpmV2ComputePoolUpdate instantiates a new FcpmV2ComputePoolUpdate object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewFrpmV2ResourcePoolWithDefaults
+### NewFcpmV2ComputePoolUpdateWithDefaults
 
-`func NewFrpmV2ResourcePoolWithDefaults() *FrpmV2ResourcePool`
+`func NewFcpmV2ComputePoolUpdateWithDefaults() *FcpmV2ComputePoolUpdate`
 
-NewFrpmV2ResourcePoolWithDefaults instantiates a new FrpmV2ResourcePool object
+NewFcpmV2ComputePoolUpdateWithDefaults instantiates a new FcpmV2ComputePoolUpdate object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetApiVersion
 
-`func (o *FrpmV2ResourcePool) GetApiVersion() string`
+`func (o *FcpmV2ComputePoolUpdate) GetApiVersion() string`
 
 GetApiVersion returns the ApiVersion field if non-nil, zero value otherwise.
 
 ### GetApiVersionOk
 
-`func (o *FrpmV2ResourcePool) GetApiVersionOk() (*string, bool)`
+`func (o *FcpmV2ComputePoolUpdate) GetApiVersionOk() (*string, bool)`
 
 GetApiVersionOk returns a tuple with the ApiVersion field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetApiVersion
 
-`func (o *FrpmV2ResourcePool) SetApiVersion(v string)`
+`func (o *FcpmV2ComputePoolUpdate) SetApiVersion(v string)`
 
 SetApiVersion sets ApiVersion field to given value.
 
 ### HasApiVersion
 
-`func (o *FrpmV2ResourcePool) HasApiVersion() bool`
+`func (o *FcpmV2ComputePoolUpdate) HasApiVersion() bool`
 
 HasApiVersion returns a boolean if a field has been set.
 
 ### GetKind
 
-`func (o *FrpmV2ResourcePool) GetKind() string`
+`func (o *FcpmV2ComputePoolUpdate) GetKind() string`
 
 GetKind returns the Kind field if non-nil, zero value otherwise.
 
 ### GetKindOk
 
-`func (o *FrpmV2ResourcePool) GetKindOk() (*string, bool)`
+`func (o *FcpmV2ComputePoolUpdate) GetKindOk() (*string, bool)`
 
 GetKindOk returns a tuple with the Kind field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetKind
 
-`func (o *FrpmV2ResourcePool) SetKind(v string)`
+`func (o *FcpmV2ComputePoolUpdate) SetKind(v string)`
 
 SetKind sets Kind field to given value.
 
 ### HasKind
 
-`func (o *FrpmV2ResourcePool) HasKind() bool`
+`func (o *FcpmV2ComputePoolUpdate) HasKind() bool`
 
 HasKind returns a boolean if a field has been set.
 
 ### GetId
 
-`func (o *FrpmV2ResourcePool) GetId() string`
+`func (o *FcpmV2ComputePoolUpdate) GetId() string`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *FrpmV2ResourcePool) GetIdOk() (*string, bool)`
+`func (o *FcpmV2ComputePoolUpdate) GetIdOk() (*string, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *FrpmV2ResourcePool) SetId(v string)`
+`func (o *FcpmV2ComputePoolUpdate) SetId(v string)`
 
 SetId sets Id field to given value.
 
 ### HasId
 
-`func (o *FrpmV2ResourcePool) HasId() bool`
+`func (o *FcpmV2ComputePoolUpdate) HasId() bool`
 
 HasId returns a boolean if a field has been set.
 
 ### GetMetadata
 
-`func (o *FrpmV2ResourcePool) GetMetadata() ObjectMeta`
+`func (o *FcpmV2ComputePoolUpdate) GetMetadata() ObjectMeta`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *FrpmV2ResourcePool) GetMetadataOk() (*ObjectMeta, bool)`
+`func (o *FcpmV2ComputePoolUpdate) GetMetadataOk() (*ObjectMeta, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *FrpmV2ResourcePool) SetMetadata(v ObjectMeta)`
+`func (o *FcpmV2ComputePoolUpdate) SetMetadata(v ObjectMeta)`
 
 SetMetadata sets Metadata field to given value.
 
 ### HasMetadata
 
-`func (o *FrpmV2ResourcePool) HasMetadata() bool`
+`func (o *FcpmV2ComputePoolUpdate) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
 
 ### GetSpec
 
-`func (o *FrpmV2ResourcePool) GetSpec() FrpmV2ResourcePoolSpec`
+`func (o *FcpmV2ComputePoolUpdate) GetSpec() FcpmV2ComputePoolSpecUpdate`
 
 GetSpec returns the Spec field if non-nil, zero value otherwise.
 
 ### GetSpecOk
 
-`func (o *FrpmV2ResourcePool) GetSpecOk() (*FrpmV2ResourcePoolSpec, bool)`
+`func (o *FcpmV2ComputePoolUpdate) GetSpecOk() (*FcpmV2ComputePoolSpecUpdate, bool)`
 
 GetSpecOk returns a tuple with the Spec field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSpec
 
-`func (o *FrpmV2ResourcePool) SetSpec(v FrpmV2ResourcePoolSpec)`
+`func (o *FcpmV2ComputePoolUpdate) SetSpec(v FcpmV2ComputePoolSpecUpdate)`
 
 SetSpec sets Spec field to given value.
 
 ### HasSpec
 
-`func (o *FrpmV2ResourcePool) HasSpec() bool`
+`func (o *FcpmV2ComputePoolUpdate) HasSpec() bool`
 
 HasSpec returns a boolean if a field has been set.
 
 ### GetStatus
 
-`func (o *FrpmV2ResourcePool) GetStatus() FrpmV2ResourcePoolStatus`
+`func (o *FcpmV2ComputePoolUpdate) GetStatus() FcpmV2ComputePoolStatus`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *FrpmV2ResourcePool) GetStatusOk() (*FrpmV2ResourcePoolStatus, bool)`
+`func (o *FcpmV2ComputePoolUpdate) GetStatusOk() (*FcpmV2ComputePoolStatus, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *FrpmV2ResourcePool) SetStatus(v FrpmV2ResourcePoolStatus)`
+`func (o *FcpmV2ComputePoolUpdate) SetStatus(v FcpmV2ComputePoolStatus)`
 
 SetStatus sets Status field to given value.
 
 ### HasStatus
 
-`func (o *FrpmV2ResourcePool) HasStatus() bool`
+`func (o *FcpmV2ComputePoolUpdate) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
 

@@ -13,9 +13,9 @@
 // limitations under the License.
 
 /*
-Flink Resource Pool Management API
+Flink Compute Pool Management API
 
-This is the Flink Resource Pool management API.
+This is the Flink Compute Pool management API.
 
 API version: 0.0.1
 Contact: ksql-team@confluent.io
@@ -39,146 +39,146 @@ var (
 	_ _context.Context
 )
 
-type ResourcePoolsFrpmV2Api interface {
+type ComputePoolsFcpmV2Api interface {
 
 	/*
-		CreateFrpmV2ResourcePool Create a Resource Pool
+		CreateFcpmV2ComputePool Create a Compute Pool
 
 		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to create a resource pool.
+	Make a request to create a compute pool.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiCreateFrpmV2ResourcePoolRequest
+		 @return ApiCreateFcpmV2ComputePoolRequest
 	*/
-	CreateFrpmV2ResourcePool(ctx _context.Context) ApiCreateFrpmV2ResourcePoolRequest
+	CreateFcpmV2ComputePool(ctx _context.Context) ApiCreateFcpmV2ComputePoolRequest
 
-	// CreateFrpmV2ResourcePoolExecute executes the request
-	//  @return FrpmV2ResourcePool
-	CreateFrpmV2ResourcePoolExecute(r ApiCreateFrpmV2ResourcePoolRequest) (FrpmV2ResourcePool, *_nethttp.Response, error)
+	// CreateFcpmV2ComputePoolExecute executes the request
+	//  @return FcpmV2ComputePool
+	CreateFcpmV2ComputePoolExecute(r ApiCreateFcpmV2ComputePoolRequest) (FcpmV2ComputePool, *_nethttp.Response, error)
 
 	/*
-		DeleteFrpmV2ResourcePool Delete a Resource Pool
+		DeleteFcpmV2ComputePool Delete a Compute Pool
 
 		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to delete a resource pool.
+	Make a request to delete a compute pool.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the resource pool.
-		 @return ApiDeleteFrpmV2ResourcePoolRequest
+		 @param id The unique identifier for the compute pool.
+		 @return ApiDeleteFcpmV2ComputePoolRequest
 	*/
-	DeleteFrpmV2ResourcePool(ctx _context.Context, id string) ApiDeleteFrpmV2ResourcePoolRequest
+	DeleteFcpmV2ComputePool(ctx _context.Context, id string) ApiDeleteFcpmV2ComputePoolRequest
 
-	// DeleteFrpmV2ResourcePoolExecute executes the request
-	DeleteFrpmV2ResourcePoolExecute(r ApiDeleteFrpmV2ResourcePoolRequest) (*_nethttp.Response, error)
+	// DeleteFcpmV2ComputePoolExecute executes the request
+	DeleteFcpmV2ComputePoolExecute(r ApiDeleteFcpmV2ComputePoolRequest) (*_nethttp.Response, error)
 
 	/*
-		GetFrpmV2ResourcePool Read a Resource Pool
+		GetFcpmV2ComputePool Read a Compute Pool
 
 		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to read a resource pool.
+	Make a request to read a compute pool.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the resource pool.
-		 @return ApiGetFrpmV2ResourcePoolRequest
+		 @param id The unique identifier for the compute pool.
+		 @return ApiGetFcpmV2ComputePoolRequest
 	*/
-	GetFrpmV2ResourcePool(ctx _context.Context, id string) ApiGetFrpmV2ResourcePoolRequest
+	GetFcpmV2ComputePool(ctx _context.Context, id string) ApiGetFcpmV2ComputePoolRequest
 
-	// GetFrpmV2ResourcePoolExecute executes the request
-	//  @return FrpmV2ResourcePool
-	GetFrpmV2ResourcePoolExecute(r ApiGetFrpmV2ResourcePoolRequest) (FrpmV2ResourcePool, *_nethttp.Response, error)
+	// GetFcpmV2ComputePoolExecute executes the request
+	//  @return FcpmV2ComputePool
+	GetFcpmV2ComputePoolExecute(r ApiGetFcpmV2ComputePoolRequest) (FcpmV2ComputePool, *_nethttp.Response, error)
 
 	/*
-		ListFrpmV2ResourcePools List of Resource Pools
+		ListFcpmV2ComputePools List of Compute Pools
 
 		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-	Retrieve a sorted, filtered, paginated list of all resource pools.
+	Retrieve a sorted, filtered, paginated list of all compute pools.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListFrpmV2ResourcePoolsRequest
+		 @return ApiListFcpmV2ComputePoolsRequest
 	*/
-	ListFrpmV2ResourcePools(ctx _context.Context) ApiListFrpmV2ResourcePoolsRequest
+	ListFcpmV2ComputePools(ctx _context.Context) ApiListFcpmV2ComputePoolsRequest
 
-	// ListFrpmV2ResourcePoolsExecute executes the request
-	//  @return FrpmV2ResourcePoolList
-	ListFrpmV2ResourcePoolsExecute(r ApiListFrpmV2ResourcePoolsRequest) (FrpmV2ResourcePoolList, *_nethttp.Response, error)
+	// ListFcpmV2ComputePoolsExecute executes the request
+	//  @return FcpmV2ComputePoolList
+	ListFcpmV2ComputePoolsExecute(r ApiListFcpmV2ComputePoolsRequest) (FcpmV2ComputePoolList, *_nethttp.Response, error)
 
 	/*
-		UpdateFrpmV2ResourcePool Update a Resource Pool
+		UpdateFcpmV2ComputePool Update a Compute Pool
 
 		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to update a resource pool.
+	Make a request to update a compute pool.
 
 
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the resource pool.
-		 @return ApiUpdateFrpmV2ResourcePoolRequest
+		 @param id The unique identifier for the compute pool.
+		 @return ApiUpdateFcpmV2ComputePoolRequest
 	*/
-	UpdateFrpmV2ResourcePool(ctx _context.Context, id string) ApiUpdateFrpmV2ResourcePoolRequest
+	UpdateFcpmV2ComputePool(ctx _context.Context, id string) ApiUpdateFcpmV2ComputePoolRequest
 
-	// UpdateFrpmV2ResourcePoolExecute executes the request
-	//  @return FrpmV2ResourcePool
-	UpdateFrpmV2ResourcePoolExecute(r ApiUpdateFrpmV2ResourcePoolRequest) (FrpmV2ResourcePool, *_nethttp.Response, error)
+	// UpdateFcpmV2ComputePoolExecute executes the request
+	//  @return FcpmV2ComputePool
+	UpdateFcpmV2ComputePoolExecute(r ApiUpdateFcpmV2ComputePoolRequest) (FcpmV2ComputePool, *_nethttp.Response, error)
 }
 
-// ResourcePoolsFrpmV2ApiService ResourcePoolsFrpmV2Api service
-type ResourcePoolsFrpmV2ApiService service
+// ComputePoolsFcpmV2ApiService ComputePoolsFcpmV2Api service
+type ComputePoolsFcpmV2ApiService service
 
-type ApiCreateFrpmV2ResourcePoolRequest struct {
-	ctx                _context.Context
-	ApiService         ResourcePoolsFrpmV2Api
-	frpmV2ResourcePool *FrpmV2ResourcePool
+type ApiCreateFcpmV2ComputePoolRequest struct {
+	ctx               _context.Context
+	ApiService        ComputePoolsFcpmV2Api
+	fcpmV2ComputePool *FcpmV2ComputePool
 }
 
-func (r ApiCreateFrpmV2ResourcePoolRequest) FrpmV2ResourcePool(frpmV2ResourcePool FrpmV2ResourcePool) ApiCreateFrpmV2ResourcePoolRequest {
-	r.frpmV2ResourcePool = &frpmV2ResourcePool
+func (r ApiCreateFcpmV2ComputePoolRequest) FcpmV2ComputePool(fcpmV2ComputePool FcpmV2ComputePool) ApiCreateFcpmV2ComputePoolRequest {
+	r.fcpmV2ComputePool = &fcpmV2ComputePool
 	return r
 }
 
-func (r ApiCreateFrpmV2ResourcePoolRequest) Execute() (FrpmV2ResourcePool, *_nethttp.Response, error) {
-	return r.ApiService.CreateFrpmV2ResourcePoolExecute(r)
+func (r ApiCreateFcpmV2ComputePoolRequest) Execute() (FcpmV2ComputePool, *_nethttp.Response, error) {
+	return r.ApiService.CreateFcpmV2ComputePoolExecute(r)
 }
 
 /*
-CreateFrpmV2ResourcePool Create a Resource Pool
+CreateFcpmV2ComputePool Create a Compute Pool
 
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to create a resource pool.
+Make a request to create a compute pool.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFrpmV2ResourcePoolRequest
+ @return ApiCreateFcpmV2ComputePoolRequest
 */
-func (a *ResourcePoolsFrpmV2ApiService) CreateFrpmV2ResourcePool(ctx _context.Context) ApiCreateFrpmV2ResourcePoolRequest {
-	return ApiCreateFrpmV2ResourcePoolRequest{
+func (a *ComputePoolsFcpmV2ApiService) CreateFcpmV2ComputePool(ctx _context.Context) ApiCreateFcpmV2ComputePoolRequest {
+	return ApiCreateFcpmV2ComputePoolRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return FrpmV2ResourcePool
-func (a *ResourcePoolsFrpmV2ApiService) CreateFrpmV2ResourcePoolExecute(r ApiCreateFrpmV2ResourcePoolRequest) (FrpmV2ResourcePool, *_nethttp.Response, error) {
+//  @return FcpmV2ComputePool
+func (a *ComputePoolsFcpmV2ApiService) CreateFcpmV2ComputePoolExecute(r ApiCreateFcpmV2ComputePoolRequest) (FcpmV2ComputePool, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  FrpmV2ResourcePool
+		localVarReturnValue  FcpmV2ComputePool
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcePoolsFrpmV2ApiService.CreateFrpmV2ResourcePool")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputePoolsFcpmV2ApiService.CreateFcpmV2ComputePool")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/frpm/v2/resource-pools"
+	localVarPath := localBasePath + "/fcpm/v2/compute-pools"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -202,7 +202,7 @@ func (a *ResourcePoolsFrpmV2ApiService) CreateFrpmV2ResourcePoolExecute(r ApiCre
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.frpmV2ResourcePool
+	localVarPostBody = r.fcpmV2ComputePool
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -299,29 +299,36 @@ func (a *ResourcePoolsFrpmV2ApiService) CreateFrpmV2ResourcePoolExecute(r ApiCre
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteFrpmV2ResourcePoolRequest struct {
-	ctx        _context.Context
-	ApiService ResourcePoolsFrpmV2Api
-	id         string
+type ApiDeleteFcpmV2ComputePoolRequest struct {
+	ctx         _context.Context
+	ApiService  ComputePoolsFcpmV2Api
+	environment *string
+	id          string
 }
 
-func (r ApiDeleteFrpmV2ResourcePoolRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.DeleteFrpmV2ResourcePoolExecute(r)
+// Scope the operation to the given environment.
+func (r ApiDeleteFcpmV2ComputePoolRequest) Environment(environment string) ApiDeleteFcpmV2ComputePoolRequest {
+	r.environment = &environment
+	return r
+}
+
+func (r ApiDeleteFcpmV2ComputePoolRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteFcpmV2ComputePoolExecute(r)
 }
 
 /*
-DeleteFrpmV2ResourcePool Delete a Resource Pool
+DeleteFcpmV2ComputePool Delete a Compute Pool
 
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to delete a resource pool.
+Make a request to delete a compute pool.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the resource pool.
- @return ApiDeleteFrpmV2ResourcePoolRequest
+ @param id The unique identifier for the compute pool.
+ @return ApiDeleteFcpmV2ComputePoolRequest
 */
-func (a *ResourcePoolsFrpmV2ApiService) DeleteFrpmV2ResourcePool(ctx _context.Context, id string) ApiDeleteFrpmV2ResourcePoolRequest {
-	return ApiDeleteFrpmV2ResourcePoolRequest{
+func (a *ComputePoolsFcpmV2ApiService) DeleteFcpmV2ComputePool(ctx _context.Context, id string) ApiDeleteFcpmV2ComputePoolRequest {
+	return ApiDeleteFcpmV2ComputePoolRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -329,7 +336,7 @@ func (a *ResourcePoolsFrpmV2ApiService) DeleteFrpmV2ResourcePool(ctx _context.Co
 }
 
 // Execute executes the request
-func (a *ResourcePoolsFrpmV2ApiService) DeleteFrpmV2ResourcePoolExecute(r ApiDeleteFrpmV2ResourcePoolRequest) (*_nethttp.Response, error) {
+func (a *ComputePoolsFcpmV2ApiService) DeleteFcpmV2ComputePoolExecute(r ApiDeleteFcpmV2ComputePoolRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
@@ -338,18 +345,22 @@ func (a *ResourcePoolsFrpmV2ApiService) DeleteFrpmV2ResourcePoolExecute(r ApiDel
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcePoolsFrpmV2ApiService.DeleteFrpmV2ResourcePool")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputePoolsFcpmV2ApiService.DeleteFcpmV2ComputePool")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/frpm/v2/resource-pools/{id}"
+	localVarPath := localBasePath + "/fcpm/v2/compute-pools/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.environment == nil {
+		return nil, reportError("environment is required and must be specified")
+	}
 
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -444,29 +455,36 @@ func (a *ResourcePoolsFrpmV2ApiService) DeleteFrpmV2ResourcePoolExecute(r ApiDel
 	return localVarHTTPResponse, nil
 }
 
-type ApiGetFrpmV2ResourcePoolRequest struct {
-	ctx        _context.Context
-	ApiService ResourcePoolsFrpmV2Api
-	id         string
+type ApiGetFcpmV2ComputePoolRequest struct {
+	ctx         _context.Context
+	ApiService  ComputePoolsFcpmV2Api
+	environment *string
+	id          string
 }
 
-func (r ApiGetFrpmV2ResourcePoolRequest) Execute() (FrpmV2ResourcePool, *_nethttp.Response, error) {
-	return r.ApiService.GetFrpmV2ResourcePoolExecute(r)
+// Scope the operation to the given environment.
+func (r ApiGetFcpmV2ComputePoolRequest) Environment(environment string) ApiGetFcpmV2ComputePoolRequest {
+	r.environment = &environment
+	return r
+}
+
+func (r ApiGetFcpmV2ComputePoolRequest) Execute() (FcpmV2ComputePool, *_nethttp.Response, error) {
+	return r.ApiService.GetFcpmV2ComputePoolExecute(r)
 }
 
 /*
-GetFrpmV2ResourcePool Read a Resource Pool
+GetFcpmV2ComputePool Read a Compute Pool
 
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to read a resource pool.
+Make a request to read a compute pool.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the resource pool.
- @return ApiGetFrpmV2ResourcePoolRequest
+ @param id The unique identifier for the compute pool.
+ @return ApiGetFcpmV2ComputePoolRequest
 */
-func (a *ResourcePoolsFrpmV2ApiService) GetFrpmV2ResourcePool(ctx _context.Context, id string) ApiGetFrpmV2ResourcePoolRequest {
-	return ApiGetFrpmV2ResourcePoolRequest{
+func (a *ComputePoolsFcpmV2ApiService) GetFcpmV2ComputePool(ctx _context.Context, id string) ApiGetFcpmV2ComputePoolRequest {
+	return ApiGetFcpmV2ComputePoolRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -474,29 +492,33 @@ func (a *ResourcePoolsFrpmV2ApiService) GetFrpmV2ResourcePool(ctx _context.Conte
 }
 
 // Execute executes the request
-//  @return FrpmV2ResourcePool
-func (a *ResourcePoolsFrpmV2ApiService) GetFrpmV2ResourcePoolExecute(r ApiGetFrpmV2ResourcePoolRequest) (FrpmV2ResourcePool, *_nethttp.Response, error) {
+//  @return FcpmV2ComputePool
+func (a *ComputePoolsFcpmV2ApiService) GetFcpmV2ComputePoolExecute(r ApiGetFcpmV2ComputePoolRequest) (FcpmV2ComputePool, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  FrpmV2ResourcePool
+		localVarReturnValue  FcpmV2ComputePool
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcePoolsFrpmV2ApiService.GetFrpmV2ResourcePool")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputePoolsFcpmV2ApiService.GetFcpmV2ComputePool")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/frpm/v2/resource-pools/{id}"
+	localVarPath := localBasePath + "/fcpm/v2/compute-pools/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.environment == nil {
+		return localVarReturnValue, nil, reportError("environment is required and must be specified")
+	}
 
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -600,9 +622,9 @@ func (a *ResourcePoolsFrpmV2ApiService) GetFrpmV2ResourcePoolExecute(r ApiGetFrp
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListFrpmV2ResourcePoolsRequest struct {
+type ApiListFcpmV2ComputePoolsRequest struct {
 	ctx         _context.Context
-	ApiService  ResourcePoolsFrpmV2Api
+	ApiService  ComputePoolsFcpmV2Api
 	specRegion  *string
 	environment *string
 	specNetwork *string
@@ -611,74 +633,74 @@ type ApiListFrpmV2ResourcePoolsRequest struct {
 }
 
 // Filter the results by exact match for spec.region.
-func (r ApiListFrpmV2ResourcePoolsRequest) SpecRegion(specRegion string) ApiListFrpmV2ResourcePoolsRequest {
+func (r ApiListFcpmV2ComputePoolsRequest) SpecRegion(specRegion string) ApiListFcpmV2ComputePoolsRequest {
 	r.specRegion = &specRegion
 	return r
 }
 
 // Filter the results by exact match for environment.
-func (r ApiListFrpmV2ResourcePoolsRequest) Environment(environment string) ApiListFrpmV2ResourcePoolsRequest {
+func (r ApiListFcpmV2ComputePoolsRequest) Environment(environment string) ApiListFcpmV2ComputePoolsRequest {
 	r.environment = &environment
 	return r
 }
 
 // Filter the results by exact match for spec.network.
-func (r ApiListFrpmV2ResourcePoolsRequest) SpecNetwork(specNetwork string) ApiListFrpmV2ResourcePoolsRequest {
+func (r ApiListFcpmV2ComputePoolsRequest) SpecNetwork(specNetwork string) ApiListFcpmV2ComputePoolsRequest {
 	r.specNetwork = &specNetwork
 	return r
 }
 
 // A pagination size for collection requests.
-func (r ApiListFrpmV2ResourcePoolsRequest) PageSize(pageSize int32) ApiListFrpmV2ResourcePoolsRequest {
+func (r ApiListFcpmV2ComputePoolsRequest) PageSize(pageSize int32) ApiListFcpmV2ComputePoolsRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
 // An opaque pagination token for collection requests.
-func (r ApiListFrpmV2ResourcePoolsRequest) PageToken(pageToken string) ApiListFrpmV2ResourcePoolsRequest {
+func (r ApiListFcpmV2ComputePoolsRequest) PageToken(pageToken string) ApiListFcpmV2ComputePoolsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-func (r ApiListFrpmV2ResourcePoolsRequest) Execute() (FrpmV2ResourcePoolList, *_nethttp.Response, error) {
-	return r.ApiService.ListFrpmV2ResourcePoolsExecute(r)
+func (r ApiListFcpmV2ComputePoolsRequest) Execute() (FcpmV2ComputePoolList, *_nethttp.Response, error) {
+	return r.ApiService.ListFcpmV2ComputePoolsExecute(r)
 }
 
 /*
-ListFrpmV2ResourcePools List of Resource Pools
+ListFcpmV2ComputePools List of Compute Pools
 
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-Retrieve a sorted, filtered, paginated list of all resource pools.
+Retrieve a sorted, filtered, paginated list of all compute pools.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListFrpmV2ResourcePoolsRequest
+ @return ApiListFcpmV2ComputePoolsRequest
 */
-func (a *ResourcePoolsFrpmV2ApiService) ListFrpmV2ResourcePools(ctx _context.Context) ApiListFrpmV2ResourcePoolsRequest {
-	return ApiListFrpmV2ResourcePoolsRequest{
+func (a *ComputePoolsFcpmV2ApiService) ListFcpmV2ComputePools(ctx _context.Context) ApiListFcpmV2ComputePoolsRequest {
+	return ApiListFcpmV2ComputePoolsRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return FrpmV2ResourcePoolList
-func (a *ResourcePoolsFrpmV2ApiService) ListFrpmV2ResourcePoolsExecute(r ApiListFrpmV2ResourcePoolsRequest) (FrpmV2ResourcePoolList, *_nethttp.Response, error) {
+//  @return FcpmV2ComputePoolList
+func (a *ComputePoolsFcpmV2ApiService) ListFcpmV2ComputePoolsExecute(r ApiListFcpmV2ComputePoolsRequest) (FcpmV2ComputePoolList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  FrpmV2ResourcePoolList
+		localVarReturnValue  FcpmV2ComputePoolList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcePoolsFrpmV2ApiService.ListFrpmV2ResourcePools")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputePoolsFcpmV2ApiService.ListFcpmV2ComputePools")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/frpm/v2/resource-pools"
+	localVarPath := localBasePath + "/fcpm/v2/compute-pools"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -686,11 +708,12 @@ func (a *ResourcePoolsFrpmV2ApiService) ListFrpmV2ResourcePoolsExecute(r ApiList
 	if r.specRegion == nil {
 		return localVarReturnValue, nil, reportError("specRegion is required and must be specified")
 	}
+	if r.environment == nil {
+		return localVarReturnValue, nil, reportError("environment is required and must be specified")
+	}
 
 	localVarQueryParams.Add("spec.region", parameterToString(*r.specRegion, ""))
-	if r.environment != nil {
-		localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
-	}
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.specNetwork != nil {
 		localVarQueryParams.Add("spec.network", parameterToString(*r.specNetwork, ""))
 	}
@@ -793,37 +816,37 @@ func (a *ResourcePoolsFrpmV2ApiService) ListFrpmV2ResourcePoolsExecute(r ApiList
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateFrpmV2ResourcePoolRequest struct {
-	ctx                      _context.Context
-	ApiService               ResourcePoolsFrpmV2Api
-	id                       string
-	frpmV2ResourcePoolUpdate *FrpmV2ResourcePoolUpdate
+type ApiUpdateFcpmV2ComputePoolRequest struct {
+	ctx                     _context.Context
+	ApiService              ComputePoolsFcpmV2Api
+	id                      string
+	fcpmV2ComputePoolUpdate *FcpmV2ComputePoolUpdate
 }
 
-func (r ApiUpdateFrpmV2ResourcePoolRequest) FrpmV2ResourcePoolUpdate(frpmV2ResourcePoolUpdate FrpmV2ResourcePoolUpdate) ApiUpdateFrpmV2ResourcePoolRequest {
-	r.frpmV2ResourcePoolUpdate = &frpmV2ResourcePoolUpdate
+func (r ApiUpdateFcpmV2ComputePoolRequest) FcpmV2ComputePoolUpdate(fcpmV2ComputePoolUpdate FcpmV2ComputePoolUpdate) ApiUpdateFcpmV2ComputePoolRequest {
+	r.fcpmV2ComputePoolUpdate = &fcpmV2ComputePoolUpdate
 	return r
 }
 
-func (r ApiUpdateFrpmV2ResourcePoolRequest) Execute() (FrpmV2ResourcePool, *_nethttp.Response, error) {
-	return r.ApiService.UpdateFrpmV2ResourcePoolExecute(r)
+func (r ApiUpdateFcpmV2ComputePoolRequest) Execute() (FcpmV2ComputePool, *_nethttp.Response, error) {
+	return r.ApiService.UpdateFcpmV2ComputePoolExecute(r)
 }
 
 /*
-UpdateFrpmV2ResourcePool Update a Resource Pool
+UpdateFcpmV2ComputePool Update a Compute Pool
 
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to update a resource pool.
+Make a request to update a compute pool.
 
 
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the resource pool.
- @return ApiUpdateFrpmV2ResourcePoolRequest
+ @param id The unique identifier for the compute pool.
+ @return ApiUpdateFcpmV2ComputePoolRequest
 */
-func (a *ResourcePoolsFrpmV2ApiService) UpdateFrpmV2ResourcePool(ctx _context.Context, id string) ApiUpdateFrpmV2ResourcePoolRequest {
-	return ApiUpdateFrpmV2ResourcePoolRequest{
+func (a *ComputePoolsFcpmV2ApiService) UpdateFcpmV2ComputePool(ctx _context.Context, id string) ApiUpdateFcpmV2ComputePoolRequest {
+	return ApiUpdateFcpmV2ComputePoolRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -831,23 +854,23 @@ func (a *ResourcePoolsFrpmV2ApiService) UpdateFrpmV2ResourcePool(ctx _context.Co
 }
 
 // Execute executes the request
-//  @return FrpmV2ResourcePool
-func (a *ResourcePoolsFrpmV2ApiService) UpdateFrpmV2ResourcePoolExecute(r ApiUpdateFrpmV2ResourcePoolRequest) (FrpmV2ResourcePool, *_nethttp.Response, error) {
+//  @return FcpmV2ComputePool
+func (a *ComputePoolsFcpmV2ApiService) UpdateFcpmV2ComputePoolExecute(r ApiUpdateFcpmV2ComputePoolRequest) (FcpmV2ComputePool, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  FrpmV2ResourcePool
+		localVarReturnValue  FcpmV2ComputePool
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcePoolsFrpmV2ApiService.UpdateFrpmV2ResourcePool")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputePoolsFcpmV2ApiService.UpdateFcpmV2ComputePool")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/frpm/v2/resource-pools/{id}"
+	localVarPath := localBasePath + "/fcpm/v2/compute-pools/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -872,7 +895,7 @@ func (a *ResourcePoolsFrpmV2ApiService) UpdateFrpmV2ResourcePoolExecute(r ApiUpd
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.frpmV2ResourcePoolUpdate
+	localVarPostBody = r.fcpmV2ComputePoolUpdate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

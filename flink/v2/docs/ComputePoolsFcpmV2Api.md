@@ -1,22 +1,22 @@
-# \ResourcePoolsFrpmV2Api
+# \ComputePoolsFcpmV2Api
 
 All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateFrpmV2ResourcePool**](ResourcePoolsFrpmV2Api.md#CreateFrpmV2ResourcePool) | **Post** /frpm/v2/resource-pools | Create a Resource Pool
-[**DeleteFrpmV2ResourcePool**](ResourcePoolsFrpmV2Api.md#DeleteFrpmV2ResourcePool) | **Delete** /frpm/v2/resource-pools/{id} | Delete a Resource Pool
-[**GetFrpmV2ResourcePool**](ResourcePoolsFrpmV2Api.md#GetFrpmV2ResourcePool) | **Get** /frpm/v2/resource-pools/{id} | Read a Resource Pool
-[**ListFrpmV2ResourcePools**](ResourcePoolsFrpmV2Api.md#ListFrpmV2ResourcePools) | **Get** /frpm/v2/resource-pools | List of Resource Pools
-[**UpdateFrpmV2ResourcePool**](ResourcePoolsFrpmV2Api.md#UpdateFrpmV2ResourcePool) | **Patch** /frpm/v2/resource-pools/{id} | Update a Resource Pool
+[**CreateFcpmV2ComputePool**](ComputePoolsFcpmV2Api.md#CreateFcpmV2ComputePool) | **Post** /fcpm/v2/compute-pools | Create a Compute Pool
+[**DeleteFcpmV2ComputePool**](ComputePoolsFcpmV2Api.md#DeleteFcpmV2ComputePool) | **Delete** /fcpm/v2/compute-pools/{id} | Delete a Compute Pool
+[**GetFcpmV2ComputePool**](ComputePoolsFcpmV2Api.md#GetFcpmV2ComputePool) | **Get** /fcpm/v2/compute-pools/{id} | Read a Compute Pool
+[**ListFcpmV2ComputePools**](ComputePoolsFcpmV2Api.md#ListFcpmV2ComputePools) | **Get** /fcpm/v2/compute-pools | List of Compute Pools
+[**UpdateFcpmV2ComputePool**](ComputePoolsFcpmV2Api.md#UpdateFcpmV2ComputePool) | **Patch** /fcpm/v2/compute-pools/{id} | Update a Compute Pool
 
 
 
-## CreateFrpmV2ResourcePool
+## CreateFcpmV2ComputePool
 
-> FrpmV2ResourcePool CreateFrpmV2ResourcePool(ctx).FrpmV2ResourcePool(frpmV2ResourcePool).Execute()
+> FcpmV2ComputePool CreateFcpmV2ComputePool(ctx).FcpmV2ComputePool(fcpmV2ComputePool).Execute()
 
-Create a Resource Pool
+Create a Compute Pool
 
 
 
@@ -33,17 +33,17 @@ import (
 )
 
 func main() {
-    frpmV2ResourcePool := *openapiclient.NewFrpmV2ResourcePool() // FrpmV2ResourcePool |  (optional)
+    fcpmV2ComputePool := *openapiclient.NewFcpmV2ComputePool() // FcpmV2ComputePool |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ResourcePoolsFrpmV2Api.CreateFrpmV2ResourcePool(context.Background()).FrpmV2ResourcePool(frpmV2ResourcePool).Execute()
+    resp, r, err := api_client.ComputePoolsFcpmV2Api.CreateFcpmV2ComputePool(context.Background()).FcpmV2ComputePool(fcpmV2ComputePool).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ResourcePoolsFrpmV2Api.CreateFrpmV2ResourcePool``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ComputePoolsFcpmV2Api.CreateFcpmV2ComputePool``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateFrpmV2ResourcePool`: FrpmV2ResourcePool
-    fmt.Fprintf(os.Stdout, "Response from `ResourcePoolsFrpmV2Api.CreateFrpmV2ResourcePool`: %v\n", resp)
+    // response from `CreateFcpmV2ComputePool`: FcpmV2ComputePool
+    fmt.Fprintf(os.Stdout, "Response from `ComputePoolsFcpmV2Api.CreateFcpmV2ComputePool`: %v\n", resp)
 }
 ```
 
@@ -53,16 +53,16 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateFrpmV2ResourcePoolRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateFcpmV2ComputePoolRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **frpmV2ResourcePool** | [**FrpmV2ResourcePool**](FrpmV2ResourcePool.md) |  | 
+ **fcpmV2ComputePool** | [**FcpmV2ComputePool**](FcpmV2ComputePool.md) |  | 
 
 ### Return type
 
-[**FrpmV2ResourcePool**](frpm.v2.ResourcePool.md)
+[**FcpmV2ComputePool**](fcpm.v2.ComputePool.md)
 
 ### Authorization
 
@@ -78,11 +78,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteFrpmV2ResourcePool
+## DeleteFcpmV2ComputePool
 
-> DeleteFrpmV2ResourcePool(ctx, id).Execute()
+> DeleteFcpmV2ComputePool(ctx, id).Environment(environment).Execute()
 
-Delete a Resource Pool
+Delete a Compute Pool
 
 
 
@@ -99,13 +99,14 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | The unique identifier for the resource pool.
+    environment := "env-00000" // string | Scope the operation to the given environment.
+    id := "id_example" // string | The unique identifier for the compute pool.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ResourcePoolsFrpmV2Api.DeleteFrpmV2ResourcePool(context.Background(), id).Execute()
+    resp, r, err := api_client.ComputePoolsFcpmV2Api.DeleteFcpmV2ComputePool(context.Background(), id).Environment(environment).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ResourcePoolsFrpmV2Api.DeleteFrpmV2ResourcePool``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ComputePoolsFcpmV2Api.DeleteFcpmV2ComputePool``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -117,15 +118,16 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the resource pool. | 
+**id** | **string** | The unique identifier for the compute pool. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteFrpmV2ResourcePoolRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteFcpmV2ComputePoolRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **environment** | **string** | Scope the operation to the given environment. | 
 
 
 ### Return type
@@ -146,11 +148,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetFrpmV2ResourcePool
+## GetFcpmV2ComputePool
 
-> FrpmV2ResourcePool GetFrpmV2ResourcePool(ctx, id).Execute()
+> FcpmV2ComputePool GetFcpmV2ComputePool(ctx, id).Environment(environment).Execute()
 
-Read a Resource Pool
+Read a Compute Pool
 
 
 
@@ -167,17 +169,18 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | The unique identifier for the resource pool.
+    environment := "env-00000" // string | Scope the operation to the given environment.
+    id := "id_example" // string | The unique identifier for the compute pool.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ResourcePoolsFrpmV2Api.GetFrpmV2ResourcePool(context.Background(), id).Execute()
+    resp, r, err := api_client.ComputePoolsFcpmV2Api.GetFcpmV2ComputePool(context.Background(), id).Environment(environment).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ResourcePoolsFrpmV2Api.GetFrpmV2ResourcePool``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ComputePoolsFcpmV2Api.GetFcpmV2ComputePool``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetFrpmV2ResourcePool`: FrpmV2ResourcePool
-    fmt.Fprintf(os.Stdout, "Response from `ResourcePoolsFrpmV2Api.GetFrpmV2ResourcePool`: %v\n", resp)
+    // response from `GetFcpmV2ComputePool`: FcpmV2ComputePool
+    fmt.Fprintf(os.Stdout, "Response from `ComputePoolsFcpmV2Api.GetFcpmV2ComputePool`: %v\n", resp)
 }
 ```
 
@@ -187,20 +190,21 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the resource pool. | 
+**id** | **string** | The unique identifier for the compute pool. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetFrpmV2ResourcePoolRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetFcpmV2ComputePoolRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **environment** | **string** | Scope the operation to the given environment. | 
 
 
 ### Return type
 
-[**FrpmV2ResourcePool**](frpm.v2.ResourcePool.md)
+[**FcpmV2ComputePool**](fcpm.v2.ComputePool.md)
 
 ### Authorization
 
@@ -216,11 +220,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ListFrpmV2ResourcePools
+## ListFcpmV2ComputePools
 
-> FrpmV2ResourcePoolList ListFrpmV2ResourcePools(ctx).SpecRegion(specRegion).Environment(environment).SpecNetwork(specNetwork).PageSize(pageSize).PageToken(pageToken).Execute()
+> FcpmV2ComputePoolList ListFcpmV2ComputePools(ctx).SpecRegion(specRegion).Environment(environment).SpecNetwork(specNetwork).PageSize(pageSize).PageToken(pageToken).Execute()
 
-List of Resource Pools
+List of Compute Pools
 
 
 
@@ -238,20 +242,20 @@ import (
 
 func main() {
     specRegion := "us-west-1" // string | Filter the results by exact match for spec.region.
-    environment := "env-00000" // string | Filter the results by exact match for environment. (optional)
+    environment := "env-00000" // string | Filter the results by exact match for environment.
     specNetwork := "n-00000" // string | Filter the results by exact match for spec.network. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ResourcePoolsFrpmV2Api.ListFrpmV2ResourcePools(context.Background()).SpecRegion(specRegion).Environment(environment).SpecNetwork(specNetwork).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.ComputePoolsFcpmV2Api.ListFcpmV2ComputePools(context.Background()).SpecRegion(specRegion).Environment(environment).SpecNetwork(specNetwork).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ResourcePoolsFrpmV2Api.ListFrpmV2ResourcePools``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ComputePoolsFcpmV2Api.ListFcpmV2ComputePools``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListFrpmV2ResourcePools`: FrpmV2ResourcePoolList
-    fmt.Fprintf(os.Stdout, "Response from `ResourcePoolsFrpmV2Api.ListFrpmV2ResourcePools`: %v\n", resp)
+    // response from `ListFcpmV2ComputePools`: FcpmV2ComputePoolList
+    fmt.Fprintf(os.Stdout, "Response from `ComputePoolsFcpmV2Api.ListFcpmV2ComputePools`: %v\n", resp)
 }
 ```
 
@@ -261,7 +265,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListFrpmV2ResourcePoolsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListFcpmV2ComputePoolsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -274,7 +278,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FrpmV2ResourcePoolList**](frpm.v2.ResourcePoolList.md)
+[**FcpmV2ComputePoolList**](fcpm.v2.ComputePoolList.md)
 
 ### Authorization
 
@@ -290,11 +294,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UpdateFrpmV2ResourcePool
+## UpdateFcpmV2ComputePool
 
-> FrpmV2ResourcePool UpdateFrpmV2ResourcePool(ctx, id).FrpmV2ResourcePoolUpdate(frpmV2ResourcePoolUpdate).Execute()
+> FcpmV2ComputePool UpdateFcpmV2ComputePool(ctx, id).FcpmV2ComputePoolUpdate(fcpmV2ComputePoolUpdate).Execute()
 
-Update a Resource Pool
+Update a Compute Pool
 
 
 
@@ -311,18 +315,18 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | The unique identifier for the resource pool.
-    frpmV2ResourcePoolUpdate := *openapiclient.NewFrpmV2ResourcePoolUpdate() // FrpmV2ResourcePoolUpdate |  (optional)
+    id := "id_example" // string | The unique identifier for the compute pool.
+    fcpmV2ComputePoolUpdate := *openapiclient.NewFcpmV2ComputePoolUpdate() // FcpmV2ComputePoolUpdate |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ResourcePoolsFrpmV2Api.UpdateFrpmV2ResourcePool(context.Background(), id).FrpmV2ResourcePoolUpdate(frpmV2ResourcePoolUpdate).Execute()
+    resp, r, err := api_client.ComputePoolsFcpmV2Api.UpdateFcpmV2ComputePool(context.Background(), id).FcpmV2ComputePoolUpdate(fcpmV2ComputePoolUpdate).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ResourcePoolsFrpmV2Api.UpdateFrpmV2ResourcePool``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ComputePoolsFcpmV2Api.UpdateFcpmV2ComputePool``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UpdateFrpmV2ResourcePool`: FrpmV2ResourcePool
-    fmt.Fprintf(os.Stdout, "Response from `ResourcePoolsFrpmV2Api.UpdateFrpmV2ResourcePool`: %v\n", resp)
+    // response from `UpdateFcpmV2ComputePool`: FcpmV2ComputePool
+    fmt.Fprintf(os.Stdout, "Response from `ComputePoolsFcpmV2Api.UpdateFcpmV2ComputePool`: %v\n", resp)
 }
 ```
 
@@ -332,21 +336,21 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the resource pool. | 
+**id** | **string** | The unique identifier for the compute pool. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUpdateFrpmV2ResourcePoolRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiUpdateFcpmV2ComputePoolRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **frpmV2ResourcePoolUpdate** | [**FrpmV2ResourcePoolUpdate**](FrpmV2ResourcePoolUpdate.md) |  | 
+ **fcpmV2ComputePoolUpdate** | [**FcpmV2ComputePoolUpdate**](FcpmV2ComputePoolUpdate.md) |  | 
 
 ### Return type
 
-[**FrpmV2ResourcePool**](frpm.v2.ResourcePool.md)
+[**FcpmV2ComputePool**](fcpm.v2.ComputePool.md)
 
 ### Authorization
 

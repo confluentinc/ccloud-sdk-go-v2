@@ -13,9 +13,9 @@
 // limitations under the License.
 
 /*
-Flink Resource Pool Management API
+Flink Compute Pool Management API
 
-This is the Flink Resource Pool management API.
+This is the Flink Compute Pool management API.
 
 API version: 0.0.1
 Contact: ksql-team@confluent.io
@@ -33,38 +33,38 @@ import (
 	"reflect"
 )
 
-// FrpmV2ResourcePoolUpdate `ResourcePool` represents a Flink runtime that you can issue queries to using its API endpoint. The API allows you to list, create, read, update, and delete your Flink resource pools.   ## The Resource Pools Model <SchemaDefinition schemaRef=\"#/components/schemas/frpm.v2.ResourcePool\" />
-type FrpmV2ResourcePoolUpdate struct {
+// FcpmV2ComputePoolUpdate A Compute Pool represents a set of compute resources that is used to run your Queries. The resources (CPUs, memory,…) provided by a Compute Pool are shared between all Queries that use it.   ## The Compute Pools Model <SchemaDefinition schemaRef=\"#/components/schemas/fcpm.v2.ComputePool\" />
+type FcpmV2ComputePoolUpdate struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
 	Kind *string `json:"kind,omitempty"`
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
-	Id       *string                       `json:"id,omitempty"`
-	Metadata *ObjectMeta                   `json:"metadata,omitempty"`
-	Spec     *FrpmV2ResourcePoolSpecUpdate `json:"spec,omitempty"`
-	Status   *FrpmV2ResourcePoolStatus     `json:"status,omitempty"`
+	Id       *string                      `json:"id,omitempty"`
+	Metadata *ObjectMeta                  `json:"metadata,omitempty"`
+	Spec     *FcpmV2ComputePoolSpecUpdate `json:"spec,omitempty"`
+	Status   *FcpmV2ComputePoolStatus     `json:"status,omitempty"`
 }
 
-// NewFrpmV2ResourcePoolUpdate instantiates a new FrpmV2ResourcePoolUpdate object
+// NewFcpmV2ComputePoolUpdate instantiates a new FcpmV2ComputePoolUpdate object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFrpmV2ResourcePoolUpdate() *FrpmV2ResourcePoolUpdate {
-	this := FrpmV2ResourcePoolUpdate{}
+func NewFcpmV2ComputePoolUpdate() *FcpmV2ComputePoolUpdate {
+	this := FcpmV2ComputePoolUpdate{}
 	return &this
 }
 
-// NewFrpmV2ResourcePoolUpdateWithDefaults instantiates a new FrpmV2ResourcePoolUpdate object
+// NewFcpmV2ComputePoolUpdateWithDefaults instantiates a new FcpmV2ComputePoolUpdate object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFrpmV2ResourcePoolUpdateWithDefaults() *FrpmV2ResourcePoolUpdate {
-	this := FrpmV2ResourcePoolUpdate{}
+func NewFcpmV2ComputePoolUpdateWithDefaults() *FcpmV2ComputePoolUpdate {
+	this := FcpmV2ComputePoolUpdate{}
 	return &this
 }
 
 // GetApiVersion returns the ApiVersion field value if set, zero value otherwise.
-func (o *FrpmV2ResourcePoolUpdate) GetApiVersion() string {
+func (o *FcpmV2ComputePoolUpdate) GetApiVersion() string {
 	if o == nil || o.ApiVersion == nil {
 		var ret string
 		return ret
@@ -74,7 +74,7 @@ func (o *FrpmV2ResourcePoolUpdate) GetApiVersion() string {
 
 // GetApiVersionOk returns a tuple with the ApiVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FrpmV2ResourcePoolUpdate) GetApiVersionOk() (*string, bool) {
+func (o *FcpmV2ComputePoolUpdate) GetApiVersionOk() (*string, bool) {
 	if o == nil || o.ApiVersion == nil {
 		return nil, false
 	}
@@ -82,7 +82,7 @@ func (o *FrpmV2ResourcePoolUpdate) GetApiVersionOk() (*string, bool) {
 }
 
 // HasApiVersion returns a boolean if a field has been set.
-func (o *FrpmV2ResourcePoolUpdate) HasApiVersion() bool {
+func (o *FcpmV2ComputePoolUpdate) HasApiVersion() bool {
 	if o != nil && o.ApiVersion != nil {
 		return true
 	}
@@ -91,12 +91,12 @@ func (o *FrpmV2ResourcePoolUpdate) HasApiVersion() bool {
 }
 
 // SetApiVersion gets a reference to the given string and assigns it to the ApiVersion field.
-func (o *FrpmV2ResourcePoolUpdate) SetApiVersion(v string) {
+func (o *FcpmV2ComputePoolUpdate) SetApiVersion(v string) {
 	o.ApiVersion = &v
 }
 
 // GetKind returns the Kind field value if set, zero value otherwise.
-func (o *FrpmV2ResourcePoolUpdate) GetKind() string {
+func (o *FcpmV2ComputePoolUpdate) GetKind() string {
 	if o == nil || o.Kind == nil {
 		var ret string
 		return ret
@@ -106,7 +106,7 @@ func (o *FrpmV2ResourcePoolUpdate) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FrpmV2ResourcePoolUpdate) GetKindOk() (*string, bool) {
+func (o *FcpmV2ComputePoolUpdate) GetKindOk() (*string, bool) {
 	if o == nil || o.Kind == nil {
 		return nil, false
 	}
@@ -114,7 +114,7 @@ func (o *FrpmV2ResourcePoolUpdate) GetKindOk() (*string, bool) {
 }
 
 // HasKind returns a boolean if a field has been set.
-func (o *FrpmV2ResourcePoolUpdate) HasKind() bool {
+func (o *FcpmV2ComputePoolUpdate) HasKind() bool {
 	if o != nil && o.Kind != nil {
 		return true
 	}
@@ -123,12 +123,12 @@ func (o *FrpmV2ResourcePoolUpdate) HasKind() bool {
 }
 
 // SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *FrpmV2ResourcePoolUpdate) SetKind(v string) {
+func (o *FcpmV2ComputePoolUpdate) SetKind(v string) {
 	o.Kind = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *FrpmV2ResourcePoolUpdate) GetId() string {
+func (o *FcpmV2ComputePoolUpdate) GetId() string {
 	if o == nil || o.Id == nil {
 		var ret string
 		return ret
@@ -138,7 +138,7 @@ func (o *FrpmV2ResourcePoolUpdate) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FrpmV2ResourcePoolUpdate) GetIdOk() (*string, bool) {
+func (o *FcpmV2ComputePoolUpdate) GetIdOk() (*string, bool) {
 	if o == nil || o.Id == nil {
 		return nil, false
 	}
@@ -146,7 +146,7 @@ func (o *FrpmV2ResourcePoolUpdate) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *FrpmV2ResourcePoolUpdate) HasId() bool {
+func (o *FcpmV2ComputePoolUpdate) HasId() bool {
 	if o != nil && o.Id != nil {
 		return true
 	}
@@ -155,12 +155,12 @@ func (o *FrpmV2ResourcePoolUpdate) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *FrpmV2ResourcePoolUpdate) SetId(v string) {
+func (o *FcpmV2ComputePoolUpdate) SetId(v string) {
 	o.Id = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *FrpmV2ResourcePoolUpdate) GetMetadata() ObjectMeta {
+func (o *FcpmV2ComputePoolUpdate) GetMetadata() ObjectMeta {
 	if o == nil || o.Metadata == nil {
 		var ret ObjectMeta
 		return ret
@@ -170,7 +170,7 @@ func (o *FrpmV2ResourcePoolUpdate) GetMetadata() ObjectMeta {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FrpmV2ResourcePoolUpdate) GetMetadataOk() (*ObjectMeta, bool) {
+func (o *FcpmV2ComputePoolUpdate) GetMetadataOk() (*ObjectMeta, bool) {
 	if o == nil || o.Metadata == nil {
 		return nil, false
 	}
@@ -178,7 +178,7 @@ func (o *FrpmV2ResourcePoolUpdate) GetMetadataOk() (*ObjectMeta, bool) {
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *FrpmV2ResourcePoolUpdate) HasMetadata() bool {
+func (o *FcpmV2ComputePoolUpdate) HasMetadata() bool {
 	if o != nil && o.Metadata != nil {
 		return true
 	}
@@ -187,14 +187,14 @@ func (o *FrpmV2ResourcePoolUpdate) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given ObjectMeta and assigns it to the Metadata field.
-func (o *FrpmV2ResourcePoolUpdate) SetMetadata(v ObjectMeta) {
+func (o *FcpmV2ComputePoolUpdate) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
 // GetSpec returns the Spec field value if set, zero value otherwise.
-func (o *FrpmV2ResourcePoolUpdate) GetSpec() FrpmV2ResourcePoolSpecUpdate {
+func (o *FcpmV2ComputePoolUpdate) GetSpec() FcpmV2ComputePoolSpecUpdate {
 	if o == nil || o.Spec == nil {
-		var ret FrpmV2ResourcePoolSpecUpdate
+		var ret FcpmV2ComputePoolSpecUpdate
 		return ret
 	}
 	return *o.Spec
@@ -202,7 +202,7 @@ func (o *FrpmV2ResourcePoolUpdate) GetSpec() FrpmV2ResourcePoolSpecUpdate {
 
 // GetSpecOk returns a tuple with the Spec field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FrpmV2ResourcePoolUpdate) GetSpecOk() (*FrpmV2ResourcePoolSpecUpdate, bool) {
+func (o *FcpmV2ComputePoolUpdate) GetSpecOk() (*FcpmV2ComputePoolSpecUpdate, bool) {
 	if o == nil || o.Spec == nil {
 		return nil, false
 	}
@@ -210,7 +210,7 @@ func (o *FrpmV2ResourcePoolUpdate) GetSpecOk() (*FrpmV2ResourcePoolSpecUpdate, b
 }
 
 // HasSpec returns a boolean if a field has been set.
-func (o *FrpmV2ResourcePoolUpdate) HasSpec() bool {
+func (o *FcpmV2ComputePoolUpdate) HasSpec() bool {
 	if o != nil && o.Spec != nil {
 		return true
 	}
@@ -218,15 +218,15 @@ func (o *FrpmV2ResourcePoolUpdate) HasSpec() bool {
 	return false
 }
 
-// SetSpec gets a reference to the given FrpmV2ResourcePoolSpecUpdate and assigns it to the Spec field.
-func (o *FrpmV2ResourcePoolUpdate) SetSpec(v FrpmV2ResourcePoolSpecUpdate) {
+// SetSpec gets a reference to the given FcpmV2ComputePoolSpecUpdate and assigns it to the Spec field.
+func (o *FcpmV2ComputePoolUpdate) SetSpec(v FcpmV2ComputePoolSpecUpdate) {
 	o.Spec = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *FrpmV2ResourcePoolUpdate) GetStatus() FrpmV2ResourcePoolStatus {
+func (o *FcpmV2ComputePoolUpdate) GetStatus() FcpmV2ComputePoolStatus {
 	if o == nil || o.Status == nil {
-		var ret FrpmV2ResourcePoolStatus
+		var ret FcpmV2ComputePoolStatus
 		return ret
 	}
 	return *o.Status
@@ -234,7 +234,7 @@ func (o *FrpmV2ResourcePoolUpdate) GetStatus() FrpmV2ResourcePoolStatus {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FrpmV2ResourcePoolUpdate) GetStatusOk() (*FrpmV2ResourcePoolStatus, bool) {
+func (o *FcpmV2ComputePoolUpdate) GetStatusOk() (*FcpmV2ComputePoolStatus, bool) {
 	if o == nil || o.Status == nil {
 		return nil, false
 	}
@@ -242,7 +242,7 @@ func (o *FrpmV2ResourcePoolUpdate) GetStatusOk() (*FrpmV2ResourcePoolStatus, boo
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *FrpmV2ResourcePoolUpdate) HasStatus() bool {
+func (o *FcpmV2ComputePoolUpdate) HasStatus() bool {
 	if o != nil && o.Status != nil {
 		return true
 	}
@@ -250,13 +250,13 @@ func (o *FrpmV2ResourcePoolUpdate) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given FrpmV2ResourcePoolStatus and assigns it to the Status field.
-func (o *FrpmV2ResourcePoolUpdate) SetStatus(v FrpmV2ResourcePoolStatus) {
+// SetStatus gets a reference to the given FcpmV2ComputePoolStatus and assigns it to the Status field.
+func (o *FcpmV2ComputePoolUpdate) SetStatus(v FcpmV2ComputePoolStatus) {
 	o.Status = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *FrpmV2ResourcePoolUpdate) Redact() {
+func (o *FcpmV2ComputePoolUpdate) Redact() {
 	o.recurseRedact(o.ApiVersion)
 	o.recurseRedact(o.Kind)
 	o.recurseRedact(o.Id)
@@ -265,7 +265,7 @@ func (o *FrpmV2ResourcePoolUpdate) Redact() {
 	o.recurseRedact(o.Status)
 }
 
-func (o *FrpmV2ResourcePoolUpdate) recurseRedact(v interface{}) {
+func (o *FcpmV2ComputePoolUpdate) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -290,12 +290,12 @@ func (o *FrpmV2ResourcePoolUpdate) recurseRedact(v interface{}) {
 	}
 }
 
-func (o FrpmV2ResourcePoolUpdate) zeroField(v interface{}) {
+func (o FcpmV2ComputePoolUpdate) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o FrpmV2ResourcePoolUpdate) MarshalJSON() ([]byte, error) {
+func (o FcpmV2ComputePoolUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ApiVersion != nil {
 		toSerialize["api_version"] = o.ApiVersion
@@ -318,38 +318,38 @@ func (o FrpmV2ResourcePoolUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableFrpmV2ResourcePoolUpdate struct {
-	value *FrpmV2ResourcePoolUpdate
+type NullableFcpmV2ComputePoolUpdate struct {
+	value *FcpmV2ComputePoolUpdate
 	isSet bool
 }
 
-func (v NullableFrpmV2ResourcePoolUpdate) Get() *FrpmV2ResourcePoolUpdate {
+func (v NullableFcpmV2ComputePoolUpdate) Get() *FcpmV2ComputePoolUpdate {
 	return v.value
 }
 
-func (v *NullableFrpmV2ResourcePoolUpdate) Set(val *FrpmV2ResourcePoolUpdate) {
+func (v *NullableFcpmV2ComputePoolUpdate) Set(val *FcpmV2ComputePoolUpdate) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFrpmV2ResourcePoolUpdate) IsSet() bool {
+func (v NullableFcpmV2ComputePoolUpdate) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFrpmV2ResourcePoolUpdate) Unset() {
+func (v *NullableFcpmV2ComputePoolUpdate) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFrpmV2ResourcePoolUpdate(val *FrpmV2ResourcePoolUpdate) *NullableFrpmV2ResourcePoolUpdate {
-	return &NullableFrpmV2ResourcePoolUpdate{value: val, isSet: true}
+func NewNullableFcpmV2ComputePoolUpdate(val *FcpmV2ComputePoolUpdate) *NullableFcpmV2ComputePoolUpdate {
+	return &NullableFcpmV2ComputePoolUpdate{value: val, isSet: true}
 }
 
-func (v NullableFrpmV2ResourcePoolUpdate) MarshalJSON() ([]byte, error) {
+func (v NullableFcpmV2ComputePoolUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFrpmV2ResourcePoolUpdate) UnmarshalJSON(src []byte) error {
+func (v *NullableFcpmV2ComputePoolUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

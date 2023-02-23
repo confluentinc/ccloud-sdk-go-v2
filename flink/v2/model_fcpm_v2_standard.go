@@ -13,9 +13,9 @@
 // limitations under the License.
 
 /*
-Flink Resource Pool Management API
+Flink Compute Pool Management API
 
-This is the Flink Resource Pool management API.
+This is the Flink Compute Pool management API.
 
 API version: 0.0.1
 Contact: ksql-team@confluent.io
@@ -33,32 +33,32 @@ import (
 	"reflect"
 )
 
-// FrpmV2Standard The standard cluster type.
-type FrpmV2Standard struct {
+// FcpmV2Standard The standard cluster type.
+type FcpmV2Standard struct {
 	// Standard cluster type.
 	Kind string `json:"kind"`
 }
 
-// NewFrpmV2Standard instantiates a new FrpmV2Standard object
+// NewFcpmV2Standard instantiates a new FcpmV2Standard object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFrpmV2Standard(kind string) *FrpmV2Standard {
-	this := FrpmV2Standard{}
+func NewFcpmV2Standard(kind string) *FcpmV2Standard {
+	this := FcpmV2Standard{}
 	this.Kind = kind
 	return &this
 }
 
-// NewFrpmV2StandardWithDefaults instantiates a new FrpmV2Standard object
+// NewFcpmV2StandardWithDefaults instantiates a new FcpmV2Standard object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFrpmV2StandardWithDefaults() *FrpmV2Standard {
-	this := FrpmV2Standard{}
+func NewFcpmV2StandardWithDefaults() *FcpmV2Standard {
+	this := FcpmV2Standard{}
 	return &this
 }
 
 // GetKind returns the Kind field value
-func (o *FrpmV2Standard) GetKind() string {
+func (o *FcpmV2Standard) GetKind() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -69,7 +69,7 @@ func (o *FrpmV2Standard) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *FrpmV2Standard) GetKindOk() (*string, bool) {
+func (o *FcpmV2Standard) GetKindOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -77,16 +77,16 @@ func (o *FrpmV2Standard) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *FrpmV2Standard) SetKind(v string) {
+func (o *FcpmV2Standard) SetKind(v string) {
 	o.Kind = v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *FrpmV2Standard) Redact() {
+func (o *FcpmV2Standard) Redact() {
 	o.recurseRedact(&o.Kind)
 }
 
-func (o *FrpmV2Standard) recurseRedact(v interface{}) {
+func (o *FcpmV2Standard) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -111,12 +111,12 @@ func (o *FrpmV2Standard) recurseRedact(v interface{}) {
 	}
 }
 
-func (o FrpmV2Standard) zeroField(v interface{}) {
+func (o FcpmV2Standard) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o FrpmV2Standard) MarshalJSON() ([]byte, error) {
+func (o FcpmV2Standard) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["kind"] = o.Kind
@@ -124,38 +124,38 @@ func (o FrpmV2Standard) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableFrpmV2Standard struct {
-	value *FrpmV2Standard
+type NullableFcpmV2Standard struct {
+	value *FcpmV2Standard
 	isSet bool
 }
 
-func (v NullableFrpmV2Standard) Get() *FrpmV2Standard {
+func (v NullableFcpmV2Standard) Get() *FcpmV2Standard {
 	return v.value
 }
 
-func (v *NullableFrpmV2Standard) Set(val *FrpmV2Standard) {
+func (v *NullableFcpmV2Standard) Set(val *FcpmV2Standard) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFrpmV2Standard) IsSet() bool {
+func (v NullableFcpmV2Standard) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFrpmV2Standard) Unset() {
+func (v *NullableFcpmV2Standard) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFrpmV2Standard(val *FrpmV2Standard) *NullableFrpmV2Standard {
-	return &NullableFrpmV2Standard{value: val, isSet: true}
+func NewNullableFcpmV2Standard(val *FcpmV2Standard) *NullableFcpmV2Standard {
+	return &NullableFcpmV2Standard{value: val, isSet: true}
 }
 
-func (v NullableFrpmV2Standard) MarshalJSON() ([]byte, error) {
+func (v NullableFcpmV2Standard) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFrpmV2Standard) UnmarshalJSON(src []byte) error {
+func (v *NullableFcpmV2Standard) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

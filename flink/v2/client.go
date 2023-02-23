@@ -13,9 +13,9 @@
 // limitations under the License.
 
 /*
-Flink Resource Pool Management API
+Flink Compute Pool Management API
 
-This is the Flink Resource Pool management API.
+This is the Flink Compute Pool management API.
 
 API version: 0.0.1
 Contact: ksql-team@confluent.io
@@ -56,7 +56,7 @@ var (
 	xmlCheck  = regexp.MustCompile(`(?i:(?:application|text)/xml)`)
 )
 
-// APIClient manages communication with the Flink Resource Pool Management API API v0.0.1
+// APIClient manages communication with the Flink Compute Pool Management API API v0.0.1
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -64,7 +64,7 @@ type APIClient struct {
 
 	// API Services
 
-	ResourcePoolsFrpmV2Api ResourcePoolsFrpmV2Api
+	ComputePoolsFcpmV2Api ComputePoolsFcpmV2Api
 }
 
 type service struct {
@@ -83,7 +83,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
-	c.ResourcePoolsFrpmV2Api = (*ResourcePoolsFrpmV2ApiService)(&c.common)
+	c.ComputePoolsFcpmV2Api = (*ComputePoolsFcpmV2ApiService)(&c.common)
 
 	return c
 }

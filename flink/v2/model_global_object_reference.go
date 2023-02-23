@@ -13,9 +13,9 @@
 // limitations under the License.
 
 /*
-Flink Resource Pool Management API
+Flink Compute Pool Management API
 
-This is the Flink Resource Pool management API.
+This is the Flink Compute Pool management API.
 
 API version: 0.0.1
 Contact: ksql-team@confluent.io

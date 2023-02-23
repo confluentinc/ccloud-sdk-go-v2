@@ -13,9 +13,9 @@
 // limitations under the License.
 
 /*
-Flink Resource Pool Management API
+Flink Compute Pool Management API
 
-This is the Flink Resource Pool management API.
+This is the Flink Compute Pool management API.
 
 API version: 0.0.1
 Contact: ksql-team@confluent.io
@@ -33,37 +33,37 @@ import (
 	"reflect"
 )
 
-// FrpmV2ResourcePoolSpecUpdate The desired state of the Resource Pool
-type FrpmV2ResourcePoolSpecUpdate struct {
-	// The API endpoint of the Flink resource pool.
+// FcpmV2ComputePoolSpecUpdate The desired state of the Compute Pool
+type FcpmV2ComputePoolSpecUpdate struct {
+	// The API endpoint of the Flink compute pool.
 	HttpEndpoint *string `json:"http_endpoint,omitempty"`
-	// The number of CSUs (Confluent Streaming Units) currently allocated to this Flink resource pool.
+	// The number of CSUs (Confluent Streaming Units) currently allocated to this Flink compute pool.
 	CurrentCsu *int32 `json:"current_csu,omitempty"`
-	// Maximum number of Confluent Streaming Units (CSUs) that the Flink resource pool should auto-scale to. If not specified, the value defaults to 8.
+	// Maximum number of Confluent Streaming Units (CSUs) that the Flink compute pool should auto-scale to. If not specified, the value defaults to 8.
 	MaxCsu *int32 `json:"max_csu,omitempty"`
-	// The type of of the Flink resource pool. Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.
-	Config *FrpmV2ResourcePoolSpecUpdateConfigOneOf `json:"config,omitempty"`
+	// The type of of the Flink compute pool.
+	Config *FcpmV2ComputePoolSpecUpdateConfigOneOf `json:"config,omitempty"`
 }
 
-// NewFrpmV2ResourcePoolSpecUpdate instantiates a new FrpmV2ResourcePoolSpecUpdate object
+// NewFcpmV2ComputePoolSpecUpdate instantiates a new FcpmV2ComputePoolSpecUpdate object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFrpmV2ResourcePoolSpecUpdate() *FrpmV2ResourcePoolSpecUpdate {
-	this := FrpmV2ResourcePoolSpecUpdate{}
+func NewFcpmV2ComputePoolSpecUpdate() *FcpmV2ComputePoolSpecUpdate {
+	this := FcpmV2ComputePoolSpecUpdate{}
 	return &this
 }
 
-// NewFrpmV2ResourcePoolSpecUpdateWithDefaults instantiates a new FrpmV2ResourcePoolSpecUpdate object
+// NewFcpmV2ComputePoolSpecUpdateWithDefaults instantiates a new FcpmV2ComputePoolSpecUpdate object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFrpmV2ResourcePoolSpecUpdateWithDefaults() *FrpmV2ResourcePoolSpecUpdate {
-	this := FrpmV2ResourcePoolSpecUpdate{}
+func NewFcpmV2ComputePoolSpecUpdateWithDefaults() *FcpmV2ComputePoolSpecUpdate {
+	this := FcpmV2ComputePoolSpecUpdate{}
 	return &this
 }
 
 // GetHttpEndpoint returns the HttpEndpoint field value if set, zero value otherwise.
-func (o *FrpmV2ResourcePoolSpecUpdate) GetHttpEndpoint() string {
+func (o *FcpmV2ComputePoolSpecUpdate) GetHttpEndpoint() string {
 	if o == nil || o.HttpEndpoint == nil {
 		var ret string
 		return ret
@@ -73,7 +73,7 @@ func (o *FrpmV2ResourcePoolSpecUpdate) GetHttpEndpoint() string {
 
 // GetHttpEndpointOk returns a tuple with the HttpEndpoint field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FrpmV2ResourcePoolSpecUpdate) GetHttpEndpointOk() (*string, bool) {
+func (o *FcpmV2ComputePoolSpecUpdate) GetHttpEndpointOk() (*string, bool) {
 	if o == nil || o.HttpEndpoint == nil {
 		return nil, false
 	}
@@ -81,7 +81,7 @@ func (o *FrpmV2ResourcePoolSpecUpdate) GetHttpEndpointOk() (*string, bool) {
 }
 
 // HasHttpEndpoint returns a boolean if a field has been set.
-func (o *FrpmV2ResourcePoolSpecUpdate) HasHttpEndpoint() bool {
+func (o *FcpmV2ComputePoolSpecUpdate) HasHttpEndpoint() bool {
 	if o != nil && o.HttpEndpoint != nil {
 		return true
 	}
@@ -90,12 +90,12 @@ func (o *FrpmV2ResourcePoolSpecUpdate) HasHttpEndpoint() bool {
 }
 
 // SetHttpEndpoint gets a reference to the given string and assigns it to the HttpEndpoint field.
-func (o *FrpmV2ResourcePoolSpecUpdate) SetHttpEndpoint(v string) {
+func (o *FcpmV2ComputePoolSpecUpdate) SetHttpEndpoint(v string) {
 	o.HttpEndpoint = &v
 }
 
 // GetCurrentCsu returns the CurrentCsu field value if set, zero value otherwise.
-func (o *FrpmV2ResourcePoolSpecUpdate) GetCurrentCsu() int32 {
+func (o *FcpmV2ComputePoolSpecUpdate) GetCurrentCsu() int32 {
 	if o == nil || o.CurrentCsu == nil {
 		var ret int32
 		return ret
@@ -105,7 +105,7 @@ func (o *FrpmV2ResourcePoolSpecUpdate) GetCurrentCsu() int32 {
 
 // GetCurrentCsuOk returns a tuple with the CurrentCsu field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FrpmV2ResourcePoolSpecUpdate) GetCurrentCsuOk() (*int32, bool) {
+func (o *FcpmV2ComputePoolSpecUpdate) GetCurrentCsuOk() (*int32, bool) {
 	if o == nil || o.CurrentCsu == nil {
 		return nil, false
 	}
@@ -113,7 +113,7 @@ func (o *FrpmV2ResourcePoolSpecUpdate) GetCurrentCsuOk() (*int32, bool) {
 }
 
 // HasCurrentCsu returns a boolean if a field has been set.
-func (o *FrpmV2ResourcePoolSpecUpdate) HasCurrentCsu() bool {
+func (o *FcpmV2ComputePoolSpecUpdate) HasCurrentCsu() bool {
 	if o != nil && o.CurrentCsu != nil {
 		return true
 	}
@@ -122,12 +122,12 @@ func (o *FrpmV2ResourcePoolSpecUpdate) HasCurrentCsu() bool {
 }
 
 // SetCurrentCsu gets a reference to the given int32 and assigns it to the CurrentCsu field.
-func (o *FrpmV2ResourcePoolSpecUpdate) SetCurrentCsu(v int32) {
+func (o *FcpmV2ComputePoolSpecUpdate) SetCurrentCsu(v int32) {
 	o.CurrentCsu = &v
 }
 
 // GetMaxCsu returns the MaxCsu field value if set, zero value otherwise.
-func (o *FrpmV2ResourcePoolSpecUpdate) GetMaxCsu() int32 {
+func (o *FcpmV2ComputePoolSpecUpdate) GetMaxCsu() int32 {
 	if o == nil || o.MaxCsu == nil {
 		var ret int32
 		return ret
@@ -137,7 +137,7 @@ func (o *FrpmV2ResourcePoolSpecUpdate) GetMaxCsu() int32 {
 
 // GetMaxCsuOk returns a tuple with the MaxCsu field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FrpmV2ResourcePoolSpecUpdate) GetMaxCsuOk() (*int32, bool) {
+func (o *FcpmV2ComputePoolSpecUpdate) GetMaxCsuOk() (*int32, bool) {
 	if o == nil || o.MaxCsu == nil {
 		return nil, false
 	}
@@ -145,7 +145,7 @@ func (o *FrpmV2ResourcePoolSpecUpdate) GetMaxCsuOk() (*int32, bool) {
 }
 
 // HasMaxCsu returns a boolean if a field has been set.
-func (o *FrpmV2ResourcePoolSpecUpdate) HasMaxCsu() bool {
+func (o *FcpmV2ComputePoolSpecUpdate) HasMaxCsu() bool {
 	if o != nil && o.MaxCsu != nil {
 		return true
 	}
@@ -154,14 +154,14 @@ func (o *FrpmV2ResourcePoolSpecUpdate) HasMaxCsu() bool {
 }
 
 // SetMaxCsu gets a reference to the given int32 and assigns it to the MaxCsu field.
-func (o *FrpmV2ResourcePoolSpecUpdate) SetMaxCsu(v int32) {
+func (o *FcpmV2ComputePoolSpecUpdate) SetMaxCsu(v int32) {
 	o.MaxCsu = &v
 }
 
 // GetConfig returns the Config field value if set, zero value otherwise.
-func (o *FrpmV2ResourcePoolSpecUpdate) GetConfig() FrpmV2ResourcePoolSpecUpdateConfigOneOf {
+func (o *FcpmV2ComputePoolSpecUpdate) GetConfig() FcpmV2ComputePoolSpecUpdateConfigOneOf {
 	if o == nil || o.Config == nil {
-		var ret FrpmV2ResourcePoolSpecUpdateConfigOneOf
+		var ret FcpmV2ComputePoolSpecUpdateConfigOneOf
 		return ret
 	}
 	return *o.Config
@@ -169,7 +169,7 @@ func (o *FrpmV2ResourcePoolSpecUpdate) GetConfig() FrpmV2ResourcePoolSpecUpdateC
 
 // GetConfigOk returns a tuple with the Config field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FrpmV2ResourcePoolSpecUpdate) GetConfigOk() (*FrpmV2ResourcePoolSpecUpdateConfigOneOf, bool) {
+func (o *FcpmV2ComputePoolSpecUpdate) GetConfigOk() (*FcpmV2ComputePoolSpecUpdateConfigOneOf, bool) {
 	if o == nil || o.Config == nil {
 		return nil, false
 	}
@@ -177,7 +177,7 @@ func (o *FrpmV2ResourcePoolSpecUpdate) GetConfigOk() (*FrpmV2ResourcePoolSpecUpd
 }
 
 // HasConfig returns a boolean if a field has been set.
-func (o *FrpmV2ResourcePoolSpecUpdate) HasConfig() bool {
+func (o *FcpmV2ComputePoolSpecUpdate) HasConfig() bool {
 	if o != nil && o.Config != nil {
 		return true
 	}
@@ -185,20 +185,20 @@ func (o *FrpmV2ResourcePoolSpecUpdate) HasConfig() bool {
 	return false
 }
 
-// SetConfig gets a reference to the given FrpmV2ResourcePoolSpecUpdateConfigOneOf and assigns it to the Config field.
-func (o *FrpmV2ResourcePoolSpecUpdate) SetConfig(v FrpmV2ResourcePoolSpecUpdateConfigOneOf) {
+// SetConfig gets a reference to the given FcpmV2ComputePoolSpecUpdateConfigOneOf and assigns it to the Config field.
+func (o *FcpmV2ComputePoolSpecUpdate) SetConfig(v FcpmV2ComputePoolSpecUpdateConfigOneOf) {
 	o.Config = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *FrpmV2ResourcePoolSpecUpdate) Redact() {
+func (o *FcpmV2ComputePoolSpecUpdate) Redact() {
 	o.recurseRedact(o.HttpEndpoint)
 	o.recurseRedact(o.CurrentCsu)
 	o.recurseRedact(o.MaxCsu)
 	o.recurseRedact(o.Config)
 }
 
-func (o *FrpmV2ResourcePoolSpecUpdate) recurseRedact(v interface{}) {
+func (o *FcpmV2ComputePoolSpecUpdate) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -223,12 +223,12 @@ func (o *FrpmV2ResourcePoolSpecUpdate) recurseRedact(v interface{}) {
 	}
 }
 
-func (o FrpmV2ResourcePoolSpecUpdate) zeroField(v interface{}) {
+func (o FcpmV2ComputePoolSpecUpdate) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o FrpmV2ResourcePoolSpecUpdate) MarshalJSON() ([]byte, error) {
+func (o FcpmV2ComputePoolSpecUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.HttpEndpoint != nil {
 		toSerialize["http_endpoint"] = o.HttpEndpoint
@@ -245,38 +245,38 @@ func (o FrpmV2ResourcePoolSpecUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableFrpmV2ResourcePoolSpecUpdate struct {
-	value *FrpmV2ResourcePoolSpecUpdate
+type NullableFcpmV2ComputePoolSpecUpdate struct {
+	value *FcpmV2ComputePoolSpecUpdate
 	isSet bool
 }
 
-func (v NullableFrpmV2ResourcePoolSpecUpdate) Get() *FrpmV2ResourcePoolSpecUpdate {
+func (v NullableFcpmV2ComputePoolSpecUpdate) Get() *FcpmV2ComputePoolSpecUpdate {
 	return v.value
 }
 
-func (v *NullableFrpmV2ResourcePoolSpecUpdate) Set(val *FrpmV2ResourcePoolSpecUpdate) {
+func (v *NullableFcpmV2ComputePoolSpecUpdate) Set(val *FcpmV2ComputePoolSpecUpdate) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFrpmV2ResourcePoolSpecUpdate) IsSet() bool {
+func (v NullableFcpmV2ComputePoolSpecUpdate) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFrpmV2ResourcePoolSpecUpdate) Unset() {
+func (v *NullableFcpmV2ComputePoolSpecUpdate) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFrpmV2ResourcePoolSpecUpdate(val *FrpmV2ResourcePoolSpecUpdate) *NullableFrpmV2ResourcePoolSpecUpdate {
-	return &NullableFrpmV2ResourcePoolSpecUpdate{value: val, isSet: true}
+func NewNullableFcpmV2ComputePoolSpecUpdate(val *FcpmV2ComputePoolSpecUpdate) *NullableFcpmV2ComputePoolSpecUpdate {
+	return &NullableFcpmV2ComputePoolSpecUpdate{value: val, isSet: true}
 }
 
-func (v NullableFrpmV2ResourcePoolSpecUpdate) MarshalJSON() ([]byte, error) {
+func (v NullableFcpmV2ComputePoolSpecUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFrpmV2ResourcePoolSpecUpdate) UnmarshalJSON(src []byte) error {
+func (v *NullableFcpmV2ComputePoolSpecUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -1,4 +1,4 @@
-# FrpmV2Standard
+# FcpmV2Standard
 
 ## Properties
 
@@ -8,55 +8,55 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewFrpmV2Standard
+### NewFcpmV2Standard
 
-`func NewFrpmV2Standard(kind string, ) *FrpmV2Standard`
+`func NewFcpmV2Standard(kind string, ) *FcpmV2Standard`
 
-NewFrpmV2Standard instantiates a new FrpmV2Standard object
+NewFcpmV2Standard instantiates a new FcpmV2Standard object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewFrpmV2StandardWithDefaults
+### NewFcpmV2StandardWithDefaults
 
-`func NewFrpmV2StandardWithDefaults() *FrpmV2Standard`
+`func NewFcpmV2StandardWithDefaults() *FcpmV2Standard`
 
-NewFrpmV2StandardWithDefaults instantiates a new FrpmV2Standard object
+NewFcpmV2StandardWithDefaults instantiates a new FcpmV2Standard object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetKind
 
-`func (o *FrpmV2Standard) GetKind() string`
+`func (o *FcpmV2Standard) GetKind() string`
 
 GetKind returns the Kind field if non-nil, zero value otherwise.
 
 ### GetKindOk
 
-`func (o *FrpmV2Standard) GetKindOk() (*string, bool)`
+`func (o *FcpmV2Standard) GetKindOk() (*string, bool)`
 
 GetKindOk returns a tuple with the Kind field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetKind
 
-`func (o *FrpmV2Standard) SetKind(v string)`
+`func (o *FcpmV2Standard) SetKind(v string)`
 
 SetKind sets Kind field to given value.
 
 
 
-### AsFrpmV2ResourcePoolSpecConfigOneOf
+### AsFcpmV2ComputePoolSpecConfigOneOf
 
-`func (s *FrpmV2Standard) AsFrpmV2ResourcePoolSpecConfigOneOf() FrpmV2ResourcePoolSpecConfigOneOf`
+`func (s *FcpmV2Standard) AsFcpmV2ComputePoolSpecConfigOneOf() FcpmV2ComputePoolSpecConfigOneOf`
 
-Convenience method to wrap this instance of FrpmV2Standard in FrpmV2ResourcePoolSpecConfigOneOf
+Convenience method to wrap this instance of FcpmV2Standard in FcpmV2ComputePoolSpecConfigOneOf
 
-### AsFrpmV2ResourcePoolSpecUpdateConfigOneOf
+### AsFcpmV2ComputePoolSpecUpdateConfigOneOf
 
-`func (s *FrpmV2Standard) AsFrpmV2ResourcePoolSpecUpdateConfigOneOf() FrpmV2ResourcePoolSpecUpdateConfigOneOf`
+`func (s *FcpmV2Standard) AsFcpmV2ComputePoolSpecUpdateConfigOneOf() FcpmV2ComputePoolSpecUpdateConfigOneOf`
 
-Convenience method to wrap this instance of FrpmV2Standard in FrpmV2ResourcePoolSpecUpdateConfigOneOf
+Convenience method to wrap this instance of FcpmV2Standard in FcpmV2ComputePoolSpecUpdateConfigOneOf
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

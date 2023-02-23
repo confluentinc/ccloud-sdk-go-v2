@@ -13,9 +13,9 @@
 // limitations under the License.
 
 /*
-Flink Resource Pool Management API
+Flink Compute Pool Management API
 
-This is the Flink Resource Pool management API.
+This is the Flink Compute Pool management API.
 
 API version: 0.0.1
 Contact: ksql-team@confluent.io
@@ -33,47 +33,47 @@ import (
 	"reflect"
 )
 
-// FrpmV2ResourcePoolSpec The desired state of the Resource Pool
-type FrpmV2ResourcePoolSpec struct {
-	// The name of the Flink resource pool.
+// FcpmV2ComputePoolSpec The desired state of the Compute Pool
+type FcpmV2ComputePoolSpec struct {
+	// The name of the Flink compute pool.
 	DisplayName *string `json:"display_name,omitempty"`
-	// The cloud service provider that runs the resource pool.
+	// The cloud service provider that runs the compute pool.
 	Cloud *string `json:"cloud,omitempty"`
-	// The API endpoint of the Flink resource pool.
+	// The API endpoint of the Flink compute pool.
 	HttpEndpoint *string `json:"http_endpoint,omitempty"`
-	// The cloud service provider region that hosts the Flink resource pool.
+	// The cloud service provider region that hosts the Flink compute pool.
 	Region *string `json:"region,omitempty"`
-	// The number of CSUs (Confluent Streaming Units) currently allocated to this Flink resource pool.
+	// The number of CSUs (Confluent Streaming Units) currently allocated to this Flink compute pool.
 	CurrentCsu *int32 `json:"current_csu,omitempty"`
-	// Maximum number of Confluent Streaming Units (CSUs) that the Flink resource pool should auto-scale to. If not specified, the value defaults to 8.
+	// Maximum number of Confluent Streaming Units (CSUs) that the Flink compute pool should auto-scale to. If not specified, the value defaults to 8.
 	MaxCsu *int32 `json:"max_csu,omitempty"`
-	// The type of of the Flink resource pool. Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.
-	Config *FrpmV2ResourcePoolSpecConfigOneOf `json:"config,omitempty"`
+	// The type of of the Flink compute pool.
+	Config *FcpmV2ComputePoolSpecConfigOneOf `json:"config,omitempty"`
 	// The environment to which this belongs.
 	Environment *GlobalObjectReference `json:"environment,omitempty"`
 	// The network to which this belongs.
 	Network *EnvScopedObjectReference `json:"network,omitempty"`
 }
 
-// NewFrpmV2ResourcePoolSpec instantiates a new FrpmV2ResourcePoolSpec object
+// NewFcpmV2ComputePoolSpec instantiates a new FcpmV2ComputePoolSpec object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFrpmV2ResourcePoolSpec() *FrpmV2ResourcePoolSpec {
-	this := FrpmV2ResourcePoolSpec{}
+func NewFcpmV2ComputePoolSpec() *FcpmV2ComputePoolSpec {
+	this := FcpmV2ComputePoolSpec{}
 	return &this
 }
 
-// NewFrpmV2ResourcePoolSpecWithDefaults instantiates a new FrpmV2ResourcePoolSpec object
+// NewFcpmV2ComputePoolSpecWithDefaults instantiates a new FcpmV2ComputePoolSpec object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFrpmV2ResourcePoolSpecWithDefaults() *FrpmV2ResourcePoolSpec {
-	this := FrpmV2ResourcePoolSpec{}
+func NewFcpmV2ComputePoolSpecWithDefaults() *FcpmV2ComputePoolSpec {
+	this := FcpmV2ComputePoolSpec{}
 	return &this
 }
 
 // GetDisplayName returns the DisplayName field value if set, zero value otherwise.
-func (o *FrpmV2ResourcePoolSpec) GetDisplayName() string {
+func (o *FcpmV2ComputePoolSpec) GetDisplayName() string {
 	if o == nil || o.DisplayName == nil {
 		var ret string
 		return ret
@@ -83,7 +83,7 @@ func (o *FrpmV2ResourcePoolSpec) GetDisplayName() string {
 
 // GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FrpmV2ResourcePoolSpec) GetDisplayNameOk() (*string, bool) {
+func (o *FcpmV2ComputePoolSpec) GetDisplayNameOk() (*string, bool) {
 	if o == nil || o.DisplayName == nil {
 		return nil, false
 	}
@@ -91,7 +91,7 @@ func (o *FrpmV2ResourcePoolSpec) GetDisplayNameOk() (*string, bool) {
 }
 
 // HasDisplayName returns a boolean if a field has been set.
-func (o *FrpmV2ResourcePoolSpec) HasDisplayName() bool {
+func (o *FcpmV2ComputePoolSpec) HasDisplayName() bool {
 	if o != nil && o.DisplayName != nil {
 		return true
 	}
@@ -100,12 +100,12 @@ func (o *FrpmV2ResourcePoolSpec) HasDisplayName() bool {
 }
 
 // SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
-func (o *FrpmV2ResourcePoolSpec) SetDisplayName(v string) {
+func (o *FcpmV2ComputePoolSpec) SetDisplayName(v string) {
 	o.DisplayName = &v
 }
 
 // GetCloud returns the Cloud field value if set, zero value otherwise.
-func (o *FrpmV2ResourcePoolSpec) GetCloud() string {
+func (o *FcpmV2ComputePoolSpec) GetCloud() string {
 	if o == nil || o.Cloud == nil {
 		var ret string
 		return ret
@@ -115,7 +115,7 @@ func (o *FrpmV2ResourcePoolSpec) GetCloud() string {
 
 // GetCloudOk returns a tuple with the Cloud field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FrpmV2ResourcePoolSpec) GetCloudOk() (*string, bool) {
+func (o *FcpmV2ComputePoolSpec) GetCloudOk() (*string, bool) {
 	if o == nil || o.Cloud == nil {
 		return nil, false
 	}
@@ -123,7 +123,7 @@ func (o *FrpmV2ResourcePoolSpec) GetCloudOk() (*string, bool) {
 }
 
 // HasCloud returns a boolean if a field has been set.
-func (o *FrpmV2ResourcePoolSpec) HasCloud() bool {
+func (o *FcpmV2ComputePoolSpec) HasCloud() bool {
 	if o != nil && o.Cloud != nil {
 		return true
 	}
@@ -132,12 +132,12 @@ func (o *FrpmV2ResourcePoolSpec) HasCloud() bool {
 }
 
 // SetCloud gets a reference to the given string and assigns it to the Cloud field.
-func (o *FrpmV2ResourcePoolSpec) SetCloud(v string) {
+func (o *FcpmV2ComputePoolSpec) SetCloud(v string) {
 	o.Cloud = &v
 }
 
 // GetHttpEndpoint returns the HttpEndpoint field value if set, zero value otherwise.
-func (o *FrpmV2ResourcePoolSpec) GetHttpEndpoint() string {
+func (o *FcpmV2ComputePoolSpec) GetHttpEndpoint() string {
 	if o == nil || o.HttpEndpoint == nil {
 		var ret string
 		return ret
@@ -147,7 +147,7 @@ func (o *FrpmV2ResourcePoolSpec) GetHttpEndpoint() string {
 
 // GetHttpEndpointOk returns a tuple with the HttpEndpoint field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FrpmV2ResourcePoolSpec) GetHttpEndpointOk() (*string, bool) {
+func (o *FcpmV2ComputePoolSpec) GetHttpEndpointOk() (*string, bool) {
 	if o == nil || o.HttpEndpoint == nil {
 		return nil, false
 	}
@@ -155,7 +155,7 @@ func (o *FrpmV2ResourcePoolSpec) GetHttpEndpointOk() (*string, bool) {
 }
 
 // HasHttpEndpoint returns a boolean if a field has been set.
-func (o *FrpmV2ResourcePoolSpec) HasHttpEndpoint() bool {
+func (o *FcpmV2ComputePoolSpec) HasHttpEndpoint() bool {
 	if o != nil && o.HttpEndpoint != nil {
 		return true
 	}
@@ -164,12 +164,12 @@ func (o *FrpmV2ResourcePoolSpec) HasHttpEndpoint() bool {
 }
 
 // SetHttpEndpoint gets a reference to the given string and assigns it to the HttpEndpoint field.
-func (o *FrpmV2ResourcePoolSpec) SetHttpEndpoint(v string) {
+func (o *FcpmV2ComputePoolSpec) SetHttpEndpoint(v string) {
 	o.HttpEndpoint = &v
 }
 
 // GetRegion returns the Region field value if set, zero value otherwise.
-func (o *FrpmV2ResourcePoolSpec) GetRegion() string {
+func (o *FcpmV2ComputePoolSpec) GetRegion() string {
 	if o == nil || o.Region == nil {
 		var ret string
 		return ret
@@ -179,7 +179,7 @@ func (o *FrpmV2ResourcePoolSpec) GetRegion() string {
 
 // GetRegionOk returns a tuple with the Region field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FrpmV2ResourcePoolSpec) GetRegionOk() (*string, bool) {
+func (o *FcpmV2ComputePoolSpec) GetRegionOk() (*string, bool) {
 	if o == nil || o.Region == nil {
 		return nil, false
 	}
@@ -187,7 +187,7 @@ func (o *FrpmV2ResourcePoolSpec) GetRegionOk() (*string, bool) {
 }
 
 // HasRegion returns a boolean if a field has been set.
-func (o *FrpmV2ResourcePoolSpec) HasRegion() bool {
+func (o *FcpmV2ComputePoolSpec) HasRegion() bool {
 	if o != nil && o.Region != nil {
 		return true
 	}
@@ -196,12 +196,12 @@ func (o *FrpmV2ResourcePoolSpec) HasRegion() bool {
 }
 
 // SetRegion gets a reference to the given string and assigns it to the Region field.
-func (o *FrpmV2ResourcePoolSpec) SetRegion(v string) {
+func (o *FcpmV2ComputePoolSpec) SetRegion(v string) {
 	o.Region = &v
 }
 
 // GetCurrentCsu returns the CurrentCsu field value if set, zero value otherwise.
-func (o *FrpmV2ResourcePoolSpec) GetCurrentCsu() int32 {
+func (o *FcpmV2ComputePoolSpec) GetCurrentCsu() int32 {
 	if o == nil || o.CurrentCsu == nil {
 		var ret int32
 		return ret
@@ -211,7 +211,7 @@ func (o *FrpmV2ResourcePoolSpec) GetCurrentCsu() int32 {
 
 // GetCurrentCsuOk returns a tuple with the CurrentCsu field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FrpmV2ResourcePoolSpec) GetCurrentCsuOk() (*int32, bool) {
+func (o *FcpmV2ComputePoolSpec) GetCurrentCsuOk() (*int32, bool) {
 	if o == nil || o.CurrentCsu == nil {
 		return nil, false
 	}
@@ -219,7 +219,7 @@ func (o *FrpmV2ResourcePoolSpec) GetCurrentCsuOk() (*int32, bool) {
 }
 
 // HasCurrentCsu returns a boolean if a field has been set.
-func (o *FrpmV2ResourcePoolSpec) HasCurrentCsu() bool {
+func (o *FcpmV2ComputePoolSpec) HasCurrentCsu() bool {
 	if o != nil && o.CurrentCsu != nil {
 		return true
 	}
@@ -228,12 +228,12 @@ func (o *FrpmV2ResourcePoolSpec) HasCurrentCsu() bool {
 }
 
 // SetCurrentCsu gets a reference to the given int32 and assigns it to the CurrentCsu field.
-func (o *FrpmV2ResourcePoolSpec) SetCurrentCsu(v int32) {
+func (o *FcpmV2ComputePoolSpec) SetCurrentCsu(v int32) {
 	o.CurrentCsu = &v
 }
 
 // GetMaxCsu returns the MaxCsu field value if set, zero value otherwise.
-func (o *FrpmV2ResourcePoolSpec) GetMaxCsu() int32 {
+func (o *FcpmV2ComputePoolSpec) GetMaxCsu() int32 {
 	if o == nil || o.MaxCsu == nil {
 		var ret int32
 		return ret
@@ -243,7 +243,7 @@ func (o *FrpmV2ResourcePoolSpec) GetMaxCsu() int32 {
 
 // GetMaxCsuOk returns a tuple with the MaxCsu field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FrpmV2ResourcePoolSpec) GetMaxCsuOk() (*int32, bool) {
+func (o *FcpmV2ComputePoolSpec) GetMaxCsuOk() (*int32, bool) {
 	if o == nil || o.MaxCsu == nil {
 		return nil, false
 	}
@@ -251,7 +251,7 @@ func (o *FrpmV2ResourcePoolSpec) GetMaxCsuOk() (*int32, bool) {
 }
 
 // HasMaxCsu returns a boolean if a field has been set.
-func (o *FrpmV2ResourcePoolSpec) HasMaxCsu() bool {
+func (o *FcpmV2ComputePoolSpec) HasMaxCsu() bool {
 	if o != nil && o.MaxCsu != nil {
 		return true
 	}
@@ -260,14 +260,14 @@ func (o *FrpmV2ResourcePoolSpec) HasMaxCsu() bool {
 }
 
 // SetMaxCsu gets a reference to the given int32 and assigns it to the MaxCsu field.
-func (o *FrpmV2ResourcePoolSpec) SetMaxCsu(v int32) {
+func (o *FcpmV2ComputePoolSpec) SetMaxCsu(v int32) {
 	o.MaxCsu = &v
 }
 
 // GetConfig returns the Config field value if set, zero value otherwise.
-func (o *FrpmV2ResourcePoolSpec) GetConfig() FrpmV2ResourcePoolSpecConfigOneOf {
+func (o *FcpmV2ComputePoolSpec) GetConfig() FcpmV2ComputePoolSpecConfigOneOf {
 	if o == nil || o.Config == nil {
-		var ret FrpmV2ResourcePoolSpecConfigOneOf
+		var ret FcpmV2ComputePoolSpecConfigOneOf
 		return ret
 	}
 	return *o.Config
@@ -275,7 +275,7 @@ func (o *FrpmV2ResourcePoolSpec) GetConfig() FrpmV2ResourcePoolSpecConfigOneOf {
 
 // GetConfigOk returns a tuple with the Config field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FrpmV2ResourcePoolSpec) GetConfigOk() (*FrpmV2ResourcePoolSpecConfigOneOf, bool) {
+func (o *FcpmV2ComputePoolSpec) GetConfigOk() (*FcpmV2ComputePoolSpecConfigOneOf, bool) {
 	if o == nil || o.Config == nil {
 		return nil, false
 	}
@@ -283,7 +283,7 @@ func (o *FrpmV2ResourcePoolSpec) GetConfigOk() (*FrpmV2ResourcePoolSpecConfigOne
 }
 
 // HasConfig returns a boolean if a field has been set.
-func (o *FrpmV2ResourcePoolSpec) HasConfig() bool {
+func (o *FcpmV2ComputePoolSpec) HasConfig() bool {
 	if o != nil && o.Config != nil {
 		return true
 	}
@@ -291,13 +291,13 @@ func (o *FrpmV2ResourcePoolSpec) HasConfig() bool {
 	return false
 }
 
-// SetConfig gets a reference to the given FrpmV2ResourcePoolSpecConfigOneOf and assigns it to the Config field.
-func (o *FrpmV2ResourcePoolSpec) SetConfig(v FrpmV2ResourcePoolSpecConfigOneOf) {
+// SetConfig gets a reference to the given FcpmV2ComputePoolSpecConfigOneOf and assigns it to the Config field.
+func (o *FcpmV2ComputePoolSpec) SetConfig(v FcpmV2ComputePoolSpecConfigOneOf) {
 	o.Config = &v
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *FrpmV2ResourcePoolSpec) GetEnvironment() GlobalObjectReference {
+func (o *FcpmV2ComputePoolSpec) GetEnvironment() GlobalObjectReference {
 	if o == nil || o.Environment == nil {
 		var ret GlobalObjectReference
 		return ret
@@ -307,7 +307,7 @@ func (o *FrpmV2ResourcePoolSpec) GetEnvironment() GlobalObjectReference {
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FrpmV2ResourcePoolSpec) GetEnvironmentOk() (*GlobalObjectReference, bool) {
+func (o *FcpmV2ComputePoolSpec) GetEnvironmentOk() (*GlobalObjectReference, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -315,7 +315,7 @@ func (o *FrpmV2ResourcePoolSpec) GetEnvironmentOk() (*GlobalObjectReference, boo
 }
 
 // HasEnvironment returns a boolean if a field has been set.
-func (o *FrpmV2ResourcePoolSpec) HasEnvironment() bool {
+func (o *FcpmV2ComputePoolSpec) HasEnvironment() bool {
 	if o != nil && o.Environment != nil {
 		return true
 	}
@@ -324,12 +324,12 @@ func (o *FrpmV2ResourcePoolSpec) HasEnvironment() bool {
 }
 
 // SetEnvironment gets a reference to the given GlobalObjectReference and assigns it to the Environment field.
-func (o *FrpmV2ResourcePoolSpec) SetEnvironment(v GlobalObjectReference) {
+func (o *FcpmV2ComputePoolSpec) SetEnvironment(v GlobalObjectReference) {
 	o.Environment = &v
 }
 
 // GetNetwork returns the Network field value if set, zero value otherwise.
-func (o *FrpmV2ResourcePoolSpec) GetNetwork() EnvScopedObjectReference {
+func (o *FcpmV2ComputePoolSpec) GetNetwork() EnvScopedObjectReference {
 	if o == nil || o.Network == nil {
 		var ret EnvScopedObjectReference
 		return ret
@@ -339,7 +339,7 @@ func (o *FrpmV2ResourcePoolSpec) GetNetwork() EnvScopedObjectReference {
 
 // GetNetworkOk returns a tuple with the Network field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FrpmV2ResourcePoolSpec) GetNetworkOk() (*EnvScopedObjectReference, bool) {
+func (o *FcpmV2ComputePoolSpec) GetNetworkOk() (*EnvScopedObjectReference, bool) {
 	if o == nil || o.Network == nil {
 		return nil, false
 	}
@@ -347,7 +347,7 @@ func (o *FrpmV2ResourcePoolSpec) GetNetworkOk() (*EnvScopedObjectReference, bool
 }
 
 // HasNetwork returns a boolean if a field has been set.
-func (o *FrpmV2ResourcePoolSpec) HasNetwork() bool {
+func (o *FcpmV2ComputePoolSpec) HasNetwork() bool {
 	if o != nil && o.Network != nil {
 		return true
 	}
@@ -356,12 +356,12 @@ func (o *FrpmV2ResourcePoolSpec) HasNetwork() bool {
 }
 
 // SetNetwork gets a reference to the given EnvScopedObjectReference and assigns it to the Network field.
-func (o *FrpmV2ResourcePoolSpec) SetNetwork(v EnvScopedObjectReference) {
+func (o *FcpmV2ComputePoolSpec) SetNetwork(v EnvScopedObjectReference) {
 	o.Network = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *FrpmV2ResourcePoolSpec) Redact() {
+func (o *FcpmV2ComputePoolSpec) Redact() {
 	o.recurseRedact(o.DisplayName)
 	o.recurseRedact(o.Cloud)
 	o.recurseRedact(o.HttpEndpoint)
@@ -373,7 +373,7 @@ func (o *FrpmV2ResourcePoolSpec) Redact() {
 	o.recurseRedact(o.Network)
 }
 
-func (o *FrpmV2ResourcePoolSpec) recurseRedact(v interface{}) {
+func (o *FcpmV2ComputePoolSpec) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -398,12 +398,12 @@ func (o *FrpmV2ResourcePoolSpec) recurseRedact(v interface{}) {
 	}
 }
 
-func (o FrpmV2ResourcePoolSpec) zeroField(v interface{}) {
+func (o FcpmV2ComputePoolSpec) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o FrpmV2ResourcePoolSpec) MarshalJSON() ([]byte, error) {
+func (o FcpmV2ComputePoolSpec) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.DisplayName != nil {
 		toSerialize["display_name"] = o.DisplayName
@@ -435,38 +435,38 @@ func (o FrpmV2ResourcePoolSpec) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableFrpmV2ResourcePoolSpec struct {
-	value *FrpmV2ResourcePoolSpec
+type NullableFcpmV2ComputePoolSpec struct {
+	value *FcpmV2ComputePoolSpec
 	isSet bool
 }
 
-func (v NullableFrpmV2ResourcePoolSpec) Get() *FrpmV2ResourcePoolSpec {
+func (v NullableFcpmV2ComputePoolSpec) Get() *FcpmV2ComputePoolSpec {
 	return v.value
 }
 
-func (v *NullableFrpmV2ResourcePoolSpec) Set(val *FrpmV2ResourcePoolSpec) {
+func (v *NullableFcpmV2ComputePoolSpec) Set(val *FcpmV2ComputePoolSpec) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFrpmV2ResourcePoolSpec) IsSet() bool {
+func (v NullableFcpmV2ComputePoolSpec) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFrpmV2ResourcePoolSpec) Unset() {
+func (v *NullableFcpmV2ComputePoolSpec) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFrpmV2ResourcePoolSpec(val *FrpmV2ResourcePoolSpec) *NullableFrpmV2ResourcePoolSpec {
-	return &NullableFrpmV2ResourcePoolSpec{value: val, isSet: true}
+func NewNullableFcpmV2ComputePoolSpec(val *FcpmV2ComputePoolSpec) *NullableFcpmV2ComputePoolSpec {
+	return &NullableFcpmV2ComputePoolSpec{value: val, isSet: true}
 }
 
-func (v NullableFrpmV2ResourcePoolSpec) MarshalJSON() ([]byte, error) {
+func (v NullableFcpmV2ComputePoolSpec) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFrpmV2ResourcePoolSpec) UnmarshalJSON(src []byte) error {
+func (v *NullableFcpmV2ComputePoolSpec) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

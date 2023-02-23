@@ -4,13 +4,13 @@ info:
     email: ksql-team@confluent.io
     name: flink
     url: https://confluent.slack.com/app_redirect?channel=ksqldb
-  description: This is the Flink Resource Pool management API.
-  title: Flink Resource Pool Management API
+  description: This is the Flink Compute Pool management API.
+  title: Flink Compute Pool Management API
   version: 0.0.1
   x-api-id: 6dfe8977-3286-4727-ac78-883e0fcba8c0
-  x-api-group: frpm/v2
+  x-api-group: fcpm/v2
   x-audience: external-public
-  x-tag-group: Resource Pool Mgmt for Flink (%s)
+  x-tag-group: Compute Pool Mgmt for Flink (%s)
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
@@ -22,21 +22,21 @@ tags:
 - description: |-
     [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-    `ResourcePool` represents a Flink runtime that you can issue queries to using its API endpoint.
-    The API allows you to list, create, read, update, and delete your Flink resource pools.
+    A Compute Pool represents a set of compute resources that is used to run your Queries.
+    The resources (CPUs, memory,…) provided by a Compute Pool are shared between all Queries that use it.
 
 
-    ## The Resource Pools Model
-    <SchemaDefinition schemaRef="#/components/schemas/frpm.v2.ResourcePool" />
-  name: Resource Pools (frpm/v2)
+    ## The Compute Pools Model
+    <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.ComputePool" />
+  name: Compute Pools (fcpm/v2)
 paths:
-  /frpm/v2/resource-pools:
+  /fcpm/v2/compute-pools:
     get:
       description: |-
         [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-        Retrieve a sorted, filtered, paginated list of all resource pools.
-      operationId: listFrpmV2ResourcePools
+        Retrieve a sorted, filtered, paginated list of all compute pools.
+      operationId: listFcpmV2ComputePools
       parameters:
       - description: Filter the results by exact match for spec.region.
         example: us-west-1
@@ -52,7 +52,7 @@ paths:
         explode: true
         in: query
         name: environment
-        required: false
+        required: true
         schema:
           $ref: '#/components/schemas/SearchFilter'
         style: form
@@ -91,7 +91,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/frpm.v2.ResourcePoolList'
+                - $ref: '#/components/schemas/fcpm.v2.ComputePoolList'
                 - properties:
                     data:
                       items:
@@ -111,7 +111,7 @@ paths:
                             type: object
                       type: array
                   type: object
-          description: Resource Pool.
+          description: Compute Pool.
           headers:
             X-Request-Id:
               description: The unique identifier for the API request.
@@ -226,21 +226,21 @@ paths:
               style: simple
       security:
       - api-key: []
-      summary: List of Resource Pools
+      summary: List of Compute Pools
       tags:
-      - Resource Pools (frpm/v2)
+      - Compute Pools (fcpm/v2)
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/frpm/v2/resource-pools?spec.region=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/fcpm/v2/compute-pools?spec.region=us-west-1&environment=env-00000&spec.network=n-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/frpm/v2/resource-pools?spec.region=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/fcpm/v2/compute-pools?spec.region=us-west-1&environment=env-00000&spec.network=n-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -248,7 +248,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/frpm/v2/resource-pools?spec.region=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pools?spec.region=us-west-1&environment=env-00000&spec.network=n-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -261,7 +261,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/frpm/v2/resource-pools?spec.region=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/fcpm/v2/compute-pools?spec.region=us-west-1&environment=env-00000&spec.network=n-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -275,7 +275,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/frpm/v2/resource-pools?spec.region=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/fcpm/v2/compute-pools?spec.region=us-west-1&environment=env-00000&spec.network=n-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -300,7 +300,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/frpm/v2/resource-pools?spec.region=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/compute-pools?spec.region=us-west-1&environment=env-00000&spec.network=n-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -309,7 +309,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/frpm/v2/resource-pools?spec.region=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/compute-pools?spec.region=us-west-1&environment=env-00000&spec.network=n-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -317,14 +317,14 @@ paths:
       description: |-
         [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-        Make a request to create a resource pool.
-      operationId: createFrpmV2ResourcePool
+        Make a request to create a compute pool.
+      operationId: createFcpmV2ComputePool
       requestBody:
         content:
           application/json:
             schema:
               allOf:
-              - $ref: '#/components/schemas/frpm.v2.ResourcePool'
+              - $ref: '#/components/schemas/fcpm.v2.ComputePool'
               - properties:
                   spec:
                     required:
@@ -355,7 +355,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/frpm.v2.ResourcePool'
+                - $ref: '#/components/schemas/fcpm.v2.ComputePool'
                 - properties:
                     spec:
                       required:
@@ -385,7 +385,7 @@ paths:
                             resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-00000
                       type: object
                   type: object
-          description: A Resource Pool is being created.
+          description: A Compute Pool is being created.
           headers:
             X-Request-Id:
               description: The unique identifier for the API request.
@@ -394,10 +394,10 @@ paths:
                 type: string
               style: simple
             Location:
-              description: ResourcePool resource uri
+              description: ComputePool resource uri
               explode: false
               schema:
-                example: https://api.confluent.cloud/frpm/v2/resource-pools/{id}
+                example: https://api.confluent.cloud/fcpm/v2/compute-pools/{id}
                 format: uri
                 type: string
               style: simple
@@ -561,25 +561,25 @@ paths:
               style: simple
       security:
       - api-key: []
-      summary: Create a Resource Pool
+      summary: Create a Compute Pool
       tags:
-      - Resource Pools (frpm/v2)
+      - Compute Pools (fcpm/v2)
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url https://api.confluent.cloud/frpm/v2/resource-pools \
+            --url https://api.confluent.cloud/fcpm/v2/compute-pools \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"flink_resource_pool_0","cloud":"GCP","http_endpoint":"string","region":"us-west-1","max_csu":16,"config":{"kind":"Basic"},"environment":{"id":"env-00000"},"network":{"id":"n-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"flink_compute_pool_0","cloud":"GCP","http_endpoint":"string","region":"us-west-1","max_csu":16,"config":{"kind":"Standard"},"environment":{"id":"env-00000"},"network":{"id":"n-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"flink_resource_pool_0\",\"cloud\":\"GCP\",\"http_endpoint\":\"string\",\"region\":\"us-west-1\",\"max_csu\":16,\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"GCP\",\"http_endpoint\":\"string\",\"region\":\"us-west-1\",\"max_csu\":16,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/frpm/v2/resource-pools")
+            .url("https://api.confluent.cloud/fcpm/v2/compute-pools")
             .post(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -588,12 +588,12 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/frpm/v2/resource-pools\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pools\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
-          :\\\"flink_resource_pool_0\\\",\\\"cloud\\\":\\\"GCP\\\",\\\"http_endpoint\\\
+          :\\\"flink_compute_pool_0\\\",\\\"cloud\\\":\\\"GCP\\\",\\\"http_endpoint\\\
           \":\\\"string\\\",\\\"region\\\":\\\"us-west-1\\\",\\\"max_csu\\\":16,\\\
-          \"config\\\":{\\\"kind\\\":\\\"Basic\\\"},\\\"environment\\\":{\\\"id\\\"\
-          :\\\"env-00000\\\"},\\\"network\\\":{\\\"id\\\":\\\"n-00000\\\",\\\"environment\\\
+          \"config\\\":{\\\"kind\\\":\\\"Standard\\\"},\\\"environment\\\":{\\\"id\\\
+          \":\\\"env-00000\\\"},\\\"network\\\":{\\\"id\\\":\\\"n-00000\\\",\\\"environment\\\
           \":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
           \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
@@ -605,14 +605,14 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"flink_resource_pool_0\",\"cloud\":\"GCP\",\"http_endpoint\":\"string\",\"region\":\"us-west-1\",\"max_csu\":16,\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"GCP\",\"http_endpoint\":\"string\",\"region\":\"us-west-1\",\"max_csu\":16,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("POST", "/frpm/v2/resource-pools", payload, headers)
+          conn.request("POST", "/fcpm/v2/compute-pools", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -626,7 +626,7 @@ paths:
             "method": "POST",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/frpm/v2/resource-pools",
+            "path": "/fcpm/v2/compute-pools",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -648,12 +648,12 @@ paths:
 
           req.write(JSON.stringify({
             spec: {
-              display_name: 'flink_resource_pool_0',
+              display_name: 'flink_compute_pool_0',
               cloud: 'GCP',
               http_endpoint: 'string',
               region: 'us-west-1',
               max_csu: 16,
-              config: {kind: 'Basic'},
+              config: {kind: 'Standard'},
               environment: {id: 'env-00000'},
               network: {id: 'n-00000', environment: 'string'}
             }
@@ -664,33 +664,42 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/frpm/v2/resource-pools");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/compute-pools");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"flink_resource_pool_0\",\"cloud\":\"GCP\",\"http_endpoint\":\"string\",\"region\":\"us-west-1\",\"max_csu\":16,\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"GCP\",\"http_endpoint\":\"string\",\"region\":\"us-west-1\",\"max_csu\":16,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/frpm/v2/resource-pools");
+          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/compute-pools");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"flink_resource_pool_0\",\"cloud\":\"GCP\",\"http_endpoint\":\"string\",\"region\":\"us-west-1\",\"max_csu\":16,\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"GCP\",\"http_endpoint\":\"string\",\"region\":\"us-west-1\",\"max_csu\":16,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-  /frpm/v2/resource-pools/{id}:
+  /fcpm/v2/compute-pools/{id}:
     delete:
       description: |-
         [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-        Make a request to delete a resource pool.
-      operationId: deleteFrpmV2ResourcePool
+        Make a request to delete a compute pool.
+      operationId: deleteFcpmV2ComputePool
       parameters:
-      - description: The unique identifier for the resource pool.
+      - description: Scope the operation to the given environment.
+        example: env-00000
+        explode: true
+        in: query
+        name: environment
+        required: true
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: The unique identifier for the compute pool.
         explode: false
         in: path
         name: id
@@ -700,7 +709,7 @@ paths:
         style: simple
       responses:
         "204":
-          description: A Resource Pool is being deleted.
+          description: A Compute Pool is being deleted.
           headers:
             X-Request-Id:
               description: The unique identifier for the API request.
@@ -833,21 +842,21 @@ paths:
               style: simple
       security:
       - api-key: []
-      summary: Delete a Resource Pool
+      summary: Delete a Compute Pool
       tags:
-      - Resource Pools (frpm/v2)
+      - Compute Pools (fcpm/v2)
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/frpm/v2/resource-pools/{id}' \
+            --url 'https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/frpm/v2/resource-pools/{id}")
+            .url("https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -855,7 +864,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/frpm/v2/resource-pools/{id}\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -868,7 +877,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/frpm/v2/resource-pools/{id}", headers=headers)
+          conn.request("DELETE", "/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -882,7 +891,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/frpm/v2/resource-pools/{id}",
+            "path": "/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -907,7 +916,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/frpm/v2/resource-pools/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -916,7 +925,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/frpm/v2/resource-pools/{id}");
+          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -924,10 +933,19 @@ paths:
       description: |-
         [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-        Make a request to read a resource pool.
-      operationId: getFrpmV2ResourcePool
+        Make a request to read a compute pool.
+      operationId: getFcpmV2ComputePool
       parameters:
-      - description: The unique identifier for the resource pool.
+      - description: Scope the operation to the given environment.
+        example: env-00000
+        explode: true
+        in: query
+        name: environment
+        required: true
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: The unique identifier for the compute pool.
         explode: false
         in: path
         name: id
@@ -941,7 +959,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/frpm.v2.ResourcePool'
+                - $ref: '#/components/schemas/fcpm.v2.ComputePool'
                 - properties:
                     spec:
                       required:
@@ -974,7 +992,7 @@ paths:
                             resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-00000
                       type: object
                   type: object
-          description: Resource Pool.
+          description: Compute Pool.
           headers:
             X-Request-Id:
               description: The unique identifier for the API request.
@@ -1107,21 +1125,21 @@ paths:
               style: simple
       security:
       - api-key: []
-      summary: Read a Resource Pool
+      summary: Read a Compute Pool
       tags:
-      - Resource Pools (frpm/v2)
+      - Compute Pools (fcpm/v2)
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/frpm/v2/resource-pools/{id}' \
+            --url 'https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/frpm/v2/resource-pools/{id}")
+            .url("https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1129,7 +1147,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/frpm/v2/resource-pools/{id}\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1142,7 +1160,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/frpm/v2/resource-pools/{id}", headers=headers)
+          conn.request("GET", "/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1156,7 +1174,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/frpm/v2/resource-pools/{id}",
+            "path": "/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1181,7 +1199,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/frpm/v2/resource-pools/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1190,7 +1208,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/frpm/v2/resource-pools/{id}");
+          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1198,11 +1216,11 @@ paths:
       description: |+
         [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-        Make a request to update a resource pool.
+        Make a request to update a compute pool.
 
-      operationId: updateFrpmV2ResourcePool
+      operationId: updateFcpmV2ComputePool
       parameters:
-      - description: The unique identifier for the resource pool.
+      - description: The unique identifier for the compute pool.
         explode: false
         in: path
         name: id
@@ -1215,7 +1233,7 @@ paths:
           application/json:
             schema:
               allOf:
-              - $ref: '#/components/schemas/frpm.v2.ResourcePoolUpdate'
+              - $ref: '#/components/schemas/fcpm.v2.ComputePoolUpdate'
               - properties:
                   spec:
                     properties:
@@ -1234,7 +1252,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/frpm.v2.ResourcePool'
+                - $ref: '#/components/schemas/fcpm.v2.ComputePool'
                 - properties:
                     spec:
                       required:
@@ -1267,7 +1285,7 @@ paths:
                             resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-00000
                       type: object
                   type: object
-          description: Resource Pool.
+          description: Compute Pool.
           headers:
             X-Request-Id:
               description: The unique identifier for the API request.
@@ -1423,25 +1441,25 @@ paths:
               style: simple
       security:
       - api-key: []
-      summary: Update a Resource Pool
+      summary: Update a Compute Pool
       tags:
-      - Resource Pools (frpm/v2)
+      - Compute Pools (fcpm/v2)
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url 'https://api.confluent.cloud/frpm/v2/resource-pools/{id}' \
+            --url https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"flink_resource_pool_0","cloud":"GCP","http_endpoint":"string","region":"us-west-1","max_csu":16,"config":{"kind":"Basic"},"environment":{"id":"env-00000"},"network":{"id":"string","environment":"string"}}}'
+            --data '{"spec":{"display_name":"flink_compute_pool_0","cloud":"GCP","http_endpoint":"string","region":"us-west-1","max_csu":16,"config":{"kind":"Standard"},"environment":{"id":"env-00000"},"network":{"id":"string","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"flink_resource_pool_0\",\"cloud\":\"GCP\",\"http_endpoint\":\"string\",\"region\":\"us-west-1\",\"max_csu\":16,\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"GCP\",\"http_endpoint\":\"string\",\"region\":\"us-west-1\",\"max_csu\":16,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/frpm/v2/resource-pools/{id}")
+            .url("https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D")
             .patch(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -1450,12 +1468,12 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/frpm/v2/resource-pools/{id}\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
-          :\\\"flink_resource_pool_0\\\",\\\"cloud\\\":\\\"GCP\\\",\\\"http_endpoint\\\
+          :\\\"flink_compute_pool_0\\\",\\\"cloud\\\":\\\"GCP\\\",\\\"http_endpoint\\\
           \":\\\"string\\\",\\\"region\\\":\\\"us-west-1\\\",\\\"max_csu\\\":16,\\\
-          \"config\\\":{\\\"kind\\\":\\\"Basic\\\"},\\\"environment\\\":{\\\"id\\\"\
-          :\\\"env-00000\\\"},\\\"network\\\":{\\\"id\\\":\\\"string\\\",\\\"environment\\\
+          \"config\\\":{\\\"kind\\\":\\\"Standard\\\"},\\\"environment\\\":{\\\"id\\\
+          \":\\\"env-00000\\\"},\\\"network\\\":{\\\"id\\\":\\\"string\\\",\\\"environment\\\
           \":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\
           \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
@@ -1467,14 +1485,14 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"flink_resource_pool_0\",\"cloud\":\"GCP\",\"http_endpoint\":\"string\",\"region\":\"us-west-1\",\"max_csu\":16,\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"GCP\",\"http_endpoint\":\"string\",\"region\":\"us-west-1\",\"max_csu\":16,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/frpm/v2/resource-pools/{id}", payload, headers)
+          conn.request("PATCH", "/fcpm/v2/compute-pools/%7Bid%7D", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1488,7 +1506,7 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/frpm/v2/resource-pools/{id}",
+            "path": "/fcpm/v2/compute-pools/%7Bid%7D",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -1510,12 +1528,12 @@ paths:
 
           req.write(JSON.stringify({
             spec: {
-              display_name: 'flink_resource_pool_0',
+              display_name: 'flink_compute_pool_0',
               cloud: 'GCP',
               http_endpoint: 'string',
               region: 'us-west-1',
               max_csu: 16,
-              config: {kind: 'Basic'},
+              config: {kind: 'Standard'},
               environment: {id: 'env-00000'},
               network: {id: 'string', environment: 'string'}
             }
@@ -1526,23 +1544,23 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/frpm/v2/resource-pools/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"flink_resource_pool_0\",\"cloud\":\"GCP\",\"http_endpoint\":\"string\",\"region\":\"us-west-1\",\"max_csu\":16,\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"GCP\",\"http_endpoint\":\"string\",\"region\":\"us-west-1\",\"max_csu\":16,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/frpm/v2/resource-pools/{id}");
+          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D");
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"flink_resource_pool_0\",\"cloud\":\"GCP\",\"http_endpoint\":\"string\",\"region\":\"us-west-1\",\"max_csu\":16,\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"GCP\",\"http_endpoint\":\"string\",\"region\":\"us-west-1\",\"max_csu\":16,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
 components:
   responses:
@@ -1741,26 +1759,26 @@ components:
             type: string
           style: simple
   schemas:
-    frpm.v2.ResourcePool:
+    fcpm.v2.ComputePool:
       description: |-
-        `ResourcePool` represents a Flink runtime that you can issue queries to using its API endpoint.
-        The API allows you to list, create, read, update, and delete your Flink resource pools.
+        A Compute Pool represents a set of compute resources that is used to run your Queries.
+        The resources (CPUs, memory,…) provided by a Compute Pool are shared between all Queries that use it.
 
 
-        ## The Resource Pools Model
-        <SchemaDefinition schemaRef="#/components/schemas/frpm.v2.ResourcePool" />
+        ## The Compute Pools Model
+        <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.ComputePool" />
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
             of a resource.
           enum:
-          - frpm/v2
+          - fcpm/v2
           readOnly: true
           type: string
         kind:
           description: Kind defines the object this REST resource represents.
           enum:
-          - ResourcePool
+          - ComputePool
           readOnly: true
           type: string
         id:
@@ -1778,19 +1796,19 @@ components:
           - $ref: '#/components/schemas/ObjectMeta'
           - properties:
               self:
-                example: https://api.confluent.cloud/frpm/v2/resource-pools/lfrp-12345
+                example: https://api.confluent.cloud/fcpm/v2/compute-pools/lfcp-12345
               resource_name:
-                example: crn://confluent.cloud/flink=lfrp-12345
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/flink=lfcp-12345
         spec:
-          $ref: '#/components/schemas/frpm.v2.ResourcePoolSpec'
+          $ref: '#/components/schemas/fcpm.v2.ComputePoolSpec'
         status:
-          $ref: '#/components/schemas/frpm.v2.ResourcePoolStatus'
+          $ref: '#/components/schemas/fcpm.v2.ComputePoolStatus'
       type: object
-    frpm.v2.ResourcePoolStatus:
-      description: The status of the Resource Pool
+    fcpm.v2.ComputePoolStatus:
+      description: The status of the Compute Pool
       properties:
         phase:
-          description: Status of the Flink resource pool.
+          description: Status of the Flink compute pool.
           example: PROVISIONING
           readOnly: true
           type: string
@@ -1802,20 +1820,7 @@ components:
       required:
       - phase
       type: object
-    frpm.v2.Basic:
-      description: |
-        The basic cluster type.
-      properties:
-        kind:
-          description: |
-            Basic cluster type.
-          enum:
-          - Basic
-          type: string
-      required:
-      - kind
-      type: object
-    frpm.v2.Standard:
+    fcpm.v2.Standard:
       description: |
         The standard cluster type.
       properties:
@@ -1831,26 +1836,26 @@ components:
     SearchFilter:
       description: Filter a collection by a string search
       type: string
-    frpm.v2.ResourcePoolList:
+    fcpm.v2.ComputePoolList:
       description: |-
-        `ResourcePool` represents a Flink runtime that you can issue queries to using its API endpoint.
-        The API allows you to list, create, read, update, and delete your Flink resource pools.
+        A Compute Pool represents a set of compute resources that is used to run your Queries.
+        The resources (CPUs, memory,…) provided by a Compute Pool are shared between all Queries that use it.
 
 
-        ## The Resource Pools Model
-        <SchemaDefinition schemaRef="#/components/schemas/frpm.v2.ResourcePool" />
+        ## The Compute Pools Model
+        <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.ComputePool" />
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
             of a resource.
           enum:
-          - frpm/v2
+          - fcpm/v2
           readOnly: true
           type: string
         kind:
           description: Kind defines the object this REST resource represents.
           enum:
-          - ResourcePoolList
+          - ComputePoolList
           readOnly: true
           type: string
         metadata:
@@ -1858,19 +1863,19 @@ components:
           - $ref: '#/components/schemas/ListMeta'
           - properties:
               first:
-                example: https://api.confluent.cloud/frpm/v2/resource-pools
+                example: https://api.confluent.cloud/fcpm/v2/compute-pools
               last:
-                example: https://api.confluent.cloud/frpm/v2/resource-pools?page_token=bcAOehAY8F16YD84Z1wT
+                example: https://api.confluent.cloud/fcpm/v2/compute-pools?page_token=bcAOehAY8F16YD84Z1wT
               prev:
-                example: https://api.confluent.cloud/frpm/v2/resource-pools?page_token=YIXRY97wWYmwzrax4dld
+                example: https://api.confluent.cloud/fcpm/v2/compute-pools?page_token=YIXRY97wWYmwzrax4dld
               next:
-                example: https://api.confluent.cloud/frpm/v2/resource-pools?page_token=UvmDWOB1iwfAIBPj6EYb
+                example: https://api.confluent.cloud/fcpm/v2/compute-pools?page_token=UvmDWOB1iwfAIBPj6EYb
         data:
           description: A data property that contains an array of resource items. Each
             entry in the array is a separate resource.
           items:
             allOf:
-            - $ref: '#/components/schemas/frpm.v2.ResourcePool'
+            - $ref: '#/components/schemas/fcpm.v2.ComputePool'
             - properties:
                 spec:
                   required:
@@ -1895,17 +1900,17 @@ components:
       - kind
       - metadata
       type: object
-    frpm.v2.ResourcePoolSpec:
-      description: The desired state of the Resource Pool
+    fcpm.v2.ComputePoolSpec:
+      description: The desired state of the Compute Pool
       properties:
         display_name:
-          description: The name of the Flink resource pool.
-          example: flink_resource_pool_0
+          description: The name of the Flink compute pool.
+          example: flink_compute_pool_0
           pattern: ^(?:[0-9A-Za-z\-])[\w-]{0,31}$
           type: string
           x-immutable: true
         cloud:
-          description: The cloud service provider that runs the resource pool.
+          description: The cloud service provider that runs the compute pool.
           example: GCP
           type: string
           x-extensible-enum:
@@ -1914,17 +1919,17 @@ components:
           - AZURE
           x-immutable: true
         http_endpoint:
-          description: The API endpoint of the Flink resource pool.
+          description: The API endpoint of the Flink compute pool.
           type: string
         region:
-          description: The cloud service provider region that hosts the Flink resource
+          description: The cloud service provider region that hosts the Flink compute
             pool.
           example: us-west-1
           type: string
           x-immutable: true
         current_csu:
           description: The number of CSUs (Confluent Streaming Units) currently allocated
-            to this Flink resource pool.
+            to this Flink compute pool.
           example: 4
           format: int32
           readOnly: true
@@ -1932,7 +1937,7 @@ components:
           x-immutable: false
         max_csu:
           description: |
-            Maximum number of Confluent Streaming Units (CSUs) that the Flink resource pool should auto-scale to. If not
+            Maximum number of Confluent Streaming Units (CSUs) that the Flink compute pool should auto-scale to. If not
             specified, the value defaults to 8.
           example: 16
           format: int32
@@ -1940,19 +1945,14 @@ components:
           x-immutable: false
         config:
           description: |
-            The type of of the Flink resource pool.
-            Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.
+            The type of of the Flink compute pool.
           discriminator:
             mapping:
-              Basic: '#/components/schemas/frpm.v2.Basic'
-              Standard: '#/components/schemas/frpm.v2.Standard'
+              Standard: '#/components/schemas/fcpm.v2.Standard'
             propertyName: kind
-          example:
-            kind: Basic
           oneOf:
-          - $ref: '#/components/schemas/frpm.v2.Basic'
-          - $ref: '#/components/schemas/frpm.v2.Standard'
-          x-one-of-name: FrpmV2ResourcePoolSpecConfigOneOf
+          - $ref: '#/components/schemas/fcpm.v2.Standard'
+          x-one-of-name: FcpmV2ComputePoolSpecConfigOneOf
         environment:
           allOf:
           - $ref: '#/components/schemas/GlobalObjectReference'
@@ -2189,15 +2189,15 @@ components:
         source:
           $ref: '#/components/schemas/Error_source'
       type: object
-    frpm.v2.ResourcePoolSpecUpdate:
-      description: The desired state of the Resource Pool
+    fcpm.v2.ComputePoolSpecUpdate:
+      description: The desired state of the Compute Pool
       properties:
         http_endpoint:
-          description: The API endpoint of the Flink resource pool.
+          description: The API endpoint of the Flink compute pool.
           type: string
         current_csu:
           description: The number of CSUs (Confluent Streaming Units) currently allocated
-            to this Flink resource pool.
+            to this Flink compute pool.
           example: 4
           format: int32
           readOnly: true
@@ -2205,7 +2205,7 @@ components:
           x-immutable: false
         max_csu:
           description: |
-            Maximum number of Confluent Streaming Units (CSUs) that the Flink resource pool should auto-scale to. If not
+            Maximum number of Confluent Streaming Units (CSUs) that the Flink compute pool should auto-scale to. If not
             specified, the value defaults to 8.
           example: 16
           format: int32
@@ -2213,43 +2213,38 @@ components:
           x-immutable: false
         config:
           description: |
-            The type of of the Flink resource pool.
-            Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.
+            The type of of the Flink compute pool.
           discriminator:
             mapping:
-              Basic: '#/components/schemas/frpm.v2.Basic'
-              Standard: '#/components/schemas/frpm.v2.Standard'
+              Standard: '#/components/schemas/fcpm.v2.Standard'
             propertyName: kind
-          example:
-            kind: Basic
           oneOf:
-          - $ref: '#/components/schemas/frpm.v2.Basic'
-          - $ref: '#/components/schemas/frpm.v2.Standard'
-          x-one-of-name: FrpmV2ResourcePoolSpecUpdateConfigOneOf
+          - $ref: '#/components/schemas/fcpm.v2.Standard'
+          x-one-of-name: FcpmV2ComputePoolSpecUpdateConfigOneOf
       type: object
       x-enable-id: true
       x-enable-listmeta: true
       x-enable-objectmeta: true
-    frpm.v2.ResourcePoolUpdate:
+    fcpm.v2.ComputePoolUpdate:
       description: |-
-        `ResourcePool` represents a Flink runtime that you can issue queries to using its API endpoint.
-        The API allows you to list, create, read, update, and delete your Flink resource pools.
+        A Compute Pool represents a set of compute resources that is used to run your Queries.
+        The resources (CPUs, memory,…) provided by a Compute Pool are shared between all Queries that use it.
 
 
-        ## The Resource Pools Model
-        <SchemaDefinition schemaRef="#/components/schemas/frpm.v2.ResourcePool" />
+        ## The Compute Pools Model
+        <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.ComputePool" />
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
             of a resource.
           enum:
-          - frpm/v2
+          - fcpm/v2
           readOnly: true
           type: string
         kind:
           description: Kind defines the object this REST resource represents.
           enum:
-          - ResourcePool
+          - ComputePool
           readOnly: true
           type: string
         id:
@@ -2267,13 +2262,13 @@ components:
           - $ref: '#/components/schemas/ObjectMeta'
           - properties:
               self:
-                example: https://api.confluent.cloud/frpm/v2/resource-pools/lfrp-12345
+                example: https://api.confluent.cloud/fcpm/v2/compute-pools/lfcp-12345
               resource_name:
-                example: crn://confluent.cloud/flink=lfrp-12345
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/flink=lfcp-12345
         spec:
-          $ref: '#/components/schemas/frpm.v2.ResourcePoolSpecUpdate'
+          $ref: '#/components/schemas/fcpm.v2.ComputePoolSpecUpdate'
         status:
-          $ref: '#/components/schemas/frpm.v2.ResourcePoolStatus'
+          $ref: '#/components/schemas/fcpm.v2.ComputePoolStatus'
       type: object
     Error_source:
       description: If this error was caused by a particular part of the API request,

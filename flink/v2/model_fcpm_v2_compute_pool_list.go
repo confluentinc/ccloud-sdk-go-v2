@@ -13,9 +13,9 @@
 // limitations under the License.
 
 /*
-Flink Resource Pool Management API
+Flink Compute Pool Management API
 
-This is the Flink Resource Pool management API.
+This is the Flink Compute Pool management API.
 
 API version: 0.0.1
 Contact: ksql-team@confluent.io
@@ -33,23 +33,23 @@ import (
 	"reflect"
 )
 
-// FrpmV2ResourcePoolList `ResourcePool` represents a Flink runtime that you can issue queries to using its API endpoint. The API allows you to list, create, read, update, and delete your Flink resource pools.   ## The Resource Pools Model <SchemaDefinition schemaRef=\"#/components/schemas/frpm.v2.ResourcePool\" />
-type FrpmV2ResourcePoolList struct {
+// FcpmV2ComputePoolList A Compute Pool represents a set of compute resources that is used to run your Queries. The resources (CPUs, memory,…) provided by a Compute Pool are shared between all Queries that use it.   ## The Compute Pools Model <SchemaDefinition schemaRef=\"#/components/schemas/fcpm.v2.ComputePool\" />
+type FcpmV2ComputePoolList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version"`
 	// Kind defines the object this REST resource represents.
 	Kind     string   `json:"kind"`
 	Metadata ListMeta `json:"metadata"`
 	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
-	Data []FrpmV2ResourcePool `json:"data"`
+	Data []FcpmV2ComputePool `json:"data"`
 }
 
-// NewFrpmV2ResourcePoolList instantiates a new FrpmV2ResourcePoolList object
+// NewFcpmV2ComputePoolList instantiates a new FcpmV2ComputePoolList object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFrpmV2ResourcePoolList(apiVersion string, kind string, metadata ListMeta, data []FrpmV2ResourcePool) *FrpmV2ResourcePoolList {
-	this := FrpmV2ResourcePoolList{}
+func NewFcpmV2ComputePoolList(apiVersion string, kind string, metadata ListMeta, data []FcpmV2ComputePool) *FcpmV2ComputePoolList {
+	this := FcpmV2ComputePoolList{}
 	this.ApiVersion = apiVersion
 	this.Kind = kind
 	this.Metadata = metadata
@@ -57,16 +57,16 @@ func NewFrpmV2ResourcePoolList(apiVersion string, kind string, metadata ListMeta
 	return &this
 }
 
-// NewFrpmV2ResourcePoolListWithDefaults instantiates a new FrpmV2ResourcePoolList object
+// NewFcpmV2ComputePoolListWithDefaults instantiates a new FcpmV2ComputePoolList object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFrpmV2ResourcePoolListWithDefaults() *FrpmV2ResourcePoolList {
-	this := FrpmV2ResourcePoolList{}
+func NewFcpmV2ComputePoolListWithDefaults() *FcpmV2ComputePoolList {
+	this := FcpmV2ComputePoolList{}
 	return &this
 }
 
 // GetApiVersion returns the ApiVersion field value
-func (o *FrpmV2ResourcePoolList) GetApiVersion() string {
+func (o *FcpmV2ComputePoolList) GetApiVersion() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -77,7 +77,7 @@ func (o *FrpmV2ResourcePoolList) GetApiVersion() string {
 
 // GetApiVersionOk returns a tuple with the ApiVersion field value
 // and a boolean to check if the value has been set.
-func (o *FrpmV2ResourcePoolList) GetApiVersionOk() (*string, bool) {
+func (o *FcpmV2ComputePoolList) GetApiVersionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -85,12 +85,12 @@ func (o *FrpmV2ResourcePoolList) GetApiVersionOk() (*string, bool) {
 }
 
 // SetApiVersion sets field value
-func (o *FrpmV2ResourcePoolList) SetApiVersion(v string) {
+func (o *FcpmV2ComputePoolList) SetApiVersion(v string) {
 	o.ApiVersion = v
 }
 
 // GetKind returns the Kind field value
-func (o *FrpmV2ResourcePoolList) GetKind() string {
+func (o *FcpmV2ComputePoolList) GetKind() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -101,7 +101,7 @@ func (o *FrpmV2ResourcePoolList) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *FrpmV2ResourcePoolList) GetKindOk() (*string, bool) {
+func (o *FcpmV2ComputePoolList) GetKindOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -109,12 +109,12 @@ func (o *FrpmV2ResourcePoolList) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *FrpmV2ResourcePoolList) SetKind(v string) {
+func (o *FcpmV2ComputePoolList) SetKind(v string) {
 	o.Kind = v
 }
 
 // GetMetadata returns the Metadata field value
-func (o *FrpmV2ResourcePoolList) GetMetadata() ListMeta {
+func (o *FcpmV2ComputePoolList) GetMetadata() ListMeta {
 	if o == nil {
 		var ret ListMeta
 		return ret
@@ -125,7 +125,7 @@ func (o *FrpmV2ResourcePoolList) GetMetadata() ListMeta {
 
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
-func (o *FrpmV2ResourcePoolList) GetMetadataOk() (*ListMeta, bool) {
+func (o *FcpmV2ComputePoolList) GetMetadataOk() (*ListMeta, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -133,14 +133,14 @@ func (o *FrpmV2ResourcePoolList) GetMetadataOk() (*ListMeta, bool) {
 }
 
 // SetMetadata sets field value
-func (o *FrpmV2ResourcePoolList) SetMetadata(v ListMeta) {
+func (o *FcpmV2ComputePoolList) SetMetadata(v ListMeta) {
 	o.Metadata = v
 }
 
 // GetData returns the Data field value
-func (o *FrpmV2ResourcePoolList) GetData() []FrpmV2ResourcePool {
+func (o *FcpmV2ComputePoolList) GetData() []FcpmV2ComputePool {
 	if o == nil {
-		var ret []FrpmV2ResourcePool
+		var ret []FcpmV2ComputePool
 		return ret
 	}
 
@@ -149,7 +149,7 @@ func (o *FrpmV2ResourcePoolList) GetData() []FrpmV2ResourcePool {
 
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
-func (o *FrpmV2ResourcePoolList) GetDataOk() (*[]FrpmV2ResourcePool, bool) {
+func (o *FcpmV2ComputePoolList) GetDataOk() (*[]FcpmV2ComputePool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -157,19 +157,19 @@ func (o *FrpmV2ResourcePoolList) GetDataOk() (*[]FrpmV2ResourcePool, bool) {
 }
 
 // SetData sets field value
-func (o *FrpmV2ResourcePoolList) SetData(v []FrpmV2ResourcePool) {
+func (o *FcpmV2ComputePoolList) SetData(v []FcpmV2ComputePool) {
 	o.Data = v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *FrpmV2ResourcePoolList) Redact() {
+func (o *FcpmV2ComputePoolList) Redact() {
 	o.recurseRedact(&o.ApiVersion)
 	o.recurseRedact(&o.Kind)
 	o.recurseRedact(&o.Metadata)
 	o.recurseRedact(&o.Data)
 }
 
-func (o *FrpmV2ResourcePoolList) recurseRedact(v interface{}) {
+func (o *FcpmV2ComputePoolList) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -194,12 +194,12 @@ func (o *FrpmV2ResourcePoolList) recurseRedact(v interface{}) {
 	}
 }
 
-func (o FrpmV2ResourcePoolList) zeroField(v interface{}) {
+func (o FcpmV2ComputePoolList) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o FrpmV2ResourcePoolList) MarshalJSON() ([]byte, error) {
+func (o FcpmV2ComputePoolList) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["api_version"] = o.ApiVersion
@@ -216,38 +216,38 @@ func (o FrpmV2ResourcePoolList) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableFrpmV2ResourcePoolList struct {
-	value *FrpmV2ResourcePoolList
+type NullableFcpmV2ComputePoolList struct {
+	value *FcpmV2ComputePoolList
 	isSet bool
 }
 
-func (v NullableFrpmV2ResourcePoolList) Get() *FrpmV2ResourcePoolList {
+func (v NullableFcpmV2ComputePoolList) Get() *FcpmV2ComputePoolList {
 	return v.value
 }
 
-func (v *NullableFrpmV2ResourcePoolList) Set(val *FrpmV2ResourcePoolList) {
+func (v *NullableFcpmV2ComputePoolList) Set(val *FcpmV2ComputePoolList) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFrpmV2ResourcePoolList) IsSet() bool {
+func (v NullableFcpmV2ComputePoolList) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFrpmV2ResourcePoolList) Unset() {
+func (v *NullableFcpmV2ComputePoolList) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFrpmV2ResourcePoolList(val *FrpmV2ResourcePoolList) *NullableFrpmV2ResourcePoolList {
-	return &NullableFrpmV2ResourcePoolList{value: val, isSet: true}
+func NewNullableFcpmV2ComputePoolList(val *FcpmV2ComputePoolList) *NullableFcpmV2ComputePoolList {
+	return &NullableFcpmV2ComputePoolList{value: val, isSet: true}
 }
 
-func (v NullableFrpmV2ResourcePoolList) MarshalJSON() ([]byte, error) {
+func (v NullableFcpmV2ComputePoolList) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFrpmV2ResourcePoolList) UnmarshalJSON(src []byte) error {
+func (v *NullableFcpmV2ComputePoolList) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

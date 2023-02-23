@@ -13,9 +13,9 @@
 // limitations under the License.
 
 /*
-Flink Resource Pool Management API
+Flink Compute Pool Management API
 
-This is the Flink Resource Pool management API.
+This is the Flink Compute Pool management API.
 
 API version: 0.0.1
 Contact: ksql-team@confluent.io
@@ -33,60 +33,60 @@ import (
 	"reflect"
 )
 
-// FrpmV2Basic The basic cluster type.
-type FrpmV2Basic struct {
-	// Basic cluster type.
-	Kind string `json:"kind"`
+// FcpmV2ComputePoolStatus The status of the Compute Pool
+type FcpmV2ComputePoolStatus struct {
+	// Status of the Flink compute pool.
+	Phase string `json:"phase"`
 }
 
-// NewFrpmV2Basic instantiates a new FrpmV2Basic object
+// NewFcpmV2ComputePoolStatus instantiates a new FcpmV2ComputePoolStatus object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFrpmV2Basic(kind string) *FrpmV2Basic {
-	this := FrpmV2Basic{}
-	this.Kind = kind
+func NewFcpmV2ComputePoolStatus(phase string) *FcpmV2ComputePoolStatus {
+	this := FcpmV2ComputePoolStatus{}
+	this.Phase = phase
 	return &this
 }
 
-// NewFrpmV2BasicWithDefaults instantiates a new FrpmV2Basic object
+// NewFcpmV2ComputePoolStatusWithDefaults instantiates a new FcpmV2ComputePoolStatus object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFrpmV2BasicWithDefaults() *FrpmV2Basic {
-	this := FrpmV2Basic{}
+func NewFcpmV2ComputePoolStatusWithDefaults() *FcpmV2ComputePoolStatus {
+	this := FcpmV2ComputePoolStatus{}
 	return &this
 }
 
-// GetKind returns the Kind field value
-func (o *FrpmV2Basic) GetKind() string {
+// GetPhase returns the Phase field value
+func (o *FcpmV2ComputePoolStatus) GetPhase() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Kind
+	return o.Phase
 }
 
-// GetKindOk returns a tuple with the Kind field value
+// GetPhaseOk returns a tuple with the Phase field value
 // and a boolean to check if the value has been set.
-func (o *FrpmV2Basic) GetKindOk() (*string, bool) {
+func (o *FcpmV2ComputePoolStatus) GetPhaseOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Kind, true
+	return &o.Phase, true
 }
 
-// SetKind sets field value
-func (o *FrpmV2Basic) SetKind(v string) {
-	o.Kind = v
+// SetPhase sets field value
+func (o *FcpmV2ComputePoolStatus) SetPhase(v string) {
+	o.Phase = v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *FrpmV2Basic) Redact() {
-	o.recurseRedact(&o.Kind)
+func (o *FcpmV2ComputePoolStatus) Redact() {
+	o.recurseRedact(&o.Phase)
 }
 
-func (o *FrpmV2Basic) recurseRedact(v interface{}) {
+func (o *FcpmV2ComputePoolStatus) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -111,51 +111,51 @@ func (o *FrpmV2Basic) recurseRedact(v interface{}) {
 	}
 }
 
-func (o FrpmV2Basic) zeroField(v interface{}) {
+func (o FcpmV2ComputePoolStatus) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o FrpmV2Basic) MarshalJSON() ([]byte, error) {
+func (o FcpmV2ComputePoolStatus) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
-		toSerialize["kind"] = o.Kind
+		toSerialize["phase"] = o.Phase
 	}
 	return json.Marshal(toSerialize)
 }
 
-type NullableFrpmV2Basic struct {
-	value *FrpmV2Basic
+type NullableFcpmV2ComputePoolStatus struct {
+	value *FcpmV2ComputePoolStatus
 	isSet bool
 }
 
-func (v NullableFrpmV2Basic) Get() *FrpmV2Basic {
+func (v NullableFcpmV2ComputePoolStatus) Get() *FcpmV2ComputePoolStatus {
 	return v.value
 }
 
-func (v *NullableFrpmV2Basic) Set(val *FrpmV2Basic) {
+func (v *NullableFcpmV2ComputePoolStatus) Set(val *FcpmV2ComputePoolStatus) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFrpmV2Basic) IsSet() bool {
+func (v NullableFcpmV2ComputePoolStatus) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFrpmV2Basic) Unset() {
+func (v *NullableFcpmV2ComputePoolStatus) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFrpmV2Basic(val *FrpmV2Basic) *NullableFrpmV2Basic {
-	return &NullableFrpmV2Basic{value: val, isSet: true}
+func NewNullableFcpmV2ComputePoolStatus(val *FcpmV2ComputePoolStatus) *NullableFcpmV2ComputePoolStatus {
+	return &NullableFcpmV2ComputePoolStatus{value: val, isSet: true}
 }
 
-func (v NullableFrpmV2Basic) MarshalJSON() ([]byte, error) {
+func (v NullableFcpmV2ComputePoolStatus) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFrpmV2Basic) UnmarshalJSON(src []byte) error {
+func (v *NullableFcpmV2ComputePoolStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
