@@ -84,6 +84,7 @@ Class | Method | HTTP request | Description
 *ComputePoolsFcpmV2Api* | [**GetFcpmV2ComputePool**](docs/ComputePoolsFcpmV2Api.md#getfcpmv2computepool) | **Get** /fcpm/v2/compute-pools/{id} | Read a Compute Pool
 *ComputePoolsFcpmV2Api* | [**ListFcpmV2ComputePools**](docs/ComputePoolsFcpmV2Api.md#listfcpmv2computepools) | **Get** /fcpm/v2/compute-pools | List of Compute Pools
 *ComputePoolsFcpmV2Api* | [**UpdateFcpmV2ComputePool**](docs/ComputePoolsFcpmV2Api.md#updatefcpmv2computepool) | **Patch** /fcpm/v2/compute-pools/{id} | Update a Compute Pool
+*RegionsFcpmV2Api* | [**ListFcpmV2Regions**](docs/RegionsFcpmV2Api.md#listfcpmv2regions) | **Get** /fcpm/v2/regions | List of Regions
 
 
 ## Documentation For Models
@@ -100,6 +101,8 @@ Class | Method | HTTP request | Description
  - [FcpmV2ComputePoolSpecUpdateConfigOneOf](docs/FcpmV2ComputePoolSpecUpdateConfigOneOf.md)
  - [FcpmV2ComputePoolStatus](docs/FcpmV2ComputePoolStatus.md)
  - [FcpmV2ComputePoolUpdate](docs/FcpmV2ComputePoolUpdate.md)
+ - [FcpmV2Region](docs/FcpmV2Region.md)
+ - [FcpmV2RegionList](docs/FcpmV2RegionList.md)
  - [FcpmV2Standard](docs/FcpmV2Standard.md)
  - [GlobalObjectReference](docs/GlobalObjectReference.md)
  - [ListMeta](docs/ListMeta.md)

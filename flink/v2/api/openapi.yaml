@@ -29,6 +29,16 @@ tags:
     ## The Compute Pools Model
     <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.ComputePool" />
   name: Compute Pools (fcpm/v2)
+- description: |-
+    [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
+    `Region` objects represent cloud provider regions available when placing Flink compute pools.
+    The API allows you to list Flink regions.
+
+
+    ## The Regions Model
+    <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.Region" />
+  name: Regions (fcpm/v2)
 paths:
   /fcpm/v2/compute-pools:
     get:
@@ -1560,6 +1570,261 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"GCP\",\"region\":\"us-west-1\",\"max_csu\":16,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
+  /fcpm/v2/regions:
+    get:
+      description: |-
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
+        Retrieve a sorted, filtered, paginated list of all regions.
+      operationId: listFcpmV2Regions
+      parameters:
+      - description: Filter the results by exact match for cloud.
+        example: AWS
+        explode: true
+        in: query
+        name: cloud
+        required: false
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: Filter the results by exact match for region_name.
+        example: us-east-2
+        explode: true
+        in: query
+        name: region_name
+        required: false
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: A pagination size for collection requests.
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 10
+          maximum: 100
+          type: integer
+          x-max-page-items: 500
+        style: form
+      - description: An opaque pagination token for collection requests.
+        explode: true
+        in: query
+        name: page_token
+        required: false
+        schema:
+          maxLength: 255
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/fcpm.v2.RegionList'
+          description: Region.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - api-key: []
+      summary: List of Regions
+      tags:
+      - Regions (fcpm/v2)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.confluent.cloud/fcpm/v2/regions?cloud=AWS&region_name=us-east-2' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/fcpm/v2/regions?cloud=AWS&region_name=us-east-2")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/regions?cloud=AWS&region_name=us-east-2\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/fcpm/v2/regions?cloud=AWS&region_name=us-east-2", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/fcpm/v2/regions?cloud=AWS&region_name=us-east-2",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/regions?cloud=AWS&region_name=us-east-2");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/regions?cloud=AWS&region_name=us-east-2");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
 components:
   responses:
     BadRequestError:
@@ -1818,6 +2083,69 @@ components:
       required:
       - phase
       type: object
+    fcpm.v2.Region:
+      description: |-
+        `Region` objects represent cloud provider regions available when placing Flink compute pools.
+        The API allows you to list Flink regions.
+
+
+        ## The Regions Model
+        <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.Region" />
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - fcpm/v2
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - Region
+          readOnly: true
+          type: string
+        id:
+          description: ID is the "natural identifier" for an object within its scope/namespace;
+            it is normally unique across time but not space. That is, you can assume
+            that the ID will not be reclaimed and reused after an object is deleted
+            ("time"); however, it may collide with IDs for other object `kinds` or
+            objects of the same `kind` within a different scope/namespace ("space").
+          example: dlz-f3a90de
+          maxLength: 255
+          readOnly: true
+          type: string
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/ObjectMeta'
+          - properties:
+              self:
+                example: https://api.confluent.cloud/fcpm/v2/regions/r-12345
+              resource_name:
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/region=r-12345
+        display_name:
+          description: The display name.
+          example: Ohio (us-east-2)
+          readOnly: true
+          type: string
+          x-immutable: true
+        cloud:
+          description: The cloud service provider that hosts the region.
+          example: AWS
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - AWS
+          - GCP
+          - AZURE
+          x-immutable: true
+        region_name:
+          description: The region name.
+          example: us-east-2
+          readOnly: true
+          type: string
+          x-immutable: true
+      type: object
     fcpm.v2.Standard:
       description: |
         The standard cluster type.
@@ -1968,6 +2296,61 @@ components:
       x-enable-id: true
       x-enable-listmeta: true
       x-enable-objectmeta: true
+    fcpm.v2.RegionList:
+      description: |-
+        `Region` objects represent cloud provider regions available when placing Flink compute pools.
+        The API allows you to list Flink regions.
+
+
+        ## The Regions Model
+        <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.Region" />
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - fcpm/v2
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - RegionList
+          readOnly: true
+          type: string
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/ListMeta'
+          - properties:
+              first:
+                example: https://api.confluent.cloud/fcpm/v2/regions
+              last:
+                example: https://api.confluent.cloud/fcpm/v2/regions?page_token=bcAOehAY8F16YD84Z1wT
+              prev:
+                example: https://api.confluent.cloud/fcpm/v2/regions?page_token=YIXRY97wWYmwzrax4dld
+              next:
+                example: https://api.confluent.cloud/fcpm/v2/regions?page_token=UvmDWOB1iwfAIBPj6EYb
+        data:
+          description: A data property that contains an array of resource items. Each
+            entry in the array is a separate resource.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/fcpm.v2.Region'
+            - required:
+              - cloud
+              - display_name
+              - id
+              - metadata
+              - region_name
+              type: object
+          type: array
+          uniqueItems: true
+      required:
+      - api_version
+      - data
+      - kind
+      - metadata
+      type: object
     ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have,
         which includes all objects users must create.

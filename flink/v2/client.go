@@ -65,6 +65,8 @@ type APIClient struct {
 	// API Services
 
 	ComputePoolsFcpmV2Api ComputePoolsFcpmV2Api
+
+	RegionsFcpmV2Api RegionsFcpmV2Api
 }
 
 type service struct {
@@ -84,6 +86,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.ComputePoolsFcpmV2Api = (*ComputePoolsFcpmV2ApiService)(&c.common)
+	c.RegionsFcpmV2Api = (*RegionsFcpmV2ApiService)(&c.common)
 
 	return c
 }
