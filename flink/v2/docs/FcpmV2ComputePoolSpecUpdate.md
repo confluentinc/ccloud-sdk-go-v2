@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**HttpEndpoint** | Pointer to **string** | The API endpoint of the Flink compute pool. | [optional] 
 **CurrentCsu** | Pointer to **int32** | The number of CSUs (Confluent Streaming Units) currently allocated to this Flink compute pool. | [optional] [readonly] 
 **MaxCsu** | Pointer to **int32** | Maximum number of Confluent Streaming Units (CSUs) that the Flink compute pool should auto-scale to. If not specified, the value defaults to 8.  | [optional] 
 **Config** | Pointer to [**FcpmV2ComputePoolSpecUpdateConfigOneOf**](FcpmV2ComputePoolSpecUpdateConfigOneOf.md) | The type of of the Flink compute pool.  | [optional] 
@@ -27,31 +26,6 @@ will change when the set of required properties is changed
 NewFcpmV2ComputePoolSpecUpdateWithDefaults instantiates a new FcpmV2ComputePoolSpecUpdate object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetHttpEndpoint
-
-`func (o *FcpmV2ComputePoolSpecUpdate) GetHttpEndpoint() string`
-
-GetHttpEndpoint returns the HttpEndpoint field if non-nil, zero value otherwise.
-
-### GetHttpEndpointOk
-
-`func (o *FcpmV2ComputePoolSpecUpdate) GetHttpEndpointOk() (*string, bool)`
-
-GetHttpEndpointOk returns a tuple with the HttpEndpoint field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHttpEndpoint
-
-`func (o *FcpmV2ComputePoolSpecUpdate) SetHttpEndpoint(v string)`
-
-SetHttpEndpoint sets HttpEndpoint field to given value.
-
-### HasHttpEndpoint
-
-`func (o *FcpmV2ComputePoolSpecUpdate) HasHttpEndpoint() bool`
-
-HasHttpEndpoint returns a boolean if a field has been set.
 
 ### GetCurrentCsu
 

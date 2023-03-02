@@ -35,8 +35,6 @@ import (
 
 // FcpmV2ComputePoolSpecUpdate The desired state of the Compute Pool
 type FcpmV2ComputePoolSpecUpdate struct {
-	// The API endpoint of the Flink compute pool.
-	HttpEndpoint *string `json:"http_endpoint,omitempty"`
 	// The number of CSUs (Confluent Streaming Units) currently allocated to this Flink compute pool.
 	CurrentCsu *int32 `json:"current_csu,omitempty"`
 	// Maximum number of Confluent Streaming Units (CSUs) that the Flink compute pool should auto-scale to. If not specified, the value defaults to 8.
@@ -60,38 +58,6 @@ func NewFcpmV2ComputePoolSpecUpdate() *FcpmV2ComputePoolSpecUpdate {
 func NewFcpmV2ComputePoolSpecUpdateWithDefaults() *FcpmV2ComputePoolSpecUpdate {
 	this := FcpmV2ComputePoolSpecUpdate{}
 	return &this
-}
-
-// GetHttpEndpoint returns the HttpEndpoint field value if set, zero value otherwise.
-func (o *FcpmV2ComputePoolSpecUpdate) GetHttpEndpoint() string {
-	if o == nil || o.HttpEndpoint == nil {
-		var ret string
-		return ret
-	}
-	return *o.HttpEndpoint
-}
-
-// GetHttpEndpointOk returns a tuple with the HttpEndpoint field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *FcpmV2ComputePoolSpecUpdate) GetHttpEndpointOk() (*string, bool) {
-	if o == nil || o.HttpEndpoint == nil {
-		return nil, false
-	}
-	return o.HttpEndpoint, true
-}
-
-// HasHttpEndpoint returns a boolean if a field has been set.
-func (o *FcpmV2ComputePoolSpecUpdate) HasHttpEndpoint() bool {
-	if o != nil && o.HttpEndpoint != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetHttpEndpoint gets a reference to the given string and assigns it to the HttpEndpoint field.
-func (o *FcpmV2ComputePoolSpecUpdate) SetHttpEndpoint(v string) {
-	o.HttpEndpoint = &v
 }
 
 // GetCurrentCsu returns the CurrentCsu field value if set, zero value otherwise.
@@ -192,7 +158,6 @@ func (o *FcpmV2ComputePoolSpecUpdate) SetConfig(v FcpmV2ComputePoolSpecUpdateCon
 
 // Redact resets all sensitive fields to their zero value.
 func (o *FcpmV2ComputePoolSpecUpdate) Redact() {
-	o.recurseRedact(o.HttpEndpoint)
 	o.recurseRedact(o.CurrentCsu)
 	o.recurseRedact(o.MaxCsu)
 	o.recurseRedact(o.Config)
@@ -230,9 +195,6 @@ func (o FcpmV2ComputePoolSpecUpdate) zeroField(v interface{}) {
 
 func (o FcpmV2ComputePoolSpecUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.HttpEndpoint != nil {
-		toSerialize["http_endpoint"] = o.HttpEndpoint
-	}
 	if o.CurrentCsu != nil {
 		toSerialize["current_csu"] = o.CurrentCsu
 	}

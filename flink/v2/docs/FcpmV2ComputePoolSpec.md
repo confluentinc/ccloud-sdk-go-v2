@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the Flink compute pool. | [optional] 
 **Cloud** | Pointer to **string** | The cloud service provider that runs the compute pool. | [optional] 
-**HttpEndpoint** | Pointer to **string** | The API endpoint of the Flink compute pool. | [optional] 
+**HttpEndpoint** | Pointer to **string** | The API endpoint of the Flink compute pool. | [optional] [readonly] 
 **Region** | Pointer to **string** | The cloud service provider region that hosts the Flink compute pool. | [optional] 
 **CurrentCsu** | Pointer to **int32** | The number of CSUs (Confluent Streaming Units) currently allocated to this Flink compute pool. | [optional] [readonly] 
 **MaxCsu** | Pointer to **int32** | Maximum number of Confluent Streaming Units (CSUs) that the Flink compute pool should auto-scale to. If not specified, the value defaults to 8.  | [optional] 
