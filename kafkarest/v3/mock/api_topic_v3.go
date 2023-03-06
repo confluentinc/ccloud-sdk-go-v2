@@ -38,6 +38,12 @@ type TopicV3Api struct {
 	lockListKafkaTopicsExecute sync.Mutex
 	ListKafkaTopicsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiListKafkaTopicsRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.TopicDataList, *net_http.Response, error)
 
+	lockUpdatePartitionCountKafkaTopic sync.Mutex
+	UpdatePartitionCountKafkaTopicFunc func(ctx context.Context, clusterId, topicName string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdatePartitionCountKafkaTopicRequest
+
+	lockUpdatePartitionCountKafkaTopicExecute sync.Mutex
+	UpdatePartitionCountKafkaTopicExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdatePartitionCountKafkaTopicRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.TopicData, *net_http.Response, error)
+
 	calls struct {
 		CreateKafkaTopic []struct {
 			Ctx       context.Context
@@ -68,6 +74,14 @@ type TopicV3Api struct {
 		}
 		ListKafkaTopicsExecute []struct {
 			R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiListKafkaTopicsRequest
+		}
+		UpdatePartitionCountKafkaTopic []struct {
+			Ctx       context.Context
+			ClusterId string
+			TopicName string
+		}
+		UpdatePartitionCountKafkaTopicExecute []struct {
+			R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdatePartitionCountKafkaTopicRequest
 		}
 	}
 }
@@ -394,6 +408,88 @@ func (m *TopicV3Api) ListKafkaTopicsExecuteCalls() []struct {
 	return m.calls.ListKafkaTopicsExecute
 }
 
+// UpdatePartitionCountKafkaTopic mocks base method by wrapping the associated func.
+func (m *TopicV3Api) UpdatePartitionCountKafkaTopic(ctx context.Context, clusterId, topicName string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdatePartitionCountKafkaTopicRequest {
+	m.lockUpdatePartitionCountKafkaTopic.Lock()
+	defer m.lockUpdatePartitionCountKafkaTopic.Unlock()
+
+	if m.UpdatePartitionCountKafkaTopicFunc == nil {
+		panic("mocker: TopicV3Api.UpdatePartitionCountKafkaTopicFunc is nil but TopicV3Api.UpdatePartitionCountKafkaTopic was called.")
+	}
+
+	call := struct {
+		Ctx       context.Context
+		ClusterId string
+		TopicName string
+	}{
+		Ctx:       ctx,
+		ClusterId: clusterId,
+		TopicName: topicName,
+	}
+
+	m.calls.UpdatePartitionCountKafkaTopic = append(m.calls.UpdatePartitionCountKafkaTopic, call)
+
+	return m.UpdatePartitionCountKafkaTopicFunc(ctx, clusterId, topicName)
+}
+
+// UpdatePartitionCountKafkaTopicCalled returns true if UpdatePartitionCountKafkaTopic was called at least once.
+func (m *TopicV3Api) UpdatePartitionCountKafkaTopicCalled() bool {
+	m.lockUpdatePartitionCountKafkaTopic.Lock()
+	defer m.lockUpdatePartitionCountKafkaTopic.Unlock()
+
+	return len(m.calls.UpdatePartitionCountKafkaTopic) > 0
+}
+
+// UpdatePartitionCountKafkaTopicCalls returns the calls made to UpdatePartitionCountKafkaTopic.
+func (m *TopicV3Api) UpdatePartitionCountKafkaTopicCalls() []struct {
+	Ctx       context.Context
+	ClusterId string
+	TopicName string
+} {
+	m.lockUpdatePartitionCountKafkaTopic.Lock()
+	defer m.lockUpdatePartitionCountKafkaTopic.Unlock()
+
+	return m.calls.UpdatePartitionCountKafkaTopic
+}
+
+// UpdatePartitionCountKafkaTopicExecute mocks base method by wrapping the associated func.
+func (m *TopicV3Api) UpdatePartitionCountKafkaTopicExecute(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdatePartitionCountKafkaTopicRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.TopicData, *net_http.Response, error) {
+	m.lockUpdatePartitionCountKafkaTopicExecute.Lock()
+	defer m.lockUpdatePartitionCountKafkaTopicExecute.Unlock()
+
+	if m.UpdatePartitionCountKafkaTopicExecuteFunc == nil {
+		panic("mocker: TopicV3Api.UpdatePartitionCountKafkaTopicExecuteFunc is nil but TopicV3Api.UpdatePartitionCountKafkaTopicExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdatePartitionCountKafkaTopicRequest
+	}{
+		R: r,
+	}
+
+	m.calls.UpdatePartitionCountKafkaTopicExecute = append(m.calls.UpdatePartitionCountKafkaTopicExecute, call)
+
+	return m.UpdatePartitionCountKafkaTopicExecuteFunc(r)
+}
+
+// UpdatePartitionCountKafkaTopicExecuteCalled returns true if UpdatePartitionCountKafkaTopicExecute was called at least once.
+func (m *TopicV3Api) UpdatePartitionCountKafkaTopicExecuteCalled() bool {
+	m.lockUpdatePartitionCountKafkaTopicExecute.Lock()
+	defer m.lockUpdatePartitionCountKafkaTopicExecute.Unlock()
+
+	return len(m.calls.UpdatePartitionCountKafkaTopicExecute) > 0
+}
+
+// UpdatePartitionCountKafkaTopicExecuteCalls returns the calls made to UpdatePartitionCountKafkaTopicExecute.
+func (m *TopicV3Api) UpdatePartitionCountKafkaTopicExecuteCalls() []struct {
+	R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdatePartitionCountKafkaTopicRequest
+} {
+	m.lockUpdatePartitionCountKafkaTopicExecute.Lock()
+	defer m.lockUpdatePartitionCountKafkaTopicExecute.Unlock()
+
+	return m.calls.UpdatePartitionCountKafkaTopicExecute
+}
+
 // Reset resets the calls made to the mocked methods.
 func (m *TopicV3Api) Reset() {
 	m.lockCreateKafkaTopic.Lock()
@@ -420,4 +516,10 @@ func (m *TopicV3Api) Reset() {
 	m.lockListKafkaTopicsExecute.Lock()
 	m.calls.ListKafkaTopicsExecute = nil
 	m.lockListKafkaTopicsExecute.Unlock()
+	m.lockUpdatePartitionCountKafkaTopic.Lock()
+	m.calls.UpdatePartitionCountKafkaTopic = nil
+	m.lockUpdatePartitionCountKafkaTopic.Unlock()
+	m.lockUpdatePartitionCountKafkaTopicExecute.Lock()
+	m.calls.UpdatePartitionCountKafkaTopicExecute = nil
+	m.lockUpdatePartitionCountKafkaTopicExecute.Unlock()
 }
