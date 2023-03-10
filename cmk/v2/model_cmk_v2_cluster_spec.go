@@ -43,7 +43,7 @@ type CmkV2ClusterSpec struct {
 	Cloud *string `json:"cloud,omitempty"`
 	// The cloud service provider region where the cluster is running.
 	Region *string `json:"region,omitempty"`
-	// The configuration of the Kafka cluster. Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.
+	// The configuration of the Kafka cluster.  Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.
 	Config *CmkV2ClusterSpecConfigOneOf `json:"config,omitempty"`
 	// The bootstrap endpoint used by Kafka clients to connect to the cluster.
 	KafkaBootstrapEndpoint *string `json:"kafka_bootstrap_endpoint,omitempty"`

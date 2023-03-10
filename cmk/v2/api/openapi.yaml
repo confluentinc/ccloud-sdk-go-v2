@@ -22,6 +22,7 @@ tags:
     [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `Clusters` objects represent Apache Kafka Clusters on Confluent Cloud.
+
     The API allows you to list, create, read, update, and delete your Kafka clusters.
 
 
@@ -1831,6 +1832,7 @@ components:
     cmk.v2.Cluster:
       description: |-
         `Clusters` objects represent Apache Kafka Clusters on Confluent Cloud.
+
         The API allows you to list, create, read, update, and delete your Kafka clusters.
 
 
@@ -1938,6 +1940,19 @@ components:
       required:
       - kind
       type: object
+    cmk.v2.Enterprise:
+      description: |
+        The enterprise cluster type.
+      properties:
+        kind:
+          description: |
+            Enterprise cluster type.
+          enum:
+          - Enterprise
+          type: string
+      required:
+      - kind
+      type: object
     cmk.v2.Dedicated:
       description: |
         A dedicated cluster with its parameters.
@@ -1965,8 +1980,10 @@ components:
         zones:
           description: |
             The list of zones the cluster is in.
+
             On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)
              (e.g. use1-az3)
+
             On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)
              (e.g. us-central1-c).
           example:
@@ -1996,6 +2013,7 @@ components:
     cmk.v2.ClusterList:
       description: |-
         `Clusters` objects represent Apache Kafka Clusters on Confluent Cloud.
+
         The API allows you to list, create, read, update, and delete your Kafka clusters.
 
 
@@ -2101,12 +2119,14 @@ components:
         config:
           description: |
             The configuration of the Kafka cluster.
+
             Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.
           discriminator:
             mapping:
               Basic: '#/components/schemas/cmk.v2.Basic'
               Standard: '#/components/schemas/cmk.v2.Standard'
               Dedicated: '#/components/schemas/cmk.v2.Dedicated'
+              Enterprise: '#/components/schemas/cmk.v2.Enterprise'
             propertyName: kind
           example:
             kind: Basic
@@ -2114,6 +2134,7 @@ components:
           - $ref: '#/components/schemas/cmk.v2.Basic'
           - $ref: '#/components/schemas/cmk.v2.Standard'
           - $ref: '#/components/schemas/cmk.v2.Dedicated'
+          - $ref: '#/components/schemas/cmk.v2.Enterprise'
           x-one-of-name: CmkV2ClusterSpecConfigOneOf
         kafka_bootstrap_endpoint:
           description: The bootstrap endpoint used by Kafka clients to connect to
@@ -2397,12 +2418,14 @@ components:
         config:
           description: |
             The configuration of the Kafka cluster.
+
             Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.
           discriminator:
             mapping:
               Basic: '#/components/schemas/cmk.v2.Basic'
               Standard: '#/components/schemas/cmk.v2.Standard'
               Dedicated: '#/components/schemas/cmk.v2.Dedicated'
+              Enterprise: '#/components/schemas/cmk.v2.Enterprise'
             propertyName: kind
           example:
             kind: Basic
@@ -2410,6 +2433,7 @@ components:
           - $ref: '#/components/schemas/cmk.v2.Basic'
           - $ref: '#/components/schemas/cmk.v2.Standard'
           - $ref: '#/components/schemas/cmk.v2.Dedicated'
+          - $ref: '#/components/schemas/cmk.v2.Enterprise'
           x-one-of-name: CmkV2ClusterSpecUpdateConfigOneOf
         environment:
           allOf:
@@ -2422,6 +2446,7 @@ components:
     cmk.v2.ClusterUpdate:
       description: |-
         `Clusters` objects represent Apache Kafka Clusters on Confluent Cloud.
+
         The API allows you to list, create, read, update, and delete your Kafka clusters.
 
 
