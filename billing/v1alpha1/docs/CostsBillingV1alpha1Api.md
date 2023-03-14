@@ -31,7 +31,7 @@ import (
 func main() {
     startDate := "2022-10-12" // string | Filter the results by exact match for start_date.
     endDate := "2022-10-15" // string | Filter the results by exact match for end_date.
-    pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10000)
+    pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 5000)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -59,7 +59,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **startDate** | **string** | Filter the results by exact match for start_date. | 
  **endDate** | **string** | Filter the results by exact match for end_date. | 
- **pageSize** | **int32** | A pagination size for collection requests. | [default to 10000]
+ **pageSize** | **int32** | A pagination size for collection requests. | [default to 5000]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 
 ### Return type

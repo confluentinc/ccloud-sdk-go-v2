@@ -62,7 +62,7 @@ paths:
         name: page_size
         required: false
         schema:
-          default: 10000
+          default: 5000
           maximum: 10000
           type: integer
           x-max-page-items: 500
