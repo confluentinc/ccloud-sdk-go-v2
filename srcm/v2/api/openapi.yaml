@@ -16,26 +16,26 @@ servers:
   url: https://api.confluent.cloud
 tags:
 - description: |-
-    [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `Region` objects represent cloud provider regions available when placing Schema Registry clusters.
     The API allows you to list Schema Registry regions.
 
 
-    Related guide: [Confluent Cloud Schema Registry Regions](https://docs.confluent.io/cloud/current/srcm/packages.html#srcm-regions).
+    Related guide: [Confluent Cloud Schema Registry Regions](https://docs.confluent.io/cloud/current/stream-governance/clusters-regions-api.html#schema-registry-regions).
 
     ## The Regions Model
     <SchemaDefinition schemaRef="#/components/schemas/srcm.v2.Region" />
   name: Regions (srcm/v2)
 - description: |-
-    [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `Clusters` objects represent Schema Registry Clusters on Confluent Cloud.
 
     The API allows you to list, create, read, and delete your Schema Registry clusters.
 
 
-    Related guide: [Confluent Cloud Schema Registry Cluster APIs](https://docs.confluent.io/cloud/current/srcm/clusters-regions-api.html).
+    Related guide: [Confluent Cloud Schema Registry Cluster APIs](https://docs.confluent.io/cloud/current/stream-governance/clusters-regions-api.html#schema-registry-cluster-management).
 
     ## The Clusters Model
     <SchemaDefinition schemaRef="#/components/schemas/srcm.v2.Cluster" />
@@ -44,7 +44,7 @@ paths:
   /srcm/v2/regions:
     get:
       description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all regions.
       operationId: listSrcmV2Regions
@@ -311,7 +311,7 @@ paths:
   /srcm/v2/regions/{id}:
     get:
       description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a region.
       operationId: getSrcmV2Region
@@ -568,7 +568,7 @@ paths:
   /srcm/v2/clusters:
     get:
       description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all clusters.
       operationId: listSrcmV2Clusters
@@ -832,7 +832,7 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create a cluster.
       operationId: createSrcmV2Cluster
@@ -1189,7 +1189,7 @@ paths:
   /srcm/v2/clusters/{id}:
     delete:
       description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete a cluster.
       operationId: deleteSrcmV2Cluster
@@ -1435,7 +1435,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a cluster.
       operationId: getSrcmV2Cluster
@@ -1715,7 +1715,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update a cluster.
 
@@ -2252,7 +2252,7 @@ components:
         The API allows you to list Schema Registry regions.
 
 
-        Related guide: [Confluent Cloud Schema Registry Regions](https://docs.confluent.io/cloud/current/srcm/packages.html#srcm-regions).
+        Related guide: [Confluent Cloud Schema Registry Regions](https://docs.confluent.io/cloud/current/stream-governance/clusters-regions-api.html#schema-registry-regions).
 
         ## The Regions Model
         <SchemaDefinition schemaRef="#/components/schemas/srcm.v2.Region" />
@@ -2298,7 +2298,7 @@ components:
         The API allows you to list, create, read, and delete your Schema Registry clusters.
 
 
-        Related guide: [Confluent Cloud Schema Registry Cluster APIs](https://docs.confluent.io/cloud/current/srcm/clusters-regions-api.html).
+        Related guide: [Confluent Cloud Schema Registry Cluster APIs](https://docs.confluent.io/cloud/current/stream-governance/clusters-regions-api.html#schema-registry-cluster-management).
 
         ## The Clusters Model
         <SchemaDefinition schemaRef="#/components/schemas/srcm.v2.Cluster" />
@@ -2376,7 +2376,7 @@ components:
         The API allows you to list Schema Registry regions.
 
 
-        Related guide: [Confluent Cloud Schema Registry Regions](https://docs.confluent.io/cloud/current/srcm/packages.html#srcm-regions).
+        Related guide: [Confluent Cloud Schema Registry Regions](https://docs.confluent.io/cloud/current/stream-governance/clusters-regions-api.html#schema-registry-regions).
 
         ## The Regions Model
         <SchemaDefinition schemaRef="#/components/schemas/srcm.v2.Region" />
@@ -2483,7 +2483,7 @@ components:
         The API allows you to list, create, read, and delete your Schema Registry clusters.
 
 
-        Related guide: [Confluent Cloud Schema Registry Cluster APIs](https://docs.confluent.io/cloud/current/srcm/clusters-regions-api.html).
+        Related guide: [Confluent Cloud Schema Registry Cluster APIs](https://docs.confluent.io/cloud/current/stream-governance/clusters-regions-api.html#schema-registry-cluster-management).
 
         ## The Clusters Model
         <SchemaDefinition schemaRef="#/components/schemas/srcm.v2.Cluster" />
@@ -2800,7 +2800,7 @@ components:
         The API allows you to list, create, read, and delete your Schema Registry clusters.
 
 
-        Related guide: [Confluent Cloud Schema Registry Cluster APIs](https://docs.confluent.io/cloud/current/srcm/clusters-regions-api.html).
+        Related guide: [Confluent Cloud Schema Registry Cluster APIs](https://docs.confluent.io/cloud/current/stream-governance/clusters-regions-api.html#schema-registry-cluster-management).
 
         ## The Clusters Model
         <SchemaDefinition schemaRef="#/components/schemas/srcm.v2.Cluster" />
