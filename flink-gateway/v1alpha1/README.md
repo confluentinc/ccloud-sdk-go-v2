@@ -92,7 +92,6 @@ Class | Method | HTTP request | Description
  - [MultipleSearchFilter](docs/MultipleSearchFilter.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [SqlV1alpha1ErrorDetails](docs/SqlV1alpha1ErrorDetails.md)
- - [SqlV1alpha1Property](docs/SqlV1alpha1Property.md)
  - [SqlV1alpha1Statement](docs/SqlV1alpha1Statement.md)
  - [SqlV1alpha1StatementList](docs/SqlV1alpha1StatementList.md)
  - [SqlV1alpha1StatementSpec](docs/SqlV1alpha1StatementSpec.md)

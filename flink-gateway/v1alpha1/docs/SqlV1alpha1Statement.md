@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ApiVersion** | Pointer to **string** | APIVersion defines the schema version of this representation of a resource. | [optional] 
-**Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] 
+**ApiVersion** | Pointer to **string** | APIVersion defines the schema version of this representation of a resource. | [optional] [readonly] 
+**Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
 **Spec** | Pointer to [**SqlV1alpha1StatementSpec**](SqlV1alpha1StatementSpec.md) |  | [optional] 
 **Status** | Pointer to [**SqlV1alpha1StatementStatus**](SqlV1alpha1StatementStatus.md) |  | [optional] 

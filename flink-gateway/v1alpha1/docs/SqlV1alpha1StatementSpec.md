@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **StatementName** | Pointer to **string** | The name of the resource, unique within this environment. | [optional] 
 **Statement** | Pointer to **string** | The raw SQL text statmement. | [optional] 
-**Properties** | Pointer to [**[]SqlV1alpha1Property**](SqlV1alpha1Property.md) | Request/client properties. | [optional] 
+**Properties** | Pointer to **map[string]string** | A map (key-value pairs) of statement properties. | [optional] 
 **ComputePoolId** | Pointer to **string** | The id associated with the compute pool in context. | [optional] 
 
 ## Methods
@@ -80,20 +80,20 @@ HasStatement returns a boolean if a field has been set.
 
 ### GetProperties
 
-`func (o *SqlV1alpha1StatementSpec) GetProperties() []SqlV1alpha1Property`
+`func (o *SqlV1alpha1StatementSpec) GetProperties() map[string]string`
 
 GetProperties returns the Properties field if non-nil, zero value otherwise.
 
 ### GetPropertiesOk
 
-`func (o *SqlV1alpha1StatementSpec) GetPropertiesOk() (*[]SqlV1alpha1Property, bool)`
+`func (o *SqlV1alpha1StatementSpec) GetPropertiesOk() (*map[string]string, bool)`
 
 GetPropertiesOk returns a tuple with the Properties field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProperties
 
-`func (o *SqlV1alpha1StatementSpec) SetProperties(v []SqlV1alpha1Property)`
+`func (o *SqlV1alpha1StatementSpec) SetProperties(v map[string]string)`
 
 SetProperties sets Properties field to given value.
 

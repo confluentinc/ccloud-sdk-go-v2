@@ -167,9 +167,6 @@ func (a *StatementsSqlV1alpha1ApiService) CreateSqlV1alpha1StatementExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.sqlV1alpha1Statement == nil {
-		return localVarReturnValue, nil, reportError("sqlV1alpha1Statement is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

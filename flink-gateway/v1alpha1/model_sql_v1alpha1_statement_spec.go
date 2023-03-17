@@ -39,8 +39,8 @@ type SqlV1alpha1StatementSpec struct {
 	StatementName *string `json:"statement_name,omitempty"`
 	// The raw SQL text statmement.
 	Statement *string `json:"statement,omitempty"`
-	// Request/client properties.
-	Properties *[]SqlV1alpha1Property `json:"properties,omitempty"`
+	// A map (key-value pairs) of statement properties.
+	Properties *map[string]string `json:"properties,omitempty"`
 	// The id associated with the compute pool in context.
 	ComputePoolId *string `json:"compute_pool_id,omitempty"`
 }
@@ -127,9 +127,9 @@ func (o *SqlV1alpha1StatementSpec) SetStatement(v string) {
 }
 
 // GetProperties returns the Properties field value if set, zero value otherwise.
-func (o *SqlV1alpha1StatementSpec) GetProperties() []SqlV1alpha1Property {
+func (o *SqlV1alpha1StatementSpec) GetProperties() map[string]string {
 	if o == nil || o.Properties == nil {
-		var ret []SqlV1alpha1Property
+		var ret map[string]string
 		return ret
 	}
 	return *o.Properties
@@ -137,7 +137,7 @@ func (o *SqlV1alpha1StatementSpec) GetProperties() []SqlV1alpha1Property {
 
 // GetPropertiesOk returns a tuple with the Properties field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SqlV1alpha1StatementSpec) GetPropertiesOk() (*[]SqlV1alpha1Property, bool) {
+func (o *SqlV1alpha1StatementSpec) GetPropertiesOk() (*map[string]string, bool) {
 	if o == nil || o.Properties == nil {
 		return nil, false
 	}
@@ -153,8 +153,8 @@ func (o *SqlV1alpha1StatementSpec) HasProperties() bool {
 	return false
 }
 
-// SetProperties gets a reference to the given []SqlV1alpha1Property and assigns it to the Properties field.
-func (o *SqlV1alpha1StatementSpec) SetProperties(v []SqlV1alpha1Property) {
+// SetProperties gets a reference to the given map[string]string and assigns it to the Properties field.
+func (o *SqlV1alpha1StatementSpec) SetProperties(v map[string]string) {
 	o.Properties = &v
 }
 

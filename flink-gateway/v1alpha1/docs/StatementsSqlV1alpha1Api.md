@@ -33,7 +33,7 @@ import (
 
 func main() {
     environmentId := "environmentId_example" // string | The unique identifier for the environment.
-    sqlV1alpha1Statement := *openapiclient.NewSqlV1alpha1Statement() // SqlV1alpha1Statement | 
+    sqlV1alpha1Statement := *openapiclient.NewSqlV1alpha1Statement() // SqlV1alpha1Statement |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)

@@ -308,8 +308,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/sql.v1alpha1.Statement'
-        required: true
+              allOf:
+              - $ref: '#/components/schemas/sql.v1alpha1.Statement'
+              - properties:
+                  spec:
+                    required:
+                    - compute_pool_id
+                    - statement
+                    - statement_name
+                    type: object
+                required:
+                - spec
+                type: object
       responses:
         "201":
           content:
@@ -509,13 +519,13 @@ paths:
             --url https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/%7Benvironment_id%7D/statements \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"api_version":"sql/v1alpha1","kind":"Statement","metadata":{"self":"https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/env-00000/statements/s-12345"},"spec":{"statement_name":"sql123","statement":"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;","properties":[{"key":"key1","value":"value1"}],"compute_pool_id":"fcp-00000"},"status":{"phase":"RUNNING","detail":"COMPLETED: SQL statement is completed"}}'
+            --data '{"spec":{"statement_name":"sql123","statement":"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;","properties":{"key1":"value1","key2":"value2"},"compute_pool_id":"fcp-00000"}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"api_version\":\"sql/v1alpha1\",\"kind\":\"Statement\",\"metadata\":{\"self\":\"https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/env-00000/statements/s-12345\"},\"spec\":{\"statement_name\":\"sql123\",\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":[{\"key\":\"key1\",\"value\":\"value1\"}],\"compute_pool_id\":\"fcp-00000\"},\"status\":{\"phase\":\"RUNNING\",\"detail\":\"COMPLETED: SQL statement is completed\"}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"statement_name\":\"sql123\",\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\"}}");
           Request request = new Request.Builder()
             .url("https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/%7Benvironment_id%7D/statements")
             .post(body)
@@ -527,25 +537,22 @@ paths:
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/%7Benvironment_id%7D/statements\"\
-          \n\n\tpayload := strings.NewReader(\"{\\\"api_version\\\":\\\"sql/v1alpha1\\\
-          \",\\\"kind\\\":\\\"Statement\\\",\\\"metadata\\\":{\\\"self\\\":\\\"https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/env-00000/statements/s-12345\\\
-          \"},\\\"spec\\\":{\\\"statement_name\\\":\\\"sql123\\\",\\\"statement\\\"\
-          :\\\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\\\",\\\"properties\\\":[{\\\
-          \"key\\\":\\\"key1\\\",\\\"value\\\":\\\"value1\\\"}],\\\"compute_pool_id\\\
-          \":\\\"fcp-00000\\\"},\\\"status\\\":{\\\"phase\\\":\\\"RUNNING\\\",\\\"\
-          detail\\\":\\\"COMPLETED: SQL statement is completed\\\"}}\")\n\n\treq,\
-          \ _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
-          , \"application/json\")\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
-          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
-          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"statement_name\\\
+          \":\\\"sql123\\\",\\\"statement\\\":\\\"SELECT * FROM TABLE WHERE VALUE1\
+          \ = VALUE2;\\\",\\\"properties\\\":{\\\"key1\\\":\\\"value1\\\",\\\"key2\\\
+          \":\\\"value2\\\"},\\\"compute_pool_id\\\":\\\"fcp-00000\\\"}}\")\n\n\t\
+          req, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
 
-          payload = "{\"api_version\":\"sql/v1alpha1\",\"kind\":\"Statement\",\"metadata\":{\"self\":\"https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/env-00000/statements/s-12345\"},\"spec\":{\"statement_name\":\"sql123\",\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":[{\"key\":\"key1\",\"value\":\"value1\"}],\"compute_pool_id\":\"fcp-00000\"},\"status\":{\"phase\":\"RUNNING\",\"detail\":\"COMPLETED: SQL statement is completed\"}}"
+          payload = "{\"spec\":{\"statement_name\":\"sql123\",\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\"}}"
 
           headers = {
               'content-type': "application/json",
@@ -587,18 +594,12 @@ paths:
           });
 
           req.write(JSON.stringify({
-            api_version: 'sql/v1alpha1',
-            kind: 'Statement',
-            metadata: {
-              self: 'https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/env-00000/statements/s-12345'
-            },
             spec: {
               statement_name: 'sql123',
               statement: 'SELECT * FROM TABLE WHERE VALUE1 = VALUE2;',
-              properties: [{key: 'key1', value: 'value1'}],
+              properties: {key1: 'value1', key2: 'value2'},
               compute_pool_id: 'fcp-00000'
-            },
-            status: {phase: 'RUNNING', detail: 'COMPLETED: SQL statement is completed'}
+            }
           }));
           req.end();
       - lang: C
@@ -613,7 +614,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"api_version\":\"sql/v1alpha1\",\"kind\":\"Statement\",\"metadata\":{\"self\":\"https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/env-00000/statements/s-12345\"},\"spec\":{\"statement_name\":\"sql123\",\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":[{\"key\":\"key1\",\"value\":\"value1\"}],\"compute_pool_id\":\"fcp-00000\"},\"status\":{\"phase\":\"RUNNING\",\"detail\":\"COMPLETED: SQL statement is completed\"}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"statement_name\":\"sql123\",\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\"}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -622,7 +623,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"api_version\":\"sql/v1alpha1\",\"kind\":\"Statement\",\"metadata\":{\"self\":\"https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/env-00000/statements/s-12345\"},\"spec\":{\"statement_name\":\"sql123\",\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":[{\"key\":\"key1\",\"value\":\"value1\"}],\"compute_pool_id\":\"fcp-00000\"},\"status\":{\"phase\":\"RUNNING\",\"detail\":\"COMPLETED: SQL statement is completed\"}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"statement_name\":\"sql123\",\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: SQL API v1alpha1
   /sql/v1alpha1/environments/{environment_id}/statements/{statement_name}:
@@ -1330,18 +1331,17 @@ components:
           enum:
           - sql/v1alpha1
           example: sql/v1alpha1
+          readOnly: true
           type: string
         kind:
           description: Kind defines the object this REST resource represents.
           enum:
           - Statement
+          readOnly: true
           type: string
         metadata:
           allOf:
           - $ref: '#/components/schemas/ObjectMeta'
-          - properties:
-              self:
-                example: https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/env-00000/statements/s-12345
         spec:
           $ref: '#/components/schemas/sql.v1alpha1.StatementSpec'
         status:
@@ -1359,6 +1359,7 @@ components:
             DELETING: SQL statement deletion is in progress;
             FAILED: SQL statement execution has failed;
           example: RUNNING
+          readOnly: true
           type: string
           x-extensible-enum:
           - PENDING
@@ -1369,7 +1370,9 @@ components:
         detail:
           description: Description of a SQL statement phase.
           example: 'COMPLETED: SQL statement is completed'
+          readOnly: true
           type: string
+      readOnly: true
       required:
       - phase
       type: object
@@ -1426,6 +1429,8 @@ components:
                   - statement_name
                   type: object
               required:
+              - api_version
+              - kind
               - metadata
               - spec
               - status
@@ -1452,11 +1457,13 @@ components:
           type: string
           x-immutable: true
         properties:
-          description: Request/client properties.
-          items:
-            $ref: '#/components/schemas/sql.v1alpha1.Property'
-          type: array
-          uniqueItems: true
+          additionalProperties:
+            type: string
+          description: A map (key-value pairs) of statement properties.
+          example:
+            key1: value1
+            key2: value2
+          type: object
         compute_pool_id:
           description: The id associated with the compute pool in context.
           example: fcp-00000
@@ -1473,22 +1480,20 @@ components:
             and other particulars necessary to locate the resource at a point in time
           example: https://api.confluent.cloud/v2/kafka-clusters/lkc-f3a90de
           format: uri
-          readOnly: true
           type: string
         created_at:
           description: The date and time at which this object was created. It is represented
             in RFC3339 format and is in UTC.
           example: 1996-03-19T01:02:03-04:05
           format: date-time
-          readOnly: true
           type: string
         updated_at:
           description: The date and time at which this object was last updated. It
             is represented in RFC3339 format and is in UTC.
           example: 2023-03-31T00:00:00Z
           format: date-time
-          readOnly: true
           type: string
+      readOnly: true
       required:
       - self
     ListMeta:
@@ -1503,18 +1508,6 @@ components:
         next:
           description: An opaque token that can be sent to get the next batch of results
           example: next_token
-          type: string
-      type: object
-    sql.v1alpha1.Property:
-      description: Key/value pair.
-      properties:
-        key:
-          description: Property key.
-          example: key1
-          type: string
-        value:
-          description: Property value.
-          example: value1
           type: string
       type: object
     Error:
