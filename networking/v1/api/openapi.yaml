@@ -385,6 +385,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: List of Networks
       tags:
       - Networks (networking/v1)
@@ -729,6 +730,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Create a Network
       tags:
       - Networks (networking/v1)
@@ -1021,6 +1023,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Delete a Network
       tags:
       - Networks (networking/v1)
@@ -1297,6 +1300,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Read a Network
       tags:
       - Networks (networking/v1)
@@ -1627,6 +1631,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Update a Network
       tags:
       - Networks (networking/v1)
@@ -1973,6 +1978,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: List of Peerings
       tags:
       - Peerings (networking/v1)
@@ -2323,6 +2329,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Create a Peering
       tags:
       - Peerings (networking/v1)
@@ -2607,6 +2614,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Delete a Peering
       tags:
       - Peerings (networking/v1)
@@ -2887,6 +2895,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Read a Peering
       tags:
       - Peerings (networking/v1)
@@ -3221,6 +3230,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Update a Peering
       tags:
       - Peerings (networking/v1)
@@ -3559,6 +3569,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: List of Transit Gateway Attachments
       tags:
       - Transit Gateway Attachments (networking/v1)
@@ -3909,6 +3920,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Create a Transit Gateway Attachment
       tags:
       - Transit Gateway Attachments (networking/v1)
@@ -4194,6 +4206,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Delete a Transit Gateway Attachment
       tags:
       - Transit Gateway Attachments (networking/v1)
@@ -4474,6 +4487,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Read a Transit Gateway Attachment
       tags:
       - Transit Gateway Attachments (networking/v1)
@@ -4808,6 +4822,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Update a Transit Gateway Attachment
       tags:
       - Transit Gateway Attachments (networking/v1)
@@ -5147,6 +5162,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: List of Private Link Accesses
       tags:
       - Private Link Accesses (networking/v1)
@@ -5497,6 +5513,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Create a Private Link Access
       tags:
       - Private Link Accesses (networking/v1)
@@ -5774,6 +5791,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Delete a Private Link Access
       tags:
       - Private Link Accesses (networking/v1)
@@ -6054,6 +6072,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Read a Private Link Access
       tags:
       - Private Link Accesses (networking/v1)
@@ -6388,6 +6407,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Update a Private Link Access
       tags:
       - Private Link Accesses (networking/v1)
@@ -6718,6 +6738,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: List of Network Link Services
       tags:
       - Network Link Services (networking/v1)
@@ -7066,6 +7087,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Create a Network Link Service
       tags:
       - Network Link Services (networking/v1)
@@ -7344,6 +7366,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Delete a Network Link Service
       tags:
       - Network Link Services (networking/v1)
@@ -7623,6 +7646,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Read a Network Link Service
       tags:
       - Network Link Services (networking/v1)
@@ -7956,6 +7980,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Update a Network Link Service
       tags:
       - Network Link Services (networking/v1)
@@ -8305,6 +8330,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: List of Network Link Endpoints
       tags:
       - Network Link Endpoints (networking/v1)
@@ -8663,6 +8689,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Create a Network Link Endpoint
       tags:
       - Network Link Endpoints (networking/v1)
@@ -8941,6 +8968,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Delete a Network Link Endpoint
       tags:
       - Network Link Endpoints (networking/v1)
@@ -9226,6 +9254,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Read a Network Link Endpoint
       tags:
       - Network Link Endpoints (networking/v1)
@@ -9565,6 +9594,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Update a Network Link Endpoint
       tags:
       - Network Link Endpoints (networking/v1)
@@ -9882,6 +9912,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: List of Network Link Service Associations
       tags:
       - Network Link Service Associations (networking/v1)
@@ -10155,6 +10186,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Read a Network Link Service Association
       tags:
       - Network Link Service Associations (networking/v1)
@@ -10734,7 +10766,11 @@ components:
 
               FAILED: attachment is in a failed state;
 
-              DEPROVISIONING: attachment deprovisioning is in progress.
+              DEPROVISIONING: attachment deprovisioning is in progress;
+
+              DISCONNECTED: attachment was manually deleted directly in the cloud provider by the customer;
+
+              ERROR: invalid customer input during attachment creation.
           example: READY
           readOnly: true
           type: string
@@ -10744,6 +10780,8 @@ components:
           - PENDING_ACCEPT
           - FAILED
           - DEPROVISIONING
+          - DISCONNECTED
+          - ERROR
         error_code:
           description: Error code if TGW attachment is in a failed state. May be used
             for programmatic error checking.
@@ -10991,13 +11029,24 @@ components:
         phase:
           description: |
             The lifecycle phase of the network link endpoint:
+
               PROVISIONING: network link endpoint provisioning is in progress;
+
               PENDING_ACCEPT: network link endpoint request is pending acceptance by the the owner of the target;
+
               READY:  network link endpoint is ready;
+
               FAILED: network link endpoint is in a failed state;
+
               DEPROVISIONING: network link endpoint deprovisioning is in progress;
+
               EXPIRED: network link endpoint request is expired, can only be deleted;
-              DISCONNECTED: network link is in a disconnected state, target owner has removed the permissions;
+
+              DISCONNECTED: network link endpoint is in a disconnected state, target owner has removed the permissions;
+
+              DISCONNECTING: network link endpoint disconnection is in progress;
+
+              INACTIVE: network link endpoint is created, but not active since there are no clusters in the network;
           example: READY
           readOnly: true
           type: string
@@ -11009,6 +11058,8 @@ components:
           - DEPROVISIONING
           - EXPIRED
           - DISCONNECTED
+          - DISCONNECTING
+          - INACTIVE
         error_code:
           description: Error code if network link is in a failed state. May be used
             for programmatic error checking.
@@ -11079,13 +11130,24 @@ components:
         phase:
           description: |
             The lifecycle phase of the network link endpoint:
+
               PROVISIONING: network link endpoint provisioning is in progress;
+
               PENDING_ACCEPT: network link endpoint request is pending acceptance by the the owner of the target;
+
               READY:  network link endpoint is ready;
+
               FAILED: network link endpoint is in a failed state;
+
               DEPROVISIONING: network link endpoint deprovisioning is in progress;
+
               EXPIRED: network link endpoint request is expired, can only be deleted;
-              DISCONNECTED: network link is in a disconnected state, target owner has removed the permissions;
+
+              DISCONNECTED: network link endpoint is in a disconnected state, target owner has removed the permissions;
+
+              DISCONNECTING: network link endpoint disconnection is in progress;
+
+              INACTIVE: network link endpoint is created, but not active since there are no clusters in the network;
           example: READY
           readOnly: true
           type: string
@@ -11097,6 +11159,8 @@ components:
           - DEPROVISIONING
           - EXPIRED
           - DISCONNECTED
+          - DISCONNECTING
+          - INACTIVE
         error_code:
           description: Error code if network link is in a failed state. May be used
             for programmatic error checking.
@@ -11711,8 +11775,6 @@ components:
 
             When resolution is PRIVATE, clusters in this network only require private DNS
              to resolve cluster endpoints.
-
-            Note - The value PRIVATE is only available to AWS networks with PRIVATELINK connection type.
           x-immutable: true
         reserved_cidr:
           description: |
@@ -12985,3 +13047,11 @@ components:
         Key ID as the username and API Key Secret as the password.
       scheme: basic
       type: http
+    confluent-sts-access-token:
+      description: Authenticate with Confluent API using this credentials (JSON Web
+        Tokens) following OAuth 2.0.
+      flows:
+        clientCredentials:
+          scopes: {}
+          tokenUrl: https://api.confluent.cloud/sts/v1/oauth2/token
+      type: oauth2

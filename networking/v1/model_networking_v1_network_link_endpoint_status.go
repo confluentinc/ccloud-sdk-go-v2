@@ -36,7 +36,7 @@ import (
 
 // NetworkingV1NetworkLinkEndpointStatus The status of the Network Link Endpoint
 type NetworkingV1NetworkLinkEndpointStatus struct {
-	// The lifecycle phase of the network link endpoint:   PROVISIONING: network link endpoint provisioning is in progress;   PENDING_ACCEPT: network link endpoint request is pending acceptance by the the owner of the target;   READY:  network link endpoint is ready;   FAILED: network link endpoint is in a failed state;   DEPROVISIONING: network link endpoint deprovisioning is in progress;   EXPIRED: network link endpoint request is expired, can only be deleted;   DISCONNECTED: network link is in a disconnected state, target owner has removed the permissions;
+	// The lifecycle phase of the network link endpoint:    PROVISIONING: network link endpoint provisioning is in progress;    PENDING_ACCEPT: network link endpoint request is pending acceptance by the the owner of the target;    READY:  network link endpoint is ready;    FAILED: network link endpoint is in a failed state;    DEPROVISIONING: network link endpoint deprovisioning is in progress;    EXPIRED: network link endpoint request is expired, can only be deleted;    DISCONNECTED: network link endpoint is in a disconnected state, target owner has removed the permissions;    DISCONNECTING: network link endpoint disconnection is in progress;    INACTIVE: network link endpoint is created, but not active since there are no clusters in the network;
 	Phase string `json:"phase"`
 	// Error code if network link is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`

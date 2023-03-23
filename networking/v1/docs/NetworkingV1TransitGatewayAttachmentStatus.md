@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Phase** | **string** | The lifecycle phase of the TGW attachment:    PROVISIONING: attachment provisioning is in progress;    PENDING_ACCEPT: attachment request is pending acceptance by the customer;    READY:  attachment is ready;    FAILED: attachment is in a failed state;    DEPROVISIONING: attachment deprovisioning is in progress.  | [readonly] 
+**Phase** | **string** | The lifecycle phase of the TGW attachment:    PROVISIONING: attachment provisioning is in progress;    PENDING_ACCEPT: attachment request is pending acceptance by the customer;    READY:  attachment is ready;    FAILED: attachment is in a failed state;    DEPROVISIONING: attachment deprovisioning is in progress;    DISCONNECTED: attachment was manually deleted directly in the cloud provider by the customer;    ERROR: invalid customer input during attachment creation.  | [readonly] 
 **ErrorCode** | Pointer to **string** | Error code if TGW attachment is in a failed state. May be used for programmatic error checking. | [optional] [readonly] 
 **ErrorMessage** | Pointer to **string** | Displayable error message if TGW attachment is in a failed state | [optional] [readonly] 
 **Cloud** | Pointer to [**NetworkingV1TransitGatewayAttachmentStatusCloudOneOf**](NetworkingV1TransitGatewayAttachmentStatusCloudOneOf.md) | The cloud-specific TGW attachment details. | [optional] [readonly] 
