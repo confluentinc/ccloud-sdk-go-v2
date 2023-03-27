@@ -599,6 +599,7 @@ components:
           - CONNECT_CAPACITY
           - CONNECT_NUM_TASKS
           - CONNECT_THROUGHPUT
+          - CONNECT_NUM_RECORDS
           - SUPPORT
           - CLUSTER_LINKING_PER_LINK
           - CLUSTER_LINKING_WRITE
