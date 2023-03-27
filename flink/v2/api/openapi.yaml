@@ -22,6 +22,16 @@ tags:
 - description: |-
     [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
+    An IdentityPoolEnvRegionBinding represents the binding of identity pools to all Flink
+    compute pools in an environment, cloud and region. This is needed for authentication purposes.
+
+
+    ## The Identity Pool Env Region Bindings Model
+    <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.IdentityPoolEnvRegionBinding" />
+  name: Identity Pool Env Region Bindings (fcpm/v2)
+- description: |-
+    [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
     A Compute Pool represents a set of compute resources that is used to run your Queries.
     The resources (CPUs, memory,…) provided by a Compute Pool are shared between all Queries that use it.
 
@@ -40,6 +50,882 @@ tags:
     <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.Region" />
   name: Regions (fcpm/v2)
 paths:
+  /fcpm/v2/identity-pool-env-region-bindings:
+    get:
+      description: |-
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
+        Retrieve a sorted, filtered, paginated list of all identity pool env region bindings.
+      operationId: listFcpmV2IdentityPoolEnvRegionBindings
+      parameters:
+      - description: Filter the results by exact match for region.
+        example: us-west-1
+        explode: true
+        in: query
+        name: region
+        required: true
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: Filter the results by exact match for environment.
+        example: env-00000
+        explode: true
+        in: query
+        name: environment
+        required: true
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: Filter the results by exact match for identity_pool.
+        explode: true
+        in: query
+        name: identity_pool
+        required: true
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: A pagination size for collection requests.
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 10
+          maximum: 100
+          type: integer
+          x-max-page-items: 500
+        style: form
+      - description: An opaque pagination token for collection requests.
+        explode: true
+        in: query
+        name: page_token
+        required: false
+        schema:
+          maxLength: 255
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/fcpm.v2.IdentityPoolEnvRegionBindingList'
+                - properties:
+                    data:
+                      items:
+                        properties:
+                          environment:
+                            example:
+                              id: env-00000
+                              related: https://api.confluent.cloud/org/v2/environments/env-00000
+                              resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
+                      type: array
+                  type: object
+          description: Identity Pool Env Region Binding.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - api-key: []
+      summary: List of Identity Pool Env Region Bindings
+      tags:
+      - Identity Pool Env Region Bindings (fcpm/v2)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings?region=us-west-1&environment=env-00000&identity_pool=SOME_STRING_VALUE' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings?region=us-west-1&environment=env-00000&identity_pool=SOME_STRING_VALUE")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings?region=us-west-1&environment=env-00000&identity_pool=SOME_STRING_VALUE\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/fcpm/v2/identity-pool-env-region-bindings?region=us-west-1&environment=env-00000&identity_pool=SOME_STRING_VALUE", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/fcpm/v2/identity-pool-env-region-bindings?region=us-west-1&environment=env-00000&identity_pool=SOME_STRING_VALUE",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings?region=us-west-1&environment=env-00000&identity_pool=SOME_STRING_VALUE");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings?region=us-west-1&environment=env-00000&identity_pool=SOME_STRING_VALUE");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+    post:
+      description: |-
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
+        Make a request to create an identity pool env region binding.
+      operationId: createFcpmV2IdentityPoolEnvRegionBinding
+      parameters:
+      - description: Scope the operation to the given environment.
+        example: env-00000
+        explode: true
+        in: query
+        name: environment
+        required: true
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: Scope the operation to the given identity_pool.
+        explode: true
+        in: query
+        name: identity_pool
+        required: true
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/fcpm.v2.IdentityPoolEnvRegionBinding'
+              - required:
+                - environment
+                - identity_pool
+                - region
+                type: object
+              - properties:
+                  environment:
+                    example:
+                      id: env-00000
+                type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/fcpm.v2.IdentityPoolEnvRegionBinding'
+                - required:
+                  - environment
+                  - identity_pool
+                  - region
+                  type: object
+                - properties:
+                    environment:
+                      example:
+                        id: env-00000
+                        related: https://api.confluent.cloud/org/v2/environments/env-00000
+                        resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
+                  type: object
+          description: An Identity Pool Env Region Binding was created.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: IdentityPoolEnvRegionBinding resource uri
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings/{id}
+                format: uri
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "409"
+                  code: resource_already_exists
+                  title: Resource Already exists
+                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                    exists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request is in conflict with the current server state
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Resource URI of conflicting resource
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/{object}/{id}
+                format: uri
+                type: string
+              style: simple
+          x-summary: Conflict
+        "422":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "422"
+                  code: invalid_configuration
+                  id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  title: Validation Failed
+                  detail: 'The property ''/cluster/storage_size'' of type string did
+                    not match the following type: integer'
+                  source:
+                    pointer: /cluster/storage_size
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Validation Failed
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - api-key: []
+      summary: Create an Identity Pool Env Region Binding
+      tags:
+      - Identity Pool Env Region Bindings (fcpm/v2)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url 'https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings?environment=env-00000&identity_pool=SOME_STRING_VALUE' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"region":"us-west-1","environment":{"id":"env-00000"},"identity_pool":{"id":"string","environment":"string"}}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"region\":\"us-west-1\",\"environment\":{\"id\":\"env-00000\"},\"identity_pool\":{\"id\":\"string\",\"environment\":\"string\"}}");
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings?environment=env-00000&identity_pool=SOME_STRING_VALUE")
+            .post(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings?environment=env-00000&identity_pool=SOME_STRING_VALUE\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"region\\\":\\\"us-west-1\\\",\\\
+          \"environment\\\":{\\\"id\\\":\\\"env-00000\\\"},\\\"identity_pool\\\":{\\\
+          \"id\\\":\\\"string\\\",\\\"environment\\\":\\\"string\\\"}}\")\n\n\treq,\
+          \ _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
+          , \"application/json\")\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
+          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          payload = "{\"region\":\"us-west-1\",\"environment\":{\"id\":\"env-00000\"},\"identity_pool\":{\"id\":\"string\",\"environment\":\"string\"}}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("POST", "/fcpm/v2/identity-pool-env-region-bindings?environment=env-00000&identity_pool=SOME_STRING_VALUE", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/fcpm/v2/identity-pool-env-region-bindings?environment=env-00000&identity_pool=SOME_STRING_VALUE",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            region: 'us-west-1',
+            environment: {id: 'env-00000'},
+            identity_pool: {id: 'string', environment: 'string'}
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings?environment=env-00000&identity_pool=SOME_STRING_VALUE");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"region\":\"us-west-1\",\"environment\":{\"id\":\"env-00000\"},\"identity_pool\":{\"id\":\"string\",\"environment\":\"string\"}}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings?environment=env-00000&identity_pool=SOME_STRING_VALUE");
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"region\":\"us-west-1\",\"environment\":{\"id\":\"env-00000\"},\"identity_pool\":{\"id\":\"string\",\"environment\":\"string\"}}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+  /fcpm/v2/identity-pool-env-region-bindings/{id}:
+    delete:
+      description: |-
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
+        Make a request to delete an identity pool env region binding.
+      operationId: deleteFcpmV2IdentityPoolEnvRegionBinding
+      parameters:
+      - description: Scope the operation to the given environment.
+        example: env-00000
+        explode: true
+        in: query
+        name: environment
+        required: true
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: Scope the operation to the given identity_pool.
+        explode: true
+        in: query
+        name: identity_pool
+        required: true
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: The unique identifier for the identity pool env region binding.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: An Identity Pool Env Region Binding is being deleted.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - api-key: []
+      summary: Delete an Identity Pool Env Region Binding
+      tags:
+      - Identity Pool Env Region Bindings (fcpm/v2)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request DELETE \
+            --url 'https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings/%7Bid%7D?environment=env-00000&identity_pool=SOME_STRING_VALUE' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings/%7Bid%7D?environment=env-00000&identity_pool=SOME_STRING_VALUE")
+            .delete(null)
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings/%7Bid%7D?environment=env-00000&identity_pool=SOME_STRING_VALUE\"\
+          \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("DELETE", "/fcpm/v2/identity-pool-env-region-bindings/%7Bid%7D?environment=env-00000&identity_pool=SOME_STRING_VALUE", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "DELETE",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/fcpm/v2/identity-pool-env-region-bindings/%7Bid%7D?environment=env-00000&identity_pool=SOME_STRING_VALUE",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings/%7Bid%7D?environment=env-00000&identity_pool=SOME_STRING_VALUE");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings/%7Bid%7D?environment=env-00000&identity_pool=SOME_STRING_VALUE");
+          var request = new RestRequest(Method.DELETE);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
   /fcpm/v2/compute-pools:
     get:
       description: |-
@@ -53,7 +939,7 @@ paths:
         explode: true
         in: query
         name: spec.region
-        required: true
+        required: false
         schema:
           $ref: '#/components/schemas/SearchFilter'
         style: form
@@ -340,7 +1226,6 @@ paths:
                     required:
                     - cloud
                     - config
-                    - current_csu
                     - display_name
                     - environment
                     - region
@@ -371,7 +1256,6 @@ paths:
                       required:
                       - cloud
                       - config
-                      - current_csu
                       - display_name
                       - environment
                       - region
@@ -974,7 +1858,6 @@ paths:
                       required:
                       - cloud
                       - config
-                      - current_csu
                       - display_name
                       - environment
                       - region
@@ -1267,7 +2150,6 @@ paths:
                       required:
                       - cloud
                       - config
-                      - current_csu
                       - display_name
                       - environment
                       - region
@@ -2022,6 +2904,72 @@ components:
             type: string
           style: simple
   schemas:
+    fcpm.v2.IdentityPoolEnvRegionBinding:
+      description: |-
+        An IdentityPoolEnvRegionBinding represents the binding of identity pools to all Flink
+        compute pools in an environment, cloud and region. This is needed for authentication purposes.
+
+
+        ## The Identity Pool Env Region Bindings Model
+        <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.IdentityPoolEnvRegionBinding" />
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - fcpm/v2
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - IdentityPoolEnvRegionBinding
+          readOnly: true
+          type: string
+        id:
+          description: ID is the "natural identifier" for an object within its scope/namespace;
+            it is normally unique across time but not space. That is, you can assume
+            that the ID will not be reclaimed and reused after an object is deleted
+            ("time"); however, it may collide with IDs for other object `kinds` or
+            objects of the same `kind` within a different scope/namespace ("space").
+          example: dlz-f3a90de
+          maxLength: 255
+          readOnly: true
+          type: string
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/ObjectMeta'
+          - properties:
+              self:
+                example: https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings/fiam-12345
+              resource_name:
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/identity_pool=pool-123/identity-pool-env-region-binding=fiam-12345
+        region:
+          description: Flink compute pools in the region provided will be able to
+            use this identity pool.
+          example: us-west-1
+          type: string
+          x-immutable: true
+        cloud:
+          description: The cloud service provider that hosts the region.
+          example: AWS
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - AWS
+          - GCP
+          - AZURE
+          x-immutable: true
+        environment:
+          allOf:
+          - $ref: '#/components/schemas/GlobalObjectReference'
+          description: The environment to which this belongs.
+        identity_pool:
+          allOf:
+          - $ref: '#/components/schemas/EnvScopedObjectReference'
+          description: The identity_pool to which this belongs.
+          x-immutable: true
+      type: object
     fcpm.v2.ComputePool:
       description: |-
         A Compute Pool represents a set of compute resources that is used to run your Queries.
@@ -2079,8 +3027,16 @@ components:
           - PROVISIONING
           - PROVISIONED
           - FAILED
+        current_csu:
+          description: The number of CSUs (Confluent Streaming Units) currently allocated
+            to this Flink compute pool.
+          example: 4
+          format: int32
+          readOnly: true
+          type: integer
       readOnly: true
       required:
+      - current_csu
       - phase
       type: object
     fcpm.v2.Region:
@@ -2162,6 +3118,62 @@ components:
     SearchFilter:
       description: Filter a collection by a string search
       type: string
+    fcpm.v2.IdentityPoolEnvRegionBindingList:
+      description: |-
+        An IdentityPoolEnvRegionBinding represents the binding of identity pools to all Flink
+        compute pools in an environment, cloud and region. This is needed for authentication purposes.
+
+
+        ## The Identity Pool Env Region Bindings Model
+        <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.IdentityPoolEnvRegionBinding" />
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - fcpm/v2
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - IdentityPoolEnvRegionBindingList
+          readOnly: true
+          type: string
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/ListMeta'
+          - properties:
+              first:
+                example: https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings
+              last:
+                example: https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings?page_token=bcAOehAY8F16YD84Z1wT
+              prev:
+                example: https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings?page_token=YIXRY97wWYmwzrax4dld
+              next:
+                example: https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings?page_token=UvmDWOB1iwfAIBPj6EYb
+        data:
+          description: A data property that contains an array of resource items. Each
+            entry in the array is a separate resource.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/fcpm.v2.IdentityPoolEnvRegionBinding'
+            - required:
+              - cloud
+              - environment
+              - id
+              - identity_pool
+              - metadata
+              - region
+              type: object
+          type: array
+          uniqueItems: true
+      required:
+      - api_version
+      - data
+      - kind
+      - metadata
+      type: object
     fcpm.v2.ComputePoolList:
       description: |-
         A Compute Pool represents a set of compute resources that is used to run your Queries.
@@ -2207,7 +3219,6 @@ components:
                   required:
                   - cloud
                   - config
-                  - current_csu
                   - display_name
                   - environment
                   - region
@@ -2251,19 +3262,11 @@ components:
           type: string
           x-immutable: true
         region:
-          description: The cloud service provider region that hosts the Flink compute
-            pool.
+          description: Flink compute pools in the region provided will be able to
+            use this identity pool
           example: us-west-1
           type: string
           x-immutable: true
-        current_csu:
-          description: The number of CSUs (Confluent Streaming Units) currently allocated
-            to this Flink compute pool.
-          example: 4
-          format: int32
-          readOnly: true
-          type: integer
-          x-immutable: false
         max_csu:
           description: |
             Maximum number of Confluent Streaming Units (CSUs) that the Flink compute pool should auto-scale to. If not
@@ -2286,7 +3289,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/GlobalObjectReference'
           description: The environment to which this belongs.
-          x-immutable: true
         network:
           allOf:
           - $ref: '#/components/schemas/EnvScopedObjectReference'
@@ -2576,14 +3578,6 @@ components:
     fcpm.v2.ComputePoolSpecUpdate:
       description: The desired state of the Compute Pool
       properties:
-        current_csu:
-          description: The number of CSUs (Confluent Streaming Units) currently allocated
-            to this Flink compute pool.
-          example: 4
-          format: int32
-          readOnly: true
-          type: integer
-          x-immutable: false
         max_csu:
           description: |
             Maximum number of Confluent Streaming Units (CSUs) that the Flink compute pool should auto-scale to. If not
@@ -2602,6 +3596,10 @@ components:
           oneOf:
           - $ref: '#/components/schemas/fcpm.v2.Standard'
           x-one-of-name: FcpmV2ComputePoolSpecUpdateConfigOneOf
+        environment:
+          allOf:
+          - $ref: '#/components/schemas/GlobalObjectReference'
+          description: The environment to which this belongs.
       type: object
       x-enable-id: true
       x-enable-listmeta: true

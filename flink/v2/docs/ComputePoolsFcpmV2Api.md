@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 
 ## ListFcpmV2ComputePools
 
-> FcpmV2ComputePoolList ListFcpmV2ComputePools(ctx).SpecRegion(specRegion).Environment(environment).SpecNetwork(specNetwork).PageSize(pageSize).PageToken(pageToken).Execute()
+> FcpmV2ComputePoolList ListFcpmV2ComputePools(ctx).Environment(environment).SpecRegion(specRegion).SpecNetwork(specNetwork).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Compute Pools
 
@@ -241,15 +241,15 @@ import (
 )
 
 func main() {
-    specRegion := "us-west-1" // string | Filter the results by exact match for spec.region.
     environment := "env-00000" // string | Filter the results by exact match for environment.
+    specRegion := "us-west-1" // string | Filter the results by exact match for spec.region. (optional)
     specNetwork := "n-00000" // string | Filter the results by exact match for spec.network. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ComputePoolsFcpmV2Api.ListFcpmV2ComputePools(context.Background()).SpecRegion(specRegion).Environment(environment).SpecNetwork(specNetwork).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.ComputePoolsFcpmV2Api.ListFcpmV2ComputePools(context.Background()).Environment(environment).SpecRegion(specRegion).SpecNetwork(specNetwork).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ComputePoolsFcpmV2Api.ListFcpmV2ComputePools``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -270,8 +270,8 @@ Other parameters are passed through a pointer to a apiListFcpmV2ComputePoolsRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **specRegion** | **string** | Filter the results by exact match for spec.region. | 
  **environment** | **string** | Filter the results by exact match for environment. | 
+ **specRegion** | **string** | Filter the results by exact match for spec.region. | 
  **specNetwork** | **string** | Filter the results by exact match for spec.network. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 

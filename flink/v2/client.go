@@ -66,6 +66,8 @@ type APIClient struct {
 
 	ComputePoolsFcpmV2Api ComputePoolsFcpmV2Api
 
+	IdentityPoolEnvRegionBindingsFcpmV2Api IdentityPoolEnvRegionBindingsFcpmV2Api
+
 	RegionsFcpmV2Api RegionsFcpmV2Api
 }
 
@@ -86,6 +88,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.ComputePoolsFcpmV2Api = (*ComputePoolsFcpmV2ApiService)(&c.common)
+	c.IdentityPoolEnvRegionBindingsFcpmV2Api = (*IdentityPoolEnvRegionBindingsFcpmV2ApiService)(&c.common)
 	c.RegionsFcpmV2Api = (*RegionsFcpmV2ApiService)(&c.common)
 
 	return c

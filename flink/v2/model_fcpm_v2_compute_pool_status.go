@@ -37,15 +37,18 @@ import (
 type FcpmV2ComputePoolStatus struct {
 	// Status of the Flink compute pool.
 	Phase string `json:"phase"`
+	// The number of CSUs (Confluent Streaming Units) currently allocated to this Flink compute pool.
+	CurrentCsu int32 `json:"current_csu"`
 }
 
 // NewFcpmV2ComputePoolStatus instantiates a new FcpmV2ComputePoolStatus object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFcpmV2ComputePoolStatus(phase string) *FcpmV2ComputePoolStatus {
+func NewFcpmV2ComputePoolStatus(phase string, currentCsu int32) *FcpmV2ComputePoolStatus {
 	this := FcpmV2ComputePoolStatus{}
 	this.Phase = phase
+	this.CurrentCsu = currentCsu
 	return &this
 }
 
@@ -70,7 +73,7 @@ func (o *FcpmV2ComputePoolStatus) GetPhase() string {
 // GetPhaseOk returns a tuple with the Phase field value
 // and a boolean to check if the value has been set.
 func (o *FcpmV2ComputePoolStatus) GetPhaseOk() (*string, bool) {
-	if o == nil {
+	if o == nil  {
 		return nil, false
 	}
 	return &o.Phase, true
@@ -81,45 +84,73 @@ func (o *FcpmV2ComputePoolStatus) SetPhase(v string) {
 	o.Phase = v
 }
 
+// GetCurrentCsu returns the CurrentCsu field value
+func (o *FcpmV2ComputePoolStatus) GetCurrentCsu() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.CurrentCsu
+}
+
+// GetCurrentCsuOk returns a tuple with the CurrentCsu field value
+// and a boolean to check if the value has been set.
+func (o *FcpmV2ComputePoolStatus) GetCurrentCsuOk() (*int32, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.CurrentCsu, true
+}
+
+// SetCurrentCsu sets field value
+func (o *FcpmV2ComputePoolStatus) SetCurrentCsu(v int32) {
+	o.CurrentCsu = v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *FcpmV2ComputePoolStatus) Redact() {
-	o.recurseRedact(&o.Phase)
+    o.recurseRedact(&o.Phase)
+    o.recurseRedact(&o.CurrentCsu)
 }
 
 func (o *FcpmV2ComputePoolStatus) recurseRedact(v interface{}) {
-	type redactor interface {
-		Redact()
-	}
-	if r, ok := v.(redactor); ok {
-		r.Redact()
-	} else {
-		val := reflect.ValueOf(v)
-		if val.Kind() == reflect.Ptr {
-			val = val.Elem()
-		}
-		switch val.Kind() {
-		case reflect.Slice, reflect.Array:
-			for i := 0; i < val.Len(); i++ {
-				// support data types declared without pointers
-				o.recurseRedact(val.Index(i).Interface())
-				// ... and data types that were declared without but need pointers (for Redact)
-				if val.Index(i).CanAddr() {
-					o.recurseRedact(val.Index(i).Addr().Interface())
-				}
-			}
-		}
-	}
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
 }
 
 func (o FcpmV2ComputePoolStatus) zeroField(v interface{}) {
-	p := reflect.ValueOf(v).Elem()
-	p.Set(reflect.Zero(p.Type()))
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o FcpmV2ComputePoolStatus) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["phase"] = o.Phase
+	}
+	if true {
+		toSerialize["current_csu"] = o.CurrentCsu
 	}
 	return json.Marshal(toSerialize)
 }
@@ -159,3 +190,5 @@ func (v *NullableFcpmV2ComputePoolStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

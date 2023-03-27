@@ -41,13 +41,11 @@ type FcpmV2ComputePoolSpec struct {
 	Cloud *string `json:"cloud,omitempty"`
 	// The API endpoint of the Flink compute pool.
 	HttpEndpoint *string `json:"http_endpoint,omitempty"`
-	// The cloud service provider region that hosts the Flink compute pool.
+	// Flink compute pools in the region provided will be able to use this identity pool
 	Region *string `json:"region,omitempty"`
-	// The number of CSUs (Confluent Streaming Units) currently allocated to this Flink compute pool.
-	CurrentCsu *int32 `json:"current_csu,omitempty"`
-	// Maximum number of Confluent Streaming Units (CSUs) that the Flink compute pool should auto-scale to. If not specified, the value defaults to 8.
+	// Maximum number of Confluent Streaming Units (CSUs) that the Flink compute pool should auto-scale to. If not specified, the value defaults to 8. 
 	MaxCsu *int32 `json:"max_csu,omitempty"`
-	// The type of of the Flink compute pool.
+	// The type of of the Flink compute pool. 
 	Config *FcpmV2ComputePoolSpecConfigOneOf `json:"config,omitempty"`
 	// The environment to which this belongs.
 	Environment *GlobalObjectReference `json:"environment,omitempty"`
@@ -200,38 +198,6 @@ func (o *FcpmV2ComputePoolSpec) SetRegion(v string) {
 	o.Region = &v
 }
 
-// GetCurrentCsu returns the CurrentCsu field value if set, zero value otherwise.
-func (o *FcpmV2ComputePoolSpec) GetCurrentCsu() int32 {
-	if o == nil || o.CurrentCsu == nil {
-		var ret int32
-		return ret
-	}
-	return *o.CurrentCsu
-}
-
-// GetCurrentCsuOk returns a tuple with the CurrentCsu field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *FcpmV2ComputePoolSpec) GetCurrentCsuOk() (*int32, bool) {
-	if o == nil || o.CurrentCsu == nil {
-		return nil, false
-	}
-	return o.CurrentCsu, true
-}
-
-// HasCurrentCsu returns a boolean if a field has been set.
-func (o *FcpmV2ComputePoolSpec) HasCurrentCsu() bool {
-	if o != nil && o.CurrentCsu != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetCurrentCsu gets a reference to the given int32 and assigns it to the CurrentCsu field.
-func (o *FcpmV2ComputePoolSpec) SetCurrentCsu(v int32) {
-	o.CurrentCsu = &v
-}
-
 // GetMaxCsu returns the MaxCsu field value if set, zero value otherwise.
 func (o *FcpmV2ComputePoolSpec) GetMaxCsu() int32 {
 	if o == nil || o.MaxCsu == nil {
@@ -362,45 +328,44 @@ func (o *FcpmV2ComputePoolSpec) SetNetwork(v EnvScopedObjectReference) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *FcpmV2ComputePoolSpec) Redact() {
-	o.recurseRedact(o.DisplayName)
-	o.recurseRedact(o.Cloud)
-	o.recurseRedact(o.HttpEndpoint)
-	o.recurseRedact(o.Region)
-	o.recurseRedact(o.CurrentCsu)
-	o.recurseRedact(o.MaxCsu)
-	o.recurseRedact(o.Config)
-	o.recurseRedact(o.Environment)
-	o.recurseRedact(o.Network)
+    o.recurseRedact(o.DisplayName)
+    o.recurseRedact(o.Cloud)
+    o.recurseRedact(o.HttpEndpoint)
+    o.recurseRedact(o.Region)
+    o.recurseRedact(o.MaxCsu)
+    o.recurseRedact(o.Config)
+    o.recurseRedact(o.Environment)
+    o.recurseRedact(o.Network)
 }
 
 func (o *FcpmV2ComputePoolSpec) recurseRedact(v interface{}) {
-	type redactor interface {
-		Redact()
-	}
-	if r, ok := v.(redactor); ok {
-		r.Redact()
-	} else {
-		val := reflect.ValueOf(v)
-		if val.Kind() == reflect.Ptr {
-			val = val.Elem()
-		}
-		switch val.Kind() {
-		case reflect.Slice, reflect.Array:
-			for i := 0; i < val.Len(); i++ {
-				// support data types declared without pointers
-				o.recurseRedact(val.Index(i).Interface())
-				// ... and data types that were declared without but need pointers (for Redact)
-				if val.Index(i).CanAddr() {
-					o.recurseRedact(val.Index(i).Addr().Interface())
-				}
-			}
-		}
-	}
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
 }
 
 func (o FcpmV2ComputePoolSpec) zeroField(v interface{}) {
-	p := reflect.ValueOf(v).Elem()
-	p.Set(reflect.Zero(p.Type()))
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o FcpmV2ComputePoolSpec) MarshalJSON() ([]byte, error) {
@@ -416,9 +381,6 @@ func (o FcpmV2ComputePoolSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.Region != nil {
 		toSerialize["region"] = o.Region
-	}
-	if o.CurrentCsu != nil {
-		toSerialize["current_csu"] = o.CurrentCsu
 	}
 	if o.MaxCsu != nil {
 		toSerialize["max_csu"] = o.MaxCsu
@@ -470,3 +432,5 @@ func (v *NullableFcpmV2ComputePoolSpec) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

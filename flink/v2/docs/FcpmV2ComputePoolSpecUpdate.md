@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CurrentCsu** | Pointer to **int32** | The number of CSUs (Confluent Streaming Units) currently allocated to this Flink compute pool. | [optional] [readonly] 
 **MaxCsu** | Pointer to **int32** | Maximum number of Confluent Streaming Units (CSUs) that the Flink compute pool should auto-scale to. If not specified, the value defaults to 8.  | [optional] 
 **Config** | Pointer to [**FcpmV2ComputePoolSpecUpdateConfigOneOf**](FcpmV2ComputePoolSpecUpdateConfigOneOf.md) | The type of of the Flink compute pool.  | [optional] 
+**Environment** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
 
@@ -26,31 +26,6 @@ will change when the set of required properties is changed
 NewFcpmV2ComputePoolSpecUpdateWithDefaults instantiates a new FcpmV2ComputePoolSpecUpdate object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetCurrentCsu
-
-`func (o *FcpmV2ComputePoolSpecUpdate) GetCurrentCsu() int32`
-
-GetCurrentCsu returns the CurrentCsu field if non-nil, zero value otherwise.
-
-### GetCurrentCsuOk
-
-`func (o *FcpmV2ComputePoolSpecUpdate) GetCurrentCsuOk() (*int32, bool)`
-
-GetCurrentCsuOk returns a tuple with the CurrentCsu field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCurrentCsu
-
-`func (o *FcpmV2ComputePoolSpecUpdate) SetCurrentCsu(v int32)`
-
-SetCurrentCsu sets CurrentCsu field to given value.
-
-### HasCurrentCsu
-
-`func (o *FcpmV2ComputePoolSpecUpdate) HasCurrentCsu() bool`
-
-HasCurrentCsu returns a boolean if a field has been set.
 
 ### GetMaxCsu
 
@@ -101,6 +76,31 @@ SetConfig sets Config field to given value.
 `func (o *FcpmV2ComputePoolSpecUpdate) HasConfig() bool`
 
 HasConfig returns a boolean if a field has been set.
+
+### GetEnvironment
+
+`func (o *FcpmV2ComputePoolSpecUpdate) GetEnvironment() GlobalObjectReference`
+
+GetEnvironment returns the Environment field if non-nil, zero value otherwise.
+
+### GetEnvironmentOk
+
+`func (o *FcpmV2ComputePoolSpecUpdate) GetEnvironmentOk() (*GlobalObjectReference, bool)`
+
+GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnvironment
+
+`func (o *FcpmV2ComputePoolSpecUpdate) SetEnvironment(v GlobalObjectReference)`
+
+SetEnvironment sets Environment field to given value.
+
+### HasEnvironment
+
+`func (o *FcpmV2ComputePoolSpecUpdate) HasEnvironment() bool`
+
+HasEnvironment returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

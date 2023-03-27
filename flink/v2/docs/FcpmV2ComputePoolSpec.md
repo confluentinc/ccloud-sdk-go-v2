@@ -7,8 +7,7 @@ Name | Type | Description | Notes
 **DisplayName** | Pointer to **string** | The name of the Flink compute pool. | [optional] 
 **Cloud** | Pointer to **string** | The cloud service provider that runs the compute pool. | [optional] 
 **HttpEndpoint** | Pointer to **string** | The API endpoint of the Flink compute pool. | [optional] [readonly] 
-**Region** | Pointer to **string** | The cloud service provider region that hosts the Flink compute pool. | [optional] 
-**CurrentCsu** | Pointer to **int32** | The number of CSUs (Confluent Streaming Units) currently allocated to this Flink compute pool. | [optional] [readonly] 
+**Region** | Pointer to **string** | Flink compute pools in the region provided will be able to use this identity pool | [optional] 
 **MaxCsu** | Pointer to **int32** | Maximum number of Confluent Streaming Units (CSUs) that the Flink compute pool should auto-scale to. If not specified, the value defaults to 8.  | [optional] 
 **Config** | Pointer to [**FcpmV2ComputePoolSpecConfigOneOf**](FcpmV2ComputePoolSpecConfigOneOf.md) | The type of of the Flink compute pool.  | [optional] 
 **Environment** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which this belongs. | [optional] 
@@ -132,31 +131,6 @@ SetRegion sets Region field to given value.
 `func (o *FcpmV2ComputePoolSpec) HasRegion() bool`
 
 HasRegion returns a boolean if a field has been set.
-
-### GetCurrentCsu
-
-`func (o *FcpmV2ComputePoolSpec) GetCurrentCsu() int32`
-
-GetCurrentCsu returns the CurrentCsu field if non-nil, zero value otherwise.
-
-### GetCurrentCsuOk
-
-`func (o *FcpmV2ComputePoolSpec) GetCurrentCsuOk() (*int32, bool)`
-
-GetCurrentCsuOk returns a tuple with the CurrentCsu field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCurrentCsu
-
-`func (o *FcpmV2ComputePoolSpec) SetCurrentCsu(v int32)`
-
-SetCurrentCsu sets CurrentCsu field to given value.
-
-### HasCurrentCsu
-
-`func (o *FcpmV2ComputePoolSpec) HasCurrentCsu() bool`
-
-HasCurrentCsu returns a boolean if a field has been set.
 
 ### GetMaxCsu
 
