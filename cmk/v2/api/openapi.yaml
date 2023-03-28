@@ -1940,19 +1940,6 @@ components:
       required:
       - kind
       type: object
-    cmk.v2.Enterprise:
-      description: |
-        The enterprise cluster type.
-      properties:
-        kind:
-          description: |
-            Enterprise cluster type.
-          enum:
-          - Enterprise
-          type: string
-      required:
-      - kind
-      type: object
     cmk.v2.Dedicated:
       description: |
         A dedicated cluster with its parameters.
@@ -2125,7 +2112,6 @@ components:
               Basic: '#/components/schemas/cmk.v2.Basic'
               Standard: '#/components/schemas/cmk.v2.Standard'
               Dedicated: '#/components/schemas/cmk.v2.Dedicated'
-              Enterprise: '#/components/schemas/cmk.v2.Enterprise'
             propertyName: kind
           example:
             kind: Basic
@@ -2133,7 +2119,6 @@ components:
           - $ref: '#/components/schemas/cmk.v2.Basic'
           - $ref: '#/components/schemas/cmk.v2.Standard'
           - $ref: '#/components/schemas/cmk.v2.Dedicated'
-          - $ref: '#/components/schemas/cmk.v2.Enterprise'
           x-one-of-name: CmkV2ClusterSpecConfigOneOf
         kafka_bootstrap_endpoint:
           description: The bootstrap endpoint used by Kafka clients to connect to
@@ -2423,7 +2408,6 @@ components:
               Basic: '#/components/schemas/cmk.v2.Basic'
               Standard: '#/components/schemas/cmk.v2.Standard'
               Dedicated: '#/components/schemas/cmk.v2.Dedicated'
-              Enterprise: '#/components/schemas/cmk.v2.Enterprise'
             propertyName: kind
           example:
             kind: Basic
@@ -2431,7 +2415,6 @@ components:
           - $ref: '#/components/schemas/cmk.v2.Basic'
           - $ref: '#/components/schemas/cmk.v2.Standard'
           - $ref: '#/components/schemas/cmk.v2.Dedicated'
-          - $ref: '#/components/schemas/cmk.v2.Enterprise'
           x-one-of-name: CmkV2ClusterSpecUpdateConfigOneOf
         environment:
           allOf:
