@@ -39,7 +39,7 @@ type CmkV2ClusterSpecUpdate struct {
 	DisplayName *string `json:"display_name,omitempty"`
 	// The availability zone configuration of the cluster Note: The availability zone can be updated from Single to Multi-Zone for Basic and Standard clusters but cannot be downgraded from Multi-Zone to Single Zone.
 	Availability *string `json:"availability,omitempty"`
-	// The configuration of the Kafka cluster. Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.
+	// The configuration of the Kafka cluster.  Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.
 	Config *CmkV2ClusterSpecUpdateConfigOneOf `json:"config,omitempty"`
 	// The environment to which this belongs.
 	Environment *EnvScopedObjectReference `json:"environment,omitempty"`
@@ -51,8 +51,6 @@ type CmkV2ClusterSpecUpdate struct {
 // will change when the set of required properties is changed
 func NewCmkV2ClusterSpecUpdate() *CmkV2ClusterSpecUpdate {
 	this := CmkV2ClusterSpecUpdate{}
-	var availability string = "SINGLE_ZONE"
-	this.Availability = &availability
 	return &this
 }
 
@@ -61,8 +59,6 @@ func NewCmkV2ClusterSpecUpdate() *CmkV2ClusterSpecUpdate {
 // but it doesn't guarantee that properties required by API are set
 func NewCmkV2ClusterSpecUpdateWithDefaults() *CmkV2ClusterSpecUpdate {
 	this := CmkV2ClusterSpecUpdate{}
-	var availability string = "SINGLE_ZONE"
-	this.Availability = &availability
 	return &this
 }
 
