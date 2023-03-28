@@ -65,8 +65,6 @@ type CmkV2ClusterSpec struct {
 // will change when the set of required properties is changed
 func NewCmkV2ClusterSpec() *CmkV2ClusterSpec {
 	this := CmkV2ClusterSpec{}
-	var availability string = "SINGLE_ZONE"
-	this.Availability = &availability
 	return &this
 }
 
@@ -75,8 +73,6 @@ func NewCmkV2ClusterSpec() *CmkV2ClusterSpec {
 // but it doesn't guarantee that properties required by API are set
 func NewCmkV2ClusterSpecWithDefaults() *CmkV2ClusterSpec {
 	this := CmkV2ClusterSpec{}
-	var availability string = "SINGLE_ZONE"
-	this.Availability = &availability
 	return &this
 }
 

@@ -2092,7 +2092,6 @@ components:
           example: ProdKafkaCluster
           type: string
         availability:
-          default: SINGLE_ZONE
           description: |
             The availability zone configuration of the cluster
             Note: The availability zone can be updated from Single to Multi-Zone for Basic and Standard clusters
@@ -2405,7 +2404,6 @@ components:
           example: ProdKafkaCluster
           type: string
         availability:
-          default: SINGLE_ZONE
           description: |
             The availability zone configuration of the cluster
             Note: The availability zone can be updated from Single to Multi-Zone for Basic and Standard clusters

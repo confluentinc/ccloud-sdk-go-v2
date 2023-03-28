@@ -51,8 +51,6 @@ type CmkV2ClusterSpecUpdate struct {
 // will change when the set of required properties is changed
 func NewCmkV2ClusterSpecUpdate() *CmkV2ClusterSpecUpdate {
 	this := CmkV2ClusterSpecUpdate{}
-	var availability string = "SINGLE_ZONE"
-	this.Availability = &availability
 	return &this
 }
 
@@ -61,8 +59,6 @@ func NewCmkV2ClusterSpecUpdate() *CmkV2ClusterSpecUpdate {
 // but it doesn't guarantee that properties required by API are set
 func NewCmkV2ClusterSpecUpdateWithDefaults() *CmkV2ClusterSpecUpdate {
 	this := CmkV2ClusterSpecUpdate{}
-	var availability string = "SINGLE_ZONE"
-	this.Availability = &availability
 	return &this
 }
 
