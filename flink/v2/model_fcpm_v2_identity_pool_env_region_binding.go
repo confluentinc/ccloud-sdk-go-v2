@@ -49,7 +49,7 @@ type FcpmV2IdentityPoolEnvRegionBinding struct {
 	// The environment to which this belongs.
 	Environment *GlobalObjectReference `json:"environment,omitempty"`
 	// The identity_pool to which this belongs.
-	IdentityPool *EnvScopedObjectReference `json:"identity_pool,omitempty"`
+	IdentityPool *GlobalObjectReference `json:"identity_pool,omitempty"`
 }
 
 // NewFcpmV2IdentityPoolEnvRegionBinding instantiates a new FcpmV2IdentityPoolEnvRegionBinding object
@@ -294,9 +294,9 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) SetEnvironment(v GlobalObjectRefere
 }
 
 // GetIdentityPool returns the IdentityPool field value if set, zero value otherwise.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) GetIdentityPool() EnvScopedObjectReference {
+func (o *FcpmV2IdentityPoolEnvRegionBinding) GetIdentityPool() GlobalObjectReference {
 	if o == nil || o.IdentityPool == nil {
-		var ret EnvScopedObjectReference
+		var ret GlobalObjectReference
 		return ret
 	}
 	return *o.IdentityPool
@@ -304,7 +304,7 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) GetIdentityPool() EnvScopedObjectRe
 
 // GetIdentityPoolOk returns a tuple with the IdentityPool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) GetIdentityPoolOk() (*EnvScopedObjectReference, bool) {
+func (o *FcpmV2IdentityPoolEnvRegionBinding) GetIdentityPoolOk() (*GlobalObjectReference, bool) {
 	if o == nil || o.IdentityPool == nil {
 		return nil, false
 	}
@@ -320,8 +320,8 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) HasIdentityPool() bool {
 	return false
 }
 
-// SetIdentityPool gets a reference to the given EnvScopedObjectReference and assigns it to the IdentityPool field.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) SetIdentityPool(v EnvScopedObjectReference) {
+// SetIdentityPool gets a reference to the given GlobalObjectReference and assigns it to the IdentityPool field.
+func (o *FcpmV2IdentityPoolEnvRegionBinding) SetIdentityPool(v GlobalObjectReference) {
 	o.IdentityPool = &v
 }
 

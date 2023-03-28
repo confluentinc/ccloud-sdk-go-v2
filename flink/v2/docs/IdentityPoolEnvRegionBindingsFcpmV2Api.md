@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## CreateFcpmV2IdentityPoolEnvRegionBinding
 
-> FcpmV2IdentityPoolEnvRegionBinding CreateFcpmV2IdentityPoolEnvRegionBinding(ctx).Environment(environment).IdentityPool(identityPool).FcpmV2IdentityPoolEnvRegionBinding(fcpmV2IdentityPoolEnvRegionBinding).Execute()
+> FcpmV2IdentityPoolEnvRegionBinding CreateFcpmV2IdentityPoolEnvRegionBinding(ctx).FcpmV2IdentityPoolEnvRegionBinding(fcpmV2IdentityPoolEnvRegionBinding).Execute()
 
 Create an Identity Pool Env Region Binding
 
@@ -31,13 +31,11 @@ import (
 )
 
 func main() {
-    environment := "env-00000" // string | Scope the operation to the given environment.
-    identityPool := "identityPool_example" // string | Scope the operation to the given identity_pool.
     fcpmV2IdentityPoolEnvRegionBinding := *openapiclient.NewFcpmV2IdentityPoolEnvRegionBinding() // FcpmV2IdentityPoolEnvRegionBinding |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.IdentityPoolEnvRegionBindingsFcpmV2Api.CreateFcpmV2IdentityPoolEnvRegionBinding(context.Background()).Environment(environment).IdentityPool(identityPool).FcpmV2IdentityPoolEnvRegionBinding(fcpmV2IdentityPoolEnvRegionBinding).Execute()
+    resp, r, err := api_client.IdentityPoolEnvRegionBindingsFcpmV2Api.CreateFcpmV2IdentityPoolEnvRegionBinding(context.Background()).FcpmV2IdentityPoolEnvRegionBinding(fcpmV2IdentityPoolEnvRegionBinding).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `IdentityPoolEnvRegionBindingsFcpmV2Api.CreateFcpmV2IdentityPoolEnvRegionBinding``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -58,8 +56,6 @@ Other parameters are passed through a pointer to a apiCreateFcpmV2IdentityPoolEn
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **environment** | **string** | Scope the operation to the given environment. | 
- **identityPool** | **string** | Scope the operation to the given identity_pool. | 
  **fcpmV2IdentityPoolEnvRegionBinding** | [**FcpmV2IdentityPoolEnvRegionBinding**](FcpmV2IdentityPoolEnvRegionBinding.md) |  | 
 
 ### Return type
@@ -102,8 +98,8 @@ import (
 
 func main() {
     environment := "env-00000" // string | Scope the operation to the given environment.
-    identityPool := "identityPool_example" // string | Scope the operation to the given identity_pool.
     id := "id_example" // string | The unique identifier for the identity pool env region binding.
+    identityPool := "iam-00000" // string | Scope the operation to the given identity_pool. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -131,8 +127,8 @@ Other parameters are passed through a pointer to a apiDeleteFcpmV2IdentityPoolEn
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **environment** | **string** | Scope the operation to the given environment. | 
- **identityPool** | **string** | Scope the operation to the given identity_pool. | 
 
+ **identityPool** | **string** | Scope the operation to the given identity_pool. | 
 
 ### Return type
 
@@ -154,7 +150,7 @@ Name | Type | Description  | Notes
 
 ## ListFcpmV2IdentityPoolEnvRegionBindings
 
-> FcpmV2IdentityPoolEnvRegionBindingList ListFcpmV2IdentityPoolEnvRegionBindings(ctx).Region(region).Environment(environment).IdentityPool(identityPool).PageSize(pageSize).PageToken(pageToken).Execute()
+> FcpmV2IdentityPoolEnvRegionBindingList ListFcpmV2IdentityPoolEnvRegionBindings(ctx).Environment(environment).Region(region).Cloud(cloud).IdentityPool(identityPool).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Identity Pool Env Region Bindings
 
@@ -173,15 +169,16 @@ import (
 )
 
 func main() {
-    region := "us-west-1" // string | Filter the results by exact match for region.
     environment := "env-00000" // string | Filter the results by exact match for environment.
-    identityPool := "identityPool_example" // string | Filter the results by exact match for identity_pool.
+    region := "us-west-1" // string | Filter the results by exact match for region. (optional)
+    cloud := "AWS" // string | Filter the results by exact match for cloud. (optional)
+    identityPool := "iam-00000" // string | Filter the results by exact match for identity_pool. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.IdentityPoolEnvRegionBindingsFcpmV2Api.ListFcpmV2IdentityPoolEnvRegionBindings(context.Background()).Region(region).Environment(environment).IdentityPool(identityPool).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.IdentityPoolEnvRegionBindingsFcpmV2Api.ListFcpmV2IdentityPoolEnvRegionBindings(context.Background()).Environment(environment).Region(region).Cloud(cloud).IdentityPool(identityPool).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `IdentityPoolEnvRegionBindingsFcpmV2Api.ListFcpmV2IdentityPoolEnvRegionBindings``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -202,8 +199,9 @@ Other parameters are passed through a pointer to a apiListFcpmV2IdentityPoolEnvR
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **region** | **string** | Filter the results by exact match for region. | 
  **environment** | **string** | Filter the results by exact match for environment. | 
+ **region** | **string** | Filter the results by exact match for region. | 
+ **cloud** | **string** | Filter the results by exact match for cloud. | 
  **identityPool** | **string** | Filter the results by exact match for identity_pool. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 

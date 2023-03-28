@@ -96,21 +96,9 @@ type IdentityPoolEnvRegionBindingsFcpmV2ApiService service
 type ApiCreateFcpmV2IdentityPoolEnvRegionBindingRequest struct {
 	ctx _context.Context
 	ApiService IdentityPoolEnvRegionBindingsFcpmV2Api
-	environment *string
-	identityPool *string
 	fcpmV2IdentityPoolEnvRegionBinding *FcpmV2IdentityPoolEnvRegionBinding
 }
 
-// Scope the operation to the given environment.
-func (r ApiCreateFcpmV2IdentityPoolEnvRegionBindingRequest) Environment(environment string) ApiCreateFcpmV2IdentityPoolEnvRegionBindingRequest {
-	r.environment = &environment
-	return r
-}
-// Scope the operation to the given identity_pool.
-func (r ApiCreateFcpmV2IdentityPoolEnvRegionBindingRequest) IdentityPool(identityPool string) ApiCreateFcpmV2IdentityPoolEnvRegionBindingRequest {
-	r.identityPool = &identityPool
-	return r
-}
 func (r ApiCreateFcpmV2IdentityPoolEnvRegionBindingRequest) FcpmV2IdentityPoolEnvRegionBinding(fcpmV2IdentityPoolEnvRegionBinding FcpmV2IdentityPoolEnvRegionBinding) ApiCreateFcpmV2IdentityPoolEnvRegionBindingRequest {
 	r.fcpmV2IdentityPoolEnvRegionBinding = &fcpmV2IdentityPoolEnvRegionBinding
 	return r
@@ -159,15 +147,7 @@ func (a *IdentityPoolEnvRegionBindingsFcpmV2ApiService) CreateFcpmV2IdentityPool
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.environment == nil {
-		return localVarReturnValue, nil, reportError("environment is required and must be specified")
-	}
-	if r.identityPool == nil {
-		return localVarReturnValue, nil, reportError("identityPool is required and must be specified")
-	}
 
-	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
-	localVarQueryParams.Add("identity_pool", parameterToString(*r.identityPool, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -287,8 +267,8 @@ type ApiDeleteFcpmV2IdentityPoolEnvRegionBindingRequest struct {
 	ctx _context.Context
 	ApiService IdentityPoolEnvRegionBindingsFcpmV2Api
 	environment *string
-	identityPool *string
 	id string
+	identityPool *string
 }
 
 // Scope the operation to the given environment.
@@ -349,12 +329,11 @@ func (a *IdentityPoolEnvRegionBindingsFcpmV2ApiService) DeleteFcpmV2IdentityPool
 	if r.environment == nil {
 		return nil, reportError("environment is required and must be specified")
 	}
-	if r.identityPool == nil {
-		return nil, reportError("identityPool is required and must be specified")
-	}
 
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
-	localVarQueryParams.Add("identity_pool", parameterToString(*r.identityPool, ""))
+	if r.identityPool != nil {
+		localVarQueryParams.Add("identity_pool", parameterToString(*r.identityPool, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -452,21 +431,27 @@ func (a *IdentityPoolEnvRegionBindingsFcpmV2ApiService) DeleteFcpmV2IdentityPool
 type ApiListFcpmV2IdentityPoolEnvRegionBindingsRequest struct {
 	ctx _context.Context
 	ApiService IdentityPoolEnvRegionBindingsFcpmV2Api
-	region *string
 	environment *string
+	region *string
+	cloud *string
 	identityPool *string
 	pageSize *int32
 	pageToken *string
 }
 
+// Filter the results by exact match for environment.
+func (r ApiListFcpmV2IdentityPoolEnvRegionBindingsRequest) Environment(environment string) ApiListFcpmV2IdentityPoolEnvRegionBindingsRequest {
+	r.environment = &environment
+	return r
+}
 // Filter the results by exact match for region.
 func (r ApiListFcpmV2IdentityPoolEnvRegionBindingsRequest) Region(region string) ApiListFcpmV2IdentityPoolEnvRegionBindingsRequest {
 	r.region = &region
 	return r
 }
-// Filter the results by exact match for environment.
-func (r ApiListFcpmV2IdentityPoolEnvRegionBindingsRequest) Environment(environment string) ApiListFcpmV2IdentityPoolEnvRegionBindingsRequest {
-	r.environment = &environment
+// Filter the results by exact match for cloud.
+func (r ApiListFcpmV2IdentityPoolEnvRegionBindingsRequest) Cloud(cloud string) ApiListFcpmV2IdentityPoolEnvRegionBindingsRequest {
+	r.cloud = &cloud
 	return r
 }
 // Filter the results by exact match for identity_pool.
@@ -528,19 +513,20 @@ func (a *IdentityPoolEnvRegionBindingsFcpmV2ApiService) ListFcpmV2IdentityPoolEn
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.region == nil {
-		return localVarReturnValue, nil, reportError("region is required and must be specified")
-	}
 	if r.environment == nil {
 		return localVarReturnValue, nil, reportError("environment is required and must be specified")
 	}
-	if r.identityPool == nil {
-		return localVarReturnValue, nil, reportError("identityPool is required and must be specified")
-	}
 
-	localVarQueryParams.Add("region", parameterToString(*r.region, ""))
+	if r.region != nil {
+		localVarQueryParams.Add("region", parameterToString(*r.region, ""))
+	}
+	if r.cloud != nil {
+		localVarQueryParams.Add("cloud", parameterToString(*r.cloud, ""))
+	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
-	localVarQueryParams.Add("identity_pool", parameterToString(*r.identityPool, ""))
+	if r.identityPool != nil {
+		localVarQueryParams.Add("identity_pool", parameterToString(*r.identityPool, ""))
+	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}

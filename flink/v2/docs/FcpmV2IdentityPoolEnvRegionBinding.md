@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **Region** | Pointer to **string** | Flink compute pools in the region provided will be able to use this identity pool. | [optional] 
 **Cloud** | Pointer to **string** | The cloud service provider that hosts the region. | [optional] [readonly] 
 **Environment** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which this belongs. | [optional] 
-**IdentityPool** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The identity_pool to which this belongs. | [optional] 
+**IdentityPool** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The identity_pool to which this belongs. | [optional] 
 
 ## Methods
 
@@ -209,20 +209,20 @@ HasEnvironment returns a boolean if a field has been set.
 
 ### GetIdentityPool
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) GetIdentityPool() EnvScopedObjectReference`
+`func (o *FcpmV2IdentityPoolEnvRegionBinding) GetIdentityPool() GlobalObjectReference`
 
 GetIdentityPool returns the IdentityPool field if non-nil, zero value otherwise.
 
 ### GetIdentityPoolOk
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) GetIdentityPoolOk() (*EnvScopedObjectReference, bool)`
+`func (o *FcpmV2IdentityPoolEnvRegionBinding) GetIdentityPoolOk() (*GlobalObjectReference, bool)`
 
 GetIdentityPoolOk returns a tuple with the IdentityPool field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIdentityPool
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) SetIdentityPool(v EnvScopedObjectReference)`
+`func (o *FcpmV2IdentityPoolEnvRegionBinding) SetIdentityPool(v GlobalObjectReference)`
 
 SetIdentityPool sets IdentityPool field to given value.
 
