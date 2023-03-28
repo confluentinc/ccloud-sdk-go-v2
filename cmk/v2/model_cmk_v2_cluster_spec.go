@@ -43,7 +43,7 @@ type CmkV2ClusterSpec struct {
 	Cloud *string `json:"cloud,omitempty"`
 	// The cloud service provider region where the cluster is running.
 	Region *string `json:"region,omitempty"`
-	// The configuration of the Kafka cluster. Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.
+	// The configuration of the Kafka cluster.  Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.
 	Config *CmkV2ClusterSpecConfigOneOf `json:"config,omitempty"`
 	// The bootstrap endpoint used by Kafka clients to connect to the cluster.
 	KafkaBootstrapEndpoint *string `json:"kafka_bootstrap_endpoint,omitempty"`
@@ -65,8 +65,6 @@ type CmkV2ClusterSpec struct {
 // will change when the set of required properties is changed
 func NewCmkV2ClusterSpec() *CmkV2ClusterSpec {
 	this := CmkV2ClusterSpec{}
-	var availability string = "SINGLE_ZONE"
-	this.Availability = &availability
 	return &this
 }
 
@@ -75,8 +73,6 @@ func NewCmkV2ClusterSpec() *CmkV2ClusterSpec {
 // but it doesn't guarantee that properties required by API are set
 func NewCmkV2ClusterSpecWithDefaults() *CmkV2ClusterSpec {
 	this := CmkV2ClusterSpec{}
-	var availability string = "SINGLE_ZONE"
-	this.Availability = &availability
 	return &this
 }
 

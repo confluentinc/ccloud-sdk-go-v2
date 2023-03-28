@@ -18,6 +18,7 @@ tags:
     [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `Clusters` objects represent Apache Kafka Clusters on Confluent Cloud.
+
     The API allows you to list, create, read, update, and delete your Kafka clusters.
 
 
@@ -1827,6 +1828,7 @@ components:
     cmk.v2.Cluster:
       description: |-
         `Clusters` objects represent Apache Kafka Clusters on Confluent Cloud.
+
         The API allows you to list, create, read, update, and delete your Kafka clusters.
 
 
@@ -1961,8 +1963,10 @@ components:
         zones:
           description: |
             The list of zones the cluster is in.
+
             On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)
              (e.g. use1-az3)
+
             On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)
              (e.g. us-central1-c).
           example:
@@ -1992,6 +1996,7 @@ components:
     cmk.v2.ClusterList:
       description: |-
         `Clusters` objects represent Apache Kafka Clusters on Confluent Cloud.
+
         The API allows you to list, create, read, update, and delete your Kafka clusters.
 
 
@@ -2070,7 +2075,6 @@ components:
           example: ProdKafkaCluster
           type: string
         availability:
-          default: SINGLE_ZONE
           description: |
             The availability zone configuration of the cluster
             Note: The availability zone can be updated from Single to Multi-Zone for Basic and Standard clusters
@@ -2097,6 +2101,7 @@ components:
         config:
           description: |
             The configuration of the Kafka cluster.
+
             Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.
           discriminator:
             mapping:
@@ -2380,7 +2385,6 @@ components:
           example: ProdKafkaCluster
           type: string
         availability:
-          default: SINGLE_ZONE
           description: |
             The availability zone configuration of the cluster
             Note: The availability zone can be updated from Single to Multi-Zone for Basic and Standard clusters
@@ -2393,6 +2397,7 @@ components:
         config:
           description: |
             The configuration of the Kafka cluster.
+
             Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.
           discriminator:
             mapping:
@@ -2418,6 +2423,7 @@ components:
     cmk.v2.ClusterUpdate:
       description: |-
         `Clusters` objects represent Apache Kafka Clusters on Confluent Cloud.
+
         The API allows you to list, create, read, update, and delete your Kafka clusters.
 
 

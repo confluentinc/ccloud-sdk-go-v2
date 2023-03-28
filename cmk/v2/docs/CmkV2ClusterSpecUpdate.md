@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the cluster. | [optional] 
-**Availability** | Pointer to **string** | The availability zone configuration of the cluster Note: The availability zone can be updated from Single to Multi-Zone for Basic and Standard clusters but cannot be downgraded from Multi-Zone to Single Zone.  | [optional] [default to "SINGLE_ZONE"]
-**Config** | Pointer to [**CmkV2ClusterSpecUpdateConfigOneOf**](CmkV2ClusterSpecUpdateConfigOneOf.md) | The configuration of the Kafka cluster. Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.  | [optional] 
+**Availability** | Pointer to **string** | The availability zone configuration of the cluster Note: The availability zone can be updated from Single to Multi-Zone for Basic and Standard clusters but cannot be downgraded from Multi-Zone to Single Zone.  | [optional] 
+**Config** | Pointer to [**CmkV2ClusterSpecUpdateConfigOneOf**](CmkV2ClusterSpecUpdateConfigOneOf.md) | The configuration of the Kafka cluster.  Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.  | [optional] 
 **Environment** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
