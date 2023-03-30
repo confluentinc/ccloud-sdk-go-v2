@@ -37,7 +37,7 @@ import (
 type NetworkingV1NetworkSpecUpdate struct {
 	// The name of the network
 	DisplayName *string `json:"display_name,omitempty"`
-	// Each item represents information related to a single zone.  Note - The attribute is in an [Early Access lifecycle stage]   (https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy) 
+	// Each item represents information related to a single zone.  Note - The attribute is in an [Early Access lifecycle stage]   (https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
 	ZonesInfo *NetworkingV1ZonesInfo `json:"zones_info,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
@@ -158,39 +158,39 @@ func (o *NetworkingV1NetworkSpecUpdate) SetEnvironment(v ObjectReference) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1NetworkSpecUpdate) Redact() {
-    o.recurseRedact(o.DisplayName)
-    o.recurseRedact(o.ZonesInfo)
-    o.recurseRedact(o.Environment)
+	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.ZonesInfo)
+	o.recurseRedact(o.Environment)
 }
 
 func (o *NetworkingV1NetworkSpecUpdate) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o NetworkingV1NetworkSpecUpdate) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1NetworkSpecUpdate) MarshalJSON() ([]byte, error) {
@@ -242,5 +242,3 @@ func (v *NullableNetworkingV1NetworkSpecUpdate) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -79,7 +79,7 @@ func (o *NetworkingV1AwsTransitGatewayAttachment) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AwsTransitGatewayAttachment) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -103,7 +103,7 @@ func (o *NetworkingV1AwsTransitGatewayAttachment) GetRamShareArn() string {
 // GetRamShareArnOk returns a tuple with the RamShareArn field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AwsTransitGatewayAttachment) GetRamShareArnOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.RamShareArn, true
@@ -127,7 +127,7 @@ func (o *NetworkingV1AwsTransitGatewayAttachment) GetTransitGatewayId() string {
 // GetTransitGatewayIdOk returns a tuple with the TransitGatewayId field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AwsTransitGatewayAttachment) GetTransitGatewayIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.TransitGatewayId, true
@@ -151,7 +151,7 @@ func (o *NetworkingV1AwsTransitGatewayAttachment) GetRoutes() []string {
 // GetRoutesOk returns a tuple with the Routes field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AwsTransitGatewayAttachment) GetRoutesOk() (*[]string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Routes, true
@@ -164,40 +164,40 @@ func (o *NetworkingV1AwsTransitGatewayAttachment) SetRoutes(v []string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1AwsTransitGatewayAttachment) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.RamShareArn)
-    o.recurseRedact(&o.TransitGatewayId)
-    o.recurseRedact(&o.Routes)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.RamShareArn)
+	o.recurseRedact(&o.TransitGatewayId)
+	o.recurseRedact(&o.Routes)
 }
 
 func (o *NetworkingV1AwsTransitGatewayAttachment) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o NetworkingV1AwsTransitGatewayAttachment) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1AwsTransitGatewayAttachment) MarshalJSON() ([]byte, error) {
@@ -252,5 +252,3 @@ func (v *NullableNetworkingV1AwsTransitGatewayAttachment) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -37,7 +37,7 @@ import (
 type NetworkingV1AzurePeering struct {
 	// Peering kind type.
 	Kind string `json:"kind"`
-	// The Azure Tenant ID in which your Azure Subscription exists. Represents an organization in Azure Active Directory. You can find your Azure Tenant ID in the Azure Portal under [Azure Active Directory](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Overview). Must be a valid **32 character UUID string**. 
+	// The Azure Tenant ID in which your Azure Subscription exists. Represents an organization in Azure Active Directory. You can find your Azure Tenant ID in the Azure Portal under [Azure Active Directory](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Overview). Must be a valid **32 character UUID string**.
 	Tenant string `json:"tenant"`
 	// The resource ID of the VNet that you are peering with Confluent Cloud. You can find the name of your Azure VNet in the [Azure Portal on the Overview tab of your Azure Virtual Network](https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Network%2FvirtualNetworks).
 	Vnet string `json:"vnet"`
@@ -79,7 +79,7 @@ func (o *NetworkingV1AzurePeering) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AzurePeering) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -103,7 +103,7 @@ func (o *NetworkingV1AzurePeering) GetTenant() string {
 // GetTenantOk returns a tuple with the Tenant field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AzurePeering) GetTenantOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Tenant, true
@@ -127,7 +127,7 @@ func (o *NetworkingV1AzurePeering) GetVnet() string {
 // GetVnetOk returns a tuple with the Vnet field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AzurePeering) GetVnetOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Vnet, true
@@ -151,7 +151,7 @@ func (o *NetworkingV1AzurePeering) GetCustomerRegion() string {
 // GetCustomerRegionOk returns a tuple with the CustomerRegion field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AzurePeering) GetCustomerRegionOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.CustomerRegion, true
@@ -164,40 +164,40 @@ func (o *NetworkingV1AzurePeering) SetCustomerRegion(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1AzurePeering) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Tenant)
-    o.recurseRedact(&o.Vnet)
-    o.recurseRedact(&o.CustomerRegion)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Tenant)
+	o.recurseRedact(&o.Vnet)
+	o.recurseRedact(&o.CustomerRegion)
 }
 
 func (o *NetworkingV1AzurePeering) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o NetworkingV1AzurePeering) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1AzurePeering) MarshalJSON() ([]byte, error) {
@@ -252,5 +252,3 @@ func (v *NullableNetworkingV1AzurePeering) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -40,17 +40,17 @@ type NetworkingV1NetworkSpec struct {
 	// The cloud service provider in which the network exists.
 	Cloud *string `json:"cloud,omitempty"`
 	// The cloud service provider region in which the network exists.
-	Region *string `json:"region,omitempty"`
+	Region          *string                      `json:"region,omitempty"`
 	ConnectionTypes *NetworkingV1ConnectionTypes `json:"connection_types,omitempty"`
-	// The IPv4 [CIDR block](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) to used for this network. Must be `/16`. Required for VPC peering and AWS TransitGateway. 
+	// The IPv4 [CIDR block](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) to used for this network. Must be `/16`. Required for VPC peering and AWS TransitGateway.
 	Cidr *string `json:"cidr,omitempty"`
-	// The 3 availability zones for this network. They can optionally be specified for AWS networks used with PrivateLink, for GCP networks used with Private Service Connect, and for AWS and GCP networks used with Peering. Otherwise, they are automatically chosen by Confluent Cloud.  On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3)  On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c).  On Azure, zones are Confluent-chosen names (e.g. 1, 2, 3) since Azure does not  have universal zone identifiers. 
+	// The 3 availability zones for this network. They can optionally be specified for AWS networks used with PrivateLink, for GCP networks used with Private Service Connect, and for AWS and GCP networks used with Peering. Otherwise, they are automatically chosen by Confluent Cloud.  On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3)  On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c).  On Azure, zones are Confluent-chosen names (e.g. 1, 2, 3) since Azure does not  have universal zone identifiers.
 	Zones *[]string `json:"zones,omitempty"`
-	// Each item represents information related to a single zone.  Note - The attribute is in an [Early Access lifecycle stage]   (https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy) 
+	// Each item represents information related to a single zone.  Note - The attribute is in an [Early Access lifecycle stage]   (https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
 	ZonesInfo *NetworkingV1ZonesInfo `json:"zones_info,omitempty"`
-	// DNS config only applies to PrivateLink network connection type.  When resolution is CHASED_PRIVATE, clusters in this network require both public and private DNS  to resolve cluster endpoints.  When resolution is PRIVATE, clusters in this network only require private DNS  to resolve cluster endpoints.  Note - The value PRIVATE is only available to AWS networks with PRIVATELINK connection type. 
+	// DNS config only applies to PrivateLink network connection type.  When resolution is CHASED_PRIVATE, clusters in this network require both public and private DNS  to resolve cluster endpoints.  When resolution is PRIVATE, clusters in this network only require private DNS  to resolve cluster endpoints.
 	DnsConfig *NetworkingV1DnsConfig `json:"dns_config,omitempty"`
-	// The reserved CIDR config is used only by AWS networks with connection_types = Vpc_Peering or Transit_Gateway  An IPv4 [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)   reserved for Confluent Cloud Network. Must be \\24.   If not specified, Confluent Cloud Network uses 172.20.255.0/24  Note - The attribute is in an [Early Access lifecycle stage](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy) 
+	// The reserved CIDR config is used only by AWS networks with connection_types = Vpc_Peering or Transit_Gateway  An IPv4 [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)   reserved for Confluent Cloud Network. Must be \\24.   If not specified, Confluent Cloud Network uses 172.20.255.0/24  Note - The attribute is in an [Early Access lifecycle stage](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
 	ReservedCidr *string `json:"reserved_cidr,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
@@ -395,46 +395,46 @@ func (o *NetworkingV1NetworkSpec) SetEnvironment(v ObjectReference) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1NetworkSpec) Redact() {
-    o.recurseRedact(o.DisplayName)
-    o.recurseRedact(o.Cloud)
-    o.recurseRedact(o.Region)
-    o.recurseRedact(o.ConnectionTypes)
-    o.recurseRedact(o.Cidr)
-    o.recurseRedact(o.Zones)
-    o.recurseRedact(o.ZonesInfo)
-    o.recurseRedact(o.DnsConfig)
-    o.recurseRedact(o.ReservedCidr)
-    o.recurseRedact(o.Environment)
+	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.Cloud)
+	o.recurseRedact(o.Region)
+	o.recurseRedact(o.ConnectionTypes)
+	o.recurseRedact(o.Cidr)
+	o.recurseRedact(o.Zones)
+	o.recurseRedact(o.ZonesInfo)
+	o.recurseRedact(o.DnsConfig)
+	o.recurseRedact(o.ReservedCidr)
+	o.recurseRedact(o.Environment)
 }
 
 func (o *NetworkingV1NetworkSpec) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o NetworkingV1NetworkSpec) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1NetworkSpec) MarshalJSON() ([]byte, error) {
@@ -507,5 +507,3 @@ func (v *NullableNetworkingV1NetworkSpec) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
