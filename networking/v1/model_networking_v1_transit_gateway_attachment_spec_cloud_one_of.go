@@ -37,9 +37,8 @@ type NetworkingV1TransitGatewayAttachmentSpecCloudOneOf struct {
 
 // NetworkingV1AwsTransitGatewayAttachmentAsNetworkingV1TransitGatewayAttachmentSpecCloudOneOf is a convenience function that returns NetworkingV1AwsTransitGatewayAttachment wrapped in NetworkingV1TransitGatewayAttachmentSpecCloudOneOf
 func NetworkingV1AwsTransitGatewayAttachmentAsNetworkingV1TransitGatewayAttachmentSpecCloudOneOf(v *NetworkingV1AwsTransitGatewayAttachment) NetworkingV1TransitGatewayAttachmentSpecCloudOneOf {
-	return NetworkingV1TransitGatewayAttachmentSpecCloudOneOf{ NetworkingV1AwsTransitGatewayAttachment: v}
+	return NetworkingV1TransitGatewayAttachmentSpecCloudOneOf{NetworkingV1AwsTransitGatewayAttachment: v}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *NetworkingV1TransitGatewayAttachmentSpecCloudOneOf) UnmarshalJSON(data []byte) error {
@@ -88,7 +87,7 @@ func (src NetworkingV1TransitGatewayAttachmentSpecCloudOneOf) MarshalJSON() ([]b
 }
 
 // Get the actual instance
-func (obj *NetworkingV1TransitGatewayAttachmentSpecCloudOneOf) GetActualInstance() (interface{}) {
+func (obj *NetworkingV1TransitGatewayAttachmentSpecCloudOneOf) GetActualInstance() interface{} {
 	if obj.NetworkingV1AwsTransitGatewayAttachment != nil {
 		return obj.NetworkingV1AwsTransitGatewayAttachment
 	}
@@ -132,5 +131,3 @@ func (v *NullableNetworkingV1TransitGatewayAttachmentSpecCloudOneOf) UnmarshalJS
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

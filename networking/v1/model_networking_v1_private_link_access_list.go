@@ -38,7 +38,7 @@ type NetworkingV1PrivateLinkAccessList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version"`
 	// Kind defines the object this REST resource represents.
-	Kind string `json:"kind"`
+	Kind     string   `json:"kind"`
 	Metadata ListMeta `json:"metadata"`
 	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
 	Data []NetworkingV1PrivateLinkAccess `json:"data"`
@@ -78,7 +78,7 @@ func (o *NetworkingV1PrivateLinkAccessList) GetApiVersion() string {
 // GetApiVersionOk returns a tuple with the ApiVersion field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1PrivateLinkAccessList) GetApiVersionOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ApiVersion, true
@@ -102,7 +102,7 @@ func (o *NetworkingV1PrivateLinkAccessList) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1PrivateLinkAccessList) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -126,7 +126,7 @@ func (o *NetworkingV1PrivateLinkAccessList) GetMetadata() ListMeta {
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1PrivateLinkAccessList) GetMetadataOk() (*ListMeta, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Metadata, true
@@ -150,7 +150,7 @@ func (o *NetworkingV1PrivateLinkAccessList) GetData() []NetworkingV1PrivateLinkA
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1PrivateLinkAccessList) GetDataOk() (*[]NetworkingV1PrivateLinkAccess, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Data, true
@@ -163,40 +163,40 @@ func (o *NetworkingV1PrivateLinkAccessList) SetData(v []NetworkingV1PrivateLinkA
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1PrivateLinkAccessList) Redact() {
-    o.recurseRedact(&o.ApiVersion)
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Metadata)
-    o.recurseRedact(&o.Data)
+	o.recurseRedact(&o.ApiVersion)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Metadata)
+	o.recurseRedact(&o.Data)
 }
 
 func (o *NetworkingV1PrivateLinkAccessList) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o NetworkingV1PrivateLinkAccessList) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1PrivateLinkAccessList) MarshalJSON() ([]byte, error) {
@@ -251,5 +251,3 @@ func (v *NullableNetworkingV1PrivateLinkAccessList) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

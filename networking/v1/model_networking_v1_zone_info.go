@@ -37,7 +37,7 @@ import (
 type NetworkingV1ZoneInfo struct {
 	// Cloud provider zone id
 	ZoneId *string `json:"zone_id,omitempty"`
-	// The IPv4 [CIDR block](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) to used for this network. Must be a `/27`. Required for VPC peering and AWS TransitGateway. 
+	// The IPv4 [CIDR block](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) to used for this network. Must be a `/27`. Required for VPC peering and AWS TransitGateway.
 	Cidr *string `json:"cidr,omitempty"`
 }
 
@@ -124,38 +124,38 @@ func (o *NetworkingV1ZoneInfo) SetCidr(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1ZoneInfo) Redact() {
-    o.recurseRedact(o.ZoneId)
-    o.recurseRedact(o.Cidr)
+	o.recurseRedact(o.ZoneId)
+	o.recurseRedact(o.Cidr)
 }
 
 func (o *NetworkingV1ZoneInfo) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o NetworkingV1ZoneInfo) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1ZoneInfo) MarshalJSON() ([]byte, error) {
@@ -204,5 +204,3 @@ func (v *NullableNetworkingV1ZoneInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

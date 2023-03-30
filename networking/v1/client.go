@@ -64,6 +64,12 @@ type APIClient struct {
 
 	// API Services
 
+	NetworkLinkEndpointsNetworkingV1Api NetworkLinkEndpointsNetworkingV1Api
+
+	NetworkLinkServiceAssociationsNetworkingV1Api NetworkLinkServiceAssociationsNetworkingV1Api
+
+	NetworkLinkServicesNetworkingV1Api NetworkLinkServicesNetworkingV1Api
+
 	NetworksNetworkingV1Api NetworksNetworkingV1Api
 
 	PeeringsNetworkingV1Api PeeringsNetworkingV1Api
@@ -89,6 +95,9 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
+	c.NetworkLinkEndpointsNetworkingV1Api = (*NetworkLinkEndpointsNetworkingV1ApiService)(&c.common)
+	c.NetworkLinkServiceAssociationsNetworkingV1Api = (*NetworkLinkServiceAssociationsNetworkingV1ApiService)(&c.common)
+	c.NetworkLinkServicesNetworkingV1Api = (*NetworkLinkServicesNetworkingV1ApiService)(&c.common)
 	c.NetworksNetworkingV1Api = (*NetworksNetworkingV1ApiService)(&c.common)
 	c.PeeringsNetworkingV1Api = (*PeeringsNetworkingV1ApiService)(&c.common)
 	c.PrivateLinkAccessesNetworkingV1Api = (*PrivateLinkAccessesNetworkingV1ApiService)(&c.common)

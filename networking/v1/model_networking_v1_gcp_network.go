@@ -41,7 +41,7 @@ type NetworkingV1GcpNetwork struct {
 	Project string `json:"project"`
 	// The network name of the Confluent Cloud VPC.
 	VpcNetwork string `json:"vpc_network"`
-	// The mapping of zones to Private Service Connect Service Attachments if available. Keys are zones and values are [GCP Private Service Connect Service Attachment](https://cloud.google.com/vpc/docs/configure-private-service-connect-producer#api_7) 
+	// The mapping of zones to Private Service Connect Service Attachments if available. Keys are zones and values are [GCP Private Service Connect Service Attachment](https://cloud.google.com/vpc/docs/configure-private-service-connect-producer#api_7)
 	PrivateServiceConnectServiceAttachments *map[string]string `json:"private_service_connect_service_attachments,omitempty"`
 }
 
@@ -78,7 +78,7 @@ func (o *NetworkingV1GcpNetwork) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1GcpNetwork) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -102,7 +102,7 @@ func (o *NetworkingV1GcpNetwork) GetProject() string {
 // GetProjectOk returns a tuple with the Project field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1GcpNetwork) GetProjectOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Project, true
@@ -126,7 +126,7 @@ func (o *NetworkingV1GcpNetwork) GetVpcNetwork() string {
 // GetVpcNetworkOk returns a tuple with the VpcNetwork field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1GcpNetwork) GetVpcNetworkOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.VpcNetwork, true
@@ -171,40 +171,40 @@ func (o *NetworkingV1GcpNetwork) SetPrivateServiceConnectServiceAttachments(v ma
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1GcpNetwork) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Project)
-    o.recurseRedact(&o.VpcNetwork)
-    o.recurseRedact(o.PrivateServiceConnectServiceAttachments)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Project)
+	o.recurseRedact(&o.VpcNetwork)
+	o.recurseRedact(o.PrivateServiceConnectServiceAttachments)
 }
 
 func (o *NetworkingV1GcpNetwork) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o NetworkingV1GcpNetwork) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1GcpNetwork) MarshalJSON() ([]byte, error) {
@@ -259,5 +259,3 @@ func (v *NullableNetworkingV1GcpNetwork) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

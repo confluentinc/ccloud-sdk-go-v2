@@ -78,7 +78,7 @@ func (o *NetworkingV1AwsNetwork) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AwsNetwork) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -102,7 +102,7 @@ func (o *NetworkingV1AwsNetwork) GetVpc() string {
 // GetVpcOk returns a tuple with the Vpc field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AwsNetwork) GetVpcOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Vpc, true
@@ -126,7 +126,7 @@ func (o *NetworkingV1AwsNetwork) GetAccount() string {
 // GetAccountOk returns a tuple with the Account field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AwsNetwork) GetAccountOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Account, true
@@ -171,40 +171,40 @@ func (o *NetworkingV1AwsNetwork) SetPrivateLinkEndpointService(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1AwsNetwork) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Vpc)
-    o.recurseRedact(&o.Account)
-    o.recurseRedact(o.PrivateLinkEndpointService)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Vpc)
+	o.recurseRedact(&o.Account)
+	o.recurseRedact(o.PrivateLinkEndpointService)
 }
 
 func (o *NetworkingV1AwsNetwork) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o NetworkingV1AwsNetwork) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1AwsNetwork) MarshalJSON() ([]byte, error) {
@@ -259,5 +259,3 @@ func (v *NullableNetworkingV1AwsNetwork) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

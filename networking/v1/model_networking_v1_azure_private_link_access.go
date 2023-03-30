@@ -37,7 +37,7 @@ import (
 type NetworkingV1AzurePrivateLinkAccess struct {
 	// PrivateLink kind type.
 	Kind string `json:"kind"`
-	// The Azure subscription ID for the account containing the VNets you want to connect from using Azure Private Link. You can find your Azure subscription ID in the subscription section of your [Microsoft Azure Portal](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade). Must be a valid **32 character UUID string**. 
+	// The Azure subscription ID for the account containing the VNets you want to connect from using Azure Private Link. You can find your Azure subscription ID in the subscription section of your [Microsoft Azure Portal](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade). Must be a valid **32 character UUID string**.
 	Subscription string `json:"subscription"`
 }
 
@@ -73,7 +73,7 @@ func (o *NetworkingV1AzurePrivateLinkAccess) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AzurePrivateLinkAccess) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -97,7 +97,7 @@ func (o *NetworkingV1AzurePrivateLinkAccess) GetSubscription() string {
 // GetSubscriptionOk returns a tuple with the Subscription field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AzurePrivateLinkAccess) GetSubscriptionOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Subscription, true
@@ -110,38 +110,38 @@ func (o *NetworkingV1AzurePrivateLinkAccess) SetSubscription(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1AzurePrivateLinkAccess) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Subscription)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Subscription)
 }
 
 func (o *NetworkingV1AzurePrivateLinkAccess) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o NetworkingV1AzurePrivateLinkAccess) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1AzurePrivateLinkAccess) MarshalJSON() ([]byte, error) {
@@ -190,5 +190,3 @@ func (v *NullableNetworkingV1AzurePrivateLinkAccess) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

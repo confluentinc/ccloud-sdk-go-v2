@@ -41,9 +41,9 @@ type NetworkingV1AzureNetwork struct {
 	Vnet string `json:"vnet"`
 	// The Azure Subscription ID associated with the Confluent Cloud VPC.
 	Subscription string `json:"subscription"`
-	// The mapping of zones to Private Link Service Aliases if available. Keys are zones and values are [Azure Private Link Service Aliases](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#share-your-service). 
+	// The mapping of zones to Private Link Service Aliases if available. Keys are zones and values are [Azure Private Link Service Aliases](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#share-your-service).
 	PrivateLinkServiceAliases *map[string]string `json:"private_link_service_aliases,omitempty"`
-	// The mapping of zones to Private Link Service Resource IDs if available. Keys are zones and values are [Azure Private Link Service Resource IDs](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#share-your-service). 
+	// The mapping of zones to Private Link Service Resource IDs if available. Keys are zones and values are [Azure Private Link Service Resource IDs](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#share-your-service).
 	PrivateLinkServiceResourceIds *map[string]string `json:"private_link_service_resource_ids,omitempty"`
 }
 
@@ -80,7 +80,7 @@ func (o *NetworkingV1AzureNetwork) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AzureNetwork) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -104,7 +104,7 @@ func (o *NetworkingV1AzureNetwork) GetVnet() string {
 // GetVnetOk returns a tuple with the Vnet field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AzureNetwork) GetVnetOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Vnet, true
@@ -128,7 +128,7 @@ func (o *NetworkingV1AzureNetwork) GetSubscription() string {
 // GetSubscriptionOk returns a tuple with the Subscription field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AzureNetwork) GetSubscriptionOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Subscription, true
@@ -205,41 +205,41 @@ func (o *NetworkingV1AzureNetwork) SetPrivateLinkServiceResourceIds(v map[string
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1AzureNetwork) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Vnet)
-    o.recurseRedact(&o.Subscription)
-    o.recurseRedact(o.PrivateLinkServiceAliases)
-    o.recurseRedact(o.PrivateLinkServiceResourceIds)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Vnet)
+	o.recurseRedact(&o.Subscription)
+	o.recurseRedact(o.PrivateLinkServiceAliases)
+	o.recurseRedact(o.PrivateLinkServiceResourceIds)
 }
 
 func (o *NetworkingV1AzureNetwork) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o NetworkingV1AzureNetwork) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1AzureNetwork) MarshalJSON() ([]byte, error) {
@@ -297,5 +297,3 @@ func (v *NullableNetworkingV1AzureNetwork) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

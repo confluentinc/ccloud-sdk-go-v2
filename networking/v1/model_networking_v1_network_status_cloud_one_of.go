@@ -32,26 +32,25 @@ import (
 
 // NetworkingV1NetworkStatusCloudOneOf - struct for NetworkingV1NetworkStatusCloudOneOf
 type NetworkingV1NetworkStatusCloudOneOf struct {
-	NetworkingV1AwsNetwork *NetworkingV1AwsNetwork
+	NetworkingV1AwsNetwork   *NetworkingV1AwsNetwork
 	NetworkingV1AzureNetwork *NetworkingV1AzureNetwork
-	NetworkingV1GcpNetwork *NetworkingV1GcpNetwork
+	NetworkingV1GcpNetwork   *NetworkingV1GcpNetwork
 }
 
 // NetworkingV1AwsNetworkAsNetworkingV1NetworkStatusCloudOneOf is a convenience function that returns NetworkingV1AwsNetwork wrapped in NetworkingV1NetworkStatusCloudOneOf
 func NetworkingV1AwsNetworkAsNetworkingV1NetworkStatusCloudOneOf(v *NetworkingV1AwsNetwork) NetworkingV1NetworkStatusCloudOneOf {
-	return NetworkingV1NetworkStatusCloudOneOf{ NetworkingV1AwsNetwork: v}
+	return NetworkingV1NetworkStatusCloudOneOf{NetworkingV1AwsNetwork: v}
 }
 
 // NetworkingV1AzureNetworkAsNetworkingV1NetworkStatusCloudOneOf is a convenience function that returns NetworkingV1AzureNetwork wrapped in NetworkingV1NetworkStatusCloudOneOf
 func NetworkingV1AzureNetworkAsNetworkingV1NetworkStatusCloudOneOf(v *NetworkingV1AzureNetwork) NetworkingV1NetworkStatusCloudOneOf {
-	return NetworkingV1NetworkStatusCloudOneOf{ NetworkingV1AzureNetwork: v}
+	return NetworkingV1NetworkStatusCloudOneOf{NetworkingV1AzureNetwork: v}
 }
 
 // NetworkingV1GcpNetworkAsNetworkingV1NetworkStatusCloudOneOf is a convenience function that returns NetworkingV1GcpNetwork wrapped in NetworkingV1NetworkStatusCloudOneOf
 func NetworkingV1GcpNetworkAsNetworkingV1NetworkStatusCloudOneOf(v *NetworkingV1GcpNetwork) NetworkingV1NetworkStatusCloudOneOf {
-	return NetworkingV1NetworkStatusCloudOneOf{ NetworkingV1GcpNetwork: v}
+	return NetworkingV1NetworkStatusCloudOneOf{NetworkingV1GcpNetwork: v}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *NetworkingV1NetworkStatusCloudOneOf) UnmarshalJSON(data []byte) error {
@@ -156,7 +155,7 @@ func (src NetworkingV1NetworkStatusCloudOneOf) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *NetworkingV1NetworkStatusCloudOneOf) GetActualInstance() (interface{}) {
+func (obj *NetworkingV1NetworkStatusCloudOneOf) GetActualInstance() interface{} {
 	if obj.NetworkingV1AwsNetwork != nil {
 		return obj.NetworkingV1AwsNetwork
 	}
@@ -208,5 +207,3 @@ func (v *NullableNetworkingV1NetworkStatusCloudOneOf) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

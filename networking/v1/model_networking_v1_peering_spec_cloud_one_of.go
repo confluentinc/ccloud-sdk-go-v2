@@ -32,26 +32,25 @@ import (
 
 // NetworkingV1PeeringSpecCloudOneOf - struct for NetworkingV1PeeringSpecCloudOneOf
 type NetworkingV1PeeringSpecCloudOneOf struct {
-	NetworkingV1AwsPeering *NetworkingV1AwsPeering
+	NetworkingV1AwsPeering   *NetworkingV1AwsPeering
 	NetworkingV1AzurePeering *NetworkingV1AzurePeering
-	NetworkingV1GcpPeering *NetworkingV1GcpPeering
+	NetworkingV1GcpPeering   *NetworkingV1GcpPeering
 }
 
 // NetworkingV1AwsPeeringAsNetworkingV1PeeringSpecCloudOneOf is a convenience function that returns NetworkingV1AwsPeering wrapped in NetworkingV1PeeringSpecCloudOneOf
 func NetworkingV1AwsPeeringAsNetworkingV1PeeringSpecCloudOneOf(v *NetworkingV1AwsPeering) NetworkingV1PeeringSpecCloudOneOf {
-	return NetworkingV1PeeringSpecCloudOneOf{ NetworkingV1AwsPeering: v}
+	return NetworkingV1PeeringSpecCloudOneOf{NetworkingV1AwsPeering: v}
 }
 
 // NetworkingV1AzurePeeringAsNetworkingV1PeeringSpecCloudOneOf is a convenience function that returns NetworkingV1AzurePeering wrapped in NetworkingV1PeeringSpecCloudOneOf
 func NetworkingV1AzurePeeringAsNetworkingV1PeeringSpecCloudOneOf(v *NetworkingV1AzurePeering) NetworkingV1PeeringSpecCloudOneOf {
-	return NetworkingV1PeeringSpecCloudOneOf{ NetworkingV1AzurePeering: v}
+	return NetworkingV1PeeringSpecCloudOneOf{NetworkingV1AzurePeering: v}
 }
 
 // NetworkingV1GcpPeeringAsNetworkingV1PeeringSpecCloudOneOf is a convenience function that returns NetworkingV1GcpPeering wrapped in NetworkingV1PeeringSpecCloudOneOf
 func NetworkingV1GcpPeeringAsNetworkingV1PeeringSpecCloudOneOf(v *NetworkingV1GcpPeering) NetworkingV1PeeringSpecCloudOneOf {
-	return NetworkingV1PeeringSpecCloudOneOf{ NetworkingV1GcpPeering: v}
+	return NetworkingV1PeeringSpecCloudOneOf{NetworkingV1GcpPeering: v}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *NetworkingV1PeeringSpecCloudOneOf) UnmarshalJSON(data []byte) error {
@@ -156,7 +155,7 @@ func (src NetworkingV1PeeringSpecCloudOneOf) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *NetworkingV1PeeringSpecCloudOneOf) GetActualInstance() (interface{}) {
+func (obj *NetworkingV1PeeringSpecCloudOneOf) GetActualInstance() interface{} {
 	if obj.NetworkingV1AwsPeering != nil {
 		return obj.NetworkingV1AwsPeering
 	}
@@ -208,5 +207,3 @@ func (v *NullableNetworkingV1PeeringSpecCloudOneOf) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

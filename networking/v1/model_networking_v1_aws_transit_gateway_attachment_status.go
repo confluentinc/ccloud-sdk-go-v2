@@ -104,7 +104,7 @@ func (o *NetworkingV1AwsTransitGatewayAttachmentStatus) GetTransitGatewayAttachm
 // GetTransitGatewayAttachmentIdOk returns a tuple with the TransitGatewayAttachmentId field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AwsTransitGatewayAttachmentStatus) GetTransitGatewayAttachmentIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.TransitGatewayAttachmentId, true
@@ -117,38 +117,38 @@ func (o *NetworkingV1AwsTransitGatewayAttachmentStatus) SetTransitGatewayAttachm
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1AwsTransitGatewayAttachmentStatus) Redact() {
-    o.recurseRedact(o.Kind)
-    o.recurseRedact(&o.TransitGatewayAttachmentId)
+	o.recurseRedact(o.Kind)
+	o.recurseRedact(&o.TransitGatewayAttachmentId)
 }
 
 func (o *NetworkingV1AwsTransitGatewayAttachmentStatus) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o NetworkingV1AwsTransitGatewayAttachmentStatus) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1AwsTransitGatewayAttachmentStatus) MarshalJSON() ([]byte, error) {
@@ -197,5 +197,3 @@ func (v *NullableNetworkingV1AwsTransitGatewayAttachmentStatus) UnmarshalJSON(sr
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
