@@ -1,4 +1,4 @@
-# FcpmV2IdentityPoolEnvRegionBinding
+# FcpmV2IamBinding
 
 ## Properties
 
@@ -15,220 +15,220 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewFcpmV2IdentityPoolEnvRegionBinding
+### NewFcpmV2IamBinding
 
-`func NewFcpmV2IdentityPoolEnvRegionBinding() *FcpmV2IdentityPoolEnvRegionBinding`
+`func NewFcpmV2IamBinding() *FcpmV2IamBinding`
 
-NewFcpmV2IdentityPoolEnvRegionBinding instantiates a new FcpmV2IdentityPoolEnvRegionBinding object
+NewFcpmV2IamBinding instantiates a new FcpmV2IamBinding object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewFcpmV2IdentityPoolEnvRegionBindingWithDefaults
+### NewFcpmV2IamBindingWithDefaults
 
-`func NewFcpmV2IdentityPoolEnvRegionBindingWithDefaults() *FcpmV2IdentityPoolEnvRegionBinding`
+`func NewFcpmV2IamBindingWithDefaults() *FcpmV2IamBinding`
 
-NewFcpmV2IdentityPoolEnvRegionBindingWithDefaults instantiates a new FcpmV2IdentityPoolEnvRegionBinding object
+NewFcpmV2IamBindingWithDefaults instantiates a new FcpmV2IamBinding object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetApiVersion
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) GetApiVersion() string`
+`func (o *FcpmV2IamBinding) GetApiVersion() string`
 
 GetApiVersion returns the ApiVersion field if non-nil, zero value otherwise.
 
 ### GetApiVersionOk
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) GetApiVersionOk() (*string, bool)`
+`func (o *FcpmV2IamBinding) GetApiVersionOk() (*string, bool)`
 
 GetApiVersionOk returns a tuple with the ApiVersion field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetApiVersion
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) SetApiVersion(v string)`
+`func (o *FcpmV2IamBinding) SetApiVersion(v string)`
 
 SetApiVersion sets ApiVersion field to given value.
 
 ### HasApiVersion
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) HasApiVersion() bool`
+`func (o *FcpmV2IamBinding) HasApiVersion() bool`
 
 HasApiVersion returns a boolean if a field has been set.
 
 ### GetKind
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) GetKind() string`
+`func (o *FcpmV2IamBinding) GetKind() string`
 
 GetKind returns the Kind field if non-nil, zero value otherwise.
 
 ### GetKindOk
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) GetKindOk() (*string, bool)`
+`func (o *FcpmV2IamBinding) GetKindOk() (*string, bool)`
 
 GetKindOk returns a tuple with the Kind field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetKind
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) SetKind(v string)`
+`func (o *FcpmV2IamBinding) SetKind(v string)`
 
 SetKind sets Kind field to given value.
 
 ### HasKind
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) HasKind() bool`
+`func (o *FcpmV2IamBinding) HasKind() bool`
 
 HasKind returns a boolean if a field has been set.
 
 ### GetId
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) GetId() string`
+`func (o *FcpmV2IamBinding) GetId() string`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) GetIdOk() (*string, bool)`
+`func (o *FcpmV2IamBinding) GetIdOk() (*string, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) SetId(v string)`
+`func (o *FcpmV2IamBinding) SetId(v string)`
 
 SetId sets Id field to given value.
 
 ### HasId
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) HasId() bool`
+`func (o *FcpmV2IamBinding) HasId() bool`
 
 HasId returns a boolean if a field has been set.
 
 ### GetMetadata
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) GetMetadata() ObjectMeta`
+`func (o *FcpmV2IamBinding) GetMetadata() ObjectMeta`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) GetMetadataOk() (*ObjectMeta, bool)`
+`func (o *FcpmV2IamBinding) GetMetadataOk() (*ObjectMeta, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) SetMetadata(v ObjectMeta)`
+`func (o *FcpmV2IamBinding) SetMetadata(v ObjectMeta)`
 
 SetMetadata sets Metadata field to given value.
 
 ### HasMetadata
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) HasMetadata() bool`
+`func (o *FcpmV2IamBinding) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
 
 ### GetRegion
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) GetRegion() string`
+`func (o *FcpmV2IamBinding) GetRegion() string`
 
 GetRegion returns the Region field if non-nil, zero value otherwise.
 
 ### GetRegionOk
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) GetRegionOk() (*string, bool)`
+`func (o *FcpmV2IamBinding) GetRegionOk() (*string, bool)`
 
 GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRegion
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) SetRegion(v string)`
+`func (o *FcpmV2IamBinding) SetRegion(v string)`
 
 SetRegion sets Region field to given value.
 
 ### HasRegion
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) HasRegion() bool`
+`func (o *FcpmV2IamBinding) HasRegion() bool`
 
 HasRegion returns a boolean if a field has been set.
 
 ### GetCloud
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) GetCloud() string`
+`func (o *FcpmV2IamBinding) GetCloud() string`
 
 GetCloud returns the Cloud field if non-nil, zero value otherwise.
 
 ### GetCloudOk
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) GetCloudOk() (*string, bool)`
+`func (o *FcpmV2IamBinding) GetCloudOk() (*string, bool)`
 
 GetCloudOk returns a tuple with the Cloud field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCloud
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) SetCloud(v string)`
+`func (o *FcpmV2IamBinding) SetCloud(v string)`
 
 SetCloud sets Cloud field to given value.
 
 ### HasCloud
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) HasCloud() bool`
+`func (o *FcpmV2IamBinding) HasCloud() bool`
 
 HasCloud returns a boolean if a field has been set.
 
 ### GetEnvironment
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) GetEnvironment() GlobalObjectReference`
+`func (o *FcpmV2IamBinding) GetEnvironment() GlobalObjectReference`
 
 GetEnvironment returns the Environment field if non-nil, zero value otherwise.
 
 ### GetEnvironmentOk
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) GetEnvironmentOk() (*GlobalObjectReference, bool)`
+`func (o *FcpmV2IamBinding) GetEnvironmentOk() (*GlobalObjectReference, bool)`
 
 GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnvironment
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) SetEnvironment(v GlobalObjectReference)`
+`func (o *FcpmV2IamBinding) SetEnvironment(v GlobalObjectReference)`
 
 SetEnvironment sets Environment field to given value.
 
 ### HasEnvironment
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) HasEnvironment() bool`
+`func (o *FcpmV2IamBinding) HasEnvironment() bool`
 
 HasEnvironment returns a boolean if a field has been set.
 
 ### GetIdentityPool
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) GetIdentityPool() GlobalObjectReference`
+`func (o *FcpmV2IamBinding) GetIdentityPool() GlobalObjectReference`
 
 GetIdentityPool returns the IdentityPool field if non-nil, zero value otherwise.
 
 ### GetIdentityPoolOk
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) GetIdentityPoolOk() (*GlobalObjectReference, bool)`
+`func (o *FcpmV2IamBinding) GetIdentityPoolOk() (*GlobalObjectReference, bool)`
 
 GetIdentityPoolOk returns a tuple with the IdentityPool field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIdentityPool
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) SetIdentityPool(v GlobalObjectReference)`
+`func (o *FcpmV2IamBinding) SetIdentityPool(v GlobalObjectReference)`
 
 SetIdentityPool sets IdentityPool field to given value.
 
 ### HasIdentityPool
 
-`func (o *FcpmV2IdentityPoolEnvRegionBinding) HasIdentityPool() bool`
+`func (o *FcpmV2IamBinding) HasIdentityPool() bool`
 
 HasIdentityPool returns a boolean if a field has been set.
 

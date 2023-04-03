@@ -33,23 +33,23 @@ import (
 	"reflect"
 )
 
-// FcpmV2RegionList `Region` objects represent cloud provider regions available when placing Flink compute pools. The API allows you to list Flink regions.   ## The Regions Model <SchemaDefinition schemaRef=\"#/components/schemas/fcpm.v2.Region\" />
-type FcpmV2RegionList struct {
+// FcpmV2IamBindingList An IamBinding represents the binding of identity pools to all Flink compute pools in an environment, cloud and region. This is needed for authentication purposes.   ## The Iam Bindings Model <SchemaDefinition schemaRef=\"#/components/schemas/fcpm.v2.IamBinding\" />
+type FcpmV2IamBindingList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version"`
 	// Kind defines the object this REST resource represents.
 	Kind     string   `json:"kind"`
 	Metadata ListMeta `json:"metadata"`
 	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
-	Data []FcpmV2Region `json:"data"`
+	Data []FcpmV2IamBinding `json:"data"`
 }
 
-// NewFcpmV2RegionList instantiates a new FcpmV2RegionList object
+// NewFcpmV2IamBindingList instantiates a new FcpmV2IamBindingList object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFcpmV2RegionList(apiVersion string, kind string, metadata ListMeta, data []FcpmV2Region) *FcpmV2RegionList {
-	this := FcpmV2RegionList{}
+func NewFcpmV2IamBindingList(apiVersion string, kind string, metadata ListMeta, data []FcpmV2IamBinding) *FcpmV2IamBindingList {
+	this := FcpmV2IamBindingList{}
 	this.ApiVersion = apiVersion
 	this.Kind = kind
 	this.Metadata = metadata
@@ -57,16 +57,16 @@ func NewFcpmV2RegionList(apiVersion string, kind string, metadata ListMeta, data
 	return &this
 }
 
-// NewFcpmV2RegionListWithDefaults instantiates a new FcpmV2RegionList object
+// NewFcpmV2IamBindingListWithDefaults instantiates a new FcpmV2IamBindingList object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFcpmV2RegionListWithDefaults() *FcpmV2RegionList {
-	this := FcpmV2RegionList{}
+func NewFcpmV2IamBindingListWithDefaults() *FcpmV2IamBindingList {
+	this := FcpmV2IamBindingList{}
 	return &this
 }
 
 // GetApiVersion returns the ApiVersion field value
-func (o *FcpmV2RegionList) GetApiVersion() string {
+func (o *FcpmV2IamBindingList) GetApiVersion() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -77,7 +77,7 @@ func (o *FcpmV2RegionList) GetApiVersion() string {
 
 // GetApiVersionOk returns a tuple with the ApiVersion field value
 // and a boolean to check if the value has been set.
-func (o *FcpmV2RegionList) GetApiVersionOk() (*string, bool) {
+func (o *FcpmV2IamBindingList) GetApiVersionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -85,12 +85,12 @@ func (o *FcpmV2RegionList) GetApiVersionOk() (*string, bool) {
 }
 
 // SetApiVersion sets field value
-func (o *FcpmV2RegionList) SetApiVersion(v string) {
+func (o *FcpmV2IamBindingList) SetApiVersion(v string) {
 	o.ApiVersion = v
 }
 
 // GetKind returns the Kind field value
-func (o *FcpmV2RegionList) GetKind() string {
+func (o *FcpmV2IamBindingList) GetKind() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -101,7 +101,7 @@ func (o *FcpmV2RegionList) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *FcpmV2RegionList) GetKindOk() (*string, bool) {
+func (o *FcpmV2IamBindingList) GetKindOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -109,12 +109,12 @@ func (o *FcpmV2RegionList) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *FcpmV2RegionList) SetKind(v string) {
+func (o *FcpmV2IamBindingList) SetKind(v string) {
 	o.Kind = v
 }
 
 // GetMetadata returns the Metadata field value
-func (o *FcpmV2RegionList) GetMetadata() ListMeta {
+func (o *FcpmV2IamBindingList) GetMetadata() ListMeta {
 	if o == nil {
 		var ret ListMeta
 		return ret
@@ -125,7 +125,7 @@ func (o *FcpmV2RegionList) GetMetadata() ListMeta {
 
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
-func (o *FcpmV2RegionList) GetMetadataOk() (*ListMeta, bool) {
+func (o *FcpmV2IamBindingList) GetMetadataOk() (*ListMeta, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -133,14 +133,14 @@ func (o *FcpmV2RegionList) GetMetadataOk() (*ListMeta, bool) {
 }
 
 // SetMetadata sets field value
-func (o *FcpmV2RegionList) SetMetadata(v ListMeta) {
+func (o *FcpmV2IamBindingList) SetMetadata(v ListMeta) {
 	o.Metadata = v
 }
 
 // GetData returns the Data field value
-func (o *FcpmV2RegionList) GetData() []FcpmV2Region {
+func (o *FcpmV2IamBindingList) GetData() []FcpmV2IamBinding {
 	if o == nil {
-		var ret []FcpmV2Region
+		var ret []FcpmV2IamBinding
 		return ret
 	}
 
@@ -149,7 +149,7 @@ func (o *FcpmV2RegionList) GetData() []FcpmV2Region {
 
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
-func (o *FcpmV2RegionList) GetDataOk() (*[]FcpmV2Region, bool) {
+func (o *FcpmV2IamBindingList) GetDataOk() (*[]FcpmV2IamBinding, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -157,19 +157,19 @@ func (o *FcpmV2RegionList) GetDataOk() (*[]FcpmV2Region, bool) {
 }
 
 // SetData sets field value
-func (o *FcpmV2RegionList) SetData(v []FcpmV2Region) {
+func (o *FcpmV2IamBindingList) SetData(v []FcpmV2IamBinding) {
 	o.Data = v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *FcpmV2RegionList) Redact() {
+func (o *FcpmV2IamBindingList) Redact() {
 	o.recurseRedact(&o.ApiVersion)
 	o.recurseRedact(&o.Kind)
 	o.recurseRedact(&o.Metadata)
 	o.recurseRedact(&o.Data)
 }
 
-func (o *FcpmV2RegionList) recurseRedact(v interface{}) {
+func (o *FcpmV2IamBindingList) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -194,12 +194,12 @@ func (o *FcpmV2RegionList) recurseRedact(v interface{}) {
 	}
 }
 
-func (o FcpmV2RegionList) zeroField(v interface{}) {
+func (o FcpmV2IamBindingList) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o FcpmV2RegionList) MarshalJSON() ([]byte, error) {
+func (o FcpmV2IamBindingList) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["api_version"] = o.ApiVersion
@@ -216,38 +216,38 @@ func (o FcpmV2RegionList) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableFcpmV2RegionList struct {
-	value *FcpmV2RegionList
+type NullableFcpmV2IamBindingList struct {
+	value *FcpmV2IamBindingList
 	isSet bool
 }
 
-func (v NullableFcpmV2RegionList) Get() *FcpmV2RegionList {
+func (v NullableFcpmV2IamBindingList) Get() *FcpmV2IamBindingList {
 	return v.value
 }
 
-func (v *NullableFcpmV2RegionList) Set(val *FcpmV2RegionList) {
+func (v *NullableFcpmV2IamBindingList) Set(val *FcpmV2IamBindingList) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFcpmV2RegionList) IsSet() bool {
+func (v NullableFcpmV2IamBindingList) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFcpmV2RegionList) Unset() {
+func (v *NullableFcpmV2IamBindingList) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFcpmV2RegionList(val *FcpmV2RegionList) *NullableFcpmV2RegionList {
-	return &NullableFcpmV2RegionList{value: val, isSet: true}
+func NewNullableFcpmV2IamBindingList(val *FcpmV2IamBindingList) *NullableFcpmV2IamBindingList {
+	return &NullableFcpmV2IamBindingList{value: val, isSet: true}
 }
 
-func (v NullableFcpmV2RegionList) MarshalJSON() ([]byte, error) {
+func (v NullableFcpmV2IamBindingList) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFcpmV2RegionList) UnmarshalJSON(src []byte) error {
+func (v *NullableFcpmV2IamBindingList) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

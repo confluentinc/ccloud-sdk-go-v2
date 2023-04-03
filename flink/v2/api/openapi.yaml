@@ -22,13 +22,13 @@ tags:
 - description: |-
     [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-    An IdentityPoolEnvRegionBinding represents the binding of identity pools to all Flink
+    An IamBinding represents the binding of identity pools to all Flink
     compute pools in an environment, cloud and region. This is needed for authentication purposes.
 
 
-    ## The Identity Pool Env Region Bindings Model
-    <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.IdentityPoolEnvRegionBinding" />
-  name: Identity Pool Env Region Bindings (fcpm/v2)
+    ## The Iam Bindings Model
+    <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.IamBinding" />
+  name: Iam Bindings (fcpm/v2)
 - description: |-
     [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
@@ -50,13 +50,13 @@ tags:
     <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.Region" />
   name: Regions (fcpm/v2)
 paths:
-  /fcpm/v2/identity-pool-env-region-bindings:
+  /fcpm/v2/iam-bindings:
     get:
       description: |-
         [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-        Retrieve a sorted, filtered, paginated list of all identity pool env region bindings.
-      operationId: listFcpmV2IdentityPoolEnvRegionBindings
+        Retrieve a sorted, filtered, paginated list of all iam bindings.
+      operationId: listFcpmV2IamBindings
       parameters:
       - description: Filter the results by exact match for region.
         example: us-west-1
@@ -120,7 +120,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/fcpm.v2.IdentityPoolEnvRegionBindingList'
+                - $ref: '#/components/schemas/fcpm.v2.IamBindingList'
                 - properties:
                     data:
                       items:
@@ -137,7 +137,7 @@ paths:
                               resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/identity-pool=iam-00000
                       type: array
                   type: object
-          description: Identity Pool Env Region Binding.
+          description: Iam Binding.
           headers:
             X-Request-Id:
               description: The unique identifier for the API request.
@@ -252,21 +252,21 @@ paths:
               style: simple
       security:
       - api-key: []
-      summary: List of Identity Pool Env Region Bindings
+      summary: List of Iam Bindings
       tags:
-      - Identity Pool Env Region Bindings (fcpm/v2)
+      - Iam Bindings (fcpm/v2)
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings?region=us-west-1&cloud=AWS&environment=env-00000&identity_pool=iam-00000' \
+            --url 'https://api.confluent.cloud/fcpm/v2/iam-bindings?region=SOME_STRING_VALUE&cloud=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&identity_pool=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings?region=us-west-1&cloud=AWS&environment=env-00000&identity_pool=iam-00000")
+            .url("https://api.confluent.cloud/fcpm/v2/iam-bindings?region=SOME_STRING_VALUE&cloud=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&identity_pool=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -274,7 +274,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings?region=us-west-1&cloud=AWS&environment=env-00000&identity_pool=iam-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/iam-bindings?region=SOME_STRING_VALUE&cloud=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&identity_pool=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -287,7 +287,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/fcpm/v2/identity-pool-env-region-bindings?region=us-west-1&cloud=AWS&environment=env-00000&identity_pool=iam-00000", headers=headers)
+          conn.request("GET", "/fcpm/v2/iam-bindings?region=SOME_STRING_VALUE&cloud=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&identity_pool=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -301,7 +301,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/fcpm/v2/identity-pool-env-region-bindings?region=us-west-1&cloud=AWS&environment=env-00000&identity_pool=iam-00000",
+            "path": "/fcpm/v2/iam-bindings?region=SOME_STRING_VALUE&cloud=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&identity_pool=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -326,7 +326,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings?region=us-west-1&cloud=AWS&environment=env-00000&identity_pool=iam-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/iam-bindings?region=SOME_STRING_VALUE&cloud=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&identity_pool=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -335,7 +335,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings?region=us-west-1&cloud=AWS&environment=env-00000&identity_pool=iam-00000");
+          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/iam-bindings?region=SOME_STRING_VALUE&cloud=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&identity_pool=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -343,14 +343,14 @@ paths:
       description: |-
         [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-        Make a request to create an identity pool env region binding.
-      operationId: createFcpmV2IdentityPoolEnvRegionBinding
+        Make a request to create an iam binding.
+      operationId: createFcpmV2IamBinding
       requestBody:
         content:
           application/json:
             schema:
               allOf:
-              - $ref: '#/components/schemas/fcpm.v2.IdentityPoolEnvRegionBinding'
+              - $ref: '#/components/schemas/fcpm.v2.IamBinding'
               - required:
                 - environment
                 - identity_pool
@@ -370,7 +370,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/fcpm.v2.IdentityPoolEnvRegionBinding'
+                - $ref: '#/components/schemas/fcpm.v2.IamBinding'
                 - required:
                   - environment
                   - identity_pool
@@ -388,7 +388,7 @@ paths:
                         related: https://api.confluent.cloud/iam/v2/identity-pools/iam-00000
                         resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/identity-pool=iam-00000
                   type: object
-          description: An Identity Pool Env Region Binding was created.
+          description: An Iam Binding was created.
           headers:
             X-Request-Id:
               description: The unique identifier for the API request.
@@ -397,10 +397,10 @@ paths:
                 type: string
               style: simple
             Location:
-              description: IdentityPoolEnvRegionBinding resource uri
+              description: IamBinding resource uri
               explode: false
               schema:
-                example: https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings/{id}
+                example: https://api.confluent.cloud/fcpm/v2/iam-bindings/{id}
                 format: uri
                 type: string
               style: simple
@@ -564,14 +564,14 @@ paths:
               style: simple
       security:
       - api-key: []
-      summary: Create an Identity Pool Env Region Binding
+      summary: Create an Iam Binding
       tags:
-      - Identity Pool Env Region Bindings (fcpm/v2)
+      - Iam Bindings (fcpm/v2)
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings \
+            --url https://api.confluent.cloud/fcpm/v2/iam-bindings \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"region":"us-west-1","environment":{"id":"env-00000"},"identity_pool":{"id":"iam-00000"}}'
@@ -582,7 +582,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"region\":\"us-west-1\",\"environment\":{\"id\":\"env-00000\"},\"identity_pool\":{\"id\":\"iam-00000\"}}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings")
+            .url("https://api.confluent.cloud/fcpm/v2/iam-bindings")
             .post(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -591,7 +591,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/iam-bindings\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"region\\\":\\\"us-west-1\\\",\\\
           \"environment\\\":{\\\"id\\\":\\\"env-00000\\\"},\\\"identity_pool\\\":{\\\
           \"id\\\":\\\"iam-00000\\\"}}\")\n\n\treq, _ := http.NewRequest(\"POST\"\
@@ -613,7 +613,7 @@ paths:
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("POST", "/fcpm/v2/identity-pool-env-region-bindings", payload, headers)
+          conn.request("POST", "/fcpm/v2/iam-bindings", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -627,7 +627,7 @@ paths:
             "method": "POST",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/fcpm/v2/identity-pool-env-region-bindings",
+            "path": "/fcpm/v2/iam-bindings",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -658,7 +658,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/iam-bindings");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -670,19 +670,19 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings");
+          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/iam-bindings");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"region\":\"us-west-1\",\"environment\":{\"id\":\"env-00000\"},\"identity_pool\":{\"id\":\"iam-00000\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-  /fcpm/v2/identity-pool-env-region-bindings/{id}:
+  /fcpm/v2/iam-bindings/{id}:
     delete:
       description: |-
         [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-        Make a request to delete an identity pool env region binding.
-      operationId: deleteFcpmV2IdentityPoolEnvRegionBinding
+        Make a request to delete an iam binding.
+      operationId: deleteFcpmV2IamBinding
       parameters:
       - description: Scope the operation to the given environment.
         example: env-00000
@@ -702,7 +702,7 @@ paths:
         schema:
           $ref: '#/components/schemas/SearchFilter'
         style: form
-      - description: The unique identifier for the identity pool env region binding.
+      - description: The unique identifier for the iam binding.
         explode: false
         in: path
         name: id
@@ -712,7 +712,7 @@ paths:
         style: simple
       responses:
         "204":
-          description: An Identity Pool Env Region Binding is being deleted.
+          description: An Iam Binding is being deleted.
           headers:
             X-Request-Id:
               description: The unique identifier for the API request.
@@ -845,21 +845,21 @@ paths:
               style: simple
       security:
       - api-key: []
-      summary: Delete an Identity Pool Env Region Binding
+      summary: Delete an Iam Binding
       tags:
-      - Identity Pool Env Region Bindings (fcpm/v2)
+      - Iam Bindings (fcpm/v2)
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings/%7Bid%7D?environment=env-00000&identity_pool=iam-00000' \
+            --url 'https://api.confluent.cloud/fcpm/v2/iam-bindings/{id}?environment=SOME_STRING_VALUE&identity_pool=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings/%7Bid%7D?environment=env-00000&identity_pool=iam-00000")
+            .url("https://api.confluent.cloud/fcpm/v2/iam-bindings/{id}?environment=SOME_STRING_VALUE&identity_pool=SOME_STRING_VALUE")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -867,7 +867,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings/%7Bid%7D?environment=env-00000&identity_pool=iam-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/iam-bindings/{id}?environment=SOME_STRING_VALUE&identity_pool=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -880,7 +880,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/fcpm/v2/identity-pool-env-region-bindings/%7Bid%7D?environment=env-00000&identity_pool=iam-00000", headers=headers)
+          conn.request("DELETE", "/fcpm/v2/iam-bindings/{id}?environment=SOME_STRING_VALUE&identity_pool=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -894,7 +894,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/fcpm/v2/identity-pool-env-region-bindings/%7Bid%7D?environment=env-00000&identity_pool=iam-00000",
+            "path": "/fcpm/v2/iam-bindings/{id}?environment=SOME_STRING_VALUE&identity_pool=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -919,7 +919,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings/%7Bid%7D?environment=env-00000&identity_pool=iam-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/iam-bindings/{id}?environment=SOME_STRING_VALUE&identity_pool=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -928,7 +928,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings/%7Bid%7D?environment=env-00000&identity_pool=iam-00000");
+          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/iam-bindings/{id}?environment=SOME_STRING_VALUE&identity_pool=SOME_STRING_VALUE");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1135,14 +1135,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/fcpm/v2/compute-pools?spec.region=us-west-1&environment=env-00000&spec.network=n-00000' \
+            --url 'https://api.confluent.cloud/fcpm/v2/compute-pools?spec.region=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/fcpm/v2/compute-pools?spec.region=us-west-1&environment=env-00000&spec.network=n-00000")
+            .url("https://api.confluent.cloud/fcpm/v2/compute-pools?spec.region=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1150,7 +1150,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pools?spec.region=us-west-1&environment=env-00000&spec.network=n-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pools?spec.region=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1163,7 +1163,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/fcpm/v2/compute-pools?spec.region=us-west-1&environment=env-00000&spec.network=n-00000", headers=headers)
+          conn.request("GET", "/fcpm/v2/compute-pools?spec.region=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1177,7 +1177,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/fcpm/v2/compute-pools?spec.region=us-west-1&environment=env-00000&spec.network=n-00000",
+            "path": "/fcpm/v2/compute-pools?spec.region=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1202,7 +1202,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/compute-pools?spec.region=us-west-1&environment=env-00000&spec.network=n-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/compute-pools?spec.region=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1211,7 +1211,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/compute-pools?spec.region=us-west-1&environment=env-00000&spec.network=n-00000");
+          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/compute-pools?spec.region=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&spec.network=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1748,14 +1748,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/fcpm/v2/compute-pools/{id}?environment=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/fcpm/v2/compute-pools/{id}?environment=SOME_STRING_VALUE")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1763,7 +1763,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pools/{id}?environment=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1776,7 +1776,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("DELETE", "/fcpm/v2/compute-pools/{id}?environment=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1790,7 +1790,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000",
+            "path": "/fcpm/v2/compute-pools/{id}?environment=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1815,7 +1815,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/compute-pools/{id}?environment=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1824,7 +1824,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/compute-pools/{id}?environment=SOME_STRING_VALUE");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -2030,14 +2030,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/fcpm/v2/compute-pools/{id}?environment=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/fcpm/v2/compute-pools/{id}?environment=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -2045,7 +2045,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pools/{id}?environment=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -2058,7 +2058,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("GET", "/fcpm/v2/compute-pools/{id}?environment=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2072,7 +2072,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000",
+            "path": "/fcpm/v2/compute-pools/{id}?environment=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -2097,7 +2097,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/compute-pools/{id}?environment=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -2106,7 +2106,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/compute-pools/{id}?environment=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -2345,7 +2345,7 @@ paths:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D \
+            --url 'https://api.confluent.cloud/fcpm/v2/compute-pools/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"spec":{"display_name":"flink_compute_pool_0","cloud":"GCP","region":"us-west-1","max_csu":16,"config":{"kind":"Standard"},"environment":{"id":"env-00000"},"network":{"id":"string","environment":"string"}}}'
@@ -2356,7 +2356,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"GCP\",\"region\":\"us-west-1\",\"max_csu\":16,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D")
+            .url("https://api.confluent.cloud/fcpm/v2/compute-pools/{id}")
             .patch(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -2365,7 +2365,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pools/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"flink_compute_pool_0\\\",\\\"cloud\\\":\\\"GCP\\\",\\\"region\\\":\\\
           \"us-west-1\\\",\\\"max_csu\\\":16,\\\"config\\\":{\\\"kind\\\":\\\"Standard\\\
@@ -2389,7 +2389,7 @@ paths:
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/fcpm/v2/compute-pools/%7Bid%7D", payload, headers)
+          conn.request("PATCH", "/fcpm/v2/compute-pools/{id}", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2403,7 +2403,7 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/fcpm/v2/compute-pools/%7Bid%7D",
+            "path": "/fcpm/v2/compute-pools/{id}",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -2440,7 +2440,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/compute-pools/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -2452,7 +2452,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/compute-pools/{id}");
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
@@ -2633,14 +2633,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/fcpm/v2/regions?cloud=AWS&region_name=us-east-2' \
+            --url 'https://api.confluent.cloud/fcpm/v2/regions?cloud=SOME_STRING_VALUE&region_name=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/fcpm/v2/regions?cloud=AWS&region_name=us-east-2")
+            .url("https://api.confluent.cloud/fcpm/v2/regions?cloud=SOME_STRING_VALUE&region_name=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -2648,7 +2648,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/regions?cloud=AWS&region_name=us-east-2\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/regions?cloud=SOME_STRING_VALUE&region_name=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -2661,7 +2661,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/fcpm/v2/regions?cloud=AWS&region_name=us-east-2", headers=headers)
+          conn.request("GET", "/fcpm/v2/regions?cloud=SOME_STRING_VALUE&region_name=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2675,7 +2675,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/fcpm/v2/regions?cloud=AWS&region_name=us-east-2",
+            "path": "/fcpm/v2/regions?cloud=SOME_STRING_VALUE&region_name=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -2700,7 +2700,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/regions?cloud=AWS&region_name=us-east-2");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/regions?cloud=SOME_STRING_VALUE&region_name=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -2709,7 +2709,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/regions?cloud=AWS&region_name=us-east-2");
+          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/regions?cloud=SOME_STRING_VALUE&region_name=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -2910,14 +2910,14 @@ components:
             type: string
           style: simple
   schemas:
-    fcpm.v2.IdentityPoolEnvRegionBinding:
+    fcpm.v2.IamBinding:
       description: |-
-        An IdentityPoolEnvRegionBinding represents the binding of identity pools to all Flink
+        An IamBinding represents the binding of identity pools to all Flink
         compute pools in an environment, cloud and region. This is needed for authentication purposes.
 
 
-        ## The Identity Pool Env Region Bindings Model
-        <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.IdentityPoolEnvRegionBinding" />
+        ## The Iam Bindings Model
+        <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.IamBinding" />
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -2929,7 +2929,7 @@ components:
         kind:
           description: Kind defines the object this REST resource represents.
           enum:
-          - IdentityPoolEnvRegionBinding
+          - IamBinding
           readOnly: true
           type: string
         id:
@@ -2947,9 +2947,9 @@ components:
           - $ref: '#/components/schemas/ObjectMeta'
           - properties:
               self:
-                example: https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings/fiam-12345
+                example: https://api.confluent.cloud/fcpm/v2/iam-bindings/fiam-12345
               resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/identity_pool=pool-123/identity-pool-env-region-binding=fiam-12345
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/iam-binding=fiam-12345
         region:
           description: Flink compute pools in the region provided will be able to
             use this identity pool.
@@ -3124,14 +3124,14 @@ components:
     SearchFilter:
       description: Filter a collection by a string search
       type: string
-    fcpm.v2.IdentityPoolEnvRegionBindingList:
+    fcpm.v2.IamBindingList:
       description: |-
-        An IdentityPoolEnvRegionBinding represents the binding of identity pools to all Flink
+        An IamBinding represents the binding of identity pools to all Flink
         compute pools in an environment, cloud and region. This is needed for authentication purposes.
 
 
-        ## The Identity Pool Env Region Bindings Model
-        <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.IdentityPoolEnvRegionBinding" />
+        ## The Iam Bindings Model
+        <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.IamBinding" />
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -3143,7 +3143,7 @@ components:
         kind:
           description: Kind defines the object this REST resource represents.
           enum:
-          - IdentityPoolEnvRegionBindingList
+          - IamBindingList
           readOnly: true
           type: string
         metadata:
@@ -3151,19 +3151,19 @@ components:
           - $ref: '#/components/schemas/ListMeta'
           - properties:
               first:
-                example: https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings
+                example: https://api.confluent.cloud/fcpm/v2/iam-bindings
               last:
-                example: https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings?page_token=bcAOehAY8F16YD84Z1wT
+                example: https://api.confluent.cloud/fcpm/v2/iam-bindings?page_token=bcAOehAY8F16YD84Z1wT
               prev:
-                example: https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings?page_token=YIXRY97wWYmwzrax4dld
+                example: https://api.confluent.cloud/fcpm/v2/iam-bindings?page_token=YIXRY97wWYmwzrax4dld
               next:
-                example: https://api.confluent.cloud/fcpm/v2/identity-pool-env-region-bindings?page_token=UvmDWOB1iwfAIBPj6EYb
+                example: https://api.confluent.cloud/fcpm/v2/iam-bindings?page_token=UvmDWOB1iwfAIBPj6EYb
         data:
           description: A data property that contains an array of resource items. Each
             entry in the array is a separate resource.
           items:
             allOf:
-            - $ref: '#/components/schemas/fcpm.v2.IdentityPoolEnvRegionBinding'
+            - $ref: '#/components/schemas/fcpm.v2.IamBinding'
             - required:
               - cloud
               - environment

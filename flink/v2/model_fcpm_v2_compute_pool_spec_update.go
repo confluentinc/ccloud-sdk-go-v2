@@ -35,9 +35,9 @@ import (
 
 // FcpmV2ComputePoolSpecUpdate The desired state of the Compute Pool
 type FcpmV2ComputePoolSpecUpdate struct {
-	// Maximum number of Confluent Streaming Units (CSUs) that the Flink compute pool should auto-scale to. If not specified, the value defaults to 8. 
+	// Maximum number of Confluent Streaming Units (CSUs) that the Flink compute pool should auto-scale to. If not specified, the value defaults to 8.
 	MaxCsu *int32 `json:"max_csu,omitempty"`
-	// The type of of the Flink compute pool. 
+	// The type of of the Flink compute pool.
 	Config *FcpmV2ComputePoolSpecUpdateConfigOneOf `json:"config,omitempty"`
 	// The environment to which this belongs.
 	Environment *GlobalObjectReference `json:"environment,omitempty"`
@@ -158,39 +158,39 @@ func (o *FcpmV2ComputePoolSpecUpdate) SetEnvironment(v GlobalObjectReference) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *FcpmV2ComputePoolSpecUpdate) Redact() {
-    o.recurseRedact(o.MaxCsu)
-    o.recurseRedact(o.Config)
-    o.recurseRedact(o.Environment)
+	o.recurseRedact(o.MaxCsu)
+	o.recurseRedact(o.Config)
+	o.recurseRedact(o.Environment)
 }
 
 func (o *FcpmV2ComputePoolSpecUpdate) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o FcpmV2ComputePoolSpecUpdate) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o FcpmV2ComputePoolSpecUpdate) MarshalJSON() ([]byte, error) {
@@ -242,5 +242,3 @@ func (v *NullableFcpmV2ComputePoolSpecUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

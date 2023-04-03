@@ -1,20 +1,20 @@
-# \IdentityPoolEnvRegionBindingsFcpmV2Api
+# \IamBindingsFcpmV2Api
 
 All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateFcpmV2IdentityPoolEnvRegionBinding**](IdentityPoolEnvRegionBindingsFcpmV2Api.md#CreateFcpmV2IdentityPoolEnvRegionBinding) | **Post** /fcpm/v2/identity-pool-env-region-bindings | Create an Identity Pool Env Region Binding
-[**DeleteFcpmV2IdentityPoolEnvRegionBinding**](IdentityPoolEnvRegionBindingsFcpmV2Api.md#DeleteFcpmV2IdentityPoolEnvRegionBinding) | **Delete** /fcpm/v2/identity-pool-env-region-bindings/{id} | Delete an Identity Pool Env Region Binding
-[**ListFcpmV2IdentityPoolEnvRegionBindings**](IdentityPoolEnvRegionBindingsFcpmV2Api.md#ListFcpmV2IdentityPoolEnvRegionBindings) | **Get** /fcpm/v2/identity-pool-env-region-bindings | List of Identity Pool Env Region Bindings
+[**CreateFcpmV2IamBinding**](IamBindingsFcpmV2Api.md#CreateFcpmV2IamBinding) | **Post** /fcpm/v2/iam-bindings | Create an Iam Binding
+[**DeleteFcpmV2IamBinding**](IamBindingsFcpmV2Api.md#DeleteFcpmV2IamBinding) | **Delete** /fcpm/v2/iam-bindings/{id} | Delete an Iam Binding
+[**ListFcpmV2IamBindings**](IamBindingsFcpmV2Api.md#ListFcpmV2IamBindings) | **Get** /fcpm/v2/iam-bindings | List of Iam Bindings
 
 
 
-## CreateFcpmV2IdentityPoolEnvRegionBinding
+## CreateFcpmV2IamBinding
 
-> FcpmV2IdentityPoolEnvRegionBinding CreateFcpmV2IdentityPoolEnvRegionBinding(ctx).FcpmV2IdentityPoolEnvRegionBinding(fcpmV2IdentityPoolEnvRegionBinding).Execute()
+> FcpmV2IamBinding CreateFcpmV2IamBinding(ctx).FcpmV2IamBinding(fcpmV2IamBinding).Execute()
 
-Create an Identity Pool Env Region Binding
+Create an Iam Binding
 
 
 
@@ -31,17 +31,17 @@ import (
 )
 
 func main() {
-    fcpmV2IdentityPoolEnvRegionBinding := *openapiclient.NewFcpmV2IdentityPoolEnvRegionBinding() // FcpmV2IdentityPoolEnvRegionBinding |  (optional)
+    fcpmV2IamBinding := *openapiclient.NewFcpmV2IamBinding() // FcpmV2IamBinding |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.IdentityPoolEnvRegionBindingsFcpmV2Api.CreateFcpmV2IdentityPoolEnvRegionBinding(context.Background()).FcpmV2IdentityPoolEnvRegionBinding(fcpmV2IdentityPoolEnvRegionBinding).Execute()
+    resp, r, err := api_client.IamBindingsFcpmV2Api.CreateFcpmV2IamBinding(context.Background()).FcpmV2IamBinding(fcpmV2IamBinding).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IdentityPoolEnvRegionBindingsFcpmV2Api.CreateFcpmV2IdentityPoolEnvRegionBinding``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `IamBindingsFcpmV2Api.CreateFcpmV2IamBinding``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateFcpmV2IdentityPoolEnvRegionBinding`: FcpmV2IdentityPoolEnvRegionBinding
-    fmt.Fprintf(os.Stdout, "Response from `IdentityPoolEnvRegionBindingsFcpmV2Api.CreateFcpmV2IdentityPoolEnvRegionBinding`: %v\n", resp)
+    // response from `CreateFcpmV2IamBinding`: FcpmV2IamBinding
+    fmt.Fprintf(os.Stdout, "Response from `IamBindingsFcpmV2Api.CreateFcpmV2IamBinding`: %v\n", resp)
 }
 ```
 
@@ -51,16 +51,16 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateFcpmV2IdentityPoolEnvRegionBindingRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateFcpmV2IamBindingRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **fcpmV2IdentityPoolEnvRegionBinding** | [**FcpmV2IdentityPoolEnvRegionBinding**](FcpmV2IdentityPoolEnvRegionBinding.md) |  | 
+ **fcpmV2IamBinding** | [**FcpmV2IamBinding**](FcpmV2IamBinding.md) |  | 
 
 ### Return type
 
-[**FcpmV2IdentityPoolEnvRegionBinding**](fcpm.v2.IdentityPoolEnvRegionBinding.md)
+[**FcpmV2IamBinding**](fcpm.v2.IamBinding.md)
 
 ### Authorization
 
@@ -76,11 +76,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteFcpmV2IdentityPoolEnvRegionBinding
+## DeleteFcpmV2IamBinding
 
-> DeleteFcpmV2IdentityPoolEnvRegionBinding(ctx, id).Environment(environment).IdentityPool(identityPool).Execute()
+> DeleteFcpmV2IamBinding(ctx, id).Environment(environment).IdentityPool(identityPool).Execute()
 
-Delete an Identity Pool Env Region Binding
+Delete an Iam Binding
 
 
 
@@ -98,14 +98,14 @@ import (
 
 func main() {
     environment := "env-00000" // string | Scope the operation to the given environment.
-    id := "id_example" // string | The unique identifier for the identity pool env region binding.
+    id := "id_example" // string | The unique identifier for the iam binding.
     identityPool := "iam-00000" // string | Scope the operation to the given identity_pool. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.IdentityPoolEnvRegionBindingsFcpmV2Api.DeleteFcpmV2IdentityPoolEnvRegionBinding(context.Background(), id).Environment(environment).IdentityPool(identityPool).Execute()
+    resp, r, err := api_client.IamBindingsFcpmV2Api.DeleteFcpmV2IamBinding(context.Background(), id).Environment(environment).IdentityPool(identityPool).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IdentityPoolEnvRegionBindingsFcpmV2Api.DeleteFcpmV2IdentityPoolEnvRegionBinding``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `IamBindingsFcpmV2Api.DeleteFcpmV2IamBinding``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -117,11 +117,11 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the identity pool env region binding. | 
+**id** | **string** | The unique identifier for the iam binding. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteFcpmV2IdentityPoolEnvRegionBindingRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteFcpmV2IamBindingRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -148,11 +148,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ListFcpmV2IdentityPoolEnvRegionBindings
+## ListFcpmV2IamBindings
 
-> FcpmV2IdentityPoolEnvRegionBindingList ListFcpmV2IdentityPoolEnvRegionBindings(ctx).Environment(environment).Region(region).Cloud(cloud).IdentityPool(identityPool).PageSize(pageSize).PageToken(pageToken).Execute()
+> FcpmV2IamBindingList ListFcpmV2IamBindings(ctx).Environment(environment).Region(region).Cloud(cloud).IdentityPool(identityPool).PageSize(pageSize).PageToken(pageToken).Execute()
 
-List of Identity Pool Env Region Bindings
+List of Iam Bindings
 
 
 
@@ -178,13 +178,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.IdentityPoolEnvRegionBindingsFcpmV2Api.ListFcpmV2IdentityPoolEnvRegionBindings(context.Background()).Environment(environment).Region(region).Cloud(cloud).IdentityPool(identityPool).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.IamBindingsFcpmV2Api.ListFcpmV2IamBindings(context.Background()).Environment(environment).Region(region).Cloud(cloud).IdentityPool(identityPool).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IdentityPoolEnvRegionBindingsFcpmV2Api.ListFcpmV2IdentityPoolEnvRegionBindings``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `IamBindingsFcpmV2Api.ListFcpmV2IamBindings``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListFcpmV2IdentityPoolEnvRegionBindings`: FcpmV2IdentityPoolEnvRegionBindingList
-    fmt.Fprintf(os.Stdout, "Response from `IdentityPoolEnvRegionBindingsFcpmV2Api.ListFcpmV2IdentityPoolEnvRegionBindings`: %v\n", resp)
+    // response from `ListFcpmV2IamBindings`: FcpmV2IamBindingList
+    fmt.Fprintf(os.Stdout, "Response from `IamBindingsFcpmV2Api.ListFcpmV2IamBindings`: %v\n", resp)
 }
 ```
 
@@ -194,7 +194,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListFcpmV2IdentityPoolEnvRegionBindingsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListFcpmV2IamBindingsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -208,7 +208,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FcpmV2IdentityPoolEnvRegionBindingList**](fcpm.v2.IdentityPoolEnvRegionBindingList.md)
+[**FcpmV2IamBindingList**](fcpm.v2.IamBindingList.md)
 
 ### Authorization
 

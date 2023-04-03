@@ -33,14 +33,14 @@ import (
 	"reflect"
 )
 
-// FcpmV2IdentityPoolEnvRegionBinding An IdentityPoolEnvRegionBinding represents the binding of identity pools to all Flink compute pools in an environment, cloud and region. This is needed for authentication purposes.   ## The Identity Pool Env Region Bindings Model <SchemaDefinition schemaRef=\"#/components/schemas/fcpm.v2.IdentityPoolEnvRegionBinding\" />
-type FcpmV2IdentityPoolEnvRegionBinding struct {
+// FcpmV2IamBinding An IamBinding represents the binding of identity pools to all Flink compute pools in an environment, cloud and region. This is needed for authentication purposes.   ## The Iam Bindings Model <SchemaDefinition schemaRef=\"#/components/schemas/fcpm.v2.IamBinding\" />
+type FcpmV2IamBinding struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
 	Kind *string `json:"kind,omitempty"`
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
-	Id *string `json:"id,omitempty"`
+	Id       *string     `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
 	// Flink compute pools in the region provided will be able to use this identity pool.
 	Region *string `json:"region,omitempty"`
@@ -52,25 +52,25 @@ type FcpmV2IdentityPoolEnvRegionBinding struct {
 	IdentityPool *GlobalObjectReference `json:"identity_pool,omitempty"`
 }
 
-// NewFcpmV2IdentityPoolEnvRegionBinding instantiates a new FcpmV2IdentityPoolEnvRegionBinding object
+// NewFcpmV2IamBinding instantiates a new FcpmV2IamBinding object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFcpmV2IdentityPoolEnvRegionBinding() *FcpmV2IdentityPoolEnvRegionBinding {
-	this := FcpmV2IdentityPoolEnvRegionBinding{}
+func NewFcpmV2IamBinding() *FcpmV2IamBinding {
+	this := FcpmV2IamBinding{}
 	return &this
 }
 
-// NewFcpmV2IdentityPoolEnvRegionBindingWithDefaults instantiates a new FcpmV2IdentityPoolEnvRegionBinding object
+// NewFcpmV2IamBindingWithDefaults instantiates a new FcpmV2IamBinding object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFcpmV2IdentityPoolEnvRegionBindingWithDefaults() *FcpmV2IdentityPoolEnvRegionBinding {
-	this := FcpmV2IdentityPoolEnvRegionBinding{}
+func NewFcpmV2IamBindingWithDefaults() *FcpmV2IamBinding {
+	this := FcpmV2IamBinding{}
 	return &this
 }
 
 // GetApiVersion returns the ApiVersion field value if set, zero value otherwise.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) GetApiVersion() string {
+func (o *FcpmV2IamBinding) GetApiVersion() string {
 	if o == nil || o.ApiVersion == nil {
 		var ret string
 		return ret
@@ -80,7 +80,7 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) GetApiVersion() string {
 
 // GetApiVersionOk returns a tuple with the ApiVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) GetApiVersionOk() (*string, bool) {
+func (o *FcpmV2IamBinding) GetApiVersionOk() (*string, bool) {
 	if o == nil || o.ApiVersion == nil {
 		return nil, false
 	}
@@ -88,7 +88,7 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) GetApiVersionOk() (*string, bool) {
 }
 
 // HasApiVersion returns a boolean if a field has been set.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) HasApiVersion() bool {
+func (o *FcpmV2IamBinding) HasApiVersion() bool {
 	if o != nil && o.ApiVersion != nil {
 		return true
 	}
@@ -97,12 +97,12 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) HasApiVersion() bool {
 }
 
 // SetApiVersion gets a reference to the given string and assigns it to the ApiVersion field.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) SetApiVersion(v string) {
+func (o *FcpmV2IamBinding) SetApiVersion(v string) {
 	o.ApiVersion = &v
 }
 
 // GetKind returns the Kind field value if set, zero value otherwise.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) GetKind() string {
+func (o *FcpmV2IamBinding) GetKind() string {
 	if o == nil || o.Kind == nil {
 		var ret string
 		return ret
@@ -112,7 +112,7 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) GetKindOk() (*string, bool) {
+func (o *FcpmV2IamBinding) GetKindOk() (*string, bool) {
 	if o == nil || o.Kind == nil {
 		return nil, false
 	}
@@ -120,7 +120,7 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) GetKindOk() (*string, bool) {
 }
 
 // HasKind returns a boolean if a field has been set.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) HasKind() bool {
+func (o *FcpmV2IamBinding) HasKind() bool {
 	if o != nil && o.Kind != nil {
 		return true
 	}
@@ -129,12 +129,12 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) HasKind() bool {
 }
 
 // SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) SetKind(v string) {
+func (o *FcpmV2IamBinding) SetKind(v string) {
 	o.Kind = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) GetId() string {
+func (o *FcpmV2IamBinding) GetId() string {
 	if o == nil || o.Id == nil {
 		var ret string
 		return ret
@@ -144,7 +144,7 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) GetIdOk() (*string, bool) {
+func (o *FcpmV2IamBinding) GetIdOk() (*string, bool) {
 	if o == nil || o.Id == nil {
 		return nil, false
 	}
@@ -152,7 +152,7 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) HasId() bool {
+func (o *FcpmV2IamBinding) HasId() bool {
 	if o != nil && o.Id != nil {
 		return true
 	}
@@ -161,12 +161,12 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) SetId(v string) {
+func (o *FcpmV2IamBinding) SetId(v string) {
 	o.Id = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) GetMetadata() ObjectMeta {
+func (o *FcpmV2IamBinding) GetMetadata() ObjectMeta {
 	if o == nil || o.Metadata == nil {
 		var ret ObjectMeta
 		return ret
@@ -176,7 +176,7 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) GetMetadata() ObjectMeta {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) GetMetadataOk() (*ObjectMeta, bool) {
+func (o *FcpmV2IamBinding) GetMetadataOk() (*ObjectMeta, bool) {
 	if o == nil || o.Metadata == nil {
 		return nil, false
 	}
@@ -184,7 +184,7 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) GetMetadataOk() (*ObjectMeta, bool)
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) HasMetadata() bool {
+func (o *FcpmV2IamBinding) HasMetadata() bool {
 	if o != nil && o.Metadata != nil {
 		return true
 	}
@@ -193,12 +193,12 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given ObjectMeta and assigns it to the Metadata field.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) SetMetadata(v ObjectMeta) {
+func (o *FcpmV2IamBinding) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
 // GetRegion returns the Region field value if set, zero value otherwise.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) GetRegion() string {
+func (o *FcpmV2IamBinding) GetRegion() string {
 	if o == nil || o.Region == nil {
 		var ret string
 		return ret
@@ -208,7 +208,7 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) GetRegion() string {
 
 // GetRegionOk returns a tuple with the Region field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) GetRegionOk() (*string, bool) {
+func (o *FcpmV2IamBinding) GetRegionOk() (*string, bool) {
 	if o == nil || o.Region == nil {
 		return nil, false
 	}
@@ -216,7 +216,7 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) GetRegionOk() (*string, bool) {
 }
 
 // HasRegion returns a boolean if a field has been set.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) HasRegion() bool {
+func (o *FcpmV2IamBinding) HasRegion() bool {
 	if o != nil && o.Region != nil {
 		return true
 	}
@@ -225,12 +225,12 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) HasRegion() bool {
 }
 
 // SetRegion gets a reference to the given string and assigns it to the Region field.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) SetRegion(v string) {
+func (o *FcpmV2IamBinding) SetRegion(v string) {
 	o.Region = &v
 }
 
 // GetCloud returns the Cloud field value if set, zero value otherwise.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) GetCloud() string {
+func (o *FcpmV2IamBinding) GetCloud() string {
 	if o == nil || o.Cloud == nil {
 		var ret string
 		return ret
@@ -240,7 +240,7 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) GetCloud() string {
 
 // GetCloudOk returns a tuple with the Cloud field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) GetCloudOk() (*string, bool) {
+func (o *FcpmV2IamBinding) GetCloudOk() (*string, bool) {
 	if o == nil || o.Cloud == nil {
 		return nil, false
 	}
@@ -248,7 +248,7 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) GetCloudOk() (*string, bool) {
 }
 
 // HasCloud returns a boolean if a field has been set.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) HasCloud() bool {
+func (o *FcpmV2IamBinding) HasCloud() bool {
 	if o != nil && o.Cloud != nil {
 		return true
 	}
@@ -257,12 +257,12 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) HasCloud() bool {
 }
 
 // SetCloud gets a reference to the given string and assigns it to the Cloud field.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) SetCloud(v string) {
+func (o *FcpmV2IamBinding) SetCloud(v string) {
 	o.Cloud = &v
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) GetEnvironment() GlobalObjectReference {
+func (o *FcpmV2IamBinding) GetEnvironment() GlobalObjectReference {
 	if o == nil || o.Environment == nil {
 		var ret GlobalObjectReference
 		return ret
@@ -272,7 +272,7 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) GetEnvironment() GlobalObjectRefere
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) GetEnvironmentOk() (*GlobalObjectReference, bool) {
+func (o *FcpmV2IamBinding) GetEnvironmentOk() (*GlobalObjectReference, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -280,7 +280,7 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) GetEnvironmentOk() (*GlobalObjectRe
 }
 
 // HasEnvironment returns a boolean if a field has been set.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) HasEnvironment() bool {
+func (o *FcpmV2IamBinding) HasEnvironment() bool {
 	if o != nil && o.Environment != nil {
 		return true
 	}
@@ -289,12 +289,12 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) HasEnvironment() bool {
 }
 
 // SetEnvironment gets a reference to the given GlobalObjectReference and assigns it to the Environment field.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) SetEnvironment(v GlobalObjectReference) {
+func (o *FcpmV2IamBinding) SetEnvironment(v GlobalObjectReference) {
 	o.Environment = &v
 }
 
 // GetIdentityPool returns the IdentityPool field value if set, zero value otherwise.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) GetIdentityPool() GlobalObjectReference {
+func (o *FcpmV2IamBinding) GetIdentityPool() GlobalObjectReference {
 	if o == nil || o.IdentityPool == nil {
 		var ret GlobalObjectReference
 		return ret
@@ -304,7 +304,7 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) GetIdentityPool() GlobalObjectRefer
 
 // GetIdentityPoolOk returns a tuple with the IdentityPool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) GetIdentityPoolOk() (*GlobalObjectReference, bool) {
+func (o *FcpmV2IamBinding) GetIdentityPoolOk() (*GlobalObjectReference, bool) {
 	if o == nil || o.IdentityPool == nil {
 		return nil, false
 	}
@@ -312,7 +312,7 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) GetIdentityPoolOk() (*GlobalObjectR
 }
 
 // HasIdentityPool returns a boolean if a field has been set.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) HasIdentityPool() bool {
+func (o *FcpmV2IamBinding) HasIdentityPool() bool {
 	if o != nil && o.IdentityPool != nil {
 		return true
 	}
@@ -321,53 +321,53 @@ func (o *FcpmV2IdentityPoolEnvRegionBinding) HasIdentityPool() bool {
 }
 
 // SetIdentityPool gets a reference to the given GlobalObjectReference and assigns it to the IdentityPool field.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) SetIdentityPool(v GlobalObjectReference) {
+func (o *FcpmV2IamBinding) SetIdentityPool(v GlobalObjectReference) {
 	o.IdentityPool = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *FcpmV2IdentityPoolEnvRegionBinding) Redact() {
-    o.recurseRedact(o.ApiVersion)
-    o.recurseRedact(o.Kind)
-    o.recurseRedact(o.Id)
-    o.recurseRedact(o.Metadata)
-    o.recurseRedact(o.Region)
-    o.recurseRedact(o.Cloud)
-    o.recurseRedact(o.Environment)
-    o.recurseRedact(o.IdentityPool)
+func (o *FcpmV2IamBinding) Redact() {
+	o.recurseRedact(o.ApiVersion)
+	o.recurseRedact(o.Kind)
+	o.recurseRedact(o.Id)
+	o.recurseRedact(o.Metadata)
+	o.recurseRedact(o.Region)
+	o.recurseRedact(o.Cloud)
+	o.recurseRedact(o.Environment)
+	o.recurseRedact(o.IdentityPool)
 }
 
-func (o *FcpmV2IdentityPoolEnvRegionBinding) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+func (o *FcpmV2IamBinding) recurseRedact(v interface{}) {
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
-func (o FcpmV2IdentityPoolEnvRegionBinding) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+func (o FcpmV2IamBinding) zeroField(v interface{}) {
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o FcpmV2IdentityPoolEnvRegionBinding) MarshalJSON() ([]byte, error) {
+func (o FcpmV2IamBinding) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ApiVersion != nil {
 		toSerialize["api_version"] = o.ApiVersion
@@ -396,40 +396,38 @@ func (o FcpmV2IdentityPoolEnvRegionBinding) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableFcpmV2IdentityPoolEnvRegionBinding struct {
-	value *FcpmV2IdentityPoolEnvRegionBinding
+type NullableFcpmV2IamBinding struct {
+	value *FcpmV2IamBinding
 	isSet bool
 }
 
-func (v NullableFcpmV2IdentityPoolEnvRegionBinding) Get() *FcpmV2IdentityPoolEnvRegionBinding {
+func (v NullableFcpmV2IamBinding) Get() *FcpmV2IamBinding {
 	return v.value
 }
 
-func (v *NullableFcpmV2IdentityPoolEnvRegionBinding) Set(val *FcpmV2IdentityPoolEnvRegionBinding) {
+func (v *NullableFcpmV2IamBinding) Set(val *FcpmV2IamBinding) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFcpmV2IdentityPoolEnvRegionBinding) IsSet() bool {
+func (v NullableFcpmV2IamBinding) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFcpmV2IdentityPoolEnvRegionBinding) Unset() {
+func (v *NullableFcpmV2IamBinding) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFcpmV2IdentityPoolEnvRegionBinding(val *FcpmV2IdentityPoolEnvRegionBinding) *NullableFcpmV2IdentityPoolEnvRegionBinding {
-	return &NullableFcpmV2IdentityPoolEnvRegionBinding{value: val, isSet: true}
+func NewNullableFcpmV2IamBinding(val *FcpmV2IamBinding) *NullableFcpmV2IamBinding {
+	return &NullableFcpmV2IamBinding{value: val, isSet: true}
 }
 
-func (v NullableFcpmV2IdentityPoolEnvRegionBinding) MarshalJSON() ([]byte, error) {
+func (v NullableFcpmV2IamBinding) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFcpmV2IdentityPoolEnvRegionBinding) UnmarshalJSON(src []byte) error {
+func (v *NullableFcpmV2IamBinding) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

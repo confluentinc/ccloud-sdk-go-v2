@@ -37,9 +37,8 @@ type FcpmV2ComputePoolSpecUpdateConfigOneOf struct {
 
 // FcpmV2StandardAsFcpmV2ComputePoolSpecUpdateConfigOneOf is a convenience function that returns FcpmV2Standard wrapped in FcpmV2ComputePoolSpecUpdateConfigOneOf
 func FcpmV2StandardAsFcpmV2ComputePoolSpecUpdateConfigOneOf(v *FcpmV2Standard) FcpmV2ComputePoolSpecUpdateConfigOneOf {
-	return FcpmV2ComputePoolSpecUpdateConfigOneOf{ FcpmV2Standard: v}
+	return FcpmV2ComputePoolSpecUpdateConfigOneOf{FcpmV2Standard: v}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *FcpmV2ComputePoolSpecUpdateConfigOneOf) UnmarshalJSON(data []byte) error {
@@ -88,7 +87,7 @@ func (src FcpmV2ComputePoolSpecUpdateConfigOneOf) MarshalJSON() ([]byte, error) 
 }
 
 // Get the actual instance
-func (obj *FcpmV2ComputePoolSpecUpdateConfigOneOf) GetActualInstance() (interface{}) {
+func (obj *FcpmV2ComputePoolSpecUpdateConfigOneOf) GetActualInstance() interface{} {
 	if obj.FcpmV2Standard != nil {
 		return obj.FcpmV2Standard
 	}
@@ -132,5 +131,3 @@ func (v *NullableFcpmV2ComputePoolSpecUpdateConfigOneOf) UnmarshalJSON(src []byt
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

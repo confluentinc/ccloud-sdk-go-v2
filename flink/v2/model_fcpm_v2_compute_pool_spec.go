@@ -43,9 +43,9 @@ type FcpmV2ComputePoolSpec struct {
 	HttpEndpoint *string `json:"http_endpoint,omitempty"`
 	// Flink compute pools in the region provided will be able to use this identity pool
 	Region *string `json:"region,omitempty"`
-	// Maximum number of Confluent Streaming Units (CSUs) that the Flink compute pool should auto-scale to. If not specified, the value defaults to 8. 
+	// Maximum number of Confluent Streaming Units (CSUs) that the Flink compute pool should auto-scale to. If not specified, the value defaults to 8.
 	MaxCsu *int32 `json:"max_csu,omitempty"`
-	// The type of of the Flink compute pool. 
+	// The type of of the Flink compute pool.
 	Config *FcpmV2ComputePoolSpecConfigOneOf `json:"config,omitempty"`
 	// The environment to which this belongs.
 	Environment *GlobalObjectReference `json:"environment,omitempty"`
@@ -328,44 +328,44 @@ func (o *FcpmV2ComputePoolSpec) SetNetwork(v EnvScopedObjectReference) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *FcpmV2ComputePoolSpec) Redact() {
-    o.recurseRedact(o.DisplayName)
-    o.recurseRedact(o.Cloud)
-    o.recurseRedact(o.HttpEndpoint)
-    o.recurseRedact(o.Region)
-    o.recurseRedact(o.MaxCsu)
-    o.recurseRedact(o.Config)
-    o.recurseRedact(o.Environment)
-    o.recurseRedact(o.Network)
+	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.Cloud)
+	o.recurseRedact(o.HttpEndpoint)
+	o.recurseRedact(o.Region)
+	o.recurseRedact(o.MaxCsu)
+	o.recurseRedact(o.Config)
+	o.recurseRedact(o.Environment)
+	o.recurseRedact(o.Network)
 }
 
 func (o *FcpmV2ComputePoolSpec) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o FcpmV2ComputePoolSpec) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o FcpmV2ComputePoolSpec) MarshalJSON() ([]byte, error) {
@@ -432,5 +432,3 @@ func (v *NullableFcpmV2ComputePoolSpec) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

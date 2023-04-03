@@ -39,135 +39,116 @@ var (
 	_ _context.Context
 )
 
-type FlinkIdentityPoolEnvRegionBindingsFiamV2Api interface {
+type IamBindingsFcpmV2Api interface {
 
 	/*
-	CreateFiamV2FlinkIdentityPoolEnvRegionBinding Create a Flink Identity Pool Env Region Binding
+		CreateFcpmV2IamBinding Create an Iam Binding
 
-	[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to create a flink identity pool env region binding.
+	Make a request to create an iam binding.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiCreateFiamV2FlinkIdentityPoolEnvRegionBindingRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateFcpmV2IamBindingRequest
 	*/
-	CreateFiamV2FlinkIdentityPoolEnvRegionBinding(ctx _context.Context) ApiCreateFiamV2FlinkIdentityPoolEnvRegionBindingRequest
+	CreateFcpmV2IamBinding(ctx _context.Context) ApiCreateFcpmV2IamBindingRequest
 
-	// CreateFiamV2FlinkIdentityPoolEnvRegionBindingExecute executes the request
-	//  @return FiamV2FlinkIdentityPoolEnvRegionBinding
-	CreateFiamV2FlinkIdentityPoolEnvRegionBindingExecute(r ApiCreateFiamV2FlinkIdentityPoolEnvRegionBindingRequest) (FiamV2FlinkIdentityPoolEnvRegionBinding, *_nethttp.Response, error)
+	// CreateFcpmV2IamBindingExecute executes the request
+	//  @return FcpmV2IamBinding
+	CreateFcpmV2IamBindingExecute(r ApiCreateFcpmV2IamBindingRequest) (FcpmV2IamBinding, *_nethttp.Response, error)
 
 	/*
-	DeleteFiamV2FlinkIdentityPoolEnvRegionBinding Delete a Flink Identity Pool Env Region Binding
+		DeleteFcpmV2IamBinding Delete an Iam Binding
 
-	[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to delete a flink identity pool env region binding.
+	Make a request to delete an iam binding.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the flink identity pool env region binding.
-	 @return ApiDeleteFiamV2FlinkIdentityPoolEnvRegionBindingRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the iam binding.
+		 @return ApiDeleteFcpmV2IamBindingRequest
 	*/
-	DeleteFiamV2FlinkIdentityPoolEnvRegionBinding(ctx _context.Context, id string) ApiDeleteFiamV2FlinkIdentityPoolEnvRegionBindingRequest
+	DeleteFcpmV2IamBinding(ctx _context.Context, id string) ApiDeleteFcpmV2IamBindingRequest
 
-	// DeleteFiamV2FlinkIdentityPoolEnvRegionBindingExecute executes the request
-	DeleteFiamV2FlinkIdentityPoolEnvRegionBindingExecute(r ApiDeleteFiamV2FlinkIdentityPoolEnvRegionBindingRequest) (*_nethttp.Response, error)
+	// DeleteFcpmV2IamBindingExecute executes the request
+	DeleteFcpmV2IamBindingExecute(r ApiDeleteFcpmV2IamBindingRequest) (*_nethttp.Response, error)
 
 	/*
-	ListFiamV2FlinkIdentityPoolEnvRegionBindings List of Flink Identity Pool Env Region Bindings
+		ListFcpmV2IamBindings List of Iam Bindings
 
-	[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-Retrieve a sorted, filtered, paginated list of all flink identity pool env region bindings.
+	Retrieve a sorted, filtered, paginated list of all iam bindings.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiListFiamV2FlinkIdentityPoolEnvRegionBindingsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListFcpmV2IamBindingsRequest
 	*/
-	ListFiamV2FlinkIdentityPoolEnvRegionBindings(ctx _context.Context) ApiListFiamV2FlinkIdentityPoolEnvRegionBindingsRequest
+	ListFcpmV2IamBindings(ctx _context.Context) ApiListFcpmV2IamBindingsRequest
 
-	// ListFiamV2FlinkIdentityPoolEnvRegionBindingsExecute executes the request
-	//  @return FiamV2FlinkIdentityPoolEnvRegionBindingList
-	ListFiamV2FlinkIdentityPoolEnvRegionBindingsExecute(r ApiListFiamV2FlinkIdentityPoolEnvRegionBindingsRequest) (FiamV2FlinkIdentityPoolEnvRegionBindingList, *_nethttp.Response, error)
+	// ListFcpmV2IamBindingsExecute executes the request
+	//  @return FcpmV2IamBindingList
+	ListFcpmV2IamBindingsExecute(r ApiListFcpmV2IamBindingsRequest) (FcpmV2IamBindingList, *_nethttp.Response, error)
 }
 
-// FlinkIdentityPoolEnvRegionBindingsFiamV2ApiService FlinkIdentityPoolEnvRegionBindingsFiamV2Api service
-type FlinkIdentityPoolEnvRegionBindingsFiamV2ApiService service
+// IamBindingsFcpmV2ApiService IamBindingsFcpmV2Api service
+type IamBindingsFcpmV2ApiService service
 
-type ApiCreateFiamV2FlinkIdentityPoolEnvRegionBindingRequest struct {
-	ctx _context.Context
-	ApiService FlinkIdentityPoolEnvRegionBindingsFiamV2Api
-	identityPool *string
-	environment *string
-	fiamV2FlinkIdentityPoolEnvRegionBinding *FiamV2FlinkIdentityPoolEnvRegionBinding
+type ApiCreateFcpmV2IamBindingRequest struct {
+	ctx              _context.Context
+	ApiService       IamBindingsFcpmV2Api
+	fcpmV2IamBinding *FcpmV2IamBinding
 }
 
-// Scope the operation to the given identity_pool.
-func (r ApiCreateFiamV2FlinkIdentityPoolEnvRegionBindingRequest) IdentityPool(identityPool string) ApiCreateFiamV2FlinkIdentityPoolEnvRegionBindingRequest {
-	r.identityPool = &identityPool
-	return r
-}
-// Scope the operation to the given environment.
-func (r ApiCreateFiamV2FlinkIdentityPoolEnvRegionBindingRequest) Environment(environment string) ApiCreateFiamV2FlinkIdentityPoolEnvRegionBindingRequest {
-	r.environment = &environment
-	return r
-}
-func (r ApiCreateFiamV2FlinkIdentityPoolEnvRegionBindingRequest) FiamV2FlinkIdentityPoolEnvRegionBinding(fiamV2FlinkIdentityPoolEnvRegionBinding FiamV2FlinkIdentityPoolEnvRegionBinding) ApiCreateFiamV2FlinkIdentityPoolEnvRegionBindingRequest {
-	r.fiamV2FlinkIdentityPoolEnvRegionBinding = &fiamV2FlinkIdentityPoolEnvRegionBinding
+func (r ApiCreateFcpmV2IamBindingRequest) FcpmV2IamBinding(fcpmV2IamBinding FcpmV2IamBinding) ApiCreateFcpmV2IamBindingRequest {
+	r.fcpmV2IamBinding = &fcpmV2IamBinding
 	return r
 }
 
-func (r ApiCreateFiamV2FlinkIdentityPoolEnvRegionBindingRequest) Execute() (FiamV2FlinkIdentityPoolEnvRegionBinding, *_nethttp.Response, error) {
-	return r.ApiService.CreateFiamV2FlinkIdentityPoolEnvRegionBindingExecute(r)
+func (r ApiCreateFcpmV2IamBindingRequest) Execute() (FcpmV2IamBinding, *_nethttp.Response, error) {
+	return r.ApiService.CreateFcpmV2IamBindingExecute(r)
 }
 
 /*
-CreateFiamV2FlinkIdentityPoolEnvRegionBinding Create a Flink Identity Pool Env Region Binding
+CreateFcpmV2IamBinding Create an Iam Binding
 
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to create a flink identity pool env region binding.
+Make a request to create an iam binding.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFiamV2FlinkIdentityPoolEnvRegionBindingRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFcpmV2IamBindingRequest
 */
-func (a *FlinkIdentityPoolEnvRegionBindingsFiamV2ApiService) CreateFiamV2FlinkIdentityPoolEnvRegionBinding(ctx _context.Context) ApiCreateFiamV2FlinkIdentityPoolEnvRegionBindingRequest {
-	return ApiCreateFiamV2FlinkIdentityPoolEnvRegionBindingRequest{
+func (a *IamBindingsFcpmV2ApiService) CreateFcpmV2IamBinding(ctx _context.Context) ApiCreateFcpmV2IamBindingRequest {
+	return ApiCreateFcpmV2IamBindingRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return FiamV2FlinkIdentityPoolEnvRegionBinding
-func (a *FlinkIdentityPoolEnvRegionBindingsFiamV2ApiService) CreateFiamV2FlinkIdentityPoolEnvRegionBindingExecute(r ApiCreateFiamV2FlinkIdentityPoolEnvRegionBindingRequest) (FiamV2FlinkIdentityPoolEnvRegionBinding, *_nethttp.Response, error) {
+//
+//	@return FcpmV2IamBinding
+func (a *IamBindingsFcpmV2ApiService) CreateFcpmV2IamBindingExecute(r ApiCreateFcpmV2IamBindingRequest) (FcpmV2IamBinding, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  FiamV2FlinkIdentityPoolEnvRegionBinding
+		localVarReturnValue  FcpmV2IamBinding
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FlinkIdentityPoolEnvRegionBindingsFiamV2ApiService.CreateFiamV2FlinkIdentityPoolEnvRegionBinding")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamBindingsFcpmV2ApiService.CreateFcpmV2IamBinding")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/fiam/v2/iam-bindings"
+	localVarPath := localBasePath + "/fcpm/v2/iam-bindings"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.identityPool == nil {
-		return localVarReturnValue, nil, reportError("identityPool is required and must be specified")
-	}
-	if r.environment == nil {
-		return localVarReturnValue, nil, reportError("environment is required and must be specified")
-	}
 
-	localVarQueryParams.Add("identity_pool", parameterToString(*r.identityPool, ""))
-	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -186,7 +167,7 @@ func (a *FlinkIdentityPoolEnvRegionBindingsFiamV2ApiService) CreateFiamV2FlinkId
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.fiamV2FlinkIdentityPoolEnvRegionBinding
+	localVarPostBody = r.fcpmV2IamBinding
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -283,50 +264,51 @@ func (a *FlinkIdentityPoolEnvRegionBindingsFiamV2ApiService) CreateFiamV2FlinkId
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteFiamV2FlinkIdentityPoolEnvRegionBindingRequest struct {
-	ctx _context.Context
-	ApiService FlinkIdentityPoolEnvRegionBindingsFiamV2Api
+type ApiDeleteFcpmV2IamBindingRequest struct {
+	ctx          _context.Context
+	ApiService   IamBindingsFcpmV2Api
+	environment  *string
+	id           string
 	identityPool *string
-	environment *string
-	id string
 }
 
-// Scope the operation to the given identity_pool.
-func (r ApiDeleteFiamV2FlinkIdentityPoolEnvRegionBindingRequest) IdentityPool(identityPool string) ApiDeleteFiamV2FlinkIdentityPoolEnvRegionBindingRequest {
-	r.identityPool = &identityPool
-	return r
-}
 // Scope the operation to the given environment.
-func (r ApiDeleteFiamV2FlinkIdentityPoolEnvRegionBindingRequest) Environment(environment string) ApiDeleteFiamV2FlinkIdentityPoolEnvRegionBindingRequest {
+func (r ApiDeleteFcpmV2IamBindingRequest) Environment(environment string) ApiDeleteFcpmV2IamBindingRequest {
 	r.environment = &environment
 	return r
 }
 
-func (r ApiDeleteFiamV2FlinkIdentityPoolEnvRegionBindingRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.DeleteFiamV2FlinkIdentityPoolEnvRegionBindingExecute(r)
+// Scope the operation to the given identity_pool.
+func (r ApiDeleteFcpmV2IamBindingRequest) IdentityPool(identityPool string) ApiDeleteFcpmV2IamBindingRequest {
+	r.identityPool = &identityPool
+	return r
+}
+
+func (r ApiDeleteFcpmV2IamBindingRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteFcpmV2IamBindingExecute(r)
 }
 
 /*
-DeleteFiamV2FlinkIdentityPoolEnvRegionBinding Delete a Flink Identity Pool Env Region Binding
+DeleteFcpmV2IamBinding Delete an Iam Binding
 
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to delete a flink identity pool env region binding.
+Make a request to delete an iam binding.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the flink identity pool env region binding.
- @return ApiDeleteFiamV2FlinkIdentityPoolEnvRegionBindingRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the iam binding.
+	@return ApiDeleteFcpmV2IamBindingRequest
 */
-func (a *FlinkIdentityPoolEnvRegionBindingsFiamV2ApiService) DeleteFiamV2FlinkIdentityPoolEnvRegionBinding(ctx _context.Context, id string) ApiDeleteFiamV2FlinkIdentityPoolEnvRegionBindingRequest {
-	return ApiDeleteFiamV2FlinkIdentityPoolEnvRegionBindingRequest{
+func (a *IamBindingsFcpmV2ApiService) DeleteFcpmV2IamBinding(ctx _context.Context, id string) ApiDeleteFcpmV2IamBindingRequest {
+	return ApiDeleteFcpmV2IamBindingRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-func (a *FlinkIdentityPoolEnvRegionBindingsFiamV2ApiService) DeleteFiamV2FlinkIdentityPoolEnvRegionBindingExecute(r ApiDeleteFiamV2FlinkIdentityPoolEnvRegionBindingRequest) (*_nethttp.Response, error) {
+func (a *IamBindingsFcpmV2ApiService) DeleteFcpmV2IamBindingExecute(r ApiDeleteFcpmV2IamBindingRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
@@ -335,26 +317,25 @@ func (a *FlinkIdentityPoolEnvRegionBindingsFiamV2ApiService) DeleteFiamV2FlinkId
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FlinkIdentityPoolEnvRegionBindingsFiamV2ApiService.DeleteFiamV2FlinkIdentityPoolEnvRegionBinding")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamBindingsFcpmV2ApiService.DeleteFcpmV2IamBinding")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/fiam/v2/iam-bindings/{id}"
+	localVarPath := localBasePath + "/fcpm/v2/iam-bindings/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.identityPool == nil {
-		return nil, reportError("identityPool is required and must be specified")
-	}
 	if r.environment == nil {
 		return nil, reportError("environment is required and must be specified")
 	}
 
-	localVarQueryParams.Add("identity_pool", parameterToString(*r.identityPool, ""))
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
+	if r.identityPool != nil {
+		localVarQueryParams.Add("identity_pool", parameterToString(*r.identityPool, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -449,98 +430,111 @@ func (a *FlinkIdentityPoolEnvRegionBindingsFiamV2ApiService) DeleteFiamV2FlinkId
 	return localVarHTTPResponse, nil
 }
 
-type ApiListFiamV2FlinkIdentityPoolEnvRegionBindingsRequest struct {
-	ctx _context.Context
-	ApiService FlinkIdentityPoolEnvRegionBindingsFiamV2Api
-	region *string
+type ApiListFcpmV2IamBindingsRequest struct {
+	ctx          _context.Context
+	ApiService   IamBindingsFcpmV2Api
+	environment  *string
+	region       *string
+	cloud        *string
 	identityPool *string
-	environment *string
-	pageSize *int32
-	pageToken *string
+	pageSize     *int32
+	pageToken    *string
 }
 
-// Filter the results by exact match for region.
-func (r ApiListFiamV2FlinkIdentityPoolEnvRegionBindingsRequest) Region(region string) ApiListFiamV2FlinkIdentityPoolEnvRegionBindingsRequest {
-	r.region = &region
-	return r
-}
-// Filter the results by exact match for identity_pool.
-func (r ApiListFiamV2FlinkIdentityPoolEnvRegionBindingsRequest) IdentityPool(identityPool string) ApiListFiamV2FlinkIdentityPoolEnvRegionBindingsRequest {
-	r.identityPool = &identityPool
-	return r
-}
 // Filter the results by exact match for environment.
-func (r ApiListFiamV2FlinkIdentityPoolEnvRegionBindingsRequest) Environment(environment string) ApiListFiamV2FlinkIdentityPoolEnvRegionBindingsRequest {
+func (r ApiListFcpmV2IamBindingsRequest) Environment(environment string) ApiListFcpmV2IamBindingsRequest {
 	r.environment = &environment
 	return r
 }
+
+// Filter the results by exact match for region.
+func (r ApiListFcpmV2IamBindingsRequest) Region(region string) ApiListFcpmV2IamBindingsRequest {
+	r.region = &region
+	return r
+}
+
+// Filter the results by exact match for cloud.
+func (r ApiListFcpmV2IamBindingsRequest) Cloud(cloud string) ApiListFcpmV2IamBindingsRequest {
+	r.cloud = &cloud
+	return r
+}
+
+// Filter the results by exact match for identity_pool.
+func (r ApiListFcpmV2IamBindingsRequest) IdentityPool(identityPool string) ApiListFcpmV2IamBindingsRequest {
+	r.identityPool = &identityPool
+	return r
+}
+
 // A pagination size for collection requests.
-func (r ApiListFiamV2FlinkIdentityPoolEnvRegionBindingsRequest) PageSize(pageSize int32) ApiListFiamV2FlinkIdentityPoolEnvRegionBindingsRequest {
+func (r ApiListFcpmV2IamBindingsRequest) PageSize(pageSize int32) ApiListFcpmV2IamBindingsRequest {
 	r.pageSize = &pageSize
 	return r
 }
+
 // An opaque pagination token for collection requests.
-func (r ApiListFiamV2FlinkIdentityPoolEnvRegionBindingsRequest) PageToken(pageToken string) ApiListFiamV2FlinkIdentityPoolEnvRegionBindingsRequest {
+func (r ApiListFcpmV2IamBindingsRequest) PageToken(pageToken string) ApiListFcpmV2IamBindingsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-func (r ApiListFiamV2FlinkIdentityPoolEnvRegionBindingsRequest) Execute() (FiamV2FlinkIdentityPoolEnvRegionBindingList, *_nethttp.Response, error) {
-	return r.ApiService.ListFiamV2FlinkIdentityPoolEnvRegionBindingsExecute(r)
+func (r ApiListFcpmV2IamBindingsRequest) Execute() (FcpmV2IamBindingList, *_nethttp.Response, error) {
+	return r.ApiService.ListFcpmV2IamBindingsExecute(r)
 }
 
 /*
-ListFiamV2FlinkIdentityPoolEnvRegionBindings List of Flink Identity Pool Env Region Bindings
+ListFcpmV2IamBindings List of Iam Bindings
 
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-Retrieve a sorted, filtered, paginated list of all flink identity pool env region bindings.
+Retrieve a sorted, filtered, paginated list of all iam bindings.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListFiamV2FlinkIdentityPoolEnvRegionBindingsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListFcpmV2IamBindingsRequest
 */
-func (a *FlinkIdentityPoolEnvRegionBindingsFiamV2ApiService) ListFiamV2FlinkIdentityPoolEnvRegionBindings(ctx _context.Context) ApiListFiamV2FlinkIdentityPoolEnvRegionBindingsRequest {
-	return ApiListFiamV2FlinkIdentityPoolEnvRegionBindingsRequest{
+func (a *IamBindingsFcpmV2ApiService) ListFcpmV2IamBindings(ctx _context.Context) ApiListFcpmV2IamBindingsRequest {
+	return ApiListFcpmV2IamBindingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return FiamV2FlinkIdentityPoolEnvRegionBindingList
-func (a *FlinkIdentityPoolEnvRegionBindingsFiamV2ApiService) ListFiamV2FlinkIdentityPoolEnvRegionBindingsExecute(r ApiListFiamV2FlinkIdentityPoolEnvRegionBindingsRequest) (FiamV2FlinkIdentityPoolEnvRegionBindingList, *_nethttp.Response, error) {
+//
+//	@return FcpmV2IamBindingList
+func (a *IamBindingsFcpmV2ApiService) ListFcpmV2IamBindingsExecute(r ApiListFcpmV2IamBindingsRequest) (FcpmV2IamBindingList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  FiamV2FlinkIdentityPoolEnvRegionBindingList
+		localVarReturnValue  FcpmV2IamBindingList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FlinkIdentityPoolEnvRegionBindingsFiamV2ApiService.ListFiamV2FlinkIdentityPoolEnvRegionBindings")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamBindingsFcpmV2ApiService.ListFcpmV2IamBindings")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/fiam/v2/iam-bindings"
+	localVarPath := localBasePath + "/fcpm/v2/iam-bindings"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.region == nil {
-		return localVarReturnValue, nil, reportError("region is required and must be specified")
-	}
-	if r.identityPool == nil {
-		return localVarReturnValue, nil, reportError("identityPool is required and must be specified")
-	}
 	if r.environment == nil {
 		return localVarReturnValue, nil, reportError("environment is required and must be specified")
 	}
 
-	localVarQueryParams.Add("region", parameterToString(*r.region, ""))
-	localVarQueryParams.Add("identity_pool", parameterToString(*r.identityPool, ""))
+	if r.region != nil {
+		localVarQueryParams.Add("region", parameterToString(*r.region, ""))
+	}
+	if r.cloud != nil {
+		localVarQueryParams.Add("cloud", parameterToString(*r.cloud, ""))
+	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
+	if r.identityPool != nil {
+		localVarQueryParams.Add("identity_pool", parameterToString(*r.identityPool, ""))
+	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}

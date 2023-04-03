@@ -41,14 +41,14 @@ var (
 type RegionsFcpmV2Api interface {
 
 	/*
-	ListFcpmV2Regions List of Regions
+		ListFcpmV2Regions List of Regions
 
-	[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-Retrieve a sorted, filtered, paginated list of all regions.
+	Retrieve a sorted, filtered, paginated list of all regions.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiListFcpmV2RegionsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListFcpmV2RegionsRequest
 	*/
 	ListFcpmV2Regions(ctx _context.Context) ApiListFcpmV2RegionsRequest
 
@@ -61,12 +61,12 @@ Retrieve a sorted, filtered, paginated list of all regions.
 type RegionsFcpmV2ApiService service
 
 type ApiListFcpmV2RegionsRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService RegionsFcpmV2Api
-	cloud *string
+	cloud      *string
 	regionName *string
-	pageSize *int32
-	pageToken *string
+	pageSize   *int32
+	pageToken  *string
 }
 
 // Filter the results by exact match for cloud.
@@ -74,16 +74,19 @@ func (r ApiListFcpmV2RegionsRequest) Cloud(cloud string) ApiListFcpmV2RegionsReq
 	r.cloud = &cloud
 	return r
 }
+
 // Filter the results by exact match for region_name.
 func (r ApiListFcpmV2RegionsRequest) RegionName(regionName string) ApiListFcpmV2RegionsRequest {
 	r.regionName = &regionName
 	return r
 }
+
 // A pagination size for collection requests.
 func (r ApiListFcpmV2RegionsRequest) PageSize(pageSize int32) ApiListFcpmV2RegionsRequest {
 	r.pageSize = &pageSize
 	return r
 }
+
 // An opaque pagination token for collection requests.
 func (r ApiListFcpmV2RegionsRequest) PageToken(pageToken string) ApiListFcpmV2RegionsRequest {
 	r.pageToken = &pageToken
@@ -101,18 +104,19 @@ ListFcpmV2Regions List of Regions
 
 Retrieve a sorted, filtered, paginated list of all regions.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListFcpmV2RegionsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListFcpmV2RegionsRequest
 */
 func (a *RegionsFcpmV2ApiService) ListFcpmV2Regions(ctx _context.Context) ApiListFcpmV2RegionsRequest {
 	return ApiListFcpmV2RegionsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return FcpmV2RegionList
+//
+//	@return FcpmV2RegionList
 func (a *RegionsFcpmV2ApiService) ListFcpmV2RegionsExecute(r ApiListFcpmV2RegionsRequest) (FcpmV2RegionList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet

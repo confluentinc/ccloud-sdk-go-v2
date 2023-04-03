@@ -73,7 +73,7 @@ func (o *FcpmV2ComputePoolStatus) GetPhase() string {
 // GetPhaseOk returns a tuple with the Phase field value
 // and a boolean to check if the value has been set.
 func (o *FcpmV2ComputePoolStatus) GetPhaseOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Phase, true
@@ -97,7 +97,7 @@ func (o *FcpmV2ComputePoolStatus) GetCurrentCsu() int32 {
 // GetCurrentCsuOk returns a tuple with the CurrentCsu field value
 // and a boolean to check if the value has been set.
 func (o *FcpmV2ComputePoolStatus) GetCurrentCsuOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.CurrentCsu, true
@@ -110,38 +110,38 @@ func (o *FcpmV2ComputePoolStatus) SetCurrentCsu(v int32) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *FcpmV2ComputePoolStatus) Redact() {
-    o.recurseRedact(&o.Phase)
-    o.recurseRedact(&o.CurrentCsu)
+	o.recurseRedact(&o.Phase)
+	o.recurseRedact(&o.CurrentCsu)
 }
 
 func (o *FcpmV2ComputePoolStatus) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o FcpmV2ComputePoolStatus) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o FcpmV2ComputePoolStatus) MarshalJSON() ([]byte, error) {
@@ -190,5 +190,3 @@ func (v *NullableFcpmV2ComputePoolStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
