@@ -123,14 +123,6 @@ func NewConfiguration() *Configuration {
 				URL: "https://api.confluent.cloud",
 				Description: "Confluent Cloud production",
 			},
-			{
-				URL: "https://api.stag.cpdev.cloud",
-				Description: "Confluent Cloud staging",
-			},
-			{
-				URL: "https://api.devel.cpdev.cloud",
-				Description: "Confluent Cloud development",
-			},
 		},
 		OperationServers: map[string]ServerConfigurations{
 		},
