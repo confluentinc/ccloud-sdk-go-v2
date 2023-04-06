@@ -298,7 +298,7 @@ Name | Type | Description  | Notes
 
 ## UpdateSdV1Pipeline
 
-> SdV1Pipeline UpdateSdV1Pipeline(ctx, id).SdV1PipelineUpdate(sdV1PipelineUpdate).Execute()
+> SdV1Pipeline UpdateSdV1Pipeline(ctx, id).SdV1Pipeline(sdV1Pipeline).Execute()
 
 Update a Pipeline
 
@@ -318,11 +318,11 @@ import (
 
 func main() {
     id := "id_example" // string | The unique identifier for the pipeline.
-    sdV1PipelineUpdate := *openapiclient.NewSdV1PipelineUpdate() // SdV1PipelineUpdate |  (optional)
+    sdV1Pipeline := *openapiclient.NewSdV1Pipeline() // SdV1Pipeline |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PipelinesSdV1Api.UpdateSdV1Pipeline(context.Background(), id).SdV1PipelineUpdate(sdV1PipelineUpdate).Execute()
+    resp, r, err := api_client.PipelinesSdV1Api.UpdateSdV1Pipeline(context.Background(), id).SdV1Pipeline(sdV1Pipeline).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PipelinesSdV1Api.UpdateSdV1Pipeline``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -348,7 +348,7 @@ Other parameters are passed through a pointer to a apiUpdateSdV1PipelineRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **sdV1PipelineUpdate** | [**SdV1PipelineUpdate**](SdV1PipelineUpdate.md) |  | 
+ **sdV1Pipeline** | [**SdV1Pipeline**](SdV1Pipeline.md) |  | 
 
 ### Return type
 

@@ -105,9 +105,7 @@ Class | Method | HTTP request | Description
  - [SdV1Pipeline](docs/SdV1Pipeline.md)
  - [SdV1PipelineList](docs/SdV1PipelineList.md)
  - [SdV1PipelineSpec](docs/SdV1PipelineSpec.md)
- - [SdV1PipelineSpecUpdate](docs/SdV1PipelineSpecUpdate.md)
  - [SdV1PipelineStatus](docs/SdV1PipelineStatus.md)
- - [SdV1PipelineUpdate](docs/SdV1PipelineUpdate.md)
  - [SdV1SourceCodeObject](docs/SdV1SourceCodeObject.md)
 
 
