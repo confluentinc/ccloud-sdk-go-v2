@@ -837,11 +837,11 @@ type ApiUpdateSdV1PipelineRequest struct {
 	ctx _context.Context
 	ApiService PipelinesSdV1Api
 	id string
-	sdV1PipelineUpdate *SdV1PipelineUpdate
+	sdV1Pipeline *SdV1Pipeline
 }
 
-func (r ApiUpdateSdV1PipelineRequest) SdV1PipelineUpdate(sdV1PipelineUpdate SdV1PipelineUpdate) ApiUpdateSdV1PipelineRequest {
-	r.sdV1PipelineUpdate = &sdV1PipelineUpdate
+func (r ApiUpdateSdV1PipelineRequest) SdV1Pipeline(sdV1Pipeline SdV1Pipeline) ApiUpdateSdV1PipelineRequest {
+	r.sdV1Pipeline = &sdV1Pipeline
 	return r
 }
 
@@ -912,7 +912,7 @@ func (a *PipelinesSdV1ApiService) UpdateSdV1PipelineExecute(r ApiUpdateSdV1Pipel
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.sdV1PipelineUpdate
+	localVarPostBody = r.sdV1Pipeline
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
