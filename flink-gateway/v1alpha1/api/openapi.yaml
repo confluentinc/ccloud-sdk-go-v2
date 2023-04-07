@@ -24,6 +24,281 @@ tags:
     <SchemaDefinition schemaRef="#/components/schemas/sql.v1alpha1.Statement" />
   name: Statements (sql/v1alpha1)
 paths:
+  /sql/v1alpha1/environments/{environment_id}/statements/{statement_name}/results:
+    get:
+      description: |-
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1alpha1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1alpha1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1alpha1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1alpha1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+        Read Statement Result.
+      operationId: getSqlV1alpha1StatementResult
+      parameters:
+      - description: The unique identifier for the environment.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the statement.
+        explode: false
+        in: path
+        name: statement_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: It contains the field offset in the CollectSinkFunction protocol.
+          On the first request, it should be unset. The offset is assumed to start
+          at 0.
+        explode: true
+        in: query
+        name: page_token
+        required: false
+        schema:
+          maxLength: 255
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/sql.v1alpha1.StatementResult'
+                - properties:
+                    results:
+                      required:
+                      - data
+                      type: object
+                  required:
+                  - api_version
+                  - kind
+                  - metadata
+                  - results
+                  type: object
+          description: Statement Result.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - api-key: []
+      summary: Read Statement Result
+      tags:
+      - Statement Result (sql/v1alpha1)
+      x-request-access-name: SQL API v1alpha1
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/%7Benvironment_id%7D/statements/%7Bstatement_name%7D/results \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/%7Benvironment_id%7D/statements/%7Bstatement_name%7D/results")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/%7Benvironment_id%7D/statements/%7Bstatement_name%7D/results\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/sql/v1alpha1/environments/%7Benvironment_id%7D/statements/%7Bstatement_name%7D/results", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "flink.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/sql/v1alpha1/environments/%7Benvironment_id%7D/statements/%7Bstatement_name%7D/results",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/%7Benvironment_id%7D/statements/%7Bstatement_name%7D/results");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/%7Benvironment_id%7D/statements/%7Bstatement_name%7D/results");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+    x-request-access-name: SQL API v1alpha1
   /sql/v1alpha1/environments/{environment_id}/statements:
     get:
       description: |-
@@ -86,15 +361,16 @@ paths:
           content:
             application/json:
               example:
-                id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                status: "400"
-                code: invalid_filter
-                title: Invalid Filter
-                detail: The 'delorean' resource can't be filtered by 'num_doors'
-                source:
-                  parameter: num_doors
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Failure'
           description: Bad Request
           headers:
             X-Request-Id:
@@ -107,13 +383,14 @@ paths:
           content:
             application/json:
               example:
-                id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                status: "401"
-                code: user_unauthenticated
-                title: Authentication Required
-                detail: Valid authentication credentials must be provided
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Failure'
           description: The request lacks valid authentication credentials for this
             resource.
           headers:
@@ -136,14 +413,15 @@ paths:
           content:
             application/json:
               example:
-                id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                status: "403"
-                code: user_unauthorized
-                title: User Access Unauthorized
-                detail: The user 'mcfly' is not allowed to access the 'delorean' resource
-                  without the 'plutonium' role.
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Failure'
           description: The access credentials were considered insufficient to grant
             access
           headers:
@@ -158,11 +436,12 @@ paths:
           content:
             application/json:
               example:
-                id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                status: "404"
-                title: Not Found
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Failure'
           description: Not Found
           headers:
             X-Request-Id:
@@ -184,14 +463,15 @@ paths:
           content:
             application/json:
               example:
-                id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                status: "500"
-                code: out_of_gas
-                title: DeLorean Out Of Gas
-                detail: The DeLorean has run out of gas, but Doc Brown will fill 'er
-                  up for you asap
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Failure'
           description: Oops, something went wrong!
           headers:
             X-Request-Id:
@@ -358,15 +638,16 @@ paths:
           content:
             application/json:
               example:
-                id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                status: "400"
-                code: invalid_filter
-                title: Invalid Filter
-                detail: The 'delorean' resource can't be filtered by 'num_doors'
-                source:
-                  parameter: num_doors
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Failure'
           description: Bad Request
           headers:
             X-Request-Id:
@@ -379,13 +660,14 @@ paths:
           content:
             application/json:
               example:
-                id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                status: "401"
-                code: user_unauthenticated
-                title: Authentication Required
-                detail: Valid authentication credentials must be provided
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Failure'
           description: The request lacks valid authentication credentials for this
             resource.
           headers:
@@ -408,14 +690,15 @@ paths:
           content:
             application/json:
               example:
-                id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                status: "403"
-                code: user_unauthorized
-                title: User Access Unauthorized
-                detail: The user 'mcfly' is not allowed to access the 'delorean' resource
-                  without the 'plutonium' role.
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Failure'
           description: The access credentials were considered insufficient to grant
             access
           headers:
@@ -430,14 +713,15 @@ paths:
           content:
             application/json:
               example:
-                id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                status: "409"
-                code: resource_already_exists
-                title: Resource Already exists
-                detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
-                  exists.
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "409"
+                  code: resource_already_exists
+                  title: Resource Already exists
+                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                    exists.
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Failure'
           description: The request is in conflict with the current server state
           headers:
             X-Request-Id:
@@ -450,7 +734,7 @@ paths:
               description: Resource URI of conflicting resource
               explode: false
               schema:
-                example: https://flink.region.provider.confluent.cloud/{object}/{id}
+                example: https://api.confluent.cloud/{object}/{id}
                 format: uri
                 type: string
               style: simple
@@ -459,16 +743,17 @@ paths:
           content:
             application/json:
               example:
-                status: "422"
-                code: invalid_configuration
-                id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                title: Validation Failed
-                detail: 'The property ''/cluster/storage_size'' of type string did
-                  not match the following type: integer'
-                source:
-                  pointer: /cluster/storage_size
+                errors:
+                - status: "422"
+                  code: invalid_configuration
+                  id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  title: Validation Failed
+                  detail: 'The property ''/cluster/storage_size'' of type string did
+                    not match the following type: integer'
+                  source:
+                    pointer: /cluster/storage_size
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Failure'
           description: Validation Failed
           headers:
             X-Request-Id:
@@ -490,14 +775,15 @@ paths:
           content:
             application/json:
               example:
-                id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                status: "500"
-                code: out_of_gas
-                title: DeLorean Out Of Gas
-                detail: The DeLorean has run out of gas, but Doc Brown will fill 'er
-                  up for you asap
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Failure'
           description: Oops, something went wrong!
           headers:
             X-Request-Id:
@@ -663,15 +949,16 @@ paths:
           content:
             application/json:
               example:
-                id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                status: "400"
-                code: invalid_filter
-                title: Invalid Filter
-                detail: The 'delorean' resource can't be filtered by 'num_doors'
-                source:
-                  parameter: num_doors
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Failure'
           description: Bad Request
           headers:
             X-Request-Id:
@@ -684,13 +971,14 @@ paths:
           content:
             application/json:
               example:
-                id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                status: "401"
-                code: user_unauthenticated
-                title: Authentication Required
-                detail: Valid authentication credentials must be provided
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Failure'
           description: The request lacks valid authentication credentials for this
             resource.
           headers:
@@ -713,14 +1001,15 @@ paths:
           content:
             application/json:
               example:
-                id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                status: "403"
-                code: user_unauthorized
-                title: User Access Unauthorized
-                detail: The user 'mcfly' is not allowed to access the 'delorean' resource
-                  without the 'plutonium' role.
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Failure'
           description: The access credentials were considered insufficient to grant
             access
           headers:
@@ -735,11 +1024,12 @@ paths:
           content:
             application/json:
               example:
-                id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                status: "404"
-                title: Not Found
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Failure'
           description: Not Found
           headers:
             X-Request-Id:
@@ -761,14 +1051,15 @@ paths:
           content:
             application/json:
               example:
-                id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                status: "500"
-                code: out_of_gas
-                title: DeLorean Out Of Gas
-                detail: The DeLorean has run out of gas, but Doc Brown will fill 'er
-                  up for you asap
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Failure'
           description: Oops, something went wrong!
           headers:
             X-Request-Id:
@@ -922,15 +1213,16 @@ paths:
           content:
             application/json:
               example:
-                id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                status: "400"
-                code: invalid_filter
-                title: Invalid Filter
-                detail: The 'delorean' resource can't be filtered by 'num_doors'
-                source:
-                  parameter: num_doors
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Failure'
           description: Bad Request
           headers:
             X-Request-Id:
@@ -943,13 +1235,14 @@ paths:
           content:
             application/json:
               example:
-                id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                status: "401"
-                code: user_unauthenticated
-                title: Authentication Required
-                detail: Valid authentication credentials must be provided
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Failure'
           description: The request lacks valid authentication credentials for this
             resource.
           headers:
@@ -972,14 +1265,15 @@ paths:
           content:
             application/json:
               example:
-                id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                status: "403"
-                code: user_unauthorized
-                title: User Access Unauthorized
-                detail: The user 'mcfly' is not allowed to access the 'delorean' resource
-                  without the 'plutonium' role.
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Failure'
           description: The access credentials were considered insufficient to grant
             access
           headers:
@@ -994,11 +1288,12 @@ paths:
           content:
             application/json:
               example:
-                id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                status: "404"
-                title: Not Found
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Failure'
           description: Not Found
           headers:
             X-Request-Id:
@@ -1020,14 +1315,15 @@ paths:
           content:
             application/json:
               example:
-                id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                status: "500"
-                code: out_of_gas
-                title: DeLorean Out Of Gas
-                detail: The DeLorean has run out of gas, but Doc Brown will fill 'er
-                  up for you asap
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Failure'
           description: Oops, something went wrong!
           headers:
             X-Request-Id:
@@ -1133,15 +1429,16 @@ components:
       content:
         application/json:
           example:
-            id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-            status: "400"
-            code: invalid_filter
-            title: Invalid Filter
-            detail: The 'delorean' resource can't be filtered by 'num_doors'
-            source:
-              parameter: num_doors
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "400"
+              code: invalid_filter
+              title: Invalid Filter
+              detail: The 'delorean' resource can't be filtered by 'num_doors'
+              source:
+                parameter: num_doors
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/Failure'
       description: Bad Request
       headers:
         X-Request-Id:
@@ -1154,13 +1451,14 @@ components:
       content:
         application/json:
           example:
-            id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-            status: "401"
-            code: user_unauthenticated
-            title: Authentication Required
-            detail: Valid authentication credentials must be provided
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "401"
+              code: user_unauthenticated
+              title: Authentication Required
+              detail: Valid authentication credentials must be provided
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/Failure'
       description: The request lacks valid authentication credentials for this resource.
       headers:
         X-Request-Id:
@@ -1181,13 +1479,14 @@ components:
       content:
         application/json:
           example:
-            id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-            status: "402"
-            code: quota_exceeded
-            title: Kafka Clusters Per Org Quota Exceeded
-            detail: 'The request would exceed the quota: kafka_clusters_per_environment'
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "402"
+              code: quota_exceeded
+              title: Kafka Clusters Per Org Quota Exceeded
+              detail: 'The request would exceed the quota: kafka_clusters_per_environment'
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/Failure'
       description: The request would exceed one or more quotas.
       headers:
         X-Request-Id:
@@ -1201,14 +1500,15 @@ components:
       content:
         application/json:
           example:
-            id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-            status: "403"
-            code: user_unauthorized
-            title: User Access Unauthorized
-            detail: The user 'mcfly' is not allowed to access the 'delorean' resource
-              without the 'plutonium' role.
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "403"
+              code: user_unauthorized
+              title: User Access Unauthorized
+              detail: The user 'mcfly' is not allowed to access the 'delorean' resource
+                without the 'plutonium' role.
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/Failure'
       description: The access credentials were considered insufficient to grant access
       headers:
         X-Request-Id:
@@ -1222,14 +1522,15 @@ components:
       content:
         application/json:
           example:
-            id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-            status: "409"
-            code: resource_already_exists
-            title: Resource Already exists
-            detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
-              exists.
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "409"
+              code: resource_already_exists
+              title: Resource Already exists
+              detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                exists.
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/Failure'
       description: The request is in conflict with the current server state
       headers:
         X-Request-Id:
@@ -1242,7 +1543,7 @@ components:
           description: Resource URI of conflicting resource
           explode: false
           schema:
-            example: https://flink.region.provider.confluent.cloud/{object}/{id}
+            example: https://api.confluent.cloud/{object}/{id}
             format: uri
             type: string
           style: simple
@@ -1251,11 +1552,12 @@ components:
       content:
         application/json:
           example:
-            id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-            status: "404"
-            title: Not Found
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "404"
+              title: Not Found
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/Failure'
       description: Not Found
       headers:
         X-Request-Id:
@@ -1268,16 +1570,17 @@ components:
       content:
         application/json:
           example:
-            status: "422"
-            code: invalid_configuration
-            id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-            title: Validation Failed
-            detail: 'The property ''/cluster/storage_size'' of type string did not
-              match the following type: integer'
-            source:
-              pointer: /cluster/storage_size
+            errors:
+            - status: "422"
+              code: invalid_configuration
+              id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              title: Validation Failed
+              detail: 'The property ''/cluster/storage_size'' of type string did not
+                match the following type: integer'
+              source:
+                pointer: /cluster/storage_size
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/Failure'
       description: Validation Failed
       headers:
         X-Request-Id:
@@ -1299,14 +1602,15 @@ components:
       content:
         application/json:
           example:
-            id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-            status: "500"
-            code: out_of_gas
-            title: DeLorean Out Of Gas
-            detail: The DeLorean has run out of gas, but Doc Brown will fill 'er up
-              for you asap
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "500"
+              code: out_of_gas
+              title: DeLorean Out Of Gas
+              detail: The DeLorean has run out of gas, but Doc Brown will fill 'er
+                up for you asap
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/Failure'
       description: Oops, something went wrong!
       headers:
         X-Request-Id:
@@ -1352,7 +1656,7 @@ components:
       properties:
         phase:
           description: |
-            The lifecyle phase of the submitted SQL statement:
+            The lifecycle phase of the submitted SQL statement:
             PENDING: SQL statement is pending execution;
             RUNNING: SQL statement execution is in progress;
             COMPLETED: SQL statement is completed;
@@ -1443,6 +1747,116 @@ components:
       - kind
       - metadata
       type: object
+    sql.v1alpha1.StatementResult:
+      description: |-
+        `Statement Result` represents a resource used to model results of SQL statements.
+        The API allows you to read your SQL statement result.
+        ## The Statement Result Model
+        <SchemaDefinition schemaRef="#/components/schemas/sql.v1alpha1.StatementResult" />
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - sql/v1alpha1
+          example: sql/v1alpha1
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - StatementResult
+          type: string
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/ResultListMeta'
+        results:
+          allOf:
+          - $ref: '#/components/schemas/sql.v1alpha1.StatementResultResults'
+      required:
+      - api_version
+      - data
+      - kind
+      - metadata
+      type: object
+    sql.v1alpha1.StatementResultResults:
+      description: A results property that contains a data property that contains
+        an array of results.
+      properties:
+        data:
+          description: A data property that contains an array of results.
+          items:
+            $ref: '#/components/schemas/sql.v1alpha1.ResultItem'
+          type: array
+      type: object
+    sql.v1alpha1.ResultItem:
+      description: A data property that contains an array of results. Each entry in
+        the array is a separate result.
+      properties:
+        op:
+          default: 0
+          description: "The kind of change that a row can describe in a changelog:\n\
+            \n`0`: represents `INSERT` (`+I`), i.e. insertion operation;\n\n`1`: represents\
+            \ `UPDATE_BEFORE` (`-U`), i.e. update operation with the previous content\
+            \ of the updated row.\nThis kind should occur together with `UPDATE_AFTER`\
+            \ for modelling an update that needs to retract\nthe previous row first.\
+            \ It is useful in cases of a non-idempotent update, i.e., an update of\
+            \ a row that is not \nuniquely identifiable by a key;\n\n`2`: represents\
+            \ `UPDATE_AFTER` (`+U`), i.e. update operation with new content of the\
+            \ updated row;\nThis kind CAN occur together with `UPDATE_BEFORE` for\
+            \ modelling an update that\nneeds to retract the previous row first or\
+            \ it describes an idempotent update, i.e., an\nupdate of a row that is\
+            \ uniquely identifiable by a key;\n\n`3`: represents `DELETE` (`-D`),\
+            \ i.e. deletion operation;\n\nDefaults to `0`.\n"
+          format: int32
+          maximum: 3
+          minimum: 0
+          type: integer
+        row:
+          $ref: '#/components/schemas/sql.v1alpha1.ResultItemRow'
+      required:
+      - row
+      type: object
+    sql.v1alpha1.ResultItemRow:
+      description: An item of the `row` attribute.
+      example:
+      - "101"
+      - Jay
+      - - null
+        - abc
+      - - null
+        - "456"
+      - 1990-01-12 12:00.12
+      - - - null
+          - Alice
+        - - "42"
+          - Bob
+      items:
+        nullable: true
+        oneOf:
+        - type: string
+        - items:
+            $ref: '#/components/schemas/sql.v1alpha1.ResultItemRow'
+          type: array
+        x-one-of-name: SqlV1alpha1ResultItemRowOneOf
+      type: array
+    sql.v1alpha1.ResultItemOp:
+      default: 0
+      description: "The kind of change that a row can describe in a changelog:\n\n\
+        `0`: represents `INSERT` (`+I`), i.e. insertion operation;\n\n`1`: represents\
+        \ `UPDATE_BEFORE` (`-U`), i.e. update operation with the previous content\
+        \ of the updated row.\nThis kind should occur together with `UPDATE_AFTER`\
+        \ for modelling an update that needs to retract\nthe previous row first. It\
+        \ is useful in cases of a non-idempotent update, i.e., an update of a row\
+        \ that is not \nuniquely identifiable by a key;\n\n`2`: represents `UPDATE_AFTER`\
+        \ (`+U`), i.e. update operation with new content of the updated row;\nThis\
+        \ kind CAN occur together with `UPDATE_BEFORE` for modelling an update that\n\
+        needs to retract the previous row first or it describes an idempotent update,\
+        \ i.e., an\nupdate of a row that is uniquely identifiable by a key;\n\n`3`:\
+        \ represents `DELETE` (`-D`), i.e. deletion operation;\n\nDefaults to `0`.\n"
+      format: int32
+      maximum: 3
+      minimum: 0
+      type: integer
     sql.v1alpha1.StatementSpec:
       description: The specs of the Statement
       properties:
@@ -1452,7 +1866,7 @@ components:
           type: string
           x-immutable: true
         statement:
-          description: The raw SQL text statmement.
+          description: The raw SQL text statement.
           example: SELECT * FROM TABLE WHERE VALUE1 = VALUE2;
           type: string
           x-immutable: true
@@ -1510,20 +1924,41 @@ components:
           example: next_token
           type: string
       type: object
-    Error:
-      description: Describes a particular error encountered while performing an operation.
+    ResultListMeta:
+      description: ListMeta describes metadata that resource collections may have
       properties:
+        self:
+          description: Self is a Uniform Resource Locator (URL) at which an object
+            can be addressed. This URL encodes the service location, API version,
+            and other particulars necessary to locate the resource at a point in time
+          example: https://flink.us-west1.aws.confluent.cloud/sql/v1alpha1/environments/env_id/statements
+          type: string
+        next:
+          description: An opaque token that can be sent to get the next batch of results
+          example: next_token
+          type: string
         created_at:
           description: The date and time at which this object was created. It is represented
             in RFC3339 format and is in UTC.
-          example: 1996-03-19T01:02:03-04:05
+          example: 2006-01-02T15:04:05-07:00
           format: date-time
           readOnly: true
           type: string
-        error:
-          $ref: '#/components/schemas/sql.v1alpha1.ErrorDetails'
       type: object
-    sql.v1alpha1.ErrorDetails:
+    Failure:
+      description: Provides information about problems encountered while performing
+        an operation.
+      properties:
+        errors:
+          description: List of errors which caused this operation to fail
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+          uniqueItems: true
+      required:
+      - errors
+      type: object
+    Error:
       description: Describes a particular error encountered while performing an operation.
       properties:
         id:
@@ -1534,6 +1969,9 @@ components:
           description: The HTTP status code applicable to this problem, expressed
             as a string value.
           type: string
+        code:
+          description: An application-specific error code, expressed as a string value.
+          type: string
         title:
           description: A short, human-readable summary of the problem. It **SHOULD
             NOT** change from occurrence to occurrence of the problem, except for
@@ -1543,9 +1981,21 @@ components:
           description: A human-readable explanation specific to this occurrence of
             the problem.
           type: string
-        resolution:
-          description: Instructions for the end-user for correcting the error.
-          example: Privilege must be granted for access.
+        source:
+          $ref: '#/components/schemas/Error_source'
+      type: object
+    Error_source:
+      description: If this error was caused by a particular part of the API request,
+        the source will point to the query string parameter or request body property
+        that caused it.
+      properties:
+        pointer:
+          description: A JSON Pointer [RFC6901] to the associated entity in the request
+            document [e.g. "/spec" for a spec object, or "/spec/title" for a specific
+            field].
+          type: string
+        parameter:
+          description: A string indicating which query parameter caused the error.
           type: string
       type: object
   securitySchemes:

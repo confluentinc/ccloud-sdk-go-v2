@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **StatementName** | Pointer to **string** | The name of the resource, unique within this environment. | [optional] 
-**Statement** | Pointer to **string** | The raw SQL text statmement. | [optional] 
+**Statement** | Pointer to **string** | The raw SQL text statement. | [optional] 
 **Properties** | Pointer to **map[string]string** | A map (key-value pairs) of statement properties. | [optional] 
 **ComputePoolId** | Pointer to **string** | The id associated with the compute pool in context. | [optional] 
 

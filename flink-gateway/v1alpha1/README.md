@@ -79,6 +79,7 @@ All URIs are relative to *https://flink.region.provider.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*StatementResultSqlV1alpha1Api* | [**GetSqlV1alpha1StatementResult**](docs/StatementResultSqlV1alpha1Api.md#getsqlv1alpha1statementresult) | **Get** /sql/v1alpha1/environments/{environment_id}/statements/{statement_name}/results | Read Statement Result
 *StatementsSqlV1alpha1Api* | [**CreateSqlV1alpha1Statement**](docs/StatementsSqlV1alpha1Api.md#createsqlv1alpha1statement) | **Post** /sql/v1alpha1/environments/{environment_id}/statements | Create a Statement
 *StatementsSqlV1alpha1Api* | [**DeleteSqlV1alpha1Statement**](docs/StatementsSqlV1alpha1Api.md#deletesqlv1alpha1statement) | **Delete** /sql/v1alpha1/environments/{environment_id}/statements/{statement_name} | Delete a Statement
 *StatementsSqlV1alpha1Api* | [**GetSqlV1alpha1Statement**](docs/StatementsSqlV1alpha1Api.md#getsqlv1alpha1statement) | **Get** /sql/v1alpha1/environments/{environment_id}/statements/{statement_name} | Read a Statement
@@ -88,12 +89,19 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [Error](docs/Error.md)
+ - [ErrorSource](docs/ErrorSource.md)
+ - [Failure](docs/Failure.md)
  - [ListMeta](docs/ListMeta.md)
  - [MultipleSearchFilter](docs/MultipleSearchFilter.md)
  - [ObjectMeta](docs/ObjectMeta.md)
- - [SqlV1alpha1ErrorDetails](docs/SqlV1alpha1ErrorDetails.md)
+ - [ResultListMeta](docs/ResultListMeta.md)
+ - [SqlV1alpha1ResultItem](docs/SqlV1alpha1ResultItem.md)
+ - [SqlV1alpha1ResultItemRow](docs/SqlV1alpha1ResultItemRow.md)
+ - [SqlV1alpha1ResultItemRowOneOf](docs/SqlV1alpha1ResultItemRowOneOf.md)
  - [SqlV1alpha1Statement](docs/SqlV1alpha1Statement.md)
  - [SqlV1alpha1StatementList](docs/SqlV1alpha1StatementList.md)
+ - [SqlV1alpha1StatementResult](docs/SqlV1alpha1StatementResult.md)
+ - [SqlV1alpha1StatementResultResults](docs/SqlV1alpha1StatementResultResults.md)
  - [SqlV1alpha1StatementSpec](docs/SqlV1alpha1StatementSpec.md)
  - [SqlV1alpha1StatementStatus](docs/SqlV1alpha1StatementStatus.md)
 

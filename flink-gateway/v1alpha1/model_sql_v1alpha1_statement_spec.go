@@ -37,7 +37,7 @@ import (
 type SqlV1alpha1StatementSpec struct {
 	// The name of the resource, unique within this environment.
 	StatementName *string `json:"statement_name,omitempty"`
-	// The raw SQL text statmement.
+	// The raw SQL text statement.
 	Statement *string `json:"statement,omitempty"`
 	// A map (key-value pairs) of statement properties.
 	Properties *map[string]string `json:"properties,omitempty"`

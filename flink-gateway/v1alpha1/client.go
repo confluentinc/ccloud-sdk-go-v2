@@ -64,6 +64,8 @@ type APIClient struct {
 
 	// API Services
 
+	StatementResultSqlV1alpha1Api StatementResultSqlV1alpha1Api
+
 	StatementsSqlV1alpha1Api StatementsSqlV1alpha1Api
 }
 
@@ -83,6 +85,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
+	c.StatementResultSqlV1alpha1Api = (*StatementResultSqlV1alpha1ApiService)(&c.common)
 	c.StatementsSqlV1alpha1Api = (*StatementsSqlV1alpha1ApiService)(&c.common)
 
 	return c
