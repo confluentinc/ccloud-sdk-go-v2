@@ -1816,6 +1816,24 @@ components:
       required:
       - row
       type: object
+    StringElement:
+      type: string
+    ArrayElement:
+      items:
+        $ref: '#/components/schemas/sql.v1alpha1.ResultItemRow'
+      type: array
+    sql.v1alpha1.ResultItemRowElement:
+      description: An element of the `ResultItemRow` attribute.
+      discriminator:
+        mapping:
+          string: '#/components/schemas/StringElement'
+          array: '#/components/schemas/ArrayElement'
+        propertyName: element_type
+      nullable: true
+      oneOf:
+      - $ref: '#/components/schemas/StringElement'
+      - $ref: '#/components/schemas/ArrayElement'
+      x-one-of-name: SqlV1alpha1ResultItemRowElement
     sql.v1alpha1.ResultItemRow:
       description: An item of the `row` attribute.
       example:
@@ -1831,13 +1849,7 @@ components:
         - - "42"
           - Bob
       items:
-        nullable: true
-        oneOf:
-        - type: string
-        - items:
-            $ref: '#/components/schemas/sql.v1alpha1.ResultItemRow'
-          type: array
-        x-one-of-name: SqlV1alpha1ResultItemRowOneOf
+        $ref: '#/components/schemas/sql.v1alpha1.ResultItemRowElement'
       type: array
     sql.v1alpha1.ResultItemOp:
       default: 0

@@ -35,7 +35,7 @@ import (
 
 // SqlV1alpha1ResultItemRow An item of the `row` attribute.
 type SqlV1alpha1ResultItemRow struct {
-	Items []SqlV1alpha1ResultItemRowOneOf
+	Items []SqlV1alpha1ResultItemRowElement
 }
 
 // NewSqlV1alpha1ResultItemRow instantiates a new SqlV1alpha1ResultItemRow object

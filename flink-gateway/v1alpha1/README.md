@@ -88,6 +88,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [ArrayElement](docs/ArrayElement.md)
  - [Error](docs/Error.md)
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
@@ -97,7 +98,7 @@ Class | Method | HTTP request | Description
  - [ResultListMeta](docs/ResultListMeta.md)
  - [SqlV1alpha1ResultItem](docs/SqlV1alpha1ResultItem.md)
  - [SqlV1alpha1ResultItemRow](docs/SqlV1alpha1ResultItemRow.md)
- - [SqlV1alpha1ResultItemRowOneOf](docs/SqlV1alpha1ResultItemRowOneOf.md)
+ - [SqlV1alpha1ResultItemRowElement](docs/SqlV1alpha1ResultItemRowElement.md)
  - [SqlV1alpha1Statement](docs/SqlV1alpha1Statement.md)
  - [SqlV1alpha1StatementList](docs/SqlV1alpha1StatementList.md)
  - [SqlV1alpha1StatementResult](docs/SqlV1alpha1StatementResult.md)

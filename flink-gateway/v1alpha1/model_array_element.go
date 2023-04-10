@@ -33,32 +33,33 @@ import (
 	"reflect"
 )
 
-// SqlV1alpha1ResultItemRowOneOf struct for SqlV1alpha1ResultItemRowOneOf
-type SqlV1alpha1ResultItemRowOneOf struct {
+// ArrayElement struct for ArrayElement
+type ArrayElement struct {
+	Items []SqlV1alpha1ResultItemRow
 }
 
-// NewSqlV1alpha1ResultItemRowOneOf instantiates a new SqlV1alpha1ResultItemRowOneOf object
+// NewArrayElement instantiates a new ArrayElement object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSqlV1alpha1ResultItemRowOneOf() *SqlV1alpha1ResultItemRowOneOf {
-	this := SqlV1alpha1ResultItemRowOneOf{}
+func NewArrayElement() *ArrayElement {
+	this := ArrayElement{}
 	return &this
 }
 
-// NewSqlV1alpha1ResultItemRowOneOfWithDefaults instantiates a new SqlV1alpha1ResultItemRowOneOf object
+// NewArrayElementWithDefaults instantiates a new ArrayElement object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSqlV1alpha1ResultItemRowOneOfWithDefaults() *SqlV1alpha1ResultItemRowOneOf {
-	this := SqlV1alpha1ResultItemRowOneOf{}
+func NewArrayElementWithDefaults() *ArrayElement {
+	this := ArrayElement{}
 	return &this
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *SqlV1alpha1ResultItemRowOneOf) Redact() {
+func (o *ArrayElement) Redact() {
 }
 
-func (o *SqlV1alpha1ResultItemRowOneOf) recurseRedact(v interface{}) {
+func (o *ArrayElement) recurseRedact(v interface{}) {
     type redactor interface {
         Redact()
     }
@@ -83,48 +84,55 @@ func (o *SqlV1alpha1ResultItemRowOneOf) recurseRedact(v interface{}) {
     }
 }
 
-func (o SqlV1alpha1ResultItemRowOneOf) zeroField(v interface{}) {
+func (o ArrayElement) zeroField(v interface{}) {
     p := reflect.ValueOf(v).Elem()
     p.Set(reflect.Zero(p.Type()))
 }
 
-func (o SqlV1alpha1ResultItemRowOneOf) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
+func (o ArrayElement) MarshalJSON() ([]byte, error) {
+	toSerialize := make([]interface{}, len(o.Items))
+	for i, item := range o.Items {
+		toSerialize[i] = item
+	}
 	return json.Marshal(toSerialize)
 }
 
-type NullableSqlV1alpha1ResultItemRowOneOf struct {
-	value *SqlV1alpha1ResultItemRowOneOf
+func (o *ArrayElement) UnmarshalJSON(bytes []byte) (err error) {
+	return json.Unmarshal(bytes, &o.Items)
+}
+
+type NullableArrayElement struct {
+	value *ArrayElement
 	isSet bool
 }
 
-func (v NullableSqlV1alpha1ResultItemRowOneOf) Get() *SqlV1alpha1ResultItemRowOneOf {
+func (v NullableArrayElement) Get() *ArrayElement {
 	return v.value
 }
 
-func (v *NullableSqlV1alpha1ResultItemRowOneOf) Set(val *SqlV1alpha1ResultItemRowOneOf) {
+func (v *NullableArrayElement) Set(val *ArrayElement) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSqlV1alpha1ResultItemRowOneOf) IsSet() bool {
+func (v NullableArrayElement) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSqlV1alpha1ResultItemRowOneOf) Unset() {
+func (v *NullableArrayElement) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSqlV1alpha1ResultItemRowOneOf(val *SqlV1alpha1ResultItemRowOneOf) *NullableSqlV1alpha1ResultItemRowOneOf {
-	return &NullableSqlV1alpha1ResultItemRowOneOf{value: val, isSet: true}
+func NewNullableArrayElement(val *ArrayElement) *NullableArrayElement {
+	return &NullableArrayElement{value: val, isSet: true}
 }
 
-func (v NullableSqlV1alpha1ResultItemRowOneOf) MarshalJSON() ([]byte, error) {
+func (v NullableArrayElement) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSqlV1alpha1ResultItemRowOneOf) UnmarshalJSON(src []byte) error {
+func (v *NullableArrayElement) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
