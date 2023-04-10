@@ -1,10 +1,10 @@
-# SqlV1alpha1ResultItemRowElement
+# SqlV1alpha1ResultItemRowOneOf
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SqlV1alpha1ResultItemRowElementInterface** | **interface { GetElementType() string }** | An interface that can hold any of the proper implementing types |
+**SqlV1alpha1ResultItemRowOneOfInterface** | **interface {  }** | An interface that can hold any of the proper implementing types |
 
 ## Methods
 

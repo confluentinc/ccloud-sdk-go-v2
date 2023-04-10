@@ -1818,41 +1818,17 @@ components:
       required:
       - row
       type: object
-    sql.v1alpha1.StringElement:
-      type: string
-    sql.v1alpha1.ArrayElement:
-      items:
-        $ref: '#/components/schemas/sql.v1alpha1.ResultItemRow'
-      type: array
-    sql.v1alpha1.ResultItemRowElement:
-      description: An element of the `ResultItemRow` attribute.
-      discriminator:
-        mapping:
-          string: '#/components/schemas/sql.v1alpha1.StringElement'
-          array: '#/components/schemas/sql.v1alpha1.ArrayElement'
-        propertyName: element_type
-      nullable: true
-      oneOf:
-      - $ref: '#/components/schemas/sql.v1alpha1.StringElement'
-      - $ref: '#/components/schemas/sql.v1alpha1.ArrayElement'
-      x-one-of-name: SqlV1alpha1ResultItemRowElement
     sql.v1alpha1.ResultItemRow:
       description: An item of the `row` attribute.
-      example:
-      - "101"
-      - Jay
-      - - null
-        - abc
-      - - null
-        - "456"
-      - 1990-01-12 12:00.12
-      - - - null
-          - Alice
-        - - "42"
-          - Bob
       items:
-        $ref: '#/components/schemas/sql.v1alpha1.ResultItemRowElement'
+        nullable: true
+        oneOf:
+        - $ref: '#/components/schemas/sql.v1alpha1.ResultItemString'
+        - $ref: '#/components/schemas/sql.v1alpha1.ResultItemRow'
+        x-one-of-name: SqlV1alpha1ResultItemRowOneOf
       type: array
+    sql.v1alpha1.ResultItemString:
+      type: string
     sql.v1alpha1.ResultItemOp:
       default: 0
       description: "The kind of change that a row can describe in a changelog:\n\n\
