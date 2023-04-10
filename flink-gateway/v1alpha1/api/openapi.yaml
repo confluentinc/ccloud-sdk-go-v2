@@ -1671,6 +1671,8 @@ components:
           - COMPLETED
           - DELETING
           - FAILED
+        result_schema:
+          $ref: '#/components/schemas/sql.v1alpha1.ResultSchema'
         detail:
           description: Description of a SQL statement phase.
           example: 'COMPLETED: SQL statement is completed'
@@ -1816,9 +1818,9 @@ components:
       required:
       - row
       type: object
-    StringElement:
+    sql.v1alpha1.StringElement:
       type: string
-    ArrayElement:
+    sql.v1alpha1.ArrayElement:
       items:
         $ref: '#/components/schemas/sql.v1alpha1.ResultItemRow'
       type: array
@@ -1826,13 +1828,13 @@ components:
       description: An element of the `ResultItemRow` attribute.
       discriminator:
         mapping:
-          string: '#/components/schemas/StringElement'
-          array: '#/components/schemas/ArrayElement'
+          string: '#/components/schemas/sql.v1alpha1.StringElement'
+          array: '#/components/schemas/sql.v1alpha1.ArrayElement'
         propertyName: element_type
       nullable: true
       oneOf:
-      - $ref: '#/components/schemas/StringElement'
-      - $ref: '#/components/schemas/ArrayElement'
+      - $ref: '#/components/schemas/sql.v1alpha1.StringElement'
+      - $ref: '#/components/schemas/sql.v1alpha1.ArrayElement'
       x-one-of-name: SqlV1alpha1ResultItemRowElement
     sql.v1alpha1.ResultItemRow:
       description: An item of the `row` attribute.
@@ -1957,6 +1959,169 @@ components:
           readOnly: true
           type: string
       type: object
+    sql.v1alpha1.ResultSchema:
+      description: The table columns of the results schema.
+      properties:
+        columns:
+          description: The properties of each SQL column in the schema.
+          items:
+            $ref: '#/components/schemas/ColumnDetails'
+          type: array
+      type: object
+    ColumnDetails:
+      description: A column in the results schema.
+      properties:
+        name:
+          description: The name of the SQL table column.
+          example: Column_Name
+          type: string
+        type:
+          allOf:
+          - $ref: '#/components/schemas/DataType'
+          description: JSON object in TableSchema format; describes the data returned
+            by the results serving API.
+      required:
+      - name
+      - type
+      type: object
+    DataType:
+      oneOf:
+      - $ref: '#/components/schemas/CharType'
+      - $ref: '#/components/schemas/VarcharType'
+      - $ref: '#/components/schemas/BooleanType'
+      - $ref: '#/components/schemas/BinaryType'
+      - $ref: '#/components/schemas/VarbinaryType'
+      - $ref: '#/components/schemas/DecimalType'
+      - $ref: '#/components/schemas/IntegerType'
+      - $ref: '#/components/schemas/TinyIntType'
+      - $ref: '#/components/schemas/SmallIntType'
+      - $ref: '#/components/schemas/BigIntType'
+      - $ref: '#/components/schemas/FloatType'
+      - $ref: '#/components/schemas/DoubleType'
+      - $ref: '#/components/schemas/DateType'
+      - $ref: '#/components/schemas/TimeWithoutTimeZoneType'
+      - $ref: '#/components/schemas/TimestampWithoutTimeZoneType'
+      - $ref: '#/components/schemas/TimestampWithTimeZoneType'
+      - $ref: '#/components/schemas/TimestampWithLocalTimeZoneType'
+      - $ref: '#/components/schemas/IntervalYearMonthType'
+      - $ref: '#/components/schemas/IntervalDayTimeType'
+      - $ref: '#/components/schemas/ArrayType'
+      - $ref: '#/components/schemas/MultisetType'
+      - $ref: '#/components/schemas/MapType'
+      - $ref: '#/components/schemas/RowType'
+      x-one-of-name: DataType
+    BaseType:
+      properties:
+        nullable:
+          description: Indicates whether values in this column can be null.
+          type: boolean
+      required:
+      - nullable
+      - type
+      type: object
+    CharType:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - $ref: '#/components/schemas/CharType_allOf'
+    VarcharType:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - $ref: '#/components/schemas/VarcharType_allOf'
+    BooleanType:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - $ref: '#/components/schemas/BooleanType_allOf'
+    BinaryType:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - $ref: '#/components/schemas/BinaryType_allOf'
+    VarbinaryType:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - $ref: '#/components/schemas/VarbinaryType_allOf'
+    DecimalType:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - $ref: '#/components/schemas/DecimalType_allOf'
+    IntegerType:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - $ref: '#/components/schemas/IntegerType_allOf'
+    TinyIntType:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - $ref: '#/components/schemas/TinyIntType_allOf'
+    SmallIntType:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - $ref: '#/components/schemas/SmallIntType_allOf'
+    BigIntType:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - $ref: '#/components/schemas/BigIntType_allOf'
+    FloatType:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - $ref: '#/components/schemas/FloatType_allOf'
+    DoubleType:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - $ref: '#/components/schemas/DoubleType_allOf'
+    DateType:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - $ref: '#/components/schemas/DateType_allOf'
+    TimeWithoutTimeZoneType:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - $ref: '#/components/schemas/TimeWithoutTimeZoneType_allOf'
+    TimestampWithoutTimeZoneType:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - $ref: '#/components/schemas/TimestampWithoutTimeZoneType_allOf'
+    TimestampWithTimeZoneType:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - $ref: '#/components/schemas/TimestampWithTimeZoneType_allOf'
+    TimestampWithLocalTimeZoneType:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - $ref: '#/components/schemas/TimestampWithLocalTimeZoneType_allOf'
+    IntervalYearMonthType:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - $ref: '#/components/schemas/IntervalYearMonthType_allOf'
+    IntervalDayTimeType:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - $ref: '#/components/schemas/IntervalDayTimeType_allOf'
+    ArrayType:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - $ref: '#/components/schemas/ArrayType_allOf'
+    MultisetType:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - $ref: '#/components/schemas/MultisetType_allOf'
+    MapType:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - $ref: '#/components/schemas/MapType_allOf'
+    RowType:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - $ref: '#/components/schemas/RowType_allOf'
+    RowFieldType:
+      properties:
+        name:
+          description: The name of the field.
+          type: string
+        type:
+          $ref: '#/components/schemas/DataType'
+      required:
+      - name
+      - type
+      type: object
     Failure:
       description: Provides information about problems encountered while performing
         an operation.
@@ -1996,6 +2161,250 @@ components:
         source:
           $ref: '#/components/schemas/Error_source'
       type: object
+    CharType_allOf:
+      properties:
+        type:
+          description: The data type of the column.
+          enum:
+          - CHAR
+          type: string
+    VarcharType_allOf:
+      properties:
+        type:
+          description: The data type of the column.
+          enum:
+          - VARCHAR
+          type: string
+    BooleanType_allOf:
+      properties:
+        type:
+          description: The data type of the column.
+          enum:
+          - BOOLEAN
+          type: string
+    BinaryType_allOf:
+      properties:
+        type:
+          description: The data type of the column.
+          enum:
+          - BINARY
+          type: string
+    VarbinaryType_allOf:
+      properties:
+        type:
+          description: The data type of the column.
+          enum:
+          - VARBINARY
+          type: string
+    DecimalType_allOf:
+      properties:
+        type:
+          description: The data type of the column.
+          enum:
+          - DECIMAL
+          type: string
+        precision:
+          description: The precision of the decimal type (i.e. the number of digits
+            in the number).
+          format: int32
+          maximum: 38
+          minimum: 0
+          type: integer
+        scale:
+          description: The scale of the decimal type (i.e. the number of digits to
+            the right of the decimal point).
+          format: int32
+          maximum: 38
+          minimum: 0
+          type: integer
+      required:
+      - precision
+      - scale
+    IntegerType_allOf:
+      properties:
+        type:
+          description: The data type of the column.
+          enum:
+          - INTEGER
+          type: string
+    TinyIntType_allOf:
+      properties:
+        type:
+          description: The data type of the column.
+          enum:
+          - TINYINT
+          type: string
+    SmallIntType_allOf:
+      properties:
+        type:
+          description: The data type of the column.
+          enum:
+          - SMALLINT
+          type: string
+    BigIntType_allOf:
+      properties:
+        type:
+          description: The data type of the column.
+          enum:
+          - BIGINT
+          type: string
+    FloatType_allOf:
+      properties:
+        type:
+          description: The data type of the column.
+          enum:
+          - FLOAT
+          type: string
+    DoubleType_allOf:
+      properties:
+        type:
+          description: The data type of the column.
+          enum:
+          - DOUBLE
+          type: string
+    DateType_allOf:
+      properties:
+        type:
+          description: The data type of the column.
+          enum:
+          - DATE
+          type: string
+    TimeWithoutTimeZoneType_allOf:
+      properties:
+        type:
+          description: The data type of the column.
+          enum:
+          - TIME_WITHOUT_TIME_ZONE
+          type: string
+        scale:
+          description: The scale of the time type.
+          format: int32
+          maximum: 38
+          minimum: 0
+          type: integer
+        precision:
+          description: The precision of the time type.
+          format: int32
+          maximum: 38
+          minimum: 0
+          type: integer
+    TimestampWithoutTimeZoneType_allOf:
+      properties:
+        type:
+          description: The data type of the column.
+          enum:
+          - TIMESTAMP_WITHOUT_TIME_ZONE
+          type: string
+    TimestampWithTimeZoneType_allOf:
+      properties:
+        type:
+          description: The data type of the column.
+          enum:
+          - TIMESTAMP_WITH_TIME_ZONE
+          type: string
+    TimestampWithLocalTimeZoneType_allOf:
+      properties:
+        type:
+          description: The data type of the column.
+          enum:
+          - TIMESTAMP_WITH_LOCAL_TIME_ZONE
+          type: string
+    IntervalYearMonthType_allOf:
+      properties:
+        type:
+          description: The data type of the column.
+          enum:
+          - INTERVAL_YEAR_MONTH
+          type: string
+        resolution:
+          description: The resolution for the interval
+          example: YEAR
+          type: string
+          x-extensible-enum:
+          - YEAR
+          - YEAR_TO_MONTH
+          - MONTH
+    IntervalDayTimeType_allOf:
+      properties:
+        type:
+          description: The data type of the column.
+          enum:
+          - INTERVAL_DAY_TIME
+          type: string
+        resolution:
+          description: The resolution for the interval
+          example: DAY
+          type: string
+          x-extensible-enum:
+          - DAY
+          - DAY_TO_HOUR
+          - DAY_TO_MINUTE
+          - DAY_TO_SECOND
+          - HOUR
+          - HOUR_TO_MINUTE
+          - HOUR_TO_SECOND
+          - MINUTE
+          - MINUTE_TO_SECOND
+          - SECOND
+    ArrayType_allOf:
+      properties:
+        type:
+          description: The data type of the column.
+          enum:
+          - ARRAY
+          type: string
+        array_element_type:
+          allOf:
+          - $ref: '#/components/schemas/DataType'
+          description: The type of the elements in the array.
+      required:
+      - array_element_type
+    MultisetType_allOf:
+      properties:
+        type:
+          description: The data type of the column.
+          enum:
+          - MULTISET
+          type: string
+        multiset_element_type:
+          allOf:
+          - $ref: '#/components/schemas/DataType'
+          description: The type of the elements in the multiset.
+      required:
+      - multiset_element_type
+    MapType_allOf:
+      properties:
+        type:
+          description: The data type of the column.
+          enum:
+          - MAP
+          type: string
+        key_type:
+          allOf:
+          - $ref: '#/components/schemas/DataType'
+          description: The type of the key in the map.
+        value_type:
+          allOf:
+          - $ref: '#/components/schemas/DataType'
+          description: The type of the value in the map.
+      required:
+      - key_type
+      - value_type
+    RowType_allOf:
+      properties:
+        type:
+          description: The data type of the column.
+          enum:
+          - ROW
+          type: string
+        fields:
+          description: The fields of the row. Can be of type [INTEGER, DECIMAL, CHARACTER,
+            ROW, ARRAY, TIMESTAMP, MAP<INT, STRING>]
+          items:
+            $ref: '#/components/schemas/RowFieldType'
+          type: array
+      required:
+      - fields
     Error_source:
       description: If this error was caused by a particular part of the API request,
         the source will point to the query string parameter or request body property

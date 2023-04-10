@@ -37,6 +37,7 @@ import (
 type SqlV1alpha1StatementStatus struct {
 	// The lifecycle phase of the submitted SQL statement: PENDING: SQL statement is pending execution; RUNNING: SQL statement execution is in progress; COMPLETED: SQL statement is completed; DELETING: SQL statement deletion is in progress; FAILED: SQL statement execution has failed; 
 	Phase string `json:"phase"`
+	ResultSchema *SqlV1alpha1ResultSchema `json:"result_schema,omitempty"`
 	// Description of a SQL statement phase.
 	Detail *string `json:"detail,omitempty"`
 }
@@ -83,6 +84,38 @@ func (o *SqlV1alpha1StatementStatus) SetPhase(v string) {
 	o.Phase = v
 }
 
+// GetResultSchema returns the ResultSchema field value if set, zero value otherwise.
+func (o *SqlV1alpha1StatementStatus) GetResultSchema() SqlV1alpha1ResultSchema {
+	if o == nil || o.ResultSchema == nil {
+		var ret SqlV1alpha1ResultSchema
+		return ret
+	}
+	return *o.ResultSchema
+}
+
+// GetResultSchemaOk returns a tuple with the ResultSchema field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SqlV1alpha1StatementStatus) GetResultSchemaOk() (*SqlV1alpha1ResultSchema, bool) {
+	if o == nil || o.ResultSchema == nil {
+		return nil, false
+	}
+	return o.ResultSchema, true
+}
+
+// HasResultSchema returns a boolean if a field has been set.
+func (o *SqlV1alpha1StatementStatus) HasResultSchema() bool {
+	if o != nil && o.ResultSchema != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetResultSchema gets a reference to the given SqlV1alpha1ResultSchema and assigns it to the ResultSchema field.
+func (o *SqlV1alpha1StatementStatus) SetResultSchema(v SqlV1alpha1ResultSchema) {
+	o.ResultSchema = &v
+}
+
 // GetDetail returns the Detail field value if set, zero value otherwise.
 func (o *SqlV1alpha1StatementStatus) GetDetail() string {
 	if o == nil || o.Detail == nil {
@@ -118,6 +151,7 @@ func (o *SqlV1alpha1StatementStatus) SetDetail(v string) {
 // Redact resets all sensitive fields to their zero value.
 func (o *SqlV1alpha1StatementStatus) Redact() {
     o.recurseRedact(&o.Phase)
+    o.recurseRedact(o.ResultSchema)
     o.recurseRedact(o.Detail)
 }
 
@@ -155,6 +189,9 @@ func (o SqlV1alpha1StatementStatus) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["phase"] = o.Phase
+	}
+	if o.ResultSchema != nil {
+		toSerialize["result_schema"] = o.ResultSchema
 	}
 	if o.Detail != nil {
 		toSerialize["detail"] = o.Detail

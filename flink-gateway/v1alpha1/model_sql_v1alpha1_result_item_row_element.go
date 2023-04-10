@@ -32,13 +32,13 @@ import (
 
 // SqlV1alpha1ResultItemRowElement - An element of the `ResultItemRow` attribute.
 type SqlV1alpha1ResultItemRowElement struct {
-	ArrayElement *ArrayElement
+	SqlV1alpha1ArrayElement *SqlV1alpha1ArrayElement
 	string *string
 }
 
-// ArrayElementAsSqlV1alpha1ResultItemRowElement is a convenience function that returns ArrayElement wrapped in SqlV1alpha1ResultItemRowElement
-func ArrayElementAsSqlV1alpha1ResultItemRowElement(v *ArrayElement) SqlV1alpha1ResultItemRowElement {
-	return SqlV1alpha1ResultItemRowElement{ ArrayElement: v}
+// SqlV1alpha1ArrayElementAsSqlV1alpha1ResultItemRowElement is a convenience function that returns SqlV1alpha1ArrayElement wrapped in SqlV1alpha1ResultItemRowElement
+func SqlV1alpha1ArrayElementAsSqlV1alpha1ResultItemRowElement(v *SqlV1alpha1ArrayElement) SqlV1alpha1ResultItemRowElement {
+	return SqlV1alpha1ResultItemRowElement{ SqlV1alpha1ArrayElement: v}
 }
 
 // stringAsSqlV1alpha1ResultItemRowElement is a convenience function that returns string wrapped in SqlV1alpha1ResultItemRowElement
@@ -56,17 +56,17 @@ func (dst *SqlV1alpha1ResultItemRowElement) UnmarshalJSON(data []byte) error {
 	}
 
 	match := 0
-	// try to unmarshal data into ArrayElement
-	err = json.Unmarshal(data, &dst.ArrayElement)
+	// try to unmarshal data into SqlV1alpha1ArrayElement
+	err = json.Unmarshal(data, &dst.SqlV1alpha1ArrayElement)
 	if err == nil {
-		jsonArrayElement, _ := json.Marshal(dst.ArrayElement)
-		if string(jsonArrayElement) == "{}" { // empty struct
-			dst.ArrayElement = nil
+		jsonSqlV1alpha1ArrayElement, _ := json.Marshal(dst.SqlV1alpha1ArrayElement)
+		if string(jsonSqlV1alpha1ArrayElement) == "{}" { // empty struct
+			dst.SqlV1alpha1ArrayElement = nil
 		} else {
 			match++
 		}
 	} else {
-		dst.ArrayElement = nil
+		dst.SqlV1alpha1ArrayElement = nil
 	}
 
 	// try to unmarshal data into string
@@ -84,7 +84,7 @@ func (dst *SqlV1alpha1ResultItemRowElement) UnmarshalJSON(data []byte) error {
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.ArrayElement = nil
+		dst.SqlV1alpha1ArrayElement = nil
 		dst.string = nil
 
 		return fmt.Errorf("Data matches more than one schema in oneOf(SqlV1alpha1ResultItemRowElement)")
@@ -97,8 +97,8 @@ func (dst *SqlV1alpha1ResultItemRowElement) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src SqlV1alpha1ResultItemRowElement) MarshalJSON() ([]byte, error) {
-	if src.ArrayElement != nil {
-		return json.Marshal(&src.ArrayElement)
+	if src.SqlV1alpha1ArrayElement != nil {
+		return json.Marshal(&src.SqlV1alpha1ArrayElement)
 	}
 
 	if src.string != nil {
@@ -110,8 +110,8 @@ func (src SqlV1alpha1ResultItemRowElement) MarshalJSON() ([]byte, error) {
 
 // Get the actual instance
 func (obj *SqlV1alpha1ResultItemRowElement) GetActualInstance() (interface{}) {
-	if obj.ArrayElement != nil {
-		return obj.ArrayElement
+	if obj.SqlV1alpha1ArrayElement != nil {
+		return obj.SqlV1alpha1ArrayElement
 	}
 
 	if obj.string != nil {

@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Phase** | **string** | The lifecycle phase of the submitted SQL statement: PENDING: SQL statement is pending execution; RUNNING: SQL statement execution is in progress; COMPLETED: SQL statement is completed; DELETING: SQL statement deletion is in progress; FAILED: SQL statement execution has failed;  | [readonly] 
+**ResultSchema** | Pointer to [**SqlV1alpha1ResultSchema**](SqlV1alpha1ResultSchema.md) |  | [optional] 
 **Detail** | Pointer to **string** | Description of a SQL statement phase. | [optional] [readonly] 
 
 ## Methods
@@ -45,6 +46,31 @@ and a boolean to check if the value has been set.
 
 SetPhase sets Phase field to given value.
 
+
+### GetResultSchema
+
+`func (o *SqlV1alpha1StatementStatus) GetResultSchema() SqlV1alpha1ResultSchema`
+
+GetResultSchema returns the ResultSchema field if non-nil, zero value otherwise.
+
+### GetResultSchemaOk
+
+`func (o *SqlV1alpha1StatementStatus) GetResultSchemaOk() (*SqlV1alpha1ResultSchema, bool)`
+
+GetResultSchemaOk returns a tuple with the ResultSchema field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResultSchema
+
+`func (o *SqlV1alpha1StatementStatus) SetResultSchema(v SqlV1alpha1ResultSchema)`
+
+SetResultSchema sets ResultSchema field to given value.
+
+### HasResultSchema
+
+`func (o *SqlV1alpha1StatementStatus) HasResultSchema() bool`
+
+HasResultSchema returns a boolean if a field has been set.
 
 ### GetDetail
 

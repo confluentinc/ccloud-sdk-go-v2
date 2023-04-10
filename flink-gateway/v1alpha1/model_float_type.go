@@ -33,33 +33,88 @@ import (
 	"reflect"
 )
 
-// ArrayElement struct for ArrayElement
-type ArrayElement struct {
-	Items []SqlV1alpha1ResultItemRow
+// FloatType struct for FloatType
+type FloatType struct {
+	// Indicates whether values in this column can be null.
+	Nullable bool `json:"nullable"`
+	// The data type of the column.
+	Type string `json:"type"`
 }
 
-// NewArrayElement instantiates a new ArrayElement object
+// NewFloatType instantiates a new FloatType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewArrayElement() *ArrayElement {
-	this := ArrayElement{}
+func NewFloatType(nullable bool, type_ string) *FloatType {
+	this := FloatType{}
+	this.Nullable = nullable
+	this.Type = type_
 	return &this
 }
 
-// NewArrayElementWithDefaults instantiates a new ArrayElement object
+// NewFloatTypeWithDefaults instantiates a new FloatType object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewArrayElementWithDefaults() *ArrayElement {
-	this := ArrayElement{}
+func NewFloatTypeWithDefaults() *FloatType {
+	this := FloatType{}
 	return &this
+}
+
+// GetNullable returns the Nullable field value
+func (o *FloatType) GetNullable() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Nullable
+}
+
+// GetNullableOk returns a tuple with the Nullable field value
+// and a boolean to check if the value has been set.
+func (o *FloatType) GetNullableOk() (*bool, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.Nullable, true
+}
+
+// SetNullable sets field value
+func (o *FloatType) SetNullable(v bool) {
+	o.Nullable = v
+}
+
+// GetType returns the Type field value
+func (o *FloatType) GetType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *FloatType) GetTypeOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.Type, true
+}
+
+// SetType sets field value
+func (o *FloatType) SetType(v string) {
+	o.Type = v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *ArrayElement) Redact() {
+func (o *FloatType) Redact() {
+    o.recurseRedact(&o.Nullable)
+    o.recurseRedact(&o.Type)
 }
 
-func (o *ArrayElement) recurseRedact(v interface{}) {
+func (o *FloatType) recurseRedact(v interface{}) {
     type redactor interface {
         Redact()
     }
@@ -84,55 +139,54 @@ func (o *ArrayElement) recurseRedact(v interface{}) {
     }
 }
 
-func (o ArrayElement) zeroField(v interface{}) {
+func (o FloatType) zeroField(v interface{}) {
     p := reflect.ValueOf(v).Elem()
     p.Set(reflect.Zero(p.Type()))
 }
 
-func (o ArrayElement) MarshalJSON() ([]byte, error) {
-	toSerialize := make([]interface{}, len(o.Items))
-	for i, item := range o.Items {
-		toSerialize[i] = item
+func (o FloatType) MarshalJSON() ([]byte, error) {
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["nullable"] = o.Nullable
+	}
+	if true {
+		toSerialize["type"] = o.Type
 	}
 	return json.Marshal(toSerialize)
 }
 
-func (o *ArrayElement) UnmarshalJSON(bytes []byte) (err error) {
-	return json.Unmarshal(bytes, &o.Items)
-}
-
-type NullableArrayElement struct {
-	value *ArrayElement
+type NullableFloatType struct {
+	value *FloatType
 	isSet bool
 }
 
-func (v NullableArrayElement) Get() *ArrayElement {
+func (v NullableFloatType) Get() *FloatType {
 	return v.value
 }
 
-func (v *NullableArrayElement) Set(val *ArrayElement) {
+func (v *NullableFloatType) Set(val *FloatType) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableArrayElement) IsSet() bool {
+func (v NullableFloatType) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableArrayElement) Unset() {
+func (v *NullableFloatType) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableArrayElement(val *ArrayElement) *NullableArrayElement {
-	return &NullableArrayElement{value: val, isSet: true}
+func NewNullableFloatType(val *FloatType) *NullableFloatType {
+	return &NullableFloatType{value: val, isSet: true}
 }
 
-func (v NullableArrayElement) MarshalJSON() ([]byte, error) {
+func (v NullableFloatType) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableArrayElement) UnmarshalJSON(src []byte) error {
+func (v *NullableFloatType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
