@@ -36,12 +36,12 @@ import (
 // FcpmV2RegionList `Region` objects represent cloud provider regions available when placing Flink compute pools. The API allows you to list Flink regions.   ## The Regions Model <SchemaDefinition schemaRef=\"#/components/schemas/fcpm.v2.Region\" />
 type FcpmV2RegionList struct {
 	// APIVersion defines the schema version of this representation of a resource.
-	ApiVersion string `json:"api_version"`
+	ApiVersion string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
-	Kind     string   `json:"kind"`
-	Metadata ListMeta `json:"metadata"`
+	Kind     string   `json:"kind,omitempty"`
+	Metadata ListMeta `json:"metadata,omitempty"`
 	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
-	Data []FcpmV2Region `json:"data"`
+	Data []FcpmV2Region `json:"data,omitempty"`
 }
 
 // NewFcpmV2RegionList instantiates a new FcpmV2RegionList object

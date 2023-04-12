@@ -36,12 +36,12 @@ import (
 // FcpmV2IamBindingList An IamBinding represents the binding of identity pools to all Flink compute pools in an environment, cloud and region. This is needed for authentication purposes.   ## The Iam Bindings Model <SchemaDefinition schemaRef=\"#/components/schemas/fcpm.v2.IamBinding\" />
 type FcpmV2IamBindingList struct {
 	// APIVersion defines the schema version of this representation of a resource.
-	ApiVersion string `json:"api_version"`
+	ApiVersion string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
-	Kind     string   `json:"kind"`
-	Metadata ListMeta `json:"metadata"`
+	Kind     string   `json:"kind,omitempty"`
+	Metadata ListMeta `json:"metadata,omitempty"`
 	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
-	Data []FcpmV2IamBinding `json:"data"`
+	Data []FcpmV2IamBinding `json:"data,omitempty"`
 }
 
 // NewFcpmV2IamBindingList instantiates a new FcpmV2IamBindingList object

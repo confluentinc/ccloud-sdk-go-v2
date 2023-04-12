@@ -36,13 +36,13 @@ import (
 // EnvScopedObjectReference ObjectReference provides information for you to locate the referred object
 type EnvScopedObjectReference struct {
 	// ID of the referred resource
-	Id string `json:"id"`
+	Id string `json:"id,omitempty"`
 	// Environment of the referred resource, if env-scoped
 	Environment *string `json:"environment,omitempty"`
 	// API URL for accessing or modifying the referred object
-	Related string `json:"related"`
+	Related string `json:"related,omitempty"`
 	// CRN reference to the referred resource
-	ResourceName string `json:"resource_name"`
+	ResourceName string `json:"resource_name,omitempty"`
 }
 
 // NewEnvScopedObjectReference instantiates a new EnvScopedObjectReference object

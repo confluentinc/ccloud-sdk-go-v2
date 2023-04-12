@@ -36,9 +36,9 @@ import (
 // FcpmV2ComputePoolStatus The status of the Compute Pool
 type FcpmV2ComputePoolStatus struct {
 	// Status of the Flink compute pool.
-	Phase string `json:"phase"`
+	Phase string `json:"phase,omitempty"`
 	// The number of CSUs (Confluent Streaming Units) currently allocated to this Flink compute pool.
-	CurrentCsu int32 `json:"current_csu"`
+	CurrentCsu int32 `json:"current_csu,omitempty"`
 }
 
 // NewFcpmV2ComputePoolStatus instantiates a new FcpmV2ComputePoolStatus object

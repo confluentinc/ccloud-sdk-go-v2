@@ -36,12 +36,12 @@ import (
 // FcpmV2ComputePoolList A Compute Pool represents a set of compute resources that is used to run your Queries. The resources (CPUs, memory,…) provided by a Compute Pool are shared between all Queries that use it.   ## The Compute Pools Model <SchemaDefinition schemaRef=\"#/components/schemas/fcpm.v2.ComputePool\" />
 type FcpmV2ComputePoolList struct {
 	// APIVersion defines the schema version of this representation of a resource.
-	ApiVersion string `json:"api_version"`
+	ApiVersion string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
-	Kind     string   `json:"kind"`
-	Metadata ListMeta `json:"metadata"`
+	Kind     string   `json:"kind,omitempty"`
+	Metadata ListMeta `json:"metadata,omitempty"`
 	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
-	Data []FcpmV2ComputePool `json:"data"`
+	Data []FcpmV2ComputePool `json:"data,omitempty"`
 }
 
 // NewFcpmV2ComputePoolList instantiates a new FcpmV2ComputePoolList object

@@ -36,7 +36,7 @@ import (
 // FcpmV2Standard The standard cluster type.
 type FcpmV2Standard struct {
 	// Standard cluster type.
-	Kind string `json:"kind"`
+	Kind string `json:"kind,omitempty"`
 }
 
 // NewFcpmV2Standard instantiates a new FcpmV2Standard object

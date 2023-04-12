@@ -36,13 +36,13 @@ import (
 // ObjectReference ObjectReference provides information for you to locate the referred object
 type ObjectReference struct {
 	// ID of the referred resource
-	Id string `json:"id"`
+	Id string `json:"id,omitempty"`
 	// Environment of the referred resource, if env-scoped
 	Environment *string `json:"environment,omitempty"`
 	// API URL for accessing or modifying the referred object
-	Related string `json:"related"`
+	Related string `json:"related,omitempty"`
 	// CRN reference to the referred resource
-	ResourceName string `json:"resource_name"`
+	ResourceName string `json:"resource_name,omitempty"`
 	// API group and version of the referred resource
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind of the referred resource

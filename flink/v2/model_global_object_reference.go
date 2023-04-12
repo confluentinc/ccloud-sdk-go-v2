@@ -36,11 +36,11 @@ import (
 // GlobalObjectReference ObjectReference provides information for you to locate the referred object
 type GlobalObjectReference struct {
 	// ID of the referred resource
-	Id string `json:"id"`
+	Id string `json:"id,omitempty"`
 	// API URL for accessing or modifying the referred object
-	Related string `json:"related"`
+	Related string `json:"related,omitempty"`
 	// CRN reference to the referred resource
-	ResourceName string `json:"resource_name"`
+	ResourceName string `json:"resource_name,omitempty"`
 }
 
 // NewGlobalObjectReference instantiates a new GlobalObjectReference object
