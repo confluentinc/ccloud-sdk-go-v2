@@ -1820,6 +1820,18 @@ components:
       type: object
     sql.v1alpha1.ResultItemRow:
       description: An item of the `row` attribute.
+      example:
+      - "101"
+      - Jay
+      - - null
+        - abc
+      - - null
+        - "456"
+      - 1990-01-12 12:00.12
+      - - - null
+          - Alice
+        - - "42"
+          - Bob
       items:
         nullable: true
         oneOf:
@@ -1853,6 +1865,7 @@ components:
         statement_name:
           description: The name of the resource, unique within this environment.
           example: sql123
+          maxLength: 255
           type: string
           x-immutable: true
         statement:
@@ -1867,10 +1880,12 @@ components:
           example:
             key1: value1
             key2: value2
+          maximum: 8192
           type: object
         compute_pool_id:
           description: The id associated with the compute pool in context.
           example: fcp-00000
+          maxLength: 255
           type: string
       type: object
       x-enable-listmeta: true
@@ -1961,6 +1976,32 @@ components:
       - type
       type: object
     DataType:
+      discriminator:
+        mapping:
+          CHAR: '#/components/schemas/CharType'
+          VARCHAR: '#/components/schemas/VarcharType'
+          BOOLEAN: '#/components/schemas/BooleanType'
+          BINARY: '#/components/schemas/BinaryType'
+          VARBINARY: '#/components/schemas/VarbinaryType'
+          DECIMAL: '#/components/schemas/DecimalType'
+          INTEGER: '#/components/schemas/IntegerType'
+          TINYINT: '#/components/schemas/TinyIntType'
+          SMALLINT: '#/components/schemas/SmallIntType'
+          BIGINT: '#/components/schemas/BigIntType'
+          FLOAT: '#/components/schemas/FloatType'
+          DOUBLE: '#/components/schemas/DoubleType'
+          DATE: '#/components/schemas/DateType'
+          TIME_WITHOUT_TIME_ZONE: '#/components/schemas/TimeWithoutTimeZoneType'
+          TIMESTAMP_WITHOUT_TIME_ZONE: '#/components/schemas/TimestampWithoutTimeZoneType'
+          TIMESTAMP_WITH_TIME_ZONE: '#/components/schemas/TimestampWithTimeZoneType'
+          TIMESTAMP_WITH_LOCAL_TIME_ZONE: '#/components/schemas/TimestampWithLocalTimeZoneType'
+          INTERVAL_YEAR_MONTH: '#/components/schemas/IntervalYearMonthType'
+          INTERVAL_DAY_TIME: '#/components/schemas/IntervalDayTimeType'
+          ARRAY: '#/components/schemas/ArrayType'
+          MULTISET: '#/components/schemas/MultisetType'
+          MAP: '#/components/schemas/MapType'
+          ROW: '#/components/schemas/RowType'
+        propertyName: type
       oneOf:
       - $ref: '#/components/schemas/CharType'
       - $ref: '#/components/schemas/VarcharType'

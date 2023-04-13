@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DataTypeInterface** | **interface {  }** | An interface that can hold any of the proper implementing types |
+**DataTypeInterface** | **interface { GetType() string }** | An interface that can hold any of the proper implementing types |
 
 ## Methods
 
