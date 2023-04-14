@@ -79,23 +79,36 @@ All URIs are relative to *https://psrc-00000.region.provider.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*EntityV1Api* | [**CreateBusinessMetadata**](docs/EntityV1Api.md#createbusinessmetadata) | **Post** /catalog/v1/entity/businessmetadata | Bulk Create Business Metadata
 *EntityV1Api* | [**CreateTags**](docs/EntityV1Api.md#createtags) | **Post** /catalog/v1/entity/tags | Bulk Create Tags
+*EntityV1Api* | [**DeleteBusinessMetadata**](docs/EntityV1Api.md#deletebusinessmetadata) | **Delete** /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata/{bmName} | Delete a Business Metadata for an Entity
 *EntityV1Api* | [**DeleteTag**](docs/EntityV1Api.md#deletetag) | **Delete** /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName} | Delete a Tag for an Entity
+*EntityV1Api* | [**GetBusinessMetadata**](docs/EntityV1Api.md#getbusinessmetadata) | **Get** /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata | Read Business Metadata for an Entity
 *EntityV1Api* | [**GetByUniqueAttributes**](docs/EntityV1Api.md#getbyuniqueattributes) | **Get** /catalog/v1/entity/type/{typeName}/name/{qualifiedName} | Read an Entity
 *EntityV1Api* | [**GetTags**](docs/EntityV1Api.md#gettags) | **Get** /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags | Read Tags for an Entity
+*EntityV1Api* | [**UpdateBusinessMetadata**](docs/EntityV1Api.md#updatebusinessmetadata) | **Put** /catalog/v1/entity/businessmetadata | Bulk Update Business Metadata
 *EntityV1Api* | [**UpdateTags**](docs/EntityV1Api.md#updatetags) | **Put** /catalog/v1/entity/tags | Bulk Update Tags
 *SearchV1Api* | [**SearchUsingAttribute**](docs/SearchV1Api.md#searchusingattribute) | **Get** /catalog/v1/search/attribute | Search by Attribute
 *SearchV1Api* | [**SearchUsingBasic**](docs/SearchV1Api.md#searchusingbasic) | **Get** /catalog/v1/search/basic | Search by Fulltext Query
+*TypesV1Api* | [**CreateBusinessMetadataDefs**](docs/TypesV1Api.md#createbusinessmetadatadefs) | **Post** /catalog/v1/types/businessmetadatadefs | Bulk Create Business Metadata Definitions
 *TypesV1Api* | [**CreateTagDefs**](docs/TypesV1Api.md#createtagdefs) | **Post** /catalog/v1/types/tagdefs | Bulk Create Tag Definitions
+*TypesV1Api* | [**DeleteBusinessMetadataDef**](docs/TypesV1Api.md#deletebusinessmetadatadef) | **Delete** /catalog/v1/types/businessmetadatadefs/{bmName} | Delete Business Metadata Definition
 *TypesV1Api* | [**DeleteTagDef**](docs/TypesV1Api.md#deletetagdef) | **Delete** /catalog/v1/types/tagdefs/{tagName} | Delete Tag Definition
+*TypesV1Api* | [**GetAllBusinessMetadataDefs**](docs/TypesV1Api.md#getallbusinessmetadatadefs) | **Get** /catalog/v1/types/businessmetadatadefs | Bulk Read Business Metadata Definitions
 *TypesV1Api* | [**GetAllTagDefs**](docs/TypesV1Api.md#getalltagdefs) | **Get** /catalog/v1/types/tagdefs | Bulk Read Tag Definitions
+*TypesV1Api* | [**GetBusinessMetadataDefByName**](docs/TypesV1Api.md#getbusinessmetadatadefbyname) | **Get** /catalog/v1/types/businessmetadatadefs/{bmName} | Read Business Metadata Definition
 *TypesV1Api* | [**GetTagDefByName**](docs/TypesV1Api.md#gettagdefbyname) | **Get** /catalog/v1/types/tagdefs/{tagName} | Read Tag Definition
+*TypesV1Api* | [**UpdateBusinessMetadataDefs**](docs/TypesV1Api.md#updatebusinessmetadatadefs) | **Put** /catalog/v1/types/businessmetadatadefs | Bulk Update Business Metadata Definitions
 *TypesV1Api* | [**UpdateTagDefs**](docs/TypesV1Api.md#updatetagdefs) | **Put** /catalog/v1/types/tagdefs | Bulk Update Tag Definitions
 
 
 ## Documentation For Models
 
  - [AttributeDef](docs/AttributeDef.md)
+ - [BusinessMetadata](docs/BusinessMetadata.md)
+ - [BusinessMetadataDef](docs/BusinessMetadataDef.md)
+ - [BusinessMetadataDefResponse](docs/BusinessMetadataDefResponse.md)
+ - [BusinessMetadataResponse](docs/BusinessMetadataResponse.md)
  - [Classification](docs/Classification.md)
  - [ConstraintDef](docs/ConstraintDef.md)
  - [Entity](docs/Entity.md)

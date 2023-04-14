@@ -42,6 +42,22 @@ var (
 type EntityV1Api interface {
 
 	/*
+		CreateBusinessMetadata Bulk Create Business Metadata
+
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+	Bulk API to create multiple business metadata.
+
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateBusinessMetadataRequest
+	*/
+	CreateBusinessMetadata(ctx _context.Context) ApiCreateBusinessMetadataRequest
+
+	// CreateBusinessMetadataExecute executes the request
+	//  @return []BusinessMetadataResponse
+	CreateBusinessMetadataExecute(r ApiCreateBusinessMetadataRequest) ([]BusinessMetadataResponse, *_nethttp.Response, error)
+
+	/*
 		CreateTags Bulk Create Tags
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
@@ -56,6 +72,24 @@ type EntityV1Api interface {
 	// CreateTagsExecute executes the request
 	//  @return []TagResponse
 	CreateTagsExecute(r ApiCreateTagsRequest) ([]TagResponse, *_nethttp.Response, error)
+
+	/*
+		DeleteBusinessMetadata Delete a Business Metadata for an Entity
+
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+	Delete a business metadata on an entity.
+
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param typeName The type of the entity
+		 @param qualifiedName The qualified name of the entity
+		 @param bmName The name of the business metadata
+		 @return ApiDeleteBusinessMetadataRequest
+	*/
+	DeleteBusinessMetadata(ctx _context.Context, typeName string, qualifiedName string, bmName string) ApiDeleteBusinessMetadataRequest
+
+	// DeleteBusinessMetadataExecute executes the request
+	DeleteBusinessMetadataExecute(r ApiDeleteBusinessMetadataRequest) (*_nethttp.Response, error)
 
 	/*
 		DeleteTag Delete a Tag for an Entity
@@ -74,6 +108,25 @@ type EntityV1Api interface {
 
 	// DeleteTagExecute executes the request
 	DeleteTagExecute(r ApiDeleteTagRequest) (*_nethttp.Response, error)
+
+	/*
+		GetBusinessMetadata Read Business Metadata for an Entity
+
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+	Gets the list of business metadata for a given entity represented
+	by a qualified name.
+
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param typeName The type of the entity
+		 @param qualifiedName The qualified name of the entity
+		 @return ApiGetBusinessMetadataRequest
+	*/
+	GetBusinessMetadata(ctx _context.Context, typeName string, qualifiedName string) ApiGetBusinessMetadataRequest
+
+	// GetBusinessMetadataExecute executes the request
+	//  @return []BusinessMetadataResponse
+	GetBusinessMetadataExecute(r ApiGetBusinessMetadataRequest) ([]BusinessMetadataResponse, *_nethttp.Response, error)
 
 	/*
 		GetByUniqueAttributes Read an Entity
@@ -112,6 +165,22 @@ type EntityV1Api interface {
 	GetTagsExecute(r ApiGetTagsRequest) ([]TagResponse, *_nethttp.Response, error)
 
 	/*
+		UpdateBusinessMetadata Bulk Update Business Metadata
+
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+	Bulk API to update multiple business metadata.
+
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiUpdateBusinessMetadataRequest
+	*/
+	UpdateBusinessMetadata(ctx _context.Context) ApiUpdateBusinessMetadataRequest
+
+	// UpdateBusinessMetadataExecute executes the request
+	//  @return []BusinessMetadataResponse
+	UpdateBusinessMetadataExecute(r ApiUpdateBusinessMetadataRequest) ([]BusinessMetadataResponse, *_nethttp.Response, error)
+
+	/*
 		UpdateTags Bulk Update Tags
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
@@ -130,6 +199,118 @@ type EntityV1Api interface {
 
 // EntityV1ApiService EntityV1Api service
 type EntityV1ApiService service
+
+type ApiCreateBusinessMetadataRequest struct {
+	ctx              _context.Context
+	ApiService       EntityV1Api
+	businessMetadata *[]BusinessMetadata
+}
+
+// The business metadata
+func (r ApiCreateBusinessMetadataRequest) BusinessMetadata(businessMetadata []BusinessMetadata) ApiCreateBusinessMetadataRequest {
+	r.businessMetadata = &businessMetadata
+	return r
+}
+
+func (r ApiCreateBusinessMetadataRequest) Execute() ([]BusinessMetadataResponse, *_nethttp.Response, error) {
+	return r.ApiService.CreateBusinessMetadataExecute(r)
+}
+
+/*
+CreateBusinessMetadata Bulk Create Business Metadata
+
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Bulk API to create multiple business metadata.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateBusinessMetadataRequest
+*/
+func (a *EntityV1ApiService) CreateBusinessMetadata(ctx _context.Context) ApiCreateBusinessMetadataRequest {
+	return ApiCreateBusinessMetadataRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return []BusinessMetadataResponse
+func (a *EntityV1ApiService) CreateBusinessMetadataExecute(r ApiCreateBusinessMetadataRequest) ([]BusinessMetadataResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []BusinessMetadataResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EntityV1ApiService.CreateBusinessMetadata")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/catalog/v1/entity/businessmetadata"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.businessMetadata
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
 
 type ApiCreateTagsRequest struct {
 	ctx        _context.Context
@@ -243,6 +424,110 @@ func (a *EntityV1ApiService) CreateTagsExecute(r ApiCreateTagsRequest) ([]TagRes
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiDeleteBusinessMetadataRequest struct {
+	ctx           _context.Context
+	ApiService    EntityV1Api
+	typeName      string
+	qualifiedName string
+	bmName        string
+}
+
+func (r ApiDeleteBusinessMetadataRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteBusinessMetadataExecute(r)
+}
+
+/*
+DeleteBusinessMetadata Delete a Business Metadata for an Entity
+
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Delete a business metadata on an entity.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param typeName The type of the entity
+ @param qualifiedName The qualified name of the entity
+ @param bmName The name of the business metadata
+ @return ApiDeleteBusinessMetadataRequest
+*/
+func (a *EntityV1ApiService) DeleteBusinessMetadata(ctx _context.Context, typeName string, qualifiedName string, bmName string) ApiDeleteBusinessMetadataRequest {
+	return ApiDeleteBusinessMetadataRequest{
+		ApiService:    a,
+		ctx:           ctx,
+		typeName:      typeName,
+		qualifiedName: qualifiedName,
+		bmName:        bmName,
+	}
+}
+
+// Execute executes the request
+func (a *EntityV1ApiService) DeleteBusinessMetadataExecute(r ApiDeleteBusinessMetadataRequest) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EntityV1ApiService.DeleteBusinessMetadata")
+	if err != nil {
+		return nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata/{bmName}"
+	localVarPath = strings.Replace(localVarPath, "{"+"typeName"+"}", _neturl.PathEscape(parameterToString(r.typeName, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"qualifiedName"+"}", _neturl.PathEscape(parameterToString(r.qualifiedName, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"bmName"+"}", _neturl.PathEscape(parameterToString(r.bmName, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type ApiDeleteTagRequest struct {
 	ctx           _context.Context
 	ApiService    EntityV1Api
@@ -345,6 +630,118 @@ func (a *EntityV1ApiService) DeleteTagExecute(r ApiDeleteTagRequest) (*_nethttp.
 	}
 
 	return localVarHTTPResponse, nil
+}
+
+type ApiGetBusinessMetadataRequest struct {
+	ctx           _context.Context
+	ApiService    EntityV1Api
+	typeName      string
+	qualifiedName string
+}
+
+func (r ApiGetBusinessMetadataRequest) Execute() ([]BusinessMetadataResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetBusinessMetadataExecute(r)
+}
+
+/*
+GetBusinessMetadata Read Business Metadata for an Entity
+
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Gets the list of business metadata for a given entity represented
+by a qualified name.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param typeName The type of the entity
+ @param qualifiedName The qualified name of the entity
+ @return ApiGetBusinessMetadataRequest
+*/
+func (a *EntityV1ApiService) GetBusinessMetadata(ctx _context.Context, typeName string, qualifiedName string) ApiGetBusinessMetadataRequest {
+	return ApiGetBusinessMetadataRequest{
+		ApiService:    a,
+		ctx:           ctx,
+		typeName:      typeName,
+		qualifiedName: qualifiedName,
+	}
+}
+
+// Execute executes the request
+//  @return []BusinessMetadataResponse
+func (a *EntityV1ApiService) GetBusinessMetadataExecute(r ApiGetBusinessMetadataRequest) ([]BusinessMetadataResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []BusinessMetadataResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EntityV1ApiService.GetBusinessMetadata")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata"
+	localVarPath = strings.Replace(localVarPath, "{"+"typeName"+"}", _neturl.PathEscape(parameterToString(r.typeName, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"qualifiedName"+"}", _neturl.PathEscape(parameterToString(r.qualifiedName, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetByUniqueAttributesRequest struct {
@@ -552,6 +949,118 @@ func (a *EntityV1ApiService) GetTagsExecute(r ApiGetTagsRequest) ([]TagResponse,
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateBusinessMetadataRequest struct {
+	ctx              _context.Context
+	ApiService       EntityV1Api
+	businessMetadata *[]BusinessMetadata
+}
+
+// The business metadata
+func (r ApiUpdateBusinessMetadataRequest) BusinessMetadata(businessMetadata []BusinessMetadata) ApiUpdateBusinessMetadataRequest {
+	r.businessMetadata = &businessMetadata
+	return r
+}
+
+func (r ApiUpdateBusinessMetadataRequest) Execute() ([]BusinessMetadataResponse, *_nethttp.Response, error) {
+	return r.ApiService.UpdateBusinessMetadataExecute(r)
+}
+
+/*
+UpdateBusinessMetadata Bulk Update Business Metadata
+
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Bulk API to update multiple business metadata.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiUpdateBusinessMetadataRequest
+*/
+func (a *EntityV1ApiService) UpdateBusinessMetadata(ctx _context.Context) ApiUpdateBusinessMetadataRequest {
+	return ApiUpdateBusinessMetadataRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return []BusinessMetadataResponse
+func (a *EntityV1ApiService) UpdateBusinessMetadataExecute(r ApiUpdateBusinessMetadataRequest) ([]BusinessMetadataResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPut
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []BusinessMetadataResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EntityV1ApiService.UpdateBusinessMetadata")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/catalog/v1/entity/businessmetadata"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.businessMetadata
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
