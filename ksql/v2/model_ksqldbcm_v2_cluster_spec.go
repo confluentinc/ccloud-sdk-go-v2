@@ -37,16 +37,16 @@ import (
 type KsqldbcmV2ClusterSpec struct {
 	// The name of the ksqlDB cluster.
 	DisplayName *string `json:"display_name,omitempty"`
-	// This flag controls whether you want to include the row data in the processing log topic. Turn it off if you don't want to emit sensitive information to the processing log 
+	// This flag controls whether you want to include the row data in the processing log topic. Turn it off if you don't want to emit sensitive information to the processing log
 	UseDetailedProcessingLog *bool `json:"use_detailed_processing_log,omitempty"`
 	// The number of CSUs (Confluent Streaming Units) in a ksqlDB cluster.
 	Csu *int32 `json:"csu,omitempty"`
 	// The kafka_cluster to which this belongs.
-	KafkaCluster *ObjectReference `json:"kafka_cluster,omitempty"`
+	KafkaCluster *EnvScopedObjectReference `json:"kafka_cluster,omitempty"`
 	// The credential_identity to which this belongs. The credential_identity can be one of iam.v2.User, iam.v2.ServiceAccount.
-	CredentialIdentity *ObjectReference `json:"credential_identity,omitempty"`
+	CredentialIdentity *TypedGlobalObjectReference `json:"credential_identity,omitempty"`
 	// The environment to which this belongs.
-	Environment *ObjectReference `json:"environment,omitempty"`
+	Environment *GlobalObjectReference `json:"environment,omitempty"`
 }
 
 // NewKsqldbcmV2ClusterSpec instantiates a new KsqldbcmV2ClusterSpec object
@@ -167,9 +167,9 @@ func (o *KsqldbcmV2ClusterSpec) SetCsu(v int32) {
 }
 
 // GetKafkaCluster returns the KafkaCluster field value if set, zero value otherwise.
-func (o *KsqldbcmV2ClusterSpec) GetKafkaCluster() ObjectReference {
+func (o *KsqldbcmV2ClusterSpec) GetKafkaCluster() EnvScopedObjectReference {
 	if o == nil || o.KafkaCluster == nil {
-		var ret ObjectReference
+		var ret EnvScopedObjectReference
 		return ret
 	}
 	return *o.KafkaCluster
@@ -177,7 +177,7 @@ func (o *KsqldbcmV2ClusterSpec) GetKafkaCluster() ObjectReference {
 
 // GetKafkaClusterOk returns a tuple with the KafkaCluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *KsqldbcmV2ClusterSpec) GetKafkaClusterOk() (*ObjectReference, bool) {
+func (o *KsqldbcmV2ClusterSpec) GetKafkaClusterOk() (*EnvScopedObjectReference, bool) {
 	if o == nil || o.KafkaCluster == nil {
 		return nil, false
 	}
@@ -193,15 +193,15 @@ func (o *KsqldbcmV2ClusterSpec) HasKafkaCluster() bool {
 	return false
 }
 
-// SetKafkaCluster gets a reference to the given ObjectReference and assigns it to the KafkaCluster field.
-func (o *KsqldbcmV2ClusterSpec) SetKafkaCluster(v ObjectReference) {
+// SetKafkaCluster gets a reference to the given EnvScopedObjectReference and assigns it to the KafkaCluster field.
+func (o *KsqldbcmV2ClusterSpec) SetKafkaCluster(v EnvScopedObjectReference) {
 	o.KafkaCluster = &v
 }
 
 // GetCredentialIdentity returns the CredentialIdentity field value if set, zero value otherwise.
-func (o *KsqldbcmV2ClusterSpec) GetCredentialIdentity() ObjectReference {
+func (o *KsqldbcmV2ClusterSpec) GetCredentialIdentity() TypedGlobalObjectReference {
 	if o == nil || o.CredentialIdentity == nil {
-		var ret ObjectReference
+		var ret TypedGlobalObjectReference
 		return ret
 	}
 	return *o.CredentialIdentity
@@ -209,7 +209,7 @@ func (o *KsqldbcmV2ClusterSpec) GetCredentialIdentity() ObjectReference {
 
 // GetCredentialIdentityOk returns a tuple with the CredentialIdentity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *KsqldbcmV2ClusterSpec) GetCredentialIdentityOk() (*ObjectReference, bool) {
+func (o *KsqldbcmV2ClusterSpec) GetCredentialIdentityOk() (*TypedGlobalObjectReference, bool) {
 	if o == nil || o.CredentialIdentity == nil {
 		return nil, false
 	}
@@ -225,15 +225,15 @@ func (o *KsqldbcmV2ClusterSpec) HasCredentialIdentity() bool {
 	return false
 }
 
-// SetCredentialIdentity gets a reference to the given ObjectReference and assigns it to the CredentialIdentity field.
-func (o *KsqldbcmV2ClusterSpec) SetCredentialIdentity(v ObjectReference) {
+// SetCredentialIdentity gets a reference to the given TypedGlobalObjectReference and assigns it to the CredentialIdentity field.
+func (o *KsqldbcmV2ClusterSpec) SetCredentialIdentity(v TypedGlobalObjectReference) {
 	o.CredentialIdentity = &v
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *KsqldbcmV2ClusterSpec) GetEnvironment() ObjectReference {
+func (o *KsqldbcmV2ClusterSpec) GetEnvironment() GlobalObjectReference {
 	if o == nil || o.Environment == nil {
-		var ret ObjectReference
+		var ret GlobalObjectReference
 		return ret
 	}
 	return *o.Environment
@@ -241,7 +241,7 @@ func (o *KsqldbcmV2ClusterSpec) GetEnvironment() ObjectReference {
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *KsqldbcmV2ClusterSpec) GetEnvironmentOk() (*ObjectReference, bool) {
+func (o *KsqldbcmV2ClusterSpec) GetEnvironmentOk() (*GlobalObjectReference, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -257,49 +257,49 @@ func (o *KsqldbcmV2ClusterSpec) HasEnvironment() bool {
 	return false
 }
 
-// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
-func (o *KsqldbcmV2ClusterSpec) SetEnvironment(v ObjectReference) {
+// SetEnvironment gets a reference to the given GlobalObjectReference and assigns it to the Environment field.
+func (o *KsqldbcmV2ClusterSpec) SetEnvironment(v GlobalObjectReference) {
 	o.Environment = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
 func (o *KsqldbcmV2ClusterSpec) Redact() {
-    o.recurseRedact(o.DisplayName)
-    o.recurseRedact(o.UseDetailedProcessingLog)
-    o.recurseRedact(o.Csu)
-    o.recurseRedact(o.KafkaCluster)
-    o.recurseRedact(o.CredentialIdentity)
-    o.recurseRedact(o.Environment)
+	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.UseDetailedProcessingLog)
+	o.recurseRedact(o.Csu)
+	o.recurseRedact(o.KafkaCluster)
+	o.recurseRedact(o.CredentialIdentity)
+	o.recurseRedact(o.Environment)
 }
 
 func (o *KsqldbcmV2ClusterSpec) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o KsqldbcmV2ClusterSpec) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o KsqldbcmV2ClusterSpec) MarshalJSON() ([]byte, error) {
@@ -360,5 +360,3 @@ func (v *NullableKsqldbcmV2ClusterSpec) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

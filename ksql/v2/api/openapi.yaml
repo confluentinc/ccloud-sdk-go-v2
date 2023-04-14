@@ -9,7 +9,7 @@ info:
   x-api-id: 6dfe8977-3286-4727-ac78-883e0fcba8c0
   x-api-group: ksqldbcm/v2
   x-audience: external-public
-  x-tag-group: ksqlDB cluster Mgmt API (%s)
+  x-tag-group: Cluster Mgmt for ksqlDB (%s)
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
@@ -19,14 +19,14 @@ servers:
   url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To ksqlDB API](https://img.shields.io/badge/-Request%20Access%20To%20ksqlDB%20API-%23bc8540)](mailto:ccloud-api-access+ksqldbcm-v2-early-access@confluent.io?subject=Request%20to%20join%20ksqldbcm/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ksqldbcm/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `Cluster` represents a ksqlDB runtime that you can issue queries to using its API endpoint.
     It executes SQL statements and queries which under the hood get built into corresponding
-    Kafka Streams topologies. The API allows you to create, read, and delete your ksqlDB clusters.
+    Kafka Streams topologies. The API allows you to list, create, read, and delete your ksqlDB clusters.
 
 
-    Related guide: [ksqlDB in Confluent Cloud](https://docs.confluent.io/cloud/current/ksqldb/index.html).
+    Related guide: [ksqlDB in Confluent Cloud](https://docs.confluent.io/cloud/current/ksqldb/ksqldb-cluster-api.html).
 
     ## The Clusters Model
     <SchemaDefinition schemaRef="#/components/schemas/ksqldbcm.v2.Cluster" />
@@ -42,7 +42,7 @@ paths:
   /ksqldbcm/v2/clusters:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To ksqlDB API](https://img.shields.io/badge/-Request%20Access%20To%20ksqlDB%20API-%23bc8540)](mailto:ccloud-api-access+ksqldbcm-v2-early-access@confluent.io?subject=Request%20to%20join%20ksqldbcm/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ksqldbcm/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all clusters.
       operationId: listKsqldbcmV2Clusters
@@ -222,10 +222,10 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: List of Clusters
       tags:
       - Clusters (ksqldbcm/v2)
-      x-request-access-name: ksqlDB API
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -312,7 +312,7 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To ksqlDB API](https://img.shields.io/badge/-Request%20Access%20To%20ksqlDB%20API-%23bc8540)](mailto:ccloud-api-access+ksqldbcm-v2-early-access@confluent.io?subject=Request%20to%20join%20ksqldbcm/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ksqldbcm/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create a cluster.
       operationId: createKsqldbcmV2Cluster
@@ -585,10 +585,10 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Create a Cluster
       tags:
       - Clusters (ksqldbcm/v2)
-      x-request-access-name: ksqlDB API
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -596,13 +596,13 @@ paths:
             --url https://api.confluent.cloud/ksqldbcm/v2/clusters \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"ksqlDB_cluster_0","use_detailed_processing_log":true,"csu":4,"kafka_cluster":{"id":"lkc-00000","environment":"string"},"credential_identity":{"id":"u-a83k9b","environment":"string"},"environment":{"id":"env-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"ksqlDB_cluster_0","use_detailed_processing_log":true,"csu":4,"kafka_cluster":{"id":"lkc-00000","environment":"string"},"credential_identity":{"id":"u-a83k9b"},"environment":{"id":"env-00000"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"use_detailed_processing_log\":true,\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"credential_identity\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"use_detailed_processing_log\":true,\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"credential_identity\":{\"id\":\"u-a83k9b\"},\"environment\":{\"id\":\"env-00000\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/ksqldbcm/v2/clusters")
             .post(body)
@@ -618,9 +618,8 @@ paths:
           :\\\"ksqlDB_cluster_0\\\",\\\"use_detailed_processing_log\\\":true,\\\"\
           csu\\\":4,\\\"kafka_cluster\\\":{\\\"id\\\":\\\"lkc-00000\\\",\\\"environment\\\
           \":\\\"string\\\"},\\\"credential_identity\\\":{\\\"id\\\":\\\"u-a83k9b\\\
-          \",\\\"environment\\\":\\\"string\\\"},\\\"environment\\\":{\\\"id\\\":\\\
-          \"env-00000\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ :=\
-          \ http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
+          \"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\"}}}\")\n\n\treq, _\
+          \ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
           , \"application/json\")\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
           )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
           \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
@@ -631,7 +630,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"use_detailed_processing_log\":true,\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"credential_identity\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"use_detailed_processing_log\":true,\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"credential_identity\":{\"id\":\"u-a83k9b\"},\"environment\":{\"id\":\"env-00000\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -678,8 +677,8 @@ paths:
               use_detailed_processing_log: true,
               csu: 4,
               kafka_cluster: {id: 'lkc-00000', environment: 'string'},
-              credential_identity: {id: 'u-a83k9b', environment: 'string'},
-              environment: {id: 'env-00000', environment: 'string'}
+              credential_identity: {id: 'u-a83k9b'},
+              environment: {id: 'env-00000'}
             }
           }));
           req.end();
@@ -695,7 +694,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"use_detailed_processing_log\":true,\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"credential_identity\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"use_detailed_processing_log\":true,\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"credential_identity\":{\"id\":\"u-a83k9b\"},\"environment\":{\"id\":\"env-00000\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -704,13 +703,12 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"use_detailed_processing_log\":true,\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"credential_identity\":{\"id\":\"u-a83k9b\",\"environment\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ksqlDB_cluster_0\",\"use_detailed_processing_log\":true,\"csu\":4,\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"},\"credential_identity\":{\"id\":\"u-a83k9b\"},\"environment\":{\"id\":\"env-00000\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: ksqlDB API
   /ksqldbcm/v2/clusters/{id}:
     delete:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To ksqlDB API](https://img.shields.io/badge/-Request%20Access%20To%20ksqlDB%20API-%23bc8540)](mailto:ccloud-api-access+ksqldbcm-v2-early-access@confluent.io?subject=Request%20to%20join%20ksqldbcm/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ksqldbcm/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete a cluster.
       operationId: deleteKsqldbcmV2Cluster
@@ -867,10 +865,10 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Delete a Cluster
       tags:
       - Clusters (ksqldbcm/v2)
-      x-request-access-name: ksqlDB API
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -957,7 +955,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To ksqlDB API](https://img.shields.io/badge/-Request%20Access%20To%20ksqlDB%20API-%23bc8540)](mailto:ccloud-api-access+ksqldbcm-v2-early-access@confluent.io?subject=Request%20to%20join%20ksqldbcm/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ksqldbcm/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a cluster.
       operationId: getKsqldbcmV2Cluster
@@ -1155,10 +1153,10 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Read a Cluster
       tags:
       - Clusters (ksqldbcm/v2)
-      x-request-access-name: ksqlDB API
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1243,7 +1241,6 @@ paths:
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
-    x-request-access-name: ksqlDB API
 components:
   responses:
     BadRequestError:
@@ -1445,10 +1442,10 @@ components:
       description: |-
         `Cluster` represents a ksqlDB runtime that you can issue queries to using its API endpoint.
         It executes SQL statements and queries which under the hood get built into corresponding
-        Kafka Streams topologies. The API allows you to create, read, and delete your ksqlDB clusters.
+        Kafka Streams topologies. The API allows you to list, create, read, and delete your ksqlDB clusters.
 
 
-        Related guide: [ksqlDB in Confluent Cloud](https://docs.confluent.io/cloud/current/ksqldb/index.html).
+        Related guide: [ksqlDB in Confluent Cloud](https://docs.confluent.io/cloud/current/ksqldb/ksqldb-cluster-api.html).
 
         ## The Clusters Model
         <SchemaDefinition schemaRef="#/components/schemas/ksqldbcm.v2.Cluster" />
@@ -1542,10 +1539,10 @@ components:
       description: |-
         `Cluster` represents a ksqlDB runtime that you can issue queries to using its API endpoint.
         It executes SQL statements and queries which under the hood get built into corresponding
-        Kafka Streams topologies. The API allows you to create, read, and delete your ksqlDB clusters.
+        Kafka Streams topologies. The API allows you to list, create, read, and delete your ksqlDB clusters.
 
 
-        Related guide: [ksqlDB in Confluent Cloud](https://docs.confluent.io/cloud/current/ksqldb/index.html).
+        Related guide: [ksqlDB in Confluent Cloud](https://docs.confluent.io/cloud/current/ksqldb/ksqldb-cluster-api.html).
 
         ## The Clusters Model
         <SchemaDefinition schemaRef="#/components/schemas/ksqldbcm.v2.Cluster" />
@@ -1642,18 +1639,18 @@ components:
           x-immutable: false
         kafka_cluster:
           allOf:
-          - $ref: '#/components/schemas/ObjectReference'
+          - $ref: '#/components/schemas/EnvScopedObjectReference'
           description: The kafka_cluster to which this belongs.
           x-immutable: true
         credential_identity:
           allOf:
-          - $ref: '#/components/schemas/ObjectReference'
+          - $ref: '#/components/schemas/TypedGlobalObjectReference'
           description: The credential_identity to which this belongs. The credential_identity
             can be one of iam.v2.User, iam.v2.ServiceAccount.
           x-immutable: true
         environment:
           allOf:
-          - $ref: '#/components/schemas/ObjectReference'
+          - $ref: '#/components/schemas/GlobalObjectReference'
           description: The environment to which this belongs.
           x-immutable: true
       type: object
@@ -1786,6 +1783,99 @@ components:
       - related
       - resource_name
       type: object
+    GlobalObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
+    EnvScopedObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        environment:
+          description: Environment of the referred resource, if env-scoped
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
+    TypedGlobalObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        api_version:
+          description: API group and version of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
     Failure:
       description: Provides information about problems encountered while performing
         an operation.
@@ -1845,3 +1935,11 @@ components:
         Key ID as the username and API Key Secret as the password.
       scheme: basic
       type: http
+    confluent-sts-access-token:
+      description: Authenticate with Confluent API using this credentials (JSON Web
+        Tokens) following OAuth 2.0.
+      flows:
+        clientCredentials:
+          scopes: {}
+          tokenUrl: https://api.confluent.cloud/sts/v1/oauth2/token
+      type: oauth2

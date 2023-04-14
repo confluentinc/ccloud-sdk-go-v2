@@ -38,11 +38,11 @@ type KsqldbcmV2ClusterStatus struct {
 	// The dataplane endpoint of the ksqlDB cluster.
 	HttpEndpoint *string `json:"http_endpoint,omitempty"`
 	// Status of the ksqlDB cluster.
-	Phase string `json:"phase"`
+	Phase string `json:"phase,omitempty"`
 	// Tells you if the cluster has been paused
-	IsPaused bool `json:"is_paused"`
+	IsPaused bool `json:"is_paused,omitempty"`
 	// Amount of storage (in GB) provisioned to this cluster
-	Storage int32 `json:"storage"`
+	Storage int32 `json:"storage,omitempty"`
 	// Topic name prefix used by this ksqlDB cluster. Used to assign ACLs for this ksqlDB cluster to use.
 	TopicPrefix *string `json:"topic_prefix,omitempty"`
 }
@@ -112,7 +112,7 @@ func (o *KsqldbcmV2ClusterStatus) GetPhase() string {
 // GetPhaseOk returns a tuple with the Phase field value
 // and a boolean to check if the value has been set.
 func (o *KsqldbcmV2ClusterStatus) GetPhaseOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Phase, true
@@ -136,7 +136,7 @@ func (o *KsqldbcmV2ClusterStatus) GetIsPaused() bool {
 // GetIsPausedOk returns a tuple with the IsPaused field value
 // and a boolean to check if the value has been set.
 func (o *KsqldbcmV2ClusterStatus) GetIsPausedOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.IsPaused, true
@@ -160,7 +160,7 @@ func (o *KsqldbcmV2ClusterStatus) GetStorage() int32 {
 // GetStorageOk returns a tuple with the Storage field value
 // and a boolean to check if the value has been set.
 func (o *KsqldbcmV2ClusterStatus) GetStorageOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Storage, true
@@ -205,41 +205,41 @@ func (o *KsqldbcmV2ClusterStatus) SetTopicPrefix(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *KsqldbcmV2ClusterStatus) Redact() {
-    o.recurseRedact(o.HttpEndpoint)
-    o.recurseRedact(&o.Phase)
-    o.recurseRedact(&o.IsPaused)
-    o.recurseRedact(&o.Storage)
-    o.recurseRedact(o.TopicPrefix)
+	o.recurseRedact(o.HttpEndpoint)
+	o.recurseRedact(&o.Phase)
+	o.recurseRedact(&o.IsPaused)
+	o.recurseRedact(&o.Storage)
+	o.recurseRedact(o.TopicPrefix)
 }
 
 func (o *KsqldbcmV2ClusterStatus) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o KsqldbcmV2ClusterStatus) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o KsqldbcmV2ClusterStatus) MarshalJSON() ([]byte, error) {
@@ -297,5 +297,3 @@ func (v *NullableKsqldbcmV2ClusterStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

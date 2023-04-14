@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 **DisplayName** | Pointer to **string** | The name of the ksqlDB cluster. | [optional] 
 **UseDetailedProcessingLog** | Pointer to **bool** | This flag controls whether you want to include the row data in the processing log topic. Turn it off if you don&#39;t want to emit sensitive information to the processing log  | [optional] [default to true]
 **Csu** | Pointer to **int32** | The number of CSUs (Confluent Streaming Units) in a ksqlDB cluster. | [optional] 
-**KafkaCluster** | Pointer to [**ObjectReference**](ObjectReference.md) | The kafka_cluster to which this belongs. | [optional] 
-**CredentialIdentity** | Pointer to [**ObjectReference**](ObjectReference.md) | The credential_identity to which this belongs. The credential_identity can be one of iam.v2.User, iam.v2.ServiceAccount. | [optional] 
-**Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
+**KafkaCluster** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The kafka_cluster to which this belongs. | [optional] 
+**CredentialIdentity** | Pointer to [**TypedGlobalObjectReference**](TypedGlobalObjectReference.md) | The credential_identity to which this belongs. The credential_identity can be one of iam.v2.User, iam.v2.ServiceAccount. | [optional] 
+**Environment** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
 
@@ -107,20 +107,20 @@ HasCsu returns a boolean if a field has been set.
 
 ### GetKafkaCluster
 
-`func (o *KsqldbcmV2ClusterSpec) GetKafkaCluster() ObjectReference`
+`func (o *KsqldbcmV2ClusterSpec) GetKafkaCluster() EnvScopedObjectReference`
 
 GetKafkaCluster returns the KafkaCluster field if non-nil, zero value otherwise.
 
 ### GetKafkaClusterOk
 
-`func (o *KsqldbcmV2ClusterSpec) GetKafkaClusterOk() (*ObjectReference, bool)`
+`func (o *KsqldbcmV2ClusterSpec) GetKafkaClusterOk() (*EnvScopedObjectReference, bool)`
 
 GetKafkaClusterOk returns a tuple with the KafkaCluster field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetKafkaCluster
 
-`func (o *KsqldbcmV2ClusterSpec) SetKafkaCluster(v ObjectReference)`
+`func (o *KsqldbcmV2ClusterSpec) SetKafkaCluster(v EnvScopedObjectReference)`
 
 SetKafkaCluster sets KafkaCluster field to given value.
 
@@ -132,20 +132,20 @@ HasKafkaCluster returns a boolean if a field has been set.
 
 ### GetCredentialIdentity
 
-`func (o *KsqldbcmV2ClusterSpec) GetCredentialIdentity() ObjectReference`
+`func (o *KsqldbcmV2ClusterSpec) GetCredentialIdentity() TypedGlobalObjectReference`
 
 GetCredentialIdentity returns the CredentialIdentity field if non-nil, zero value otherwise.
 
 ### GetCredentialIdentityOk
 
-`func (o *KsqldbcmV2ClusterSpec) GetCredentialIdentityOk() (*ObjectReference, bool)`
+`func (o *KsqldbcmV2ClusterSpec) GetCredentialIdentityOk() (*TypedGlobalObjectReference, bool)`
 
 GetCredentialIdentityOk returns a tuple with the CredentialIdentity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCredentialIdentity
 
-`func (o *KsqldbcmV2ClusterSpec) SetCredentialIdentity(v ObjectReference)`
+`func (o *KsqldbcmV2ClusterSpec) SetCredentialIdentity(v TypedGlobalObjectReference)`
 
 SetCredentialIdentity sets CredentialIdentity field to given value.
 
@@ -157,20 +157,20 @@ HasCredentialIdentity returns a boolean if a field has been set.
 
 ### GetEnvironment
 
-`func (o *KsqldbcmV2ClusterSpec) GetEnvironment() ObjectReference`
+`func (o *KsqldbcmV2ClusterSpec) GetEnvironment() GlobalObjectReference`
 
 GetEnvironment returns the Environment field if non-nil, zero value otherwise.
 
 ### GetEnvironmentOk
 
-`func (o *KsqldbcmV2ClusterSpec) GetEnvironmentOk() (*ObjectReference, bool)`
+`func (o *KsqldbcmV2ClusterSpec) GetEnvironmentOk() (*GlobalObjectReference, bool)`
 
 GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnvironment
 
-`func (o *KsqldbcmV2ClusterSpec) SetEnvironment(v ObjectReference)`
+`func (o *KsqldbcmV2ClusterSpec) SetEnvironment(v GlobalObjectReference)`
 
 SetEnvironment sets Environment field to given value.
 

@@ -42,14 +42,14 @@ var (
 type ClustersKsqldbcmV2Api interface {
 
 	/*
-	CreateKsqldbcmV2Cluster Create a Cluster
+		CreateKsqldbcmV2Cluster Create a Cluster
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To ksqlDB API](https://img.shields.io/badge/-Request%20Access%20To%20ksqlDB%20API-%23bc8540)](mailto:ccloud-api-access+ksqldbcm-v2-early-access@confluent.io?subject=Request%20to%20join%20ksqldbcm/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ksqldbcm/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to create a cluster.
+	Make a request to create a cluster.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiCreateKsqldbcmV2ClusterRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateKsqldbcmV2ClusterRequest
 	*/
 	CreateKsqldbcmV2Cluster(ctx _context.Context) ApiCreateKsqldbcmV2ClusterRequest
 
@@ -58,15 +58,15 @@ Make a request to create a cluster.
 	CreateKsqldbcmV2ClusterExecute(r ApiCreateKsqldbcmV2ClusterRequest) (KsqldbcmV2Cluster, *_nethttp.Response, error)
 
 	/*
-	DeleteKsqldbcmV2Cluster Delete a Cluster
+		DeleteKsqldbcmV2Cluster Delete a Cluster
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To ksqlDB API](https://img.shields.io/badge/-Request%20Access%20To%20ksqlDB%20API-%23bc8540)](mailto:ccloud-api-access+ksqldbcm-v2-early-access@confluent.io?subject=Request%20to%20join%20ksqldbcm/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ksqldbcm/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to delete a cluster.
+	Make a request to delete a cluster.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the cluster.
-	 @return ApiDeleteKsqldbcmV2ClusterRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the cluster.
+		 @return ApiDeleteKsqldbcmV2ClusterRequest
 	*/
 	DeleteKsqldbcmV2Cluster(ctx _context.Context, id string) ApiDeleteKsqldbcmV2ClusterRequest
 
@@ -74,15 +74,15 @@ Make a request to delete a cluster.
 	DeleteKsqldbcmV2ClusterExecute(r ApiDeleteKsqldbcmV2ClusterRequest) (*_nethttp.Response, error)
 
 	/*
-	GetKsqldbcmV2Cluster Read a Cluster
+		GetKsqldbcmV2Cluster Read a Cluster
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To ksqlDB API](https://img.shields.io/badge/-Request%20Access%20To%20ksqlDB%20API-%23bc8540)](mailto:ccloud-api-access+ksqldbcm-v2-early-access@confluent.io?subject=Request%20to%20join%20ksqldbcm/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ksqldbcm/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to read a cluster.
+	Make a request to read a cluster.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the cluster.
-	 @return ApiGetKsqldbcmV2ClusterRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the cluster.
+		 @return ApiGetKsqldbcmV2ClusterRequest
 	*/
 	GetKsqldbcmV2Cluster(ctx _context.Context, id string) ApiGetKsqldbcmV2ClusterRequest
 
@@ -91,14 +91,14 @@ Make a request to read a cluster.
 	GetKsqldbcmV2ClusterExecute(r ApiGetKsqldbcmV2ClusterRequest) (KsqldbcmV2Cluster, *_nethttp.Response, error)
 
 	/*
-	ListKsqldbcmV2Clusters List of Clusters
+		ListKsqldbcmV2Clusters List of Clusters
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To ksqlDB API](https://img.shields.io/badge/-Request%20Access%20To%20ksqlDB%20API-%23bc8540)](mailto:ccloud-api-access+ksqldbcm-v2-early-access@confluent.io?subject=Request%20to%20join%20ksqldbcm/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ksqldbcm/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Retrieve a sorted, filtered, paginated list of all clusters.
+	Retrieve a sorted, filtered, paginated list of all clusters.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiListKsqldbcmV2ClustersRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListKsqldbcmV2ClustersRequest
 	*/
 	ListKsqldbcmV2Clusters(ctx _context.Context) ApiListKsqldbcmV2ClustersRequest
 
@@ -111,8 +111,8 @@ Retrieve a sorted, filtered, paginated list of all clusters.
 type ClustersKsqldbcmV2ApiService service
 
 type ApiCreateKsqldbcmV2ClusterRequest struct {
-	ctx _context.Context
-	ApiService ClustersKsqldbcmV2Api
+	ctx               _context.Context
+	ApiService        ClustersKsqldbcmV2Api
 	ksqldbcmV2Cluster *KsqldbcmV2Cluster
 }
 
@@ -128,22 +128,23 @@ func (r ApiCreateKsqldbcmV2ClusterRequest) Execute() (KsqldbcmV2Cluster, *_netht
 /*
 CreateKsqldbcmV2Cluster Create a Cluster
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To ksqlDB API](https://img.shields.io/badge/-Request%20Access%20To%20ksqlDB%20API-%23bc8540)](mailto:ccloud-api-access+ksqldbcm-v2-early-access@confluent.io?subject=Request%20to%20join%20ksqldbcm/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ksqldbcm/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create a cluster.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateKsqldbcmV2ClusterRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateKsqldbcmV2ClusterRequest
 */
 func (a *ClustersKsqldbcmV2ApiService) CreateKsqldbcmV2Cluster(ctx _context.Context) ApiCreateKsqldbcmV2ClusterRequest {
 	return ApiCreateKsqldbcmV2ClusterRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return KsqldbcmV2Cluster
+//
+//	@return KsqldbcmV2Cluster
 func (a *ClustersKsqldbcmV2ApiService) CreateKsqldbcmV2ClusterExecute(r ApiCreateKsqldbcmV2ClusterRequest) (KsqldbcmV2Cluster, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -291,10 +292,10 @@ func (a *ClustersKsqldbcmV2ApiService) CreateKsqldbcmV2ClusterExecute(r ApiCreat
 }
 
 type ApiDeleteKsqldbcmV2ClusterRequest struct {
-	ctx _context.Context
-	ApiService ClustersKsqldbcmV2Api
+	ctx         _context.Context
+	ApiService  ClustersKsqldbcmV2Api
 	environment *string
-	id string
+	id          string
 }
 
 // Scope the operation to the given environment.
@@ -310,19 +311,19 @@ func (r ApiDeleteKsqldbcmV2ClusterRequest) Execute() (*_nethttp.Response, error)
 /*
 DeleteKsqldbcmV2Cluster Delete a Cluster
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To ksqlDB API](https://img.shields.io/badge/-Request%20Access%20To%20ksqlDB%20API-%23bc8540)](mailto:ccloud-api-access+ksqldbcm-v2-early-access@confluent.io?subject=Request%20to%20join%20ksqldbcm/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ksqldbcm/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete a cluster.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the cluster.
- @return ApiDeleteKsqldbcmV2ClusterRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the cluster.
+	@return ApiDeleteKsqldbcmV2ClusterRequest
 */
 func (a *ClustersKsqldbcmV2ApiService) DeleteKsqldbcmV2Cluster(ctx _context.Context, id string) ApiDeleteKsqldbcmV2ClusterRequest {
 	return ApiDeleteKsqldbcmV2ClusterRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
@@ -447,10 +448,10 @@ func (a *ClustersKsqldbcmV2ApiService) DeleteKsqldbcmV2ClusterExecute(r ApiDelet
 }
 
 type ApiGetKsqldbcmV2ClusterRequest struct {
-	ctx _context.Context
-	ApiService ClustersKsqldbcmV2Api
+	ctx         _context.Context
+	ApiService  ClustersKsqldbcmV2Api
 	environment *string
-	id string
+	id          string
 }
 
 // Scope the operation to the given environment.
@@ -466,24 +467,25 @@ func (r ApiGetKsqldbcmV2ClusterRequest) Execute() (KsqldbcmV2Cluster, *_nethttp.
 /*
 GetKsqldbcmV2Cluster Read a Cluster
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To ksqlDB API](https://img.shields.io/badge/-Request%20Access%20To%20ksqlDB%20API-%23bc8540)](mailto:ccloud-api-access+ksqldbcm-v2-early-access@confluent.io?subject=Request%20to%20join%20ksqldbcm/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ksqldbcm/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a cluster.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the cluster.
- @return ApiGetKsqldbcmV2ClusterRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the cluster.
+	@return ApiGetKsqldbcmV2ClusterRequest
 */
 func (a *ClustersKsqldbcmV2ApiService) GetKsqldbcmV2Cluster(ctx _context.Context, id string) ApiGetKsqldbcmV2ClusterRequest {
 	return ApiGetKsqldbcmV2ClusterRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return KsqldbcmV2Cluster
+//
+//	@return KsqldbcmV2Cluster
 func (a *ClustersKsqldbcmV2ApiService) GetKsqldbcmV2ClusterExecute(r ApiGetKsqldbcmV2ClusterRequest) (KsqldbcmV2Cluster, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -614,11 +616,11 @@ func (a *ClustersKsqldbcmV2ApiService) GetKsqldbcmV2ClusterExecute(r ApiGetKsqld
 }
 
 type ApiListKsqldbcmV2ClustersRequest struct {
-	ctx _context.Context
-	ApiService ClustersKsqldbcmV2Api
+	ctx         _context.Context
+	ApiService  ClustersKsqldbcmV2Api
 	environment *string
-	pageSize *int32
-	pageToken *string
+	pageSize    *int32
+	pageToken   *string
 }
 
 // Filter the results by exact match for environment.
@@ -626,11 +628,13 @@ func (r ApiListKsqldbcmV2ClustersRequest) Environment(environment string) ApiLis
 	r.environment = &environment
 	return r
 }
+
 // A pagination size for collection requests.
 func (r ApiListKsqldbcmV2ClustersRequest) PageSize(pageSize int32) ApiListKsqldbcmV2ClustersRequest {
 	r.pageSize = &pageSize
 	return r
 }
+
 // An opaque pagination token for collection requests.
 func (r ApiListKsqldbcmV2ClustersRequest) PageToken(pageToken string) ApiListKsqldbcmV2ClustersRequest {
 	r.pageToken = &pageToken
@@ -644,22 +648,23 @@ func (r ApiListKsqldbcmV2ClustersRequest) Execute() (KsqldbcmV2ClusterList, *_ne
 /*
 ListKsqldbcmV2Clusters List of Clusters
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To ksqlDB API](https://img.shields.io/badge/-Request%20Access%20To%20ksqlDB%20API-%23bc8540)](mailto:ccloud-api-access+ksqldbcm-v2-early-access@confluent.io?subject=Request%20to%20join%20ksqldbcm/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ksqldbcm/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all clusters.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListKsqldbcmV2ClustersRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListKsqldbcmV2ClustersRequest
 */
 func (a *ClustersKsqldbcmV2ApiService) ListKsqldbcmV2Clusters(ctx _context.Context) ApiListKsqldbcmV2ClustersRequest {
 	return ApiListKsqldbcmV2ClustersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return KsqldbcmV2ClusterList
+//
+//	@return KsqldbcmV2ClusterList
 func (a *ClustersKsqldbcmV2ApiService) ListKsqldbcmV2ClustersExecute(r ApiListKsqldbcmV2ClustersRequest) (KsqldbcmV2ClusterList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
