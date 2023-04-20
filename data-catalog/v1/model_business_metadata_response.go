@@ -38,7 +38,7 @@ type BusinessMetadataResponse struct {
 	// The business metadata name
 	TypeName *string `json:"typeName,omitempty"`
 	// The business metadata attributes
-	Attributes *map[string]map[string]interface{} `json:"attributes,omitempty"`
+	Attributes *map[string]interface{} `json:"attributes,omitempty"`
 	// The entity type
 	EntityType *string `json:"entityType,omitempty"`
 	// The qualified name of the entity
@@ -96,9 +96,9 @@ func (o *BusinessMetadataResponse) SetTypeName(v string) {
 }
 
 // GetAttributes returns the Attributes field value if set, zero value otherwise.
-func (o *BusinessMetadataResponse) GetAttributes() map[string]map[string]interface{} {
+func (o *BusinessMetadataResponse) GetAttributes() map[string]interface{} {
 	if o == nil || o.Attributes == nil {
-		var ret map[string]map[string]interface{}
+		var ret map[string]interface{}
 		return ret
 	}
 	return *o.Attributes
@@ -106,7 +106,7 @@ func (o *BusinessMetadataResponse) GetAttributes() map[string]map[string]interfa
 
 // GetAttributesOk returns a tuple with the Attributes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BusinessMetadataResponse) GetAttributesOk() (*map[string]map[string]interface{}, bool) {
+func (o *BusinessMetadataResponse) GetAttributesOk() (*map[string]interface{}, bool) {
 	if o == nil || o.Attributes == nil {
 		return nil, false
 	}
@@ -122,8 +122,8 @@ func (o *BusinessMetadataResponse) HasAttributes() bool {
 	return false
 }
 
-// SetAttributes gets a reference to the given map[string]map[string]interface{} and assigns it to the Attributes field.
-func (o *BusinessMetadataResponse) SetAttributes(v map[string]map[string]interface{}) {
+// SetAttributes gets a reference to the given map[string]interface{} and assigns it to the Attributes field.
+func (o *BusinessMetadataResponse) SetAttributes(v map[string]interface{}) {
 	o.Attributes = &v
 }
 

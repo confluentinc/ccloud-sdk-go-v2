@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **TypeName** | Pointer to **string** | The business metadata name | [optional] 
-**Attributes** | Pointer to **map[string]map[string]interface{}** | The business metadata attributes | [optional] 
+**Attributes** | Pointer to **map[string]interface{}** | The business metadata attributes | [optional] 
 **EntityType** | Pointer to **string** | The entity type | [optional] 
 **EntityName** | Pointer to **string** | The qualified name of the entity | [optional] 
 **Error** | Pointer to [**ErrorMessage**](ErrorMessage.md) |  | [optional] 
@@ -56,20 +56,20 @@ HasTypeName returns a boolean if a field has been set.
 
 ### GetAttributes
 
-`func (o *BusinessMetadataResponse) GetAttributes() map[string]map[string]interface{}`
+`func (o *BusinessMetadataResponse) GetAttributes() map[string]interface{}`
 
 GetAttributes returns the Attributes field if non-nil, zero value otherwise.
 
 ### GetAttributesOk
 
-`func (o *BusinessMetadataResponse) GetAttributesOk() (*map[string]map[string]interface{}, bool)`
+`func (o *BusinessMetadataResponse) GetAttributesOk() (*map[string]interface{}, bool)`
 
 GetAttributesOk returns a tuple with the Attributes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAttributes
 
-`func (o *BusinessMetadataResponse) SetAttributes(v map[string]map[string]interface{})`
+`func (o *BusinessMetadataResponse) SetAttributes(v map[string]interface{})`
 
 SetAttributes sets Attributes field to given value.
 

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **TypeName** | Pointer to **string** | The tag name | [optional] 
-**Attributes** | Pointer to **map[string]map[string]interface{}** | The tag attributes | [optional] 
+**Attributes** | Pointer to **map[string]interface{}** | The tag attributes | [optional] 
 **EntityGuid** | Pointer to **string** | The internal entity guid | [optional] 
 **EntityStatus** | Pointer to **string** | The entity status | [optional] 
 **Propagate** | Pointer to **bool** | Whether to propagate the tag | [optional] 
@@ -60,20 +60,20 @@ HasTypeName returns a boolean if a field has been set.
 
 ### GetAttributes
 
-`func (o *Tag) GetAttributes() map[string]map[string]interface{}`
+`func (o *Tag) GetAttributes() map[string]interface{}`
 
 GetAttributes returns the Attributes field if non-nil, zero value otherwise.
 
 ### GetAttributesOk
 
-`func (o *Tag) GetAttributesOk() (*map[string]map[string]interface{}, bool)`
+`func (o *Tag) GetAttributesOk() (*map[string]interface{}, bool)`
 
 GetAttributesOk returns a tuple with the Attributes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAttributes
 
-`func (o *Tag) SetAttributes(v map[string]map[string]interface{})`
+`func (o *Tag) SetAttributes(v map[string]interface{})`
 
 SetAttributes sets Attributes field to given value.
 

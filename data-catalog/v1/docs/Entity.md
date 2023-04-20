@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **TypeName** | Pointer to **string** | The type name | [optional] 
-**Attributes** | Pointer to **map[string]map[string]interface{}** | The type attributes | [optional] 
+**Attributes** | Pointer to **map[string]interface{}** | The type attributes | [optional] 
 **Guid** | Pointer to **string** | The internal guid | [optional] 
 **HomeId** | Pointer to **string** | The home id | [optional] 
 **IsProxy** | Pointer to **bool** | Whether is a proxy | [optional] 
@@ -17,11 +17,11 @@ Name | Type | Description | Notes
 **CreateTime** | Pointer to **int64** | The create time | [optional] 
 **UpdateTime** | Pointer to **int64** | The update time | [optional] 
 **Version** | Pointer to **int32** | The version | [optional] 
-**RelationshipAttributes** | Pointer to **map[string]map[string]interface{}** | The relationship attributes | [optional] 
+**RelationshipAttributes** | Pointer to **map[string]interface{}** | The relationship attributes | [optional] 
 **Classifications** | Pointer to [**[]Classification**](Classification.md) | The classifications (tags) | [optional] 
 **Meanings** | Pointer to [**[]TermAssignmentHeader**](TermAssignmentHeader.md) | The meanings | [optional] 
 **CustomAttributes** | Pointer to **map[string]string** | The custom attributes | [optional] 
-**BusinessAttributes** | Pointer to **map[string]map[string]map[string]interface{}** | The business attributes | [optional] 
+**BusinessAttributes** | Pointer to **map[string]map[string]interface{}** | The business attributes | [optional] 
 **Labels** | Pointer to **[]string** | The labels | [optional] 
 **Proxy** | Pointer to **bool** | Whether is a proxy | [optional] 
 
@@ -71,20 +71,20 @@ HasTypeName returns a boolean if a field has been set.
 
 ### GetAttributes
 
-`func (o *Entity) GetAttributes() map[string]map[string]interface{}`
+`func (o *Entity) GetAttributes() map[string]interface{}`
 
 GetAttributes returns the Attributes field if non-nil, zero value otherwise.
 
 ### GetAttributesOk
 
-`func (o *Entity) GetAttributesOk() (*map[string]map[string]interface{}, bool)`
+`func (o *Entity) GetAttributesOk() (*map[string]interface{}, bool)`
 
 GetAttributesOk returns a tuple with the Attributes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAttributes
 
-`func (o *Entity) SetAttributes(v map[string]map[string]interface{})`
+`func (o *Entity) SetAttributes(v map[string]interface{})`
 
 SetAttributes sets Attributes field to given value.
 
@@ -371,20 +371,20 @@ HasVersion returns a boolean if a field has been set.
 
 ### GetRelationshipAttributes
 
-`func (o *Entity) GetRelationshipAttributes() map[string]map[string]interface{}`
+`func (o *Entity) GetRelationshipAttributes() map[string]interface{}`
 
 GetRelationshipAttributes returns the RelationshipAttributes field if non-nil, zero value otherwise.
 
 ### GetRelationshipAttributesOk
 
-`func (o *Entity) GetRelationshipAttributesOk() (*map[string]map[string]interface{}, bool)`
+`func (o *Entity) GetRelationshipAttributesOk() (*map[string]interface{}, bool)`
 
 GetRelationshipAttributesOk returns a tuple with the RelationshipAttributes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRelationshipAttributes
 
-`func (o *Entity) SetRelationshipAttributes(v map[string]map[string]interface{})`
+`func (o *Entity) SetRelationshipAttributes(v map[string]interface{})`
 
 SetRelationshipAttributes sets RelationshipAttributes field to given value.
 
@@ -471,20 +471,20 @@ HasCustomAttributes returns a boolean if a field has been set.
 
 ### GetBusinessAttributes
 
-`func (o *Entity) GetBusinessAttributes() map[string]map[string]map[string]interface{}`
+`func (o *Entity) GetBusinessAttributes() map[string]map[string]interface{}`
 
 GetBusinessAttributes returns the BusinessAttributes field if non-nil, zero value otherwise.
 
 ### GetBusinessAttributesOk
 
-`func (o *Entity) GetBusinessAttributesOk() (*map[string]map[string]map[string]interface{}, bool)`
+`func (o *Entity) GetBusinessAttributesOk() (*map[string]map[string]interface{}, bool)`
 
 GetBusinessAttributesOk returns a tuple with the BusinessAttributes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBusinessAttributes
 
-`func (o *Entity) SetBusinessAttributes(v map[string]map[string]map[string]interface{})`
+`func (o *Entity) SetBusinessAttributes(v map[string]map[string]interface{})`
 
 SetBusinessAttributes sets BusinessAttributes field to given value.
 

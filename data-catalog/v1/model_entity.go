@@ -38,7 +38,7 @@ type Entity struct {
 	// The type name
 	TypeName *string `json:"typeName,omitempty"`
 	// The type attributes
-	Attributes *map[string]map[string]interface{} `json:"attributes,omitempty"`
+	Attributes *map[string]interface{} `json:"attributes,omitempty"`
 	// The internal guid
 	Guid *string `json:"guid,omitempty"`
 	// The home id
@@ -62,7 +62,7 @@ type Entity struct {
 	// The version
 	Version *int32 `json:"version,omitempty"`
 	// The relationship attributes
-	RelationshipAttributes *map[string]map[string]interface{} `json:"relationshipAttributes,omitempty"`
+	RelationshipAttributes *map[string]interface{} `json:"relationshipAttributes,omitempty"`
 	// The classifications (tags)
 	Classifications *[]Classification `json:"classifications,omitempty"`
 	// The meanings
@@ -70,7 +70,7 @@ type Entity struct {
 	// The custom attributes
 	CustomAttributes *map[string]string `json:"customAttributes,omitempty"`
 	// The business attributes
-	BusinessAttributes *map[string]map[string]map[string]interface{} `json:"businessAttributes,omitempty"`
+	BusinessAttributes *map[string]map[string]interface{} `json:"businessAttributes,omitempty"`
 	// The labels
 	Labels *[]string `json:"labels,omitempty"`
 	// Whether is a proxy
@@ -127,9 +127,9 @@ func (o *Entity) SetTypeName(v string) {
 }
 
 // GetAttributes returns the Attributes field value if set, zero value otherwise.
-func (o *Entity) GetAttributes() map[string]map[string]interface{} {
+func (o *Entity) GetAttributes() map[string]interface{} {
 	if o == nil || o.Attributes == nil {
-		var ret map[string]map[string]interface{}
+		var ret map[string]interface{}
 		return ret
 	}
 	return *o.Attributes
@@ -137,7 +137,7 @@ func (o *Entity) GetAttributes() map[string]map[string]interface{} {
 
 // GetAttributesOk returns a tuple with the Attributes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Entity) GetAttributesOk() (*map[string]map[string]interface{}, bool) {
+func (o *Entity) GetAttributesOk() (*map[string]interface{}, bool) {
 	if o == nil || o.Attributes == nil {
 		return nil, false
 	}
@@ -153,8 +153,8 @@ func (o *Entity) HasAttributes() bool {
 	return false
 }
 
-// SetAttributes gets a reference to the given map[string]map[string]interface{} and assigns it to the Attributes field.
-func (o *Entity) SetAttributes(v map[string]map[string]interface{}) {
+// SetAttributes gets a reference to the given map[string]interface{} and assigns it to the Attributes field.
+func (o *Entity) SetAttributes(v map[string]interface{}) {
 	o.Attributes = &v
 }
 
@@ -511,9 +511,9 @@ func (o *Entity) SetVersion(v int32) {
 }
 
 // GetRelationshipAttributes returns the RelationshipAttributes field value if set, zero value otherwise.
-func (o *Entity) GetRelationshipAttributes() map[string]map[string]interface{} {
+func (o *Entity) GetRelationshipAttributes() map[string]interface{} {
 	if o == nil || o.RelationshipAttributes == nil {
-		var ret map[string]map[string]interface{}
+		var ret map[string]interface{}
 		return ret
 	}
 	return *o.RelationshipAttributes
@@ -521,7 +521,7 @@ func (o *Entity) GetRelationshipAttributes() map[string]map[string]interface{} {
 
 // GetRelationshipAttributesOk returns a tuple with the RelationshipAttributes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Entity) GetRelationshipAttributesOk() (*map[string]map[string]interface{}, bool) {
+func (o *Entity) GetRelationshipAttributesOk() (*map[string]interface{}, bool) {
 	if o == nil || o.RelationshipAttributes == nil {
 		return nil, false
 	}
@@ -537,8 +537,8 @@ func (o *Entity) HasRelationshipAttributes() bool {
 	return false
 }
 
-// SetRelationshipAttributes gets a reference to the given map[string]map[string]interface{} and assigns it to the RelationshipAttributes field.
-func (o *Entity) SetRelationshipAttributes(v map[string]map[string]interface{}) {
+// SetRelationshipAttributes gets a reference to the given map[string]interface{} and assigns it to the RelationshipAttributes field.
+func (o *Entity) SetRelationshipAttributes(v map[string]interface{}) {
 	o.RelationshipAttributes = &v
 }
 
@@ -639,9 +639,9 @@ func (o *Entity) SetCustomAttributes(v map[string]string) {
 }
 
 // GetBusinessAttributes returns the BusinessAttributes field value if set, zero value otherwise.
-func (o *Entity) GetBusinessAttributes() map[string]map[string]map[string]interface{} {
+func (o *Entity) GetBusinessAttributes() map[string]map[string]interface{} {
 	if o == nil || o.BusinessAttributes == nil {
-		var ret map[string]map[string]map[string]interface{}
+		var ret map[string]map[string]interface{}
 		return ret
 	}
 	return *o.BusinessAttributes
@@ -649,7 +649,7 @@ func (o *Entity) GetBusinessAttributes() map[string]map[string]map[string]interf
 
 // GetBusinessAttributesOk returns a tuple with the BusinessAttributes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Entity) GetBusinessAttributesOk() (*map[string]map[string]map[string]interface{}, bool) {
+func (o *Entity) GetBusinessAttributesOk() (*map[string]map[string]interface{}, bool) {
 	if o == nil || o.BusinessAttributes == nil {
 		return nil, false
 	}
@@ -665,8 +665,8 @@ func (o *Entity) HasBusinessAttributes() bool {
 	return false
 }
 
-// SetBusinessAttributes gets a reference to the given map[string]map[string]map[string]interface{} and assigns it to the BusinessAttributes field.
-func (o *Entity) SetBusinessAttributes(v map[string]map[string]map[string]interface{}) {
+// SetBusinessAttributes gets a reference to the given map[string]map[string]interface{} and assigns it to the BusinessAttributes field.
+func (o *Entity) SetBusinessAttributes(v map[string]map[string]interface{}) {
 	o.BusinessAttributes = &v
 }
 

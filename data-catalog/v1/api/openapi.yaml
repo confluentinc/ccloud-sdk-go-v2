@@ -740,13 +740,13 @@ paths:
           curl --request POST \
             --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/businessmetadata \
             --header 'content-type: application/json' \
-            --data '[{"typeName":"string","attributes":{"property1":{},"property2":{}},"entityType":"string","entityName":"string"}]'
+            --data '[{"typeName":"string","attributes":{},"entityType":"string","entityName":"string"}]'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityType\":\"string\",\"entityName\":\"string\"}]");
+          RequestBody body = RequestBody.create(mediaType, "[{\"typeName\":\"string\",\"attributes\":{},\"entityType\":\"string\",\"entityName\":\"string\"}]");
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/businessmetadata")
             .post(body)
@@ -758,19 +758,18 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/businessmetadata\"\
           \n\n\tpayload := strings.NewReader(\"[{\\\"typeName\\\":\\\"string\\\",\\\
-          \"attributes\\\":{\\\"property1\\\":{},\\\"property2\\\":{}},\\\"entityType\\\
-          \":\\\"string\\\",\\\"entityName\\\":\\\"string\\\"}]\")\n\n\treq, _ :=\
-          \ http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
-          , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
-          defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
-          \tfmt.Println(string(body))\n\n}"
+          \"attributes\\\":{},\\\"entityType\\\":\\\"string\\\",\\\"entityName\\\"\
+          :\\\"string\\\"}]\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _ :=\
+          \ http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\
+          \n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          payload = "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityType\":\"string\",\"entityName\":\"string\"}]"
+          payload = "[{\"typeName\":\"string\",\"attributes\":{},\"entityType\":\"string\",\"entityName\":\"string\"}]"
 
           headers = { 'content-type': "application/json" }
 
@@ -808,12 +807,7 @@ paths:
           });
 
           req.write(JSON.stringify([
-            {
-              typeName: 'string',
-              attributes: {property1: {}, property2: {}},
-              entityType: 'string',
-              entityName: 'string'
-            }
+            {typeName: 'string', attributes: {}, entityType: 'string', entityName: 'string'}
           ]));
           req.end();
       - lang: C
@@ -827,7 +821,7 @@ paths:
           headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityType\":\"string\",\"entityName\":\"string\"}]");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"typeName\":\"string\",\"attributes\":{},\"entityType\":\"string\",\"entityName\":\"string\"}]");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -835,7 +829,7 @@ paths:
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/businessmetadata");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
-          request.AddParameter("application/json", "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityType\":\"string\",\"entityName\":\"string\"}]", ParameterType.RequestBody);
+          request.AddParameter("application/json", "[{\"typeName\":\"string\",\"attributes\":{},\"entityType\":\"string\",\"entityName\":\"string\"}]", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     put:
       description: |-
@@ -876,13 +870,13 @@ paths:
           curl --request PUT \
             --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/businessmetadata \
             --header 'content-type: application/json' \
-            --data '[{"typeName":"string","attributes":{"property1":{},"property2":{}},"entityType":"string","entityName":"string"}]'
+            --data '[{"typeName":"string","attributes":{},"entityType":"string","entityName":"string"}]'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityType\":\"string\",\"entityName\":\"string\"}]");
+          RequestBody body = RequestBody.create(mediaType, "[{\"typeName\":\"string\",\"attributes\":{},\"entityType\":\"string\",\"entityName\":\"string\"}]");
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/businessmetadata")
             .put(body)
@@ -894,19 +888,18 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/businessmetadata\"\
           \n\n\tpayload := strings.NewReader(\"[{\\\"typeName\\\":\\\"string\\\",\\\
-          \"attributes\\\":{\\\"property1\\\":{},\\\"property2\\\":{}},\\\"entityType\\\
-          \":\\\"string\\\",\\\"entityName\\\":\\\"string\\\"}]\")\n\n\treq, _ :=\
-          \ http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
-          , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
-          defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
-          \tfmt.Println(string(body))\n\n}"
+          \"attributes\\\":{},\\\"entityType\\\":\\\"string\\\",\\\"entityName\\\"\
+          :\\\"string\\\"}]\")\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _ :=\
+          \ http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\
+          \n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          payload = "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityType\":\"string\",\"entityName\":\"string\"}]"
+          payload = "[{\"typeName\":\"string\",\"attributes\":{},\"entityType\":\"string\",\"entityName\":\"string\"}]"
 
           headers = { 'content-type': "application/json" }
 
@@ -944,12 +937,7 @@ paths:
           });
 
           req.write(JSON.stringify([
-            {
-              typeName: 'string',
-              attributes: {property1: {}, property2: {}},
-              entityType: 'string',
-              entityName: 'string'
-            }
+            {typeName: 'string', attributes: {}, entityType: 'string', entityName: 'string'}
           ]));
           req.end();
       - lang: C
@@ -963,7 +951,7 @@ paths:
           headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityType\":\"string\",\"entityName\":\"string\"}]");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"typeName\":\"string\",\"attributes\":{},\"entityType\":\"string\",\"entityName\":\"string\"}]");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -971,7 +959,7 @@ paths:
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/businessmetadata");
           var request = new RestRequest(Method.PUT);
           request.AddHeader("content-type", "application/json");
-          request.AddParameter("application/json", "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityType\":\"string\",\"entityName\":\"string\"}]", ParameterType.RequestBody);
+          request.AddParameter("application/json", "[{\"typeName\":\"string\",\"attributes\":{},\"entityType\":\"string\",\"entityName\":\"string\"}]", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata:
     get:
@@ -1245,13 +1233,13 @@ paths:
           curl --request POST \
             --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags \
             --header 'content-type: application/json' \
-            --data '[{"typeName":"string","attributes":{"property1":{},"property2":{}},"entityGuid":"string","entityStatus":"ACTIVE","propagate":true,"validityPeriods":[{"startTime":"string","endTime":"string","timeZone":"string"}],"removePropagationsOnEntityDelete":true,"entityType":"string","entityName":"string"}]'
+            --data '[{"typeName":"string","attributes":{},"entityGuid":"string","entityStatus":"ACTIVE","propagate":true,"validityPeriods":[{"startTime":"string","endTime":"string","timeZone":"string"}],"removePropagationsOnEntityDelete":true,"entityType":"string","entityName":"string"}]'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]");
+          RequestBody body = RequestBody.create(mediaType, "[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]");
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags")
             .post(body)
@@ -1263,22 +1251,22 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags\"\
           \n\n\tpayload := strings.NewReader(\"[{\\\"typeName\\\":\\\"string\\\",\\\
-          \"attributes\\\":{\\\"property1\\\":{},\\\"property2\\\":{}},\\\"entityGuid\\\
-          \":\\\"string\\\",\\\"entityStatus\\\":\\\"ACTIVE\\\",\\\"propagate\\\"\
-          :true,\\\"validityPeriods\\\":[{\\\"startTime\\\":\\\"string\\\",\\\"endTime\\\
-          \":\\\"string\\\",\\\"timeZone\\\":\\\"string\\\"}],\\\"removePropagationsOnEntityDelete\\\
-          \":true,\\\"entityType\\\":\\\"string\\\",\\\"entityName\\\":\\\"string\\\
-          \"}]\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \"attributes\\\":{},\\\"entityGuid\\\":\\\"string\\\",\\\"entityStatus\\\
+          \":\\\"ACTIVE\\\",\\\"propagate\\\":true,\\\"validityPeriods\\\":[{\\\"\
+          startTime\\\":\\\"string\\\",\\\"endTime\\\":\\\"string\\\",\\\"timeZone\\\
+          \":\\\"string\\\"}],\\\"removePropagationsOnEntityDelete\\\":true,\\\"entityType\\\
+          \":\\\"string\\\",\\\"entityName\\\":\\\"string\\\"}]\")\n\n\treq, _ :=\
+          \ http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
+          , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
+          defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
+          \tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          payload = "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]"
+          payload = "[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]"
 
           headers = { 'content-type': "application/json" }
 
@@ -1318,7 +1306,7 @@ paths:
           req.write(JSON.stringify([
             {
               typeName: 'string',
-              attributes: {property1: {}, property2: {}},
+              attributes: {},
               entityGuid: 'string',
               entityStatus: 'ACTIVE',
               propagate: true,
@@ -1340,7 +1328,7 @@ paths:
           headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1348,7 +1336,7 @@ paths:
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
-          request.AddParameter("application/json", "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]", ParameterType.RequestBody);
+          request.AddParameter("application/json", "[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     put:
       description: |-
@@ -1388,13 +1376,13 @@ paths:
           curl --request PUT \
             --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags \
             --header 'content-type: application/json' \
-            --data '[{"typeName":"string","attributes":{"property1":{},"property2":{}},"entityGuid":"string","entityStatus":"ACTIVE","propagate":true,"validityPeriods":[{"startTime":"string","endTime":"string","timeZone":"string"}],"removePropagationsOnEntityDelete":true,"entityType":"string","entityName":"string"}]'
+            --data '[{"typeName":"string","attributes":{},"entityGuid":"string","entityStatus":"ACTIVE","propagate":true,"validityPeriods":[{"startTime":"string","endTime":"string","timeZone":"string"}],"removePropagationsOnEntityDelete":true,"entityType":"string","entityName":"string"}]'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]");
+          RequestBody body = RequestBody.create(mediaType, "[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]");
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags")
             .put(body)
@@ -1406,22 +1394,22 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags\"\
           \n\n\tpayload := strings.NewReader(\"[{\\\"typeName\\\":\\\"string\\\",\\\
-          \"attributes\\\":{\\\"property1\\\":{},\\\"property2\\\":{}},\\\"entityGuid\\\
-          \":\\\"string\\\",\\\"entityStatus\\\":\\\"ACTIVE\\\",\\\"propagate\\\"\
-          :true,\\\"validityPeriods\\\":[{\\\"startTime\\\":\\\"string\\\",\\\"endTime\\\
-          \":\\\"string\\\",\\\"timeZone\\\":\\\"string\\\"}],\\\"removePropagationsOnEntityDelete\\\
-          \":true,\\\"entityType\\\":\\\"string\\\",\\\"entityName\\\":\\\"string\\\
-          \"}]\")\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \"attributes\\\":{},\\\"entityGuid\\\":\\\"string\\\",\\\"entityStatus\\\
+          \":\\\"ACTIVE\\\",\\\"propagate\\\":true,\\\"validityPeriods\\\":[{\\\"\
+          startTime\\\":\\\"string\\\",\\\"endTime\\\":\\\"string\\\",\\\"timeZone\\\
+          \":\\\"string\\\"}],\\\"removePropagationsOnEntityDelete\\\":true,\\\"entityType\\\
+          \":\\\"string\\\",\\\"entityName\\\":\\\"string\\\"}]\")\n\n\treq, _ :=\
+          \ http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
+          , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
+          defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
+          \tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          payload = "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]"
+          payload = "[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]"
 
           headers = { 'content-type': "application/json" }
 
@@ -1461,7 +1449,7 @@ paths:
           req.write(JSON.stringify([
             {
               typeName: 'string',
-              attributes: {property1: {}, property2: {}},
+              attributes: {},
               entityGuid: 'string',
               entityStatus: 'ACTIVE',
               propagate: true,
@@ -1483,7 +1471,7 @@ paths:
           headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1491,7 +1479,7 @@ paths:
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags");
           var request = new RestRequest(Method.PUT);
           request.AddHeader("content-type", "application/json");
-          request.AddParameter("application/json", "[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]", ParameterType.RequestBody);
+          request.AddParameter("application/json", "[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /catalog/v1/entity/type/{typeName}/name/{qualifiedName}:
     get:
@@ -2916,15 +2904,12 @@ components:
         - timeZone: timeZone
           startTime: startTime
           endTime: endTime
-        attributes:
-          key: '{}'
+        attributes: '{}'
       properties:
         typeName:
           description: The tag name
           type: string
         attributes:
-          additionalProperties:
-            type: object
           description: The tag attributes
           type: object
         entityGuid:
@@ -3021,8 +3006,7 @@ components:
     Entity:
       description: The entity
       example:
-        relationshipAttributes:
-          key: '{}'
+        relationshipAttributes: '{}'
         provenanceType: 0
         updatedBy: updatedBy
         typeName: typeName
@@ -3054,8 +3038,7 @@ components:
         - labels
         - labels
         businessAttributes:
-          key:
-            key: '{}'
+          key: '{}'
         classifications:
         - removePropagationsOnEntityDelete: true
           entityStatus: ACTIVE
@@ -3089,8 +3072,7 @@ components:
         createdBy: createdBy
         createTime: 6
         guid: guid
-        attributes:
-          key: '{}'
+        attributes: '{}'
         homeId: homeId
         isIncomplete: true
         status: ACTIVE
@@ -3101,8 +3083,6 @@ components:
           description: The type name
           type: string
         attributes:
-          additionalProperties:
-            type: object
           description: The type attributes
           type: object
         guid:
@@ -3148,8 +3128,6 @@ components:
           format: int32
           type: integer
         relationshipAttributes:
-          additionalProperties:
-            type: object
           description: The relationship attributes
           type: object
         classifications:
@@ -3169,8 +3147,6 @@ components:
           type: object
         businessAttributes:
           additionalProperties:
-            additionalProperties:
-              type: object
             type: object
           description: The business attributes
           type: object
@@ -3188,8 +3164,7 @@ components:
       example:
         referredEntities:
           key:
-            relationshipAttributes:
-              key: '{}'
+            relationshipAttributes: '{}'
             provenanceType: 0
             updatedBy: updatedBy
             typeName: typeName
@@ -3221,8 +3196,7 @@ components:
             - labels
             - labels
             businessAttributes:
-              key:
-                key: '{}'
+              key: '{}'
             classifications:
             - removePropagationsOnEntityDelete: true
               entityStatus: ACTIVE
@@ -3256,16 +3230,14 @@ components:
             createdBy: createdBy
             createTime: 6
             guid: guid
-            attributes:
-              key: '{}'
+            attributes: '{}'
             homeId: homeId
             isIncomplete: true
             status: ACTIVE
             customAttributes:
               key: customAttributes
         entity:
-          relationshipAttributes:
-            key: '{}'
+          relationshipAttributes: '{}'
           provenanceType: 0
           updatedBy: updatedBy
           typeName: typeName
@@ -3297,8 +3269,7 @@ components:
           - labels
           - labels
           businessAttributes:
-            key:
-              key: '{}'
+            key: '{}'
           classifications:
           - removePropagationsOnEntityDelete: true
             entityStatus: ACTIVE
@@ -3332,8 +3303,7 @@ components:
           createdBy: createdBy
           createTime: 6
           guid: guid
-          attributes:
-            key: '{}'
+          attributes: '{}'
           homeId: homeId
           isIncomplete: true
           status: ACTIVE
@@ -3474,8 +3444,7 @@ components:
           description: The type name
           type: string
         attributes:
-          additionalProperties:
-            type: object
+          additionalProperties: true
           description: The attributes
           type: object
         guid:
@@ -4040,8 +4009,7 @@ components:
         entityType: entityType
         entityName: entityName
         typeName: typeName
-        attributes:
-          key: '{}'
+        attributes: '{}'
         error:
           error_code: 7
           message: message
@@ -4050,8 +4018,6 @@ components:
           description: The business metadata name
           type: string
         attributes:
-          additionalProperties:
-            type: object
           description: The business metadata attributes
           type: object
         entityType:
@@ -4068,15 +4034,12 @@ components:
         entityType: entityType
         entityName: entityName
         typeName: typeName
-        attributes:
-          key: '{}'
+        attributes: '{}'
       properties:
         typeName:
           description: The business metadata name
           type: string
         attributes:
-          additionalProperties:
-            type: object
           description: The business metadata attributes
           type: object
         entityType:
@@ -4349,8 +4312,7 @@ components:
         - timeZone: timeZone
           startTime: startTime
           endTime: endTime
-        attributes:
-          key: '{}'
+        attributes: '{}'
         error:
           error_code: 7
           message: message
@@ -4359,8 +4321,6 @@ components:
           description: The tag name
           type: string
         attributes:
-          additionalProperties:
-            type: object
           description: The tag attributes
           type: object
         entityGuid:

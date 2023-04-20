@@ -38,7 +38,7 @@ type Tag struct {
 	// The tag name
 	TypeName *string `json:"typeName,omitempty"`
 	// The tag attributes
-	Attributes *map[string]map[string]interface{} `json:"attributes,omitempty"`
+	Attributes *map[string]interface{} `json:"attributes,omitempty"`
 	// The internal entity guid
 	EntityGuid *string `json:"entityGuid,omitempty"`
 	// The entity status
@@ -105,9 +105,9 @@ func (o *Tag) SetTypeName(v string) {
 }
 
 // GetAttributes returns the Attributes field value if set, zero value otherwise.
-func (o *Tag) GetAttributes() map[string]map[string]interface{} {
+func (o *Tag) GetAttributes() map[string]interface{} {
 	if o == nil || o.Attributes == nil {
-		var ret map[string]map[string]interface{}
+		var ret map[string]interface{}
 		return ret
 	}
 	return *o.Attributes
@@ -115,7 +115,7 @@ func (o *Tag) GetAttributes() map[string]map[string]interface{} {
 
 // GetAttributesOk returns a tuple with the Attributes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Tag) GetAttributesOk() (*map[string]map[string]interface{}, bool) {
+func (o *Tag) GetAttributesOk() (*map[string]interface{}, bool) {
 	if o == nil || o.Attributes == nil {
 		return nil, false
 	}
@@ -131,8 +131,8 @@ func (o *Tag) HasAttributes() bool {
 	return false
 }
 
-// SetAttributes gets a reference to the given map[string]map[string]interface{} and assigns it to the Attributes field.
-func (o *Tag) SetAttributes(v map[string]map[string]interface{}) {
+// SetAttributes gets a reference to the given map[string]interface{} and assigns it to the Attributes field.
+func (o *Tag) SetAttributes(v map[string]interface{}) {
 	o.Attributes = &v
 }
 
