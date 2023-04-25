@@ -35,8 +35,8 @@ import (
 
 // FcpmV2ComputePoolSpecUpdate The desired state of the Compute Pool
 type FcpmV2ComputePoolSpecUpdate struct {
-	// Maximum number of Confluent Streaming Units (CSUs) that the Flink compute pool should auto-scale to. If not specified, the value defaults to 8.
-	MaxCsu *int32 `json:"max_csu,omitempty"`
+	// Maximum number of Confluent Flink Units (CFUs) that the Flink compute pool should auto-scale to.
+	MaxCfu *int32 `json:"max_cfu,omitempty"`
 	// The type of of the Flink compute pool.
 	Config *FcpmV2ComputePoolSpecUpdateConfigOneOf `json:"config,omitempty"`
 	// The environment to which this belongs.
@@ -60,36 +60,36 @@ func NewFcpmV2ComputePoolSpecUpdateWithDefaults() *FcpmV2ComputePoolSpecUpdate {
 	return &this
 }
 
-// GetMaxCsu returns the MaxCsu field value if set, zero value otherwise.
-func (o *FcpmV2ComputePoolSpecUpdate) GetMaxCsu() int32 {
-	if o == nil || o.MaxCsu == nil {
+// GetMaxCfu returns the MaxCfu field value if set, zero value otherwise.
+func (o *FcpmV2ComputePoolSpecUpdate) GetMaxCfu() int32 {
+	if o == nil || o.MaxCfu == nil {
 		var ret int32
 		return ret
 	}
-	return *o.MaxCsu
+	return *o.MaxCfu
 }
 
-// GetMaxCsuOk returns a tuple with the MaxCsu field value if set, nil otherwise
+// GetMaxCfuOk returns a tuple with the MaxCfu field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FcpmV2ComputePoolSpecUpdate) GetMaxCsuOk() (*int32, bool) {
-	if o == nil || o.MaxCsu == nil {
+func (o *FcpmV2ComputePoolSpecUpdate) GetMaxCfuOk() (*int32, bool) {
+	if o == nil || o.MaxCfu == nil {
 		return nil, false
 	}
-	return o.MaxCsu, true
+	return o.MaxCfu, true
 }
 
-// HasMaxCsu returns a boolean if a field has been set.
-func (o *FcpmV2ComputePoolSpecUpdate) HasMaxCsu() bool {
-	if o != nil && o.MaxCsu != nil {
+// HasMaxCfu returns a boolean if a field has been set.
+func (o *FcpmV2ComputePoolSpecUpdate) HasMaxCfu() bool {
+	if o != nil && o.MaxCfu != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetMaxCsu gets a reference to the given int32 and assigns it to the MaxCsu field.
-func (o *FcpmV2ComputePoolSpecUpdate) SetMaxCsu(v int32) {
-	o.MaxCsu = &v
+// SetMaxCfu gets a reference to the given int32 and assigns it to the MaxCfu field.
+func (o *FcpmV2ComputePoolSpecUpdate) SetMaxCfu(v int32) {
+	o.MaxCfu = &v
 }
 
 // GetConfig returns the Config field value if set, zero value otherwise.
@@ -158,7 +158,7 @@ func (o *FcpmV2ComputePoolSpecUpdate) SetEnvironment(v GlobalObjectReference) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *FcpmV2ComputePoolSpecUpdate) Redact() {
-	o.recurseRedact(o.MaxCsu)
+	o.recurseRedact(o.MaxCfu)
 	o.recurseRedact(o.Config)
 	o.recurseRedact(o.Environment)
 }
@@ -195,8 +195,8 @@ func (o FcpmV2ComputePoolSpecUpdate) zeroField(v interface{}) {
 
 func (o FcpmV2ComputePoolSpecUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.MaxCsu != nil {
-		toSerialize["max_csu"] = o.MaxCsu
+	if o.MaxCfu != nil {
+		toSerialize["max_cfu"] = o.MaxCfu
 	}
 	if o.Config != nil {
 		toSerialize["config"] = o.Config

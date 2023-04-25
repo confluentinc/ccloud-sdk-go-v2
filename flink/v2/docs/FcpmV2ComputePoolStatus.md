@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Phase** | **string** | Status of the Flink compute pool. | [readonly] 
-**CurrentCsu** | **int32** | The number of CSUs (Confluent Streaming Units) currently allocated to this Flink compute pool. | [readonly] 
+**CurrentCfu** | Pointer to **int32** | The number of CSUs (Confluent Streaming Units) currently allocated to this Flink compute pool. | [optional] [readonly] 
 
 ## Methods
 
 ### NewFcpmV2ComputePoolStatus
 
-`func NewFcpmV2ComputePoolStatus(phase string, currentCsu int32, ) *FcpmV2ComputePoolStatus`
+`func NewFcpmV2ComputePoolStatus(phase string, ) *FcpmV2ComputePoolStatus`
 
 NewFcpmV2ComputePoolStatus instantiates a new FcpmV2ComputePoolStatus object
 This constructor will assign default values to properties that have it defined,
@@ -46,25 +46,30 @@ and a boolean to check if the value has been set.
 SetPhase sets Phase field to given value.
 
 
-### GetCurrentCsu
+### GetCurrentCfu
 
-`func (o *FcpmV2ComputePoolStatus) GetCurrentCsu() int32`
+`func (o *FcpmV2ComputePoolStatus) GetCurrentCfu() int32`
 
-GetCurrentCsu returns the CurrentCsu field if non-nil, zero value otherwise.
+GetCurrentCfu returns the CurrentCfu field if non-nil, zero value otherwise.
 
-### GetCurrentCsuOk
+### GetCurrentCfuOk
 
-`func (o *FcpmV2ComputePoolStatus) GetCurrentCsuOk() (*int32, bool)`
+`func (o *FcpmV2ComputePoolStatus) GetCurrentCfuOk() (*int32, bool)`
 
-GetCurrentCsuOk returns a tuple with the CurrentCsu field if it's non-nil, zero value otherwise
+GetCurrentCfuOk returns a tuple with the CurrentCfu field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCurrentCsu
+### SetCurrentCfu
 
-`func (o *FcpmV2ComputePoolStatus) SetCurrentCsu(v int32)`
+`func (o *FcpmV2ComputePoolStatus) SetCurrentCfu(v int32)`
 
-SetCurrentCsu sets CurrentCsu field to given value.
+SetCurrentCfu sets CurrentCfu field to given value.
 
+### HasCurrentCfu
+
+`func (o *FcpmV2ComputePoolStatus) HasCurrentCfu() bool`
+
+HasCurrentCfu returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

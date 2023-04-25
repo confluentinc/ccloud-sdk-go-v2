@@ -38,17 +38,16 @@ type FcpmV2ComputePoolStatus struct {
 	// Status of the Flink compute pool.
 	Phase string `json:"phase,omitempty"`
 	// The number of CSUs (Confluent Streaming Units) currently allocated to this Flink compute pool.
-	CurrentCsu int32 `json:"current_csu,omitempty"`
+	CurrentCfu *int32 `json:"current_cfu,omitempty"`
 }
 
 // NewFcpmV2ComputePoolStatus instantiates a new FcpmV2ComputePoolStatus object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFcpmV2ComputePoolStatus(phase string, currentCsu int32) *FcpmV2ComputePoolStatus {
+func NewFcpmV2ComputePoolStatus(phase string) *FcpmV2ComputePoolStatus {
 	this := FcpmV2ComputePoolStatus{}
 	this.Phase = phase
-	this.CurrentCsu = currentCsu
 	return &this
 }
 
@@ -84,34 +83,42 @@ func (o *FcpmV2ComputePoolStatus) SetPhase(v string) {
 	o.Phase = v
 }
 
-// GetCurrentCsu returns the CurrentCsu field value
-func (o *FcpmV2ComputePoolStatus) GetCurrentCsu() int32 {
-	if o == nil {
+// GetCurrentCfu returns the CurrentCfu field value if set, zero value otherwise.
+func (o *FcpmV2ComputePoolStatus) GetCurrentCfu() int32 {
+	if o == nil || o.CurrentCfu == nil {
 		var ret int32
 		return ret
 	}
-
-	return o.CurrentCsu
+	return *o.CurrentCfu
 }
 
-// GetCurrentCsuOk returns a tuple with the CurrentCsu field value
+// GetCurrentCfuOk returns a tuple with the CurrentCfu field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FcpmV2ComputePoolStatus) GetCurrentCsuOk() (*int32, bool) {
-	if o == nil {
+func (o *FcpmV2ComputePoolStatus) GetCurrentCfuOk() (*int32, bool) {
+	if o == nil || o.CurrentCfu == nil {
 		return nil, false
 	}
-	return &o.CurrentCsu, true
+	return o.CurrentCfu, true
 }
 
-// SetCurrentCsu sets field value
-func (o *FcpmV2ComputePoolStatus) SetCurrentCsu(v int32) {
-	o.CurrentCsu = v
+// HasCurrentCfu returns a boolean if a field has been set.
+func (o *FcpmV2ComputePoolStatus) HasCurrentCfu() bool {
+	if o != nil && o.CurrentCfu != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCurrentCfu gets a reference to the given int32 and assigns it to the CurrentCfu field.
+func (o *FcpmV2ComputePoolStatus) SetCurrentCfu(v int32) {
+	o.CurrentCfu = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
 func (o *FcpmV2ComputePoolStatus) Redact() {
 	o.recurseRedact(&o.Phase)
-	o.recurseRedact(&o.CurrentCsu)
+	o.recurseRedact(o.CurrentCfu)
 }
 
 func (o *FcpmV2ComputePoolStatus) recurseRedact(v interface{}) {
@@ -149,8 +156,8 @@ func (o FcpmV2ComputePoolStatus) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["phase"] = o.Phase
 	}
-	if true {
-		toSerialize["current_csu"] = o.CurrentCsu
+	if o.CurrentCfu != nil {
+		toSerialize["current_cfu"] = o.CurrentCfu
 	}
 	return json.Marshal(toSerialize)
 }

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MaxCsu** | Pointer to **int32** | Maximum number of Confluent Streaming Units (CSUs) that the Flink compute pool should auto-scale to. If not specified, the value defaults to 8.  | [optional] 
+**MaxCfu** | Pointer to **int32** | Maximum number of Confluent Flink Units (CFUs) that the Flink compute pool should auto-scale to.  | [optional] 
 **Config** | Pointer to [**FcpmV2ComputePoolSpecUpdateConfigOneOf**](FcpmV2ComputePoolSpecUpdateConfigOneOf.md) | The type of of the Flink compute pool.  | [optional] 
 **Environment** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which this belongs. | [optional] 
 
@@ -27,30 +27,30 @@ NewFcpmV2ComputePoolSpecUpdateWithDefaults instantiates a new FcpmV2ComputePoolS
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetMaxCsu
+### GetMaxCfu
 
-`func (o *FcpmV2ComputePoolSpecUpdate) GetMaxCsu() int32`
+`func (o *FcpmV2ComputePoolSpecUpdate) GetMaxCfu() int32`
 
-GetMaxCsu returns the MaxCsu field if non-nil, zero value otherwise.
+GetMaxCfu returns the MaxCfu field if non-nil, zero value otherwise.
 
-### GetMaxCsuOk
+### GetMaxCfuOk
 
-`func (o *FcpmV2ComputePoolSpecUpdate) GetMaxCsuOk() (*int32, bool)`
+`func (o *FcpmV2ComputePoolSpecUpdate) GetMaxCfuOk() (*int32, bool)`
 
-GetMaxCsuOk returns a tuple with the MaxCsu field if it's non-nil, zero value otherwise
+GetMaxCfuOk returns a tuple with the MaxCfu field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMaxCsu
+### SetMaxCfu
 
-`func (o *FcpmV2ComputePoolSpecUpdate) SetMaxCsu(v int32)`
+`func (o *FcpmV2ComputePoolSpecUpdate) SetMaxCfu(v int32)`
 
-SetMaxCsu sets MaxCsu field to given value.
+SetMaxCfu sets MaxCfu field to given value.
 
-### HasMaxCsu
+### HasMaxCfu
 
-`func (o *FcpmV2ComputePoolSpecUpdate) HasMaxCsu() bool`
+`func (o *FcpmV2ComputePoolSpecUpdate) HasMaxCfu() bool`
 
-HasMaxCsu returns a boolean if a field has been set.
+HasMaxCfu returns a boolean if a field has been set.
 
 ### GetConfig
 
