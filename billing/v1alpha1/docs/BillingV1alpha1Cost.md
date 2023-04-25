@@ -14,15 +14,13 @@ Name | Type | Description | Notes
 **NetworkAccessType** | Pointer to **string** | Network access type for the cluster. | [optional] 
 **Product** | Pointer to **string** | Product name. | [optional] 
 **LineType** | Pointer to **string** | Type of the line item. | [optional] 
-**ResourceName** | Pointer to **string** | Display name of the resource. | [optional] 
 **Price** | Pointer to **float64** | Price for the line item in dollars. | [optional] 
 **Unit** | Pointer to **string** | Unit of the line item. | [optional] 
 **Quantity** | Pointer to **float64** | Quantity of the line item. | [optional] 
 **OriginalAmount** | Pointer to **float64** | Original amount accrued for this line item. | [optional] 
 **DiscountAmount** | Pointer to **float64** | Amount discounted from the original amount in dollars. | [optional] 
 **Amount** | Pointer to **float64** | Final amount after deducting discounts. | [optional] 
-**Environment** | Pointer to [**NullableEnvScopedObjectReference**](EnvScopedObjectReference.md) | The environment associated with this object. May be &#x60;null&#x60; or omitted if not associated with a environment. | [optional] 
-**Resource** | Pointer to [**NullableTypedEnvScopedObjectReference**](TypedEnvScopedObjectReference.md) | The resource associated with this object. The resource can be one of Kafka Cluster ID (example: lkc-12345), Connector ID (example: lcc-12345), Schema Registry Cluster ID (example: lsrc-12345), or ksqlDB Cluster ID (example: lksqlc-12345). May be null or omitted if not associated with a resource. For Cloud API keys, resource should be &#x60;null&#x60;. [Learn more in Authentication](https://docs.confluent.io/cloud/current/api.html#section/Authentication).  | [optional] 
+**Resource** | Pointer to [**BillingV1alpha1Resource**](billing.v1alpha1.Resource.md) | The resource for a given object | [optional] 
 
 ## Methods
 
@@ -293,31 +291,6 @@ SetLineType sets LineType field to given value.
 
 HasLineType returns a boolean if a field has been set.
 
-### GetResourceName
-
-`func (o *BillingV1alpha1Cost) GetResourceName() string`
-
-GetResourceName returns the ResourceName field if non-nil, zero value otherwise.
-
-### GetResourceNameOk
-
-`func (o *BillingV1alpha1Cost) GetResourceNameOk() (*string, bool)`
-
-GetResourceNameOk returns a tuple with the ResourceName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResourceName
-
-`func (o *BillingV1alpha1Cost) SetResourceName(v string)`
-
-SetResourceName sets ResourceName field to given value.
-
-### HasResourceName
-
-`func (o *BillingV1alpha1Cost) HasResourceName() bool`
-
-HasResourceName returns a boolean if a field has been set.
-
 ### GetPrice
 
 `func (o *BillingV1alpha1Cost) GetPrice() float64`
@@ -468,57 +441,22 @@ SetAmount sets Amount field to given value.
 
 HasAmount returns a boolean if a field has been set.
 
-### GetEnvironment
-
-`func (o *BillingV1alpha1Cost) GetEnvironment() EnvScopedObjectReference`
-
-GetEnvironment returns the Environment field if non-nil, zero value otherwise.
-
-### GetEnvironmentOk
-
-`func (o *BillingV1alpha1Cost) GetEnvironmentOk() (*EnvScopedObjectReference, bool)`
-
-GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnvironment
-
-`func (o *BillingV1alpha1Cost) SetEnvironment(v EnvScopedObjectReference)`
-
-SetEnvironment sets Environment field to given value.
-
-### HasEnvironment
-
-`func (o *BillingV1alpha1Cost) HasEnvironment() bool`
-
-HasEnvironment returns a boolean if a field has been set.
-
-### SetEnvironmentNil
-
-`func (o *BillingV1alpha1Cost) SetEnvironmentNil(b bool)`
-
- SetEnvironmentNil sets the value for Environment to be an explicit nil
-
-### UnsetEnvironment
-`func (o *BillingV1alpha1Cost) UnsetEnvironment()`
-
-UnsetEnvironment ensures that no value is present for Environment, not even an explicit nil
 ### GetResource
 
-`func (o *BillingV1alpha1Cost) GetResource() TypedEnvScopedObjectReference`
+`func (o *BillingV1alpha1Cost) GetResource() BillingV1alpha1Resource`
 
 GetResource returns the Resource field if non-nil, zero value otherwise.
 
 ### GetResourceOk
 
-`func (o *BillingV1alpha1Cost) GetResourceOk() (*TypedEnvScopedObjectReference, bool)`
+`func (o *BillingV1alpha1Cost) GetResourceOk() (*BillingV1alpha1Resource, bool)`
 
 GetResourceOk returns a tuple with the Resource field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResource
 
-`func (o *BillingV1alpha1Cost) SetResource(v TypedEnvScopedObjectReference)`
+`func (o *BillingV1alpha1Cost) SetResource(v BillingV1alpha1Resource)`
 
 SetResource sets Resource field to given value.
 
@@ -528,16 +466,6 @@ SetResource sets Resource field to given value.
 
 HasResource returns a boolean if a field has been set.
 
-### SetResourceNil
-
-`func (o *BillingV1alpha1Cost) SetResourceNil(b bool)`
-
- SetResourceNil sets the value for Resource to be an explicit nil
-
-### UnsetResource
-`func (o *BillingV1alpha1Cost) UnsetResource()`
-
-UnsetResource ensures that no value is present for Resource, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

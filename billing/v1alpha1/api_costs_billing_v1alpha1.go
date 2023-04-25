@@ -15,7 +15,7 @@
 /*
 Billing API
 
-Confluent Cloud Billing API
+Confluent Cloud Billing API 
 
 API version: 0.0.1-alpha0
 Contact: monetization-eng@confluent.io
@@ -41,14 +41,14 @@ var (
 type CostsBillingV1alpha1Api interface {
 
 	/*
-		ListBillingV1alpha1Costs List of Costs
+	ListBillingV1alpha1Costs List of Costs
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cost API V1](https://img.shields.io/badge/-Request%20Access%20To%20Cost%20API%20V1-%23bc8540)](mailto:ccloud-api-access+billing-v1alpha1-early-access@confluent.io?subject=Request%20to%20join%20billing/v1alpha1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20billing/v1alpha1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cost API V1](https://img.shields.io/badge/-Request%20Access%20To%20Cost%20API%20V1-%23bc8540)](mailto:ccloud-api-access_billing-v1alpha1-early-access@confluent.io?subject=Request%20to%20join%20Billing%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20billing/v1alpha1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Retrieve a sorted, filtered, paginated list of all costs.
+Retrieve a sorted, filtered, paginated list of all costs.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListBillingV1alpha1CostsRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiListBillingV1alpha1CostsRequest
 	*/
 	ListBillingV1alpha1Costs(ctx _context.Context) ApiListBillingV1alpha1CostsRequest
 
@@ -61,12 +61,12 @@ type CostsBillingV1alpha1Api interface {
 type CostsBillingV1alpha1ApiService service
 
 type ApiListBillingV1alpha1CostsRequest struct {
-	ctx        _context.Context
+	ctx _context.Context
 	ApiService CostsBillingV1alpha1Api
-	startDate  *string
-	endDate    *string
-	pageSize   *int32
-	pageToken  *string
+	startDate *string
+	endDate *string
+	pageSize *int32
+	pageToken *string
 }
 
 // Filter the results by exact match for start_date.
@@ -74,19 +74,16 @@ func (r ApiListBillingV1alpha1CostsRequest) StartDate(startDate string) ApiListB
 	r.startDate = &startDate
 	return r
 }
-
 // Filter the results by exact match for end_date.
 func (r ApiListBillingV1alpha1CostsRequest) EndDate(endDate string) ApiListBillingV1alpha1CostsRequest {
 	r.endDate = &endDate
 	return r
 }
-
 // A pagination size for collection requests.
 func (r ApiListBillingV1alpha1CostsRequest) PageSize(pageSize int32) ApiListBillingV1alpha1CostsRequest {
 	r.pageSize = &pageSize
 	return r
 }
-
 // An opaque pagination token for collection requests.
 func (r ApiListBillingV1alpha1CostsRequest) PageToken(pageToken string) ApiListBillingV1alpha1CostsRequest {
 	r.pageToken = &pageToken
@@ -100,7 +97,7 @@ func (r ApiListBillingV1alpha1CostsRequest) Execute() (BillingV1alpha1CostList, 
 /*
 ListBillingV1alpha1Costs List of Costs
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cost API V1](https://img.shields.io/badge/-Request%20Access%20To%20Cost%20API%20V1-%23bc8540)](mailto:ccloud-api-access+billing-v1alpha1-early-access@confluent.io?subject=Request%20to%20join%20billing/v1alpha1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20billing/v1alpha1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cost API V1](https://img.shields.io/badge/-Request%20Access%20To%20Cost%20API%20V1-%23bc8540)](mailto:ccloud-api-access_billing-v1alpha1-early-access@confluent.io?subject=Request%20to%20join%20Billing%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20billing/v1alpha1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
 Retrieve a sorted, filtered, paginated list of all costs.
 
@@ -110,7 +107,7 @@ Retrieve a sorted, filtered, paginated list of all costs.
 func (a *CostsBillingV1alpha1ApiService) ListBillingV1alpha1Costs(ctx _context.Context) ApiListBillingV1alpha1CostsRequest {
 	return ApiListBillingV1alpha1CostsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 

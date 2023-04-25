@@ -15,7 +15,7 @@
 /*
 Billing API
 
-Confluent Cloud Billing API
+Confluent Cloud Billing API 
 
 API version: 0.0.1-alpha0
 Contact: monetization-eng@confluent.io
@@ -40,7 +40,7 @@ type BillingV1alpha1Cost struct {
 	// Kind defines the object this REST resource represents.
 	Kind *string `json:"kind,omitempty"`
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
-	Id       *string     `json:"id,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
 	// Start date of time period (inclusive) to retrieve billing costs. It is represented in RFC3339 format and is in UTC.
 	StartDate *string `json:"start_date,omitempty"`
@@ -54,8 +54,6 @@ type BillingV1alpha1Cost struct {
 	Product *string `json:"product,omitempty"`
 	// Type of the line item.
 	LineType *string `json:"line_type,omitempty"`
-	// Display name of the resource.
-	ResourceName *string `json:"resource_name,omitempty"`
 	// Price for the line item in dollars.
 	Price *float64 `json:"price,omitempty"`
 	// Unit of the line item.
@@ -68,10 +66,8 @@ type BillingV1alpha1Cost struct {
 	DiscountAmount *float64 `json:"discount_amount,omitempty"`
 	// Final amount after deducting discounts.
 	Amount *float64 `json:"amount,omitempty"`
-	// The environment associated with this object. May be `null` or omitted if not associated with a environment.
-	Environment NullableEnvScopedObjectReference `json:"environment,omitempty"`
-	// The resource associated with this object. The resource can be one of Kafka Cluster ID (example: lkc-12345), Connector ID (example: lcc-12345), Schema Registry Cluster ID (example: lsrc-12345), or ksqlDB Cluster ID (example: lksqlc-12345). May be null or omitted if not associated with a resource. For Cloud API keys, resource should be `null`. [Learn more in Authentication](https://docs.confluent.io/cloud/current/api.html#section/Authentication).
-	Resource NullableTypedEnvScopedObjectReference `json:"resource,omitempty"`
+	// The resource for a given object
+	Resource *BillingV1alpha1Resource `json:"resource,omitempty"`
 }
 
 // NewBillingV1alpha1Cost instantiates a new BillingV1alpha1Cost object
@@ -415,38 +411,6 @@ func (o *BillingV1alpha1Cost) SetLineType(v string) {
 	o.LineType = &v
 }
 
-// GetResourceName returns the ResourceName field value if set, zero value otherwise.
-func (o *BillingV1alpha1Cost) GetResourceName() string {
-	if o == nil || o.ResourceName == nil {
-		var ret string
-		return ret
-	}
-	return *o.ResourceName
-}
-
-// GetResourceNameOk returns a tuple with the ResourceName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BillingV1alpha1Cost) GetResourceNameOk() (*string, bool) {
-	if o == nil || o.ResourceName == nil {
-		return nil, false
-	}
-	return o.ResourceName, true
-}
-
-// HasResourceName returns a boolean if a field has been set.
-func (o *BillingV1alpha1Cost) HasResourceName() bool {
-	if o != nil && o.ResourceName != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetResourceName gets a reference to the given string and assigns it to the ResourceName field.
-func (o *BillingV1alpha1Cost) SetResourceName(v string) {
-	o.ResourceName = &v
-}
-
 // GetPrice returns the Price field value if set, zero value otherwise.
 func (o *BillingV1alpha1Cost) GetPrice() float64 {
 	if o == nil || o.Price == nil {
@@ -639,143 +603,87 @@ func (o *BillingV1alpha1Cost) SetAmount(v float64) {
 	o.Amount = &v
 }
 
-// GetEnvironment returns the Environment field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BillingV1alpha1Cost) GetEnvironment() EnvScopedObjectReference {
-	if o == nil || o.Environment.Get() == nil {
-		var ret EnvScopedObjectReference
+// GetResource returns the Resource field value if set, zero value otherwise.
+func (o *BillingV1alpha1Cost) GetResource() BillingV1alpha1Resource {
+	if o == nil || o.Resource == nil {
+		var ret BillingV1alpha1Resource
 		return ret
 	}
-	return *o.Environment.Get()
-}
-
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BillingV1alpha1Cost) GetEnvironmentOk() (*EnvScopedObjectReference, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Environment.Get(), o.Environment.IsSet()
-}
-
-// HasEnvironment returns a boolean if a field has been set.
-func (o *BillingV1alpha1Cost) HasEnvironment() bool {
-	if o != nil && o.Environment.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given NullableEnvScopedObjectReference and assigns it to the Environment field.
-func (o *BillingV1alpha1Cost) SetEnvironment(v EnvScopedObjectReference) {
-	o.Environment.Set(&v)
-}
-
-// SetEnvironmentNil sets the value for Environment to be an explicit nil
-func (o *BillingV1alpha1Cost) SetEnvironmentNil() {
-	o.Environment.Set(nil)
-}
-
-// UnsetEnvironment ensures that no value is present for Environment, not even an explicit nil
-func (o *BillingV1alpha1Cost) UnsetEnvironment() {
-	o.Environment.Unset()
-}
-
-// GetResource returns the Resource field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BillingV1alpha1Cost) GetResource() TypedEnvScopedObjectReference {
-	if o == nil || o.Resource.Get() == nil {
-		var ret TypedEnvScopedObjectReference
-		return ret
-	}
-	return *o.Resource.Get()
+	return *o.Resource
 }
 
 // GetResourceOk returns a tuple with the Resource field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BillingV1alpha1Cost) GetResourceOk() (*TypedEnvScopedObjectReference, bool) {
-	if o == nil {
+func (o *BillingV1alpha1Cost) GetResourceOk() (*BillingV1alpha1Resource, bool) {
+	if o == nil || o.Resource == nil {
 		return nil, false
 	}
-	return o.Resource.Get(), o.Resource.IsSet()
+	return o.Resource, true
 }
 
 // HasResource returns a boolean if a field has been set.
 func (o *BillingV1alpha1Cost) HasResource() bool {
-	if o != nil && o.Resource.IsSet() {
+	if o != nil && o.Resource != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetResource gets a reference to the given NullableTypedEnvScopedObjectReference and assigns it to the Resource field.
-func (o *BillingV1alpha1Cost) SetResource(v TypedEnvScopedObjectReference) {
-	o.Resource.Set(&v)
-}
-
-// SetResourceNil sets the value for Resource to be an explicit nil
-func (o *BillingV1alpha1Cost) SetResourceNil() {
-	o.Resource.Set(nil)
-}
-
-// UnsetResource ensures that no value is present for Resource, not even an explicit nil
-func (o *BillingV1alpha1Cost) UnsetResource() {
-	o.Resource.Unset()
+// SetResource gets a reference to the given BillingV1alpha1Resource and assigns it to the Resource field.
+func (o *BillingV1alpha1Cost) SetResource(v BillingV1alpha1Resource) {
+	o.Resource = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
 func (o *BillingV1alpha1Cost) Redact() {
-	o.recurseRedact(o.ApiVersion)
-	o.recurseRedact(o.Kind)
-	o.recurseRedact(o.Id)
-	o.recurseRedact(o.Metadata)
-	o.recurseRedact(o.StartDate)
-	o.recurseRedact(o.EndDate)
-	o.recurseRedact(o.Granularity)
-	o.recurseRedact(o.NetworkAccessType)
-	o.recurseRedact(o.Product)
-	o.recurseRedact(o.LineType)
-	o.recurseRedact(o.ResourceName)
-	o.recurseRedact(o.Price)
-	o.recurseRedact(o.Unit)
-	o.recurseRedact(o.Quantity)
-	o.recurseRedact(o.OriginalAmount)
-	o.recurseRedact(o.DiscountAmount)
-	o.recurseRedact(o.Amount)
-	o.recurseRedact(o.Environment)
-	o.recurseRedact(o.Resource)
+    o.recurseRedact(o.ApiVersion)
+    o.recurseRedact(o.Kind)
+    o.recurseRedact(o.Id)
+    o.recurseRedact(o.Metadata)
+    o.recurseRedact(o.StartDate)
+    o.recurseRedact(o.EndDate)
+    o.recurseRedact(o.Granularity)
+    o.recurseRedact(o.NetworkAccessType)
+    o.recurseRedact(o.Product)
+    o.recurseRedact(o.LineType)
+    o.recurseRedact(o.Price)
+    o.recurseRedact(o.Unit)
+    o.recurseRedact(o.Quantity)
+    o.recurseRedact(o.OriginalAmount)
+    o.recurseRedact(o.DiscountAmount)
+    o.recurseRedact(o.Amount)
+    o.recurseRedact(o.Resource)
 }
 
 func (o *BillingV1alpha1Cost) recurseRedact(v interface{}) {
-	type redactor interface {
-		Redact()
-	}
-	if r, ok := v.(redactor); ok {
-		r.Redact()
-	} else {
-		val := reflect.ValueOf(v)
-		if val.Kind() == reflect.Ptr {
-			val = val.Elem()
-		}
-		switch val.Kind() {
-		case reflect.Slice, reflect.Array:
-			for i := 0; i < val.Len(); i++ {
-				// support data types declared without pointers
-				o.recurseRedact(val.Index(i).Interface())
-				// ... and data types that were declared without but need pointers (for Redact)
-				if val.Index(i).CanAddr() {
-					o.recurseRedact(val.Index(i).Addr().Interface())
-				}
-			}
-		}
-	}
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
 }
 
 func (o BillingV1alpha1Cost) zeroField(v interface{}) {
-	p := reflect.ValueOf(v).Elem()
-	p.Set(reflect.Zero(p.Type()))
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o BillingV1alpha1Cost) MarshalJSON() ([]byte, error) {
@@ -810,9 +718,6 @@ func (o BillingV1alpha1Cost) MarshalJSON() ([]byte, error) {
 	if o.LineType != nil {
 		toSerialize["line_type"] = o.LineType
 	}
-	if o.ResourceName != nil {
-		toSerialize["resource_name"] = o.ResourceName
-	}
 	if o.Price != nil {
 		toSerialize["price"] = o.Price
 	}
@@ -831,11 +736,8 @@ func (o BillingV1alpha1Cost) MarshalJSON() ([]byte, error) {
 	if o.Amount != nil {
 		toSerialize["amount"] = o.Amount
 	}
-	if o.Environment.IsSet() {
-		toSerialize["environment"] = o.Environment.Get()
-	}
-	if o.Resource.IsSet() {
-		toSerialize["resource"] = o.Resource.Get()
+	if o.Resource != nil {
+		toSerialize["resource"] = o.Resource
 	}
 	return json.Marshal(toSerialize)
 }
@@ -875,3 +777,5 @@ func (v *NullableBillingV1alpha1Cost) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

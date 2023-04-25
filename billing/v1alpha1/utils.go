@@ -15,7 +15,7 @@
 /*
 Billing API
 
-Confluent Cloud Billing API
+Confluent Cloud Billing API 
 
 API version: 0.0.1-alpha0
 Contact: monetization-eng@confluent.io

@@ -33,60 +33,67 @@ import (
 	"reflect"
 )
 
-// Failure Provides information about problems encountered while performing an operation.
-type Failure struct {
-	// List of errors which caused this operation to fail
-	Errors []Error `json:"errors,omitempty"`
+// BillingV1alpha1Environment The details of the environment for a given resource. 
+type BillingV1alpha1Environment struct {
+	// ID of the environment.
+	Id *string `json:"id,omitempty"`
 }
 
-// NewFailure instantiates a new Failure object
+// NewBillingV1alpha1Environment instantiates a new BillingV1alpha1Environment object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFailure(errors []Error) *Failure {
-	this := Failure{}
-	this.Errors = errors
+func NewBillingV1alpha1Environment() *BillingV1alpha1Environment {
+	this := BillingV1alpha1Environment{}
 	return &this
 }
 
-// NewFailureWithDefaults instantiates a new Failure object
+// NewBillingV1alpha1EnvironmentWithDefaults instantiates a new BillingV1alpha1Environment object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFailureWithDefaults() *Failure {
-	this := Failure{}
+func NewBillingV1alpha1EnvironmentWithDefaults() *BillingV1alpha1Environment {
+	this := BillingV1alpha1Environment{}
 	return &this
 }
 
-// GetErrors returns the Errors field value
-func (o *Failure) GetErrors() []Error {
-	if o == nil {
-		var ret []Error
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *BillingV1alpha1Environment) GetId() string {
+	if o == nil || o.Id == nil {
+		var ret string
 		return ret
 	}
-
-	return o.Errors
+	return *o.Id
 }
 
-// GetErrorsOk returns a tuple with the Errors field value
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Failure) GetErrorsOk() (*[]Error, bool) {
-	if o == nil  {
+func (o *BillingV1alpha1Environment) GetIdOk() (*string, bool) {
+	if o == nil || o.Id == nil {
 		return nil, false
 	}
-	return &o.Errors, true
+	return o.Id, true
 }
 
-// SetErrors sets field value
-func (o *Failure) SetErrors(v []Error) {
-	o.Errors = v
+// HasId returns a boolean if a field has been set.
+func (o *BillingV1alpha1Environment) HasId() bool {
+	if o != nil && o.Id != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *BillingV1alpha1Environment) SetId(v string) {
+	o.Id = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *Failure) Redact() {
-    o.recurseRedact(&o.Errors)
+func (o *BillingV1alpha1Environment) Redact() {
+    o.recurseRedact(o.Id)
 }
 
-func (o *Failure) recurseRedact(v interface{}) {
+func (o *BillingV1alpha1Environment) recurseRedact(v interface{}) {
     type redactor interface {
         Redact()
     }
@@ -111,51 +118,51 @@ func (o *Failure) recurseRedact(v interface{}) {
     }
 }
 
-func (o Failure) zeroField(v interface{}) {
+func (o BillingV1alpha1Environment) zeroField(v interface{}) {
     p := reflect.ValueOf(v).Elem()
     p.Set(reflect.Zero(p.Type()))
 }
 
-func (o Failure) MarshalJSON() ([]byte, error) {
+func (o BillingV1alpha1Environment) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["errors"] = o.Errors
+	if o.Id != nil {
+		toSerialize["id"] = o.Id
 	}
 	return json.Marshal(toSerialize)
 }
 
-type NullableFailure struct {
-	value *Failure
+type NullableBillingV1alpha1Environment struct {
+	value *BillingV1alpha1Environment
 	isSet bool
 }
 
-func (v NullableFailure) Get() *Failure {
+func (v NullableBillingV1alpha1Environment) Get() *BillingV1alpha1Environment {
 	return v.value
 }
 
-func (v *NullableFailure) Set(val *Failure) {
+func (v *NullableBillingV1alpha1Environment) Set(val *BillingV1alpha1Environment) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFailure) IsSet() bool {
+func (v NullableBillingV1alpha1Environment) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFailure) Unset() {
+func (v *NullableBillingV1alpha1Environment) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFailure(val *Failure) *NullableFailure {
-	return &NullableFailure{value: val, isSet: true}
+func NewNullableBillingV1alpha1Environment(val *BillingV1alpha1Environment) *NullableBillingV1alpha1Environment {
+	return &NullableBillingV1alpha1Environment{value: val, isSet: true}
 }
 
-func (v NullableFailure) MarshalJSON() ([]byte, error) {
+func (v NullableBillingV1alpha1Environment) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFailure) UnmarshalJSON(src []byte) error {
+func (v *NullableBillingV1alpha1Environment) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

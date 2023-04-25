@@ -87,14 +87,14 @@ Class | Method | HTTP request | Description
 
  - [BillingV1alpha1Cost](docs/BillingV1alpha1Cost.md)
  - [BillingV1alpha1CostList](docs/BillingV1alpha1CostList.md)
- - [EnvScopedObjectReference](docs/EnvScopedObjectReference.md)
+ - [BillingV1alpha1Environment](docs/BillingV1alpha1Environment.md)
+ - [BillingV1alpha1Resource](docs/BillingV1alpha1Resource.md)
  - [Error](docs/Error.md)
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
  - [ListMeta](docs/ListMeta.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
- - [TypedEnvScopedObjectReference](docs/TypedEnvScopedObjectReference.md)
 
 
 ## Documentation For Authorization

@@ -15,7 +15,7 @@
 /*
 Billing API
 
-Confluent Cloud Billing API
+Confluent Cloud Billing API 
 
 API version: 0.0.1-alpha0
 Contact: monetization-eng@confluent.io
@@ -37,7 +37,7 @@ import (
 // ObjectMeta ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
 type ObjectMeta struct {
 	// Self is a Uniform Resource Locator (URL) at which an object can be addressed. This URL encodes the service location, API version, and other particulars necessary to locate the resource at a point in time
-	Self string `json:"self"`
+	Self string `json:"self,omitempty"`
 	// Resource Name is a Uniform Resource Identifier (URI) that is globally unique across space and time. It is represented as a Confluent Resource Name
 	ResourceName *string `json:"resource_name,omitempty"`
 	// The date and time at which this object was created. It is represented in RFC3339 format and is in UTC.
@@ -79,7 +79,7 @@ func (o *ObjectMeta) GetSelf() string {
 // GetSelfOk returns a tuple with the Self field value
 // and a boolean to check if the value has been set.
 func (o *ObjectMeta) GetSelfOk() (*string, bool) {
-	if o == nil {
+	if o == nil  {
 		return nil, false
 	}
 	return &o.Self, true
@@ -220,41 +220,41 @@ func (o *ObjectMeta) SetDeletedAt(v time.Time) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ObjectMeta) Redact() {
-	o.recurseRedact(&o.Self)
-	o.recurseRedact(o.ResourceName)
-	o.recurseRedact(o.CreatedAt)
-	o.recurseRedact(o.UpdatedAt)
-	o.recurseRedact(o.DeletedAt)
+    o.recurseRedact(&o.Self)
+    o.recurseRedact(o.ResourceName)
+    o.recurseRedact(o.CreatedAt)
+    o.recurseRedact(o.UpdatedAt)
+    o.recurseRedact(o.DeletedAt)
 }
 
 func (o *ObjectMeta) recurseRedact(v interface{}) {
-	type redactor interface {
-		Redact()
-	}
-	if r, ok := v.(redactor); ok {
-		r.Redact()
-	} else {
-		val := reflect.ValueOf(v)
-		if val.Kind() == reflect.Ptr {
-			val = val.Elem()
-		}
-		switch val.Kind() {
-		case reflect.Slice, reflect.Array:
-			for i := 0; i < val.Len(); i++ {
-				// support data types declared without pointers
-				o.recurseRedact(val.Index(i).Interface())
-				// ... and data types that were declared without but need pointers (for Redact)
-				if val.Index(i).CanAddr() {
-					o.recurseRedact(val.Index(i).Addr().Interface())
-				}
-			}
-		}
-	}
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
 }
 
 func (o ObjectMeta) zeroField(v interface{}) {
-	p := reflect.ValueOf(v).Elem()
-	p.Set(reflect.Zero(p.Type()))
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ObjectMeta) MarshalJSON() ([]byte, error) {
@@ -312,3 +312,5 @@ func (v *NullableObjectMeta) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
