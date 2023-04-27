@@ -36,10 +36,10 @@ import (
 // SqlV1alpha1StatementResult `Statement Result` represents a resource used to model results of SQL statements. The API allows you to read your SQL statement result. ## The Statement Result Model <SchemaDefinition schemaRef=\"#/components/schemas/sql.v1alpha1.StatementResult\" />
 type SqlV1alpha1StatementResult struct {
 	// APIVersion defines the schema version of this representation of a resource.
-	ApiVersion string `json:"api_version"`
+	ApiVersion string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
-	Kind string `json:"kind"`
-	Metadata ResultListMeta `json:"metadata"`
+	Kind string `json:"kind,omitempty"`
+	Metadata ResultListMeta `json:"metadata,omitempty"`
 	Results *SqlV1alpha1StatementResultResults `json:"results,omitempty"`
 }
 

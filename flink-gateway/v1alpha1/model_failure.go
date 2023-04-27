@@ -36,7 +36,7 @@ import (
 // Failure Provides information about problems encountered while performing an operation.
 type Failure struct {
 	// List of errors which caused this operation to fail
-	Errors []Error `json:"errors"`
+	Errors []Error `json:"errors,omitempty"`
 }
 
 // NewFailure instantiates a new Failure object

@@ -36,9 +36,9 @@ import (
 // TimestampWithTimeZoneType struct for TimestampWithTimeZoneType
 type TimestampWithTimeZoneType struct {
 	// Indicates whether values in this column can be null.
-	Nullable bool `json:"nullable"`
+	Nullable bool `json:"nullable,omitempty"`
 	// The data type of the column.
-	Type string `json:"type"`
+	Type string `json:"type,omitempty"`
 }
 
 // NewTimestampWithTimeZoneType instantiates a new TimestampWithTimeZoneType object

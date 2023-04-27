@@ -37,6 +37,8 @@ import (
 type TimestampWithLocalTimeZoneTypeAllOf struct {
 	// The data type of the column.
 	Type *string `json:"type,omitempty"`
+	// The precision of the decimal type (i.e. the number of digits in the number).
+	Precision *int32 `json:"precision,omitempty"`
 }
 
 // NewTimestampWithLocalTimeZoneTypeAllOf instantiates a new TimestampWithLocalTimeZoneTypeAllOf object
@@ -88,9 +90,42 @@ func (o *TimestampWithLocalTimeZoneTypeAllOf) SetType(v string) {
 	o.Type = &v
 }
 
+// GetPrecision returns the Precision field value if set, zero value otherwise.
+func (o *TimestampWithLocalTimeZoneTypeAllOf) GetPrecision() int32 {
+	if o == nil || o.Precision == nil {
+		var ret int32
+		return ret
+	}
+	return *o.Precision
+}
+
+// GetPrecisionOk returns a tuple with the Precision field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TimestampWithLocalTimeZoneTypeAllOf) GetPrecisionOk() (*int32, bool) {
+	if o == nil || o.Precision == nil {
+		return nil, false
+	}
+	return o.Precision, true
+}
+
+// HasPrecision returns a boolean if a field has been set.
+func (o *TimestampWithLocalTimeZoneTypeAllOf) HasPrecision() bool {
+	if o != nil && o.Precision != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPrecision gets a reference to the given int32 and assigns it to the Precision field.
+func (o *TimestampWithLocalTimeZoneTypeAllOf) SetPrecision(v int32) {
+	o.Precision = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *TimestampWithLocalTimeZoneTypeAllOf) Redact() {
     o.recurseRedact(o.Type)
+    o.recurseRedact(o.Precision)
 }
 
 func (o *TimestampWithLocalTimeZoneTypeAllOf) recurseRedact(v interface{}) {
@@ -127,6 +162,9 @@ func (o TimestampWithLocalTimeZoneTypeAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
 		toSerialize["type"] = o.Type
+	}
+	if o.Precision != nil {
+		toSerialize["precision"] = o.Precision
 	}
 	return json.Marshal(toSerialize)
 }

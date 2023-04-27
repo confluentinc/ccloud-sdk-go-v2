@@ -36,9 +36,11 @@ import (
 // TimestampWithLocalTimeZoneType struct for TimestampWithLocalTimeZoneType
 type TimestampWithLocalTimeZoneType struct {
 	// Indicates whether values in this column can be null.
-	Nullable bool `json:"nullable"`
+	Nullable bool `json:"nullable,omitempty"`
 	// The data type of the column.
-	Type string `json:"type"`
+	Type string `json:"type,omitempty"`
+	// The precision of the decimal type (i.e. the number of digits in the number).
+	Precision *int32 `json:"precision,omitempty"`
 }
 
 // NewTimestampWithLocalTimeZoneType instantiates a new TimestampWithLocalTimeZoneType object
@@ -108,10 +110,43 @@ func (o *TimestampWithLocalTimeZoneType) SetType(v string) {
 	o.Type = v
 }
 
+// GetPrecision returns the Precision field value if set, zero value otherwise.
+func (o *TimestampWithLocalTimeZoneType) GetPrecision() int32 {
+	if o == nil || o.Precision == nil {
+		var ret int32
+		return ret
+	}
+	return *o.Precision
+}
+
+// GetPrecisionOk returns a tuple with the Precision field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TimestampWithLocalTimeZoneType) GetPrecisionOk() (*int32, bool) {
+	if o == nil || o.Precision == nil {
+		return nil, false
+	}
+	return o.Precision, true
+}
+
+// HasPrecision returns a boolean if a field has been set.
+func (o *TimestampWithLocalTimeZoneType) HasPrecision() bool {
+	if o != nil && o.Precision != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPrecision gets a reference to the given int32 and assigns it to the Precision field.
+func (o *TimestampWithLocalTimeZoneType) SetPrecision(v int32) {
+	o.Precision = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *TimestampWithLocalTimeZoneType) Redact() {
     o.recurseRedact(&o.Nullable)
     o.recurseRedact(&o.Type)
+    o.recurseRedact(o.Precision)
 }
 
 func (o *TimestampWithLocalTimeZoneType) recurseRedact(v interface{}) {
@@ -151,6 +186,9 @@ func (o TimestampWithLocalTimeZoneType) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["type"] = o.Type
+	}
+	if o.Precision != nil {
+		toSerialize["precision"] = o.Precision
 	}
 	return json.Marshal(toSerialize)
 }

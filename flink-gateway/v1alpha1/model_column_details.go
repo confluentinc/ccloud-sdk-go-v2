@@ -36,9 +36,9 @@ import (
 // ColumnDetails A column in the results schema.
 type ColumnDetails struct {
 	// The name of the SQL table column.
-	Name string `json:"name"`
+	Name string `json:"name,omitempty"`
 	// JSON object in TableSchema format; describes the data returned by the results serving API.
-	Type DataType `json:"type"`
+	Type DataType `json:"type,omitempty"`
 }
 
 // NewColumnDetails instantiates a new ColumnDetails object

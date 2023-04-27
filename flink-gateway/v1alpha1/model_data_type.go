@@ -176,566 +176,338 @@ func VarcharTypeAsDataType(v *VarcharType) DataType {
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *DataType) UnmarshalJSON(data []byte) error {
 	var err error
-	// use discriminator value to speed up the lookup
-	var jsonDict map[string]interface{}
-	err = json.Unmarshal(data, &jsonDict)
-	if err != nil {
-		return fmt.Errorf("Failed to unmarshal JSON into map for the discriminator lookup.")
-	}
-
-	// check if the discriminator value is 'ARRAY'
-	if jsonDict["type"] == "ARRAY" {
-		// try to unmarshal JSON data into ArrayType
-		err = json.Unmarshal(data, &dst.ArrayType)
-		if err == nil {
-			return nil // data stored in dst.ArrayType, return on the first match
-		} else {
+	match := 0
+	// try to unmarshal data into ArrayType
+	err = json.Unmarshal(data, &dst.ArrayType)
+	if err == nil {
+		jsonArrayType, _ := json.Marshal(dst.ArrayType)
+		if string(jsonArrayType) == "{}" { // empty struct
 			dst.ArrayType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as ArrayType: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.ArrayType = nil
 	}
 
-	// check if the discriminator value is 'ArrayType'
-	if jsonDict["type"] == "ArrayType" {
-		// try to unmarshal JSON data into ArrayType
-		err = json.Unmarshal(data, &dst.ArrayType)
-		if err == nil {
-			return nil // data stored in dst.ArrayType, return on the first match
-		} else {
-			dst.ArrayType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as ArrayType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'BIGINT'
-	if jsonDict["type"] == "BIGINT" {
-		// try to unmarshal JSON data into BigIntType
-		err = json.Unmarshal(data, &dst.BigIntType)
-		if err == nil {
-			return nil // data stored in dst.BigIntType, return on the first match
-		} else {
+	// try to unmarshal data into BigIntType
+	err = json.Unmarshal(data, &dst.BigIntType)
+	if err == nil {
+		jsonBigIntType, _ := json.Marshal(dst.BigIntType)
+		if string(jsonBigIntType) == "{}" { // empty struct
 			dst.BigIntType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as BigIntType: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.BigIntType = nil
 	}
 
-	// check if the discriminator value is 'BINARY'
-	if jsonDict["type"] == "BINARY" {
-		// try to unmarshal JSON data into BinaryType
-		err = json.Unmarshal(data, &dst.BinaryType)
-		if err == nil {
-			return nil // data stored in dst.BinaryType, return on the first match
-		} else {
+	// try to unmarshal data into BinaryType
+	err = json.Unmarshal(data, &dst.BinaryType)
+	if err == nil {
+		jsonBinaryType, _ := json.Marshal(dst.BinaryType)
+		if string(jsonBinaryType) == "{}" { // empty struct
 			dst.BinaryType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as BinaryType: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.BinaryType = nil
 	}
 
-	// check if the discriminator value is 'BOOLEAN'
-	if jsonDict["type"] == "BOOLEAN" {
-		// try to unmarshal JSON data into BooleanType
-		err = json.Unmarshal(data, &dst.BooleanType)
-		if err == nil {
-			return nil // data stored in dst.BooleanType, return on the first match
-		} else {
+	// try to unmarshal data into BooleanType
+	err = json.Unmarshal(data, &dst.BooleanType)
+	if err == nil {
+		jsonBooleanType, _ := json.Marshal(dst.BooleanType)
+		if string(jsonBooleanType) == "{}" { // empty struct
 			dst.BooleanType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as BooleanType: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.BooleanType = nil
 	}
 
-	// check if the discriminator value is 'BigIntType'
-	if jsonDict["type"] == "BigIntType" {
-		// try to unmarshal JSON data into BigIntType
-		err = json.Unmarshal(data, &dst.BigIntType)
-		if err == nil {
-			return nil // data stored in dst.BigIntType, return on the first match
-		} else {
-			dst.BigIntType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as BigIntType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'BinaryType'
-	if jsonDict["type"] == "BinaryType" {
-		// try to unmarshal JSON data into BinaryType
-		err = json.Unmarshal(data, &dst.BinaryType)
-		if err == nil {
-			return nil // data stored in dst.BinaryType, return on the first match
-		} else {
-			dst.BinaryType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as BinaryType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'BooleanType'
-	if jsonDict["type"] == "BooleanType" {
-		// try to unmarshal JSON data into BooleanType
-		err = json.Unmarshal(data, &dst.BooleanType)
-		if err == nil {
-			return nil // data stored in dst.BooleanType, return on the first match
-		} else {
-			dst.BooleanType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as BooleanType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'CHAR'
-	if jsonDict["type"] == "CHAR" {
-		// try to unmarshal JSON data into CharType
-		err = json.Unmarshal(data, &dst.CharType)
-		if err == nil {
-			return nil // data stored in dst.CharType, return on the first match
-		} else {
+	// try to unmarshal data into CharType
+	err = json.Unmarshal(data, &dst.CharType)
+	if err == nil {
+		jsonCharType, _ := json.Marshal(dst.CharType)
+		if string(jsonCharType) == "{}" { // empty struct
 			dst.CharType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as CharType: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.CharType = nil
 	}
 
-	// check if the discriminator value is 'CharType'
-	if jsonDict["type"] == "CharType" {
-		// try to unmarshal JSON data into CharType
-		err = json.Unmarshal(data, &dst.CharType)
-		if err == nil {
-			return nil // data stored in dst.CharType, return on the first match
-		} else {
-			dst.CharType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as CharType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'DATE'
-	if jsonDict["type"] == "DATE" {
-		// try to unmarshal JSON data into DateType
-		err = json.Unmarshal(data, &dst.DateType)
-		if err == nil {
-			return nil // data stored in dst.DateType, return on the first match
-		} else {
+	// try to unmarshal data into DateType
+	err = json.Unmarshal(data, &dst.DateType)
+	if err == nil {
+		jsonDateType, _ := json.Marshal(dst.DateType)
+		if string(jsonDateType) == "{}" { // empty struct
 			dst.DateType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as DateType: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.DateType = nil
 	}
 
-	// check if the discriminator value is 'DECIMAL'
-	if jsonDict["type"] == "DECIMAL" {
-		// try to unmarshal JSON data into DecimalType
-		err = json.Unmarshal(data, &dst.DecimalType)
-		if err == nil {
-			return nil // data stored in dst.DecimalType, return on the first match
-		} else {
+	// try to unmarshal data into DecimalType
+	err = json.Unmarshal(data, &dst.DecimalType)
+	if err == nil {
+		jsonDecimalType, _ := json.Marshal(dst.DecimalType)
+		if string(jsonDecimalType) == "{}" { // empty struct
 			dst.DecimalType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as DecimalType: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.DecimalType = nil
 	}
 
-	// check if the discriminator value is 'DOUBLE'
-	if jsonDict["type"] == "DOUBLE" {
-		// try to unmarshal JSON data into DoubleType
-		err = json.Unmarshal(data, &dst.DoubleType)
-		if err == nil {
-			return nil // data stored in dst.DoubleType, return on the first match
-		} else {
+	// try to unmarshal data into DoubleType
+	err = json.Unmarshal(data, &dst.DoubleType)
+	if err == nil {
+		jsonDoubleType, _ := json.Marshal(dst.DoubleType)
+		if string(jsonDoubleType) == "{}" { // empty struct
 			dst.DoubleType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as DoubleType: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.DoubleType = nil
 	}
 
-	// check if the discriminator value is 'DateType'
-	if jsonDict["type"] == "DateType" {
-		// try to unmarshal JSON data into DateType
-		err = json.Unmarshal(data, &dst.DateType)
-		if err == nil {
-			return nil // data stored in dst.DateType, return on the first match
-		} else {
-			dst.DateType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as DateType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'DecimalType'
-	if jsonDict["type"] == "DecimalType" {
-		// try to unmarshal JSON data into DecimalType
-		err = json.Unmarshal(data, &dst.DecimalType)
-		if err == nil {
-			return nil // data stored in dst.DecimalType, return on the first match
-		} else {
-			dst.DecimalType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as DecimalType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'DoubleType'
-	if jsonDict["type"] == "DoubleType" {
-		// try to unmarshal JSON data into DoubleType
-		err = json.Unmarshal(data, &dst.DoubleType)
-		if err == nil {
-			return nil // data stored in dst.DoubleType, return on the first match
-		} else {
-			dst.DoubleType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as DoubleType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'FLOAT'
-	if jsonDict["type"] == "FLOAT" {
-		// try to unmarshal JSON data into FloatType
-		err = json.Unmarshal(data, &dst.FloatType)
-		if err == nil {
-			return nil // data stored in dst.FloatType, return on the first match
-		} else {
+	// try to unmarshal data into FloatType
+	err = json.Unmarshal(data, &dst.FloatType)
+	if err == nil {
+		jsonFloatType, _ := json.Marshal(dst.FloatType)
+		if string(jsonFloatType) == "{}" { // empty struct
 			dst.FloatType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as FloatType: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.FloatType = nil
 	}
 
-	// check if the discriminator value is 'FloatType'
-	if jsonDict["type"] == "FloatType" {
-		// try to unmarshal JSON data into FloatType
-		err = json.Unmarshal(data, &dst.FloatType)
-		if err == nil {
-			return nil // data stored in dst.FloatType, return on the first match
-		} else {
-			dst.FloatType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as FloatType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'INTEGER'
-	if jsonDict["type"] == "INTEGER" {
-		// try to unmarshal JSON data into IntegerType
-		err = json.Unmarshal(data, &dst.IntegerType)
-		if err == nil {
-			return nil // data stored in dst.IntegerType, return on the first match
-		} else {
+	// try to unmarshal data into IntegerType
+	err = json.Unmarshal(data, &dst.IntegerType)
+	if err == nil {
+		jsonIntegerType, _ := json.Marshal(dst.IntegerType)
+		if string(jsonIntegerType) == "{}" { // empty struct
 			dst.IntegerType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as IntegerType: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.IntegerType = nil
 	}
 
-	// check if the discriminator value is 'INTERVAL_DAY_TIME'
-	if jsonDict["type"] == "INTERVAL_DAY_TIME" {
-		// try to unmarshal JSON data into IntervalDayTimeType
-		err = json.Unmarshal(data, &dst.IntervalDayTimeType)
-		if err == nil {
-			return nil // data stored in dst.IntervalDayTimeType, return on the first match
-		} else {
+	// try to unmarshal data into IntervalDayTimeType
+	err = json.Unmarshal(data, &dst.IntervalDayTimeType)
+	if err == nil {
+		jsonIntervalDayTimeType, _ := json.Marshal(dst.IntervalDayTimeType)
+		if string(jsonIntervalDayTimeType) == "{}" { // empty struct
 			dst.IntervalDayTimeType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as IntervalDayTimeType: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.IntervalDayTimeType = nil
 	}
 
-	// check if the discriminator value is 'INTERVAL_YEAR_MONTH'
-	if jsonDict["type"] == "INTERVAL_YEAR_MONTH" {
-		// try to unmarshal JSON data into IntervalYearMonthType
-		err = json.Unmarshal(data, &dst.IntervalYearMonthType)
-		if err == nil {
-			return nil // data stored in dst.IntervalYearMonthType, return on the first match
-		} else {
+	// try to unmarshal data into IntervalYearMonthType
+	err = json.Unmarshal(data, &dst.IntervalYearMonthType)
+	if err == nil {
+		jsonIntervalYearMonthType, _ := json.Marshal(dst.IntervalYearMonthType)
+		if string(jsonIntervalYearMonthType) == "{}" { // empty struct
 			dst.IntervalYearMonthType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as IntervalYearMonthType: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.IntervalYearMonthType = nil
 	}
 
-	// check if the discriminator value is 'IntegerType'
-	if jsonDict["type"] == "IntegerType" {
-		// try to unmarshal JSON data into IntegerType
-		err = json.Unmarshal(data, &dst.IntegerType)
-		if err == nil {
-			return nil // data stored in dst.IntegerType, return on the first match
-		} else {
-			dst.IntegerType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as IntegerType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'IntervalDayTimeType'
-	if jsonDict["type"] == "IntervalDayTimeType" {
-		// try to unmarshal JSON data into IntervalDayTimeType
-		err = json.Unmarshal(data, &dst.IntervalDayTimeType)
-		if err == nil {
-			return nil // data stored in dst.IntervalDayTimeType, return on the first match
-		} else {
-			dst.IntervalDayTimeType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as IntervalDayTimeType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'IntervalYearMonthType'
-	if jsonDict["type"] == "IntervalYearMonthType" {
-		// try to unmarshal JSON data into IntervalYearMonthType
-		err = json.Unmarshal(data, &dst.IntervalYearMonthType)
-		if err == nil {
-			return nil // data stored in dst.IntervalYearMonthType, return on the first match
-		} else {
-			dst.IntervalYearMonthType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as IntervalYearMonthType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'MAP'
-	if jsonDict["type"] == "MAP" {
-		// try to unmarshal JSON data into MapType
-		err = json.Unmarshal(data, &dst.MapType)
-		if err == nil {
-			return nil // data stored in dst.MapType, return on the first match
-		} else {
+	// try to unmarshal data into MapType
+	err = json.Unmarshal(data, &dst.MapType)
+	if err == nil {
+		jsonMapType, _ := json.Marshal(dst.MapType)
+		if string(jsonMapType) == "{}" { // empty struct
 			dst.MapType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as MapType: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.MapType = nil
 	}
 
-	// check if the discriminator value is 'MULTISET'
-	if jsonDict["type"] == "MULTISET" {
-		// try to unmarshal JSON data into MultisetType
-		err = json.Unmarshal(data, &dst.MultisetType)
-		if err == nil {
-			return nil // data stored in dst.MultisetType, return on the first match
-		} else {
+	// try to unmarshal data into MultisetType
+	err = json.Unmarshal(data, &dst.MultisetType)
+	if err == nil {
+		jsonMultisetType, _ := json.Marshal(dst.MultisetType)
+		if string(jsonMultisetType) == "{}" { // empty struct
 			dst.MultisetType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as MultisetType: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.MultisetType = nil
 	}
 
-	// check if the discriminator value is 'MapType'
-	if jsonDict["type"] == "MapType" {
-		// try to unmarshal JSON data into MapType
-		err = json.Unmarshal(data, &dst.MapType)
-		if err == nil {
-			return nil // data stored in dst.MapType, return on the first match
-		} else {
-			dst.MapType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as MapType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'MultisetType'
-	if jsonDict["type"] == "MultisetType" {
-		// try to unmarshal JSON data into MultisetType
-		err = json.Unmarshal(data, &dst.MultisetType)
-		if err == nil {
-			return nil // data stored in dst.MultisetType, return on the first match
-		} else {
-			dst.MultisetType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as MultisetType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'ROW'
-	if jsonDict["type"] == "ROW" {
-		// try to unmarshal JSON data into RowType
-		err = json.Unmarshal(data, &dst.RowType)
-		if err == nil {
-			return nil // data stored in dst.RowType, return on the first match
-		} else {
+	// try to unmarshal data into RowType
+	err = json.Unmarshal(data, &dst.RowType)
+	if err == nil {
+		jsonRowType, _ := json.Marshal(dst.RowType)
+		if string(jsonRowType) == "{}" { // empty struct
 			dst.RowType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as RowType: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.RowType = nil
 	}
 
-	// check if the discriminator value is 'RowType'
-	if jsonDict["type"] == "RowType" {
-		// try to unmarshal JSON data into RowType
-		err = json.Unmarshal(data, &dst.RowType)
-		if err == nil {
-			return nil // data stored in dst.RowType, return on the first match
-		} else {
-			dst.RowType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as RowType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'SMALLINT'
-	if jsonDict["type"] == "SMALLINT" {
-		// try to unmarshal JSON data into SmallIntType
-		err = json.Unmarshal(data, &dst.SmallIntType)
-		if err == nil {
-			return nil // data stored in dst.SmallIntType, return on the first match
-		} else {
+	// try to unmarshal data into SmallIntType
+	err = json.Unmarshal(data, &dst.SmallIntType)
+	if err == nil {
+		jsonSmallIntType, _ := json.Marshal(dst.SmallIntType)
+		if string(jsonSmallIntType) == "{}" { // empty struct
 			dst.SmallIntType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as SmallIntType: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.SmallIntType = nil
 	}
 
-	// check if the discriminator value is 'SmallIntType'
-	if jsonDict["type"] == "SmallIntType" {
-		// try to unmarshal JSON data into SmallIntType
-		err = json.Unmarshal(data, &dst.SmallIntType)
-		if err == nil {
-			return nil // data stored in dst.SmallIntType, return on the first match
-		} else {
-			dst.SmallIntType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as SmallIntType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'TIMESTAMP_WITHOUT_TIME_ZONE'
-	if jsonDict["type"] == "TIMESTAMP_WITHOUT_TIME_ZONE" {
-		// try to unmarshal JSON data into TimestampWithoutTimeZoneType
-		err = json.Unmarshal(data, &dst.TimestampWithoutTimeZoneType)
-		if err == nil {
-			return nil // data stored in dst.TimestampWithoutTimeZoneType, return on the first match
-		} else {
-			dst.TimestampWithoutTimeZoneType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as TimestampWithoutTimeZoneType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'TIMESTAMP_WITH_LOCAL_TIME_ZONE'
-	if jsonDict["type"] == "TIMESTAMP_WITH_LOCAL_TIME_ZONE" {
-		// try to unmarshal JSON data into TimestampWithLocalTimeZoneType
-		err = json.Unmarshal(data, &dst.TimestampWithLocalTimeZoneType)
-		if err == nil {
-			return nil // data stored in dst.TimestampWithLocalTimeZoneType, return on the first match
-		} else {
-			dst.TimestampWithLocalTimeZoneType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as TimestampWithLocalTimeZoneType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'TIMESTAMP_WITH_TIME_ZONE'
-	if jsonDict["type"] == "TIMESTAMP_WITH_TIME_ZONE" {
-		// try to unmarshal JSON data into TimestampWithTimeZoneType
-		err = json.Unmarshal(data, &dst.TimestampWithTimeZoneType)
-		if err == nil {
-			return nil // data stored in dst.TimestampWithTimeZoneType, return on the first match
-		} else {
-			dst.TimestampWithTimeZoneType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as TimestampWithTimeZoneType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'TIME_WITHOUT_TIME_ZONE'
-	if jsonDict["type"] == "TIME_WITHOUT_TIME_ZONE" {
-		// try to unmarshal JSON data into TimeWithoutTimeZoneType
-		err = json.Unmarshal(data, &dst.TimeWithoutTimeZoneType)
-		if err == nil {
-			return nil // data stored in dst.TimeWithoutTimeZoneType, return on the first match
-		} else {
+	// try to unmarshal data into TimeWithoutTimeZoneType
+	err = json.Unmarshal(data, &dst.TimeWithoutTimeZoneType)
+	if err == nil {
+		jsonTimeWithoutTimeZoneType, _ := json.Marshal(dst.TimeWithoutTimeZoneType)
+		if string(jsonTimeWithoutTimeZoneType) == "{}" { // empty struct
 			dst.TimeWithoutTimeZoneType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as TimeWithoutTimeZoneType: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.TimeWithoutTimeZoneType = nil
 	}
 
-	// check if the discriminator value is 'TINYINT'
-	if jsonDict["type"] == "TINYINT" {
-		// try to unmarshal JSON data into TinyIntType
-		err = json.Unmarshal(data, &dst.TinyIntType)
-		if err == nil {
-			return nil // data stored in dst.TinyIntType, return on the first match
-		} else {
-			dst.TinyIntType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as TinyIntType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'TimeWithoutTimeZoneType'
-	if jsonDict["type"] == "TimeWithoutTimeZoneType" {
-		// try to unmarshal JSON data into TimeWithoutTimeZoneType
-		err = json.Unmarshal(data, &dst.TimeWithoutTimeZoneType)
-		if err == nil {
-			return nil // data stored in dst.TimeWithoutTimeZoneType, return on the first match
-		} else {
-			dst.TimeWithoutTimeZoneType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as TimeWithoutTimeZoneType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'TimestampWithLocalTimeZoneType'
-	if jsonDict["type"] == "TimestampWithLocalTimeZoneType" {
-		// try to unmarshal JSON data into TimestampWithLocalTimeZoneType
-		err = json.Unmarshal(data, &dst.TimestampWithLocalTimeZoneType)
-		if err == nil {
-			return nil // data stored in dst.TimestampWithLocalTimeZoneType, return on the first match
-		} else {
+	// try to unmarshal data into TimestampWithLocalTimeZoneType
+	err = json.Unmarshal(data, &dst.TimestampWithLocalTimeZoneType)
+	if err == nil {
+		jsonTimestampWithLocalTimeZoneType, _ := json.Marshal(dst.TimestampWithLocalTimeZoneType)
+		if string(jsonTimestampWithLocalTimeZoneType) == "{}" { // empty struct
 			dst.TimestampWithLocalTimeZoneType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as TimestampWithLocalTimeZoneType: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.TimestampWithLocalTimeZoneType = nil
 	}
 
-	// check if the discriminator value is 'TimestampWithTimeZoneType'
-	if jsonDict["type"] == "TimestampWithTimeZoneType" {
-		// try to unmarshal JSON data into TimestampWithTimeZoneType
-		err = json.Unmarshal(data, &dst.TimestampWithTimeZoneType)
-		if err == nil {
-			return nil // data stored in dst.TimestampWithTimeZoneType, return on the first match
-		} else {
+	// try to unmarshal data into TimestampWithTimeZoneType
+	err = json.Unmarshal(data, &dst.TimestampWithTimeZoneType)
+	if err == nil {
+		jsonTimestampWithTimeZoneType, _ := json.Marshal(dst.TimestampWithTimeZoneType)
+		if string(jsonTimestampWithTimeZoneType) == "{}" { // empty struct
 			dst.TimestampWithTimeZoneType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as TimestampWithTimeZoneType: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.TimestampWithTimeZoneType = nil
 	}
 
-	// check if the discriminator value is 'TimestampWithoutTimeZoneType'
-	if jsonDict["type"] == "TimestampWithoutTimeZoneType" {
-		// try to unmarshal JSON data into TimestampWithoutTimeZoneType
-		err = json.Unmarshal(data, &dst.TimestampWithoutTimeZoneType)
-		if err == nil {
-			return nil // data stored in dst.TimestampWithoutTimeZoneType, return on the first match
-		} else {
+	// try to unmarshal data into TimestampWithoutTimeZoneType
+	err = json.Unmarshal(data, &dst.TimestampWithoutTimeZoneType)
+	if err == nil {
+		jsonTimestampWithoutTimeZoneType, _ := json.Marshal(dst.TimestampWithoutTimeZoneType)
+		if string(jsonTimestampWithoutTimeZoneType) == "{}" { // empty struct
 			dst.TimestampWithoutTimeZoneType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as TimestampWithoutTimeZoneType: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.TimestampWithoutTimeZoneType = nil
 	}
 
-	// check if the discriminator value is 'TinyIntType'
-	if jsonDict["type"] == "TinyIntType" {
-		// try to unmarshal JSON data into TinyIntType
-		err = json.Unmarshal(data, &dst.TinyIntType)
-		if err == nil {
-			return nil // data stored in dst.TinyIntType, return on the first match
-		} else {
+	// try to unmarshal data into TinyIntType
+	err = json.Unmarshal(data, &dst.TinyIntType)
+	if err == nil {
+		jsonTinyIntType, _ := json.Marshal(dst.TinyIntType)
+		if string(jsonTinyIntType) == "{}" { // empty struct
 			dst.TinyIntType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as TinyIntType: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.TinyIntType = nil
 	}
 
-	// check if the discriminator value is 'VARBINARY'
-	if jsonDict["type"] == "VARBINARY" {
-		// try to unmarshal JSON data into VarbinaryType
-		err = json.Unmarshal(data, &dst.VarbinaryType)
-		if err == nil {
-			return nil // data stored in dst.VarbinaryType, return on the first match
-		} else {
+	// try to unmarshal data into VarbinaryType
+	err = json.Unmarshal(data, &dst.VarbinaryType)
+	if err == nil {
+		jsonVarbinaryType, _ := json.Marshal(dst.VarbinaryType)
+		if string(jsonVarbinaryType) == "{}" { // empty struct
 			dst.VarbinaryType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as VarbinaryType: %s", err.Error())
+		} else {
+			match++
 		}
+	} else {
+		dst.VarbinaryType = nil
 	}
 
-	// check if the discriminator value is 'VARCHAR'
-	if jsonDict["type"] == "VARCHAR" {
-		// try to unmarshal JSON data into VarcharType
-		err = json.Unmarshal(data, &dst.VarcharType)
-		if err == nil {
-			return nil // data stored in dst.VarcharType, return on the first match
-		} else {
+	// try to unmarshal data into VarcharType
+	err = json.Unmarshal(data, &dst.VarcharType)
+	if err == nil {
+		jsonVarcharType, _ := json.Marshal(dst.VarcharType)
+		if string(jsonVarcharType) == "{}" { // empty struct
 			dst.VarcharType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as VarcharType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'VarbinaryType'
-	if jsonDict["type"] == "VarbinaryType" {
-		// try to unmarshal JSON data into VarbinaryType
-		err = json.Unmarshal(data, &dst.VarbinaryType)
-		if err == nil {
-			return nil // data stored in dst.VarbinaryType, return on the first match
 		} else {
-			dst.VarbinaryType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as VarbinaryType: %s", err.Error())
+			match++
 		}
+	} else {
+		dst.VarcharType = nil
 	}
 
-	// check if the discriminator value is 'VarcharType'
-	if jsonDict["type"] == "VarcharType" {
-		// try to unmarshal JSON data into VarcharType
-		err = json.Unmarshal(data, &dst.VarcharType)
-		if err == nil {
-			return nil // data stored in dst.VarcharType, return on the first match
-		} else {
-			dst.VarcharType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as VarcharType: %s", err.Error())
-		}
-	}
+	if match > 1 { // more than 1 match
+		// reset to nil
+		dst.ArrayType = nil
+		dst.BigIntType = nil
+		dst.BinaryType = nil
+		dst.BooleanType = nil
+		dst.CharType = nil
+		dst.DateType = nil
+		dst.DecimalType = nil
+		dst.DoubleType = nil
+		dst.FloatType = nil
+		dst.IntegerType = nil
+		dst.IntervalDayTimeType = nil
+		dst.IntervalYearMonthType = nil
+		dst.MapType = nil
+		dst.MultisetType = nil
+		dst.RowType = nil
+		dst.SmallIntType = nil
+		dst.TimeWithoutTimeZoneType = nil
+		dst.TimestampWithLocalTimeZoneType = nil
+		dst.TimestampWithTimeZoneType = nil
+		dst.TimestampWithoutTimeZoneType = nil
+		dst.TinyIntType = nil
+		dst.VarbinaryType = nil
+		dst.VarcharType = nil
 
-	return nil
+		return fmt.Errorf("Data matches more than one schema in oneOf(DataType)")
+	} else if match == 1 {
+		return nil // exactly one match
+	} else { // no match
+		return fmt.Errorf("Data failed to match schemas in oneOf(DataType)")
+	}
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON

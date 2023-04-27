@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Nullable** | **bool** | Indicates whether values in this column can be null. | 
 **Type** | **string** | The data type of the column. | 
+**Length** | Pointer to **int32** | The length of the column. | [optional] 
 
 ## Methods
 
@@ -65,6 +66,31 @@ and a boolean to check if the value has been set.
 
 SetType sets Type field to given value.
 
+
+### GetLength
+
+`func (o *BinaryType) GetLength() int32`
+
+GetLength returns the Length field if non-nil, zero value otherwise.
+
+### GetLengthOk
+
+`func (o *BinaryType) GetLengthOk() (*int32, bool)`
+
+GetLengthOk returns a tuple with the Length field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLength
+
+`func (o *BinaryType) SetLength(v int32)`
+
+SetLength sets Length field to given value.
+
+### HasLength
+
+`func (o *BinaryType) HasLength() bool`
+
+HasLength returns a boolean if a field has been set.
 
 
 ### AsDataType

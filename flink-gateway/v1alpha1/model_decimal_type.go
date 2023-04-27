@@ -36,13 +36,13 @@ import (
 // DecimalType struct for DecimalType
 type DecimalType struct {
 	// Indicates whether values in this column can be null.
-	Nullable bool `json:"nullable"`
+	Nullable bool `json:"nullable,omitempty"`
 	// The data type of the column.
-	Type string `json:"type"`
+	Type string `json:"type,omitempty"`
 	// The precision of the decimal type (i.e. the number of digits in the number).
-	Precision int32 `json:"precision"`
+	Precision int32 `json:"precision,omitempty"`
 	// The scale of the decimal type (i.e. the number of digits to the right of the decimal point).
-	Scale int32 `json:"scale"`
+	Scale int32 `json:"scale,omitempty"`
 }
 
 // NewDecimalType instantiates a new DecimalType object

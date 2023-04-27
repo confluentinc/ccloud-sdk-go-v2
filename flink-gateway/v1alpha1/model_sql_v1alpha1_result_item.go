@@ -37,7 +37,7 @@ import (
 type SqlV1alpha1ResultItem struct {
 	// The kind of change that a row can describe in a changelog:  `0`: represents `INSERT` (`+I`), i.e. insertion operation;  `1`: represents `UPDATE_BEFORE` (`-U`), i.e. update operation with the previous content of the updated row. This kind should occur together with `UPDATE_AFTER` for modelling an update that needs to retract the previous row first. It is useful in cases of a non-idempotent update, i.e., an update of a row that is not  uniquely identifiable by a key;  `2`: represents `UPDATE_AFTER` (`+U`), i.e. update operation with new content of the updated row; This kind CAN occur together with `UPDATE_BEFORE` for modelling an update that needs to retract the previous row first or it describes an idempotent update, i.e., an update of a row that is uniquely identifiable by a key;  `3`: represents `DELETE` (`-D`), i.e. deletion operation;  Defaults to `0`. 
 	Op *int32 `json:"op,omitempty"`
-	Row SqlV1alpha1ResultItemRow `json:"row"`
+	Row SqlV1alpha1ResultItemRow `json:"row,omitempty"`
 }
 
 // NewSqlV1alpha1ResultItem instantiates a new SqlV1alpha1ResultItem object

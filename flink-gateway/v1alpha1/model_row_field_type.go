@@ -36,8 +36,8 @@ import (
 // RowFieldType struct for RowFieldType
 type RowFieldType struct {
 	// The name of the field.
-	Name string `json:"name"`
-	Type DataType `json:"type"`
+	Name string `json:"name,omitempty"`
+	Type DataType `json:"type,omitempty"`
 }
 
 // NewRowFieldType instantiates a new RowFieldType object

@@ -36,9 +36,9 @@ import (
 // IntervalYearMonthType struct for IntervalYearMonthType
 type IntervalYearMonthType struct {
 	// Indicates whether values in this column can be null.
-	Nullable bool `json:"nullable"`
+	Nullable bool `json:"nullable,omitempty"`
 	// The data type of the column.
-	Type string `json:"type"`
+	Type string `json:"type,omitempty"`
 	// The resolution for the interval
 	Resolution *string `json:"resolution,omitempty"`
 }

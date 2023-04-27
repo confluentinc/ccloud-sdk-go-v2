@@ -36,7 +36,7 @@ import (
 // BaseType struct for BaseType
 type BaseType struct {
 	// Indicates whether values in this column can be null.
-	Nullable bool `json:"nullable"`
+	Nullable bool `json:"nullable,omitempty"`
 }
 
 // NewBaseType instantiates a new BaseType object

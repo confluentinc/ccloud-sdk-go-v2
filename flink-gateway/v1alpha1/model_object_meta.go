@@ -37,7 +37,7 @@ import (
 // ObjectMeta The metadata of the statement.
 type ObjectMeta struct {
 	// Self is a Uniform Resource Locator (URL) at which an object can be addressed. This URL encodes the service location, API version, and other particulars necessary to locate the resource at a point in time
-	Self string `json:"self"`
+	Self string `json:"self,omitempty"`
 	// The date and time at which this object was created. It is represented in RFC3339 format and is in UTC.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// The date and time at which this object was last updated. It is represented in RFC3339 format and is in UTC.

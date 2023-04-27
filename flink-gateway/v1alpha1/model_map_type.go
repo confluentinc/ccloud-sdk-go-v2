@@ -36,13 +36,13 @@ import (
 // MapType struct for MapType
 type MapType struct {
 	// Indicates whether values in this column can be null.
-	Nullable bool `json:"nullable"`
+	Nullable bool `json:"nullable,omitempty"`
 	// The data type of the column.
-	Type string `json:"type"`
+	Type string `json:"type,omitempty"`
 	// The type of the key in the map.
-	KeyType DataType `json:"key_type"`
+	KeyType DataType `json:"key_type,omitempty"`
 	// The type of the value in the map.
-	ValueType DataType `json:"value_type"`
+	ValueType DataType `json:"value_type,omitempty"`
 }
 
 // NewMapType instantiates a new MapType object

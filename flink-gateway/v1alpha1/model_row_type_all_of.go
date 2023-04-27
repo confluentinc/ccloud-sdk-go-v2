@@ -38,7 +38,7 @@ type RowTypeAllOf struct {
 	// The data type of the column.
 	Type *string `json:"type,omitempty"`
 	// The fields of the row. Can be of type [INTEGER, DECIMAL, CHARACTER, ROW, ARRAY, TIMESTAMP, MAP<INT, STRING>]
-	Fields []RowFieldType `json:"fields"`
+	Fields []RowFieldType `json:"fields,omitempty"`
 }
 
 // NewRowTypeAllOf instantiates a new RowTypeAllOf object

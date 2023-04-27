@@ -36,12 +36,12 @@ import (
 // SqlV1alpha1StatementList `Statement` represents a core resource used to model SQL statements for execution. A statement generalizes DDL, DML, DQL, etc., but doesn’t attempt to handle session management or any higher-level functionality. The API allows you to list, create, read, and delete your statements. ## The Statements Model <SchemaDefinition schemaRef=\"#/components/schemas/sql.v1alpha1.Statement\" />
 type SqlV1alpha1StatementList struct {
 	// APIVersion defines the schema version of this representation of a resource.
-	ApiVersion string `json:"api_version"`
+	ApiVersion string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
-	Kind string `json:"kind"`
-	Metadata ListMeta `json:"metadata"`
+	Kind string `json:"kind,omitempty"`
+	Metadata ListMeta `json:"metadata,omitempty"`
 	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
-	Data []SqlV1alpha1Statement `json:"data"`
+	Data []SqlV1alpha1Statement `json:"data,omitempty"`
 }
 
 // NewSqlV1alpha1StatementList instantiates a new SqlV1alpha1StatementList object

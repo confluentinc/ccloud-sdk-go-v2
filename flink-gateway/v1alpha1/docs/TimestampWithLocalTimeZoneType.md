@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Nullable** | **bool** | Indicates whether values in this column can be null. | 
 **Type** | **string** | The data type of the column. | 
+**Precision** | Pointer to **int32** | The precision of the decimal type (i.e. the number of digits in the number). | [optional] 
 
 ## Methods
 
@@ -65,6 +66,31 @@ and a boolean to check if the value has been set.
 
 SetType sets Type field to given value.
 
+
+### GetPrecision
+
+`func (o *TimestampWithLocalTimeZoneType) GetPrecision() int32`
+
+GetPrecision returns the Precision field if non-nil, zero value otherwise.
+
+### GetPrecisionOk
+
+`func (o *TimestampWithLocalTimeZoneType) GetPrecisionOk() (*int32, bool)`
+
+GetPrecisionOk returns a tuple with the Precision field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrecision
+
+`func (o *TimestampWithLocalTimeZoneType) SetPrecision(v int32)`
+
+SetPrecision sets Precision field to given value.
+
+### HasPrecision
+
+`func (o *TimestampWithLocalTimeZoneType) HasPrecision() bool`
+
+HasPrecision returns a boolean if a field has been set.
 
 
 ### AsDataType

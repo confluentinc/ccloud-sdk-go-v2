@@ -36,9 +36,11 @@ import (
 // VarbinaryType struct for VarbinaryType
 type VarbinaryType struct {
 	// Indicates whether values in this column can be null.
-	Nullable bool `json:"nullable"`
+	Nullable bool `json:"nullable,omitempty"`
 	// The data type of the column.
-	Type string `json:"type"`
+	Type string `json:"type,omitempty"`
+	// The length of the column.
+	Length *int32 `json:"length,omitempty"`
 }
 
 // NewVarbinaryType instantiates a new VarbinaryType object
@@ -108,10 +110,43 @@ func (o *VarbinaryType) SetType(v string) {
 	o.Type = v
 }
 
+// GetLength returns the Length field value if set, zero value otherwise.
+func (o *VarbinaryType) GetLength() int32 {
+	if o == nil || o.Length == nil {
+		var ret int32
+		return ret
+	}
+	return *o.Length
+}
+
+// GetLengthOk returns a tuple with the Length field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VarbinaryType) GetLengthOk() (*int32, bool) {
+	if o == nil || o.Length == nil {
+		return nil, false
+	}
+	return o.Length, true
+}
+
+// HasLength returns a boolean if a field has been set.
+func (o *VarbinaryType) HasLength() bool {
+	if o != nil && o.Length != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLength gets a reference to the given int32 and assigns it to the Length field.
+func (o *VarbinaryType) SetLength(v int32) {
+	o.Length = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *VarbinaryType) Redact() {
     o.recurseRedact(&o.Nullable)
     o.recurseRedact(&o.Type)
+    o.recurseRedact(o.Length)
 }
 
 func (o *VarbinaryType) recurseRedact(v interface{}) {
@@ -151,6 +186,9 @@ func (o VarbinaryType) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["type"] = o.Type
+	}
+	if o.Length != nil {
+		toSerialize["length"] = o.Length
 	}
 	return json.Marshal(toSerialize)
 }

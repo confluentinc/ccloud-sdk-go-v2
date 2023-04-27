@@ -36,9 +36,9 @@ import (
 // TimeWithoutTimeZoneType struct for TimeWithoutTimeZoneType
 type TimeWithoutTimeZoneType struct {
 	// Indicates whether values in this column can be null.
-	Nullable bool `json:"nullable"`
+	Nullable bool `json:"nullable,omitempty"`
 	// The data type of the column.
-	Type string `json:"type"`
+	Type string `json:"type,omitempty"`
 	// The scale of the time type.
 	Scale *int32 `json:"scale,omitempty"`
 	// The precision of the time type.

@@ -37,6 +37,8 @@ import (
 type BinaryTypeAllOf struct {
 	// The data type of the column.
 	Type *string `json:"type,omitempty"`
+	// The length of the column.
+	Length *int32 `json:"length,omitempty"`
 }
 
 // NewBinaryTypeAllOf instantiates a new BinaryTypeAllOf object
@@ -88,9 +90,42 @@ func (o *BinaryTypeAllOf) SetType(v string) {
 	o.Type = &v
 }
 
+// GetLength returns the Length field value if set, zero value otherwise.
+func (o *BinaryTypeAllOf) GetLength() int32 {
+	if o == nil || o.Length == nil {
+		var ret int32
+		return ret
+	}
+	return *o.Length
+}
+
+// GetLengthOk returns a tuple with the Length field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BinaryTypeAllOf) GetLengthOk() (*int32, bool) {
+	if o == nil || o.Length == nil {
+		return nil, false
+	}
+	return o.Length, true
+}
+
+// HasLength returns a boolean if a field has been set.
+func (o *BinaryTypeAllOf) HasLength() bool {
+	if o != nil && o.Length != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLength gets a reference to the given int32 and assigns it to the Length field.
+func (o *BinaryTypeAllOf) SetLength(v int32) {
+	o.Length = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *BinaryTypeAllOf) Redact() {
     o.recurseRedact(o.Type)
+    o.recurseRedact(o.Length)
 }
 
 func (o *BinaryTypeAllOf) recurseRedact(v interface{}) {
@@ -127,6 +162,9 @@ func (o BinaryTypeAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
 		toSerialize["type"] = o.Type
+	}
+	if o.Length != nil {
+		toSerialize["length"] = o.Length
 	}
 	return json.Marshal(toSerialize)
 }

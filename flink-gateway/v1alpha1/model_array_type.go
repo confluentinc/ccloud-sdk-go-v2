@@ -36,11 +36,11 @@ import (
 // ArrayType struct for ArrayType
 type ArrayType struct {
 	// Indicates whether values in this column can be null.
-	Nullable bool `json:"nullable"`
+	Nullable bool `json:"nullable,omitempty"`
 	// The data type of the column.
-	Type string `json:"type"`
+	Type string `json:"type,omitempty"`
 	// The type of the elements in the array.
-	ArrayElementType DataType `json:"array_element_type"`
+	ArrayElementType DataType `json:"array_element_type,omitempty"`
 }
 
 // NewArrayType instantiates a new ArrayType object

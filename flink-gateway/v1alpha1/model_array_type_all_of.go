@@ -38,7 +38,7 @@ type ArrayTypeAllOf struct {
 	// The data type of the column.
 	Type *string `json:"type,omitempty"`
 	// The type of the elements in the array.
-	ArrayElementType DataType `json:"array_element_type"`
+	ArrayElementType DataType `json:"array_element_type,omitempty"`
 }
 
 // NewArrayTypeAllOf instantiates a new ArrayTypeAllOf object

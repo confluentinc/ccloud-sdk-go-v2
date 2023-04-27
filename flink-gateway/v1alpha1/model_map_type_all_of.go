@@ -38,9 +38,9 @@ type MapTypeAllOf struct {
 	// The data type of the column.
 	Type *string `json:"type,omitempty"`
 	// The type of the key in the map.
-	KeyType DataType `json:"key_type"`
+	KeyType DataType `json:"key_type,omitempty"`
 	// The type of the value in the map.
-	ValueType DataType `json:"value_type"`
+	ValueType DataType `json:"value_type,omitempty"`
 }
 
 // NewMapTypeAllOf instantiates a new MapTypeAllOf object

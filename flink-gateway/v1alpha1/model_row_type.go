@@ -36,11 +36,11 @@ import (
 // RowType struct for RowType
 type RowType struct {
 	// Indicates whether values in this column can be null.
-	Nullable bool `json:"nullable"`
+	Nullable bool `json:"nullable,omitempty"`
 	// The data type of the column.
-	Type string `json:"type"`
+	Type string `json:"type,omitempty"`
 	// The fields of the row. Can be of type [INTEGER, DECIMAL, CHARACTER, ROW, ARRAY, TIMESTAMP, MAP<INT, STRING>]
-	Fields []RowFieldType `json:"fields"`
+	Fields []RowFieldType `json:"fields,omitempty"`
 }
 
 // NewRowType instantiates a new RowType object

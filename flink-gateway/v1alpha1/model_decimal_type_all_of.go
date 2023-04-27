@@ -38,9 +38,9 @@ type DecimalTypeAllOf struct {
 	// The data type of the column.
 	Type *string `json:"type,omitempty"`
 	// The precision of the decimal type (i.e. the number of digits in the number).
-	Precision int32 `json:"precision"`
+	Precision int32 `json:"precision,omitempty"`
 	// The scale of the decimal type (i.e. the number of digits to the right of the decimal point).
-	Scale int32 `json:"scale"`
+	Scale int32 `json:"scale,omitempty"`
 }
 
 // NewDecimalTypeAllOf instantiates a new DecimalTypeAllOf object

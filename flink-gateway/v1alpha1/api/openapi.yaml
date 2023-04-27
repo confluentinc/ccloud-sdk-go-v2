@@ -1897,7 +1897,7 @@ components:
           description: Self is a Uniform Resource Locator (URL) at which an object
             can be addressed. This URL encodes the service location, API version,
             and other particulars necessary to locate the resource at a point in time
-          example: https://api.confluent.cloud/v2/kafka-clusters/lkc-f3a90de
+          example: https://flink.us-west1.aws.confluent.cloud/sql/v1alpha1/environments/env-123/statements/my-statement
           format: uri
           type: string
         created_at:
@@ -1922,7 +1922,7 @@ components:
           description: Self is a Uniform Resource Locator (URL) at which an object
             can be addressed. This URL encodes the service location, API version,
             and other particulars necessary to locate the resource at a point in time
-          example: https://flink.us-west1.aws.confluent.cloud/sql/v1alpha1/environments/env_id/statements
+          example: https://flink.us-west1.aws.confluent.cloud/sql/v1alpha1/environments/env-123/statements
           type: string
         next:
           description: An opaque token that can be sent to get the next batch of results
@@ -1936,7 +1936,7 @@ components:
           description: Self is a Uniform Resource Locator (URL) at which an object
             can be addressed. This URL encodes the service location, API version,
             and other particulars necessary to locate the resource at a point in time
-          example: https://flink.us-west1.aws.confluent.cloud/sql/v1alpha1/environments/env_id/statements
+          example: https://flink.us-west1.aws.confluent.cloud/sql/v1alpha1/environments/env-123/statements
           type: string
         next:
           description: An opaque token that can be sent to get the next batch of results
@@ -2185,6 +2185,11 @@ components:
           enum:
           - CHAR
           type: string
+        length:
+          description: The length of the column.
+          format: int32
+          minimum: 0
+          type: integer
     VarcharType_allOf:
       properties:
         type:
@@ -2192,6 +2197,11 @@ components:
           enum:
           - VARCHAR
           type: string
+        length:
+          description: The length of the column.
+          format: int32
+          minimum: 0
+          type: integer
     BooleanType_allOf:
       properties:
         type:
@@ -2206,6 +2216,11 @@ components:
           enum:
           - BINARY
           type: string
+        length:
+          description: The length of the column.
+          format: int32
+          minimum: 0
+          type: integer
     VarbinaryType_allOf:
       properties:
         type:
@@ -2213,6 +2228,11 @@ components:
           enum:
           - VARBINARY
           type: string
+        length:
+          description: The length of the column.
+          format: int32
+          minimum: 0
+          type: integer
     DecimalType_allOf:
       properties:
         type:
@@ -2326,6 +2346,13 @@ components:
           enum:
           - TIMESTAMP_WITH_LOCAL_TIME_ZONE
           type: string
+        precision:
+          description: The precision of the decimal type (i.e. the number of digits
+            in the number).
+          format: int32
+          maximum: 38
+          minimum: 0
+          type: integer
     IntervalYearMonthType_allOf:
       properties:
         type:

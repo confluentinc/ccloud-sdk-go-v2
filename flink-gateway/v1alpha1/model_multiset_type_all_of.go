@@ -38,7 +38,7 @@ type MultisetTypeAllOf struct {
 	// The data type of the column.
 	Type *string `json:"type,omitempty"`
 	// The type of the elements in the multiset.
-	MultisetElementType DataType `json:"multiset_element_type"`
+	MultisetElementType DataType `json:"multiset_element_type,omitempty"`
 }
 
 // NewMultisetTypeAllOf instantiates a new MultisetTypeAllOf object

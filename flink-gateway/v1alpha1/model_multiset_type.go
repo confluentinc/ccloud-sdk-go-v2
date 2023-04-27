@@ -36,11 +36,11 @@ import (
 // MultisetType struct for MultisetType
 type MultisetType struct {
 	// Indicates whether values in this column can be null.
-	Nullable bool `json:"nullable"`
+	Nullable bool `json:"nullable,omitempty"`
 	// The data type of the column.
-	Type string `json:"type"`
+	Type string `json:"type,omitempty"`
 	// The type of the elements in the multiset.
-	MultisetElementType DataType `json:"multiset_element_type"`
+	MultisetElementType DataType `json:"multiset_element_type,omitempty"`
 }
 
 // NewMultisetType instantiates a new MultisetType object
