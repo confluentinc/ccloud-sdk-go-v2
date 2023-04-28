@@ -38,7 +38,7 @@ import (
 type ResultListMeta struct {
 	// Self is a Uniform Resource Locator (URL) at which an object can be addressed. This URL encodes the service location, API version, and other particulars necessary to locate the resource at a point in time
 	Self *string `json:"self,omitempty"`
-	// An opaque token that can be sent to get the next batch of results
+	// A URL that can be followed to get the next batch of results.
 	Next *string `json:"next,omitempty"`
 	// The date and time at which this object was created. It is represented in RFC3339 format and is in UTC.
 	CreatedAt *time.Time `json:"created_at,omitempty"`

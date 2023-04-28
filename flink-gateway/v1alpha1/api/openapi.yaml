@@ -349,7 +349,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/sql.v1alpha1.StatementList'
-          description: Statement.
+          description: Statements.
           headers:
             X-Request-Id:
               description: The unique identifier for the API request.
@@ -1423,6 +1423,257 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     x-request-access-name: SQL API v1alpha1
+  /sql/v1alpha1/environments/{environment_id}/statements/{statement_name}/exceptions:
+    get:
+      description: |-
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1alpha1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1alpha1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1alpha1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1alpha1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        Retrieve a list of the 10 most recent statement exceptions.
+      operationId: getSqlV1alpha1StatementExceptions
+      parameters:
+      - description: The unique identifier for the environment.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the statement.
+        explode: false
+        in: path
+        name: statement_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sql.v1alpha1.StatementExceptionList'
+          description: Statement Exceptions.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - api-key: []
+      summary: List of Statements
+      tags:
+      - StatementExceptions (sql/v1alpha1)
+      x-request-access-name: SQL API v1alpha1
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/%7Benvironment_id%7D/statements/%7Bstatement_name%7D/exceptions \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/%7Benvironment_id%7D/statements/%7Bstatement_name%7D/exceptions")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/%7Benvironment_id%7D/statements/%7Bstatement_name%7D/exceptions\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/sql/v1alpha1/environments/%7Benvironment_id%7D/statements/%7Bstatement_name%7D/exceptions", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "flink.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/sql/v1alpha1/environments/%7Benvironment_id%7D/statements/%7Bstatement_name%7D/exceptions",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/%7Benvironment_id%7D/statements/%7Bstatement_name%7D/exceptions");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/%7Benvironment_id%7D/statements/%7Bstatement_name%7D/exceptions");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+    x-request-access-name: SQL API v1alpha1
 components:
   responses:
     BadRequestError:
@@ -1925,8 +2176,8 @@ components:
           example: https://flink.us-west1.aws.confluent.cloud/sql/v1alpha1/environments/env-123/statements
           type: string
         next:
-          description: An opaque token that can be sent to get the next batch of results
-          example: next_token
+          description: A URL that can be followed to get the next batch of results.
+          example: https://flink.us-west1.aws.confluent.cloud/sql/v1alpha1/environments/env-123/statements?page_token=UvmDWOB1iwfAIBPj6EYb
           type: string
       type: object
     ResultListMeta:
@@ -1939,8 +2190,8 @@ components:
           example: https://flink.us-west1.aws.confluent.cloud/sql/v1alpha1/environments/env-123/statements
           type: string
         next:
-          description: An opaque token that can be sent to get the next batch of results
-          example: next_token
+          description: A URL that can be followed to get the next batch of results.
+          example: https://flink.us-west1.aws.confluent.cloud/sql/v1alpha1/environments/env-123/statements?page_token=UvmDWOB1iwfAIBPj6EYb
           type: string
         created_at:
           description: The date and time at which this object was created. It is represented
@@ -2177,6 +2428,88 @@ components:
           type: string
         source:
           $ref: '#/components/schemas/Error_source'
+      type: object
+    sql.v1alpha1.StatementExceptionList:
+      description: |-
+        StatementExceptionList is a list of exceptions coming from FAILED or FAILING Statements created by
+        the SQL Statements API.
+      example:
+        metadata: ""
+        data:
+        - stacktrace: "java.lang.RuntimeException: An error occurred\n\tat org.apache.flink.streaming.runtime.tasks.SourceStreamTask.run(SourceStreamTask.java:84)\n\
+            \tat org.apache.flink.streaming.runtime.tasks.StreamTask.invoke(StreamTask.java:374)\n\
+            \tat org.apache.flink.runtime.taskmanager.Task.doRun(Task.java:784)\n\t\
+            at org.apache.flink.runtime.taskmanager.Task.run(Task.java:571)\n\tat\
+            \ java.lang.Thread.run(Thread.java:748)\n"
+          name: java.lang.RuntimeException
+          timestamp: 2023-03-31T00:00:00Z
+        - stacktrace: "java.lang.RuntimeException: An error occurred\n\tat org.apache.flink.streaming.runtime.tasks.SourceStreamTask.run(SourceStreamTask.java:84)\n\
+            \tat org.apache.flink.streaming.runtime.tasks.StreamTask.invoke(StreamTask.java:374)\n\
+            \tat org.apache.flink.runtime.taskmanager.Task.doRun(Task.java:784)\n\t\
+            at org.apache.flink.runtime.taskmanager.Task.run(Task.java:571)\n\tat\
+            \ java.lang.Thread.run(Thread.java:748)\n"
+          name: java.lang.RuntimeException
+          timestamp: 2023-03-31T00:00:00Z
+        kind: StatementExceptionList
+        api_version: sql/v1alpha1
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - sql/v1alpha1
+          example: sql/v1alpha1
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - StatementExceptionList
+          type: string
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/ListMeta'
+        data:
+          description: A data property that contains an array of resource items. Each
+            entry in the array is a separate resource.
+          items:
+            $ref: '#/components/schemas/sql.v1alpha1.StatementException'
+          type: array
+      required:
+      - api_version
+      - data
+      - kind
+      - metadata
+      type: object
+    sql.v1alpha1.StatementException:
+      example:
+        stacktrace: "java.lang.RuntimeException: An error occurred\n\tat org.apache.flink.streaming.runtime.tasks.SourceStreamTask.run(SourceStreamTask.java:84)\n\
+          \tat org.apache.flink.streaming.runtime.tasks.StreamTask.invoke(StreamTask.java:374)\n\
+          \tat org.apache.flink.runtime.taskmanager.Task.doRun(Task.java:784)\n\t\
+          at org.apache.flink.runtime.taskmanager.Task.run(Task.java:571)\n\tat java.lang.Thread.run(Thread.java:748)\n"
+        name: java.lang.RuntimeException
+        timestamp: 2023-03-31T00:00:00Z
+      properties:
+        name:
+          description: Name of the SQL statement exception.
+          example: java.lang.RuntimeException
+          readOnly: true
+          type: string
+        stacktrace:
+          description: Stack trace of the statement exception.
+          example: "java.lang.RuntimeException: An error occurred\n\tat org.apache.flink.streaming.runtime.tasks.SourceStreamTask.run(SourceStreamTask.java:84)\n\
+            \tat org.apache.flink.streaming.runtime.tasks.StreamTask.invoke(StreamTask.java:374)\n\
+            \tat org.apache.flink.runtime.taskmanager.Task.doRun(Task.java:784)\n\t\
+            at org.apache.flink.runtime.taskmanager.Task.run(Task.java:571)\n\tat\
+            \ java.lang.Thread.run(Thread.java:748)\n"
+          readOnly: true
+          type: string
+        timestamp:
+          description: The date and time at which the exception occurred. It is represented
+            in RFC3339 format and is in UTC.
+          example: 2023-03-31T00:00:00Z
+          format: date-time
+          readOnly: true
+          type: string
       type: object
     CharType_allOf:
       properties:

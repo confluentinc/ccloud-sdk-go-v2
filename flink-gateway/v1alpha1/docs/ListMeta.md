@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Self** | Pointer to **string** | Self is a Uniform Resource Locator (URL) at which an object can be addressed. This URL encodes the service location, API version, and other particulars necessary to locate the resource at a point in time | [optional] 
-**Next** | Pointer to **string** | An opaque token that can be sent to get the next batch of results | [optional] 
+**Next** | Pointer to **string** | A URL that can be followed to get the next batch of results. | [optional] 
 
 ## Methods
 
