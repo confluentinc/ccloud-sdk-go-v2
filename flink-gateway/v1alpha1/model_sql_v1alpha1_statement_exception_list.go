@@ -39,7 +39,7 @@ type SqlV1alpha1StatementExceptionList struct {
 	ApiVersion string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
 	Kind string `json:"kind,omitempty"`
-	Metadata ListMeta `json:"metadata,omitempty"`
+	Metadata ExceptionListMeta `json:"metadata,omitempty"`
 	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
 	Data []SqlV1alpha1StatementException `json:"data,omitempty"`
 }
@@ -48,7 +48,7 @@ type SqlV1alpha1StatementExceptionList struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSqlV1alpha1StatementExceptionList(apiVersion string, kind string, metadata ListMeta, data []SqlV1alpha1StatementException) *SqlV1alpha1StatementExceptionList {
+func NewSqlV1alpha1StatementExceptionList(apiVersion string, kind string, metadata ExceptionListMeta, data []SqlV1alpha1StatementException) *SqlV1alpha1StatementExceptionList {
 	this := SqlV1alpha1StatementExceptionList{}
 	this.ApiVersion = apiVersion
 	this.Kind = kind
@@ -114,9 +114,9 @@ func (o *SqlV1alpha1StatementExceptionList) SetKind(v string) {
 }
 
 // GetMetadata returns the Metadata field value
-func (o *SqlV1alpha1StatementExceptionList) GetMetadata() ListMeta {
+func (o *SqlV1alpha1StatementExceptionList) GetMetadata() ExceptionListMeta {
 	if o == nil {
-		var ret ListMeta
+		var ret ExceptionListMeta
 		return ret
 	}
 
@@ -125,7 +125,7 @@ func (o *SqlV1alpha1StatementExceptionList) GetMetadata() ListMeta {
 
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
-func (o *SqlV1alpha1StatementExceptionList) GetMetadataOk() (*ListMeta, bool) {
+func (o *SqlV1alpha1StatementExceptionList) GetMetadataOk() (*ExceptionListMeta, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -133,7 +133,7 @@ func (o *SqlV1alpha1StatementExceptionList) GetMetadataOk() (*ListMeta, bool) {
 }
 
 // SetMetadata sets field value
-func (o *SqlV1alpha1StatementExceptionList) SetMetadata(v ListMeta) {
+func (o *SqlV1alpha1StatementExceptionList) SetMetadata(v ExceptionListMeta) {
 	o.Metadata = v
 }
 

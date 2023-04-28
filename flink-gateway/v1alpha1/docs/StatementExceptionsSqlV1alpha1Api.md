@@ -4,7 +4,7 @@ All URIs are relative to *https://flink.region.provider.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetSqlV1alpha1StatementExceptions**](StatementExceptionsSqlV1alpha1Api.md#GetSqlV1alpha1StatementExceptions) | **Get** /sql/v1alpha1/environments/{environment_id}/statements/{statement_name}/exceptions | List of Statements
+[**GetSqlV1alpha1StatementExceptions**](StatementExceptionsSqlV1alpha1Api.md#GetSqlV1alpha1StatementExceptions) | **Get** /sql/v1alpha1/environments/{environment_id}/statements/{statement_name}/exceptions | List of Statement Exceptions
 
 
 
@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 > SqlV1alpha1StatementExceptionList GetSqlV1alpha1StatementExceptions(ctx, environmentId, statementName).Execute()
 
-List of Statements
+List of Statement Exceptions
 
 
 

@@ -6,14 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ApiVersion** | **string** | APIVersion defines the schema version of this representation of a resource. | 
 **Kind** | **string** | Kind defines the object this REST resource represents. | 
-**Metadata** | [**ListMeta**](ListMeta.md) |  | 
+**Metadata** | [**ExceptionListMeta**](ExceptionListMeta.md) |  | 
 **Data** | [**[]SqlV1alpha1StatementException**](SqlV1alpha1StatementException.md) | A data property that contains an array of resource items. Each entry in the array is a separate resource. | 
 
 ## Methods
 
 ### NewSqlV1alpha1StatementExceptionList
 
-`func NewSqlV1alpha1StatementExceptionList(apiVersion string, kind string, metadata ListMeta, data []SqlV1alpha1StatementException, ) *SqlV1alpha1StatementExceptionList`
+`func NewSqlV1alpha1StatementExceptionList(apiVersion string, kind string, metadata ExceptionListMeta, data []SqlV1alpha1StatementException, ) *SqlV1alpha1StatementExceptionList`
 
 NewSqlV1alpha1StatementExceptionList instantiates a new SqlV1alpha1StatementExceptionList object
 This constructor will assign default values to properties that have it defined,
@@ -70,20 +70,20 @@ SetKind sets Kind field to given value.
 
 ### GetMetadata
 
-`func (o *SqlV1alpha1StatementExceptionList) GetMetadata() ListMeta`
+`func (o *SqlV1alpha1StatementExceptionList) GetMetadata() ExceptionListMeta`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *SqlV1alpha1StatementExceptionList) GetMetadataOk() (*ListMeta, bool)`
+`func (o *SqlV1alpha1StatementExceptionList) GetMetadataOk() (*ExceptionListMeta, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *SqlV1alpha1StatementExceptionList) SetMetadata(v ListMeta)`
+`func (o *SqlV1alpha1StatementExceptionList) SetMetadata(v ExceptionListMeta)`
 
 SetMetadata sets Metadata field to given value.
 

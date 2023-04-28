@@ -42,7 +42,7 @@ var (
 type StatementExceptionsSqlV1alpha1Api interface {
 
 	/*
-	GetSqlV1alpha1StatementExceptions List of Statements
+	GetSqlV1alpha1StatementExceptions List of Statement Exceptions
 
 	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1alpha1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1alpha1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1alpha1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1alpha1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 Retrieve a list of the 10 most recent statement exceptions.
@@ -75,7 +75,7 @@ func (r ApiGetSqlV1alpha1StatementExceptionsRequest) Execute() (SqlV1alpha1State
 }
 
 /*
-GetSqlV1alpha1StatementExceptions List of Statements
+GetSqlV1alpha1StatementExceptions List of Statement Exceptions
 
 [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1alpha1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1alpha1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1alpha1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1alpha1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 Retrieve a list of the 10 most recent statement exceptions.

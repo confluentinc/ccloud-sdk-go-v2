@@ -79,7 +79,7 @@ All URIs are relative to *https://flink.region.provider.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*StatementExceptionsSqlV1alpha1Api* | [**GetSqlV1alpha1StatementExceptions**](docs/StatementExceptionsSqlV1alpha1Api.md#getsqlv1alpha1statementexceptions) | **Get** /sql/v1alpha1/environments/{environment_id}/statements/{statement_name}/exceptions | List of Statements
+*StatementExceptionsSqlV1alpha1Api* | [**GetSqlV1alpha1StatementExceptions**](docs/StatementExceptionsSqlV1alpha1Api.md#getsqlv1alpha1statementexceptions) | **Get** /sql/v1alpha1/environments/{environment_id}/statements/{statement_name}/exceptions | List of Statement Exceptions
 *StatementResultSqlV1alpha1Api* | [**GetSqlV1alpha1StatementResult**](docs/StatementResultSqlV1alpha1Api.md#getsqlv1alpha1statementresult) | **Get** /sql/v1alpha1/environments/{environment_id}/statements/{statement_name}/results | Read Statement Result
 *StatementsSqlV1alpha1Api* | [**CreateSqlV1alpha1Statement**](docs/StatementsSqlV1alpha1Api.md#createsqlv1alpha1statement) | **Post** /sql/v1alpha1/environments/{environment_id}/statements | Create a Statement
 *StatementsSqlV1alpha1Api* | [**DeleteSqlV1alpha1Statement**](docs/StatementsSqlV1alpha1Api.md#deletesqlv1alpha1statement) | **Delete** /sql/v1alpha1/environments/{environment_id}/statements/{statement_name} | Delete a Statement
@@ -110,6 +110,7 @@ Class | Method | HTTP request | Description
  - [DoubleTypeAllOf](docs/DoubleTypeAllOf.md)
  - [Error](docs/Error.md)
  - [ErrorSource](docs/ErrorSource.md)
+ - [ExceptionListMeta](docs/ExceptionListMeta.md)
  - [Failure](docs/Failure.md)
  - [FloatType](docs/FloatType.md)
  - [FloatTypeAllOf](docs/FloatTypeAllOf.md)

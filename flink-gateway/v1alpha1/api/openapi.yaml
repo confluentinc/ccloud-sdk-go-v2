@@ -1585,7 +1585,7 @@ paths:
               style: simple
       security:
       - api-key: []
-      summary: List of Statements
+      summary: List of Statement Exceptions
       tags:
       - StatementExceptions (sql/v1alpha1)
       x-request-access-name: SQL API v1alpha1
@@ -2177,7 +2177,7 @@ components:
           type: string
         next:
           description: A URL that can be followed to get the next batch of results.
-          example: https://flink.us-west1.aws.confluent.cloud/sql/v1alpha1/environments/env-123/statements?page_token=UvmDWOB1iwfAIBPj6EYb
+          example: https://flink.us-west1.aws.confluent.cloud/sql/v1alpha1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb
           type: string
       type: object
     ResultListMeta:
@@ -2191,7 +2191,7 @@ components:
           type: string
         next:
           description: A URL that can be followed to get the next batch of results.
-          example: https://flink.us-west1.aws.confluent.cloud/sql/v1alpha1/environments/env-123/statements?page_token=UvmDWOB1iwfAIBPj6EYb
+          example: https://flink.us-west1.aws.confluent.cloud/sql/v1alpha1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb
           type: string
         created_at:
           description: The date and time at which this object was created. It is represented
@@ -2429,6 +2429,16 @@ components:
         source:
           $ref: '#/components/schemas/Error_source'
       type: object
+    ExceptionListMeta:
+      description: ListMeta describes metadata that resource collections may have
+      properties:
+        self:
+          description: Self is a Uniform Resource Locator (URL) at which an object
+            can be addressed. This URL encodes the service location, API version,
+            and other particulars necessary to locate the resource at a point in time
+          example: https://flink.us-west1.aws.confluent.cloud/sql/v1alpha1/environments/env-123/statements/sql123/exceptions
+          type: string
+      type: object
     sql.v1alpha1.StatementExceptionList:
       description: |-
         StatementExceptionList is a list of exceptions coming from FAILED or FAILING Statements created by
@@ -2467,7 +2477,7 @@ components:
           type: string
         metadata:
           allOf:
-          - $ref: '#/components/schemas/ListMeta'
+          - $ref: '#/components/schemas/ExceptionListMeta'
         data:
           description: A data property that contains an array of resource items. Each
             entry in the array is a separate resource.
