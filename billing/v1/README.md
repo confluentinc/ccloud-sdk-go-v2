@@ -1,4 +1,4 @@
-# Go API client for v1alpha1
+# Go API client for v1
 
 Confluent Cloud Billing API
 
@@ -24,7 +24,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```golang
-import sw "./v1alpha1"
+import sw "./v1"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
@@ -80,21 +80,21 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*CostsBillingV1alpha1Api* | [**ListBillingV1alpha1Costs**](docs/CostsBillingV1alpha1Api.md#listbillingv1alpha1costs) | **Get** /billing/v1alpha1/costs | List of Costs
+*CostsBillingV1Api* | [**ListBillingV1Costs**](docs/CostsBillingV1Api.md#listbillingv1costs) | **Get** /billing/v1/costs | List of Costs
 
 
 ## Documentation For Models
 
- - [BillingV1alpha1Cost](docs/BillingV1alpha1Cost.md)
- - [BillingV1alpha1CostList](docs/BillingV1alpha1CostList.md)
- - [EnvScopedObjectReference](docs/EnvScopedObjectReference.md)
+ - [BillingV1Cost](docs/BillingV1Cost.md)
+ - [BillingV1CostList](docs/BillingV1CostList.md)
+ - [BillingV1Environment](docs/BillingV1Environment.md)
+ - [BillingV1Resource](docs/BillingV1Resource.md)
  - [Error](docs/Error.md)
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
  - [ListMeta](docs/ListMeta.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
- - [TypedEnvScopedObjectReference](docs/TypedEnvScopedObjectReference.md)
 
 
 ## Documentation For Authorization

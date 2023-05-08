@@ -1,16 +1,16 @@
-# \CostsBillingV1alpha1Api
+# \CostsBillingV1Api
 
 All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ListBillingV1alpha1Costs**](CostsBillingV1alpha1Api.md#ListBillingV1alpha1Costs) | **Get** /billing/v1alpha1/costs | List of Costs
+[**ListBillingV1Costs**](CostsBillingV1Api.md#ListBillingV1Costs) | **Get** /billing/v1/costs | List of Costs
 
 
 
-## ListBillingV1alpha1Costs
+## ListBillingV1Costs
 
-> BillingV1alpha1CostList ListBillingV1alpha1Costs(ctx).StartDate(startDate).EndDate(endDate).PageSize(pageSize).PageToken(pageToken).Execute()
+> BillingV1CostList ListBillingV1Costs(ctx).StartDate(startDate).EndDate(endDate).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Costs
 
@@ -36,13 +36,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CostsBillingV1alpha1Api.ListBillingV1alpha1Costs(context.Background()).StartDate(startDate).EndDate(endDate).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.CostsBillingV1Api.ListBillingV1Costs(context.Background()).StartDate(startDate).EndDate(endDate).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CostsBillingV1alpha1Api.ListBillingV1alpha1Costs``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `CostsBillingV1Api.ListBillingV1Costs``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListBillingV1alpha1Costs`: BillingV1alpha1CostList
-    fmt.Fprintf(os.Stdout, "Response from `CostsBillingV1alpha1Api.ListBillingV1alpha1Costs`: %v\n", resp)
+    // response from `ListBillingV1Costs`: BillingV1CostList
+    fmt.Fprintf(os.Stdout, "Response from `CostsBillingV1Api.ListBillingV1Costs`: %v\n", resp)
 }
 ```
 
@@ -52,7 +52,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListBillingV1alpha1CostsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListBillingV1CostsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BillingV1alpha1CostList**](billing.v1alpha1.CostList.md)
+[**BillingV1CostList**](billing.v1.CostList.md)
 
 ### Authorization
 
