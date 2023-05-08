@@ -9,7 +9,7 @@ info:
   title: Billing API
   version: 0.0.1-alpha0
   x-api-id: 21c65edb-5671-44b4-a916-4e29d71b32fe
-  x-api-group: billing/v1alpha1
+  x-api-group: billing/v1
   x-audience: external-public
   x-tag-group: Billing API (%s)
 servers:
@@ -17,22 +17,22 @@ servers:
   url: https://api.confluent.cloud
 tags:
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cost API V1](https://img.shields.io/badge/-Request%20Access%20To%20Cost%20API%20V1-%23bc8540)](mailto:ccloud-api-access_billing-v1alpha1-early-access@confluent.io?subject=Request%20to%20join%20Billing%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20billing/v1alpha1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `Cost` objects represent the aggregated billing costs for an organization
 
 
     ## The Costs Model
-    <SchemaDefinition schemaRef="#/components/schemas/billing.v1alpha1.Cost" />
-  name: Costs (billing/v1alpha1)
+    <SchemaDefinition schemaRef="#/components/schemas/billing.v1.Cost" />
+  name: Costs (billing/v1)
 paths:
-  /billing/v1alpha1/costs:
+  /billing/v1/costs:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Cost API V1](https://img.shields.io/badge/-Request%20Access%20To%20Cost%20API%20V1-%23bc8540)](mailto:ccloud-api-access_billing-v1alpha1-early-access@confluent.io?subject=Request%20to%20join%20Billing%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20billing/v1alpha1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all costs.
-      operationId: listBillingV1alpha1Costs
+      operationId: listBillingV1Costs
       parameters:
       - description: Filter the results by exact match for start_date.
         example: 2022-10-12
@@ -78,25 +78,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/billing.v1alpha1.CostList'
-                - properties:
-                    data:
-                      items:
-                        properties:
-                          environment:
-                            example:
-                              id: env-00000
-                              related: https://api.confluent.cloud/v2/environments/env-00000
-                              resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
-                            nullable: true
-                          resource:
-                            example:
-                              id: lkc-c29js0
-                              related: https://api.confluent.cloud/cmk/v2/clusters/lkc-c29js0
-                              resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lkc-c29js0
-                            nullable: true
-                      type: array
-                  type: object
+                - $ref: '#/components/schemas/billing.v1.CostList'
           description: Cost.
           headers:
             X-Request-Id:
@@ -214,20 +196,19 @@ paths:
       - api-key: []
       summary: List of Costs
       tags:
-      - Costs (billing/v1alpha1)
-      x-request-access-name: Cost API V1
+      - Costs (billing/v1)
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/billing/v1alpha1/costs?start_date=SOME_STRING_VALUE&end_date=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/billing/v1/costs?start_date=2022-10-12&end_date=2022-10-15' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/billing/v1alpha1/costs?start_date=SOME_STRING_VALUE&end_date=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/billing/v1/costs?start_date=2022-10-12&end_date=2022-10-15")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -235,7 +216,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/billing/v1alpha1/costs?start_date=SOME_STRING_VALUE&end_date=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/billing/v1/costs?start_date=2022-10-12&end_date=2022-10-15\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -248,7 +229,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/billing/v1alpha1/costs?start_date=SOME_STRING_VALUE&end_date=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/billing/v1/costs?start_date=2022-10-12&end_date=2022-10-15", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -262,7 +243,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/billing/v1alpha1/costs?start_date=SOME_STRING_VALUE&end_date=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/billing/v1/costs?start_date=2022-10-12&end_date=2022-10-15",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -287,7 +268,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/billing/v1alpha1/costs?start_date=SOME_STRING_VALUE&end_date=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/billing/v1/costs?start_date=2022-10-12&end_date=2022-10-15");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -296,11 +277,10 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/billing/v1alpha1/costs?start_date=SOME_STRING_VALUE&end_date=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/billing/v1/costs?start_date=2022-10-12&end_date=2022-10-15");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Cost API V1
 components:
   responses:
     BadRequestError:
@@ -498,19 +478,19 @@ components:
             type: string
           style: simple
   schemas:
-    billing.v1alpha1.Cost:
+    billing.v1.Cost:
       description: |-
         `Cost` objects represent the aggregated billing costs for an organization
 
 
         ## The Costs Model
-        <SchemaDefinition schemaRef="#/components/schemas/billing.v1alpha1.Cost" />
+        <SchemaDefinition schemaRef="#/components/schemas/billing.v1.Cost" />
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
             of a resource.
           enum:
-          - billing/v1alpha1
+          - billing/v1
           readOnly: true
           type: string
         kind:
@@ -529,14 +509,6 @@ components:
           maxLength: 255
           readOnly: true
           type: string
-        metadata:
-          allOf:
-          - $ref: '#/components/schemas/ObjectMeta'
-          - properties:
-              self:
-                example: https://api.confluent.cloud/billing/v1alpha1/costs/c-12345
-              resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/cost=c-12345
         start_date:
           description: Start date of time period (inclusive) to retrieve billing costs.
             It is represented in RFC3339 format and is in UTC.
@@ -604,10 +576,6 @@ components:
           - GOVERNANCE_BASE
           - SCHEMA_REGISTRY
           - PROMO_CREDIT
-        resource_name:
-          description: Display name of the resource.
-          example: prod_cluster_1
-          type: string
         price:
           description: Price for the line item in dollars.
           example: 1.5
@@ -637,40 +605,58 @@ components:
           example: 79.0
           format: double
           type: number
-        environment:
-          allOf:
-          - $ref: '#/components/schemas/EnvScopedObjectReference'
-          description: The environment associated with this object. May be `null`
-            or omitted if not associated with a environment.
-          nullable: true
         resource:
           allOf:
-          - $ref: '#/components/schemas/TypedEnvScopedObjectReference'
-          description: |
-            The resource associated with this object. The resource can be one of Kafka Cluster ID (example: lkc-12345),
-            Connector ID (example: lcc-12345), Schema Registry Cluster ID (example: lsrc-12345), or ksqlDB Cluster ID
-            (example: lksqlc-12345).
-            May be null or omitted if not associated with a resource. For Cloud API keys, resource should be `null`.
-            [Learn more in Authentication](https://docs.confluent.io/cloud/current/api.html#section/Authentication).
+          - $ref: '#/components/schemas/billing.v1.Resource'
+          description: The resource for a given object
+      type: object
+    billing.v1.Resource:
+      description: |
+        The resource associated with this object. The resource can be one of Kafka Cluster ID (example: lkc-12345),
+        Connector ID (example:
+            lcc-12345), Schema Registry Cluster ID (example: lsrc-12345), or ksqlDB Cluster ID
+        (example: lksqlc-12345).
+        May be null or omitted if not associated with a resource.
+      properties:
+        id:
+          description: ID of the resource.
+          example: lkc-12345
+          type: string
+        display_name:
+          description: Display name of the resource.
+          example: prod-kafka-cluster
+          type: string
+        environment:
+          allOf:
+          - $ref: '#/components/schemas/billing.v1.Environment'
+          description: The environment associated with this resource
           nullable: true
-          x-immutable: true
+      type: object
+    billing.v1.Environment:
+      description: |
+        The details of the environment for a given resource.
+      properties:
+        id:
+          description: ID of the environment.
+          example: env-123
+          type: string
       type: object
     SearchFilter:
       description: Filter a collection by a string search
       type: string
-    billing.v1alpha1.CostList:
+    billing.v1.CostList:
       description: |-
         `Cost` objects represent the aggregated billing costs for an organization
 
 
         ## The Costs Model
-        <SchemaDefinition schemaRef="#/components/schemas/billing.v1alpha1.Cost" />
+        <SchemaDefinition schemaRef="#/components/schemas/billing.v1.Cost" />
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
             of a resource.
           enum:
-          - billing/v1alpha1
+          - billing/v1
           readOnly: true
           type: string
         kind:
@@ -684,23 +670,22 @@ components:
           - $ref: '#/components/schemas/ListMeta'
           - properties:
               first:
-                example: https://api.confluent.cloud/billing/v1alpha1/costs
+                example: https://api.confluent.cloud/billing/v1/costs
               last:
-                example: https://api.confluent.cloud/billing/v1alpha1/costs?page_token=bcAOehAY8F16YD84Z1wT
+                example: https://api.confluent.cloud/billing/v1/costs?page_token=bcAOehAY8F16YD84Z1wT
               prev:
-                example: https://api.confluent.cloud/billing/v1alpha1/costs?page_token=YIXRY97wWYmwzrax4dld
+                example: https://api.confluent.cloud/billing/v1/costs?page_token=YIXRY97wWYmwzrax4dld
               next:
-                example: https://api.confluent.cloud/billing/v1alpha1/costs?page_token=UvmDWOB1iwfAIBPj6EYb
+                example: https://api.confluent.cloud/billing/v1/costs?page_token=UvmDWOB1iwfAIBPj6EYb
         data:
           description: A data property that contains an array of resource items. Each
             entry in the array is a separate resource.
           items:
             allOf:
-            - $ref: '#/components/schemas/billing.v1alpha1.Cost'
+            - $ref: '#/components/schemas/billing.v1.Cost'
             - required:
               - end_date
               - id
-              - metadata
               - original_amount
               - start_date
               - unit
@@ -799,78 +784,6 @@ components:
           type: integer
       type: object
     ObjectReference:
-      description: ObjectReference provides information for you to locate the referred
-        object
-      properties:
-        id:
-          description: ID of the referred resource
-          maxLength: 255
-          minLength: 1
-          type: string
-        environment:
-          description: Environment of the referred resource, if env-scoped
-          maxLength: 255
-          minLength: 1
-          type: string
-        related:
-          description: API URL for accessing or modifying the referred object
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-        resource_name:
-          description: CRN reference to the referred resource
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-        api_version:
-          description: API group and version of the referred resource
-          minLength: 1
-          readOnly: true
-          type: string
-        kind:
-          description: Kind of the referred resource
-          minLength: 1
-          readOnly: true
-          type: string
-      required:
-      - id
-      - related
-      - resource_name
-      type: object
-    EnvScopedObjectReference:
-      description: ObjectReference provides information for you to locate the referred
-        object
-      properties:
-        id:
-          description: ID of the referred resource
-          maxLength: 255
-          minLength: 1
-          type: string
-        environment:
-          description: Environment of the referred resource, if env-scoped
-          maxLength: 255
-          minLength: 1
-          type: string
-        related:
-          description: API URL for accessing or modifying the referred object
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-        resource_name:
-          description: CRN reference to the referred resource
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-      required:
-      - id
-      - related
-      - resource_name
-      type: object
-    TypedEnvScopedObjectReference:
       description: ObjectReference provides information for you to locate the referred
         object
       properties:
