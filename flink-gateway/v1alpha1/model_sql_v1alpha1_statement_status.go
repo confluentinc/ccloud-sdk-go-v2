@@ -35,7 +35,7 @@ import (
 
 // SqlV1alpha1StatementStatus The status of the Statement
 type SqlV1alpha1StatementStatus struct {
-	// The lifecycle phase of the submitted SQL statement: PENDING: SQL statement is pending execution; RUNNING: SQL statement execution is in progress; COMPLETED: SQL statement is completed; DELETING: SQL statement deletion is in progress; FAILED: SQL statement execution has failed; 
+	// The lifecycle phase of the submitted SQL statement: PENDING: SQL statement is pending execution; RUNNING: SQL statement execution is in progress; COMPLETED: SQL statement is completed; DELETING: SQL statement deletion is in progress; FAILING: SQL statement is failing; FAILED: SQL statement execution has failed; 
 	Phase string `json:"phase,omitempty"`
 	ResultSchema *SqlV1alpha1ResultSchema `json:"result_schema,omitempty"`
 	// Description of a SQL statement phase.

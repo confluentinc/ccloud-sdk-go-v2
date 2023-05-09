@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Phase** | **string** | The lifecycle phase of the submitted SQL statement: PENDING: SQL statement is pending execution; RUNNING: SQL statement execution is in progress; COMPLETED: SQL statement is completed; DELETING: SQL statement deletion is in progress; FAILED: SQL statement execution has failed;  | [readonly] 
+**Phase** | **string** | The lifecycle phase of the submitted SQL statement: PENDING: SQL statement is pending execution; RUNNING: SQL statement execution is in progress; COMPLETED: SQL statement is completed; DELETING: SQL statement deletion is in progress; FAILING: SQL statement is failing; FAILED: SQL statement execution has failed;  | [readonly] 
 **ResultSchema** | Pointer to [**SqlV1alpha1ResultSchema**](SqlV1alpha1ResultSchema.md) |  | [optional] 
 **Detail** | Pointer to **string** | Description of a SQL statement phase. | [optional] [readonly] 
 

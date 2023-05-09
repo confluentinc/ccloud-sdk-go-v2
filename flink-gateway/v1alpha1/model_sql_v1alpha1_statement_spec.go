@@ -43,6 +43,8 @@ type SqlV1alpha1StatementSpec struct {
 	Properties *map[string]string `json:"properties,omitempty"`
 	// The id associated with the compute pool in context.
 	ComputePoolId *string `json:"compute_pool_id,omitempty"`
+	// The id associated with the identity pool in context.
+	IdentityPoolId *string `json:"identity_pool_id,omitempty"`
 }
 
 // NewSqlV1alpha1StatementSpec instantiates a new SqlV1alpha1StatementSpec object
@@ -190,12 +192,45 @@ func (o *SqlV1alpha1StatementSpec) SetComputePoolId(v string) {
 	o.ComputePoolId = &v
 }
 
+// GetIdentityPoolId returns the IdentityPoolId field value if set, zero value otherwise.
+func (o *SqlV1alpha1StatementSpec) GetIdentityPoolId() string {
+	if o == nil || o.IdentityPoolId == nil {
+		var ret string
+		return ret
+	}
+	return *o.IdentityPoolId
+}
+
+// GetIdentityPoolIdOk returns a tuple with the IdentityPoolId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SqlV1alpha1StatementSpec) GetIdentityPoolIdOk() (*string, bool) {
+	if o == nil || o.IdentityPoolId == nil {
+		return nil, false
+	}
+	return o.IdentityPoolId, true
+}
+
+// HasIdentityPoolId returns a boolean if a field has been set.
+func (o *SqlV1alpha1StatementSpec) HasIdentityPoolId() bool {
+	if o != nil && o.IdentityPoolId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIdentityPoolId gets a reference to the given string and assigns it to the IdentityPoolId field.
+func (o *SqlV1alpha1StatementSpec) SetIdentityPoolId(v string) {
+	o.IdentityPoolId = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *SqlV1alpha1StatementSpec) Redact() {
     o.recurseRedact(o.StatementName)
     o.recurseRedact(o.Statement)
     o.recurseRedact(o.Properties)
     o.recurseRedact(o.ComputePoolId)
+    o.recurseRedact(o.IdentityPoolId)
 }
 
 func (o *SqlV1alpha1StatementSpec) recurseRedact(v interface{}) {
@@ -241,6 +276,9 @@ func (o SqlV1alpha1StatementSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.ComputePoolId != nil {
 		toSerialize["compute_pool_id"] = o.ComputePoolId
+	}
+	if o.IdentityPoolId != nil {
+		toSerialize["identity_pool_id"] = o.IdentityPoolId
 	}
 	return json.Marshal(toSerialize)
 }

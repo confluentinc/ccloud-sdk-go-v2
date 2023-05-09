@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Statement** | Pointer to **string** | The raw SQL text statement. | [optional] 
 **Properties** | Pointer to **map[string]string** | A map (key-value pairs) of statement properties. | [optional] 
 **ComputePoolId** | Pointer to **string** | The id associated with the compute pool in context. | [optional] 
+**IdentityPoolId** | Pointer to **string** | The id associated with the identity pool in context. | [optional] 
 
 ## Methods
 
@@ -127,6 +128,31 @@ SetComputePoolId sets ComputePoolId field to given value.
 `func (o *SqlV1alpha1StatementSpec) HasComputePoolId() bool`
 
 HasComputePoolId returns a boolean if a field has been set.
+
+### GetIdentityPoolId
+
+`func (o *SqlV1alpha1StatementSpec) GetIdentityPoolId() string`
+
+GetIdentityPoolId returns the IdentityPoolId field if non-nil, zero value otherwise.
+
+### GetIdentityPoolIdOk
+
+`func (o *SqlV1alpha1StatementSpec) GetIdentityPoolIdOk() (*string, bool)`
+
+GetIdentityPoolIdOk returns a tuple with the IdentityPoolId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIdentityPoolId
+
+`func (o *SqlV1alpha1StatementSpec) SetIdentityPoolId(v string)`
+
+SetIdentityPoolId sets IdentityPoolId field to given value.
+
+### HasIdentityPoolId
+
+`func (o *SqlV1alpha1StatementSpec) HasIdentityPoolId() bool`
+
+HasIdentityPoolId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
