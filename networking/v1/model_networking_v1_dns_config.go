@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,7 +37,7 @@ import (
 // NetworkingV1DnsConfig The network DNS config
 type NetworkingV1DnsConfig struct {
 	// Network DNS resolution
-	Resolution string `json:"resolution"`
+	Resolution string `json:"resolution,omitempty"`
 }
 
 // NewNetworkingV1DnsConfig instantiates a new NetworkingV1DnsConfig object
@@ -121,7 +122,11 @@ func (o NetworkingV1DnsConfig) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["resolution"] = o.Resolution
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1DnsConfig struct {
@@ -152,7 +157,11 @@ func NewNullableNetworkingV1DnsConfig(val *NetworkingV1DnsConfig) *NullableNetwo
 }
 
 func (v NullableNetworkingV1DnsConfig) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1DnsConfig) UnmarshalJSON(src []byte) error {

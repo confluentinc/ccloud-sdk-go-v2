@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -315,7 +316,11 @@ func (o NetworkingV1TransitGatewayAttachmentUpdate) MarshalJSON() ([]byte, error
 	if o.Status != nil {
 		toSerialize["status"] = o.Status
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1TransitGatewayAttachmentUpdate struct {
@@ -346,7 +351,11 @@ func NewNullableNetworkingV1TransitGatewayAttachmentUpdate(val *NetworkingV1Tran
 }
 
 func (v NullableNetworkingV1TransitGatewayAttachmentUpdate) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1TransitGatewayAttachmentUpdate) UnmarshalJSON(src []byte) error {

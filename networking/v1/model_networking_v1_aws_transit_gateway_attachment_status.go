@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -38,7 +39,7 @@ type NetworkingV1AwsTransitGatewayAttachmentStatus struct {
 	// AWS Transit Gateway Attachment Status kind type.
 	Kind *string `json:"kind,omitempty"`
 	// The ID of the AWS Transit Gateway VPC Attachment that attaches Confluent VPC to Transit Gateway.
-	TransitGatewayAttachmentId string `json:"transit_gateway_attachment_id"`
+	TransitGatewayAttachmentId string `json:"transit_gateway_attachment_id,omitempty"`
 }
 
 // NewNetworkingV1AwsTransitGatewayAttachmentStatus instantiates a new NetworkingV1AwsTransitGatewayAttachmentStatus object
@@ -159,7 +160,11 @@ func (o NetworkingV1AwsTransitGatewayAttachmentStatus) MarshalJSON() ([]byte, er
 	if true {
 		toSerialize["transit_gateway_attachment_id"] = o.TransitGatewayAttachmentId
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1AwsTransitGatewayAttachmentStatus struct {
@@ -190,7 +195,11 @@ func NewNullableNetworkingV1AwsTransitGatewayAttachmentStatus(val *NetworkingV1A
 }
 
 func (v NullableNetworkingV1AwsTransitGatewayAttachmentStatus) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1AwsTransitGatewayAttachmentStatus) UnmarshalJSON(src []byte) error {

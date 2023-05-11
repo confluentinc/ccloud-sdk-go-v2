@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,12 +37,12 @@ import (
 // NetworkingV1PrivateLinkAccessList Add or remove access to PrivateLink endpoints by AWS account, Azure subscription and GCP project ID.  Related guide: [Private Links Overview](https://docs.confluent.io/cloud/current/networking/private-links/index.html).  ## The Private Link Accesses Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.PrivateLinkAccess\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `private_link_accounts_per_network` | Number of AWS accounts per network | | `private_link_subscriptions_per_network` | Number of Azure subscriptions per network | | `private_service_connect_projects_per_network` | Number of GCP projects per network |
 type NetworkingV1PrivateLinkAccessList struct {
 	// APIVersion defines the schema version of this representation of a resource.
-	ApiVersion string `json:"api_version"`
+	ApiVersion string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
-	Kind     string   `json:"kind"`
-	Metadata ListMeta `json:"metadata"`
+	Kind     string   `json:"kind,omitempty"`
+	Metadata ListMeta `json:"metadata,omitempty"`
 	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
-	Data []NetworkingV1PrivateLinkAccess `json:"data"`
+	Data []NetworkingV1PrivateLinkAccess `json:"data,omitempty"`
 }
 
 // NewNetworkingV1PrivateLinkAccessList instantiates a new NetworkingV1PrivateLinkAccessList object
@@ -213,7 +214,11 @@ func (o NetworkingV1PrivateLinkAccessList) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1PrivateLinkAccessList struct {
@@ -244,7 +249,11 @@ func NewNullableNetworkingV1PrivateLinkAccessList(val *NetworkingV1PrivateLinkAc
 }
 
 func (v NullableNetworkingV1PrivateLinkAccessList) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1PrivateLinkAccessList) UnmarshalJSON(src []byte) error {

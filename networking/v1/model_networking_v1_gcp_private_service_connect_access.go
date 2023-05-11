@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,9 +37,9 @@ import (
 // NetworkingV1GcpPrivateServiceConnectAccess GCP Private Service Connect access configuration.
 type NetworkingV1GcpPrivateServiceConnectAccess struct {
 	// PrivateLink kind type.
-	Kind string `json:"kind"`
+	Kind string `json:"kind,omitempty"`
 	// The GCP project ID for the account containing the VPCs that you want to connect from using Private Service Connect. You can find your Google Cloud Project ID under **Project ID** section of your [Google Cloud Console dashboard](https://console.cloud.google.com/home/dashboard).
-	Project string `json:"project"`
+	Project string `json:"project,omitempty"`
 }
 
 // NewNetworkingV1GcpPrivateServiceConnectAccess instantiates a new NetworkingV1GcpPrivateServiceConnectAccess object
@@ -152,7 +153,11 @@ func (o NetworkingV1GcpPrivateServiceConnectAccess) MarshalJSON() ([]byte, error
 	if true {
 		toSerialize["project"] = o.Project
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1GcpPrivateServiceConnectAccess struct {
@@ -183,7 +188,11 @@ func NewNullableNetworkingV1GcpPrivateServiceConnectAccess(val *NetworkingV1GcpP
 }
 
 func (v NullableNetworkingV1GcpPrivateServiceConnectAccess) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1GcpPrivateServiceConnectAccess) UnmarshalJSON(src []byte) error {

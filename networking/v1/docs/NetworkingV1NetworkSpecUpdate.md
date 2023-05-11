@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the network | [optional] 
-**ZonesInfo** | Pointer to [**NetworkingV1ZonesInfo**](networking.v1.ZonesInfo.md) | Each item represents information related to a single zone.  Note - The attribute is in an [Early Access lifecycle stage]   (https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)  | [optional] 
+**ZonesInfo** | Pointer to [**NetworkingV1ZonesInfo**](networking.v1.ZonesInfo.md) | Each item represents information related to a single zone.  Note - The attribute is in a [Limited Availability lifecycle stage](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)  | [optional] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods

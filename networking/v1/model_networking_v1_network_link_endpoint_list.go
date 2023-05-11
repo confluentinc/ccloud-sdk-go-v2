@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,12 +37,12 @@ import (
 // NetworkingV1NetworkLinkEndpointList A Network Link Enpoint is associated with a Private Link Confluent Cloud Network at the origin and a Network Link Service (associated with another Private Link Confluent Cloud Network) at the target. It enables connectivity between the origin network and the target network. It can only be associated with a Private Link network.   ## The Network Link Endpoints Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.NetworkLinkEndpoint\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `network_link_endpoints_per_network` | Number of network link endpoints per network |
 type NetworkingV1NetworkLinkEndpointList struct {
 	// APIVersion defines the schema version of this representation of a resource.
-	ApiVersion string `json:"api_version"`
+	ApiVersion string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
-	Kind     string   `json:"kind"`
-	Metadata ListMeta `json:"metadata"`
+	Kind     string   `json:"kind,omitempty"`
+	Metadata ListMeta `json:"metadata,omitempty"`
 	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
-	Data []NetworkingV1NetworkLinkEndpoint `json:"data"`
+	Data []NetworkingV1NetworkLinkEndpoint `json:"data,omitempty"`
 }
 
 // NewNetworkingV1NetworkLinkEndpointList instantiates a new NetworkingV1NetworkLinkEndpointList object
@@ -213,7 +214,11 @@ func (o NetworkingV1NetworkLinkEndpointList) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1NetworkLinkEndpointList struct {
@@ -244,7 +249,11 @@ func NewNullableNetworkingV1NetworkLinkEndpointList(val *NetworkingV1NetworkLink
 }
 
 func (v NullableNetworkingV1NetworkLinkEndpointList) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1NetworkLinkEndpointList) UnmarshalJSON(src []byte) error {

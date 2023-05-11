@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,8 +36,8 @@ import (
 
 // NetworkingV1PeeringStatus The status of the Peering
 type NetworkingV1PeeringStatus struct {
-	// The lifecycle phase of the peering:    PROVISIONING: peering provisioning is in progress;    PENDING_ACCEPT: peering connection request is pending acceptance by the customer;    READY:  peering is ready;    FAILED: peering is in a failed state;    DEPROVISIONING: peering deprovisioning is in progress;
-	Phase string `json:"phase"`
+	// The lifecycle phase of the peering:    PROVISIONING: peering provisioning is in progress;    PENDING_ACCEPT: peering connection request is pending acceptance by the customer;    READY:  peering is ready;    FAILED: peering is in a failed state;    DEPROVISIONING: peering deprovisioning is in progress;    DISCONNECTED: peering has been disconnected in the cloud provider by the customer;
+	Phase string `json:"phase,omitempty"`
 	// Error code if peering is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`
 	// Displayable error message if peering is in a failed state
@@ -197,7 +198,11 @@ func (o NetworkingV1PeeringStatus) MarshalJSON() ([]byte, error) {
 	if o.ErrorMessage != nil {
 		toSerialize["error_message"] = o.ErrorMessage
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1PeeringStatus struct {
@@ -228,7 +233,11 @@ func NewNullableNetworkingV1PeeringStatus(val *NetworkingV1PeeringStatus) *Nulla
 }
 
 func (v NullableNetworkingV1PeeringStatus) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1PeeringStatus) UnmarshalJSON(src []byte) error {

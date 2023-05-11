@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,11 +37,11 @@ import (
 // GlobalObjectReference ObjectReference provides information for you to locate the referred object
 type GlobalObjectReference struct {
 	// ID of the referred resource
-	Id string `json:"id"`
+	Id string `json:"id,omitempty"`
 	// API URL for accessing or modifying the referred object
-	Related string `json:"related"`
+	Related string `json:"related,omitempty"`
 	// CRN reference to the referred resource
-	ResourceName string `json:"resource_name"`
+	ResourceName string `json:"resource_name,omitempty"`
 }
 
 // NewGlobalObjectReference instantiates a new GlobalObjectReference object
@@ -183,7 +184,11 @@ func (o GlobalObjectReference) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["resource_name"] = o.ResourceName
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableGlobalObjectReference struct {
@@ -214,7 +219,11 @@ func NewNullableGlobalObjectReference(val *GlobalObjectReference) *NullableGloba
 }
 
 func (v NullableGlobalObjectReference) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableGlobalObjectReference) UnmarshalJSON(src []byte) error {

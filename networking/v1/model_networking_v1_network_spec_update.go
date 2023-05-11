@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -37,7 +38,7 @@ import (
 type NetworkingV1NetworkSpecUpdate struct {
 	// The name of the network
 	DisplayName *string `json:"display_name,omitempty"`
-	// Each item represents information related to a single zone.  Note - The attribute is in an [Early Access lifecycle stage]   (https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
+	// Each item represents information related to a single zone.  Note - The attribute is in a [Limited Availability lifecycle stage](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
 	ZonesInfo *NetworkingV1ZonesInfo `json:"zones_info,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
@@ -204,7 +205,11 @@ func (o NetworkingV1NetworkSpecUpdate) MarshalJSON() ([]byte, error) {
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1NetworkSpecUpdate struct {
@@ -235,7 +240,11 @@ func NewNullableNetworkingV1NetworkSpecUpdate(val *NetworkingV1NetworkSpecUpdate
 }
 
 func (v NullableNetworkingV1NetworkSpecUpdate) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1NetworkSpecUpdate) UnmarshalJSON(src []byte) error {

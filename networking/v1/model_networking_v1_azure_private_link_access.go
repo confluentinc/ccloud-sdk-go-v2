@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,9 +37,9 @@ import (
 // NetworkingV1AzurePrivateLinkAccess Azure PrivateLink access configuration.
 type NetworkingV1AzurePrivateLinkAccess struct {
 	// PrivateLink kind type.
-	Kind string `json:"kind"`
+	Kind string `json:"kind,omitempty"`
 	// The Azure subscription ID for the account containing the VNets you want to connect from using Azure Private Link. You can find your Azure subscription ID in the subscription section of your [Microsoft Azure Portal](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade). Must be a valid **32 character UUID string**.
-	Subscription string `json:"subscription"`
+	Subscription string `json:"subscription,omitempty"`
 }
 
 // NewNetworkingV1AzurePrivateLinkAccess instantiates a new NetworkingV1AzurePrivateLinkAccess object
@@ -152,7 +153,11 @@ func (o NetworkingV1AzurePrivateLinkAccess) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["subscription"] = o.Subscription
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1AzurePrivateLinkAccess struct {
@@ -183,7 +188,11 @@ func NewNullableNetworkingV1AzurePrivateLinkAccess(val *NetworkingV1AzurePrivate
 }
 
 func (v NullableNetworkingV1AzurePrivateLinkAccess) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1AzurePrivateLinkAccess) UnmarshalJSON(src []byte) error {

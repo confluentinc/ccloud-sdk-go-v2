@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,7 +37,7 @@ import (
 // NetworkingV1NetworkLinkServiceStatus The status of the Network Link Service
 type NetworkingV1NetworkLinkServiceStatus struct {
 	// The lifecycle phase of the network link service:  READY:  network link service is ready;
-	Phase string `json:"phase"`
+	Phase string `json:"phase,omitempty"`
 	// Error code if network link service is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`
 	// Displayable error message if network link service is in a failed state
@@ -197,7 +198,11 @@ func (o NetworkingV1NetworkLinkServiceStatus) MarshalJSON() ([]byte, error) {
 	if o.ErrorMessage != nil {
 		toSerialize["error_message"] = o.ErrorMessage
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1NetworkLinkServiceStatus struct {
@@ -228,7 +233,11 @@ func NewNullableNetworkingV1NetworkLinkServiceStatus(val *NetworkingV1NetworkLin
 }
 
 func (v NullableNetworkingV1NetworkLinkServiceStatus) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1NetworkLinkServiceStatus) UnmarshalJSON(src []byte) error {

@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -46,11 +47,11 @@ type NetworkingV1NetworkSpec struct {
 	Cidr *string `json:"cidr,omitempty"`
 	// The 3 availability zones for this network. They can optionally be specified for AWS networks used with PrivateLink, for GCP networks used with Private Service Connect, and for AWS and GCP networks used with Peering. Otherwise, they are automatically chosen by Confluent Cloud.  On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3)  On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c).  On Azure, zones are Confluent-chosen names (e.g. 1, 2, 3) since Azure does not  have universal zone identifiers.
 	Zones *[]string `json:"zones,omitempty"`
-	// Each item represents information related to a single zone.  Note - The attribute is in an [Early Access lifecycle stage]   (https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
+	// Each item represents information related to a single zone.  Note - The attribute is in a [Limited Availability lifecycle stage](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
 	ZonesInfo *NetworkingV1ZonesInfo `json:"zones_info,omitempty"`
 	// DNS config only applies to PrivateLink network connection type.  When resolution is CHASED_PRIVATE, clusters in this network require both public and private DNS  to resolve cluster endpoints.  When resolution is PRIVATE, clusters in this network only require private DNS  to resolve cluster endpoints.
 	DnsConfig *NetworkingV1DnsConfig `json:"dns_config,omitempty"`
-	// The reserved CIDR config is used only by AWS networks with connection_types = Vpc_Peering or Transit_Gateway  An IPv4 [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)   reserved for Confluent Cloud Network. Must be \\24.   If not specified, Confluent Cloud Network uses 172.20.255.0/24  Note - The attribute is in an [Early Access lifecycle stage](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
+	// The reserved CIDR config is used only by AWS networks with connection_types = Vpc_Peering or Transit_Gateway  An IPv4 [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)   reserved for Confluent Cloud Network. Must be \\24.   If not specified, Confluent Cloud Network uses 172.20.255.0/24  Note - The attribute is in a [Limited Availability lifecycle stage](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
 	ReservedCidr *string `json:"reserved_cidr,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
@@ -469,7 +470,11 @@ func (o NetworkingV1NetworkSpec) MarshalJSON() ([]byte, error) {
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1NetworkSpec struct {
@@ -500,7 +505,11 @@ func NewNullableNetworkingV1NetworkSpec(val *NetworkingV1NetworkSpec) *NullableN
 }
 
 func (v NullableNetworkingV1NetworkSpec) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1NetworkSpec) UnmarshalJSON(src []byte) error {
