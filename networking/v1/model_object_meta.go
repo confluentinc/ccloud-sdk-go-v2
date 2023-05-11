@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
@@ -37,7 +38,7 @@ import (
 // ObjectMeta ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
 type ObjectMeta struct {
 	// Self is a Uniform Resource Locator (URL) at which an object can be addressed. This URL encodes the service location, API version, and other particulars necessary to locate the resource at a point in time
-	Self string `json:"self"`
+	Self string `json:"self,omitempty"`
 	// Resource Name is a Uniform Resource Identifier (URI) that is globally unique across space and time. It is represented as a Confluent Resource Name
 	ResourceName *string `json:"resource_name,omitempty"`
 	// The date and time at which this object was created. It is represented in RFC3339 format and is in UTC.
@@ -274,7 +275,11 @@ func (o ObjectMeta) MarshalJSON() ([]byte, error) {
 	if o.DeletedAt != nil {
 		toSerialize["deleted_at"] = o.DeletedAt
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableObjectMeta struct {
@@ -305,7 +310,11 @@ func NewNullableObjectMeta(val *ObjectMeta) *NullableObjectMeta {
 }
 
 func (v NullableObjectMeta) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableObjectMeta) UnmarshalJSON(src []byte) error {

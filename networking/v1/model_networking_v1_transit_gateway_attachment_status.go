@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,7 +37,7 @@ import (
 // NetworkingV1TransitGatewayAttachmentStatus The status of the Transit Gateway Attachment
 type NetworkingV1TransitGatewayAttachmentStatus struct {
 	// The lifecycle phase of the TGW attachment:    PROVISIONING: attachment provisioning is in progress;    PENDING_ACCEPT: attachment request is pending acceptance by the customer;    READY:  attachment is ready;    FAILED: attachment is in a failed state;    DEPROVISIONING: attachment deprovisioning is in progress;    DISCONNECTED: attachment was manually deleted directly in the cloud provider by the customer;    ERROR: invalid customer input during attachment creation.
-	Phase string `json:"phase"`
+	Phase string `json:"phase,omitempty"`
 	// Error code if TGW attachment is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`
 	// Displayable error message if TGW attachment is in a failed state
@@ -235,7 +236,11 @@ func (o NetworkingV1TransitGatewayAttachmentStatus) MarshalJSON() ([]byte, error
 	if o.Cloud != nil {
 		toSerialize["cloud"] = o.Cloud
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1TransitGatewayAttachmentStatus struct {
@@ -266,7 +271,11 @@ func NewNullableNetworkingV1TransitGatewayAttachmentStatus(val *NetworkingV1Tran
 }
 
 func (v NullableNetworkingV1TransitGatewayAttachmentStatus) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1TransitGatewayAttachmentStatus) UnmarshalJSON(src []byte) error {

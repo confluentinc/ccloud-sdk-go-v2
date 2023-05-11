@@ -42,14 +42,14 @@ var (
 type TransitGatewayAttachmentsNetworkingV1Api interface {
 
 	/*
-			CreateNetworkingV1TransitGatewayAttachment Create a Transit Gateway Attachment
+		CreateNetworkingV1TransitGatewayAttachment Create a Transit Gateway Attachment
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to create a transit gateway attachment.
+	Make a request to create a transit gateway attachment.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiCreateNetworkingV1TransitGatewayAttachmentRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateNetworkingV1TransitGatewayAttachmentRequest
 	*/
 	CreateNetworkingV1TransitGatewayAttachment(ctx _context.Context) ApiCreateNetworkingV1TransitGatewayAttachmentRequest
 
@@ -58,15 +58,15 @@ type TransitGatewayAttachmentsNetworkingV1Api interface {
 	CreateNetworkingV1TransitGatewayAttachmentExecute(r ApiCreateNetworkingV1TransitGatewayAttachmentRequest) (NetworkingV1TransitGatewayAttachment, *_nethttp.Response, error)
 
 	/*
-			DeleteNetworkingV1TransitGatewayAttachment Delete a Transit Gateway Attachment
+		DeleteNetworkingV1TransitGatewayAttachment Delete a Transit Gateway Attachment
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to delete a transit gateway attachment.
+	Make a request to delete a transit gateway attachment.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the transit gateway attachment.
-			 @return ApiDeleteNetworkingV1TransitGatewayAttachmentRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the transit gateway attachment.
+		 @return ApiDeleteNetworkingV1TransitGatewayAttachmentRequest
 	*/
 	DeleteNetworkingV1TransitGatewayAttachment(ctx _context.Context, id string) ApiDeleteNetworkingV1TransitGatewayAttachmentRequest
 
@@ -74,15 +74,15 @@ type TransitGatewayAttachmentsNetworkingV1Api interface {
 	DeleteNetworkingV1TransitGatewayAttachmentExecute(r ApiDeleteNetworkingV1TransitGatewayAttachmentRequest) (*_nethttp.Response, error)
 
 	/*
-			GetNetworkingV1TransitGatewayAttachment Read a Transit Gateway Attachment
+		GetNetworkingV1TransitGatewayAttachment Read a Transit Gateway Attachment
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to read a transit gateway attachment.
+	Make a request to read a transit gateway attachment.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the transit gateway attachment.
-			 @return ApiGetNetworkingV1TransitGatewayAttachmentRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the transit gateway attachment.
+		 @return ApiGetNetworkingV1TransitGatewayAttachmentRequest
 	*/
 	GetNetworkingV1TransitGatewayAttachment(ctx _context.Context, id string) ApiGetNetworkingV1TransitGatewayAttachmentRequest
 
@@ -91,14 +91,14 @@ type TransitGatewayAttachmentsNetworkingV1Api interface {
 	GetNetworkingV1TransitGatewayAttachmentExecute(r ApiGetNetworkingV1TransitGatewayAttachmentRequest) (NetworkingV1TransitGatewayAttachment, *_nethttp.Response, error)
 
 	/*
-			ListNetworkingV1TransitGatewayAttachments List of Transit Gateway Attachments
+		ListNetworkingV1TransitGatewayAttachments List of Transit Gateway Attachments
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Retrieve a sorted, filtered, paginated list of all transit gateway attachments.
+	Retrieve a sorted, filtered, paginated list of all transit gateway attachments.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiListNetworkingV1TransitGatewayAttachmentsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListNetworkingV1TransitGatewayAttachmentsRequest
 	*/
 	ListNetworkingV1TransitGatewayAttachments(ctx _context.Context) ApiListNetworkingV1TransitGatewayAttachmentsRequest
 
@@ -107,17 +107,17 @@ type TransitGatewayAttachmentsNetworkingV1Api interface {
 	ListNetworkingV1TransitGatewayAttachmentsExecute(r ApiListNetworkingV1TransitGatewayAttachmentsRequest) (NetworkingV1TransitGatewayAttachmentList, *_nethttp.Response, error)
 
 	/*
-			UpdateNetworkingV1TransitGatewayAttachment Update a Transit Gateway Attachment
+		UpdateNetworkingV1TransitGatewayAttachment Update a Transit Gateway Attachment
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to update a transit gateway attachment.
+	Make a request to update a transit gateway attachment.
 
 
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the transit gateway attachment.
-			 @return ApiUpdateNetworkingV1TransitGatewayAttachmentRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the transit gateway attachment.
+		 @return ApiUpdateNetworkingV1TransitGatewayAttachmentRequest
 	*/
 	UpdateNetworkingV1TransitGatewayAttachment(ctx _context.Context, id string) ApiUpdateNetworkingV1TransitGatewayAttachmentRequest
 
@@ -147,12 +147,12 @@ func (r ApiCreateNetworkingV1TransitGatewayAttachmentRequest) Execute() (Network
 /*
 CreateNetworkingV1TransitGatewayAttachment Create a Transit Gateway Attachment
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create a transit gateway attachment.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateNetworkingV1TransitGatewayAttachmentRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateNetworkingV1TransitGatewayAttachmentRequest
 */
 func (a *TransitGatewayAttachmentsNetworkingV1ApiService) CreateNetworkingV1TransitGatewayAttachment(ctx _context.Context) ApiCreateNetworkingV1TransitGatewayAttachmentRequest {
 	return ApiCreateNetworkingV1TransitGatewayAttachmentRequest{
@@ -162,7 +162,8 @@ func (a *TransitGatewayAttachmentsNetworkingV1ApiService) CreateNetworkingV1Tran
 }
 
 // Execute executes the request
-//  @return NetworkingV1TransitGatewayAttachment
+//
+//	@return NetworkingV1TransitGatewayAttachment
 func (a *TransitGatewayAttachmentsNetworkingV1ApiService) CreateNetworkingV1TransitGatewayAttachmentExecute(r ApiCreateNetworkingV1TransitGatewayAttachmentRequest) (NetworkingV1TransitGatewayAttachment, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -329,13 +330,13 @@ func (r ApiDeleteNetworkingV1TransitGatewayAttachmentRequest) Execute() (*_netht
 /*
 DeleteNetworkingV1TransitGatewayAttachment Delete a Transit Gateway Attachment
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete a transit gateway attachment.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the transit gateway attachment.
- @return ApiDeleteNetworkingV1TransitGatewayAttachmentRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the transit gateway attachment.
+	@return ApiDeleteNetworkingV1TransitGatewayAttachmentRequest
 */
 func (a *TransitGatewayAttachmentsNetworkingV1ApiService) DeleteNetworkingV1TransitGatewayAttachment(ctx _context.Context, id string) ApiDeleteNetworkingV1TransitGatewayAttachmentRequest {
 	return ApiDeleteNetworkingV1TransitGatewayAttachmentRequest{
@@ -485,13 +486,13 @@ func (r ApiGetNetworkingV1TransitGatewayAttachmentRequest) Execute() (Networking
 /*
 GetNetworkingV1TransitGatewayAttachment Read a Transit Gateway Attachment
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a transit gateway attachment.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the transit gateway attachment.
- @return ApiGetNetworkingV1TransitGatewayAttachmentRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the transit gateway attachment.
+	@return ApiGetNetworkingV1TransitGatewayAttachmentRequest
 */
 func (a *TransitGatewayAttachmentsNetworkingV1ApiService) GetNetworkingV1TransitGatewayAttachment(ctx _context.Context, id string) ApiGetNetworkingV1TransitGatewayAttachmentRequest {
 	return ApiGetNetworkingV1TransitGatewayAttachmentRequest{
@@ -502,7 +503,8 @@ func (a *TransitGatewayAttachmentsNetworkingV1ApiService) GetNetworkingV1Transit
 }
 
 // Execute executes the request
-//  @return NetworkingV1TransitGatewayAttachment
+//
+//	@return NetworkingV1TransitGatewayAttachment
 func (a *TransitGatewayAttachmentsNetworkingV1ApiService) GetNetworkingV1TransitGatewayAttachmentExecute(r ApiGetNetworkingV1TransitGatewayAttachmentRequest) (NetworkingV1TransitGatewayAttachment, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -686,12 +688,12 @@ func (r ApiListNetworkingV1TransitGatewayAttachmentsRequest) Execute() (Networki
 /*
 ListNetworkingV1TransitGatewayAttachments List of Transit Gateway Attachments
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all transit gateway attachments.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListNetworkingV1TransitGatewayAttachmentsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListNetworkingV1TransitGatewayAttachmentsRequest
 */
 func (a *TransitGatewayAttachmentsNetworkingV1ApiService) ListNetworkingV1TransitGatewayAttachments(ctx _context.Context) ApiListNetworkingV1TransitGatewayAttachmentsRequest {
 	return ApiListNetworkingV1TransitGatewayAttachmentsRequest{
@@ -701,7 +703,8 @@ func (a *TransitGatewayAttachmentsNetworkingV1ApiService) ListNetworkingV1Transi
 }
 
 // Execute executes the request
-//  @return NetworkingV1TransitGatewayAttachmentList
+//
+//	@return NetworkingV1TransitGatewayAttachmentList
 func (a *TransitGatewayAttachmentsNetworkingV1ApiService) ListNetworkingV1TransitGatewayAttachmentsExecute(r ApiListNetworkingV1TransitGatewayAttachmentsRequest) (NetworkingV1TransitGatewayAttachmentList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -854,15 +857,13 @@ func (r ApiUpdateNetworkingV1TransitGatewayAttachmentRequest) Execute() (Network
 /*
 UpdateNetworkingV1TransitGatewayAttachment Update a Transit Gateway Attachment
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update a transit gateway attachment.
 
-
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the transit gateway attachment.
- @return ApiUpdateNetworkingV1TransitGatewayAttachmentRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the transit gateway attachment.
+	@return ApiUpdateNetworkingV1TransitGatewayAttachmentRequest
 */
 func (a *TransitGatewayAttachmentsNetworkingV1ApiService) UpdateNetworkingV1TransitGatewayAttachment(ctx _context.Context, id string) ApiUpdateNetworkingV1TransitGatewayAttachmentRequest {
 	return ApiUpdateNetworkingV1TransitGatewayAttachmentRequest{
@@ -873,7 +874,8 @@ func (a *TransitGatewayAttachmentsNetworkingV1ApiService) UpdateNetworkingV1Tran
 }
 
 // Execute executes the request
-//  @return NetworkingV1TransitGatewayAttachment
+//
+//	@return NetworkingV1TransitGatewayAttachment
 func (a *TransitGatewayAttachmentsNetworkingV1ApiService) UpdateNetworkingV1TransitGatewayAttachmentExecute(r ApiUpdateNetworkingV1TransitGatewayAttachmentRequest) (NetworkingV1TransitGatewayAttachment, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch

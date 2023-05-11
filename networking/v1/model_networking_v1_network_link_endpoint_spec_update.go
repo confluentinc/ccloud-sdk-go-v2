@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -204,7 +205,11 @@ func (o NetworkingV1NetworkLinkEndpointSpecUpdate) MarshalJSON() ([]byte, error)
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1NetworkLinkEndpointSpecUpdate struct {
@@ -235,7 +240,11 @@ func NewNullableNetworkingV1NetworkLinkEndpointSpecUpdate(val *NetworkingV1Netwo
 }
 
 func (v NullableNetworkingV1NetworkLinkEndpointSpecUpdate) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1NetworkLinkEndpointSpecUpdate) UnmarshalJSON(src []byte) error {

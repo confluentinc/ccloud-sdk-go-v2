@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,11 +37,11 @@ import (
 // NetworkingV1GcpNetwork The GCP network details.
 type NetworkingV1GcpNetwork struct {
 	// Network kind type.
-	Kind string `json:"kind"`
+	Kind string `json:"kind,omitempty"`
 	// The GCP Project ID associated with the Confluent Cloud VPC.
-	Project string `json:"project"`
+	Project string `json:"project,omitempty"`
 	// The network name of the Confluent Cloud VPC.
-	VpcNetwork string `json:"vpc_network"`
+	VpcNetwork string `json:"vpc_network,omitempty"`
 	// The mapping of zones to Private Service Connect Service Attachments if available. Keys are zones and values are [GCP Private Service Connect Service Attachment](https://cloud.google.com/vpc/docs/configure-private-service-connect-producer#api_7)
 	PrivateServiceConnectServiceAttachments *map[string]string `json:"private_service_connect_service_attachments,omitempty"`
 }
@@ -221,7 +222,11 @@ func (o NetworkingV1GcpNetwork) MarshalJSON() ([]byte, error) {
 	if o.PrivateServiceConnectServiceAttachments != nil {
 		toSerialize["private_service_connect_service_attachments"] = o.PrivateServiceConnectServiceAttachments
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1GcpNetwork struct {
@@ -252,7 +257,11 @@ func NewNullableNetworkingV1GcpNetwork(val *NetworkingV1GcpNetwork) *NullableNet
 }
 
 func (v NullableNetworkingV1GcpNetwork) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1GcpNetwork) UnmarshalJSON(src []byte) error {

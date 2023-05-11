@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -280,7 +281,11 @@ func (o NetworkingV1NetworkLinkServiceAssociationSpec) MarshalJSON() ([]byte, er
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1NetworkLinkServiceAssociationSpec struct {
@@ -311,7 +316,11 @@ func NewNullableNetworkingV1NetworkLinkServiceAssociationSpec(val *NetworkingV1N
 }
 
 func (v NullableNetworkingV1NetworkLinkServiceAssociationSpec) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1NetworkLinkServiceAssociationSpec) UnmarshalJSON(src []byte) error {

@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
@@ -37,7 +38,7 @@ import (
 // NetworkingV1NetworkLinkEndpointStatus The status of the Network Link Endpoint
 type NetworkingV1NetworkLinkEndpointStatus struct {
 	// The lifecycle phase of the network link endpoint:    PROVISIONING: network link endpoint provisioning is in progress;    PENDING_ACCEPT: network link endpoint request is pending acceptance by the the owner of the target;    READY:  network link endpoint is ready;    FAILED: network link endpoint is in a failed state;    DEPROVISIONING: network link endpoint deprovisioning is in progress;    EXPIRED: network link endpoint request is expired, can only be deleted;    DISCONNECTED: network link endpoint is in a disconnected state, target owner has removed the permissions;    DISCONNECTING: network link endpoint disconnection is in progress;    INACTIVE: network link endpoint is created, but not active since there are no clusters in the network;
-	Phase string `json:"phase"`
+	Phase string `json:"phase,omitempty"`
 	// Error code if network link is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`
 	// Displayable error message if network link is in a failed state
@@ -236,7 +237,11 @@ func (o NetworkingV1NetworkLinkEndpointStatus) MarshalJSON() ([]byte, error) {
 	if o.ExpiresAt != nil {
 		toSerialize["expires_at"] = o.ExpiresAt
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1NetworkLinkEndpointStatus struct {
@@ -267,7 +272,11 @@ func NewNullableNetworkingV1NetworkLinkEndpointStatus(val *NetworkingV1NetworkLi
 }
 
 func (v NullableNetworkingV1NetworkLinkEndpointStatus) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1NetworkLinkEndpointStatus) UnmarshalJSON(src []byte) error {

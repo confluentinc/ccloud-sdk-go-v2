@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,15 +37,15 @@ import (
 // NetworkingV1AwsPeering AWS VPC Peering.
 type NetworkingV1AwsPeering struct {
 	// Peering kind type.
-	Kind string `json:"kind"`
+	Kind string `json:"kind,omitempty"`
 	// The AWS account ID associated with the VPC you are peering with Confluent Cloud network.
-	Account string `json:"account"`
+	Account string `json:"account,omitempty"`
 	// The VPC ID you are peering with Confluent Cloud network.
-	Vpc string `json:"vpc"`
+	Vpc string `json:"vpc,omitempty"`
 	// The [CIDR blocks](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) of the VPC you are peering with Confluent Cloud network. This is used by Confluent Cloud network to route traffic back to your network. The CIDR block must be a private range and cannot overlap with the Confluent Cloud CIDR block.
-	Routes []string `json:"routes"`
+	Routes []string `json:"routes,omitempty"`
 	// The region of the VPC you are peering with Confluent Cloud network.
-	CustomerRegion string `json:"customer_region"`
+	CustomerRegion string `json:"customer_region,omitempty"`
 }
 
 // NewNetworkingV1AwsPeering instantiates a new NetworkingV1AwsPeering object
@@ -245,7 +246,11 @@ func (o NetworkingV1AwsPeering) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["customer_region"] = o.CustomerRegion
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1AwsPeering struct {
@@ -276,7 +281,11 @@ func NewNullableNetworkingV1AwsPeering(val *NetworkingV1AwsPeering) *NullableNet
 }
 
 func (v NullableNetworkingV1AwsPeering) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1AwsPeering) UnmarshalJSON(src []byte) error {

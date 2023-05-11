@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,13 +37,13 @@ import (
 // NetworkingV1AzurePeering Azure VNet Peering.
 type NetworkingV1AzurePeering struct {
 	// Peering kind type.
-	Kind string `json:"kind"`
+	Kind string `json:"kind,omitempty"`
 	// The Azure Tenant ID in which your Azure Subscription exists. Represents an organization in Azure Active Directory. You can find your Azure Tenant ID in the Azure Portal under [Azure Active Directory](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Overview). Must be a valid **32 character UUID string**.
-	Tenant string `json:"tenant"`
+	Tenant string `json:"tenant,omitempty"`
 	// The resource ID of the VNet that you are peering with Confluent Cloud. You can find the name of your Azure VNet in the [Azure Portal on the Overview tab of your Azure Virtual Network](https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Network%2FvirtualNetworks).
-	Vnet string `json:"vnet"`
+	Vnet string `json:"vnet,omitempty"`
 	// The region of the VNet you are peering with Confluent Cloud network.
-	CustomerRegion string `json:"customer_region"`
+	CustomerRegion string `json:"customer_region,omitempty"`
 }
 
 // NewNetworkingV1AzurePeering instantiates a new NetworkingV1AzurePeering object
@@ -214,7 +215,11 @@ func (o NetworkingV1AzurePeering) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["customer_region"] = o.CustomerRegion
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1AzurePeering struct {
@@ -245,7 +250,11 @@ func NewNullableNetworkingV1AzurePeering(val *NetworkingV1AzurePeering) *Nullabl
 }
 
 func (v NullableNetworkingV1AzurePeering) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1AzurePeering) UnmarshalJSON(src []byte) error {

@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,9 +37,9 @@ import (
 // NetworkingV1AwsPrivateLinkAccess AWS PrivateLink access configuration.
 type NetworkingV1AwsPrivateLinkAccess struct {
 	// PrivateLink kind type.
-	Kind string `json:"kind"`
+	Kind string `json:"kind,omitempty"`
 	// The AWS account ID for the account containing the VPCs you want to connect from using AWS PrivateLink. You can find your AWS account ID [here] (https://console.aws.amazon.com/billing/home?#/account) under **My Account** in your AWS Management Console. Must be a **12 character string**.
-	Account string `json:"account"`
+	Account string `json:"account,omitempty"`
 }
 
 // NewNetworkingV1AwsPrivateLinkAccess instantiates a new NetworkingV1AwsPrivateLinkAccess object
@@ -152,7 +153,11 @@ func (o NetworkingV1AwsPrivateLinkAccess) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["account"] = o.Account
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1AwsPrivateLinkAccess struct {
@@ -183,7 +188,11 @@ func NewNullableNetworkingV1AwsPrivateLinkAccess(val *NetworkingV1AwsPrivateLink
 }
 
 func (v NullableNetworkingV1AwsPrivateLinkAccess) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1AwsPrivateLinkAccess) UnmarshalJSON(src []byte) error {

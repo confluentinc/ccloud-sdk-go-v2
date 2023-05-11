@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -140,15 +141,27 @@ func (dst *NetworkingV1PrivateLinkAccessSpecCloudOneOf) UnmarshalJSON(data []byt
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src NetworkingV1PrivateLinkAccessSpecCloudOneOf) MarshalJSON() ([]byte, error) {
 	if src.NetworkingV1AwsPrivateLinkAccess != nil {
-		return json.Marshal(&src.NetworkingV1AwsPrivateLinkAccess)
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.NetworkingV1AwsPrivateLinkAccess)
+		return buffer.Bytes(), err
 	}
 
 	if src.NetworkingV1AzurePrivateLinkAccess != nil {
-		return json.Marshal(&src.NetworkingV1AzurePrivateLinkAccess)
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.NetworkingV1AzurePrivateLinkAccess)
+		return buffer.Bytes(), err
 	}
 
 	if src.NetworkingV1GcpPrivateServiceConnectAccess != nil {
-		return json.Marshal(&src.NetworkingV1GcpPrivateServiceConnectAccess)
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.NetworkingV1GcpPrivateServiceConnectAccess)
+		return buffer.Bytes(), err
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -200,7 +213,11 @@ func NewNullableNetworkingV1PrivateLinkAccessSpecCloudOneOf(val *NetworkingV1Pri
 }
 
 func (v NullableNetworkingV1PrivateLinkAccessSpecCloudOneOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1PrivateLinkAccessSpecCloudOneOf) UnmarshalJSON(src []byte) error {

@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,11 +37,11 @@ import (
 // NetworkingV1AwsNetwork The AWS network details.
 type NetworkingV1AwsNetwork struct {
 	// Network kind type.
-	Kind string `json:"kind"`
+	Kind string `json:"kind,omitempty"`
 	// The Confluent Cloud VPC ID.
-	Vpc string `json:"vpc"`
+	Vpc string `json:"vpc,omitempty"`
 	// The AWS account ID associated with the Confluent Cloud VPC.
-	Account string `json:"account"`
+	Account string `json:"account,omitempty"`
 	// The endpoint service of the Confluent Cloud VPC. (used for PrivateLink) if available.
 	PrivateLinkEndpointService *string `json:"private_link_endpoint_service,omitempty"`
 }
@@ -221,7 +222,11 @@ func (o NetworkingV1AwsNetwork) MarshalJSON() ([]byte, error) {
 	if o.PrivateLinkEndpointService != nil {
 		toSerialize["private_link_endpoint_service"] = o.PrivateLinkEndpointService
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1AwsNetwork struct {
@@ -252,7 +257,11 @@ func NewNullableNetworkingV1AwsNetwork(val *NetworkingV1AwsNetwork) *NullableNet
 }
 
 func (v NullableNetworkingV1AwsNetwork) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1AwsNetwork) UnmarshalJSON(src []byte) error {

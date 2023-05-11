@@ -42,15 +42,15 @@ var (
 type NetworkLinkServiceAssociationsNetworkingV1Api interface {
 
 	/*
-			GetNetworkingV1NetworkLinkServiceAssociation Read a Network Link Service Association
+		GetNetworkingV1NetworkLinkServiceAssociation Read a Network Link Service Association
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Make a request to read a network link service association.
+	Make a request to read a network link service association.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the network link service association.
-			 @return ApiGetNetworkingV1NetworkLinkServiceAssociationRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the network link service association.
+		 @return ApiGetNetworkingV1NetworkLinkServiceAssociationRequest
 	*/
 	GetNetworkingV1NetworkLinkServiceAssociation(ctx _context.Context, id string) ApiGetNetworkingV1NetworkLinkServiceAssociationRequest
 
@@ -59,14 +59,14 @@ type NetworkLinkServiceAssociationsNetworkingV1Api interface {
 	GetNetworkingV1NetworkLinkServiceAssociationExecute(r ApiGetNetworkingV1NetworkLinkServiceAssociationRequest) (NetworkingV1NetworkLinkServiceAssociation, *_nethttp.Response, error)
 
 	/*
-			ListNetworkingV1NetworkLinkServiceAssociations List of Network Link Service Associations
+		ListNetworkingV1NetworkLinkServiceAssociations List of Network Link Service Associations
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Retrieve a sorted, filtered, paginated list of all network link service associations.
+	Retrieve a sorted, filtered, paginated list of all network link service associations.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiListNetworkingV1NetworkLinkServiceAssociationsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListNetworkingV1NetworkLinkServiceAssociationsRequest
 	*/
 	ListNetworkingV1NetworkLinkServiceAssociations(ctx _context.Context) ApiListNetworkingV1NetworkLinkServiceAssociationsRequest
 
@@ -91,13 +91,13 @@ func (r ApiGetNetworkingV1NetworkLinkServiceAssociationRequest) Execute() (Netwo
 /*
 GetNetworkingV1NetworkLinkServiceAssociation Read a Network Link Service Association
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
 Make a request to read a network link service association.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the network link service association.
- @return ApiGetNetworkingV1NetworkLinkServiceAssociationRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the network link service association.
+	@return ApiGetNetworkingV1NetworkLinkServiceAssociationRequest
 */
 func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) GetNetworkingV1NetworkLinkServiceAssociation(ctx _context.Context, id string) ApiGetNetworkingV1NetworkLinkServiceAssociationRequest {
 	return ApiGetNetworkingV1NetworkLinkServiceAssociationRequest{
@@ -108,7 +108,8 @@ func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) GetNetworkingV1Ne
 }
 
 // Execute executes the request
-//  @return NetworkingV1NetworkLinkServiceAssociation
+//
+//	@return NetworkingV1NetworkLinkServiceAssociation
 func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) GetNetworkingV1NetworkLinkServiceAssociationExecute(r ApiGetNetworkingV1NetworkLinkServiceAssociationRequest) (NetworkingV1NetworkLinkServiceAssociation, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -281,12 +282,12 @@ func (r ApiListNetworkingV1NetworkLinkServiceAssociationsRequest) Execute() (Net
 /*
 ListNetworkingV1NetworkLinkServiceAssociations List of Network Link Service Associations
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
 Retrieve a sorted, filtered, paginated list of all network link service associations.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListNetworkingV1NetworkLinkServiceAssociationsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListNetworkingV1NetworkLinkServiceAssociationsRequest
 */
 func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) ListNetworkingV1NetworkLinkServiceAssociations(ctx _context.Context) ApiListNetworkingV1NetworkLinkServiceAssociationsRequest {
 	return ApiListNetworkingV1NetworkLinkServiceAssociationsRequest{
@@ -296,7 +297,8 @@ func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) ListNetworkingV1N
 }
 
 // Execute executes the request
-//  @return NetworkingV1NetworkLinkServiceAssociationList
+//
+//	@return NetworkingV1NetworkLinkServiceAssociationList
 func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) ListNetworkingV1NetworkLinkServiceAssociationsExecute(r ApiListNetworkingV1NetworkLinkServiceAssociationsRequest) (NetworkingV1NetworkLinkServiceAssociationList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet

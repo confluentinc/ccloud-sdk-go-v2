@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -140,15 +141,27 @@ func (dst *NetworkingV1PeeringSpecCloudOneOf) UnmarshalJSON(data []byte) error {
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src NetworkingV1PeeringSpecCloudOneOf) MarshalJSON() ([]byte, error) {
 	if src.NetworkingV1AwsPeering != nil {
-		return json.Marshal(&src.NetworkingV1AwsPeering)
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.NetworkingV1AwsPeering)
+		return buffer.Bytes(), err
 	}
 
 	if src.NetworkingV1AzurePeering != nil {
-		return json.Marshal(&src.NetworkingV1AzurePeering)
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.NetworkingV1AzurePeering)
+		return buffer.Bytes(), err
 	}
 
 	if src.NetworkingV1GcpPeering != nil {
-		return json.Marshal(&src.NetworkingV1GcpPeering)
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.NetworkingV1GcpPeering)
+		return buffer.Bytes(), err
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -200,7 +213,11 @@ func NewNullableNetworkingV1PeeringSpecCloudOneOf(val *NetworkingV1PeeringSpecCl
 }
 
 func (v NullableNetworkingV1PeeringSpecCloudOneOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1PeeringSpecCloudOneOf) UnmarshalJSON(src []byte) error {

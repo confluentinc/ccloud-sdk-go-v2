@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -80,7 +81,11 @@ func (dst *NetworkingV1TransitGatewayAttachmentStatusCloudOneOf) UnmarshalJSON(d
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src NetworkingV1TransitGatewayAttachmentStatusCloudOneOf) MarshalJSON() ([]byte, error) {
 	if src.NetworkingV1AwsTransitGatewayAttachmentStatus != nil {
-		return json.Marshal(&src.NetworkingV1AwsTransitGatewayAttachmentStatus)
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.NetworkingV1AwsTransitGatewayAttachmentStatus)
+		return buffer.Bytes(), err
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -124,7 +129,11 @@ func NewNullableNetworkingV1TransitGatewayAttachmentStatusCloudOneOf(val *Networ
 }
 
 func (v NullableNetworkingV1TransitGatewayAttachmentStatusCloudOneOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1TransitGatewayAttachmentStatusCloudOneOf) UnmarshalJSON(src []byte) error {
