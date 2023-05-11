@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,11 +37,11 @@ import (
 // NetworkingV1GcpPeering GCP VPC Peering.
 type NetworkingV1GcpPeering struct {
 	// Peering kind type.
-	Kind string `json:"kind"`
+	Kind string `json:"kind,omitempty"`
 	// The Google Cloud project ID associated with the VPC that you are peering with Confluent Cloud network.
-	Project string `json:"project"`
+	Project string `json:"project,omitempty"`
 	// The name of the VPC that you are peering with Confluent Cloud network.
-	VpcNetwork string `json:"vpc_network"`
+	VpcNetwork string `json:"vpc_network,omitempty"`
 	// Enable customer route import. For more information, see [Importing custom routes](https://cloud.google.com/vpc/docs/vpc-peering#importing-exporting-routes).
 	ImportCustomRoutes *bool `json:"import_custom_routes,omitempty"`
 }
@@ -225,7 +226,11 @@ func (o NetworkingV1GcpPeering) MarshalJSON() ([]byte, error) {
 	if o.ImportCustomRoutes != nil {
 		toSerialize["import_custom_routes"] = o.ImportCustomRoutes
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1GcpPeering struct {
@@ -256,7 +261,11 @@ func NewNullableNetworkingV1GcpPeering(val *NetworkingV1GcpPeering) *NullableNet
 }
 
 func (v NullableNetworkingV1GcpPeering) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1GcpPeering) UnmarshalJSON(src []byte) error {

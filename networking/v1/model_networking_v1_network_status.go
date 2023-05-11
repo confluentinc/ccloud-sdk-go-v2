@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,9 +37,9 @@ import (
 // NetworkingV1NetworkStatus The status of the Network
 type NetworkingV1NetworkStatus struct {
 	// The lifecyle phase of the network:  PROVISIONING:  network provisioning is in progress;  READY:  network is ready;  FAILED: provisioning failed;  DEPROVISIONING: network deprovisioning is in progress;
-	Phase                    string                               `json:"phase"`
-	SupportedConnectionTypes NetworkingV1SupportedConnectionTypes `json:"supported_connection_types"`
-	ActiveConnectionTypes    NetworkingV1ConnectionTypes          `json:"active_connection_types"`
+	Phase                    string                               `json:"phase,omitempty"`
+	SupportedConnectionTypes NetworkingV1SupportedConnectionTypes `json:"supported_connection_types,omitempty"`
+	ActiveConnectionTypes    NetworkingV1ConnectionTypes          `json:"active_connection_types,omitempty"`
 	// Error code if network is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`
 	// Displayable error message if network is in a failed state
@@ -371,7 +372,11 @@ func (o NetworkingV1NetworkStatus) MarshalJSON() ([]byte, error) {
 	if o.Cloud != nil {
 		toSerialize["cloud"] = o.Cloud
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1NetworkStatus struct {
@@ -402,7 +407,11 @@ func NewNullableNetworkingV1NetworkStatus(val *NetworkingV1NetworkStatus) *Nulla
 }
 
 func (v NullableNetworkingV1NetworkStatus) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1NetworkStatus) UnmarshalJSON(src []byte) error {

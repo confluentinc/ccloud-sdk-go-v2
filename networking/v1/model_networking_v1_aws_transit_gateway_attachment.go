@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,13 +37,13 @@ import (
 // NetworkingV1AwsTransitGatewayAttachment AWS Transit Gateway Attachment.
 type NetworkingV1AwsTransitGatewayAttachment struct {
 	// AWS Transit Gateway Attachment kind type.
-	Kind string `json:"kind"`
+	Kind string `json:"kind,omitempty"`
 	// The full AWS Resource Name (ARN) for the AWS Resource Access Manager (RAM) Share of the Transit Gateways that you want Confluent Cloud to be attached to.
-	RamShareArn string `json:"ram_share_arn"`
+	RamShareArn string `json:"ram_share_arn,omitempty"`
 	// The ID of the AWS Transit Gateway that you want Confluent CLoud to be attached to.
-	TransitGatewayId string `json:"transit_gateway_id"`
+	TransitGatewayId string `json:"transit_gateway_id,omitempty"`
 	// List of destination routes.
-	Routes []string `json:"routes"`
+	Routes []string `json:"routes,omitempty"`
 }
 
 // NewNetworkingV1AwsTransitGatewayAttachment instantiates a new NetworkingV1AwsTransitGatewayAttachment object
@@ -214,7 +215,11 @@ func (o NetworkingV1AwsTransitGatewayAttachment) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["routes"] = o.Routes
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1AwsTransitGatewayAttachment struct {
@@ -245,7 +250,11 @@ func NewNullableNetworkingV1AwsTransitGatewayAttachment(val *NetworkingV1AwsTran
 }
 
 func (v NullableNetworkingV1AwsTransitGatewayAttachment) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1AwsTransitGatewayAttachment) UnmarshalJSON(src []byte) error {

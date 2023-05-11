@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,7 +37,7 @@ import (
 // NetworkingV1PrivateLinkAccessStatus The status of the Private Link Access
 type NetworkingV1PrivateLinkAccessStatus struct {
 	// The lifecycle phase of the PrivateLink access configuration:    PROVISIONING: PrivateLink access provisioning is in progress;    READY:  PrivateLink access is ready;    FAILED: PrivateLink access is in a failed state;    DEPROVISIONING: PrivateLink access deprovisioning is in progress;
-	Phase string `json:"phase"`
+	Phase string `json:"phase,omitempty"`
 	// Error code if PrivateLink access is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`
 	// Displayable error message if PrivateLink access is in a failed state
@@ -197,7 +198,11 @@ func (o NetworkingV1PrivateLinkAccessStatus) MarshalJSON() ([]byte, error) {
 	if o.ErrorMessage != nil {
 		toSerialize["error_message"] = o.ErrorMessage
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1PrivateLinkAccessStatus struct {
@@ -228,7 +233,11 @@ func NewNullableNetworkingV1PrivateLinkAccessStatus(val *NetworkingV1PrivateLink
 }
 
 func (v NullableNetworkingV1PrivateLinkAccessStatus) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1PrivateLinkAccessStatus) UnmarshalJSON(src []byte) error {

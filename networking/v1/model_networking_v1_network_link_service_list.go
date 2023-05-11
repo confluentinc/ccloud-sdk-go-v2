@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,12 +37,12 @@ import (
 // NetworkingV1NetworkLinkServiceList List of incoming Network Link Enpoints associated with the Network Link Service.   ## The Network Link Service Associations Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.NetworkLinkServiceAssociation\" />
 type NetworkingV1NetworkLinkServiceList struct {
 	// APIVersion defines the schema version of this representation of a resource.
-	ApiVersion string `json:"api_version"`
+	ApiVersion string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
-	Kind     string   `json:"kind"`
-	Metadata ListMeta `json:"metadata"`
+	Kind     string   `json:"kind,omitempty"`
+	Metadata ListMeta `json:"metadata,omitempty"`
 	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
-	Data []NetworkingV1NetworkLinkService `json:"data"`
+	Data []NetworkingV1NetworkLinkService `json:"data,omitempty"`
 }
 
 // NewNetworkingV1NetworkLinkServiceList instantiates a new NetworkingV1NetworkLinkServiceList object
@@ -213,7 +214,11 @@ func (o NetworkingV1NetworkLinkServiceList) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1NetworkLinkServiceList struct {
@@ -244,7 +249,11 @@ func NewNullableNetworkingV1NetworkLinkServiceList(val *NetworkingV1NetworkLinkS
 }
 
 func (v NullableNetworkingV1NetworkLinkServiceList) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1NetworkLinkServiceList) UnmarshalJSON(src []byte) error {

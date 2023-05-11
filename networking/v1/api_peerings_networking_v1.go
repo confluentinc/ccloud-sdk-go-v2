@@ -44,7 +44,7 @@ type PeeringsNetworkingV1Api interface {
 	/*
 		CreateNetworkingV1Peering Create a Peering
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to create a peering.
 
@@ -60,7 +60,7 @@ type PeeringsNetworkingV1Api interface {
 	/*
 		DeleteNetworkingV1Peering Delete a Peering
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to delete a peering.
 
@@ -76,7 +76,7 @@ type PeeringsNetworkingV1Api interface {
 	/*
 		GetNetworkingV1Peering Read a Peering
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to read a peering.
 
@@ -93,7 +93,7 @@ type PeeringsNetworkingV1Api interface {
 	/*
 		ListNetworkingV1Peerings List of Peerings
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Retrieve a sorted, filtered, paginated list of all peerings.
 
@@ -109,7 +109,7 @@ type PeeringsNetworkingV1Api interface {
 	/*
 		UpdateNetworkingV1Peering Update a Peering
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to update a peering.
 
@@ -147,12 +147,12 @@ func (r ApiCreateNetworkingV1PeeringRequest) Execute() (NetworkingV1Peering, *_n
 /*
 CreateNetworkingV1Peering Create a Peering
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create a peering.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateNetworkingV1PeeringRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateNetworkingV1PeeringRequest
 */
 func (a *PeeringsNetworkingV1ApiService) CreateNetworkingV1Peering(ctx _context.Context) ApiCreateNetworkingV1PeeringRequest {
 	return ApiCreateNetworkingV1PeeringRequest{
@@ -162,7 +162,8 @@ func (a *PeeringsNetworkingV1ApiService) CreateNetworkingV1Peering(ctx _context.
 }
 
 // Execute executes the request
-//  @return NetworkingV1Peering
+//
+//	@return NetworkingV1Peering
 func (a *PeeringsNetworkingV1ApiService) CreateNetworkingV1PeeringExecute(r ApiCreateNetworkingV1PeeringRequest) (NetworkingV1Peering, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -329,13 +330,13 @@ func (r ApiDeleteNetworkingV1PeeringRequest) Execute() (*_nethttp.Response, erro
 /*
 DeleteNetworkingV1Peering Delete a Peering
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete a peering.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the peering.
- @return ApiDeleteNetworkingV1PeeringRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the peering.
+	@return ApiDeleteNetworkingV1PeeringRequest
 */
 func (a *PeeringsNetworkingV1ApiService) DeleteNetworkingV1Peering(ctx _context.Context, id string) ApiDeleteNetworkingV1PeeringRequest {
 	return ApiDeleteNetworkingV1PeeringRequest{
@@ -485,13 +486,13 @@ func (r ApiGetNetworkingV1PeeringRequest) Execute() (NetworkingV1Peering, *_neth
 /*
 GetNetworkingV1Peering Read a Peering
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a peering.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the peering.
- @return ApiGetNetworkingV1PeeringRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the peering.
+	@return ApiGetNetworkingV1PeeringRequest
 */
 func (a *PeeringsNetworkingV1ApiService) GetNetworkingV1Peering(ctx _context.Context, id string) ApiGetNetworkingV1PeeringRequest {
 	return ApiGetNetworkingV1PeeringRequest{
@@ -502,7 +503,8 @@ func (a *PeeringsNetworkingV1ApiService) GetNetworkingV1Peering(ctx _context.Con
 }
 
 // Execute executes the request
-//  @return NetworkingV1Peering
+//
+//	@return NetworkingV1Peering
 func (a *PeeringsNetworkingV1ApiService) GetNetworkingV1PeeringExecute(r ApiGetNetworkingV1PeeringRequest) (NetworkingV1Peering, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -686,12 +688,12 @@ func (r ApiListNetworkingV1PeeringsRequest) Execute() (NetworkingV1PeeringList, 
 /*
 ListNetworkingV1Peerings List of Peerings
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all peerings.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListNetworkingV1PeeringsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListNetworkingV1PeeringsRequest
 */
 func (a *PeeringsNetworkingV1ApiService) ListNetworkingV1Peerings(ctx _context.Context) ApiListNetworkingV1PeeringsRequest {
 	return ApiListNetworkingV1PeeringsRequest{
@@ -701,7 +703,8 @@ func (a *PeeringsNetworkingV1ApiService) ListNetworkingV1Peerings(ctx _context.C
 }
 
 // Execute executes the request
-//  @return NetworkingV1PeeringList
+//
+//	@return NetworkingV1PeeringList
 func (a *PeeringsNetworkingV1ApiService) ListNetworkingV1PeeringsExecute(r ApiListNetworkingV1PeeringsRequest) (NetworkingV1PeeringList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -854,15 +857,13 @@ func (r ApiUpdateNetworkingV1PeeringRequest) Execute() (NetworkingV1Peering, *_n
 /*
 UpdateNetworkingV1Peering Update a Peering
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update a peering.
 
-
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the peering.
- @return ApiUpdateNetworkingV1PeeringRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the peering.
+	@return ApiUpdateNetworkingV1PeeringRequest
 */
 func (a *PeeringsNetworkingV1ApiService) UpdateNetworkingV1Peering(ctx _context.Context, id string) ApiUpdateNetworkingV1PeeringRequest {
 	return ApiUpdateNetworkingV1PeeringRequest{
@@ -873,7 +874,8 @@ func (a *PeeringsNetworkingV1ApiService) UpdateNetworkingV1Peering(ctx _context.
 }
 
 // Execute executes the request
-//  @return NetworkingV1Peering
+//
+//	@return NetworkingV1Peering
 func (a *PeeringsNetworkingV1ApiService) UpdateNetworkingV1PeeringExecute(r ApiUpdateNetworkingV1PeeringRequest) (NetworkingV1Peering, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch

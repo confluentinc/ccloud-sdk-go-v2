@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -140,15 +141,27 @@ func (dst *NetworkingV1NetworkStatusCloudOneOf) UnmarshalJSON(data []byte) error
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src NetworkingV1NetworkStatusCloudOneOf) MarshalJSON() ([]byte, error) {
 	if src.NetworkingV1AwsNetwork != nil {
-		return json.Marshal(&src.NetworkingV1AwsNetwork)
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.NetworkingV1AwsNetwork)
+		return buffer.Bytes(), err
 	}
 
 	if src.NetworkingV1AzureNetwork != nil {
-		return json.Marshal(&src.NetworkingV1AzureNetwork)
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.NetworkingV1AzureNetwork)
+		return buffer.Bytes(), err
 	}
 
 	if src.NetworkingV1GcpNetwork != nil {
-		return json.Marshal(&src.NetworkingV1GcpNetwork)
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.NetworkingV1GcpNetwork)
+		return buffer.Bytes(), err
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -200,7 +213,11 @@ func NewNullableNetworkingV1NetworkStatusCloudOneOf(val *NetworkingV1NetworkStat
 }
 
 func (v NullableNetworkingV1NetworkStatusCloudOneOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1NetworkStatusCloudOneOf) UnmarshalJSON(src []byte) error {

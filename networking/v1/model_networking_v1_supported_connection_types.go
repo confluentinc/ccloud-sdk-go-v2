@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -94,7 +95,11 @@ func (o NetworkingV1SupportedConnectionTypes) MarshalJSON() ([]byte, error) {
 	for i, item := range o.Items {
 		toSerialize[i] = item
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 func (o *NetworkingV1SupportedConnectionTypes) UnmarshalJSON(bytes []byte) (err error) {
@@ -129,7 +134,11 @@ func NewNullableNetworkingV1SupportedConnectionTypes(val *NetworkingV1SupportedC
 }
 
 func (v NullableNetworkingV1SupportedConnectionTypes) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1SupportedConnectionTypes) UnmarshalJSON(src []byte) error {

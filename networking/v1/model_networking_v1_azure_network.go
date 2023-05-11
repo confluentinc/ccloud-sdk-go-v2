@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,11 +37,11 @@ import (
 // NetworkingV1AzureNetwork The Azure network details.
 type NetworkingV1AzureNetwork struct {
 	// Network kind type.
-	Kind string `json:"kind"`
+	Kind string `json:"kind,omitempty"`
 	// The resource ID of the Confluent Cloud VNet.
-	Vnet string `json:"vnet"`
+	Vnet string `json:"vnet,omitempty"`
 	// The Azure Subscription ID associated with the Confluent Cloud VPC.
-	Subscription string `json:"subscription"`
+	Subscription string `json:"subscription,omitempty"`
 	// The mapping of zones to Private Link Service Aliases if available. Keys are zones and values are [Azure Private Link Service Aliases](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#share-your-service).
 	PrivateLinkServiceAliases *map[string]string `json:"private_link_service_aliases,omitempty"`
 	// The mapping of zones to Private Link Service Resource IDs if available. Keys are zones and values are [Azure Private Link Service Resource IDs](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview#share-your-service).
@@ -259,7 +260,11 @@ func (o NetworkingV1AzureNetwork) MarshalJSON() ([]byte, error) {
 	if o.PrivateLinkServiceResourceIds != nil {
 		toSerialize["private_link_service_resource_ids"] = o.PrivateLinkServiceResourceIds
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1AzureNetwork struct {
@@ -290,7 +295,11 @@ func NewNullableNetworkingV1AzureNetwork(val *NetworkingV1AzureNetwork) *Nullabl
 }
 
 func (v NullableNetworkingV1AzureNetwork) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1AzureNetwork) UnmarshalJSON(src []byte) error {
