@@ -26,6 +26,7 @@ Contact: flink-control-plane@confluent.io
 package v1alpha1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -280,7 +281,11 @@ func (o SqlV1alpha1StatementSpec) MarshalJSON() ([]byte, error) {
 	if o.IdentityPoolId != nil {
 		toSerialize["identity_pool_id"] = o.IdentityPoolId
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableSqlV1alpha1StatementSpec struct {
@@ -311,7 +316,11 @@ func NewNullableSqlV1alpha1StatementSpec(val *SqlV1alpha1StatementSpec) *Nullabl
 }
 
 func (v NullableSqlV1alpha1StatementSpec) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableSqlV1alpha1StatementSpec) UnmarshalJSON(src []byte) error {

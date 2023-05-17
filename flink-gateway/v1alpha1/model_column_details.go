@@ -26,6 +26,7 @@ Contact: flink-control-plane@confluent.io
 package v1alpha1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -152,7 +153,11 @@ func (o ColumnDetails) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["type"] = o.Type
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableColumnDetails struct {
@@ -183,7 +188,11 @@ func NewNullableColumnDetails(val *ColumnDetails) *NullableColumnDetails {
 }
 
 func (v NullableColumnDetails) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableColumnDetails) UnmarshalJSON(src []byte) error {

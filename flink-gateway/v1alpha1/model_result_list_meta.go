@@ -26,6 +26,7 @@ Contact: flink-control-plane@confluent.io
 package v1alpha1
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
@@ -205,7 +206,11 @@ func (o ResultListMeta) MarshalJSON() ([]byte, error) {
 	if o.CreatedAt != nil {
 		toSerialize["created_at"] = o.CreatedAt
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableResultListMeta struct {
@@ -236,7 +241,11 @@ func NewNullableResultListMeta(val *ResultListMeta) *NullableResultListMeta {
 }
 
 func (v NullableResultListMeta) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableResultListMeta) UnmarshalJSON(src []byte) error {

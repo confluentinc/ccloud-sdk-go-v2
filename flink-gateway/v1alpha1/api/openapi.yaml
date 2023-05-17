@@ -805,13 +805,13 @@ paths:
             --url https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/%7Benvironment_id%7D/statements \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"statement_name":"sql123","statement":"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;","properties":{"key1":"value1","key2":"value2"},"compute_pool_id":"fcp-00000"}}'
+            --data '{"spec":{"statement_name":"sql123","statement":"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;","properties":{"key1":"value1","key2":"value2"},"compute_pool_id":"fcp-00000","identity_pool_id":"pool-abc123"}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"statement_name\":\"sql123\",\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\"}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"statement_name\":\"sql123\",\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"identity_pool_id\":\"pool-abc123\"}}");
           Request request = new Request.Builder()
             .url("https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/%7Benvironment_id%7D/statements")
             .post(body)
@@ -826,19 +826,20 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"statement_name\\\
           \":\\\"sql123\\\",\\\"statement\\\":\\\"SELECT * FROM TABLE WHERE VALUE1\
           \ = VALUE2;\\\",\\\"properties\\\":{\\\"key1\\\":\\\"value1\\\",\\\"key2\\\
-          \":\\\"value2\\\"},\\\"compute_pool_id\\\":\\\"fcp-00000\\\"}}\")\n\n\t\
-          req, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \":\\\"value2\\\"},\\\"compute_pool_id\\\":\\\"fcp-00000\\\",\\\"identity_pool_id\\\
+          \":\\\"pool-abc123\\\"}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url,\
+          \ payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\")\n\
+          \treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\t\
+          res, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
 
-          payload = "{\"spec\":{\"statement_name\":\"sql123\",\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\"}}"
+          payload = "{\"spec\":{\"statement_name\":\"sql123\",\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"identity_pool_id\":\"pool-abc123\"}}"
 
           headers = {
               'content-type': "application/json",
@@ -884,7 +885,8 @@ paths:
               statement_name: 'sql123',
               statement: 'SELECT * FROM TABLE WHERE VALUE1 = VALUE2;',
               properties: {key1: 'value1', key2: 'value2'},
-              compute_pool_id: 'fcp-00000'
+              compute_pool_id: 'fcp-00000',
+              identity_pool_id: 'pool-abc123'
             }
           }));
           req.end();
@@ -900,7 +902,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"statement_name\":\"sql123\",\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\"}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"statement_name\":\"sql123\",\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"identity_pool_id\":\"pool-abc123\"}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -909,7 +911,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"statement_name\":\"sql123\",\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\"}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"statement_name\":\"sql123\",\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"identity_pool_id\":\"pool-abc123\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: SQL API v1alpha1
   /sql/v1alpha1/environments/{environment_id}/statements/{statement_name}:
@@ -1912,6 +1914,7 @@ components:
             RUNNING: SQL statement execution is in progress;
             COMPLETED: SQL statement is completed;
             DELETING: SQL statement deletion is in progress;
+            FAILING: SQL statement is failing;
             FAILED: SQL statement execution has failed;
           example: RUNNING
           readOnly: true
@@ -1921,6 +1924,7 @@ components:
           - RUNNING
           - COMPLETED
           - DELETING
+          - FAILING
           - FAILED
         result_schema:
           $ref: '#/components/schemas/sql.v1alpha1.ResultSchema'
@@ -2036,80 +2040,38 @@ components:
         an array of results.
       properties:
         data:
-          description: A data property that contains an array of results.
-          items:
-            $ref: '#/components/schemas/sql.v1alpha1.ResultItem'
+          description: "A data property that contains an array of results. Each entry\
+            \ in the array is a separate result.\n\nThe value of `op` attribute (if\
+            \ present) represents the kind of change that a row can describe in a\
+            \ changelog:\n\n`0`: represents `INSERT` (`+I`), i.e. insertion operation;\n\
+            \n`1`: represents `UPDATE_BEFORE` (`-U`), i.e. update operation with the\
+            \ previous content of the updated row.\nThis kind should occur together\
+            \ with `UPDATE_AFTER` for modelling an update that needs to retract\n\
+            the previous row first. It is useful in cases of a non-idempotent update,\
+            \ i.e., an update of a row that is not \nuniquely identifiable by a key;\n\
+            \n`2`: represents `UPDATE_AFTER` (`+U`), i.e. update operation with new\
+            \ content of the updated row;\nThis kind CAN occur together with `UPDATE_BEFORE`\
+            \ for modelling an update that\nneeds to retract the previous row first\
+            \ or it describes an idempotent update, i.e., an\nupdate of a row that\
+            \ is uniquely identifiable by a key;\n\n`3`: represents `DELETE` (`-D`),\
+            \ i.e. deletion operation;\n\nDefaults to `0`.\n"
+          example:
+          - op: 0
+            row:
+            - "101"
+            - Jay
+            - - null
+              - abc
+            - - null
+              - "456"
+            - 1990-01-12 12:00.12
+            - - - null
+                - Alice
+              - - "42"
+                - Bob
+          items: {}
           type: array
       type: object
-    sql.v1alpha1.ResultItem:
-      description: A data property that contains an array of results. Each entry in
-        the array is a separate result.
-      properties:
-        op:
-          default: 0
-          description: "The kind of change that a row can describe in a changelog:\n\
-            \n`0`: represents `INSERT` (`+I`), i.e. insertion operation;\n\n`1`: represents\
-            \ `UPDATE_BEFORE` (`-U`), i.e. update operation with the previous content\
-            \ of the updated row.\nThis kind should occur together with `UPDATE_AFTER`\
-            \ for modelling an update that needs to retract\nthe previous row first.\
-            \ It is useful in cases of a non-idempotent update, i.e., an update of\
-            \ a row that is not \nuniquely identifiable by a key;\n\n`2`: represents\
-            \ `UPDATE_AFTER` (`+U`), i.e. update operation with new content of the\
-            \ updated row;\nThis kind CAN occur together with `UPDATE_BEFORE` for\
-            \ modelling an update that\nneeds to retract the previous row first or\
-            \ it describes an idempotent update, i.e., an\nupdate of a row that is\
-            \ uniquely identifiable by a key;\n\n`3`: represents `DELETE` (`-D`),\
-            \ i.e. deletion operation;\n\nDefaults to `0`.\n"
-          format: int32
-          maximum: 3
-          minimum: 0
-          type: integer
-        row:
-          $ref: '#/components/schemas/sql.v1alpha1.ResultItemRow'
-      required:
-      - row
-      type: object
-    sql.v1alpha1.ResultItemRow:
-      description: An item of the `row` attribute.
-      example:
-      - "101"
-      - Jay
-      - - null
-        - abc
-      - - null
-        - "456"
-      - 1990-01-12 12:00.12
-      - - - null
-          - Alice
-        - - "42"
-          - Bob
-      items:
-        nullable: true
-        oneOf:
-        - $ref: '#/components/schemas/sql.v1alpha1.ResultItemString'
-        - $ref: '#/components/schemas/sql.v1alpha1.ResultItemRow'
-        x-one-of-name: SqlV1alpha1ResultItemRowOneOf
-      type: array
-    sql.v1alpha1.ResultItemString:
-      type: string
-    sql.v1alpha1.ResultItemOp:
-      default: 0
-      description: "The kind of change that a row can describe in a changelog:\n\n\
-        `0`: represents `INSERT` (`+I`), i.e. insertion operation;\n\n`1`: represents\
-        \ `UPDATE_BEFORE` (`-U`), i.e. update operation with the previous content\
-        \ of the updated row.\nThis kind should occur together with `UPDATE_AFTER`\
-        \ for modelling an update that needs to retract\nthe previous row first. It\
-        \ is useful in cases of a non-idempotent update, i.e., an update of a row\
-        \ that is not \nuniquely identifiable by a key;\n\n`2`: represents `UPDATE_AFTER`\
-        \ (`+U`), i.e. update operation with new content of the updated row;\nThis\
-        \ kind CAN occur together with `UPDATE_BEFORE` for modelling an update that\n\
-        needs to retract the previous row first or it describes an idempotent update,\
-        \ i.e., an\nupdate of a row that is uniquely identifiable by a key;\n\n`3`:\
-        \ represents `DELETE` (`-D`), i.e. deletion operation;\n\nDefaults to `0`.\n"
-      format: int32
-      maximum: 3
-      minimum: 0
-      type: integer
     sql.v1alpha1.StatementSpec:
       description: The specs of the Statement
       properties:
@@ -2136,6 +2098,11 @@ components:
         compute_pool_id:
           description: The id associated with the compute pool in context.
           example: fcp-00000
+          maxLength: 255
+          type: string
+        identity_pool_id:
+          description: The id associated with the identity pool in context.
+          example: pool-abc123
           maxLength: 255
           type: string
       type: object
@@ -2227,167 +2194,37 @@ components:
       - type
       type: object
     DataType:
-      discriminator:
-        mapping:
-          CHAR: '#/components/schemas/CharType'
-          VARCHAR: '#/components/schemas/VarcharType'
-          BOOLEAN: '#/components/schemas/BooleanType'
-          BINARY: '#/components/schemas/BinaryType'
-          VARBINARY: '#/components/schemas/VarbinaryType'
-          DECIMAL: '#/components/schemas/DecimalType'
-          INTEGER: '#/components/schemas/IntegerType'
-          TINYINT: '#/components/schemas/TinyIntType'
-          SMALLINT: '#/components/schemas/SmallIntType'
-          BIGINT: '#/components/schemas/BigIntType'
-          FLOAT: '#/components/schemas/FloatType'
-          DOUBLE: '#/components/schemas/DoubleType'
-          DATE: '#/components/schemas/DateType'
-          TIME_WITHOUT_TIME_ZONE: '#/components/schemas/TimeWithoutTimeZoneType'
-          TIMESTAMP_WITHOUT_TIME_ZONE: '#/components/schemas/TimestampWithoutTimeZoneType'
-          TIMESTAMP_WITH_TIME_ZONE: '#/components/schemas/TimestampWithTimeZoneType'
-          TIMESTAMP_WITH_LOCAL_TIME_ZONE: '#/components/schemas/TimestampWithLocalTimeZoneType'
-          INTERVAL_YEAR_MONTH: '#/components/schemas/IntervalYearMonthType'
-          INTERVAL_DAY_TIME: '#/components/schemas/IntervalDayTimeType'
-          ARRAY: '#/components/schemas/ArrayType'
-          MULTISET: '#/components/schemas/MultisetType'
-          MAP: '#/components/schemas/MapType'
-          ROW: '#/components/schemas/RowType'
-        propertyName: type
-      oneOf:
-      - $ref: '#/components/schemas/CharType'
-      - $ref: '#/components/schemas/VarcharType'
-      - $ref: '#/components/schemas/BooleanType'
-      - $ref: '#/components/schemas/BinaryType'
-      - $ref: '#/components/schemas/VarbinaryType'
-      - $ref: '#/components/schemas/DecimalType'
-      - $ref: '#/components/schemas/IntegerType'
-      - $ref: '#/components/schemas/TinyIntType'
-      - $ref: '#/components/schemas/SmallIntType'
-      - $ref: '#/components/schemas/BigIntType'
-      - $ref: '#/components/schemas/FloatType'
-      - $ref: '#/components/schemas/DoubleType'
-      - $ref: '#/components/schemas/DateType'
-      - $ref: '#/components/schemas/TimeWithoutTimeZoneType'
-      - $ref: '#/components/schemas/TimestampWithoutTimeZoneType'
-      - $ref: '#/components/schemas/TimestampWithTimeZoneType'
-      - $ref: '#/components/schemas/TimestampWithLocalTimeZoneType'
-      - $ref: '#/components/schemas/IntervalYearMonthType'
-      - $ref: '#/components/schemas/IntervalDayTimeType'
-      - $ref: '#/components/schemas/ArrayType'
-      - $ref: '#/components/schemas/MultisetType'
-      - $ref: '#/components/schemas/MapType'
-      - $ref: '#/components/schemas/RowType'
-      x-one-of-name: DataType
-    BaseType:
       properties:
+        type:
+          description: The data type of the column.
+          example: CHAR
+          type: string
         nullable:
           description: Indicates whether values in this column can be null.
+          example: true
           type: boolean
+        length:
+          description: The length of the data type.
+          format: int32
+          type: integer
+        precision:
+          description: The precision of the data type.
+          format: int32
+          type: integer
+        scale:
+          description: The scale of the data type.
+          format: int32
+          type: integer
+        key_type:
+          allOf:
+          - $ref: '#/components/schemas/DataType'
+          description: The type of the key in the data type (if applicable).
+        value_type:
+          allOf:
+          - $ref: '#/components/schemas/DataType'
+          description: The type of the value in the data type (if applicable).
       required:
       - nullable
-      - type
-      type: object
-    CharType:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - $ref: '#/components/schemas/CharType_allOf'
-    VarcharType:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - $ref: '#/components/schemas/VarcharType_allOf'
-    BooleanType:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - $ref: '#/components/schemas/BooleanType_allOf'
-    BinaryType:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - $ref: '#/components/schemas/BinaryType_allOf'
-    VarbinaryType:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - $ref: '#/components/schemas/VarbinaryType_allOf'
-    DecimalType:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - $ref: '#/components/schemas/DecimalType_allOf'
-    IntegerType:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - $ref: '#/components/schemas/IntegerType_allOf'
-    TinyIntType:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - $ref: '#/components/schemas/TinyIntType_allOf'
-    SmallIntType:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - $ref: '#/components/schemas/SmallIntType_allOf'
-    BigIntType:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - $ref: '#/components/schemas/BigIntType_allOf'
-    FloatType:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - $ref: '#/components/schemas/FloatType_allOf'
-    DoubleType:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - $ref: '#/components/schemas/DoubleType_allOf'
-    DateType:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - $ref: '#/components/schemas/DateType_allOf'
-    TimeWithoutTimeZoneType:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - $ref: '#/components/schemas/TimeWithoutTimeZoneType_allOf'
-    TimestampWithoutTimeZoneType:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - $ref: '#/components/schemas/TimestampWithoutTimeZoneType_allOf'
-    TimestampWithTimeZoneType:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - $ref: '#/components/schemas/TimestampWithTimeZoneType_allOf'
-    TimestampWithLocalTimeZoneType:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - $ref: '#/components/schemas/TimestampWithLocalTimeZoneType_allOf'
-    IntervalYearMonthType:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - $ref: '#/components/schemas/IntervalYearMonthType_allOf'
-    IntervalDayTimeType:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - $ref: '#/components/schemas/IntervalDayTimeType_allOf'
-    ArrayType:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - $ref: '#/components/schemas/ArrayType_allOf'
-    MultisetType:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - $ref: '#/components/schemas/MultisetType_allOf'
-    MapType:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - $ref: '#/components/schemas/MapType_allOf'
-    RowType:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - $ref: '#/components/schemas/RowType_allOf'
-    RowFieldType:
-      properties:
-        name:
-          description: The name of the field.
-          type: string
-        type:
-          $ref: '#/components/schemas/DataType'
-      required:
-      - name
       - type
       type: object
     Failure:
@@ -2521,277 +2358,6 @@ components:
           readOnly: true
           type: string
       type: object
-    CharType_allOf:
-      properties:
-        type:
-          description: The data type of the column.
-          enum:
-          - CHAR
-          type: string
-        length:
-          description: The length of the column.
-          format: int32
-          minimum: 0
-          type: integer
-    VarcharType_allOf:
-      properties:
-        type:
-          description: The data type of the column.
-          enum:
-          - VARCHAR
-          type: string
-        length:
-          description: The length of the column.
-          format: int32
-          minimum: 0
-          type: integer
-    BooleanType_allOf:
-      properties:
-        type:
-          description: The data type of the column.
-          enum:
-          - BOOLEAN
-          type: string
-    BinaryType_allOf:
-      properties:
-        type:
-          description: The data type of the column.
-          enum:
-          - BINARY
-          type: string
-        length:
-          description: The length of the column.
-          format: int32
-          minimum: 0
-          type: integer
-    VarbinaryType_allOf:
-      properties:
-        type:
-          description: The data type of the column.
-          enum:
-          - VARBINARY
-          type: string
-        length:
-          description: The length of the column.
-          format: int32
-          minimum: 0
-          type: integer
-    DecimalType_allOf:
-      properties:
-        type:
-          description: The data type of the column.
-          enum:
-          - DECIMAL
-          type: string
-        precision:
-          description: The precision of the decimal type (i.e. the number of digits
-            in the number).
-          format: int32
-          maximum: 38
-          minimum: 0
-          type: integer
-        scale:
-          description: The scale of the decimal type (i.e. the number of digits to
-            the right of the decimal point).
-          format: int32
-          maximum: 38
-          minimum: 0
-          type: integer
-      required:
-      - precision
-      - scale
-    IntegerType_allOf:
-      properties:
-        type:
-          description: The data type of the column.
-          enum:
-          - INTEGER
-          type: string
-    TinyIntType_allOf:
-      properties:
-        type:
-          description: The data type of the column.
-          enum:
-          - TINYINT
-          type: string
-    SmallIntType_allOf:
-      properties:
-        type:
-          description: The data type of the column.
-          enum:
-          - SMALLINT
-          type: string
-    BigIntType_allOf:
-      properties:
-        type:
-          description: The data type of the column.
-          enum:
-          - BIGINT
-          type: string
-    FloatType_allOf:
-      properties:
-        type:
-          description: The data type of the column.
-          enum:
-          - FLOAT
-          type: string
-    DoubleType_allOf:
-      properties:
-        type:
-          description: The data type of the column.
-          enum:
-          - DOUBLE
-          type: string
-    DateType_allOf:
-      properties:
-        type:
-          description: The data type of the column.
-          enum:
-          - DATE
-          type: string
-    TimeWithoutTimeZoneType_allOf:
-      properties:
-        type:
-          description: The data type of the column.
-          enum:
-          - TIME_WITHOUT_TIME_ZONE
-          type: string
-        scale:
-          description: The scale of the time type.
-          format: int32
-          maximum: 38
-          minimum: 0
-          type: integer
-        precision:
-          description: The precision of the time type.
-          format: int32
-          maximum: 38
-          minimum: 0
-          type: integer
-    TimestampWithoutTimeZoneType_allOf:
-      properties:
-        type:
-          description: The data type of the column.
-          enum:
-          - TIMESTAMP_WITHOUT_TIME_ZONE
-          type: string
-    TimestampWithTimeZoneType_allOf:
-      properties:
-        type:
-          description: The data type of the column.
-          enum:
-          - TIMESTAMP_WITH_TIME_ZONE
-          type: string
-    TimestampWithLocalTimeZoneType_allOf:
-      properties:
-        type:
-          description: The data type of the column.
-          enum:
-          - TIMESTAMP_WITH_LOCAL_TIME_ZONE
-          type: string
-        precision:
-          description: The precision of the decimal type (i.e. the number of digits
-            in the number).
-          format: int32
-          maximum: 38
-          minimum: 0
-          type: integer
-    IntervalYearMonthType_allOf:
-      properties:
-        type:
-          description: The data type of the column.
-          enum:
-          - INTERVAL_YEAR_MONTH
-          type: string
-        resolution:
-          description: The resolution for the interval
-          example: YEAR
-          type: string
-          x-extensible-enum:
-          - YEAR
-          - YEAR_TO_MONTH
-          - MONTH
-    IntervalDayTimeType_allOf:
-      properties:
-        type:
-          description: The data type of the column.
-          enum:
-          - INTERVAL_DAY_TIME
-          type: string
-        resolution:
-          description: The resolution for the interval
-          example: DAY
-          type: string
-          x-extensible-enum:
-          - DAY
-          - DAY_TO_HOUR
-          - DAY_TO_MINUTE
-          - DAY_TO_SECOND
-          - HOUR
-          - HOUR_TO_MINUTE
-          - HOUR_TO_SECOND
-          - MINUTE
-          - MINUTE_TO_SECOND
-          - SECOND
-    ArrayType_allOf:
-      properties:
-        type:
-          description: The data type of the column.
-          enum:
-          - ARRAY
-          type: string
-        array_element_type:
-          allOf:
-          - $ref: '#/components/schemas/DataType'
-          description: The type of the elements in the array.
-      required:
-      - array_element_type
-    MultisetType_allOf:
-      properties:
-        type:
-          description: The data type of the column.
-          enum:
-          - MULTISET
-          type: string
-        multiset_element_type:
-          allOf:
-          - $ref: '#/components/schemas/DataType'
-          description: The type of the elements in the multiset.
-      required:
-      - multiset_element_type
-    MapType_allOf:
-      properties:
-        type:
-          description: The data type of the column.
-          enum:
-          - MAP
-          type: string
-        key_type:
-          allOf:
-          - $ref: '#/components/schemas/DataType'
-          description: The type of the key in the map.
-        value_type:
-          allOf:
-          - $ref: '#/components/schemas/DataType'
-          description: The type of the value in the map.
-      required:
-      - key_type
-      - value_type
-    RowType_allOf:
-      properties:
-        type:
-          description: The data type of the column.
-          enum:
-          - ROW
-          type: string
-        fields:
-          description: The fields of the row. Can be of type [INTEGER, DECIMAL, CHARACTER,
-            ROW, ARRAY, TIMESTAMP, MAP<INT, STRING>]
-          items:
-            $ref: '#/components/schemas/RowFieldType'
-          type: array
-      required:
-      - fields
     Error_source:
       description: If this error was caused by a particular part of the API request,
         the source will point to the query string parameter or request body property

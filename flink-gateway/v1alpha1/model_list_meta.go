@@ -26,6 +26,7 @@ Contact: flink-control-plane@confluent.io
 package v1alpha1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -166,7 +167,11 @@ func (o ListMeta) MarshalJSON() ([]byte, error) {
 	if o.Next != nil {
 		toSerialize["next"] = o.Next
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableListMeta struct {
@@ -197,7 +202,11 @@ func NewNullableListMeta(val *ListMeta) *NullableListMeta {
 }
 
 func (v NullableListMeta) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableListMeta) UnmarshalJSON(src []byte) error {

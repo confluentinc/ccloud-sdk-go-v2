@@ -26,6 +26,7 @@ Contact: flink-control-plane@confluent.io
 package v1alpha1
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
@@ -205,7 +206,11 @@ func (o SqlV1alpha1StatementException) MarshalJSON() ([]byte, error) {
 	if o.Timestamp != nil {
 		toSerialize["timestamp"] = o.Timestamp
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableSqlV1alpha1StatementException struct {
@@ -236,7 +241,11 @@ func NewNullableSqlV1alpha1StatementException(val *SqlV1alpha1StatementException
 }
 
 func (v NullableSqlV1alpha1StatementException) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableSqlV1alpha1StatementException) UnmarshalJSON(src []byte) error {

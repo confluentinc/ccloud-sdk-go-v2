@@ -26,6 +26,7 @@ Contact: flink-control-plane@confluent.io
 package v1alpha1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,8 +36,8 @@ import (
 
 // SqlV1alpha1StatementResultResults A results property that contains a data property that contains an array of results.
 type SqlV1alpha1StatementResultResults struct {
-	// A data property that contains an array of results.
-	Data *[]SqlV1alpha1ResultItem `json:"data,omitempty"`
+	// A data property that contains an array of results. Each entry in the array is a separate result.  The value of `op` attribute (if present) represents the kind of change that a row can describe in a changelog:  `0`: represents `INSERT` (`+I`), i.e. insertion operation;  `1`: represents `UPDATE_BEFORE` (`-U`), i.e. update operation with the previous content of the updated row. This kind should occur together with `UPDATE_AFTER` for modelling an update that needs to retract the previous row first. It is useful in cases of a non-idempotent update, i.e., an update of a row that is not  uniquely identifiable by a key;  `2`: represents `UPDATE_AFTER` (`+U`), i.e. update operation with new content of the updated row; This kind CAN occur together with `UPDATE_BEFORE` for modelling an update that needs to retract the previous row first or it describes an idempotent update, i.e., an update of a row that is uniquely identifiable by a key;  `3`: represents `DELETE` (`-D`), i.e. deletion operation;  Defaults to `0`. 
+	Data *[]interface{} `json:"data,omitempty"`
 }
 
 // NewSqlV1alpha1StatementResultResults instantiates a new SqlV1alpha1StatementResultResults object
@@ -57,9 +58,9 @@ func NewSqlV1alpha1StatementResultResultsWithDefaults() *SqlV1alpha1StatementRes
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *SqlV1alpha1StatementResultResults) GetData() []SqlV1alpha1ResultItem {
+func (o *SqlV1alpha1StatementResultResults) GetData() []interface{} {
 	if o == nil || o.Data == nil {
-		var ret []SqlV1alpha1ResultItem
+		var ret []interface{}
 		return ret
 	}
 	return *o.Data
@@ -67,7 +68,7 @@ func (o *SqlV1alpha1StatementResultResults) GetData() []SqlV1alpha1ResultItem {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SqlV1alpha1StatementResultResults) GetDataOk() (*[]SqlV1alpha1ResultItem, bool) {
+func (o *SqlV1alpha1StatementResultResults) GetDataOk() (*[]interface{}, bool) {
 	if o == nil || o.Data == nil {
 		return nil, false
 	}
@@ -83,8 +84,8 @@ func (o *SqlV1alpha1StatementResultResults) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given []SqlV1alpha1ResultItem and assigns it to the Data field.
-func (o *SqlV1alpha1StatementResultResults) SetData(v []SqlV1alpha1ResultItem) {
+// SetData gets a reference to the given []interface{} and assigns it to the Data field.
+func (o *SqlV1alpha1StatementResultResults) SetData(v []interface{}) {
 	o.Data = &v
 }
 
@@ -128,7 +129,11 @@ func (o SqlV1alpha1StatementResultResults) MarshalJSON() ([]byte, error) {
 	if o.Data != nil {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableSqlV1alpha1StatementResultResults struct {
@@ -159,7 +164,11 @@ func NewNullableSqlV1alpha1StatementResultResults(val *SqlV1alpha1StatementResul
 }
 
 func (v NullableSqlV1alpha1StatementResultResults) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableSqlV1alpha1StatementResultResults) UnmarshalJSON(src []byte) error {

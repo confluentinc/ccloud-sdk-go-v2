@@ -26,911 +26,328 @@ Contact: flink-control-plane@confluent.io
 package v1alpha1
 
 import (
+	"bytes"
 	"encoding/json"
-	"fmt"
 )
 
-// DataType - struct for DataType
+import (
+	"reflect"
+)
+
+// DataType struct for DataType
 type DataType struct {
-	ArrayType *ArrayType
-	BigIntType *BigIntType
-	BinaryType *BinaryType
-	BooleanType *BooleanType
-	CharType *CharType
-	DateType *DateType
-	DecimalType *DecimalType
-	DoubleType *DoubleType
-	FloatType *FloatType
-	IntegerType *IntegerType
-	IntervalDayTimeType *IntervalDayTimeType
-	IntervalYearMonthType *IntervalYearMonthType
-	MapType *MapType
-	MultisetType *MultisetType
-	RowType *RowType
-	SmallIntType *SmallIntType
-	TimeWithoutTimeZoneType *TimeWithoutTimeZoneType
-	TimestampWithLocalTimeZoneType *TimestampWithLocalTimeZoneType
-	TimestampWithTimeZoneType *TimestampWithTimeZoneType
-	TimestampWithoutTimeZoneType *TimestampWithoutTimeZoneType
-	TinyIntType *TinyIntType
-	VarbinaryType *VarbinaryType
-	VarcharType *VarcharType
+	// The data type of the column.
+	Type string `json:"type,omitempty"`
+	// Indicates whether values in this column can be null.
+	Nullable bool `json:"nullable,omitempty"`
+	// The length of the data type.
+	Length *int32 `json:"length,omitempty"`
+	// The precision of the data type.
+	Precision *int32 `json:"precision,omitempty"`
+	// The scale of the data type.
+	Scale *int32 `json:"scale,omitempty"`
+	// The type of the key in the data type (if applicable).
+	KeyType *DataType `json:"key_type,omitempty"`
+	// The type of the value in the data type (if applicable).
+	ValueType *DataType `json:"value_type,omitempty"`
 }
 
-// ArrayTypeAsDataType is a convenience function that returns ArrayType wrapped in DataType
-func ArrayTypeAsDataType(v *ArrayType) DataType {
-	return DataType{ ArrayType: v}
+// NewDataType instantiates a new DataType object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewDataType(type_ string, nullable bool) *DataType {
+	this := DataType{}
+	this.Type = type_
+	this.Nullable = nullable
+	return &this
 }
 
-// BigIntTypeAsDataType is a convenience function that returns BigIntType wrapped in DataType
-func BigIntTypeAsDataType(v *BigIntType) DataType {
-	return DataType{ BigIntType: v}
+// NewDataTypeWithDefaults instantiates a new DataType object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewDataTypeWithDefaults() *DataType {
+	this := DataType{}
+	return &this
 }
 
-// BinaryTypeAsDataType is a convenience function that returns BinaryType wrapped in DataType
-func BinaryTypeAsDataType(v *BinaryType) DataType {
-	return DataType{ BinaryType: v}
+// GetType returns the Type field value
+func (o *DataType) GetType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Type
 }
 
-// BooleanTypeAsDataType is a convenience function that returns BooleanType wrapped in DataType
-func BooleanTypeAsDataType(v *BooleanType) DataType {
-	return DataType{ BooleanType: v}
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *DataType) GetTypeOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.Type, true
 }
 
-// CharTypeAsDataType is a convenience function that returns CharType wrapped in DataType
-func CharTypeAsDataType(v *CharType) DataType {
-	return DataType{ CharType: v}
+// SetType sets field value
+func (o *DataType) SetType(v string) {
+	o.Type = v
 }
 
-// DateTypeAsDataType is a convenience function that returns DateType wrapped in DataType
-func DateTypeAsDataType(v *DateType) DataType {
-	return DataType{ DateType: v}
+// GetNullable returns the Nullable field value
+func (o *DataType) GetNullable() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Nullable
 }
 
-// DecimalTypeAsDataType is a convenience function that returns DecimalType wrapped in DataType
-func DecimalTypeAsDataType(v *DecimalType) DataType {
-	return DataType{ DecimalType: v}
+// GetNullableOk returns a tuple with the Nullable field value
+// and a boolean to check if the value has been set.
+func (o *DataType) GetNullableOk() (*bool, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.Nullable, true
 }
 
-// DoubleTypeAsDataType is a convenience function that returns DoubleType wrapped in DataType
-func DoubleTypeAsDataType(v *DoubleType) DataType {
-	return DataType{ DoubleType: v}
+// SetNullable sets field value
+func (o *DataType) SetNullable(v bool) {
+	o.Nullable = v
 }
 
-// FloatTypeAsDataType is a convenience function that returns FloatType wrapped in DataType
-func FloatTypeAsDataType(v *FloatType) DataType {
-	return DataType{ FloatType: v}
+// GetLength returns the Length field value if set, zero value otherwise.
+func (o *DataType) GetLength() int32 {
+	if o == nil || o.Length == nil {
+		var ret int32
+		return ret
+	}
+	return *o.Length
 }
 
-// IntegerTypeAsDataType is a convenience function that returns IntegerType wrapped in DataType
-func IntegerTypeAsDataType(v *IntegerType) DataType {
-	return DataType{ IntegerType: v}
+// GetLengthOk returns a tuple with the Length field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DataType) GetLengthOk() (*int32, bool) {
+	if o == nil || o.Length == nil {
+		return nil, false
+	}
+	return o.Length, true
 }
 
-// IntervalDayTimeTypeAsDataType is a convenience function that returns IntervalDayTimeType wrapped in DataType
-func IntervalDayTimeTypeAsDataType(v *IntervalDayTimeType) DataType {
-	return DataType{ IntervalDayTimeType: v}
+// HasLength returns a boolean if a field has been set.
+func (o *DataType) HasLength() bool {
+	if o != nil && o.Length != nil {
+		return true
+	}
+
+	return false
 }
 
-// IntervalYearMonthTypeAsDataType is a convenience function that returns IntervalYearMonthType wrapped in DataType
-func IntervalYearMonthTypeAsDataType(v *IntervalYearMonthType) DataType {
-	return DataType{ IntervalYearMonthType: v}
+// SetLength gets a reference to the given int32 and assigns it to the Length field.
+func (o *DataType) SetLength(v int32) {
+	o.Length = &v
 }
 
-// MapTypeAsDataType is a convenience function that returns MapType wrapped in DataType
-func MapTypeAsDataType(v *MapType) DataType {
-	return DataType{ MapType: v}
+// GetPrecision returns the Precision field value if set, zero value otherwise.
+func (o *DataType) GetPrecision() int32 {
+	if o == nil || o.Precision == nil {
+		var ret int32
+		return ret
+	}
+	return *o.Precision
 }
 
-// MultisetTypeAsDataType is a convenience function that returns MultisetType wrapped in DataType
-func MultisetTypeAsDataType(v *MultisetType) DataType {
-	return DataType{ MultisetType: v}
+// GetPrecisionOk returns a tuple with the Precision field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DataType) GetPrecisionOk() (*int32, bool) {
+	if o == nil || o.Precision == nil {
+		return nil, false
+	}
+	return o.Precision, true
 }
 
-// RowTypeAsDataType is a convenience function that returns RowType wrapped in DataType
-func RowTypeAsDataType(v *RowType) DataType {
-	return DataType{ RowType: v}
+// HasPrecision returns a boolean if a field has been set.
+func (o *DataType) HasPrecision() bool {
+	if o != nil && o.Precision != nil {
+		return true
+	}
+
+	return false
 }
 
-// SmallIntTypeAsDataType is a convenience function that returns SmallIntType wrapped in DataType
-func SmallIntTypeAsDataType(v *SmallIntType) DataType {
-	return DataType{ SmallIntType: v}
+// SetPrecision gets a reference to the given int32 and assigns it to the Precision field.
+func (o *DataType) SetPrecision(v int32) {
+	o.Precision = &v
 }
 
-// TimeWithoutTimeZoneTypeAsDataType is a convenience function that returns TimeWithoutTimeZoneType wrapped in DataType
-func TimeWithoutTimeZoneTypeAsDataType(v *TimeWithoutTimeZoneType) DataType {
-	return DataType{ TimeWithoutTimeZoneType: v}
+// GetScale returns the Scale field value if set, zero value otherwise.
+func (o *DataType) GetScale() int32 {
+	if o == nil || o.Scale == nil {
+		var ret int32
+		return ret
+	}
+	return *o.Scale
 }
 
-// TimestampWithLocalTimeZoneTypeAsDataType is a convenience function that returns TimestampWithLocalTimeZoneType wrapped in DataType
-func TimestampWithLocalTimeZoneTypeAsDataType(v *TimestampWithLocalTimeZoneType) DataType {
-	return DataType{ TimestampWithLocalTimeZoneType: v}
+// GetScaleOk returns a tuple with the Scale field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DataType) GetScaleOk() (*int32, bool) {
+	if o == nil || o.Scale == nil {
+		return nil, false
+	}
+	return o.Scale, true
 }
 
-// TimestampWithTimeZoneTypeAsDataType is a convenience function that returns TimestampWithTimeZoneType wrapped in DataType
-func TimestampWithTimeZoneTypeAsDataType(v *TimestampWithTimeZoneType) DataType {
-	return DataType{ TimestampWithTimeZoneType: v}
+// HasScale returns a boolean if a field has been set.
+func (o *DataType) HasScale() bool {
+	if o != nil && o.Scale != nil {
+		return true
+	}
+
+	return false
 }
 
-// TimestampWithoutTimeZoneTypeAsDataType is a convenience function that returns TimestampWithoutTimeZoneType wrapped in DataType
-func TimestampWithoutTimeZoneTypeAsDataType(v *TimestampWithoutTimeZoneType) DataType {
-	return DataType{ TimestampWithoutTimeZoneType: v}
+// SetScale gets a reference to the given int32 and assigns it to the Scale field.
+func (o *DataType) SetScale(v int32) {
+	o.Scale = &v
 }
 
-// TinyIntTypeAsDataType is a convenience function that returns TinyIntType wrapped in DataType
-func TinyIntTypeAsDataType(v *TinyIntType) DataType {
-	return DataType{ TinyIntType: v}
+// GetKeyType returns the KeyType field value if set, zero value otherwise.
+func (o *DataType) GetKeyType() DataType {
+	if o == nil || o.KeyType == nil {
+		var ret DataType
+		return ret
+	}
+	return *o.KeyType
 }
 
-// VarbinaryTypeAsDataType is a convenience function that returns VarbinaryType wrapped in DataType
-func VarbinaryTypeAsDataType(v *VarbinaryType) DataType {
-	return DataType{ VarbinaryType: v}
+// GetKeyTypeOk returns a tuple with the KeyType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DataType) GetKeyTypeOk() (*DataType, bool) {
+	if o == nil || o.KeyType == nil {
+		return nil, false
+	}
+	return o.KeyType, true
 }
 
-// VarcharTypeAsDataType is a convenience function that returns VarcharType wrapped in DataType
-func VarcharTypeAsDataType(v *VarcharType) DataType {
-	return DataType{ VarcharType: v}
+// HasKeyType returns a boolean if a field has been set.
+func (o *DataType) HasKeyType() bool {
+	if o != nil && o.KeyType != nil {
+		return true
+	}
+
+	return false
 }
 
-
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *DataType) UnmarshalJSON(data []byte) error {
-	var err error
-	// use discriminator value to speed up the lookup
-	var jsonDict map[string]interface{}
-	err = json.Unmarshal(data, &jsonDict)
-	if err != nil {
-		return fmt.Errorf("Failed to unmarshal JSON into map for the discriminator lookup.")
-	}
-
-	// check if the discriminator value is 'ARRAY'
-	if jsonDict["type"] == "ARRAY" {
-		// try to unmarshal JSON data into ArrayType
-		err = json.Unmarshal(data, &dst.ArrayType)
-		if err == nil {
-			return nil // data stored in dst.ArrayType, return on the first match
-		} else {
-			dst.ArrayType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as ArrayType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'ArrayType'
-	if jsonDict["type"] == "ArrayType" {
-		// try to unmarshal JSON data into ArrayType
-		err = json.Unmarshal(data, &dst.ArrayType)
-		if err == nil {
-			return nil // data stored in dst.ArrayType, return on the first match
-		} else {
-			dst.ArrayType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as ArrayType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'BIGINT'
-	if jsonDict["type"] == "BIGINT" {
-		// try to unmarshal JSON data into BigIntType
-		err = json.Unmarshal(data, &dst.BigIntType)
-		if err == nil {
-			return nil // data stored in dst.BigIntType, return on the first match
-		} else {
-			dst.BigIntType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as BigIntType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'BINARY'
-	if jsonDict["type"] == "BINARY" {
-		// try to unmarshal JSON data into BinaryType
-		err = json.Unmarshal(data, &dst.BinaryType)
-		if err == nil {
-			return nil // data stored in dst.BinaryType, return on the first match
-		} else {
-			dst.BinaryType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as BinaryType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'BOOLEAN'
-	if jsonDict["type"] == "BOOLEAN" {
-		// try to unmarshal JSON data into BooleanType
-		err = json.Unmarshal(data, &dst.BooleanType)
-		if err == nil {
-			return nil // data stored in dst.BooleanType, return on the first match
-		} else {
-			dst.BooleanType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as BooleanType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'BigIntType'
-	if jsonDict["type"] == "BigIntType" {
-		// try to unmarshal JSON data into BigIntType
-		err = json.Unmarshal(data, &dst.BigIntType)
-		if err == nil {
-			return nil // data stored in dst.BigIntType, return on the first match
-		} else {
-			dst.BigIntType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as BigIntType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'BinaryType'
-	if jsonDict["type"] == "BinaryType" {
-		// try to unmarshal JSON data into BinaryType
-		err = json.Unmarshal(data, &dst.BinaryType)
-		if err == nil {
-			return nil // data stored in dst.BinaryType, return on the first match
-		} else {
-			dst.BinaryType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as BinaryType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'BooleanType'
-	if jsonDict["type"] == "BooleanType" {
-		// try to unmarshal JSON data into BooleanType
-		err = json.Unmarshal(data, &dst.BooleanType)
-		if err == nil {
-			return nil // data stored in dst.BooleanType, return on the first match
-		} else {
-			dst.BooleanType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as BooleanType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'CHAR'
-	if jsonDict["type"] == "CHAR" {
-		// try to unmarshal JSON data into CharType
-		err = json.Unmarshal(data, &dst.CharType)
-		if err == nil {
-			return nil // data stored in dst.CharType, return on the first match
-		} else {
-			dst.CharType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as CharType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'CharType'
-	if jsonDict["type"] == "CharType" {
-		// try to unmarshal JSON data into CharType
-		err = json.Unmarshal(data, &dst.CharType)
-		if err == nil {
-			return nil // data stored in dst.CharType, return on the first match
-		} else {
-			dst.CharType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as CharType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'DATE'
-	if jsonDict["type"] == "DATE" {
-		// try to unmarshal JSON data into DateType
-		err = json.Unmarshal(data, &dst.DateType)
-		if err == nil {
-			return nil // data stored in dst.DateType, return on the first match
-		} else {
-			dst.DateType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as DateType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'DECIMAL'
-	if jsonDict["type"] == "DECIMAL" {
-		// try to unmarshal JSON data into DecimalType
-		err = json.Unmarshal(data, &dst.DecimalType)
-		if err == nil {
-			return nil // data stored in dst.DecimalType, return on the first match
-		} else {
-			dst.DecimalType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as DecimalType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'DOUBLE'
-	if jsonDict["type"] == "DOUBLE" {
-		// try to unmarshal JSON data into DoubleType
-		err = json.Unmarshal(data, &dst.DoubleType)
-		if err == nil {
-			return nil // data stored in dst.DoubleType, return on the first match
-		} else {
-			dst.DoubleType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as DoubleType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'DateType'
-	if jsonDict["type"] == "DateType" {
-		// try to unmarshal JSON data into DateType
-		err = json.Unmarshal(data, &dst.DateType)
-		if err == nil {
-			return nil // data stored in dst.DateType, return on the first match
-		} else {
-			dst.DateType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as DateType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'DecimalType'
-	if jsonDict["type"] == "DecimalType" {
-		// try to unmarshal JSON data into DecimalType
-		err = json.Unmarshal(data, &dst.DecimalType)
-		if err == nil {
-			return nil // data stored in dst.DecimalType, return on the first match
-		} else {
-			dst.DecimalType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as DecimalType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'DoubleType'
-	if jsonDict["type"] == "DoubleType" {
-		// try to unmarshal JSON data into DoubleType
-		err = json.Unmarshal(data, &dst.DoubleType)
-		if err == nil {
-			return nil // data stored in dst.DoubleType, return on the first match
-		} else {
-			dst.DoubleType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as DoubleType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'FLOAT'
-	if jsonDict["type"] == "FLOAT" {
-		// try to unmarshal JSON data into FloatType
-		err = json.Unmarshal(data, &dst.FloatType)
-		if err == nil {
-			return nil // data stored in dst.FloatType, return on the first match
-		} else {
-			dst.FloatType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as FloatType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'FloatType'
-	if jsonDict["type"] == "FloatType" {
-		// try to unmarshal JSON data into FloatType
-		err = json.Unmarshal(data, &dst.FloatType)
-		if err == nil {
-			return nil // data stored in dst.FloatType, return on the first match
-		} else {
-			dst.FloatType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as FloatType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'INTEGER'
-	if jsonDict["type"] == "INTEGER" {
-		// try to unmarshal JSON data into IntegerType
-		err = json.Unmarshal(data, &dst.IntegerType)
-		if err == nil {
-			return nil // data stored in dst.IntegerType, return on the first match
-		} else {
-			dst.IntegerType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as IntegerType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'INTERVAL_DAY_TIME'
-	if jsonDict["type"] == "INTERVAL_DAY_TIME" {
-		// try to unmarshal JSON data into IntervalDayTimeType
-		err = json.Unmarshal(data, &dst.IntervalDayTimeType)
-		if err == nil {
-			return nil // data stored in dst.IntervalDayTimeType, return on the first match
-		} else {
-			dst.IntervalDayTimeType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as IntervalDayTimeType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'INTERVAL_YEAR_MONTH'
-	if jsonDict["type"] == "INTERVAL_YEAR_MONTH" {
-		// try to unmarshal JSON data into IntervalYearMonthType
-		err = json.Unmarshal(data, &dst.IntervalYearMonthType)
-		if err == nil {
-			return nil // data stored in dst.IntervalYearMonthType, return on the first match
-		} else {
-			dst.IntervalYearMonthType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as IntervalYearMonthType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'IntegerType'
-	if jsonDict["type"] == "IntegerType" {
-		// try to unmarshal JSON data into IntegerType
-		err = json.Unmarshal(data, &dst.IntegerType)
-		if err == nil {
-			return nil // data stored in dst.IntegerType, return on the first match
-		} else {
-			dst.IntegerType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as IntegerType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'IntervalDayTimeType'
-	if jsonDict["type"] == "IntervalDayTimeType" {
-		// try to unmarshal JSON data into IntervalDayTimeType
-		err = json.Unmarshal(data, &dst.IntervalDayTimeType)
-		if err == nil {
-			return nil // data stored in dst.IntervalDayTimeType, return on the first match
-		} else {
-			dst.IntervalDayTimeType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as IntervalDayTimeType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'IntervalYearMonthType'
-	if jsonDict["type"] == "IntervalYearMonthType" {
-		// try to unmarshal JSON data into IntervalYearMonthType
-		err = json.Unmarshal(data, &dst.IntervalYearMonthType)
-		if err == nil {
-			return nil // data stored in dst.IntervalYearMonthType, return on the first match
-		} else {
-			dst.IntervalYearMonthType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as IntervalYearMonthType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'MAP'
-	if jsonDict["type"] == "MAP" {
-		// try to unmarshal JSON data into MapType
-		err = json.Unmarshal(data, &dst.MapType)
-		if err == nil {
-			return nil // data stored in dst.MapType, return on the first match
-		} else {
-			dst.MapType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as MapType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'MULTISET'
-	if jsonDict["type"] == "MULTISET" {
-		// try to unmarshal JSON data into MultisetType
-		err = json.Unmarshal(data, &dst.MultisetType)
-		if err == nil {
-			return nil // data stored in dst.MultisetType, return on the first match
-		} else {
-			dst.MultisetType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as MultisetType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'MapType'
-	if jsonDict["type"] == "MapType" {
-		// try to unmarshal JSON data into MapType
-		err = json.Unmarshal(data, &dst.MapType)
-		if err == nil {
-			return nil // data stored in dst.MapType, return on the first match
-		} else {
-			dst.MapType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as MapType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'MultisetType'
-	if jsonDict["type"] == "MultisetType" {
-		// try to unmarshal JSON data into MultisetType
-		err = json.Unmarshal(data, &dst.MultisetType)
-		if err == nil {
-			return nil // data stored in dst.MultisetType, return on the first match
-		} else {
-			dst.MultisetType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as MultisetType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'ROW'
-	if jsonDict["type"] == "ROW" {
-		// try to unmarshal JSON data into RowType
-		err = json.Unmarshal(data, &dst.RowType)
-		if err == nil {
-			return nil // data stored in dst.RowType, return on the first match
-		} else {
-			dst.RowType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as RowType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'RowType'
-	if jsonDict["type"] == "RowType" {
-		// try to unmarshal JSON data into RowType
-		err = json.Unmarshal(data, &dst.RowType)
-		if err == nil {
-			return nil // data stored in dst.RowType, return on the first match
-		} else {
-			dst.RowType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as RowType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'SMALLINT'
-	if jsonDict["type"] == "SMALLINT" {
-		// try to unmarshal JSON data into SmallIntType
-		err = json.Unmarshal(data, &dst.SmallIntType)
-		if err == nil {
-			return nil // data stored in dst.SmallIntType, return on the first match
-		} else {
-			dst.SmallIntType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as SmallIntType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'SmallIntType'
-	if jsonDict["type"] == "SmallIntType" {
-		// try to unmarshal JSON data into SmallIntType
-		err = json.Unmarshal(data, &dst.SmallIntType)
-		if err == nil {
-			return nil // data stored in dst.SmallIntType, return on the first match
-		} else {
-			dst.SmallIntType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as SmallIntType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'TIMESTAMP_WITHOUT_TIME_ZONE'
-	if jsonDict["type"] == "TIMESTAMP_WITHOUT_TIME_ZONE" {
-		// try to unmarshal JSON data into TimestampWithoutTimeZoneType
-		err = json.Unmarshal(data, &dst.TimestampWithoutTimeZoneType)
-		if err == nil {
-			return nil // data stored in dst.TimestampWithoutTimeZoneType, return on the first match
-		} else {
-			dst.TimestampWithoutTimeZoneType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as TimestampWithoutTimeZoneType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'TIMESTAMP_WITH_LOCAL_TIME_ZONE'
-	if jsonDict["type"] == "TIMESTAMP_WITH_LOCAL_TIME_ZONE" {
-		// try to unmarshal JSON data into TimestampWithLocalTimeZoneType
-		err = json.Unmarshal(data, &dst.TimestampWithLocalTimeZoneType)
-		if err == nil {
-			return nil // data stored in dst.TimestampWithLocalTimeZoneType, return on the first match
-		} else {
-			dst.TimestampWithLocalTimeZoneType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as TimestampWithLocalTimeZoneType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'TIMESTAMP_WITH_TIME_ZONE'
-	if jsonDict["type"] == "TIMESTAMP_WITH_TIME_ZONE" {
-		// try to unmarshal JSON data into TimestampWithTimeZoneType
-		err = json.Unmarshal(data, &dst.TimestampWithTimeZoneType)
-		if err == nil {
-			return nil // data stored in dst.TimestampWithTimeZoneType, return on the first match
-		} else {
-			dst.TimestampWithTimeZoneType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as TimestampWithTimeZoneType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'TIME_WITHOUT_TIME_ZONE'
-	if jsonDict["type"] == "TIME_WITHOUT_TIME_ZONE" {
-		// try to unmarshal JSON data into TimeWithoutTimeZoneType
-		err = json.Unmarshal(data, &dst.TimeWithoutTimeZoneType)
-		if err == nil {
-			return nil // data stored in dst.TimeWithoutTimeZoneType, return on the first match
-		} else {
-			dst.TimeWithoutTimeZoneType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as TimeWithoutTimeZoneType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'TINYINT'
-	if jsonDict["type"] == "TINYINT" {
-		// try to unmarshal JSON data into TinyIntType
-		err = json.Unmarshal(data, &dst.TinyIntType)
-		if err == nil {
-			return nil // data stored in dst.TinyIntType, return on the first match
-		} else {
-			dst.TinyIntType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as TinyIntType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'TimeWithoutTimeZoneType'
-	if jsonDict["type"] == "TimeWithoutTimeZoneType" {
-		// try to unmarshal JSON data into TimeWithoutTimeZoneType
-		err = json.Unmarshal(data, &dst.TimeWithoutTimeZoneType)
-		if err == nil {
-			return nil // data stored in dst.TimeWithoutTimeZoneType, return on the first match
-		} else {
-			dst.TimeWithoutTimeZoneType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as TimeWithoutTimeZoneType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'TimestampWithLocalTimeZoneType'
-	if jsonDict["type"] == "TimestampWithLocalTimeZoneType" {
-		// try to unmarshal JSON data into TimestampWithLocalTimeZoneType
-		err = json.Unmarshal(data, &dst.TimestampWithLocalTimeZoneType)
-		if err == nil {
-			return nil // data stored in dst.TimestampWithLocalTimeZoneType, return on the first match
-		} else {
-			dst.TimestampWithLocalTimeZoneType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as TimestampWithLocalTimeZoneType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'TimestampWithTimeZoneType'
-	if jsonDict["type"] == "TimestampWithTimeZoneType" {
-		// try to unmarshal JSON data into TimestampWithTimeZoneType
-		err = json.Unmarshal(data, &dst.TimestampWithTimeZoneType)
-		if err == nil {
-			return nil // data stored in dst.TimestampWithTimeZoneType, return on the first match
-		} else {
-			dst.TimestampWithTimeZoneType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as TimestampWithTimeZoneType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'TimestampWithoutTimeZoneType'
-	if jsonDict["type"] == "TimestampWithoutTimeZoneType" {
-		// try to unmarshal JSON data into TimestampWithoutTimeZoneType
-		err = json.Unmarshal(data, &dst.TimestampWithoutTimeZoneType)
-		if err == nil {
-			return nil // data stored in dst.TimestampWithoutTimeZoneType, return on the first match
-		} else {
-			dst.TimestampWithoutTimeZoneType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as TimestampWithoutTimeZoneType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'TinyIntType'
-	if jsonDict["type"] == "TinyIntType" {
-		// try to unmarshal JSON data into TinyIntType
-		err = json.Unmarshal(data, &dst.TinyIntType)
-		if err == nil {
-			return nil // data stored in dst.TinyIntType, return on the first match
-		} else {
-			dst.TinyIntType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as TinyIntType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'VARBINARY'
-	if jsonDict["type"] == "VARBINARY" {
-		// try to unmarshal JSON data into VarbinaryType
-		err = json.Unmarshal(data, &dst.VarbinaryType)
-		if err == nil {
-			return nil // data stored in dst.VarbinaryType, return on the first match
-		} else {
-			dst.VarbinaryType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as VarbinaryType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'VARCHAR'
-	if jsonDict["type"] == "VARCHAR" {
-		// try to unmarshal JSON data into VarcharType
-		err = json.Unmarshal(data, &dst.VarcharType)
-		if err == nil {
-			return nil // data stored in dst.VarcharType, return on the first match
-		} else {
-			dst.VarcharType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as VarcharType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'VarbinaryType'
-	if jsonDict["type"] == "VarbinaryType" {
-		// try to unmarshal JSON data into VarbinaryType
-		err = json.Unmarshal(data, &dst.VarbinaryType)
-		if err == nil {
-			return nil // data stored in dst.VarbinaryType, return on the first match
-		} else {
-			dst.VarbinaryType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as VarbinaryType: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'VarcharType'
-	if jsonDict["type"] == "VarcharType" {
-		// try to unmarshal JSON data into VarcharType
-		err = json.Unmarshal(data, &dst.VarcharType)
-		if err == nil {
-			return nil // data stored in dst.VarcharType, return on the first match
-		} else {
-			dst.VarcharType = nil
-			return fmt.Errorf("Failed to unmarshal DataType as VarcharType: %s", err.Error())
-		}
-	}
-
-	return nil
+// SetKeyType gets a reference to the given DataType and assigns it to the KeyType field.
+func (o *DataType) SetKeyType(v DataType) {
+	o.KeyType = &v
 }
 
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src DataType) MarshalJSON() ([]byte, error) {
-	if src.ArrayType != nil {
-		return json.Marshal(&src.ArrayType)
+// GetValueType returns the ValueType field value if set, zero value otherwise.
+func (o *DataType) GetValueType() DataType {
+	if o == nil || o.ValueType == nil {
+		var ret DataType
+		return ret
 	}
-
-	if src.BigIntType != nil {
-		return json.Marshal(&src.BigIntType)
-	}
-
-	if src.BinaryType != nil {
-		return json.Marshal(&src.BinaryType)
-	}
-
-	if src.BooleanType != nil {
-		return json.Marshal(&src.BooleanType)
-	}
-
-	if src.CharType != nil {
-		return json.Marshal(&src.CharType)
-	}
-
-	if src.DateType != nil {
-		return json.Marshal(&src.DateType)
-	}
-
-	if src.DecimalType != nil {
-		return json.Marshal(&src.DecimalType)
-	}
-
-	if src.DoubleType != nil {
-		return json.Marshal(&src.DoubleType)
-	}
-
-	if src.FloatType != nil {
-		return json.Marshal(&src.FloatType)
-	}
-
-	if src.IntegerType != nil {
-		return json.Marshal(&src.IntegerType)
-	}
-
-	if src.IntervalDayTimeType != nil {
-		return json.Marshal(&src.IntervalDayTimeType)
-	}
-
-	if src.IntervalYearMonthType != nil {
-		return json.Marshal(&src.IntervalYearMonthType)
-	}
-
-	if src.MapType != nil {
-		return json.Marshal(&src.MapType)
-	}
-
-	if src.MultisetType != nil {
-		return json.Marshal(&src.MultisetType)
-	}
-
-	if src.RowType != nil {
-		return json.Marshal(&src.RowType)
-	}
-
-	if src.SmallIntType != nil {
-		return json.Marshal(&src.SmallIntType)
-	}
-
-	if src.TimeWithoutTimeZoneType != nil {
-		return json.Marshal(&src.TimeWithoutTimeZoneType)
-	}
-
-	if src.TimestampWithLocalTimeZoneType != nil {
-		return json.Marshal(&src.TimestampWithLocalTimeZoneType)
-	}
-
-	if src.TimestampWithTimeZoneType != nil {
-		return json.Marshal(&src.TimestampWithTimeZoneType)
-	}
-
-	if src.TimestampWithoutTimeZoneType != nil {
-		return json.Marshal(&src.TimestampWithoutTimeZoneType)
-	}
-
-	if src.TinyIntType != nil {
-		return json.Marshal(&src.TinyIntType)
-	}
-
-	if src.VarbinaryType != nil {
-		return json.Marshal(&src.VarbinaryType)
-	}
-
-	if src.VarcharType != nil {
-		return json.Marshal(&src.VarcharType)
-	}
-
-	return nil, nil // no data in oneOf schemas
+	return *o.ValueType
 }
 
-// Get the actual instance
-func (obj *DataType) GetActualInstance() (interface{}) {
-	if obj.ArrayType != nil {
-		return obj.ArrayType
+// GetValueTypeOk returns a tuple with the ValueType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DataType) GetValueTypeOk() (*DataType, bool) {
+	if o == nil || o.ValueType == nil {
+		return nil, false
+	}
+	return o.ValueType, true
+}
+
+// HasValueType returns a boolean if a field has been set.
+func (o *DataType) HasValueType() bool {
+	if o != nil && o.ValueType != nil {
+		return true
 	}
 
-	if obj.BigIntType != nil {
-		return obj.BigIntType
-	}
+	return false
+}
 
-	if obj.BinaryType != nil {
-		return obj.BinaryType
-	}
+// SetValueType gets a reference to the given DataType and assigns it to the ValueType field.
+func (o *DataType) SetValueType(v DataType) {
+	o.ValueType = &v
+}
 
-	if obj.BooleanType != nil {
-		return obj.BooleanType
-	}
+// Redact resets all sensitive fields to their zero value.
+func (o *DataType) Redact() {
+    o.recurseRedact(&o.Type)
+    o.recurseRedact(&o.Nullable)
+    o.recurseRedact(o.Length)
+    o.recurseRedact(o.Precision)
+    o.recurseRedact(o.Scale)
+    o.recurseRedact(o.KeyType)
+    o.recurseRedact(o.ValueType)
+}
 
-	if obj.CharType != nil {
-		return obj.CharType
-	}
+func (o *DataType) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
 
-	if obj.DateType != nil {
-		return obj.DateType
-	}
+func (o DataType) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
+}
 
-	if obj.DecimalType != nil {
-		return obj.DecimalType
+func (o DataType) MarshalJSON() ([]byte, error) {
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["type"] = o.Type
 	}
-
-	if obj.DoubleType != nil {
-		return obj.DoubleType
+	if true {
+		toSerialize["nullable"] = o.Nullable
 	}
-
-	if obj.FloatType != nil {
-		return obj.FloatType
+	if o.Length != nil {
+		toSerialize["length"] = o.Length
 	}
-
-	if obj.IntegerType != nil {
-		return obj.IntegerType
+	if o.Precision != nil {
+		toSerialize["precision"] = o.Precision
 	}
-
-	if obj.IntervalDayTimeType != nil {
-		return obj.IntervalDayTimeType
+	if o.Scale != nil {
+		toSerialize["scale"] = o.Scale
 	}
-
-	if obj.IntervalYearMonthType != nil {
-		return obj.IntervalYearMonthType
+	if o.KeyType != nil {
+		toSerialize["key_type"] = o.KeyType
 	}
-
-	if obj.MapType != nil {
-		return obj.MapType
+	if o.ValueType != nil {
+		toSerialize["value_type"] = o.ValueType
 	}
-
-	if obj.MultisetType != nil {
-		return obj.MultisetType
-	}
-
-	if obj.RowType != nil {
-		return obj.RowType
-	}
-
-	if obj.SmallIntType != nil {
-		return obj.SmallIntType
-	}
-
-	if obj.TimeWithoutTimeZoneType != nil {
-		return obj.TimeWithoutTimeZoneType
-	}
-
-	if obj.TimestampWithLocalTimeZoneType != nil {
-		return obj.TimestampWithLocalTimeZoneType
-	}
-
-	if obj.TimestampWithTimeZoneType != nil {
-		return obj.TimestampWithTimeZoneType
-	}
-
-	if obj.TimestampWithoutTimeZoneType != nil {
-		return obj.TimestampWithoutTimeZoneType
-	}
-
-	if obj.TinyIntType != nil {
-		return obj.TinyIntType
-	}
-
-	if obj.VarbinaryType != nil {
-		return obj.VarbinaryType
-	}
-
-	if obj.VarcharType != nil {
-		return obj.VarcharType
-	}
-
-	// all schemas are nil
-	return nil
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableDataType struct {
@@ -961,7 +378,11 @@ func NewNullableDataType(val *DataType) *NullableDataType {
 }
 
 func (v NullableDataType) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableDataType) UnmarshalJSON(src []byte) error {
