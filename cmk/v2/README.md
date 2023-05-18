@@ -98,6 +98,7 @@ Class | Method | HTTP request | Description
  - [CmkV2ClusterStatus](docs/CmkV2ClusterStatus.md)
  - [CmkV2ClusterUpdate](docs/CmkV2ClusterUpdate.md)
  - [CmkV2Dedicated](docs/CmkV2Dedicated.md)
+ - [CmkV2Enterprise](docs/CmkV2Enterprise.md)
  - [CmkV2Standard](docs/CmkV2Standard.md)
  - [EnvScopedObjectReference](docs/EnvScopedObjectReference.md)
  - [Error](docs/Error.md)
@@ -124,6 +125,34 @@ auth := context.WithValue(context.Background(), sw.ContextBasicAuth, sw.BasicAut
     UserName: "username",
     Password: "password",
 })
+r, err := client.Service.Operation(auth, args)
+```
+
+
+### confluent-sts-access-token
+
+
+- **Type**: OAuth
+- **Flow**: application
+- **Authorization URL**: 
+- **Scopes**: N/A
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextAccessToken, "ACCESSTOKENSTRING")
+r, err := client.Service.Operation(auth, args)
+```
+
+Or via OAuth2 module to automatically refresh tokens and perform user authentication.
+
+```golang
+import "golang.org/x/oauth2"
+
+/* Perform OAuth2 round trip request and obtain a token */
+
+tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
+auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
 r, err := client.Service.Operation(auth, args)
 ```
 

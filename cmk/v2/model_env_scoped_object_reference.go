@@ -26,6 +26,7 @@ Contact: orchestrator-team@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,13 +37,13 @@ import (
 // EnvScopedObjectReference ObjectReference provides information for you to locate the referred object
 type EnvScopedObjectReference struct {
 	// ID of the referred resource
-	Id string `json:"id"`
+	Id string `json:"id,omitempty"`
 	// Environment of the referred resource, if env-scoped
 	Environment *string `json:"environment,omitempty"`
 	// API URL for accessing or modifying the referred object
-	Related string `json:"related"`
+	Related string `json:"related,omitempty"`
 	// CRN reference to the referred resource
-	ResourceName string `json:"resource_name"`
+	ResourceName string `json:"resource_name,omitempty"`
 }
 
 // NewEnvScopedObjectReference instantiates a new EnvScopedObjectReference object
@@ -221,7 +222,11 @@ func (o EnvScopedObjectReference) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["resource_name"] = o.ResourceName
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableEnvScopedObjectReference struct {
@@ -252,7 +257,11 @@ func NewNullableEnvScopedObjectReference(val *EnvScopedObjectReference) *Nullabl
 }
 
 func (v NullableEnvScopedObjectReference) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableEnvScopedObjectReference) UnmarshalJSON(src []byte) error {

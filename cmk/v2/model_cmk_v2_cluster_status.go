@@ -26,6 +26,7 @@ Contact: orchestrator-team@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,7 +37,7 @@ import (
 // CmkV2ClusterStatus The status of the Cluster
 type CmkV2ClusterStatus struct {
 	// The lifecyle phase of the cluster:   PROVISIONED:  cluster is provisioned;   PROVISIONING:  cluster provisioning is in progress;   FAILED:  provisioning failed
-	Phase string `json:"phase"`
+	Phase string `json:"phase,omitempty"`
 	// The number of Confluent Kafka Units (CKUs) the Dedicated cluster currently has.
 	Cku *int32 `json:"cku,omitempty"`
 }
@@ -159,7 +160,11 @@ func (o CmkV2ClusterStatus) MarshalJSON() ([]byte, error) {
 	if o.Cku != nil {
 		toSerialize["cku"] = o.Cku
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableCmkV2ClusterStatus struct {
@@ -190,7 +195,11 @@ func NewNullableCmkV2ClusterStatus(val *CmkV2ClusterStatus) *NullableCmkV2Cluste
 }
 
 func (v NullableCmkV2ClusterStatus) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableCmkV2ClusterStatus) UnmarshalJSON(src []byte) error {
