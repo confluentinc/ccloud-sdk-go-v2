@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The cluster name. | [optional] [readonly] 
 **Package** | Pointer to **string** | The billing package.  Note: Clusters can be upgraded from ESSENTIALS to ADVANCED, but cannot be downgraded from ADVANCED to ESSENTIALS.  | [optional] 
+**NetworkType** | Pointer to **string** | The network access type for the cluster.  | [optional] [default to "PUBLIC"]
 **HttpEndpoint** | Pointer to **string** | The cluster HTTP request URL. | [optional] [readonly] 
 **Environment** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which this belongs. | [optional] 
 **Region** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The region to which this belongs. | [optional] 
@@ -78,6 +79,31 @@ SetPackage sets Package field to given value.
 `func (o *SrcmV2ClusterSpec) HasPackage() bool`
 
 HasPackage returns a boolean if a field has been set.
+
+### GetNetworkType
+
+`func (o *SrcmV2ClusterSpec) GetNetworkType() string`
+
+GetNetworkType returns the NetworkType field if non-nil, zero value otherwise.
+
+### GetNetworkTypeOk
+
+`func (o *SrcmV2ClusterSpec) GetNetworkTypeOk() (*string, bool)`
+
+GetNetworkTypeOk returns a tuple with the NetworkType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkType
+
+`func (o *SrcmV2ClusterSpec) SetNetworkType(v string)`
+
+SetNetworkType sets NetworkType field to given value.
+
+### HasNetworkType
+
+`func (o *SrcmV2ClusterSpec) HasNetworkType() bool`
+
+HasNetworkType returns a boolean if a field has been set.
 
 ### GetHttpEndpoint
 
