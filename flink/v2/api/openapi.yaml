@@ -3284,7 +3284,7 @@ components:
           example: 9
           format: int32
           maximum: 10
-          minimum: 0
+          minimum: 1
           type: integer
           x-immutable: false
         config:
@@ -3596,7 +3596,7 @@ components:
           example: 9
           format: int32
           maximum: 10
-          minimum: 0
+          minimum: 1
           type: integer
           x-immutable: false
         config:
