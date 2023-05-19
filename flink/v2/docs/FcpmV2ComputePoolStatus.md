@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Phase** | **string** | Status of the Flink compute pool. | [readonly] 
-**CurrentCfu** | Pointer to **int32** | The number of CSUs (Confluent Streaming Units) currently allocated to this Flink compute pool. | [optional] [readonly] 
+**CurrentCfu** | **int32** | The number of CSUs (Confluent Streaming Units) currently allocated to this Flink compute pool. | [readonly] 
 
 ## Methods
 
 ### NewFcpmV2ComputePoolStatus
 
-`func NewFcpmV2ComputePoolStatus(phase string, ) *FcpmV2ComputePoolStatus`
+`func NewFcpmV2ComputePoolStatus(phase string, currentCfu int32, ) *FcpmV2ComputePoolStatus`
 
 NewFcpmV2ComputePoolStatus instantiates a new FcpmV2ComputePoolStatus object
 This constructor will assign default values to properties that have it defined,
@@ -65,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetCurrentCfu sets CurrentCfu field to given value.
 
-### HasCurrentCfu
-
-`func (o *FcpmV2ComputePoolStatus) HasCurrentCfu() bool`
-
-HasCurrentCfu returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

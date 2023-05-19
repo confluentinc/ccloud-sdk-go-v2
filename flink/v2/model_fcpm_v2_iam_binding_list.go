@@ -26,6 +26,7 @@ Contact: ksql-team@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -213,7 +214,11 @@ func (o FcpmV2IamBindingList) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableFcpmV2IamBindingList struct {
@@ -244,7 +249,11 @@ func NewNullableFcpmV2IamBindingList(val *FcpmV2IamBindingList) *NullableFcpmV2I
 }
 
 func (v NullableFcpmV2IamBindingList) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableFcpmV2IamBindingList) UnmarshalJSON(src []byte) error {

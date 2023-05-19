@@ -26,6 +26,7 @@ Contact: ksql-team@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -80,7 +81,11 @@ func (dst *FcpmV2ComputePoolSpecConfigOneOf) UnmarshalJSON(data []byte) error {
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src FcpmV2ComputePoolSpecConfigOneOf) MarshalJSON() ([]byte, error) {
 	if src.FcpmV2Standard != nil {
-		return json.Marshal(&src.FcpmV2Standard)
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.FcpmV2Standard)
+		return buffer.Bytes(), err
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -124,7 +129,11 @@ func NewNullableFcpmV2ComputePoolSpecConfigOneOf(val *FcpmV2ComputePoolSpecConfi
 }
 
 func (v NullableFcpmV2ComputePoolSpecConfigOneOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableFcpmV2ComputePoolSpecConfigOneOf) UnmarshalJSON(src []byte) error {

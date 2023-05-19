@@ -26,6 +26,7 @@ Contact: ksql-team@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -213,7 +214,11 @@ func (o FcpmV2ComputePoolList) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableFcpmV2ComputePoolList struct {
@@ -244,7 +249,11 @@ func NewNullableFcpmV2ComputePoolList(val *FcpmV2ComputePoolList) *NullableFcpmV
 }
 
 func (v NullableFcpmV2ComputePoolList) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableFcpmV2ComputePoolList) UnmarshalJSON(src []byte) error {

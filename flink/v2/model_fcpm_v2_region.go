@@ -26,6 +26,7 @@ Contact: ksql-team@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -355,7 +356,11 @@ func (o FcpmV2Region) MarshalJSON() ([]byte, error) {
 	if o.RegionName != nil {
 		toSerialize["region_name"] = o.RegionName
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableFcpmV2Region struct {
@@ -386,7 +391,11 @@ func NewNullableFcpmV2Region(val *FcpmV2Region) *NullableFcpmV2Region {
 }
 
 func (v NullableFcpmV2Region) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableFcpmV2Region) UnmarshalJSON(src []byte) error {

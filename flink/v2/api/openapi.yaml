@@ -1473,13 +1473,13 @@ paths:
             --url https://api.confluent.cloud/fcpm/v2/compute-pools \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"flink_compute_pool_0","cloud":"AWS","region":"us-west-1","max_cfu":16,"config":{"kind":"Standard"},"environment":{"id":"env-00000"},"network":{"id":"n-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"flink_compute_pool_0","cloud":"AWS","region":"us-west-1","max_cfu":9,"config":{"kind":"Standard"},"environment":{"id":"env-00000"},"network":{"id":"n-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":16,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":9,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/fcpm/v2/compute-pools")
             .post(body)
@@ -1493,7 +1493,7 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pools\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"flink_compute_pool_0\\\",\\\"cloud\\\":\\\"AWS\\\",\\\"region\\\":\\\
-          \"us-west-1\\\",\\\"max_cfu\\\":16,\\\"config\\\":{\\\"kind\\\":\\\"Standard\\\
+          \"us-west-1\\\",\\\"max_cfu\\\":9,\\\"config\\\":{\\\"kind\\\":\\\"Standard\\\
           \"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\"},\\\"network\\\":{\\\
           \"id\\\":\\\"n-00000\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\t\
           req, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
@@ -1507,7 +1507,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":16,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":9,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -1553,7 +1553,7 @@ paths:
               display_name: 'flink_compute_pool_0',
               cloud: 'AWS',
               region: 'us-west-1',
-              max_cfu: 16,
+              max_cfu: 9,
               config: {kind: 'Standard'},
               environment: {id: 'env-00000'},
               network: {id: 'n-00000', environment: 'string'}
@@ -1572,7 +1572,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":16,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":9,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1581,7 +1581,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":16,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":9,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /fcpm/v2/compute-pools/{id}:
     delete:
@@ -2352,13 +2352,13 @@ paths:
             --url https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"flink_compute_pool_0","cloud":"AWS","region":"us-west-1","max_cfu":16,"config":{"kind":"Standard"},"environment":{"id":"env-00000"},"network":{"id":"string","environment":"string"}}}'
+            --data '{"spec":{"display_name":"flink_compute_pool_0","cloud":"AWS","region":"us-west-1","max_cfu":9,"config":{"kind":"Standard"},"environment":{"id":"env-00000"},"network":{"id":"string","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":16,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":9,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D")
             .patch(body)
@@ -2372,7 +2372,7 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"flink_compute_pool_0\\\",\\\"cloud\\\":\\\"AWS\\\",\\\"region\\\":\\\
-          \"us-west-1\\\",\\\"max_cfu\\\":16,\\\"config\\\":{\\\"kind\\\":\\\"Standard\\\
+          \"us-west-1\\\",\\\"max_cfu\\\":9,\\\"config\\\":{\\\"kind\\\":\\\"Standard\\\
           \"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\"},\\\"network\\\":{\\\
           \"id\\\":\\\"string\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq,\
           \ _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
@@ -2386,7 +2386,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":16,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":9,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -2432,7 +2432,7 @@ paths:
               display_name: 'flink_compute_pool_0',
               cloud: 'AWS',
               region: 'us-west-1',
-              max_cfu: 16,
+              max_cfu: 9,
               config: {kind: 'Standard'},
               environment: {id: 'env-00000'},
               network: {id: 'string', environment: 'string'}
@@ -2451,7 +2451,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":16,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":9,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -2460,7 +2460,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":16,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":9,\"config\":{\"kind\":\"Standard\"},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /fcpm/v2/regions:
     get:
@@ -3046,6 +3046,7 @@ components:
           type: integer
       readOnly: true
       required:
+      - current_cfu
       - phase
       type: object
     fcpm.v2.Region:
@@ -3280,8 +3281,10 @@ components:
         max_cfu:
           description: |
             Maximum number of Confluent Flink Units (CFUs) that the Flink compute pool should auto-scale to.
-          example: 16
+          example: 9
           format: int32
+          maximum: 10
+          minimum: 0
           type: integer
           x-immutable: false
         config:
@@ -3590,8 +3593,10 @@ components:
         max_cfu:
           description: |
             Maximum number of Confluent Flink Units (CFUs) that the Flink compute pool should auto-scale to.
-          example: 16
+          example: 9
           format: int32
+          maximum: 10
+          minimum: 0
           type: integer
           x-immutable: false
         config:

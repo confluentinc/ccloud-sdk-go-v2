@@ -26,6 +26,7 @@ Contact: ksql-team@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -183,7 +184,11 @@ func (o GlobalObjectReference) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["resource_name"] = o.ResourceName
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableGlobalObjectReference struct {
@@ -214,7 +219,11 @@ func NewNullableGlobalObjectReference(val *GlobalObjectReference) *NullableGloba
 }
 
 func (v NullableGlobalObjectReference) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableGlobalObjectReference) UnmarshalJSON(src []byte) error {

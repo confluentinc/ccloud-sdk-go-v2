@@ -26,6 +26,7 @@ Contact: ksql-team@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
@@ -274,7 +275,11 @@ func (o ObjectMeta) MarshalJSON() ([]byte, error) {
 	if o.DeletedAt != nil {
 		toSerialize["deleted_at"] = o.DeletedAt
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableObjectMeta struct {
@@ -305,7 +310,11 @@ func NewNullableObjectMeta(val *ObjectMeta) *NullableObjectMeta {
 }
 
 func (v NullableObjectMeta) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableObjectMeta) UnmarshalJSON(src []byte) error {

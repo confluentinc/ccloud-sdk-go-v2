@@ -26,6 +26,7 @@ Contact: ksql-team@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -204,7 +205,11 @@ func (o FcpmV2ComputePoolSpecUpdate) MarshalJSON() ([]byte, error) {
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableFcpmV2ComputePoolSpecUpdate struct {
@@ -235,7 +240,11 @@ func NewNullableFcpmV2ComputePoolSpecUpdate(val *FcpmV2ComputePoolSpecUpdate) *N
 }
 
 func (v NullableFcpmV2ComputePoolSpecUpdate) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableFcpmV2ComputePoolSpecUpdate) UnmarshalJSON(src []byte) error {

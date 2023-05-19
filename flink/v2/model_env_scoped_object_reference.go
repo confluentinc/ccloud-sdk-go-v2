@@ -26,6 +26,7 @@ Contact: ksql-team@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -221,7 +222,11 @@ func (o EnvScopedObjectReference) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["resource_name"] = o.ResourceName
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableEnvScopedObjectReference struct {
@@ -252,7 +257,11 @@ func NewNullableEnvScopedObjectReference(val *EnvScopedObjectReference) *Nullabl
 }
 
 func (v NullableEnvScopedObjectReference) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableEnvScopedObjectReference) UnmarshalJSON(src []byte) error {
