@@ -11,6 +11,10 @@ Name | Type | Description | Notes
 **Scale** | Pointer to **int32** | The scale of the data type. | [optional] 
 **KeyType** | Pointer to [**DataType**](DataType.md) | The type of the key in the data type (if applicable). | [optional] 
 **ValueType** | Pointer to [**DataType**](DataType.md) | The type of the value in the data type (if applicable). | [optional] 
+**ElementType** | Pointer to [**DataType**](DataType.md) | The type of the element in the data type (if applicable). | [optional] 
+**Fields** | Pointer to [**[]RowFieldType**](RowFieldType.md) | The fields of the element in the data type (if applicable). | [optional] 
+**Resolution** | Pointer to **string** | The resolution of the data type (if applicable). | [optional] 
+**FractionalPrecision** | Pointer to **int32** | The fractional precision of the data type (if applicable). | [optional] 
 
 ## Methods
 
@@ -195,6 +199,106 @@ SetValueType sets ValueType field to given value.
 `func (o *DataType) HasValueType() bool`
 
 HasValueType returns a boolean if a field has been set.
+
+### GetElementType
+
+`func (o *DataType) GetElementType() DataType`
+
+GetElementType returns the ElementType field if non-nil, zero value otherwise.
+
+### GetElementTypeOk
+
+`func (o *DataType) GetElementTypeOk() (*DataType, bool)`
+
+GetElementTypeOk returns a tuple with the ElementType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetElementType
+
+`func (o *DataType) SetElementType(v DataType)`
+
+SetElementType sets ElementType field to given value.
+
+### HasElementType
+
+`func (o *DataType) HasElementType() bool`
+
+HasElementType returns a boolean if a field has been set.
+
+### GetFields
+
+`func (o *DataType) GetFields() []RowFieldType`
+
+GetFields returns the Fields field if non-nil, zero value otherwise.
+
+### GetFieldsOk
+
+`func (o *DataType) GetFieldsOk() (*[]RowFieldType, bool)`
+
+GetFieldsOk returns a tuple with the Fields field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFields
+
+`func (o *DataType) SetFields(v []RowFieldType)`
+
+SetFields sets Fields field to given value.
+
+### HasFields
+
+`func (o *DataType) HasFields() bool`
+
+HasFields returns a boolean if a field has been set.
+
+### GetResolution
+
+`func (o *DataType) GetResolution() string`
+
+GetResolution returns the Resolution field if non-nil, zero value otherwise.
+
+### GetResolutionOk
+
+`func (o *DataType) GetResolutionOk() (*string, bool)`
+
+GetResolutionOk returns a tuple with the Resolution field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResolution
+
+`func (o *DataType) SetResolution(v string)`
+
+SetResolution sets Resolution field to given value.
+
+### HasResolution
+
+`func (o *DataType) HasResolution() bool`
+
+HasResolution returns a boolean if a field has been set.
+
+### GetFractionalPrecision
+
+`func (o *DataType) GetFractionalPrecision() int32`
+
+GetFractionalPrecision returns the FractionalPrecision field if non-nil, zero value otherwise.
+
+### GetFractionalPrecisionOk
+
+`func (o *DataType) GetFractionalPrecisionOk() (*int32, bool)`
+
+GetFractionalPrecisionOk returns a tuple with the FractionalPrecision field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFractionalPrecision
+
+`func (o *DataType) SetFractionalPrecision(v int32)`
+
+SetFractionalPrecision sets FractionalPrecision field to given value.
+
+### HasFractionalPrecision
+
+`func (o *DataType) HasFractionalPrecision() bool`
+
+HasFractionalPrecision returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

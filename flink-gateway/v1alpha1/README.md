@@ -99,6 +99,7 @@ Class | Method | HTTP request | Description
  - [MultipleSearchFilter](docs/MultipleSearchFilter.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ResultListMeta](docs/ResultListMeta.md)
+ - [RowFieldType](docs/RowFieldType.md)
  - [SqlV1alpha1ResultSchema](docs/SqlV1alpha1ResultSchema.md)
  - [SqlV1alpha1Statement](docs/SqlV1alpha1Statement.md)
  - [SqlV1alpha1StatementException](docs/SqlV1alpha1StatementException.md)

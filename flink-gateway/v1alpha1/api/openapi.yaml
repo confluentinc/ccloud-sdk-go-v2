@@ -2189,6 +2189,10 @@ components:
           - $ref: '#/components/schemas/DataType'
           description: JSON object in TableSchema format; describes the data returned
             by the results serving API.
+          example:
+            type: CHAR
+            nullable: true
+            length: 8
       required:
       - name
       - type
@@ -2197,11 +2201,9 @@ components:
       properties:
         type:
           description: The data type of the column.
-          example: CHAR
           type: string
         nullable:
           description: Indicates whether values in this column can be null.
-          example: true
           type: boolean
         length:
           description: The length of the data type.
@@ -2223,9 +2225,41 @@ components:
           allOf:
           - $ref: '#/components/schemas/DataType'
           description: The type of the value in the data type (if applicable).
+        element_type:
+          allOf:
+          - $ref: '#/components/schemas/DataType'
+          description: The type of the element in the data type (if applicable).
+        fields:
+          description: The fields of the element in the data type (if applicable).
+          items:
+            $ref: '#/components/schemas/RowFieldType'
+          type: array
+        resolution:
+          description: The resolution of the data type (if applicable).
+          type: string
+        fractional_precision:
+          description: The fractional precision of the data type (if applicable).
+          format: int32
+          type: integer
       required:
       - nullable
       - type
+      type: object
+    RowFieldType:
+      properties:
+        name:
+          description: The name of the field.
+          type: string
+        field_type:
+          allOf:
+          - $ref: '#/components/schemas/DataType'
+          description: The data type of the field.
+        description:
+          description: The description of the field.
+          type: string
+      required:
+      - field_type
+      - name
       type: object
     Failure:
       description: Provides information about problems encountered while performing

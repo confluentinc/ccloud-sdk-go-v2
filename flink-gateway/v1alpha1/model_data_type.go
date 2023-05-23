@@ -50,6 +50,14 @@ type DataType struct {
 	KeyType *DataType `json:"key_type,omitempty"`
 	// The type of the value in the data type (if applicable).
 	ValueType *DataType `json:"value_type,omitempty"`
+	// The type of the element in the data type (if applicable).
+	ElementType *DataType `json:"element_type,omitempty"`
+	// The fields of the element in the data type (if applicable).
+	Fields *[]RowFieldType `json:"fields,omitempty"`
+	// The resolution of the data type (if applicable).
+	Resolution *string `json:"resolution,omitempty"`
+	// The fractional precision of the data type (if applicable).
+	FractionalPrecision *int32 `json:"fractional_precision,omitempty"`
 }
 
 // NewDataType instantiates a new DataType object
@@ -279,6 +287,134 @@ func (o *DataType) SetValueType(v DataType) {
 	o.ValueType = &v
 }
 
+// GetElementType returns the ElementType field value if set, zero value otherwise.
+func (o *DataType) GetElementType() DataType {
+	if o == nil || o.ElementType == nil {
+		var ret DataType
+		return ret
+	}
+	return *o.ElementType
+}
+
+// GetElementTypeOk returns a tuple with the ElementType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DataType) GetElementTypeOk() (*DataType, bool) {
+	if o == nil || o.ElementType == nil {
+		return nil, false
+	}
+	return o.ElementType, true
+}
+
+// HasElementType returns a boolean if a field has been set.
+func (o *DataType) HasElementType() bool {
+	if o != nil && o.ElementType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetElementType gets a reference to the given DataType and assigns it to the ElementType field.
+func (o *DataType) SetElementType(v DataType) {
+	o.ElementType = &v
+}
+
+// GetFields returns the Fields field value if set, zero value otherwise.
+func (o *DataType) GetFields() []RowFieldType {
+	if o == nil || o.Fields == nil {
+		var ret []RowFieldType
+		return ret
+	}
+	return *o.Fields
+}
+
+// GetFieldsOk returns a tuple with the Fields field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DataType) GetFieldsOk() (*[]RowFieldType, bool) {
+	if o == nil || o.Fields == nil {
+		return nil, false
+	}
+	return o.Fields, true
+}
+
+// HasFields returns a boolean if a field has been set.
+func (o *DataType) HasFields() bool {
+	if o != nil && o.Fields != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFields gets a reference to the given []RowFieldType and assigns it to the Fields field.
+func (o *DataType) SetFields(v []RowFieldType) {
+	o.Fields = &v
+}
+
+// GetResolution returns the Resolution field value if set, zero value otherwise.
+func (o *DataType) GetResolution() string {
+	if o == nil || o.Resolution == nil {
+		var ret string
+		return ret
+	}
+	return *o.Resolution
+}
+
+// GetResolutionOk returns a tuple with the Resolution field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DataType) GetResolutionOk() (*string, bool) {
+	if o == nil || o.Resolution == nil {
+		return nil, false
+	}
+	return o.Resolution, true
+}
+
+// HasResolution returns a boolean if a field has been set.
+func (o *DataType) HasResolution() bool {
+	if o != nil && o.Resolution != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetResolution gets a reference to the given string and assigns it to the Resolution field.
+func (o *DataType) SetResolution(v string) {
+	o.Resolution = &v
+}
+
+// GetFractionalPrecision returns the FractionalPrecision field value if set, zero value otherwise.
+func (o *DataType) GetFractionalPrecision() int32 {
+	if o == nil || o.FractionalPrecision == nil {
+		var ret int32
+		return ret
+	}
+	return *o.FractionalPrecision
+}
+
+// GetFractionalPrecisionOk returns a tuple with the FractionalPrecision field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DataType) GetFractionalPrecisionOk() (*int32, bool) {
+	if o == nil || o.FractionalPrecision == nil {
+		return nil, false
+	}
+	return o.FractionalPrecision, true
+}
+
+// HasFractionalPrecision returns a boolean if a field has been set.
+func (o *DataType) HasFractionalPrecision() bool {
+	if o != nil && o.FractionalPrecision != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFractionalPrecision gets a reference to the given int32 and assigns it to the FractionalPrecision field.
+func (o *DataType) SetFractionalPrecision(v int32) {
+	o.FractionalPrecision = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *DataType) Redact() {
     o.recurseRedact(&o.Type)
@@ -288,6 +424,10 @@ func (o *DataType) Redact() {
     o.recurseRedact(o.Scale)
     o.recurseRedact(o.KeyType)
     o.recurseRedact(o.ValueType)
+    o.recurseRedact(o.ElementType)
+    o.recurseRedact(o.Fields)
+    o.recurseRedact(o.Resolution)
+    o.recurseRedact(o.FractionalPrecision)
 }
 
 func (o *DataType) recurseRedact(v interface{}) {
@@ -342,6 +482,18 @@ func (o DataType) MarshalJSON() ([]byte, error) {
 	}
 	if o.ValueType != nil {
 		toSerialize["value_type"] = o.ValueType
+	}
+	if o.ElementType != nil {
+		toSerialize["element_type"] = o.ElementType
+	}
+	if o.Fields != nil {
+		toSerialize["fields"] = o.Fields
+	}
+	if o.Resolution != nil {
+		toSerialize["resolution"] = o.Resolution
+	}
+	if o.FractionalPrecision != nil {
+		toSerialize["fractional_precision"] = o.FractionalPrecision
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
