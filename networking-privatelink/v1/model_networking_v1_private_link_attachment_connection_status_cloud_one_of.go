@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -140,15 +141,27 @@ func (dst *NetworkingV1PrivateLinkAttachmentConnectionStatusCloudOneOf) Unmarsha
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src NetworkingV1PrivateLinkAttachmentConnectionStatusCloudOneOf) MarshalJSON() ([]byte, error) {
 	if src.NetworkingV1AwsPrivateLinkAttachmentConnectionStatus != nil {
-		return json.Marshal(&src.NetworkingV1AwsPrivateLinkAttachmentConnectionStatus)
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.NetworkingV1AwsPrivateLinkAttachmentConnectionStatus)
+		return buffer.Bytes(), err
 	}
 
 	if src.NetworkingV1AzurePrivateLinkAttachmentConnectionStatus != nil {
-		return json.Marshal(&src.NetworkingV1AzurePrivateLinkAttachmentConnectionStatus)
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.NetworkingV1AzurePrivateLinkAttachmentConnectionStatus)
+		return buffer.Bytes(), err
 	}
 
 	if src.NetworkingV1GcpPrivateLinkAttachmentConnectionStatus != nil {
-		return json.Marshal(&src.NetworkingV1GcpPrivateLinkAttachmentConnectionStatus)
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.NetworkingV1GcpPrivateLinkAttachmentConnectionStatus)
+		return buffer.Bytes(), err
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -200,7 +213,11 @@ func NewNullableNetworkingV1PrivateLinkAttachmentConnectionStatusCloudOneOf(val 
 }
 
 func (v NullableNetworkingV1PrivateLinkAttachmentConnectionStatusCloudOneOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1PrivateLinkAttachmentConnectionStatusCloudOneOf) UnmarshalJSON(src []byte) error {

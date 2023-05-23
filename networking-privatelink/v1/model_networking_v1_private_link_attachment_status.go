@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,11 +37,13 @@ import (
 // NetworkingV1PrivateLinkAttachmentStatus The status of the Private Link Attachment
 type NetworkingV1PrivateLinkAttachmentStatus struct {
 	// The lifecycle phase of the PrivateLink attachment:    PROVISIONING: PrivateLink attachment provisioning is in progress;    WAITING_FOR_CONNECTIONS: PrivateLink attachment is waiting for connections;    READY: PrivateLink attachment is ready;    FAILED: PrivateLink attachment is in a failed state;    EXPIRED: PrivateLink attachment has timed out waiting for connections, can only be deleted;    DEPROVISIONING: PrivateLink attachment deprovisioning is in progress;
-	Phase string `json:"phase"`
+	Phase string `json:"phase,omitempty"`
 	// Error code if PrivateLink attachment is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`
 	// Displayable error message if PrivateLink attachment is in a failed state.
 	ErrorMessage *string `json:"error_message,omitempty"`
+	// The root DNS domain for the PrivateLink attachment.
+	DnsDomain *string `json:"dns_domain,omitempty"`
 	// The cloud specific status of the PrivateLink attachment. These will be populated when the PrivateLink attachment reaches the WAITING_FOR_CONNECTIONS state.
 	Cloud *NetworkingV1PrivateLinkAttachmentStatusCloudOneOf `json:"cloud,omitempty"`
 }
@@ -151,6 +154,38 @@ func (o *NetworkingV1PrivateLinkAttachmentStatus) SetErrorMessage(v string) {
 	o.ErrorMessage = &v
 }
 
+// GetDnsDomain returns the DnsDomain field value if set, zero value otherwise.
+func (o *NetworkingV1PrivateLinkAttachmentStatus) GetDnsDomain() string {
+	if o == nil || o.DnsDomain == nil {
+		var ret string
+		return ret
+	}
+	return *o.DnsDomain
+}
+
+// GetDnsDomainOk returns a tuple with the DnsDomain field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1PrivateLinkAttachmentStatus) GetDnsDomainOk() (*string, bool) {
+	if o == nil || o.DnsDomain == nil {
+		return nil, false
+	}
+	return o.DnsDomain, true
+}
+
+// HasDnsDomain returns a boolean if a field has been set.
+func (o *NetworkingV1PrivateLinkAttachmentStatus) HasDnsDomain() bool {
+	if o != nil && o.DnsDomain != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDnsDomain gets a reference to the given string and assigns it to the DnsDomain field.
+func (o *NetworkingV1PrivateLinkAttachmentStatus) SetDnsDomain(v string) {
+	o.DnsDomain = &v
+}
+
 // GetCloud returns the Cloud field value if set, zero value otherwise.
 func (o *NetworkingV1PrivateLinkAttachmentStatus) GetCloud() NetworkingV1PrivateLinkAttachmentStatusCloudOneOf {
 	if o == nil || o.Cloud == nil {
@@ -188,6 +223,7 @@ func (o *NetworkingV1PrivateLinkAttachmentStatus) Redact() {
 	o.recurseRedact(&o.Phase)
 	o.recurseRedact(o.ErrorCode)
 	o.recurseRedact(o.ErrorMessage)
+	o.recurseRedact(o.DnsDomain)
 	o.recurseRedact(o.Cloud)
 }
 
@@ -232,10 +268,17 @@ func (o NetworkingV1PrivateLinkAttachmentStatus) MarshalJSON() ([]byte, error) {
 	if o.ErrorMessage != nil {
 		toSerialize["error_message"] = o.ErrorMessage
 	}
+	if o.DnsDomain != nil {
+		toSerialize["dns_domain"] = o.DnsDomain
+	}
 	if o.Cloud != nil {
 		toSerialize["cloud"] = o.Cloud
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1PrivateLinkAttachmentStatus struct {
@@ -266,7 +309,11 @@ func NewNullableNetworkingV1PrivateLinkAttachmentStatus(val *NetworkingV1Private
 }
 
 func (v NullableNetworkingV1PrivateLinkAttachmentStatus) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1PrivateLinkAttachmentStatus) UnmarshalJSON(src []byte) error {

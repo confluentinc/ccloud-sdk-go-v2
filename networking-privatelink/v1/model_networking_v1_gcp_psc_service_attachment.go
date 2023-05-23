@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,9 +37,9 @@ import (
 // NetworkingV1GcpPscServiceAttachment GCP PSC Service attachment for a zone with reserved capacity to connect a PSC Endpoint.
 type NetworkingV1GcpPscServiceAttachment struct {
 	// Zone associated with the PSC Service attachment.
-	Zone string `json:"zone"`
+	Zone string `json:"zone,omitempty"`
 	// Id of a Private Service Connect Service Attachment in Confluent Cloud.
-	PrivateServiceConnectServiceAttachment string `json:"private_service_connect_service_attachment"`
+	PrivateServiceConnectServiceAttachment string `json:"private_service_connect_service_attachment,omitempty"`
 }
 
 // NewNetworkingV1GcpPscServiceAttachment instantiates a new NetworkingV1GcpPscServiceAttachment object
@@ -152,7 +153,11 @@ func (o NetworkingV1GcpPscServiceAttachment) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["private_service_connect_service_attachment"] = o.PrivateServiceConnectServiceAttachment
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1GcpPscServiceAttachment struct {
@@ -183,7 +188,11 @@ func NewNullableNetworkingV1GcpPscServiceAttachment(val *NetworkingV1GcpPscServi
 }
 
 func (v NullableNetworkingV1GcpPscServiceAttachment) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1GcpPscServiceAttachment) UnmarshalJSON(src []byte) error {

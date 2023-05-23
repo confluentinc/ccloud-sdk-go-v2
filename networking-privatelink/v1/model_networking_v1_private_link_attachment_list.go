@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,12 +37,12 @@ import (
 // NetworkingV1PrivateLinkAttachmentList PrivateLink attachment connection objects represent connections established to a cloud region in order to access resources that belong to a Confluent Cloud Environment. The API allows you to list, create, read update and delete your PrivateLink attachment connections.   ## The Private Link Attachment Connections Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.PrivateLinkAttachmentConnection\" />
 type NetworkingV1PrivateLinkAttachmentList struct {
 	// APIVersion defines the schema version of this representation of a resource.
-	ApiVersion string `json:"api_version"`
+	ApiVersion string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
-	Kind     string   `json:"kind"`
-	Metadata ListMeta `json:"metadata"`
+	Kind     string   `json:"kind,omitempty"`
+	Metadata ListMeta `json:"metadata,omitempty"`
 	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
-	Data []NetworkingV1PrivateLinkAttachment `json:"data"`
+	Data []NetworkingV1PrivateLinkAttachment `json:"data,omitempty"`
 }
 
 // NewNetworkingV1PrivateLinkAttachmentList instantiates a new NetworkingV1PrivateLinkAttachmentList object
@@ -213,7 +214,11 @@ func (o NetworkingV1PrivateLinkAttachmentList) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1PrivateLinkAttachmentList struct {
@@ -244,7 +249,11 @@ func NewNullableNetworkingV1PrivateLinkAttachmentList(val *NetworkingV1PrivateLi
 }
 
 func (v NullableNetworkingV1PrivateLinkAttachmentList) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1PrivateLinkAttachmentList) UnmarshalJSON(src []byte) error {

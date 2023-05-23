@@ -42,14 +42,14 @@ var (
 type PrivateLinkAttachmentsNetworkingV1Api interface {
 
 	/*
-			CreateNetworkingV1PrivateLinkAttachment Create a Private Link Attachment
+		CreateNetworkingV1PrivateLinkAttachment Create a Private Link Attachment
 
-			[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to create a private link attachment.
+	Make a request to create a private link attachment.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiCreateNetworkingV1PrivateLinkAttachmentRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateNetworkingV1PrivateLinkAttachmentRequest
 	*/
 	CreateNetworkingV1PrivateLinkAttachment(ctx _context.Context) ApiCreateNetworkingV1PrivateLinkAttachmentRequest
 
@@ -58,15 +58,15 @@ type PrivateLinkAttachmentsNetworkingV1Api interface {
 	CreateNetworkingV1PrivateLinkAttachmentExecute(r ApiCreateNetworkingV1PrivateLinkAttachmentRequest) (NetworkingV1PrivateLinkAttachment, *_nethttp.Response, error)
 
 	/*
-			DeleteNetworkingV1PrivateLinkAttachment Delete a Private Link Attachment
+		DeleteNetworkingV1PrivateLinkAttachment Delete a Private Link Attachment
 
-			[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to delete a private link attachment.
+	Make a request to delete a private link attachment.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the private link attachment.
-			 @return ApiDeleteNetworkingV1PrivateLinkAttachmentRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the private link attachment.
+		 @return ApiDeleteNetworkingV1PrivateLinkAttachmentRequest
 	*/
 	DeleteNetworkingV1PrivateLinkAttachment(ctx _context.Context, id string) ApiDeleteNetworkingV1PrivateLinkAttachmentRequest
 
@@ -74,15 +74,15 @@ type PrivateLinkAttachmentsNetworkingV1Api interface {
 	DeleteNetworkingV1PrivateLinkAttachmentExecute(r ApiDeleteNetworkingV1PrivateLinkAttachmentRequest) (*_nethttp.Response, error)
 
 	/*
-			GetNetworkingV1PrivateLinkAttachment Read a Private Link Attachment
+		GetNetworkingV1PrivateLinkAttachment Read a Private Link Attachment
 
-			[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to read a private link attachment.
+	Make a request to read a private link attachment.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the private link attachment.
-			 @return ApiGetNetworkingV1PrivateLinkAttachmentRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the private link attachment.
+		 @return ApiGetNetworkingV1PrivateLinkAttachmentRequest
 	*/
 	GetNetworkingV1PrivateLinkAttachment(ctx _context.Context, id string) ApiGetNetworkingV1PrivateLinkAttachmentRequest
 
@@ -91,14 +91,14 @@ type PrivateLinkAttachmentsNetworkingV1Api interface {
 	GetNetworkingV1PrivateLinkAttachmentExecute(r ApiGetNetworkingV1PrivateLinkAttachmentRequest) (NetworkingV1PrivateLinkAttachment, *_nethttp.Response, error)
 
 	/*
-			ListNetworkingV1PrivateLinkAttachments List of Private Link Attachments
+		ListNetworkingV1PrivateLinkAttachments List of Private Link Attachments
 
-			[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-		Retrieve a sorted, filtered, paginated list of all private link attachments.
+	Retrieve a sorted, filtered, paginated list of all private link attachments.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiListNetworkingV1PrivateLinkAttachmentsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListNetworkingV1PrivateLinkAttachmentsRequest
 	*/
 	ListNetworkingV1PrivateLinkAttachments(ctx _context.Context) ApiListNetworkingV1PrivateLinkAttachmentsRequest
 
@@ -107,17 +107,17 @@ type PrivateLinkAttachmentsNetworkingV1Api interface {
 	ListNetworkingV1PrivateLinkAttachmentsExecute(r ApiListNetworkingV1PrivateLinkAttachmentsRequest) (NetworkingV1PrivateLinkAttachmentList, *_nethttp.Response, error)
 
 	/*
-			UpdateNetworkingV1PrivateLinkAttachment Update a Private Link Attachment
+		UpdateNetworkingV1PrivateLinkAttachment Update a Private Link Attachment
 
-			[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to update a private link attachment.
+	Make a request to update a private link attachment.
 
 
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the private link attachment.
-			 @return ApiUpdateNetworkingV1PrivateLinkAttachmentRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the private link attachment.
+		 @return ApiUpdateNetworkingV1PrivateLinkAttachmentRequest
 	*/
 	UpdateNetworkingV1PrivateLinkAttachment(ctx _context.Context, id string) ApiUpdateNetworkingV1PrivateLinkAttachmentRequest
 

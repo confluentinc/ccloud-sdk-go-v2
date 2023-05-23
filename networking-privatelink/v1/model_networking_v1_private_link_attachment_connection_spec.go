@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -242,7 +243,11 @@ func (o NetworkingV1PrivateLinkAttachmentConnectionSpec) MarshalJSON() ([]byte, 
 	if o.PrivateLinkAttachment != nil {
 		toSerialize["private_link_attachment"] = o.PrivateLinkAttachment
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1PrivateLinkAttachmentConnectionSpec struct {
@@ -273,7 +278,11 @@ func NewNullableNetworkingV1PrivateLinkAttachmentConnectionSpec(val *NetworkingV
 }
 
 func (v NullableNetworkingV1PrivateLinkAttachmentConnectionSpec) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1PrivateLinkAttachmentConnectionSpec) UnmarshalJSON(src []byte) error {

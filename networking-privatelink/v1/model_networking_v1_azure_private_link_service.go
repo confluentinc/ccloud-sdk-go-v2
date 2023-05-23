@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,11 +37,11 @@ import (
 // NetworkingV1AzurePrivateLinkService Azure Private Link Service for an availability zone with reserved capacity to connect a Private Endpoint.
 type NetworkingV1AzurePrivateLinkService struct {
 	// Availability zone associated with the Azure PrivateLink service.
-	Zone string `json:"zone"`
+	Zone string `json:"zone,omitempty"`
 	// Azure PrivateLink service alias for the availability zone.
-	PrivateLinkServiceAlias string `json:"private_link_service_alias"`
+	PrivateLinkServiceAlias string `json:"private_link_service_alias,omitempty"`
 	// Azure PrivateLink service resource id for the availability zone.
-	PrivateLinkServiceResourceId string `json:"private_link_service_resource_id"`
+	PrivateLinkServiceResourceId string `json:"private_link_service_resource_id,omitempty"`
 }
 
 // NewNetworkingV1AzurePrivateLinkService instantiates a new NetworkingV1AzurePrivateLinkService object
@@ -183,7 +184,11 @@ func (o NetworkingV1AzurePrivateLinkService) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["private_link_service_resource_id"] = o.PrivateLinkServiceResourceId
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1AzurePrivateLinkService struct {
@@ -214,7 +219,11 @@ func NewNullableNetworkingV1AzurePrivateLinkService(val *NetworkingV1AzurePrivat
 }
 
 func (v NullableNetworkingV1AzurePrivateLinkService) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1AzurePrivateLinkService) UnmarshalJSON(src []byte) error {

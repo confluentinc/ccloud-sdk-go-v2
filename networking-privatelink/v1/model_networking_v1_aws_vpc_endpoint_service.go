@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,7 +37,7 @@ import (
 // NetworkingV1AwsVpcEndpointService AWS VPC Endpoint service that can be used to create VPC Endpoints.
 type NetworkingV1AwsVpcEndpointService struct {
 	// Id of the VPC Endpoint service.
-	VpcEndpointServiceName string `json:"vpc_endpoint_service_name"`
+	VpcEndpointServiceName string `json:"vpc_endpoint_service_name,omitempty"`
 }
 
 // NewNetworkingV1AwsVpcEndpointService instantiates a new NetworkingV1AwsVpcEndpointService object
@@ -121,7 +122,11 @@ func (o NetworkingV1AwsVpcEndpointService) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["vpc_endpoint_service_name"] = o.VpcEndpointServiceName
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1AwsVpcEndpointService struct {
@@ -152,7 +157,11 @@ func NewNullableNetworkingV1AwsVpcEndpointService(val *NetworkingV1AwsVpcEndpoin
 }
 
 func (v NullableNetworkingV1AwsVpcEndpointService) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1AwsVpcEndpointService) UnmarshalJSON(src []byte) error {

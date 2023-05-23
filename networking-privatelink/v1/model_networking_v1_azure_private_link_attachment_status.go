@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,9 +37,9 @@ import (
 // NetworkingV1AzurePrivateLinkAttachmentStatus Azure PrivateLink attachment represents reserved capacity in zonal PrivateLink services.  A Private Endpoint can be connected to the PLS corresponding to each zone.
 type NetworkingV1AzurePrivateLinkAttachmentStatus struct {
 	// PrivateLinkAttachmentStatus kind.
-	Kind string `json:"kind"`
+	Kind string `json:"kind,omitempty"`
 	// Array of Azure PrivateLink services that can be used to connect PrivateEndpoints for each availability zone.
-	PrivateLinkServices []NetworkingV1AzurePrivateLinkService `json:"private_link_services"`
+	PrivateLinkServices []NetworkingV1AzurePrivateLinkService `json:"private_link_services,omitempty"`
 }
 
 // NewNetworkingV1AzurePrivateLinkAttachmentStatus instantiates a new NetworkingV1AzurePrivateLinkAttachmentStatus object
@@ -152,7 +153,11 @@ func (o NetworkingV1AzurePrivateLinkAttachmentStatus) MarshalJSON() ([]byte, err
 	if true {
 		toSerialize["private_link_services"] = o.PrivateLinkServices
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1AzurePrivateLinkAttachmentStatus struct {
@@ -183,7 +188,11 @@ func NewNullableNetworkingV1AzurePrivateLinkAttachmentStatus(val *NetworkingV1Az
 }
 
 func (v NullableNetworkingV1AzurePrivateLinkAttachmentStatus) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1AzurePrivateLinkAttachmentStatus) UnmarshalJSON(src []byte) error {

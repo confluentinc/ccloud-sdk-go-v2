@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,9 +37,9 @@ import (
 // NetworkingV1GcpPrivateLinkAttachmentConnection Represents a connection between a GCP PSC Service Attachment and a PSC Endpoint.
 type NetworkingV1GcpPrivateLinkAttachmentConnection struct {
 	// PrivateLinkAttachmentConnection kind.
-	Kind string `json:"kind"`
+	Kind string `json:"kind,omitempty"`
 	// Id of the Private Service connection.
-	PrivateServiceConnectConnectionId string `json:"private_service_connect_connection_id"`
+	PrivateServiceConnectConnectionId string `json:"private_service_connect_connection_id,omitempty"`
 }
 
 // NewNetworkingV1GcpPrivateLinkAttachmentConnection instantiates a new NetworkingV1GcpPrivateLinkAttachmentConnection object
@@ -152,7 +153,11 @@ func (o NetworkingV1GcpPrivateLinkAttachmentConnection) MarshalJSON() ([]byte, e
 	if true {
 		toSerialize["private_service_connect_connection_id"] = o.PrivateServiceConnectConnectionId
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1GcpPrivateLinkAttachmentConnection struct {
@@ -183,7 +188,11 @@ func NewNullableNetworkingV1GcpPrivateLinkAttachmentConnection(val *NetworkingV1
 }
 
 func (v NullableNetworkingV1GcpPrivateLinkAttachmentConnection) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1GcpPrivateLinkAttachmentConnection) UnmarshalJSON(src []byte) error {

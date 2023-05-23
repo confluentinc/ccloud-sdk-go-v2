@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,13 +37,13 @@ import (
 // NetworkingV1GcpPrivateLinkAttachmentConnectionStatus Status of a GCP PrivateLink attachment connection for a zone.
 type NetworkingV1GcpPrivateLinkAttachmentConnectionStatus struct {
 	// PrivateLinkAttachmentConnectionStatus kind.
-	Kind string `json:"kind"`
+	Kind string `json:"kind,omitempty"`
 	// Zone associated with the GCP PrivateLink attachment connection.
-	Zone string `json:"zone"`
+	Zone string `json:"zone,omitempty"`
 	// GCP Private Service Connect ServiceAttachment for the zone.
-	PrivateServiceConnectServiceAttachment string `json:"private_service_connect_service_attachment"`
+	PrivateServiceConnectServiceAttachment string `json:"private_service_connect_service_attachment,omitempty"`
 	// Id of the Private Service connection.
-	PrivateServiceConnectConnectionId string `json:"private_service_connect_connection_id"`
+	PrivateServiceConnectConnectionId string `json:"private_service_connect_connection_id,omitempty"`
 }
 
 // NewNetworkingV1GcpPrivateLinkAttachmentConnectionStatus instantiates a new NetworkingV1GcpPrivateLinkAttachmentConnectionStatus object
@@ -214,7 +215,11 @@ func (o NetworkingV1GcpPrivateLinkAttachmentConnectionStatus) MarshalJSON() ([]b
 	if true {
 		toSerialize["private_service_connect_connection_id"] = o.PrivateServiceConnectConnectionId
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1GcpPrivateLinkAttachmentConnectionStatus struct {
@@ -245,7 +250,11 @@ func NewNullableNetworkingV1GcpPrivateLinkAttachmentConnectionStatus(val *Networ
 }
 
 func (v NullableNetworkingV1GcpPrivateLinkAttachmentConnectionStatus) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1GcpPrivateLinkAttachmentConnectionStatus) UnmarshalJSON(src []byte) error {

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Phase** | **string** | The lifecycle phase of the PrivateLink attachment:    PROVISIONING: PrivateLink attachment provisioning is in progress;    WAITING_FOR_CONNECTIONS: PrivateLink attachment is waiting for connections;    READY: PrivateLink attachment is ready;    FAILED: PrivateLink attachment is in a failed state;    EXPIRED: PrivateLink attachment has timed out waiting for connections, can only be deleted;    DEPROVISIONING: PrivateLink attachment deprovisioning is in progress;  | [readonly] 
 **ErrorCode** | Pointer to **string** | Error code if PrivateLink attachment is in a failed state. May be used for programmatic error checking. | [optional] [readonly] 
 **ErrorMessage** | Pointer to **string** | Displayable error message if PrivateLink attachment is in a failed state. | [optional] [readonly] 
+**DnsDomain** | Pointer to **string** | The root DNS domain for the PrivateLink attachment. | [optional] [readonly] 
 **Cloud** | Pointer to [**NetworkingV1PrivateLinkAttachmentStatusCloudOneOf**](NetworkingV1PrivateLinkAttachmentStatusCloudOneOf.md) | The cloud specific status of the PrivateLink attachment. These will be populated when the PrivateLink attachment reaches the WAITING_FOR_CONNECTIONS state. | [optional] [readonly] 
 
 ## Methods
@@ -97,6 +98,31 @@ SetErrorMessage sets ErrorMessage field to given value.
 `func (o *NetworkingV1PrivateLinkAttachmentStatus) HasErrorMessage() bool`
 
 HasErrorMessage returns a boolean if a field has been set.
+
+### GetDnsDomain
+
+`func (o *NetworkingV1PrivateLinkAttachmentStatus) GetDnsDomain() string`
+
+GetDnsDomain returns the DnsDomain field if non-nil, zero value otherwise.
+
+### GetDnsDomainOk
+
+`func (o *NetworkingV1PrivateLinkAttachmentStatus) GetDnsDomainOk() (*string, bool)`
+
+GetDnsDomainOk returns a tuple with the DnsDomain field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDnsDomain
+
+`func (o *NetworkingV1PrivateLinkAttachmentStatus) SetDnsDomain(v string)`
+
+SetDnsDomain sets DnsDomain field to given value.
+
+### HasDnsDomain
+
+`func (o *NetworkingV1PrivateLinkAttachmentStatus) HasDnsDomain() bool`
+
+HasDnsDomain returns a boolean if a field has been set.
 
 ### GetCloud
 

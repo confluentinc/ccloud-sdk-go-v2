@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,15 +37,15 @@ import (
 // NetworkingV1AzurePrivateLinkAttachmentConnectionStatus Status of an Azure PrivateLink attachment connection for an availability zone.
 type NetworkingV1AzurePrivateLinkAttachmentConnectionStatus struct {
 	// PrivateLinkAttachmentConnectionStatus kind.
-	Kind string `json:"kind"`
+	Kind string `json:"kind,omitempty"`
 	// Availability zone associated with the Azure PrivateLink service.
-	Zone string `json:"zone"`
+	Zone string `json:"zone,omitempty"`
 	// Azure PrivateLink service alias for the availability zone.
-	PrivateLinkServiceAlias string `json:"private_link_service_alias"`
+	PrivateLinkServiceAlias string `json:"private_link_service_alias,omitempty"`
 	// Azure PrivateLink service resource id for the availability zone.
-	PrivateLinkServiceResourceId string `json:"private_link_service_resource_id"`
+	PrivateLinkServiceResourceId string `json:"private_link_service_resource_id,omitempty"`
 	// Resource Id of the PrivateEndpoint (if any) that is connected to the PrivateLink service for this availability zone.
-	PrivateEndpointResourceId string `json:"private_endpoint_resource_id"`
+	PrivateEndpointResourceId string `json:"private_endpoint_resource_id,omitempty"`
 }
 
 // NewNetworkingV1AzurePrivateLinkAttachmentConnectionStatus instantiates a new NetworkingV1AzurePrivateLinkAttachmentConnectionStatus object
@@ -245,7 +246,11 @@ func (o NetworkingV1AzurePrivateLinkAttachmentConnectionStatus) MarshalJSON() ([
 	if true {
 		toSerialize["private_endpoint_resource_id"] = o.PrivateEndpointResourceId
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1AzurePrivateLinkAttachmentConnectionStatus struct {
@@ -276,7 +281,11 @@ func NewNullableNetworkingV1AzurePrivateLinkAttachmentConnectionStatus(val *Netw
 }
 
 func (v NullableNetworkingV1AzurePrivateLinkAttachmentConnectionStatus) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1AzurePrivateLinkAttachmentConnectionStatus) UnmarshalJSON(src []byte) error {

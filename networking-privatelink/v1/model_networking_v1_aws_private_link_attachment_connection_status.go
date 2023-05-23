@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,11 +37,11 @@ import (
 // NetworkingV1AwsPrivateLinkAttachmentConnectionStatus Status of a connection to an AWS PrivateLink attachment.
 type NetworkingV1AwsPrivateLinkAttachmentConnectionStatus struct {
 	// PrivateLinkAttachmentConnectionStatus kind.
-	Kind string `json:"kind"`
+	Kind string `json:"kind,omitempty"`
 	// Id of the VPC Endpoint service used for PrivateLink.
-	VpcEndpointServiceName string `json:"vpc_endpoint_service_name"`
+	VpcEndpointServiceName string `json:"vpc_endpoint_service_name,omitempty"`
 	// Id of the VPC Endpoint (if any) that is connected to the VPC Endpoint service.
-	VpcEndpointId string `json:"vpc_endpoint_id"`
+	VpcEndpointId string `json:"vpc_endpoint_id,omitempty"`
 }
 
 // NewNetworkingV1AwsPrivateLinkAttachmentConnectionStatus instantiates a new NetworkingV1AwsPrivateLinkAttachmentConnectionStatus object
@@ -183,7 +184,11 @@ func (o NetworkingV1AwsPrivateLinkAttachmentConnectionStatus) MarshalJSON() ([]b
 	if true {
 		toSerialize["vpc_endpoint_id"] = o.VpcEndpointId
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1AwsPrivateLinkAttachmentConnectionStatus struct {
@@ -214,7 +219,11 @@ func NewNullableNetworkingV1AwsPrivateLinkAttachmentConnectionStatus(val *Networ
 }
 
 func (v NullableNetworkingV1AwsPrivateLinkAttachmentConnectionStatus) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1AwsPrivateLinkAttachmentConnectionStatus) UnmarshalJSON(src []byte) error {

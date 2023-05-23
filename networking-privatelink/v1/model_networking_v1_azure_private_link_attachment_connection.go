@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,9 +37,9 @@ import (
 // NetworkingV1AzurePrivateLinkAttachmentConnection Represents a connection between an Azure PrivateLink service and a PrivateEndpoint.
 type NetworkingV1AzurePrivateLinkAttachmentConnection struct {
 	// PrivateLinkAttachmentConnection kind.
-	Kind string `json:"kind"`
+	Kind string `json:"kind,omitempty"`
 	// Resource Id of the PrivateEndpoint that is connected to the PrivateLink service.
-	PrivateEndpointResourceId string `json:"private_endpoint_resource_id"`
+	PrivateEndpointResourceId string `json:"private_endpoint_resource_id,omitempty"`
 }
 
 // NewNetworkingV1AzurePrivateLinkAttachmentConnection instantiates a new NetworkingV1AzurePrivateLinkAttachmentConnection object
@@ -152,7 +153,11 @@ func (o NetworkingV1AzurePrivateLinkAttachmentConnection) MarshalJSON() ([]byte,
 	if true {
 		toSerialize["private_endpoint_resource_id"] = o.PrivateEndpointResourceId
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1AzurePrivateLinkAttachmentConnection struct {
@@ -183,7 +188,11 @@ func NewNullableNetworkingV1AzurePrivateLinkAttachmentConnection(val *Networking
 }
 
 func (v NullableNetworkingV1AzurePrivateLinkAttachmentConnection) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1AzurePrivateLinkAttachmentConnection) UnmarshalJSON(src []byte) error {

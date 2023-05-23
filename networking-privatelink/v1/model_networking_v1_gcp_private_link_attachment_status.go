@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,9 +37,9 @@ import (
 // NetworkingV1GcpPrivateLinkAttachmentStatus GCP PrivateLink attachment represents reserved capacity in zonal GCP PSC Service attachments.  A PSC Endpoint can be connected to the Service attachment corresponding to each zone.
 type NetworkingV1GcpPrivateLinkAttachmentStatus struct {
 	// PrivateLinkAttachmentStatus kind.
-	Kind string `json:"kind"`
+	Kind string `json:"kind,omitempty"`
 	// Array of GCP PSC Service attachments that can be used to connect PSC Endpoints for each zone.
-	ServiceAttachments []NetworkingV1GcpPscServiceAttachment `json:"service_attachments"`
+	ServiceAttachments []NetworkingV1GcpPscServiceAttachment `json:"service_attachments,omitempty"`
 }
 
 // NewNetworkingV1GcpPrivateLinkAttachmentStatus instantiates a new NetworkingV1GcpPrivateLinkAttachmentStatus object
@@ -152,7 +153,11 @@ func (o NetworkingV1GcpPrivateLinkAttachmentStatus) MarshalJSON() ([]byte, error
 	if true {
 		toSerialize["service_attachments"] = o.ServiceAttachments
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1GcpPrivateLinkAttachmentStatus struct {
@@ -183,7 +188,11 @@ func NewNullableNetworkingV1GcpPrivateLinkAttachmentStatus(val *NetworkingV1GcpP
 }
 
 func (v NullableNetworkingV1GcpPrivateLinkAttachmentStatus) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1GcpPrivateLinkAttachmentStatus) UnmarshalJSON(src []byte) error {
