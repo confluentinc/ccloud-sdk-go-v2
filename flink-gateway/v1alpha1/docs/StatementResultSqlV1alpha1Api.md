@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## GetSqlV1alpha1StatementResult
 
-> SqlV1alpha1StatementResult GetSqlV1alpha1StatementResult(ctx, environmentId, statementName).PageToken(pageToken).Execute()
+> SqlV1alpha1StatementResult GetSqlV1alpha1StatementResult(ctx, environmentId, statementName).OrgId(orgId).PageToken(pageToken).Execute()
 
 Read Statement Result
 
@@ -29,13 +29,14 @@ import (
 )
 
 func main() {
+    orgId := TODO // string | The unique identifier for the organization.
     environmentId := "environmentId_example" // string | The unique identifier for the environment.
     statementName := "statementName_example" // string | The unique identifier for the statement.
     pageToken := "pageToken_example" // string | It contains the field offset in the CollectSinkFunction protocol. On the first request, it should be unset. The offset is assumed to start at 0. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StatementResultSqlV1alpha1Api.GetSqlV1alpha1StatementResult(context.Background(), environmentId, statementName).PageToken(pageToken).Execute()
+    resp, r, err := api_client.StatementResultSqlV1alpha1Api.GetSqlV1alpha1StatementResult(context.Background(), environmentId, statementName).OrgId(orgId).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StatementResultSqlV1alpha1Api.GetSqlV1alpha1StatementResult``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -61,6 +62,7 @@ Other parameters are passed through a pointer to a apiGetSqlV1alpha1StatementRes
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **orgId** | [**string**](string.md) | The unique identifier for the organization. | 
 
 
  **pageToken** | **string** | It contains the field offset in the CollectSinkFunction protocol. On the first request, it should be unset. The offset is assumed to start at 0. | 

@@ -435,10 +435,16 @@ func (a *StatementsSqlV1alpha1ApiService) DeleteSqlV1alpha1StatementExecute(r Ap
 type ApiGetSqlV1alpha1StatementRequest struct {
 	ctx _context.Context
 	ApiService StatementsSqlV1alpha1Api
+	orgId *string
 	environmentId string
 	statementName string
 }
 
+// The unique identifier for the organization.
+func (r ApiGetSqlV1alpha1StatementRequest) OrgId(orgId string) ApiGetSqlV1alpha1StatementRequest {
+	r.orgId = &orgId
+	return r
+}
 
 func (r ApiGetSqlV1alpha1StatementRequest) Execute() (SqlV1alpha1Statement, *_nethttp.Response, error) {
 	return r.ApiService.GetSqlV1alpha1StatementExecute(r)
@@ -488,6 +494,9 @@ func (a *StatementsSqlV1alpha1ApiService) GetSqlV1alpha1StatementExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.orgId == nil {
+		return localVarReturnValue, nil, reportError("orgId is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -506,6 +515,7 @@ func (a *StatementsSqlV1alpha1ApiService) GetSqlV1alpha1StatementExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	localVarHeaderParams["Org-Id"] = parameterToString(*r.orgId, "")
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -595,12 +605,18 @@ func (a *StatementsSqlV1alpha1ApiService) GetSqlV1alpha1StatementExecute(r ApiGe
 type ApiListSqlV1alpha1StatementsRequest struct {
 	ctx _context.Context
 	ApiService StatementsSqlV1alpha1Api
+	orgId *string
 	environmentId string
 	computePoolId *string
 	pageSize *int32
 	pageToken *string
 }
 
+// The unique identifier for the organization.
+func (r ApiListSqlV1alpha1StatementsRequest) OrgId(orgId string) ApiListSqlV1alpha1StatementsRequest {
+	r.orgId = &orgId
+	return r
+}
 // Filter the results by exact match for spec.compute_pool_id.
 func (r ApiListSqlV1alpha1StatementsRequest) ComputePoolId(computePoolId string) ApiListSqlV1alpha1StatementsRequest {
 	r.computePoolId = &computePoolId
@@ -662,6 +678,9 @@ func (a *StatementsSqlV1alpha1ApiService) ListSqlV1alpha1StatementsExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.orgId == nil {
+		return localVarReturnValue, nil, reportError("orgId is required and must be specified")
+	}
 
 	if r.computePoolId != nil {
 		localVarQueryParams.Add("compute_pool_id", parameterToString(*r.computePoolId, ""))
@@ -689,6 +708,7 @@ func (a *StatementsSqlV1alpha1ApiService) ListSqlV1alpha1StatementsExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	localVarHeaderParams["Org-Id"] = parameterToString(*r.orgId, "")
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

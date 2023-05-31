@@ -65,10 +65,16 @@ type StatementExceptionsSqlV1alpha1ApiService service
 type ApiGetSqlV1alpha1StatementExceptionsRequest struct {
 	ctx _context.Context
 	ApiService StatementExceptionsSqlV1alpha1Api
+	orgId *string
 	environmentId string
 	statementName string
 }
 
+// The unique identifier for the organization.
+func (r ApiGetSqlV1alpha1StatementExceptionsRequest) OrgId(orgId string) ApiGetSqlV1alpha1StatementExceptionsRequest {
+	r.orgId = &orgId
+	return r
+}
 
 func (r ApiGetSqlV1alpha1StatementExceptionsRequest) Execute() (SqlV1alpha1StatementExceptionList, *_nethttp.Response, error) {
 	return r.ApiService.GetSqlV1alpha1StatementExceptionsExecute(r)
@@ -118,6 +124,9 @@ func (a *StatementExceptionsSqlV1alpha1ApiService) GetSqlV1alpha1StatementExcept
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.orgId == nil {
+		return localVarReturnValue, nil, reportError("orgId is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -136,6 +145,7 @@ func (a *StatementExceptionsSqlV1alpha1ApiService) GetSqlV1alpha1StatementExcept
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	localVarHeaderParams["Org-Id"] = parameterToString(*r.orgId, "")
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

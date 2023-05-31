@@ -66,11 +66,17 @@ type StatementResultSqlV1alpha1ApiService service
 type ApiGetSqlV1alpha1StatementResultRequest struct {
 	ctx _context.Context
 	ApiService StatementResultSqlV1alpha1Api
+	orgId *string
 	environmentId string
 	statementName string
 	pageToken *string
 }
 
+// The unique identifier for the organization.
+func (r ApiGetSqlV1alpha1StatementResultRequest) OrgId(orgId string) ApiGetSqlV1alpha1StatementResultRequest {
+	r.orgId = &orgId
+	return r
+}
 // It contains the field offset in the CollectSinkFunction protocol. On the first request, it should be unset. The offset is assumed to start at 0.
 func (r ApiGetSqlV1alpha1StatementResultRequest) PageToken(pageToken string) ApiGetSqlV1alpha1StatementResultRequest {
 	r.pageToken = &pageToken
@@ -126,6 +132,9 @@ func (a *StatementResultSqlV1alpha1ApiService) GetSqlV1alpha1StatementResultExec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.orgId == nil {
+		return localVarReturnValue, nil, reportError("orgId is required and must be specified")
+	}
 
 	if r.pageToken != nil {
 		localVarQueryParams.Add("page_token", parameterToString(*r.pageToken, ""))
@@ -147,6 +156,7 @@ func (a *StatementResultSqlV1alpha1ApiService) GetSqlV1alpha1StatementResultExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	localVarHeaderParams["Org-Id"] = parameterToString(*r.orgId, "")
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

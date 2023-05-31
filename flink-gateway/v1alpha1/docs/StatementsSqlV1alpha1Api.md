@@ -156,7 +156,7 @@ Name | Type | Description  | Notes
 
 ## GetSqlV1alpha1Statement
 
-> SqlV1alpha1Statement GetSqlV1alpha1Statement(ctx, environmentId, statementName).Execute()
+> SqlV1alpha1Statement GetSqlV1alpha1Statement(ctx, environmentId, statementName).OrgId(orgId).Execute()
 
 Read a Statement
 
@@ -175,12 +175,13 @@ import (
 )
 
 func main() {
+    orgId := TODO // string | The unique identifier for the organization.
     environmentId := "environmentId_example" // string | The unique identifier for the environment.
     statementName := "statementName_example" // string | The unique identifier for the statement.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StatementsSqlV1alpha1Api.GetSqlV1alpha1Statement(context.Background(), environmentId, statementName).Execute()
+    resp, r, err := api_client.StatementsSqlV1alpha1Api.GetSqlV1alpha1Statement(context.Background(), environmentId, statementName).OrgId(orgId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StatementsSqlV1alpha1Api.GetSqlV1alpha1Statement``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -206,6 +207,7 @@ Other parameters are passed through a pointer to a apiGetSqlV1alpha1StatementReq
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **orgId** | [**string**](string.md) | The unique identifier for the organization. | 
 
 
 
@@ -229,7 +231,7 @@ Name | Type | Description  | Notes
 
 ## ListSqlV1alpha1Statements
 
-> SqlV1alpha1StatementList ListSqlV1alpha1Statements(ctx, environmentId).ComputePoolId(computePoolId).PageSize(pageSize).PageToken(pageToken).Execute()
+> SqlV1alpha1StatementList ListSqlV1alpha1Statements(ctx, environmentId).OrgId(orgId).ComputePoolId(computePoolId).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Statements
 
@@ -248,6 +250,7 @@ import (
 )
 
 func main() {
+    orgId := TODO // string | The unique identifier for the organization.
     environmentId := "environmentId_example" // string | The unique identifier for the environment.
     computePoolId := "fcp-00000" // string | Filter the results by exact match for spec.compute_pool_id. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
@@ -255,7 +258,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StatementsSqlV1alpha1Api.ListSqlV1alpha1Statements(context.Background(), environmentId).ComputePoolId(computePoolId).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.StatementsSqlV1alpha1Api.ListSqlV1alpha1Statements(context.Background(), environmentId).OrgId(orgId).ComputePoolId(computePoolId).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StatementsSqlV1alpha1Api.ListSqlV1alpha1Statements``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -280,6 +283,7 @@ Other parameters are passed through a pointer to a apiListSqlV1alpha1StatementsR
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **orgId** | [**string**](string.md) | The unique identifier for the organization. | 
 
  **computePoolId** | **string** | Filter the results by exact match for spec.compute_pool_id. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
