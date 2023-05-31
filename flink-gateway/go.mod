@@ -1,4 +1,4 @@
-module github.com/confluentinc/ccloud-sdk-go-v2-internal/flink-gateway
+module github.com/confluentinc/ccloud-sdk-go-v2/flink-gateway
 
 go 1.13
 
