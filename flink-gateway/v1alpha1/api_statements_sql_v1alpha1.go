@@ -113,10 +113,16 @@ type StatementsSqlV1alpha1ApiService service
 type ApiCreateSqlV1alpha1StatementRequest struct {
 	ctx _context.Context
 	ApiService StatementsSqlV1alpha1Api
+	orgId *string
 	environmentId string
 	sqlV1alpha1Statement *SqlV1alpha1Statement
 }
 
+// The unique identifier for the organization.
+func (r ApiCreateSqlV1alpha1StatementRequest) OrgId(orgId string) ApiCreateSqlV1alpha1StatementRequest {
+	r.orgId = &orgId
+	return r
+}
 func (r ApiCreateSqlV1alpha1StatementRequest) SqlV1alpha1Statement(sqlV1alpha1Statement SqlV1alpha1Statement) ApiCreateSqlV1alpha1StatementRequest {
 	r.sqlV1alpha1Statement = &sqlV1alpha1Statement
 	return r
@@ -167,6 +173,9 @@ func (a *StatementsSqlV1alpha1ApiService) CreateSqlV1alpha1StatementExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.orgId == nil {
+		return localVarReturnValue, nil, reportError("orgId is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -185,6 +194,7 @@ func (a *StatementsSqlV1alpha1ApiService) CreateSqlV1alpha1StatementExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	localVarHeaderParams["Org-Id"] = parameterToString(*r.orgId, "")
 	// body params
 	localVarPostBody = r.sqlV1alpha1Statement
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
@@ -286,10 +296,16 @@ func (a *StatementsSqlV1alpha1ApiService) CreateSqlV1alpha1StatementExecute(r Ap
 type ApiDeleteSqlV1alpha1StatementRequest struct {
 	ctx _context.Context
 	ApiService StatementsSqlV1alpha1Api
+	orgId *string
 	environmentId string
 	statementName string
 }
 
+// The unique identifier for the organization.
+func (r ApiDeleteSqlV1alpha1StatementRequest) OrgId(orgId string) ApiDeleteSqlV1alpha1StatementRequest {
+	r.orgId = &orgId
+	return r
+}
 
 func (r ApiDeleteSqlV1alpha1StatementRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteSqlV1alpha1StatementExecute(r)
@@ -337,6 +353,9 @@ func (a *StatementsSqlV1alpha1ApiService) DeleteSqlV1alpha1StatementExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.orgId == nil {
+		return nil, reportError("orgId is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -355,6 +374,7 @@ func (a *StatementsSqlV1alpha1ApiService) DeleteSqlV1alpha1StatementExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	localVarHeaderParams["Org-Id"] = parameterToString(*r.orgId, "")
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return nil, err
