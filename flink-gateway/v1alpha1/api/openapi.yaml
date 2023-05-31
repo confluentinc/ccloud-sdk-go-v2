@@ -612,6 +612,15 @@ paths:
         Make a request to create a statement.
       operationId: createSqlV1alpha1Statement
       parameters:
+      - description: The unique identifier for the organization.
+        explode: false
+        in: header
+        name: Org-Id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
       - description: The unique identifier for the environment.
         explode: false
         in: path
@@ -630,6 +639,7 @@ paths:
                   spec:
                     required:
                     - compute_pool_id
+                    - identity_pool_id
                     - statement
                     - statement_name
                     type: object
@@ -840,6 +850,7 @@ paths:
           curl --request POST \
             --url https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/%7Benvironment_id%7D/statements \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'Org-Id: SOME_STRING_VALUE' \
             --header 'content-type: application/json' \
             --data '{"spec":{"statement_name":"sql123","statement":"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;","properties":{"key1":"value1","key2":"value2"},"compute_pool_id":"fcp-00000","identity_pool_id":"pool-abc123"}}'
       - lang: Java
@@ -852,6 +863,7 @@ paths:
             .url("https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/%7Benvironment_id%7D/statements")
             .post(body)
             .addHeader("content-type", "application/json")
+            .addHeader("Org-Id", "SOME_STRING_VALUE")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
@@ -865,10 +877,10 @@ paths:
           \":\\\"value2\\\"},\\\"compute_pool_id\\\":\\\"fcp-00000\\\",\\\"identity_pool_id\\\
           \":\\\"pool-abc123\\\"}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url,\
           \ payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\")\n\
-          \treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\t\
-          res, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          \treq.Header.Add(\"Org-Id\", \"SOME_STRING_VALUE\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
@@ -879,6 +891,7 @@ paths:
 
           headers = {
               'content-type': "application/json",
+              'Org-Id': "SOME_STRING_VALUE",
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
@@ -899,6 +912,7 @@ paths:
             "path": "/sql/v1alpha1/environments/%7Benvironment_id%7D/statements",
             "headers": {
               "content-type": "application/json",
+              "Org-Id": "SOME_STRING_VALUE",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
           };
@@ -935,6 +949,7 @@ paths:
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Org-Id: SOME_STRING_VALUE");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
@@ -946,6 +961,7 @@ paths:
           var client = new RestClient("https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/%7Benvironment_id%7D/statements");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
+          request.AddHeader("Org-Id", "SOME_STRING_VALUE");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"spec\":{\"statement_name\":\"sql123\",\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"identity_pool_id\":\"pool-abc123\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
@@ -957,6 +973,15 @@ paths:
         Make a request to delete a statement.
       operationId: deleteSqlV1alpha1Statement
       parameters:
+      - description: The unique identifier for the organization.
+        explode: false
+        in: header
+        name: Org-Id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
       - description: The unique identifier for the environment.
         explode: false
         in: path
@@ -1117,7 +1142,8 @@ paths:
         source: |-
           curl --request DELETE \
             --url https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/%7Benvironment_id%7D/statements/%7Bstatement_name%7D \
-            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'Org-Id: SOME_STRING_VALUE'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
@@ -1125,6 +1151,7 @@ paths:
           Request request = new Request.Builder()
             .url("https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/%7Benvironment_id%7D/statements/%7Bstatement_name%7D")
             .delete(null)
+            .addHeader("Org-Id", "SOME_STRING_VALUE")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
@@ -1133,16 +1160,20 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
           \n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/%7Benvironment_id%7D/statements/%7Bstatement_name%7D\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          Org-Id\", \"SOME_STRING_VALUE\")\n\treq.Header.Add(\"Authorization\", \"\
+          Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\
+          \tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
+          \tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
 
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+          headers = {
+              'Org-Id': "SOME_STRING_VALUE",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
 
           conn.request("DELETE", "/sql/v1alpha1/environments/%7Benvironment_id%7D/statements/%7Bstatement_name%7D", headers=headers)
 
@@ -1160,6 +1191,7 @@ paths:
             "port": null,
             "path": "/sql/v1alpha1/environments/%7Benvironment_id%7D/statements/%7Bstatement_name%7D",
             "headers": {
+              "Org-Id": "SOME_STRING_VALUE",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
           };
@@ -1186,6 +1218,7 @@ paths:
           curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/%7Benvironment_id%7D/statements/%7Bstatement_name%7D");
 
           struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Org-Id: SOME_STRING_VALUE");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
@@ -1194,6 +1227,7 @@ paths:
         source: |-
           var client = new RestClient("https://flink.region.provider.confluent.cloud/sql/v1alpha1/environments/%7Benvironment_id%7D/statements/%7Bstatement_name%7D");
           var request = new RestRequest(Method.DELETE);
+          request.AddHeader("Org-Id", "SOME_STRING_VALUE");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     get:

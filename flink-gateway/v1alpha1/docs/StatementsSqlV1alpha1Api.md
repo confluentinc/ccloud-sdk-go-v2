@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## CreateSqlV1alpha1Statement
 
-> SqlV1alpha1Statement CreateSqlV1alpha1Statement(ctx, environmentId).SqlV1alpha1Statement(sqlV1alpha1Statement).Execute()
+> SqlV1alpha1Statement CreateSqlV1alpha1Statement(ctx, environmentId).OrgId(orgId).SqlV1alpha1Statement(sqlV1alpha1Statement).Execute()
 
 Create a Statement
 
@@ -32,12 +32,13 @@ import (
 )
 
 func main() {
+    orgId := TODO // string | The unique identifier for the organization.
     environmentId := "environmentId_example" // string | The unique identifier for the environment.
     sqlV1alpha1Statement := *openapiclient.NewSqlV1alpha1Statement() // SqlV1alpha1Statement |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StatementsSqlV1alpha1Api.CreateSqlV1alpha1Statement(context.Background(), environmentId).SqlV1alpha1Statement(sqlV1alpha1Statement).Execute()
+    resp, r, err := api_client.StatementsSqlV1alpha1Api.CreateSqlV1alpha1Statement(context.Background(), environmentId).OrgId(orgId).SqlV1alpha1Statement(sqlV1alpha1Statement).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StatementsSqlV1alpha1Api.CreateSqlV1alpha1Statement``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -62,6 +63,7 @@ Other parameters are passed through a pointer to a apiCreateSqlV1alpha1Statement
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **orgId** | [**string**](string.md) | The unique identifier for the organization. | 
 
  **sqlV1alpha1Statement** | [**SqlV1alpha1Statement**](SqlV1alpha1Statement.md) |  | 
 
@@ -85,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## DeleteSqlV1alpha1Statement
 
-> DeleteSqlV1alpha1Statement(ctx, environmentId, statementName).Execute()
+> DeleteSqlV1alpha1Statement(ctx, environmentId, statementName).OrgId(orgId).Execute()
 
 Delete a Statement
 
@@ -104,12 +106,13 @@ import (
 )
 
 func main() {
+    orgId := TODO // string | The unique identifier for the organization.
     environmentId := "environmentId_example" // string | The unique identifier for the environment.
     statementName := "statementName_example" // string | The unique identifier for the statement.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StatementsSqlV1alpha1Api.DeleteSqlV1alpha1Statement(context.Background(), environmentId, statementName).Execute()
+    resp, r, err := api_client.StatementsSqlV1alpha1Api.DeleteSqlV1alpha1Statement(context.Background(), environmentId, statementName).OrgId(orgId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StatementsSqlV1alpha1Api.DeleteSqlV1alpha1Statement``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -133,6 +136,7 @@ Other parameters are passed through a pointer to a apiDeleteSqlV1alpha1Statement
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **orgId** | [**string**](string.md) | The unique identifier for the organization. | 
 
 
 
