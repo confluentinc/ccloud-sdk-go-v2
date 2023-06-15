@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Phase** | **string** | Status of the Flink compute pool. | [readonly] 
-**CurrentCfu** | **int32** | The number of CSUs (Confluent Streaming Units) currently allocated to this Flink compute pool. | [readonly] 
+**CurrentCfu** | **int32** | The number of Confluent Flink Units (CFUs) currently allocated to this Flink compute pool. | [readonly] 
 
 ## Methods
 

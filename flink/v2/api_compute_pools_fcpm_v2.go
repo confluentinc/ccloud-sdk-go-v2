@@ -113,8 +113,6 @@ type ComputePoolsFcpmV2Api interface {
 
 	Make a request to update a compute pool.
 
-
-
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param id The unique identifier for the compute pool.
 		 @return ApiUpdateFcpmV2ComputePoolRequest

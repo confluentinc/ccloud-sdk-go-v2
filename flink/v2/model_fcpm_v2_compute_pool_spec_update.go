@@ -38,8 +38,6 @@ import (
 type FcpmV2ComputePoolSpecUpdate struct {
 	// Maximum number of Confluent Flink Units (CFUs) that the Flink compute pool should auto-scale to.
 	MaxCfu *int32 `json:"max_cfu,omitempty"`
-	// The type of of the Flink compute pool.
-	Config *FcpmV2ComputePoolSpecUpdateConfigOneOf `json:"config,omitempty"`
 	// The environment to which this belongs.
 	Environment *GlobalObjectReference `json:"environment,omitempty"`
 }
@@ -93,38 +91,6 @@ func (o *FcpmV2ComputePoolSpecUpdate) SetMaxCfu(v int32) {
 	o.MaxCfu = &v
 }
 
-// GetConfig returns the Config field value if set, zero value otherwise.
-func (o *FcpmV2ComputePoolSpecUpdate) GetConfig() FcpmV2ComputePoolSpecUpdateConfigOneOf {
-	if o == nil || o.Config == nil {
-		var ret FcpmV2ComputePoolSpecUpdateConfigOneOf
-		return ret
-	}
-	return *o.Config
-}
-
-// GetConfigOk returns a tuple with the Config field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *FcpmV2ComputePoolSpecUpdate) GetConfigOk() (*FcpmV2ComputePoolSpecUpdateConfigOneOf, bool) {
-	if o == nil || o.Config == nil {
-		return nil, false
-	}
-	return o.Config, true
-}
-
-// HasConfig returns a boolean if a field has been set.
-func (o *FcpmV2ComputePoolSpecUpdate) HasConfig() bool {
-	if o != nil && o.Config != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetConfig gets a reference to the given FcpmV2ComputePoolSpecUpdateConfigOneOf and assigns it to the Config field.
-func (o *FcpmV2ComputePoolSpecUpdate) SetConfig(v FcpmV2ComputePoolSpecUpdateConfigOneOf) {
-	o.Config = &v
-}
-
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
 func (o *FcpmV2ComputePoolSpecUpdate) GetEnvironment() GlobalObjectReference {
 	if o == nil || o.Environment == nil {
@@ -160,7 +126,6 @@ func (o *FcpmV2ComputePoolSpecUpdate) SetEnvironment(v GlobalObjectReference) {
 // Redact resets all sensitive fields to their zero value.
 func (o *FcpmV2ComputePoolSpecUpdate) Redact() {
 	o.recurseRedact(o.MaxCfu)
-	o.recurseRedact(o.Config)
 	o.recurseRedact(o.Environment)
 }
 
@@ -198,9 +163,6 @@ func (o FcpmV2ComputePoolSpecUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.MaxCfu != nil {
 		toSerialize["max_cfu"] = o.MaxCfu
-	}
-	if o.Config != nil {
-		toSerialize["config"] = o.Config
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment

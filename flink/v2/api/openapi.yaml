@@ -2114,11 +2114,10 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     patch:
-      description: |+
+      description: |-
         [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update a compute pool.
-
       operationId: updateFcpmV2ComputePool
       parameters:
       - description: The unique identifier for the compute pool.
@@ -3038,7 +3037,7 @@ components:
           - PROVISIONED
           - FAILED
         current_cfu:
-          description: The number of CSUs (Confluent Streaming Units) currently allocated
+          description: The number of Confluent Flink Units (CFUs) currently allocated
             to this Flink compute pool.
           example: 4
           format: int32
@@ -3296,6 +3295,7 @@ components:
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/fcpm.v2.Standard'
+          x-immutable: true
           x-one-of-name: FcpmV2ComputePoolSpecConfigOneOf
         environment:
           allOf:
@@ -3599,16 +3599,6 @@ components:
           minimum: 1
           type: integer
           x-immutable: false
-        config:
-          description: |
-            The type of of the Flink compute pool.
-          discriminator:
-            mapping:
-              Standard: '#/components/schemas/fcpm.v2.Standard'
-            propertyName: kind
-          oneOf:
-          - $ref: '#/components/schemas/fcpm.v2.Standard'
-          x-one-of-name: FcpmV2ComputePoolSpecUpdateConfigOneOf
         environment:
           allOf:
           - $ref: '#/components/schemas/GlobalObjectReference'

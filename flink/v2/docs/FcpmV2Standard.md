@@ -52,12 +52,6 @@ SetKind sets Kind field to given value.
 
 Convenience method to wrap this instance of FcpmV2Standard in FcpmV2ComputePoolSpecConfigOneOf
 
-### AsFcpmV2ComputePoolSpecUpdateConfigOneOf
-
-`func (s *FcpmV2Standard) AsFcpmV2ComputePoolSpecUpdateConfigOneOf() FcpmV2ComputePoolSpecUpdateConfigOneOf`
-
-Convenience method to wrap this instance of FcpmV2Standard in FcpmV2ComputePoolSpecUpdateConfigOneOf
-
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

@@ -5,7 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **MaxCfu** | Pointer to **int32** | Maximum number of Confluent Flink Units (CFUs) that the Flink compute pool should auto-scale to.  | [optional] 
-**Config** | Pointer to [**FcpmV2ComputePoolSpecUpdateConfigOneOf**](FcpmV2ComputePoolSpecUpdateConfigOneOf.md) | The type of of the Flink compute pool.  | [optional] 
 **Environment** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
@@ -51,31 +50,6 @@ SetMaxCfu sets MaxCfu field to given value.
 `func (o *FcpmV2ComputePoolSpecUpdate) HasMaxCfu() bool`
 
 HasMaxCfu returns a boolean if a field has been set.
-
-### GetConfig
-
-`func (o *FcpmV2ComputePoolSpecUpdate) GetConfig() FcpmV2ComputePoolSpecUpdateConfigOneOf`
-
-GetConfig returns the Config field if non-nil, zero value otherwise.
-
-### GetConfigOk
-
-`func (o *FcpmV2ComputePoolSpecUpdate) GetConfigOk() (*FcpmV2ComputePoolSpecUpdateConfigOneOf, bool)`
-
-GetConfigOk returns a tuple with the Config field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetConfig
-
-`func (o *FcpmV2ComputePoolSpecUpdate) SetConfig(v FcpmV2ComputePoolSpecUpdateConfigOneOf)`
-
-SetConfig sets Config field to given value.
-
-### HasConfig
-
-`func (o *FcpmV2ComputePoolSpecUpdate) HasConfig() bool`
-
-HasConfig returns a boolean if a field has been set.
 
 ### GetEnvironment
 
