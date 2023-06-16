@@ -26,6 +26,7 @@ Contact: paas-team@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -40,10 +41,12 @@ type OrgV2Organization struct {
 	// Kind defines the object this REST resource represents.
 	Kind *string `json:"kind,omitempty"`
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
-	Id       *string     `json:"id,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
 	// A human-readable name for the Organization
 	DisplayName *string `json:"display_name,omitempty"`
+	// The flag to toggle Just-In-Time user provision for SSO-enabled organization
+	JitEnabled *bool `json:"jit_enabled,omitempty"`
 }
 
 // NewOrgV2Organization instantiates a new OrgV2Organization object
@@ -223,6 +226,38 @@ func (o *OrgV2Organization) SetDisplayName(v string) {
 	o.DisplayName = &v
 }
 
+// GetJitEnabled returns the JitEnabled field value if set, zero value otherwise.
+func (o *OrgV2Organization) GetJitEnabled() bool {
+	if o == nil || o.JitEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.JitEnabled
+}
+
+// GetJitEnabledOk returns a tuple with the JitEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrgV2Organization) GetJitEnabledOk() (*bool, bool) {
+	if o == nil || o.JitEnabled == nil {
+		return nil, false
+	}
+	return o.JitEnabled, true
+}
+
+// HasJitEnabled returns a boolean if a field has been set.
+func (o *OrgV2Organization) HasJitEnabled() bool {
+	if o != nil && o.JitEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetJitEnabled gets a reference to the given bool and assigns it to the JitEnabled field.
+func (o *OrgV2Organization) SetJitEnabled(v bool) {
+	o.JitEnabled = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *OrgV2Organization) Redact() {
 	o.recurseRedact(o.ApiVersion)
@@ -230,6 +265,7 @@ func (o *OrgV2Organization) Redact() {
 	o.recurseRedact(o.Id)
 	o.recurseRedact(o.Metadata)
 	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.JitEnabled)
 }
 
 func (o *OrgV2Organization) recurseRedact(v interface{}) {
@@ -279,7 +315,14 @@ func (o OrgV2Organization) MarshalJSON() ([]byte, error) {
 	if o.DisplayName != nil {
 		toSerialize["display_name"] = o.DisplayName
 	}
-	return json.Marshal(toSerialize)
+	if o.JitEnabled != nil {
+		toSerialize["jit_enabled"] = o.JitEnabled
+	}
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableOrgV2Organization struct {
@@ -310,10 +353,16 @@ func NewNullableOrgV2Organization(val *OrgV2Organization) *NullableOrgV2Organiza
 }
 
 func (v NullableOrgV2Organization) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableOrgV2Organization) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

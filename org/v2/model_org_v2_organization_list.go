@@ -26,6 +26,7 @@ Contact: paas-team@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,12 +37,12 @@ import (
 // OrgV2OrganizationList `Organization` objects represent a customer organization. An organization contains all customer resources (e.g., Environments, Kafka Clusters, Service Accounts, API Keys) and is tied to a billing agreement (including any annual commitment or support plan).  The API allows you to list, view, and update your organizations.   Related guide: [Organizations for Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/hierarchy/organizations/cloud-organization.html).  ## The Organizations Model <SchemaDefinition schemaRef=\"#/components/schemas/org.v2.Organization\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `organizations_per_user` | Confluent Cloud organizations a user belongs to |
 type OrgV2OrganizationList struct {
 	// APIVersion defines the schema version of this representation of a resource.
-	ApiVersion string `json:"api_version"`
+	ApiVersion string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
-	Kind     string   `json:"kind"`
-	Metadata ListMeta `json:"metadata"`
+	Kind string `json:"kind,omitempty"`
+	Metadata ListMeta `json:"metadata,omitempty"`
 	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
-	Data []OrgV2Organization `json:"data"`
+	Data []OrgV2Organization `json:"data,omitempty"`
 }
 
 // NewOrgV2OrganizationList instantiates a new OrgV2OrganizationList object
@@ -78,7 +79,7 @@ func (o *OrgV2OrganizationList) GetApiVersion() string {
 // GetApiVersionOk returns a tuple with the ApiVersion field value
 // and a boolean to check if the value has been set.
 func (o *OrgV2OrganizationList) GetApiVersionOk() (*string, bool) {
-	if o == nil {
+	if o == nil  {
 		return nil, false
 	}
 	return &o.ApiVersion, true
@@ -102,7 +103,7 @@ func (o *OrgV2OrganizationList) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *OrgV2OrganizationList) GetKindOk() (*string, bool) {
-	if o == nil {
+	if o == nil  {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -126,7 +127,7 @@ func (o *OrgV2OrganizationList) GetMetadata() ListMeta {
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *OrgV2OrganizationList) GetMetadataOk() (*ListMeta, bool) {
-	if o == nil {
+	if o == nil  {
 		return nil, false
 	}
 	return &o.Metadata, true
@@ -150,7 +151,7 @@ func (o *OrgV2OrganizationList) GetData() []OrgV2Organization {
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
 func (o *OrgV2OrganizationList) GetDataOk() (*[]OrgV2Organization, bool) {
-	if o == nil {
+	if o == nil  {
 		return nil, false
 	}
 	return &o.Data, true
@@ -213,7 +214,11 @@ func (o OrgV2OrganizationList) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableOrgV2OrganizationList struct {
@@ -244,7 +249,11 @@ func NewNullableOrgV2OrganizationList(val *OrgV2OrganizationList) *NullableOrgV2
 }
 
 func (v NullableOrgV2OrganizationList) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableOrgV2OrganizationList) UnmarshalJSON(src []byte) error {
