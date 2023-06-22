@@ -41,12 +41,14 @@ var (
 type UsagesCliV1Api interface {
 
 	/*
-	CreateCliV1Usage Create a Usage
+		CreateCliV1Usage Create a Usage
+
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to create a usage.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiCreateCliV1UsageRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateCliV1UsageRequest
 	*/
 	CreateCliV1Usage(ctx _context.Context) ApiCreateCliV1UsageRequest
 
@@ -58,7 +60,7 @@ type UsagesCliV1Api interface {
 type UsagesCliV1ApiService service
 
 type ApiCreateCliV1UsageRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService UsagesCliV1Api
 	cliV1Usage *CliV1Usage
 }
@@ -75,15 +77,17 @@ func (r ApiCreateCliV1UsageRequest) Execute() (*_nethttp.Response, error) {
 /*
 CreateCliV1Usage Create a Usage
 
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
 Make a request to create a usage.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCliV1UsageRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCliV1UsageRequest
 */
 func (a *UsagesCliV1ApiService) CreateCliV1Usage(ctx _context.Context) ApiCreateCliV1UsageRequest {
 	return ApiCreateCliV1UsageRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 

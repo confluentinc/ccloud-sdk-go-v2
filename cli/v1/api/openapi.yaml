@@ -21,6 +21,8 @@ servers:
   url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
     `Usage` objects represent CLI commands that were run while logged in to Confluent Cloud.
     The API creates usage objects that are collected for CLI analytics.
 
@@ -31,7 +33,10 @@ tags:
 paths:
   /cli/v1/usages:
     post:
-      description: Make a request to create a usage.
+      description: |-
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Make a request to create a usage.
       operationId: createCliV1Usage
       requestBody:
         content:
@@ -220,13 +225,13 @@ paths:
             --url https://api.confluent.cloud/cli/v1/usages \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"os":"darwin","arch":"amd64","version":"v2.7.0","command":"confluent kafka cluster create","flags":["cloud","region"],"error":true}'
+            --data '{"os":"darwin","arch":"amd64","version":"v2.7.0","command":"confluent kafka cluster create","flags":["cloud","region"],"error":true,"stack_frames":["~/.goenv/versions/1.20.4/src/runtime/panic.go:884","github.com/confluentinc/cli/internal/cmd/command.go:171"]}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"os\":\"darwin\",\"arch\":\"amd64\",\"version\":\"v2.7.0\",\"command\":\"confluent kafka cluster create\",\"flags\":[\"cloud\",\"region\"],\"error\":true}");
+          RequestBody body = RequestBody.create(mediaType, "{\"os\":\"darwin\",\"arch\":\"amd64\",\"version\":\"v2.7.0\",\"command\":\"confluent kafka cluster create\",\"flags\":[\"cloud\",\"region\"],\"error\":true,\"stack_frames\":[\"~/.goenv/versions/1.20.4/src/runtime/panic.go:884\",\"github.com/confluentinc/cli/internal/cmd/command.go:171\"]}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/cli/v1/usages")
             .post(body)
@@ -241,9 +246,11 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"os\\\":\\\"darwin\\\",\\\"arch\\\
           \":\\\"amd64\\\",\\\"version\\\":\\\"v2.7.0\\\",\\\"command\\\":\\\"confluent\
           \ kafka cluster create\\\",\\\"flags\\\":[\\\"cloud\\\",\\\"region\\\"],\\\
-          \"error\\\":true}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
-          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \"error\\\":true,\\\"stack_frames\\\":[\\\"~/.goenv/versions/1.20.4/src/runtime/panic.go:884\\\
+          \",\\\"github.com/confluentinc/cli/internal/cmd/command.go:171\\\"]}\")\n\
+          \n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -252,7 +259,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"os\":\"darwin\",\"arch\":\"amd64\",\"version\":\"v2.7.0\",\"command\":\"confluent kafka cluster create\",\"flags\":[\"cloud\",\"region\"],\"error\":true}"
+          payload = "{\"os\":\"darwin\",\"arch\":\"amd64\",\"version\":\"v2.7.0\",\"command\":\"confluent kafka cluster create\",\"flags\":[\"cloud\",\"region\"],\"error\":true,\"stack_frames\":[\"~/.goenv/versions/1.20.4/src/runtime/panic.go:884\",\"github.com/confluentinc/cli/internal/cmd/command.go:171\"]}"
 
           headers = {
               'content-type': "application/json",
@@ -299,7 +306,11 @@ paths:
             version: 'v2.7.0',
             command: 'confluent kafka cluster create',
             flags: ['cloud', 'region'],
-            error: true
+            error: true,
+            stack_frames: [
+              '~/.goenv/versions/1.20.4/src/runtime/panic.go:884',
+              'github.com/confluentinc/cli/internal/cmd/command.go:171'
+            ]
           }));
           req.end();
       - lang: C
@@ -314,7 +325,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"os\":\"darwin\",\"arch\":\"amd64\",\"version\":\"v2.7.0\",\"command\":\"confluent kafka cluster create\",\"flags\":[\"cloud\",\"region\"],\"error\":true}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"os\":\"darwin\",\"arch\":\"amd64\",\"version\":\"v2.7.0\",\"command\":\"confluent kafka cluster create\",\"flags\":[\"cloud\",\"region\"],\"error\":true,\"stack_frames\":[\"~/.goenv/versions/1.20.4/src/runtime/panic.go:884\",\"github.com/confluentinc/cli/internal/cmd/command.go:171\"]}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -323,7 +334,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"os\":\"darwin\",\"arch\":\"amd64\",\"version\":\"v2.7.0\",\"command\":\"confluent kafka cluster create\",\"flags\":[\"cloud\",\"region\"],\"error\":true}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"os\":\"darwin\",\"arch\":\"amd64\",\"version\":\"v2.7.0\",\"command\":\"confluent kafka cluster create\",\"flags\":[\"cloud\",\"region\"],\"error\":true,\"stack_frames\":[\"~/.goenv/versions/1.20.4/src/runtime/panic.go:884\",\"github.com/confluentinc/cli/internal/cmd/command.go:171\"]}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
 components:
   responses:
@@ -590,6 +601,14 @@ components:
           description: If an error occurred while running the CLI command
           example: true
           type: boolean
+        stack_frames:
+          description: Line numbers of the stack trace from a panic
+          example:
+          - ~/.goenv/versions/1.20.4/src/runtime/panic.go:884
+          - github.com/confluentinc/cli/internal/cmd/command.go:171
+          items:
+            type: string
+          type: array
       type: object
     ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have,
