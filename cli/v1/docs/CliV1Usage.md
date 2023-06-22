@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **Command** | Pointer to **string** | CLI command that was run | [optional] 
 **Flags** | Pointer to **[]string** | Names of the flags passed with the CLI command | [optional] 
 **Error** | Pointer to **bool** | If an error occurred while running the CLI command | [optional] 
+**StackFrames** | Pointer to **[]string** | Line numbers of the stack trace from a panic | [optional] 
 
 ## Methods
 
@@ -283,6 +284,31 @@ SetError sets Error field to given value.
 `func (o *CliV1Usage) HasError() bool`
 
 HasError returns a boolean if a field has been set.
+
+### GetStackFrames
+
+`func (o *CliV1Usage) GetStackFrames() []string`
+
+GetStackFrames returns the StackFrames field if non-nil, zero value otherwise.
+
+### GetStackFramesOk
+
+`func (o *CliV1Usage) GetStackFramesOk() (*[]string, bool)`
+
+GetStackFramesOk returns a tuple with the StackFrames field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStackFrames
+
+`func (o *CliV1Usage) SetStackFrames(v []string)`
+
+SetStackFrames sets StackFrames field to given value.
+
+### HasStackFrames
+
+`func (o *CliV1Usage) HasStackFrames() bool`
+
+HasStackFrames returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
