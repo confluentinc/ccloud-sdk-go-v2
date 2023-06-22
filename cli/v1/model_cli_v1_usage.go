@@ -26,6 +26,7 @@ Contact: cli-team@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -54,6 +55,8 @@ type CliV1Usage struct {
 	Flags *[]string `json:"flags,omitempty"`
 	// If an error occurred while running the CLI command
 	Error *bool `json:"error,omitempty"`
+	// Line numbers of the stack trace from a panic
+	StackFrames *[]string `json:"stack_frames,omitempty"`
 }
 
 // NewCliV1Usage instantiates a new CliV1Usage object
@@ -393,6 +396,38 @@ func (o *CliV1Usage) SetError(v bool) {
 	o.Error = &v
 }
 
+// GetStackFrames returns the StackFrames field value if set, zero value otherwise.
+func (o *CliV1Usage) GetStackFrames() []string {
+	if o == nil || o.StackFrames == nil {
+		var ret []string
+		return ret
+	}
+	return *o.StackFrames
+}
+
+// GetStackFramesOk returns a tuple with the StackFrames field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CliV1Usage) GetStackFramesOk() (*[]string, bool) {
+	if o == nil || o.StackFrames == nil {
+		return nil, false
+	}
+	return o.StackFrames, true
+}
+
+// HasStackFrames returns a boolean if a field has been set.
+func (o *CliV1Usage) HasStackFrames() bool {
+	if o != nil && o.StackFrames != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStackFrames gets a reference to the given []string and assigns it to the StackFrames field.
+func (o *CliV1Usage) SetStackFrames(v []string) {
+	o.StackFrames = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *CliV1Usage) Redact() {
     o.recurseRedact(o.ApiVersion)
@@ -405,6 +440,7 @@ func (o *CliV1Usage) Redact() {
     o.recurseRedact(o.Command)
     o.recurseRedact(o.Flags)
     o.recurseRedact(o.Error)
+    o.recurseRedact(o.StackFrames)
 }
 
 func (o *CliV1Usage) recurseRedact(v interface{}) {
@@ -469,7 +505,14 @@ func (o CliV1Usage) MarshalJSON() ([]byte, error) {
 	if o.Error != nil {
 		toSerialize["error"] = o.Error
 	}
-	return json.Marshal(toSerialize)
+	if o.StackFrames != nil {
+		toSerialize["stack_frames"] = o.StackFrames
+	}
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableCliV1Usage struct {
@@ -500,7 +543,11 @@ func NewNullableCliV1Usage(val *CliV1Usage) *NullableCliV1Usage {
 }
 
 func (v NullableCliV1Usage) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableCliV1Usage) UnmarshalJSON(src []byte) error {
