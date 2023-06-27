@@ -90,6 +90,7 @@ Class | Method | HTTP request | Description
 
  - [ByokV1AwsKey](docs/ByokV1AwsKey.md)
  - [ByokV1AzureKey](docs/ByokV1AzureKey.md)
+ - [ByokV1GcpKey](docs/ByokV1GcpKey.md)
  - [ByokV1Key](docs/ByokV1Key.md)
  - [ByokV1KeyKeyOneOf](docs/ByokV1KeyKeyOneOf.md)
  - [ByokV1KeyList](docs/ByokV1KeyList.md)

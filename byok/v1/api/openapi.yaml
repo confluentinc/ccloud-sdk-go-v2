@@ -21,11 +21,11 @@ servers:
   url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To BYOK API v1](https://img.shields.io/badge/-Request%20Access%20To%20BYOK%20API%20v1-%23bc8540)](mailto:ccloud-api-access+byok-v1-early-access@confluent.io?subject=Request%20to%20join%20byok/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20byok/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `Key` objects represent customer managed keys on dedicated Confluent Cloud clusters.
 
-    Keys are used to protect data at rest stored in your dedicated Confluent Cloud clusters on AWS and Azure.
+    Keys are used to protect data at rest stored in your dedicated Confluent Cloud clusters on AWS, Azure and GCP.
     This API allows you to upload and retrieve self-managed keys on Confluent Cloud.
 
 
@@ -33,12 +33,19 @@ tags:
 
     ## The Keys Model
     <SchemaDefinition schemaRef="#/components/schemas/byok.v1.Key" />
+
+    ## Quotas and Limits
+    This resource is subject to the following quotas:
+
+    | Quota | Description |
+    | --- | --- |
+    | `byok.max_keys.per_org` | BYOK keys in one Confluent Cloud organisation. |
   name: Keys (byok/v1)
 paths:
   /byok/v1/keys:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To BYOK API v1](https://img.shields.io/badge/-Request%20Access%20To%20BYOK%20API%20v1-%23bc8540)](mailto:ccloud-api-access+byok-v1-early-access@confluent.io?subject=Request%20to%20join%20byok/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20byok/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all keys.
       operationId: listByokV1Keys
@@ -206,7 +213,6 @@ paths:
       summary: List of Keys
       tags:
       - Keys (byok/v1)
-      x-request-access-name: BYOK API v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -293,7 +299,7 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To BYOK API v1](https://img.shields.io/badge/-Request%20Access%20To%20BYOK%20API%20v1-%23bc8540)](mailto:ccloud-api-access+byok-v1-early-access@confluent.io?subject=Request%20to%20join%20byok/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20byok/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create a key.
       operationId: createByokV1Key
@@ -384,6 +390,27 @@ paths:
                 type: string
               style: simple
           x-summary: Unauthorized
+        "402":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "402"
+                  code: quota_exceeded
+                  title: Kafka Clusters Per Org Quota Exceeded
+                  detail: 'The request would exceed the quota: kafka_clusters_per_environment'
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request would exceed one or more quotas.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Over Quota
         "403":
           content:
             application/json:
@@ -495,7 +522,6 @@ paths:
       summary: Create a Key
       tags:
       - Keys (byok/v1)
-      x-request-access-name: BYOK API v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -606,11 +632,10 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"key\":{\"key_arn\":\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\",\"kind\":\"AwsKey\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: BYOK API v1
   /byok/v1/keys/{id}:
     delete:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To BYOK API v1](https://img.shields.io/badge/-Request%20Access%20To%20BYOK%20API%20v1-%23bc8540)](mailto:ccloud-api-access+byok-v1-early-access@confluent.io?subject=Request%20to%20join%20byok/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20byok/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete a key.
       operationId: deleteByokV1Key
@@ -761,7 +786,6 @@ paths:
       summary: Delete a Key
       tags:
       - Keys (byok/v1)
-      x-request-access-name: BYOK API v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -848,7 +872,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To BYOK API v1](https://img.shields.io/badge/-Request%20Access%20To%20BYOK%20API%20v1-%23bc8540)](mailto:ccloud-api-access+byok-v1-early-access@confluent.io?subject=Request%20to%20join%20byok/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20byok/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a key.
       operationId: getByokV1Key
@@ -1012,7 +1036,6 @@ paths:
       summary: Read a Key
       tags:
       - Keys (byok/v1)
-      x-request-access-name: BYOK API v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1097,7 +1120,6 @@ paths:
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
-    x-request-access-name: BYOK API v1
 components:
   responses:
     BadRequestError:
@@ -1299,7 +1321,7 @@ components:
       description: |-
         `Key` objects represent customer managed keys on dedicated Confluent Cloud clusters.
 
-        Keys are used to protect data at rest stored in your dedicated Confluent Cloud clusters on AWS and Azure.
+        Keys are used to protect data at rest stored in your dedicated Confluent Cloud clusters on AWS, Azure and GCP.
         This API allows you to upload and retrieve self-managed keys on Confluent Cloud.
 
 
@@ -1307,6 +1329,13 @@ components:
 
         ## The Keys Model
         <SchemaDefinition schemaRef="#/components/schemas/byok.v1.Key" />
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `byok.max_keys.per_org` | BYOK keys in one Confluent Cloud organisation. |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -1345,14 +1374,17 @@ components:
 
             For AWS please provide the corresponding `key_arn`.
             For Azure please provide the corresponding `key_id`.
+            For GCP please provide the corresponding `key_id`.
           discriminator:
             mapping:
               AwsKey: '#/components/schemas/byok.v1.AwsKey'
               AzureKey: '#/components/schemas/byok.v1.AzureKey'
+              GcpKey: '#/components/schemas/byok.v1.GcpKey'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/byok.v1.AwsKey'
           - $ref: '#/components/schemas/byok.v1.AzureKey'
+          - $ref: '#/components/schemas/byok.v1.GcpKey'
           type: object
           x-immutable: true
           x-one-of-name: ByokV1KeyKeyOneOf
@@ -1364,6 +1396,7 @@ components:
           x-extensible-enum:
           - AWS
           - AZURE
+          - GCP
         state:
           description: |
             The state of the key:
@@ -1389,6 +1422,9 @@ components:
         roles:
           description: |
             The Amazon Resource Names (ARNs) of IAM Roles created for this key-environment combination.
+          example:
+          - arn:aws:iam::123456789876:role/block_storage_manager
+          - arn:aws:iam::987654321234:role/cc-kafka-1111aaaa-11aa-11aa-11aa-111111aaaaaa
           items:
             type: string
           readOnly: true
@@ -1415,14 +1451,14 @@ components:
           type: string
         key_id:
           description: |
-            The unique Key Object Identifier URL of an Azure Key Vault key.
-          example: https://a-vault.vault.azure.net/keys/a-key/00000000000000000000000000000000
+            The unique Key Object Identifier URL without version of an Azure Key Vault key.
+          example: https://vault-name.vault.azure.net/keys/key-name
           type: string
           x-immutable: true
         key_vault_id:
           description: |
             Key Vault ID containing the key
-          example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/a-resourcegroups/providers/Microsoft.KeyVault/vaults/a-vault
+          example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcegroup-name/providers/Microsoft.KeyVault/vaults/vault-name
           type: string
           x-immutable: true
         kind:
@@ -1444,6 +1480,33 @@ components:
       - kind
       - tenant_id
       type: object
+    byok.v1.GcpKey:
+      description: |
+        The GCP BYOK details
+      properties:
+        key_id:
+          description: |
+            The Google Cloud Platform key ID.
+          example: projects/exampleproject/locations/us-central1/keyRings/testkeyring/cryptoKeys/testbyokkey/cryptoKeyVersions/3
+          type: string
+          x-immutable: true
+        security_group:
+          description: |
+            The Google security group created for this key.
+          example: testgroupid@domain.com
+          readOnly: true
+          type: string
+        kind:
+          description: |
+            BYOK kind type.
+          enum:
+          - GcpKey
+          type: string
+          x-immutable: true
+      required:
+      - key_id
+      - kind
+      type: object
     SearchFilter:
       description: Filter a collection by a string search
       type: string
@@ -1451,7 +1514,7 @@ components:
       description: |-
         `Key` objects represent customer managed keys on dedicated Confluent Cloud clusters.
 
-        Keys are used to protect data at rest stored in your dedicated Confluent Cloud clusters on AWS and Azure.
+        Keys are used to protect data at rest stored in your dedicated Confluent Cloud clusters on AWS, Azure and GCP.
         This API allows you to upload and retrieve self-managed keys on Confluent Cloud.
 
 
@@ -1459,6 +1522,13 @@ components:
 
         ## The Keys Model
         <SchemaDefinition schemaRef="#/components/schemas/byok.v1.Key" />
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `byok.max_keys.per_org` | BYOK keys in one Confluent Cloud organisation. |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation

@@ -34,93 +34,93 @@ import (
 	"reflect"
 )
 
-// ByokV1AwsKey The AWS BYOK details
-type ByokV1AwsKey struct {
-	// The Amazon Resource Name (ARN) of an AWS KMS key.
-	KeyArn string `json:"key_arn,omitempty"`
-	// The Amazon Resource Names (ARNs) of IAM Roles created for this key-environment combination.
-	Roles *[]string `json:"roles,omitempty"`
+// ByokV1GcpKey The GCP BYOK details
+type ByokV1GcpKey struct {
+	// The Google Cloud Platform key ID.
+	KeyId string `json:"key_id,omitempty"`
+	// The Google security group created for this key.
+	SecurityGroup *string `json:"security_group,omitempty"`
 	// BYOK kind type.
 	Kind string `json:"kind,omitempty"`
 }
 
-// NewByokV1AwsKey instantiates a new ByokV1AwsKey object
+// NewByokV1GcpKey instantiates a new ByokV1GcpKey object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewByokV1AwsKey(keyArn string, kind string) *ByokV1AwsKey {
-	this := ByokV1AwsKey{}
-	this.KeyArn = keyArn
+func NewByokV1GcpKey(keyId string, kind string) *ByokV1GcpKey {
+	this := ByokV1GcpKey{}
+	this.KeyId = keyId
 	this.Kind = kind
 	return &this
 }
 
-// NewByokV1AwsKeyWithDefaults instantiates a new ByokV1AwsKey object
+// NewByokV1GcpKeyWithDefaults instantiates a new ByokV1GcpKey object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewByokV1AwsKeyWithDefaults() *ByokV1AwsKey {
-	this := ByokV1AwsKey{}
+func NewByokV1GcpKeyWithDefaults() *ByokV1GcpKey {
+	this := ByokV1GcpKey{}
 	return &this
 }
 
-// GetKeyArn returns the KeyArn field value
-func (o *ByokV1AwsKey) GetKeyArn() string {
+// GetKeyId returns the KeyId field value
+func (o *ByokV1GcpKey) GetKeyId() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.KeyArn
+	return o.KeyId
 }
 
-// GetKeyArnOk returns a tuple with the KeyArn field value
+// GetKeyIdOk returns a tuple with the KeyId field value
 // and a boolean to check if the value has been set.
-func (o *ByokV1AwsKey) GetKeyArnOk() (*string, bool) {
+func (o *ByokV1GcpKey) GetKeyIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.KeyArn, true
+	return &o.KeyId, true
 }
 
-// SetKeyArn sets field value
-func (o *ByokV1AwsKey) SetKeyArn(v string) {
-	o.KeyArn = v
+// SetKeyId sets field value
+func (o *ByokV1GcpKey) SetKeyId(v string) {
+	o.KeyId = v
 }
 
-// GetRoles returns the Roles field value if set, zero value otherwise.
-func (o *ByokV1AwsKey) GetRoles() []string {
-	if o == nil || o.Roles == nil {
-		var ret []string
+// GetSecurityGroup returns the SecurityGroup field value if set, zero value otherwise.
+func (o *ByokV1GcpKey) GetSecurityGroup() string {
+	if o == nil || o.SecurityGroup == nil {
+		var ret string
 		return ret
 	}
-	return *o.Roles
+	return *o.SecurityGroup
 }
 
-// GetRolesOk returns a tuple with the Roles field value if set, nil otherwise
+// GetSecurityGroupOk returns a tuple with the SecurityGroup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ByokV1AwsKey) GetRolesOk() (*[]string, bool) {
-	if o == nil || o.Roles == nil {
+func (o *ByokV1GcpKey) GetSecurityGroupOk() (*string, bool) {
+	if o == nil || o.SecurityGroup == nil {
 		return nil, false
 	}
-	return o.Roles, true
+	return o.SecurityGroup, true
 }
 
-// HasRoles returns a boolean if a field has been set.
-func (o *ByokV1AwsKey) HasRoles() bool {
-	if o != nil && o.Roles != nil {
+// HasSecurityGroup returns a boolean if a field has been set.
+func (o *ByokV1GcpKey) HasSecurityGroup() bool {
+	if o != nil && o.SecurityGroup != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetRoles gets a reference to the given []string and assigns it to the Roles field.
-func (o *ByokV1AwsKey) SetRoles(v []string) {
-	o.Roles = &v
+// SetSecurityGroup gets a reference to the given string and assigns it to the SecurityGroup field.
+func (o *ByokV1GcpKey) SetSecurityGroup(v string) {
+	o.SecurityGroup = &v
 }
 
 // GetKind returns the Kind field value
-func (o *ByokV1AwsKey) GetKind() string {
+func (o *ByokV1GcpKey) GetKind() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -131,7 +131,7 @@ func (o *ByokV1AwsKey) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *ByokV1AwsKey) GetKindOk() (*string, bool) {
+func (o *ByokV1GcpKey) GetKindOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -139,18 +139,18 @@ func (o *ByokV1AwsKey) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *ByokV1AwsKey) SetKind(v string) {
+func (o *ByokV1GcpKey) SetKind(v string) {
 	o.Kind = v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *ByokV1AwsKey) Redact() {
-	o.recurseRedact(&o.KeyArn)
-	o.recurseRedact(o.Roles)
+func (o *ByokV1GcpKey) Redact() {
+	o.recurseRedact(&o.KeyId)
+	o.recurseRedact(o.SecurityGroup)
 	o.recurseRedact(&o.Kind)
 }
 
-func (o *ByokV1AwsKey) recurseRedact(v interface{}) {
+func (o *ByokV1GcpKey) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -175,18 +175,18 @@ func (o *ByokV1AwsKey) recurseRedact(v interface{}) {
 	}
 }
 
-func (o ByokV1AwsKey) zeroField(v interface{}) {
+func (o ByokV1GcpKey) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o ByokV1AwsKey) MarshalJSON() ([]byte, error) {
+func (o ByokV1GcpKey) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
-		toSerialize["key_arn"] = o.KeyArn
+		toSerialize["key_id"] = o.KeyId
 	}
-	if o.Roles != nil {
-		toSerialize["roles"] = o.Roles
+	if o.SecurityGroup != nil {
+		toSerialize["security_group"] = o.SecurityGroup
 	}
 	if true {
 		toSerialize["kind"] = o.Kind
@@ -198,34 +198,34 @@ func (o ByokV1AwsKey) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableByokV1AwsKey struct {
-	value *ByokV1AwsKey
+type NullableByokV1GcpKey struct {
+	value *ByokV1GcpKey
 	isSet bool
 }
 
-func (v NullableByokV1AwsKey) Get() *ByokV1AwsKey {
+func (v NullableByokV1GcpKey) Get() *ByokV1GcpKey {
 	return v.value
 }
 
-func (v *NullableByokV1AwsKey) Set(val *ByokV1AwsKey) {
+func (v *NullableByokV1GcpKey) Set(val *ByokV1GcpKey) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableByokV1AwsKey) IsSet() bool {
+func (v NullableByokV1GcpKey) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableByokV1AwsKey) Unset() {
+func (v *NullableByokV1GcpKey) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableByokV1AwsKey(val *ByokV1AwsKey) *NullableByokV1AwsKey {
-	return &NullableByokV1AwsKey{value: val, isSet: true}
+func NewNullableByokV1GcpKey(val *ByokV1GcpKey) *NullableByokV1GcpKey {
+	return &NullableByokV1GcpKey{value: val, isSet: true}
 }
 
-func (v NullableByokV1AwsKey) MarshalJSON() ([]byte, error) {
+func (v NullableByokV1GcpKey) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -233,7 +233,7 @@ func (v NullableByokV1AwsKey) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableByokV1AwsKey) UnmarshalJSON(src []byte) error {
+func (v *NullableByokV1GcpKey) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
