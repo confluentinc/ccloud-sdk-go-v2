@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,9 +36,9 @@ import (
 
 // AlterMirrorStatusResponseDataList struct for AlterMirrorStatusResponseDataList
 type AlterMirrorStatusResponseDataList struct {
-	Kind     string                          `json:"kind"`
-	Metadata ResourceCollectionMetadata      `json:"metadata"`
-	Data     []AlterMirrorStatusResponseData `json:"data"`
+	Kind     string                          `json:"kind,omitempty"`
+	Metadata ResourceCollectionMetadata      `json:"metadata,omitempty"`
+	Data     []AlterMirrorStatusResponseData `json:"data,omitempty"`
 }
 
 // NewAlterMirrorStatusResponseDataList instantiates a new AlterMirrorStatusResponseDataList object
@@ -180,7 +181,11 @@ func (o AlterMirrorStatusResponseDataList) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableAlterMirrorStatusResponseDataList struct {
@@ -211,7 +216,11 @@ func NewNullableAlterMirrorStatusResponseDataList(val *AlterMirrorStatusResponse
 }
 
 func (v NullableAlterMirrorStatusResponseDataList) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableAlterMirrorStatusResponseDataList) UnmarshalJSON(src []byte) error {

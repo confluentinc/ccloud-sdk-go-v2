@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,12 +36,12 @@ import (
 
 // BalancerStatusDataAllOf struct for BalancerStatusDataAllOf
 type BalancerStatusDataAllOf struct {
-	ClusterId     string         `json:"cluster_id"`
-	Status        string         `json:"status"`
+	ClusterId     string         `json:"cluster_id,omitempty"`
+	Status        string         `json:"status,omitempty"`
 	ErrorCode     NullableInt32  `json:"error_code,omitempty"`
 	ErrorMessage  NullableString `json:"error_message,omitempty"`
-	AnyUnevenLoad Relationship   `json:"any_uneven_load"`
-	BrokerTasks   Relationship   `json:"broker_tasks"`
+	AnyUnevenLoad Relationship   `json:"any_uneven_load,omitempty"`
+	BrokerTasks   Relationship   `json:"broker_tasks,omitempty"`
 }
 
 // NewBalancerStatusDataAllOf instantiates a new BalancerStatusDataAllOf object
@@ -306,7 +307,11 @@ func (o BalancerStatusDataAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["broker_tasks"] = o.BrokerTasks
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableBalancerStatusDataAllOf struct {
@@ -337,7 +342,11 @@ func NewNullableBalancerStatusDataAllOf(val *BalancerStatusDataAllOf) *NullableB
 }
 
 func (v NullableBalancerStatusDataAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableBalancerStatusDataAllOf) UnmarshalJSON(src []byte) error {

@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,9 +36,9 @@ import (
 
 // TopicConfigDataList struct for TopicConfigDataList
 type TopicConfigDataList struct {
-	Kind     string                     `json:"kind"`
-	Metadata ResourceCollectionMetadata `json:"metadata"`
-	Data     []TopicConfigData          `json:"data"`
+	Kind     string                     `json:"kind,omitempty"`
+	Metadata ResourceCollectionMetadata `json:"metadata,omitempty"`
+	Data     []TopicConfigData          `json:"data,omitempty"`
 }
 
 // NewTopicConfigDataList instantiates a new TopicConfigDataList object
@@ -180,7 +181,11 @@ func (o TopicConfigDataList) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableTopicConfigDataList struct {
@@ -211,7 +216,11 @@ func NewNullableTopicConfigDataList(val *TopicConfigDataList) *NullableTopicConf
 }
 
 func (v NullableTopicConfigDataList) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableTopicConfigDataList) UnmarshalJSON(src []byte) error {

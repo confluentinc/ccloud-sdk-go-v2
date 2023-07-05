@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,15 +36,15 @@ import (
 
 // AlterBrokerReplicaExclusionData struct for AlterBrokerReplicaExclusionData
 type AlterBrokerReplicaExclusionData struct {
-	Kind         string           `json:"kind"`
-	Metadata     ResourceMetadata `json:"metadata"`
-	ClusterId    string           `json:"cluster_id"`
-	BrokerId     int32            `json:"broker_id"`
-	Exclusion    string           `json:"exclusion"`
-	Reason       string           `json:"reason"`
+	Kind         string           `json:"kind,omitempty"`
+	Metadata     ResourceMetadata `json:"metadata,omitempty"`
+	ClusterId    string           `json:"cluster_id,omitempty"`
+	BrokerId     int32            `json:"broker_id,omitempty"`
+	Exclusion    string           `json:"exclusion,omitempty"`
+	Reason       string           `json:"reason,omitempty"`
 	ErrorCode    NullableInt32    `json:"error_code,omitempty"`
 	ErrorMessage NullableString   `json:"error_message,omitempty"`
-	Broker       Relationship     `json:"broker"`
+	Broker       Relationship     `json:"broker,omitempty"`
 }
 
 // NewAlterBrokerReplicaExclusionData instantiates a new AlterBrokerReplicaExclusionData object
@@ -396,7 +397,11 @@ func (o AlterBrokerReplicaExclusionData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["broker"] = o.Broker
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableAlterBrokerReplicaExclusionData struct {
@@ -427,7 +432,11 @@ func NewNullableAlterBrokerReplicaExclusionData(val *AlterBrokerReplicaExclusion
 }
 
 func (v NullableAlterBrokerReplicaExclusionData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableAlterBrokerReplicaExclusionData) UnmarshalJSON(src []byte) error {

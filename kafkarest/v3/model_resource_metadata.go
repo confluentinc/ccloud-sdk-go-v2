@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,7 +36,7 @@ import (
 
 // ResourceMetadata struct for ResourceMetadata
 type ResourceMetadata struct {
-	Self         string         `json:"self"`
+	Self         string         `json:"self,omitempty"`
 	ResourceName NullableString `json:"resource_name,omitempty"`
 }
 
@@ -168,7 +169,11 @@ func (o ResourceMetadata) MarshalJSON() ([]byte, error) {
 	if o.ResourceName.IsSet() {
 		toSerialize["resource_name"] = o.ResourceName.Get()
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableResourceMetadata struct {
@@ -199,7 +204,11 @@ func NewNullableResourceMetadata(val *ResourceMetadata) *NullableResourceMetadat
 }
 
 func (v NullableResourceMetadata) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableResourceMetadata) UnmarshalJSON(src []byte) error {

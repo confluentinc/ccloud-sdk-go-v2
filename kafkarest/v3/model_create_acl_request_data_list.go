@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,7 +36,7 @@ import (
 
 // CreateAclRequestDataList struct for CreateAclRequestDataList
 type CreateAclRequestDataList struct {
-	Data []CreateAclRequestData `json:"data"`
+	Data []CreateAclRequestData `json:"data,omitempty"`
 }
 
 // NewCreateAclRequestDataList instantiates a new CreateAclRequestDataList object
@@ -120,7 +121,11 @@ func (o CreateAclRequestDataList) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableCreateAclRequestDataList struct {
@@ -151,7 +156,11 @@ func NewNullableCreateAclRequestDataList(val *CreateAclRequestDataList) *Nullabl
 }
 
 func (v NullableCreateAclRequestDataList) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableCreateAclRequestDataList) UnmarshalJSON(src []byte) error {

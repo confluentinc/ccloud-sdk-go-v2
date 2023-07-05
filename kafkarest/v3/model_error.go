@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,8 +36,8 @@ import (
 
 // Error struct for Error
 type Error struct {
-	ErrorCode int32          `json:"error_code"`
-	Message   NullableString `json:"message"`
+	ErrorCode int32          `json:"error_code,omitempty"`
+	Message   NullableString `json:"message,omitempty"`
 }
 
 // NewError instantiates a new Error object
@@ -152,7 +153,11 @@ func (o Error) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["message"] = o.Message.Get()
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableError struct {
@@ -183,7 +188,11 @@ func NewNullableError(val *Error) *NullableError {
 }
 
 func (v NullableError) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableError) UnmarshalJSON(src []byte) error {

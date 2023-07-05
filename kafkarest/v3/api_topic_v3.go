@@ -46,7 +46,7 @@ type TopicV3Api interface {
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Creates a topic.
+	Create a topic.
 	Also supports a dry-run mode that only validates whether the topic creation would succeed
 	if the ``validate_only`` request property is explicitly specified and set to true. Note that
 	when dry-run mode is being used the response status would be 200 OK instead of 201 Created.
@@ -66,7 +66,7 @@ type TopicV3Api interface {
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Deletes the topic with the given `topic_name`.
+	Delete the topic with the given `topic_name`.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param clusterId The Kafka cluster ID.
@@ -83,7 +83,7 @@ type TopicV3Api interface {
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Returns the topic with the given `topic_name`.
+	Return the topic with the given `topic_name`.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param clusterId The Kafka cluster ID.
@@ -101,7 +101,7 @@ type TopicV3Api interface {
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Returns the list of topics that belong to the specified Kafka cluster.
+	Return the list of topics that belong to the specified Kafka cluster.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param clusterId The Kafka cluster ID.
@@ -114,11 +114,11 @@ type TopicV3Api interface {
 	ListKafkaTopicsExecute(r ApiListKafkaTopicsRequest) (TopicDataList, *_nethttp.Response, error)
 
 	/*
-		UpdatePartitionCountKafkaTopic Update partition count
+		UpdatePartitionCountKafkaTopic Update Partition Count
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Increases number of partitions on a topic.
+	Increase the number of partitions for a topic.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param clusterId The Kafka cluster ID.
@@ -157,7 +157,7 @@ CreateKafkaTopic Create Topic
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Creates a topic.
+Create a topic.
 Also supports a dry-run mode that only validates whether the topic creation would succeed
 if the ``validate_only`` request property is explicitly specified and set to true. Note that
 when dry-run mode is being used the response status would be 200 OK instead of 201 Created.
@@ -208,7 +208,7 @@ func (a *TopicV3ApiService) CreateKafkaTopicExecute(r ApiCreateKafkaTopicRequest
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -250,6 +250,16 @@ func (a *TopicV3ApiService) CreateKafkaTopicExecute(r ApiCreateKafkaTopicRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -309,7 +319,7 @@ DeleteKafkaTopic Delete Topic
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Deletes the topic with the given `topic_name`.
+Delete the topic with the given `topic_name`.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
@@ -358,7 +368,7 @@ func (a *TopicV3ApiService) DeleteKafkaTopicExecute(r ApiDeleteKafkaTopicRequest
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -407,6 +417,16 @@ func (a *TopicV3ApiService) DeleteKafkaTopicExecute(r ApiDeleteKafkaTopicRequest
 			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -443,10 +463,17 @@ func (a *TopicV3ApiService) DeleteKafkaTopicExecute(r ApiDeleteKafkaTopicRequest
 }
 
 type ApiGetKafkaTopicRequest struct {
-	ctx        _context.Context
-	ApiService TopicV3Api
-	clusterId  string
-	topicName  string
+	ctx                         _context.Context
+	ApiService                  TopicV3Api
+	clusterId                   string
+	topicName                   string
+	includeAuthorizedOperations *bool
+}
+
+// Specify if authorized operations should be included in the response.
+func (r ApiGetKafkaTopicRequest) IncludeAuthorizedOperations(includeAuthorizedOperations bool) ApiGetKafkaTopicRequest {
+	r.includeAuthorizedOperations = &includeAuthorizedOperations
+	return r
 }
 
 func (r ApiGetKafkaTopicRequest) Execute() (TopicData, *_nethttp.Response, error) {
@@ -458,7 +485,7 @@ GetKafkaTopic Get Topic
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Returns the topic with the given `topic_name`.
+Return the topic with the given `topic_name`.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
@@ -499,6 +526,9 @@ func (a *TopicV3ApiService) GetKafkaTopicExecute(r ApiGetKafkaTopicRequest) (Top
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.includeAuthorizedOperations != nil {
+		localVarQueryParams.Add("include_authorized_operations", parameterToString(*r.includeAuthorizedOperations, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -509,7 +539,7 @@ func (a *TopicV3ApiService) GetKafkaTopicExecute(r ApiGetKafkaTopicRequest) (Top
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -549,6 +579,16 @@ func (a *TopicV3ApiService) GetKafkaTopicExecute(r ApiGetKafkaTopicRequest) (Top
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -617,7 +657,7 @@ ListKafkaTopics List Topics
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Returns the list of topics that belong to the specified Kafka cluster.
+Return the list of topics that belong to the specified Kafka cluster.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
@@ -665,7 +705,7 @@ func (a *TopicV3ApiService) ListKafkaTopicsExecute(r ApiListKafkaTopicsRequest) 
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -705,6 +745,16 @@ func (a *TopicV3ApiService) ListKafkaTopicsExecute(r ApiListKafkaTopicsRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -756,7 +806,6 @@ type ApiUpdatePartitionCountKafkaTopicRequest struct {
 	updatePartitionCountRequestData *UpdatePartitionCountRequestData
 }
 
-// The number of partitions to increase the partition count to.
 func (r ApiUpdatePartitionCountKafkaTopicRequest) UpdatePartitionCountRequestData(updatePartitionCountRequestData UpdatePartitionCountRequestData) ApiUpdatePartitionCountKafkaTopicRequest {
 	r.updatePartitionCountRequestData = &updatePartitionCountRequestData
 	return r
@@ -767,11 +816,11 @@ func (r ApiUpdatePartitionCountKafkaTopicRequest) Execute() (TopicData, *_nethtt
 }
 
 /*
-UpdatePartitionCountKafkaTopic Update partition count
+UpdatePartitionCountKafkaTopic Update Partition Count
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Increases number of partitions on a topic.
+Increase the number of partitions for a topic.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
@@ -822,7 +871,7 @@ func (a *TopicV3ApiService) UpdatePartitionCountKafkaTopicExecute(r ApiUpdatePar
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -864,6 +913,16 @@ func (a *TopicV3ApiService) UpdatePartitionCountKafkaTopicExecute(r ApiUpdatePar
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

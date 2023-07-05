@@ -79,10 +79,10 @@ All URIs are relative to *https://pkc-00000.region.provider.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ACLV3Api* | [**BatchCreateKafkaV3Acls**](docs/ACLV3Api.md#batchcreatekafkav3acls) | **Post** /kafka/v3/clusters/{cluster_id}/acls:batch | Batch Create ACLs
-*ACLV3Api* | [**CreateKafkaAcls**](docs/ACLV3Api.md#createkafkaacls) | **Post** /kafka/v3/clusters/{cluster_id}/acls | Create ACLs
+*ACLV3Api* | [**BatchCreateKafkaAcls**](docs/ACLV3Api.md#batchcreatekafkaacls) | **Post** /kafka/v3/clusters/{cluster_id}/acls:batch | Batch Create ACLs
+*ACLV3Api* | [**CreateKafkaAcls**](docs/ACLV3Api.md#createkafkaacls) | **Post** /kafka/v3/clusters/{cluster_id}/acls | Create an ACL
 *ACLV3Api* | [**DeleteKafkaAcls**](docs/ACLV3Api.md#deletekafkaacls) | **Delete** /kafka/v3/clusters/{cluster_id}/acls | Delete ACLs
-*ACLV3Api* | [**GetKafkaAcls**](docs/ACLV3Api.md#getkafkaacls) | **Get** /kafka/v3/clusters/{cluster_id}/acls | Search ACLs
+*ACLV3Api* | [**GetKafkaAcls**](docs/ACLV3Api.md#getkafkaacls) | **Get** /kafka/v3/clusters/{cluster_id}/acls | List ACLs
 *ClusterLinkingV3Api* | [**CreateKafkaLink**](docs/ClusterLinkingV3Api.md#createkafkalink) | **Post** /kafka/v3/clusters/{cluster_id}/links | Create a cluster link
 *ClusterLinkingV3Api* | [**CreateKafkaMirrorTopic**](docs/ClusterLinkingV3Api.md#createkafkamirrortopic) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors | Create a mirror topic
 *ClusterLinkingV3Api* | [**DeleteKafkaLink**](docs/ClusterLinkingV3Api.md#deletekafkalink) | **Delete** /kafka/v3/clusters/{cluster_id}/links/{link_name} | Delete the cluster link
@@ -101,33 +101,33 @@ Class | Method | HTTP request | Description
 *ClusterLinkingV3Api* | [**UpdateKafkaMirrorTopicsPromote**](docs/ClusterLinkingV3Api.md#updatekafkamirrortopicspromote) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:promote | Promote the mirror topics
 *ClusterLinkingV3Api* | [**UpdateKafkaMirrorTopicsResume**](docs/ClusterLinkingV3Api.md#updatekafkamirrortopicsresume) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:resume | Resume the mirror topics
 *ClusterV3Api* | [**GetKafkaCluster**](docs/ClusterV3Api.md#getkafkacluster) | **Get** /kafka/v3/clusters/{cluster_id} | Get Cluster
-*ConfigsV3Api* | [**DeleteKafkaClusterConfig**](docs/ConfigsV3Api.md#deletekafkaclusterconfig) | **Delete** /kafka/v3/clusters/{cluster_id}/broker-configs/{name} | Reset Cluster Config
+*ConfigsV3Api* | [**DeleteKafkaClusterConfig**](docs/ConfigsV3Api.md#deletekafkaclusterconfig) | **Delete** /kafka/v3/clusters/{cluster_id}/broker-configs/{name} | Reset Dynamic Broker Config
 *ConfigsV3Api* | [**DeleteKafkaTopicConfig**](docs/ConfigsV3Api.md#deletekafkatopicconfig) | **Delete** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs/{name} | Reset Topic Config
-*ConfigsV3Api* | [**GetKafkaClusterConfig**](docs/ConfigsV3Api.md#getkafkaclusterconfig) | **Get** /kafka/v3/clusters/{cluster_id}/broker-configs/{name} | Get Cluster Config
+*ConfigsV3Api* | [**GetKafkaClusterConfig**](docs/ConfigsV3Api.md#getkafkaclusterconfig) | **Get** /kafka/v3/clusters/{cluster_id}/broker-configs/{name} | Get Dynamic Broker Config
 *ConfigsV3Api* | [**GetKafkaTopicConfig**](docs/ConfigsV3Api.md#getkafkatopicconfig) | **Get** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs/{name} | Get Topic Config
-*ConfigsV3Api* | [**ListKafkaAllTopicConfigs**](docs/ConfigsV3Api.md#listkafkaalltopicconfigs) | **Get** /kafka/v3/clusters/{cluster_id}/topics/-/configs | Get All Topic Configs
-*ConfigsV3Api* | [**ListKafkaClusterConfigs**](docs/ConfigsV3Api.md#listkafkaclusterconfigs) | **Get** /kafka/v3/clusters/{cluster_id}/broker-configs | List Cluster Configs
-*ConfigsV3Api* | [**ListKafkaDefaultTopicConfigs**](docs/ConfigsV3Api.md#listkafkadefaulttopicconfigs) | **Get** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/default-configs | List Default Topic Configs
+*ConfigsV3Api* | [**ListKafkaAllTopicConfigs**](docs/ConfigsV3Api.md#listkafkaalltopicconfigs) | **Get** /kafka/v3/clusters/{cluster_id}/topics/-/configs | List All Topic Configs
+*ConfigsV3Api* | [**ListKafkaClusterConfigs**](docs/ConfigsV3Api.md#listkafkaclusterconfigs) | **Get** /kafka/v3/clusters/{cluster_id}/broker-configs | List Dynamic Broker Configs
+*ConfigsV3Api* | [**ListKafkaDefaultTopicConfigs**](docs/ConfigsV3Api.md#listkafkadefaulttopicconfigs) | **Get** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/default-configs | List New Topic Default Configs
 *ConfigsV3Api* | [**ListKafkaTopicConfigs**](docs/ConfigsV3Api.md#listkafkatopicconfigs) | **Get** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs | List Topic Configs
-*ConfigsV3Api* | [**UpdateKafkaClusterConfig**](docs/ConfigsV3Api.md#updatekafkaclusterconfig) | **Put** /kafka/v3/clusters/{cluster_id}/broker-configs/{name} | Update Cluster Config
-*ConfigsV3Api* | [**UpdateKafkaClusterConfigs**](docs/ConfigsV3Api.md#updatekafkaclusterconfigs) | **Post** /kafka/v3/clusters/{cluster_id}/broker-configs:alter | Batch Alter Cluster Configs
+*ConfigsV3Api* | [**UpdateKafkaClusterConfig**](docs/ConfigsV3Api.md#updatekafkaclusterconfig) | **Put** /kafka/v3/clusters/{cluster_id}/broker-configs/{name} | Update Dynamic Broker Config
+*ConfigsV3Api* | [**UpdateKafkaClusterConfigs**](docs/ConfigsV3Api.md#updatekafkaclusterconfigs) | **Post** /kafka/v3/clusters/{cluster_id}/broker-configs:alter | Batch Alter Dynamic Broker Configs
 *ConfigsV3Api* | [**UpdateKafkaTopicConfig**](docs/ConfigsV3Api.md#updatekafkatopicconfig) | **Put** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs/{name} | Update Topic Config
 *ConfigsV3Api* | [**UpdateKafkaTopicConfigBatch**](docs/ConfigsV3Api.md#updatekafkatopicconfigbatch) | **Post** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs:alter | Batch Alter Topic Configs
 *ConsumerGroupV3Api* | [**GetKafkaConsumer**](docs/ConsumerGroupV3Api.md#getkafkaconsumer) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/consumers/{consumer_id} | Get Consumer
 *ConsumerGroupV3Api* | [**GetKafkaConsumerGroup**](docs/ConsumerGroupV3Api.md#getkafkaconsumergroup) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id} | Get Consumer Group
-*ConsumerGroupV3Api* | [**GetKafkaConsumerGroupLagSummary**](docs/ConsumerGroupV3Api.md#getkafkaconsumergrouplagsummary) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lag-summary | Get Consumer Group Lag Summary.
+*ConsumerGroupV3Api* | [**GetKafkaConsumerGroupLagSummary**](docs/ConsumerGroupV3Api.md#getkafkaconsumergrouplagsummary) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lag-summary | Get Consumer Group Lag Summary
+*ConsumerGroupV3Api* | [**GetKafkaConsumerLag**](docs/ConsumerGroupV3Api.md#getkafkaconsumerlag) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lags/{topic_name}/partitions/{partition_id} | Get Consumer Lag
 *ConsumerGroupV3Api* | [**ListKafkaConsumerGroups**](docs/ConsumerGroupV3Api.md#listkafkaconsumergroups) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups | List Consumer Groups
 *ConsumerGroupV3Api* | [**ListKafkaConsumerLags**](docs/ConsumerGroupV3Api.md#listkafkaconsumerlags) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lags | List Consumer Lags
 *ConsumerGroupV3Api* | [**ListKafkaConsumers**](docs/ConsumerGroupV3Api.md#listkafkaconsumers) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/consumers | List Consumers
-*PartitionV3Api* | [**GetKafkaConsumerLag**](docs/PartitionV3Api.md#getkafkaconsumerlag) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lags/{topic_name}/partitions/{partition_id} | Get Consumer Lag
 *PartitionV3Api* | [**GetKafkaPartition**](docs/PartitionV3Api.md#getkafkapartition) | **Get** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/partitions/{partition_id} | Get Partition
 *PartitionV3Api* | [**ListKafkaPartitions**](docs/PartitionV3Api.md#listkafkapartitions) | **Get** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/partitions | List Partitions
-*RecordsV3Api* | [**ProduceRecords**](docs/RecordsV3Api.md#producerecords) | **Post** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/records | Produce records to the given topic.
+*RecordsV3Api* | [**ProduceRecord**](docs/RecordsV3Api.md#producerecord) | **Post** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/records | Produce Records
 *TopicV3Api* | [**CreateKafkaTopic**](docs/TopicV3Api.md#createkafkatopic) | **Post** /kafka/v3/clusters/{cluster_id}/topics | Create Topic
 *TopicV3Api* | [**DeleteKafkaTopic**](docs/TopicV3Api.md#deletekafkatopic) | **Delete** /kafka/v3/clusters/{cluster_id}/topics/{topic_name} | Delete Topic
 *TopicV3Api* | [**GetKafkaTopic**](docs/TopicV3Api.md#getkafkatopic) | **Get** /kafka/v3/clusters/{cluster_id}/topics/{topic_name} | Get Topic
 *TopicV3Api* | [**ListKafkaTopics**](docs/TopicV3Api.md#listkafkatopics) | **Get** /kafka/v3/clusters/{cluster_id}/topics | List Topics
-*TopicV3Api* | [**UpdatePartitionCountKafkaTopic**](docs/TopicV3Api.md#updatepartitioncountkafkatopic) | **Patch** /kafka/v3/clusters/{cluster_id}/topics/{topic_name} | Update partition count
+*TopicV3Api* | [**UpdatePartitionCountKafkaTopic**](docs/TopicV3Api.md#updatepartitioncountkafkatopic) | **Patch** /kafka/v3/clusters/{cluster_id}/topics/{topic_name} | Update Partition Count
 
 
 ## Documentation For Models
@@ -151,6 +151,7 @@ Class | Method | HTTP request | Description
  - [AlterMirrorsRequestData](docs/AlterMirrorsRequestData.md)
  - [AnyUnevenLoadData](docs/AnyUnevenLoadData.md)
  - [AnyUnevenLoadDataAllOf](docs/AnyUnevenLoadDataAllOf.md)
+ - [AuthorizedOperations](docs/AuthorizedOperations.md)
  - [BalancerStatusData](docs/BalancerStatusData.md)
  - [BalancerStatusDataAllOf](docs/BalancerStatusDataAllOf.md)
  - [BrokerConfigData](docs/BrokerConfigData.md)
@@ -267,7 +268,6 @@ Class | Method | HTTP request | Description
  - [TopicDataAllOf](docs/TopicDataAllOf.md)
  - [TopicDataList](docs/TopicDataList.md)
  - [TopicDataListAllOf](docs/TopicDataListAllOf.md)
- - [TopicList](docs/TopicList.md)
  - [UpdateConfigRequestData](docs/UpdateConfigRequestData.md)
  - [UpdateLinkConfigRequestData](docs/UpdateLinkConfigRequestData.md)
  - [UpdatePartitionCountRequestData](docs/UpdatePartitionCountRequestData.md)
@@ -288,6 +288,34 @@ auth := context.WithValue(context.Background(), sw.ContextBasicAuth, sw.BasicAut
     UserName: "username",
     Password: "password",
 })
+r, err := client.Service.Operation(auth, args)
+```
+
+
+### confluent-sts-access-token
+
+
+- **Type**: OAuth
+- **Flow**: application
+- **Authorization URL**: 
+- **Scopes**: N/A
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextAccessToken, "ACCESSTOKENSTRING")
+r, err := client.Service.Operation(auth, args)
+```
+
+Or via OAuth2 module to automatically refresh tokens and perform user authentication.
+
+```golang
+import "golang.org/x/oauth2"
+
+/* Perform OAuth2 round trip request and obtain a token */
+
+tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
+auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
 r, err := client.Service.Operation(auth, args)
 ```
 

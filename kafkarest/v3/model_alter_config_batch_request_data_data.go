@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,7 +36,7 @@ import (
 
 // AlterConfigBatchRequestDataData struct for AlterConfigBatchRequestDataData
 type AlterConfigBatchRequestDataData struct {
-	Name      string         `json:"name"`
+	Name      string         `json:"name,omitempty"`
 	Value     NullableString `json:"value,omitempty"`
 	Operation NullableString `json:"operation,omitempty"`
 }
@@ -216,7 +217,11 @@ func (o AlterConfigBatchRequestDataData) MarshalJSON() ([]byte, error) {
 	if o.Operation.IsSet() {
 		toSerialize["operation"] = o.Operation.Get()
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableAlterConfigBatchRequestDataData struct {
@@ -247,7 +252,11 @@ func NewNullableAlterConfigBatchRequestDataData(val *AlterConfigBatchRequestData
 }
 
 func (v NullableAlterConfigBatchRequestDataData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableAlterConfigBatchRequestDataData) UnmarshalJSON(src []byte) error {

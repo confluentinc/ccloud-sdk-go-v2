@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,16 +36,18 @@ import (
 
 // AlterMirrorsRequestData struct for AlterMirrorsRequestData
 type AlterMirrorsRequestData struct {
-	MirrorTopicNames []string `json:"mirror_topic_names"`
+	// The mirror topics specified as a list of topic names.
+	MirrorTopicNames *[]string `json:"mirror_topic_names,omitempty"`
+	// The mirror topics specified as a pattern.
+	MirrorTopicNamePattern *string `json:"mirror_topic_name_pattern,omitempty"`
 }
 
 // NewAlterMirrorsRequestData instantiates a new AlterMirrorsRequestData object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlterMirrorsRequestData(mirrorTopicNames []string) *AlterMirrorsRequestData {
+func NewAlterMirrorsRequestData() *AlterMirrorsRequestData {
 	this := AlterMirrorsRequestData{}
-	this.MirrorTopicNames = mirrorTopicNames
 	return &this
 }
 
@@ -56,33 +59,74 @@ func NewAlterMirrorsRequestDataWithDefaults() *AlterMirrorsRequestData {
 	return &this
 }
 
-// GetMirrorTopicNames returns the MirrorTopicNames field value
+// GetMirrorTopicNames returns the MirrorTopicNames field value if set, zero value otherwise.
 func (o *AlterMirrorsRequestData) GetMirrorTopicNames() []string {
-	if o == nil {
+	if o == nil || o.MirrorTopicNames == nil {
 		var ret []string
 		return ret
 	}
-
-	return o.MirrorTopicNames
+	return *o.MirrorTopicNames
 }
 
-// GetMirrorTopicNamesOk returns a tuple with the MirrorTopicNames field value
+// GetMirrorTopicNamesOk returns a tuple with the MirrorTopicNames field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlterMirrorsRequestData) GetMirrorTopicNamesOk() (*[]string, bool) {
-	if o == nil {
+	if o == nil || o.MirrorTopicNames == nil {
 		return nil, false
 	}
-	return &o.MirrorTopicNames, true
+	return o.MirrorTopicNames, true
 }
 
-// SetMirrorTopicNames sets field value
+// HasMirrorTopicNames returns a boolean if a field has been set.
+func (o *AlterMirrorsRequestData) HasMirrorTopicNames() bool {
+	if o != nil && o.MirrorTopicNames != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMirrorTopicNames gets a reference to the given []string and assigns it to the MirrorTopicNames field.
 func (o *AlterMirrorsRequestData) SetMirrorTopicNames(v []string) {
-	o.MirrorTopicNames = v
+	o.MirrorTopicNames = &v
+}
+
+// GetMirrorTopicNamePattern returns the MirrorTopicNamePattern field value if set, zero value otherwise.
+func (o *AlterMirrorsRequestData) GetMirrorTopicNamePattern() string {
+	if o == nil || o.MirrorTopicNamePattern == nil {
+		var ret string
+		return ret
+	}
+	return *o.MirrorTopicNamePattern
+}
+
+// GetMirrorTopicNamePatternOk returns a tuple with the MirrorTopicNamePattern field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlterMirrorsRequestData) GetMirrorTopicNamePatternOk() (*string, bool) {
+	if o == nil || o.MirrorTopicNamePattern == nil {
+		return nil, false
+	}
+	return o.MirrorTopicNamePattern, true
+}
+
+// HasMirrorTopicNamePattern returns a boolean if a field has been set.
+func (o *AlterMirrorsRequestData) HasMirrorTopicNamePattern() bool {
+	if o != nil && o.MirrorTopicNamePattern != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMirrorTopicNamePattern gets a reference to the given string and assigns it to the MirrorTopicNamePattern field.
+func (o *AlterMirrorsRequestData) SetMirrorTopicNamePattern(v string) {
+	o.MirrorTopicNamePattern = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
 func (o *AlterMirrorsRequestData) Redact() {
-	o.recurseRedact(&o.MirrorTopicNames)
+	o.recurseRedact(o.MirrorTopicNames)
+	o.recurseRedact(o.MirrorTopicNamePattern)
 }
 
 func (o *AlterMirrorsRequestData) recurseRedact(v interface{}) {
@@ -117,10 +161,17 @@ func (o AlterMirrorsRequestData) zeroField(v interface{}) {
 
 func (o AlterMirrorsRequestData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
+	if o.MirrorTopicNames != nil {
 		toSerialize["mirror_topic_names"] = o.MirrorTopicNames
 	}
-	return json.Marshal(toSerialize)
+	if o.MirrorTopicNamePattern != nil {
+		toSerialize["mirror_topic_name_pattern"] = o.MirrorTopicNamePattern
+	}
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableAlterMirrorsRequestData struct {
@@ -151,7 +202,11 @@ func NewNullableAlterMirrorsRequestData(val *AlterMirrorsRequestData) *NullableA
 }
 
 func (v NullableAlterMirrorsRequestData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableAlterMirrorsRequestData) UnmarshalJSON(src []byte) error {

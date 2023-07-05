@@ -109,6 +109,8 @@ type ClusterLinkingV3Api interface {
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
+	``link_id`` in ``ListLinksResponseData`` is deprecated and may be removed in a future release. Use the new ``cluster_link_id`` instead.
+
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param clusterId The Kafka cluster ID.
 		 @param linkName The link name
@@ -157,6 +159,8 @@ type ClusterLinkingV3Api interface {
 		ListKafkaLinks List all cluster links in the dest cluster
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+	``link_id`` in ``ListLinksResponseData`` is deprecated and may be removed in a future release. Use the new ``cluster_link_id`` instead.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param clusterId The Kafka cluster ID.
@@ -418,7 +422,7 @@ func (a *ClusterLinkingV3ApiService) CreateKafkaLinkExecute(r ApiCreateKafkaLink
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -567,7 +571,7 @@ func (a *ClusterLinkingV3ApiService) CreateKafkaMirrorTopicExecute(r ApiCreateKa
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -726,7 +730,7 @@ func (a *ClusterLinkingV3ApiService) DeleteKafkaLinkExecute(r ApiDeleteKafkaLink
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -867,7 +871,7 @@ func (a *ClusterLinkingV3ApiService) DeleteKafkaLinkConfigExecute(r ApiDeleteKaf
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -957,6 +961,8 @@ GetKafkaLink Describe the cluster link
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
+``link_id`` in ``ListLinksResponseData`` is deprecated and may be removed in a future release. Use the new ``cluster_link_id`` instead.
+
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
  @param linkName The link name
@@ -1006,7 +1012,7 @@ func (a *ClusterLinkingV3ApiService) GetKafkaLinkExecute(r ApiGetKafkaLinkReques
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1158,7 +1164,7 @@ func (a *ClusterLinkingV3ApiService) GetKafkaLinkConfigsExecute(r ApiGetKafkaLin
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1306,7 +1312,7 @@ func (a *ClusterLinkingV3ApiService) ListKafkaLinkConfigsExecute(r ApiListKafkaL
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1404,6 +1410,8 @@ ListKafkaLinks List all cluster links in the dest cluster
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
+``link_id`` in ``ListLinksResponseData`` is deprecated and may be removed in a future release. Use the new ``cluster_link_id`` instead.
+
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
  @return ApiListKafkaLinksRequest
@@ -1450,7 +1458,7 @@ func (a *ClusterLinkingV3ApiService) ListKafkaLinksExecute(r ApiListKafkaLinksRe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1606,7 +1614,7 @@ func (a *ClusterLinkingV3ApiService) ListKafkaMirrorTopicsExecute(r ApiListKafka
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1766,7 +1774,7 @@ func (a *ClusterLinkingV3ApiService) ListKafkaMirrorTopicsUnderLinkExecute(r Api
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1918,7 +1926,7 @@ func (a *ClusterLinkingV3ApiService) ReadKafkaMirrorTopicExecute(r ApiReadKafkaM
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -2075,7 +2083,7 @@ func (a *ClusterLinkingV3ApiService) UpdateKafkaLinkConfigExecute(r ApiUpdateKaf
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -2231,7 +2239,7 @@ func (a *ClusterLinkingV3ApiService) UpdateKafkaLinkConfigBatchExecute(r ApiUpda
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -2322,7 +2330,7 @@ func (r ApiUpdateKafkaMirrorTopicsFailoverRequest) ValidateOnly(validateOnly boo
 	return r
 }
 
-// Name of the topics to apply the changes
+// Mirror topics to be altered.
 func (r ApiUpdateKafkaMirrorTopicsFailoverRequest) AlterMirrorsRequestData(alterMirrorsRequestData AlterMirrorsRequestData) ApiUpdateKafkaMirrorTopicsFailoverRequest {
 	r.alterMirrorsRequestData = &alterMirrorsRequestData
 	return r
@@ -2389,7 +2397,7 @@ func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsFailoverExecute(r Ap
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -2489,7 +2497,7 @@ func (r ApiUpdateKafkaMirrorTopicsPauseRequest) ValidateOnly(validateOnly bool) 
 	return r
 }
 
-// Name of the topics to apply the changes
+// Mirror topics to be altered.
 func (r ApiUpdateKafkaMirrorTopicsPauseRequest) AlterMirrorsRequestData(alterMirrorsRequestData AlterMirrorsRequestData) ApiUpdateKafkaMirrorTopicsPauseRequest {
 	r.alterMirrorsRequestData = &alterMirrorsRequestData
 	return r
@@ -2556,7 +2564,7 @@ func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsPauseExecute(r ApiUp
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -2656,7 +2664,7 @@ func (r ApiUpdateKafkaMirrorTopicsPromoteRequest) ValidateOnly(validateOnly bool
 	return r
 }
 
-// Name of the topics to apply the changes
+// Mirror topics to be altered.
 func (r ApiUpdateKafkaMirrorTopicsPromoteRequest) AlterMirrorsRequestData(alterMirrorsRequestData AlterMirrorsRequestData) ApiUpdateKafkaMirrorTopicsPromoteRequest {
 	r.alterMirrorsRequestData = &alterMirrorsRequestData
 	return r
@@ -2723,7 +2731,7 @@ func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsPromoteExecute(r Api
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -2823,7 +2831,7 @@ func (r ApiUpdateKafkaMirrorTopicsResumeRequest) ValidateOnly(validateOnly bool)
 	return r
 }
 
-// Name of the topics to apply the changes
+// Mirror topics to be altered.
 func (r ApiUpdateKafkaMirrorTopicsResumeRequest) AlterMirrorsRequestData(alterMirrorsRequestData AlterMirrorsRequestData) ApiUpdateKafkaMirrorTopicsResumeRequest {
 	r.alterMirrorsRequestData = &alterMirrorsRequestData
 	return r
@@ -2890,7 +2898,7 @@ func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsResumeExecute(r ApiU
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

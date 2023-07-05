@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
@@ -36,21 +37,21 @@ import (
 
 // BrokerTaskData struct for BrokerTaskData
 type BrokerTaskData struct {
-	Kind              string            `json:"kind"`
-	Metadata          ResourceMetadata  `json:"metadata"`
-	ClusterId         string            `json:"cluster_id"`
-	BrokerId          int32             `json:"broker_id"`
-	TaskType          BrokerTaskType    `json:"task_type"`
-	TaskStatus        string            `json:"task_status"`
+	Kind              string            `json:"kind,omitempty"`
+	Metadata          ResourceMetadata  `json:"metadata,omitempty"`
+	ClusterId         string            `json:"cluster_id,omitempty"`
+	BrokerId          int32             `json:"broker_id,omitempty"`
+	TaskType          BrokerTaskType    `json:"task_type,omitempty"`
+	TaskStatus        string            `json:"task_status,omitempty"`
 	ShutdownScheduled NullableBool      `json:"shutdown_scheduled,omitempty"`
-	SubTaskStatuses   map[string]string `json:"sub_task_statuses"`
+	SubTaskStatuses   map[string]string `json:"sub_task_statuses,omitempty"`
 	// The date and time at which this task was created.
-	CreatedAt time.Time `json:"created_at"`
+	CreatedAt time.Time `json:"created_at,omitempty"`
 	// The date and time at which this task was last updated.
-	UpdatedAt    time.Time      `json:"updated_at"`
+	UpdatedAt    time.Time      `json:"updated_at,omitempty"`
 	ErrorCode    NullableInt32  `json:"error_code,omitempty"`
 	ErrorMessage NullableString `json:"error_message,omitempty"`
-	Broker       Relationship   `json:"broker"`
+	Broker       Relationship   `json:"broker,omitempty"`
 }
 
 // NewBrokerTaskData instantiates a new BrokerTaskData object
@@ -537,7 +538,11 @@ func (o BrokerTaskData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["broker"] = o.Broker
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableBrokerTaskData struct {
@@ -568,7 +573,11 @@ func NewNullableBrokerTaskData(val *BrokerTaskData) *NullableBrokerTaskData {
 }
 
 func (v NullableBrokerTaskData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableBrokerTaskData) UnmarshalJSON(src []byte) error {

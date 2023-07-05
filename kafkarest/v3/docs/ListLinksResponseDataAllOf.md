@@ -6,9 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **SourceClusterId** | Pointer to **NullableString** |  | [optional] 
 **DestinationClusterId** | Pointer to **NullableString** |  | [optional] 
+**RemoteClusterId** | Pointer to **NullableString** |  | [optional] 
 **LinkName** | **string** |  | 
-**LinkId** | **string** |  | 
-**TopicsNames** | Pointer to **[]string** |  | [optional] 
+**LinkId** | Pointer to **string** |  | [optional] 
+**ClusterLinkId** | **string** |  | 
+**TopicNames** | **[]string** |  | 
 **LinkError** | Pointer to **string** |  | [optional] 
 **LinkErrorMessage** | Pointer to **NullableString** |  | [optional] 
 **LinkState** | Pointer to **string** |  | [optional] 
@@ -17,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewListLinksResponseDataAllOf
 
-`func NewListLinksResponseDataAllOf(linkName string, linkId string, ) *ListLinksResponseDataAllOf`
+`func NewListLinksResponseDataAllOf(linkName string, clusterLinkId string, topicNames []string, ) *ListLinksResponseDataAllOf`
 
 NewListLinksResponseDataAllOf instantiates a new ListLinksResponseDataAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -102,6 +104,41 @@ HasDestinationClusterId returns a boolean if a field has been set.
 `func (o *ListLinksResponseDataAllOf) UnsetDestinationClusterId()`
 
 UnsetDestinationClusterId ensures that no value is present for DestinationClusterId, not even an explicit nil
+### GetRemoteClusterId
+
+`func (o *ListLinksResponseDataAllOf) GetRemoteClusterId() string`
+
+GetRemoteClusterId returns the RemoteClusterId field if non-nil, zero value otherwise.
+
+### GetRemoteClusterIdOk
+
+`func (o *ListLinksResponseDataAllOf) GetRemoteClusterIdOk() (*string, bool)`
+
+GetRemoteClusterIdOk returns a tuple with the RemoteClusterId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRemoteClusterId
+
+`func (o *ListLinksResponseDataAllOf) SetRemoteClusterId(v string)`
+
+SetRemoteClusterId sets RemoteClusterId field to given value.
+
+### HasRemoteClusterId
+
+`func (o *ListLinksResponseDataAllOf) HasRemoteClusterId() bool`
+
+HasRemoteClusterId returns a boolean if a field has been set.
+
+### SetRemoteClusterIdNil
+
+`func (o *ListLinksResponseDataAllOf) SetRemoteClusterIdNil(b bool)`
+
+ SetRemoteClusterIdNil sets the value for RemoteClusterId to be an explicit nil
+
+### UnsetRemoteClusterId
+`func (o *ListLinksResponseDataAllOf) UnsetRemoteClusterId()`
+
+UnsetRemoteClusterId ensures that no value is present for RemoteClusterId, not even an explicit nil
 ### GetLinkName
 
 `func (o *ListLinksResponseDataAllOf) GetLinkName() string`
@@ -141,31 +178,51 @@ and a boolean to check if the value has been set.
 
 SetLinkId sets LinkId field to given value.
 
+### HasLinkId
 
-### GetTopicsNames
+`func (o *ListLinksResponseDataAllOf) HasLinkId() bool`
 
-`func (o *ListLinksResponseDataAllOf) GetTopicsNames() []string`
+HasLinkId returns a boolean if a field has been set.
 
-GetTopicsNames returns the TopicsNames field if non-nil, zero value otherwise.
+### GetClusterLinkId
 
-### GetTopicsNamesOk
+`func (o *ListLinksResponseDataAllOf) GetClusterLinkId() string`
 
-`func (o *ListLinksResponseDataAllOf) GetTopicsNamesOk() (*[]string, bool)`
+GetClusterLinkId returns the ClusterLinkId field if non-nil, zero value otherwise.
 
-GetTopicsNamesOk returns a tuple with the TopicsNames field if it's non-nil, zero value otherwise
+### GetClusterLinkIdOk
+
+`func (o *ListLinksResponseDataAllOf) GetClusterLinkIdOk() (*string, bool)`
+
+GetClusterLinkIdOk returns a tuple with the ClusterLinkId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTopicsNames
+### SetClusterLinkId
 
-`func (o *ListLinksResponseDataAllOf) SetTopicsNames(v []string)`
+`func (o *ListLinksResponseDataAllOf) SetClusterLinkId(v string)`
 
-SetTopicsNames sets TopicsNames field to given value.
+SetClusterLinkId sets ClusterLinkId field to given value.
 
-### HasTopicsNames
 
-`func (o *ListLinksResponseDataAllOf) HasTopicsNames() bool`
+### GetTopicNames
 
-HasTopicsNames returns a boolean if a field has been set.
+`func (o *ListLinksResponseDataAllOf) GetTopicNames() []string`
+
+GetTopicNames returns the TopicNames field if non-nil, zero value otherwise.
+
+### GetTopicNamesOk
+
+`func (o *ListLinksResponseDataAllOf) GetTopicNamesOk() (*[]string, bool)`
+
+GetTopicNamesOk returns a tuple with the TopicNames field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTopicNames
+
+`func (o *ListLinksResponseDataAllOf) SetTopicNames(v []string)`
+
+SetTopicNames sets TopicNames field to given value.
+
 
 ### GetLinkError
 

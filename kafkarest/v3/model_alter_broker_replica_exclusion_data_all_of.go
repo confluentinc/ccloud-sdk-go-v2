@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,13 +36,13 @@ import (
 
 // AlterBrokerReplicaExclusionDataAllOf struct for AlterBrokerReplicaExclusionDataAllOf
 type AlterBrokerReplicaExclusionDataAllOf struct {
-	ClusterId    string         `json:"cluster_id"`
-	BrokerId     int32          `json:"broker_id"`
-	Exclusion    string         `json:"exclusion"`
-	Reason       string         `json:"reason"`
+	ClusterId    string         `json:"cluster_id,omitempty"`
+	BrokerId     int32          `json:"broker_id,omitempty"`
+	Exclusion    string         `json:"exclusion,omitempty"`
+	Reason       string         `json:"reason,omitempty"`
 	ErrorCode    NullableInt32  `json:"error_code,omitempty"`
 	ErrorMessage NullableString `json:"error_message,omitempty"`
-	Broker       Relationship   `json:"broker"`
+	Broker       Relationship   `json:"broker,omitempty"`
 }
 
 // NewAlterBrokerReplicaExclusionDataAllOf instantiates a new AlterBrokerReplicaExclusionDataAllOf object
@@ -336,7 +337,11 @@ func (o AlterBrokerReplicaExclusionDataAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["broker"] = o.Broker
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableAlterBrokerReplicaExclusionDataAllOf struct {
@@ -367,7 +372,11 @@ func NewNullableAlterBrokerReplicaExclusionDataAllOf(val *AlterBrokerReplicaExcl
 }
 
 func (v NullableAlterBrokerReplicaExclusionDataAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableAlterBrokerReplicaExclusionDataAllOf) UnmarshalJSON(src []byte) error {

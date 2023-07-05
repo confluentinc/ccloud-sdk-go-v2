@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,9 +36,15 @@ import (
 
 // CreateLinkRequestData struct for CreateLinkRequestData
 type CreateLinkRequestData struct {
-	SourceClusterId      *string       `json:"source_cluster_id,omitempty"`
-	DestinationClusterId *string       `json:"destination_cluster_id,omitempty"`
-	Configs              *[]ConfigData `json:"configs,omitempty"`
+	// Deprecated
+	SourceClusterId *string `json:"source_cluster_id,omitempty"`
+	// Deprecated
+	DestinationClusterId *string `json:"destination_cluster_id,omitempty"`
+	// The expected remote cluster ID.
+	RemoteClusterId *string `json:"remote_cluster_id,omitempty"`
+	// The expected cluster link ID. Can be provided when creating the second side of a bidirectional link for validating the link ID is as expected. If it's not provided, it's inferred from the remote cluster.
+	ClusterLinkId *string       `json:"cluster_link_id,omitempty"`
+	Configs       *[]ConfigData `json:"configs,omitempty"`
 }
 
 // NewCreateLinkRequestData instantiates a new CreateLinkRequestData object
@@ -58,6 +65,7 @@ func NewCreateLinkRequestDataWithDefaults() *CreateLinkRequestData {
 }
 
 // GetSourceClusterId returns the SourceClusterId field value if set, zero value otherwise.
+// Deprecated
 func (o *CreateLinkRequestData) GetSourceClusterId() string {
 	if o == nil || o.SourceClusterId == nil {
 		var ret string
@@ -68,6 +76,7 @@ func (o *CreateLinkRequestData) GetSourceClusterId() string {
 
 // GetSourceClusterIdOk returns a tuple with the SourceClusterId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *CreateLinkRequestData) GetSourceClusterIdOk() (*string, bool) {
 	if o == nil || o.SourceClusterId == nil {
 		return nil, false
@@ -85,11 +94,13 @@ func (o *CreateLinkRequestData) HasSourceClusterId() bool {
 }
 
 // SetSourceClusterId gets a reference to the given string and assigns it to the SourceClusterId field.
+// Deprecated
 func (o *CreateLinkRequestData) SetSourceClusterId(v string) {
 	o.SourceClusterId = &v
 }
 
 // GetDestinationClusterId returns the DestinationClusterId field value if set, zero value otherwise.
+// Deprecated
 func (o *CreateLinkRequestData) GetDestinationClusterId() string {
 	if o == nil || o.DestinationClusterId == nil {
 		var ret string
@@ -100,6 +111,7 @@ func (o *CreateLinkRequestData) GetDestinationClusterId() string {
 
 // GetDestinationClusterIdOk returns a tuple with the DestinationClusterId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *CreateLinkRequestData) GetDestinationClusterIdOk() (*string, bool) {
 	if o == nil || o.DestinationClusterId == nil {
 		return nil, false
@@ -117,8 +129,73 @@ func (o *CreateLinkRequestData) HasDestinationClusterId() bool {
 }
 
 // SetDestinationClusterId gets a reference to the given string and assigns it to the DestinationClusterId field.
+// Deprecated
 func (o *CreateLinkRequestData) SetDestinationClusterId(v string) {
 	o.DestinationClusterId = &v
+}
+
+// GetRemoteClusterId returns the RemoteClusterId field value if set, zero value otherwise.
+func (o *CreateLinkRequestData) GetRemoteClusterId() string {
+	if o == nil || o.RemoteClusterId == nil {
+		var ret string
+		return ret
+	}
+	return *o.RemoteClusterId
+}
+
+// GetRemoteClusterIdOk returns a tuple with the RemoteClusterId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateLinkRequestData) GetRemoteClusterIdOk() (*string, bool) {
+	if o == nil || o.RemoteClusterId == nil {
+		return nil, false
+	}
+	return o.RemoteClusterId, true
+}
+
+// HasRemoteClusterId returns a boolean if a field has been set.
+func (o *CreateLinkRequestData) HasRemoteClusterId() bool {
+	if o != nil && o.RemoteClusterId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRemoteClusterId gets a reference to the given string and assigns it to the RemoteClusterId field.
+func (o *CreateLinkRequestData) SetRemoteClusterId(v string) {
+	o.RemoteClusterId = &v
+}
+
+// GetClusterLinkId returns the ClusterLinkId field value if set, zero value otherwise.
+func (o *CreateLinkRequestData) GetClusterLinkId() string {
+	if o == nil || o.ClusterLinkId == nil {
+		var ret string
+		return ret
+	}
+	return *o.ClusterLinkId
+}
+
+// GetClusterLinkIdOk returns a tuple with the ClusterLinkId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateLinkRequestData) GetClusterLinkIdOk() (*string, bool) {
+	if o == nil || o.ClusterLinkId == nil {
+		return nil, false
+	}
+	return o.ClusterLinkId, true
+}
+
+// HasClusterLinkId returns a boolean if a field has been set.
+func (o *CreateLinkRequestData) HasClusterLinkId() bool {
+	if o != nil && o.ClusterLinkId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetClusterLinkId gets a reference to the given string and assigns it to the ClusterLinkId field.
+func (o *CreateLinkRequestData) SetClusterLinkId(v string) {
+	o.ClusterLinkId = &v
 }
 
 // GetConfigs returns the Configs field value if set, zero value otherwise.
@@ -157,6 +234,8 @@ func (o *CreateLinkRequestData) SetConfigs(v []ConfigData) {
 func (o *CreateLinkRequestData) Redact() {
 	o.recurseRedact(o.SourceClusterId)
 	o.recurseRedact(o.DestinationClusterId)
+	o.recurseRedact(o.RemoteClusterId)
+	o.recurseRedact(o.ClusterLinkId)
 	o.recurseRedact(o.Configs)
 }
 
@@ -198,10 +277,20 @@ func (o CreateLinkRequestData) MarshalJSON() ([]byte, error) {
 	if o.DestinationClusterId != nil {
 		toSerialize["destination_cluster_id"] = o.DestinationClusterId
 	}
+	if o.RemoteClusterId != nil {
+		toSerialize["remote_cluster_id"] = o.RemoteClusterId
+	}
+	if o.ClusterLinkId != nil {
+		toSerialize["cluster_link_id"] = o.ClusterLinkId
+	}
 	if o.Configs != nil {
 		toSerialize["configs"] = o.Configs
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableCreateLinkRequestData struct {
@@ -232,7 +321,11 @@ func NewNullableCreateLinkRequestData(val *CreateLinkRequestData) *NullableCreat
 }
 
 func (v NullableCreateLinkRequestData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableCreateLinkRequestData) UnmarshalJSON(src []byte) error {

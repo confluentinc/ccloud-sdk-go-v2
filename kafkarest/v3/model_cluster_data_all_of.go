@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,14 +36,14 @@ import (
 
 // ClusterDataAllOf struct for ClusterDataAllOf
 type ClusterDataAllOf struct {
-	ClusterId              string        `json:"cluster_id"`
+	ClusterId              string        `json:"cluster_id,omitempty"`
 	Controller             *Relationship `json:"controller,omitempty"`
-	Acls                   Relationship  `json:"acls"`
-	Brokers                Relationship  `json:"brokers"`
-	BrokerConfigs          Relationship  `json:"broker_configs"`
-	ConsumerGroups         Relationship  `json:"consumer_groups"`
-	Topics                 Relationship  `json:"topics"`
-	PartitionReassignments Relationship  `json:"partition_reassignments"`
+	Acls                   Relationship  `json:"acls,omitempty"`
+	Brokers                Relationship  `json:"brokers,omitempty"`
+	BrokerConfigs          Relationship  `json:"broker_configs,omitempty"`
+	ConsumerGroups         Relationship  `json:"consumer_groups,omitempty"`
+	Topics                 Relationship  `json:"topics,omitempty"`
+	PartitionReassignments Relationship  `json:"partition_reassignments,omitempty"`
 }
 
 // NewClusterDataAllOf instantiates a new ClusterDataAllOf object
@@ -337,7 +338,11 @@ func (o ClusterDataAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["partition_reassignments"] = o.PartitionReassignments
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableClusterDataAllOf struct {
@@ -368,7 +373,11 @@ func NewNullableClusterDataAllOf(val *ClusterDataAllOf) *NullableClusterDataAllO
 }
 
 func (v NullableClusterDataAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableClusterDataAllOf) UnmarshalJSON(src []byte) error {

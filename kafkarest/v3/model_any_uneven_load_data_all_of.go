@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
@@ -36,16 +37,16 @@ import (
 
 // AnyUnevenLoadDataAllOf struct for AnyUnevenLoadDataAllOf
 type AnyUnevenLoadDataAllOf struct {
-	ClusterId      string `json:"cluster_id"`
-	Status         string `json:"status"`
-	PreviousStatus string `json:"previous_status"`
+	ClusterId      string `json:"cluster_id,omitempty"`
+	Status         string `json:"status,omitempty"`
+	PreviousStatus string `json:"previous_status,omitempty"`
 	// The date and time at which this task was created.
-	StatusUpdatedAt time.Time `json:"status_updated_at"`
+	StatusUpdatedAt time.Time `json:"status_updated_at,omitempty"`
 	// The date and time at which this task was created.
-	PreviousStatusUpdatedAt time.Time      `json:"previous_status_updated_at"`
+	PreviousStatusUpdatedAt time.Time      `json:"previous_status_updated_at,omitempty"`
 	ErrorCode               NullableInt32  `json:"error_code,omitempty"`
 	ErrorMessage            NullableString `json:"error_message,omitempty"`
-	BrokerTasks             Relationship   `json:"broker_tasks"`
+	BrokerTasks             Relationship   `json:"broker_tasks,omitempty"`
 }
 
 // NewAnyUnevenLoadDataAllOf instantiates a new AnyUnevenLoadDataAllOf object
@@ -369,7 +370,11 @@ func (o AnyUnevenLoadDataAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["broker_tasks"] = o.BrokerTasks
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableAnyUnevenLoadDataAllOf struct {
@@ -400,7 +405,11 @@ func NewNullableAnyUnevenLoadDataAllOf(val *AnyUnevenLoadDataAllOf) *NullableAny
 }
 
 func (v NullableAnyUnevenLoadDataAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableAnyUnevenLoadDataAllOf) UnmarshalJSON(src []byte) error {

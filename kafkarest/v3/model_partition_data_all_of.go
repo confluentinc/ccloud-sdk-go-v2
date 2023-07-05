@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,12 +36,12 @@ import (
 
 // PartitionDataAllOf struct for PartitionDataAllOf
 type PartitionDataAllOf struct {
-	ClusterId    string        `json:"cluster_id"`
-	TopicName    string        `json:"topic_name"`
-	PartitionId  int32         `json:"partition_id"`
+	ClusterId    string        `json:"cluster_id,omitempty"`
+	TopicName    string        `json:"topic_name,omitempty"`
+	PartitionId  int32         `json:"partition_id,omitempty"`
 	Leader       *Relationship `json:"leader,omitempty"`
-	Replicas     Relationship  `json:"replicas"`
-	Reassignment Relationship  `json:"reassignment"`
+	Replicas     Relationship  `json:"replicas,omitempty"`
+	Reassignment Relationship  `json:"reassignment,omitempty"`
 }
 
 // NewPartitionDataAllOf instantiates a new PartitionDataAllOf object
@@ -277,7 +278,11 @@ func (o PartitionDataAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["reassignment"] = o.Reassignment
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullablePartitionDataAllOf struct {
@@ -308,7 +313,11 @@ func NewNullablePartitionDataAllOf(val *PartitionDataAllOf) *NullablePartitionDa
 }
 
 func (v NullablePartitionDataAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullablePartitionDataAllOf) UnmarshalJSON(src []byte) error {

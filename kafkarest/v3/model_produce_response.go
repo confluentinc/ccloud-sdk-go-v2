@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
@@ -36,10 +37,12 @@ import (
 
 // ProduceResponse struct for ProduceResponse
 type ProduceResponse struct {
-	ClusterId   string                      `json:"cluster_id"`
-	TopicName   string                      `json:"topic_name"`
-	PartitionId int32                       `json:"partition_id"`
-	Offset      int64                       `json:"offset"`
+	ErrorCode   int32                       `json:"error_code,omitempty"`
+	Message     *string                     `json:"message,omitempty"`
+	ClusterId   *string                     `json:"cluster_id,omitempty"`
+	TopicName   *string                     `json:"topic_name,omitempty"`
+	PartitionId *int32                      `json:"partition_id,omitempty"`
+	Offset      *int64                      `json:"offset,omitempty"`
 	Timestamp   NullableTime                `json:"timestamp,omitempty"`
 	Key         NullableProduceResponseData `json:"key,omitempty"`
 	Value       NullableProduceResponseData `json:"value,omitempty"`
@@ -49,12 +52,9 @@ type ProduceResponse struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProduceResponse(clusterId string, topicName string, partitionId int32, offset int64) *ProduceResponse {
+func NewProduceResponse(errorCode int32) *ProduceResponse {
 	this := ProduceResponse{}
-	this.ClusterId = clusterId
-	this.TopicName = topicName
-	this.PartitionId = partitionId
-	this.Offset = offset
+	this.ErrorCode = errorCode
 	return &this
 }
 
@@ -66,100 +66,188 @@ func NewProduceResponseWithDefaults() *ProduceResponse {
 	return &this
 }
 
-// GetClusterId returns the ClusterId field value
-func (o *ProduceResponse) GetClusterId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ClusterId
-}
-
-// GetClusterIdOk returns a tuple with the ClusterId field value
-// and a boolean to check if the value has been set.
-func (o *ProduceResponse) GetClusterIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ClusterId, true
-}
-
-// SetClusterId sets field value
-func (o *ProduceResponse) SetClusterId(v string) {
-	o.ClusterId = v
-}
-
-// GetTopicName returns the TopicName field value
-func (o *ProduceResponse) GetTopicName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.TopicName
-}
-
-// GetTopicNameOk returns a tuple with the TopicName field value
-// and a boolean to check if the value has been set.
-func (o *ProduceResponse) GetTopicNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.TopicName, true
-}
-
-// SetTopicName sets field value
-func (o *ProduceResponse) SetTopicName(v string) {
-	o.TopicName = v
-}
-
-// GetPartitionId returns the PartitionId field value
-func (o *ProduceResponse) GetPartitionId() int32 {
+// GetErrorCode returns the ErrorCode field value
+func (o *ProduceResponse) GetErrorCode() int32 {
 	if o == nil {
 		var ret int32
 		return ret
 	}
 
-	return o.PartitionId
+	return o.ErrorCode
 }
 
-// GetPartitionIdOk returns a tuple with the PartitionId field value
+// GetErrorCodeOk returns a tuple with the ErrorCode field value
 // and a boolean to check if the value has been set.
-func (o *ProduceResponse) GetPartitionIdOk() (*int32, bool) {
+func (o *ProduceResponse) GetErrorCodeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.PartitionId, true
+	return &o.ErrorCode, true
 }
 
-// SetPartitionId sets field value
+// SetErrorCode sets field value
+func (o *ProduceResponse) SetErrorCode(v int32) {
+	o.ErrorCode = v
+}
+
+// GetMessage returns the Message field value if set, zero value otherwise.
+func (o *ProduceResponse) GetMessage() string {
+	if o == nil || o.Message == nil {
+		var ret string
+		return ret
+	}
+	return *o.Message
+}
+
+// GetMessageOk returns a tuple with the Message field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProduceResponse) GetMessageOk() (*string, bool) {
+	if o == nil || o.Message == nil {
+		return nil, false
+	}
+	return o.Message, true
+}
+
+// HasMessage returns a boolean if a field has been set.
+func (o *ProduceResponse) HasMessage() bool {
+	if o != nil && o.Message != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMessage gets a reference to the given string and assigns it to the Message field.
+func (o *ProduceResponse) SetMessage(v string) {
+	o.Message = &v
+}
+
+// GetClusterId returns the ClusterId field value if set, zero value otherwise.
+func (o *ProduceResponse) GetClusterId() string {
+	if o == nil || o.ClusterId == nil {
+		var ret string
+		return ret
+	}
+	return *o.ClusterId
+}
+
+// GetClusterIdOk returns a tuple with the ClusterId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProduceResponse) GetClusterIdOk() (*string, bool) {
+	if o == nil || o.ClusterId == nil {
+		return nil, false
+	}
+	return o.ClusterId, true
+}
+
+// HasClusterId returns a boolean if a field has been set.
+func (o *ProduceResponse) HasClusterId() bool {
+	if o != nil && o.ClusterId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetClusterId gets a reference to the given string and assigns it to the ClusterId field.
+func (o *ProduceResponse) SetClusterId(v string) {
+	o.ClusterId = &v
+}
+
+// GetTopicName returns the TopicName field value if set, zero value otherwise.
+func (o *ProduceResponse) GetTopicName() string {
+	if o == nil || o.TopicName == nil {
+		var ret string
+		return ret
+	}
+	return *o.TopicName
+}
+
+// GetTopicNameOk returns a tuple with the TopicName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProduceResponse) GetTopicNameOk() (*string, bool) {
+	if o == nil || o.TopicName == nil {
+		return nil, false
+	}
+	return o.TopicName, true
+}
+
+// HasTopicName returns a boolean if a field has been set.
+func (o *ProduceResponse) HasTopicName() bool {
+	if o != nil && o.TopicName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTopicName gets a reference to the given string and assigns it to the TopicName field.
+func (o *ProduceResponse) SetTopicName(v string) {
+	o.TopicName = &v
+}
+
+// GetPartitionId returns the PartitionId field value if set, zero value otherwise.
+func (o *ProduceResponse) GetPartitionId() int32 {
+	if o == nil || o.PartitionId == nil {
+		var ret int32
+		return ret
+	}
+	return *o.PartitionId
+}
+
+// GetPartitionIdOk returns a tuple with the PartitionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProduceResponse) GetPartitionIdOk() (*int32, bool) {
+	if o == nil || o.PartitionId == nil {
+		return nil, false
+	}
+	return o.PartitionId, true
+}
+
+// HasPartitionId returns a boolean if a field has been set.
+func (o *ProduceResponse) HasPartitionId() bool {
+	if o != nil && o.PartitionId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPartitionId gets a reference to the given int32 and assigns it to the PartitionId field.
 func (o *ProduceResponse) SetPartitionId(v int32) {
-	o.PartitionId = v
+	o.PartitionId = &v
 }
 
-// GetOffset returns the Offset field value
+// GetOffset returns the Offset field value if set, zero value otherwise.
 func (o *ProduceResponse) GetOffset() int64 {
-	if o == nil {
+	if o == nil || o.Offset == nil {
 		var ret int64
 		return ret
 	}
-
-	return o.Offset
+	return *o.Offset
 }
 
-// GetOffsetOk returns a tuple with the Offset field value
+// GetOffsetOk returns a tuple with the Offset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProduceResponse) GetOffsetOk() (*int64, bool) {
-	if o == nil {
+	if o == nil || o.Offset == nil {
 		return nil, false
 	}
-	return &o.Offset, true
+	return o.Offset, true
 }
 
-// SetOffset sets field value
+// HasOffset returns a boolean if a field has been set.
+func (o *ProduceResponse) HasOffset() bool {
+	if o != nil && o.Offset != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOffset gets a reference to the given int64 and assigns it to the Offset field.
 func (o *ProduceResponse) SetOffset(v int64) {
-	o.Offset = v
+	o.Offset = &v
 }
 
 // GetTimestamp returns the Timestamp field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -293,10 +381,12 @@ func (o *ProduceResponse) UnsetValue() {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ProduceResponse) Redact() {
-	o.recurseRedact(&o.ClusterId)
-	o.recurseRedact(&o.TopicName)
-	o.recurseRedact(&o.PartitionId)
-	o.recurseRedact(&o.Offset)
+	o.recurseRedact(&o.ErrorCode)
+	o.recurseRedact(o.Message)
+	o.recurseRedact(o.ClusterId)
+	o.recurseRedact(o.TopicName)
+	o.recurseRedact(o.PartitionId)
+	o.recurseRedact(o.Offset)
 	o.recurseRedact(o.Timestamp)
 	o.recurseRedact(o.Key)
 	o.recurseRedact(o.Value)
@@ -335,15 +425,21 @@ func (o ProduceResponse) zeroField(v interface{}) {
 func (o ProduceResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
+		toSerialize["error_code"] = o.ErrorCode
+	}
+	if o.Message != nil {
+		toSerialize["message"] = o.Message
+	}
+	if o.ClusterId != nil {
 		toSerialize["cluster_id"] = o.ClusterId
 	}
-	if true {
+	if o.TopicName != nil {
 		toSerialize["topic_name"] = o.TopicName
 	}
-	if true {
+	if o.PartitionId != nil {
 		toSerialize["partition_id"] = o.PartitionId
 	}
-	if true {
+	if o.Offset != nil {
 		toSerialize["offset"] = o.Offset
 	}
 	if o.Timestamp.IsSet() {
@@ -355,7 +451,11 @@ func (o ProduceResponse) MarshalJSON() ([]byte, error) {
 	if o.Value.IsSet() {
 		toSerialize["value"] = o.Value.Get()
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableProduceResponse struct {
@@ -386,7 +486,11 @@ func NewNullableProduceResponse(val *ProduceResponse) *NullableProduceResponse {
 }
 
 func (v NullableProduceResponse) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableProduceResponse) UnmarshalJSON(src []byte) error {

@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,9 +36,9 @@ import (
 
 // BrokerTaskDataList struct for BrokerTaskDataList
 type BrokerTaskDataList struct {
-	Kind     string                     `json:"kind"`
-	Metadata ResourceCollectionMetadata `json:"metadata"`
-	Data     []BrokerTaskData           `json:"data"`
+	Kind     string                     `json:"kind,omitempty"`
+	Metadata ResourceCollectionMetadata `json:"metadata,omitempty"`
+	Data     []BrokerTaskData           `json:"data,omitempty"`
 }
 
 // NewBrokerTaskDataList instantiates a new BrokerTaskDataList object
@@ -180,7 +181,11 @@ func (o BrokerTaskDataList) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableBrokerTaskDataList struct {
@@ -211,7 +216,11 @@ func NewNullableBrokerTaskDataList(val *BrokerTaskDataList) *NullableBrokerTaskD
 }
 
 func (v NullableBrokerTaskDataList) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableBrokerTaskDataList) UnmarshalJSON(src []byte) error {

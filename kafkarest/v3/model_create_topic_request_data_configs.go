@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,7 +36,7 @@ import (
 
 // CreateTopicRequestDataConfigs struct for CreateTopicRequestDataConfigs
 type CreateTopicRequestDataConfigs struct {
-	Name  string         `json:"name"`
+	Name  string         `json:"name,omitempty"`
 	Value NullableString `json:"value,omitempty"`
 }
 
@@ -168,7 +169,11 @@ func (o CreateTopicRequestDataConfigs) MarshalJSON() ([]byte, error) {
 	if o.Value.IsSet() {
 		toSerialize["value"] = o.Value.Get()
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableCreateTopicRequestDataConfigs struct {
@@ -199,7 +204,11 @@ func NewNullableCreateTopicRequestDataConfigs(val *CreateTopicRequestDataConfigs
 }
 
 func (v NullableCreateTopicRequestDataConfigs) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableCreateTopicRequestDataConfigs) UnmarshalJSON(src []byte) error {

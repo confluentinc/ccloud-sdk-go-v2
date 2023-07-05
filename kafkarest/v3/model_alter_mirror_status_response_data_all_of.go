@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,10 +36,10 @@ import (
 
 // AlterMirrorStatusResponseDataAllOf struct for AlterMirrorStatusResponseDataAllOf
 type AlterMirrorStatusResponseDataAllOf struct {
-	MirrorTopicName string         `json:"mirror_topic_name"`
-	ErrorMessage    NullableString `json:"error_message"`
-	ErrorCode       NullableInt32  `json:"error_code"`
-	MirrorLags      MirrorLags     `json:"mirror_lags"`
+	MirrorTopicName string         `json:"mirror_topic_name,omitempty"`
+	ErrorMessage    NullableString `json:"error_message,omitempty"`
+	ErrorCode       NullableInt32  `json:"error_code,omitempty"`
+	MirrorLags      MirrorLags     `json:"mirror_lags,omitempty"`
 }
 
 // NewAlterMirrorStatusResponseDataAllOf instantiates a new AlterMirrorStatusResponseDataAllOf object
@@ -214,7 +215,11 @@ func (o AlterMirrorStatusResponseDataAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["mirror_lags"] = o.MirrorLags
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableAlterMirrorStatusResponseDataAllOf struct {
@@ -245,7 +250,11 @@ func NewNullableAlterMirrorStatusResponseDataAllOf(val *AlterMirrorStatusRespons
 }
 
 func (v NullableAlterMirrorStatusResponseDataAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableAlterMirrorStatusResponseDataAllOf) UnmarshalJSON(src []byte) error {

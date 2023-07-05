@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **Partitions** | [**Relationship**](Relationship.md) |  | 
 **Configs** | [**Relationship**](Relationship.md) |  | 
 **PartitionReassignments** | [**Relationship**](Relationship.md) |  | 
+**AuthorizedOperations** | Pointer to [**AuthorizedOperations**](AuthorizedOperations.md) |  | [optional] 
 
 ## Methods
 
@@ -191,6 +192,31 @@ and a boolean to check if the value has been set.
 
 SetPartitionReassignments sets PartitionReassignments field to given value.
 
+
+### GetAuthorizedOperations
+
+`func (o *TopicDataAllOf) GetAuthorizedOperations() AuthorizedOperations`
+
+GetAuthorizedOperations returns the AuthorizedOperations field if non-nil, zero value otherwise.
+
+### GetAuthorizedOperationsOk
+
+`func (o *TopicDataAllOf) GetAuthorizedOperationsOk() (*AuthorizedOperations, bool)`
+
+GetAuthorizedOperationsOk returns a tuple with the AuthorizedOperations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuthorizedOperations
+
+`func (o *TopicDataAllOf) SetAuthorizedOperations(v AuthorizedOperations)`
+
+SetAuthorizedOperations sets AuthorizedOperations field to given value.
+
+### HasAuthorizedOperations
+
+`func (o *TopicDataAllOf) HasAuthorizedOperations() bool`
+
+HasAuthorizedOperations returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

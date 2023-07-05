@@ -4,16 +4,16 @@ All URIs are relative to *https://pkc-00000.region.provider.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeleteKafkaClusterConfig**](ConfigsV3Api.md#DeleteKafkaClusterConfig) | **Delete** /kafka/v3/clusters/{cluster_id}/broker-configs/{name} | Reset Cluster Config
+[**DeleteKafkaClusterConfig**](ConfigsV3Api.md#DeleteKafkaClusterConfig) | **Delete** /kafka/v3/clusters/{cluster_id}/broker-configs/{name} | Reset Dynamic Broker Config
 [**DeleteKafkaTopicConfig**](ConfigsV3Api.md#DeleteKafkaTopicConfig) | **Delete** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs/{name} | Reset Topic Config
-[**GetKafkaClusterConfig**](ConfigsV3Api.md#GetKafkaClusterConfig) | **Get** /kafka/v3/clusters/{cluster_id}/broker-configs/{name} | Get Cluster Config
+[**GetKafkaClusterConfig**](ConfigsV3Api.md#GetKafkaClusterConfig) | **Get** /kafka/v3/clusters/{cluster_id}/broker-configs/{name} | Get Dynamic Broker Config
 [**GetKafkaTopicConfig**](ConfigsV3Api.md#GetKafkaTopicConfig) | **Get** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs/{name} | Get Topic Config
-[**ListKafkaAllTopicConfigs**](ConfigsV3Api.md#ListKafkaAllTopicConfigs) | **Get** /kafka/v3/clusters/{cluster_id}/topics/-/configs | Get All Topic Configs
-[**ListKafkaClusterConfigs**](ConfigsV3Api.md#ListKafkaClusterConfigs) | **Get** /kafka/v3/clusters/{cluster_id}/broker-configs | List Cluster Configs
-[**ListKafkaDefaultTopicConfigs**](ConfigsV3Api.md#ListKafkaDefaultTopicConfigs) | **Get** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/default-configs | List Default Topic Configs
+[**ListKafkaAllTopicConfigs**](ConfigsV3Api.md#ListKafkaAllTopicConfigs) | **Get** /kafka/v3/clusters/{cluster_id}/topics/-/configs | List All Topic Configs
+[**ListKafkaClusterConfigs**](ConfigsV3Api.md#ListKafkaClusterConfigs) | **Get** /kafka/v3/clusters/{cluster_id}/broker-configs | List Dynamic Broker Configs
+[**ListKafkaDefaultTopicConfigs**](ConfigsV3Api.md#ListKafkaDefaultTopicConfigs) | **Get** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/default-configs | List New Topic Default Configs
 [**ListKafkaTopicConfigs**](ConfigsV3Api.md#ListKafkaTopicConfigs) | **Get** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs | List Topic Configs
-[**UpdateKafkaClusterConfig**](ConfigsV3Api.md#UpdateKafkaClusterConfig) | **Put** /kafka/v3/clusters/{cluster_id}/broker-configs/{name} | Update Cluster Config
-[**UpdateKafkaClusterConfigs**](ConfigsV3Api.md#UpdateKafkaClusterConfigs) | **Post** /kafka/v3/clusters/{cluster_id}/broker-configs:alter | Batch Alter Cluster Configs
+[**UpdateKafkaClusterConfig**](ConfigsV3Api.md#UpdateKafkaClusterConfig) | **Put** /kafka/v3/clusters/{cluster_id}/broker-configs/{name} | Update Dynamic Broker Config
+[**UpdateKafkaClusterConfigs**](ConfigsV3Api.md#UpdateKafkaClusterConfigs) | **Post** /kafka/v3/clusters/{cluster_id}/broker-configs:alter | Batch Alter Dynamic Broker Configs
 [**UpdateKafkaTopicConfig**](ConfigsV3Api.md#UpdateKafkaTopicConfig) | **Put** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs/{name} | Update Topic Config
 [**UpdateKafkaTopicConfigBatch**](ConfigsV3Api.md#UpdateKafkaTopicConfigBatch) | **Post** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs:alter | Batch Alter Topic Configs
 
@@ -23,7 +23,7 @@ Method | HTTP request | Description
 
 > DeleteKafkaClusterConfig(ctx, clusterId, name).Execute()
 
-Reset Cluster Config
+Reset Dynamic Broker Config
 
 
 
@@ -78,12 +78,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -152,12 +152,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -168,7 +168,7 @@ Name | Type | Description  | Notes
 
 > ClusterConfigData GetKafkaClusterConfig(ctx, clusterId, name).Execute()
 
-Get Cluster Config
+Get Dynamic Broker Config
 
 
 
@@ -225,12 +225,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -301,12 +301,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -317,7 +317,7 @@ Name | Type | Description  | Notes
 
 > TopicConfigDataList ListKafkaAllTopicConfigs(ctx, clusterId).Execute()
 
-Get All Topic Configs
+List All Topic Configs
 
 
 
@@ -371,12 +371,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -387,7 +387,7 @@ Name | Type | Description  | Notes
 
 > ClusterConfigDataList ListKafkaClusterConfigs(ctx, clusterId).Execute()
 
-List Cluster Configs
+List Dynamic Broker Configs
 
 
 
@@ -441,12 +441,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -457,7 +457,7 @@ Name | Type | Description  | Notes
 
 > TopicConfigDataList ListKafkaDefaultTopicConfigs(ctx, clusterId, topicName).Execute()
 
-List Default Topic Configs
+List New Topic Default Configs
 
 
 
@@ -514,12 +514,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -587,12 +587,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -603,7 +603,7 @@ Name | Type | Description  | Notes
 
 > UpdateKafkaClusterConfig(ctx, clusterId, name).UpdateConfigRequestData(updateConfigRequestData).Execute()
 
-Update Cluster Config
+Update Dynamic Broker Config
 
 
 
@@ -660,12 +660,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -676,7 +676,7 @@ Name | Type | Description  | Notes
 
 > UpdateKafkaClusterConfigs(ctx, clusterId).AlterConfigBatchRequestData(alterConfigBatchRequestData).Execute()
 
-Batch Alter Cluster Configs
+Batch Alter Dynamic Broker Configs
 
 
 
@@ -730,12 +730,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -806,12 +806,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -879,12 +879,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

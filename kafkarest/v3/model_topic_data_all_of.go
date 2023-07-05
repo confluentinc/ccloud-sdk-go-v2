@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,14 +36,15 @@ import (
 
 // TopicDataAllOf struct for TopicDataAllOf
 type TopicDataAllOf struct {
-	ClusterId              string       `json:"cluster_id"`
-	TopicName              string       `json:"topic_name"`
-	IsInternal             bool         `json:"is_internal"`
-	ReplicationFactor      int32        `json:"replication_factor"`
-	PartitionsCount        int32        `json:"partitions_count"`
-	Partitions             Relationship `json:"partitions"`
-	Configs                Relationship `json:"configs"`
-	PartitionReassignments Relationship `json:"partition_reassignments"`
+	ClusterId              string                `json:"cluster_id,omitempty"`
+	TopicName              string                `json:"topic_name,omitempty"`
+	IsInternal             bool                  `json:"is_internal,omitempty"`
+	ReplicationFactor      int32                 `json:"replication_factor,omitempty"`
+	PartitionsCount        int32                 `json:"partitions_count,omitempty"`
+	Partitions             Relationship          `json:"partitions,omitempty"`
+	Configs                Relationship          `json:"configs,omitempty"`
+	PartitionReassignments Relationship          `json:"partition_reassignments,omitempty"`
+	AuthorizedOperations   *AuthorizedOperations `json:"authorized_operations,omitempty"`
 }
 
 // NewTopicDataAllOf instantiates a new TopicDataAllOf object
@@ -262,6 +264,38 @@ func (o *TopicDataAllOf) SetPartitionReassignments(v Relationship) {
 	o.PartitionReassignments = v
 }
 
+// GetAuthorizedOperations returns the AuthorizedOperations field value if set, zero value otherwise.
+func (o *TopicDataAllOf) GetAuthorizedOperations() AuthorizedOperations {
+	if o == nil || o.AuthorizedOperations == nil {
+		var ret AuthorizedOperations
+		return ret
+	}
+	return *o.AuthorizedOperations
+}
+
+// GetAuthorizedOperationsOk returns a tuple with the AuthorizedOperations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TopicDataAllOf) GetAuthorizedOperationsOk() (*AuthorizedOperations, bool) {
+	if o == nil || o.AuthorizedOperations == nil {
+		return nil, false
+	}
+	return o.AuthorizedOperations, true
+}
+
+// HasAuthorizedOperations returns a boolean if a field has been set.
+func (o *TopicDataAllOf) HasAuthorizedOperations() bool {
+	if o != nil && o.AuthorizedOperations != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthorizedOperations gets a reference to the given AuthorizedOperations and assigns it to the AuthorizedOperations field.
+func (o *TopicDataAllOf) SetAuthorizedOperations(v AuthorizedOperations) {
+	o.AuthorizedOperations = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *TopicDataAllOf) Redact() {
 	o.recurseRedact(&o.ClusterId)
@@ -272,6 +306,7 @@ func (o *TopicDataAllOf) Redact() {
 	o.recurseRedact(&o.Partitions)
 	o.recurseRedact(&o.Configs)
 	o.recurseRedact(&o.PartitionReassignments)
+	o.recurseRedact(o.AuthorizedOperations)
 }
 
 func (o *TopicDataAllOf) recurseRedact(v interface{}) {
@@ -330,7 +365,14 @@ func (o TopicDataAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["partition_reassignments"] = o.PartitionReassignments
 	}
-	return json.Marshal(toSerialize)
+	if o.AuthorizedOperations != nil {
+		toSerialize["authorized_operations"] = o.AuthorizedOperations
+	}
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableTopicDataAllOf struct {
@@ -361,7 +403,11 @@ func NewNullableTopicDataAllOf(val *TopicDataAllOf) *NullableTopicDataAllOf {
 }
 
 func (v NullableTopicDataAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableTopicDataAllOf) UnmarshalJSON(src []byte) error {

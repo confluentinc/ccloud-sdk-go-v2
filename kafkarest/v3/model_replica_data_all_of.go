@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,13 +36,13 @@ import (
 
 // ReplicaDataAllOf struct for ReplicaDataAllOf
 type ReplicaDataAllOf struct {
-	ClusterId   string       `json:"cluster_id"`
-	TopicName   string       `json:"topic_name"`
-	PartitionId int32        `json:"partition_id"`
-	BrokerId    int32        `json:"broker_id"`
-	IsLeader    bool         `json:"is_leader"`
-	IsInSync    bool         `json:"is_in_sync"`
-	Broker      Relationship `json:"broker"`
+	ClusterId   string       `json:"cluster_id,omitempty"`
+	TopicName   string       `json:"topic_name,omitempty"`
+	PartitionId int32        `json:"partition_id,omitempty"`
+	BrokerId    int32        `json:"broker_id,omitempty"`
+	IsLeader    bool         `json:"is_leader,omitempty"`
+	IsInSync    bool         `json:"is_in_sync,omitempty"`
+	Broker      Relationship `json:"broker,omitempty"`
 }
 
 // NewReplicaDataAllOf instantiates a new ReplicaDataAllOf object
@@ -300,7 +301,11 @@ func (o ReplicaDataAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["broker"] = o.Broker
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableReplicaDataAllOf struct {
@@ -331,7 +336,11 @@ func NewNullableReplicaDataAllOf(val *ReplicaDataAllOf) *NullableReplicaDataAllO
 }
 
 func (v NullableReplicaDataAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableReplicaDataAllOf) UnmarshalJSON(src []byte) error {

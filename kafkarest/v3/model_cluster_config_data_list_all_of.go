@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,7 +36,7 @@ import (
 
 // ClusterConfigDataListAllOf struct for ClusterConfigDataListAllOf
 type ClusterConfigDataListAllOf struct {
-	Data []ClusterConfigData `json:"data"`
+	Data []ClusterConfigData `json:"data,omitempty"`
 }
 
 // NewClusterConfigDataListAllOf instantiates a new ClusterConfigDataListAllOf object
@@ -120,7 +121,11 @@ func (o ClusterConfigDataListAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableClusterConfigDataListAllOf struct {
@@ -151,7 +156,11 @@ func NewNullableClusterConfigDataListAllOf(val *ClusterConfigDataListAllOf) *Nul
 }
 
 func (v NullableClusterConfigDataListAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableClusterConfigDataListAllOf) UnmarshalJSON(src []byte) error {

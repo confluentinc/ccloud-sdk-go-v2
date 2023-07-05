@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,13 +36,13 @@ import (
 
 // ConsumerAssignmentDataAllOf struct for ConsumerAssignmentDataAllOf
 type ConsumerAssignmentDataAllOf struct {
-	ClusterId       string       `json:"cluster_id"`
-	ConsumerGroupId string       `json:"consumer_group_id"`
-	ConsumerId      string       `json:"consumer_id"`
-	TopicName       string       `json:"topic_name"`
-	PartitionId     int32        `json:"partition_id"`
-	Partition       Relationship `json:"partition"`
-	Lag             Relationship `json:"lag"`
+	ClusterId       string       `json:"cluster_id,omitempty"`
+	ConsumerGroupId string       `json:"consumer_group_id,omitempty"`
+	ConsumerId      string       `json:"consumer_id,omitempty"`
+	TopicName       string       `json:"topic_name,omitempty"`
+	PartitionId     int32        `json:"partition_id,omitempty"`
+	Partition       Relationship `json:"partition,omitempty"`
+	Lag             Relationship `json:"lag,omitempty"`
 }
 
 // NewConsumerAssignmentDataAllOf instantiates a new ConsumerAssignmentDataAllOf object
@@ -300,7 +301,11 @@ func (o ConsumerAssignmentDataAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["lag"] = o.Lag
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableConsumerAssignmentDataAllOf struct {
@@ -331,7 +336,11 @@ func NewNullableConsumerAssignmentDataAllOf(val *ConsumerAssignmentDataAllOf) *N
 }
 
 func (v NullableConsumerAssignmentDataAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableConsumerAssignmentDataAllOf) UnmarshalJSON(src []byte) error {

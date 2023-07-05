@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,15 +36,15 @@ import (
 
 // ListMirrorTopicsResponseData struct for ListMirrorTopicsResponseData
 type ListMirrorTopicsResponseData struct {
-	Kind            string            `json:"kind"`
-	Metadata        ResourceMetadata  `json:"metadata"`
-	LinkName        string            `json:"link_name"`
-	MirrorTopicName string            `json:"mirror_topic_name"`
-	SourceTopicName string            `json:"source_topic_name"`
-	NumPartitions   int32             `json:"num_partitions"`
-	MirrorLags      MirrorLags        `json:"mirror_lags"`
-	MirrorStatus    MirrorTopicStatus `json:"mirror_status"`
-	StateTimeMs     int64             `json:"state_time_ms"`
+	Kind            string            `json:"kind,omitempty"`
+	Metadata        ResourceMetadata  `json:"metadata,omitempty"`
+	LinkName        string            `json:"link_name,omitempty"`
+	MirrorTopicName string            `json:"mirror_topic_name,omitempty"`
+	SourceTopicName string            `json:"source_topic_name,omitempty"`
+	NumPartitions   int32             `json:"num_partitions,omitempty"`
+	MirrorLags      MirrorLags        `json:"mirror_lags,omitempty"`
+	MirrorStatus    MirrorTopicStatus `json:"mirror_status,omitempty"`
+	StateTimeMs     int64             `json:"state_time_ms,omitempty"`
 }
 
 // NewListMirrorTopicsResponseData instantiates a new ListMirrorTopicsResponseData object
@@ -360,7 +361,11 @@ func (o ListMirrorTopicsResponseData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["state_time_ms"] = o.StateTimeMs
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableListMirrorTopicsResponseData struct {
@@ -391,7 +396,11 @@ func NewNullableListMirrorTopicsResponseData(val *ListMirrorTopicsResponseData) 
 }
 
 func (v NullableListMirrorTopicsResponseData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableListMirrorTopicsResponseData) UnmarshalJSON(src []byte) error {

@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,7 +36,7 @@ import (
 
 // UpdateLinkConfigRequestData struct for UpdateLinkConfigRequestData
 type UpdateLinkConfigRequestData struct {
-	Value string `json:"value"`
+	Value string `json:"value,omitempty"`
 }
 
 // NewUpdateLinkConfigRequestData instantiates a new UpdateLinkConfigRequestData object
@@ -120,7 +121,11 @@ func (o UpdateLinkConfigRequestData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["value"] = o.Value
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableUpdateLinkConfigRequestData struct {
@@ -151,7 +156,11 @@ func NewNullableUpdateLinkConfigRequestData(val *UpdateLinkConfigRequestData) *N
 }
 
 func (v NullableUpdateLinkConfigRequestData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableUpdateLinkConfigRequestData) UnmarshalJSON(src []byte) error {

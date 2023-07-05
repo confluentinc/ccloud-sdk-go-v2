@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,7 +36,7 @@ import (
 
 // CreateTopicRequestData struct for CreateTopicRequestData
 type CreateTopicRequestData struct {
-	TopicName         string                           `json:"topic_name"`
+	TopicName         string                           `json:"topic_name,omitempty"`
 	PartitionsCount   *int32                           `json:"partitions_count,omitempty"`
 	ReplicationFactor *int32                           `json:"replication_factor,omitempty"`
 	Configs           *[]CreateTopicRequestDataConfigs `json:"configs,omitempty"`
@@ -268,7 +269,11 @@ func (o CreateTopicRequestData) MarshalJSON() ([]byte, error) {
 	if o.ValidateOnly != nil {
 		toSerialize["validate_only"] = o.ValidateOnly
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableCreateTopicRequestData struct {
@@ -299,7 +304,11 @@ func NewNullableCreateTopicRequestData(val *CreateTopicRequestData) *NullableCre
 }
 
 func (v NullableCreateTopicRequestData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableCreateTopicRequestData) UnmarshalJSON(src []byte) error {

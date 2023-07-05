@@ -4,10 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ClusterId** | **string** |  | 
-**TopicName** | **string** |  | 
-**PartitionId** | **int32** |  | 
-**Offset** | **int64** |  | 
+**ErrorCode** | **int32** |  | 
+**Message** | Pointer to **string** |  | [optional] 
+**ClusterId** | Pointer to **string** |  | [optional] 
+**TopicName** | Pointer to **string** |  | [optional] 
+**PartitionId** | Pointer to **int32** |  | [optional] 
+**Offset** | Pointer to **int64** |  | [optional] 
 **Timestamp** | Pointer to **NullableTime** |  | [optional] 
 **Key** | Pointer to [**NullableProduceResponseData**](ProduceResponseData.md) |  | [optional] 
 **Value** | Pointer to [**NullableProduceResponseData**](ProduceResponseData.md) |  | [optional] 
@@ -16,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewProduceResponse
 
-`func NewProduceResponse(clusterId string, topicName string, partitionId int32, offset int64, ) *ProduceResponse`
+`func NewProduceResponse(errorCode int32, ) *ProduceResponse`
 
 NewProduceResponse instantiates a new ProduceResponse object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +32,51 @@ will change when the set of required properties is changed
 NewProduceResponseWithDefaults instantiates a new ProduceResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetErrorCode
+
+`func (o *ProduceResponse) GetErrorCode() int32`
+
+GetErrorCode returns the ErrorCode field if non-nil, zero value otherwise.
+
+### GetErrorCodeOk
+
+`func (o *ProduceResponse) GetErrorCodeOk() (*int32, bool)`
+
+GetErrorCodeOk returns a tuple with the ErrorCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetErrorCode
+
+`func (o *ProduceResponse) SetErrorCode(v int32)`
+
+SetErrorCode sets ErrorCode field to given value.
+
+
+### GetMessage
+
+`func (o *ProduceResponse) GetMessage() string`
+
+GetMessage returns the Message field if non-nil, zero value otherwise.
+
+### GetMessageOk
+
+`func (o *ProduceResponse) GetMessageOk() (*string, bool)`
+
+GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMessage
+
+`func (o *ProduceResponse) SetMessage(v string)`
+
+SetMessage sets Message field to given value.
+
+### HasMessage
+
+`func (o *ProduceResponse) HasMessage() bool`
+
+HasMessage returns a boolean if a field has been set.
 
 ### GetClusterId
 
@@ -50,6 +97,11 @@ and a boolean to check if the value has been set.
 
 SetClusterId sets ClusterId field to given value.
 
+### HasClusterId
+
+`func (o *ProduceResponse) HasClusterId() bool`
+
+HasClusterId returns a boolean if a field has been set.
 
 ### GetTopicName
 
@@ -70,6 +122,11 @@ and a boolean to check if the value has been set.
 
 SetTopicName sets TopicName field to given value.
 
+### HasTopicName
+
+`func (o *ProduceResponse) HasTopicName() bool`
+
+HasTopicName returns a boolean if a field has been set.
 
 ### GetPartitionId
 
@@ -90,6 +147,11 @@ and a boolean to check if the value has been set.
 
 SetPartitionId sets PartitionId field to given value.
 
+### HasPartitionId
+
+`func (o *ProduceResponse) HasPartitionId() bool`
+
+HasPartitionId returns a boolean if a field has been set.
 
 ### GetOffset
 
@@ -110,6 +172,11 @@ and a boolean to check if the value has been set.
 
 SetOffset sets Offset field to given value.
 
+### HasOffset
+
+`func (o *ProduceResponse) HasOffset() bool`
+
+HasOffset returns a boolean if a field has been set.
 
 ### GetTimestamp
 

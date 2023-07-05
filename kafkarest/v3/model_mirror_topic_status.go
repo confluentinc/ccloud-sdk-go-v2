@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -121,7 +122,11 @@ func NewNullableMirrorTopicStatus(val *MirrorTopicStatus) *NullableMirrorTopicSt
 }
 
 func (v NullableMirrorTopicStatus) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableMirrorTopicStatus) UnmarshalJSON(src []byte) error {
