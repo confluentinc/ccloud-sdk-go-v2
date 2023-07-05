@@ -42,14 +42,14 @@ var (
 type ClustersSrcmV2Api interface {
 
 	/*
-		CreateSrcmV2Cluster Create a Cluster
+			CreateSrcmV2Cluster Create a Cluster
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to create a cluster.
+		Make a request to create a cluster.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiCreateSrcmV2ClusterRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiCreateSrcmV2ClusterRequest
 	*/
 	CreateSrcmV2Cluster(ctx _context.Context) ApiCreateSrcmV2ClusterRequest
 
@@ -58,15 +58,15 @@ type ClustersSrcmV2Api interface {
 	CreateSrcmV2ClusterExecute(r ApiCreateSrcmV2ClusterRequest) (SrcmV2Cluster, *_nethttp.Response, error)
 
 	/*
-		DeleteSrcmV2Cluster Delete a Cluster
+			DeleteSrcmV2Cluster Delete a Cluster
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to delete a cluster.
+		Make a request to delete a cluster.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the cluster.
-		 @return ApiDeleteSrcmV2ClusterRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the cluster.
+			 @return ApiDeleteSrcmV2ClusterRequest
 	*/
 	DeleteSrcmV2Cluster(ctx _context.Context, id string) ApiDeleteSrcmV2ClusterRequest
 
@@ -74,15 +74,15 @@ type ClustersSrcmV2Api interface {
 	DeleteSrcmV2ClusterExecute(r ApiDeleteSrcmV2ClusterRequest) (*_nethttp.Response, error)
 
 	/*
-		GetSrcmV2Cluster Read a Cluster
+			GetSrcmV2Cluster Read a Cluster
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to read a cluster.
+		Make a request to read a cluster.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the cluster.
-		 @return ApiGetSrcmV2ClusterRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the cluster.
+			 @return ApiGetSrcmV2ClusterRequest
 	*/
 	GetSrcmV2Cluster(ctx _context.Context, id string) ApiGetSrcmV2ClusterRequest
 
@@ -91,14 +91,14 @@ type ClustersSrcmV2Api interface {
 	GetSrcmV2ClusterExecute(r ApiGetSrcmV2ClusterRequest) (SrcmV2Cluster, *_nethttp.Response, error)
 
 	/*
-		ListSrcmV2Clusters List of Clusters
+			ListSrcmV2Clusters List of Clusters
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Retrieve a sorted, filtered, paginated list of all clusters.
+		Retrieve a sorted, filtered, paginated list of all clusters.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListSrcmV2ClustersRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiListSrcmV2ClustersRequest
 	*/
 	ListSrcmV2Clusters(ctx _context.Context) ApiListSrcmV2ClustersRequest
 
@@ -107,17 +107,17 @@ type ClustersSrcmV2Api interface {
 	ListSrcmV2ClustersExecute(r ApiListSrcmV2ClustersRequest) (SrcmV2ClusterList, *_nethttp.Response, error)
 
 	/*
-		UpdateSrcmV2Cluster Update a Cluster
+			UpdateSrcmV2Cluster Update a Cluster
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to update a cluster.
+		Make a request to update a cluster.
 
 
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the cluster.
-		 @return ApiUpdateSrcmV2ClusterRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the cluster.
+			 @return ApiUpdateSrcmV2ClusterRequest
 	*/
 	UpdateSrcmV2Cluster(ctx _context.Context, id string) ApiUpdateSrcmV2ClusterRequest
 
@@ -147,12 +147,12 @@ func (r ApiCreateSrcmV2ClusterRequest) Execute() (SrcmV2Cluster, *_nethttp.Respo
 /*
 CreateSrcmV2Cluster Create a Cluster
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create a cluster.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateSrcmV2ClusterRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateSrcmV2ClusterRequest
 */
 func (a *ClustersSrcmV2ApiService) CreateSrcmV2Cluster(ctx _context.Context) ApiCreateSrcmV2ClusterRequest {
 	return ApiCreateSrcmV2ClusterRequest{
@@ -162,8 +162,7 @@ func (a *ClustersSrcmV2ApiService) CreateSrcmV2Cluster(ctx _context.Context) Api
 }
 
 // Execute executes the request
-//
-//	@return SrcmV2Cluster
+//  @return SrcmV2Cluster
 func (a *ClustersSrcmV2ApiService) CreateSrcmV2ClusterExecute(r ApiCreateSrcmV2ClusterRequest) (SrcmV2Cluster, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -320,13 +319,13 @@ func (r ApiDeleteSrcmV2ClusterRequest) Execute() (*_nethttp.Response, error) {
 /*
 DeleteSrcmV2Cluster Delete a Cluster
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete a cluster.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the cluster.
-	@return ApiDeleteSrcmV2ClusterRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the cluster.
+ @return ApiDeleteSrcmV2ClusterRequest
 */
 func (a *ClustersSrcmV2ApiService) DeleteSrcmV2Cluster(ctx _context.Context, id string) ApiDeleteSrcmV2ClusterRequest {
 	return ApiDeleteSrcmV2ClusterRequest{
@@ -476,13 +475,13 @@ func (r ApiGetSrcmV2ClusterRequest) Execute() (SrcmV2Cluster, *_nethttp.Response
 /*
 GetSrcmV2Cluster Read a Cluster
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a cluster.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the cluster.
-	@return ApiGetSrcmV2ClusterRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the cluster.
+ @return ApiGetSrcmV2ClusterRequest
 */
 func (a *ClustersSrcmV2ApiService) GetSrcmV2Cluster(ctx _context.Context, id string) ApiGetSrcmV2ClusterRequest {
 	return ApiGetSrcmV2ClusterRequest{
@@ -493,8 +492,7 @@ func (a *ClustersSrcmV2ApiService) GetSrcmV2Cluster(ctx _context.Context, id str
 }
 
 // Execute executes the request
-//
-//	@return SrcmV2Cluster
+//  @return SrcmV2Cluster
 func (a *ClustersSrcmV2ApiService) GetSrcmV2ClusterExecute(r ApiGetSrcmV2ClusterRequest) (SrcmV2Cluster, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -657,12 +655,12 @@ func (r ApiListSrcmV2ClustersRequest) Execute() (SrcmV2ClusterList, *_nethttp.Re
 /*
 ListSrcmV2Clusters List of Clusters
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all clusters.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListSrcmV2ClustersRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListSrcmV2ClustersRequest
 */
 func (a *ClustersSrcmV2ApiService) ListSrcmV2Clusters(ctx _context.Context) ApiListSrcmV2ClustersRequest {
 	return ApiListSrcmV2ClustersRequest{
@@ -672,8 +670,7 @@ func (a *ClustersSrcmV2ApiService) ListSrcmV2Clusters(ctx _context.Context) ApiL
 }
 
 // Execute executes the request
-//
-//	@return SrcmV2ClusterList
+//  @return SrcmV2ClusterList
 func (a *ClustersSrcmV2ApiService) ListSrcmV2ClustersExecute(r ApiListSrcmV2ClustersRequest) (SrcmV2ClusterList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -817,13 +814,15 @@ func (r ApiUpdateSrcmV2ClusterRequest) Execute() (SrcmV2Cluster, *_nethttp.Respo
 /*
 UpdateSrcmV2Cluster Update a Cluster
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update a cluster.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the cluster.
-	@return ApiUpdateSrcmV2ClusterRequest
+
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the cluster.
+ @return ApiUpdateSrcmV2ClusterRequest
 */
 func (a *ClustersSrcmV2ApiService) UpdateSrcmV2Cluster(ctx _context.Context, id string) ApiUpdateSrcmV2ClusterRequest {
 	return ApiUpdateSrcmV2ClusterRequest{
@@ -834,8 +833,7 @@ func (a *ClustersSrcmV2ApiService) UpdateSrcmV2Cluster(ctx _context.Context, id 
 }
 
 // Execute executes the request
-//
-//	@return SrcmV2Cluster
+//  @return SrcmV2Cluster
 func (a *ClustersSrcmV2ApiService) UpdateSrcmV2ClusterExecute(r ApiUpdateSrcmV2ClusterRequest) (SrcmV2Cluster, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch

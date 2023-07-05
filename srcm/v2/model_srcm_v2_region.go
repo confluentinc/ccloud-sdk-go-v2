@@ -26,6 +26,7 @@ Contact: data-governance@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -278,7 +279,11 @@ func (o SrcmV2Region) MarshalJSON() ([]byte, error) {
 	if o.Spec != nil {
 		toSerialize["spec"] = o.Spec
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableSrcmV2Region struct {
@@ -309,7 +314,11 @@ func NewNullableSrcmV2Region(val *SrcmV2Region) *NullableSrcmV2Region {
 }
 
 func (v NullableSrcmV2Region) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableSrcmV2Region) UnmarshalJSON(src []byte) error {

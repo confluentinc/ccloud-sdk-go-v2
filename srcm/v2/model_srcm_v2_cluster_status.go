@@ -26,6 +26,7 @@ Contact: data-governance@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,7 +37,7 @@ import (
 // SrcmV2ClusterStatus The status of the Cluster
 type SrcmV2ClusterStatus struct {
 	// The lifecyle phase of the cluster:    PROVISIONED:  cluster is provisioned;    PROVISIONING:  cluster provisioning is in progress;    FAILED:  provisioning failed
-	Phase string `json:"phase"`
+	Phase string `json:"phase,omitempty"`
 }
 
 // NewSrcmV2ClusterStatus instantiates a new SrcmV2ClusterStatus object
@@ -121,7 +122,11 @@ func (o SrcmV2ClusterStatus) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["phase"] = o.Phase
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableSrcmV2ClusterStatus struct {
@@ -152,7 +157,11 @@ func NewNullableSrcmV2ClusterStatus(val *SrcmV2ClusterStatus) *NullableSrcmV2Clu
 }
 
 func (v NullableSrcmV2ClusterStatus) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableSrcmV2ClusterStatus) UnmarshalJSON(src []byte) error {

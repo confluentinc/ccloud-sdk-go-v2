@@ -26,6 +26,7 @@ Contact: data-governance@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,7 +37,7 @@ import (
 // Failure Provides information about problems encountered while performing an operation.
 type Failure struct {
 	// List of errors which caused this operation to fail
-	Errors []Error `json:"errors"`
+	Errors []Error `json:"errors,omitempty"`
 }
 
 // NewFailure instantiates a new Failure object
@@ -121,7 +122,11 @@ func (o Failure) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["errors"] = o.Errors
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableFailure struct {
@@ -152,7 +157,11 @@ func NewNullableFailure(val *Failure) *NullableFailure {
 }
 
 func (v NullableFailure) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableFailure) UnmarshalJSON(src []byte) error {

@@ -26,6 +26,7 @@ Contact: data-governance@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,12 +37,12 @@ import (
 // SrcmV2RegionList `Region` objects represent cloud provider regions available when placing Schema Registry clusters. The API allows you to list Schema Registry regions.   Related guide: [Confluent Cloud Schema Registry Regions](https://docs.confluent.io/cloud/current/stream-governance/clusters-regions-api.html#schema-registry-regions).  ## The Regions Model <SchemaDefinition schemaRef=\"#/components/schemas/srcm.v2.Region\" />
 type SrcmV2RegionList struct {
 	// APIVersion defines the schema version of this representation of a resource.
-	ApiVersion string `json:"api_version"`
+	ApiVersion string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
-	Kind     string   `json:"kind"`
-	Metadata ListMeta `json:"metadata"`
+	Kind     string   `json:"kind,omitempty"`
+	Metadata ListMeta `json:"metadata,omitempty"`
 	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
-	Data []SrcmV2Region `json:"data"`
+	Data []SrcmV2Region `json:"data,omitempty"`
 }
 
 // NewSrcmV2RegionList instantiates a new SrcmV2RegionList object
@@ -213,7 +214,11 @@ func (o SrcmV2RegionList) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableSrcmV2RegionList struct {
@@ -244,7 +249,11 @@ func NewNullableSrcmV2RegionList(val *SrcmV2RegionList) *NullableSrcmV2RegionLis
 }
 
 func (v NullableSrcmV2RegionList) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableSrcmV2RegionList) UnmarshalJSON(src []byte) error {
