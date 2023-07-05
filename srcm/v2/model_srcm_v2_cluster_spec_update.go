@@ -36,9 +36,9 @@ import (
 
 // SrcmV2ClusterSpecUpdate The desired state of the Cluster
 type SrcmV2ClusterSpecUpdate struct {
-	// The billing package.  Note: Clusters can be upgraded from ESSENTIALS to ADVANCED, but cannot be downgraded from ADVANCED to ESSENTIALS. 
+	// The billing package.  Note: Clusters can be upgraded from ESSENTIALS to ADVANCED, but cannot be downgraded from ADVANCED to ESSENTIALS.
 	Package *string `json:"package,omitempty"`
-	// The network access type for the cluster. 
+	// The network access type for the cluster.
 	NetworkType *string `json:"network_type,omitempty"`
 	// The environment to which this belongs.
 	Environment *GlobalObjectReference `json:"environment,omitempty"`
@@ -163,39 +163,39 @@ func (o *SrcmV2ClusterSpecUpdate) SetEnvironment(v GlobalObjectReference) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *SrcmV2ClusterSpecUpdate) Redact() {
-    o.recurseRedact(o.Package)
-    o.recurseRedact(o.NetworkType)
-    o.recurseRedact(o.Environment)
+	o.recurseRedact(o.Package)
+	o.recurseRedact(o.NetworkType)
+	o.recurseRedact(o.Environment)
 }
 
 func (o *SrcmV2ClusterSpecUpdate) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o SrcmV2ClusterSpecUpdate) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o SrcmV2ClusterSpecUpdate) MarshalJSON() ([]byte, error) {
@@ -255,5 +255,3 @@ func (v *NullableSrcmV2ClusterSpecUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
