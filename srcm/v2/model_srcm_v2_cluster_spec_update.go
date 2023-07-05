@@ -26,6 +26,7 @@ Contact: data-governance@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,8 +36,10 @@ import (
 
 // SrcmV2ClusterSpecUpdate The desired state of the Cluster
 type SrcmV2ClusterSpecUpdate struct {
-	// The billing package.  Note: Clusters can be upgraded from ESSENTIALS to ADVANCED, but cannot be downgraded from ADVANCED to ESSENTIALS.
+	// The billing package.  Note: Clusters can be upgraded from ESSENTIALS to ADVANCED, but cannot be downgraded from ADVANCED to ESSENTIALS. 
 	Package *string `json:"package,omitempty"`
+	// The network access type for the cluster. 
+	NetworkType *string `json:"network_type,omitempty"`
 	// The environment to which this belongs.
 	Environment *GlobalObjectReference `json:"environment,omitempty"`
 }
@@ -47,6 +50,8 @@ type SrcmV2ClusterSpecUpdate struct {
 // will change when the set of required properties is changed
 func NewSrcmV2ClusterSpecUpdate() *SrcmV2ClusterSpecUpdate {
 	this := SrcmV2ClusterSpecUpdate{}
+	var networkType string = "PUBLIC"
+	this.NetworkType = &networkType
 	return &this
 }
 
@@ -55,6 +60,8 @@ func NewSrcmV2ClusterSpecUpdate() *SrcmV2ClusterSpecUpdate {
 // but it doesn't guarantee that properties required by API are set
 func NewSrcmV2ClusterSpecUpdateWithDefaults() *SrcmV2ClusterSpecUpdate {
 	this := SrcmV2ClusterSpecUpdate{}
+	var networkType string = "PUBLIC"
+	this.NetworkType = &networkType
 	return &this
 }
 
@@ -88,6 +95,38 @@ func (o *SrcmV2ClusterSpecUpdate) HasPackage() bool {
 // SetPackage gets a reference to the given string and assigns it to the Package field.
 func (o *SrcmV2ClusterSpecUpdate) SetPackage(v string) {
 	o.Package = &v
+}
+
+// GetNetworkType returns the NetworkType field value if set, zero value otherwise.
+func (o *SrcmV2ClusterSpecUpdate) GetNetworkType() string {
+	if o == nil || o.NetworkType == nil {
+		var ret string
+		return ret
+	}
+	return *o.NetworkType
+}
+
+// GetNetworkTypeOk returns a tuple with the NetworkType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SrcmV2ClusterSpecUpdate) GetNetworkTypeOk() (*string, bool) {
+	if o == nil || o.NetworkType == nil {
+		return nil, false
+	}
+	return o.NetworkType, true
+}
+
+// HasNetworkType returns a boolean if a field has been set.
+func (o *SrcmV2ClusterSpecUpdate) HasNetworkType() bool {
+	if o != nil && o.NetworkType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNetworkType gets a reference to the given string and assigns it to the NetworkType field.
+func (o *SrcmV2ClusterSpecUpdate) SetNetworkType(v string) {
+	o.NetworkType = &v
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
@@ -124,38 +163,39 @@ func (o *SrcmV2ClusterSpecUpdate) SetEnvironment(v GlobalObjectReference) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *SrcmV2ClusterSpecUpdate) Redact() {
-	o.recurseRedact(o.Package)
-	o.recurseRedact(o.Environment)
+    o.recurseRedact(o.Package)
+    o.recurseRedact(o.NetworkType)
+    o.recurseRedact(o.Environment)
 }
 
 func (o *SrcmV2ClusterSpecUpdate) recurseRedact(v interface{}) {
-	type redactor interface {
-		Redact()
-	}
-	if r, ok := v.(redactor); ok {
-		r.Redact()
-	} else {
-		val := reflect.ValueOf(v)
-		if val.Kind() == reflect.Ptr {
-			val = val.Elem()
-		}
-		switch val.Kind() {
-		case reflect.Slice, reflect.Array:
-			for i := 0; i < val.Len(); i++ {
-				// support data types declared without pointers
-				o.recurseRedact(val.Index(i).Interface())
-				// ... and data types that were declared without but need pointers (for Redact)
-				if val.Index(i).CanAddr() {
-					o.recurseRedact(val.Index(i).Addr().Interface())
-				}
-			}
-		}
-	}
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
 }
 
 func (o SrcmV2ClusterSpecUpdate) zeroField(v interface{}) {
-	p := reflect.ValueOf(v).Elem()
-	p.Set(reflect.Zero(p.Type()))
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o SrcmV2ClusterSpecUpdate) MarshalJSON() ([]byte, error) {
@@ -163,10 +203,17 @@ func (o SrcmV2ClusterSpecUpdate) MarshalJSON() ([]byte, error) {
 	if o.Package != nil {
 		toSerialize["package"] = o.Package
 	}
+	if o.NetworkType != nil {
+		toSerialize["network_type"] = o.NetworkType
+	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableSrcmV2ClusterSpecUpdate struct {
@@ -197,10 +244,16 @@ func NewNullableSrcmV2ClusterSpecUpdate(val *SrcmV2ClusterSpecUpdate) *NullableS
 }
 
 func (v NullableSrcmV2ClusterSpecUpdate) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableSrcmV2ClusterSpecUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

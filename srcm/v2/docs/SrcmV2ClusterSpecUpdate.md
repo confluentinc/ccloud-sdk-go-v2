@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Package** | Pointer to **string** | The billing package.  Note: Clusters can be upgraded from ESSENTIALS to ADVANCED, but cannot be downgraded from ADVANCED to ESSENTIALS.  | [optional] 
+**NetworkType** | Pointer to **string** | The network access type for the cluster.  | [optional] [default to "PUBLIC"]
 **Environment** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
@@ -50,6 +51,31 @@ SetPackage sets Package field to given value.
 `func (o *SrcmV2ClusterSpecUpdate) HasPackage() bool`
 
 HasPackage returns a boolean if a field has been set.
+
+### GetNetworkType
+
+`func (o *SrcmV2ClusterSpecUpdate) GetNetworkType() string`
+
+GetNetworkType returns the NetworkType field if non-nil, zero value otherwise.
+
+### GetNetworkTypeOk
+
+`func (o *SrcmV2ClusterSpecUpdate) GetNetworkTypeOk() (*string, bool)`
+
+GetNetworkTypeOk returns a tuple with the NetworkType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkType
+
+`func (o *SrcmV2ClusterSpecUpdate) SetNetworkType(v string)`
+
+SetNetworkType sets NetworkType field to given value.
+
+### HasNetworkType
+
+`func (o *SrcmV2ClusterSpecUpdate) HasNetworkType() bool`
+
+HasNetworkType returns a boolean if a field has been set.
 
 ### GetEnvironment
 

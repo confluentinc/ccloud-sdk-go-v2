@@ -31,8 +31,8 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
-	"reflect"
 	"strings"
+	"reflect"
 )
 
 // Linger please
@@ -43,15 +43,15 @@ var (
 type RegionsSrcmV2Api interface {
 
 	/*
-		GetSrcmV2Region Read a Region
+	GetSrcmV2Region Read a Region
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+	[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to read a region.
+Make a request to read a region.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the region.
-		 @return ApiGetSrcmV2RegionRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param id The unique identifier for the region.
+	 @return ApiGetSrcmV2RegionRequest
 	*/
 	GetSrcmV2Region(ctx _context.Context, id string) ApiGetSrcmV2RegionRequest
 
@@ -60,14 +60,14 @@ type RegionsSrcmV2Api interface {
 	GetSrcmV2RegionExecute(r ApiGetSrcmV2RegionRequest) (SrcmV2Region, *_nethttp.Response, error)
 
 	/*
-		ListSrcmV2Regions List of Regions
+	ListSrcmV2Regions List of Regions
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+	[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Retrieve a sorted, filtered, paginated list of all regions.
+Retrieve a sorted, filtered, paginated list of all regions.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListSrcmV2RegionsRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiListSrcmV2RegionsRequest
 	*/
 	ListSrcmV2Regions(ctx _context.Context) ApiListSrcmV2RegionsRequest
 
@@ -80,10 +80,11 @@ type RegionsSrcmV2Api interface {
 type RegionsSrcmV2ApiService service
 
 type ApiGetSrcmV2RegionRequest struct {
-	ctx        _context.Context
+	ctx _context.Context
 	ApiService RegionsSrcmV2Api
-	id         string
+	id string
 }
+
 
 func (r ApiGetSrcmV2RegionRequest) Execute() (SrcmV2Region, *_nethttp.Response, error) {
 	return r.ApiService.GetSrcmV2RegionExecute(r)
@@ -92,25 +93,24 @@ func (r ApiGetSrcmV2RegionRequest) Execute() (SrcmV2Region, *_nethttp.Response, 
 /*
 GetSrcmV2Region Read a Region
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a region.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the region.
-	@return ApiGetSrcmV2RegionRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the region.
+ @return ApiGetSrcmV2RegionRequest
 */
 func (a *RegionsSrcmV2ApiService) GetSrcmV2Region(ctx _context.Context, id string) ApiGetSrcmV2RegionRequest {
 	return ApiGetSrcmV2RegionRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return SrcmV2Region
+//  @return SrcmV2Region
 func (a *RegionsSrcmV2ApiService) GetSrcmV2RegionExecute(r ApiGetSrcmV2RegionRequest) (SrcmV2Region, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -237,13 +237,13 @@ func (a *RegionsSrcmV2ApiService) GetSrcmV2RegionExecute(r ApiGetSrcmV2RegionReq
 }
 
 type ApiListSrcmV2RegionsRequest struct {
-	ctx            _context.Context
-	ApiService     RegionsSrcmV2Api
-	specCloud      *string
+	ctx _context.Context
+	ApiService RegionsSrcmV2Api
+	specCloud *string
 	specRegionName *string
-	specPackages   *[]string
-	pageSize       *int32
-	pageToken      *string
+	specPackages *[]string
+	pageSize *int32
+	pageToken *string
 }
 
 // Filter the results by exact match for spec.cloud.
@@ -251,25 +251,21 @@ func (r ApiListSrcmV2RegionsRequest) SpecCloud(specCloud string) ApiListSrcmV2Re
 	r.specCloud = &specCloud
 	return r
 }
-
 // Filter the results by exact match for spec.region_name.
 func (r ApiListSrcmV2RegionsRequest) SpecRegionName(specRegionName string) ApiListSrcmV2RegionsRequest {
 	r.specRegionName = &specRegionName
 	return r
 }
-
 // Filter the results by exact match for spec.packages. Pass multiple times to see results matching any of the values.
 func (r ApiListSrcmV2RegionsRequest) SpecPackages(specPackages []string) ApiListSrcmV2RegionsRequest {
 	r.specPackages = &specPackages
 	return r
 }
-
 // A pagination size for collection requests.
 func (r ApiListSrcmV2RegionsRequest) PageSize(pageSize int32) ApiListSrcmV2RegionsRequest {
 	r.pageSize = &pageSize
 	return r
 }
-
 // An opaque pagination token for collection requests.
 func (r ApiListSrcmV2RegionsRequest) PageToken(pageToken string) ApiListSrcmV2RegionsRequest {
 	r.pageToken = &pageToken
@@ -283,23 +279,22 @@ func (r ApiListSrcmV2RegionsRequest) Execute() (SrcmV2RegionList, *_nethttp.Resp
 /*
 ListSrcmV2Regions List of Regions
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all regions.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListSrcmV2RegionsRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListSrcmV2RegionsRequest
 */
 func (a *RegionsSrcmV2ApiService) ListSrcmV2Regions(ctx _context.Context) ApiListSrcmV2RegionsRequest {
 	return ApiListSrcmV2RegionsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return SrcmV2RegionList
+//  @return SrcmV2RegionList
 func (a *RegionsSrcmV2ApiService) ListSrcmV2RegionsExecute(r ApiListSrcmV2RegionsRequest) (SrcmV2RegionList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet

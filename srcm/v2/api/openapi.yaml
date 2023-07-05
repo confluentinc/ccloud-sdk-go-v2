@@ -16,7 +16,7 @@ servers:
   url: https://api.confluent.cloud
 tags:
 - description: |-
-    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `Region` objects represent cloud provider regions available when placing Schema Registry clusters.
     The API allows you to list Schema Registry regions.
@@ -28,7 +28,7 @@ tags:
     <SchemaDefinition schemaRef="#/components/schemas/srcm.v2.Region" />
   name: Regions (srcm/v2)
 - description: |-
-    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `Clusters` objects represent Schema Registry Clusters on Confluent Cloud.
 
@@ -44,7 +44,7 @@ paths:
   /srcm/v2/regions:
     get:
       description: |-
-        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all regions.
       operationId: listSrcmV2Regions
@@ -228,14 +228,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/srcm/v2/regions?spec.cloud=SOME_STRING_VALUE&spec.region_name=SOME_STRING_VALUE&spec.packages=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/srcm/v2/regions?spec.cloud=AWS&spec.region_name=us-east-2&spec.packages=ESSENTIALS%2CADVANCED' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/srcm/v2/regions?spec.cloud=SOME_STRING_VALUE&spec.region_name=SOME_STRING_VALUE&spec.packages=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/srcm/v2/regions?spec.cloud=AWS&spec.region_name=us-east-2&spec.packages=ESSENTIALS%2CADVANCED")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -243,7 +243,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/srcm/v2/regions?spec.cloud=SOME_STRING_VALUE&spec.region_name=SOME_STRING_VALUE&spec.packages=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/srcm/v2/regions?spec.cloud=AWS&spec.region_name=us-east-2&spec.packages=ESSENTIALS%2CADVANCED\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -256,7 +256,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/srcm/v2/regions?spec.cloud=SOME_STRING_VALUE&spec.region_name=SOME_STRING_VALUE&spec.packages=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/srcm/v2/regions?spec.cloud=AWS&spec.region_name=us-east-2&spec.packages=ESSENTIALS%2CADVANCED", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -270,7 +270,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/srcm/v2/regions?spec.cloud=SOME_STRING_VALUE&spec.region_name=SOME_STRING_VALUE&spec.packages=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/srcm/v2/regions?spec.cloud=AWS&spec.region_name=us-east-2&spec.packages=ESSENTIALS%2CADVANCED",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -295,7 +295,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/srcm/v2/regions?spec.cloud=SOME_STRING_VALUE&spec.region_name=SOME_STRING_VALUE&spec.packages=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/srcm/v2/regions?spec.cloud=AWS&spec.region_name=us-east-2&spec.packages=ESSENTIALS%2CADVANCED");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -304,14 +304,14 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/srcm/v2/regions?spec.cloud=SOME_STRING_VALUE&spec.region_name=SOME_STRING_VALUE&spec.packages=SOME_ARRAY_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/srcm/v2/regions?spec.cloud=AWS&spec.region_name=us-east-2&spec.packages=ESSENTIALS%2CADVANCED");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
   /srcm/v2/regions/{id}:
     get:
       description: |-
-        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a region.
       operationId: getSrcmV2Region
@@ -485,14 +485,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/srcm/v2/regions/{id}' \
+            --url https://api.confluent.cloud/srcm/v2/regions/%7Bid%7D \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/srcm/v2/regions/{id}")
+            .url("https://api.confluent.cloud/srcm/v2/regions/%7Bid%7D")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -500,7 +500,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/srcm/v2/regions/{id}\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/srcm/v2/regions/%7Bid%7D\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -513,7 +513,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/srcm/v2/regions/{id}", headers=headers)
+          conn.request("GET", "/srcm/v2/regions/%7Bid%7D", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -527,7 +527,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/srcm/v2/regions/{id}",
+            "path": "/srcm/v2/regions/%7Bid%7D",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -552,7 +552,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/srcm/v2/regions/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/srcm/v2/regions/%7Bid%7D");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -561,14 +561,14 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/srcm/v2/regions/{id}");
+          var client = new RestClient("https://api.confluent.cloud/srcm/v2/regions/%7Bid%7D");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
   /srcm/v2/clusters:
     get:
       description: |-
-        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all clusters.
       operationId: listSrcmV2Clusters
@@ -750,14 +750,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/srcm/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/srcm/v2/clusters?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/srcm/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/srcm/v2/clusters?environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -765,7 +765,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/srcm/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/srcm/v2/clusters?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -778,7 +778,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/srcm/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/srcm/v2/clusters?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -792,7 +792,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/srcm/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/srcm/v2/clusters?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -817,7 +817,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/srcm/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/srcm/v2/clusters?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -826,13 +826,13 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/srcm/v2/clusters?environment=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/srcm/v2/clusters?environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create a cluster.
       operationId: createSrcmV2Cluster
@@ -1082,13 +1082,13 @@ paths:
             --url https://api.confluent.cloud/srcm/v2/clusters \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"package":"ESSENTIALS","environment":{"id":"env-00000"},"region":{"id":"sgreg-00000"}}}'
+            --data '{"spec":{"package":"ESSENTIALS","network_type":"PUBLIC","environment":{"id":"env-00000"},"region":{"id":"sgreg-00000"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"sgreg-00000\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"package\":\"ESSENTIALS\",\"network_type\":\"PUBLIC\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"sgreg-00000\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/srcm/v2/clusters")
             .post(body)
@@ -1101,20 +1101,20 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/srcm/v2/clusters\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"package\\\":\\\"\
-          ESSENTIALS\\\",\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\"},\\\"region\\\
-          \":{\\\"id\\\":\\\"sgreg-00000\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
-          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          ESSENTIALS\\\",\\\"network_type\\\":\\\"PUBLIC\\\",\\\"environment\\\":{\\\
+          \"id\\\":\\\"env-00000\\\"},\\\"region\\\":{\\\"id\\\":\\\"sgreg-00000\\\
+          \"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"sgreg-00000\"}}}"
+          payload = "{\"spec\":{\"package\":\"ESSENTIALS\",\"network_type\":\"PUBLIC\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"sgreg-00000\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -1158,6 +1158,7 @@ paths:
           req.write(JSON.stringify({
             spec: {
               package: 'ESSENTIALS',
+              network_type: 'PUBLIC',
               environment: {id: 'env-00000'},
               region: {id: 'sgreg-00000'}
             }
@@ -1175,7 +1176,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"sgreg-00000\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"package\":\"ESSENTIALS\",\"network_type\":\"PUBLIC\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"sgreg-00000\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1184,12 +1185,12 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"sgreg-00000\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"package\":\"ESSENTIALS\",\"network_type\":\"PUBLIC\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"sgreg-00000\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /srcm/v2/clusters/{id}:
     delete:
       description: |-
-        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete a cluster.
       operationId: deleteSrcmV2Cluster
@@ -1353,14 +1354,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/srcm/v2/clusters/{id}?environment=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/srcm/v2/clusters/%7Bid%7D?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/srcm/v2/clusters/{id}?environment=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/srcm/v2/clusters/%7Bid%7D?environment=env-00000")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1368,7 +1369,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/srcm/v2/clusters/{id}?environment=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/srcm/v2/clusters/%7Bid%7D?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1381,7 +1382,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/srcm/v2/clusters/{id}?environment=SOME_STRING_VALUE", headers=headers)
+          conn.request("DELETE", "/srcm/v2/clusters/%7Bid%7D?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1395,7 +1396,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/srcm/v2/clusters/{id}?environment=SOME_STRING_VALUE",
+            "path": "/srcm/v2/clusters/%7Bid%7D?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1420,7 +1421,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/srcm/v2/clusters/{id}?environment=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/srcm/v2/clusters/%7Bid%7D?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1429,13 +1430,13 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/srcm/v2/clusters/{id}?environment=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/srcm/v2/clusters/%7Bid%7D?environment=env-00000");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a cluster.
       operationId: getSrcmV2Cluster
@@ -1633,14 +1634,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/srcm/v2/clusters/{id}?environment=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/srcm/v2/clusters/%7Bid%7D?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/srcm/v2/clusters/{id}?environment=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/srcm/v2/clusters/%7Bid%7D?environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1648,7 +1649,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/srcm/v2/clusters/{id}?environment=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/srcm/v2/clusters/%7Bid%7D?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1661,7 +1662,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/srcm/v2/clusters/{id}?environment=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/srcm/v2/clusters/%7Bid%7D?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1675,7 +1676,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/srcm/v2/clusters/{id}?environment=SOME_STRING_VALUE",
+            "path": "/srcm/v2/clusters/%7Bid%7D?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1700,7 +1701,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/srcm/v2/clusters/{id}?environment=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/srcm/v2/clusters/%7Bid%7D?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1709,13 +1710,13 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/srcm/v2/clusters/{id}?environment=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/srcm/v2/clusters/%7Bid%7D?environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update a cluster.
 
@@ -1946,18 +1947,18 @@ paths:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url 'https://api.confluent.cloud/srcm/v2/clusters/{id}' \
+            --url https://api.confluent.cloud/srcm/v2/clusters/%7Bid%7D \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"package":"ESSENTIALS","environment":{"id":"env-00000"},"region":{"id":"string"}}}'
+            --data '{"spec":{"package":"ESSENTIALS","network_type":"PUBLIC","environment":{"id":"env-00000"},"region":{"id":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"package\":\"ESSENTIALS\",\"network_type\":\"PUBLIC\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"string\"}}}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/srcm/v2/clusters/{id}")
+            .url("https://api.confluent.cloud/srcm/v2/clusters/%7Bid%7D")
             .patch(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -1966,29 +1967,29 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/srcm/v2/clusters/{id}\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/srcm/v2/clusters/%7Bid%7D\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"package\\\":\\\"\
-          ESSENTIALS\\\",\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\"},\\\"region\\\
-          \":{\\\"id\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\"\
-          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          ESSENTIALS\\\",\\\"network_type\\\":\\\"PUBLIC\\\",\\\"environment\\\":{\\\
+          \"id\\\":\\\"env-00000\\\"},\\\"region\\\":{\\\"id\\\":\\\"string\\\"}}}\"\
+          )\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"string\"}}}"
+          payload = "{\"spec\":{\"package\":\"ESSENTIALS\",\"network_type\":\"PUBLIC\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/srcm/v2/clusters/{id}", payload, headers)
+          conn.request("PATCH", "/srcm/v2/clusters/%7Bid%7D", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2002,7 +2003,7 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/srcm/v2/clusters/{id}",
+            "path": "/srcm/v2/clusters/%7Bid%7D",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -2023,7 +2024,12 @@ paths:
           });
 
           req.write(JSON.stringify({
-            spec: {package: 'ESSENTIALS', environment: {id: 'env-00000'}, region: {id: 'string'}}
+            spec: {
+              package: 'ESSENTIALS',
+              network_type: 'PUBLIC',
+              environment: {id: 'env-00000'},
+              region: {id: 'string'}
+            }
           }));
           req.end();
       - lang: C
@@ -2031,23 +2037,23 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/srcm/v2/clusters/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/srcm/v2/clusters/%7Bid%7D");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"package\":\"ESSENTIALS\",\"network_type\":\"PUBLIC\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/srcm/v2/clusters/{id}");
+          var client = new RestClient("https://api.confluent.cloud/srcm/v2/clusters/%7Bid%7D");
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"package\":\"ESSENTIALS\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"package\":\"ESSENTIALS\",\"network_type\":\"PUBLIC\",\"environment\":{\"id\":\"env-00000\"},\"region\":{\"id\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
 components:
   responses:
@@ -2560,6 +2566,15 @@ components:
           x-extensible-enum:
           - ESSENTIALS
           - ADVANCED
+        network_type:
+          default: PUBLIC
+          description: |
+            The network access type for the cluster.
+          example: PUBLIC
+          type: string
+          x-extensible-enum:
+          - PRIVATE
+          - PUBLIC
         http_endpoint:
           description: The cluster HTTP request URL.
           example: https://psrc-00000.us-central1.gcp.confluent.cloud
@@ -2785,6 +2800,15 @@ components:
           x-extensible-enum:
           - ESSENTIALS
           - ADVANCED
+        network_type:
+          default: PUBLIC
+          description: |
+            The network access type for the cluster.
+          example: PUBLIC
+          type: string
+          x-extensible-enum:
+          - PRIVATE
+          - PUBLIC
         environment:
           allOf:
           - $ref: '#/components/schemas/GlobalObjectReference'

@@ -26,6 +26,7 @@ Contact: data-governance@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,13 +37,13 @@ import (
 // ObjectReference ObjectReference provides information for you to locate the referred object
 type ObjectReference struct {
 	// ID of the referred resource
-	Id string `json:"id"`
+	Id string `json:"id,omitempty"`
 	// Environment of the referred resource, if env-scoped
 	Environment *string `json:"environment,omitempty"`
 	// API URL for accessing or modifying the referred object
-	Related string `json:"related"`
+	Related string `json:"related,omitempty"`
 	// CRN reference to the referred resource
-	ResourceName string `json:"resource_name"`
+	ResourceName string `json:"resource_name,omitempty"`
 	// API group and version of the referred resource
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind of the referred resource
@@ -82,7 +83,7 @@ func (o *ObjectReference) GetId() string {
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *ObjectReference) GetIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil  {
 		return nil, false
 	}
 	return &o.Id, true
@@ -138,7 +139,7 @@ func (o *ObjectReference) GetRelated() string {
 // GetRelatedOk returns a tuple with the Related field value
 // and a boolean to check if the value has been set.
 func (o *ObjectReference) GetRelatedOk() (*string, bool) {
-	if o == nil {
+	if o == nil  {
 		return nil, false
 	}
 	return &o.Related, true
@@ -162,7 +163,7 @@ func (o *ObjectReference) GetResourceName() string {
 // GetResourceNameOk returns a tuple with the ResourceName field value
 // and a boolean to check if the value has been set.
 func (o *ObjectReference) GetResourceNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil  {
 		return nil, false
 	}
 	return &o.ResourceName, true
@@ -239,42 +240,42 @@ func (o *ObjectReference) SetKind(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ObjectReference) Redact() {
-	o.recurseRedact(&o.Id)
-	o.recurseRedact(o.Environment)
-	o.recurseRedact(&o.Related)
-	o.recurseRedact(&o.ResourceName)
-	o.recurseRedact(o.ApiVersion)
-	o.recurseRedact(o.Kind)
+    o.recurseRedact(&o.Id)
+    o.recurseRedact(o.Environment)
+    o.recurseRedact(&o.Related)
+    o.recurseRedact(&o.ResourceName)
+    o.recurseRedact(o.ApiVersion)
+    o.recurseRedact(o.Kind)
 }
 
 func (o *ObjectReference) recurseRedact(v interface{}) {
-	type redactor interface {
-		Redact()
-	}
-	if r, ok := v.(redactor); ok {
-		r.Redact()
-	} else {
-		val := reflect.ValueOf(v)
-		if val.Kind() == reflect.Ptr {
-			val = val.Elem()
-		}
-		switch val.Kind() {
-		case reflect.Slice, reflect.Array:
-			for i := 0; i < val.Len(); i++ {
-				// support data types declared without pointers
-				o.recurseRedact(val.Index(i).Interface())
-				// ... and data types that were declared without but need pointers (for Redact)
-				if val.Index(i).CanAddr() {
-					o.recurseRedact(val.Index(i).Addr().Interface())
-				}
-			}
-		}
-	}
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
 }
 
 func (o ObjectReference) zeroField(v interface{}) {
-	p := reflect.ValueOf(v).Elem()
-	p.Set(reflect.Zero(p.Type()))
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ObjectReference) MarshalJSON() ([]byte, error) {
@@ -297,7 +298,11 @@ func (o ObjectReference) MarshalJSON() ([]byte, error) {
 	if o.Kind != nil {
 		toSerialize["kind"] = o.Kind
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableObjectReference struct {
@@ -328,10 +333,16 @@ func NewNullableObjectReference(val *ObjectReference) *NullableObjectReference {
 }
 
 func (v NullableObjectReference) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableObjectReference) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
