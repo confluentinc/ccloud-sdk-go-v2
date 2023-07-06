@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,14 +36,14 @@ import (
 
 // ReassignmentData struct for ReassignmentData
 type ReassignmentData struct {
-	Kind             string           `json:"kind"`
-	Metadata         ResourceMetadata `json:"metadata"`
-	ClusterId        string           `json:"cluster_id"`
-	TopicName        string           `json:"topic_name"`
-	PartitionId      int32            `json:"partition_id"`
-	AddingReplicas   []int32          `json:"adding_replicas"`
-	RemovingReplicas []int32          `json:"removing_replicas"`
-	Replicas         Relationship     `json:"replicas"`
+	Kind             string           `json:"kind,omitempty"`
+	Metadata         ResourceMetadata `json:"metadata,omitempty"`
+	ClusterId        string           `json:"cluster_id,omitempty"`
+	TopicName        string           `json:"topic_name,omitempty"`
+	PartitionId      int32            `json:"partition_id,omitempty"`
+	AddingReplicas   []int32          `json:"adding_replicas,omitempty"`
+	RemovingReplicas []int32          `json:"removing_replicas,omitempty"`
+	Replicas         Relationship     `json:"replicas,omitempty"`
 }
 
 // NewReassignmentData instantiates a new ReassignmentData object
@@ -330,7 +331,11 @@ func (o ReassignmentData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["replicas"] = o.Replicas
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableReassignmentData struct {
@@ -361,7 +366,11 @@ func NewNullableReassignmentData(val *ReassignmentData) *NullableReassignmentDat
 }
 
 func (v NullableReassignmentData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableReassignmentData) UnmarshalJSON(src []byte) error {

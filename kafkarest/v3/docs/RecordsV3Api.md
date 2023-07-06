@@ -4,15 +4,15 @@ All URIs are relative to *https://pkc-00000.region.provider.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ProduceRecords**](RecordsV3Api.md#ProduceRecords) | **Post** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/records | Produce records to the given topic.
+[**ProduceRecord**](RecordsV3Api.md#ProduceRecord) | **Post** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/records | Produce Records
 
 
 
-## ProduceRecords
+## ProduceRecord
 
-> ProduceResponse ProduceRecords(ctx, clusterId, topicName).ProduceRequest(produceRequest).Execute()
+> ProduceResponse ProduceRecord(ctx, clusterId, topicName).ProduceRequest(produceRequest).Execute()
 
-Produce records to the given topic.
+Produce Records
 
 
 
@@ -31,17 +31,17 @@ import (
 func main() {
     clusterId := "cluster-1" // string | The Kafka cluster ID.
     topicName := "topic-1" // string | The topic name.
-    produceRequest := *openapiclient.NewProduceRequest() // ProduceRequest | A single record to be produced to Kafka. To produce multiple records on the same connection, simply concatenate all the records, e.g.: {\"partition_id\": \"1\", \"value\": {\"type\": \"JSON\", \"data\": \"Bonjour le monde!\"}} {\"partition_id\": \"10\", \"value\": {\"type\": \"JSON\", \"data\": \"Bonjour le monde, de nouveau!\"}} Delivery reports will be concatenated in the same order as the records are sent. See examples for the options available. (optional)
+    produceRequest := *openapiclient.NewProduceRequest() // ProduceRequest | A single record to be produced to Kafka. To produce multiple records in the same request, simply concatenate the records. The delivery reports are concatenated in the same order as the records are sent. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.RecordsV3Api.ProduceRecords(context.Background(), clusterId, topicName).ProduceRequest(produceRequest).Execute()
+    resp, r, err := api_client.RecordsV3Api.ProduceRecord(context.Background(), clusterId, topicName).ProduceRequest(produceRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RecordsV3Api.ProduceRecords``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `RecordsV3Api.ProduceRecord``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ProduceRecords`: ProduceResponse
-    fmt.Fprintf(os.Stdout, "Response from `RecordsV3Api.ProduceRecords`: %v\n", resp)
+    // response from `ProduceRecord`: ProduceResponse
+    fmt.Fprintf(os.Stdout, "Response from `RecordsV3Api.ProduceRecord`: %v\n", resp)
 }
 ```
 
@@ -56,14 +56,14 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiProduceRecordsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiProduceRecordRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **produceRequest** | [**ProduceRequest**](ProduceRequest.md) | A single record to be produced to Kafka. To produce multiple records on the same connection, simply concatenate all the records, e.g.: {\&quot;partition_id\&quot;: \&quot;1\&quot;, \&quot;value\&quot;: {\&quot;type\&quot;: \&quot;JSON\&quot;, \&quot;data\&quot;: \&quot;Bonjour le monde!\&quot;}} {\&quot;partition_id\&quot;: \&quot;10\&quot;, \&quot;value\&quot;: {\&quot;type\&quot;: \&quot;JSON\&quot;, \&quot;data\&quot;: \&quot;Bonjour le monde, de nouveau!\&quot;}} Delivery reports will be concatenated in the same order as the records are sent. See examples for the options available. | 
+ **produceRequest** | [**ProduceRequest**](ProduceRequest.md) | A single record to be produced to Kafka. To produce multiple records in the same request, simply concatenate the records. The delivery reports are concatenated in the same order as the records are sent. | 
 
 ### Return type
 
@@ -71,12 +71,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

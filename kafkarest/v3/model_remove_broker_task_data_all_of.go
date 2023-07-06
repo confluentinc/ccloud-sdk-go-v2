@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,15 +36,15 @@ import (
 
 // RemoveBrokerTaskDataAllOf struct for RemoveBrokerTaskDataAllOf
 type RemoveBrokerTaskDataAllOf struct {
-	ClusterId                    string         `json:"cluster_id"`
-	BrokerId                     int32          `json:"broker_id"`
-	ShutdownScheduled            bool           `json:"shutdown_scheduled"`
-	BrokerReplicaExclusionStatus string         `json:"broker_replica_exclusion_status"`
-	PartitionReassignmentStatus  string         `json:"partition_reassignment_status"`
-	BrokerShutdownStatus         string         `json:"broker_shutdown_status"`
+	ClusterId                    string         `json:"cluster_id,omitempty"`
+	BrokerId                     int32          `json:"broker_id,omitempty"`
+	ShutdownScheduled            bool           `json:"shutdown_scheduled,omitempty"`
+	BrokerReplicaExclusionStatus string         `json:"broker_replica_exclusion_status,omitempty"`
+	PartitionReassignmentStatus  string         `json:"partition_reassignment_status,omitempty"`
+	BrokerShutdownStatus         string         `json:"broker_shutdown_status,omitempty"`
 	ErrorCode                    NullableInt32  `json:"error_code,omitempty"`
 	ErrorMessage                 NullableString `json:"error_message,omitempty"`
-	Broker                       Relationship   `json:"broker"`
+	Broker                       Relationship   `json:"broker,omitempty"`
 }
 
 // NewRemoveBrokerTaskDataAllOf instantiates a new RemoveBrokerTaskDataAllOf object
@@ -396,7 +397,11 @@ func (o RemoveBrokerTaskDataAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["broker"] = o.Broker
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableRemoveBrokerTaskDataAllOf struct {
@@ -427,7 +432,11 @@ func NewNullableRemoveBrokerTaskDataAllOf(val *RemoveBrokerTaskDataAllOf) *Nulla
 }
 
 func (v NullableRemoveBrokerTaskDataAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableRemoveBrokerTaskDataAllOf) UnmarshalJSON(src []byte) error {

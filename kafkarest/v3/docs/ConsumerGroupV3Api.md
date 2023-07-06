@@ -6,7 +6,8 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetKafkaConsumer**](ConsumerGroupV3Api.md#GetKafkaConsumer) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/consumers/{consumer_id} | Get Consumer
 [**GetKafkaConsumerGroup**](ConsumerGroupV3Api.md#GetKafkaConsumerGroup) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id} | Get Consumer Group
-[**GetKafkaConsumerGroupLagSummary**](ConsumerGroupV3Api.md#GetKafkaConsumerGroupLagSummary) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lag-summary | Get Consumer Group Lag Summary.
+[**GetKafkaConsumerGroupLagSummary**](ConsumerGroupV3Api.md#GetKafkaConsumerGroupLagSummary) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lag-summary | Get Consumer Group Lag Summary
+[**GetKafkaConsumerLag**](ConsumerGroupV3Api.md#GetKafkaConsumerLag) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lags/{topic_name}/partitions/{partition_id} | Get Consumer Lag
 [**ListKafkaConsumerGroups**](ConsumerGroupV3Api.md#ListKafkaConsumerGroups) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups | List Consumer Groups
 [**ListKafkaConsumerLags**](ConsumerGroupV3Api.md#ListKafkaConsumerLags) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lags | List Consumer Lags
 [**ListKafkaConsumers**](ConsumerGroupV3Api.md#ListKafkaConsumers) | **Get** /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/consumers | List Consumers
@@ -77,12 +78,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -150,12 +151,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -166,7 +167,7 @@ Name | Type | Description  | Notes
 
 > ConsumerGroupLagSummaryData GetKafkaConsumerGroupLagSummary(ctx, clusterId, consumerGroupId).Execute()
 
-Get Consumer Group Lag Summary.
+Get Consumer Group Lag Summary
 
 
 
@@ -223,12 +224,91 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetKafkaConsumerLag
+
+> ConsumerLagData GetKafkaConsumerLag(ctx, clusterId, consumerGroupId, topicName, partitionId).Execute()
+
+Get Consumer Lag
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    clusterId := "cluster-1" // string | The Kafka cluster ID.
+    consumerGroupId := "consumer-group-1" // string | The consumer group ID.
+    topicName := "topic-1" // string | The topic name.
+    partitionId := int32(0) // int32 | The partition ID.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.ConsumerGroupV3Api.GetKafkaConsumerLag(context.Background(), clusterId, consumerGroupId, topicName, partitionId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ConsumerGroupV3Api.GetKafkaConsumerLag``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetKafkaConsumerLag`: ConsumerLagData
+    fmt.Fprintf(os.Stdout, "Response from `ConsumerGroupV3Api.GetKafkaConsumerLag`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**clusterId** | **string** | The Kafka cluster ID. | 
+**consumerGroupId** | **string** | The consumer group ID. | 
+**topicName** | **string** | The topic name. | 
+**partitionId** | **int32** | The partition ID. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetKafkaConsumerLagRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+
+### Return type
+
+[**ConsumerLagData**](ConsumerLagData.md)
+
+### Authorization
+
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -293,12 +373,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -366,12 +446,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -439,12 +519,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

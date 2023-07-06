@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,7 +36,7 @@ import (
 
 // InlineResponse200 struct for InlineResponse200
 type InlineResponse200 struct {
-	Data []AclData `json:"data"`
+	Data []AclData `json:"data,omitempty"`
 }
 
 // NewInlineResponse200 instantiates a new InlineResponse200 object
@@ -120,7 +121,11 @@ func (o InlineResponse200) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableInlineResponse200 struct {
@@ -151,7 +156,11 @@ func NewNullableInlineResponse200(val *InlineResponse200) *NullableInlineRespons
 }
 
 func (v NullableInlineResponse200) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableInlineResponse200) UnmarshalJSON(src []byte) error {

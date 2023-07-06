@@ -14,11 +14,11 @@ import (
 
 // ACLV3Api is a mock of ACLV3Api interface
 type ACLV3Api struct {
-	lockBatchCreateKafkaV3Acls sync.Mutex
-	BatchCreateKafkaV3AclsFunc func(ctx context.Context, clusterId string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiBatchCreateKafkaV3AclsRequest
+	lockBatchCreateKafkaAcls sync.Mutex
+	BatchCreateKafkaAclsFunc func(ctx context.Context, clusterId string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiBatchCreateKafkaAclsRequest
 
-	lockBatchCreateKafkaV3AclsExecute sync.Mutex
-	BatchCreateKafkaV3AclsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiBatchCreateKafkaV3AclsRequest) (*net_http.Response, error)
+	lockBatchCreateKafkaAclsExecute sync.Mutex
+	BatchCreateKafkaAclsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiBatchCreateKafkaAclsRequest) (*net_http.Response, error)
 
 	lockCreateKafkaAcls sync.Mutex
 	CreateKafkaAclsFunc func(ctx context.Context, clusterId string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiCreateKafkaAclsRequest
@@ -39,12 +39,12 @@ type ACLV3Api struct {
 	GetKafkaAclsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaAclsRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.AclDataList, *net_http.Response, error)
 
 	calls struct {
-		BatchCreateKafkaV3Acls []struct {
+		BatchCreateKafkaAcls []struct {
 			Ctx       context.Context
 			ClusterId string
 		}
-		BatchCreateKafkaV3AclsExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiBatchCreateKafkaV3AclsRequest
+		BatchCreateKafkaAclsExecute []struct {
+			R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiBatchCreateKafkaAclsRequest
 		}
 		CreateKafkaAcls []struct {
 			Ctx       context.Context
@@ -70,13 +70,13 @@ type ACLV3Api struct {
 	}
 }
 
-// BatchCreateKafkaV3Acls mocks base method by wrapping the associated func.
-func (m *ACLV3Api) BatchCreateKafkaV3Acls(ctx context.Context, clusterId string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiBatchCreateKafkaV3AclsRequest {
-	m.lockBatchCreateKafkaV3Acls.Lock()
-	defer m.lockBatchCreateKafkaV3Acls.Unlock()
+// BatchCreateKafkaAcls mocks base method by wrapping the associated func.
+func (m *ACLV3Api) BatchCreateKafkaAcls(ctx context.Context, clusterId string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiBatchCreateKafkaAclsRequest {
+	m.lockBatchCreateKafkaAcls.Lock()
+	defer m.lockBatchCreateKafkaAcls.Unlock()
 
-	if m.BatchCreateKafkaV3AclsFunc == nil {
-		panic("mocker: ACLV3Api.BatchCreateKafkaV3AclsFunc is nil but ACLV3Api.BatchCreateKafkaV3Acls was called.")
+	if m.BatchCreateKafkaAclsFunc == nil {
+		panic("mocker: ACLV3Api.BatchCreateKafkaAclsFunc is nil but ACLV3Api.BatchCreateKafkaAcls was called.")
 	}
 
 	call := struct {
@@ -87,66 +87,66 @@ func (m *ACLV3Api) BatchCreateKafkaV3Acls(ctx context.Context, clusterId string)
 		ClusterId: clusterId,
 	}
 
-	m.calls.BatchCreateKafkaV3Acls = append(m.calls.BatchCreateKafkaV3Acls, call)
+	m.calls.BatchCreateKafkaAcls = append(m.calls.BatchCreateKafkaAcls, call)
 
-	return m.BatchCreateKafkaV3AclsFunc(ctx, clusterId)
+	return m.BatchCreateKafkaAclsFunc(ctx, clusterId)
 }
 
-// BatchCreateKafkaV3AclsCalled returns true if BatchCreateKafkaV3Acls was called at least once.
-func (m *ACLV3Api) BatchCreateKafkaV3AclsCalled() bool {
-	m.lockBatchCreateKafkaV3Acls.Lock()
-	defer m.lockBatchCreateKafkaV3Acls.Unlock()
+// BatchCreateKafkaAclsCalled returns true if BatchCreateKafkaAcls was called at least once.
+func (m *ACLV3Api) BatchCreateKafkaAclsCalled() bool {
+	m.lockBatchCreateKafkaAcls.Lock()
+	defer m.lockBatchCreateKafkaAcls.Unlock()
 
-	return len(m.calls.BatchCreateKafkaV3Acls) > 0
+	return len(m.calls.BatchCreateKafkaAcls) > 0
 }
 
-// BatchCreateKafkaV3AclsCalls returns the calls made to BatchCreateKafkaV3Acls.
-func (m *ACLV3Api) BatchCreateKafkaV3AclsCalls() []struct {
+// BatchCreateKafkaAclsCalls returns the calls made to BatchCreateKafkaAcls.
+func (m *ACLV3Api) BatchCreateKafkaAclsCalls() []struct {
 	Ctx       context.Context
 	ClusterId string
 } {
-	m.lockBatchCreateKafkaV3Acls.Lock()
-	defer m.lockBatchCreateKafkaV3Acls.Unlock()
+	m.lockBatchCreateKafkaAcls.Lock()
+	defer m.lockBatchCreateKafkaAcls.Unlock()
 
-	return m.calls.BatchCreateKafkaV3Acls
+	return m.calls.BatchCreateKafkaAcls
 }
 
-// BatchCreateKafkaV3AclsExecute mocks base method by wrapping the associated func.
-func (m *ACLV3Api) BatchCreateKafkaV3AclsExecute(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiBatchCreateKafkaV3AclsRequest) (*net_http.Response, error) {
-	m.lockBatchCreateKafkaV3AclsExecute.Lock()
-	defer m.lockBatchCreateKafkaV3AclsExecute.Unlock()
+// BatchCreateKafkaAclsExecute mocks base method by wrapping the associated func.
+func (m *ACLV3Api) BatchCreateKafkaAclsExecute(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiBatchCreateKafkaAclsRequest) (*net_http.Response, error) {
+	m.lockBatchCreateKafkaAclsExecute.Lock()
+	defer m.lockBatchCreateKafkaAclsExecute.Unlock()
 
-	if m.BatchCreateKafkaV3AclsExecuteFunc == nil {
-		panic("mocker: ACLV3Api.BatchCreateKafkaV3AclsExecuteFunc is nil but ACLV3Api.BatchCreateKafkaV3AclsExecute was called.")
+	if m.BatchCreateKafkaAclsExecuteFunc == nil {
+		panic("mocker: ACLV3Api.BatchCreateKafkaAclsExecuteFunc is nil but ACLV3Api.BatchCreateKafkaAclsExecute was called.")
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiBatchCreateKafkaV3AclsRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiBatchCreateKafkaAclsRequest
 	}{
 		R: r,
 	}
 
-	m.calls.BatchCreateKafkaV3AclsExecute = append(m.calls.BatchCreateKafkaV3AclsExecute, call)
+	m.calls.BatchCreateKafkaAclsExecute = append(m.calls.BatchCreateKafkaAclsExecute, call)
 
-	return m.BatchCreateKafkaV3AclsExecuteFunc(r)
+	return m.BatchCreateKafkaAclsExecuteFunc(r)
 }
 
-// BatchCreateKafkaV3AclsExecuteCalled returns true if BatchCreateKafkaV3AclsExecute was called at least once.
-func (m *ACLV3Api) BatchCreateKafkaV3AclsExecuteCalled() bool {
-	m.lockBatchCreateKafkaV3AclsExecute.Lock()
-	defer m.lockBatchCreateKafkaV3AclsExecute.Unlock()
+// BatchCreateKafkaAclsExecuteCalled returns true if BatchCreateKafkaAclsExecute was called at least once.
+func (m *ACLV3Api) BatchCreateKafkaAclsExecuteCalled() bool {
+	m.lockBatchCreateKafkaAclsExecute.Lock()
+	defer m.lockBatchCreateKafkaAclsExecute.Unlock()
 
-	return len(m.calls.BatchCreateKafkaV3AclsExecute) > 0
+	return len(m.calls.BatchCreateKafkaAclsExecute) > 0
 }
 
-// BatchCreateKafkaV3AclsExecuteCalls returns the calls made to BatchCreateKafkaV3AclsExecute.
-func (m *ACLV3Api) BatchCreateKafkaV3AclsExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiBatchCreateKafkaV3AclsRequest
+// BatchCreateKafkaAclsExecuteCalls returns the calls made to BatchCreateKafkaAclsExecute.
+func (m *ACLV3Api) BatchCreateKafkaAclsExecuteCalls() []struct {
+	R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiBatchCreateKafkaAclsRequest
 } {
-	m.lockBatchCreateKafkaV3AclsExecute.Lock()
-	defer m.lockBatchCreateKafkaV3AclsExecute.Unlock()
+	m.lockBatchCreateKafkaAclsExecute.Lock()
+	defer m.lockBatchCreateKafkaAclsExecute.Unlock()
 
-	return m.calls.BatchCreateKafkaV3AclsExecute
+	return m.calls.BatchCreateKafkaAclsExecute
 }
 
 // CreateKafkaAcls mocks base method by wrapping the associated func.
@@ -388,12 +388,12 @@ func (m *ACLV3Api) GetKafkaAclsExecuteCalls() []struct {
 
 // Reset resets the calls made to the mocked methods.
 func (m *ACLV3Api) Reset() {
-	m.lockBatchCreateKafkaV3Acls.Lock()
-	m.calls.BatchCreateKafkaV3Acls = nil
-	m.lockBatchCreateKafkaV3Acls.Unlock()
-	m.lockBatchCreateKafkaV3AclsExecute.Lock()
-	m.calls.BatchCreateKafkaV3AclsExecute = nil
-	m.lockBatchCreateKafkaV3AclsExecute.Unlock()
+	m.lockBatchCreateKafkaAcls.Lock()
+	m.calls.BatchCreateKafkaAcls = nil
+	m.lockBatchCreateKafkaAcls.Unlock()
+	m.lockBatchCreateKafkaAclsExecute.Lock()
+	m.calls.BatchCreateKafkaAclsExecute = nil
+	m.lockBatchCreateKafkaAclsExecute.Unlock()
 	m.lockCreateKafkaAcls.Lock()
 	m.calls.CreateKafkaAcls = nil
 	m.lockCreateKafkaAcls.Unlock()

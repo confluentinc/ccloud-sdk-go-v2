@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,7 +36,7 @@ import (
 
 // BrokerReplicaExclusionBatchRequestData struct for BrokerReplicaExclusionBatchRequestData
 type BrokerReplicaExclusionBatchRequestData struct {
-	Data []BrokerReplicaExclusionRequestData `json:"data"`
+	Data []BrokerReplicaExclusionRequestData `json:"data,omitempty"`
 }
 
 // NewBrokerReplicaExclusionBatchRequestData instantiates a new BrokerReplicaExclusionBatchRequestData object
@@ -120,7 +121,11 @@ func (o BrokerReplicaExclusionBatchRequestData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableBrokerReplicaExclusionBatchRequestData struct {
@@ -151,7 +156,11 @@ func NewNullableBrokerReplicaExclusionBatchRequestData(val *BrokerReplicaExclusi
 }
 
 func (v NullableBrokerReplicaExclusionBatchRequestData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableBrokerReplicaExclusionBatchRequestData) UnmarshalJSON(src []byte) error {

@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,8 +36,8 @@ import (
 
 // ProduceResponseData struct for ProduceResponseData
 type ProduceResponseData struct {
-	Size int32  `json:"size"`
-	Type string `json:"type"`
+	Size int32  `json:"size,omitempty"`
+	Type string `json:"type,omitempty"`
 }
 
 // NewProduceResponseData instantiates a new ProduceResponseData object
@@ -150,7 +151,11 @@ func (o ProduceResponseData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["type"] = o.Type
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableProduceResponseData struct {
@@ -181,7 +186,11 @@ func NewNullableProduceResponseData(val *ProduceResponseData) *NullableProduceRe
 }
 
 func (v NullableProduceResponseData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableProduceResponseData) UnmarshalJSON(src []byte) error {

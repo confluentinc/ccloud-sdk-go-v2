@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,15 +36,15 @@ import (
 
 // ConsumerAssignmentData struct for ConsumerAssignmentData
 type ConsumerAssignmentData struct {
-	Kind            string           `json:"kind"`
-	Metadata        ResourceMetadata `json:"metadata"`
-	ClusterId       string           `json:"cluster_id"`
-	ConsumerGroupId string           `json:"consumer_group_id"`
-	ConsumerId      string           `json:"consumer_id"`
-	TopicName       string           `json:"topic_name"`
-	PartitionId     int32            `json:"partition_id"`
-	Partition       Relationship     `json:"partition"`
-	Lag             Relationship     `json:"lag"`
+	Kind            string           `json:"kind,omitempty"`
+	Metadata        ResourceMetadata `json:"metadata,omitempty"`
+	ClusterId       string           `json:"cluster_id,omitempty"`
+	ConsumerGroupId string           `json:"consumer_group_id,omitempty"`
+	ConsumerId      string           `json:"consumer_id,omitempty"`
+	TopicName       string           `json:"topic_name,omitempty"`
+	PartitionId     int32            `json:"partition_id,omitempty"`
+	Partition       Relationship     `json:"partition,omitempty"`
+	Lag             Relationship     `json:"lag,omitempty"`
 }
 
 // NewConsumerAssignmentData instantiates a new ConsumerAssignmentData object
@@ -360,7 +361,11 @@ func (o ConsumerAssignmentData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["lag"] = o.Lag
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableConsumerAssignmentData struct {
@@ -391,7 +396,11 @@ func NewNullableConsumerAssignmentData(val *ConsumerAssignmentData) *NullableCon
 }
 
 func (v NullableConsumerAssignmentData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableConsumerAssignmentData) UnmarshalJSON(src []byte) error {

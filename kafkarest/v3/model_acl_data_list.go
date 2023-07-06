@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,9 +36,9 @@ import (
 
 // AclDataList struct for AclDataList
 type AclDataList struct {
-	Kind     string                     `json:"kind"`
-	Metadata ResourceCollectionMetadata `json:"metadata"`
-	Data     []AclData                  `json:"data"`
+	Kind     string                     `json:"kind,omitempty"`
+	Metadata ResourceCollectionMetadata `json:"metadata,omitempty"`
+	Data     []AclData                  `json:"data,omitempty"`
 }
 
 // NewAclDataList instantiates a new AclDataList object
@@ -180,7 +181,11 @@ func (o AclDataList) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableAclDataList struct {
@@ -211,7 +216,11 @@ func NewNullableAclDataList(val *AclDataList) *NullableAclDataList {
 }
 
 func (v NullableAclDataList) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableAclDataList) UnmarshalJSON(src []byte) error {

@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,9 +36,9 @@ import (
 
 // MirrorLag struct for MirrorLag
 type MirrorLag struct {
-	Partition             int32 `json:"partition"`
-	Lag                   int64 `json:"lag"`
-	LastSourceFetchOffset int64 `json:"last_source_fetch_offset"`
+	Partition             int32 `json:"partition,omitempty"`
+	Lag                   int64 `json:"lag,omitempty"`
+	LastSourceFetchOffset int64 `json:"last_source_fetch_offset,omitempty"`
 }
 
 // NewMirrorLag instantiates a new MirrorLag object
@@ -180,7 +181,11 @@ func (o MirrorLag) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["last_source_fetch_offset"] = o.LastSourceFetchOffset
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableMirrorLag struct {
@@ -211,7 +216,11 @@ func NewNullableMirrorLag(val *MirrorLag) *NullableMirrorLag {
 }
 
 func (v NullableMirrorLag) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableMirrorLag) UnmarshalJSON(src []byte) error {

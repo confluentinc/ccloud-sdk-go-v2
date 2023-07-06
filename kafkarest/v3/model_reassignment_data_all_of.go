@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,12 +36,12 @@ import (
 
 // ReassignmentDataAllOf struct for ReassignmentDataAllOf
 type ReassignmentDataAllOf struct {
-	ClusterId        string       `json:"cluster_id"`
-	TopicName        string       `json:"topic_name"`
-	PartitionId      int32        `json:"partition_id"`
-	AddingReplicas   []int32      `json:"adding_replicas"`
-	RemovingReplicas []int32      `json:"removing_replicas"`
-	Replicas         Relationship `json:"replicas"`
+	ClusterId        string       `json:"cluster_id,omitempty"`
+	TopicName        string       `json:"topic_name,omitempty"`
+	PartitionId      int32        `json:"partition_id,omitempty"`
+	AddingReplicas   []int32      `json:"adding_replicas,omitempty"`
+	RemovingReplicas []int32      `json:"removing_replicas,omitempty"`
+	Replicas         Relationship `json:"replicas,omitempty"`
 }
 
 // NewReassignmentDataAllOf instantiates a new ReassignmentDataAllOf object
@@ -270,7 +271,11 @@ func (o ReassignmentDataAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["replicas"] = o.Replicas
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableReassignmentDataAllOf struct {
@@ -301,7 +306,11 @@ func NewNullableReassignmentDataAllOf(val *ReassignmentDataAllOf) *NullableReass
 }
 
 func (v NullableReassignmentDataAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableReassignmentDataAllOf) UnmarshalJSON(src []byte) error {

@@ -34,59 +34,33 @@ import (
 	"reflect"
 )
 
-// RemoveBrokerTaskDataListAllOf struct for RemoveBrokerTaskDataListAllOf
-type RemoveBrokerTaskDataListAllOf struct {
-	Data []RemoveBrokerTaskData `json:"data,omitempty"`
+// AuthorizedOperations struct for AuthorizedOperations
+type AuthorizedOperations struct {
+	Items []string
 }
 
-// NewRemoveBrokerTaskDataListAllOf instantiates a new RemoveBrokerTaskDataListAllOf object
+// NewAuthorizedOperations instantiates a new AuthorizedOperations object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRemoveBrokerTaskDataListAllOf(data []RemoveBrokerTaskData) *RemoveBrokerTaskDataListAllOf {
-	this := RemoveBrokerTaskDataListAllOf{}
-	this.Data = data
+func NewAuthorizedOperations() *AuthorizedOperations {
+	this := AuthorizedOperations{}
 	return &this
 }
 
-// NewRemoveBrokerTaskDataListAllOfWithDefaults instantiates a new RemoveBrokerTaskDataListAllOf object
+// NewAuthorizedOperationsWithDefaults instantiates a new AuthorizedOperations object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewRemoveBrokerTaskDataListAllOfWithDefaults() *RemoveBrokerTaskDataListAllOf {
-	this := RemoveBrokerTaskDataListAllOf{}
+func NewAuthorizedOperationsWithDefaults() *AuthorizedOperations {
+	this := AuthorizedOperations{}
 	return &this
-}
-
-// GetData returns the Data field value
-func (o *RemoveBrokerTaskDataListAllOf) GetData() []RemoveBrokerTaskData {
-	if o == nil {
-		var ret []RemoveBrokerTaskData
-		return ret
-	}
-
-	return o.Data
-}
-
-// GetDataOk returns a tuple with the Data field value
-// and a boolean to check if the value has been set.
-func (o *RemoveBrokerTaskDataListAllOf) GetDataOk() (*[]RemoveBrokerTaskData, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Data, true
-}
-
-// SetData sets field value
-func (o *RemoveBrokerTaskDataListAllOf) SetData(v []RemoveBrokerTaskData) {
-	o.Data = v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *RemoveBrokerTaskDataListAllOf) Redact() {
-	o.recurseRedact(&o.Data)
+func (o *AuthorizedOperations) Redact() {
 }
 
-func (o *RemoveBrokerTaskDataListAllOf) recurseRedact(v interface{}) {
+func (o *AuthorizedOperations) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -111,15 +85,15 @@ func (o *RemoveBrokerTaskDataListAllOf) recurseRedact(v interface{}) {
 	}
 }
 
-func (o RemoveBrokerTaskDataListAllOf) zeroField(v interface{}) {
+func (o AuthorizedOperations) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o RemoveBrokerTaskDataListAllOf) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["data"] = o.Data
+func (o AuthorizedOperations) MarshalJSON() ([]byte, error) {
+	toSerialize := make([]interface{}, len(o.Items))
+	for i, item := range o.Items {
+		toSerialize[i] = item
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
@@ -128,34 +102,38 @@ func (o RemoveBrokerTaskDataListAllOf) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableRemoveBrokerTaskDataListAllOf struct {
-	value *RemoveBrokerTaskDataListAllOf
+func (o *AuthorizedOperations) UnmarshalJSON(bytes []byte) (err error) {
+	return json.Unmarshal(bytes, &o.Items)
+}
+
+type NullableAuthorizedOperations struct {
+	value *AuthorizedOperations
 	isSet bool
 }
 
-func (v NullableRemoveBrokerTaskDataListAllOf) Get() *RemoveBrokerTaskDataListAllOf {
+func (v NullableAuthorizedOperations) Get() *AuthorizedOperations {
 	return v.value
 }
 
-func (v *NullableRemoveBrokerTaskDataListAllOf) Set(val *RemoveBrokerTaskDataListAllOf) {
+func (v *NullableAuthorizedOperations) Set(val *AuthorizedOperations) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableRemoveBrokerTaskDataListAllOf) IsSet() bool {
+func (v NullableAuthorizedOperations) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableRemoveBrokerTaskDataListAllOf) Unset() {
+func (v *NullableAuthorizedOperations) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableRemoveBrokerTaskDataListAllOf(val *RemoveBrokerTaskDataListAllOf) *NullableRemoveBrokerTaskDataListAllOf {
-	return &NullableRemoveBrokerTaskDataListAllOf{value: val, isSet: true}
+func NewNullableAuthorizedOperations(val *AuthorizedOperations) *NullableAuthorizedOperations {
+	return &NullableAuthorizedOperations{value: val, isSet: true}
 }
 
-func (v NullableRemoveBrokerTaskDataListAllOf) MarshalJSON() ([]byte, error) {
+func (v NullableAuthorizedOperations) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -163,7 +141,7 @@ func (v NullableRemoveBrokerTaskDataListAllOf) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableRemoveBrokerTaskDataListAllOf) UnmarshalJSON(src []byte) error {
+func (v *NullableAuthorizedOperations) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

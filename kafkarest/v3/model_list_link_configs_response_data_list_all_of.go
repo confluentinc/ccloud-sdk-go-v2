@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,7 +36,7 @@ import (
 
 // ListLinkConfigsResponseDataListAllOf struct for ListLinkConfigsResponseDataListAllOf
 type ListLinkConfigsResponseDataListAllOf struct {
-	Data []ListLinkConfigsResponseData `json:"data"`
+	Data []ListLinkConfigsResponseData `json:"data,omitempty"`
 }
 
 // NewListLinkConfigsResponseDataListAllOf instantiates a new ListLinkConfigsResponseDataListAllOf object
@@ -120,7 +121,11 @@ func (o ListLinkConfigsResponseDataListAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableListLinkConfigsResponseDataListAllOf struct {
@@ -151,7 +156,11 @@ func NewNullableListLinkConfigsResponseDataListAllOf(val *ListLinkConfigsRespons
 }
 
 func (v NullableListLinkConfigsResponseDataListAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableListLinkConfigsResponseDataListAllOf) UnmarshalJSON(src []byte) error {

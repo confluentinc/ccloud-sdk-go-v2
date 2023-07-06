@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,9 +36,9 @@ import (
 
 // ListMirrorTopicsResponseDataList struct for ListMirrorTopicsResponseDataList
 type ListMirrorTopicsResponseDataList struct {
-	Kind     string                         `json:"kind"`
-	Metadata ResourceCollectionMetadata     `json:"metadata"`
-	Data     []ListMirrorTopicsResponseData `json:"data"`
+	Kind     string                         `json:"kind,omitempty"`
+	Metadata ResourceCollectionMetadata     `json:"metadata,omitempty"`
+	Data     []ListMirrorTopicsResponseData `json:"data,omitempty"`
 }
 
 // NewListMirrorTopicsResponseDataList instantiates a new ListMirrorTopicsResponseDataList object
@@ -180,7 +181,11 @@ func (o ListMirrorTopicsResponseDataList) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableListMirrorTopicsResponseDataList struct {
@@ -211,7 +216,11 @@ func NewNullableListMirrorTopicsResponseDataList(val *ListMirrorTopicsResponseDa
 }
 
 func (v NullableListMirrorTopicsResponseDataList) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableListMirrorTopicsResponseDataList) UnmarshalJSON(src []byte) error {

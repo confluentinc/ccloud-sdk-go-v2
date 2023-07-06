@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,16 +36,16 @@ import (
 
 // AclData struct for AclData
 type AclData struct {
-	Kind         string           `json:"kind"`
-	Metadata     ResourceMetadata `json:"metadata"`
-	ClusterId    string           `json:"cluster_id"`
-	ResourceType AclResourceType  `json:"resource_type"`
-	ResourceName string           `json:"resource_name"`
-	PatternType  string           `json:"pattern_type"`
-	Principal    string           `json:"principal"`
-	Host         string           `json:"host"`
-	Operation    string           `json:"operation"`
-	Permission   string           `json:"permission"`
+	Kind         string           `json:"kind,omitempty"`
+	Metadata     ResourceMetadata `json:"metadata,omitempty"`
+	ClusterId    string           `json:"cluster_id,omitempty"`
+	ResourceType AclResourceType  `json:"resource_type,omitempty"`
+	ResourceName string           `json:"resource_name,omitempty"`
+	PatternType  string           `json:"pattern_type,omitempty"`
+	Principal    string           `json:"principal,omitempty"`
+	Host         string           `json:"host,omitempty"`
+	Operation    string           `json:"operation,omitempty"`
+	Permission   string           `json:"permission,omitempty"`
 }
 
 // NewAclData instantiates a new AclData object
@@ -390,7 +391,11 @@ func (o AclData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["permission"] = o.Permission
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableAclData struct {
@@ -421,7 +426,11 @@ func NewNullableAclData(val *AclData) *NullableAclData {
 }
 
 func (v NullableAclData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableAclData) UnmarshalJSON(src []byte) error {

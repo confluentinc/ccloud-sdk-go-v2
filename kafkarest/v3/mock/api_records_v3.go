@@ -14,31 +14,31 @@ import (
 
 // RecordsV3Api is a mock of RecordsV3Api interface
 type RecordsV3Api struct {
-	lockProduceRecords sync.Mutex
-	ProduceRecordsFunc func(ctx context.Context, clusterId, topicName string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiProduceRecordsRequest
+	lockProduceRecord sync.Mutex
+	ProduceRecordFunc func(ctx context.Context, clusterId, topicName string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiProduceRecordRequest
 
-	lockProduceRecordsExecute sync.Mutex
-	ProduceRecordsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiProduceRecordsRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ProduceResponse, *net_http.Response, error)
+	lockProduceRecordExecute sync.Mutex
+	ProduceRecordExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiProduceRecordRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ProduceResponse, *net_http.Response, error)
 
 	calls struct {
-		ProduceRecords []struct {
+		ProduceRecord []struct {
 			Ctx       context.Context
 			ClusterId string
 			TopicName string
 		}
-		ProduceRecordsExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiProduceRecordsRequest
+		ProduceRecordExecute []struct {
+			R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiProduceRecordRequest
 		}
 	}
 }
 
-// ProduceRecords mocks base method by wrapping the associated func.
-func (m *RecordsV3Api) ProduceRecords(ctx context.Context, clusterId, topicName string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiProduceRecordsRequest {
-	m.lockProduceRecords.Lock()
-	defer m.lockProduceRecords.Unlock()
+// ProduceRecord mocks base method by wrapping the associated func.
+func (m *RecordsV3Api) ProduceRecord(ctx context.Context, clusterId, topicName string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiProduceRecordRequest {
+	m.lockProduceRecord.Lock()
+	defer m.lockProduceRecord.Unlock()
 
-	if m.ProduceRecordsFunc == nil {
-		panic("mocker: RecordsV3Api.ProduceRecordsFunc is nil but RecordsV3Api.ProduceRecords was called.")
+	if m.ProduceRecordFunc == nil {
+		panic("mocker: RecordsV3Api.ProduceRecordFunc is nil but RecordsV3Api.ProduceRecord was called.")
 	}
 
 	call := struct {
@@ -51,75 +51,75 @@ func (m *RecordsV3Api) ProduceRecords(ctx context.Context, clusterId, topicName 
 		TopicName: topicName,
 	}
 
-	m.calls.ProduceRecords = append(m.calls.ProduceRecords, call)
+	m.calls.ProduceRecord = append(m.calls.ProduceRecord, call)
 
-	return m.ProduceRecordsFunc(ctx, clusterId, topicName)
+	return m.ProduceRecordFunc(ctx, clusterId, topicName)
 }
 
-// ProduceRecordsCalled returns true if ProduceRecords was called at least once.
-func (m *RecordsV3Api) ProduceRecordsCalled() bool {
-	m.lockProduceRecords.Lock()
-	defer m.lockProduceRecords.Unlock()
+// ProduceRecordCalled returns true if ProduceRecord was called at least once.
+func (m *RecordsV3Api) ProduceRecordCalled() bool {
+	m.lockProduceRecord.Lock()
+	defer m.lockProduceRecord.Unlock()
 
-	return len(m.calls.ProduceRecords) > 0
+	return len(m.calls.ProduceRecord) > 0
 }
 
-// ProduceRecordsCalls returns the calls made to ProduceRecords.
-func (m *RecordsV3Api) ProduceRecordsCalls() []struct {
+// ProduceRecordCalls returns the calls made to ProduceRecord.
+func (m *RecordsV3Api) ProduceRecordCalls() []struct {
 	Ctx       context.Context
 	ClusterId string
 	TopicName string
 } {
-	m.lockProduceRecords.Lock()
-	defer m.lockProduceRecords.Unlock()
+	m.lockProduceRecord.Lock()
+	defer m.lockProduceRecord.Unlock()
 
-	return m.calls.ProduceRecords
+	return m.calls.ProduceRecord
 }
 
-// ProduceRecordsExecute mocks base method by wrapping the associated func.
-func (m *RecordsV3Api) ProduceRecordsExecute(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiProduceRecordsRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ProduceResponse, *net_http.Response, error) {
-	m.lockProduceRecordsExecute.Lock()
-	defer m.lockProduceRecordsExecute.Unlock()
+// ProduceRecordExecute mocks base method by wrapping the associated func.
+func (m *RecordsV3Api) ProduceRecordExecute(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiProduceRecordRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ProduceResponse, *net_http.Response, error) {
+	m.lockProduceRecordExecute.Lock()
+	defer m.lockProduceRecordExecute.Unlock()
 
-	if m.ProduceRecordsExecuteFunc == nil {
-		panic("mocker: RecordsV3Api.ProduceRecordsExecuteFunc is nil but RecordsV3Api.ProduceRecordsExecute was called.")
+	if m.ProduceRecordExecuteFunc == nil {
+		panic("mocker: RecordsV3Api.ProduceRecordExecuteFunc is nil but RecordsV3Api.ProduceRecordExecute was called.")
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiProduceRecordsRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiProduceRecordRequest
 	}{
 		R: r,
 	}
 
-	m.calls.ProduceRecordsExecute = append(m.calls.ProduceRecordsExecute, call)
+	m.calls.ProduceRecordExecute = append(m.calls.ProduceRecordExecute, call)
 
-	return m.ProduceRecordsExecuteFunc(r)
+	return m.ProduceRecordExecuteFunc(r)
 }
 
-// ProduceRecordsExecuteCalled returns true if ProduceRecordsExecute was called at least once.
-func (m *RecordsV3Api) ProduceRecordsExecuteCalled() bool {
-	m.lockProduceRecordsExecute.Lock()
-	defer m.lockProduceRecordsExecute.Unlock()
+// ProduceRecordExecuteCalled returns true if ProduceRecordExecute was called at least once.
+func (m *RecordsV3Api) ProduceRecordExecuteCalled() bool {
+	m.lockProduceRecordExecute.Lock()
+	defer m.lockProduceRecordExecute.Unlock()
 
-	return len(m.calls.ProduceRecordsExecute) > 0
+	return len(m.calls.ProduceRecordExecute) > 0
 }
 
-// ProduceRecordsExecuteCalls returns the calls made to ProduceRecordsExecute.
-func (m *RecordsV3Api) ProduceRecordsExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiProduceRecordsRequest
+// ProduceRecordExecuteCalls returns the calls made to ProduceRecordExecute.
+func (m *RecordsV3Api) ProduceRecordExecuteCalls() []struct {
+	R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiProduceRecordRequest
 } {
-	m.lockProduceRecordsExecute.Lock()
-	defer m.lockProduceRecordsExecute.Unlock()
+	m.lockProduceRecordExecute.Lock()
+	defer m.lockProduceRecordExecute.Unlock()
 
-	return m.calls.ProduceRecordsExecute
+	return m.calls.ProduceRecordExecute
 }
 
 // Reset resets the calls made to the mocked methods.
 func (m *RecordsV3Api) Reset() {
-	m.lockProduceRecords.Lock()
-	m.calls.ProduceRecords = nil
-	m.lockProduceRecords.Unlock()
-	m.lockProduceRecordsExecute.Lock()
-	m.calls.ProduceRecordsExecute = nil
-	m.lockProduceRecordsExecute.Unlock()
+	m.lockProduceRecord.Lock()
+	m.calls.ProduceRecord = nil
+	m.lockProduceRecord.Unlock()
+	m.lockProduceRecordExecute.Lock()
+	m.calls.ProduceRecordExecute = nil
+	m.lockProduceRecordExecute.Unlock()
 }

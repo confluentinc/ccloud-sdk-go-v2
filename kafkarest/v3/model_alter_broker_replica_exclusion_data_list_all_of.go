@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,7 +36,7 @@ import (
 
 // AlterBrokerReplicaExclusionDataListAllOf struct for AlterBrokerReplicaExclusionDataListAllOf
 type AlterBrokerReplicaExclusionDataListAllOf struct {
-	Data []AlterBrokerReplicaExclusionData `json:"data"`
+	Data []AlterBrokerReplicaExclusionData `json:"data,omitempty"`
 }
 
 // NewAlterBrokerReplicaExclusionDataListAllOf instantiates a new AlterBrokerReplicaExclusionDataListAllOf object
@@ -120,7 +121,11 @@ func (o AlterBrokerReplicaExclusionDataListAllOf) MarshalJSON() ([]byte, error) 
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableAlterBrokerReplicaExclusionDataListAllOf struct {
@@ -151,7 +156,11 @@ func NewNullableAlterBrokerReplicaExclusionDataListAllOf(val *AlterBrokerReplica
 }
 
 func (v NullableAlterBrokerReplicaExclusionDataListAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableAlterBrokerReplicaExclusionDataListAllOf) UnmarshalJSON(src []byte) error {

@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -94,7 +95,11 @@ func (o MirrorLags) MarshalJSON() ([]byte, error) {
 	for i, item := range o.Items {
 		toSerialize[i] = item
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 func (o *MirrorLags) UnmarshalJSON(bytes []byte) (err error) {
@@ -129,7 +134,11 @@ func NewNullableMirrorLags(val *MirrorLags) *NullableMirrorLags {
 }
 
 func (v NullableMirrorLags) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableMirrorLags) UnmarshalJSON(src []byte) error {

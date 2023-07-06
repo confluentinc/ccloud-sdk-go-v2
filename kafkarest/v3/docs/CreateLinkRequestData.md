@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **SourceClusterId** | Pointer to **string** |  | [optional] 
 **DestinationClusterId** | Pointer to **string** |  | [optional] 
+**RemoteClusterId** | Pointer to **string** | The expected remote cluster ID. | [optional] 
+**ClusterLinkId** | Pointer to **string** | The expected cluster link ID. Can be provided when creating the second side of a bidirectional link for validating the link ID is as expected. If it&#39;s not provided, it&#39;s inferred from the remote cluster. | [optional] 
 **Configs** | Pointer to [**[]ConfigData**](ConfigData.md) |  | [optional] 
 
 ## Methods
@@ -76,6 +78,56 @@ SetDestinationClusterId sets DestinationClusterId field to given value.
 `func (o *CreateLinkRequestData) HasDestinationClusterId() bool`
 
 HasDestinationClusterId returns a boolean if a field has been set.
+
+### GetRemoteClusterId
+
+`func (o *CreateLinkRequestData) GetRemoteClusterId() string`
+
+GetRemoteClusterId returns the RemoteClusterId field if non-nil, zero value otherwise.
+
+### GetRemoteClusterIdOk
+
+`func (o *CreateLinkRequestData) GetRemoteClusterIdOk() (*string, bool)`
+
+GetRemoteClusterIdOk returns a tuple with the RemoteClusterId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRemoteClusterId
+
+`func (o *CreateLinkRequestData) SetRemoteClusterId(v string)`
+
+SetRemoteClusterId sets RemoteClusterId field to given value.
+
+### HasRemoteClusterId
+
+`func (o *CreateLinkRequestData) HasRemoteClusterId() bool`
+
+HasRemoteClusterId returns a boolean if a field has been set.
+
+### GetClusterLinkId
+
+`func (o *CreateLinkRequestData) GetClusterLinkId() string`
+
+GetClusterLinkId returns the ClusterLinkId field if non-nil, zero value otherwise.
+
+### GetClusterLinkIdOk
+
+`func (o *CreateLinkRequestData) GetClusterLinkIdOk() (*string, bool)`
+
+GetClusterLinkIdOk returns a tuple with the ClusterLinkId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterLinkId
+
+`func (o *CreateLinkRequestData) SetClusterLinkId(v string)`
+
+SetClusterLinkId sets ClusterLinkId field to given value.
+
+### HasClusterLinkId
+
+`func (o *CreateLinkRequestData) HasClusterLinkId() bool`
+
+HasClusterLinkId returns a boolean if a field has been set.
 
 ### GetConfigs
 

@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,7 +36,7 @@ import (
 
 // CreateMirrorTopicRequestData struct for CreateMirrorTopicRequestData
 type CreateMirrorTopicRequestData struct {
-	SourceTopicName   string        `json:"source_topic_name"`
+	SourceTopicName   string        `json:"source_topic_name,omitempty"`
 	MirrorTopicName   *string       `json:"mirror_topic_name,omitempty"`
 	ReplicationFactor *int32        `json:"replication_factor,omitempty"`
 	Configs           *[]ConfigData `json:"configs,omitempty"`
@@ -231,7 +232,11 @@ func (o CreateMirrorTopicRequestData) MarshalJSON() ([]byte, error) {
 	if o.Configs != nil {
 		toSerialize["configs"] = o.Configs
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableCreateMirrorTopicRequestData struct {
@@ -262,7 +267,11 @@ func NewNullableCreateMirrorTopicRequestData(val *CreateMirrorTopicRequestData) 
 }
 
 func (v NullableCreateMirrorTopicRequestData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableCreateMirrorTopicRequestData) UnmarshalJSON(src []byte) error {

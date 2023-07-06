@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,17 +36,17 @@ import (
 
 // TopicConfigData struct for TopicConfigData
 type TopicConfigData struct {
-	Kind        string              `json:"kind"`
-	Metadata    ResourceMetadata    `json:"metadata"`
-	ClusterId   string              `json:"cluster_id"`
-	Name        string              `json:"name"`
+	Kind        string              `json:"kind,omitempty"`
+	Metadata    ResourceMetadata    `json:"metadata,omitempty"`
+	ClusterId   string              `json:"cluster_id,omitempty"`
+	Name        string              `json:"name,omitempty"`
 	Value       NullableString      `json:"value,omitempty"`
-	IsDefault   bool                `json:"is_default"`
-	IsReadOnly  bool                `json:"is_read_only"`
-	IsSensitive bool                `json:"is_sensitive"`
-	Source      string              `json:"source"`
-	Synonyms    []ConfigSynonymData `json:"synonyms"`
-	TopicName   string              `json:"topic_name"`
+	IsDefault   bool                `json:"is_default,omitempty"`
+	IsReadOnly  bool                `json:"is_read_only,omitempty"`
+	IsSensitive bool                `json:"is_sensitive,omitempty"`
+	Source      string              `json:"source,omitempty"`
+	Synonyms    []ConfigSynonymData `json:"synonyms,omitempty"`
+	TopicName   string              `json:"topic_name,omitempty"`
 }
 
 // NewTopicConfigData instantiates a new TopicConfigData object
@@ -438,7 +439,11 @@ func (o TopicConfigData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["topic_name"] = o.TopicName
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableTopicConfigData struct {
@@ -469,7 +474,11 @@ func NewNullableTopicConfigData(val *TopicConfigData) *NullableTopicConfigData {
 }
 
 func (v NullableTopicConfigData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableTopicConfigData) UnmarshalJSON(src []byte) error {

@@ -42,25 +42,27 @@ var (
 type ACLV3Api interface {
 
 	/*
-		BatchCreateKafkaV3Acls Batch Create ACLs
-
-		Creates ACLs.
-
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param clusterId The Kafka cluster ID.
-		 @return ApiBatchCreateKafkaV3AclsRequest
-	*/
-	BatchCreateKafkaV3Acls(ctx _context.Context, clusterId string) ApiBatchCreateKafkaV3AclsRequest
-
-	// BatchCreateKafkaV3AclsExecute executes the request
-	BatchCreateKafkaV3AclsExecute(r ApiBatchCreateKafkaV3AclsRequest) (*_nethttp.Response, error)
-
-	/*
-		CreateKafkaAcls Create ACLs
+		BatchCreateKafkaAcls Batch Create ACLs
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Creates an ACL.
+	Create ACLs.
+
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @return ApiBatchCreateKafkaAclsRequest
+	*/
+	BatchCreateKafkaAcls(ctx _context.Context, clusterId string) ApiBatchCreateKafkaAclsRequest
+
+	// BatchCreateKafkaAclsExecute executes the request
+	BatchCreateKafkaAclsExecute(r ApiBatchCreateKafkaAclsRequest) (*_nethttp.Response, error)
+
+	/*
+		CreateKafkaAcls Create an ACL
+
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+	Create an ACL.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param clusterId The Kafka cluster ID.
@@ -76,7 +78,7 @@ type ACLV3Api interface {
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Deletes the list of ACLs that matches the search criteria.
+	Delete the ACLs that match the search criteria.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param clusterId The Kafka cluster ID.
@@ -89,11 +91,11 @@ type ACLV3Api interface {
 	DeleteKafkaAclsExecute(r ApiDeleteKafkaAclsRequest) (InlineResponse200, *_nethttp.Response, error)
 
 	/*
-		GetKafkaAcls Search ACLs
+		GetKafkaAcls List ACLs
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Returns a list of ACLs that match the search criteria.
+	Return a list of ACLs that match the search criteria.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param clusterId The Kafka cluster ID.
@@ -109,7 +111,7 @@ type ACLV3Api interface {
 // ACLV3ApiService ACLV3Api service
 type ACLV3ApiService service
 
-type ApiBatchCreateKafkaV3AclsRequest struct {
+type ApiBatchCreateKafkaAclsRequest struct {
 	ctx                      _context.Context
 	ApiService               ACLV3Api
 	clusterId                string
@@ -117,26 +119,28 @@ type ApiBatchCreateKafkaV3AclsRequest struct {
 }
 
 // The batch ACL creation request.
-func (r ApiBatchCreateKafkaV3AclsRequest) CreateAclRequestDataList(createAclRequestDataList CreateAclRequestDataList) ApiBatchCreateKafkaV3AclsRequest {
+func (r ApiBatchCreateKafkaAclsRequest) CreateAclRequestDataList(createAclRequestDataList CreateAclRequestDataList) ApiBatchCreateKafkaAclsRequest {
 	r.createAclRequestDataList = &createAclRequestDataList
 	return r
 }
 
-func (r ApiBatchCreateKafkaV3AclsRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.BatchCreateKafkaV3AclsExecute(r)
+func (r ApiBatchCreateKafkaAclsRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.BatchCreateKafkaAclsExecute(r)
 }
 
 /*
-BatchCreateKafkaV3Acls Batch Create ACLs
+BatchCreateKafkaAcls Batch Create ACLs
 
-Creates ACLs.
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Create ACLs.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
- @return ApiBatchCreateKafkaV3AclsRequest
+ @return ApiBatchCreateKafkaAclsRequest
 */
-func (a *ACLV3ApiService) BatchCreateKafkaV3Acls(ctx _context.Context, clusterId string) ApiBatchCreateKafkaV3AclsRequest {
-	return ApiBatchCreateKafkaV3AclsRequest{
+func (a *ACLV3ApiService) BatchCreateKafkaAcls(ctx _context.Context, clusterId string) ApiBatchCreateKafkaAclsRequest {
+	return ApiBatchCreateKafkaAclsRequest{
 		ApiService: a,
 		ctx:        ctx,
 		clusterId:  clusterId,
@@ -144,7 +148,7 @@ func (a *ACLV3ApiService) BatchCreateKafkaV3Acls(ctx _context.Context, clusterId
 }
 
 // Execute executes the request
-func (a *ACLV3ApiService) BatchCreateKafkaV3AclsExecute(r ApiBatchCreateKafkaV3AclsRequest) (*_nethttp.Response, error) {
+func (a *ACLV3ApiService) BatchCreateKafkaAclsExecute(r ApiBatchCreateKafkaAclsRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -153,7 +157,7 @@ func (a *ACLV3ApiService) BatchCreateKafkaV3AclsExecute(r ApiBatchCreateKafkaV3A
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ACLV3ApiService.BatchCreateKafkaV3Acls")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ACLV3ApiService.BatchCreateKafkaAcls")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -175,7 +179,7 @@ func (a *ACLV3ApiService) BatchCreateKafkaV3AclsExecute(r ApiBatchCreateKafkaV3A
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -217,6 +221,16 @@ func (a *ACLV3ApiService) BatchCreateKafkaV3AclsExecute(r ApiBatchCreateKafkaV3A
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -269,11 +283,11 @@ func (r ApiCreateKafkaAclsRequest) Execute() (*_nethttp.Response, error) {
 }
 
 /*
-CreateKafkaAcls Create ACLs
+CreateKafkaAcls Create an ACL
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Creates an ACL.
+Create an ACL.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
@@ -319,7 +333,7 @@ func (a *ACLV3ApiService) CreateKafkaAclsExecute(r ApiCreateKafkaAclsRequest) (*
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -370,6 +384,16 @@ func (a *ACLV3ApiService) CreateKafkaAclsExecute(r ApiCreateKafkaAclsRequest) (*
 			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 429 {
 			var v string
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -400,12 +424,12 @@ type ApiDeleteKafkaAclsRequest struct {
 	ApiService   ACLV3Api
 	clusterId    string
 	resourceType *AclResourceType
-	resourceName *string
 	patternType  *string
-	principal    *string
-	host         *string
 	operation    *string
 	permission   *string
+	resourceName *string
+	principal    *string
+	host         *string
 }
 
 // The ACL resource type.
@@ -414,27 +438,9 @@ func (r ApiDeleteKafkaAclsRequest) ResourceType(resourceType AclResourceType) Ap
 	return r
 }
 
-// The ACL resource name.
-func (r ApiDeleteKafkaAclsRequest) ResourceName(resourceName string) ApiDeleteKafkaAclsRequest {
-	r.resourceName = &resourceName
-	return r
-}
-
 // The ACL pattern type.
 func (r ApiDeleteKafkaAclsRequest) PatternType(patternType string) ApiDeleteKafkaAclsRequest {
 	r.patternType = &patternType
-	return r
-}
-
-// The ACL principal.
-func (r ApiDeleteKafkaAclsRequest) Principal(principal string) ApiDeleteKafkaAclsRequest {
-	r.principal = &principal
-	return r
-}
-
-// The ACL host.
-func (r ApiDeleteKafkaAclsRequest) Host(host string) ApiDeleteKafkaAclsRequest {
-	r.host = &host
 	return r
 }
 
@@ -450,6 +456,24 @@ func (r ApiDeleteKafkaAclsRequest) Permission(permission string) ApiDeleteKafkaA
 	return r
 }
 
+// The ACL resource name.
+func (r ApiDeleteKafkaAclsRequest) ResourceName(resourceName string) ApiDeleteKafkaAclsRequest {
+	r.resourceName = &resourceName
+	return r
+}
+
+// The ACL principal. This is the Service Account name or user name.
+func (r ApiDeleteKafkaAclsRequest) Principal(principal string) ApiDeleteKafkaAclsRequest {
+	r.principal = &principal
+	return r
+}
+
+// The ACL host.
+func (r ApiDeleteKafkaAclsRequest) Host(host string) ApiDeleteKafkaAclsRequest {
+	r.host = &host
+	return r
+}
+
 func (r ApiDeleteKafkaAclsRequest) Execute() (InlineResponse200, *_nethttp.Response, error) {
 	return r.ApiService.DeleteKafkaAclsExecute(r)
 }
@@ -459,7 +483,7 @@ DeleteKafkaAcls Delete ACLs
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Deletes the list of ACLs that matches the search criteria.
+Delete the ACLs that match the search criteria.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
@@ -496,28 +520,32 @@ func (a *ACLV3ApiService) DeleteKafkaAclsExecute(r ApiDeleteKafkaAclsRequest) (I
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-
-	if r.resourceType != nil {
-		localVarQueryParams.Add("resource_type", parameterToString(*r.resourceType, ""))
+	if r.resourceType == nil {
+		return localVarReturnValue, nil, reportError("resourceType is required and must be specified")
 	}
+	if r.patternType == nil {
+		return localVarReturnValue, nil, reportError("patternType is required and must be specified")
+	}
+	if r.operation == nil {
+		return localVarReturnValue, nil, reportError("operation is required and must be specified")
+	}
+	if r.permission == nil {
+		return localVarReturnValue, nil, reportError("permission is required and must be specified")
+	}
+
+	localVarQueryParams.Add("resource_type", parameterToString(*r.resourceType, ""))
 	if r.resourceName != nil {
 		localVarQueryParams.Add("resource_name", parameterToString(*r.resourceName, ""))
 	}
-	if r.patternType != nil {
-		localVarQueryParams.Add("pattern_type", parameterToString(*r.patternType, ""))
-	}
+	localVarQueryParams.Add("pattern_type", parameterToString(*r.patternType, ""))
 	if r.principal != nil {
 		localVarQueryParams.Add("principal", parameterToString(*r.principal, ""))
 	}
 	if r.host != nil {
 		localVarQueryParams.Add("host", parameterToString(*r.host, ""))
 	}
-	if r.operation != nil {
-		localVarQueryParams.Add("operation", parameterToString(*r.operation, ""))
-	}
-	if r.permission != nil {
-		localVarQueryParams.Add("permission", parameterToString(*r.permission, ""))
-	}
+	localVarQueryParams.Add("operation", parameterToString(*r.operation, ""))
+	localVarQueryParams.Add("permission", parameterToString(*r.permission, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -528,7 +556,7 @@ func (a *ACLV3ApiService) DeleteKafkaAclsExecute(r ApiDeleteKafkaAclsRequest) (I
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -568,6 +596,16 @@ func (a *ACLV3ApiService) DeleteKafkaAclsExecute(r ApiDeleteKafkaAclsRequest) (I
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -642,7 +680,7 @@ func (r ApiGetKafkaAclsRequest) PatternType(patternType string) ApiGetKafkaAclsR
 	return r
 }
 
-// The ACL principal.
+// The ACL principal. This is the Service Account name or user name.
 func (r ApiGetKafkaAclsRequest) Principal(principal string) ApiGetKafkaAclsRequest {
 	r.principal = &principal
 	return r
@@ -671,11 +709,11 @@ func (r ApiGetKafkaAclsRequest) Execute() (AclDataList, *_nethttp.Response, erro
 }
 
 /*
-GetKafkaAcls Search ACLs
+GetKafkaAcls List ACLs
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Returns a list of ACLs that match the search criteria.
+Return a list of ACLs that match the search criteria.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
@@ -744,7 +782,7 @@ func (a *ACLV3ApiService) GetKafkaAclsExecute(r ApiGetKafkaAclsRequest) (AclData
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -784,6 +822,16 @@ func (a *ACLV3ApiService) GetKafkaAclsExecute(r ApiGetKafkaAclsRequest) (AclData
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

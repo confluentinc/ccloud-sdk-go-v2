@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,13 +36,13 @@ import (
 
 // BrokerDataAllOf struct for BrokerDataAllOf
 type BrokerDataAllOf struct {
-	ClusterId         string         `json:"cluster_id"`
-	BrokerId          int32          `json:"broker_id"`
+	ClusterId         string         `json:"cluster_id,omitempty"`
+	BrokerId          int32          `json:"broker_id,omitempty"`
 	Host              NullableString `json:"host,omitempty"`
 	Port              NullableInt32  `json:"port,omitempty"`
 	Rack              NullableString `json:"rack,omitempty"`
-	Configs           Relationship   `json:"configs"`
-	PartitionReplicas Relationship   `json:"partition_replicas"`
+	Configs           Relationship   `json:"configs,omitempty"`
+	PartitionReplicas Relationship   `json:"partition_replicas,omitempty"`
 }
 
 // NewBrokerDataAllOf instantiates a new BrokerDataAllOf object
@@ -354,7 +355,11 @@ func (o BrokerDataAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["partition_replicas"] = o.PartitionReplicas
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableBrokerDataAllOf struct {
@@ -385,7 +390,11 @@ func NewNullableBrokerDataAllOf(val *BrokerDataAllOf) *NullableBrokerDataAllOf {
 }
 
 func (v NullableBrokerDataAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableBrokerDataAllOf) UnmarshalJSON(src []byte) error {

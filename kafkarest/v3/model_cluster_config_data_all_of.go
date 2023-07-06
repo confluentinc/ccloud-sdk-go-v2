@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,7 +36,7 @@ import (
 
 // ClusterConfigDataAllOf struct for ClusterConfigDataAllOf
 type ClusterConfigDataAllOf struct {
-	ConfigType string `json:"config_type"`
+	ConfigType string `json:"config_type,omitempty"`
 }
 
 // NewClusterConfigDataAllOf instantiates a new ClusterConfigDataAllOf object
@@ -120,7 +121,11 @@ func (o ClusterConfigDataAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["config_type"] = o.ConfigType
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableClusterConfigDataAllOf struct {
@@ -151,7 +156,11 @@ func NewNullableClusterConfigDataAllOf(val *ClusterConfigDataAllOf) *NullableClu
 }
 
 func (v NullableClusterConfigDataAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableClusterConfigDataAllOf) UnmarshalJSON(src []byte) error {

@@ -4,16 +4,16 @@ All URIs are relative to *https://pkc-00000.region.provider.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**BatchCreateKafkaV3Acls**](ACLV3Api.md#BatchCreateKafkaV3Acls) | **Post** /kafka/v3/clusters/{cluster_id}/acls:batch | Batch Create ACLs
-[**CreateKafkaAcls**](ACLV3Api.md#CreateKafkaAcls) | **Post** /kafka/v3/clusters/{cluster_id}/acls | Create ACLs
+[**BatchCreateKafkaAcls**](ACLV3Api.md#BatchCreateKafkaAcls) | **Post** /kafka/v3/clusters/{cluster_id}/acls:batch | Batch Create ACLs
+[**CreateKafkaAcls**](ACLV3Api.md#CreateKafkaAcls) | **Post** /kafka/v3/clusters/{cluster_id}/acls | Create an ACL
 [**DeleteKafkaAcls**](ACLV3Api.md#DeleteKafkaAcls) | **Delete** /kafka/v3/clusters/{cluster_id}/acls | Delete ACLs
-[**GetKafkaAcls**](ACLV3Api.md#GetKafkaAcls) | **Get** /kafka/v3/clusters/{cluster_id}/acls | Search ACLs
+[**GetKafkaAcls**](ACLV3Api.md#GetKafkaAcls) | **Get** /kafka/v3/clusters/{cluster_id}/acls | List ACLs
 
 
 
-## BatchCreateKafkaV3Acls
+## BatchCreateKafkaAcls
 
-> BatchCreateKafkaV3Acls(ctx, clusterId).CreateAclRequestDataList(createAclRequestDataList).Execute()
+> BatchCreateKafkaAcls(ctx, clusterId).CreateAclRequestDataList(createAclRequestDataList).Execute()
 
 Batch Create ACLs
 
@@ -37,9 +37,9 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ACLV3Api.BatchCreateKafkaV3Acls(context.Background(), clusterId).CreateAclRequestDataList(createAclRequestDataList).Execute()
+    resp, r, err := api_client.ACLV3Api.BatchCreateKafkaAcls(context.Background(), clusterId).CreateAclRequestDataList(createAclRequestDataList).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ACLV3Api.BatchCreateKafkaV3Acls``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ACLV3Api.BatchCreateKafkaAcls``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -55,7 +55,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiBatchCreateKafkaV3AclsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiBatchCreateKafkaAclsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -69,12 +69,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -85,7 +85,7 @@ No authorization required
 
 > CreateKafkaAcls(ctx, clusterId).CreateAclRequestData(createAclRequestData).Execute()
 
-Create ACLs
+Create an ACL
 
 
 
@@ -139,12 +139,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -153,7 +153,7 @@ Name | Type | Description  | Notes
 
 ## DeleteKafkaAcls
 
-> InlineResponse200 DeleteKafkaAcls(ctx, clusterId).ResourceType(resourceType).ResourceName(resourceName).PatternType(patternType).Principal(principal).Host(host).Operation(operation).Permission(permission).Execute()
+> InlineResponse200 DeleteKafkaAcls(ctx, clusterId).ResourceType(resourceType).PatternType(patternType).Operation(operation).Permission(permission).ResourceName(resourceName).Principal(principal).Host(host).Execute()
 
 Delete ACLs
 
@@ -173,17 +173,17 @@ import (
 
 func main() {
     clusterId := "cluster-1" // string | The Kafka cluster ID.
-    resourceType := openapiclient.AclResourceType("UNKNOWN") // AclResourceType | The ACL resource type. (optional)
+    resourceType := openapiclient.AclResourceType("UNKNOWN") // AclResourceType | The ACL resource type.
+    patternType := "patternType_example" // string | The ACL pattern type.
+    operation := "operation_example" // string | The ACL operation.
+    permission := "permission_example" // string | The ACL permission.
     resourceName := "resourceName_example" // string | The ACL resource name. (optional)
-    patternType := "patternType_example" // string | The ACL pattern type. (optional)
-    principal := "principal_example" // string | The ACL principal. (optional)
+    principal := "principal_example" // string | The ACL principal. This is the Service Account name or user name. (optional)
     host := "host_example" // string | The ACL host. (optional)
-    operation := "operation_example" // string | The ACL operation. (optional)
-    permission := "permission_example" // string | The ACL permission. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ACLV3Api.DeleteKafkaAcls(context.Background(), clusterId).ResourceType(resourceType).ResourceName(resourceName).PatternType(patternType).Principal(principal).Host(host).Operation(operation).Permission(permission).Execute()
+    resp, r, err := api_client.ACLV3Api.DeleteKafkaAcls(context.Background(), clusterId).ResourceType(resourceType).PatternType(patternType).Operation(operation).Permission(permission).ResourceName(resourceName).Principal(principal).Host(host).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ACLV3Api.DeleteKafkaAcls``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -210,12 +210,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **resourceType** | [**AclResourceType**](AclResourceType.md) | The ACL resource type. | 
- **resourceName** | **string** | The ACL resource name. | 
  **patternType** | **string** | The ACL pattern type. | 
- **principal** | **string** | The ACL principal. | 
- **host** | **string** | The ACL host. | 
  **operation** | **string** | The ACL operation. | 
  **permission** | **string** | The ACL permission. | 
+ **resourceName** | **string** | The ACL resource name. | 
+ **principal** | **string** | The ACL principal. This is the Service Account name or user name. | 
+ **host** | **string** | The ACL host. | 
 
 ### Return type
 
@@ -223,12 +223,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -239,7 +239,7 @@ Name | Type | Description  | Notes
 
 > AclDataList GetKafkaAcls(ctx, clusterId).ResourceType(resourceType).ResourceName(resourceName).PatternType(patternType).Principal(principal).Host(host).Operation(operation).Permission(permission).Execute()
 
-Search ACLs
+List ACLs
 
 
 
@@ -260,7 +260,7 @@ func main() {
     resourceType := openapiclient.AclResourceType("UNKNOWN") // AclResourceType | The ACL resource type. (optional)
     resourceName := "resourceName_example" // string | The ACL resource name. (optional)
     patternType := "patternType_example" // string | The ACL pattern type. (optional)
-    principal := "principal_example" // string | The ACL principal. (optional)
+    principal := "principal_example" // string | The ACL principal. This is the Service Account name or user name. (optional)
     host := "host_example" // string | The ACL host. (optional)
     operation := "operation_example" // string | The ACL operation. (optional)
     permission := "permission_example" // string | The ACL permission. (optional)
@@ -296,7 +296,7 @@ Name | Type | Description  | Notes
  **resourceType** | [**AclResourceType**](AclResourceType.md) | The ACL resource type. | 
  **resourceName** | **string** | The ACL resource name. | 
  **patternType** | **string** | The ACL pattern type. | 
- **principal** | **string** | The ACL principal. | 
+ **principal** | **string** | The ACL principal. This is the Service Account name or user name. | 
  **host** | **string** | The ACL host. | 
  **operation** | **string** | The ACL operation. | 
  **permission** | **string** | The ACL permission. | 
@@ -307,12 +307,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

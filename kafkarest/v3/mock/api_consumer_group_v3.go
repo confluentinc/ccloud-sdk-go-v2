@@ -32,6 +32,12 @@ type ConsumerGroupV3Api struct {
 	lockGetKafkaConsumerGroupLagSummaryExecute sync.Mutex
 	GetKafkaConsumerGroupLagSummaryExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaConsumerGroupLagSummaryRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ConsumerGroupLagSummaryData, *net_http.Response, error)
 
+	lockGetKafkaConsumerLag sync.Mutex
+	GetKafkaConsumerLagFunc func(ctx context.Context, clusterId, consumerGroupId, topicName string, partitionId int32) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaConsumerLagRequest
+
+	lockGetKafkaConsumerLagExecute sync.Mutex
+	GetKafkaConsumerLagExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaConsumerLagRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ConsumerLagData, *net_http.Response, error)
+
 	lockListKafkaConsumerGroups sync.Mutex
 	ListKafkaConsumerGroupsFunc func(ctx context.Context, clusterId string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiListKafkaConsumerGroupsRequest
 
@@ -75,6 +81,16 @@ type ConsumerGroupV3Api struct {
 		}
 		GetKafkaConsumerGroupLagSummaryExecute []struct {
 			R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaConsumerGroupLagSummaryRequest
+		}
+		GetKafkaConsumerLag []struct {
+			Ctx             context.Context
+			ClusterId       string
+			ConsumerGroupId string
+			TopicName       string
+			PartitionId     int32
+		}
+		GetKafkaConsumerLagExecute []struct {
+			R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaConsumerLagRequest
 		}
 		ListKafkaConsumerGroups []struct {
 			Ctx       context.Context
@@ -351,6 +367,94 @@ func (m *ConsumerGroupV3Api) GetKafkaConsumerGroupLagSummaryExecuteCalls() []str
 	return m.calls.GetKafkaConsumerGroupLagSummaryExecute
 }
 
+// GetKafkaConsumerLag mocks base method by wrapping the associated func.
+func (m *ConsumerGroupV3Api) GetKafkaConsumerLag(ctx context.Context, clusterId, consumerGroupId, topicName string, partitionId int32) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaConsumerLagRequest {
+	m.lockGetKafkaConsumerLag.Lock()
+	defer m.lockGetKafkaConsumerLag.Unlock()
+
+	if m.GetKafkaConsumerLagFunc == nil {
+		panic("mocker: ConsumerGroupV3Api.GetKafkaConsumerLagFunc is nil but ConsumerGroupV3Api.GetKafkaConsumerLag was called.")
+	}
+
+	call := struct {
+		Ctx             context.Context
+		ClusterId       string
+		ConsumerGroupId string
+		TopicName       string
+		PartitionId     int32
+	}{
+		Ctx:             ctx,
+		ClusterId:       clusterId,
+		ConsumerGroupId: consumerGroupId,
+		TopicName:       topicName,
+		PartitionId:     partitionId,
+	}
+
+	m.calls.GetKafkaConsumerLag = append(m.calls.GetKafkaConsumerLag, call)
+
+	return m.GetKafkaConsumerLagFunc(ctx, clusterId, consumerGroupId, topicName, partitionId)
+}
+
+// GetKafkaConsumerLagCalled returns true if GetKafkaConsumerLag was called at least once.
+func (m *ConsumerGroupV3Api) GetKafkaConsumerLagCalled() bool {
+	m.lockGetKafkaConsumerLag.Lock()
+	defer m.lockGetKafkaConsumerLag.Unlock()
+
+	return len(m.calls.GetKafkaConsumerLag) > 0
+}
+
+// GetKafkaConsumerLagCalls returns the calls made to GetKafkaConsumerLag.
+func (m *ConsumerGroupV3Api) GetKafkaConsumerLagCalls() []struct {
+	Ctx             context.Context
+	ClusterId       string
+	ConsumerGroupId string
+	TopicName       string
+	PartitionId     int32
+} {
+	m.lockGetKafkaConsumerLag.Lock()
+	defer m.lockGetKafkaConsumerLag.Unlock()
+
+	return m.calls.GetKafkaConsumerLag
+}
+
+// GetKafkaConsumerLagExecute mocks base method by wrapping the associated func.
+func (m *ConsumerGroupV3Api) GetKafkaConsumerLagExecute(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaConsumerLagRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ConsumerLagData, *net_http.Response, error) {
+	m.lockGetKafkaConsumerLagExecute.Lock()
+	defer m.lockGetKafkaConsumerLagExecute.Unlock()
+
+	if m.GetKafkaConsumerLagExecuteFunc == nil {
+		panic("mocker: ConsumerGroupV3Api.GetKafkaConsumerLagExecuteFunc is nil but ConsumerGroupV3Api.GetKafkaConsumerLagExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaConsumerLagRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetKafkaConsumerLagExecute = append(m.calls.GetKafkaConsumerLagExecute, call)
+
+	return m.GetKafkaConsumerLagExecuteFunc(r)
+}
+
+// GetKafkaConsumerLagExecuteCalled returns true if GetKafkaConsumerLagExecute was called at least once.
+func (m *ConsumerGroupV3Api) GetKafkaConsumerLagExecuteCalled() bool {
+	m.lockGetKafkaConsumerLagExecute.Lock()
+	defer m.lockGetKafkaConsumerLagExecute.Unlock()
+
+	return len(m.calls.GetKafkaConsumerLagExecute) > 0
+}
+
+// GetKafkaConsumerLagExecuteCalls returns the calls made to GetKafkaConsumerLagExecute.
+func (m *ConsumerGroupV3Api) GetKafkaConsumerLagExecuteCalls() []struct {
+	R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaConsumerLagRequest
+} {
+	m.lockGetKafkaConsumerLagExecute.Lock()
+	defer m.lockGetKafkaConsumerLagExecute.Unlock()
+
+	return m.calls.GetKafkaConsumerLagExecute
+}
+
 // ListKafkaConsumerGroups mocks base method by wrapping the associated func.
 func (m *ConsumerGroupV3Api) ListKafkaConsumerGroups(ctx context.Context, clusterId string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiListKafkaConsumerGroupsRequest {
 	m.lockListKafkaConsumerGroups.Lock()
@@ -614,6 +718,12 @@ func (m *ConsumerGroupV3Api) Reset() {
 	m.lockGetKafkaConsumerGroupLagSummaryExecute.Lock()
 	m.calls.GetKafkaConsumerGroupLagSummaryExecute = nil
 	m.lockGetKafkaConsumerGroupLagSummaryExecute.Unlock()
+	m.lockGetKafkaConsumerLag.Lock()
+	m.calls.GetKafkaConsumerLag = nil
+	m.lockGetKafkaConsumerLag.Unlock()
+	m.lockGetKafkaConsumerLagExecute.Lock()
+	m.calls.GetKafkaConsumerLagExecute = nil
+	m.lockGetKafkaConsumerLagExecute.Unlock()
 	m.lockListKafkaConsumerGroups.Lock()
 	m.calls.ListKafkaConsumerGroups = nil
 	m.lockListKafkaConsumerGroups.Unlock()

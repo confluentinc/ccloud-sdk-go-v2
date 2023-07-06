@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,7 +36,7 @@ import (
 
 // Relationship struct for Relationship
 type Relationship struct {
-	Related string `json:"related"`
+	Related string `json:"related,omitempty"`
 }
 
 // NewRelationship instantiates a new Relationship object
@@ -120,7 +121,11 @@ func (o Relationship) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["related"] = o.Related
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableRelationship struct {
@@ -151,7 +156,11 @@ func NewNullableRelationship(val *Relationship) *NullableRelationship {
 }
 
 func (v NullableRelationship) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableRelationship) UnmarshalJSON(src []byte) error {

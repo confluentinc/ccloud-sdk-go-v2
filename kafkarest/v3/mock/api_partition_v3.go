@@ -14,12 +14,6 @@ import (
 
 // PartitionV3Api is a mock of PartitionV3Api interface
 type PartitionV3Api struct {
-	lockGetKafkaConsumerLag sync.Mutex
-	GetKafkaConsumerLagFunc func(ctx context.Context, clusterId, consumerGroupId, topicName string, partitionId int32) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaConsumerLagRequest
-
-	lockGetKafkaConsumerLagExecute sync.Mutex
-	GetKafkaConsumerLagExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaConsumerLagRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ConsumerLagData, *net_http.Response, error)
-
 	lockGetKafkaPartition sync.Mutex
 	GetKafkaPartitionFunc func(ctx context.Context, clusterId, topicName string, partitionId int32) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaPartitionRequest
 
@@ -33,16 +27,6 @@ type PartitionV3Api struct {
 	ListKafkaPartitionsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiListKafkaPartitionsRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.PartitionDataList, *net_http.Response, error)
 
 	calls struct {
-		GetKafkaConsumerLag []struct {
-			Ctx             context.Context
-			ClusterId       string
-			ConsumerGroupId string
-			TopicName       string
-			PartitionId     int32
-		}
-		GetKafkaConsumerLagExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaConsumerLagRequest
-		}
 		GetKafkaPartition []struct {
 			Ctx         context.Context
 			ClusterId   string
@@ -61,94 +45,6 @@ type PartitionV3Api struct {
 			R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiListKafkaPartitionsRequest
 		}
 	}
-}
-
-// GetKafkaConsumerLag mocks base method by wrapping the associated func.
-func (m *PartitionV3Api) GetKafkaConsumerLag(ctx context.Context, clusterId, consumerGroupId, topicName string, partitionId int32) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaConsumerLagRequest {
-	m.lockGetKafkaConsumerLag.Lock()
-	defer m.lockGetKafkaConsumerLag.Unlock()
-
-	if m.GetKafkaConsumerLagFunc == nil {
-		panic("mocker: PartitionV3Api.GetKafkaConsumerLagFunc is nil but PartitionV3Api.GetKafkaConsumerLag was called.")
-	}
-
-	call := struct {
-		Ctx             context.Context
-		ClusterId       string
-		ConsumerGroupId string
-		TopicName       string
-		PartitionId     int32
-	}{
-		Ctx:             ctx,
-		ClusterId:       clusterId,
-		ConsumerGroupId: consumerGroupId,
-		TopicName:       topicName,
-		PartitionId:     partitionId,
-	}
-
-	m.calls.GetKafkaConsumerLag = append(m.calls.GetKafkaConsumerLag, call)
-
-	return m.GetKafkaConsumerLagFunc(ctx, clusterId, consumerGroupId, topicName, partitionId)
-}
-
-// GetKafkaConsumerLagCalled returns true if GetKafkaConsumerLag was called at least once.
-func (m *PartitionV3Api) GetKafkaConsumerLagCalled() bool {
-	m.lockGetKafkaConsumerLag.Lock()
-	defer m.lockGetKafkaConsumerLag.Unlock()
-
-	return len(m.calls.GetKafkaConsumerLag) > 0
-}
-
-// GetKafkaConsumerLagCalls returns the calls made to GetKafkaConsumerLag.
-func (m *PartitionV3Api) GetKafkaConsumerLagCalls() []struct {
-	Ctx             context.Context
-	ClusterId       string
-	ConsumerGroupId string
-	TopicName       string
-	PartitionId     int32
-} {
-	m.lockGetKafkaConsumerLag.Lock()
-	defer m.lockGetKafkaConsumerLag.Unlock()
-
-	return m.calls.GetKafkaConsumerLag
-}
-
-// GetKafkaConsumerLagExecute mocks base method by wrapping the associated func.
-func (m *PartitionV3Api) GetKafkaConsumerLagExecute(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaConsumerLagRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ConsumerLagData, *net_http.Response, error) {
-	m.lockGetKafkaConsumerLagExecute.Lock()
-	defer m.lockGetKafkaConsumerLagExecute.Unlock()
-
-	if m.GetKafkaConsumerLagExecuteFunc == nil {
-		panic("mocker: PartitionV3Api.GetKafkaConsumerLagExecuteFunc is nil but PartitionV3Api.GetKafkaConsumerLagExecute was called.")
-	}
-
-	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaConsumerLagRequest
-	}{
-		R: r,
-	}
-
-	m.calls.GetKafkaConsumerLagExecute = append(m.calls.GetKafkaConsumerLagExecute, call)
-
-	return m.GetKafkaConsumerLagExecuteFunc(r)
-}
-
-// GetKafkaConsumerLagExecuteCalled returns true if GetKafkaConsumerLagExecute was called at least once.
-func (m *PartitionV3Api) GetKafkaConsumerLagExecuteCalled() bool {
-	m.lockGetKafkaConsumerLagExecute.Lock()
-	defer m.lockGetKafkaConsumerLagExecute.Unlock()
-
-	return len(m.calls.GetKafkaConsumerLagExecute) > 0
-}
-
-// GetKafkaConsumerLagExecuteCalls returns the calls made to GetKafkaConsumerLagExecute.
-func (m *PartitionV3Api) GetKafkaConsumerLagExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiGetKafkaConsumerLagRequest
-} {
-	m.lockGetKafkaConsumerLagExecute.Lock()
-	defer m.lockGetKafkaConsumerLagExecute.Unlock()
-
-	return m.calls.GetKafkaConsumerLagExecute
 }
 
 // GetKafkaPartition mocks base method by wrapping the associated func.
@@ -320,12 +216,6 @@ func (m *PartitionV3Api) ListKafkaPartitionsExecuteCalls() []struct {
 
 // Reset resets the calls made to the mocked methods.
 func (m *PartitionV3Api) Reset() {
-	m.lockGetKafkaConsumerLag.Lock()
-	m.calls.GetKafkaConsumerLag = nil
-	m.lockGetKafkaConsumerLag.Unlock()
-	m.lockGetKafkaConsumerLagExecute.Lock()
-	m.calls.GetKafkaConsumerLagExecute = nil
-	m.lockGetKafkaConsumerLagExecute.Unlock()
 	m.lockGetKafkaPartition.Lock()
 	m.calls.GetKafkaPartition = nil
 	m.lockGetKafkaPartition.Unlock()

@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,18 +36,18 @@ import (
 
 // ConsumerLagData struct for ConsumerLagData
 type ConsumerLagData struct {
-	Kind            string           `json:"kind"`
-	Metadata        ResourceMetadata `json:"metadata"`
-	ClusterId       string           `json:"cluster_id"`
-	ConsumerGroupId string           `json:"consumer_group_id"`
-	TopicName       string           `json:"topic_name"`
-	PartitionId     int32            `json:"partition_id"`
-	CurrentOffset   int64            `json:"current_offset"`
-	LogEndOffset    int64            `json:"log_end_offset"`
-	Lag             int64            `json:"lag"`
-	ConsumerId      string           `json:"consumer_id"`
+	Kind            string           `json:"kind,omitempty"`
+	Metadata        ResourceMetadata `json:"metadata,omitempty"`
+	ClusterId       string           `json:"cluster_id,omitempty"`
+	ConsumerGroupId string           `json:"consumer_group_id,omitempty"`
+	TopicName       string           `json:"topic_name,omitempty"`
+	PartitionId     int32            `json:"partition_id,omitempty"`
+	CurrentOffset   int64            `json:"current_offset,omitempty"`
+	LogEndOffset    int64            `json:"log_end_offset,omitempty"`
+	Lag             int64            `json:"lag,omitempty"`
+	ConsumerId      string           `json:"consumer_id,omitempty"`
 	InstanceId      NullableString   `json:"instance_id,omitempty"`
-	ClientId        string           `json:"client_id"`
+	ClientId        string           `json:"client_id,omitempty"`
 }
 
 // NewConsumerLagData instantiates a new ConsumerLagData object
@@ -468,7 +469,11 @@ func (o ConsumerLagData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["client_id"] = o.ClientId
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableConsumerLagData struct {
@@ -499,7 +504,11 @@ func NewNullableConsumerLagData(val *ConsumerLagData) *NullableConsumerLagData {
 }
 
 func (v NullableConsumerLagData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableConsumerLagData) UnmarshalJSON(src []byte) error {

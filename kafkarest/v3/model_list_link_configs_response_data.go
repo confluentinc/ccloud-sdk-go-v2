@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,16 +36,16 @@ import (
 
 // ListLinkConfigsResponseData struct for ListLinkConfigsResponseData
 type ListLinkConfigsResponseData struct {
-	Kind      string           `json:"kind"`
-	Metadata  ResourceMetadata `json:"metadata"`
-	ClusterId string           `json:"cluster_id"`
-	Name      string           `json:"name"`
-	Value     string           `json:"value"`
-	ReadOnly  bool             `json:"read_only"`
-	Sensitive bool             `json:"sensitive"`
-	Source    string           `json:"source"`
-	Synonyms  []string         `json:"synonyms"`
-	LinkName  string           `json:"link_name"`
+	Kind      string           `json:"kind,omitempty"`
+	Metadata  ResourceMetadata `json:"metadata,omitempty"`
+	ClusterId string           `json:"cluster_id,omitempty"`
+	Name      string           `json:"name,omitempty"`
+	Value     string           `json:"value,omitempty"`
+	ReadOnly  bool             `json:"read_only,omitempty"`
+	Sensitive bool             `json:"sensitive,omitempty"`
+	Source    string           `json:"source,omitempty"`
+	Synonyms  []string         `json:"synonyms,omitempty"`
+	LinkName  string           `json:"link_name,omitempty"`
 }
 
 // NewListLinkConfigsResponseData instantiates a new ListLinkConfigsResponseData object
@@ -390,7 +391,11 @@ func (o ListLinkConfigsResponseData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["link_name"] = o.LinkName
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableListLinkConfigsResponseData struct {
@@ -421,7 +426,11 @@ func NewNullableListLinkConfigsResponseData(val *ListLinkConfigsResponseData) *N
 }
 
 func (v NullableListLinkConfigsResponseData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableListLinkConfigsResponseData) UnmarshalJSON(src []byte) error {

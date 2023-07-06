@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**DeleteKafkaTopic**](TopicV3Api.md#DeleteKafkaTopic) | **Delete** /kafka/v3/clusters/{cluster_id}/topics/{topic_name} | Delete Topic
 [**GetKafkaTopic**](TopicV3Api.md#GetKafkaTopic) | **Get** /kafka/v3/clusters/{cluster_id}/topics/{topic_name} | Get Topic
 [**ListKafkaTopics**](TopicV3Api.md#ListKafkaTopics) | **Get** /kafka/v3/clusters/{cluster_id}/topics | List Topics
-[**UpdatePartitionCountKafkaTopic**](TopicV3Api.md#UpdatePartitionCountKafkaTopic) | **Patch** /kafka/v3/clusters/{cluster_id}/topics/{topic_name} | Update partition count
+[**UpdatePartitionCountKafkaTopic**](TopicV3Api.md#UpdatePartitionCountKafkaTopic) | **Patch** /kafka/v3/clusters/{cluster_id}/topics/{topic_name} | Update Partition Count
 
 
 
@@ -72,12 +72,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -143,12 +143,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 
 ## GetKafkaTopic
 
-> TopicData GetKafkaTopic(ctx, clusterId, topicName).Execute()
+> TopicData GetKafkaTopic(ctx, clusterId, topicName).IncludeAuthorizedOperations(includeAuthorizedOperations).Execute()
 
 Get Topic
 
@@ -178,10 +178,11 @@ import (
 func main() {
     clusterId := "cluster-1" // string | The Kafka cluster ID.
     topicName := "topic-1" // string | The topic name.
+    includeAuthorizedOperations := true // bool | Specify if authorized operations should be included in the response. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TopicV3Api.GetKafkaTopic(context.Background(), clusterId, topicName).Execute()
+    resp, r, err := api_client.TopicV3Api.GetKafkaTopic(context.Background(), clusterId, topicName).IncludeAuthorizedOperations(includeAuthorizedOperations).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TopicV3Api.GetKafkaTopic``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -209,6 +210,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **includeAuthorizedOperations** | **bool** | Specify if authorized operations should be included in the response. | 
 
 ### Return type
 
@@ -216,12 +218,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -286,12 +288,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -302,7 +304,7 @@ Name | Type | Description  | Notes
 
 > TopicData UpdatePartitionCountKafkaTopic(ctx, clusterId, topicName).UpdatePartitionCountRequestData(updatePartitionCountRequestData).Execute()
 
-Update partition count
+Update Partition Count
 
 
 
@@ -321,7 +323,7 @@ import (
 func main() {
     clusterId := "cluster-1" // string | The Kafka cluster ID.
     topicName := "topic-1" // string | The topic name.
-    updatePartitionCountRequestData := *openapiclient.NewUpdatePartitionCountRequestData(int32(123)) // UpdatePartitionCountRequestData | The number of partitions to increase the partition count to. (optional)
+    updatePartitionCountRequestData := *openapiclient.NewUpdatePartitionCountRequestData(int32(123)) // UpdatePartitionCountRequestData |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -353,7 +355,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **updatePartitionCountRequestData** | [**UpdatePartitionCountRequestData**](UpdatePartitionCountRequestData.md) | The number of partitions to increase the partition count to. | 
+ **updatePartitionCountRequestData** | [**UpdatePartitionCountRequestData**](UpdatePartitionCountRequestData.md) |  | 
 
 ### Return type
 
@@ -361,12 +363,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json, text/plain, text/html
+- **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

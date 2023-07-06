@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,13 +36,13 @@ import (
 
 // CreateAclRequestData struct for CreateAclRequestData
 type CreateAclRequestData struct {
-	ResourceType AclResourceType `json:"resource_type"`
-	ResourceName string          `json:"resource_name"`
-	PatternType  string          `json:"pattern_type"`
-	Principal    string          `json:"principal"`
-	Host         string          `json:"host"`
-	Operation    string          `json:"operation"`
-	Permission   string          `json:"permission"`
+	ResourceType AclResourceType `json:"resource_type,omitempty"`
+	ResourceName string          `json:"resource_name,omitempty"`
+	PatternType  string          `json:"pattern_type,omitempty"`
+	Principal    string          `json:"principal,omitempty"`
+	Host         string          `json:"host,omitempty"`
+	Operation    string          `json:"operation,omitempty"`
+	Permission   string          `json:"permission,omitempty"`
 }
 
 // NewCreateAclRequestData instantiates a new CreateAclRequestData object
@@ -300,7 +301,11 @@ func (o CreateAclRequestData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["permission"] = o.Permission
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableCreateAclRequestData struct {
@@ -331,7 +336,11 @@ func NewNullableCreateAclRequestData(val *CreateAclRequestData) *NullableCreateA
 }
 
 func (v NullableCreateAclRequestData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableCreateAclRequestData) UnmarshalJSON(src []byte) error {

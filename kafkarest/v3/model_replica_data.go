@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,15 +36,15 @@ import (
 
 // ReplicaData struct for ReplicaData
 type ReplicaData struct {
-	Kind        string           `json:"kind"`
-	Metadata    ResourceMetadata `json:"metadata"`
-	ClusterId   string           `json:"cluster_id"`
-	TopicName   string           `json:"topic_name"`
-	PartitionId int32            `json:"partition_id"`
-	BrokerId    int32            `json:"broker_id"`
-	IsLeader    bool             `json:"is_leader"`
-	IsInSync    bool             `json:"is_in_sync"`
-	Broker      Relationship     `json:"broker"`
+	Kind        string           `json:"kind,omitempty"`
+	Metadata    ResourceMetadata `json:"metadata,omitempty"`
+	ClusterId   string           `json:"cluster_id,omitempty"`
+	TopicName   string           `json:"topic_name,omitempty"`
+	PartitionId int32            `json:"partition_id,omitempty"`
+	BrokerId    int32            `json:"broker_id,omitempty"`
+	IsLeader    bool             `json:"is_leader,omitempty"`
+	IsInSync    bool             `json:"is_in_sync,omitempty"`
+	Broker      Relationship     `json:"broker,omitempty"`
 }
 
 // NewReplicaData instantiates a new ReplicaData object
@@ -360,7 +361,11 @@ func (o ReplicaData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["broker"] = o.Broker
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableReplicaData struct {
@@ -391,7 +396,11 @@ func NewNullableReplicaData(val *ReplicaData) *NullableReplicaData {
 }
 
 func (v NullableReplicaData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableReplicaData) UnmarshalJSON(src []byte) error {

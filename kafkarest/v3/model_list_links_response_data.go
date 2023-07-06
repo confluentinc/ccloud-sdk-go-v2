@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,28 +36,34 @@ import (
 
 // ListLinksResponseData struct for ListLinksResponseData
 type ListLinksResponseData struct {
-	Kind                 string           `json:"kind"`
-	Metadata             ResourceMetadata `json:"metadata"`
-	SourceClusterId      NullableString   `json:"source_cluster_id,omitempty"`
-	DestinationClusterId NullableString   `json:"destination_cluster_id,omitempty"`
-	LinkName             string           `json:"link_name"`
-	LinkId               string           `json:"link_id"`
-	TopicsNames          *[]string        `json:"topics_names,omitempty"`
-	LinkError            *string          `json:"link_error,omitempty"`
-	LinkErrorMessage     NullableString   `json:"link_error_message,omitempty"`
-	LinkState            *string          `json:"link_state,omitempty"`
+	Kind     string           `json:"kind,omitempty"`
+	Metadata ResourceMetadata `json:"metadata,omitempty"`
+	// Deprecated
+	SourceClusterId NullableString `json:"source_cluster_id,omitempty"`
+	// Deprecated
+	DestinationClusterId NullableString `json:"destination_cluster_id,omitempty"`
+	RemoteClusterId      NullableString `json:"remote_cluster_id,omitempty"`
+	LinkName             string         `json:"link_name,omitempty"`
+	// Deprecated
+	LinkId           *string        `json:"link_id,omitempty"`
+	ClusterLinkId    string         `json:"cluster_link_id,omitempty"`
+	TopicNames       []string       `json:"topic_names,omitempty"`
+	LinkError        *string        `json:"link_error,omitempty"`
+	LinkErrorMessage NullableString `json:"link_error_message,omitempty"`
+	LinkState        *string        `json:"link_state,omitempty"`
 }
 
 // NewListLinksResponseData instantiates a new ListLinksResponseData object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListLinksResponseData(kind string, metadata ResourceMetadata, linkName string, linkId string) *ListLinksResponseData {
+func NewListLinksResponseData(kind string, metadata ResourceMetadata, linkName string, clusterLinkId string, topicNames []string) *ListLinksResponseData {
 	this := ListLinksResponseData{}
 	this.Kind = kind
 	this.Metadata = metadata
 	this.LinkName = linkName
-	this.LinkId = linkId
+	this.ClusterLinkId = clusterLinkId
+	this.TopicNames = topicNames
 	return &this
 }
 
@@ -117,6 +124,7 @@ func (o *ListLinksResponseData) SetMetadata(v ResourceMetadata) {
 }
 
 // GetSourceClusterId returns the SourceClusterId field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
 func (o *ListLinksResponseData) GetSourceClusterId() string {
 	if o == nil || o.SourceClusterId.Get() == nil {
 		var ret string
@@ -128,6 +136,7 @@ func (o *ListLinksResponseData) GetSourceClusterId() string {
 // GetSourceClusterIdOk returns a tuple with the SourceClusterId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
 func (o *ListLinksResponseData) GetSourceClusterIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
@@ -145,6 +154,7 @@ func (o *ListLinksResponseData) HasSourceClusterId() bool {
 }
 
 // SetSourceClusterId gets a reference to the given NullableString and assigns it to the SourceClusterId field.
+// Deprecated
 func (o *ListLinksResponseData) SetSourceClusterId(v string) {
 	o.SourceClusterId.Set(&v)
 }
@@ -160,6 +170,7 @@ func (o *ListLinksResponseData) UnsetSourceClusterId() {
 }
 
 // GetDestinationClusterId returns the DestinationClusterId field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
 func (o *ListLinksResponseData) GetDestinationClusterId() string {
 	if o == nil || o.DestinationClusterId.Get() == nil {
 		var ret string
@@ -171,6 +182,7 @@ func (o *ListLinksResponseData) GetDestinationClusterId() string {
 // GetDestinationClusterIdOk returns a tuple with the DestinationClusterId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
 func (o *ListLinksResponseData) GetDestinationClusterIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
@@ -188,6 +200,7 @@ func (o *ListLinksResponseData) HasDestinationClusterId() bool {
 }
 
 // SetDestinationClusterId gets a reference to the given NullableString and assigns it to the DestinationClusterId field.
+// Deprecated
 func (o *ListLinksResponseData) SetDestinationClusterId(v string) {
 	o.DestinationClusterId.Set(&v)
 }
@@ -200,6 +213,49 @@ func (o *ListLinksResponseData) SetDestinationClusterIdNil() {
 // UnsetDestinationClusterId ensures that no value is present for DestinationClusterId, not even an explicit nil
 func (o *ListLinksResponseData) UnsetDestinationClusterId() {
 	o.DestinationClusterId.Unset()
+}
+
+// GetRemoteClusterId returns the RemoteClusterId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ListLinksResponseData) GetRemoteClusterId() string {
+	if o == nil || o.RemoteClusterId.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.RemoteClusterId.Get()
+}
+
+// GetRemoteClusterIdOk returns a tuple with the RemoteClusterId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ListLinksResponseData) GetRemoteClusterIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RemoteClusterId.Get(), o.RemoteClusterId.IsSet()
+}
+
+// HasRemoteClusterId returns a boolean if a field has been set.
+func (o *ListLinksResponseData) HasRemoteClusterId() bool {
+	if o != nil && o.RemoteClusterId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRemoteClusterId gets a reference to the given NullableString and assigns it to the RemoteClusterId field.
+func (o *ListLinksResponseData) SetRemoteClusterId(v string) {
+	o.RemoteClusterId.Set(&v)
+}
+
+// SetRemoteClusterIdNil sets the value for RemoteClusterId to be an explicit nil
+func (o *ListLinksResponseData) SetRemoteClusterIdNil() {
+	o.RemoteClusterId.Set(nil)
+}
+
+// UnsetRemoteClusterId ensures that no value is present for RemoteClusterId, not even an explicit nil
+func (o *ListLinksResponseData) UnsetRemoteClusterId() {
+	o.RemoteClusterId.Unset()
 }
 
 // GetLinkName returns the LinkName field value
@@ -226,60 +282,87 @@ func (o *ListLinksResponseData) SetLinkName(v string) {
 	o.LinkName = v
 }
 
-// GetLinkId returns the LinkId field value
+// GetLinkId returns the LinkId field value if set, zero value otherwise.
+// Deprecated
 func (o *ListLinksResponseData) GetLinkId() string {
-	if o == nil {
+	if o == nil || o.LinkId == nil {
 		var ret string
 		return ret
 	}
-
-	return o.LinkId
+	return *o.LinkId
 }
 
-// GetLinkIdOk returns a tuple with the LinkId field value
+// GetLinkIdOk returns a tuple with the LinkId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *ListLinksResponseData) GetLinkIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || o.LinkId == nil {
 		return nil, false
 	}
-	return &o.LinkId, true
+	return o.LinkId, true
 }
 
-// SetLinkId sets field value
-func (o *ListLinksResponseData) SetLinkId(v string) {
-	o.LinkId = v
-}
-
-// GetTopicsNames returns the TopicsNames field value if set, zero value otherwise.
-func (o *ListLinksResponseData) GetTopicsNames() []string {
-	if o == nil || o.TopicsNames == nil {
-		var ret []string
-		return ret
-	}
-	return *o.TopicsNames
-}
-
-// GetTopicsNamesOk returns a tuple with the TopicsNames field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ListLinksResponseData) GetTopicsNamesOk() (*[]string, bool) {
-	if o == nil || o.TopicsNames == nil {
-		return nil, false
-	}
-	return o.TopicsNames, true
-}
-
-// HasTopicsNames returns a boolean if a field has been set.
-func (o *ListLinksResponseData) HasTopicsNames() bool {
-	if o != nil && o.TopicsNames != nil {
+// HasLinkId returns a boolean if a field has been set.
+func (o *ListLinksResponseData) HasLinkId() bool {
+	if o != nil && o.LinkId != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetTopicsNames gets a reference to the given []string and assigns it to the TopicsNames field.
-func (o *ListLinksResponseData) SetTopicsNames(v []string) {
-	o.TopicsNames = &v
+// SetLinkId gets a reference to the given string and assigns it to the LinkId field.
+// Deprecated
+func (o *ListLinksResponseData) SetLinkId(v string) {
+	o.LinkId = &v
+}
+
+// GetClusterLinkId returns the ClusterLinkId field value
+func (o *ListLinksResponseData) GetClusterLinkId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ClusterLinkId
+}
+
+// GetClusterLinkIdOk returns a tuple with the ClusterLinkId field value
+// and a boolean to check if the value has been set.
+func (o *ListLinksResponseData) GetClusterLinkIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ClusterLinkId, true
+}
+
+// SetClusterLinkId sets field value
+func (o *ListLinksResponseData) SetClusterLinkId(v string) {
+	o.ClusterLinkId = v
+}
+
+// GetTopicNames returns the TopicNames field value
+func (o *ListLinksResponseData) GetTopicNames() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.TopicNames
+}
+
+// GetTopicNamesOk returns a tuple with the TopicNames field value
+// and a boolean to check if the value has been set.
+func (o *ListLinksResponseData) GetTopicNamesOk() (*[]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.TopicNames, true
+}
+
+// SetTopicNames sets field value
+func (o *ListLinksResponseData) SetTopicNames(v []string) {
+	o.TopicNames = v
 }
 
 // GetLinkError returns the LinkError field value if set, zero value otherwise.
@@ -395,9 +478,11 @@ func (o *ListLinksResponseData) Redact() {
 	o.recurseRedact(&o.Metadata)
 	o.recurseRedact(o.SourceClusterId)
 	o.recurseRedact(o.DestinationClusterId)
+	o.recurseRedact(o.RemoteClusterId)
 	o.recurseRedact(&o.LinkName)
-	o.recurseRedact(&o.LinkId)
-	o.recurseRedact(o.TopicsNames)
+	o.recurseRedact(o.LinkId)
+	o.recurseRedact(&o.ClusterLinkId)
+	o.recurseRedact(&o.TopicNames)
 	o.recurseRedact(o.LinkError)
 	o.recurseRedact(o.LinkErrorMessage)
 	o.recurseRedact(o.LinkState)
@@ -447,14 +532,20 @@ func (o ListLinksResponseData) MarshalJSON() ([]byte, error) {
 	if o.DestinationClusterId.IsSet() {
 		toSerialize["destination_cluster_id"] = o.DestinationClusterId.Get()
 	}
+	if o.RemoteClusterId.IsSet() {
+		toSerialize["remote_cluster_id"] = o.RemoteClusterId.Get()
+	}
 	if true {
 		toSerialize["link_name"] = o.LinkName
 	}
-	if true {
+	if o.LinkId != nil {
 		toSerialize["link_id"] = o.LinkId
 	}
-	if o.TopicsNames != nil {
-		toSerialize["topics_names"] = o.TopicsNames
+	if true {
+		toSerialize["cluster_link_id"] = o.ClusterLinkId
+	}
+	if true {
+		toSerialize["topic_names"] = o.TopicNames
 	}
 	if o.LinkError != nil {
 		toSerialize["link_error"] = o.LinkError
@@ -465,7 +556,11 @@ func (o ListLinksResponseData) MarshalJSON() ([]byte, error) {
 	if o.LinkState != nil {
 		toSerialize["link_state"] = o.LinkState
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableListLinksResponseData struct {
@@ -496,7 +591,11 @@ func NewNullableListLinksResponseData(val *ListLinksResponseData) *NullableListL
 }
 
 func (v NullableListLinksResponseData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableListLinksResponseData) UnmarshalJSON(src []byte) error {

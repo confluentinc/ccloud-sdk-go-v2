@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,19 +36,19 @@ import (
 
 // ReplicaStatusDataAllOf struct for ReplicaStatusDataAllOf
 type ReplicaStatusDataAllOf struct {
-	ClusterId          string  `json:"cluster_id"`
-	TopicName          string  `json:"topic_name"`
-	BrokerId           int32   `json:"broker_id"`
-	PartitionId        int32   `json:"partition_id"`
-	IsLeader           bool    `json:"is_leader"`
-	IsObserver         bool    `json:"is_observer"`
-	IsIsrEligible      bool    `json:"is_isr_eligible"`
-	IsInIsr            bool    `json:"is_in_isr"`
-	IsCaughtUp         bool    `json:"is_caught_up"`
-	LogStartOffset     int64   `json:"log_start_offset"`
-	LogEndOffset       int64   `json:"log_end_offset"`
-	LastCaughtUpTimeMs int64   `json:"last_caught_up_time_ms"`
-	LastFetchTimeMs    int64   `json:"last_fetch_time_ms"`
+	ClusterId          string  `json:"cluster_id,omitempty"`
+	TopicName          string  `json:"topic_name,omitempty"`
+	BrokerId           int32   `json:"broker_id,omitempty"`
+	PartitionId        int32   `json:"partition_id,omitempty"`
+	IsLeader           bool    `json:"is_leader,omitempty"`
+	IsObserver         bool    `json:"is_observer,omitempty"`
+	IsIsrEligible      bool    `json:"is_isr_eligible,omitempty"`
+	IsInIsr            bool    `json:"is_in_isr,omitempty"`
+	IsCaughtUp         bool    `json:"is_caught_up,omitempty"`
+	LogStartOffset     int64   `json:"log_start_offset,omitempty"`
+	LogEndOffset       int64   `json:"log_end_offset,omitempty"`
+	LastCaughtUpTimeMs int64   `json:"last_caught_up_time_ms,omitempty"`
+	LastFetchTimeMs    int64   `json:"last_fetch_time_ms,omitempty"`
 	LinkName           *string `json:"link_name,omitempty"`
 }
 
@@ -517,7 +518,11 @@ func (o ReplicaStatusDataAllOf) MarshalJSON() ([]byte, error) {
 	if o.LinkName != nil {
 		toSerialize["link_name"] = o.LinkName
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableReplicaStatusDataAllOf struct {
@@ -548,7 +553,11 @@ func NewNullableReplicaStatusDataAllOf(val *ReplicaStatusDataAllOf) *NullableRep
 }
 
 func (v NullableReplicaStatusDataAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableReplicaStatusDataAllOf) UnmarshalJSON(src []byte) error {

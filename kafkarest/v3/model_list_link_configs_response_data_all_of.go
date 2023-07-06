@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,14 +36,14 @@ import (
 
 // ListLinkConfigsResponseDataAllOf struct for ListLinkConfigsResponseDataAllOf
 type ListLinkConfigsResponseDataAllOf struct {
-	ClusterId string   `json:"cluster_id"`
-	Name      string   `json:"name"`
-	Value     string   `json:"value"`
-	ReadOnly  bool     `json:"read_only"`
-	Sensitive bool     `json:"sensitive"`
-	Source    string   `json:"source"`
-	Synonyms  []string `json:"synonyms"`
-	LinkName  string   `json:"link_name"`
+	ClusterId string   `json:"cluster_id,omitempty"`
+	Name      string   `json:"name,omitempty"`
+	Value     string   `json:"value,omitempty"`
+	ReadOnly  bool     `json:"read_only,omitempty"`
+	Sensitive bool     `json:"sensitive,omitempty"`
+	Source    string   `json:"source,omitempty"`
+	Synonyms  []string `json:"synonyms,omitempty"`
+	LinkName  string   `json:"link_name,omitempty"`
 }
 
 // NewListLinkConfigsResponseDataAllOf instantiates a new ListLinkConfigsResponseDataAllOf object
@@ -330,7 +331,11 @@ func (o ListLinkConfigsResponseDataAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["link_name"] = o.LinkName
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableListLinkConfigsResponseDataAllOf struct {
@@ -361,7 +366,11 @@ func NewNullableListLinkConfigsResponseDataAllOf(val *ListLinkConfigsResponseDat
 }
 
 func (v NullableListLinkConfigsResponseDataAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableListLinkConfigsResponseDataAllOf) UnmarshalJSON(src []byte) error {

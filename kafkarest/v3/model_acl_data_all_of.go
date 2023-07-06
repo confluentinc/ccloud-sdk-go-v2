@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,14 +36,14 @@ import (
 
 // AclDataAllOf struct for AclDataAllOf
 type AclDataAllOf struct {
-	ClusterId    string          `json:"cluster_id"`
-	ResourceType AclResourceType `json:"resource_type"`
-	ResourceName string          `json:"resource_name"`
-	PatternType  string          `json:"pattern_type"`
-	Principal    string          `json:"principal"`
-	Host         string          `json:"host"`
-	Operation    string          `json:"operation"`
-	Permission   string          `json:"permission"`
+	ClusterId    string          `json:"cluster_id,omitempty"`
+	ResourceType AclResourceType `json:"resource_type,omitempty"`
+	ResourceName string          `json:"resource_name,omitempty"`
+	PatternType  string          `json:"pattern_type,omitempty"`
+	Principal    string          `json:"principal,omitempty"`
+	Host         string          `json:"host,omitempty"`
+	Operation    string          `json:"operation,omitempty"`
+	Permission   string          `json:"permission,omitempty"`
 }
 
 // NewAclDataAllOf instantiates a new AclDataAllOf object
@@ -330,7 +331,11 @@ func (o AclDataAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["permission"] = o.Permission
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableAclDataAllOf struct {
@@ -361,7 +366,11 @@ func NewNullableAclDataAllOf(val *AclDataAllOf) *NullableAclDataAllOf {
 }
 
 func (v NullableAclDataAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableAclDataAllOf) UnmarshalJSON(src []byte) error {

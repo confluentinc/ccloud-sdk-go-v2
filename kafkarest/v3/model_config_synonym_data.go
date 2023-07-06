@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,9 +36,9 @@ import (
 
 // ConfigSynonymData struct for ConfigSynonymData
 type ConfigSynonymData struct {
-	Name   string         `json:"name"`
+	Name   string         `json:"name,omitempty"`
 	Value  NullableString `json:"value,omitempty"`
-	Source string         `json:"source"`
+	Source string         `json:"source,omitempty"`
 }
 
 // NewConfigSynonymData instantiates a new ConfigSynonymData object
@@ -198,7 +199,11 @@ func (o ConfigSynonymData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["source"] = o.Source
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableConfigSynonymData struct {
@@ -229,7 +234,11 @@ func NewNullableConfigSynonymData(val *ConfigSynonymData) *NullableConfigSynonym
 }
 
 func (v NullableConfigSynonymData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableConfigSynonymData) UnmarshalJSON(src []byte) error {

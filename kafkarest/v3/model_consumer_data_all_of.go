@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,12 +36,12 @@ import (
 
 // ConsumerDataAllOf struct for ConsumerDataAllOf
 type ConsumerDataAllOf struct {
-	ClusterId       string         `json:"cluster_id"`
-	ConsumerGroupId string         `json:"consumer_group_id"`
-	ConsumerId      string         `json:"consumer_id"`
+	ClusterId       string         `json:"cluster_id,omitempty"`
+	ConsumerGroupId string         `json:"consumer_group_id,omitempty"`
+	ConsumerId      string         `json:"consumer_id,omitempty"`
 	InstanceId      NullableString `json:"instance_id,omitempty"`
-	ClientId        string         `json:"client_id"`
-	Assignments     Relationship   `json:"assignments"`
+	ClientId        string         `json:"client_id,omitempty"`
+	Assignments     Relationship   `json:"assignments,omitempty"`
 }
 
 // NewConsumerDataAllOf instantiates a new ConsumerDataAllOf object
@@ -288,7 +289,11 @@ func (o ConsumerDataAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["assignments"] = o.Assignments
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableConsumerDataAllOf struct {
@@ -319,7 +324,11 @@ func NewNullableConsumerDataAllOf(val *ConsumerDataAllOf) *NullableConsumerDataA
 }
 
 func (v NullableConsumerDataAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableConsumerDataAllOf) UnmarshalJSON(src []byte) error {

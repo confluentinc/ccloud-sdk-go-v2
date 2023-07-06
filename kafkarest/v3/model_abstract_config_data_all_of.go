@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,14 +36,14 @@ import (
 
 // AbstractConfigDataAllOf struct for AbstractConfigDataAllOf
 type AbstractConfigDataAllOf struct {
-	ClusterId   string              `json:"cluster_id"`
-	Name        string              `json:"name"`
+	ClusterId   string              `json:"cluster_id,omitempty"`
+	Name        string              `json:"name,omitempty"`
 	Value       NullableString      `json:"value,omitempty"`
-	IsDefault   bool                `json:"is_default"`
-	IsReadOnly  bool                `json:"is_read_only"`
-	IsSensitive bool                `json:"is_sensitive"`
-	Source      string              `json:"source"`
-	Synonyms    []ConfigSynonymData `json:"synonyms"`
+	IsDefault   bool                `json:"is_default,omitempty"`
+	IsReadOnly  bool                `json:"is_read_only,omitempty"`
+	IsSensitive bool                `json:"is_sensitive,omitempty"`
+	Source      string              `json:"source,omitempty"`
+	Synonyms    []ConfigSynonymData `json:"synonyms,omitempty"`
 }
 
 // NewAbstractConfigDataAllOf instantiates a new AbstractConfigDataAllOf object
@@ -348,7 +349,11 @@ func (o AbstractConfigDataAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["synonyms"] = o.Synonyms
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableAbstractConfigDataAllOf struct {
@@ -379,7 +384,11 @@ func NewNullableAbstractConfigDataAllOf(val *AbstractConfigDataAllOf) *NullableA
 }
 
 func (v NullableAbstractConfigDataAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableAbstractConfigDataAllOf) UnmarshalJSON(src []byte) error {

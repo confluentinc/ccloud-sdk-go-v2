@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,12 +36,12 @@ import (
 
 // BrokerRemovalData struct for BrokerRemovalData
 type BrokerRemovalData struct {
-	Kind       string           `json:"kind"`
-	Metadata   ResourceMetadata `json:"metadata"`
-	ClusterId  string           `json:"cluster_id"`
-	BrokerId   int32            `json:"broker_id"`
-	BrokerTask Relationship     `json:"broker_task"`
-	Broker     Relationship     `json:"broker"`
+	Kind       string           `json:"kind,omitempty"`
+	Metadata   ResourceMetadata `json:"metadata,omitempty"`
+	ClusterId  string           `json:"cluster_id,omitempty"`
+	BrokerId   int32            `json:"broker_id,omitempty"`
+	BrokerTask Relationship     `json:"broker_task,omitempty"`
+	Broker     Relationship     `json:"broker,omitempty"`
 }
 
 // NewBrokerRemovalData instantiates a new BrokerRemovalData object
@@ -270,7 +271,11 @@ func (o BrokerRemovalData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["broker"] = o.Broker
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableBrokerRemovalData struct {
@@ -301,7 +306,11 @@ func NewNullableBrokerRemovalData(val *BrokerRemovalData) *NullableBrokerRemoval
 }
 
 func (v NullableBrokerRemovalData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableBrokerRemovalData) UnmarshalJSON(src []byte) error {

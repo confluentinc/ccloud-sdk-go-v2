@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,7 +36,7 @@ import (
 
 // ReplicaDataListAllOf struct for ReplicaDataListAllOf
 type ReplicaDataListAllOf struct {
-	Data []ReplicaData `json:"data"`
+	Data []ReplicaData `json:"data,omitempty"`
 }
 
 // NewReplicaDataListAllOf instantiates a new ReplicaDataListAllOf object
@@ -120,7 +121,11 @@ func (o ReplicaDataListAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableReplicaDataListAllOf struct {
@@ -151,7 +156,11 @@ func NewNullableReplicaDataListAllOf(val *ReplicaDataListAllOf) *NullableReplica
 }
 
 func (v NullableReplicaDataListAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableReplicaDataListAllOf) UnmarshalJSON(src []byte) error {

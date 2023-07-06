@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,16 +36,16 @@ import (
 
 // ConsumerGroupData struct for ConsumerGroupData
 type ConsumerGroupData struct {
-	Kind              string           `json:"kind"`
-	Metadata          ResourceMetadata `json:"metadata"`
-	ClusterId         string           `json:"cluster_id"`
-	ConsumerGroupId   string           `json:"consumer_group_id"`
-	IsSimple          bool             `json:"is_simple"`
-	PartitionAssignor string           `json:"partition_assignor"`
-	State             string           `json:"state"`
-	Coordinator       Relationship     `json:"coordinator"`
+	Kind              string           `json:"kind,omitempty"`
+	Metadata          ResourceMetadata `json:"metadata,omitempty"`
+	ClusterId         string           `json:"cluster_id,omitempty"`
+	ConsumerGroupId   string           `json:"consumer_group_id,omitempty"`
+	IsSimple          bool             `json:"is_simple,omitempty"`
+	PartitionAssignor string           `json:"partition_assignor,omitempty"`
+	State             string           `json:"state,omitempty"`
+	Coordinator       Relationship     `json:"coordinator,omitempty"`
 	Consumer          *Relationship    `json:"consumer,omitempty"`
-	LagSummary        Relationship     `json:"lag_summary"`
+	LagSummary        Relationship     `json:"lag_summary,omitempty"`
 }
 
 // NewConsumerGroupData instantiates a new ConsumerGroupData object
@@ -397,7 +398,11 @@ func (o ConsumerGroupData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["lag_summary"] = o.LagSummary
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableConsumerGroupData struct {
@@ -428,7 +433,11 @@ func NewNullableConsumerGroupData(val *ConsumerGroupData) *NullableConsumerGroup
 }
 
 func (v NullableConsumerGroupData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableConsumerGroupData) UnmarshalJSON(src []byte) error {

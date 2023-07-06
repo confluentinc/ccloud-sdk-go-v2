@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,9 +36,9 @@ import (
 
 // ConsumerGroupDataList struct for ConsumerGroupDataList
 type ConsumerGroupDataList struct {
-	Kind     string                     `json:"kind"`
-	Metadata ResourceCollectionMetadata `json:"metadata"`
-	Data     []ConsumerGroupData        `json:"data"`
+	Kind     string                     `json:"kind,omitempty"`
+	Metadata ResourceCollectionMetadata `json:"metadata,omitempty"`
+	Data     []ConsumerGroupData        `json:"data,omitempty"`
 }
 
 // NewConsumerGroupDataList instantiates a new ConsumerGroupDataList object
@@ -180,7 +181,11 @@ func (o ConsumerGroupDataList) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableConsumerGroupDataList struct {
@@ -211,7 +216,11 @@ func NewNullableConsumerGroupDataList(val *ConsumerGroupDataList) *NullableConsu
 }
 
 func (v NullableConsumerGroupDataList) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableConsumerGroupDataList) UnmarshalJSON(src []byte) error {

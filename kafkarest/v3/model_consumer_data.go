@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,14 +36,14 @@ import (
 
 // ConsumerData struct for ConsumerData
 type ConsumerData struct {
-	Kind            string           `json:"kind"`
-	Metadata        ResourceMetadata `json:"metadata"`
-	ClusterId       string           `json:"cluster_id"`
-	ConsumerGroupId string           `json:"consumer_group_id"`
-	ConsumerId      string           `json:"consumer_id"`
+	Kind            string           `json:"kind,omitempty"`
+	Metadata        ResourceMetadata `json:"metadata,omitempty"`
+	ClusterId       string           `json:"cluster_id,omitempty"`
+	ConsumerGroupId string           `json:"consumer_group_id,omitempty"`
+	ConsumerId      string           `json:"consumer_id,omitempty"`
 	InstanceId      NullableString   `json:"instance_id,omitempty"`
-	ClientId        string           `json:"client_id"`
-	Assignments     Relationship     `json:"assignments"`
+	ClientId        string           `json:"client_id,omitempty"`
+	Assignments     Relationship     `json:"assignments,omitempty"`
 }
 
 // NewConsumerData instantiates a new ConsumerData object
@@ -348,7 +349,11 @@ func (o ConsumerData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["assignments"] = o.Assignments
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableConsumerData struct {
@@ -379,7 +384,11 @@ func NewNullableConsumerData(val *ConsumerData) *NullableConsumerData {
 }
 
 func (v NullableConsumerData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableConsumerData) UnmarshalJSON(src []byte) error {

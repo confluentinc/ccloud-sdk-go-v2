@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,14 +36,14 @@ import (
 
 // ConsumerGroupDataAllOf struct for ConsumerGroupDataAllOf
 type ConsumerGroupDataAllOf struct {
-	ClusterId         string        `json:"cluster_id"`
-	ConsumerGroupId   string        `json:"consumer_group_id"`
-	IsSimple          bool          `json:"is_simple"`
-	PartitionAssignor string        `json:"partition_assignor"`
-	State             string        `json:"state"`
-	Coordinator       Relationship  `json:"coordinator"`
+	ClusterId         string        `json:"cluster_id,omitempty"`
+	ConsumerGroupId   string        `json:"consumer_group_id,omitempty"`
+	IsSimple          bool          `json:"is_simple,omitempty"`
+	PartitionAssignor string        `json:"partition_assignor,omitempty"`
+	State             string        `json:"state,omitempty"`
+	Coordinator       Relationship  `json:"coordinator,omitempty"`
 	Consumer          *Relationship `json:"consumer,omitempty"`
-	LagSummary        Relationship  `json:"lag_summary"`
+	LagSummary        Relationship  `json:"lag_summary,omitempty"`
 }
 
 // NewConsumerGroupDataAllOf instantiates a new ConsumerGroupDataAllOf object
@@ -337,7 +338,11 @@ func (o ConsumerGroupDataAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["lag_summary"] = o.LagSummary
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableConsumerGroupDataAllOf struct {
@@ -368,7 +373,11 @@ func NewNullableConsumerGroupDataAllOf(val *ConsumerGroupDataAllOf) *NullableCon
 }
 
 func (v NullableConsumerGroupDataAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableConsumerGroupDataAllOf) UnmarshalJSON(src []byte) error {

@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,17 +36,17 @@ import (
 
 // ConsumerGroupLagSummaryDataAllOf struct for ConsumerGroupLagSummaryDataAllOf
 type ConsumerGroupLagSummaryDataAllOf struct {
-	ClusterId         string         `json:"cluster_id"`
-	ConsumerGroupId   string         `json:"consumer_group_id"`
-	MaxLagConsumerId  string         `json:"max_lag_consumer_id"`
+	ClusterId         string         `json:"cluster_id,omitempty"`
+	ConsumerGroupId   string         `json:"consumer_group_id,omitempty"`
+	MaxLagConsumerId  string         `json:"max_lag_consumer_id,omitempty"`
 	MaxLagInstanceId  NullableString `json:"max_lag_instance_id,omitempty"`
-	MaxLagClientId    string         `json:"max_lag_client_id"`
-	MaxLagTopicName   string         `json:"max_lag_topic_name"`
-	MaxLagPartitionId int32          `json:"max_lag_partition_id"`
-	MaxLag            int64          `json:"max_lag"`
-	TotalLag          int64          `json:"total_lag"`
-	MaxLagConsumer    Relationship   `json:"max_lag_consumer"`
-	MaxLagPartition   Relationship   `json:"max_lag_partition"`
+	MaxLagClientId    string         `json:"max_lag_client_id,omitempty"`
+	MaxLagTopicName   string         `json:"max_lag_topic_name,omitempty"`
+	MaxLagPartitionId int32          `json:"max_lag_partition_id,omitempty"`
+	MaxLag            int64          `json:"max_lag,omitempty"`
+	TotalLag          int64          `json:"total_lag,omitempty"`
+	MaxLagConsumer    Relationship   `json:"max_lag_consumer,omitempty"`
+	MaxLagPartition   Relationship   `json:"max_lag_partition,omitempty"`
 }
 
 // NewConsumerGroupLagSummaryDataAllOf instantiates a new ConsumerGroupLagSummaryDataAllOf object
@@ -438,7 +439,11 @@ func (o ConsumerGroupLagSummaryDataAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["max_lag_partition"] = o.MaxLagPartition
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableConsumerGroupLagSummaryDataAllOf struct {
@@ -469,7 +474,11 @@ func NewNullableConsumerGroupLagSummaryDataAllOf(val *ConsumerGroupLagSummaryDat
 }
 
 func (v NullableConsumerGroupLagSummaryDataAllOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableConsumerGroupLagSummaryDataAllOf) UnmarshalJSON(src []byte) error {

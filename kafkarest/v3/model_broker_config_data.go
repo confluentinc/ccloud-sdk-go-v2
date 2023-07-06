@@ -26,6 +26,7 @@ Contact: kafka-clients-proxy-team@confluent.io
 package v3
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -35,17 +36,17 @@ import (
 
 // BrokerConfigData struct for BrokerConfigData
 type BrokerConfigData struct {
-	Kind        string              `json:"kind"`
-	Metadata    ResourceMetadata    `json:"metadata"`
-	ClusterId   string              `json:"cluster_id"`
-	Name        string              `json:"name"`
+	Kind        string              `json:"kind,omitempty"`
+	Metadata    ResourceMetadata    `json:"metadata,omitempty"`
+	ClusterId   string              `json:"cluster_id,omitempty"`
+	Name        string              `json:"name,omitempty"`
 	Value       NullableString      `json:"value,omitempty"`
-	IsDefault   bool                `json:"is_default"`
-	IsReadOnly  bool                `json:"is_read_only"`
-	IsSensitive bool                `json:"is_sensitive"`
-	Source      string              `json:"source"`
-	Synonyms    []ConfigSynonymData `json:"synonyms"`
-	BrokerId    int32               `json:"broker_id"`
+	IsDefault   bool                `json:"is_default,omitempty"`
+	IsReadOnly  bool                `json:"is_read_only,omitempty"`
+	IsSensitive bool                `json:"is_sensitive,omitempty"`
+	Source      string              `json:"source,omitempty"`
+	Synonyms    []ConfigSynonymData `json:"synonyms,omitempty"`
+	BrokerId    int32               `json:"broker_id,omitempty"`
 }
 
 // NewBrokerConfigData instantiates a new BrokerConfigData object
@@ -438,7 +439,11 @@ func (o BrokerConfigData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["broker_id"] = o.BrokerId
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableBrokerConfigData struct {
@@ -469,7 +474,11 @@ func NewNullableBrokerConfigData(val *BrokerConfigData) *NullableBrokerConfigDat
 }
 
 func (v NullableBrokerConfigData) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableBrokerConfigData) UnmarshalJSON(src []byte) error {

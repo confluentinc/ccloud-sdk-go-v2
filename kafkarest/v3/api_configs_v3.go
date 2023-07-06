@@ -42,12 +42,12 @@ var (
 type ConfigsV3Api interface {
 
 	/*
-		DeleteKafkaClusterConfig Reset Cluster Config
+		DeleteKafkaClusterConfig Reset Dynamic Broker Config
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Resets the configuration parameter specified by ``name`` to its
-	default value.
+	Reset the configuration parameter specified by ``name`` to its
+	default value by deleting a dynamic cluster-wide configuration.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param clusterId The Kafka cluster ID.
@@ -64,7 +64,7 @@ type ConfigsV3Api interface {
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Resets the config with given `name` to its default value.
+	Reset the configuration parameter with given `name` to its default value.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param clusterId The Kafka cluster ID.
@@ -78,11 +78,11 @@ type ConfigsV3Api interface {
 	DeleteKafkaTopicConfigExecute(r ApiDeleteKafkaTopicConfigRequest) (*_nethttp.Response, error)
 
 	/*
-		GetKafkaClusterConfig Get Cluster Config
+		GetKafkaClusterConfig Get Dynamic Broker Config
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Returns the configuration parameter specified by ``name``.
+	Return the dynamic cluster-wide broker configuration parameter specified by ``name``.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param clusterId The Kafka cluster ID.
@@ -100,7 +100,7 @@ type ConfigsV3Api interface {
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Return the config with the given `name`.
+	Return the configuration parameter with the given `name`.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param clusterId The Kafka cluster ID.
@@ -115,11 +115,11 @@ type ConfigsV3Api interface {
 	GetKafkaTopicConfigExecute(r ApiGetKafkaTopicConfigRequest) (TopicConfigData, *_nethttp.Response, error)
 
 	/*
-		ListKafkaAllTopicConfigs Get All Topic Configs
+		ListKafkaAllTopicConfigs List All Topic Configs
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Returns all topic configurations for topics hosted by the specified
+	Return the list of configuration parameters for all topics hosted by the specified
 	cluster.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -133,12 +133,12 @@ type ConfigsV3Api interface {
 	ListKafkaAllTopicConfigsExecute(r ApiListKafkaAllTopicConfigsRequest) (TopicConfigDataList, *_nethttp.Response, error)
 
 	/*
-		ListKafkaClusterConfigs List Cluster Configs
+		ListKafkaClusterConfigs List Dynamic Broker Configs
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Returns a list of configuration parameters for the specified Kafka
-	cluster.
+	Return a list of dynamic cluster-wide broker configuration parameters for the specified Kafka
+	cluster. Returns an empty list if there are no dynamic cluster-wide broker configuration parameters.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param clusterId The Kafka cluster ID.
@@ -151,9 +151,11 @@ type ConfigsV3Api interface {
 	ListKafkaClusterConfigsExecute(r ApiListKafkaClusterConfigsRequest) (ClusterConfigDataList, *_nethttp.Response, error)
 
 	/*
-		ListKafkaDefaultTopicConfigs List Default Topic Configs
+		ListKafkaDefaultTopicConfigs List New Topic Default Configs
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+	List the default configuration parameters used if the topic were to be newly created.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param clusterId The Kafka cluster ID.
@@ -171,7 +173,7 @@ type ConfigsV3Api interface {
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Return the list of configs that belong to the specified topic.
+	Return the list of configuration parameters that belong to the specified topic.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param clusterId The Kafka cluster ID.
@@ -185,11 +187,11 @@ type ConfigsV3Api interface {
 	ListKafkaTopicConfigsExecute(r ApiListKafkaTopicConfigsRequest) (TopicConfigDataList, *_nethttp.Response, error)
 
 	/*
-		UpdateKafkaClusterConfig Update Cluster Config
+		UpdateKafkaClusterConfig Update Dynamic Broker Config
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Updates the configuration parameter specified by ``name``.
+	Update the dynamic cluster-wide broker configuration parameter specified by ``name``.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param clusterId The Kafka cluster ID.
@@ -202,11 +204,11 @@ type ConfigsV3Api interface {
 	UpdateKafkaClusterConfigExecute(r ApiUpdateKafkaClusterConfigRequest) (*_nethttp.Response, error)
 
 	/*
-		UpdateKafkaClusterConfigs Batch Alter Cluster Configs
+		UpdateKafkaClusterConfigs Batch Alter Dynamic Broker Configs
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Updates or deletes a set of Kafka cluster configuration parameters.
+	Update or delete a set of dynamic cluster-wide broker configuration parameters.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param clusterId The Kafka cluster ID.
@@ -222,7 +224,7 @@ type ConfigsV3Api interface {
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Updates the config with given `name`.
+	Update the configuration parameter with given `name`.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param clusterId The Kafka cluster ID.
@@ -240,7 +242,7 @@ type ConfigsV3Api interface {
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Updates or deletes a set of topic configs.
+	Update or delete a set of topic configuration parameters.
 	Also supports a dry-run mode that only validates whether the operation would succeed if the
 	``validate_only`` request property is explicitly specified and set to true.
 
@@ -270,12 +272,12 @@ func (r ApiDeleteKafkaClusterConfigRequest) Execute() (*_nethttp.Response, error
 }
 
 /*
-DeleteKafkaClusterConfig Reset Cluster Config
+DeleteKafkaClusterConfig Reset Dynamic Broker Config
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Resets the configuration parameter specified by ``name`` to its
-default value.
+Reset the configuration parameter specified by ``name`` to its
+default value by deleting a dynamic cluster-wide configuration.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
@@ -324,7 +326,7 @@ func (a *ConfigsV3ApiService) DeleteKafkaClusterConfigExecute(r ApiDeleteKafkaCl
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -364,6 +366,16 @@ func (a *ConfigsV3ApiService) DeleteKafkaClusterConfigExecute(r ApiDeleteKafkaCl
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -415,7 +427,7 @@ DeleteKafkaTopicConfig Reset Topic Config
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Resets the config with given `name` to its default value.
+Reset the configuration parameter with given `name` to its default value.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
@@ -467,7 +479,7 @@ func (a *ConfigsV3ApiService) DeleteKafkaTopicConfigExecute(r ApiDeleteKafkaTopi
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -507,6 +519,16 @@ func (a *ConfigsV3ApiService) DeleteKafkaTopicConfigExecute(r ApiDeleteKafkaTopi
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -563,11 +585,11 @@ func (r ApiGetKafkaClusterConfigRequest) Execute() (ClusterConfigData, *_nethttp
 }
 
 /*
-GetKafkaClusterConfig Get Cluster Config
+GetKafkaClusterConfig Get Dynamic Broker Config
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Returns the configuration parameter specified by ``name``.
+Return the dynamic cluster-wide broker configuration parameter specified by ``name``.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
@@ -618,7 +640,7 @@ func (a *ConfigsV3ApiService) GetKafkaClusterConfigExecute(r ApiGetKafkaClusterC
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -658,6 +680,16 @@ func (a *ConfigsV3ApiService) GetKafkaClusterConfigExecute(r ApiGetKafkaClusterC
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -718,7 +750,7 @@ GetKafkaTopicConfig Get Topic Config
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Return the config with the given `name`.
+Return the configuration parameter with the given `name`.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
@@ -772,7 +804,7 @@ func (a *ConfigsV3ApiService) GetKafkaTopicConfigExecute(r ApiGetKafkaTopicConfi
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -812,6 +844,16 @@ func (a *ConfigsV3ApiService) GetKafkaTopicConfigExecute(r ApiGetKafkaTopicConfi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -876,11 +918,11 @@ func (r ApiListKafkaAllTopicConfigsRequest) Execute() (TopicConfigDataList, *_ne
 }
 
 /*
-ListKafkaAllTopicConfigs Get All Topic Configs
+ListKafkaAllTopicConfigs List All Topic Configs
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Returns all topic configurations for topics hosted by the specified
+Return the list of configuration parameters for all topics hosted by the specified
 cluster.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -929,7 +971,7 @@ func (a *ConfigsV3ApiService) ListKafkaAllTopicConfigsExecute(r ApiListKafkaAllT
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -969,6 +1011,16 @@ func (a *ConfigsV3ApiService) ListKafkaAllTopicConfigsExecute(r ApiListKafkaAllT
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1023,12 +1075,12 @@ func (r ApiListKafkaClusterConfigsRequest) Execute() (ClusterConfigDataList, *_n
 }
 
 /*
-ListKafkaClusterConfigs List Cluster Configs
+ListKafkaClusterConfigs List Dynamic Broker Configs
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Returns a list of configuration parameters for the specified Kafka
-cluster.
+Return a list of dynamic cluster-wide broker configuration parameters for the specified Kafka
+cluster. Returns an empty list if there are no dynamic cluster-wide broker configuration parameters.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
@@ -1076,7 +1128,7 @@ func (a *ConfigsV3ApiService) ListKafkaClusterConfigsExecute(r ApiListKafkaClust
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1116,6 +1168,16 @@ func (a *ConfigsV3ApiService) ListKafkaClusterConfigsExecute(r ApiListKafkaClust
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1171,9 +1233,11 @@ func (r ApiListKafkaDefaultTopicConfigsRequest) Execute() (TopicConfigDataList, 
 }
 
 /*
-ListKafkaDefaultTopicConfigs List Default Topic Configs
+ListKafkaDefaultTopicConfigs List New Topic Default Configs
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+List the default configuration parameters used if the topic were to be newly created.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
@@ -1224,7 +1288,7 @@ func (a *ConfigsV3ApiService) ListKafkaDefaultTopicConfigsExecute(r ApiListKafka
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1333,7 +1397,7 @@ ListKafkaTopicConfigs List Topic Configs
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Return the list of configs that belong to the specified topic.
+Return the list of configuration parameters that belong to the specified topic.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
@@ -1384,7 +1448,7 @@ func (a *ConfigsV3ApiService) ListKafkaTopicConfigsExecute(r ApiListKafkaTopicCo
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1424,6 +1488,16 @@ func (a *ConfigsV3ApiService) ListKafkaTopicConfigsExecute(r ApiListKafkaTopicCo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1496,11 +1570,11 @@ func (r ApiUpdateKafkaClusterConfigRequest) Execute() (*_nethttp.Response, error
 }
 
 /*
-UpdateKafkaClusterConfig Update Cluster Config
+UpdateKafkaClusterConfig Update Dynamic Broker Config
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Updates the configuration parameter specified by ``name``.
+Update the dynamic cluster-wide broker configuration parameter specified by ``name``.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
@@ -1549,7 +1623,7 @@ func (a *ConfigsV3ApiService) UpdateKafkaClusterConfigExecute(r ApiUpdateKafkaCl
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1591,6 +1665,16 @@ func (a *ConfigsV3ApiService) UpdateKafkaClusterConfigExecute(r ApiUpdateKafkaCl
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1643,11 +1727,11 @@ func (r ApiUpdateKafkaClusterConfigsRequest) Execute() (*_nethttp.Response, erro
 }
 
 /*
-UpdateKafkaClusterConfigs Batch Alter Cluster Configs
+UpdateKafkaClusterConfigs Batch Alter Dynamic Broker Configs
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Updates or deletes a set of Kafka cluster configuration parameters.
+Update or delete a set of dynamic cluster-wide broker configuration parameters.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
@@ -1693,7 +1777,7 @@ func (a *ConfigsV3ApiService) UpdateKafkaClusterConfigsExecute(r ApiUpdateKafkaC
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1735,6 +1819,16 @@ func (a *ConfigsV3ApiService) UpdateKafkaClusterConfigsExecute(r ApiUpdateKafkaC
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1793,7 +1887,7 @@ UpdateKafkaTopicConfig Update Topic Config
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Updates the config with given `name`.
+Update the configuration parameter with given `name`.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId The Kafka cluster ID.
@@ -1845,7 +1939,7 @@ func (a *ConfigsV3ApiService) UpdateKafkaTopicConfigExecute(r ApiUpdateKafkaTopi
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1887,6 +1981,16 @@ func (a *ConfigsV3ApiService) UpdateKafkaTopicConfigExecute(r ApiUpdateKafkaTopi
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1954,7 +2058,7 @@ UpdateKafkaTopicConfigBatch Batch Alter Topic Configs
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Updates or deletes a set of topic configs.
+Update or delete a set of topic configuration parameters.
 Also supports a dry-run mode that only validates whether the operation would succeed if the
 ``validate_only`` request property is explicitly specified and set to true.
 
@@ -2005,7 +2109,7 @@ func (a *ConfigsV3ApiService) UpdateKafkaTopicConfigBatchExecute(r ApiUpdateKafk
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/plain", "text/html"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -2047,6 +2151,16 @@ func (a *ConfigsV3ApiService) UpdateKafkaTopicConfigBatchExecute(r ApiUpdateKafk
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
