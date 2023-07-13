@@ -57,7 +57,7 @@ Other parameters are passed through a pointer to a apiListContextsRequest struct
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 

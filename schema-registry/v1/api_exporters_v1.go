@@ -39,218 +39,223 @@ var (
 	_ _context.Context
 )
 
-type SubjectsV1Api interface {
+type ExportersV1Api interface {
 
 	/*
-		DeleteSchemaVersion Delete schema version
+		DeleteExporter Delete schema exporter by name.
 
-		Deletes a specific version of the schema registered under this subject. This only deletes the version and the schema ID remains intact making it still possible to decode data using the schema ID. This API is recommended to be used only in development environments or under extreme circumstances where-in, its required to delete a previously registered schema for compatibility purposes or re-register previously registered schema.
+		Deletes the schema exporter.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param subject Name of the subject
-		 @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
-		 @return ApiDeleteSchemaVersionRequest
+		 @param name Name of the exporter
+		 @return ApiDeleteExporterRequest
 	*/
-	DeleteSchemaVersion(ctx _context.Context, subject string, version string) ApiDeleteSchemaVersionRequest
+	DeleteExporter(ctx _context.Context, name string) ApiDeleteExporterRequest
 
-	// DeleteSchemaVersionExecute executes the request
-	//  @return int32
-	DeleteSchemaVersionExecute(r ApiDeleteSchemaVersionRequest) (int32, *_nethttp.Response, error)
+	// DeleteExporterExecute executes the request
+	DeleteExporterExecute(r ApiDeleteExporterRequest) (*_nethttp.Response, error)
 
 	/*
-		DeleteSubject Delete subject
+		GetExporterConfigByName Gets schema exporter config by name.
 
-		Deletes the specified subject and its associated compatibility level if registered. It is recommended to use this API only when a topic needs to be recycled or in development environment.
+		Retrieves the config of the schema exporter.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param subject Name of the subject
-		 @return ApiDeleteSubjectRequest
+		 @param name Name of the exporter
+		 @return ApiGetExporterConfigByNameRequest
 	*/
-	DeleteSubject(ctx _context.Context, subject string) ApiDeleteSubjectRequest
+	GetExporterConfigByName(ctx _context.Context, name string) ApiGetExporterConfigByNameRequest
 
-	// DeleteSubjectExecute executes the request
-	//  @return []int32
-	DeleteSubjectExecute(r ApiDeleteSubjectRequest) ([]int32, *_nethttp.Response, error)
+	// GetExporterConfigByNameExecute executes the request
+	//  @return ExporterConfigResponse
+	GetExporterConfigByNameExecute(r ApiGetExporterConfigByNameRequest) (ExporterConfigResponse, *_nethttp.Response, error)
 
 	/*
-		GetReferencedBy List schemas referencing a schema
+		GetExporterInfoByName Gets schema exporter by name.
 
-		Retrieves the IDs of schemas that reference the specified schema.
+		Retrieves the information of the schema exporter.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param subject Name of the subject
-		 @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
-		 @return ApiGetReferencedByRequest
+		 @param name Name of the exporter
+		 @return ApiGetExporterInfoByNameRequest
 	*/
-	GetReferencedBy(ctx _context.Context, subject string, version string) ApiGetReferencedByRequest
+	GetExporterInfoByName(ctx _context.Context, name string) ApiGetExporterInfoByNameRequest
 
-	// GetReferencedByExecute executes the request
-	//  @return []int32
-	GetReferencedByExecute(r ApiGetReferencedByRequest) ([]int32, *_nethttp.Response, error)
+	// GetExporterInfoByNameExecute executes the request
+	//  @return ExporterReference
+	GetExporterInfoByNameExecute(r ApiGetExporterInfoByNameRequest) (ExporterReference, *_nethttp.Response, error)
 
 	/*
-		GetSchemaByVersion Get schema by version
+		GetExporterStatusByName Gets schema exporter status by name.
 
-		Retrieves a specific version of the schema registered under this subject.
+		Retrieves the status of the schema exporter.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param subject Name of the subject
-		 @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
-		 @return ApiGetSchemaByVersionRequest
+		 @param name Name of the exporter
+		 @return ApiGetExporterStatusByNameRequest
 	*/
-	GetSchemaByVersion(ctx _context.Context, subject string, version string) ApiGetSchemaByVersionRequest
+	GetExporterStatusByName(ctx _context.Context, name string) ApiGetExporterStatusByNameRequest
 
-	// GetSchemaByVersionExecute executes the request
-	//  @return Schema
-	GetSchemaByVersionExecute(r ApiGetSchemaByVersionRequest) (Schema, *_nethttp.Response, error)
+	// GetExporterStatusByNameExecute executes the request
+	//  @return ExporterStatusResponse
+	GetExporterStatusByNameExecute(r ApiGetExporterStatusByNameRequest) (ExporterStatusResponse, *_nethttp.Response, error)
 
 	/*
-		GetSchemaOnly1 Get schema string by version
+		ListExporters Gets all schema exporters.
 
-		Retrieves the schema for the specified version of this subject. Only the unescaped schema string is returned.
-
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param subject Name of the subject
-		 @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
-		 @return ApiGetSchemaOnly1Request
-	*/
-	GetSchemaOnly1(ctx _context.Context, subject string, version string) ApiGetSchemaOnly1Request
-
-	// GetSchemaOnly1Execute executes the request
-	//  @return string
-	GetSchemaOnly1Execute(r ApiGetSchemaOnly1Request) (string, *_nethttp.Response, error)
-
-	/*
-		List List subjects
-
-		Retrieves a list of registered subjects matching specified parameters.
+		Retrieves a list of schema exporters that have been created.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListRequest
+		 @return ApiListExportersRequest
 	*/
-	List(ctx _context.Context) ApiListRequest
+	ListExporters(ctx _context.Context) ApiListExportersRequest
 
-	// ListExecute executes the request
+	// ListExportersExecute executes the request
 	//  @return []string
-	ListExecute(r ApiListRequest) ([]string, *_nethttp.Response, error)
+	ListExportersExecute(r ApiListExportersRequest) ([]string, *_nethttp.Response, error)
 
 	/*
-		ListVersions List versions under subject
+		PauseExporterByName Pause schema exporter by name.
 
-		Retrieves a list of versions registered under the specified subject.
+		Pauses the state of the schema exporter.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param subject Name of the subject
-		 @return ApiListVersionsRequest
+		 @param name Name of the exporter
+		 @return ApiPauseExporterByNameRequest
 	*/
-	ListVersions(ctx _context.Context, subject string) ApiListVersionsRequest
+	PauseExporterByName(ctx _context.Context, name string) ApiPauseExporterByNameRequest
 
-	// ListVersionsExecute executes the request
-	//  @return []int32
-	ListVersionsExecute(r ApiListVersionsRequest) ([]int32, *_nethttp.Response, error)
+	// PauseExporterByNameExecute executes the request
+	//  @return ExporterResponse
+	PauseExporterByNameExecute(r ApiPauseExporterByNameRequest) (ExporterResponse, *_nethttp.Response, error)
 
 	/*
-		LookUpSchemaUnderSubject Lookup schema under subject
+		RegisterExporter Creates a new schema exporter.
 
-		Check if a schema has already been registered under the specified subject. If so, this returns the schema string along with its globally unique identifier, its version under this subject and the subject name.
+		Creates a new schema exporter. All attributes in request body are optional except config.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param subject Subject under which the schema will be registered
-		 @return ApiLookUpSchemaUnderSubjectRequest
+		 @return ApiRegisterExporterRequest
 	*/
-	LookUpSchemaUnderSubject(ctx _context.Context, subject string) ApiLookUpSchemaUnderSubjectRequest
+	RegisterExporter(ctx _context.Context) ApiRegisterExporterRequest
 
-	// LookUpSchemaUnderSubjectExecute executes the request
-	//  @return Schema
-	LookUpSchemaUnderSubjectExecute(r ApiLookUpSchemaUnderSubjectRequest) (Schema, *_nethttp.Response, error)
+	// RegisterExporterExecute executes the request
+	//  @return ExporterResponse
+	RegisterExporterExecute(r ApiRegisterExporterRequest) (ExporterResponse, *_nethttp.Response, error)
 
 	/*
-		Register Register schema under a subject
+		ResetExporterByName Reset schema exporter by name.
 
-		Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema's version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects.
-	A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config
-	When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
+		Reset the state of the schema exporter.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param subject Name of the subject
-		 @return ApiRegisterRequest
+		 @param name Name of the exporter
+		 @return ApiResetExporterByNameRequest
 	*/
-	Register(ctx _context.Context, subject string) ApiRegisterRequest
+	ResetExporterByName(ctx _context.Context, name string) ApiResetExporterByNameRequest
 
-	// RegisterExecute executes the request
-	//  @return RegisterSchemaResponse
-	RegisterExecute(r ApiRegisterRequest) (RegisterSchemaResponse, *_nethttp.Response, error)
+	// ResetExporterByNameExecute executes the request
+	//  @return ExporterResponse
+	ResetExporterByNameExecute(r ApiResetExporterByNameRequest) (ExporterResponse, *_nethttp.Response, error)
+
+	/*
+		ResumeExporterByName Resume schema exporter by name.
+
+		Resume running of the schema exporter.
+
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name Name of the exporter
+		 @return ApiResumeExporterByNameRequest
+	*/
+	ResumeExporterByName(ctx _context.Context, name string) ApiResumeExporterByNameRequest
+
+	// ResumeExporterByNameExecute executes the request
+	//  @return ExporterResponse
+	ResumeExporterByNameExecute(r ApiResumeExporterByNameRequest) (ExporterResponse, *_nethttp.Response, error)
+
+	/*
+		UpdateExporterConfigByName Update schema exporter config by name.
+
+		Retrieves the config of the schema exporter.
+
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name Name of the exporter
+		 @return ApiUpdateExporterConfigByNameRequest
+	*/
+	UpdateExporterConfigByName(ctx _context.Context, name string) ApiUpdateExporterConfigByNameRequest
+
+	// UpdateExporterConfigByNameExecute executes the request
+	//  @return ExporterResponse
+	UpdateExporterConfigByNameExecute(r ApiUpdateExporterConfigByNameRequest) (ExporterResponse, *_nethttp.Response, error)
+
+	/*
+		UpdateExporterInfo Update schema exporter by name.
+
+		Updates the information or configurations of the schema exporter. All attributes in request body are optional.
+
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name Name of the exporter
+		 @return ApiUpdateExporterInfoRequest
+	*/
+	UpdateExporterInfo(ctx _context.Context, name string) ApiUpdateExporterInfoRequest
+
+	// UpdateExporterInfoExecute executes the request
+	//  @return ExporterResponse
+	UpdateExporterInfoExecute(r ApiUpdateExporterInfoRequest) (ExporterResponse, *_nethttp.Response, error)
 }
 
-// SubjectsV1ApiService SubjectsV1Api service
-type SubjectsV1ApiService service
+// ExportersV1ApiService ExportersV1Api service
+type ExportersV1ApiService service
 
-type ApiDeleteSchemaVersionRequest struct {
+type ApiDeleteExporterRequest struct {
 	ctx        _context.Context
-	ApiService SubjectsV1Api
-	subject    string
-	version    string
-	permanent  *bool
+	ApiService ExportersV1Api
+	name       string
 }
 
-// Whether to perform a permanent delete
-func (r ApiDeleteSchemaVersionRequest) Permanent(permanent bool) ApiDeleteSchemaVersionRequest {
-	r.permanent = &permanent
-	return r
-}
-
-func (r ApiDeleteSchemaVersionRequest) Execute() (int32, *_nethttp.Response, error) {
-	return r.ApiService.DeleteSchemaVersionExecute(r)
+func (r ApiDeleteExporterRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteExporterExecute(r)
 }
 
 /*
-DeleteSchemaVersion Delete schema version
+DeleteExporter Delete schema exporter by name.
 
-Deletes a specific version of the schema registered under this subject. This only deletes the version and the schema ID remains intact making it still possible to decode data using the schema ID. This API is recommended to be used only in development environments or under extreme circumstances where-in, its required to delete a previously registered schema for compatibility purposes or re-register previously registered schema.
+Deletes the schema exporter.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param subject Name of the subject
-	@param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
-	@return ApiDeleteSchemaVersionRequest
+	@param name Name of the exporter
+	@return ApiDeleteExporterRequest
 */
-func (a *SubjectsV1ApiService) DeleteSchemaVersion(ctx _context.Context, subject string, version string) ApiDeleteSchemaVersionRequest {
-	return ApiDeleteSchemaVersionRequest{
+func (a *ExportersV1ApiService) DeleteExporter(ctx _context.Context, name string) ApiDeleteExporterRequest {
+	return ApiDeleteExporterRequest{
 		ApiService: a,
 		ctx:        ctx,
-		subject:    subject,
-		version:    version,
+		name:       name,
 	}
 }
 
 // Execute executes the request
-//
-//	@return int32
-func (a *SubjectsV1ApiService) DeleteSchemaVersionExecute(r ApiDeleteSchemaVersionRequest) (int32, *_nethttp.Response, error) {
+func (a *ExportersV1ApiService) DeleteExporterExecute(r ApiDeleteExporterRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  int32
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubjectsV1ApiService.DeleteSchemaVersion")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExportersV1ApiService.DeleteExporter")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/subjects/{subject}/versions/{version}"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(r.subject, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(r.version, "")), -1)
+	localVarPath := localBasePath + "/exporters/{name}"
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(r.name, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
-	if r.permanent != nil {
-		localVarQueryParams.Add("permanent", parameterToString(*r.permanent, ""))
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -261,7 +266,7 @@ func (a *SubjectsV1ApiService) DeleteSchemaVersionExecute(r ApiDeleteSchemaVersi
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -270,19 +275,19 @@ func (a *SubjectsV1ApiService) DeleteSchemaVersionExecute(r ApiDeleteSchemaVersi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -295,293 +300,103 @@ func (a *SubjectsV1ApiService) DeleteSchemaVersionExecute(r ApiDeleteSchemaVersi
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v ErrorMessage
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorMessage
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorMessage
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v ErrorMessage
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v ErrorMessage
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiDeleteSubjectRequest struct {
-	ctx        _context.Context
-	ApiService SubjectsV1Api
-	subject    string
-	permanent  *bool
-}
-
-// Whether to perform a permanent delete
-func (r ApiDeleteSubjectRequest) Permanent(permanent bool) ApiDeleteSubjectRequest {
-	r.permanent = &permanent
-	return r
-}
-
-func (r ApiDeleteSubjectRequest) Execute() ([]int32, *_nethttp.Response, error) {
-	return r.ApiService.DeleteSubjectExecute(r)
-}
-
-/*
-DeleteSubject Delete subject
-
-Deletes the specified subject and its associated compatibility level if registered. It is recommended to use this API only when a topic needs to be recycled or in development environment.
-
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param subject Name of the subject
-	@return ApiDeleteSubjectRequest
-*/
-func (a *SubjectsV1ApiService) DeleteSubject(ctx _context.Context, subject string) ApiDeleteSubjectRequest {
-	return ApiDeleteSubjectRequest{
-		ApiService: a,
-		ctx:        ctx,
-		subject:    subject,
-	}
-}
-
-// Execute executes the request
-//
-//	@return []int32
-func (a *SubjectsV1ApiService) DeleteSubjectExecute(r ApiDeleteSubjectRequest) ([]int32, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  []int32
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubjectsV1ApiService.DeleteSubject")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/subjects/{subject}"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(r.subject, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	if r.permanent != nil {
-		localVarQueryParams.Add("permanent", parameterToString(*r.permanent, ""))
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5", "application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ErrorMessage
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorMessage
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorMessage
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ErrorMessage
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v ErrorMessage
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarHTTPResponse, nil
 }
 
-type ApiGetReferencedByRequest struct {
+type ApiGetExporterConfigByNameRequest struct {
 	ctx        _context.Context
-	ApiService SubjectsV1Api
-	subject    string
-	version    string
+	ApiService ExportersV1Api
+	name       string
 }
 
-func (r ApiGetReferencedByRequest) Execute() ([]int32, *_nethttp.Response, error) {
-	return r.ApiService.GetReferencedByExecute(r)
+func (r ApiGetExporterConfigByNameRequest) Execute() (ExporterConfigResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetExporterConfigByNameExecute(r)
 }
 
 /*
-GetReferencedBy List schemas referencing a schema
+GetExporterConfigByName Gets schema exporter config by name.
 
-Retrieves the IDs of schemas that reference the specified schema.
+Retrieves the config of the schema exporter.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param subject Name of the subject
-	@param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
-	@return ApiGetReferencedByRequest
+	@param name Name of the exporter
+	@return ApiGetExporterConfigByNameRequest
 */
-func (a *SubjectsV1ApiService) GetReferencedBy(ctx _context.Context, subject string, version string) ApiGetReferencedByRequest {
-	return ApiGetReferencedByRequest{
+func (a *ExportersV1ApiService) GetExporterConfigByName(ctx _context.Context, name string) ApiGetExporterConfigByNameRequest {
+	return ApiGetExporterConfigByNameRequest{
 		ApiService: a,
 		ctx:        ctx,
-		subject:    subject,
-		version:    version,
+		name:       name,
 	}
 }
 
 // Execute executes the request
 //
-//	@return []int32
-func (a *SubjectsV1ApiService) GetReferencedByExecute(r ApiGetReferencedByRequest) ([]int32, *_nethttp.Response, error) {
+//	@return ExporterConfigResponse
+func (a *ExportersV1ApiService) GetExporterConfigByNameExecute(r ApiGetExporterConfigByNameRequest) (ExporterConfigResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []int32
+		localVarReturnValue  ExporterConfigResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubjectsV1ApiService.GetReferencedBy")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExportersV1ApiService.GetExporterConfigByName")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/subjects/{subject}/versions/{version}/referencedby"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(r.subject, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(r.version, "")), -1)
+	localVarPath := localBasePath + "/exporters/{name}/config"
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(r.name, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -597,7 +412,7 @@ func (a *SubjectsV1ApiService) GetReferencedByExecute(r ApiGetReferencedByReques
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -627,26 +442,6 @@ func (a *SubjectsV1ApiService) GetReferencedByExecute(r ApiGetReferencedByReques
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ErrorMessage
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v ErrorMessage
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorMessage
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -686,6 +481,15 @@ func (a *SubjectsV1ApiService) GetReferencedByExecute(r ApiGetReferencedByReques
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -701,72 +505,58 @@ func (a *SubjectsV1ApiService) GetReferencedByExecute(r ApiGetReferencedByReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetSchemaByVersionRequest struct {
+type ApiGetExporterInfoByNameRequest struct {
 	ctx        _context.Context
-	ApiService SubjectsV1Api
-	subject    string
-	version    string
-	deleted    *bool
+	ApiService ExportersV1Api
+	name       string
 }
 
-// Whether to include deleted schema
-func (r ApiGetSchemaByVersionRequest) Deleted(deleted bool) ApiGetSchemaByVersionRequest {
-	r.deleted = &deleted
-	return r
-}
-
-func (r ApiGetSchemaByVersionRequest) Execute() (Schema, *_nethttp.Response, error) {
-	return r.ApiService.GetSchemaByVersionExecute(r)
+func (r ApiGetExporterInfoByNameRequest) Execute() (ExporterReference, *_nethttp.Response, error) {
+	return r.ApiService.GetExporterInfoByNameExecute(r)
 }
 
 /*
-GetSchemaByVersion Get schema by version
+GetExporterInfoByName Gets schema exporter by name.
 
-Retrieves a specific version of the schema registered under this subject.
+Retrieves the information of the schema exporter.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param subject Name of the subject
-	@param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
-	@return ApiGetSchemaByVersionRequest
+	@param name Name of the exporter
+	@return ApiGetExporterInfoByNameRequest
 */
-func (a *SubjectsV1ApiService) GetSchemaByVersion(ctx _context.Context, subject string, version string) ApiGetSchemaByVersionRequest {
-	return ApiGetSchemaByVersionRequest{
+func (a *ExportersV1ApiService) GetExporterInfoByName(ctx _context.Context, name string) ApiGetExporterInfoByNameRequest {
+	return ApiGetExporterInfoByNameRequest{
 		ApiService: a,
 		ctx:        ctx,
-		subject:    subject,
-		version:    version,
+		name:       name,
 	}
 }
 
 // Execute executes the request
 //
-//	@return Schema
-func (a *SubjectsV1ApiService) GetSchemaByVersionExecute(r ApiGetSchemaByVersionRequest) (Schema, *_nethttp.Response, error) {
+//	@return ExporterReference
+func (a *ExportersV1ApiService) GetExporterInfoByNameExecute(r ApiGetExporterInfoByNameRequest) (ExporterReference, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Schema
+		localVarReturnValue  ExporterReference
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubjectsV1ApiService.GetSchemaByVersion")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExportersV1ApiService.GetExporterInfoByName")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/subjects/{subject}/versions/{version}"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(r.subject, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(r.version, "")), -1)
+	localVarPath := localBasePath + "/exporters/{name}"
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(r.name, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
-	if r.deleted != nil {
-		localVarQueryParams.Add("deleted", parameterToString(*r.deleted, ""))
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -777,7 +567,7 @@ func (a *SubjectsV1ApiService) GetSchemaByVersionExecute(r ApiGetSchemaByVersion
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -807,26 +597,6 @@ func (a *SubjectsV1ApiService) GetSchemaByVersionExecute(r ApiGetSchemaByVersion
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ErrorMessage
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v ErrorMessage
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorMessage
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -866,6 +636,15 @@ func (a *SubjectsV1ApiService) GetSchemaByVersionExecute(r ApiGetSchemaByVersion
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -881,72 +660,58 @@ func (a *SubjectsV1ApiService) GetSchemaByVersionExecute(r ApiGetSchemaByVersion
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetSchemaOnly1Request struct {
+type ApiGetExporterStatusByNameRequest struct {
 	ctx        _context.Context
-	ApiService SubjectsV1Api
-	subject    string
-	version    string
-	deleted    *bool
+	ApiService ExportersV1Api
+	name       string
 }
 
-// Whether to include deleted schema
-func (r ApiGetSchemaOnly1Request) Deleted(deleted bool) ApiGetSchemaOnly1Request {
-	r.deleted = &deleted
-	return r
-}
-
-func (r ApiGetSchemaOnly1Request) Execute() (string, *_nethttp.Response, error) {
-	return r.ApiService.GetSchemaOnly1Execute(r)
+func (r ApiGetExporterStatusByNameRequest) Execute() (ExporterStatusResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetExporterStatusByNameExecute(r)
 }
 
 /*
-GetSchemaOnly1 Get schema string by version
+GetExporterStatusByName Gets schema exporter status by name.
 
-Retrieves the schema for the specified version of this subject. Only the unescaped schema string is returned.
+Retrieves the status of the schema exporter.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param subject Name of the subject
-	@param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
-	@return ApiGetSchemaOnly1Request
+	@param name Name of the exporter
+	@return ApiGetExporterStatusByNameRequest
 */
-func (a *SubjectsV1ApiService) GetSchemaOnly1(ctx _context.Context, subject string, version string) ApiGetSchemaOnly1Request {
-	return ApiGetSchemaOnly1Request{
+func (a *ExportersV1ApiService) GetExporterStatusByName(ctx _context.Context, name string) ApiGetExporterStatusByNameRequest {
+	return ApiGetExporterStatusByNameRequest{
 		ApiService: a,
 		ctx:        ctx,
-		subject:    subject,
-		version:    version,
+		name:       name,
 	}
 }
 
 // Execute executes the request
 //
-//	@return string
-func (a *SubjectsV1ApiService) GetSchemaOnly1Execute(r ApiGetSchemaOnly1Request) (string, *_nethttp.Response, error) {
+//	@return ExporterStatusResponse
+func (a *ExportersV1ApiService) GetExporterStatusByNameExecute(r ApiGetExporterStatusByNameRequest) (ExporterStatusResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  string
+		localVarReturnValue  ExporterStatusResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubjectsV1ApiService.GetSchemaOnly1")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExportersV1ApiService.GetExporterStatusByName")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/subjects/{subject}/versions/{version}/schema"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(r.subject, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(r.version, "")), -1)
+	localVarPath := localBasePath + "/exporters/{name}/status"
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(r.name, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
-	if r.deleted != nil {
-		localVarQueryParams.Add("deleted", parameterToString(*r.deleted, ""))
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -957,7 +722,7 @@ func (a *SubjectsV1ApiService) GetSchemaOnly1Execute(r ApiGetSchemaOnly1Request)
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -987,26 +752,6 @@ func (a *SubjectsV1ApiService) GetSchemaOnly1Execute(r ApiGetSchemaOnly1Request)
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ErrorMessage
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v ErrorMessage
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorMessage
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1046,6 +791,15 @@ func (a *SubjectsV1ApiService) GetSchemaOnly1Execute(r ApiGetSchemaOnly1Request)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1061,39 +815,25 @@ func (a *SubjectsV1ApiService) GetSchemaOnly1Execute(r ApiGetSchemaOnly1Request)
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListRequest struct {
-	ctx           _context.Context
-	ApiService    SubjectsV1Api
-	subjectPrefix *string
-	deleted       *bool
+type ApiListExportersRequest struct {
+	ctx        _context.Context
+	ApiService ExportersV1Api
 }
 
-// Subject name prefix
-func (r ApiListRequest) SubjectPrefix(subjectPrefix string) ApiListRequest {
-	r.subjectPrefix = &subjectPrefix
-	return r
-}
-
-// Whether to look up deleted subjects
-func (r ApiListRequest) Deleted(deleted bool) ApiListRequest {
-	r.deleted = &deleted
-	return r
-}
-
-func (r ApiListRequest) Execute() ([]string, *_nethttp.Response, error) {
-	return r.ApiService.ListExecute(r)
+func (r ApiListExportersRequest) Execute() ([]string, *_nethttp.Response, error) {
+	return r.ApiService.ListExportersExecute(r)
 }
 
 /*
-List List subjects
+ListExporters Gets all schema exporters.
 
-Retrieves a list of registered subjects matching specified parameters.
+Retrieves a list of schema exporters that have been created.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListRequest
+	@return ApiListExportersRequest
 */
-func (a *SubjectsV1ApiService) List(ctx _context.Context) ApiListRequest {
-	return ApiListRequest{
+func (a *ExportersV1ApiService) ListExporters(ctx _context.Context) ApiListExportersRequest {
+	return ApiListExportersRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -1102,7 +842,7 @@ func (a *SubjectsV1ApiService) List(ctx _context.Context) ApiListRequest {
 // Execute executes the request
 //
 //	@return []string
-func (a *SubjectsV1ApiService) ListExecute(r ApiListRequest) ([]string, *_nethttp.Response, error) {
+func (a *ExportersV1ApiService) ListExportersExecute(r ApiListExportersRequest) ([]string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -1112,23 +852,17 @@ func (a *SubjectsV1ApiService) ListExecute(r ApiListRequest) ([]string, *_nethtt
 		localVarReturnValue  []string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubjectsV1ApiService.List")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExportersV1ApiService.ListExporters")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/subjects"
+	localVarPath := localBasePath + "/exporters"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
-	if r.subjectPrefix != nil {
-		localVarQueryParams.Add("subjectPrefix", parameterToString(*r.subjectPrefix, ""))
-	}
-	if r.deleted != nil {
-		localVarQueryParams.Add("deleted", parameterToString(*r.deleted, ""))
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1139,7 +873,7 @@ func (a *SubjectsV1ApiService) ListExecute(r ApiListRequest) ([]string, *_nethtt
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1167,16 +901,6 @@ func (a *SubjectsV1ApiService) ListExecute(r ApiListRequest) ([]string, *_nethtt
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorMessage
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorMessage
@@ -1208,6 +932,15 @@ func (a *SubjectsV1ApiService) ListExecute(r ApiListRequest) ([]string, *_nethtt
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1223,68 +956,58 @@ func (a *SubjectsV1ApiService) ListExecute(r ApiListRequest) ([]string, *_nethtt
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListVersionsRequest struct {
+type ApiPauseExporterByNameRequest struct {
 	ctx        _context.Context
-	ApiService SubjectsV1Api
-	subject    string
-	deleted    *bool
+	ApiService ExportersV1Api
+	name       string
 }
 
-// Whether to include deleted schemas
-func (r ApiListVersionsRequest) Deleted(deleted bool) ApiListVersionsRequest {
-	r.deleted = &deleted
-	return r
-}
-
-func (r ApiListVersionsRequest) Execute() ([]int32, *_nethttp.Response, error) {
-	return r.ApiService.ListVersionsExecute(r)
+func (r ApiPauseExporterByNameRequest) Execute() (ExporterResponse, *_nethttp.Response, error) {
+	return r.ApiService.PauseExporterByNameExecute(r)
 }
 
 /*
-ListVersions List versions under subject
+PauseExporterByName Pause schema exporter by name.
 
-Retrieves a list of versions registered under the specified subject.
+Pauses the state of the schema exporter.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param subject Name of the subject
-	@return ApiListVersionsRequest
+	@param name Name of the exporter
+	@return ApiPauseExporterByNameRequest
 */
-func (a *SubjectsV1ApiService) ListVersions(ctx _context.Context, subject string) ApiListVersionsRequest {
-	return ApiListVersionsRequest{
+func (a *ExportersV1ApiService) PauseExporterByName(ctx _context.Context, name string) ApiPauseExporterByNameRequest {
+	return ApiPauseExporterByNameRequest{
 		ApiService: a,
 		ctx:        ctx,
-		subject:    subject,
+		name:       name,
 	}
 }
 
 // Execute executes the request
 //
-//	@return []int32
-func (a *SubjectsV1ApiService) ListVersionsExecute(r ApiListVersionsRequest) ([]int32, *_nethttp.Response, error) {
+//	@return ExporterResponse
+func (a *ExportersV1ApiService) PauseExporterByNameExecute(r ApiPauseExporterByNameRequest) (ExporterResponse, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = _nethttp.MethodPut
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []int32
+		localVarReturnValue  ExporterResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubjectsV1ApiService.ListVersions")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExportersV1ApiService.PauseExporterByName")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/subjects/{subject}/versions"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(r.subject, "")), -1)
+	localVarPath := localBasePath + "/exporters/{name}/pause"
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(r.name, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
-	if r.deleted != nil {
-		localVarQueryParams.Add("deleted", parameterToString(*r.deleted, ""))
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1295,7 +1018,7 @@ func (a *SubjectsV1ApiService) ListVersionsExecute(r ApiListVersionsRequest) ([]
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1334,7 +1057,7 @@ func (a *SubjectsV1ApiService) ListVersionsExecute(r ApiListVersionsRequest) ([]
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
+		if localVarHTTPResponse.StatusCode == 409 {
 			var v ErrorMessage
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1374,154 +1097,6 @@ func (a *SubjectsV1ApiService) ListVersionsExecute(r ApiListVersionsRequest) ([]
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiLookUpSchemaUnderSubjectRequest struct {
-	ctx                   _context.Context
-	ApiService            SubjectsV1Api
-	subject               string
-	registerSchemaRequest *RegisterSchemaRequest
-	normalize             *bool
-	deleted               *bool
-}
-
-// Schema
-func (r ApiLookUpSchemaUnderSubjectRequest) RegisterSchemaRequest(registerSchemaRequest RegisterSchemaRequest) ApiLookUpSchemaUnderSubjectRequest {
-	r.registerSchemaRequest = &registerSchemaRequest
-	return r
-}
-
-// Whether to lookup the normalized schema
-func (r ApiLookUpSchemaUnderSubjectRequest) Normalize(normalize bool) ApiLookUpSchemaUnderSubjectRequest {
-	r.normalize = &normalize
-	return r
-}
-
-// Whether to lookup deleted schemas
-func (r ApiLookUpSchemaUnderSubjectRequest) Deleted(deleted bool) ApiLookUpSchemaUnderSubjectRequest {
-	r.deleted = &deleted
-	return r
-}
-
-func (r ApiLookUpSchemaUnderSubjectRequest) Execute() (Schema, *_nethttp.Response, error) {
-	return r.ApiService.LookUpSchemaUnderSubjectExecute(r)
-}
-
-/*
-LookUpSchemaUnderSubject Lookup schema under subject
-
-Check if a schema has already been registered under the specified subject. If so, this returns the schema string along with its globally unique identifier, its version under this subject and the subject name.
-
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param subject Subject under which the schema will be registered
-	@return ApiLookUpSchemaUnderSubjectRequest
-*/
-func (a *SubjectsV1ApiService) LookUpSchemaUnderSubject(ctx _context.Context, subject string) ApiLookUpSchemaUnderSubjectRequest {
-	return ApiLookUpSchemaUnderSubjectRequest{
-		ApiService: a,
-		ctx:        ctx,
-		subject:    subject,
-	}
-}
-
-// Execute executes the request
-//
-//	@return Schema
-func (a *SubjectsV1ApiService) LookUpSchemaUnderSubjectExecute(r ApiLookUpSchemaUnderSubjectRequest) (Schema, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Schema
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubjectsV1ApiService.LookUpSchemaUnderSubject")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/subjects/{subject}"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(r.subject, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-	if r.registerSchemaRequest == nil {
-		return localVarReturnValue, nil, reportError("registerSchemaRequest is required and must be specified")
-	}
-
-	if r.normalize != nil {
-		localVarQueryParams.Add("normalize", parameterToString(*r.normalize, ""))
-	}
-	if r.deleted != nil {
-		localVarQueryParams.Add("deleted", parameterToString(*r.deleted, ""))
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json", "application/octet-stream"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5", "application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.registerSchemaRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ErrorMessage
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorMessage
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -1530,37 +1105,6 @@ func (a *SubjectsV1ApiService) LookUpSchemaUnderSubjectExecute(r ApiLookUpSchema
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorMessage
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ErrorMessage
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v ErrorMessage
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1577,82 +1121,66 @@ func (a *SubjectsV1ApiService) LookUpSchemaUnderSubjectExecute(r ApiLookUpSchema
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiRegisterRequest struct {
-	ctx                   _context.Context
-	ApiService            SubjectsV1Api
-	subject               string
-	registerSchemaRequest *RegisterSchemaRequest
-	normalize             *bool
+type ApiRegisterExporterRequest struct {
+	ctx               _context.Context
+	ApiService        ExportersV1Api
+	exporterReference *ExporterReference
 }
 
 // Schema
-func (r ApiRegisterRequest) RegisterSchemaRequest(registerSchemaRequest RegisterSchemaRequest) ApiRegisterRequest {
-	r.registerSchemaRequest = &registerSchemaRequest
+func (r ApiRegisterExporterRequest) ExporterReference(exporterReference ExporterReference) ApiRegisterExporterRequest {
+	r.exporterReference = &exporterReference
 	return r
 }
 
-// Whether to register the normalized schema
-func (r ApiRegisterRequest) Normalize(normalize bool) ApiRegisterRequest {
-	r.normalize = &normalize
-	return r
-}
-
-func (r ApiRegisterRequest) Execute() (RegisterSchemaResponse, *_nethttp.Response, error) {
-	return r.ApiService.RegisterExecute(r)
+func (r ApiRegisterExporterRequest) Execute() (ExporterResponse, *_nethttp.Response, error) {
+	return r.ApiService.RegisterExporterExecute(r)
 }
 
 /*
-Register Register schema under a subject
+RegisterExporter Creates a new schema exporter.
 
-Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema's version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects.
-A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config
-When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
+Creates a new schema exporter. All attributes in request body are optional except config.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param subject Name of the subject
-	@return ApiRegisterRequest
+	@return ApiRegisterExporterRequest
 */
-func (a *SubjectsV1ApiService) Register(ctx _context.Context, subject string) ApiRegisterRequest {
-	return ApiRegisterRequest{
+func (a *ExportersV1ApiService) RegisterExporter(ctx _context.Context) ApiRegisterExporterRequest {
+	return ApiRegisterExporterRequest{
 		ApiService: a,
 		ctx:        ctx,
-		subject:    subject,
 	}
 }
 
 // Execute executes the request
 //
-//	@return RegisterSchemaResponse
-func (a *SubjectsV1ApiService) RegisterExecute(r ApiRegisterRequest) (RegisterSchemaResponse, *_nethttp.Response, error) {
+//	@return ExporterResponse
+func (a *ExportersV1ApiService) RegisterExporterExecute(r ApiRegisterExporterRequest) (ExporterResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  RegisterSchemaResponse
+		localVarReturnValue  ExporterResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubjectsV1ApiService.Register")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExportersV1ApiService.RegisterExporter")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/subjects/{subject}/versions"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(r.subject, "")), -1)
+	localVarPath := localBasePath + "/exporters"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.registerSchemaRequest == nil {
-		return localVarReturnValue, nil, reportError("registerSchemaRequest is required and must be specified")
+	if r.exporterReference == nil {
+		return localVarReturnValue, nil, reportError("exporterReference is required and must be specified")
 	}
 
-	if r.normalize != nil {
-		localVarQueryParams.Add("normalize", parameterToString(*r.normalize, ""))
-	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json", "application/octet-stream"}
+	localVarHTTPContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1661,7 +1189,7 @@ func (a *SubjectsV1ApiService) RegisterExecute(r ApiRegisterRequest) (RegisterSc
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/json; qs=0.5", "application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1669,7 +1197,7 @@ func (a *SubjectsV1ApiService) RegisterExecute(r ApiRegisterRequest) (RegisterSc
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.registerSchemaRequest
+	localVarPostBody = r.exporterReference
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1702,7 +1230,27 @@ func (a *SubjectsV1ApiService) RegisterExecute(r ApiRegisterRequest) (RegisterSc
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 422 {
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v ErrorMessage
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1713,6 +1261,131 @@ func (a *SubjectsV1ApiService) RegisterExecute(r ApiRegisterRequest) (RegisterSc
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiResetExporterByNameRequest struct {
+	ctx        _context.Context
+	ApiService ExportersV1Api
+	name       string
+}
+
+func (r ApiResetExporterByNameRequest) Execute() (ExporterResponse, *_nethttp.Response, error) {
+	return r.ApiService.ResetExporterByNameExecute(r)
+}
+
+/*
+ResetExporterByName Reset schema exporter by name.
+
+Reset the state of the schema exporter.
+
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the exporter
+	@return ApiResetExporterByNameRequest
+*/
+func (a *ExportersV1ApiService) ResetExporterByName(ctx _context.Context, name string) ApiResetExporterByNameRequest {
+	return ApiResetExporterByNameRequest{
+		ApiService: a,
+		ctx:        ctx,
+		name:       name,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ExporterResponse
+func (a *ExportersV1ApiService) ResetExporterByNameExecute(r ApiResetExporterByNameRequest) (ExporterResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPut
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  ExporterResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExportersV1ApiService.ResetExporterByName")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/exporters/{name}/reset"
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(r.name, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
 			var v ErrorMessage
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1751,6 +1424,534 @@ func (a *SubjectsV1ApiService) RegisterExecute(r ApiRegisterRequest) (RegisterSc
 			}
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiResumeExporterByNameRequest struct {
+	ctx        _context.Context
+	ApiService ExportersV1Api
+	name       string
+}
+
+func (r ApiResumeExporterByNameRequest) Execute() (ExporterResponse, *_nethttp.Response, error) {
+	return r.ApiService.ResumeExporterByNameExecute(r)
+}
+
+/*
+ResumeExporterByName Resume schema exporter by name.
+
+Resume running of the schema exporter.
+
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the exporter
+	@return ApiResumeExporterByNameRequest
+*/
+func (a *ExportersV1ApiService) ResumeExporterByName(ctx _context.Context, name string) ApiResumeExporterByNameRequest {
+	return ApiResumeExporterByNameRequest{
+		ApiService: a,
+		ctx:        ctx,
+		name:       name,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ExporterResponse
+func (a *ExportersV1ApiService) ResumeExporterByNameExecute(r ApiResumeExporterByNameRequest) (ExporterResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPut
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  ExporterResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExportersV1ApiService.ResumeExporterByName")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/exporters/{name}/resume"
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(r.name, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateExporterConfigByNameRequest struct {
+	ctx                    _context.Context
+	ApiService             ExportersV1Api
+	name                   string
+	exporterConfigResponse *ExporterConfigResponse
+}
+
+// Exporter Update Request
+func (r ApiUpdateExporterConfigByNameRequest) ExporterConfigResponse(exporterConfigResponse ExporterConfigResponse) ApiUpdateExporterConfigByNameRequest {
+	r.exporterConfigResponse = &exporterConfigResponse
+	return r
+}
+
+func (r ApiUpdateExporterConfigByNameRequest) Execute() (ExporterResponse, *_nethttp.Response, error) {
+	return r.ApiService.UpdateExporterConfigByNameExecute(r)
+}
+
+/*
+UpdateExporterConfigByName Update schema exporter config by name.
+
+Retrieves the config of the schema exporter.
+
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the exporter
+	@return ApiUpdateExporterConfigByNameRequest
+*/
+func (a *ExportersV1ApiService) UpdateExporterConfigByName(ctx _context.Context, name string) ApiUpdateExporterConfigByNameRequest {
+	return ApiUpdateExporterConfigByNameRequest{
+		ApiService: a,
+		ctx:        ctx,
+		name:       name,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ExporterResponse
+func (a *ExportersV1ApiService) UpdateExporterConfigByNameExecute(r ApiUpdateExporterConfigByNameRequest) (ExporterResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPut
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  ExporterResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExportersV1ApiService.UpdateExporterConfigByName")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/exporters/{name}/config"
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(r.name, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.exporterConfigResponse == nil {
+		return localVarReturnValue, nil, reportError("exporterConfigResponse is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.exporterConfigResponse
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateExporterInfoRequest struct {
+	ctx                   _context.Context
+	ApiService            ExportersV1Api
+	name                  string
+	exporterUpdateRequest *ExporterUpdateRequest
+}
+
+// Exporter Update Request
+func (r ApiUpdateExporterInfoRequest) ExporterUpdateRequest(exporterUpdateRequest ExporterUpdateRequest) ApiUpdateExporterInfoRequest {
+	r.exporterUpdateRequest = &exporterUpdateRequest
+	return r
+}
+
+func (r ApiUpdateExporterInfoRequest) Execute() (ExporterResponse, *_nethttp.Response, error) {
+	return r.ApiService.UpdateExporterInfoExecute(r)
+}
+
+/*
+UpdateExporterInfo Update schema exporter by name.
+
+Updates the information or configurations of the schema exporter. All attributes in request body are optional.
+
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the exporter
+	@return ApiUpdateExporterInfoRequest
+*/
+func (a *ExportersV1ApiService) UpdateExporterInfo(ctx _context.Context, name string) ApiUpdateExporterInfoRequest {
+	return ApiUpdateExporterInfoRequest{
+		ApiService: a,
+		ctx:        ctx,
+		name:       name,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ExporterResponse
+func (a *ExportersV1ApiService) UpdateExporterInfoExecute(r ApiUpdateExporterInfoRequest) (ExporterResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPut
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  ExporterResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExportersV1ApiService.UpdateExporterInfo")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/exporters/{name}"
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(r.name, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.exporterUpdateRequest == nil {
+		return localVarReturnValue, nil, reportError("exporterUpdateRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.exporterUpdateRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
