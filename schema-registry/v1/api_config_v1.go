@@ -71,6 +71,20 @@ type ConfigV1Api interface {
 	DeleteTopLevelConfigExecute(r ApiDeleteTopLevelConfigRequest) (string, *_nethttp.Response, error)
 
 	/*
+		GetClusterConfig Get cluster config
+
+		Retrieves cluster config information.
+
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiGetClusterConfigRequest
+	*/
+	GetClusterConfig(ctx _context.Context) ApiGetClusterConfigRequest
+
+	// GetClusterConfigExecute executes the request
+	//  @return ClusterConfig
+	GetClusterConfigExecute(r ApiGetClusterConfigRequest) (ClusterConfig, *_nethttp.Response, error)
+
+	/*
 		GetSubjectLevelConfig Get subject compatibility level
 
 		Retrieves compatibility level for a subject.
@@ -147,9 +161,9 @@ DeleteSubjectConfig Delete subject compatibility level
 
 Deletes the specified subject-level compatibility level config and reverts to the global default.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Name of the subject
- @return ApiDeleteSubjectConfigRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Name of the subject
+	@return ApiDeleteSubjectConfigRequest
 */
 func (a *ConfigV1ApiService) DeleteSubjectConfig(ctx _context.Context, subject string) ApiDeleteSubjectConfigRequest {
 	return ApiDeleteSubjectConfigRequest{
@@ -160,7 +174,8 @@ func (a *ConfigV1ApiService) DeleteSubjectConfig(ctx _context.Context, subject s
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *ConfigV1ApiService) DeleteSubjectConfigExecute(r ApiDeleteSubjectConfigRequest) (string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
@@ -301,8 +316,8 @@ DeleteTopLevelConfig Delete global compatibility level
 
 Deletes the global compatibility level config and reverts to the default.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiDeleteTopLevelConfigRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiDeleteTopLevelConfigRequest
 */
 func (a *ConfigV1ApiService) DeleteTopLevelConfig(ctx _context.Context) ApiDeleteTopLevelConfigRequest {
 	return ApiDeleteTopLevelConfigRequest{
@@ -312,7 +327,8 @@ func (a *ConfigV1ApiService) DeleteTopLevelConfig(ctx _context.Context) ApiDelet
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *ConfigV1ApiService) DeleteTopLevelConfigExecute(r ApiDeleteTopLevelConfigRequest) (string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
@@ -428,6 +444,147 @@ func (a *ConfigV1ApiService) DeleteTopLevelConfigExecute(r ApiDeleteTopLevelConf
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetClusterConfigRequest struct {
+	ctx        _context.Context
+	ApiService ConfigV1Api
+}
+
+func (r ApiGetClusterConfigRequest) Execute() (ClusterConfig, *_nethttp.Response, error) {
+	return r.ApiService.GetClusterConfigExecute(r)
+}
+
+/*
+GetClusterConfig Get cluster config
+
+Retrieves cluster config information.
+
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetClusterConfigRequest
+*/
+func (a *ConfigV1ApiService) GetClusterConfig(ctx _context.Context) ApiGetClusterConfigRequest {
+	return ApiGetClusterConfigRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ClusterConfig
+func (a *ConfigV1ApiService) GetClusterConfigExecute(r ApiGetClusterConfigRequest) (ClusterConfig, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  ClusterConfig
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigV1ApiService.GetClusterConfig")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/clusterconfig"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5", "application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetSubjectLevelConfigRequest struct {
 	ctx             _context.Context
 	ApiService      ConfigV1Api
@@ -450,9 +607,9 @@ GetSubjectLevelConfig Get subject compatibility level
 
 Retrieves compatibility level for a subject.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Name of the subject
- @return ApiGetSubjectLevelConfigRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Name of the subject
+	@return ApiGetSubjectLevelConfigRequest
 */
 func (a *ConfigV1ApiService) GetSubjectLevelConfig(ctx _context.Context, subject string) ApiGetSubjectLevelConfigRequest {
 	return ApiGetSubjectLevelConfigRequest{
@@ -463,7 +620,8 @@ func (a *ConfigV1ApiService) GetSubjectLevelConfig(ctx _context.Context, subject
 }
 
 // Execute executes the request
-//  @return Config
+//
+//	@return Config
 func (a *ConfigV1ApiService) GetSubjectLevelConfigExecute(r ApiGetSubjectLevelConfigRequest) (Config, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -607,8 +765,8 @@ GetTopLevelConfig Get global compatibility level
 
 Retrieves the global compatibility level.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetTopLevelConfigRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetTopLevelConfigRequest
 */
 func (a *ConfigV1ApiService) GetTopLevelConfig(ctx _context.Context) ApiGetTopLevelConfigRequest {
 	return ApiGetTopLevelConfigRequest{
@@ -618,7 +776,8 @@ func (a *ConfigV1ApiService) GetTopLevelConfig(ctx _context.Context) ApiGetTopLe
 }
 
 // Execute executes the request
-//  @return Config
+//
+//	@return Config
 func (a *ConfigV1ApiService) GetTopLevelConfigExecute(r ApiGetTopLevelConfigRequest) (Config, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -756,9 +915,9 @@ UpdateSubjectLevelConfig Update subject compatibility level
 
 Update compatibility level for the specified subject. On success, echoes the original request back to the client.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Name of the subject
- @return ApiUpdateSubjectLevelConfigRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Name of the subject
+	@return ApiUpdateSubjectLevelConfigRequest
 */
 func (a *ConfigV1ApiService) UpdateSubjectLevelConfig(ctx _context.Context, subject string) ApiUpdateSubjectLevelConfigRequest {
 	return ApiUpdateSubjectLevelConfigRequest{
@@ -769,7 +928,8 @@ func (a *ConfigV1ApiService) UpdateSubjectLevelConfig(ctx _context.Context, subj
 }
 
 // Execute executes the request
-//  @return ConfigUpdateRequest
+//
+//	@return ConfigUpdateRequest
 func (a *ConfigV1ApiService) UpdateSubjectLevelConfigExecute(r ApiUpdateSubjectLevelConfigRequest) (ConfigUpdateRequest, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -835,16 +995,6 @@ func (a *ConfigV1ApiService) UpdateSubjectLevelConfigExecute(r ApiUpdateSubjectL
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ErrorMessage
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v ErrorMessage
@@ -932,8 +1082,8 @@ UpdateTopLevelConfig Update global compatibility level
 
 Updates the global compatibility level. On success, echoes the original request back to the client.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiUpdateTopLevelConfigRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiUpdateTopLevelConfigRequest
 */
 func (a *ConfigV1ApiService) UpdateTopLevelConfig(ctx _context.Context) ApiUpdateTopLevelConfigRequest {
 	return ApiUpdateTopLevelConfigRequest{
@@ -943,7 +1093,8 @@ func (a *ConfigV1ApiService) UpdateTopLevelConfig(ctx _context.Context) ApiUpdat
 }
 
 // Execute executes the request
-//  @return ConfigUpdateRequest
+//
+//	@return ConfigUpdateRequest
 func (a *ConfigV1ApiService) UpdateTopLevelConfigExecute(r ApiUpdateTopLevelConfigRequest) (ConfigUpdateRequest, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut

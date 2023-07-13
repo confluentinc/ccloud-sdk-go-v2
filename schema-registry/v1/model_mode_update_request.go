@@ -26,6 +26,7 @@ Contact: data-governance@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -128,7 +129,11 @@ func (o ModeUpdateRequest) MarshalJSON() ([]byte, error) {
 	if o.Mode != nil {
 		toSerialize["mode"] = o.Mode
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableModeUpdateRequest struct {
@@ -159,7 +164,11 @@ func NewNullableModeUpdateRequest(val *ModeUpdateRequest) *NullableModeUpdateReq
 }
 
 func (v NullableModeUpdateRequest) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableModeUpdateRequest) UnmarshalJSON(src []byte) error {

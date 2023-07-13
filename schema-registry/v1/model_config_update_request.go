@@ -26,6 +26,7 @@ Contact: data-governance@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -128,7 +129,11 @@ func (o ConfigUpdateRequest) MarshalJSON() ([]byte, error) {
 	if o.Compatibility != nil {
 		toSerialize["compatibility"] = o.Compatibility
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableConfigUpdateRequest struct {
@@ -159,7 +164,11 @@ func NewNullableConfigUpdateRequest(val *ConfigUpdateRequest) *NullableConfigUpd
 }
 
 func (v NullableConfigUpdateRequest) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableConfigUpdateRequest) UnmarshalJSON(src []byte) error {
