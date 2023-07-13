@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **DisplayName** | Pointer to **string** | The display name. | [optional] [readonly] 
 **Cloud** | Pointer to **string** | The cloud service provider that hosts the region. | [optional] [readonly] 
 **RegionName** | Pointer to **string** | The region name. | [optional] [readonly] 
+**HttpEndpoint** | Pointer to **string** | The regional API endpoint for flink compute pools. | [optional] [readonly] 
 
 ## Methods
 
@@ -205,6 +206,31 @@ SetRegionName sets RegionName field to given value.
 `func (o *FcpmV2Region) HasRegionName() bool`
 
 HasRegionName returns a boolean if a field has been set.
+
+### GetHttpEndpoint
+
+`func (o *FcpmV2Region) GetHttpEndpoint() string`
+
+GetHttpEndpoint returns the HttpEndpoint field if non-nil, zero value otherwise.
+
+### GetHttpEndpointOk
+
+`func (o *FcpmV2Region) GetHttpEndpointOk() (*string, bool)`
+
+GetHttpEndpointOk returns a tuple with the HttpEndpoint field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHttpEndpoint
+
+`func (o *FcpmV2Region) SetHttpEndpoint(v string)`
+
+SetHttpEndpoint sets HttpEndpoint field to given value.
+
+### HasHttpEndpoint
+
+`func (o *FcpmV2Region) HasHttpEndpoint() bool`
+
+HasHttpEndpoint returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

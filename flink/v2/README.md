@@ -101,7 +101,6 @@ Class | Method | HTTP request | Description
  - [FcpmV2ComputePoolSpec](docs/FcpmV2ComputePoolSpec.md)
  - [FcpmV2ComputePoolSpecConfigOneOf](docs/FcpmV2ComputePoolSpecConfigOneOf.md)
  - [FcpmV2ComputePoolSpecUpdate](docs/FcpmV2ComputePoolSpecUpdate.md)
- - [FcpmV2ComputePoolSpecUpdateConfigOneOf](docs/FcpmV2ComputePoolSpecUpdateConfigOneOf.md)
  - [FcpmV2ComputePoolStatus](docs/FcpmV2ComputePoolStatus.md)
  - [FcpmV2ComputePoolUpdate](docs/FcpmV2ComputePoolUpdate.md)
  - [FcpmV2IamBinding](docs/FcpmV2IamBinding.md)

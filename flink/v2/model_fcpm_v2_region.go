@@ -49,6 +49,8 @@ type FcpmV2Region struct {
 	Cloud *string `json:"cloud,omitempty"`
 	// The region name.
 	RegionName *string `json:"region_name,omitempty"`
+	// The regional API endpoint for flink compute pools.
+	HttpEndpoint *string `json:"http_endpoint,omitempty"`
 }
 
 // NewFcpmV2Region instantiates a new FcpmV2Region object
@@ -292,6 +294,38 @@ func (o *FcpmV2Region) SetRegionName(v string) {
 	o.RegionName = &v
 }
 
+// GetHttpEndpoint returns the HttpEndpoint field value if set, zero value otherwise.
+func (o *FcpmV2Region) GetHttpEndpoint() string {
+	if o == nil || o.HttpEndpoint == nil {
+		var ret string
+		return ret
+	}
+	return *o.HttpEndpoint
+}
+
+// GetHttpEndpointOk returns a tuple with the HttpEndpoint field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FcpmV2Region) GetHttpEndpointOk() (*string, bool) {
+	if o == nil || o.HttpEndpoint == nil {
+		return nil, false
+	}
+	return o.HttpEndpoint, true
+}
+
+// HasHttpEndpoint returns a boolean if a field has been set.
+func (o *FcpmV2Region) HasHttpEndpoint() bool {
+	if o != nil && o.HttpEndpoint != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHttpEndpoint gets a reference to the given string and assigns it to the HttpEndpoint field.
+func (o *FcpmV2Region) SetHttpEndpoint(v string) {
+	o.HttpEndpoint = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *FcpmV2Region) Redact() {
 	o.recurseRedact(o.ApiVersion)
@@ -301,6 +335,7 @@ func (o *FcpmV2Region) Redact() {
 	o.recurseRedact(o.DisplayName)
 	o.recurseRedact(o.Cloud)
 	o.recurseRedact(o.RegionName)
+	o.recurseRedact(o.HttpEndpoint)
 }
 
 func (o *FcpmV2Region) recurseRedact(v interface{}) {
@@ -355,6 +390,9 @@ func (o FcpmV2Region) MarshalJSON() ([]byte, error) {
 	}
 	if o.RegionName != nil {
 		toSerialize["region_name"] = o.RegionName
+	}
+	if o.HttpEndpoint != nil {
+		toSerialize["http_endpoint"] = o.HttpEndpoint
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

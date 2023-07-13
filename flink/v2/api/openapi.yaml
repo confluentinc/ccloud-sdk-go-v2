@@ -141,6 +141,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -224,6 +247,36 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
               style: simple
         "500":
           content:
@@ -392,6 +445,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
             Location:
               description: IamBinding resource uri
               explode: false
@@ -536,6 +612,36 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
               style: simple
         "500":
           content:
@@ -716,6 +822,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -817,6 +946,36 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
               style: simple
         "500":
           content:
@@ -1017,6 +1176,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -1100,6 +1282,36 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
               style: simple
         "500":
           content:
@@ -1291,6 +1503,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
             Location:
               description: ComputePool resource uri
               explode: false
@@ -1435,6 +1670,36 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
               style: simple
         "500":
           content:
@@ -1614,6 +1879,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -1715,6 +2003,36 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
               style: simple
         "500":
           content:
@@ -1897,6 +2215,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -1998,6 +2339,36 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
               style: simple
         "500":
           content:
@@ -2110,11 +2481,10 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     patch:
-      description: |+
+      description: |-
         [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update a compute pool.
-
       operationId: updateFcpmV2ComputePool
       parameters:
       - description: The unique identifier for the compute pool.
@@ -2189,6 +2559,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -2314,6 +2707,36 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
               style: simple
         "500":
           content:
@@ -2519,6 +2942,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -2602,6 +3048,36 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
               style: simple
         "500":
           content:
@@ -2888,6 +3364,36 @@ components:
           schema:
             type: string
           style: simple
+        X-RateLimit-Limit:
+          description: The maximum number of requests you're permitted to make per
+            time period.
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        X-RateLimit-Remaining:
+          description: The number of requests remaining in the current rate limit
+            window.
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        X-RateLimit-Reset:
+          description: "The relative time in seconds until the current rate-limit\
+            \ window resets.  \n  \n**Important:** This differs from Github and Twitter's\
+            \ same-named header which uses UTC epoch seconds. We use relative time\
+            \ to avoid client/server time synchronization issues."
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        Retry-After:
+          description: The number of seconds to wait until the rate limit window resets.
+            Only sent when the rate limit is reached.
+          explode: false
+          schema:
+            type: integer
+          style: simple
     DefaultSystemError:
       content:
         application/json:
@@ -3034,7 +3540,7 @@ components:
           - PROVISIONED
           - FAILED
         current_cfu:
-          description: The number of CSUs (Confluent Streaming Units) currently allocated
+          description: The number of Confluent Flink Units (CFUs) currently allocated
             to this Flink compute pool.
           example: 4
           format: int32
@@ -3104,6 +3610,12 @@ components:
         region_name:
           description: The region name.
           example: us-east-2
+          readOnly: true
+          type: string
+          x-immutable: true
+        http_endpoint:
+          description: The regional API endpoint for flink compute pools.
+          format: uri
           readOnly: true
           type: string
           x-immutable: true
@@ -3292,6 +3804,7 @@ components:
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/fcpm.v2.Standard'
+          x-immutable: true
           x-one-of-name: FcpmV2ComputePoolSpecConfigOneOf
         environment:
           allOf:
@@ -3595,16 +4108,6 @@ components:
           minimum: 1
           type: integer
           x-immutable: false
-        config:
-          description: |
-            The type of of the Flink compute pool.
-          discriminator:
-            mapping:
-              Standard: '#/components/schemas/fcpm.v2.Standard'
-            propertyName: kind
-          oneOf:
-          - $ref: '#/components/schemas/fcpm.v2.Standard'
-          x-one-of-name: FcpmV2ComputePoolSpecUpdateConfigOneOf
         environment:
           allOf:
           - $ref: '#/components/schemas/GlobalObjectReference'
