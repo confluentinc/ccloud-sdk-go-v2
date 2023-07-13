@@ -79,16 +79,27 @@ All URIs are relative to *https://psrc-00000.region.provider.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ClusterConfigV1Api* | [**GetClusterConfig**](docs/ClusterConfigV1Api.md#getclusterconfig) | **Get** /clusterconfig | Get cluster config
 *CompatibilityV1Api* | [**TestCompatibilityBySubjectName**](docs/CompatibilityV1Api.md#testcompatibilitybysubjectname) | **Post** /compatibility/subjects/{subject}/versions/{version} | Test schema compatibility against a particular schema subject-version
 *CompatibilityV1Api* | [**TestCompatibilityForSubject**](docs/CompatibilityV1Api.md#testcompatibilityforsubject) | **Post** /compatibility/subjects/{subject}/versions | Test schema compatibility against all schemas under a subject
 *ConfigV1Api* | [**DeleteSubjectConfig**](docs/ConfigV1Api.md#deletesubjectconfig) | **Delete** /config/{subject} | Delete subject compatibility level
 *ConfigV1Api* | [**DeleteTopLevelConfig**](docs/ConfigV1Api.md#deletetoplevelconfig) | **Delete** /config | Delete global compatibility level
+*ConfigV1Api* | [**GetClusterConfig**](docs/ConfigV1Api.md#getclusterconfig) | **Get** /clusterconfig | Get cluster config
 *ConfigV1Api* | [**GetSubjectLevelConfig**](docs/ConfigV1Api.md#getsubjectlevelconfig) | **Get** /config/{subject} | Get subject compatibility level
 *ConfigV1Api* | [**GetTopLevelConfig**](docs/ConfigV1Api.md#gettoplevelconfig) | **Get** /config | Get global compatibility level
 *ConfigV1Api* | [**UpdateSubjectLevelConfig**](docs/ConfigV1Api.md#updatesubjectlevelconfig) | **Put** /config/{subject} | Update subject compatibility level
 *ConfigV1Api* | [**UpdateTopLevelConfig**](docs/ConfigV1Api.md#updatetoplevelconfig) | **Put** /config | Update global compatibility level
 *ContextsV1Api* | [**ListContexts**](docs/ContextsV1Api.md#listcontexts) | **Get** /contexts | List contexts
+*ExportersV1Api* | [**DeleteExporter**](docs/ExportersV1Api.md#deleteexporter) | **Delete** /exporters/{name} | Delete schema exporter by name.
+*ExportersV1Api* | [**GetExporterConfigByName**](docs/ExportersV1Api.md#getexporterconfigbyname) | **Get** /exporters/{name}/config | Gets schema exporter config by name.
+*ExportersV1Api* | [**GetExporterInfoByName**](docs/ExportersV1Api.md#getexporterinfobyname) | **Get** /exporters/{name} | Gets schema exporter by name.
+*ExportersV1Api* | [**GetExporterStatusByName**](docs/ExportersV1Api.md#getexporterstatusbyname) | **Get** /exporters/{name}/status | Gets schema exporter status by name.
+*ExportersV1Api* | [**ListExporters**](docs/ExportersV1Api.md#listexporters) | **Get** /exporters | Gets all schema exporters.
+*ExportersV1Api* | [**PauseExporterByName**](docs/ExportersV1Api.md#pauseexporterbyname) | **Put** /exporters/{name}/pause | Pause schema exporter by name.
+*ExportersV1Api* | [**RegisterExporter**](docs/ExportersV1Api.md#registerexporter) | **Post** /exporters | Creates a new schema exporter.
+*ExportersV1Api* | [**ResetExporterByName**](docs/ExportersV1Api.md#resetexporterbyname) | **Put** /exporters/{name}/reset | Reset schema exporter by name.
+*ExportersV1Api* | [**ResumeExporterByName**](docs/ExportersV1Api.md#resumeexporterbyname) | **Put** /exporters/{name}/resume | Resume schema exporter by name.
+*ExportersV1Api* | [**UpdateExporterConfigByName**](docs/ExportersV1Api.md#updateexporterconfigbyname) | **Put** /exporters/{name}/config | Update schema exporter config by name.
+*ExportersV1Api* | [**UpdateExporterInfo**](docs/ExportersV1Api.md#updateexporterinfo) | **Put** /exporters/{name} | Update schema exporter by name.
 *ModesV1Api* | [**DeleteSubjectMode**](docs/ModesV1Api.md#deletesubjectmode) | **Delete** /mode/{subject} | Delete subject mode
 *ModesV1Api* | [**GetMode**](docs/ModesV1Api.md#getmode) | **Get** /mode/{subject} | Get subject mode
 *ModesV1Api* | [**GetTopLevelMode**](docs/ModesV1Api.md#gettoplevelmode) | **Get** /mode | Get global mode
@@ -100,15 +111,15 @@ Class | Method | HTTP request | Description
 *SchemasV1Api* | [**GetSchemas**](docs/SchemasV1Api.md#getschemas) | **Get** /schemas | List schemas
 *SchemasV1Api* | [**GetSubjects**](docs/SchemasV1Api.md#getsubjects) | **Get** /schemas/ids/{id}/subjects | List subjects associated to schema ID
 *SchemasV1Api* | [**GetVersions**](docs/SchemasV1Api.md#getversions) | **Get** /schemas/ids/{id}/versions | List subject-versions associated to schema ID
-*SubjectVersionsV1Api* | [**DeleteSchemaVersion**](docs/SubjectVersionsV1Api.md#deleteschemaversion) | **Delete** /subjects/{subject}/versions/{version} | Delete schema version
-*SubjectVersionsV1Api* | [**GetReferencedBy**](docs/SubjectVersionsV1Api.md#getreferencedby) | **Get** /subjects/{subject}/versions/{version}/referencedby | List schemas referencing a schema
-*SubjectVersionsV1Api* | [**GetSchemaByVersion**](docs/SubjectVersionsV1Api.md#getschemabyversion) | **Get** /subjects/{subject}/versions/{version} | Get schema by version
-*SubjectVersionsV1Api* | [**GetSchemaOnly1**](docs/SubjectVersionsV1Api.md#getschemaonly1) | **Get** /subjects/{subject}/versions/{version}/schema | Get schema string by version
-*SubjectVersionsV1Api* | [**ListVersions**](docs/SubjectVersionsV1Api.md#listversions) | **Get** /subjects/{subject}/versions | List versions under subject
-*SubjectVersionsV1Api* | [**Register**](docs/SubjectVersionsV1Api.md#register) | **Post** /subjects/{subject}/versions | Register schema under a subject
+*SubjectsV1Api* | [**DeleteSchemaVersion**](docs/SubjectsV1Api.md#deleteschemaversion) | **Delete** /subjects/{subject}/versions/{version} | Delete schema version
 *SubjectsV1Api* | [**DeleteSubject**](docs/SubjectsV1Api.md#deletesubject) | **Delete** /subjects/{subject} | Delete subject
+*SubjectsV1Api* | [**GetReferencedBy**](docs/SubjectsV1Api.md#getreferencedby) | **Get** /subjects/{subject}/versions/{version}/referencedby | List schemas referencing a schema
+*SubjectsV1Api* | [**GetSchemaByVersion**](docs/SubjectsV1Api.md#getschemabyversion) | **Get** /subjects/{subject}/versions/{version} | Get schema by version
+*SubjectsV1Api* | [**GetSchemaOnly1**](docs/SubjectsV1Api.md#getschemaonly1) | **Get** /subjects/{subject}/versions/{version}/schema | Get schema string by version
 *SubjectsV1Api* | [**List**](docs/SubjectsV1Api.md#list) | **Get** /subjects | List subjects
+*SubjectsV1Api* | [**ListVersions**](docs/SubjectsV1Api.md#listversions) | **Get** /subjects/{subject}/versions | List versions under subject
 *SubjectsV1Api* | [**LookUpSchemaUnderSubject**](docs/SubjectsV1Api.md#lookupschemaundersubject) | **Post** /subjects/{subject} | Lookup schema under subject
+*SubjectsV1Api* | [**Register**](docs/SubjectsV1Api.md#register) | **Post** /subjects/{subject}/versions | Register schema under a subject
 
 
 ## Documentation For Models
@@ -118,8 +129,14 @@ Class | Method | HTTP request | Description
  - [Config](docs/Config.md)
  - [ConfigUpdateRequest](docs/ConfigUpdateRequest.md)
  - [ErrorMessage](docs/ErrorMessage.md)
+ - [ExporterConfigResponse](docs/ExporterConfigResponse.md)
+ - [ExporterReference](docs/ExporterReference.md)
+ - [ExporterResponse](docs/ExporterResponse.md)
+ - [ExporterStatusResponse](docs/ExporterStatusResponse.md)
+ - [ExporterUpdateRequest](docs/ExporterUpdateRequest.md)
  - [Mode](docs/Mode.md)
  - [ModeUpdateRequest](docs/ModeUpdateRequest.md)
+ - [RegisterExporterRequest](docs/RegisterExporterRequest.md)
  - [RegisterSchemaRequest](docs/RegisterSchemaRequest.md)
  - [RegisterSchemaResponse](docs/RegisterSchemaResponse.md)
  - [Schema](docs/Schema.md)
@@ -143,6 +160,34 @@ auth := context.WithValue(context.Background(), sw.ContextBasicAuth, sw.BasicAut
     UserName: "username",
     Password: "password",
 })
+r, err := client.Service.Operation(auth, args)
+```
+
+
+### confluent-sts-access-token
+
+
+- **Type**: OAuth
+- **Flow**: application
+- **Authorization URL**: 
+- **Scopes**: N/A
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextAccessToken, "ACCESSTOKENSTRING")
+r, err := client.Service.Operation(auth, args)
+```
+
+Or via OAuth2 module to automatically refresh tokens and perform user authentication.
+
+```golang
+import "golang.org/x/oauth2"
+
+/* Perform OAuth2 round trip request and obtain a token */
+
+tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
+auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
 r, err := client.Service.Operation(auth, args)
 ```
 

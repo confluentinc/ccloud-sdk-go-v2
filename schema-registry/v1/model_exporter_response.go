@@ -34,67 +34,67 @@ import (
 	"reflect"
 )
 
-// Mode Schema Registry operating mode
-type Mode struct {
-	// Schema Registry operating mode
-	Mode *string `json:"mode,omitempty"`
+// ExporterResponse Exporter register response
+type ExporterResponse struct {
+	// Name of the exporter
+	Name *string `json:"name,omitempty"`
 }
 
-// NewMode instantiates a new Mode object
+// NewExporterResponse instantiates a new ExporterResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMode() *Mode {
-	this := Mode{}
+func NewExporterResponse() *ExporterResponse {
+	this := ExporterResponse{}
 	return &this
 }
 
-// NewModeWithDefaults instantiates a new Mode object
+// NewExporterResponseWithDefaults instantiates a new ExporterResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewModeWithDefaults() *Mode {
-	this := Mode{}
+func NewExporterResponseWithDefaults() *ExporterResponse {
+	this := ExporterResponse{}
 	return &this
 }
 
-// GetMode returns the Mode field value if set, zero value otherwise.
-func (o *Mode) GetMode() string {
-	if o == nil || o.Mode == nil {
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *ExporterResponse) GetName() string {
+	if o == nil || o.Name == nil {
 		var ret string
 		return ret
 	}
-	return *o.Mode
+	return *o.Name
 }
 
-// GetModeOk returns a tuple with the Mode field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Mode) GetModeOk() (*string, bool) {
-	if o == nil || o.Mode == nil {
+func (o *ExporterResponse) GetNameOk() (*string, bool) {
+	if o == nil || o.Name == nil {
 		return nil, false
 	}
-	return o.Mode, true
+	return o.Name, true
 }
 
-// HasMode returns a boolean if a field has been set.
-func (o *Mode) HasMode() bool {
-	if o != nil && o.Mode != nil {
+// HasName returns a boolean if a field has been set.
+func (o *ExporterResponse) HasName() bool {
+	if o != nil && o.Name != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetMode gets a reference to the given string and assigns it to the Mode field.
-func (o *Mode) SetMode(v string) {
-	o.Mode = &v
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *ExporterResponse) SetName(v string) {
+	o.Name = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *Mode) Redact() {
-	o.recurseRedact(o.Mode)
+func (o *ExporterResponse) Redact() {
+	o.recurseRedact(o.Name)
 }
 
-func (o *Mode) recurseRedact(v interface{}) {
+func (o *ExporterResponse) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -119,15 +119,15 @@ func (o *Mode) recurseRedact(v interface{}) {
 	}
 }
 
-func (o Mode) zeroField(v interface{}) {
+func (o ExporterResponse) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o Mode) MarshalJSON() ([]byte, error) {
+func (o ExporterResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Mode != nil {
-		toSerialize["mode"] = o.Mode
+	if o.Name != nil {
+		toSerialize["name"] = o.Name
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
@@ -136,34 +136,34 @@ func (o Mode) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableMode struct {
-	value *Mode
+type NullableExporterResponse struct {
+	value *ExporterResponse
 	isSet bool
 }
 
-func (v NullableMode) Get() *Mode {
+func (v NullableExporterResponse) Get() *ExporterResponse {
 	return v.value
 }
 
-func (v *NullableMode) Set(val *Mode) {
+func (v *NullableExporterResponse) Set(val *ExporterResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableMode) IsSet() bool {
+func (v NullableExporterResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableMode) Unset() {
+func (v *NullableExporterResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableMode(val *Mode) *NullableMode {
-	return &NullableMode{value: val, isSet: true}
+func NewNullableExporterResponse(val *ExporterResponse) *NullableExporterResponse {
+	return &NullableExporterResponse{value: val, isSet: true}
 }
 
-func (v NullableMode) MarshalJSON() ([]byte, error) {
+func (v NullableExporterResponse) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -171,7 +171,7 @@ func (v NullableMode) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableMode) UnmarshalJSON(src []byte) error {
+func (v *NullableExporterResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

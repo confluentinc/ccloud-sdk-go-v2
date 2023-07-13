@@ -64,19 +64,17 @@ type APIClient struct {
 
 	// API Services
 
-	ClusterConfigV1Api ClusterConfigV1Api
-
 	CompatibilityV1Api CompatibilityV1Api
 
 	ConfigV1Api ConfigV1Api
 
 	ContextsV1Api ContextsV1Api
 
+	ExportersV1Api ExportersV1Api
+
 	ModesV1Api ModesV1Api
 
 	SchemasV1Api SchemasV1Api
-
-	SubjectVersionsV1Api SubjectVersionsV1Api
 
 	SubjectsV1Api SubjectsV1Api
 }
@@ -97,13 +95,12 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
-	c.ClusterConfigV1Api = (*ClusterConfigV1ApiService)(&c.common)
 	c.CompatibilityV1Api = (*CompatibilityV1ApiService)(&c.common)
 	c.ConfigV1Api = (*ConfigV1ApiService)(&c.common)
 	c.ContextsV1Api = (*ContextsV1ApiService)(&c.common)
+	c.ExportersV1Api = (*ExportersV1ApiService)(&c.common)
 	c.ModesV1Api = (*ModesV1ApiService)(&c.common)
 	c.SchemasV1Api = (*SchemasV1ApiService)(&c.common)
-	c.SubjectVersionsV1Api = (*SubjectVersionsV1ApiService)(&c.common)
 	c.SubjectsV1Api = (*SubjectsV1ApiService)(&c.common)
 
 	return c

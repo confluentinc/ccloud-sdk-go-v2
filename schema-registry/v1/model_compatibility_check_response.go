@@ -26,6 +26,7 @@ Contact: data-governance@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -166,7 +167,11 @@ func (o CompatibilityCheckResponse) MarshalJSON() ([]byte, error) {
 	if o.Messages != nil {
 		toSerialize["messages"] = o.Messages
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableCompatibilityCheckResponse struct {
@@ -197,7 +202,11 @@ func NewNullableCompatibilityCheckResponse(val *CompatibilityCheckResponse) *Nul
 }
 
 func (v NullableCompatibilityCheckResponse) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableCompatibilityCheckResponse) UnmarshalJSON(src []byte) error {
