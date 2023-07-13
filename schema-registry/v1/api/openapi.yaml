@@ -2139,13 +2139,13 @@ paths:
             --url https://psrc-00000.region.provider.confluent.cloud/exporters \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"name":"test-exporter","contextType":"CUSTOM","context":"User","subjects":["string"],"subjectRenameFormat":"string","config":{}}'
+            --data '{"name":"test-exporter","contextType":"CUSTOM","context":"User","subjects":["string"],"subjectRenameFormat":"string","config":{"property1":"string","property2":"string"}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"test-exporter\",\"contextType\":\"CUSTOM\",\"context\":\"User\",\"subjects\":[\"string\"],\"subjectRenameFormat\":\"string\",\"config\":{}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"test-exporter\",\"contextType\":\"CUSTOM\",\"context\":\"User\",\"subjects\":[\"string\"],\"subjectRenameFormat\":\"string\",\"config\":{\"property1\":\"string\",\"property2\":\"string\"}}");
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/exporters")
             .post(body)
@@ -2160,7 +2160,8 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"name\\\":\\\"test-exporter\\\"\
           ,\\\"contextType\\\":\\\"CUSTOM\\\",\\\"context\\\":\\\"User\\\",\\\"subjects\\\
           \":[\\\"string\\\"],\\\"subjectRenameFormat\\\":\\\"string\\\",\\\"config\\\
-          \":{}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          \":{\\\"property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\"}}\"\
+          )\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
           content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
           , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -2171,7 +2172,7 @@ paths:
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          payload = "{\"name\":\"test-exporter\",\"contextType\":\"CUSTOM\",\"context\":\"User\",\"subjects\":[\"string\"],\"subjectRenameFormat\":\"string\",\"config\":{}}"
+          payload = "{\"name\":\"test-exporter\",\"contextType\":\"CUSTOM\",\"context\":\"User\",\"subjects\":[\"string\"],\"subjectRenameFormat\":\"string\",\"config\":{\"property1\":\"string\",\"property2\":\"string\"}}"
 
           headers = {
               'content-type': "application/json",
@@ -2218,7 +2219,7 @@ paths:
             context: 'User',
             subjects: ['string'],
             subjectRenameFormat: 'string',
-            config: {}
+            config: {property1: 'string', property2: 'string'}
           }));
           req.end();
       - lang: C
@@ -2233,7 +2234,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"test-exporter\",\"contextType\":\"CUSTOM\",\"context\":\"User\",\"subjects\":[\"string\"],\"subjectRenameFormat\":\"string\",\"config\":{}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"test-exporter\",\"contextType\":\"CUSTOM\",\"context\":\"User\",\"subjects\":[\"string\"],\"subjectRenameFormat\":\"string\",\"config\":{\"property1\":\"string\",\"property2\":\"string\"}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -2242,7 +2243,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"name\":\"test-exporter\",\"contextType\":\"CUSTOM\",\"context\":\"User\",\"subjects\":[\"string\"],\"subjectRenameFormat\":\"string\",\"config\":{}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"name\":\"test-exporter\",\"contextType\":\"CUSTOM\",\"context\":\"User\",\"subjects\":[\"string\"],\"subjectRenameFormat\":\"string\",\"config\":{\"property1\":\"string\",\"property2\":\"string\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /exporters/{name}:
     delete:
@@ -2684,13 +2685,13 @@ paths:
             --url https://psrc-00000.region.provider.confluent.cloud/exporters/%7Bname%7D \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"contextType":"CUSTOM","context":"test-context"}'
+            --data '{"contextType":"CUSTOM","context":"User","subjects":["string"],"subjectRenameFormat":"string","config":{"property1":"string","property2":"string"}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"contextType\":\"CUSTOM\",\"context\":\"test-context\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"contextType\":\"CUSTOM\",\"context\":\"User\",\"subjects\":[\"string\"],\"subjectRenameFormat\":\"string\",\"config\":{\"property1\":\"string\",\"property2\":\"string\"}}");
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/exporters/%7Bname%7D")
             .put(body)
@@ -2703,8 +2704,10 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/exporters/%7Bname%7D\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"contextType\\\":\\\"CUSTOM\\\"\
-          ,\\\"context\\\":\\\"test-context\\\"}\")\n\n\treq, _ := http.NewRequest(\"\
-          PUT\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          ,\\\"context\\\":\\\"User\\\",\\\"subjects\\\":[\\\"string\\\"],\\\"subjectRenameFormat\\\
+          \":\\\"string\\\",\\\"config\\\":{\\\"property1\\\":\\\"string\\\",\\\"\
+          property2\\\":\\\"string\\\"}}\")\n\n\treq, _ := http.NewRequest(\"PUT\"\
+          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
           )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
           \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
           \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
@@ -2715,7 +2718,7 @@ paths:
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          payload = "{\"contextType\":\"CUSTOM\",\"context\":\"test-context\"}"
+          payload = "{\"contextType\":\"CUSTOM\",\"context\":\"User\",\"subjects\":[\"string\"],\"subjectRenameFormat\":\"string\",\"config\":{\"property1\":\"string\",\"property2\":\"string\"}}"
 
           headers = {
               'content-type': "application/json",
@@ -2756,7 +2759,13 @@ paths:
             });
           });
 
-          req.write(JSON.stringify({contextType: 'CUSTOM', context: 'test-context'}));
+          req.write(JSON.stringify({
+            contextType: 'CUSTOM',
+            context: 'User',
+            subjects: ['string'],
+            subjectRenameFormat: 'string',
+            config: {property1: 'string', property2: 'string'}
+          }));
           req.end();
       - lang: C
         source: |-
@@ -2770,7 +2779,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"contextType\":\"CUSTOM\",\"context\":\"test-context\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"contextType\":\"CUSTOM\",\"context\":\"User\",\"subjects\":[\"string\"],\"subjectRenameFormat\":\"string\",\"config\":{\"property1\":\"string\",\"property2\":\"string\"}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -2779,7 +2788,7 @@ paths:
           var request = new RestRequest(Method.PUT);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"contextType\":\"CUSTOM\",\"context\":\"test-context\"}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"contextType\":\"CUSTOM\",\"context\":\"User\",\"subjects\":[\"string\"],\"subjectRenameFormat\":\"string\",\"config\":{\"property1\":\"string\",\"property2\":\"string\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /exporters/{name}/status:
     get:
@@ -8301,17 +8310,43 @@ components:
     ExporterUpdateRequest:
       description: Exporter update request
       example:
+        subjectRenameFormat: subjectRenameFormat
         contextType: CUSTOM
-        context: test-context
+        subjects:
+        - subjects
+        - subjects
+        context: User
+        config:
+          key: config
       properties:
         contextType:
           description: Context type of the exporter. One of CUSTOM, NONE or AUTO (default)
           example: CUSTOM
           type: string
+          x-extensible-enum:
+          - CUSTOM
+          - AUTO
+          - NONE
         context:
-          description: Context of the exporter if contextType equals CUSTOM
-          example: test-context
+          description: Customized context of the exporter if contextType equals CUSTOM.
+          example: User
           type: string
+        subjects:
+          description: Name of each exporter subject
+          items:
+            type: string
+          type: array
+        subjectRenameFormat:
+          description: Format string for the subject name in the destination cluster,
+            which may contain ${subject} as a placeholder for the originating subject
+            name. For example, dc_${subject} for the subject orders will map to the
+            destination subject name dc_orders.
+          type: string
+        config:
+          additionalProperties:
+            type: string
+          description: The map containing exporter’s configurations
+          type: object
       type: object
     ExporterStatusResponse:
       description: Exporter status get request
@@ -8400,12 +8435,7 @@ components:
         name: test-exporter
         context: User
         config:
-        - schema.registry.url: <Physical SR Endpoint>
-          basic.auth.user.info: basic.auth.user.info
-          basic.auth.credentials.source: USER_INFO
-        - schema.registry.url: <Physical SR Endpoint>
-          basic.auth.user.info: basic.auth.user.info
-          basic.auth.credentials.source: USER_INFO
+          key: config
       properties:
         name:
           description: Name of the exporter
@@ -8414,6 +8444,7 @@ components:
         contextType:
           description: Context type of the exporter. One of CUSTOM, NONE or AUTO (default)
           example: CUSTOM
+          type: string
           x-extensible-enum:
           - CUSTOM
           - AUTO
@@ -8434,10 +8465,10 @@ components:
             destination subject name dc_orders.
           type: string
         config:
+          additionalProperties:
+            type: string
           description: The map containing exporter’s configurations
-          items:
-            $ref: '#/components/schemas/ExporterConfigResponse'
-          type: array
+          type: object
       type: object
     Config:
       description: Config

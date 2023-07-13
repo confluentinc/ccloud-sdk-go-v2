@@ -39,7 +39,7 @@ type ExporterReference struct {
 	// Name of the exporter
 	Name *string `json:"name,omitempty"`
 	// Context type of the exporter. One of CUSTOM, NONE or AUTO (default)
-	ContextType interface{} `json:"contextType,omitempty"`
+	ContextType *string `json:"contextType,omitempty"`
 	// Customized context of the exporter if contextType equals CUSTOM.
 	Context *string `json:"context,omitempty"`
 	// Name of each exporter subject
@@ -47,7 +47,7 @@ type ExporterReference struct {
 	// Format string for the subject name in the destination cluster, which may contain ${subject} as a placeholder for the originating subject name. For example, dc_${subject} for the subject orders will map to the destination subject name dc_orders.
 	SubjectRenameFormat *string `json:"subjectRenameFormat,omitempty"`
 	// The map containing exporter’s configurations
-	Config *[]ExporterConfigResponse `json:"config,omitempty"`
+	Config *map[string]string `json:"config,omitempty"`
 }
 
 // NewExporterReference instantiates a new ExporterReference object
@@ -99,23 +99,22 @@ func (o *ExporterReference) SetName(v string) {
 	o.Name = &v
 }
 
-// GetContextType returns the ContextType field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ExporterReference) GetContextType() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetContextType returns the ContextType field value if set, zero value otherwise.
+func (o *ExporterReference) GetContextType() string {
+	if o == nil || o.ContextType == nil {
+		var ret string
 		return ret
 	}
-	return o.ContextType
+	return *o.ContextType
 }
 
 // GetContextTypeOk returns a tuple with the ContextType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ExporterReference) GetContextTypeOk() (*interface{}, bool) {
+func (o *ExporterReference) GetContextTypeOk() (*string, bool) {
 	if o == nil || o.ContextType == nil {
 		return nil, false
 	}
-	return &o.ContextType, true
+	return o.ContextType, true
 }
 
 // HasContextType returns a boolean if a field has been set.
@@ -127,9 +126,9 @@ func (o *ExporterReference) HasContextType() bool {
 	return false
 }
 
-// SetContextType gets a reference to the given interface{} and assigns it to the ContextType field.
-func (o *ExporterReference) SetContextType(v interface{}) {
-	o.ContextType = v
+// SetContextType gets a reference to the given string and assigns it to the ContextType field.
+func (o *ExporterReference) SetContextType(v string) {
+	o.ContextType = &v
 }
 
 // GetContext returns the Context field value if set, zero value otherwise.
@@ -229,9 +228,9 @@ func (o *ExporterReference) SetSubjectRenameFormat(v string) {
 }
 
 // GetConfig returns the Config field value if set, zero value otherwise.
-func (o *ExporterReference) GetConfig() []ExporterConfigResponse {
+func (o *ExporterReference) GetConfig() map[string]string {
 	if o == nil || o.Config == nil {
-		var ret []ExporterConfigResponse
+		var ret map[string]string
 		return ret
 	}
 	return *o.Config
@@ -239,7 +238,7 @@ func (o *ExporterReference) GetConfig() []ExporterConfigResponse {
 
 // GetConfigOk returns a tuple with the Config field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ExporterReference) GetConfigOk() (*[]ExporterConfigResponse, bool) {
+func (o *ExporterReference) GetConfigOk() (*map[string]string, bool) {
 	if o == nil || o.Config == nil {
 		return nil, false
 	}
@@ -255,8 +254,8 @@ func (o *ExporterReference) HasConfig() bool {
 	return false
 }
 
-// SetConfig gets a reference to the given []ExporterConfigResponse and assigns it to the Config field.
-func (o *ExporterReference) SetConfig(v []ExporterConfigResponse) {
+// SetConfig gets a reference to the given map[string]string and assigns it to the Config field.
+func (o *ExporterReference) SetConfig(v map[string]string) {
 	o.Config = &v
 }
 

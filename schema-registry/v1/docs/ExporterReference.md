@@ -5,11 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** | Name of the exporter | [optional] 
-**ContextType** | Pointer to **interface{}** | Context type of the exporter. One of CUSTOM, NONE or AUTO (default) | [optional] 
+**ContextType** | Pointer to **string** | Context type of the exporter. One of CUSTOM, NONE or AUTO (default) | [optional] 
 **Context** | Pointer to **string** | Customized context of the exporter if contextType equals CUSTOM. | [optional] 
 **Subjects** | Pointer to **[]string** | Name of each exporter subject | [optional] 
 **SubjectRenameFormat** | Pointer to **string** | Format string for the subject name in the destination cluster, which may contain ${subject} as a placeholder for the originating subject name. For example, dc_${subject} for the subject orders will map to the destination subject name dc_orders. | [optional] 
-**Config** | Pointer to [**[]ExporterConfigResponse**](ExporterConfigResponse.md) | The map containing exporter’s configurations | [optional] 
+**Config** | Pointer to **map[string]string** | The map containing exporter’s configurations | [optional] 
 
 ## Methods
 
@@ -57,20 +57,20 @@ HasName returns a boolean if a field has been set.
 
 ### GetContextType
 
-`func (o *ExporterReference) GetContextType() interface{}`
+`func (o *ExporterReference) GetContextType() string`
 
 GetContextType returns the ContextType field if non-nil, zero value otherwise.
 
 ### GetContextTypeOk
 
-`func (o *ExporterReference) GetContextTypeOk() (*interface{}, bool)`
+`func (o *ExporterReference) GetContextTypeOk() (*string, bool)`
 
 GetContextTypeOk returns a tuple with the ContextType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContextType
 
-`func (o *ExporterReference) SetContextType(v interface{})`
+`func (o *ExporterReference) SetContextType(v string)`
 
 SetContextType sets ContextType field to given value.
 
@@ -80,16 +80,6 @@ SetContextType sets ContextType field to given value.
 
 HasContextType returns a boolean if a field has been set.
 
-### SetContextTypeNil
-
-`func (o *ExporterReference) SetContextTypeNil(b bool)`
-
- SetContextTypeNil sets the value for ContextType to be an explicit nil
-
-### UnsetContextType
-`func (o *ExporterReference) UnsetContextType()`
-
-UnsetContextType ensures that no value is present for ContextType, not even an explicit nil
 ### GetContext
 
 `func (o *ExporterReference) GetContext() string`
@@ -167,20 +157,20 @@ HasSubjectRenameFormat returns a boolean if a field has been set.
 
 ### GetConfig
 
-`func (o *ExporterReference) GetConfig() []ExporterConfigResponse`
+`func (o *ExporterReference) GetConfig() map[string]string`
 
 GetConfig returns the Config field if non-nil, zero value otherwise.
 
 ### GetConfigOk
 
-`func (o *ExporterReference) GetConfigOk() (*[]ExporterConfigResponse, bool)`
+`func (o *ExporterReference) GetConfigOk() (*map[string]string, bool)`
 
 GetConfigOk returns a tuple with the Config field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetConfig
 
-`func (o *ExporterReference) SetConfig(v []ExporterConfigResponse)`
+`func (o *ExporterReference) SetConfig(v map[string]string)`
 
 SetConfig sets Config field to given value.
 

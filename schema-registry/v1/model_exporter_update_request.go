@@ -38,8 +38,14 @@ import (
 type ExporterUpdateRequest struct {
 	// Context type of the exporter. One of CUSTOM, NONE or AUTO (default)
 	ContextType *string `json:"contextType,omitempty"`
-	// Context of the exporter if contextType equals CUSTOM
+	// Customized context of the exporter if contextType equals CUSTOM.
 	Context *string `json:"context,omitempty"`
+	// Name of each exporter subject
+	Subjects *[]string `json:"subjects,omitempty"`
+	// Format string for the subject name in the destination cluster, which may contain ${subject} as a placeholder for the originating subject name. For example, dc_${subject} for the subject orders will map to the destination subject name dc_orders.
+	SubjectRenameFormat *string `json:"subjectRenameFormat,omitempty"`
+	// The map containing exporter’s configurations
+	Config *map[string]string `json:"config,omitempty"`
 }
 
 // NewExporterUpdateRequest instantiates a new ExporterUpdateRequest object
@@ -123,10 +129,109 @@ func (o *ExporterUpdateRequest) SetContext(v string) {
 	o.Context = &v
 }
 
+// GetSubjects returns the Subjects field value if set, zero value otherwise.
+func (o *ExporterUpdateRequest) GetSubjects() []string {
+	if o == nil || o.Subjects == nil {
+		var ret []string
+		return ret
+	}
+	return *o.Subjects
+}
+
+// GetSubjectsOk returns a tuple with the Subjects field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ExporterUpdateRequest) GetSubjectsOk() (*[]string, bool) {
+	if o == nil || o.Subjects == nil {
+		return nil, false
+	}
+	return o.Subjects, true
+}
+
+// HasSubjects returns a boolean if a field has been set.
+func (o *ExporterUpdateRequest) HasSubjects() bool {
+	if o != nil && o.Subjects != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSubjects gets a reference to the given []string and assigns it to the Subjects field.
+func (o *ExporterUpdateRequest) SetSubjects(v []string) {
+	o.Subjects = &v
+}
+
+// GetSubjectRenameFormat returns the SubjectRenameFormat field value if set, zero value otherwise.
+func (o *ExporterUpdateRequest) GetSubjectRenameFormat() string {
+	if o == nil || o.SubjectRenameFormat == nil {
+		var ret string
+		return ret
+	}
+	return *o.SubjectRenameFormat
+}
+
+// GetSubjectRenameFormatOk returns a tuple with the SubjectRenameFormat field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ExporterUpdateRequest) GetSubjectRenameFormatOk() (*string, bool) {
+	if o == nil || o.SubjectRenameFormat == nil {
+		return nil, false
+	}
+	return o.SubjectRenameFormat, true
+}
+
+// HasSubjectRenameFormat returns a boolean if a field has been set.
+func (o *ExporterUpdateRequest) HasSubjectRenameFormat() bool {
+	if o != nil && o.SubjectRenameFormat != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSubjectRenameFormat gets a reference to the given string and assigns it to the SubjectRenameFormat field.
+func (o *ExporterUpdateRequest) SetSubjectRenameFormat(v string) {
+	o.SubjectRenameFormat = &v
+}
+
+// GetConfig returns the Config field value if set, zero value otherwise.
+func (o *ExporterUpdateRequest) GetConfig() map[string]string {
+	if o == nil || o.Config == nil {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Config
+}
+
+// GetConfigOk returns a tuple with the Config field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ExporterUpdateRequest) GetConfigOk() (*map[string]string, bool) {
+	if o == nil || o.Config == nil {
+		return nil, false
+	}
+	return o.Config, true
+}
+
+// HasConfig returns a boolean if a field has been set.
+func (o *ExporterUpdateRequest) HasConfig() bool {
+	if o != nil && o.Config != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetConfig gets a reference to the given map[string]string and assigns it to the Config field.
+func (o *ExporterUpdateRequest) SetConfig(v map[string]string) {
+	o.Config = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *ExporterUpdateRequest) Redact() {
 	o.recurseRedact(o.ContextType)
 	o.recurseRedact(o.Context)
+	o.recurseRedact(o.Subjects)
+	o.recurseRedact(o.SubjectRenameFormat)
+	o.recurseRedact(o.Config)
 }
 
 func (o *ExporterUpdateRequest) recurseRedact(v interface{}) {
@@ -166,6 +271,15 @@ func (o ExporterUpdateRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.Context != nil {
 		toSerialize["context"] = o.Context
+	}
+	if o.Subjects != nil {
+		toSerialize["subjects"] = o.Subjects
+	}
+	if o.SubjectRenameFormat != nil {
+		toSerialize["subjectRenameFormat"] = o.SubjectRenameFormat
+	}
+	if o.Config != nil {
+		toSerialize["config"] = o.Config
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
