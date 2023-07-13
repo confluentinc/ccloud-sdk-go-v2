@@ -104,8 +104,8 @@ ListFcpmV2Regions List of Regions
 
 Retrieve a sorted, filtered, paginated list of all regions.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListFcpmV2RegionsRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListFcpmV2RegionsRequest
 */
 func (a *RegionsFcpmV2ApiService) ListFcpmV2Regions(ctx _context.Context) ApiListFcpmV2RegionsRequest {
 	return ApiListFcpmV2RegionsRequest{
@@ -115,8 +115,7 @@ func (a *RegionsFcpmV2ApiService) ListFcpmV2Regions(ctx _context.Context) ApiLis
 }
 
 // Execute executes the request
-//
-//	@return FcpmV2RegionList
+//  @return FcpmV2RegionList
 func (a *RegionsFcpmV2ApiService) ListFcpmV2RegionsExecute(r ApiListFcpmV2RegionsRequest) (FcpmV2RegionList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
