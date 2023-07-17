@@ -8372,12 +8372,12 @@ components:
         offset:
           description: Offset of the exporter
           example: 100
-          format: int32
+          format: int64
           type: integer
         ts:
           description: Timestamp of the exporter
           example: 1631206325
-          format: int32
+          format: int64
           type: integer
         trace:
           description: Error trace of the exporter
