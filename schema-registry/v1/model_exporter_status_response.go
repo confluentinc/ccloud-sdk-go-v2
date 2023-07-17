@@ -41,9 +41,9 @@ type ExporterStatusResponse struct {
 	// State of the exporter. Could be STARTING, RUNNING or PAUSED
 	State *string `json:"state,omitempty"`
 	// Offset of the exporter
-	Offset *int32 `json:"offset,omitempty"`
+	Offset *int64 `json:"offset,omitempty"`
 	// Timestamp of the exporter
-	Ts *int32 `json:"ts,omitempty"`
+	Ts *int64 `json:"ts,omitempty"`
 	// Error trace of the exporter
 	Trace *string `json:"trace,omitempty"`
 }
@@ -130,9 +130,9 @@ func (o *ExporterStatusResponse) SetState(v string) {
 }
 
 // GetOffset returns the Offset field value if set, zero value otherwise.
-func (o *ExporterStatusResponse) GetOffset() int32 {
+func (o *ExporterStatusResponse) GetOffset() int64 {
 	if o == nil || o.Offset == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.Offset
@@ -140,7 +140,7 @@ func (o *ExporterStatusResponse) GetOffset() int32 {
 
 // GetOffsetOk returns a tuple with the Offset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ExporterStatusResponse) GetOffsetOk() (*int32, bool) {
+func (o *ExporterStatusResponse) GetOffsetOk() (*int64, bool) {
 	if o == nil || o.Offset == nil {
 		return nil, false
 	}
@@ -156,15 +156,15 @@ func (o *ExporterStatusResponse) HasOffset() bool {
 	return false
 }
 
-// SetOffset gets a reference to the given int32 and assigns it to the Offset field.
-func (o *ExporterStatusResponse) SetOffset(v int32) {
+// SetOffset gets a reference to the given int64 and assigns it to the Offset field.
+func (o *ExporterStatusResponse) SetOffset(v int64) {
 	o.Offset = &v
 }
 
 // GetTs returns the Ts field value if set, zero value otherwise.
-func (o *ExporterStatusResponse) GetTs() int32 {
+func (o *ExporterStatusResponse) GetTs() int64 {
 	if o == nil || o.Ts == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.Ts
@@ -172,7 +172,7 @@ func (o *ExporterStatusResponse) GetTs() int32 {
 
 // GetTsOk returns a tuple with the Ts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ExporterStatusResponse) GetTsOk() (*int32, bool) {
+func (o *ExporterStatusResponse) GetTsOk() (*int64, bool) {
 	if o == nil || o.Ts == nil {
 		return nil, false
 	}
@@ -188,8 +188,8 @@ func (o *ExporterStatusResponse) HasTs() bool {
 	return false
 }
 
-// SetTs gets a reference to the given int32 and assigns it to the Ts field.
-func (o *ExporterStatusResponse) SetTs(v int32) {
+// SetTs gets a reference to the given int64 and assigns it to the Ts field.
+func (o *ExporterStatusResponse) SetTs(v int64) {
 	o.Ts = &v
 }
 

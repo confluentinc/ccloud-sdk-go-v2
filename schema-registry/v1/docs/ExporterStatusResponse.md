@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** | Name of exporter. | [optional] 
 **State** | Pointer to **string** | State of the exporter. Could be STARTING, RUNNING or PAUSED | [optional] 
-**Offset** | Pointer to **int32** | Offset of the exporter | [optional] 
-**Ts** | Pointer to **int32** | Timestamp of the exporter | [optional] 
+**Offset** | Pointer to **int64** | Offset of the exporter | [optional] 
+**Ts** | Pointer to **int64** | Timestamp of the exporter | [optional] 
 **Trace** | Pointer to **string** | Error trace of the exporter | [optional] 
 
 ## Methods
@@ -81,20 +81,20 @@ HasState returns a boolean if a field has been set.
 
 ### GetOffset
 
-`func (o *ExporterStatusResponse) GetOffset() int32`
+`func (o *ExporterStatusResponse) GetOffset() int64`
 
 GetOffset returns the Offset field if non-nil, zero value otherwise.
 
 ### GetOffsetOk
 
-`func (o *ExporterStatusResponse) GetOffsetOk() (*int32, bool)`
+`func (o *ExporterStatusResponse) GetOffsetOk() (*int64, bool)`
 
 GetOffsetOk returns a tuple with the Offset field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOffset
 
-`func (o *ExporterStatusResponse) SetOffset(v int32)`
+`func (o *ExporterStatusResponse) SetOffset(v int64)`
 
 SetOffset sets Offset field to given value.
 
@@ -106,20 +106,20 @@ HasOffset returns a boolean if a field has been set.
 
 ### GetTs
 
-`func (o *ExporterStatusResponse) GetTs() int32`
+`func (o *ExporterStatusResponse) GetTs() int64`
 
 GetTs returns the Ts field if non-nil, zero value otherwise.
 
 ### GetTsOk
 
-`func (o *ExporterStatusResponse) GetTsOk() (*int32, bool)`
+`func (o *ExporterStatusResponse) GetTsOk() (*int64, bool)`
 
 GetTsOk returns a tuple with the Ts field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTs
 
-`func (o *ExporterStatusResponse) SetTs(v int32)`
+`func (o *ExporterStatusResponse) SetTs(v int64)`
 
 SetTs sets Ts field to given value.
 
