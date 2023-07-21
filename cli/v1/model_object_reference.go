@@ -17,7 +17,7 @@ CLI API
 
 API to collect data on CLI commands run while logged in to Confluent Cloud
 
-API version: 0.1.0
+API version: 0.2.0
 Contact: cli-team@confluent.io
 */
 
@@ -83,7 +83,7 @@ func (o *ObjectReference) GetId() string {
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *ObjectReference) GetIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Id, true
@@ -139,7 +139,7 @@ func (o *ObjectReference) GetRelated() string {
 // GetRelatedOk returns a tuple with the Related field value
 // and a boolean to check if the value has been set.
 func (o *ObjectReference) GetRelatedOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Related, true
@@ -163,7 +163,7 @@ func (o *ObjectReference) GetResourceName() string {
 // GetResourceNameOk returns a tuple with the ResourceName field value
 // and a boolean to check if the value has been set.
 func (o *ObjectReference) GetResourceNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ResourceName, true
@@ -240,42 +240,42 @@ func (o *ObjectReference) SetKind(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ObjectReference) Redact() {
-    o.recurseRedact(&o.Id)
-    o.recurseRedact(o.Environment)
-    o.recurseRedact(&o.Related)
-    o.recurseRedact(&o.ResourceName)
-    o.recurseRedact(o.ApiVersion)
-    o.recurseRedact(o.Kind)
+	o.recurseRedact(&o.Id)
+	o.recurseRedact(o.Environment)
+	o.recurseRedact(&o.Related)
+	o.recurseRedact(&o.ResourceName)
+	o.recurseRedact(o.ApiVersion)
+	o.recurseRedact(o.Kind)
 }
 
 func (o *ObjectReference) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ObjectReference) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ObjectReference) MarshalJSON() ([]byte, error) {
@@ -344,5 +344,3 @@ func (v *NullableObjectReference) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

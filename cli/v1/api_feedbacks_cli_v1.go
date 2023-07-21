@@ -38,61 +38,61 @@ var (
 	_ _context.Context
 )
 
-type UsagesCliV1Api interface {
+type FeedbacksCliV1Api interface {
 
 	/*
-		CreateCliV1Usage Create a Usage
+		CreateCliV1Feedback Create a Feedback
 
 		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to create a usage.
+	Make a request to create a feedback.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiCreateCliV1UsageRequest
+		 @return ApiCreateCliV1FeedbackRequest
 	*/
-	CreateCliV1Usage(ctx _context.Context) ApiCreateCliV1UsageRequest
+	CreateCliV1Feedback(ctx _context.Context) ApiCreateCliV1FeedbackRequest
 
-	// CreateCliV1UsageExecute executes the request
-	CreateCliV1UsageExecute(r ApiCreateCliV1UsageRequest) (*_nethttp.Response, error)
+	// CreateCliV1FeedbackExecute executes the request
+	CreateCliV1FeedbackExecute(r ApiCreateCliV1FeedbackRequest) (*_nethttp.Response, error)
 }
 
-// UsagesCliV1ApiService UsagesCliV1Api service
-type UsagesCliV1ApiService service
+// FeedbacksCliV1ApiService FeedbacksCliV1Api service
+type FeedbacksCliV1ApiService service
 
-type ApiCreateCliV1UsageRequest struct {
-	ctx        _context.Context
-	ApiService UsagesCliV1Api
-	cliV1Usage *CliV1Usage
+type ApiCreateCliV1FeedbackRequest struct {
+	ctx           _context.Context
+	ApiService    FeedbacksCliV1Api
+	cliV1Feedback *CliV1Feedback
 }
 
-func (r ApiCreateCliV1UsageRequest) CliV1Usage(cliV1Usage CliV1Usage) ApiCreateCliV1UsageRequest {
-	r.cliV1Usage = &cliV1Usage
+func (r ApiCreateCliV1FeedbackRequest) CliV1Feedback(cliV1Feedback CliV1Feedback) ApiCreateCliV1FeedbackRequest {
+	r.cliV1Feedback = &cliV1Feedback
 	return r
 }
 
-func (r ApiCreateCliV1UsageRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.CreateCliV1UsageExecute(r)
+func (r ApiCreateCliV1FeedbackRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.CreateCliV1FeedbackExecute(r)
 }
 
 /*
-CreateCliV1Usage Create a Usage
+CreateCliV1Feedback Create a Feedback
 
 [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to create a usage.
+Make a request to create a feedback.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateCliV1UsageRequest
+	@return ApiCreateCliV1FeedbackRequest
 */
-func (a *UsagesCliV1ApiService) CreateCliV1Usage(ctx _context.Context) ApiCreateCliV1UsageRequest {
-	return ApiCreateCliV1UsageRequest{
+func (a *FeedbacksCliV1ApiService) CreateCliV1Feedback(ctx _context.Context) ApiCreateCliV1FeedbackRequest {
+	return ApiCreateCliV1FeedbackRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-func (a *UsagesCliV1ApiService) CreateCliV1UsageExecute(r ApiCreateCliV1UsageRequest) (*_nethttp.Response, error) {
+func (a *FeedbacksCliV1ApiService) CreateCliV1FeedbackExecute(r ApiCreateCliV1FeedbackRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -101,12 +101,12 @@ func (a *UsagesCliV1ApiService) CreateCliV1UsageExecute(r ApiCreateCliV1UsageReq
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsagesCliV1ApiService.CreateCliV1Usage")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeedbacksCliV1ApiService.CreateCliV1Feedback")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/cli/v1/usages"
+	localVarPath := localBasePath + "/cli/v1/feedbacks"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -130,7 +130,7 @@ func (a *UsagesCliV1ApiService) CreateCliV1UsageExecute(r ApiCreateCliV1UsageReq
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.cliV1Usage
+	localVarPostBody = r.cliV1Feedback
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return nil, err

@@ -17,7 +17,7 @@ CLI API
 
 API to collect data on CLI commands run while logged in to Confluent Cloud
 
-API version: 0.1.0
+API version: 0.2.0
 Contact: cli-team@confluent.io
 */
 
@@ -56,13 +56,15 @@ var (
 	xmlCheck  = regexp.MustCompile(`(?i:(?:application|text)/xml)`)
 )
 
-// APIClient manages communication with the CLI API API v0.1.0
+// APIClient manages communication with the CLI API API v0.2.0
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
 	common service // Reuse a single struct instead of allocating one for each service on the heap.
 
 	// API Services
+
+	FeedbacksCliV1Api FeedbacksCliV1Api
 
 	UsagesCliV1Api UsagesCliV1Api
 }
@@ -83,6 +85,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
+	c.FeedbacksCliV1Api = (*FeedbacksCliV1ApiService)(&c.common)
 	c.UsagesCliV1Api = (*UsagesCliV1ApiService)(&c.common)
 
 	return c
