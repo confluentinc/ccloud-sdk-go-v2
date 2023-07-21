@@ -17,7 +17,7 @@ CLI API
 
 API to collect data on CLI commands run while logged in to Confluent Cloud
 
-API version: 0.1.0
+API version: 0.2.0
 Contact: cli-team@confluent.io
 */
 
