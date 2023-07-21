@@ -17,7 +17,7 @@ CLI API
 
 API to collect data on CLI commands run while logged in to Confluent Cloud
 
-API version: 0.1.0
+API version: 0.2.0
 Contact: cli-team@confluent.io
 */
 
@@ -78,7 +78,7 @@ func (o *ListMeta) GetFirst() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ListMeta) GetFirstOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.First.Get(), o.First.IsSet()
@@ -97,6 +97,7 @@ func (o *ListMeta) HasFirst() bool {
 func (o *ListMeta) SetFirst(v string) {
 	o.First.Set(&v)
 }
+
 // SetFirstNil sets the value for First to be an explicit nil
 func (o *ListMeta) SetFirstNil() {
 	o.First.Set(nil)
@@ -120,7 +121,7 @@ func (o *ListMeta) GetLast() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ListMeta) GetLastOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Last.Get(), o.Last.IsSet()
@@ -139,6 +140,7 @@ func (o *ListMeta) HasLast() bool {
 func (o *ListMeta) SetLast(v string) {
 	o.Last.Set(&v)
 }
+
 // SetLastNil sets the value for Last to be an explicit nil
 func (o *ListMeta) SetLastNil() {
 	o.Last.Set(nil)
@@ -162,7 +164,7 @@ func (o *ListMeta) GetPrev() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ListMeta) GetPrevOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Prev.Get(), o.Prev.IsSet()
@@ -181,6 +183,7 @@ func (o *ListMeta) HasPrev() bool {
 func (o *ListMeta) SetPrev(v string) {
 	o.Prev.Set(&v)
 }
+
 // SetPrevNil sets the value for Prev to be an explicit nil
 func (o *ListMeta) SetPrevNil() {
 	o.Prev.Set(nil)
@@ -204,7 +207,7 @@ func (o *ListMeta) GetNext() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ListMeta) GetNextOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Next.Get(), o.Next.IsSet()
@@ -223,6 +226,7 @@ func (o *ListMeta) HasNext() bool {
 func (o *ListMeta) SetNext(v string) {
 	o.Next.Set(&v)
 }
+
 // SetNextNil sets the value for Next to be an explicit nil
 func (o *ListMeta) SetNextNil() {
 	o.Next.Set(nil)
@@ -267,41 +271,41 @@ func (o *ListMeta) SetTotalSize(v int32) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ListMeta) Redact() {
-    o.recurseRedact(o.First)
-    o.recurseRedact(o.Last)
-    o.recurseRedact(o.Prev)
-    o.recurseRedact(o.Next)
-    o.recurseRedact(o.TotalSize)
+	o.recurseRedact(o.First)
+	o.recurseRedact(o.Last)
+	o.recurseRedact(o.Prev)
+	o.recurseRedact(o.Next)
+	o.recurseRedact(o.TotalSize)
 }
 
 func (o *ListMeta) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ListMeta) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ListMeta) MarshalJSON() ([]byte, error) {
@@ -367,5 +371,3 @@ func (v *NullableListMeta) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
