@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Name of the SQL statement exception. | [optional] [readonly] 
 **Stacktrace** | Pointer to **string** | Stack trace of the statement exception. | [optional] [readonly] 
 **Timestamp** | Pointer to **time.Time** | The date and time at which the exception occurred. It is represented in RFC3339 format and is in UTC. | [optional] [readonly] 
-**FailureLabels** | Pointer to **map[string]string** | The custom metadata in the form of key value pairs attached to a statement exception when a failure occurs. | [optional] [readonly] 
+**Labels** | Pointer to **map[string]string** | The custom metadata in the form of key value pairs attached to a statement exception when a failure occurs. | [optional] [readonly] 
 
 ## Methods
 
@@ -103,30 +103,30 @@ SetTimestamp sets Timestamp field to given value.
 
 HasTimestamp returns a boolean if a field has been set.
 
-### GetFailureLabels
+### GetLabels
 
-`func (o *SqlV1alpha1StatementException) GetFailureLabels() map[string]string`
+`func (o *SqlV1alpha1StatementException) GetLabels() map[string]string`
 
-GetFailureLabels returns the FailureLabels field if non-nil, zero value otherwise.
+GetLabels returns the Labels field if non-nil, zero value otherwise.
 
-### GetFailureLabelsOk
+### GetLabelsOk
 
-`func (o *SqlV1alpha1StatementException) GetFailureLabelsOk() (*map[string]string, bool)`
+`func (o *SqlV1alpha1StatementException) GetLabelsOk() (*map[string]string, bool)`
 
-GetFailureLabelsOk returns a tuple with the FailureLabels field if it's non-nil, zero value otherwise
+GetLabelsOk returns a tuple with the Labels field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetFailureLabels
+### SetLabels
 
-`func (o *SqlV1alpha1StatementException) SetFailureLabels(v map[string]string)`
+`func (o *SqlV1alpha1StatementException) SetLabels(v map[string]string)`
 
-SetFailureLabels sets FailureLabels field to given value.
+SetLabels sets Labels field to given value.
 
-### HasFailureLabels
+### HasLabels
 
-`func (o *SqlV1alpha1StatementException) HasFailureLabels() bool`
+`func (o *SqlV1alpha1StatementException) HasLabels() bool`
 
-HasFailureLabels returns a boolean if a field has been set.
+HasLabels returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
