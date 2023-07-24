@@ -44,7 +44,7 @@ type SqlV1alpha1StatementException struct {
 	// The date and time at which the exception occurred. It is represented in RFC3339 format and is in UTC.
 	Timestamp *time.Time `json:"timestamp,omitempty"`
 	// The custom metadata in the form of key value pairs attached to a statement exception when a failure occurs.
-	FailureLabels *map[string]string `json:"failure_labels,omitempty"`
+	Labels *map[string]string `json:"labels,omitempty"`
 }
 
 // NewSqlV1alpha1StatementException instantiates a new SqlV1alpha1StatementException object
@@ -160,36 +160,36 @@ func (o *SqlV1alpha1StatementException) SetTimestamp(v time.Time) {
 	o.Timestamp = &v
 }
 
-// GetFailureLabels returns the FailureLabels field value if set, zero value otherwise.
-func (o *SqlV1alpha1StatementException) GetFailureLabels() map[string]string {
-	if o == nil || o.FailureLabels == nil {
+// GetLabels returns the Labels field value if set, zero value otherwise.
+func (o *SqlV1alpha1StatementException) GetLabels() map[string]string {
+	if o == nil || o.Labels == nil {
 		var ret map[string]string
 		return ret
 	}
-	return *o.FailureLabels
+	return *o.Labels
 }
 
-// GetFailureLabelsOk returns a tuple with the FailureLabels field value if set, nil otherwise
+// GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SqlV1alpha1StatementException) GetFailureLabelsOk() (*map[string]string, bool) {
-	if o == nil || o.FailureLabels == nil {
+func (o *SqlV1alpha1StatementException) GetLabelsOk() (*map[string]string, bool) {
+	if o == nil || o.Labels == nil {
 		return nil, false
 	}
-	return o.FailureLabels, true
+	return o.Labels, true
 }
 
-// HasFailureLabels returns a boolean if a field has been set.
-func (o *SqlV1alpha1StatementException) HasFailureLabels() bool {
-	if o != nil && o.FailureLabels != nil {
+// HasLabels returns a boolean if a field has been set.
+func (o *SqlV1alpha1StatementException) HasLabels() bool {
+	if o != nil && o.Labels != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetFailureLabels gets a reference to the given map[string]string and assigns it to the FailureLabels field.
-func (o *SqlV1alpha1StatementException) SetFailureLabels(v map[string]string) {
-	o.FailureLabels = &v
+// SetLabels gets a reference to the given map[string]string and assigns it to the Labels field.
+func (o *SqlV1alpha1StatementException) SetLabels(v map[string]string) {
+	o.Labels = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
@@ -197,7 +197,7 @@ func (o *SqlV1alpha1StatementException) Redact() {
 	o.recurseRedact(o.Name)
 	o.recurseRedact(o.Stacktrace)
 	o.recurseRedact(o.Timestamp)
-	o.recurseRedact(o.FailureLabels)
+	o.recurseRedact(o.Labels)
 }
 
 func (o *SqlV1alpha1StatementException) recurseRedact(v interface{}) {
@@ -241,8 +241,8 @@ func (o SqlV1alpha1StatementException) MarshalJSON() ([]byte, error) {
 	if o.Timestamp != nil {
 		toSerialize["timestamp"] = o.Timestamp
 	}
-	if o.FailureLabels != nil {
-		toSerialize["failure_labels"] = o.FailureLabels
+	if o.Labels != nil {
+		toSerialize["labels"] = o.Labels
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
