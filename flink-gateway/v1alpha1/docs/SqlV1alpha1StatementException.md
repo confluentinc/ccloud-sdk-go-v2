@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Name of the SQL statement exception. | [optional] [readonly] 
 **Stacktrace** | Pointer to **string** | Stack trace of the statement exception. | [optional] [readonly] 
 **Timestamp** | Pointer to **time.Time** | The date and time at which the exception occurred. It is represented in RFC3339 format and is in UTC. | [optional] [readonly] 
-**FailureLabels** | Pointer to **map[string]string** | The custom metadata in the form of key value pairs attached to a statement exception when a failure occurs. | [optional] [readonly] 
 
 ## Methods
 
@@ -102,31 +101,6 @@ SetTimestamp sets Timestamp field to given value.
 `func (o *SqlV1alpha1StatementException) HasTimestamp() bool`
 
 HasTimestamp returns a boolean if a field has been set.
-
-### GetFailureLabels
-
-`func (o *SqlV1alpha1StatementException) GetFailureLabels() map[string]string`
-
-GetFailureLabels returns the FailureLabels field if non-nil, zero value otherwise.
-
-### GetFailureLabelsOk
-
-`func (o *SqlV1alpha1StatementException) GetFailureLabelsOk() (*map[string]string, bool)`
-
-GetFailureLabelsOk returns a tuple with the FailureLabels field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFailureLabels
-
-`func (o *SqlV1alpha1StatementException) SetFailureLabels(v map[string]string)`
-
-SetFailureLabels sets FailureLabels field to given value.
-
-### HasFailureLabels
-
-`func (o *SqlV1alpha1StatementException) HasFailureLabels() bool`
-
-HasFailureLabels returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
