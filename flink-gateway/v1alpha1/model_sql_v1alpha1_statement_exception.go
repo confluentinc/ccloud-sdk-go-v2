@@ -43,8 +43,6 @@ type SqlV1alpha1StatementException struct {
 	Stacktrace *string `json:"stacktrace,omitempty"`
 	// The date and time at which the exception occurred. It is represented in RFC3339 format and is in UTC.
 	Timestamp *time.Time `json:"timestamp,omitempty"`
-	// The custom metadata in the form of key value pairs attached to a statement exception when a failure occurs.
-	FailureLabels *map[string]string `json:"failure_labels,omitempty"`
 }
 
 // NewSqlV1alpha1StatementException instantiates a new SqlV1alpha1StatementException object
@@ -160,74 +158,41 @@ func (o *SqlV1alpha1StatementException) SetTimestamp(v time.Time) {
 	o.Timestamp = &v
 }
 
-// GetFailureLabels returns the FailureLabels field value if set, zero value otherwise.
-func (o *SqlV1alpha1StatementException) GetFailureLabels() map[string]string {
-	if o == nil || o.FailureLabels == nil {
-		var ret map[string]string
-		return ret
-	}
-	return *o.FailureLabels
-}
-
-// GetFailureLabelsOk returns a tuple with the FailureLabels field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SqlV1alpha1StatementException) GetFailureLabelsOk() (*map[string]string, bool) {
-	if o == nil || o.FailureLabels == nil {
-		return nil, false
-	}
-	return o.FailureLabels, true
-}
-
-// HasFailureLabels returns a boolean if a field has been set.
-func (o *SqlV1alpha1StatementException) HasFailureLabels() bool {
-	if o != nil && o.FailureLabels != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetFailureLabels gets a reference to the given map[string]string and assigns it to the FailureLabels field.
-func (o *SqlV1alpha1StatementException) SetFailureLabels(v map[string]string) {
-	o.FailureLabels = &v
-}
-
 // Redact resets all sensitive fields to their zero value.
 func (o *SqlV1alpha1StatementException) Redact() {
-	o.recurseRedact(o.Name)
-	o.recurseRedact(o.Stacktrace)
-	o.recurseRedact(o.Timestamp)
-	o.recurseRedact(o.FailureLabels)
+    o.recurseRedact(o.Name)
+    o.recurseRedact(o.Stacktrace)
+    o.recurseRedact(o.Timestamp)
 }
 
 func (o *SqlV1alpha1StatementException) recurseRedact(v interface{}) {
-	type redactor interface {
-		Redact()
-	}
-	if r, ok := v.(redactor); ok {
-		r.Redact()
-	} else {
-		val := reflect.ValueOf(v)
-		if val.Kind() == reflect.Ptr {
-			val = val.Elem()
-		}
-		switch val.Kind() {
-		case reflect.Slice, reflect.Array:
-			for i := 0; i < val.Len(); i++ {
-				// support data types declared without pointers
-				o.recurseRedact(val.Index(i).Interface())
-				// ... and data types that were declared without but need pointers (for Redact)
-				if val.Index(i).CanAddr() {
-					o.recurseRedact(val.Index(i).Addr().Interface())
-				}
-			}
-		}
-	}
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
 }
 
 func (o SqlV1alpha1StatementException) zeroField(v interface{}) {
-	p := reflect.ValueOf(v).Elem()
-	p.Set(reflect.Zero(p.Type()))
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o SqlV1alpha1StatementException) MarshalJSON() ([]byte, error) {
@@ -240,9 +205,6 @@ func (o SqlV1alpha1StatementException) MarshalJSON() ([]byte, error) {
 	}
 	if o.Timestamp != nil {
 		toSerialize["timestamp"] = o.Timestamp
-	}
-	if o.FailureLabels != nil {
-		toSerialize["failure_labels"] = o.FailureLabels
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
@@ -290,3 +252,5 @@ func (v *NullableSqlV1alpha1StatementException) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
