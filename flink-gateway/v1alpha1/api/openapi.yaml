@@ -2430,20 +2430,20 @@ components:
             at org.apache.flink.runtime.taskmanager.Task.run(Task.java:571)\n\tat\
             \ java.lang.Thread.run(Thread.java:748)\n"
           name: java.lang.RuntimeException
-          timestamp: 2023-03-31T00:00:00Z
-          labels:
+          failure_labels:
             code: SYSTEM
             type: USER
+          timestamp: 2023-03-31T00:00:00Z
         - stacktrace: "java.lang.RuntimeException: An error occurred\n\tat org.apache.flink.streaming.runtime.tasks.SourceStreamTask.run(SourceStreamTask.java:84)\n\
             \tat org.apache.flink.streaming.runtime.tasks.StreamTask.invoke(StreamTask.java:374)\n\
             \tat org.apache.flink.runtime.taskmanager.Task.doRun(Task.java:784)\n\t\
             at org.apache.flink.runtime.taskmanager.Task.run(Task.java:571)\n\tat\
             \ java.lang.Thread.run(Thread.java:748)\n"
           name: java.lang.RuntimeException
-          timestamp: 2023-03-31T00:00:00Z
-          labels:
+          failure_labels:
             code: SYSTEM
             type: USER
+          timestamp: 2023-03-31T00:00:00Z
         kind: StatementExceptionList
         api_version: sql/v1alpha1
       properties:
@@ -2481,10 +2481,10 @@ components:
           \tat org.apache.flink.runtime.taskmanager.Task.doRun(Task.java:784)\n\t\
           at org.apache.flink.runtime.taskmanager.Task.run(Task.java:571)\n\tat java.lang.Thread.run(Thread.java:748)\n"
         name: java.lang.RuntimeException
-        timestamp: 2023-03-31T00:00:00Z
-        labels:
+        failure_labels:
           code: SYSTEM
           type: USER
+        timestamp: 2023-03-31T00:00:00Z
       properties:
         name:
           description: Name of the SQL statement exception.
@@ -2507,7 +2507,7 @@ components:
           format: date-time
           readOnly: true
           type: string
-        labels:
+        failure_labels:
           additionalProperties:
             type: string
           description: The custom metadata in the form of key value pairs attached
