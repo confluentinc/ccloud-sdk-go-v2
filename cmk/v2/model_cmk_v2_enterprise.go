@@ -34,95 +34,60 @@ import (
 	"reflect"
 )
 
-// CmkV2ClusterStatus The status of the Cluster
-type CmkV2ClusterStatus struct {
-	// The lifecyle phase of the cluster:   PROVISIONED:  cluster is provisioned;   PROVISIONING:  cluster provisioning is in progress;   FAILED:  provisioning failed
-	Phase string `json:"phase,omitempty"`
-	// The number of Confluent Kafka Units (CKUs) the Dedicated cluster currently has.
-	Cku *int32 `json:"cku,omitempty"`
+// CmkV2Enterprise The enterprise cluster type.
+type CmkV2Enterprise struct {
+	// Enterprise cluster type.
+	Kind string `json:"kind,omitempty"`
 }
 
-// NewCmkV2ClusterStatus instantiates a new CmkV2ClusterStatus object
+// NewCmkV2Enterprise instantiates a new CmkV2Enterprise object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCmkV2ClusterStatus(phase string) *CmkV2ClusterStatus {
-	this := CmkV2ClusterStatus{}
-	this.Phase = phase
+func NewCmkV2Enterprise(kind string) *CmkV2Enterprise {
+	this := CmkV2Enterprise{}
+	this.Kind = kind
 	return &this
 }
 
-// NewCmkV2ClusterStatusWithDefaults instantiates a new CmkV2ClusterStatus object
+// NewCmkV2EnterpriseWithDefaults instantiates a new CmkV2Enterprise object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCmkV2ClusterStatusWithDefaults() *CmkV2ClusterStatus {
-	this := CmkV2ClusterStatus{}
+func NewCmkV2EnterpriseWithDefaults() *CmkV2Enterprise {
+	this := CmkV2Enterprise{}
 	return &this
 }
 
-// GetPhase returns the Phase field value
-func (o *CmkV2ClusterStatus) GetPhase() string {
+// GetKind returns the Kind field value
+func (o *CmkV2Enterprise) GetKind() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Phase
+	return o.Kind
 }
 
-// GetPhaseOk returns a tuple with the Phase field value
+// GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *CmkV2ClusterStatus) GetPhaseOk() (*string, bool) {
+func (o *CmkV2Enterprise) GetKindOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Phase, true
+	return &o.Kind, true
 }
 
-// SetPhase sets field value
-func (o *CmkV2ClusterStatus) SetPhase(v string) {
-	o.Phase = v
-}
-
-// GetCku returns the Cku field value if set, zero value otherwise.
-func (o *CmkV2ClusterStatus) GetCku() int32 {
-	if o == nil || o.Cku == nil {
-		var ret int32
-		return ret
-	}
-	return *o.Cku
-}
-
-// GetCkuOk returns a tuple with the Cku field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CmkV2ClusterStatus) GetCkuOk() (*int32, bool) {
-	if o == nil || o.Cku == nil {
-		return nil, false
-	}
-	return o.Cku, true
-}
-
-// HasCku returns a boolean if a field has been set.
-func (o *CmkV2ClusterStatus) HasCku() bool {
-	if o != nil && o.Cku != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetCku gets a reference to the given int32 and assigns it to the Cku field.
-func (o *CmkV2ClusterStatus) SetCku(v int32) {
-	o.Cku = &v
+// SetKind sets field value
+func (o *CmkV2Enterprise) SetKind(v string) {
+	o.Kind = v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *CmkV2ClusterStatus) Redact() {
-	o.recurseRedact(&o.Phase)
-	o.recurseRedact(o.Cku)
+func (o *CmkV2Enterprise) Redact() {
+	o.recurseRedact(&o.Kind)
 }
 
-func (o *CmkV2ClusterStatus) recurseRedact(v interface{}) {
+func (o *CmkV2Enterprise) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -147,18 +112,15 @@ func (o *CmkV2ClusterStatus) recurseRedact(v interface{}) {
 	}
 }
 
-func (o CmkV2ClusterStatus) zeroField(v interface{}) {
+func (o CmkV2Enterprise) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o CmkV2ClusterStatus) MarshalJSON() ([]byte, error) {
+func (o CmkV2Enterprise) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
-		toSerialize["phase"] = o.Phase
-	}
-	if o.Cku != nil {
-		toSerialize["cku"] = o.Cku
+		toSerialize["kind"] = o.Kind
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
@@ -167,34 +129,34 @@ func (o CmkV2ClusterStatus) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableCmkV2ClusterStatus struct {
-	value *CmkV2ClusterStatus
+type NullableCmkV2Enterprise struct {
+	value *CmkV2Enterprise
 	isSet bool
 }
 
-func (v NullableCmkV2ClusterStatus) Get() *CmkV2ClusterStatus {
+func (v NullableCmkV2Enterprise) Get() *CmkV2Enterprise {
 	return v.value
 }
 
-func (v *NullableCmkV2ClusterStatus) Set(val *CmkV2ClusterStatus) {
+func (v *NullableCmkV2Enterprise) Set(val *CmkV2Enterprise) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCmkV2ClusterStatus) IsSet() bool {
+func (v NullableCmkV2Enterprise) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCmkV2ClusterStatus) Unset() {
+func (v *NullableCmkV2Enterprise) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCmkV2ClusterStatus(val *CmkV2ClusterStatus) *NullableCmkV2ClusterStatus {
-	return &NullableCmkV2ClusterStatus{value: val, isSet: true}
+func NewNullableCmkV2Enterprise(val *CmkV2Enterprise) *NullableCmkV2Enterprise {
+	return &NullableCmkV2Enterprise{value: val, isSet: true}
 }
 
-func (v NullableCmkV2ClusterStatus) MarshalJSON() ([]byte, error) {
+func (v NullableCmkV2Enterprise) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -202,7 +164,7 @@ func (v NullableCmkV2ClusterStatus) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableCmkV2ClusterStatus) UnmarshalJSON(src []byte) error {
+func (v *NullableCmkV2Enterprise) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

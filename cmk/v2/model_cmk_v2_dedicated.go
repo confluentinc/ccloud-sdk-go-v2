@@ -26,6 +26,7 @@ Contact: orchestrator-team@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,9 +37,9 @@ import (
 // CmkV2Dedicated A dedicated cluster with its parameters.
 type CmkV2Dedicated struct {
 	// Dedicated cluster type.
-	Kind string `json:"kind"`
+	Kind string `json:"kind,omitempty"`
 	// The number of Confluent Kafka Units (CKUs) for Dedicated cluster types. MULTI_ZONE dedicated clusters must have at least two CKUs.
-	Cku int32 `json:"cku"`
+	Cku int32 `json:"cku,omitempty"`
 	// The id of the encryption key that is used to encrypt the data in the Kafka cluster. (e.g. for Amazon Web Services, the Amazon Resource Name of the key).
 	// Deprecated
 	EncryptionKey *string `json:"encryption_key,omitempty"`
@@ -232,7 +233,11 @@ func (o CmkV2Dedicated) MarshalJSON() ([]byte, error) {
 	if o.Zones != nil {
 		toSerialize["zones"] = o.Zones
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableCmkV2Dedicated struct {
@@ -263,7 +268,11 @@ func NewNullableCmkV2Dedicated(val *CmkV2Dedicated) *NullableCmkV2Dedicated {
 }
 
 func (v NullableCmkV2Dedicated) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableCmkV2Dedicated) UnmarshalJSON(src []byte) error {

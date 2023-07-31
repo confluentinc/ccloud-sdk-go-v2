@@ -26,6 +26,7 @@ Contact: orchestrator-team@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -315,7 +316,11 @@ func (o CmkV2ClusterUpdate) MarshalJSON() ([]byte, error) {
 	if o.Status != nil {
 		toSerialize["status"] = o.Status
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableCmkV2ClusterUpdate struct {
@@ -346,7 +351,11 @@ func NewNullableCmkV2ClusterUpdate(val *CmkV2ClusterUpdate) *NullableCmkV2Cluste
 }
 
 func (v NullableCmkV2ClusterUpdate) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableCmkV2ClusterUpdate) UnmarshalJSON(src []byte) error {

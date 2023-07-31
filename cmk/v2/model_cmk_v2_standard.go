@@ -26,6 +26,7 @@ Contact: orchestrator-team@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,7 +37,7 @@ import (
 // CmkV2Standard The standard cluster type.
 type CmkV2Standard struct {
 	// Standard cluster type.
-	Kind string `json:"kind"`
+	Kind string `json:"kind,omitempty"`
 }
 
 // NewCmkV2Standard instantiates a new CmkV2Standard object
@@ -121,7 +122,11 @@ func (o CmkV2Standard) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["kind"] = o.Kind
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableCmkV2Standard struct {
@@ -152,7 +157,11 @@ func NewNullableCmkV2Standard(val *CmkV2Standard) *NullableCmkV2Standard {
 }
 
 func (v NullableCmkV2Standard) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableCmkV2Standard) UnmarshalJSON(src []byte) error {

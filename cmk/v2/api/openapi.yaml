@@ -15,7 +15,7 @@ servers:
   url: https://api.confluent.cloud
 tags:
 - description: |-
-    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `Clusters` objects represent Apache Kafka Clusters on Confluent Cloud.
 
@@ -38,7 +38,7 @@ paths:
   /cmk/v2/clusters:
     get:
       description: |-
-        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all clusters.
       operationId: listCmkV2Clusters
@@ -230,6 +230,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: List of Clusters
       tags:
       - Clusters (cmk/v2)
@@ -319,7 +320,7 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create a cluster.
       operationId: createCmkV2Cluster
@@ -594,6 +595,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Create a Cluster
       tags:
       - Clusters (cmk/v2)
@@ -719,7 +721,7 @@ paths:
   /cmk/v2/clusters/{id}:
     delete:
       description: |-
-        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete a cluster.
       operationId: deleteCmkV2Cluster
@@ -876,6 +878,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Delete a Cluster
       tags:
       - Clusters (cmk/v2)
@@ -965,7 +968,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a cluster.
       operationId: getCmkV2Cluster
@@ -1164,6 +1167,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Read a Cluster
       tags:
       - Clusters (cmk/v2)
@@ -1253,7 +1257,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update a cluster.
 
@@ -1506,6 +1510,7 @@ paths:
               style: simple
       security:
       - api-key: []
+      - confluent-sts-access-token: []
       summary: Update a Cluster
       tags:
       - Clusters (cmk/v2)
@@ -1936,6 +1941,19 @@ components:
       required:
       - kind
       type: object
+    cmk.v2.Enterprise:
+      description: |
+        The enterprise cluster type.
+      properties:
+        kind:
+          description: |
+            Enterprise cluster type.
+          enum:
+          - Enterprise
+          type: string
+      required:
+      - kind
+      type: object
     cmk.v2.Dedicated:
       description: |
         A dedicated cluster with its parameters.
@@ -2108,6 +2126,7 @@ components:
               Basic: '#/components/schemas/cmk.v2.Basic'
               Standard: '#/components/schemas/cmk.v2.Standard'
               Dedicated: '#/components/schemas/cmk.v2.Dedicated'
+              Enterprise: '#/components/schemas/cmk.v2.Enterprise'
             propertyName: kind
           example:
             kind: Basic
@@ -2115,6 +2134,7 @@ components:
           - $ref: '#/components/schemas/cmk.v2.Basic'
           - $ref: '#/components/schemas/cmk.v2.Standard'
           - $ref: '#/components/schemas/cmk.v2.Dedicated'
+          - $ref: '#/components/schemas/cmk.v2.Enterprise'
           x-one-of-name: CmkV2ClusterSpecConfigOneOf
         kafka_bootstrap_endpoint:
           description: The bootstrap endpoint used by Kafka clients to connect to
@@ -2404,6 +2424,7 @@ components:
               Basic: '#/components/schemas/cmk.v2.Basic'
               Standard: '#/components/schemas/cmk.v2.Standard'
               Dedicated: '#/components/schemas/cmk.v2.Dedicated'
+              Enterprise: '#/components/schemas/cmk.v2.Enterprise'
             propertyName: kind
           example:
             kind: Basic
@@ -2411,6 +2432,7 @@ components:
           - $ref: '#/components/schemas/cmk.v2.Basic'
           - $ref: '#/components/schemas/cmk.v2.Standard'
           - $ref: '#/components/schemas/cmk.v2.Dedicated'
+          - $ref: '#/components/schemas/cmk.v2.Enterprise'
           x-one-of-name: CmkV2ClusterSpecUpdateConfigOneOf
         environment:
           allOf:
@@ -2495,3 +2517,11 @@ components:
         Key ID as the username and API Key Secret as the password.
       scheme: basic
       type: http
+    confluent-sts-access-token:
+      description: Authenticate with Confluent API using this credentials (JSON Web
+        Tokens) following OAuth 2.0.
+      flows:
+        clientCredentials:
+          scopes: {}
+          tokenUrl: https://api.confluent.cloud/sts/v1/oauth2/token
+      type: oauth2

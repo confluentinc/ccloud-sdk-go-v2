@@ -26,15 +26,17 @@ Contact: orchestrator-team@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
 
 // CmkV2ClusterSpecConfigOneOf - struct for CmkV2ClusterSpecConfigOneOf
 type CmkV2ClusterSpecConfigOneOf struct {
-	CmkV2Basic     *CmkV2Basic
-	CmkV2Dedicated *CmkV2Dedicated
-	CmkV2Standard  *CmkV2Standard
+	CmkV2Basic      *CmkV2Basic
+	CmkV2Dedicated  *CmkV2Dedicated
+	CmkV2Enterprise *CmkV2Enterprise
+	CmkV2Standard   *CmkV2Standard
 }
 
 // CmkV2BasicAsCmkV2ClusterSpecConfigOneOf is a convenience function that returns CmkV2Basic wrapped in CmkV2ClusterSpecConfigOneOf
@@ -45,6 +47,11 @@ func CmkV2BasicAsCmkV2ClusterSpecConfigOneOf(v *CmkV2Basic) CmkV2ClusterSpecConf
 // CmkV2DedicatedAsCmkV2ClusterSpecConfigOneOf is a convenience function that returns CmkV2Dedicated wrapped in CmkV2ClusterSpecConfigOneOf
 func CmkV2DedicatedAsCmkV2ClusterSpecConfigOneOf(v *CmkV2Dedicated) CmkV2ClusterSpecConfigOneOf {
 	return CmkV2ClusterSpecConfigOneOf{CmkV2Dedicated: v}
+}
+
+// CmkV2EnterpriseAsCmkV2ClusterSpecConfigOneOf is a convenience function that returns CmkV2Enterprise wrapped in CmkV2ClusterSpecConfigOneOf
+func CmkV2EnterpriseAsCmkV2ClusterSpecConfigOneOf(v *CmkV2Enterprise) CmkV2ClusterSpecConfigOneOf {
+	return CmkV2ClusterSpecConfigOneOf{CmkV2Enterprise: v}
 }
 
 // CmkV2StandardAsCmkV2ClusterSpecConfigOneOf is a convenience function that returns CmkV2Standard wrapped in CmkV2ClusterSpecConfigOneOf
@@ -86,6 +93,18 @@ func (dst *CmkV2ClusterSpecConfigOneOf) UnmarshalJSON(data []byte) error {
 		}
 	}
 
+	// check if the discriminator value is 'Enterprise'
+	if jsonDict["kind"] == "Enterprise" {
+		// try to unmarshal JSON data into CmkV2Enterprise
+		err = json.Unmarshal(data, &dst.CmkV2Enterprise)
+		if err == nil {
+			return nil // data stored in dst.CmkV2Enterprise, return on the first match
+		} else {
+			dst.CmkV2Enterprise = nil
+			return fmt.Errorf("Failed to unmarshal CmkV2ClusterSpecConfigOneOf as CmkV2Enterprise: %s", err.Error())
+		}
+	}
+
 	// check if the discriminator value is 'Standard'
 	if jsonDict["kind"] == "Standard" {
 		// try to unmarshal JSON data into CmkV2Standard
@@ -122,6 +141,18 @@ func (dst *CmkV2ClusterSpecConfigOneOf) UnmarshalJSON(data []byte) error {
 		}
 	}
 
+	// check if the discriminator value is 'cmk.v2.Enterprise'
+	if jsonDict["kind"] == "cmk.v2.Enterprise" {
+		// try to unmarshal JSON data into CmkV2Enterprise
+		err = json.Unmarshal(data, &dst.CmkV2Enterprise)
+		if err == nil {
+			return nil // data stored in dst.CmkV2Enterprise, return on the first match
+		} else {
+			dst.CmkV2Enterprise = nil
+			return fmt.Errorf("Failed to unmarshal CmkV2ClusterSpecConfigOneOf as CmkV2Enterprise: %s", err.Error())
+		}
+	}
+
 	// check if the discriminator value is 'cmk.v2.Standard'
 	if jsonDict["kind"] == "cmk.v2.Standard" {
 		// try to unmarshal JSON data into CmkV2Standard
@@ -140,15 +171,35 @@ func (dst *CmkV2ClusterSpecConfigOneOf) UnmarshalJSON(data []byte) error {
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src CmkV2ClusterSpecConfigOneOf) MarshalJSON() ([]byte, error) {
 	if src.CmkV2Basic != nil {
-		return json.Marshal(&src.CmkV2Basic)
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.CmkV2Basic)
+		return buffer.Bytes(), err
 	}
 
 	if src.CmkV2Dedicated != nil {
-		return json.Marshal(&src.CmkV2Dedicated)
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.CmkV2Dedicated)
+		return buffer.Bytes(), err
+	}
+
+	if src.CmkV2Enterprise != nil {
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.CmkV2Enterprise)
+		return buffer.Bytes(), err
 	}
 
 	if src.CmkV2Standard != nil {
-		return json.Marshal(&src.CmkV2Standard)
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.CmkV2Standard)
+		return buffer.Bytes(), err
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -162,6 +213,10 @@ func (obj *CmkV2ClusterSpecConfigOneOf) GetActualInstance() interface{} {
 
 	if obj.CmkV2Dedicated != nil {
 		return obj.CmkV2Dedicated
+	}
+
+	if obj.CmkV2Enterprise != nil {
+		return obj.CmkV2Enterprise
 	}
 
 	if obj.CmkV2Standard != nil {
@@ -200,7 +255,11 @@ func NewNullableCmkV2ClusterSpecConfigOneOf(val *CmkV2ClusterSpecConfigOneOf) *N
 }
 
 func (v NullableCmkV2ClusterSpecConfigOneOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableCmkV2ClusterSpecConfigOneOf) UnmarshalJSON(src []byte) error {
