@@ -26,6 +26,7 @@ Contact: data-governance@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -356,7 +357,11 @@ func (o Classification) MarshalJSON() ([]byte, error) {
 	if o.RemovePropagationsOnEntityDelete != nil {
 		toSerialize["removePropagationsOnEntityDelete"] = o.RemovePropagationsOnEntityDelete
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableClassification struct {
@@ -387,7 +392,11 @@ func NewNullableClassification(val *Classification) *NullableClassification {
 }
 
 func (v NullableClassification) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableClassification) UnmarshalJSON(src []byte) error {

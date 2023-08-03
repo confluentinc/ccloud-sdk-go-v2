@@ -34,47 +34,39 @@ import (
 	"reflect"
 )
 
-// Tag struct for Tag
-type Tag struct {
+// ClassificationHeader struct for ClassificationHeader
+type ClassificationHeader struct {
 	// The tag name
 	TypeName *string `json:"typeName,omitempty"`
-	// The tag attributes
-	Attributes *map[string]interface{} `json:"attributes,omitempty"`
 	// The internal entity guid
 	EntityGuid *string `json:"entityGuid,omitempty"`
 	// The entity status
 	EntityStatus *string `json:"entityStatus,omitempty"`
 	// Whether to propagate the tag
 	Propagate *bool `json:"propagate,omitempty"`
-	// The validity periods
-	ValidityPeriods *[]TimeBoundary `json:"validityPeriods,omitempty"`
 	// Whether to remove propagations on entity delete
 	RemovePropagationsOnEntityDelete *bool `json:"removePropagationsOnEntityDelete,omitempty"`
-	// The entity type
-	EntityType *string `json:"entityType,omitempty"`
-	// The qualified name of the entity
-	EntityName *string `json:"entityName,omitempty"`
 }
 
-// NewTag instantiates a new Tag object
+// NewClassificationHeader instantiates a new ClassificationHeader object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTag() *Tag {
-	this := Tag{}
+func NewClassificationHeader() *ClassificationHeader {
+	this := ClassificationHeader{}
 	return &this
 }
 
-// NewTagWithDefaults instantiates a new Tag object
+// NewClassificationHeaderWithDefaults instantiates a new ClassificationHeader object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewTagWithDefaults() *Tag {
-	this := Tag{}
+func NewClassificationHeaderWithDefaults() *ClassificationHeader {
+	this := ClassificationHeader{}
 	return &this
 }
 
 // GetTypeName returns the TypeName field value if set, zero value otherwise.
-func (o *Tag) GetTypeName() string {
+func (o *ClassificationHeader) GetTypeName() string {
 	if o == nil || o.TypeName == nil {
 		var ret string
 		return ret
@@ -84,7 +76,7 @@ func (o *Tag) GetTypeName() string {
 
 // GetTypeNameOk returns a tuple with the TypeName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Tag) GetTypeNameOk() (*string, bool) {
+func (o *ClassificationHeader) GetTypeNameOk() (*string, bool) {
 	if o == nil || o.TypeName == nil {
 		return nil, false
 	}
@@ -92,7 +84,7 @@ func (o *Tag) GetTypeNameOk() (*string, bool) {
 }
 
 // HasTypeName returns a boolean if a field has been set.
-func (o *Tag) HasTypeName() bool {
+func (o *ClassificationHeader) HasTypeName() bool {
 	if o != nil && o.TypeName != nil {
 		return true
 	}
@@ -101,44 +93,12 @@ func (o *Tag) HasTypeName() bool {
 }
 
 // SetTypeName gets a reference to the given string and assigns it to the TypeName field.
-func (o *Tag) SetTypeName(v string) {
+func (o *ClassificationHeader) SetTypeName(v string) {
 	o.TypeName = &v
 }
 
-// GetAttributes returns the Attributes field value if set, zero value otherwise.
-func (o *Tag) GetAttributes() map[string]interface{} {
-	if o == nil || o.Attributes == nil {
-		var ret map[string]interface{}
-		return ret
-	}
-	return *o.Attributes
-}
-
-// GetAttributesOk returns a tuple with the Attributes field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Tag) GetAttributesOk() (*map[string]interface{}, bool) {
-	if o == nil || o.Attributes == nil {
-		return nil, false
-	}
-	return o.Attributes, true
-}
-
-// HasAttributes returns a boolean if a field has been set.
-func (o *Tag) HasAttributes() bool {
-	if o != nil && o.Attributes != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetAttributes gets a reference to the given map[string]interface{} and assigns it to the Attributes field.
-func (o *Tag) SetAttributes(v map[string]interface{}) {
-	o.Attributes = &v
-}
-
 // GetEntityGuid returns the EntityGuid field value if set, zero value otherwise.
-func (o *Tag) GetEntityGuid() string {
+func (o *ClassificationHeader) GetEntityGuid() string {
 	if o == nil || o.EntityGuid == nil {
 		var ret string
 		return ret
@@ -148,7 +108,7 @@ func (o *Tag) GetEntityGuid() string {
 
 // GetEntityGuidOk returns a tuple with the EntityGuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Tag) GetEntityGuidOk() (*string, bool) {
+func (o *ClassificationHeader) GetEntityGuidOk() (*string, bool) {
 	if o == nil || o.EntityGuid == nil {
 		return nil, false
 	}
@@ -156,7 +116,7 @@ func (o *Tag) GetEntityGuidOk() (*string, bool) {
 }
 
 // HasEntityGuid returns a boolean if a field has been set.
-func (o *Tag) HasEntityGuid() bool {
+func (o *ClassificationHeader) HasEntityGuid() bool {
 	if o != nil && o.EntityGuid != nil {
 		return true
 	}
@@ -165,12 +125,12 @@ func (o *Tag) HasEntityGuid() bool {
 }
 
 // SetEntityGuid gets a reference to the given string and assigns it to the EntityGuid field.
-func (o *Tag) SetEntityGuid(v string) {
+func (o *ClassificationHeader) SetEntityGuid(v string) {
 	o.EntityGuid = &v
 }
 
 // GetEntityStatus returns the EntityStatus field value if set, zero value otherwise.
-func (o *Tag) GetEntityStatus() string {
+func (o *ClassificationHeader) GetEntityStatus() string {
 	if o == nil || o.EntityStatus == nil {
 		var ret string
 		return ret
@@ -180,7 +140,7 @@ func (o *Tag) GetEntityStatus() string {
 
 // GetEntityStatusOk returns a tuple with the EntityStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Tag) GetEntityStatusOk() (*string, bool) {
+func (o *ClassificationHeader) GetEntityStatusOk() (*string, bool) {
 	if o == nil || o.EntityStatus == nil {
 		return nil, false
 	}
@@ -188,7 +148,7 @@ func (o *Tag) GetEntityStatusOk() (*string, bool) {
 }
 
 // HasEntityStatus returns a boolean if a field has been set.
-func (o *Tag) HasEntityStatus() bool {
+func (o *ClassificationHeader) HasEntityStatus() bool {
 	if o != nil && o.EntityStatus != nil {
 		return true
 	}
@@ -197,12 +157,12 @@ func (o *Tag) HasEntityStatus() bool {
 }
 
 // SetEntityStatus gets a reference to the given string and assigns it to the EntityStatus field.
-func (o *Tag) SetEntityStatus(v string) {
+func (o *ClassificationHeader) SetEntityStatus(v string) {
 	o.EntityStatus = &v
 }
 
 // GetPropagate returns the Propagate field value if set, zero value otherwise.
-func (o *Tag) GetPropagate() bool {
+func (o *ClassificationHeader) GetPropagate() bool {
 	if o == nil || o.Propagate == nil {
 		var ret bool
 		return ret
@@ -212,7 +172,7 @@ func (o *Tag) GetPropagate() bool {
 
 // GetPropagateOk returns a tuple with the Propagate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Tag) GetPropagateOk() (*bool, bool) {
+func (o *ClassificationHeader) GetPropagateOk() (*bool, bool) {
 	if o == nil || o.Propagate == nil {
 		return nil, false
 	}
@@ -220,7 +180,7 @@ func (o *Tag) GetPropagateOk() (*bool, bool) {
 }
 
 // HasPropagate returns a boolean if a field has been set.
-func (o *Tag) HasPropagate() bool {
+func (o *ClassificationHeader) HasPropagate() bool {
 	if o != nil && o.Propagate != nil {
 		return true
 	}
@@ -229,44 +189,12 @@ func (o *Tag) HasPropagate() bool {
 }
 
 // SetPropagate gets a reference to the given bool and assigns it to the Propagate field.
-func (o *Tag) SetPropagate(v bool) {
+func (o *ClassificationHeader) SetPropagate(v bool) {
 	o.Propagate = &v
 }
 
-// GetValidityPeriods returns the ValidityPeriods field value if set, zero value otherwise.
-func (o *Tag) GetValidityPeriods() []TimeBoundary {
-	if o == nil || o.ValidityPeriods == nil {
-		var ret []TimeBoundary
-		return ret
-	}
-	return *o.ValidityPeriods
-}
-
-// GetValidityPeriodsOk returns a tuple with the ValidityPeriods field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Tag) GetValidityPeriodsOk() (*[]TimeBoundary, bool) {
-	if o == nil || o.ValidityPeriods == nil {
-		return nil, false
-	}
-	return o.ValidityPeriods, true
-}
-
-// HasValidityPeriods returns a boolean if a field has been set.
-func (o *Tag) HasValidityPeriods() bool {
-	if o != nil && o.ValidityPeriods != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetValidityPeriods gets a reference to the given []TimeBoundary and assigns it to the ValidityPeriods field.
-func (o *Tag) SetValidityPeriods(v []TimeBoundary) {
-	o.ValidityPeriods = &v
-}
-
 // GetRemovePropagationsOnEntityDelete returns the RemovePropagationsOnEntityDelete field value if set, zero value otherwise.
-func (o *Tag) GetRemovePropagationsOnEntityDelete() bool {
+func (o *ClassificationHeader) GetRemovePropagationsOnEntityDelete() bool {
 	if o == nil || o.RemovePropagationsOnEntityDelete == nil {
 		var ret bool
 		return ret
@@ -276,7 +204,7 @@ func (o *Tag) GetRemovePropagationsOnEntityDelete() bool {
 
 // GetRemovePropagationsOnEntityDeleteOk returns a tuple with the RemovePropagationsOnEntityDelete field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Tag) GetRemovePropagationsOnEntityDeleteOk() (*bool, bool) {
+func (o *ClassificationHeader) GetRemovePropagationsOnEntityDeleteOk() (*bool, bool) {
 	if o == nil || o.RemovePropagationsOnEntityDelete == nil {
 		return nil, false
 	}
@@ -284,7 +212,7 @@ func (o *Tag) GetRemovePropagationsOnEntityDeleteOk() (*bool, bool) {
 }
 
 // HasRemovePropagationsOnEntityDelete returns a boolean if a field has been set.
-func (o *Tag) HasRemovePropagationsOnEntityDelete() bool {
+func (o *ClassificationHeader) HasRemovePropagationsOnEntityDelete() bool {
 	if o != nil && o.RemovePropagationsOnEntityDelete != nil {
 		return true
 	}
@@ -293,88 +221,20 @@ func (o *Tag) HasRemovePropagationsOnEntityDelete() bool {
 }
 
 // SetRemovePropagationsOnEntityDelete gets a reference to the given bool and assigns it to the RemovePropagationsOnEntityDelete field.
-func (o *Tag) SetRemovePropagationsOnEntityDelete(v bool) {
+func (o *ClassificationHeader) SetRemovePropagationsOnEntityDelete(v bool) {
 	o.RemovePropagationsOnEntityDelete = &v
 }
 
-// GetEntityType returns the EntityType field value if set, zero value otherwise.
-func (o *Tag) GetEntityType() string {
-	if o == nil || o.EntityType == nil {
-		var ret string
-		return ret
-	}
-	return *o.EntityType
-}
-
-// GetEntityTypeOk returns a tuple with the EntityType field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Tag) GetEntityTypeOk() (*string, bool) {
-	if o == nil || o.EntityType == nil {
-		return nil, false
-	}
-	return o.EntityType, true
-}
-
-// HasEntityType returns a boolean if a field has been set.
-func (o *Tag) HasEntityType() bool {
-	if o != nil && o.EntityType != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetEntityType gets a reference to the given string and assigns it to the EntityType field.
-func (o *Tag) SetEntityType(v string) {
-	o.EntityType = &v
-}
-
-// GetEntityName returns the EntityName field value if set, zero value otherwise.
-func (o *Tag) GetEntityName() string {
-	if o == nil || o.EntityName == nil {
-		var ret string
-		return ret
-	}
-	return *o.EntityName
-}
-
-// GetEntityNameOk returns a tuple with the EntityName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Tag) GetEntityNameOk() (*string, bool) {
-	if o == nil || o.EntityName == nil {
-		return nil, false
-	}
-	return o.EntityName, true
-}
-
-// HasEntityName returns a boolean if a field has been set.
-func (o *Tag) HasEntityName() bool {
-	if o != nil && o.EntityName != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetEntityName gets a reference to the given string and assigns it to the EntityName field.
-func (o *Tag) SetEntityName(v string) {
-	o.EntityName = &v
-}
-
 // Redact resets all sensitive fields to their zero value.
-func (o *Tag) Redact() {
+func (o *ClassificationHeader) Redact() {
 	o.recurseRedact(o.TypeName)
-	o.recurseRedact(o.Attributes)
 	o.recurseRedact(o.EntityGuid)
 	o.recurseRedact(o.EntityStatus)
 	o.recurseRedact(o.Propagate)
-	o.recurseRedact(o.ValidityPeriods)
 	o.recurseRedact(o.RemovePropagationsOnEntityDelete)
-	o.recurseRedact(o.EntityType)
-	o.recurseRedact(o.EntityName)
 }
 
-func (o *Tag) recurseRedact(v interface{}) {
+func (o *ClassificationHeader) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -399,18 +259,15 @@ func (o *Tag) recurseRedact(v interface{}) {
 	}
 }
 
-func (o Tag) zeroField(v interface{}) {
+func (o ClassificationHeader) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o Tag) MarshalJSON() ([]byte, error) {
+func (o ClassificationHeader) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.TypeName != nil {
 		toSerialize["typeName"] = o.TypeName
-	}
-	if o.Attributes != nil {
-		toSerialize["attributes"] = o.Attributes
 	}
 	if o.EntityGuid != nil {
 		toSerialize["entityGuid"] = o.EntityGuid
@@ -421,17 +278,8 @@ func (o Tag) MarshalJSON() ([]byte, error) {
 	if o.Propagate != nil {
 		toSerialize["propagate"] = o.Propagate
 	}
-	if o.ValidityPeriods != nil {
-		toSerialize["validityPeriods"] = o.ValidityPeriods
-	}
 	if o.RemovePropagationsOnEntityDelete != nil {
 		toSerialize["removePropagationsOnEntityDelete"] = o.RemovePropagationsOnEntityDelete
-	}
-	if o.EntityType != nil {
-		toSerialize["entityType"] = o.EntityType
-	}
-	if o.EntityName != nil {
-		toSerialize["entityName"] = o.EntityName
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
@@ -440,34 +288,34 @@ func (o Tag) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableTag struct {
-	value *Tag
+type NullableClassificationHeader struct {
+	value *ClassificationHeader
 	isSet bool
 }
 
-func (v NullableTag) Get() *Tag {
+func (v NullableClassificationHeader) Get() *ClassificationHeader {
 	return v.value
 }
 
-func (v *NullableTag) Set(val *Tag) {
+func (v *NullableClassificationHeader) Set(val *ClassificationHeader) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableTag) IsSet() bool {
+func (v NullableClassificationHeader) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableTag) Unset() {
+func (v *NullableClassificationHeader) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableTag(val *Tag) *NullableTag {
-	return &NullableTag{value: val, isSet: true}
+func NewNullableClassificationHeader(val *ClassificationHeader) *NullableClassificationHeader {
+	return &NullableClassificationHeader{value: val, isSet: true}
 }
 
-func (v NullableTag) MarshalJSON() ([]byte, error) {
+func (v NullableClassificationHeader) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -475,7 +323,7 @@ func (v NullableTag) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableTag) UnmarshalJSON(src []byte) error {
+func (v *NullableClassificationHeader) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

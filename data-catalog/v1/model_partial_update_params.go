@@ -34,51 +34,43 @@ import (
 	"reflect"
 )
 
-// EntityHeader struct for EntityHeader
-type EntityHeader struct {
+// PartialUpdateParams struct for PartialUpdateParams
+type PartialUpdateParams struct {
 	// The type name
 	TypeName *string `json:"typeName,omitempty"`
 	// The attributes
-	Attributes *map[string]map[string]interface{} `json:"attributes,omitempty"`
+	Attributes *map[string]interface{} `json:"attributes,omitempty"`
 	// The internal guid
 	Guid *string `json:"guid,omitempty"`
 	// The status
 	Status *string `json:"status,omitempty"`
-	// The display text
-	DisplayText *string `json:"displayText,omitempty"`
 	// The classification (tag) names
 	ClassificationNames *[]string `json:"classificationNames,omitempty"`
 	// The classifications (tags)
-	Classifications *[]Classification `json:"classifications,omitempty"`
-	// The meaning names
-	MeaningNames *[]string `json:"meaningNames,omitempty"`
-	// The meanings
-	Meanings *[]TermAssignmentHeader `json:"meanings,omitempty"`
+	Classifications *[]ClassificationHeader `json:"classifications,omitempty"`
 	// Whether is incomplete
 	IsIncomplete *bool `json:"isIncomplete,omitempty"`
-	// The labels
-	Labels *[]string `json:"labels,omitempty"`
 }
 
-// NewEntityHeader instantiates a new EntityHeader object
+// NewPartialUpdateParams instantiates a new PartialUpdateParams object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEntityHeader() *EntityHeader {
-	this := EntityHeader{}
+func NewPartialUpdateParams() *PartialUpdateParams {
+	this := PartialUpdateParams{}
 	return &this
 }
 
-// NewEntityHeaderWithDefaults instantiates a new EntityHeader object
+// NewPartialUpdateParamsWithDefaults instantiates a new PartialUpdateParams object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewEntityHeaderWithDefaults() *EntityHeader {
-	this := EntityHeader{}
+func NewPartialUpdateParamsWithDefaults() *PartialUpdateParams {
+	this := PartialUpdateParams{}
 	return &this
 }
 
 // GetTypeName returns the TypeName field value if set, zero value otherwise.
-func (o *EntityHeader) GetTypeName() string {
+func (o *PartialUpdateParams) GetTypeName() string {
 	if o == nil || o.TypeName == nil {
 		var ret string
 		return ret
@@ -88,7 +80,7 @@ func (o *EntityHeader) GetTypeName() string {
 
 // GetTypeNameOk returns a tuple with the TypeName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EntityHeader) GetTypeNameOk() (*string, bool) {
+func (o *PartialUpdateParams) GetTypeNameOk() (*string, bool) {
 	if o == nil || o.TypeName == nil {
 		return nil, false
 	}
@@ -96,7 +88,7 @@ func (o *EntityHeader) GetTypeNameOk() (*string, bool) {
 }
 
 // HasTypeName returns a boolean if a field has been set.
-func (o *EntityHeader) HasTypeName() bool {
+func (o *PartialUpdateParams) HasTypeName() bool {
 	if o != nil && o.TypeName != nil {
 		return true
 	}
@@ -105,14 +97,14 @@ func (o *EntityHeader) HasTypeName() bool {
 }
 
 // SetTypeName gets a reference to the given string and assigns it to the TypeName field.
-func (o *EntityHeader) SetTypeName(v string) {
+func (o *PartialUpdateParams) SetTypeName(v string) {
 	o.TypeName = &v
 }
 
 // GetAttributes returns the Attributes field value if set, zero value otherwise.
-func (o *EntityHeader) GetAttributes() map[string]map[string]interface{} {
+func (o *PartialUpdateParams) GetAttributes() map[string]interface{} {
 	if o == nil || o.Attributes == nil {
-		var ret map[string]map[string]interface{}
+		var ret map[string]interface{}
 		return ret
 	}
 	return *o.Attributes
@@ -120,7 +112,7 @@ func (o *EntityHeader) GetAttributes() map[string]map[string]interface{} {
 
 // GetAttributesOk returns a tuple with the Attributes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EntityHeader) GetAttributesOk() (*map[string]map[string]interface{}, bool) {
+func (o *PartialUpdateParams) GetAttributesOk() (*map[string]interface{}, bool) {
 	if o == nil || o.Attributes == nil {
 		return nil, false
 	}
@@ -128,7 +120,7 @@ func (o *EntityHeader) GetAttributesOk() (*map[string]map[string]interface{}, bo
 }
 
 // HasAttributes returns a boolean if a field has been set.
-func (o *EntityHeader) HasAttributes() bool {
+func (o *PartialUpdateParams) HasAttributes() bool {
 	if o != nil && o.Attributes != nil {
 		return true
 	}
@@ -136,13 +128,13 @@ func (o *EntityHeader) HasAttributes() bool {
 	return false
 }
 
-// SetAttributes gets a reference to the given map[string]map[string]interface{} and assigns it to the Attributes field.
-func (o *EntityHeader) SetAttributes(v map[string]map[string]interface{}) {
+// SetAttributes gets a reference to the given map[string]interface{} and assigns it to the Attributes field.
+func (o *PartialUpdateParams) SetAttributes(v map[string]interface{}) {
 	o.Attributes = &v
 }
 
 // GetGuid returns the Guid field value if set, zero value otherwise.
-func (o *EntityHeader) GetGuid() string {
+func (o *PartialUpdateParams) GetGuid() string {
 	if o == nil || o.Guid == nil {
 		var ret string
 		return ret
@@ -152,7 +144,7 @@ func (o *EntityHeader) GetGuid() string {
 
 // GetGuidOk returns a tuple with the Guid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EntityHeader) GetGuidOk() (*string, bool) {
+func (o *PartialUpdateParams) GetGuidOk() (*string, bool) {
 	if o == nil || o.Guid == nil {
 		return nil, false
 	}
@@ -160,7 +152,7 @@ func (o *EntityHeader) GetGuidOk() (*string, bool) {
 }
 
 // HasGuid returns a boolean if a field has been set.
-func (o *EntityHeader) HasGuid() bool {
+func (o *PartialUpdateParams) HasGuid() bool {
 	if o != nil && o.Guid != nil {
 		return true
 	}
@@ -169,12 +161,12 @@ func (o *EntityHeader) HasGuid() bool {
 }
 
 // SetGuid gets a reference to the given string and assigns it to the Guid field.
-func (o *EntityHeader) SetGuid(v string) {
+func (o *PartialUpdateParams) SetGuid(v string) {
 	o.Guid = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *EntityHeader) GetStatus() string {
+func (o *PartialUpdateParams) GetStatus() string {
 	if o == nil || o.Status == nil {
 		var ret string
 		return ret
@@ -184,7 +176,7 @@ func (o *EntityHeader) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EntityHeader) GetStatusOk() (*string, bool) {
+func (o *PartialUpdateParams) GetStatusOk() (*string, bool) {
 	if o == nil || o.Status == nil {
 		return nil, false
 	}
@@ -192,7 +184,7 @@ func (o *EntityHeader) GetStatusOk() (*string, bool) {
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *EntityHeader) HasStatus() bool {
+func (o *PartialUpdateParams) HasStatus() bool {
 	if o != nil && o.Status != nil {
 		return true
 	}
@@ -201,44 +193,12 @@ func (o *EntityHeader) HasStatus() bool {
 }
 
 // SetStatus gets a reference to the given string and assigns it to the Status field.
-func (o *EntityHeader) SetStatus(v string) {
+func (o *PartialUpdateParams) SetStatus(v string) {
 	o.Status = &v
 }
 
-// GetDisplayText returns the DisplayText field value if set, zero value otherwise.
-func (o *EntityHeader) GetDisplayText() string {
-	if o == nil || o.DisplayText == nil {
-		var ret string
-		return ret
-	}
-	return *o.DisplayText
-}
-
-// GetDisplayTextOk returns a tuple with the DisplayText field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *EntityHeader) GetDisplayTextOk() (*string, bool) {
-	if o == nil || o.DisplayText == nil {
-		return nil, false
-	}
-	return o.DisplayText, true
-}
-
-// HasDisplayText returns a boolean if a field has been set.
-func (o *EntityHeader) HasDisplayText() bool {
-	if o != nil && o.DisplayText != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetDisplayText gets a reference to the given string and assigns it to the DisplayText field.
-func (o *EntityHeader) SetDisplayText(v string) {
-	o.DisplayText = &v
-}
-
 // GetClassificationNames returns the ClassificationNames field value if set, zero value otherwise.
-func (o *EntityHeader) GetClassificationNames() []string {
+func (o *PartialUpdateParams) GetClassificationNames() []string {
 	if o == nil || o.ClassificationNames == nil {
 		var ret []string
 		return ret
@@ -248,7 +208,7 @@ func (o *EntityHeader) GetClassificationNames() []string {
 
 // GetClassificationNamesOk returns a tuple with the ClassificationNames field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EntityHeader) GetClassificationNamesOk() (*[]string, bool) {
+func (o *PartialUpdateParams) GetClassificationNamesOk() (*[]string, bool) {
 	if o == nil || o.ClassificationNames == nil {
 		return nil, false
 	}
@@ -256,7 +216,7 @@ func (o *EntityHeader) GetClassificationNamesOk() (*[]string, bool) {
 }
 
 // HasClassificationNames returns a boolean if a field has been set.
-func (o *EntityHeader) HasClassificationNames() bool {
+func (o *PartialUpdateParams) HasClassificationNames() bool {
 	if o != nil && o.ClassificationNames != nil {
 		return true
 	}
@@ -265,14 +225,14 @@ func (o *EntityHeader) HasClassificationNames() bool {
 }
 
 // SetClassificationNames gets a reference to the given []string and assigns it to the ClassificationNames field.
-func (o *EntityHeader) SetClassificationNames(v []string) {
+func (o *PartialUpdateParams) SetClassificationNames(v []string) {
 	o.ClassificationNames = &v
 }
 
 // GetClassifications returns the Classifications field value if set, zero value otherwise.
-func (o *EntityHeader) GetClassifications() []Classification {
+func (o *PartialUpdateParams) GetClassifications() []ClassificationHeader {
 	if o == nil || o.Classifications == nil {
-		var ret []Classification
+		var ret []ClassificationHeader
 		return ret
 	}
 	return *o.Classifications
@@ -280,7 +240,7 @@ func (o *EntityHeader) GetClassifications() []Classification {
 
 // GetClassificationsOk returns a tuple with the Classifications field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EntityHeader) GetClassificationsOk() (*[]Classification, bool) {
+func (o *PartialUpdateParams) GetClassificationsOk() (*[]ClassificationHeader, bool) {
 	if o == nil || o.Classifications == nil {
 		return nil, false
 	}
@@ -288,7 +248,7 @@ func (o *EntityHeader) GetClassificationsOk() (*[]Classification, bool) {
 }
 
 // HasClassifications returns a boolean if a field has been set.
-func (o *EntityHeader) HasClassifications() bool {
+func (o *PartialUpdateParams) HasClassifications() bool {
 	if o != nil && o.Classifications != nil {
 		return true
 	}
@@ -296,77 +256,13 @@ func (o *EntityHeader) HasClassifications() bool {
 	return false
 }
 
-// SetClassifications gets a reference to the given []Classification and assigns it to the Classifications field.
-func (o *EntityHeader) SetClassifications(v []Classification) {
+// SetClassifications gets a reference to the given []ClassificationHeader and assigns it to the Classifications field.
+func (o *PartialUpdateParams) SetClassifications(v []ClassificationHeader) {
 	o.Classifications = &v
 }
 
-// GetMeaningNames returns the MeaningNames field value if set, zero value otherwise.
-func (o *EntityHeader) GetMeaningNames() []string {
-	if o == nil || o.MeaningNames == nil {
-		var ret []string
-		return ret
-	}
-	return *o.MeaningNames
-}
-
-// GetMeaningNamesOk returns a tuple with the MeaningNames field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *EntityHeader) GetMeaningNamesOk() (*[]string, bool) {
-	if o == nil || o.MeaningNames == nil {
-		return nil, false
-	}
-	return o.MeaningNames, true
-}
-
-// HasMeaningNames returns a boolean if a field has been set.
-func (o *EntityHeader) HasMeaningNames() bool {
-	if o != nil && o.MeaningNames != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetMeaningNames gets a reference to the given []string and assigns it to the MeaningNames field.
-func (o *EntityHeader) SetMeaningNames(v []string) {
-	o.MeaningNames = &v
-}
-
-// GetMeanings returns the Meanings field value if set, zero value otherwise.
-func (o *EntityHeader) GetMeanings() []TermAssignmentHeader {
-	if o == nil || o.Meanings == nil {
-		var ret []TermAssignmentHeader
-		return ret
-	}
-	return *o.Meanings
-}
-
-// GetMeaningsOk returns a tuple with the Meanings field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *EntityHeader) GetMeaningsOk() (*[]TermAssignmentHeader, bool) {
-	if o == nil || o.Meanings == nil {
-		return nil, false
-	}
-	return o.Meanings, true
-}
-
-// HasMeanings returns a boolean if a field has been set.
-func (o *EntityHeader) HasMeanings() bool {
-	if o != nil && o.Meanings != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetMeanings gets a reference to the given []TermAssignmentHeader and assigns it to the Meanings field.
-func (o *EntityHeader) SetMeanings(v []TermAssignmentHeader) {
-	o.Meanings = &v
-}
-
 // GetIsIncomplete returns the IsIncomplete field value if set, zero value otherwise.
-func (o *EntityHeader) GetIsIncomplete() bool {
+func (o *PartialUpdateParams) GetIsIncomplete() bool {
 	if o == nil || o.IsIncomplete == nil {
 		var ret bool
 		return ret
@@ -376,7 +272,7 @@ func (o *EntityHeader) GetIsIncomplete() bool {
 
 // GetIsIncompleteOk returns a tuple with the IsIncomplete field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EntityHeader) GetIsIncompleteOk() (*bool, bool) {
+func (o *PartialUpdateParams) GetIsIncompleteOk() (*bool, bool) {
 	if o == nil || o.IsIncomplete == nil {
 		return nil, false
 	}
@@ -384,7 +280,7 @@ func (o *EntityHeader) GetIsIncompleteOk() (*bool, bool) {
 }
 
 // HasIsIncomplete returns a boolean if a field has been set.
-func (o *EntityHeader) HasIsIncomplete() bool {
+func (o *PartialUpdateParams) HasIsIncomplete() bool {
 	if o != nil && o.IsIncomplete != nil {
 		return true
 	}
@@ -393,58 +289,22 @@ func (o *EntityHeader) HasIsIncomplete() bool {
 }
 
 // SetIsIncomplete gets a reference to the given bool and assigns it to the IsIncomplete field.
-func (o *EntityHeader) SetIsIncomplete(v bool) {
+func (o *PartialUpdateParams) SetIsIncomplete(v bool) {
 	o.IsIncomplete = &v
 }
 
-// GetLabels returns the Labels field value if set, zero value otherwise.
-func (o *EntityHeader) GetLabels() []string {
-	if o == nil || o.Labels == nil {
-		var ret []string
-		return ret
-	}
-	return *o.Labels
-}
-
-// GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *EntityHeader) GetLabelsOk() (*[]string, bool) {
-	if o == nil || o.Labels == nil {
-		return nil, false
-	}
-	return o.Labels, true
-}
-
-// HasLabels returns a boolean if a field has been set.
-func (o *EntityHeader) HasLabels() bool {
-	if o != nil && o.Labels != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetLabels gets a reference to the given []string and assigns it to the Labels field.
-func (o *EntityHeader) SetLabels(v []string) {
-	o.Labels = &v
-}
-
 // Redact resets all sensitive fields to their zero value.
-func (o *EntityHeader) Redact() {
+func (o *PartialUpdateParams) Redact() {
 	o.recurseRedact(o.TypeName)
 	o.recurseRedact(o.Attributes)
 	o.recurseRedact(o.Guid)
 	o.recurseRedact(o.Status)
-	o.recurseRedact(o.DisplayText)
 	o.recurseRedact(o.ClassificationNames)
 	o.recurseRedact(o.Classifications)
-	o.recurseRedact(o.MeaningNames)
-	o.recurseRedact(o.Meanings)
 	o.recurseRedact(o.IsIncomplete)
-	o.recurseRedact(o.Labels)
 }
 
-func (o *EntityHeader) recurseRedact(v interface{}) {
+func (o *PartialUpdateParams) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -469,12 +329,12 @@ func (o *EntityHeader) recurseRedact(v interface{}) {
 	}
 }
 
-func (o EntityHeader) zeroField(v interface{}) {
+func (o PartialUpdateParams) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o EntityHeader) MarshalJSON() ([]byte, error) {
+func (o PartialUpdateParams) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.TypeName != nil {
 		toSerialize["typeName"] = o.TypeName
@@ -488,26 +348,14 @@ func (o EntityHeader) MarshalJSON() ([]byte, error) {
 	if o.Status != nil {
 		toSerialize["status"] = o.Status
 	}
-	if o.DisplayText != nil {
-		toSerialize["displayText"] = o.DisplayText
-	}
 	if o.ClassificationNames != nil {
 		toSerialize["classificationNames"] = o.ClassificationNames
 	}
 	if o.Classifications != nil {
 		toSerialize["classifications"] = o.Classifications
 	}
-	if o.MeaningNames != nil {
-		toSerialize["meaningNames"] = o.MeaningNames
-	}
-	if o.Meanings != nil {
-		toSerialize["meanings"] = o.Meanings
-	}
 	if o.IsIncomplete != nil {
 		toSerialize["isIncomplete"] = o.IsIncomplete
-	}
-	if o.Labels != nil {
-		toSerialize["labels"] = o.Labels
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
@@ -516,34 +364,34 @@ func (o EntityHeader) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableEntityHeader struct {
-	value *EntityHeader
+type NullablePartialUpdateParams struct {
+	value *PartialUpdateParams
 	isSet bool
 }
 
-func (v NullableEntityHeader) Get() *EntityHeader {
+func (v NullablePartialUpdateParams) Get() *PartialUpdateParams {
 	return v.value
 }
 
-func (v *NullableEntityHeader) Set(val *EntityHeader) {
+func (v *NullablePartialUpdateParams) Set(val *PartialUpdateParams) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableEntityHeader) IsSet() bool {
+func (v NullablePartialUpdateParams) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableEntityHeader) Unset() {
+func (v *NullablePartialUpdateParams) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableEntityHeader(val *EntityHeader) *NullableEntityHeader {
-	return &NullableEntityHeader{value: val, isSet: true}
+func NewNullablePartialUpdateParams(val *PartialUpdateParams) *NullablePartialUpdateParams {
+	return &NullablePartialUpdateParams{value: val, isSet: true}
 }
 
-func (v NullableEntityHeader) MarshalJSON() ([]byte, error) {
+func (v NullablePartialUpdateParams) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -551,7 +399,7 @@ func (v NullableEntityHeader) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableEntityHeader) UnmarshalJSON(src []byte) error {
+func (v *NullablePartialUpdateParams) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

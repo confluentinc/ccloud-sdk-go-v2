@@ -64,10 +64,35 @@ paths:
           description: The business metadata definitions
         "400":
           description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                error_code: 401
+                message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error_code: 403
+                message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
         "429":
           description: Rate Limit Error
         "500":
           description: Internal Server Error
+      security:
+      - resource-api-key: []
+      - external-access-token: []
       summary: Bulk Read Business Metadata Definitions
       tags:
       - Types (v1)
@@ -75,7 +100,8 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs
+            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
@@ -83,13 +109,15 @@ paths:
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs")
             .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
           \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs\"\
-          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -98,7 +126,9 @@ paths:
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          conn.request("GET", "/catalog/v1/types/businessmetadatadefs")
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/catalog/v1/types/businessmetadatadefs", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -113,7 +143,9 @@ paths:
             "hostname": "psrc-00000.region.provider.confluent.cloud",
             "port": null,
             "path": "/catalog/v1/types/businessmetadatadefs",
-            "headers": {}
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
           };
 
           const req = http.request(options, function (res) {
@@ -137,11 +169,16 @@ paths:
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
           curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs");
 
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs");
           var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     post:
       description: |-
@@ -169,10 +206,35 @@ paths:
             definitions will have an additional error property.
         "400":
           description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                error_code: 401
+                message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error_code: 403
+                message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
         "429":
           description: Rate Limit Error
         "500":
           description: Internal Server Error
+      security:
+      - resource-api-key: []
+      - external-access-token: []
       summary: Bulk Create Business Metadata Definitions
       tags:
       - Types (v1)
@@ -181,6 +243,7 @@ paths:
         source: |-
           curl --request POST \
             --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '[{"category":"PRIMITIVE","guid":"string","createdBy":"string","updatedBy":"string","createTime":0,"updateTime":0,"version":0,"name":"string","description":"string","typeVersion":"string","serviceType":"string","options":{"property1":"string","property2":"string"},"attributeDefs":[{"name":"string","typeName":"string","isOptional":true,"cardinality":"SINGLE","valuesMinCount":0,"valuesMaxCount":0,"isUnique":true,"isIndexable":true,"includeInNotification":true,"defaultValue":"string","description":"string","searchWeight":0,"indexType":"DEFAULT","constraints":[{"type":"string","params":{"property1":{},"property2":{}}}],"options":{"property1":"string","property2":"string"},"displayName":"string"}]}]'
       - lang: Java
@@ -193,6 +256,7 @@ paths:
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs")
             .post(body)
             .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -215,8 +279,9 @@ paths:
           \"options\\\":{\\\"property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\
           \"},\\\"displayName\\\":\\\"string\\\"}]}]\")\n\n\treq, _ := http.NewRequest(\"\
           POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
-          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -226,7 +291,10 @@ paths:
 
           payload = "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}]}]"
 
-          headers = { 'content-type': "application/json" }
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
 
           conn.request("POST", "/catalog/v1/types/businessmetadatadefs", payload, headers)
 
@@ -244,7 +312,8 @@ paths:
             "port": null,
             "path": "/catalog/v1/types/businessmetadatadefs",
             "headers": {
-              "content-type": "application/json"
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
           };
 
@@ -307,6 +376,7 @@ paths:
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}]}]");
@@ -317,6 +387,7 @@ paths:
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}]}]", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     put:
@@ -345,10 +416,35 @@ paths:
             definitions will have an additional error property.
         "400":
           description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                error_code: 401
+                message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error_code: 403
+                message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
         "429":
           description: Rate Limit Error
         "500":
           description: Internal Server Error
+      security:
+      - resource-api-key: []
+      - external-access-token: []
       summary: Bulk Update Business Metadata Definitions
       tags:
       - Types (v1)
@@ -357,6 +453,7 @@ paths:
         source: |-
           curl --request PUT \
             --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '[{"category":"PRIMITIVE","guid":"string","createdBy":"string","updatedBy":"string","createTime":0,"updateTime":0,"version":0,"name":"string","description":"string","typeVersion":"string","serviceType":"string","options":{"property1":"string","property2":"string"},"attributeDefs":[{"name":"string","typeName":"string","isOptional":true,"cardinality":"SINGLE","valuesMinCount":0,"valuesMaxCount":0,"isUnique":true,"isIndexable":true,"includeInNotification":true,"defaultValue":"string","description":"string","searchWeight":0,"indexType":"DEFAULT","constraints":[{"type":"string","params":{"property1":{},"property2":{}}}],"options":{"property1":"string","property2":"string"},"displayName":"string"}]}]'
       - lang: Java
@@ -369,6 +466,7 @@ paths:
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs")
             .put(body)
             .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -391,8 +489,9 @@ paths:
           \"options\\\":{\\\"property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\
           \"},\\\"displayName\\\":\\\"string\\\"}]}]\")\n\n\treq, _ := http.NewRequest(\"\
           PUT\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
-          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -402,7 +501,10 @@ paths:
 
           payload = "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}]}]"
 
-          headers = { 'content-type': "application/json" }
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
 
           conn.request("PUT", "/catalog/v1/types/businessmetadatadefs", payload, headers)
 
@@ -420,7 +522,8 @@ paths:
             "port": null,
             "path": "/catalog/v1/types/businessmetadatadefs",
             "headers": {
-              "content-type": "application/json"
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
           };
 
@@ -483,6 +586,7 @@ paths:
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}]}]");
@@ -493,6 +597,7 @@ paths:
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs");
           var request = new RestRequest(Method.PUT);
           request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}]}]", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /catalog/v1/types/businessmetadatadefs/{bmName}:
@@ -516,10 +621,35 @@ paths:
           description: No Content
         "400":
           description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                error_code: 401
+                message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error_code: 403
+                message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
         "429":
           description: Rate Limit Error
         "500":
           description: Internal Server Error
+      security:
+      - resource-api-key: []
+      - external-access-token: []
       summary: Delete Business Metadata Definition
       tags:
       - Types (v1)
@@ -527,7 +657,8 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/%7BbmName%7D
+            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/%7BbmName%7D \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
@@ -535,13 +666,15 @@ paths:
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/%7BbmName%7D")
             .delete(null)
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
           \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/%7BbmName%7D\"\
-          \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -550,7 +683,9 @@ paths:
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          conn.request("DELETE", "/catalog/v1/types/businessmetadatadefs/%7BbmName%7D")
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("DELETE", "/catalog/v1/types/businessmetadatadefs/%7BbmName%7D", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -565,7 +700,9 @@ paths:
             "hostname": "psrc-00000.region.provider.confluent.cloud",
             "port": null,
             "path": "/catalog/v1/types/businessmetadatadefs/%7BbmName%7D",
-            "headers": {}
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
           };
 
           const req = http.request(options, function (res) {
@@ -589,11 +726,16 @@ paths:
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
           curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/%7BbmName%7D");
 
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/%7BbmName%7D");
           var request = new RestRequest(Method.DELETE);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     get:
       description: |-
@@ -620,11 +762,44 @@ paths:
         "400":
           description: Bad Request
         "404":
-          description: Business metadata definition not found
+          content:
+            application/json:
+              example:
+                error_code: 404
+                message: Not Found
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Not Found
+          x-summary: Not Found
+        "401":
+          content:
+            application/json:
+              example:
+                error_code: 401
+                message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error_code: 403
+                message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
         "429":
           description: Rate Limit Error
         "500":
           description: Internal Server Error
+      security:
+      - resource-api-key: []
+      - external-access-token: []
       summary: Read Business Metadata Definition
       tags:
       - Types (v1)
@@ -632,7 +807,8 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/%7BbmName%7D
+            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/%7BbmName%7D \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
@@ -640,13 +816,15 @@ paths:
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/%7BbmName%7D")
             .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
           \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/%7BbmName%7D\"\
-          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -655,7 +833,9 @@ paths:
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          conn.request("GET", "/catalog/v1/types/businessmetadatadefs/%7BbmName%7D")
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/catalog/v1/types/businessmetadatadefs/%7BbmName%7D", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -670,7 +850,9 @@ paths:
             "hostname": "psrc-00000.region.provider.confluent.cloud",
             "port": null,
             "path": "/catalog/v1/types/businessmetadatadefs/%7BbmName%7D",
-            "headers": {}
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
           };
 
           const req = http.request(options, function (res) {
@@ -694,11 +876,16 @@ paths:
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
           curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/%7BbmName%7D");
 
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/%7BbmName%7D");
           var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
   /catalog/v1/entity/businessmetadata:
     post:
@@ -727,10 +914,35 @@ paths:
             an additional error property.
         "400":
           description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                error_code: 401
+                message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error_code: 403
+                message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
         "429":
           description: Rate Limit Error
         "500":
           description: Internal Server Error
+      security:
+      - resource-api-key: []
+      - external-access-token: []
       summary: Bulk Create Business Metadata
       tags:
       - Entity (v1)
@@ -739,6 +951,7 @@ paths:
         source: |-
           curl --request POST \
             --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/businessmetadata \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '[{"typeName":"string","attributes":{},"entityType":"string","entityName":"string"}]'
       - lang: Java
@@ -751,6 +964,7 @@ paths:
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/businessmetadata")
             .post(body)
             .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -760,9 +974,10 @@ paths:
           \n\n\tpayload := strings.NewReader(\"[{\\\"typeName\\\":\\\"string\\\",\\\
           \"attributes\\\":{},\\\"entityType\\\":\\\"string\\\",\\\"entityName\\\"\
           :\\\"string\\\"}]\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
-          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _ :=\
-          \ http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\
-          \n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
@@ -771,7 +986,10 @@ paths:
 
           payload = "[{\"typeName\":\"string\",\"attributes\":{},\"entityType\":\"string\",\"entityName\":\"string\"}]"
 
-          headers = { 'content-type': "application/json" }
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
 
           conn.request("POST", "/catalog/v1/entity/businessmetadata", payload, headers)
 
@@ -789,7 +1007,8 @@ paths:
             "port": null,
             "path": "/catalog/v1/entity/businessmetadata",
             "headers": {
-              "content-type": "application/json"
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
           };
 
@@ -819,6 +1038,7 @@ paths:
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"typeName\":\"string\",\"attributes\":{},\"entityType\":\"string\",\"entityName\":\"string\"}]");
@@ -829,6 +1049,7 @@ paths:
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/businessmetadata");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "[{\"typeName\":\"string\",\"attributes\":{},\"entityType\":\"string\",\"entityName\":\"string\"}]", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     put:
@@ -857,10 +1078,35 @@ paths:
             an additional error property.
         "400":
           description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                error_code: 401
+                message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error_code: 403
+                message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
         "429":
           description: Rate Limit Error
         "500":
           description: Internal Server Error
+      security:
+      - resource-api-key: []
+      - external-access-token: []
       summary: Bulk Update Business Metadata
       tags:
       - Entity (v1)
@@ -869,6 +1115,7 @@ paths:
         source: |-
           curl --request PUT \
             --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/businessmetadata \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '[{"typeName":"string","attributes":{},"entityType":"string","entityName":"string"}]'
       - lang: Java
@@ -881,6 +1128,7 @@ paths:
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/businessmetadata")
             .put(body)
             .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -890,9 +1138,10 @@ paths:
           \n\n\tpayload := strings.NewReader(\"[{\\\"typeName\\\":\\\"string\\\",\\\
           \"attributes\\\":{},\\\"entityType\\\":\\\"string\\\",\\\"entityName\\\"\
           :\\\"string\\\"}]\")\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\
-          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _ :=\
-          \ http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\
-          \n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
@@ -901,7 +1150,10 @@ paths:
 
           payload = "[{\"typeName\":\"string\",\"attributes\":{},\"entityType\":\"string\",\"entityName\":\"string\"}]"
 
-          headers = { 'content-type': "application/json" }
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
 
           conn.request("PUT", "/catalog/v1/entity/businessmetadata", payload, headers)
 
@@ -919,7 +1171,8 @@ paths:
             "port": null,
             "path": "/catalog/v1/entity/businessmetadata",
             "headers": {
-              "content-type": "application/json"
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
           };
 
@@ -949,6 +1202,7 @@ paths:
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"typeName\":\"string\",\"attributes\":{},\"entityType\":\"string\",\"entityName\":\"string\"}]");
@@ -959,6 +1213,7 @@ paths:
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/businessmetadata");
           var request = new RestRequest(Method.PUT);
           request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "[{\"typeName\":\"string\",\"attributes\":{},\"entityType\":\"string\",\"entityName\":\"string\"}]", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata:
@@ -998,11 +1253,44 @@ paths:
         "400":
           description: Bad Request
         "404":
-          description: Entity not found
+          content:
+            application/json:
+              example:
+                error_code: 404
+                message: Not Found
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Not Found
+          x-summary: Not Found
+        "401":
+          content:
+            application/json:
+              example:
+                error_code: 401
+                message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error_code: 403
+                message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
         "429":
           description: Rate Limit Error
         "500":
           description: Internal Server Error
+      security:
+      - resource-api-key: []
+      - external-access-token: []
       summary: Read Business Metadata for an Entity
       tags:
       - Entity (v1)
@@ -1010,7 +1298,8 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata
+            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
@@ -1018,13 +1307,15 @@ paths:
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata")
             .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
           \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata\"\
-          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -1033,7 +1324,9 @@ paths:
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          conn.request("GET", "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata")
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1048,7 +1341,9 @@ paths:
             "hostname": "psrc-00000.region.provider.confluent.cloud",
             "port": null,
             "path": "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata",
-            "headers": {}
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
           };
 
           const req = http.request(options, function (res) {
@@ -1072,11 +1367,16 @@ paths:
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
           curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata");
 
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata");
           var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
   /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata/{bmName}:
     delete:
@@ -1115,10 +1415,35 @@ paths:
           description: No Content
         "400":
           description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                error_code: 401
+                message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error_code: 403
+                message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
         "429":
           description: Rate Limit Error
         "500":
           description: Internal Server Error
+      security:
+      - resource-api-key: []
+      - external-access-token: []
       summary: Delete a Business Metadata for an Entity
       tags:
       - Entity (v1)
@@ -1126,7 +1451,8 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata/%7BbmName%7D
+            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata/%7BbmName%7D \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
@@ -1134,13 +1460,15 @@ paths:
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata/%7BbmName%7D")
             .delete(null)
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
           \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata/%7BbmName%7D\"\
-          \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -1149,7 +1477,9 @@ paths:
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          conn.request("DELETE", "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata/%7BbmName%7D")
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("DELETE", "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata/%7BbmName%7D", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1164,7 +1494,9 @@ paths:
             "hostname": "psrc-00000.region.provider.confluent.cloud",
             "port": null,
             "path": "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata/%7BbmName%7D",
-            "headers": {}
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
           };
 
           const req = http.request(options, function (res) {
@@ -1188,11 +1520,16 @@ paths:
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
           curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata/%7BbmName%7D");
 
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata/%7BbmName%7D");
           var request = new RestRequest(Method.DELETE);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
   /catalog/v1/entity/tags:
     post:
@@ -1220,10 +1557,45 @@ paths:
           description: The tags. Errored tags will have an additional error property.
         "400":
           description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                error_code: 401
+                message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error_code: 403
+                message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                error_code: 404
+                message: Not Found
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Not Found
+          x-summary: Not Found
         "429":
           description: Rate Limit Error
         "500":
           description: Internal Server Error
+      security:
+      - resource-api-key: []
+      - external-access-token: []
       summary: Bulk Create Tags
       tags:
       - Entity (v1)
@@ -1232,6 +1604,7 @@ paths:
         source: |-
           curl --request POST \
             --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '[{"typeName":"string","attributes":{},"entityGuid":"string","entityStatus":"ACTIVE","propagate":true,"validityPeriods":[{"startTime":"string","endTime":"string","timeZone":"string"}],"removePropagationsOnEntityDelete":true,"entityType":"string","entityName":"string"}]'
       - lang: Java
@@ -1244,6 +1617,7 @@ paths:
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags")
             .post(body)
             .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -1257,9 +1631,10 @@ paths:
           \":\\\"string\\\"}],\\\"removePropagationsOnEntityDelete\\\":true,\\\"entityType\\\
           \":\\\"string\\\",\\\"entityName\\\":\\\"string\\\"}]\")\n\n\treq, _ :=\
           \ http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
-          , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
-          defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
-          \tfmt.Println(string(body))\n\n}"
+          , \"application/json\")\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
+          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
@@ -1268,7 +1643,10 @@ paths:
 
           payload = "[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]"
 
-          headers = { 'content-type': "application/json" }
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
 
           conn.request("POST", "/catalog/v1/entity/tags", payload, headers)
 
@@ -1286,7 +1664,8 @@ paths:
             "port": null,
             "path": "/catalog/v1/entity/tags",
             "headers": {
-              "content-type": "application/json"
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
           };
 
@@ -1326,6 +1705,7 @@ paths:
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]");
@@ -1336,6 +1716,7 @@ paths:
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     put:
@@ -1363,10 +1744,35 @@ paths:
           description: The tags. Errored tags will have an additional error property.
         "400":
           description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                error_code: 401
+                message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error_code: 403
+                message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
         "429":
           description: Rate Limit Error
         "500":
           description: Internal Server Error
+      security:
+      - resource-api-key: []
+      - external-access-token: []
       summary: Bulk Update Tags
       tags:
       - Entity (v1)
@@ -1375,6 +1781,7 @@ paths:
         source: |-
           curl --request PUT \
             --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '[{"typeName":"string","attributes":{},"entityGuid":"string","entityStatus":"ACTIVE","propagate":true,"validityPeriods":[{"startTime":"string","endTime":"string","timeZone":"string"}],"removePropagationsOnEntityDelete":true,"entityType":"string","entityName":"string"}]'
       - lang: Java
@@ -1387,6 +1794,7 @@ paths:
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags")
             .put(body)
             .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -1400,9 +1808,10 @@ paths:
           \":\\\"string\\\"}],\\\"removePropagationsOnEntityDelete\\\":true,\\\"entityType\\\
           \":\\\"string\\\",\\\"entityName\\\":\\\"string\\\"}]\")\n\n\treq, _ :=\
           \ http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
-          , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
-          defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
-          \tfmt.Println(string(body))\n\n}"
+          , \"application/json\")\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
+          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
@@ -1411,7 +1820,10 @@ paths:
 
           payload = "[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]"
 
-          headers = { 'content-type': "application/json" }
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
 
           conn.request("PUT", "/catalog/v1/entity/tags", payload, headers)
 
@@ -1429,7 +1841,8 @@ paths:
             "port": null,
             "path": "/catalog/v1/entity/tags",
             "headers": {
-              "content-type": "application/json"
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
           };
 
@@ -1469,6 +1882,7 @@ paths:
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]");
@@ -1479,6 +1893,7 @@ paths:
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/tags");
           var request = new RestRequest(Method.PUT);
           request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true,\"entityType\":\"string\",\"entityName\":\"string\"}]", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /catalog/v1/entity/type/{typeName}/name/{qualifiedName}:
@@ -1533,11 +1948,44 @@ paths:
         "400":
           description: Bad Request
         "404":
-          description: Entity not found
+          content:
+            application/json:
+              example:
+                error_code: 404
+                message: Not Found
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Not Found
+          x-summary: Not Found
+        "401":
+          content:
+            application/json:
+              example:
+                error_code: 401
+                message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error_code: 403
+                message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
         "429":
           description: Rate Limit Error
         "500":
           description: Internal Server Error
+      security:
+      - resource-api-key: []
+      - external-access-token: []
       summary: Read an Entity
       tags:
       - Entity (v1)
@@ -1545,7 +1993,8 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D
+            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
@@ -1553,13 +2002,15 @@ paths:
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D")
             .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
           \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D\"\
-          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -1568,7 +2019,9 @@ paths:
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          conn.request("GET", "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D")
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1583,7 +2036,9 @@ paths:
             "hostname": "psrc-00000.region.provider.confluent.cloud",
             "port": null,
             "path": "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D",
-            "headers": {}
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
           };
 
           const req = http.request(options, function (res) {
@@ -1607,11 +2062,16 @@ paths:
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
           curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D");
 
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D");
           var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
   /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags:
     get:
@@ -1649,11 +2109,44 @@ paths:
         "400":
           description: Bad Request
         "404":
-          description: Entity not found
+          content:
+            application/json:
+              example:
+                error_code: 404
+                message: Not Found
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Not Found
+          x-summary: Not Found
+        "401":
+          content:
+            application/json:
+              example:
+                error_code: 401
+                message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error_code: 403
+                message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
         "429":
           description: Rate Limit Error
         "500":
           description: Internal Server Error
+      security:
+      - resource-api-key: []
+      - external-access-token: []
       summary: Read Tags for an Entity
       tags:
       - Entity (v1)
@@ -1661,7 +2154,8 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags
+            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
@@ -1669,13 +2163,15 @@ paths:
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags")
             .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
           \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags\"\
-          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -1684,7 +2180,9 @@ paths:
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          conn.request("GET", "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags")
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1699,7 +2197,9 @@ paths:
             "hostname": "psrc-00000.region.provider.confluent.cloud",
             "port": null,
             "path": "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags",
-            "headers": {}
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
           };
 
           const req = http.request(options, function (res) {
@@ -1723,11 +2223,374 @@ paths:
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
           curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags");
 
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags");
           var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+  /catalog/v1/entity:
+    put:
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Partially update an entity attribute.
+      operationId: partialEntityUpdate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntityWithExtInfo'
+        description: The entity to update
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityPartialUpdateResponse'
+          description: The updated entity
+        "400":
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              example:
+                error_code: 404
+                message: Not Found
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Not Found
+          x-summary: Not Found
+        "401":
+          content:
+            application/json:
+              example:
+                error_code: 401
+                message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error_code: 403
+                message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      security:
+      - resource-api-key: []
+      - external-access-token: []
+      summary: Update an Entity Attribute
+      tags:
+      - Entity (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request PUT \
+            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"referredEntities":{"property1":{"typeName":"string","attributes":{},"guid":"string","homeId":"string","isProxy":true,"isIncomplete":true,"provenanceType":0,"status":"ACTIVE","createdBy":"string","updatedBy":"string","createTime":0,"updateTime":0,"version":0,"relationshipAttributes":{},"classifications":[{"typeName":"string","attributes":{"property1":{},"property2":{}},"entityGuid":"string","entityStatus":"ACTIVE","propagate":true,"validityPeriods":[{"startTime":"string","endTime":"string","timeZone":"string"}],"removePropagationsOnEntityDelete":true}],"meanings":[{"termGuid":"string","relationGuid":"string","description":"string","displayText":"string","expression":"string","createdBy":"string","steward":"string","source":"string","confidence":0,"status":"DISCOVERED"}],"customAttributes":{"property1":"string","property2":"string"},"businessAttributes":{"property1":{},"property2":{}},"labels":["string"],"proxy":true},"property2":{"typeName":"string","attributes":{},"guid":"string","homeId":"string","isProxy":true,"isIncomplete":true,"provenanceType":0,"status":"ACTIVE","createdBy":"string","updatedBy":"string","createTime":0,"updateTime":0,"version":0,"relationshipAttributes":{},"classifications":[{"typeName":"string","attributes":{"property1":{},"property2":{}},"entityGuid":"string","entityStatus":"ACTIVE","propagate":true,"validityPeriods":[{"startTime":"string","endTime":"string","timeZone":"string"}],"removePropagationsOnEntityDelete":true}],"meanings":[{"termGuid":"string","relationGuid":"string","description":"string","displayText":"string","expression":"string","createdBy":"string","steward":"string","source":"string","confidence":0,"status":"DISCOVERED"}],"customAttributes":{"property1":"string","property2":"string"},"businessAttributes":{"property1":{},"property2":{}},"labels":["string"],"proxy":true}},"entity":{"typeName":"string","attributes":{},"guid":"string","homeId":"string","isProxy":true,"isIncomplete":true,"provenanceType":0,"status":"ACTIVE","createdBy":"string","updatedBy":"string","createTime":0,"updateTime":0,"version":0,"relationshipAttributes":{},"classifications":[{"typeName":"string","attributes":{"property1":{},"property2":{}},"entityGuid":"string","entityStatus":"ACTIVE","propagate":true,"validityPeriods":[{"startTime":"string","endTime":"string","timeZone":"string"}],"removePropagationsOnEntityDelete":true}],"meanings":[{"termGuid":"string","relationGuid":"string","description":"string","displayText":"string","expression":"string","createdBy":"string","steward":"string","source":"string","confidence":0,"status":"DISCOVERED"}],"customAttributes":{"property1":"string","property2":"string"},"businessAttributes":{"property1":{},"property2":{}},"labels":["string"],"proxy":true}}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"referredEntities\":{\"property1\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true},\"property2\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}},\"entity\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}}");
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity")
+            .put(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"referredEntities\\\":{\\\"property1\\\
+          \":{\\\"typeName\\\":\\\"string\\\",\\\"attributes\\\":{},\\\"guid\\\":\\\
+          \"string\\\",\\\"homeId\\\":\\\"string\\\",\\\"isProxy\\\":true,\\\"isIncomplete\\\
+          \":true,\\\"provenanceType\\\":0,\\\"status\\\":\\\"ACTIVE\\\",\\\"createdBy\\\
+          \":\\\"string\\\",\\\"updatedBy\\\":\\\"string\\\",\\\"createTime\\\":0,\\\
+          \"updateTime\\\":0,\\\"version\\\":0,\\\"relationshipAttributes\\\":{},\\\
+          \"classifications\\\":[{\\\"typeName\\\":\\\"string\\\",\\\"attributes\\\
+          \":{\\\"property1\\\":{},\\\"property2\\\":{}},\\\"entityGuid\\\":\\\"string\\\
+          \",\\\"entityStatus\\\":\\\"ACTIVE\\\",\\\"propagate\\\":true,\\\"validityPeriods\\\
+          \":[{\\\"startTime\\\":\\\"string\\\",\\\"endTime\\\":\\\"string\\\",\\\"\
+          timeZone\\\":\\\"string\\\"}],\\\"removePropagationsOnEntityDelete\\\":true}],\\\
+          \"meanings\\\":[{\\\"termGuid\\\":\\\"string\\\",\\\"relationGuid\\\":\\\
+          \"string\\\",\\\"description\\\":\\\"string\\\",\\\"displayText\\\":\\\"\
+          string\\\",\\\"expression\\\":\\\"string\\\",\\\"createdBy\\\":\\\"string\\\
+          \",\\\"steward\\\":\\\"string\\\",\\\"source\\\":\\\"string\\\",\\\"confidence\\\
+          \":0,\\\"status\\\":\\\"DISCOVERED\\\"}],\\\"customAttributes\\\":{\\\"\
+          property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\"},\\\"businessAttributes\\\
+          \":{\\\"property1\\\":{},\\\"property2\\\":{}},\\\"labels\\\":[\\\"string\\\
+          \"],\\\"proxy\\\":true},\\\"property2\\\":{\\\"typeName\\\":\\\"string\\\
+          \",\\\"attributes\\\":{},\\\"guid\\\":\\\"string\\\",\\\"homeId\\\":\\\"\
+          string\\\",\\\"isProxy\\\":true,\\\"isIncomplete\\\":true,\\\"provenanceType\\\
+          \":0,\\\"status\\\":\\\"ACTIVE\\\",\\\"createdBy\\\":\\\"string\\\",\\\"\
+          updatedBy\\\":\\\"string\\\",\\\"createTime\\\":0,\\\"updateTime\\\":0,\\\
+          \"version\\\":0,\\\"relationshipAttributes\\\":{},\\\"classifications\\\"\
+          :[{\\\"typeName\\\":\\\"string\\\",\\\"attributes\\\":{\\\"property1\\\"\
+          :{},\\\"property2\\\":{}},\\\"entityGuid\\\":\\\"string\\\",\\\"entityStatus\\\
+          \":\\\"ACTIVE\\\",\\\"propagate\\\":true,\\\"validityPeriods\\\":[{\\\"\
+          startTime\\\":\\\"string\\\",\\\"endTime\\\":\\\"string\\\",\\\"timeZone\\\
+          \":\\\"string\\\"}],\\\"removePropagationsOnEntityDelete\\\":true}],\\\"\
+          meanings\\\":[{\\\"termGuid\\\":\\\"string\\\",\\\"relationGuid\\\":\\\"\
+          string\\\",\\\"description\\\":\\\"string\\\",\\\"displayText\\\":\\\"string\\\
+          \",\\\"expression\\\":\\\"string\\\",\\\"createdBy\\\":\\\"string\\\",\\\
+          \"steward\\\":\\\"string\\\",\\\"source\\\":\\\"string\\\",\\\"confidence\\\
+          \":0,\\\"status\\\":\\\"DISCOVERED\\\"}],\\\"customAttributes\\\":{\\\"\
+          property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\"},\\\"businessAttributes\\\
+          \":{\\\"property1\\\":{},\\\"property2\\\":{}},\\\"labels\\\":[\\\"string\\\
+          \"],\\\"proxy\\\":true}},\\\"entity\\\":{\\\"typeName\\\":\\\"string\\\"\
+          ,\\\"attributes\\\":{},\\\"guid\\\":\\\"string\\\",\\\"homeId\\\":\\\"string\\\
+          \",\\\"isProxy\\\":true,\\\"isIncomplete\\\":true,\\\"provenanceType\\\"\
+          :0,\\\"status\\\":\\\"ACTIVE\\\",\\\"createdBy\\\":\\\"string\\\",\\\"updatedBy\\\
+          \":\\\"string\\\",\\\"createTime\\\":0,\\\"updateTime\\\":0,\\\"version\\\
+          \":0,\\\"relationshipAttributes\\\":{},\\\"classifications\\\":[{\\\"typeName\\\
+          \":\\\"string\\\",\\\"attributes\\\":{\\\"property1\\\":{},\\\"property2\\\
+          \":{}},\\\"entityGuid\\\":\\\"string\\\",\\\"entityStatus\\\":\\\"ACTIVE\\\
+          \",\\\"propagate\\\":true,\\\"validityPeriods\\\":[{\\\"startTime\\\":\\\
+          \"string\\\",\\\"endTime\\\":\\\"string\\\",\\\"timeZone\\\":\\\"string\\\
+          \"}],\\\"removePropagationsOnEntityDelete\\\":true}],\\\"meanings\\\":[{\\\
+          \"termGuid\\\":\\\"string\\\",\\\"relationGuid\\\":\\\"string\\\",\\\"description\\\
+          \":\\\"string\\\",\\\"displayText\\\":\\\"string\\\",\\\"expression\\\"\
+          :\\\"string\\\",\\\"createdBy\\\":\\\"string\\\",\\\"steward\\\":\\\"string\\\
+          \",\\\"source\\\":\\\"string\\\",\\\"confidence\\\":0,\\\"status\\\":\\\"\
+          DISCOVERED\\\"}],\\\"customAttributes\\\":{\\\"property1\\\":\\\"string\\\
+          \",\\\"property2\\\":\\\"string\\\"},\\\"businessAttributes\\\":{\\\"property1\\\
+          \":{},\\\"property2\\\":{}},\\\"labels\\\":[\\\"string\\\"],\\\"proxy\\\"\
+          :true}}\")\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          payload = "{\"referredEntities\":{\"property1\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true},\"property2\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}},\"entity\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("PUT", "/catalog/v1/entity", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "PUT",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/catalog/v1/entity",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            referredEntities: {
+              property1: {
+                typeName: 'string',
+                attributes: {},
+                guid: 'string',
+                homeId: 'string',
+                isProxy: true,
+                isIncomplete: true,
+                provenanceType: 0,
+                status: 'ACTIVE',
+                createdBy: 'string',
+                updatedBy: 'string',
+                createTime: 0,
+                updateTime: 0,
+                version: 0,
+                relationshipAttributes: {},
+                classifications: [
+                  {
+                    typeName: 'string',
+                    attributes: {property1: {}, property2: {}},
+                    entityGuid: 'string',
+                    entityStatus: 'ACTIVE',
+                    propagate: true,
+                    validityPeriods: [{startTime: 'string', endTime: 'string', timeZone: 'string'}],
+                    removePropagationsOnEntityDelete: true
+                  }
+                ],
+                meanings: [
+                  {
+                    termGuid: 'string',
+                    relationGuid: 'string',
+                    description: 'string',
+                    displayText: 'string',
+                    expression: 'string',
+                    createdBy: 'string',
+                    steward: 'string',
+                    source: 'string',
+                    confidence: 0,
+                    status: 'DISCOVERED'
+                  }
+                ],
+                customAttributes: {property1: 'string', property2: 'string'},
+                businessAttributes: {property1: {}, property2: {}},
+                labels: ['string'],
+                proxy: true
+              },
+              property2: {
+                typeName: 'string',
+                attributes: {},
+                guid: 'string',
+                homeId: 'string',
+                isProxy: true,
+                isIncomplete: true,
+                provenanceType: 0,
+                status: 'ACTIVE',
+                createdBy: 'string',
+                updatedBy: 'string',
+                createTime: 0,
+                updateTime: 0,
+                version: 0,
+                relationshipAttributes: {},
+                classifications: [
+                  {
+                    typeName: 'string',
+                    attributes: {property1: {}, property2: {}},
+                    entityGuid: 'string',
+                    entityStatus: 'ACTIVE',
+                    propagate: true,
+                    validityPeriods: [{startTime: 'string', endTime: 'string', timeZone: 'string'}],
+                    removePropagationsOnEntityDelete: true
+                  }
+                ],
+                meanings: [
+                  {
+                    termGuid: 'string',
+                    relationGuid: 'string',
+                    description: 'string',
+                    displayText: 'string',
+                    expression: 'string',
+                    createdBy: 'string',
+                    steward: 'string',
+                    source: 'string',
+                    confidence: 0,
+                    status: 'DISCOVERED'
+                  }
+                ],
+                customAttributes: {property1: 'string', property2: 'string'},
+                businessAttributes: {property1: {}, property2: {}},
+                labels: ['string'],
+                proxy: true
+              }
+            },
+            entity: {
+              typeName: 'string',
+              attributes: {},
+              guid: 'string',
+              homeId: 'string',
+              isProxy: true,
+              isIncomplete: true,
+              provenanceType: 0,
+              status: 'ACTIVE',
+              createdBy: 'string',
+              updatedBy: 'string',
+              createTime: 0,
+              updateTime: 0,
+              version: 0,
+              relationshipAttributes: {},
+              classifications: [
+                {
+                  typeName: 'string',
+                  attributes: {property1: {}, property2: {}},
+                  entityGuid: 'string',
+                  entityStatus: 'ACTIVE',
+                  propagate: true,
+                  validityPeriods: [{startTime: 'string', endTime: 'string', timeZone: 'string'}],
+                  removePropagationsOnEntityDelete: true
+                }
+              ],
+              meanings: [
+                {
+                  termGuid: 'string',
+                  relationGuid: 'string',
+                  description: 'string',
+                  displayText: 'string',
+                  expression: 'string',
+                  createdBy: 'string',
+                  steward: 'string',
+                  source: 'string',
+                  confidence: 0,
+                  status: 'DISCOVERED'
+                }
+              ],
+              customAttributes: {property1: 'string', property2: 'string'},
+              businessAttributes: {property1: {}, property2: {}},
+              labels: ['string'],
+              proxy: true
+            }
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PUT");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"referredEntities\":{\"property1\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true},\"property2\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}},\"entity\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity");
+          var request = new RestRequest(Method.PUT);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"referredEntities\":{\"property1\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true},\"property2\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}},\"entity\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName}:
     delete:
@@ -1766,10 +2629,35 @@ paths:
           description: No Content
         "400":
           description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                error_code: 401
+                message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error_code: 403
+                message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
         "429":
           description: Rate Limit Error
         "500":
           description: Internal Server Error
+      security:
+      - resource-api-key: []
+      - external-access-token: []
       summary: Delete a Tag for an Entity
       tags:
       - Entity (v1)
@@ -1777,7 +2665,8 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags/%7BtagName%7D
+            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags/%7BtagName%7D \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
@@ -1785,13 +2674,15 @@ paths:
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags/%7BtagName%7D")
             .delete(null)
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
           \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags/%7BtagName%7D\"\
-          \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -1800,7 +2691,9 @@ paths:
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          conn.request("DELETE", "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags/%7BtagName%7D")
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("DELETE", "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags/%7BtagName%7D", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1815,7 +2708,9 @@ paths:
             "hostname": "psrc-00000.region.provider.confluent.cloud",
             "port": null,
             "path": "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags/%7BtagName%7D",
-            "headers": {}
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
           };
 
           const req = http.request(options, function (res) {
@@ -1839,11 +2734,16 @@ paths:
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
           curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags/%7BtagName%7D");
 
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags/%7BtagName%7D");
           var request = new RestRequest(Method.DELETE);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
   /catalog/v1/search/attribute:
     get:
@@ -1957,10 +2857,35 @@ paths:
             an empty list if execution succeeded without any results
         "400":
           description: Invalid wildcard or query parameters
+        "401":
+          content:
+            application/json:
+              example:
+                error_code: 401
+                message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error_code: 403
+                message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
         "429":
           description: Rate Limit Error
         "500":
           description: Internal Server Error
+      security:
+      - resource-api-key: []
+      - external-access-token: []
       summary: Search by Attribute
       tags:
       - Search (v1)
@@ -1968,7 +2893,8 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/search/attribute
+            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/search/attribute \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
@@ -1976,13 +2902,15 @@ paths:
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/search/attribute")
             .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
           \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/search/attribute\"\
-          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -1991,7 +2919,9 @@ paths:
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          conn.request("GET", "/catalog/v1/search/attribute")
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/catalog/v1/search/attribute", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2006,7 +2936,9 @@ paths:
             "hostname": "psrc-00000.region.provider.confluent.cloud",
             "port": null,
             "path": "/catalog/v1/search/attribute",
-            "headers": {}
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
           };
 
           const req = http.request(options, function (res) {
@@ -2030,11 +2962,16 @@ paths:
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
           curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/search/attribute");
 
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/search/attribute");
           var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
   /catalog/v1/search/basic:
     get:
@@ -2136,10 +3073,35 @@ paths:
             an empty list if execution succeeded without any results
         "400":
           description: Invalid fulltext or query parameters
+        "401":
+          content:
+            application/json:
+              example:
+                error_code: 401
+                message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error_code: 403
+                message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
         "429":
           description: Rate Limit Error
         "500":
           description: Internal Server Error
+      security:
+      - resource-api-key: []
+      - external-access-token: []
       summary: Search by Fulltext Query
       tags:
       - Search (v1)
@@ -2147,7 +3109,8 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/search/basic
+            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/search/basic \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
@@ -2155,13 +3118,15 @@ paths:
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/search/basic")
             .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
           \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/search/basic\"\
-          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -2170,7 +3135,9 @@ paths:
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          conn.request("GET", "/catalog/v1/search/basic")
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/catalog/v1/search/basic", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2185,7 +3152,9 @@ paths:
             "hostname": "psrc-00000.region.provider.confluent.cloud",
             "port": null,
             "path": "/catalog/v1/search/basic",
-            "headers": {}
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
           };
 
           const req = http.request(options, function (res) {
@@ -2209,11 +3178,16 @@ paths:
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
           curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/search/basic");
 
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/search/basic");
           var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
   /catalog/v1/types/tagdefs:
     get:
@@ -2242,10 +3216,35 @@ paths:
           description: The tag definitions
         "400":
           description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                error_code: 401
+                message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error_code: 403
+                message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
         "429":
           description: Rate Limit Error
         "500":
           description: Internal Server Error
+      security:
+      - resource-api-key: []
+      - external-access-token: []
       summary: Bulk Read Tag Definitions
       tags:
       - Types (v1)
@@ -2253,7 +3252,8 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs
+            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
@@ -2261,13 +3261,15 @@ paths:
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs")
             .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
           \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs\"\
-          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -2276,7 +3278,9 @@ paths:
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          conn.request("GET", "/catalog/v1/types/tagdefs")
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/catalog/v1/types/tagdefs", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2291,7 +3295,9 @@ paths:
             "hostname": "psrc-00000.region.provider.confluent.cloud",
             "port": null,
             "path": "/catalog/v1/types/tagdefs",
-            "headers": {}
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
           };
 
           const req = http.request(options, function (res) {
@@ -2315,11 +3321,16 @@ paths:
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
           curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs");
 
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs");
           var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     post:
       description: |-
@@ -2347,10 +3358,45 @@ paths:
             error property.
         "400":
           description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                error_code: 401
+                message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error_code: 403
+                message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                error_code: 404
+                message: Not Found
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Not Found
+          x-summary: Not Found
         "429":
           description: Rate Limit Error
         "500":
           description: Internal Server Error
+      security:
+      - resource-api-key: []
+      - external-access-token: []
       summary: Bulk Create Tag Definitions
       tags:
       - Types (v1)
@@ -2359,6 +3405,7 @@ paths:
         source: |-
           curl --request POST \
             --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '[{"category":"PRIMITIVE","guid":"string","createdBy":"string","updatedBy":"string","createTime":0,"updateTime":0,"version":0,"name":"string","description":"string","typeVersion":"string","serviceType":"string","options":{"property1":"string","property2":"string"},"attributeDefs":[{"name":"string","typeName":"string","isOptional":true,"cardinality":"SINGLE","valuesMinCount":0,"valuesMaxCount":0,"isUnique":true,"isIndexable":true,"includeInNotification":true,"defaultValue":"string","description":"string","searchWeight":0,"indexType":"DEFAULT","constraints":[{"type":"string","params":{"property1":{},"property2":{}}}],"options":{"property1":"string","property2":"string"},"displayName":"string"}],"superTypes":["string"],"entityTypes":["string"],"subTypes":["string"]}]'
       - lang: Java
@@ -2371,6 +3418,7 @@ paths:
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs")
             .post(body)
             .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -2394,7 +3442,8 @@ paths:
           \"},\\\"displayName\\\":\\\"string\\\"}],\\\"superTypes\\\":[\\\"string\\\
           \"],\\\"entityTypes\\\":[\\\"string\\\"],\\\"subTypes\\\":[\\\"string\\\"\
           ]}]\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -2405,7 +3454,10 @@ paths:
 
           payload = "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]"
 
-          headers = { 'content-type': "application/json" }
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
 
           conn.request("POST", "/catalog/v1/types/tagdefs", payload, headers)
 
@@ -2423,7 +3475,8 @@ paths:
             "port": null,
             "path": "/catalog/v1/types/tagdefs",
             "headers": {
-              "content-type": "application/json"
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
           };
 
@@ -2489,6 +3542,7 @@ paths:
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]");
@@ -2499,6 +3553,7 @@ paths:
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     put:
@@ -2527,10 +3582,35 @@ paths:
             error property.
         "400":
           description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                error_code: 401
+                message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error_code: 403
+                message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
         "429":
           description: Rate Limit Error
         "500":
           description: Internal Server Error
+      security:
+      - resource-api-key: []
+      - external-access-token: []
       summary: Bulk Update Tag Definitions
       tags:
       - Types (v1)
@@ -2539,6 +3619,7 @@ paths:
         source: |-
           curl --request PUT \
             --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '[{"category":"PRIMITIVE","guid":"string","createdBy":"string","updatedBy":"string","createTime":0,"updateTime":0,"version":0,"name":"string","description":"string","typeVersion":"string","serviceType":"string","options":{"property1":"string","property2":"string"},"attributeDefs":[{"name":"string","typeName":"string","isOptional":true,"cardinality":"SINGLE","valuesMinCount":0,"valuesMaxCount":0,"isUnique":true,"isIndexable":true,"includeInNotification":true,"defaultValue":"string","description":"string","searchWeight":0,"indexType":"DEFAULT","constraints":[{"type":"string","params":{"property1":{},"property2":{}}}],"options":{"property1":"string","property2":"string"},"displayName":"string"}],"superTypes":["string"],"entityTypes":["string"],"subTypes":["string"]}]'
       - lang: Java
@@ -2551,6 +3632,7 @@ paths:
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs")
             .put(body)
             .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -2574,7 +3656,8 @@ paths:
           \"},\\\"displayName\\\":\\\"string\\\"}],\\\"superTypes\\\":[\\\"string\\\
           \"],\\\"entityTypes\\\":[\\\"string\\\"],\\\"subTypes\\\":[\\\"string\\\"\
           ]}]\")\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -2585,7 +3668,10 @@ paths:
 
           payload = "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]"
 
-          headers = { 'content-type': "application/json" }
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
 
           conn.request("PUT", "/catalog/v1/types/tagdefs", payload, headers)
 
@@ -2603,7 +3689,8 @@ paths:
             "port": null,
             "path": "/catalog/v1/types/tagdefs",
             "headers": {
-              "content-type": "application/json"
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
           };
 
@@ -2669,6 +3756,7 @@ paths:
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]");
@@ -2679,6 +3767,7 @@ paths:
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs");
           var request = new RestRequest(Method.PUT);
           request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /catalog/v1/types/tagdefs/{tagName}:
@@ -2702,10 +3791,35 @@ paths:
           description: No Content
         "400":
           description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                error_code: 401
+                message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error_code: 403
+                message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
         "429":
           description: Rate Limit Error
         "500":
           description: Internal Server Error
+      security:
+      - resource-api-key: []
+      - external-access-token: []
       summary: Delete Tag Definition
       tags:
       - Types (v1)
@@ -2713,7 +3827,8 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/%7BtagName%7D
+            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/%7BtagName%7D \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
@@ -2721,13 +3836,15 @@ paths:
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/%7BtagName%7D")
             .delete(null)
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
           \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/%7BtagName%7D\"\
-          \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -2736,7 +3853,9 @@ paths:
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          conn.request("DELETE", "/catalog/v1/types/tagdefs/%7BtagName%7D")
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("DELETE", "/catalog/v1/types/tagdefs/%7BtagName%7D", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2751,7 +3870,9 @@ paths:
             "hostname": "psrc-00000.region.provider.confluent.cloud",
             "port": null,
             "path": "/catalog/v1/types/tagdefs/%7BtagName%7D",
-            "headers": {}
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
           };
 
           const req = http.request(options, function (res) {
@@ -2775,11 +3896,16 @@ paths:
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
           curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/%7BtagName%7D");
 
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/%7BtagName%7D");
           var request = new RestRequest(Method.DELETE);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     get:
       description: |-
@@ -2806,11 +3932,44 @@ paths:
         "400":
           description: Bad Request
         "404":
-          description: Tag definition not found
+          content:
+            application/json:
+              example:
+                error_code: 404
+                message: Not Found
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Not Found
+          x-summary: Not Found
+        "401":
+          content:
+            application/json:
+              example:
+                error_code: 401
+                message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error_code: 403
+                message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
         "429":
           description: Rate Limit Error
         "500":
           description: Internal Server Error
+      security:
+      - resource-api-key: []
+      - external-access-token: []
       summary: Read Tag Definition
       tags:
       - Types (v1)
@@ -2818,7 +3977,8 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/%7BtagName%7D
+            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/%7BtagName%7D \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
@@ -2826,13 +3986,15 @@ paths:
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/%7BtagName%7D")
             .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
           \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/%7BtagName%7D\"\
-          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -2841,7 +4003,9 @@ paths:
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          conn.request("GET", "/catalog/v1/types/tagdefs/%7BtagName%7D")
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/catalog/v1/types/tagdefs/%7BtagName%7D", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2856,7 +4020,9 @@ paths:
             "hostname": "psrc-00000.region.provider.confluent.cloud",
             "port": null,
             "path": "/catalog/v1/types/tagdefs/%7BtagName%7D",
-            "headers": {}
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
           };
 
           const req = http.request(options, function (res) {
@@ -2880,13 +4046,49 @@ paths:
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
           curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/%7BtagName%7D");
 
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
           var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/%7BtagName%7D");
           var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
 components:
+  responses:
+    UnauthenticatedError:
+      content:
+        application/json:
+          example:
+            error_code: 401
+            message: Unauthorized
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+      description: The request lacks valid authentication credentials for this resource.
+      x-summary: Unauthorized
+    UnauthorizedError:
+      content:
+        application/json:
+          example:
+            error_code: 403
+            message: Forbidden
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+      description: The access credentials were considered insufficient to grant access
+      x-summary: Forbidden
+    NotFoundError:
+      content:
+        application/json:
+          example:
+            error_code: 404
+            message: Not Found
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+      description: Not Found
+      x-summary: Not Found
   schemas:
     Tag:
       example:
@@ -2999,6 +4201,34 @@ components:
           items:
             $ref: '#/components/schemas/TimeBoundary'
           type: array
+        removePropagationsOnEntityDelete:
+          description: Whether to remove propagations on entity delete
+          type: boolean
+      type: object
+    ClassificationHeader:
+      example:
+        removePropagationsOnEntityDelete: true
+        entityStatus: ACTIVE
+        typeName: typeName
+        entityGuid: entityGuid
+        propagate: true
+      properties:
+        typeName:
+          description: The tag name
+          type: string
+        entityGuid:
+          description: The internal entity guid
+          type: string
+        entityStatus:
+          description: The entity status
+          enum:
+          - ACTIVE
+          - DELETED
+          - PURGED
+          type: string
+        propagate:
+          description: Whether to propagate the tag
+          type: boolean
         removePropagationsOnEntityDelete:
           description: Whether to remove propagations on entity delete
           type: boolean
@@ -3318,6 +4548,53 @@ components:
         entity:
           $ref: '#/components/schemas/Entity'
       type: object
+    EntityPartialUpdateResponse:
+      description: The type name
+      example:
+        mutatedEntities:
+          UPDATE:
+          - classifications:
+            - removePropagationsOnEntityDelete: true
+              entityStatus: ACTIVE
+              typeName: typeName
+              entityGuid: entityGuid
+              propagate: true
+            - removePropagationsOnEntityDelete: true
+              entityStatus: ACTIVE
+              typeName: typeName
+              entityGuid: entityGuid
+              propagate: true
+            classificationNames:
+            - classificationNames
+            - classificationNames
+            typeName: typeName
+            guid: guid
+            attributes: '{}'
+            status: ACTIVE
+            isIncomplete: true
+          - classifications:
+            - removePropagationsOnEntityDelete: true
+              entityStatus: ACTIVE
+              typeName: typeName
+              entityGuid: entityGuid
+              propagate: true
+            - removePropagationsOnEntityDelete: true
+              entityStatus: ACTIVE
+              typeName: typeName
+              entityGuid: entityGuid
+              propagate: true
+            classificationNames:
+            - classificationNames
+            - classificationNames
+            typeName: typeName
+            guid: guid
+            attributes: '{}'
+            status: ACTIVE
+            isIncomplete: true
+      properties:
+        mutatedEntities:
+          $ref: '#/components/schemas/EntityPartialUpdate'
+      type: object
     TermAssignmentHeader:
       example:
         displayText: displayText
@@ -3489,6 +4766,107 @@ components:
             type: string
           type: array
           uniqueItems: true
+      type: object
+    EntityPartialUpdate:
+      description: The updated entities.
+      example:
+        UPDATE:
+        - classifications:
+          - removePropagationsOnEntityDelete: true
+            entityStatus: ACTIVE
+            typeName: typeName
+            entityGuid: entityGuid
+            propagate: true
+          - removePropagationsOnEntityDelete: true
+            entityStatus: ACTIVE
+            typeName: typeName
+            entityGuid: entityGuid
+            propagate: true
+          classificationNames:
+          - classificationNames
+          - classificationNames
+          typeName: typeName
+          guid: guid
+          attributes: '{}'
+          status: ACTIVE
+          isIncomplete: true
+        - classifications:
+          - removePropagationsOnEntityDelete: true
+            entityStatus: ACTIVE
+            typeName: typeName
+            entityGuid: entityGuid
+            propagate: true
+          - removePropagationsOnEntityDelete: true
+            entityStatus: ACTIVE
+            typeName: typeName
+            entityGuid: entityGuid
+            propagate: true
+          classificationNames:
+          - classificationNames
+          - classificationNames
+          typeName: typeName
+          guid: guid
+          attributes: '{}'
+          status: ACTIVE
+          isIncomplete: true
+      properties:
+        UPDATE:
+          description: The updated entities.
+          items:
+            $ref: '#/components/schemas/PartialUpdateParams'
+          type: array
+      type: object
+    PartialUpdateParams:
+      example:
+        classifications:
+        - removePropagationsOnEntityDelete: true
+          entityStatus: ACTIVE
+          typeName: typeName
+          entityGuid: entityGuid
+          propagate: true
+        - removePropagationsOnEntityDelete: true
+          entityStatus: ACTIVE
+          typeName: typeName
+          entityGuid: entityGuid
+          propagate: true
+        classificationNames:
+        - classificationNames
+        - classificationNames
+        typeName: typeName
+        guid: guid
+        attributes: '{}'
+        status: ACTIVE
+        isIncomplete: true
+      properties:
+        typeName:
+          description: The type name
+          type: string
+        attributes:
+          description: The attributes
+          type: object
+        guid:
+          description: The internal guid
+          type: string
+        status:
+          description: The status
+          enum:
+          - ACTIVE
+          - DELETED
+          - PURGED
+          type: string
+        classificationNames:
+          description: The classification (tag) names
+          items:
+            type: string
+          type: array
+        classifications:
+          description: The classifications (tags)
+          items:
+            $ref: '#/components/schemas/ClassificationHeader'
+          type: array
+        isIncomplete:
+          description: Whether is incomplete
+          type: boolean
       type: object
     SearchParams:
       description: Search paramas to filter results
@@ -4506,3 +5884,17 @@ components:
         error:
           $ref: '#/components/schemas/ErrorMessage'
       type: object
+  securitySchemes:
+    resource-api-key:
+      description: "Authenticate with resource-specific API Keys using HTTP Basic\
+        \ Auth. Treat the resource-specific API Key ID \nas the username and resource-specific\
+        \ API Key Secret as the password.\n"
+      scheme: basic
+      type: http
+    external-access-token:
+      description: Authenticate with OAuth 2.0.
+      flows:
+        clientCredentials:
+          scopes: {}
+          tokenUrl: https://api.confluent.cloud/sts/v1/oauth2/token
+      type: oauth2

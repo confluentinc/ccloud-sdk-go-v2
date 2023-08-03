@@ -26,6 +26,7 @@ Contact: data-governance@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -165,7 +166,11 @@ func (o EntityWithExtInfo) MarshalJSON() ([]byte, error) {
 	if o.Entity != nil {
 		toSerialize["entity"] = o.Entity
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableEntityWithExtInfo struct {
@@ -196,7 +201,11 @@ func NewNullableEntityWithExtInfo(val *EntityWithExtInfo) *NullableEntityWithExt
 }
 
 func (v NullableEntityWithExtInfo) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableEntityWithExtInfo) UnmarshalJSON(src []byte) error {
