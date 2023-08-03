@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**GetBusinessMetadata**](EntityV1Api.md#GetBusinessMetadata) | **Get** /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata | Read Business Metadata for an Entity
 [**GetByUniqueAttributes**](EntityV1Api.md#GetByUniqueAttributes) | **Get** /catalog/v1/entity/type/{typeName}/name/{qualifiedName} | Read an Entity
 [**GetTags**](EntityV1Api.md#GetTags) | **Get** /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags | Read Tags for an Entity
+[**PartialEntityUpdate**](EntityV1Api.md#PartialEntityUpdate) | **Put** /catalog/v1/entity | Update an Entity Attribute
 [**UpdateBusinessMetadata**](EntityV1Api.md#UpdateBusinessMetadata) | **Put** /catalog/v1/entity/businessmetadata | Bulk Update Business Metadata
 [**UpdateTags**](EntityV1Api.md#UpdateTags) | **Put** /catalog/v1/entity/tags | Bulk Update Tags
 
@@ -70,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -136,7 +137,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -210,12 +211,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -284,12 +285,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -357,7 +358,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -434,7 +435,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -507,11 +508,77 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PartialEntityUpdate
+
+> EntityPartialUpdateResponse PartialEntityUpdate(ctx).EntityWithExtInfo(entityWithExtInfo).Execute()
+
+Update an Entity Attribute
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    entityWithExtInfo := *openapiclient.NewEntityWithExtInfo() // EntityWithExtInfo | The entity to update (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.EntityV1Api.PartialEntityUpdate(context.Background()).EntityWithExtInfo(entityWithExtInfo).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EntityV1Api.PartialEntityUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PartialEntityUpdate`: EntityPartialUpdateResponse
+    fmt.Fprintf(os.Stdout, "Response from `EntityV1Api.PartialEntityUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPartialEntityUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **entityWithExtInfo** | [**EntityWithExtInfo**](EntityWithExtInfo.md) | The entity to update | 
+
+### Return type
+
+[**EntityPartialUpdateResponse**](EntityPartialUpdateResponse.md)
+
+### Authorization
+
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -573,7 +640,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -639,7 +706,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 

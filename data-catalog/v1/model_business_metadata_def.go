@@ -26,6 +26,7 @@ Contact: data-governance@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -584,7 +585,11 @@ func (o BusinessMetadataDef) MarshalJSON() ([]byte, error) {
 	if o.AttributeDefs != nil {
 		toSerialize["attributeDefs"] = o.AttributeDefs
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableBusinessMetadataDef struct {
@@ -615,7 +620,11 @@ func NewNullableBusinessMetadataDef(val *BusinessMetadataDef) *NullableBusinessM
 }
 
 func (v NullableBusinessMetadataDef) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableBusinessMetadataDef) UnmarshalJSON(src []byte) error {

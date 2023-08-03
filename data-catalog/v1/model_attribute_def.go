@@ -26,6 +26,7 @@ Contact: data-governance@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -698,7 +699,11 @@ func (o AttributeDef) MarshalJSON() ([]byte, error) {
 	if o.DisplayName != nil {
 		toSerialize["displayName"] = o.DisplayName
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableAttributeDef struct {
@@ -729,7 +734,11 @@ func NewNullableAttributeDef(val *AttributeDef) *NullableAttributeDef {
 }
 
 func (v NullableAttributeDef) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableAttributeDef) UnmarshalJSON(src []byte) error {

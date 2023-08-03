@@ -86,6 +86,7 @@ Class | Method | HTTP request | Description
 *EntityV1Api* | [**GetBusinessMetadata**](docs/EntityV1Api.md#getbusinessmetadata) | **Get** /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata | Read Business Metadata for an Entity
 *EntityV1Api* | [**GetByUniqueAttributes**](docs/EntityV1Api.md#getbyuniqueattributes) | **Get** /catalog/v1/entity/type/{typeName}/name/{qualifiedName} | Read an Entity
 *EntityV1Api* | [**GetTags**](docs/EntityV1Api.md#gettags) | **Get** /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags | Read Tags for an Entity
+*EntityV1Api* | [**PartialEntityUpdate**](docs/EntityV1Api.md#partialentityupdate) | **Put** /catalog/v1/entity | Update an Entity Attribute
 *EntityV1Api* | [**UpdateBusinessMetadata**](docs/EntityV1Api.md#updatebusinessmetadata) | **Put** /catalog/v1/entity/businessmetadata | Bulk Update Business Metadata
 *EntityV1Api* | [**UpdateTags**](docs/EntityV1Api.md#updatetags) | **Put** /catalog/v1/entity/tags | Bulk Update Tags
 *SearchV1Api* | [**SearchUsingAttribute**](docs/SearchV1Api.md#searchusingattribute) | **Get** /catalog/v1/search/attribute | Search by Attribute
@@ -110,11 +111,15 @@ Class | Method | HTTP request | Description
  - [BusinessMetadataDefResponse](docs/BusinessMetadataDefResponse.md)
  - [BusinessMetadataResponse](docs/BusinessMetadataResponse.md)
  - [Classification](docs/Classification.md)
+ - [ClassificationHeader](docs/ClassificationHeader.md)
  - [ConstraintDef](docs/ConstraintDef.md)
  - [Entity](docs/Entity.md)
  - [EntityHeader](docs/EntityHeader.md)
+ - [EntityPartialUpdate](docs/EntityPartialUpdate.md)
+ - [EntityPartialUpdateResponse](docs/EntityPartialUpdateResponse.md)
  - [EntityWithExtInfo](docs/EntityWithExtInfo.md)
  - [ErrorMessage](docs/ErrorMessage.md)
+ - [PartialUpdateParams](docs/PartialUpdateParams.md)
  - [SearchParams](docs/SearchParams.md)
  - [SearchResult](docs/SearchResult.md)
  - [Tag](docs/Tag.md)
@@ -127,7 +132,49 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
- Endpoints do not require authorization.
+
+
+### external-access-token
+
+
+- **Type**: OAuth
+- **Flow**: application
+- **Authorization URL**: 
+- **Scopes**: N/A
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextAccessToken, "ACCESSTOKENSTRING")
+r, err := client.Service.Operation(auth, args)
+```
+
+Or via OAuth2 module to automatically refresh tokens and perform user authentication.
+
+```golang
+import "golang.org/x/oauth2"
+
+/* Perform OAuth2 round trip request and obtain a token */
+
+tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
+auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
+r, err := client.Service.Operation(auth, args)
+```
+
+
+### resource-api-key
+
+- **Type**: HTTP basic authentication
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextBasicAuth, sw.BasicAuth{
+    UserName: "username",
+    Password: "password",
+})
+r, err := client.Service.Operation(auth, args)
+```
 
 
 ## Documentation for Utility Methods

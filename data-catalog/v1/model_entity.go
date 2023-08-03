@@ -26,6 +26,7 @@ Contact: data-governance@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -850,7 +851,11 @@ func (o Entity) MarshalJSON() ([]byte, error) {
 	if o.Proxy != nil {
 		toSerialize["proxy"] = o.Proxy
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableEntity struct {
@@ -881,7 +886,11 @@ func NewNullableEntity(val *Entity) *NullableEntity {
 }
 
 func (v NullableEntity) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableEntity) UnmarshalJSON(src []byte) error {
