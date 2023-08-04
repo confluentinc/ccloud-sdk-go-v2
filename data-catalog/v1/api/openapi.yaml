@@ -63,7 +63,15 @@ paths:
                 type: array
           description: The business metadata definitions
         "400":
+          content:
+            application/json:
+              example:
+                error_code: 400
+                message: Bad Request
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
+          x-summary: Bad Request
         "401":
           content:
             application/json:
@@ -89,7 +97,15 @@ paths:
         "429":
           description: Rate Limit Error
         "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
+          x-summary: Internal Server Error
       security:
       - resource-api-key: []
       - external-access-token: []
@@ -205,7 +221,15 @@ paths:
           description: The business metadata definitions. Errored business metadata
             definitions will have an additional error property.
         "400":
+          content:
+            application/json:
+              example:
+                error_code: 400
+                message: Bad Request
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
+          x-summary: Bad Request
         "401":
           content:
             application/json:
@@ -231,7 +255,15 @@ paths:
         "429":
           description: Rate Limit Error
         "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
+          x-summary: Internal Server Error
       security:
       - resource-api-key: []
       - external-access-token: []
@@ -415,7 +447,15 @@ paths:
           description: The business metadata definitions. Errored business metadata
             definitions will have an additional error property.
         "400":
+          content:
+            application/json:
+              example:
+                error_code: 400
+                message: Bad Request
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
+          x-summary: Bad Request
         "401":
           content:
             application/json:
@@ -441,7 +481,15 @@ paths:
         "429":
           description: Rate Limit Error
         "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
+          x-summary: Internal Server Error
       security:
       - resource-api-key: []
       - external-access-token: []
@@ -620,7 +668,15 @@ paths:
         "204":
           description: No Content
         "400":
+          content:
+            application/json:
+              example:
+                error_code: 400
+                message: Bad Request
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
+          x-summary: Bad Request
         "401":
           content:
             application/json:
@@ -646,7 +702,15 @@ paths:
         "429":
           description: Rate Limit Error
         "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
+          x-summary: Internal Server Error
       security:
       - resource-api-key: []
       - external-access-token: []
@@ -760,7 +824,15 @@ paths:
                 $ref: '#/components/schemas/BusinessMetadataDef'
           description: The business metadata definition
         "400":
+          content:
+            application/json:
+              example:
+                error_code: 400
+                message: Bad Request
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
+          x-summary: Bad Request
         "404":
           content:
             application/json:
@@ -796,7 +868,15 @@ paths:
         "429":
           description: Rate Limit Error
         "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
+          x-summary: Internal Server Error
       security:
       - resource-api-key: []
       - external-access-token: []
@@ -913,7 +993,15 @@ paths:
           description: The business metadata. Errored business metadata will have
             an additional error property.
         "400":
+          content:
+            application/json:
+              example:
+                error_code: 400
+                message: Bad Request
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
+          x-summary: Bad Request
         "401":
           content:
             application/json:
@@ -939,7 +1027,15 @@ paths:
         "429":
           description: Rate Limit Error
         "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
+          x-summary: Internal Server Error
       security:
       - resource-api-key: []
       - external-access-token: []
@@ -1077,7 +1173,15 @@ paths:
           description: The business metadata. Errored business metadata will have
             an additional error property.
         "400":
+          content:
+            application/json:
+              example:
+                error_code: 400
+                message: Bad Request
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
+          x-summary: Bad Request
         "401":
           content:
             application/json:
@@ -1103,7 +1207,15 @@ paths:
         "429":
           description: Rate Limit Error
         "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
+          x-summary: Internal Server Error
       security:
       - resource-api-key: []
       - external-access-token: []
@@ -1251,7 +1363,15 @@ paths:
                 type: array
           description: The business metadata
         "400":
+          content:
+            application/json:
+              example:
+                error_code: 400
+                message: Bad Request
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
+          x-summary: Bad Request
         "404":
           content:
             application/json:
@@ -1287,7 +1407,15 @@ paths:
         "429":
           description: Rate Limit Error
         "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
+          x-summary: Internal Server Error
       security:
       - resource-api-key: []
       - external-access-token: []
@@ -1414,7 +1542,15 @@ paths:
         "204":
           description: No Content
         "400":
+          content:
+            application/json:
+              example:
+                error_code: 400
+                message: Bad Request
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
+          x-summary: Bad Request
         "401":
           content:
             application/json:
@@ -1440,7 +1576,15 @@ paths:
         "429":
           description: Rate Limit Error
         "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
+          x-summary: Internal Server Error
       security:
       - resource-api-key: []
       - external-access-token: []
@@ -1556,7 +1700,15 @@ paths:
                 type: array
           description: The tags. Errored tags will have an additional error property.
         "400":
+          content:
+            application/json:
+              example:
+                error_code: 400
+                message: Bad Request
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
+          x-summary: Bad Request
         "401":
           content:
             application/json:
@@ -1592,7 +1744,15 @@ paths:
         "429":
           description: Rate Limit Error
         "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
+          x-summary: Internal Server Error
       security:
       - resource-api-key: []
       - external-access-token: []
@@ -1743,7 +1903,15 @@ paths:
                 type: array
           description: The tags. Errored tags will have an additional error property.
         "400":
+          content:
+            application/json:
+              example:
+                error_code: 400
+                message: Bad Request
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
+          x-summary: Bad Request
         "401":
           content:
             application/json:
@@ -1769,7 +1937,15 @@ paths:
         "429":
           description: Rate Limit Error
         "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
+          x-summary: Internal Server Error
       security:
       - resource-api-key: []
       - external-access-token: []
@@ -1946,7 +2122,15 @@ paths:
                 $ref: '#/components/schemas/EntityWithExtInfo'
           description: The entity
         "400":
+          content:
+            application/json:
+              example:
+                error_code: 400
+                message: Bad Request
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
+          x-summary: Bad Request
         "404":
           content:
             application/json:
@@ -1982,7 +2166,15 @@ paths:
         "429":
           description: Rate Limit Error
         "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
+          x-summary: Internal Server Error
       security:
       - resource-api-key: []
       - external-access-token: []
@@ -2107,7 +2299,15 @@ paths:
                 type: array
           description: The tags
         "400":
+          content:
+            application/json:
+              example:
+                error_code: 400
+                message: Bad Request
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
+          x-summary: Bad Request
         "404":
           content:
             application/json:
@@ -2143,7 +2343,15 @@ paths:
         "429":
           description: Rate Limit Error
         "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
+          x-summary: Internal Server Error
       security:
       - resource-api-key: []
       - external-access-token: []
@@ -2255,7 +2463,15 @@ paths:
                 $ref: '#/components/schemas/EntityPartialUpdateResponse'
           description: The updated entity
         "400":
+          content:
+            application/json:
+              example:
+                error_code: 400
+                message: Bad Request
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
+          x-summary: Bad Request
         "404":
           content:
             application/json:
@@ -2291,7 +2507,15 @@ paths:
         "429":
           description: Rate Limit Error
         "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
+          x-summary: Internal Server Error
       security:
       - resource-api-key: []
       - external-access-token: []
@@ -2628,7 +2852,15 @@ paths:
         "204":
           description: No Content
         "400":
+          content:
+            application/json:
+              example:
+                error_code: 400
+                message: Bad Request
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
+          x-summary: Bad Request
         "401":
           content:
             application/json:
@@ -2654,7 +2886,15 @@ paths:
         "429":
           description: Rate Limit Error
         "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
+          x-summary: Internal Server Error
       security:
       - resource-api-key: []
       - external-access-token: []
@@ -2882,7 +3122,15 @@ paths:
         "429":
           description: Rate Limit Error
         "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
+          x-summary: Internal Server Error
       security:
       - resource-api-key: []
       - external-access-token: []
@@ -3098,7 +3346,15 @@ paths:
         "429":
           description: Rate Limit Error
         "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
+          x-summary: Internal Server Error
       security:
       - resource-api-key: []
       - external-access-token: []
@@ -3215,7 +3471,15 @@ paths:
                 type: array
           description: The tag definitions
         "400":
+          content:
+            application/json:
+              example:
+                error_code: 400
+                message: Bad Request
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
+          x-summary: Bad Request
         "401":
           content:
             application/json:
@@ -3241,7 +3505,15 @@ paths:
         "429":
           description: Rate Limit Error
         "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
+          x-summary: Internal Server Error
       security:
       - resource-api-key: []
       - external-access-token: []
@@ -3357,7 +3629,15 @@ paths:
           description: The tag definitions. Errored tag definitions will have an additional
             error property.
         "400":
+          content:
+            application/json:
+              example:
+                error_code: 400
+                message: Bad Request
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
+          x-summary: Bad Request
         "401":
           content:
             application/json:
@@ -3393,7 +3673,15 @@ paths:
         "429":
           description: Rate Limit Error
         "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
+          x-summary: Internal Server Error
       security:
       - resource-api-key: []
       - external-access-token: []
@@ -3581,7 +3869,15 @@ paths:
           description: The tag definitions. Errored tag definitions will have an additional
             error property.
         "400":
+          content:
+            application/json:
+              example:
+                error_code: 400
+                message: Bad Request
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
+          x-summary: Bad Request
         "401":
           content:
             application/json:
@@ -3607,7 +3903,15 @@ paths:
         "429":
           description: Rate Limit Error
         "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
+          x-summary: Internal Server Error
       security:
       - resource-api-key: []
       - external-access-token: []
@@ -3790,7 +4094,15 @@ paths:
         "204":
           description: No Content
         "400":
+          content:
+            application/json:
+              example:
+                error_code: 400
+                message: Bad Request
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
+          x-summary: Bad Request
         "401":
           content:
             application/json:
@@ -3816,7 +4128,15 @@ paths:
         "429":
           description: Rate Limit Error
         "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
+          x-summary: Internal Server Error
       security:
       - resource-api-key: []
       - external-access-token: []
@@ -3930,7 +4250,15 @@ paths:
                 $ref: '#/components/schemas/TagDef'
           description: The tag definition
         "400":
+          content:
+            application/json:
+              example:
+                error_code: 400
+                message: Bad Request
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
+          x-summary: Bad Request
         "404":
           content:
             application/json:
@@ -3966,7 +4294,15 @@ paths:
         "429":
           description: Rate Limit Error
         "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
+          x-summary: Internal Server Error
       security:
       - resource-api-key: []
       - external-access-token: []
@@ -4059,6 +4395,16 @@ paths:
           IRestResponse response = client.Execute(request);
 components:
   responses:
+    BadRequestError:
+      content:
+        application/json:
+          example:
+            error_code: 400
+            message: Bad Request
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+      description: Bad Request
+      x-summary: Bad Request
     UnauthenticatedError:
       content:
         application/json:
@@ -4089,6 +4435,16 @@ components:
             $ref: '#/components/schemas/ErrorMessage'
       description: Not Found
       x-summary: Not Found
+    DefaultSystemError:
+      content:
+        application/json:
+          example:
+            error_code: 500
+            message: Oops, something went wrong
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+      description: Internal Server Error
+      x-summary: Internal Server Error
   schemas:
     Tag:
       example:
