@@ -36,6 +36,8 @@ import (
 
 // FcpmV2ComputePoolSpecUpdate The desired state of the Compute Pool
 type FcpmV2ComputePoolSpecUpdate struct {
+	// The name of the Flink compute pool.
+	DisplayName *string `json:"display_name,omitempty"`
 	// Maximum number of Confluent Flink Units (CFUs) that the Flink compute pool should auto-scale to.
 	MaxCfu *int32 `json:"max_cfu,omitempty"`
 	// The environment to which this belongs.
@@ -57,6 +59,38 @@ func NewFcpmV2ComputePoolSpecUpdate() *FcpmV2ComputePoolSpecUpdate {
 func NewFcpmV2ComputePoolSpecUpdateWithDefaults() *FcpmV2ComputePoolSpecUpdate {
 	this := FcpmV2ComputePoolSpecUpdate{}
 	return &this
+}
+
+// GetDisplayName returns the DisplayName field value if set, zero value otherwise.
+func (o *FcpmV2ComputePoolSpecUpdate) GetDisplayName() string {
+	if o == nil || o.DisplayName == nil {
+		var ret string
+		return ret
+	}
+	return *o.DisplayName
+}
+
+// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FcpmV2ComputePoolSpecUpdate) GetDisplayNameOk() (*string, bool) {
+	if o == nil || o.DisplayName == nil {
+		return nil, false
+	}
+	return o.DisplayName, true
+}
+
+// HasDisplayName returns a boolean if a field has been set.
+func (o *FcpmV2ComputePoolSpecUpdate) HasDisplayName() bool {
+	if o != nil && o.DisplayName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
+func (o *FcpmV2ComputePoolSpecUpdate) SetDisplayName(v string) {
+	o.DisplayName = &v
 }
 
 // GetMaxCfu returns the MaxCfu field value if set, zero value otherwise.
@@ -125,6 +159,7 @@ func (o *FcpmV2ComputePoolSpecUpdate) SetEnvironment(v GlobalObjectReference) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *FcpmV2ComputePoolSpecUpdate) Redact() {
+	o.recurseRedact(o.DisplayName)
 	o.recurseRedact(o.MaxCfu)
 	o.recurseRedact(o.Environment)
 }
@@ -161,6 +196,9 @@ func (o FcpmV2ComputePoolSpecUpdate) zeroField(v interface{}) {
 
 func (o FcpmV2ComputePoolSpecUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.DisplayName != nil {
+		toSerialize["display_name"] = o.DisplayName
+	}
 	if o.MaxCfu != nil {
 		toSerialize["max_cfu"] = o.MaxCfu
 	}

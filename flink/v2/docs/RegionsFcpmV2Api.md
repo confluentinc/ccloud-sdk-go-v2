@@ -68,7 +68,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[cloud-api-key](../README.md#cloud-api-key)
 
 ### HTTP request headers
 

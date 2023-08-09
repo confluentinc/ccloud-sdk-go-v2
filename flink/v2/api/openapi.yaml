@@ -304,7 +304,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       summary: List of Iam Bindings
       tags:
       - Iam Bindings (fcpm/v2)
@@ -669,7 +669,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       summary: Create an Iam Binding
       tags:
       - Iam Bindings (fcpm/v2)
@@ -1003,7 +1003,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       summary: Delete an Iam Binding
       tags:
       - Iam Bindings (fcpm/v2)
@@ -1339,7 +1339,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       summary: List of Compute Pools
       tags:
       - Compute Pools (fcpm/v2)
@@ -1727,7 +1727,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       summary: Create a Compute Pool
       tags:
       - Compute Pools (fcpm/v2)
@@ -2060,7 +2060,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       summary: Delete a Compute Pool
       tags:
       - Compute Pools (fcpm/v2)
@@ -2396,7 +2396,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       summary: Read a Compute Pool
       tags:
       - Compute Pools (fcpm/v2)
@@ -2764,7 +2764,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       summary: Update a Compute Pool
       tags:
       - Compute Pools (fcpm/v2)
@@ -3105,7 +3105,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       summary: List of Regions
       tags:
       - Regions (fcpm/v2)
@@ -3768,7 +3768,7 @@ components:
           example: flink_compute_pool_0
           pattern: ^(?:[0-9A-Za-z\-])[\w-]{0,31}$
           type: string
-          x-immutable: true
+          x-immutable: false
         cloud:
           description: The cloud service provider that runs the compute pool.
           example: AWS
@@ -4103,6 +4103,12 @@ components:
     fcpm.v2.ComputePoolSpecUpdate:
       description: The desired state of the Compute Pool
       properties:
+        display_name:
+          description: The name of the Flink compute pool.
+          example: flink_compute_pool_0
+          pattern: ^(?:[0-9A-Za-z\-])[\w-]{0,31}$
+          type: string
+          x-immutable: false
         max_cfu:
           description: |
             Maximum number of Confluent Flink Units (CFUs) that the Flink compute pool should auto-scale to.
@@ -4180,8 +4186,8 @@ components:
           type: string
       type: object
   securitySchemes:
-    api-key:
-      description: Authenticate with API Keys using HTTP Basic Auth. Treat the API
-        Key ID as the username and API Key Secret as the password.
+    cloud-api-key:
+      description: Authenticate with Cloud API Keys using HTTP Basic Auth. Treat the
+        Cloud API Key ID as the username and Cloud API Key Secret as the password.
       scheme: basic
       type: http
