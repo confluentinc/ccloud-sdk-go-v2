@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**DisplayName** | Pointer to **string** | The name of the Flink compute pool. | [optional] 
 **MaxCfu** | Pointer to **int32** | Maximum number of Confluent Flink Units (CFUs) that the Flink compute pool should auto-scale to.  | [optional] 
 **Environment** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which this belongs. | [optional] 
 
@@ -25,6 +26,31 @@ will change when the set of required properties is changed
 NewFcpmV2ComputePoolSpecUpdateWithDefaults instantiates a new FcpmV2ComputePoolSpecUpdate object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetDisplayName
+
+`func (o *FcpmV2ComputePoolSpecUpdate) GetDisplayName() string`
+
+GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
+
+### GetDisplayNameOk
+
+`func (o *FcpmV2ComputePoolSpecUpdate) GetDisplayNameOk() (*string, bool)`
+
+GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisplayName
+
+`func (o *FcpmV2ComputePoolSpecUpdate) SetDisplayName(v string)`
+
+SetDisplayName sets DisplayName field to given value.
+
+### HasDisplayName
+
+`func (o *FcpmV2ComputePoolSpecUpdate) HasDisplayName() bool`
+
+HasDisplayName returns a boolean if a field has been set.
 
 ### GetMaxCfu
 

@@ -115,8 +115,8 @@ CreateFcpmV2IamBinding Create an Iam Binding
 
 Make a request to create an iam binding.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFcpmV2IamBindingRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFcpmV2IamBindingRequest
 */
 func (a *IamBindingsFcpmV2ApiService) CreateFcpmV2IamBinding(ctx _context.Context) ApiCreateFcpmV2IamBindingRequest {
 	return ApiCreateFcpmV2IamBindingRequest{
@@ -126,7 +126,8 @@ func (a *IamBindingsFcpmV2ApiService) CreateFcpmV2IamBinding(ctx _context.Contex
 }
 
 // Execute executes the request
-//  @return FcpmV2IamBinding
+//
+//	@return FcpmV2IamBinding
 func (a *IamBindingsFcpmV2ApiService) CreateFcpmV2IamBindingExecute(r ApiCreateFcpmV2IamBindingRequest) (FcpmV2IamBinding, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -294,9 +295,9 @@ DeleteFcpmV2IamBinding Delete an Iam Binding
 
 Make a request to delete an iam binding.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the iam binding.
- @return ApiDeleteFcpmV2IamBindingRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the iam binding.
+	@return ApiDeleteFcpmV2IamBindingRequest
 */
 func (a *IamBindingsFcpmV2ApiService) DeleteFcpmV2IamBinding(ctx _context.Context, id string) ApiDeleteFcpmV2IamBindingRequest {
 	return ApiDeleteFcpmV2IamBindingRequest{
@@ -487,8 +488,8 @@ ListFcpmV2IamBindings List of Iam Bindings
 
 Retrieve a sorted, filtered, paginated list of all iam bindings.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListFcpmV2IamBindingsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListFcpmV2IamBindingsRequest
 */
 func (a *IamBindingsFcpmV2ApiService) ListFcpmV2IamBindings(ctx _context.Context) ApiListFcpmV2IamBindingsRequest {
 	return ApiListFcpmV2IamBindingsRequest{
@@ -498,7 +499,8 @@ func (a *IamBindingsFcpmV2ApiService) ListFcpmV2IamBindings(ctx _context.Context
 }
 
 // Execute executes the request
-//  @return FcpmV2IamBindingList
+//
+//	@return FcpmV2IamBindingList
 func (a *IamBindingsFcpmV2ApiService) ListFcpmV2IamBindingsExecute(r ApiListFcpmV2IamBindingsRequest) (FcpmV2IamBindingList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
