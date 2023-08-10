@@ -118,7 +118,7 @@ Class | Method | HTTP request | Description
 
 
 
-### api-key
+### cloud-api-key
 
 - **Type**: HTTP basic authentication
 
