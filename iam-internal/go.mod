@@ -1,4 +1,4 @@
-module github.com/confluentinc/ccloud-sdk-go-v2-internal
+module github.com/confluentinc/ccloud-sdk-go-v2-internal/iam-internal
 
 go 1.16
 
