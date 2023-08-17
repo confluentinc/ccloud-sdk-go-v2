@@ -5,7 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | A human-readable display name for the workspace. | [optional] 
-**ComputePool** | Pointer to [**WsV1beta1ComputePoolRef**](WsV1beta1ComputePoolRef.md) |  | [optional] 
+**ComputePool** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) |  | [optional] 
+**ServiceAccount** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) |  | [optional] 
 **Blocks** | Pointer to [**[]WsV1beta1Block**](WsV1beta1Block.md) | The ordered blocks for the new workspace | [optional] 
 
 ## Methods
@@ -54,20 +55,20 @@ HasDisplayName returns a boolean if a field has been set.
 
 ### GetComputePool
 
-`func (o *WsV1beta1WorkspaceSpec) GetComputePool() WsV1beta1ComputePoolRef`
+`func (o *WsV1beta1WorkspaceSpec) GetComputePool() EnvScopedObjectReference`
 
 GetComputePool returns the ComputePool field if non-nil, zero value otherwise.
 
 ### GetComputePoolOk
 
-`func (o *WsV1beta1WorkspaceSpec) GetComputePoolOk() (*WsV1beta1ComputePoolRef, bool)`
+`func (o *WsV1beta1WorkspaceSpec) GetComputePoolOk() (*EnvScopedObjectReference, bool)`
 
 GetComputePoolOk returns a tuple with the ComputePool field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetComputePool
 
-`func (o *WsV1beta1WorkspaceSpec) SetComputePool(v WsV1beta1ComputePoolRef)`
+`func (o *WsV1beta1WorkspaceSpec) SetComputePool(v EnvScopedObjectReference)`
 
 SetComputePool sets ComputePool field to given value.
 
@@ -76,6 +77,31 @@ SetComputePool sets ComputePool field to given value.
 `func (o *WsV1beta1WorkspaceSpec) HasComputePool() bool`
 
 HasComputePool returns a boolean if a field has been set.
+
+### GetServiceAccount
+
+`func (o *WsV1beta1WorkspaceSpec) GetServiceAccount() GlobalObjectReference`
+
+GetServiceAccount returns the ServiceAccount field if non-nil, zero value otherwise.
+
+### GetServiceAccountOk
+
+`func (o *WsV1beta1WorkspaceSpec) GetServiceAccountOk() (*GlobalObjectReference, bool)`
+
+GetServiceAccountOk returns a tuple with the ServiceAccount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServiceAccount
+
+`func (o *WsV1beta1WorkspaceSpec) SetServiceAccount(v GlobalObjectReference)`
+
+SetServiceAccount sets ServiceAccount field to given value.
+
+### HasServiceAccount
+
+`func (o *WsV1beta1WorkspaceSpec) HasServiceAccount() bool`
+
+HasServiceAccount returns a boolean if a field has been set.
 
 ### GetBlocks
 

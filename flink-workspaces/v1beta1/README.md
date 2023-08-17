@@ -88,15 +88,16 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [EnvScopedObjectReference](docs/EnvScopedObjectReference.md)
  - [Error](docs/Error.md)
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
+ - [GlobalObjectReference](docs/GlobalObjectReference.md)
  - [ListMeta](docs/ListMeta.md)
  - [MultipleSearchFilter](docs/MultipleSearchFilter.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [WsV1beta1Block](docs/WsV1beta1Block.md)
  - [WsV1beta1CodeOptions](docs/WsV1beta1CodeOptions.md)
- - [WsV1beta1ComputePoolRef](docs/WsV1beta1ComputePoolRef.md)
  - [WsV1beta1Workspace](docs/WsV1beta1Workspace.md)
  - [WsV1beta1WorkspaceList](docs/WsV1beta1WorkspaceList.md)
  - [WsV1beta1WorkspaceSpec](docs/WsV1beta1WorkspaceSpec.md)

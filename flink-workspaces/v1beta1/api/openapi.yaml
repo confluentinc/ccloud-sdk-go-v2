@@ -360,9 +360,15 @@ paths:
                           or generated if absent.
                         maxLength: 255
                         type: string
+                      service_account:
+                        description: The service account that clients can use to execute
+                          the workspace's code blocks.
+                        example:
+                          id: sa-00000
+                        nullable: true
                       compute_pool:
                         description: The compute pool in the same environment that
-                          can be used to execute the workspace's code blocks.
+                          clients can use to execute the workspace's code blocks.
                         example:
                           id: lfcp-00000
                         nullable: true
@@ -586,13 +592,13 @@ paths:
             --url 'https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"name":"my-workspace","spec":{"display_name":"string","compute_pool":{"id":"lfcp-00000","environment":"string"},"blocks":null}}'
+            --data '{"name":"my-workspace","spec":{"display_name":"string","compute_pool":{"id":"lfcp-00000"},"service_account":{"id":"sa-00000"},"blocks":null}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"my-workspace\",\"spec\":{\"display_name\":\"string\",\"compute_pool\":{\"id\":\"lfcp-00000\",\"environment\":\"string\"},\"blocks\":null}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"my-workspace\",\"spec\":{\"display_name\":\"string\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":null}}");
           Request request = new Request.Builder()
             .url("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces")
             .post(body)
@@ -606,19 +612,20 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"name\\\":\\\"my-workspace\\\"\
           ,\\\"spec\\\":{\\\"display_name\\\":\\\"string\\\",\\\"compute_pool\\\"\
-          :{\\\"id\\\":\\\"lfcp-00000\\\",\\\"environment\\\":\\\"string\\\"},\\\"\
-          blocks\\\":null}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
-          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          :{\\\"id\\\":\\\"lfcp-00000\\\"},\\\"service_account\\\":{\\\"id\\\":\\\"\
+          sa-00000\\\"},\\\"blocks\\\":null}}\")\n\n\treq, _ := http.NewRequest(\"\
+          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
 
-          payload = "{\"name\":\"my-workspace\",\"spec\":{\"display_name\":\"string\",\"compute_pool\":{\"id\":\"lfcp-00000\",\"environment\":\"string\"},\"blocks\":null}}"
+          payload = "{\"name\":\"my-workspace\",\"spec\":{\"display_name\":\"string\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":null}}"
 
           headers = {
               'content-type': "application/json",
@@ -663,7 +670,8 @@ paths:
             name: 'my-workspace',
             spec: {
               display_name: 'string',
-              compute_pool: {id: 'lfcp-00000', environment: 'string'},
+              compute_pool: {id: 'lfcp-00000'},
+              service_account: {id: 'sa-00000'},
               blocks: null
             }
           }));
@@ -680,7 +688,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"my-workspace\",\"spec\":{\"display_name\":\"string\",\"compute_pool\":{\"id\":\"lfcp-00000\",\"environment\":\"string\"},\"blocks\":null}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"my-workspace\",\"spec\":{\"display_name\":\"string\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":null}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -689,7 +697,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"name\":\"my-workspace\",\"spec\":{\"display_name\":\"string\",\"compute_pool\":{\"id\":\"lfcp-00000\",\"environment\":\"string\"},\"blocks\":null}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"name\":\"my-workspace\",\"spec\":{\"display_name\":\"string\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":null}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Workspaces API v1beta1
   /ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}:
@@ -1003,6 +1011,18 @@ paths:
                       - uid
                       type: object
                     spec:
+                      properties:
+                        compute_pool:
+                          example:
+                            id: lfcp-00000
+                            environment: env-12345
+                            related: https://flink.region.provider.confluent.cloud/fcpm/v2/compute-pools/lfcp-00000
+                            resource_name: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-12345/flink-region=aws.us-east-2/compute-pool=lfcp-00000
+                        service_account:
+                          example:
+                            id: sa-4voj5e
+                            related: https://api.confluent.cloud/iam/v2/service-accounts/sa-4voj5e
+                            resource_name: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/service-account=sa-4voj5e
                       required:
                       - display_name
                       type: object
@@ -1281,8 +1301,10 @@ paths:
                       compute_pool:
                         example:
                           id: lfcp-00000
-                          related: https://flink.region.provider.confluent.cloud/fcpm/v2/compute-pools/lfcp-00000
-                          resource_name: https://flink.region.provider.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-12345/flink-region=aws.us-east-2/compute-pool=lfcp-00000
+                        nullable: true
+                      service_account:
+                        example:
+                          id: sa-00000
                         nullable: true
                     required:
                     - display_name
@@ -1505,13 +1527,13 @@ paths:
             --url 'https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"name":"string","spec":{"display_name":"My first workspace","compute_pool":{"id":"lfcp-00000","environment":"string","related":"https://flink.region.provider.confluent.cloud/fcpm/v2/compute-pools/lfcp-00000","resource_name":"https://flink.region.provider.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-12345/flink-region=aws.us-east-2/compute-pool=lfcp-00000"},"blocks":[{"type":"CODE","code_options":{"source":["SELECT * FROM my-catalog.cluster_3.topic-1;"]}}]}}'
+            --data '{"name":"string","spec":{"display_name":"My first workspace","compute_pool":{"id":"lfcp-00000"},"service_account":{"id":"sa-00000"},"blocks":[{"type":"CODE","code_options":{"source":["SELECT * FROM my-catalog.cluster_3.topic-1;"]}}]}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"string\",\"spec\":{\"display_name\":\"My first workspace\",\"compute_pool\":{\"id\":\"lfcp-00000\",\"environment\":\"string\",\"related\":\"https://flink.region.provider.confluent.cloud/fcpm/v2/compute-pools/lfcp-00000\",\"resource_name\":\"https://flink.region.provider.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-12345/flink-region=aws.us-east-2/compute-pool=lfcp-00000\"},\"blocks\":[{\"type\":\"CODE\",\"code_options\":{\"source\":[\"SELECT * FROM my-catalog.cluster_3.topic-1;\"]}}]}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"string\",\"spec\":{\"display_name\":\"My first workspace\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":[{\"type\":\"CODE\",\"code_options\":{\"source\":[\"SELECT * FROM my-catalog.cluster_3.topic-1;\"]}}]}}");
           Request request = new Request.Builder()
             .url("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}")
             .put(body)
@@ -1525,12 +1547,10 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"name\\\":\\\"string\\\",\\\"spec\\\
           \":{\\\"display_name\\\":\\\"My first workspace\\\",\\\"compute_pool\\\"\
-          :{\\\"id\\\":\\\"lfcp-00000\\\",\\\"environment\\\":\\\"string\\\",\\\"\
-          related\\\":\\\"https://flink.region.provider.confluent.cloud/fcpm/v2/compute-pools/lfcp-00000\\\
-          \",\\\"resource_name\\\":\\\"https://flink.region.provider.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-12345/flink-region=aws.us-east-2/compute-pool=lfcp-00000\\\
-          \"},\\\"blocks\\\":[{\\\"type\\\":\\\"CODE\\\",\\\"code_options\\\":{\\\"\
-          source\\\":[\\\"SELECT * FROM my-catalog.cluster_3.topic-1;\\\"]}}]}}\"\
-          )\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"\
+          :{\\\"id\\\":\\\"lfcp-00000\\\"},\\\"service_account\\\":{\\\"id\\\":\\\"\
+          sa-00000\\\"},\\\"blocks\\\":[{\\\"type\\\":\\\"CODE\\\",\\\"code_options\\\
+          \":{\\\"source\\\":[\\\"SELECT * FROM my-catalog.cluster_3.topic-1;\\\"\
+          ]}}]}}\")\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"\
           content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
           , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1541,7 +1561,7 @@ paths:
 
           conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
 
-          payload = "{\"name\":\"string\",\"spec\":{\"display_name\":\"My first workspace\",\"compute_pool\":{\"id\":\"lfcp-00000\",\"environment\":\"string\",\"related\":\"https://flink.region.provider.confluent.cloud/fcpm/v2/compute-pools/lfcp-00000\",\"resource_name\":\"https://flink.region.provider.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-12345/flink-region=aws.us-east-2/compute-pool=lfcp-00000\"},\"blocks\":[{\"type\":\"CODE\",\"code_options\":{\"source\":[\"SELECT * FROM my-catalog.cluster_3.topic-1;\"]}}]}}"
+          payload = "{\"name\":\"string\",\"spec\":{\"display_name\":\"My first workspace\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":[{\"type\":\"CODE\",\"code_options\":{\"source\":[\"SELECT * FROM my-catalog.cluster_3.topic-1;\"]}}]}}"
 
           headers = {
               'content-type': "application/json",
@@ -1586,12 +1606,8 @@ paths:
             name: 'string',
             spec: {
               display_name: 'My first workspace',
-              compute_pool: {
-                id: 'lfcp-00000',
-                environment: 'string',
-                related: 'https://flink.region.provider.confluent.cloud/fcpm/v2/compute-pools/lfcp-00000',
-                resource_name: 'https://flink.region.provider.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-12345/flink-region=aws.us-east-2/compute-pool=lfcp-00000'
-              },
+              compute_pool: {id: 'lfcp-00000'},
+              service_account: {id: 'sa-00000'},
               blocks: [
                 {
                   type: 'CODE',
@@ -1613,7 +1629,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"string\",\"spec\":{\"display_name\":\"My first workspace\",\"compute_pool\":{\"id\":\"lfcp-00000\",\"environment\":\"string\",\"related\":\"https://flink.region.provider.confluent.cloud/fcpm/v2/compute-pools/lfcp-00000\",\"resource_name\":\"https://flink.region.provider.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-12345/flink-region=aws.us-east-2/compute-pool=lfcp-00000\"},\"blocks\":[{\"type\":\"CODE\",\"code_options\":{\"source\":[\"SELECT * FROM my-catalog.cluster_3.topic-1;\"]}}]}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"string\",\"spec\":{\"display_name\":\"My first workspace\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":[{\"type\":\"CODE\",\"code_options\":{\"source\":[\"SELECT * FROM my-catalog.cluster_3.topic-1;\"]}}]}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1622,7 +1638,7 @@ paths:
           var request = new RestRequest(Method.PUT);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"name\":\"string\",\"spec\":{\"display_name\":\"My first workspace\",\"compute_pool\":{\"id\":\"lfcp-00000\",\"environment\":\"string\",\"related\":\"https://flink.region.provider.confluent.cloud/fcpm/v2/compute-pools/lfcp-00000\",\"resource_name\":\"https://flink.region.provider.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-12345/flink-region=aws.us-east-2/compute-pool=lfcp-00000\"},\"blocks\":[{\"type\":\"CODE\",\"code_options\":{\"source\":[\"SELECT * FROM my-catalog.cluster_3.topic-1;\"]}}]}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"name\":\"string\",\"spec\":{\"display_name\":\"My first workspace\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":[{\"type\":\"CODE\",\"code_options\":{\"source\":[\"SELECT * FROM my-catalog.cluster_3.topic-1;\"]}}]}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Workspace API v1beta1
 components:
@@ -1954,7 +1970,11 @@ components:
           example: My first workspace
           type: string
         compute_pool:
-          $ref: '#/components/schemas/ws.v1beta1.ComputePoolRef'
+          allOf:
+          - $ref: '#/components/schemas/EnvScopedObjectReference'
+        service_account:
+          allOf:
+          - $ref: '#/components/schemas/GlobalObjectReference'
         blocks:
           description: The ordered blocks for the new workspace
           items:
@@ -2022,42 +2042,6 @@ components:
           example: https://flink.us-west1.aws.confluent.cloud/ws/v1beta1/organizations/9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environments/env-12345/workspaces?page_token=UvmDWOB1iwfAIBPj6EYb
           type: string
       type: object
-    ws.v1beta1.ComputePoolRef:
-      description: A reference to a logical compute pool
-      properties:
-        id:
-          description: The ID associated with the compute pool in context.
-          example: lfc-00000
-          maxLength: 255
-          type: string
-        environment:
-          description: Environment of the referred resource, if env-scoped
-          maxLength: 255
-          minLength: 1
-          type: string
-        related:
-          description: API URL for accessing or modifying the referred object
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-        resource_name:
-          description: CRN reference to the referred resource
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-        api_version:
-          description: API group and version of the referred resource
-          minLength: 1
-          readOnly: true
-          type: string
-        kind:
-          description: Kind of the referred resource
-          minLength: 1
-          readOnly: true
-          type: string
-      type: object
     ws.v1beta1.Block:
       description: A block within a workspace.
       properties:
@@ -2083,6 +2067,65 @@ components:
           type: array
       required:
       - source
+      type: object
+    GlobalObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
+    EnvScopedObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        environment:
+          description: Environment of the referred resource, which is the same environment
+            as the workspace
+          maxLength: 255
+          minLength: 1
+          readOnly: true
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
       type: object
     Failure:
       description: Provides information about problems encountered while performing

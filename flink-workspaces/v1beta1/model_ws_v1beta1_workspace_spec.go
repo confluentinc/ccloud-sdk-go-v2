@@ -37,8 +37,9 @@ import (
 // WsV1beta1WorkspaceSpec The specification for the Workspace
 type WsV1beta1WorkspaceSpec struct {
 	// A human-readable display name for the workspace.
-	DisplayName *string                  `json:"display_name,omitempty"`
-	ComputePool *WsV1beta1ComputePoolRef `json:"compute_pool,omitempty"`
+	DisplayName    *string                   `json:"display_name,omitempty"`
+	ComputePool    *EnvScopedObjectReference `json:"compute_pool,omitempty"`
+	ServiceAccount *GlobalObjectReference    `json:"service_account,omitempty"`
 	// The ordered blocks for the new workspace
 	Blocks *[]WsV1beta1Block `json:"blocks,omitempty"`
 }
@@ -93,9 +94,9 @@ func (o *WsV1beta1WorkspaceSpec) SetDisplayName(v string) {
 }
 
 // GetComputePool returns the ComputePool field value if set, zero value otherwise.
-func (o *WsV1beta1WorkspaceSpec) GetComputePool() WsV1beta1ComputePoolRef {
+func (o *WsV1beta1WorkspaceSpec) GetComputePool() EnvScopedObjectReference {
 	if o == nil || o.ComputePool == nil {
-		var ret WsV1beta1ComputePoolRef
+		var ret EnvScopedObjectReference
 		return ret
 	}
 	return *o.ComputePool
@@ -103,7 +104,7 @@ func (o *WsV1beta1WorkspaceSpec) GetComputePool() WsV1beta1ComputePoolRef {
 
 // GetComputePoolOk returns a tuple with the ComputePool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WsV1beta1WorkspaceSpec) GetComputePoolOk() (*WsV1beta1ComputePoolRef, bool) {
+func (o *WsV1beta1WorkspaceSpec) GetComputePoolOk() (*EnvScopedObjectReference, bool) {
 	if o == nil || o.ComputePool == nil {
 		return nil, false
 	}
@@ -119,9 +120,41 @@ func (o *WsV1beta1WorkspaceSpec) HasComputePool() bool {
 	return false
 }
 
-// SetComputePool gets a reference to the given WsV1beta1ComputePoolRef and assigns it to the ComputePool field.
-func (o *WsV1beta1WorkspaceSpec) SetComputePool(v WsV1beta1ComputePoolRef) {
+// SetComputePool gets a reference to the given EnvScopedObjectReference and assigns it to the ComputePool field.
+func (o *WsV1beta1WorkspaceSpec) SetComputePool(v EnvScopedObjectReference) {
 	o.ComputePool = &v
+}
+
+// GetServiceAccount returns the ServiceAccount field value if set, zero value otherwise.
+func (o *WsV1beta1WorkspaceSpec) GetServiceAccount() GlobalObjectReference {
+	if o == nil || o.ServiceAccount == nil {
+		var ret GlobalObjectReference
+		return ret
+	}
+	return *o.ServiceAccount
+}
+
+// GetServiceAccountOk returns a tuple with the ServiceAccount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WsV1beta1WorkspaceSpec) GetServiceAccountOk() (*GlobalObjectReference, bool) {
+	if o == nil || o.ServiceAccount == nil {
+		return nil, false
+	}
+	return o.ServiceAccount, true
+}
+
+// HasServiceAccount returns a boolean if a field has been set.
+func (o *WsV1beta1WorkspaceSpec) HasServiceAccount() bool {
+	if o != nil && o.ServiceAccount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetServiceAccount gets a reference to the given GlobalObjectReference and assigns it to the ServiceAccount field.
+func (o *WsV1beta1WorkspaceSpec) SetServiceAccount(v GlobalObjectReference) {
+	o.ServiceAccount = &v
 }
 
 // GetBlocks returns the Blocks field value if set, zero value otherwise.
@@ -160,6 +193,7 @@ func (o *WsV1beta1WorkspaceSpec) SetBlocks(v []WsV1beta1Block) {
 func (o *WsV1beta1WorkspaceSpec) Redact() {
 	o.recurseRedact(o.DisplayName)
 	o.recurseRedact(o.ComputePool)
+	o.recurseRedact(o.ServiceAccount)
 	o.recurseRedact(o.Blocks)
 }
 
@@ -200,6 +234,9 @@ func (o WsV1beta1WorkspaceSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.ComputePool != nil {
 		toSerialize["compute_pool"] = o.ComputePool
+	}
+	if o.ServiceAccount != nil {
+		toSerialize["service_account"] = o.ServiceAccount
 	}
 	if o.Blocks != nil {
 		toSerialize["blocks"] = o.Blocks
