@@ -73,7 +73,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
