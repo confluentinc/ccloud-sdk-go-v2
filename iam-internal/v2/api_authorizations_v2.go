@@ -31,7 +31,6 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
-	"strings"
 )
 
 // Linger please
@@ -47,14 +46,13 @@ type AuthorizationsV2Api interface {
 		Make a request to authorize an authorization.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the authorization.
 		 @return ApiAuthorizeV2AuthorizationRequest
 	*/
-	AuthorizeV2Authorization(ctx _context.Context, id string) ApiAuthorizeV2AuthorizationRequest
+	AuthorizeV2Authorization(ctx _context.Context) ApiAuthorizeV2AuthorizationRequest
 
 	// AuthorizeV2AuthorizationExecute executes the request
-	//  @return []string
-	AuthorizeV2AuthorizationExecute(r ApiAuthorizeV2AuthorizationRequest) ([]string, *_nethttp.Response, error)
+	//  @return IamV2AuthorizeResponse
+	AuthorizeV2AuthorizationExecute(r ApiAuthorizeV2AuthorizationRequest) (IamV2AuthorizeResponse, *_nethttp.Response, error)
 }
 
 // AuthorizationsV2ApiService AuthorizationsV2Api service
@@ -63,7 +61,6 @@ type AuthorizationsV2ApiService service
 type ApiAuthorizeV2AuthorizationRequest struct {
 	ctx                   _context.Context
 	ApiService            AuthorizationsV2Api
-	id                    string
 	iamV2AuthorizeRequest *IamV2AuthorizeRequest
 }
 
@@ -72,7 +69,7 @@ func (r ApiAuthorizeV2AuthorizationRequest) IamV2AuthorizeRequest(iamV2Authorize
 	return r
 }
 
-func (r ApiAuthorizeV2AuthorizationRequest) Execute() ([]string, *_nethttp.Response, error) {
+func (r ApiAuthorizeV2AuthorizationRequest) Execute() (IamV2AuthorizeResponse, *_nethttp.Response, error) {
 	return r.ApiService.AuthorizeV2AuthorizationExecute(r)
 }
 
@@ -82,28 +79,26 @@ AuthorizeV2Authorization Authorize an Authorization
 Make a request to authorize an authorization.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the authorization.
 	@return ApiAuthorizeV2AuthorizationRequest
 */
-func (a *AuthorizationsV2ApiService) AuthorizeV2Authorization(ctx _context.Context, id string) ApiAuthorizeV2AuthorizationRequest {
+func (a *AuthorizationsV2ApiService) AuthorizeV2Authorization(ctx _context.Context) ApiAuthorizeV2AuthorizationRequest {
 	return ApiAuthorizeV2AuthorizationRequest{
 		ApiService: a,
 		ctx:        ctx,
-		id:         id,
 	}
 }
 
 // Execute executes the request
 //
-//	@return []string
-func (a *AuthorizationsV2ApiService) AuthorizeV2AuthorizationExecute(r ApiAuthorizeV2AuthorizationRequest) ([]string, *_nethttp.Response, error) {
+//	@return IamV2AuthorizeResponse
+func (a *AuthorizationsV2ApiService) AuthorizeV2AuthorizationExecute(r ApiAuthorizeV2AuthorizationRequest) (IamV2AuthorizeResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []string
+		localVarReturnValue  IamV2AuthorizeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuthorizationsV2ApiService.AuthorizeV2Authorization")
@@ -111,8 +106,7 @@ func (a *AuthorizationsV2ApiService) AuthorizeV2AuthorizationExecute(r ApiAuthor
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/authorize/{id}/authorize"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath := localBasePath + "/iam/v2/authorize"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}

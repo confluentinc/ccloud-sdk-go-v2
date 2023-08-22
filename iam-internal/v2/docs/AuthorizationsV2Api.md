@@ -4,13 +4,13 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AuthorizeV2Authorization**](AuthorizationsV2Api.md#AuthorizeV2Authorization) | **Post** /v2/authorize/{id}/authorize | Authorize an Authorization
+[**AuthorizeV2Authorization**](AuthorizationsV2Api.md#AuthorizeV2Authorization) | **Post** /iam/v2/authorize | Authorize an Authorization
 
 
 
 ## AuthorizeV2Authorization
 
-> []string AuthorizeV2Authorization(ctx, id).IamV2AuthorizeRequest(iamV2AuthorizeRequest).Execute()
+> IamV2AuthorizeResponse AuthorizeV2Authorization(ctx).IamV2AuthorizeRequest(iamV2AuthorizeRequest).Execute()
 
 Authorize an Authorization
 
@@ -29,17 +29,16 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | The unique identifier for the authorization.
     iamV2AuthorizeRequest := *openapiclient.NewIamV2AuthorizeRequest() // IamV2AuthorizeRequest | 
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AuthorizationsV2Api.AuthorizeV2Authorization(context.Background(), id).IamV2AuthorizeRequest(iamV2AuthorizeRequest).Execute()
+    resp, r, err := api_client.AuthorizationsV2Api.AuthorizeV2Authorization(context.Background()).IamV2AuthorizeRequest(iamV2AuthorizeRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AuthorizationsV2Api.AuthorizeV2Authorization``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `AuthorizeV2Authorization`: []string
+    // response from `AuthorizeV2Authorization`: IamV2AuthorizeResponse
     fmt.Fprintf(os.Stdout, "Response from `AuthorizationsV2Api.AuthorizeV2Authorization`: %v\n", resp)
 }
 ```
@@ -47,10 +46,6 @@ func main() {
 ### Path Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the authorization. | 
 
 ### Other Parameters
 
@@ -59,12 +54,11 @@ Other parameters are passed through a pointer to a apiAuthorizeV2AuthorizationRe
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
  **iamV2AuthorizeRequest** | [**IamV2AuthorizeRequest**](IamV2AuthorizeRequest.md) |  | 
 
 ### Return type
 
-**[]string**
+[**IamV2AuthorizeResponse**](iam.v2.AuthorizeResponse.md)
 
 ### Authorization
 

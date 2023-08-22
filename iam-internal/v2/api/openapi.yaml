@@ -768,19 +768,10 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"send_invitation\":true,\"status\":\"string\",\"user\":{\"email\":\"marty.mcfly@example.com\",\"full_name\":\"Marty McFly\"},\"role_bindings\":[{\"principal\":\"User:u-111aaa\",\"role_name\":\"CloudClusterAdmin\",\"crn_pattern\":\"crn://confluent.cloud/organization=1111aaaa-11aa-11aa-11aa-111111aaaaaa/environment=env-aaa1111/cloud-cluster=lkc-1111aaa\"}]}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-  /v2/authorize/{id}/authorize:
+  /iam/v2/authorize:
     post:
       description: Make a request to authorize an authorization.
       operationId: authorizeV2Authorization
-      parameters:
-      - description: The unique identifier for the authorization.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
       requestBody:
         content:
           application/json:
@@ -795,9 +786,10 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  type: string
-                type: array
+                allOf:
+                - $ref: '#/components/schemas/iam.v2.AuthorizeResponse'
+                - type: object
+                type: object
           description: Query was successfully processed. Response is an array of Allowed/Denied
             decisions in the same order as the "actions" array in the request.
         "400":
@@ -876,18 +868,18 @@ paths:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url https://api.confluent.cloud/v2/authorize/%7Bid%7D/authorize \
+            --url https://api.confluent.cloud/iam/v2/authorize \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"target_principal_context":{"principal_ids":["string"]},"request_context":{"ip_address":"string"},"actions":[{"resource_name":"string","operation":"string"}]}'
+            --data '{"principal_context":{"principal_ids":["string"]},"request_context":{"ip_address":"string"},"actions":[{"resource_name":"string","operation":"string"}]}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"target_principal_context\":{\"principal_ids\":[\"string\"]},\"request_context\":{\"ip_address\":\"string\"},\"actions\":[{\"resource_name\":\"string\",\"operation\":\"string\"}]}");
+          RequestBody body = RequestBody.create(mediaType, "{\"principal_context\":{\"principal_ids\":[\"string\"]},\"request_context\":{\"ip_address\":\"string\"},\"actions\":[{\"resource_name\":\"string\",\"operation\":\"string\"}]}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/v2/authorize/%7Bid%7D/authorize")
+            .url("https://api.confluent.cloud/iam/v2/authorize")
             .post(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -896,30 +888,29 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/v2/authorize/%7Bid%7D/authorize\"\
-          \n\n\tpayload := strings.NewReader(\"{\\\"target_principal_context\\\":{\\\
-          \"principal_ids\\\":[\\\"string\\\"]},\\\"request_context\\\":{\\\"ip_address\\\
-          \":\\\"string\\\"},\\\"actions\\\":[{\\\"resource_name\\\":\\\"string\\\"\
-          ,\\\"operation\\\":\\\"string\\\"}]}\")\n\n\treq, _ := http.NewRequest(\"\
-          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/authorize\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"principal_context\\\":{\\\"principal_ids\\\
+          \":[\\\"string\\\"]},\\\"request_context\\\":{\\\"ip_address\\\":\\\"string\\\
+          \"},\\\"actions\\\":[{\\\"resource_name\\\":\\\"string\\\",\\\"operation\\\
+          \":\\\"string\\\"}]}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"target_principal_context\":{\"principal_ids\":[\"string\"]},\"request_context\":{\"ip_address\":\"string\"},\"actions\":[{\"resource_name\":\"string\",\"operation\":\"string\"}]}"
+          payload = "{\"principal_context\":{\"principal_ids\":[\"string\"]},\"request_context\":{\"ip_address\":\"string\"},\"actions\":[{\"resource_name\":\"string\",\"operation\":\"string\"}]}"
 
           headers = {
               'content-type': "application/json",
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("POST", "/v2/authorize/%7Bid%7D/authorize", payload, headers)
+          conn.request("POST", "/iam/v2/authorize", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -933,7 +924,7 @@ paths:
             "method": "POST",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/v2/authorize/%7Bid%7D/authorize",
+            "path": "/iam/v2/authorize",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -954,7 +945,7 @@ paths:
           });
 
           req.write(JSON.stringify({
-            target_principal_context: {principal_ids: ['string']},
+            principal_context: {principal_ids: ['string']},
             request_context: {ip_address: 'string'},
             actions: [{resource_name: 'string', operation: 'string'}]
           }));
@@ -964,23 +955,23 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/v2/authorize/%7Bid%7D/authorize");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/authorize");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"target_principal_context\":{\"principal_ids\":[\"string\"]},\"request_context\":{\"ip_address\":\"string\"},\"actions\":[{\"resource_name\":\"string\",\"operation\":\"string\"}]}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"principal_context\":{\"principal_ids\":[\"string\"]},\"request_context\":{\"ip_address\":\"string\"},\"actions\":[{\"resource_name\":\"string\",\"operation\":\"string\"}]}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/v2/authorize/%7Bid%7D/authorize");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/authorize");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"target_principal_context\":{\"principal_ids\":[\"string\"]},\"request_context\":{\"ip_address\":\"string\"},\"actions\":[{\"resource_name\":\"string\",\"operation\":\"string\"}]}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"principal_context\":{\"principal_ids\":[\"string\"]},\"request_context\":{\"ip_address\":\"string\"},\"actions\":[{\"resource_name\":\"string\",\"operation\":\"string\"}]}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
 components:
   responses:
@@ -1472,13 +1463,52 @@ components:
                 example: https://api.confluent.cloud/iam/v2/authorize-requests/ar-12345
               resource_name:
                 example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/authorize-request=ar-12345
-        target_principal_context:
-          $ref: '#/components/schemas/iam_v2_AuthorizeRequest_target_principal_context'
+        principal_context:
+          $ref: '#/components/schemas/iam_v2_AuthorizeRequest_principal_context'
         request_context:
           $ref: '#/components/schemas/iam_v2_AuthorizeRequest_request_context'
         actions:
           items:
             $ref: '#/components/schemas/iam_v2_AuthorizeRequest_actions'
+          type: array
+      type: object
+    iam.v2.AuthorizeResponse:
+      description: Authorization response
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - iam/v2
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - AuthorizeResponse
+          readOnly: true
+          type: string
+        id:
+          description: ID is the "natural identifier" for an object within its scope/namespace;
+            it is normally unique across time but not space. That is, you can assume
+            that the ID will not be reclaimed and reused after an object is deleted
+            ("time"); however, it may collide with IDs for other object `kinds` or
+            objects of the same `kind` within a different scope/namespace ("space").
+          example: dlz-f3a90de
+          maxLength: 255
+          readOnly: true
+          type: string
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/ObjectMeta'
+          - properties:
+              self:
+                example: https://api.confluent.cloud/iam/v2/authorize-responses/ar-12345
+              resource_name:
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/authorize-response=ar-12345
+        results:
+          items:
+            type: string
           type: array
       type: object
     ObjectMeta:
@@ -1646,7 +1676,7 @@ components:
         source:
           $ref: '#/components/schemas/Error_source'
       type: object
-    iam_v2_AuthorizeRequest_target_principal_context:
+    iam_v2_AuthorizeRequest_principal_context:
       description: context related to principal
       properties:
         principal_ids:

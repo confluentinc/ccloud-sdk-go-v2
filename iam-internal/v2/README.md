@@ -79,7 +79,7 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AuthorizationsV2Api* | [**AuthorizeV2Authorization**](docs/AuthorizationsV2Api.md#authorizev2authorization) | **Post** /v2/authorize/{id}/authorize | Authorize an Authorization
+*AuthorizationsV2Api* | [**AuthorizeV2Authorization**](docs/AuthorizationsV2Api.md#authorizev2authorization) | **Post** /iam/v2/authorize | Authorize an Authorization
 *SsoConnectionsV2Api* | [**CreateV2SsoConnection**](docs/SsoConnectionsV2Api.md#createv2ssoconnection) | **Post** /v2/sso-connections | Create a Sso Connection
 *UserInvitationsV2Api* | [**CreateV2UserInvitation**](docs/UserInvitationsV2Api.md#createv2userinvitation) | **Post** /v2/user-invitations | Create a User Invitation
 
@@ -91,8 +91,9 @@ Class | Method | HTTP request | Description
  - [Failure](docs/Failure.md)
  - [IamV2AuthorizeRequest](docs/IamV2AuthorizeRequest.md)
  - [IamV2AuthorizeRequestActions](docs/IamV2AuthorizeRequestActions.md)
+ - [IamV2AuthorizeRequestPrincipalContext](docs/IamV2AuthorizeRequestPrincipalContext.md)
  - [IamV2AuthorizeRequestRequestContext](docs/IamV2AuthorizeRequestRequestContext.md)
- - [IamV2AuthorizeRequestTargetPrincipalContext](docs/IamV2AuthorizeRequestTargetPrincipalContext.md)
+ - [IamV2AuthorizeResponse](docs/IamV2AuthorizeResponse.md)
  - [IamV2RoleBinding](docs/IamV2RoleBinding.md)
  - [IamV2User](docs/IamV2User.md)
  - [ListMeta](docs/ListMeta.md)

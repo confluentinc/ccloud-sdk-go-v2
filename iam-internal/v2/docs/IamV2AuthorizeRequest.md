@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
-**TargetPrincipalContext** | Pointer to [**IamV2AuthorizeRequestTargetPrincipalContext**](IamV2AuthorizeRequestTargetPrincipalContext.md) |  | [optional] 
+**PrincipalContext** | Pointer to [**IamV2AuthorizeRequestPrincipalContext**](IamV2AuthorizeRequestPrincipalContext.md) |  | [optional] 
 **RequestContext** | Pointer to [**IamV2AuthorizeRequestRequestContext**](IamV2AuthorizeRequestRequestContext.md) |  | [optional] 
 **Actions** | Pointer to [**[]IamV2AuthorizeRequestActions**](IamV2AuthorizeRequestActions.md) |  | [optional] 
 
@@ -131,30 +131,30 @@ SetMetadata sets Metadata field to given value.
 
 HasMetadata returns a boolean if a field has been set.
 
-### GetTargetPrincipalContext
+### GetPrincipalContext
 
-`func (o *IamV2AuthorizeRequest) GetTargetPrincipalContext() IamV2AuthorizeRequestTargetPrincipalContext`
+`func (o *IamV2AuthorizeRequest) GetPrincipalContext() IamV2AuthorizeRequestPrincipalContext`
 
-GetTargetPrincipalContext returns the TargetPrincipalContext field if non-nil, zero value otherwise.
+GetPrincipalContext returns the PrincipalContext field if non-nil, zero value otherwise.
 
-### GetTargetPrincipalContextOk
+### GetPrincipalContextOk
 
-`func (o *IamV2AuthorizeRequest) GetTargetPrincipalContextOk() (*IamV2AuthorizeRequestTargetPrincipalContext, bool)`
+`func (o *IamV2AuthorizeRequest) GetPrincipalContextOk() (*IamV2AuthorizeRequestPrincipalContext, bool)`
 
-GetTargetPrincipalContextOk returns a tuple with the TargetPrincipalContext field if it's non-nil, zero value otherwise
+GetPrincipalContextOk returns a tuple with the PrincipalContext field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTargetPrincipalContext
+### SetPrincipalContext
 
-`func (o *IamV2AuthorizeRequest) SetTargetPrincipalContext(v IamV2AuthorizeRequestTargetPrincipalContext)`
+`func (o *IamV2AuthorizeRequest) SetPrincipalContext(v IamV2AuthorizeRequestPrincipalContext)`
 
-SetTargetPrincipalContext sets TargetPrincipalContext field to given value.
+SetPrincipalContext sets PrincipalContext field to given value.
 
-### HasTargetPrincipalContext
+### HasPrincipalContext
 
-`func (o *IamV2AuthorizeRequest) HasTargetPrincipalContext() bool`
+`func (o *IamV2AuthorizeRequest) HasPrincipalContext() bool`
 
-HasTargetPrincipalContext returns a boolean if a field has been set.
+HasPrincipalContext returns a boolean if a field has been set.
 
 ### GetRequestContext
 
