@@ -95,12 +95,14 @@ tags:
     | `private_service_connect_projects_per_network` | Number of GCP projects per network |
   name: Private Link Accesses (networking/v1)
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     Network Link Service is associated with a Private Link Confluent Cloud Network.
     It enables connectivity from other Private Link Confluent Cloud Networks based on
     the configured accept policies.
 
+
+    Related guide: [Network Linking Overview](https://docs.confluent.io/cloud/current/networking/network-linking.html).
 
     ## The Network Link Services Model
     <SchemaDefinition schemaRef="#/components/schemas/networking.v1.NetworkLinkService" />
@@ -113,13 +115,15 @@ tags:
     | `network_link_service_per_network` | Number of network link services per network |
   name: Network Link Services (networking/v1)
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     A Network Link Enpoint is associated with a Private Link Confluent Cloud Network at the origin and a
     Network Link Service (associated with another Private Link Confluent Cloud Network) at the target.
     It enables connectivity between the origin network and the target network.
     It can only be associated with a Private Link network.
 
+
+    Related guide: [Network Linking Overview](https://docs.confluent.io/cloud/current/networking/network-linking.html).
 
     ## The Network Link Endpoints Model
     <SchemaDefinition schemaRef="#/components/schemas/networking.v1.NetworkLinkEndpoint" />
@@ -132,10 +136,12 @@ tags:
     | `network_link_endpoints_per_network` | Number of network link endpoints per network |
   name: Network Link Endpoints (networking/v1)
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     List of incoming Network Link Enpoints associated with the Network Link Service.
 
+
+    Related guide: [Network Linking Overview](https://docs.confluent.io/cloud/current/networking/network-linking.html).
 
     ## The Network Link Service Associations Model
     <SchemaDefinition schemaRef="#/components/schemas/networking.v1.NetworkLinkServiceAssociation" />
@@ -278,6 +284,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -362,6 +391,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -384,7 +443,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: List of Networks
       tags:
@@ -540,6 +599,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
             Location:
               description: Network resource uri
@@ -707,6 +789,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -729,7 +841,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Create a Network
       tags:
@@ -898,6 +1010,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -1000,6 +1135,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -1022,7 +1187,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Delete a Network
       tags:
@@ -1175,6 +1340,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -1277,6 +1465,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -1299,7 +1517,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Read a Network
       tags:
@@ -1462,6 +1680,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -1608,6 +1849,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -1630,7 +1901,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Update a Network
       tags:
@@ -1871,6 +2142,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -1955,6 +2249,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -1977,7 +2301,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: List of Peerings
       tags:
@@ -2139,6 +2463,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
             Location:
               description: Peering resource uri
@@ -2306,6 +2653,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -2328,7 +2705,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Create a Peering
       tags:
@@ -2489,6 +2866,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -2591,6 +2991,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -2613,7 +3043,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Delete a Peering
       tags:
@@ -2770,6 +3200,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -2872,6 +3325,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -2894,7 +3377,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Read a Peering
       tags:
@@ -3061,6 +3544,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -3207,6 +3713,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -3229,7 +3765,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Update a Peering
       tags:
@@ -3462,6 +3998,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -3546,6 +4105,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -3568,7 +4157,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: List of Transit Gateway Attachments
       tags:
@@ -3730,6 +4319,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
             Location:
               description: TransitGatewayAttachment resource uri
@@ -3897,6 +4509,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -3919,7 +4561,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Create a Transit Gateway Attachment
       tags:
@@ -4081,6 +4723,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -4183,6 +4848,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -4205,7 +4900,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Delete a Transit Gateway Attachment
       tags:
@@ -4362,6 +5057,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -4464,6 +5182,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -4486,7 +5234,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Read a Transit Gateway Attachment
       tags:
@@ -4653,6 +5401,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -4799,6 +5570,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -4821,7 +5622,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Update a Transit Gateway Attachment
       tags:
@@ -5055,6 +5856,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -5139,6 +5963,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -5161,7 +6015,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: List of Private Link Accesses
       tags:
@@ -5323,6 +6177,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
             Location:
               description: PrivateLinkAccess resource uri
@@ -5490,6 +6367,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -5512,7 +6419,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Create a Private Link Access
       tags:
@@ -5666,6 +6573,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -5768,6 +6698,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -5790,7 +6750,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Delete a Private Link Access
       tags:
@@ -5947,6 +6907,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -6049,6 +7032,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -6071,7 +7084,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Read a Private Link Access
       tags:
@@ -6238,6 +7251,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -6384,6 +7420,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -6406,7 +7472,7 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Update a Private Link Access
       tags:
@@ -6528,7 +7594,7 @@ paths:
   /networking/v1/network-link-services:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all network link services.
       operationId: listNetworkingV1NetworkLinkServices
@@ -6631,6 +7697,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -6715,6 +7804,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -6737,12 +7856,11 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: List of Network Link Services
       tags:
       - Network Link Services (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -6829,7 +7947,7 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create a network link service.
       operationId: createNetworkingV1NetworkLinkService
@@ -6898,6 +8016,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
             Location:
               description: NetworkLinkService resource uri
@@ -7065,6 +8206,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -7087,12 +8258,11 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Create a Network Link Service
       tags:
       - Network Link Services (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -7208,11 +8378,10 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-net-1-nls\",\"description\":\"Allow connections from analytics hub\",\"accept\":{\"environments\":[\"string\"],\"networks\":[\"string\"]},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Networking v1
   /networking/v1/network-link-services/{id}:
     delete:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete a network link service.
       operationId: deleteNetworkingV1NetworkLinkService
@@ -7243,6 +8412,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -7346,6 +8538,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -7368,12 +8590,11 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Delete a Network Link Service
       tags:
       - Network Link Services (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -7460,7 +8681,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a network link service.
       operationId: getNetworkingV1NetworkLinkService
@@ -7524,6 +8745,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -7627,6 +8871,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -7649,12 +8923,11 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Read a Network Link Service
       tags:
       - Network Link Services (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -7741,7 +9014,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update a network link service.
 
@@ -7815,6 +9088,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -7962,6 +9258,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -7984,12 +9310,11 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Update a Network Link Service
       tags:
       - Network Link Services (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -8105,11 +9430,10 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-net-1-nls\",\"description\":\"Allow connections from analytics hub\",\"accept\":{\"environments\":[\"string\"],\"networks\":[\"string\"]},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Networking v1
   /networking/v1/network-link-endpoints:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all network link endpoints.
       operationId: listNetworkingV1NetworkLinkEndpoints
@@ -8218,7 +9542,7 @@ paths:
                                 example:
                                   id: nls-abcde
                                   related: https://api.confluent.cloud/networking/v1/network-link-services/nls-abcde
-                                  resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network-link-service=nls-abcde
+                                  resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-456xyz/network-link-service=nls-abcde
                             type: object
                       type: array
                   type: object
@@ -8229,6 +9553,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -8314,6 +9661,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -8336,12 +9713,11 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: List of Network Link Endpoints
       tags:
       - Network Link Endpoints (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -8428,7 +9804,7 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create a network link endpoint.
       operationId: createNetworkingV1NetworkLinkEndpoint
@@ -8497,7 +9873,7 @@ paths:
                           example:
                             id: nls-abcde
                             related: https://api.confluent.cloud/networking/v1/network-link-services/nls-abcde
-                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network-link-service=nls-abcde
+                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-456xyz/network-link-service=nls-abcde
                       type: object
                   type: object
           description: A Network Link Endpoint is being created.
@@ -8507,6 +9883,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
             Location:
               description: NetworkLinkEndpoint resource uri
@@ -8674,6 +10073,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -8696,12 +10125,11 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Create a Network Link Endpoint
       tags:
       - Network Link Endpoints (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -8817,11 +10245,10 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-net-1-nle\",\"description\":\"Connect to Network - analytics hub\",\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"},\"network_link_service\":{\"id\":\"nls-abcde\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Networking v1
   /networking/v1/network-link-endpoints/{id}:
     delete:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete a network link endpoint.
       operationId: deleteNetworkingV1NetworkLinkEndpoint
@@ -8852,6 +10279,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -8955,6 +10405,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -8977,12 +10457,11 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Delete a Network Link Endpoint
       tags:
       - Network Link Endpoints (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -9069,7 +10548,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a network link endpoint.
       operationId: getNetworkingV1NetworkLinkEndpoint
@@ -9129,7 +10608,7 @@ paths:
                           example:
                             id: nls-abcde
                             related: https://api.confluent.cloud/networking/v1/network-link-services/nls-abcde
-                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network-link-service=nls-abcde
+                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-456xyz/network-link-service=nls-abcde
                       type: object
                   type: object
           description: Network Link Endpoint.
@@ -9139,6 +10618,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -9242,6 +10744,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -9264,12 +10796,11 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Read a Network Link Endpoint
       tags:
       - Network Link Endpoints (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -9356,7 +10887,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update a network link endpoint.
 
@@ -9426,7 +10957,7 @@ paths:
                           example:
                             id: nls-abcde
                             related: https://api.confluent.cloud/networking/v1/network-link-services/nls-abcde
-                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network-link-service=nls-abcde
+                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-456xyz/network-link-service=nls-abcde
                       type: object
                   type: object
           description: Network Link Endpoint.
@@ -9436,6 +10967,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -9583,6 +11137,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -9605,12 +11189,11 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Update a Network Link Endpoint
       tags:
       - Network Link Endpoints (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -9726,11 +11309,10 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-net-1-nle\",\"description\":\"Connect to Network - analytics hub\",\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"},\"network_link_service\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Networking v1
   /networking/v1/network-link-service-associations:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all network link service associations.
       operationId: listNetworkingV1NetworkLinkServiceAssociations
@@ -9802,7 +11384,7 @@ paths:
                                 example:
                                   id: nls-abcde
                                   related: https://api.confluent.cloud/networking/v1/network-link-services/nls-abcde
-                                  resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network-link-service=nls-abcde
+                                  resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-456xyz/network-link-service=nls-abcde
                               environment:
                                 example:
                                   id: env-00000
@@ -9818,6 +11400,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -9903,6 +11508,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -9925,12 +11560,11 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: List of Network Link Service Associations
       tags:
       - Network Link Service Associations (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -10015,11 +11649,10 @@ paths:
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Networking v1
   /networking/v1/network-link-service-associations/{id}:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a network link service association.
       operationId: getNetworkingV1NetworkLinkServiceAssociation
@@ -10061,7 +11694,7 @@ paths:
                           example:
                             id: nls-abcde
                             related: https://api.confluent.cloud/networking/v1/network-link-services/nls-abcde
-                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network-link-service=nls-abcde
+                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-456xyz/network-link-service=nls-abcde
                         environment:
                           example:
                             id: env-00000
@@ -10076,6 +11709,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -10179,6 +11835,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -10201,12 +11887,11 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
       - confluent-sts-access-token: []
       summary: Read a Network Link Service Association
       tags:
       - Network Link Service Associations (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -10291,7 +11976,6 @@ paths:
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Networking v1
 components:
   responses:
     BadRequestError:
@@ -10466,6 +12150,36 @@ components:
           explode: false
           schema:
             type: string
+          style: simple
+        X-RateLimit-Limit:
+          description: The maximum number of requests you're permitted to make per
+            time period.
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        X-RateLimit-Remaining:
+          description: The number of requests remaining in the current rate limit
+            window.
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        X-RateLimit-Reset:
+          description: "The relative time in seconds until the current rate-limit\
+            \ window resets.  \n  \n**Important:** This differs from Github and Twitter's\
+            \ same-named header which uses UTC epoch seconds. We use relative time\
+            \ to avoid client/server time synchronization issues."
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        Retry-After:
+          description: The number of seconds to wait until the rate limit window resets.
+            Only sent when the rate limit is reached.
+          explode: false
+          schema:
+            type: integer
           style: simple
     DefaultSystemError:
       content:
@@ -10920,11 +12634,22 @@ components:
       type: object
     networking.v1.NetworkLinkService:
       description: |-
-        List of incoming Network Link Enpoints associated with the Network Link Service.
+        Network Link Service is associated with a Private Link Confluent Cloud Network.
+        It enables connectivity from other Private Link Confluent Cloud Networks based on
+        the configured accept policies.
 
 
-        ## The Network Link Service Associations Model
-        <SchemaDefinition schemaRef="#/components/schemas/networking.v1.NetworkLinkServiceAssociation" />
+        Related guide: [Network Linking Overview](https://docs.confluent.io/cloud/current/networking/network-linking.html).
+
+        ## The Network Link Services Model
+        <SchemaDefinition schemaRef="#/components/schemas/networking.v1.NetworkLinkService" />
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `network_link_service_per_network` | Number of network link services per network |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -10956,7 +12681,7 @@ components:
               self:
                 example: https://api.confluent.cloud/networking/v1/network-link-services/nls-12345
               resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network-link-service=nls-12345
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-456xyz/network-link-service=nls-12345
         spec:
           $ref: '#/components/schemas/networking.v1.NetworkLinkServiceSpec'
         status:
@@ -10998,6 +12723,8 @@ components:
         It can only be associated with a Private Link network.
 
 
+        Related guide: [Network Linking Overview](https://docs.confluent.io/cloud/current/networking/network-linking.html).
+
         ## The Network Link Endpoints Model
         <SchemaDefinition schemaRef="#/components/schemas/networking.v1.NetworkLinkEndpoint" />
 
@@ -11038,7 +12765,7 @@ components:
               self:
                 example: https://api.confluent.cloud/networking/v1/network-link-endpoints/nle-12345
               resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network-link-endpoint=nle-12345
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-456xyz/network-link-endpoint=nle-12345
         spec:
           $ref: '#/components/schemas/networking.v1.NetworkLinkEndpointSpec'
         status:
@@ -11106,6 +12833,8 @@ components:
         List of incoming Network Link Enpoints associated with the Network Link Service.
 
 
+        Related guide: [Network Linking Overview](https://docs.confluent.io/cloud/current/networking/network-linking.html).
+
         ## The Network Link Service Associations Model
         <SchemaDefinition schemaRef="#/components/schemas/networking.v1.NetworkLinkServiceAssociation" />
       properties:
@@ -11139,7 +12868,7 @@ components:
               self:
                 example: https://api.confluent.cloud/networking/v1/network-link-service-associations/nlsa-12345
               resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network-link-service-association=nlsa-12345
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-456xyz/network-link-service=nls-12345/network-link-endpoint=nle-12345
         spec:
           $ref: '#/components/schemas/networking.v1.NetworkLinkServiceAssociationSpec'
         status:
@@ -11784,6 +13513,7 @@ components:
             Each item represents information related to a single zone.
 
             Note - The attribute is in a [Limited Availability lifecycle stage](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
+          x-immutable: true
         dns_config:
           allOf:
           - $ref: '#/components/schemas/networking.v1.DnsConfig'
@@ -12125,11 +13855,22 @@ components:
       x-enable-objectmeta: true
     networking.v1.NetworkLinkServiceList:
       description: |-
-        List of incoming Network Link Enpoints associated with the Network Link Service.
+        Network Link Service is associated with a Private Link Confluent Cloud Network.
+        It enables connectivity from other Private Link Confluent Cloud Networks based on
+        the configured accept policies.
 
 
-        ## The Network Link Service Associations Model
-        <SchemaDefinition schemaRef="#/components/schemas/networking.v1.NetworkLinkServiceAssociation" />
+        Related guide: [Network Linking Overview](https://docs.confluent.io/cloud/current/networking/network-linking.html).
+
+        ## The Network Link Services Model
+        <SchemaDefinition schemaRef="#/components/schemas/networking.v1.NetworkLinkService" />
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `network_link_service_per_network` | Number of network link services per network |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -12217,6 +13958,8 @@ components:
         It enables connectivity between the origin network and the target network.
         It can only be associated with a Private Link network.
 
+
+        Related guide: [Network Linking Overview](https://docs.confluent.io/cloud/current/networking/network-linking.html).
 
         ## The Network Link Endpoints Model
         <SchemaDefinition schemaRef="#/components/schemas/networking.v1.NetworkLinkEndpoint" />
@@ -12313,6 +14056,8 @@ components:
       description: |-
         List of incoming Network Link Enpoints associated with the Network Link Service.
 
+
+        Related guide: [Network Linking Overview](https://docs.confluent.io/cloud/current/networking/network-linking.html).
 
         ## The Network Link Service Associations Model
         <SchemaDefinition schemaRef="#/components/schemas/networking.v1.NetworkLinkServiceAssociation" />
@@ -12631,13 +14376,6 @@ components:
           description: The name of the network
           example: prod-aws-us-east1
           type: string
-        zones_info:
-          allOf:
-          - $ref: '#/components/schemas/networking.v1.ZonesInfo'
-          description: |
-            Each item represents information related to a single zone.
-
-            Note - The attribute is in a [Limited Availability lifecycle stage](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
         environment:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'
@@ -12931,11 +14669,22 @@ components:
       x-enable-objectmeta: true
     networking.v1.NetworkLinkServiceUpdate:
       description: |-
-        List of incoming Network Link Enpoints associated with the Network Link Service.
+        Network Link Service is associated with a Private Link Confluent Cloud Network.
+        It enables connectivity from other Private Link Confluent Cloud Networks based on
+        the configured accept policies.
 
 
-        ## The Network Link Service Associations Model
-        <SchemaDefinition schemaRef="#/components/schemas/networking.v1.NetworkLinkServiceAssociation" />
+        Related guide: [Network Linking Overview](https://docs.confluent.io/cloud/current/networking/network-linking.html).
+
+        ## The Network Link Services Model
+        <SchemaDefinition schemaRef="#/components/schemas/networking.v1.NetworkLinkService" />
+
+        ## Quotas and Limits
+        This resource is subject to the following quotas:
+
+        | Quota | Description |
+        | --- | --- |
+        | `network_link_service_per_network` | Number of network link services per network |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -12967,7 +14716,7 @@ components:
               self:
                 example: https://api.confluent.cloud/networking/v1/network-link-services/nls-12345
               resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network-link-service=nls-12345
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-456xyz/network-link-service=nls-12345
         spec:
           $ref: '#/components/schemas/networking.v1.NetworkLinkServiceSpecUpdate'
         status:
@@ -12999,6 +14748,8 @@ components:
         It enables connectivity between the origin network and the target network.
         It can only be associated with a Private Link network.
 
+
+        Related guide: [Network Linking Overview](https://docs.confluent.io/cloud/current/networking/network-linking.html).
 
         ## The Network Link Endpoints Model
         <SchemaDefinition schemaRef="#/components/schemas/networking.v1.NetworkLinkEndpoint" />
@@ -13040,7 +14791,7 @@ components:
               self:
                 example: https://api.confluent.cloud/networking/v1/network-link-endpoints/nle-12345
               resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network-link-endpoint=nle-12345
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-456xyz/network-link-endpoint=nle-12345
         spec:
           $ref: '#/components/schemas/networking.v1.NetworkLinkEndpointSpecUpdate'
         status:
@@ -13061,9 +14812,9 @@ components:
           type: string
       type: object
   securitySchemes:
-    api-key:
-      description: Authenticate with API Keys using HTTP Basic Auth. Treat the API
-        Key ID as the username and API Key Secret as the password.
+    cloud-api-key:
+      description: Authenticate with Cloud API Keys using HTTP Basic Auth. Treat the
+        Cloud API Key ID as the username and Cloud API Key Secret as the password.
       scheme: basic
       type: http
     confluent-sts-access-token:

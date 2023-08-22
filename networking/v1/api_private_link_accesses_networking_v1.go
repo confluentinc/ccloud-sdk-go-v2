@@ -151,8 +151,8 @@ CreateNetworkingV1PrivateLinkAccess Create a Private Link Access
 
 Make a request to create a private link access.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateNetworkingV1PrivateLinkAccessRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateNetworkingV1PrivateLinkAccessRequest
 */
 func (a *PrivateLinkAccessesNetworkingV1ApiService) CreateNetworkingV1PrivateLinkAccess(ctx _context.Context) ApiCreateNetworkingV1PrivateLinkAccessRequest {
 	return ApiCreateNetworkingV1PrivateLinkAccessRequest{
@@ -162,8 +162,7 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) CreateNetworkingV1PrivateLin
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1PrivateLinkAccess
+//  @return NetworkingV1PrivateLinkAccess
 func (a *PrivateLinkAccessesNetworkingV1ApiService) CreateNetworkingV1PrivateLinkAccessExecute(r ApiCreateNetworkingV1PrivateLinkAccessRequest) (NetworkingV1PrivateLinkAccess, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -334,9 +333,9 @@ DeleteNetworkingV1PrivateLinkAccess Delete a Private Link Access
 
 Make a request to delete a private link access.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the private link access.
-	@return ApiDeleteNetworkingV1PrivateLinkAccessRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the private link access.
+ @return ApiDeleteNetworkingV1PrivateLinkAccessRequest
 */
 func (a *PrivateLinkAccessesNetworkingV1ApiService) DeleteNetworkingV1PrivateLinkAccess(ctx _context.Context, id string) ApiDeleteNetworkingV1PrivateLinkAccessRequest {
 	return ApiDeleteNetworkingV1PrivateLinkAccessRequest{
@@ -490,9 +489,9 @@ GetNetworkingV1PrivateLinkAccess Read a Private Link Access
 
 Make a request to read a private link access.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the private link access.
-	@return ApiGetNetworkingV1PrivateLinkAccessRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the private link access.
+ @return ApiGetNetworkingV1PrivateLinkAccessRequest
 */
 func (a *PrivateLinkAccessesNetworkingV1ApiService) GetNetworkingV1PrivateLinkAccess(ctx _context.Context, id string) ApiGetNetworkingV1PrivateLinkAccessRequest {
 	return ApiGetNetworkingV1PrivateLinkAccessRequest{
@@ -503,8 +502,7 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) GetNetworkingV1PrivateLinkAc
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1PrivateLinkAccess
+//  @return NetworkingV1PrivateLinkAccess
 func (a *PrivateLinkAccessesNetworkingV1ApiService) GetNetworkingV1PrivateLinkAccessExecute(r ApiGetNetworkingV1PrivateLinkAccessRequest) (NetworkingV1PrivateLinkAccess, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -692,8 +690,8 @@ ListNetworkingV1PrivateLinkAccesses List of Private Link Accesses
 
 Retrieve a sorted, filtered, paginated list of all private link accesses.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListNetworkingV1PrivateLinkAccessesRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListNetworkingV1PrivateLinkAccessesRequest
 */
 func (a *PrivateLinkAccessesNetworkingV1ApiService) ListNetworkingV1PrivateLinkAccesses(ctx _context.Context) ApiListNetworkingV1PrivateLinkAccessesRequest {
 	return ApiListNetworkingV1PrivateLinkAccessesRequest{
@@ -703,8 +701,7 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) ListNetworkingV1PrivateLinkA
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1PrivateLinkAccessList
+//  @return NetworkingV1PrivateLinkAccessList
 func (a *PrivateLinkAccessesNetworkingV1ApiService) ListNetworkingV1PrivateLinkAccessesExecute(r ApiListNetworkingV1PrivateLinkAccessesRequest) (NetworkingV1PrivateLinkAccessList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -861,9 +858,11 @@ UpdateNetworkingV1PrivateLinkAccess Update a Private Link Access
 
 Make a request to update a private link access.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the private link access.
-	@return ApiUpdateNetworkingV1PrivateLinkAccessRequest
+
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the private link access.
+ @return ApiUpdateNetworkingV1PrivateLinkAccessRequest
 */
 func (a *PrivateLinkAccessesNetworkingV1ApiService) UpdateNetworkingV1PrivateLinkAccess(ctx _context.Context, id string) ApiUpdateNetworkingV1PrivateLinkAccessRequest {
 	return ApiUpdateNetworkingV1PrivateLinkAccessRequest{
@@ -874,8 +873,7 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) UpdateNetworkingV1PrivateLin
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1PrivateLinkAccess
+//  @return NetworkingV1PrivateLinkAccess
 func (a *PrivateLinkAccessesNetworkingV1ApiService) UpdateNetworkingV1PrivateLinkAccessExecute(r ApiUpdateNetworkingV1PrivateLinkAccessRequest) (NetworkingV1PrivateLinkAccess, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch

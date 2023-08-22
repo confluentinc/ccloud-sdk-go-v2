@@ -44,7 +44,7 @@ type NetworkLinkServicesNetworkingV1Api interface {
 	/*
 		CreateNetworkingV1NetworkLinkService Create a Network Link Service
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to create a network link service.
 
@@ -60,7 +60,7 @@ type NetworkLinkServicesNetworkingV1Api interface {
 	/*
 		DeleteNetworkingV1NetworkLinkService Delete a Network Link Service
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to delete a network link service.
 
@@ -76,7 +76,7 @@ type NetworkLinkServicesNetworkingV1Api interface {
 	/*
 		GetNetworkingV1NetworkLinkService Read a Network Link Service
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to read a network link service.
 
@@ -93,7 +93,7 @@ type NetworkLinkServicesNetworkingV1Api interface {
 	/*
 		ListNetworkingV1NetworkLinkServices List of Network Link Services
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Retrieve a sorted, filtered, paginated list of all network link services.
 
@@ -109,7 +109,7 @@ type NetworkLinkServicesNetworkingV1Api interface {
 	/*
 		UpdateNetworkingV1NetworkLinkService Update a Network Link Service
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to update a network link service.
 
@@ -147,12 +147,12 @@ func (r ApiCreateNetworkingV1NetworkLinkServiceRequest) Execute() (NetworkingV1N
 /*
 CreateNetworkingV1NetworkLinkService Create a Network Link Service
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create a network link service.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateNetworkingV1NetworkLinkServiceRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateNetworkingV1NetworkLinkServiceRequest
 */
 func (a *NetworkLinkServicesNetworkingV1ApiService) CreateNetworkingV1NetworkLinkService(ctx _context.Context) ApiCreateNetworkingV1NetworkLinkServiceRequest {
 	return ApiCreateNetworkingV1NetworkLinkServiceRequest{
@@ -162,8 +162,7 @@ func (a *NetworkLinkServicesNetworkingV1ApiService) CreateNetworkingV1NetworkLin
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1NetworkLinkService
+//  @return NetworkingV1NetworkLinkService
 func (a *NetworkLinkServicesNetworkingV1ApiService) CreateNetworkingV1NetworkLinkServiceExecute(r ApiCreateNetworkingV1NetworkLinkServiceRequest) (NetworkingV1NetworkLinkService, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -330,13 +329,13 @@ func (r ApiDeleteNetworkingV1NetworkLinkServiceRequest) Execute() (*_nethttp.Res
 /*
 DeleteNetworkingV1NetworkLinkService Delete a Network Link Service
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete a network link service.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the network link service.
-	@return ApiDeleteNetworkingV1NetworkLinkServiceRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the network link service.
+ @return ApiDeleteNetworkingV1NetworkLinkServiceRequest
 */
 func (a *NetworkLinkServicesNetworkingV1ApiService) DeleteNetworkingV1NetworkLinkService(ctx _context.Context, id string) ApiDeleteNetworkingV1NetworkLinkServiceRequest {
 	return ApiDeleteNetworkingV1NetworkLinkServiceRequest{
@@ -486,13 +485,13 @@ func (r ApiGetNetworkingV1NetworkLinkServiceRequest) Execute() (NetworkingV1Netw
 /*
 GetNetworkingV1NetworkLinkService Read a Network Link Service
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a network link service.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the network link service.
-	@return ApiGetNetworkingV1NetworkLinkServiceRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the network link service.
+ @return ApiGetNetworkingV1NetworkLinkServiceRequest
 */
 func (a *NetworkLinkServicesNetworkingV1ApiService) GetNetworkingV1NetworkLinkService(ctx _context.Context, id string) ApiGetNetworkingV1NetworkLinkServiceRequest {
 	return ApiGetNetworkingV1NetworkLinkServiceRequest{
@@ -503,8 +502,7 @@ func (a *NetworkLinkServicesNetworkingV1ApiService) GetNetworkingV1NetworkLinkSe
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1NetworkLinkService
+//  @return NetworkingV1NetworkLinkService
 func (a *NetworkLinkServicesNetworkingV1ApiService) GetNetworkingV1NetworkLinkServiceExecute(r ApiGetNetworkingV1NetworkLinkServiceRequest) (NetworkingV1NetworkLinkService, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -688,12 +686,12 @@ func (r ApiListNetworkingV1NetworkLinkServicesRequest) Execute() (NetworkingV1Ne
 /*
 ListNetworkingV1NetworkLinkServices List of Network Link Services
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all network link services.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListNetworkingV1NetworkLinkServicesRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListNetworkingV1NetworkLinkServicesRequest
 */
 func (a *NetworkLinkServicesNetworkingV1ApiService) ListNetworkingV1NetworkLinkServices(ctx _context.Context) ApiListNetworkingV1NetworkLinkServicesRequest {
 	return ApiListNetworkingV1NetworkLinkServicesRequest{
@@ -703,8 +701,7 @@ func (a *NetworkLinkServicesNetworkingV1ApiService) ListNetworkingV1NetworkLinkS
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1NetworkLinkServiceList
+//  @return NetworkingV1NetworkLinkServiceList
 func (a *NetworkLinkServicesNetworkingV1ApiService) ListNetworkingV1NetworkLinkServicesExecute(r ApiListNetworkingV1NetworkLinkServicesRequest) (NetworkingV1NetworkLinkServiceList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -857,13 +854,15 @@ func (r ApiUpdateNetworkingV1NetworkLinkServiceRequest) Execute() (NetworkingV1N
 /*
 UpdateNetworkingV1NetworkLinkService Update a Network Link Service
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update a network link service.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the network link service.
-	@return ApiUpdateNetworkingV1NetworkLinkServiceRequest
+
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the network link service.
+ @return ApiUpdateNetworkingV1NetworkLinkServiceRequest
 */
 func (a *NetworkLinkServicesNetworkingV1ApiService) UpdateNetworkingV1NetworkLinkService(ctx _context.Context, id string) ApiUpdateNetworkingV1NetworkLinkServiceRequest {
 	return ApiUpdateNetworkingV1NetworkLinkServiceRequest{
@@ -874,8 +873,7 @@ func (a *NetworkLinkServicesNetworkingV1ApiService) UpdateNetworkingV1NetworkLin
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1NetworkLinkService
+//  @return NetworkingV1NetworkLinkService
 func (a *NetworkLinkServicesNetworkingV1ApiService) UpdateNetworkingV1NetworkLinkServiceExecute(r ApiUpdateNetworkingV1NetworkLinkServiceRequest) (NetworkingV1NetworkLinkService, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch

@@ -34,7 +34,7 @@ import (
 	"reflect"
 )
 
-// NetworkingV1NetworkLinkServiceList List of incoming Network Link Enpoints associated with the Network Link Service.   ## The Network Link Service Associations Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.NetworkLinkServiceAssociation\" />
+// NetworkingV1NetworkLinkServiceList Network Link Service is associated with a Private Link Confluent Cloud Network. It enables connectivity from other Private Link Confluent Cloud Networks based on the configured accept policies.   Related guide: [Network Linking Overview](https://docs.confluent.io/cloud/current/networking/network-linking.html).  ## The Network Link Services Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.NetworkLinkService\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `network_link_service_per_network` | Number of network link services per network |
 type NetworkingV1NetworkLinkServiceList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version,omitempty"`
