@@ -115,7 +115,7 @@ Class | Method | HTTP request | Description
 
 
 
-### api-key
+### resource-api-key
 
 - **Type**: HTTP basic authentication
 
