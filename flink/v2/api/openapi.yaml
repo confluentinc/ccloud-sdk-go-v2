@@ -3539,6 +3539,7 @@ components:
           - PROVISIONING
           - PROVISIONED
           - FAILED
+          - DEPROVISIONING
         current_cfu:
           description: The number of Confluent Flink Units (CFUs) currently allocated
             to this Flink compute pool.
