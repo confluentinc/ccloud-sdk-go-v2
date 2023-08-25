@@ -43,6 +43,10 @@ type ObjectMeta struct {
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// The date and time at which this object was last updated. It is represented in RFC3339 format and is in UTC.
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	// A system generated globally unique identifier for this resource.
+	Uid *string `json:"uid,omitempty"`
+	// A system generated string that uniquely identifies the version of this resource.
+	ResourceVersion *string `json:"resource_version,omitempty"`
 }
 
 // NewObjectMeta instantiates a new ObjectMeta object
@@ -76,7 +80,7 @@ func (o *ObjectMeta) GetSelf() string {
 // GetSelfOk returns a tuple with the Self field value
 // and a boolean to check if the value has been set.
 func (o *ObjectMeta) GetSelfOk() (*string, bool) {
-	if o == nil {
+	if o == nil  {
 		return nil, false
 	}
 	return &o.Self, true
@@ -151,41 +155,107 @@ func (o *ObjectMeta) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = &v
 }
 
+// GetUid returns the Uid field value if set, zero value otherwise.
+func (o *ObjectMeta) GetUid() string {
+	if o == nil || o.Uid == nil {
+		var ret string
+		return ret
+	}
+	return *o.Uid
+}
+
+// GetUidOk returns a tuple with the Uid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ObjectMeta) GetUidOk() (*string, bool) {
+	if o == nil || o.Uid == nil {
+		return nil, false
+	}
+	return o.Uid, true
+}
+
+// HasUid returns a boolean if a field has been set.
+func (o *ObjectMeta) HasUid() bool {
+	if o != nil && o.Uid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUid gets a reference to the given string and assigns it to the Uid field.
+func (o *ObjectMeta) SetUid(v string) {
+	o.Uid = &v
+}
+
+// GetResourceVersion returns the ResourceVersion field value if set, zero value otherwise.
+func (o *ObjectMeta) GetResourceVersion() string {
+	if o == nil || o.ResourceVersion == nil {
+		var ret string
+		return ret
+	}
+	return *o.ResourceVersion
+}
+
+// GetResourceVersionOk returns a tuple with the ResourceVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ObjectMeta) GetResourceVersionOk() (*string, bool) {
+	if o == nil || o.ResourceVersion == nil {
+		return nil, false
+	}
+	return o.ResourceVersion, true
+}
+
+// HasResourceVersion returns a boolean if a field has been set.
+func (o *ObjectMeta) HasResourceVersion() bool {
+	if o != nil && o.ResourceVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetResourceVersion gets a reference to the given string and assigns it to the ResourceVersion field.
+func (o *ObjectMeta) SetResourceVersion(v string) {
+	o.ResourceVersion = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *ObjectMeta) Redact() {
-	o.recurseRedact(&o.Self)
-	o.recurseRedact(o.CreatedAt)
-	o.recurseRedact(o.UpdatedAt)
+    o.recurseRedact(&o.Self)
+    o.recurseRedact(o.CreatedAt)
+    o.recurseRedact(o.UpdatedAt)
+    o.recurseRedact(o.Uid)
+    o.recurseRedact(o.ResourceVersion)
 }
 
 func (o *ObjectMeta) recurseRedact(v interface{}) {
-	type redactor interface {
-		Redact()
-	}
-	if r, ok := v.(redactor); ok {
-		r.Redact()
-	} else {
-		val := reflect.ValueOf(v)
-		if val.Kind() == reflect.Ptr {
-			val = val.Elem()
-		}
-		switch val.Kind() {
-		case reflect.Slice, reflect.Array:
-			for i := 0; i < val.Len(); i++ {
-				// support data types declared without pointers
-				o.recurseRedact(val.Index(i).Interface())
-				// ... and data types that were declared without but need pointers (for Redact)
-				if val.Index(i).CanAddr() {
-					o.recurseRedact(val.Index(i).Addr().Interface())
-				}
-			}
-		}
-	}
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
 }
 
 func (o ObjectMeta) zeroField(v interface{}) {
-	p := reflect.ValueOf(v).Elem()
-	p.Set(reflect.Zero(p.Type()))
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ObjectMeta) MarshalJSON() ([]byte, error) {
@@ -198,6 +268,12 @@ func (o ObjectMeta) MarshalJSON() ([]byte, error) {
 	}
 	if o.UpdatedAt != nil {
 		toSerialize["updated_at"] = o.UpdatedAt
+	}
+	if o.Uid != nil {
+		toSerialize["uid"] = o.Uid
+	}
+	if o.ResourceVersion != nil {
+		toSerialize["resource_version"] = o.ResourceVersion
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
@@ -245,3 +321,5 @@ func (v *NullableObjectMeta) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

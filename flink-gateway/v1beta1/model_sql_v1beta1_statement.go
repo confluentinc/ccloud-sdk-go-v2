@@ -39,7 +39,7 @@ type SqlV1beta1Statement struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
-	Kind     *string     `json:"kind,omitempty"`
+	Kind *string `json:"kind,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
 	// The user provided name of the resource, unique within this environment.
 	Name *string `json:"name,omitempty"`
@@ -47,10 +47,8 @@ type SqlV1beta1Statement struct {
 	OrganizationId *string `json:"organization_id,omitempty"`
 	// The unique identifier for the environment.
 	EnvironmentId *string `json:"environment_id,omitempty"`
-	// The principal that the query runs as - can be a user account or service account
-	Principal *string                    `json:"principal,omitempty"`
-	Spec      *SqlV1beta1StatementSpec   `json:"spec,omitempty"`
-	Status    *SqlV1beta1StatementStatus `json:"status,omitempty"`
+	Spec *SqlV1beta1StatementSpec `json:"spec,omitempty"`
+	Status *SqlV1beta1StatementStatus `json:"status,omitempty"`
 }
 
 // NewSqlV1beta1Statement instantiates a new SqlV1beta1Statement object
@@ -262,38 +260,6 @@ func (o *SqlV1beta1Statement) SetEnvironmentId(v string) {
 	o.EnvironmentId = &v
 }
 
-// GetPrincipal returns the Principal field value if set, zero value otherwise.
-func (o *SqlV1beta1Statement) GetPrincipal() string {
-	if o == nil || o.Principal == nil {
-		var ret string
-		return ret
-	}
-	return *o.Principal
-}
-
-// GetPrincipalOk returns a tuple with the Principal field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SqlV1beta1Statement) GetPrincipalOk() (*string, bool) {
-	if o == nil || o.Principal == nil {
-		return nil, false
-	}
-	return o.Principal, true
-}
-
-// HasPrincipal returns a boolean if a field has been set.
-func (o *SqlV1beta1Statement) HasPrincipal() bool {
-	if o != nil && o.Principal != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPrincipal gets a reference to the given string and assigns it to the Principal field.
-func (o *SqlV1beta1Statement) SetPrincipal(v string) {
-	o.Principal = &v
-}
-
 // GetSpec returns the Spec field value if set, zero value otherwise.
 func (o *SqlV1beta1Statement) GetSpec() SqlV1beta1StatementSpec {
 	if o == nil || o.Spec == nil {
@@ -360,45 +326,44 @@ func (o *SqlV1beta1Statement) SetStatus(v SqlV1beta1StatementStatus) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *SqlV1beta1Statement) Redact() {
-	o.recurseRedact(o.ApiVersion)
-	o.recurseRedact(o.Kind)
-	o.recurseRedact(o.Metadata)
-	o.recurseRedact(o.Name)
-	o.recurseRedact(o.OrganizationId)
-	o.recurseRedact(o.EnvironmentId)
-	o.recurseRedact(o.Principal)
-	o.recurseRedact(o.Spec)
-	o.recurseRedact(o.Status)
+    o.recurseRedact(o.ApiVersion)
+    o.recurseRedact(o.Kind)
+    o.recurseRedact(o.Metadata)
+    o.recurseRedact(o.Name)
+    o.recurseRedact(o.OrganizationId)
+    o.recurseRedact(o.EnvironmentId)
+    o.recurseRedact(o.Spec)
+    o.recurseRedact(o.Status)
 }
 
 func (o *SqlV1beta1Statement) recurseRedact(v interface{}) {
-	type redactor interface {
-		Redact()
-	}
-	if r, ok := v.(redactor); ok {
-		r.Redact()
-	} else {
-		val := reflect.ValueOf(v)
-		if val.Kind() == reflect.Ptr {
-			val = val.Elem()
-		}
-		switch val.Kind() {
-		case reflect.Slice, reflect.Array:
-			for i := 0; i < val.Len(); i++ {
-				// support data types declared without pointers
-				o.recurseRedact(val.Index(i).Interface())
-				// ... and data types that were declared without but need pointers (for Redact)
-				if val.Index(i).CanAddr() {
-					o.recurseRedact(val.Index(i).Addr().Interface())
-				}
-			}
-		}
-	}
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
 }
 
 func (o SqlV1beta1Statement) zeroField(v interface{}) {
-	p := reflect.ValueOf(v).Elem()
-	p.Set(reflect.Zero(p.Type()))
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o SqlV1beta1Statement) MarshalJSON() ([]byte, error) {
@@ -420,9 +385,6 @@ func (o SqlV1beta1Statement) MarshalJSON() ([]byte, error) {
 	}
 	if o.EnvironmentId != nil {
 		toSerialize["environment_id"] = o.EnvironmentId
-	}
-	if o.Principal != nil {
-		toSerialize["principal"] = o.Principal
 	}
 	if o.Spec != nil {
 		toSerialize["spec"] = o.Spec
@@ -476,3 +438,5 @@ func (v *NullableSqlV1beta1Statement) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
