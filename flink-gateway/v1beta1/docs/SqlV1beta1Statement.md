@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The user provided name of the resource, unique within this environment. | [optional] 
 **OrganizationId** | Pointer to **string** | The unique identifier for the organization. | [optional] 
 **EnvironmentId** | Pointer to **string** | The unique identifier for the environment. | [optional] 
-**Principal** | Pointer to **string** | The principal that the query runs as - can be a user account or service account | [optional] 
 **Spec** | Pointer to [**SqlV1beta1StatementSpec**](SqlV1beta1StatementSpec.md) |  | [optional] 
 **Status** | Pointer to [**SqlV1beta1StatementStatus**](SqlV1beta1StatementStatus.md) |  | [optional] 
 
@@ -182,31 +181,6 @@ SetEnvironmentId sets EnvironmentId field to given value.
 `func (o *SqlV1beta1Statement) HasEnvironmentId() bool`
 
 HasEnvironmentId returns a boolean if a field has been set.
-
-### GetPrincipal
-
-`func (o *SqlV1beta1Statement) GetPrincipal() string`
-
-GetPrincipal returns the Principal field if non-nil, zero value otherwise.
-
-### GetPrincipalOk
-
-`func (o *SqlV1beta1Statement) GetPrincipalOk() (*string, bool)`
-
-GetPrincipalOk returns a tuple with the Principal field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPrincipal
-
-`func (o *SqlV1beta1Statement) SetPrincipal(v string)`
-
-SetPrincipal sets Principal field to given value.
-
-### HasPrincipal
-
-`func (o *SqlV1beta1Statement) HasPrincipal() bool`
-
-HasPrincipal returns a boolean if a field has been set.
 
 ### GetSpec
 

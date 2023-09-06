@@ -85,6 +85,7 @@ Class | Method | HTTP request | Description
 *StatementsSqlV1beta1Api* | [**DeleteSqlv1beta1Statement**](docs/StatementsSqlV1beta1Api.md#deletesqlv1beta1statement) | **Delete** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Delete a Statement
 *StatementsSqlV1beta1Api* | [**GetSqlv1beta1Statement**](docs/StatementsSqlV1beta1Api.md#getsqlv1beta1statement) | **Get** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Read a Statement
 *StatementsSqlV1beta1Api* | [**ListSqlv1beta1Statements**](docs/StatementsSqlV1beta1Api.md#listsqlv1beta1statements) | **Get** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements | List of Statements
+*StatementsSqlV1beta1Api* | [**UpdateSqlv1beta1Statement**](docs/StatementsSqlV1beta1Api.md#updatesqlv1beta1statement) | **Put** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Update a Statement
 
 
 ## Documentation For Models

@@ -46,11 +46,9 @@ type SqlV1beta1Statement struct {
 	// The unique identifier for the organization.
 	OrganizationId *string `json:"organization_id,omitempty"`
 	// The unique identifier for the environment.
-	EnvironmentId *string `json:"environment_id,omitempty"`
-	// The principal that the query runs as - can be a user account or service account
-	Principal *string                    `json:"principal,omitempty"`
-	Spec      *SqlV1beta1StatementSpec   `json:"spec,omitempty"`
-	Status    *SqlV1beta1StatementStatus `json:"status,omitempty"`
+	EnvironmentId *string                    `json:"environment_id,omitempty"`
+	Spec          *SqlV1beta1StatementSpec   `json:"spec,omitempty"`
+	Status        *SqlV1beta1StatementStatus `json:"status,omitempty"`
 }
 
 // NewSqlV1beta1Statement instantiates a new SqlV1beta1Statement object
@@ -262,38 +260,6 @@ func (o *SqlV1beta1Statement) SetEnvironmentId(v string) {
 	o.EnvironmentId = &v
 }
 
-// GetPrincipal returns the Principal field value if set, zero value otherwise.
-func (o *SqlV1beta1Statement) GetPrincipal() string {
-	if o == nil || o.Principal == nil {
-		var ret string
-		return ret
-	}
-	return *o.Principal
-}
-
-// GetPrincipalOk returns a tuple with the Principal field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SqlV1beta1Statement) GetPrincipalOk() (*string, bool) {
-	if o == nil || o.Principal == nil {
-		return nil, false
-	}
-	return o.Principal, true
-}
-
-// HasPrincipal returns a boolean if a field has been set.
-func (o *SqlV1beta1Statement) HasPrincipal() bool {
-	if o != nil && o.Principal != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPrincipal gets a reference to the given string and assigns it to the Principal field.
-func (o *SqlV1beta1Statement) SetPrincipal(v string) {
-	o.Principal = &v
-}
-
 // GetSpec returns the Spec field value if set, zero value otherwise.
 func (o *SqlV1beta1Statement) GetSpec() SqlV1beta1StatementSpec {
 	if o == nil || o.Spec == nil {
@@ -366,7 +332,6 @@ func (o *SqlV1beta1Statement) Redact() {
 	o.recurseRedact(o.Name)
 	o.recurseRedact(o.OrganizationId)
 	o.recurseRedact(o.EnvironmentId)
-	o.recurseRedact(o.Principal)
 	o.recurseRedact(o.Spec)
 	o.recurseRedact(o.Status)
 }
@@ -420,9 +385,6 @@ func (o SqlV1beta1Statement) MarshalJSON() ([]byte, error) {
 	}
 	if o.EnvironmentId != nil {
 		toSerialize["environment_id"] = o.EnvironmentId
-	}
-	if o.Principal != nil {
-		toSerialize["principal"] = o.Principal
 	}
 	if o.Spec != nil {
 		toSerialize["spec"] = o.Spec

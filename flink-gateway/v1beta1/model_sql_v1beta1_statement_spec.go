@@ -42,8 +42,10 @@ type SqlV1beta1StatementSpec struct {
 	Properties *map[string]string `json:"properties,omitempty"`
 	// The id associated with the compute pool in context.
 	ComputePoolId *string `json:"compute_pool_id,omitempty"`
-	// The id associated with the identity pool in context.
-	IdentityPoolId *string `json:"identity_pool_id,omitempty"`
+	// The id of a principal this statement runs as.
+	Principal *string `json:"principal,omitempty"`
+	// Indicates whether the statement should be stopped.
+	Stopped *bool `json:"stopped,omitempty"`
 }
 
 // NewSqlV1beta1StatementSpec instantiates a new SqlV1beta1StatementSpec object
@@ -159,36 +161,68 @@ func (o *SqlV1beta1StatementSpec) SetComputePoolId(v string) {
 	o.ComputePoolId = &v
 }
 
-// GetIdentityPoolId returns the IdentityPoolId field value if set, zero value otherwise.
-func (o *SqlV1beta1StatementSpec) GetIdentityPoolId() string {
-	if o == nil || o.IdentityPoolId == nil {
+// GetPrincipal returns the Principal field value if set, zero value otherwise.
+func (o *SqlV1beta1StatementSpec) GetPrincipal() string {
+	if o == nil || o.Principal == nil {
 		var ret string
 		return ret
 	}
-	return *o.IdentityPoolId
+	return *o.Principal
 }
 
-// GetIdentityPoolIdOk returns a tuple with the IdentityPoolId field value if set, nil otherwise
+// GetPrincipalOk returns a tuple with the Principal field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SqlV1beta1StatementSpec) GetIdentityPoolIdOk() (*string, bool) {
-	if o == nil || o.IdentityPoolId == nil {
+func (o *SqlV1beta1StatementSpec) GetPrincipalOk() (*string, bool) {
+	if o == nil || o.Principal == nil {
 		return nil, false
 	}
-	return o.IdentityPoolId, true
+	return o.Principal, true
 }
 
-// HasIdentityPoolId returns a boolean if a field has been set.
-func (o *SqlV1beta1StatementSpec) HasIdentityPoolId() bool {
-	if o != nil && o.IdentityPoolId != nil {
+// HasPrincipal returns a boolean if a field has been set.
+func (o *SqlV1beta1StatementSpec) HasPrincipal() bool {
+	if o != nil && o.Principal != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetIdentityPoolId gets a reference to the given string and assigns it to the IdentityPoolId field.
-func (o *SqlV1beta1StatementSpec) SetIdentityPoolId(v string) {
-	o.IdentityPoolId = &v
+// SetPrincipal gets a reference to the given string and assigns it to the Principal field.
+func (o *SqlV1beta1StatementSpec) SetPrincipal(v string) {
+	o.Principal = &v
+}
+
+// GetStopped returns the Stopped field value if set, zero value otherwise.
+func (o *SqlV1beta1StatementSpec) GetStopped() bool {
+	if o == nil || o.Stopped == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Stopped
+}
+
+// GetStoppedOk returns a tuple with the Stopped field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SqlV1beta1StatementSpec) GetStoppedOk() (*bool, bool) {
+	if o == nil || o.Stopped == nil {
+		return nil, false
+	}
+	return o.Stopped, true
+}
+
+// HasStopped returns a boolean if a field has been set.
+func (o *SqlV1beta1StatementSpec) HasStopped() bool {
+	if o != nil && o.Stopped != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStopped gets a reference to the given bool and assigns it to the Stopped field.
+func (o *SqlV1beta1StatementSpec) SetStopped(v bool) {
+	o.Stopped = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
@@ -196,7 +230,8 @@ func (o *SqlV1beta1StatementSpec) Redact() {
 	o.recurseRedact(o.Statement)
 	o.recurseRedact(o.Properties)
 	o.recurseRedact(o.ComputePoolId)
-	o.recurseRedact(o.IdentityPoolId)
+	o.recurseRedact(o.Principal)
+	o.recurseRedact(o.Stopped)
 }
 
 func (o *SqlV1beta1StatementSpec) recurseRedact(v interface{}) {
@@ -240,8 +275,11 @@ func (o SqlV1beta1StatementSpec) MarshalJSON() ([]byte, error) {
 	if o.ComputePoolId != nil {
 		toSerialize["compute_pool_id"] = o.ComputePoolId
 	}
-	if o.IdentityPoolId != nil {
-		toSerialize["identity_pool_id"] = o.IdentityPoolId
+	if o.Principal != nil {
+		toSerialize["principal"] = o.Principal
+	}
+	if o.Stopped != nil {
+		toSerialize["stopped"] = o.Stopped
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

@@ -7,7 +7,8 @@ Name | Type | Description | Notes
 **Statement** | Pointer to **string** | The raw SQL text statement. | [optional] 
 **Properties** | Pointer to **map[string]string** | A map (key-value pairs) of statement properties. | [optional] 
 **ComputePoolId** | Pointer to **string** | The id associated with the compute pool in context. | [optional] 
-**IdentityPoolId** | Pointer to **string** | The id associated with the identity pool in context. | [optional] 
+**Principal** | Pointer to **string** | The id of a principal this statement runs as. | [optional] 
+**Stopped** | Pointer to **bool** | Indicates whether the statement should be stopped. | [optional] 
 
 ## Methods
 
@@ -103,30 +104,55 @@ SetComputePoolId sets ComputePoolId field to given value.
 
 HasComputePoolId returns a boolean if a field has been set.
 
-### GetIdentityPoolId
+### GetPrincipal
 
-`func (o *SqlV1beta1StatementSpec) GetIdentityPoolId() string`
+`func (o *SqlV1beta1StatementSpec) GetPrincipal() string`
 
-GetIdentityPoolId returns the IdentityPoolId field if non-nil, zero value otherwise.
+GetPrincipal returns the Principal field if non-nil, zero value otherwise.
 
-### GetIdentityPoolIdOk
+### GetPrincipalOk
 
-`func (o *SqlV1beta1StatementSpec) GetIdentityPoolIdOk() (*string, bool)`
+`func (o *SqlV1beta1StatementSpec) GetPrincipalOk() (*string, bool)`
 
-GetIdentityPoolIdOk returns a tuple with the IdentityPoolId field if it's non-nil, zero value otherwise
+GetPrincipalOk returns a tuple with the Principal field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIdentityPoolId
+### SetPrincipal
 
-`func (o *SqlV1beta1StatementSpec) SetIdentityPoolId(v string)`
+`func (o *SqlV1beta1StatementSpec) SetPrincipal(v string)`
 
-SetIdentityPoolId sets IdentityPoolId field to given value.
+SetPrincipal sets Principal field to given value.
 
-### HasIdentityPoolId
+### HasPrincipal
 
-`func (o *SqlV1beta1StatementSpec) HasIdentityPoolId() bool`
+`func (o *SqlV1beta1StatementSpec) HasPrincipal() bool`
 
-HasIdentityPoolId returns a boolean if a field has been set.
+HasPrincipal returns a boolean if a field has been set.
+
+### GetStopped
+
+`func (o *SqlV1beta1StatementSpec) GetStopped() bool`
+
+GetStopped returns the Stopped field if non-nil, zero value otherwise.
+
+### GetStoppedOk
+
+`func (o *SqlV1beta1StatementSpec) GetStoppedOk() (*bool, bool)`
+
+GetStoppedOk returns a tuple with the Stopped field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStopped
+
+`func (o *SqlV1beta1StatementSpec) SetStopped(v bool)`
+
+SetStopped sets Stopped field to given value.
+
+### HasStopped
+
+`func (o *SqlV1beta1StatementSpec) HasStopped() bool`
+
+HasStopped returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
