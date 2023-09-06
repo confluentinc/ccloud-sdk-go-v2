@@ -621,7 +621,7 @@ paths:
                   spec:
                     required:
                     - compute_pool_id
-                    - identity_pool_id
+                    - principal
                     - statement
                     type: object
                 required:
@@ -833,13 +833,13 @@ paths:
             --url 'https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"name":"sql123","organization_id":"7c60d51f-b44e-4682-87d6-449835ea4de6","environment_id":"string","principal":"sa-123","spec":{"statement":"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;","properties":{"key1":"value1","key2":"value2"},"compute_pool_id":"fcp-00000","identity_pool_id":"pool-abc123"}}'
+            --data '{"name":"sql123","organization_id":"7c60d51f-b44e-4682-87d6-449835ea4de6","environment_id":"string","spec":{"statement":"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;","properties":{"key1":"value1","key2":"value2"},"compute_pool_id":"fcp-00000","principal":"sa-abc123","stopped":true}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"principal\":\"sa-123\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"identity_pool_id\":\"pool-abc123\"}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true}}");
           Request request = new Request.Builder()
             .url("https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements")
             .post(body)
@@ -853,22 +853,22 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"name\\\":\\\"sql123\\\",\\\"organization_id\\\
           \":\\\"7c60d51f-b44e-4682-87d6-449835ea4de6\\\",\\\"environment_id\\\":\\\
-          \"string\\\",\\\"principal\\\":\\\"sa-123\\\",\\\"spec\\\":{\\\"statement\\\
-          \":\\\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\\\",\\\"properties\\\"\
-          :{\\\"key1\\\":\\\"value1\\\",\\\"key2\\\":\\\"value2\\\"},\\\"compute_pool_id\\\
-          \":\\\"fcp-00000\\\",\\\"identity_pool_id\\\":\\\"pool-abc123\\\"}}\")\n\
-          \n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \"string\\\",\\\"spec\\\":{\\\"statement\\\":\\\"SELECT * FROM TABLE WHERE\
+          \ VALUE1 = VALUE2;\\\",\\\"properties\\\":{\\\"key1\\\":\\\"value1\\\",\\\
+          \"key2\\\":\\\"value2\\\"},\\\"compute_pool_id\\\":\\\"fcp-00000\\\",\\\"\
+          principal\\\":\\\"sa-abc123\\\",\\\"stopped\\\":true}}\")\n\n\treq, _ :=\
+          \ http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
+          , \"application/json\")\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
+          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
 
-          payload = "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"principal\":\"sa-123\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"identity_pool_id\":\"pool-abc123\"}}"
+          payload = "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true}}"
 
           headers = {
               'content-type': "application/json",
@@ -913,12 +913,12 @@ paths:
             name: 'sql123',
             organization_id: '7c60d51f-b44e-4682-87d6-449835ea4de6',
             environment_id: 'string',
-            principal: 'sa-123',
             spec: {
               statement: 'SELECT * FROM TABLE WHERE VALUE1 = VALUE2;',
               properties: {key1: 'value1', key2: 'value2'},
               compute_pool_id: 'fcp-00000',
-              identity_pool_id: 'pool-abc123'
+              principal: 'sa-abc123',
+              stopped: true
             }
           }));
           req.end();
@@ -934,7 +934,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"principal\":\"sa-123\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"identity_pool_id\":\"pool-abc123\"}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -943,7 +943,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"principal\":\"sa-123\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"identity_pool_id\":\"pool-abc123\"}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: SQL API v1beta1
   /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}:
@@ -1474,6 +1474,316 @@ paths:
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
+    put:
+      description: |-
+        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        Make a request to update a statement.
+      operationId: updateSqlv1beta1Statement
+      parameters:
+      - description: The unique identifier for the organization.
+        explode: false
+        in: path
+        name: organization_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The unique identifier for the environment.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the statement.
+        explode: false
+        in: path
+        name: statement_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/sql.v1beta1.Statement'
+              - properties:
+                  spec:
+                    required:
+                    - stopped
+                    type: object
+                  metadata:
+                    required:
+                    - resource_version
+                    type: object
+                required:
+                - metadata
+                - name
+                - spec
+                type: object
+      responses:
+        "202":
+          description: A Statement is being updated.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - resource-api-key: []
+      summary: Update a Statement
+      tags:
+      - Statements (sql/v1beta1)
+      x-request-access-name: SQL API v1beta1
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request PUT \
+            --url 'https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"name":"sql123","organization_id":"7c60d51f-b44e-4682-87d6-449835ea4de6","environment_id":"string","spec":{"statement":"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;","properties":{"key1":"value1","key2":"value2"},"compute_pool_id":"fcp-00000","principal":"sa-abc123","stopped":true},"metadata":{}}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true},\"metadata\":{}}");
+          Request request = new Request.Builder()
+            .url("https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}")
+            .put(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"name\\\":\\\"sql123\\\",\\\"organization_id\\\
+          \":\\\"7c60d51f-b44e-4682-87d6-449835ea4de6\\\",\\\"environment_id\\\":\\\
+          \"string\\\",\\\"spec\\\":{\\\"statement\\\":\\\"SELECT * FROM TABLE WHERE\
+          \ VALUE1 = VALUE2;\\\",\\\"properties\\\":{\\\"key1\\\":\\\"value1\\\",\\\
+          \"key2\\\":\\\"value2\\\"},\\\"compute_pool_id\\\":\\\"fcp-00000\\\",\\\"\
+          principal\\\":\\\"sa-abc123\\\",\\\"stopped\\\":true},\\\"metadata\\\":{}}\"\
+          )\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
+
+          payload = "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true},\"metadata\":{}}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("PUT", "/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "PUT",
+            "hostname": "flink.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            name: 'sql123',
+            organization_id: '7c60d51f-b44e-4682-87d6-449835ea4de6',
+            environment_id: 'string',
+            spec: {
+              statement: 'SELECT * FROM TABLE WHERE VALUE1 = VALUE2;',
+              properties: {key1: 'value1', key2: 'value2'},
+              compute_pool_id: 'fcp-00000',
+              principal: 'sa-abc123',
+              stopped: true
+            },
+            metadata: {}
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PUT");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true},\"metadata\":{}}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}");
+          var request = new RestRequest(Method.PUT);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true},\"metadata\":{}}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
     x-request-access-name: SQL API v1beta1
   /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}/exceptions:
     get:
@@ -1974,12 +2284,6 @@ components:
           description: The unique identifier for the environment.
           type: string
           x-immutable: true
-        principal:
-          description: The principal that the query runs as - can be a user account
-            or service account
-          example: sa-123
-          type: string
-          x-immutable: true
         spec:
           $ref: '#/components/schemas/sql.v1beta1.StatementSpec'
         status:
@@ -2178,11 +2482,15 @@ components:
           example: fcp-00000
           maxLength: 255
           type: string
-        identity_pool_id:
-          description: The id associated with the identity pool in context.
-          example: pool-abc123
+        principal:
+          description: The id of a principal this statement runs as.
+          example: sa-abc123
           maxLength: 255
           type: string
+          x-immutable: true
+        stopped:
+          description: Indicates whether the statement should be stopped.
+          type: boolean
       type: object
       x-enable-listmeta: true
       x-enable-objectmeta: true
@@ -2207,6 +2515,15 @@ components:
             is represented in RFC3339 format and is in UTC.
           example: 2023-03-31T00:00:00Z
           format: date-time
+          type: string
+        uid:
+          description: A system generated globally unique identifier for this resource.
+          example: 12345678-1234-1234-1234-123456789012
+          type: string
+        resource_version:
+          description: A system generated string that uniquely identifies the version
+            of this resource.
+          example: a23av
           type: string
       readOnly: true
       required:

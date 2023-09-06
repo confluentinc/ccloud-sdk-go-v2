@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **Self** | **string** | Self is a Uniform Resource Locator (URL) at which an object can be addressed. This URL encodes the service location, API version, and other particulars necessary to locate the resource at a point in time | 
 **CreatedAt** | Pointer to **time.Time** | The date and time at which this object was created. It is represented in RFC3339 format and is in UTC. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | The date and time at which this object was last updated. It is represented in RFC3339 format and is in UTC. | [optional] 
+**Uid** | Pointer to **string** | A system generated globally unique identifier for this resource. | [optional] 
+**ResourceVersion** | Pointer to **string** | A system generated string that uniquely identifies the version of this resource. | [optional] 
 
 ## Methods
 
@@ -96,6 +98,56 @@ SetUpdatedAt sets UpdatedAt field to given value.
 `func (o *ObjectMeta) HasUpdatedAt() bool`
 
 HasUpdatedAt returns a boolean if a field has been set.
+
+### GetUid
+
+`func (o *ObjectMeta) GetUid() string`
+
+GetUid returns the Uid field if non-nil, zero value otherwise.
+
+### GetUidOk
+
+`func (o *ObjectMeta) GetUidOk() (*string, bool)`
+
+GetUidOk returns a tuple with the Uid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUid
+
+`func (o *ObjectMeta) SetUid(v string)`
+
+SetUid sets Uid field to given value.
+
+### HasUid
+
+`func (o *ObjectMeta) HasUid() bool`
+
+HasUid returns a boolean if a field has been set.
+
+### GetResourceVersion
+
+`func (o *ObjectMeta) GetResourceVersion() string`
+
+GetResourceVersion returns the ResourceVersion field if non-nil, zero value otherwise.
+
+### GetResourceVersionOk
+
+`func (o *ObjectMeta) GetResourceVersionOk() (*string, bool)`
+
+GetResourceVersionOk returns a tuple with the ResourceVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResourceVersion
+
+`func (o *ObjectMeta) SetResourceVersion(v string)`
+
+SetResourceVersion sets ResourceVersion field to given value.
+
+### HasResourceVersion
+
+`func (o *ObjectMeta) HasResourceVersion() bool`
+
+HasResourceVersion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
