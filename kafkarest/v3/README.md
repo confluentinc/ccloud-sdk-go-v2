@@ -277,22 +277,7 @@ Class | Method | HTTP request | Description
 
 
 
-### api-key
-
-- **Type**: HTTP basic authentication
-
-Example
-
-```golang
-auth := context.WithValue(context.Background(), sw.ContextBasicAuth, sw.BasicAuth{
-    UserName: "username",
-    Password: "password",
-})
-r, err := client.Service.Operation(auth, args)
-```
-
-
-### confluent-sts-access-token
+### external-access-token
 
 
 - **Type**: OAuth
@@ -316,6 +301,21 @@ import "golang.org/x/oauth2"
 
 tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
 auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
+r, err := client.Service.Operation(auth, args)
+```
+
+
+### resource-api-key
+
+- **Type**: HTTP basic authentication
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextBasicAuth, sw.BasicAuth{
+    UserName: "username",
+    Password: "password",
+})
 r, err := client.Service.Operation(auth, args)
 ```
 

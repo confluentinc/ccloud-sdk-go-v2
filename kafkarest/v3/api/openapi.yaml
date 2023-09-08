@@ -156,8 +156,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Get Cluster
       tags:
       - Cluster (v3)
@@ -339,8 +339,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Batch Create ACLs
       tags:
       - ACL (v3)
@@ -350,6 +350,7 @@ paths:
           curl --request POST \
             --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls:batch \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
             --data '{"data":[{"resource_type":"UNKNOWN","resource_name":"string","pattern_type":"string","principal":"string","host":"string","operation":"string","permission":"string"}]}'
       - lang: Java
         source: |-
@@ -361,6 +362,7 @@ paths:
             .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls:batch")
             .post(body)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -372,9 +374,10 @@ paths:
           \":\\\"string\\\",\\\"principal\\\":\\\"string\\\",\\\"host\\\":\\\"string\\\
           \",\\\"operation\\\":\\\"string\\\",\\\"permission\\\":\\\"string\\\"}]}\"\
           )\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\"\
+          , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
+          defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
+          \tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
@@ -383,7 +386,10 @@ paths:
 
           payload = "{\"data\":[{\"resource_type\":\"UNKNOWN\",\"resource_name\":\"string\",\"pattern_type\":\"string\",\"principal\":\"string\",\"host\":\"string\",\"operation\":\"string\",\"permission\":\"string\"}]}"
 
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+          headers = {
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
+              }
 
           conn.request("POST", "/kafka/v3/clusters/cluster-1/acls:batch", payload, headers)
 
@@ -401,7 +407,8 @@ paths:
             "port": null,
             "path": "/kafka/v3/clusters/cluster-1/acls:batch",
             "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -441,6 +448,7 @@ paths:
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"data\":[{\"resource_type\":\"UNKNOWN\",\"resource_name\":\"string\",\"pattern_type\":\"string\",\"principal\":\"string\",\"host\":\"string\",\"operation\":\"string\",\"permission\":\"string\"}]}");
@@ -451,7 +459,8 @@ paths:
           var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls:batch");
           var request = new RestRequest(Method.POST);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("undefined", "{\"data\":[{\"resource_type\":\"UNKNOWN\",\"resource_name\":\"string\",\"pattern_type\":\"string\",\"principal\":\"string\",\"host\":\"string\",\"operation\":\"string\",\"permission\":\"string\"}]}", ParameterType.RequestBody);
+          request.AddHeader("content-type", "application/json");
+          request.AddParameter("application/json", "{\"data\":[{\"resource_type\":\"UNKNOWN\",\"resource_name\":\"string\",\"pattern_type\":\"string\",\"principal\":\"string\",\"host\":\"string\",\"operation\":\"string\",\"permission\":\"string\"}]}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /kafka/v3/clusters/{cluster_id}/acls:
     delete:
@@ -629,8 +638,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Delete ACLs
       tags:
       - ACL (v3)
@@ -638,14 +647,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE' \
+            --url 'https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&resource_name=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&principal=SOME_STRING_VALUE&host=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE")
+            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&resource_name=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&principal=SOME_STRING_VALUE&host=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -653,7 +662,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&resource_name=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&principal=SOME_STRING_VALUE&host=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -666,7 +675,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE", headers=headers)
+          conn.request("DELETE", "/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&resource_name=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&principal=SOME_STRING_VALUE&host=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -680,7 +689,7 @@ paths:
             "method": "DELETE",
             "hostname": "pkc-00000.region.provider.confluent.cloud",
             "port": null,
-            "path": "/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE",
+            "path": "/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&resource_name=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&principal=SOME_STRING_VALUE&host=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -705,7 +714,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&resource_name=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&principal=SOME_STRING_VALUE&host=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -714,7 +723,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE");
+          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&resource_name=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&principal=SOME_STRING_VALUE&host=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -904,8 +913,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: List ACLs
       tags:
       - ACL (v3)
@@ -913,14 +922,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE' \
+            --url 'https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&resource_name=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&principal=SOME_STRING_VALUE&host=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE")
+            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&resource_name=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&principal=SOME_STRING_VALUE&host=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -928,7 +937,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&resource_name=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&principal=SOME_STRING_VALUE&host=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -941,7 +950,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&resource_name=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&principal=SOME_STRING_VALUE&host=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -955,7 +964,7 @@ paths:
             "method": "GET",
             "hostname": "pkc-00000.region.provider.confluent.cloud",
             "port": null,
-            "path": "/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE",
+            "path": "/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&resource_name=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&principal=SOME_STRING_VALUE&host=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -980,7 +989,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&resource_name=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&principal=SOME_STRING_VALUE&host=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -989,7 +998,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE");
+          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls?resource_type=SOME_STRING_VALUE&resource_name=SOME_STRING_VALUE&pattern_type=SOME_STRING_VALUE&principal=SOME_STRING_VALUE&host=SOME_STRING_VALUE&operation=SOME_STRING_VALUE&permission=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1086,8 +1095,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Create an ACL
       tags:
       - ACL (v3)
@@ -1097,6 +1106,7 @@ paths:
           curl --request POST \
             --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
             --data '{"resource_type":"UNKNOWN","resource_name":"string","pattern_type":"string","principal":"string","host":"string","operation":"string","permission":"string"}'
       - lang: Java
         source: |-
@@ -1108,6 +1118,7 @@ paths:
             .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls")
             .post(body)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -1119,8 +1130,9 @@ paths:
           \",\\\"principal\\\":\\\"string\\\",\\\"host\\\":\\\"string\\\",\\\"operation\\\
           \":\\\"string\\\",\\\"permission\\\":\\\"string\\\"}\")\n\n\treq, _ := http.NewRequest(\"\
           POST\", url, payload)\n\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
-          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
-          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          )\n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _\
+          \ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ :=\
+          \ ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -1130,7 +1142,10 @@ paths:
 
           payload = "{\"resource_type\":\"UNKNOWN\",\"resource_name\":\"string\",\"pattern_type\":\"string\",\"principal\":\"string\",\"host\":\"string\",\"operation\":\"string\",\"permission\":\"string\"}"
 
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+          headers = {
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
+              }
 
           conn.request("POST", "/kafka/v3/clusters/cluster-1/acls", payload, headers)
 
@@ -1148,7 +1163,8 @@ paths:
             "port": null,
             "path": "/kafka/v3/clusters/cluster-1/acls",
             "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -1184,6 +1200,7 @@ paths:
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"resource_type\":\"UNKNOWN\",\"resource_name\":\"string\",\"pattern_type\":\"string\",\"principal\":\"string\",\"host\":\"string\",\"operation\":\"string\",\"permission\":\"string\"}");
@@ -1194,7 +1211,8 @@ paths:
           var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/acls");
           var request = new RestRequest(Method.POST);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("undefined", "{\"resource_type\":\"UNKNOWN\",\"resource_name\":\"string\",\"pattern_type\":\"string\",\"principal\":\"string\",\"host\":\"string\",\"operation\":\"string\",\"permission\":\"string\"}", ParameterType.RequestBody);
+          request.AddHeader("content-type", "application/json");
+          request.AddParameter("application/json", "{\"resource_type\":\"UNKNOWN\",\"resource_name\":\"string\",\"pattern_type\":\"string\",\"principal\":\"string\",\"host\":\"string\",\"operation\":\"string\",\"permission\":\"string\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /kafka/v3/clusters/{cluster_id}/broker-configs:
     get:
@@ -1345,8 +1363,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: List Dynamic Broker Configs
       tags:
       - Configs (v3)
@@ -1536,8 +1554,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Batch Alter Dynamic Broker Configs
       tags:
       - Configs (v3)
@@ -1547,6 +1565,7 @@ paths:
           curl --request POST \
             --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/broker-configs:alter \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
             --data '{"data":[{"name":"string","value":"string","operation":"string"}],"validate_only":true}'
       - lang: Java
         source: |-
@@ -1558,6 +1577,7 @@ paths:
             .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/broker-configs:alter")
             .post(body)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -1568,8 +1588,9 @@ paths:
           \",\\\"value\\\":\\\"string\\\",\\\"operation\\\":\\\"string\\\"}],\\\"\
           validate_only\\\":true}\")\n\n\treq, _ := http.NewRequest(\"POST\", url,\
           \ payload)\n\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
-          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
-          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          )\n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _\
+          \ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ :=\
+          \ ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -1579,7 +1600,10 @@ paths:
 
           payload = "{\"data\":[{\"name\":\"string\",\"value\":\"string\",\"operation\":\"string\"}],\"validate_only\":true}"
 
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+          headers = {
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
+              }
 
           conn.request("POST", "/kafka/v3/clusters/cluster-1/broker-configs:alter", payload, headers)
 
@@ -1597,7 +1621,8 @@ paths:
             "port": null,
             "path": "/kafka/v3/clusters/cluster-1/broker-configs:alter",
             "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -1628,6 +1653,7 @@ paths:
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"data\":[{\"name\":\"string\",\"value\":\"string\",\"operation\":\"string\"}],\"validate_only\":true}");
@@ -1638,7 +1664,8 @@ paths:
           var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/broker-configs:alter");
           var request = new RestRequest(Method.POST);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("undefined", "{\"data\":[{\"name\":\"string\",\"value\":\"string\",\"operation\":\"string\"}],\"validate_only\":true}", ParameterType.RequestBody);
+          request.AddHeader("content-type", "application/json");
+          request.AddParameter("application/json", "{\"data\":[{\"name\":\"string\",\"value\":\"string\",\"operation\":\"string\"}],\"validate_only\":true}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /kafka/v3/clusters/{cluster_id}/broker-configs/{name}:
     delete:
@@ -1750,8 +1777,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Reset Dynamic Broker Config
       tags:
       - Configs (v3)
@@ -1971,8 +1998,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Get Dynamic Broker Config
       tags:
       - Configs (v3)
@@ -2170,8 +2197,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Update Dynamic Broker Config
       tags:
       - Configs (v3)
@@ -2181,6 +2208,7 @@ paths:
           curl --request PUT \
             --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/broker-configs/compression.type \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
             --data '{"value":"string"}'
       - lang: Java
         source: |-
@@ -2192,6 +2220,7 @@ paths:
             .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/broker-configs/compression.type")
             .put(body)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -2200,9 +2229,10 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/broker-configs/compression.type\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"value\\\":\\\"string\\\"}\")\n\
           \n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\"\
+          , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
+          defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
+          \tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
@@ -2211,7 +2241,10 @@ paths:
 
           payload = "{\"value\":\"string\"}"
 
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+          headers = {
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
+              }
 
           conn.request("PUT", "/kafka/v3/clusters/cluster-1/broker-configs/compression.type", payload, headers)
 
@@ -2229,7 +2262,8 @@ paths:
             "port": null,
             "path": "/kafka/v3/clusters/cluster-1/broker-configs/compression.type",
             "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -2257,6 +2291,7 @@ paths:
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"value\":\"string\"}");
@@ -2267,7 +2302,8 @@ paths:
           var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/broker-configs/compression.type");
           var request = new RestRequest(Method.PUT);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("undefined", "{\"value\":\"string\"}", ParameterType.RequestBody);
+          request.AddHeader("content-type", "application/json");
+          request.AddParameter("application/json", "{\"value\":\"string\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /kafka/v3/clusters/{cluster_id}/consumer-groups:
     get:
@@ -2425,8 +2461,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: List Consumer Groups
       tags:
       - Consumer Group (v3)
@@ -2643,8 +2679,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Get Consumer Group
       tags:
       - Consumer Group (v3)
@@ -2885,8 +2921,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: List Consumers
       tags:
       - Consumer Group (v3)
@@ -3106,8 +3142,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Get Consumer Group Lag Summary
       tags:
       - Consumer Group (v3)
@@ -3357,8 +3393,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: List Consumer Lags
       tags:
       - Consumer Group (v3)
@@ -3592,8 +3628,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Get Consumer Lag
       tags:
       - Consumer Group (v3)
@@ -3815,8 +3851,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Get Consumer
       tags:
       - Consumer Group (v3)
@@ -4059,8 +4095,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: List Topics
       tags:
       - Topic (v3)
@@ -4293,8 +4329,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Create Topic
       tags:
       - Topic (v3)
@@ -4304,6 +4340,7 @@ paths:
           curl --request POST \
             --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
             --data '{"topic_name":"string","partitions_count":0,"replication_factor":0,"configs":[{"name":"string","value":"string"}],"validate_only":true}'
       - lang: Java
         source: |-
@@ -4315,6 +4352,7 @@ paths:
             .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics")
             .post(body)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -4325,10 +4363,10 @@ paths:
           ,\\\"partitions_count\\\":0,\\\"replication_factor\\\":0,\\\"configs\\\"\
           :[{\\\"name\\\":\\\"string\\\",\\\"value\\\":\\\"string\\\"}],\\\"validate_only\\\
           \":true}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\t\
-          req.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres,\
-          \ _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _\
-          \ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          req.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
@@ -4337,7 +4375,10 @@ paths:
 
           payload = "{\"topic_name\":\"string\",\"partitions_count\":0,\"replication_factor\":0,\"configs\":[{\"name\":\"string\",\"value\":\"string\"}],\"validate_only\":true}"
 
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+          headers = {
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
+              }
 
           conn.request("POST", "/kafka/v3/clusters/cluster-1/topics", payload, headers)
 
@@ -4355,7 +4396,8 @@ paths:
             "port": null,
             "path": "/kafka/v3/clusters/cluster-1/topics",
             "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -4389,6 +4431,7 @@ paths:
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"topic_name\":\"string\",\"partitions_count\":0,\"replication_factor\":0,\"configs\":[{\"name\":\"string\",\"value\":\"string\"}],\"validate_only\":true}");
@@ -4399,7 +4442,8 @@ paths:
           var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics");
           var request = new RestRequest(Method.POST);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("undefined", "{\"topic_name\":\"string\",\"partitions_count\":0,\"replication_factor\":0,\"configs\":[{\"name\":\"string\",\"value\":\"string\"}],\"validate_only\":true}", ParameterType.RequestBody);
+          request.AddHeader("content-type", "application/json");
+          request.AddParameter("application/json", "{\"topic_name\":\"string\",\"partitions_count\":0,\"replication_factor\":0,\"configs\":[{\"name\":\"string\",\"value\":\"string\"}],\"validate_only\":true}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /kafka/v3/clusters/{cluster_id}/topics/{topic_name}:
     delete:
@@ -4535,8 +4579,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Delete Topic
       tags:
       - Topic (v3)
@@ -4785,8 +4829,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Get Topic
       tags:
       - Topic (v3)
@@ -4794,14 +4838,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1 \
+            --url 'https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1?include_authorized_operations=SOME_BOOLEAN_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1")
+            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1?include_authorized_operations=SOME_BOOLEAN_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -4809,7 +4853,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1?include_authorized_operations=SOME_BOOLEAN_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -4822,7 +4866,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/kafka/v3/clusters/cluster-1/topics/topic-1", headers=headers)
+          conn.request("GET", "/kafka/v3/clusters/cluster-1/topics/topic-1?include_authorized_operations=SOME_BOOLEAN_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -4836,7 +4880,7 @@ paths:
             "method": "GET",
             "hostname": "pkc-00000.region.provider.confluent.cloud",
             "port": null,
-            "path": "/kafka/v3/clusters/cluster-1/topics/topic-1",
+            "path": "/kafka/v3/clusters/cluster-1/topics/topic-1?include_authorized_operations=SOME_BOOLEAN_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -4861,7 +4905,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1?include_authorized_operations=SOME_BOOLEAN_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -4870,7 +4914,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1");
+          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1?include_authorized_operations=SOME_BOOLEAN_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -4999,8 +5043,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Update Partition Count
       tags:
       - Topic (v3)
@@ -5021,8 +5065,8 @@ paths:
           Request request = new Request.Builder()
             .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1")
             .patch(body)
-            .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -5031,10 +5075,10 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"partitions_count\\\":0}\")\n\n\
           \treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\"\
+          , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
+          defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
+          \tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
@@ -5044,8 +5088,8 @@ paths:
           payload = "{\"partitions_count\":0}"
 
           headers = {
-              'content-type': "application/json",
-              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
               }
 
           conn.request("PATCH", "/kafka/v3/clusters/cluster-1/topics/topic-1", payload, headers)
@@ -5064,8 +5108,8 @@ paths:
             "port": null,
             "path": "/kafka/v3/clusters/cluster-1/topics/topic-1",
             "headers": {
-              "content-type": "application/json",
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -5092,8 +5136,8 @@ paths:
           curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1");
 
           struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"partitions_count\":0}");
@@ -5103,8 +5147,8 @@ paths:
         source: |-
           var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1");
           var request = new RestRequest(Method.PATCH);
-          request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddHeader("content-type", "application/json");
           request.AddParameter("application/json", "{\"partitions_count\":0}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs:
@@ -5289,8 +5333,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: List Topic Configs
       tags:
       - Configs (v3)
@@ -5516,8 +5560,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Batch Alter Topic Configs
       tags:
       - Configs (v3)
@@ -5527,6 +5571,7 @@ paths:
           curl --request POST \
             --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1/configs:alter \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
             --data '{"data":[{"name":"string","value":"string","operation":"string"}],"validate_only":true}'
       - lang: Java
         source: |-
@@ -5538,6 +5583,7 @@ paths:
             .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1/configs:alter")
             .post(body)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -5548,8 +5594,9 @@ paths:
           \",\\\"value\\\":\\\"string\\\",\\\"operation\\\":\\\"string\\\"}],\\\"\
           validate_only\\\":true}\")\n\n\treq, _ := http.NewRequest(\"POST\", url,\
           \ payload)\n\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
-          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
-          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          )\n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _\
+          \ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ :=\
+          \ ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -5559,7 +5606,10 @@ paths:
 
           payload = "{\"data\":[{\"name\":\"string\",\"value\":\"string\",\"operation\":\"string\"}],\"validate_only\":true}"
 
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+          headers = {
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
+              }
 
           conn.request("POST", "/kafka/v3/clusters/cluster-1/topics/topic-1/configs:alter", payload, headers)
 
@@ -5577,7 +5627,8 @@ paths:
             "port": null,
             "path": "/kafka/v3/clusters/cluster-1/topics/topic-1/configs:alter",
             "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -5608,6 +5659,7 @@ paths:
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"data\":[{\"name\":\"string\",\"value\":\"string\",\"operation\":\"string\"}],\"validate_only\":true}");
@@ -5618,7 +5670,8 @@ paths:
           var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1/configs:alter");
           var request = new RestRequest(Method.POST);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("undefined", "{\"data\":[{\"name\":\"string\",\"value\":\"string\",\"operation\":\"string\"}],\"validate_only\":true}", ParameterType.RequestBody);
+          request.AddHeader("content-type", "application/json");
+          request.AddParameter("application/json", "{\"data\":[{\"name\":\"string\",\"value\":\"string\",\"operation\":\"string\"}],\"validate_only\":true}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs/{name}:
     delete:
@@ -5763,8 +5816,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Reset Topic Config
       tags:
       - Configs (v3)
@@ -6018,8 +6071,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Get Topic Config
       tags:
       - Configs (v3)
@@ -6251,8 +6304,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Update Topic Config
       tags:
       - Configs (v3)
@@ -6262,6 +6315,7 @@ paths:
           curl --request PUT \
             --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1/configs/compression.type \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
             --data '{"value":"string"}'
       - lang: Java
         source: |-
@@ -6273,6 +6327,7 @@ paths:
             .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1/configs/compression.type")
             .put(body)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -6281,9 +6336,10 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1/configs/compression.type\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"value\\\":\\\"string\\\"}\")\n\
           \n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\"\
+          , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
+          defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
+          \tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
@@ -6292,7 +6348,10 @@ paths:
 
           payload = "{\"value\":\"string\"}"
 
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+          headers = {
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
+              }
 
           conn.request("PUT", "/kafka/v3/clusters/cluster-1/topics/topic-1/configs/compression.type", payload, headers)
 
@@ -6310,7 +6369,8 @@ paths:
             "port": null,
             "path": "/kafka/v3/clusters/cluster-1/topics/topic-1/configs/compression.type",
             "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -6338,6 +6398,7 @@ paths:
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"value\":\"string\"}");
@@ -6348,7 +6409,8 @@ paths:
           var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1/configs/compression.type");
           var request = new RestRequest(Method.PUT);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("undefined", "{\"value\":\"string\"}", ParameterType.RequestBody);
+          request.AddHeader("content-type", "application/json");
+          request.AddParameter("application/json", "{\"value\":\"string\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/partitions:
     get:
@@ -6533,8 +6595,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: List Partitions
       tags:
       - Partition (v3)
@@ -6783,8 +6845,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Get Partition
       tags:
       - Partition (v3)
@@ -7021,8 +7083,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: List All Topic Configs
       tags:
       - Configs (v3)
@@ -7112,18 +7174,23 @@ paths:
           IRestResponse response = client.Execute(request);
   /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/records:
     post:
-      description: "[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)\n\
-        \nProduce records to the given topic, returning delivery reports for each\n\
-        \            record produced. This API can be used in streaming mode by setting\
-        \ \"Transfer-Encoding:\n            chunked\" header. For as long as the connection\
-        \ is kept open, the server will\n            keep accepting records. Records\
-        \ are streamed to and from the server as Concatenated \n            JSON.\
-        \ For each record sent to the server, the server will\n            asynchronously\
-        \ send back a delivery report, in the same order, each with its own\n    \
-        \        error_code. An error_code of 200 indicates success. The HTTP status\
-        \ code will be HTTP \n            200 OK as long as the connection is successfully\
-        \ established. To identify records\n            that have encountered an error,\
-        \ check the error_code of each delivery report."
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Produce records to the given topic, returning delivery reports for each
+        record produced. This API can be used in streaming mode by setting
+        "Transfer-Encoding: chunked" header. For as long as the connection is
+        kept open, the server will keep accepting records. Records are streamed
+        to and from the server as Concatenated JSON. For each record sent to the
+        server, the server will asynchronously send back a delivery report, in
+        the same order, each with its own error_code. An error_code of 200
+        indicates success. The HTTP status code will be HTTP 200 OK as long as
+        the connection is successfully established. To identify records that
+        have encountered an error, check the error_code of each delivery report.
+
+        This API currently does not support Schema Registry integration. Sending
+        schemas is not supported. Only BINARY, JSON, and STRING formats are
+        supported.
       operationId: produceRecord
       parameters:
       - description: The Kafka cluster ID.
@@ -7274,8 +7341,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Produce Records
       tags:
       - Records (v3)
@@ -7285,6 +7352,7 @@ paths:
           curl --request POST \
             --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1/records \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
             --data '{"partition_id":0,"headers":[{"name":"string","value":"string"}],"key":{"type":"string","data":null},"value":{"type":"string","data":null},"timestamp":"2019-08-24T14:15:22Z"}'
       - lang: Java
         source: |-
@@ -7296,6 +7364,7 @@ paths:
             .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1/records")
             .post(body)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -7307,9 +7376,10 @@ paths:
           \":{\\\"type\\\":\\\"string\\\",\\\"data\\\":null},\\\"value\\\":{\\\"type\\\
           \":\\\"string\\\",\\\"data\\\":null},\\\"timestamp\\\":\\\"2019-08-24T14:15:22Z\\\
           \"}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\"\
+          , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
+          defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
+          \tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
@@ -7318,7 +7388,10 @@ paths:
 
           payload = "{\"partition_id\":0,\"headers\":[{\"name\":\"string\",\"value\":\"string\"}],\"key\":{\"type\":\"string\",\"data\":null},\"value\":{\"type\":\"string\",\"data\":null},\"timestamp\":\"2019-08-24T14:15:22Z\"}"
 
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+          headers = {
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
+              }
 
           conn.request("POST", "/kafka/v3/clusters/cluster-1/topics/topic-1/records", payload, headers)
 
@@ -7336,7 +7409,8 @@ paths:
             "port": null,
             "path": "/kafka/v3/clusters/cluster-1/topics/topic-1/records",
             "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -7370,6 +7444,7 @@ paths:
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"partition_id\":0,\"headers\":[{\"name\":\"string\",\"value\":\"string\"}],\"key\":{\"type\":\"string\",\"data\":null},\"value\":{\"type\":\"string\",\"data\":null},\"timestamp\":\"2019-08-24T14:15:22Z\"}");
@@ -7380,7 +7455,8 @@ paths:
           var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1/records");
           var request = new RestRequest(Method.POST);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("undefined", "{\"partition_id\":0,\"headers\":[{\"name\":\"string\",\"value\":\"string\"}],\"key\":{\"type\":\"string\",\"data\":null},\"value\":{\"type\":\"string\",\"data\":null},\"timestamp\":\"2019-08-24T14:15:22Z\"}", ParameterType.RequestBody);
+          request.AddHeader("content-type", "application/json");
+          request.AddParameter("application/json", "{\"partition_id\":0,\"headers\":[{\"name\":\"string\",\"value\":\"string\"}],\"key\":{\"type\":\"string\",\"data\":null},\"value\":{\"type\":\"string\",\"data\":null},\"timestamp\":\"2019-08-24T14:15:22Z\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /kafka/v3/clusters/{cluster_id}/links:
     get:
@@ -7413,8 +7489,7 @@ paths:
                   metadata:
                     self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/CIL-69l7S1CwoVNAhoQLug/links/my-new-link-1
                     resource_name: null
-                  remote_cluster_id: src-cluster-id
-                  destination_cluster_id: null
+                  source_cluster_id: src-cluster-id
                   link_name: my-new-link-1
                   link_id: 7840644d-f7d8-4844-a577-a10ef3df31df
                   cluster_link_id: eEBkTffYSESld6EO898x3w
@@ -7427,7 +7502,6 @@ paths:
                     self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/CIL-69l7S1CwoVNAhoQLug/links/my-new-link-2
                     resource_name: null
                   remote_cluster_id: src-cluster-id
-                  destination_cluster_id: null
                   link_name: my-new-link-2
                   link_id: f749116e-f847-4bd2-b1f6-5c4e518a0678
                   cluster_link_id: 90kRbvhHS9Kx9lxOUYoGeA
@@ -7441,7 +7515,6 @@ paths:
                   metadata:
                     self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/CIL-69l7S1CwoVNAhoQLug/links/my-new-link-3
                     resource_name: null
-                  remote_cluster_id: null
                   destination_cluster_id: dest-cluster-id
                   link_name: my-new-link-3
                   link_id: 9cd1711e-a4ef-4390-a35e-dfd758d97a82
@@ -7517,8 +7590,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: List all cluster links in the dest cluster
       tags:
       - Cluster Linking (v3)
@@ -7720,8 +7793,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Create a cluster link
       tags:
       - Cluster Linking (v3)
@@ -7729,8 +7802,9 @@ paths:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links \
+            --url 'https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links?link_name=link-sb1&validate_only=false&validate_link=false' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
             --data '{"source_cluster_id":"string","destination_cluster_id":"string","remote_cluster_id":"string","cluster_link_id":"string","configs":[{"name":"name","value":"value"}]}'
       - lang: Java
         source: |-
@@ -7739,23 +7813,25 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"source_cluster_id\":\"string\",\"destination_cluster_id\":\"string\",\"remote_cluster_id\":\"string\",\"cluster_link_id\":\"string\",\"configs\":[{\"name\":\"name\",\"value\":\"value\"}]}");
           Request request = new Request.Builder()
-            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links")
+            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links?link_name=link-sb1&validate_only=false&validate_link=false")
             .post(body)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links?link_name=link-sb1&validate_only=false&validate_link=false\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"source_cluster_id\\\":\\\"string\\\
           \",\\\"destination_cluster_id\\\":\\\"string\\\",\\\"remote_cluster_id\\\
           \":\\\"string\\\",\\\"cluster_link_id\\\":\\\"string\\\",\\\"configs\\\"\
           :[{\\\"name\\\":\\\"name\\\",\\\"value\\\":\\\"value\\\"}]}\")\n\n\treq,\
           \ _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          , \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
+          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
@@ -7764,9 +7840,12 @@ paths:
 
           payload = "{\"source_cluster_id\":\"string\",\"destination_cluster_id\":\"string\",\"remote_cluster_id\":\"string\",\"cluster_link_id\":\"string\",\"configs\":[{\"name\":\"name\",\"value\":\"value\"}]}"
 
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+          headers = {
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
+              }
 
-          conn.request("POST", "/kafka/v3/clusters/cluster-1/links", payload, headers)
+          conn.request("POST", "/kafka/v3/clusters/cluster-1/links?link_name=link-sb1&validate_only=false&validate_link=false", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -7780,9 +7859,10 @@ paths:
             "method": "POST",
             "hostname": "pkc-00000.region.provider.confluent.cloud",
             "port": null,
-            "path": "/kafka/v3/clusters/cluster-1/links",
+            "path": "/kafka/v3/clusters/cluster-1/links?link_name=link-sb1&validate_only=false&validate_link=false",
             "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -7812,10 +7892,11 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links?link_name=link-sb1&validate_only=false&validate_link=false");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"source_cluster_id\":\"string\",\"destination_cluster_id\":\"string\",\"remote_cluster_id\":\"string\",\"cluster_link_id\":\"string\",\"configs\":[{\"name\":\"name\",\"value\":\"value\"}]}");
@@ -7823,10 +7904,11 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links");
+          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links?link_name=link-sb1&validate_only=false&validate_link=false");
           var request = new RestRequest(Method.POST);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("undefined", "{\"source_cluster_id\":\"string\",\"destination_cluster_id\":\"string\",\"remote_cluster_id\":\"string\",\"cluster_link_id\":\"string\",\"configs\":[{\"name\":\"name\",\"value\":\"value\"}]}", ParameterType.RequestBody);
+          request.AddHeader("content-type", "application/json");
+          request.AddParameter("application/json", "{\"source_cluster_id\":\"string\",\"destination_cluster_id\":\"string\",\"remote_cluster_id\":\"string\",\"cluster_link_id\":\"string\",\"configs\":[{\"name\":\"name\",\"value\":\"value\"}]}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /kafka/v3/clusters/{cluster_id}/links/{link_name}:
     delete:
@@ -7939,8 +8021,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Delete the cluster link
       tags:
       - Cluster Linking (v3)
@@ -7948,14 +8030,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1 \
+            --url 'https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1?force=false&validate_only=false' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1")
+            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1?force=false&validate_only=false")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -7963,7 +8045,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1?force=false&validate_only=false\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -7976,7 +8058,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/kafka/v3/clusters/cluster-1/links/link-sb1", headers=headers)
+          conn.request("DELETE", "/kafka/v3/clusters/cluster-1/links/link-sb1?force=false&validate_only=false", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -7990,7 +8072,7 @@ paths:
             "method": "DELETE",
             "hostname": "pkc-00000.region.provider.confluent.cloud",
             "port": null,
-            "path": "/kafka/v3/clusters/cluster-1/links/link-sb1",
+            "path": "/kafka/v3/clusters/cluster-1/links/link-sb1?force=false&validate_only=false",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -8015,7 +8097,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1?force=false&validate_only=false");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -8024,7 +8106,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1");
+          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1?force=false&validate_only=false");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -8065,8 +8147,7 @@ paths:
                     metadata:
                       self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/Fds7TcT9TTqEXsoRLEKMcQ/links/my-new-link-1
                     resource_name: null
-                    remote_cluster_id: src-cluster-id
-                    destination_cluster_id: null
+                    source_cluster_id: src-cluster-id
                     link_name: my-new-link-1
                     link_id: 7840644d-f7d8-4844-a577-a10ef3df31df
                     cluster_link_id: eEBkTffYSESld6EO898x3w
@@ -8080,7 +8161,6 @@ paths:
                     metadata:
                       self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/Fds7TcT9TTqEXsoRLEKMcQ/links/my-new-link-1
                     resource_name: null
-                    remote_cluster_id: null
                     destination_cluster_id: dst-cluster-id
                     link_name: my-new-link-1
                     link_id: 7840644d-f7d8-4844-a577-a10ef3df31df
@@ -8155,8 +8235,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Describe the cluster link
       tags:
       - Cluster Linking (v3)
@@ -8412,8 +8492,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: List New Topic Default Configs
       tags:
       - Configs (v3)
@@ -8633,8 +8713,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: List all configs of the cluster link
       tags:
       - Cluster Linking (v3)
@@ -8823,8 +8903,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Reset the given config to default value
       tags:
       - Cluster Linking (v3)
@@ -9035,8 +9115,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Describe the config under the cluster link
       tags:
       - Cluster Linking (v3)
@@ -9226,8 +9306,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Alter the config under the cluster link
       tags:
       - Cluster Linking (v3)
@@ -9237,6 +9317,7 @@ paths:
           curl --request PUT \
             --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/configs/consumer.offset.sync.enable \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
             --data '{"value":"string"}'
       - lang: Java
         source: |-
@@ -9248,6 +9329,7 @@ paths:
             .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/configs/consumer.offset.sync.enable")
             .put(body)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -9256,9 +9338,10 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/configs/consumer.offset.sync.enable\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"value\\\":\\\"string\\\"}\")\n\
           \n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\"\
+          , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
+          defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
+          \tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
@@ -9267,7 +9350,10 @@ paths:
 
           payload = "{\"value\":\"string\"}"
 
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+          headers = {
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
+              }
 
           conn.request("PUT", "/kafka/v3/clusters/cluster-1/links/link-sb1/configs/consumer.offset.sync.enable", payload, headers)
 
@@ -9285,7 +9371,8 @@ paths:
             "port": null,
             "path": "/kafka/v3/clusters/cluster-1/links/link-sb1/configs/consumer.offset.sync.enable",
             "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -9313,6 +9400,7 @@ paths:
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"value\":\"string\"}");
@@ -9323,7 +9411,8 @@ paths:
           var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/configs/consumer.offset.sync.enable");
           var request = new RestRequest(Method.PUT);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("undefined", "{\"value\":\"string\"}", ParameterType.RequestBody);
+          request.AddHeader("content-type", "application/json");
+          request.AddParameter("application/json", "{\"value\":\"string\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs:alter:
     put:
@@ -9432,8 +9521,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Batch Alter Cluster Link Configs
       tags:
       - Cluster Linking (v3)
@@ -9441,8 +9530,9 @@ paths:
       - lang: Shell
         source: |-
           curl --request PUT \
-            --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/configs:alter \
+            --url 'https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/configs:alter?validate_only=false' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
             --data '{"data":[{"name":"string","value":"string","operation":"string"}],"validate_only":true}'
       - lang: Java
         source: |-
@@ -9451,21 +9541,23 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"data\":[{\"name\":\"string\",\"value\":\"string\",\"operation\":\"string\"}],\"validate_only\":true}");
           Request request = new Request.Builder()
-            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/configs:alter")
+            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/configs:alter?validate_only=false")
             .put(body)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/configs:alter\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/configs:alter?validate_only=false\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"data\\\":[{\\\"name\\\":\\\"string\\\
           \",\\\"value\\\":\\\"string\\\",\\\"operation\\\":\\\"string\\\"}],\\\"\
           validate_only\\\":true}\")\n\n\treq, _ := http.NewRequest(\"PUT\", url,\
           \ payload)\n\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
-          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
-          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          )\n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _\
+          \ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ :=\
+          \ ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -9475,9 +9567,12 @@ paths:
 
           payload = "{\"data\":[{\"name\":\"string\",\"value\":\"string\",\"operation\":\"string\"}],\"validate_only\":true}"
 
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+          headers = {
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
+              }
 
-          conn.request("PUT", "/kafka/v3/clusters/cluster-1/links/link-sb1/configs:alter", payload, headers)
+          conn.request("PUT", "/kafka/v3/clusters/cluster-1/links/link-sb1/configs:alter?validate_only=false", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -9491,9 +9586,10 @@ paths:
             "method": "PUT",
             "hostname": "pkc-00000.region.provider.confluent.cloud",
             "port": null,
-            "path": "/kafka/v3/clusters/cluster-1/links/link-sb1/configs:alter",
+            "path": "/kafka/v3/clusters/cluster-1/links/link-sb1/configs:alter?validate_only=false",
             "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -9520,10 +9616,11 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PUT");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/configs:alter");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/configs:alter?validate_only=false");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"data\":[{\"name\":\"string\",\"value\":\"string\",\"operation\":\"string\"}],\"validate_only\":true}");
@@ -9531,10 +9628,11 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/configs:alter");
+          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/configs:alter?validate_only=false");
           var request = new RestRequest(Method.PUT);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("undefined", "{\"data\":[{\"name\":\"string\",\"value\":\"string\",\"operation\":\"string\"}],\"validate_only\":true}", ParameterType.RequestBody);
+          request.AddHeader("content-type", "application/json");
+          request.AddParameter("application/json", "{\"data\":[{\"name\":\"string\",\"value\":\"string\",\"operation\":\"string\"}],\"validate_only\":true}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:
     get:
@@ -9694,8 +9792,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: List mirror topics
       tags:
       - Cluster Linking (v3)
@@ -9880,8 +9978,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Create a mirror topic
       tags:
       - Cluster Linking (v3)
@@ -9891,6 +9989,7 @@ paths:
           curl --request POST \
             --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
             --data '{"source_topic_name":"string","mirror_topic_name":"string","replication_factor":0,"configs":[{"name":"name","value":"value"}]}'
       - lang: Java
         source: |-
@@ -9902,6 +10001,7 @@ paths:
             .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors")
             .post(body)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -9912,9 +10012,10 @@ paths:
           \",\\\"mirror_topic_name\\\":\\\"string\\\",\\\"replication_factor\\\":0,\\\
           \"configs\\\":[{\\\"name\\\":\\\"name\\\",\\\"value\\\":\\\"value\\\"}]}\"\
           )\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\"\
+          , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
+          defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
+          \tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
@@ -9923,7 +10024,10 @@ paths:
 
           payload = "{\"source_topic_name\":\"string\",\"mirror_topic_name\":\"string\",\"replication_factor\":0,\"configs\":[{\"name\":\"name\",\"value\":\"value\"}]}"
 
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+          headers = {
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
+              }
 
           conn.request("POST", "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors", payload, headers)
 
@@ -9941,7 +10045,8 @@ paths:
             "port": null,
             "path": "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors",
             "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -9974,6 +10079,7 @@ paths:
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"source_topic_name\":\"string\",\"mirror_topic_name\":\"string\",\"replication_factor\":0,\"configs\":[{\"name\":\"name\",\"value\":\"value\"}]}");
@@ -9984,7 +10090,8 @@ paths:
           var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors");
           var request = new RestRequest(Method.POST);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("undefined", "{\"source_topic_name\":\"string\",\"mirror_topic_name\":\"string\",\"replication_factor\":0,\"configs\":[{\"name\":\"name\",\"value\":\"value\"}]}", ParameterType.RequestBody);
+          request.AddHeader("content-type", "application/json");
+          request.AddParameter("application/json", "{\"source_topic_name\":\"string\",\"mirror_topic_name\":\"string\",\"replication_factor\":0,\"configs\":[{\"name\":\"name\",\"value\":\"value\"}]}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /kafka/v3/clusters/{cluster_id}/links/-/mirrors:
     get:
@@ -10135,8 +10242,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: List mirror topics
       tags:
       - Cluster Linking (v3)
@@ -10144,14 +10251,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/-/mirrors \
+            --url 'https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/-/mirrors?mirror_status=ACTIVE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/-/mirrors")
+            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/-/mirrors?mirror_status=ACTIVE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -10159,7 +10266,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/-/mirrors\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/-/mirrors?mirror_status=ACTIVE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -10172,7 +10279,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/kafka/v3/clusters/cluster-1/links/-/mirrors", headers=headers)
+          conn.request("GET", "/kafka/v3/clusters/cluster-1/links/-/mirrors?mirror_status=ACTIVE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -10186,7 +10293,7 @@ paths:
             "method": "GET",
             "hostname": "pkc-00000.region.provider.confluent.cloud",
             "port": null,
-            "path": "/kafka/v3/clusters/cluster-1/links/-/mirrors",
+            "path": "/kafka/v3/clusters/cluster-1/links/-/mirrors?mirror_status=ACTIVE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -10211,7 +10318,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/-/mirrors");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/-/mirrors?mirror_status=ACTIVE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -10220,7 +10327,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/-/mirrors");
+          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/-/mirrors?mirror_status=ACTIVE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -10350,8 +10457,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Describe the mirror topic
       tags:
       - Cluster Linking (v3)
@@ -10588,8 +10695,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Promote the mirror topics
       tags:
       - Cluster Linking (v3)
@@ -10597,8 +10704,9 @@ paths:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote \
+            --url 'https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote?validate_only=false' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
             --data '{"mirror_topic_names":["string"],"mirror_topic_name_pattern":"string"}'
       - lang: Java
         source: |-
@@ -10607,21 +10715,23 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}");
           Request request = new Request.Builder()
-            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote")
+            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote?validate_only=false")
             .post(body)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote?validate_only=false\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"mirror_topic_names\\\":[\\\"string\\\
           \"],\\\"mirror_topic_name_pattern\\\":\\\"string\\\"}\")\n\n\treq, _ :=\
           \ http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          , \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
+          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
@@ -10630,9 +10740,12 @@ paths:
 
           payload = "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}"
 
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+          headers = {
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
+              }
 
-          conn.request("POST", "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote", payload, headers)
+          conn.request("POST", "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote?validate_only=false", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -10646,9 +10759,10 @@ paths:
             "method": "POST",
             "hostname": "pkc-00000.region.provider.confluent.cloud",
             "port": null,
-            "path": "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote",
+            "path": "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote?validate_only=false",
             "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -10672,10 +10786,11 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote?validate_only=false");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}");
@@ -10683,10 +10798,11 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote");
+          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote?validate_only=false");
           var request = new RestRequest(Method.POST);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("undefined", "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}", ParameterType.RequestBody);
+          request.AddHeader("content-type", "application/json");
+          request.AddParameter("application/json", "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:failover:
     post:
@@ -10837,8 +10953,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Failover the mirror topics
       tags:
       - Cluster Linking (v3)
@@ -10846,8 +10962,9 @@ paths:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:failover \
+            --url 'https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:failover?validate_only=false' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
             --data '{"mirror_topic_names":["string"],"mirror_topic_name_pattern":"string"}'
       - lang: Java
         source: |-
@@ -10856,21 +10973,23 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}");
           Request request = new Request.Builder()
-            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:failover")
+            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:failover?validate_only=false")
             .post(body)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:failover\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:failover?validate_only=false\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"mirror_topic_names\\\":[\\\"string\\\
           \"],\\\"mirror_topic_name_pattern\\\":\\\"string\\\"}\")\n\n\treq, _ :=\
           \ http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          , \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
+          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
@@ -10879,9 +10998,12 @@ paths:
 
           payload = "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}"
 
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+          headers = {
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
+              }
 
-          conn.request("POST", "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:failover", payload, headers)
+          conn.request("POST", "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:failover?validate_only=false", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -10895,9 +11017,10 @@ paths:
             "method": "POST",
             "hostname": "pkc-00000.region.provider.confluent.cloud",
             "port": null,
-            "path": "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:failover",
+            "path": "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:failover?validate_only=false",
             "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -10921,10 +11044,11 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:failover");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:failover?validate_only=false");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}");
@@ -10932,10 +11056,11 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:failover");
+          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:failover?validate_only=false");
           var request = new RestRequest(Method.POST);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("undefined", "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}", ParameterType.RequestBody);
+          request.AddHeader("content-type", "application/json");
+          request.AddParameter("application/json", "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:pause:
     post:
@@ -11086,8 +11211,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Pause the mirror topics
       tags:
       - Cluster Linking (v3)
@@ -11095,8 +11220,9 @@ paths:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:pause \
+            --url 'https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:pause?validate_only=false' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
             --data '{"mirror_topic_names":["string"],"mirror_topic_name_pattern":"string"}'
       - lang: Java
         source: |-
@@ -11105,21 +11231,23 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}");
           Request request = new Request.Builder()
-            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:pause")
+            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:pause?validate_only=false")
             .post(body)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:pause\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:pause?validate_only=false\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"mirror_topic_names\\\":[\\\"string\\\
           \"],\\\"mirror_topic_name_pattern\\\":\\\"string\\\"}\")\n\n\treq, _ :=\
           \ http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          , \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
+          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
@@ -11128,9 +11256,12 @@ paths:
 
           payload = "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}"
 
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+          headers = {
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
+              }
 
-          conn.request("POST", "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:pause", payload, headers)
+          conn.request("POST", "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:pause?validate_only=false", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -11144,9 +11275,10 @@ paths:
             "method": "POST",
             "hostname": "pkc-00000.region.provider.confluent.cloud",
             "port": null,
-            "path": "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:pause",
+            "path": "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:pause?validate_only=false",
             "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -11170,10 +11302,11 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:pause");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:pause?validate_only=false");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}");
@@ -11181,10 +11314,11 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:pause");
+          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:pause?validate_only=false");
           var request = new RestRequest(Method.POST);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("undefined", "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}", ParameterType.RequestBody);
+          request.AddHeader("content-type", "application/json");
+          request.AddParameter("application/json", "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:resume:
     post:
@@ -11335,8 +11469,8 @@ paths:
             client side. Retriable Kafka errors will contain error code 50003 in the
             response body.
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Resume the mirror topics
       tags:
       - Cluster Linking (v3)
@@ -11344,8 +11478,9 @@ paths:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:resume \
+            --url 'https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:resume?validate_only=false' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
             --data '{"mirror_topic_names":["string"],"mirror_topic_name_pattern":"string"}'
       - lang: Java
         source: |-
@@ -11354,21 +11489,23 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}");
           Request request = new Request.Builder()
-            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:resume")
+            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:resume?validate_only=false")
             .post(body)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:resume\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:resume?validate_only=false\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"mirror_topic_names\\\":[\\\"string\\\
           \"],\\\"mirror_topic_name_pattern\\\":\\\"string\\\"}\")\n\n\treq, _ :=\
           \ http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          , \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
+          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
@@ -11377,9 +11514,12 @@ paths:
 
           payload = "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}"
 
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+          headers = {
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
+              }
 
-          conn.request("POST", "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:resume", payload, headers)
+          conn.request("POST", "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:resume?validate_only=false", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -11393,9 +11533,10 @@ paths:
             "method": "POST",
             "hostname": "pkc-00000.region.provider.confluent.cloud",
             "port": null,
-            "path": "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:resume",
+            "path": "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:resume?validate_only=false",
             "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -11419,10 +11560,11 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:resume");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:resume?validate_only=false");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}");
@@ -11430,10 +11572,11 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:resume");
+          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:resume?validate_only=false");
           var request = new RestRequest(Method.POST);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("undefined", "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}", ParameterType.RequestBody);
+          request.AddHeader("content-type", "application/json");
+          request.AddParameter("application/json", "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
 components:
   parameters:
@@ -11896,7 +12039,7 @@ components:
             destination_initiated_link:
               description: Create a destination initiated cluster link
               value:
-                remote_cluster_id: cluster-1
+                source_cluster_id: cluster-1
                 configs:
                 - name: bootstrap.servers
                   value: cluster-1-bootstrap-server
@@ -11916,7 +12059,7 @@ components:
             source_initiated_link_at_destination_cluster:
               description: Create a source initiated cluster link at destination cluster
               value:
-                remote_cluster_id: cluster-1
+                destination_cluster_id: cluster-1
                 configs:
                 - name: bootstrap.servers
                   value: cluster-1-bootstrap-server
@@ -13919,8 +14062,7 @@ components:
               metadata:
                 self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/CIL-69l7S1CwoVNAhoQLug/links/my-new-link-1
                 resource_name: null
-              remote_cluster_id: src-cluster-id
-              destination_cluster_id: null
+              source_cluster_id: src-cluster-id
               link_name: my-new-link-1
               link_id: 7840644d-f7d8-4844-a577-a10ef3df31df
               cluster_link_id: eEBkTffYSESld6EO898x3w
@@ -13933,7 +14075,6 @@ components:
                 self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/CIL-69l7S1CwoVNAhoQLug/links/my-new-link-2
                 resource_name: null
               remote_cluster_id: src-cluster-id
-              destination_cluster_id: null
               link_name: my-new-link-2
               link_id: f749116e-f847-4bd2-b1f6-5c4e518a0678
               cluster_link_id: 90kRbvhHS9Kx9lxOUYoGeA
@@ -13947,7 +14088,6 @@ components:
               metadata:
                 self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/CIL-69l7S1CwoVNAhoQLug/links/my-new-link-3
                 resource_name: null
-              remote_cluster_id: null
               destination_cluster_id: dest-cluster-id
               link_name: my-new-link-3
               link_id: 9cd1711e-a4ef-4390-a35e-dfd758d97a82
@@ -13968,8 +14108,7 @@ components:
                 metadata:
                   self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/Fds7TcT9TTqEXsoRLEKMcQ/links/my-new-link-1
                 resource_name: null
-                remote_cluster_id: src-cluster-id
-                destination_cluster_id: null
+                source_cluster_id: src-cluster-id
                 link_name: my-new-link-1
                 link_id: 7840644d-f7d8-4844-a577-a10ef3df31df
                 cluster_link_id: eEBkTffYSESld6EO898x3w
@@ -13983,7 +14122,6 @@ components:
                 metadata:
                   self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/Fds7TcT9TTqEXsoRLEKMcQ/links/my-new-link-1
                 resource_name: null
-                remote_cluster_id: null
                 destination_cluster_id: dst-cluster-id
                 link_name: my-new-link-1
                 link_id: 7840644d-f7d8-4844-a577-a10ef3df31df
@@ -14929,10 +15067,8 @@ components:
         source_cluster_id: source_cluster_id
       properties:
         source_cluster_id:
-          deprecated: true
           type: string
         destination_cluster_id:
-          deprecated: true
           type: string
         remote_cluster_id:
           description: The expected remote cluster ID.
@@ -15078,9 +15214,12 @@ components:
       enum:
       - ACTIVE
       - FAILED
+      - LINK_FAILED
+      - LINK_PAUSED
       - PAUSED
-      - STOPPED
       - PENDING_STOPPED
+      - SOURCE_UNAVAILABLE
+      - STOPPED
       type: string
     AnyUnevenLoadStatus:
       type: string
@@ -16101,11 +16240,9 @@ components:
     ListLinksResponseData_allOf:
       properties:
         source_cluster_id:
-          deprecated: true
           nullable: true
           type: string
         destination_cluster_id:
-          deprecated: true
           nullable: true
           type: string
         remote_cluster_id:
@@ -16262,14 +16399,14 @@ components:
       - data
       type: object
   securitySchemes:
-    api-key:
-      description: Authenticate with API Keys using HTTP Basic Auth. Treat the API
-        Key ID as the username and API Key Secret as the password.
+    resource-api-key:
+      description: "Authenticate with resource-specific API Keys using HTTP Basic\
+        \ Auth. Treat the resource-specific API Key ID \nas the username and resource-specific\
+        \ API Key Secret as the password.\n"
       scheme: basic
       type: http
-    confluent-sts-access-token:
-      description: Authenticate with Confluent API using this credentials (JSON Web
-        Tokens) following OAuth 2.0.
+    external-access-token:
+      description: Authenticate with OAuth 2.0.
       flows:
         clientCredentials:
           scopes: {}
