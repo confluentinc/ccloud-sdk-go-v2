@@ -36,9 +36,7 @@ import (
 
 // CreateLinkRequestData struct for CreateLinkRequestData
 type CreateLinkRequestData struct {
-	// Deprecated
-	SourceClusterId *string `json:"source_cluster_id,omitempty"`
-	// Deprecated
+	SourceClusterId      *string `json:"source_cluster_id,omitempty"`
 	DestinationClusterId *string `json:"destination_cluster_id,omitempty"`
 	// The expected remote cluster ID.
 	RemoteClusterId *string `json:"remote_cluster_id,omitempty"`
@@ -65,7 +63,6 @@ func NewCreateLinkRequestDataWithDefaults() *CreateLinkRequestData {
 }
 
 // GetSourceClusterId returns the SourceClusterId field value if set, zero value otherwise.
-// Deprecated
 func (o *CreateLinkRequestData) GetSourceClusterId() string {
 	if o == nil || o.SourceClusterId == nil {
 		var ret string
@@ -76,7 +73,6 @@ func (o *CreateLinkRequestData) GetSourceClusterId() string {
 
 // GetSourceClusterIdOk returns a tuple with the SourceClusterId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *CreateLinkRequestData) GetSourceClusterIdOk() (*string, bool) {
 	if o == nil || o.SourceClusterId == nil {
 		return nil, false
@@ -94,13 +90,11 @@ func (o *CreateLinkRequestData) HasSourceClusterId() bool {
 }
 
 // SetSourceClusterId gets a reference to the given string and assigns it to the SourceClusterId field.
-// Deprecated
 func (o *CreateLinkRequestData) SetSourceClusterId(v string) {
 	o.SourceClusterId = &v
 }
 
 // GetDestinationClusterId returns the DestinationClusterId field value if set, zero value otherwise.
-// Deprecated
 func (o *CreateLinkRequestData) GetDestinationClusterId() string {
 	if o == nil || o.DestinationClusterId == nil {
 		var ret string
@@ -111,7 +105,6 @@ func (o *CreateLinkRequestData) GetDestinationClusterId() string {
 
 // GetDestinationClusterIdOk returns a tuple with the DestinationClusterId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *CreateLinkRequestData) GetDestinationClusterIdOk() (*string, bool) {
 	if o == nil || o.DestinationClusterId == nil {
 		return nil, false
@@ -129,7 +122,6 @@ func (o *CreateLinkRequestData) HasDestinationClusterId() bool {
 }
 
 // SetDestinationClusterId gets a reference to the given string and assigns it to the DestinationClusterId field.
-// Deprecated
 func (o *CreateLinkRequestData) SetDestinationClusterId(v string) {
 	o.DestinationClusterId = &v
 }

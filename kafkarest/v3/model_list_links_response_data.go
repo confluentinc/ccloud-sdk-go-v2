@@ -36,14 +36,12 @@ import (
 
 // ListLinksResponseData struct for ListLinksResponseData
 type ListLinksResponseData struct {
-	Kind     string           `json:"kind,omitempty"`
-	Metadata ResourceMetadata `json:"metadata,omitempty"`
-	// Deprecated
-	SourceClusterId NullableString `json:"source_cluster_id,omitempty"`
-	// Deprecated
-	DestinationClusterId NullableString `json:"destination_cluster_id,omitempty"`
-	RemoteClusterId      NullableString `json:"remote_cluster_id,omitempty"`
-	LinkName             string         `json:"link_name,omitempty"`
+	Kind                 string           `json:"kind,omitempty"`
+	Metadata             ResourceMetadata `json:"metadata,omitempty"`
+	SourceClusterId      NullableString   `json:"source_cluster_id,omitempty"`
+	DestinationClusterId NullableString   `json:"destination_cluster_id,omitempty"`
+	RemoteClusterId      NullableString   `json:"remote_cluster_id,omitempty"`
+	LinkName             string           `json:"link_name,omitempty"`
 	// Deprecated
 	LinkId           *string        `json:"link_id,omitempty"`
 	ClusterLinkId    string         `json:"cluster_link_id,omitempty"`
@@ -124,7 +122,6 @@ func (o *ListLinksResponseData) SetMetadata(v ResourceMetadata) {
 }
 
 // GetSourceClusterId returns the SourceClusterId field value if set, zero value otherwise (both if not set or set to explicit null).
-// Deprecated
 func (o *ListLinksResponseData) GetSourceClusterId() string {
 	if o == nil || o.SourceClusterId.Get() == nil {
 		var ret string
@@ -136,7 +133,6 @@ func (o *ListLinksResponseData) GetSourceClusterId() string {
 // GetSourceClusterIdOk returns a tuple with the SourceClusterId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-// Deprecated
 func (o *ListLinksResponseData) GetSourceClusterIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
@@ -154,7 +150,6 @@ func (o *ListLinksResponseData) HasSourceClusterId() bool {
 }
 
 // SetSourceClusterId gets a reference to the given NullableString and assigns it to the SourceClusterId field.
-// Deprecated
 func (o *ListLinksResponseData) SetSourceClusterId(v string) {
 	o.SourceClusterId.Set(&v)
 }
@@ -170,7 +165,6 @@ func (o *ListLinksResponseData) UnsetSourceClusterId() {
 }
 
 // GetDestinationClusterId returns the DestinationClusterId field value if set, zero value otherwise (both if not set or set to explicit null).
-// Deprecated
 func (o *ListLinksResponseData) GetDestinationClusterId() string {
 	if o == nil || o.DestinationClusterId.Get() == nil {
 		var ret string
@@ -182,7 +176,6 @@ func (o *ListLinksResponseData) GetDestinationClusterId() string {
 // GetDestinationClusterIdOk returns a tuple with the DestinationClusterId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-// Deprecated
 func (o *ListLinksResponseData) GetDestinationClusterIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
@@ -200,7 +193,6 @@ func (o *ListLinksResponseData) HasDestinationClusterId() bool {
 }
 
 // SetDestinationClusterId gets a reference to the given NullableString and assigns it to the DestinationClusterId field.
-// Deprecated
 func (o *ListLinksResponseData) SetDestinationClusterId(v string) {
 	o.DestinationClusterId.Set(&v)
 }
