@@ -41,7 +41,7 @@ type ObjectMeta struct {
 	Self string `json:"self,omitempty"`
 	// The system-generated identifier of the resource that is unique across space and time.
 	Uid *string `json:"uid,omitempty"`
-	// The system-generated opaque version used for optimistic locking and client-side detection of changes. A client can include this version in an update request, instructing the update to fail if the workspace has since been modified (i.e., the workspace resource has a different version).
+	// The system-generated opaque version used for optimistic locking and client-side detection of changes. A client should include this version in an update request, instructing the update to fail if the workspace has since been modified (i.e., the workspace resource has a different version).
 	ResourceVersion *string `json:"resource_version,omitempty"`
 	// The date and time at which this object was created. It is represented in RFC3339 format and is in UTC.
 	CreatedAt *time.Time `json:"created_at,omitempty"`

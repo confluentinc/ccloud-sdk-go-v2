@@ -37,7 +37,9 @@ import (
 // WsV1beta1Block A block within a workspace.
 type WsV1beta1Block struct {
 	// The type of block.
-	Type        *string               `json:"type,omitempty"`
+	Type *string `json:"type,omitempty"`
+	// A map (key-value pairs) of cell properties. All key-value pairs are optional, and any key-value pair may be ignored.
+	Properties  *map[string]string    `json:"properties,omitempty"`
 	CodeOptions *WsV1beta1CodeOptions `json:"code_options,omitempty"`
 }
 
@@ -90,6 +92,38 @@ func (o *WsV1beta1Block) SetType(v string) {
 	o.Type = &v
 }
 
+// GetProperties returns the Properties field value if set, zero value otherwise.
+func (o *WsV1beta1Block) GetProperties() map[string]string {
+	if o == nil || o.Properties == nil {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Properties
+}
+
+// GetPropertiesOk returns a tuple with the Properties field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WsV1beta1Block) GetPropertiesOk() (*map[string]string, bool) {
+	if o == nil || o.Properties == nil {
+		return nil, false
+	}
+	return o.Properties, true
+}
+
+// HasProperties returns a boolean if a field has been set.
+func (o *WsV1beta1Block) HasProperties() bool {
+	if o != nil && o.Properties != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetProperties gets a reference to the given map[string]string and assigns it to the Properties field.
+func (o *WsV1beta1Block) SetProperties(v map[string]string) {
+	o.Properties = &v
+}
+
 // GetCodeOptions returns the CodeOptions field value if set, zero value otherwise.
 func (o *WsV1beta1Block) GetCodeOptions() WsV1beta1CodeOptions {
 	if o == nil || o.CodeOptions == nil {
@@ -125,6 +159,7 @@ func (o *WsV1beta1Block) SetCodeOptions(v WsV1beta1CodeOptions) {
 // Redact resets all sensitive fields to their zero value.
 func (o *WsV1beta1Block) Redact() {
 	o.recurseRedact(o.Type)
+	o.recurseRedact(o.Properties)
 	o.recurseRedact(o.CodeOptions)
 }
 
@@ -162,6 +197,9 @@ func (o WsV1beta1Block) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
 		toSerialize["type"] = o.Type
+	}
+	if o.Properties != nil {
+		toSerialize["properties"] = o.Properties
 	}
 	if o.CodeOptions != nil {
 		toSerialize["code_options"] = o.CodeOptions

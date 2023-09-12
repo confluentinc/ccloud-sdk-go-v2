@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | The type of block. | [optional] 
+**Properties** | Pointer to **map[string]string** | A map (key-value pairs) of cell properties. All key-value pairs are optional, and any key-value pair may be ignored. | [optional] 
 **CodeOptions** | Pointer to [**WsV1beta1CodeOptions**](WsV1beta1CodeOptions.md) |  | [optional] 
 
 ## Methods
@@ -50,6 +51,31 @@ SetType sets Type field to given value.
 `func (o *WsV1beta1Block) HasType() bool`
 
 HasType returns a boolean if a field has been set.
+
+### GetProperties
+
+`func (o *WsV1beta1Block) GetProperties() map[string]string`
+
+GetProperties returns the Properties field if non-nil, zero value otherwise.
+
+### GetPropertiesOk
+
+`func (o *WsV1beta1Block) GetPropertiesOk() (*map[string]string, bool)`
+
+GetPropertiesOk returns a tuple with the Properties field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProperties
+
+`func (o *WsV1beta1Block) SetProperties(v map[string]string)`
+
+SetProperties sets Properties field to given value.
+
+### HasProperties
+
+`func (o *WsV1beta1Block) HasProperties() bool`
+
+HasProperties returns a boolean if a field has been set.
 
 ### GetCodeOptions
 

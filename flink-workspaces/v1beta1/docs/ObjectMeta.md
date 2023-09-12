@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Self** | **string** | Self is a Uniform Resource Locator (URL) at which an object can be addressed. This URL encodes the service location, API version, and other particulars necessary to locate the resource at a point in time | 
-**Uid** | Pointer to **string** | The system-generated identifier of the resource that is unique across space and time. | [optional] 
-**ResourceVersion** | Pointer to **string** | The system-generated opaque version used for optimistic locking and client-side detection of changes. A client can include this version in an update request, instructing the update to fail if the workspace has since been modified (i.e., the workspace resource has a different version). | [optional] 
-**CreatedAt** | Pointer to **time.Time** | The date and time at which this object was created. It is represented in RFC3339 format and is in UTC. | [optional] 
-**UpdatedAt** | Pointer to **time.Time** | The date and time at which this object was last updated. It is represented in RFC3339 format and is in UTC. | [optional] 
+**Self** | **string** | Self is a Uniform Resource Locator (URL) at which an object can be addressed. This URL encodes the service location, API version, and other particulars necessary to locate the resource at a point in time | [readonly] 
+**Uid** | Pointer to **string** | The system-generated identifier of the resource that is unique across space and time. | [optional] [readonly] 
+**ResourceVersion** | Pointer to **string** | The system-generated opaque version used for optimistic locking and client-side detection of changes. A client should include this version in an update request, instructing the update to fail if the workspace has since been modified (i.e., the workspace resource has a different version). | [optional] [readonly] 
+**CreatedAt** | Pointer to **time.Time** | The date and time at which this object was created. It is represented in RFC3339 format and is in UTC. | [optional] [readonly] 
+**UpdatedAt** | Pointer to **time.Time** | The date and time at which this object was last updated. It is represented in RFC3339 format and is in UTC. | [optional] [readonly] 
 
 ## Methods
 
