@@ -42,14 +42,14 @@ var (
 type IamBindingsFcpmV2Api interface {
 
 	/*
-		CreateFcpmV2IamBinding Create an Iam Binding
+			CreateFcpmV2IamBinding Create an Iam Binding
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+			[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to create an iam binding.
+		Make a request to create an iam binding.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiCreateFcpmV2IamBindingRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiCreateFcpmV2IamBindingRequest
 	*/
 	CreateFcpmV2IamBinding(ctx _context.Context) ApiCreateFcpmV2IamBindingRequest
 
@@ -58,15 +58,15 @@ type IamBindingsFcpmV2Api interface {
 	CreateFcpmV2IamBindingExecute(r ApiCreateFcpmV2IamBindingRequest) (FcpmV2IamBinding, *_nethttp.Response, error)
 
 	/*
-		DeleteFcpmV2IamBinding Delete an Iam Binding
+			DeleteFcpmV2IamBinding Delete an Iam Binding
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+			[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to delete an iam binding.
+		Make a request to delete an iam binding.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the iam binding.
-		 @return ApiDeleteFcpmV2IamBindingRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the iam binding.
+			 @return ApiDeleteFcpmV2IamBindingRequest
 	*/
 	DeleteFcpmV2IamBinding(ctx _context.Context, id string) ApiDeleteFcpmV2IamBindingRequest
 
@@ -74,14 +74,14 @@ type IamBindingsFcpmV2Api interface {
 	DeleteFcpmV2IamBindingExecute(r ApiDeleteFcpmV2IamBindingRequest) (*_nethttp.Response, error)
 
 	/*
-		ListFcpmV2IamBindings List of Iam Bindings
+			ListFcpmV2IamBindings List of Iam Bindings
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+			[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-	Retrieve a sorted, filtered, paginated list of all iam bindings.
+		Retrieve a sorted, filtered, paginated list of all iam bindings.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListFcpmV2IamBindingsRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiListFcpmV2IamBindingsRequest
 	*/
 	ListFcpmV2IamBindings(ctx _context.Context) ApiListFcpmV2IamBindingsRequest
 
