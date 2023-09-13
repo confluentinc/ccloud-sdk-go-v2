@@ -42,14 +42,14 @@ var (
 type ComputePoolsFcpmV2Api interface {
 
 	/*
-		CreateFcpmV2ComputePool Create a Compute Pool
+			CreateFcpmV2ComputePool Create a Compute Pool
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+			[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to create a compute pool.
+		Make a request to create a compute pool.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiCreateFcpmV2ComputePoolRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiCreateFcpmV2ComputePoolRequest
 	*/
 	CreateFcpmV2ComputePool(ctx _context.Context) ApiCreateFcpmV2ComputePoolRequest
 
@@ -58,15 +58,15 @@ type ComputePoolsFcpmV2Api interface {
 	CreateFcpmV2ComputePoolExecute(r ApiCreateFcpmV2ComputePoolRequest) (FcpmV2ComputePool, *_nethttp.Response, error)
 
 	/*
-		DeleteFcpmV2ComputePool Delete a Compute Pool
+			DeleteFcpmV2ComputePool Delete a Compute Pool
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+			[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to delete a compute pool.
+		Make a request to delete a compute pool.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the compute pool.
-		 @return ApiDeleteFcpmV2ComputePoolRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the compute pool.
+			 @return ApiDeleteFcpmV2ComputePoolRequest
 	*/
 	DeleteFcpmV2ComputePool(ctx _context.Context, id string) ApiDeleteFcpmV2ComputePoolRequest
 
@@ -74,15 +74,15 @@ type ComputePoolsFcpmV2Api interface {
 	DeleteFcpmV2ComputePoolExecute(r ApiDeleteFcpmV2ComputePoolRequest) (*_nethttp.Response, error)
 
 	/*
-		GetFcpmV2ComputePool Read a Compute Pool
+			GetFcpmV2ComputePool Read a Compute Pool
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+			[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to read a compute pool.
+		Make a request to read a compute pool.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the compute pool.
-		 @return ApiGetFcpmV2ComputePoolRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the compute pool.
+			 @return ApiGetFcpmV2ComputePoolRequest
 	*/
 	GetFcpmV2ComputePool(ctx _context.Context, id string) ApiGetFcpmV2ComputePoolRequest
 
@@ -91,14 +91,14 @@ type ComputePoolsFcpmV2Api interface {
 	GetFcpmV2ComputePoolExecute(r ApiGetFcpmV2ComputePoolRequest) (FcpmV2ComputePool, *_nethttp.Response, error)
 
 	/*
-		ListFcpmV2ComputePools List of Compute Pools
+			ListFcpmV2ComputePools List of Compute Pools
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+			[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-	Retrieve a sorted, filtered, paginated list of all compute pools.
+		Retrieve a sorted, filtered, paginated list of all compute pools.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListFcpmV2ComputePoolsRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiListFcpmV2ComputePoolsRequest
 	*/
 	ListFcpmV2ComputePools(ctx _context.Context) ApiListFcpmV2ComputePoolsRequest
 
@@ -107,15 +107,15 @@ type ComputePoolsFcpmV2Api interface {
 	ListFcpmV2ComputePoolsExecute(r ApiListFcpmV2ComputePoolsRequest) (FcpmV2ComputePoolList, *_nethttp.Response, error)
 
 	/*
-		UpdateFcpmV2ComputePool Update a Compute Pool
+			UpdateFcpmV2ComputePool Update a Compute Pool
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+			[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to update a compute pool.
+		Make a request to update a compute pool.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the compute pool.
-		 @return ApiUpdateFcpmV2ComputePoolRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the compute pool.
+			 @return ApiUpdateFcpmV2ComputePoolRequest
 	*/
 	UpdateFcpmV2ComputePool(ctx _context.Context, id string) ApiUpdateFcpmV2ComputePoolRequest
 
