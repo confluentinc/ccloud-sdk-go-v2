@@ -41,14 +41,14 @@ var (
 type RegionsFcpmV2Api interface {
 
 	/*
-			ListFcpmV2Regions List of Regions
+		ListFcpmV2Regions List of Regions
 
-			[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-		Retrieve a sorted, filtered, paginated list of all regions.
+	Retrieve a sorted, filtered, paginated list of all regions.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiListFcpmV2RegionsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListFcpmV2RegionsRequest
 	*/
 	ListFcpmV2Regions(ctx _context.Context) ApiListFcpmV2RegionsRequest
 
