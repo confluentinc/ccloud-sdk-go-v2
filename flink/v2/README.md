@@ -84,9 +84,6 @@ Class | Method | HTTP request | Description
 *ComputePoolsFcpmV2Api* | [**GetFcpmV2ComputePool**](docs/ComputePoolsFcpmV2Api.md#getfcpmv2computepool) | **Get** /fcpm/v2/compute-pools/{id} | Read a Compute Pool
 *ComputePoolsFcpmV2Api* | [**ListFcpmV2ComputePools**](docs/ComputePoolsFcpmV2Api.md#listfcpmv2computepools) | **Get** /fcpm/v2/compute-pools | List of Compute Pools
 *ComputePoolsFcpmV2Api* | [**UpdateFcpmV2ComputePool**](docs/ComputePoolsFcpmV2Api.md#updatefcpmv2computepool) | **Patch** /fcpm/v2/compute-pools/{id} | Update a Compute Pool
-*IamBindingsFcpmV2Api* | [**CreateFcpmV2IamBinding**](docs/IamBindingsFcpmV2Api.md#createfcpmv2iambinding) | **Post** /fcpm/v2/iam-bindings | Create an Iam Binding
-*IamBindingsFcpmV2Api* | [**DeleteFcpmV2IamBinding**](docs/IamBindingsFcpmV2Api.md#deletefcpmv2iambinding) | **Delete** /fcpm/v2/iam-bindings/{id} | Delete an Iam Binding
-*IamBindingsFcpmV2Api* | [**ListFcpmV2IamBindings**](docs/IamBindingsFcpmV2Api.md#listfcpmv2iambindings) | **Get** /fcpm/v2/iam-bindings | List of Iam Bindings
 *RegionsFcpmV2Api* | [**ListFcpmV2Regions**](docs/RegionsFcpmV2Api.md#listfcpmv2regions) | **Get** /fcpm/v2/regions | List of Regions
 
 
@@ -102,8 +99,6 @@ Class | Method | HTTP request | Description
  - [FcpmV2ComputePoolSpecUpdate](docs/FcpmV2ComputePoolSpecUpdate.md)
  - [FcpmV2ComputePoolStatus](docs/FcpmV2ComputePoolStatus.md)
  - [FcpmV2ComputePoolUpdate](docs/FcpmV2ComputePoolUpdate.md)
- - [FcpmV2IamBinding](docs/FcpmV2IamBinding.md)
- - [FcpmV2IamBindingList](docs/FcpmV2IamBindingList.md)
  - [FcpmV2Region](docs/FcpmV2Region.md)
  - [FcpmV2RegionList](docs/FcpmV2RegionList.md)
  - [GlobalObjectReference](docs/GlobalObjectReference.md)
