@@ -2301,6 +2301,7 @@ components:
             DELETING: SQL statement deletion is in progress;
             FAILING: SQL statement is failing;
             FAILED: SQL statement execution has failed;
+            STOPPED: SQL statement execution has successfully been stopped;
           example: RUNNING
           readOnly: true
           type: string
@@ -2311,6 +2312,7 @@ components:
           - DELETING
           - FAILING
           - FAILED
+          - STOPPED
         result_schema:
           $ref: '#/components/schemas/sql.v1beta1.ResultSchema'
         detail:
