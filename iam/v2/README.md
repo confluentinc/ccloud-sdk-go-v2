@@ -83,6 +83,15 @@ Class | Method | HTTP request | Description
 *InvitationsIamV2Api* | [**DeleteIamV2Invitation**](docs/InvitationsIamV2Api.md#deleteiamv2invitation) | **Delete** /iam/v2/invitations/{id} | Delete an Invitation
 *InvitationsIamV2Api* | [**GetIamV2Invitation**](docs/InvitationsIamV2Api.md#getiamv2invitation) | **Get** /iam/v2/invitations/{id} | Read an Invitation
 *InvitationsIamV2Api* | [**ListIamV2Invitations**](docs/InvitationsIamV2Api.md#listiamv2invitations) | **Get** /iam/v2/invitations | List of Invitations
+*IpFiltersIamV2Api* | [**CreateIamV2IpFilter**](docs/IpFiltersIamV2Api.md#createiamv2ipfilter) | **Post** /iam/v2/ip-filters | Create an Ip Filter
+*IpFiltersIamV2Api* | [**DeleteIamV2IpFilter**](docs/IpFiltersIamV2Api.md#deleteiamv2ipfilter) | **Delete** /iam/v2/ip-filters/{id} | Delete an Ip Filter
+*IpFiltersIamV2Api* | [**GetIamV2IpFilter**](docs/IpFiltersIamV2Api.md#getiamv2ipfilter) | **Get** /iam/v2/ip-filters/{id} | Read an Ip Filter
+*IpFiltersIamV2Api* | [**ListIamV2IpFilters**](docs/IpFiltersIamV2Api.md#listiamv2ipfilters) | **Get** /iam/v2/ip-filters | List of Ip Filters
+*IpGroupsIamV2Api* | [**CreateIamV2IpGroup**](docs/IpGroupsIamV2Api.md#createiamv2ipgroup) | **Post** /iam/v2/ip-groups | Create an Ip Group
+*IpGroupsIamV2Api* | [**DeleteIamV2IpGroup**](docs/IpGroupsIamV2Api.md#deleteiamv2ipgroup) | **Delete** /iam/v2/ip-groups/{id} | Delete an Ip Group
+*IpGroupsIamV2Api* | [**GetIamV2IpGroup**](docs/IpGroupsIamV2Api.md#getiamv2ipgroup) | **Get** /iam/v2/ip-groups/{id} | Read an Ip Group
+*IpGroupsIamV2Api* | [**ListIamV2IpGroups**](docs/IpGroupsIamV2Api.md#listiamv2ipgroups) | **Get** /iam/v2/ip-groups | List of Ip Groups
+*IpGroupsIamV2Api* | [**UpdateIamV2IpGroup**](docs/IpGroupsIamV2Api.md#updateiamv2ipgroup) | **Patch** /iam/v2/ip-groups/{id} | Update an Ip Group
 *ServiceAccountsIamV2Api* | [**CreateIamV2ServiceAccount**](docs/ServiceAccountsIamV2Api.md#createiamv2serviceaccount) | **Post** /iam/v2/service-accounts | Create a Service Account
 *ServiceAccountsIamV2Api* | [**DeleteIamV2ServiceAccount**](docs/ServiceAccountsIamV2Api.md#deleteiamv2serviceaccount) | **Delete** /iam/v2/service-accounts/{id} | Delete a Service Account
 *ServiceAccountsIamV2Api* | [**GetIamV2ServiceAccount**](docs/ServiceAccountsIamV2Api.md#getiamv2serviceaccount) | **Get** /iam/v2/service-accounts/{id} | Read a Service Account
@@ -102,6 +111,10 @@ Class | Method | HTTP request | Description
  - [GlobalObjectReference](docs/GlobalObjectReference.md)
  - [IamV2Invitation](docs/IamV2Invitation.md)
  - [IamV2InvitationList](docs/IamV2InvitationList.md)
+ - [IamV2IpFilter](docs/IamV2IpFilter.md)
+ - [IamV2IpFilterList](docs/IamV2IpFilterList.md)
+ - [IamV2IpGroup](docs/IamV2IpGroup.md)
+ - [IamV2IpGroupList](docs/IamV2IpGroupList.md)
  - [IamV2ServiceAccount](docs/IamV2ServiceAccount.md)
  - [IamV2ServiceAccountList](docs/IamV2ServiceAccountList.md)
  - [IamV2ServiceAccountUpdate](docs/IamV2ServiceAccountUpdate.md)
@@ -117,7 +130,7 @@ Class | Method | HTTP request | Description
 
 
 
-### api-key
+### cloud-api-key
 
 - **Type**: HTTP basic authentication
 
@@ -128,6 +141,34 @@ auth := context.WithValue(context.Background(), sw.ContextBasicAuth, sw.BasicAut
     UserName: "username",
     Password: "password",
 })
+r, err := client.Service.Operation(auth, args)
+```
+
+
+### confluent-sts-access-token
+
+
+- **Type**: OAuth
+- **Flow**: application
+- **Authorization URL**: 
+- **Scopes**: N/A
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextAccessToken, "ACCESSTOKENSTRING")
+r, err := client.Service.Operation(auth, args)
+```
+
+Or via OAuth2 module to automatically refresh tokens and perform user authentication.
+
+```golang
+import "golang.org/x/oauth2"
+
+/* Perform OAuth2 round trip request and obtain a token */
+
+tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
+auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
 r, err := client.Service.Operation(auth, args)
 ```
 

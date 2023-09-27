@@ -39,127 +39,123 @@ var (
 	_ _context.Context
 )
 
-type ServiceAccountsIamV2Api interface {
+type IpGroupsIamV2Api interface {
 
 	/*
-		CreateIamV2ServiceAccount Create a Service Account
+		CreateIamV2IpGroup Create an Ip Group
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Make a request to create a service account.
+	Make a request to create an ip group.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiCreateIamV2ServiceAccountRequest
+		 @return ApiCreateIamV2IpGroupRequest
 	*/
-	CreateIamV2ServiceAccount(ctx _context.Context) ApiCreateIamV2ServiceAccountRequest
+	CreateIamV2IpGroup(ctx _context.Context) ApiCreateIamV2IpGroupRequest
 
-	// CreateIamV2ServiceAccountExecute executes the request
-	//  @return IamV2ServiceAccount
-	CreateIamV2ServiceAccountExecute(r ApiCreateIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error)
+	// CreateIamV2IpGroupExecute executes the request
+	//  @return IamV2IpGroup
+	CreateIamV2IpGroupExecute(r ApiCreateIamV2IpGroupRequest) (IamV2IpGroup, *_nethttp.Response, error)
 
 	/*
-		DeleteIamV2ServiceAccount Delete a Service Account
+		DeleteIamV2IpGroup Delete an Ip Group
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Make a request to delete a service account.
-
-	If successful, this request will also recursively delete all of the service account's associated resources,
-	including its cloud and cluster API keys.
-
+	Make a request to delete an ip group.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the service account.
-		 @return ApiDeleteIamV2ServiceAccountRequest
+		 @param id The unique identifier for the ip group.
+		 @return ApiDeleteIamV2IpGroupRequest
 	*/
-	DeleteIamV2ServiceAccount(ctx _context.Context, id string) ApiDeleteIamV2ServiceAccountRequest
+	DeleteIamV2IpGroup(ctx _context.Context, id string) ApiDeleteIamV2IpGroupRequest
 
-	// DeleteIamV2ServiceAccountExecute executes the request
-	DeleteIamV2ServiceAccountExecute(r ApiDeleteIamV2ServiceAccountRequest) (*_nethttp.Response, error)
+	// DeleteIamV2IpGroupExecute executes the request
+	DeleteIamV2IpGroupExecute(r ApiDeleteIamV2IpGroupRequest) (*_nethttp.Response, error)
 
 	/*
-		GetIamV2ServiceAccount Read a Service Account
+		GetIamV2IpGroup Read an Ip Group
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Make a request to read a service account.
+	Make a request to read an ip group.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the service account.
-		 @return ApiGetIamV2ServiceAccountRequest
+		 @param id The unique identifier for the ip group.
+		 @return ApiGetIamV2IpGroupRequest
 	*/
-	GetIamV2ServiceAccount(ctx _context.Context, id string) ApiGetIamV2ServiceAccountRequest
+	GetIamV2IpGroup(ctx _context.Context, id string) ApiGetIamV2IpGroupRequest
 
-	// GetIamV2ServiceAccountExecute executes the request
-	//  @return IamV2ServiceAccount
-	GetIamV2ServiceAccountExecute(r ApiGetIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error)
+	// GetIamV2IpGroupExecute executes the request
+	//  @return IamV2IpGroup
+	GetIamV2IpGroupExecute(r ApiGetIamV2IpGroupRequest) (IamV2IpGroup, *_nethttp.Response, error)
 
 	/*
-		ListIamV2ServiceAccounts List of Service Accounts
+		ListIamV2IpGroups List of Ip Groups
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Retrieve a sorted, filtered, paginated list of all service accounts.
+	Retrieve a sorted, filtered, paginated list of all ip groups.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListIamV2ServiceAccountsRequest
+		 @return ApiListIamV2IpGroupsRequest
 	*/
-	ListIamV2ServiceAccounts(ctx _context.Context) ApiListIamV2ServiceAccountsRequest
+	ListIamV2IpGroups(ctx _context.Context) ApiListIamV2IpGroupsRequest
 
-	// ListIamV2ServiceAccountsExecute executes the request
-	//  @return IamV2ServiceAccountList
-	ListIamV2ServiceAccountsExecute(r ApiListIamV2ServiceAccountsRequest) (IamV2ServiceAccountList, *_nethttp.Response, error)
+	// ListIamV2IpGroupsExecute executes the request
+	//  @return IamV2IpGroupList
+	ListIamV2IpGroupsExecute(r ApiListIamV2IpGroupsRequest) (IamV2IpGroupList, *_nethttp.Response, error)
 
 	/*
-		UpdateIamV2ServiceAccount Update a Service Account
+		UpdateIamV2IpGroup Update an Ip Group
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Make a request to update a service account.
+	Make a request to update an ip group.
 
 
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the service account.
-		 @return ApiUpdateIamV2ServiceAccountRequest
+		 @param id The unique identifier for the ip group.
+		 @return ApiUpdateIamV2IpGroupRequest
 	*/
-	UpdateIamV2ServiceAccount(ctx _context.Context, id string) ApiUpdateIamV2ServiceAccountRequest
+	UpdateIamV2IpGroup(ctx _context.Context, id string) ApiUpdateIamV2IpGroupRequest
 
-	// UpdateIamV2ServiceAccountExecute executes the request
-	//  @return IamV2ServiceAccount
-	UpdateIamV2ServiceAccountExecute(r ApiUpdateIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error)
+	// UpdateIamV2IpGroupExecute executes the request
+	//  @return IamV2IpGroup
+	UpdateIamV2IpGroupExecute(r ApiUpdateIamV2IpGroupRequest) (IamV2IpGroup, *_nethttp.Response, error)
 }
 
-// ServiceAccountsIamV2ApiService ServiceAccountsIamV2Api service
-type ServiceAccountsIamV2ApiService service
+// IpGroupsIamV2ApiService IpGroupsIamV2Api service
+type IpGroupsIamV2ApiService service
 
-type ApiCreateIamV2ServiceAccountRequest struct {
-	ctx                 _context.Context
-	ApiService          ServiceAccountsIamV2Api
-	iamV2ServiceAccount *IamV2ServiceAccount
+type ApiCreateIamV2IpGroupRequest struct {
+	ctx          _context.Context
+	ApiService   IpGroupsIamV2Api
+	iamV2IpGroup *IamV2IpGroup
 }
 
-func (r ApiCreateIamV2ServiceAccountRequest) IamV2ServiceAccount(iamV2ServiceAccount IamV2ServiceAccount) ApiCreateIamV2ServiceAccountRequest {
-	r.iamV2ServiceAccount = &iamV2ServiceAccount
+func (r ApiCreateIamV2IpGroupRequest) IamV2IpGroup(iamV2IpGroup IamV2IpGroup) ApiCreateIamV2IpGroupRequest {
+	r.iamV2IpGroup = &iamV2IpGroup
 	return r
 }
 
-func (r ApiCreateIamV2ServiceAccountRequest) Execute() (IamV2ServiceAccount, *_nethttp.Response, error) {
-	return r.ApiService.CreateIamV2ServiceAccountExecute(r)
+func (r ApiCreateIamV2IpGroupRequest) Execute() (IamV2IpGroup, *_nethttp.Response, error) {
+	return r.ApiService.CreateIamV2IpGroupExecute(r)
 }
 
 /*
-CreateIamV2ServiceAccount Create a Service Account
+CreateIamV2IpGroup Create an Ip Group
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to create a service account.
+Make a request to create an ip group.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateIamV2ServiceAccountRequest
+	@return ApiCreateIamV2IpGroupRequest
 */
-func (a *ServiceAccountsIamV2ApiService) CreateIamV2ServiceAccount(ctx _context.Context) ApiCreateIamV2ServiceAccountRequest {
-	return ApiCreateIamV2ServiceAccountRequest{
+func (a *IpGroupsIamV2ApiService) CreateIamV2IpGroup(ctx _context.Context) ApiCreateIamV2IpGroupRequest {
+	return ApiCreateIamV2IpGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -167,23 +163,23 @@ func (a *ServiceAccountsIamV2ApiService) CreateIamV2ServiceAccount(ctx _context.
 
 // Execute executes the request
 //
-//	@return IamV2ServiceAccount
-func (a *ServiceAccountsIamV2ApiService) CreateIamV2ServiceAccountExecute(r ApiCreateIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error) {
+//	@return IamV2IpGroup
+func (a *IpGroupsIamV2ApiService) CreateIamV2IpGroupExecute(r ApiCreateIamV2IpGroupRequest) (IamV2IpGroup, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  IamV2ServiceAccount
+		localVarReturnValue  IamV2IpGroup
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceAccountsIamV2ApiService.CreateIamV2ServiceAccount")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IpGroupsIamV2ApiService.CreateIamV2IpGroup")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/iam/v2/service-accounts"
+	localVarPath := localBasePath + "/iam/v2/ip-groups"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -207,7 +203,7 @@ func (a *ServiceAccountsIamV2ApiService) CreateIamV2ServiceAccountExecute(r ApiC
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.iamV2ServiceAccount
+	localVarPostBody = r.iamV2IpGroup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -241,16 +237,6 @@ func (a *ServiceAccountsIamV2ApiService) CreateIamV2ServiceAccountExecute(r ApiC
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 402 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -314,32 +300,29 @@ func (a *ServiceAccountsIamV2ApiService) CreateIamV2ServiceAccountExecute(r ApiC
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteIamV2ServiceAccountRequest struct {
+type ApiDeleteIamV2IpGroupRequest struct {
 	ctx        _context.Context
-	ApiService ServiceAccountsIamV2Api
+	ApiService IpGroupsIamV2Api
 	id         string
 }
 
-func (r ApiDeleteIamV2ServiceAccountRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.DeleteIamV2ServiceAccountExecute(r)
+func (r ApiDeleteIamV2IpGroupRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteIamV2IpGroupExecute(r)
 }
 
 /*
-DeleteIamV2ServiceAccount Delete a Service Account
+DeleteIamV2IpGroup Delete an Ip Group
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to delete a service account.
-
-If successful, this request will also recursively delete all of the service account's associated resources,
-including its cloud and cluster API keys.
+Make a request to delete an ip group.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the service account.
-	@return ApiDeleteIamV2ServiceAccountRequest
+	@param id The unique identifier for the ip group.
+	@return ApiDeleteIamV2IpGroupRequest
 */
-func (a *ServiceAccountsIamV2ApiService) DeleteIamV2ServiceAccount(ctx _context.Context, id string) ApiDeleteIamV2ServiceAccountRequest {
-	return ApiDeleteIamV2ServiceAccountRequest{
+func (a *IpGroupsIamV2ApiService) DeleteIamV2IpGroup(ctx _context.Context, id string) ApiDeleteIamV2IpGroupRequest {
+	return ApiDeleteIamV2IpGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -347,7 +330,7 @@ func (a *ServiceAccountsIamV2ApiService) DeleteIamV2ServiceAccount(ctx _context.
 }
 
 // Execute executes the request
-func (a *ServiceAccountsIamV2ApiService) DeleteIamV2ServiceAccountExecute(r ApiDeleteIamV2ServiceAccountRequest) (*_nethttp.Response, error) {
+func (a *IpGroupsIamV2ApiService) DeleteIamV2IpGroupExecute(r ApiDeleteIamV2IpGroupRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
@@ -356,12 +339,12 @@ func (a *ServiceAccountsIamV2ApiService) DeleteIamV2ServiceAccountExecute(r ApiD
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceAccountsIamV2ApiService.DeleteIamV2ServiceAccount")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IpGroupsIamV2ApiService.DeleteIamV2IpGroup")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/iam/v2/service-accounts/{id}"
+	localVarPath := localBasePath + "/iam/v2/ip-groups/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -462,29 +445,29 @@ func (a *ServiceAccountsIamV2ApiService) DeleteIamV2ServiceAccountExecute(r ApiD
 	return localVarHTTPResponse, nil
 }
 
-type ApiGetIamV2ServiceAccountRequest struct {
+type ApiGetIamV2IpGroupRequest struct {
 	ctx        _context.Context
-	ApiService ServiceAccountsIamV2Api
+	ApiService IpGroupsIamV2Api
 	id         string
 }
 
-func (r ApiGetIamV2ServiceAccountRequest) Execute() (IamV2ServiceAccount, *_nethttp.Response, error) {
-	return r.ApiService.GetIamV2ServiceAccountExecute(r)
+func (r ApiGetIamV2IpGroupRequest) Execute() (IamV2IpGroup, *_nethttp.Response, error) {
+	return r.ApiService.GetIamV2IpGroupExecute(r)
 }
 
 /*
-GetIamV2ServiceAccount Read a Service Account
+GetIamV2IpGroup Read an Ip Group
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to read a service account.
+Make a request to read an ip group.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the service account.
-	@return ApiGetIamV2ServiceAccountRequest
+	@param id The unique identifier for the ip group.
+	@return ApiGetIamV2IpGroupRequest
 */
-func (a *ServiceAccountsIamV2ApiService) GetIamV2ServiceAccount(ctx _context.Context, id string) ApiGetIamV2ServiceAccountRequest {
-	return ApiGetIamV2ServiceAccountRequest{
+func (a *IpGroupsIamV2ApiService) GetIamV2IpGroup(ctx _context.Context, id string) ApiGetIamV2IpGroupRequest {
+	return ApiGetIamV2IpGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -493,23 +476,23 @@ func (a *ServiceAccountsIamV2ApiService) GetIamV2ServiceAccount(ctx _context.Con
 
 // Execute executes the request
 //
-//	@return IamV2ServiceAccount
-func (a *ServiceAccountsIamV2ApiService) GetIamV2ServiceAccountExecute(r ApiGetIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error) {
+//	@return IamV2IpGroup
+func (a *IpGroupsIamV2ApiService) GetIamV2IpGroupExecute(r ApiGetIamV2IpGroupRequest) (IamV2IpGroup, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  IamV2ServiceAccount
+		localVarReturnValue  IamV2IpGroup
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceAccountsIamV2ApiService.GetIamV2ServiceAccount")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IpGroupsIamV2ApiService.GetIamV2IpGroup")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/iam/v2/service-accounts/{id}"
+	localVarPath := localBasePath + "/iam/v2/ip-groups/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -619,41 +602,41 @@ func (a *ServiceAccountsIamV2ApiService) GetIamV2ServiceAccountExecute(r ApiGetI
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListIamV2ServiceAccountsRequest struct {
+type ApiListIamV2IpGroupsRequest struct {
 	ctx        _context.Context
-	ApiService ServiceAccountsIamV2Api
+	ApiService IpGroupsIamV2Api
 	pageSize   *int32
 	pageToken  *string
 }
 
 // A pagination size for collection requests.
-func (r ApiListIamV2ServiceAccountsRequest) PageSize(pageSize int32) ApiListIamV2ServiceAccountsRequest {
+func (r ApiListIamV2IpGroupsRequest) PageSize(pageSize int32) ApiListIamV2IpGroupsRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
 // An opaque pagination token for collection requests.
-func (r ApiListIamV2ServiceAccountsRequest) PageToken(pageToken string) ApiListIamV2ServiceAccountsRequest {
+func (r ApiListIamV2IpGroupsRequest) PageToken(pageToken string) ApiListIamV2IpGroupsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-func (r ApiListIamV2ServiceAccountsRequest) Execute() (IamV2ServiceAccountList, *_nethttp.Response, error) {
-	return r.ApiService.ListIamV2ServiceAccountsExecute(r)
+func (r ApiListIamV2IpGroupsRequest) Execute() (IamV2IpGroupList, *_nethttp.Response, error) {
+	return r.ApiService.ListIamV2IpGroupsExecute(r)
 }
 
 /*
-ListIamV2ServiceAccounts List of Service Accounts
+ListIamV2IpGroups List of Ip Groups
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Retrieve a sorted, filtered, paginated list of all service accounts.
+Retrieve a sorted, filtered, paginated list of all ip groups.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListIamV2ServiceAccountsRequest
+	@return ApiListIamV2IpGroupsRequest
 */
-func (a *ServiceAccountsIamV2ApiService) ListIamV2ServiceAccounts(ctx _context.Context) ApiListIamV2ServiceAccountsRequest {
-	return ApiListIamV2ServiceAccountsRequest{
+func (a *IpGroupsIamV2ApiService) ListIamV2IpGroups(ctx _context.Context) ApiListIamV2IpGroupsRequest {
+	return ApiListIamV2IpGroupsRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -661,23 +644,23 @@ func (a *ServiceAccountsIamV2ApiService) ListIamV2ServiceAccounts(ctx _context.C
 
 // Execute executes the request
 //
-//	@return IamV2ServiceAccountList
-func (a *ServiceAccountsIamV2ApiService) ListIamV2ServiceAccountsExecute(r ApiListIamV2ServiceAccountsRequest) (IamV2ServiceAccountList, *_nethttp.Response, error) {
+//	@return IamV2IpGroupList
+func (a *IpGroupsIamV2ApiService) ListIamV2IpGroupsExecute(r ApiListIamV2IpGroupsRequest) (IamV2IpGroupList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  IamV2ServiceAccountList
+		localVarReturnValue  IamV2IpGroupList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceAccountsIamV2ApiService.ListIamV2ServiceAccounts")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IpGroupsIamV2ApiService.ListIamV2IpGroups")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/iam/v2/service-accounts"
+	localVarPath := localBasePath + "/iam/v2/ip-groups"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -782,35 +765,35 @@ func (a *ServiceAccountsIamV2ApiService) ListIamV2ServiceAccountsExecute(r ApiLi
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateIamV2ServiceAccountRequest struct {
-	ctx                       _context.Context
-	ApiService                ServiceAccountsIamV2Api
-	id                        string
-	iamV2ServiceAccountUpdate *IamV2ServiceAccountUpdate
+type ApiUpdateIamV2IpGroupRequest struct {
+	ctx          _context.Context
+	ApiService   IpGroupsIamV2Api
+	id           string
+	iamV2IpGroup *IamV2IpGroup
 }
 
-func (r ApiUpdateIamV2ServiceAccountRequest) IamV2ServiceAccountUpdate(iamV2ServiceAccountUpdate IamV2ServiceAccountUpdate) ApiUpdateIamV2ServiceAccountRequest {
-	r.iamV2ServiceAccountUpdate = &iamV2ServiceAccountUpdate
+func (r ApiUpdateIamV2IpGroupRequest) IamV2IpGroup(iamV2IpGroup IamV2IpGroup) ApiUpdateIamV2IpGroupRequest {
+	r.iamV2IpGroup = &iamV2IpGroup
 	return r
 }
 
-func (r ApiUpdateIamV2ServiceAccountRequest) Execute() (IamV2ServiceAccount, *_nethttp.Response, error) {
-	return r.ApiService.UpdateIamV2ServiceAccountExecute(r)
+func (r ApiUpdateIamV2IpGroupRequest) Execute() (IamV2IpGroup, *_nethttp.Response, error) {
+	return r.ApiService.UpdateIamV2IpGroupExecute(r)
 }
 
 /*
-UpdateIamV2ServiceAccount Update a Service Account
+UpdateIamV2IpGroup Update an Ip Group
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to update a service account.
+Make a request to update an ip group.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the service account.
-	@return ApiUpdateIamV2ServiceAccountRequest
+	@param id The unique identifier for the ip group.
+	@return ApiUpdateIamV2IpGroupRequest
 */
-func (a *ServiceAccountsIamV2ApiService) UpdateIamV2ServiceAccount(ctx _context.Context, id string) ApiUpdateIamV2ServiceAccountRequest {
-	return ApiUpdateIamV2ServiceAccountRequest{
+func (a *IpGroupsIamV2ApiService) UpdateIamV2IpGroup(ctx _context.Context, id string) ApiUpdateIamV2IpGroupRequest {
+	return ApiUpdateIamV2IpGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -819,23 +802,23 @@ func (a *ServiceAccountsIamV2ApiService) UpdateIamV2ServiceAccount(ctx _context.
 
 // Execute executes the request
 //
-//	@return IamV2ServiceAccount
-func (a *ServiceAccountsIamV2ApiService) UpdateIamV2ServiceAccountExecute(r ApiUpdateIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error) {
+//	@return IamV2IpGroup
+func (a *IpGroupsIamV2ApiService) UpdateIamV2IpGroupExecute(r ApiUpdateIamV2IpGroupRequest) (IamV2IpGroup, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  IamV2ServiceAccount
+		localVarReturnValue  IamV2IpGroup
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceAccountsIamV2ApiService.UpdateIamV2ServiceAccount")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IpGroupsIamV2ApiService.UpdateIamV2IpGroup")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/iam/v2/service-accounts/{id}"
+	localVarPath := localBasePath + "/iam/v2/ip-groups/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -860,7 +843,7 @@ func (a *ServiceAccountsIamV2ApiService) UpdateIamV2ServiceAccountExecute(r ApiU
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.iamV2ServiceAccountUpdate
+	localVarPostBody = r.iamV2IpGroup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -894,16 +877,6 @@ func (a *ServiceAccountsIamV2ApiService) UpdateIamV2ServiceAccountExecute(r ApiU
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 402 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

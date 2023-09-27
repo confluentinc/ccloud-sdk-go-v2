@@ -44,7 +44,7 @@ type UsersIamV2Api interface {
 	/*
 		DeleteIamV2User Delete a User
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to delete a user.
 
@@ -64,7 +64,7 @@ type UsersIamV2Api interface {
 	/*
 		GetIamV2User Read a User
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to read a user.
 
@@ -81,7 +81,7 @@ type UsersIamV2Api interface {
 	/*
 		ListIamV2Users List of Users
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Retrieve a sorted, filtered, paginated list of all users.
 
@@ -97,7 +97,7 @@ type UsersIamV2Api interface {
 	/*
 		UpdateIamV2User Update a User
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to update a user.
 
@@ -130,7 +130,7 @@ func (r ApiDeleteIamV2UserRequest) Execute() (*_nethttp.Response, error) {
 /*
 DeleteIamV2User Delete a User
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete a user.
 
@@ -278,7 +278,7 @@ func (r ApiGetIamV2UserRequest) Execute() (IamV2User, *_nethttp.Response, error)
 /*
 GetIamV2User Read a User
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a user.
 
@@ -448,7 +448,7 @@ func (r ApiListIamV2UsersRequest) Execute() (IamV2UserList, *_nethttp.Response, 
 /*
 ListIamV2Users List of Users
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all users.
 
@@ -604,7 +604,7 @@ func (r ApiUpdateIamV2UserRequest) Execute() (IamV2User, *_nethttp.Response, err
 /*
 UpdateIamV2User Update a User
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update a user.
 

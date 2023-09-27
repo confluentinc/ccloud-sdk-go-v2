@@ -39,127 +39,104 @@ var (
 	_ _context.Context
 )
 
-type ServiceAccountsIamV2Api interface {
+type IpFiltersIamV2Api interface {
 
 	/*
-		CreateIamV2ServiceAccount Create a Service Account
+		CreateIamV2IpFilter Create an Ip Filter
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Make a request to create a service account.
+	Make a request to create an ip filter.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiCreateIamV2ServiceAccountRequest
+		 @return ApiCreateIamV2IpFilterRequest
 	*/
-	CreateIamV2ServiceAccount(ctx _context.Context) ApiCreateIamV2ServiceAccountRequest
+	CreateIamV2IpFilter(ctx _context.Context) ApiCreateIamV2IpFilterRequest
 
-	// CreateIamV2ServiceAccountExecute executes the request
-	//  @return IamV2ServiceAccount
-	CreateIamV2ServiceAccountExecute(r ApiCreateIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error)
+	// CreateIamV2IpFilterExecute executes the request
+	//  @return IamV2IpFilter
+	CreateIamV2IpFilterExecute(r ApiCreateIamV2IpFilterRequest) (IamV2IpFilter, *_nethttp.Response, error)
 
 	/*
-		DeleteIamV2ServiceAccount Delete a Service Account
+		DeleteIamV2IpFilter Delete an Ip Filter
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Make a request to delete a service account.
-
-	If successful, this request will also recursively delete all of the service account's associated resources,
-	including its cloud and cluster API keys.
-
+	Make a request to delete an ip filter.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the service account.
-		 @return ApiDeleteIamV2ServiceAccountRequest
+		 @param id The unique identifier for the ip filter.
+		 @return ApiDeleteIamV2IpFilterRequest
 	*/
-	DeleteIamV2ServiceAccount(ctx _context.Context, id string) ApiDeleteIamV2ServiceAccountRequest
+	DeleteIamV2IpFilter(ctx _context.Context, id string) ApiDeleteIamV2IpFilterRequest
 
-	// DeleteIamV2ServiceAccountExecute executes the request
-	DeleteIamV2ServiceAccountExecute(r ApiDeleteIamV2ServiceAccountRequest) (*_nethttp.Response, error)
+	// DeleteIamV2IpFilterExecute executes the request
+	DeleteIamV2IpFilterExecute(r ApiDeleteIamV2IpFilterRequest) (*_nethttp.Response, error)
 
 	/*
-		GetIamV2ServiceAccount Read a Service Account
+		GetIamV2IpFilter Read an Ip Filter
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Make a request to read a service account.
+	Make a request to read an ip filter.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the service account.
-		 @return ApiGetIamV2ServiceAccountRequest
+		 @param id The unique identifier for the ip filter.
+		 @return ApiGetIamV2IpFilterRequest
 	*/
-	GetIamV2ServiceAccount(ctx _context.Context, id string) ApiGetIamV2ServiceAccountRequest
+	GetIamV2IpFilter(ctx _context.Context, id string) ApiGetIamV2IpFilterRequest
 
-	// GetIamV2ServiceAccountExecute executes the request
-	//  @return IamV2ServiceAccount
-	GetIamV2ServiceAccountExecute(r ApiGetIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error)
+	// GetIamV2IpFilterExecute executes the request
+	//  @return IamV2IpFilter
+	GetIamV2IpFilterExecute(r ApiGetIamV2IpFilterRequest) (IamV2IpFilter, *_nethttp.Response, error)
 
 	/*
-		ListIamV2ServiceAccounts List of Service Accounts
+		ListIamV2IpFilters List of Ip Filters
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Retrieve a sorted, filtered, paginated list of all service accounts.
-
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListIamV2ServiceAccountsRequest
-	*/
-	ListIamV2ServiceAccounts(ctx _context.Context) ApiListIamV2ServiceAccountsRequest
-
-	// ListIamV2ServiceAccountsExecute executes the request
-	//  @return IamV2ServiceAccountList
-	ListIamV2ServiceAccountsExecute(r ApiListIamV2ServiceAccountsRequest) (IamV2ServiceAccountList, *_nethttp.Response, error)
-
-	/*
-		UpdateIamV2ServiceAccount Update a Service Account
-
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-	Make a request to update a service account.
-
-
+	Retrieve a sorted, filtered, paginated list of all ip filters.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the service account.
-		 @return ApiUpdateIamV2ServiceAccountRequest
+		 @return ApiListIamV2IpFiltersRequest
 	*/
-	UpdateIamV2ServiceAccount(ctx _context.Context, id string) ApiUpdateIamV2ServiceAccountRequest
+	ListIamV2IpFilters(ctx _context.Context) ApiListIamV2IpFiltersRequest
 
-	// UpdateIamV2ServiceAccountExecute executes the request
-	//  @return IamV2ServiceAccount
-	UpdateIamV2ServiceAccountExecute(r ApiUpdateIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error)
+	// ListIamV2IpFiltersExecute executes the request
+	//  @return IamV2IpFilterList
+	ListIamV2IpFiltersExecute(r ApiListIamV2IpFiltersRequest) (IamV2IpFilterList, *_nethttp.Response, error)
 }
 
-// ServiceAccountsIamV2ApiService ServiceAccountsIamV2Api service
-type ServiceAccountsIamV2ApiService service
+// IpFiltersIamV2ApiService IpFiltersIamV2Api service
+type IpFiltersIamV2ApiService service
 
-type ApiCreateIamV2ServiceAccountRequest struct {
-	ctx                 _context.Context
-	ApiService          ServiceAccountsIamV2Api
-	iamV2ServiceAccount *IamV2ServiceAccount
+type ApiCreateIamV2IpFilterRequest struct {
+	ctx           _context.Context
+	ApiService    IpFiltersIamV2Api
+	iamV2IpFilter *IamV2IpFilter
 }
 
-func (r ApiCreateIamV2ServiceAccountRequest) IamV2ServiceAccount(iamV2ServiceAccount IamV2ServiceAccount) ApiCreateIamV2ServiceAccountRequest {
-	r.iamV2ServiceAccount = &iamV2ServiceAccount
+func (r ApiCreateIamV2IpFilterRequest) IamV2IpFilter(iamV2IpFilter IamV2IpFilter) ApiCreateIamV2IpFilterRequest {
+	r.iamV2IpFilter = &iamV2IpFilter
 	return r
 }
 
-func (r ApiCreateIamV2ServiceAccountRequest) Execute() (IamV2ServiceAccount, *_nethttp.Response, error) {
-	return r.ApiService.CreateIamV2ServiceAccountExecute(r)
+func (r ApiCreateIamV2IpFilterRequest) Execute() (IamV2IpFilter, *_nethttp.Response, error) {
+	return r.ApiService.CreateIamV2IpFilterExecute(r)
 }
 
 /*
-CreateIamV2ServiceAccount Create a Service Account
+CreateIamV2IpFilter Create an Ip Filter
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to create a service account.
+Make a request to create an ip filter.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateIamV2ServiceAccountRequest
+	@return ApiCreateIamV2IpFilterRequest
 */
-func (a *ServiceAccountsIamV2ApiService) CreateIamV2ServiceAccount(ctx _context.Context) ApiCreateIamV2ServiceAccountRequest {
-	return ApiCreateIamV2ServiceAccountRequest{
+func (a *IpFiltersIamV2ApiService) CreateIamV2IpFilter(ctx _context.Context) ApiCreateIamV2IpFilterRequest {
+	return ApiCreateIamV2IpFilterRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -167,23 +144,23 @@ func (a *ServiceAccountsIamV2ApiService) CreateIamV2ServiceAccount(ctx _context.
 
 // Execute executes the request
 //
-//	@return IamV2ServiceAccount
-func (a *ServiceAccountsIamV2ApiService) CreateIamV2ServiceAccountExecute(r ApiCreateIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error) {
+//	@return IamV2IpFilter
+func (a *IpFiltersIamV2ApiService) CreateIamV2IpFilterExecute(r ApiCreateIamV2IpFilterRequest) (IamV2IpFilter, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  IamV2ServiceAccount
+		localVarReturnValue  IamV2IpFilter
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceAccountsIamV2ApiService.CreateIamV2ServiceAccount")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IpFiltersIamV2ApiService.CreateIamV2IpFilter")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/iam/v2/service-accounts"
+	localVarPath := localBasePath + "/iam/v2/ip-filters"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -207,7 +184,7 @@ func (a *ServiceAccountsIamV2ApiService) CreateIamV2ServiceAccountExecute(r ApiC
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.iamV2ServiceAccount
+	localVarPostBody = r.iamV2IpFilter
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -241,16 +218,6 @@ func (a *ServiceAccountsIamV2ApiService) CreateIamV2ServiceAccountExecute(r ApiC
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 402 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -314,32 +281,29 @@ func (a *ServiceAccountsIamV2ApiService) CreateIamV2ServiceAccountExecute(r ApiC
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteIamV2ServiceAccountRequest struct {
+type ApiDeleteIamV2IpFilterRequest struct {
 	ctx        _context.Context
-	ApiService ServiceAccountsIamV2Api
+	ApiService IpFiltersIamV2Api
 	id         string
 }
 
-func (r ApiDeleteIamV2ServiceAccountRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.DeleteIamV2ServiceAccountExecute(r)
+func (r ApiDeleteIamV2IpFilterRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteIamV2IpFilterExecute(r)
 }
 
 /*
-DeleteIamV2ServiceAccount Delete a Service Account
+DeleteIamV2IpFilter Delete an Ip Filter
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to delete a service account.
-
-If successful, this request will also recursively delete all of the service account's associated resources,
-including its cloud and cluster API keys.
+Make a request to delete an ip filter.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the service account.
-	@return ApiDeleteIamV2ServiceAccountRequest
+	@param id The unique identifier for the ip filter.
+	@return ApiDeleteIamV2IpFilterRequest
 */
-func (a *ServiceAccountsIamV2ApiService) DeleteIamV2ServiceAccount(ctx _context.Context, id string) ApiDeleteIamV2ServiceAccountRequest {
-	return ApiDeleteIamV2ServiceAccountRequest{
+func (a *IpFiltersIamV2ApiService) DeleteIamV2IpFilter(ctx _context.Context, id string) ApiDeleteIamV2IpFilterRequest {
+	return ApiDeleteIamV2IpFilterRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -347,7 +311,7 @@ func (a *ServiceAccountsIamV2ApiService) DeleteIamV2ServiceAccount(ctx _context.
 }
 
 // Execute executes the request
-func (a *ServiceAccountsIamV2ApiService) DeleteIamV2ServiceAccountExecute(r ApiDeleteIamV2ServiceAccountRequest) (*_nethttp.Response, error) {
+func (a *IpFiltersIamV2ApiService) DeleteIamV2IpFilterExecute(r ApiDeleteIamV2IpFilterRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
@@ -356,12 +320,12 @@ func (a *ServiceAccountsIamV2ApiService) DeleteIamV2ServiceAccountExecute(r ApiD
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceAccountsIamV2ApiService.DeleteIamV2ServiceAccount")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IpFiltersIamV2ApiService.DeleteIamV2IpFilter")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/iam/v2/service-accounts/{id}"
+	localVarPath := localBasePath + "/iam/v2/ip-filters/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -462,29 +426,29 @@ func (a *ServiceAccountsIamV2ApiService) DeleteIamV2ServiceAccountExecute(r ApiD
 	return localVarHTTPResponse, nil
 }
 
-type ApiGetIamV2ServiceAccountRequest struct {
+type ApiGetIamV2IpFilterRequest struct {
 	ctx        _context.Context
-	ApiService ServiceAccountsIamV2Api
+	ApiService IpFiltersIamV2Api
 	id         string
 }
 
-func (r ApiGetIamV2ServiceAccountRequest) Execute() (IamV2ServiceAccount, *_nethttp.Response, error) {
-	return r.ApiService.GetIamV2ServiceAccountExecute(r)
+func (r ApiGetIamV2IpFilterRequest) Execute() (IamV2IpFilter, *_nethttp.Response, error) {
+	return r.ApiService.GetIamV2IpFilterExecute(r)
 }
 
 /*
-GetIamV2ServiceAccount Read a Service Account
+GetIamV2IpFilter Read an Ip Filter
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to read a service account.
+Make a request to read an ip filter.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the service account.
-	@return ApiGetIamV2ServiceAccountRequest
+	@param id The unique identifier for the ip filter.
+	@return ApiGetIamV2IpFilterRequest
 */
-func (a *ServiceAccountsIamV2ApiService) GetIamV2ServiceAccount(ctx _context.Context, id string) ApiGetIamV2ServiceAccountRequest {
-	return ApiGetIamV2ServiceAccountRequest{
+func (a *IpFiltersIamV2ApiService) GetIamV2IpFilter(ctx _context.Context, id string) ApiGetIamV2IpFilterRequest {
+	return ApiGetIamV2IpFilterRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -493,23 +457,23 @@ func (a *ServiceAccountsIamV2ApiService) GetIamV2ServiceAccount(ctx _context.Con
 
 // Execute executes the request
 //
-//	@return IamV2ServiceAccount
-func (a *ServiceAccountsIamV2ApiService) GetIamV2ServiceAccountExecute(r ApiGetIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error) {
+//	@return IamV2IpFilter
+func (a *IpFiltersIamV2ApiService) GetIamV2IpFilterExecute(r ApiGetIamV2IpFilterRequest) (IamV2IpFilter, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  IamV2ServiceAccount
+		localVarReturnValue  IamV2IpFilter
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceAccountsIamV2ApiService.GetIamV2ServiceAccount")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IpFiltersIamV2ApiService.GetIamV2IpFilter")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/iam/v2/service-accounts/{id}"
+	localVarPath := localBasePath + "/iam/v2/ip-filters/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -619,41 +583,41 @@ func (a *ServiceAccountsIamV2ApiService) GetIamV2ServiceAccountExecute(r ApiGetI
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListIamV2ServiceAccountsRequest struct {
+type ApiListIamV2IpFiltersRequest struct {
 	ctx        _context.Context
-	ApiService ServiceAccountsIamV2Api
+	ApiService IpFiltersIamV2Api
 	pageSize   *int32
 	pageToken  *string
 }
 
 // A pagination size for collection requests.
-func (r ApiListIamV2ServiceAccountsRequest) PageSize(pageSize int32) ApiListIamV2ServiceAccountsRequest {
+func (r ApiListIamV2IpFiltersRequest) PageSize(pageSize int32) ApiListIamV2IpFiltersRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
 // An opaque pagination token for collection requests.
-func (r ApiListIamV2ServiceAccountsRequest) PageToken(pageToken string) ApiListIamV2ServiceAccountsRequest {
+func (r ApiListIamV2IpFiltersRequest) PageToken(pageToken string) ApiListIamV2IpFiltersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-func (r ApiListIamV2ServiceAccountsRequest) Execute() (IamV2ServiceAccountList, *_nethttp.Response, error) {
-	return r.ApiService.ListIamV2ServiceAccountsExecute(r)
+func (r ApiListIamV2IpFiltersRequest) Execute() (IamV2IpFilterList, *_nethttp.Response, error) {
+	return r.ApiService.ListIamV2IpFiltersExecute(r)
 }
 
 /*
-ListIamV2ServiceAccounts List of Service Accounts
+ListIamV2IpFilters List of Ip Filters
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Retrieve a sorted, filtered, paginated list of all service accounts.
+Retrieve a sorted, filtered, paginated list of all ip filters.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListIamV2ServiceAccountsRequest
+	@return ApiListIamV2IpFiltersRequest
 */
-func (a *ServiceAccountsIamV2ApiService) ListIamV2ServiceAccounts(ctx _context.Context) ApiListIamV2ServiceAccountsRequest {
-	return ApiListIamV2ServiceAccountsRequest{
+func (a *IpFiltersIamV2ApiService) ListIamV2IpFilters(ctx _context.Context) ApiListIamV2IpFiltersRequest {
+	return ApiListIamV2IpFiltersRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -661,23 +625,23 @@ func (a *ServiceAccountsIamV2ApiService) ListIamV2ServiceAccounts(ctx _context.C
 
 // Execute executes the request
 //
-//	@return IamV2ServiceAccountList
-func (a *ServiceAccountsIamV2ApiService) ListIamV2ServiceAccountsExecute(r ApiListIamV2ServiceAccountsRequest) (IamV2ServiceAccountList, *_nethttp.Response, error) {
+//	@return IamV2IpFilterList
+func (a *IpFiltersIamV2ApiService) ListIamV2IpFiltersExecute(r ApiListIamV2IpFiltersRequest) (IamV2IpFilterList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  IamV2ServiceAccountList
+		localVarReturnValue  IamV2IpFilterList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceAccountsIamV2ApiService.ListIamV2ServiceAccounts")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IpFiltersIamV2ApiService.ListIamV2IpFilters")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/iam/v2/service-accounts"
+	localVarPath := localBasePath + "/iam/v2/ip-filters"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -749,191 +713,6 @@ func (a *ServiceAccountsIamV2ApiService) ListIamV2ServiceAccountsExecute(r ApiLi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateIamV2ServiceAccountRequest struct {
-	ctx                       _context.Context
-	ApiService                ServiceAccountsIamV2Api
-	id                        string
-	iamV2ServiceAccountUpdate *IamV2ServiceAccountUpdate
-}
-
-func (r ApiUpdateIamV2ServiceAccountRequest) IamV2ServiceAccountUpdate(iamV2ServiceAccountUpdate IamV2ServiceAccountUpdate) ApiUpdateIamV2ServiceAccountRequest {
-	r.iamV2ServiceAccountUpdate = &iamV2ServiceAccountUpdate
-	return r
-}
-
-func (r ApiUpdateIamV2ServiceAccountRequest) Execute() (IamV2ServiceAccount, *_nethttp.Response, error) {
-	return r.ApiService.UpdateIamV2ServiceAccountExecute(r)
-}
-
-/*
-UpdateIamV2ServiceAccount Update a Service Account
-
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-Make a request to update a service account.
-
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the service account.
-	@return ApiUpdateIamV2ServiceAccountRequest
-*/
-func (a *ServiceAccountsIamV2ApiService) UpdateIamV2ServiceAccount(ctx _context.Context, id string) ApiUpdateIamV2ServiceAccountRequest {
-	return ApiUpdateIamV2ServiceAccountRequest{
-		ApiService: a,
-		ctx:        ctx,
-		id:         id,
-	}
-}
-
-// Execute executes the request
-//
-//	@return IamV2ServiceAccount
-func (a *ServiceAccountsIamV2ApiService) UpdateIamV2ServiceAccountExecute(r ApiUpdateIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamV2ServiceAccount
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceAccountsIamV2ApiService.UpdateIamV2ServiceAccount")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/iam/v2/service-accounts/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.iamV2ServiceAccountUpdate
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 402 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

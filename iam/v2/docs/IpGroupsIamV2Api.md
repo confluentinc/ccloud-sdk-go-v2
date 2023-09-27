@@ -1,22 +1,22 @@
-# \ServiceAccountsIamV2Api
+# \IpGroupsIamV2Api
 
 All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateIamV2ServiceAccount**](ServiceAccountsIamV2Api.md#CreateIamV2ServiceAccount) | **Post** /iam/v2/service-accounts | Create a Service Account
-[**DeleteIamV2ServiceAccount**](ServiceAccountsIamV2Api.md#DeleteIamV2ServiceAccount) | **Delete** /iam/v2/service-accounts/{id} | Delete a Service Account
-[**GetIamV2ServiceAccount**](ServiceAccountsIamV2Api.md#GetIamV2ServiceAccount) | **Get** /iam/v2/service-accounts/{id} | Read a Service Account
-[**ListIamV2ServiceAccounts**](ServiceAccountsIamV2Api.md#ListIamV2ServiceAccounts) | **Get** /iam/v2/service-accounts | List of Service Accounts
-[**UpdateIamV2ServiceAccount**](ServiceAccountsIamV2Api.md#UpdateIamV2ServiceAccount) | **Patch** /iam/v2/service-accounts/{id} | Update a Service Account
+[**CreateIamV2IpGroup**](IpGroupsIamV2Api.md#CreateIamV2IpGroup) | **Post** /iam/v2/ip-groups | Create an Ip Group
+[**DeleteIamV2IpGroup**](IpGroupsIamV2Api.md#DeleteIamV2IpGroup) | **Delete** /iam/v2/ip-groups/{id} | Delete an Ip Group
+[**GetIamV2IpGroup**](IpGroupsIamV2Api.md#GetIamV2IpGroup) | **Get** /iam/v2/ip-groups/{id} | Read an Ip Group
+[**ListIamV2IpGroups**](IpGroupsIamV2Api.md#ListIamV2IpGroups) | **Get** /iam/v2/ip-groups | List of Ip Groups
+[**UpdateIamV2IpGroup**](IpGroupsIamV2Api.md#UpdateIamV2IpGroup) | **Patch** /iam/v2/ip-groups/{id} | Update an Ip Group
 
 
 
-## CreateIamV2ServiceAccount
+## CreateIamV2IpGroup
 
-> IamV2ServiceAccount CreateIamV2ServiceAccount(ctx).IamV2ServiceAccount(iamV2ServiceAccount).Execute()
+> IamV2IpGroup CreateIamV2IpGroup(ctx).IamV2IpGroup(iamV2IpGroup).Execute()
 
-Create a Service Account
+Create an Ip Group
 
 
 
@@ -33,17 +33,17 @@ import (
 )
 
 func main() {
-    iamV2ServiceAccount := *openapiclient.NewIamV2ServiceAccount() // IamV2ServiceAccount |  (optional)
+    iamV2IpGroup := *openapiclient.NewIamV2IpGroup() // IamV2IpGroup |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ServiceAccountsIamV2Api.CreateIamV2ServiceAccount(context.Background()).IamV2ServiceAccount(iamV2ServiceAccount).Execute()
+    resp, r, err := api_client.IpGroupsIamV2Api.CreateIamV2IpGroup(context.Background()).IamV2IpGroup(iamV2IpGroup).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ServiceAccountsIamV2Api.CreateIamV2ServiceAccount``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `IpGroupsIamV2Api.CreateIamV2IpGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateIamV2ServiceAccount`: IamV2ServiceAccount
-    fmt.Fprintf(os.Stdout, "Response from `ServiceAccountsIamV2Api.CreateIamV2ServiceAccount`: %v\n", resp)
+    // response from `CreateIamV2IpGroup`: IamV2IpGroup
+    fmt.Fprintf(os.Stdout, "Response from `IpGroupsIamV2Api.CreateIamV2IpGroup`: %v\n", resp)
 }
 ```
 
@@ -53,16 +53,16 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateIamV2ServiceAccountRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateIamV2IpGroupRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **iamV2ServiceAccount** | [**IamV2ServiceAccount**](IamV2ServiceAccount.md) |  | 
+ **iamV2IpGroup** | [**IamV2IpGroup**](IamV2IpGroup.md) |  | 
 
 ### Return type
 
-[**IamV2ServiceAccount**](iam.v2.ServiceAccount.md)
+[**IamV2IpGroup**](iam.v2.IpGroup.md)
 
 ### Authorization
 
@@ -78,11 +78,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteIamV2ServiceAccount
+## DeleteIamV2IpGroup
 
-> DeleteIamV2ServiceAccount(ctx, id).Execute()
+> DeleteIamV2IpGroup(ctx, id).Execute()
 
-Delete a Service Account
+Delete an Ip Group
 
 
 
@@ -99,13 +99,13 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | The unique identifier for the service account.
+    id := "id_example" // string | The unique identifier for the ip group.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ServiceAccountsIamV2Api.DeleteIamV2ServiceAccount(context.Background(), id).Execute()
+    resp, r, err := api_client.IpGroupsIamV2Api.DeleteIamV2IpGroup(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ServiceAccountsIamV2Api.DeleteIamV2ServiceAccount``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `IpGroupsIamV2Api.DeleteIamV2IpGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -117,11 +117,11 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the service account. | 
+**id** | **string** | The unique identifier for the ip group. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteIamV2ServiceAccountRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteIamV2IpGroupRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -146,11 +146,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetIamV2ServiceAccount
+## GetIamV2IpGroup
 
-> IamV2ServiceAccount GetIamV2ServiceAccount(ctx, id).Execute()
+> IamV2IpGroup GetIamV2IpGroup(ctx, id).Execute()
 
-Read a Service Account
+Read an Ip Group
 
 
 
@@ -167,17 +167,17 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | The unique identifier for the service account.
+    id := "id_example" // string | The unique identifier for the ip group.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ServiceAccountsIamV2Api.GetIamV2ServiceAccount(context.Background(), id).Execute()
+    resp, r, err := api_client.IpGroupsIamV2Api.GetIamV2IpGroup(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ServiceAccountsIamV2Api.GetIamV2ServiceAccount``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `IpGroupsIamV2Api.GetIamV2IpGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetIamV2ServiceAccount`: IamV2ServiceAccount
-    fmt.Fprintf(os.Stdout, "Response from `ServiceAccountsIamV2Api.GetIamV2ServiceAccount`: %v\n", resp)
+    // response from `GetIamV2IpGroup`: IamV2IpGroup
+    fmt.Fprintf(os.Stdout, "Response from `IpGroupsIamV2Api.GetIamV2IpGroup`: %v\n", resp)
 }
 ```
 
@@ -187,11 +187,11 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the service account. | 
+**id** | **string** | The unique identifier for the ip group. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetIamV2ServiceAccountRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetIamV2IpGroupRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -200,7 +200,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IamV2ServiceAccount**](iam.v2.ServiceAccount.md)
+[**IamV2IpGroup**](iam.v2.IpGroup.md)
 
 ### Authorization
 
@@ -216,11 +216,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ListIamV2ServiceAccounts
+## ListIamV2IpGroups
 
-> IamV2ServiceAccountList ListIamV2ServiceAccounts(ctx).PageSize(pageSize).PageToken(pageToken).Execute()
+> IamV2IpGroupList ListIamV2IpGroups(ctx).PageSize(pageSize).PageToken(pageToken).Execute()
 
-List of Service Accounts
+List of Ip Groups
 
 
 
@@ -237,18 +237,18 @@ import (
 )
 
 func main() {
-    pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
+    pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 25)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ServiceAccountsIamV2Api.ListIamV2ServiceAccounts(context.Background()).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.IpGroupsIamV2Api.ListIamV2IpGroups(context.Background()).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ServiceAccountsIamV2Api.ListIamV2ServiceAccounts``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `IpGroupsIamV2Api.ListIamV2IpGroups``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListIamV2ServiceAccounts`: IamV2ServiceAccountList
-    fmt.Fprintf(os.Stdout, "Response from `ServiceAccountsIamV2Api.ListIamV2ServiceAccounts`: %v\n", resp)
+    // response from `ListIamV2IpGroups`: IamV2IpGroupList
+    fmt.Fprintf(os.Stdout, "Response from `IpGroupsIamV2Api.ListIamV2IpGroups`: %v\n", resp)
 }
 ```
 
@@ -258,17 +258,17 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListIamV2ServiceAccountsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListIamV2IpGroupsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
+ **pageSize** | **int32** | A pagination size for collection requests. | [default to 25]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 
 ### Return type
 
-[**IamV2ServiceAccountList**](iam.v2.ServiceAccountList.md)
+[**IamV2IpGroupList**](iam.v2.IpGroupList.md)
 
 ### Authorization
 
@@ -284,11 +284,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UpdateIamV2ServiceAccount
+## UpdateIamV2IpGroup
 
-> IamV2ServiceAccount UpdateIamV2ServiceAccount(ctx, id).IamV2ServiceAccountUpdate(iamV2ServiceAccountUpdate).Execute()
+> IamV2IpGroup UpdateIamV2IpGroup(ctx, id).IamV2IpGroup(iamV2IpGroup).Execute()
 
-Update a Service Account
+Update an Ip Group
 
 
 
@@ -305,18 +305,18 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | The unique identifier for the service account.
-    iamV2ServiceAccountUpdate := *openapiclient.NewIamV2ServiceAccountUpdate() // IamV2ServiceAccountUpdate |  (optional)
+    id := "id_example" // string | The unique identifier for the ip group.
+    iamV2IpGroup := *openapiclient.NewIamV2IpGroup() // IamV2IpGroup |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ServiceAccountsIamV2Api.UpdateIamV2ServiceAccount(context.Background(), id).IamV2ServiceAccountUpdate(iamV2ServiceAccountUpdate).Execute()
+    resp, r, err := api_client.IpGroupsIamV2Api.UpdateIamV2IpGroup(context.Background(), id).IamV2IpGroup(iamV2IpGroup).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ServiceAccountsIamV2Api.UpdateIamV2ServiceAccount``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `IpGroupsIamV2Api.UpdateIamV2IpGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UpdateIamV2ServiceAccount`: IamV2ServiceAccount
-    fmt.Fprintf(os.Stdout, "Response from `ServiceAccountsIamV2Api.UpdateIamV2ServiceAccount`: %v\n", resp)
+    // response from `UpdateIamV2IpGroup`: IamV2IpGroup
+    fmt.Fprintf(os.Stdout, "Response from `IpGroupsIamV2Api.UpdateIamV2IpGroup`: %v\n", resp)
 }
 ```
 
@@ -326,21 +326,21 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the service account. | 
+**id** | **string** | The unique identifier for the ip group. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUpdateIamV2ServiceAccountRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiUpdateIamV2IpGroupRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **iamV2ServiceAccountUpdate** | [**IamV2ServiceAccountUpdate**](IamV2ServiceAccountUpdate.md) |  | 
+ **iamV2IpGroup** | [**IamV2IpGroup**](IamV2IpGroup.md) |  | 
 
 ### Return type
 
-[**IamV2ServiceAccount**](iam.v2.ServiceAccount.md)
+[**IamV2IpGroup**](iam.v2.IpGroup.md)
 
 ### Authorization
 

@@ -44,7 +44,7 @@ type InvitationsIamV2Api interface {
 	/*
 		CreateIamV2Invitation Create an Invitation
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to create an invitation.
 
@@ -66,7 +66,7 @@ type InvitationsIamV2Api interface {
 	/*
 		DeleteIamV2Invitation Delete an Invitation
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to delete an invitation.
 
@@ -85,7 +85,7 @@ type InvitationsIamV2Api interface {
 	/*
 		GetIamV2Invitation Read an Invitation
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to read an invitation.
 
@@ -102,7 +102,7 @@ type InvitationsIamV2Api interface {
 	/*
 		ListIamV2Invitations List of Invitations
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Retrieve a sorted, filtered, paginated list of all invitations.
 
@@ -137,7 +137,7 @@ func (r ApiCreateIamV2InvitationRequest) Execute() (IamV2Invitation, *_nethttp.R
 /*
 CreateIamV2Invitation Create an Invitation
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create an invitation.
 
@@ -318,7 +318,7 @@ func (r ApiDeleteIamV2InvitationRequest) Execute() (*_nethttp.Response, error) {
 /*
 DeleteIamV2Invitation Delete an Invitation
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete an invitation.
 
@@ -465,7 +465,7 @@ func (r ApiGetIamV2InvitationRequest) Execute() (IamV2Invitation, *_nethttp.Resp
 /*
 GetIamV2Invitation Read an Invitation
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read an invitation.
 
@@ -663,7 +663,7 @@ func (r ApiListIamV2InvitationsRequest) Execute() (IamV2InvitationList, *_nethtt
 /*
 ListIamV2Invitations List of Invitations
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all invitations.
 
