@@ -42,13 +42,21 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/fcpm.v2.Quickstart'
+              allOf:
+              - $ref: '#/components/schemas/fcpm.v2.Quickstart'
+              - required:
+                - compute_pools
+                type: object
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/fcpm.v2.Quickstart'
+                allOf:
+                - $ref: '#/components/schemas/fcpm.v2.Quickstart'
+                - required:
+                  - compute_pools
+                  type: object
           description: A Quickstart was created.
           headers:
             X-Request-Id:
@@ -621,20 +629,6 @@ components:
 
         ## The Quickstarts Model
         <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.Quickstart" />
-      example:
-        metadata: ""
-        kind: Quickstart
-        id: dlz-f3a90de
-        api_version: fcpm/v2
-        compute_pools:
-        - cloud: cloud
-          compute_pool_id: compute_pool_id
-          environment_id: environment_id
-          region: region
-        - cloud: cloud
-          compute_pool_id: compute_pool_id
-          environment_id: environment_id
-          region: region
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -673,15 +667,17 @@ components:
           items:
             $ref: '#/components/schemas/fcpm.V2.QuickstartComputePool'
           type: array
+        errors:
+          description: |
+            The list of errors encountered when quickstart a compute pool.
+          items:
+            $ref: '#/components/schemas/fcpm.V2.Error'
+          readOnly: true
+          type: array
       type: object
     fcpm.V2.QuickstartComputePool:
       description: |
         Quickstart compute pool for the EnvironmentId + Region + Cloud
-      example:
-        cloud: cloud
-        compute_pool_id: compute_pool_id
-        environment_id: environment_id
-        region: region
       properties:
         environment_id:
           description: |
@@ -704,10 +700,48 @@ components:
             The id of the compute pool.
           readOnly: true
           type: string
+        display_name:
+          description: |
+            The display_name of the compute pool.
+          readOnly: true
+          type: string
+        max_cfu:
+          description: |
+            The max_cfu of the compute pool.
+          example: 123
+          format: int32
+          readOnly: true
+          type: integer
       required:
       - cloud
       - environment_id
       - region
+      type: object
+    fcpm.V2.Error:
+      description: Describes a particular error encountered while performing an operation.
+      properties:
+        id:
+          description: A unique identifier for this particular occurrence of the problem.
+          maxLength: 255
+          type: string
+        status:
+          description: The HTTP status code applicable to this problem, expressed
+            as a string value.
+          type: string
+        code:
+          description: An application-specific error code, expressed as a string value.
+          type: string
+        title:
+          description: A short, human-readable summary of the problem. It **SHOULD
+            NOT** change from occurrence to occurrence of the problem, except for
+            purposes of localization.
+          type: string
+        detail:
+          description: A human-readable explanation specific to this occurrence of
+            the problem.
+          type: string
+        source:
+          $ref: '#/components/schemas/fcpm_V2_Error_source'
       type: object
     ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have,
@@ -872,9 +906,9 @@ components:
             the problem.
           type: string
         source:
-          $ref: '#/components/schemas/Error_source'
+          $ref: '#/components/schemas/fcpm_V2_Error_source'
       type: object
-    Error_source:
+    fcpm_V2_Error_source:
       description: If this error was caused by a particular part of the API request,
         the source will point to the query string parameter or request body property
         that caused it.

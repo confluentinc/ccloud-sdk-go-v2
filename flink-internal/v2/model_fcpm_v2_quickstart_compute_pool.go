@@ -44,6 +44,10 @@ type FcpmV2QuickstartComputePool struct {
 	Cloud string `json:"cloud,omitempty"`
 	// The id of the compute pool. 
 	ComputePoolId *string `json:"compute_pool_id,omitempty"`
+	// The display_name of the compute pool. 
+	DisplayName *string `json:"display_name,omitempty"`
+	// The max_cfu of the compute pool. 
+	MaxCfu *int32 `json:"max_cfu,omitempty"`
 }
 
 // NewFcpmV2QuickstartComputePool instantiates a new FcpmV2QuickstartComputePool object
@@ -170,12 +174,78 @@ func (o *FcpmV2QuickstartComputePool) SetComputePoolId(v string) {
 	o.ComputePoolId = &v
 }
 
+// GetDisplayName returns the DisplayName field value if set, zero value otherwise.
+func (o *FcpmV2QuickstartComputePool) GetDisplayName() string {
+	if o == nil || o.DisplayName == nil {
+		var ret string
+		return ret
+	}
+	return *o.DisplayName
+}
+
+// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FcpmV2QuickstartComputePool) GetDisplayNameOk() (*string, bool) {
+	if o == nil || o.DisplayName == nil {
+		return nil, false
+	}
+	return o.DisplayName, true
+}
+
+// HasDisplayName returns a boolean if a field has been set.
+func (o *FcpmV2QuickstartComputePool) HasDisplayName() bool {
+	if o != nil && o.DisplayName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
+func (o *FcpmV2QuickstartComputePool) SetDisplayName(v string) {
+	o.DisplayName = &v
+}
+
+// GetMaxCfu returns the MaxCfu field value if set, zero value otherwise.
+func (o *FcpmV2QuickstartComputePool) GetMaxCfu() int32 {
+	if o == nil || o.MaxCfu == nil {
+		var ret int32
+		return ret
+	}
+	return *o.MaxCfu
+}
+
+// GetMaxCfuOk returns a tuple with the MaxCfu field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FcpmV2QuickstartComputePool) GetMaxCfuOk() (*int32, bool) {
+	if o == nil || o.MaxCfu == nil {
+		return nil, false
+	}
+	return o.MaxCfu, true
+}
+
+// HasMaxCfu returns a boolean if a field has been set.
+func (o *FcpmV2QuickstartComputePool) HasMaxCfu() bool {
+	if o != nil && o.MaxCfu != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxCfu gets a reference to the given int32 and assigns it to the MaxCfu field.
+func (o *FcpmV2QuickstartComputePool) SetMaxCfu(v int32) {
+	o.MaxCfu = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *FcpmV2QuickstartComputePool) Redact() {
     o.recurseRedact(&o.EnvironmentId)
     o.recurseRedact(&o.Region)
     o.recurseRedact(&o.Cloud)
     o.recurseRedact(o.ComputePoolId)
+    o.recurseRedact(o.DisplayName)
+    o.recurseRedact(o.MaxCfu)
 }
 
 func (o *FcpmV2QuickstartComputePool) recurseRedact(v interface{}) {
@@ -221,6 +291,12 @@ func (o FcpmV2QuickstartComputePool) MarshalJSON() ([]byte, error) {
 	}
 	if o.ComputePoolId != nil {
 		toSerialize["compute_pool_id"] = o.ComputePoolId
+	}
+	if o.DisplayName != nil {
+		toSerialize["display_name"] = o.DisplayName
+	}
+	if o.MaxCfu != nil {
+		toSerialize["max_cfu"] = o.MaxCfu
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

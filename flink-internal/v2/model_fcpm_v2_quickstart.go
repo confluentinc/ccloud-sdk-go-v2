@@ -45,6 +45,8 @@ type FcpmV2Quickstart struct {
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
 	// The list of compute pools to quickstart. 
 	ComputePools *[]FcpmV2QuickstartComputePool `json:"compute_pools,omitempty"`
+	// The list of errors encountered when quickstart a compute pool. 
+	Errors *[]FcpmV2Error `json:"errors,omitempty"`
 }
 
 // NewFcpmV2Quickstart instantiates a new FcpmV2Quickstart object
@@ -224,6 +226,38 @@ func (o *FcpmV2Quickstart) SetComputePools(v []FcpmV2QuickstartComputePool) {
 	o.ComputePools = &v
 }
 
+// GetErrors returns the Errors field value if set, zero value otherwise.
+func (o *FcpmV2Quickstart) GetErrors() []FcpmV2Error {
+	if o == nil || o.Errors == nil {
+		var ret []FcpmV2Error
+		return ret
+	}
+	return *o.Errors
+}
+
+// GetErrorsOk returns a tuple with the Errors field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FcpmV2Quickstart) GetErrorsOk() (*[]FcpmV2Error, bool) {
+	if o == nil || o.Errors == nil {
+		return nil, false
+	}
+	return o.Errors, true
+}
+
+// HasErrors returns a boolean if a field has been set.
+func (o *FcpmV2Quickstart) HasErrors() bool {
+	if o != nil && o.Errors != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetErrors gets a reference to the given []FcpmV2Error and assigns it to the Errors field.
+func (o *FcpmV2Quickstart) SetErrors(v []FcpmV2Error) {
+	o.Errors = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *FcpmV2Quickstart) Redact() {
     o.recurseRedact(o.ApiVersion)
@@ -231,6 +265,7 @@ func (o *FcpmV2Quickstart) Redact() {
     o.recurseRedact(o.Id)
     o.recurseRedact(o.Metadata)
     o.recurseRedact(o.ComputePools)
+    o.recurseRedact(o.Errors)
 }
 
 func (o *FcpmV2Quickstart) recurseRedact(v interface{}) {
@@ -279,6 +314,9 @@ func (o FcpmV2Quickstart) MarshalJSON() ([]byte, error) {
 	}
 	if o.ComputePools != nil {
 		toSerialize["compute_pools"] = o.ComputePools
+	}
+	if o.Errors != nil {
+		toSerialize["errors"] = o.Errors
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

@@ -58,7 +58,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FcpmV2Quickstart**](FcpmV2Quickstart.md)
+[**FcpmV2Quickstart**](fcpm.v2.Quickstart.md)
 
 ### Authorization
 

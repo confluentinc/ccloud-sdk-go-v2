@@ -34,8 +34,8 @@ import (
 	"reflect"
 )
 
-// Error Describes a particular error encountered while performing an operation.
-type Error struct {
+// FcpmV2Error Describes a particular error encountered while performing an operation.
+type FcpmV2Error struct {
 	// A unique identifier for this particular occurrence of the problem.
 	Id *string `json:"id,omitempty"`
 	// The HTTP status code applicable to this problem, expressed as a string value.
@@ -49,25 +49,25 @@ type Error struct {
 	Source *FcpmV2ErrorSource `json:"source,omitempty"`
 }
 
-// NewError instantiates a new Error object
+// NewFcpmV2Error instantiates a new FcpmV2Error object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewError() *Error {
-	this := Error{}
+func NewFcpmV2Error() *FcpmV2Error {
+	this := FcpmV2Error{}
 	return &this
 }
 
-// NewErrorWithDefaults instantiates a new Error object
+// NewFcpmV2ErrorWithDefaults instantiates a new FcpmV2Error object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewErrorWithDefaults() *Error {
-	this := Error{}
+func NewFcpmV2ErrorWithDefaults() *FcpmV2Error {
+	this := FcpmV2Error{}
 	return &this
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *Error) GetId() string {
+func (o *FcpmV2Error) GetId() string {
 	if o == nil || o.Id == nil {
 		var ret string
 		return ret
@@ -77,7 +77,7 @@ func (o *Error) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Error) GetIdOk() (*string, bool) {
+func (o *FcpmV2Error) GetIdOk() (*string, bool) {
 	if o == nil || o.Id == nil {
 		return nil, false
 	}
@@ -85,7 +85,7 @@ func (o *Error) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *Error) HasId() bool {
+func (o *FcpmV2Error) HasId() bool {
 	if o != nil && o.Id != nil {
 		return true
 	}
@@ -94,12 +94,12 @@ func (o *Error) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *Error) SetId(v string) {
+func (o *FcpmV2Error) SetId(v string) {
 	o.Id = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *Error) GetStatus() string {
+func (o *FcpmV2Error) GetStatus() string {
 	if o == nil || o.Status == nil {
 		var ret string
 		return ret
@@ -109,7 +109,7 @@ func (o *Error) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Error) GetStatusOk() (*string, bool) {
+func (o *FcpmV2Error) GetStatusOk() (*string, bool) {
 	if o == nil || o.Status == nil {
 		return nil, false
 	}
@@ -117,7 +117,7 @@ func (o *Error) GetStatusOk() (*string, bool) {
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *Error) HasStatus() bool {
+func (o *FcpmV2Error) HasStatus() bool {
 	if o != nil && o.Status != nil {
 		return true
 	}
@@ -126,12 +126,12 @@ func (o *Error) HasStatus() bool {
 }
 
 // SetStatus gets a reference to the given string and assigns it to the Status field.
-func (o *Error) SetStatus(v string) {
+func (o *FcpmV2Error) SetStatus(v string) {
 	o.Status = &v
 }
 
 // GetCode returns the Code field value if set, zero value otherwise.
-func (o *Error) GetCode() string {
+func (o *FcpmV2Error) GetCode() string {
 	if o == nil || o.Code == nil {
 		var ret string
 		return ret
@@ -141,7 +141,7 @@ func (o *Error) GetCode() string {
 
 // GetCodeOk returns a tuple with the Code field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Error) GetCodeOk() (*string, bool) {
+func (o *FcpmV2Error) GetCodeOk() (*string, bool) {
 	if o == nil || o.Code == nil {
 		return nil, false
 	}
@@ -149,7 +149,7 @@ func (o *Error) GetCodeOk() (*string, bool) {
 }
 
 // HasCode returns a boolean if a field has been set.
-func (o *Error) HasCode() bool {
+func (o *FcpmV2Error) HasCode() bool {
 	if o != nil && o.Code != nil {
 		return true
 	}
@@ -158,12 +158,12 @@ func (o *Error) HasCode() bool {
 }
 
 // SetCode gets a reference to the given string and assigns it to the Code field.
-func (o *Error) SetCode(v string) {
+func (o *FcpmV2Error) SetCode(v string) {
 	o.Code = &v
 }
 
 // GetTitle returns the Title field value if set, zero value otherwise.
-func (o *Error) GetTitle() string {
+func (o *FcpmV2Error) GetTitle() string {
 	if o == nil || o.Title == nil {
 		var ret string
 		return ret
@@ -173,7 +173,7 @@ func (o *Error) GetTitle() string {
 
 // GetTitleOk returns a tuple with the Title field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Error) GetTitleOk() (*string, bool) {
+func (o *FcpmV2Error) GetTitleOk() (*string, bool) {
 	if o == nil || o.Title == nil {
 		return nil, false
 	}
@@ -181,7 +181,7 @@ func (o *Error) GetTitleOk() (*string, bool) {
 }
 
 // HasTitle returns a boolean if a field has been set.
-func (o *Error) HasTitle() bool {
+func (o *FcpmV2Error) HasTitle() bool {
 	if o != nil && o.Title != nil {
 		return true
 	}
@@ -190,12 +190,12 @@ func (o *Error) HasTitle() bool {
 }
 
 // SetTitle gets a reference to the given string and assigns it to the Title field.
-func (o *Error) SetTitle(v string) {
+func (o *FcpmV2Error) SetTitle(v string) {
 	o.Title = &v
 }
 
 // GetDetail returns the Detail field value if set, zero value otherwise.
-func (o *Error) GetDetail() string {
+func (o *FcpmV2Error) GetDetail() string {
 	if o == nil || o.Detail == nil {
 		var ret string
 		return ret
@@ -205,7 +205,7 @@ func (o *Error) GetDetail() string {
 
 // GetDetailOk returns a tuple with the Detail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Error) GetDetailOk() (*string, bool) {
+func (o *FcpmV2Error) GetDetailOk() (*string, bool) {
 	if o == nil || o.Detail == nil {
 		return nil, false
 	}
@@ -213,7 +213,7 @@ func (o *Error) GetDetailOk() (*string, bool) {
 }
 
 // HasDetail returns a boolean if a field has been set.
-func (o *Error) HasDetail() bool {
+func (o *FcpmV2Error) HasDetail() bool {
 	if o != nil && o.Detail != nil {
 		return true
 	}
@@ -222,12 +222,12 @@ func (o *Error) HasDetail() bool {
 }
 
 // SetDetail gets a reference to the given string and assigns it to the Detail field.
-func (o *Error) SetDetail(v string) {
+func (o *FcpmV2Error) SetDetail(v string) {
 	o.Detail = &v
 }
 
 // GetSource returns the Source field value if set, zero value otherwise.
-func (o *Error) GetSource() FcpmV2ErrorSource {
+func (o *FcpmV2Error) GetSource() FcpmV2ErrorSource {
 	if o == nil || o.Source == nil {
 		var ret FcpmV2ErrorSource
 		return ret
@@ -237,7 +237,7 @@ func (o *Error) GetSource() FcpmV2ErrorSource {
 
 // GetSourceOk returns a tuple with the Source field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Error) GetSourceOk() (*FcpmV2ErrorSource, bool) {
+func (o *FcpmV2Error) GetSourceOk() (*FcpmV2ErrorSource, bool) {
 	if o == nil || o.Source == nil {
 		return nil, false
 	}
@@ -245,7 +245,7 @@ func (o *Error) GetSourceOk() (*FcpmV2ErrorSource, bool) {
 }
 
 // HasSource returns a boolean if a field has been set.
-func (o *Error) HasSource() bool {
+func (o *FcpmV2Error) HasSource() bool {
 	if o != nil && o.Source != nil {
 		return true
 	}
@@ -254,12 +254,12 @@ func (o *Error) HasSource() bool {
 }
 
 // SetSource gets a reference to the given FcpmV2ErrorSource and assigns it to the Source field.
-func (o *Error) SetSource(v FcpmV2ErrorSource) {
+func (o *FcpmV2Error) SetSource(v FcpmV2ErrorSource) {
 	o.Source = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *Error) Redact() {
+func (o *FcpmV2Error) Redact() {
     o.recurseRedact(o.Id)
     o.recurseRedact(o.Status)
     o.recurseRedact(o.Code)
@@ -268,7 +268,7 @@ func (o *Error) Redact() {
     o.recurseRedact(o.Source)
 }
 
-func (o *Error) recurseRedact(v interface{}) {
+func (o *FcpmV2Error) recurseRedact(v interface{}) {
     type redactor interface {
         Redact()
     }
@@ -293,12 +293,12 @@ func (o *Error) recurseRedact(v interface{}) {
     }
 }
 
-func (o Error) zeroField(v interface{}) {
+func (o FcpmV2Error) zeroField(v interface{}) {
     p := reflect.ValueOf(v).Elem()
     p.Set(reflect.Zero(p.Type()))
 }
 
-func (o Error) MarshalJSON() ([]byte, error) {
+func (o FcpmV2Error) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
@@ -325,34 +325,34 @@ func (o Error) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableError struct {
-	value *Error
+type NullableFcpmV2Error struct {
+	value *FcpmV2Error
 	isSet bool
 }
 
-func (v NullableError) Get() *Error {
+func (v NullableFcpmV2Error) Get() *FcpmV2Error {
 	return v.value
 }
 
-func (v *NullableError) Set(val *Error) {
+func (v *NullableFcpmV2Error) Set(val *FcpmV2Error) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableError) IsSet() bool {
+func (v NullableFcpmV2Error) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableError) Unset() {
+func (v *NullableFcpmV2Error) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableError(val *Error) *NullableError {
-	return &NullableError{value: val, isSet: true}
+func NewNullableFcpmV2Error(val *FcpmV2Error) *NullableFcpmV2Error {
+	return &NullableFcpmV2Error{value: val, isSet: true}
 }
 
-func (v NullableError) MarshalJSON() ([]byte, error) {
+func (v NullableFcpmV2Error) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -360,7 +360,7 @@ func (v NullableError) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableError) UnmarshalJSON(src []byte) error {
+func (v *NullableFcpmV2Error) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **Region** | **string** | The region for which quickstart a compute pool.  | 
 **Cloud** | **string** | The cloud for which quickstart a compute pool.  | 
 **ComputePoolId** | Pointer to **string** | The id of the compute pool.  | [optional] [readonly] 
+**DisplayName** | Pointer to **string** | The display_name of the compute pool.  | [optional] [readonly] 
+**MaxCfu** | Pointer to **int32** | The max_cfu of the compute pool.  | [optional] [readonly] 
 
 ## Methods
 
@@ -112,6 +114,56 @@ SetComputePoolId sets ComputePoolId field to given value.
 `func (o *FcpmV2QuickstartComputePool) HasComputePoolId() bool`
 
 HasComputePoolId returns a boolean if a field has been set.
+
+### GetDisplayName
+
+`func (o *FcpmV2QuickstartComputePool) GetDisplayName() string`
+
+GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
+
+### GetDisplayNameOk
+
+`func (o *FcpmV2QuickstartComputePool) GetDisplayNameOk() (*string, bool)`
+
+GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisplayName
+
+`func (o *FcpmV2QuickstartComputePool) SetDisplayName(v string)`
+
+SetDisplayName sets DisplayName field to given value.
+
+### HasDisplayName
+
+`func (o *FcpmV2QuickstartComputePool) HasDisplayName() bool`
+
+HasDisplayName returns a boolean if a field has been set.
+
+### GetMaxCfu
+
+`func (o *FcpmV2QuickstartComputePool) GetMaxCfu() int32`
+
+GetMaxCfu returns the MaxCfu field if non-nil, zero value otherwise.
+
+### GetMaxCfuOk
+
+`func (o *FcpmV2QuickstartComputePool) GetMaxCfuOk() (*int32, bool)`
+
+GetMaxCfuOk returns a tuple with the MaxCfu field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaxCfu
+
+`func (o *FcpmV2QuickstartComputePool) SetMaxCfu(v int32)`
+
+SetMaxCfu sets MaxCfu field to given value.
+
+### HasMaxCfu
+
+`func (o *FcpmV2QuickstartComputePool) HasMaxCfu() bool`
+
+HasMaxCfu returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

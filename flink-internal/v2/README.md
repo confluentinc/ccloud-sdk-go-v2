@@ -85,8 +85,9 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [Error](docs/Error.md)
- - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
+ - [FcpmV2Error](docs/FcpmV2Error.md)
+ - [FcpmV2ErrorSource](docs/FcpmV2ErrorSource.md)
  - [FcpmV2Quickstart](docs/FcpmV2Quickstart.md)
  - [FcpmV2QuickstartComputePool](docs/FcpmV2QuickstartComputePool.md)
  - [ListMeta](docs/ListMeta.md)
