@@ -31,6 +31,7 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
+	"reflect"
 	"strings"
 )
 
@@ -151,8 +152,8 @@ CreateNetworkingV1NetworkLinkService Create a Network Link Service
 
 Make a request to create a network link service.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateNetworkingV1NetworkLinkServiceRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateNetworkingV1NetworkLinkServiceRequest
 */
 func (a *NetworkLinkServicesNetworkingV1ApiService) CreateNetworkingV1NetworkLinkService(ctx _context.Context) ApiCreateNetworkingV1NetworkLinkServiceRequest {
 	return ApiCreateNetworkingV1NetworkLinkServiceRequest{
@@ -162,7 +163,8 @@ func (a *NetworkLinkServicesNetworkingV1ApiService) CreateNetworkingV1NetworkLin
 }
 
 // Execute executes the request
-//  @return NetworkingV1NetworkLinkService
+//
+//	@return NetworkingV1NetworkLinkService
 func (a *NetworkLinkServicesNetworkingV1ApiService) CreateNetworkingV1NetworkLinkServiceExecute(r ApiCreateNetworkingV1NetworkLinkServiceRequest) (NetworkingV1NetworkLinkService, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -333,9 +335,9 @@ DeleteNetworkingV1NetworkLinkService Delete a Network Link Service
 
 Make a request to delete a network link service.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the network link service.
- @return ApiDeleteNetworkingV1NetworkLinkServiceRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the network link service.
+	@return ApiDeleteNetworkingV1NetworkLinkServiceRequest
 */
 func (a *NetworkLinkServicesNetworkingV1ApiService) DeleteNetworkingV1NetworkLinkService(ctx _context.Context, id string) ApiDeleteNetworkingV1NetworkLinkServiceRequest {
 	return ApiDeleteNetworkingV1NetworkLinkServiceRequest{
@@ -489,9 +491,9 @@ GetNetworkingV1NetworkLinkService Read a Network Link Service
 
 Make a request to read a network link service.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the network link service.
- @return ApiGetNetworkingV1NetworkLinkServiceRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the network link service.
+	@return ApiGetNetworkingV1NetworkLinkServiceRequest
 */
 func (a *NetworkLinkServicesNetworkingV1ApiService) GetNetworkingV1NetworkLinkService(ctx _context.Context, id string) ApiGetNetworkingV1NetworkLinkServiceRequest {
 	return ApiGetNetworkingV1NetworkLinkServiceRequest{
@@ -502,7 +504,8 @@ func (a *NetworkLinkServicesNetworkingV1ApiService) GetNetworkingV1NetworkLinkSe
 }
 
 // Execute executes the request
-//  @return NetworkingV1NetworkLinkService
+//
+//	@return NetworkingV1NetworkLinkService
 func (a *NetworkLinkServicesNetworkingV1ApiService) GetNetworkingV1NetworkLinkServiceExecute(r ApiGetNetworkingV1NetworkLinkServiceRequest) (NetworkingV1NetworkLinkService, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -636,9 +639,9 @@ type ApiListNetworkingV1NetworkLinkServicesRequest struct {
 	ctx             _context.Context
 	ApiService      NetworkLinkServicesNetworkingV1Api
 	environment     *string
-	specDisplayName *MultipleSearchFilter
-	statusPhase     *MultipleSearchFilter
-	specNetwork     *MultipleSearchFilter
+	specDisplayName *[]string
+	statusPhase     *[]string
+	specNetwork     *[]string
 	pageSize        *int32
 	pageToken       *string
 }
@@ -650,19 +653,19 @@ func (r ApiListNetworkingV1NetworkLinkServicesRequest) Environment(environment s
 }
 
 // Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworkLinkServicesRequest) SpecDisplayName(specDisplayName MultipleSearchFilter) ApiListNetworkingV1NetworkLinkServicesRequest {
+func (r ApiListNetworkingV1NetworkLinkServicesRequest) SpecDisplayName(specDisplayName []string) ApiListNetworkingV1NetworkLinkServicesRequest {
 	r.specDisplayName = &specDisplayName
 	return r
 }
 
 // Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworkLinkServicesRequest) StatusPhase(statusPhase MultipleSearchFilter) ApiListNetworkingV1NetworkLinkServicesRequest {
+func (r ApiListNetworkingV1NetworkLinkServicesRequest) StatusPhase(statusPhase []string) ApiListNetworkingV1NetworkLinkServicesRequest {
 	r.statusPhase = &statusPhase
 	return r
 }
 
 // Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworkLinkServicesRequest) SpecNetwork(specNetwork MultipleSearchFilter) ApiListNetworkingV1NetworkLinkServicesRequest {
+func (r ApiListNetworkingV1NetworkLinkServicesRequest) SpecNetwork(specNetwork []string) ApiListNetworkingV1NetworkLinkServicesRequest {
 	r.specNetwork = &specNetwork
 	return r
 }
@@ -690,8 +693,8 @@ ListNetworkingV1NetworkLinkServices List of Network Link Services
 
 Retrieve a sorted, filtered, paginated list of all network link services.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListNetworkingV1NetworkLinkServicesRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListNetworkingV1NetworkLinkServicesRequest
 */
 func (a *NetworkLinkServicesNetworkingV1ApiService) ListNetworkingV1NetworkLinkServices(ctx _context.Context) ApiListNetworkingV1NetworkLinkServicesRequest {
 	return ApiListNetworkingV1NetworkLinkServicesRequest{
@@ -701,7 +704,8 @@ func (a *NetworkLinkServicesNetworkingV1ApiService) ListNetworkingV1NetworkLinkS
 }
 
 // Execute executes the request
-//  @return NetworkingV1NetworkLinkServiceList
+//
+//	@return NetworkingV1NetworkLinkServiceList
 func (a *NetworkLinkServicesNetworkingV1ApiService) ListNetworkingV1NetworkLinkServicesExecute(r ApiListNetworkingV1NetworkLinkServicesRequest) (NetworkingV1NetworkLinkServiceList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -727,14 +731,38 @@ func (a *NetworkLinkServicesNetworkingV1ApiService) ListNetworkingV1NetworkLinkS
 	}
 
 	if r.specDisplayName != nil {
-		localVarQueryParams.Add("spec.display_name", parameterToString(*r.specDisplayName, ""))
+		t := *r.specDisplayName
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.display_name", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.display_name", parameterToString(t, "multi"))
+		}
 	}
 	if r.statusPhase != nil {
-		localVarQueryParams.Add("status.phase", parameterToString(*r.statusPhase, ""))
+		t := *r.statusPhase
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("status.phase", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("status.phase", parameterToString(t, "multi"))
+		}
 	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.specNetwork != nil {
-		localVarQueryParams.Add("spec.network", parameterToString(*r.specNetwork, ""))
+		t := *r.specNetwork
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.network", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.network", parameterToString(t, "multi"))
+		}
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
@@ -858,11 +886,9 @@ UpdateNetworkingV1NetworkLinkService Update a Network Link Service
 
 Make a request to update a network link service.
 
-
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the network link service.
- @return ApiUpdateNetworkingV1NetworkLinkServiceRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the network link service.
+	@return ApiUpdateNetworkingV1NetworkLinkServiceRequest
 */
 func (a *NetworkLinkServicesNetworkingV1ApiService) UpdateNetworkingV1NetworkLinkService(ctx _context.Context, id string) ApiUpdateNetworkingV1NetworkLinkServiceRequest {
 	return ApiUpdateNetworkingV1NetworkLinkServiceRequest{
@@ -873,7 +899,8 @@ func (a *NetworkLinkServicesNetworkingV1ApiService) UpdateNetworkingV1NetworkLin
 }
 
 // Execute executes the request
-//  @return NetworkingV1NetworkLinkService
+//
+//	@return NetworkingV1NetworkLinkService
 func (a *NetworkLinkServicesNetworkingV1ApiService) UpdateNetworkingV1NetworkLinkServiceExecute(r ApiUpdateNetworkingV1NetworkLinkServiceRequest) (NetworkingV1NetworkLinkService, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch

@@ -31,6 +31,7 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
+	"reflect"
 	"strings"
 )
 
@@ -151,8 +152,8 @@ CreateNetworkingV1NetworkLinkEndpoint Create a Network Link Endpoint
 
 Make a request to create a network link endpoint.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateNetworkingV1NetworkLinkEndpointRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateNetworkingV1NetworkLinkEndpointRequest
 */
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) CreateNetworkingV1NetworkLinkEndpoint(ctx _context.Context) ApiCreateNetworkingV1NetworkLinkEndpointRequest {
 	return ApiCreateNetworkingV1NetworkLinkEndpointRequest{
@@ -162,7 +163,8 @@ func (a *NetworkLinkEndpointsNetworkingV1ApiService) CreateNetworkingV1NetworkLi
 }
 
 // Execute executes the request
-//  @return NetworkingV1NetworkLinkEndpoint
+//
+//	@return NetworkingV1NetworkLinkEndpoint
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) CreateNetworkingV1NetworkLinkEndpointExecute(r ApiCreateNetworkingV1NetworkLinkEndpointRequest) (NetworkingV1NetworkLinkEndpoint, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -333,9 +335,9 @@ DeleteNetworkingV1NetworkLinkEndpoint Delete a Network Link Endpoint
 
 Make a request to delete a network link endpoint.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the network link endpoint.
- @return ApiDeleteNetworkingV1NetworkLinkEndpointRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the network link endpoint.
+	@return ApiDeleteNetworkingV1NetworkLinkEndpointRequest
 */
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) DeleteNetworkingV1NetworkLinkEndpoint(ctx _context.Context, id string) ApiDeleteNetworkingV1NetworkLinkEndpointRequest {
 	return ApiDeleteNetworkingV1NetworkLinkEndpointRequest{
@@ -489,9 +491,9 @@ GetNetworkingV1NetworkLinkEndpoint Read a Network Link Endpoint
 
 Make a request to read a network link endpoint.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the network link endpoint.
- @return ApiGetNetworkingV1NetworkLinkEndpointRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the network link endpoint.
+	@return ApiGetNetworkingV1NetworkLinkEndpointRequest
 */
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) GetNetworkingV1NetworkLinkEndpoint(ctx _context.Context, id string) ApiGetNetworkingV1NetworkLinkEndpointRequest {
 	return ApiGetNetworkingV1NetworkLinkEndpointRequest{
@@ -502,7 +504,8 @@ func (a *NetworkLinkEndpointsNetworkingV1ApiService) GetNetworkingV1NetworkLinkE
 }
 
 // Execute executes the request
-//  @return NetworkingV1NetworkLinkEndpoint
+//
+//	@return NetworkingV1NetworkLinkEndpoint
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) GetNetworkingV1NetworkLinkEndpointExecute(r ApiGetNetworkingV1NetworkLinkEndpointRequest) (NetworkingV1NetworkLinkEndpoint, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -636,10 +639,10 @@ type ApiListNetworkingV1NetworkLinkEndpointsRequest struct {
 	ctx                    _context.Context
 	ApiService             NetworkLinkEndpointsNetworkingV1Api
 	environment            *string
-	specDisplayName        *MultipleSearchFilter
-	statusPhase            *MultipleSearchFilter
-	specNetwork            *MultipleSearchFilter
-	specNetworkLinkService *MultipleSearchFilter
+	specDisplayName        *[]string
+	statusPhase            *[]string
+	specNetwork            *[]string
+	specNetworkLinkService *[]string
 	pageSize               *int32
 	pageToken              *string
 }
@@ -651,25 +654,25 @@ func (r ApiListNetworkingV1NetworkLinkEndpointsRequest) Environment(environment 
 }
 
 // Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworkLinkEndpointsRequest) SpecDisplayName(specDisplayName MultipleSearchFilter) ApiListNetworkingV1NetworkLinkEndpointsRequest {
+func (r ApiListNetworkingV1NetworkLinkEndpointsRequest) SpecDisplayName(specDisplayName []string) ApiListNetworkingV1NetworkLinkEndpointsRequest {
 	r.specDisplayName = &specDisplayName
 	return r
 }
 
 // Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworkLinkEndpointsRequest) StatusPhase(statusPhase MultipleSearchFilter) ApiListNetworkingV1NetworkLinkEndpointsRequest {
+func (r ApiListNetworkingV1NetworkLinkEndpointsRequest) StatusPhase(statusPhase []string) ApiListNetworkingV1NetworkLinkEndpointsRequest {
 	r.statusPhase = &statusPhase
 	return r
 }
 
 // Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworkLinkEndpointsRequest) SpecNetwork(specNetwork MultipleSearchFilter) ApiListNetworkingV1NetworkLinkEndpointsRequest {
+func (r ApiListNetworkingV1NetworkLinkEndpointsRequest) SpecNetwork(specNetwork []string) ApiListNetworkingV1NetworkLinkEndpointsRequest {
 	r.specNetwork = &specNetwork
 	return r
 }
 
 // Filter the results by exact match for spec.network_link_service. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworkLinkEndpointsRequest) SpecNetworkLinkService(specNetworkLinkService MultipleSearchFilter) ApiListNetworkingV1NetworkLinkEndpointsRequest {
+func (r ApiListNetworkingV1NetworkLinkEndpointsRequest) SpecNetworkLinkService(specNetworkLinkService []string) ApiListNetworkingV1NetworkLinkEndpointsRequest {
 	r.specNetworkLinkService = &specNetworkLinkService
 	return r
 }
@@ -697,8 +700,8 @@ ListNetworkingV1NetworkLinkEndpoints List of Network Link Endpoints
 
 Retrieve a sorted, filtered, paginated list of all network link endpoints.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListNetworkingV1NetworkLinkEndpointsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListNetworkingV1NetworkLinkEndpointsRequest
 */
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) ListNetworkingV1NetworkLinkEndpoints(ctx _context.Context) ApiListNetworkingV1NetworkLinkEndpointsRequest {
 	return ApiListNetworkingV1NetworkLinkEndpointsRequest{
@@ -708,7 +711,8 @@ func (a *NetworkLinkEndpointsNetworkingV1ApiService) ListNetworkingV1NetworkLink
 }
 
 // Execute executes the request
-//  @return NetworkingV1NetworkLinkEndpointList
+//
+//	@return NetworkingV1NetworkLinkEndpointList
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) ListNetworkingV1NetworkLinkEndpointsExecute(r ApiListNetworkingV1NetworkLinkEndpointsRequest) (NetworkingV1NetworkLinkEndpointList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -734,17 +738,49 @@ func (a *NetworkLinkEndpointsNetworkingV1ApiService) ListNetworkingV1NetworkLink
 	}
 
 	if r.specDisplayName != nil {
-		localVarQueryParams.Add("spec.display_name", parameterToString(*r.specDisplayName, ""))
+		t := *r.specDisplayName
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.display_name", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.display_name", parameterToString(t, "multi"))
+		}
 	}
 	if r.statusPhase != nil {
-		localVarQueryParams.Add("status.phase", parameterToString(*r.statusPhase, ""))
+		t := *r.statusPhase
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("status.phase", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("status.phase", parameterToString(t, "multi"))
+		}
 	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.specNetwork != nil {
-		localVarQueryParams.Add("spec.network", parameterToString(*r.specNetwork, ""))
+		t := *r.specNetwork
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.network", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.network", parameterToString(t, "multi"))
+		}
 	}
 	if r.specNetworkLinkService != nil {
-		localVarQueryParams.Add("spec.network_link_service", parameterToString(*r.specNetworkLinkService, ""))
+		t := *r.specNetworkLinkService
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.network_link_service", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.network_link_service", parameterToString(t, "multi"))
+		}
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
@@ -868,11 +904,9 @@ UpdateNetworkingV1NetworkLinkEndpoint Update a Network Link Endpoint
 
 Make a request to update a network link endpoint.
 
-
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the network link endpoint.
- @return ApiUpdateNetworkingV1NetworkLinkEndpointRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the network link endpoint.
+	@return ApiUpdateNetworkingV1NetworkLinkEndpointRequest
 */
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) UpdateNetworkingV1NetworkLinkEndpoint(ctx _context.Context, id string) ApiUpdateNetworkingV1NetworkLinkEndpointRequest {
 	return ApiUpdateNetworkingV1NetworkLinkEndpointRequest{
@@ -883,7 +917,8 @@ func (a *NetworkLinkEndpointsNetworkingV1ApiService) UpdateNetworkingV1NetworkLi
 }
 
 // Execute executes the request
-//  @return NetworkingV1NetworkLinkEndpoint
+//
+//	@return NetworkingV1NetworkLinkEndpoint
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) UpdateNetworkingV1NetworkLinkEndpointExecute(r ApiUpdateNetworkingV1NetworkLinkEndpointRequest) (NetworkingV1NetworkLinkEndpoint, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
