@@ -31,6 +31,7 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
+	"reflect"
 	"strings"
 )
 
@@ -44,7 +45,7 @@ type NetworkLinkServiceAssociationsNetworkingV1Api interface {
 	/*
 		GetNetworkingV1NetworkLinkServiceAssociation Read a Network Link Service Association
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to read a network link service association.
 
@@ -61,7 +62,7 @@ type NetworkLinkServiceAssociationsNetworkingV1Api interface {
 	/*
 		ListNetworkingV1NetworkLinkServiceAssociations List of Network Link Service Associations
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Retrieve a sorted, filtered, paginated list of all network link service associations.
 
@@ -91,7 +92,7 @@ func (r ApiGetNetworkingV1NetworkLinkServiceAssociationRequest) Execute() (Netwo
 /*
 GetNetworkingV1NetworkLinkServiceAssociation Read a Network Link Service Association
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a network link service association.
 
@@ -240,7 +241,7 @@ type ApiListNetworkingV1NetworkLinkServiceAssociationsRequest struct {
 	ApiService             NetworkLinkServiceAssociationsNetworkingV1Api
 	specNetworkLinkService *string
 	environment            *string
-	statusPhase            *MultipleSearchFilter
+	statusPhase            *[]string
 	pageSize               *int32
 	pageToken              *string
 }
@@ -258,7 +259,7 @@ func (r ApiListNetworkingV1NetworkLinkServiceAssociationsRequest) Environment(en
 }
 
 // Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworkLinkServiceAssociationsRequest) StatusPhase(statusPhase MultipleSearchFilter) ApiListNetworkingV1NetworkLinkServiceAssociationsRequest {
+func (r ApiListNetworkingV1NetworkLinkServiceAssociationsRequest) StatusPhase(statusPhase []string) ApiListNetworkingV1NetworkLinkServiceAssociationsRequest {
 	r.statusPhase = &statusPhase
 	return r
 }
@@ -282,7 +283,7 @@ func (r ApiListNetworkingV1NetworkLinkServiceAssociationsRequest) Execute() (Net
 /*
 ListNetworkingV1NetworkLinkServiceAssociations List of Network Link Service Associations
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all network link service associations.
 
@@ -327,7 +328,15 @@ func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) ListNetworkingV1N
 	}
 
 	if r.statusPhase != nil {
-		localVarQueryParams.Add("status.phase", parameterToString(*r.statusPhase, ""))
+		t := *r.statusPhase
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("status.phase", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("status.phase", parameterToString(t, "multi"))
+		}
 	}
 	localVarQueryParams.Add("spec.network_link_service", parameterToString(*r.specNetworkLinkService, ""))
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))

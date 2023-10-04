@@ -37,9 +37,9 @@ import (
 // NetworkingV1NetworkStatus The status of the Network
 type NetworkingV1NetworkStatus struct {
 	// The lifecyle phase of the network:  PROVISIONING:  network provisioning is in progress;  READY:  network is ready;  FAILED: provisioning failed;  DEPROVISIONING: network deprovisioning is in progress;
-	Phase                    string                               `json:"phase,omitempty"`
-	SupportedConnectionTypes NetworkingV1SupportedConnectionTypes `json:"supported_connection_types,omitempty"`
-	ActiveConnectionTypes    NetworkingV1ConnectionTypes          `json:"active_connection_types,omitempty"`
+	Phase                    string `json:"phase,omitempty"`
+	SupportedConnectionTypes Set    `json:"supported_connection_types,omitempty"`
+	ActiveConnectionTypes    Set    `json:"active_connection_types,omitempty"`
 	// Error code if network is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`
 	// Displayable error message if network is in a failed state
@@ -56,7 +56,7 @@ type NetworkingV1NetworkStatus struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1NetworkStatus(phase string, supportedConnectionTypes NetworkingV1SupportedConnectionTypes, activeConnectionTypes NetworkingV1ConnectionTypes) *NetworkingV1NetworkStatus {
+func NewNetworkingV1NetworkStatus(phase string, supportedConnectionTypes Set, activeConnectionTypes Set) *NetworkingV1NetworkStatus {
 	this := NetworkingV1NetworkStatus{}
 	this.Phase = phase
 	this.SupportedConnectionTypes = supportedConnectionTypes
@@ -97,9 +97,9 @@ func (o *NetworkingV1NetworkStatus) SetPhase(v string) {
 }
 
 // GetSupportedConnectionTypes returns the SupportedConnectionTypes field value
-func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypes() NetworkingV1SupportedConnectionTypes {
+func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypes() Set {
 	if o == nil {
-		var ret NetworkingV1SupportedConnectionTypes
+		var ret Set
 		return ret
 	}
 
@@ -108,7 +108,7 @@ func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypes() NetworkingV1Su
 
 // GetSupportedConnectionTypesOk returns a tuple with the SupportedConnectionTypes field value
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypesOk() (*NetworkingV1SupportedConnectionTypes, bool) {
+func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypesOk() (*Set, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -116,14 +116,14 @@ func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypesOk() (*Networking
 }
 
 // SetSupportedConnectionTypes sets field value
-func (o *NetworkingV1NetworkStatus) SetSupportedConnectionTypes(v NetworkingV1SupportedConnectionTypes) {
+func (o *NetworkingV1NetworkStatus) SetSupportedConnectionTypes(v Set) {
 	o.SupportedConnectionTypes = v
 }
 
 // GetActiveConnectionTypes returns the ActiveConnectionTypes field value
-func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypes() NetworkingV1ConnectionTypes {
+func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypes() Set {
 	if o == nil {
-		var ret NetworkingV1ConnectionTypes
+		var ret Set
 		return ret
 	}
 
@@ -132,7 +132,7 @@ func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypes() NetworkingV1Conne
 
 // GetActiveConnectionTypesOk returns a tuple with the ActiveConnectionTypes field value
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypesOk() (*NetworkingV1ConnectionTypes, bool) {
+func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypesOk() (*Set, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -140,7 +140,7 @@ func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypesOk() (*NetworkingV1C
 }
 
 // SetActiveConnectionTypes sets field value
-func (o *NetworkingV1NetworkStatus) SetActiveConnectionTypes(v NetworkingV1ConnectionTypes) {
+func (o *NetworkingV1NetworkStatus) SetActiveConnectionTypes(v Set) {
 	o.ActiveConnectionTypes = v
 }
 

@@ -121,7 +121,6 @@ Class | Method | HTTP request | Description
  - [Failure](docs/Failure.md)
  - [GlobalObjectReference](docs/GlobalObjectReference.md)
  - [ListMeta](docs/ListMeta.md)
- - [MultipleSearchFilter](docs/MultipleSearchFilter.md)
  - [NetworkingV1AwsNetwork](docs/NetworkingV1AwsNetwork.md)
  - [NetworkingV1AwsPeering](docs/NetworkingV1AwsPeering.md)
  - [NetworkingV1AwsPrivateLinkAccess](docs/NetworkingV1AwsPrivateLinkAccess.md)
@@ -130,7 +129,6 @@ Class | Method | HTTP request | Description
  - [NetworkingV1AzureNetwork](docs/NetworkingV1AzureNetwork.md)
  - [NetworkingV1AzurePeering](docs/NetworkingV1AzurePeering.md)
  - [NetworkingV1AzurePrivateLinkAccess](docs/NetworkingV1AzurePrivateLinkAccess.md)
- - [NetworkingV1ConnectionTypes](docs/NetworkingV1ConnectionTypes.md)
  - [NetworkingV1DnsConfig](docs/NetworkingV1DnsConfig.md)
  - [NetworkingV1GcpNetwork](docs/NetworkingV1GcpNetwork.md)
  - [NetworkingV1GcpPeering](docs/NetworkingV1GcpPeering.md)
@@ -173,7 +171,6 @@ Class | Method | HTTP request | Description
  - [NetworkingV1PrivateLinkAccessSpecUpdate](docs/NetworkingV1PrivateLinkAccessSpecUpdate.md)
  - [NetworkingV1PrivateLinkAccessStatus](docs/NetworkingV1PrivateLinkAccessStatus.md)
  - [NetworkingV1PrivateLinkAccessUpdate](docs/NetworkingV1PrivateLinkAccessUpdate.md)
- - [NetworkingV1SupportedConnectionTypes](docs/NetworkingV1SupportedConnectionTypes.md)
  - [NetworkingV1TransitGatewayAttachment](docs/NetworkingV1TransitGatewayAttachment.md)
  - [NetworkingV1TransitGatewayAttachmentList](docs/NetworkingV1TransitGatewayAttachmentList.md)
  - [NetworkingV1TransitGatewayAttachmentSpec](docs/NetworkingV1TransitGatewayAttachmentSpec.md)
@@ -183,7 +180,6 @@ Class | Method | HTTP request | Description
  - [NetworkingV1TransitGatewayAttachmentStatusCloudOneOf](docs/NetworkingV1TransitGatewayAttachmentStatusCloudOneOf.md)
  - [NetworkingV1TransitGatewayAttachmentUpdate](docs/NetworkingV1TransitGatewayAttachmentUpdate.md)
  - [NetworkingV1ZoneInfo](docs/NetworkingV1ZoneInfo.md)
- - [NetworkingV1ZonesInfo](docs/NetworkingV1ZonesInfo.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
 
@@ -192,7 +188,7 @@ Class | Method | HTTP request | Description
 
 
 
-### api-key
+### cloud-api-key
 
 - **Type**: HTTP basic authentication
 

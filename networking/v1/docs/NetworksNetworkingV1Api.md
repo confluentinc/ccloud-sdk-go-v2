@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
@@ -136,7 +136,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
@@ -208,7 +208,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
@@ -242,12 +242,12 @@ import (
 
 func main() {
     environment := "env-00000" // string | Filter the results by exact match for environment.
-    specDisplayName := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. (optional)
-    specCloud := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for spec.cloud. Pass multiple times to see results matching any of the values. (optional)
-    specRegion :=  // MultipleSearchFilter | Filter the results by exact match for spec.region. Pass multiple times to see results matching any of the values. (optional)
-    specCidr :=  // MultipleSearchFilter | Filter the results by exact match for spec.cidr. Pass multiple times to see results matching any of the values. (optional)
-    statusPhase :=  // MultipleSearchFilter | Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values. (optional)
-    connectionType :=  // MultipleSearchFilter | Filter the results by exact match for connection_type. Pass multiple times to see results matching any of the values. (optional)
+    specDisplayName := []string{"Inner_example"} // []string | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. (optional)
+    specCloud := []string{"Inner_example"} // []string | Filter the results by exact match for spec.cloud. Pass multiple times to see results matching any of the values. (optional)
+    specRegion := []string{"Inner_example"} // []string | Filter the results by exact match for spec.region. Pass multiple times to see results matching any of the values. (optional)
+    specCidr := []string{"Inner_example"} // []string | Filter the results by exact match for spec.cidr. Pass multiple times to see results matching any of the values. (optional)
+    statusPhase := []string{"Inner_example"} // []string | Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values. (optional)
+    connectionType := []string{"Inner_example"} // []string | Filter the results by exact match for connection_type. Pass multiple times to see results matching any of the values. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
@@ -275,12 +275,12 @@ Other parameters are passed through a pointer to a apiListNetworkingV1NetworksRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **environment** | **string** | Filter the results by exact match for environment. | 
- **specDisplayName** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. | 
- **specCloud** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for spec.cloud. Pass multiple times to see results matching any of the values. | 
- **specRegion** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for spec.region. Pass multiple times to see results matching any of the values. | 
- **specCidr** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for spec.cidr. Pass multiple times to see results matching any of the values. | 
- **statusPhase** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values. | 
- **connectionType** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for connection_type. Pass multiple times to see results matching any of the values. | 
+ **specDisplayName** | **[]string** | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. | 
+ **specCloud** | **[]string** | Filter the results by exact match for spec.cloud. Pass multiple times to see results matching any of the values. | 
+ **specRegion** | **[]string** | Filter the results by exact match for spec.region. Pass multiple times to see results matching any of the values. | 
+ **specCidr** | **[]string** | Filter the results by exact match for spec.cidr. Pass multiple times to see results matching any of the values. | 
+ **statusPhase** | **[]string** | Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values. | 
+ **connectionType** | **[]string** | Filter the results by exact match for connection_type. Pass multiple times to see results matching any of the values. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 
@@ -290,7 +290,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
@@ -362,7 +362,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 

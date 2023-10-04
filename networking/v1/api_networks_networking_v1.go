@@ -31,6 +31,7 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
+	"reflect"
 	"strings"
 )
 
@@ -638,12 +639,12 @@ type ApiListNetworkingV1NetworksRequest struct {
 	ctx             _context.Context
 	ApiService      NetworksNetworkingV1Api
 	environment     *string
-	specDisplayName *MultipleSearchFilter
-	specCloud       *MultipleSearchFilter
-	specRegion      *MultipleSearchFilter
-	specCidr        *MultipleSearchFilter
-	statusPhase     *MultipleSearchFilter
-	connectionType  *MultipleSearchFilter
+	specDisplayName *[]string
+	specCloud       *[]string
+	specRegion      *[]string
+	specCidr        *[]string
+	statusPhase     *[]string
+	connectionType  *[]string
 	pageSize        *int32
 	pageToken       *string
 }
@@ -655,37 +656,37 @@ func (r ApiListNetworkingV1NetworksRequest) Environment(environment string) ApiL
 }
 
 // Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworksRequest) SpecDisplayName(specDisplayName MultipleSearchFilter) ApiListNetworkingV1NetworksRequest {
+func (r ApiListNetworkingV1NetworksRequest) SpecDisplayName(specDisplayName []string) ApiListNetworkingV1NetworksRequest {
 	r.specDisplayName = &specDisplayName
 	return r
 }
 
 // Filter the results by exact match for spec.cloud. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworksRequest) SpecCloud(specCloud MultipleSearchFilter) ApiListNetworkingV1NetworksRequest {
+func (r ApiListNetworkingV1NetworksRequest) SpecCloud(specCloud []string) ApiListNetworkingV1NetworksRequest {
 	r.specCloud = &specCloud
 	return r
 }
 
 // Filter the results by exact match for spec.region. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworksRequest) SpecRegion(specRegion MultipleSearchFilter) ApiListNetworkingV1NetworksRequest {
+func (r ApiListNetworkingV1NetworksRequest) SpecRegion(specRegion []string) ApiListNetworkingV1NetworksRequest {
 	r.specRegion = &specRegion
 	return r
 }
 
 // Filter the results by exact match for spec.cidr. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworksRequest) SpecCidr(specCidr MultipleSearchFilter) ApiListNetworkingV1NetworksRequest {
+func (r ApiListNetworkingV1NetworksRequest) SpecCidr(specCidr []string) ApiListNetworkingV1NetworksRequest {
 	r.specCidr = &specCidr
 	return r
 }
 
 // Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworksRequest) StatusPhase(statusPhase MultipleSearchFilter) ApiListNetworkingV1NetworksRequest {
+func (r ApiListNetworkingV1NetworksRequest) StatusPhase(statusPhase []string) ApiListNetworkingV1NetworksRequest {
 	r.statusPhase = &statusPhase
 	return r
 }
 
 // Filter the results by exact match for connection_type. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworksRequest) ConnectionType(connectionType MultipleSearchFilter) ApiListNetworkingV1NetworksRequest {
+func (r ApiListNetworkingV1NetworksRequest) ConnectionType(connectionType []string) ApiListNetworkingV1NetworksRequest {
 	r.connectionType = &connectionType
 	return r
 }
@@ -751,23 +752,71 @@ func (a *NetworksNetworkingV1ApiService) ListNetworkingV1NetworksExecute(r ApiLi
 	}
 
 	if r.specDisplayName != nil {
-		localVarQueryParams.Add("spec.display_name", parameterToString(*r.specDisplayName, ""))
+		t := *r.specDisplayName
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.display_name", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.display_name", parameterToString(t, "multi"))
+		}
 	}
 	if r.specCloud != nil {
-		localVarQueryParams.Add("spec.cloud", parameterToString(*r.specCloud, ""))
+		t := *r.specCloud
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.cloud", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.cloud", parameterToString(t, "multi"))
+		}
 	}
 	if r.specRegion != nil {
-		localVarQueryParams.Add("spec.region", parameterToString(*r.specRegion, ""))
+		t := *r.specRegion
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.region", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.region", parameterToString(t, "multi"))
+		}
 	}
 	if r.specCidr != nil {
-		localVarQueryParams.Add("spec.cidr", parameterToString(*r.specCidr, ""))
+		t := *r.specCidr
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.cidr", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.cidr", parameterToString(t, "multi"))
+		}
 	}
 	if r.statusPhase != nil {
-		localVarQueryParams.Add("status.phase", parameterToString(*r.statusPhase, ""))
+		t := *r.statusPhase
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("status.phase", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("status.phase", parameterToString(t, "multi"))
+		}
 	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.connectionType != nil {
-		localVarQueryParams.Add("connection_type", parameterToString(*r.connectionType, ""))
+		t := *r.connectionType
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("connection_type", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("connection_type", parameterToString(t, "multi"))
+		}
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
