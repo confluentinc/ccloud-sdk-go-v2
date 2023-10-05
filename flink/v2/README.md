@@ -85,6 +85,11 @@ Class | Method | HTTP request | Description
 *ComputePoolsFcpmV2Api* | [**ListFcpmV2ComputePools**](docs/ComputePoolsFcpmV2Api.md#listfcpmv2computepools) | **Get** /fcpm/v2/compute-pools | List of Compute Pools
 *ComputePoolsFcpmV2Api* | [**UpdateFcpmV2ComputePool**](docs/ComputePoolsFcpmV2Api.md#updatefcpmv2computepool) | **Patch** /fcpm/v2/compute-pools/{id} | Update a Compute Pool
 *RegionsFcpmV2Api* | [**ListFcpmV2Regions**](docs/RegionsFcpmV2Api.md#listfcpmv2regions) | **Get** /fcpm/v2/regions | List of Regions
+*SecretsFcpmV2Api* | [**CreateFcpmV2Secret**](docs/SecretsFcpmV2Api.md#createfcpmv2secret) | **Post** /fcpm/v2/secrets | Create a Secret
+*SecretsFcpmV2Api* | [**DeleteFcpmV2Secret**](docs/SecretsFcpmV2Api.md#deletefcpmv2secret) | **Delete** /fcpm/v2/secrets/{id} | Delete a Secret
+*SecretsFcpmV2Api* | [**GetFcpmV2Secret**](docs/SecretsFcpmV2Api.md#getfcpmv2secret) | **Get** /fcpm/v2/secrets/{id} | Read a Secret
+*SecretsFcpmV2Api* | [**ListFcpmV2Secrets**](docs/SecretsFcpmV2Api.md#listfcpmv2secrets) | **Get** /fcpm/v2/secrets | List of Secrets
+*SecretsFcpmV2Api* | [**UpdateFcpmV2Secret**](docs/SecretsFcpmV2Api.md#updatefcpmv2secret) | **Patch** /fcpm/v2/secrets/{id} | Update a Secret
 
 
 ## Documentation For Models
@@ -101,6 +106,9 @@ Class | Method | HTTP request | Description
  - [FcpmV2ComputePoolUpdate](docs/FcpmV2ComputePoolUpdate.md)
  - [FcpmV2Region](docs/FcpmV2Region.md)
  - [FcpmV2RegionList](docs/FcpmV2RegionList.md)
+ - [FcpmV2Secret](docs/FcpmV2Secret.md)
+ - [FcpmV2SecretList](docs/FcpmV2SecretList.md)
+ - [FcpmV2SecretUpdate](docs/FcpmV2SecretUpdate.md)
  - [GlobalObjectReference](docs/GlobalObjectReference.md)
  - [ListMeta](docs/ListMeta.md)
  - [ObjectMeta](docs/ObjectMeta.md)
