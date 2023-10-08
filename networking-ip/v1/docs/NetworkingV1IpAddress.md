@@ -6,12 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ApiVersion** | Pointer to **string** | APIVersion defines the schema version of this representation of a resource. | [optional] [readonly] 
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
-**Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
-**Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
-**IpPrefix** | Pointer to **string** | The ip address range. | [optional] 
+**IpPrefix** | Pointer to **string** | The IP Address range. | [optional] 
 **Cloud** | Pointer to **string** | The cloud service provider in which the address exists. | [optional] 
-**Region** | Pointer to **string** | The region/location where the IP addresses will be provisioned. | [optional] 
-**Services** | Pointer to [**NetworkingV1Services**](networking.v1.Services.md) |  | [optional] 
+**Region** | Pointer to **string** | The region/location where the IP Address is in use. | [optional] 
+**Services** | Pointer to [**Set**](set.md) |  | [optional] 
 **AddressType** | Pointer to **string** | Whether the address is used for egress or ingress. | [optional] 
 
 ## Methods
@@ -82,56 +80,6 @@ SetKind sets Kind field to given value.
 `func (o *NetworkingV1IpAddress) HasKind() bool`
 
 HasKind returns a boolean if a field has been set.
-
-### GetId
-
-`func (o *NetworkingV1IpAddress) GetId() string`
-
-GetId returns the Id field if non-nil, zero value otherwise.
-
-### GetIdOk
-
-`func (o *NetworkingV1IpAddress) GetIdOk() (*string, bool)`
-
-GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetId
-
-`func (o *NetworkingV1IpAddress) SetId(v string)`
-
-SetId sets Id field to given value.
-
-### HasId
-
-`func (o *NetworkingV1IpAddress) HasId() bool`
-
-HasId returns a boolean if a field has been set.
-
-### GetMetadata
-
-`func (o *NetworkingV1IpAddress) GetMetadata() ObjectMeta`
-
-GetMetadata returns the Metadata field if non-nil, zero value otherwise.
-
-### GetMetadataOk
-
-`func (o *NetworkingV1IpAddress) GetMetadataOk() (*ObjectMeta, bool)`
-
-GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMetadata
-
-`func (o *NetworkingV1IpAddress) SetMetadata(v ObjectMeta)`
-
-SetMetadata sets Metadata field to given value.
-
-### HasMetadata
-
-`func (o *NetworkingV1IpAddress) HasMetadata() bool`
-
-HasMetadata returns a boolean if a field has been set.
 
 ### GetIpPrefix
 
@@ -210,20 +158,20 @@ HasRegion returns a boolean if a field has been set.
 
 ### GetServices
 
-`func (o *NetworkingV1IpAddress) GetServices() NetworkingV1Services`
+`func (o *NetworkingV1IpAddress) GetServices() Set`
 
 GetServices returns the Services field if non-nil, zero value otherwise.
 
 ### GetServicesOk
 
-`func (o *NetworkingV1IpAddress) GetServicesOk() (*NetworkingV1Services, bool)`
+`func (o *NetworkingV1IpAddress) GetServicesOk() (*Set, bool)`
 
 GetServicesOk returns a tuple with the Services field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetServices
 
-`func (o *NetworkingV1IpAddress) SetServices(v NetworkingV1Services)`
+`func (o *NetworkingV1IpAddress) SetServices(v Set)`
 
 SetServices sets Services field to given value.
 

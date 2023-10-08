@@ -31,6 +31,7 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
+	"reflect"
 )
 
 // Linger please
@@ -38,17 +39,19 @@ var (
 	_ _context.Context
 )
 
-type IpAddressesNetworkingV1Api interface {
+type IPAddressesNetworkingV1Api interface {
 
 	/*
-		ListNetworkingV1IpAddresses List of Ip Addresses
+	ListNetworkingV1IpAddresses List of IP Addresses
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+	[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Retrieve a sorted, filtered, paginated list of all ip addresses.
+Related guide: [Use Public Egress IP addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListNetworkingV1IpAddressesRequest
+Retrieve a sorted, filtered, paginated list of all IP Addresses.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiListNetworkingV1IpAddressesRequest
 	*/
 	ListNetworkingV1IpAddresses(ctx _context.Context) ApiListNetworkingV1IpAddressesRequest
 
@@ -57,50 +60,45 @@ type IpAddressesNetworkingV1Api interface {
 	ListNetworkingV1IpAddressesExecute(r ApiListNetworkingV1IpAddressesRequest) (NetworkingV1IpAddressList, *_nethttp.Response, error)
 }
 
-// IpAddressesNetworkingV1ApiService IpAddressesNetworkingV1Api service
-type IpAddressesNetworkingV1ApiService service
+// IPAddressesNetworkingV1ApiService IPAddressesNetworkingV1Api service
+type IPAddressesNetworkingV1ApiService service
 
 type ApiListNetworkingV1IpAddressesRequest struct {
-	ctx         _context.Context
-	ApiService  IpAddressesNetworkingV1Api
-	cloud       *MultipleSearchFilter
-	region      *MultipleSearchFilter
-	services    *MultipleSearchFilter
-	addressType *MultipleSearchFilter
-	pageSize    *int32
-	pageToken   *string
+	ctx _context.Context
+	ApiService IPAddressesNetworkingV1Api
+	cloud *[]string
+	region *[]string
+	services *[]string
+	addressType *[]string
+	pageSize *int32
+	pageToken *string
 }
 
 // Filter the results by exact match for cloud. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1IpAddressesRequest) Cloud(cloud MultipleSearchFilter) ApiListNetworkingV1IpAddressesRequest {
+func (r ApiListNetworkingV1IpAddressesRequest) Cloud(cloud []string) ApiListNetworkingV1IpAddressesRequest {
 	r.cloud = &cloud
 	return r
 }
-
 // Filter the results by exact match for region. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1IpAddressesRequest) Region(region MultipleSearchFilter) ApiListNetworkingV1IpAddressesRequest {
+func (r ApiListNetworkingV1IpAddressesRequest) Region(region []string) ApiListNetworkingV1IpAddressesRequest {
 	r.region = &region
 	return r
 }
-
 // Filter the results by exact match for services. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1IpAddressesRequest) Services(services MultipleSearchFilter) ApiListNetworkingV1IpAddressesRequest {
+func (r ApiListNetworkingV1IpAddressesRequest) Services(services []string) ApiListNetworkingV1IpAddressesRequest {
 	r.services = &services
 	return r
 }
-
 // Filter the results by exact match for address_type. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1IpAddressesRequest) AddressType(addressType MultipleSearchFilter) ApiListNetworkingV1IpAddressesRequest {
+func (r ApiListNetworkingV1IpAddressesRequest) AddressType(addressType []string) ApiListNetworkingV1IpAddressesRequest {
 	r.addressType = &addressType
 	return r
 }
-
 // A pagination size for collection requests.
 func (r ApiListNetworkingV1IpAddressesRequest) PageSize(pageSize int32) ApiListNetworkingV1IpAddressesRequest {
 	r.pageSize = &pageSize
 	return r
 }
-
 // An opaque pagination token for collection requests.
 func (r ApiListNetworkingV1IpAddressesRequest) PageToken(pageToken string) ApiListNetworkingV1IpAddressesRequest {
 	r.pageToken = &pageToken
@@ -112,25 +110,27 @@ func (r ApiListNetworkingV1IpAddressesRequest) Execute() (NetworkingV1IpAddressL
 }
 
 /*
-ListNetworkingV1IpAddresses List of Ip Addresses
+ListNetworkingV1IpAddresses List of IP Addresses
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Retrieve a sorted, filtered, paginated list of all ip addresses.
+Related guide: [Use Public Egress IP addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)
+
+Retrieve a sorted, filtered, paginated list of all IP Addresses.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiListNetworkingV1IpAddressesRequest
 */
-func (a *IpAddressesNetworkingV1ApiService) ListNetworkingV1IpAddresses(ctx _context.Context) ApiListNetworkingV1IpAddressesRequest {
+func (a *IPAddressesNetworkingV1ApiService) ListNetworkingV1IpAddresses(ctx _context.Context) ApiListNetworkingV1IpAddressesRequest {
 	return ApiListNetworkingV1IpAddressesRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
 //  @return NetworkingV1IpAddressList
-func (a *IpAddressesNetworkingV1ApiService) ListNetworkingV1IpAddressesExecute(r ApiListNetworkingV1IpAddressesRequest) (NetworkingV1IpAddressList, *_nethttp.Response, error) {
+func (a *IPAddressesNetworkingV1ApiService) ListNetworkingV1IpAddressesExecute(r ApiListNetworkingV1IpAddressesRequest) (NetworkingV1IpAddressList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -140,7 +140,7 @@ func (a *IpAddressesNetworkingV1ApiService) ListNetworkingV1IpAddressesExecute(r
 		localVarReturnValue  NetworkingV1IpAddressList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IpAddressesNetworkingV1ApiService.ListNetworkingV1IpAddresses")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IPAddressesNetworkingV1ApiService.ListNetworkingV1IpAddresses")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -152,16 +152,48 @@ func (a *IpAddressesNetworkingV1ApiService) ListNetworkingV1IpAddressesExecute(r
 	localVarFormParams := _neturl.Values{}
 
 	if r.cloud != nil {
-		localVarQueryParams.Add("cloud", parameterToString(*r.cloud, ""))
+		t := *r.cloud
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("cloud", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("cloud", parameterToString(t, "multi"))
+		}
 	}
 	if r.region != nil {
-		localVarQueryParams.Add("region", parameterToString(*r.region, ""))
+		t := *r.region
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("region", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("region", parameterToString(t, "multi"))
+		}
 	}
 	if r.services != nil {
-		localVarQueryParams.Add("services", parameterToString(*r.services, ""))
+		t := *r.services
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("services", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("services", parameterToString(t, "multi"))
+		}
 	}
 	if r.addressType != nil {
-		localVarQueryParams.Add("address_type", parameterToString(*r.addressType, ""))
+		t := *r.addressType
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("address_type", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("address_type", parameterToString(t, "multi"))
+		}
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))

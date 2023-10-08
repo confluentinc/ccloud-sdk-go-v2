@@ -79,7 +79,7 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*IpAddressesNetworkingV1Api* | [**ListNetworkingV1IpAddresses**](docs/IpAddressesNetworkingV1Api.md#listnetworkingv1ipaddresses) | **Get** /networking/v1/ip-addresses | List of Ip Addresses
+*IPAddressesNetworkingV1Api* | [**ListNetworkingV1IpAddresses**](docs/IPAddressesNetworkingV1Api.md#listnetworkingv1ipaddresses) | **Get** /networking/v1/ip-addresses | List of IP Addresses
 
 
 ## Documentation For Models
@@ -88,19 +88,15 @@ Class | Method | HTTP request | Description
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
  - [ListMeta](docs/ListMeta.md)
- - [MultipleSearchFilter](docs/MultipleSearchFilter.md)
  - [NetworkingV1IpAddress](docs/NetworkingV1IpAddress.md)
  - [NetworkingV1IpAddressList](docs/NetworkingV1IpAddressList.md)
- - [NetworkingV1Services](docs/NetworkingV1Services.md)
- - [ObjectMeta](docs/ObjectMeta.md)
- - [ObjectReference](docs/ObjectReference.md)
 
 
 ## Documentation For Authorization
 
 
 
-### api-key
+### cloud-api-key
 
 - **Type**: HTTP basic authentication
 

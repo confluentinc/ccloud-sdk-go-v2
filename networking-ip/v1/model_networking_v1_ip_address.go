@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -33,22 +34,19 @@ import (
 	"reflect"
 )
 
-// NetworkingV1IpAddress IP Addresses  ## The Ip Addresses Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.IpAddress\" />
+// NetworkingV1IpAddress IP Addresses  Related guide: [Use Public Egress IP addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)  ## The IP Addresses Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.IpAddress\" />
 type NetworkingV1IpAddress struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
 	Kind *string `json:"kind,omitempty"`
-	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
-	Id       *string     `json:"id,omitempty"`
-	Metadata *ObjectMeta `json:"metadata,omitempty"`
-	// The ip address range.
+	// The IP Address range.
 	IpPrefix *string `json:"ip_prefix,omitempty"`
 	// The cloud service provider in which the address exists.
 	Cloud *string `json:"cloud,omitempty"`
-	// The region/location where the IP addresses will be provisioned.
-	Region   *string               `json:"region,omitempty"`
-	Services *NetworkingV1Services `json:"services,omitempty"`
+	// The region/location where the IP Address is in use.
+	Region *string `json:"region,omitempty"`
+	Services *Set `json:"services,omitempty"`
 	// Whether the address is used for egress or ingress.
 	AddressType *string `json:"address_type,omitempty"`
 }
@@ -132,70 +130,6 @@ func (o *NetworkingV1IpAddress) HasKind() bool {
 // SetKind gets a reference to the given string and assigns it to the Kind field.
 func (o *NetworkingV1IpAddress) SetKind(v string) {
 	o.Kind = &v
-}
-
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *NetworkingV1IpAddress) GetId() string {
-	if o == nil || o.Id == nil {
-		var ret string
-		return ret
-	}
-	return *o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *NetworkingV1IpAddress) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
-		return nil, false
-	}
-	return o.Id, true
-}
-
-// HasId returns a boolean if a field has been set.
-func (o *NetworkingV1IpAddress) HasId() bool {
-	if o != nil && o.Id != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
-func (o *NetworkingV1IpAddress) SetId(v string) {
-	o.Id = &v
-}
-
-// GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *NetworkingV1IpAddress) GetMetadata() ObjectMeta {
-	if o == nil || o.Metadata == nil {
-		var ret ObjectMeta
-		return ret
-	}
-	return *o.Metadata
-}
-
-// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *NetworkingV1IpAddress) GetMetadataOk() (*ObjectMeta, bool) {
-	if o == nil || o.Metadata == nil {
-		return nil, false
-	}
-	return o.Metadata, true
-}
-
-// HasMetadata returns a boolean if a field has been set.
-func (o *NetworkingV1IpAddress) HasMetadata() bool {
-	if o != nil && o.Metadata != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetMetadata gets a reference to the given ObjectMeta and assigns it to the Metadata field.
-func (o *NetworkingV1IpAddress) SetMetadata(v ObjectMeta) {
-	o.Metadata = &v
 }
 
 // GetIpPrefix returns the IpPrefix field value if set, zero value otherwise.
@@ -295,9 +229,9 @@ func (o *NetworkingV1IpAddress) SetRegion(v string) {
 }
 
 // GetServices returns the Services field value if set, zero value otherwise.
-func (o *NetworkingV1IpAddress) GetServices() NetworkingV1Services {
+func (o *NetworkingV1IpAddress) GetServices() Set {
 	if o == nil || o.Services == nil {
-		var ret NetworkingV1Services
+		var ret Set
 		return ret
 	}
 	return *o.Services
@@ -305,7 +239,7 @@ func (o *NetworkingV1IpAddress) GetServices() NetworkingV1Services {
 
 // GetServicesOk returns a tuple with the Services field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1IpAddress) GetServicesOk() (*NetworkingV1Services, bool) {
+func (o *NetworkingV1IpAddress) GetServicesOk() (*Set, bool) {
 	if o == nil || o.Services == nil {
 		return nil, false
 	}
@@ -321,8 +255,8 @@ func (o *NetworkingV1IpAddress) HasServices() bool {
 	return false
 }
 
-// SetServices gets a reference to the given NetworkingV1Services and assigns it to the Services field.
-func (o *NetworkingV1IpAddress) SetServices(v NetworkingV1Services) {
+// SetServices gets a reference to the given Set and assigns it to the Services field.
+func (o *NetworkingV1IpAddress) SetServices(v Set) {
 	o.Services = &v
 }
 
@@ -360,45 +294,43 @@ func (o *NetworkingV1IpAddress) SetAddressType(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1IpAddress) Redact() {
-	o.recurseRedact(o.ApiVersion)
-	o.recurseRedact(o.Kind)
-	o.recurseRedact(o.Id)
-	o.recurseRedact(o.Metadata)
-	o.recurseRedact(o.IpPrefix)
-	o.recurseRedact(o.Cloud)
-	o.recurseRedact(o.Region)
-	o.recurseRedact(o.Services)
-	o.recurseRedact(o.AddressType)
+    o.recurseRedact(o.ApiVersion)
+    o.recurseRedact(o.Kind)
+    o.recurseRedact(o.IpPrefix)
+    o.recurseRedact(o.Cloud)
+    o.recurseRedact(o.Region)
+    o.recurseRedact(o.Services)
+    o.recurseRedact(o.AddressType)
 }
 
 func (o *NetworkingV1IpAddress) recurseRedact(v interface{}) {
-	type redactor interface {
-		Redact()
-	}
-	if r, ok := v.(redactor); ok {
-		r.Redact()
-	} else {
-		val := reflect.ValueOf(v)
-		if val.Kind() == reflect.Ptr {
-			val = val.Elem()
-		}
-		switch val.Kind() {
-		case reflect.Slice, reflect.Array:
-			for i := 0; i < val.Len(); i++ {
-				// support data types declared without pointers
-				o.recurseRedact(val.Index(i).Interface())
-				// ... and data types that were declared without but need pointers (for Redact)
-				if val.Index(i).CanAddr() {
-					o.recurseRedact(val.Index(i).Addr().Interface())
-				}
-			}
-		}
-	}
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
 }
 
 func (o NetworkingV1IpAddress) zeroField(v interface{}) {
-	p := reflect.ValueOf(v).Elem()
-	p.Set(reflect.Zero(p.Type()))
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1IpAddress) MarshalJSON() ([]byte, error) {
@@ -408,12 +340,6 @@ func (o NetworkingV1IpAddress) MarshalJSON() ([]byte, error) {
 	}
 	if o.Kind != nil {
 		toSerialize["kind"] = o.Kind
-	}
-	if o.Id != nil {
-		toSerialize["id"] = o.Id
-	}
-	if o.Metadata != nil {
-		toSerialize["metadata"] = o.Metadata
 	}
 	if o.IpPrefix != nil {
 		toSerialize["ip_prefix"] = o.IpPrefix
@@ -430,7 +356,11 @@ func (o NetworkingV1IpAddress) MarshalJSON() ([]byte, error) {
 	if o.AddressType != nil {
 		toSerialize["address_type"] = o.AddressType
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1IpAddress struct {
@@ -461,10 +391,16 @@ func NewNullableNetworkingV1IpAddress(val *NetworkingV1IpAddress) *NullableNetwo
 }
 
 func (v NullableNetworkingV1IpAddress) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1IpAddress) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

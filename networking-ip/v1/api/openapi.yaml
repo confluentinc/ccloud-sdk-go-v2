@@ -20,20 +20,24 @@ servers:
   url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     IP Addresses
 
-    ## The Ip Addresses Model
+    Related guide: [Use Public Egress IP addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)
+
+    ## The IP Addresses Model
     <SchemaDefinition schemaRef="#/components/schemas/networking.v1.IpAddress" />
-  name: Ip Addresses (networking/v1)
+  name: IP Addresses (networking/v1)
 paths:
   /networking/v1/ip-addresses:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-        Retrieve a sorted, filtered, paginated list of all ip addresses.
+        Related guide: [Use Public Egress IP addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)
+
+        Retrieve a sorted, filtered, paginated list of all IP Addresses.
       operationId: listNetworkingV1IpAddresses
       parameters:
       - description: Filter the results by exact match for cloud. Pass multiple times
@@ -111,7 +115,7 @@ paths:
               schema:
                 allOf:
                 - $ref: '#/components/schemas/networking.v1.IpAddressList'
-          description: Ip Address.
+          description: IP Address.
           headers:
             X-Request-Id:
               description: The unique identifier for the API request.
@@ -225,11 +229,10 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
-      summary: List of Ip Addresses
+      - cloud-api-key: []
+      summary: List of IP Addresses
       tags:
-      - Ip Addresses (networking/v1)
-      x-request-access-name: Networking v1
+      - IP Addresses (networking/v1)
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -314,7 +317,6 @@ paths:
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Networking v1
 components:
   responses:
     BadRequestError:
@@ -516,7 +518,9 @@ components:
       description: |-
         IP Addresses
 
-        ## The Ip Addresses Model
+        Related guide: [Use Public Egress IP addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)
+
+        ## The IP Addresses Model
         <SchemaDefinition schemaRef="#/components/schemas/networking.v1.IpAddress" />
       properties:
         api_version:
@@ -532,26 +536,8 @@ components:
           - IpAddress
           readOnly: true
           type: string
-        id:
-          description: ID is the "natural identifier" for an object within its scope/namespace;
-            it is normally unique across time but not space. That is, you can assume
-            that the ID will not be reclaimed and reused after an object is deleted
-            ("time"); however, it may collide with IDs for other object `kinds` or
-            objects of the same `kind` within a different scope/namespace ("space").
-          example: dlz-f3a90de
-          maxLength: 255
-          readOnly: true
-          type: string
-        metadata:
-          allOf:
-          - $ref: '#/components/schemas/ObjectMeta'
-          - properties:
-              self:
-                example: https://api.confluent.cloud/networking/v1/ip-addresses/ia-12345
-              resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/ip-address=ia-12345
         ip_prefix:
-          description: The ip address range.
+          description: The IP Address range.
           example: 10.200.0.0/28
           pattern: ^\d+\.\d+\.\d+\.\d+/\d+$
           type: string
@@ -563,8 +549,9 @@ components:
           - AWS
           - GCP
           - AZURE
+          - ANY
         region:
-          description: The region/location where the IP addresses will be provisioned.
+          description: The region/location where the IP Address is in use.
           example: us-east-1
           type: string
         services:
@@ -585,6 +572,7 @@ components:
       x-extensible-enum:
       - KAFKA
       - CONNECT
+      - EXTERNAL_OAUTH
     networking.v1.Services:
       description: The service types that will use the address.
       items:
@@ -601,7 +589,9 @@ components:
       description: |-
         IP Addresses
 
-        ## The Ip Addresses Model
+        Related guide: [Use Public Egress IP Addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)
+
+        ## The IP Addresses Model
         <SchemaDefinition schemaRef="#/components/schemas/networking.v1.IpAddress" />
       properties:
         api_version:
@@ -635,10 +625,7 @@ components:
           items:
             allOf:
             - $ref: '#/components/schemas/networking.v1.IpAddress'
-            - required:
-              - id
-              - metadata
-              type: object
+            - type: object
           type: array
           uniqueItems: true
       required:
@@ -647,50 +634,6 @@ components:
       - kind
       - metadata
       type: object
-    ObjectMeta:
-      description: ObjectMeta is metadata that all persisted resources must have,
-        which includes all objects users must create.
-      properties:
-        self:
-          description: Self is a Uniform Resource Locator (URL) at which an object
-            can be addressed. This URL encodes the service location, API version,
-            and other particulars necessary to locate the resource at a point in time
-          example: https://api.confluent.cloud/v2/kafka-clusters/lkc-f3a90de
-          format: uri
-          readOnly: true
-          type: string
-        resource_name:
-          description: Resource Name is a Uniform Resource Identifier (URI) that is
-            globally unique across space and time. It is represented as a Confluent
-            Resource Name
-          example: crn://confluent.cloud/kafka=lkc-f3a90de
-          format: uri
-          readOnly: true
-          type: string
-        created_at:
-          description: The date and time at which this object was created. It is represented
-            in RFC3339 format and is in UTC.
-          example: 2006-01-02T15:04:05-07:00
-          format: date-time
-          readOnly: true
-          type: string
-        updated_at:
-          description: The date and time at which this object was last updated. It
-            is represented in RFC3339 format and is in UTC.
-          example: 2006-01-02T15:04:05-07:00
-          format: date-time
-          readOnly: true
-          type: string
-        deleted_at:
-          description: The date and time at which this object was (or will be) deleted.
-            It is represented in RFC3339 format and is in UTC.
-          example: 2006-01-02T15:04:05-07:00
-          format: date-time
-          readOnly: true
-          type: string
-      readOnly: true
-      required:
-      - self
     ListMeta:
       description: ListMeta describes metadata that resource collections may have
       properties:
@@ -731,47 +674,6 @@ components:
           format: int32
           minimum: 0
           type: integer
-      type: object
-    ObjectReference:
-      description: ObjectReference provides information for you to locate the referred
-        object
-      properties:
-        id:
-          description: ID of the referred resource
-          maxLength: 255
-          minLength: 1
-          type: string
-        environment:
-          description: Environment of the referred resource, if env-scoped
-          maxLength: 255
-          minLength: 1
-          type: string
-        related:
-          description: API URL for accessing or modifying the referred object
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-        resource_name:
-          description: CRN reference to the referred resource
-          format: uri
-          minLength: 1
-          readOnly: true
-          type: string
-        api_version:
-          description: API group and version of the referred resource
-          minLength: 1
-          readOnly: true
-          type: string
-        kind:
-          description: Kind of the referred resource
-          minLength: 1
-          readOnly: true
-          type: string
-      required:
-      - id
-      - related
-      - resource_name
       type: object
     Failure:
       description: Provides information about problems encountered while performing
@@ -827,8 +729,8 @@ components:
           type: string
       type: object
   securitySchemes:
-    api-key:
-      description: Authenticate with API Keys using HTTP Basic Auth. Treat the API
-        Key ID as the username and API Key Secret as the password.
+    cloud-api-key:
+      description: Authenticate with Cloud API Keys using HTTP Basic Auth. Treat the
+        Cloud API Key ID as the username and Cloud API Key Secret as the password.
       scheme: basic
       type: http

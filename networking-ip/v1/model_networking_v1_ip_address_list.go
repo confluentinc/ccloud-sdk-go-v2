@@ -26,6 +26,7 @@ Contact: cire-traffic@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -33,15 +34,15 @@ import (
 	"reflect"
 )
 
-// NetworkingV1IpAddressList IP Addresses  ## The Ip Addresses Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.IpAddress\" />
+// NetworkingV1IpAddressList IP Addresses  Related guide: [Use Public Egress IP Addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)  ## The IP Addresses Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.IpAddress\" />
 type NetworkingV1IpAddressList struct {
 	// APIVersion defines the schema version of this representation of a resource.
-	ApiVersion string `json:"api_version"`
+	ApiVersion string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
-	Kind     string   `json:"kind"`
-	Metadata ListMeta `json:"metadata"`
+	Kind string `json:"kind,omitempty"`
+	Metadata ListMeta `json:"metadata,omitempty"`
 	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
-	Data []NetworkingV1IpAddress `json:"data"`
+	Data []NetworkingV1IpAddress `json:"data,omitempty"`
 }
 
 // NewNetworkingV1IpAddressList instantiates a new NetworkingV1IpAddressList object
@@ -78,7 +79,7 @@ func (o *NetworkingV1IpAddressList) GetApiVersion() string {
 // GetApiVersionOk returns a tuple with the ApiVersion field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1IpAddressList) GetApiVersionOk() (*string, bool) {
-	if o == nil {
+	if o == nil  {
 		return nil, false
 	}
 	return &o.ApiVersion, true
@@ -102,7 +103,7 @@ func (o *NetworkingV1IpAddressList) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1IpAddressList) GetKindOk() (*string, bool) {
-	if o == nil {
+	if o == nil  {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -126,7 +127,7 @@ func (o *NetworkingV1IpAddressList) GetMetadata() ListMeta {
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1IpAddressList) GetMetadataOk() (*ListMeta, bool) {
-	if o == nil {
+	if o == nil  {
 		return nil, false
 	}
 	return &o.Metadata, true
@@ -150,7 +151,7 @@ func (o *NetworkingV1IpAddressList) GetData() []NetworkingV1IpAddress {
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1IpAddressList) GetDataOk() (*[]NetworkingV1IpAddress, bool) {
-	if o == nil {
+	if o == nil  {
 		return nil, false
 	}
 	return &o.Data, true
@@ -163,40 +164,40 @@ func (o *NetworkingV1IpAddressList) SetData(v []NetworkingV1IpAddress) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1IpAddressList) Redact() {
-	o.recurseRedact(&o.ApiVersion)
-	o.recurseRedact(&o.Kind)
-	o.recurseRedact(&o.Metadata)
-	o.recurseRedact(&o.Data)
+    o.recurseRedact(&o.ApiVersion)
+    o.recurseRedact(&o.Kind)
+    o.recurseRedact(&o.Metadata)
+    o.recurseRedact(&o.Data)
 }
 
 func (o *NetworkingV1IpAddressList) recurseRedact(v interface{}) {
-	type redactor interface {
-		Redact()
-	}
-	if r, ok := v.(redactor); ok {
-		r.Redact()
-	} else {
-		val := reflect.ValueOf(v)
-		if val.Kind() == reflect.Ptr {
-			val = val.Elem()
-		}
-		switch val.Kind() {
-		case reflect.Slice, reflect.Array:
-			for i := 0; i < val.Len(); i++ {
-				// support data types declared without pointers
-				o.recurseRedact(val.Index(i).Interface())
-				// ... and data types that were declared without but need pointers (for Redact)
-				if val.Index(i).CanAddr() {
-					o.recurseRedact(val.Index(i).Addr().Interface())
-				}
-			}
-		}
-	}
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
 }
 
 func (o NetworkingV1IpAddressList) zeroField(v interface{}) {
-	p := reflect.ValueOf(v).Elem()
-	p.Set(reflect.Zero(p.Type()))
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1IpAddressList) MarshalJSON() ([]byte, error) {
@@ -213,7 +214,11 @@ func (o NetworkingV1IpAddressList) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableNetworkingV1IpAddressList struct {
@@ -244,10 +249,16 @@ func NewNullableNetworkingV1IpAddressList(val *NetworkingV1IpAddressList) *Nulla
 }
 
 func (v NullableNetworkingV1IpAddressList) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableNetworkingV1IpAddressList) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
