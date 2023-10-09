@@ -31,6 +31,7 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
+	"reflect"
 	"strings"
 )
 
@@ -638,9 +639,9 @@ type ApiListNetworkingV1TransitGatewayAttachmentsRequest struct {
 	ctx             _context.Context
 	ApiService      TransitGatewayAttachmentsNetworkingV1Api
 	environment     *string
-	specDisplayName *MultipleSearchFilter
-	statusPhase     *MultipleSearchFilter
-	specNetwork     *MultipleSearchFilter
+	specDisplayName *[]string
+	statusPhase     *[]string
+	specNetwork     *[]string
 	pageSize        *int32
 	pageToken       *string
 }
@@ -652,19 +653,19 @@ func (r ApiListNetworkingV1TransitGatewayAttachmentsRequest) Environment(environ
 }
 
 // Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1TransitGatewayAttachmentsRequest) SpecDisplayName(specDisplayName MultipleSearchFilter) ApiListNetworkingV1TransitGatewayAttachmentsRequest {
+func (r ApiListNetworkingV1TransitGatewayAttachmentsRequest) SpecDisplayName(specDisplayName []string) ApiListNetworkingV1TransitGatewayAttachmentsRequest {
 	r.specDisplayName = &specDisplayName
 	return r
 }
 
 // Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1TransitGatewayAttachmentsRequest) StatusPhase(statusPhase MultipleSearchFilter) ApiListNetworkingV1TransitGatewayAttachmentsRequest {
+func (r ApiListNetworkingV1TransitGatewayAttachmentsRequest) StatusPhase(statusPhase []string) ApiListNetworkingV1TransitGatewayAttachmentsRequest {
 	r.statusPhase = &statusPhase
 	return r
 }
 
 // Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1TransitGatewayAttachmentsRequest) SpecNetwork(specNetwork MultipleSearchFilter) ApiListNetworkingV1TransitGatewayAttachmentsRequest {
+func (r ApiListNetworkingV1TransitGatewayAttachmentsRequest) SpecNetwork(specNetwork []string) ApiListNetworkingV1TransitGatewayAttachmentsRequest {
 	r.specNetwork = &specNetwork
 	return r
 }
@@ -730,14 +731,38 @@ func (a *TransitGatewayAttachmentsNetworkingV1ApiService) ListNetworkingV1Transi
 	}
 
 	if r.specDisplayName != nil {
-		localVarQueryParams.Add("spec.display_name", parameterToString(*r.specDisplayName, ""))
+		t := *r.specDisplayName
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.display_name", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.display_name", parameterToString(t, "multi"))
+		}
 	}
 	if r.statusPhase != nil {
-		localVarQueryParams.Add("status.phase", parameterToString(*r.statusPhase, ""))
+		t := *r.statusPhase
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("status.phase", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("status.phase", parameterToString(t, "multi"))
+		}
 	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.specNetwork != nil {
-		localVarQueryParams.Add("spec.network", parameterToString(*r.specNetwork, ""))
+		t := *r.specNetwork
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.network", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.network", parameterToString(t, "multi"))
+		}
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))

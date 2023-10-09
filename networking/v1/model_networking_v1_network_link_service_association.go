@@ -34,7 +34,7 @@ import (
 	"reflect"
 )
 
-// NetworkingV1NetworkLinkServiceAssociation List of incoming Network Link Enpoints associated with the Network Link Service.   ## The Network Link Service Associations Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.NetworkLinkServiceAssociation\" />
+// NetworkingV1NetworkLinkServiceAssociation List of incoming Network Link Enpoints associated with the Network Link Service.   Related guide: [Network Linking Overview](https://docs.confluent.io/cloud/current/networking/network-linking.html).  ## The Network Link Service Associations Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.NetworkLinkServiceAssociation\" />
 type NetworkingV1NetworkLinkServiceAssociation struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
