@@ -34,7 +34,7 @@ import (
 	"reflect"
 )
 
-// NetworkingV1IpAddressList IP Addresses  Related guide: [Use Static IP addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)  ## The IP Addresses Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.IpAddress\" />
+// NetworkingV1IpAddressList IP Addresses  Related guide: [Use Public Egress IP Addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)  ## The IP Addresses Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.IpAddress\" />
 type NetworkingV1IpAddressList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version,omitempty"`

@@ -14,17 +14,13 @@ info:
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
-- description: Confluent Cloud staging
-  url: https://api.stag.cpdev.cloud
-- description: Confluent Cloud development
-  url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
     [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     IP Addresses
 
-    Related guide: [Use Static IP addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)
+    Related guide: [Use Public Egress IP addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)
 
     ## The IP Addresses Model
     <SchemaDefinition schemaRef="#/components/schemas/networking.v1.IpAddress" />
@@ -35,7 +31,7 @@ paths:
       description: |-
         [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-        Related guide: [Use Static IP addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)
+        Related guide: [Use Public Egress IP addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)
 
         Retrieve a sorted, filtered, paginated list of all IP Addresses.
       operationId: listNetworkingV1IpAddresses
@@ -518,7 +514,7 @@ components:
       description: |-
         IP Addresses
 
-        Related guide: [Use Static IP addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)
+        Related guide: [Use Public Egress IP addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)
 
         ## The IP Addresses Model
         <SchemaDefinition schemaRef="#/components/schemas/networking.v1.IpAddress" />
@@ -549,6 +545,7 @@ components:
           - AWS
           - GCP
           - AZURE
+          - ANY
         region:
           description: The region/location where the IP Address is in use.
           example: us-east-1
@@ -571,6 +568,7 @@ components:
       x-extensible-enum:
       - KAFKA
       - CONNECT
+      - EXTERNAL_OAUTH
     networking.v1.Services:
       description: The service types that will use the address.
       items:
@@ -587,7 +585,7 @@ components:
       description: |-
         IP Addresses
 
-        Related guide: [Use Static IP addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)
+        Related guide: [Use Public Egress IP Addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)
 
         ## The IP Addresses Model
         <SchemaDefinition schemaRef="#/components/schemas/networking.v1.IpAddress" />

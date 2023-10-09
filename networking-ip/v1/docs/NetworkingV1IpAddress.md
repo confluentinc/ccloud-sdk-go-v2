@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **IpPrefix** | Pointer to **string** | The IP Address range. | [optional] 
 **Cloud** | Pointer to **string** | The cloud service provider in which the address exists. | [optional] 
 **Region** | Pointer to **string** | The region/location where the IP Address is in use. | [optional] 
-**Services** | Pointer to [**NetworkingV1Services**](networking.v1.Services.md) |  | [optional] 
+**Services** | Pointer to [**Set**](set.md) |  | [optional] 
 **AddressType** | Pointer to **string** | Whether the address is used for egress or ingress. | [optional] 
 
 ## Methods
@@ -158,20 +158,20 @@ HasRegion returns a boolean if a field has been set.
 
 ### GetServices
 
-`func (o *NetworkingV1IpAddress) GetServices() NetworkingV1Services`
+`func (o *NetworkingV1IpAddress) GetServices() Set`
 
 GetServices returns the Services field if non-nil, zero value otherwise.
 
 ### GetServicesOk
 
-`func (o *NetworkingV1IpAddress) GetServicesOk() (*NetworkingV1Services, bool)`
+`func (o *NetworkingV1IpAddress) GetServicesOk() (*Set, bool)`
 
 GetServicesOk returns a tuple with the Services field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetServices
 
-`func (o *NetworkingV1IpAddress) SetServices(v NetworkingV1Services)`
+`func (o *NetworkingV1IpAddress) SetServices(v Set)`
 
 SetServices sets Services field to given value.
 

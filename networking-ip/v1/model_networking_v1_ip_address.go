@@ -34,7 +34,7 @@ import (
 	"reflect"
 )
 
-// NetworkingV1IpAddress IP Addresses  Related guide: [Use Static IP addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)  ## The IP Addresses Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.IpAddress\" />
+// NetworkingV1IpAddress IP Addresses  Related guide: [Use Public Egress IP addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)  ## The IP Addresses Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.IpAddress\" />
 type NetworkingV1IpAddress struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
@@ -45,8 +45,8 @@ type NetworkingV1IpAddress struct {
 	// The cloud service provider in which the address exists.
 	Cloud *string `json:"cloud,omitempty"`
 	// The region/location where the IP Address is in use.
-	Region   *string               `json:"region,omitempty"`
-	Services *NetworkingV1Services `json:"services,omitempty"`
+	Region   *string `json:"region,omitempty"`
+	Services *Set    `json:"services,omitempty"`
 	// Whether the address is used for egress or ingress.
 	AddressType *string `json:"address_type,omitempty"`
 }
@@ -229,9 +229,9 @@ func (o *NetworkingV1IpAddress) SetRegion(v string) {
 }
 
 // GetServices returns the Services field value if set, zero value otherwise.
-func (o *NetworkingV1IpAddress) GetServices() NetworkingV1Services {
+func (o *NetworkingV1IpAddress) GetServices() Set {
 	if o == nil || o.Services == nil {
-		var ret NetworkingV1Services
+		var ret Set
 		return ret
 	}
 	return *o.Services
@@ -239,7 +239,7 @@ func (o *NetworkingV1IpAddress) GetServices() NetworkingV1Services {
 
 // GetServicesOk returns a tuple with the Services field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1IpAddress) GetServicesOk() (*NetworkingV1Services, bool) {
+func (o *NetworkingV1IpAddress) GetServicesOk() (*Set, bool) {
 	if o == nil || o.Services == nil {
 		return nil, false
 	}
@@ -255,8 +255,8 @@ func (o *NetworkingV1IpAddress) HasServices() bool {
 	return false
 }
 
-// SetServices gets a reference to the given NetworkingV1Services and assigns it to the Services field.
-func (o *NetworkingV1IpAddress) SetServices(v NetworkingV1Services) {
+// SetServices gets a reference to the given Set and assigns it to the Services field.
+func (o *NetworkingV1IpAddress) SetServices(v Set) {
 	o.Services = &v
 }
 

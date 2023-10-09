@@ -31,6 +31,7 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
+	"reflect"
 )
 
 // Linger please
@@ -45,7 +46,7 @@ type IPAddressesNetworkingV1Api interface {
 
 		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Related guide: [Use Static IP addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)
+	Related guide: [Use Public Egress IP addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)
 
 	Retrieve a sorted, filtered, paginated list of all IP Addresses.
 
@@ -65,34 +66,34 @@ type IPAddressesNetworkingV1ApiService service
 type ApiListNetworkingV1IpAddressesRequest struct {
 	ctx         _context.Context
 	ApiService  IPAddressesNetworkingV1Api
-	cloud       *MultipleSearchFilter
-	region      *MultipleSearchFilter
-	services    *MultipleSearchFilter
-	addressType *MultipleSearchFilter
+	cloud       *[]string
+	region      *[]string
+	services    *[]string
+	addressType *[]string
 	pageSize    *int32
 	pageToken   *string
 }
 
 // Filter the results by exact match for cloud. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1IpAddressesRequest) Cloud(cloud MultipleSearchFilter) ApiListNetworkingV1IpAddressesRequest {
+func (r ApiListNetworkingV1IpAddressesRequest) Cloud(cloud []string) ApiListNetworkingV1IpAddressesRequest {
 	r.cloud = &cloud
 	return r
 }
 
 // Filter the results by exact match for region. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1IpAddressesRequest) Region(region MultipleSearchFilter) ApiListNetworkingV1IpAddressesRequest {
+func (r ApiListNetworkingV1IpAddressesRequest) Region(region []string) ApiListNetworkingV1IpAddressesRequest {
 	r.region = &region
 	return r
 }
 
 // Filter the results by exact match for services. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1IpAddressesRequest) Services(services MultipleSearchFilter) ApiListNetworkingV1IpAddressesRequest {
+func (r ApiListNetworkingV1IpAddressesRequest) Services(services []string) ApiListNetworkingV1IpAddressesRequest {
 	r.services = &services
 	return r
 }
 
 // Filter the results by exact match for address_type. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1IpAddressesRequest) AddressType(addressType MultipleSearchFilter) ApiListNetworkingV1IpAddressesRequest {
+func (r ApiListNetworkingV1IpAddressesRequest) AddressType(addressType []string) ApiListNetworkingV1IpAddressesRequest {
 	r.addressType = &addressType
 	return r
 }
@@ -118,7 +119,7 @@ ListNetworkingV1IpAddresses List of IP Addresses
 
 [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Related guide: [Use Static IP addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)
+Related guide: [Use Public Egress IP addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)
 
 Retrieve a sorted, filtered, paginated list of all IP Addresses.
 
@@ -156,16 +157,48 @@ func (a *IPAddressesNetworkingV1ApiService) ListNetworkingV1IpAddressesExecute(r
 	localVarFormParams := _neturl.Values{}
 
 	if r.cloud != nil {
-		localVarQueryParams.Add("cloud", parameterToString(*r.cloud, ""))
+		t := *r.cloud
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("cloud", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("cloud", parameterToString(t, "multi"))
+		}
 	}
 	if r.region != nil {
-		localVarQueryParams.Add("region", parameterToString(*r.region, ""))
+		t := *r.region
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("region", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("region", parameterToString(t, "multi"))
+		}
 	}
 	if r.services != nil {
-		localVarQueryParams.Add("services", parameterToString(*r.services, ""))
+		t := *r.services
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("services", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("services", parameterToString(t, "multi"))
+		}
 	}
 	if r.addressType != nil {
-		localVarQueryParams.Add("address_type", parameterToString(*r.addressType, ""))
+		t := *r.addressType
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("address_type", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("address_type", parameterToString(t, "multi"))
+		}
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))

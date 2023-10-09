@@ -29,10 +29,10 @@ import (
 )
 
 func main() {
-    cloud := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for cloud. Pass multiple times to see results matching any of the values. (optional)
-    region := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for region. Pass multiple times to see results matching any of the values. (optional)
-    services :=  // MultipleSearchFilter | Filter the results by exact match for services. Pass multiple times to see results matching any of the values. (optional)
-    addressType :=  // MultipleSearchFilter | Filter the results by exact match for address_type. Pass multiple times to see results matching any of the values. (optional)
+    cloud := []string{"Inner_example"} // []string | Filter the results by exact match for cloud. Pass multiple times to see results matching any of the values. (optional)
+    region := []string{"Inner_example"} // []string | Filter the results by exact match for region. Pass multiple times to see results matching any of the values. (optional)
+    services := []string{"Inner_example"} // []string | Filter the results by exact match for services. Pass multiple times to see results matching any of the values. (optional)
+    addressType := []string{"Inner_example"} // []string | Filter the results by exact match for address_type. Pass multiple times to see results matching any of the values. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
@@ -59,10 +59,10 @@ Other parameters are passed through a pointer to a apiListNetworkingV1IpAddresse
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cloud** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for cloud. Pass multiple times to see results matching any of the values. | 
- **region** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for region. Pass multiple times to see results matching any of the values. | 
- **services** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for services. Pass multiple times to see results matching any of the values. | 
- **addressType** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for address_type. Pass multiple times to see results matching any of the values. | 
+ **cloud** | **[]string** | Filter the results by exact match for cloud. Pass multiple times to see results matching any of the values. | 
+ **region** | **[]string** | Filter the results by exact match for region. Pass multiple times to see results matching any of the values. | 
+ **services** | **[]string** | Filter the results by exact match for services. Pass multiple times to see results matching any of the values. | 
+ **addressType** | **[]string** | Filter the results by exact match for address_type. Pass multiple times to see results matching any of the values. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 

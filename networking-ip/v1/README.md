@@ -88,10 +88,8 @@ Class | Method | HTTP request | Description
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
  - [ListMeta](docs/ListMeta.md)
- - [MultipleSearchFilter](docs/MultipleSearchFilter.md)
  - [NetworkingV1IpAddress](docs/NetworkingV1IpAddress.md)
  - [NetworkingV1IpAddressList](docs/NetworkingV1IpAddressList.md)
- - [NetworkingV1Services](docs/NetworkingV1Services.md)
 
 
 ## Documentation For Authorization
