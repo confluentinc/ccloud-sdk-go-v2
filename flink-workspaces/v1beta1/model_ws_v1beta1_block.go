@@ -38,7 +38,7 @@ import (
 type WsV1beta1Block struct {
 	// The type of block.
 	Type *string `json:"type,omitempty"`
-	// A map (key-value pairs) of cell properties. All key-value pairs are optional, and any key-value pair may be ignored.
+	// A map (key-value pairs) of cell properties. All key-value pairs are optional, and clients choose whether and how to use these key-value pairs.
 	Properties  *map[string]string    `json:"properties,omitempty"`
 	CodeOptions *WsV1beta1CodeOptions `json:"code_options,omitempty"`
 }

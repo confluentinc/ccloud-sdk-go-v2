@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ComputePool** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) |  | [optional] 
 **ServiceAccount** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) |  | [optional] 
 **Blocks** | Pointer to [**[]WsV1beta1Block**](WsV1beta1Block.md) | The ordered blocks for the new workspace | [optional] 
+**Properties** | Pointer to **map[string]string** | A map (key-value pairs) of workspace-level properties. All key-value pairs are optional, and clients choose whether and how to use these key-value pairs. | [optional] 
 
 ## Methods
 
@@ -127,6 +128,31 @@ SetBlocks sets Blocks field to given value.
 `func (o *WsV1beta1WorkspaceSpec) HasBlocks() bool`
 
 HasBlocks returns a boolean if a field has been set.
+
+### GetProperties
+
+`func (o *WsV1beta1WorkspaceSpec) GetProperties() map[string]string`
+
+GetProperties returns the Properties field if non-nil, zero value otherwise.
+
+### GetPropertiesOk
+
+`func (o *WsV1beta1WorkspaceSpec) GetPropertiesOk() (*map[string]string, bool)`
+
+GetPropertiesOk returns a tuple with the Properties field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProperties
+
+`func (o *WsV1beta1WorkspaceSpec) SetProperties(v map[string]string)`
+
+SetProperties sets Properties field to given value.
+
+### HasProperties
+
+`func (o *WsV1beta1WorkspaceSpec) HasProperties() bool`
+
+HasProperties returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

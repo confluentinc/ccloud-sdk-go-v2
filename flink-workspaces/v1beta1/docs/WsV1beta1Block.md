@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | The type of block. | [optional] 
-**Properties** | Pointer to **map[string]string** | A map (key-value pairs) of cell properties. All key-value pairs are optional, and any key-value pair may be ignored. | [optional] 
+**Properties** | Pointer to **map[string]string** | A map (key-value pairs) of cell properties. All key-value pairs are optional, and clients choose whether and how to use these key-value pairs. | [optional] 
 **CodeOptions** | Pointer to [**WsV1beta1CodeOptions**](WsV1beta1CodeOptions.md) |  | [optional] 
 
 ## Methods

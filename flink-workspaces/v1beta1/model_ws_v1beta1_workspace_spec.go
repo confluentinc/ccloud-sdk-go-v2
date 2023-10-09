@@ -42,6 +42,8 @@ type WsV1beta1WorkspaceSpec struct {
 	ServiceAccount *GlobalObjectReference    `json:"service_account,omitempty"`
 	// The ordered blocks for the new workspace
 	Blocks *[]WsV1beta1Block `json:"blocks,omitempty"`
+	// A map (key-value pairs) of workspace-level properties. All key-value pairs are optional, and clients choose whether and how to use these key-value pairs.
+	Properties *map[string]string `json:"properties,omitempty"`
 }
 
 // NewWsV1beta1WorkspaceSpec instantiates a new WsV1beta1WorkspaceSpec object
@@ -189,12 +191,45 @@ func (o *WsV1beta1WorkspaceSpec) SetBlocks(v []WsV1beta1Block) {
 	o.Blocks = &v
 }
 
+// GetProperties returns the Properties field value if set, zero value otherwise.
+func (o *WsV1beta1WorkspaceSpec) GetProperties() map[string]string {
+	if o == nil || o.Properties == nil {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Properties
+}
+
+// GetPropertiesOk returns a tuple with the Properties field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WsV1beta1WorkspaceSpec) GetPropertiesOk() (*map[string]string, bool) {
+	if o == nil || o.Properties == nil {
+		return nil, false
+	}
+	return o.Properties, true
+}
+
+// HasProperties returns a boolean if a field has been set.
+func (o *WsV1beta1WorkspaceSpec) HasProperties() bool {
+	if o != nil && o.Properties != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetProperties gets a reference to the given map[string]string and assigns it to the Properties field.
+func (o *WsV1beta1WorkspaceSpec) SetProperties(v map[string]string) {
+	o.Properties = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *WsV1beta1WorkspaceSpec) Redact() {
 	o.recurseRedact(o.DisplayName)
 	o.recurseRedact(o.ComputePool)
 	o.recurseRedact(o.ServiceAccount)
 	o.recurseRedact(o.Blocks)
+	o.recurseRedact(o.Properties)
 }
 
 func (o *WsV1beta1WorkspaceSpec) recurseRedact(v interface{}) {
@@ -240,6 +275,9 @@ func (o WsV1beta1WorkspaceSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.Blocks != nil {
 		toSerialize["blocks"] = o.Blocks
+	}
+	if o.Properties != nil {
+		toSerialize["properties"] = o.Properties
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

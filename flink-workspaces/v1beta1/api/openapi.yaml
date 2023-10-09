@@ -374,6 +374,10 @@ paths:
                         nullable: true
                       blocks:
                         description: The ordered blocks for the new workspace
+                      properties:
+                        description: The key-value pair properties for the new workspace.
+                          All key-value pairs are optional, and clients choose whether
+                          and how to use these key-value pairs.
                     type: object
                 required:
                 - name
@@ -592,13 +596,13 @@ paths:
             --url 'https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"name":"my-workspace","spec":{"display_name":"string","compute_pool":{"id":"lfcp-00000"},"service_account":{"id":"sa-00000"},"blocks":null}}'
+            --data '{"name":"my-workspace","spec":{"display_name":"string","compute_pool":{"id":"lfcp-00000"},"service_account":{"id":"sa-00000"},"blocks":null,"properties":null}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"my-workspace\",\"spec\":{\"display_name\":\"string\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":null}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"my-workspace\",\"spec\":{\"display_name\":\"string\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":null,\"properties\":null}}");
           Request request = new Request.Builder()
             .url("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces")
             .post(body)
@@ -613,11 +617,11 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"name\\\":\\\"my-workspace\\\"\
           ,\\\"spec\\\":{\\\"display_name\\\":\\\"string\\\",\\\"compute_pool\\\"\
           :{\\\"id\\\":\\\"lfcp-00000\\\"},\\\"service_account\\\":{\\\"id\\\":\\\"\
-          sa-00000\\\"},\\\"blocks\\\":null}}\")\n\n\treq, _ := http.NewRequest(\"\
-          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          sa-00000\\\"},\\\"blocks\\\":null,\\\"properties\\\":null}}\")\n\n\treq,\
+          \ _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
+          , \"application/json\")\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
+          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -625,7 +629,7 @@ paths:
 
           conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
 
-          payload = "{\"name\":\"my-workspace\",\"spec\":{\"display_name\":\"string\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":null}}"
+          payload = "{\"name\":\"my-workspace\",\"spec\":{\"display_name\":\"string\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":null,\"properties\":null}}"
 
           headers = {
               'content-type': "application/json",
@@ -672,7 +676,8 @@ paths:
               display_name: 'string',
               compute_pool: {id: 'lfcp-00000'},
               service_account: {id: 'sa-00000'},
-              blocks: null
+              blocks: null,
+              properties: null
             }
           }));
           req.end();
@@ -688,7 +693,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"my-workspace\",\"spec\":{\"display_name\":\"string\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":null}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"my-workspace\",\"spec\":{\"display_name\":\"string\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":null,\"properties\":null}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -697,7 +702,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"name\":\"my-workspace\",\"spec\":{\"display_name\":\"string\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":null}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"name\":\"my-workspace\",\"spec\":{\"display_name\":\"string\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":null,\"properties\":null}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Workspaces API v1beta1
   /ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}:
@@ -1547,13 +1552,13 @@ paths:
             --url 'https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"name":"string","spec":{"display_name":"My first workspace","compute_pool":{"id":"lfcp-00000"},"service_account":{"id":"sa-00000"},"blocks":[{"type":"CODE","properties":{"app_id":"block-1234","language":"SQL"},"code_options":{"source":["SELECT * FROM my-catalog.cluster_3.topic-1;"]}}]},"metadata":{"resource_version":null}}'
+            --data '{"name":"string","spec":{"display_name":"My first workspace","compute_pool":{"id":"lfcp-00000"},"service_account":{"id":"sa-00000"},"blocks":[{"type":"CODE","properties":{"app_id":"block-1234","language":"SQL"},"code_options":{"source":["SELECT * FROM my-catalog.cluster_3.topic-1;"]}}],"properties":{"sql-catalog":"inventory","sql-database":"customers"}},"metadata":{"resource_version":null}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"string\",\"spec\":{\"display_name\":\"My first workspace\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":[{\"type\":\"CODE\",\"properties\":{\"app_id\":\"block-1234\",\"language\":\"SQL\"},\"code_options\":{\"source\":[\"SELECT * FROM my-catalog.cluster_3.topic-1;\"]}}]},\"metadata\":{\"resource_version\":null}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"string\",\"spec\":{\"display_name\":\"My first workspace\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":[{\"type\":\"CODE\",\"properties\":{\"app_id\":\"block-1234\",\"language\":\"SQL\"},\"code_options\":{\"source\":[\"SELECT * FROM my-catalog.cluster_3.topic-1;\"]}}],\"properties\":{\"sql-catalog\":\"inventory\",\"sql-database\":\"customers\"}},\"metadata\":{\"resource_version\":null}}");
           Request request = new Request.Builder()
             .url("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}")
             .put(body)
@@ -1571,19 +1576,20 @@ paths:
           sa-00000\\\"},\\\"blocks\\\":[{\\\"type\\\":\\\"CODE\\\",\\\"properties\\\
           \":{\\\"app_id\\\":\\\"block-1234\\\",\\\"language\\\":\\\"SQL\\\"},\\\"\
           code_options\\\":{\\\"source\\\":[\\\"SELECT * FROM my-catalog.cluster_3.topic-1;\\\
-          \"]}}]},\\\"metadata\\\":{\\\"resource_version\\\":null}}\")\n\n\treq, _\
-          \ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
-          , \"application/json\")\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
-          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
-          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          \"]}}],\\\"properties\\\":{\\\"sql-catalog\\\":\\\"inventory\\\",\\\"sql-database\\\
+          \":\\\"customers\\\"}},\\\"metadata\\\":{\\\"resource_version\\\":null}}\"\
+          )\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
 
-          payload = "{\"name\":\"string\",\"spec\":{\"display_name\":\"My first workspace\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":[{\"type\":\"CODE\",\"properties\":{\"app_id\":\"block-1234\",\"language\":\"SQL\"},\"code_options\":{\"source\":[\"SELECT * FROM my-catalog.cluster_3.topic-1;\"]}}]},\"metadata\":{\"resource_version\":null}}"
+          payload = "{\"name\":\"string\",\"spec\":{\"display_name\":\"My first workspace\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":[{\"type\":\"CODE\",\"properties\":{\"app_id\":\"block-1234\",\"language\":\"SQL\"},\"code_options\":{\"source\":[\"SELECT * FROM my-catalog.cluster_3.topic-1;\"]}}],\"properties\":{\"sql-catalog\":\"inventory\",\"sql-database\":\"customers\"}},\"metadata\":{\"resource_version\":null}}"
 
           headers = {
               'content-type': "application/json",
@@ -1636,7 +1642,8 @@ paths:
                   properties: {app_id: 'block-1234', language: 'SQL'},
                   code_options: {source: ['SELECT * FROM my-catalog.cluster_3.topic-1;']}
                 }
-              ]
+              ],
+              properties: {'sql-catalog': 'inventory', 'sql-database': 'customers'}
             },
             metadata: {resource_version: null}
           }));
@@ -1653,7 +1660,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"string\",\"spec\":{\"display_name\":\"My first workspace\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":[{\"type\":\"CODE\",\"properties\":{\"app_id\":\"block-1234\",\"language\":\"SQL\"},\"code_options\":{\"source\":[\"SELECT * FROM my-catalog.cluster_3.topic-1;\"]}}]},\"metadata\":{\"resource_version\":null}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"string\",\"spec\":{\"display_name\":\"My first workspace\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":[{\"type\":\"CODE\",\"properties\":{\"app_id\":\"block-1234\",\"language\":\"SQL\"},\"code_options\":{\"source\":[\"SELECT * FROM my-catalog.cluster_3.topic-1;\"]}}],\"properties\":{\"sql-catalog\":\"inventory\",\"sql-database\":\"customers\"}},\"metadata\":{\"resource_version\":null}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1662,7 +1669,7 @@ paths:
           var request = new RestRequest(Method.PUT);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"name\":\"string\",\"spec\":{\"display_name\":\"My first workspace\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":[{\"type\":\"CODE\",\"properties\":{\"app_id\":\"block-1234\",\"language\":\"SQL\"},\"code_options\":{\"source\":[\"SELECT * FROM my-catalog.cluster_3.topic-1;\"]}}]},\"metadata\":{\"resource_version\":null}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"name\":\"string\",\"spec\":{\"display_name\":\"My first workspace\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":[{\"type\":\"CODE\",\"properties\":{\"app_id\":\"block-1234\",\"language\":\"SQL\"},\"code_options\":{\"source\":[\"SELECT * FROM my-catalog.cluster_3.topic-1;\"]}}],\"properties\":{\"sql-catalog\":\"inventory\",\"sql-database\":\"customers\"}},\"metadata\":{\"resource_version\":null}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Workspace API v1beta1
 components:
@@ -2010,6 +2017,17 @@ components:
           maxItems: 20
           minItems: 0
           type: array
+        properties:
+          additionalProperties:
+            type: string
+          description: A map (key-value pairs) of workspace-level properties. All
+            key-value pairs are optional, and clients choose whether and how to use
+            these key-value pairs.
+          example:
+            sql-catalog: inventory
+            sql-database: customers
+          maximum: 32
+          type: object
       type: object
       x-enable-listmeta: true
       x-enable-objectmeta: true
@@ -2084,7 +2102,8 @@ components:
           additionalProperties:
             type: string
           description: A map (key-value pairs) of cell properties. All key-value pairs
-            are optional, and any key-value pair may be ignored.
+            are optional, and clients choose whether and how to use these key-value
+            pairs.
           example:
             app_id: block-1234
             language: SQL

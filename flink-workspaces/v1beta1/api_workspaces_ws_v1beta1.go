@@ -42,15 +42,15 @@ var (
 type WorkspacesWsV1beta1Api interface {
 
 	/*
-			CreateWsV1beta1Workspace Create a Workspace
+		CreateWsV1beta1Workspace Create a Workspace
 
-			[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-		Make a request to create a workspace.
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+	Make a request to create a workspace.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param organizationId The unique identifier for the organization.
-			 @param environmentId The unique identifier for the environment.
-			 @return ApiCreateWsV1beta1WorkspaceRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param organizationId The unique identifier for the organization.
+		 @param environmentId The unique identifier for the environment.
+		 @return ApiCreateWsV1beta1WorkspaceRequest
 	*/
 	CreateWsV1beta1Workspace(ctx _context.Context, organizationId string, environmentId string) ApiCreateWsV1beta1WorkspaceRequest
 
@@ -59,16 +59,16 @@ type WorkspacesWsV1beta1Api interface {
 	CreateWsV1beta1WorkspaceExecute(r ApiCreateWsV1beta1WorkspaceRequest) (WsV1beta1Workspace, *_nethttp.Response, error)
 
 	/*
-			DeleteWsV1beta1Workspace Delete a Workspace
+		DeleteWsV1beta1Workspace Delete a Workspace
 
-			[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-		Make a request to delete a workspace.
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+	Make a request to delete a workspace.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param organizationId The unique identifier for the organization.
-			 @param environmentId The unique identifier for the environment.
-			 @param name The workspace name that is unique across the environment and region.
-			 @return ApiDeleteWsV1beta1WorkspaceRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param organizationId The unique identifier for the organization.
+		 @param environmentId The unique identifier for the environment.
+		 @param name The workspace name that is unique across the environment and region.
+		 @return ApiDeleteWsV1beta1WorkspaceRequest
 	*/
 	DeleteWsV1beta1Workspace(ctx _context.Context, organizationId string, environmentId string, name string) ApiDeleteWsV1beta1WorkspaceRequest
 
@@ -76,16 +76,16 @@ type WorkspacesWsV1beta1Api interface {
 	DeleteWsV1beta1WorkspaceExecute(r ApiDeleteWsV1beta1WorkspaceRequest) (*_nethttp.Response, error)
 
 	/*
-			GetWsV1beta1Workspace Read a Workspace
+		GetWsV1beta1Workspace Read a Workspace
 
-			[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-		Make a request to read a workspace.
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+	Make a request to read a workspace.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param organizationId The unique identifier for the organization.
-			 @param environmentId The unique identifier for the environment.
-			 @param name The workspace name that is unique across the environment and region.
-			 @return ApiGetWsV1beta1WorkspaceRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param organizationId The unique identifier for the organization.
+		 @param environmentId The unique identifier for the environment.
+		 @param name The workspace name that is unique across the environment and region.
+		 @return ApiGetWsV1beta1WorkspaceRequest
 	*/
 	GetWsV1beta1Workspace(ctx _context.Context, organizationId string, environmentId string, name string) ApiGetWsV1beta1WorkspaceRequest
 
@@ -94,16 +94,16 @@ type WorkspacesWsV1beta1Api interface {
 	GetWsV1beta1WorkspaceExecute(r ApiGetWsV1beta1WorkspaceRequest) (WsV1beta1Workspace, *_nethttp.Response, error)
 
 	/*
-			ListWsV1beta1Workspaces List of Workspaces
+		ListWsV1beta1Workspaces List of Workspaces
 
-			[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-		Retrieve a sorted, filtered, paginated list of all workspaces.
+	Retrieve a sorted, filtered, paginated list of all workspaces.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param organizationId The unique identifier for the organization.
-			 @param environmentId The unique identifier for the environment.
-			 @return ApiListWsV1beta1WorkspacesRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param organizationId The unique identifier for the organization.
+		 @param environmentId The unique identifier for the environment.
+		 @return ApiListWsV1beta1WorkspacesRequest
 	*/
 	ListWsV1beta1Workspaces(ctx _context.Context, organizationId string, environmentId string) ApiListWsV1beta1WorkspacesRequest
 
@@ -112,16 +112,16 @@ type WorkspacesWsV1beta1Api interface {
 	ListWsV1beta1WorkspacesExecute(r ApiListWsV1beta1WorkspacesRequest) (WsV1beta1WorkspaceList, *_nethttp.Response, error)
 
 	/*
-			PutWsV1beta1Workspace Update a Workspace
+		PutWsV1beta1Workspace Update a Workspace
 
-			[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-		Make a request to update a workspace.
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+	Make a request to update a workspace.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param organizationId The unique identifier for the organization.
-			 @param environmentId The unique identifier for the environment.
-			 @param name The workspace name that is unique across the environment and region.
-			 @return ApiPutWsV1beta1WorkspaceRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param organizationId The unique identifier for the organization.
+		 @param environmentId The unique identifier for the environment.
+		 @param name The workspace name that is unique across the environment and region.
+		 @return ApiPutWsV1beta1WorkspaceRequest
 	*/
 	PutWsV1beta1Workspace(ctx _context.Context, organizationId string, environmentId string, name string) ApiPutWsV1beta1WorkspaceRequest
 
