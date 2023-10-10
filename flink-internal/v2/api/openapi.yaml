@@ -667,13 +667,6 @@ components:
           items:
             $ref: '#/components/schemas/fcpm.V2.QuickstartComputePool'
           type: array
-        errors:
-          description: |
-            The list of errors encountered when quickstart a compute pool.
-          items:
-            $ref: '#/components/schemas/fcpm.V2.Error'
-          readOnly: true
-          type: array
       type: object
     fcpm.V2.QuickstartComputePool:
       description: |
@@ -712,6 +705,13 @@ components:
           format: int32
           readOnly: true
           type: integer
+        error:
+          allOf:
+          - $ref: '#/components/schemas/fcpm.V2.Error'
+          description: |
+            The error encountered while creating the compute pool.
+          readOnly: true
+          type: object
       required:
       - cloud
       - environment_id
