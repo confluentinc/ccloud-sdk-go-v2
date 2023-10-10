@@ -53,8 +53,8 @@ Submit a GraphQL query.
 	QueryTurboV1alpha1Graphql(ctx _context.Context) ApiQueryTurboV1alpha1GraphqlRequest
 
 	// QueryTurboV1alpha1GraphqlExecute executes the request
-	//  @return TurboV1alpha1GraphqlReply
-	QueryTurboV1alpha1GraphqlExecute(r ApiQueryTurboV1alpha1GraphqlRequest) (TurboV1alpha1GraphqlReply, *_nethttp.Response, error)
+	//  @return string
+	QueryTurboV1alpha1GraphqlExecute(r ApiQueryTurboV1alpha1GraphqlRequest) (string, *_nethttp.Response, error)
 }
 
 // GraphqlsTurboV1alpha1ApiService GraphqlsTurboV1alpha1Api service
@@ -71,7 +71,7 @@ func (r ApiQueryTurboV1alpha1GraphqlRequest) TurboV1alpha1GraphqlRequest(turboV1
 	return r
 }
 
-func (r ApiQueryTurboV1alpha1GraphqlRequest) Execute() (TurboV1alpha1GraphqlReply, *_nethttp.Response, error) {
+func (r ApiQueryTurboV1alpha1GraphqlRequest) Execute() (string, *_nethttp.Response, error) {
 	return r.ApiService.QueryTurboV1alpha1GraphqlExecute(r)
 }
 
@@ -93,15 +93,15 @@ func (a *GraphqlsTurboV1alpha1ApiService) QueryTurboV1alpha1Graphql(ctx _context
 }
 
 // Execute executes the request
-//  @return TurboV1alpha1GraphqlReply
-func (a *GraphqlsTurboV1alpha1ApiService) QueryTurboV1alpha1GraphqlExecute(r ApiQueryTurboV1alpha1GraphqlRequest) (TurboV1alpha1GraphqlReply, *_nethttp.Response, error) {
+//  @return string
+func (a *GraphqlsTurboV1alpha1ApiService) QueryTurboV1alpha1GraphqlExecute(r ApiQueryTurboV1alpha1GraphqlRequest) (string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  TurboV1alpha1GraphqlReply
+		localVarReturnValue  string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GraphqlsTurboV1alpha1ApiService.QueryTurboV1alpha1Graphql")

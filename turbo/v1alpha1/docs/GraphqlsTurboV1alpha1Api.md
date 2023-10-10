@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## QueryTurboV1alpha1Graphql
 
-> TurboV1alpha1GraphqlReply QueryTurboV1alpha1Graphql(ctx).TurboV1alpha1GraphqlRequest(turboV1alpha1GraphqlRequest).Execute()
+> string QueryTurboV1alpha1Graphql(ctx).TurboV1alpha1GraphqlRequest(turboV1alpha1GraphqlRequest).Execute()
 
 Query a Graphql
 
@@ -38,7 +38,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `GraphqlsTurboV1alpha1Api.QueryTurboV1alpha1Graphql``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `QueryTurboV1alpha1Graphql`: TurboV1alpha1GraphqlReply
+    // response from `QueryTurboV1alpha1Graphql`: string
     fmt.Fprintf(os.Stdout, "Response from `GraphqlsTurboV1alpha1Api.QueryTurboV1alpha1Graphql`: %v\n", resp)
 }
 ```
@@ -58,7 +58,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TurboV1alpha1GraphqlReply**](TurboV1alpha1GraphqlReply.md)
+**string**
 
 ### Authorization
 

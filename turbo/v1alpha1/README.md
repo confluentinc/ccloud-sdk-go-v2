@@ -90,7 +90,6 @@ Class | Method | HTTP request | Description
  - [ListMeta](docs/ListMeta.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
- - [TurboV1alpha1GraphqlReply](docs/TurboV1alpha1GraphqlReply.md)
  - [TurboV1alpha1GraphqlRequest](docs/TurboV1alpha1GraphqlRequest.md)
 
 
