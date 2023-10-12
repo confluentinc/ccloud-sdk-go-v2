@@ -19,6 +19,10 @@
 
 * `STOPPED` (value: `"STOPPED"`)
 
+* `PENDING_MIRROR` (value: `"PENDING_MIRROR"`)
+
+* `PENDING_SYNCHRONIZE` (value: `"PENDING_SYNCHRONIZE"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
