@@ -43,9 +43,7 @@ type RecordsV3Api interface {
 
 	/*
 		ProduceRecord Produce Records
-
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
 	Produce records to the given topic, returning delivery reports for each
 	record produced. This API can be used in streaming mode by setting
 	"Transfer-Encoding: chunked" header. For as long as the connection is
@@ -56,11 +54,9 @@ type RecordsV3Api interface {
 	indicates success. The HTTP status code will be HTTP 200 OK as long as
 	the connection is successfully established. To identify records that
 	have encountered an error, check the error_code of each delivery report.
-
 	This API currently does not support Schema Registry integration. Sending
 	schemas is not supported. Only BINARY, JSON, and STRING formats are
 	supported.
-
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param clusterId The Kafka cluster ID.
 		 @param topicName The topic name.
@@ -195,6 +191,16 @@ func (a *RecordsV3ApiService) ProduceRecordExecute(r ApiProduceRecordRequest) (P
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -216,6 +222,26 @@ func (a *RecordsV3ApiService) ProduceRecordExecute(r ApiProduceRecordRequest) (P
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 413 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 415 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
