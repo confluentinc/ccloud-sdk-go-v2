@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## QueryTurboV1alpha1Graphql
 
-> string QueryTurboV1alpha1Graphql(ctx).TurboV1alpha1GraphqlRequest(turboV1alpha1GraphqlRequest).Execute()
+> string QueryTurboV1alpha1Graphql(ctx).XPrincipal(xPrincipal).XPrincipalResourceId(xPrincipalResourceId).XOrganizationId(xOrganizationId).XOrganizationResourceId(xOrganizationResourceId).XExternalIdentity(xExternalIdentity).TurboV1alpha1GraphqlRequest(turboV1alpha1GraphqlRequest).Execute()
 
 Query a Graphql
 
@@ -29,11 +29,16 @@ import (
 )
 
 func main() {
+    xPrincipal := "xPrincipal_example" // string |  (optional)
+    xPrincipalResourceId := "xPrincipalResourceId_example" // string |  (optional)
+    xOrganizationId := "xOrganizationId_example" // string |  (optional)
+    xOrganizationResourceId := "xOrganizationResourceId_example" // string |  (optional)
+    xExternalIdentity := "xExternalIdentity_example" // string |  (optional)
     turboV1alpha1GraphqlRequest := *openapiclient.NewTurboV1alpha1GraphqlRequest() // TurboV1alpha1GraphqlRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.GraphqlsTurboV1alpha1Api.QueryTurboV1alpha1Graphql(context.Background()).TurboV1alpha1GraphqlRequest(turboV1alpha1GraphqlRequest).Execute()
+    resp, r, err := api_client.GraphqlsTurboV1alpha1Api.QueryTurboV1alpha1Graphql(context.Background()).XPrincipal(xPrincipal).XPrincipalResourceId(xPrincipalResourceId).XOrganizationId(xOrganizationId).XOrganizationResourceId(xOrganizationResourceId).XExternalIdentity(xExternalIdentity).TurboV1alpha1GraphqlRequest(turboV1alpha1GraphqlRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `GraphqlsTurboV1alpha1Api.QueryTurboV1alpha1Graphql``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -54,6 +59,11 @@ Other parameters are passed through a pointer to a apiQueryTurboV1alpha1GraphqlR
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **xPrincipal** | **string** |  | 
+ **xPrincipalResourceId** | **string** |  | 
+ **xOrganizationId** | **string** |  | 
+ **xOrganizationResourceId** | **string** |  | 
+ **xExternalIdentity** | **string** |  | 
  **turboV1alpha1GraphqlRequest** | [**TurboV1alpha1GraphqlRequest**](TurboV1alpha1GraphqlRequest.md) |  | 
 
 ### Return type

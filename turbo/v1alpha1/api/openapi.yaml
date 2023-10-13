@@ -32,6 +32,42 @@ paths:
 
         Submit a GraphQL query.
       operationId: queryTurboV1alpha1Graphql
+      parameters:
+      - explode: false
+        in: header
+        name: X-Principal
+        required: false
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: header
+        name: X-Principal-Resource-Id
+        required: false
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: header
+        name: X-Organization-Id
+        required: false
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: header
+        name: X-Organization-Resource-Id
+        required: false
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: header
+        name: X-External-Identity
+        required: false
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -214,6 +250,11 @@ paths:
           curl --request POST \
             --url https://api.confluent.cloud/turbo/v1alpha1/graphql \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'X-External-Identity: SOME_STRING_VALUE' \
+            --header 'X-Organization-Id: SOME_STRING_VALUE' \
+            --header 'X-Organization-Resource-Id: SOME_STRING_VALUE' \
+            --header 'X-Principal: SOME_STRING_VALUE' \
+            --header 'X-Principal-Resource-Id: SOME_STRING_VALUE' \
             --header 'content-type: application/json' \
             --data '{"query":"string"}'
       - lang: Java
@@ -226,6 +267,11 @@ paths:
             .url("https://api.confluent.cloud/turbo/v1alpha1/graphql")
             .post(body)
             .addHeader("content-type", "application/json")
+            .addHeader("X-Principal", "SOME_STRING_VALUE")
+            .addHeader("X-Principal-Resource-Id", "SOME_STRING_VALUE")
+            .addHeader("X-Organization-Id", "SOME_STRING_VALUE")
+            .addHeader("X-Organization-Resource-Id", "SOME_STRING_VALUE")
+            .addHeader("X-External-Identity", "SOME_STRING_VALUE")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
@@ -235,10 +281,15 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/turbo/v1alpha1/graphql\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"query\\\":\\\"string\\\"}\")\n\
           \n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          content-type\", \"application/json\")\n\treq.Header.Add(\"X-Principal\"\
+          , \"SOME_STRING_VALUE\")\n\treq.Header.Add(\"X-Principal-Resource-Id\",\
+          \ \"SOME_STRING_VALUE\")\n\treq.Header.Add(\"X-Organization-Id\", \"SOME_STRING_VALUE\"\
+          )\n\treq.Header.Add(\"X-Organization-Resource-Id\", \"SOME_STRING_VALUE\"\
+          )\n\treq.Header.Add(\"X-External-Identity\", \"SOME_STRING_VALUE\")\n\t\
+          req.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres,\
+          \ _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _\
+          \ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
@@ -249,6 +300,11 @@ paths:
 
           headers = {
               'content-type': "application/json",
+              'X-Principal': "SOME_STRING_VALUE",
+              'X-Principal-Resource-Id': "SOME_STRING_VALUE",
+              'X-Organization-Id': "SOME_STRING_VALUE",
+              'X-Organization-Resource-Id': "SOME_STRING_VALUE",
+              'X-External-Identity': "SOME_STRING_VALUE",
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
@@ -269,6 +325,11 @@ paths:
             "path": "/turbo/v1alpha1/graphql",
             "headers": {
               "content-type": "application/json",
+              "X-Principal": "SOME_STRING_VALUE",
+              "X-Principal-Resource-Id": "SOME_STRING_VALUE",
+              "X-Organization-Id": "SOME_STRING_VALUE",
+              "X-Organization-Resource-Id": "SOME_STRING_VALUE",
+              "X-External-Identity": "SOME_STRING_VALUE",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
           };
@@ -297,6 +358,11 @@ paths:
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "X-Principal: SOME_STRING_VALUE");
+          headers = curl_slist_append(headers, "X-Principal-Resource-Id: SOME_STRING_VALUE");
+          headers = curl_slist_append(headers, "X-Organization-Id: SOME_STRING_VALUE");
+          headers = curl_slist_append(headers, "X-Organization-Resource-Id: SOME_STRING_VALUE");
+          headers = curl_slist_append(headers, "X-External-Identity: SOME_STRING_VALUE");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
@@ -308,6 +374,11 @@ paths:
           var client = new RestClient("https://api.confluent.cloud/turbo/v1alpha1/graphql");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
+          request.AddHeader("X-Principal", "SOME_STRING_VALUE");
+          request.AddHeader("X-Principal-Resource-Id", "SOME_STRING_VALUE");
+          request.AddHeader("X-Organization-Id", "SOME_STRING_VALUE");
+          request.AddHeader("X-Organization-Resource-Id", "SOME_STRING_VALUE");
+          request.AddHeader("X-External-Identity", "SOME_STRING_VALUE");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"query\":\"string\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);

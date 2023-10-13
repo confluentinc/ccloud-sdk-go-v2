@@ -63,9 +63,34 @@ type GraphqlsTurboV1alpha1ApiService service
 type ApiQueryTurboV1alpha1GraphqlRequest struct {
 	ctx _context.Context
 	ApiService GraphqlsTurboV1alpha1Api
+	xPrincipal *string
+	xPrincipalResourceId *string
+	xOrganizationId *string
+	xOrganizationResourceId *string
+	xExternalIdentity *string
 	turboV1alpha1GraphqlRequest *TurboV1alpha1GraphqlRequest
 }
 
+func (r ApiQueryTurboV1alpha1GraphqlRequest) XPrincipal(xPrincipal string) ApiQueryTurboV1alpha1GraphqlRequest {
+	r.xPrincipal = &xPrincipal
+	return r
+}
+func (r ApiQueryTurboV1alpha1GraphqlRequest) XPrincipalResourceId(xPrincipalResourceId string) ApiQueryTurboV1alpha1GraphqlRequest {
+	r.xPrincipalResourceId = &xPrincipalResourceId
+	return r
+}
+func (r ApiQueryTurboV1alpha1GraphqlRequest) XOrganizationId(xOrganizationId string) ApiQueryTurboV1alpha1GraphqlRequest {
+	r.xOrganizationId = &xOrganizationId
+	return r
+}
+func (r ApiQueryTurboV1alpha1GraphqlRequest) XOrganizationResourceId(xOrganizationResourceId string) ApiQueryTurboV1alpha1GraphqlRequest {
+	r.xOrganizationResourceId = &xOrganizationResourceId
+	return r
+}
+func (r ApiQueryTurboV1alpha1GraphqlRequest) XExternalIdentity(xExternalIdentity string) ApiQueryTurboV1alpha1GraphqlRequest {
+	r.xExternalIdentity = &xExternalIdentity
+	return r
+}
 func (r ApiQueryTurboV1alpha1GraphqlRequest) TurboV1alpha1GraphqlRequest(turboV1alpha1GraphqlRequest TurboV1alpha1GraphqlRequest) ApiQueryTurboV1alpha1GraphqlRequest {
 	r.turboV1alpha1GraphqlRequest = &turboV1alpha1GraphqlRequest
 	return r
@@ -131,6 +156,21 @@ func (a *GraphqlsTurboV1alpha1ApiService) QueryTurboV1alpha1GraphqlExecute(r Api
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xPrincipal != nil {
+		localVarHeaderParams["X-Principal"] = parameterToString(*r.xPrincipal, "")
+	}
+	if r.xPrincipalResourceId != nil {
+		localVarHeaderParams["X-Principal-Resource-Id"] = parameterToString(*r.xPrincipalResourceId, "")
+	}
+	if r.xOrganizationId != nil {
+		localVarHeaderParams["X-Organization-Id"] = parameterToString(*r.xOrganizationId, "")
+	}
+	if r.xOrganizationResourceId != nil {
+		localVarHeaderParams["X-Organization-Resource-Id"] = parameterToString(*r.xOrganizationResourceId, "")
+	}
+	if r.xExternalIdentity != nil {
+		localVarHeaderParams["X-External-Identity"] = parameterToString(*r.xExternalIdentity, "")
 	}
 	// body params
 	localVarPostBody = r.turboV1alpha1GraphqlRequest
