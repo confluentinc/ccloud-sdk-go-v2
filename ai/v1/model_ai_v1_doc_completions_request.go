@@ -28,15 +28,14 @@ package v1
 import (
 	"bytes"
 	"encoding/json"
-	"time"
 )
 
 import (
 	"reflect"
 )
 
-// AiV1ChatCompletionsReply Reply from the Confluent AI assistant.
-type AiV1ChatCompletionsReply struct {
+// AiV1DocCompletionsRequest Request to the Docs AI assistant.
+type AiV1DocCompletionsRequest struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
@@ -44,30 +43,30 @@ type AiV1ChatCompletionsReply struct {
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
 	Id       *string     `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
-	Answer   *string     `json:"answer,omitempty"`
-	// The date and time at which this question was asked. It is represented in RFC3339 format and is in UTC.
-	AskedAt *time.Time `json:"asked_at,omitempty"`
+	Question *string     `json:"question,omitempty"`
+	// Question and answer pairs from previous interactions.
+	History *[]AiV1DocCompletionsHistory `json:"history,omitempty"`
 }
 
-// NewAiV1ChatCompletionsReply instantiates a new AiV1ChatCompletionsReply object
+// NewAiV1DocCompletionsRequest instantiates a new AiV1DocCompletionsRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAiV1ChatCompletionsReply() *AiV1ChatCompletionsReply {
-	this := AiV1ChatCompletionsReply{}
+func NewAiV1DocCompletionsRequest() *AiV1DocCompletionsRequest {
+	this := AiV1DocCompletionsRequest{}
 	return &this
 }
 
-// NewAiV1ChatCompletionsReplyWithDefaults instantiates a new AiV1ChatCompletionsReply object
+// NewAiV1DocCompletionsRequestWithDefaults instantiates a new AiV1DocCompletionsRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAiV1ChatCompletionsReplyWithDefaults() *AiV1ChatCompletionsReply {
-	this := AiV1ChatCompletionsReply{}
+func NewAiV1DocCompletionsRequestWithDefaults() *AiV1DocCompletionsRequest {
+	this := AiV1DocCompletionsRequest{}
 	return &this
 }
 
 // GetApiVersion returns the ApiVersion field value if set, zero value otherwise.
-func (o *AiV1ChatCompletionsReply) GetApiVersion() string {
+func (o *AiV1DocCompletionsRequest) GetApiVersion() string {
 	if o == nil || o.ApiVersion == nil {
 		var ret string
 		return ret
@@ -77,7 +76,7 @@ func (o *AiV1ChatCompletionsReply) GetApiVersion() string {
 
 // GetApiVersionOk returns a tuple with the ApiVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AiV1ChatCompletionsReply) GetApiVersionOk() (*string, bool) {
+func (o *AiV1DocCompletionsRequest) GetApiVersionOk() (*string, bool) {
 	if o == nil || o.ApiVersion == nil {
 		return nil, false
 	}
@@ -85,7 +84,7 @@ func (o *AiV1ChatCompletionsReply) GetApiVersionOk() (*string, bool) {
 }
 
 // HasApiVersion returns a boolean if a field has been set.
-func (o *AiV1ChatCompletionsReply) HasApiVersion() bool {
+func (o *AiV1DocCompletionsRequest) HasApiVersion() bool {
 	if o != nil && o.ApiVersion != nil {
 		return true
 	}
@@ -94,12 +93,12 @@ func (o *AiV1ChatCompletionsReply) HasApiVersion() bool {
 }
 
 // SetApiVersion gets a reference to the given string and assigns it to the ApiVersion field.
-func (o *AiV1ChatCompletionsReply) SetApiVersion(v string) {
+func (o *AiV1DocCompletionsRequest) SetApiVersion(v string) {
 	o.ApiVersion = &v
 }
 
 // GetKind returns the Kind field value if set, zero value otherwise.
-func (o *AiV1ChatCompletionsReply) GetKind() string {
+func (o *AiV1DocCompletionsRequest) GetKind() string {
 	if o == nil || o.Kind == nil {
 		var ret string
 		return ret
@@ -109,7 +108,7 @@ func (o *AiV1ChatCompletionsReply) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AiV1ChatCompletionsReply) GetKindOk() (*string, bool) {
+func (o *AiV1DocCompletionsRequest) GetKindOk() (*string, bool) {
 	if o == nil || o.Kind == nil {
 		return nil, false
 	}
@@ -117,7 +116,7 @@ func (o *AiV1ChatCompletionsReply) GetKindOk() (*string, bool) {
 }
 
 // HasKind returns a boolean if a field has been set.
-func (o *AiV1ChatCompletionsReply) HasKind() bool {
+func (o *AiV1DocCompletionsRequest) HasKind() bool {
 	if o != nil && o.Kind != nil {
 		return true
 	}
@@ -126,12 +125,12 @@ func (o *AiV1ChatCompletionsReply) HasKind() bool {
 }
 
 // SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *AiV1ChatCompletionsReply) SetKind(v string) {
+func (o *AiV1DocCompletionsRequest) SetKind(v string) {
 	o.Kind = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *AiV1ChatCompletionsReply) GetId() string {
+func (o *AiV1DocCompletionsRequest) GetId() string {
 	if o == nil || o.Id == nil {
 		var ret string
 		return ret
@@ -141,7 +140,7 @@ func (o *AiV1ChatCompletionsReply) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AiV1ChatCompletionsReply) GetIdOk() (*string, bool) {
+func (o *AiV1DocCompletionsRequest) GetIdOk() (*string, bool) {
 	if o == nil || o.Id == nil {
 		return nil, false
 	}
@@ -149,7 +148,7 @@ func (o *AiV1ChatCompletionsReply) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *AiV1ChatCompletionsReply) HasId() bool {
+func (o *AiV1DocCompletionsRequest) HasId() bool {
 	if o != nil && o.Id != nil {
 		return true
 	}
@@ -158,12 +157,12 @@ func (o *AiV1ChatCompletionsReply) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *AiV1ChatCompletionsReply) SetId(v string) {
+func (o *AiV1DocCompletionsRequest) SetId(v string) {
 	o.Id = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *AiV1ChatCompletionsReply) GetMetadata() ObjectMeta {
+func (o *AiV1DocCompletionsRequest) GetMetadata() ObjectMeta {
 	if o == nil || o.Metadata == nil {
 		var ret ObjectMeta
 		return ret
@@ -173,7 +172,7 @@ func (o *AiV1ChatCompletionsReply) GetMetadata() ObjectMeta {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AiV1ChatCompletionsReply) GetMetadataOk() (*ObjectMeta, bool) {
+func (o *AiV1DocCompletionsRequest) GetMetadataOk() (*ObjectMeta, bool) {
 	if o == nil || o.Metadata == nil {
 		return nil, false
 	}
@@ -181,7 +180,7 @@ func (o *AiV1ChatCompletionsReply) GetMetadataOk() (*ObjectMeta, bool) {
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *AiV1ChatCompletionsReply) HasMetadata() bool {
+func (o *AiV1DocCompletionsRequest) HasMetadata() bool {
 	if o != nil && o.Metadata != nil {
 		return true
 	}
@@ -190,85 +189,85 @@ func (o *AiV1ChatCompletionsReply) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given ObjectMeta and assigns it to the Metadata field.
-func (o *AiV1ChatCompletionsReply) SetMetadata(v ObjectMeta) {
+func (o *AiV1DocCompletionsRequest) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
-// GetAnswer returns the Answer field value if set, zero value otherwise.
-func (o *AiV1ChatCompletionsReply) GetAnswer() string {
-	if o == nil || o.Answer == nil {
+// GetQuestion returns the Question field value if set, zero value otherwise.
+func (o *AiV1DocCompletionsRequest) GetQuestion() string {
+	if o == nil || o.Question == nil {
 		var ret string
 		return ret
 	}
-	return *o.Answer
+	return *o.Question
 }
 
-// GetAnswerOk returns a tuple with the Answer field value if set, nil otherwise
+// GetQuestionOk returns a tuple with the Question field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AiV1ChatCompletionsReply) GetAnswerOk() (*string, bool) {
-	if o == nil || o.Answer == nil {
+func (o *AiV1DocCompletionsRequest) GetQuestionOk() (*string, bool) {
+	if o == nil || o.Question == nil {
 		return nil, false
 	}
-	return o.Answer, true
+	return o.Question, true
 }
 
-// HasAnswer returns a boolean if a field has been set.
-func (o *AiV1ChatCompletionsReply) HasAnswer() bool {
-	if o != nil && o.Answer != nil {
+// HasQuestion returns a boolean if a field has been set.
+func (o *AiV1DocCompletionsRequest) HasQuestion() bool {
+	if o != nil && o.Question != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetAnswer gets a reference to the given string and assigns it to the Answer field.
-func (o *AiV1ChatCompletionsReply) SetAnswer(v string) {
-	o.Answer = &v
+// SetQuestion gets a reference to the given string and assigns it to the Question field.
+func (o *AiV1DocCompletionsRequest) SetQuestion(v string) {
+	o.Question = &v
 }
 
-// GetAskedAt returns the AskedAt field value if set, zero value otherwise.
-func (o *AiV1ChatCompletionsReply) GetAskedAt() time.Time {
-	if o == nil || o.AskedAt == nil {
-		var ret time.Time
+// GetHistory returns the History field value if set, zero value otherwise.
+func (o *AiV1DocCompletionsRequest) GetHistory() []AiV1DocCompletionsHistory {
+	if o == nil || o.History == nil {
+		var ret []AiV1DocCompletionsHistory
 		return ret
 	}
-	return *o.AskedAt
+	return *o.History
 }
 
-// GetAskedAtOk returns a tuple with the AskedAt field value if set, nil otherwise
+// GetHistoryOk returns a tuple with the History field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AiV1ChatCompletionsReply) GetAskedAtOk() (*time.Time, bool) {
-	if o == nil || o.AskedAt == nil {
+func (o *AiV1DocCompletionsRequest) GetHistoryOk() (*[]AiV1DocCompletionsHistory, bool) {
+	if o == nil || o.History == nil {
 		return nil, false
 	}
-	return o.AskedAt, true
+	return o.History, true
 }
 
-// HasAskedAt returns a boolean if a field has been set.
-func (o *AiV1ChatCompletionsReply) HasAskedAt() bool {
-	if o != nil && o.AskedAt != nil {
+// HasHistory returns a boolean if a field has been set.
+func (o *AiV1DocCompletionsRequest) HasHistory() bool {
+	if o != nil && o.History != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetAskedAt gets a reference to the given time.Time and assigns it to the AskedAt field.
-func (o *AiV1ChatCompletionsReply) SetAskedAt(v time.Time) {
-	o.AskedAt = &v
+// SetHistory gets a reference to the given []AiV1DocCompletionsHistory and assigns it to the History field.
+func (o *AiV1DocCompletionsRequest) SetHistory(v []AiV1DocCompletionsHistory) {
+	o.History = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *AiV1ChatCompletionsReply) Redact() {
+func (o *AiV1DocCompletionsRequest) Redact() {
 	o.recurseRedact(o.ApiVersion)
 	o.recurseRedact(o.Kind)
 	o.recurseRedact(o.Id)
 	o.recurseRedact(o.Metadata)
-	o.recurseRedact(o.Answer)
-	o.recurseRedact(o.AskedAt)
+	o.recurseRedact(o.Question)
+	o.recurseRedact(o.History)
 }
 
-func (o *AiV1ChatCompletionsReply) recurseRedact(v interface{}) {
+func (o *AiV1DocCompletionsRequest) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -293,12 +292,12 @@ func (o *AiV1ChatCompletionsReply) recurseRedact(v interface{}) {
 	}
 }
 
-func (o AiV1ChatCompletionsReply) zeroField(v interface{}) {
+func (o AiV1DocCompletionsRequest) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o AiV1ChatCompletionsReply) MarshalJSON() ([]byte, error) {
+func (o AiV1DocCompletionsRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ApiVersion != nil {
 		toSerialize["api_version"] = o.ApiVersion
@@ -312,11 +311,11 @@ func (o AiV1ChatCompletionsReply) MarshalJSON() ([]byte, error) {
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if o.Answer != nil {
-		toSerialize["answer"] = o.Answer
+	if o.Question != nil {
+		toSerialize["question"] = o.Question
 	}
-	if o.AskedAt != nil {
-		toSerialize["asked_at"] = o.AskedAt
+	if o.History != nil {
+		toSerialize["history"] = o.History
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
@@ -325,34 +324,34 @@ func (o AiV1ChatCompletionsReply) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableAiV1ChatCompletionsReply struct {
-	value *AiV1ChatCompletionsReply
+type NullableAiV1DocCompletionsRequest struct {
+	value *AiV1DocCompletionsRequest
 	isSet bool
 }
 
-func (v NullableAiV1ChatCompletionsReply) Get() *AiV1ChatCompletionsReply {
+func (v NullableAiV1DocCompletionsRequest) Get() *AiV1DocCompletionsRequest {
 	return v.value
 }
 
-func (v *NullableAiV1ChatCompletionsReply) Set(val *AiV1ChatCompletionsReply) {
+func (v *NullableAiV1DocCompletionsRequest) Set(val *AiV1DocCompletionsRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAiV1ChatCompletionsReply) IsSet() bool {
+func (v NullableAiV1DocCompletionsRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAiV1ChatCompletionsReply) Unset() {
+func (v *NullableAiV1DocCompletionsRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAiV1ChatCompletionsReply(val *AiV1ChatCompletionsReply) *NullableAiV1ChatCompletionsReply {
-	return &NullableAiV1ChatCompletionsReply{value: val, isSet: true}
+func NewNullableAiV1DocCompletionsRequest(val *AiV1DocCompletionsRequest) *NullableAiV1DocCompletionsRequest {
+	return &NullableAiV1DocCompletionsRequest{value: val, isSet: true}
 }
 
-func (v NullableAiV1ChatCompletionsReply) MarshalJSON() ([]byte, error) {
+func (v NullableAiV1DocCompletionsRequest) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -360,7 +359,7 @@ func (v NullableAiV1ChatCompletionsReply) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableAiV1ChatCompletionsReply) UnmarshalJSON(src []byte) error {
+func (v *NullableAiV1DocCompletionsRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

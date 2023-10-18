@@ -38,78 +38,78 @@ var (
 	_ _context.Context
 )
 
-type ChatCompletionsAiV1Api interface {
+type DocCompletionsAiV1Api interface {
 
 	/*
-		QueryAiV1ChatCompletion Query a Chat Completion
+		QueryAiV1DocCompletion Query a Doc Completion
 
 		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Query the Confluent AI assistant, optionally with prior conversation history.
+	Query the Docs AI assistant, optionally with prior conversation history.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiQueryAiV1ChatCompletionRequest
+		 @return ApiQueryAiV1DocCompletionRequest
 	*/
-	QueryAiV1ChatCompletion(ctx _context.Context) ApiQueryAiV1ChatCompletionRequest
+	QueryAiV1DocCompletion(ctx _context.Context) ApiQueryAiV1DocCompletionRequest
 
-	// QueryAiV1ChatCompletionExecute executes the request
-	//  @return AiV1ChatCompletionsReply
-	QueryAiV1ChatCompletionExecute(r ApiQueryAiV1ChatCompletionRequest) (AiV1ChatCompletionsReply, *_nethttp.Response, error)
+	// QueryAiV1DocCompletionExecute executes the request
+	//  @return AiV1DocCompletionsReply
+	QueryAiV1DocCompletionExecute(r ApiQueryAiV1DocCompletionRequest) (AiV1DocCompletionsReply, *_nethttp.Response, error)
 }
 
-// ChatCompletionsAiV1ApiService ChatCompletionsAiV1Api service
-type ChatCompletionsAiV1ApiService service
+// DocCompletionsAiV1ApiService DocCompletionsAiV1Api service
+type DocCompletionsAiV1ApiService service
 
-type ApiQueryAiV1ChatCompletionRequest struct {
-	ctx                        _context.Context
-	ApiService                 ChatCompletionsAiV1Api
-	aiV1ChatCompletionsRequest *AiV1ChatCompletionsRequest
+type ApiQueryAiV1DocCompletionRequest struct {
+	ctx                       _context.Context
+	ApiService                DocCompletionsAiV1Api
+	aiV1DocCompletionsRequest *AiV1DocCompletionsRequest
 }
 
-func (r ApiQueryAiV1ChatCompletionRequest) AiV1ChatCompletionsRequest(aiV1ChatCompletionsRequest AiV1ChatCompletionsRequest) ApiQueryAiV1ChatCompletionRequest {
-	r.aiV1ChatCompletionsRequest = &aiV1ChatCompletionsRequest
+func (r ApiQueryAiV1DocCompletionRequest) AiV1DocCompletionsRequest(aiV1DocCompletionsRequest AiV1DocCompletionsRequest) ApiQueryAiV1DocCompletionRequest {
+	r.aiV1DocCompletionsRequest = &aiV1DocCompletionsRequest
 	return r
 }
 
-func (r ApiQueryAiV1ChatCompletionRequest) Execute() (AiV1ChatCompletionsReply, *_nethttp.Response, error) {
-	return r.ApiService.QueryAiV1ChatCompletionExecute(r)
+func (r ApiQueryAiV1DocCompletionRequest) Execute() (AiV1DocCompletionsReply, *_nethttp.Response, error) {
+	return r.ApiService.QueryAiV1DocCompletionExecute(r)
 }
 
 /*
-QueryAiV1ChatCompletion Query a Chat Completion
+QueryAiV1DocCompletion Query a Doc Completion
 
 [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Query the Confluent AI assistant, optionally with prior conversation history.
+Query the Docs AI assistant, optionally with prior conversation history.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiQueryAiV1ChatCompletionRequest
+ @return ApiQueryAiV1DocCompletionRequest
 */
-func (a *ChatCompletionsAiV1ApiService) QueryAiV1ChatCompletion(ctx _context.Context) ApiQueryAiV1ChatCompletionRequest {
-	return ApiQueryAiV1ChatCompletionRequest{
+func (a *DocCompletionsAiV1ApiService) QueryAiV1DocCompletion(ctx _context.Context) ApiQueryAiV1DocCompletionRequest {
+	return ApiQueryAiV1DocCompletionRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AiV1ChatCompletionsReply
-func (a *ChatCompletionsAiV1ApiService) QueryAiV1ChatCompletionExecute(r ApiQueryAiV1ChatCompletionRequest) (AiV1ChatCompletionsReply, *_nethttp.Response, error) {
+//  @return AiV1DocCompletionsReply
+func (a *DocCompletionsAiV1ApiService) QueryAiV1DocCompletionExecute(r ApiQueryAiV1DocCompletionRequest) (AiV1DocCompletionsReply, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  AiV1ChatCompletionsReply
+		localVarReturnValue  AiV1DocCompletionsReply
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChatCompletionsAiV1ApiService.QueryAiV1ChatCompletion")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DocCompletionsAiV1ApiService.QueryAiV1DocCompletion")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/ai/v1/chat-completions"
+	localVarPath := localBasePath + "/ai/v1/doc-completions"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -133,7 +133,7 @@ func (a *ChatCompletionsAiV1ApiService) QueryAiV1ChatCompletionExecute(r ApiQuer
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.aiV1ChatCompletionsRequest
+	localVarPostBody = r.aiV1DocCompletionsRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

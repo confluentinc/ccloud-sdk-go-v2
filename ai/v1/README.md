@@ -80,6 +80,7 @@ All URIs are relative to *https://api.confluent.cloud*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ChatCompletionsAiV1Api* | [**QueryAiV1ChatCompletion**](docs/ChatCompletionsAiV1Api.md#queryaiv1chatcompletion) | **Post** /ai/v1/chat-completions | Query a Chat Completion
+*DocCompletionsAiV1Api* | [**QueryAiV1DocCompletion**](docs/DocCompletionsAiV1Api.md#queryaiv1doccompletion) | **Post** /ai/v1/doc-completions | Query a Doc Completion
 
 
 ## Documentation For Models
@@ -87,6 +88,9 @@ Class | Method | HTTP request | Description
  - [AiV1ChatCompletionsHistory](docs/AiV1ChatCompletionsHistory.md)
  - [AiV1ChatCompletionsReply](docs/AiV1ChatCompletionsReply.md)
  - [AiV1ChatCompletionsRequest](docs/AiV1ChatCompletionsRequest.md)
+ - [AiV1DocCompletionsHistory](docs/AiV1DocCompletionsHistory.md)
+ - [AiV1DocCompletionsReply](docs/AiV1DocCompletionsReply.md)
+ - [AiV1DocCompletionsRequest](docs/AiV1DocCompletionsRequest.md)
  - [Error](docs/Error.md)
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)

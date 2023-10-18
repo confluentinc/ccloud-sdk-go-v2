@@ -35,9 +35,9 @@ import (
 	"reflect"
 )
 
-// AiV1ChatCompletionsHistory A question and answer pair from a previous interaction.
-type AiV1ChatCompletionsHistory struct {
-	// Question for the Confluent AI assistant.
+// AiV1DocCompletionsHistory A question and answer pair from a previous interaction.
+type AiV1DocCompletionsHistory struct {
+	// Question for the Docs AI assistant.
 	Question *string `json:"question,omitempty"`
 	// Markdown-formatted answer from the Confluent AI assistant.
 	Answer *string `json:"answer,omitempty"`
@@ -45,25 +45,25 @@ type AiV1ChatCompletionsHistory struct {
 	AskedAt *time.Time `json:"asked_at,omitempty"`
 }
 
-// NewAiV1ChatCompletionsHistory instantiates a new AiV1ChatCompletionsHistory object
+// NewAiV1DocCompletionsHistory instantiates a new AiV1DocCompletionsHistory object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAiV1ChatCompletionsHistory() *AiV1ChatCompletionsHistory {
-	this := AiV1ChatCompletionsHistory{}
+func NewAiV1DocCompletionsHistory() *AiV1DocCompletionsHistory {
+	this := AiV1DocCompletionsHistory{}
 	return &this
 }
 
-// NewAiV1ChatCompletionsHistoryWithDefaults instantiates a new AiV1ChatCompletionsHistory object
+// NewAiV1DocCompletionsHistoryWithDefaults instantiates a new AiV1DocCompletionsHistory object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAiV1ChatCompletionsHistoryWithDefaults() *AiV1ChatCompletionsHistory {
-	this := AiV1ChatCompletionsHistory{}
+func NewAiV1DocCompletionsHistoryWithDefaults() *AiV1DocCompletionsHistory {
+	this := AiV1DocCompletionsHistory{}
 	return &this
 }
 
 // GetQuestion returns the Question field value if set, zero value otherwise.
-func (o *AiV1ChatCompletionsHistory) GetQuestion() string {
+func (o *AiV1DocCompletionsHistory) GetQuestion() string {
 	if o == nil || o.Question == nil {
 		var ret string
 		return ret
@@ -73,7 +73,7 @@ func (o *AiV1ChatCompletionsHistory) GetQuestion() string {
 
 // GetQuestionOk returns a tuple with the Question field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AiV1ChatCompletionsHistory) GetQuestionOk() (*string, bool) {
+func (o *AiV1DocCompletionsHistory) GetQuestionOk() (*string, bool) {
 	if o == nil || o.Question == nil {
 		return nil, false
 	}
@@ -81,7 +81,7 @@ func (o *AiV1ChatCompletionsHistory) GetQuestionOk() (*string, bool) {
 }
 
 // HasQuestion returns a boolean if a field has been set.
-func (o *AiV1ChatCompletionsHistory) HasQuestion() bool {
+func (o *AiV1DocCompletionsHistory) HasQuestion() bool {
 	if o != nil && o.Question != nil {
 		return true
 	}
@@ -90,12 +90,12 @@ func (o *AiV1ChatCompletionsHistory) HasQuestion() bool {
 }
 
 // SetQuestion gets a reference to the given string and assigns it to the Question field.
-func (o *AiV1ChatCompletionsHistory) SetQuestion(v string) {
+func (o *AiV1DocCompletionsHistory) SetQuestion(v string) {
 	o.Question = &v
 }
 
 // GetAnswer returns the Answer field value if set, zero value otherwise.
-func (o *AiV1ChatCompletionsHistory) GetAnswer() string {
+func (o *AiV1DocCompletionsHistory) GetAnswer() string {
 	if o == nil || o.Answer == nil {
 		var ret string
 		return ret
@@ -105,7 +105,7 @@ func (o *AiV1ChatCompletionsHistory) GetAnswer() string {
 
 // GetAnswerOk returns a tuple with the Answer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AiV1ChatCompletionsHistory) GetAnswerOk() (*string, bool) {
+func (o *AiV1DocCompletionsHistory) GetAnswerOk() (*string, bool) {
 	if o == nil || o.Answer == nil {
 		return nil, false
 	}
@@ -113,7 +113,7 @@ func (o *AiV1ChatCompletionsHistory) GetAnswerOk() (*string, bool) {
 }
 
 // HasAnswer returns a boolean if a field has been set.
-func (o *AiV1ChatCompletionsHistory) HasAnswer() bool {
+func (o *AiV1DocCompletionsHistory) HasAnswer() bool {
 	if o != nil && o.Answer != nil {
 		return true
 	}
@@ -122,12 +122,12 @@ func (o *AiV1ChatCompletionsHistory) HasAnswer() bool {
 }
 
 // SetAnswer gets a reference to the given string and assigns it to the Answer field.
-func (o *AiV1ChatCompletionsHistory) SetAnswer(v string) {
+func (o *AiV1DocCompletionsHistory) SetAnswer(v string) {
 	o.Answer = &v
 }
 
 // GetAskedAt returns the AskedAt field value if set, zero value otherwise.
-func (o *AiV1ChatCompletionsHistory) GetAskedAt() time.Time {
+func (o *AiV1DocCompletionsHistory) GetAskedAt() time.Time {
 	if o == nil || o.AskedAt == nil {
 		var ret time.Time
 		return ret
@@ -137,7 +137,7 @@ func (o *AiV1ChatCompletionsHistory) GetAskedAt() time.Time {
 
 // GetAskedAtOk returns a tuple with the AskedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AiV1ChatCompletionsHistory) GetAskedAtOk() (*time.Time, bool) {
+func (o *AiV1DocCompletionsHistory) GetAskedAtOk() (*time.Time, bool) {
 	if o == nil || o.AskedAt == nil {
 		return nil, false
 	}
@@ -145,7 +145,7 @@ func (o *AiV1ChatCompletionsHistory) GetAskedAtOk() (*time.Time, bool) {
 }
 
 // HasAskedAt returns a boolean if a field has been set.
-func (o *AiV1ChatCompletionsHistory) HasAskedAt() bool {
+func (o *AiV1DocCompletionsHistory) HasAskedAt() bool {
 	if o != nil && o.AskedAt != nil {
 		return true
 	}
@@ -154,18 +154,18 @@ func (o *AiV1ChatCompletionsHistory) HasAskedAt() bool {
 }
 
 // SetAskedAt gets a reference to the given time.Time and assigns it to the AskedAt field.
-func (o *AiV1ChatCompletionsHistory) SetAskedAt(v time.Time) {
+func (o *AiV1DocCompletionsHistory) SetAskedAt(v time.Time) {
 	o.AskedAt = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *AiV1ChatCompletionsHistory) Redact() {
+func (o *AiV1DocCompletionsHistory) Redact() {
 	o.recurseRedact(o.Question)
 	o.recurseRedact(o.Answer)
 	o.recurseRedact(o.AskedAt)
 }
 
-func (o *AiV1ChatCompletionsHistory) recurseRedact(v interface{}) {
+func (o *AiV1DocCompletionsHistory) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -190,12 +190,12 @@ func (o *AiV1ChatCompletionsHistory) recurseRedact(v interface{}) {
 	}
 }
 
-func (o AiV1ChatCompletionsHistory) zeroField(v interface{}) {
+func (o AiV1DocCompletionsHistory) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o AiV1ChatCompletionsHistory) MarshalJSON() ([]byte, error) {
+func (o AiV1DocCompletionsHistory) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Question != nil {
 		toSerialize["question"] = o.Question
@@ -213,34 +213,34 @@ func (o AiV1ChatCompletionsHistory) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableAiV1ChatCompletionsHistory struct {
-	value *AiV1ChatCompletionsHistory
+type NullableAiV1DocCompletionsHistory struct {
+	value *AiV1DocCompletionsHistory
 	isSet bool
 }
 
-func (v NullableAiV1ChatCompletionsHistory) Get() *AiV1ChatCompletionsHistory {
+func (v NullableAiV1DocCompletionsHistory) Get() *AiV1DocCompletionsHistory {
 	return v.value
 }
 
-func (v *NullableAiV1ChatCompletionsHistory) Set(val *AiV1ChatCompletionsHistory) {
+func (v *NullableAiV1DocCompletionsHistory) Set(val *AiV1DocCompletionsHistory) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAiV1ChatCompletionsHistory) IsSet() bool {
+func (v NullableAiV1DocCompletionsHistory) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAiV1ChatCompletionsHistory) Unset() {
+func (v *NullableAiV1DocCompletionsHistory) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAiV1ChatCompletionsHistory(val *AiV1ChatCompletionsHistory) *NullableAiV1ChatCompletionsHistory {
-	return &NullableAiV1ChatCompletionsHistory{value: val, isSet: true}
+func NewNullableAiV1DocCompletionsHistory(val *AiV1DocCompletionsHistory) *NullableAiV1DocCompletionsHistory {
+	return &NullableAiV1DocCompletionsHistory{value: val, isSet: true}
 }
 
-func (v NullableAiV1ChatCompletionsHistory) MarshalJSON() ([]byte, error) {
+func (v NullableAiV1DocCompletionsHistory) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -248,7 +248,7 @@ func (v NullableAiV1ChatCompletionsHistory) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableAiV1ChatCompletionsHistory) UnmarshalJSON(src []byte) error {
+func (v *NullableAiV1DocCompletionsHistory) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

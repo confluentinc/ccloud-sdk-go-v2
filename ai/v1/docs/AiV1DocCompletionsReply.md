@@ -1,4 +1,4 @@
-# AiV1ChatCompletionsReply
+# AiV1DocCompletionsReply
 
 ## Properties
 
@@ -13,170 +13,170 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewAiV1ChatCompletionsReply
+### NewAiV1DocCompletionsReply
 
-`func NewAiV1ChatCompletionsReply() *AiV1ChatCompletionsReply`
+`func NewAiV1DocCompletionsReply() *AiV1DocCompletionsReply`
 
-NewAiV1ChatCompletionsReply instantiates a new AiV1ChatCompletionsReply object
+NewAiV1DocCompletionsReply instantiates a new AiV1DocCompletionsReply object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewAiV1ChatCompletionsReplyWithDefaults
+### NewAiV1DocCompletionsReplyWithDefaults
 
-`func NewAiV1ChatCompletionsReplyWithDefaults() *AiV1ChatCompletionsReply`
+`func NewAiV1DocCompletionsReplyWithDefaults() *AiV1DocCompletionsReply`
 
-NewAiV1ChatCompletionsReplyWithDefaults instantiates a new AiV1ChatCompletionsReply object
+NewAiV1DocCompletionsReplyWithDefaults instantiates a new AiV1DocCompletionsReply object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetApiVersion
 
-`func (o *AiV1ChatCompletionsReply) GetApiVersion() string`
+`func (o *AiV1DocCompletionsReply) GetApiVersion() string`
 
 GetApiVersion returns the ApiVersion field if non-nil, zero value otherwise.
 
 ### GetApiVersionOk
 
-`func (o *AiV1ChatCompletionsReply) GetApiVersionOk() (*string, bool)`
+`func (o *AiV1DocCompletionsReply) GetApiVersionOk() (*string, bool)`
 
 GetApiVersionOk returns a tuple with the ApiVersion field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetApiVersion
 
-`func (o *AiV1ChatCompletionsReply) SetApiVersion(v string)`
+`func (o *AiV1DocCompletionsReply) SetApiVersion(v string)`
 
 SetApiVersion sets ApiVersion field to given value.
 
 ### HasApiVersion
 
-`func (o *AiV1ChatCompletionsReply) HasApiVersion() bool`
+`func (o *AiV1DocCompletionsReply) HasApiVersion() bool`
 
 HasApiVersion returns a boolean if a field has been set.
 
 ### GetKind
 
-`func (o *AiV1ChatCompletionsReply) GetKind() string`
+`func (o *AiV1DocCompletionsReply) GetKind() string`
 
 GetKind returns the Kind field if non-nil, zero value otherwise.
 
 ### GetKindOk
 
-`func (o *AiV1ChatCompletionsReply) GetKindOk() (*string, bool)`
+`func (o *AiV1DocCompletionsReply) GetKindOk() (*string, bool)`
 
 GetKindOk returns a tuple with the Kind field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetKind
 
-`func (o *AiV1ChatCompletionsReply) SetKind(v string)`
+`func (o *AiV1DocCompletionsReply) SetKind(v string)`
 
 SetKind sets Kind field to given value.
 
 ### HasKind
 
-`func (o *AiV1ChatCompletionsReply) HasKind() bool`
+`func (o *AiV1DocCompletionsReply) HasKind() bool`
 
 HasKind returns a boolean if a field has been set.
 
 ### GetId
 
-`func (o *AiV1ChatCompletionsReply) GetId() string`
+`func (o *AiV1DocCompletionsReply) GetId() string`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *AiV1ChatCompletionsReply) GetIdOk() (*string, bool)`
+`func (o *AiV1DocCompletionsReply) GetIdOk() (*string, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *AiV1ChatCompletionsReply) SetId(v string)`
+`func (o *AiV1DocCompletionsReply) SetId(v string)`
 
 SetId sets Id field to given value.
 
 ### HasId
 
-`func (o *AiV1ChatCompletionsReply) HasId() bool`
+`func (o *AiV1DocCompletionsReply) HasId() bool`
 
 HasId returns a boolean if a field has been set.
 
 ### GetMetadata
 
-`func (o *AiV1ChatCompletionsReply) GetMetadata() ObjectMeta`
+`func (o *AiV1DocCompletionsReply) GetMetadata() ObjectMeta`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *AiV1ChatCompletionsReply) GetMetadataOk() (*ObjectMeta, bool)`
+`func (o *AiV1DocCompletionsReply) GetMetadataOk() (*ObjectMeta, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *AiV1ChatCompletionsReply) SetMetadata(v ObjectMeta)`
+`func (o *AiV1DocCompletionsReply) SetMetadata(v ObjectMeta)`
 
 SetMetadata sets Metadata field to given value.
 
 ### HasMetadata
 
-`func (o *AiV1ChatCompletionsReply) HasMetadata() bool`
+`func (o *AiV1DocCompletionsReply) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
 
 ### GetAnswer
 
-`func (o *AiV1ChatCompletionsReply) GetAnswer() string`
+`func (o *AiV1DocCompletionsReply) GetAnswer() string`
 
 GetAnswer returns the Answer field if non-nil, zero value otherwise.
 
 ### GetAnswerOk
 
-`func (o *AiV1ChatCompletionsReply) GetAnswerOk() (*string, bool)`
+`func (o *AiV1DocCompletionsReply) GetAnswerOk() (*string, bool)`
 
 GetAnswerOk returns a tuple with the Answer field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAnswer
 
-`func (o *AiV1ChatCompletionsReply) SetAnswer(v string)`
+`func (o *AiV1DocCompletionsReply) SetAnswer(v string)`
 
 SetAnswer sets Answer field to given value.
 
 ### HasAnswer
 
-`func (o *AiV1ChatCompletionsReply) HasAnswer() bool`
+`func (o *AiV1DocCompletionsReply) HasAnswer() bool`
 
 HasAnswer returns a boolean if a field has been set.
 
 ### GetAskedAt
 
-`func (o *AiV1ChatCompletionsReply) GetAskedAt() time.Time`
+`func (o *AiV1DocCompletionsReply) GetAskedAt() time.Time`
 
 GetAskedAt returns the AskedAt field if non-nil, zero value otherwise.
 
 ### GetAskedAtOk
 
-`func (o *AiV1ChatCompletionsReply) GetAskedAtOk() (*time.Time, bool)`
+`func (o *AiV1DocCompletionsReply) GetAskedAtOk() (*time.Time, bool)`
 
 GetAskedAtOk returns a tuple with the AskedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAskedAt
 
-`func (o *AiV1ChatCompletionsReply) SetAskedAt(v time.Time)`
+`func (o *AiV1DocCompletionsReply) SetAskedAt(v time.Time)`
 
 SetAskedAt sets AskedAt field to given value.
 
 ### HasAskedAt
 
-`func (o *AiV1ChatCompletionsReply) HasAskedAt() bool`
+`func (o *AiV1DocCompletionsReply) HasAskedAt() bool`
 
 HasAskedAt returns a boolean if a field has been set.
 
