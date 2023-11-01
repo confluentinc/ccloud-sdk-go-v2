@@ -80,7 +80,7 @@ All URIs are relative to *https://flink.region.provider.confluent.cloud*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *StatementExceptionsSqlV1beta1Api* | [**GetSqlv1beta1StatementExceptions**](docs/StatementExceptionsSqlV1beta1Api.md#getsqlv1beta1statementexceptions) | **Get** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}/exceptions | List of Statement Exceptions
-*StatementResultSqlV1beta1Api* | [**GetSqlv1beta1StatementResult**](docs/StatementResultSqlV1beta1Api.md#getsqlv1beta1statementresult) | **Get** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results | Read Statement Result
+*StatementResultsSqlV1beta1Api* | [**GetSqlv1beta1StatementResult**](docs/StatementResultsSqlV1beta1Api.md#getsqlv1beta1statementresult) | **Get** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results | Read Statement Result
 *StatementsSqlV1beta1Api* | [**CreateSqlv1beta1Statement**](docs/StatementsSqlV1beta1Api.md#createsqlv1beta1statement) | **Post** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements | Create a Statement
 *StatementsSqlV1beta1Api* | [**DeleteSqlv1beta1Statement**](docs/StatementsSqlV1beta1Api.md#deletesqlv1beta1statement) | **Delete** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Delete a Statement
 *StatementsSqlV1beta1Api* | [**GetSqlv1beta1Statement**](docs/StatementsSqlV1beta1Api.md#getsqlv1beta1statement) | **Get** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Read a Statement

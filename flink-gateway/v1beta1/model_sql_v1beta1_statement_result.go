@@ -39,9 +39,9 @@ type SqlV1beta1StatementResult struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
-	Kind string `json:"kind,omitempty"`
-	Metadata ResultListMeta `json:"metadata,omitempty"`
-	Results *SqlV1beta1StatementResultResults `json:"results,omitempty"`
+	Kind     string                            `json:"kind,omitempty"`
+	Metadata ResultListMeta                    `json:"metadata,omitempty"`
+	Results  *SqlV1beta1StatementResultResults `json:"results,omitempty"`
 }
 
 // NewSqlV1beta1StatementResult instantiates a new SqlV1beta1StatementResult object
@@ -77,7 +77,7 @@ func (o *SqlV1beta1StatementResult) GetApiVersion() string {
 // GetApiVersionOk returns a tuple with the ApiVersion field value
 // and a boolean to check if the value has been set.
 func (o *SqlV1beta1StatementResult) GetApiVersionOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ApiVersion, true
@@ -101,7 +101,7 @@ func (o *SqlV1beta1StatementResult) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *SqlV1beta1StatementResult) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -125,7 +125,7 @@ func (o *SqlV1beta1StatementResult) GetMetadata() ResultListMeta {
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *SqlV1beta1StatementResult) GetMetadataOk() (*ResultListMeta, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Metadata, true
@@ -170,40 +170,40 @@ func (o *SqlV1beta1StatementResult) SetResults(v SqlV1beta1StatementResultResult
 
 // Redact resets all sensitive fields to their zero value.
 func (o *SqlV1beta1StatementResult) Redact() {
-    o.recurseRedact(&o.ApiVersion)
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Metadata)
-    o.recurseRedact(o.Results)
+	o.recurseRedact(&o.ApiVersion)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Metadata)
+	o.recurseRedact(o.Results)
 }
 
 func (o *SqlV1beta1StatementResult) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o SqlV1beta1StatementResult) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o SqlV1beta1StatementResult) MarshalJSON() ([]byte, error) {
@@ -266,5 +266,3 @@ func (v *NullableSqlV1beta1StatementResult) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

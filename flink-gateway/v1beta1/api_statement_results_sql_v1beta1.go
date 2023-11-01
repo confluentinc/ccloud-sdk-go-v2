@@ -39,20 +39,19 @@ var (
 	_ _context.Context
 )
 
-type StatementResultSqlV1beta1Api interface {
+type StatementResultsSqlV1beta1Api interface {
 
 	/*
-	GetSqlv1beta1StatementResult Read Statement Result
+		GetSqlv1beta1StatementResult Read Statement Result
 
-	[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20kk%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+	Read Statement Result.
 
-Read Statement Result.
-
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param organizationId The unique identifier for the organization.
-	 @param environmentId The unique identifier for the environment.
-	 @param name The unique identifier for the statement.
-	 @return ApiGetSqlv1beta1StatementResultRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param organizationId The unique identifier for the organization.
+		 @param environmentId The unique identifier for the environment.
+		 @param name The unique identifier for the statement.
+		 @return ApiGetSqlv1beta1StatementResultRequest
 	*/
 	GetSqlv1beta1StatementResult(ctx _context.Context, organizationId string, environmentId string, name string) ApiGetSqlv1beta1StatementResultRequest
 
@@ -61,16 +60,16 @@ Read Statement Result.
 	GetSqlv1beta1StatementResultExecute(r ApiGetSqlv1beta1StatementResultRequest) (SqlV1beta1StatementResult, *_nethttp.Response, error)
 }
 
-// StatementResultSqlV1beta1ApiService StatementResultSqlV1beta1Api service
-type StatementResultSqlV1beta1ApiService service
+// StatementResultsSqlV1beta1ApiService StatementResultsSqlV1beta1Api service
+type StatementResultsSqlV1beta1ApiService service
 
 type ApiGetSqlv1beta1StatementResultRequest struct {
-	ctx _context.Context
-	ApiService StatementResultSqlV1beta1Api
+	ctx            _context.Context
+	ApiService     StatementResultsSqlV1beta1Api
 	organizationId string
-	environmentId string
-	name string
-	pageToken *string
+	environmentId  string
+	name           string
+	pageToken      *string
 }
 
 // It contains the field offset in the CollectSinkFunction protocol. On the first request, it should be unset. The offset is assumed to start at 0.
@@ -86,29 +85,29 @@ func (r ApiGetSqlv1beta1StatementResultRequest) Execute() (SqlV1beta1StatementRe
 /*
 GetSqlv1beta1StatementResult Read Statement Result
 
-[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20kk%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-
+[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 Read Statement Result.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organizationId The unique identifier for the organization.
- @param environmentId The unique identifier for the environment.
- @param name The unique identifier for the statement.
- @return ApiGetSqlv1beta1StatementResultRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique identifier for the organization.
+	@param environmentId The unique identifier for the environment.
+	@param name The unique identifier for the statement.
+	@return ApiGetSqlv1beta1StatementResultRequest
 */
-func (a *StatementResultSqlV1beta1ApiService) GetSqlv1beta1StatementResult(ctx _context.Context, organizationId string, environmentId string, name string) ApiGetSqlv1beta1StatementResultRequest {
+func (a *StatementResultsSqlV1beta1ApiService) GetSqlv1beta1StatementResult(ctx _context.Context, organizationId string, environmentId string, name string) ApiGetSqlv1beta1StatementResultRequest {
 	return ApiGetSqlv1beta1StatementResultRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:     a,
+		ctx:            ctx,
 		organizationId: organizationId,
-		environmentId: environmentId,
-		name: name,
+		environmentId:  environmentId,
+		name:           name,
 	}
 }
 
 // Execute executes the request
-//  @return SqlV1beta1StatementResult
-func (a *StatementResultSqlV1beta1ApiService) GetSqlv1beta1StatementResultExecute(r ApiGetSqlv1beta1StatementResultRequest) (SqlV1beta1StatementResult, *_nethttp.Response, error) {
+//
+//	@return SqlV1beta1StatementResult
+func (a *StatementResultsSqlV1beta1ApiService) GetSqlv1beta1StatementResultExecute(r ApiGetSqlv1beta1StatementResultRequest) (SqlV1beta1StatementResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -118,7 +117,7 @@ func (a *StatementResultSqlV1beta1ApiService) GetSqlv1beta1StatementResultExecut
 		localVarReturnValue  SqlV1beta1StatementResult
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StatementResultSqlV1beta1ApiService.GetSqlv1beta1StatementResult")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StatementResultsSqlV1beta1ApiService.GetSqlv1beta1StatementResult")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}

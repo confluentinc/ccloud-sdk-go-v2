@@ -15,7 +15,8 @@ servers:
   url: https://flink.region.provider.confluent.cloud
 tags:
 - description: |-
-    [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
     `Statement` represents a core resource used to model SQL statements for execution.
     A statement generalizes DDL, DML, DQL, etc., but doesn’t attempt to handle session
     management or any higher-level functionality.
@@ -23,12 +24,27 @@ tags:
     ## The Statements Model
     <SchemaDefinition schemaRef="#/components/schemas/sql.v1beta1.Statement" />
   name: Statements (sql/v1beta1)
+- description: |-
+    [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
+    `StatementResult` represents a result of a `Statement` resource.
+    The API allows you to read your statement's results.
+    ## The Statement Results Model
+    <SchemaDefinition schemaRef="#/components/schemas/sql.v1beta1.StatementResult" />
+  name: Statement Results (sql/v1beta1)
+- description: |-
+    [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
+    `StatementException` represents an exception of a `Statement` resource.
+    The API allows you to read your statement's exceptions.
+    ## The Statement Exceptions Model
+    <SchemaDefinition schemaRef="#/components/schemas/sql.v1beta1.StatementException" />
+  name: Statement Exceptions (sql/v1beta1)
 paths:
   /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results:
     get:
       description: |-
-        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20kk%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
         Read Statement Result.
       operationId: getSqlv1beta1StatementResult
       parameters:
@@ -221,20 +237,20 @@ paths:
       - resource-api-key: []
       summary: Read Statement Result
       tags:
-      - Statement Result (sql/v1beta1)
+      - Statement Results (sql/v1beta1)
       x-request-access-name: SQL API v1beta1
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results?page_token=SOME_STRING_VALUE' \
+            --url 'https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results?page_token=SOME_STRING_VALUE")
+            .url("https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -242,7 +258,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results?page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -255,7 +271,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results?page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -269,7 +285,7 @@ paths:
             "method": "GET",
             "hostname": "flink.region.provider.confluent.cloud",
             "port": null,
-            "path": "/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results?page_token=SOME_STRING_VALUE",
+            "path": "/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -294,7 +310,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results?page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -303,7 +319,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results?page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -311,7 +327,7 @@ paths:
   /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements:
     get:
       description: |-
-        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
         Retrieve a sorted, filtered, paginated list of all statements.
       operationId: listSqlv1beta1Statements
       parameters:
@@ -508,14 +524,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements?spec.compute_pool_id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements?spec.compute_pool_id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -523,7 +539,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements?spec.compute_pool_id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -536,7 +552,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements?spec.compute_pool_id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -550,7 +566,7 @@ paths:
             "method": "GET",
             "hostname": "flink.region.provider.confluent.cloud",
             "port": null,
-            "path": "/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements?spec.compute_pool_id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -575,7 +591,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements?spec.compute_pool_id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -584,13 +600,13 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements?spec.compute_pool_id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
         Make a request to create a statement.
       operationId: createSqlv1beta1Statement
       parameters:
@@ -949,7 +965,7 @@ paths:
   /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}:
     delete:
       description: |-
-        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
         Make a request to delete a statement.
       operationId: deleteSqlv1beta1Statement
       parameters:
@@ -1203,7 +1219,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
         Make a request to read a statement.
       operationId: getSqlv1beta1Statement
       parameters:
@@ -1476,7 +1492,7 @@ paths:
           IRestResponse response = client.Execute(request);
     put:
       description: |-
-        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
         Make a request to update a statement.
       operationId: updateSqlv1beta1Statement
       parameters:
@@ -1788,7 +1804,7 @@ paths:
   /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}/exceptions:
     get:
       description: |-
-        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
         Retrieve a list of the 10 most recent statement exceptions.
       operationId: getSqlv1beta1StatementExceptions
       parameters:
@@ -1958,7 +1974,7 @@ paths:
       - resource-api-key: []
       summary: List of Statement Exceptions
       tags:
-      - StatementExceptions (sql/v1beta1)
+      - Statement Exceptions (sql/v1beta1)
       x-request-access-name: SQL API v1beta1
       x-codeSamples:
       - lang: Shell
@@ -2313,6 +2329,30 @@ components:
           - FAILING
           - FAILED
           - STOPPED
+        scaling_status:
+          description: Scaling status for this statement.
+          properties:
+            scaling_state:
+              description: |
+                OK: The statement runs at the right scale.
+                PENDING_SCALE_DOWN: The statement requires less resources, and will be scaled down in the near future.
+                PENDING_SCALE_UP: The statement requires more resources, and will be scaled up in the near future.
+                POOL_EXHAUSTED: The statement requires more resources, but not enough resources are available.
+              example: OK
+              readOnly: true
+              type: string
+              x-extensible-enum:
+              - OK
+              - PENDING_SCALE_DOWN
+              - PENDING_SCALE_UP
+              - POOL_EXHAUSTED
+            last_updated:
+              description: The last time the scaling status was updated.
+              example: 1996-03-19T01:02:03-04:05
+              format: date-time
+              readOnly: true
+              type: string
+          readOnly: true
         result_schema:
           $ref: '#/components/schemas/sql.v1beta1.ResultSchema'
         detail:
@@ -2762,10 +2802,10 @@ components:
         stacktrace:
           description: Stack trace of the statement exception.
           example: "java.lang.RuntimeException: An error occurred\n\tat org.apache.flink.streaming.runtime.tasks.SourceStreamTask.run(SourceStreamTask.java:84)\n\
-            \tat org.apache.flink.streaming.runtime.tasks.StreamTask.invoke(StreamTask.java:374)\n\
-            \tat org.apache.flink.runtime.taskmanager.Task.doRun(Task.java:784)\n\t\
-            at org.apache.flink.runtime.taskmanager.Task.run(Task.java:571)\n\tat\
-            \ java.lang.Thread.run(Thread.java:748)\n"
+            \ \tat org.apache.flink.streaming.runtime.tasks.StreamTask.invoke(StreamTask.java:374)\n\
+            \ \tat org.apache.flink.runtime.taskmanager.Task.doRun(Task.java:784)\n\
+            \t at org.apache.flink.runtime.taskmanager.Task.run(Task.java:571)\n\t\
+            at java.lang.Thread.run(Thread.java:748)\n"
           readOnly: true
           type: string
         timestamp:

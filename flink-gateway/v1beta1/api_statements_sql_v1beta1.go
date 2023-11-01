@@ -42,15 +42,15 @@ var (
 type StatementsSqlV1beta1Api interface {
 
 	/*
-	CreateSqlv1beta1Statement Create a Statement
+		CreateSqlv1beta1Statement Create a Statement
 
-	[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-Make a request to create a statement.
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+	Make a request to create a statement.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param organizationId The unique identifier for the organization.
-	 @param environmentId The unique identifier for the environment.
-	 @return ApiCreateSqlv1beta1StatementRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param organizationId The unique identifier for the organization.
+		 @param environmentId The unique identifier for the environment.
+		 @return ApiCreateSqlv1beta1StatementRequest
 	*/
 	CreateSqlv1beta1Statement(ctx _context.Context, organizationId string, environmentId string) ApiCreateSqlv1beta1StatementRequest
 
@@ -59,16 +59,16 @@ Make a request to create a statement.
 	CreateSqlv1beta1StatementExecute(r ApiCreateSqlv1beta1StatementRequest) (SqlV1beta1Statement, *_nethttp.Response, error)
 
 	/*
-	DeleteSqlv1beta1Statement Delete a Statement
+		DeleteSqlv1beta1Statement Delete a Statement
 
-	[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-Make a request to delete a statement.
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+	Make a request to delete a statement.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param organizationId The unique identifier for the organization.
-	 @param environmentId The unique identifier for the environment.
-	 @param statementName The unique identifier for the statement.
-	 @return ApiDeleteSqlv1beta1StatementRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param organizationId The unique identifier for the organization.
+		 @param environmentId The unique identifier for the environment.
+		 @param statementName The unique identifier for the statement.
+		 @return ApiDeleteSqlv1beta1StatementRequest
 	*/
 	DeleteSqlv1beta1Statement(ctx _context.Context, organizationId string, environmentId string, statementName string) ApiDeleteSqlv1beta1StatementRequest
 
@@ -76,16 +76,16 @@ Make a request to delete a statement.
 	DeleteSqlv1beta1StatementExecute(r ApiDeleteSqlv1beta1StatementRequest) (*_nethttp.Response, error)
 
 	/*
-	GetSqlv1beta1Statement Read a Statement
+		GetSqlv1beta1Statement Read a Statement
 
-	[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-Make a request to read a statement.
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+	Make a request to read a statement.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param organizationId The unique identifier for the organization.
-	 @param environmentId The unique identifier for the environment.
-	 @param statementName The unique identifier for the statement.
-	 @return ApiGetSqlv1beta1StatementRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param organizationId The unique identifier for the organization.
+		 @param environmentId The unique identifier for the environment.
+		 @param statementName The unique identifier for the statement.
+		 @return ApiGetSqlv1beta1StatementRequest
 	*/
 	GetSqlv1beta1Statement(ctx _context.Context, organizationId string, environmentId string, statementName string) ApiGetSqlv1beta1StatementRequest
 
@@ -94,15 +94,15 @@ Make a request to read a statement.
 	GetSqlv1beta1StatementExecute(r ApiGetSqlv1beta1StatementRequest) (SqlV1beta1Statement, *_nethttp.Response, error)
 
 	/*
-	ListSqlv1beta1Statements List of Statements
+		ListSqlv1beta1Statements List of Statements
 
-	[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-Retrieve a sorted, filtered, paginated list of all statements.
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+	Retrieve a sorted, filtered, paginated list of all statements.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param organizationId The unique identifier for the organization.
-	 @param environmentId The unique identifier for the environment.
-	 @return ApiListSqlv1beta1StatementsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param organizationId The unique identifier for the organization.
+		 @param environmentId The unique identifier for the environment.
+		 @return ApiListSqlv1beta1StatementsRequest
 	*/
 	ListSqlv1beta1Statements(ctx _context.Context, organizationId string, environmentId string) ApiListSqlv1beta1StatementsRequest
 
@@ -111,16 +111,16 @@ Retrieve a sorted, filtered, paginated list of all statements.
 	ListSqlv1beta1StatementsExecute(r ApiListSqlv1beta1StatementsRequest) (SqlV1beta1StatementList, *_nethttp.Response, error)
 
 	/*
-	UpdateSqlv1beta1Statement Update a Statement
+		UpdateSqlv1beta1Statement Update a Statement
 
-	[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-Make a request to update a statement.
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+	Make a request to update a statement.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param organizationId The unique identifier for the organization.
-	 @param environmentId The unique identifier for the environment.
-	 @param statementName The unique identifier for the statement.
-	 @return ApiUpdateSqlv1beta1StatementRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param organizationId The unique identifier for the organization.
+		 @param environmentId The unique identifier for the environment.
+		 @param statementName The unique identifier for the statement.
+		 @return ApiUpdateSqlv1beta1StatementRequest
 	*/
 	UpdateSqlv1beta1Statement(ctx _context.Context, organizationId string, environmentId string, statementName string) ApiUpdateSqlv1beta1StatementRequest
 
@@ -132,10 +132,10 @@ Make a request to update a statement.
 type StatementsSqlV1beta1ApiService service
 
 type ApiCreateSqlv1beta1StatementRequest struct {
-	ctx _context.Context
-	ApiService StatementsSqlV1beta1Api
-	organizationId string
-	environmentId string
+	ctx                 _context.Context
+	ApiService          StatementsSqlV1beta1Api
+	organizationId      string
+	environmentId       string
 	sqlV1beta1Statement *SqlV1beta1Statement
 }
 
@@ -151,25 +151,26 @@ func (r ApiCreateSqlv1beta1StatementRequest) Execute() (SqlV1beta1Statement, *_n
 /*
 CreateSqlv1beta1Statement Create a Statement
 
-[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 Make a request to create a statement.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organizationId The unique identifier for the organization.
- @param environmentId The unique identifier for the environment.
- @return ApiCreateSqlv1beta1StatementRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique identifier for the organization.
+	@param environmentId The unique identifier for the environment.
+	@return ApiCreateSqlv1beta1StatementRequest
 */
 func (a *StatementsSqlV1beta1ApiService) CreateSqlv1beta1Statement(ctx _context.Context, organizationId string, environmentId string) ApiCreateSqlv1beta1StatementRequest {
 	return ApiCreateSqlv1beta1StatementRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:     a,
+		ctx:            ctx,
 		organizationId: organizationId,
-		environmentId: environmentId,
+		environmentId:  environmentId,
 	}
 }
 
 // Execute executes the request
-//  @return SqlV1beta1Statement
+//
+//	@return SqlV1beta1Statement
 func (a *StatementsSqlV1beta1ApiService) CreateSqlv1beta1StatementExecute(r ApiCreateSqlv1beta1StatementRequest) (SqlV1beta1Statement, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -309,13 +310,12 @@ func (a *StatementsSqlV1beta1ApiService) CreateSqlv1beta1StatementExecute(r ApiC
 }
 
 type ApiDeleteSqlv1beta1StatementRequest struct {
-	ctx _context.Context
-	ApiService StatementsSqlV1beta1Api
+	ctx            _context.Context
+	ApiService     StatementsSqlV1beta1Api
 	organizationId string
-	environmentId string
-	statementName string
+	environmentId  string
+	statementName  string
 }
-
 
 func (r ApiDeleteSqlv1beta1StatementRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteSqlv1beta1StatementExecute(r)
@@ -324,22 +324,22 @@ func (r ApiDeleteSqlv1beta1StatementRequest) Execute() (*_nethttp.Response, erro
 /*
 DeleteSqlv1beta1Statement Delete a Statement
 
-[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 Make a request to delete a statement.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organizationId The unique identifier for the organization.
- @param environmentId The unique identifier for the environment.
- @param statementName The unique identifier for the statement.
- @return ApiDeleteSqlv1beta1StatementRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique identifier for the organization.
+	@param environmentId The unique identifier for the environment.
+	@param statementName The unique identifier for the statement.
+	@return ApiDeleteSqlv1beta1StatementRequest
 */
 func (a *StatementsSqlV1beta1ApiService) DeleteSqlv1beta1Statement(ctx _context.Context, organizationId string, environmentId string, statementName string) ApiDeleteSqlv1beta1StatementRequest {
 	return ApiDeleteSqlv1beta1StatementRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:     a,
+		ctx:            ctx,
 		organizationId: organizationId,
-		environmentId: environmentId,
-		statementName: statementName,
+		environmentId:  environmentId,
+		statementName:  statementName,
 	}
 }
 
@@ -462,13 +462,12 @@ func (a *StatementsSqlV1beta1ApiService) DeleteSqlv1beta1StatementExecute(r ApiD
 }
 
 type ApiGetSqlv1beta1StatementRequest struct {
-	ctx _context.Context
-	ApiService StatementsSqlV1beta1Api
+	ctx            _context.Context
+	ApiService     StatementsSqlV1beta1Api
 	organizationId string
-	environmentId string
-	statementName string
+	environmentId  string
+	statementName  string
 }
-
 
 func (r ApiGetSqlv1beta1StatementRequest) Execute() (SqlV1beta1Statement, *_nethttp.Response, error) {
 	return r.ApiService.GetSqlv1beta1StatementExecute(r)
@@ -477,27 +476,28 @@ func (r ApiGetSqlv1beta1StatementRequest) Execute() (SqlV1beta1Statement, *_neth
 /*
 GetSqlv1beta1Statement Read a Statement
 
-[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 Make a request to read a statement.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organizationId The unique identifier for the organization.
- @param environmentId The unique identifier for the environment.
- @param statementName The unique identifier for the statement.
- @return ApiGetSqlv1beta1StatementRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique identifier for the organization.
+	@param environmentId The unique identifier for the environment.
+	@param statementName The unique identifier for the statement.
+	@return ApiGetSqlv1beta1StatementRequest
 */
 func (a *StatementsSqlV1beta1ApiService) GetSqlv1beta1Statement(ctx _context.Context, organizationId string, environmentId string, statementName string) ApiGetSqlv1beta1StatementRequest {
 	return ApiGetSqlv1beta1StatementRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:     a,
+		ctx:            ctx,
 		organizationId: organizationId,
-		environmentId: environmentId,
-		statementName: statementName,
+		environmentId:  environmentId,
+		statementName:  statementName,
 	}
 }
 
 // Execute executes the request
-//  @return SqlV1beta1Statement
+//
+//	@return SqlV1beta1Statement
 func (a *StatementsSqlV1beta1ApiService) GetSqlv1beta1StatementExecute(r ApiGetSqlv1beta1StatementRequest) (SqlV1beta1Statement, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -626,13 +626,13 @@ func (a *StatementsSqlV1beta1ApiService) GetSqlv1beta1StatementExecute(r ApiGetS
 }
 
 type ApiListSqlv1beta1StatementsRequest struct {
-	ctx _context.Context
-	ApiService StatementsSqlV1beta1Api
-	organizationId string
-	environmentId string
+	ctx               _context.Context
+	ApiService        StatementsSqlV1beta1Api
+	organizationId    string
+	environmentId     string
 	specComputePoolId *string
-	pageSize *int32
-	pageToken *string
+	pageSize          *int32
+	pageToken         *string
 }
 
 // Filter the results by exact match for spec.compute_pool.
@@ -640,11 +640,13 @@ func (r ApiListSqlv1beta1StatementsRequest) SpecComputePoolId(specComputePoolId 
 	r.specComputePoolId = &specComputePoolId
 	return r
 }
+
 // A pagination size for collection requests.
 func (r ApiListSqlv1beta1StatementsRequest) PageSize(pageSize int32) ApiListSqlv1beta1StatementsRequest {
 	r.pageSize = &pageSize
 	return r
 }
+
 // An opaque pagination token for collection requests.
 func (r ApiListSqlv1beta1StatementsRequest) PageToken(pageToken string) ApiListSqlv1beta1StatementsRequest {
 	r.pageToken = &pageToken
@@ -658,25 +660,26 @@ func (r ApiListSqlv1beta1StatementsRequest) Execute() (SqlV1beta1StatementList, 
 /*
 ListSqlv1beta1Statements List of Statements
 
-[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 Retrieve a sorted, filtered, paginated list of all statements.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organizationId The unique identifier for the organization.
- @param environmentId The unique identifier for the environment.
- @return ApiListSqlv1beta1StatementsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique identifier for the organization.
+	@param environmentId The unique identifier for the environment.
+	@return ApiListSqlv1beta1StatementsRequest
 */
 func (a *StatementsSqlV1beta1ApiService) ListSqlv1beta1Statements(ctx _context.Context, organizationId string, environmentId string) ApiListSqlv1beta1StatementsRequest {
 	return ApiListSqlv1beta1StatementsRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:     a,
+		ctx:            ctx,
 		organizationId: organizationId,
-		environmentId: environmentId,
+		environmentId:  environmentId,
 	}
 }
 
 // Execute executes the request
-//  @return SqlV1beta1StatementList
+//
+//	@return SqlV1beta1StatementList
 func (a *StatementsSqlV1beta1ApiService) ListSqlv1beta1StatementsExecute(r ApiListSqlv1beta1StatementsRequest) (SqlV1beta1StatementList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -813,11 +816,11 @@ func (a *StatementsSqlV1beta1ApiService) ListSqlv1beta1StatementsExecute(r ApiLi
 }
 
 type ApiUpdateSqlv1beta1StatementRequest struct {
-	ctx _context.Context
-	ApiService StatementsSqlV1beta1Api
-	organizationId string
-	environmentId string
-	statementName string
+	ctx                 _context.Context
+	ApiService          StatementsSqlV1beta1Api
+	organizationId      string
+	environmentId       string
+	statementName       string
 	sqlV1beta1Statement *SqlV1beta1Statement
 }
 
@@ -833,22 +836,22 @@ func (r ApiUpdateSqlv1beta1StatementRequest) Execute() (*_nethttp.Response, erro
 /*
 UpdateSqlv1beta1Statement Update a Statement
 
-[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 Make a request to update a statement.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organizationId The unique identifier for the organization.
- @param environmentId The unique identifier for the environment.
- @param statementName The unique identifier for the statement.
- @return ApiUpdateSqlv1beta1StatementRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique identifier for the organization.
+	@param environmentId The unique identifier for the environment.
+	@param statementName The unique identifier for the statement.
+	@return ApiUpdateSqlv1beta1StatementRequest
 */
 func (a *StatementsSqlV1beta1ApiService) UpdateSqlv1beta1Statement(ctx _context.Context, organizationId string, environmentId string, statementName string) ApiUpdateSqlv1beta1StatementRequest {
 	return ApiUpdateSqlv1beta1StatementRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:     a,
+		ctx:            ctx,
 		organizationId: organizationId,
-		environmentId: environmentId,
-		statementName: statementName,
+		environmentId:  environmentId,
+		statementName:  statementName,
 	}
 }
 

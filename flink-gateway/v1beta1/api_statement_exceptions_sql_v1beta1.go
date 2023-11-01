@@ -42,16 +42,16 @@ var (
 type StatementExceptionsSqlV1beta1Api interface {
 
 	/*
-	GetSqlv1beta1StatementExceptions List of Statement Exceptions
+		GetSqlv1beta1StatementExceptions List of Statement Exceptions
 
-	[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-Retrieve a list of the 10 most recent statement exceptions.
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+	Retrieve a list of the 10 most recent statement exceptions.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param organizationId The unique identifier for the organization.
-	 @param environmentId The unique identifier for the environment.
-	 @param statementName The unique identifier for the statement.
-	 @return ApiGetSqlv1beta1StatementExceptionsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param organizationId The unique identifier for the organization.
+		 @param environmentId The unique identifier for the environment.
+		 @param statementName The unique identifier for the statement.
+		 @return ApiGetSqlv1beta1StatementExceptionsRequest
 	*/
 	GetSqlv1beta1StatementExceptions(ctx _context.Context, organizationId string, environmentId string, statementName string) ApiGetSqlv1beta1StatementExceptionsRequest
 
@@ -64,13 +64,12 @@ Retrieve a list of the 10 most recent statement exceptions.
 type StatementExceptionsSqlV1beta1ApiService service
 
 type ApiGetSqlv1beta1StatementExceptionsRequest struct {
-	ctx _context.Context
-	ApiService StatementExceptionsSqlV1beta1Api
+	ctx            _context.Context
+	ApiService     StatementExceptionsSqlV1beta1Api
 	organizationId string
-	environmentId string
-	statementName string
+	environmentId  string
+	statementName  string
 }
-
 
 func (r ApiGetSqlv1beta1StatementExceptionsRequest) Execute() (SqlV1beta1StatementExceptionList, *_nethttp.Response, error) {
 	return r.ApiService.GetSqlv1beta1StatementExceptionsExecute(r)
@@ -79,27 +78,28 @@ func (r ApiGetSqlv1beta1StatementExceptionsRequest) Execute() (SqlV1beta1Stateme
 /*
 GetSqlv1beta1StatementExceptions List of Statement Exceptions
 
-[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 Retrieve a list of the 10 most recent statement exceptions.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organizationId The unique identifier for the organization.
- @param environmentId The unique identifier for the environment.
- @param statementName The unique identifier for the statement.
- @return ApiGetSqlv1beta1StatementExceptionsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique identifier for the organization.
+	@param environmentId The unique identifier for the environment.
+	@param statementName The unique identifier for the statement.
+	@return ApiGetSqlv1beta1StatementExceptionsRequest
 */
 func (a *StatementExceptionsSqlV1beta1ApiService) GetSqlv1beta1StatementExceptions(ctx _context.Context, organizationId string, environmentId string, statementName string) ApiGetSqlv1beta1StatementExceptionsRequest {
 	return ApiGetSqlv1beta1StatementExceptionsRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:     a,
+		ctx:            ctx,
 		organizationId: organizationId,
-		environmentId: environmentId,
-		statementName: statementName,
+		environmentId:  environmentId,
+		statementName:  statementName,
 	}
 }
 
 // Execute executes the request
-//  @return SqlV1beta1StatementExceptionList
+//
+//	@return SqlV1beta1StatementExceptionList
 func (a *StatementExceptionsSqlV1beta1ApiService) GetSqlv1beta1StatementExceptionsExecute(r ApiGetSqlv1beta1StatementExceptionsRequest) (SqlV1beta1StatementExceptionList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet

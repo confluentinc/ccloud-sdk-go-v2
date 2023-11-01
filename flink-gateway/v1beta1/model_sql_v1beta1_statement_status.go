@@ -36,9 +36,11 @@ import (
 
 // SqlV1beta1StatementStatus The status of the Statement
 type SqlV1beta1StatementStatus struct {
-	// The lifecycle phase of the submitted SQL statement: PENDING: SQL statement is pending execution; RUNNING: SQL statement execution is in progress; COMPLETED: SQL statement is completed; DELETING: SQL statement deletion is in progress; FAILING: SQL statement is failing; FAILED: SQL statement execution has failed; STOPPED: SQL statement execution has successfully been stopped; 
+	// The lifecycle phase of the submitted SQL statement: PENDING: SQL statement is pending execution; RUNNING: SQL statement execution is in progress; COMPLETED: SQL statement is completed; DELETING: SQL statement deletion is in progress; FAILING: SQL statement is failing; FAILED: SQL statement execution has failed; STOPPED: SQL statement execution has successfully been stopped;
 	Phase string `json:"phase,omitempty"`
-	ResultSchema *SqlV1beta1ResultSchema `json:"result_schema,omitempty"`
+	// Scaling status for this statement.
+	ScalingStatus *map[string]interface{} `json:"scaling_status,omitempty"`
+	ResultSchema  *SqlV1beta1ResultSchema `json:"result_schema,omitempty"`
 	// Description of a SQL statement phase.
 	Detail *string `json:"detail,omitempty"`
 }
@@ -74,7 +76,7 @@ func (o *SqlV1beta1StatementStatus) GetPhase() string {
 // GetPhaseOk returns a tuple with the Phase field value
 // and a boolean to check if the value has been set.
 func (o *SqlV1beta1StatementStatus) GetPhaseOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Phase, true
@@ -83,6 +85,38 @@ func (o *SqlV1beta1StatementStatus) GetPhaseOk() (*string, bool) {
 // SetPhase sets field value
 func (o *SqlV1beta1StatementStatus) SetPhase(v string) {
 	o.Phase = v
+}
+
+// GetScalingStatus returns the ScalingStatus field value if set, zero value otherwise.
+func (o *SqlV1beta1StatementStatus) GetScalingStatus() map[string]interface{} {
+	if o == nil || o.ScalingStatus == nil {
+		var ret map[string]interface{}
+		return ret
+	}
+	return *o.ScalingStatus
+}
+
+// GetScalingStatusOk returns a tuple with the ScalingStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SqlV1beta1StatementStatus) GetScalingStatusOk() (*map[string]interface{}, bool) {
+	if o == nil || o.ScalingStatus == nil {
+		return nil, false
+	}
+	return o.ScalingStatus, true
+}
+
+// HasScalingStatus returns a boolean if a field has been set.
+func (o *SqlV1beta1StatementStatus) HasScalingStatus() bool {
+	if o != nil && o.ScalingStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetScalingStatus gets a reference to the given map[string]interface{} and assigns it to the ScalingStatus field.
+func (o *SqlV1beta1StatementStatus) SetScalingStatus(v map[string]interface{}) {
+	o.ScalingStatus = &v
 }
 
 // GetResultSchema returns the ResultSchema field value if set, zero value otherwise.
@@ -151,45 +185,49 @@ func (o *SqlV1beta1StatementStatus) SetDetail(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *SqlV1beta1StatementStatus) Redact() {
-    o.recurseRedact(&o.Phase)
-    o.recurseRedact(o.ResultSchema)
-    o.recurseRedact(o.Detail)
+	o.recurseRedact(&o.Phase)
+	o.recurseRedact(o.ScalingStatus)
+	o.recurseRedact(o.ResultSchema)
+	o.recurseRedact(o.Detail)
 }
 
 func (o *SqlV1beta1StatementStatus) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o SqlV1beta1StatementStatus) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o SqlV1beta1StatementStatus) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["phase"] = o.Phase
+	}
+	if o.ScalingStatus != nil {
+		toSerialize["scaling_status"] = o.ScalingStatus
 	}
 	if o.ResultSchema != nil {
 		toSerialize["result_schema"] = o.ResultSchema
@@ -243,5 +281,3 @@ func (v *NullableSqlV1beta1StatementStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

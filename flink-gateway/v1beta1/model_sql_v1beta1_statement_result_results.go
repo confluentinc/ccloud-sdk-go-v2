@@ -36,7 +36,7 @@ import (
 
 // SqlV1beta1StatementResultResults A results property that contains a data property that contains an array of results.
 type SqlV1beta1StatementResultResults struct {
-	// A data property that contains an array of results. Each entry in the array is a separate result.  The value of `op` attribute (if present) represents the kind of change that a row can describe in a changelog:  `0`: represents `INSERT` (`+I`), i.e. insertion operation;  `1`: represents `UPDATE_BEFORE` (`-U`), i.e. update operation with the previous content of the updated row. This kind should occur together with `UPDATE_AFTER` for modelling an update that needs to retract the previous row first. It is useful in cases of a non-idempotent update, i.e., an update of a row that is not  uniquely identifiable by a key;  `2`: represents `UPDATE_AFTER` (`+U`), i.e. update operation with new content of the updated row; This kind CAN occur together with `UPDATE_BEFORE` for modelling an update that needs to retract the previous row first or it describes an idempotent update, i.e., an update of a row that is uniquely identifiable by a key;  `3`: represents `DELETE` (`-D`), i.e. deletion operation;  Defaults to `0`. 
+	// A data property that contains an array of results. Each entry in the array is a separate result.  The value of `op` attribute (if present) represents the kind of change that a row can describe in a changelog:  `0`: represents `INSERT` (`+I`), i.e. insertion operation;  `1`: represents `UPDATE_BEFORE` (`-U`), i.e. update operation with the previous content of the updated row. This kind should occur together with `UPDATE_AFTER` for modelling an update that needs to retract the previous row first. It is useful in cases of a non-idempotent update, i.e., an update of a row that is not  uniquely identifiable by a key;  `2`: represents `UPDATE_AFTER` (`+U`), i.e. update operation with new content of the updated row; This kind CAN occur together with `UPDATE_BEFORE` for modelling an update that needs to retract the previous row first or it describes an idempotent update, i.e., an update of a row that is uniquely identifiable by a key;  `3`: represents `DELETE` (`-D`), i.e. deletion operation;  Defaults to `0`.
 	Data *[]interface{} `json:"data,omitempty"`
 }
 
@@ -91,37 +91,37 @@ func (o *SqlV1beta1StatementResultResults) SetData(v []interface{}) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *SqlV1beta1StatementResultResults) Redact() {
-    o.recurseRedact(o.Data)
+	o.recurseRedact(o.Data)
 }
 
 func (o *SqlV1beta1StatementResultResults) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o SqlV1beta1StatementResultResults) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o SqlV1beta1StatementResultResults) MarshalJSON() ([]byte, error) {
@@ -175,5 +175,3 @@ func (v *NullableSqlV1beta1StatementResultResults) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

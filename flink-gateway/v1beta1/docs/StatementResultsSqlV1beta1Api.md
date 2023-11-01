@@ -1,10 +1,10 @@
-# \StatementResultSqlV1beta1Api
+# \StatementResultsSqlV1beta1Api
 
 All URIs are relative to *https://flink.region.provider.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetSqlv1beta1StatementResult**](StatementResultSqlV1beta1Api.md#GetSqlv1beta1StatementResult) | **Get** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results | Read Statement Result
+[**GetSqlv1beta1StatementResult**](StatementResultsSqlV1beta1Api.md#GetSqlv1beta1StatementResult) | **Get** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results | Read Statement Result
 
 
 
@@ -36,13 +36,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StatementResultSqlV1beta1Api.GetSqlv1beta1StatementResult(context.Background(), organizationId, environmentId, name).PageToken(pageToken).Execute()
+    resp, r, err := api_client.StatementResultsSqlV1beta1Api.GetSqlv1beta1StatementResult(context.Background(), organizationId, environmentId, name).PageToken(pageToken).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `StatementResultSqlV1beta1Api.GetSqlv1beta1StatementResult``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `StatementResultsSqlV1beta1Api.GetSqlv1beta1StatementResult``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `GetSqlv1beta1StatementResult`: SqlV1beta1StatementResult
-    fmt.Fprintf(os.Stdout, "Response from `StatementResultSqlV1beta1Api.GetSqlv1beta1StatementResult`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `StatementResultsSqlV1beta1Api.GetSqlv1beta1StatementResult`: %v\n", resp)
 }
 ```
 
