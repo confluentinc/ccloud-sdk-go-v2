@@ -26,6 +26,7 @@ Contact: paas-team@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -33,7 +34,7 @@ import (
 	"reflect"
 )
 
-// OrgV2Environment `Environment` objects represent an isolated namespace for your Confluent resources for organizational purposes.  The API allows you to create, delete, and update your environments. You can retrieve individual environments as well as a list of all your environments.   Related guide: [Environments in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/environments.html).  ## The Environments Model <SchemaDefinition schemaRef=\"#/components/schemas/org.v2.Environment\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `environments_per_org` | Environments in one Confluent Cloud organization |
+// OrgV2Environment `Environment` objects represent an isolated namespace for your Confluent resources for organizational purposes.  The API allows you to create, delete, and update your environments. You can retrieve individual environments as well as a list of all your environments.   Related guide: [Environments in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/environments.html).  ## The Environments Model <SchemaDefinition schemaRef=\"#/components/schemas/org.v2.Environment\" />  ## Quotas and Limits This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):  | Quota | Description | | --- | --- | | `environments_per_org` | Environments in one Confluent Cloud organization |
 type OrgV2Environment struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
@@ -44,6 +45,8 @@ type OrgV2Environment struct {
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
 	// A human-readable name for the Environment
 	DisplayName *string `json:"display_name,omitempty"`
+	// Stream Governance configurations for the environment
+	StreamGovernanceConfig *OrgV2StreamGovernanceConfig `json:"stream_governance_config,omitempty"`
 }
 
 // NewOrgV2Environment instantiates a new OrgV2Environment object
@@ -223,6 +226,38 @@ func (o *OrgV2Environment) SetDisplayName(v string) {
 	o.DisplayName = &v
 }
 
+// GetStreamGovernanceConfig returns the StreamGovernanceConfig field value if set, zero value otherwise.
+func (o *OrgV2Environment) GetStreamGovernanceConfig() OrgV2StreamGovernanceConfig {
+	if o == nil || o.StreamGovernanceConfig == nil {
+		var ret OrgV2StreamGovernanceConfig
+		return ret
+	}
+	return *o.StreamGovernanceConfig
+}
+
+// GetStreamGovernanceConfigOk returns a tuple with the StreamGovernanceConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrgV2Environment) GetStreamGovernanceConfigOk() (*OrgV2StreamGovernanceConfig, bool) {
+	if o == nil || o.StreamGovernanceConfig == nil {
+		return nil, false
+	}
+	return o.StreamGovernanceConfig, true
+}
+
+// HasStreamGovernanceConfig returns a boolean if a field has been set.
+func (o *OrgV2Environment) HasStreamGovernanceConfig() bool {
+	if o != nil && o.StreamGovernanceConfig != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStreamGovernanceConfig gets a reference to the given OrgV2StreamGovernanceConfig and assigns it to the StreamGovernanceConfig field.
+func (o *OrgV2Environment) SetStreamGovernanceConfig(v OrgV2StreamGovernanceConfig) {
+	o.StreamGovernanceConfig = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *OrgV2Environment) Redact() {
 	o.recurseRedact(o.ApiVersion)
@@ -230,6 +265,7 @@ func (o *OrgV2Environment) Redact() {
 	o.recurseRedact(o.Id)
 	o.recurseRedact(o.Metadata)
 	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.StreamGovernanceConfig)
 }
 
 func (o *OrgV2Environment) recurseRedact(v interface{}) {
@@ -279,7 +315,14 @@ func (o OrgV2Environment) MarshalJSON() ([]byte, error) {
 	if o.DisplayName != nil {
 		toSerialize["display_name"] = o.DisplayName
 	}
-	return json.Marshal(toSerialize)
+	if o.StreamGovernanceConfig != nil {
+		toSerialize["stream_governance_config"] = o.StreamGovernanceConfig
+	}
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableOrgV2Environment struct {
@@ -310,7 +353,11 @@ func NewNullableOrgV2Environment(val *OrgV2Environment) *NullableOrgV2Environmen
 }
 
 func (v NullableOrgV2Environment) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableOrgV2Environment) UnmarshalJSON(src []byte) error {

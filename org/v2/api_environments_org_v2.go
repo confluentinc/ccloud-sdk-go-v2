@@ -44,7 +44,7 @@ type EnvironmentsOrgV2Api interface {
 	/*
 		CreateOrgV2Environment Create an Environment
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to create an environment.
 
@@ -60,7 +60,7 @@ type EnvironmentsOrgV2Api interface {
 	/*
 		DeleteOrgV2Environment Delete an Environment
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to delete an environment.
 
@@ -80,7 +80,7 @@ type EnvironmentsOrgV2Api interface {
 	/*
 		GetOrgV2Environment Read an Environment
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to read an environment.
 
@@ -97,7 +97,7 @@ type EnvironmentsOrgV2Api interface {
 	/*
 		ListOrgV2Environments List of Environments
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Retrieve a sorted, filtered, paginated list of all environments.
 
@@ -113,7 +113,7 @@ type EnvironmentsOrgV2Api interface {
 	/*
 		UpdateOrgV2Environment Update an Environment
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to update an environment.
 
@@ -151,7 +151,7 @@ func (r ApiCreateOrgV2EnvironmentRequest) Execute() (OrgV2Environment, *_nethttp
 /*
 CreateOrgV2Environment Create an Environment
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create an environment.
 
@@ -327,7 +327,7 @@ func (r ApiDeleteOrgV2EnvironmentRequest) Execute() (*_nethttp.Response, error) 
 /*
 DeleteOrgV2Environment Delete an Environment
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete an environment.
 
@@ -475,7 +475,7 @@ func (r ApiGetOrgV2EnvironmentRequest) Execute() (OrgV2Environment, *_nethttp.Re
 /*
 GetOrgV2Environment Read an Environment
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read an environment.
 
@@ -645,7 +645,7 @@ func (r ApiListOrgV2EnvironmentsRequest) Execute() (OrgV2EnvironmentList, *_neth
 /*
 ListOrgV2Environments List of Environments
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all environments.
 
@@ -801,7 +801,7 @@ func (r ApiUpdateOrgV2EnvironmentRequest) Execute() (OrgV2Environment, *_nethttp
 /*
 UpdateOrgV2Environment Update an Environment
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update an environment.
 

@@ -19,7 +19,7 @@ servers:
   url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
-    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `Environment` objects represent an isolated namespace for your Confluent resources
     for organizational purposes.
@@ -34,14 +34,14 @@ tags:
     <SchemaDefinition schemaRef="#/components/schemas/org.v2.Environment" />
 
     ## Quotas and Limits
-    This resource is subject to the following quotas:
+    This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
 
     | Quota | Description |
     | --- | --- |
     | `environments_per_org` | Environments in one Confluent Cloud organization |
   name: Environments (org/v2)
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Organization v2](https://img.shields.io/badge/-Request%20Access%20To%20Organization%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `Organization` objects represent a customer organization. An organization contains all customer
     resources (e.g., Environments, Kafka Clusters, Service Accounts, API Keys) and is tied to a billing
@@ -56,7 +56,7 @@ tags:
     <SchemaDefinition schemaRef="#/components/schemas/org.v2.Organization" />
 
     ## Quotas and Limits
-    This resource is subject to the following quotas:
+    This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
 
     | Quota | Description |
     | --- | --- |
@@ -66,7 +66,7 @@ paths:
   /org/v2/environments:
     get:
       description: |-
-        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all environments.
       operationId: listOrgV2Environments
@@ -105,6 +105,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -190,6 +213,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -212,7 +265,8 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: List of Environments
       tags:
       - Environments (org/v2)
@@ -220,14 +274,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/org/v2/environments?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url https://api.confluent.cloud/org/v2/environments \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/org/v2/environments?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/org/v2/environments")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -235,7 +289,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/environments?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/environments\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -248,7 +302,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/org/v2/environments?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/org/v2/environments", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -262,7 +316,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/org/v2/environments?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/org/v2/environments",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -287,7 +341,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/environments?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/environments");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -296,13 +350,13 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/org/v2/environments?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/org/v2/environments");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create an environment.
       operationId: createOrgV2Environment
@@ -332,6 +386,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
             Location:
               description: Environment resource uri
@@ -499,6 +576,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -521,7 +628,8 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Create an Environment
       tags:
       - Environments (org/v2)
@@ -532,18 +640,18 @@ paths:
             --url https://api.confluent.cloud/org/v2/environments \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"prod-finance01"}'
+            --data '{"display_name":"prod-finance01","stream_governance_config":{"package":"string"}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"prod-finance01\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"prod-finance01\",\"stream_governance_config\":{\"package\":\"string\"}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/org/v2/environments")
             .post(body)
-            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -551,22 +659,23 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/environments\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"prod-finance01\\\
-          \"}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\"\
-          , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
-          defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
-          \tfmt.Println(string(body))\n\n}"
+          \",\\\"stream_governance_config\\\":{\\\"package\\\":\\\"string\\\"}}\"\
+          )\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"prod-finance01\"}"
+          payload = "{\"display_name\":\"prod-finance01\",\"stream_governance_config\":{\"package\":\"string\"}}"
 
           headers = {
-              'Authorization': "Basic REPLACE_BASIC_AUTH",
-              'content-type': "application/json"
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
           conn.request("POST", "/org/v2/environments", payload, headers)
@@ -585,8 +694,8 @@ paths:
             "port": null,
             "path": "/org/v2/environments",
             "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH",
-              "content-type": "application/json"
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
           };
 
@@ -603,7 +712,7 @@ paths:
             });
           });
 
-          req.write(JSON.stringify({display_name: 'prod-finance01'}));
+          req.write(JSON.stringify({display_name: 'prod-finance01', stream_governance_config: {package: 'string'}}));
           req.end();
       - lang: C
         source: |-
@@ -613,25 +722,25 @@ paths:
           curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/environments");
 
           struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"prod-finance01\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"prod-finance01\",\"stream_governance_config\":{\"package\":\"string\"}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
           var client = new RestClient("https://api.confluent.cloud/org/v2/environments");
           var request = new RestRequest(Method.POST);
-          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddHeader("content-type", "application/json");
-          request.AddParameter("application/json", "{\"display_name\":\"prod-finance01\"}", ParameterType.RequestBody);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"display_name\":\"prod-finance01\",\"stream_governance_config\":{\"package\":\"string\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /org/v2/environments/{id}:
     delete:
       description: |
-        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete an environment.
 
@@ -656,6 +765,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -759,6 +891,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -781,7 +943,8 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Delete an Environment
       tags:
       - Environments (org/v2)
@@ -789,14 +952,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url https://api.confluent.cloud/org/v2/environments/%7Bid%7D \
+            --url 'https://api.confluent.cloud/org/v2/environments/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/org/v2/environments/%7Bid%7D")
+            .url("https://api.confluent.cloud/org/v2/environments/{id}")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -804,7 +967,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/environments/%7Bid%7D\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/environments/{id}\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -817,7 +980,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/org/v2/environments/%7Bid%7D", headers=headers)
+          conn.request("DELETE", "/org/v2/environments/{id}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -831,7 +994,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/org/v2/environments/%7Bid%7D",
+            "path": "/org/v2/environments/{id}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -856,7 +1019,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/environments/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/environments/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -865,13 +1028,13 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/org/v2/environments/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/org/v2/environments/{id}");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read an environment.
       operationId: getOrgV2Environment
@@ -905,6 +1068,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -1007,6 +1193,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -1029,7 +1245,8 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Read an Environment
       tags:
       - Environments (org/v2)
@@ -1037,14 +1254,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://api.confluent.cloud/org/v2/environments/%7Bid%7D \
+            --url 'https://api.confluent.cloud/org/v2/environments/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/org/v2/environments/%7Bid%7D")
+            .url("https://api.confluent.cloud/org/v2/environments/{id}")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1052,7 +1269,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/environments/%7Bid%7D\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/environments/{id}\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1065,7 +1282,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/org/v2/environments/%7Bid%7D", headers=headers)
+          conn.request("GET", "/org/v2/environments/{id}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1079,7 +1296,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/org/v2/environments/%7Bid%7D",
+            "path": "/org/v2/environments/{id}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1104,7 +1321,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/environments/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/environments/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1113,13 +1330,13 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/org/v2/environments/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/org/v2/environments/{id}");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update an environment.
 
@@ -1159,6 +1376,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -1305,6 +1545,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -1327,7 +1597,8 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Update an Environment
       tags:
       - Environments (org/v2)
@@ -1335,47 +1606,48 @@ paths:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url https://api.confluent.cloud/org/v2/environments/%7Bid%7D \
+            --url 'https://api.confluent.cloud/org/v2/environments/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"prod-finance01"}'
+            --data '{"display_name":"prod-finance01","stream_governance_config":{"package":"string"}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"prod-finance01\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"prod-finance01\",\"stream_governance_config\":{\"package\":\"string\"}}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/org/v2/environments/%7Bid%7D")
+            .url("https://api.confluent.cloud/org/v2/environments/{id}")
             .patch(body)
-            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/environments/%7Bid%7D\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/environments/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"prod-finance01\\\
-          \"}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\"\
-          , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
-          defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
-          \tfmt.Println(string(body))\n\n}"
+          \",\\\"stream_governance_config\\\":{\\\"package\\\":\\\"string\\\"}}\"\
+          )\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"prod-finance01\"}"
+          payload = "{\"display_name\":\"prod-finance01\",\"stream_governance_config\":{\"package\":\"string\"}}"
 
           headers = {
-              'Authorization': "Basic REPLACE_BASIC_AUTH",
-              'content-type': "application/json"
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/org/v2/environments/%7Bid%7D", payload, headers)
+          conn.request("PATCH", "/org/v2/environments/{id}", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1389,10 +1661,10 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/org/v2/environments/%7Bid%7D",
+            "path": "/org/v2/environments/{id}",
             "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH",
-              "content-type": "application/json"
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
           };
 
@@ -1409,35 +1681,35 @@ paths:
             });
           });
 
-          req.write(JSON.stringify({display_name: 'prod-finance01'}));
+          req.write(JSON.stringify({display_name: 'prod-finance01', stream_governance_config: {package: 'string'}}));
           req.end();
       - lang: C
         source: |-
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/environments/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/environments/{id}");
 
           struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"prod-finance01\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"prod-finance01\",\"stream_governance_config\":{\"package\":\"string\"}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/org/v2/environments/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/org/v2/environments/{id}");
           var request = new RestRequest(Method.PATCH);
-          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddHeader("content-type", "application/json");
-          request.AddParameter("application/json", "{\"display_name\":\"prod-finance01\"}", ParameterType.RequestBody);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"display_name\":\"prod-finance01\",\"stream_governance_config\":{\"package\":\"string\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /org/v2/organizations:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Organization v2](https://img.shields.io/badge/-Request%20Access%20To%20Organization%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all organizations.
       operationId: listOrgV2Organizations
@@ -1477,6 +1749,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -1561,6 +1856,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -1583,23 +1908,23 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: List of Organizations
       tags:
       - Organizations (org/v2)
-      x-request-access-name: Organization v2
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/org/v2/organizations?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url https://api.confluent.cloud/org/v2/organizations \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/org/v2/organizations?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/org/v2/organizations")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1607,7 +1932,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/organizations?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/organizations\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1620,7 +1945,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/org/v2/organizations?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/org/v2/organizations", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1634,7 +1959,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/org/v2/organizations?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/org/v2/organizations",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1659,7 +1984,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/organizations?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/organizations");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1668,15 +1993,14 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/org/v2/organizations?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/org/v2/organizations");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Organization v2
   /org/v2/organizations/{id}:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Organization v2](https://img.shields.io/badge/-Request%20Access%20To%20Organization%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read an organization.
       operationId: getOrgV2Organization
@@ -1698,7 +2022,6 @@ paths:
                 - $ref: '#/components/schemas/org.v2.Organization'
                 - required:
                   - api_version
-                  - display_name
                   - id
                   - kind
                   type: object
@@ -1709,6 +2032,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -1812,6 +2158,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -1834,23 +2210,23 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Read an Organization
       tags:
       - Organizations (org/v2)
-      x-request-access-name: Organization v2
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://api.confluent.cloud/org/v2/organizations/%7Bid%7D \
+            --url 'https://api.confluent.cloud/org/v2/organizations/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/org/v2/organizations/%7Bid%7D")
+            .url("https://api.confluent.cloud/org/v2/organizations/{id}")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1858,7 +2234,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/organizations/%7Bid%7D\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/organizations/{id}\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1871,7 +2247,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/org/v2/organizations/%7Bid%7D", headers=headers)
+          conn.request("GET", "/org/v2/organizations/{id}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1885,7 +2261,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/org/v2/organizations/%7Bid%7D",
+            "path": "/org/v2/organizations/{id}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1910,7 +2286,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/organizations/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/organizations/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1919,13 +2295,13 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/org/v2/organizations/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/org/v2/organizations/{id}");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Organization v2](https://img.shields.io/badge/-Request%20Access%20To%20Organization%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update an organization.
 
@@ -1953,7 +2329,6 @@ paths:
                 - $ref: '#/components/schemas/org.v2.Organization'
                 - required:
                   - api_version
-                  - display_name
                   - id
                   - kind
                   type: object
@@ -1964,6 +2339,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -2111,6 +2509,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -2133,56 +2561,57 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Update an Organization
       tags:
       - Organizations (org/v2)
-      x-request-access-name: Organization v2
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url https://api.confluent.cloud/org/v2/organizations/%7Bid%7D \
+            --url 'https://api.confluent.cloud/org/v2/organizations/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"Finance Org"}'
+            --data '{"display_name":"Finance Org","jit_enabled":true}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"Finance Org\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"Finance Org\",\"jit_enabled\":true}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/org/v2/organizations/%7Bid%7D")
+            .url("https://api.confluent.cloud/org/v2/organizations/{id}")
             .patch(body)
-            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/organizations/%7Bid%7D\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/organizations/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"Finance Org\\\
-          \"}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\"\
-          , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
-          defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
-          \tfmt.Println(string(body))\n\n}"
+          \",\\\"jit_enabled\\\":true}\")\n\n\treq, _ := http.NewRequest(\"PATCH\"\
+          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"Finance Org\"}"
+          payload = "{\"display_name\":\"Finance Org\",\"jit_enabled\":true}"
 
           headers = {
-              'Authorization': "Basic REPLACE_BASIC_AUTH",
-              'content-type': "application/json"
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/org/v2/organizations/%7Bid%7D", payload, headers)
+          conn.request("PATCH", "/org/v2/organizations/{id}", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2196,10 +2625,10 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/org/v2/organizations/%7Bid%7D",
+            "path": "/org/v2/organizations/{id}",
             "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH",
-              "content-type": "application/json"
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
           };
 
@@ -2216,32 +2645,31 @@ paths:
             });
           });
 
-          req.write(JSON.stringify({display_name: 'Finance Org'}));
+          req.write(JSON.stringify({display_name: 'Finance Org', jit_enabled: true}));
           req.end();
       - lang: C
         source: |-
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/organizations/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/organizations/{id}");
 
           struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"Finance Org\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"Finance Org\",\"jit_enabled\":true}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/org/v2/organizations/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/org/v2/organizations/{id}");
           var request = new RestRequest(Method.PATCH);
-          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddHeader("content-type", "application/json");
-          request.AddParameter("application/json", "{\"display_name\":\"Finance Org\"}", ParameterType.RequestBody);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"display_name\":\"Finance Org\",\"jit_enabled\":true}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Organization v2
 components:
   responses:
     BadRequestError:
@@ -2417,6 +2845,36 @@ components:
           schema:
             type: string
           style: simple
+        X-RateLimit-Limit:
+          description: The maximum number of requests you're permitted to make per
+            time period.
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        X-RateLimit-Remaining:
+          description: The number of requests remaining in the current rate limit
+            window.
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        X-RateLimit-Reset:
+          description: "The relative time in seconds until the current rate-limit\
+            \ window resets.  \n  \n**Important:** This differs from Github and Twitter's\
+            \ same-named header which uses UTC epoch seconds. We use relative time\
+            \ to avoid client/server time synchronization issues."
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        Retry-After:
+          description: The number of seconds to wait until the rate limit window resets.
+            Only sent when the rate limit is reached.
+          explode: false
+          schema:
+            type: integer
+          style: simple
     DefaultSystemError:
       content:
         application/json:
@@ -2454,7 +2912,7 @@ components:
         <SchemaDefinition schemaRef="#/components/schemas/org.v2.Environment" />
 
         ## Quotas and Limits
-        This resource is subject to the following quotas:
+        This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
 
         | Quota | Description |
         | --- | --- |
@@ -2495,6 +2953,11 @@ components:
           description: A human-readable name for the Environment
           example: prod-finance01
           type: string
+        stream_governance_config:
+          allOf:
+          - $ref: '#/components/schemas/org.v2.StreamGovernanceConfig'
+          description: Stream Governance configurations for the environment
+          type: object
       type: object
     org.v2.Organization:
       description: |-
@@ -2511,7 +2974,7 @@ components:
         <SchemaDefinition schemaRef="#/components/schemas/org.v2.Organization" />
 
         ## Quotas and Limits
-        This resource is subject to the following quotas:
+        This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
 
         | Quota | Description |
         | --- | --- |
@@ -2553,6 +3016,24 @@ components:
           example: Finance Org
           pattern: ^[^<>#%'*^`{|}~\"]{1,31}$
           type: string
+        jit_enabled:
+          description: The flag to toggle Just-In-Time user provisioning for SSO-enabled
+            organization. Available for early access only.
+          type: boolean
+      type: object
+    org.v2.StreamGovernanceConfig:
+      description: |
+        Configurations pertaining to Stream Governance
+      properties:
+        package:
+          description: |
+            Stream Governance Package. Supported values are ESSENTIALS and ADVANCED with the default being ESSENTIALS.
+            Package comparison can be found
+            [here](https://docs.confluent.io/cloud/current/stream-governance/packages.html#features-by-package-type).
+          type: string
+          x-extensible-enum:
+          - ESSENTIALS
+          - ADVANCED
       type: object
     org.v2.EnvironmentList:
       description: |-
@@ -2569,7 +3050,7 @@ components:
         <SchemaDefinition schemaRef="#/components/schemas/org.v2.Environment" />
 
         ## Quotas and Limits
-        This resource is subject to the following quotas:
+        This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
 
         | Quota | Description |
         | --- | --- |
@@ -2634,7 +3115,7 @@ components:
         <SchemaDefinition schemaRef="#/components/schemas/org.v2.Organization" />
 
         ## Quotas and Limits
-        This resource is subject to the following quotas:
+        This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
 
         | Quota | Description |
         | --- | --- |
@@ -2672,7 +3153,6 @@ components:
             allOf:
             - $ref: '#/components/schemas/org.v2.Organization'
             - required:
-              - display_name
               - id
               - metadata
               type: object
@@ -2864,8 +3344,16 @@ components:
           type: string
       type: object
   securitySchemes:
-    api-key:
-      description: Authenticate with API Keys using HTTP Basic Auth. Treat the API
-        Key ID as the username and API Key Secret as the password.
+    cloud-api-key:
+      description: Authenticate with Cloud API Keys using HTTP Basic Auth. Treat the
+        Cloud API Key ID as the username and Cloud API Key Secret as the password.
       scheme: basic
       type: http
+    confluent-sts-access-token:
+      description: Authenticate with Confluent API using this credentials (JSON Web
+        Tokens) following OAuth 2.0.
+      flows:
+        clientCredentials:
+          scopes: {}
+          tokenUrl: https://api.confluent.cloud/sts/v1/oauth2/token
+      type: oauth2
