@@ -42,14 +42,14 @@ var (
 type ServiceAccountsIamV2Api interface {
 
 	/*
-		CreateIamV2ServiceAccount Create a Service Account
+			CreateIamV2ServiceAccount Create a Service Account
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to create a service account.
+		Make a request to create a service account.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiCreateIamV2ServiceAccountRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiCreateIamV2ServiceAccountRequest
 	*/
 	CreateIamV2ServiceAccount(ctx _context.Context) ApiCreateIamV2ServiceAccountRequest
 
@@ -58,19 +58,19 @@ type ServiceAccountsIamV2Api interface {
 	CreateIamV2ServiceAccountExecute(r ApiCreateIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error)
 
 	/*
-		DeleteIamV2ServiceAccount Delete a Service Account
+			DeleteIamV2ServiceAccount Delete a Service Account
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to delete a service account.
+		Make a request to delete a service account.
 
-	If successful, this request will also recursively delete all of the service account's associated resources,
-	including its cloud and cluster API keys.
+		If successful, this request will also recursively delete all of the service account's associated resources,
+		including its cloud and cluster API keys.
 
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the service account.
-		 @return ApiDeleteIamV2ServiceAccountRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the service account.
+			 @return ApiDeleteIamV2ServiceAccountRequest
 	*/
 	DeleteIamV2ServiceAccount(ctx _context.Context, id string) ApiDeleteIamV2ServiceAccountRequest
 
@@ -78,15 +78,15 @@ type ServiceAccountsIamV2Api interface {
 	DeleteIamV2ServiceAccountExecute(r ApiDeleteIamV2ServiceAccountRequest) (*_nethttp.Response, error)
 
 	/*
-		GetIamV2ServiceAccount Read a Service Account
+			GetIamV2ServiceAccount Read a Service Account
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to read a service account.
+		Make a request to read a service account.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the service account.
-		 @return ApiGetIamV2ServiceAccountRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the service account.
+			 @return ApiGetIamV2ServiceAccountRequest
 	*/
 	GetIamV2ServiceAccount(ctx _context.Context, id string) ApiGetIamV2ServiceAccountRequest
 
@@ -95,14 +95,14 @@ type ServiceAccountsIamV2Api interface {
 	GetIamV2ServiceAccountExecute(r ApiGetIamV2ServiceAccountRequest) (IamV2ServiceAccount, *_nethttp.Response, error)
 
 	/*
-		ListIamV2ServiceAccounts List of Service Accounts
+			ListIamV2ServiceAccounts List of Service Accounts
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Retrieve a sorted, filtered, paginated list of all service accounts.
+		Retrieve a sorted, filtered, paginated list of all service accounts.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListIamV2ServiceAccountsRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiListIamV2ServiceAccountsRequest
 	*/
 	ListIamV2ServiceAccounts(ctx _context.Context) ApiListIamV2ServiceAccountsRequest
 
@@ -111,17 +111,17 @@ type ServiceAccountsIamV2Api interface {
 	ListIamV2ServiceAccountsExecute(r ApiListIamV2ServiceAccountsRequest) (IamV2ServiceAccountList, *_nethttp.Response, error)
 
 	/*
-		UpdateIamV2ServiceAccount Update a Service Account
+			UpdateIamV2ServiceAccount Update a Service Account
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to update a service account.
+		Make a request to update a service account.
 
 
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the service account.
-		 @return ApiUpdateIamV2ServiceAccountRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the service account.
+			 @return ApiUpdateIamV2ServiceAccountRequest
 	*/
 	UpdateIamV2ServiceAccount(ctx _context.Context, id string) ApiUpdateIamV2ServiceAccountRequest
 
@@ -151,7 +151,7 @@ func (r ApiCreateIamV2ServiceAccountRequest) Execute() (IamV2ServiceAccount, *_n
 /*
 CreateIamV2ServiceAccount Create a Service Account
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create a service account.
 
@@ -327,7 +327,7 @@ func (r ApiDeleteIamV2ServiceAccountRequest) Execute() (*_nethttp.Response, erro
 /*
 DeleteIamV2ServiceAccount Delete a Service Account
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete a service account.
 
@@ -475,7 +475,7 @@ func (r ApiGetIamV2ServiceAccountRequest) Execute() (IamV2ServiceAccount, *_neth
 /*
 GetIamV2ServiceAccount Read a Service Account
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a service account.
 
@@ -645,7 +645,7 @@ func (r ApiListIamV2ServiceAccountsRequest) Execute() (IamV2ServiceAccountList, 
 /*
 ListIamV2ServiceAccounts List of Service Accounts
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all service accounts.
 
@@ -801,7 +801,7 @@ func (r ApiUpdateIamV2ServiceAccountRequest) Execute() (IamV2ServiceAccount, *_n
 /*
 UpdateIamV2ServiceAccount Update a Service Account
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update a service account.
 

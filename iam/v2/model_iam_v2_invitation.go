@@ -26,6 +26,7 @@ Contact: paas-team@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
@@ -34,7 +35,7 @@ import (
 	"reflect"
 )
 
-// IamV2Invitation `Invitation` objects represent invitations to invite users to join your organizations in Confluent Cloud.  The API allows you to list all your invitations, as well as create, read, and delete a specified invitation.   Related guide: [User invitations in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/identity/user-accounts.html).  ## The Invitations Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.Invitation\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `invitations_per_org` | Invitations in a Confluent Cloud organization |
+// IamV2Invitation `Invitation` objects represent invitations to invite users to join your organizations in Confluent Cloud.  The API allows you to list all your invitations, as well as create, read, and delete a specified invitation.   Related guide: [User invitations in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/identity/user-accounts.html).  ## The Invitations Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.Invitation\" />  ## Quotas and Limits This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):  | Quota | Description | | --- | --- | | `invitations_per_org` | Invitations in a Confluent Cloud organization |
 type IamV2Invitation struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
@@ -519,7 +520,11 @@ func (o IamV2Invitation) MarshalJSON() ([]byte, error) {
 	if o.Creator != nil {
 		toSerialize["creator"] = o.Creator
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableIamV2Invitation struct {
@@ -550,7 +555,11 @@ func NewNullableIamV2Invitation(val *IamV2Invitation) *NullableIamV2Invitation {
 }
 
 func (v NullableIamV2Invitation) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableIamV2Invitation) UnmarshalJSON(src []byte) error {

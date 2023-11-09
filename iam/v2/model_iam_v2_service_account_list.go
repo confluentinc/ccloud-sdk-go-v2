@@ -26,6 +26,7 @@ Contact: paas-team@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -33,15 +34,15 @@ import (
 	"reflect"
 )
 
-// IamV2ServiceAccountList `ServiceAccount` objects are typically used to represent applications and other non-human principals that may access your Confluent resources.  The API allows you to create, retrieve, update, and delete individual service accounts, as well as list all your service accounts.   Related guide: [Service Accounts in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/service-account.html).  ## The Service Accounts Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.ServiceAccount\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `service_accounts_per_org` | Service Accounts in one Confluent Cloud organization |
+// IamV2ServiceAccountList `ServiceAccount` objects are typically used to represent applications and other non-human principals that may access your Confluent resources.  The API allows you to create, retrieve, update, and delete individual service accounts, as well as list all your service accounts.   Related guide: [Service Accounts in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/service-account.html).  ## The Service Accounts Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.ServiceAccount\" />  ## Quotas and Limits This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):  | Quota | Description | | --- | --- | | `service_accounts_per_org` | Service Accounts in one Confluent Cloud organization |
 type IamV2ServiceAccountList struct {
 	// APIVersion defines the schema version of this representation of a resource.
-	ApiVersion string `json:"api_version"`
+	ApiVersion string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
-	Kind     string   `json:"kind"`
-	Metadata ListMeta `json:"metadata"`
+	Kind     string   `json:"kind,omitempty"`
+	Metadata ListMeta `json:"metadata,omitempty"`
 	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
-	Data []IamV2ServiceAccount `json:"data"`
+	Data []IamV2ServiceAccount `json:"data,omitempty"`
 }
 
 // NewIamV2ServiceAccountList instantiates a new IamV2ServiceAccountList object
@@ -213,7 +214,11 @@ func (o IamV2ServiceAccountList) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableIamV2ServiceAccountList struct {
@@ -244,7 +249,11 @@ func NewNullableIamV2ServiceAccountList(val *IamV2ServiceAccountList) *NullableI
 }
 
 func (v NullableIamV2ServiceAccountList) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableIamV2ServiceAccountList) UnmarshalJSON(src []byte) error {
