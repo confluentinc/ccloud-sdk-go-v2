@@ -1,13 +1,14 @@
-# \IpFiltersIamV2Api
+# \IPFiltersIamV2Api
 
 All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateIamV2IpFilter**](IpFiltersIamV2Api.md#CreateIamV2IpFilter) | **Post** /iam/v2/ip-filters | Create an Ip Filter
-[**DeleteIamV2IpFilter**](IpFiltersIamV2Api.md#DeleteIamV2IpFilter) | **Delete** /iam/v2/ip-filters/{id} | Delete an Ip Filter
-[**GetIamV2IpFilter**](IpFiltersIamV2Api.md#GetIamV2IpFilter) | **Get** /iam/v2/ip-filters/{id} | Read an Ip Filter
-[**ListIamV2IpFilters**](IpFiltersIamV2Api.md#ListIamV2IpFilters) | **Get** /iam/v2/ip-filters | List of Ip Filters
+[**CreateIamV2IpFilter**](IPFiltersIamV2Api.md#CreateIamV2IpFilter) | **Post** /iam/v2/ip-filters | Create an IP Filter
+[**DeleteIamV2IpFilter**](IPFiltersIamV2Api.md#DeleteIamV2IpFilter) | **Delete** /iam/v2/ip-filters/{id} | Delete an IP Filter
+[**GetIamV2IpFilter**](IPFiltersIamV2Api.md#GetIamV2IpFilter) | **Get** /iam/v2/ip-filters/{id} | Read an IP Filter
+[**ListIamV2IpFilters**](IPFiltersIamV2Api.md#ListIamV2IpFilters) | **Get** /iam/v2/ip-filters | List of IP Filters
+[**UpdateIamV2IpFilter**](IPFiltersIamV2Api.md#UpdateIamV2IpFilter) | **Patch** /iam/v2/ip-filters/{id} | Update an IP Filter
 
 
 
@@ -15,7 +16,7 @@ Method | HTTP request | Description
 
 > IamV2IpFilter CreateIamV2IpFilter(ctx).IamV2IpFilter(iamV2IpFilter).Execute()
 
-Create an Ip Filter
+Create an IP Filter
 
 
 
@@ -36,13 +37,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.IpFiltersIamV2Api.CreateIamV2IpFilter(context.Background()).IamV2IpFilter(iamV2IpFilter).Execute()
+    resp, r, err := api_client.IPFiltersIamV2Api.CreateIamV2IpFilter(context.Background()).IamV2IpFilter(iamV2IpFilter).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IpFiltersIamV2Api.CreateIamV2IpFilter``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `IPFiltersIamV2Api.CreateIamV2IpFilter``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `CreateIamV2IpFilter`: IamV2IpFilter
-    fmt.Fprintf(os.Stdout, "Response from `IpFiltersIamV2Api.CreateIamV2IpFilter`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `IPFiltersIamV2Api.CreateIamV2IpFilter`: %v\n", resp)
 }
 ```
 
@@ -81,7 +82,7 @@ Name | Type | Description  | Notes
 
 > DeleteIamV2IpFilter(ctx, id).Execute()
 
-Delete an Ip Filter
+Delete an IP Filter
 
 
 
@@ -98,13 +99,13 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | The unique identifier for the ip filter.
+    id := "id_example" // string | The unique identifier for the IP filter.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.IpFiltersIamV2Api.DeleteIamV2IpFilter(context.Background(), id).Execute()
+    resp, r, err := api_client.IPFiltersIamV2Api.DeleteIamV2IpFilter(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IpFiltersIamV2Api.DeleteIamV2IpFilter``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `IPFiltersIamV2Api.DeleteIamV2IpFilter``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -116,7 +117,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the ip filter. | 
+**id** | **string** | The unique identifier for the IP filter. | 
 
 ### Other Parameters
 
@@ -149,7 +150,7 @@ Name | Type | Description  | Notes
 
 > IamV2IpFilter GetIamV2IpFilter(ctx, id).Execute()
 
-Read an Ip Filter
+Read an IP Filter
 
 
 
@@ -166,17 +167,17 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | The unique identifier for the ip filter.
+    id := "id_example" // string | The unique identifier for the IP filter.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.IpFiltersIamV2Api.GetIamV2IpFilter(context.Background(), id).Execute()
+    resp, r, err := api_client.IPFiltersIamV2Api.GetIamV2IpFilter(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IpFiltersIamV2Api.GetIamV2IpFilter``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `IPFiltersIamV2Api.GetIamV2IpFilter``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `GetIamV2IpFilter`: IamV2IpFilter
-    fmt.Fprintf(os.Stdout, "Response from `IpFiltersIamV2Api.GetIamV2IpFilter`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `IPFiltersIamV2Api.GetIamV2IpFilter`: %v\n", resp)
 }
 ```
 
@@ -186,7 +187,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the ip filter. | 
+**id** | **string** | The unique identifier for the IP filter. | 
 
 ### Other Parameters
 
@@ -219,7 +220,7 @@ Name | Type | Description  | Notes
 
 > IamV2IpFilterList ListIamV2IpFilters(ctx).PageSize(pageSize).PageToken(pageToken).Execute()
 
-List of Ip Filters
+List of IP Filters
 
 
 
@@ -241,13 +242,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.IpFiltersIamV2Api.ListIamV2IpFilters(context.Background()).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.IPFiltersIamV2Api.ListIamV2IpFilters(context.Background()).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IpFiltersIamV2Api.ListIamV2IpFilters``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `IPFiltersIamV2Api.ListIamV2IpFilters``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `ListIamV2IpFilters`: IamV2IpFilterList
-    fmt.Fprintf(os.Stdout, "Response from `IpFiltersIamV2Api.ListIamV2IpFilters`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `IPFiltersIamV2Api.ListIamV2IpFilters`: %v\n", resp)
 }
 ```
 
@@ -276,6 +277,78 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateIamV2IpFilter
+
+> IamV2IpFilter UpdateIamV2IpFilter(ctx, id).IamV2IpFilter(iamV2IpFilter).Execute()
+
+Update an IP Filter
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    id := "id_example" // string | The unique identifier for the IP filter.
+    iamV2IpFilter := *openapiclient.NewIamV2IpFilter() // IamV2IpFilter |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.IPFiltersIamV2Api.UpdateIamV2IpFilter(context.Background(), id).IamV2IpFilter(iamV2IpFilter).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `IPFiltersIamV2Api.UpdateIamV2IpFilter``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateIamV2IpFilter`: IamV2IpFilter
+    fmt.Fprintf(os.Stdout, "Response from `IPFiltersIamV2Api.UpdateIamV2IpFilter`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | The unique identifier for the IP filter. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateIamV2IpFilterRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **iamV2IpFilter** | [**IamV2IpFilter**](IamV2IpFilter.md) |  | 
+
+### Return type
+
+[**IamV2IpFilter**](iam.v2.IpFilter.md)
+
+### Authorization
+
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

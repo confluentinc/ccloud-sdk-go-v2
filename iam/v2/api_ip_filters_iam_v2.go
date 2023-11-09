@@ -39,14 +39,14 @@ var (
 	_ _context.Context
 )
 
-type IpFiltersIamV2Api interface {
+type IPFiltersIamV2Api interface {
 
 	/*
-		CreateIamV2IpFilter Create an Ip Filter
+		CreateIamV2IpFilter Create an IP Filter
 
 		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Make a request to create an ip filter.
+	Make a request to create an IP filter.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @return ApiCreateIamV2IpFilterRequest
@@ -58,14 +58,14 @@ type IpFiltersIamV2Api interface {
 	CreateIamV2IpFilterExecute(r ApiCreateIamV2IpFilterRequest) (IamV2IpFilter, *_nethttp.Response, error)
 
 	/*
-		DeleteIamV2IpFilter Delete an Ip Filter
+		DeleteIamV2IpFilter Delete an IP Filter
 
 		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Make a request to delete an ip filter.
+	Make a request to delete an IP filter.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the ip filter.
+		 @param id The unique identifier for the IP filter.
 		 @return ApiDeleteIamV2IpFilterRequest
 	*/
 	DeleteIamV2IpFilter(ctx _context.Context, id string) ApiDeleteIamV2IpFilterRequest
@@ -74,14 +74,14 @@ type IpFiltersIamV2Api interface {
 	DeleteIamV2IpFilterExecute(r ApiDeleteIamV2IpFilterRequest) (*_nethttp.Response, error)
 
 	/*
-		GetIamV2IpFilter Read an Ip Filter
+		GetIamV2IpFilter Read an IP Filter
 
 		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Make a request to read an ip filter.
+	Make a request to read an IP filter.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the ip filter.
+		 @param id The unique identifier for the IP filter.
 		 @return ApiGetIamV2IpFilterRequest
 	*/
 	GetIamV2IpFilter(ctx _context.Context, id string) ApiGetIamV2IpFilterRequest
@@ -91,11 +91,11 @@ type IpFiltersIamV2Api interface {
 	GetIamV2IpFilterExecute(r ApiGetIamV2IpFilterRequest) (IamV2IpFilter, *_nethttp.Response, error)
 
 	/*
-		ListIamV2IpFilters List of Ip Filters
+		ListIamV2IpFilters List of IP Filters
 
 		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Retrieve a sorted, filtered, paginated list of all ip filters.
+	Retrieve a sorted, filtered, paginated list of all IP filters.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @return ApiListIamV2IpFiltersRequest
@@ -105,14 +105,33 @@ type IpFiltersIamV2Api interface {
 	// ListIamV2IpFiltersExecute executes the request
 	//  @return IamV2IpFilterList
 	ListIamV2IpFiltersExecute(r ApiListIamV2IpFiltersRequest) (IamV2IpFilterList, *_nethttp.Response, error)
+
+	/*
+		UpdateIamV2IpFilter Update an IP Filter
+
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+	Make a request to update an IP filter.
+
+
+
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the IP filter.
+		 @return ApiUpdateIamV2IpFilterRequest
+	*/
+	UpdateIamV2IpFilter(ctx _context.Context, id string) ApiUpdateIamV2IpFilterRequest
+
+	// UpdateIamV2IpFilterExecute executes the request
+	//  @return IamV2IpFilter
+	UpdateIamV2IpFilterExecute(r ApiUpdateIamV2IpFilterRequest) (IamV2IpFilter, *_nethttp.Response, error)
 }
 
-// IpFiltersIamV2ApiService IpFiltersIamV2Api service
-type IpFiltersIamV2ApiService service
+// IPFiltersIamV2ApiService IPFiltersIamV2Api service
+type IPFiltersIamV2ApiService service
 
 type ApiCreateIamV2IpFilterRequest struct {
 	ctx           _context.Context
-	ApiService    IpFiltersIamV2Api
+	ApiService    IPFiltersIamV2Api
 	iamV2IpFilter *IamV2IpFilter
 }
 
@@ -126,16 +145,16 @@ func (r ApiCreateIamV2IpFilterRequest) Execute() (IamV2IpFilter, *_nethttp.Respo
 }
 
 /*
-CreateIamV2IpFilter Create an Ip Filter
+CreateIamV2IpFilter Create an IP Filter
 
 [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to create an ip filter.
+Make a request to create an IP filter.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateIamV2IpFilterRequest
 */
-func (a *IpFiltersIamV2ApiService) CreateIamV2IpFilter(ctx _context.Context) ApiCreateIamV2IpFilterRequest {
+func (a *IPFiltersIamV2ApiService) CreateIamV2IpFilter(ctx _context.Context) ApiCreateIamV2IpFilterRequest {
 	return ApiCreateIamV2IpFilterRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -145,7 +164,7 @@ func (a *IpFiltersIamV2ApiService) CreateIamV2IpFilter(ctx _context.Context) Api
 // Execute executes the request
 //
 //	@return IamV2IpFilter
-func (a *IpFiltersIamV2ApiService) CreateIamV2IpFilterExecute(r ApiCreateIamV2IpFilterRequest) (IamV2IpFilter, *_nethttp.Response, error) {
+func (a *IPFiltersIamV2ApiService) CreateIamV2IpFilterExecute(r ApiCreateIamV2IpFilterRequest) (IamV2IpFilter, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -155,7 +174,7 @@ func (a *IpFiltersIamV2ApiService) CreateIamV2IpFilterExecute(r ApiCreateIamV2Ip
 		localVarReturnValue  IamV2IpFilter
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IpFiltersIamV2ApiService.CreateIamV2IpFilter")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IPFiltersIamV2ApiService.CreateIamV2IpFilter")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -283,7 +302,7 @@ func (a *IpFiltersIamV2ApiService) CreateIamV2IpFilterExecute(r ApiCreateIamV2Ip
 
 type ApiDeleteIamV2IpFilterRequest struct {
 	ctx        _context.Context
-	ApiService IpFiltersIamV2Api
+	ApiService IPFiltersIamV2Api
 	id         string
 }
 
@@ -292,17 +311,17 @@ func (r ApiDeleteIamV2IpFilterRequest) Execute() (*_nethttp.Response, error) {
 }
 
 /*
-DeleteIamV2IpFilter Delete an Ip Filter
+DeleteIamV2IpFilter Delete an IP Filter
 
 [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to delete an ip filter.
+Make a request to delete an IP filter.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the ip filter.
+	@param id The unique identifier for the IP filter.
 	@return ApiDeleteIamV2IpFilterRequest
 */
-func (a *IpFiltersIamV2ApiService) DeleteIamV2IpFilter(ctx _context.Context, id string) ApiDeleteIamV2IpFilterRequest {
+func (a *IPFiltersIamV2ApiService) DeleteIamV2IpFilter(ctx _context.Context, id string) ApiDeleteIamV2IpFilterRequest {
 	return ApiDeleteIamV2IpFilterRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -311,7 +330,7 @@ func (a *IpFiltersIamV2ApiService) DeleteIamV2IpFilter(ctx _context.Context, id 
 }
 
 // Execute executes the request
-func (a *IpFiltersIamV2ApiService) DeleteIamV2IpFilterExecute(r ApiDeleteIamV2IpFilterRequest) (*_nethttp.Response, error) {
+func (a *IPFiltersIamV2ApiService) DeleteIamV2IpFilterExecute(r ApiDeleteIamV2IpFilterRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
@@ -320,7 +339,7 @@ func (a *IpFiltersIamV2ApiService) DeleteIamV2IpFilterExecute(r ApiDeleteIamV2Ip
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IpFiltersIamV2ApiService.DeleteIamV2IpFilter")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IPFiltersIamV2ApiService.DeleteIamV2IpFilter")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -428,7 +447,7 @@ func (a *IpFiltersIamV2ApiService) DeleteIamV2IpFilterExecute(r ApiDeleteIamV2Ip
 
 type ApiGetIamV2IpFilterRequest struct {
 	ctx        _context.Context
-	ApiService IpFiltersIamV2Api
+	ApiService IPFiltersIamV2Api
 	id         string
 }
 
@@ -437,17 +456,17 @@ func (r ApiGetIamV2IpFilterRequest) Execute() (IamV2IpFilter, *_nethttp.Response
 }
 
 /*
-GetIamV2IpFilter Read an Ip Filter
+GetIamV2IpFilter Read an IP Filter
 
 [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to read an ip filter.
+Make a request to read an IP filter.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the ip filter.
+	@param id The unique identifier for the IP filter.
 	@return ApiGetIamV2IpFilterRequest
 */
-func (a *IpFiltersIamV2ApiService) GetIamV2IpFilter(ctx _context.Context, id string) ApiGetIamV2IpFilterRequest {
+func (a *IPFiltersIamV2ApiService) GetIamV2IpFilter(ctx _context.Context, id string) ApiGetIamV2IpFilterRequest {
 	return ApiGetIamV2IpFilterRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -458,7 +477,7 @@ func (a *IpFiltersIamV2ApiService) GetIamV2IpFilter(ctx _context.Context, id str
 // Execute executes the request
 //
 //	@return IamV2IpFilter
-func (a *IpFiltersIamV2ApiService) GetIamV2IpFilterExecute(r ApiGetIamV2IpFilterRequest) (IamV2IpFilter, *_nethttp.Response, error) {
+func (a *IPFiltersIamV2ApiService) GetIamV2IpFilterExecute(r ApiGetIamV2IpFilterRequest) (IamV2IpFilter, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -468,7 +487,7 @@ func (a *IpFiltersIamV2ApiService) GetIamV2IpFilterExecute(r ApiGetIamV2IpFilter
 		localVarReturnValue  IamV2IpFilter
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IpFiltersIamV2ApiService.GetIamV2IpFilter")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IPFiltersIamV2ApiService.GetIamV2IpFilter")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -585,7 +604,7 @@ func (a *IpFiltersIamV2ApiService) GetIamV2IpFilterExecute(r ApiGetIamV2IpFilter
 
 type ApiListIamV2IpFiltersRequest struct {
 	ctx        _context.Context
-	ApiService IpFiltersIamV2Api
+	ApiService IPFiltersIamV2Api
 	pageSize   *int32
 	pageToken  *string
 }
@@ -607,16 +626,16 @@ func (r ApiListIamV2IpFiltersRequest) Execute() (IamV2IpFilterList, *_nethttp.Re
 }
 
 /*
-ListIamV2IpFilters List of Ip Filters
+ListIamV2IpFilters List of IP Filters
 
 [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Retrieve a sorted, filtered, paginated list of all ip filters.
+Retrieve a sorted, filtered, paginated list of all IP filters.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListIamV2IpFiltersRequest
 */
-func (a *IpFiltersIamV2ApiService) ListIamV2IpFilters(ctx _context.Context) ApiListIamV2IpFiltersRequest {
+func (a *IPFiltersIamV2ApiService) ListIamV2IpFilters(ctx _context.Context) ApiListIamV2IpFiltersRequest {
 	return ApiListIamV2IpFiltersRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -626,7 +645,7 @@ func (a *IpFiltersIamV2ApiService) ListIamV2IpFilters(ctx _context.Context) ApiL
 // Execute executes the request
 //
 //	@return IamV2IpFilterList
-func (a *IpFiltersIamV2ApiService) ListIamV2IpFiltersExecute(r ApiListIamV2IpFiltersRequest) (IamV2IpFilterList, *_nethttp.Response, error) {
+func (a *IPFiltersIamV2ApiService) ListIamV2IpFiltersExecute(r ApiListIamV2IpFiltersRequest) (IamV2IpFilterList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -636,7 +655,7 @@ func (a *IpFiltersIamV2ApiService) ListIamV2IpFiltersExecute(r ApiListIamV2IpFil
 		localVarReturnValue  IamV2IpFilterList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IpFiltersIamV2ApiService.ListIamV2IpFilters")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IPFiltersIamV2ApiService.ListIamV2IpFilters")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -713,6 +732,181 @@ func (a *IpFiltersIamV2ApiService) ListIamV2IpFiltersExecute(r ApiListIamV2IpFil
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateIamV2IpFilterRequest struct {
+	ctx           _context.Context
+	ApiService    IPFiltersIamV2Api
+	id            string
+	iamV2IpFilter *IamV2IpFilter
+}
+
+func (r ApiUpdateIamV2IpFilterRequest) IamV2IpFilter(iamV2IpFilter IamV2IpFilter) ApiUpdateIamV2IpFilterRequest {
+	r.iamV2IpFilter = &iamV2IpFilter
+	return r
+}
+
+func (r ApiUpdateIamV2IpFilterRequest) Execute() (IamV2IpFilter, *_nethttp.Response, error) {
+	return r.ApiService.UpdateIamV2IpFilterExecute(r)
+}
+
+/*
+UpdateIamV2IpFilter Update an IP Filter
+
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Make a request to update an IP filter.
+
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the IP filter.
+	@return ApiUpdateIamV2IpFilterRequest
+*/
+func (a *IPFiltersIamV2ApiService) UpdateIamV2IpFilter(ctx _context.Context, id string) ApiUpdateIamV2IpFilterRequest {
+	return ApiUpdateIamV2IpFilterRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+//
+//	@return IamV2IpFilter
+func (a *IPFiltersIamV2ApiService) UpdateIamV2IpFilterExecute(r ApiUpdateIamV2IpFilterRequest) (IamV2IpFilter, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  IamV2IpFilter
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IPFiltersIamV2ApiService.UpdateIamV2IpFilter")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/iam/v2/ip-filters/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.iamV2IpFilter
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

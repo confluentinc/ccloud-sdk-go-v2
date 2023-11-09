@@ -8,8 +8,9 @@ Name | Type | Description | Notes
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
-**ResourceGroup** | Pointer to **string** | Container for IP Group. The only resource_group currently available is \&quot;management\&quot;. | [optional] 
-**IpGroup** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | An IP Group. | [optional] 
+**FilterName** | Pointer to **string** | A human readable name for an IP Filter. Can contain any unicode letter or number, the ASCII space character, or any of the following special characters: &#x60;[&#x60;, &#x60;]&#x60;, &#x60;|&#x60;, &#x60;&amp;&#x60;, &#x60;+&#x60;, &#x60;-&#x60;, &#x60;_&#x60;, &#x60;/&#x60;, &#x60;.&#x60;, &#x60;,&#x60;.  | [optional] 
+**ResourceGroup** | Pointer to **string** | Scope of resources covered by this IP filter. The only resource_group currently available is \&quot;management\&quot;. | [optional] 
+**IpGroups** | Pointer to [**[]GlobalObjectReference**](GlobalObjectReference.md) | A list of IP Groups. | [optional] 
 
 ## Methods
 
@@ -130,6 +131,31 @@ SetMetadata sets Metadata field to given value.
 
 HasMetadata returns a boolean if a field has been set.
 
+### GetFilterName
+
+`func (o *IamV2IpFilter) GetFilterName() string`
+
+GetFilterName returns the FilterName field if non-nil, zero value otherwise.
+
+### GetFilterNameOk
+
+`func (o *IamV2IpFilter) GetFilterNameOk() (*string, bool)`
+
+GetFilterNameOk returns a tuple with the FilterName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFilterName
+
+`func (o *IamV2IpFilter) SetFilterName(v string)`
+
+SetFilterName sets FilterName field to given value.
+
+### HasFilterName
+
+`func (o *IamV2IpFilter) HasFilterName() bool`
+
+HasFilterName returns a boolean if a field has been set.
+
 ### GetResourceGroup
 
 `func (o *IamV2IpFilter) GetResourceGroup() string`
@@ -155,30 +181,30 @@ SetResourceGroup sets ResourceGroup field to given value.
 
 HasResourceGroup returns a boolean if a field has been set.
 
-### GetIpGroup
+### GetIpGroups
 
-`func (o *IamV2IpFilter) GetIpGroup() GlobalObjectReference`
+`func (o *IamV2IpFilter) GetIpGroups() []GlobalObjectReference`
 
-GetIpGroup returns the IpGroup field if non-nil, zero value otherwise.
+GetIpGroups returns the IpGroups field if non-nil, zero value otherwise.
 
-### GetIpGroupOk
+### GetIpGroupsOk
 
-`func (o *IamV2IpFilter) GetIpGroupOk() (*GlobalObjectReference, bool)`
+`func (o *IamV2IpFilter) GetIpGroupsOk() (*[]GlobalObjectReference, bool)`
 
-GetIpGroupOk returns a tuple with the IpGroup field if it's non-nil, zero value otherwise
+GetIpGroupsOk returns a tuple with the IpGroups field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIpGroup
+### SetIpGroups
 
-`func (o *IamV2IpFilter) SetIpGroup(v GlobalObjectReference)`
+`func (o *IamV2IpFilter) SetIpGroups(v []GlobalObjectReference)`
 
-SetIpGroup sets IpGroup field to given value.
+SetIpGroups sets IpGroups field to given value.
 
-### HasIpGroup
+### HasIpGroups
 
-`func (o *IamV2IpFilter) HasIpGroup() bool`
+`func (o *IamV2IpFilter) HasIpGroups() bool`
 
-HasIpGroup returns a boolean if a field has been set.
+HasIpGroups returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

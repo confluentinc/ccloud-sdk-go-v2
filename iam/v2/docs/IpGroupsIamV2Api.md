@@ -1,14 +1,14 @@
-# \IpGroupsIamV2Api
+# \IPGroupsIamV2Api
 
 All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateIamV2IpGroup**](IpGroupsIamV2Api.md#CreateIamV2IpGroup) | **Post** /iam/v2/ip-groups | Create an Ip Group
-[**DeleteIamV2IpGroup**](IpGroupsIamV2Api.md#DeleteIamV2IpGroup) | **Delete** /iam/v2/ip-groups/{id} | Delete an Ip Group
-[**GetIamV2IpGroup**](IpGroupsIamV2Api.md#GetIamV2IpGroup) | **Get** /iam/v2/ip-groups/{id} | Read an Ip Group
-[**ListIamV2IpGroups**](IpGroupsIamV2Api.md#ListIamV2IpGroups) | **Get** /iam/v2/ip-groups | List of Ip Groups
-[**UpdateIamV2IpGroup**](IpGroupsIamV2Api.md#UpdateIamV2IpGroup) | **Patch** /iam/v2/ip-groups/{id} | Update an Ip Group
+[**CreateIamV2IpGroup**](IPGroupsIamV2Api.md#CreateIamV2IpGroup) | **Post** /iam/v2/ip-groups | Create an IP Group
+[**DeleteIamV2IpGroup**](IPGroupsIamV2Api.md#DeleteIamV2IpGroup) | **Delete** /iam/v2/ip-groups/{id} | Delete an IP Group
+[**GetIamV2IpGroup**](IPGroupsIamV2Api.md#GetIamV2IpGroup) | **Get** /iam/v2/ip-groups/{id} | Read an IP Group
+[**ListIamV2IpGroups**](IPGroupsIamV2Api.md#ListIamV2IpGroups) | **Get** /iam/v2/ip-groups | List of IP Groups
+[**UpdateIamV2IpGroup**](IPGroupsIamV2Api.md#UpdateIamV2IpGroup) | **Patch** /iam/v2/ip-groups/{id} | Update an IP Group
 
 
 
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 > IamV2IpGroup CreateIamV2IpGroup(ctx).IamV2IpGroup(iamV2IpGroup).Execute()
 
-Create an Ip Group
+Create an IP Group
 
 
 
@@ -37,13 +37,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.IpGroupsIamV2Api.CreateIamV2IpGroup(context.Background()).IamV2IpGroup(iamV2IpGroup).Execute()
+    resp, r, err := api_client.IPGroupsIamV2Api.CreateIamV2IpGroup(context.Background()).IamV2IpGroup(iamV2IpGroup).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IpGroupsIamV2Api.CreateIamV2IpGroup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `IPGroupsIamV2Api.CreateIamV2IpGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `CreateIamV2IpGroup`: IamV2IpGroup
-    fmt.Fprintf(os.Stdout, "Response from `IpGroupsIamV2Api.CreateIamV2IpGroup`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `IPGroupsIamV2Api.CreateIamV2IpGroup`: %v\n", resp)
 }
 ```
 
@@ -82,7 +82,7 @@ Name | Type | Description  | Notes
 
 > DeleteIamV2IpGroup(ctx, id).Execute()
 
-Delete an Ip Group
+Delete an IP Group
 
 
 
@@ -99,13 +99,13 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | The unique identifier for the ip group.
+    id := "id_example" // string | The unique identifier for the IP group.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.IpGroupsIamV2Api.DeleteIamV2IpGroup(context.Background(), id).Execute()
+    resp, r, err := api_client.IPGroupsIamV2Api.DeleteIamV2IpGroup(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IpGroupsIamV2Api.DeleteIamV2IpGroup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `IPGroupsIamV2Api.DeleteIamV2IpGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -117,7 +117,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the ip group. | 
+**id** | **string** | The unique identifier for the IP group. | 
 
 ### Other Parameters
 
@@ -150,7 +150,7 @@ Name | Type | Description  | Notes
 
 > IamV2IpGroup GetIamV2IpGroup(ctx, id).Execute()
 
-Read an Ip Group
+Read an IP Group
 
 
 
@@ -167,17 +167,17 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | The unique identifier for the ip group.
+    id := "id_example" // string | The unique identifier for the IP group.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.IpGroupsIamV2Api.GetIamV2IpGroup(context.Background(), id).Execute()
+    resp, r, err := api_client.IPGroupsIamV2Api.GetIamV2IpGroup(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IpGroupsIamV2Api.GetIamV2IpGroup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `IPGroupsIamV2Api.GetIamV2IpGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `GetIamV2IpGroup`: IamV2IpGroup
-    fmt.Fprintf(os.Stdout, "Response from `IpGroupsIamV2Api.GetIamV2IpGroup`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `IPGroupsIamV2Api.GetIamV2IpGroup`: %v\n", resp)
 }
 ```
 
@@ -187,7 +187,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the ip group. | 
+**id** | **string** | The unique identifier for the IP group. | 
 
 ### Other Parameters
 
@@ -220,7 +220,7 @@ Name | Type | Description  | Notes
 
 > IamV2IpGroupList ListIamV2IpGroups(ctx).PageSize(pageSize).PageToken(pageToken).Execute()
 
-List of Ip Groups
+List of IP Groups
 
 
 
@@ -242,13 +242,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.IpGroupsIamV2Api.ListIamV2IpGroups(context.Background()).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.IPGroupsIamV2Api.ListIamV2IpGroups(context.Background()).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IpGroupsIamV2Api.ListIamV2IpGroups``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `IPGroupsIamV2Api.ListIamV2IpGroups``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `ListIamV2IpGroups`: IamV2IpGroupList
-    fmt.Fprintf(os.Stdout, "Response from `IpGroupsIamV2Api.ListIamV2IpGroups`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `IPGroupsIamV2Api.ListIamV2IpGroups`: %v\n", resp)
 }
 ```
 
@@ -288,7 +288,7 @@ Name | Type | Description  | Notes
 
 > IamV2IpGroup UpdateIamV2IpGroup(ctx, id).IamV2IpGroup(iamV2IpGroup).Execute()
 
-Update an Ip Group
+Update an IP Group
 
 
 
@@ -305,18 +305,18 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | The unique identifier for the ip group.
+    id := "id_example" // string | The unique identifier for the IP group.
     iamV2IpGroup := *openapiclient.NewIamV2IpGroup() // IamV2IpGroup |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.IpGroupsIamV2Api.UpdateIamV2IpGroup(context.Background(), id).IamV2IpGroup(iamV2IpGroup).Execute()
+    resp, r, err := api_client.IPGroupsIamV2Api.UpdateIamV2IpGroup(context.Background(), id).IamV2IpGroup(iamV2IpGroup).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IpGroupsIamV2Api.UpdateIamV2IpGroup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `IPGroupsIamV2Api.UpdateIamV2IpGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `UpdateIamV2IpGroup`: IamV2IpGroup
-    fmt.Fprintf(os.Stdout, "Response from `IpGroupsIamV2Api.UpdateIamV2IpGroup`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `IPGroupsIamV2Api.UpdateIamV2IpGroup`: %v\n", resp)
 }
 ```
 
@@ -326,7 +326,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the ip group. | 
+**id** | **string** | The unique identifier for the IP group. | 
 
 ### Other Parameters
 

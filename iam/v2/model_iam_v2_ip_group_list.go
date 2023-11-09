@@ -34,7 +34,7 @@ import (
 	"reflect"
 )
 
-// IamV2IpGroupList Definitions of networks which can be named and referred by IP blocks, commonly used to attach to IP Filter rules.   ## The Ip Groups Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.IpGroup\" />
+// IamV2IpGroupList Definitions of networks which can be named and referred by IP blocks, commonly used to attach to IP Filter rules.   ## The IP Groups Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.IpGroup\" />
 type IamV2IpGroupList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version,omitempty"`

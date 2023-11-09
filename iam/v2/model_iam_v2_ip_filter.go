@@ -34,7 +34,7 @@ import (
 	"reflect"
 )
 
-// IamV2IpFilter `IP Filter` objects are bindings between IP Groups and Confluent resource(s). For example, a binding between \"CorpNet\" and \"Management APIs\" will enforce that access must come from one of the CIDR blocks associated with CorpNet. If there are multiple IP filters bound to a resource, a request matching any of the CIDR blocks for any of the IP Group will allow the request. If there are no IP Filters for a resource, then access will be granted to requests originating from any IP Address.   ## The Ip Filters Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.IpFilter\" />
+// IamV2IpFilter `IP Filter` objects are bindings between IP Groups and Confluent resource(s). For example, a binding between \"CorpNet\" and \"Management APIs\" will enforce that access must come from one of the CIDR blocks associated with CorpNet. If there are multiple IP filters bound to a resource, a request matching any of the CIDR blocks for any of the IP Group will allow the request. If there are no IP Filters for a resource, then access will be granted to requests originating from any IP Address.   ## The IP Filters Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.IpFilter\" />
 type IamV2IpFilter struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
@@ -43,10 +43,12 @@ type IamV2IpFilter struct {
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
 	Id       *string     `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
-	// Container for IP Group. The only resource_group currently available is \"management\".
+	// A human readable name for an IP Filter. Can contain any unicode letter or number, the ASCII space character, or any of the following special characters: `[`, `]`, `|`, `&`, `+`, `-`, `_`, `/`, `.`, `,`.
+	FilterName *string `json:"filter_name,omitempty"`
+	// Scope of resources covered by this IP filter. The only resource_group currently available is \"management\".
 	ResourceGroup *string `json:"resource_group,omitempty"`
-	// An IP Group.
-	IpGroup *GlobalObjectReference `json:"ip_group,omitempty"`
+	// A list of IP Groups.
+	IpGroups *[]GlobalObjectReference `json:"ip_groups,omitempty"`
 }
 
 // NewIamV2IpFilter instantiates a new IamV2IpFilter object
@@ -194,6 +196,38 @@ func (o *IamV2IpFilter) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
+// GetFilterName returns the FilterName field value if set, zero value otherwise.
+func (o *IamV2IpFilter) GetFilterName() string {
+	if o == nil || o.FilterName == nil {
+		var ret string
+		return ret
+	}
+	return *o.FilterName
+}
+
+// GetFilterNameOk returns a tuple with the FilterName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamV2IpFilter) GetFilterNameOk() (*string, bool) {
+	if o == nil || o.FilterName == nil {
+		return nil, false
+	}
+	return o.FilterName, true
+}
+
+// HasFilterName returns a boolean if a field has been set.
+func (o *IamV2IpFilter) HasFilterName() bool {
+	if o != nil && o.FilterName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFilterName gets a reference to the given string and assigns it to the FilterName field.
+func (o *IamV2IpFilter) SetFilterName(v string) {
+	o.FilterName = &v
+}
+
 // GetResourceGroup returns the ResourceGroup field value if set, zero value otherwise.
 func (o *IamV2IpFilter) GetResourceGroup() string {
 	if o == nil || o.ResourceGroup == nil {
@@ -226,36 +260,36 @@ func (o *IamV2IpFilter) SetResourceGroup(v string) {
 	o.ResourceGroup = &v
 }
 
-// GetIpGroup returns the IpGroup field value if set, zero value otherwise.
-func (o *IamV2IpFilter) GetIpGroup() GlobalObjectReference {
-	if o == nil || o.IpGroup == nil {
-		var ret GlobalObjectReference
+// GetIpGroups returns the IpGroups field value if set, zero value otherwise.
+func (o *IamV2IpFilter) GetIpGroups() []GlobalObjectReference {
+	if o == nil || o.IpGroups == nil {
+		var ret []GlobalObjectReference
 		return ret
 	}
-	return *o.IpGroup
+	return *o.IpGroups
 }
 
-// GetIpGroupOk returns a tuple with the IpGroup field value if set, nil otherwise
+// GetIpGroupsOk returns a tuple with the IpGroups field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IamV2IpFilter) GetIpGroupOk() (*GlobalObjectReference, bool) {
-	if o == nil || o.IpGroup == nil {
+func (o *IamV2IpFilter) GetIpGroupsOk() (*[]GlobalObjectReference, bool) {
+	if o == nil || o.IpGroups == nil {
 		return nil, false
 	}
-	return o.IpGroup, true
+	return o.IpGroups, true
 }
 
-// HasIpGroup returns a boolean if a field has been set.
-func (o *IamV2IpFilter) HasIpGroup() bool {
-	if o != nil && o.IpGroup != nil {
+// HasIpGroups returns a boolean if a field has been set.
+func (o *IamV2IpFilter) HasIpGroups() bool {
+	if o != nil && o.IpGroups != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetIpGroup gets a reference to the given GlobalObjectReference and assigns it to the IpGroup field.
-func (o *IamV2IpFilter) SetIpGroup(v GlobalObjectReference) {
-	o.IpGroup = &v
+// SetIpGroups gets a reference to the given []GlobalObjectReference and assigns it to the IpGroups field.
+func (o *IamV2IpFilter) SetIpGroups(v []GlobalObjectReference) {
+	o.IpGroups = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
@@ -264,8 +298,9 @@ func (o *IamV2IpFilter) Redact() {
 	o.recurseRedact(o.Kind)
 	o.recurseRedact(o.Id)
 	o.recurseRedact(o.Metadata)
+	o.recurseRedact(o.FilterName)
 	o.recurseRedact(o.ResourceGroup)
-	o.recurseRedact(o.IpGroup)
+	o.recurseRedact(o.IpGroups)
 }
 
 func (o *IamV2IpFilter) recurseRedact(v interface{}) {
@@ -312,11 +347,14 @@ func (o IamV2IpFilter) MarshalJSON() ([]byte, error) {
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
 	}
+	if o.FilterName != nil {
+		toSerialize["filter_name"] = o.FilterName
+	}
 	if o.ResourceGroup != nil {
 		toSerialize["resource_group"] = o.ResourceGroup
 	}
-	if o.IpGroup != nil {
-		toSerialize["ip_group"] = o.IpGroup
+	if o.IpGroups != nil {
+		toSerialize["ip_groups"] = o.IpGroups
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

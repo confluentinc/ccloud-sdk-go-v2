@@ -79,19 +79,20 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*IPFiltersIamV2Api* | [**CreateIamV2IpFilter**](docs/IPFiltersIamV2Api.md#createiamv2ipfilter) | **Post** /iam/v2/ip-filters | Create an IP Filter
+*IPFiltersIamV2Api* | [**DeleteIamV2IpFilter**](docs/IPFiltersIamV2Api.md#deleteiamv2ipfilter) | **Delete** /iam/v2/ip-filters/{id} | Delete an IP Filter
+*IPFiltersIamV2Api* | [**GetIamV2IpFilter**](docs/IPFiltersIamV2Api.md#getiamv2ipfilter) | **Get** /iam/v2/ip-filters/{id} | Read an IP Filter
+*IPFiltersIamV2Api* | [**ListIamV2IpFilters**](docs/IPFiltersIamV2Api.md#listiamv2ipfilters) | **Get** /iam/v2/ip-filters | List of IP Filters
+*IPFiltersIamV2Api* | [**UpdateIamV2IpFilter**](docs/IPFiltersIamV2Api.md#updateiamv2ipfilter) | **Patch** /iam/v2/ip-filters/{id} | Update an IP Filter
+*IPGroupsIamV2Api* | [**CreateIamV2IpGroup**](docs/IPGroupsIamV2Api.md#createiamv2ipgroup) | **Post** /iam/v2/ip-groups | Create an IP Group
+*IPGroupsIamV2Api* | [**DeleteIamV2IpGroup**](docs/IPGroupsIamV2Api.md#deleteiamv2ipgroup) | **Delete** /iam/v2/ip-groups/{id} | Delete an IP Group
+*IPGroupsIamV2Api* | [**GetIamV2IpGroup**](docs/IPGroupsIamV2Api.md#getiamv2ipgroup) | **Get** /iam/v2/ip-groups/{id} | Read an IP Group
+*IPGroupsIamV2Api* | [**ListIamV2IpGroups**](docs/IPGroupsIamV2Api.md#listiamv2ipgroups) | **Get** /iam/v2/ip-groups | List of IP Groups
+*IPGroupsIamV2Api* | [**UpdateIamV2IpGroup**](docs/IPGroupsIamV2Api.md#updateiamv2ipgroup) | **Patch** /iam/v2/ip-groups/{id} | Update an IP Group
 *InvitationsIamV2Api* | [**CreateIamV2Invitation**](docs/InvitationsIamV2Api.md#createiamv2invitation) | **Post** /iam/v2/invitations | Create an Invitation
 *InvitationsIamV2Api* | [**DeleteIamV2Invitation**](docs/InvitationsIamV2Api.md#deleteiamv2invitation) | **Delete** /iam/v2/invitations/{id} | Delete an Invitation
 *InvitationsIamV2Api* | [**GetIamV2Invitation**](docs/InvitationsIamV2Api.md#getiamv2invitation) | **Get** /iam/v2/invitations/{id} | Read an Invitation
 *InvitationsIamV2Api* | [**ListIamV2Invitations**](docs/InvitationsIamV2Api.md#listiamv2invitations) | **Get** /iam/v2/invitations | List of Invitations
-*IpFiltersIamV2Api* | [**CreateIamV2IpFilter**](docs/IpFiltersIamV2Api.md#createiamv2ipfilter) | **Post** /iam/v2/ip-filters | Create an Ip Filter
-*IpFiltersIamV2Api* | [**DeleteIamV2IpFilter**](docs/IpFiltersIamV2Api.md#deleteiamv2ipfilter) | **Delete** /iam/v2/ip-filters/{id} | Delete an Ip Filter
-*IpFiltersIamV2Api* | [**GetIamV2IpFilter**](docs/IpFiltersIamV2Api.md#getiamv2ipfilter) | **Get** /iam/v2/ip-filters/{id} | Read an Ip Filter
-*IpFiltersIamV2Api* | [**ListIamV2IpFilters**](docs/IpFiltersIamV2Api.md#listiamv2ipfilters) | **Get** /iam/v2/ip-filters | List of Ip Filters
-*IpGroupsIamV2Api* | [**CreateIamV2IpGroup**](docs/IpGroupsIamV2Api.md#createiamv2ipgroup) | **Post** /iam/v2/ip-groups | Create an Ip Group
-*IpGroupsIamV2Api* | [**DeleteIamV2IpGroup**](docs/IpGroupsIamV2Api.md#deleteiamv2ipgroup) | **Delete** /iam/v2/ip-groups/{id} | Delete an Ip Group
-*IpGroupsIamV2Api* | [**GetIamV2IpGroup**](docs/IpGroupsIamV2Api.md#getiamv2ipgroup) | **Get** /iam/v2/ip-groups/{id} | Read an Ip Group
-*IpGroupsIamV2Api* | [**ListIamV2IpGroups**](docs/IpGroupsIamV2Api.md#listiamv2ipgroups) | **Get** /iam/v2/ip-groups | List of Ip Groups
-*IpGroupsIamV2Api* | [**UpdateIamV2IpGroup**](docs/IpGroupsIamV2Api.md#updateiamv2ipgroup) | **Patch** /iam/v2/ip-groups/{id} | Update an Ip Group
 *ServiceAccountsIamV2Api* | [**CreateIamV2ServiceAccount**](docs/ServiceAccountsIamV2Api.md#createiamv2serviceaccount) | **Post** /iam/v2/service-accounts | Create a Service Account
 *ServiceAccountsIamV2Api* | [**DeleteIamV2ServiceAccount**](docs/ServiceAccountsIamV2Api.md#deleteiamv2serviceaccount) | **Delete** /iam/v2/service-accounts/{id} | Delete a Service Account
 *ServiceAccountsIamV2Api* | [**GetIamV2ServiceAccount**](docs/ServiceAccountsIamV2Api.md#getiamv2serviceaccount) | **Get** /iam/v2/service-accounts/{id} | Read a Service Account
