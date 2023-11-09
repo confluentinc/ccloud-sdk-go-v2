@@ -39,110 +39,290 @@ var (
 	_ _context.Context
 )
 
-type UsersIamV2Api interface {
+type IPGroupsIamV2Api interface {
 
 	/*
-			DeleteIamV2User Delete a User
+			CreateIamV2IpGroup Create an IP Group
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Make a request to delete a user.
+		Make a request to create an IP group.
 
-		If successful, this request will also recursively delete all of the user's associated resources,
-		including its cloud and cluster API keys.
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiCreateIamV2IpGroupRequest
+	*/
+	CreateIamV2IpGroup(ctx _context.Context) ApiCreateIamV2IpGroupRequest
+
+	// CreateIamV2IpGroupExecute executes the request
+	//  @return IamV2IpGroup
+	CreateIamV2IpGroupExecute(r ApiCreateIamV2IpGroupRequest) (IamV2IpGroup, *_nethttp.Response, error)
+
+	/*
+			DeleteIamV2IpGroup Delete an IP Group
+
+			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+		Make a request to delete an IP group.
+
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the IP group.
+			 @return ApiDeleteIamV2IpGroupRequest
+	*/
+	DeleteIamV2IpGroup(ctx _context.Context, id string) ApiDeleteIamV2IpGroupRequest
+
+	// DeleteIamV2IpGroupExecute executes the request
+	DeleteIamV2IpGroupExecute(r ApiDeleteIamV2IpGroupRequest) (*_nethttp.Response, error)
+
+	/*
+			GetIamV2IpGroup Read an IP Group
+
+			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+		Make a request to read an IP group.
+
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the IP group.
+			 @return ApiGetIamV2IpGroupRequest
+	*/
+	GetIamV2IpGroup(ctx _context.Context, id string) ApiGetIamV2IpGroupRequest
+
+	// GetIamV2IpGroupExecute executes the request
+	//  @return IamV2IpGroup
+	GetIamV2IpGroupExecute(r ApiGetIamV2IpGroupRequest) (IamV2IpGroup, *_nethttp.Response, error)
+
+	/*
+			ListIamV2IpGroups List of IP Groups
+
+			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+		Retrieve a sorted, filtered, paginated list of all IP groups.
+
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiListIamV2IpGroupsRequest
+	*/
+	ListIamV2IpGroups(ctx _context.Context) ApiListIamV2IpGroupsRequest
+
+	// ListIamV2IpGroupsExecute executes the request
+	//  @return IamV2IpGroupList
+	ListIamV2IpGroupsExecute(r ApiListIamV2IpGroupsRequest) (IamV2IpGroupList, *_nethttp.Response, error)
+
+	/*
+			UpdateIamV2IpGroup Update an IP Group
+
+			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+		Make a request to update an IP group.
+
 
 
 			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the user.
-			 @return ApiDeleteIamV2UserRequest
+			 @param id The unique identifier for the IP group.
+			 @return ApiUpdateIamV2IpGroupRequest
 	*/
-	DeleteIamV2User(ctx _context.Context, id string) ApiDeleteIamV2UserRequest
+	UpdateIamV2IpGroup(ctx _context.Context, id string) ApiUpdateIamV2IpGroupRequest
 
-	// DeleteIamV2UserExecute executes the request
-	DeleteIamV2UserExecute(r ApiDeleteIamV2UserRequest) (*_nethttp.Response, error)
-
-	/*
-			GetIamV2User Read a User
-
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-		Make a request to read a user.
-
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the user.
-			 @return ApiGetIamV2UserRequest
-	*/
-	GetIamV2User(ctx _context.Context, id string) ApiGetIamV2UserRequest
-
-	// GetIamV2UserExecute executes the request
-	//  @return IamV2User
-	GetIamV2UserExecute(r ApiGetIamV2UserRequest) (IamV2User, *_nethttp.Response, error)
-
-	/*
-			ListIamV2Users List of Users
-
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-		Retrieve a sorted, filtered, paginated list of all users.
-
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiListIamV2UsersRequest
-	*/
-	ListIamV2Users(ctx _context.Context) ApiListIamV2UsersRequest
-
-	// ListIamV2UsersExecute executes the request
-	//  @return IamV2UserList
-	ListIamV2UsersExecute(r ApiListIamV2UsersRequest) (IamV2UserList, *_nethttp.Response, error)
-
-	/*
-			UpdateIamV2User Update a User
-
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-		Make a request to update a user.
-
-
-
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the user.
-			 @return ApiUpdateIamV2UserRequest
-	*/
-	UpdateIamV2User(ctx _context.Context, id string) ApiUpdateIamV2UserRequest
-
-	// UpdateIamV2UserExecute executes the request
-	//  @return IamV2User
-	UpdateIamV2UserExecute(r ApiUpdateIamV2UserRequest) (IamV2User, *_nethttp.Response, error)
+	// UpdateIamV2IpGroupExecute executes the request
+	//  @return IamV2IpGroup
+	UpdateIamV2IpGroupExecute(r ApiUpdateIamV2IpGroupRequest) (IamV2IpGroup, *_nethttp.Response, error)
 }
 
-// UsersIamV2ApiService UsersIamV2Api service
-type UsersIamV2ApiService service
+// IPGroupsIamV2ApiService IPGroupsIamV2Api service
+type IPGroupsIamV2ApiService service
 
-type ApiDeleteIamV2UserRequest struct {
-	ctx        _context.Context
-	ApiService UsersIamV2Api
-	id         string
+type ApiCreateIamV2IpGroupRequest struct {
+	ctx          _context.Context
+	ApiService   IPGroupsIamV2Api
+	iamV2IpGroup *IamV2IpGroup
 }
 
-func (r ApiDeleteIamV2UserRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.DeleteIamV2UserExecute(r)
+func (r ApiCreateIamV2IpGroupRequest) IamV2IpGroup(iamV2IpGroup IamV2IpGroup) ApiCreateIamV2IpGroupRequest {
+	r.iamV2IpGroup = &iamV2IpGroup
+	return r
+}
+
+func (r ApiCreateIamV2IpGroupRequest) Execute() (IamV2IpGroup, *_nethttp.Response, error) {
+	return r.ApiService.CreateIamV2IpGroupExecute(r)
 }
 
 /*
-DeleteIamV2User Delete a User
+CreateIamV2IpGroup Create an IP Group
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to delete a user.
-
-If successful, this request will also recursively delete all of the user's associated resources,
-including its cloud and cluster API keys.
+Make a request to create an IP group.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the user.
-	@return ApiDeleteIamV2UserRequest
+	@return ApiCreateIamV2IpGroupRequest
 */
-func (a *UsersIamV2ApiService) DeleteIamV2User(ctx _context.Context, id string) ApiDeleteIamV2UserRequest {
-	return ApiDeleteIamV2UserRequest{
+func (a *IPGroupsIamV2ApiService) CreateIamV2IpGroup(ctx _context.Context) ApiCreateIamV2IpGroupRequest {
+	return ApiCreateIamV2IpGroupRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return IamV2IpGroup
+func (a *IPGroupsIamV2ApiService) CreateIamV2IpGroupExecute(r ApiCreateIamV2IpGroupRequest) (IamV2IpGroup, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  IamV2IpGroup
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IPGroupsIamV2ApiService.CreateIamV2IpGroup")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/iam/v2/ip-groups"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.iamV2IpGroup
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiDeleteIamV2IpGroupRequest struct {
+	ctx        _context.Context
+	ApiService IPGroupsIamV2Api
+	id         string
+}
+
+func (r ApiDeleteIamV2IpGroupRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteIamV2IpGroupExecute(r)
+}
+
+/*
+DeleteIamV2IpGroup Delete an IP Group
+
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Make a request to delete an IP group.
+
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the IP group.
+	@return ApiDeleteIamV2IpGroupRequest
+*/
+func (a *IPGroupsIamV2ApiService) DeleteIamV2IpGroup(ctx _context.Context, id string) ApiDeleteIamV2IpGroupRequest {
+	return ApiDeleteIamV2IpGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -150,7 +330,7 @@ func (a *UsersIamV2ApiService) DeleteIamV2User(ctx _context.Context, id string) 
 }
 
 // Execute executes the request
-func (a *UsersIamV2ApiService) DeleteIamV2UserExecute(r ApiDeleteIamV2UserRequest) (*_nethttp.Response, error) {
+func (a *IPGroupsIamV2ApiService) DeleteIamV2IpGroupExecute(r ApiDeleteIamV2IpGroupRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
@@ -159,12 +339,12 @@ func (a *UsersIamV2ApiService) DeleteIamV2UserExecute(r ApiDeleteIamV2UserReques
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersIamV2ApiService.DeleteIamV2User")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IPGroupsIamV2ApiService.DeleteIamV2IpGroup")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/iam/v2/users/{id}"
+	localVarPath := localBasePath + "/iam/v2/ip-groups/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -265,29 +445,29 @@ func (a *UsersIamV2ApiService) DeleteIamV2UserExecute(r ApiDeleteIamV2UserReques
 	return localVarHTTPResponse, nil
 }
 
-type ApiGetIamV2UserRequest struct {
+type ApiGetIamV2IpGroupRequest struct {
 	ctx        _context.Context
-	ApiService UsersIamV2Api
+	ApiService IPGroupsIamV2Api
 	id         string
 }
 
-func (r ApiGetIamV2UserRequest) Execute() (IamV2User, *_nethttp.Response, error) {
-	return r.ApiService.GetIamV2UserExecute(r)
+func (r ApiGetIamV2IpGroupRequest) Execute() (IamV2IpGroup, *_nethttp.Response, error) {
+	return r.ApiService.GetIamV2IpGroupExecute(r)
 }
 
 /*
-GetIamV2User Read a User
+GetIamV2IpGroup Read an IP Group
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to read a user.
+Make a request to read an IP group.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the user.
-	@return ApiGetIamV2UserRequest
+	@param id The unique identifier for the IP group.
+	@return ApiGetIamV2IpGroupRequest
 */
-func (a *UsersIamV2ApiService) GetIamV2User(ctx _context.Context, id string) ApiGetIamV2UserRequest {
-	return ApiGetIamV2UserRequest{
+func (a *IPGroupsIamV2ApiService) GetIamV2IpGroup(ctx _context.Context, id string) ApiGetIamV2IpGroupRequest {
+	return ApiGetIamV2IpGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -296,23 +476,23 @@ func (a *UsersIamV2ApiService) GetIamV2User(ctx _context.Context, id string) Api
 
 // Execute executes the request
 //
-//	@return IamV2User
-func (a *UsersIamV2ApiService) GetIamV2UserExecute(r ApiGetIamV2UserRequest) (IamV2User, *_nethttp.Response, error) {
+//	@return IamV2IpGroup
+func (a *IPGroupsIamV2ApiService) GetIamV2IpGroupExecute(r ApiGetIamV2IpGroupRequest) (IamV2IpGroup, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  IamV2User
+		localVarReturnValue  IamV2IpGroup
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersIamV2ApiService.GetIamV2User")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IPGroupsIamV2ApiService.GetIamV2IpGroup")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/iam/v2/users/{id}"
+	localVarPath := localBasePath + "/iam/v2/ip-groups/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -422,41 +602,41 @@ func (a *UsersIamV2ApiService) GetIamV2UserExecute(r ApiGetIamV2UserRequest) (Ia
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListIamV2UsersRequest struct {
+type ApiListIamV2IpGroupsRequest struct {
 	ctx        _context.Context
-	ApiService UsersIamV2Api
+	ApiService IPGroupsIamV2Api
 	pageSize   *int32
 	pageToken  *string
 }
 
 // A pagination size for collection requests.
-func (r ApiListIamV2UsersRequest) PageSize(pageSize int32) ApiListIamV2UsersRequest {
+func (r ApiListIamV2IpGroupsRequest) PageSize(pageSize int32) ApiListIamV2IpGroupsRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
 // An opaque pagination token for collection requests.
-func (r ApiListIamV2UsersRequest) PageToken(pageToken string) ApiListIamV2UsersRequest {
+func (r ApiListIamV2IpGroupsRequest) PageToken(pageToken string) ApiListIamV2IpGroupsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-func (r ApiListIamV2UsersRequest) Execute() (IamV2UserList, *_nethttp.Response, error) {
-	return r.ApiService.ListIamV2UsersExecute(r)
+func (r ApiListIamV2IpGroupsRequest) Execute() (IamV2IpGroupList, *_nethttp.Response, error) {
+	return r.ApiService.ListIamV2IpGroupsExecute(r)
 }
 
 /*
-ListIamV2Users List of Users
+ListIamV2IpGroups List of IP Groups
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Retrieve a sorted, filtered, paginated list of all users.
+Retrieve a sorted, filtered, paginated list of all IP groups.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListIamV2UsersRequest
+	@return ApiListIamV2IpGroupsRequest
 */
-func (a *UsersIamV2ApiService) ListIamV2Users(ctx _context.Context) ApiListIamV2UsersRequest {
-	return ApiListIamV2UsersRequest{
+func (a *IPGroupsIamV2ApiService) ListIamV2IpGroups(ctx _context.Context) ApiListIamV2IpGroupsRequest {
+	return ApiListIamV2IpGroupsRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -464,23 +644,23 @@ func (a *UsersIamV2ApiService) ListIamV2Users(ctx _context.Context) ApiListIamV2
 
 // Execute executes the request
 //
-//	@return IamV2UserList
-func (a *UsersIamV2ApiService) ListIamV2UsersExecute(r ApiListIamV2UsersRequest) (IamV2UserList, *_nethttp.Response, error) {
+//	@return IamV2IpGroupList
+func (a *IPGroupsIamV2ApiService) ListIamV2IpGroupsExecute(r ApiListIamV2IpGroupsRequest) (IamV2IpGroupList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  IamV2UserList
+		localVarReturnValue  IamV2IpGroupList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersIamV2ApiService.ListIamV2Users")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IPGroupsIamV2ApiService.ListIamV2IpGroups")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/iam/v2/users"
+	localVarPath := localBasePath + "/iam/v2/ip-groups"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -585,35 +765,35 @@ func (a *UsersIamV2ApiService) ListIamV2UsersExecute(r ApiListIamV2UsersRequest)
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateIamV2UserRequest struct {
-	ctx             _context.Context
-	ApiService      UsersIamV2Api
-	id              string
-	iamV2UserUpdate *IamV2UserUpdate
+type ApiUpdateIamV2IpGroupRequest struct {
+	ctx          _context.Context
+	ApiService   IPGroupsIamV2Api
+	id           string
+	iamV2IpGroup *IamV2IpGroup
 }
 
-func (r ApiUpdateIamV2UserRequest) IamV2UserUpdate(iamV2UserUpdate IamV2UserUpdate) ApiUpdateIamV2UserRequest {
-	r.iamV2UserUpdate = &iamV2UserUpdate
+func (r ApiUpdateIamV2IpGroupRequest) IamV2IpGroup(iamV2IpGroup IamV2IpGroup) ApiUpdateIamV2IpGroupRequest {
+	r.iamV2IpGroup = &iamV2IpGroup
 	return r
 }
 
-func (r ApiUpdateIamV2UserRequest) Execute() (IamV2User, *_nethttp.Response, error) {
-	return r.ApiService.UpdateIamV2UserExecute(r)
+func (r ApiUpdateIamV2IpGroupRequest) Execute() (IamV2IpGroup, *_nethttp.Response, error) {
+	return r.ApiService.UpdateIamV2IpGroupExecute(r)
 }
 
 /*
-UpdateIamV2User Update a User
+UpdateIamV2IpGroup Update an IP Group
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to update a user.
+Make a request to update an IP group.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the user.
-	@return ApiUpdateIamV2UserRequest
+	@param id The unique identifier for the IP group.
+	@return ApiUpdateIamV2IpGroupRequest
 */
-func (a *UsersIamV2ApiService) UpdateIamV2User(ctx _context.Context, id string) ApiUpdateIamV2UserRequest {
-	return ApiUpdateIamV2UserRequest{
+func (a *IPGroupsIamV2ApiService) UpdateIamV2IpGroup(ctx _context.Context, id string) ApiUpdateIamV2IpGroupRequest {
+	return ApiUpdateIamV2IpGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -622,23 +802,23 @@ func (a *UsersIamV2ApiService) UpdateIamV2User(ctx _context.Context, id string) 
 
 // Execute executes the request
 //
-//	@return IamV2User
-func (a *UsersIamV2ApiService) UpdateIamV2UserExecute(r ApiUpdateIamV2UserRequest) (IamV2User, *_nethttp.Response, error) {
+//	@return IamV2IpGroup
+func (a *IPGroupsIamV2ApiService) UpdateIamV2IpGroupExecute(r ApiUpdateIamV2IpGroupRequest) (IamV2IpGroup, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  IamV2User
+		localVarReturnValue  IamV2IpGroup
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersIamV2ApiService.UpdateIamV2User")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IPGroupsIamV2ApiService.UpdateIamV2IpGroup")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/iam/v2/users/{id}"
+	localVarPath := localBasePath + "/iam/v2/ip-groups/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -663,7 +843,7 @@ func (a *UsersIamV2ApiService) UpdateIamV2UserExecute(r ApiUpdateIamV2UserReques
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.iamV2UserUpdate
+	localVarPostBody = r.iamV2IpGroup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -697,16 +877,6 @@ func (a *UsersIamV2ApiService) UpdateIamV2UserExecute(r ApiUpdateIamV2UserReques
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 402 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

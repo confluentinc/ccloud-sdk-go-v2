@@ -26,6 +26,7 @@ Contact: paas-team@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,13 +37,13 @@ import (
 // ObjectReference ObjectReference provides information for you to locate the referred object
 type ObjectReference struct {
 	// ID of the referred resource
-	Id string `json:"id"`
+	Id string `json:"id,omitempty"`
 	// Environment of the referred resource, if env-scoped
 	Environment *string `json:"environment,omitempty"`
 	// API URL for accessing or modifying the referred object
-	Related string `json:"related"`
+	Related string `json:"related,omitempty"`
 	// CRN reference to the referred resource
-	ResourceName string `json:"resource_name"`
+	ResourceName string `json:"resource_name,omitempty"`
 	// API group and version of the referred resource
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind of the referred resource
@@ -297,7 +298,11 @@ func (o ObjectReference) MarshalJSON() ([]byte, error) {
 	if o.Kind != nil {
 		toSerialize["kind"] = o.Kind
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableObjectReference struct {
@@ -328,7 +333,11 @@ func NewNullableObjectReference(val *ObjectReference) *NullableObjectReference {
 }
 
 func (v NullableObjectReference) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableObjectReference) UnmarshalJSON(src []byte) error {
