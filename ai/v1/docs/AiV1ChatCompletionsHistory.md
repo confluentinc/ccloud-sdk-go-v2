@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Question** | Pointer to **string** | Question for the Confluent AI assistant. | [optional] 
-**Answer** | Pointer to **string** | Markdown-formatted answer from the Confluent AI assistant. | [optional] 
+**Question** | Pointer to **string** | Question for the AI assistant. | [optional] 
+**Answer** | Pointer to **string** | Markdown-formatted answer from the AI assistant. | [optional] 
 **AskedAt** | Pointer to **time.Time** | The date and time at which this question was asked. It is represented in RFC3339 format and is in UTC. | [optional] 
 
 ## Methods

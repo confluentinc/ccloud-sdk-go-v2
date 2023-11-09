@@ -53,25 +53,25 @@ type DocCompletionsAiV1Api interface {
 	QueryAiV1DocCompletion(ctx _context.Context) ApiQueryAiV1DocCompletionRequest
 
 	// QueryAiV1DocCompletionExecute executes the request
-	//  @return AiV1DocCompletionsReply
-	QueryAiV1DocCompletionExecute(r ApiQueryAiV1DocCompletionRequest) (AiV1DocCompletionsReply, *_nethttp.Response, error)
+	//  @return AiV1ChatCompletionsReply
+	QueryAiV1DocCompletionExecute(r ApiQueryAiV1DocCompletionRequest) (AiV1ChatCompletionsReply, *_nethttp.Response, error)
 }
 
 // DocCompletionsAiV1ApiService DocCompletionsAiV1Api service
 type DocCompletionsAiV1ApiService service
 
 type ApiQueryAiV1DocCompletionRequest struct {
-	ctx                       _context.Context
-	ApiService                DocCompletionsAiV1Api
-	aiV1DocCompletionsRequest *AiV1DocCompletionsRequest
+	ctx                        _context.Context
+	ApiService                 DocCompletionsAiV1Api
+	aiV1ChatCompletionsRequest *AiV1ChatCompletionsRequest
 }
 
-func (r ApiQueryAiV1DocCompletionRequest) AiV1DocCompletionsRequest(aiV1DocCompletionsRequest AiV1DocCompletionsRequest) ApiQueryAiV1DocCompletionRequest {
-	r.aiV1DocCompletionsRequest = &aiV1DocCompletionsRequest
+func (r ApiQueryAiV1DocCompletionRequest) AiV1ChatCompletionsRequest(aiV1ChatCompletionsRequest AiV1ChatCompletionsRequest) ApiQueryAiV1DocCompletionRequest {
+	r.aiV1ChatCompletionsRequest = &aiV1ChatCompletionsRequest
 	return r
 }
 
-func (r ApiQueryAiV1DocCompletionRequest) Execute() (AiV1DocCompletionsReply, *_nethttp.Response, error) {
+func (r ApiQueryAiV1DocCompletionRequest) Execute() (AiV1ChatCompletionsReply, *_nethttp.Response, error) {
 	return r.ApiService.QueryAiV1DocCompletionExecute(r)
 }
 
@@ -93,15 +93,15 @@ func (a *DocCompletionsAiV1ApiService) QueryAiV1DocCompletion(ctx _context.Conte
 }
 
 // Execute executes the request
-//  @return AiV1DocCompletionsReply
-func (a *DocCompletionsAiV1ApiService) QueryAiV1DocCompletionExecute(r ApiQueryAiV1DocCompletionRequest) (AiV1DocCompletionsReply, *_nethttp.Response, error) {
+//  @return AiV1ChatCompletionsReply
+func (a *DocCompletionsAiV1ApiService) QueryAiV1DocCompletionExecute(r ApiQueryAiV1DocCompletionRequest) (AiV1ChatCompletionsReply, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  AiV1DocCompletionsReply
+		localVarReturnValue  AiV1ChatCompletionsReply
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DocCompletionsAiV1ApiService.QueryAiV1DocCompletion")
@@ -133,7 +133,7 @@ func (a *DocCompletionsAiV1ApiService) QueryAiV1DocCompletionExecute(r ApiQueryA
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.aiV1DocCompletionsRequest
+	localVarPostBody = r.aiV1ChatCompletionsRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -157,26 +157,6 @@ func (a *DocCompletionsAiV1ApiService) QueryAiV1DocCompletionExecute(r ApiQueryA
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

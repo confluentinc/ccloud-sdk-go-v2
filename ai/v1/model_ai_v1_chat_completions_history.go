@@ -37,9 +37,9 @@ import (
 
 // AiV1ChatCompletionsHistory A question and answer pair from a previous interaction.
 type AiV1ChatCompletionsHistory struct {
-	// Question for the Confluent AI assistant.
+	// Question for the AI assistant.
 	Question *string `json:"question,omitempty"`
-	// Markdown-formatted answer from the Confluent AI assistant.
+	// Markdown-formatted answer from the AI assistant.
 	Answer *string `json:"answer,omitempty"`
 	// The date and time at which this question was asked. It is represented in RFC3339 format and is in UTC.
 	AskedAt *time.Time `json:"asked_at,omitempty"`

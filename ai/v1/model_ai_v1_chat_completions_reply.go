@@ -35,7 +35,7 @@ import (
 	"reflect"
 )
 
-// AiV1ChatCompletionsReply Reply from the Confluent AI assistant.
+// AiV1ChatCompletionsReply Reply from the AI assistant.
 type AiV1ChatCompletionsReply struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`

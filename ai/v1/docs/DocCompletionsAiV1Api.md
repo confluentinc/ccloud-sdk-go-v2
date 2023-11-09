@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## QueryAiV1DocCompletion
 
-> AiV1DocCompletionsReply QueryAiV1DocCompletion(ctx).AiV1DocCompletionsRequest(aiV1DocCompletionsRequest).Execute()
+> AiV1ChatCompletionsReply QueryAiV1DocCompletion(ctx).AiV1ChatCompletionsRequest(aiV1ChatCompletionsRequest).Execute()
 
 Query a Doc Completion
 
@@ -29,16 +29,16 @@ import (
 )
 
 func main() {
-    aiV1DocCompletionsRequest := *openapiclient.NewAiV1DocCompletionsRequest() // AiV1DocCompletionsRequest |  (optional)
+    aiV1ChatCompletionsRequest := *openapiclient.NewAiV1ChatCompletionsRequest() // AiV1ChatCompletionsRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DocCompletionsAiV1Api.QueryAiV1DocCompletion(context.Background()).AiV1DocCompletionsRequest(aiV1DocCompletionsRequest).Execute()
+    resp, r, err := api_client.DocCompletionsAiV1Api.QueryAiV1DocCompletion(context.Background()).AiV1ChatCompletionsRequest(aiV1ChatCompletionsRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DocCompletionsAiV1Api.QueryAiV1DocCompletion``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `QueryAiV1DocCompletion`: AiV1DocCompletionsReply
+    // response from `QueryAiV1DocCompletion`: AiV1ChatCompletionsReply
     fmt.Fprintf(os.Stdout, "Response from `DocCompletionsAiV1Api.QueryAiV1DocCompletion`: %v\n", resp)
 }
 ```
@@ -54,15 +54,15 @@ Other parameters are passed through a pointer to a apiQueryAiV1DocCompletionRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **aiV1DocCompletionsRequest** | [**AiV1DocCompletionsRequest**](AiV1DocCompletionsRequest.md) |  | 
+ **aiV1ChatCompletionsRequest** | [**AiV1ChatCompletionsRequest**](AiV1ChatCompletionsRequest.md) |  | 
 
 ### Return type
 
-[**AiV1DocCompletionsReply**](AiV1DocCompletionsReply.md)
+[**AiV1ChatCompletionsReply**](AiV1ChatCompletionsReply.md)
 
 ### Authorization
 
-[cloud-api-key](../README.md#cloud-api-key)
+No authorization required
 
 ### HTTP request headers
 
