@@ -101,13 +101,14 @@ Class | Method | HTTP request | Description
  - [OrgV2EnvironmentList](docs/OrgV2EnvironmentList.md)
  - [OrgV2Organization](docs/OrgV2Organization.md)
  - [OrgV2OrganizationList](docs/OrgV2OrganizationList.md)
+ - [OrgV2StreamGovernanceConfig](docs/OrgV2StreamGovernanceConfig.md)
 
 
 ## Documentation For Authorization
 
 
 
-### api-key
+### cloud-api-key
 
 - **Type**: HTTP basic authentication
 
@@ -118,6 +119,34 @@ auth := context.WithValue(context.Background(), sw.ContextBasicAuth, sw.BasicAut
     UserName: "username",
     Password: "password",
 })
+r, err := client.Service.Operation(auth, args)
+```
+
+
+### confluent-sts-access-token
+
+
+- **Type**: OAuth
+- **Flow**: application
+- **Authorization URL**: 
+- **Scopes**: N/A
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextAccessToken, "ACCESSTOKENSTRING")
+r, err := client.Service.Operation(auth, args)
+```
+
+Or via OAuth2 module to automatically refresh tokens and perform user authentication.
+
+```golang
+import "golang.org/x/oauth2"
+
+/* Perform OAuth2 round trip request and obtain a token */
+
+tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
+auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
 r, err := client.Service.Operation(auth, args)
 ```
 

@@ -34,7 +34,7 @@ import (
 	"reflect"
 )
 
-// OrgV2Organization `Organization` objects represent a customer organization. An organization contains all customer resources (e.g., Environments, Kafka Clusters, Service Accounts, API Keys) and is tied to a billing agreement (including any annual commitment or support plan).  The API allows you to list, view, and update your organizations.   Related guide: [Organizations for Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/hierarchy/organizations/cloud-organization.html).  ## The Organizations Model <SchemaDefinition schemaRef=\"#/components/schemas/org.v2.Organization\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `organizations_per_user` | Confluent Cloud organizations a user belongs to |
+// OrgV2Organization `Organization` objects represent a customer organization. An organization contains all customer resources (e.g., Environments, Kafka Clusters, Service Accounts, API Keys) and is tied to a billing agreement (including any annual commitment or support plan).  The API allows you to list, view, and update your organizations.   Related guide: [Organizations for Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/hierarchy/organizations/cloud-organization.html).  ## The Organizations Model <SchemaDefinition schemaRef=\"#/components/schemas/org.v2.Organization\" />  ## Quotas and Limits This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):  | Quota | Description | | --- | --- | | `organizations_per_user` | Confluent Cloud organizations a user belongs to |
 type OrgV2Organization struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
@@ -45,7 +45,7 @@ type OrgV2Organization struct {
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
 	// A human-readable name for the Organization
 	DisplayName *string `json:"display_name,omitempty"`
-	// The flag to toggle Just-In-Time user provision for SSO-enabled organization
+	// The flag to toggle Just-In-Time user provisioning for SSO-enabled organization. Available for early access only.
 	JitEnabled *bool `json:"jit_enabled,omitempty"`
 }
 
