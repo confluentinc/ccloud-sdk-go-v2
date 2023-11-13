@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
 **DisplayName** | Pointer to **string** | A human-readable name for the Environment | [optional] 
+**StreamGovernanceConfig** | Pointer to [**OrgV2StreamGovernanceConfig**](org.v2.StreamGovernanceConfig.md) | Stream Governance configurations for the environment | [optional] 
 
 ## Methods
 
@@ -153,6 +154,31 @@ SetDisplayName sets DisplayName field to given value.
 `func (o *OrgV2Environment) HasDisplayName() bool`
 
 HasDisplayName returns a boolean if a field has been set.
+
+### GetStreamGovernanceConfig
+
+`func (o *OrgV2Environment) GetStreamGovernanceConfig() OrgV2StreamGovernanceConfig`
+
+GetStreamGovernanceConfig returns the StreamGovernanceConfig field if non-nil, zero value otherwise.
+
+### GetStreamGovernanceConfigOk
+
+`func (o *OrgV2Environment) GetStreamGovernanceConfigOk() (*OrgV2StreamGovernanceConfig, bool)`
+
+GetStreamGovernanceConfigOk returns a tuple with the StreamGovernanceConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStreamGovernanceConfig
+
+`func (o *OrgV2Environment) SetStreamGovernanceConfig(v OrgV2StreamGovernanceConfig)`
+
+SetStreamGovernanceConfig sets StreamGovernanceConfig field to given value.
+
+### HasStreamGovernanceConfig
+
+`func (o *OrgV2Environment) HasStreamGovernanceConfig() bool`
+
+HasStreamGovernanceConfig returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

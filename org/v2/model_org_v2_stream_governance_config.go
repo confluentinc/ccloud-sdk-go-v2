@@ -34,60 +34,67 @@ import (
 	"reflect"
 )
 
-// Failure Provides information about problems encountered while performing an operation.
-type Failure struct {
-	// List of errors which caused this operation to fail
-	Errors []Error `json:"errors,omitempty"`
+// OrgV2StreamGovernanceConfig Configurations pertaining to Stream Governance
+type OrgV2StreamGovernanceConfig struct {
+	// Stream Governance Package. Supported values are ESSENTIALS and ADVANCED with the default being ESSENTIALS. Package comparison can be found [here](https://docs.confluent.io/cloud/current/stream-governance/packages.html#features-by-package-type).
+	Package *string `json:"package,omitempty"`
 }
 
-// NewFailure instantiates a new Failure object
+// NewOrgV2StreamGovernanceConfig instantiates a new OrgV2StreamGovernanceConfig object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFailure(errors []Error) *Failure {
-	this := Failure{}
-	this.Errors = errors
+func NewOrgV2StreamGovernanceConfig() *OrgV2StreamGovernanceConfig {
+	this := OrgV2StreamGovernanceConfig{}
 	return &this
 }
 
-// NewFailureWithDefaults instantiates a new Failure object
+// NewOrgV2StreamGovernanceConfigWithDefaults instantiates a new OrgV2StreamGovernanceConfig object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFailureWithDefaults() *Failure {
-	this := Failure{}
+func NewOrgV2StreamGovernanceConfigWithDefaults() *OrgV2StreamGovernanceConfig {
+	this := OrgV2StreamGovernanceConfig{}
 	return &this
 }
 
-// GetErrors returns the Errors field value
-func (o *Failure) GetErrors() []Error {
-	if o == nil {
-		var ret []Error
+// GetPackage returns the Package field value if set, zero value otherwise.
+func (o *OrgV2StreamGovernanceConfig) GetPackage() string {
+	if o == nil || o.Package == nil {
+		var ret string
 		return ret
 	}
-
-	return o.Errors
+	return *o.Package
 }
 
-// GetErrorsOk returns a tuple with the Errors field value
+// GetPackageOk returns a tuple with the Package field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Failure) GetErrorsOk() (*[]Error, bool) {
-	if o == nil {
+func (o *OrgV2StreamGovernanceConfig) GetPackageOk() (*string, bool) {
+	if o == nil || o.Package == nil {
 		return nil, false
 	}
-	return &o.Errors, true
+	return o.Package, true
 }
 
-// SetErrors sets field value
-func (o *Failure) SetErrors(v []Error) {
-	o.Errors = v
+// HasPackage returns a boolean if a field has been set.
+func (o *OrgV2StreamGovernanceConfig) HasPackage() bool {
+	if o != nil && o.Package != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPackage gets a reference to the given string and assigns it to the Package field.
+func (o *OrgV2StreamGovernanceConfig) SetPackage(v string) {
+	o.Package = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *Failure) Redact() {
-	o.recurseRedact(&o.Errors)
+func (o *OrgV2StreamGovernanceConfig) Redact() {
+	o.recurseRedact(o.Package)
 }
 
-func (o *Failure) recurseRedact(v interface{}) {
+func (o *OrgV2StreamGovernanceConfig) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -112,15 +119,15 @@ func (o *Failure) recurseRedact(v interface{}) {
 	}
 }
 
-func (o Failure) zeroField(v interface{}) {
+func (o OrgV2StreamGovernanceConfig) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o Failure) MarshalJSON() ([]byte, error) {
+func (o OrgV2StreamGovernanceConfig) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["errors"] = o.Errors
+	if o.Package != nil {
+		toSerialize["package"] = o.Package
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
@@ -129,34 +136,34 @@ func (o Failure) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableFailure struct {
-	value *Failure
+type NullableOrgV2StreamGovernanceConfig struct {
+	value *OrgV2StreamGovernanceConfig
 	isSet bool
 }
 
-func (v NullableFailure) Get() *Failure {
+func (v NullableOrgV2StreamGovernanceConfig) Get() *OrgV2StreamGovernanceConfig {
 	return v.value
 }
 
-func (v *NullableFailure) Set(val *Failure) {
+func (v *NullableOrgV2StreamGovernanceConfig) Set(val *OrgV2StreamGovernanceConfig) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFailure) IsSet() bool {
+func (v NullableOrgV2StreamGovernanceConfig) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFailure) Unset() {
+func (v *NullableOrgV2StreamGovernanceConfig) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFailure(val *Failure) *NullableFailure {
-	return &NullableFailure{value: val, isSet: true}
+func NewNullableOrgV2StreamGovernanceConfig(val *OrgV2StreamGovernanceConfig) *NullableOrgV2StreamGovernanceConfig {
+	return &NullableOrgV2StreamGovernanceConfig{value: val, isSet: true}
 }
 
-func (v NullableFailure) MarshalJSON() ([]byte, error) {
+func (v NullableOrgV2StreamGovernanceConfig) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -164,7 +171,7 @@ func (v NullableFailure) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableFailure) UnmarshalJSON(src []byte) error {
+func (v *NullableOrgV2StreamGovernanceConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
