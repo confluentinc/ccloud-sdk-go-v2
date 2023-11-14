@@ -37,10 +37,9 @@ import (
 // SqlV1beta1StatementStatus The status of the Statement
 type SqlV1beta1StatementStatus struct {
 	// The lifecycle phase of the submitted SQL statement: PENDING: SQL statement is pending execution; RUNNING: SQL statement execution is in progress; COMPLETED: SQL statement is completed; DELETING: SQL statement deletion is in progress; FAILING: SQL statement is failing; FAILED: SQL statement execution has failed; STOPPED: SQL statement execution has successfully been stopped;
-	Phase string `json:"phase,omitempty"`
-	// Scaling status for this statement.
-	ScalingStatus *map[string]interface{} `json:"scaling_status,omitempty"`
-	ResultSchema  *SqlV1beta1ResultSchema `json:"result_schema,omitempty"`
+	Phase         string                   `json:"phase,omitempty"`
+	ScalingStatus *SqlV1beta1ScalingStatus `json:"scaling_status,omitempty"`
+	ResultSchema  *SqlV1beta1ResultSchema  `json:"result_schema,omitempty"`
 	// Description of a SQL statement phase.
 	Detail *string `json:"detail,omitempty"`
 }
@@ -88,9 +87,9 @@ func (o *SqlV1beta1StatementStatus) SetPhase(v string) {
 }
 
 // GetScalingStatus returns the ScalingStatus field value if set, zero value otherwise.
-func (o *SqlV1beta1StatementStatus) GetScalingStatus() map[string]interface{} {
+func (o *SqlV1beta1StatementStatus) GetScalingStatus() SqlV1beta1ScalingStatus {
 	if o == nil || o.ScalingStatus == nil {
-		var ret map[string]interface{}
+		var ret SqlV1beta1ScalingStatus
 		return ret
 	}
 	return *o.ScalingStatus
@@ -98,7 +97,7 @@ func (o *SqlV1beta1StatementStatus) GetScalingStatus() map[string]interface{} {
 
 // GetScalingStatusOk returns a tuple with the ScalingStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SqlV1beta1StatementStatus) GetScalingStatusOk() (*map[string]interface{}, bool) {
+func (o *SqlV1beta1StatementStatus) GetScalingStatusOk() (*SqlV1beta1ScalingStatus, bool) {
 	if o == nil || o.ScalingStatus == nil {
 		return nil, false
 	}
@@ -114,8 +113,8 @@ func (o *SqlV1beta1StatementStatus) HasScalingStatus() bool {
 	return false
 }
 
-// SetScalingStatus gets a reference to the given map[string]interface{} and assigns it to the ScalingStatus field.
-func (o *SqlV1beta1StatementStatus) SetScalingStatus(v map[string]interface{}) {
+// SetScalingStatus gets a reference to the given SqlV1beta1ScalingStatus and assigns it to the ScalingStatus field.
+func (o *SqlV1beta1StatementStatus) SetScalingStatus(v SqlV1beta1ScalingStatus) {
 	o.ScalingStatus = &v
 }
 

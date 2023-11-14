@@ -102,6 +102,7 @@ Class | Method | HTTP request | Description
  - [ResultListMeta](docs/ResultListMeta.md)
  - [RowFieldType](docs/RowFieldType.md)
  - [SqlV1beta1ResultSchema](docs/SqlV1beta1ResultSchema.md)
+ - [SqlV1beta1ScalingStatus](docs/SqlV1beta1ScalingStatus.md)
  - [SqlV1beta1Statement](docs/SqlV1beta1Statement.md)
  - [SqlV1beta1StatementException](docs/SqlV1beta1StatementException.md)
  - [SqlV1beta1StatementExceptionList](docs/SqlV1beta1StatementExceptionList.md)

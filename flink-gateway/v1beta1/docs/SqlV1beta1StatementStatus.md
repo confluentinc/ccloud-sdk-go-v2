@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Phase** | **string** | The lifecycle phase of the submitted SQL statement: PENDING: SQL statement is pending execution; RUNNING: SQL statement execution is in progress; COMPLETED: SQL statement is completed; DELETING: SQL statement deletion is in progress; FAILING: SQL statement is failing; FAILED: SQL statement execution has failed; STOPPED: SQL statement execution has successfully been stopped;  | [readonly] 
-**ScalingStatus** | Pointer to **map[string]interface{}** | Scaling status for this statement. | [optional] [readonly] 
+**ScalingStatus** | Pointer to [**SqlV1beta1ScalingStatus**](SqlV1beta1ScalingStatus.md) |  | [optional] 
 **ResultSchema** | Pointer to [**SqlV1beta1ResultSchema**](SqlV1beta1ResultSchema.md) |  | [optional] 
 **Detail** | Pointer to **string** | Description of a SQL statement phase. | [optional] [readonly] 
 
@@ -50,20 +50,20 @@ SetPhase sets Phase field to given value.
 
 ### GetScalingStatus
 
-`func (o *SqlV1beta1StatementStatus) GetScalingStatus() map[string]interface{}`
+`func (o *SqlV1beta1StatementStatus) GetScalingStatus() SqlV1beta1ScalingStatus`
 
 GetScalingStatus returns the ScalingStatus field if non-nil, zero value otherwise.
 
 ### GetScalingStatusOk
 
-`func (o *SqlV1beta1StatementStatus) GetScalingStatusOk() (*map[string]interface{}, bool)`
+`func (o *SqlV1beta1StatementStatus) GetScalingStatusOk() (*SqlV1beta1ScalingStatus, bool)`
 
 GetScalingStatusOk returns a tuple with the ScalingStatus field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetScalingStatus
 
-`func (o *SqlV1beta1StatementStatus) SetScalingStatus(v map[string]interface{})`
+`func (o *SqlV1beta1StatementStatus) SetScalingStatus(v SqlV1beta1ScalingStatus)`
 
 SetScalingStatus sets ScalingStatus field to given value.
 

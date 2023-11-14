@@ -2330,29 +2330,7 @@ components:
           - FAILED
           - STOPPED
         scaling_status:
-          description: Scaling status for this statement.
-          properties:
-            scaling_state:
-              description: |
-                OK: The statement runs at the right scale.
-                PENDING_SCALE_DOWN: The statement requires less resources, and will be scaled down in the near future.
-                PENDING_SCALE_UP: The statement requires more resources, and will be scaled up in the near future.
-                POOL_EXHAUSTED: The statement requires more resources, but not enough resources are available.
-              example: OK
-              readOnly: true
-              type: string
-              x-extensible-enum:
-              - OK
-              - PENDING_SCALE_DOWN
-              - PENDING_SCALE_UP
-              - POOL_EXHAUSTED
-            last_updated:
-              description: The last time the scaling status was updated.
-              example: 1996-03-19T01:02:03-04:05
-              format: date-time
-              readOnly: true
-              type: string
-          readOnly: true
+          $ref: '#/components/schemas/sql.v1beta1.ScalingStatus'
         result_schema:
           $ref: '#/components/schemas/sql.v1beta1.ResultSchema'
         detail:
@@ -2604,6 +2582,31 @@ components:
           format: date-time
           readOnly: true
           type: string
+      type: object
+    sql.v1beta1.ScalingStatus:
+      description: Scaling status for this statement.
+      properties:
+        scaling_state:
+          description: |
+            OK: The statement runs at the right scale.
+            PENDING_SCALE_DOWN: The statement requires less resources, and will be scaled down in the near future.
+            PENDING_SCALE_UP: The statement requires more resources, and will be scaled up in the near future.
+            POOL_EXHAUSTED: The statement requires more resources, but not enough resources are available.
+          example: OK
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - OK
+          - PENDING_SCALE_DOWN
+          - PENDING_SCALE_UP
+          - POOL_EXHAUSTED
+        last_updated:
+          description: The last time the scaling status was updated.
+          example: 1996-03-19T01:02:03-04:05
+          format: date-time
+          readOnly: true
+          type: string
+      readOnly: true
       type: object
     sql.v1beta1.ResultSchema:
       description: The table columns of the results schema.
