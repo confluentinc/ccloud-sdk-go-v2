@@ -81,6 +81,8 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ChatCompletionsAiV1Api* | [**QueryAiV1ChatCompletion**](docs/ChatCompletionsAiV1Api.md#queryaiv1chatcompletion) | **Post** /ai/v1/chat-completions | Query a Chat Completion
 *DocCompletionsAiV1Api* | [**QueryAiV1DocCompletion**](docs/DocCompletionsAiV1Api.md#queryaiv1doccompletion) | **Post** /ai/v1/doc-completions | Query a Doc Completion
+*FeedbacksAiV1Api* | [**CreateAiV1ChatCompletionFeedback**](docs/FeedbacksAiV1Api.md#createaiv1chatcompletionfeedback) | **Post** /ai/v1/chat-completions/{chat_completion_id}/feedback | Create a Feedback
+*FeedbacksAiV1Api* | [**CreateAiV1DocCompletionFeedback**](docs/FeedbacksAiV1Api.md#createaiv1doccompletionfeedback) | **Post** /ai/v1/doc-completions/{doc_completion_id}/feedback | Create a Feedback
 
 
 ## Documentation For Models
@@ -88,6 +90,7 @@ Class | Method | HTTP request | Description
  - [AiV1ChatCompletionsHistory](docs/AiV1ChatCompletionsHistory.md)
  - [AiV1ChatCompletionsReply](docs/AiV1ChatCompletionsReply.md)
  - [AiV1ChatCompletionsRequest](docs/AiV1ChatCompletionsRequest.md)
+ - [AiV1Feedback](docs/AiV1Feedback.md)
  - [Error](docs/Error.md)
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)

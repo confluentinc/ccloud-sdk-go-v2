@@ -28,7 +28,6 @@ package v1
 import (
 	"bytes"
 	"encoding/json"
-	"time"
 )
 
 import (
@@ -41,8 +40,6 @@ type AiV1ChatCompletionsHistory struct {
 	Question *string `json:"question,omitempty"`
 	// Markdown-formatted answer from the AI assistant.
 	Answer *string `json:"answer,omitempty"`
-	// The date and time at which this question was asked. It is represented in RFC3339 format and is in UTC.
-	AskedAt *time.Time `json:"asked_at,omitempty"`
 }
 
 // NewAiV1ChatCompletionsHistory instantiates a new AiV1ChatCompletionsHistory object
@@ -126,73 +123,40 @@ func (o *AiV1ChatCompletionsHistory) SetAnswer(v string) {
 	o.Answer = &v
 }
 
-// GetAskedAt returns the AskedAt field value if set, zero value otherwise.
-func (o *AiV1ChatCompletionsHistory) GetAskedAt() time.Time {
-	if o == nil || o.AskedAt == nil {
-		var ret time.Time
-		return ret
-	}
-	return *o.AskedAt
-}
-
-// GetAskedAtOk returns a tuple with the AskedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AiV1ChatCompletionsHistory) GetAskedAtOk() (*time.Time, bool) {
-	if o == nil || o.AskedAt == nil {
-		return nil, false
-	}
-	return o.AskedAt, true
-}
-
-// HasAskedAt returns a boolean if a field has been set.
-func (o *AiV1ChatCompletionsHistory) HasAskedAt() bool {
-	if o != nil && o.AskedAt != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetAskedAt gets a reference to the given time.Time and assigns it to the AskedAt field.
-func (o *AiV1ChatCompletionsHistory) SetAskedAt(v time.Time) {
-	o.AskedAt = &v
-}
-
 // Redact resets all sensitive fields to their zero value.
 func (o *AiV1ChatCompletionsHistory) Redact() {
-	o.recurseRedact(o.Question)
-	o.recurseRedact(o.Answer)
-	o.recurseRedact(o.AskedAt)
+    o.recurseRedact(o.Question)
+    o.recurseRedact(o.Answer)
 }
 
 func (o *AiV1ChatCompletionsHistory) recurseRedact(v interface{}) {
-	type redactor interface {
-		Redact()
-	}
-	if r, ok := v.(redactor); ok {
-		r.Redact()
-	} else {
-		val := reflect.ValueOf(v)
-		if val.Kind() == reflect.Ptr {
-			val = val.Elem()
-		}
-		switch val.Kind() {
-		case reflect.Slice, reflect.Array:
-			for i := 0; i < val.Len(); i++ {
-				// support data types declared without pointers
-				o.recurseRedact(val.Index(i).Interface())
-				// ... and data types that were declared without but need pointers (for Redact)
-				if val.Index(i).CanAddr() {
-					o.recurseRedact(val.Index(i).Addr().Interface())
-				}
-			}
-		}
-	}
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
 }
 
 func (o AiV1ChatCompletionsHistory) zeroField(v interface{}) {
-	p := reflect.ValueOf(v).Elem()
-	p.Set(reflect.Zero(p.Type()))
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o AiV1ChatCompletionsHistory) MarshalJSON() ([]byte, error) {
@@ -202,9 +166,6 @@ func (o AiV1ChatCompletionsHistory) MarshalJSON() ([]byte, error) {
 	}
 	if o.Answer != nil {
 		toSerialize["answer"] = o.Answer
-	}
-	if o.AskedAt != nil {
-		toSerialize["asked_at"] = o.AskedAt
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
@@ -252,3 +213,5 @@ func (v *NullableAiV1ChatCompletionsHistory) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

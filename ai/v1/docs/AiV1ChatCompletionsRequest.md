@@ -8,8 +8,9 @@ Name | Type | Description | Notes
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
+**AiSessionId** | Pointer to **string** |  | [optional] 
 **Question** | Pointer to **string** |  | [optional] 
-**History** | Pointer to [**[]AiV1ChatCompletionsHistory**](AiV1ChatCompletionsHistory.md) | Question and answer pairs from previous interactions. | [optional] 
+**History** | Pointer to [**[]AiV1ChatCompletionsHistory**](AiV1ChatCompletionsHistory.md) | Completion objects from previous interactions. | [optional] 
 
 ## Methods
 
@@ -129,6 +130,31 @@ SetMetadata sets Metadata field to given value.
 `func (o *AiV1ChatCompletionsRequest) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
+
+### GetAiSessionId
+
+`func (o *AiV1ChatCompletionsRequest) GetAiSessionId() string`
+
+GetAiSessionId returns the AiSessionId field if non-nil, zero value otherwise.
+
+### GetAiSessionIdOk
+
+`func (o *AiV1ChatCompletionsRequest) GetAiSessionIdOk() (*string, bool)`
+
+GetAiSessionIdOk returns a tuple with the AiSessionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAiSessionId
+
+`func (o *AiV1ChatCompletionsRequest) SetAiSessionId(v string)`
+
+SetAiSessionId sets AiSessionId field to given value.
+
+### HasAiSessionId
+
+`func (o *AiV1ChatCompletionsRequest) HasAiSessionId() bool`
+
+HasAiSessionId returns a boolean if a field has been set.
 
 ### GetQuestion
 

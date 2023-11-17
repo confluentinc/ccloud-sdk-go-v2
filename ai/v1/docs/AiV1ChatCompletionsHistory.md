@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Question** | Pointer to **string** | Question for the AI assistant. | [optional] 
 **Answer** | Pointer to **string** | Markdown-formatted answer from the AI assistant. | [optional] 
-**AskedAt** | Pointer to **time.Time** | The date and time at which this question was asked. It is represented in RFC3339 format and is in UTC. | [optional] 
 
 ## Methods
 
@@ -76,31 +75,6 @@ SetAnswer sets Answer field to given value.
 `func (o *AiV1ChatCompletionsHistory) HasAnswer() bool`
 
 HasAnswer returns a boolean if a field has been set.
-
-### GetAskedAt
-
-`func (o *AiV1ChatCompletionsHistory) GetAskedAt() time.Time`
-
-GetAskedAt returns the AskedAt field if non-nil, zero value otherwise.
-
-### GetAskedAtOk
-
-`func (o *AiV1ChatCompletionsHistory) GetAskedAtOk() (*time.Time, bool)`
-
-GetAskedAtOk returns a tuple with the AskedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAskedAt
-
-`func (o *AiV1ChatCompletionsHistory) SetAskedAt(v time.Time)`
-
-SetAskedAt sets AskedAt field to given value.
-
-### HasAskedAt
-
-`func (o *AiV1ChatCompletionsHistory) HasAskedAt() bool`
-
-HasAskedAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

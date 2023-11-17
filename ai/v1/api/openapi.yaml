@@ -29,6 +29,11 @@ tags:
 
     Query the Docs AI assistant, optionally with prior conversation history.
   name: Doc Completions (ai/v1)
+- description: |-
+    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+    Submit feedback on the AI assistant.
+  name: Feedbacks (ai/v1)
 paths:
   /ai/v1/chat-completions:
     post:
@@ -44,6 +49,7 @@ paths:
               allOf:
               - $ref: '#/components/schemas/ai.v1.ChatCompletionsRequest'
               - required:
+                - ai_session_id
                 - question
                 type: object
       responses:
@@ -51,7 +57,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ai.v1.ChatCompletionsReply'
+                allOf:
+                - $ref: '#/components/schemas/ai.v1.ChatCompletionsReply'
+                - required:
+                  - answer
+                  - api_version
+                  - id
+                  - kind
+                  - question
+                  type: object
           description: Query was successful.
         "400":
           content:
@@ -220,13 +234,13 @@ paths:
             --url https://api.confluent.cloud/ai/v1/chat-completions \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"question":"What is my most expensive Kafka cluster?","history":[{"question":"What is my most expensive Kafka cluster?","answer":"Your most expensive Kafka cluster is \"lkc-12345\".","asked_at":"2023-01-02T15:04:05-07:00"}]}'
+            --data '{"ai_session_id":"cd2ec6a3-82fe-4911-902a-065ff8425b66","question":"What is my most expensive Kafka cluster?","history":[{"question":"What is my most expensive Kafka cluster?","answer":"Your most expensive Kafka cluster is \"lkc-12345\"."}]}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\",\"asked_at\":\"2023-01-02T15:04:05-07:00\"}]}");
+          RequestBody body = RequestBody.create(mediaType, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/ai/v1/chat-completions")
             .post(body)
@@ -238,23 +252,22 @@ paths:
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ai/v1/chat-completions\"\
-          \n\n\tpayload := strings.NewReader(\"{\\\"question\\\":\\\"What is my most\
-          \ expensive Kafka cluster?\\\",\\\"history\\\":[{\\\"question\\\":\\\"What\
-          \ is my most expensive Kafka cluster?\\\",\\\"answer\\\":\\\"Your most expensive\
-          \ Kafka cluster is \\\\\\\"lkc-12345\\\\\\\".\\\",\\\"asked_at\\\":\\\"\
-          2023-01-02T15:04:05-07:00\\\"}]}\")\n\n\treq, _ := http.NewRequest(\"POST\"\
-          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          \n\n\tpayload := strings.NewReader(\"{\\\"ai_session_id\\\":\\\"cd2ec6a3-82fe-4911-902a-065ff8425b66\\\
+          \",\\\"question\\\":\\\"What is my most expensive Kafka cluster?\\\",\\\"\
+          history\\\":[{\\\"question\\\":\\\"What is my most expensive Kafka cluster?\\\
+          \",\\\"answer\\\":\\\"Your most expensive Kafka cluster is \\\\\\\"lkc-12345\\\
+          \\\\\".\\\"}]}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\",\"asked_at\":\"2023-01-02T15:04:05-07:00\"}]}"
+          payload = "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}"
 
           headers = {
               'content-type': "application/json",
@@ -296,12 +309,12 @@ paths:
           });
 
           req.write(JSON.stringify({
+            ai_session_id: 'cd2ec6a3-82fe-4911-902a-065ff8425b66',
             question: 'What is my most expensive Kafka cluster?',
             history: [
               {
                 question: 'What is my most expensive Kafka cluster?',
-                answer: 'Your most expensive Kafka cluster is "lkc-12345".',
-                asked_at: '2023-01-02T15:04:05-07:00'
+                answer: 'Your most expensive Kafka cluster is "lkc-12345".'
               }
             ]
           }));
@@ -318,7 +331,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\",\"asked_at\":\"2023-01-02T15:04:05-07:00\"}]}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -327,7 +340,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\",\"asked_at\":\"2023-01-02T15:04:05-07:00\"}]}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: AI API v1
   /ai/v1/doc-completions:
@@ -344,6 +357,7 @@ paths:
               allOf:
               - $ref: '#/components/schemas/ai.v1.ChatCompletionsRequest'
               - required:
+                - ai_session_id
                 - question
                 type: object
       responses:
@@ -464,13 +478,13 @@ paths:
           curl --request POST \
             --url https://api.confluent.cloud/ai/v1/doc-completions \
             --header 'content-type: application/json' \
-            --data '{"question":"What is my most expensive Kafka cluster?","history":[{"question":"What is my most expensive Kafka cluster?","answer":"Your most expensive Kafka cluster is \"lkc-12345\".","asked_at":"2023-01-02T15:04:05-07:00"}]}'
+            --data '{"ai_session_id":"cd2ec6a3-82fe-4911-902a-065ff8425b66","question":"What is my most expensive Kafka cluster?","history":[{"question":"What is my most expensive Kafka cluster?","answer":"Your most expensive Kafka cluster is \"lkc-12345\"."}]}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\",\"asked_at\":\"2023-01-02T15:04:05-07:00\"}]}");
+          RequestBody body = RequestBody.create(mediaType, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/ai/v1/doc-completions")
             .post(body)
@@ -481,22 +495,21 @@ paths:
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ai/v1/doc-completions\"\
-          \n\n\tpayload := strings.NewReader(\"{\\\"question\\\":\\\"What is my most\
-          \ expensive Kafka cluster?\\\",\\\"history\\\":[{\\\"question\\\":\\\"What\
-          \ is my most expensive Kafka cluster?\\\",\\\"answer\\\":\\\"Your most expensive\
-          \ Kafka cluster is \\\\\\\"lkc-12345\\\\\\\".\\\",\\\"asked_at\\\":\\\"\
-          2023-01-02T15:04:05-07:00\\\"}]}\")\n\n\treq, _ := http.NewRequest(\"POST\"\
-          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
-          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          \n\n\tpayload := strings.NewReader(\"{\\\"ai_session_id\\\":\\\"cd2ec6a3-82fe-4911-902a-065ff8425b66\\\
+          \",\\\"question\\\":\\\"What is my most expensive Kafka cluster?\\\",\\\"\
+          history\\\":[{\\\"question\\\":\\\"What is my most expensive Kafka cluster?\\\
+          \",\\\"answer\\\":\\\"Your most expensive Kafka cluster is \\\\\\\"lkc-12345\\\
+          \\\\\".\\\"}]}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _ :=\
+          \ http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\
+          \n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\",\"asked_at\":\"2023-01-02T15:04:05-07:00\"}]}"
+          payload = "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}"
 
           headers = { 'content-type': "application/json" }
 
@@ -534,12 +547,12 @@ paths:
           });
 
           req.write(JSON.stringify({
+            ai_session_id: 'cd2ec6a3-82fe-4911-902a-065ff8425b66',
             question: 'What is my most expensive Kafka cluster?',
             history: [
               {
                 question: 'What is my most expensive Kafka cluster?',
-                answer: 'Your most expensive Kafka cluster is "lkc-12345".',
-                asked_at: '2023-01-02T15:04:05-07:00'
+                answer: 'Your most expensive Kafka cluster is "lkc-12345".'
               }
             ]
           }));
@@ -555,7 +568,7 @@ paths:
           headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\",\"asked_at\":\"2023-01-02T15:04:05-07:00\"}]}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -563,7 +576,699 @@ paths:
           var client = new RestClient("https://api.confluent.cloud/ai/v1/doc-completions");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
-          request.AddParameter("application/json", "{\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\",\"asked_at\":\"2023-01-02T15:04:05-07:00\"}]}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+    x-request-access-name: AI API v1
+  /ai/v1/chat-completions/{chat_completion_id}/feedback:
+    post:
+      description: |-
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+        Submit feedback on the Confluent AI assistant.
+      operationId: createAiV1ChatCompletionFeedback
+      parameters:
+      - description: The Chat Completion
+        explode: false
+        in: path
+        name: chat_completion_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ai.v1.Feedback'
+              - required:
+                - ai_session_id
+                type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ai.v1.Feedback'
+          description: A Feedback was created.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Location:
+              description: Feedback resource uri
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/ai/v1/chat-completions/{chat_completion_id}/feedback/{id}
+                format: uri
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "409"
+                  code: resource_already_exists
+                  title: Resource Already exists
+                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                    exists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request is in conflict with the current server state
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Resource URI of conflicting resource
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/{object}/{id}
+                format: uri
+                type: string
+              style: simple
+          x-summary: Conflict
+        "422":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "422"
+                  code: invalid_configuration
+                  id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  title: Validation Failed
+                  detail: 'The property ''/cluster/storage_size'' of type string did
+                    not match the following type: integer'
+                  source:
+                    pointer: /cluster/storage_size
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Validation Failed
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - cloud-api-key: []
+      summary: Create a Feedback
+      tags:
+      - Feedbacks (ai/v1)
+      x-request-access-name: AI API v1
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://api.confluent.cloud/ai/v1/chat-completions/%7Bchat_completion_id%7D/feedback \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"ai_session_id":"cd2ec6a3-82fe-4911-902a-065ff8425b66","like":true,"copy_code":true,"copy_message":true,"comment":"The suggested CLI command contained several typos. It was supposed to be \"confluent\" instead of \"ccloud\"."}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"like\":true,\"copy_code\":true,\"copy_message\":true,\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}");
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/ai/v1/chat-completions/%7Bchat_completion_id%7D/feedback")
+            .post(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ai/v1/chat-completions/%7Bchat_completion_id%7D/feedback\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"ai_session_id\\\":\\\"cd2ec6a3-82fe-4911-902a-065ff8425b66\\\
+          \",\\\"like\\\":true,\\\"copy_code\\\":true,\\\"copy_message\\\":true,\\\
+          \"comment\\\":\\\"The suggested CLI command contained several typos. It\
+          \ was supposed to be \\\\\\\"confluent\\\\\\\" instead of \\\\\\\"ccloud\\\
+          \\\\\".\\\"}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          payload = "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"like\":true,\"copy_code\":true,\"copy_message\":true,\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("POST", "/ai/v1/chat-completions/%7Bchat_completion_id%7D/feedback", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/ai/v1/chat-completions/%7Bchat_completion_id%7D/feedback",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            ai_session_id: 'cd2ec6a3-82fe-4911-902a-065ff8425b66',
+            like: true,
+            copy_code: true,
+            copy_message: true,
+            comment: 'The suggested CLI command contained several typos. It was supposed to be "confluent" instead of "ccloud".'
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ai/v1/chat-completions/%7Bchat_completion_id%7D/feedback");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"like\":true,\"copy_code\":true,\"copy_message\":true,\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/ai/v1/chat-completions/%7Bchat_completion_id%7D/feedback");
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"like\":true,\"copy_code\":true,\"copy_message\":true,\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+    x-request-access-name: AI API v1
+  /ai/v1/doc-completions/{doc_completion_id}/feedback:
+    post:
+      description: |-
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+        Submit feedback on the Doc AI assistant.
+      operationId: createAiV1DocCompletionFeedback
+      parameters:
+      - description: The Doc Completion
+        explode: false
+        in: path
+        name: doc_completion_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ai.v1.Feedback'
+              - required:
+                - ai_session_id
+                type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ai.v1.Feedback'
+          description: A Feedback was created.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Location:
+              description: Feedback resource uri
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/ai/v1/doc-completions/{doc_completion_id}/feedback/{id}
+                format: uri
+                type: string
+              style: simple
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "409"
+                  code: resource_already_exists
+                  title: Resource Already exists
+                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                    exists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request is in conflict with the current server state
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Resource URI of conflicting resource
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/{object}/{id}
+                format: uri
+                type: string
+              style: simple
+          x-summary: Conflict
+        "422":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "422"
+                  code: invalid_configuration
+                  id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  title: Validation Failed
+                  detail: 'The property ''/cluster/storage_size'' of type string did
+                    not match the following type: integer'
+                  source:
+                    pointer: /cluster/storage_size
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Validation Failed
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      summary: Create a Feedback
+      tags:
+      - Feedbacks (ai/v1)
+      x-request-access-name: AI API v1
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://api.confluent.cloud/ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback \
+            --header 'content-type: application/json' \
+            --data '{"ai_session_id":"cd2ec6a3-82fe-4911-902a-065ff8425b66","like":true,"copy_code":true,"copy_message":true,"comment":"The suggested CLI command contained several typos. It was supposed to be \"confluent\" instead of \"ccloud\"."}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"like\":true,\"copy_code\":true,\"copy_message\":true,\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}");
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback")
+            .post(body)
+            .addHeader("content-type", "application/json")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"ai_session_id\\\":\\\"cd2ec6a3-82fe-4911-902a-065ff8425b66\\\
+          \",\\\"like\\\":true,\\\"copy_code\\\":true,\\\"copy_message\\\":true,\\\
+          \"comment\\\":\\\"The suggested CLI command contained several typos. It\
+          \ was supposed to be \\\\\\\"confluent\\\\\\\" instead of \\\\\\\"ccloud\\\
+          \\\\\".\\\"}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _ :=\
+          \ http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\
+          \n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          payload = "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"like\":true,\"copy_code\":true,\"copy_message\":true,\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}"
+
+          headers = { 'content-type': "application/json" }
+
+          conn.request("POST", "/ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback",
+            "headers": {
+              "content-type": "application/json"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            ai_session_id: 'cd2ec6a3-82fe-4911-902a-065ff8425b66',
+            like: true,
+            copy_code: true,
+            copy_message: true,
+            comment: 'The suggested CLI command contained several typos. It was supposed to be "confluent" instead of "ccloud".'
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"like\":true,\"copy_code\":true,\"copy_message\":true,\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback");
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("content-type", "application/json");
+          request.AddParameter("application/json", "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"like\":true,\"copy_code\":true,\"copy_message\":true,\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: AI API v1
 components:
@@ -827,13 +1532,17 @@ components:
                 example: https://api.confluent.cloud/ai/v1/chat-completions-requests/ccr-12345
               resource_name:
                 example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/chat-completions-request=ccr-12345
+        ai_session_id:
+          allOf:
+          - $ref: '#/components/schemas/ai.v1.SessionId'
         question:
           allOf:
           - $ref: '#/components/schemas/ai.v1.ChatCompletionsQuestion'
         history:
-          description: Question and answer pairs from previous interactions.
+          description: Completion objects from previous interactions.
           items:
             $ref: '#/components/schemas/ai.v1.ChatCompletionsHistory'
+          maxItems: 5
           type: array
       type: object
     ai.v1.ChatCompletionsReply:
@@ -841,8 +1550,8 @@ components:
       example:
         metadata: ""
         answer: ""
+        question: ""
         kind: ChatCompletionsReply
-        asked_at: 2023-01-02T15:04:05-07:00
         id: dlz-f3a90de
         api_version: ai/v1
       properties:
@@ -880,11 +1589,77 @@ components:
         answer:
           allOf:
           - $ref: '#/components/schemas/ai.v1.ChatCompletionsAnswer'
-        asked_at:
-          description: The date and time at which this question was asked. It is represented
-            in RFC3339 format and is in UTC.
-          example: 2023-01-02T15:04:05-07:00
-          format: date-time
+        question:
+          allOf:
+          - $ref: '#/components/schemas/ai.v1.ChatCompletionsQuestion'
+      type: object
+    ai.v1.Feedback:
+      description: Submit feedback on the AI assistant.
+      example:
+        copy_code: true
+        metadata: ""
+        ai_session_id: ""
+        like: true
+        kind: Feedback
+        comment: The suggested CLI command contained several typos. It was supposed
+          to be "confluent" instead of "ccloud".
+        id: dlz-f3a90de
+        api_version: ai/v1
+        copy_message: true
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - ai/v1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - Feedback
+          readOnly: true
+          type: string
+        id:
+          description: ID is the "natural identifier" for an object within its scope/namespace;
+            it is normally unique across time but not space. That is, you can assume
+            that the ID will not be reclaimed and reused after an object is deleted
+            ("time"); however, it may collide with IDs for other object `kinds` or
+            objects of the same `kind` within a different scope/namespace ("space").
+          example: dlz-f3a90de
+          maxLength: 255
+          readOnly: true
+          type: string
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/ObjectMeta'
+          - properties:
+              self:
+                example: https://api.confluent.cloud/ai/v1/feedbacks/f-12345
+              resource_name:
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/feedback=f-12345
+        ai_session_id:
+          allOf:
+          - $ref: '#/components/schemas/ai.v1.SessionId'
+        like:
+          description: Use 'true' for thumbs up and 'false' for thumbs down.
+          nullable: true
+          type: boolean
+        copy_code:
+          description: Use 'true' if a user copied a code snippet from the AI Assistant's
+            answer.
+          nullable: true
+          type: boolean
+        copy_message:
+          description: Use 'true' if a user copied the AI Assistant's answer.
+          nullable: true
+          type: boolean
+        comment:
+          description: Additional text feedback optionally provided by a user.
+          example: The suggested CLI command contained several typos. It was supposed
+            to be "confluent" instead of "ccloud".
+          maxLength: 500
+          nullable: true
           type: string
       type: object
     ai.v1.ChatCompletionsHistory:
@@ -898,13 +1673,12 @@ components:
           allOf:
           - $ref: '#/components/schemas/ai.v1.ChatCompletionsAnswer'
           description: Markdown-formatted answer from the AI assistant.
-        asked_at:
-          description: The date and time at which this question was asked. It is represented
-            in RFC3339 format and is in UTC.
-          example: 2023-01-02T15:04:05-07:00
-          format: date-time
-          type: string
       type: object
+    ai.v1.SessionId:
+      description: Client-generated AI session ID.
+      example: cd2ec6a3-82fe-4911-902a-065ff8425b66
+      format: uuid
+      type: string
     ai.v1.ChatCompletionsQuestion:
       description: Question for the AI assistant.
       example: What is my most expensive Kafka cluster?

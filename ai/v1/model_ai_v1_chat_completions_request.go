@@ -41,10 +41,11 @@ type AiV1ChatCompletionsRequest struct {
 	// Kind defines the object this REST resource represents.
 	Kind *string `json:"kind,omitempty"`
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
-	Id       *string     `json:"id,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
-	Question *string     `json:"question,omitempty"`
-	// Question and answer pairs from previous interactions.
+	AiSessionId *string `json:"ai_session_id,omitempty"`
+	Question *string `json:"question,omitempty"`
+	// Completion objects from previous interactions.
 	History *[]AiV1ChatCompletionsHistory `json:"history,omitempty"`
 }
 
@@ -193,6 +194,38 @@ func (o *AiV1ChatCompletionsRequest) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
+// GetAiSessionId returns the AiSessionId field value if set, zero value otherwise.
+func (o *AiV1ChatCompletionsRequest) GetAiSessionId() string {
+	if o == nil || o.AiSessionId == nil {
+		var ret string
+		return ret
+	}
+	return *o.AiSessionId
+}
+
+// GetAiSessionIdOk returns a tuple with the AiSessionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiV1ChatCompletionsRequest) GetAiSessionIdOk() (*string, bool) {
+	if o == nil || o.AiSessionId == nil {
+		return nil, false
+	}
+	return o.AiSessionId, true
+}
+
+// HasAiSessionId returns a boolean if a field has been set.
+func (o *AiV1ChatCompletionsRequest) HasAiSessionId() bool {
+	if o != nil && o.AiSessionId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAiSessionId gets a reference to the given string and assigns it to the AiSessionId field.
+func (o *AiV1ChatCompletionsRequest) SetAiSessionId(v string) {
+	o.AiSessionId = &v
+}
+
 // GetQuestion returns the Question field value if set, zero value otherwise.
 func (o *AiV1ChatCompletionsRequest) GetQuestion() string {
 	if o == nil || o.Question == nil {
@@ -259,42 +292,43 @@ func (o *AiV1ChatCompletionsRequest) SetHistory(v []AiV1ChatCompletionsHistory) 
 
 // Redact resets all sensitive fields to their zero value.
 func (o *AiV1ChatCompletionsRequest) Redact() {
-	o.recurseRedact(o.ApiVersion)
-	o.recurseRedact(o.Kind)
-	o.recurseRedact(o.Id)
-	o.recurseRedact(o.Metadata)
-	o.recurseRedact(o.Question)
-	o.recurseRedact(o.History)
+    o.recurseRedact(o.ApiVersion)
+    o.recurseRedact(o.Kind)
+    o.recurseRedact(o.Id)
+    o.recurseRedact(o.Metadata)
+    o.recurseRedact(o.AiSessionId)
+    o.recurseRedact(o.Question)
+    o.recurseRedact(o.History)
 }
 
 func (o *AiV1ChatCompletionsRequest) recurseRedact(v interface{}) {
-	type redactor interface {
-		Redact()
-	}
-	if r, ok := v.(redactor); ok {
-		r.Redact()
-	} else {
-		val := reflect.ValueOf(v)
-		if val.Kind() == reflect.Ptr {
-			val = val.Elem()
-		}
-		switch val.Kind() {
-		case reflect.Slice, reflect.Array:
-			for i := 0; i < val.Len(); i++ {
-				// support data types declared without pointers
-				o.recurseRedact(val.Index(i).Interface())
-				// ... and data types that were declared without but need pointers (for Redact)
-				if val.Index(i).CanAddr() {
-					o.recurseRedact(val.Index(i).Addr().Interface())
-				}
-			}
-		}
-	}
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
 }
 
 func (o AiV1ChatCompletionsRequest) zeroField(v interface{}) {
-	p := reflect.ValueOf(v).Elem()
-	p.Set(reflect.Zero(p.Type()))
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o AiV1ChatCompletionsRequest) MarshalJSON() ([]byte, error) {
@@ -310,6 +344,9 @@ func (o AiV1ChatCompletionsRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
+	}
+	if o.AiSessionId != nil {
+		toSerialize["ai_session_id"] = o.AiSessionId
 	}
 	if o.Question != nil {
 		toSerialize["question"] = o.Question
@@ -363,3 +400,5 @@ func (v *NullableAiV1ChatCompletionsRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
 **Answer** | Pointer to **string** |  | [optional] 
-**AskedAt** | Pointer to **time.Time** | The date and time at which this question was asked. It is represented in RFC3339 format and is in UTC. | [optional] 
+**Question** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -155,30 +155,30 @@ SetAnswer sets Answer field to given value.
 
 HasAnswer returns a boolean if a field has been set.
 
-### GetAskedAt
+### GetQuestion
 
-`func (o *AiV1ChatCompletionsReply) GetAskedAt() time.Time`
+`func (o *AiV1ChatCompletionsReply) GetQuestion() string`
 
-GetAskedAt returns the AskedAt field if non-nil, zero value otherwise.
+GetQuestion returns the Question field if non-nil, zero value otherwise.
 
-### GetAskedAtOk
+### GetQuestionOk
 
-`func (o *AiV1ChatCompletionsReply) GetAskedAtOk() (*time.Time, bool)`
+`func (o *AiV1ChatCompletionsReply) GetQuestionOk() (*string, bool)`
 
-GetAskedAtOk returns a tuple with the AskedAt field if it's non-nil, zero value otherwise
+GetQuestionOk returns a tuple with the Question field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAskedAt
+### SetQuestion
 
-`func (o *AiV1ChatCompletionsReply) SetAskedAt(v time.Time)`
+`func (o *AiV1ChatCompletionsReply) SetQuestion(v string)`
 
-SetAskedAt sets AskedAt field to given value.
+SetQuestion sets Question field to given value.
 
-### HasAskedAt
+### HasQuestion
 
-`func (o *AiV1ChatCompletionsReply) HasAskedAt() bool`
+`func (o *AiV1ChatCompletionsReply) HasQuestion() bool`
 
-HasAskedAt returns a boolean if a field has been set.
+HasQuestion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
