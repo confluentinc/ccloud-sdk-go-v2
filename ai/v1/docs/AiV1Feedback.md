@@ -9,9 +9,8 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
 **AiSessionId** | Pointer to **string** |  | [optional] 
-**Like** | Pointer to **NullableBool** | Use &#39;true&#39; for thumbs up and &#39;false&#39; for thumbs down. | [optional] 
-**CopyCode** | Pointer to **NullableBool** | Use &#39;true&#39; if a user copied a code snippet from the AI Assistant&#39;s answer. | [optional] 
-**CopyMessage** | Pointer to **NullableBool** | Use &#39;true&#39; if a user copied the AI Assistant&#39;s answer. | [optional] 
+**Reaction** | Pointer to **string** | The feedback reaction types are:  &#39;THUMBS_UP&#39;: when a user upvotes AI Assistant&#39;s answer.  &#39;THUMBS_DOWN&#39;: when a user downvotes the AI Assistant&#39;s answer.  | [optional] [default to "UNSPECIFIED"]
+**Copied** | Pointer to **string** | The feedback copy types are:  &#39;ANSWER&#39;: when a user copies the AI Assistant&#39;s answer.  &#39;CODE&#39;: when a user copies the code snippet from the AI Assistant&#39;s answer.  | [optional] [default to "UNSPECIFIED"]
 **Comment** | Pointer to **NullableString** | Additional text feedback optionally provided by a user. | [optional] 
 
 ## Methods
@@ -158,111 +157,56 @@ SetAiSessionId sets AiSessionId field to given value.
 
 HasAiSessionId returns a boolean if a field has been set.
 
-### GetLike
+### GetReaction
 
-`func (o *AiV1Feedback) GetLike() bool`
+`func (o *AiV1Feedback) GetReaction() string`
 
-GetLike returns the Like field if non-nil, zero value otherwise.
+GetReaction returns the Reaction field if non-nil, zero value otherwise.
 
-### GetLikeOk
+### GetReactionOk
 
-`func (o *AiV1Feedback) GetLikeOk() (*bool, bool)`
+`func (o *AiV1Feedback) GetReactionOk() (*string, bool)`
 
-GetLikeOk returns a tuple with the Like field if it's non-nil, zero value otherwise
+GetReactionOk returns a tuple with the Reaction field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetLike
+### SetReaction
 
-`func (o *AiV1Feedback) SetLike(v bool)`
+`func (o *AiV1Feedback) SetReaction(v string)`
 
-SetLike sets Like field to given value.
+SetReaction sets Reaction field to given value.
 
-### HasLike
+### HasReaction
 
-`func (o *AiV1Feedback) HasLike() bool`
+`func (o *AiV1Feedback) HasReaction() bool`
 
-HasLike returns a boolean if a field has been set.
+HasReaction returns a boolean if a field has been set.
 
-### SetLikeNil
+### GetCopied
 
-`func (o *AiV1Feedback) SetLikeNil(b bool)`
+`func (o *AiV1Feedback) GetCopied() string`
 
- SetLikeNil sets the value for Like to be an explicit nil
+GetCopied returns the Copied field if non-nil, zero value otherwise.
 
-### UnsetLike
-`func (o *AiV1Feedback) UnsetLike()`
+### GetCopiedOk
 
-UnsetLike ensures that no value is present for Like, not even an explicit nil
-### GetCopyCode
+`func (o *AiV1Feedback) GetCopiedOk() (*string, bool)`
 
-`func (o *AiV1Feedback) GetCopyCode() bool`
-
-GetCopyCode returns the CopyCode field if non-nil, zero value otherwise.
-
-### GetCopyCodeOk
-
-`func (o *AiV1Feedback) GetCopyCodeOk() (*bool, bool)`
-
-GetCopyCodeOk returns a tuple with the CopyCode field if it's non-nil, zero value otherwise
+GetCopiedOk returns a tuple with the Copied field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCopyCode
+### SetCopied
 
-`func (o *AiV1Feedback) SetCopyCode(v bool)`
+`func (o *AiV1Feedback) SetCopied(v string)`
 
-SetCopyCode sets CopyCode field to given value.
+SetCopied sets Copied field to given value.
 
-### HasCopyCode
+### HasCopied
 
-`func (o *AiV1Feedback) HasCopyCode() bool`
+`func (o *AiV1Feedback) HasCopied() bool`
 
-HasCopyCode returns a boolean if a field has been set.
+HasCopied returns a boolean if a field has been set.
 
-### SetCopyCodeNil
-
-`func (o *AiV1Feedback) SetCopyCodeNil(b bool)`
-
- SetCopyCodeNil sets the value for CopyCode to be an explicit nil
-
-### UnsetCopyCode
-`func (o *AiV1Feedback) UnsetCopyCode()`
-
-UnsetCopyCode ensures that no value is present for CopyCode, not even an explicit nil
-### GetCopyMessage
-
-`func (o *AiV1Feedback) GetCopyMessage() bool`
-
-GetCopyMessage returns the CopyMessage field if non-nil, zero value otherwise.
-
-### GetCopyMessageOk
-
-`func (o *AiV1Feedback) GetCopyMessageOk() (*bool, bool)`
-
-GetCopyMessageOk returns a tuple with the CopyMessage field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCopyMessage
-
-`func (o *AiV1Feedback) SetCopyMessage(v bool)`
-
-SetCopyMessage sets CopyMessage field to given value.
-
-### HasCopyMessage
-
-`func (o *AiV1Feedback) HasCopyMessage() bool`
-
-HasCopyMessage returns a boolean if a field has been set.
-
-### SetCopyMessageNil
-
-`func (o *AiV1Feedback) SetCopyMessageNil(b bool)`
-
- SetCopyMessageNil sets the value for CopyMessage to be an explicit nil
-
-### UnsetCopyMessage
-`func (o *AiV1Feedback) UnsetCopyMessage()`
-
-UnsetCopyMessage ensures that no value is present for CopyMessage, not even an explicit nil
 ### GetComment
 
 `func (o *AiV1Feedback) GetComment() string`

@@ -44,12 +44,10 @@ type AiV1Feedback struct {
 	Id *string `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
 	AiSessionId *string `json:"ai_session_id,omitempty"`
-	// Use 'true' for thumbs up and 'false' for thumbs down.
-	Like NullableBool `json:"like,omitempty"`
-	// Use 'true' if a user copied a code snippet from the AI Assistant's answer.
-	CopyCode NullableBool `json:"copy_code,omitempty"`
-	// Use 'true' if a user copied the AI Assistant's answer.
-	CopyMessage NullableBool `json:"copy_message,omitempty"`
+	// The feedback reaction types are:  'THUMBS_UP': when a user upvotes AI Assistant's answer.  'THUMBS_DOWN': when a user downvotes the AI Assistant's answer. 
+	Reaction *string `json:"reaction,omitempty"`
+	// The feedback copy types are:  'ANSWER': when a user copies the AI Assistant's answer.  'CODE': when a user copies the code snippet from the AI Assistant's answer. 
+	Copied *string `json:"copied,omitempty"`
 	// Additional text feedback optionally provided by a user.
 	Comment NullableString `json:"comment,omitempty"`
 }
@@ -60,6 +58,10 @@ type AiV1Feedback struct {
 // will change when the set of required properties is changed
 func NewAiV1Feedback() *AiV1Feedback {
 	this := AiV1Feedback{}
+	var reaction string = "UNSPECIFIED"
+	this.Reaction = &reaction
+	var copied string = "UNSPECIFIED"
+	this.Copied = &copied
 	return &this
 }
 
@@ -68,6 +70,10 @@ func NewAiV1Feedback() *AiV1Feedback {
 // but it doesn't guarantee that properties required by API are set
 func NewAiV1FeedbackWithDefaults() *AiV1Feedback {
 	this := AiV1Feedback{}
+	var reaction string = "UNSPECIFIED"
+	this.Reaction = &reaction
+	var copied string = "UNSPECIFIED"
+	this.Copied = &copied
 	return &this
 }
 
@@ -231,130 +237,68 @@ func (o *AiV1Feedback) SetAiSessionId(v string) {
 	o.AiSessionId = &v
 }
 
-// GetLike returns the Like field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AiV1Feedback) GetLike() bool {
-	if o == nil || o.Like.Get() == nil {
-		var ret bool
+// GetReaction returns the Reaction field value if set, zero value otherwise.
+func (o *AiV1Feedback) GetReaction() string {
+	if o == nil || o.Reaction == nil {
+		var ret string
 		return ret
 	}
-	return *o.Like.Get()
+	return *o.Reaction
 }
 
-// GetLikeOk returns a tuple with the Like field value if set, nil otherwise
+// GetReactionOk returns a tuple with the Reaction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AiV1Feedback) GetLikeOk() (*bool, bool) {
-	if o == nil  {
+func (o *AiV1Feedback) GetReactionOk() (*string, bool) {
+	if o == nil || o.Reaction == nil {
 		return nil, false
 	}
-	return o.Like.Get(), o.Like.IsSet()
+	return o.Reaction, true
 }
 
-// HasLike returns a boolean if a field has been set.
-func (o *AiV1Feedback) HasLike() bool {
-	if o != nil && o.Like.IsSet() {
+// HasReaction returns a boolean if a field has been set.
+func (o *AiV1Feedback) HasReaction() bool {
+	if o != nil && o.Reaction != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetLike gets a reference to the given NullableBool and assigns it to the Like field.
-func (o *AiV1Feedback) SetLike(v bool) {
-	o.Like.Set(&v)
-}
-// SetLikeNil sets the value for Like to be an explicit nil
-func (o *AiV1Feedback) SetLikeNil() {
-	o.Like.Set(nil)
+// SetReaction gets a reference to the given string and assigns it to the Reaction field.
+func (o *AiV1Feedback) SetReaction(v string) {
+	o.Reaction = &v
 }
 
-// UnsetLike ensures that no value is present for Like, not even an explicit nil
-func (o *AiV1Feedback) UnsetLike() {
-	o.Like.Unset()
-}
-
-// GetCopyCode returns the CopyCode field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AiV1Feedback) GetCopyCode() bool {
-	if o == nil || o.CopyCode.Get() == nil {
-		var ret bool
+// GetCopied returns the Copied field value if set, zero value otherwise.
+func (o *AiV1Feedback) GetCopied() string {
+	if o == nil || o.Copied == nil {
+		var ret string
 		return ret
 	}
-	return *o.CopyCode.Get()
+	return *o.Copied
 }
 
-// GetCopyCodeOk returns a tuple with the CopyCode field value if set, nil otherwise
+// GetCopiedOk returns a tuple with the Copied field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AiV1Feedback) GetCopyCodeOk() (*bool, bool) {
-	if o == nil  {
+func (o *AiV1Feedback) GetCopiedOk() (*string, bool) {
+	if o == nil || o.Copied == nil {
 		return nil, false
 	}
-	return o.CopyCode.Get(), o.CopyCode.IsSet()
+	return o.Copied, true
 }
 
-// HasCopyCode returns a boolean if a field has been set.
-func (o *AiV1Feedback) HasCopyCode() bool {
-	if o != nil && o.CopyCode.IsSet() {
+// HasCopied returns a boolean if a field has been set.
+func (o *AiV1Feedback) HasCopied() bool {
+	if o != nil && o.Copied != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetCopyCode gets a reference to the given NullableBool and assigns it to the CopyCode field.
-func (o *AiV1Feedback) SetCopyCode(v bool) {
-	o.CopyCode.Set(&v)
-}
-// SetCopyCodeNil sets the value for CopyCode to be an explicit nil
-func (o *AiV1Feedback) SetCopyCodeNil() {
-	o.CopyCode.Set(nil)
-}
-
-// UnsetCopyCode ensures that no value is present for CopyCode, not even an explicit nil
-func (o *AiV1Feedback) UnsetCopyCode() {
-	o.CopyCode.Unset()
-}
-
-// GetCopyMessage returns the CopyMessage field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AiV1Feedback) GetCopyMessage() bool {
-	if o == nil || o.CopyMessage.Get() == nil {
-		var ret bool
-		return ret
-	}
-	return *o.CopyMessage.Get()
-}
-
-// GetCopyMessageOk returns a tuple with the CopyMessage field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AiV1Feedback) GetCopyMessageOk() (*bool, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return o.CopyMessage.Get(), o.CopyMessage.IsSet()
-}
-
-// HasCopyMessage returns a boolean if a field has been set.
-func (o *AiV1Feedback) HasCopyMessage() bool {
-	if o != nil && o.CopyMessage.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCopyMessage gets a reference to the given NullableBool and assigns it to the CopyMessage field.
-func (o *AiV1Feedback) SetCopyMessage(v bool) {
-	o.CopyMessage.Set(&v)
-}
-// SetCopyMessageNil sets the value for CopyMessage to be an explicit nil
-func (o *AiV1Feedback) SetCopyMessageNil() {
-	o.CopyMessage.Set(nil)
-}
-
-// UnsetCopyMessage ensures that no value is present for CopyMessage, not even an explicit nil
-func (o *AiV1Feedback) UnsetCopyMessage() {
-	o.CopyMessage.Unset()
+// SetCopied gets a reference to the given string and assigns it to the Copied field.
+func (o *AiV1Feedback) SetCopied(v string) {
+	o.Copied = &v
 }
 
 // GetComment returns the Comment field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -406,9 +350,8 @@ func (o *AiV1Feedback) Redact() {
     o.recurseRedact(o.Id)
     o.recurseRedact(o.Metadata)
     o.recurseRedact(o.AiSessionId)
-    o.recurseRedact(o.Like)
-    o.recurseRedact(o.CopyCode)
-    o.recurseRedact(o.CopyMessage)
+    o.recurseRedact(o.Reaction)
+    o.recurseRedact(o.Copied)
     o.recurseRedact(o.Comment)
 }
 
@@ -459,14 +402,11 @@ func (o AiV1Feedback) MarshalJSON() ([]byte, error) {
 	if o.AiSessionId != nil {
 		toSerialize["ai_session_id"] = o.AiSessionId
 	}
-	if o.Like.IsSet() {
-		toSerialize["like"] = o.Like.Get()
+	if o.Reaction != nil {
+		toSerialize["reaction"] = o.Reaction
 	}
-	if o.CopyCode.IsSet() {
-		toSerialize["copy_code"] = o.CopyCode.Get()
-	}
-	if o.CopyMessage.IsSet() {
-		toSerialize["copy_message"] = o.CopyMessage.Get()
+	if o.Copied != nil {
+		toSerialize["copied"] = o.Copied
 	}
 	if o.Comment.IsSet() {
 		toSerialize["comment"] = o.Comment.Get()

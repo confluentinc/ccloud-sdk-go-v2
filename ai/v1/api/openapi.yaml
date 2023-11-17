@@ -850,13 +850,13 @@ paths:
             --url https://api.confluent.cloud/ai/v1/chat-completions/%7Bchat_completion_id%7D/feedback \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"ai_session_id":"cd2ec6a3-82fe-4911-902a-065ff8425b66","like":true,"copy_code":true,"copy_message":true,"comment":"The suggested CLI command contained several typos. It was supposed to be \"confluent\" instead of \"ccloud\"."}'
+            --data '{"ai_session_id":"cd2ec6a3-82fe-4911-902a-065ff8425b66","reaction":"UNSPECIFIED","copied":"UNSPECIFIED","comment":"The suggested CLI command contained several typos. It was supposed to be \"confluent\" instead of \"ccloud\"."}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"like\":true,\"copy_code\":true,\"copy_message\":true,\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"reaction\":\"UNSPECIFIED\",\"copied\":\"UNSPECIFIED\",\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/ai/v1/chat-completions/%7Bchat_completion_id%7D/feedback")
             .post(body)
@@ -869,9 +869,9 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ai/v1/chat-completions/%7Bchat_completion_id%7D/feedback\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"ai_session_id\\\":\\\"cd2ec6a3-82fe-4911-902a-065ff8425b66\\\
-          \",\\\"like\\\":true,\\\"copy_code\\\":true,\\\"copy_message\\\":true,\\\
-          \"comment\\\":\\\"The suggested CLI command contained several typos. It\
-          \ was supposed to be \\\\\\\"confluent\\\\\\\" instead of \\\\\\\"ccloud\\\
+          \",\\\"reaction\\\":\\\"UNSPECIFIED\\\",\\\"copied\\\":\\\"UNSPECIFIED\\\
+          \",\\\"comment\\\":\\\"The suggested CLI command contained several typos.\
+          \ It was supposed to be \\\\\\\"confluent\\\\\\\" instead of \\\\\\\"ccloud\\\
           \\\\\".\\\"}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
           \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
@@ -883,7 +883,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"like\":true,\"copy_code\":true,\"copy_message\":true,\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}"
+          payload = "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"reaction\":\"UNSPECIFIED\",\"copied\":\"UNSPECIFIED\",\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}"
 
           headers = {
               'content-type': "application/json",
@@ -926,9 +926,8 @@ paths:
 
           req.write(JSON.stringify({
             ai_session_id: 'cd2ec6a3-82fe-4911-902a-065ff8425b66',
-            like: true,
-            copy_code: true,
-            copy_message: true,
+            reaction: 'UNSPECIFIED',
+            copied: 'UNSPECIFIED',
             comment: 'The suggested CLI command contained several typos. It was supposed to be "confluent" instead of "ccloud".'
           }));
           req.end();
@@ -944,7 +943,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"like\":true,\"copy_code\":true,\"copy_message\":true,\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"reaction\":\"UNSPECIFIED\",\"copied\":\"UNSPECIFIED\",\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -953,7 +952,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"like\":true,\"copy_code\":true,\"copy_message\":true,\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"reaction\":\"UNSPECIFIED\",\"copied\":\"UNSPECIFIED\",\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: AI API v1
   /ai/v1/doc-completions/{doc_completion_id}/feedback:
@@ -1173,13 +1172,13 @@ paths:
           curl --request POST \
             --url https://api.confluent.cloud/ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback \
             --header 'content-type: application/json' \
-            --data '{"ai_session_id":"cd2ec6a3-82fe-4911-902a-065ff8425b66","like":true,"copy_code":true,"copy_message":true,"comment":"The suggested CLI command contained several typos. It was supposed to be \"confluent\" instead of \"ccloud\"."}'
+            --data '{"ai_session_id":"cd2ec6a3-82fe-4911-902a-065ff8425b66","reaction":"UNSPECIFIED","copied":"UNSPECIFIED","comment":"The suggested CLI command contained several typos. It was supposed to be \"confluent\" instead of \"ccloud\"."}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"like\":true,\"copy_code\":true,\"copy_message\":true,\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"reaction\":\"UNSPECIFIED\",\"copied\":\"UNSPECIFIED\",\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback")
             .post(body)
@@ -1191,9 +1190,9 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"ai_session_id\\\":\\\"cd2ec6a3-82fe-4911-902a-065ff8425b66\\\
-          \",\\\"like\\\":true,\\\"copy_code\\\":true,\\\"copy_message\\\":true,\\\
-          \"comment\\\":\\\"The suggested CLI command contained several typos. It\
-          \ was supposed to be \\\\\\\"confluent\\\\\\\" instead of \\\\\\\"ccloud\\\
+          \",\\\"reaction\\\":\\\"UNSPECIFIED\\\",\\\"copied\\\":\\\"UNSPECIFIED\\\
+          \",\\\"comment\\\":\\\"The suggested CLI command contained several typos.\
+          \ It was supposed to be \\\\\\\"confluent\\\\\\\" instead of \\\\\\\"ccloud\\\
           \\\\\".\\\"}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
           \n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _ :=\
           \ http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\
@@ -1204,7 +1203,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"like\":true,\"copy_code\":true,\"copy_message\":true,\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}"
+          payload = "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"reaction\":\"UNSPECIFIED\",\"copied\":\"UNSPECIFIED\",\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}"
 
           headers = { 'content-type': "application/json" }
 
@@ -1243,9 +1242,8 @@ paths:
 
           req.write(JSON.stringify({
             ai_session_id: 'cd2ec6a3-82fe-4911-902a-065ff8425b66',
-            like: true,
-            copy_code: true,
-            copy_message: true,
+            reaction: 'UNSPECIFIED',
+            copied: 'UNSPECIFIED',
             comment: 'The suggested CLI command contained several typos. It was supposed to be "confluent" instead of "ccloud".'
           }));
           req.end();
@@ -1260,7 +1258,7 @@ paths:
           headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"like\":true,\"copy_code\":true,\"copy_message\":true,\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"reaction\":\"UNSPECIFIED\",\"copied\":\"UNSPECIFIED\",\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1268,7 +1266,7 @@ paths:
           var client = new RestClient("https://api.confluent.cloud/ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
-          request.AddParameter("application/json", "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"like\":true,\"copy_code\":true,\"copy_message\":true,\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"reaction\":\"UNSPECIFIED\",\"copied\":\"UNSPECIFIED\",\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: AI API v1
 components:
@@ -1596,16 +1594,15 @@ components:
     ai.v1.Feedback:
       description: Submit feedback on the AI assistant.
       example:
-        copy_code: true
         metadata: ""
+        reaction: UNSPECIFIED
+        copied: UNSPECIFIED
         ai_session_id: ""
-        like: true
         kind: Feedback
         comment: The suggested CLI command contained several typos. It was supposed
           to be "confluent" instead of "ccloud".
         id: dlz-f3a90de
         api_version: ai/v1
-        copy_message: true
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -1641,19 +1638,32 @@ components:
         ai_session_id:
           allOf:
           - $ref: '#/components/schemas/ai.v1.SessionId'
-        like:
-          description: Use 'true' for thumbs up and 'false' for thumbs down.
-          nullable: true
-          type: boolean
-        copy_code:
-          description: Use 'true' if a user copied a code snippet from the AI Assistant's
-            answer.
-          nullable: true
-          type: boolean
-        copy_message:
-          description: Use 'true' if a user copied the AI Assistant's answer.
-          nullable: true
-          type: boolean
+        reaction:
+          default: UNSPECIFIED
+          description: |
+            The feedback reaction types are:
+
+            'THUMBS_UP': when a user upvotes AI Assistant's answer.
+
+            'THUMBS_DOWN': when a user downvotes the AI Assistant's answer.
+          type: string
+          x-extensible-enum:
+          - THUMBS_UP
+          - THUMBS_DOWN
+          - UNSPECIFIED
+        copied:
+          default: UNSPECIFIED
+          description: |
+            The feedback copy types are:
+
+            'ANSWER': when a user copies the AI Assistant's answer.
+
+            'CODE': when a user copies the code snippet from the AI Assistant's answer.
+          type: string
+          x-extensible-enum:
+          - ANSWER
+          - CODE
+          - UNSPECIFIED
         comment:
           description: Additional text feedback optionally provided by a user.
           example: The suggested CLI command contained several typos. It was supposed
