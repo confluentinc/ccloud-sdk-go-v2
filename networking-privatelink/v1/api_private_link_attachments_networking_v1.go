@@ -44,7 +44,7 @@ type PrivateLinkAttachmentsNetworkingV1Api interface {
 	/*
 		CreateNetworkingV1PrivateLinkAttachment Create a Private Link Attachment
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to create a private link attachment.
 
@@ -60,7 +60,7 @@ type PrivateLinkAttachmentsNetworkingV1Api interface {
 	/*
 		DeleteNetworkingV1PrivateLinkAttachment Delete a Private Link Attachment
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to delete a private link attachment.
 
@@ -76,7 +76,7 @@ type PrivateLinkAttachmentsNetworkingV1Api interface {
 	/*
 		GetNetworkingV1PrivateLinkAttachment Read a Private Link Attachment
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to read a private link attachment.
 
@@ -93,7 +93,7 @@ type PrivateLinkAttachmentsNetworkingV1Api interface {
 	/*
 		ListNetworkingV1PrivateLinkAttachments List of Private Link Attachments
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Retrieve a sorted, filtered, paginated list of all private link attachments.
 
@@ -109,7 +109,7 @@ type PrivateLinkAttachmentsNetworkingV1Api interface {
 	/*
 		UpdateNetworkingV1PrivateLinkAttachment Update a Private Link Attachment
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to update a private link attachment.
 
@@ -147,7 +147,7 @@ func (r ApiCreateNetworkingV1PrivateLinkAttachmentRequest) Execute() (Networking
 /*
 CreateNetworkingV1PrivateLinkAttachment Create a Private Link Attachment
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create a private link attachment.
 
@@ -329,7 +329,7 @@ func (r ApiDeleteNetworkingV1PrivateLinkAttachmentRequest) Execute() (*_nethttp.
 /*
 DeleteNetworkingV1PrivateLinkAttachment Delete a Private Link Attachment
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete a private link attachment.
 
@@ -485,7 +485,7 @@ func (r ApiGetNetworkingV1PrivateLinkAttachmentRequest) Execute() (NetworkingV1P
 /*
 GetNetworkingV1PrivateLinkAttachment Read a Private Link Attachment
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a private link attachment.
 
@@ -693,7 +693,7 @@ func (r ApiListNetworkingV1PrivateLinkAttachmentsRequest) Execute() (NetworkingV
 /*
 ListNetworkingV1PrivateLinkAttachments List of Private Link Attachments
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all private link attachments.
 
@@ -864,7 +864,7 @@ func (r ApiUpdateNetworkingV1PrivateLinkAttachmentRequest) Execute() (Networking
 /*
 UpdateNetworkingV1PrivateLinkAttachment Update a Private Link Attachment
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update a private link attachment.
 
@@ -988,6 +988,16 @@ func (a *PrivateLinkAttachmentsNetworkingV1ApiService) UpdateNetworkingV1Private
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

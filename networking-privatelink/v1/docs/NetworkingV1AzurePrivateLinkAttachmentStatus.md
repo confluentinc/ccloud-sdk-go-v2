@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | PrivateLinkAttachmentStatus kind. | [readonly] 
-**PrivateLinkServices** | [**[]NetworkingV1AzurePrivateLinkService**](NetworkingV1AzurePrivateLinkService.md) | Array of Azure PrivateLink services that can be used to connect PrivateEndpoints for each availability zone.  | [readonly] 
+**PrivateLinkService** | [**NetworkingV1AzurePrivateLinkService**](networking.v1.AzurePrivateLinkService.md) | Azure PrivateLink service that can be used to connect to a PrivateEndpoint.  | [readonly] 
 
 ## Methods
 
 ### NewNetworkingV1AzurePrivateLinkAttachmentStatus
 
-`func NewNetworkingV1AzurePrivateLinkAttachmentStatus(kind string, privateLinkServices []NetworkingV1AzurePrivateLinkService, ) *NetworkingV1AzurePrivateLinkAttachmentStatus`
+`func NewNetworkingV1AzurePrivateLinkAttachmentStatus(kind string, privateLinkService NetworkingV1AzurePrivateLinkService, ) *NetworkingV1AzurePrivateLinkAttachmentStatus`
 
 NewNetworkingV1AzurePrivateLinkAttachmentStatus instantiates a new NetworkingV1AzurePrivateLinkAttachmentStatus object
 This constructor will assign default values to properties that have it defined,
@@ -46,24 +46,24 @@ and a boolean to check if the value has been set.
 SetKind sets Kind field to given value.
 
 
-### GetPrivateLinkServices
+### GetPrivateLinkService
 
-`func (o *NetworkingV1AzurePrivateLinkAttachmentStatus) GetPrivateLinkServices() []NetworkingV1AzurePrivateLinkService`
+`func (o *NetworkingV1AzurePrivateLinkAttachmentStatus) GetPrivateLinkService() NetworkingV1AzurePrivateLinkService`
 
-GetPrivateLinkServices returns the PrivateLinkServices field if non-nil, zero value otherwise.
+GetPrivateLinkService returns the PrivateLinkService field if non-nil, zero value otherwise.
 
-### GetPrivateLinkServicesOk
+### GetPrivateLinkServiceOk
 
-`func (o *NetworkingV1AzurePrivateLinkAttachmentStatus) GetPrivateLinkServicesOk() (*[]NetworkingV1AzurePrivateLinkService, bool)`
+`func (o *NetworkingV1AzurePrivateLinkAttachmentStatus) GetPrivateLinkServiceOk() (*NetworkingV1AzurePrivateLinkService, bool)`
 
-GetPrivateLinkServicesOk returns a tuple with the PrivateLinkServices field if it's non-nil, zero value otherwise
+GetPrivateLinkServiceOk returns a tuple with the PrivateLinkService field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPrivateLinkServices
+### SetPrivateLinkService
 
-`func (o *NetworkingV1AzurePrivateLinkAttachmentStatus) SetPrivateLinkServices(v []NetworkingV1AzurePrivateLinkService)`
+`func (o *NetworkingV1AzurePrivateLinkAttachmentStatus) SetPrivateLinkService(v NetworkingV1AzurePrivateLinkService)`
 
-SetPrivateLinkServices sets PrivateLinkServices field to given value.
+SetPrivateLinkService sets PrivateLinkService field to given value.
 
 
 

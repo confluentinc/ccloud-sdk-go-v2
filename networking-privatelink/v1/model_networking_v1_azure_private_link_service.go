@@ -34,13 +34,11 @@ import (
 	"reflect"
 )
 
-// NetworkingV1AzurePrivateLinkService Azure Private Link Service for an availability zone with reserved capacity to connect a Private Endpoint.
+// NetworkingV1AzurePrivateLinkService Azure Private Link Service with reserved capacity to connect a Private Endpoint.
 type NetworkingV1AzurePrivateLinkService struct {
-	// Availability zone associated with the Azure PrivateLink service.
-	Zone string `json:"zone,omitempty"`
-	// Azure PrivateLink service alias for the availability zone.
+	// Azure PrivateLink service alias.
 	PrivateLinkServiceAlias string `json:"private_link_service_alias,omitempty"`
-	// Azure PrivateLink service resource id for the availability zone.
+	// Azure PrivateLink service resource id.
 	PrivateLinkServiceResourceId string `json:"private_link_service_resource_id,omitempty"`
 }
 
@@ -48,9 +46,8 @@ type NetworkingV1AzurePrivateLinkService struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1AzurePrivateLinkService(zone string, privateLinkServiceAlias string, privateLinkServiceResourceId string) *NetworkingV1AzurePrivateLinkService {
+func NewNetworkingV1AzurePrivateLinkService(privateLinkServiceAlias string, privateLinkServiceResourceId string) *NetworkingV1AzurePrivateLinkService {
 	this := NetworkingV1AzurePrivateLinkService{}
-	this.Zone = zone
 	this.PrivateLinkServiceAlias = privateLinkServiceAlias
 	this.PrivateLinkServiceResourceId = privateLinkServiceResourceId
 	return &this
@@ -62,30 +59,6 @@ func NewNetworkingV1AzurePrivateLinkService(zone string, privateLinkServiceAlias
 func NewNetworkingV1AzurePrivateLinkServiceWithDefaults() *NetworkingV1AzurePrivateLinkService {
 	this := NetworkingV1AzurePrivateLinkService{}
 	return &this
-}
-
-// GetZone returns the Zone field value
-func (o *NetworkingV1AzurePrivateLinkService) GetZone() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Zone
-}
-
-// GetZoneOk returns a tuple with the Zone field value
-// and a boolean to check if the value has been set.
-func (o *NetworkingV1AzurePrivateLinkService) GetZoneOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Zone, true
-}
-
-// SetZone sets field value
-func (o *NetworkingV1AzurePrivateLinkService) SetZone(v string) {
-	o.Zone = v
 }
 
 // GetPrivateLinkServiceAlias returns the PrivateLinkServiceAlias field value
@@ -138,7 +111,6 @@ func (o *NetworkingV1AzurePrivateLinkService) SetPrivateLinkServiceResourceId(v 
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1AzurePrivateLinkService) Redact() {
-	o.recurseRedact(&o.Zone)
 	o.recurseRedact(&o.PrivateLinkServiceAlias)
 	o.recurseRedact(&o.PrivateLinkServiceResourceId)
 }
@@ -175,9 +147,6 @@ func (o NetworkingV1AzurePrivateLinkService) zeroField(v interface{}) {
 
 func (o NetworkingV1AzurePrivateLinkService) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["zone"] = o.Zone
-	}
 	if true {
 		toSerialize["private_link_service_alias"] = o.PrivateLinkServiceAlias
 	}
