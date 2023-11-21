@@ -83,6 +83,7 @@ Class | Method | HTTP request | Description
 *WorkspacesWsV1beta1Api* | [**DeleteWsV1beta1Workspace**](docs/WorkspacesWsV1beta1Api.md#deletewsv1beta1workspace) | **Delete** /ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name} | Delete a Workspace
 *WorkspacesWsV1beta1Api* | [**GetWsV1beta1Workspace**](docs/WorkspacesWsV1beta1Api.md#getwsv1beta1workspace) | **Get** /ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name} | Read a Workspace
 *WorkspacesWsV1beta1Api* | [**ListWsV1beta1Workspaces**](docs/WorkspacesWsV1beta1Api.md#listwsv1beta1workspaces) | **Get** /ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces | List of Workspaces
+*WorkspacesWsV1beta1Api* | [**PatchWsV1beta1Workspace**](docs/WorkspacesWsV1beta1Api.md#patchwsv1beta1workspace) | **Patch** /ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name} | Update a Workspace with patch request
 *WorkspacesWsV1beta1Api* | [**PutWsV1beta1Workspace**](docs/WorkspacesWsV1beta1Api.md#putwsv1beta1workspace) | **Put** /ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name} | Update a Workspace
 
 
@@ -93,9 +94,14 @@ Class | Method | HTTP request | Description
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
  - [GlobalObjectReference](docs/GlobalObjectReference.md)
+ - [JSONPatchRequestAddReplace](docs/JSONPatchRequestAddReplace.md)
+ - [JSONPatchRequestMoveCopy](docs/JSONPatchRequestMoveCopy.md)
+ - [JSONPatchRequestRemove](docs/JSONPatchRequestRemove.md)
  - [ListMeta](docs/ListMeta.md)
  - [MultipleSearchFilter](docs/MultipleSearchFilter.md)
  - [ObjectMeta](docs/ObjectMeta.md)
+ - [PatchRequest](docs/PatchRequest.md)
+ - [PatchRequestOneOf](docs/PatchRequestOneOf.md)
  - [WsV1beta1Block](docs/WsV1beta1Block.md)
  - [WsV1beta1CodeOptions](docs/WsV1beta1CodeOptions.md)
  - [WsV1beta1Workspace](docs/WsV1beta1Workspace.md)

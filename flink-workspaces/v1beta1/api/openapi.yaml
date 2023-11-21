@@ -236,14 +236,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces?spec.compute_pool=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces?spec.compute_pool=lfcp-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces?spec.compute_pool=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces?spec.compute_pool=lfcp-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -251,7 +251,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces?spec.compute_pool=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces?spec.compute_pool=lfcp-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -264,7 +264,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces?spec.compute_pool=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces?spec.compute_pool=lfcp-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -278,7 +278,7 @@ paths:
             "method": "GET",
             "hostname": "flink.region.provider.confluent.cloud",
             "port": null,
-            "path": "/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces?spec.compute_pool=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces?spec.compute_pool=lfcp-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -303,7 +303,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces?spec.compute_pool=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces?spec.compute_pool=lfcp-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -312,7 +312,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces?spec.compute_pool=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces?spec.compute_pool=lfcp-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -593,7 +593,7 @@ paths:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url 'https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces' \
+            --url https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"name":"my-workspace","spec":{"display_name":"string","compute_pool":{"id":"lfcp-00000"},"service_account":{"id":"sa-00000"},"blocks":null,"properties":null}}'
@@ -604,7 +604,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"name\":\"my-workspace\",\"spec\":{\"display_name\":\"string\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":null,\"properties\":null}}");
           Request request = new Request.Builder()
-            .url("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces")
+            .url("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces")
             .post(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -613,7 +613,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"name\\\":\\\"my-workspace\\\"\
           ,\\\"spec\\\":{\\\"display_name\\\":\\\"string\\\",\\\"compute_pool\\\"\
           :{\\\"id\\\":\\\"lfcp-00000\\\"},\\\"service_account\\\":{\\\"id\\\":\\\"\
@@ -636,7 +636,7 @@ paths:
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("POST", "/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces", payload, headers)
+          conn.request("POST", "/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -650,7 +650,7 @@ paths:
             "method": "POST",
             "hostname": "flink.region.provider.confluent.cloud",
             "port": null,
-            "path": "/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces",
+            "path": "/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -686,7 +686,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -698,7 +698,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces");
+          var client = new RestClient("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
@@ -881,14 +881,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}' \
+            --url https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}")
+            .url("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -896,7 +896,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -909,7 +909,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}", headers=headers)
+          conn.request("DELETE", "/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -923,7 +923,7 @@ paths:
             "method": "DELETE",
             "hostname": "flink.region.provider.confluent.cloud",
             "port": null,
-            "path": "/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}",
+            "path": "/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -948,7 +948,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -957,7 +957,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}");
+          var client = new RestClient("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1173,14 +1173,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}' \
+            --url https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}")
+            .url("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1188,7 +1188,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1201,7 +1201,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}", headers=headers)
+          conn.request("GET", "/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1215,7 +1215,7 @@ paths:
             "method": "GET",
             "hostname": "flink.region.provider.confluent.cloud",
             "port": null,
-            "path": "/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}",
+            "path": "/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1240,7 +1240,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1249,8 +1249,348 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}");
+          var client = new RestClient("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D");
           var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+    patch:
+      description: |-
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        Make a request to patch a workspace.
+      operationId: patchWsV1beta1Workspace
+      parameters:
+      - description: The unique identifier for the organization.
+        explode: false
+        in: path
+        name: organization_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The unique identifier for the environment.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The workspace name that is unique across the environment and
+          region.
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/PatchRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ws.v1beta1.Workspace'
+                - required:
+                  - api_version
+                  - environment
+                  - kind
+                  - metadata
+                  - name
+                  - org
+                  - spec
+                  type: object
+                - properties:
+                    metadata:
+                      required:
+                      - self
+                      - uid
+                      type: object
+                    spec:
+                      required:
+                      - display_name
+                      type: object
+                  type: object
+          description: The updated workspace.
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'my-workspace'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "409"
+                  code: resource_already_exists
+                  title: Resource Already exists
+                  detail: The workspace '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                    exists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request is in conflict with the current server state
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Resource URI of conflicting resource
+              explode: false
+              schema:
+                example: https://flink.region.provider.confluent.cloud/{object}/{id}
+                format: uri
+                type: string
+              style: simple
+          x-summary: Conflict
+        "422":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "422"
+                  code: invalid_configuration
+                  id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  title: Validation Failed
+                  detail: 'The property ''/cluster/storage_size'' of type string did
+                    not match the following type: integer'
+                  source:
+                    pointer: /cluster/storage_size
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Validation Failed
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - cloud-api-key: []
+      summary: Update a Workspace with patch request
+      tags:
+      - Workspaces (ws/v1beta1)
+      x-request-access-name: Workspace API v1beta1
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request PATCH \
+            --url https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json-patch+json'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D")
+            .patch(null)
+            .addHeader("content-type", "application/json-patch+json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D\"\
+          \n\n\treq, _ := http.NewRequest(\"PATCH\", url, nil)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json-patch+json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
+
+          headers = {
+              'content-type': "application/json-patch+json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("PATCH", "/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "PATCH",
+            "hostname": "flink.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D",
+            "headers": {
+              "content-type": "application/json-patch+json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json-patch+json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D");
+          var request = new RestRequest(Method.PATCH);
+          request.AddHeader("content-type", "application/json-patch+json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     put:
@@ -1549,7 +1889,7 @@ paths:
       - lang: Shell
         source: |-
           curl --request PUT \
-            --url 'https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}' \
+            --url https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"name":"string","spec":{"display_name":"My first workspace","compute_pool":{"id":"lfcp-00000"},"service_account":{"id":"sa-00000"},"blocks":[{"type":"CODE","properties":{"app_id":"block-1234","language":"SQL"},"code_options":{"source":["SELECT * FROM my-catalog.cluster_3.topic-1;"]}}],"properties":{"sql-catalog":"inventory","sql-database":"customers"}},"metadata":{"resource_version":null}}'
@@ -1560,7 +1900,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"name\":\"string\",\"spec\":{\"display_name\":\"My first workspace\",\"compute_pool\":{\"id\":\"lfcp-00000\"},\"service_account\":{\"id\":\"sa-00000\"},\"blocks\":[{\"type\":\"CODE\",\"properties\":{\"app_id\":\"block-1234\",\"language\":\"SQL\"},\"code_options\":{\"source\":[\"SELECT * FROM my-catalog.cluster_3.topic-1;\"]}}],\"properties\":{\"sql-catalog\":\"inventory\",\"sql-database\":\"customers\"}},\"metadata\":{\"resource_version\":null}}");
           Request request = new Request.Builder()
-            .url("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}")
+            .url("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D")
             .put(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -1569,7 +1909,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"name\\\":\\\"string\\\",\\\"spec\\\
           \":{\\\"display_name\\\":\\\"My first workspace\\\",\\\"compute_pool\\\"\
           :{\\\"id\\\":\\\"lfcp-00000\\\"},\\\"service_account\\\":{\\\"id\\\":\\\"\
@@ -1596,7 +1936,7 @@ paths:
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PUT", "/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}", payload, headers)
+          conn.request("PUT", "/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1610,7 +1950,7 @@ paths:
             "method": "PUT",
             "hostname": "flink.region.provider.confluent.cloud",
             "port": null,
-            "path": "/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}",
+            "path": "/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -1653,7 +1993,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PUT");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -1665,7 +2005,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}");
+          var client = new RestClient("https://flink.region.provider.confluent.cloud/ws/v1beta1/organizations/%7Borganization_id%7D/environments/%7Benvironment_id%7D/workspaces/%7Bname%7D");
           var request = new RestRequest(Method.PUT);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
@@ -2223,6 +2563,74 @@ components:
           type: string
         source:
           $ref: '#/components/schemas/Error_source'
+      type: object
+    PatchRequest:
+      description: PatchRequest represent a json-patch request to be applied to the
+        workspace. See https://tools.ietf.org/html/rfc6902
+      items:
+        oneOf:
+        - $ref: '#/components/schemas/JSONPatchRequestAddReplace'
+        - $ref: '#/components/schemas/JSONPatchRequestRemove'
+        - $ref: '#/components/schemas/JSONPatchRequestMoveCopy'
+        x-one-of-name: PatchRequestOneOf
+      type: array
+    JSONPatchRequestAddReplace:
+      additionalProperties: false
+      description: This option is used to add or replace a value for a field
+      properties:
+        path:
+          description: A JSON Pointer path.
+          type: string
+        value:
+          description: The value to add, replace or test.
+        op:
+          description: The operation to perform.
+          enum:
+          - add
+          - replace
+          - test
+          type: string
+      required:
+      - op
+      - path
+      - value
+      type: object
+    JSONPatchRequestRemove:
+      additionalProperties: false
+      description: This option is used to remove a field
+      properties:
+        path:
+          description: A JSON Pointer path.
+          type: string
+        op:
+          description: The operation to perform.
+          enum:
+          - remove
+          type: string
+      required:
+      - op
+      - path
+      type: object
+    JSONPatchRequestMoveCopy:
+      additionalProperties: false
+      description: This option is used to move or copy a field
+      properties:
+        path:
+          description: A JSON Pointer path.
+          type: string
+        op:
+          description: The operation to perform.
+          enum:
+          - move
+          - copy
+          type: string
+        from:
+          description: A JSON Pointer path.
+          type: string
+      required:
+      - from
+      - op
+      - path
       type: object
     Error_source:
       description: If this error was caused by a particular part of the API request,

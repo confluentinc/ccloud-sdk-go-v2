@@ -112,6 +112,24 @@ type WorkspacesWsV1beta1Api interface {
 	ListWsV1beta1WorkspacesExecute(r ApiListWsV1beta1WorkspacesRequest) (WsV1beta1WorkspaceList, *_nethttp.Response, error)
 
 	/*
+		PatchWsV1beta1Workspace Update a Workspace with patch request
+
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+	Make a request to patch a workspace.
+
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param organizationId The unique identifier for the organization.
+		 @param environmentId The unique identifier for the environment.
+		 @param name The workspace name that is unique across the environment and region.
+		 @return ApiPatchWsV1beta1WorkspaceRequest
+	*/
+	PatchWsV1beta1Workspace(ctx _context.Context, organizationId string, environmentId string, name string) ApiPatchWsV1beta1WorkspaceRequest
+
+	// PatchWsV1beta1WorkspaceExecute executes the request
+	//  @return WsV1beta1Workspace
+	PatchWsV1beta1WorkspaceExecute(r ApiPatchWsV1beta1WorkspaceRequest) (WsV1beta1Workspace, *_nethttp.Response, error)
+
+	/*
 		PutWsV1beta1Workspace Update a Workspace
 
 		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
@@ -156,10 +174,10 @@ CreateWsV1beta1Workspace Create a Workspace
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 Make a request to create a workspace.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param organizationId The unique identifier for the organization.
-	@param environmentId The unique identifier for the environment.
-	@return ApiCreateWsV1beta1WorkspaceRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organizationId The unique identifier for the organization.
+ @param environmentId The unique identifier for the environment.
+ @return ApiCreateWsV1beta1WorkspaceRequest
 */
 func (a *WorkspacesWsV1beta1ApiService) CreateWsV1beta1Workspace(ctx _context.Context, organizationId string, environmentId string) ApiCreateWsV1beta1WorkspaceRequest {
 	return ApiCreateWsV1beta1WorkspaceRequest{
@@ -171,8 +189,7 @@ func (a *WorkspacesWsV1beta1ApiService) CreateWsV1beta1Workspace(ctx _context.Co
 }
 
 // Execute executes the request
-//
-//	@return WsV1beta1Workspace
+//  @return WsV1beta1Workspace
 func (a *WorkspacesWsV1beta1ApiService) CreateWsV1beta1WorkspaceExecute(r ApiCreateWsV1beta1WorkspaceRequest) (WsV1beta1Workspace, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -329,11 +346,11 @@ DeleteWsV1beta1Workspace Delete a Workspace
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 Make a request to delete a workspace.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param organizationId The unique identifier for the organization.
-	@param environmentId The unique identifier for the environment.
-	@param name The workspace name that is unique across the environment and region.
-	@return ApiDeleteWsV1beta1WorkspaceRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organizationId The unique identifier for the organization.
+ @param environmentId The unique identifier for the environment.
+ @param name The workspace name that is unique across the environment and region.
+ @return ApiDeleteWsV1beta1WorkspaceRequest
 */
 func (a *WorkspacesWsV1beta1ApiService) DeleteWsV1beta1Workspace(ctx _context.Context, organizationId string, environmentId string, name string) ApiDeleteWsV1beta1WorkspaceRequest {
 	return ApiDeleteWsV1beta1WorkspaceRequest{
@@ -481,11 +498,11 @@ GetWsV1beta1Workspace Read a Workspace
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 Make a request to read a workspace.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param organizationId The unique identifier for the organization.
-	@param environmentId The unique identifier for the environment.
-	@param name The workspace name that is unique across the environment and region.
-	@return ApiGetWsV1beta1WorkspaceRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organizationId The unique identifier for the organization.
+ @param environmentId The unique identifier for the environment.
+ @param name The workspace name that is unique across the environment and region.
+ @return ApiGetWsV1beta1WorkspaceRequest
 */
 func (a *WorkspacesWsV1beta1ApiService) GetWsV1beta1Workspace(ctx _context.Context, organizationId string, environmentId string, name string) ApiGetWsV1beta1WorkspaceRequest {
 	return ApiGetWsV1beta1WorkspaceRequest{
@@ -498,8 +515,7 @@ func (a *WorkspacesWsV1beta1ApiService) GetWsV1beta1Workspace(ctx _context.Conte
 }
 
 // Execute executes the request
-//
-//	@return WsV1beta1Workspace
+//  @return WsV1beta1Workspace
 func (a *WorkspacesWsV1beta1ApiService) GetWsV1beta1WorkspaceExecute(r ApiGetWsV1beta1WorkspaceRequest) (WsV1beta1Workspace, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -666,10 +682,10 @@ ListWsV1beta1Workspaces List of Workspaces
 
 Retrieve a sorted, filtered, paginated list of all workspaces.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param organizationId The unique identifier for the organization.
-	@param environmentId The unique identifier for the environment.
-	@return ApiListWsV1beta1WorkspacesRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organizationId The unique identifier for the organization.
+ @param environmentId The unique identifier for the environment.
+ @return ApiListWsV1beta1WorkspacesRequest
 */
 func (a *WorkspacesWsV1beta1ApiService) ListWsV1beta1Workspaces(ctx _context.Context, organizationId string, environmentId string) ApiListWsV1beta1WorkspacesRequest {
 	return ApiListWsV1beta1WorkspacesRequest{
@@ -681,8 +697,7 @@ func (a *WorkspacesWsV1beta1ApiService) ListWsV1beta1Workspaces(ctx _context.Con
 }
 
 // Execute executes the request
-//
-//	@return WsV1beta1WorkspaceList
+//  @return WsV1beta1WorkspaceList
 func (a *WorkspacesWsV1beta1ApiService) ListWsV1beta1WorkspacesExecute(r ApiListWsV1beta1WorkspacesRequest) (WsV1beta1WorkspaceList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -818,6 +833,197 @@ func (a *WorkspacesWsV1beta1ApiService) ListWsV1beta1WorkspacesExecute(r ApiList
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiPatchWsV1beta1WorkspaceRequest struct {
+	ctx            _context.Context
+	ApiService     WorkspacesWsV1beta1Api
+	organizationId string
+	environmentId  string
+	name           string
+	patchRequest   *PatchRequest
+}
+
+func (r ApiPatchWsV1beta1WorkspaceRequest) PatchRequest(patchRequest PatchRequest) ApiPatchWsV1beta1WorkspaceRequest {
+	r.patchRequest = &patchRequest
+	return r
+}
+
+func (r ApiPatchWsV1beta1WorkspaceRequest) Execute() (WsV1beta1Workspace, *_nethttp.Response, error) {
+	return r.ApiService.PatchWsV1beta1WorkspaceExecute(r)
+}
+
+/*
+PatchWsV1beta1Workspace Update a Workspace with patch request
+
+[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+Make a request to patch a workspace.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organizationId The unique identifier for the organization.
+ @param environmentId The unique identifier for the environment.
+ @param name The workspace name that is unique across the environment and region.
+ @return ApiPatchWsV1beta1WorkspaceRequest
+*/
+func (a *WorkspacesWsV1beta1ApiService) PatchWsV1beta1Workspace(ctx _context.Context, organizationId string, environmentId string, name string) ApiPatchWsV1beta1WorkspaceRequest {
+	return ApiPatchWsV1beta1WorkspaceRequest{
+		ApiService:     a,
+		ctx:            ctx,
+		organizationId: organizationId,
+		environmentId:  environmentId,
+		name:           name,
+	}
+}
+
+// Execute executes the request
+//  @return WsV1beta1Workspace
+func (a *WorkspacesWsV1beta1ApiService) PatchWsV1beta1WorkspaceExecute(r ApiPatchWsV1beta1WorkspaceRequest) (WsV1beta1Workspace, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  WsV1beta1Workspace
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkspacesWsV1beta1ApiService.PatchWsV1beta1Workspace")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/ws/v1beta1/organizations/{organization_id}/environments/{environment_id}/workspaces/{name}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization_id"+"}", _neturl.PathEscape(parameterToString(r.organizationId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"environment_id"+"}", _neturl.PathEscape(parameterToString(r.environmentId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(r.name, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.patchRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiPutWsV1beta1WorkspaceRequest struct {
 	ctx                _context.Context
 	ApiService         WorkspacesWsV1beta1Api
@@ -842,11 +1048,11 @@ PutWsV1beta1Workspace Update a Workspace
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 Make a request to update a workspace.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param organizationId The unique identifier for the organization.
-	@param environmentId The unique identifier for the environment.
-	@param name The workspace name that is unique across the environment and region.
-	@return ApiPutWsV1beta1WorkspaceRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organizationId The unique identifier for the organization.
+ @param environmentId The unique identifier for the environment.
+ @param name The workspace name that is unique across the environment and region.
+ @return ApiPutWsV1beta1WorkspaceRequest
 */
 func (a *WorkspacesWsV1beta1ApiService) PutWsV1beta1Workspace(ctx _context.Context, organizationId string, environmentId string, name string) ApiPutWsV1beta1WorkspaceRequest {
 	return ApiPutWsV1beta1WorkspaceRequest{
@@ -859,8 +1065,7 @@ func (a *WorkspacesWsV1beta1ApiService) PutWsV1beta1Workspace(ctx _context.Conte
 }
 
 // Execute executes the request
-//
-//	@return WsV1beta1Workspace
+//  @return WsV1beta1Workspace
 func (a *WorkspacesWsV1beta1ApiService) PutWsV1beta1WorkspaceExecute(r ApiPutWsV1beta1WorkspaceRequest) (WsV1beta1Workspace, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
