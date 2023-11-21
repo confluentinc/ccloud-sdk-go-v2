@@ -58,7 +58,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AiV1ChatCompletionsReply**](AiV1ChatCompletionsReply.md)
+[**AiV1ChatCompletionsReply**](ai.v1.ChatCompletionsReply.md)
 
 ### Authorization
 

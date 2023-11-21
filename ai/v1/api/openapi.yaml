@@ -49,7 +49,6 @@ paths:
               allOf:
               - $ref: '#/components/schemas/ai.v1.ChatCompletionsRequest'
               - required:
-                - ai_session_id
                 - question
                 type: object
       responses:
@@ -60,6 +59,7 @@ paths:
                 allOf:
                 - $ref: '#/components/schemas/ai.v1.ChatCompletionsReply'
                 - required:
+                  - ai_session_id
                   - answer
                   - api_version
                   - id
@@ -357,7 +357,6 @@ paths:
               allOf:
               - $ref: '#/components/schemas/ai.v1.ChatCompletionsRequest'
               - required:
-                - ai_session_id
                 - question
                 type: object
       responses:
@@ -365,7 +364,16 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ai.v1.ChatCompletionsReply'
+                allOf:
+                - $ref: '#/components/schemas/ai.v1.ChatCompletionsReply'
+                - required:
+                  - ai_session_id
+                  - answer
+                  - api_version
+                  - id
+                  - kind
+                  - question
+                  type: object
           description: Query was successful.
         "400":
           content:
@@ -1545,13 +1553,6 @@ components:
       type: object
     ai.v1.ChatCompletionsReply:
       description: Reply from the AI assistant.
-      example:
-        metadata: ""
-        answer: ""
-        question: ""
-        kind: ChatCompletionsReply
-        id: dlz-f3a90de
-        api_version: ai/v1
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -1584,6 +1585,9 @@ components:
                 example: https://api.confluent.cloud/ai/v1/chat-completions-replies/ccr-12345
               resource_name:
                 example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/chat-completions-reply=ccr-12345
+        ai_session_id:
+          allOf:
+          - $ref: '#/components/schemas/ai.v1.SessionId'
         answer:
           allOf:
           - $ref: '#/components/schemas/ai.v1.ChatCompletionsAnswer'

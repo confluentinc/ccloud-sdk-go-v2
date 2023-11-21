@@ -43,6 +43,7 @@ type AiV1ChatCompletionsReply struct {
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
 	Id *string `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
+	AiSessionId *string `json:"ai_session_id,omitempty"`
 	Answer *string `json:"answer,omitempty"`
 	Question *string `json:"question,omitempty"`
 }
@@ -192,6 +193,38 @@ func (o *AiV1ChatCompletionsReply) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
+// GetAiSessionId returns the AiSessionId field value if set, zero value otherwise.
+func (o *AiV1ChatCompletionsReply) GetAiSessionId() string {
+	if o == nil || o.AiSessionId == nil {
+		var ret string
+		return ret
+	}
+	return *o.AiSessionId
+}
+
+// GetAiSessionIdOk returns a tuple with the AiSessionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiV1ChatCompletionsReply) GetAiSessionIdOk() (*string, bool) {
+	if o == nil || o.AiSessionId == nil {
+		return nil, false
+	}
+	return o.AiSessionId, true
+}
+
+// HasAiSessionId returns a boolean if a field has been set.
+func (o *AiV1ChatCompletionsReply) HasAiSessionId() bool {
+	if o != nil && o.AiSessionId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAiSessionId gets a reference to the given string and assigns it to the AiSessionId field.
+func (o *AiV1ChatCompletionsReply) SetAiSessionId(v string) {
+	o.AiSessionId = &v
+}
+
 // GetAnswer returns the Answer field value if set, zero value otherwise.
 func (o *AiV1ChatCompletionsReply) GetAnswer() string {
 	if o == nil || o.Answer == nil {
@@ -262,6 +295,7 @@ func (o *AiV1ChatCompletionsReply) Redact() {
     o.recurseRedact(o.Kind)
     o.recurseRedact(o.Id)
     o.recurseRedact(o.Metadata)
+    o.recurseRedact(o.AiSessionId)
     o.recurseRedact(o.Answer)
     o.recurseRedact(o.Question)
 }
@@ -309,6 +343,9 @@ func (o AiV1ChatCompletionsReply) MarshalJSON() ([]byte, error) {
 	}
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
+	}
+	if o.AiSessionId != nil {
+		toSerialize["ai_session_id"] = o.AiSessionId
 	}
 	if o.Answer != nil {
 		toSerialize["answer"] = o.Answer
