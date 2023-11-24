@@ -56,17 +56,17 @@ type ClusterLinkingV3Api interface {
 	CreateKafkaLinkExecute(r ApiCreateKafkaLinkRequest) (*_nethttp.Response, error)
 
 	/*
-		CreateKafkaMirrorTopic Create a mirror topic
+			CreateKafkaMirrorTopic Create a mirror topic
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Create a topic in the destination cluster mirroring a topic in
-	the source cluster
+		Create a topic in the destination cluster mirroring a topic in
+		the source cluster
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param clusterId The Kafka cluster ID.
-		 @param linkName The link name
-		 @return ApiCreateKafkaMirrorTopicRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @param linkName The link name
+			 @return ApiCreateKafkaMirrorTopicRequest
 	*/
 	CreateKafkaMirrorTopic(ctx _context.Context, clusterId string, linkName string) ApiCreateKafkaMirrorTopicRequest
 
@@ -105,16 +105,16 @@ type ClusterLinkingV3Api interface {
 	DeleteKafkaLinkConfigExecute(r ApiDeleteKafkaLinkConfigRequest) (*_nethttp.Response, error)
 
 	/*
-		GetKafkaLink Describe the cluster link
+			GetKafkaLink Describe the cluster link
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	``link_id`` in ``ListLinksResponseData`` is deprecated and may be removed in a future release. Use the new ``cluster_link_id`` instead.
+		``link_id`` in ``ListLinksResponseData`` is deprecated and may be removed in a future release. Use the new ``cluster_link_id`` instead.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param clusterId The Kafka cluster ID.
-		 @param linkName The link name
-		 @return ApiGetKafkaLinkRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @param linkName The link name
+			 @return ApiGetKafkaLinkRequest
 	*/
 	GetKafkaLink(ctx _context.Context, clusterId string, linkName string) ApiGetKafkaLinkRequest
 
@@ -156,15 +156,15 @@ type ClusterLinkingV3Api interface {
 	ListKafkaLinkConfigsExecute(r ApiListKafkaLinkConfigsRequest) (ListLinkConfigsResponseDataList, *_nethttp.Response, error)
 
 	/*
-		ListKafkaLinks List all cluster links in the dest cluster
+			ListKafkaLinks List all cluster links in the dest cluster
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	``link_id`` in ``ListLinksResponseData`` is deprecated and may be removed in a future release. Use the new ``cluster_link_id`` instead.
+		``link_id`` in ``ListLinksResponseData`` is deprecated and may be removed in a future release. Use the new ``cluster_link_id`` instead.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param clusterId The Kafka cluster ID.
-		 @return ApiListKafkaLinksRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @return ApiListKafkaLinksRequest
 	*/
 	ListKafkaLinks(ctx _context.Context, clusterId string) ApiListKafkaLinksRequest
 
@@ -173,15 +173,15 @@ type ClusterLinkingV3Api interface {
 	ListKafkaLinksExecute(r ApiListKafkaLinksRequest) (ListLinksResponseDataList, *_nethttp.Response, error)
 
 	/*
-		ListKafkaMirrorTopics List mirror topics
+			ListKafkaMirrorTopics List mirror topics
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	List all mirror topics in the cluster
+		List all mirror topics in the cluster
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param clusterId The Kafka cluster ID.
-		 @return ApiListKafkaMirrorTopicsRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @return ApiListKafkaMirrorTopicsRequest
 	*/
 	ListKafkaMirrorTopics(ctx _context.Context, clusterId string) ApiListKafkaMirrorTopicsRequest
 
@@ -190,16 +190,16 @@ type ClusterLinkingV3Api interface {
 	ListKafkaMirrorTopicsExecute(r ApiListKafkaMirrorTopicsRequest) (ListMirrorTopicsResponseDataList, *_nethttp.Response, error)
 
 	/*
-		ListKafkaMirrorTopicsUnderLink List mirror topics
+			ListKafkaMirrorTopicsUnderLink List mirror topics
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	List all mirror topics under the link
+		List all mirror topics under the link
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param clusterId The Kafka cluster ID.
-		 @param linkName The link name
-		 @return ApiListKafkaMirrorTopicsUnderLinkRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @param linkName The link name
+			 @return ApiListKafkaMirrorTopicsUnderLinkRequest
 	*/
 	ListKafkaMirrorTopicsUnderLink(ctx _context.Context, clusterId string, linkName string) ApiListKafkaMirrorTopicsUnderLinkRequest
 
@@ -241,16 +241,16 @@ type ClusterLinkingV3Api interface {
 	UpdateKafkaLinkConfigExecute(r ApiUpdateKafkaLinkConfigRequest) (*_nethttp.Response, error)
 
 	/*
-		UpdateKafkaLinkConfigBatch Batch Alter Cluster Link Configs
+			UpdateKafkaLinkConfigBatch Batch Alter Cluster Link Configs
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Batch Alter Cluster Link Configs
+		Batch Alter Cluster Link Configs
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param clusterId The Kafka cluster ID.
-		 @param linkName The link name
-		 @return ApiUpdateKafkaLinkConfigBatchRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param clusterId The Kafka cluster ID.
+			 @param linkName The link name
+			 @return ApiUpdateKafkaLinkConfigBatchRequest
 	*/
 	UpdateKafkaLinkConfigBatch(ctx _context.Context, clusterId string, linkName string) ApiUpdateKafkaLinkConfigBatchRequest
 
@@ -306,38 +306,6 @@ type ClusterLinkingV3Api interface {
 	UpdateKafkaMirrorTopicsPromoteExecute(r ApiUpdateKafkaMirrorTopicsPromoteRequest) (AlterMirrorStatusResponseDataList, *_nethttp.Response, error)
 
 	/*
-		UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror Promote the local mirror topic and Pause the remote mirror topic
-
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param clusterId The Kafka cluster ID.
-		 @param linkName The link name
-		 @return ApiUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorRequest
-	*/
-	UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror(ctx _context.Context, clusterId string, linkName string) ApiUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorRequest
-
-	// UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute executes the request
-	//  @return AlterMirrorStatusResponseDataList
-	UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute(r ApiUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorRequest) (AlterMirrorStatusResponseDataList, *_nethttp.Response, error)
-
-	/*
-		UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror Promote the local mirror topic and start the remote mirror topic
-
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param clusterId The Kafka cluster ID.
-		 @param linkName The link name
-		 @return ApiUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorRequest
-	*/
-	UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror(ctx _context.Context, clusterId string, linkName string) ApiUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorRequest
-
-	// UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute executes the request
-	//  @return AlterMirrorStatusResponseDataList
-	UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute(r ApiUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorRequest) (AlterMirrorStatusResponseDataList, *_nethttp.Response, error)
-
-	/*
 		UpdateKafkaMirrorTopicsResume Resume the mirror topics
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
@@ -352,6 +320,38 @@ type ClusterLinkingV3Api interface {
 	// UpdateKafkaMirrorTopicsResumeExecute executes the request
 	//  @return AlterMirrorStatusResponseDataList
 	UpdateKafkaMirrorTopicsResumeExecute(r ApiUpdateKafkaMirrorTopicsResumeRequest) (AlterMirrorStatusResponseDataList, *_nethttp.Response, error)
+
+	/*
+		UpdateKafkaMirrorTopicsReverseAndPauseMirror Reverse the local mirror topic and pause the remote mirror topic
+
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param linkName The link name
+		 @return ApiUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequest
+	*/
+	UpdateKafkaMirrorTopicsReverseAndPauseMirror(ctx _context.Context, clusterId string, linkName string) ApiUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequest
+
+	// UpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute executes the request
+	//  @return AlterMirrorStatusResponseDataList
+	UpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute(r ApiUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequest) (AlterMirrorStatusResponseDataList, *_nethttp.Response, error)
+
+	/*
+		UpdateKafkaMirrorTopicsReverseAndStartMirror Reverse the local mirror topic and start the remote mirror topic
+
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @param linkName The link name
+		 @return ApiUpdateKafkaMirrorTopicsReverseAndStartMirrorRequest
+	*/
+	UpdateKafkaMirrorTopicsReverseAndStartMirror(ctx _context.Context, clusterId string, linkName string) ApiUpdateKafkaMirrorTopicsReverseAndStartMirrorRequest
+
+	// UpdateKafkaMirrorTopicsReverseAndStartMirrorExecute executes the request
+	//  @return AlterMirrorStatusResponseDataList
+	UpdateKafkaMirrorTopicsReverseAndStartMirrorExecute(r ApiUpdateKafkaMirrorTopicsReverseAndStartMirrorRequest) (AlterMirrorStatusResponseDataList, *_nethttp.Response, error)
 }
 
 // ClusterLinkingV3ApiService ClusterLinkingV3Api service
@@ -400,9 +400,9 @@ CreateKafkaLink Create a cluster link
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@return ApiCreateKafkaLinkRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @return ApiCreateKafkaLinkRequest
 */
 func (a *ClusterLinkingV3ApiService) CreateKafkaLink(ctx _context.Context, clusterId string) ApiCreateKafkaLinkRequest {
 	return ApiCreateKafkaLinkRequest{
@@ -556,10 +556,10 @@ CreateKafkaMirrorTopic Create a mirror topic
 Create a topic in the destination cluster mirroring a topic in
 the source cluster
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param linkName The link name
-	@return ApiCreateKafkaMirrorTopicRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param linkName The link name
+ @return ApiCreateKafkaMirrorTopicRequest
 */
 func (a *ClusterLinkingV3ApiService) CreateKafkaMirrorTopic(ctx _context.Context, clusterId string, linkName string) ApiCreateKafkaMirrorTopicRequest {
 	return ApiCreateKafkaMirrorTopicRequest{
@@ -709,10 +709,10 @@ DeleteKafkaLink Delete the cluster link
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param linkName The link name
-	@return ApiDeleteKafkaLinkRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param linkName The link name
+ @return ApiDeleteKafkaLinkRequest
 */
 func (a *ClusterLinkingV3ApiService) DeleteKafkaLink(ctx _context.Context, clusterId string, linkName string) ApiDeleteKafkaLinkRequest {
 	return ApiDeleteKafkaLinkRequest{
@@ -853,11 +853,11 @@ DeleteKafkaLinkConfig Reset the given config to default value
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param linkName The link name
-	@param configName The link config name
-	@return ApiDeleteKafkaLinkConfigRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param linkName The link name
+ @param configName The link config name
+ @return ApiDeleteKafkaLinkConfigRequest
 */
 func (a *ClusterLinkingV3ApiService) DeleteKafkaLinkConfig(ctx _context.Context, clusterId string, linkName string, configName string) ApiDeleteKafkaLinkConfigRequest {
 	return ApiDeleteKafkaLinkConfigRequest{
@@ -993,12 +993,12 @@ GetKafkaLink Describe the cluster link
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-“link_id“ in “ListLinksResponseData“ is deprecated and may be removed in a future release. Use the new “cluster_link_id“ instead.
+``link_id`` in ``ListLinksResponseData`` is deprecated and may be removed in a future release. Use the new ``cluster_link_id`` instead.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param linkName The link name
-	@return ApiGetKafkaLinkRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param linkName The link name
+ @return ApiGetKafkaLinkRequest
 */
 func (a *ClusterLinkingV3ApiService) GetKafkaLink(ctx _context.Context, clusterId string, linkName string) ApiGetKafkaLinkRequest {
 	return ApiGetKafkaLinkRequest{
@@ -1010,8 +1010,7 @@ func (a *ClusterLinkingV3ApiService) GetKafkaLink(ctx _context.Context, clusterI
 }
 
 // Execute executes the request
-//
-//	@return ListLinksResponseData
+//  @return ListLinksResponseData
 func (a *ClusterLinkingV3ApiService) GetKafkaLinkExecute(r ApiGetKafkaLinkRequest) (ListLinksResponseData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -1145,11 +1144,11 @@ GetKafkaLinkConfigs Describe the config under the cluster link
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param linkName The link name
-	@param configName The link config name
-	@return ApiGetKafkaLinkConfigsRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param linkName The link name
+ @param configName The link config name
+ @return ApiGetKafkaLinkConfigsRequest
 */
 func (a *ClusterLinkingV3ApiService) GetKafkaLinkConfigs(ctx _context.Context, clusterId string, linkName string, configName string) ApiGetKafkaLinkConfigsRequest {
 	return ApiGetKafkaLinkConfigsRequest{
@@ -1162,8 +1161,7 @@ func (a *ClusterLinkingV3ApiService) GetKafkaLinkConfigs(ctx _context.Context, c
 }
 
 // Execute executes the request
-//
-//	@return ListLinkConfigsResponseData
+//  @return ListLinkConfigsResponseData
 func (a *ClusterLinkingV3ApiService) GetKafkaLinkConfigsExecute(r ApiGetKafkaLinkConfigsRequest) (ListLinkConfigsResponseData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -1297,10 +1295,10 @@ ListKafkaLinkConfigs List all configs of the cluster link
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param linkName The link name
-	@return ApiListKafkaLinkConfigsRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param linkName The link name
+ @return ApiListKafkaLinkConfigsRequest
 */
 func (a *ClusterLinkingV3ApiService) ListKafkaLinkConfigs(ctx _context.Context, clusterId string, linkName string) ApiListKafkaLinkConfigsRequest {
 	return ApiListKafkaLinkConfigsRequest{
@@ -1312,8 +1310,7 @@ func (a *ClusterLinkingV3ApiService) ListKafkaLinkConfigs(ctx _context.Context, 
 }
 
 // Execute executes the request
-//
-//	@return ListLinkConfigsResponseDataList
+//  @return ListLinkConfigsResponseDataList
 func (a *ClusterLinkingV3ApiService) ListKafkaLinkConfigsExecute(r ApiListKafkaLinkConfigsRequest) (ListLinkConfigsResponseDataList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -1445,11 +1442,11 @@ ListKafkaLinks List all cluster links in the dest cluster
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-“link_id“ in “ListLinksResponseData“ is deprecated and may be removed in a future release. Use the new “cluster_link_id“ instead.
+``link_id`` in ``ListLinksResponseData`` is deprecated and may be removed in a future release. Use the new ``cluster_link_id`` instead.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@return ApiListKafkaLinksRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @return ApiListKafkaLinksRequest
 */
 func (a *ClusterLinkingV3ApiService) ListKafkaLinks(ctx _context.Context, clusterId string) ApiListKafkaLinksRequest {
 	return ApiListKafkaLinksRequest{
@@ -1460,8 +1457,7 @@ func (a *ClusterLinkingV3ApiService) ListKafkaLinks(ctx _context.Context, cluste
 }
 
 // Execute executes the request
-//
-//	@return ListLinksResponseDataList
+//  @return ListLinksResponseDataList
 func (a *ClusterLinkingV3ApiService) ListKafkaLinksExecute(r ApiListKafkaLinksRequest) (ListLinksResponseDataList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -1601,9 +1597,9 @@ ListKafkaMirrorTopics List mirror topics
 
 List all mirror topics in the cluster
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@return ApiListKafkaMirrorTopicsRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @return ApiListKafkaMirrorTopicsRequest
 */
 func (a *ClusterLinkingV3ApiService) ListKafkaMirrorTopics(ctx _context.Context, clusterId string) ApiListKafkaMirrorTopicsRequest {
 	return ApiListKafkaMirrorTopicsRequest{
@@ -1614,8 +1610,7 @@ func (a *ClusterLinkingV3ApiService) ListKafkaMirrorTopics(ctx _context.Context,
 }
 
 // Execute executes the request
-//
-//	@return ListMirrorTopicsResponseDataList
+//  @return ListMirrorTopicsResponseDataList
 func (a *ClusterLinkingV3ApiService) ListKafkaMirrorTopicsExecute(r ApiListKafkaMirrorTopicsRequest) (ListMirrorTopicsResponseDataList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -1759,10 +1754,10 @@ ListKafkaMirrorTopicsUnderLink List mirror topics
 
 List all mirror topics under the link
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param linkName The link name
-	@return ApiListKafkaMirrorTopicsUnderLinkRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param linkName The link name
+ @return ApiListKafkaMirrorTopicsUnderLinkRequest
 */
 func (a *ClusterLinkingV3ApiService) ListKafkaMirrorTopicsUnderLink(ctx _context.Context, clusterId string, linkName string) ApiListKafkaMirrorTopicsUnderLinkRequest {
 	return ApiListKafkaMirrorTopicsUnderLinkRequest{
@@ -1774,8 +1769,7 @@ func (a *ClusterLinkingV3ApiService) ListKafkaMirrorTopicsUnderLink(ctx _context
 }
 
 // Execute executes the request
-//
-//	@return ListMirrorTopicsResponseDataList
+//  @return ListMirrorTopicsResponseDataList
 func (a *ClusterLinkingV3ApiService) ListKafkaMirrorTopicsUnderLinkExecute(r ApiListKafkaMirrorTopicsUnderLinkRequest) (ListMirrorTopicsResponseDataList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -1912,11 +1906,11 @@ ReadKafkaMirrorTopic Describe the mirror topic
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param linkName The link name
-	@param mirrorTopicName Cluster Linking mirror topic name
-	@return ApiReadKafkaMirrorTopicRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param linkName The link name
+ @param mirrorTopicName Cluster Linking mirror topic name
+ @return ApiReadKafkaMirrorTopicRequest
 */
 func (a *ClusterLinkingV3ApiService) ReadKafkaMirrorTopic(ctx _context.Context, clusterId string, linkName string, mirrorTopicName string) ApiReadKafkaMirrorTopicRequest {
 	return ApiReadKafkaMirrorTopicRequest{
@@ -1929,8 +1923,7 @@ func (a *ClusterLinkingV3ApiService) ReadKafkaMirrorTopic(ctx _context.Context, 
 }
 
 // Execute executes the request
-//
-//	@return ListMirrorTopicsResponseData
+//  @return ListMirrorTopicsResponseData
 func (a *ClusterLinkingV3ApiService) ReadKafkaMirrorTopicExecute(r ApiReadKafkaMirrorTopicRequest) (ListMirrorTopicsResponseData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -2072,11 +2065,11 @@ UpdateKafkaLinkConfig Alter the config under the cluster link
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param linkName The link name
-	@param configName The link config name
-	@return ApiUpdateKafkaLinkConfigRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param linkName The link name
+ @param configName The link config name
+ @return ApiUpdateKafkaLinkConfigRequest
 */
 func (a *ClusterLinkingV3ApiService) UpdateKafkaLinkConfig(ctx _context.Context, clusterId string, linkName string, configName string) ApiUpdateKafkaLinkConfigRequest {
 	return ApiUpdateKafkaLinkConfigRequest{
@@ -2228,10 +2221,10 @@ UpdateKafkaLinkConfigBatch Batch Alter Cluster Link Configs
 
 Batch Alter Cluster Link Configs
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param linkName The link name
-	@return ApiUpdateKafkaLinkConfigBatchRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param linkName The link name
+ @return ApiUpdateKafkaLinkConfigBatchRequest
 */
 func (a *ClusterLinkingV3ApiService) UpdateKafkaLinkConfigBatch(ctx _context.Context, clusterId string, linkName string) ApiUpdateKafkaLinkConfigBatchRequest {
 	return ApiUpdateKafkaLinkConfigBatchRequest{
@@ -2384,10 +2377,10 @@ UpdateKafkaMirrorTopicsFailover Failover the mirror topics
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param linkName The link name
-	@return ApiUpdateKafkaMirrorTopicsFailoverRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param linkName The link name
+ @return ApiUpdateKafkaMirrorTopicsFailoverRequest
 */
 func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsFailover(ctx _context.Context, clusterId string, linkName string) ApiUpdateKafkaMirrorTopicsFailoverRequest {
 	return ApiUpdateKafkaMirrorTopicsFailoverRequest{
@@ -2399,8 +2392,7 @@ func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsFailover(ctx _contex
 }
 
 // Execute executes the request
-//
-//	@return AlterMirrorStatusResponseDataList
+//  @return AlterMirrorStatusResponseDataList
 func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsFailoverExecute(r ApiUpdateKafkaMirrorTopicsFailoverRequest) (AlterMirrorStatusResponseDataList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -2552,10 +2544,10 @@ UpdateKafkaMirrorTopicsPause Pause the mirror topics
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param linkName The link name
-	@return ApiUpdateKafkaMirrorTopicsPauseRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param linkName The link name
+ @return ApiUpdateKafkaMirrorTopicsPauseRequest
 */
 func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsPause(ctx _context.Context, clusterId string, linkName string) ApiUpdateKafkaMirrorTopicsPauseRequest {
 	return ApiUpdateKafkaMirrorTopicsPauseRequest{
@@ -2567,8 +2559,7 @@ func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsPause(ctx _context.C
 }
 
 // Execute executes the request
-//
-//	@return AlterMirrorStatusResponseDataList
+//  @return AlterMirrorStatusResponseDataList
 func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsPauseExecute(r ApiUpdateKafkaMirrorTopicsPauseRequest) (AlterMirrorStatusResponseDataList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -2720,10 +2711,10 @@ UpdateKafkaMirrorTopicsPromote Promote the mirror topics
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param linkName The link name
-	@return ApiUpdateKafkaMirrorTopicsPromoteRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param linkName The link name
+ @return ApiUpdateKafkaMirrorTopicsPromoteRequest
 */
 func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsPromote(ctx _context.Context, clusterId string, linkName string) ApiUpdateKafkaMirrorTopicsPromoteRequest {
 	return ApiUpdateKafkaMirrorTopicsPromoteRequest{
@@ -2735,8 +2726,7 @@ func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsPromote(ctx _context
 }
 
 // Execute executes the request
-//
-//	@return AlterMirrorStatusResponseDataList
+//  @return AlterMirrorStatusResponseDataList
 func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsPromoteExecute(r ApiUpdateKafkaMirrorTopicsPromoteRequest) (AlterMirrorStatusResponseDataList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -2753,342 +2743,6 @@ func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsPromoteExecute(r Api
 	}
 
 	localVarPath := localBasePath + "/kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:promote"
-	localVarPath = strings.Replace(localVarPath, "{"+"cluster_id"+"}", _neturl.PathEscape(parameterToString(r.clusterId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"link_name"+"}", _neturl.PathEscape(parameterToString(r.linkName, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	if r.validateOnly != nil {
-		localVarQueryParams.Add("validate_only", parameterToString(*r.validateOnly, ""))
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.alterMirrorsRequestData
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode >= 500 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorRequest struct {
-	ctx                     _context.Context
-	ApiService              ClusterLinkingV3Api
-	clusterId               string
-	linkName                string
-	validateOnly            *bool
-	alterMirrorsRequestData *AlterMirrorsRequestData
-}
-
-// To validate the action can be performed successfully or not. Default: false
-func (r ApiUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorRequest) ValidateOnly(validateOnly bool) ApiUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorRequest {
-	r.validateOnly = &validateOnly
-	return r
-}
-
-// Mirror topics to be altered.
-func (r ApiUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorRequest) AlterMirrorsRequestData(alterMirrorsRequestData AlterMirrorsRequestData) ApiUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorRequest {
-	r.alterMirrorsRequestData = &alterMirrorsRequestData
-	return r
-}
-
-func (r ApiUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorRequest) Execute() (AlterMirrorStatusResponseDataList, *_nethttp.Response, error) {
-	return r.ApiService.UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute(r)
-}
-
-/*
-UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror Promote the local mirror topic and Pause the remote mirror topic
-
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param linkName The link name
-	@return ApiUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorRequest
-*/
-func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror(ctx _context.Context, clusterId string, linkName string) ApiUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorRequest {
-	return ApiUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		clusterId:  clusterId,
-		linkName:   linkName,
-	}
-}
-
-// Execute executes the request
-//
-//	@return AlterMirrorStatusResponseDataList
-func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute(r ApiUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorRequest) (AlterMirrorStatusResponseDataList, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AlterMirrorStatusResponseDataList
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ClusterLinkingV3ApiService.UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:promote-local-and-pause-remote-mirror"
-	localVarPath = strings.Replace(localVarPath, "{"+"cluster_id"+"}", _neturl.PathEscape(parameterToString(r.clusterId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"link_name"+"}", _neturl.PathEscape(parameterToString(r.linkName, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	if r.validateOnly != nil {
-		localVarQueryParams.Add("validate_only", parameterToString(*r.validateOnly, ""))
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.alterMirrorsRequestData
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode >= 500 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorRequest struct {
-	ctx                     _context.Context
-	ApiService              ClusterLinkingV3Api
-	clusterId               string
-	linkName                string
-	validateOnly            *bool
-	alterMirrorsRequestData *AlterMirrorsRequestData
-}
-
-// To validate the action can be performed successfully or not. Default: false
-func (r ApiUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorRequest) ValidateOnly(validateOnly bool) ApiUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorRequest {
-	r.validateOnly = &validateOnly
-	return r
-}
-
-// Mirror topics to be altered.
-func (r ApiUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorRequest) AlterMirrorsRequestData(alterMirrorsRequestData AlterMirrorsRequestData) ApiUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorRequest {
-	r.alterMirrorsRequestData = &alterMirrorsRequestData
-	return r
-}
-
-func (r ApiUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorRequest) Execute() (AlterMirrorStatusResponseDataList, *_nethttp.Response, error) {
-	return r.ApiService.UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute(r)
-}
-
-/*
-UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror Promote the local mirror topic and start the remote mirror topic
-
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param linkName The link name
-	@return ApiUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorRequest
-*/
-func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror(ctx _context.Context, clusterId string, linkName string) ApiUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorRequest {
-	return ApiUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorRequest{
-		ApiService: a,
-		ctx:        ctx,
-		clusterId:  clusterId,
-		linkName:   linkName,
-	}
-}
-
-// Execute executes the request
-//
-//	@return AlterMirrorStatusResponseDataList
-func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute(r ApiUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorRequest) (AlterMirrorStatusResponseDataList, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AlterMirrorStatusResponseDataList
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ClusterLinkingV3ApiService.UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:promote-local-and-start-remote-mirror"
 	localVarPath = strings.Replace(localVarPath, "{"+"cluster_id"+"}", _neturl.PathEscape(parameterToString(r.clusterId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"link_name"+"}", _neturl.PathEscape(parameterToString(r.linkName, "")), -1)
 
@@ -3224,10 +2878,10 @@ UpdateKafkaMirrorTopicsResume Resume the mirror topics
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param linkName The link name
-	@return ApiUpdateKafkaMirrorTopicsResumeRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param linkName The link name
+ @return ApiUpdateKafkaMirrorTopicsResumeRequest
 */
 func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsResume(ctx _context.Context, clusterId string, linkName string) ApiUpdateKafkaMirrorTopicsResumeRequest {
 	return ApiUpdateKafkaMirrorTopicsResumeRequest{
@@ -3239,8 +2893,7 @@ func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsResume(ctx _context.
 }
 
 // Execute executes the request
-//
-//	@return AlterMirrorStatusResponseDataList
+//  @return AlterMirrorStatusResponseDataList
 func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsResumeExecute(r ApiUpdateKafkaMirrorTopicsResumeRequest) (AlterMirrorStatusResponseDataList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -3257,6 +2910,340 @@ func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsResumeExecute(r ApiU
 	}
 
 	localVarPath := localBasePath + "/kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:resume"
+	localVarPath = strings.Replace(localVarPath, "{"+"cluster_id"+"}", _neturl.PathEscape(parameterToString(r.clusterId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"link_name"+"}", _neturl.PathEscape(parameterToString(r.linkName, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.validateOnly != nil {
+		localVarQueryParams.Add("validate_only", parameterToString(*r.validateOnly, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.alterMirrorsRequestData
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequest struct {
+	ctx                     _context.Context
+	ApiService              ClusterLinkingV3Api
+	clusterId               string
+	linkName                string
+	validateOnly            *bool
+	alterMirrorsRequestData *AlterMirrorsRequestData
+}
+
+// To validate the action can be performed successfully or not. Default: false
+func (r ApiUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequest) ValidateOnly(validateOnly bool) ApiUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequest {
+	r.validateOnly = &validateOnly
+	return r
+}
+
+// Mirror topics to be altered.
+func (r ApiUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequest) AlterMirrorsRequestData(alterMirrorsRequestData AlterMirrorsRequestData) ApiUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequest {
+	r.alterMirrorsRequestData = &alterMirrorsRequestData
+	return r
+}
+
+func (r ApiUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequest) Execute() (AlterMirrorStatusResponseDataList, *_nethttp.Response, error) {
+	return r.ApiService.UpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute(r)
+}
+
+/*
+UpdateKafkaMirrorTopicsReverseAndPauseMirror Reverse the local mirror topic and pause the remote mirror topic
+
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param linkName The link name
+ @return ApiUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequest
+*/
+func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsReverseAndPauseMirror(ctx _context.Context, clusterId string, linkName string) ApiUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequest {
+	return ApiUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequest{
+		ApiService: a,
+		ctx:        ctx,
+		clusterId:  clusterId,
+		linkName:   linkName,
+	}
+}
+
+// Execute executes the request
+//  @return AlterMirrorStatusResponseDataList
+func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute(r ApiUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequest) (AlterMirrorStatusResponseDataList, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  AlterMirrorStatusResponseDataList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ClusterLinkingV3ApiService.UpdateKafkaMirrorTopicsReverseAndPauseMirror")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:reverse-and-pause-mirror"
+	localVarPath = strings.Replace(localVarPath, "{"+"cluster_id"+"}", _neturl.PathEscape(parameterToString(r.clusterId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"link_name"+"}", _neturl.PathEscape(parameterToString(r.linkName, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.validateOnly != nil {
+		localVarQueryParams.Add("validate_only", parameterToString(*r.validateOnly, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/html"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.alterMirrorsRequestData
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateKafkaMirrorTopicsReverseAndStartMirrorRequest struct {
+	ctx                     _context.Context
+	ApiService              ClusterLinkingV3Api
+	clusterId               string
+	linkName                string
+	validateOnly            *bool
+	alterMirrorsRequestData *AlterMirrorsRequestData
+}
+
+// To validate the action can be performed successfully or not. Default: false
+func (r ApiUpdateKafkaMirrorTopicsReverseAndStartMirrorRequest) ValidateOnly(validateOnly bool) ApiUpdateKafkaMirrorTopicsReverseAndStartMirrorRequest {
+	r.validateOnly = &validateOnly
+	return r
+}
+
+// Mirror topics to be altered.
+func (r ApiUpdateKafkaMirrorTopicsReverseAndStartMirrorRequest) AlterMirrorsRequestData(alterMirrorsRequestData AlterMirrorsRequestData) ApiUpdateKafkaMirrorTopicsReverseAndStartMirrorRequest {
+	r.alterMirrorsRequestData = &alterMirrorsRequestData
+	return r
+}
+
+func (r ApiUpdateKafkaMirrorTopicsReverseAndStartMirrorRequest) Execute() (AlterMirrorStatusResponseDataList, *_nethttp.Response, error) {
+	return r.ApiService.UpdateKafkaMirrorTopicsReverseAndStartMirrorExecute(r)
+}
+
+/*
+UpdateKafkaMirrorTopicsReverseAndStartMirror Reverse the local mirror topic and start the remote mirror topic
+
+[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param linkName The link name
+ @return ApiUpdateKafkaMirrorTopicsReverseAndStartMirrorRequest
+*/
+func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsReverseAndStartMirror(ctx _context.Context, clusterId string, linkName string) ApiUpdateKafkaMirrorTopicsReverseAndStartMirrorRequest {
+	return ApiUpdateKafkaMirrorTopicsReverseAndStartMirrorRequest{
+		ApiService: a,
+		ctx:        ctx,
+		clusterId:  clusterId,
+		linkName:   linkName,
+	}
+}
+
+// Execute executes the request
+//  @return AlterMirrorStatusResponseDataList
+func (a *ClusterLinkingV3ApiService) UpdateKafkaMirrorTopicsReverseAndStartMirrorExecute(r ApiUpdateKafkaMirrorTopicsReverseAndStartMirrorRequest) (AlterMirrorStatusResponseDataList, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  AlterMirrorStatusResponseDataList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ClusterLinkingV3ApiService.UpdateKafkaMirrorTopicsReverseAndStartMirror")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:reverse-and-start-mirror"
 	localVarPath = strings.Replace(localVarPath, "{"+"cluster_id"+"}", _neturl.PathEscape(parameterToString(r.clusterId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"link_name"+"}", _neturl.PathEscape(parameterToString(r.linkName, "")), -1)
 

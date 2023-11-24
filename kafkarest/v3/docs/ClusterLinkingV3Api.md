@@ -20,9 +20,9 @@ Method | HTTP request | Description
 [**UpdateKafkaMirrorTopicsFailover**](ClusterLinkingV3Api.md#UpdateKafkaMirrorTopicsFailover) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:failover | Failover the mirror topics
 [**UpdateKafkaMirrorTopicsPause**](ClusterLinkingV3Api.md#UpdateKafkaMirrorTopicsPause) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:pause | Pause the mirror topics
 [**UpdateKafkaMirrorTopicsPromote**](ClusterLinkingV3Api.md#UpdateKafkaMirrorTopicsPromote) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:promote | Promote the mirror topics
-[**UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror**](ClusterLinkingV3Api.md#UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:promote-local-and-pause-remote-mirror | Promote the local mirror topic and Pause the remote mirror topic
-[**UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror**](ClusterLinkingV3Api.md#UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:promote-local-and-start-remote-mirror | Promote the local mirror topic and start the remote mirror topic
 [**UpdateKafkaMirrorTopicsResume**](ClusterLinkingV3Api.md#UpdateKafkaMirrorTopicsResume) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:resume | Resume the mirror topics
+[**UpdateKafkaMirrorTopicsReverseAndPauseMirror**](ClusterLinkingV3Api.md#UpdateKafkaMirrorTopicsReverseAndPauseMirror) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:reverse-and-pause-mirror | Reverse the local mirror topic and pause the remote mirror topic
+[**UpdateKafkaMirrorTopicsReverseAndStartMirror**](ClusterLinkingV3Api.md#UpdateKafkaMirrorTopicsReverseAndStartMirror) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:reverse-and-start-mirror | Reverse the local mirror topic and start the remote mirror topic
 
 
 
@@ -1221,160 +1221,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror
-
-> AlterMirrorStatusResponseDataList UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror(ctx, clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
-
-Promote the local mirror topic and Pause the remote mirror topic
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    clusterId := "cluster-1" // string | The Kafka cluster ID.
-    linkName := "link-sb1" // string | The link name
-    validateOnly := false // bool | To validate the action can be performed successfully or not. Default: false (optional)
-    alterMirrorsRequestData := *openapiclient.NewAlterMirrorsRequestData() // AlterMirrorsRequestData | Mirror topics to be altered. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClusterLinkingV3Api.UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror(context.Background(), clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror`: AlterMirrorStatusResponseDataList
-    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **string** | The Kafka cluster ID. | 
-**linkName** | **string** | The link name | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **validateOnly** | **bool** | To validate the action can be performed successfully or not. Default: false | 
- **alterMirrorsRequestData** | [**AlterMirrorsRequestData**](AlterMirrorsRequestData.md) | Mirror topics to be altered. | 
-
-### Return type
-
-[**AlterMirrorStatusResponseDataList**](AlterMirrorStatusResponseDataList.md)
-
-### Authorization
-
-[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json, text/html
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror
-
-> AlterMirrorStatusResponseDataList UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror(ctx, clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
-
-Promote the local mirror topic and start the remote mirror topic
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    clusterId := "cluster-1" // string | The Kafka cluster ID.
-    linkName := "link-sb1" // string | The link name
-    validateOnly := false // bool | To validate the action can be performed successfully or not. Default: false (optional)
-    alterMirrorsRequestData := *openapiclient.NewAlterMirrorsRequestData() // AlterMirrorsRequestData | Mirror topics to be altered. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClusterLinkingV3Api.UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror(context.Background(), clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror`: AlterMirrorStatusResponseDataList
-    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**clusterId** | **string** | The Kafka cluster ID. | 
-**linkName** | **string** | The link name | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **validateOnly** | **bool** | To validate the action can be performed successfully or not. Default: false | 
- **alterMirrorsRequestData** | [**AlterMirrorsRequestData**](AlterMirrorsRequestData.md) | Mirror topics to be altered. | 
-
-### Return type
-
-[**AlterMirrorStatusResponseDataList**](AlterMirrorStatusResponseDataList.md)
-
-### Authorization
-
-[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json, text/html
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## UpdateKafkaMirrorTopicsResume
 
 > AlterMirrorStatusResponseDataList UpdateKafkaMirrorTopicsResume(ctx, clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
@@ -1425,6 +1271,160 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiUpdateKafkaMirrorTopicsResumeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **validateOnly** | **bool** | To validate the action can be performed successfully or not. Default: false | 
+ **alterMirrorsRequestData** | [**AlterMirrorsRequestData**](AlterMirrorsRequestData.md) | Mirror topics to be altered. | 
+
+### Return type
+
+[**AlterMirrorStatusResponseDataList**](AlterMirrorStatusResponseDataList.md)
+
+### Authorization
+
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json, text/html
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateKafkaMirrorTopicsReverseAndPauseMirror
+
+> AlterMirrorStatusResponseDataList UpdateKafkaMirrorTopicsReverseAndPauseMirror(ctx, clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
+
+Reverse the local mirror topic and pause the remote mirror topic
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    clusterId := "cluster-1" // string | The Kafka cluster ID.
+    linkName := "link-sb1" // string | The link name
+    validateOnly := false // bool | To validate the action can be performed successfully or not. Default: false (optional)
+    alterMirrorsRequestData := *openapiclient.NewAlterMirrorsRequestData() // AlterMirrorsRequestData | Mirror topics to be altered. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.ClusterLinkingV3Api.UpdateKafkaMirrorTopicsReverseAndPauseMirror(context.Background(), clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.UpdateKafkaMirrorTopicsReverseAndPauseMirror``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateKafkaMirrorTopicsReverseAndPauseMirror`: AlterMirrorStatusResponseDataList
+    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.UpdateKafkaMirrorTopicsReverseAndPauseMirror`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**clusterId** | **string** | The Kafka cluster ID. | 
+**linkName** | **string** | The link name | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **validateOnly** | **bool** | To validate the action can be performed successfully or not. Default: false | 
+ **alterMirrorsRequestData** | [**AlterMirrorsRequestData**](AlterMirrorsRequestData.md) | Mirror topics to be altered. | 
+
+### Return type
+
+[**AlterMirrorStatusResponseDataList**](AlterMirrorStatusResponseDataList.md)
+
+### Authorization
+
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json, text/html
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateKafkaMirrorTopicsReverseAndStartMirror
+
+> AlterMirrorStatusResponseDataList UpdateKafkaMirrorTopicsReverseAndStartMirror(ctx, clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
+
+Reverse the local mirror topic and start the remote mirror topic
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    clusterId := "cluster-1" // string | The Kafka cluster ID.
+    linkName := "link-sb1" // string | The link name
+    validateOnly := false // bool | To validate the action can be performed successfully or not. Default: false (optional)
+    alterMirrorsRequestData := *openapiclient.NewAlterMirrorsRequestData() // AlterMirrorsRequestData | Mirror topics to be altered. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.ClusterLinkingV3Api.UpdateKafkaMirrorTopicsReverseAndStartMirror(context.Background(), clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.UpdateKafkaMirrorTopicsReverseAndStartMirror``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateKafkaMirrorTopicsReverseAndStartMirror`: AlterMirrorStatusResponseDataList
+    fmt.Fprintf(os.Stdout, "Response from `ClusterLinkingV3Api.UpdateKafkaMirrorTopicsReverseAndStartMirror`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**clusterId** | **string** | The Kafka cluster ID. | 
+**linkName** | **string** | The link name | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateKafkaMirrorTopicsReverseAndStartMirrorRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
