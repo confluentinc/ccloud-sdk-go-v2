@@ -36,8 +36,8 @@ import (
 
 // BrokerReplicaExclusionRequestData struct for BrokerReplicaExclusionRequestData
 type BrokerReplicaExclusionRequestData struct {
-	BrokerId int32 `json:"broker_id,omitempty"`
-	Reason string `json:"reason,omitempty"`
+	BrokerId int32  `json:"broker_id,omitempty"`
+	Reason   string `json:"reason,omitempty"`
 }
 
 // NewBrokerReplicaExclusionRequestData instantiates a new BrokerReplicaExclusionRequestData object
@@ -72,7 +72,7 @@ func (o *BrokerReplicaExclusionRequestData) GetBrokerId() int32 {
 // GetBrokerIdOk returns a tuple with the BrokerId field value
 // and a boolean to check if the value has been set.
 func (o *BrokerReplicaExclusionRequestData) GetBrokerIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.BrokerId, true
@@ -96,7 +96,7 @@ func (o *BrokerReplicaExclusionRequestData) GetReason() string {
 // GetReasonOk returns a tuple with the Reason field value
 // and a boolean to check if the value has been set.
 func (o *BrokerReplicaExclusionRequestData) GetReasonOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Reason, true
@@ -109,38 +109,38 @@ func (o *BrokerReplicaExclusionRequestData) SetReason(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *BrokerReplicaExclusionRequestData) Redact() {
-    o.recurseRedact(&o.BrokerId)
-    o.recurseRedact(&o.Reason)
+	o.recurseRedact(&o.BrokerId)
+	o.recurseRedact(&o.Reason)
 }
 
 func (o *BrokerReplicaExclusionRequestData) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o BrokerReplicaExclusionRequestData) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o BrokerReplicaExclusionRequestData) MarshalJSON() ([]byte, error) {
@@ -197,5 +197,3 @@ func (v *NullableBrokerReplicaExclusionRequestData) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

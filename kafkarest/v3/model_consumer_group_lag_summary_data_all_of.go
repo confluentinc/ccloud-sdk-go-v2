@@ -36,17 +36,17 @@ import (
 
 // ConsumerGroupLagSummaryDataAllOf struct for ConsumerGroupLagSummaryDataAllOf
 type ConsumerGroupLagSummaryDataAllOf struct {
-	ClusterId string `json:"cluster_id,omitempty"`
-	ConsumerGroupId string `json:"consumer_group_id,omitempty"`
-	MaxLagConsumerId string `json:"max_lag_consumer_id,omitempty"`
-	MaxLagInstanceId NullableString `json:"max_lag_instance_id,omitempty"`
-	MaxLagClientId string `json:"max_lag_client_id,omitempty"`
-	MaxLagTopicName string `json:"max_lag_topic_name,omitempty"`
-	MaxLagPartitionId int32 `json:"max_lag_partition_id,omitempty"`
-	MaxLag int64 `json:"max_lag,omitempty"`
-	TotalLag int64 `json:"total_lag,omitempty"`
-	MaxLagConsumer Relationship `json:"max_lag_consumer,omitempty"`
-	MaxLagPartition Relationship `json:"max_lag_partition,omitempty"`
+	ClusterId         string         `json:"cluster_id,omitempty"`
+	ConsumerGroupId   string         `json:"consumer_group_id,omitempty"`
+	MaxLagConsumerId  string         `json:"max_lag_consumer_id,omitempty"`
+	MaxLagInstanceId  NullableString `json:"max_lag_instance_id,omitempty"`
+	MaxLagClientId    string         `json:"max_lag_client_id,omitempty"`
+	MaxLagTopicName   string         `json:"max_lag_topic_name,omitempty"`
+	MaxLagPartitionId int32          `json:"max_lag_partition_id,omitempty"`
+	MaxLag            int64          `json:"max_lag,omitempty"`
+	TotalLag          int64          `json:"total_lag,omitempty"`
+	MaxLagConsumer    Relationship   `json:"max_lag_consumer,omitempty"`
+	MaxLagPartition   Relationship   `json:"max_lag_partition,omitempty"`
 }
 
 // NewConsumerGroupLagSummaryDataAllOf instantiates a new ConsumerGroupLagSummaryDataAllOf object
@@ -89,7 +89,7 @@ func (o *ConsumerGroupLagSummaryDataAllOf) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerGroupLagSummaryDataAllOf) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -113,7 +113,7 @@ func (o *ConsumerGroupLagSummaryDataAllOf) GetConsumerGroupId() string {
 // GetConsumerGroupIdOk returns a tuple with the ConsumerGroupId field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerGroupLagSummaryDataAllOf) GetConsumerGroupIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ConsumerGroupId, true
@@ -137,7 +137,7 @@ func (o *ConsumerGroupLagSummaryDataAllOf) GetMaxLagConsumerId() string {
 // GetMaxLagConsumerIdOk returns a tuple with the MaxLagConsumerId field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerGroupLagSummaryDataAllOf) GetMaxLagConsumerIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.MaxLagConsumerId, true
@@ -161,7 +161,7 @@ func (o *ConsumerGroupLagSummaryDataAllOf) GetMaxLagInstanceId() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConsumerGroupLagSummaryDataAllOf) GetMaxLagInstanceIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.MaxLagInstanceId.Get(), o.MaxLagInstanceId.IsSet()
@@ -180,6 +180,7 @@ func (o *ConsumerGroupLagSummaryDataAllOf) HasMaxLagInstanceId() bool {
 func (o *ConsumerGroupLagSummaryDataAllOf) SetMaxLagInstanceId(v string) {
 	o.MaxLagInstanceId.Set(&v)
 }
+
 // SetMaxLagInstanceIdNil sets the value for MaxLagInstanceId to be an explicit nil
 func (o *ConsumerGroupLagSummaryDataAllOf) SetMaxLagInstanceIdNil() {
 	o.MaxLagInstanceId.Set(nil)
@@ -203,7 +204,7 @@ func (o *ConsumerGroupLagSummaryDataAllOf) GetMaxLagClientId() string {
 // GetMaxLagClientIdOk returns a tuple with the MaxLagClientId field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerGroupLagSummaryDataAllOf) GetMaxLagClientIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.MaxLagClientId, true
@@ -227,7 +228,7 @@ func (o *ConsumerGroupLagSummaryDataAllOf) GetMaxLagTopicName() string {
 // GetMaxLagTopicNameOk returns a tuple with the MaxLagTopicName field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerGroupLagSummaryDataAllOf) GetMaxLagTopicNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.MaxLagTopicName, true
@@ -251,7 +252,7 @@ func (o *ConsumerGroupLagSummaryDataAllOf) GetMaxLagPartitionId() int32 {
 // GetMaxLagPartitionIdOk returns a tuple with the MaxLagPartitionId field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerGroupLagSummaryDataAllOf) GetMaxLagPartitionIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.MaxLagPartitionId, true
@@ -275,7 +276,7 @@ func (o *ConsumerGroupLagSummaryDataAllOf) GetMaxLag() int64 {
 // GetMaxLagOk returns a tuple with the MaxLag field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerGroupLagSummaryDataAllOf) GetMaxLagOk() (*int64, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.MaxLag, true
@@ -299,7 +300,7 @@ func (o *ConsumerGroupLagSummaryDataAllOf) GetTotalLag() int64 {
 // GetTotalLagOk returns a tuple with the TotalLag field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerGroupLagSummaryDataAllOf) GetTotalLagOk() (*int64, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.TotalLag, true
@@ -323,7 +324,7 @@ func (o *ConsumerGroupLagSummaryDataAllOf) GetMaxLagConsumer() Relationship {
 // GetMaxLagConsumerOk returns a tuple with the MaxLagConsumer field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerGroupLagSummaryDataAllOf) GetMaxLagConsumerOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.MaxLagConsumer, true
@@ -347,7 +348,7 @@ func (o *ConsumerGroupLagSummaryDataAllOf) GetMaxLagPartition() Relationship {
 // GetMaxLagPartitionOk returns a tuple with the MaxLagPartition field value
 // and a boolean to check if the value has been set.
 func (o *ConsumerGroupLagSummaryDataAllOf) GetMaxLagPartitionOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.MaxLagPartition, true
@@ -360,47 +361,47 @@ func (o *ConsumerGroupLagSummaryDataAllOf) SetMaxLagPartition(v Relationship) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ConsumerGroupLagSummaryDataAllOf) Redact() {
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.ConsumerGroupId)
-    o.recurseRedact(&o.MaxLagConsumerId)
-    o.recurseRedact(o.MaxLagInstanceId)
-    o.recurseRedact(&o.MaxLagClientId)
-    o.recurseRedact(&o.MaxLagTopicName)
-    o.recurseRedact(&o.MaxLagPartitionId)
-    o.recurseRedact(&o.MaxLag)
-    o.recurseRedact(&o.TotalLag)
-    o.recurseRedact(&o.MaxLagConsumer)
-    o.recurseRedact(&o.MaxLagPartition)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.ConsumerGroupId)
+	o.recurseRedact(&o.MaxLagConsumerId)
+	o.recurseRedact(o.MaxLagInstanceId)
+	o.recurseRedact(&o.MaxLagClientId)
+	o.recurseRedact(&o.MaxLagTopicName)
+	o.recurseRedact(&o.MaxLagPartitionId)
+	o.recurseRedact(&o.MaxLag)
+	o.recurseRedact(&o.TotalLag)
+	o.recurseRedact(&o.MaxLagConsumer)
+	o.recurseRedact(&o.MaxLagPartition)
 }
 
 func (o *ConsumerGroupLagSummaryDataAllOf) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ConsumerGroupLagSummaryDataAllOf) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ConsumerGroupLagSummaryDataAllOf) MarshalJSON() ([]byte, error) {
@@ -484,5 +485,3 @@ func (v *NullableConsumerGroupLagSummaryDataAllOf) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -37,11 +37,11 @@ import (
 
 // ProduceRequest struct for ProduceRequest
 type ProduceRequest struct {
-	PartitionId NullableInt32 `json:"partition_id,omitempty"`
-	Headers *[]ProduceRequestHeader `json:"headers,omitempty"`
-	Key NullableProduceRequestData `json:"key,omitempty"`
-	Value NullableProduceRequestData `json:"value,omitempty"`
-	Timestamp NullableTime `json:"timestamp,omitempty"`
+	PartitionId NullableInt32              `json:"partition_id,omitempty"`
+	Headers     *[]ProduceRequestHeader    `json:"headers,omitempty"`
+	Key         NullableProduceRequestData `json:"key,omitempty"`
+	Value       NullableProduceRequestData `json:"value,omitempty"`
+	Timestamp   NullableTime               `json:"timestamp,omitempty"`
 }
 
 // NewProduceRequest instantiates a new ProduceRequest object
@@ -74,7 +74,7 @@ func (o *ProduceRequest) GetPartitionId() int32 {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ProduceRequest) GetPartitionIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.PartitionId.Get(), o.PartitionId.IsSet()
@@ -93,6 +93,7 @@ func (o *ProduceRequest) HasPartitionId() bool {
 func (o *ProduceRequest) SetPartitionId(v int32) {
 	o.PartitionId.Set(&v)
 }
+
 // SetPartitionIdNil sets the value for PartitionId to be an explicit nil
 func (o *ProduceRequest) SetPartitionIdNil() {
 	o.PartitionId.Set(nil)
@@ -148,7 +149,7 @@ func (o *ProduceRequest) GetKey() ProduceRequestData {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ProduceRequest) GetKeyOk() (*ProduceRequestData, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Key.Get(), o.Key.IsSet()
@@ -167,6 +168,7 @@ func (o *ProduceRequest) HasKey() bool {
 func (o *ProduceRequest) SetKey(v ProduceRequestData) {
 	o.Key.Set(&v)
 }
+
 // SetKeyNil sets the value for Key to be an explicit nil
 func (o *ProduceRequest) SetKeyNil() {
 	o.Key.Set(nil)
@@ -190,7 +192,7 @@ func (o *ProduceRequest) GetValue() ProduceRequestData {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ProduceRequest) GetValueOk() (*ProduceRequestData, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Value.Get(), o.Value.IsSet()
@@ -209,6 +211,7 @@ func (o *ProduceRequest) HasValue() bool {
 func (o *ProduceRequest) SetValue(v ProduceRequestData) {
 	o.Value.Set(&v)
 }
+
 // SetValueNil sets the value for Value to be an explicit nil
 func (o *ProduceRequest) SetValueNil() {
 	o.Value.Set(nil)
@@ -232,7 +235,7 @@ func (o *ProduceRequest) GetTimestamp() time.Time {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ProduceRequest) GetTimestampOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Timestamp.Get(), o.Timestamp.IsSet()
@@ -251,6 +254,7 @@ func (o *ProduceRequest) HasTimestamp() bool {
 func (o *ProduceRequest) SetTimestamp(v time.Time) {
 	o.Timestamp.Set(&v)
 }
+
 // SetTimestampNil sets the value for Timestamp to be an explicit nil
 func (o *ProduceRequest) SetTimestampNil() {
 	o.Timestamp.Set(nil)
@@ -263,41 +267,41 @@ func (o *ProduceRequest) UnsetTimestamp() {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ProduceRequest) Redact() {
-    o.recurseRedact(o.PartitionId)
-    o.recurseRedact(o.Headers)
-    o.recurseRedact(o.Key)
-    o.recurseRedact(o.Value)
-    o.recurseRedact(o.Timestamp)
+	o.recurseRedact(o.PartitionId)
+	o.recurseRedact(o.Headers)
+	o.recurseRedact(o.Key)
+	o.recurseRedact(o.Value)
+	o.recurseRedact(o.Timestamp)
 }
 
 func (o *ProduceRequest) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ProduceRequest) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ProduceRequest) MarshalJSON() ([]byte, error) {
@@ -363,5 +367,3 @@ func (v *NullableProduceRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

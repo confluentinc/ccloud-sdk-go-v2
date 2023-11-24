@@ -36,13 +36,13 @@ import (
 
 // BrokerDataAllOf struct for BrokerDataAllOf
 type BrokerDataAllOf struct {
-	ClusterId string `json:"cluster_id,omitempty"`
-	BrokerId int32 `json:"broker_id,omitempty"`
-	Host NullableString `json:"host,omitempty"`
-	Port NullableInt32 `json:"port,omitempty"`
-	Rack NullableString `json:"rack,omitempty"`
-	Configs Relationship `json:"configs,omitempty"`
-	PartitionReplicas Relationship `json:"partition_replicas,omitempty"`
+	ClusterId         string         `json:"cluster_id,omitempty"`
+	BrokerId          int32          `json:"broker_id,omitempty"`
+	Host              NullableString `json:"host,omitempty"`
+	Port              NullableInt32  `json:"port,omitempty"`
+	Rack              NullableString `json:"rack,omitempty"`
+	Configs           Relationship   `json:"configs,omitempty"`
+	PartitionReplicas Relationship   `json:"partition_replicas,omitempty"`
 }
 
 // NewBrokerDataAllOf instantiates a new BrokerDataAllOf object
@@ -79,7 +79,7 @@ func (o *BrokerDataAllOf) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *BrokerDataAllOf) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -103,7 +103,7 @@ func (o *BrokerDataAllOf) GetBrokerId() int32 {
 // GetBrokerIdOk returns a tuple with the BrokerId field value
 // and a boolean to check if the value has been set.
 func (o *BrokerDataAllOf) GetBrokerIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.BrokerId, true
@@ -127,7 +127,7 @@ func (o *BrokerDataAllOf) GetHost() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BrokerDataAllOf) GetHostOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Host.Get(), o.Host.IsSet()
@@ -146,6 +146,7 @@ func (o *BrokerDataAllOf) HasHost() bool {
 func (o *BrokerDataAllOf) SetHost(v string) {
 	o.Host.Set(&v)
 }
+
 // SetHostNil sets the value for Host to be an explicit nil
 func (o *BrokerDataAllOf) SetHostNil() {
 	o.Host.Set(nil)
@@ -169,7 +170,7 @@ func (o *BrokerDataAllOf) GetPort() int32 {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BrokerDataAllOf) GetPortOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Port.Get(), o.Port.IsSet()
@@ -188,6 +189,7 @@ func (o *BrokerDataAllOf) HasPort() bool {
 func (o *BrokerDataAllOf) SetPort(v int32) {
 	o.Port.Set(&v)
 }
+
 // SetPortNil sets the value for Port to be an explicit nil
 func (o *BrokerDataAllOf) SetPortNil() {
 	o.Port.Set(nil)
@@ -211,7 +213,7 @@ func (o *BrokerDataAllOf) GetRack() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BrokerDataAllOf) GetRackOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Rack.Get(), o.Rack.IsSet()
@@ -230,6 +232,7 @@ func (o *BrokerDataAllOf) HasRack() bool {
 func (o *BrokerDataAllOf) SetRack(v string) {
 	o.Rack.Set(&v)
 }
+
 // SetRackNil sets the value for Rack to be an explicit nil
 func (o *BrokerDataAllOf) SetRackNil() {
 	o.Rack.Set(nil)
@@ -253,7 +256,7 @@ func (o *BrokerDataAllOf) GetConfigs() Relationship {
 // GetConfigsOk returns a tuple with the Configs field value
 // and a boolean to check if the value has been set.
 func (o *BrokerDataAllOf) GetConfigsOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Configs, true
@@ -277,7 +280,7 @@ func (o *BrokerDataAllOf) GetPartitionReplicas() Relationship {
 // GetPartitionReplicasOk returns a tuple with the PartitionReplicas field value
 // and a boolean to check if the value has been set.
 func (o *BrokerDataAllOf) GetPartitionReplicasOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PartitionReplicas, true
@@ -290,43 +293,43 @@ func (o *BrokerDataAllOf) SetPartitionReplicas(v Relationship) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *BrokerDataAllOf) Redact() {
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.BrokerId)
-    o.recurseRedact(o.Host)
-    o.recurseRedact(o.Port)
-    o.recurseRedact(o.Rack)
-    o.recurseRedact(&o.Configs)
-    o.recurseRedact(&o.PartitionReplicas)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.BrokerId)
+	o.recurseRedact(o.Host)
+	o.recurseRedact(o.Port)
+	o.recurseRedact(o.Rack)
+	o.recurseRedact(&o.Configs)
+	o.recurseRedact(&o.PartitionReplicas)
 }
 
 func (o *BrokerDataAllOf) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o BrokerDataAllOf) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o BrokerDataAllOf) MarshalJSON() ([]byte, error) {
@@ -398,5 +401,3 @@ func (v *NullableBrokerDataAllOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

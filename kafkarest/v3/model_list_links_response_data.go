@@ -36,19 +36,19 @@ import (
 
 // ListLinksResponseData struct for ListLinksResponseData
 type ListLinksResponseData struct {
-	Kind string `json:"kind,omitempty"`
-	Metadata ResourceMetadata `json:"metadata,omitempty"`
-	SourceClusterId NullableString `json:"source_cluster_id,omitempty"`
-	DestinationClusterId NullableString `json:"destination_cluster_id,omitempty"`
-	RemoteClusterId NullableString `json:"remote_cluster_id,omitempty"`
-	LinkName string `json:"link_name,omitempty"`
+	Kind                 string           `json:"kind,omitempty"`
+	Metadata             ResourceMetadata `json:"metadata,omitempty"`
+	SourceClusterId      NullableString   `json:"source_cluster_id,omitempty"`
+	DestinationClusterId NullableString   `json:"destination_cluster_id,omitempty"`
+	RemoteClusterId      NullableString   `json:"remote_cluster_id,omitempty"`
+	LinkName             string           `json:"link_name,omitempty"`
 	// Deprecated
-	LinkId *string `json:"link_id,omitempty"`
-	ClusterLinkId string `json:"cluster_link_id,omitempty"`
-	TopicNames []string `json:"topic_names,omitempty"`
-	LinkError *string `json:"link_error,omitempty"`
+	LinkId           *string        `json:"link_id,omitempty"`
+	ClusterLinkId    string         `json:"cluster_link_id,omitempty"`
+	TopicNames       []string       `json:"topic_names,omitempty"`
+	LinkError        *string        `json:"link_error,omitempty"`
 	LinkErrorMessage NullableString `json:"link_error_message,omitempty"`
-	LinkState *string `json:"link_state,omitempty"`
+	LinkState        *string        `json:"link_state,omitempty"`
 }
 
 // NewListLinksResponseData instantiates a new ListLinksResponseData object
@@ -86,7 +86,7 @@ func (o *ListLinksResponseData) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *ListLinksResponseData) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -110,7 +110,7 @@ func (o *ListLinksResponseData) GetMetadata() ResourceMetadata {
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *ListLinksResponseData) GetMetadataOk() (*ResourceMetadata, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Metadata, true
@@ -134,7 +134,7 @@ func (o *ListLinksResponseData) GetSourceClusterId() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ListLinksResponseData) GetSourceClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.SourceClusterId.Get(), o.SourceClusterId.IsSet()
@@ -153,6 +153,7 @@ func (o *ListLinksResponseData) HasSourceClusterId() bool {
 func (o *ListLinksResponseData) SetSourceClusterId(v string) {
 	o.SourceClusterId.Set(&v)
 }
+
 // SetSourceClusterIdNil sets the value for SourceClusterId to be an explicit nil
 func (o *ListLinksResponseData) SetSourceClusterIdNil() {
 	o.SourceClusterId.Set(nil)
@@ -176,7 +177,7 @@ func (o *ListLinksResponseData) GetDestinationClusterId() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ListLinksResponseData) GetDestinationClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.DestinationClusterId.Get(), o.DestinationClusterId.IsSet()
@@ -195,6 +196,7 @@ func (o *ListLinksResponseData) HasDestinationClusterId() bool {
 func (o *ListLinksResponseData) SetDestinationClusterId(v string) {
 	o.DestinationClusterId.Set(&v)
 }
+
 // SetDestinationClusterIdNil sets the value for DestinationClusterId to be an explicit nil
 func (o *ListLinksResponseData) SetDestinationClusterIdNil() {
 	o.DestinationClusterId.Set(nil)
@@ -218,7 +220,7 @@ func (o *ListLinksResponseData) GetRemoteClusterId() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ListLinksResponseData) GetRemoteClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.RemoteClusterId.Get(), o.RemoteClusterId.IsSet()
@@ -237,6 +239,7 @@ func (o *ListLinksResponseData) HasRemoteClusterId() bool {
 func (o *ListLinksResponseData) SetRemoteClusterId(v string) {
 	o.RemoteClusterId.Set(&v)
 }
+
 // SetRemoteClusterIdNil sets the value for RemoteClusterId to be an explicit nil
 func (o *ListLinksResponseData) SetRemoteClusterIdNil() {
 	o.RemoteClusterId.Set(nil)
@@ -260,7 +263,7 @@ func (o *ListLinksResponseData) GetLinkName() string {
 // GetLinkNameOk returns a tuple with the LinkName field value
 // and a boolean to check if the value has been set.
 func (o *ListLinksResponseData) GetLinkNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.LinkName, true
@@ -319,7 +322,7 @@ func (o *ListLinksResponseData) GetClusterLinkId() string {
 // GetClusterLinkIdOk returns a tuple with the ClusterLinkId field value
 // and a boolean to check if the value has been set.
 func (o *ListLinksResponseData) GetClusterLinkIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterLinkId, true
@@ -343,7 +346,7 @@ func (o *ListLinksResponseData) GetTopicNames() []string {
 // GetTopicNamesOk returns a tuple with the TopicNames field value
 // and a boolean to check if the value has been set.
 func (o *ListLinksResponseData) GetTopicNamesOk() (*[]string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.TopicNames, true
@@ -399,7 +402,7 @@ func (o *ListLinksResponseData) GetLinkErrorMessage() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ListLinksResponseData) GetLinkErrorMessageOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.LinkErrorMessage.Get(), o.LinkErrorMessage.IsSet()
@@ -418,6 +421,7 @@ func (o *ListLinksResponseData) HasLinkErrorMessage() bool {
 func (o *ListLinksResponseData) SetLinkErrorMessage(v string) {
 	o.LinkErrorMessage.Set(&v)
 }
+
 // SetLinkErrorMessageNil sets the value for LinkErrorMessage to be an explicit nil
 func (o *ListLinksResponseData) SetLinkErrorMessageNil() {
 	o.LinkErrorMessage.Set(nil)
@@ -462,48 +466,48 @@ func (o *ListLinksResponseData) SetLinkState(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ListLinksResponseData) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Metadata)
-    o.recurseRedact(o.SourceClusterId)
-    o.recurseRedact(o.DestinationClusterId)
-    o.recurseRedact(o.RemoteClusterId)
-    o.recurseRedact(&o.LinkName)
-    o.recurseRedact(o.LinkId)
-    o.recurseRedact(&o.ClusterLinkId)
-    o.recurseRedact(&o.TopicNames)
-    o.recurseRedact(o.LinkError)
-    o.recurseRedact(o.LinkErrorMessage)
-    o.recurseRedact(o.LinkState)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Metadata)
+	o.recurseRedact(o.SourceClusterId)
+	o.recurseRedact(o.DestinationClusterId)
+	o.recurseRedact(o.RemoteClusterId)
+	o.recurseRedact(&o.LinkName)
+	o.recurseRedact(o.LinkId)
+	o.recurseRedact(&o.ClusterLinkId)
+	o.recurseRedact(&o.TopicNames)
+	o.recurseRedact(o.LinkError)
+	o.recurseRedact(o.LinkErrorMessage)
+	o.recurseRedact(o.LinkState)
 }
 
 func (o *ListLinksResponseData) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ListLinksResponseData) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ListLinksResponseData) MarshalJSON() ([]byte, error) {
@@ -590,5 +594,3 @@ func (v *NullableListLinksResponseData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

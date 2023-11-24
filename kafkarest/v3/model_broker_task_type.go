@@ -36,7 +36,7 @@ type BrokerTaskType string
 
 // List of BrokerTaskType
 const (
-	ADD_BROKER BrokerTaskType = "add-broker"
+	ADD_BROKER    BrokerTaskType = "add-broker"
 	REMOVE_BROKER BrokerTaskType = "remove-broker"
 )
 
@@ -127,4 +127,3 @@ func (v *NullableBrokerTaskType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

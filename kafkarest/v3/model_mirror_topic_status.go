@@ -36,15 +36,15 @@ type MirrorTopicStatus string
 
 // List of MirrorTopicStatus
 const (
-	ACTIVE MirrorTopicStatus = "ACTIVE"
-	FAILED MirrorTopicStatus = "FAILED"
-	LINK_FAILED MirrorTopicStatus = "LINK_FAILED"
-	LINK_PAUSED MirrorTopicStatus = "LINK_PAUSED"
-	PAUSED MirrorTopicStatus = "PAUSED"
-	PENDING_STOPPED MirrorTopicStatus = "PENDING_STOPPED"
-	SOURCE_UNAVAILABLE MirrorTopicStatus = "SOURCE_UNAVAILABLE"
-	STOPPED MirrorTopicStatus = "STOPPED"
-	PENDING_MIRROR MirrorTopicStatus = "PENDING_MIRROR"
+	ACTIVE              MirrorTopicStatus = "ACTIVE"
+	FAILED              MirrorTopicStatus = "FAILED"
+	LINK_FAILED         MirrorTopicStatus = "LINK_FAILED"
+	LINK_PAUSED         MirrorTopicStatus = "LINK_PAUSED"
+	PAUSED              MirrorTopicStatus = "PAUSED"
+	PENDING_STOPPED     MirrorTopicStatus = "PENDING_STOPPED"
+	SOURCE_UNAVAILABLE  MirrorTopicStatus = "SOURCE_UNAVAILABLE"
+	STOPPED             MirrorTopicStatus = "STOPPED"
+	PENDING_MIRROR      MirrorTopicStatus = "PENDING_MIRROR"
 	PENDING_SYNCHRONIZE MirrorTopicStatus = "PENDING_SYNCHRONIZE"
 )
 
@@ -143,4 +143,3 @@ func (v *NullableMirrorTopicStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -36,17 +36,17 @@ import (
 
 // BrokerConfigData struct for BrokerConfigData
 type BrokerConfigData struct {
-	Kind string `json:"kind,omitempty"`
-	Metadata ResourceMetadata `json:"metadata,omitempty"`
-	ClusterId string `json:"cluster_id,omitempty"`
-	Name string `json:"name,omitempty"`
-	Value NullableString `json:"value,omitempty"`
-	IsDefault bool `json:"is_default,omitempty"`
-	IsReadOnly bool `json:"is_read_only,omitempty"`
-	IsSensitive bool `json:"is_sensitive,omitempty"`
-	Source string `json:"source,omitempty"`
-	Synonyms []ConfigSynonymData `json:"synonyms,omitempty"`
-	BrokerId int32 `json:"broker_id,omitempty"`
+	Kind        string              `json:"kind,omitempty"`
+	Metadata    ResourceMetadata    `json:"metadata,omitempty"`
+	ClusterId   string              `json:"cluster_id,omitempty"`
+	Name        string              `json:"name,omitempty"`
+	Value       NullableString      `json:"value,omitempty"`
+	IsDefault   bool                `json:"is_default,omitempty"`
+	IsReadOnly  bool                `json:"is_read_only,omitempty"`
+	IsSensitive bool                `json:"is_sensitive,omitempty"`
+	Source      string              `json:"source,omitempty"`
+	Synonyms    []ConfigSynonymData `json:"synonyms,omitempty"`
+	BrokerId    int32               `json:"broker_id,omitempty"`
 }
 
 // NewBrokerConfigData instantiates a new BrokerConfigData object
@@ -89,7 +89,7 @@ func (o *BrokerConfigData) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *BrokerConfigData) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -113,7 +113,7 @@ func (o *BrokerConfigData) GetMetadata() ResourceMetadata {
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *BrokerConfigData) GetMetadataOk() (*ResourceMetadata, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Metadata, true
@@ -137,7 +137,7 @@ func (o *BrokerConfigData) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *BrokerConfigData) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -161,7 +161,7 @@ func (o *BrokerConfigData) GetName() string {
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *BrokerConfigData) GetNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Name, true
@@ -185,7 +185,7 @@ func (o *BrokerConfigData) GetValue() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BrokerConfigData) GetValueOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Value.Get(), o.Value.IsSet()
@@ -204,6 +204,7 @@ func (o *BrokerConfigData) HasValue() bool {
 func (o *BrokerConfigData) SetValue(v string) {
 	o.Value.Set(&v)
 }
+
 // SetValueNil sets the value for Value to be an explicit nil
 func (o *BrokerConfigData) SetValueNil() {
 	o.Value.Set(nil)
@@ -227,7 +228,7 @@ func (o *BrokerConfigData) GetIsDefault() bool {
 // GetIsDefaultOk returns a tuple with the IsDefault field value
 // and a boolean to check if the value has been set.
 func (o *BrokerConfigData) GetIsDefaultOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.IsDefault, true
@@ -251,7 +252,7 @@ func (o *BrokerConfigData) GetIsReadOnly() bool {
 // GetIsReadOnlyOk returns a tuple with the IsReadOnly field value
 // and a boolean to check if the value has been set.
 func (o *BrokerConfigData) GetIsReadOnlyOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.IsReadOnly, true
@@ -275,7 +276,7 @@ func (o *BrokerConfigData) GetIsSensitive() bool {
 // GetIsSensitiveOk returns a tuple with the IsSensitive field value
 // and a boolean to check if the value has been set.
 func (o *BrokerConfigData) GetIsSensitiveOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.IsSensitive, true
@@ -299,7 +300,7 @@ func (o *BrokerConfigData) GetSource() string {
 // GetSourceOk returns a tuple with the Source field value
 // and a boolean to check if the value has been set.
 func (o *BrokerConfigData) GetSourceOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Source, true
@@ -323,7 +324,7 @@ func (o *BrokerConfigData) GetSynonyms() []ConfigSynonymData {
 // GetSynonymsOk returns a tuple with the Synonyms field value
 // and a boolean to check if the value has been set.
 func (o *BrokerConfigData) GetSynonymsOk() (*[]ConfigSynonymData, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Synonyms, true
@@ -347,7 +348,7 @@ func (o *BrokerConfigData) GetBrokerId() int32 {
 // GetBrokerIdOk returns a tuple with the BrokerId field value
 // and a boolean to check if the value has been set.
 func (o *BrokerConfigData) GetBrokerIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.BrokerId, true
@@ -360,47 +361,47 @@ func (o *BrokerConfigData) SetBrokerId(v int32) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *BrokerConfigData) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Metadata)
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.Name)
-    o.recurseRedact(o.Value)
-    o.recurseRedact(&o.IsDefault)
-    o.recurseRedact(&o.IsReadOnly)
-    o.recurseRedact(&o.IsSensitive)
-    o.recurseRedact(&o.Source)
-    o.recurseRedact(&o.Synonyms)
-    o.recurseRedact(&o.BrokerId)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Metadata)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.Name)
+	o.recurseRedact(o.Value)
+	o.recurseRedact(&o.IsDefault)
+	o.recurseRedact(&o.IsReadOnly)
+	o.recurseRedact(&o.IsSensitive)
+	o.recurseRedact(&o.Source)
+	o.recurseRedact(&o.Synonyms)
+	o.recurseRedact(&o.BrokerId)
 }
 
 func (o *BrokerConfigData) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o BrokerConfigData) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o BrokerConfigData) MarshalJSON() ([]byte, error) {
@@ -484,5 +485,3 @@ func (v *NullableBrokerConfigData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

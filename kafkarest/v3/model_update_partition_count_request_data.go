@@ -70,7 +70,7 @@ func (o *UpdatePartitionCountRequestData) GetPartitionsCount() int32 {
 // GetPartitionsCountOk returns a tuple with the PartitionsCount field value
 // and a boolean to check if the value has been set.
 func (o *UpdatePartitionCountRequestData) GetPartitionsCountOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PartitionsCount, true
@@ -83,37 +83,37 @@ func (o *UpdatePartitionCountRequestData) SetPartitionsCount(v int32) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *UpdatePartitionCountRequestData) Redact() {
-    o.recurseRedact(&o.PartitionsCount)
+	o.recurseRedact(&o.PartitionsCount)
 }
 
 func (o *UpdatePartitionCountRequestData) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o UpdatePartitionCountRequestData) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o UpdatePartitionCountRequestData) MarshalJSON() ([]byte, error) {
@@ -167,5 +167,3 @@ func (v *NullableUpdatePartitionCountRequestData) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

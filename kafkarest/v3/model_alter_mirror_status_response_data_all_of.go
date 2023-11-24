@@ -36,10 +36,10 @@ import (
 
 // AlterMirrorStatusResponseDataAllOf struct for AlterMirrorStatusResponseDataAllOf
 type AlterMirrorStatusResponseDataAllOf struct {
-	MirrorTopicName string `json:"mirror_topic_name,omitempty"`
-	ErrorMessage NullableString `json:"error_message,omitempty"`
-	ErrorCode NullableInt32 `json:"error_code,omitempty"`
-	MirrorLags MirrorLags `json:"mirror_lags,omitempty"`
+	MirrorTopicName string         `json:"mirror_topic_name,omitempty"`
+	ErrorMessage    NullableString `json:"error_message,omitempty"`
+	ErrorCode       NullableInt32  `json:"error_code,omitempty"`
+	MirrorLags      MirrorLags     `json:"mirror_lags,omitempty"`
 }
 
 // NewAlterMirrorStatusResponseDataAllOf instantiates a new AlterMirrorStatusResponseDataAllOf object
@@ -76,7 +76,7 @@ func (o *AlterMirrorStatusResponseDataAllOf) GetMirrorTopicName() string {
 // GetMirrorTopicNameOk returns a tuple with the MirrorTopicName field value
 // and a boolean to check if the value has been set.
 func (o *AlterMirrorStatusResponseDataAllOf) GetMirrorTopicNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.MirrorTopicName, true
@@ -102,7 +102,7 @@ func (o *AlterMirrorStatusResponseDataAllOf) GetErrorMessage() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AlterMirrorStatusResponseDataAllOf) GetErrorMessageOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.ErrorMessage.Get(), o.ErrorMessage.IsSet()
@@ -128,7 +128,7 @@ func (o *AlterMirrorStatusResponseDataAllOf) GetErrorCode() int32 {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AlterMirrorStatusResponseDataAllOf) GetErrorCodeOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.ErrorCode.Get(), o.ErrorCode.IsSet()
@@ -152,7 +152,7 @@ func (o *AlterMirrorStatusResponseDataAllOf) GetMirrorLags() MirrorLags {
 // GetMirrorLagsOk returns a tuple with the MirrorLags field value
 // and a boolean to check if the value has been set.
 func (o *AlterMirrorStatusResponseDataAllOf) GetMirrorLagsOk() (*MirrorLags, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.MirrorLags, true
@@ -165,40 +165,40 @@ func (o *AlterMirrorStatusResponseDataAllOf) SetMirrorLags(v MirrorLags) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *AlterMirrorStatusResponseDataAllOf) Redact() {
-    o.recurseRedact(&o.MirrorTopicName)
-    o.recurseRedact(&o.ErrorMessage)
-    o.recurseRedact(&o.ErrorCode)
-    o.recurseRedact(&o.MirrorLags)
+	o.recurseRedact(&o.MirrorTopicName)
+	o.recurseRedact(&o.ErrorMessage)
+	o.recurseRedact(&o.ErrorCode)
+	o.recurseRedact(&o.MirrorLags)
 }
 
 func (o *AlterMirrorStatusResponseDataAllOf) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o AlterMirrorStatusResponseDataAllOf) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o AlterMirrorStatusResponseDataAllOf) MarshalJSON() ([]byte, error) {
@@ -261,5 +261,3 @@ func (v *NullableAlterMirrorStatusResponseDataAllOf) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

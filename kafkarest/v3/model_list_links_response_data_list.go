@@ -36,9 +36,9 @@ import (
 
 // ListLinksResponseDataList struct for ListLinksResponseDataList
 type ListLinksResponseDataList struct {
-	Kind string `json:"kind,omitempty"`
+	Kind     string                     `json:"kind,omitempty"`
 	Metadata ResourceCollectionMetadata `json:"metadata,omitempty"`
-	Data []ListLinksResponseData `json:"data,omitempty"`
+	Data     []ListLinksResponseData    `json:"data,omitempty"`
 }
 
 // NewListLinksResponseDataList instantiates a new ListLinksResponseDataList object
@@ -74,7 +74,7 @@ func (o *ListLinksResponseDataList) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *ListLinksResponseDataList) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -98,7 +98,7 @@ func (o *ListLinksResponseDataList) GetMetadata() ResourceCollectionMetadata {
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *ListLinksResponseDataList) GetMetadataOk() (*ResourceCollectionMetadata, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Metadata, true
@@ -122,7 +122,7 @@ func (o *ListLinksResponseDataList) GetData() []ListLinksResponseData {
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
 func (o *ListLinksResponseDataList) GetDataOk() (*[]ListLinksResponseData, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Data, true
@@ -135,39 +135,39 @@ func (o *ListLinksResponseDataList) SetData(v []ListLinksResponseData) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ListLinksResponseDataList) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Metadata)
-    o.recurseRedact(&o.Data)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Metadata)
+	o.recurseRedact(&o.Data)
 }
 
 func (o *ListLinksResponseDataList) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ListLinksResponseDataList) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ListLinksResponseDataList) MarshalJSON() ([]byte, error) {
@@ -227,5 +227,3 @@ func (v *NullableListLinksResponseDataList) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

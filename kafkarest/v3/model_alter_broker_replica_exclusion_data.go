@@ -36,15 +36,15 @@ import (
 
 // AlterBrokerReplicaExclusionData struct for AlterBrokerReplicaExclusionData
 type AlterBrokerReplicaExclusionData struct {
-	Kind string `json:"kind,omitempty"`
-	Metadata ResourceMetadata `json:"metadata,omitempty"`
-	ClusterId string `json:"cluster_id,omitempty"`
-	BrokerId int32 `json:"broker_id,omitempty"`
-	Exclusion string `json:"exclusion,omitempty"`
-	Reason string `json:"reason,omitempty"`
-	ErrorCode NullableInt32 `json:"error_code,omitempty"`
-	ErrorMessage NullableString `json:"error_message,omitempty"`
-	Broker Relationship `json:"broker,omitempty"`
+	Kind         string           `json:"kind,omitempty"`
+	Metadata     ResourceMetadata `json:"metadata,omitempty"`
+	ClusterId    string           `json:"cluster_id,omitempty"`
+	BrokerId     int32            `json:"broker_id,omitempty"`
+	Exclusion    string           `json:"exclusion,omitempty"`
+	Reason       string           `json:"reason,omitempty"`
+	ErrorCode    NullableInt32    `json:"error_code,omitempty"`
+	ErrorMessage NullableString   `json:"error_message,omitempty"`
+	Broker       Relationship     `json:"broker,omitempty"`
 }
 
 // NewAlterBrokerReplicaExclusionData instantiates a new AlterBrokerReplicaExclusionData object
@@ -84,7 +84,7 @@ func (o *AlterBrokerReplicaExclusionData) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *AlterBrokerReplicaExclusionData) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -108,7 +108,7 @@ func (o *AlterBrokerReplicaExclusionData) GetMetadata() ResourceMetadata {
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *AlterBrokerReplicaExclusionData) GetMetadataOk() (*ResourceMetadata, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Metadata, true
@@ -132,7 +132,7 @@ func (o *AlterBrokerReplicaExclusionData) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *AlterBrokerReplicaExclusionData) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -156,7 +156,7 @@ func (o *AlterBrokerReplicaExclusionData) GetBrokerId() int32 {
 // GetBrokerIdOk returns a tuple with the BrokerId field value
 // and a boolean to check if the value has been set.
 func (o *AlterBrokerReplicaExclusionData) GetBrokerIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.BrokerId, true
@@ -180,7 +180,7 @@ func (o *AlterBrokerReplicaExclusionData) GetExclusion() string {
 // GetExclusionOk returns a tuple with the Exclusion field value
 // and a boolean to check if the value has been set.
 func (o *AlterBrokerReplicaExclusionData) GetExclusionOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Exclusion, true
@@ -204,7 +204,7 @@ func (o *AlterBrokerReplicaExclusionData) GetReason() string {
 // GetReasonOk returns a tuple with the Reason field value
 // and a boolean to check if the value has been set.
 func (o *AlterBrokerReplicaExclusionData) GetReasonOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Reason, true
@@ -228,7 +228,7 @@ func (o *AlterBrokerReplicaExclusionData) GetErrorCode() int32 {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AlterBrokerReplicaExclusionData) GetErrorCodeOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.ErrorCode.Get(), o.ErrorCode.IsSet()
@@ -247,6 +247,7 @@ func (o *AlterBrokerReplicaExclusionData) HasErrorCode() bool {
 func (o *AlterBrokerReplicaExclusionData) SetErrorCode(v int32) {
 	o.ErrorCode.Set(&v)
 }
+
 // SetErrorCodeNil sets the value for ErrorCode to be an explicit nil
 func (o *AlterBrokerReplicaExclusionData) SetErrorCodeNil() {
 	o.ErrorCode.Set(nil)
@@ -270,7 +271,7 @@ func (o *AlterBrokerReplicaExclusionData) GetErrorMessage() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AlterBrokerReplicaExclusionData) GetErrorMessageOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.ErrorMessage.Get(), o.ErrorMessage.IsSet()
@@ -289,6 +290,7 @@ func (o *AlterBrokerReplicaExclusionData) HasErrorMessage() bool {
 func (o *AlterBrokerReplicaExclusionData) SetErrorMessage(v string) {
 	o.ErrorMessage.Set(&v)
 }
+
 // SetErrorMessageNil sets the value for ErrorMessage to be an explicit nil
 func (o *AlterBrokerReplicaExclusionData) SetErrorMessageNil() {
 	o.ErrorMessage.Set(nil)
@@ -312,7 +314,7 @@ func (o *AlterBrokerReplicaExclusionData) GetBroker() Relationship {
 // GetBrokerOk returns a tuple with the Broker field value
 // and a boolean to check if the value has been set.
 func (o *AlterBrokerReplicaExclusionData) GetBrokerOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Broker, true
@@ -325,45 +327,45 @@ func (o *AlterBrokerReplicaExclusionData) SetBroker(v Relationship) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *AlterBrokerReplicaExclusionData) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Metadata)
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.BrokerId)
-    o.recurseRedact(&o.Exclusion)
-    o.recurseRedact(&o.Reason)
-    o.recurseRedact(o.ErrorCode)
-    o.recurseRedact(o.ErrorMessage)
-    o.recurseRedact(&o.Broker)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Metadata)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.BrokerId)
+	o.recurseRedact(&o.Exclusion)
+	o.recurseRedact(&o.Reason)
+	o.recurseRedact(o.ErrorCode)
+	o.recurseRedact(o.ErrorMessage)
+	o.recurseRedact(&o.Broker)
 }
 
 func (o *AlterBrokerReplicaExclusionData) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o AlterBrokerReplicaExclusionData) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o AlterBrokerReplicaExclusionData) MarshalJSON() ([]byte, error) {
@@ -441,5 +443,3 @@ func (v *NullableAlterBrokerReplicaExclusionData) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

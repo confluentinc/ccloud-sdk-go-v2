@@ -37,21 +37,21 @@ import (
 
 // BrokerTaskData struct for BrokerTaskData
 type BrokerTaskData struct {
-	Kind string `json:"kind,omitempty"`
-	Metadata ResourceMetadata `json:"metadata,omitempty"`
-	ClusterId string `json:"cluster_id,omitempty"`
-	BrokerId int32 `json:"broker_id,omitempty"`
-	TaskType BrokerTaskType `json:"task_type,omitempty"`
-	TaskStatus string `json:"task_status,omitempty"`
-	ShutdownScheduled NullableBool `json:"shutdown_scheduled,omitempty"`
-	SubTaskStatuses map[string]string `json:"sub_task_statuses,omitempty"`
+	Kind              string            `json:"kind,omitempty"`
+	Metadata          ResourceMetadata  `json:"metadata,omitempty"`
+	ClusterId         string            `json:"cluster_id,omitempty"`
+	BrokerId          int32             `json:"broker_id,omitempty"`
+	TaskType          BrokerTaskType    `json:"task_type,omitempty"`
+	TaskStatus        string            `json:"task_status,omitempty"`
+	ShutdownScheduled NullableBool      `json:"shutdown_scheduled,omitempty"`
+	SubTaskStatuses   map[string]string `json:"sub_task_statuses,omitempty"`
 	// The date and time at which this task was created.
 	CreatedAt time.Time `json:"created_at,omitempty"`
 	// The date and time at which this task was last updated.
-	UpdatedAt time.Time `json:"updated_at,omitempty"`
-	ErrorCode NullableInt32 `json:"error_code,omitempty"`
+	UpdatedAt    time.Time      `json:"updated_at,omitempty"`
+	ErrorCode    NullableInt32  `json:"error_code,omitempty"`
 	ErrorMessage NullableString `json:"error_message,omitempty"`
-	Broker Relationship `json:"broker,omitempty"`
+	Broker       Relationship   `json:"broker,omitempty"`
 }
 
 // NewBrokerTaskData instantiates a new BrokerTaskData object
@@ -94,7 +94,7 @@ func (o *BrokerTaskData) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *BrokerTaskData) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -118,7 +118,7 @@ func (o *BrokerTaskData) GetMetadata() ResourceMetadata {
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *BrokerTaskData) GetMetadataOk() (*ResourceMetadata, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Metadata, true
@@ -142,7 +142,7 @@ func (o *BrokerTaskData) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *BrokerTaskData) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -166,7 +166,7 @@ func (o *BrokerTaskData) GetBrokerId() int32 {
 // GetBrokerIdOk returns a tuple with the BrokerId field value
 // and a boolean to check if the value has been set.
 func (o *BrokerTaskData) GetBrokerIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.BrokerId, true
@@ -190,7 +190,7 @@ func (o *BrokerTaskData) GetTaskType() BrokerTaskType {
 // GetTaskTypeOk returns a tuple with the TaskType field value
 // and a boolean to check if the value has been set.
 func (o *BrokerTaskData) GetTaskTypeOk() (*BrokerTaskType, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.TaskType, true
@@ -214,7 +214,7 @@ func (o *BrokerTaskData) GetTaskStatus() string {
 // GetTaskStatusOk returns a tuple with the TaskStatus field value
 // and a boolean to check if the value has been set.
 func (o *BrokerTaskData) GetTaskStatusOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.TaskStatus, true
@@ -238,7 +238,7 @@ func (o *BrokerTaskData) GetShutdownScheduled() bool {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BrokerTaskData) GetShutdownScheduledOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.ShutdownScheduled.Get(), o.ShutdownScheduled.IsSet()
@@ -257,6 +257,7 @@ func (o *BrokerTaskData) HasShutdownScheduled() bool {
 func (o *BrokerTaskData) SetShutdownScheduled(v bool) {
 	o.ShutdownScheduled.Set(&v)
 }
+
 // SetShutdownScheduledNil sets the value for ShutdownScheduled to be an explicit nil
 func (o *BrokerTaskData) SetShutdownScheduledNil() {
 	o.ShutdownScheduled.Set(nil)
@@ -280,7 +281,7 @@ func (o *BrokerTaskData) GetSubTaskStatuses() map[string]string {
 // GetSubTaskStatusesOk returns a tuple with the SubTaskStatuses field value
 // and a boolean to check if the value has been set.
 func (o *BrokerTaskData) GetSubTaskStatusesOk() (*map[string]string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.SubTaskStatuses, true
@@ -304,7 +305,7 @@ func (o *BrokerTaskData) GetCreatedAt() time.Time {
 // GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
 func (o *BrokerTaskData) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.CreatedAt, true
@@ -328,7 +329,7 @@ func (o *BrokerTaskData) GetUpdatedAt() time.Time {
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value
 // and a boolean to check if the value has been set.
 func (o *BrokerTaskData) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.UpdatedAt, true
@@ -352,7 +353,7 @@ func (o *BrokerTaskData) GetErrorCode() int32 {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BrokerTaskData) GetErrorCodeOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.ErrorCode.Get(), o.ErrorCode.IsSet()
@@ -371,6 +372,7 @@ func (o *BrokerTaskData) HasErrorCode() bool {
 func (o *BrokerTaskData) SetErrorCode(v int32) {
 	o.ErrorCode.Set(&v)
 }
+
 // SetErrorCodeNil sets the value for ErrorCode to be an explicit nil
 func (o *BrokerTaskData) SetErrorCodeNil() {
 	o.ErrorCode.Set(nil)
@@ -394,7 +396,7 @@ func (o *BrokerTaskData) GetErrorMessage() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BrokerTaskData) GetErrorMessageOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.ErrorMessage.Get(), o.ErrorMessage.IsSet()
@@ -413,6 +415,7 @@ func (o *BrokerTaskData) HasErrorMessage() bool {
 func (o *BrokerTaskData) SetErrorMessage(v string) {
 	o.ErrorMessage.Set(&v)
 }
+
 // SetErrorMessageNil sets the value for ErrorMessage to be an explicit nil
 func (o *BrokerTaskData) SetErrorMessageNil() {
 	o.ErrorMessage.Set(nil)
@@ -436,7 +439,7 @@ func (o *BrokerTaskData) GetBroker() Relationship {
 // GetBrokerOk returns a tuple with the Broker field value
 // and a boolean to check if the value has been set.
 func (o *BrokerTaskData) GetBrokerOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Broker, true
@@ -449,49 +452,49 @@ func (o *BrokerTaskData) SetBroker(v Relationship) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *BrokerTaskData) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Metadata)
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.BrokerId)
-    o.recurseRedact(&o.TaskType)
-    o.recurseRedact(&o.TaskStatus)
-    o.recurseRedact(o.ShutdownScheduled)
-    o.recurseRedact(&o.SubTaskStatuses)
-    o.recurseRedact(&o.CreatedAt)
-    o.recurseRedact(&o.UpdatedAt)
-    o.recurseRedact(o.ErrorCode)
-    o.recurseRedact(o.ErrorMessage)
-    o.recurseRedact(&o.Broker)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Metadata)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.BrokerId)
+	o.recurseRedact(&o.TaskType)
+	o.recurseRedact(&o.TaskStatus)
+	o.recurseRedact(o.ShutdownScheduled)
+	o.recurseRedact(&o.SubTaskStatuses)
+	o.recurseRedact(&o.CreatedAt)
+	o.recurseRedact(&o.UpdatedAt)
+	o.recurseRedact(o.ErrorCode)
+	o.recurseRedact(o.ErrorMessage)
+	o.recurseRedact(&o.Broker)
 }
 
 func (o *BrokerTaskData) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o BrokerTaskData) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o BrokerTaskData) MarshalJSON() ([]byte, error) {
@@ -581,5 +584,3 @@ func (v *NullableBrokerTaskData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

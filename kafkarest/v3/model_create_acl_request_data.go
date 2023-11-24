@@ -37,12 +37,12 @@ import (
 // CreateAclRequestData struct for CreateAclRequestData
 type CreateAclRequestData struct {
 	ResourceType AclResourceType `json:"resource_type,omitempty"`
-	ResourceName string `json:"resource_name,omitempty"`
-	PatternType string `json:"pattern_type,omitempty"`
-	Principal string `json:"principal,omitempty"`
-	Host string `json:"host,omitempty"`
-	Operation string `json:"operation,omitempty"`
-	Permission string `json:"permission,omitempty"`
+	ResourceName string          `json:"resource_name,omitempty"`
+	PatternType  string          `json:"pattern_type,omitempty"`
+	Principal    string          `json:"principal,omitempty"`
+	Host         string          `json:"host,omitempty"`
+	Operation    string          `json:"operation,omitempty"`
+	Permission   string          `json:"permission,omitempty"`
 }
 
 // NewCreateAclRequestData instantiates a new CreateAclRequestData object
@@ -82,7 +82,7 @@ func (o *CreateAclRequestData) GetResourceType() AclResourceType {
 // GetResourceTypeOk returns a tuple with the ResourceType field value
 // and a boolean to check if the value has been set.
 func (o *CreateAclRequestData) GetResourceTypeOk() (*AclResourceType, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ResourceType, true
@@ -106,7 +106,7 @@ func (o *CreateAclRequestData) GetResourceName() string {
 // GetResourceNameOk returns a tuple with the ResourceName field value
 // and a boolean to check if the value has been set.
 func (o *CreateAclRequestData) GetResourceNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ResourceName, true
@@ -130,7 +130,7 @@ func (o *CreateAclRequestData) GetPatternType() string {
 // GetPatternTypeOk returns a tuple with the PatternType field value
 // and a boolean to check if the value has been set.
 func (o *CreateAclRequestData) GetPatternTypeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PatternType, true
@@ -154,7 +154,7 @@ func (o *CreateAclRequestData) GetPrincipal() string {
 // GetPrincipalOk returns a tuple with the Principal field value
 // and a boolean to check if the value has been set.
 func (o *CreateAclRequestData) GetPrincipalOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Principal, true
@@ -178,7 +178,7 @@ func (o *CreateAclRequestData) GetHost() string {
 // GetHostOk returns a tuple with the Host field value
 // and a boolean to check if the value has been set.
 func (o *CreateAclRequestData) GetHostOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Host, true
@@ -202,7 +202,7 @@ func (o *CreateAclRequestData) GetOperation() string {
 // GetOperationOk returns a tuple with the Operation field value
 // and a boolean to check if the value has been set.
 func (o *CreateAclRequestData) GetOperationOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Operation, true
@@ -226,7 +226,7 @@ func (o *CreateAclRequestData) GetPermission() string {
 // GetPermissionOk returns a tuple with the Permission field value
 // and a boolean to check if the value has been set.
 func (o *CreateAclRequestData) GetPermissionOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Permission, true
@@ -239,43 +239,43 @@ func (o *CreateAclRequestData) SetPermission(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *CreateAclRequestData) Redact() {
-    o.recurseRedact(&o.ResourceType)
-    o.recurseRedact(&o.ResourceName)
-    o.recurseRedact(&o.PatternType)
-    o.recurseRedact(&o.Principal)
-    o.recurseRedact(&o.Host)
-    o.recurseRedact(&o.Operation)
-    o.recurseRedact(&o.Permission)
+	o.recurseRedact(&o.ResourceType)
+	o.recurseRedact(&o.ResourceName)
+	o.recurseRedact(&o.PatternType)
+	o.recurseRedact(&o.Principal)
+	o.recurseRedact(&o.Host)
+	o.recurseRedact(&o.Operation)
+	o.recurseRedact(&o.Permission)
 }
 
 func (o *CreateAclRequestData) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o CreateAclRequestData) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o CreateAclRequestData) MarshalJSON() ([]byte, error) {
@@ -347,5 +347,3 @@ func (v *NullableCreateAclRequestData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

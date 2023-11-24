@@ -36,10 +36,10 @@ import (
 
 // BrokerReplicaExclusionDataAllOf struct for BrokerReplicaExclusionDataAllOf
 type BrokerReplicaExclusionDataAllOf struct {
-	ClusterId string `json:"cluster_id,omitempty"`
-	BrokerId int32 `json:"broker_id,omitempty"`
-	Reason string `json:"reason,omitempty"`
-	Broker Relationship `json:"broker,omitempty"`
+	ClusterId string       `json:"cluster_id,omitempty"`
+	BrokerId  int32        `json:"broker_id,omitempty"`
+	Reason    string       `json:"reason,omitempty"`
+	Broker    Relationship `json:"broker,omitempty"`
 }
 
 // NewBrokerReplicaExclusionDataAllOf instantiates a new BrokerReplicaExclusionDataAllOf object
@@ -76,7 +76,7 @@ func (o *BrokerReplicaExclusionDataAllOf) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *BrokerReplicaExclusionDataAllOf) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -100,7 +100,7 @@ func (o *BrokerReplicaExclusionDataAllOf) GetBrokerId() int32 {
 // GetBrokerIdOk returns a tuple with the BrokerId field value
 // and a boolean to check if the value has been set.
 func (o *BrokerReplicaExclusionDataAllOf) GetBrokerIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.BrokerId, true
@@ -124,7 +124,7 @@ func (o *BrokerReplicaExclusionDataAllOf) GetReason() string {
 // GetReasonOk returns a tuple with the Reason field value
 // and a boolean to check if the value has been set.
 func (o *BrokerReplicaExclusionDataAllOf) GetReasonOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Reason, true
@@ -148,7 +148,7 @@ func (o *BrokerReplicaExclusionDataAllOf) GetBroker() Relationship {
 // GetBrokerOk returns a tuple with the Broker field value
 // and a boolean to check if the value has been set.
 func (o *BrokerReplicaExclusionDataAllOf) GetBrokerOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Broker, true
@@ -161,40 +161,40 @@ func (o *BrokerReplicaExclusionDataAllOf) SetBroker(v Relationship) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *BrokerReplicaExclusionDataAllOf) Redact() {
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.BrokerId)
-    o.recurseRedact(&o.Reason)
-    o.recurseRedact(&o.Broker)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.BrokerId)
+	o.recurseRedact(&o.Reason)
+	o.recurseRedact(&o.Broker)
 }
 
 func (o *BrokerReplicaExclusionDataAllOf) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o BrokerReplicaExclusionDataAllOf) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o BrokerReplicaExclusionDataAllOf) MarshalJSON() ([]byte, error) {
@@ -257,5 +257,3 @@ func (v *NullableBrokerReplicaExclusionDataAllOf) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

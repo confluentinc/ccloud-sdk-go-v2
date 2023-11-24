@@ -36,12 +36,12 @@ import (
 
 // PartitionDataAllOf struct for PartitionDataAllOf
 type PartitionDataAllOf struct {
-	ClusterId string `json:"cluster_id,omitempty"`
-	TopicName string `json:"topic_name,omitempty"`
-	PartitionId int32 `json:"partition_id,omitempty"`
-	Leader *Relationship `json:"leader,omitempty"`
-	Replicas Relationship `json:"replicas,omitempty"`
-	Reassignment Relationship `json:"reassignment,omitempty"`
+	ClusterId    string        `json:"cluster_id,omitempty"`
+	TopicName    string        `json:"topic_name,omitempty"`
+	PartitionId  int32         `json:"partition_id,omitempty"`
+	Leader       *Relationship `json:"leader,omitempty"`
+	Replicas     Relationship  `json:"replicas,omitempty"`
+	Reassignment Relationship  `json:"reassignment,omitempty"`
 }
 
 // NewPartitionDataAllOf instantiates a new PartitionDataAllOf object
@@ -79,7 +79,7 @@ func (o *PartitionDataAllOf) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *PartitionDataAllOf) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -103,7 +103,7 @@ func (o *PartitionDataAllOf) GetTopicName() string {
 // GetTopicNameOk returns a tuple with the TopicName field value
 // and a boolean to check if the value has been set.
 func (o *PartitionDataAllOf) GetTopicNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.TopicName, true
@@ -127,7 +127,7 @@ func (o *PartitionDataAllOf) GetPartitionId() int32 {
 // GetPartitionIdOk returns a tuple with the PartitionId field value
 // and a boolean to check if the value has been set.
 func (o *PartitionDataAllOf) GetPartitionIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PartitionId, true
@@ -183,7 +183,7 @@ func (o *PartitionDataAllOf) GetReplicas() Relationship {
 // GetReplicasOk returns a tuple with the Replicas field value
 // and a boolean to check if the value has been set.
 func (o *PartitionDataAllOf) GetReplicasOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Replicas, true
@@ -207,7 +207,7 @@ func (o *PartitionDataAllOf) GetReassignment() Relationship {
 // GetReassignmentOk returns a tuple with the Reassignment field value
 // and a boolean to check if the value has been set.
 func (o *PartitionDataAllOf) GetReassignmentOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Reassignment, true
@@ -220,42 +220,42 @@ func (o *PartitionDataAllOf) SetReassignment(v Relationship) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *PartitionDataAllOf) Redact() {
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.TopicName)
-    o.recurseRedact(&o.PartitionId)
-    o.recurseRedact(o.Leader)
-    o.recurseRedact(&o.Replicas)
-    o.recurseRedact(&o.Reassignment)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.TopicName)
+	o.recurseRedact(&o.PartitionId)
+	o.recurseRedact(o.Leader)
+	o.recurseRedact(&o.Replicas)
+	o.recurseRedact(&o.Reassignment)
 }
 
 func (o *PartitionDataAllOf) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o PartitionDataAllOf) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o PartitionDataAllOf) MarshalJSON() ([]byte, error) {
@@ -324,5 +324,3 @@ func (v *NullablePartitionDataAllOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

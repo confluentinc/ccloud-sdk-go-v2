@@ -37,16 +37,16 @@ import (
 
 // AnyUnevenLoadDataAllOf struct for AnyUnevenLoadDataAllOf
 type AnyUnevenLoadDataAllOf struct {
-	ClusterId string `json:"cluster_id,omitempty"`
-	Status string `json:"status,omitempty"`
+	ClusterId      string `json:"cluster_id,omitempty"`
+	Status         string `json:"status,omitempty"`
 	PreviousStatus string `json:"previous_status,omitempty"`
 	// The date and time at which this task was created.
 	StatusUpdatedAt time.Time `json:"status_updated_at,omitempty"`
 	// The date and time at which this task was created.
-	PreviousStatusUpdatedAt time.Time `json:"previous_status_updated_at,omitempty"`
-	ErrorCode NullableInt32 `json:"error_code,omitempty"`
-	ErrorMessage NullableString `json:"error_message,omitempty"`
-	BrokerTasks Relationship `json:"broker_tasks,omitempty"`
+	PreviousStatusUpdatedAt time.Time      `json:"previous_status_updated_at,omitempty"`
+	ErrorCode               NullableInt32  `json:"error_code,omitempty"`
+	ErrorMessage            NullableString `json:"error_message,omitempty"`
+	BrokerTasks             Relationship   `json:"broker_tasks,omitempty"`
 }
 
 // NewAnyUnevenLoadDataAllOf instantiates a new AnyUnevenLoadDataAllOf object
@@ -85,7 +85,7 @@ func (o *AnyUnevenLoadDataAllOf) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *AnyUnevenLoadDataAllOf) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -109,7 +109,7 @@ func (o *AnyUnevenLoadDataAllOf) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
 func (o *AnyUnevenLoadDataAllOf) GetStatusOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Status, true
@@ -133,7 +133,7 @@ func (o *AnyUnevenLoadDataAllOf) GetPreviousStatus() string {
 // GetPreviousStatusOk returns a tuple with the PreviousStatus field value
 // and a boolean to check if the value has been set.
 func (o *AnyUnevenLoadDataAllOf) GetPreviousStatusOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PreviousStatus, true
@@ -157,7 +157,7 @@ func (o *AnyUnevenLoadDataAllOf) GetStatusUpdatedAt() time.Time {
 // GetStatusUpdatedAtOk returns a tuple with the StatusUpdatedAt field value
 // and a boolean to check if the value has been set.
 func (o *AnyUnevenLoadDataAllOf) GetStatusUpdatedAtOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.StatusUpdatedAt, true
@@ -181,7 +181,7 @@ func (o *AnyUnevenLoadDataAllOf) GetPreviousStatusUpdatedAt() time.Time {
 // GetPreviousStatusUpdatedAtOk returns a tuple with the PreviousStatusUpdatedAt field value
 // and a boolean to check if the value has been set.
 func (o *AnyUnevenLoadDataAllOf) GetPreviousStatusUpdatedAtOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PreviousStatusUpdatedAt, true
@@ -205,7 +205,7 @@ func (o *AnyUnevenLoadDataAllOf) GetErrorCode() int32 {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AnyUnevenLoadDataAllOf) GetErrorCodeOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.ErrorCode.Get(), o.ErrorCode.IsSet()
@@ -224,6 +224,7 @@ func (o *AnyUnevenLoadDataAllOf) HasErrorCode() bool {
 func (o *AnyUnevenLoadDataAllOf) SetErrorCode(v int32) {
 	o.ErrorCode.Set(&v)
 }
+
 // SetErrorCodeNil sets the value for ErrorCode to be an explicit nil
 func (o *AnyUnevenLoadDataAllOf) SetErrorCodeNil() {
 	o.ErrorCode.Set(nil)
@@ -247,7 +248,7 @@ func (o *AnyUnevenLoadDataAllOf) GetErrorMessage() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AnyUnevenLoadDataAllOf) GetErrorMessageOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.ErrorMessage.Get(), o.ErrorMessage.IsSet()
@@ -266,6 +267,7 @@ func (o *AnyUnevenLoadDataAllOf) HasErrorMessage() bool {
 func (o *AnyUnevenLoadDataAllOf) SetErrorMessage(v string) {
 	o.ErrorMessage.Set(&v)
 }
+
 // SetErrorMessageNil sets the value for ErrorMessage to be an explicit nil
 func (o *AnyUnevenLoadDataAllOf) SetErrorMessageNil() {
 	o.ErrorMessage.Set(nil)
@@ -289,7 +291,7 @@ func (o *AnyUnevenLoadDataAllOf) GetBrokerTasks() Relationship {
 // GetBrokerTasksOk returns a tuple with the BrokerTasks field value
 // and a boolean to check if the value has been set.
 func (o *AnyUnevenLoadDataAllOf) GetBrokerTasksOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.BrokerTasks, true
@@ -302,44 +304,44 @@ func (o *AnyUnevenLoadDataAllOf) SetBrokerTasks(v Relationship) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *AnyUnevenLoadDataAllOf) Redact() {
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.Status)
-    o.recurseRedact(&o.PreviousStatus)
-    o.recurseRedact(&o.StatusUpdatedAt)
-    o.recurseRedact(&o.PreviousStatusUpdatedAt)
-    o.recurseRedact(o.ErrorCode)
-    o.recurseRedact(o.ErrorMessage)
-    o.recurseRedact(&o.BrokerTasks)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.Status)
+	o.recurseRedact(&o.PreviousStatus)
+	o.recurseRedact(&o.StatusUpdatedAt)
+	o.recurseRedact(&o.PreviousStatusUpdatedAt)
+	o.recurseRedact(o.ErrorCode)
+	o.recurseRedact(o.ErrorMessage)
+	o.recurseRedact(&o.BrokerTasks)
 }
 
 func (o *AnyUnevenLoadDataAllOf) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o AnyUnevenLoadDataAllOf) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o AnyUnevenLoadDataAllOf) MarshalJSON() ([]byte, error) {
@@ -414,5 +416,3 @@ func (v *NullableAnyUnevenLoadDataAllOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

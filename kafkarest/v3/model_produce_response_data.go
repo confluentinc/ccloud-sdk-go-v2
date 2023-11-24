@@ -36,7 +36,7 @@ import (
 
 // ProduceResponseData struct for ProduceResponseData
 type ProduceResponseData struct {
-	Size int32 `json:"size,omitempty"`
+	Size int32  `json:"size,omitempty"`
 	Type string `json:"type,omitempty"`
 }
 
@@ -72,7 +72,7 @@ func (o *ProduceResponseData) GetSize() int32 {
 // GetSizeOk returns a tuple with the Size field value
 // and a boolean to check if the value has been set.
 func (o *ProduceResponseData) GetSizeOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Size, true
@@ -96,7 +96,7 @@ func (o *ProduceResponseData) GetType() string {
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
 func (o *ProduceResponseData) GetTypeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Type, true
@@ -109,38 +109,38 @@ func (o *ProduceResponseData) SetType(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ProduceResponseData) Redact() {
-    o.recurseRedact(&o.Size)
-    o.recurseRedact(&o.Type)
+	o.recurseRedact(&o.Size)
+	o.recurseRedact(&o.Type)
 }
 
 func (o *ProduceResponseData) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ProduceResponseData) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ProduceResponseData) MarshalJSON() ([]byte, error) {
@@ -197,5 +197,3 @@ func (v *NullableProduceResponseData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

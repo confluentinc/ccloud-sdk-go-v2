@@ -36,15 +36,15 @@ import (
 
 // RemoveBrokerTaskDataAllOf struct for RemoveBrokerTaskDataAllOf
 type RemoveBrokerTaskDataAllOf struct {
-	ClusterId string `json:"cluster_id,omitempty"`
-	BrokerId int32 `json:"broker_id,omitempty"`
-	ShutdownScheduled bool `json:"shutdown_scheduled,omitempty"`
-	BrokerReplicaExclusionStatus string `json:"broker_replica_exclusion_status,omitempty"`
-	PartitionReassignmentStatus string `json:"partition_reassignment_status,omitempty"`
-	BrokerShutdownStatus string `json:"broker_shutdown_status,omitempty"`
-	ErrorCode NullableInt32 `json:"error_code,omitempty"`
-	ErrorMessage NullableString `json:"error_message,omitempty"`
-	Broker Relationship `json:"broker,omitempty"`
+	ClusterId                    string         `json:"cluster_id,omitempty"`
+	BrokerId                     int32          `json:"broker_id,omitempty"`
+	ShutdownScheduled            bool           `json:"shutdown_scheduled,omitempty"`
+	BrokerReplicaExclusionStatus string         `json:"broker_replica_exclusion_status,omitempty"`
+	PartitionReassignmentStatus  string         `json:"partition_reassignment_status,omitempty"`
+	BrokerShutdownStatus         string         `json:"broker_shutdown_status,omitempty"`
+	ErrorCode                    NullableInt32  `json:"error_code,omitempty"`
+	ErrorMessage                 NullableString `json:"error_message,omitempty"`
+	Broker                       Relationship   `json:"broker,omitempty"`
 }
 
 // NewRemoveBrokerTaskDataAllOf instantiates a new RemoveBrokerTaskDataAllOf object
@@ -84,7 +84,7 @@ func (o *RemoveBrokerTaskDataAllOf) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *RemoveBrokerTaskDataAllOf) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -108,7 +108,7 @@ func (o *RemoveBrokerTaskDataAllOf) GetBrokerId() int32 {
 // GetBrokerIdOk returns a tuple with the BrokerId field value
 // and a boolean to check if the value has been set.
 func (o *RemoveBrokerTaskDataAllOf) GetBrokerIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.BrokerId, true
@@ -132,7 +132,7 @@ func (o *RemoveBrokerTaskDataAllOf) GetShutdownScheduled() bool {
 // GetShutdownScheduledOk returns a tuple with the ShutdownScheduled field value
 // and a boolean to check if the value has been set.
 func (o *RemoveBrokerTaskDataAllOf) GetShutdownScheduledOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ShutdownScheduled, true
@@ -156,7 +156,7 @@ func (o *RemoveBrokerTaskDataAllOf) GetBrokerReplicaExclusionStatus() string {
 // GetBrokerReplicaExclusionStatusOk returns a tuple with the BrokerReplicaExclusionStatus field value
 // and a boolean to check if the value has been set.
 func (o *RemoveBrokerTaskDataAllOf) GetBrokerReplicaExclusionStatusOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.BrokerReplicaExclusionStatus, true
@@ -180,7 +180,7 @@ func (o *RemoveBrokerTaskDataAllOf) GetPartitionReassignmentStatus() string {
 // GetPartitionReassignmentStatusOk returns a tuple with the PartitionReassignmentStatus field value
 // and a boolean to check if the value has been set.
 func (o *RemoveBrokerTaskDataAllOf) GetPartitionReassignmentStatusOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PartitionReassignmentStatus, true
@@ -204,7 +204,7 @@ func (o *RemoveBrokerTaskDataAllOf) GetBrokerShutdownStatus() string {
 // GetBrokerShutdownStatusOk returns a tuple with the BrokerShutdownStatus field value
 // and a boolean to check if the value has been set.
 func (o *RemoveBrokerTaskDataAllOf) GetBrokerShutdownStatusOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.BrokerShutdownStatus, true
@@ -228,7 +228,7 @@ func (o *RemoveBrokerTaskDataAllOf) GetErrorCode() int32 {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RemoveBrokerTaskDataAllOf) GetErrorCodeOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.ErrorCode.Get(), o.ErrorCode.IsSet()
@@ -247,6 +247,7 @@ func (o *RemoveBrokerTaskDataAllOf) HasErrorCode() bool {
 func (o *RemoveBrokerTaskDataAllOf) SetErrorCode(v int32) {
 	o.ErrorCode.Set(&v)
 }
+
 // SetErrorCodeNil sets the value for ErrorCode to be an explicit nil
 func (o *RemoveBrokerTaskDataAllOf) SetErrorCodeNil() {
 	o.ErrorCode.Set(nil)
@@ -270,7 +271,7 @@ func (o *RemoveBrokerTaskDataAllOf) GetErrorMessage() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RemoveBrokerTaskDataAllOf) GetErrorMessageOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.ErrorMessage.Get(), o.ErrorMessage.IsSet()
@@ -289,6 +290,7 @@ func (o *RemoveBrokerTaskDataAllOf) HasErrorMessage() bool {
 func (o *RemoveBrokerTaskDataAllOf) SetErrorMessage(v string) {
 	o.ErrorMessage.Set(&v)
 }
+
 // SetErrorMessageNil sets the value for ErrorMessage to be an explicit nil
 func (o *RemoveBrokerTaskDataAllOf) SetErrorMessageNil() {
 	o.ErrorMessage.Set(nil)
@@ -312,7 +314,7 @@ func (o *RemoveBrokerTaskDataAllOf) GetBroker() Relationship {
 // GetBrokerOk returns a tuple with the Broker field value
 // and a boolean to check if the value has been set.
 func (o *RemoveBrokerTaskDataAllOf) GetBrokerOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Broker, true
@@ -325,45 +327,45 @@ func (o *RemoveBrokerTaskDataAllOf) SetBroker(v Relationship) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *RemoveBrokerTaskDataAllOf) Redact() {
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.BrokerId)
-    o.recurseRedact(&o.ShutdownScheduled)
-    o.recurseRedact(&o.BrokerReplicaExclusionStatus)
-    o.recurseRedact(&o.PartitionReassignmentStatus)
-    o.recurseRedact(&o.BrokerShutdownStatus)
-    o.recurseRedact(o.ErrorCode)
-    o.recurseRedact(o.ErrorMessage)
-    o.recurseRedact(&o.Broker)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.BrokerId)
+	o.recurseRedact(&o.ShutdownScheduled)
+	o.recurseRedact(&o.BrokerReplicaExclusionStatus)
+	o.recurseRedact(&o.PartitionReassignmentStatus)
+	o.recurseRedact(&o.BrokerShutdownStatus)
+	o.recurseRedact(o.ErrorCode)
+	o.recurseRedact(o.ErrorMessage)
+	o.recurseRedact(&o.Broker)
 }
 
 func (o *RemoveBrokerTaskDataAllOf) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o RemoveBrokerTaskDataAllOf) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o RemoveBrokerTaskDataAllOf) MarshalJSON() ([]byte, error) {
@@ -441,5 +443,3 @@ func (v *NullableRemoveBrokerTaskDataAllOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

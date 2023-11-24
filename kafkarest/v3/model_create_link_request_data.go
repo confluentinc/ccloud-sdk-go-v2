@@ -36,13 +36,13 @@ import (
 
 // CreateLinkRequestData struct for CreateLinkRequestData
 type CreateLinkRequestData struct {
-	SourceClusterId *string `json:"source_cluster_id,omitempty"`
+	SourceClusterId      *string `json:"source_cluster_id,omitempty"`
 	DestinationClusterId *string `json:"destination_cluster_id,omitempty"`
 	// The expected remote cluster ID.
 	RemoteClusterId *string `json:"remote_cluster_id,omitempty"`
 	// The expected cluster link ID. Can be provided when creating the second side of a bidirectional link for validating the link ID is as expected. If it's not provided, it's inferred from the remote cluster.
-	ClusterLinkId *string `json:"cluster_link_id,omitempty"`
-	Configs *[]ConfigData `json:"configs,omitempty"`
+	ClusterLinkId *string       `json:"cluster_link_id,omitempty"`
+	Configs       *[]ConfigData `json:"configs,omitempty"`
 }
 
 // NewCreateLinkRequestData instantiates a new CreateLinkRequestData object
@@ -224,41 +224,41 @@ func (o *CreateLinkRequestData) SetConfigs(v []ConfigData) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *CreateLinkRequestData) Redact() {
-    o.recurseRedact(o.SourceClusterId)
-    o.recurseRedact(o.DestinationClusterId)
-    o.recurseRedact(o.RemoteClusterId)
-    o.recurseRedact(o.ClusterLinkId)
-    o.recurseRedact(o.Configs)
+	o.recurseRedact(o.SourceClusterId)
+	o.recurseRedact(o.DestinationClusterId)
+	o.recurseRedact(o.RemoteClusterId)
+	o.recurseRedact(o.ClusterLinkId)
+	o.recurseRedact(o.Configs)
 }
 
 func (o *CreateLinkRequestData) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o CreateLinkRequestData) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o CreateLinkRequestData) MarshalJSON() ([]byte, error) {
@@ -324,5 +324,3 @@ func (v *NullableCreateLinkRequestData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

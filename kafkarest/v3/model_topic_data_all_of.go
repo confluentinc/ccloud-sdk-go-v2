@@ -36,15 +36,15 @@ import (
 
 // TopicDataAllOf struct for TopicDataAllOf
 type TopicDataAllOf struct {
-	ClusterId string `json:"cluster_id,omitempty"`
-	TopicName string `json:"topic_name,omitempty"`
-	IsInternal bool `json:"is_internal,omitempty"`
-	ReplicationFactor int32 `json:"replication_factor,omitempty"`
-	PartitionsCount int32 `json:"partitions_count,omitempty"`
-	Partitions Relationship `json:"partitions,omitempty"`
-	Configs Relationship `json:"configs,omitempty"`
-	PartitionReassignments Relationship `json:"partition_reassignments,omitempty"`
-	AuthorizedOperations *AuthorizedOperations `json:"authorized_operations,omitempty"`
+	ClusterId              string                `json:"cluster_id,omitempty"`
+	TopicName              string                `json:"topic_name,omitempty"`
+	IsInternal             bool                  `json:"is_internal,omitempty"`
+	ReplicationFactor      int32                 `json:"replication_factor,omitempty"`
+	PartitionsCount        int32                 `json:"partitions_count,omitempty"`
+	Partitions             Relationship          `json:"partitions,omitempty"`
+	Configs                Relationship          `json:"configs,omitempty"`
+	PartitionReassignments Relationship          `json:"partition_reassignments,omitempty"`
+	AuthorizedOperations   *AuthorizedOperations `json:"authorized_operations,omitempty"`
 }
 
 // NewTopicDataAllOf instantiates a new TopicDataAllOf object
@@ -85,7 +85,7 @@ func (o *TopicDataAllOf) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *TopicDataAllOf) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -109,7 +109,7 @@ func (o *TopicDataAllOf) GetTopicName() string {
 // GetTopicNameOk returns a tuple with the TopicName field value
 // and a boolean to check if the value has been set.
 func (o *TopicDataAllOf) GetTopicNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.TopicName, true
@@ -133,7 +133,7 @@ func (o *TopicDataAllOf) GetIsInternal() bool {
 // GetIsInternalOk returns a tuple with the IsInternal field value
 // and a boolean to check if the value has been set.
 func (o *TopicDataAllOf) GetIsInternalOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.IsInternal, true
@@ -157,7 +157,7 @@ func (o *TopicDataAllOf) GetReplicationFactor() int32 {
 // GetReplicationFactorOk returns a tuple with the ReplicationFactor field value
 // and a boolean to check if the value has been set.
 func (o *TopicDataAllOf) GetReplicationFactorOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ReplicationFactor, true
@@ -181,7 +181,7 @@ func (o *TopicDataAllOf) GetPartitionsCount() int32 {
 // GetPartitionsCountOk returns a tuple with the PartitionsCount field value
 // and a boolean to check if the value has been set.
 func (o *TopicDataAllOf) GetPartitionsCountOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PartitionsCount, true
@@ -205,7 +205,7 @@ func (o *TopicDataAllOf) GetPartitions() Relationship {
 // GetPartitionsOk returns a tuple with the Partitions field value
 // and a boolean to check if the value has been set.
 func (o *TopicDataAllOf) GetPartitionsOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Partitions, true
@@ -229,7 +229,7 @@ func (o *TopicDataAllOf) GetConfigs() Relationship {
 // GetConfigsOk returns a tuple with the Configs field value
 // and a boolean to check if the value has been set.
 func (o *TopicDataAllOf) GetConfigsOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Configs, true
@@ -253,7 +253,7 @@ func (o *TopicDataAllOf) GetPartitionReassignments() Relationship {
 // GetPartitionReassignmentsOk returns a tuple with the PartitionReassignments field value
 // and a boolean to check if the value has been set.
 func (o *TopicDataAllOf) GetPartitionReassignmentsOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PartitionReassignments, true
@@ -298,45 +298,45 @@ func (o *TopicDataAllOf) SetAuthorizedOperations(v AuthorizedOperations) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *TopicDataAllOf) Redact() {
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.TopicName)
-    o.recurseRedact(&o.IsInternal)
-    o.recurseRedact(&o.ReplicationFactor)
-    o.recurseRedact(&o.PartitionsCount)
-    o.recurseRedact(&o.Partitions)
-    o.recurseRedact(&o.Configs)
-    o.recurseRedact(&o.PartitionReassignments)
-    o.recurseRedact(o.AuthorizedOperations)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.TopicName)
+	o.recurseRedact(&o.IsInternal)
+	o.recurseRedact(&o.ReplicationFactor)
+	o.recurseRedact(&o.PartitionsCount)
+	o.recurseRedact(&o.Partitions)
+	o.recurseRedact(&o.Configs)
+	o.recurseRedact(&o.PartitionReassignments)
+	o.recurseRedact(o.AuthorizedOperations)
 }
 
 func (o *TopicDataAllOf) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o TopicDataAllOf) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o TopicDataAllOf) MarshalJSON() ([]byte, error) {
@@ -414,5 +414,3 @@ func (v *NullableTopicDataAllOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -36,13 +36,13 @@ import (
 
 // ListMirrorTopicsResponseDataAllOf struct for ListMirrorTopicsResponseDataAllOf
 type ListMirrorTopicsResponseDataAllOf struct {
-	LinkName string `json:"link_name,omitempty"`
-	MirrorTopicName string `json:"mirror_topic_name,omitempty"`
-	SourceTopicName string `json:"source_topic_name,omitempty"`
-	NumPartitions int32 `json:"num_partitions,omitempty"`
-	MirrorLags MirrorLags `json:"mirror_lags,omitempty"`
-	MirrorStatus MirrorTopicStatus `json:"mirror_status,omitempty"`
-	StateTimeMs int64 `json:"state_time_ms,omitempty"`
+	LinkName        string            `json:"link_name,omitempty"`
+	MirrorTopicName string            `json:"mirror_topic_name,omitempty"`
+	SourceTopicName string            `json:"source_topic_name,omitempty"`
+	NumPartitions   int32             `json:"num_partitions,omitempty"`
+	MirrorLags      MirrorLags        `json:"mirror_lags,omitempty"`
+	MirrorStatus    MirrorTopicStatus `json:"mirror_status,omitempty"`
+	StateTimeMs     int64             `json:"state_time_ms,omitempty"`
 }
 
 // NewListMirrorTopicsResponseDataAllOf instantiates a new ListMirrorTopicsResponseDataAllOf object
@@ -82,7 +82,7 @@ func (o *ListMirrorTopicsResponseDataAllOf) GetLinkName() string {
 // GetLinkNameOk returns a tuple with the LinkName field value
 // and a boolean to check if the value has been set.
 func (o *ListMirrorTopicsResponseDataAllOf) GetLinkNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.LinkName, true
@@ -106,7 +106,7 @@ func (o *ListMirrorTopicsResponseDataAllOf) GetMirrorTopicName() string {
 // GetMirrorTopicNameOk returns a tuple with the MirrorTopicName field value
 // and a boolean to check if the value has been set.
 func (o *ListMirrorTopicsResponseDataAllOf) GetMirrorTopicNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.MirrorTopicName, true
@@ -130,7 +130,7 @@ func (o *ListMirrorTopicsResponseDataAllOf) GetSourceTopicName() string {
 // GetSourceTopicNameOk returns a tuple with the SourceTopicName field value
 // and a boolean to check if the value has been set.
 func (o *ListMirrorTopicsResponseDataAllOf) GetSourceTopicNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.SourceTopicName, true
@@ -154,7 +154,7 @@ func (o *ListMirrorTopicsResponseDataAllOf) GetNumPartitions() int32 {
 // GetNumPartitionsOk returns a tuple with the NumPartitions field value
 // and a boolean to check if the value has been set.
 func (o *ListMirrorTopicsResponseDataAllOf) GetNumPartitionsOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.NumPartitions, true
@@ -178,7 +178,7 @@ func (o *ListMirrorTopicsResponseDataAllOf) GetMirrorLags() MirrorLags {
 // GetMirrorLagsOk returns a tuple with the MirrorLags field value
 // and a boolean to check if the value has been set.
 func (o *ListMirrorTopicsResponseDataAllOf) GetMirrorLagsOk() (*MirrorLags, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.MirrorLags, true
@@ -202,7 +202,7 @@ func (o *ListMirrorTopicsResponseDataAllOf) GetMirrorStatus() MirrorTopicStatus 
 // GetMirrorStatusOk returns a tuple with the MirrorStatus field value
 // and a boolean to check if the value has been set.
 func (o *ListMirrorTopicsResponseDataAllOf) GetMirrorStatusOk() (*MirrorTopicStatus, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.MirrorStatus, true
@@ -226,7 +226,7 @@ func (o *ListMirrorTopicsResponseDataAllOf) GetStateTimeMs() int64 {
 // GetStateTimeMsOk returns a tuple with the StateTimeMs field value
 // and a boolean to check if the value has been set.
 func (o *ListMirrorTopicsResponseDataAllOf) GetStateTimeMsOk() (*int64, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.StateTimeMs, true
@@ -239,43 +239,43 @@ func (o *ListMirrorTopicsResponseDataAllOf) SetStateTimeMs(v int64) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ListMirrorTopicsResponseDataAllOf) Redact() {
-    o.recurseRedact(&o.LinkName)
-    o.recurseRedact(&o.MirrorTopicName)
-    o.recurseRedact(&o.SourceTopicName)
-    o.recurseRedact(&o.NumPartitions)
-    o.recurseRedact(&o.MirrorLags)
-    o.recurseRedact(&o.MirrorStatus)
-    o.recurseRedact(&o.StateTimeMs)
+	o.recurseRedact(&o.LinkName)
+	o.recurseRedact(&o.MirrorTopicName)
+	o.recurseRedact(&o.SourceTopicName)
+	o.recurseRedact(&o.NumPartitions)
+	o.recurseRedact(&o.MirrorLags)
+	o.recurseRedact(&o.MirrorStatus)
+	o.recurseRedact(&o.StateTimeMs)
 }
 
 func (o *ListMirrorTopicsResponseDataAllOf) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ListMirrorTopicsResponseDataAllOf) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ListMirrorTopicsResponseDataAllOf) MarshalJSON() ([]byte, error) {
@@ -347,5 +347,3 @@ func (v *NullableListMirrorTopicsResponseDataAllOf) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

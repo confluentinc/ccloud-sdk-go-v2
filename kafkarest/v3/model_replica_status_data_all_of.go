@@ -36,20 +36,20 @@ import (
 
 // ReplicaStatusDataAllOf struct for ReplicaStatusDataAllOf
 type ReplicaStatusDataAllOf struct {
-	ClusterId string `json:"cluster_id,omitempty"`
-	TopicName string `json:"topic_name,omitempty"`
-	BrokerId int32 `json:"broker_id,omitempty"`
-	PartitionId int32 `json:"partition_id,omitempty"`
-	IsLeader bool `json:"is_leader,omitempty"`
-	IsObserver bool `json:"is_observer,omitempty"`
-	IsIsrEligible bool `json:"is_isr_eligible,omitempty"`
-	IsInIsr bool `json:"is_in_isr,omitempty"`
-	IsCaughtUp bool `json:"is_caught_up,omitempty"`
-	LogStartOffset int64 `json:"log_start_offset,omitempty"`
-	LogEndOffset int64 `json:"log_end_offset,omitempty"`
-	LastCaughtUpTimeMs int64 `json:"last_caught_up_time_ms,omitempty"`
-	LastFetchTimeMs int64 `json:"last_fetch_time_ms,omitempty"`
-	LinkName *string `json:"link_name,omitempty"`
+	ClusterId          string  `json:"cluster_id,omitempty"`
+	TopicName          string  `json:"topic_name,omitempty"`
+	BrokerId           int32   `json:"broker_id,omitempty"`
+	PartitionId        int32   `json:"partition_id,omitempty"`
+	IsLeader           bool    `json:"is_leader,omitempty"`
+	IsObserver         bool    `json:"is_observer,omitempty"`
+	IsIsrEligible      bool    `json:"is_isr_eligible,omitempty"`
+	IsInIsr            bool    `json:"is_in_isr,omitempty"`
+	IsCaughtUp         bool    `json:"is_caught_up,omitempty"`
+	LogStartOffset     int64   `json:"log_start_offset,omitempty"`
+	LogEndOffset       int64   `json:"log_end_offset,omitempty"`
+	LastCaughtUpTimeMs int64   `json:"last_caught_up_time_ms,omitempty"`
+	LastFetchTimeMs    int64   `json:"last_fetch_time_ms,omitempty"`
+	LinkName           *string `json:"link_name,omitempty"`
 }
 
 // NewReplicaStatusDataAllOf instantiates a new ReplicaStatusDataAllOf object
@@ -95,7 +95,7 @@ func (o *ReplicaStatusDataAllOf) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *ReplicaStatusDataAllOf) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -119,7 +119,7 @@ func (o *ReplicaStatusDataAllOf) GetTopicName() string {
 // GetTopicNameOk returns a tuple with the TopicName field value
 // and a boolean to check if the value has been set.
 func (o *ReplicaStatusDataAllOf) GetTopicNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.TopicName, true
@@ -143,7 +143,7 @@ func (o *ReplicaStatusDataAllOf) GetBrokerId() int32 {
 // GetBrokerIdOk returns a tuple with the BrokerId field value
 // and a boolean to check if the value has been set.
 func (o *ReplicaStatusDataAllOf) GetBrokerIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.BrokerId, true
@@ -167,7 +167,7 @@ func (o *ReplicaStatusDataAllOf) GetPartitionId() int32 {
 // GetPartitionIdOk returns a tuple with the PartitionId field value
 // and a boolean to check if the value has been set.
 func (o *ReplicaStatusDataAllOf) GetPartitionIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PartitionId, true
@@ -191,7 +191,7 @@ func (o *ReplicaStatusDataAllOf) GetIsLeader() bool {
 // GetIsLeaderOk returns a tuple with the IsLeader field value
 // and a boolean to check if the value has been set.
 func (o *ReplicaStatusDataAllOf) GetIsLeaderOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.IsLeader, true
@@ -215,7 +215,7 @@ func (o *ReplicaStatusDataAllOf) GetIsObserver() bool {
 // GetIsObserverOk returns a tuple with the IsObserver field value
 // and a boolean to check if the value has been set.
 func (o *ReplicaStatusDataAllOf) GetIsObserverOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.IsObserver, true
@@ -239,7 +239,7 @@ func (o *ReplicaStatusDataAllOf) GetIsIsrEligible() bool {
 // GetIsIsrEligibleOk returns a tuple with the IsIsrEligible field value
 // and a boolean to check if the value has been set.
 func (o *ReplicaStatusDataAllOf) GetIsIsrEligibleOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.IsIsrEligible, true
@@ -263,7 +263,7 @@ func (o *ReplicaStatusDataAllOf) GetIsInIsr() bool {
 // GetIsInIsrOk returns a tuple with the IsInIsr field value
 // and a boolean to check if the value has been set.
 func (o *ReplicaStatusDataAllOf) GetIsInIsrOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.IsInIsr, true
@@ -287,7 +287,7 @@ func (o *ReplicaStatusDataAllOf) GetIsCaughtUp() bool {
 // GetIsCaughtUpOk returns a tuple with the IsCaughtUp field value
 // and a boolean to check if the value has been set.
 func (o *ReplicaStatusDataAllOf) GetIsCaughtUpOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.IsCaughtUp, true
@@ -311,7 +311,7 @@ func (o *ReplicaStatusDataAllOf) GetLogStartOffset() int64 {
 // GetLogStartOffsetOk returns a tuple with the LogStartOffset field value
 // and a boolean to check if the value has been set.
 func (o *ReplicaStatusDataAllOf) GetLogStartOffsetOk() (*int64, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.LogStartOffset, true
@@ -335,7 +335,7 @@ func (o *ReplicaStatusDataAllOf) GetLogEndOffset() int64 {
 // GetLogEndOffsetOk returns a tuple with the LogEndOffset field value
 // and a boolean to check if the value has been set.
 func (o *ReplicaStatusDataAllOf) GetLogEndOffsetOk() (*int64, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.LogEndOffset, true
@@ -359,7 +359,7 @@ func (o *ReplicaStatusDataAllOf) GetLastCaughtUpTimeMs() int64 {
 // GetLastCaughtUpTimeMsOk returns a tuple with the LastCaughtUpTimeMs field value
 // and a boolean to check if the value has been set.
 func (o *ReplicaStatusDataAllOf) GetLastCaughtUpTimeMsOk() (*int64, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.LastCaughtUpTimeMs, true
@@ -383,7 +383,7 @@ func (o *ReplicaStatusDataAllOf) GetLastFetchTimeMs() int64 {
 // GetLastFetchTimeMsOk returns a tuple with the LastFetchTimeMs field value
 // and a boolean to check if the value has been set.
 func (o *ReplicaStatusDataAllOf) GetLastFetchTimeMsOk() (*int64, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.LastFetchTimeMs, true
@@ -428,50 +428,50 @@ func (o *ReplicaStatusDataAllOf) SetLinkName(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ReplicaStatusDataAllOf) Redact() {
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.TopicName)
-    o.recurseRedact(&o.BrokerId)
-    o.recurseRedact(&o.PartitionId)
-    o.recurseRedact(&o.IsLeader)
-    o.recurseRedact(&o.IsObserver)
-    o.recurseRedact(&o.IsIsrEligible)
-    o.recurseRedact(&o.IsInIsr)
-    o.recurseRedact(&o.IsCaughtUp)
-    o.recurseRedact(&o.LogStartOffset)
-    o.recurseRedact(&o.LogEndOffset)
-    o.recurseRedact(&o.LastCaughtUpTimeMs)
-    o.recurseRedact(&o.LastFetchTimeMs)
-    o.recurseRedact(o.LinkName)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.TopicName)
+	o.recurseRedact(&o.BrokerId)
+	o.recurseRedact(&o.PartitionId)
+	o.recurseRedact(&o.IsLeader)
+	o.recurseRedact(&o.IsObserver)
+	o.recurseRedact(&o.IsIsrEligible)
+	o.recurseRedact(&o.IsInIsr)
+	o.recurseRedact(&o.IsCaughtUp)
+	o.recurseRedact(&o.LogStartOffset)
+	o.recurseRedact(&o.LogEndOffset)
+	o.recurseRedact(&o.LastCaughtUpTimeMs)
+	o.recurseRedact(&o.LastFetchTimeMs)
+	o.recurseRedact(o.LinkName)
 }
 
 func (o *ReplicaStatusDataAllOf) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ReplicaStatusDataAllOf) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ReplicaStatusDataAllOf) MarshalJSON() ([]byte, error) {
@@ -564,5 +564,3 @@ func (v *NullableReplicaStatusDataAllOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

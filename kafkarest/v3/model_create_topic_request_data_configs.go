@@ -36,7 +36,7 @@ import (
 
 // CreateTopicRequestDataConfigs struct for CreateTopicRequestDataConfigs
 type CreateTopicRequestDataConfigs struct {
-	Name string `json:"name,omitempty"`
+	Name  string         `json:"name,omitempty"`
 	Value NullableString `json:"value,omitempty"`
 }
 
@@ -71,7 +71,7 @@ func (o *CreateTopicRequestDataConfigs) GetName() string {
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *CreateTopicRequestDataConfigs) GetNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Name, true
@@ -95,7 +95,7 @@ func (o *CreateTopicRequestDataConfigs) GetValue() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateTopicRequestDataConfigs) GetValueOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Value.Get(), o.Value.IsSet()
@@ -114,6 +114,7 @@ func (o *CreateTopicRequestDataConfigs) HasValue() bool {
 func (o *CreateTopicRequestDataConfigs) SetValue(v string) {
 	o.Value.Set(&v)
 }
+
 // SetValueNil sets the value for Value to be an explicit nil
 func (o *CreateTopicRequestDataConfigs) SetValueNil() {
 	o.Value.Set(nil)
@@ -126,38 +127,38 @@ func (o *CreateTopicRequestDataConfigs) UnsetValue() {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *CreateTopicRequestDataConfigs) Redact() {
-    o.recurseRedact(&o.Name)
-    o.recurseRedact(o.Value)
+	o.recurseRedact(&o.Name)
+	o.recurseRedact(o.Value)
 }
 
 func (o *CreateTopicRequestDataConfigs) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o CreateTopicRequestDataConfigs) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o CreateTopicRequestDataConfigs) MarshalJSON() ([]byte, error) {
@@ -214,5 +215,3 @@ func (v *NullableCreateTopicRequestDataConfigs) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

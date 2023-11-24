@@ -36,8 +36,8 @@ import (
 
 // Error struct for Error
 type Error struct {
-	ErrorCode int32 `json:"error_code,omitempty"`
-	Message NullableString `json:"message,omitempty"`
+	ErrorCode int32          `json:"error_code,omitempty"`
+	Message   NullableString `json:"message,omitempty"`
 }
 
 // NewError instantiates a new Error object
@@ -72,7 +72,7 @@ func (o *Error) GetErrorCode() int32 {
 // GetErrorCodeOk returns a tuple with the ErrorCode field value
 // and a boolean to check if the value has been set.
 func (o *Error) GetErrorCodeOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ErrorCode, true
@@ -98,7 +98,7 @@ func (o *Error) GetMessage() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Error) GetMessageOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Message.Get(), o.Message.IsSet()
@@ -111,38 +111,38 @@ func (o *Error) SetMessage(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *Error) Redact() {
-    o.recurseRedact(&o.ErrorCode)
-    o.recurseRedact(&o.Message)
+	o.recurseRedact(&o.ErrorCode)
+	o.recurseRedact(&o.Message)
 }
 
 func (o *Error) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o Error) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o Error) MarshalJSON() ([]byte, error) {
@@ -199,5 +199,3 @@ func (v *NullableError) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -36,12 +36,12 @@ import (
 
 // ReassignmentDataAllOf struct for ReassignmentDataAllOf
 type ReassignmentDataAllOf struct {
-	ClusterId string `json:"cluster_id,omitempty"`
-	TopicName string `json:"topic_name,omitempty"`
-	PartitionId int32 `json:"partition_id,omitempty"`
-	AddingReplicas []int32 `json:"adding_replicas,omitempty"`
-	RemovingReplicas []int32 `json:"removing_replicas,omitempty"`
-	Replicas Relationship `json:"replicas,omitempty"`
+	ClusterId        string       `json:"cluster_id,omitempty"`
+	TopicName        string       `json:"topic_name,omitempty"`
+	PartitionId      int32        `json:"partition_id,omitempty"`
+	AddingReplicas   []int32      `json:"adding_replicas,omitempty"`
+	RemovingReplicas []int32      `json:"removing_replicas,omitempty"`
+	Replicas         Relationship `json:"replicas,omitempty"`
 }
 
 // NewReassignmentDataAllOf instantiates a new ReassignmentDataAllOf object
@@ -80,7 +80,7 @@ func (o *ReassignmentDataAllOf) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value
 // and a boolean to check if the value has been set.
 func (o *ReassignmentDataAllOf) GetClusterIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClusterId, true
@@ -104,7 +104,7 @@ func (o *ReassignmentDataAllOf) GetTopicName() string {
 // GetTopicNameOk returns a tuple with the TopicName field value
 // and a boolean to check if the value has been set.
 func (o *ReassignmentDataAllOf) GetTopicNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.TopicName, true
@@ -128,7 +128,7 @@ func (o *ReassignmentDataAllOf) GetPartitionId() int32 {
 // GetPartitionIdOk returns a tuple with the PartitionId field value
 // and a boolean to check if the value has been set.
 func (o *ReassignmentDataAllOf) GetPartitionIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PartitionId, true
@@ -152,7 +152,7 @@ func (o *ReassignmentDataAllOf) GetAddingReplicas() []int32 {
 // GetAddingReplicasOk returns a tuple with the AddingReplicas field value
 // and a boolean to check if the value has been set.
 func (o *ReassignmentDataAllOf) GetAddingReplicasOk() (*[]int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AddingReplicas, true
@@ -176,7 +176,7 @@ func (o *ReassignmentDataAllOf) GetRemovingReplicas() []int32 {
 // GetRemovingReplicasOk returns a tuple with the RemovingReplicas field value
 // and a boolean to check if the value has been set.
 func (o *ReassignmentDataAllOf) GetRemovingReplicasOk() (*[]int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.RemovingReplicas, true
@@ -200,7 +200,7 @@ func (o *ReassignmentDataAllOf) GetReplicas() Relationship {
 // GetReplicasOk returns a tuple with the Replicas field value
 // and a boolean to check if the value has been set.
 func (o *ReassignmentDataAllOf) GetReplicasOk() (*Relationship, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Replicas, true
@@ -213,42 +213,42 @@ func (o *ReassignmentDataAllOf) SetReplicas(v Relationship) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ReassignmentDataAllOf) Redact() {
-    o.recurseRedact(&o.ClusterId)
-    o.recurseRedact(&o.TopicName)
-    o.recurseRedact(&o.PartitionId)
-    o.recurseRedact(&o.AddingReplicas)
-    o.recurseRedact(&o.RemovingReplicas)
-    o.recurseRedact(&o.Replicas)
+	o.recurseRedact(&o.ClusterId)
+	o.recurseRedact(&o.TopicName)
+	o.recurseRedact(&o.PartitionId)
+	o.recurseRedact(&o.AddingReplicas)
+	o.recurseRedact(&o.RemovingReplicas)
+	o.recurseRedact(&o.Replicas)
 }
 
 func (o *ReassignmentDataAllOf) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ReassignmentDataAllOf) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ReassignmentDataAllOf) MarshalJSON() ([]byte, error) {
@@ -317,5 +317,3 @@ func (v *NullableReassignmentDataAllOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
