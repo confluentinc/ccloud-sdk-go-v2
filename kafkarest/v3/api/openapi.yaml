@@ -11481,10 +11481,10 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("undefined", "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-  /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:promote-local-and-start-remote-mirror:
+  /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:reverse-and-start-mirror:
     post:
       description: '[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)'
-      operationId: updateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror
+      operationId: updateKafkaMirrorTopicsReverseAndStartMirror
       parameters:
       - description: The Kafka cluster ID.
         example: cluster-1
@@ -11632,14 +11632,14 @@ paths:
       security:
       - resource-api-key: []
       - external-access-token: []
-      summary: Promote the local mirror topic and start the remote mirror topic
+      summary: Reverse the local mirror topic and start the remote mirror topic
       tags:
       - Cluster Linking (v3)
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote-local-and-start-remote-mirror \
+            --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:reverse-and-start-mirror \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --data '{"mirror_topic_names":["string"],"mirror_topic_name_pattern":"string"}'
       - lang: Java
@@ -11649,7 +11649,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}");
           Request request = new Request.Builder()
-            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote-local-and-start-remote-mirror")
+            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:reverse-and-start-mirror")
             .post(body)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -11657,7 +11657,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote-local-and-start-remote-mirror\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:reverse-and-start-mirror\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"mirror_topic_names\\\":[\\\"string\\\
           \"],\\\"mirror_topic_name_pattern\\\":\\\"string\\\"}\")\n\n\treq, _ :=\
           \ http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"Authorization\"\
@@ -11674,7 +11674,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("POST", "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote-local-and-start-remote-mirror", payload, headers)
+          conn.request("POST", "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:reverse-and-start-mirror", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -11688,7 +11688,7 @@ paths:
             "method": "POST",
             "hostname": "pkc-00000.region.provider.confluent.cloud",
             "port": null,
-            "path": "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote-local-and-start-remote-mirror",
+            "path": "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:reverse-and-start-mirror",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -11714,7 +11714,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote-local-and-start-remote-mirror");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:reverse-and-start-mirror");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -11725,15 +11725,15 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote-local-and-start-remote-mirror");
+          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:reverse-and-start-mirror");
           var request = new RestRequest(Method.POST);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("undefined", "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-  /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:promote-local-and-pause-remote-mirror:
+  /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:reverse-and-pause-mirror:
     post:
       description: '[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)'
-      operationId: updateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror
+      operationId: updateKafkaMirrorTopicsReverseAndPauseMirror
       parameters:
       - description: The Kafka cluster ID.
         example: cluster-1
@@ -11881,14 +11881,14 @@ paths:
       security:
       - resource-api-key: []
       - external-access-token: []
-      summary: Promote the local mirror topic and Pause the remote mirror topic
+      summary: Reverse the local mirror topic and pause the remote mirror topic
       tags:
       - Cluster Linking (v3)
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote-local-and-pause-remote-mirror \
+            --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:reverse-and-pause-mirror \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --data '{"mirror_topic_names":["string"],"mirror_topic_name_pattern":"string"}'
       - lang: Java
@@ -11898,7 +11898,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}");
           Request request = new Request.Builder()
-            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote-local-and-pause-remote-mirror")
+            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:reverse-and-pause-mirror")
             .post(body)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -11906,7 +11906,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote-local-and-pause-remote-mirror\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:reverse-and-pause-mirror\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"mirror_topic_names\\\":[\\\"string\\\
           \"],\\\"mirror_topic_name_pattern\\\":\\\"string\\\"}\")\n\n\treq, _ :=\
           \ http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"Authorization\"\
@@ -11923,7 +11923,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("POST", "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote-local-and-pause-remote-mirror", payload, headers)
+          conn.request("POST", "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:reverse-and-pause-mirror", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -11937,7 +11937,7 @@ paths:
             "method": "POST",
             "hostname": "pkc-00000.region.provider.confluent.cloud",
             "port": null,
-            "path": "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote-local-and-pause-remote-mirror",
+            "path": "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:reverse-and-pause-mirror",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -11963,7 +11963,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote-local-and-pause-remote-mirror");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:reverse-and-pause-mirror");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -11974,7 +11974,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:promote-local-and-pause-remote-mirror");
+          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:reverse-and-pause-mirror");
           var request = new RestRequest(Method.POST);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("undefined", "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}", ParameterType.RequestBody);

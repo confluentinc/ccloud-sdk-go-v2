@@ -43,7 +43,9 @@ type RecordsV3Api interface {
 
 	/*
 			ProduceRecord Produce Records
+
 			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
 		Produce records to the given topic, returning delivery reports for each
 		record produced. This API can be used in streaming mode by setting
 		"Transfer-Encoding: chunked" header. For as long as the connection is
@@ -54,9 +56,11 @@ type RecordsV3Api interface {
 		indicates success. The HTTP status code will be HTTP 200 OK as long as
 		the connection is successfully established. To identify records that
 		have encountered an error, check the error_code of each delivery report.
+
 		This API currently does not support Schema Registry integration. Sending
 		schemas is not supported. Only BINARY, JSON, and STRING formats are
 		supported.
+
 			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 			 @param clusterId The Kafka cluster ID.
 			 @param topicName The topic name.
@@ -110,10 +114,10 @@ This API currently does not support Schema Registry integration. Sending
 schemas is not supported. Only BINARY, JSON, and STRING formats are
 supported.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param topicName The topic name.
-	@return ApiProduceRecordRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param topicName The topic name.
+ @return ApiProduceRecordRequest
 */
 func (a *RecordsV3ApiService) ProduceRecord(ctx _context.Context, clusterId string, topicName string) ApiProduceRecordRequest {
 	return ApiProduceRecordRequest{
@@ -125,8 +129,7 @@ func (a *RecordsV3ApiService) ProduceRecord(ctx _context.Context, clusterId stri
 }
 
 // Execute executes the request
-//
-//	@return ProduceResponse
+//  @return ProduceResponse
 func (a *RecordsV3ApiService) ProduceRecordExecute(r ApiProduceRecordRequest) (ProduceResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost

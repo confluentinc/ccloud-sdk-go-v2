@@ -110,23 +110,23 @@ type ClusterLinkingV3Api struct {
 	lockUpdateKafkaMirrorTopicsPromoteExecute sync.Mutex
 	UpdateKafkaMirrorTopicsPromoteExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsPromoteRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.AlterMirrorStatusResponseDataList, *net_http.Response, error)
 
-	lockUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror sync.Mutex
-	UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorFunc func(ctx context.Context, clusterId, linkName string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorRequest
-
-	lockUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute sync.Mutex
-	UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.AlterMirrorStatusResponseDataList, *net_http.Response, error)
-
-	lockUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror sync.Mutex
-	UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorFunc func(ctx context.Context, clusterId, linkName string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorRequest
-
-	lockUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute sync.Mutex
-	UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.AlterMirrorStatusResponseDataList, *net_http.Response, error)
-
 	lockUpdateKafkaMirrorTopicsResume sync.Mutex
 	UpdateKafkaMirrorTopicsResumeFunc func(ctx context.Context, clusterId, linkName string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsResumeRequest
 
 	lockUpdateKafkaMirrorTopicsResumeExecute sync.Mutex
 	UpdateKafkaMirrorTopicsResumeExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsResumeRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.AlterMirrorStatusResponseDataList, *net_http.Response, error)
+
+	lockUpdateKafkaMirrorTopicsReverseAndPauseMirror sync.Mutex
+	UpdateKafkaMirrorTopicsReverseAndPauseMirrorFunc func(ctx context.Context, clusterId, linkName string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequest
+
+	lockUpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute sync.Mutex
+	UpdateKafkaMirrorTopicsReverseAndPauseMirrorExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.AlterMirrorStatusResponseDataList, *net_http.Response, error)
+
+	lockUpdateKafkaMirrorTopicsReverseAndStartMirror sync.Mutex
+	UpdateKafkaMirrorTopicsReverseAndStartMirrorFunc func(ctx context.Context, clusterId, linkName string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsReverseAndStartMirrorRequest
+
+	lockUpdateKafkaMirrorTopicsReverseAndStartMirrorExecute sync.Mutex
+	UpdateKafkaMirrorTopicsReverseAndStartMirrorExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsReverseAndStartMirrorRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.AlterMirrorStatusResponseDataList, *net_http.Response, error)
 
 	calls struct {
 		CreateKafkaLink []struct {
@@ -258,22 +258,6 @@ type ClusterLinkingV3Api struct {
 		UpdateKafkaMirrorTopicsPromoteExecute []struct {
 			R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsPromoteRequest
 		}
-		UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror []struct {
-			Ctx       context.Context
-			ClusterId string
-			LinkName  string
-		}
-		UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorRequest
-		}
-		UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror []struct {
-			Ctx       context.Context
-			ClusterId string
-			LinkName  string
-		}
-		UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorRequest
-		}
 		UpdateKafkaMirrorTopicsResume []struct {
 			Ctx       context.Context
 			ClusterId string
@@ -281,6 +265,22 @@ type ClusterLinkingV3Api struct {
 		}
 		UpdateKafkaMirrorTopicsResumeExecute []struct {
 			R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsResumeRequest
+		}
+		UpdateKafkaMirrorTopicsReverseAndPauseMirror []struct {
+			Ctx       context.Context
+			ClusterId string
+			LinkName  string
+		}
+		UpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute []struct {
+			R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequest
+		}
+		UpdateKafkaMirrorTopicsReverseAndStartMirror []struct {
+			Ctx       context.Context
+			ClusterId string
+			LinkName  string
+		}
+		UpdateKafkaMirrorTopicsReverseAndStartMirrorExecute []struct {
+			R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsReverseAndStartMirrorRequest
 		}
 	}
 }
@@ -1600,170 +1600,6 @@ func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsPromoteExecuteCalls() []str
 	return m.calls.UpdateKafkaMirrorTopicsPromoteExecute
 }
 
-// UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror mocks base method by wrapping the associated func.
-func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror(ctx context.Context, clusterId, linkName string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorRequest {
-	m.lockUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror.Lock()
-	defer m.lockUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror.Unlock()
-
-	if m.UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorFunc == nil {
-		panic("mocker: ClusterLinkingV3Api.UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorFunc is nil but ClusterLinkingV3Api.UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror was called.")
-	}
-
-	call := struct {
-		Ctx       context.Context
-		ClusterId string
-		LinkName  string
-	}{
-		Ctx:       ctx,
-		ClusterId: clusterId,
-		LinkName:  linkName,
-	}
-
-	m.calls.UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror = append(m.calls.UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror, call)
-
-	return m.UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorFunc(ctx, clusterId, linkName)
-}
-
-// UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorCalled returns true if UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror was called at least once.
-func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorCalled() bool {
-	m.lockUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror.Lock()
-	defer m.lockUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror.Unlock()
-
-	return len(m.calls.UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror) > 0
-}
-
-// UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorCalls returns the calls made to UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror.
-func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorCalls() []struct {
-	Ctx       context.Context
-	ClusterId string
-	LinkName  string
-} {
-	m.lockUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror.Lock()
-	defer m.lockUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror.Unlock()
-
-	return m.calls.UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror
-}
-
-// UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute mocks base method by wrapping the associated func.
-func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.AlterMirrorStatusResponseDataList, *net_http.Response, error) {
-	m.lockUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute.Lock()
-	defer m.lockUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute.Unlock()
-
-	if m.UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecuteFunc == nil {
-		panic("mocker: ClusterLinkingV3Api.UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecuteFunc is nil but ClusterLinkingV3Api.UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute was called.")
-	}
-
-	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorRequest
-	}{
-		R: r,
-	}
-
-	m.calls.UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute = append(m.calls.UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute, call)
-
-	return m.UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecuteFunc(r)
-}
-
-// UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecuteCalled returns true if UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute was called at least once.
-func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecuteCalled() bool {
-	m.lockUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute.Lock()
-	defer m.lockUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute.Unlock()
-
-	return len(m.calls.UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute) > 0
-}
-
-// UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecuteCalls returns the calls made to UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute.
-func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorRequest
-} {
-	m.lockUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute.Lock()
-	defer m.lockUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute.Unlock()
-
-	return m.calls.UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute
-}
-
-// UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror mocks base method by wrapping the associated func.
-func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror(ctx context.Context, clusterId, linkName string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorRequest {
-	m.lockUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror.Lock()
-	defer m.lockUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror.Unlock()
-
-	if m.UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorFunc == nil {
-		panic("mocker: ClusterLinkingV3Api.UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorFunc is nil but ClusterLinkingV3Api.UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror was called.")
-	}
-
-	call := struct {
-		Ctx       context.Context
-		ClusterId string
-		LinkName  string
-	}{
-		Ctx:       ctx,
-		ClusterId: clusterId,
-		LinkName:  linkName,
-	}
-
-	m.calls.UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror = append(m.calls.UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror, call)
-
-	return m.UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorFunc(ctx, clusterId, linkName)
-}
-
-// UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorCalled returns true if UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror was called at least once.
-func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorCalled() bool {
-	m.lockUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror.Lock()
-	defer m.lockUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror.Unlock()
-
-	return len(m.calls.UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror) > 0
-}
-
-// UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorCalls returns the calls made to UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror.
-func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorCalls() []struct {
-	Ctx       context.Context
-	ClusterId string
-	LinkName  string
-} {
-	m.lockUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror.Lock()
-	defer m.lockUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror.Unlock()
-
-	return m.calls.UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror
-}
-
-// UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute mocks base method by wrapping the associated func.
-func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.AlterMirrorStatusResponseDataList, *net_http.Response, error) {
-	m.lockUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute.Lock()
-	defer m.lockUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute.Unlock()
-
-	if m.UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecuteFunc == nil {
-		panic("mocker: ClusterLinkingV3Api.UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecuteFunc is nil but ClusterLinkingV3Api.UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute was called.")
-	}
-
-	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorRequest
-	}{
-		R: r,
-	}
-
-	m.calls.UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute = append(m.calls.UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute, call)
-
-	return m.UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecuteFunc(r)
-}
-
-// UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecuteCalled returns true if UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute was called at least once.
-func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecuteCalled() bool {
-	m.lockUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute.Lock()
-	defer m.lockUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute.Unlock()
-
-	return len(m.calls.UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute) > 0
-}
-
-// UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecuteCalls returns the calls made to UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute.
-func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorRequest
-} {
-	m.lockUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute.Lock()
-	defer m.lockUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute.Unlock()
-
-	return m.calls.UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute
-}
-
 // UpdateKafkaMirrorTopicsResume mocks base method by wrapping the associated func.
 func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsResume(ctx context.Context, clusterId, linkName string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsResumeRequest {
 	m.lockUpdateKafkaMirrorTopicsResume.Lock()
@@ -1844,6 +1680,170 @@ func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsResumeExecuteCalls() []stru
 	defer m.lockUpdateKafkaMirrorTopicsResumeExecute.Unlock()
 
 	return m.calls.UpdateKafkaMirrorTopicsResumeExecute
+}
+
+// UpdateKafkaMirrorTopicsReverseAndPauseMirror mocks base method by wrapping the associated func.
+func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsReverseAndPauseMirror(ctx context.Context, clusterId, linkName string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequest {
+	m.lockUpdateKafkaMirrorTopicsReverseAndPauseMirror.Lock()
+	defer m.lockUpdateKafkaMirrorTopicsReverseAndPauseMirror.Unlock()
+
+	if m.UpdateKafkaMirrorTopicsReverseAndPauseMirrorFunc == nil {
+		panic("mocker: ClusterLinkingV3Api.UpdateKafkaMirrorTopicsReverseAndPauseMirrorFunc is nil but ClusterLinkingV3Api.UpdateKafkaMirrorTopicsReverseAndPauseMirror was called.")
+	}
+
+	call := struct {
+		Ctx       context.Context
+		ClusterId string
+		LinkName  string
+	}{
+		Ctx:       ctx,
+		ClusterId: clusterId,
+		LinkName:  linkName,
+	}
+
+	m.calls.UpdateKafkaMirrorTopicsReverseAndPauseMirror = append(m.calls.UpdateKafkaMirrorTopicsReverseAndPauseMirror, call)
+
+	return m.UpdateKafkaMirrorTopicsReverseAndPauseMirrorFunc(ctx, clusterId, linkName)
+}
+
+// UpdateKafkaMirrorTopicsReverseAndPauseMirrorCalled returns true if UpdateKafkaMirrorTopicsReverseAndPauseMirror was called at least once.
+func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsReverseAndPauseMirrorCalled() bool {
+	m.lockUpdateKafkaMirrorTopicsReverseAndPauseMirror.Lock()
+	defer m.lockUpdateKafkaMirrorTopicsReverseAndPauseMirror.Unlock()
+
+	return len(m.calls.UpdateKafkaMirrorTopicsReverseAndPauseMirror) > 0
+}
+
+// UpdateKafkaMirrorTopicsReverseAndPauseMirrorCalls returns the calls made to UpdateKafkaMirrorTopicsReverseAndPauseMirror.
+func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsReverseAndPauseMirrorCalls() []struct {
+	Ctx       context.Context
+	ClusterId string
+	LinkName  string
+} {
+	m.lockUpdateKafkaMirrorTopicsReverseAndPauseMirror.Lock()
+	defer m.lockUpdateKafkaMirrorTopicsReverseAndPauseMirror.Unlock()
+
+	return m.calls.UpdateKafkaMirrorTopicsReverseAndPauseMirror
+}
+
+// UpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute mocks base method by wrapping the associated func.
+func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.AlterMirrorStatusResponseDataList, *net_http.Response, error) {
+	m.lockUpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute.Lock()
+	defer m.lockUpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute.Unlock()
+
+	if m.UpdateKafkaMirrorTopicsReverseAndPauseMirrorExecuteFunc == nil {
+		panic("mocker: ClusterLinkingV3Api.UpdateKafkaMirrorTopicsReverseAndPauseMirrorExecuteFunc is nil but ClusterLinkingV3Api.UpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequest
+	}{
+		R: r,
+	}
+
+	m.calls.UpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute = append(m.calls.UpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute, call)
+
+	return m.UpdateKafkaMirrorTopicsReverseAndPauseMirrorExecuteFunc(r)
+}
+
+// UpdateKafkaMirrorTopicsReverseAndPauseMirrorExecuteCalled returns true if UpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute was called at least once.
+func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsReverseAndPauseMirrorExecuteCalled() bool {
+	m.lockUpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute.Lock()
+	defer m.lockUpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute.Unlock()
+
+	return len(m.calls.UpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute) > 0
+}
+
+// UpdateKafkaMirrorTopicsReverseAndPauseMirrorExecuteCalls returns the calls made to UpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute.
+func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsReverseAndPauseMirrorExecuteCalls() []struct {
+	R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequest
+} {
+	m.lockUpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute.Lock()
+	defer m.lockUpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute.Unlock()
+
+	return m.calls.UpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute
+}
+
+// UpdateKafkaMirrorTopicsReverseAndStartMirror mocks base method by wrapping the associated func.
+func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsReverseAndStartMirror(ctx context.Context, clusterId, linkName string) github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsReverseAndStartMirrorRequest {
+	m.lockUpdateKafkaMirrorTopicsReverseAndStartMirror.Lock()
+	defer m.lockUpdateKafkaMirrorTopicsReverseAndStartMirror.Unlock()
+
+	if m.UpdateKafkaMirrorTopicsReverseAndStartMirrorFunc == nil {
+		panic("mocker: ClusterLinkingV3Api.UpdateKafkaMirrorTopicsReverseAndStartMirrorFunc is nil but ClusterLinkingV3Api.UpdateKafkaMirrorTopicsReverseAndStartMirror was called.")
+	}
+
+	call := struct {
+		Ctx       context.Context
+		ClusterId string
+		LinkName  string
+	}{
+		Ctx:       ctx,
+		ClusterId: clusterId,
+		LinkName:  linkName,
+	}
+
+	m.calls.UpdateKafkaMirrorTopicsReverseAndStartMirror = append(m.calls.UpdateKafkaMirrorTopicsReverseAndStartMirror, call)
+
+	return m.UpdateKafkaMirrorTopicsReverseAndStartMirrorFunc(ctx, clusterId, linkName)
+}
+
+// UpdateKafkaMirrorTopicsReverseAndStartMirrorCalled returns true if UpdateKafkaMirrorTopicsReverseAndStartMirror was called at least once.
+func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsReverseAndStartMirrorCalled() bool {
+	m.lockUpdateKafkaMirrorTopicsReverseAndStartMirror.Lock()
+	defer m.lockUpdateKafkaMirrorTopicsReverseAndStartMirror.Unlock()
+
+	return len(m.calls.UpdateKafkaMirrorTopicsReverseAndStartMirror) > 0
+}
+
+// UpdateKafkaMirrorTopicsReverseAndStartMirrorCalls returns the calls made to UpdateKafkaMirrorTopicsReverseAndStartMirror.
+func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsReverseAndStartMirrorCalls() []struct {
+	Ctx       context.Context
+	ClusterId string
+	LinkName  string
+} {
+	m.lockUpdateKafkaMirrorTopicsReverseAndStartMirror.Lock()
+	defer m.lockUpdateKafkaMirrorTopicsReverseAndStartMirror.Unlock()
+
+	return m.calls.UpdateKafkaMirrorTopicsReverseAndStartMirror
+}
+
+// UpdateKafkaMirrorTopicsReverseAndStartMirrorExecute mocks base method by wrapping the associated func.
+func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsReverseAndStartMirrorExecute(r github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsReverseAndStartMirrorRequest) (github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.AlterMirrorStatusResponseDataList, *net_http.Response, error) {
+	m.lockUpdateKafkaMirrorTopicsReverseAndStartMirrorExecute.Lock()
+	defer m.lockUpdateKafkaMirrorTopicsReverseAndStartMirrorExecute.Unlock()
+
+	if m.UpdateKafkaMirrorTopicsReverseAndStartMirrorExecuteFunc == nil {
+		panic("mocker: ClusterLinkingV3Api.UpdateKafkaMirrorTopicsReverseAndStartMirrorExecuteFunc is nil but ClusterLinkingV3Api.UpdateKafkaMirrorTopicsReverseAndStartMirrorExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsReverseAndStartMirrorRequest
+	}{
+		R: r,
+	}
+
+	m.calls.UpdateKafkaMirrorTopicsReverseAndStartMirrorExecute = append(m.calls.UpdateKafkaMirrorTopicsReverseAndStartMirrorExecute, call)
+
+	return m.UpdateKafkaMirrorTopicsReverseAndStartMirrorExecuteFunc(r)
+}
+
+// UpdateKafkaMirrorTopicsReverseAndStartMirrorExecuteCalled returns true if UpdateKafkaMirrorTopicsReverseAndStartMirrorExecute was called at least once.
+func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsReverseAndStartMirrorExecuteCalled() bool {
+	m.lockUpdateKafkaMirrorTopicsReverseAndStartMirrorExecute.Lock()
+	defer m.lockUpdateKafkaMirrorTopicsReverseAndStartMirrorExecute.Unlock()
+
+	return len(m.calls.UpdateKafkaMirrorTopicsReverseAndStartMirrorExecute) > 0
+}
+
+// UpdateKafkaMirrorTopicsReverseAndStartMirrorExecuteCalls returns the calls made to UpdateKafkaMirrorTopicsReverseAndStartMirrorExecute.
+func (m *ClusterLinkingV3Api) UpdateKafkaMirrorTopicsReverseAndStartMirrorExecuteCalls() []struct {
+	R github_com_confluentinc_ccloud_sdk_go_v2_kafkarest_v3.ApiUpdateKafkaMirrorTopicsReverseAndStartMirrorRequest
+} {
+	m.lockUpdateKafkaMirrorTopicsReverseAndStartMirrorExecute.Lock()
+	defer m.lockUpdateKafkaMirrorTopicsReverseAndStartMirrorExecute.Unlock()
+
+	return m.calls.UpdateKafkaMirrorTopicsReverseAndStartMirrorExecute
 }
 
 // Reset resets the calls made to the mocked methods.
@@ -1944,22 +1944,22 @@ func (m *ClusterLinkingV3Api) Reset() {
 	m.lockUpdateKafkaMirrorTopicsPromoteExecute.Lock()
 	m.calls.UpdateKafkaMirrorTopicsPromoteExecute = nil
 	m.lockUpdateKafkaMirrorTopicsPromoteExecute.Unlock()
-	m.lockUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror.Lock()
-	m.calls.UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror = nil
-	m.lockUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirror.Unlock()
-	m.lockUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute.Lock()
-	m.calls.UpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute = nil
-	m.lockUpdateKafkaMirrorTopicsPromoteLocalAndPauseRemoteMirrorExecute.Unlock()
-	m.lockUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror.Lock()
-	m.calls.UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror = nil
-	m.lockUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirror.Unlock()
-	m.lockUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute.Lock()
-	m.calls.UpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute = nil
-	m.lockUpdateKafkaMirrorTopicsPromoteLocalAndStartRemoteMirrorExecute.Unlock()
 	m.lockUpdateKafkaMirrorTopicsResume.Lock()
 	m.calls.UpdateKafkaMirrorTopicsResume = nil
 	m.lockUpdateKafkaMirrorTopicsResume.Unlock()
 	m.lockUpdateKafkaMirrorTopicsResumeExecute.Lock()
 	m.calls.UpdateKafkaMirrorTopicsResumeExecute = nil
 	m.lockUpdateKafkaMirrorTopicsResumeExecute.Unlock()
+	m.lockUpdateKafkaMirrorTopicsReverseAndPauseMirror.Lock()
+	m.calls.UpdateKafkaMirrorTopicsReverseAndPauseMirror = nil
+	m.lockUpdateKafkaMirrorTopicsReverseAndPauseMirror.Unlock()
+	m.lockUpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute.Lock()
+	m.calls.UpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute = nil
+	m.lockUpdateKafkaMirrorTopicsReverseAndPauseMirrorExecute.Unlock()
+	m.lockUpdateKafkaMirrorTopicsReverseAndStartMirror.Lock()
+	m.calls.UpdateKafkaMirrorTopicsReverseAndStartMirror = nil
+	m.lockUpdateKafkaMirrorTopicsReverseAndStartMirror.Unlock()
+	m.lockUpdateKafkaMirrorTopicsReverseAndStartMirrorExecute.Lock()
+	m.calls.UpdateKafkaMirrorTopicsReverseAndStartMirrorExecute = nil
+	m.lockUpdateKafkaMirrorTopicsReverseAndStartMirrorExecute.Unlock()
 }
