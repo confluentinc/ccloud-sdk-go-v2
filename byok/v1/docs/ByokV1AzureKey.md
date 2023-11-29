@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ApplicationId** | Pointer to **string** | The Application ID created for this key-environment combination.  | [optional] [readonly] 
-**KeyId** | **string** | The unique Key Object Identifier URL of an Azure Key Vault key.  | 
+**KeyId** | **string** | The unique Key Object Identifier URL without version of an Azure Key Vault key.  | 
 **KeyVaultId** | **string** | Key Vault ID containing the key  | 
 **Kind** | **string** | BYOK kind type.  | 
 **TenantId** | **string** | Tenant ID (uuid) hosting the Key Vault containing the key  | 
