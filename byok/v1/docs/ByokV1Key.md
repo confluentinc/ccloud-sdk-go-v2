@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
-**Key** | Pointer to [**ByokV1KeyKeyOneOf**](ByokV1KeyKeyOneOf.md) | The cloud-specific key details.  For AWS please provide the corresponding &#x60;key_arn&#x60;. For Azure please provide the corresponding &#x60;key_id&#x60;.  | [optional] 
+**Key** | Pointer to [**ByokV1KeyKeyOneOf**](ByokV1KeyKeyOneOf.md) | The cloud-specific key details.  For AWS please provide the corresponding &#x60;key_arn&#x60;. For Azure please provide the corresponding &#x60;key_id&#x60;. For GCP please provide the corresponding &#x60;key_id&#x60;.  | [optional] 
 **Provider** | Pointer to **string** | The cloud provider of the Key. | [optional] [readonly] 
 **State** | Pointer to **string** | The state of the key:   AVAILABLE: key can be used for a Kafka cluster provisioning   IN_USE: key is already in use by a Kafka cluster provisioning  | [optional] [readonly] 
 

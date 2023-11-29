@@ -15,7 +15,7 @@
 /*
 Key Management API for BYOK
 
-Upload and retrieve self-managed keys on dedicated Confluent Cloud clusters. 
+Upload and retrieve self-managed keys on dedicated Confluent Cloud clusters.
 
 API version: 0.0.1
 Contact: cire-storage@confluent.io
@@ -26,26 +26,32 @@ Contact: cire-storage@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
 
 // ByokV1KeyKeyOneOf - struct for ByokV1KeyKeyOneOf
 type ByokV1KeyKeyOneOf struct {
-	ByokV1AwsKey *ByokV1AwsKey
+	ByokV1AwsKey   *ByokV1AwsKey
 	ByokV1AzureKey *ByokV1AzureKey
+	ByokV1GcpKey   *ByokV1GcpKey
 }
 
 // ByokV1AwsKeyAsByokV1KeyKeyOneOf is a convenience function that returns ByokV1AwsKey wrapped in ByokV1KeyKeyOneOf
 func ByokV1AwsKeyAsByokV1KeyKeyOneOf(v *ByokV1AwsKey) ByokV1KeyKeyOneOf {
-	return ByokV1KeyKeyOneOf{ ByokV1AwsKey: v}
+	return ByokV1KeyKeyOneOf{ByokV1AwsKey: v}
 }
 
 // ByokV1AzureKeyAsByokV1KeyKeyOneOf is a convenience function that returns ByokV1AzureKey wrapped in ByokV1KeyKeyOneOf
 func ByokV1AzureKeyAsByokV1KeyKeyOneOf(v *ByokV1AzureKey) ByokV1KeyKeyOneOf {
-	return ByokV1KeyKeyOneOf{ ByokV1AzureKey: v}
+	return ByokV1KeyKeyOneOf{ByokV1AzureKey: v}
 }
 
+// ByokV1GcpKeyAsByokV1KeyKeyOneOf is a convenience function that returns ByokV1GcpKey wrapped in ByokV1KeyKeyOneOf
+func ByokV1GcpKeyAsByokV1KeyKeyOneOf(v *ByokV1GcpKey) ByokV1KeyKeyOneOf {
+	return ByokV1KeyKeyOneOf{ByokV1GcpKey: v}
+}
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *ByokV1KeyKeyOneOf) UnmarshalJSON(data []byte) error {
@@ -81,6 +87,18 @@ func (dst *ByokV1KeyKeyOneOf) UnmarshalJSON(data []byte) error {
 		}
 	}
 
+	// check if the discriminator value is 'GcpKey'
+	if jsonDict["kind"] == "GcpKey" {
+		// try to unmarshal JSON data into ByokV1GcpKey
+		err = json.Unmarshal(data, &dst.ByokV1GcpKey)
+		if err == nil {
+			return nil // data stored in dst.ByokV1GcpKey, return on the first match
+		} else {
+			dst.ByokV1GcpKey = nil
+			return fmt.Errorf("Failed to unmarshal ByokV1KeyKeyOneOf as ByokV1GcpKey: %s", err.Error())
+		}
+	}
+
 	// check if the discriminator value is 'byok.v1.AwsKey'
 	if jsonDict["kind"] == "byok.v1.AwsKey" {
 		// try to unmarshal JSON data into ByokV1AwsKey
@@ -105,30 +123,62 @@ func (dst *ByokV1KeyKeyOneOf) UnmarshalJSON(data []byte) error {
 		}
 	}
 
+	// check if the discriminator value is 'byok.v1.GcpKey'
+	if jsonDict["kind"] == "byok.v1.GcpKey" {
+		// try to unmarshal JSON data into ByokV1GcpKey
+		err = json.Unmarshal(data, &dst.ByokV1GcpKey)
+		if err == nil {
+			return nil // data stored in dst.ByokV1GcpKey, return on the first match
+		} else {
+			dst.ByokV1GcpKey = nil
+			return fmt.Errorf("Failed to unmarshal ByokV1KeyKeyOneOf as ByokV1GcpKey: %s", err.Error())
+		}
+	}
+
 	return nil
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src ByokV1KeyKeyOneOf) MarshalJSON() ([]byte, error) {
 	if src.ByokV1AwsKey != nil {
-		return json.Marshal(&src.ByokV1AwsKey)
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.ByokV1AwsKey)
+		return buffer.Bytes(), err
 	}
 
 	if src.ByokV1AzureKey != nil {
-		return json.Marshal(&src.ByokV1AzureKey)
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.ByokV1AzureKey)
+		return buffer.Bytes(), err
+	}
+
+	if src.ByokV1GcpKey != nil {
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.ByokV1GcpKey)
+		return buffer.Bytes(), err
 	}
 
 	return nil, nil // no data in oneOf schemas
 }
 
 // Get the actual instance
-func (obj *ByokV1KeyKeyOneOf) GetActualInstance() (interface{}) {
+func (obj *ByokV1KeyKeyOneOf) GetActualInstance() interface{} {
 	if obj.ByokV1AwsKey != nil {
 		return obj.ByokV1AwsKey
 	}
 
 	if obj.ByokV1AzureKey != nil {
 		return obj.ByokV1AzureKey
+	}
+
+	if obj.ByokV1GcpKey != nil {
+		return obj.ByokV1GcpKey
 	}
 
 	// all schemas are nil
@@ -163,12 +213,14 @@ func NewNullableByokV1KeyKeyOneOf(val *ByokV1KeyKeyOneOf) *NullableByokV1KeyKeyO
 }
 
 func (v NullableByokV1KeyKeyOneOf) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableByokV1KeyKeyOneOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

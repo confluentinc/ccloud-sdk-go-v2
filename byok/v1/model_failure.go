@@ -15,7 +15,7 @@
 /*
 Key Management API for BYOK
 
-Upload and retrieve self-managed keys on dedicated Confluent Cloud clusters. 
+Upload and retrieve self-managed keys on dedicated Confluent Cloud clusters.
 
 API version: 0.0.1
 Contact: cire-storage@confluent.io
@@ -26,6 +26,7 @@ Contact: cire-storage@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,7 +37,7 @@ import (
 // Failure Provides information about problems encountered while performing an operation.
 type Failure struct {
 	// List of errors which caused this operation to fail
-	Errors []Error `json:"errors"`
+	Errors []Error `json:"errors,omitempty"`
 }
 
 // NewFailure instantiates a new Failure object
@@ -70,7 +71,7 @@ func (o *Failure) GetErrors() []Error {
 // GetErrorsOk returns a tuple with the Errors field value
 // and a boolean to check if the value has been set.
 func (o *Failure) GetErrorsOk() (*[]Error, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Errors, true
@@ -83,37 +84,37 @@ func (o *Failure) SetErrors(v []Error) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *Failure) Redact() {
-    o.recurseRedact(&o.Errors)
+	o.recurseRedact(&o.Errors)
 }
 
 func (o *Failure) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o Failure) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o Failure) MarshalJSON() ([]byte, error) {
@@ -121,7 +122,11 @@ func (o Failure) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["errors"] = o.Errors
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableFailure struct {
@@ -152,12 +157,14 @@ func NewNullableFailure(val *Failure) *NullableFailure {
 }
 
 func (v NullableFailure) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableFailure) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
