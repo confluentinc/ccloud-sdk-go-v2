@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the network | [optional] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
+**Gateway** | Pointer to [**NullableTypedEnvScopedObjectReference**](TypedEnvScopedObjectReference.md) | The gateway associated with this object. The gateway can be one of networking.v1.Gateway. May be &#x60;null&#x60; or omitted if not associated with a gateway. | [optional] 
 
 ## Methods
 
@@ -76,6 +77,41 @@ SetEnvironment sets Environment field to given value.
 
 HasEnvironment returns a boolean if a field has been set.
 
+### GetGateway
+
+`func (o *NetworkingV1NetworkSpecUpdate) GetGateway() TypedEnvScopedObjectReference`
+
+GetGateway returns the Gateway field if non-nil, zero value otherwise.
+
+### GetGatewayOk
+
+`func (o *NetworkingV1NetworkSpecUpdate) GetGatewayOk() (*TypedEnvScopedObjectReference, bool)`
+
+GetGatewayOk returns a tuple with the Gateway field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGateway
+
+`func (o *NetworkingV1NetworkSpecUpdate) SetGateway(v TypedEnvScopedObjectReference)`
+
+SetGateway sets Gateway field to given value.
+
+### HasGateway
+
+`func (o *NetworkingV1NetworkSpecUpdate) HasGateway() bool`
+
+HasGateway returns a boolean if a field has been set.
+
+### SetGatewayNil
+
+`func (o *NetworkingV1NetworkSpecUpdate) SetGatewayNil(b bool)`
+
+ SetGatewayNil sets the value for Gateway to be an explicit nil
+
+### UnsetGateway
+`func (o *NetworkingV1NetworkSpecUpdate) UnsetGateway()`
+
+UnsetGateway ensures that no value is present for Gateway, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -31,7 +31,6 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
-	"reflect"
 	"strings"
 )
 
@@ -40,146 +39,146 @@ var (
 	_ _context.Context
 )
 
-type PrivateLinkAccessesNetworkingV1Api interface {
+type DnsForwardersNetworkingV1Api interface {
 
 	/*
-			CreateNetworkingV1PrivateLinkAccess Create a Private Link Access
+			CreateNetworkingV1DnsForwarder Create a Dns Forwarder
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Make a request to create a private link access.
+		Make a request to create a dns forwarder.
 
 			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiCreateNetworkingV1PrivateLinkAccessRequest
+			 @return ApiCreateNetworkingV1DnsForwarderRequest
 	*/
-	CreateNetworkingV1PrivateLinkAccess(ctx _context.Context) ApiCreateNetworkingV1PrivateLinkAccessRequest
+	CreateNetworkingV1DnsForwarder(ctx _context.Context) ApiCreateNetworkingV1DnsForwarderRequest
 
-	// CreateNetworkingV1PrivateLinkAccessExecute executes the request
-	//  @return NetworkingV1PrivateLinkAccess
-	CreateNetworkingV1PrivateLinkAccessExecute(r ApiCreateNetworkingV1PrivateLinkAccessRequest) (NetworkingV1PrivateLinkAccess, *_nethttp.Response, error)
+	// CreateNetworkingV1DnsForwarderExecute executes the request
+	//  @return NetworkingV1DnsForwarder
+	CreateNetworkingV1DnsForwarderExecute(r ApiCreateNetworkingV1DnsForwarderRequest) (NetworkingV1DnsForwarder, *_nethttp.Response, error)
 
 	/*
-			DeleteNetworkingV1PrivateLinkAccess Delete a Private Link Access
+			DeleteNetworkingV1DnsForwarder Delete a Dns Forwarder
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Make a request to delete a private link access.
+		Make a request to delete a dns forwarder.
 
 			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the private link access.
-			 @return ApiDeleteNetworkingV1PrivateLinkAccessRequest
+			 @param id The unique identifier for the dns forwarder.
+			 @return ApiDeleteNetworkingV1DnsForwarderRequest
 	*/
-	DeleteNetworkingV1PrivateLinkAccess(ctx _context.Context, id string) ApiDeleteNetworkingV1PrivateLinkAccessRequest
+	DeleteNetworkingV1DnsForwarder(ctx _context.Context, id string) ApiDeleteNetworkingV1DnsForwarderRequest
 
-	// DeleteNetworkingV1PrivateLinkAccessExecute executes the request
-	DeleteNetworkingV1PrivateLinkAccessExecute(r ApiDeleteNetworkingV1PrivateLinkAccessRequest) (*_nethttp.Response, error)
+	// DeleteNetworkingV1DnsForwarderExecute executes the request
+	DeleteNetworkingV1DnsForwarderExecute(r ApiDeleteNetworkingV1DnsForwarderRequest) (*_nethttp.Response, error)
 
 	/*
-			GetNetworkingV1PrivateLinkAccess Read a Private Link Access
+			GetNetworkingV1DnsForwarder Read a Dns Forwarder
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Make a request to read a private link access.
+		Make a request to read a dns forwarder.
 
 			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the private link access.
-			 @return ApiGetNetworkingV1PrivateLinkAccessRequest
+			 @param id The unique identifier for the dns forwarder.
+			 @return ApiGetNetworkingV1DnsForwarderRequest
 	*/
-	GetNetworkingV1PrivateLinkAccess(ctx _context.Context, id string) ApiGetNetworkingV1PrivateLinkAccessRequest
+	GetNetworkingV1DnsForwarder(ctx _context.Context, id string) ApiGetNetworkingV1DnsForwarderRequest
 
-	// GetNetworkingV1PrivateLinkAccessExecute executes the request
-	//  @return NetworkingV1PrivateLinkAccess
-	GetNetworkingV1PrivateLinkAccessExecute(r ApiGetNetworkingV1PrivateLinkAccessRequest) (NetworkingV1PrivateLinkAccess, *_nethttp.Response, error)
+	// GetNetworkingV1DnsForwarderExecute executes the request
+	//  @return NetworkingV1DnsForwarder
+	GetNetworkingV1DnsForwarderExecute(r ApiGetNetworkingV1DnsForwarderRequest) (NetworkingV1DnsForwarder, *_nethttp.Response, error)
 
 	/*
-			ListNetworkingV1PrivateLinkAccesses List of Private Link Accesses
+			ListNetworkingV1DnsForwarders List of Dns Forwarders
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Retrieve a sorted, filtered, paginated list of all private link accesses.
+		Retrieve a sorted, filtered, paginated list of all dns forwarders.
 
 			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiListNetworkingV1PrivateLinkAccessesRequest
+			 @return ApiListNetworkingV1DnsForwardersRequest
 	*/
-	ListNetworkingV1PrivateLinkAccesses(ctx _context.Context) ApiListNetworkingV1PrivateLinkAccessesRequest
+	ListNetworkingV1DnsForwarders(ctx _context.Context) ApiListNetworkingV1DnsForwardersRequest
 
-	// ListNetworkingV1PrivateLinkAccessesExecute executes the request
-	//  @return NetworkingV1PrivateLinkAccessList
-	ListNetworkingV1PrivateLinkAccessesExecute(r ApiListNetworkingV1PrivateLinkAccessesRequest) (NetworkingV1PrivateLinkAccessList, *_nethttp.Response, error)
+	// ListNetworkingV1DnsForwardersExecute executes the request
+	//  @return NetworkingV1DnsForwarderList
+	ListNetworkingV1DnsForwardersExecute(r ApiListNetworkingV1DnsForwardersRequest) (NetworkingV1DnsForwarderList, *_nethttp.Response, error)
 
 	/*
-			UpdateNetworkingV1PrivateLinkAccess Update a Private Link Access
+			UpdateNetworkingV1DnsForwarder Update a Dns Forwarder
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Make a request to update a private link access.
+		Make a request to update a dns forwarder.
 
 
 
 			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the private link access.
-			 @return ApiUpdateNetworkingV1PrivateLinkAccessRequest
+			 @param id The unique identifier for the dns forwarder.
+			 @return ApiUpdateNetworkingV1DnsForwarderRequest
 	*/
-	UpdateNetworkingV1PrivateLinkAccess(ctx _context.Context, id string) ApiUpdateNetworkingV1PrivateLinkAccessRequest
+	UpdateNetworkingV1DnsForwarder(ctx _context.Context, id string) ApiUpdateNetworkingV1DnsForwarderRequest
 
-	// UpdateNetworkingV1PrivateLinkAccessExecute executes the request
-	//  @return NetworkingV1PrivateLinkAccess
-	UpdateNetworkingV1PrivateLinkAccessExecute(r ApiUpdateNetworkingV1PrivateLinkAccessRequest) (NetworkingV1PrivateLinkAccess, *_nethttp.Response, error)
+	// UpdateNetworkingV1DnsForwarderExecute executes the request
+	//  @return NetworkingV1DnsForwarder
+	UpdateNetworkingV1DnsForwarderExecute(r ApiUpdateNetworkingV1DnsForwarderRequest) (NetworkingV1DnsForwarder, *_nethttp.Response, error)
 }
 
-// PrivateLinkAccessesNetworkingV1ApiService PrivateLinkAccessesNetworkingV1Api service
-type PrivateLinkAccessesNetworkingV1ApiService service
+// DnsForwardersNetworkingV1ApiService DnsForwardersNetworkingV1Api service
+type DnsForwardersNetworkingV1ApiService service
 
-type ApiCreateNetworkingV1PrivateLinkAccessRequest struct {
-	ctx                           _context.Context
-	ApiService                    PrivateLinkAccessesNetworkingV1Api
-	networkingV1PrivateLinkAccess *NetworkingV1PrivateLinkAccess
+type ApiCreateNetworkingV1DnsForwarderRequest struct {
+	ctx                      _context.Context
+	ApiService               DnsForwardersNetworkingV1Api
+	networkingV1DnsForwarder *NetworkingV1DnsForwarder
 }
 
-func (r ApiCreateNetworkingV1PrivateLinkAccessRequest) NetworkingV1PrivateLinkAccess(networkingV1PrivateLinkAccess NetworkingV1PrivateLinkAccess) ApiCreateNetworkingV1PrivateLinkAccessRequest {
-	r.networkingV1PrivateLinkAccess = &networkingV1PrivateLinkAccess
+func (r ApiCreateNetworkingV1DnsForwarderRequest) NetworkingV1DnsForwarder(networkingV1DnsForwarder NetworkingV1DnsForwarder) ApiCreateNetworkingV1DnsForwarderRequest {
+	r.networkingV1DnsForwarder = &networkingV1DnsForwarder
 	return r
 }
 
-func (r ApiCreateNetworkingV1PrivateLinkAccessRequest) Execute() (NetworkingV1PrivateLinkAccess, *_nethttp.Response, error) {
-	return r.ApiService.CreateNetworkingV1PrivateLinkAccessExecute(r)
+func (r ApiCreateNetworkingV1DnsForwarderRequest) Execute() (NetworkingV1DnsForwarder, *_nethttp.Response, error) {
+	return r.ApiService.CreateNetworkingV1DnsForwarderExecute(r)
 }
 
 /*
-CreateNetworkingV1PrivateLinkAccess Create a Private Link Access
+CreateNetworkingV1DnsForwarder Create a Dns Forwarder
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to create a private link access.
+Make a request to create a dns forwarder.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateNetworkingV1PrivateLinkAccessRequest
+ @return ApiCreateNetworkingV1DnsForwarderRequest
 */
-func (a *PrivateLinkAccessesNetworkingV1ApiService) CreateNetworkingV1PrivateLinkAccess(ctx _context.Context) ApiCreateNetworkingV1PrivateLinkAccessRequest {
-	return ApiCreateNetworkingV1PrivateLinkAccessRequest{
+func (a *DnsForwardersNetworkingV1ApiService) CreateNetworkingV1DnsForwarder(ctx _context.Context) ApiCreateNetworkingV1DnsForwarderRequest {
+	return ApiCreateNetworkingV1DnsForwarderRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return NetworkingV1PrivateLinkAccess
-func (a *PrivateLinkAccessesNetworkingV1ApiService) CreateNetworkingV1PrivateLinkAccessExecute(r ApiCreateNetworkingV1PrivateLinkAccessRequest) (NetworkingV1PrivateLinkAccess, *_nethttp.Response, error) {
+//  @return NetworkingV1DnsForwarder
+func (a *DnsForwardersNetworkingV1ApiService) CreateNetworkingV1DnsForwarderExecute(r ApiCreateNetworkingV1DnsForwarderRequest) (NetworkingV1DnsForwarder, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  NetworkingV1PrivateLinkAccess
+		localVarReturnValue  NetworkingV1DnsForwarder
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PrivateLinkAccessesNetworkingV1ApiService.CreateNetworkingV1PrivateLinkAccess")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DnsForwardersNetworkingV1ApiService.CreateNetworkingV1DnsForwarder")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/networking/v1/private-link-accesses"
+	localVarPath := localBasePath + "/networking/v1/dns-forwarders"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -203,7 +202,7 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) CreateNetworkingV1PrivateLin
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.networkingV1PrivateLinkAccess
+	localVarPostBody = r.networkingV1DnsForwarder
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -310,36 +309,36 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) CreateNetworkingV1PrivateLin
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteNetworkingV1PrivateLinkAccessRequest struct {
+type ApiDeleteNetworkingV1DnsForwarderRequest struct {
 	ctx         _context.Context
-	ApiService  PrivateLinkAccessesNetworkingV1Api
+	ApiService  DnsForwardersNetworkingV1Api
 	environment *string
 	id          string
 }
 
 // Scope the operation to the given environment.
-func (r ApiDeleteNetworkingV1PrivateLinkAccessRequest) Environment(environment string) ApiDeleteNetworkingV1PrivateLinkAccessRequest {
+func (r ApiDeleteNetworkingV1DnsForwarderRequest) Environment(environment string) ApiDeleteNetworkingV1DnsForwarderRequest {
 	r.environment = &environment
 	return r
 }
 
-func (r ApiDeleteNetworkingV1PrivateLinkAccessRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.DeleteNetworkingV1PrivateLinkAccessExecute(r)
+func (r ApiDeleteNetworkingV1DnsForwarderRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteNetworkingV1DnsForwarderExecute(r)
 }
 
 /*
-DeleteNetworkingV1PrivateLinkAccess Delete a Private Link Access
+DeleteNetworkingV1DnsForwarder Delete a Dns Forwarder
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to delete a private link access.
+Make a request to delete a dns forwarder.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the private link access.
- @return ApiDeleteNetworkingV1PrivateLinkAccessRequest
+ @param id The unique identifier for the dns forwarder.
+ @return ApiDeleteNetworkingV1DnsForwarderRequest
 */
-func (a *PrivateLinkAccessesNetworkingV1ApiService) DeleteNetworkingV1PrivateLinkAccess(ctx _context.Context, id string) ApiDeleteNetworkingV1PrivateLinkAccessRequest {
-	return ApiDeleteNetworkingV1PrivateLinkAccessRequest{
+func (a *DnsForwardersNetworkingV1ApiService) DeleteNetworkingV1DnsForwarder(ctx _context.Context, id string) ApiDeleteNetworkingV1DnsForwarderRequest {
+	return ApiDeleteNetworkingV1DnsForwarderRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -347,7 +346,7 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) DeleteNetworkingV1PrivateLin
 }
 
 // Execute executes the request
-func (a *PrivateLinkAccessesNetworkingV1ApiService) DeleteNetworkingV1PrivateLinkAccessExecute(r ApiDeleteNetworkingV1PrivateLinkAccessRequest) (*_nethttp.Response, error) {
+func (a *DnsForwardersNetworkingV1ApiService) DeleteNetworkingV1DnsForwarderExecute(r ApiDeleteNetworkingV1DnsForwarderRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
@@ -356,12 +355,12 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) DeleteNetworkingV1PrivateLin
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PrivateLinkAccessesNetworkingV1ApiService.DeleteNetworkingV1PrivateLinkAccess")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DnsForwardersNetworkingV1ApiService.DeleteNetworkingV1DnsForwarder")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/networking/v1/private-link-accesses/{id}"
+	localVarPath := localBasePath + "/networking/v1/dns-forwarders/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -466,36 +465,36 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) DeleteNetworkingV1PrivateLin
 	return localVarHTTPResponse, nil
 }
 
-type ApiGetNetworkingV1PrivateLinkAccessRequest struct {
+type ApiGetNetworkingV1DnsForwarderRequest struct {
 	ctx         _context.Context
-	ApiService  PrivateLinkAccessesNetworkingV1Api
+	ApiService  DnsForwardersNetworkingV1Api
 	environment *string
 	id          string
 }
 
 // Scope the operation to the given environment.
-func (r ApiGetNetworkingV1PrivateLinkAccessRequest) Environment(environment string) ApiGetNetworkingV1PrivateLinkAccessRequest {
+func (r ApiGetNetworkingV1DnsForwarderRequest) Environment(environment string) ApiGetNetworkingV1DnsForwarderRequest {
 	r.environment = &environment
 	return r
 }
 
-func (r ApiGetNetworkingV1PrivateLinkAccessRequest) Execute() (NetworkingV1PrivateLinkAccess, *_nethttp.Response, error) {
-	return r.ApiService.GetNetworkingV1PrivateLinkAccessExecute(r)
+func (r ApiGetNetworkingV1DnsForwarderRequest) Execute() (NetworkingV1DnsForwarder, *_nethttp.Response, error) {
+	return r.ApiService.GetNetworkingV1DnsForwarderExecute(r)
 }
 
 /*
-GetNetworkingV1PrivateLinkAccess Read a Private Link Access
+GetNetworkingV1DnsForwarder Read a Dns Forwarder
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to read a private link access.
+Make a request to read a dns forwarder.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the private link access.
- @return ApiGetNetworkingV1PrivateLinkAccessRequest
+ @param id The unique identifier for the dns forwarder.
+ @return ApiGetNetworkingV1DnsForwarderRequest
 */
-func (a *PrivateLinkAccessesNetworkingV1ApiService) GetNetworkingV1PrivateLinkAccess(ctx _context.Context, id string) ApiGetNetworkingV1PrivateLinkAccessRequest {
-	return ApiGetNetworkingV1PrivateLinkAccessRequest{
+func (a *DnsForwardersNetworkingV1ApiService) GetNetworkingV1DnsForwarder(ctx _context.Context, id string) ApiGetNetworkingV1DnsForwarderRequest {
+	return ApiGetNetworkingV1DnsForwarderRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -503,23 +502,23 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) GetNetworkingV1PrivateLinkAc
 }
 
 // Execute executes the request
-//  @return NetworkingV1PrivateLinkAccess
-func (a *PrivateLinkAccessesNetworkingV1ApiService) GetNetworkingV1PrivateLinkAccessExecute(r ApiGetNetworkingV1PrivateLinkAccessRequest) (NetworkingV1PrivateLinkAccess, *_nethttp.Response, error) {
+//  @return NetworkingV1DnsForwarder
+func (a *DnsForwardersNetworkingV1ApiService) GetNetworkingV1DnsForwarderExecute(r ApiGetNetworkingV1DnsForwarderRequest) (NetworkingV1DnsForwarder, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  NetworkingV1PrivateLinkAccess
+		localVarReturnValue  NetworkingV1DnsForwarder
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PrivateLinkAccessesNetworkingV1ApiService.GetNetworkingV1PrivateLinkAccess")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DnsForwardersNetworkingV1ApiService.GetNetworkingV1DnsForwarder")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/networking/v1/private-link-accesses/{id}"
+	localVarPath := localBasePath + "/networking/v1/dns-forwarders/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -633,92 +632,71 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) GetNetworkingV1PrivateLinkAc
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListNetworkingV1PrivateLinkAccessesRequest struct {
-	ctx             _context.Context
-	ApiService      PrivateLinkAccessesNetworkingV1Api
-	environment     *string
-	specDisplayName *[]string
-	statusPhase     *[]string
-	specNetwork     *[]string
-	pageSize        *int32
-	pageToken       *string
+type ApiListNetworkingV1DnsForwardersRequest struct {
+	ctx         _context.Context
+	ApiService  DnsForwardersNetworkingV1Api
+	environment *string
+	pageSize    *int32
+	pageToken   *string
 }
 
 // Filter the results by exact match for environment.
-func (r ApiListNetworkingV1PrivateLinkAccessesRequest) Environment(environment string) ApiListNetworkingV1PrivateLinkAccessesRequest {
+func (r ApiListNetworkingV1DnsForwardersRequest) Environment(environment string) ApiListNetworkingV1DnsForwardersRequest {
 	r.environment = &environment
 	return r
 }
 
-// Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PrivateLinkAccessesRequest) SpecDisplayName(specDisplayName []string) ApiListNetworkingV1PrivateLinkAccessesRequest {
-	r.specDisplayName = &specDisplayName
-	return r
-}
-
-// Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PrivateLinkAccessesRequest) StatusPhase(statusPhase []string) ApiListNetworkingV1PrivateLinkAccessesRequest {
-	r.statusPhase = &statusPhase
-	return r
-}
-
-// Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PrivateLinkAccessesRequest) SpecNetwork(specNetwork []string) ApiListNetworkingV1PrivateLinkAccessesRequest {
-	r.specNetwork = &specNetwork
-	return r
-}
-
 // A pagination size for collection requests.
-func (r ApiListNetworkingV1PrivateLinkAccessesRequest) PageSize(pageSize int32) ApiListNetworkingV1PrivateLinkAccessesRequest {
+func (r ApiListNetworkingV1DnsForwardersRequest) PageSize(pageSize int32) ApiListNetworkingV1DnsForwardersRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
 // An opaque pagination token for collection requests.
-func (r ApiListNetworkingV1PrivateLinkAccessesRequest) PageToken(pageToken string) ApiListNetworkingV1PrivateLinkAccessesRequest {
+func (r ApiListNetworkingV1DnsForwardersRequest) PageToken(pageToken string) ApiListNetworkingV1DnsForwardersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-func (r ApiListNetworkingV1PrivateLinkAccessesRequest) Execute() (NetworkingV1PrivateLinkAccessList, *_nethttp.Response, error) {
-	return r.ApiService.ListNetworkingV1PrivateLinkAccessesExecute(r)
+func (r ApiListNetworkingV1DnsForwardersRequest) Execute() (NetworkingV1DnsForwarderList, *_nethttp.Response, error) {
+	return r.ApiService.ListNetworkingV1DnsForwardersExecute(r)
 }
 
 /*
-ListNetworkingV1PrivateLinkAccesses List of Private Link Accesses
+ListNetworkingV1DnsForwarders List of Dns Forwarders
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Retrieve a sorted, filtered, paginated list of all private link accesses.
+Retrieve a sorted, filtered, paginated list of all dns forwarders.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListNetworkingV1PrivateLinkAccessesRequest
+ @return ApiListNetworkingV1DnsForwardersRequest
 */
-func (a *PrivateLinkAccessesNetworkingV1ApiService) ListNetworkingV1PrivateLinkAccesses(ctx _context.Context) ApiListNetworkingV1PrivateLinkAccessesRequest {
-	return ApiListNetworkingV1PrivateLinkAccessesRequest{
+func (a *DnsForwardersNetworkingV1ApiService) ListNetworkingV1DnsForwarders(ctx _context.Context) ApiListNetworkingV1DnsForwardersRequest {
+	return ApiListNetworkingV1DnsForwardersRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return NetworkingV1PrivateLinkAccessList
-func (a *PrivateLinkAccessesNetworkingV1ApiService) ListNetworkingV1PrivateLinkAccessesExecute(r ApiListNetworkingV1PrivateLinkAccessesRequest) (NetworkingV1PrivateLinkAccessList, *_nethttp.Response, error) {
+//  @return NetworkingV1DnsForwarderList
+func (a *DnsForwardersNetworkingV1ApiService) ListNetworkingV1DnsForwardersExecute(r ApiListNetworkingV1DnsForwardersRequest) (NetworkingV1DnsForwarderList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  NetworkingV1PrivateLinkAccessList
+		localVarReturnValue  NetworkingV1DnsForwarderList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PrivateLinkAccessesNetworkingV1ApiService.ListNetworkingV1PrivateLinkAccesses")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DnsForwardersNetworkingV1ApiService.ListNetworkingV1DnsForwarders")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/networking/v1/private-link-accesses"
+	localVarPath := localBasePath + "/networking/v1/dns-forwarders"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -727,40 +705,7 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) ListNetworkingV1PrivateLinkA
 		return localVarReturnValue, nil, reportError("environment is required and must be specified")
 	}
 
-	if r.specDisplayName != nil {
-		t := *r.specDisplayName
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("spec.display_name", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("spec.display_name", parameterToString(t, "multi"))
-		}
-	}
-	if r.statusPhase != nil {
-		t := *r.statusPhase
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("status.phase", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("status.phase", parameterToString(t, "multi"))
-		}
-	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
-	if r.specNetwork != nil {
-		t := *r.specNetwork
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("spec.network", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("spec.network", parameterToString(t, "multi"))
-		}
-	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}
@@ -860,37 +805,37 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) ListNetworkingV1PrivateLinkA
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateNetworkingV1PrivateLinkAccessRequest struct {
-	ctx                                 _context.Context
-	ApiService                          PrivateLinkAccessesNetworkingV1Api
-	id                                  string
-	networkingV1PrivateLinkAccessUpdate *NetworkingV1PrivateLinkAccessUpdate
+type ApiUpdateNetworkingV1DnsForwarderRequest struct {
+	ctx                            _context.Context
+	ApiService                     DnsForwardersNetworkingV1Api
+	id                             string
+	networkingV1DnsForwarderUpdate *NetworkingV1DnsForwarderUpdate
 }
 
-func (r ApiUpdateNetworkingV1PrivateLinkAccessRequest) NetworkingV1PrivateLinkAccessUpdate(networkingV1PrivateLinkAccessUpdate NetworkingV1PrivateLinkAccessUpdate) ApiUpdateNetworkingV1PrivateLinkAccessRequest {
-	r.networkingV1PrivateLinkAccessUpdate = &networkingV1PrivateLinkAccessUpdate
+func (r ApiUpdateNetworkingV1DnsForwarderRequest) NetworkingV1DnsForwarderUpdate(networkingV1DnsForwarderUpdate NetworkingV1DnsForwarderUpdate) ApiUpdateNetworkingV1DnsForwarderRequest {
+	r.networkingV1DnsForwarderUpdate = &networkingV1DnsForwarderUpdate
 	return r
 }
 
-func (r ApiUpdateNetworkingV1PrivateLinkAccessRequest) Execute() (NetworkingV1PrivateLinkAccess, *_nethttp.Response, error) {
-	return r.ApiService.UpdateNetworkingV1PrivateLinkAccessExecute(r)
+func (r ApiUpdateNetworkingV1DnsForwarderRequest) Execute() (NetworkingV1DnsForwarder, *_nethttp.Response, error) {
+	return r.ApiService.UpdateNetworkingV1DnsForwarderExecute(r)
 }
 
 /*
-UpdateNetworkingV1PrivateLinkAccess Update a Private Link Access
+UpdateNetworkingV1DnsForwarder Update a Dns Forwarder
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to update a private link access.
+Make a request to update a dns forwarder.
 
 
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the private link access.
- @return ApiUpdateNetworkingV1PrivateLinkAccessRequest
+ @param id The unique identifier for the dns forwarder.
+ @return ApiUpdateNetworkingV1DnsForwarderRequest
 */
-func (a *PrivateLinkAccessesNetworkingV1ApiService) UpdateNetworkingV1PrivateLinkAccess(ctx _context.Context, id string) ApiUpdateNetworkingV1PrivateLinkAccessRequest {
-	return ApiUpdateNetworkingV1PrivateLinkAccessRequest{
+func (a *DnsForwardersNetworkingV1ApiService) UpdateNetworkingV1DnsForwarder(ctx _context.Context, id string) ApiUpdateNetworkingV1DnsForwarderRequest {
+	return ApiUpdateNetworkingV1DnsForwarderRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -898,23 +843,23 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) UpdateNetworkingV1PrivateLin
 }
 
 // Execute executes the request
-//  @return NetworkingV1PrivateLinkAccess
-func (a *PrivateLinkAccessesNetworkingV1ApiService) UpdateNetworkingV1PrivateLinkAccessExecute(r ApiUpdateNetworkingV1PrivateLinkAccessRequest) (NetworkingV1PrivateLinkAccess, *_nethttp.Response, error) {
+//  @return NetworkingV1DnsForwarder
+func (a *DnsForwardersNetworkingV1ApiService) UpdateNetworkingV1DnsForwarderExecute(r ApiUpdateNetworkingV1DnsForwarderRequest) (NetworkingV1DnsForwarder, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  NetworkingV1PrivateLinkAccess
+		localVarReturnValue  NetworkingV1DnsForwarder
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PrivateLinkAccessesNetworkingV1ApiService.UpdateNetworkingV1PrivateLinkAccess")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DnsForwardersNetworkingV1ApiService.UpdateNetworkingV1DnsForwarder")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/networking/v1/private-link-accesses/{id}"
+	localVarPath := localBasePath + "/networking/v1/dns-forwarders/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -939,7 +884,7 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) UpdateNetworkingV1PrivateLin
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.networkingV1PrivateLinkAccessUpdate
+	localVarPostBody = r.networkingV1DnsForwarderUpdate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -28,6 +28,7 @@ package v1
 import (
 	"bytes"
 	"encoding/json"
+	"time"
 )
 
 import (
@@ -50,6 +51,8 @@ type NetworkingV1NetworkStatus struct {
 	ZonalSubdomains *map[string]string `json:"zonal_subdomains,omitempty"`
 	// The cloud-specific network details. These will be populated when the network reaches the READY state.
 	Cloud *NetworkingV1NetworkStatusCloudOneOf `json:"cloud,omitempty"`
+	// The date and time when the network becomes idle
+	IdleSince *time.Time `json:"idle_since,omitempty"`
 }
 
 // NewNetworkingV1NetworkStatus instantiates a new NetworkingV1NetworkStatus object
@@ -304,6 +307,38 @@ func (o *NetworkingV1NetworkStatus) SetCloud(v NetworkingV1NetworkStatusCloudOne
 	o.Cloud = &v
 }
 
+// GetIdleSince returns the IdleSince field value if set, zero value otherwise.
+func (o *NetworkingV1NetworkStatus) GetIdleSince() time.Time {
+	if o == nil || o.IdleSince == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.IdleSince
+}
+
+// GetIdleSinceOk returns a tuple with the IdleSince field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1NetworkStatus) GetIdleSinceOk() (*time.Time, bool) {
+	if o == nil || o.IdleSince == nil {
+		return nil, false
+	}
+	return o.IdleSince, true
+}
+
+// HasIdleSince returns a boolean if a field has been set.
+func (o *NetworkingV1NetworkStatus) HasIdleSince() bool {
+	if o != nil && o.IdleSince != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIdleSince gets a reference to the given time.Time and assigns it to the IdleSince field.
+func (o *NetworkingV1NetworkStatus) SetIdleSince(v time.Time) {
+	o.IdleSince = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1NetworkStatus) Redact() {
 	o.recurseRedact(&o.Phase)
@@ -314,6 +349,7 @@ func (o *NetworkingV1NetworkStatus) Redact() {
 	o.recurseRedact(o.DnsDomain)
 	o.recurseRedact(o.ZonalSubdomains)
 	o.recurseRedact(o.Cloud)
+	o.recurseRedact(o.IdleSince)
 }
 
 func (o *NetworkingV1NetworkStatus) recurseRedact(v interface{}) {
@@ -371,6 +407,9 @@ func (o NetworkingV1NetworkStatus) MarshalJSON() ([]byte, error) {
 	}
 	if o.Cloud != nil {
 		toSerialize["cloud"] = o.Cloud
+	}
+	if o.IdleSince != nil {
+		toSerialize["idle_since"] = o.IdleSince
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

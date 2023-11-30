@@ -43,14 +43,14 @@ var (
 type NetworkLinkEndpointsNetworkingV1Api interface {
 
 	/*
-		CreateNetworkingV1NetworkLinkEndpoint Create a Network Link Endpoint
+			CreateNetworkingV1NetworkLinkEndpoint Create a Network Link Endpoint
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to create a network link endpoint.
+		Make a request to create a network link endpoint.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiCreateNetworkingV1NetworkLinkEndpointRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiCreateNetworkingV1NetworkLinkEndpointRequest
 	*/
 	CreateNetworkingV1NetworkLinkEndpoint(ctx _context.Context) ApiCreateNetworkingV1NetworkLinkEndpointRequest
 
@@ -59,15 +59,15 @@ type NetworkLinkEndpointsNetworkingV1Api interface {
 	CreateNetworkingV1NetworkLinkEndpointExecute(r ApiCreateNetworkingV1NetworkLinkEndpointRequest) (NetworkingV1NetworkLinkEndpoint, *_nethttp.Response, error)
 
 	/*
-		DeleteNetworkingV1NetworkLinkEndpoint Delete a Network Link Endpoint
+			DeleteNetworkingV1NetworkLinkEndpoint Delete a Network Link Endpoint
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to delete a network link endpoint.
+		Make a request to delete a network link endpoint.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the network link endpoint.
-		 @return ApiDeleteNetworkingV1NetworkLinkEndpointRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the network link endpoint.
+			 @return ApiDeleteNetworkingV1NetworkLinkEndpointRequest
 	*/
 	DeleteNetworkingV1NetworkLinkEndpoint(ctx _context.Context, id string) ApiDeleteNetworkingV1NetworkLinkEndpointRequest
 
@@ -75,15 +75,15 @@ type NetworkLinkEndpointsNetworkingV1Api interface {
 	DeleteNetworkingV1NetworkLinkEndpointExecute(r ApiDeleteNetworkingV1NetworkLinkEndpointRequest) (*_nethttp.Response, error)
 
 	/*
-		GetNetworkingV1NetworkLinkEndpoint Read a Network Link Endpoint
+			GetNetworkingV1NetworkLinkEndpoint Read a Network Link Endpoint
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to read a network link endpoint.
+		Make a request to read a network link endpoint.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the network link endpoint.
-		 @return ApiGetNetworkingV1NetworkLinkEndpointRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the network link endpoint.
+			 @return ApiGetNetworkingV1NetworkLinkEndpointRequest
 	*/
 	GetNetworkingV1NetworkLinkEndpoint(ctx _context.Context, id string) ApiGetNetworkingV1NetworkLinkEndpointRequest
 
@@ -92,14 +92,14 @@ type NetworkLinkEndpointsNetworkingV1Api interface {
 	GetNetworkingV1NetworkLinkEndpointExecute(r ApiGetNetworkingV1NetworkLinkEndpointRequest) (NetworkingV1NetworkLinkEndpoint, *_nethttp.Response, error)
 
 	/*
-		ListNetworkingV1NetworkLinkEndpoints List of Network Link Endpoints
+			ListNetworkingV1NetworkLinkEndpoints List of Network Link Endpoints
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Retrieve a sorted, filtered, paginated list of all network link endpoints.
+		Retrieve a sorted, filtered, paginated list of all network link endpoints.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListNetworkingV1NetworkLinkEndpointsRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiListNetworkingV1NetworkLinkEndpointsRequest
 	*/
 	ListNetworkingV1NetworkLinkEndpoints(ctx _context.Context) ApiListNetworkingV1NetworkLinkEndpointsRequest
 
@@ -108,17 +108,17 @@ type NetworkLinkEndpointsNetworkingV1Api interface {
 	ListNetworkingV1NetworkLinkEndpointsExecute(r ApiListNetworkingV1NetworkLinkEndpointsRequest) (NetworkingV1NetworkLinkEndpointList, *_nethttp.Response, error)
 
 	/*
-		UpdateNetworkingV1NetworkLinkEndpoint Update a Network Link Endpoint
+			UpdateNetworkingV1NetworkLinkEndpoint Update a Network Link Endpoint
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to update a network link endpoint.
+		Make a request to update a network link endpoint.
 
 
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the network link endpoint.
-		 @return ApiUpdateNetworkingV1NetworkLinkEndpointRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the network link endpoint.
+			 @return ApiUpdateNetworkingV1NetworkLinkEndpointRequest
 	*/
 	UpdateNetworkingV1NetworkLinkEndpoint(ctx _context.Context, id string) ApiUpdateNetworkingV1NetworkLinkEndpointRequest
 
@@ -152,8 +152,8 @@ CreateNetworkingV1NetworkLinkEndpoint Create a Network Link Endpoint
 
 Make a request to create a network link endpoint.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateNetworkingV1NetworkLinkEndpointRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateNetworkingV1NetworkLinkEndpointRequest
 */
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) CreateNetworkingV1NetworkLinkEndpoint(ctx _context.Context) ApiCreateNetworkingV1NetworkLinkEndpointRequest {
 	return ApiCreateNetworkingV1NetworkLinkEndpointRequest{
@@ -163,8 +163,7 @@ func (a *NetworkLinkEndpointsNetworkingV1ApiService) CreateNetworkingV1NetworkLi
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1NetworkLinkEndpoint
+//  @return NetworkingV1NetworkLinkEndpoint
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) CreateNetworkingV1NetworkLinkEndpointExecute(r ApiCreateNetworkingV1NetworkLinkEndpointRequest) (NetworkingV1NetworkLinkEndpoint, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -335,9 +334,9 @@ DeleteNetworkingV1NetworkLinkEndpoint Delete a Network Link Endpoint
 
 Make a request to delete a network link endpoint.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the network link endpoint.
-	@return ApiDeleteNetworkingV1NetworkLinkEndpointRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the network link endpoint.
+ @return ApiDeleteNetworkingV1NetworkLinkEndpointRequest
 */
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) DeleteNetworkingV1NetworkLinkEndpoint(ctx _context.Context, id string) ApiDeleteNetworkingV1NetworkLinkEndpointRequest {
 	return ApiDeleteNetworkingV1NetworkLinkEndpointRequest{
@@ -491,9 +490,9 @@ GetNetworkingV1NetworkLinkEndpoint Read a Network Link Endpoint
 
 Make a request to read a network link endpoint.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the network link endpoint.
-	@return ApiGetNetworkingV1NetworkLinkEndpointRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the network link endpoint.
+ @return ApiGetNetworkingV1NetworkLinkEndpointRequest
 */
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) GetNetworkingV1NetworkLinkEndpoint(ctx _context.Context, id string) ApiGetNetworkingV1NetworkLinkEndpointRequest {
 	return ApiGetNetworkingV1NetworkLinkEndpointRequest{
@@ -504,8 +503,7 @@ func (a *NetworkLinkEndpointsNetworkingV1ApiService) GetNetworkingV1NetworkLinkE
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1NetworkLinkEndpoint
+//  @return NetworkingV1NetworkLinkEndpoint
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) GetNetworkingV1NetworkLinkEndpointExecute(r ApiGetNetworkingV1NetworkLinkEndpointRequest) (NetworkingV1NetworkLinkEndpoint, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -700,8 +698,8 @@ ListNetworkingV1NetworkLinkEndpoints List of Network Link Endpoints
 
 Retrieve a sorted, filtered, paginated list of all network link endpoints.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListNetworkingV1NetworkLinkEndpointsRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListNetworkingV1NetworkLinkEndpointsRequest
 */
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) ListNetworkingV1NetworkLinkEndpoints(ctx _context.Context) ApiListNetworkingV1NetworkLinkEndpointsRequest {
 	return ApiListNetworkingV1NetworkLinkEndpointsRequest{
@@ -711,8 +709,7 @@ func (a *NetworkLinkEndpointsNetworkingV1ApiService) ListNetworkingV1NetworkLink
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1NetworkLinkEndpointList
+//  @return NetworkingV1NetworkLinkEndpointList
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) ListNetworkingV1NetworkLinkEndpointsExecute(r ApiListNetworkingV1NetworkLinkEndpointsRequest) (NetworkingV1NetworkLinkEndpointList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -904,9 +901,11 @@ UpdateNetworkingV1NetworkLinkEndpoint Update a Network Link Endpoint
 
 Make a request to update a network link endpoint.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the network link endpoint.
-	@return ApiUpdateNetworkingV1NetworkLinkEndpointRequest
+
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the network link endpoint.
+ @return ApiUpdateNetworkingV1NetworkLinkEndpointRequest
 */
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) UpdateNetworkingV1NetworkLinkEndpoint(ctx _context.Context, id string) ApiUpdateNetworkingV1NetworkLinkEndpointRequest {
 	return ApiUpdateNetworkingV1NetworkLinkEndpointRequest{
@@ -917,8 +916,7 @@ func (a *NetworkLinkEndpointsNetworkingV1ApiService) UpdateNetworkingV1NetworkLi
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1NetworkLinkEndpoint
+//  @return NetworkingV1NetworkLinkEndpoint
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) UpdateNetworkingV1NetworkLinkEndpointExecute(r ApiUpdateNetworkingV1NetworkLinkEndpointRequest) (NetworkingV1NetworkLinkEndpoint, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
@@ -1023,6 +1021,16 @@ func (a *NetworkLinkEndpointsNetworkingV1ApiService) UpdateNetworkingV1NetworkLi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

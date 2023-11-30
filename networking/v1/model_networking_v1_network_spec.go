@@ -55,6 +55,8 @@ type NetworkingV1NetworkSpec struct {
 	ReservedCidr *string `json:"reserved_cidr,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
+	// The gateway associated with this object. The gateway can be one of networking.v1.Gateway. May be `null` or omitted if not associated with a gateway.
+	Gateway NullableTypedEnvScopedObjectReference `json:"gateway,omitempty"`
 }
 
 // NewNetworkingV1NetworkSpec instantiates a new NetworkingV1NetworkSpec object
@@ -394,6 +396,49 @@ func (o *NetworkingV1NetworkSpec) SetEnvironment(v ObjectReference) {
 	o.Environment = &v
 }
 
+// GetGateway returns the Gateway field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NetworkingV1NetworkSpec) GetGateway() TypedEnvScopedObjectReference {
+	if o == nil || o.Gateway.Get() == nil {
+		var ret TypedEnvScopedObjectReference
+		return ret
+	}
+	return *o.Gateway.Get()
+}
+
+// GetGatewayOk returns a tuple with the Gateway field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NetworkingV1NetworkSpec) GetGatewayOk() (*TypedEnvScopedObjectReference, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Gateway.Get(), o.Gateway.IsSet()
+}
+
+// HasGateway returns a boolean if a field has been set.
+func (o *NetworkingV1NetworkSpec) HasGateway() bool {
+	if o != nil && o.Gateway.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetGateway gets a reference to the given NullableTypedEnvScopedObjectReference and assigns it to the Gateway field.
+func (o *NetworkingV1NetworkSpec) SetGateway(v TypedEnvScopedObjectReference) {
+	o.Gateway.Set(&v)
+}
+
+// SetGatewayNil sets the value for Gateway to be an explicit nil
+func (o *NetworkingV1NetworkSpec) SetGatewayNil() {
+	o.Gateway.Set(nil)
+}
+
+// UnsetGateway ensures that no value is present for Gateway, not even an explicit nil
+func (o *NetworkingV1NetworkSpec) UnsetGateway() {
+	o.Gateway.Unset()
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1NetworkSpec) Redact() {
 	o.recurseRedact(o.DisplayName)
@@ -406,6 +451,7 @@ func (o *NetworkingV1NetworkSpec) Redact() {
 	o.recurseRedact(o.DnsConfig)
 	o.recurseRedact(o.ReservedCidr)
 	o.recurseRedact(o.Environment)
+	o.recurseRedact(o.Gateway)
 }
 
 func (o *NetworkingV1NetworkSpec) recurseRedact(v interface{}) {
@@ -469,6 +515,9 @@ func (o NetworkingV1NetworkSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
+	}
+	if o.Gateway.IsSet() {
+		toSerialize["gateway"] = o.Gateway.Get()
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

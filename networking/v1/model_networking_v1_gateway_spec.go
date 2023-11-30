@@ -34,35 +34,33 @@ import (
 	"reflect"
 )
 
-// NetworkingV1NetworkSpecUpdate The desired state of the Network
-type NetworkingV1NetworkSpecUpdate struct {
-	// The name of the network
+// NetworkingV1GatewaySpec The desired state of the Gateway
+type NetworkingV1GatewaySpec struct {
+	// The name of the gateway
 	DisplayName *string `json:"display_name,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
-	// The gateway associated with this object. The gateway can be one of networking.v1.Gateway. May be `null` or omitted if not associated with a gateway.
-	Gateway NullableTypedEnvScopedObjectReference `json:"gateway,omitempty"`
 }
 
-// NewNetworkingV1NetworkSpecUpdate instantiates a new NetworkingV1NetworkSpecUpdate object
+// NewNetworkingV1GatewaySpec instantiates a new NetworkingV1GatewaySpec object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1NetworkSpecUpdate() *NetworkingV1NetworkSpecUpdate {
-	this := NetworkingV1NetworkSpecUpdate{}
+func NewNetworkingV1GatewaySpec() *NetworkingV1GatewaySpec {
+	this := NetworkingV1GatewaySpec{}
 	return &this
 }
 
-// NewNetworkingV1NetworkSpecUpdateWithDefaults instantiates a new NetworkingV1NetworkSpecUpdate object
+// NewNetworkingV1GatewaySpecWithDefaults instantiates a new NetworkingV1GatewaySpec object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewNetworkingV1NetworkSpecUpdateWithDefaults() *NetworkingV1NetworkSpecUpdate {
-	this := NetworkingV1NetworkSpecUpdate{}
+func NewNetworkingV1GatewaySpecWithDefaults() *NetworkingV1GatewaySpec {
+	this := NetworkingV1GatewaySpec{}
 	return &this
 }
 
 // GetDisplayName returns the DisplayName field value if set, zero value otherwise.
-func (o *NetworkingV1NetworkSpecUpdate) GetDisplayName() string {
+func (o *NetworkingV1GatewaySpec) GetDisplayName() string {
 	if o == nil || o.DisplayName == nil {
 		var ret string
 		return ret
@@ -72,7 +70,7 @@ func (o *NetworkingV1NetworkSpecUpdate) GetDisplayName() string {
 
 // GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1NetworkSpecUpdate) GetDisplayNameOk() (*string, bool) {
+func (o *NetworkingV1GatewaySpec) GetDisplayNameOk() (*string, bool) {
 	if o == nil || o.DisplayName == nil {
 		return nil, false
 	}
@@ -80,7 +78,7 @@ func (o *NetworkingV1NetworkSpecUpdate) GetDisplayNameOk() (*string, bool) {
 }
 
 // HasDisplayName returns a boolean if a field has been set.
-func (o *NetworkingV1NetworkSpecUpdate) HasDisplayName() bool {
+func (o *NetworkingV1GatewaySpec) HasDisplayName() bool {
 	if o != nil && o.DisplayName != nil {
 		return true
 	}
@@ -89,12 +87,12 @@ func (o *NetworkingV1NetworkSpecUpdate) HasDisplayName() bool {
 }
 
 // SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
-func (o *NetworkingV1NetworkSpecUpdate) SetDisplayName(v string) {
+func (o *NetworkingV1GatewaySpec) SetDisplayName(v string) {
 	o.DisplayName = &v
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *NetworkingV1NetworkSpecUpdate) GetEnvironment() ObjectReference {
+func (o *NetworkingV1GatewaySpec) GetEnvironment() ObjectReference {
 	if o == nil || o.Environment == nil {
 		var ret ObjectReference
 		return ret
@@ -104,7 +102,7 @@ func (o *NetworkingV1NetworkSpecUpdate) GetEnvironment() ObjectReference {
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1NetworkSpecUpdate) GetEnvironmentOk() (*ObjectReference, bool) {
+func (o *NetworkingV1GatewaySpec) GetEnvironmentOk() (*ObjectReference, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -112,7 +110,7 @@ func (o *NetworkingV1NetworkSpecUpdate) GetEnvironmentOk() (*ObjectReference, bo
 }
 
 // HasEnvironment returns a boolean if a field has been set.
-func (o *NetworkingV1NetworkSpecUpdate) HasEnvironment() bool {
+func (o *NetworkingV1GatewaySpec) HasEnvironment() bool {
 	if o != nil && o.Environment != nil {
 		return true
 	}
@@ -121,61 +119,17 @@ func (o *NetworkingV1NetworkSpecUpdate) HasEnvironment() bool {
 }
 
 // SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
-func (o *NetworkingV1NetworkSpecUpdate) SetEnvironment(v ObjectReference) {
+func (o *NetworkingV1GatewaySpec) SetEnvironment(v ObjectReference) {
 	o.Environment = &v
 }
 
-// GetGateway returns the Gateway field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *NetworkingV1NetworkSpecUpdate) GetGateway() TypedEnvScopedObjectReference {
-	if o == nil || o.Gateway.Get() == nil {
-		var ret TypedEnvScopedObjectReference
-		return ret
-	}
-	return *o.Gateway.Get()
-}
-
-// GetGatewayOk returns a tuple with the Gateway field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *NetworkingV1NetworkSpecUpdate) GetGatewayOk() (*TypedEnvScopedObjectReference, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Gateway.Get(), o.Gateway.IsSet()
-}
-
-// HasGateway returns a boolean if a field has been set.
-func (o *NetworkingV1NetworkSpecUpdate) HasGateway() bool {
-	if o != nil && o.Gateway.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetGateway gets a reference to the given NullableTypedEnvScopedObjectReference and assigns it to the Gateway field.
-func (o *NetworkingV1NetworkSpecUpdate) SetGateway(v TypedEnvScopedObjectReference) {
-	o.Gateway.Set(&v)
-}
-
-// SetGatewayNil sets the value for Gateway to be an explicit nil
-func (o *NetworkingV1NetworkSpecUpdate) SetGatewayNil() {
-	o.Gateway.Set(nil)
-}
-
-// UnsetGateway ensures that no value is present for Gateway, not even an explicit nil
-func (o *NetworkingV1NetworkSpecUpdate) UnsetGateway() {
-	o.Gateway.Unset()
-}
-
 // Redact resets all sensitive fields to their zero value.
-func (o *NetworkingV1NetworkSpecUpdate) Redact() {
+func (o *NetworkingV1GatewaySpec) Redact() {
 	o.recurseRedact(o.DisplayName)
 	o.recurseRedact(o.Environment)
-	o.recurseRedact(o.Gateway)
 }
 
-func (o *NetworkingV1NetworkSpecUpdate) recurseRedact(v interface{}) {
+func (o *NetworkingV1GatewaySpec) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -200,21 +154,18 @@ func (o *NetworkingV1NetworkSpecUpdate) recurseRedact(v interface{}) {
 	}
 }
 
-func (o NetworkingV1NetworkSpecUpdate) zeroField(v interface{}) {
+func (o NetworkingV1GatewaySpec) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o NetworkingV1NetworkSpecUpdate) MarshalJSON() ([]byte, error) {
+func (o NetworkingV1GatewaySpec) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.DisplayName != nil {
 		toSerialize["display_name"] = o.DisplayName
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
-	}
-	if o.Gateway.IsSet() {
-		toSerialize["gateway"] = o.Gateway.Get()
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
@@ -223,34 +174,34 @@ func (o NetworkingV1NetworkSpecUpdate) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableNetworkingV1NetworkSpecUpdate struct {
-	value *NetworkingV1NetworkSpecUpdate
+type NullableNetworkingV1GatewaySpec struct {
+	value *NetworkingV1GatewaySpec
 	isSet bool
 }
 
-func (v NullableNetworkingV1NetworkSpecUpdate) Get() *NetworkingV1NetworkSpecUpdate {
+func (v NullableNetworkingV1GatewaySpec) Get() *NetworkingV1GatewaySpec {
 	return v.value
 }
 
-func (v *NullableNetworkingV1NetworkSpecUpdate) Set(val *NetworkingV1NetworkSpecUpdate) {
+func (v *NullableNetworkingV1GatewaySpec) Set(val *NetworkingV1GatewaySpec) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableNetworkingV1NetworkSpecUpdate) IsSet() bool {
+func (v NullableNetworkingV1GatewaySpec) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableNetworkingV1NetworkSpecUpdate) Unset() {
+func (v *NullableNetworkingV1GatewaySpec) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableNetworkingV1NetworkSpecUpdate(val *NetworkingV1NetworkSpecUpdate) *NullableNetworkingV1NetworkSpecUpdate {
-	return &NullableNetworkingV1NetworkSpecUpdate{value: val, isSet: true}
+func NewNullableNetworkingV1GatewaySpec(val *NetworkingV1GatewaySpec) *NullableNetworkingV1GatewaySpec {
+	return &NullableNetworkingV1GatewaySpec{value: val, isSet: true}
 }
 
-func (v NullableNetworkingV1NetworkSpecUpdate) MarshalJSON() ([]byte, error) {
+func (v NullableNetworkingV1GatewaySpec) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -258,7 +209,7 @@ func (v NullableNetworkingV1NetworkSpecUpdate) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableNetworkingV1NetworkSpecUpdate) UnmarshalJSON(src []byte) error {
+func (v *NullableNetworkingV1GatewaySpec) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
