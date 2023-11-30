@@ -31,7 +31,6 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
-	"reflect"
 	"strings"
 )
 
@@ -43,14 +42,14 @@ var (
 type NetworksNetworkingV1Api interface {
 
 	/*
-			CreateNetworkingV1Network Create a Network
+		CreateNetworkingV1Network Create a Network
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to create a network.
+	Make a request to create a network.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiCreateNetworkingV1NetworkRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateNetworkingV1NetworkRequest
 	*/
 	CreateNetworkingV1Network(ctx _context.Context) ApiCreateNetworkingV1NetworkRequest
 
@@ -59,15 +58,15 @@ type NetworksNetworkingV1Api interface {
 	CreateNetworkingV1NetworkExecute(r ApiCreateNetworkingV1NetworkRequest) (NetworkingV1Network, *_nethttp.Response, error)
 
 	/*
-			DeleteNetworkingV1Network Delete a Network
+		DeleteNetworkingV1Network Delete a Network
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to delete a network.
+	Make a request to delete a network.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the network.
-			 @return ApiDeleteNetworkingV1NetworkRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the network.
+		 @return ApiDeleteNetworkingV1NetworkRequest
 	*/
 	DeleteNetworkingV1Network(ctx _context.Context, id string) ApiDeleteNetworkingV1NetworkRequest
 
@@ -75,15 +74,15 @@ type NetworksNetworkingV1Api interface {
 	DeleteNetworkingV1NetworkExecute(r ApiDeleteNetworkingV1NetworkRequest) (*_nethttp.Response, error)
 
 	/*
-			GetNetworkingV1Network Read a Network
+		GetNetworkingV1Network Read a Network
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to read a network.
+	Make a request to read a network.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the network.
-			 @return ApiGetNetworkingV1NetworkRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the network.
+		 @return ApiGetNetworkingV1NetworkRequest
 	*/
 	GetNetworkingV1Network(ctx _context.Context, id string) ApiGetNetworkingV1NetworkRequest
 
@@ -92,14 +91,14 @@ type NetworksNetworkingV1Api interface {
 	GetNetworkingV1NetworkExecute(r ApiGetNetworkingV1NetworkRequest) (NetworkingV1Network, *_nethttp.Response, error)
 
 	/*
-			ListNetworkingV1Networks List of Networks
+		ListNetworkingV1Networks List of Networks
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Retrieve a sorted, filtered, paginated list of all networks.
+	Retrieve a sorted, filtered, paginated list of all networks.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiListNetworkingV1NetworksRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListNetworkingV1NetworksRequest
 	*/
 	ListNetworkingV1Networks(ctx _context.Context) ApiListNetworkingV1NetworksRequest
 
@@ -108,17 +107,17 @@ type NetworksNetworkingV1Api interface {
 	ListNetworkingV1NetworksExecute(r ApiListNetworkingV1NetworksRequest) (NetworkingV1NetworkList, *_nethttp.Response, error)
 
 	/*
-			UpdateNetworkingV1Network Update a Network
+		UpdateNetworkingV1Network Update a Network
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to update a network.
+	Make a request to update a network.
 
 
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the network.
-			 @return ApiUpdateNetworkingV1NetworkRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the network.
+		 @return ApiUpdateNetworkingV1NetworkRequest
 	*/
 	UpdateNetworkingV1Network(ctx _context.Context, id string) ApiUpdateNetworkingV1NetworkRequest
 
@@ -152,8 +151,8 @@ CreateNetworkingV1Network Create a Network
 
 Make a request to create a network.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateNetworkingV1NetworkRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateNetworkingV1NetworkRequest
 */
 func (a *NetworksNetworkingV1ApiService) CreateNetworkingV1Network(ctx _context.Context) ApiCreateNetworkingV1NetworkRequest {
 	return ApiCreateNetworkingV1NetworkRequest{
@@ -163,7 +162,8 @@ func (a *NetworksNetworkingV1ApiService) CreateNetworkingV1Network(ctx _context.
 }
 
 // Execute executes the request
-//  @return NetworkingV1Network
+//
+//	@return NetworkingV1Network
 func (a *NetworksNetworkingV1ApiService) CreateNetworkingV1NetworkExecute(r ApiCreateNetworkingV1NetworkRequest) (NetworkingV1Network, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -334,9 +334,9 @@ DeleteNetworkingV1Network Delete a Network
 
 Make a request to delete a network.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the network.
- @return ApiDeleteNetworkingV1NetworkRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the network.
+	@return ApiDeleteNetworkingV1NetworkRequest
 */
 func (a *NetworksNetworkingV1ApiService) DeleteNetworkingV1Network(ctx _context.Context, id string) ApiDeleteNetworkingV1NetworkRequest {
 	return ApiDeleteNetworkingV1NetworkRequest{
@@ -490,9 +490,9 @@ GetNetworkingV1Network Read a Network
 
 Make a request to read a network.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the network.
- @return ApiGetNetworkingV1NetworkRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the network.
+	@return ApiGetNetworkingV1NetworkRequest
 */
 func (a *NetworksNetworkingV1ApiService) GetNetworkingV1Network(ctx _context.Context, id string) ApiGetNetworkingV1NetworkRequest {
 	return ApiGetNetworkingV1NetworkRequest{
@@ -503,7 +503,8 @@ func (a *NetworksNetworkingV1ApiService) GetNetworkingV1Network(ctx _context.Con
 }
 
 // Execute executes the request
-//  @return NetworkingV1Network
+//
+//	@return NetworkingV1Network
 func (a *NetworksNetworkingV1ApiService) GetNetworkingV1NetworkExecute(r ApiGetNetworkingV1NetworkRequest) (NetworkingV1Network, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -637,12 +638,12 @@ type ApiListNetworkingV1NetworksRequest struct {
 	ctx             _context.Context
 	ApiService      NetworksNetworkingV1Api
 	environment     *string
-	specDisplayName *[]string
-	specCloud       *[]string
-	specRegion      *[]string
-	specCidr        *[]string
-	statusPhase     *[]string
-	connectionType  *[]string
+	specDisplayName *MultipleSearchFilter
+	specCloud       *MultipleSearchFilter
+	specRegion      *MultipleSearchFilter
+	specCidr        *MultipleSearchFilter
+	statusPhase     *MultipleSearchFilter
+	connectionType  *MultipleSearchFilter
 	pageSize        *int32
 	pageToken       *string
 }
@@ -654,37 +655,37 @@ func (r ApiListNetworkingV1NetworksRequest) Environment(environment string) ApiL
 }
 
 // Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworksRequest) SpecDisplayName(specDisplayName []string) ApiListNetworkingV1NetworksRequest {
+func (r ApiListNetworkingV1NetworksRequest) SpecDisplayName(specDisplayName MultipleSearchFilter) ApiListNetworkingV1NetworksRequest {
 	r.specDisplayName = &specDisplayName
 	return r
 }
 
 // Filter the results by exact match for spec.cloud. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworksRequest) SpecCloud(specCloud []string) ApiListNetworkingV1NetworksRequest {
+func (r ApiListNetworkingV1NetworksRequest) SpecCloud(specCloud MultipleSearchFilter) ApiListNetworkingV1NetworksRequest {
 	r.specCloud = &specCloud
 	return r
 }
 
 // Filter the results by exact match for spec.region. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworksRequest) SpecRegion(specRegion []string) ApiListNetworkingV1NetworksRequest {
+func (r ApiListNetworkingV1NetworksRequest) SpecRegion(specRegion MultipleSearchFilter) ApiListNetworkingV1NetworksRequest {
 	r.specRegion = &specRegion
 	return r
 }
 
 // Filter the results by exact match for spec.cidr. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworksRequest) SpecCidr(specCidr []string) ApiListNetworkingV1NetworksRequest {
+func (r ApiListNetworkingV1NetworksRequest) SpecCidr(specCidr MultipleSearchFilter) ApiListNetworkingV1NetworksRequest {
 	r.specCidr = &specCidr
 	return r
 }
 
 // Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworksRequest) StatusPhase(statusPhase []string) ApiListNetworkingV1NetworksRequest {
+func (r ApiListNetworkingV1NetworksRequest) StatusPhase(statusPhase MultipleSearchFilter) ApiListNetworkingV1NetworksRequest {
 	r.statusPhase = &statusPhase
 	return r
 }
 
 // Filter the results by exact match for connection_type. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworksRequest) ConnectionType(connectionType []string) ApiListNetworkingV1NetworksRequest {
+func (r ApiListNetworkingV1NetworksRequest) ConnectionType(connectionType MultipleSearchFilter) ApiListNetworkingV1NetworksRequest {
 	r.connectionType = &connectionType
 	return r
 }
@@ -712,8 +713,8 @@ ListNetworkingV1Networks List of Networks
 
 Retrieve a sorted, filtered, paginated list of all networks.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListNetworkingV1NetworksRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListNetworkingV1NetworksRequest
 */
 func (a *NetworksNetworkingV1ApiService) ListNetworkingV1Networks(ctx _context.Context) ApiListNetworkingV1NetworksRequest {
 	return ApiListNetworkingV1NetworksRequest{
@@ -723,7 +724,8 @@ func (a *NetworksNetworkingV1ApiService) ListNetworkingV1Networks(ctx _context.C
 }
 
 // Execute executes the request
-//  @return NetworkingV1NetworkList
+//
+//	@return NetworkingV1NetworkList
 func (a *NetworksNetworkingV1ApiService) ListNetworkingV1NetworksExecute(r ApiListNetworkingV1NetworksRequest) (NetworkingV1NetworkList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -749,71 +751,23 @@ func (a *NetworksNetworkingV1ApiService) ListNetworkingV1NetworksExecute(r ApiLi
 	}
 
 	if r.specDisplayName != nil {
-		t := *r.specDisplayName
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("spec.display_name", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("spec.display_name", parameterToString(t, "multi"))
-		}
+		localVarQueryParams.Add("spec.display_name", parameterToString(*r.specDisplayName, ""))
 	}
 	if r.specCloud != nil {
-		t := *r.specCloud
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("spec.cloud", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("spec.cloud", parameterToString(t, "multi"))
-		}
+		localVarQueryParams.Add("spec.cloud", parameterToString(*r.specCloud, ""))
 	}
 	if r.specRegion != nil {
-		t := *r.specRegion
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("spec.region", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("spec.region", parameterToString(t, "multi"))
-		}
+		localVarQueryParams.Add("spec.region", parameterToString(*r.specRegion, ""))
 	}
 	if r.specCidr != nil {
-		t := *r.specCidr
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("spec.cidr", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("spec.cidr", parameterToString(t, "multi"))
-		}
+		localVarQueryParams.Add("spec.cidr", parameterToString(*r.specCidr, ""))
 	}
 	if r.statusPhase != nil {
-		t := *r.statusPhase
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("status.phase", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("status.phase", parameterToString(t, "multi"))
-		}
+		localVarQueryParams.Add("status.phase", parameterToString(*r.statusPhase, ""))
 	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.connectionType != nil {
-		t := *r.connectionType
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("connection_type", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("connection_type", parameterToString(t, "multi"))
-		}
+		localVarQueryParams.Add("connection_type", parameterToString(*r.connectionType, ""))
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
@@ -937,11 +891,9 @@ UpdateNetworkingV1Network Update a Network
 
 Make a request to update a network.
 
-
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the network.
- @return ApiUpdateNetworkingV1NetworkRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the network.
+	@return ApiUpdateNetworkingV1NetworkRequest
 */
 func (a *NetworksNetworkingV1ApiService) UpdateNetworkingV1Network(ctx _context.Context, id string) ApiUpdateNetworkingV1NetworkRequest {
 	return ApiUpdateNetworkingV1NetworkRequest{
@@ -952,7 +904,8 @@ func (a *NetworksNetworkingV1ApiService) UpdateNetworkingV1Network(ctx _context.
 }
 
 // Execute executes the request
-//  @return NetworkingV1Network
+//
+//	@return NetworkingV1Network
 func (a *NetworksNetworkingV1ApiService) UpdateNetworkingV1NetworkExecute(r ApiUpdateNetworkingV1NetworkRequest) (NetworkingV1Network, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch

@@ -31,7 +31,6 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
-	"reflect"
 	"strings"
 )
 
@@ -43,14 +42,14 @@ var (
 type PrivateLinkAccessesNetworkingV1Api interface {
 
 	/*
-			CreateNetworkingV1PrivateLinkAccess Create a Private Link Access
+		CreateNetworkingV1PrivateLinkAccess Create a Private Link Access
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to create a private link access.
+	Make a request to create a private link access.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiCreateNetworkingV1PrivateLinkAccessRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateNetworkingV1PrivateLinkAccessRequest
 	*/
 	CreateNetworkingV1PrivateLinkAccess(ctx _context.Context) ApiCreateNetworkingV1PrivateLinkAccessRequest
 
@@ -59,15 +58,15 @@ type PrivateLinkAccessesNetworkingV1Api interface {
 	CreateNetworkingV1PrivateLinkAccessExecute(r ApiCreateNetworkingV1PrivateLinkAccessRequest) (NetworkingV1PrivateLinkAccess, *_nethttp.Response, error)
 
 	/*
-			DeleteNetworkingV1PrivateLinkAccess Delete a Private Link Access
+		DeleteNetworkingV1PrivateLinkAccess Delete a Private Link Access
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to delete a private link access.
+	Make a request to delete a private link access.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the private link access.
-			 @return ApiDeleteNetworkingV1PrivateLinkAccessRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the private link access.
+		 @return ApiDeleteNetworkingV1PrivateLinkAccessRequest
 	*/
 	DeleteNetworkingV1PrivateLinkAccess(ctx _context.Context, id string) ApiDeleteNetworkingV1PrivateLinkAccessRequest
 
@@ -75,15 +74,15 @@ type PrivateLinkAccessesNetworkingV1Api interface {
 	DeleteNetworkingV1PrivateLinkAccessExecute(r ApiDeleteNetworkingV1PrivateLinkAccessRequest) (*_nethttp.Response, error)
 
 	/*
-			GetNetworkingV1PrivateLinkAccess Read a Private Link Access
+		GetNetworkingV1PrivateLinkAccess Read a Private Link Access
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to read a private link access.
+	Make a request to read a private link access.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the private link access.
-			 @return ApiGetNetworkingV1PrivateLinkAccessRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the private link access.
+		 @return ApiGetNetworkingV1PrivateLinkAccessRequest
 	*/
 	GetNetworkingV1PrivateLinkAccess(ctx _context.Context, id string) ApiGetNetworkingV1PrivateLinkAccessRequest
 
@@ -92,14 +91,14 @@ type PrivateLinkAccessesNetworkingV1Api interface {
 	GetNetworkingV1PrivateLinkAccessExecute(r ApiGetNetworkingV1PrivateLinkAccessRequest) (NetworkingV1PrivateLinkAccess, *_nethttp.Response, error)
 
 	/*
-			ListNetworkingV1PrivateLinkAccesses List of Private Link Accesses
+		ListNetworkingV1PrivateLinkAccesses List of Private Link Accesses
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Retrieve a sorted, filtered, paginated list of all private link accesses.
+	Retrieve a sorted, filtered, paginated list of all private link accesses.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiListNetworkingV1PrivateLinkAccessesRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListNetworkingV1PrivateLinkAccessesRequest
 	*/
 	ListNetworkingV1PrivateLinkAccesses(ctx _context.Context) ApiListNetworkingV1PrivateLinkAccessesRequest
 
@@ -108,17 +107,17 @@ type PrivateLinkAccessesNetworkingV1Api interface {
 	ListNetworkingV1PrivateLinkAccessesExecute(r ApiListNetworkingV1PrivateLinkAccessesRequest) (NetworkingV1PrivateLinkAccessList, *_nethttp.Response, error)
 
 	/*
-			UpdateNetworkingV1PrivateLinkAccess Update a Private Link Access
+		UpdateNetworkingV1PrivateLinkAccess Update a Private Link Access
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to update a private link access.
+	Make a request to update a private link access.
 
 
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the private link access.
-			 @return ApiUpdateNetworkingV1PrivateLinkAccessRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the private link access.
+		 @return ApiUpdateNetworkingV1PrivateLinkAccessRequest
 	*/
 	UpdateNetworkingV1PrivateLinkAccess(ctx _context.Context, id string) ApiUpdateNetworkingV1PrivateLinkAccessRequest
 
@@ -152,8 +151,8 @@ CreateNetworkingV1PrivateLinkAccess Create a Private Link Access
 
 Make a request to create a private link access.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateNetworkingV1PrivateLinkAccessRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateNetworkingV1PrivateLinkAccessRequest
 */
 func (a *PrivateLinkAccessesNetworkingV1ApiService) CreateNetworkingV1PrivateLinkAccess(ctx _context.Context) ApiCreateNetworkingV1PrivateLinkAccessRequest {
 	return ApiCreateNetworkingV1PrivateLinkAccessRequest{
@@ -163,7 +162,8 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) CreateNetworkingV1PrivateLin
 }
 
 // Execute executes the request
-//  @return NetworkingV1PrivateLinkAccess
+//
+//	@return NetworkingV1PrivateLinkAccess
 func (a *PrivateLinkAccessesNetworkingV1ApiService) CreateNetworkingV1PrivateLinkAccessExecute(r ApiCreateNetworkingV1PrivateLinkAccessRequest) (NetworkingV1PrivateLinkAccess, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -334,9 +334,9 @@ DeleteNetworkingV1PrivateLinkAccess Delete a Private Link Access
 
 Make a request to delete a private link access.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the private link access.
- @return ApiDeleteNetworkingV1PrivateLinkAccessRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the private link access.
+	@return ApiDeleteNetworkingV1PrivateLinkAccessRequest
 */
 func (a *PrivateLinkAccessesNetworkingV1ApiService) DeleteNetworkingV1PrivateLinkAccess(ctx _context.Context, id string) ApiDeleteNetworkingV1PrivateLinkAccessRequest {
 	return ApiDeleteNetworkingV1PrivateLinkAccessRequest{
@@ -490,9 +490,9 @@ GetNetworkingV1PrivateLinkAccess Read a Private Link Access
 
 Make a request to read a private link access.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the private link access.
- @return ApiGetNetworkingV1PrivateLinkAccessRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the private link access.
+	@return ApiGetNetworkingV1PrivateLinkAccessRequest
 */
 func (a *PrivateLinkAccessesNetworkingV1ApiService) GetNetworkingV1PrivateLinkAccess(ctx _context.Context, id string) ApiGetNetworkingV1PrivateLinkAccessRequest {
 	return ApiGetNetworkingV1PrivateLinkAccessRequest{
@@ -503,7 +503,8 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) GetNetworkingV1PrivateLinkAc
 }
 
 // Execute executes the request
-//  @return NetworkingV1PrivateLinkAccess
+//
+//	@return NetworkingV1PrivateLinkAccess
 func (a *PrivateLinkAccessesNetworkingV1ApiService) GetNetworkingV1PrivateLinkAccessExecute(r ApiGetNetworkingV1PrivateLinkAccessRequest) (NetworkingV1PrivateLinkAccess, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -637,9 +638,9 @@ type ApiListNetworkingV1PrivateLinkAccessesRequest struct {
 	ctx             _context.Context
 	ApiService      PrivateLinkAccessesNetworkingV1Api
 	environment     *string
-	specDisplayName *[]string
-	statusPhase     *[]string
-	specNetwork     *[]string
+	specDisplayName *MultipleSearchFilter
+	statusPhase     *MultipleSearchFilter
+	specNetwork     *MultipleSearchFilter
 	pageSize        *int32
 	pageToken       *string
 }
@@ -651,19 +652,19 @@ func (r ApiListNetworkingV1PrivateLinkAccessesRequest) Environment(environment s
 }
 
 // Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PrivateLinkAccessesRequest) SpecDisplayName(specDisplayName []string) ApiListNetworkingV1PrivateLinkAccessesRequest {
+func (r ApiListNetworkingV1PrivateLinkAccessesRequest) SpecDisplayName(specDisplayName MultipleSearchFilter) ApiListNetworkingV1PrivateLinkAccessesRequest {
 	r.specDisplayName = &specDisplayName
 	return r
 }
 
 // Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PrivateLinkAccessesRequest) StatusPhase(statusPhase []string) ApiListNetworkingV1PrivateLinkAccessesRequest {
+func (r ApiListNetworkingV1PrivateLinkAccessesRequest) StatusPhase(statusPhase MultipleSearchFilter) ApiListNetworkingV1PrivateLinkAccessesRequest {
 	r.statusPhase = &statusPhase
 	return r
 }
 
 // Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PrivateLinkAccessesRequest) SpecNetwork(specNetwork []string) ApiListNetworkingV1PrivateLinkAccessesRequest {
+func (r ApiListNetworkingV1PrivateLinkAccessesRequest) SpecNetwork(specNetwork MultipleSearchFilter) ApiListNetworkingV1PrivateLinkAccessesRequest {
 	r.specNetwork = &specNetwork
 	return r
 }
@@ -691,8 +692,8 @@ ListNetworkingV1PrivateLinkAccesses List of Private Link Accesses
 
 Retrieve a sorted, filtered, paginated list of all private link accesses.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListNetworkingV1PrivateLinkAccessesRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListNetworkingV1PrivateLinkAccessesRequest
 */
 func (a *PrivateLinkAccessesNetworkingV1ApiService) ListNetworkingV1PrivateLinkAccesses(ctx _context.Context) ApiListNetworkingV1PrivateLinkAccessesRequest {
 	return ApiListNetworkingV1PrivateLinkAccessesRequest{
@@ -702,7 +703,8 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) ListNetworkingV1PrivateLinkA
 }
 
 // Execute executes the request
-//  @return NetworkingV1PrivateLinkAccessList
+//
+//	@return NetworkingV1PrivateLinkAccessList
 func (a *PrivateLinkAccessesNetworkingV1ApiService) ListNetworkingV1PrivateLinkAccessesExecute(r ApiListNetworkingV1PrivateLinkAccessesRequest) (NetworkingV1PrivateLinkAccessList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -728,38 +730,14 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) ListNetworkingV1PrivateLinkA
 	}
 
 	if r.specDisplayName != nil {
-		t := *r.specDisplayName
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("spec.display_name", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("spec.display_name", parameterToString(t, "multi"))
-		}
+		localVarQueryParams.Add("spec.display_name", parameterToString(*r.specDisplayName, ""))
 	}
 	if r.statusPhase != nil {
-		t := *r.statusPhase
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("status.phase", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("status.phase", parameterToString(t, "multi"))
-		}
+		localVarQueryParams.Add("status.phase", parameterToString(*r.statusPhase, ""))
 	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.specNetwork != nil {
-		t := *r.specNetwork
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("spec.network", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("spec.network", parameterToString(t, "multi"))
-		}
+		localVarQueryParams.Add("spec.network", parameterToString(*r.specNetwork, ""))
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
@@ -883,11 +861,9 @@ UpdateNetworkingV1PrivateLinkAccess Update a Private Link Access
 
 Make a request to update a private link access.
 
-
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the private link access.
- @return ApiUpdateNetworkingV1PrivateLinkAccessRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the private link access.
+	@return ApiUpdateNetworkingV1PrivateLinkAccessRequest
 */
 func (a *PrivateLinkAccessesNetworkingV1ApiService) UpdateNetworkingV1PrivateLinkAccess(ctx _context.Context, id string) ApiUpdateNetworkingV1PrivateLinkAccessRequest {
 	return ApiUpdateNetworkingV1PrivateLinkAccessRequest{
@@ -898,7 +874,8 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) UpdateNetworkingV1PrivateLin
 }
 
 // Execute executes the request
-//  @return NetworkingV1PrivateLinkAccess
+//
+//	@return NetworkingV1PrivateLinkAccess
 func (a *PrivateLinkAccessesNetworkingV1ApiService) UpdateNetworkingV1PrivateLinkAccessExecute(r ApiUpdateNetworkingV1PrivateLinkAccessRequest) (NetworkingV1PrivateLinkAccess, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch

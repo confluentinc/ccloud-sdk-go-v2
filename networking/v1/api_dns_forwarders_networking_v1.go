@@ -42,14 +42,14 @@ var (
 type DnsForwardersNetworkingV1Api interface {
 
 	/*
-			CreateNetworkingV1DnsForwarder Create a Dns Forwarder
+		CreateNetworkingV1DnsForwarder Create a Dns Forwarder
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Make a request to create a dns forwarder.
+	Make a request to create a dns forwarder.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiCreateNetworkingV1DnsForwarderRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateNetworkingV1DnsForwarderRequest
 	*/
 	CreateNetworkingV1DnsForwarder(ctx _context.Context) ApiCreateNetworkingV1DnsForwarderRequest
 
@@ -58,15 +58,15 @@ type DnsForwardersNetworkingV1Api interface {
 	CreateNetworkingV1DnsForwarderExecute(r ApiCreateNetworkingV1DnsForwarderRequest) (NetworkingV1DnsForwarder, *_nethttp.Response, error)
 
 	/*
-			DeleteNetworkingV1DnsForwarder Delete a Dns Forwarder
+		DeleteNetworkingV1DnsForwarder Delete a Dns Forwarder
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Make a request to delete a dns forwarder.
+	Make a request to delete a dns forwarder.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the dns forwarder.
-			 @return ApiDeleteNetworkingV1DnsForwarderRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the dns forwarder.
+		 @return ApiDeleteNetworkingV1DnsForwarderRequest
 	*/
 	DeleteNetworkingV1DnsForwarder(ctx _context.Context, id string) ApiDeleteNetworkingV1DnsForwarderRequest
 
@@ -74,15 +74,15 @@ type DnsForwardersNetworkingV1Api interface {
 	DeleteNetworkingV1DnsForwarderExecute(r ApiDeleteNetworkingV1DnsForwarderRequest) (*_nethttp.Response, error)
 
 	/*
-			GetNetworkingV1DnsForwarder Read a Dns Forwarder
+		GetNetworkingV1DnsForwarder Read a Dns Forwarder
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Make a request to read a dns forwarder.
+	Make a request to read a dns forwarder.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the dns forwarder.
-			 @return ApiGetNetworkingV1DnsForwarderRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the dns forwarder.
+		 @return ApiGetNetworkingV1DnsForwarderRequest
 	*/
 	GetNetworkingV1DnsForwarder(ctx _context.Context, id string) ApiGetNetworkingV1DnsForwarderRequest
 
@@ -91,14 +91,14 @@ type DnsForwardersNetworkingV1Api interface {
 	GetNetworkingV1DnsForwarderExecute(r ApiGetNetworkingV1DnsForwarderRequest) (NetworkingV1DnsForwarder, *_nethttp.Response, error)
 
 	/*
-			ListNetworkingV1DnsForwarders List of Dns Forwarders
+		ListNetworkingV1DnsForwarders List of Dns Forwarders
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Retrieve a sorted, filtered, paginated list of all dns forwarders.
+	Retrieve a sorted, filtered, paginated list of all dns forwarders.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiListNetworkingV1DnsForwardersRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListNetworkingV1DnsForwardersRequest
 	*/
 	ListNetworkingV1DnsForwarders(ctx _context.Context) ApiListNetworkingV1DnsForwardersRequest
 
@@ -107,17 +107,17 @@ type DnsForwardersNetworkingV1Api interface {
 	ListNetworkingV1DnsForwardersExecute(r ApiListNetworkingV1DnsForwardersRequest) (NetworkingV1DnsForwarderList, *_nethttp.Response, error)
 
 	/*
-			UpdateNetworkingV1DnsForwarder Update a Dns Forwarder
+		UpdateNetworkingV1DnsForwarder Update a Dns Forwarder
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Make a request to update a dns forwarder.
+	Make a request to update a dns forwarder.
 
 
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the dns forwarder.
-			 @return ApiUpdateNetworkingV1DnsForwarderRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the dns forwarder.
+		 @return ApiUpdateNetworkingV1DnsForwarderRequest
 	*/
 	UpdateNetworkingV1DnsForwarder(ctx _context.Context, id string) ApiUpdateNetworkingV1DnsForwarderRequest
 
@@ -151,8 +151,8 @@ CreateNetworkingV1DnsForwarder Create a Dns Forwarder
 
 Make a request to create a dns forwarder.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateNetworkingV1DnsForwarderRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateNetworkingV1DnsForwarderRequest
 */
 func (a *DnsForwardersNetworkingV1ApiService) CreateNetworkingV1DnsForwarder(ctx _context.Context) ApiCreateNetworkingV1DnsForwarderRequest {
 	return ApiCreateNetworkingV1DnsForwarderRequest{
@@ -162,7 +162,8 @@ func (a *DnsForwardersNetworkingV1ApiService) CreateNetworkingV1DnsForwarder(ctx
 }
 
 // Execute executes the request
-//  @return NetworkingV1DnsForwarder
+//
+//	@return NetworkingV1DnsForwarder
 func (a *DnsForwardersNetworkingV1ApiService) CreateNetworkingV1DnsForwarderExecute(r ApiCreateNetworkingV1DnsForwarderRequest) (NetworkingV1DnsForwarder, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -333,9 +334,9 @@ DeleteNetworkingV1DnsForwarder Delete a Dns Forwarder
 
 Make a request to delete a dns forwarder.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the dns forwarder.
- @return ApiDeleteNetworkingV1DnsForwarderRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the dns forwarder.
+	@return ApiDeleteNetworkingV1DnsForwarderRequest
 */
 func (a *DnsForwardersNetworkingV1ApiService) DeleteNetworkingV1DnsForwarder(ctx _context.Context, id string) ApiDeleteNetworkingV1DnsForwarderRequest {
 	return ApiDeleteNetworkingV1DnsForwarderRequest{
@@ -489,9 +490,9 @@ GetNetworkingV1DnsForwarder Read a Dns Forwarder
 
 Make a request to read a dns forwarder.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the dns forwarder.
- @return ApiGetNetworkingV1DnsForwarderRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the dns forwarder.
+	@return ApiGetNetworkingV1DnsForwarderRequest
 */
 func (a *DnsForwardersNetworkingV1ApiService) GetNetworkingV1DnsForwarder(ctx _context.Context, id string) ApiGetNetworkingV1DnsForwarderRequest {
 	return ApiGetNetworkingV1DnsForwarderRequest{
@@ -502,7 +503,8 @@ func (a *DnsForwardersNetworkingV1ApiService) GetNetworkingV1DnsForwarder(ctx _c
 }
 
 // Execute executes the request
-//  @return NetworkingV1DnsForwarder
+//
+//	@return NetworkingV1DnsForwarder
 func (a *DnsForwardersNetworkingV1ApiService) GetNetworkingV1DnsForwarderExecute(r ApiGetNetworkingV1DnsForwarderRequest) (NetworkingV1DnsForwarder, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -669,8 +671,8 @@ ListNetworkingV1DnsForwarders List of Dns Forwarders
 
 Retrieve a sorted, filtered, paginated list of all dns forwarders.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListNetworkingV1DnsForwardersRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListNetworkingV1DnsForwardersRequest
 */
 func (a *DnsForwardersNetworkingV1ApiService) ListNetworkingV1DnsForwarders(ctx _context.Context) ApiListNetworkingV1DnsForwardersRequest {
 	return ApiListNetworkingV1DnsForwardersRequest{
@@ -680,7 +682,8 @@ func (a *DnsForwardersNetworkingV1ApiService) ListNetworkingV1DnsForwarders(ctx 
 }
 
 // Execute executes the request
-//  @return NetworkingV1DnsForwarderList
+//
+//	@return NetworkingV1DnsForwarderList
 func (a *DnsForwardersNetworkingV1ApiService) ListNetworkingV1DnsForwardersExecute(r ApiListNetworkingV1DnsForwardersRequest) (NetworkingV1DnsForwarderList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -828,11 +831,9 @@ UpdateNetworkingV1DnsForwarder Update a Dns Forwarder
 
 Make a request to update a dns forwarder.
 
-
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the dns forwarder.
- @return ApiUpdateNetworkingV1DnsForwarderRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the dns forwarder.
+	@return ApiUpdateNetworkingV1DnsForwarderRequest
 */
 func (a *DnsForwardersNetworkingV1ApiService) UpdateNetworkingV1DnsForwarder(ctx _context.Context, id string) ApiUpdateNetworkingV1DnsForwarderRequest {
 	return ApiUpdateNetworkingV1DnsForwarderRequest{
@@ -843,7 +844,8 @@ func (a *DnsForwardersNetworkingV1ApiService) UpdateNetworkingV1DnsForwarder(ctx
 }
 
 // Execute executes the request
-//  @return NetworkingV1DnsForwarder
+//
+//	@return NetworkingV1DnsForwarder
 func (a *DnsForwardersNetworkingV1ApiService) UpdateNetworkingV1DnsForwarderExecute(r ApiUpdateNetworkingV1DnsForwarderRequest) (NetworkingV1DnsForwarder, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch

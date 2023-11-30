@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Phase** | **string** | The lifecyle phase of the network:  PROVISIONING:  network provisioning is in progress;  READY:  network is ready;  FAILED: provisioning failed;  DEPROVISIONING: network deprovisioning is in progress;  | [readonly] 
-**SupportedConnectionTypes** | [**Set**](set.md) |  | [readonly] 
-**ActiveConnectionTypes** | [**Set**](set.md) |  | [readonly] 
+**SupportedConnectionTypes** | [**NetworkingV1SupportedConnectionTypes**](networking.v1.SupportedConnectionTypes.md) |  | [readonly] 
+**ActiveConnectionTypes** | [**NetworkingV1ConnectionTypes**](networking.v1.ConnectionTypes.md) |  | [readonly] 
 **ErrorCode** | Pointer to **string** | Error code if network is in a failed state. May be used for programmatic error checking. | [optional] [readonly] 
 **ErrorMessage** | Pointer to **string** | Displayable error message if network is in a failed state | [optional] [readonly] 
 **DnsDomain** | Pointer to **string** | The root DNS domain for the network if applicable. Present on networks that support PrivateLink. | [optional] [readonly] 
@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewNetworkingV1NetworkStatus
 
-`func NewNetworkingV1NetworkStatus(phase string, supportedConnectionTypes Set, activeConnectionTypes Set, ) *NetworkingV1NetworkStatus`
+`func NewNetworkingV1NetworkStatus(phase string, supportedConnectionTypes NetworkingV1SupportedConnectionTypes, activeConnectionTypes NetworkingV1ConnectionTypes, ) *NetworkingV1NetworkStatus`
 
 NewNetworkingV1NetworkStatus instantiates a new NetworkingV1NetworkStatus object
 This constructor will assign default values to properties that have it defined,
@@ -55,40 +55,40 @@ SetPhase sets Phase field to given value.
 
 ### GetSupportedConnectionTypes
 
-`func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypes() Set`
+`func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypes() NetworkingV1SupportedConnectionTypes`
 
 GetSupportedConnectionTypes returns the SupportedConnectionTypes field if non-nil, zero value otherwise.
 
 ### GetSupportedConnectionTypesOk
 
-`func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypesOk() (*Set, bool)`
+`func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypesOk() (*NetworkingV1SupportedConnectionTypes, bool)`
 
 GetSupportedConnectionTypesOk returns a tuple with the SupportedConnectionTypes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSupportedConnectionTypes
 
-`func (o *NetworkingV1NetworkStatus) SetSupportedConnectionTypes(v Set)`
+`func (o *NetworkingV1NetworkStatus) SetSupportedConnectionTypes(v NetworkingV1SupportedConnectionTypes)`
 
 SetSupportedConnectionTypes sets SupportedConnectionTypes field to given value.
 
 
 ### GetActiveConnectionTypes
 
-`func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypes() Set`
+`func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypes() NetworkingV1ConnectionTypes`
 
 GetActiveConnectionTypes returns the ActiveConnectionTypes field if non-nil, zero value otherwise.
 
 ### GetActiveConnectionTypesOk
 
-`func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypesOk() (*Set, bool)`
+`func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypesOk() (*NetworkingV1ConnectionTypes, bool)`
 
 GetActiveConnectionTypesOk returns a tuple with the ActiveConnectionTypes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetActiveConnectionTypes
 
-`func (o *NetworkingV1NetworkStatus) SetActiveConnectionTypes(v Set)`
+`func (o *NetworkingV1NetworkStatus) SetActiveConnectionTypes(v NetworkingV1ConnectionTypes)`
 
 SetActiveConnectionTypes sets ActiveConnectionTypes field to given value.
 

@@ -31,7 +31,6 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
-	"reflect"
 	"strings"
 )
 
@@ -43,14 +42,14 @@ var (
 type PeeringsNetworkingV1Api interface {
 
 	/*
-			CreateNetworkingV1Peering Create a Peering
+		CreateNetworkingV1Peering Create a Peering
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to create a peering.
+	Make a request to create a peering.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiCreateNetworkingV1PeeringRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateNetworkingV1PeeringRequest
 	*/
 	CreateNetworkingV1Peering(ctx _context.Context) ApiCreateNetworkingV1PeeringRequest
 
@@ -59,15 +58,15 @@ type PeeringsNetworkingV1Api interface {
 	CreateNetworkingV1PeeringExecute(r ApiCreateNetworkingV1PeeringRequest) (NetworkingV1Peering, *_nethttp.Response, error)
 
 	/*
-			DeleteNetworkingV1Peering Delete a Peering
+		DeleteNetworkingV1Peering Delete a Peering
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to delete a peering.
+	Make a request to delete a peering.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the peering.
-			 @return ApiDeleteNetworkingV1PeeringRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the peering.
+		 @return ApiDeleteNetworkingV1PeeringRequest
 	*/
 	DeleteNetworkingV1Peering(ctx _context.Context, id string) ApiDeleteNetworkingV1PeeringRequest
 
@@ -75,15 +74,15 @@ type PeeringsNetworkingV1Api interface {
 	DeleteNetworkingV1PeeringExecute(r ApiDeleteNetworkingV1PeeringRequest) (*_nethttp.Response, error)
 
 	/*
-			GetNetworkingV1Peering Read a Peering
+		GetNetworkingV1Peering Read a Peering
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to read a peering.
+	Make a request to read a peering.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the peering.
-			 @return ApiGetNetworkingV1PeeringRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the peering.
+		 @return ApiGetNetworkingV1PeeringRequest
 	*/
 	GetNetworkingV1Peering(ctx _context.Context, id string) ApiGetNetworkingV1PeeringRequest
 
@@ -92,14 +91,14 @@ type PeeringsNetworkingV1Api interface {
 	GetNetworkingV1PeeringExecute(r ApiGetNetworkingV1PeeringRequest) (NetworkingV1Peering, *_nethttp.Response, error)
 
 	/*
-			ListNetworkingV1Peerings List of Peerings
+		ListNetworkingV1Peerings List of Peerings
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Retrieve a sorted, filtered, paginated list of all peerings.
+	Retrieve a sorted, filtered, paginated list of all peerings.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiListNetworkingV1PeeringsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListNetworkingV1PeeringsRequest
 	*/
 	ListNetworkingV1Peerings(ctx _context.Context) ApiListNetworkingV1PeeringsRequest
 
@@ -108,17 +107,17 @@ type PeeringsNetworkingV1Api interface {
 	ListNetworkingV1PeeringsExecute(r ApiListNetworkingV1PeeringsRequest) (NetworkingV1PeeringList, *_nethttp.Response, error)
 
 	/*
-			UpdateNetworkingV1Peering Update a Peering
+		UpdateNetworkingV1Peering Update a Peering
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to update a peering.
+	Make a request to update a peering.
 
 
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the peering.
-			 @return ApiUpdateNetworkingV1PeeringRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the peering.
+		 @return ApiUpdateNetworkingV1PeeringRequest
 	*/
 	UpdateNetworkingV1Peering(ctx _context.Context, id string) ApiUpdateNetworkingV1PeeringRequest
 
@@ -152,8 +151,8 @@ CreateNetworkingV1Peering Create a Peering
 
 Make a request to create a peering.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateNetworkingV1PeeringRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateNetworkingV1PeeringRequest
 */
 func (a *PeeringsNetworkingV1ApiService) CreateNetworkingV1Peering(ctx _context.Context) ApiCreateNetworkingV1PeeringRequest {
 	return ApiCreateNetworkingV1PeeringRequest{
@@ -163,7 +162,8 @@ func (a *PeeringsNetworkingV1ApiService) CreateNetworkingV1Peering(ctx _context.
 }
 
 // Execute executes the request
-//  @return NetworkingV1Peering
+//
+//	@return NetworkingV1Peering
 func (a *PeeringsNetworkingV1ApiService) CreateNetworkingV1PeeringExecute(r ApiCreateNetworkingV1PeeringRequest) (NetworkingV1Peering, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -334,9 +334,9 @@ DeleteNetworkingV1Peering Delete a Peering
 
 Make a request to delete a peering.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the peering.
- @return ApiDeleteNetworkingV1PeeringRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the peering.
+	@return ApiDeleteNetworkingV1PeeringRequest
 */
 func (a *PeeringsNetworkingV1ApiService) DeleteNetworkingV1Peering(ctx _context.Context, id string) ApiDeleteNetworkingV1PeeringRequest {
 	return ApiDeleteNetworkingV1PeeringRequest{
@@ -490,9 +490,9 @@ GetNetworkingV1Peering Read a Peering
 
 Make a request to read a peering.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the peering.
- @return ApiGetNetworkingV1PeeringRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the peering.
+	@return ApiGetNetworkingV1PeeringRequest
 */
 func (a *PeeringsNetworkingV1ApiService) GetNetworkingV1Peering(ctx _context.Context, id string) ApiGetNetworkingV1PeeringRequest {
 	return ApiGetNetworkingV1PeeringRequest{
@@ -503,7 +503,8 @@ func (a *PeeringsNetworkingV1ApiService) GetNetworkingV1Peering(ctx _context.Con
 }
 
 // Execute executes the request
-//  @return NetworkingV1Peering
+//
+//	@return NetworkingV1Peering
 func (a *PeeringsNetworkingV1ApiService) GetNetworkingV1PeeringExecute(r ApiGetNetworkingV1PeeringRequest) (NetworkingV1Peering, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -637,9 +638,9 @@ type ApiListNetworkingV1PeeringsRequest struct {
 	ctx             _context.Context
 	ApiService      PeeringsNetworkingV1Api
 	environment     *string
-	specDisplayName *[]string
-	statusPhase     *[]string
-	specNetwork     *[]string
+	specDisplayName *MultipleSearchFilter
+	statusPhase     *MultipleSearchFilter
+	specNetwork     *MultipleSearchFilter
 	pageSize        *int32
 	pageToken       *string
 }
@@ -651,19 +652,19 @@ func (r ApiListNetworkingV1PeeringsRequest) Environment(environment string) ApiL
 }
 
 // Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PeeringsRequest) SpecDisplayName(specDisplayName []string) ApiListNetworkingV1PeeringsRequest {
+func (r ApiListNetworkingV1PeeringsRequest) SpecDisplayName(specDisplayName MultipleSearchFilter) ApiListNetworkingV1PeeringsRequest {
 	r.specDisplayName = &specDisplayName
 	return r
 }
 
 // Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PeeringsRequest) StatusPhase(statusPhase []string) ApiListNetworkingV1PeeringsRequest {
+func (r ApiListNetworkingV1PeeringsRequest) StatusPhase(statusPhase MultipleSearchFilter) ApiListNetworkingV1PeeringsRequest {
 	r.statusPhase = &statusPhase
 	return r
 }
 
 // Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PeeringsRequest) SpecNetwork(specNetwork []string) ApiListNetworkingV1PeeringsRequest {
+func (r ApiListNetworkingV1PeeringsRequest) SpecNetwork(specNetwork MultipleSearchFilter) ApiListNetworkingV1PeeringsRequest {
 	r.specNetwork = &specNetwork
 	return r
 }
@@ -691,8 +692,8 @@ ListNetworkingV1Peerings List of Peerings
 
 Retrieve a sorted, filtered, paginated list of all peerings.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListNetworkingV1PeeringsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListNetworkingV1PeeringsRequest
 */
 func (a *PeeringsNetworkingV1ApiService) ListNetworkingV1Peerings(ctx _context.Context) ApiListNetworkingV1PeeringsRequest {
 	return ApiListNetworkingV1PeeringsRequest{
@@ -702,7 +703,8 @@ func (a *PeeringsNetworkingV1ApiService) ListNetworkingV1Peerings(ctx _context.C
 }
 
 // Execute executes the request
-//  @return NetworkingV1PeeringList
+//
+//	@return NetworkingV1PeeringList
 func (a *PeeringsNetworkingV1ApiService) ListNetworkingV1PeeringsExecute(r ApiListNetworkingV1PeeringsRequest) (NetworkingV1PeeringList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -728,38 +730,14 @@ func (a *PeeringsNetworkingV1ApiService) ListNetworkingV1PeeringsExecute(r ApiLi
 	}
 
 	if r.specDisplayName != nil {
-		t := *r.specDisplayName
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("spec.display_name", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("spec.display_name", parameterToString(t, "multi"))
-		}
+		localVarQueryParams.Add("spec.display_name", parameterToString(*r.specDisplayName, ""))
 	}
 	if r.statusPhase != nil {
-		t := *r.statusPhase
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("status.phase", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("status.phase", parameterToString(t, "multi"))
-		}
+		localVarQueryParams.Add("status.phase", parameterToString(*r.statusPhase, ""))
 	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.specNetwork != nil {
-		t := *r.specNetwork
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("spec.network", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("spec.network", parameterToString(t, "multi"))
-		}
+		localVarQueryParams.Add("spec.network", parameterToString(*r.specNetwork, ""))
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
@@ -883,11 +861,9 @@ UpdateNetworkingV1Peering Update a Peering
 
 Make a request to update a peering.
 
-
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the peering.
- @return ApiUpdateNetworkingV1PeeringRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the peering.
+	@return ApiUpdateNetworkingV1PeeringRequest
 */
 func (a *PeeringsNetworkingV1ApiService) UpdateNetworkingV1Peering(ctx _context.Context, id string) ApiUpdateNetworkingV1PeeringRequest {
 	return ApiUpdateNetworkingV1PeeringRequest{
@@ -898,7 +874,8 @@ func (a *PeeringsNetworkingV1ApiService) UpdateNetworkingV1Peering(ctx _context.
 }
 
 // Execute executes the request
-//  @return NetworkingV1Peering
+//
+//	@return NetworkingV1Peering
 func (a *PeeringsNetworkingV1ApiService) UpdateNetworkingV1PeeringExecute(r ApiUpdateNetworkingV1PeeringRequest) (NetworkingV1Peering, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
