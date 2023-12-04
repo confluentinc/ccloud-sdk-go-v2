@@ -9,7 +9,6 @@ import (
 /*
 	Adding this type as an alternate to the following types when not available:
 	- networking/v1/model_networking_v1_connection_types.go
-	- networking/v1/model_networking_v1_zones_info.go
 	- networking/v1/model_networking_v1_supported_connection_types.go
 	- networking/v1/model_multiple_search_filter.go
 */

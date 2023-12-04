@@ -48,7 +48,7 @@ type NetworkingV1NetworkSpec struct {
 	// The 3 availability zones for this network. They can optionally be specified for AWS networks used with PrivateLink, for GCP networks used with Private Service Connect, and for AWS and GCP networks used with Peering. Otherwise, they are automatically chosen by Confluent Cloud.  On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3)  On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c).  On Azure, zones are Confluent-chosen names (e.g. 1, 2, 3) since Azure does not  have universal zone identifiers.
 	Zones *[]string `json:"zones,omitempty"`
 	// Each item represents information related to a single zone.  Note - The attribute is in a [Limited Availability lifecycle stage](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
-	ZonesInfo *Set `json:"zones_info,omitempty"`
+	ZonesInfo *NetworkingV1ZonesInfo `json:"zones_info,omitempty"`
 	// DNS config only applies to PrivateLink network connection type.  When resolution is CHASED_PRIVATE, clusters in this network require both public and private DNS  to resolve cluster endpoints.  When resolution is PRIVATE, clusters in this network only require private DNS  to resolve cluster endpoints.
 	DnsConfig *NetworkingV1DnsConfig `json:"dns_config,omitempty"`
 	// The reserved CIDR config is used only by AWS networks with connection_types = Vpc_Peering or Transit_Gateway  An IPv4 [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)   reserved for Confluent Cloud Network. Must be \\24.   If not specified, Confluent Cloud Network uses 172.20.255.0/24  Note - The attribute is in a [Limited Availability lifecycle stage](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
@@ -267,9 +267,9 @@ func (o *NetworkingV1NetworkSpec) SetZones(v []string) {
 }
 
 // GetZonesInfo returns the ZonesInfo field value if set, zero value otherwise.
-func (o *NetworkingV1NetworkSpec) GetZonesInfo() Set {
+func (o *NetworkingV1NetworkSpec) GetZonesInfo() NetworkingV1ZonesInfo {
 	if o == nil || o.ZonesInfo == nil {
-		var ret Set
+		var ret NetworkingV1ZonesInfo
 		return ret
 	}
 	return *o.ZonesInfo
@@ -277,7 +277,7 @@ func (o *NetworkingV1NetworkSpec) GetZonesInfo() Set {
 
 // GetZonesInfoOk returns a tuple with the ZonesInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1NetworkSpec) GetZonesInfoOk() (*Set, bool) {
+func (o *NetworkingV1NetworkSpec) GetZonesInfoOk() (*NetworkingV1ZonesInfo, bool) {
 	if o == nil || o.ZonesInfo == nil {
 		return nil, false
 	}
@@ -293,8 +293,8 @@ func (o *NetworkingV1NetworkSpec) HasZonesInfo() bool {
 	return false
 }
 
-// SetZonesInfo gets a reference to the given Set and assigns it to the ZonesInfo field.
-func (o *NetworkingV1NetworkSpec) SetZonesInfo(v Set) {
+// SetZonesInfo gets a reference to the given NetworkingV1ZonesInfo and assigns it to the ZonesInfo field.
+func (o *NetworkingV1NetworkSpec) SetZonesInfo(v NetworkingV1ZonesInfo) {
 	o.ZonesInfo = &v
 }
 
