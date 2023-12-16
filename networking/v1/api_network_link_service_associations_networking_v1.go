@@ -79,9 +79,23 @@ type NetworkLinkServiceAssociationsNetworkingV1Api interface {
 type NetworkLinkServiceAssociationsNetworkingV1ApiService service
 
 type ApiGetNetworkingV1NetworkLinkServiceAssociationRequest struct {
-	ctx        _context.Context
-	ApiService NetworkLinkServiceAssociationsNetworkingV1Api
-	id         string
+	ctx                    _context.Context
+	ApiService             NetworkLinkServiceAssociationsNetworkingV1Api
+	specNetworkLinkService *string
+	environment            *string
+	id                     string
+}
+
+// Scope the operation to the given spec.network_link_service.
+func (r ApiGetNetworkingV1NetworkLinkServiceAssociationRequest) SpecNetworkLinkService(specNetworkLinkService string) ApiGetNetworkingV1NetworkLinkServiceAssociationRequest {
+	r.specNetworkLinkService = &specNetworkLinkService
+	return r
+}
+
+// Scope the operation to the given environment.
+func (r ApiGetNetworkingV1NetworkLinkServiceAssociationRequest) Environment(environment string) ApiGetNetworkingV1NetworkLinkServiceAssociationRequest {
+	r.environment = &environment
+	return r
 }
 
 func (r ApiGetNetworkingV1NetworkLinkServiceAssociationRequest) Execute() (NetworkingV1NetworkLinkServiceAssociation, *_nethttp.Response, error) {
@@ -95,9 +109,9 @@ GetNetworkingV1NetworkLinkServiceAssociation Read a Network Link Service Associa
 
 Make a request to read a network link service association.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the network link service association.
-	@return ApiGetNetworkingV1NetworkLinkServiceAssociationRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the network link service association.
+ @return ApiGetNetworkingV1NetworkLinkServiceAssociationRequest
 */
 func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) GetNetworkingV1NetworkLinkServiceAssociation(ctx _context.Context, id string) ApiGetNetworkingV1NetworkLinkServiceAssociationRequest {
 	return ApiGetNetworkingV1NetworkLinkServiceAssociationRequest{
@@ -108,8 +122,7 @@ func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) GetNetworkingV1Ne
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1NetworkLinkServiceAssociation
+//  @return NetworkingV1NetworkLinkServiceAssociation
 func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) GetNetworkingV1NetworkLinkServiceAssociationExecute(r ApiGetNetworkingV1NetworkLinkServiceAssociationRequest) (NetworkingV1NetworkLinkServiceAssociation, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -131,7 +144,15 @@ func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) GetNetworkingV1Ne
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.specNetworkLinkService == nil {
+		return localVarReturnValue, nil, reportError("specNetworkLinkService is required and must be specified")
+	}
+	if r.environment == nil {
+		return localVarReturnValue, nil, reportError("environment is required and must be specified")
+	}
 
+	localVarQueryParams.Add("spec.network_link_service", parameterToString(*r.specNetworkLinkService, ""))
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -286,8 +307,8 @@ ListNetworkingV1NetworkLinkServiceAssociations List of Network Link Service Asso
 
 Retrieve a sorted, filtered, paginated list of all network link service associations.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListNetworkingV1NetworkLinkServiceAssociationsRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListNetworkingV1NetworkLinkServiceAssociationsRequest
 */
 func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) ListNetworkingV1NetworkLinkServiceAssociations(ctx _context.Context) ApiListNetworkingV1NetworkLinkServiceAssociationsRequest {
 	return ApiListNetworkingV1NetworkLinkServiceAssociationsRequest{
@@ -297,8 +318,7 @@ func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) ListNetworkingV1N
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1NetworkLinkServiceAssociationList
+//  @return NetworkingV1NetworkLinkServiceAssociationList
 func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) ListNetworkingV1NetworkLinkServiceAssociationsExecute(r ApiListNetworkingV1NetworkLinkServiceAssociationsRequest) (NetworkingV1NetworkLinkServiceAssociationList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet

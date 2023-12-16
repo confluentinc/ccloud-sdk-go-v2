@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## GetNetworkingV1NetworkLinkServiceAssociation
 
-> NetworkingV1NetworkLinkServiceAssociation GetNetworkingV1NetworkLinkServiceAssociation(ctx, id).Execute()
+> NetworkingV1NetworkLinkServiceAssociation GetNetworkingV1NetworkLinkServiceAssociation(ctx, id).SpecNetworkLinkService(specNetworkLinkService).Environment(environment).Execute()
 
 Read a Network Link Service Association
 
@@ -30,11 +30,13 @@ import (
 )
 
 func main() {
+    specNetworkLinkService := "nls-abcde" // string | Scope the operation to the given spec.network_link_service.
+    environment := "env-00000" // string | Scope the operation to the given environment.
     id := "id_example" // string | The unique identifier for the network link service association.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.NetworkLinkServiceAssociationsNetworkingV1Api.GetNetworkingV1NetworkLinkServiceAssociation(context.Background(), id).Execute()
+    resp, r, err := api_client.NetworkLinkServiceAssociationsNetworkingV1Api.GetNetworkingV1NetworkLinkServiceAssociation(context.Background(), id).SpecNetworkLinkService(specNetworkLinkService).Environment(environment).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `NetworkLinkServiceAssociationsNetworkingV1Api.GetNetworkingV1NetworkLinkServiceAssociation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -59,6 +61,8 @@ Other parameters are passed through a pointer to a apiGetNetworkingV1NetworkLink
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **specNetworkLinkService** | **string** | Scope the operation to the given spec.network_link_service. | 
+ **environment** | **string** | Scope the operation to the given environment. | 
 
 
 ### Return type

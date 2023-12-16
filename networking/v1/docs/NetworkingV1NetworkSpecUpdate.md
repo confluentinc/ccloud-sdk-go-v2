@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the network | [optional] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
-**Gateway** | Pointer to [**NullableTypedEnvScopedObjectReference**](TypedEnvScopedObjectReference.md) | The gateway associated with this object. The gateway can be one of networking.v1.Gateway. May be &#x60;null&#x60; or omitted if not associated with a gateway. | [optional] 
+**Gateway** | Pointer to [**NullableTypedEnvScopedObjectReference**](TypedEnvScopedObjectReference.md) | The gateway associated with this object. The gateway can be one of networking.v1.Gateway. May be &#x60;null&#x60; or omitted if not associated with a gateway. | [optional] [readonly] 
 
 ## Methods
 

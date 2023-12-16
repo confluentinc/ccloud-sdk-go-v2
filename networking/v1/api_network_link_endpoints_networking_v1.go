@@ -151,8 +151,8 @@ CreateNetworkingV1NetworkLinkEndpoint Create a Network Link Endpoint
 
 Make a request to create a network link endpoint.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateNetworkingV1NetworkLinkEndpointRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateNetworkingV1NetworkLinkEndpointRequest
 */
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) CreateNetworkingV1NetworkLinkEndpoint(ctx _context.Context) ApiCreateNetworkingV1NetworkLinkEndpointRequest {
 	return ApiCreateNetworkingV1NetworkLinkEndpointRequest{
@@ -162,8 +162,7 @@ func (a *NetworkLinkEndpointsNetworkingV1ApiService) CreateNetworkingV1NetworkLi
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1NetworkLinkEndpoint
+//  @return NetworkingV1NetworkLinkEndpoint
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) CreateNetworkingV1NetworkLinkEndpointExecute(r ApiCreateNetworkingV1NetworkLinkEndpointRequest) (NetworkingV1NetworkLinkEndpoint, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -334,9 +333,9 @@ DeleteNetworkingV1NetworkLinkEndpoint Delete a Network Link Endpoint
 
 Make a request to delete a network link endpoint.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the network link endpoint.
-	@return ApiDeleteNetworkingV1NetworkLinkEndpointRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the network link endpoint.
+ @return ApiDeleteNetworkingV1NetworkLinkEndpointRequest
 */
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) DeleteNetworkingV1NetworkLinkEndpoint(ctx _context.Context, id string) ApiDeleteNetworkingV1NetworkLinkEndpointRequest {
 	return ApiDeleteNetworkingV1NetworkLinkEndpointRequest{
@@ -490,9 +489,9 @@ GetNetworkingV1NetworkLinkEndpoint Read a Network Link Endpoint
 
 Make a request to read a network link endpoint.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the network link endpoint.
-	@return ApiGetNetworkingV1NetworkLinkEndpointRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the network link endpoint.
+ @return ApiGetNetworkingV1NetworkLinkEndpointRequest
 */
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) GetNetworkingV1NetworkLinkEndpoint(ctx _context.Context, id string) ApiGetNetworkingV1NetworkLinkEndpointRequest {
 	return ApiGetNetworkingV1NetworkLinkEndpointRequest{
@@ -503,8 +502,7 @@ func (a *NetworkLinkEndpointsNetworkingV1ApiService) GetNetworkingV1NetworkLinkE
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1NetworkLinkEndpoint
+//  @return NetworkingV1NetworkLinkEndpoint
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) GetNetworkingV1NetworkLinkEndpointExecute(r ApiGetNetworkingV1NetworkLinkEndpointRequest) (NetworkingV1NetworkLinkEndpoint, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -699,8 +697,8 @@ ListNetworkingV1NetworkLinkEndpoints List of Network Link Endpoints
 
 Retrieve a sorted, filtered, paginated list of all network link endpoints.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListNetworkingV1NetworkLinkEndpointsRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListNetworkingV1NetworkLinkEndpointsRequest
 */
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) ListNetworkingV1NetworkLinkEndpoints(ctx _context.Context) ApiListNetworkingV1NetworkLinkEndpointsRequest {
 	return ApiListNetworkingV1NetworkLinkEndpointsRequest{
@@ -710,8 +708,7 @@ func (a *NetworkLinkEndpointsNetworkingV1ApiService) ListNetworkingV1NetworkLink
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1NetworkLinkEndpointList
+//  @return NetworkingV1NetworkLinkEndpointList
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) ListNetworkingV1NetworkLinkEndpointsExecute(r ApiListNetworkingV1NetworkLinkEndpointsRequest) (NetworkingV1NetworkLinkEndpointList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -871,9 +868,11 @@ UpdateNetworkingV1NetworkLinkEndpoint Update a Network Link Endpoint
 
 Make a request to update a network link endpoint.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the network link endpoint.
-	@return ApiUpdateNetworkingV1NetworkLinkEndpointRequest
+
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the network link endpoint.
+ @return ApiUpdateNetworkingV1NetworkLinkEndpointRequest
 */
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) UpdateNetworkingV1NetworkLinkEndpoint(ctx _context.Context, id string) ApiUpdateNetworkingV1NetworkLinkEndpointRequest {
 	return ApiUpdateNetworkingV1NetworkLinkEndpointRequest{
@@ -884,8 +883,7 @@ func (a *NetworkLinkEndpointsNetworkingV1ApiService) UpdateNetworkingV1NetworkLi
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1NetworkLinkEndpoint
+//  @return NetworkingV1NetworkLinkEndpoint
 func (a *NetworkLinkEndpointsNetworkingV1ApiService) UpdateNetworkingV1NetworkLinkEndpointExecute(r ApiUpdateNetworkingV1NetworkLinkEndpointRequest) (NetworkingV1NetworkLinkEndpoint, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch

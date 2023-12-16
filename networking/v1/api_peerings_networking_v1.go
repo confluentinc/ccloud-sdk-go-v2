@@ -151,8 +151,8 @@ CreateNetworkingV1Peering Create a Peering
 
 Make a request to create a peering.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateNetworkingV1PeeringRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateNetworkingV1PeeringRequest
 */
 func (a *PeeringsNetworkingV1ApiService) CreateNetworkingV1Peering(ctx _context.Context) ApiCreateNetworkingV1PeeringRequest {
 	return ApiCreateNetworkingV1PeeringRequest{
@@ -162,8 +162,7 @@ func (a *PeeringsNetworkingV1ApiService) CreateNetworkingV1Peering(ctx _context.
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1Peering
+//  @return NetworkingV1Peering
 func (a *PeeringsNetworkingV1ApiService) CreateNetworkingV1PeeringExecute(r ApiCreateNetworkingV1PeeringRequest) (NetworkingV1Peering, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -334,9 +333,9 @@ DeleteNetworkingV1Peering Delete a Peering
 
 Make a request to delete a peering.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the peering.
-	@return ApiDeleteNetworkingV1PeeringRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the peering.
+ @return ApiDeleteNetworkingV1PeeringRequest
 */
 func (a *PeeringsNetworkingV1ApiService) DeleteNetworkingV1Peering(ctx _context.Context, id string) ApiDeleteNetworkingV1PeeringRequest {
 	return ApiDeleteNetworkingV1PeeringRequest{
@@ -490,9 +489,9 @@ GetNetworkingV1Peering Read a Peering
 
 Make a request to read a peering.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the peering.
-	@return ApiGetNetworkingV1PeeringRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the peering.
+ @return ApiGetNetworkingV1PeeringRequest
 */
 func (a *PeeringsNetworkingV1ApiService) GetNetworkingV1Peering(ctx _context.Context, id string) ApiGetNetworkingV1PeeringRequest {
 	return ApiGetNetworkingV1PeeringRequest{
@@ -503,8 +502,7 @@ func (a *PeeringsNetworkingV1ApiService) GetNetworkingV1Peering(ctx _context.Con
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1Peering
+//  @return NetworkingV1Peering
 func (a *PeeringsNetworkingV1ApiService) GetNetworkingV1PeeringExecute(r ApiGetNetworkingV1PeeringRequest) (NetworkingV1Peering, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -692,8 +690,8 @@ ListNetworkingV1Peerings List of Peerings
 
 Retrieve a sorted, filtered, paginated list of all peerings.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListNetworkingV1PeeringsRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListNetworkingV1PeeringsRequest
 */
 func (a *PeeringsNetworkingV1ApiService) ListNetworkingV1Peerings(ctx _context.Context) ApiListNetworkingV1PeeringsRequest {
 	return ApiListNetworkingV1PeeringsRequest{
@@ -703,8 +701,7 @@ func (a *PeeringsNetworkingV1ApiService) ListNetworkingV1Peerings(ctx _context.C
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1PeeringList
+//  @return NetworkingV1PeeringList
 func (a *PeeringsNetworkingV1ApiService) ListNetworkingV1PeeringsExecute(r ApiListNetworkingV1PeeringsRequest) (NetworkingV1PeeringList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -861,9 +858,11 @@ UpdateNetworkingV1Peering Update a Peering
 
 Make a request to update a peering.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the peering.
-	@return ApiUpdateNetworkingV1PeeringRequest
+
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the peering.
+ @return ApiUpdateNetworkingV1PeeringRequest
 */
 func (a *PeeringsNetworkingV1ApiService) UpdateNetworkingV1Peering(ctx _context.Context, id string) ApiUpdateNetworkingV1PeeringRequest {
 	return ApiUpdateNetworkingV1PeeringRequest{
@@ -874,8 +873,7 @@ func (a *PeeringsNetworkingV1ApiService) UpdateNetworkingV1Peering(ctx _context.
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1Peering
+//  @return NetworkingV1Peering
 func (a *PeeringsNetworkingV1ApiService) UpdateNetworkingV1PeeringExecute(r ApiUpdateNetworkingV1PeeringRequest) (NetworkingV1Peering, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch

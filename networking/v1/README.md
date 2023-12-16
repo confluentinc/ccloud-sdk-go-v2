@@ -79,11 +79,6 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*DnsForwardersNetworkingV1Api* | [**CreateNetworkingV1DnsForwarder**](docs/DnsForwardersNetworkingV1Api.md#createnetworkingv1dnsforwarder) | **Post** /networking/v1/dns-forwarders | Create a Dns Forwarder
-*DnsForwardersNetworkingV1Api* | [**DeleteNetworkingV1DnsForwarder**](docs/DnsForwardersNetworkingV1Api.md#deletenetworkingv1dnsforwarder) | **Delete** /networking/v1/dns-forwarders/{id} | Delete a Dns Forwarder
-*DnsForwardersNetworkingV1Api* | [**GetNetworkingV1DnsForwarder**](docs/DnsForwardersNetworkingV1Api.md#getnetworkingv1dnsforwarder) | **Get** /networking/v1/dns-forwarders/{id} | Read a Dns Forwarder
-*DnsForwardersNetworkingV1Api* | [**ListNetworkingV1DnsForwarders**](docs/DnsForwardersNetworkingV1Api.md#listnetworkingv1dnsforwarders) | **Get** /networking/v1/dns-forwarders | List of Dns Forwarders
-*DnsForwardersNetworkingV1Api* | [**UpdateNetworkingV1DnsForwarder**](docs/DnsForwardersNetworkingV1Api.md#updatenetworkingv1dnsforwarder) | **Patch** /networking/v1/dns-forwarders/{id} | Update a Dns Forwarder
 *GatewaysNetworkingV1Api* | [**GetNetworkingV1Gateway**](docs/GatewaysNetworkingV1Api.md#getnetworkingv1gateway) | **Get** /networking/v1/gateways/{id} | Read a Gateway
 *GatewaysNetworkingV1Api* | [**ListNetworkingV1Gateways**](docs/GatewaysNetworkingV1Api.md#listnetworkingv1gateways) | **Get** /networking/v1/gateways | List of Gateways
 *NetworkLinkEndpointsNetworkingV1Api* | [**CreateNetworkingV1NetworkLinkEndpoint**](docs/NetworkLinkEndpointsNetworkingV1Api.md#createnetworkingv1networklinkendpoint) | **Post** /networking/v1/network-link-endpoints | Create a Network Link Endpoint
@@ -139,14 +134,6 @@ Class | Method | HTTP request | Description
  - [NetworkingV1AzurePrivateLinkAccess](docs/NetworkingV1AzurePrivateLinkAccess.md)
  - [NetworkingV1ConnectionTypes](docs/NetworkingV1ConnectionTypes.md)
  - [NetworkingV1DnsConfig](docs/NetworkingV1DnsConfig.md)
- - [NetworkingV1DnsForwarder](docs/NetworkingV1DnsForwarder.md)
- - [NetworkingV1DnsForwarderList](docs/NetworkingV1DnsForwarderList.md)
- - [NetworkingV1DnsForwarderSpec](docs/NetworkingV1DnsForwarderSpec.md)
- - [NetworkingV1DnsForwarderSpecConfigOneOf](docs/NetworkingV1DnsForwarderSpecConfigOneOf.md)
- - [NetworkingV1DnsForwarderSpecUpdate](docs/NetworkingV1DnsForwarderSpecUpdate.md)
- - [NetworkingV1DnsForwarderStatus](docs/NetworkingV1DnsForwarderStatus.md)
- - [NetworkingV1DnsForwarderUpdate](docs/NetworkingV1DnsForwarderUpdate.md)
- - [NetworkingV1ForwardViaIp](docs/NetworkingV1ForwardViaIp.md)
  - [NetworkingV1Gateway](docs/NetworkingV1Gateway.md)
  - [NetworkingV1GatewayList](docs/NetworkingV1GatewayList.md)
  - [NetworkingV1GatewaySpec](docs/NetworkingV1GatewaySpec.md)

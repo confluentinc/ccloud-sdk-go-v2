@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **DnsConfig** | Pointer to [**NetworkingV1DnsConfig**](networking.v1.DnsConfig.md) | DNS config only applies to PrivateLink network connection type.  When resolution is CHASED_PRIVATE, clusters in this network require both public and private DNS  to resolve cluster endpoints.  When resolution is PRIVATE, clusters in this network only require private DNS  to resolve cluster endpoints.  | [optional] 
 **ReservedCidr** | Pointer to **string** | The reserved CIDR config is used only by AWS networks with connection_types &#x3D; Vpc_Peering or Transit_Gateway  An IPv4 [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)   reserved for Confluent Cloud Network. Must be \\24.   If not specified, Confluent Cloud Network uses 172.20.255.0/24  Note - The attribute is in a [Limited Availability lifecycle stage](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)  | [optional] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
-**Gateway** | Pointer to [**NullableTypedEnvScopedObjectReference**](TypedEnvScopedObjectReference.md) | The gateway associated with this object. The gateway can be one of networking.v1.Gateway. May be &#x60;null&#x60; or omitted if not associated with a gateway. | [optional] 
+**Gateway** | Pointer to [**NullableTypedEnvScopedObjectReference**](TypedEnvScopedObjectReference.md) | The gateway associated with this object. The gateway can be one of networking.v1.Gateway. May be &#x60;null&#x60; or omitted if not associated with a gateway. | [optional] [readonly] 
 
 ## Methods
 
