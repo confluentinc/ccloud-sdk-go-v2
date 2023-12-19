@@ -49,6 +49,7 @@ type ListLinksResponseData struct {
 	LinkError        *string        `json:"link_error,omitempty"`
 	LinkErrorMessage NullableString `json:"link_error_message,omitempty"`
 	LinkState        *string        `json:"link_state,omitempty"`
+	Tasks            []LinkTask     `json:"tasks,omitempty"`
 }
 
 // NewListLinksResponseData instantiates a new ListLinksResponseData object
@@ -464,6 +465,39 @@ func (o *ListLinksResponseData) SetLinkState(v string) {
 	o.LinkState = &v
 }
 
+// GetTasks returns the Tasks field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ListLinksResponseData) GetTasks() []LinkTask {
+	if o == nil {
+		var ret []LinkTask
+		return ret
+	}
+	return o.Tasks
+}
+
+// GetTasksOk returns a tuple with the Tasks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ListLinksResponseData) GetTasksOk() (*[]LinkTask, bool) {
+	if o == nil || o.Tasks == nil {
+		return nil, false
+	}
+	return &o.Tasks, true
+}
+
+// HasTasks returns a boolean if a field has been set.
+func (o *ListLinksResponseData) HasTasks() bool {
+	if o != nil && o.Tasks != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTasks gets a reference to the given []LinkTask and assigns it to the Tasks field.
+func (o *ListLinksResponseData) SetTasks(v []LinkTask) {
+	o.Tasks = v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *ListLinksResponseData) Redact() {
 	o.recurseRedact(&o.Kind)
@@ -478,6 +512,7 @@ func (o *ListLinksResponseData) Redact() {
 	o.recurseRedact(o.LinkError)
 	o.recurseRedact(o.LinkErrorMessage)
 	o.recurseRedact(o.LinkState)
+	o.recurseRedact(o.Tasks)
 }
 
 func (o *ListLinksResponseData) recurseRedact(v interface{}) {
@@ -547,6 +582,9 @@ func (o ListLinksResponseData) MarshalJSON() ([]byte, error) {
 	}
 	if o.LinkState != nil {
 		toSerialize["link_state"] = o.LinkState
+	}
+	if o.Tasks != nil {
+		toSerialize["tasks"] = o.Tasks
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

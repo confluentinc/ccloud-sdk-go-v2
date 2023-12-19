@@ -322,7 +322,7 @@ type ClusterLinkingV3Api interface {
 	UpdateKafkaMirrorTopicsResumeExecute(r ApiUpdateKafkaMirrorTopicsResumeRequest) (AlterMirrorStatusResponseDataList, *_nethttp.Response, error)
 
 	/*
-		UpdateKafkaMirrorTopicsReverseAndPauseMirror Reverse the local mirror topic and pause the remote mirror topic
+		UpdateKafkaMirrorTopicsReverseAndPauseMirror Reverse the local mirror topic and Pause the remote mirror topic
 
 		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
@@ -978,10 +978,17 @@ func (a *ClusterLinkingV3ApiService) DeleteKafkaLinkConfigExecute(r ApiDeleteKaf
 }
 
 type ApiGetKafkaLinkRequest struct {
-	ctx        _context.Context
-	ApiService ClusterLinkingV3Api
-	clusterId  string
-	linkName   string
+	ctx          _context.Context
+	ApiService   ClusterLinkingV3Api
+	clusterId    string
+	linkName     string
+	includeTasks *bool
+}
+
+// Whether to include cluster linking tasks in the response. Default: false
+func (r ApiGetKafkaLinkRequest) IncludeTasks(includeTasks bool) ApiGetKafkaLinkRequest {
+	r.includeTasks = &includeTasks
+	return r
 }
 
 func (r ApiGetKafkaLinkRequest) Execute() (ListLinksResponseData, *_nethttp.Response, error) {
@@ -1034,6 +1041,9 @@ func (a *ClusterLinkingV3ApiService) GetKafkaLinkExecute(r ApiGetKafkaLinkReques
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.includeTasks != nil {
+		localVarQueryParams.Add("include_tasks", parameterToString(*r.includeTasks, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1890,11 +1900,18 @@ func (a *ClusterLinkingV3ApiService) ListKafkaMirrorTopicsUnderLinkExecute(r Api
 }
 
 type ApiReadKafkaMirrorTopicRequest struct {
-	ctx             _context.Context
-	ApiService      ClusterLinkingV3Api
-	clusterId       string
-	linkName        string
-	mirrorTopicName string
+	ctx                          _context.Context
+	ApiService                   ClusterLinkingV3Api
+	clusterId                    string
+	linkName                     string
+	mirrorTopicName              string
+	includeStateTransitionErrors *bool
+}
+
+// Whether to include mirror state transition errors in the response. Default: false
+func (r ApiReadKafkaMirrorTopicRequest) IncludeStateTransitionErrors(includeStateTransitionErrors bool) ApiReadKafkaMirrorTopicRequest {
+	r.includeStateTransitionErrors = &includeStateTransitionErrors
+	return r
 }
 
 func (r ApiReadKafkaMirrorTopicRequest) Execute() (ListMirrorTopicsResponseData, *_nethttp.Response, error) {
@@ -1948,6 +1965,9 @@ func (a *ClusterLinkingV3ApiService) ReadKafkaMirrorTopicExecute(r ApiReadKafkaM
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.includeStateTransitionErrors != nil {
+		localVarQueryParams.Add("include_state_transition_errors", parameterToString(*r.includeStateTransitionErrors, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3041,7 +3061,7 @@ func (r ApiUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequest) Execute() (Alter
 }
 
 /*
-UpdateKafkaMirrorTopicsReverseAndPauseMirror Reverse the local mirror topic and pause the remote mirror topic
+UpdateKafkaMirrorTopicsReverseAndPauseMirror Reverse the local mirror topic and Pause the remote mirror topic
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 

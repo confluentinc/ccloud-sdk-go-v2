@@ -8101,6 +8101,16 @@ paths:
         schema:
           type: string
         style: simple
+      - description: 'Whether to include cluster linking tasks in the response. Default:
+          false'
+        example: false
+        explode: true
+        in: query
+        name: include_tasks
+        required: false
+        schema:
+          type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -10302,6 +10312,16 @@ paths:
         schema:
           type: string
         style: simple
+      - description: 'Whether to include mirror state transition errors in the response.
+          Default: false'
+        example: false
+        explode: true
+        in: query
+        name: include_state_transition_errors
+        required: false
+        schema:
+          type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -11881,7 +11901,7 @@ paths:
       security:
       - resource-api-key: []
       - external-access-token: []
-      summary: Reverse the local mirror topic and pause the remote mirror topic
+      summary: Reverse the local mirror topic and Pause the remote mirror topic
       tags:
       - Cluster Linking (v3)
       x-codeSamples:
@@ -12198,6 +12218,28 @@ components:
       explode: true
       in: query
       name: validate_link
+      required: false
+      schema:
+        type: boolean
+      style: form
+    IncludeTasks:
+      description: 'Whether to include cluster linking tasks in the response. Default:
+        false'
+      example: false
+      explode: true
+      in: query
+      name: include_tasks
+      required: false
+      schema:
+        type: boolean
+      style: form
+    IncludeStateTransitionErrors:
+      description: 'Whether to include mirror state transition errors in the response.
+        Default: false'
+      example: false
+      explode: true
+      in: query
+      name: include_state_transition_errors
       required: false
       schema:
         type: boolean
@@ -15557,6 +15599,68 @@ components:
       - INVALID_BOOTSTRAP_INTERNAL_ENDPOINT_ERROR
       - BOOTSTRAP_TCP_CONNECTION_FAILED_ERROR
       - TIMEOUT_ERROR
+    LinkTask:
+      properties:
+        task_name:
+          type: string
+        state:
+          type: string
+          x-extensible-enum:
+          - UNKNOWN
+          - ACTIVE
+          - IN_ERROR
+          - NOT_CONFIGURED
+          - LINK_FAILED
+          - LINK_UNAVAILABLE
+          - LINK_PAUSED
+        errors:
+          items:
+            $ref: '#/components/schemas/LinkTaskError'
+          type: array
+      required:
+      - errors
+      - state
+      - task_name
+      type: object
+    LinkTaskError:
+      properties:
+        error_code:
+          type: string
+        error_message:
+          type: string
+      required:
+      - error_code
+      - error_message
+      type: object
+    LinkTaskState:
+      type: string
+      x-extensible-enum:
+      - UNKNOWN
+      - ACTIVE
+      - IN_ERROR
+      - NOT_CONFIGURED
+      - LINK_FAILED
+      - LINK_UNAVAILABLE
+      - LINK_PAUSED
+    LinkTaskErrorCode:
+      type: string
+      x-extensible-enum:
+      - UNKNOWN
+      - NO_ERROR
+      - INTERNAL_ERROR
+      - AUTHENTICATION_ERROR
+      - BROKER_AUTHENTICATION_ERROR
+      - MISCONFIGURATION_ERROR
+      - REMOTE_LINK_NOT_FOUND_ERROR
+      - LINK_NOT_FOUND_ERROR
+      - CONSUMER_GROUP_IN_USE_ERROR
+      - AUTHORIZATION_ERROR
+      - BROKER_AUTHORIZATION_ERROR
+      - SECURITY_DISABLED_ERROR
+      - TOPIC_EXISTS_ERROR
+      - POLICY_VIOLATION_ERROR
+      - LINK_COORDINATOR_NOT_ENABLED_ERROR
+      - ACL_LIMIT_EXCEEDED
     ListLinksResponseData:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -16729,6 +16833,11 @@ components:
           - UNAVAILABLE
           - PAUSED
           - UNKNOWN
+        tasks:
+          items:
+            $ref: '#/components/schemas/LinkTask'
+          nullable: true
+          type: array
       required:
       - cluster_link_id
       - link_name
@@ -16802,6 +16911,10 @@ components:
         state_time_ms:
           format: int64
           type: integer
+        mirror_state_transition_errors:
+          items:
+            $ref: '#/components/schemas/LinkTaskError'
+          type: array
       required:
       - link_name
       - mirror_lags
