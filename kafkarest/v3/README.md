@@ -100,7 +100,7 @@ Class | Method | HTTP request | Description
 *ClusterLinkingV3Api* | [**UpdateKafkaMirrorTopicsPause**](docs/ClusterLinkingV3Api.md#updatekafkamirrortopicspause) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:pause | Pause the mirror topics
 *ClusterLinkingV3Api* | [**UpdateKafkaMirrorTopicsPromote**](docs/ClusterLinkingV3Api.md#updatekafkamirrortopicspromote) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:promote | Promote the mirror topics
 *ClusterLinkingV3Api* | [**UpdateKafkaMirrorTopicsResume**](docs/ClusterLinkingV3Api.md#updatekafkamirrortopicsresume) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:resume | Resume the mirror topics
-*ClusterLinkingV3Api* | [**UpdateKafkaMirrorTopicsReverseAndPauseMirror**](docs/ClusterLinkingV3Api.md#updatekafkamirrortopicsreverseandpausemirror) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:reverse-and-pause-mirror | Reverse the local mirror topic and pause the remote mirror topic
+*ClusterLinkingV3Api* | [**UpdateKafkaMirrorTopicsReverseAndPauseMirror**](docs/ClusterLinkingV3Api.md#updatekafkamirrortopicsreverseandpausemirror) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:reverse-and-pause-mirror | Reverse the local mirror topic and Pause the remote mirror topic
 *ClusterLinkingV3Api* | [**UpdateKafkaMirrorTopicsReverseAndStartMirror**](docs/ClusterLinkingV3Api.md#updatekafkamirrortopicsreverseandstartmirror) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:reverse-and-start-mirror | Reverse the local mirror topic and start the remote mirror topic
 *ClusterV3Api* | [**GetKafkaCluster**](docs/ClusterV3Api.md#getkafkacluster) | **Get** /kafka/v3/clusters/{cluster_id} | Get Cluster
 *ConfigsV3Api* | [**DeleteKafkaClusterConfig**](docs/ConfigsV3Api.md#deletekafkaclusterconfig) | **Delete** /kafka/v3/clusters/{cluster_id}/broker-configs/{name} | Reset Dynamic Broker Config
@@ -216,6 +216,8 @@ Class | Method | HTTP request | Description
  - [CreateTopicRequestDataConfigs](docs/CreateTopicRequestDataConfigs.md)
  - [Error](docs/Error.md)
  - [InlineResponse200](docs/InlineResponse200.md)
+ - [LinkTask](docs/LinkTask.md)
+ - [LinkTaskError](docs/LinkTaskError.md)
  - [ListLinkConfigsResponseData](docs/ListLinkConfigsResponseData.md)
  - [ListLinkConfigsResponseDataAllOf](docs/ListLinkConfigsResponseDataAllOf.md)
  - [ListLinkConfigsResponseDataList](docs/ListLinkConfigsResponseDataList.md)

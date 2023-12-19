@@ -47,6 +47,7 @@ type ListLinksResponseDataAllOf struct {
 	LinkError        *string        `json:"link_error,omitempty"`
 	LinkErrorMessage NullableString `json:"link_error_message,omitempty"`
 	LinkState        *string        `json:"link_state,omitempty"`
+	Tasks            []LinkTask     `json:"tasks,omitempty"`
 }
 
 // NewListLinksResponseDataAllOf instantiates a new ListLinksResponseDataAllOf object
@@ -412,6 +413,39 @@ func (o *ListLinksResponseDataAllOf) SetLinkState(v string) {
 	o.LinkState = &v
 }
 
+// GetTasks returns the Tasks field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ListLinksResponseDataAllOf) GetTasks() []LinkTask {
+	if o == nil {
+		var ret []LinkTask
+		return ret
+	}
+	return o.Tasks
+}
+
+// GetTasksOk returns a tuple with the Tasks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ListLinksResponseDataAllOf) GetTasksOk() (*[]LinkTask, bool) {
+	if o == nil || o.Tasks == nil {
+		return nil, false
+	}
+	return &o.Tasks, true
+}
+
+// HasTasks returns a boolean if a field has been set.
+func (o *ListLinksResponseDataAllOf) HasTasks() bool {
+	if o != nil && o.Tasks != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTasks gets a reference to the given []LinkTask and assigns it to the Tasks field.
+func (o *ListLinksResponseDataAllOf) SetTasks(v []LinkTask) {
+	o.Tasks = v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *ListLinksResponseDataAllOf) Redact() {
 	o.recurseRedact(o.SourceClusterId)
@@ -424,6 +458,7 @@ func (o *ListLinksResponseDataAllOf) Redact() {
 	o.recurseRedact(o.LinkError)
 	o.recurseRedact(o.LinkErrorMessage)
 	o.recurseRedact(o.LinkState)
+	o.recurseRedact(o.Tasks)
 }
 
 func (o *ListLinksResponseDataAllOf) recurseRedact(v interface{}) {
@@ -487,6 +522,9 @@ func (o ListLinksResponseDataAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.LinkState != nil {
 		toSerialize["link_state"] = o.LinkState
+	}
+	if o.Tasks != nil {
+		toSerialize["tasks"] = o.Tasks
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

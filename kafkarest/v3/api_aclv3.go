@@ -42,15 +42,15 @@ var (
 type ACLV3Api interface {
 
 	/*
-			BatchCreateKafkaAcls Batch Create ACLs
+		BatchCreateKafkaAcls Batch Create ACLs
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Create ACLs.
+	Create ACLs.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @return ApiBatchCreateKafkaAclsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @return ApiBatchCreateKafkaAclsRequest
 	*/
 	BatchCreateKafkaAcls(ctx _context.Context, clusterId string) ApiBatchCreateKafkaAclsRequest
 
@@ -58,15 +58,15 @@ type ACLV3Api interface {
 	BatchCreateKafkaAclsExecute(r ApiBatchCreateKafkaAclsRequest) (*_nethttp.Response, error)
 
 	/*
-			CreateKafkaAcls Create an ACL
+		CreateKafkaAcls Create an ACL
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Create an ACL.
+	Create an ACL.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @return ApiCreateKafkaAclsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @return ApiCreateKafkaAclsRequest
 	*/
 	CreateKafkaAcls(ctx _context.Context, clusterId string) ApiCreateKafkaAclsRequest
 
@@ -74,15 +74,15 @@ type ACLV3Api interface {
 	CreateKafkaAclsExecute(r ApiCreateKafkaAclsRequest) (*_nethttp.Response, error)
 
 	/*
-			DeleteKafkaAcls Delete ACLs
+		DeleteKafkaAcls Delete ACLs
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Delete the ACLs that match the search criteria.
+	Delete the ACLs that match the search criteria.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @return ApiDeleteKafkaAclsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @return ApiDeleteKafkaAclsRequest
 	*/
 	DeleteKafkaAcls(ctx _context.Context, clusterId string) ApiDeleteKafkaAclsRequest
 
@@ -91,15 +91,15 @@ type ACLV3Api interface {
 	DeleteKafkaAclsExecute(r ApiDeleteKafkaAclsRequest) (InlineResponse200, *_nethttp.Response, error)
 
 	/*
-			GetKafkaAcls List ACLs
+		GetKafkaAcls List ACLs
 
-			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Return a list of ACLs that match the search criteria.
+	Return a list of ACLs that match the search criteria.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param clusterId The Kafka cluster ID.
-			 @return ApiGetKafkaAclsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param clusterId The Kafka cluster ID.
+		 @return ApiGetKafkaAclsRequest
 	*/
 	GetKafkaAcls(ctx _context.Context, clusterId string) ApiGetKafkaAclsRequest
 

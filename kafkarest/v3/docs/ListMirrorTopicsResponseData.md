@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **MirrorLags** | [**MirrorLags**](MirrorLags.md) |  | 
 **MirrorStatus** | [**MirrorTopicStatus**](MirrorTopicStatus.md) |  | 
 **StateTimeMs** | **int64** |  | 
+**MirrorStateTransitionErrors** | Pointer to [**[]LinkTaskError**](LinkTaskError.md) |  | [optional] 
 
 ## Methods
 
@@ -212,6 +213,31 @@ and a boolean to check if the value has been set.
 
 SetStateTimeMs sets StateTimeMs field to given value.
 
+
+### GetMirrorStateTransitionErrors
+
+`func (o *ListMirrorTopicsResponseData) GetMirrorStateTransitionErrors() []LinkTaskError`
+
+GetMirrorStateTransitionErrors returns the MirrorStateTransitionErrors field if non-nil, zero value otherwise.
+
+### GetMirrorStateTransitionErrorsOk
+
+`func (o *ListMirrorTopicsResponseData) GetMirrorStateTransitionErrorsOk() (*[]LinkTaskError, bool)`
+
+GetMirrorStateTransitionErrorsOk returns a tuple with the MirrorStateTransitionErrors field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMirrorStateTransitionErrors
+
+`func (o *ListMirrorTopicsResponseData) SetMirrorStateTransitionErrors(v []LinkTaskError)`
+
+SetMirrorStateTransitionErrors sets MirrorStateTransitionErrors field to given value.
+
+### HasMirrorStateTransitionErrors
+
+`func (o *ListMirrorTopicsResponseData) HasMirrorStateTransitionErrors() bool`
+
+HasMirrorStateTransitionErrors returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

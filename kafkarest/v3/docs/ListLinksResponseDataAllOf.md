@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **LinkError** | Pointer to **string** |  | [optional] 
 **LinkErrorMessage** | Pointer to **NullableString** |  | [optional] 
 **LinkState** | Pointer to **string** |  | [optional] 
+**Tasks** | Pointer to [**[]LinkTask**](LinkTask.md) |  | [optional] 
 
 ## Methods
 
@@ -309,6 +310,41 @@ SetLinkState sets LinkState field to given value.
 
 HasLinkState returns a boolean if a field has been set.
 
+### GetTasks
+
+`func (o *ListLinksResponseDataAllOf) GetTasks() []LinkTask`
+
+GetTasks returns the Tasks field if non-nil, zero value otherwise.
+
+### GetTasksOk
+
+`func (o *ListLinksResponseDataAllOf) GetTasksOk() (*[]LinkTask, bool)`
+
+GetTasksOk returns a tuple with the Tasks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTasks
+
+`func (o *ListLinksResponseDataAllOf) SetTasks(v []LinkTask)`
+
+SetTasks sets Tasks field to given value.
+
+### HasTasks
+
+`func (o *ListLinksResponseDataAllOf) HasTasks() bool`
+
+HasTasks returns a boolean if a field has been set.
+
+### SetTasksNil
+
+`func (o *ListLinksResponseDataAllOf) SetTasksNil(b bool)`
+
+ SetTasksNil sets the value for Tasks to be an explicit nil
+
+### UnsetTasks
+`func (o *ListLinksResponseDataAllOf) UnsetTasks()`
+
+UnsetTasks ensures that no value is present for Tasks, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

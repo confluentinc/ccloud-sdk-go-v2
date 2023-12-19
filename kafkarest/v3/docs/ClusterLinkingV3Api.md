@@ -21,7 +21,7 @@ Method | HTTP request | Description
 [**UpdateKafkaMirrorTopicsPause**](ClusterLinkingV3Api.md#UpdateKafkaMirrorTopicsPause) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:pause | Pause the mirror topics
 [**UpdateKafkaMirrorTopicsPromote**](ClusterLinkingV3Api.md#UpdateKafkaMirrorTopicsPromote) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:promote | Promote the mirror topics
 [**UpdateKafkaMirrorTopicsResume**](ClusterLinkingV3Api.md#UpdateKafkaMirrorTopicsResume) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:resume | Resume the mirror topics
-[**UpdateKafkaMirrorTopicsReverseAndPauseMirror**](ClusterLinkingV3Api.md#UpdateKafkaMirrorTopicsReverseAndPauseMirror) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:reverse-and-pause-mirror | Reverse the local mirror topic and pause the remote mirror topic
+[**UpdateKafkaMirrorTopicsReverseAndPauseMirror**](ClusterLinkingV3Api.md#UpdateKafkaMirrorTopicsReverseAndPauseMirror) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:reverse-and-pause-mirror | Reverse the local mirror topic and Pause the remote mirror topic
 [**UpdateKafkaMirrorTopicsReverseAndStartMirror**](ClusterLinkingV3Api.md#UpdateKafkaMirrorTopicsReverseAndStartMirror) | **Post** /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:reverse-and-start-mirror | Reverse the local mirror topic and start the remote mirror topic
 
 
@@ -326,7 +326,7 @@ Name | Type | Description  | Notes
 
 ## GetKafkaLink
 
-> ListLinksResponseData GetKafkaLink(ctx, clusterId, linkName).Execute()
+> ListLinksResponseData GetKafkaLink(ctx, clusterId, linkName).IncludeTasks(includeTasks).Execute()
 
 Describe the cluster link
 
@@ -347,10 +347,11 @@ import (
 func main() {
     clusterId := "cluster-1" // string | The Kafka cluster ID.
     linkName := "link-sb1" // string | The link name
+    includeTasks := false // bool | Whether to include cluster linking tasks in the response. Default: false (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClusterLinkingV3Api.GetKafkaLink(context.Background(), clusterId, linkName).Execute()
+    resp, r, err := api_client.ClusterLinkingV3Api.GetKafkaLink(context.Background(), clusterId, linkName).IncludeTasks(includeTasks).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.GetKafkaLink``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -378,6 +379,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **includeTasks** | **bool** | Whether to include cluster linking tasks in the response. Default: false | 
 
 ### Return type
 
@@ -765,7 +767,7 @@ Name | Type | Description  | Notes
 
 ## ReadKafkaMirrorTopic
 
-> ListMirrorTopicsResponseData ReadKafkaMirrorTopic(ctx, clusterId, linkName, mirrorTopicName).Execute()
+> ListMirrorTopicsResponseData ReadKafkaMirrorTopic(ctx, clusterId, linkName, mirrorTopicName).IncludeStateTransitionErrors(includeStateTransitionErrors).Execute()
 
 Describe the mirror topic
 
@@ -787,10 +789,11 @@ func main() {
     clusterId := "cluster-1" // string | The Kafka cluster ID.
     linkName := "link-sb1" // string | The link name
     mirrorTopicName := "topic-1" // string | Cluster Linking mirror topic name
+    includeStateTransitionErrors := false // bool | Whether to include mirror state transition errors in the response. Default: false (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClusterLinkingV3Api.ReadKafkaMirrorTopic(context.Background(), clusterId, linkName, mirrorTopicName).Execute()
+    resp, r, err := api_client.ClusterLinkingV3Api.ReadKafkaMirrorTopic(context.Background(), clusterId, linkName, mirrorTopicName).IncludeStateTransitionErrors(includeStateTransitionErrors).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.ReadKafkaMirrorTopic``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -820,6 +823,7 @@ Name | Type | Description  | Notes
 
 
 
+ **includeStateTransitionErrors** | **bool** | Whether to include mirror state transition errors in the response. Default: false | 
 
 ### Return type
 
@@ -1302,7 +1306,7 @@ Name | Type | Description  | Notes
 
 > AlterMirrorStatusResponseDataList UpdateKafkaMirrorTopicsReverseAndPauseMirror(ctx, clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
 
-Reverse the local mirror topic and pause the remote mirror topic
+Reverse the local mirror topic and Pause the remote mirror topic
 
 
 
