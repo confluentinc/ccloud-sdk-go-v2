@@ -36,7 +36,7 @@ import (
 
 // NetworkingV1DnsForwarderStatus The status of the Dns Forwarder
 type NetworkingV1DnsForwarderStatus struct {
-	// The lifecycle phase of the dns forwarder:    PROVISIONING: dns forwarder provisioning is in progress;    READY: dns forwarder is ready;    FAILED: dns forwarder is in a failed state;    DEPROVISIONING: dns forwarder deprovisioning is in progress; 
+	// The lifecycle phase of the dns forwarder:    PROVISIONING: dns forwarder provisioning is in progress;    READY: dns forwarder is ready;    FAILED: dns forwarder is in a failed state;    DEPROVISIONING: dns forwarder deprovisioning is in progress;
 	Phase string `json:"phase,omitempty"`
 	// Error code if dns forwarder is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`
@@ -75,7 +75,7 @@ func (o *NetworkingV1DnsForwarderStatus) GetPhase() string {
 // GetPhaseOk returns a tuple with the Phase field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1DnsForwarderStatus) GetPhaseOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Phase, true
@@ -152,39 +152,39 @@ func (o *NetworkingV1DnsForwarderStatus) SetErrorMessage(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1DnsForwarderStatus) Redact() {
-    o.recurseRedact(&o.Phase)
-    o.recurseRedact(o.ErrorCode)
-    o.recurseRedact(o.ErrorMessage)
+	o.recurseRedact(&o.Phase)
+	o.recurseRedact(o.ErrorCode)
+	o.recurseRedact(o.ErrorMessage)
 }
 
 func (o *NetworkingV1DnsForwarderStatus) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o NetworkingV1DnsForwarderStatus) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1DnsForwarderStatus) MarshalJSON() ([]byte, error) {
@@ -244,5 +244,3 @@ func (v *NullableNetworkingV1DnsForwarderStatus) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

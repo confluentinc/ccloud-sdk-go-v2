@@ -275,91 +275,9 @@ paths:
       summary: List of Dns Forwarders
       tags:
       - Dns Forwarders (networking/v1)
+      x-lifecycle-stage: Early Access
+      x-self-access: false
       x-request-access-name: Networking v1
-      x-codeSamples:
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/dns-forwarders?environment=env-00000' \
-            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
-      - lang: Java
-        source: |-
-          OkHttpClient client = new OkHttpClient();
-
-          Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/dns-forwarders?environment=env-00000")
-            .get()
-            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
-            .build();
-
-          Response response = client.newCall(request).execute();
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/dns-forwarders?environment=env-00000\"\
-          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
-      - lang: Python
-        source: |-
-          import http.client
-
-          conn = http.client.HTTPSConnection("api.confluent.cloud")
-
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
-
-          conn.request("GET", "/networking/v1/dns-forwarders?environment=env-00000", headers=headers)
-
-          res = conn.getresponse()
-          data = res.read()
-
-          print(data.decode("utf-8"))
-      - lang: Node
-        source: |-
-          const http = require("https");
-
-          const options = {
-            "method": "GET",
-            "hostname": "api.confluent.cloud",
-            "port": null,
-            "path": "/networking/v1/dns-forwarders?environment=env-00000",
-            "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
-            }
-          };
-
-          const req = http.request(options, function (res) {
-            const chunks = [];
-
-            res.on("data", function (chunk) {
-              chunks.push(chunk);
-            });
-
-            res.on("end", function () {
-              const body = Buffer.concat(chunks);
-              console.log(body.toString());
-            });
-          });
-
-          req.end();
-      - lang: C
-        source: |-
-          CURL *hnd = curl_easy_init();
-
-          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/dns-forwarders?environment=env-00000");
-
-          struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
-          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
-
-          CURLcode ret = curl_easy_perform(hnd);
-      - lang: C#
-        source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/dns-forwarders?environment=env-00000");
-          var request = new RestRequest(Method.GET);
-          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          IRestResponse response = client.Execute(request);
     post:
       description: |-
         [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
@@ -680,121 +598,11 @@ paths:
       summary: Create a Dns Forwarder
       tags:
       - Dns Forwarders (networking/v1)
+      x-lifecycle-stage: Early Access
+      x-self-access: false
       x-request-access-name: Networking v1
-      x-codeSamples:
-      - lang: Shell
-        source: |-
-          curl --request POST \
-            --url https://api.confluent.cloud/networking/v1/dns-forwarders \
-            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
-            --header 'content-type: application/json' \
-            --data '{"spec":{"domains":["example.com","domainname.com"],"config":{"dns_server_ips":["10.200.0.0","10.200.0.1"]},"environment":{"id":"env-00000","environment":"string"},"gateway":{"id":"gw-00000","environment":"string"}}}'
-      - lang: Java
-        source: |-
-          OkHttpClient client = new OkHttpClient();
-
-          MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"domains\":[\"example.com\",\"domainname.com\"],\"config\":{\"dns_server_ips\":[\"10.200.0.0\",\"10.200.0.1\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"gw-00000\",\"environment\":\"string\"}}}");
-          Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/dns-forwarders")
-            .post(body)
-            .addHeader("content-type", "application/json")
-            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
-            .build();
-
-          Response response = client.newCall(request).execute();
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/dns-forwarders\"\
-          \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"domains\\\":[\\\"\
-          example.com\\\",\\\"domainname.com\\\"],\\\"config\\\":{\\\"dns_server_ips\\\
-          \":[\\\"10.200.0.0\\\",\\\"10.200.0.1\\\"]},\\\"environment\\\":{\\\"id\\\
-          \":\\\"env-00000\\\",\\\"environment\\\":\\\"string\\\"},\\\"gateway\\\"\
-          :{\\\"id\\\":\\\"gw-00000\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\
-          \n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
-      - lang: Python
-        source: |-
-          import http.client
-
-          conn = http.client.HTTPSConnection("api.confluent.cloud")
-
-          payload = "{\"spec\":{\"domains\":[\"example.com\",\"domainname.com\"],\"config\":{\"dns_server_ips\":[\"10.200.0.0\",\"10.200.0.1\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"gw-00000\",\"environment\":\"string\"}}}"
-
-          headers = {
-              'content-type': "application/json",
-              'Authorization': "Basic REPLACE_BASIC_AUTH"
-              }
-
-          conn.request("POST", "/networking/v1/dns-forwarders", payload, headers)
-
-          res = conn.getresponse()
-          data = res.read()
-
-          print(data.decode("utf-8"))
-      - lang: Node
-        source: |-
-          const http = require("https");
-
-          const options = {
-            "method": "POST",
-            "hostname": "api.confluent.cloud",
-            "port": null,
-            "path": "/networking/v1/dns-forwarders",
-            "headers": {
-              "content-type": "application/json",
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
-            }
-          };
-
-          const req = http.request(options, function (res) {
-            const chunks = [];
-
-            res.on("data", function (chunk) {
-              chunks.push(chunk);
-            });
-
-            res.on("end", function () {
-              const body = Buffer.concat(chunks);
-              console.log(body.toString());
-            });
-          });
-
-          req.write(JSON.stringify({
-            spec: {
-              domains: ['example.com', 'domainname.com'],
-              config: {dns_server_ips: ['10.200.0.0', '10.200.0.1']},
-              environment: {id: 'env-00000', environment: 'string'},
-              gateway: {id: 'gw-00000', environment: 'string'}
-            }
-          }));
-          req.end();
-      - lang: C
-        source: |-
-          CURL *hnd = curl_easy_init();
-
-          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/dns-forwarders");
-
-          struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "content-type: application/json");
-          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
-          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
-
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"domains\":[\"example.com\",\"domainname.com\"],\"config\":{\"dns_server_ips\":[\"10.200.0.0\",\"10.200.0.1\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"gw-00000\",\"environment\":\"string\"}}}");
-
-          CURLcode ret = curl_easy_perform(hnd);
-      - lang: C#
-        source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/dns-forwarders");
-          var request = new RestRequest(Method.POST);
-          request.AddHeader("content-type", "application/json");
-          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"domains\":[\"example.com\",\"domainname.com\"],\"config\":{\"dns_server_ips\":[\"10.200.0.0\",\"10.200.0.1\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"gw-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
-          IRestResponse response = client.Execute(request);
+    x-lifecycle-stage: Early Access
+    x-self-access: false
     x-request-access-name: Networking v1
   /networking/v1/dns-forwarders/{id}:
     delete:
@@ -1013,91 +821,9 @@ paths:
       summary: Delete a Dns Forwarder
       tags:
       - Dns Forwarders (networking/v1)
+      x-lifecycle-stage: Early Access
+      x-self-access: false
       x-request-access-name: Networking v1
-      x-codeSamples:
-      - lang: Shell
-        source: |-
-          curl --request DELETE \
-            --url 'https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000' \
-            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
-      - lang: Java
-        source: |-
-          OkHttpClient client = new OkHttpClient();
-
-          Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000")
-            .delete(null)
-            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
-            .build();
-
-          Response response = client.newCall(request).execute();
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000\"\
-          \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
-      - lang: Python
-        source: |-
-          import http.client
-
-          conn = http.client.HTTPSConnection("api.confluent.cloud")
-
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
-
-          conn.request("DELETE", "/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000", headers=headers)
-
-          res = conn.getresponse()
-          data = res.read()
-
-          print(data.decode("utf-8"))
-      - lang: Node
-        source: |-
-          const http = require("https");
-
-          const options = {
-            "method": "DELETE",
-            "hostname": "api.confluent.cloud",
-            "port": null,
-            "path": "/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000",
-            "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
-            }
-          };
-
-          const req = http.request(options, function (res) {
-            const chunks = [];
-
-            res.on("data", function (chunk) {
-              chunks.push(chunk);
-            });
-
-            res.on("end", function () {
-              const body = Buffer.concat(chunks);
-              console.log(body.toString());
-            });
-          });
-
-          req.end();
-      - lang: C
-        source: |-
-          CURL *hnd = curl_easy_init();
-
-          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000");
-
-          struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
-          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
-
-          CURLcode ret = curl_easy_perform(hnd);
-      - lang: C#
-        source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000");
-          var request = new RestRequest(Method.DELETE);
-          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          IRestResponse response = client.Execute(request);
     get:
       description: |-
         [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
@@ -1348,91 +1074,9 @@ paths:
       summary: Read a Dns Forwarder
       tags:
       - Dns Forwarders (networking/v1)
+      x-lifecycle-stage: Early Access
+      x-self-access: false
       x-request-access-name: Networking v1
-      x-codeSamples:
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000' \
-            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
-      - lang: Java
-        source: |-
-          OkHttpClient client = new OkHttpClient();
-
-          Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000")
-            .get()
-            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
-            .build();
-
-          Response response = client.newCall(request).execute();
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000\"\
-          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
-      - lang: Python
-        source: |-
-          import http.client
-
-          conn = http.client.HTTPSConnection("api.confluent.cloud")
-
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
-
-          conn.request("GET", "/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000", headers=headers)
-
-          res = conn.getresponse()
-          data = res.read()
-
-          print(data.decode("utf-8"))
-      - lang: Node
-        source: |-
-          const http = require("https");
-
-          const options = {
-            "method": "GET",
-            "hostname": "api.confluent.cloud",
-            "port": null,
-            "path": "/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000",
-            "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
-            }
-          };
-
-          const req = http.request(options, function (res) {
-            const chunks = [];
-
-            res.on("data", function (chunk) {
-              chunks.push(chunk);
-            });
-
-            res.on("end", function () {
-              const body = Buffer.concat(chunks);
-              console.log(body.toString());
-            });
-          });
-
-          req.end();
-      - lang: C
-        source: |-
-          CURL *hnd = curl_easy_init();
-
-          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000");
-
-          struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
-          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
-
-          CURLcode ret = curl_easy_perform(hnd);
-      - lang: C#
-        source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000");
-          var request = new RestRequest(Method.GET);
-          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          IRestResponse response = client.Execute(request);
     patch:
       description: |+
         [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
@@ -1454,7 +1098,7 @@ paths:
           application/json:
             schema:
               allOf:
-              - $ref: '#/components/schemas/networking.v1.DnsForwarderUpdate'
+              - $ref: '#/components/schemas/networking.v1.DnsForwarder'
               - properties:
                   spec:
                     properties:
@@ -1767,121 +1411,11 @@ paths:
       summary: Update a Dns Forwarder
       tags:
       - Dns Forwarders (networking/v1)
+      x-lifecycle-stage: Early Access
+      x-self-access: false
       x-request-access-name: Networking v1
-      x-codeSamples:
-      - lang: Shell
-        source: |-
-          curl --request PATCH \
-            --url https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D \
-            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
-            --header 'content-type: application/json' \
-            --data '{"spec":{"domains":["example.com","domainname.com"],"config":{"dns_server_ips":["10.200.0.0","10.200.0.1"]},"environment":{"id":"env-00000","environment":"string"},"gateway":{"id":"string","environment":"string"}}}'
-      - lang: Java
-        source: |-
-          OkHttpClient client = new OkHttpClient();
-
-          MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"domains\":[\"example.com\",\"domainname.com\"],\"config\":{\"dns_server_ips\":[\"10.200.0.0\",\"10.200.0.1\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"string\",\"environment\":\"string\"}}}");
-          Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D")
-            .patch(body)
-            .addHeader("content-type", "application/json")
-            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
-            .build();
-
-          Response response = client.newCall(request).execute();
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D\"\
-          \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"domains\\\":[\\\"\
-          example.com\\\",\\\"domainname.com\\\"],\\\"config\\\":{\\\"dns_server_ips\\\
-          \":[\\\"10.200.0.0\\\",\\\"10.200.0.1\\\"]},\\\"environment\\\":{\\\"id\\\
-          \":\\\"env-00000\\\",\\\"environment\\\":\\\"string\\\"},\\\"gateway\\\"\
-          :{\\\"id\\\":\\\"string\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\
-          \treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
-      - lang: Python
-        source: |-
-          import http.client
-
-          conn = http.client.HTTPSConnection("api.confluent.cloud")
-
-          payload = "{\"spec\":{\"domains\":[\"example.com\",\"domainname.com\"],\"config\":{\"dns_server_ips\":[\"10.200.0.0\",\"10.200.0.1\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"string\",\"environment\":\"string\"}}}"
-
-          headers = {
-              'content-type': "application/json",
-              'Authorization': "Basic REPLACE_BASIC_AUTH"
-              }
-
-          conn.request("PATCH", "/networking/v1/dns-forwarders/%7Bid%7D", payload, headers)
-
-          res = conn.getresponse()
-          data = res.read()
-
-          print(data.decode("utf-8"))
-      - lang: Node
-        source: |-
-          const http = require("https");
-
-          const options = {
-            "method": "PATCH",
-            "hostname": "api.confluent.cloud",
-            "port": null,
-            "path": "/networking/v1/dns-forwarders/%7Bid%7D",
-            "headers": {
-              "content-type": "application/json",
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
-            }
-          };
-
-          const req = http.request(options, function (res) {
-            const chunks = [];
-
-            res.on("data", function (chunk) {
-              chunks.push(chunk);
-            });
-
-            res.on("end", function () {
-              const body = Buffer.concat(chunks);
-              console.log(body.toString());
-            });
-          });
-
-          req.write(JSON.stringify({
-            spec: {
-              domains: ['example.com', 'domainname.com'],
-              config: {dns_server_ips: ['10.200.0.0', '10.200.0.1']},
-              environment: {id: 'env-00000', environment: 'string'},
-              gateway: {id: 'string', environment: 'string'}
-            }
-          }));
-          req.end();
-      - lang: C
-        source: |-
-          CURL *hnd = curl_easy_init();
-
-          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D");
-
-          struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "content-type: application/json");
-          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
-          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
-
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"domains\":[\"example.com\",\"domainname.com\"],\"config\":{\"dns_server_ips\":[\"10.200.0.0\",\"10.200.0.1\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"string\",\"environment\":\"string\"}}}");
-
-          CURLcode ret = curl_easy_perform(hnd);
-      - lang: C#
-        source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D");
-          var request = new RestRequest(Method.PATCH);
-          request.AddHeader("content-type", "application/json");
-          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"domains\":[\"example.com\",\"domainname.com\"],\"config\":{\"dns_server_ips\":[\"10.200.0.0\",\"10.200.0.1\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
-          IRestResponse response = client.Execute(request);
+    x-lifecycle-stage: Early Access
+    x-self-access: false
     x-request-access-name: Networking v1
 components:
   responses:
@@ -2208,6 +1742,11 @@ components:
     networking.v1.ForwardViaIp:
       description: DNS Forwarder Configured via DNS Server IPs.
       properties:
+        kind:
+          description: DNS Forwarder Configured via DNS Server IPs kind type.
+          enum:
+          - ForwardViaIp
+          type: string
         dns_server_ips:
           description: List of IP addresses of the DNS server
           example:
@@ -2221,6 +1760,7 @@ components:
           uniqueItems: true
       required:
       - dns_server_ips
+      - kind
       title: ForwardViaIp
       type: object
     SearchFilter:
@@ -2300,6 +1840,10 @@ components:
     networking.v1.DnsForwarderSpec:
       description: The desired state of the Dns Forwarder
       properties:
+        display_name:
+          description: The name of the DNS forwarder
+          example: prod-dnsf-1
+          type: string
         domains:
           description: List of domains for the DNS forwarder to use
           example:
@@ -2499,87 +2043,6 @@ components:
           type: string
         source:
           $ref: '#/components/schemas/Error_source'
-      type: object
-    networking.v1.DnsForwarderSpecUpdate:
-      description: The desired state of the Dns Forwarder
-      properties:
-        domains:
-          description: List of domains for the DNS forwarder to use
-          example:
-          - example.com
-          - domainname.com
-          items:
-            type: string
-          maxItems: 10
-          minItems: 0
-          type: array
-          uniqueItems: true
-        environment:
-          allOf:
-          - $ref: '#/components/schemas/ObjectReference'
-          description: The environment to which this belongs.
-        gateway:
-          allOf:
-          - $ref: '#/components/schemas/ObjectReference'
-          description: The gateway to which this belongs.
-      type: object
-      x-enable-id: true
-      x-enable-listmeta: true
-      x-enable-objectmeta: true
-    networking.v1.DnsForwarderUpdate:
-      description: |-
-        Add, remove, and update DNS forwarder for your gateway.
-
-        Related guides:
-        * [Use VPC peering connections with Confluent Cloud on AWS](https://docs.confluent.io/cloud/current/networking/peering/aws-peering.html).
-        * [Use VNet peering connections with Confluent Cloud on Azure](https://docs.confluent.io/cloud/current/networking/peering/azure-peering.html).
-
-
-        ## The Dns Forwarders Model
-        <SchemaDefinition schemaRef="#/components/schemas/networking.v1.DnsForwarder" />
-
-        ## Quotas and Limits
-        This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
-
-        | Quota | Description |
-        | --- | --- |
-        | `dns_forwarder_per_gateway` | Number of dns forwarder per gateway |
-      properties:
-        api_version:
-          description: APIVersion defines the schema version of this representation
-            of a resource.
-          enum:
-          - networking/v1
-          readOnly: true
-          type: string
-        kind:
-          description: Kind defines the object this REST resource represents.
-          enum:
-          - DnsForwarder
-          readOnly: true
-          type: string
-        id:
-          description: ID is the "natural identifier" for an object within its scope/namespace;
-            it is normally unique across time but not space. That is, you can assume
-            that the ID will not be reclaimed and reused after an object is deleted
-            ("time"); however, it may collide with IDs for other object `kinds` or
-            objects of the same `kind` within a different scope/namespace ("space").
-          example: dlz-f3a90de
-          maxLength: 255
-          readOnly: true
-          type: string
-        metadata:
-          allOf:
-          - $ref: '#/components/schemas/ObjectMeta'
-          - properties:
-              self:
-                example: https://api.confluent.cloud/networking/v1/dns-forwarders/df-12345
-              resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/dns-forwarder=df-12345
-        spec:
-          $ref: '#/components/schemas/networking.v1.DnsForwarderSpecUpdate'
-        status:
-          $ref: '#/components/schemas/networking.v1.DnsForwarderStatus'
       type: object
     Error_source:
       description: If this error was caused by a particular part of the API request,

@@ -36,6 +36,8 @@ import (
 
 // NetworkingV1ForwardViaIp DNS Forwarder Configured via DNS Server IPs.
 type NetworkingV1ForwardViaIp struct {
+	// DNS Forwarder Configured via DNS Server IPs kind type.
+	Kind string `json:"kind,omitempty"`
 	// List of IP addresses of the DNS server
 	DnsServerIps []string `json:"dns_server_ips,omitempty"`
 }
@@ -44,8 +46,9 @@ type NetworkingV1ForwardViaIp struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1ForwardViaIp(dnsServerIps []string) *NetworkingV1ForwardViaIp {
+func NewNetworkingV1ForwardViaIp(kind string, dnsServerIps []string) *NetworkingV1ForwardViaIp {
 	this := NetworkingV1ForwardViaIp{}
+	this.Kind = kind
 	this.DnsServerIps = dnsServerIps
 	return &this
 }
@@ -56,6 +59,30 @@ func NewNetworkingV1ForwardViaIp(dnsServerIps []string) *NetworkingV1ForwardViaI
 func NewNetworkingV1ForwardViaIpWithDefaults() *NetworkingV1ForwardViaIp {
 	this := NetworkingV1ForwardViaIp{}
 	return &this
+}
+
+// GetKind returns the Kind field value
+func (o *NetworkingV1ForwardViaIp) GetKind() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Kind
+}
+
+// GetKindOk returns a tuple with the Kind field value
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1ForwardViaIp) GetKindOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Kind, true
+}
+
+// SetKind sets field value
+func (o *NetworkingV1ForwardViaIp) SetKind(v string) {
+	o.Kind = v
 }
 
 // GetDnsServerIps returns the DnsServerIps field value
@@ -71,7 +98,7 @@ func (o *NetworkingV1ForwardViaIp) GetDnsServerIps() []string {
 // GetDnsServerIpsOk returns a tuple with the DnsServerIps field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1ForwardViaIp) GetDnsServerIpsOk() (*[]string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.DnsServerIps, true
@@ -84,41 +111,45 @@ func (o *NetworkingV1ForwardViaIp) SetDnsServerIps(v []string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1ForwardViaIp) Redact() {
-    o.recurseRedact(&o.DnsServerIps)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.DnsServerIps)
 }
 
 func (o *NetworkingV1ForwardViaIp) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o NetworkingV1ForwardViaIp) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1ForwardViaIp) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["kind"] = o.Kind
+	}
 	if true {
 		toSerialize["dns_server_ips"] = o.DnsServerIps
 	}
@@ -168,5 +199,3 @@ func (v *NullableNetworkingV1ForwardViaIp) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -36,6 +36,8 @@ import (
 
 // NetworkingV1DnsForwarderSpec The desired state of the Dns Forwarder
 type NetworkingV1DnsForwarderSpec struct {
+	// The name of the DNS forwarder
+	DisplayName *string `json:"display_name,omitempty"`
 	// List of domains for the DNS forwarder to use
 	Domains *[]string `json:"domains,omitempty"`
 	// The specific details of different kinds of configuration for DNS Forwarder.
@@ -61,6 +63,38 @@ func NewNetworkingV1DnsForwarderSpec() *NetworkingV1DnsForwarderSpec {
 func NewNetworkingV1DnsForwarderSpecWithDefaults() *NetworkingV1DnsForwarderSpec {
 	this := NetworkingV1DnsForwarderSpec{}
 	return &this
+}
+
+// GetDisplayName returns the DisplayName field value if set, zero value otherwise.
+func (o *NetworkingV1DnsForwarderSpec) GetDisplayName() string {
+	if o == nil || o.DisplayName == nil {
+		var ret string
+		return ret
+	}
+	return *o.DisplayName
+}
+
+// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1DnsForwarderSpec) GetDisplayNameOk() (*string, bool) {
+	if o == nil || o.DisplayName == nil {
+		return nil, false
+	}
+	return o.DisplayName, true
+}
+
+// HasDisplayName returns a boolean if a field has been set.
+func (o *NetworkingV1DnsForwarderSpec) HasDisplayName() bool {
+	if o != nil && o.DisplayName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
+func (o *NetworkingV1DnsForwarderSpec) SetDisplayName(v string) {
+	o.DisplayName = &v
 }
 
 // GetDomains returns the Domains field value if set, zero value otherwise.
@@ -193,44 +227,48 @@ func (o *NetworkingV1DnsForwarderSpec) SetGateway(v ObjectReference) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1DnsForwarderSpec) Redact() {
-    o.recurseRedact(o.Domains)
-    o.recurseRedact(o.Config)
-    o.recurseRedact(o.Environment)
-    o.recurseRedact(o.Gateway)
+	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.Domains)
+	o.recurseRedact(o.Config)
+	o.recurseRedact(o.Environment)
+	o.recurseRedact(o.Gateway)
 }
 
 func (o *NetworkingV1DnsForwarderSpec) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o NetworkingV1DnsForwarderSpec) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o NetworkingV1DnsForwarderSpec) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.DisplayName != nil {
+		toSerialize["display_name"] = o.DisplayName
+	}
 	if o.Domains != nil {
 		toSerialize["domains"] = o.Domains
 	}
@@ -289,5 +327,3 @@ func (v *NullableNetworkingV1DnsForwarderSpec) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

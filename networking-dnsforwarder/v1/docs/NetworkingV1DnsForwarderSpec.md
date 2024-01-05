@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**DisplayName** | Pointer to **string** | The name of the DNS forwarder | [optional] 
 **Domains** | Pointer to **[]string** | List of domains for the DNS forwarder to use | [optional] 
 **Config** | Pointer to [**NetworkingV1DnsForwarderSpecConfigOneOf**](NetworkingV1DnsForwarderSpecConfigOneOf.md) | The specific details of different kinds of configuration for DNS Forwarder. | [optional] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
@@ -27,6 +28,31 @@ will change when the set of required properties is changed
 NewNetworkingV1DnsForwarderSpecWithDefaults instantiates a new NetworkingV1DnsForwarderSpec object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetDisplayName
+
+`func (o *NetworkingV1DnsForwarderSpec) GetDisplayName() string`
+
+GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
+
+### GetDisplayNameOk
+
+`func (o *NetworkingV1DnsForwarderSpec) GetDisplayNameOk() (*string, bool)`
+
+GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisplayName
+
+`func (o *NetworkingV1DnsForwarderSpec) SetDisplayName(v string)`
+
+SetDisplayName sets DisplayName field to given value.
+
+### HasDisplayName
+
+`func (o *NetworkingV1DnsForwarderSpec) HasDisplayName() bool`
+
+HasDisplayName returns a boolean if a field has been set.
 
 ### GetDomains
 

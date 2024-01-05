@@ -292,7 +292,7 @@ Name | Type | Description  | Notes
 
 ## UpdateNetworkingV1DnsForwarder
 
-> NetworkingV1DnsForwarder UpdateNetworkingV1DnsForwarder(ctx, id).NetworkingV1DnsForwarderUpdate(networkingV1DnsForwarderUpdate).Execute()
+> NetworkingV1DnsForwarder UpdateNetworkingV1DnsForwarder(ctx, id).NetworkingV1DnsForwarder(networkingV1DnsForwarder).Execute()
 
 Update a Dns Forwarder
 
@@ -312,11 +312,11 @@ import (
 
 func main() {
     id := "id_example" // string | The unique identifier for the dns forwarder.
-    networkingV1DnsForwarderUpdate := *openapiclient.NewNetworkingV1DnsForwarderUpdate() // NetworkingV1DnsForwarderUpdate |  (optional)
+    networkingV1DnsForwarder := *openapiclient.NewNetworkingV1DnsForwarder() // NetworkingV1DnsForwarder |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DnsForwardersNetworkingV1Api.UpdateNetworkingV1DnsForwarder(context.Background(), id).NetworkingV1DnsForwarderUpdate(networkingV1DnsForwarderUpdate).Execute()
+    resp, r, err := api_client.DnsForwardersNetworkingV1Api.UpdateNetworkingV1DnsForwarder(context.Background(), id).NetworkingV1DnsForwarder(networkingV1DnsForwarder).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DnsForwardersNetworkingV1Api.UpdateNetworkingV1DnsForwarder``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -342,7 +342,7 @@ Other parameters are passed through a pointer to a apiUpdateNetworkingV1DnsForwa
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **networkingV1DnsForwarderUpdate** | [**NetworkingV1DnsForwarderUpdate**](NetworkingV1DnsForwarderUpdate.md) |  | 
+ **networkingV1DnsForwarder** | [**NetworkingV1DnsForwarder**](NetworkingV1DnsForwarder.md) |  | 
 
 ### Return type
 

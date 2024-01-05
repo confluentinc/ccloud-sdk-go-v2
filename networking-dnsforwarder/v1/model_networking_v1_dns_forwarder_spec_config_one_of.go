@@ -38,9 +38,8 @@ type NetworkingV1DnsForwarderSpecConfigOneOf struct {
 
 // NetworkingV1ForwardViaIpAsNetworkingV1DnsForwarderSpecConfigOneOf is a convenience function that returns NetworkingV1ForwardViaIp wrapped in NetworkingV1DnsForwarderSpecConfigOneOf
 func NetworkingV1ForwardViaIpAsNetworkingV1DnsForwarderSpecConfigOneOf(v *NetworkingV1ForwardViaIp) NetworkingV1DnsForwarderSpecConfigOneOf {
-	return NetworkingV1DnsForwarderSpecConfigOneOf{ NetworkingV1ForwardViaIp: v}
+	return NetworkingV1DnsForwarderSpecConfigOneOf{NetworkingV1ForwardViaIp: v}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *NetworkingV1DnsForwarderSpecConfigOneOf) UnmarshalJSON(data []byte) error {
@@ -93,7 +92,7 @@ func (src NetworkingV1DnsForwarderSpecConfigOneOf) MarshalJSON() ([]byte, error)
 }
 
 // Get the actual instance
-func (obj *NetworkingV1DnsForwarderSpecConfigOneOf) GetActualInstance() (interface{}) {
+func (obj *NetworkingV1DnsForwarderSpecConfigOneOf) GetActualInstance() interface{} {
 	if obj.NetworkingV1ForwardViaIp != nil {
 		return obj.NetworkingV1ForwardViaIp
 	}
@@ -141,5 +140,3 @@ func (v *NullableNetworkingV1DnsForwarderSpecConfigOneOf) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
