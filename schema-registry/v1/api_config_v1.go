@@ -85,13 +85,14 @@ type ConfigV1Api interface {
 	GetClusterConfigExecute(r ApiGetClusterConfigRequest) (ClusterConfig, *_nethttp.Response, error)
 
 	/*
-		GetSubjectLevelConfig Get subject compatibility level
+			GetSubjectLevelConfig Get subject compatibility level
 
-		Retrieves compatibility level for a subject.
+			Retrieves compatibility level, compatibility group, normalization,
+		default metadata, and rule set for a subject.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param subject Name of the subject
-		 @return ApiGetSubjectLevelConfigRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param subject Name of the subject
+			 @return ApiGetSubjectLevelConfigRequest
 	*/
 	GetSubjectLevelConfig(ctx _context.Context, subject string) ApiGetSubjectLevelConfigRequest
 
@@ -100,12 +101,13 @@ type ConfigV1Api interface {
 	GetSubjectLevelConfigExecute(r ApiGetSubjectLevelConfigRequest) (Config, *_nethttp.Response, error)
 
 	/*
-		GetTopLevelConfig Get global compatibility level
+			GetTopLevelConfig Get global compatibility level
 
-		Retrieves the global compatibility level.
+			Retrieves the global compatibility level, compatibility group,
+		normalization, default metadata, and rule set.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiGetTopLevelConfigRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiGetTopLevelConfigRequest
 	*/
 	GetTopLevelConfig(ctx _context.Context) ApiGetTopLevelConfigRequest
 
@@ -114,13 +116,15 @@ type ConfigV1Api interface {
 	GetTopLevelConfigExecute(r ApiGetTopLevelConfigRequest) (Config, *_nethttp.Response, error)
 
 	/*
-		UpdateSubjectLevelConfig Update subject compatibility level
+			UpdateSubjectLevelConfig Update subject compatibility level
 
-		Update compatibility level for the specified subject. On success, echoes the original request back to the client.
+			Update compatibility level, compatibility group, normalization,
+		default metadata, and rule set for the specified subject. On success,
+		echoes the original request back to the client.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param subject Name of the subject
-		 @return ApiUpdateSubjectLevelConfigRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param subject Name of the subject
+			 @return ApiUpdateSubjectLevelConfigRequest
 	*/
 	UpdateSubjectLevelConfig(ctx _context.Context, subject string) ApiUpdateSubjectLevelConfigRequest
 
@@ -129,12 +133,14 @@ type ConfigV1Api interface {
 	UpdateSubjectLevelConfigExecute(r ApiUpdateSubjectLevelConfigRequest) (ConfigUpdateRequest, *_nethttp.Response, error)
 
 	/*
-		UpdateTopLevelConfig Update global compatibility level
+			UpdateTopLevelConfig Update global compatibility level
 
-		Updates the global compatibility level. On success, echoes the original request back to the client.
+			Updates the global compatibility level, compatibility group,
+		schema normalization, default metadata, and rule set. On success, echoes the
+		original request back to the client.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiUpdateTopLevelConfigRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiUpdateTopLevelConfigRequest
 	*/
 	UpdateTopLevelConfig(ctx _context.Context) ApiUpdateTopLevelConfigRequest
 
@@ -161,9 +167,9 @@ DeleteSubjectConfig Delete subject compatibility level
 
 Deletes the specified subject-level compatibility level config and reverts to the global default.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param subject Name of the subject
-	@return ApiDeleteSubjectConfigRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param subject Name of the subject
+ @return ApiDeleteSubjectConfigRequest
 */
 func (a *ConfigV1ApiService) DeleteSubjectConfig(ctx _context.Context, subject string) ApiDeleteSubjectConfigRequest {
 	return ApiDeleteSubjectConfigRequest{
@@ -174,8 +180,7 @@ func (a *ConfigV1ApiService) DeleteSubjectConfig(ctx _context.Context, subject s
 }
 
 // Execute executes the request
-//
-//	@return string
+//  @return string
 func (a *ConfigV1ApiService) DeleteSubjectConfigExecute(r ApiDeleteSubjectConfigRequest) (string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
@@ -316,8 +321,8 @@ DeleteTopLevelConfig Delete global compatibility level
 
 Deletes the global compatibility level config and reverts to the default.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiDeleteTopLevelConfigRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiDeleteTopLevelConfigRequest
 */
 func (a *ConfigV1ApiService) DeleteTopLevelConfig(ctx _context.Context) ApiDeleteTopLevelConfigRequest {
 	return ApiDeleteTopLevelConfigRequest{
@@ -327,8 +332,7 @@ func (a *ConfigV1ApiService) DeleteTopLevelConfig(ctx _context.Context) ApiDelet
 }
 
 // Execute executes the request
-//
-//	@return string
+//  @return string
 func (a *ConfigV1ApiService) DeleteTopLevelConfigExecute(r ApiDeleteTopLevelConfigRequest) (string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
@@ -458,8 +462,8 @@ GetClusterConfig Get cluster config
 
 Retrieves cluster config information.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetClusterConfigRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetClusterConfigRequest
 */
 func (a *ConfigV1ApiService) GetClusterConfig(ctx _context.Context) ApiGetClusterConfigRequest {
 	return ApiGetClusterConfigRequest{
@@ -469,8 +473,7 @@ func (a *ConfigV1ApiService) GetClusterConfig(ctx _context.Context) ApiGetCluste
 }
 
 // Execute executes the request
-//
-//	@return ClusterConfig
+//  @return ClusterConfig
 func (a *ConfigV1ApiService) GetClusterConfigExecute(r ApiGetClusterConfigRequest) (ClusterConfig, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -605,11 +608,12 @@ func (r ApiGetSubjectLevelConfigRequest) Execute() (Config, *_nethttp.Response, 
 /*
 GetSubjectLevelConfig Get subject compatibility level
 
-Retrieves compatibility level for a subject.
+Retrieves compatibility level, compatibility group, normalization,
+default metadata, and rule set for a subject.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param subject Name of the subject
-	@return ApiGetSubjectLevelConfigRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param subject Name of the subject
+ @return ApiGetSubjectLevelConfigRequest
 */
 func (a *ConfigV1ApiService) GetSubjectLevelConfig(ctx _context.Context, subject string) ApiGetSubjectLevelConfigRequest {
 	return ApiGetSubjectLevelConfigRequest{
@@ -620,8 +624,7 @@ func (a *ConfigV1ApiService) GetSubjectLevelConfig(ctx _context.Context, subject
 }
 
 // Execute executes the request
-//
-//	@return Config
+//  @return Config
 func (a *ConfigV1ApiService) GetSubjectLevelConfigExecute(r ApiGetSubjectLevelConfigRequest) (Config, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -763,10 +766,11 @@ func (r ApiGetTopLevelConfigRequest) Execute() (Config, *_nethttp.Response, erro
 /*
 GetTopLevelConfig Get global compatibility level
 
-Retrieves the global compatibility level.
+Retrieves the global compatibility level, compatibility group,
+normalization, default metadata, and rule set.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetTopLevelConfigRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetTopLevelConfigRequest
 */
 func (a *ConfigV1ApiService) GetTopLevelConfig(ctx _context.Context) ApiGetTopLevelConfigRequest {
 	return ApiGetTopLevelConfigRequest{
@@ -776,8 +780,7 @@ func (a *ConfigV1ApiService) GetTopLevelConfig(ctx _context.Context) ApiGetTopLe
 }
 
 // Execute executes the request
-//
-//	@return Config
+//  @return Config
 func (a *ConfigV1ApiService) GetTopLevelConfigExecute(r ApiGetTopLevelConfigRequest) (Config, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -913,11 +916,13 @@ func (r ApiUpdateSubjectLevelConfigRequest) Execute() (ConfigUpdateRequest, *_ne
 /*
 UpdateSubjectLevelConfig Update subject compatibility level
 
-Update compatibility level for the specified subject. On success, echoes the original request back to the client.
+Update compatibility level, compatibility group, normalization,
+default metadata, and rule set for the specified subject. On success,
+echoes the original request back to the client.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param subject Name of the subject
-	@return ApiUpdateSubjectLevelConfigRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param subject Name of the subject
+ @return ApiUpdateSubjectLevelConfigRequest
 */
 func (a *ConfigV1ApiService) UpdateSubjectLevelConfig(ctx _context.Context, subject string) ApiUpdateSubjectLevelConfigRequest {
 	return ApiUpdateSubjectLevelConfigRequest{
@@ -928,8 +933,7 @@ func (a *ConfigV1ApiService) UpdateSubjectLevelConfig(ctx _context.Context, subj
 }
 
 // Execute executes the request
-//
-//	@return ConfigUpdateRequest
+//  @return ConfigUpdateRequest
 func (a *ConfigV1ApiService) UpdateSubjectLevelConfigExecute(r ApiUpdateSubjectLevelConfigRequest) (ConfigUpdateRequest, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -1080,10 +1084,12 @@ func (r ApiUpdateTopLevelConfigRequest) Execute() (ConfigUpdateRequest, *_nethtt
 /*
 UpdateTopLevelConfig Update global compatibility level
 
-Updates the global compatibility level. On success, echoes the original request back to the client.
+Updates the global compatibility level, compatibility group,
+schema normalization, default metadata, and rule set. On success, echoes the
+original request back to the client.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiUpdateTopLevelConfigRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiUpdateTopLevelConfigRequest
 */
 func (a *ConfigV1ApiService) UpdateTopLevelConfig(ctx _context.Context) ApiUpdateTopLevelConfigRequest {
 	return ApiUpdateTopLevelConfigRequest{
@@ -1093,8 +1099,7 @@ func (a *ConfigV1ApiService) UpdateTopLevelConfig(ctx _context.Context) ApiUpdat
 }
 
 // Execute executes the request
-//
-//	@return ConfigUpdateRequest
+//  @return ConfigUpdateRequest
 func (a *ConfigV1ApiService) UpdateTopLevelConfigExecute(r ApiUpdateTopLevelConfigRequest) (ConfigUpdateRequest, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut

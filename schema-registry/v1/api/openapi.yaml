@@ -64,6 +64,20 @@ tags:
 
     Related guide: [Manage Schemas in Confluent Cloud](https://docs.confluent.io/cloud/current/sr/schemas-manage.html#manage-schemas-in-ccloud).
   name: Subjects (v1)
+- description: |-
+    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+    The API allows you to create, retrieve, update, and delete key encryption keys.
+
+    Related guide: [Manage Schemas in Confluent Cloud](https://docs.confluent.io/cloud/current/sr/schemas-manage.html#manage-schemas-in-ccloud).
+  name: Key Encryption Keys (v1)
+- description: |-
+    [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+    The API allows you to create, retrieve, update, and delete data encryption keys.
+
+    Related guide: [Manage Schemas in Confluent Cloud](https://docs.confluent.io/cloud/current/sr/schemas-manage.html#manage-schemas-in-ccloud).
+  name: Data Encryption Keys (v1)
 paths:
   /clusterconfig:
     get:
@@ -86,9 +100,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -96,9 +109,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -106,9 +118,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -126,15 +137,14 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 500
-                  message: Oops, something went wrong
+                error_code: 500
+                message: Oops, something went wrong
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Get cluster config
       tags:
       - Config (v1)
@@ -331,9 +341,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -341,9 +350,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -351,9 +359,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -368,8 +375,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Test schema compatibility against a particular schema subject-version
       tags:
       - Compatibility (v1)
@@ -558,9 +565,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -568,9 +574,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -578,9 +583,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -595,8 +599,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Test schema compatibility against all schemas under a subject
       tags:
       - Compatibility (v1)
@@ -794,9 +798,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -804,9 +807,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -814,9 +816,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -831,8 +832,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Delete subject compatibility level
       tags:
       - Config (v1)
@@ -921,7 +922,9 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     get:
-      description: Retrieves compatibility level for a subject.
+      description: |-
+        Retrieves compatibility level, compatibility group, normalization,
+        default metadata, and rule set for a subject.
       operationId: getSubjectLevelConfig
       parameters:
       - description: Name of the subject
@@ -983,9 +986,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -993,9 +995,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -1003,9 +1004,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -1020,8 +1020,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Get subject compatibility level
       tags:
       - Config (v1)
@@ -1110,7 +1110,9 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     put:
-      description: Update compatibility level for the specified subject. On success,
+      description: |-
+        Update compatibility level, compatibility group, normalization,
+        default metadata, and rule set for the specified subject. On success,
         echoes the original request back to the client.
       operationId: updateSubjectLevelConfig
       parameters:
@@ -1182,9 +1184,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -1192,9 +1193,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -1202,9 +1202,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -1219,8 +1218,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Update subject compatibility level
       tags:
       - Config (v1)
@@ -1231,13 +1230,13 @@ paths:
             --url https://psrc-00000.region.provider.confluent.cloud/config/%7Bsubject%7D \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/octet-stream' \
-            --data '{"compatibility":"FULL_TRANSITIVE"}'
+            --data '{"alias":"string","normalize":true,"compatibility":"FULL_TRANSITIVE","compatibilityGroup":"string","defaultMetadata":{"properties":{}},"overrideMetadata":{"properties":{}},"defaultRuleSet":{"properties":{}},"overrideRuleSet":{"properties":{}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"compatibility\":\"FULL_TRANSITIVE\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"alias\":\"string\",\"normalize\":true,\"compatibility\":\"FULL_TRANSITIVE\",\"compatibilityGroup\":\"string\",\"defaultMetadata\":{\"properties\":{}},\"overrideMetadata\":{\"properties\":{}},\"defaultRuleSet\":{\"properties\":{}},\"overrideRuleSet\":{\"properties\":{}}}");
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/config/%7Bsubject%7D")
             .put(body)
@@ -1249,19 +1248,23 @@ paths:
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/config/%7Bsubject%7D\"\
-          \n\n\tpayload := strings.NewReader(\"{\\\"compatibility\\\":\\\"FULL_TRANSITIVE\\\
-          \"}\")\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/octet-stream\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \n\n\tpayload := strings.NewReader(\"{\\\"alias\\\":\\\"string\\\",\\\"\
+          normalize\\\":true,\\\"compatibility\\\":\\\"FULL_TRANSITIVE\\\",\\\"compatibilityGroup\\\
+          \":\\\"string\\\",\\\"defaultMetadata\\\":{\\\"properties\\\":{}},\\\"overrideMetadata\\\
+          \":{\\\"properties\\\":{}},\\\"defaultRuleSet\\\":{\\\"properties\\\":{}},\\\
+          \"overrideRuleSet\\\":{\\\"properties\\\":{}}}\")\n\n\treq, _ := http.NewRequest(\"\
+          PUT\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/octet-stream\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          payload = "{\"compatibility\":\"FULL_TRANSITIVE\"}"
+          payload = "{\"alias\":\"string\",\"normalize\":true,\"compatibility\":\"FULL_TRANSITIVE\",\"compatibilityGroup\":\"string\",\"defaultMetadata\":{\"properties\":{}},\"overrideMetadata\":{\"properties\":{}},\"defaultRuleSet\":{\"properties\":{}},\"overrideRuleSet\":{\"properties\":{}}}"
 
           headers = {
               'content-type': "application/octet-stream",
@@ -1302,7 +1305,16 @@ paths:
             });
           });
 
-          req.write(JSON.stringify({compatibility: 'FULL_TRANSITIVE'}));
+          req.write(JSON.stringify({
+            alias: 'string',
+            normalize: true,
+            compatibility: 'FULL_TRANSITIVE',
+            compatibilityGroup: 'string',
+            defaultMetadata: {properties: {}},
+            overrideMetadata: {properties: {}},
+            defaultRuleSet: {properties: {}},
+            overrideRuleSet: {properties: {}}
+          }));
           req.end();
       - lang: C
         source: |-
@@ -1316,7 +1328,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"compatibility\":\"FULL_TRANSITIVE\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"alias\":\"string\",\"normalize\":true,\"compatibility\":\"FULL_TRANSITIVE\",\"compatibilityGroup\":\"string\",\"defaultMetadata\":{\"properties\":{}},\"overrideMetadata\":{\"properties\":{}},\"defaultRuleSet\":{\"properties\":{}},\"overrideRuleSet\":{\"properties\":{}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1325,7 +1337,7 @@ paths:
           var request = new RestRequest(Method.PUT);
           request.AddHeader("content-type", "application/octet-stream");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/octet-stream", "{\"compatibility\":\"FULL_TRANSITIVE\"}", ParameterType.RequestBody);
+          request.AddParameter("application/octet-stream", "{\"alias\":\"string\",\"normalize\":true,\"compatibility\":\"FULL_TRANSITIVE\",\"compatibilityGroup\":\"string\",\"defaultMetadata\":{\"properties\":{}},\"overrideMetadata\":{\"properties\":{}},\"defaultRuleSet\":{\"properties\":{}},\"overrideRuleSet\":{\"properties\":{}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /config:
     delete:
@@ -1389,9 +1401,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -1399,9 +1410,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -1409,9 +1419,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -1426,8 +1435,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Delete global compatibility level
       tags:
       - Config (v1)
@@ -1516,7 +1525,9 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     get:
-      description: Retrieves the global compatibility level.
+      description: |-
+        Retrieves the global compatibility level, compatibility group,
+        normalization, default metadata, and rule set.
       operationId: getTopLevelConfig
       responses:
         "200":
@@ -1548,9 +1559,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -1558,9 +1568,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -1568,9 +1577,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -1585,8 +1593,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Get global compatibility level
       tags:
       - Config (v1)
@@ -1675,7 +1683,9 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     put:
-      description: Updates the global compatibility level. On success, echoes the
+      description: |-
+        Updates the global compatibility level, compatibility group,
+        schema normalization, default metadata, and rule set. On success, echoes the
         original request back to the client.
       operationId: updateTopLevelConfig
       requestBody:
@@ -1738,9 +1748,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -1748,9 +1757,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -1758,9 +1766,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -1775,8 +1782,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Update global compatibility level
       tags:
       - Config (v1)
@@ -1787,13 +1794,13 @@ paths:
             --url https://psrc-00000.region.provider.confluent.cloud/config \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/octet-stream' \
-            --data '{"compatibility":"FULL_TRANSITIVE"}'
+            --data '{"alias":"string","normalize":true,"compatibility":"FULL_TRANSITIVE","compatibilityGroup":"string","defaultMetadata":{"properties":{}},"overrideMetadata":{"properties":{}},"defaultRuleSet":{"properties":{}},"overrideRuleSet":{"properties":{}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"compatibility\":\"FULL_TRANSITIVE\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"alias\":\"string\",\"normalize\":true,\"compatibility\":\"FULL_TRANSITIVE\",\"compatibilityGroup\":\"string\",\"defaultMetadata\":{\"properties\":{}},\"overrideMetadata\":{\"properties\":{}},\"defaultRuleSet\":{\"properties\":{}},\"overrideRuleSet\":{\"properties\":{}}}");
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/config")
             .put(body)
@@ -1805,19 +1812,23 @@ paths:
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/config\"\
-          \n\n\tpayload := strings.NewReader(\"{\\\"compatibility\\\":\\\"FULL_TRANSITIVE\\\
-          \"}\")\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/octet-stream\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \n\n\tpayload := strings.NewReader(\"{\\\"alias\\\":\\\"string\\\",\\\"\
+          normalize\\\":true,\\\"compatibility\\\":\\\"FULL_TRANSITIVE\\\",\\\"compatibilityGroup\\\
+          \":\\\"string\\\",\\\"defaultMetadata\\\":{\\\"properties\\\":{}},\\\"overrideMetadata\\\
+          \":{\\\"properties\\\":{}},\\\"defaultRuleSet\\\":{\\\"properties\\\":{}},\\\
+          \"overrideRuleSet\\\":{\\\"properties\\\":{}}}\")\n\n\treq, _ := http.NewRequest(\"\
+          PUT\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/octet-stream\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          payload = "{\"compatibility\":\"FULL_TRANSITIVE\"}"
+          payload = "{\"alias\":\"string\",\"normalize\":true,\"compatibility\":\"FULL_TRANSITIVE\",\"compatibilityGroup\":\"string\",\"defaultMetadata\":{\"properties\":{}},\"overrideMetadata\":{\"properties\":{}},\"defaultRuleSet\":{\"properties\":{}},\"overrideRuleSet\":{\"properties\":{}}}"
 
           headers = {
               'content-type': "application/octet-stream",
@@ -1858,7 +1869,16 @@ paths:
             });
           });
 
-          req.write(JSON.stringify({compatibility: 'FULL_TRANSITIVE'}));
+          req.write(JSON.stringify({
+            alias: 'string',
+            normalize: true,
+            compatibility: 'FULL_TRANSITIVE',
+            compatibilityGroup: 'string',
+            defaultMetadata: {properties: {}},
+            overrideMetadata: {properties: {}},
+            defaultRuleSet: {properties: {}},
+            overrideRuleSet: {properties: {}}
+          }));
           req.end();
       - lang: C
         source: |-
@@ -1872,7 +1892,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"compatibility\":\"FULL_TRANSITIVE\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"alias\":\"string\",\"normalize\":true,\"compatibility\":\"FULL_TRANSITIVE\",\"compatibilityGroup\":\"string\",\"defaultMetadata\":{\"properties\":{}},\"overrideMetadata\":{\"properties\":{}},\"defaultRuleSet\":{\"properties\":{}},\"overrideRuleSet\":{\"properties\":{}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1881,7 +1901,7 @@ paths:
           var request = new RestRequest(Method.PUT);
           request.AddHeader("content-type", "application/octet-stream");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/octet-stream", "{\"compatibility\":\"FULL_TRANSITIVE\"}", ParameterType.RequestBody);
+          request.AddParameter("application/octet-stream", "{\"alias\":\"string\",\"normalize\":true,\"compatibility\":\"FULL_TRANSITIVE\",\"compatibilityGroup\":\"string\",\"defaultMetadata\":{\"properties\":{}},\"overrideMetadata\":{\"properties\":{}},\"defaultRuleSet\":{\"properties\":{}},\"overrideRuleSet\":{\"properties\":{}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /exporters:
     get:
@@ -1901,9 +1921,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -1911,9 +1930,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -1921,9 +1939,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -1941,15 +1958,14 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 500
-                  message: Oops, something went wrong
+                error_code: 500
+                message: Oops, something went wrong
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Gets all schema exporters.
       tags:
       - Exporters (v1)
@@ -2080,9 +2096,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -2090,9 +2105,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -2100,9 +2114,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -2120,15 +2133,14 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 500
-                  message: Oops, something went wrong
+                error_code: 500
+                message: Oops, something went wrong
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Creates a new schema exporter.
       tags:
       - Exporters (v1)
@@ -2265,9 +2277,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 404
-                  message: account not found
+                error_code: 404
+                message: account not found
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Not Found
@@ -2275,9 +2286,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -2285,9 +2295,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -2295,9 +2304,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -2315,15 +2323,14 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 500
-                  message: Oops, something went wrong
+                error_code: 500
+                message: Oops, something went wrong
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Delete schema exporter by name.
       tags:
       - Exporters (v1)
@@ -2440,9 +2447,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -2450,9 +2456,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -2460,9 +2465,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -2480,15 +2484,14 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 500
-                  message: Oops, something went wrong
+                error_code: 500
+                message: Oops, something went wrong
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Gets schema exporter by name.
       tags:
       - Exporters (v1)
@@ -2626,9 +2629,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -2636,9 +2638,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -2646,9 +2647,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -2666,15 +2666,14 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 500
-                  message: Oops, something went wrong
+                error_code: 500
+                message: Oops, something went wrong
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Update schema exporter by name.
       tags:
       - Exporters (v1)
@@ -2820,9 +2819,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -2830,9 +2828,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -2840,9 +2837,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -2860,15 +2856,14 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 500
-                  message: Oops, something went wrong
+                error_code: 500
+                message: Oops, something went wrong
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Gets schema exporter status by name.
       tags:
       - Exporters (v1)
@@ -2986,9 +2981,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -2996,9 +2990,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -3006,9 +2999,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -3026,15 +3018,14 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 500
-                  message: Oops, something went wrong
+                error_code: 500
+                message: Oops, something went wrong
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Gets schema exporter config by name.
       tags:
       - Exporters (v1)
@@ -3171,9 +3162,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -3181,9 +3171,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -3191,9 +3180,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -3211,15 +3199,14 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 500
-                  message: Oops, something went wrong
+                error_code: 500
+                message: Oops, something went wrong
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Update schema exporter config by name.
       tags:
       - Exporters (v1)
@@ -3369,9 +3356,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -3379,9 +3365,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -3389,9 +3374,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -3409,15 +3393,14 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 500
-                  message: Oops, something went wrong
+                error_code: 500
+                message: Oops, something went wrong
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Pause schema exporter by name.
       tags:
       - Exporters (v1)
@@ -3541,9 +3524,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -3551,9 +3533,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -3561,9 +3542,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -3581,15 +3561,14 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 500
-                  message: Oops, something went wrong
+                error_code: 500
+                message: Oops, something went wrong
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Reset schema exporter by name.
       tags:
       - Exporters (v1)
@@ -3713,9 +3692,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -3723,9 +3701,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -3733,9 +3710,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -3753,15 +3729,14 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 500
-                  message: Oops, something went wrong
+                error_code: 500
+                message: Oops, something went wrong
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Internal Server Error
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Resume schema exporter by name.
       tags:
       - Exporters (v1)
@@ -3892,9 +3867,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -3902,9 +3876,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -3912,9 +3885,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -3929,8 +3901,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: List contexts
       tags:
       - Contexts (v1)
@@ -4074,9 +4046,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -4084,9 +4055,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -4094,9 +4064,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -4111,8 +4080,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Delete subject mode
       tags:
       - Modes (v1)
@@ -4262,9 +4231,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -4272,9 +4240,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -4282,9 +4249,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -4299,8 +4265,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Get subject mode
       tags:
       - Modes (v1)
@@ -4470,9 +4436,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -4480,9 +4445,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -4490,9 +4454,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -4507,8 +4470,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Update subject mode
       tags:
       - Modes (v1)
@@ -4638,9 +4601,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -4648,9 +4610,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -4658,9 +4619,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -4675,8 +4635,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Get global mode
       tags:
       - Modes (v1)
@@ -4838,9 +4798,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -4848,9 +4807,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -4858,9 +4816,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -4875,8 +4832,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Update global mode
       tags:
       - Modes (v1)
@@ -5065,9 +5022,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -5075,9 +5031,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -5085,9 +5040,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -5102,8 +5056,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Get schema string by ID
       tags:
       - Schemas (v1)
@@ -5267,9 +5221,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -5277,9 +5230,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -5287,9 +5239,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -5304,8 +5255,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Get schema by ID
       tags:
       - Schemas (v1)
@@ -5436,9 +5387,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -5446,9 +5396,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -5456,9 +5405,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -5473,8 +5421,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: List supported schema types
       tags:
       - Schemas (v1)
@@ -5651,9 +5599,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -5661,9 +5608,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -5671,9 +5617,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -5688,8 +5633,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: List schemas
       tags:
       - Schemas (v1)
@@ -5859,9 +5804,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -5869,9 +5813,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -5879,9 +5822,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -5896,8 +5838,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: List subjects associated to schema ID
       tags:
       - Schemas (v1)
@@ -6063,9 +6005,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -6073,9 +6014,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -6083,9 +6023,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -6100,8 +6039,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: List subject-versions associated to schema ID
       tags:
       - Schemas (v1)
@@ -6288,9 +6227,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -6298,9 +6236,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -6308,9 +6245,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -6325,8 +6261,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Delete schema version
       tags:
       - Subjects (v1)
@@ -6502,9 +6438,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -6512,9 +6447,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -6522,9 +6456,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -6539,8 +6472,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Get schema by version
       tags:
       - Subjects (v1)
@@ -6720,9 +6653,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -6730,9 +6662,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -6740,9 +6671,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -6757,8 +6687,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: List schemas referencing a schema
       tags:
       - Subjects (v1)
@@ -6938,9 +6868,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -6948,9 +6877,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -6958,9 +6886,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -6975,8 +6902,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Get schema string by version
       tags:
       - Subjects (v1)
@@ -7139,9 +7066,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -7149,9 +7075,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -7159,9 +7084,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -7176,8 +7100,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: List versions under subject
       tags:
       - Subjects (v1)
@@ -7360,9 +7284,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -7370,9 +7293,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -7380,9 +7302,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -7397,8 +7318,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Register schema under a subject
       tags:
       - Subjects (v1)
@@ -7590,9 +7511,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -7600,9 +7520,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -7610,9 +7529,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -7627,8 +7545,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Delete subject
       tags:
       - Subjects (v1)
@@ -7804,9 +7722,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -7814,9 +7731,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -7824,9 +7740,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -7841,8 +7756,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: Lookup schema under subject
       tags:
       - Subjects (v1)
@@ -8018,9 +7933,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 400
-                  message: Bad Request
+                error_code: 400
+                message: Bad Request
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Bad Request
@@ -8028,9 +7942,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 401
-                  message: Unauthorized
+                error_code: 401
+                message: Unauthorized
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Unauthorized
@@ -8038,9 +7951,8 @@ paths:
           content:
             application/json:
               example:
-                error:
-                  code: 403
-                  message: Forbidden
+                error_code: 403
+                message: Forbidden
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
           description: Forbidden
@@ -8055,8 +7967,8 @@ paths:
                 type: integer
               style: simple
       security:
-      - api-key: []
-      - confluent-sts-access-token: []
+      - resource-api-key: []
+      - external-access-token: []
       summary: List subjects
       tags:
       - Subjects (v1)
@@ -8144,15 +8056,1858 @@ paths:
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
+  /dek-registry/v1/keks:
+    get:
+      operationId: getKekNames
+      parameters:
+      - description: Whether to include deleted keys
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  example: mykek
+                  type: string
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  example: mykek
+                  type: string
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  example: mykek
+                  type: string
+                type: array
+          description: List of kek names
+      summary: Get a list of kek names.
+      tags:
+      - Key Encryption Keys (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks")
+            .get()
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          conn.request("GET", "/dek-registry/v1/keks")
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/dek-registry/v1/keks",
+            "headers": {}
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks");
+          var request = new RestRequest(Method.GET);
+          IRestResponse response = client.Execute(request);
+    post:
+      operationId: createKek
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              $ref: '#/components/schemas/CreateKekRequest'
+          application/vnd.schemaregistry+json:
+            schema:
+              $ref: '#/components/schemas/CreateKekRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateKekRequest'
+          application/octet-stream:
+            schema:
+              $ref: '#/components/schemas/CreateKekRequest'
+        description: The create request
+        required: true
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/Kek'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/Kek'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/Kek'
+          description: The create response
+      summary: Create a kek.
+      tags:
+      - Key Encryption Keys (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks \
+            --header 'content-type: application/octet-stream' \
+            --data '{"kmsProps":{"key":"kmsProps"},"shared":true,"name":"name","doc":"doc","kmsKeyId":"kmsKeyId","kmsType":"kmsType"}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"kmsProps\":{\"key\":\"kmsProps\"},\"shared\":true,\"name\":\"name\",\"doc\":\"doc\",\"kmsKeyId\":\"kmsKeyId\",\"kmsType\":\"kmsType\"}");
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks")
+            .post(body)
+            .addHeader("content-type", "application/octet-stream")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"kmsProps\\\":{\\\"key\\\":\\\"\
+          kmsProps\\\"},\\\"shared\\\":true,\\\"name\\\":\\\"name\\\",\\\"doc\\\"\
+          :\\\"doc\\\",\\\"kmsKeyId\\\":\\\"kmsKeyId\\\",\\\"kmsType\\\":\\\"kmsType\\\
+          \"}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/octet-stream\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          payload = "{\"kmsProps\":{\"key\":\"kmsProps\"},\"shared\":true,\"name\":\"name\",\"doc\":\"doc\",\"kmsKeyId\":\"kmsKeyId\",\"kmsType\":\"kmsType\"}"
+
+          headers = { 'content-type': "application/octet-stream" }
+
+          conn.request("POST", "/dek-registry/v1/keks", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/dek-registry/v1/keks",
+            "headers": {
+              "content-type": "application/octet-stream"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            kmsProps: {key: 'kmsProps'},
+            shared: true,
+            name: 'name',
+            doc: 'doc',
+            kmsKeyId: 'kmsKeyId',
+            kmsType: 'kmsType'
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/octet-stream");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"kmsProps\":{\"key\":\"kmsProps\"},\"shared\":true,\"name\":\"name\",\"doc\":\"doc\",\"kmsKeyId\":\"kmsKeyId\",\"kmsType\":\"kmsType\"}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks");
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("content-type", "application/octet-stream");
+          request.AddParameter("application/octet-stream", "{\"kmsProps\":{\"key\":\"kmsProps\"},\"shared\":true,\"name\":\"name\",\"doc\":\"doc\",\"kmsKeyId\":\"kmsKeyId\",\"kmsType\":\"kmsType\"}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+  /dek-registry/v1/keks/{name}:
+    delete:
+      operationId: deleteKek
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Whether to perform a permanent delete
+        explode: true
+        in: query
+        name: permanent
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Delete a kek.
+      tags:
+      - Key Encryption Keys (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request DELETE \
+            --url https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D")
+            .delete(null)
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D\"\
+          \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          conn.request("DELETE", "/dek-registry/v1/keks/%7Bname%7D")
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "DELETE",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/dek-registry/v1/keks/%7Bname%7D",
+            "headers": {}
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D");
+          var request = new RestRequest(Method.DELETE);
+          IRestResponse response = client.Execute(request);
+    get:
+      operationId: getKek
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Whether to include deleted keys
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/Kek'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/Kek'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/Kek'
+          description: The kek info
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Get a kek by name.
+      tags:
+      - Key Encryption Keys (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D")
+            .get()
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          conn.request("GET", "/dek-registry/v1/keks/%7Bname%7D")
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/dek-registry/v1/keks/%7Bname%7D",
+            "headers": {}
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D");
+          var request = new RestRequest(Method.GET);
+          IRestResponse response = client.Execute(request);
+    put:
+      operationId: putKek
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              $ref: '#/components/schemas/UpdateKekRequest'
+          application/vnd.schemaregistry+json:
+            schema:
+              $ref: '#/components/schemas/UpdateKekRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateKekRequest'
+          application/octet-stream:
+            schema:
+              $ref: '#/components/schemas/UpdateKekRequest'
+        description: The update request
+        required: true
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/Kek'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/Kek'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/Kek'
+          description: The update response
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Alters a kek.
+      tags:
+      - Key Encryption Keys (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request PUT \
+            --url https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D \
+            --header 'content-type: application/octet-stream' \
+            --data '{"kmsProps":{"key":"kmsProps"},"shared":true,"doc":"doc"}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"kmsProps\":{\"key\":\"kmsProps\"},\"shared\":true,\"doc\":\"doc\"}");
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D")
+            .put(body)
+            .addHeader("content-type", "application/octet-stream")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"kmsProps\\\":{\\\"key\\\":\\\"\
+          kmsProps\\\"},\\\"shared\\\":true,\\\"doc\\\":\\\"doc\\\"}\")\n\n\treq,\
+          \ _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
+          , \"application/octet-stream\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          payload = "{\"kmsProps\":{\"key\":\"kmsProps\"},\"shared\":true,\"doc\":\"doc\"}"
+
+          headers = { 'content-type': "application/octet-stream" }
+
+          conn.request("PUT", "/dek-registry/v1/keks/%7Bname%7D", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "PUT",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/dek-registry/v1/keks/%7Bname%7D",
+            "headers": {
+              "content-type": "application/octet-stream"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({kmsProps: {key: 'kmsProps'}, shared: true, doc: 'doc'}));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PUT");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/octet-stream");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"kmsProps\":{\"key\":\"kmsProps\"},\"shared\":true,\"doc\":\"doc\"}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D");
+          var request = new RestRequest(Method.PUT);
+          request.AddHeader("content-type", "application/octet-stream");
+          request.AddParameter("application/octet-stream", "{\"kmsProps\":{\"key\":\"kmsProps\"},\"shared\":true,\"doc\":\"doc\"}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+  /dek-registry/v1/keks/{name}/undelete:
+    post:
+      operationId: undeleteKek
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Undelete a kek.
+      tags:
+      - Key Encryption Keys (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/undelete
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/undelete")
+            .post(null)
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/undelete\"\
+          \n\n\treq, _ := http.NewRequest(\"POST\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          conn.request("POST", "/dek-registry/v1/keks/%7Bname%7D/undelete")
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/dek-registry/v1/keks/%7Bname%7D/undelete",
+            "headers": {}
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/undelete");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/undelete");
+          var request = new RestRequest(Method.POST);
+          IRestResponse response = client.Execute(request);
+  /dek-registry/v1/keks/{name}/deks:
+    get:
+      operationId: getDekSubjects
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Whether to include deleted keys
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  example: User
+                  type: string
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  example: User
+                  type: string
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  example: User
+                  type: string
+                type: array
+          description: List of dek subjects
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Get a list of dek subjects.
+      tags:
+      - Data Encryption Keys (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks")
+            .get()
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          conn.request("GET", "/dek-registry/v1/keks/%7Bname%7D/deks")
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/dek-registry/v1/keks/%7Bname%7D/deks",
+            "headers": {}
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks");
+          var request = new RestRequest(Method.GET);
+          IRestResponse response = client.Execute(request);
+    post:
+      operationId: createDek
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              $ref: '#/components/schemas/CreateDekRequest'
+          application/vnd.schemaregistry+json:
+            schema:
+              $ref: '#/components/schemas/CreateDekRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDekRequest'
+          application/octet-stream:
+            schema:
+              $ref: '#/components/schemas/CreateDekRequest'
+        description: The create request
+        required: true
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/Dek'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/Dek'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/Dek'
+          description: The create response
+      summary: Create a dek.
+      tags:
+      - Data Encryption Keys (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks \
+            --header 'content-type: application/octet-stream' \
+            --data '{"subject":"subject","encryptedKeyMaterial":"encryptedKeyMaterial","version":0,"algorithm":"AES128_GCM"}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"subject\":\"subject\",\"encryptedKeyMaterial\":\"encryptedKeyMaterial\",\"version\":0,\"algorithm\":\"AES128_GCM\"}");
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks")
+            .post(body)
+            .addHeader("content-type", "application/octet-stream")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"subject\\\":\\\"subject\\\",\\\
+          \"encryptedKeyMaterial\\\":\\\"encryptedKeyMaterial\\\",\\\"version\\\"\
+          :0,\\\"algorithm\\\":\\\"AES128_GCM\\\"}\")\n\n\treq, _ := http.NewRequest(\"\
+          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/octet-stream\"\
+          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
+          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          payload = "{\"subject\":\"subject\",\"encryptedKeyMaterial\":\"encryptedKeyMaterial\",\"version\":0,\"algorithm\":\"AES128_GCM\"}"
+
+          headers = { 'content-type': "application/octet-stream" }
+
+          conn.request("POST", "/dek-registry/v1/keks/%7Bname%7D/deks", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/dek-registry/v1/keks/%7Bname%7D/deks",
+            "headers": {
+              "content-type": "application/octet-stream"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            subject: 'subject',
+            encryptedKeyMaterial: 'encryptedKeyMaterial',
+            version: 0,
+            algorithm: 'AES128_GCM'
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/octet-stream");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"subject\":\"subject\",\"encryptedKeyMaterial\":\"encryptedKeyMaterial\",\"version\":0,\"algorithm\":\"AES128_GCM\"}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks");
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("content-type", "application/octet-stream");
+          request.AddParameter("application/octet-stream", "{\"subject\":\"subject\",\"encryptedKeyMaterial\":\"encryptedKeyMaterial\",\"version\":0,\"algorithm\":\"AES128_GCM\"}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+  /dek-registry/v1/keks/{name}/deks/{subject}:
+    delete:
+      operationId: deleteDekVersions
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Subject of the dek
+        explode: false
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Algorithm of the dek
+        explode: true
+        in: query
+        name: algorithm
+        required: false
+        schema:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        style: form
+      - description: Whether to perform a permanent delete
+        explode: true
+        in: query
+        name: permanent
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Delete all versions of a dek.
+      tags:
+      - Data Encryption Keys (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request DELETE \
+            --url https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D")
+            .delete(null)
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D\"\
+          \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          conn.request("DELETE", "/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D")
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "DELETE",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D",
+            "headers": {}
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D");
+          var request = new RestRequest(Method.DELETE);
+          IRestResponse response = client.Execute(request);
+    get:
+      operationId: getDek
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Subject of the dek
+        explode: false
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Algorithm of the dek
+        explode: true
+        in: query
+        name: algorithm
+        required: false
+        schema:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        style: form
+      - description: Whether to include deleted keys
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/Dek'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/Dek'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/Dek'
+          description: The dek info
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Get a dek by subject.
+      tags:
+      - Data Encryption Keys (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D")
+            .get()
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          conn.request("GET", "/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D")
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D",
+            "headers": {}
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D");
+          var request = new RestRequest(Method.GET);
+          IRestResponse response = client.Execute(request);
+  /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version}:
+    delete:
+      operationId: deleteDekVersion
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Subject of the dek
+        explode: false
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Version of the dek
+        explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Algorithm of the dek
+        explode: true
+        in: query
+        name: algorithm
+        required: false
+        schema:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        style: form
+      - description: Whether to perform a permanent delete
+        explode: true
+        in: query
+        name: permanent
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Error code 40470 -- Key not found
+        "422":
+          description: Error code 42202 -- Invalid version
+      summary: Delete a dek version.
+      tags:
+      - Data Encryption Keys (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request DELETE \
+            --url https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions/%7Bversion%7D
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions/%7Bversion%7D")
+            .delete(null)
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions/%7Bversion%7D\"\
+          \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          conn.request("DELETE", "/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions/%7Bversion%7D")
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "DELETE",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions/%7Bversion%7D",
+            "headers": {}
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions/%7Bversion%7D");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions/%7Bversion%7D");
+          var request = new RestRequest(Method.DELETE);
+          IRestResponse response = client.Execute(request);
+    get:
+      operationId: getDekByVersion
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Subject of the dek
+        explode: false
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Version of the dek
+        explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Algorithm of the dek
+        explode: true
+        in: query
+        name: algorithm
+        required: false
+        schema:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        style: form
+      - description: Whether to include deleted keys
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/Dek'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/Dek'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/Dek'
+          description: The dek info
+        "404":
+          description: Error code 40470 -- Key not found
+        "422":
+          description: Error code 42202 -- Invalid version
+      summary: Get a dek by subject and version.
+      tags:
+      - Data Encryption Keys (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions/%7Bversion%7D
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions/%7Bversion%7D")
+            .get()
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions/%7Bversion%7D\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          conn.request("GET", "/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions/%7Bversion%7D")
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions/%7Bversion%7D",
+            "headers": {}
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions/%7Bversion%7D");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions/%7Bversion%7D");
+          var request = new RestRequest(Method.GET);
+          IRestResponse response = client.Execute(request);
+  /dek-registry/v1/keks/{name}/deks/{subject}/versions:
+    get:
+      operationId: getDekVersions
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Subject of the dek
+        explode: false
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Algorithm of the dek
+        explode: true
+        in: query
+        name: algorithm
+        required: false
+        schema:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        style: form
+      - description: Whether to include deleted keys
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  example: 1
+                  format: int32
+                  type: integer
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  example: 1
+                  format: int32
+                  type: integer
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  example: 1
+                  format: int32
+                  type: integer
+                type: array
+          description: List of version numbers for dek
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: List versions of dek.
+      tags:
+      - Data Encryption Keys (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions")
+            .get()
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          conn.request("GET", "/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions")
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions",
+            "headers": {}
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions");
+          var request = new RestRequest(Method.GET);
+          IRestResponse response = client.Execute(request);
+  /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version}/undelete:
+    post:
+      operationId: undeleteDekVersion
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Subject of the dek
+        explode: false
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Version of the dek
+        explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Algorithm of the dek
+        explode: true
+        in: query
+        name: algorithm
+        required: false
+        schema:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        style: form
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Error code 40470 -- Key not found
+        "422":
+          description: Error code 42202 -- Invalid version
+      summary: Undelete a dek version.
+      tags:
+      - Data Encryption Keys (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions/%7Bversion%7D/undelete
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions/%7Bversion%7D/undelete")
+            .post(null)
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions/%7Bversion%7D/undelete\"\
+          \n\n\treq, _ := http.NewRequest(\"POST\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          conn.request("POST", "/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions/%7Bversion%7D/undelete")
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions/%7Bversion%7D/undelete",
+            "headers": {}
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions/%7Bversion%7D/undelete");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/versions/%7Bversion%7D/undelete");
+          var request = new RestRequest(Method.POST);
+          IRestResponse response = client.Execute(request);
+  /dek-registry/v1/keks/{name}/deks/{subject}/undelete:
+    post:
+      operationId: undeleteDekVersions
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Subject of the dek
+        explode: false
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Algorithm of the dek
+        explode: true
+        in: query
+        name: algorithm
+        required: false
+        schema:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        style: form
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Undelete all versions of a dek.
+      tags:
+      - Data Encryption Keys (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/undelete
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/undelete")
+            .post(null)
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/undelete\"\
+          \n\n\treq, _ := http.NewRequest(\"POST\", url, nil)\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          conn.request("POST", "/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/undelete")
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/undelete",
+            "headers": {}
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/undelete");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/dek-registry/v1/keks/%7Bname%7D/deks/%7Bsubject%7D/undelete");
+          var request = new RestRequest(Method.POST);
+          IRestResponse response = client.Execute(request);
 components:
   responses:
     schemaregistry.v1.BadRequestError:
       content:
         application/json:
           example:
-            error:
-              code: 400
-              message: Bad Request
+            error_code: 400
+            message: Bad Request
           schema:
             $ref: '#/components/schemas/ErrorMessage'
       description: Bad Request
@@ -8160,9 +9915,8 @@ components:
       content:
         application/json:
           example:
-            error:
-              code: 401
-              message: Unauthorized
+            error_code: 401
+            message: Unauthorized
           schema:
             $ref: '#/components/schemas/ErrorMessage'
       description: Unauthorized
@@ -8170,9 +9924,8 @@ components:
       content:
         application/json:
           example:
-            error:
-              code: 403
-              message: Forbidden
+            error_code: 403
+            message: Forbidden
           schema:
             $ref: '#/components/schemas/ErrorMessage'
       description: Forbidden
@@ -8180,9 +9933,8 @@ components:
       content:
         application/json:
           example:
-            error:
-              code: 404
-              message: account not found
+            error_code: 404
+            message: account not found
           schema:
             $ref: '#/components/schemas/ErrorMessage'
       description: Not Found
@@ -8190,9 +9942,8 @@ components:
       content:
         application/json:
           example:
-            error:
-              code: 404
-              message: resource not found
+            error_code: 404
+            message: resource not found
           schema:
             $ref: '#/components/schemas/ErrorMessage'
       description: Not Found
@@ -8200,9 +9951,8 @@ components:
       content:
         application/json:
           example:
-            error:
-              code: 500
-              message: Oops, something went wrong
+            error_code: 500
+            message: Oops, something went wrong
           schema:
             $ref: '#/components/schemas/ErrorMessage'
       description: Internal Server Error
@@ -8473,8 +10223,31 @@ components:
     Config:
       description: Config
       example:
+        overrideRuleSet:
+          properties: '{}'
+        defaultMetadata:
+          properties: '{}'
         compatibilityLevel: FULL_TRANSITIVE
+        normalize: true
+        overrideMetadata:
+          properties: '{}'
+        defaultRuleSet:
+          properties: '{}'
+        alias: alias
+        compatibilityGroup: compatibilityGroup
       properties:
+        alias:
+          description: |-
+            If alias is specified, then this subject is an alias for the subject
+            named by the alias. That means that any reference to this subject
+            will be replaced by the alias.
+          type: string
+        normalize:
+          description: |-
+            If true, then schemas are automatically normalized when registered or
+            when passed during lookups. This means that clients do not have to
+            pass the "normalize" query parameter to have normalization occur.
+          type: boolean
         compatibilityLevel:
           description: Compatibility Level
           example: FULL_TRANSITIVE
@@ -8487,12 +10260,48 @@ components:
           - FULL
           - FULL_TRANSITIVE
           - NONE
+        compatibilityGroup:
+          description: |-
+            Only schemas that belong to the same compatibility group will be
+            checked for compatibility.
+          type: string
+        defaultMetadata:
+          $ref: '#/components/schemas/Config_defaultMetadata'
+        overrideMetadata:
+          $ref: '#/components/schemas/Config_overrideMetadata'
+        defaultRuleSet:
+          $ref: '#/components/schemas/Config_defaultRuleSet'
+        overrideRuleSet:
+          $ref: '#/components/schemas/Config_overrideRuleSet'
       type: object
     ConfigUpdateRequest:
       description: Config update request
       example:
+        overrideRuleSet:
+          properties: '{}'
+        defaultMetadata:
+          properties: '{}'
+        normalize: true
+        overrideMetadata:
+          properties: '{}'
+        defaultRuleSet:
+          properties: '{}'
+        alias: alias
         compatibility: FULL_TRANSITIVE
+        compatibilityGroup: compatibilityGroup
       properties:
+        alias:
+          description: |-
+            If alias is specified, then this subject is an alias for the subject
+            named by the alias. That means that any reference to this subject
+            will be replaced by the alias.
+          type: string
+        normalize:
+          description: |-
+            If true, then schemas are automatically normalized when registered
+            or when passed during lookups. This means that clients do not have
+            to pass the "normalize" query parameter to have normalization occur.
+          type: boolean
         compatibility:
           description: Compatibility Level
           example: FULL_TRANSITIVE
@@ -8505,6 +10314,19 @@ components:
           - FULL
           - FULL_TRANSITIVE
           - NONE
+        compatibilityGroup:
+          description: |-
+            Only schemas that belong to the same compatibility group will be
+            checked for compatibility.
+          type: string
+        defaultMetadata:
+          $ref: '#/components/schemas/Config_defaultMetadata'
+        overrideMetadata:
+          $ref: '#/components/schemas/Config_overrideMetadata'
+        defaultRuleSet:
+          $ref: '#/components/schemas/Config_defaultRuleSet'
+        overrideRuleSet:
+          $ref: '#/components/schemas/Config_overrideRuleSet'
       type: object
     Mode:
       description: Schema Registry operating mode
@@ -8650,17 +10472,181 @@ components:
           format: int32
           type: integer
       type: object
+    Dek:
+      example:
+        kekName: kekName
+        keyMaterial: keyMaterial
+        deleted: true
+        subject: subject
+        encryptedKeyMaterial: encryptedKeyMaterial
+        version: 0
+        algorithm: AES128_GCM
+        ts: 6
+      properties:
+        kekName:
+          type: string
+        subject:
+          type: string
+        version:
+          format: int32
+          type: integer
+        algorithm:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        encryptedKeyMaterial:
+          type: string
+        keyMaterial:
+          type: string
+        ts:
+          format: int64
+          type: integer
+        deleted:
+          type: boolean
+      type: object
+    CreateDekRequest:
+      example:
+        subject: subject
+        encryptedKeyMaterial: encryptedKeyMaterial
+        version: 0
+        algorithm: AES128_GCM
+      properties:
+        subject:
+          type: string
+        version:
+          format: int32
+          type: integer
+        algorithm:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        encryptedKeyMaterial:
+          type: string
+      type: object
+    Kek:
+      example:
+        kmsProps:
+          key: kmsProps
+        shared: true
+        deleted: true
+        name: name
+        doc: doc
+        kmsKeyId: kmsKeyId
+        kmsType: kmsType
+        ts: 0
+      properties:
+        name:
+          type: string
+        kmsType:
+          type: string
+        kmsKeyId:
+          type: string
+        kmsProps:
+          additionalProperties:
+            type: string
+          type: object
+        doc:
+          type: string
+        shared:
+          type: boolean
+        ts:
+          format: int64
+          type: integer
+        deleted:
+          type: boolean
+      type: object
+    CreateKekRequest:
+      example:
+        kmsProps:
+          key: kmsProps
+        shared: true
+        name: name
+        doc: doc
+        kmsKeyId: kmsKeyId
+        kmsType: kmsType
+      properties:
+        name:
+          type: string
+        kmsType:
+          type: string
+        kmsKeyId:
+          type: string
+        kmsProps:
+          additionalProperties:
+            type: string
+          type: object
+        doc:
+          type: string
+        shared:
+          type: boolean
+      type: object
+    UpdateKekRequest:
+      example:
+        kmsProps:
+          key: kmsProps
+        shared: true
+        doc: doc
+      properties:
+        kmsProps:
+          additionalProperties:
+            type: string
+          type: object
+        doc:
+          type: string
+        shared:
+          type: boolean
+      type: object
+    Config_defaultMetadata:
+      description: Default value for the metadata to be used during schema registration.
+      example:
+        properties: '{}'
+      properties:
+        properties:
+          description: The metadata properties and their new values
+          type: object
+      type: object
+    Config_overrideMetadata:
+      description: Override value for the metadata to be used during schema registration.
+      example:
+        properties: '{}'
+      properties:
+        properties:
+          description: The metadata properties and their new values
+          type: object
+      type: object
+    Config_defaultRuleSet:
+      description: Default value for the ruleSet to be used during schema registration.
+      example:
+        properties: '{}'
+      properties:
+        properties:
+          description: The metadata properties and their new values
+          type: object
+      type: object
+    Config_overrideRuleSet:
+      description: Override value for the ruleSet to be used during schema registration.
+      example:
+        properties: '{}'
+      properties:
+        properties:
+          description: The metadata properties and their new values
+          type: object
+      type: object
   securitySchemes:
-    api-key:
-      description: Authenticate with API Keys using HTTP Basic Auth. Treat the API
-        Key ID as the username and API Key Secret as the password.
+    resource-api-key:
+      description: "Authenticate with resource-specific API Keys using HTTP Basic\
+        \ Auth. Treat the resource-specific API Key ID \nas the username and resource-specific\
+        \ API Key Secret as the password.\n"
       scheme: basic
       type: http
-    confluent-sts-access-token:
-      description: Authenticate with Confluent API using this credentials (JSON Web
-        Tokens) following OAuth 2.0.
+    external-access-token:
+      description: Authenticate with OAuth 2.0.
       flows:
         clientCredentials:
           scopes: {}
-          tokenUrl: https://api.confluent.cloud/sts/v1/oauth2/token
+          tokenUrl: https://<oauth-identity-provider>/token
       type: oauth2

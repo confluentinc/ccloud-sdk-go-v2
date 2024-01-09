@@ -89,6 +89,15 @@ Class | Method | HTTP request | Description
 *ConfigV1Api* | [**UpdateSubjectLevelConfig**](docs/ConfigV1Api.md#updatesubjectlevelconfig) | **Put** /config/{subject} | Update subject compatibility level
 *ConfigV1Api* | [**UpdateTopLevelConfig**](docs/ConfigV1Api.md#updatetoplevelconfig) | **Put** /config | Update global compatibility level
 *ContextsV1Api* | [**ListContexts**](docs/ContextsV1Api.md#listcontexts) | **Get** /contexts | List contexts
+*DataEncryptionKeysV1Api* | [**CreateDek**](docs/DataEncryptionKeysV1Api.md#createdek) | **Post** /dek-registry/v1/keks/{name}/deks | Create a dek.
+*DataEncryptionKeysV1Api* | [**DeleteDekVersion**](docs/DataEncryptionKeysV1Api.md#deletedekversion) | **Delete** /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version} | Delete a dek version.
+*DataEncryptionKeysV1Api* | [**DeleteDekVersions**](docs/DataEncryptionKeysV1Api.md#deletedekversions) | **Delete** /dek-registry/v1/keks/{name}/deks/{subject} | Delete all versions of a dek.
+*DataEncryptionKeysV1Api* | [**GetDek**](docs/DataEncryptionKeysV1Api.md#getdek) | **Get** /dek-registry/v1/keks/{name}/deks/{subject} | Get a dek by subject.
+*DataEncryptionKeysV1Api* | [**GetDekByVersion**](docs/DataEncryptionKeysV1Api.md#getdekbyversion) | **Get** /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version} | Get a dek by subject and version.
+*DataEncryptionKeysV1Api* | [**GetDekSubjects**](docs/DataEncryptionKeysV1Api.md#getdeksubjects) | **Get** /dek-registry/v1/keks/{name}/deks | Get a list of dek subjects.
+*DataEncryptionKeysV1Api* | [**GetDekVersions**](docs/DataEncryptionKeysV1Api.md#getdekversions) | **Get** /dek-registry/v1/keks/{name}/deks/{subject}/versions | List versions of dek.
+*DataEncryptionKeysV1Api* | [**UndeleteDekVersion**](docs/DataEncryptionKeysV1Api.md#undeletedekversion) | **Post** /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version}/undelete | Undelete a dek version.
+*DataEncryptionKeysV1Api* | [**UndeleteDekVersions**](docs/DataEncryptionKeysV1Api.md#undeletedekversions) | **Post** /dek-registry/v1/keks/{name}/deks/{subject}/undelete | Undelete all versions of a dek.
 *ExportersV1Api* | [**DeleteExporter**](docs/ExportersV1Api.md#deleteexporter) | **Delete** /exporters/{name} | Delete schema exporter by name.
 *ExportersV1Api* | [**GetExporterConfigByName**](docs/ExportersV1Api.md#getexporterconfigbyname) | **Get** /exporters/{name}/config | Gets schema exporter config by name.
 *ExportersV1Api* | [**GetExporterInfoByName**](docs/ExportersV1Api.md#getexporterinfobyname) | **Get** /exporters/{name} | Gets schema exporter by name.
@@ -100,6 +109,12 @@ Class | Method | HTTP request | Description
 *ExportersV1Api* | [**ResumeExporterByName**](docs/ExportersV1Api.md#resumeexporterbyname) | **Put** /exporters/{name}/resume | Resume schema exporter by name.
 *ExportersV1Api* | [**UpdateExporterConfigByName**](docs/ExportersV1Api.md#updateexporterconfigbyname) | **Put** /exporters/{name}/config | Update schema exporter config by name.
 *ExportersV1Api* | [**UpdateExporterInfo**](docs/ExportersV1Api.md#updateexporterinfo) | **Put** /exporters/{name} | Update schema exporter by name.
+*KeyEncryptionKeysV1Api* | [**CreateKek**](docs/KeyEncryptionKeysV1Api.md#createkek) | **Post** /dek-registry/v1/keks | Create a kek.
+*KeyEncryptionKeysV1Api* | [**DeleteKek**](docs/KeyEncryptionKeysV1Api.md#deletekek) | **Delete** /dek-registry/v1/keks/{name} | Delete a kek.
+*KeyEncryptionKeysV1Api* | [**GetKek**](docs/KeyEncryptionKeysV1Api.md#getkek) | **Get** /dek-registry/v1/keks/{name} | Get a kek by name.
+*KeyEncryptionKeysV1Api* | [**GetKekNames**](docs/KeyEncryptionKeysV1Api.md#getkeknames) | **Get** /dek-registry/v1/keks | Get a list of kek names.
+*KeyEncryptionKeysV1Api* | [**PutKek**](docs/KeyEncryptionKeysV1Api.md#putkek) | **Put** /dek-registry/v1/keks/{name} | Alters a kek.
+*KeyEncryptionKeysV1Api* | [**UndeleteKek**](docs/KeyEncryptionKeysV1Api.md#undeletekek) | **Post** /dek-registry/v1/keks/{name}/undelete | Undelete a kek.
 *ModesV1Api* | [**DeleteSubjectMode**](docs/ModesV1Api.md#deletesubjectmode) | **Delete** /mode/{subject} | Delete subject mode
 *ModesV1Api* | [**GetMode**](docs/ModesV1Api.md#getmode) | **Get** /mode/{subject} | Get subject mode
 *ModesV1Api* | [**GetTopLevelMode**](docs/ModesV1Api.md#gettoplevelmode) | **Get** /mode | Get global mode
@@ -127,13 +142,21 @@ Class | Method | HTTP request | Description
  - [ClusterConfig](docs/ClusterConfig.md)
  - [CompatibilityCheckResponse](docs/CompatibilityCheckResponse.md)
  - [Config](docs/Config.md)
+ - [ConfigDefaultMetadata](docs/ConfigDefaultMetadata.md)
+ - [ConfigDefaultRuleSet](docs/ConfigDefaultRuleSet.md)
+ - [ConfigOverrideMetadata](docs/ConfigOverrideMetadata.md)
+ - [ConfigOverrideRuleSet](docs/ConfigOverrideRuleSet.md)
  - [ConfigUpdateRequest](docs/ConfigUpdateRequest.md)
+ - [CreateDekRequest](docs/CreateDekRequest.md)
+ - [CreateKekRequest](docs/CreateKekRequest.md)
+ - [Dek](docs/Dek.md)
  - [ErrorMessage](docs/ErrorMessage.md)
  - [ExporterConfigResponse](docs/ExporterConfigResponse.md)
  - [ExporterReference](docs/ExporterReference.md)
  - [ExporterResponse](docs/ExporterResponse.md)
  - [ExporterStatusResponse](docs/ExporterStatusResponse.md)
  - [ExporterUpdateRequest](docs/ExporterUpdateRequest.md)
+ - [Kek](docs/Kek.md)
  - [Mode](docs/Mode.md)
  - [ModeUpdateRequest](docs/ModeUpdateRequest.md)
  - [RegisterExporterRequest](docs/RegisterExporterRequest.md)
@@ -143,28 +166,14 @@ Class | Method | HTTP request | Description
  - [SchemaReference](docs/SchemaReference.md)
  - [SchemaString](docs/SchemaString.md)
  - [SubjectVersion](docs/SubjectVersion.md)
+ - [UpdateKekRequest](docs/UpdateKekRequest.md)
 
 
 ## Documentation For Authorization
 
 
 
-### api-key
-
-- **Type**: HTTP basic authentication
-
-Example
-
-```golang
-auth := context.WithValue(context.Background(), sw.ContextBasicAuth, sw.BasicAuth{
-    UserName: "username",
-    Password: "password",
-})
-r, err := client.Service.Operation(auth, args)
-```
-
-
-### confluent-sts-access-token
+### external-access-token
 
 
 - **Type**: OAuth
@@ -188,6 +197,21 @@ import "golang.org/x/oauth2"
 
 tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
 auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
+r, err := client.Service.Operation(auth, args)
+```
+
+
+### resource-api-key
+
+- **Type**: HTTP basic authentication
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextBasicAuth, sw.BasicAuth{
+    UserName: "username",
+    Password: "password",
+})
 r, err := client.Service.Operation(auth, args)
 ```
 
