@@ -34,22 +34,22 @@ import (
 	"reflect"
 )
 
-// NetworkingV1AzurePrivateLinkAttachmentStatus Azure PrivateLink attachment represents reserved capacity in zonal PrivateLink services.  A Private Endpoint can be connected to the PLS corresponding to each zone.
+// NetworkingV1AzurePrivateLinkAttachmentStatus Azure PrivateLink attachment represents reserved capacity in a PrivateLink service that can be used to establish PrivateLink
 type NetworkingV1AzurePrivateLinkAttachmentStatus struct {
 	// PrivateLinkAttachmentStatus kind.
 	Kind string `json:"kind,omitempty"`
-	// Array of Azure PrivateLink services that can be used to connect PrivateEndpoints for each availability zone.
-	PrivateLinkServices []NetworkingV1AzurePrivateLinkService `json:"private_link_services,omitempty"`
+	// Azure PrivateLink service that can be used to connect to a PrivateEndpoint.
+	PrivateLinkService NetworkingV1AzurePrivateLinkService `json:"private_link_service,omitempty"`
 }
 
 // NewNetworkingV1AzurePrivateLinkAttachmentStatus instantiates a new NetworkingV1AzurePrivateLinkAttachmentStatus object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1AzurePrivateLinkAttachmentStatus(kind string, privateLinkServices []NetworkingV1AzurePrivateLinkService) *NetworkingV1AzurePrivateLinkAttachmentStatus {
+func NewNetworkingV1AzurePrivateLinkAttachmentStatus(kind string, privateLinkService NetworkingV1AzurePrivateLinkService) *NetworkingV1AzurePrivateLinkAttachmentStatus {
 	this := NetworkingV1AzurePrivateLinkAttachmentStatus{}
 	this.Kind = kind
-	this.PrivateLinkServices = privateLinkServices
+	this.PrivateLinkService = privateLinkService
 	return &this
 }
 
@@ -85,34 +85,34 @@ func (o *NetworkingV1AzurePrivateLinkAttachmentStatus) SetKind(v string) {
 	o.Kind = v
 }
 
-// GetPrivateLinkServices returns the PrivateLinkServices field value
-func (o *NetworkingV1AzurePrivateLinkAttachmentStatus) GetPrivateLinkServices() []NetworkingV1AzurePrivateLinkService {
+// GetPrivateLinkService returns the PrivateLinkService field value
+func (o *NetworkingV1AzurePrivateLinkAttachmentStatus) GetPrivateLinkService() NetworkingV1AzurePrivateLinkService {
 	if o == nil {
-		var ret []NetworkingV1AzurePrivateLinkService
+		var ret NetworkingV1AzurePrivateLinkService
 		return ret
 	}
 
-	return o.PrivateLinkServices
+	return o.PrivateLinkService
 }
 
-// GetPrivateLinkServicesOk returns a tuple with the PrivateLinkServices field value
+// GetPrivateLinkServiceOk returns a tuple with the PrivateLinkService field value
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1AzurePrivateLinkAttachmentStatus) GetPrivateLinkServicesOk() (*[]NetworkingV1AzurePrivateLinkService, bool) {
+func (o *NetworkingV1AzurePrivateLinkAttachmentStatus) GetPrivateLinkServiceOk() (*NetworkingV1AzurePrivateLinkService, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.PrivateLinkServices, true
+	return &o.PrivateLinkService, true
 }
 
-// SetPrivateLinkServices sets field value
-func (o *NetworkingV1AzurePrivateLinkAttachmentStatus) SetPrivateLinkServices(v []NetworkingV1AzurePrivateLinkService) {
-	o.PrivateLinkServices = v
+// SetPrivateLinkService sets field value
+func (o *NetworkingV1AzurePrivateLinkAttachmentStatus) SetPrivateLinkService(v NetworkingV1AzurePrivateLinkService) {
+	o.PrivateLinkService = v
 }
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1AzurePrivateLinkAttachmentStatus) Redact() {
 	o.recurseRedact(&o.Kind)
-	o.recurseRedact(&o.PrivateLinkServices)
+	o.recurseRedact(&o.PrivateLinkService)
 }
 
 func (o *NetworkingV1AzurePrivateLinkAttachmentStatus) recurseRedact(v interface{}) {
@@ -151,7 +151,7 @@ func (o NetworkingV1AzurePrivateLinkAttachmentStatus) MarshalJSON() ([]byte, err
 		toSerialize["kind"] = o.Kind
 	}
 	if true {
-		toSerialize["private_link_services"] = o.PrivateLinkServices
+		toSerialize["private_link_service"] = o.PrivateLinkService
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

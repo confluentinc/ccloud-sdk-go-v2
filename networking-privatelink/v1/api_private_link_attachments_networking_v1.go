@@ -31,6 +31,7 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
+	"reflect"
 	"strings"
 )
 
@@ -44,7 +45,7 @@ type PrivateLinkAttachmentsNetworkingV1Api interface {
 	/*
 		CreateNetworkingV1PrivateLinkAttachment Create a Private Link Attachment
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to create a private link attachment.
 
@@ -60,7 +61,7 @@ type PrivateLinkAttachmentsNetworkingV1Api interface {
 	/*
 		DeleteNetworkingV1PrivateLinkAttachment Delete a Private Link Attachment
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to delete a private link attachment.
 
@@ -76,7 +77,7 @@ type PrivateLinkAttachmentsNetworkingV1Api interface {
 	/*
 		GetNetworkingV1PrivateLinkAttachment Read a Private Link Attachment
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to read a private link attachment.
 
@@ -93,7 +94,7 @@ type PrivateLinkAttachmentsNetworkingV1Api interface {
 	/*
 		ListNetworkingV1PrivateLinkAttachments List of Private Link Attachments
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Retrieve a sorted, filtered, paginated list of all private link attachments.
 
@@ -109,7 +110,7 @@ type PrivateLinkAttachmentsNetworkingV1Api interface {
 	/*
 		UpdateNetworkingV1PrivateLinkAttachment Update a Private Link Attachment
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to update a private link attachment.
 
@@ -147,7 +148,7 @@ func (r ApiCreateNetworkingV1PrivateLinkAttachmentRequest) Execute() (Networking
 /*
 CreateNetworkingV1PrivateLinkAttachment Create a Private Link Attachment
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create a private link attachment.
 
@@ -329,7 +330,7 @@ func (r ApiDeleteNetworkingV1PrivateLinkAttachmentRequest) Execute() (*_nethttp.
 /*
 DeleteNetworkingV1PrivateLinkAttachment Delete a Private Link Attachment
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete a private link attachment.
 
@@ -485,7 +486,7 @@ func (r ApiGetNetworkingV1PrivateLinkAttachmentRequest) Execute() (NetworkingV1P
 /*
 GetNetworkingV1PrivateLinkAttachment Read a Private Link Attachment
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a private link attachment.
 
@@ -636,10 +637,10 @@ type ApiListNetworkingV1PrivateLinkAttachmentsRequest struct {
 	ctx             _context.Context
 	ApiService      PrivateLinkAttachmentsNetworkingV1Api
 	environment     *string
-	specDisplayName *MultipleSearchFilter
-	specCloud       *MultipleSearchFilter
-	specRegion      *MultipleSearchFilter
-	statusPhase     *MultipleSearchFilter
+	specDisplayName *[]string
+	specCloud       *[]string
+	specRegion      *[]string
+	statusPhase     *[]string
 	pageSize        *int32
 	pageToken       *string
 }
@@ -651,25 +652,25 @@ func (r ApiListNetworkingV1PrivateLinkAttachmentsRequest) Environment(environmen
 }
 
 // Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PrivateLinkAttachmentsRequest) SpecDisplayName(specDisplayName MultipleSearchFilter) ApiListNetworkingV1PrivateLinkAttachmentsRequest {
+func (r ApiListNetworkingV1PrivateLinkAttachmentsRequest) SpecDisplayName(specDisplayName []string) ApiListNetworkingV1PrivateLinkAttachmentsRequest {
 	r.specDisplayName = &specDisplayName
 	return r
 }
 
 // Filter the results by exact match for spec.cloud. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PrivateLinkAttachmentsRequest) SpecCloud(specCloud MultipleSearchFilter) ApiListNetworkingV1PrivateLinkAttachmentsRequest {
+func (r ApiListNetworkingV1PrivateLinkAttachmentsRequest) SpecCloud(specCloud []string) ApiListNetworkingV1PrivateLinkAttachmentsRequest {
 	r.specCloud = &specCloud
 	return r
 }
 
 // Filter the results by exact match for spec.region. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PrivateLinkAttachmentsRequest) SpecRegion(specRegion MultipleSearchFilter) ApiListNetworkingV1PrivateLinkAttachmentsRequest {
+func (r ApiListNetworkingV1PrivateLinkAttachmentsRequest) SpecRegion(specRegion []string) ApiListNetworkingV1PrivateLinkAttachmentsRequest {
 	r.specRegion = &specRegion
 	return r
 }
 
 // Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PrivateLinkAttachmentsRequest) StatusPhase(statusPhase MultipleSearchFilter) ApiListNetworkingV1PrivateLinkAttachmentsRequest {
+func (r ApiListNetworkingV1PrivateLinkAttachmentsRequest) StatusPhase(statusPhase []string) ApiListNetworkingV1PrivateLinkAttachmentsRequest {
 	r.statusPhase = &statusPhase
 	return r
 }
@@ -693,7 +694,7 @@ func (r ApiListNetworkingV1PrivateLinkAttachmentsRequest) Execute() (NetworkingV
 /*
 ListNetworkingV1PrivateLinkAttachments List of Private Link Attachments
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all private link attachments.
 
@@ -734,16 +735,48 @@ func (a *PrivateLinkAttachmentsNetworkingV1ApiService) ListNetworkingV1PrivateLi
 	}
 
 	if r.specDisplayName != nil {
-		localVarQueryParams.Add("spec.display_name", parameterToString(*r.specDisplayName, ""))
+		t := *r.specDisplayName
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.display_name", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.display_name", parameterToString(t, "multi"))
+		}
 	}
 	if r.specCloud != nil {
-		localVarQueryParams.Add("spec.cloud", parameterToString(*r.specCloud, ""))
+		t := *r.specCloud
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.cloud", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.cloud", parameterToString(t, "multi"))
+		}
 	}
 	if r.specRegion != nil {
-		localVarQueryParams.Add("spec.region", parameterToString(*r.specRegion, ""))
+		t := *r.specRegion
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.region", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.region", parameterToString(t, "multi"))
+		}
 	}
 	if r.statusPhase != nil {
-		localVarQueryParams.Add("status.phase", parameterToString(*r.statusPhase, ""))
+		t := *r.statusPhase
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("status.phase", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("status.phase", parameterToString(t, "multi"))
+		}
 	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.pageSize != nil {
@@ -864,7 +897,7 @@ func (r ApiUpdateNetworkingV1PrivateLinkAttachmentRequest) Execute() (Networking
 /*
 UpdateNetworkingV1PrivateLinkAttachment Update a Private Link Attachment
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update a private link attachment.
 
@@ -988,6 +1021,16 @@ func (a *PrivateLinkAttachmentsNetworkingV1ApiService) UpdateNetworkingV1Private
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
