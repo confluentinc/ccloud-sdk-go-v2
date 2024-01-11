@@ -31,6 +31,7 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
+	"reflect"
 	"strings"
 )
 
@@ -636,10 +637,10 @@ type ApiListNetworkingV1PrivateLinkAttachmentsRequest struct {
 	ctx             _context.Context
 	ApiService      PrivateLinkAttachmentsNetworkingV1Api
 	environment     *string
-	specDisplayName *MultipleSearchFilter
-	specCloud       *MultipleSearchFilter
-	specRegion      *MultipleSearchFilter
-	statusPhase     *MultipleSearchFilter
+	specDisplayName *[]string
+	specCloud       *[]string
+	specRegion      *[]string
+	statusPhase     *[]string
 	pageSize        *int32
 	pageToken       *string
 }
@@ -651,25 +652,25 @@ func (r ApiListNetworkingV1PrivateLinkAttachmentsRequest) Environment(environmen
 }
 
 // Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PrivateLinkAttachmentsRequest) SpecDisplayName(specDisplayName MultipleSearchFilter) ApiListNetworkingV1PrivateLinkAttachmentsRequest {
+func (r ApiListNetworkingV1PrivateLinkAttachmentsRequest) SpecDisplayName(specDisplayName []string) ApiListNetworkingV1PrivateLinkAttachmentsRequest {
 	r.specDisplayName = &specDisplayName
 	return r
 }
 
 // Filter the results by exact match for spec.cloud. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PrivateLinkAttachmentsRequest) SpecCloud(specCloud MultipleSearchFilter) ApiListNetworkingV1PrivateLinkAttachmentsRequest {
+func (r ApiListNetworkingV1PrivateLinkAttachmentsRequest) SpecCloud(specCloud []string) ApiListNetworkingV1PrivateLinkAttachmentsRequest {
 	r.specCloud = &specCloud
 	return r
 }
 
 // Filter the results by exact match for spec.region. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PrivateLinkAttachmentsRequest) SpecRegion(specRegion MultipleSearchFilter) ApiListNetworkingV1PrivateLinkAttachmentsRequest {
+func (r ApiListNetworkingV1PrivateLinkAttachmentsRequest) SpecRegion(specRegion []string) ApiListNetworkingV1PrivateLinkAttachmentsRequest {
 	r.specRegion = &specRegion
 	return r
 }
 
 // Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PrivateLinkAttachmentsRequest) StatusPhase(statusPhase MultipleSearchFilter) ApiListNetworkingV1PrivateLinkAttachmentsRequest {
+func (r ApiListNetworkingV1PrivateLinkAttachmentsRequest) StatusPhase(statusPhase []string) ApiListNetworkingV1PrivateLinkAttachmentsRequest {
 	r.statusPhase = &statusPhase
 	return r
 }
@@ -734,16 +735,48 @@ func (a *PrivateLinkAttachmentsNetworkingV1ApiService) ListNetworkingV1PrivateLi
 	}
 
 	if r.specDisplayName != nil {
-		localVarQueryParams.Add("spec.display_name", parameterToString(*r.specDisplayName, ""))
+		t := *r.specDisplayName
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.display_name", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.display_name", parameterToString(t, "multi"))
+		}
 	}
 	if r.specCloud != nil {
-		localVarQueryParams.Add("spec.cloud", parameterToString(*r.specCloud, ""))
+		t := *r.specCloud
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.cloud", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.cloud", parameterToString(t, "multi"))
+		}
 	}
 	if r.specRegion != nil {
-		localVarQueryParams.Add("spec.region", parameterToString(*r.specRegion, ""))
+		t := *r.specRegion
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.region", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.region", parameterToString(t, "multi"))
+		}
 	}
 	if r.statusPhase != nil {
-		localVarQueryParams.Add("status.phase", parameterToString(*r.statusPhase, ""))
+		t := *r.statusPhase
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("status.phase", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("status.phase", parameterToString(t, "multi"))
+		}
 	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.pageSize != nil {

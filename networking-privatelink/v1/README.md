@@ -97,7 +97,6 @@ Class | Method | HTTP request | Description
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
  - [ListMeta](docs/ListMeta.md)
- - [MultipleSearchFilter](docs/MultipleSearchFilter.md)
  - [NetworkingV1AwsPrivateLinkAttachmentConnection](docs/NetworkingV1AwsPrivateLinkAttachmentConnection.md)
  - [NetworkingV1AwsPrivateLinkAttachmentConnectionStatus](docs/NetworkingV1AwsPrivateLinkAttachmentConnectionStatus.md)
  - [NetworkingV1AwsPrivateLinkAttachmentStatus](docs/NetworkingV1AwsPrivateLinkAttachmentStatus.md)
