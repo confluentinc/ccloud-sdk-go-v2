@@ -42,9 +42,9 @@ type WsV1Workspace struct {
 	Kind     *string     `json:"kind,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
 	// The organization in which the workspace exists.
-	Org *string `json:"org,omitempty"`
+	OrganizationId *string `json:"organization_id,omitempty"`
 	// The environment in which the workspace exists.
-	Environment *string `json:"environment,omitempty"`
+	EnvironmentId *string `json:"environment_id,omitempty"`
 	// The workspace name that is unique across the environment and region.
 	Name *string            `json:"name,omitempty"`
 	Spec *WsV1WorkspaceSpec `json:"spec,omitempty"`
@@ -163,68 +163,68 @@ func (o *WsV1Workspace) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
-// GetOrg returns the Org field value if set, zero value otherwise.
-func (o *WsV1Workspace) GetOrg() string {
-	if o == nil || o.Org == nil {
+// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
+func (o *WsV1Workspace) GetOrganizationId() string {
+	if o == nil || o.OrganizationId == nil {
 		var ret string
 		return ret
 	}
-	return *o.Org
+	return *o.OrganizationId
 }
 
-// GetOrgOk returns a tuple with the Org field value if set, nil otherwise
+// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WsV1Workspace) GetOrgOk() (*string, bool) {
-	if o == nil || o.Org == nil {
+func (o *WsV1Workspace) GetOrganizationIdOk() (*string, bool) {
+	if o == nil || o.OrganizationId == nil {
 		return nil, false
 	}
-	return o.Org, true
+	return o.OrganizationId, true
 }
 
-// HasOrg returns a boolean if a field has been set.
-func (o *WsV1Workspace) HasOrg() bool {
-	if o != nil && o.Org != nil {
+// HasOrganizationId returns a boolean if a field has been set.
+func (o *WsV1Workspace) HasOrganizationId() bool {
+	if o != nil && o.OrganizationId != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetOrg gets a reference to the given string and assigns it to the Org field.
-func (o *WsV1Workspace) SetOrg(v string) {
-	o.Org = &v
+// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
+func (o *WsV1Workspace) SetOrganizationId(v string) {
+	o.OrganizationId = &v
 }
 
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *WsV1Workspace) GetEnvironment() string {
-	if o == nil || o.Environment == nil {
+// GetEnvironmentId returns the EnvironmentId field value if set, zero value otherwise.
+func (o *WsV1Workspace) GetEnvironmentId() string {
+	if o == nil || o.EnvironmentId == nil {
 		var ret string
 		return ret
 	}
-	return *o.Environment
+	return *o.EnvironmentId
 }
 
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
+// GetEnvironmentIdOk returns a tuple with the EnvironmentId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WsV1Workspace) GetEnvironmentOk() (*string, bool) {
-	if o == nil || o.Environment == nil {
+func (o *WsV1Workspace) GetEnvironmentIdOk() (*string, bool) {
+	if o == nil || o.EnvironmentId == nil {
 		return nil, false
 	}
-	return o.Environment, true
+	return o.EnvironmentId, true
 }
 
-// HasEnvironment returns a boolean if a field has been set.
-func (o *WsV1Workspace) HasEnvironment() bool {
-	if o != nil && o.Environment != nil {
+// HasEnvironmentId returns a boolean if a field has been set.
+func (o *WsV1Workspace) HasEnvironmentId() bool {
+	if o != nil && o.EnvironmentId != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *WsV1Workspace) SetEnvironment(v string) {
-	o.Environment = &v
+// SetEnvironmentId gets a reference to the given string and assigns it to the EnvironmentId field.
+func (o *WsV1Workspace) SetEnvironmentId(v string) {
+	o.EnvironmentId = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -296,8 +296,8 @@ func (o *WsV1Workspace) Redact() {
 	o.recurseRedact(o.ApiVersion)
 	o.recurseRedact(o.Kind)
 	o.recurseRedact(o.Metadata)
-	o.recurseRedact(o.Org)
-	o.recurseRedact(o.Environment)
+	o.recurseRedact(o.OrganizationId)
+	o.recurseRedact(o.EnvironmentId)
 	o.recurseRedact(o.Name)
 	o.recurseRedact(o.Spec)
 }
@@ -343,11 +343,11 @@ func (o WsV1Workspace) MarshalJSON() ([]byte, error) {
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if o.Org != nil {
-		toSerialize["org"] = o.Org
+	if o.OrganizationId != nil {
+		toSerialize["organization_id"] = o.OrganizationId
 	}
-	if o.Environment != nil {
-		toSerialize["environment"] = o.Environment
+	if o.EnvironmentId != nil {
+		toSerialize["environment_id"] = o.EnvironmentId
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name

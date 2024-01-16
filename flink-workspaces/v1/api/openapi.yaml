@@ -2247,12 +2247,12 @@ components:
           - properties:
               self:
                 example: https://flink.region.provider.confluent.cloud/ws/v1/organization/9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environments/env-12345/workspaces/my-workspace
-        org:
+        organization_id:
           description: The organization in which the workspace exists.
           example: 9bb441c4-edef-46ac-8a41-c49e44a3fd9a
           readOnly: true
           type: string
-        environment:
+        environment_id:
           description: The environment in which the workspace exists.
           example: env-12345
           readOnly: true

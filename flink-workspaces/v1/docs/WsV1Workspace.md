@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **ApiVersion** | Pointer to **string** | APIVersion defines the schema version of this representation of a resource. | [optional] [readonly] 
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
-**Org** | Pointer to **string** | The organization in which the workspace exists. | [optional] [readonly] 
-**Environment** | Pointer to **string** | The environment in which the workspace exists. | [optional] [readonly] 
+**OrganizationId** | Pointer to **string** | The organization in which the workspace exists. | [optional] [readonly] 
+**EnvironmentId** | Pointer to **string** | The environment in which the workspace exists. | [optional] [readonly] 
 **Name** | Pointer to **string** | The workspace name that is unique across the environment and region. | [optional] 
 **Spec** | Pointer to [**WsV1WorkspaceSpec**](WsV1WorkspaceSpec.md) |  | [optional] 
 
@@ -106,55 +106,55 @@ SetMetadata sets Metadata field to given value.
 
 HasMetadata returns a boolean if a field has been set.
 
-### GetOrg
+### GetOrganizationId
 
-`func (o *WsV1Workspace) GetOrg() string`
+`func (o *WsV1Workspace) GetOrganizationId() string`
 
-GetOrg returns the Org field if non-nil, zero value otherwise.
+GetOrganizationId returns the OrganizationId field if non-nil, zero value otherwise.
 
-### GetOrgOk
+### GetOrganizationIdOk
 
-`func (o *WsV1Workspace) GetOrgOk() (*string, bool)`
+`func (o *WsV1Workspace) GetOrganizationIdOk() (*string, bool)`
 
-GetOrgOk returns a tuple with the Org field if it's non-nil, zero value otherwise
+GetOrganizationIdOk returns a tuple with the OrganizationId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOrg
+### SetOrganizationId
 
-`func (o *WsV1Workspace) SetOrg(v string)`
+`func (o *WsV1Workspace) SetOrganizationId(v string)`
 
-SetOrg sets Org field to given value.
+SetOrganizationId sets OrganizationId field to given value.
 
-### HasOrg
+### HasOrganizationId
 
-`func (o *WsV1Workspace) HasOrg() bool`
+`func (o *WsV1Workspace) HasOrganizationId() bool`
 
-HasOrg returns a boolean if a field has been set.
+HasOrganizationId returns a boolean if a field has been set.
 
-### GetEnvironment
+### GetEnvironmentId
 
-`func (o *WsV1Workspace) GetEnvironment() string`
+`func (o *WsV1Workspace) GetEnvironmentId() string`
 
-GetEnvironment returns the Environment field if non-nil, zero value otherwise.
+GetEnvironmentId returns the EnvironmentId field if non-nil, zero value otherwise.
 
-### GetEnvironmentOk
+### GetEnvironmentIdOk
 
-`func (o *WsV1Workspace) GetEnvironmentOk() (*string, bool)`
+`func (o *WsV1Workspace) GetEnvironmentIdOk() (*string, bool)`
 
-GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
+GetEnvironmentIdOk returns a tuple with the EnvironmentId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetEnvironment
+### SetEnvironmentId
 
-`func (o *WsV1Workspace) SetEnvironment(v string)`
+`func (o *WsV1Workspace) SetEnvironmentId(v string)`
 
-SetEnvironment sets Environment field to given value.
+SetEnvironmentId sets EnvironmentId field to given value.
 
-### HasEnvironment
+### HasEnvironmentId
 
-`func (o *WsV1Workspace) HasEnvironment() bool`
+`func (o *WsV1Workspace) HasEnvironmentId() bool`
 
-HasEnvironment returns a boolean if a field has been set.
+HasEnvironmentId returns a boolean if a field has been set.
 
 ### GetName
 
