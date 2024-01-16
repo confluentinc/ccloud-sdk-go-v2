@@ -31,7 +31,6 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
-	"strings"
 )
 
 // Linger please
@@ -39,107 +38,100 @@ var (
 	_ _context.Context
 )
 
-type FeedbacksAiV1Api interface {
+type OrgPreferencesAiV1Api interface {
 
 	/*
-		CreateAiV1ChatCompletionFeedback Create a Feedback
+		GetAiV1OrgPreference Read the organization's ai-assistant setting in org-preferences.
 
 		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Submit feedback on the Confluent AI assistant.
+	Returns the organization's ai-assistant setting in org-preferences.
+
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param chatCompletionId The Chat Completion
-		 @return ApiCreateAiV1ChatCompletionFeedbackRequest
+		 @return ApiGetAiV1OrgPreferenceRequest
 	*/
-	CreateAiV1ChatCompletionFeedback(ctx _context.Context, chatCompletionId string) ApiCreateAiV1ChatCompletionFeedbackRequest
+	GetAiV1OrgPreference(ctx _context.Context) ApiGetAiV1OrgPreferenceRequest
 
-	// CreateAiV1ChatCompletionFeedbackExecute executes the request
-	//  @return AiV1Feedback
-	CreateAiV1ChatCompletionFeedbackExecute(r ApiCreateAiV1ChatCompletionFeedbackRequest) (AiV1Feedback, *_nethttp.Response, error)
+	// GetAiV1OrgPreferenceExecute executes the request
+	//  @return AiV1OrgPreferences
+	GetAiV1OrgPreferenceExecute(r ApiGetAiV1OrgPreferenceRequest) (AiV1OrgPreferences, *_nethttp.Response, error)
 
 	/*
-		CreateAiV1DocCompletionFeedback Create a Feedback
+		UpdateAiV1OrgPreference Set the organization's ai-assistant setting in org-preferences.
 
 		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Submit feedback on the Doc AI assistant.
+	Updates the organization's ai-assistant setting in org-preferences.
+
+
+
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param docCompletionId The Doc Completion
-		 @return ApiCreateAiV1DocCompletionFeedbackRequest
+		 @return ApiUpdateAiV1OrgPreferenceRequest
 	*/
-	CreateAiV1DocCompletionFeedback(ctx _context.Context, docCompletionId string) ApiCreateAiV1DocCompletionFeedbackRequest
+	UpdateAiV1OrgPreference(ctx _context.Context) ApiUpdateAiV1OrgPreferenceRequest
 
-	// CreateAiV1DocCompletionFeedbackExecute executes the request
-	//  @return AiV1Feedback
-	CreateAiV1DocCompletionFeedbackExecute(r ApiCreateAiV1DocCompletionFeedbackRequest) (AiV1Feedback, *_nethttp.Response, error)
+	// UpdateAiV1OrgPreferenceExecute executes the request
+	//  @return AiV1OrgPreferences
+	UpdateAiV1OrgPreferenceExecute(r ApiUpdateAiV1OrgPreferenceRequest) (AiV1OrgPreferences, *_nethttp.Response, error)
 }
 
-// FeedbacksAiV1ApiService FeedbacksAiV1Api service
-type FeedbacksAiV1ApiService service
+// OrgPreferencesAiV1ApiService OrgPreferencesAiV1Api service
+type OrgPreferencesAiV1ApiService service
 
-type ApiCreateAiV1ChatCompletionFeedbackRequest struct {
-	ctx              _context.Context
-	ApiService       FeedbacksAiV1Api
-	chatCompletionId string
-	aiV1Feedback     *AiV1Feedback
+type ApiGetAiV1OrgPreferenceRequest struct {
+	ctx        _context.Context
+	ApiService OrgPreferencesAiV1Api
 }
 
-func (r ApiCreateAiV1ChatCompletionFeedbackRequest) AiV1Feedback(aiV1Feedback AiV1Feedback) ApiCreateAiV1ChatCompletionFeedbackRequest {
-	r.aiV1Feedback = &aiV1Feedback
-	return r
-}
-
-func (r ApiCreateAiV1ChatCompletionFeedbackRequest) Execute() (AiV1Feedback, *_nethttp.Response, error) {
-	return r.ApiService.CreateAiV1ChatCompletionFeedbackExecute(r)
+func (r ApiGetAiV1OrgPreferenceRequest) Execute() (AiV1OrgPreferences, *_nethttp.Response, error) {
+	return r.ApiService.GetAiV1OrgPreferenceExecute(r)
 }
 
 /*
-CreateAiV1ChatCompletionFeedback Create a Feedback
+GetAiV1OrgPreference Read the organization's ai-assistant setting in org-preferences.
 
 [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Submit feedback on the Confluent AI assistant.
+Returns the organization's ai-assistant setting in org-preferences.
+
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param chatCompletionId The Chat Completion
- @return ApiCreateAiV1ChatCompletionFeedbackRequest
+ @return ApiGetAiV1OrgPreferenceRequest
 */
-func (a *FeedbacksAiV1ApiService) CreateAiV1ChatCompletionFeedback(ctx _context.Context, chatCompletionId string) ApiCreateAiV1ChatCompletionFeedbackRequest {
-	return ApiCreateAiV1ChatCompletionFeedbackRequest{
-		ApiService:       a,
-		ctx:              ctx,
-		chatCompletionId: chatCompletionId,
+func (a *OrgPreferencesAiV1ApiService) GetAiV1OrgPreference(ctx _context.Context) ApiGetAiV1OrgPreferenceRequest {
+	return ApiGetAiV1OrgPreferenceRequest{
+		ApiService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AiV1Feedback
-func (a *FeedbacksAiV1ApiService) CreateAiV1ChatCompletionFeedbackExecute(r ApiCreateAiV1ChatCompletionFeedbackRequest) (AiV1Feedback, *_nethttp.Response, error) {
+//  @return AiV1OrgPreferences
+func (a *OrgPreferencesAiV1ApiService) GetAiV1OrgPreferenceExecute(r ApiGetAiV1OrgPreferenceRequest) (AiV1OrgPreferences, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  AiV1Feedback
+		localVarReturnValue  AiV1OrgPreferences
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeedbacksAiV1ApiService.CreateAiV1ChatCompletionFeedback")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgPreferencesAiV1ApiService.GetAiV1OrgPreference")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/ai/v1/chat-completions/{chat_completion_id}/feedback"
-	localVarPath = strings.Replace(localVarPath, "{"+"chat_completion_id"+"}", _neturl.PathEscape(parameterToString(r.chatCompletionId, "")), -1)
+	localVarPath := localBasePath + "/ai/v1/org-preferences"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -155,8 +147,6 @@ func (a *FeedbacksAiV1ApiService) CreateAiV1ChatCompletionFeedbackExecute(r ApiC
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.aiV1Feedback
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -209,17 +199,7 @@ func (a *FeedbacksAiV1ApiService) CreateAiV1ChatCompletionFeedbackExecute(r ApiC
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 409 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
+		if localVarHTTPResponse.StatusCode == 404 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -253,60 +233,59 @@ func (a *FeedbacksAiV1ApiService) CreateAiV1ChatCompletionFeedbackExecute(r ApiC
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateAiV1DocCompletionFeedbackRequest struct {
-	ctx             _context.Context
-	ApiService      FeedbacksAiV1Api
-	docCompletionId string
-	aiV1Feedback    *AiV1Feedback
+type ApiUpdateAiV1OrgPreferenceRequest struct {
+	ctx                _context.Context
+	ApiService         OrgPreferencesAiV1Api
+	aiV1OrgPreferences *AiV1OrgPreferences
 }
 
-func (r ApiCreateAiV1DocCompletionFeedbackRequest) AiV1Feedback(aiV1Feedback AiV1Feedback) ApiCreateAiV1DocCompletionFeedbackRequest {
-	r.aiV1Feedback = &aiV1Feedback
+func (r ApiUpdateAiV1OrgPreferenceRequest) AiV1OrgPreferences(aiV1OrgPreferences AiV1OrgPreferences) ApiUpdateAiV1OrgPreferenceRequest {
+	r.aiV1OrgPreferences = &aiV1OrgPreferences
 	return r
 }
 
-func (r ApiCreateAiV1DocCompletionFeedbackRequest) Execute() (AiV1Feedback, *_nethttp.Response, error) {
-	return r.ApiService.CreateAiV1DocCompletionFeedbackExecute(r)
+func (r ApiUpdateAiV1OrgPreferenceRequest) Execute() (AiV1OrgPreferences, *_nethttp.Response, error) {
+	return r.ApiService.UpdateAiV1OrgPreferenceExecute(r)
 }
 
 /*
-CreateAiV1DocCompletionFeedback Create a Feedback
+UpdateAiV1OrgPreference Set the organization's ai-assistant setting in org-preferences.
 
 [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Submit feedback on the Doc AI assistant.
+Updates the organization's ai-assistant setting in org-preferences.
+
+
+
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param docCompletionId The Doc Completion
- @return ApiCreateAiV1DocCompletionFeedbackRequest
+ @return ApiUpdateAiV1OrgPreferenceRequest
 */
-func (a *FeedbacksAiV1ApiService) CreateAiV1DocCompletionFeedback(ctx _context.Context, docCompletionId string) ApiCreateAiV1DocCompletionFeedbackRequest {
-	return ApiCreateAiV1DocCompletionFeedbackRequest{
-		ApiService:      a,
-		ctx:             ctx,
-		docCompletionId: docCompletionId,
+func (a *OrgPreferencesAiV1ApiService) UpdateAiV1OrgPreference(ctx _context.Context) ApiUpdateAiV1OrgPreferenceRequest {
+	return ApiUpdateAiV1OrgPreferenceRequest{
+		ApiService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AiV1Feedback
-func (a *FeedbacksAiV1ApiService) CreateAiV1DocCompletionFeedbackExecute(r ApiCreateAiV1DocCompletionFeedbackRequest) (AiV1Feedback, *_nethttp.Response, error) {
+//  @return AiV1OrgPreferences
+func (a *OrgPreferencesAiV1ApiService) UpdateAiV1OrgPreferenceExecute(r ApiUpdateAiV1OrgPreferenceRequest) (AiV1OrgPreferences, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  AiV1Feedback
+		localVarReturnValue  AiV1OrgPreferences
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeedbacksAiV1ApiService.CreateAiV1DocCompletionFeedback")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgPreferencesAiV1ApiService.UpdateAiV1OrgPreference")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/ai/v1/doc-completions/{doc_completion_id}/feedback"
-	localVarPath = strings.Replace(localVarPath, "{"+"doc_completion_id"+"}", _neturl.PathEscape(parameterToString(r.docCompletionId, "")), -1)
+	localVarPath := localBasePath + "/ai/v1/org-preferences"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -330,7 +309,7 @@ func (a *FeedbacksAiV1ApiService) CreateAiV1DocCompletionFeedbackExecute(r ApiCr
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.aiV1Feedback
+	localVarPostBody = r.aiV1OrgPreferences
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -354,6 +333,36 @@ func (a *FeedbacksAiV1ApiService) CreateAiV1DocCompletionFeedbackExecute(r ApiCr
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

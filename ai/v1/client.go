@@ -69,6 +69,8 @@ type APIClient struct {
 	DocCompletionsAiV1Api DocCompletionsAiV1Api
 
 	FeedbacksAiV1Api FeedbacksAiV1Api
+
+	OrgPreferencesAiV1Api OrgPreferencesAiV1Api
 }
 
 type service struct {
@@ -90,6 +92,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ChatCompletionsAiV1Api = (*ChatCompletionsAiV1ApiService)(&c.common)
 	c.DocCompletionsAiV1Api = (*DocCompletionsAiV1ApiService)(&c.common)
 	c.FeedbacksAiV1Api = (*FeedbacksAiV1ApiService)(&c.common)
+	c.OrgPreferencesAiV1Api = (*OrgPreferencesAiV1ApiService)(&c.common)
 
 	return c
 }

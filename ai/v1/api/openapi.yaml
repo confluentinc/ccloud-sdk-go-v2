@@ -34,6 +34,16 @@ tags:
 
     Submit feedback on the AI assistant.
   name: Feedbacks (ai/v1)
+- description: |-
+    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+    Enable the Confluent AI Assistant for your organization. This operation is only available to users
+    with the `OrganizationAdmin` role. By default, this setting is set to `True`.
+
+
+    ## The Org Preferences Model
+    <SchemaDefinition schemaRef="#/components/schemas/ai.v1.OrgPreferences" />
+  name: Org Preferences (ai/v1)
 paths:
   /ai/v1/chat-completions:
     post:
@@ -1277,6 +1287,671 @@ paths:
           request.AddParameter("application/json", "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"reaction\":\"UNSPECIFIED\",\"copied\":\"UNSPECIFIED\",\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: AI API v1
+  /ai/v1/org-preferences:
+    get:
+      description: |
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+        Returns the organization's ai-assistant setting in org-preferences.
+      operationId: getAiV1OrgPreference
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ai.v1.OrgPreferences'
+                - required:
+                  - ai_assistant_enabled
+                  - api_version
+                  - kind
+                  type: object
+          description: Org Preferences.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - cloud-api-key: []
+      summary: Read the organization's ai-assistant setting in org-preferences.
+      tags:
+      - Org Preferences (ai/v1)
+      x-request-access-name: AI API v1
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://api.confluent.cloud/ai/v1/org-preferences \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/ai/v1/org-preferences")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ai/v1/org-preferences\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/ai/v1/org-preferences", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/ai/v1/org-preferences",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ai/v1/org-preferences");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/ai/v1/org-preferences");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+    patch:
+      description: |+
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+        Updates the organization's ai-assistant setting in org-preferences.
+
+
+      operationId: updateAiV1OrgPreference
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ai.v1.OrgPreferences'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ai.v1.OrgPreferences'
+                - required:
+                  - ai_assistant_enabled
+                  - api_version
+                  - kind
+                  type: object
+          description: Org Preferences.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "409"
+                  code: resource_already_exists
+                  title: Resource Already exists
+                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                    exists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request is in conflict with the current server state
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Resource URI of conflicting resource
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/{object}/{id}
+                format: uri
+                type: string
+              style: simple
+          x-summary: Conflict
+        "422":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "422"
+                  code: invalid_configuration
+                  id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  title: Validation Failed
+                  detail: 'The property ''/cluster/storage_size'' of type string did
+                    not match the following type: integer'
+                  source:
+                    pointer: /cluster/storage_size
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Validation Failed
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - cloud-api-key: []
+      summary: Set the organization's ai-assistant setting in org-preferences.
+      tags:
+      - Org Preferences (ai/v1)
+      x-request-access-name: AI API v1
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request PATCH \
+            --url https://api.confluent.cloud/ai/v1/org-preferences \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"ai_assistant_enabled":true}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"ai_assistant_enabled\":true}");
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/ai/v1/org-preferences")
+            .patch(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ai/v1/org-preferences\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"ai_assistant_enabled\\\":true}\"\
+          )\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          payload = "{\"ai_assistant_enabled\":true}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("PATCH", "/ai/v1/org-preferences", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "PATCH",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/ai/v1/org-preferences",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({ai_assistant_enabled: true}));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ai/v1/org-preferences");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"ai_assistant_enabled\":true}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/ai/v1/org-preferences");
+          var request = new RestRequest(Method.PATCH);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"ai_assistant_enabled\":true}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+    x-request-access-name: AI API v1
 components:
   responses:
     BadRequestError:
@@ -1504,6 +2179,32 @@ components:
             type: string
           style: simple
   schemas:
+    ai.v1.OrgPreferences:
+      description: |-
+        Enable the Confluent AI Assistant for your organization. This operation is only available to users
+        with the `OrganizationAdmin` role. By default, this setting is set to `True`.
+
+
+        ## The Org Preferences Model
+        <SchemaDefinition schemaRef="#/components/schemas/ai.v1.OrgPreferences" />
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - ai/v1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - OrgPreferences
+          readOnly: true
+          type: string
+        ai_assistant_enabled:
+          description: Enable ai-assist for the organization
+          type: boolean
+      type: object
     ai.v1.ChatCompletionsRequest:
       description: Request to the AI assistant.
       properties:

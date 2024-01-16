@@ -41,12 +41,12 @@ type AiV1Feedback struct {
 	// Kind defines the object this REST resource represents.
 	Kind *string `json:"kind,omitempty"`
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
-	Id *string `json:"id,omitempty"`
-	Metadata *ObjectMeta `json:"metadata,omitempty"`
-	AiSessionId *string `json:"ai_session_id,omitempty"`
-	// The feedback reaction types are:  'THUMBS_UP': when a user upvotes AI Assistant's answer.  'THUMBS_DOWN': when a user downvotes the AI Assistant's answer. 
+	Id          *string     `json:"id,omitempty"`
+	Metadata    *ObjectMeta `json:"metadata,omitempty"`
+	AiSessionId *string     `json:"ai_session_id,omitempty"`
+	// The feedback reaction types are:  'THUMBS_UP': when a user upvotes AI Assistant's answer.  'THUMBS_DOWN': when a user downvotes the AI Assistant's answer.
 	Reaction *string `json:"reaction,omitempty"`
-	// The feedback copy types are:  'ANSWER': when a user copies the AI Assistant's answer.  'CODE': when a user copies the code snippet from the AI Assistant's answer. 
+	// The feedback copy types are:  'ANSWER': when a user copies the AI Assistant's answer.  'CODE': when a user copies the code snippet from the AI Assistant's answer.
 	Copied *string `json:"copied,omitempty"`
 	// Additional text feedback optionally provided by a user.
 	Comment NullableString `json:"comment,omitempty"`
@@ -314,7 +314,7 @@ func (o *AiV1Feedback) GetComment() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AiV1Feedback) GetCommentOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Comment.Get(), o.Comment.IsSet()
@@ -333,6 +333,7 @@ func (o *AiV1Feedback) HasComment() bool {
 func (o *AiV1Feedback) SetComment(v string) {
 	o.Comment.Set(&v)
 }
+
 // SetCommentNil sets the value for Comment to be an explicit nil
 func (o *AiV1Feedback) SetCommentNil() {
 	o.Comment.Set(nil)
@@ -345,44 +346,44 @@ func (o *AiV1Feedback) UnsetComment() {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *AiV1Feedback) Redact() {
-    o.recurseRedact(o.ApiVersion)
-    o.recurseRedact(o.Kind)
-    o.recurseRedact(o.Id)
-    o.recurseRedact(o.Metadata)
-    o.recurseRedact(o.AiSessionId)
-    o.recurseRedact(o.Reaction)
-    o.recurseRedact(o.Copied)
-    o.recurseRedact(o.Comment)
+	o.recurseRedact(o.ApiVersion)
+	o.recurseRedact(o.Kind)
+	o.recurseRedact(o.Id)
+	o.recurseRedact(o.Metadata)
+	o.recurseRedact(o.AiSessionId)
+	o.recurseRedact(o.Reaction)
+	o.recurseRedact(o.Copied)
+	o.recurseRedact(o.Comment)
 }
 
 func (o *AiV1Feedback) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o AiV1Feedback) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o AiV1Feedback) MarshalJSON() ([]byte, error) {
@@ -457,5 +458,3 @@ func (v *NullableAiV1Feedback) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
