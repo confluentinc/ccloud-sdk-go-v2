@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **ComputePoolId** | Pointer to **string** | The id of the compute pool.  | [optional] [readonly] 
 **DisplayName** | Pointer to **string** | The display_name of the compute pool.  | [optional] [readonly] 
 **MaxCfu** | Pointer to **int32** | The max_cfu of the compute pool.  | [optional] [readonly] 
+**Phase** | Pointer to **string** | Status of the Flink compute pool. | [optional] [readonly] 
 **Error** | Pointer to [**FcpmV2Error**](fcpm.V2.Error.md) | The error encountered while creating the compute pool.  | [optional] [readonly] 
 
 ## Methods
@@ -165,6 +166,31 @@ SetMaxCfu sets MaxCfu field to given value.
 `func (o *FcpmV2QuickstartComputePool) HasMaxCfu() bool`
 
 HasMaxCfu returns a boolean if a field has been set.
+
+### GetPhase
+
+`func (o *FcpmV2QuickstartComputePool) GetPhase() string`
+
+GetPhase returns the Phase field if non-nil, zero value otherwise.
+
+### GetPhaseOk
+
+`func (o *FcpmV2QuickstartComputePool) GetPhaseOk() (*string, bool)`
+
+GetPhaseOk returns a tuple with the Phase field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPhase
+
+`func (o *FcpmV2QuickstartComputePool) SetPhase(v string)`
+
+SetPhase sets Phase field to given value.
+
+### HasPhase
+
+`func (o *FcpmV2QuickstartComputePool) HasPhase() bool`
+
+HasPhase returns a boolean if a field has been set.
 
 ### GetError
 

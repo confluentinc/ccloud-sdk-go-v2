@@ -41,15 +41,15 @@ var (
 type QuickstartsFcpmV2Api interface {
 
 	/*
-	CreateFcpmV2Quickstart quickstart compute pools
+			CreateFcpmV2Quickstart quickstart compute pools
 
-	[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+			[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-Return the created compute pools.
+		Return the created compute pools.
 
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiCreateFcpmV2QuickstartRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiCreateFcpmV2QuickstartRequest
 	*/
 	CreateFcpmV2Quickstart(ctx _context.Context) ApiCreateFcpmV2QuickstartRequest
 
@@ -62,8 +62,8 @@ Return the created compute pools.
 type QuickstartsFcpmV2ApiService service
 
 type ApiCreateFcpmV2QuickstartRequest struct {
-	ctx _context.Context
-	ApiService QuickstartsFcpmV2Api
+	ctx              _context.Context
+	ApiService       QuickstartsFcpmV2Api
 	fcpmV2Quickstart *FcpmV2Quickstart
 }
 
@@ -83,19 +83,19 @@ CreateFcpmV2Quickstart quickstart compute pools
 
 Return the created compute pools.
 
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFcpmV2QuickstartRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFcpmV2QuickstartRequest
 */
 func (a *QuickstartsFcpmV2ApiService) CreateFcpmV2Quickstart(ctx _context.Context) ApiCreateFcpmV2QuickstartRequest {
 	return ApiCreateFcpmV2QuickstartRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return FcpmV2Quickstart
+//
+//	@return FcpmV2Quickstart
 func (a *QuickstartsFcpmV2ApiService) CreateFcpmV2QuickstartExecute(r ApiCreateFcpmV2QuickstartRequest) (FcpmV2Quickstart, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost

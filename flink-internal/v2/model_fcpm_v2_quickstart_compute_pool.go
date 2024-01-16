@@ -34,21 +34,23 @@ import (
 	"reflect"
 )
 
-// FcpmV2QuickstartComputePool Quickstart compute pool for the EnvironmentId + Region + Cloud 
+// FcpmV2QuickstartComputePool Quickstart compute pool for the EnvironmentId + Region + Cloud
 type FcpmV2QuickstartComputePool struct {
-	// The environment for which quickstart a compute pool. 
+	// The environment for which quickstart a compute pool.
 	EnvironmentId string `json:"environment_id,omitempty"`
-	// The region for which quickstart a compute pool. 
+	// The region for which quickstart a compute pool.
 	Region string `json:"region,omitempty"`
-	// The cloud for which quickstart a compute pool. 
+	// The cloud for which quickstart a compute pool.
 	Cloud string `json:"cloud,omitempty"`
-	// The id of the compute pool. 
+	// The id of the compute pool.
 	ComputePoolId *string `json:"compute_pool_id,omitempty"`
-	// The display_name of the compute pool. 
+	// The display_name of the compute pool.
 	DisplayName *string `json:"display_name,omitempty"`
-	// The max_cfu of the compute pool. 
+	// The max_cfu of the compute pool.
 	MaxCfu *int32 `json:"max_cfu,omitempty"`
-	// The error encountered while creating the compute pool. 
+	// Status of the Flink compute pool.
+	Phase *string `json:"phase,omitempty"`
+	// The error encountered while creating the compute pool.
 	Error *FcpmV2Error `json:"error,omitempty"`
 }
 
@@ -85,7 +87,7 @@ func (o *FcpmV2QuickstartComputePool) GetEnvironmentId() string {
 // GetEnvironmentIdOk returns a tuple with the EnvironmentId field value
 // and a boolean to check if the value has been set.
 func (o *FcpmV2QuickstartComputePool) GetEnvironmentIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.EnvironmentId, true
@@ -109,7 +111,7 @@ func (o *FcpmV2QuickstartComputePool) GetRegion() string {
 // GetRegionOk returns a tuple with the Region field value
 // and a boolean to check if the value has been set.
 func (o *FcpmV2QuickstartComputePool) GetRegionOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Region, true
@@ -133,7 +135,7 @@ func (o *FcpmV2QuickstartComputePool) GetCloud() string {
 // GetCloudOk returns a tuple with the Cloud field value
 // and a boolean to check if the value has been set.
 func (o *FcpmV2QuickstartComputePool) GetCloudOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Cloud, true
@@ -240,6 +242,38 @@ func (o *FcpmV2QuickstartComputePool) SetMaxCfu(v int32) {
 	o.MaxCfu = &v
 }
 
+// GetPhase returns the Phase field value if set, zero value otherwise.
+func (o *FcpmV2QuickstartComputePool) GetPhase() string {
+	if o == nil || o.Phase == nil {
+		var ret string
+		return ret
+	}
+	return *o.Phase
+}
+
+// GetPhaseOk returns a tuple with the Phase field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FcpmV2QuickstartComputePool) GetPhaseOk() (*string, bool) {
+	if o == nil || o.Phase == nil {
+		return nil, false
+	}
+	return o.Phase, true
+}
+
+// HasPhase returns a boolean if a field has been set.
+func (o *FcpmV2QuickstartComputePool) HasPhase() bool {
+	if o != nil && o.Phase != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPhase gets a reference to the given string and assigns it to the Phase field.
+func (o *FcpmV2QuickstartComputePool) SetPhase(v string) {
+	o.Phase = &v
+}
+
 // GetError returns the Error field value if set, zero value otherwise.
 func (o *FcpmV2QuickstartComputePool) GetError() FcpmV2Error {
 	if o == nil || o.Error == nil {
@@ -274,43 +308,44 @@ func (o *FcpmV2QuickstartComputePool) SetError(v FcpmV2Error) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *FcpmV2QuickstartComputePool) Redact() {
-    o.recurseRedact(&o.EnvironmentId)
-    o.recurseRedact(&o.Region)
-    o.recurseRedact(&o.Cloud)
-    o.recurseRedact(o.ComputePoolId)
-    o.recurseRedact(o.DisplayName)
-    o.recurseRedact(o.MaxCfu)
-    o.recurseRedact(o.Error)
+	o.recurseRedact(&o.EnvironmentId)
+	o.recurseRedact(&o.Region)
+	o.recurseRedact(&o.Cloud)
+	o.recurseRedact(o.ComputePoolId)
+	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.MaxCfu)
+	o.recurseRedact(o.Phase)
+	o.recurseRedact(o.Error)
 }
 
 func (o *FcpmV2QuickstartComputePool) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o FcpmV2QuickstartComputePool) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o FcpmV2QuickstartComputePool) MarshalJSON() ([]byte, error) {
@@ -332,6 +367,9 @@ func (o FcpmV2QuickstartComputePool) MarshalJSON() ([]byte, error) {
 	}
 	if o.MaxCfu != nil {
 		toSerialize["max_cfu"] = o.MaxCfu
+	}
+	if o.Phase != nil {
+		toSerialize["phase"] = o.Phase
 	}
 	if o.Error != nil {
 		toSerialize["error"] = o.Error
@@ -382,5 +420,3 @@ func (v *NullableFcpmV2QuickstartComputePool) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -705,6 +705,16 @@ components:
           format: int32
           readOnly: true
           type: integer
+        phase:
+          description: Status of the Flink compute pool.
+          example: PROVISIONING
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - PROVISIONING
+          - PROVISIONED
+          - FAILED
+          - DEPROVISIONING
         error:
           allOf:
           - $ref: '#/components/schemas/fcpm.V2.Error'
