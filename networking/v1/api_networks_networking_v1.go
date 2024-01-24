@@ -636,17 +636,17 @@ func (a *NetworksNetworkingV1ApiService) GetNetworkingV1NetworkExecute(r ApiGetN
 }
 
 type ApiListNetworkingV1NetworksRequest struct {
-	ctx             _context.Context
-	ApiService      NetworksNetworkingV1Api
-	environment     *string
-	specDisplayName *[]string
-	specCloud       *[]string
-	specRegion      *[]string
-	specCidr        *[]string
-	statusPhase     *[]string
-	connectionType  *[]string
-	pageSize        *int32
-	pageToken       *string
+	ctx                 _context.Context
+	ApiService          NetworksNetworkingV1Api
+	environment         *string
+	specDisplayName     *[]string
+	specCloud           *[]string
+	specRegion          *[]string
+	specConnectionTypes *[]string
+	specCidr            *[]string
+	statusPhase         *[]string
+	pageSize            *int32
+	pageToken           *string
 }
 
 // Filter the results by exact match for environment.
@@ -673,6 +673,12 @@ func (r ApiListNetworkingV1NetworksRequest) SpecRegion(specRegion []string) ApiL
 	return r
 }
 
+// Filter the results by exact match for spec.connection_types. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1NetworksRequest) SpecConnectionTypes(specConnectionTypes []string) ApiListNetworkingV1NetworksRequest {
+	r.specConnectionTypes = &specConnectionTypes
+	return r
+}
+
 // Filter the results by exact match for spec.cidr. Pass multiple times to see results matching any of the values.
 func (r ApiListNetworkingV1NetworksRequest) SpecCidr(specCidr []string) ApiListNetworkingV1NetworksRequest {
 	r.specCidr = &specCidr
@@ -682,12 +688,6 @@ func (r ApiListNetworkingV1NetworksRequest) SpecCidr(specCidr []string) ApiListN
 // Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values.
 func (r ApiListNetworkingV1NetworksRequest) StatusPhase(statusPhase []string) ApiListNetworkingV1NetworksRequest {
 	r.statusPhase = &statusPhase
-	return r
-}
-
-// Filter the results by exact match for connection_type. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworksRequest) ConnectionType(connectionType []string) ApiListNetworkingV1NetworksRequest {
-	r.connectionType = &connectionType
 	return r
 }
 
@@ -784,6 +784,17 @@ func (a *NetworksNetworkingV1ApiService) ListNetworkingV1NetworksExecute(r ApiLi
 			localVarQueryParams.Add("spec.region", parameterToString(t, "multi"))
 		}
 	}
+	if r.specConnectionTypes != nil {
+		t := *r.specConnectionTypes
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.connection_types", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.connection_types", parameterToString(t, "multi"))
+		}
+	}
 	if r.specCidr != nil {
 		t := *r.specCidr
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -807,17 +818,6 @@ func (a *NetworksNetworkingV1ApiService) ListNetworkingV1NetworksExecute(r ApiLi
 		}
 	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
-	if r.connectionType != nil {
-		t := *r.connectionType
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("connection_type", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("connection_type", parameterToString(t, "multi"))
-		}
-	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}
@@ -1059,6 +1059,16 @@ func (a *NetworksNetworkingV1ApiService) UpdateNetworkingV1NetworkExecute(r ApiU
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

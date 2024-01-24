@@ -41,20 +41,22 @@ type NetworkingV1NetworkSpec struct {
 	// The cloud service provider in which the network exists.
 	Cloud *string `json:"cloud,omitempty"`
 	// The cloud service provider region in which the network exists.
-	Region          *string `json:"region,omitempty"`
-	ConnectionTypes *Set    `json:"connection_types,omitempty"`
+	Region          *string                      `json:"region,omitempty"`
+	ConnectionTypes *NetworkingV1ConnectionTypes `json:"connection_types,omitempty"`
 	// The IPv4 [CIDR block](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) to used for this network. Must be `/16`. Required for VPC peering and AWS TransitGateway.
 	Cidr *string `json:"cidr,omitempty"`
 	// The 3 availability zones for this network. They can optionally be specified for AWS networks used with PrivateLink, for GCP networks used with Private Service Connect, and for AWS and GCP networks used with Peering. Otherwise, they are automatically chosen by Confluent Cloud.  On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3)  On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c).  On Azure, zones are Confluent-chosen names (e.g. 1, 2, 3) since Azure does not  have universal zone identifiers.
 	Zones *[]string `json:"zones,omitempty"`
 	// Each item represents information related to a single zone.  Note - The attribute is in a [Limited Availability lifecycle stage](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
-	ZonesInfo *Set `json:"zones_info,omitempty"`
+	ZonesInfo *NetworkingV1ZonesInfo `json:"zones_info,omitempty"`
 	// DNS config only applies to PrivateLink network connection type.  When resolution is CHASED_PRIVATE, clusters in this network require both public and private DNS  to resolve cluster endpoints.  When resolution is PRIVATE, clusters in this network only require private DNS  to resolve cluster endpoints.
 	DnsConfig *NetworkingV1DnsConfig `json:"dns_config,omitempty"`
 	// The reserved CIDR config is used only by AWS networks with connection_types = Vpc_Peering or Transit_Gateway  An IPv4 [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)   reserved for Confluent Cloud Network. Must be \\24.   If not specified, Confluent Cloud Network uses 172.20.255.0/24  Note - The attribute is in a [Limited Availability lifecycle stage](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
 	ReservedCidr *string `json:"reserved_cidr,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
+	// The gateway associated with this object. The gateway can be one of networking.v1.Gateway. May be `null` or omitted if not associated with a gateway.
+	Gateway NullableTypedEnvScopedObjectReference `json:"gateway,omitempty"`
 }
 
 // NewNetworkingV1NetworkSpec instantiates a new NetworkingV1NetworkSpec object
@@ -171,9 +173,9 @@ func (o *NetworkingV1NetworkSpec) SetRegion(v string) {
 }
 
 // GetConnectionTypes returns the ConnectionTypes field value if set, zero value otherwise.
-func (o *NetworkingV1NetworkSpec) GetConnectionTypes() Set {
+func (o *NetworkingV1NetworkSpec) GetConnectionTypes() NetworkingV1ConnectionTypes {
 	if o == nil || o.ConnectionTypes == nil {
-		var ret Set
+		var ret NetworkingV1ConnectionTypes
 		return ret
 	}
 	return *o.ConnectionTypes
@@ -181,7 +183,7 @@ func (o *NetworkingV1NetworkSpec) GetConnectionTypes() Set {
 
 // GetConnectionTypesOk returns a tuple with the ConnectionTypes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1NetworkSpec) GetConnectionTypesOk() (*Set, bool) {
+func (o *NetworkingV1NetworkSpec) GetConnectionTypesOk() (*NetworkingV1ConnectionTypes, bool) {
 	if o == nil || o.ConnectionTypes == nil {
 		return nil, false
 	}
@@ -197,8 +199,8 @@ func (o *NetworkingV1NetworkSpec) HasConnectionTypes() bool {
 	return false
 }
 
-// SetConnectionTypes gets a reference to the given Set and assigns it to the ConnectionTypes field.
-func (o *NetworkingV1NetworkSpec) SetConnectionTypes(v Set) {
+// SetConnectionTypes gets a reference to the given NetworkingV1ConnectionTypes and assigns it to the ConnectionTypes field.
+func (o *NetworkingV1NetworkSpec) SetConnectionTypes(v NetworkingV1ConnectionTypes) {
 	o.ConnectionTypes = &v
 }
 
@@ -267,9 +269,9 @@ func (o *NetworkingV1NetworkSpec) SetZones(v []string) {
 }
 
 // GetZonesInfo returns the ZonesInfo field value if set, zero value otherwise.
-func (o *NetworkingV1NetworkSpec) GetZonesInfo() Set {
+func (o *NetworkingV1NetworkSpec) GetZonesInfo() NetworkingV1ZonesInfo {
 	if o == nil || o.ZonesInfo == nil {
-		var ret Set
+		var ret NetworkingV1ZonesInfo
 		return ret
 	}
 	return *o.ZonesInfo
@@ -277,7 +279,7 @@ func (o *NetworkingV1NetworkSpec) GetZonesInfo() Set {
 
 // GetZonesInfoOk returns a tuple with the ZonesInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1NetworkSpec) GetZonesInfoOk() (*Set, bool) {
+func (o *NetworkingV1NetworkSpec) GetZonesInfoOk() (*NetworkingV1ZonesInfo, bool) {
 	if o == nil || o.ZonesInfo == nil {
 		return nil, false
 	}
@@ -293,8 +295,8 @@ func (o *NetworkingV1NetworkSpec) HasZonesInfo() bool {
 	return false
 }
 
-// SetZonesInfo gets a reference to the given Set and assigns it to the ZonesInfo field.
-func (o *NetworkingV1NetworkSpec) SetZonesInfo(v Set) {
+// SetZonesInfo gets a reference to the given NetworkingV1ZonesInfo and assigns it to the ZonesInfo field.
+func (o *NetworkingV1NetworkSpec) SetZonesInfo(v NetworkingV1ZonesInfo) {
 	o.ZonesInfo = &v
 }
 
@@ -394,6 +396,49 @@ func (o *NetworkingV1NetworkSpec) SetEnvironment(v ObjectReference) {
 	o.Environment = &v
 }
 
+// GetGateway returns the Gateway field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NetworkingV1NetworkSpec) GetGateway() TypedEnvScopedObjectReference {
+	if o == nil || o.Gateway.Get() == nil {
+		var ret TypedEnvScopedObjectReference
+		return ret
+	}
+	return *o.Gateway.Get()
+}
+
+// GetGatewayOk returns a tuple with the Gateway field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NetworkingV1NetworkSpec) GetGatewayOk() (*TypedEnvScopedObjectReference, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Gateway.Get(), o.Gateway.IsSet()
+}
+
+// HasGateway returns a boolean if a field has been set.
+func (o *NetworkingV1NetworkSpec) HasGateway() bool {
+	if o != nil && o.Gateway.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetGateway gets a reference to the given NullableTypedEnvScopedObjectReference and assigns it to the Gateway field.
+func (o *NetworkingV1NetworkSpec) SetGateway(v TypedEnvScopedObjectReference) {
+	o.Gateway.Set(&v)
+}
+
+// SetGatewayNil sets the value for Gateway to be an explicit nil
+func (o *NetworkingV1NetworkSpec) SetGatewayNil() {
+	o.Gateway.Set(nil)
+}
+
+// UnsetGateway ensures that no value is present for Gateway, not even an explicit nil
+func (o *NetworkingV1NetworkSpec) UnsetGateway() {
+	o.Gateway.Unset()
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1NetworkSpec) Redact() {
 	o.recurseRedact(o.DisplayName)
@@ -406,6 +451,7 @@ func (o *NetworkingV1NetworkSpec) Redact() {
 	o.recurseRedact(o.DnsConfig)
 	o.recurseRedact(o.ReservedCidr)
 	o.recurseRedact(o.Environment)
+	o.recurseRedact(o.Gateway)
 }
 
 func (o *NetworkingV1NetworkSpec) recurseRedact(v interface{}) {
@@ -469,6 +515,9 @@ func (o NetworkingV1NetworkSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
+	}
+	if o.Gateway.IsSet() {
+		toSerialize["gateway"] = o.Gateway.Get()
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

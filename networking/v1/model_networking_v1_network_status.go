@@ -28,6 +28,7 @@ package v1
 import (
 	"bytes"
 	"encoding/json"
+	"time"
 )
 
 import (
@@ -37,9 +38,9 @@ import (
 // NetworkingV1NetworkStatus The status of the Network
 type NetworkingV1NetworkStatus struct {
 	// The lifecyle phase of the network:  PROVISIONING:  network provisioning is in progress;  READY:  network is ready;  FAILED: provisioning failed;  DEPROVISIONING: network deprovisioning is in progress;
-	Phase                    string `json:"phase,omitempty"`
-	SupportedConnectionTypes Set    `json:"supported_connection_types,omitempty"`
-	ActiveConnectionTypes    Set    `json:"active_connection_types,omitempty"`
+	Phase                    string                               `json:"phase,omitempty"`
+	SupportedConnectionTypes NetworkingV1SupportedConnectionTypes `json:"supported_connection_types,omitempty"`
+	ActiveConnectionTypes    NetworkingV1ConnectionTypes          `json:"active_connection_types,omitempty"`
 	// Error code if network is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`
 	// Displayable error message if network is in a failed state
@@ -50,13 +51,15 @@ type NetworkingV1NetworkStatus struct {
 	ZonalSubdomains *map[string]string `json:"zonal_subdomains,omitempty"`
 	// The cloud-specific network details. These will be populated when the network reaches the READY state.
 	Cloud *NetworkingV1NetworkStatusCloudOneOf `json:"cloud,omitempty"`
+	// The date and time when the network becomes idle
+	IdleSince *time.Time `json:"idle_since,omitempty"`
 }
 
 // NewNetworkingV1NetworkStatus instantiates a new NetworkingV1NetworkStatus object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1NetworkStatus(phase string, supportedConnectionTypes Set, activeConnectionTypes Set) *NetworkingV1NetworkStatus {
+func NewNetworkingV1NetworkStatus(phase string, supportedConnectionTypes NetworkingV1SupportedConnectionTypes, activeConnectionTypes NetworkingV1ConnectionTypes) *NetworkingV1NetworkStatus {
 	this := NetworkingV1NetworkStatus{}
 	this.Phase = phase
 	this.SupportedConnectionTypes = supportedConnectionTypes
@@ -97,9 +100,9 @@ func (o *NetworkingV1NetworkStatus) SetPhase(v string) {
 }
 
 // GetSupportedConnectionTypes returns the SupportedConnectionTypes field value
-func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypes() Set {
+func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypes() NetworkingV1SupportedConnectionTypes {
 	if o == nil {
-		var ret Set
+		var ret NetworkingV1SupportedConnectionTypes
 		return ret
 	}
 
@@ -108,7 +111,7 @@ func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypes() Set {
 
 // GetSupportedConnectionTypesOk returns a tuple with the SupportedConnectionTypes field value
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypesOk() (*Set, bool) {
+func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypesOk() (*NetworkingV1SupportedConnectionTypes, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -116,14 +119,14 @@ func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypesOk() (*Set, bool)
 }
 
 // SetSupportedConnectionTypes sets field value
-func (o *NetworkingV1NetworkStatus) SetSupportedConnectionTypes(v Set) {
+func (o *NetworkingV1NetworkStatus) SetSupportedConnectionTypes(v NetworkingV1SupportedConnectionTypes) {
 	o.SupportedConnectionTypes = v
 }
 
 // GetActiveConnectionTypes returns the ActiveConnectionTypes field value
-func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypes() Set {
+func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypes() NetworkingV1ConnectionTypes {
 	if o == nil {
-		var ret Set
+		var ret NetworkingV1ConnectionTypes
 		return ret
 	}
 
@@ -132,7 +135,7 @@ func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypes() Set {
 
 // GetActiveConnectionTypesOk returns a tuple with the ActiveConnectionTypes field value
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypesOk() (*Set, bool) {
+func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypesOk() (*NetworkingV1ConnectionTypes, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -140,7 +143,7 @@ func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypesOk() (*Set, bool) {
 }
 
 // SetActiveConnectionTypes sets field value
-func (o *NetworkingV1NetworkStatus) SetActiveConnectionTypes(v Set) {
+func (o *NetworkingV1NetworkStatus) SetActiveConnectionTypes(v NetworkingV1ConnectionTypes) {
 	o.ActiveConnectionTypes = v
 }
 
@@ -304,6 +307,38 @@ func (o *NetworkingV1NetworkStatus) SetCloud(v NetworkingV1NetworkStatusCloudOne
 	o.Cloud = &v
 }
 
+// GetIdleSince returns the IdleSince field value if set, zero value otherwise.
+func (o *NetworkingV1NetworkStatus) GetIdleSince() time.Time {
+	if o == nil || o.IdleSince == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.IdleSince
+}
+
+// GetIdleSinceOk returns a tuple with the IdleSince field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1NetworkStatus) GetIdleSinceOk() (*time.Time, bool) {
+	if o == nil || o.IdleSince == nil {
+		return nil, false
+	}
+	return o.IdleSince, true
+}
+
+// HasIdleSince returns a boolean if a field has been set.
+func (o *NetworkingV1NetworkStatus) HasIdleSince() bool {
+	if o != nil && o.IdleSince != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIdleSince gets a reference to the given time.Time and assigns it to the IdleSince field.
+func (o *NetworkingV1NetworkStatus) SetIdleSince(v time.Time) {
+	o.IdleSince = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1NetworkStatus) Redact() {
 	o.recurseRedact(&o.Phase)
@@ -314,6 +349,7 @@ func (o *NetworkingV1NetworkStatus) Redact() {
 	o.recurseRedact(o.DnsDomain)
 	o.recurseRedact(o.ZonalSubdomains)
 	o.recurseRedact(o.Cloud)
+	o.recurseRedact(o.IdleSince)
 }
 
 func (o *NetworkingV1NetworkStatus) recurseRedact(v interface{}) {
@@ -371,6 +407,9 @@ func (o NetworkingV1NetworkStatus) MarshalJSON() ([]byte, error) {
 	}
 	if o.Cloud != nil {
 		toSerialize["cloud"] = o.Cloud
+	}
+	if o.IdleSince != nil {
+		toSerialize["idle_since"] = o.IdleSince
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

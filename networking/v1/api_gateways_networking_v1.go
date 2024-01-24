@@ -31,7 +31,6 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
-	"reflect"
 	"strings"
 )
 
@@ -40,82 +39,75 @@ var (
 	_ _context.Context
 )
 
-type NetworkLinkServiceAssociationsNetworkingV1Api interface {
+type GatewaysNetworkingV1Api interface {
 
 	/*
-		GetNetworkingV1NetworkLinkServiceAssociation Read a Network Link Service Association
+		GetNetworkingV1Gateway Read a Gateway
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Make a request to read a network link service association.
+	Make a request to read a gateway.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the network link service association.
-		 @return ApiGetNetworkingV1NetworkLinkServiceAssociationRequest
+		 @param id The unique identifier for the gateway.
+		 @return ApiGetNetworkingV1GatewayRequest
 	*/
-	GetNetworkingV1NetworkLinkServiceAssociation(ctx _context.Context, id string) ApiGetNetworkingV1NetworkLinkServiceAssociationRequest
+	GetNetworkingV1Gateway(ctx _context.Context, id string) ApiGetNetworkingV1GatewayRequest
 
-	// GetNetworkingV1NetworkLinkServiceAssociationExecute executes the request
-	//  @return NetworkingV1NetworkLinkServiceAssociation
-	GetNetworkingV1NetworkLinkServiceAssociationExecute(r ApiGetNetworkingV1NetworkLinkServiceAssociationRequest) (NetworkingV1NetworkLinkServiceAssociation, *_nethttp.Response, error)
+	// GetNetworkingV1GatewayExecute executes the request
+	//  @return NetworkingV1Gateway
+	GetNetworkingV1GatewayExecute(r ApiGetNetworkingV1GatewayRequest) (NetworkingV1Gateway, *_nethttp.Response, error)
 
 	/*
-		ListNetworkingV1NetworkLinkServiceAssociations List of Network Link Service Associations
+		ListNetworkingV1Gateways List of Gateways
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Retrieve a sorted, filtered, paginated list of all network link service associations.
+	Retrieve a sorted, filtered, paginated list of all gateways.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListNetworkingV1NetworkLinkServiceAssociationsRequest
+		 @return ApiListNetworkingV1GatewaysRequest
 	*/
-	ListNetworkingV1NetworkLinkServiceAssociations(ctx _context.Context) ApiListNetworkingV1NetworkLinkServiceAssociationsRequest
+	ListNetworkingV1Gateways(ctx _context.Context) ApiListNetworkingV1GatewaysRequest
 
-	// ListNetworkingV1NetworkLinkServiceAssociationsExecute executes the request
-	//  @return NetworkingV1NetworkLinkServiceAssociationList
-	ListNetworkingV1NetworkLinkServiceAssociationsExecute(r ApiListNetworkingV1NetworkLinkServiceAssociationsRequest) (NetworkingV1NetworkLinkServiceAssociationList, *_nethttp.Response, error)
+	// ListNetworkingV1GatewaysExecute executes the request
+	//  @return NetworkingV1GatewayList
+	ListNetworkingV1GatewaysExecute(r ApiListNetworkingV1GatewaysRequest) (NetworkingV1GatewayList, *_nethttp.Response, error)
 }
 
-// NetworkLinkServiceAssociationsNetworkingV1ApiService NetworkLinkServiceAssociationsNetworkingV1Api service
-type NetworkLinkServiceAssociationsNetworkingV1ApiService service
+// GatewaysNetworkingV1ApiService GatewaysNetworkingV1Api service
+type GatewaysNetworkingV1ApiService service
 
-type ApiGetNetworkingV1NetworkLinkServiceAssociationRequest struct {
-	ctx                    _context.Context
-	ApiService             NetworkLinkServiceAssociationsNetworkingV1Api
-	specNetworkLinkService *string
-	environment            *string
-	id                     string
-}
-
-// Scope the operation to the given spec.network_link_service.
-func (r ApiGetNetworkingV1NetworkLinkServiceAssociationRequest) SpecNetworkLinkService(specNetworkLinkService string) ApiGetNetworkingV1NetworkLinkServiceAssociationRequest {
-	r.specNetworkLinkService = &specNetworkLinkService
-	return r
+type ApiGetNetworkingV1GatewayRequest struct {
+	ctx         _context.Context
+	ApiService  GatewaysNetworkingV1Api
+	environment *string
+	id          string
 }
 
 // Scope the operation to the given environment.
-func (r ApiGetNetworkingV1NetworkLinkServiceAssociationRequest) Environment(environment string) ApiGetNetworkingV1NetworkLinkServiceAssociationRequest {
+func (r ApiGetNetworkingV1GatewayRequest) Environment(environment string) ApiGetNetworkingV1GatewayRequest {
 	r.environment = &environment
 	return r
 }
 
-func (r ApiGetNetworkingV1NetworkLinkServiceAssociationRequest) Execute() (NetworkingV1NetworkLinkServiceAssociation, *_nethttp.Response, error) {
-	return r.ApiService.GetNetworkingV1NetworkLinkServiceAssociationExecute(r)
+func (r ApiGetNetworkingV1GatewayRequest) Execute() (NetworkingV1Gateway, *_nethttp.Response, error) {
+	return r.ApiService.GetNetworkingV1GatewayExecute(r)
 }
 
 /*
-GetNetworkingV1NetworkLinkServiceAssociation Read a Network Link Service Association
+GetNetworkingV1Gateway Read a Gateway
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to read a network link service association.
+Make a request to read a gateway.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the network link service association.
-	@return ApiGetNetworkingV1NetworkLinkServiceAssociationRequest
+	@param id The unique identifier for the gateway.
+	@return ApiGetNetworkingV1GatewayRequest
 */
-func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) GetNetworkingV1NetworkLinkServiceAssociation(ctx _context.Context, id string) ApiGetNetworkingV1NetworkLinkServiceAssociationRequest {
-	return ApiGetNetworkingV1NetworkLinkServiceAssociationRequest{
+func (a *GatewaysNetworkingV1ApiService) GetNetworkingV1Gateway(ctx _context.Context, id string) ApiGetNetworkingV1GatewayRequest {
+	return ApiGetNetworkingV1GatewayRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -124,36 +116,32 @@ func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) GetNetworkingV1Ne
 
 // Execute executes the request
 //
-//	@return NetworkingV1NetworkLinkServiceAssociation
-func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) GetNetworkingV1NetworkLinkServiceAssociationExecute(r ApiGetNetworkingV1NetworkLinkServiceAssociationRequest) (NetworkingV1NetworkLinkServiceAssociation, *_nethttp.Response, error) {
+//	@return NetworkingV1Gateway
+func (a *GatewaysNetworkingV1ApiService) GetNetworkingV1GatewayExecute(r ApiGetNetworkingV1GatewayRequest) (NetworkingV1Gateway, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  NetworkingV1NetworkLinkServiceAssociation
+		localVarReturnValue  NetworkingV1Gateway
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkLinkServiceAssociationsNetworkingV1ApiService.GetNetworkingV1NetworkLinkServiceAssociation")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GatewaysNetworkingV1ApiService.GetNetworkingV1Gateway")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/networking/v1/network-link-service-associations/{id}"
+	localVarPath := localBasePath + "/networking/v1/gateways/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.specNetworkLinkService == nil {
-		return localVarReturnValue, nil, reportError("specNetworkLinkService is required and must be specified")
-	}
 	if r.environment == nil {
 		return localVarReturnValue, nil, reportError("environment is required and must be specified")
 	}
 
-	localVarQueryParams.Add("spec.network_link_service", parameterToString(*r.specNetworkLinkService, ""))
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -258,62 +246,48 @@ func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) GetNetworkingV1Ne
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListNetworkingV1NetworkLinkServiceAssociationsRequest struct {
-	ctx                    _context.Context
-	ApiService             NetworkLinkServiceAssociationsNetworkingV1Api
-	specNetworkLinkService *string
-	environment            *string
-	statusPhase            *[]string
-	pageSize               *int32
-	pageToken              *string
-}
-
-// Filter the results by exact match for spec.network_link_service.
-func (r ApiListNetworkingV1NetworkLinkServiceAssociationsRequest) SpecNetworkLinkService(specNetworkLinkService string) ApiListNetworkingV1NetworkLinkServiceAssociationsRequest {
-	r.specNetworkLinkService = &specNetworkLinkService
-	return r
+type ApiListNetworkingV1GatewaysRequest struct {
+	ctx         _context.Context
+	ApiService  GatewaysNetworkingV1Api
+	environment *string
+	pageSize    *int32
+	pageToken   *string
 }
 
 // Filter the results by exact match for environment.
-func (r ApiListNetworkingV1NetworkLinkServiceAssociationsRequest) Environment(environment string) ApiListNetworkingV1NetworkLinkServiceAssociationsRequest {
+func (r ApiListNetworkingV1GatewaysRequest) Environment(environment string) ApiListNetworkingV1GatewaysRequest {
 	r.environment = &environment
 	return r
 }
 
-// Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1NetworkLinkServiceAssociationsRequest) StatusPhase(statusPhase []string) ApiListNetworkingV1NetworkLinkServiceAssociationsRequest {
-	r.statusPhase = &statusPhase
-	return r
-}
-
 // A pagination size for collection requests.
-func (r ApiListNetworkingV1NetworkLinkServiceAssociationsRequest) PageSize(pageSize int32) ApiListNetworkingV1NetworkLinkServiceAssociationsRequest {
+func (r ApiListNetworkingV1GatewaysRequest) PageSize(pageSize int32) ApiListNetworkingV1GatewaysRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
 // An opaque pagination token for collection requests.
-func (r ApiListNetworkingV1NetworkLinkServiceAssociationsRequest) PageToken(pageToken string) ApiListNetworkingV1NetworkLinkServiceAssociationsRequest {
+func (r ApiListNetworkingV1GatewaysRequest) PageToken(pageToken string) ApiListNetworkingV1GatewaysRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-func (r ApiListNetworkingV1NetworkLinkServiceAssociationsRequest) Execute() (NetworkingV1NetworkLinkServiceAssociationList, *_nethttp.Response, error) {
-	return r.ApiService.ListNetworkingV1NetworkLinkServiceAssociationsExecute(r)
+func (r ApiListNetworkingV1GatewaysRequest) Execute() (NetworkingV1GatewayList, *_nethttp.Response, error) {
+	return r.ApiService.ListNetworkingV1GatewaysExecute(r)
 }
 
 /*
-ListNetworkingV1NetworkLinkServiceAssociations List of Network Link Service Associations
+ListNetworkingV1Gateways List of Gateways
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Retrieve a sorted, filtered, paginated list of all network link service associations.
+Retrieve a sorted, filtered, paginated list of all gateways.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListNetworkingV1NetworkLinkServiceAssociationsRequest
+	@return ApiListNetworkingV1GatewaysRequest
 */
-func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) ListNetworkingV1NetworkLinkServiceAssociations(ctx _context.Context) ApiListNetworkingV1NetworkLinkServiceAssociationsRequest {
-	return ApiListNetworkingV1NetworkLinkServiceAssociationsRequest{
+func (a *GatewaysNetworkingV1ApiService) ListNetworkingV1Gateways(ctx _context.Context) ApiListNetworkingV1GatewaysRequest {
+	return ApiListNetworkingV1GatewaysRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -321,46 +295,31 @@ func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) ListNetworkingV1N
 
 // Execute executes the request
 //
-//	@return NetworkingV1NetworkLinkServiceAssociationList
-func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) ListNetworkingV1NetworkLinkServiceAssociationsExecute(r ApiListNetworkingV1NetworkLinkServiceAssociationsRequest) (NetworkingV1NetworkLinkServiceAssociationList, *_nethttp.Response, error) {
+//	@return NetworkingV1GatewayList
+func (a *GatewaysNetworkingV1ApiService) ListNetworkingV1GatewaysExecute(r ApiListNetworkingV1GatewaysRequest) (NetworkingV1GatewayList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  NetworkingV1NetworkLinkServiceAssociationList
+		localVarReturnValue  NetworkingV1GatewayList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkLinkServiceAssociationsNetworkingV1ApiService.ListNetworkingV1NetworkLinkServiceAssociations")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GatewaysNetworkingV1ApiService.ListNetworkingV1Gateways")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/networking/v1/network-link-service-associations"
+	localVarPath := localBasePath + "/networking/v1/gateways"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.specNetworkLinkService == nil {
-		return localVarReturnValue, nil, reportError("specNetworkLinkService is required and must be specified")
-	}
 	if r.environment == nil {
 		return localVarReturnValue, nil, reportError("environment is required and must be specified")
 	}
 
-	if r.statusPhase != nil {
-		t := *r.statusPhase
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("status.phase", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("status.phase", parameterToString(t, "multi"))
-		}
-	}
-	localVarQueryParams.Add("spec.network_link_service", parameterToString(*r.specNetworkLinkService, ""))
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))

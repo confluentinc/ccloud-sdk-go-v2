@@ -79,6 +79,8 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*GatewaysNetworkingV1Api* | [**GetNetworkingV1Gateway**](docs/GatewaysNetworkingV1Api.md#getnetworkingv1gateway) | **Get** /networking/v1/gateways/{id} | Read a Gateway
+*GatewaysNetworkingV1Api* | [**ListNetworkingV1Gateways**](docs/GatewaysNetworkingV1Api.md#listnetworkingv1gateways) | **Get** /networking/v1/gateways | List of Gateways
 *NetworkLinkEndpointsNetworkingV1Api* | [**CreateNetworkingV1NetworkLinkEndpoint**](docs/NetworkLinkEndpointsNetworkingV1Api.md#createnetworkingv1networklinkendpoint) | **Post** /networking/v1/network-link-endpoints | Create a Network Link Endpoint
 *NetworkLinkEndpointsNetworkingV1Api* | [**DeleteNetworkingV1NetworkLinkEndpoint**](docs/NetworkLinkEndpointsNetworkingV1Api.md#deletenetworkingv1networklinkendpoint) | **Delete** /networking/v1/network-link-endpoints/{id} | Delete a Network Link Endpoint
 *NetworkLinkEndpointsNetworkingV1Api* | [**GetNetworkingV1NetworkLinkEndpoint**](docs/NetworkLinkEndpointsNetworkingV1Api.md#getnetworkingv1networklinkendpoint) | **Get** /networking/v1/network-link-endpoints/{id} | Read a Network Link Endpoint
@@ -121,6 +123,7 @@ Class | Method | HTTP request | Description
  - [Failure](docs/Failure.md)
  - [GlobalObjectReference](docs/GlobalObjectReference.md)
  - [ListMeta](docs/ListMeta.md)
+ - [MultipleSearchFilter](docs/MultipleSearchFilter.md)
  - [NetworkingV1AwsNetwork](docs/NetworkingV1AwsNetwork.md)
  - [NetworkingV1AwsPeering](docs/NetworkingV1AwsPeering.md)
  - [NetworkingV1AwsPrivateLinkAccess](docs/NetworkingV1AwsPrivateLinkAccess.md)
@@ -129,7 +132,11 @@ Class | Method | HTTP request | Description
  - [NetworkingV1AzureNetwork](docs/NetworkingV1AzureNetwork.md)
  - [NetworkingV1AzurePeering](docs/NetworkingV1AzurePeering.md)
  - [NetworkingV1AzurePrivateLinkAccess](docs/NetworkingV1AzurePrivateLinkAccess.md)
+ - [NetworkingV1ConnectionTypes](docs/NetworkingV1ConnectionTypes.md)
  - [NetworkingV1DnsConfig](docs/NetworkingV1DnsConfig.md)
+ - [NetworkingV1Gateway](docs/NetworkingV1Gateway.md)
+ - [NetworkingV1GatewayList](docs/NetworkingV1GatewayList.md)
+ - [NetworkingV1GatewaySpec](docs/NetworkingV1GatewaySpec.md)
  - [NetworkingV1GcpNetwork](docs/NetworkingV1GcpNetwork.md)
  - [NetworkingV1GcpPeering](docs/NetworkingV1GcpPeering.md)
  - [NetworkingV1GcpPrivateServiceConnectAccess](docs/NetworkingV1GcpPrivateServiceConnectAccess.md)
@@ -171,6 +178,7 @@ Class | Method | HTTP request | Description
  - [NetworkingV1PrivateLinkAccessSpecUpdate](docs/NetworkingV1PrivateLinkAccessSpecUpdate.md)
  - [NetworkingV1PrivateLinkAccessStatus](docs/NetworkingV1PrivateLinkAccessStatus.md)
  - [NetworkingV1PrivateLinkAccessUpdate](docs/NetworkingV1PrivateLinkAccessUpdate.md)
+ - [NetworkingV1SupportedConnectionTypes](docs/NetworkingV1SupportedConnectionTypes.md)
  - [NetworkingV1TransitGatewayAttachment](docs/NetworkingV1TransitGatewayAttachment.md)
  - [NetworkingV1TransitGatewayAttachmentList](docs/NetworkingV1TransitGatewayAttachmentList.md)
  - [NetworkingV1TransitGatewayAttachmentSpec](docs/NetworkingV1TransitGatewayAttachmentSpec.md)
@@ -180,8 +188,10 @@ Class | Method | HTTP request | Description
  - [NetworkingV1TransitGatewayAttachmentStatusCloudOneOf](docs/NetworkingV1TransitGatewayAttachmentStatusCloudOneOf.md)
  - [NetworkingV1TransitGatewayAttachmentUpdate](docs/NetworkingV1TransitGatewayAttachmentUpdate.md)
  - [NetworkingV1ZoneInfo](docs/NetworkingV1ZoneInfo.md)
+ - [NetworkingV1ZonesInfo](docs/NetworkingV1ZonesInfo.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
+ - [TypedEnvScopedObjectReference](docs/TypedEnvScopedObjectReference.md)
 
 
 ## Documentation For Authorization
