@@ -74,7 +74,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -150,7 +150,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -223,7 +223,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -298,7 +298,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -376,7 +376,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -446,7 +446,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -521,7 +521,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -595,7 +595,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -666,7 +666,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
