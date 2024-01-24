@@ -31,6 +31,7 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
+	"reflect"
 	"strings"
 )
 
@@ -151,8 +152,8 @@ CreateNetworkingV1PrivateLinkAccess Create a Private Link Access
 
 Make a request to create a private link access.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateNetworkingV1PrivateLinkAccessRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateNetworkingV1PrivateLinkAccessRequest
 */
 func (a *PrivateLinkAccessesNetworkingV1ApiService) CreateNetworkingV1PrivateLinkAccess(ctx _context.Context) ApiCreateNetworkingV1PrivateLinkAccessRequest {
 	return ApiCreateNetworkingV1PrivateLinkAccessRequest{
@@ -162,7 +163,8 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) CreateNetworkingV1PrivateLin
 }
 
 // Execute executes the request
-//  @return NetworkingV1PrivateLinkAccess
+//
+//	@return NetworkingV1PrivateLinkAccess
 func (a *PrivateLinkAccessesNetworkingV1ApiService) CreateNetworkingV1PrivateLinkAccessExecute(r ApiCreateNetworkingV1PrivateLinkAccessRequest) (NetworkingV1PrivateLinkAccess, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -333,9 +335,9 @@ DeleteNetworkingV1PrivateLinkAccess Delete a Private Link Access
 
 Make a request to delete a private link access.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the private link access.
- @return ApiDeleteNetworkingV1PrivateLinkAccessRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the private link access.
+	@return ApiDeleteNetworkingV1PrivateLinkAccessRequest
 */
 func (a *PrivateLinkAccessesNetworkingV1ApiService) DeleteNetworkingV1PrivateLinkAccess(ctx _context.Context, id string) ApiDeleteNetworkingV1PrivateLinkAccessRequest {
 	return ApiDeleteNetworkingV1PrivateLinkAccessRequest{
@@ -489,9 +491,9 @@ GetNetworkingV1PrivateLinkAccess Read a Private Link Access
 
 Make a request to read a private link access.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the private link access.
- @return ApiGetNetworkingV1PrivateLinkAccessRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the private link access.
+	@return ApiGetNetworkingV1PrivateLinkAccessRequest
 */
 func (a *PrivateLinkAccessesNetworkingV1ApiService) GetNetworkingV1PrivateLinkAccess(ctx _context.Context, id string) ApiGetNetworkingV1PrivateLinkAccessRequest {
 	return ApiGetNetworkingV1PrivateLinkAccessRequest{
@@ -502,7 +504,8 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) GetNetworkingV1PrivateLinkAc
 }
 
 // Execute executes the request
-//  @return NetworkingV1PrivateLinkAccess
+//
+//	@return NetworkingV1PrivateLinkAccess
 func (a *PrivateLinkAccessesNetworkingV1ApiService) GetNetworkingV1PrivateLinkAccessExecute(r ApiGetNetworkingV1PrivateLinkAccessRequest) (NetworkingV1PrivateLinkAccess, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -636,9 +639,9 @@ type ApiListNetworkingV1PrivateLinkAccessesRequest struct {
 	ctx             _context.Context
 	ApiService      PrivateLinkAccessesNetworkingV1Api
 	environment     *string
-	specDisplayName *MultipleSearchFilter
-	statusPhase     *MultipleSearchFilter
-	specNetwork     *MultipleSearchFilter
+	specDisplayName *[]string
+	statusPhase     *[]string
+	specNetwork     *[]string
 	pageSize        *int32
 	pageToken       *string
 }
@@ -650,19 +653,19 @@ func (r ApiListNetworkingV1PrivateLinkAccessesRequest) Environment(environment s
 }
 
 // Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PrivateLinkAccessesRequest) SpecDisplayName(specDisplayName MultipleSearchFilter) ApiListNetworkingV1PrivateLinkAccessesRequest {
+func (r ApiListNetworkingV1PrivateLinkAccessesRequest) SpecDisplayName(specDisplayName []string) ApiListNetworkingV1PrivateLinkAccessesRequest {
 	r.specDisplayName = &specDisplayName
 	return r
 }
 
 // Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PrivateLinkAccessesRequest) StatusPhase(statusPhase MultipleSearchFilter) ApiListNetworkingV1PrivateLinkAccessesRequest {
+func (r ApiListNetworkingV1PrivateLinkAccessesRequest) StatusPhase(statusPhase []string) ApiListNetworkingV1PrivateLinkAccessesRequest {
 	r.statusPhase = &statusPhase
 	return r
 }
 
 // Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1PrivateLinkAccessesRequest) SpecNetwork(specNetwork MultipleSearchFilter) ApiListNetworkingV1PrivateLinkAccessesRequest {
+func (r ApiListNetworkingV1PrivateLinkAccessesRequest) SpecNetwork(specNetwork []string) ApiListNetworkingV1PrivateLinkAccessesRequest {
 	r.specNetwork = &specNetwork
 	return r
 }
@@ -690,8 +693,8 @@ ListNetworkingV1PrivateLinkAccesses List of Private Link Accesses
 
 Retrieve a sorted, filtered, paginated list of all private link accesses.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListNetworkingV1PrivateLinkAccessesRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListNetworkingV1PrivateLinkAccessesRequest
 */
 func (a *PrivateLinkAccessesNetworkingV1ApiService) ListNetworkingV1PrivateLinkAccesses(ctx _context.Context) ApiListNetworkingV1PrivateLinkAccessesRequest {
 	return ApiListNetworkingV1PrivateLinkAccessesRequest{
@@ -701,7 +704,8 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) ListNetworkingV1PrivateLinkA
 }
 
 // Execute executes the request
-//  @return NetworkingV1PrivateLinkAccessList
+//
+//	@return NetworkingV1PrivateLinkAccessList
 func (a *PrivateLinkAccessesNetworkingV1ApiService) ListNetworkingV1PrivateLinkAccessesExecute(r ApiListNetworkingV1PrivateLinkAccessesRequest) (NetworkingV1PrivateLinkAccessList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -727,14 +731,38 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) ListNetworkingV1PrivateLinkA
 	}
 
 	if r.specDisplayName != nil {
-		localVarQueryParams.Add("spec.display_name", parameterToString(*r.specDisplayName, ""))
+		t := *r.specDisplayName
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.display_name", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.display_name", parameterToString(t, "multi"))
+		}
 	}
 	if r.statusPhase != nil {
-		localVarQueryParams.Add("status.phase", parameterToString(*r.statusPhase, ""))
+		t := *r.statusPhase
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("status.phase", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("status.phase", parameterToString(t, "multi"))
+		}
 	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.specNetwork != nil {
-		localVarQueryParams.Add("spec.network", parameterToString(*r.specNetwork, ""))
+		t := *r.specNetwork
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.network", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.network", parameterToString(t, "multi"))
+		}
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
@@ -858,11 +886,9 @@ UpdateNetworkingV1PrivateLinkAccess Update a Private Link Access
 
 Make a request to update a private link access.
 
-
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the private link access.
- @return ApiUpdateNetworkingV1PrivateLinkAccessRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the private link access.
+	@return ApiUpdateNetworkingV1PrivateLinkAccessRequest
 */
 func (a *PrivateLinkAccessesNetworkingV1ApiService) UpdateNetworkingV1PrivateLinkAccess(ctx _context.Context, id string) ApiUpdateNetworkingV1PrivateLinkAccessRequest {
 	return ApiUpdateNetworkingV1PrivateLinkAccessRequest{
@@ -873,7 +899,8 @@ func (a *PrivateLinkAccessesNetworkingV1ApiService) UpdateNetworkingV1PrivateLin
 }
 
 // Execute executes the request
-//  @return NetworkingV1PrivateLinkAccess
+//
+//	@return NetworkingV1PrivateLinkAccess
 func (a *PrivateLinkAccessesNetworkingV1ApiService) UpdateNetworkingV1PrivateLinkAccessExecute(r ApiUpdateNetworkingV1PrivateLinkAccessRequest) (NetworkingV1PrivateLinkAccess, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch

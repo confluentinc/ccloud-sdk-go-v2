@@ -102,9 +102,9 @@ GetNetworkingV1Gateway Read a Gateway
 
 Make a request to read a gateway.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the gateway.
- @return ApiGetNetworkingV1GatewayRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the gateway.
+	@return ApiGetNetworkingV1GatewayRequest
 */
 func (a *GatewaysNetworkingV1ApiService) GetNetworkingV1Gateway(ctx _context.Context, id string) ApiGetNetworkingV1GatewayRequest {
 	return ApiGetNetworkingV1GatewayRequest{
@@ -115,7 +115,8 @@ func (a *GatewaysNetworkingV1ApiService) GetNetworkingV1Gateway(ctx _context.Con
 }
 
 // Execute executes the request
-//  @return NetworkingV1Gateway
+//
+//	@return NetworkingV1Gateway
 func (a *GatewaysNetworkingV1ApiService) GetNetworkingV1GatewayExecute(r ApiGetNetworkingV1GatewayRequest) (NetworkingV1Gateway, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -282,8 +283,8 @@ ListNetworkingV1Gateways List of Gateways
 
 Retrieve a sorted, filtered, paginated list of all gateways.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListNetworkingV1GatewaysRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListNetworkingV1GatewaysRequest
 */
 func (a *GatewaysNetworkingV1ApiService) ListNetworkingV1Gateways(ctx _context.Context) ApiListNetworkingV1GatewaysRequest {
 	return ApiListNetworkingV1GatewaysRequest{
@@ -293,7 +294,8 @@ func (a *GatewaysNetworkingV1ApiService) ListNetworkingV1Gateways(ctx _context.C
 }
 
 // Execute executes the request
-//  @return NetworkingV1GatewayList
+//
+//	@return NetworkingV1GatewayList
 func (a *GatewaysNetworkingV1ApiService) ListNetworkingV1GatewaysExecute(r ApiListNetworkingV1GatewaysRequest) (NetworkingV1GatewayList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet

@@ -31,6 +31,7 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
+	"reflect"
 	"strings"
 )
 
@@ -151,8 +152,8 @@ CreateNetworkingV1TransitGatewayAttachment Create a Transit Gateway Attachment
 
 Make a request to create a transit gateway attachment.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateNetworkingV1TransitGatewayAttachmentRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateNetworkingV1TransitGatewayAttachmentRequest
 */
 func (a *TransitGatewayAttachmentsNetworkingV1ApiService) CreateNetworkingV1TransitGatewayAttachment(ctx _context.Context) ApiCreateNetworkingV1TransitGatewayAttachmentRequest {
 	return ApiCreateNetworkingV1TransitGatewayAttachmentRequest{
@@ -162,7 +163,8 @@ func (a *TransitGatewayAttachmentsNetworkingV1ApiService) CreateNetworkingV1Tran
 }
 
 // Execute executes the request
-//  @return NetworkingV1TransitGatewayAttachment
+//
+//	@return NetworkingV1TransitGatewayAttachment
 func (a *TransitGatewayAttachmentsNetworkingV1ApiService) CreateNetworkingV1TransitGatewayAttachmentExecute(r ApiCreateNetworkingV1TransitGatewayAttachmentRequest) (NetworkingV1TransitGatewayAttachment, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -333,9 +335,9 @@ DeleteNetworkingV1TransitGatewayAttachment Delete a Transit Gateway Attachment
 
 Make a request to delete a transit gateway attachment.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the transit gateway attachment.
- @return ApiDeleteNetworkingV1TransitGatewayAttachmentRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the transit gateway attachment.
+	@return ApiDeleteNetworkingV1TransitGatewayAttachmentRequest
 */
 func (a *TransitGatewayAttachmentsNetworkingV1ApiService) DeleteNetworkingV1TransitGatewayAttachment(ctx _context.Context, id string) ApiDeleteNetworkingV1TransitGatewayAttachmentRequest {
 	return ApiDeleteNetworkingV1TransitGatewayAttachmentRequest{
@@ -489,9 +491,9 @@ GetNetworkingV1TransitGatewayAttachment Read a Transit Gateway Attachment
 
 Make a request to read a transit gateway attachment.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the transit gateway attachment.
- @return ApiGetNetworkingV1TransitGatewayAttachmentRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the transit gateway attachment.
+	@return ApiGetNetworkingV1TransitGatewayAttachmentRequest
 */
 func (a *TransitGatewayAttachmentsNetworkingV1ApiService) GetNetworkingV1TransitGatewayAttachment(ctx _context.Context, id string) ApiGetNetworkingV1TransitGatewayAttachmentRequest {
 	return ApiGetNetworkingV1TransitGatewayAttachmentRequest{
@@ -502,7 +504,8 @@ func (a *TransitGatewayAttachmentsNetworkingV1ApiService) GetNetworkingV1Transit
 }
 
 // Execute executes the request
-//  @return NetworkingV1TransitGatewayAttachment
+//
+//	@return NetworkingV1TransitGatewayAttachment
 func (a *TransitGatewayAttachmentsNetworkingV1ApiService) GetNetworkingV1TransitGatewayAttachmentExecute(r ApiGetNetworkingV1TransitGatewayAttachmentRequest) (NetworkingV1TransitGatewayAttachment, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -636,9 +639,9 @@ type ApiListNetworkingV1TransitGatewayAttachmentsRequest struct {
 	ctx             _context.Context
 	ApiService      TransitGatewayAttachmentsNetworkingV1Api
 	environment     *string
-	specDisplayName *MultipleSearchFilter
-	statusPhase     *MultipleSearchFilter
-	specNetwork     *MultipleSearchFilter
+	specDisplayName *[]string
+	statusPhase     *[]string
+	specNetwork     *[]string
 	pageSize        *int32
 	pageToken       *string
 }
@@ -650,19 +653,19 @@ func (r ApiListNetworkingV1TransitGatewayAttachmentsRequest) Environment(environ
 }
 
 // Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1TransitGatewayAttachmentsRequest) SpecDisplayName(specDisplayName MultipleSearchFilter) ApiListNetworkingV1TransitGatewayAttachmentsRequest {
+func (r ApiListNetworkingV1TransitGatewayAttachmentsRequest) SpecDisplayName(specDisplayName []string) ApiListNetworkingV1TransitGatewayAttachmentsRequest {
 	r.specDisplayName = &specDisplayName
 	return r
 }
 
 // Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1TransitGatewayAttachmentsRequest) StatusPhase(statusPhase MultipleSearchFilter) ApiListNetworkingV1TransitGatewayAttachmentsRequest {
+func (r ApiListNetworkingV1TransitGatewayAttachmentsRequest) StatusPhase(statusPhase []string) ApiListNetworkingV1TransitGatewayAttachmentsRequest {
 	r.statusPhase = &statusPhase
 	return r
 }
 
 // Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1TransitGatewayAttachmentsRequest) SpecNetwork(specNetwork MultipleSearchFilter) ApiListNetworkingV1TransitGatewayAttachmentsRequest {
+func (r ApiListNetworkingV1TransitGatewayAttachmentsRequest) SpecNetwork(specNetwork []string) ApiListNetworkingV1TransitGatewayAttachmentsRequest {
 	r.specNetwork = &specNetwork
 	return r
 }
@@ -690,8 +693,8 @@ ListNetworkingV1TransitGatewayAttachments List of Transit Gateway Attachments
 
 Retrieve a sorted, filtered, paginated list of all transit gateway attachments.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListNetworkingV1TransitGatewayAttachmentsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListNetworkingV1TransitGatewayAttachmentsRequest
 */
 func (a *TransitGatewayAttachmentsNetworkingV1ApiService) ListNetworkingV1TransitGatewayAttachments(ctx _context.Context) ApiListNetworkingV1TransitGatewayAttachmentsRequest {
 	return ApiListNetworkingV1TransitGatewayAttachmentsRequest{
@@ -701,7 +704,8 @@ func (a *TransitGatewayAttachmentsNetworkingV1ApiService) ListNetworkingV1Transi
 }
 
 // Execute executes the request
-//  @return NetworkingV1TransitGatewayAttachmentList
+//
+//	@return NetworkingV1TransitGatewayAttachmentList
 func (a *TransitGatewayAttachmentsNetworkingV1ApiService) ListNetworkingV1TransitGatewayAttachmentsExecute(r ApiListNetworkingV1TransitGatewayAttachmentsRequest) (NetworkingV1TransitGatewayAttachmentList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -727,14 +731,38 @@ func (a *TransitGatewayAttachmentsNetworkingV1ApiService) ListNetworkingV1Transi
 	}
 
 	if r.specDisplayName != nil {
-		localVarQueryParams.Add("spec.display_name", parameterToString(*r.specDisplayName, ""))
+		t := *r.specDisplayName
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.display_name", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.display_name", parameterToString(t, "multi"))
+		}
 	}
 	if r.statusPhase != nil {
-		localVarQueryParams.Add("status.phase", parameterToString(*r.statusPhase, ""))
+		t := *r.statusPhase
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("status.phase", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("status.phase", parameterToString(t, "multi"))
+		}
 	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.specNetwork != nil {
-		localVarQueryParams.Add("spec.network", parameterToString(*r.specNetwork, ""))
+		t := *r.specNetwork
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.network", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.network", parameterToString(t, "multi"))
+		}
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
@@ -858,11 +886,9 @@ UpdateNetworkingV1TransitGatewayAttachment Update a Transit Gateway Attachment
 
 Make a request to update a transit gateway attachment.
 
-
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the transit gateway attachment.
- @return ApiUpdateNetworkingV1TransitGatewayAttachmentRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the transit gateway attachment.
+	@return ApiUpdateNetworkingV1TransitGatewayAttachmentRequest
 */
 func (a *TransitGatewayAttachmentsNetworkingV1ApiService) UpdateNetworkingV1TransitGatewayAttachment(ctx _context.Context, id string) ApiUpdateNetworkingV1TransitGatewayAttachmentRequest {
 	return ApiUpdateNetworkingV1TransitGatewayAttachmentRequest{
@@ -873,7 +899,8 @@ func (a *TransitGatewayAttachmentsNetworkingV1ApiService) UpdateNetworkingV1Tran
 }
 
 // Execute executes the request
-//  @return NetworkingV1TransitGatewayAttachment
+//
+//	@return NetworkingV1TransitGatewayAttachment
 func (a *TransitGatewayAttachmentsNetworkingV1ApiService) UpdateNetworkingV1TransitGatewayAttachmentExecute(r ApiUpdateNetworkingV1TransitGatewayAttachmentRequest) (NetworkingV1TransitGatewayAttachment, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
