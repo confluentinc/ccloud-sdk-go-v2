@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 
 ## ListNetworkingV1Networks
 
-> NetworkingV1NetworkList ListNetworkingV1Networks(ctx).Environment(environment).SpecDisplayName(specDisplayName).SpecCloud(specCloud).SpecRegion(specRegion).SpecCidr(specCidr).StatusPhase(statusPhase).ConnectionType(connectionType).PageSize(pageSize).PageToken(pageToken).Execute()
+> NetworkingV1NetworkList ListNetworkingV1Networks(ctx).Environment(environment).SpecDisplayName(specDisplayName).SpecCloud(specCloud).SpecRegion(specRegion).SpecConnectionTypes(specConnectionTypes).SpecCidr(specCidr).StatusPhase(statusPhase).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Networks
 
@@ -245,15 +245,15 @@ func main() {
     specDisplayName := []string{"Inner_example"} // []string | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. (optional)
     specCloud := []string{"Inner_example"} // []string | Filter the results by exact match for spec.cloud. Pass multiple times to see results matching any of the values. (optional)
     specRegion := []string{"Inner_example"} // []string | Filter the results by exact match for spec.region. Pass multiple times to see results matching any of the values. (optional)
+    specConnectionTypes := []string{"Inner_example"} // []string | Filter the results by exact match for spec.connection_types. Pass multiple times to see results matching any of the values. (optional)
     specCidr := []string{"Inner_example"} // []string | Filter the results by exact match for spec.cidr. Pass multiple times to see results matching any of the values. (optional)
     statusPhase := []string{"Inner_example"} // []string | Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values. (optional)
-    connectionType := []string{"Inner_example"} // []string | Filter the results by exact match for connection_type. Pass multiple times to see results matching any of the values. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.NetworksNetworkingV1Api.ListNetworkingV1Networks(context.Background()).Environment(environment).SpecDisplayName(specDisplayName).SpecCloud(specCloud).SpecRegion(specRegion).SpecCidr(specCidr).StatusPhase(statusPhase).ConnectionType(connectionType).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.NetworksNetworkingV1Api.ListNetworkingV1Networks(context.Background()).Environment(environment).SpecDisplayName(specDisplayName).SpecCloud(specCloud).SpecRegion(specRegion).SpecConnectionTypes(specConnectionTypes).SpecCidr(specCidr).StatusPhase(statusPhase).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `NetworksNetworkingV1Api.ListNetworkingV1Networks``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -278,9 +278,9 @@ Name | Type | Description  | Notes
  **specDisplayName** | **[]string** | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. | 
  **specCloud** | **[]string** | Filter the results by exact match for spec.cloud. Pass multiple times to see results matching any of the values. | 
  **specRegion** | **[]string** | Filter the results by exact match for spec.region. Pass multiple times to see results matching any of the values. | 
+ **specConnectionTypes** | **[]string** | Filter the results by exact match for spec.connection_types. Pass multiple times to see results matching any of the values. | 
  **specCidr** | **[]string** | Filter the results by exact match for spec.cidr. Pass multiple times to see results matching any of the values. | 
  **statusPhase** | **[]string** | Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values. | 
- **connectionType** | **[]string** | Filter the results by exact match for connection_type. Pass multiple times to see results matching any of the values. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 
