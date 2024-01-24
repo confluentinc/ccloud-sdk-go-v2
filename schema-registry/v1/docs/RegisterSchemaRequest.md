@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **References** | Pointer to [**[]SchemaReference**](SchemaReference.md) | References to other schemas | [optional] 
 **Schema** | Pointer to **string** | Schema definition string | [optional] 
 **Metadata** | Pointer to [**NullableMetadata**](Metadata.md) |  | [optional] 
-**Ruleset** | Pointer to [**NullableRuleSet**](RuleSet.md) |  | [optional] 
+**RuleSet** | Pointer to [**NullableRuleSet**](RuleSet.md) |  | [optional] 
 
 ## Methods
 
@@ -191,41 +191,41 @@ HasMetadata returns a boolean if a field has been set.
 `func (o *RegisterSchemaRequest) UnsetMetadata()`
 
 UnsetMetadata ensures that no value is present for Metadata, not even an explicit nil
-### GetRuleset
+### GetRuleSet
 
-`func (o *RegisterSchemaRequest) GetRuleset() RuleSet`
+`func (o *RegisterSchemaRequest) GetRuleSet() RuleSet`
 
-GetRuleset returns the Ruleset field if non-nil, zero value otherwise.
+GetRuleSet returns the RuleSet field if non-nil, zero value otherwise.
 
-### GetRulesetOk
+### GetRuleSetOk
 
-`func (o *RegisterSchemaRequest) GetRulesetOk() (*RuleSet, bool)`
+`func (o *RegisterSchemaRequest) GetRuleSetOk() (*RuleSet, bool)`
 
-GetRulesetOk returns a tuple with the Ruleset field if it's non-nil, zero value otherwise
+GetRuleSetOk returns a tuple with the RuleSet field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetRuleset
+### SetRuleSet
 
-`func (o *RegisterSchemaRequest) SetRuleset(v RuleSet)`
+`func (o *RegisterSchemaRequest) SetRuleSet(v RuleSet)`
 
-SetRuleset sets Ruleset field to given value.
+SetRuleSet sets RuleSet field to given value.
 
-### HasRuleset
+### HasRuleSet
 
-`func (o *RegisterSchemaRequest) HasRuleset() bool`
+`func (o *RegisterSchemaRequest) HasRuleSet() bool`
 
-HasRuleset returns a boolean if a field has been set.
+HasRuleSet returns a boolean if a field has been set.
 
-### SetRulesetNil
+### SetRuleSetNil
 
-`func (o *RegisterSchemaRequest) SetRulesetNil(b bool)`
+`func (o *RegisterSchemaRequest) SetRuleSetNil(b bool)`
 
- SetRulesetNil sets the value for Ruleset to be an explicit nil
+ SetRuleSetNil sets the value for RuleSet to be an explicit nil
 
-### UnsetRuleset
-`func (o *RegisterSchemaRequest) UnsetRuleset()`
+### UnsetRuleSet
+`func (o *RegisterSchemaRequest) UnsetRuleSet()`
 
-UnsetRuleset ensures that no value is present for Ruleset, not even an explicit nil
+UnsetRuleSet ensures that no value is present for RuleSet, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
