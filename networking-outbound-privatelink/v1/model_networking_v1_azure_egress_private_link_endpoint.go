@@ -37,7 +37,7 @@ import (
 // NetworkingV1AzureEgressPrivateLinkEndpoint Azure Private Endpoint.
 type NetworkingV1AzureEgressPrivateLinkEndpoint struct {
 	// AzureEgressPrivateLinkEndpoint kind.
-	Kind *string `json:"kind,omitempty"`
+	Kind string `json:"kind,omitempty"`
 	// Resource id of the Azure PrivateLink service.
 	PrivateLinkServiceResourceId string `json:"private_link_service_resource_id,omitempty"`
 }
@@ -46,8 +46,9 @@ type NetworkingV1AzureEgressPrivateLinkEndpoint struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1AzureEgressPrivateLinkEndpoint(privateLinkServiceResourceId string) *NetworkingV1AzureEgressPrivateLinkEndpoint {
+func NewNetworkingV1AzureEgressPrivateLinkEndpoint(kind string, privateLinkServiceResourceId string) *NetworkingV1AzureEgressPrivateLinkEndpoint {
 	this := NetworkingV1AzureEgressPrivateLinkEndpoint{}
+	this.Kind = kind
 	this.PrivateLinkServiceResourceId = privateLinkServiceResourceId
 	return &this
 }
@@ -60,36 +61,28 @@ func NewNetworkingV1AzureEgressPrivateLinkEndpointWithDefaults() *NetworkingV1Az
 	return &this
 }
 
-// GetKind returns the Kind field value if set, zero value otherwise.
+// GetKind returns the Kind field value
 func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) GetKind() string {
-	if o == nil || o.Kind == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Kind
+
+	return o.Kind
 }
 
-// GetKindOk returns a tuple with the Kind field value if set, nil otherwise
+// GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) GetKindOk() (*string, bool) {
-	if o == nil || o.Kind == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Kind, true
+	return &o.Kind, true
 }
 
-// HasKind returns a boolean if a field has been set.
-func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) HasKind() bool {
-	if o != nil && o.Kind != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetKind gets a reference to the given string and assigns it to the Kind field.
+// SetKind sets field value
 func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) SetKind(v string) {
-	o.Kind = &v
+	o.Kind = v
 }
 
 // GetPrivateLinkServiceResourceId returns the PrivateLinkServiceResourceId field value
@@ -118,7 +111,7 @@ func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) SetPrivateLinkServiceResour
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) Redact() {
-	o.recurseRedact(o.Kind)
+	o.recurseRedact(&o.Kind)
 	o.recurseRedact(&o.PrivateLinkServiceResourceId)
 }
 
@@ -154,7 +147,7 @@ func (o NetworkingV1AzureEgressPrivateLinkEndpoint) zeroField(v interface{}) {
 
 func (o NetworkingV1AzureEgressPrivateLinkEndpoint) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Kind != nil {
+	if true {
 		toSerialize["kind"] = o.Kind
 	}
 	if true {

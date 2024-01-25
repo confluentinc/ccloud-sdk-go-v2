@@ -4134,6 +4134,7 @@ components:
           type: boolean
           x-immutable: true
       required:
+      - kind
       - vpc_endpoint_service_name
       type: object
     networking.v1.AzureEgressPrivateLinkEndpoint:
@@ -4150,6 +4151,7 @@ components:
           minLength: 1
           type: string
       required:
+      - kind
       - private_link_service_resource_id
       type: object
     networking.v1.AwsEgressPrivateLinkEndpointStatus:
@@ -4167,6 +4169,7 @@ components:
           readOnly: true
           type: string
       required:
+      - kind
       - vpc_endpoint_id
       title: AWS
       type: object
@@ -4185,6 +4188,7 @@ components:
           readOnly: true
           type: string
       required:
+      - kind
       - private_endpoint_resource_id
       type: object
     networking.v1.PrivateLinkAccessPoint:

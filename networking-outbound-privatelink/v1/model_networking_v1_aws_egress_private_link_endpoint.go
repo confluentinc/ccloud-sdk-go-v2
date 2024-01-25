@@ -37,7 +37,7 @@ import (
 // NetworkingV1AwsEgressPrivateLinkEndpoint AWS VPC Endpoint.
 type NetworkingV1AwsEgressPrivateLinkEndpoint struct {
 	// AwsEgressPrivateLinkEndpoint kind.
-	Kind *string `json:"kind,omitempty"`
+	Kind string `json:"kind,omitempty"`
 	// Id of the VPC Endpoint service used for PrivateLink.
 	VpcEndpointServiceName string `json:"vpc_endpoint_service_name,omitempty"`
 	// resource is provisioned with high availability
@@ -48,8 +48,9 @@ type NetworkingV1AwsEgressPrivateLinkEndpoint struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1AwsEgressPrivateLinkEndpoint(vpcEndpointServiceName string) *NetworkingV1AwsEgressPrivateLinkEndpoint {
+func NewNetworkingV1AwsEgressPrivateLinkEndpoint(kind string, vpcEndpointServiceName string) *NetworkingV1AwsEgressPrivateLinkEndpoint {
 	this := NetworkingV1AwsEgressPrivateLinkEndpoint{}
+	this.Kind = kind
 	this.VpcEndpointServiceName = vpcEndpointServiceName
 	return &this
 }
@@ -62,36 +63,28 @@ func NewNetworkingV1AwsEgressPrivateLinkEndpointWithDefaults() *NetworkingV1AwsE
 	return &this
 }
 
-// GetKind returns the Kind field value if set, zero value otherwise.
+// GetKind returns the Kind field value
 func (o *NetworkingV1AwsEgressPrivateLinkEndpoint) GetKind() string {
-	if o == nil || o.Kind == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Kind
+
+	return o.Kind
 }
 
-// GetKindOk returns a tuple with the Kind field value if set, nil otherwise
+// GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *NetworkingV1AwsEgressPrivateLinkEndpoint) GetKindOk() (*string, bool) {
-	if o == nil || o.Kind == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Kind, true
+	return &o.Kind, true
 }
 
-// HasKind returns a boolean if a field has been set.
-func (o *NetworkingV1AwsEgressPrivateLinkEndpoint) HasKind() bool {
-	if o != nil && o.Kind != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetKind gets a reference to the given string and assigns it to the Kind field.
+// SetKind sets field value
 func (o *NetworkingV1AwsEgressPrivateLinkEndpoint) SetKind(v string) {
-	o.Kind = &v
+	o.Kind = v
 }
 
 // GetVpcEndpointServiceName returns the VpcEndpointServiceName field value
@@ -152,7 +145,7 @@ func (o *NetworkingV1AwsEgressPrivateLinkEndpoint) SetEnableHighAvailability(v b
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1AwsEgressPrivateLinkEndpoint) Redact() {
-	o.recurseRedact(o.Kind)
+	o.recurseRedact(&o.Kind)
 	o.recurseRedact(&o.VpcEndpointServiceName)
 	o.recurseRedact(o.EnableHighAvailability)
 }
@@ -189,7 +182,7 @@ func (o NetworkingV1AwsEgressPrivateLinkEndpoint) zeroField(v interface{}) {
 
 func (o NetworkingV1AwsEgressPrivateLinkEndpoint) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Kind != nil {
+	if true {
 		toSerialize["kind"] = o.Kind
 	}
 	if true {

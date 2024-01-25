@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | Pointer to **string** | AwsEgressPrivateLinkEndpoint kind. | [optional] 
+**Kind** | **string** | AwsEgressPrivateLinkEndpoint kind. | 
 **VpcEndpointServiceName** | **string** | Id of the VPC Endpoint service used for PrivateLink. | 
 **EnableHighAvailability** | Pointer to **bool** | resource is provisioned with high availability | [optional] 
 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewNetworkingV1AwsEgressPrivateLinkEndpoint
 
-`func NewNetworkingV1AwsEgressPrivateLinkEndpoint(vpcEndpointServiceName string, ) *NetworkingV1AwsEgressPrivateLinkEndpoint`
+`func NewNetworkingV1AwsEgressPrivateLinkEndpoint(kind string, vpcEndpointServiceName string, ) *NetworkingV1AwsEgressPrivateLinkEndpoint`
 
 NewNetworkingV1AwsEgressPrivateLinkEndpoint instantiates a new NetworkingV1AwsEgressPrivateLinkEndpoint object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetKind sets Kind field to given value.
 
-### HasKind
-
-`func (o *NetworkingV1AwsEgressPrivateLinkEndpoint) HasKind() bool`
-
-HasKind returns a boolean if a field has been set.
 
 ### GetVpcEndpointServiceName
 

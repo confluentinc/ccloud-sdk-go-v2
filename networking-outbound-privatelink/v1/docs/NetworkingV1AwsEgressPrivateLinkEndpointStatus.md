@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | Pointer to **string** | AwsEgressPrivateLinkEndpointStatus kind. | [optional] 
+**Kind** | **string** | AwsEgressPrivateLinkEndpointStatus kind. | 
 **VpcEndpointId** | **string** | Id of a VPC Endpoint (if any) that is connected to the VPC Endpoint service. | [readonly] 
 
 ## Methods
 
 ### NewNetworkingV1AwsEgressPrivateLinkEndpointStatus
 
-`func NewNetworkingV1AwsEgressPrivateLinkEndpointStatus(vpcEndpointId string, ) *NetworkingV1AwsEgressPrivateLinkEndpointStatus`
+`func NewNetworkingV1AwsEgressPrivateLinkEndpointStatus(kind string, vpcEndpointId string, ) *NetworkingV1AwsEgressPrivateLinkEndpointStatus`
 
 NewNetworkingV1AwsEgressPrivateLinkEndpointStatus instantiates a new NetworkingV1AwsEgressPrivateLinkEndpointStatus object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetKind sets Kind field to given value.
 
-### HasKind
-
-`func (o *NetworkingV1AwsEgressPrivateLinkEndpointStatus) HasKind() bool`
-
-HasKind returns a boolean if a field has been set.
 
 ### GetVpcEndpointId
 

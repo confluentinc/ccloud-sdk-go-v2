@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | Pointer to **string** | AzureEgressPrivateLinkEndpoint kind. | [optional] 
+**Kind** | **string** | AzureEgressPrivateLinkEndpoint kind. | 
 **PrivateLinkServiceResourceId** | **string** | Resource id of the Azure PrivateLink service. | 
 
 ## Methods
 
 ### NewNetworkingV1AzureEgressPrivateLinkEndpoint
 
-`func NewNetworkingV1AzureEgressPrivateLinkEndpoint(privateLinkServiceResourceId string, ) *NetworkingV1AzureEgressPrivateLinkEndpoint`
+`func NewNetworkingV1AzureEgressPrivateLinkEndpoint(kind string, privateLinkServiceResourceId string, ) *NetworkingV1AzureEgressPrivateLinkEndpoint`
 
 NewNetworkingV1AzureEgressPrivateLinkEndpoint instantiates a new NetworkingV1AzureEgressPrivateLinkEndpoint object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetKind sets Kind field to given value.
 
-### HasKind
-
-`func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) HasKind() bool`
-
-HasKind returns a boolean if a field has been set.
 
 ### GetPrivateLinkServiceResourceId
 
