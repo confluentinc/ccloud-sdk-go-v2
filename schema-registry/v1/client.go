@@ -70,7 +70,11 @@ type APIClient struct {
 
 	ContextsV1Api ContextsV1Api
 
+	DataEncryptionKeysV1Api DataEncryptionKeysV1Api
+
 	ExportersV1Api ExportersV1Api
+
+	KeyEncryptionKeysV1Api KeyEncryptionKeysV1Api
 
 	ModesV1Api ModesV1Api
 
@@ -98,7 +102,9 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.CompatibilityV1Api = (*CompatibilityV1ApiService)(&c.common)
 	c.ConfigV1Api = (*ConfigV1ApiService)(&c.common)
 	c.ContextsV1Api = (*ContextsV1ApiService)(&c.common)
+	c.DataEncryptionKeysV1Api = (*DataEncryptionKeysV1ApiService)(&c.common)
 	c.ExportersV1Api = (*ExportersV1ApiService)(&c.common)
+	c.KeyEncryptionKeysV1Api = (*KeyEncryptionKeysV1ApiService)(&c.common)
 	c.ModesV1Api = (*ModesV1ApiService)(&c.common)
 	c.SchemasV1Api = (*SchemasV1ApiService)(&c.common)
 	c.SubjectsV1Api = (*SubjectsV1ApiService)(&c.common)

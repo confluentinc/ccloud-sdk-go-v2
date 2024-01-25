@@ -45,7 +45,9 @@ type RegisterSchemaRequest struct {
 	// References to other schemas
 	References *[]SchemaReference `json:"references,omitempty"`
 	// Schema definition string
-	Schema *string `json:"schema,omitempty"`
+	Schema   *string          `json:"schema,omitempty"`
+	Metadata NullableMetadata `json:"metadata,omitempty"`
+	RuleSet  NullableRuleSet  `json:"ruleSet,omitempty"`
 }
 
 // NewRegisterSchemaRequest instantiates a new RegisterSchemaRequest object
@@ -225,6 +227,92 @@ func (o *RegisterSchemaRequest) SetSchema(v string) {
 	o.Schema = &v
 }
 
+// GetMetadata returns the Metadata field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *RegisterSchemaRequest) GetMetadata() Metadata {
+	if o == nil || o.Metadata.Get() == nil {
+		var ret Metadata
+		return ret
+	}
+	return *o.Metadata.Get()
+}
+
+// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *RegisterSchemaRequest) GetMetadataOk() (*Metadata, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Metadata.Get(), o.Metadata.IsSet()
+}
+
+// HasMetadata returns a boolean if a field has been set.
+func (o *RegisterSchemaRequest) HasMetadata() bool {
+	if o != nil && o.Metadata.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadata gets a reference to the given NullableMetadata and assigns it to the Metadata field.
+func (o *RegisterSchemaRequest) SetMetadata(v Metadata) {
+	o.Metadata.Set(&v)
+}
+
+// SetMetadataNil sets the value for Metadata to be an explicit nil
+func (o *RegisterSchemaRequest) SetMetadataNil() {
+	o.Metadata.Set(nil)
+}
+
+// UnsetMetadata ensures that no value is present for Metadata, not even an explicit nil
+func (o *RegisterSchemaRequest) UnsetMetadata() {
+	o.Metadata.Unset()
+}
+
+// GetRuleSet returns the RuleSet field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *RegisterSchemaRequest) GetRuleSet() RuleSet {
+	if o == nil || o.RuleSet.Get() == nil {
+		var ret RuleSet
+		return ret
+	}
+	return *o.RuleSet.Get()
+}
+
+// GetRuleSetOk returns a tuple with the RuleSet field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *RegisterSchemaRequest) GetRuleSetOk() (*RuleSet, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RuleSet.Get(), o.RuleSet.IsSet()
+}
+
+// HasRuleSet returns a boolean if a field has been set.
+func (o *RegisterSchemaRequest) HasRuleSet() bool {
+	if o != nil && o.RuleSet.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRuleSet gets a reference to the given NullableRuleSet and assigns it to the RuleSet field.
+func (o *RegisterSchemaRequest) SetRuleSet(v RuleSet) {
+	o.RuleSet.Set(&v)
+}
+
+// SetRuleSetNil sets the value for RuleSet to be an explicit nil
+func (o *RegisterSchemaRequest) SetRuleSetNil() {
+	o.RuleSet.Set(nil)
+}
+
+// UnsetRuleSet ensures that no value is present for RuleSet, not even an explicit nil
+func (o *RegisterSchemaRequest) UnsetRuleSet() {
+	o.RuleSet.Unset()
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *RegisterSchemaRequest) Redact() {
 	o.recurseRedact(o.Version)
@@ -232,6 +320,8 @@ func (o *RegisterSchemaRequest) Redact() {
 	o.recurseRedact(o.SchemaType)
 	o.recurseRedact(o.References)
 	o.recurseRedact(o.Schema)
+	o.recurseRedact(o.Metadata)
+	o.recurseRedact(o.RuleSet)
 }
 
 func (o *RegisterSchemaRequest) recurseRedact(v interface{}) {
@@ -280,6 +370,12 @@ func (o RegisterSchemaRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.Schema != nil {
 		toSerialize["schema"] = o.Schema
+	}
+	if o.Metadata.IsSet() {
+		toSerialize["metadata"] = o.Metadata.Get()
+	}
+	if o.RuleSet.IsSet() {
+		toSerialize["ruleSet"] = o.RuleSet.Get()
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

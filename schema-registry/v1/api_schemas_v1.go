@@ -169,9 +169,9 @@ GetSchema Get schema string by ID
 
 Retrieves the schema string identified by the input ID.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Globally unique identifier of the schema
-	@return ApiGetSchemaRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Globally unique identifier of the schema
+ @return ApiGetSchemaRequest
 */
 func (a *SchemasV1ApiService) GetSchema(ctx _context.Context, id int32) ApiGetSchemaRequest {
 	return ApiGetSchemaRequest{
@@ -182,8 +182,7 @@ func (a *SchemasV1ApiService) GetSchema(ctx _context.Context, id int32) ApiGetSc
 }
 
 // Execute executes the request
-//
-//	@return SchemaString
+//  @return SchemaString
 func (a *SchemasV1ApiService) GetSchemaExecute(r ApiGetSchemaRequest) (SchemaString, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -348,9 +347,9 @@ GetSchemaOnly Get schema by ID
 
 Retrieves the schema identified by the input ID.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Globally unique identifier of the schema
-	@return ApiGetSchemaOnlyRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Globally unique identifier of the schema
+ @return ApiGetSchemaOnlyRequest
 */
 func (a *SchemasV1ApiService) GetSchemaOnly(ctx _context.Context, id int32) ApiGetSchemaOnlyRequest {
 	return ApiGetSchemaOnlyRequest{
@@ -361,8 +360,7 @@ func (a *SchemasV1ApiService) GetSchemaOnly(ctx _context.Context, id int32) ApiG
 }
 
 // Execute executes the request
-//
-//	@return string
+//  @return string
 func (a *SchemasV1ApiService) GetSchemaOnlyExecute(r ApiGetSchemaOnlyRequest) (string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -509,8 +507,8 @@ GetSchemaTypes List supported schema types
 
 Retrieve the schema types supported by this registry.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetSchemaTypesRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetSchemaTypesRequest
 */
 func (a *SchemasV1ApiService) GetSchemaTypes(ctx _context.Context) ApiGetSchemaTypesRequest {
 	return ApiGetSchemaTypesRequest{
@@ -520,8 +518,7 @@ func (a *SchemasV1ApiService) GetSchemaTypes(ctx _context.Context) ApiGetSchemaT
 }
 
 // Execute executes the request
-//
-//	@return []string
+//  @return []string
 func (a *SchemasV1ApiService) GetSchemaTypesExecute(r ApiGetSchemaTypesRequest) ([]string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -686,8 +683,8 @@ GetSchemas List schemas
 
 Get the schemas matching the specified parameters.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetSchemasRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetSchemasRequest
 */
 func (a *SchemasV1ApiService) GetSchemas(ctx _context.Context) ApiGetSchemasRequest {
 	return ApiGetSchemasRequest{
@@ -697,8 +694,7 @@ func (a *SchemasV1ApiService) GetSchemas(ctx _context.Context) ApiGetSchemasRequ
 }
 
 // Execute executes the request
-//
-//	@return []Schema
+//  @return []Schema
 func (a *SchemasV1ApiService) GetSchemasExecute(r ApiGetSchemasRequest) ([]Schema, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -858,9 +854,9 @@ GetSubjects List subjects associated to schema ID
 
 Retrieves all the subjects associated with a particular schema ID.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Globally unique identifier of the schema
-	@return ApiGetSubjectsRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Globally unique identifier of the schema
+ @return ApiGetSubjectsRequest
 */
 func (a *SchemasV1ApiService) GetSubjects(ctx _context.Context, id int32) ApiGetSubjectsRequest {
 	return ApiGetSubjectsRequest{
@@ -871,8 +867,7 @@ func (a *SchemasV1ApiService) GetSubjects(ctx _context.Context, id int32) ApiGet
 }
 
 // Execute executes the request
-//
-//	@return []string
+//  @return []string
 func (a *SchemasV1ApiService) GetSubjectsExecute(r ApiGetSubjectsRequest) ([]string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -1034,9 +1029,9 @@ GetVersions List subject-versions associated to schema ID
 
 Get all the subject-version pairs associated with the input ID.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Globally unique identifier of the schema
-	@return ApiGetVersionsRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Globally unique identifier of the schema
+ @return ApiGetVersionsRequest
 */
 func (a *SchemasV1ApiService) GetVersions(ctx _context.Context, id int32) ApiGetVersionsRequest {
 	return ApiGetVersionsRequest{
@@ -1047,8 +1042,7 @@ func (a *SchemasV1ApiService) GetVersions(ctx _context.Context, id int32) ApiGet
 }
 
 // Execute executes the request
-//
-//	@return []SubjectVersion
+//  @return []SubjectVersion
 func (a *SchemasV1ApiService) GetVersionsExecute(r ApiGetVersionsRequest) ([]SubjectVersion, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet

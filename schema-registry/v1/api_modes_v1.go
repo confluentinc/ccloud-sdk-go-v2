@@ -133,9 +133,9 @@ DeleteSubjectMode Delete subject mode
 
 Deletes the specified subject-level mode and reverts to the global default.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param subject Name of the subject
-	@return ApiDeleteSubjectModeRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param subject Name of the subject
+ @return ApiDeleteSubjectModeRequest
 */
 func (a *ModesV1ApiService) DeleteSubjectMode(ctx _context.Context, subject string) ApiDeleteSubjectModeRequest {
 	return ApiDeleteSubjectModeRequest{
@@ -146,8 +146,7 @@ func (a *ModesV1ApiService) DeleteSubjectMode(ctx _context.Context, subject stri
 }
 
 // Execute executes the request
-//
-//	@return Mode
+//  @return Mode
 func (a *ModesV1ApiService) DeleteSubjectModeExecute(r ApiDeleteSubjectModeRequest) (Mode, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
@@ -296,9 +295,9 @@ GetMode Get subject mode
 
 Retrieves the subject mode.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param subject Name of the subject
-	@return ApiGetModeRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param subject Name of the subject
+ @return ApiGetModeRequest
 */
 func (a *ModesV1ApiService) GetMode(ctx _context.Context, subject string) ApiGetModeRequest {
 	return ApiGetModeRequest{
@@ -309,8 +308,7 @@ func (a *ModesV1ApiService) GetMode(ctx _context.Context, subject string) ApiGet
 }
 
 // Execute executes the request
-//
-//	@return Mode
+//  @return Mode
 func (a *ModesV1ApiService) GetModeExecute(r ApiGetModeRequest) (Mode, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -454,8 +452,8 @@ GetTopLevelMode Get global mode
 
 Retrieves global mode.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetTopLevelModeRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetTopLevelModeRequest
 */
 func (a *ModesV1ApiService) GetTopLevelMode(ctx _context.Context) ApiGetTopLevelModeRequest {
 	return ApiGetTopLevelModeRequest{
@@ -465,8 +463,7 @@ func (a *ModesV1ApiService) GetTopLevelMode(ctx _context.Context) ApiGetTopLevel
 }
 
 // Execute executes the request
-//
-//	@return Mode
+//  @return Mode
 func (a *ModesV1ApiService) GetTopLevelModeExecute(r ApiGetTopLevelModeRequest) (Mode, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -601,9 +598,9 @@ UpdateMode Update subject mode
 
 Update mode for the specified subject. On success, echoes the original request back to the client.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param subject Name of the subject
-	@return ApiUpdateModeRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param subject Name of the subject
+ @return ApiUpdateModeRequest
 */
 func (a *ModesV1ApiService) UpdateMode(ctx _context.Context, subject string) ApiUpdateModeRequest {
 	return ApiUpdateModeRequest{
@@ -614,8 +611,7 @@ func (a *ModesV1ApiService) UpdateMode(ctx _context.Context, subject string) Api
 }
 
 // Execute executes the request
-//
-//	@return ModeUpdateRequest
+//  @return ModeUpdateRequest
 func (a *ModesV1ApiService) UpdateModeExecute(r ApiUpdateModeRequest) (ModeUpdateRequest, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -778,8 +774,8 @@ UpdateTopLevelMode Update global mode
 
 Update global mode. On success, echoes the original request back to the client.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiUpdateTopLevelModeRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiUpdateTopLevelModeRequest
 */
 func (a *ModesV1ApiService) UpdateTopLevelMode(ctx _context.Context) ApiUpdateTopLevelModeRequest {
 	return ApiUpdateTopLevelModeRequest{
@@ -789,8 +785,7 @@ func (a *ModesV1ApiService) UpdateTopLevelMode(ctx _context.Context) ApiUpdateTo
 }
 
 // Execute executes the request
-//
-//	@return ModeUpdateRequest
+//  @return ModeUpdateRequest
 func (a *ModesV1ApiService) UpdateTopLevelModeExecute(r ApiUpdateTopLevelModeRequest) (ModeUpdateRequest, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut

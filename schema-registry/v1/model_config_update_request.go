@@ -36,8 +36,18 @@ import (
 
 // ConfigUpdateRequest Config update request
 type ConfigUpdateRequest struct {
+	// If alias is specified, then this subject is an alias for the subject named by the alias. That means that any reference to this subject will be replaced by the alias.
+	Alias *string `json:"alias,omitempty"`
+	// If true, then schemas are automatically normalized when registered or when passed during lookups. This means that clients do not have to pass the \"normalize\" query parameter to have normalization occur.
+	Normalize *bool `json:"normalize,omitempty"`
 	// Compatibility Level
 	Compatibility *string `json:"compatibility,omitempty"`
+	// Only schemas that belong to the same compatibility group will be checked for compatibility.
+	CompatibilityGroup *string                 `json:"compatibilityGroup,omitempty"`
+	DefaultMetadata    *ConfigDefaultMetadata  `json:"defaultMetadata,omitempty"`
+	OverrideMetadata   *ConfigOverrideMetadata `json:"overrideMetadata,omitempty"`
+	DefaultRuleSet     *ConfigDefaultRuleSet   `json:"defaultRuleSet,omitempty"`
+	OverrideRuleSet    *ConfigOverrideRuleSet  `json:"overrideRuleSet,omitempty"`
 }
 
 // NewConfigUpdateRequest instantiates a new ConfigUpdateRequest object
@@ -55,6 +65,70 @@ func NewConfigUpdateRequest() *ConfigUpdateRequest {
 func NewConfigUpdateRequestWithDefaults() *ConfigUpdateRequest {
 	this := ConfigUpdateRequest{}
 	return &this
+}
+
+// GetAlias returns the Alias field value if set, zero value otherwise.
+func (o *ConfigUpdateRequest) GetAlias() string {
+	if o == nil || o.Alias == nil {
+		var ret string
+		return ret
+	}
+	return *o.Alias
+}
+
+// GetAliasOk returns a tuple with the Alias field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigUpdateRequest) GetAliasOk() (*string, bool) {
+	if o == nil || o.Alias == nil {
+		return nil, false
+	}
+	return o.Alias, true
+}
+
+// HasAlias returns a boolean if a field has been set.
+func (o *ConfigUpdateRequest) HasAlias() bool {
+	if o != nil && o.Alias != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAlias gets a reference to the given string and assigns it to the Alias field.
+func (o *ConfigUpdateRequest) SetAlias(v string) {
+	o.Alias = &v
+}
+
+// GetNormalize returns the Normalize field value if set, zero value otherwise.
+func (o *ConfigUpdateRequest) GetNormalize() bool {
+	if o == nil || o.Normalize == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Normalize
+}
+
+// GetNormalizeOk returns a tuple with the Normalize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigUpdateRequest) GetNormalizeOk() (*bool, bool) {
+	if o == nil || o.Normalize == nil {
+		return nil, false
+	}
+	return o.Normalize, true
+}
+
+// HasNormalize returns a boolean if a field has been set.
+func (o *ConfigUpdateRequest) HasNormalize() bool {
+	if o != nil && o.Normalize != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNormalize gets a reference to the given bool and assigns it to the Normalize field.
+func (o *ConfigUpdateRequest) SetNormalize(v bool) {
+	o.Normalize = &v
 }
 
 // GetCompatibility returns the Compatibility field value if set, zero value otherwise.
@@ -89,9 +163,176 @@ func (o *ConfigUpdateRequest) SetCompatibility(v string) {
 	o.Compatibility = &v
 }
 
+// GetCompatibilityGroup returns the CompatibilityGroup field value if set, zero value otherwise.
+func (o *ConfigUpdateRequest) GetCompatibilityGroup() string {
+	if o == nil || o.CompatibilityGroup == nil {
+		var ret string
+		return ret
+	}
+	return *o.CompatibilityGroup
+}
+
+// GetCompatibilityGroupOk returns a tuple with the CompatibilityGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigUpdateRequest) GetCompatibilityGroupOk() (*string, bool) {
+	if o == nil || o.CompatibilityGroup == nil {
+		return nil, false
+	}
+	return o.CompatibilityGroup, true
+}
+
+// HasCompatibilityGroup returns a boolean if a field has been set.
+func (o *ConfigUpdateRequest) HasCompatibilityGroup() bool {
+	if o != nil && o.CompatibilityGroup != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCompatibilityGroup gets a reference to the given string and assigns it to the CompatibilityGroup field.
+func (o *ConfigUpdateRequest) SetCompatibilityGroup(v string) {
+	o.CompatibilityGroup = &v
+}
+
+// GetDefaultMetadata returns the DefaultMetadata field value if set, zero value otherwise.
+func (o *ConfigUpdateRequest) GetDefaultMetadata() ConfigDefaultMetadata {
+	if o == nil || o.DefaultMetadata == nil {
+		var ret ConfigDefaultMetadata
+		return ret
+	}
+	return *o.DefaultMetadata
+}
+
+// GetDefaultMetadataOk returns a tuple with the DefaultMetadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigUpdateRequest) GetDefaultMetadataOk() (*ConfigDefaultMetadata, bool) {
+	if o == nil || o.DefaultMetadata == nil {
+		return nil, false
+	}
+	return o.DefaultMetadata, true
+}
+
+// HasDefaultMetadata returns a boolean if a field has been set.
+func (o *ConfigUpdateRequest) HasDefaultMetadata() bool {
+	if o != nil && o.DefaultMetadata != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultMetadata gets a reference to the given ConfigDefaultMetadata and assigns it to the DefaultMetadata field.
+func (o *ConfigUpdateRequest) SetDefaultMetadata(v ConfigDefaultMetadata) {
+	o.DefaultMetadata = &v
+}
+
+// GetOverrideMetadata returns the OverrideMetadata field value if set, zero value otherwise.
+func (o *ConfigUpdateRequest) GetOverrideMetadata() ConfigOverrideMetadata {
+	if o == nil || o.OverrideMetadata == nil {
+		var ret ConfigOverrideMetadata
+		return ret
+	}
+	return *o.OverrideMetadata
+}
+
+// GetOverrideMetadataOk returns a tuple with the OverrideMetadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigUpdateRequest) GetOverrideMetadataOk() (*ConfigOverrideMetadata, bool) {
+	if o == nil || o.OverrideMetadata == nil {
+		return nil, false
+	}
+	return o.OverrideMetadata, true
+}
+
+// HasOverrideMetadata returns a boolean if a field has been set.
+func (o *ConfigUpdateRequest) HasOverrideMetadata() bool {
+	if o != nil && o.OverrideMetadata != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOverrideMetadata gets a reference to the given ConfigOverrideMetadata and assigns it to the OverrideMetadata field.
+func (o *ConfigUpdateRequest) SetOverrideMetadata(v ConfigOverrideMetadata) {
+	o.OverrideMetadata = &v
+}
+
+// GetDefaultRuleSet returns the DefaultRuleSet field value if set, zero value otherwise.
+func (o *ConfigUpdateRequest) GetDefaultRuleSet() ConfigDefaultRuleSet {
+	if o == nil || o.DefaultRuleSet == nil {
+		var ret ConfigDefaultRuleSet
+		return ret
+	}
+	return *o.DefaultRuleSet
+}
+
+// GetDefaultRuleSetOk returns a tuple with the DefaultRuleSet field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigUpdateRequest) GetDefaultRuleSetOk() (*ConfigDefaultRuleSet, bool) {
+	if o == nil || o.DefaultRuleSet == nil {
+		return nil, false
+	}
+	return o.DefaultRuleSet, true
+}
+
+// HasDefaultRuleSet returns a boolean if a field has been set.
+func (o *ConfigUpdateRequest) HasDefaultRuleSet() bool {
+	if o != nil && o.DefaultRuleSet != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultRuleSet gets a reference to the given ConfigDefaultRuleSet and assigns it to the DefaultRuleSet field.
+func (o *ConfigUpdateRequest) SetDefaultRuleSet(v ConfigDefaultRuleSet) {
+	o.DefaultRuleSet = &v
+}
+
+// GetOverrideRuleSet returns the OverrideRuleSet field value if set, zero value otherwise.
+func (o *ConfigUpdateRequest) GetOverrideRuleSet() ConfigOverrideRuleSet {
+	if o == nil || o.OverrideRuleSet == nil {
+		var ret ConfigOverrideRuleSet
+		return ret
+	}
+	return *o.OverrideRuleSet
+}
+
+// GetOverrideRuleSetOk returns a tuple with the OverrideRuleSet field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigUpdateRequest) GetOverrideRuleSetOk() (*ConfigOverrideRuleSet, bool) {
+	if o == nil || o.OverrideRuleSet == nil {
+		return nil, false
+	}
+	return o.OverrideRuleSet, true
+}
+
+// HasOverrideRuleSet returns a boolean if a field has been set.
+func (o *ConfigUpdateRequest) HasOverrideRuleSet() bool {
+	if o != nil && o.OverrideRuleSet != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOverrideRuleSet gets a reference to the given ConfigOverrideRuleSet and assigns it to the OverrideRuleSet field.
+func (o *ConfigUpdateRequest) SetOverrideRuleSet(v ConfigOverrideRuleSet) {
+	o.OverrideRuleSet = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *ConfigUpdateRequest) Redact() {
+	o.recurseRedact(o.Alias)
+	o.recurseRedact(o.Normalize)
 	o.recurseRedact(o.Compatibility)
+	o.recurseRedact(o.CompatibilityGroup)
+	o.recurseRedact(o.DefaultMetadata)
+	o.recurseRedact(o.OverrideMetadata)
+	o.recurseRedact(o.DefaultRuleSet)
+	o.recurseRedact(o.OverrideRuleSet)
 }
 
 func (o *ConfigUpdateRequest) recurseRedact(v interface{}) {
@@ -126,8 +367,29 @@ func (o ConfigUpdateRequest) zeroField(v interface{}) {
 
 func (o ConfigUpdateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.Alias != nil {
+		toSerialize["alias"] = o.Alias
+	}
+	if o.Normalize != nil {
+		toSerialize["normalize"] = o.Normalize
+	}
 	if o.Compatibility != nil {
 		toSerialize["compatibility"] = o.Compatibility
+	}
+	if o.CompatibilityGroup != nil {
+		toSerialize["compatibilityGroup"] = o.CompatibilityGroup
+	}
+	if o.DefaultMetadata != nil {
+		toSerialize["defaultMetadata"] = o.DefaultMetadata
+	}
+	if o.OverrideMetadata != nil {
+		toSerialize["overrideMetadata"] = o.OverrideMetadata
+	}
+	if o.DefaultRuleSet != nil {
+		toSerialize["defaultRuleSet"] = o.DefaultRuleSet
+	}
+	if o.OverrideRuleSet != nil {
+		toSerialize["overrideRuleSet"] = o.OverrideRuleSet
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
