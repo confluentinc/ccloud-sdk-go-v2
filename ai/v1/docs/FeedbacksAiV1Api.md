@@ -5,13 +5,13 @@ All URIs are relative to *https://api.confluent.cloud*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateAiV1ChatCompletionFeedback**](FeedbacksAiV1Api.md#CreateAiV1ChatCompletionFeedback) | **Post** /ai/v1/chat-completions/{chat_completion_id}/feedback | Create a Feedback
-[**CreateAiV1DocCompletionFeedback**](FeedbacksAiV1Api.md#CreateAiV1DocCompletionFeedback) | **Post** /ai/v1/doc-completions/{doc_completion_id}/feedback | Create a Feedback
+[**CreateAiV1DocCompletionFeedback**](FeedbacksAiV1Api.md#CreateAiV1DocCompletionFeedback) | **Post** /docs-ai/v1/doc-completions/{doc_completion_id}/feedback | Create a Feedback
 
 
 
 ## CreateAiV1ChatCompletionFeedback
 
-> AiV1Feedback CreateAiV1ChatCompletionFeedback(ctx, chatCompletionId).AiV1Feedback(aiV1Feedback).Execute()
+> CreateAiV1ChatCompletionFeedback(ctx, chatCompletionId).AiV1Feedback(aiV1Feedback).Execute()
 
 Create a Feedback
 
@@ -40,8 +40,6 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `FeedbacksAiV1Api.CreateAiV1ChatCompletionFeedback``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateAiV1ChatCompletionFeedback`: AiV1Feedback
-    fmt.Fprintf(os.Stdout, "Response from `FeedbacksAiV1Api.CreateAiV1ChatCompletionFeedback`: %v\n", resp)
 }
 ```
 
@@ -65,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AiV1Feedback**](AiV1Feedback.md)
+ (empty response body)
 
 ### Authorization
 
@@ -83,7 +81,7 @@ Name | Type | Description  | Notes
 
 ## CreateAiV1DocCompletionFeedback
 
-> AiV1Feedback CreateAiV1DocCompletionFeedback(ctx, docCompletionId).AiV1Feedback(aiV1Feedback).Execute()
+> CreateAiV1DocCompletionFeedback(ctx, docCompletionId).AiV1Feedback(aiV1Feedback).Execute()
 
 Create a Feedback
 
@@ -112,8 +110,6 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `FeedbacksAiV1Api.CreateAiV1DocCompletionFeedback``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateAiV1DocCompletionFeedback`: AiV1Feedback
-    fmt.Fprintf(os.Stdout, "Response from `FeedbacksAiV1Api.CreateAiV1DocCompletionFeedback`: %v\n", resp)
 }
 ```
 
@@ -137,7 +133,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AiV1Feedback**](AiV1Feedback.md)
+ (empty response body)
 
 ### Authorization
 

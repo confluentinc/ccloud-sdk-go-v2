@@ -25,10 +25,10 @@ tags:
     Query the Confluent AI assistant, optionally with prior conversation history.
   name: Chat Completions (ai/v1)
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+docs-ai-v1-early-access@confluent.io?subject=Request%20to%20join%20docs-ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20docs-ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
     Query the Docs AI assistant, optionally with prior conversation history.
-  name: Doc Completions (ai/v1)
+  name: Doc Completions (docs-ai/v1)
 - description: |-
     [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
@@ -355,13 +355,13 @@ paths:
           request.AddParameter("application/json", "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"drift_enabled\":false,\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: AI API v1
-  /ai/v1/doc-completions:
+  /docs-ai/v1/doc-completions:
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+docs-ai-v1-early-access@confluent.io?subject=Request%20to%20join%20docs-ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20docs-ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Query the Docs AI assistant, optionally with prior conversation history.
-      operationId: queryAiV1DocCompletion
+      operationId: queryDocsAiV1DocCompletion
       requestBody:
         content:
           application/json:
@@ -489,14 +489,14 @@ paths:
               style: simple
       summary: Query a Doc Completion
       tags:
-      - Doc Completions (ai/v1)
+      - Doc Completions (docs-ai/v1)
       x-request-access-name: AI API v1
-      x-name: ai.v1.DocCompletions
+      x-name: docs-ai.v1.DocCompletions
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url https://api.confluent.cloud/ai/v1/doc-completions \
+            --url https://api.confluent.cloud/docs-ai/v1/doc-completions \
             --header 'content-type: application/json' \
             --data '{"ai_session_id":"cd2ec6a3-82fe-4911-902a-065ff8425b66","question":"What is my most expensive Kafka cluster?","drift_enabled":false,"history":[{"question":"What is my most expensive Kafka cluster?","answer":"Your most expensive Kafka cluster is \"lkc-12345\"."}]}'
       - lang: Java
@@ -506,7 +506,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"drift_enabled\":false,\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/ai/v1/doc-completions")
+            .url("https://api.confluent.cloud/docs-ai/v1/doc-completions")
             .post(body)
             .addHeader("content-type", "application/json")
             .build();
@@ -514,7 +514,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ai/v1/doc-completions\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/docs-ai/v1/doc-completions\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"ai_session_id\\\":\\\"cd2ec6a3-82fe-4911-902a-065ff8425b66\\\
           \",\\\"question\\\":\\\"What is my most expensive Kafka cluster?\\\",\\\"\
           drift_enabled\\\":false,\\\"history\\\":[{\\\"question\\\":\\\"What is my\
@@ -534,7 +534,7 @@ paths:
 
           headers = { 'content-type': "application/json" }
 
-          conn.request("POST", "/ai/v1/doc-completions", payload, headers)
+          conn.request("POST", "/docs-ai/v1/doc-completions", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -548,7 +548,7 @@ paths:
             "method": "POST",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/ai/v1/doc-completions",
+            "path": "/docs-ai/v1/doc-completions",
             "headers": {
               "content-type": "application/json"
             }
@@ -584,7 +584,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ai/v1/doc-completions");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/docs-ai/v1/doc-completions");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -595,7 +595,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/ai/v1/doc-completions");
+          var client = new RestClient("https://api.confluent.cloud/docs-ai/v1/doc-completions");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddParameter("application/json", "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"drift_enabled\":false,\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}", ParameterType.RequestBody);
@@ -627,50 +627,8 @@ paths:
                 - ai_session_id
                 type: object
       responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ai.v1.Feedback'
-          description: A Feedback was created.
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-            X-RateLimit-Limit:
-              description: The maximum number of requests you're permitted to make
-                per time period.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Remaining:
-              description: The number of requests remaining in the current rate limit
-                window.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Reset:
-              description: "The relative time in seconds until the current rate-limit\
-                \ window resets.  \n  \n**Important:** This differs from Github and\
-                \ Twitter's same-named header which uses UTC epoch seconds. We use\
-                \ relative time to avoid client/server time synchronization issues."
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            Location:
-              description: Feedback resource uri
-              explode: false
-              schema:
-                example: https://api.confluent.cloud/ai/v1/chat-completions/{chat_completion_id}/feedback/{id}
-                format: uri
-                type: string
-              style: simple
+        "204":
+          description: No Content
         "400":
           content:
             application/json:
@@ -977,7 +935,7 @@ paths:
           request.AddParameter("application/json", "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"reaction\":\"UNSPECIFIED\",\"copied\":\"UNSPECIFIED\",\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: AI API v1
-  /ai/v1/doc-completions/{doc_completion_id}/feedback:
+  /docs-ai/v1/doc-completions/{doc_completion_id}/feedback:
     post:
       description: |-
         [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
@@ -1003,50 +961,6 @@ paths:
                 - ai_session_id
                 type: object
       responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ai.v1.Feedback'
-          description: A Feedback was created.
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-            X-RateLimit-Limit:
-              description: The maximum number of requests you're permitted to make
-                per time period.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Remaining:
-              description: The number of requests remaining in the current rate limit
-                window.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Reset:
-              description: "The relative time in seconds until the current rate-limit\
-                \ window resets.  \n  \n**Important:** This differs from Github and\
-                \ Twitter's same-named header which uses UTC epoch seconds. We use\
-                \ relative time to avoid client/server time synchronization issues."
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            Location:
-              description: Feedback resource uri
-              explode: false
-              schema:
-                example: https://api.confluent.cloud/ai/v1/doc-completions/{doc_completion_id}/feedback/{id}
-                format: uri
-                type: string
-              style: simple
         "204":
           description: No Content
         "400":
@@ -1192,7 +1106,7 @@ paths:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url https://api.confluent.cloud/ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback \
+            --url https://api.confluent.cloud/docs-ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback \
             --header 'content-type: application/json' \
             --data '{"ai_session_id":"cd2ec6a3-82fe-4911-902a-065ff8425b66","reaction":"UNSPECIFIED","copied":"UNSPECIFIED","comment":"The suggested CLI command contained several typos. It was supposed to be \"confluent\" instead of \"ccloud\"."}'
       - lang: Java
@@ -1202,7 +1116,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"reaction\":\"UNSPECIFIED\",\"copied\":\"UNSPECIFIED\",\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback")
+            .url("https://api.confluent.cloud/docs-ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback")
             .post(body)
             .addHeader("content-type", "application/json")
             .build();
@@ -1210,7 +1124,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/docs-ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"ai_session_id\\\":\\\"cd2ec6a3-82fe-4911-902a-065ff8425b66\\\
           \",\\\"reaction\\\":\\\"UNSPECIFIED\\\",\\\"copied\\\":\\\"UNSPECIFIED\\\
           \",\\\"comment\\\":\\\"The suggested CLI command contained several typos.\
@@ -1229,7 +1143,7 @@ paths:
 
           headers = { 'content-type': "application/json" }
 
-          conn.request("POST", "/ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback", payload, headers)
+          conn.request("POST", "/docs-ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1243,7 +1157,7 @@ paths:
             "method": "POST",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback",
+            "path": "/docs-ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback",
             "headers": {
               "content-type": "application/json"
             }
@@ -1274,7 +1188,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/docs-ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -1285,7 +1199,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback");
+          var client = new RestClient("https://api.confluent.cloud/docs-ai/v1/doc-completions/%7Bdoc_completion_id%7D/feedback");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddParameter("application/json", "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"reaction\":\"UNSPECIFIED\",\"copied\":\"UNSPECIFIED\",\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}", ParameterType.RequestBody);
@@ -2305,16 +2219,6 @@ components:
       type: object
     ai.v1.Feedback:
       description: Submit feedback on the AI assistant.
-      example:
-        metadata: ""
-        reaction: UNSPECIFIED
-        copied: UNSPECIFIED
-        ai_session_id: ""
-        kind: Feedback
-        comment: The suggested CLI command contained several typos. It was supposed
-          to be "confluent" instead of "ccloud".
-        id: dlz-f3a90de
-        api_version: ai/v1
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation

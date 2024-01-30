@@ -80,9 +80,9 @@ All URIs are relative to *https://api.confluent.cloud*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ChatCompletionsAiV1Api* | [**QueryAiV1ChatCompletion**](docs/ChatCompletionsAiV1Api.md#queryaiv1chatcompletion) | **Post** /ai/v1/chat-completions | Query a Chat Completion
-*DocCompletionsAiV1Api* | [**QueryAiV1DocCompletion**](docs/DocCompletionsAiV1Api.md#queryaiv1doccompletion) | **Post** /ai/v1/doc-completions | Query a Doc Completion
+*DocCompletionsDocsAiV1Api* | [**QueryDocsAiV1DocCompletion**](docs/DocCompletionsDocsAiV1Api.md#querydocsaiv1doccompletion) | **Post** /docs-ai/v1/doc-completions | Query a Doc Completion
 *FeedbacksAiV1Api* | [**CreateAiV1ChatCompletionFeedback**](docs/FeedbacksAiV1Api.md#createaiv1chatcompletionfeedback) | **Post** /ai/v1/chat-completions/{chat_completion_id}/feedback | Create a Feedback
-*FeedbacksAiV1Api* | [**CreateAiV1DocCompletionFeedback**](docs/FeedbacksAiV1Api.md#createaiv1doccompletionfeedback) | **Post** /ai/v1/doc-completions/{doc_completion_id}/feedback | Create a Feedback
+*FeedbacksAiV1Api* | [**CreateAiV1DocCompletionFeedback**](docs/FeedbacksAiV1Api.md#createaiv1doccompletionfeedback) | **Post** /docs-ai/v1/doc-completions/{doc_completion_id}/feedback | Create a Feedback
 *OrgPreferencesAiV1Api* | [**GetAiV1OrgPreference**](docs/OrgPreferencesAiV1Api.md#getaiv1orgpreference) | **Get** /ai/v1/org-preferences | Read the organization&#39;s ai-assistant setting in org-preferences.
 *OrgPreferencesAiV1Api* | [**UpdateAiV1OrgPreference**](docs/OrgPreferencesAiV1Api.md#updateaiv1orgpreference) | **Patch** /ai/v1/org-preferences | Set the organization&#39;s ai-assistant setting in org-preferences.
 

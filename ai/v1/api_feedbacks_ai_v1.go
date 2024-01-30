@@ -55,8 +55,7 @@ type FeedbacksAiV1Api interface {
 	CreateAiV1ChatCompletionFeedback(ctx _context.Context, chatCompletionId string) ApiCreateAiV1ChatCompletionFeedbackRequest
 
 	// CreateAiV1ChatCompletionFeedbackExecute executes the request
-	//  @return AiV1Feedback
-	CreateAiV1ChatCompletionFeedbackExecute(r ApiCreateAiV1ChatCompletionFeedbackRequest) (AiV1Feedback, *_nethttp.Response, error)
+	CreateAiV1ChatCompletionFeedbackExecute(r ApiCreateAiV1ChatCompletionFeedbackRequest) (*_nethttp.Response, error)
 
 	/*
 		CreateAiV1DocCompletionFeedback Create a Feedback
@@ -72,8 +71,7 @@ type FeedbacksAiV1Api interface {
 	CreateAiV1DocCompletionFeedback(ctx _context.Context, docCompletionId string) ApiCreateAiV1DocCompletionFeedbackRequest
 
 	// CreateAiV1DocCompletionFeedbackExecute executes the request
-	//  @return AiV1Feedback
-	CreateAiV1DocCompletionFeedbackExecute(r ApiCreateAiV1DocCompletionFeedbackRequest) (AiV1Feedback, *_nethttp.Response, error)
+	CreateAiV1DocCompletionFeedbackExecute(r ApiCreateAiV1DocCompletionFeedbackRequest) (*_nethttp.Response, error)
 }
 
 // FeedbacksAiV1ApiService FeedbacksAiV1Api service
@@ -91,7 +89,7 @@ func (r ApiCreateAiV1ChatCompletionFeedbackRequest) AiV1Feedback(aiV1Feedback Ai
 	return r
 }
 
-func (r ApiCreateAiV1ChatCompletionFeedbackRequest) Execute() (AiV1Feedback, *_nethttp.Response, error) {
+func (r ApiCreateAiV1ChatCompletionFeedbackRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.CreateAiV1ChatCompletionFeedbackExecute(r)
 }
 
@@ -115,20 +113,18 @@ func (a *FeedbacksAiV1ApiService) CreateAiV1ChatCompletionFeedback(ctx _context.
 }
 
 // Execute executes the request
-//  @return AiV1Feedback
-func (a *FeedbacksAiV1ApiService) CreateAiV1ChatCompletionFeedbackExecute(r ApiCreateAiV1ChatCompletionFeedbackRequest) (AiV1Feedback, *_nethttp.Response, error) {
+func (a *FeedbacksAiV1ApiService) CreateAiV1ChatCompletionFeedbackExecute(r ApiCreateAiV1ChatCompletionFeedbackRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  AiV1Feedback
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeedbacksAiV1ApiService.CreateAiV1ChatCompletionFeedback")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/ai/v1/chat-completions/{chat_completion_id}/feedback"
@@ -159,19 +155,19 @@ func (a *FeedbacksAiV1ApiService) CreateAiV1ChatCompletionFeedbackExecute(r ApiC
 	localVarPostBody = r.aiV1Feedback
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -184,73 +180,64 @@ func (a *FeedbacksAiV1ApiService) CreateAiV1ChatCompletionFeedbackExecute(r ApiC
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
 		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarHTTPResponse, nil
 }
 
 type ApiCreateAiV1DocCompletionFeedbackRequest struct {
@@ -265,7 +252,7 @@ func (r ApiCreateAiV1DocCompletionFeedbackRequest) AiV1Feedback(aiV1Feedback AiV
 	return r
 }
 
-func (r ApiCreateAiV1DocCompletionFeedbackRequest) Execute() (AiV1Feedback, *_nethttp.Response, error) {
+func (r ApiCreateAiV1DocCompletionFeedbackRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.CreateAiV1DocCompletionFeedbackExecute(r)
 }
 
@@ -289,23 +276,21 @@ func (a *FeedbacksAiV1ApiService) CreateAiV1DocCompletionFeedback(ctx _context.C
 }
 
 // Execute executes the request
-//  @return AiV1Feedback
-func (a *FeedbacksAiV1ApiService) CreateAiV1DocCompletionFeedbackExecute(r ApiCreateAiV1DocCompletionFeedbackRequest) (AiV1Feedback, *_nethttp.Response, error) {
+func (a *FeedbacksAiV1ApiService) CreateAiV1DocCompletionFeedbackExecute(r ApiCreateAiV1DocCompletionFeedbackRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  AiV1Feedback
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeedbacksAiV1ApiService.CreateAiV1DocCompletionFeedback")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/ai/v1/doc-completions/{doc_completion_id}/feedback"
+	localVarPath := localBasePath + "/docs-ai/v1/doc-completions/{doc_completion_id}/feedback"
 	localVarPath = strings.Replace(localVarPath, "{"+"doc_completion_id"+"}", _neturl.PathEscape(parameterToString(r.docCompletionId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -333,19 +318,19 @@ func (a *FeedbacksAiV1ApiService) CreateAiV1DocCompletionFeedbackExecute(r ApiCr
 	localVarPostBody = r.aiV1Feedback
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -358,51 +343,42 @@ func (a *FeedbacksAiV1ApiService) CreateAiV1DocCompletionFeedbackExecute(r ApiCr
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
 		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarHTTPResponse, nil
 }

@@ -38,55 +38,55 @@ var (
 	_ _context.Context
 )
 
-type DocCompletionsAiV1Api interface {
+type DocCompletionsDocsAiV1Api interface {
 
 	/*
-		QueryAiV1DocCompletion Query a Doc Completion
+		QueryDocsAiV1DocCompletion Query a Doc Completion
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+docs-ai-v1-early-access@confluent.io?subject=Request%20to%20join%20docs-ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20docs-ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
 	Query the Docs AI assistant, optionally with prior conversation history.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiQueryAiV1DocCompletionRequest
+		 @return ApiQueryDocsAiV1DocCompletionRequest
 	*/
-	QueryAiV1DocCompletion(ctx _context.Context) ApiQueryAiV1DocCompletionRequest
+	QueryDocsAiV1DocCompletion(ctx _context.Context) ApiQueryDocsAiV1DocCompletionRequest
 
-	// QueryAiV1DocCompletionExecute executes the request
+	// QueryDocsAiV1DocCompletionExecute executes the request
 	//  @return AiV1ChatCompletionsReply
-	QueryAiV1DocCompletionExecute(r ApiQueryAiV1DocCompletionRequest) (AiV1ChatCompletionsReply, *_nethttp.Response, error)
+	QueryDocsAiV1DocCompletionExecute(r ApiQueryDocsAiV1DocCompletionRequest) (AiV1ChatCompletionsReply, *_nethttp.Response, error)
 }
 
-// DocCompletionsAiV1ApiService DocCompletionsAiV1Api service
-type DocCompletionsAiV1ApiService service
+// DocCompletionsDocsAiV1ApiService DocCompletionsDocsAiV1Api service
+type DocCompletionsDocsAiV1ApiService service
 
-type ApiQueryAiV1DocCompletionRequest struct {
+type ApiQueryDocsAiV1DocCompletionRequest struct {
 	ctx                        _context.Context
-	ApiService                 DocCompletionsAiV1Api
+	ApiService                 DocCompletionsDocsAiV1Api
 	aiV1ChatCompletionsRequest *AiV1ChatCompletionsRequest
 }
 
-func (r ApiQueryAiV1DocCompletionRequest) AiV1ChatCompletionsRequest(aiV1ChatCompletionsRequest AiV1ChatCompletionsRequest) ApiQueryAiV1DocCompletionRequest {
+func (r ApiQueryDocsAiV1DocCompletionRequest) AiV1ChatCompletionsRequest(aiV1ChatCompletionsRequest AiV1ChatCompletionsRequest) ApiQueryDocsAiV1DocCompletionRequest {
 	r.aiV1ChatCompletionsRequest = &aiV1ChatCompletionsRequest
 	return r
 }
 
-func (r ApiQueryAiV1DocCompletionRequest) Execute() (AiV1ChatCompletionsReply, *_nethttp.Response, error) {
-	return r.ApiService.QueryAiV1DocCompletionExecute(r)
+func (r ApiQueryDocsAiV1DocCompletionRequest) Execute() (AiV1ChatCompletionsReply, *_nethttp.Response, error) {
+	return r.ApiService.QueryDocsAiV1DocCompletionExecute(r)
 }
 
 /*
-QueryAiV1DocCompletion Query a Doc Completion
+QueryDocsAiV1DocCompletion Query a Doc Completion
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+docs-ai-v1-early-access@confluent.io?subject=Request%20to%20join%20docs-ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20docs-ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
 Query the Docs AI assistant, optionally with prior conversation history.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiQueryAiV1DocCompletionRequest
+ @return ApiQueryDocsAiV1DocCompletionRequest
 */
-func (a *DocCompletionsAiV1ApiService) QueryAiV1DocCompletion(ctx _context.Context) ApiQueryAiV1DocCompletionRequest {
-	return ApiQueryAiV1DocCompletionRequest{
+func (a *DocCompletionsDocsAiV1ApiService) QueryDocsAiV1DocCompletion(ctx _context.Context) ApiQueryDocsAiV1DocCompletionRequest {
+	return ApiQueryDocsAiV1DocCompletionRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -94,7 +94,7 @@ func (a *DocCompletionsAiV1ApiService) QueryAiV1DocCompletion(ctx _context.Conte
 
 // Execute executes the request
 //  @return AiV1ChatCompletionsReply
-func (a *DocCompletionsAiV1ApiService) QueryAiV1DocCompletionExecute(r ApiQueryAiV1DocCompletionRequest) (AiV1ChatCompletionsReply, *_nethttp.Response, error) {
+func (a *DocCompletionsDocsAiV1ApiService) QueryDocsAiV1DocCompletionExecute(r ApiQueryDocsAiV1DocCompletionRequest) (AiV1ChatCompletionsReply, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -104,12 +104,12 @@ func (a *DocCompletionsAiV1ApiService) QueryAiV1DocCompletionExecute(r ApiQueryA
 		localVarReturnValue  AiV1ChatCompletionsReply
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DocCompletionsAiV1ApiService.QueryAiV1DocCompletion")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DocCompletionsDocsAiV1ApiService.QueryDocsAiV1DocCompletion")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/ai/v1/doc-completions"
+	localVarPath := localBasePath + "/docs-ai/v1/doc-completions"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}

@@ -1,16 +1,16 @@
-# \DocCompletionsAiV1Api
+# \DocCompletionsDocsAiV1Api
 
 All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**QueryAiV1DocCompletion**](DocCompletionsAiV1Api.md#QueryAiV1DocCompletion) | **Post** /ai/v1/doc-completions | Query a Doc Completion
+[**QueryDocsAiV1DocCompletion**](DocCompletionsDocsAiV1Api.md#QueryDocsAiV1DocCompletion) | **Post** /docs-ai/v1/doc-completions | Query a Doc Completion
 
 
 
-## QueryAiV1DocCompletion
+## QueryDocsAiV1DocCompletion
 
-> AiV1ChatCompletionsReply QueryAiV1DocCompletion(ctx).AiV1ChatCompletionsRequest(aiV1ChatCompletionsRequest).Execute()
+> AiV1ChatCompletionsReply QueryDocsAiV1DocCompletion(ctx).AiV1ChatCompletionsRequest(aiV1ChatCompletionsRequest).Execute()
 
 Query a Doc Completion
 
@@ -33,13 +33,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DocCompletionsAiV1Api.QueryAiV1DocCompletion(context.Background()).AiV1ChatCompletionsRequest(aiV1ChatCompletionsRequest).Execute()
+    resp, r, err := api_client.DocCompletionsDocsAiV1Api.QueryDocsAiV1DocCompletion(context.Background()).AiV1ChatCompletionsRequest(aiV1ChatCompletionsRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DocCompletionsAiV1Api.QueryAiV1DocCompletion``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `DocCompletionsDocsAiV1Api.QueryDocsAiV1DocCompletion``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `QueryAiV1DocCompletion`: AiV1ChatCompletionsReply
-    fmt.Fprintf(os.Stdout, "Response from `DocCompletionsAiV1Api.QueryAiV1DocCompletion`: %v\n", resp)
+    // response from `QueryDocsAiV1DocCompletion`: AiV1ChatCompletionsReply
+    fmt.Fprintf(os.Stdout, "Response from `DocCompletionsDocsAiV1Api.QueryDocsAiV1DocCompletion`: %v\n", resp)
 }
 ```
 
@@ -49,7 +49,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiQueryAiV1DocCompletionRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiQueryDocsAiV1DocCompletionRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
