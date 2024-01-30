@@ -244,13 +244,13 @@ paths:
             --url https://api.confluent.cloud/ai/v1/chat-completions \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"ai_session_id":"cd2ec6a3-82fe-4911-902a-065ff8425b66","question":"What is my most expensive Kafka cluster?","history":[{"question":"What is my most expensive Kafka cluster?","answer":"Your most expensive Kafka cluster is \"lkc-12345\"."}]}'
+            --data '{"ai_session_id":"cd2ec6a3-82fe-4911-902a-065ff8425b66","question":"What is my most expensive Kafka cluster?","drift_enabled":false,"history":[{"question":"What is my most expensive Kafka cluster?","answer":"Your most expensive Kafka cluster is \"lkc-12345\"."}]}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}");
+          RequestBody body = RequestBody.create(mediaType, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"drift_enabled\":false,\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/ai/v1/chat-completions")
             .post(body)
@@ -264,20 +264,21 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ai/v1/chat-completions\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"ai_session_id\\\":\\\"cd2ec6a3-82fe-4911-902a-065ff8425b66\\\
           \",\\\"question\\\":\\\"What is my most expensive Kafka cluster?\\\",\\\"\
-          history\\\":[{\\\"question\\\":\\\"What is my most expensive Kafka cluster?\\\
-          \",\\\"answer\\\":\\\"Your most expensive Kafka cluster is \\\\\\\"lkc-12345\\\
-          \\\\\".\\\"}]}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
-          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          drift_enabled\\\":false,\\\"history\\\":[{\\\"question\\\":\\\"What is my\
+          \ most expensive Kafka cluster?\\\",\\\"answer\\\":\\\"Your most expensive\
+          \ Kafka cluster is \\\\\\\"lkc-12345\\\\\\\".\\\"}]}\")\n\n\treq, _ := http.NewRequest(\"\
+          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}"
+          payload = "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"drift_enabled\":false,\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}"
 
           headers = {
               'content-type': "application/json",
@@ -321,6 +322,7 @@ paths:
           req.write(JSON.stringify({
             ai_session_id: 'cd2ec6a3-82fe-4911-902a-065ff8425b66',
             question: 'What is my most expensive Kafka cluster?',
+            drift_enabled: false,
             history: [
               {
                 question: 'What is my most expensive Kafka cluster?',
@@ -341,7 +343,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"drift_enabled\":false,\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -350,7 +352,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"drift_enabled\":false,\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: AI API v1
   /ai/v1/doc-completions:
@@ -496,13 +498,13 @@ paths:
           curl --request POST \
             --url https://api.confluent.cloud/ai/v1/doc-completions \
             --header 'content-type: application/json' \
-            --data '{"ai_session_id":"cd2ec6a3-82fe-4911-902a-065ff8425b66","question":"What is my most expensive Kafka cluster?","history":[{"question":"What is my most expensive Kafka cluster?","answer":"Your most expensive Kafka cluster is \"lkc-12345\"."}]}'
+            --data '{"ai_session_id":"cd2ec6a3-82fe-4911-902a-065ff8425b66","question":"What is my most expensive Kafka cluster?","drift_enabled":false,"history":[{"question":"What is my most expensive Kafka cluster?","answer":"Your most expensive Kafka cluster is \"lkc-12345\"."}]}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}");
+          RequestBody body = RequestBody.create(mediaType, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"drift_enabled\":false,\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/ai/v1/doc-completions")
             .post(body)
@@ -515,19 +517,20 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ai/v1/doc-completions\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"ai_session_id\\\":\\\"cd2ec6a3-82fe-4911-902a-065ff8425b66\\\
           \",\\\"question\\\":\\\"What is my most expensive Kafka cluster?\\\",\\\"\
-          history\\\":[{\\\"question\\\":\\\"What is my most expensive Kafka cluster?\\\
-          \",\\\"answer\\\":\\\"Your most expensive Kafka cluster is \\\\\\\"lkc-12345\\\
-          \\\\\".\\\"}]}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
-          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _ :=\
-          \ http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\
-          \n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          drift_enabled\\\":false,\\\"history\\\":[{\\\"question\\\":\\\"What is my\
+          \ most expensive Kafka cluster?\\\",\\\"answer\\\":\\\"Your most expensive\
+          \ Kafka cluster is \\\\\\\"lkc-12345\\\\\\\".\\\"}]}\")\n\n\treq, _ := http.NewRequest(\"\
+          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
+          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}"
+          payload = "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"drift_enabled\":false,\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}"
 
           headers = { 'content-type': "application/json" }
 
@@ -567,6 +570,7 @@ paths:
           req.write(JSON.stringify({
             ai_session_id: 'cd2ec6a3-82fe-4911-902a-065ff8425b66',
             question: 'What is my most expensive Kafka cluster?',
+            drift_enabled: false,
             history: [
               {
                 question: 'What is my most expensive Kafka cluster?',
@@ -586,7 +590,7 @@ paths:
           headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"drift_enabled\":false,\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -594,7 +598,7 @@ paths:
           var client = new RestClient("https://api.confluent.cloud/ai/v1/doc-completions");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
-          request.AddParameter("application/json", "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"drift_enabled\":false,\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: AI API v1
   /ai/v1/chat-completions/{chat_completion_id}/feedback:
@@ -2245,6 +2249,9 @@ components:
         question:
           allOf:
           - $ref: '#/components/schemas/ai.v1.ChatCompletionsQuestion'
+        drift_enabled:
+          allOf:
+          - $ref: '#/components/schemas/ai.v1.DriftEnabled'
         history:
           description: Completion objects from previous interactions.
           items:
@@ -2394,6 +2401,11 @@ components:
       example: cd2ec6a3-82fe-4911-902a-065ff8425b66
       format: uuid
       type: string
+    ai.v1.DriftEnabled:
+      default: false
+      description: Indicates whether the backend can route to Confluent Chat Support
+        with a human.
+      type: boolean
     ai.v1.ChatCompletionsQuestion:
       description: Question for the AI assistant.
       example: What is my most expensive Kafka cluster?

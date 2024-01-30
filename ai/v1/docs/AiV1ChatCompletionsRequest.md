@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
 **AiSessionId** | Pointer to **string** |  | [optional] 
 **Question** | Pointer to **string** |  | [optional] 
+**DriftEnabled** | Pointer to **bool** |  | [optional] 
 **History** | Pointer to [**[]AiV1ChatCompletionsHistory**](AiV1ChatCompletionsHistory.md) | Completion objects from previous interactions. | [optional] 
 
 ## Methods
@@ -180,6 +181,31 @@ SetQuestion sets Question field to given value.
 `func (o *AiV1ChatCompletionsRequest) HasQuestion() bool`
 
 HasQuestion returns a boolean if a field has been set.
+
+### GetDriftEnabled
+
+`func (o *AiV1ChatCompletionsRequest) GetDriftEnabled() bool`
+
+GetDriftEnabled returns the DriftEnabled field if non-nil, zero value otherwise.
+
+### GetDriftEnabledOk
+
+`func (o *AiV1ChatCompletionsRequest) GetDriftEnabledOk() (*bool, bool)`
+
+GetDriftEnabledOk returns a tuple with the DriftEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDriftEnabled
+
+`func (o *AiV1ChatCompletionsRequest) SetDriftEnabled(v bool)`
+
+SetDriftEnabled sets DriftEnabled field to given value.
+
+### HasDriftEnabled
+
+`func (o *AiV1ChatCompletionsRequest) HasDriftEnabled() bool`
+
+HasDriftEnabled returns a boolean if a field has been set.
 
 ### GetHistory
 

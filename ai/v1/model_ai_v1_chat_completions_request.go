@@ -41,10 +41,11 @@ type AiV1ChatCompletionsRequest struct {
 	// Kind defines the object this REST resource represents.
 	Kind *string `json:"kind,omitempty"`
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
-	Id          *string     `json:"id,omitempty"`
-	Metadata    *ObjectMeta `json:"metadata,omitempty"`
-	AiSessionId *string     `json:"ai_session_id,omitempty"`
-	Question    *string     `json:"question,omitempty"`
+	Id           *string     `json:"id,omitempty"`
+	Metadata     *ObjectMeta `json:"metadata,omitempty"`
+	AiSessionId  *string     `json:"ai_session_id,omitempty"`
+	Question     *string     `json:"question,omitempty"`
+	DriftEnabled *bool       `json:"drift_enabled,omitempty"`
 	// Completion objects from previous interactions.
 	History *[]AiV1ChatCompletionsHistory `json:"history,omitempty"`
 }
@@ -258,6 +259,38 @@ func (o *AiV1ChatCompletionsRequest) SetQuestion(v string) {
 	o.Question = &v
 }
 
+// GetDriftEnabled returns the DriftEnabled field value if set, zero value otherwise.
+func (o *AiV1ChatCompletionsRequest) GetDriftEnabled() bool {
+	if o == nil || o.DriftEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.DriftEnabled
+}
+
+// GetDriftEnabledOk returns a tuple with the DriftEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AiV1ChatCompletionsRequest) GetDriftEnabledOk() (*bool, bool) {
+	if o == nil || o.DriftEnabled == nil {
+		return nil, false
+	}
+	return o.DriftEnabled, true
+}
+
+// HasDriftEnabled returns a boolean if a field has been set.
+func (o *AiV1ChatCompletionsRequest) HasDriftEnabled() bool {
+	if o != nil && o.DriftEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDriftEnabled gets a reference to the given bool and assigns it to the DriftEnabled field.
+func (o *AiV1ChatCompletionsRequest) SetDriftEnabled(v bool) {
+	o.DriftEnabled = &v
+}
+
 // GetHistory returns the History field value if set, zero value otherwise.
 func (o *AiV1ChatCompletionsRequest) GetHistory() []AiV1ChatCompletionsHistory {
 	if o == nil || o.History == nil {
@@ -298,6 +331,7 @@ func (o *AiV1ChatCompletionsRequest) Redact() {
 	o.recurseRedact(o.Metadata)
 	o.recurseRedact(o.AiSessionId)
 	o.recurseRedact(o.Question)
+	o.recurseRedact(o.DriftEnabled)
 	o.recurseRedact(o.History)
 }
 
@@ -350,6 +384,9 @@ func (o AiV1ChatCompletionsRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.Question != nil {
 		toSerialize["question"] = o.Question
+	}
+	if o.DriftEnabled != nil {
+		toSerialize["drift_enabled"] = o.DriftEnabled
 	}
 	if o.History != nil {
 		toSerialize["history"] = o.History
