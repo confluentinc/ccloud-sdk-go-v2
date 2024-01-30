@@ -1623,6 +1623,36 @@ paths:
               schema:
                 type: string
               style: simple
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "409"
+                  code: resource_already_exists
+                  title: Resource Already exists
+                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                    exists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request is in conflict with the current server state
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Resource URI of conflicting resource
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/{object}/{id}
+                format: uri
+                type: string
+              style: simple
+          x-summary: Conflict
         "422":
           content:
             application/json:
@@ -2572,7 +2602,7 @@ components:
         display_name:
           description: The name of the Flink compute pool.
           example: flink_compute_pool_0
-          pattern: ^(?:[0-9A-Za-z\-])[\w-]{0,31}$
+          pattern: ^(?:[0-9A-Za-z\-])[\w\.-]{0,31}$
           type: string
           x-immutable: false
         cloud:
@@ -2601,10 +2631,14 @@ components:
             Maximum number of Confluent Flink Units (CFUs) that the Flink compute pool should auto-scale to.
           example: 5
           format: int32
-          maximum: 10
-          minimum: 5
-          multipleOf: 5
           type: integer
+          x-extensible-enum:
+          - 5
+          - 10
+          - 20
+          - 30
+          - 40
+          - 50
           x-immutable: false
         environment:
           allOf:
@@ -2902,7 +2936,7 @@ components:
         display_name:
           description: The name of the Flink compute pool.
           example: flink_compute_pool_0
-          pattern: ^(?:[0-9A-Za-z\-])[\w-]{0,31}$
+          pattern: ^(?:[0-9A-Za-z\-])[\w\.-]{0,31}$
           type: string
           x-immutable: false
         max_cfu:
@@ -2910,10 +2944,14 @@ components:
             Maximum number of Confluent Flink Units (CFUs) that the Flink compute pool should auto-scale to.
           example: 5
           format: int32
-          maximum: 10
-          minimum: 5
-          multipleOf: 5
           type: integer
+          x-extensible-enum:
+          - 5
+          - 10
+          - 20
+          - 30
+          - 40
+          - 50
           x-immutable: false
         environment:
           allOf:
