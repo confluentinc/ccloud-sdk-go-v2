@@ -111,6 +111,7 @@ Class | Method | HTTP request | Description
  - [SqlV1StatementResultResults](docs/SqlV1StatementResultResults.md)
  - [SqlV1StatementSpec](docs/SqlV1StatementSpec.md)
  - [SqlV1StatementStatus](docs/SqlV1StatementStatus.md)
+ - [SqlV1StatementTraits](docs/SqlV1StatementTraits.md)
 
 
 ## Documentation For Authorization

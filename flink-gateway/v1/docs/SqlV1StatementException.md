@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] 
 **Name** | Pointer to **string** | Name of the SQL statement exception. | [optional] [readonly] 
-**Stacktrace** | Pointer to **string** | Stack trace of the statement exception. | [optional] [readonly] 
+**Message** | Pointer to **string** | Error message of the statement exception. | [optional] [readonly] 
 **Timestamp** | Pointer to **time.Time** | The date and time at which the exception occurred. It is represented in RFC3339 format and is in UTC. | [optional] [readonly] 
 
 ## Methods
@@ -78,30 +78,30 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
-### GetStacktrace
+### GetMessage
 
-`func (o *SqlV1StatementException) GetStacktrace() string`
+`func (o *SqlV1StatementException) GetMessage() string`
 
-GetStacktrace returns the Stacktrace field if non-nil, zero value otherwise.
+GetMessage returns the Message field if non-nil, zero value otherwise.
 
-### GetStacktraceOk
+### GetMessageOk
 
-`func (o *SqlV1StatementException) GetStacktraceOk() (*string, bool)`
+`func (o *SqlV1StatementException) GetMessageOk() (*string, bool)`
 
-GetStacktraceOk returns a tuple with the Stacktrace field if it's non-nil, zero value otherwise
+GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetStacktrace
+### SetMessage
 
-`func (o *SqlV1StatementException) SetStacktrace(v string)`
+`func (o *SqlV1StatementException) SetMessage(v string)`
 
-SetStacktrace sets Stacktrace field to given value.
+SetMessage sets Message field to given value.
 
-### HasStacktrace
+### HasMessage
 
-`func (o *SqlV1StatementException) HasStacktrace() bool`
+`func (o *SqlV1StatementException) HasMessage() bool`
 
-HasStacktrace returns a boolean if a field has been set.
+HasMessage returns a boolean if a field has been set.
 
 ### GetTimestamp
 

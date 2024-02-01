@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Phase** | **string** | The lifecycle phase of the submitted SQL statement: PENDING: SQL statement is pending execution; RUNNING: SQL statement execution is in progress; COMPLETED: SQL statement is completed; DELETING: SQL statement deletion is in progress; FAILING: SQL statement is failing; FAILED: SQL statement execution has failed; STOPPED: SQL statement execution has successfully been stopped;  | [readonly] 
 **ScalingStatus** | Pointer to [**SqlV1ScalingStatus**](SqlV1ScalingStatus.md) |  | [optional] 
-**ResultSchema** | Pointer to [**SqlV1ResultSchema**](SqlV1ResultSchema.md) |  | [optional] 
 **Detail** | Pointer to **string** | Description of a SQL statement phase. | [optional] [readonly] 
+**Traits** | Pointer to [**SqlV1StatementTraits**](SqlV1StatementTraits.md) |  | [optional] 
 
 ## Methods
 
@@ -73,31 +73,6 @@ SetScalingStatus sets ScalingStatus field to given value.
 
 HasScalingStatus returns a boolean if a field has been set.
 
-### GetResultSchema
-
-`func (o *SqlV1StatementStatus) GetResultSchema() SqlV1ResultSchema`
-
-GetResultSchema returns the ResultSchema field if non-nil, zero value otherwise.
-
-### GetResultSchemaOk
-
-`func (o *SqlV1StatementStatus) GetResultSchemaOk() (*SqlV1ResultSchema, bool)`
-
-GetResultSchemaOk returns a tuple with the ResultSchema field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResultSchema
-
-`func (o *SqlV1StatementStatus) SetResultSchema(v SqlV1ResultSchema)`
-
-SetResultSchema sets ResultSchema field to given value.
-
-### HasResultSchema
-
-`func (o *SqlV1StatementStatus) HasResultSchema() bool`
-
-HasResultSchema returns a boolean if a field has been set.
-
 ### GetDetail
 
 `func (o *SqlV1StatementStatus) GetDetail() string`
@@ -122,6 +97,31 @@ SetDetail sets Detail field to given value.
 `func (o *SqlV1StatementStatus) HasDetail() bool`
 
 HasDetail returns a boolean if a field has been set.
+
+### GetTraits
+
+`func (o *SqlV1StatementStatus) GetTraits() SqlV1StatementTraits`
+
+GetTraits returns the Traits field if non-nil, zero value otherwise.
+
+### GetTraitsOk
+
+`func (o *SqlV1StatementStatus) GetTraitsOk() (*SqlV1StatementTraits, bool)`
+
+GetTraitsOk returns a tuple with the Traits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTraits
+
+`func (o *SqlV1StatementStatus) SetTraits(v SqlV1StatementTraits)`
+
+SetTraits sets Traits field to given value.
+
+### HasTraits
+
+`func (o *SqlV1StatementStatus) HasTraits() bool`
+
+HasTraits returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

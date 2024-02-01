@@ -41,8 +41,8 @@ type SqlV1StatementException struct {
 	Kind *string `json:"kind,omitempty"`
 	// Name of the SQL statement exception.
 	Name *string `json:"name,omitempty"`
-	// Stack trace of the statement exception.
-	Stacktrace *string `json:"stacktrace,omitempty"`
+	// Error message of the statement exception.
+	Message *string `json:"message,omitempty"`
 	// The date and time at which the exception occurred. It is represented in RFC3339 format and is in UTC.
 	Timestamp *time.Time `json:"timestamp,omitempty"`
 }
@@ -128,36 +128,36 @@ func (o *SqlV1StatementException) SetName(v string) {
 	o.Name = &v
 }
 
-// GetStacktrace returns the Stacktrace field value if set, zero value otherwise.
-func (o *SqlV1StatementException) GetStacktrace() string {
-	if o == nil || o.Stacktrace == nil {
+// GetMessage returns the Message field value if set, zero value otherwise.
+func (o *SqlV1StatementException) GetMessage() string {
+	if o == nil || o.Message == nil {
 		var ret string
 		return ret
 	}
-	return *o.Stacktrace
+	return *o.Message
 }
 
-// GetStacktraceOk returns a tuple with the Stacktrace field value if set, nil otherwise
+// GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SqlV1StatementException) GetStacktraceOk() (*string, bool) {
-	if o == nil || o.Stacktrace == nil {
+func (o *SqlV1StatementException) GetMessageOk() (*string, bool) {
+	if o == nil || o.Message == nil {
 		return nil, false
 	}
-	return o.Stacktrace, true
+	return o.Message, true
 }
 
-// HasStacktrace returns a boolean if a field has been set.
-func (o *SqlV1StatementException) HasStacktrace() bool {
-	if o != nil && o.Stacktrace != nil {
+// HasMessage returns a boolean if a field has been set.
+func (o *SqlV1StatementException) HasMessage() bool {
+	if o != nil && o.Message != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetStacktrace gets a reference to the given string and assigns it to the Stacktrace field.
-func (o *SqlV1StatementException) SetStacktrace(v string) {
-	o.Stacktrace = &v
+// SetMessage gets a reference to the given string and assigns it to the Message field.
+func (o *SqlV1StatementException) SetMessage(v string) {
+	o.Message = &v
 }
 
 // GetTimestamp returns the Timestamp field value if set, zero value otherwise.
@@ -196,7 +196,7 @@ func (o *SqlV1StatementException) SetTimestamp(v time.Time) {
 func (o *SqlV1StatementException) Redact() {
 	o.recurseRedact(o.Kind)
 	o.recurseRedact(o.Name)
-	o.recurseRedact(o.Stacktrace)
+	o.recurseRedact(o.Message)
 	o.recurseRedact(o.Timestamp)
 }
 
@@ -238,8 +238,8 @@ func (o SqlV1StatementException) MarshalJSON() ([]byte, error) {
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
 	}
-	if o.Stacktrace != nil {
-		toSerialize["stacktrace"] = o.Stacktrace
+	if o.Message != nil {
+		toSerialize["message"] = o.Message
 	}
 	if o.Timestamp != nil {
 		toSerialize["timestamp"] = o.Timestamp
