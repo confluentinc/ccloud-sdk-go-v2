@@ -39,9 +39,9 @@ type SqlV1StatementStatus struct {
 	// The lifecycle phase of the submitted SQL statement: PENDING: SQL statement is pending execution; RUNNING: SQL statement execution is in progress; COMPLETED: SQL statement is completed; DELETING: SQL statement deletion is in progress; FAILING: SQL statement is failing; FAILED: SQL statement execution has failed; STOPPED: SQL statement execution has successfully been stopped;
 	Phase         string              `json:"phase,omitempty"`
 	ScalingStatus *SqlV1ScalingStatus `json:"scaling_status,omitempty"`
-	ResultSchema  *SqlV1ResultSchema  `json:"result_schema,omitempty"`
 	// Description of a SQL statement phase.
-	Detail *string `json:"detail,omitempty"`
+	Detail *string               `json:"detail,omitempty"`
+	Traits *SqlV1StatementTraits `json:"traits,omitempty"`
 }
 
 // NewSqlV1StatementStatus instantiates a new SqlV1StatementStatus object
@@ -118,38 +118,6 @@ func (o *SqlV1StatementStatus) SetScalingStatus(v SqlV1ScalingStatus) {
 	o.ScalingStatus = &v
 }
 
-// GetResultSchema returns the ResultSchema field value if set, zero value otherwise.
-func (o *SqlV1StatementStatus) GetResultSchema() SqlV1ResultSchema {
-	if o == nil || o.ResultSchema == nil {
-		var ret SqlV1ResultSchema
-		return ret
-	}
-	return *o.ResultSchema
-}
-
-// GetResultSchemaOk returns a tuple with the ResultSchema field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SqlV1StatementStatus) GetResultSchemaOk() (*SqlV1ResultSchema, bool) {
-	if o == nil || o.ResultSchema == nil {
-		return nil, false
-	}
-	return o.ResultSchema, true
-}
-
-// HasResultSchema returns a boolean if a field has been set.
-func (o *SqlV1StatementStatus) HasResultSchema() bool {
-	if o != nil && o.ResultSchema != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetResultSchema gets a reference to the given SqlV1ResultSchema and assigns it to the ResultSchema field.
-func (o *SqlV1StatementStatus) SetResultSchema(v SqlV1ResultSchema) {
-	o.ResultSchema = &v
-}
-
 // GetDetail returns the Detail field value if set, zero value otherwise.
 func (o *SqlV1StatementStatus) GetDetail() string {
 	if o == nil || o.Detail == nil {
@@ -182,12 +150,44 @@ func (o *SqlV1StatementStatus) SetDetail(v string) {
 	o.Detail = &v
 }
 
+// GetTraits returns the Traits field value if set, zero value otherwise.
+func (o *SqlV1StatementStatus) GetTraits() SqlV1StatementTraits {
+	if o == nil || o.Traits == nil {
+		var ret SqlV1StatementTraits
+		return ret
+	}
+	return *o.Traits
+}
+
+// GetTraitsOk returns a tuple with the Traits field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SqlV1StatementStatus) GetTraitsOk() (*SqlV1StatementTraits, bool) {
+	if o == nil || o.Traits == nil {
+		return nil, false
+	}
+	return o.Traits, true
+}
+
+// HasTraits returns a boolean if a field has been set.
+func (o *SqlV1StatementStatus) HasTraits() bool {
+	if o != nil && o.Traits != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTraits gets a reference to the given SqlV1StatementTraits and assigns it to the Traits field.
+func (o *SqlV1StatementStatus) SetTraits(v SqlV1StatementTraits) {
+	o.Traits = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *SqlV1StatementStatus) Redact() {
 	o.recurseRedact(&o.Phase)
 	o.recurseRedact(o.ScalingStatus)
-	o.recurseRedact(o.ResultSchema)
 	o.recurseRedact(o.Detail)
+	o.recurseRedact(o.Traits)
 }
 
 func (o *SqlV1StatementStatus) recurseRedact(v interface{}) {
@@ -228,11 +228,11 @@ func (o SqlV1StatementStatus) MarshalJSON() ([]byte, error) {
 	if o.ScalingStatus != nil {
 		toSerialize["scaling_status"] = o.ScalingStatus
 	}
-	if o.ResultSchema != nil {
-		toSerialize["result_schema"] = o.ResultSchema
-	}
 	if o.Detail != nil {
 		toSerialize["detail"] = o.Detail
+	}
+	if o.Traits != nil {
+		toSerialize["traits"] = o.Traits
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
