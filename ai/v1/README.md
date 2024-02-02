@@ -79,6 +79,7 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*ChatCompletionsAiV1Api* | [**GetAiV1ChatCompletion**](docs/ChatCompletionsAiV1Api.md#getaiv1chatcompletion) | **Options** /ai/v1/chat-completions | Read a Chat Completion
 *ChatCompletionsAiV1Api* | [**QueryAiV1ChatCompletion**](docs/ChatCompletionsAiV1Api.md#queryaiv1chatcompletion) | **Post** /ai/v1/chat-completions | Query a Chat Completion
 *DocCompletionsDocsAiV1Api* | [**QueryDocsAiV1DocCompletion**](docs/DocCompletionsDocsAiV1Api.md#querydocsaiv1doccompletion) | **Post** /docs-ai/v1/doc-completions | Query a Doc Completion
 *FeedbacksAiV1Api* | [**CreateAiV1ChatCompletionFeedback**](docs/FeedbacksAiV1Api.md#createaiv1chatcompletionfeedback) | **Post** /ai/v1/chat-completions/{chat_completion_id}/feedback | Create a Feedback

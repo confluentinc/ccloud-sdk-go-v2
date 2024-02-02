@@ -96,9 +96,8 @@ GetAiV1OrgPreference Read the organization's ai-assistant setting in org-prefere
 
 Returns the organization's ai-assistant setting in org-preferences.
 
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAiV1OrgPreferenceRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetAiV1OrgPreferenceRequest
 */
 func (a *OrgPreferencesAiV1ApiService) GetAiV1OrgPreference(ctx _context.Context) ApiGetAiV1OrgPreferenceRequest {
 	return ApiGetAiV1OrgPreferenceRequest{
@@ -108,7 +107,8 @@ func (a *OrgPreferencesAiV1ApiService) GetAiV1OrgPreference(ctx _context.Context
 }
 
 // Execute executes the request
-//  @return AiV1OrgPreferences
+//
+//	@return AiV1OrgPreferences
 func (a *OrgPreferencesAiV1ApiService) GetAiV1OrgPreferenceExecute(r ApiGetAiV1OrgPreferenceRequest) (AiV1OrgPreferences, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -255,11 +255,8 @@ UpdateAiV1OrgPreference Set the organization's ai-assistant setting in org-prefe
 
 Updates the organization's ai-assistant setting in org-preferences.
 
-
-
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiUpdateAiV1OrgPreferenceRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiUpdateAiV1OrgPreferenceRequest
 */
 func (a *OrgPreferencesAiV1ApiService) UpdateAiV1OrgPreference(ctx _context.Context) ApiUpdateAiV1OrgPreferenceRequest {
 	return ApiUpdateAiV1OrgPreferenceRequest{
@@ -269,7 +266,8 @@ func (a *OrgPreferencesAiV1ApiService) UpdateAiV1OrgPreference(ctx _context.Cont
 }
 
 // Execute executes the request
-//  @return AiV1OrgPreferences
+//
+//	@return AiV1OrgPreferences
 func (a *OrgPreferencesAiV1ApiService) UpdateAiV1OrgPreferenceExecute(r ApiUpdateAiV1OrgPreferenceRequest) (AiV1OrgPreferences, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch

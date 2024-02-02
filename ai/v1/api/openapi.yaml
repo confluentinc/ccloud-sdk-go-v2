@@ -46,6 +46,258 @@ tags:
   name: Org Preferences (ai/v1)
 paths:
   /ai/v1/chat-completions:
+    options:
+      description: |-
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+        Get the HTTP methods/verbs (if any) the particular authenticated user is allowed to submit
+      operationId: getAiV1ChatCompletion
+      responses:
+        "204":
+          description: Query was successful.
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - cloud-api-key: []
+      summary: Read a Chat Completion
+      tags:
+      - Chat Completions (ai/v1)
+      x-request-access-name: AI API v1
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request OPTIONS \
+            --url https://api.confluent.cloud/ai/v1/chat-completions \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/ai/v1/chat-completions")
+            .method("OPTIONS", null)
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ai/v1/chat-completions\"\
+          \n\n\treq, _ := http.NewRequest(\"OPTIONS\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("OPTIONS", "/ai/v1/chat-completions", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "OPTIONS",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/ai/v1/chat-completions",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "OPTIONS");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ai/v1/chat-completions");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/ai/v1/chat-completions");
+          var request = new RestRequest(Method.OPTIONS);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
     post:
       description: |-
         [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
@@ -254,8 +506,8 @@ paths:
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/ai/v1/chat-completions")
             .post(body)
-            .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -267,10 +519,10 @@ paths:
           drift_enabled\\\":false,\\\"history\\\":[{\\\"question\\\":\\\"What is my\
           \ most expensive Kafka cluster?\\\",\\\"answer\\\":\\\"Your most expensive\
           \ Kafka cluster is \\\\\\\"lkc-12345\\\\\\\".\\\"}]}\")\n\n\treq, _ := http.NewRequest(\"\
-          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          POST\", url, payload)\n\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _\
+          \ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ :=\
+          \ ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -281,8 +533,8 @@ paths:
           payload = "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"drift_enabled\":false,\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}"
 
           headers = {
-              'content-type': "application/json",
-              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
               }
 
           conn.request("POST", "/ai/v1/chat-completions", payload, headers)
@@ -301,8 +553,8 @@ paths:
             "port": null,
             "path": "/ai/v1/chat-completions",
             "headers": {
-              "content-type": "application/json",
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -339,8 +591,8 @@ paths:
           curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ai/v1/chat-completions");
 
           struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"drift_enabled\":false,\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}");
@@ -350,8 +602,9 @@ paths:
         source: |-
           var client = new RestClient("https://api.confluent.cloud/ai/v1/chat-completions");
           var request = new RestRequest(Method.POST);
-          request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddHeader("content-type", "application/json");
+
           request.AddParameter("application/json", "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"question\":\"What is my most expensive Kafka cluster?\",\"drift_enabled\":false,\"history\":[{\"question\":\"What is my most expensive Kafka cluster?\",\"answer\":\"Your most expensive Kafka cluster is \\\"lkc-12345\\\".\"}]}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: AI API v1
@@ -840,8 +1093,8 @@ paths:
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/ai/v1/chat-completions/%7Bchat_completion_id%7D/feedback")
             .post(body)
-            .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -853,8 +1106,8 @@ paths:
           \",\\\"comment\\\":\\\"The suggested CLI command contained several typos.\
           \ It was supposed to be \\\\\\\"confluent\\\\\\\" instead of \\\\\\\"ccloud\\\
           \\\\\".\\\"}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
-          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\t\
+          req.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -866,8 +1119,8 @@ paths:
           payload = "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"reaction\":\"UNSPECIFIED\",\"copied\":\"UNSPECIFIED\",\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}"
 
           headers = {
-              'content-type': "application/json",
-              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
               }
 
           conn.request("POST", "/ai/v1/chat-completions/%7Bchat_completion_id%7D/feedback", payload, headers)
@@ -886,8 +1139,8 @@ paths:
             "port": null,
             "path": "/ai/v1/chat-completions/%7Bchat_completion_id%7D/feedback",
             "headers": {
-              "content-type": "application/json",
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -919,8 +1172,8 @@ paths:
           curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ai/v1/chat-completions/%7Bchat_completion_id%7D/feedback");
 
           struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"reaction\":\"UNSPECIFIED\",\"copied\":\"UNSPECIFIED\",\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}");
@@ -930,8 +1183,8 @@ paths:
         source: |-
           var client = new RestClient("https://api.confluent.cloud/ai/v1/chat-completions/%7Bchat_completion_id%7D/feedback");
           var request = new RestRequest(Method.POST);
-          request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddHeader("content-type", "application/json");
           request.AddParameter("application/json", "{\"ai_session_id\":\"cd2ec6a3-82fe-4911-902a-065ff8425b66\",\"reaction\":\"UNSPECIFIED\",\"copied\":\"UNSPECIFIED\",\"comment\":\"The suggested CLI command contained several typos. It was supposed to be \\\"confluent\\\" instead of \\\"ccloud\\\".\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: AI API v1
@@ -1783,8 +2036,8 @@ paths:
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/ai/v1/org-preferences")
             .patch(body)
-            .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -1793,10 +2046,10 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ai/v1/org-preferences\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"ai_assistant_enabled\\\":true}\"\
           )\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\"\
+          , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
+          defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
+          \tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
@@ -1806,8 +2059,8 @@ paths:
           payload = "{\"ai_assistant_enabled\":true}"
 
           headers = {
-              'content-type': "application/json",
-              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
               }
 
           conn.request("PATCH", "/ai/v1/org-preferences", payload, headers)
@@ -1826,8 +2079,8 @@ paths:
             "port": null,
             "path": "/ai/v1/org-preferences",
             "headers": {
-              "content-type": "application/json",
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -1854,8 +2107,8 @@ paths:
           curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ai/v1/org-preferences");
 
           struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"ai_assistant_enabled\":true}");
@@ -1865,8 +2118,8 @@ paths:
         source: |-
           var client = new RestClient("https://api.confluent.cloud/ai/v1/org-preferences");
           var request = new RestRequest(Method.PATCH);
-          request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddHeader("content-type", "application/json");
           request.AddParameter("application/json", "{\"ai_assistant_enabled\":true}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: AI API v1

@@ -100,9 +100,9 @@ CreateAiV1ChatCompletionFeedback Create a Feedback
 
 Submit feedback on the Confluent AI assistant.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param chatCompletionId The Chat Completion
- @return ApiCreateAiV1ChatCompletionFeedbackRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param chatCompletionId The Chat Completion
+	@return ApiCreateAiV1ChatCompletionFeedbackRequest
 */
 func (a *FeedbacksAiV1ApiService) CreateAiV1ChatCompletionFeedback(ctx _context.Context, chatCompletionId string) ApiCreateAiV1ChatCompletionFeedbackRequest {
 	return ApiCreateAiV1ChatCompletionFeedbackRequest{
@@ -263,9 +263,9 @@ CreateAiV1DocCompletionFeedback Create a Feedback
 
 Submit feedback on the Doc AI assistant.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param docCompletionId The Doc Completion
- @return ApiCreateAiV1DocCompletionFeedbackRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param docCompletionId The Doc Completion
+	@return ApiCreateAiV1DocCompletionFeedbackRequest
 */
 func (a *FeedbacksAiV1ApiService) CreateAiV1DocCompletionFeedback(ctx _context.Context, docCompletionId string) ApiCreateAiV1DocCompletionFeedbackRequest {
 	return ApiCreateAiV1DocCompletionFeedbackRequest{
