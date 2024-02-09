@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **Shared** | Pointer to **bool** |  | [optional] 
 **Ts** | Pointer to **int64** |  | [optional] 
 **Deleted** | Pointer to **bool** |  | [optional] 
+**Error** | Pointer to [**ErrorMessage**](ErrorMessage.md) |  | [optional] 
 
 ## Methods
 
@@ -231,6 +232,31 @@ SetDeleted sets Deleted field to given value.
 `func (o *Kek) HasDeleted() bool`
 
 HasDeleted returns a boolean if a field has been set.
+
+### GetError
+
+`func (o *Kek) GetError() ErrorMessage`
+
+GetError returns the Error field if non-nil, zero value otherwise.
+
+### GetErrorOk
+
+`func (o *Kek) GetErrorOk() (*ErrorMessage, bool)`
+
+GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetError
+
+`func (o *Kek) SetError(v ErrorMessage)`
+
+SetError sets Error field to given value.
+
+### HasError
+
+`func (o *Kek) HasError() bool`
+
+HasError returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

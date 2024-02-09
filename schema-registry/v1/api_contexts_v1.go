@@ -72,8 +72,8 @@ ListContexts List contexts
 
 Retrieves a list of contexts.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListContextsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListContextsRequest
 */
 func (a *ContextsV1ApiService) ListContexts(ctx _context.Context) ApiListContextsRequest {
 	return ApiListContextsRequest{
@@ -83,7 +83,8 @@ func (a *ContextsV1ApiService) ListContexts(ctx _context.Context) ApiListContext
 }
 
 // Execute executes the request
-//  @return []string
+//
+//	@return []string
 func (a *ContextsV1ApiService) ListContextsExecute(r ApiListContextsRequest) ([]string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet

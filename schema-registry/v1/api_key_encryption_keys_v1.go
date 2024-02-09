@@ -138,8 +138,8 @@ func (r ApiCreateKekRequest) Execute() (Kek, *_nethttp.Response, error) {
 /*
 CreateKek Create a kek.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateKekRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateKekRequest
 */
 func (a *KeyEncryptionKeysV1ApiService) CreateKek(ctx _context.Context) ApiCreateKekRequest {
 	return ApiCreateKekRequest{
@@ -149,7 +149,8 @@ func (a *KeyEncryptionKeysV1ApiService) CreateKek(ctx _context.Context) ApiCreat
 }
 
 // Execute executes the request
-//  @return Kek
+//
+//	@return Kek
 func (a *KeyEncryptionKeysV1ApiService) CreateKekExecute(r ApiCreateKekRequest) (Kek, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -250,9 +251,9 @@ func (r ApiDeleteKekRequest) Execute() (*_nethttp.Response, error) {
 /*
 DeleteKek Delete a kek.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @return ApiDeleteKekRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@return ApiDeleteKekRequest
 */
 func (a *KeyEncryptionKeysV1ApiService) DeleteKek(ctx _context.Context, name string) ApiDeleteKekRequest {
 	return ApiDeleteKekRequest{
@@ -352,9 +353,9 @@ func (r ApiGetKekRequest) Execute() (Kek, *_nethttp.Response, error) {
 /*
 GetKek Get a kek by name.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @return ApiGetKekRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@return ApiGetKekRequest
 */
 func (a *KeyEncryptionKeysV1ApiService) GetKek(ctx _context.Context, name string) ApiGetKekRequest {
 	return ApiGetKekRequest{
@@ -365,7 +366,8 @@ func (a *KeyEncryptionKeysV1ApiService) GetKek(ctx _context.Context, name string
 }
 
 // Execute executes the request
-//  @return Kek
+//
+//	@return Kek
 func (a *KeyEncryptionKeysV1ApiService) GetKekExecute(r ApiGetKekRequest) (Kek, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -464,8 +466,8 @@ func (r ApiGetKekNamesRequest) Execute() ([]string, *_nethttp.Response, error) {
 /*
 GetKekNames Get a list of kek names.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetKekNamesRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetKekNamesRequest
 */
 func (a *KeyEncryptionKeysV1ApiService) GetKekNames(ctx _context.Context) ApiGetKekNamesRequest {
 	return ApiGetKekNamesRequest{
@@ -475,7 +477,8 @@ func (a *KeyEncryptionKeysV1ApiService) GetKekNames(ctx _context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return []string
+//
+//	@return []string
 func (a *KeyEncryptionKeysV1ApiService) GetKekNamesExecute(r ApiGetKekNamesRequest) ([]string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -574,9 +577,9 @@ func (r ApiPutKekRequest) Execute() (Kek, *_nethttp.Response, error) {
 /*
 PutKek Alters a kek.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @return ApiPutKekRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@return ApiPutKekRequest
 */
 func (a *KeyEncryptionKeysV1ApiService) PutKek(ctx _context.Context, name string) ApiPutKekRequest {
 	return ApiPutKekRequest{
@@ -587,7 +590,8 @@ func (a *KeyEncryptionKeysV1ApiService) PutKek(ctx _context.Context, name string
 }
 
 // Execute executes the request
-//  @return Kek
+//
+//	@return Kek
 func (a *KeyEncryptionKeysV1ApiService) PutKekExecute(r ApiPutKekRequest) (Kek, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -682,9 +686,9 @@ func (r ApiUndeleteKekRequest) Execute() (*_nethttp.Response, error) {
 /*
 UndeleteKek Undelete a kek.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @return ApiUndeleteKekRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@return ApiUndeleteKekRequest
 */
 func (a *KeyEncryptionKeysV1ApiService) UndeleteKek(ctx _context.Context, name string) ApiUndeleteKekRequest {
 	return ApiUndeleteKekRequest{

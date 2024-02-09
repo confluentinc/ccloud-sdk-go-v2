@@ -36,14 +36,15 @@ import (
 
 // Dek struct for Dek
 type Dek struct {
-	KekName              *string `json:"kekName,omitempty"`
-	Subject              *string `json:"subject,omitempty"`
-	Version              *int32  `json:"version,omitempty"`
-	Algorithm            *string `json:"algorithm,omitempty"`
-	EncryptedKeyMaterial *string `json:"encryptedKeyMaterial,omitempty"`
-	KeyMaterial          *string `json:"keyMaterial,omitempty"`
-	Ts                   *int64  `json:"ts,omitempty"`
-	Deleted              *bool   `json:"deleted,omitempty"`
+	KekName              *string       `json:"kekName,omitempty"`
+	Subject              *string       `json:"subject,omitempty"`
+	Version              *int32        `json:"version,omitempty"`
+	Algorithm            *string       `json:"algorithm,omitempty"`
+	EncryptedKeyMaterial *string       `json:"encryptedKeyMaterial,omitempty"`
+	KeyMaterial          *string       `json:"keyMaterial,omitempty"`
+	Ts                   *int64        `json:"ts,omitempty"`
+	Deleted              *bool         `json:"deleted,omitempty"`
+	Error                *ErrorMessage `json:"error,omitempty"`
 }
 
 // NewDek instantiates a new Dek object
@@ -319,6 +320,38 @@ func (o *Dek) SetDeleted(v bool) {
 	o.Deleted = &v
 }
 
+// GetError returns the Error field value if set, zero value otherwise.
+func (o *Dek) GetError() ErrorMessage {
+	if o == nil || o.Error == nil {
+		var ret ErrorMessage
+		return ret
+	}
+	return *o.Error
+}
+
+// GetErrorOk returns a tuple with the Error field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Dek) GetErrorOk() (*ErrorMessage, bool) {
+	if o == nil || o.Error == nil {
+		return nil, false
+	}
+	return o.Error, true
+}
+
+// HasError returns a boolean if a field has been set.
+func (o *Dek) HasError() bool {
+	if o != nil && o.Error != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetError gets a reference to the given ErrorMessage and assigns it to the Error field.
+func (o *Dek) SetError(v ErrorMessage) {
+	o.Error = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *Dek) Redact() {
 	o.recurseRedact(o.KekName)
@@ -329,6 +362,7 @@ func (o *Dek) Redact() {
 	o.recurseRedact(o.KeyMaterial)
 	o.recurseRedact(o.Ts)
 	o.recurseRedact(o.Deleted)
+	o.recurseRedact(o.Error)
 }
 
 func (o *Dek) recurseRedact(v interface{}) {
@@ -386,6 +420,9 @@ func (o Dek) MarshalJSON() ([]byte, error) {
 	}
 	if o.Deleted != nil {
 		toSerialize["deleted"] = o.Deleted
+	}
+	if o.Error != nil {
+		toSerialize["error"] = o.Error
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

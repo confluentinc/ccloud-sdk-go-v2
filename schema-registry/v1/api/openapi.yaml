@@ -11071,6 +11071,8 @@ components:
           type: integer
         deleted:
           type: boolean
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
       type: object
     CreateDekRequest:
       example:
@@ -11124,6 +11126,8 @@ components:
           type: integer
         deleted:
           type: boolean
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
       type: object
     CreateKekRequest:
       example:

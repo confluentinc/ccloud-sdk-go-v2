@@ -208,10 +208,10 @@ DeleteSchemaVersion Delete schema version
 
 Deletes a specific version of the schema registered under this subject. This only deletes the version and the schema ID remains intact making it still possible to decode data using the schema ID. This API is recommended to be used only in development environments or under extreme circumstances where-in, its required to delete a previously registered schema for compatibility purposes or re-register previously registered schema.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Name of the subject
- @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
- @return ApiDeleteSchemaVersionRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Name of the subject
+	@param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+	@return ApiDeleteSchemaVersionRequest
 */
 func (a *SubjectsV1ApiService) DeleteSchemaVersion(ctx _context.Context, subject string, version string) ApiDeleteSchemaVersionRequest {
 	return ApiDeleteSchemaVersionRequest{
@@ -223,7 +223,8 @@ func (a *SubjectsV1ApiService) DeleteSchemaVersion(ctx _context.Context, subject
 }
 
 // Execute executes the request
-//  @return int32
+//
+//	@return int32
 func (a *SubjectsV1ApiService) DeleteSchemaVersionExecute(r ApiDeleteSchemaVersionRequest) (int32, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
@@ -386,9 +387,9 @@ DeleteSubject Delete subject
 
 Deletes the specified subject and its associated compatibility level if registered. It is recommended to use this API only when a topic needs to be recycled or in development environment.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Name of the subject
- @return ApiDeleteSubjectRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Name of the subject
+	@return ApiDeleteSubjectRequest
 */
 func (a *SubjectsV1ApiService) DeleteSubject(ctx _context.Context, subject string) ApiDeleteSubjectRequest {
 	return ApiDeleteSubjectRequest{
@@ -399,7 +400,8 @@ func (a *SubjectsV1ApiService) DeleteSubject(ctx _context.Context, subject strin
 }
 
 // Execute executes the request
-//  @return []int32
+//
+//	@return []int32
 func (a *SubjectsV1ApiService) DeleteSubjectExecute(r ApiDeleteSubjectRequest) ([]int32, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
@@ -545,10 +547,10 @@ GetReferencedBy List schemas referencing a schema
 
 Retrieves the IDs of schemas that reference the specified schema.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Name of the subject
- @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
- @return ApiGetReferencedByRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Name of the subject
+	@param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+	@return ApiGetReferencedByRequest
 */
 func (a *SubjectsV1ApiService) GetReferencedBy(ctx _context.Context, subject string, version string) ApiGetReferencedByRequest {
 	return ApiGetReferencedByRequest{
@@ -560,7 +562,8 @@ func (a *SubjectsV1ApiService) GetReferencedBy(ctx _context.Context, subject str
 }
 
 // Execute executes the request
-//  @return []int32
+//
+//	@return []int32
 func (a *SubjectsV1ApiService) GetReferencedByExecute(r ApiGetReferencedByRequest) ([]int32, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -721,10 +724,10 @@ GetSchemaByVersion Get schema by version
 
 Retrieves a specific version of the schema registered under this subject.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Name of the subject
- @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
- @return ApiGetSchemaByVersionRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Name of the subject
+	@param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+	@return ApiGetSchemaByVersionRequest
 */
 func (a *SubjectsV1ApiService) GetSchemaByVersion(ctx _context.Context, subject string, version string) ApiGetSchemaByVersionRequest {
 	return ApiGetSchemaByVersionRequest{
@@ -736,7 +739,8 @@ func (a *SubjectsV1ApiService) GetSchemaByVersion(ctx _context.Context, subject 
 }
 
 // Execute executes the request
-//  @return Schema
+//
+//	@return Schema
 func (a *SubjectsV1ApiService) GetSchemaByVersionExecute(r ApiGetSchemaByVersionRequest) (Schema, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -900,10 +904,10 @@ GetSchemaOnly1 Get schema string by version
 
 Retrieves the schema for the specified version of this subject. Only the unescaped schema string is returned.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Name of the subject
- @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
- @return ApiGetSchemaOnly1Request
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Name of the subject
+	@param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+	@return ApiGetSchemaOnly1Request
 */
 func (a *SubjectsV1ApiService) GetSchemaOnly1(ctx _context.Context, subject string, version string) ApiGetSchemaOnly1Request {
 	return ApiGetSchemaOnly1Request{
@@ -915,7 +919,8 @@ func (a *SubjectsV1ApiService) GetSchemaOnly1(ctx _context.Context, subject stri
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *SubjectsV1ApiService) GetSchemaOnly1Execute(r ApiGetSchemaOnly1Request) (string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -1084,8 +1089,8 @@ List List subjects
 
 Retrieves a list of registered subjects matching specified parameters.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListRequest
 */
 func (a *SubjectsV1ApiService) List(ctx _context.Context) ApiListRequest {
 	return ApiListRequest{
@@ -1095,7 +1100,8 @@ func (a *SubjectsV1ApiService) List(ctx _context.Context) ApiListRequest {
 }
 
 // Execute executes the request
-//  @return []string
+//
+//	@return []string
 func (a *SubjectsV1ApiService) ListExecute(r ApiListRequest) ([]string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -1239,9 +1245,9 @@ ListVersions List versions under subject
 
 Retrieves a list of versions registered under the specified subject.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Name of the subject
- @return ApiListVersionsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Name of the subject
+	@return ApiListVersionsRequest
 */
 func (a *SubjectsV1ApiService) ListVersions(ctx _context.Context, subject string) ApiListVersionsRequest {
 	return ApiListVersionsRequest{
@@ -1252,7 +1258,8 @@ func (a *SubjectsV1ApiService) ListVersions(ctx _context.Context, subject string
 }
 
 // Execute executes the request
-//  @return []int32
+//
+//	@return []int32
 func (a *SubjectsV1ApiService) ListVersionsExecute(r ApiListVersionsRequest) ([]int32, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -1418,9 +1425,9 @@ LookUpSchemaUnderSubject Lookup schema under subject
 
 Check if a schema has already been registered under the specified subject. If so, this returns the schema string along with its globally unique identifier, its version under this subject and the subject name.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Subject under which the schema will be registered
- @return ApiLookUpSchemaUnderSubjectRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Subject under which the schema will be registered
+	@return ApiLookUpSchemaUnderSubjectRequest
 */
 func (a *SubjectsV1ApiService) LookUpSchemaUnderSubject(ctx _context.Context, subject string) ApiLookUpSchemaUnderSubjectRequest {
 	return ApiLookUpSchemaUnderSubjectRequest{
@@ -1431,7 +1438,8 @@ func (a *SubjectsV1ApiService) LookUpSchemaUnderSubject(ctx _context.Context, su
 }
 
 // Execute executes the request
-//  @return Schema
+//
+//	@return Schema
 func (a *SubjectsV1ApiService) LookUpSchemaUnderSubjectExecute(r ApiLookUpSchemaUnderSubjectRequest) (Schema, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -1600,9 +1608,9 @@ Register a new schema under the specified subject. If successfully registered, t
 A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config
 When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Name of the subject
- @return ApiRegisterRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Name of the subject
+	@return ApiRegisterRequest
 */
 func (a *SubjectsV1ApiService) Register(ctx _context.Context, subject string) ApiRegisterRequest {
 	return ApiRegisterRequest{
@@ -1613,7 +1621,8 @@ func (a *SubjectsV1ApiService) Register(ctx _context.Context, subject string) Ap
 }
 
 // Execute executes the request
-//  @return RegisterSchemaResponse
+//
+//	@return RegisterSchemaResponse
 func (a *SubjectsV1ApiService) RegisterExecute(r ApiRegisterRequest) (RegisterSchemaResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost

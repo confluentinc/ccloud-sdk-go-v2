@@ -44,6 +44,7 @@ type Kek struct {
 	Shared   *bool              `json:"shared,omitempty"`
 	Ts       *int64             `json:"ts,omitempty"`
 	Deleted  *bool              `json:"deleted,omitempty"`
+	Error    *ErrorMessage      `json:"error,omitempty"`
 }
 
 // NewKek instantiates a new Kek object
@@ -319,6 +320,38 @@ func (o *Kek) SetDeleted(v bool) {
 	o.Deleted = &v
 }
 
+// GetError returns the Error field value if set, zero value otherwise.
+func (o *Kek) GetError() ErrorMessage {
+	if o == nil || o.Error == nil {
+		var ret ErrorMessage
+		return ret
+	}
+	return *o.Error
+}
+
+// GetErrorOk returns a tuple with the Error field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Kek) GetErrorOk() (*ErrorMessage, bool) {
+	if o == nil || o.Error == nil {
+		return nil, false
+	}
+	return o.Error, true
+}
+
+// HasError returns a boolean if a field has been set.
+func (o *Kek) HasError() bool {
+	if o != nil && o.Error != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetError gets a reference to the given ErrorMessage and assigns it to the Error field.
+func (o *Kek) SetError(v ErrorMessage) {
+	o.Error = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *Kek) Redact() {
 	o.recurseRedact(o.Name)
@@ -329,6 +362,7 @@ func (o *Kek) Redact() {
 	o.recurseRedact(o.Shared)
 	o.recurseRedact(o.Ts)
 	o.recurseRedact(o.Deleted)
+	o.recurseRedact(o.Error)
 }
 
 func (o *Kek) recurseRedact(v interface{}) {
@@ -386,6 +420,9 @@ func (o Kek) MarshalJSON() ([]byte, error) {
 	}
 	if o.Deleted != nil {
 		toSerialize["deleted"] = o.Deleted
+	}
+	if o.Error != nil {
+		toSerialize["error"] = o.Error
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

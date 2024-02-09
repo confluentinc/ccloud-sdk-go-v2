@@ -106,10 +106,10 @@ TestCompatibilityBySubjectName Test schema compatibility against a particular sc
 
 Test input schema against a particular version of a subject's schema for compatibility. The compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject's compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Subject of the schema version against which compatibility is to be tested
- @param version Version of the subject's schema against which compatibility is to be tested. Valid values for versionId are between [1,2^31-1] or the string \"latest\".\"latest\" checks compatibility of the input schema with the last registered schema under the specified subject
- @return ApiTestCompatibilityBySubjectNameRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Subject of the schema version against which compatibility is to be tested
+	@param version Version of the subject's schema against which compatibility is to be tested. Valid values for versionId are between [1,2^31-1] or the string \"latest\".\"latest\" checks compatibility of the input schema with the last registered schema under the specified subject
+	@return ApiTestCompatibilityBySubjectNameRequest
 */
 func (a *CompatibilityV1ApiService) TestCompatibilityBySubjectName(ctx _context.Context, subject string, version string) ApiTestCompatibilityBySubjectNameRequest {
 	return ApiTestCompatibilityBySubjectNameRequest{
@@ -121,7 +121,8 @@ func (a *CompatibilityV1ApiService) TestCompatibilityBySubjectName(ctx _context.
 }
 
 // Execute executes the request
-//  @return CompatibilityCheckResponse
+//
+//	@return CompatibilityCheckResponse
 func (a *CompatibilityV1ApiService) TestCompatibilityBySubjectNameExecute(r ApiTestCompatibilityBySubjectNameRequest) (CompatibilityCheckResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -296,9 +297,9 @@ TestCompatibilityForSubject Test schema compatibility against all schemas under 
 
 Test input schema against a subject's schemas for compatibility, based on the configured compatibility level of the subject. In other words, it will perform the same compatibility check as register for that subject. The compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject's compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Subject of the schema version against which compatibility is to be tested
- @return ApiTestCompatibilityForSubjectRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Subject of the schema version against which compatibility is to be tested
+	@return ApiTestCompatibilityForSubjectRequest
 */
 func (a *CompatibilityV1ApiService) TestCompatibilityForSubject(ctx _context.Context, subject string) ApiTestCompatibilityForSubjectRequest {
 	return ApiTestCompatibilityForSubjectRequest{
@@ -309,7 +310,8 @@ func (a *CompatibilityV1ApiService) TestCompatibilityForSubject(ctx _context.Con
 }
 
 // Execute executes the request
-//  @return CompatibilityCheckResponse
+//
+//	@return CompatibilityCheckResponse
 func (a *CompatibilityV1ApiService) TestCompatibilityForSubjectExecute(r ApiTestCompatibilityForSubjectRequest) (CompatibilityCheckResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
