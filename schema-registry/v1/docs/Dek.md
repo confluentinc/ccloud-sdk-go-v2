@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **KeyMaterial** | Pointer to **string** |  | [optional] 
 **Ts** | Pointer to **int64** |  | [optional] 
 **Deleted** | Pointer to **bool** |  | [optional] 
-**Error** | Pointer to [**ErrorMessage**](ErrorMessage.md) |  | [optional] 
+**Message** | Pointer to **string** | Detailed error message | [optional] 
 
 ## Methods
 
@@ -233,30 +233,30 @@ SetDeleted sets Deleted field to given value.
 
 HasDeleted returns a boolean if a field has been set.
 
-### GetError
+### GetMessage
 
-`func (o *Dek) GetError() ErrorMessage`
+`func (o *Dek) GetMessage() string`
 
-GetError returns the Error field if non-nil, zero value otherwise.
+GetMessage returns the Message field if non-nil, zero value otherwise.
 
-### GetErrorOk
+### GetMessageOk
 
-`func (o *Dek) GetErrorOk() (*ErrorMessage, bool)`
+`func (o *Dek) GetMessageOk() (*string, bool)`
 
-GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
+GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetError
+### SetMessage
 
-`func (o *Dek) SetError(v ErrorMessage)`
+`func (o *Dek) SetMessage(v string)`
 
-SetError sets Error field to given value.
+SetMessage sets Message field to given value.
 
-### HasError
+### HasMessage
 
-`func (o *Dek) HasError() bool`
+`func (o *Dek) HasMessage() bool`
 
-HasError returns a boolean if a field has been set.
+HasMessage returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

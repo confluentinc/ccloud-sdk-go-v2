@@ -44,7 +44,8 @@ type Kek struct {
 	Shared   *bool              `json:"shared,omitempty"`
 	Ts       *int64             `json:"ts,omitempty"`
 	Deleted  *bool              `json:"deleted,omitempty"`
-	Error    *ErrorMessage      `json:"error,omitempty"`
+	// Detailed error message
+	Message *string `json:"message,omitempty"`
 }
 
 // NewKek instantiates a new Kek object
@@ -320,36 +321,36 @@ func (o *Kek) SetDeleted(v bool) {
 	o.Deleted = &v
 }
 
-// GetError returns the Error field value if set, zero value otherwise.
-func (o *Kek) GetError() ErrorMessage {
-	if o == nil || o.Error == nil {
-		var ret ErrorMessage
+// GetMessage returns the Message field value if set, zero value otherwise.
+func (o *Kek) GetMessage() string {
+	if o == nil || o.Message == nil {
+		var ret string
 		return ret
 	}
-	return *o.Error
+	return *o.Message
 }
 
-// GetErrorOk returns a tuple with the Error field value if set, nil otherwise
+// GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Kek) GetErrorOk() (*ErrorMessage, bool) {
-	if o == nil || o.Error == nil {
+func (o *Kek) GetMessageOk() (*string, bool) {
+	if o == nil || o.Message == nil {
 		return nil, false
 	}
-	return o.Error, true
+	return o.Message, true
 }
 
-// HasError returns a boolean if a field has been set.
-func (o *Kek) HasError() bool {
-	if o != nil && o.Error != nil {
+// HasMessage returns a boolean if a field has been set.
+func (o *Kek) HasMessage() bool {
+	if o != nil && o.Message != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetError gets a reference to the given ErrorMessage and assigns it to the Error field.
-func (o *Kek) SetError(v ErrorMessage) {
-	o.Error = &v
+// SetMessage gets a reference to the given string and assigns it to the Message field.
+func (o *Kek) SetMessage(v string) {
+	o.Message = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
@@ -362,7 +363,7 @@ func (o *Kek) Redact() {
 	o.recurseRedact(o.Shared)
 	o.recurseRedact(o.Ts)
 	o.recurseRedact(o.Deleted)
-	o.recurseRedact(o.Error)
+	o.recurseRedact(o.Message)
 }
 
 func (o *Kek) recurseRedact(v interface{}) {
@@ -421,8 +422,8 @@ func (o Kek) MarshalJSON() ([]byte, error) {
 	if o.Deleted != nil {
 		toSerialize["deleted"] = o.Deleted
 	}
-	if o.Error != nil {
-		toSerialize["error"] = o.Error
+	if o.Message != nil {
+		toSerialize["message"] = o.Message
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
