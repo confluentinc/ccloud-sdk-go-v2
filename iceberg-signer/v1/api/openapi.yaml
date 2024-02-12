@@ -1,0 +1,324 @@
+openapi: 3.0.3
+info:
+  description: Defines the specification for the S3 Signer API.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  title: Apache Iceberg S3 Signer API
+  version: 0.0.1
+servers:
+- description: Server URL when the port can be inferred from the scheme
+  url: "{scheme}://{host}/{basePath}"
+  variables:
+    scheme:
+      default: https
+      description: "The scheme of the URI, either http or https."
+    host:
+      default: localhost
+      description: The host address for the specified server
+    basePath:
+      default: ""
+      description: Optional prefix to be prepended to all routes
+- description: "Generic base server URL, with all parts configurable"
+  url: "{scheme}://{host}:{port}/{basePath}"
+  variables:
+    scheme:
+      default: https
+      description: "The scheme of the URI, either http or https."
+    host:
+      default: localhost
+      description: The host address for the specified server
+    port:
+      default: "443"
+      description: The port used when addressing the host
+    basePath:
+      default: ""
+      description: Optional prefix to be appended to all routes
+paths:
+  /v1/aws/s3/sign:
+    post:
+      operationId: signS3Request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/S3SignRequest'
+        description: The request containing the headers to be signed
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/signS3Request_200_response'
+          description: "The response containing signed & unsigned headers. The server\
+            \ will also send a Cache-Control header, indicating whether the response\
+            \ can be cached (Cache-Control = [\"private\"]) or not (Cache-Control\
+            \ = [\"no-cache\"])."
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Malformed request
+                  type: BadRequestException
+                  code: 400
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: "Indicates a bad request error. It could be caused by an unexpected\
+            \ request body format or other forms of request validation failure, such\
+            \ as invalid json. Usually serves application/json content, although in\
+            \ some cases simple text/plain content might be returned by the server's\
+            \ middleware."
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Not authorized to make this request
+                  type: NotAuthorizedException
+                  code: 401
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: Unauthorized. Authentication is required and has failed or
+            has not yet been provided.
+        "403":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Not authorized to make this request
+                  type: NotAuthorizedException
+                  code: 403
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: Forbidden. Authenticated user does not have the necessary permissions.
+        "419":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Credentials have timed out
+                  type: AuthenticationTimeoutException
+                  code: 419
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: "Credentials have timed out. If possible, the client should\
+            \ refresh credentials and retry."
+        "503":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Slow down
+                  type: SlowDownException
+                  code: 503
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: |-
+            The service is not ready to handle the request. The client should wait and retry.
+
+            The service may additionally send a Retry-After header to indicate when to retry.
+        "5XX":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Internal Server Error
+                  type: InternalServerError
+                  code: 500
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: A server-side problem that might not be addressable from the
+            client side. Used for server 5xx errors without more specific documentation
+            in individual routes.
+      summary: Remotely signs S3 requests
+      tags:
+      - S3 Signer API
+components:
+  responses:
+    S3SignResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/signS3Request_200_response'
+      description: "The response containing signed & unsigned headers. The server\
+        \ will also send a Cache-Control header, indicating whether the response can\
+        \ be cached (Cache-Control = [\"private\"]) or not (Cache-Control = [\"no-cache\"\
+        ])."
+    BadRequestErrorResponse:
+      content:
+        application/json:
+          example:
+            error:
+              message: Malformed request
+              type: BadRequestException
+              code: 400
+          schema:
+            $ref: '#/components/schemas/IcebergErrorResponse'
+      description: "Indicates a bad request error. It could be caused by an unexpected\
+        \ request body format or other forms of request validation failure, such as\
+        \ invalid json. Usually serves application/json content, although in some\
+        \ cases simple text/plain content might be returned by the server's middleware."
+    UnauthorizedResponse:
+      content:
+        application/json:
+          example:
+            error:
+              message: Not authorized to make this request
+              type: NotAuthorizedException
+              code: 401
+          schema:
+            $ref: '#/components/schemas/IcebergErrorResponse'
+      description: Unauthorized. Authentication is required and has failed or has
+        not yet been provided.
+    ForbiddenResponse:
+      content:
+        application/json:
+          example:
+            error:
+              message: Not authorized to make this request
+              type: NotAuthorizedException
+              code: 403
+          schema:
+            $ref: '#/components/schemas/IcebergErrorResponse'
+      description: Forbidden. Authenticated user does not have the necessary permissions.
+    AuthenticationTimeoutResponse:
+      content:
+        application/json:
+          example:
+            error:
+              message: Credentials have timed out
+              type: AuthenticationTimeoutException
+              code: 419
+          schema:
+            $ref: '#/components/schemas/IcebergErrorResponse'
+      description: "Credentials have timed out. If possible, the client should refresh\
+        \ credentials and retry."
+    ServiceUnavailableResponse:
+      content:
+        application/json:
+          example:
+            error:
+              message: Slow down
+              type: SlowDownException
+              code: 503
+          schema:
+            $ref: '#/components/schemas/IcebergErrorResponse'
+      description: |-
+        The service is not ready to handle the request. The client should wait and retry.
+
+        The service may additionally send a Retry-After header to indicate when to retry.
+    ServerErrorResponse:
+      content:
+        application/json:
+          example:
+            error:
+              message: Internal Server Error
+              type: InternalServerError
+              code: 500
+          schema:
+            $ref: '#/components/schemas/IcebergErrorResponse'
+      description: A server-side problem that might not be addressable from the client
+        side. Used for server 5xx errors without more specific documentation in individual
+        routes.
+  schemas:
+    S3Headers:
+      additionalProperties:
+        items:
+          type: string
+        type: array
+      type: object
+    S3SignRequest:
+      example:
+        headers: null
+        method: PUT
+        region: region
+        body: body
+        uri: uri
+        properties:
+          key: properties
+      properties:
+        region:
+          type: string
+        uri:
+          type: string
+        method:
+          enum:
+          - PUT
+          - GET
+          - HEAD
+          - POST
+          - DELETE
+          - PATCH
+          - OPTIONS
+          type: string
+        headers:
+          $ref: '#/components/schemas/S3Headers'
+        properties:
+          additionalProperties:
+            type: string
+          type: object
+        body:
+          description: Optional body of the S3 request to send to the signing API.
+            This should only be populated for S3 requests which do not have the relevant
+            data in the URI itself (e.g. DeleteObjects requests)
+          type: string
+      required:
+      - headers
+      - method
+      - region
+      - uri
+    ErrorModel:
+      description: JSON error payload returned in a response with further details
+        on the error
+      properties:
+        message:
+          description: Human-readable error message
+          type: string
+        type:
+          description: Internal type definition of the error
+          example: NoSuchNamespaceException
+          type: string
+        code:
+          description: HTTP response code
+          example: 404
+          maximum: 600
+          minimum: 400
+          type: integer
+        stack:
+          items:
+            type: string
+          type: array
+      required:
+      - code
+      - message
+      - type
+      type: object
+    IcebergErrorResponse:
+      additionalProperties: false
+      description: JSON wrapper for all error responses (non-2xx)
+      example:
+        error:
+          message: The server does not support this operation
+          type: UnsupportedOperationException
+          code: 406
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorModel'
+      required:
+      - error
+      type: object
+    signS3Request_200_response:
+      example:
+        headers: null
+        uri: uri
+      properties:
+        uri:
+          type: string
+        headers:
+          $ref: '#/components/schemas/S3Headers'
+      required:
+      - headers
+      - uri
+      type: object

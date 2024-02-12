@@ -1,0 +1,2351 @@
+openapi: 3.0.3
+info:
+  description: "Defines the specification for the first version of the REST Catalog\
+    \ API. Implementations should ideally support both Iceberg table specs v1 and\
+    \ v2, with priority given to v2."
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  title: Apache Iceberg REST Catalog API
+  version: 0.0.1
+servers:
+- description: Server URL when the port can be inferred from the scheme
+  url: "{scheme}://{host}/{basePath}"
+  variables:
+    scheme:
+      default: https
+      description: "The scheme of the URI, either http or https."
+    host:
+      default: localhost
+      description: The host address for the specified server
+    basePath:
+      default: ""
+      description: Optional prefix to be appended to all routes
+- description: "Generic base server URL, with all parts configurable"
+  url: "{scheme}://{host}:{port}/{basePath}"
+  variables:
+    scheme:
+      default: https
+      description: "The scheme of the URI, either http or https."
+    host:
+      default: localhost
+      description: The host address for the specified server
+    port:
+      default: "443"
+      description: The port used when addressing the host
+    basePath:
+      default: ""
+      description: Optional prefix to be appended to all routes
+security:
+- OAuth2:
+  - catalog
+- BearerAuth: []
+paths:
+  /v1/config:
+    get:
+      description: " All REST clients should first call this route to get catalog\
+        \ configuration properties from the server to configure the catalog and its\
+        \ HTTP client. Configuration from the server consists of two sets of key/value\
+        \ pairs.\n- defaults -  properties that should be used as default configuration;\
+        \ applied before client configuration\n- overrides - properties that should\
+        \ be used to override client configuration; applied after defaults and client\
+        \ configuration\n\nCatalog configuration is constructed by setting the defaults,\
+        \ then client- provided configuration, and finally overrides. The final property\
+        \ set is then used to configure the catalog.\n\nFor example, a default configuration\
+        \ property might set the size of the client pool, which can be replaced with\
+        \ a client-specific setting. An override might be used to set the warehouse\
+        \ location, which is stored on the server rather than in client configuration.\n\
+        \nCommon catalog configuration settings are documented at https://iceberg.apache.org/configuration/#catalog-properties "
+      operationId: getConfig
+      parameters:
+      - description: Warehouse location or identifier to request from the service
+        explode: true
+        in: query
+        name: warehouse
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                overrides:
+                  warehouse: s3://bucket/warehouse/
+                defaults:
+                  clients: "4"
+              schema:
+                $ref: '#/components/schemas/CatalogConfig'
+          description: Server specified configuration values.
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Malformed request
+                  type: BadRequestException
+                  code: 400
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: "Indicates a bad request error. It could be caused by an unexpected\
+            \ request body format or other forms of request validation failure, such\
+            \ as invalid json. Usually serves application/json content, although in\
+            \ some cases simple text/plain content might be returned by the server's\
+            \ middleware."
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Not authorized to make this request
+                  type: NotAuthorizedException
+                  code: 401
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: Unauthorized. Authentication is required and has failed or
+            has not yet been provided.
+        "403":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Not authorized to make this request
+                  type: NotAuthorizedException
+                  code: 403
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: Forbidden. Authenticated user does not have the necessary permissions.
+        "419":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Credentials have timed out
+                  type: AuthenticationTimeoutException
+                  code: 419
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: "Credentials have timed out. If possible, the client should\
+            \ refresh credentials and retry."
+        "503":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Slow down
+                  type: SlowDownException
+                  code: 503
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: |-
+            The service is not ready to handle the request. The client should wait and retry.
+
+            The service may additionally send a Retry-After header to indicate when to retry.
+        "5XX":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Internal Server Error
+                  type: InternalServerError
+                  code: 500
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: A server-side problem that might not be addressable from the
+            client side. Used for server 5xx errors without more specific documentation
+            in individual routes.
+      summary: List all catalog configuration settings
+      tags:
+      - Configuration API
+  /v1/oauth/tokens:
+    post:
+      description: |-
+        Exchange credentials for a token using the OAuth2 client credentials flow or token exchange.
+
+        This endpoint is used for three purposes -
+        1. To exchange client credentials (client ID and secret) for an access token This uses the client credentials flow.
+        2. To exchange a client token and an identity token for a more specific access token This uses the token exchange flow.
+        3. To exchange an access token for one with the same claims and a refreshed expiration period This uses the token exchange flow.
+
+        For example, a catalog client may be configured with client credentials from the OAuth2 Authorization flow. This client would exchange its client ID and secret for an access token using the client credentials request with this endpoint (1). Subsequent requests would then use that access token.
+
+        Some clients may also handle sessions that have additional user context. These clients would use the token exchange flow to exchange a user token (the "subject" token) from the session for a more specific access token for that user, using the catalog's access token as the "actor" token (2). The user ID token is the "subject" token and can be any token type allowed by the OAuth2 token exchange flow, including a unsecured JWT token with a sub claim. This request should use the catalog's bearer token in the "Authorization" header.
+
+        Clients may also use the token exchange flow to refresh a token that is about to expire by sending a token exchange request (3). The request's "subject" token should be the expiring token. This request should use the subject token in the "Authorization" header.
+      operationId: getToken
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAuthTokenRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthTokenResponse'
+          description: OAuth2 token response for client credentials or token exchange
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthError'
+          description: OAuth2 error response
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthError'
+          description: OAuth2 error response
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthError'
+          description: OAuth2 error response
+      summary: Get a token using an OAuth2 flow
+      tags:
+      - OAuth2 API
+  /v1/{prefix}/namespaces:
+    get:
+      description: "List all namespaces at a certain level, optionally starting from\
+        \ a given parent namespace. If table accounting.tax.paid.info exists, using\
+        \ 'SELECT NAMESPACE IN accounting' would translate into `GET /namespaces?parent=accounting`\
+        \ and must return a namespace, [\"accounting\", \"tax\"] only. Using 'SELECT\
+        \ NAMESPACE IN accounting.tax' would translate into `GET /namespaces?parent=accounting%1Ftax`\
+        \ and must return a namespace, [\"accounting\", \"tax\", \"paid\"]. If `parent`\
+        \ is not provided, all top-level namespaces should be listed."
+      operationId: listNamespaces
+      parameters:
+      - description: An optional prefix in the path
+        explode: false
+        in: path
+        name: prefix
+        required: true
+        schema:
+          type: string
+        style: simple
+      - allowEmptyValue: true
+        description: "An optional namespace, underneath which to list namespaces.\
+          \ If not provided or empty, all top-level namespaces should be listed. If\
+          \ parent is a multipart namespace, the parts must be separated by the unit\
+          \ separator (`0x1F`) byte."
+        example: accounting%1Ftax
+        explode: true
+        in: query
+        name: parent
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                NonEmptyResponse:
+                  $ref: '#/components/examples/ListNamespacesNonEmptyExample'
+                EmptyResponse:
+                  $ref: '#/components/examples/ListNamespacesEmptyExample'
+              schema:
+                $ref: '#/components/schemas/ListNamespacesResponse'
+          description: A list of namespaces
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Malformed request
+                  type: BadRequestException
+                  code: 400
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: "Indicates a bad request error. It could be caused by an unexpected\
+            \ request body format or other forms of request validation failure, such\
+            \ as invalid json. Usually serves application/json content, although in\
+            \ some cases simple text/plain content might be returned by the server's\
+            \ middleware."
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Not authorized to make this request
+                  type: NotAuthorizedException
+                  code: 401
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: Unauthorized. Authentication is required and has failed or
+            has not yet been provided.
+        "403":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Not authorized to make this request
+                  type: NotAuthorizedException
+                  code: 403
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: Forbidden. Authenticated user does not have the necessary permissions.
+        "404":
+          content:
+            application/json:
+              examples:
+                NoSuchNamespaceExample:
+                  $ref: '#/components/examples/NoSuchNamespaceError'
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: Not Found - Namespace provided in the `parent` query parameter
+            is not found.
+        "419":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Credentials have timed out
+                  type: AuthenticationTimeoutException
+                  code: 419
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: "Credentials have timed out. If possible, the client should\
+            \ refresh credentials and retry."
+        "503":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Slow down
+                  type: SlowDownException
+                  code: 503
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: |-
+            The service is not ready to handle the request. The client should wait and retry.
+
+            The service may additionally send a Retry-After header to indicate when to retry.
+        "5XX":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Internal Server Error
+                  type: InternalServerError
+                  code: 500
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: A server-side problem that might not be addressable from the
+            client side. Used for server 5xx errors without more specific documentation
+            in individual routes.
+      summary: "List namespaces, optionally providing a parent namespace to list underneath"
+      tags:
+      - Catalog API
+  /v1/{prefix}/namespaces/{namespace}:
+    get:
+      description: Return all stored metadata properties for a given namespace
+      operationId: loadNamespaceMetadata
+      parameters:
+      - description: An optional prefix in the path
+        explode: false
+        in: path
+        name: prefix
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: A namespace identifier as a single string. Multipart namespace
+          parts should be separated by the unit separator (`0x1F`) byte.
+        examples:
+          singlepart_namespace:
+            value: accounting
+          multipart_namespace:
+            value: accounting%1Ftax
+        explode: false
+        in: path
+        name: namespace
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetNamespaceResponse'
+          description: "Returns a namespace, as well as any properties stored on the\
+            \ namespace if namespace properties are supported by the server."
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Malformed request
+                  type: BadRequestException
+                  code: 400
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: "Indicates a bad request error. It could be caused by an unexpected\
+            \ request body format or other forms of request validation failure, such\
+            \ as invalid json. Usually serves application/json content, although in\
+            \ some cases simple text/plain content might be returned by the server's\
+            \ middleware."
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Not authorized to make this request
+                  type: NotAuthorizedException
+                  code: 401
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: Unauthorized. Authentication is required and has failed or
+            has not yet been provided.
+        "403":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Not authorized to make this request
+                  type: NotAuthorizedException
+                  code: 403
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: Forbidden. Authenticated user does not have the necessary permissions.
+        "404":
+          content:
+            application/json:
+              examples:
+                NoSuchNamespaceExample:
+                  $ref: '#/components/examples/NoSuchNamespaceError'
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: Not Found - Namespace not found
+        "419":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Credentials have timed out
+                  type: AuthenticationTimeoutException
+                  code: 419
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: "Credentials have timed out. If possible, the client should\
+            \ refresh credentials and retry."
+        "503":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Slow down
+                  type: SlowDownException
+                  code: 503
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: |-
+            The service is not ready to handle the request. The client should wait and retry.
+
+            The service may additionally send a Retry-After header to indicate when to retry.
+        "5XX":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Internal Server Error
+                  type: InternalServerError
+                  code: 500
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: A server-side problem that might not be addressable from the
+            client side. Used for server 5xx errors without more specific documentation
+            in individual routes.
+      summary: Load the metadata properties for a namespace
+      tags:
+      - Catalog API
+    head:
+      description: Check if a namespace exists. The response does not contain a body.
+      operationId: namespaceExists
+      parameters:
+      - description: An optional prefix in the path
+        explode: false
+        in: path
+        name: prefix
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: A namespace identifier as a single string. Multipart namespace
+          parts should be separated by the unit separator (`0x1F`) byte.
+        examples:
+          singlepart_namespace:
+            value: accounting
+          multipart_namespace:
+            value: accounting%1Ftax
+        explode: false
+        in: path
+        name: namespace
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: "Success, no content"
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Malformed request
+                  type: BadRequestException
+                  code: 400
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: "Indicates a bad request error. It could be caused by an unexpected\
+            \ request body format or other forms of request validation failure, such\
+            \ as invalid json. Usually serves application/json content, although in\
+            \ some cases simple text/plain content might be returned by the server's\
+            \ middleware."
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Not authorized to make this request
+                  type: NotAuthorizedException
+                  code: 401
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: Unauthorized. Authentication is required and has failed or
+            has not yet been provided.
+        "403":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Not authorized to make this request
+                  type: NotAuthorizedException
+                  code: 403
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: Forbidden. Authenticated user does not have the necessary permissions.
+        "404":
+          content:
+            application/json:
+              examples:
+                NoSuchNamespaceExample:
+                  $ref: '#/components/examples/NoSuchNamespaceError'
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: Not Found - Namespace not found
+        "419":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Credentials have timed out
+                  type: AuthenticationTimeoutException
+                  code: 419
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: "Credentials have timed out. If possible, the client should\
+            \ refresh credentials and retry."
+        "503":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Slow down
+                  type: SlowDownException
+                  code: 503
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: |-
+            The service is not ready to handle the request. The client should wait and retry.
+
+            The service may additionally send a Retry-After header to indicate when to retry.
+        "5XX":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Internal Server Error
+                  type: InternalServerError
+                  code: 500
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: A server-side problem that might not be addressable from the
+            client side. Used for server 5xx errors without more specific documentation
+            in individual routes.
+      summary: Check if a namespace exists
+      tags:
+      - Catalog API
+  /v1/{prefix}/namespaces/{namespace}/tables:
+    get:
+      description: Return all table identifiers under this namespace
+      operationId: listTables
+      parameters:
+      - description: An optional prefix in the path
+        explode: false
+        in: path
+        name: prefix
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: A namespace identifier as a single string. Multipart namespace
+          parts should be separated by the unit separator (`0x1F`) byte.
+        examples:
+          singlepart_namespace:
+            value: accounting
+          multipart_namespace:
+            value: accounting%1Ftax
+        explode: false
+        in: path
+        name: namespace
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                ListTablesResponseNonEmpty:
+                  $ref: '#/components/examples/ListTablesNonEmptyExample'
+                ListTablesResponseEmpty:
+                  $ref: '#/components/examples/ListTablesEmptyExample'
+              schema:
+                $ref: '#/components/schemas/ListTablesResponse'
+          description: A list of table identifiers
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Malformed request
+                  type: BadRequestException
+                  code: 400
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: "Indicates a bad request error. It could be caused by an unexpected\
+            \ request body format or other forms of request validation failure, such\
+            \ as invalid json. Usually serves application/json content, although in\
+            \ some cases simple text/plain content might be returned by the server's\
+            \ middleware."
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Not authorized to make this request
+                  type: NotAuthorizedException
+                  code: 401
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: Unauthorized. Authentication is required and has failed or
+            has not yet been provided.
+        "403":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Not authorized to make this request
+                  type: NotAuthorizedException
+                  code: 403
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: Forbidden. Authenticated user does not have the necessary permissions.
+        "404":
+          content:
+            application/json:
+              examples:
+                NamespaceNotFound:
+                  $ref: '#/components/examples/NoSuchNamespaceError'
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: Not Found - The namespace specified does not exist
+        "419":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Credentials have timed out
+                  type: AuthenticationTimeoutException
+                  code: 419
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: "Credentials have timed out. If possible, the client should\
+            \ refresh credentials and retry."
+        "503":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Slow down
+                  type: SlowDownException
+                  code: 503
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: |-
+            The service is not ready to handle the request. The client should wait and retry.
+
+            The service may additionally send a Retry-After header to indicate when to retry.
+        "5XX":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Internal Server Error
+                  type: InternalServerError
+                  code: 500
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: A server-side problem that might not be addressable from the
+            client side. Used for server 5xx errors without more specific documentation
+            in individual routes.
+      summary: List all table identifiers underneath a given namespace
+      tags:
+      - Catalog API
+  /v1/{prefix}/namespaces/{namespace}/tables/{table}:
+    get:
+      description: |-
+        Load a table from the catalog.
+
+        The response contains both configuration and table metadata. The configuration, if non-empty is used as additional configuration for the table that overrides catalog configuration. For example, this configuration may change the FileIO implementation to be used for the table.
+
+        The response also contains the table's full metadata, matching the table metadata JSON file.
+
+        The catalog configuration may contain credentials that should be used for subsequent requests for the table. The configuration key "token" is used to pass an access token to be used as a bearer token for table requests. Otherwise, a token may be passed using a RFC 8693 token type as a configuration key. For example, "urn:ietf:params:oauth:token-type:jwt=<JWT-token>".
+      operationId: loadTable
+      parameters:
+      - description: An optional prefix in the path
+        explode: false
+        in: path
+        name: prefix
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: A namespace identifier as a single string. Multipart namespace
+          parts should be separated by the unit separator (`0x1F`) byte.
+        examples:
+          singlepart_namespace:
+            value: accounting
+          multipart_namespace:
+            value: accounting%1Ftax
+        explode: false
+        in: path
+        name: namespace
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: A table name
+        example: sales
+        explode: false
+        in: path
+        name: table
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: |
+          Optional signal to the server that the client supports delegated access via a comma-separated list of access mechanisms.  The server may choose to supply access via any or none of the requested mechanisms.
+
+          Specific properties and handling for `vended-credentials` is documented in the `LoadTableResult` schema section of this spec document.
+
+          The protocol and specification for `remote-signing` is documented in the `s3-signer-open-api.yaml` OpenApi spec in the `aws` module.
+        example: "vended-credentials,remote-signing"
+        explode: false
+        in: header
+        name: X-Iceberg-Access-Delegation
+        required: false
+        schema:
+          enum:
+          - vended-credentials
+          - remote-signing
+          type: string
+        style: simple
+      - description: |-
+          The snapshots to return in the body of the metadata. Setting the value to `all` would return the full set of snapshots currently valid for the table. Setting the value to `refs` would load all snapshots referenced by branches or tags.
+          Default if no param is provided is `all`.
+        explode: true
+        in: query
+        name: snapshots
+        required: false
+        schema:
+          enum:
+          - all
+          - refs
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoadTableResult'
+          description: Table metadata result when loading a table
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Malformed request
+                  type: BadRequestException
+                  code: 400
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: "Indicates a bad request error. It could be caused by an unexpected\
+            \ request body format or other forms of request validation failure, such\
+            \ as invalid json. Usually serves application/json content, although in\
+            \ some cases simple text/plain content might be returned by the server's\
+            \ middleware."
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Not authorized to make this request
+                  type: NotAuthorizedException
+                  code: 401
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: Unauthorized. Authentication is required and has failed or
+            has not yet been provided.
+        "403":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Not authorized to make this request
+                  type: NotAuthorizedException
+                  code: 403
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: Forbidden. Authenticated user does not have the necessary permissions.
+        "404":
+          content:
+            application/json:
+              examples:
+                TableToLoadDoesNotExist:
+                  $ref: '#/components/examples/NoSuchTableError'
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: "Not Found - NoSuchTableException, table to load does not exist"
+        "419":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Credentials have timed out
+                  type: AuthenticationTimeoutException
+                  code: 419
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: "Credentials have timed out. If possible, the client should\
+            \ refresh credentials and retry."
+        "503":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Slow down
+                  type: SlowDownException
+                  code: 503
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: |-
+            The service is not ready to handle the request. The client should wait and retry.
+
+            The service may additionally send a Retry-After header to indicate when to retry.
+        "5XX":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Internal Server Error
+                  type: InternalServerError
+                  code: 500
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: A server-side problem that might not be addressable from the
+            client side. Used for server 5xx errors without more specific documentation
+            in individual routes.
+      summary: Load a table from the catalog
+      tags:
+      - Catalog API
+    head:
+      description: Check if a table exists within a given namespace. The response
+        does not contain a body.
+      operationId: tableExists
+      parameters:
+      - description: An optional prefix in the path
+        explode: false
+        in: path
+        name: prefix
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: A namespace identifier as a single string. Multipart namespace
+          parts should be separated by the unit separator (`0x1F`) byte.
+        examples:
+          singlepart_namespace:
+            value: accounting
+          multipart_namespace:
+            value: accounting%1Ftax
+        explode: false
+        in: path
+        name: namespace
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: A table name
+        example: sales
+        explode: false
+        in: path
+        name: table
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: "Success, no content"
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Malformed request
+                  type: BadRequestException
+                  code: 400
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: "Indicates a bad request error. It could be caused by an unexpected\
+            \ request body format or other forms of request validation failure, such\
+            \ as invalid json. Usually serves application/json content, although in\
+            \ some cases simple text/plain content might be returned by the server's\
+            \ middleware."
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Not authorized to make this request
+                  type: NotAuthorizedException
+                  code: 401
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: Unauthorized. Authentication is required and has failed or
+            has not yet been provided.
+        "403":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Not authorized to make this request
+                  type: NotAuthorizedException
+                  code: 403
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: Forbidden. Authenticated user does not have the necessary permissions.
+        "404":
+          content:
+            application/json:
+              examples:
+                TableToLoadDoesNotExist:
+                  $ref: '#/components/examples/NoSuchTableError'
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: "Not Found - NoSuchTableException, Table not found"
+        "419":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Credentials have timed out
+                  type: AuthenticationTimeoutException
+                  code: 419
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: "Credentials have timed out. If possible, the client should\
+            \ refresh credentials and retry."
+        "503":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Slow down
+                  type: SlowDownException
+                  code: 503
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: |-
+            The service is not ready to handle the request. The client should wait and retry.
+
+            The service may additionally send a Retry-After header to indicate when to retry.
+        "5XX":
+          content:
+            application/json:
+              example:
+                error:
+                  message: Internal Server Error
+                  type: InternalServerError
+                  code: 500
+              schema:
+                $ref: '#/components/schemas/IcebergErrorResponse'
+          description: A server-side problem that might not be addressable from the
+            client side. Used for server 5xx errors without more specific documentation
+            in individual routes.
+      summary: Check if a table exists
+      tags:
+      - Catalog API
+components:
+  examples:
+    ListTablesEmptyExample:
+      summary: An empty list for a namespace with no tables
+      value:
+        identifiers: []
+    ListNamespacesEmptyExample:
+      summary: An empty list of namespaces
+      value:
+        namespaces: []
+    ListNamespacesNonEmptyExample:
+      summary: A non-empty list of namespaces
+      value:
+        namespaces:
+        - - accounting
+          - tax
+        - - accounting
+          - credits
+    ListTablesNonEmptyExample:
+      summary: A non-empty list of table identifiers
+      value:
+        identifiers:
+        - namespace:
+          - accounting
+          - tax
+          name: paid
+        - namespace:
+          - accounting
+          - tax
+          name: owed
+    MultipartNamespaceAsPathVariable:
+      summary: "A multi-part namespace, as represented in a path parameter"
+      value: accounting%1Ftax
+    NamespaceAsPathVariable:
+      summary: "A single part namespace, as represented in a path paremeter"
+      value: accounting
+    NoSuchTableError:
+      summary: The requested table does not exist
+      value:
+        error:
+          message: The given table does not exist
+          type: NoSuchTableException
+          code: 404
+    NoSuchNamespaceError:
+      summary: The requested namespace does not exist
+      value:
+        error:
+          message: The given namespace does not exist
+          type: NoSuchNamespaceException
+          code: 404
+    UnprocessableEntityDuplicateKey:
+      summary: The request body either has the same key multiple times in what should
+        be a map with unique keys or the request body has keys in two or more fields
+        which should be disjoint sets.
+      value:
+        error:
+          message: The request cannot be processed as there is a key present multiple
+            times
+          type: UnprocessableEntityException
+          code: 422
+  parameters:
+    namespace:
+      description: A namespace identifier as a single string. Multipart namespace
+        parts should be separated by the unit separator (`0x1F`) byte.
+      examples:
+        singlepart_namespace:
+          value: accounting
+        multipart_namespace:
+          value: accounting%1Ftax
+      explode: false
+      in: path
+      name: namespace
+      required: true
+      schema:
+        type: string
+      style: simple
+    prefix:
+      description: An optional prefix in the path
+      explode: false
+      in: path
+      name: prefix
+      required: true
+      schema:
+        type: string
+      style: simple
+    table:
+      description: A table name
+      example: sales
+      explode: false
+      in: path
+      name: table
+      required: true
+      schema:
+        type: string
+      style: simple
+    data-access:
+      description: |
+        Optional signal to the server that the client supports delegated access via a comma-separated list of access mechanisms.  The server may choose to supply access via any or none of the requested mechanisms.
+
+        Specific properties and handling for `vended-credentials` is documented in the `LoadTableResult` schema section of this spec document.
+
+        The protocol and specification for `remote-signing` is documented in the `s3-signer-open-api.yaml` OpenApi spec in the `aws` module.
+      example: "vended-credentials,remote-signing"
+      explode: false
+      in: header
+      name: X-Iceberg-Access-Delegation
+      required: false
+      schema:
+        enum:
+        - vended-credentials
+        - remote-signing
+        type: string
+      style: simple
+  responses:
+    OAuthTokenResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OAuthTokenResponse'
+      description: OAuth2 token response for client credentials or token exchange
+    OAuthErrorResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OAuthError'
+      description: OAuth2 error response
+    BadRequestErrorResponse:
+      content:
+        application/json:
+          example:
+            error:
+              message: Malformed request
+              type: BadRequestException
+              code: 400
+          schema:
+            $ref: '#/components/schemas/IcebergErrorResponse'
+      description: "Indicates a bad request error. It could be caused by an unexpected\
+        \ request body format or other forms of request validation failure, such as\
+        \ invalid json. Usually serves application/json content, although in some\
+        \ cases simple text/plain content might be returned by the server's middleware."
+    UnauthorizedResponse:
+      content:
+        application/json:
+          example:
+            error:
+              message: Not authorized to make this request
+              type: NotAuthorizedException
+              code: 401
+          schema:
+            $ref: '#/components/schemas/IcebergErrorResponse'
+      description: Unauthorized. Authentication is required and has failed or has
+        not yet been provided.
+    ForbiddenResponse:
+      content:
+        application/json:
+          example:
+            error:
+              message: Not authorized to make this request
+              type: NotAuthorizedException
+              code: 403
+          schema:
+            $ref: '#/components/schemas/IcebergErrorResponse'
+      description: Forbidden. Authenticated user does not have the necessary permissions.
+    UnsupportedOperationResponse:
+      content:
+        application/json:
+          example:
+            error:
+              message: The server does not support this operation
+              type: UnsupportedOperationException
+              code: 406
+          schema:
+            $ref: '#/components/schemas/ErrorModel'
+      description: Not Acceptable / Unsupported Operation. The server does not support
+        this operation.
+    IcebergErrorResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IcebergErrorResponse'
+      description: JSON wrapper for all error responses (non-2xx)
+    GetNamespaceResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetNamespaceResponse'
+      description: "Returns a namespace, as well as any properties stored on the namespace\
+        \ if namespace properties are supported by the server."
+    ListTablesResponse:
+      content:
+        application/json:
+          examples:
+            ListTablesResponseNonEmpty:
+              $ref: '#/components/examples/ListTablesNonEmptyExample'
+            ListTablesResponseEmpty:
+              $ref: '#/components/examples/ListTablesEmptyExample'
+          schema:
+            $ref: '#/components/schemas/ListTablesResponse'
+      description: A list of table identifiers
+    ListNamespacesResponse:
+      content:
+        application/json:
+          examples:
+            NonEmptyResponse:
+              $ref: '#/components/examples/ListNamespacesNonEmptyExample'
+            EmptyResponse:
+              $ref: '#/components/examples/ListNamespacesEmptyExample'
+          schema:
+            $ref: '#/components/schemas/ListNamespacesResponse'
+      description: A list of namespaces
+    AuthenticationTimeoutResponse:
+      content:
+        application/json:
+          example:
+            error:
+              message: Credentials have timed out
+              type: AuthenticationTimeoutException
+              code: 419
+          schema:
+            $ref: '#/components/schemas/IcebergErrorResponse'
+      description: "Credentials have timed out. If possible, the client should refresh\
+        \ credentials and retry."
+    ServiceUnavailableResponse:
+      content:
+        application/json:
+          example:
+            error:
+              message: Slow down
+              type: SlowDownException
+              code: 503
+          schema:
+            $ref: '#/components/schemas/IcebergErrorResponse'
+      description: |-
+        The service is not ready to handle the request. The client should wait and retry.
+
+        The service may additionally send a Retry-After header to indicate when to retry.
+    ServerErrorResponse:
+      content:
+        application/json:
+          example:
+            error:
+              message: Internal Server Error
+              type: InternalServerError
+              code: 500
+          schema:
+            $ref: '#/components/schemas/IcebergErrorResponse'
+      description: A server-side problem that might not be addressable from the client
+        side. Used for server 5xx errors without more specific documentation in individual
+        routes.
+    LoadTableResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LoadTableResult'
+      description: Table metadata result when loading a table
+  schemas:
+    ErrorModel:
+      description: JSON error payload returned in a response with further details
+        on the error
+      properties:
+        message:
+          description: Human-readable error message
+          type: string
+        type:
+          description: Internal type definition of the error
+          example: NoSuchNamespaceException
+          type: string
+        code:
+          description: HTTP response code
+          example: 404
+          maximum: 600
+          minimum: 400
+          type: integer
+        stack:
+          items:
+            type: string
+          type: array
+      required:
+      - code
+      - message
+      - type
+      type: object
+    CatalogConfig:
+      description: Server-provided configuration for the catalog.
+      example:
+        defaults:
+          key: defaults
+        overrides:
+          key: overrides
+      properties:
+        overrides:
+          additionalProperties:
+            type: string
+          description: Properties that should be used to override client configuration;
+            applied after defaults and client configuration.
+          type: object
+        defaults:
+          additionalProperties:
+            type: string
+          description: Properties that should be used as default configuration; applied
+            before client configuration.
+          type: object
+      required:
+      - defaults
+      - overrides
+      type: object
+    Namespace:
+      description: Reference to one or more levels of a namespace
+      example:
+      - accounting
+      - tax
+      items:
+        type: string
+      type: array
+    TableIdentifier:
+      example:
+        namespace:
+        - accounting
+        - tax
+        name: name
+      properties:
+        namespace:
+          $ref: '#/components/schemas/Namespace'
+        name:
+          nullable: false
+          type: string
+      required:
+      - name
+      - namespace
+      type: object
+    PrimitiveType:
+      example: "[\"long\",\"string\",\"fixed[16]\",\"decimal(10,2)\"]"
+      type: string
+    StructField:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/Type'
+        required:
+          type: boolean
+        doc:
+          type: string
+      required:
+      - id
+      - name
+      - required
+      - type
+      type: object
+    StructType:
+      properties:
+        type:
+          enum:
+          - struct
+          type: string
+        fields:
+          items:
+            $ref: '#/components/schemas/StructField'
+          type: array
+      required:
+      - fields
+      - type
+      type: object
+    ListType:
+      properties:
+        type:
+          enum:
+          - list
+          type: string
+        element-id:
+          type: integer
+        element:
+          $ref: '#/components/schemas/Type'
+        element-required:
+          type: boolean
+      required:
+      - element
+      - element-id
+      - element-required
+      - type
+      type: object
+    MapType:
+      properties:
+        type:
+          enum:
+          - map
+          type: string
+        key-id:
+          type: integer
+        key:
+          $ref: '#/components/schemas/Type'
+        value-id:
+          type: integer
+        value:
+          $ref: '#/components/schemas/Type'
+        value-required:
+          type: boolean
+      required:
+      - key
+      - key-id
+      - type
+      - value
+      - value-id
+      - value-required
+      type: object
+    Type:
+      oneOf:
+      - $ref: '#/components/schemas/PrimitiveType'
+      - $ref: '#/components/schemas/StructType'
+      - $ref: '#/components/schemas/ListType'
+      - $ref: '#/components/schemas/MapType'
+    Schema:
+      allOf:
+      - $ref: '#/components/schemas/StructType'
+      - properties:
+          schema-id:
+            readOnly: true
+            type: integer
+          identifier-field-ids:
+            items:
+              type: integer
+            type: array
+        type: object
+    Transform:
+      example: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+        ,\"truncate[16]\"]"
+      type: string
+    PartitionField:
+      example:
+        field-id: 2
+        transform: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+          ,\"truncate[16]\"]"
+        name: name
+        source-id: 7
+      properties:
+        field-id:
+          type: integer
+        source-id:
+          type: integer
+        name:
+          type: string
+        transform:
+          example: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+            ,\"truncate[16]\"]"
+          type: string
+      required:
+      - name
+      - source-id
+      - transform
+      type: object
+    PartitionSpec:
+      example:
+        spec-id: 5
+        fields:
+        - field-id: 2
+          transform: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+            ,\"truncate[16]\"]"
+          name: name
+          source-id: 7
+        - field-id: 2
+          transform: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+            ,\"truncate[16]\"]"
+          name: name
+          source-id: 7
+      properties:
+        spec-id:
+          readOnly: true
+          type: integer
+        fields:
+          items:
+            $ref: '#/components/schemas/PartitionField'
+          type: array
+      required:
+      - fields
+      type: object
+    SortDirection:
+      enum:
+      - asc
+      - desc
+      type: string
+    NullOrder:
+      enum:
+      - nulls-first
+      - nulls-last
+      type: string
+    SortField:
+      example:
+        transform: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+          ,\"truncate[16]\"]"
+        null-order: null
+        source-id: 4
+        direction: null
+      properties:
+        source-id:
+          type: integer
+        transform:
+          example: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+            ,\"truncate[16]\"]"
+          type: string
+        direction:
+          $ref: '#/components/schemas/SortDirection'
+        null-order:
+          $ref: '#/components/schemas/NullOrder'
+      required:
+      - direction
+      - null-order
+      - source-id
+      - transform
+      type: object
+    SortOrder:
+      example:
+        order-id: 2
+        fields:
+        - transform: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+            ,\"truncate[16]\"]"
+          null-order: null
+          source-id: 4
+          direction: null
+        - transform: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+            ,\"truncate[16]\"]"
+          null-order: null
+          source-id: 4
+          direction: null
+      properties:
+        order-id:
+          readOnly: true
+          type: integer
+        fields:
+          items:
+            $ref: '#/components/schemas/SortField'
+          type: array
+      required:
+      - fields
+      - order-id
+      type: object
+    Snapshot:
+      example:
+        summary:
+          additionalProperties: additionalProperties
+          operation: append
+        snapshot-id: 1
+        schema-id: 7
+        manifest-list: manifest-list
+        timestamp-ms: 6
+        sequence-number: 1
+        parent-snapshot-id: 1
+      properties:
+        snapshot-id:
+          format: int64
+          type: integer
+        parent-snapshot-id:
+          format: int64
+          type: integer
+        sequence-number:
+          format: int64
+          type: integer
+        timestamp-ms:
+          format: int64
+          type: integer
+        manifest-list:
+          description: Location of the snapshot's manifest list file
+          type: string
+        summary:
+          $ref: '#/components/schemas/Snapshot_summary'
+        schema-id:
+          type: integer
+      required:
+      - manifest-list
+      - snapshot-id
+      - summary
+      - timestamp-ms
+      type: object
+    SnapshotReference:
+      properties:
+        type:
+          enum:
+          - tag
+          - branch
+          type: string
+        snapshot-id:
+          format: int64
+          type: integer
+        max-ref-age-ms:
+          format: int64
+          type: integer
+        max-snapshot-age-ms:
+          format: int64
+          type: integer
+        min-snapshots-to-keep:
+          type: integer
+      required:
+      - snapshot-id
+      - type
+      type: object
+    SnapshotReferences:
+      additionalProperties:
+        $ref: '#/components/schemas/SnapshotReference'
+      type: object
+    SnapshotLog:
+      items:
+        $ref: '#/components/schemas/SnapshotLog_inner'
+      type: array
+    MetadataLog:
+      items:
+        $ref: '#/components/schemas/MetadataLog_inner'
+      type: array
+    TableMetadata:
+      example:
+        metadata-log: null
+        current-snapshot-id: 1
+        last-updated-ms: 6
+        last-sequence-number: 4
+        format-version: 1
+        statistics-files:
+        - file-size-in-bytes: 9
+          snapshot-id: 5
+          blob-metadata:
+          - snapshot-id: 6
+            sequence-number: 8
+            type: type
+            fields:
+            - 9
+            - 9
+            properties: "{}"
+          - snapshot-id: 6
+            sequence-number: 8
+            type: type
+            fields:
+            - 9
+            - 9
+            properties: "{}"
+          statistics-path: statistics-path
+          file-footer-size-in-bytes: 9
+        - file-size-in-bytes: 9
+          snapshot-id: 5
+          blob-metadata:
+          - snapshot-id: 6
+            sequence-number: 8
+            type: type
+            fields:
+            - 9
+            - 9
+            properties: "{}"
+          - snapshot-id: 6
+            sequence-number: 8
+            type: type
+            fields:
+            - 9
+            - 9
+            properties: "{}"
+          statistics-path: statistics-path
+          file-footer-size-in-bytes: 9
+        table-uuid: table-uuid
+        default-sort-order-id: 7
+        snapshots:
+        - summary:
+            additionalProperties: additionalProperties
+            operation: append
+          snapshot-id: 1
+          schema-id: 7
+          manifest-list: manifest-list
+          timestamp-ms: 6
+          sequence-number: 1
+          parent-snapshot-id: 1
+        - summary:
+            additionalProperties: additionalProperties
+            operation: append
+          snapshot-id: 1
+          schema-id: 7
+          manifest-list: manifest-list
+          timestamp-ms: 6
+          sequence-number: 1
+          parent-snapshot-id: 1
+        last-partition-id: 3
+        snapshot-log: null
+        refs: null
+        current-schema-id: 1
+        schemas:
+        - null
+        - null
+        partition-statistics-files:
+        - file-size-in-bytes: 3
+          snapshot-id: 6
+          statistics-path: statistics-path
+        - file-size-in-bytes: 3
+          snapshot-id: 6
+          statistics-path: statistics-path
+        sort-orders:
+        - order-id: 2
+          fields:
+          - transform: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+              ,\"truncate[16]\"]"
+            null-order: null
+            source-id: 4
+            direction: null
+          - transform: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+              ,\"truncate[16]\"]"
+            null-order: null
+            source-id: 4
+            direction: null
+        - order-id: 2
+          fields:
+          - transform: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+              ,\"truncate[16]\"]"
+            null-order: null
+            source-id: 4
+            direction: null
+          - transform: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+              ,\"truncate[16]\"]"
+            null-order: null
+            source-id: 4
+            direction: null
+        location: location
+        last-column-id: 5
+        default-spec-id: 9
+        partition-specs:
+        - spec-id: 5
+          fields:
+          - field-id: 2
+            transform: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+              ,\"truncate[16]\"]"
+            name: name
+            source-id: 7
+          - field-id: 2
+            transform: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+              ,\"truncate[16]\"]"
+            name: name
+            source-id: 7
+        - spec-id: 5
+          fields:
+          - field-id: 2
+            transform: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+              ,\"truncate[16]\"]"
+            name: name
+            source-id: 7
+          - field-id: 2
+            transform: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+              ,\"truncate[16]\"]"
+            name: name
+            source-id: 7
+        properties:
+          key: properties
+      properties:
+        format-version:
+          maximum: 2
+          minimum: 1
+          type: integer
+        table-uuid:
+          type: string
+        location:
+          type: string
+        last-updated-ms:
+          format: int64
+          type: integer
+        properties:
+          additionalProperties:
+            type: string
+          type: object
+        schemas:
+          items:
+            $ref: '#/components/schemas/Schema'
+          type: array
+        current-schema-id:
+          type: integer
+        last-column-id:
+          type: integer
+        partition-specs:
+          items:
+            $ref: '#/components/schemas/PartitionSpec'
+          type: array
+        default-spec-id:
+          type: integer
+        last-partition-id:
+          type: integer
+        sort-orders:
+          items:
+            $ref: '#/components/schemas/SortOrder'
+          type: array
+        default-sort-order-id:
+          type: integer
+        snapshots:
+          items:
+            $ref: '#/components/schemas/Snapshot'
+          type: array
+        refs:
+          $ref: '#/components/schemas/SnapshotReferences'
+        current-snapshot-id:
+          format: int64
+          type: integer
+        last-sequence-number:
+          format: int64
+          type: integer
+        snapshot-log:
+          $ref: '#/components/schemas/SnapshotLog'
+        metadata-log:
+          $ref: '#/components/schemas/MetadataLog'
+        statistics-files:
+          items:
+            $ref: '#/components/schemas/StatisticsFile'
+          type: array
+        partition-statistics-files:
+          items:
+            $ref: '#/components/schemas/PartitionStatisticsFile'
+          type: array
+      required:
+      - format-version
+      - table-uuid
+      type: object
+    LoadTableResult:
+      description: |
+        Result used when a table is successfully loaded.
+
+
+        The table metadata JSON is returned in the `metadata` field. The corresponding file location of table metadata should be returned in the `metadata-location` field, unless the metadata is not yet committed. For example, a create transaction may return metadata that is staged but not committed.
+        Clients can check whether metadata has changed by comparing metadata locations after the table has been created.
+
+
+        The `config` map returns table-specific configuration for the table's resources, including its HTTP client and FileIO. For example, config may contain a specific FileIO implementation class for the table depending on its underlying storage.
+
+
+        The following configurations should be respected by clients:
+
+        ## General Configurations
+
+        - `token`: Authorization bearer token to use for table requests if OAuth2 security is enabled
+
+        ## AWS Configurations
+
+        The following configurations should be respected when working with tables stored in AWS S3
+         - `client.region`: region to configure client for making requests to AWS
+         - `s3.access-key-id`: id for for credentials that provide access to the data in S3
+         - `s3.secret-access-key`: secret for credentials that provide access to data in S3
+         - `s3.session-token`: if present, this value should be used for as the session token
+         - `s3.remote-signing-enabled`: if `true` remote signing should be performed as described in the `s3-signer-open-api.yaml` specification
+      example:
+        metadata:
+          metadata-log: null
+          current-snapshot-id: 1
+          last-updated-ms: 6
+          last-sequence-number: 4
+          format-version: 1
+          statistics-files:
+          - file-size-in-bytes: 9
+            snapshot-id: 5
+            blob-metadata:
+            - snapshot-id: 6
+              sequence-number: 8
+              type: type
+              fields:
+              - 9
+              - 9
+              properties: "{}"
+            - snapshot-id: 6
+              sequence-number: 8
+              type: type
+              fields:
+              - 9
+              - 9
+              properties: "{}"
+            statistics-path: statistics-path
+            file-footer-size-in-bytes: 9
+          - file-size-in-bytes: 9
+            snapshot-id: 5
+            blob-metadata:
+            - snapshot-id: 6
+              sequence-number: 8
+              type: type
+              fields:
+              - 9
+              - 9
+              properties: "{}"
+            - snapshot-id: 6
+              sequence-number: 8
+              type: type
+              fields:
+              - 9
+              - 9
+              properties: "{}"
+            statistics-path: statistics-path
+            file-footer-size-in-bytes: 9
+          table-uuid: table-uuid
+          default-sort-order-id: 7
+          snapshots:
+          - summary:
+              additionalProperties: additionalProperties
+              operation: append
+            snapshot-id: 1
+            schema-id: 7
+            manifest-list: manifest-list
+            timestamp-ms: 6
+            sequence-number: 1
+            parent-snapshot-id: 1
+          - summary:
+              additionalProperties: additionalProperties
+              operation: append
+            snapshot-id: 1
+            schema-id: 7
+            manifest-list: manifest-list
+            timestamp-ms: 6
+            sequence-number: 1
+            parent-snapshot-id: 1
+          last-partition-id: 3
+          snapshot-log: null
+          refs: null
+          current-schema-id: 1
+          schemas:
+          - null
+          - null
+          partition-statistics-files:
+          - file-size-in-bytes: 3
+            snapshot-id: 6
+            statistics-path: statistics-path
+          - file-size-in-bytes: 3
+            snapshot-id: 6
+            statistics-path: statistics-path
+          sort-orders:
+          - order-id: 2
+            fields:
+            - transform: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+                ,\"truncate[16]\"]"
+              null-order: null
+              source-id: 4
+              direction: null
+            - transform: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+                ,\"truncate[16]\"]"
+              null-order: null
+              source-id: 4
+              direction: null
+          - order-id: 2
+            fields:
+            - transform: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+                ,\"truncate[16]\"]"
+              null-order: null
+              source-id: 4
+              direction: null
+            - transform: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+                ,\"truncate[16]\"]"
+              null-order: null
+              source-id: 4
+              direction: null
+          location: location
+          last-column-id: 5
+          default-spec-id: 9
+          partition-specs:
+          - spec-id: 5
+            fields:
+            - field-id: 2
+              transform: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+                ,\"truncate[16]\"]"
+              name: name
+              source-id: 7
+            - field-id: 2
+              transform: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+                ,\"truncate[16]\"]"
+              name: name
+              source-id: 7
+          - spec-id: 5
+            fields:
+            - field-id: 2
+              transform: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+                ,\"truncate[16]\"]"
+              name: name
+              source-id: 7
+            - field-id: 2
+              transform: "[\"identity\",\"year\",\"month\",\"day\",\"hour\",\"bucket[256]\"\
+                ,\"truncate[16]\"]"
+              name: name
+              source-id: 7
+          properties:
+            key: properties
+        metadata-location: metadata-location
+        config:
+          key: config
+      properties:
+        metadata-location:
+          description: May be null if the table is staged as part of a transaction
+          type: string
+        metadata:
+          $ref: '#/components/schemas/TableMetadata'
+        config:
+          additionalProperties:
+            type: string
+          type: object
+      required:
+      - metadata
+      type: object
+    TokenType:
+      description: |-
+        Token type identifier, from RFC 8693 Section 3
+
+        See https://datatracker.ietf.org/doc/html/rfc8693#section-3
+      enum:
+      - urn:ietf:params:oauth:token-type:access_token
+      - urn:ietf:params:oauth:token-type:refresh_token
+      - urn:ietf:params:oauth:token-type:id_token
+      - urn:ietf:params:oauth:token-type:saml1
+      - urn:ietf:params:oauth:token-type:saml2
+      - urn:ietf:params:oauth:token-type:jwt
+      type: string
+    OAuthClientCredentialsRequest:
+      description: |-
+        OAuth2 client credentials request
+
+        See https://datatracker.ietf.org/doc/html/rfc6749#section-4.4
+      properties:
+        grant_type:
+          enum:
+          - client_credentials
+          type: string
+        scope:
+          type: string
+        client_id:
+          description: |-
+            Client ID
+
+            This can be sent in the request body, but OAuth2 recommends sending it in a Basic Authorization header.
+          type: string
+        client_secret:
+          description: |-
+            Client secret
+
+            This can be sent in the request body, but OAuth2 recommends sending it in a Basic Authorization header.
+          type: string
+      required:
+      - client_id
+      - client_secret
+      - grant_type
+      type: object
+    OAuthTokenExchangeRequest:
+      description: |-
+        OAuth2 token exchange request
+
+        See https://datatracker.ietf.org/doc/html/rfc8693
+      properties:
+        grant_type:
+          enum:
+          - urn:ietf:params:oauth:grant-type:token-exchange
+          type: string
+        scope:
+          type: string
+        requested_token_type:
+          $ref: '#/components/schemas/TokenType'
+        subject_token:
+          description: Subject token for token exchange request
+          type: string
+        subject_token_type:
+          $ref: '#/components/schemas/TokenType'
+        actor_token:
+          description: Actor token for token exchange request
+          type: string
+        actor_token_type:
+          $ref: '#/components/schemas/TokenType'
+      required:
+      - grant_type
+      - subject_token
+      - subject_token_type
+      type: object
+    OAuthTokenRequest:
+      anyOf:
+      - $ref: '#/components/schemas/OAuthClientCredentialsRequest'
+      - $ref: '#/components/schemas/OAuthTokenExchangeRequest'
+    OAuthError:
+      properties:
+        error:
+          enum:
+          - invalid_request
+          - invalid_client
+          - invalid_grant
+          - unauthorized_client
+          - unsupported_grant_type
+          - invalid_scope
+          type: string
+        error_description:
+          type: string
+        error_uri:
+          type: string
+      required:
+      - error
+      type: object
+    OAuthTokenResponse:
+      example:
+        access_token: access_token
+        refresh_token: refresh_token
+        issued_token_type: null
+        scope: scope
+        token_type: bearer
+        expires_in: 0
+      properties:
+        access_token:
+          description: "The access token, for client credentials or token exchange"
+          type: string
+        token_type:
+          description: |-
+            Access token type for client credentials or token exchange
+
+            See https://datatracker.ietf.org/doc/html/rfc6749#section-7.1
+          enum:
+          - bearer
+          - mac
+          - N_A
+          type: string
+        expires_in:
+          description: Lifetime of the access token in seconds for client credentials
+            or token exchange
+          type: integer
+        issued_token_type:
+          $ref: '#/components/schemas/TokenType'
+        refresh_token:
+          description: Refresh token for client credentials or token exchange
+          type: string
+        scope:
+          description: Authorization scope for client credentials or token exchange
+          type: string
+      required:
+      - access_token
+      - token_type
+      type: object
+    IcebergErrorResponse:
+      additionalProperties: false
+      description: JSON wrapper for all error responses (non-2xx)
+      example:
+        error:
+          message: The server does not support this operation
+          type: UnsupportedOperationException
+          code: 406
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorModel'
+      required:
+      - error
+      type: object
+    GetNamespaceResponse:
+      example:
+        namespace:
+        - accounting
+        - tax
+        properties:
+          owner: Ralph
+          transient_lastDdlTime: "1452120468"
+      properties:
+        namespace:
+          $ref: '#/components/schemas/Namespace'
+        properties:
+          additionalProperties:
+            type: string
+          default: {}
+          description: "Properties stored on the namespace, if supported by the server.\
+            \ If the server does not support namespace properties, it should return\
+            \ null for this field. If namespace properties are supported, but none\
+            \ are set, it should return an empty object."
+          example:
+            owner: Ralph
+            transient_lastDdlTime: "1452120468"
+          nullable: true
+          type: object
+      required:
+      - namespace
+      type: object
+    ListTablesResponse:
+      example:
+        identifiers:
+        - namespace:
+          - accounting
+          - tax
+          name: name
+        - namespace:
+          - accounting
+          - tax
+          name: name
+      properties:
+        identifiers:
+          items:
+            $ref: '#/components/schemas/TableIdentifier'
+          type: array
+          uniqueItems: true
+      type: object
+    ListNamespacesResponse:
+      example:
+        namespaces:
+        - - accounting
+          - tax
+        - - accounting
+          - tax
+      properties:
+        namespaces:
+          items:
+            $ref: '#/components/schemas/Namespace'
+          type: array
+          uniqueItems: true
+      type: object
+    StatisticsFile:
+      example:
+        file-size-in-bytes: 9
+        snapshot-id: 5
+        blob-metadata:
+        - snapshot-id: 6
+          sequence-number: 8
+          type: type
+          fields:
+          - 9
+          - 9
+          properties: "{}"
+        - snapshot-id: 6
+          sequence-number: 8
+          type: type
+          fields:
+          - 9
+          - 9
+          properties: "{}"
+        statistics-path: statistics-path
+        file-footer-size-in-bytes: 9
+      properties:
+        snapshot-id:
+          format: int64
+          type: integer
+        statistics-path:
+          type: string
+        file-size-in-bytes:
+          format: int64
+          type: integer
+        file-footer-size-in-bytes:
+          format: int64
+          type: integer
+        blob-metadata:
+          items:
+            $ref: '#/components/schemas/BlobMetadata'
+          type: array
+      required:
+      - blob-metadata
+      - file-footer-size-in-bytes
+      - file-size-in-bytes
+      - snapshot-id
+      - statistics-path
+      type: object
+    BlobMetadata:
+      example:
+        snapshot-id: 6
+        sequence-number: 8
+        type: type
+        fields:
+        - 9
+        - 9
+        properties: "{}"
+      properties:
+        type:
+          type: string
+        snapshot-id:
+          format: int64
+          type: integer
+        sequence-number:
+          format: int64
+          type: integer
+        fields:
+          items:
+            type: integer
+          type: array
+        properties:
+          type: object
+      required:
+      - fields
+      - sequence-number
+      - snapshot-id
+      - type
+      type: object
+    PartitionStatisticsFile:
+      example:
+        file-size-in-bytes: 3
+        snapshot-id: 6
+        statistics-path: statistics-path
+      properties:
+        snapshot-id:
+          format: int64
+          type: integer
+        statistics-path:
+          type: string
+        file-size-in-bytes:
+          format: int64
+          type: integer
+      required:
+      - file-size-in-bytes
+      - snapshot-id
+      - statistics-path
+      type: object
+    Snapshot_summary:
+      example:
+        additionalProperties: additionalProperties
+        operation: append
+      properties:
+        operation:
+          enum:
+          - append
+          - replace
+          - overwrite
+          - delete
+          type: string
+        additionalProperties:
+          type: string
+      required:
+      - operation
+      type: object
+    SnapshotLog_inner:
+      properties:
+        snapshot-id:
+          format: int64
+          type: integer
+        timestamp-ms:
+          format: int64
+          type: integer
+      required:
+      - snapshot-id
+      - timestamp-ms
+      type: object
+    MetadataLog_inner:
+      properties:
+        metadata-file:
+          type: string
+        timestamp-ms:
+          format: int64
+          type: integer
+      required:
+      - metadata-file
+      - timestamp-ms
+      type: object
+  securitySchemes:
+    OAuth2:
+      description: |-
+        This scheme is used for OAuth2 authorization.
+
+        For unauthorized requests, services should return an appropriate 401 or 403 response. Implementations must not return altered success (200) responses when a request is unauthenticated or unauthorized.
+        If a separate authorization server is used, substitute the tokenUrl with the full token path of the external authorization server, and use the resulting token to access the resources defined in the spec.
+      flows:
+        clientCredentials:
+          scopes:
+            catalog: Allows interacting with the Config and Catalog APIs
+          tokenUrl: /v1/oauth/tokens
+      type: oauth2
+    BearerAuth:
+      scheme: bearer
+      type: http
