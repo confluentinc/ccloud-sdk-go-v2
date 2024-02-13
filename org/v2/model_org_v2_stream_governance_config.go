@@ -36,7 +36,7 @@ import (
 
 // OrgV2StreamGovernanceConfig Configurations pertaining to Stream Governance
 type OrgV2StreamGovernanceConfig struct {
-	// Stream Governance Package. Supported values are ESSENTIALS and ADVANCED with the default being ESSENTIALS. Package comparison can be found [here](https://docs.confluent.io/cloud/current/stream-governance/packages.html#features-by-package-type).
+	// Stream Governance Package. Supported values are ESSENTIALS and ADVANCED. Package comparison can be found [here](https://docs.confluent.io/cloud/current/stream-governance/packages.html#features-by-package-type).
 	Package *string `json:"package,omitempty"`
 }
 

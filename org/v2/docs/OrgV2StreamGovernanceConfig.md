@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Package** | Pointer to **string** | Stream Governance Package. Supported values are ESSENTIALS and ADVANCED with the default being ESSENTIALS. Package comparison can be found [here](https://docs.confluent.io/cloud/current/stream-governance/packages.html#features-by-package-type).  | [optional] 
+**Package** | Pointer to **string** | Stream Governance Package. Supported values are ESSENTIALS and ADVANCED. Package comparison can be found [here](https://docs.confluent.io/cloud/current/stream-governance/packages.html#features-by-package-type).  | [optional] 
 
 ## Methods
 
