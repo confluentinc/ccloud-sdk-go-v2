@@ -73,6 +73,12 @@ SetDnsServerIps sets DnsServerIps field to given value.
 
 Convenience method to wrap this instance of NetworkingV1ForwardViaIp in NetworkingV1DnsForwarderSpecConfigOneOf
 
+### AsNetworkingV1DnsForwarderSpecUpdateConfigOneOf
+
+`func (s *NetworkingV1ForwardViaIp) AsNetworkingV1DnsForwarderSpecUpdateConfigOneOf() NetworkingV1DnsForwarderSpecUpdateConfigOneOf`
+
+Convenience method to wrap this instance of NetworkingV1ForwardViaIp in NetworkingV1DnsForwarderSpecUpdateConfigOneOf
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

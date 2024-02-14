@@ -79,11 +79,11 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*DnsForwardersNetworkingV1Api* | [**CreateNetworkingV1DnsForwarder**](docs/DnsForwardersNetworkingV1Api.md#createnetworkingv1dnsforwarder) | **Post** /networking/v1/dns-forwarders | Create a Dns Forwarder
-*DnsForwardersNetworkingV1Api* | [**DeleteNetworkingV1DnsForwarder**](docs/DnsForwardersNetworkingV1Api.md#deletenetworkingv1dnsforwarder) | **Delete** /networking/v1/dns-forwarders/{id} | Delete a Dns Forwarder
-*DnsForwardersNetworkingV1Api* | [**GetNetworkingV1DnsForwarder**](docs/DnsForwardersNetworkingV1Api.md#getnetworkingv1dnsforwarder) | **Get** /networking/v1/dns-forwarders/{id} | Read a Dns Forwarder
-*DnsForwardersNetworkingV1Api* | [**ListNetworkingV1DnsForwarders**](docs/DnsForwardersNetworkingV1Api.md#listnetworkingv1dnsforwarders) | **Get** /networking/v1/dns-forwarders | List of Dns Forwarders
-*DnsForwardersNetworkingV1Api* | [**UpdateNetworkingV1DnsForwarder**](docs/DnsForwardersNetworkingV1Api.md#updatenetworkingv1dnsforwarder) | **Patch** /networking/v1/dns-forwarders/{id} | Update a Dns Forwarder
+*DNSForwardersNetworkingV1Api* | [**CreateNetworkingV1DnsForwarder**](docs/DNSForwardersNetworkingV1Api.md#createnetworkingv1dnsforwarder) | **Post** /networking/v1/dns-forwarders | Create a DNS Forwarder
+*DNSForwardersNetworkingV1Api* | [**DeleteNetworkingV1DnsForwarder**](docs/DNSForwardersNetworkingV1Api.md#deletenetworkingv1dnsforwarder) | **Delete** /networking/v1/dns-forwarders/{id} | Delete a DNS Forwarder
+*DNSForwardersNetworkingV1Api* | [**GetNetworkingV1DnsForwarder**](docs/DNSForwardersNetworkingV1Api.md#getnetworkingv1dnsforwarder) | **Get** /networking/v1/dns-forwarders/{id} | Read a DNS Forwarder
+*DNSForwardersNetworkingV1Api* | [**ListNetworkingV1DnsForwarders**](docs/DNSForwardersNetworkingV1Api.md#listnetworkingv1dnsforwarders) | **Get** /networking/v1/dns-forwarders | List of DNS Forwarders
+*DNSForwardersNetworkingV1Api* | [**UpdateNetworkingV1DnsForwarder**](docs/DNSForwardersNetworkingV1Api.md#updatenetworkingv1dnsforwarder) | **Patch** /networking/v1/dns-forwarders/{id} | Update a DNS Forwarder
 
 
 ## Documentation For Models
@@ -96,7 +96,10 @@ Class | Method | HTTP request | Description
  - [NetworkingV1DnsForwarderList](docs/NetworkingV1DnsForwarderList.md)
  - [NetworkingV1DnsForwarderSpec](docs/NetworkingV1DnsForwarderSpec.md)
  - [NetworkingV1DnsForwarderSpecConfigOneOf](docs/NetworkingV1DnsForwarderSpecConfigOneOf.md)
+ - [NetworkingV1DnsForwarderSpecUpdate](docs/NetworkingV1DnsForwarderSpecUpdate.md)
+ - [NetworkingV1DnsForwarderSpecUpdateConfigOneOf](docs/NetworkingV1DnsForwarderSpecUpdateConfigOneOf.md)
  - [NetworkingV1DnsForwarderStatus](docs/NetworkingV1DnsForwarderStatus.md)
+ - [NetworkingV1DnsForwarderUpdate](docs/NetworkingV1DnsForwarderUpdate.md)
  - [NetworkingV1ForwardViaIp](docs/NetworkingV1ForwardViaIp.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)

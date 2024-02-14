@@ -1,14 +1,14 @@
-# \DnsForwardersNetworkingV1Api
+# \DNSForwardersNetworkingV1Api
 
 All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateNetworkingV1DnsForwarder**](DnsForwardersNetworkingV1Api.md#CreateNetworkingV1DnsForwarder) | **Post** /networking/v1/dns-forwarders | Create a Dns Forwarder
-[**DeleteNetworkingV1DnsForwarder**](DnsForwardersNetworkingV1Api.md#DeleteNetworkingV1DnsForwarder) | **Delete** /networking/v1/dns-forwarders/{id} | Delete a Dns Forwarder
-[**GetNetworkingV1DnsForwarder**](DnsForwardersNetworkingV1Api.md#GetNetworkingV1DnsForwarder) | **Get** /networking/v1/dns-forwarders/{id} | Read a Dns Forwarder
-[**ListNetworkingV1DnsForwarders**](DnsForwardersNetworkingV1Api.md#ListNetworkingV1DnsForwarders) | **Get** /networking/v1/dns-forwarders | List of Dns Forwarders
-[**UpdateNetworkingV1DnsForwarder**](DnsForwardersNetworkingV1Api.md#UpdateNetworkingV1DnsForwarder) | **Patch** /networking/v1/dns-forwarders/{id} | Update a Dns Forwarder
+[**CreateNetworkingV1DnsForwarder**](DNSForwardersNetworkingV1Api.md#CreateNetworkingV1DnsForwarder) | **Post** /networking/v1/dns-forwarders | Create a DNS Forwarder
+[**DeleteNetworkingV1DnsForwarder**](DNSForwardersNetworkingV1Api.md#DeleteNetworkingV1DnsForwarder) | **Delete** /networking/v1/dns-forwarders/{id} | Delete a DNS Forwarder
+[**GetNetworkingV1DnsForwarder**](DNSForwardersNetworkingV1Api.md#GetNetworkingV1DnsForwarder) | **Get** /networking/v1/dns-forwarders/{id} | Read a DNS Forwarder
+[**ListNetworkingV1DnsForwarders**](DNSForwardersNetworkingV1Api.md#ListNetworkingV1DnsForwarders) | **Get** /networking/v1/dns-forwarders | List of DNS Forwarders
+[**UpdateNetworkingV1DnsForwarder**](DNSForwardersNetworkingV1Api.md#UpdateNetworkingV1DnsForwarder) | **Patch** /networking/v1/dns-forwarders/{id} | Update a DNS Forwarder
 
 
 
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 > NetworkingV1DnsForwarder CreateNetworkingV1DnsForwarder(ctx).NetworkingV1DnsForwarder(networkingV1DnsForwarder).Execute()
 
-Create a Dns Forwarder
+Create a DNS Forwarder
 
 
 
@@ -37,13 +37,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DnsForwardersNetworkingV1Api.CreateNetworkingV1DnsForwarder(context.Background()).NetworkingV1DnsForwarder(networkingV1DnsForwarder).Execute()
+    resp, r, err := api_client.DNSForwardersNetworkingV1Api.CreateNetworkingV1DnsForwarder(context.Background()).NetworkingV1DnsForwarder(networkingV1DnsForwarder).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DnsForwardersNetworkingV1Api.CreateNetworkingV1DnsForwarder``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `DNSForwardersNetworkingV1Api.CreateNetworkingV1DnsForwarder``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `CreateNetworkingV1DnsForwarder`: NetworkingV1DnsForwarder
-    fmt.Fprintf(os.Stdout, "Response from `DnsForwardersNetworkingV1Api.CreateNetworkingV1DnsForwarder`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `DNSForwardersNetworkingV1Api.CreateNetworkingV1DnsForwarder`: %v\n", resp)
 }
 ```
 
@@ -82,7 +82,7 @@ Name | Type | Description  | Notes
 
 > DeleteNetworkingV1DnsForwarder(ctx, id).Environment(environment).Execute()
 
-Delete a Dns Forwarder
+Delete a DNS Forwarder
 
 
 
@@ -100,13 +100,13 @@ import (
 
 func main() {
     environment := "env-00000" // string | Scope the operation to the given environment.
-    id := "id_example" // string | The unique identifier for the dns forwarder.
+    id := "id_example" // string | The unique identifier for the DNS forwarder.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DnsForwardersNetworkingV1Api.DeleteNetworkingV1DnsForwarder(context.Background(), id).Environment(environment).Execute()
+    resp, r, err := api_client.DNSForwardersNetworkingV1Api.DeleteNetworkingV1DnsForwarder(context.Background(), id).Environment(environment).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DnsForwardersNetworkingV1Api.DeleteNetworkingV1DnsForwarder``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `DNSForwardersNetworkingV1Api.DeleteNetworkingV1DnsForwarder``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -118,7 +118,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the dns forwarder. | 
+**id** | **string** | The unique identifier for the DNS forwarder. | 
 
 ### Other Parameters
 
@@ -152,7 +152,7 @@ Name | Type | Description  | Notes
 
 > NetworkingV1DnsForwarder GetNetworkingV1DnsForwarder(ctx, id).Environment(environment).Execute()
 
-Read a Dns Forwarder
+Read a DNS Forwarder
 
 
 
@@ -170,17 +170,17 @@ import (
 
 func main() {
     environment := "env-00000" // string | Scope the operation to the given environment.
-    id := "id_example" // string | The unique identifier for the dns forwarder.
+    id := "id_example" // string | The unique identifier for the DNS forwarder.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DnsForwardersNetworkingV1Api.GetNetworkingV1DnsForwarder(context.Background(), id).Environment(environment).Execute()
+    resp, r, err := api_client.DNSForwardersNetworkingV1Api.GetNetworkingV1DnsForwarder(context.Background(), id).Environment(environment).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DnsForwardersNetworkingV1Api.GetNetworkingV1DnsForwarder``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `DNSForwardersNetworkingV1Api.GetNetworkingV1DnsForwarder``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `GetNetworkingV1DnsForwarder`: NetworkingV1DnsForwarder
-    fmt.Fprintf(os.Stdout, "Response from `DnsForwardersNetworkingV1Api.GetNetworkingV1DnsForwarder`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `DNSForwardersNetworkingV1Api.GetNetworkingV1DnsForwarder`: %v\n", resp)
 }
 ```
 
@@ -190,7 +190,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the dns forwarder. | 
+**id** | **string** | The unique identifier for the DNS forwarder. | 
 
 ### Other Parameters
 
@@ -224,7 +224,7 @@ Name | Type | Description  | Notes
 
 > NetworkingV1DnsForwarderList ListNetworkingV1DnsForwarders(ctx).Environment(environment).PageSize(pageSize).PageToken(pageToken).Execute()
 
-List of Dns Forwarders
+List of DNS Forwarders
 
 
 
@@ -247,13 +247,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DnsForwardersNetworkingV1Api.ListNetworkingV1DnsForwarders(context.Background()).Environment(environment).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.DNSForwardersNetworkingV1Api.ListNetworkingV1DnsForwarders(context.Background()).Environment(environment).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DnsForwardersNetworkingV1Api.ListNetworkingV1DnsForwarders``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `DNSForwardersNetworkingV1Api.ListNetworkingV1DnsForwarders``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `ListNetworkingV1DnsForwarders`: NetworkingV1DnsForwarderList
-    fmt.Fprintf(os.Stdout, "Response from `DnsForwardersNetworkingV1Api.ListNetworkingV1DnsForwarders`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `DNSForwardersNetworkingV1Api.ListNetworkingV1DnsForwarders`: %v\n", resp)
 }
 ```
 
@@ -292,9 +292,9 @@ Name | Type | Description  | Notes
 
 ## UpdateNetworkingV1DnsForwarder
 
-> NetworkingV1DnsForwarder UpdateNetworkingV1DnsForwarder(ctx, id).NetworkingV1DnsForwarder(networkingV1DnsForwarder).Execute()
+> NetworkingV1DnsForwarder UpdateNetworkingV1DnsForwarder(ctx, id).NetworkingV1DnsForwarderUpdate(networkingV1DnsForwarderUpdate).Execute()
 
-Update a Dns Forwarder
+Update a DNS Forwarder
 
 
 
@@ -311,18 +311,18 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | The unique identifier for the dns forwarder.
-    networkingV1DnsForwarder := *openapiclient.NewNetworkingV1DnsForwarder() // NetworkingV1DnsForwarder |  (optional)
+    id := "id_example" // string | The unique identifier for the DNS forwarder.
+    networkingV1DnsForwarderUpdate := *openapiclient.NewNetworkingV1DnsForwarderUpdate() // NetworkingV1DnsForwarderUpdate |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DnsForwardersNetworkingV1Api.UpdateNetworkingV1DnsForwarder(context.Background(), id).NetworkingV1DnsForwarder(networkingV1DnsForwarder).Execute()
+    resp, r, err := api_client.DNSForwardersNetworkingV1Api.UpdateNetworkingV1DnsForwarder(context.Background(), id).NetworkingV1DnsForwarderUpdate(networkingV1DnsForwarderUpdate).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DnsForwardersNetworkingV1Api.UpdateNetworkingV1DnsForwarder``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `DNSForwardersNetworkingV1Api.UpdateNetworkingV1DnsForwarder``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `UpdateNetworkingV1DnsForwarder`: NetworkingV1DnsForwarder
-    fmt.Fprintf(os.Stdout, "Response from `DnsForwardersNetworkingV1Api.UpdateNetworkingV1DnsForwarder`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `DNSForwardersNetworkingV1Api.UpdateNetworkingV1DnsForwarder`: %v\n", resp)
 }
 ```
 
@@ -332,7 +332,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the dns forwarder. | 
+**id** | **string** | The unique identifier for the DNS forwarder. | 
 
 ### Other Parameters
 
@@ -342,7 +342,7 @@ Other parameters are passed through a pointer to a apiUpdateNetworkingV1DnsForwa
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **networkingV1DnsForwarder** | [**NetworkingV1DnsForwarder**](NetworkingV1DnsForwarder.md) |  | 
+ **networkingV1DnsForwarderUpdate** | [**NetworkingV1DnsForwarderUpdate**](NetworkingV1DnsForwarderUpdate.md) |  | 
 
 ### Return type
 
