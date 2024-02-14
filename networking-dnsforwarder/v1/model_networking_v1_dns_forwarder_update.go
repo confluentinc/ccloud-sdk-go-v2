@@ -34,38 +34,38 @@ import (
 	"reflect"
 )
 
-// NetworkingV1DnsForwarder Add, remove, and update DNS forwarder for your gateway.  Related guides: * [Use VPC peering connections with Confluent Cloud on AWS](https://docs.confluent.io/cloud/current/networking/peering/aws-peering.html). * [Use VNet peering connections with Confluent Cloud on Azure](https://docs.confluent.io/cloud/current/networking/peering/azure-peering.html).   ## The DNS Forwarders Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.DnsForwarder\" />
-type NetworkingV1DnsForwarder struct {
+// NetworkingV1DnsForwarderUpdate Add, remove, and update DNS forwarder for your gateway.  Related guides: * [Use VPC peering connections with Confluent Cloud on AWS](https://docs.confluent.io/cloud/current/networking/peering/aws-peering.html). * [Use VNet peering connections with Confluent Cloud on Azure](https://docs.confluent.io/cloud/current/networking/peering/azure-peering.html).   ## The DNS Forwarders Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.DnsForwarder\" />
+type NetworkingV1DnsForwarderUpdate struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
 	Kind *string `json:"kind,omitempty"`
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
-	Id       *string                         `json:"id,omitempty"`
-	Metadata *ObjectMeta                     `json:"metadata,omitempty"`
-	Spec     *NetworkingV1DnsForwarderSpec   `json:"spec,omitempty"`
-	Status   *NetworkingV1DnsForwarderStatus `json:"status,omitempty"`
+	Id       *string                             `json:"id,omitempty"`
+	Metadata *ObjectMeta                         `json:"metadata,omitempty"`
+	Spec     *NetworkingV1DnsForwarderSpecUpdate `json:"spec,omitempty"`
+	Status   *NetworkingV1DnsForwarderStatus     `json:"status,omitempty"`
 }
 
-// NewNetworkingV1DnsForwarder instantiates a new NetworkingV1DnsForwarder object
+// NewNetworkingV1DnsForwarderUpdate instantiates a new NetworkingV1DnsForwarderUpdate object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1DnsForwarder() *NetworkingV1DnsForwarder {
-	this := NetworkingV1DnsForwarder{}
+func NewNetworkingV1DnsForwarderUpdate() *NetworkingV1DnsForwarderUpdate {
+	this := NetworkingV1DnsForwarderUpdate{}
 	return &this
 }
 
-// NewNetworkingV1DnsForwarderWithDefaults instantiates a new NetworkingV1DnsForwarder object
+// NewNetworkingV1DnsForwarderUpdateWithDefaults instantiates a new NetworkingV1DnsForwarderUpdate object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewNetworkingV1DnsForwarderWithDefaults() *NetworkingV1DnsForwarder {
-	this := NetworkingV1DnsForwarder{}
+func NewNetworkingV1DnsForwarderUpdateWithDefaults() *NetworkingV1DnsForwarderUpdate {
+	this := NetworkingV1DnsForwarderUpdate{}
 	return &this
 }
 
 // GetApiVersion returns the ApiVersion field value if set, zero value otherwise.
-func (o *NetworkingV1DnsForwarder) GetApiVersion() string {
+func (o *NetworkingV1DnsForwarderUpdate) GetApiVersion() string {
 	if o == nil || o.ApiVersion == nil {
 		var ret string
 		return ret
@@ -75,7 +75,7 @@ func (o *NetworkingV1DnsForwarder) GetApiVersion() string {
 
 // GetApiVersionOk returns a tuple with the ApiVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1DnsForwarder) GetApiVersionOk() (*string, bool) {
+func (o *NetworkingV1DnsForwarderUpdate) GetApiVersionOk() (*string, bool) {
 	if o == nil || o.ApiVersion == nil {
 		return nil, false
 	}
@@ -83,7 +83,7 @@ func (o *NetworkingV1DnsForwarder) GetApiVersionOk() (*string, bool) {
 }
 
 // HasApiVersion returns a boolean if a field has been set.
-func (o *NetworkingV1DnsForwarder) HasApiVersion() bool {
+func (o *NetworkingV1DnsForwarderUpdate) HasApiVersion() bool {
 	if o != nil && o.ApiVersion != nil {
 		return true
 	}
@@ -92,12 +92,12 @@ func (o *NetworkingV1DnsForwarder) HasApiVersion() bool {
 }
 
 // SetApiVersion gets a reference to the given string and assigns it to the ApiVersion field.
-func (o *NetworkingV1DnsForwarder) SetApiVersion(v string) {
+func (o *NetworkingV1DnsForwarderUpdate) SetApiVersion(v string) {
 	o.ApiVersion = &v
 }
 
 // GetKind returns the Kind field value if set, zero value otherwise.
-func (o *NetworkingV1DnsForwarder) GetKind() string {
+func (o *NetworkingV1DnsForwarderUpdate) GetKind() string {
 	if o == nil || o.Kind == nil {
 		var ret string
 		return ret
@@ -107,7 +107,7 @@ func (o *NetworkingV1DnsForwarder) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1DnsForwarder) GetKindOk() (*string, bool) {
+func (o *NetworkingV1DnsForwarderUpdate) GetKindOk() (*string, bool) {
 	if o == nil || o.Kind == nil {
 		return nil, false
 	}
@@ -115,7 +115,7 @@ func (o *NetworkingV1DnsForwarder) GetKindOk() (*string, bool) {
 }
 
 // HasKind returns a boolean if a field has been set.
-func (o *NetworkingV1DnsForwarder) HasKind() bool {
+func (o *NetworkingV1DnsForwarderUpdate) HasKind() bool {
 	if o != nil && o.Kind != nil {
 		return true
 	}
@@ -124,12 +124,12 @@ func (o *NetworkingV1DnsForwarder) HasKind() bool {
 }
 
 // SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *NetworkingV1DnsForwarder) SetKind(v string) {
+func (o *NetworkingV1DnsForwarderUpdate) SetKind(v string) {
 	o.Kind = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *NetworkingV1DnsForwarder) GetId() string {
+func (o *NetworkingV1DnsForwarderUpdate) GetId() string {
 	if o == nil || o.Id == nil {
 		var ret string
 		return ret
@@ -139,7 +139,7 @@ func (o *NetworkingV1DnsForwarder) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1DnsForwarder) GetIdOk() (*string, bool) {
+func (o *NetworkingV1DnsForwarderUpdate) GetIdOk() (*string, bool) {
 	if o == nil || o.Id == nil {
 		return nil, false
 	}
@@ -147,7 +147,7 @@ func (o *NetworkingV1DnsForwarder) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *NetworkingV1DnsForwarder) HasId() bool {
+func (o *NetworkingV1DnsForwarderUpdate) HasId() bool {
 	if o != nil && o.Id != nil {
 		return true
 	}
@@ -156,12 +156,12 @@ func (o *NetworkingV1DnsForwarder) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *NetworkingV1DnsForwarder) SetId(v string) {
+func (o *NetworkingV1DnsForwarderUpdate) SetId(v string) {
 	o.Id = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *NetworkingV1DnsForwarder) GetMetadata() ObjectMeta {
+func (o *NetworkingV1DnsForwarderUpdate) GetMetadata() ObjectMeta {
 	if o == nil || o.Metadata == nil {
 		var ret ObjectMeta
 		return ret
@@ -171,7 +171,7 @@ func (o *NetworkingV1DnsForwarder) GetMetadata() ObjectMeta {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1DnsForwarder) GetMetadataOk() (*ObjectMeta, bool) {
+func (o *NetworkingV1DnsForwarderUpdate) GetMetadataOk() (*ObjectMeta, bool) {
 	if o == nil || o.Metadata == nil {
 		return nil, false
 	}
@@ -179,7 +179,7 @@ func (o *NetworkingV1DnsForwarder) GetMetadataOk() (*ObjectMeta, bool) {
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *NetworkingV1DnsForwarder) HasMetadata() bool {
+func (o *NetworkingV1DnsForwarderUpdate) HasMetadata() bool {
 	if o != nil && o.Metadata != nil {
 		return true
 	}
@@ -188,14 +188,14 @@ func (o *NetworkingV1DnsForwarder) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given ObjectMeta and assigns it to the Metadata field.
-func (o *NetworkingV1DnsForwarder) SetMetadata(v ObjectMeta) {
+func (o *NetworkingV1DnsForwarderUpdate) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
 // GetSpec returns the Spec field value if set, zero value otherwise.
-func (o *NetworkingV1DnsForwarder) GetSpec() NetworkingV1DnsForwarderSpec {
+func (o *NetworkingV1DnsForwarderUpdate) GetSpec() NetworkingV1DnsForwarderSpecUpdate {
 	if o == nil || o.Spec == nil {
-		var ret NetworkingV1DnsForwarderSpec
+		var ret NetworkingV1DnsForwarderSpecUpdate
 		return ret
 	}
 	return *o.Spec
@@ -203,7 +203,7 @@ func (o *NetworkingV1DnsForwarder) GetSpec() NetworkingV1DnsForwarderSpec {
 
 // GetSpecOk returns a tuple with the Spec field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1DnsForwarder) GetSpecOk() (*NetworkingV1DnsForwarderSpec, bool) {
+func (o *NetworkingV1DnsForwarderUpdate) GetSpecOk() (*NetworkingV1DnsForwarderSpecUpdate, bool) {
 	if o == nil || o.Spec == nil {
 		return nil, false
 	}
@@ -211,7 +211,7 @@ func (o *NetworkingV1DnsForwarder) GetSpecOk() (*NetworkingV1DnsForwarderSpec, b
 }
 
 // HasSpec returns a boolean if a field has been set.
-func (o *NetworkingV1DnsForwarder) HasSpec() bool {
+func (o *NetworkingV1DnsForwarderUpdate) HasSpec() bool {
 	if o != nil && o.Spec != nil {
 		return true
 	}
@@ -219,13 +219,13 @@ func (o *NetworkingV1DnsForwarder) HasSpec() bool {
 	return false
 }
 
-// SetSpec gets a reference to the given NetworkingV1DnsForwarderSpec and assigns it to the Spec field.
-func (o *NetworkingV1DnsForwarder) SetSpec(v NetworkingV1DnsForwarderSpec) {
+// SetSpec gets a reference to the given NetworkingV1DnsForwarderSpecUpdate and assigns it to the Spec field.
+func (o *NetworkingV1DnsForwarderUpdate) SetSpec(v NetworkingV1DnsForwarderSpecUpdate) {
 	o.Spec = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *NetworkingV1DnsForwarder) GetStatus() NetworkingV1DnsForwarderStatus {
+func (o *NetworkingV1DnsForwarderUpdate) GetStatus() NetworkingV1DnsForwarderStatus {
 	if o == nil || o.Status == nil {
 		var ret NetworkingV1DnsForwarderStatus
 		return ret
@@ -235,7 +235,7 @@ func (o *NetworkingV1DnsForwarder) GetStatus() NetworkingV1DnsForwarderStatus {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1DnsForwarder) GetStatusOk() (*NetworkingV1DnsForwarderStatus, bool) {
+func (o *NetworkingV1DnsForwarderUpdate) GetStatusOk() (*NetworkingV1DnsForwarderStatus, bool) {
 	if o == nil || o.Status == nil {
 		return nil, false
 	}
@@ -243,7 +243,7 @@ func (o *NetworkingV1DnsForwarder) GetStatusOk() (*NetworkingV1DnsForwarderStatu
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *NetworkingV1DnsForwarder) HasStatus() bool {
+func (o *NetworkingV1DnsForwarderUpdate) HasStatus() bool {
 	if o != nil && o.Status != nil {
 		return true
 	}
@@ -252,12 +252,12 @@ func (o *NetworkingV1DnsForwarder) HasStatus() bool {
 }
 
 // SetStatus gets a reference to the given NetworkingV1DnsForwarderStatus and assigns it to the Status field.
-func (o *NetworkingV1DnsForwarder) SetStatus(v NetworkingV1DnsForwarderStatus) {
+func (o *NetworkingV1DnsForwarderUpdate) SetStatus(v NetworkingV1DnsForwarderStatus) {
 	o.Status = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *NetworkingV1DnsForwarder) Redact() {
+func (o *NetworkingV1DnsForwarderUpdate) Redact() {
 	o.recurseRedact(o.ApiVersion)
 	o.recurseRedact(o.Kind)
 	o.recurseRedact(o.Id)
@@ -266,7 +266,7 @@ func (o *NetworkingV1DnsForwarder) Redact() {
 	o.recurseRedact(o.Status)
 }
 
-func (o *NetworkingV1DnsForwarder) recurseRedact(v interface{}) {
+func (o *NetworkingV1DnsForwarderUpdate) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -291,12 +291,12 @@ func (o *NetworkingV1DnsForwarder) recurseRedact(v interface{}) {
 	}
 }
 
-func (o NetworkingV1DnsForwarder) zeroField(v interface{}) {
+func (o NetworkingV1DnsForwarderUpdate) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o NetworkingV1DnsForwarder) MarshalJSON() ([]byte, error) {
+func (o NetworkingV1DnsForwarderUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ApiVersion != nil {
 		toSerialize["api_version"] = o.ApiVersion
@@ -323,34 +323,34 @@ func (o NetworkingV1DnsForwarder) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableNetworkingV1DnsForwarder struct {
-	value *NetworkingV1DnsForwarder
+type NullableNetworkingV1DnsForwarderUpdate struct {
+	value *NetworkingV1DnsForwarderUpdate
 	isSet bool
 }
 
-func (v NullableNetworkingV1DnsForwarder) Get() *NetworkingV1DnsForwarder {
+func (v NullableNetworkingV1DnsForwarderUpdate) Get() *NetworkingV1DnsForwarderUpdate {
 	return v.value
 }
 
-func (v *NullableNetworkingV1DnsForwarder) Set(val *NetworkingV1DnsForwarder) {
+func (v *NullableNetworkingV1DnsForwarderUpdate) Set(val *NetworkingV1DnsForwarderUpdate) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableNetworkingV1DnsForwarder) IsSet() bool {
+func (v NullableNetworkingV1DnsForwarderUpdate) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableNetworkingV1DnsForwarder) Unset() {
+func (v *NullableNetworkingV1DnsForwarderUpdate) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableNetworkingV1DnsForwarder(val *NetworkingV1DnsForwarder) *NullableNetworkingV1DnsForwarder {
-	return &NullableNetworkingV1DnsForwarder{value: val, isSet: true}
+func NewNullableNetworkingV1DnsForwarderUpdate(val *NetworkingV1DnsForwarderUpdate) *NullableNetworkingV1DnsForwarderUpdate {
+	return &NullableNetworkingV1DnsForwarderUpdate{value: val, isSet: true}
 }
 
-func (v NullableNetworkingV1DnsForwarder) MarshalJSON() ([]byte, error) {
+func (v NullableNetworkingV1DnsForwarderUpdate) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -358,7 +358,7 @@ func (v NullableNetworkingV1DnsForwarder) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableNetworkingV1DnsForwarder) UnmarshalJSON(src []byte) error {
+func (v *NullableNetworkingV1DnsForwarderUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

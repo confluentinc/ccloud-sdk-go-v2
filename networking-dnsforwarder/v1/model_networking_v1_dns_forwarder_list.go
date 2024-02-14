@@ -34,7 +34,7 @@ import (
 	"reflect"
 )
 
-// NetworkingV1DnsForwarderList Add, remove, and update DNS forwarder for your gateway.  Related guides: * [Use VPC peering connections with Confluent Cloud on AWS](https://docs.confluent.io/cloud/current/networking/peering/aws-peering.html). * [Use VNet peering connections with Confluent Cloud on Azure](https://docs.confluent.io/cloud/current/networking/peering/azure-peering.html).   ## The Dns Forwarders Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.DnsForwarder\" />  ## Quotas and Limits This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):  | Quota | Description | | --- | --- | | `dns_forwarder_per_gateway` | Number of dns forwarder per gateway |
+// NetworkingV1DnsForwarderList Add, remove, and update DNS forwarder for your gateway.  Related guides: * [Use VPC peering connections with Confluent Cloud on AWS](https://docs.confluent.io/cloud/current/networking/peering/aws-peering.html). * [Use VNet peering connections with Confluent Cloud on Azure](https://docs.confluent.io/cloud/current/networking/peering/azure-peering.html).   ## The DNS Forwarders Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.DnsForwarder\" />
 type NetworkingV1DnsForwarderList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version,omitempty"`
