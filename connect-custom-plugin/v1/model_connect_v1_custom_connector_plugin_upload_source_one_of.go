@@ -38,9 +38,8 @@ type ConnectV1CustomConnectorPluginUploadSourceOneOf struct {
 
 // ConnectV1UploadSourcePresignedUrlAsConnectV1CustomConnectorPluginUploadSourceOneOf is a convenience function that returns ConnectV1UploadSourcePresignedUrl wrapped in ConnectV1CustomConnectorPluginUploadSourceOneOf
 func ConnectV1UploadSourcePresignedUrlAsConnectV1CustomConnectorPluginUploadSourceOneOf(v *ConnectV1UploadSourcePresignedUrl) ConnectV1CustomConnectorPluginUploadSourceOneOf {
-	return ConnectV1CustomConnectorPluginUploadSourceOneOf{ ConnectV1UploadSourcePresignedUrl: v}
+	return ConnectV1CustomConnectorPluginUploadSourceOneOf{ConnectV1UploadSourcePresignedUrl: v}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *ConnectV1CustomConnectorPluginUploadSourceOneOf) UnmarshalJSON(data []byte) error {
@@ -93,7 +92,7 @@ func (src ConnectV1CustomConnectorPluginUploadSourceOneOf) MarshalJSON() ([]byte
 }
 
 // Get the actual instance
-func (obj *ConnectV1CustomConnectorPluginUploadSourceOneOf) GetActualInstance() (interface{}) {
+func (obj *ConnectV1CustomConnectorPluginUploadSourceOneOf) GetActualInstance() interface{} {
 	if obj.ConnectV1UploadSourcePresignedUrl != nil {
 		return obj.ConnectV1UploadSourcePresignedUrl
 	}
@@ -141,5 +140,3 @@ func (v *NullableConnectV1CustomConnectorPluginUploadSourceOneOf) UnmarshalJSON(
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

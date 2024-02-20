@@ -34,19 +34,21 @@ import (
 	"reflect"
 )
 
-// ConnectV1PresignedUrl Request a presigned upload url for new Custom Connector Plugin.   ## The Presigned Urls Model <SchemaDefinition schemaRef=\"#/components/schemas/connect.v1.PresignedUrl\" />
+// ConnectV1PresignedUrl Request a presigned upload URL for new Custom Connector Plugin. Note that the URL policy expires in one hour. If the policy expires, you can request a new presigned upload URL.  Related guide: [Custom Connector Plugin API](https://docs.confluent.io/cloud/current/connectors/connect-api-section.html).   ## The Presigned Urls Model <SchemaDefinition schemaRef=\"#/components/schemas/connect.v1.PresignedUrl\" />
 type ConnectV1PresignedUrl struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
 	Kind *string `json:"kind,omitempty"`
-	// Content format of Custom Connector Plugin archive.
+	// Content format of the Custom Connector Plugin archive.
 	ContentFormat *string `json:"content_format,omitempty"`
+	// Cloud provider where the Custom Connector Plugin archive is uploaded.
+	Cloud *string `json:"cloud,omitempty"`
 	// Unique identifier of this upload.
 	UploadId *string `json:"upload_id,omitempty"`
-	// Upload url for Custom Connector Plugin archive.
+	// Upload URL for the Custom Connector Plugin archive.
 	UploadUrl *string `json:"upload_url,omitempty"`
-	// Upload form data of Custom Connector Plugin. All values should be strings.
+	// Upload form data of the Custom Connector Plugin. All values should be strings.
 	UploadFormData *map[string]interface{} `json:"upload_form_data,omitempty"`
 }
 
@@ -163,6 +165,38 @@ func (o *ConnectV1PresignedUrl) SetContentFormat(v string) {
 	o.ContentFormat = &v
 }
 
+// GetCloud returns the Cloud field value if set, zero value otherwise.
+func (o *ConnectV1PresignedUrl) GetCloud() string {
+	if o == nil || o.Cloud == nil {
+		var ret string
+		return ret
+	}
+	return *o.Cloud
+}
+
+// GetCloudOk returns a tuple with the Cloud field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectV1PresignedUrl) GetCloudOk() (*string, bool) {
+	if o == nil || o.Cloud == nil {
+		return nil, false
+	}
+	return o.Cloud, true
+}
+
+// HasCloud returns a boolean if a field has been set.
+func (o *ConnectV1PresignedUrl) HasCloud() bool {
+	if o != nil && o.Cloud != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCloud gets a reference to the given string and assigns it to the Cloud field.
+func (o *ConnectV1PresignedUrl) SetCloud(v string) {
+	o.Cloud = &v
+}
+
 // GetUploadId returns the UploadId field value if set, zero value otherwise.
 func (o *ConnectV1PresignedUrl) GetUploadId() string {
 	if o == nil || o.UploadId == nil {
@@ -261,42 +295,43 @@ func (o *ConnectV1PresignedUrl) SetUploadFormData(v map[string]interface{}) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ConnectV1PresignedUrl) Redact() {
-    o.recurseRedact(o.ApiVersion)
-    o.recurseRedact(o.Kind)
-    o.recurseRedact(o.ContentFormat)
-    o.recurseRedact(o.UploadId)
-    o.recurseRedact(o.UploadUrl)
-    o.recurseRedact(o.UploadFormData)
+	o.recurseRedact(o.ApiVersion)
+	o.recurseRedact(o.Kind)
+	o.recurseRedact(o.ContentFormat)
+	o.recurseRedact(o.Cloud)
+	o.recurseRedact(o.UploadId)
+	o.recurseRedact(o.UploadUrl)
+	o.recurseRedact(o.UploadFormData)
 }
 
 func (o *ConnectV1PresignedUrl) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ConnectV1PresignedUrl) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ConnectV1PresignedUrl) MarshalJSON() ([]byte, error) {
@@ -309,6 +344,9 @@ func (o ConnectV1PresignedUrl) MarshalJSON() ([]byte, error) {
 	}
 	if o.ContentFormat != nil {
 		toSerialize["content_format"] = o.ContentFormat
+	}
+	if o.Cloud != nil {
+		toSerialize["cloud"] = o.Cloud
 	}
 	if o.UploadId != nil {
 		toSerialize["upload_id"] = o.UploadId
@@ -365,5 +403,3 @@ func (v *NullableConnectV1PresignedUrl) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

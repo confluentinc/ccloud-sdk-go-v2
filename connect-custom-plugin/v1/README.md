@@ -84,7 +84,7 @@ Class | Method | HTTP request | Description
 *CustomConnectorPluginsConnectV1Api* | [**GetConnectV1CustomConnectorPlugin**](docs/CustomConnectorPluginsConnectV1Api.md#getconnectv1customconnectorplugin) | **Get** /connect/v1/custom-connector-plugins/{id} | Read a Custom Connector Plugin
 *CustomConnectorPluginsConnectV1Api* | [**ListConnectV1CustomConnectorPlugins**](docs/CustomConnectorPluginsConnectV1Api.md#listconnectv1customconnectorplugins) | **Get** /connect/v1/custom-connector-plugins | List of Custom Connector Plugins
 *CustomConnectorPluginsConnectV1Api* | [**UpdateConnectV1CustomConnectorPlugin**](docs/CustomConnectorPluginsConnectV1Api.md#updateconnectv1customconnectorplugin) | **Patch** /connect/v1/custom-connector-plugins/{id} | Update a Custom Connector Plugin
-*PresignedUrlsConnectV1Api* | [**PresignedUploadUrlConnectV1PresignedUrl**](docs/PresignedUrlsConnectV1Api.md#presigneduploadurlconnectv1presignedurl) | **Post** /connect/v1/presigned-upload-url | Request a presigned upload url for new Custom Connector Plugin.
+*PresignedUrlsConnectV1Api* | [**PresignedUploadUrlConnectV1PresignedUrl**](docs/PresignedUrlsConnectV1Api.md#presigneduploadurlconnectv1presignedurl) | **Post** /connect/v1/presigned-upload-url | Request a presigned upload URL for a new Custom Connector Plugin.
 
 
 ## Documentation For Models

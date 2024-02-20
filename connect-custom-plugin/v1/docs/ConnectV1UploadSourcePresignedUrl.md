@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Location** | **string** | Location of Custom Connector Plugin source.  | 
-**UploadId** | **string** | Upload id returned by &#x60;/presigned-upload-url&#x60; API. This field returns empty string in all responses. | 
+**Location** | **string** | Location of the Custom Connector Plugin source.  | 
+**UploadId** | **string** | Upload ID returned by the &#x60;/presigned-upload-url&#x60; API. This field returns an empty string in all responses. | 
 
 ## Methods
 

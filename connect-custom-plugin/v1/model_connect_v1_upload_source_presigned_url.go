@@ -34,11 +34,11 @@ import (
 	"reflect"
 )
 
-// ConnectV1UploadSourcePresignedUrl Presigned url of uploaded Custom Connector Plugin archive.
+// ConnectV1UploadSourcePresignedUrl Presigned URL of the uploaded Custom Connector Plugin archive.
 type ConnectV1UploadSourcePresignedUrl struct {
-	// Location of Custom Connector Plugin source. 
+	// Location of the Custom Connector Plugin source.
 	Location string `json:"location,omitempty"`
-	// Upload id returned by `/presigned-upload-url` API. This field returns empty string in all responses.
+	// Upload ID returned by the `/presigned-upload-url` API. This field returns an empty string in all responses.
 	UploadId string `json:"upload_id,omitempty"`
 }
 
@@ -74,7 +74,7 @@ func (o *ConnectV1UploadSourcePresignedUrl) GetLocation() string {
 // GetLocationOk returns a tuple with the Location field value
 // and a boolean to check if the value has been set.
 func (o *ConnectV1UploadSourcePresignedUrl) GetLocationOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Location, true
@@ -98,7 +98,7 @@ func (o *ConnectV1UploadSourcePresignedUrl) GetUploadId() string {
 // GetUploadIdOk returns a tuple with the UploadId field value
 // and a boolean to check if the value has been set.
 func (o *ConnectV1UploadSourcePresignedUrl) GetUploadIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.UploadId, true
@@ -111,38 +111,38 @@ func (o *ConnectV1UploadSourcePresignedUrl) SetUploadId(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ConnectV1UploadSourcePresignedUrl) Redact() {
-    o.recurseRedact(&o.Location)
-    o.recurseRedact(&o.UploadId)
+	o.recurseRedact(&o.Location)
+	o.recurseRedact(&o.UploadId)
 }
 
 func (o *ConnectV1UploadSourcePresignedUrl) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ConnectV1UploadSourcePresignedUrl) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ConnectV1UploadSourcePresignedUrl) MarshalJSON() ([]byte, error) {
@@ -199,5 +199,3 @@ func (v *NullableConnectV1UploadSourcePresignedUrl) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

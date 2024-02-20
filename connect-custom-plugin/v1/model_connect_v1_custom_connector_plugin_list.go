@@ -34,12 +34,12 @@ import (
 	"reflect"
 )
 
-// ConnectV1CustomConnectorPluginList `CustomConnectorPlugins` objects represent Custom Connector Plugins on Confluent Cloud.  The API allows you to list, create, read, update, and delete your Custom Connector Plugins.   ## The Custom Connector Plugins Model <SchemaDefinition schemaRef=\"#/components/schemas/connect.v1.CustomConnectorPlugin\" />
+// ConnectV1CustomConnectorPluginList CustomConnectorPlugins objects represent Custom Connector Plugins on Confluent Cloud. The API allows you to list, create, read, update, and delete your Custom Connector Plugins. Related guide: [Custom Connector Plugin API](https://docs.confluent.io/cloud/current/connectors/connect-api-section.html).   ## The Custom Connector Plugins Model <SchemaDefinition schemaRef=\"#/components/schemas/connect.v1.CustomConnectorPlugin\" />
 type ConnectV1CustomConnectorPluginList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
-	Kind string `json:"kind,omitempty"`
+	Kind     string   `json:"kind,omitempty"`
 	Metadata ListMeta `json:"metadata,omitempty"`
 	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
 	Data []ConnectV1CustomConnectorPlugin `json:"data,omitempty"`
@@ -79,7 +79,7 @@ func (o *ConnectV1CustomConnectorPluginList) GetApiVersion() string {
 // GetApiVersionOk returns a tuple with the ApiVersion field value
 // and a boolean to check if the value has been set.
 func (o *ConnectV1CustomConnectorPluginList) GetApiVersionOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ApiVersion, true
@@ -103,7 +103,7 @@ func (o *ConnectV1CustomConnectorPluginList) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *ConnectV1CustomConnectorPluginList) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -127,7 +127,7 @@ func (o *ConnectV1CustomConnectorPluginList) GetMetadata() ListMeta {
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *ConnectV1CustomConnectorPluginList) GetMetadataOk() (*ListMeta, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Metadata, true
@@ -151,7 +151,7 @@ func (o *ConnectV1CustomConnectorPluginList) GetData() []ConnectV1CustomConnecto
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
 func (o *ConnectV1CustomConnectorPluginList) GetDataOk() (*[]ConnectV1CustomConnectorPlugin, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Data, true
@@ -164,40 +164,40 @@ func (o *ConnectV1CustomConnectorPluginList) SetData(v []ConnectV1CustomConnecto
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ConnectV1CustomConnectorPluginList) Redact() {
-    o.recurseRedact(&o.ApiVersion)
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Metadata)
-    o.recurseRedact(&o.Data)
+	o.recurseRedact(&o.ApiVersion)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Metadata)
+	o.recurseRedact(&o.Data)
 }
 
 func (o *ConnectV1CustomConnectorPluginList) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ConnectV1CustomConnectorPluginList) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ConnectV1CustomConnectorPluginList) MarshalJSON() ([]byte, error) {
@@ -260,5 +260,3 @@ func (v *NullableConnectV1CustomConnectorPluginList) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

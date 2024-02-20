@@ -4,7 +4,7 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**PresignedUploadUrlConnectV1PresignedUrl**](PresignedUrlsConnectV1Api.md#PresignedUploadUrlConnectV1PresignedUrl) | **Post** /connect/v1/presigned-upload-url | Request a presigned upload url for new Custom Connector Plugin.
+[**PresignedUploadUrlConnectV1PresignedUrl**](PresignedUrlsConnectV1Api.md#PresignedUploadUrlConnectV1PresignedUrl) | **Post** /connect/v1/presigned-upload-url | Request a presigned upload URL for a new Custom Connector Plugin.
 
 
 
@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 > ConnectV1PresignedUrl PresignedUploadUrlConnectV1PresignedUrl(ctx).ConnectV1PresignedUrlRequest(connectV1PresignedUrlRequest).Execute()
 
-Request a presigned upload url for new Custom Connector Plugin.
+Request a presigned upload URL for a new Custom Connector Plugin.
 
 
 

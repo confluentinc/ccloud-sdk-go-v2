@@ -42,14 +42,14 @@ var (
 type CustomConnectorPluginsConnectV1Api interface {
 
 	/*
-	CreateConnectV1CustomConnectorPlugin Create a Custom Connector Plugin
+			CreateConnectV1CustomConnectorPlugin Create a Custom Connector Plugin
 
-	[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to create a custom connector plugin.
+		Make a request to create a custom connector plugin.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiCreateConnectV1CustomConnectorPluginRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiCreateConnectV1CustomConnectorPluginRequest
 	*/
 	CreateConnectV1CustomConnectorPlugin(ctx _context.Context) ApiCreateConnectV1CustomConnectorPluginRequest
 
@@ -58,15 +58,15 @@ Make a request to create a custom connector plugin.
 	CreateConnectV1CustomConnectorPluginExecute(r ApiCreateConnectV1CustomConnectorPluginRequest) (ConnectV1CustomConnectorPlugin, *_nethttp.Response, error)
 
 	/*
-	DeleteConnectV1CustomConnectorPlugin Delete a Custom Connector Plugin
+			DeleteConnectV1CustomConnectorPlugin Delete a Custom Connector Plugin
 
-	[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to delete a custom connector plugin.
+		Make a request to delete a custom connector plugin.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the custom connector plugin.
-	 @return ApiDeleteConnectV1CustomConnectorPluginRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the custom connector plugin.
+			 @return ApiDeleteConnectV1CustomConnectorPluginRequest
 	*/
 	DeleteConnectV1CustomConnectorPlugin(ctx _context.Context, id string) ApiDeleteConnectV1CustomConnectorPluginRequest
 
@@ -74,15 +74,15 @@ Make a request to delete a custom connector plugin.
 	DeleteConnectV1CustomConnectorPluginExecute(r ApiDeleteConnectV1CustomConnectorPluginRequest) (*_nethttp.Response, error)
 
 	/*
-	GetConnectV1CustomConnectorPlugin Read a Custom Connector Plugin
+			GetConnectV1CustomConnectorPlugin Read a Custom Connector Plugin
 
-	[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to read a custom connector plugin.
+		Make a request to read a custom connector plugin.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the custom connector plugin.
-	 @return ApiGetConnectV1CustomConnectorPluginRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the custom connector plugin.
+			 @return ApiGetConnectV1CustomConnectorPluginRequest
 	*/
 	GetConnectV1CustomConnectorPlugin(ctx _context.Context, id string) ApiGetConnectV1CustomConnectorPluginRequest
 
@@ -91,14 +91,17 @@ Make a request to read a custom connector plugin.
 	GetConnectV1CustomConnectorPluginExecute(r ApiGetConnectV1CustomConnectorPluginRequest) (ConnectV1CustomConnectorPlugin, *_nethttp.Response, error)
 
 	/*
-	ListConnectV1CustomConnectorPlugins List of Custom Connector Plugins
+			ListConnectV1CustomConnectorPlugins List of Custom Connector Plugins
 
-	[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Retrieve a sorted, filtered, paginated list of all custom connector plugins.
+		Retrieve a sorted, filtered, paginated list of all custom connector plugins.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiListConnectV1CustomConnectorPluginsRequest
+		If no `cloud` filter is specified, returns custom connector plugins from all clouds.
+
+
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiListConnectV1CustomConnectorPluginsRequest
 	*/
 	ListConnectV1CustomConnectorPlugins(ctx _context.Context) ApiListConnectV1CustomConnectorPluginsRequest
 
@@ -107,17 +110,17 @@ Retrieve a sorted, filtered, paginated list of all custom connector plugins.
 	ListConnectV1CustomConnectorPluginsExecute(r ApiListConnectV1CustomConnectorPluginsRequest) (ConnectV1CustomConnectorPluginList, *_nethttp.Response, error)
 
 	/*
-	UpdateConnectV1CustomConnectorPlugin Update a Custom Connector Plugin
+			UpdateConnectV1CustomConnectorPlugin Update a Custom Connector Plugin
 
-	[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to update a custom connector plugin.
+		Make a request to update a custom connector plugin.
 
 
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the custom connector plugin.
-	 @return ApiUpdateConnectV1CustomConnectorPluginRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the custom connector plugin.
+			 @return ApiUpdateConnectV1CustomConnectorPluginRequest
 	*/
 	UpdateConnectV1CustomConnectorPlugin(ctx _context.Context, id string) ApiUpdateConnectV1CustomConnectorPluginRequest
 
@@ -130,8 +133,8 @@ Make a request to update a custom connector plugin.
 type CustomConnectorPluginsConnectV1ApiService service
 
 type ApiCreateConnectV1CustomConnectorPluginRequest struct {
-	ctx _context.Context
-	ApiService CustomConnectorPluginsConnectV1Api
+	ctx                            _context.Context
+	ApiService                     CustomConnectorPluginsConnectV1Api
 	connectV1CustomConnectorPlugin *ConnectV1CustomConnectorPlugin
 }
 
@@ -147,22 +150,23 @@ func (r ApiCreateConnectV1CustomConnectorPluginRequest) Execute() (ConnectV1Cust
 /*
 CreateConnectV1CustomConnectorPlugin Create a Custom Connector Plugin
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create a custom connector plugin.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateConnectV1CustomConnectorPluginRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateConnectV1CustomConnectorPluginRequest
 */
 func (a *CustomConnectorPluginsConnectV1ApiService) CreateConnectV1CustomConnectorPlugin(ctx _context.Context) ApiCreateConnectV1CustomConnectorPluginRequest {
 	return ApiCreateConnectV1CustomConnectorPluginRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ConnectV1CustomConnectorPlugin
+//
+//	@return ConnectV1CustomConnectorPlugin
 func (a *CustomConnectorPluginsConnectV1ApiService) CreateConnectV1CustomConnectorPluginExecute(r ApiCreateConnectV1CustomConnectorPluginRequest) (ConnectV1CustomConnectorPlugin, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -300,11 +304,10 @@ func (a *CustomConnectorPluginsConnectV1ApiService) CreateConnectV1CustomConnect
 }
 
 type ApiDeleteConnectV1CustomConnectorPluginRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService CustomConnectorPluginsConnectV1Api
-	id string
+	id         string
 }
-
 
 func (r ApiDeleteConnectV1CustomConnectorPluginRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteConnectV1CustomConnectorPluginExecute(r)
@@ -313,19 +316,19 @@ func (r ApiDeleteConnectV1CustomConnectorPluginRequest) Execute() (*_nethttp.Res
 /*
 DeleteConnectV1CustomConnectorPlugin Delete a Custom Connector Plugin
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete a custom connector plugin.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the custom connector plugin.
- @return ApiDeleteConnectV1CustomConnectorPluginRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the custom connector plugin.
+	@return ApiDeleteConnectV1CustomConnectorPluginRequest
 */
 func (a *CustomConnectorPluginsConnectV1ApiService) DeleteConnectV1CustomConnectorPlugin(ctx _context.Context, id string) ApiDeleteConnectV1CustomConnectorPluginRequest {
 	return ApiDeleteConnectV1CustomConnectorPluginRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
@@ -446,11 +449,10 @@ func (a *CustomConnectorPluginsConnectV1ApiService) DeleteConnectV1CustomConnect
 }
 
 type ApiGetConnectV1CustomConnectorPluginRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService CustomConnectorPluginsConnectV1Api
-	id string
+	id         string
 }
-
 
 func (r ApiGetConnectV1CustomConnectorPluginRequest) Execute() (ConnectV1CustomConnectorPlugin, *_nethttp.Response, error) {
 	return r.ApiService.GetConnectV1CustomConnectorPluginExecute(r)
@@ -459,24 +461,25 @@ func (r ApiGetConnectV1CustomConnectorPluginRequest) Execute() (ConnectV1CustomC
 /*
 GetConnectV1CustomConnectorPlugin Read a Custom Connector Plugin
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a custom connector plugin.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the custom connector plugin.
- @return ApiGetConnectV1CustomConnectorPluginRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the custom connector plugin.
+	@return ApiGetConnectV1CustomConnectorPluginRequest
 */
 func (a *CustomConnectorPluginsConnectV1ApiService) GetConnectV1CustomConnectorPlugin(ctx _context.Context, id string) ApiGetConnectV1CustomConnectorPluginRequest {
 	return ApiGetConnectV1CustomConnectorPluginRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return ConnectV1CustomConnectorPlugin
+//
+//	@return ConnectV1CustomConnectorPlugin
 func (a *CustomConnectorPluginsConnectV1ApiService) GetConnectV1CustomConnectorPluginExecute(r ApiGetConnectV1CustomConnectorPluginRequest) (ConnectV1CustomConnectorPlugin, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -603,10 +606,17 @@ func (a *CustomConnectorPluginsConnectV1ApiService) GetConnectV1CustomConnectorP
 }
 
 type ApiListConnectV1CustomConnectorPluginsRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService CustomConnectorPluginsConnectV1Api
-	pageSize *int32
-	pageToken *string
+	cloud      *string
+	pageSize   *int32
+	pageToken  *string
+}
+
+// Filter the results by exact match for cloud.
+func (r ApiListConnectV1CustomConnectorPluginsRequest) Cloud(cloud string) ApiListConnectV1CustomConnectorPluginsRequest {
+	r.cloud = &cloud
+	return r
 }
 
 // A pagination size for collection requests.
@@ -614,6 +624,7 @@ func (r ApiListConnectV1CustomConnectorPluginsRequest) PageSize(pageSize int32) 
 	r.pageSize = &pageSize
 	return r
 }
+
 // An opaque pagination token for collection requests.
 func (r ApiListConnectV1CustomConnectorPluginsRequest) PageToken(pageToken string) ApiListConnectV1CustomConnectorPluginsRequest {
 	r.pageToken = &pageToken
@@ -627,22 +638,25 @@ func (r ApiListConnectV1CustomConnectorPluginsRequest) Execute() (ConnectV1Custo
 /*
 ListConnectV1CustomConnectorPlugins List of Custom Connector Plugins
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all custom connector plugins.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListConnectV1CustomConnectorPluginsRequest
+If no `cloud` filter is specified, returns custom connector plugins from all clouds.
+
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListConnectV1CustomConnectorPluginsRequest
 */
 func (a *CustomConnectorPluginsConnectV1ApiService) ListConnectV1CustomConnectorPlugins(ctx _context.Context) ApiListConnectV1CustomConnectorPluginsRequest {
 	return ApiListConnectV1CustomConnectorPluginsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ConnectV1CustomConnectorPluginList
+//
+//	@return ConnectV1CustomConnectorPluginList
 func (a *CustomConnectorPluginsConnectV1ApiService) ListConnectV1CustomConnectorPluginsExecute(r ApiListConnectV1CustomConnectorPluginsRequest) (ConnectV1CustomConnectorPluginList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -664,6 +678,9 @@ func (a *CustomConnectorPluginsConnectV1ApiService) ListConnectV1CustomConnector
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.cloud != nil {
+		localVarQueryParams.Add("cloud", parameterToString(*r.cloud, ""))
+	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}
@@ -764,9 +781,9 @@ func (a *CustomConnectorPluginsConnectV1ApiService) ListConnectV1CustomConnector
 }
 
 type ApiUpdateConnectV1CustomConnectorPluginRequest struct {
-	ctx _context.Context
-	ApiService CustomConnectorPluginsConnectV1Api
-	id string
+	ctx                                  _context.Context
+	ApiService                           CustomConnectorPluginsConnectV1Api
+	id                                   string
 	connectV1CustomConnectorPluginUpdate *ConnectV1CustomConnectorPluginUpdate
 }
 
@@ -782,26 +799,25 @@ func (r ApiUpdateConnectV1CustomConnectorPluginRequest) Execute() (ConnectV1Cust
 /*
 UpdateConnectV1CustomConnectorPlugin Update a Custom Connector Plugin
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update a custom connector plugin.
 
-
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the custom connector plugin.
- @return ApiUpdateConnectV1CustomConnectorPluginRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the custom connector plugin.
+	@return ApiUpdateConnectV1CustomConnectorPluginRequest
 */
 func (a *CustomConnectorPluginsConnectV1ApiService) UpdateConnectV1CustomConnectorPlugin(ctx _context.Context, id string) ApiUpdateConnectV1CustomConnectorPluginRequest {
 	return ApiUpdateConnectV1CustomConnectorPluginRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return ConnectV1CustomConnectorPlugin
+//
+//	@return ConnectV1CustomConnectorPlugin
 func (a *CustomConnectorPluginsConnectV1ApiService) UpdateConnectV1CustomConnectorPluginExecute(r ApiUpdateConnectV1CustomConnectorPluginRequest) (ConnectV1CustomConnectorPlugin, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
@@ -896,6 +912,16 @@ func (a *CustomConnectorPluginsConnectV1ApiService) UpdateConnectV1CustomConnect
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

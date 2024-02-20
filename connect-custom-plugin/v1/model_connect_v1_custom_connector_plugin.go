@@ -34,14 +34,14 @@ import (
 	"reflect"
 )
 
-// ConnectV1CustomConnectorPlugin `CustomConnectorPlugins` objects represent Custom Connector Plugins on Confluent Cloud.  The API allows you to list, create, read, update, and delete your Custom Connector Plugins.   ## The Custom Connector Plugins Model <SchemaDefinition schemaRef=\"#/components/schemas/connect.v1.CustomConnectorPlugin\" />
+// ConnectV1CustomConnectorPlugin CustomConnectorPlugins objects represent Custom Connector Plugins on Confluent Cloud. The API allows you to list, create, read, update, and delete your Custom Connector Plugins. Related guide: [Custom Connector Plugin API](https://docs.confluent.io/cloud/current/connectors/connect-api-section.html).   ## The Custom Connector Plugins Model <SchemaDefinition schemaRef=\"#/components/schemas/connect.v1.CustomConnectorPlugin\" />
 type ConnectV1CustomConnectorPlugin struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
 	Kind *string `json:"kind,omitempty"`
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
-	Id *string `json:"id,omitempty"`
+	Id       *string     `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
 	// Display name of Custom Connector Plugin.
 	DisplayName *string `json:"display_name,omitempty"`
@@ -53,8 +53,10 @@ type ConnectV1CustomConnectorPlugin struct {
 	DocumentationLink *string `json:"documentation_link,omitempty"`
 	// Java class or alias for connector. You can get connector class from connector documentation provided by developer.
 	ConnectorClass *string `json:"connector_class,omitempty"`
-	// Custom Connector type. 
+	// Custom Connector type.
 	ConnectorType *string `json:"connector_type,omitempty"`
+	// Cloud provider where the Custom Connector Plugin archive is uploaded.
+	Cloud *string `json:"cloud,omitempty"`
 	// A sensitive property is a connector configuration property that must be hidden after a user enters property value when setting up connector.
 	SensitiveConfigProperties *[]string `json:"sensitive_config_properties,omitempty"`
 	// [immutable] Upload source of Custom Connector Plugin. Only required in `create` request, will be ignored in `read`, `update` or `list`.
@@ -67,6 +69,8 @@ type ConnectV1CustomConnectorPlugin struct {
 // will change when the set of required properties is changed
 func NewConnectV1CustomConnectorPlugin() *ConnectV1CustomConnectorPlugin {
 	this := ConnectV1CustomConnectorPlugin{}
+	var cloud string = "AWS"
+	this.Cloud = &cloud
 	return &this
 }
 
@@ -75,6 +79,8 @@ func NewConnectV1CustomConnectorPlugin() *ConnectV1CustomConnectorPlugin {
 // but it doesn't guarantee that properties required by API are set
 func NewConnectV1CustomConnectorPluginWithDefaults() *ConnectV1CustomConnectorPlugin {
 	this := ConnectV1CustomConnectorPlugin{}
+	var cloud string = "AWS"
+	this.Cloud = &cloud
 	return &this
 }
 
@@ -398,6 +404,38 @@ func (o *ConnectV1CustomConnectorPlugin) SetConnectorType(v string) {
 	o.ConnectorType = &v
 }
 
+// GetCloud returns the Cloud field value if set, zero value otherwise.
+func (o *ConnectV1CustomConnectorPlugin) GetCloud() string {
+	if o == nil || o.Cloud == nil {
+		var ret string
+		return ret
+	}
+	return *o.Cloud
+}
+
+// GetCloudOk returns a tuple with the Cloud field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectV1CustomConnectorPlugin) GetCloudOk() (*string, bool) {
+	if o == nil || o.Cloud == nil {
+		return nil, false
+	}
+	return o.Cloud, true
+}
+
+// HasCloud returns a boolean if a field has been set.
+func (o *ConnectV1CustomConnectorPlugin) HasCloud() bool {
+	if o != nil && o.Cloud != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCloud gets a reference to the given string and assigns it to the Cloud field.
+func (o *ConnectV1CustomConnectorPlugin) SetCloud(v string) {
+	o.Cloud = &v
+}
+
 // GetSensitiveConfigProperties returns the SensitiveConfigProperties field value if set, zero value otherwise.
 func (o *ConnectV1CustomConnectorPlugin) GetSensitiveConfigProperties() []string {
 	if o == nil || o.SensitiveConfigProperties == nil {
@@ -464,48 +502,49 @@ func (o *ConnectV1CustomConnectorPlugin) SetUploadSource(v ConnectV1CustomConnec
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ConnectV1CustomConnectorPlugin) Redact() {
-    o.recurseRedact(o.ApiVersion)
-    o.recurseRedact(o.Kind)
-    o.recurseRedact(o.Id)
-    o.recurseRedact(o.Metadata)
-    o.recurseRedact(o.DisplayName)
-    o.recurseRedact(o.ContentFormat)
-    o.recurseRedact(o.Description)
-    o.recurseRedact(o.DocumentationLink)
-    o.recurseRedact(o.ConnectorClass)
-    o.recurseRedact(o.ConnectorType)
-    o.recurseRedact(o.SensitiveConfigProperties)
-    o.recurseRedact(o.UploadSource)
+	o.recurseRedact(o.ApiVersion)
+	o.recurseRedact(o.Kind)
+	o.recurseRedact(o.Id)
+	o.recurseRedact(o.Metadata)
+	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.ContentFormat)
+	o.recurseRedact(o.Description)
+	o.recurseRedact(o.DocumentationLink)
+	o.recurseRedact(o.ConnectorClass)
+	o.recurseRedact(o.ConnectorType)
+	o.recurseRedact(o.Cloud)
+	o.recurseRedact(o.SensitiveConfigProperties)
+	o.recurseRedact(o.UploadSource)
 }
 
 func (o *ConnectV1CustomConnectorPlugin) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ConnectV1CustomConnectorPlugin) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ConnectV1CustomConnectorPlugin) MarshalJSON() ([]byte, error) {
@@ -539,6 +578,9 @@ func (o ConnectV1CustomConnectorPlugin) MarshalJSON() ([]byte, error) {
 	}
 	if o.ConnectorType != nil {
 		toSerialize["connector_type"] = o.ConnectorType
+	}
+	if o.Cloud != nil {
+		toSerialize["cloud"] = o.Cloud
 	}
 	if o.SensitiveConfigProperties != nil {
 		toSerialize["sensitive_config_properties"] = o.SensitiveConfigProperties
@@ -592,5 +634,3 @@ func (v *NullableConnectV1CustomConnectorPlugin) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

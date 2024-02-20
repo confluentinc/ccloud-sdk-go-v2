@@ -34,17 +34,19 @@ import (
 	"reflect"
 )
 
-// ConnectV1PresignedUrlRequest Request schema of presigned upload url. 
+// ConnectV1PresignedUrlRequest Request schema of the presigned upload URL.
 type ConnectV1PresignedUrlRequest struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
 	Kind *string `json:"kind,omitempty"`
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
-	Id *string `json:"id,omitempty"`
+	Id       *string     `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
-	// Archive format of Custom Connector Plugin.
+	// Archive format of the Custom Connector Plugin.
 	ContentFormat *string `json:"content_format,omitempty"`
+	// Cloud provider where the Custom Connector Plugin archive is uploaded.
+	Cloud *string `json:"cloud,omitempty"`
 }
 
 // NewConnectV1PresignedUrlRequest instantiates a new ConnectV1PresignedUrlRequest object
@@ -53,6 +55,8 @@ type ConnectV1PresignedUrlRequest struct {
 // will change when the set of required properties is changed
 func NewConnectV1PresignedUrlRequest() *ConnectV1PresignedUrlRequest {
 	this := ConnectV1PresignedUrlRequest{}
+	var cloud string = "AWS"
+	this.Cloud = &cloud
 	return &this
 }
 
@@ -61,6 +65,8 @@ func NewConnectV1PresignedUrlRequest() *ConnectV1PresignedUrlRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewConnectV1PresignedUrlRequestWithDefaults() *ConnectV1PresignedUrlRequest {
 	this := ConnectV1PresignedUrlRequest{}
+	var cloud string = "AWS"
+	this.Cloud = &cloud
 	return &this
 }
 
@@ -224,43 +230,76 @@ func (o *ConnectV1PresignedUrlRequest) SetContentFormat(v string) {
 	o.ContentFormat = &v
 }
 
+// GetCloud returns the Cloud field value if set, zero value otherwise.
+func (o *ConnectV1PresignedUrlRequest) GetCloud() string {
+	if o == nil || o.Cloud == nil {
+		var ret string
+		return ret
+	}
+	return *o.Cloud
+}
+
+// GetCloudOk returns a tuple with the Cloud field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectV1PresignedUrlRequest) GetCloudOk() (*string, bool) {
+	if o == nil || o.Cloud == nil {
+		return nil, false
+	}
+	return o.Cloud, true
+}
+
+// HasCloud returns a boolean if a field has been set.
+func (o *ConnectV1PresignedUrlRequest) HasCloud() bool {
+	if o != nil && o.Cloud != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCloud gets a reference to the given string and assigns it to the Cloud field.
+func (o *ConnectV1PresignedUrlRequest) SetCloud(v string) {
+	o.Cloud = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *ConnectV1PresignedUrlRequest) Redact() {
-    o.recurseRedact(o.ApiVersion)
-    o.recurseRedact(o.Kind)
-    o.recurseRedact(o.Id)
-    o.recurseRedact(o.Metadata)
-    o.recurseRedact(o.ContentFormat)
+	o.recurseRedact(o.ApiVersion)
+	o.recurseRedact(o.Kind)
+	o.recurseRedact(o.Id)
+	o.recurseRedact(o.Metadata)
+	o.recurseRedact(o.ContentFormat)
+	o.recurseRedact(o.Cloud)
 }
 
 func (o *ConnectV1PresignedUrlRequest) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ConnectV1PresignedUrlRequest) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ConnectV1PresignedUrlRequest) MarshalJSON() ([]byte, error) {
@@ -279,6 +318,9 @@ func (o ConnectV1PresignedUrlRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.ContentFormat != nil {
 		toSerialize["content_format"] = o.ContentFormat
+	}
+	if o.Cloud != nil {
+		toSerialize["cloud"] = o.Cloud
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
@@ -326,5 +368,3 @@ func (v *NullableConnectV1PresignedUrlRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

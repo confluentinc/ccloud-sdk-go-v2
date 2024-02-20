@@ -218,7 +218,7 @@ Name | Type | Description  | Notes
 
 ## ListConnectV1CustomConnectorPlugins
 
-> ConnectV1CustomConnectorPluginList ListConnectV1CustomConnectorPlugins(ctx).PageSize(pageSize).PageToken(pageToken).Execute()
+> ConnectV1CustomConnectorPluginList ListConnectV1CustomConnectorPlugins(ctx).Cloud(cloud).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Custom Connector Plugins
 
@@ -237,12 +237,13 @@ import (
 )
 
 func main() {
+    cloud := "AWS" // string | Filter the results by exact match for cloud. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CustomConnectorPluginsConnectV1Api.ListConnectV1CustomConnectorPlugins(context.Background()).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.CustomConnectorPluginsConnectV1Api.ListConnectV1CustomConnectorPlugins(context.Background()).Cloud(cloud).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CustomConnectorPluginsConnectV1Api.ListConnectV1CustomConnectorPlugins``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -263,6 +264,7 @@ Other parameters are passed through a pointer to a apiListConnectV1CustomConnect
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **cloud** | **string** | Filter the results by exact match for cloud. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 

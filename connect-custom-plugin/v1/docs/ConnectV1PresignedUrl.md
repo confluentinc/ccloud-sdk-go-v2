@@ -6,10 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ApiVersion** | Pointer to **string** | APIVersion defines the schema version of this representation of a resource. | [optional] [readonly] 
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
-**ContentFormat** | Pointer to **string** | Content format of Custom Connector Plugin archive. | [optional] [readonly] 
+**ContentFormat** | Pointer to **string** | Content format of the Custom Connector Plugin archive. | [optional] [readonly] 
+**Cloud** | Pointer to **string** | Cloud provider where the Custom Connector Plugin archive is uploaded. | [optional] [readonly] 
 **UploadId** | Pointer to **string** | Unique identifier of this upload. | [optional] [readonly] 
-**UploadUrl** | Pointer to **string** | Upload url for Custom Connector Plugin archive. | [optional] [readonly] 
-**UploadFormData** | Pointer to **map[string]interface{}** | Upload form data of Custom Connector Plugin. All values should be strings. | [optional] [readonly] 
+**UploadUrl** | Pointer to **string** | Upload URL for the Custom Connector Plugin archive. | [optional] [readonly] 
+**UploadFormData** | Pointer to **map[string]interface{}** | Upload form data of the Custom Connector Plugin. All values should be strings. | [optional] [readonly] 
 
 ## Methods
 
@@ -104,6 +105,31 @@ SetContentFormat sets ContentFormat field to given value.
 `func (o *ConnectV1PresignedUrl) HasContentFormat() bool`
 
 HasContentFormat returns a boolean if a field has been set.
+
+### GetCloud
+
+`func (o *ConnectV1PresignedUrl) GetCloud() string`
+
+GetCloud returns the Cloud field if non-nil, zero value otherwise.
+
+### GetCloudOk
+
+`func (o *ConnectV1PresignedUrl) GetCloudOk() (*string, bool)`
+
+GetCloudOk returns a tuple with the Cloud field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCloud
+
+`func (o *ConnectV1PresignedUrl) SetCloud(v string)`
+
+SetCloud sets Cloud field to given value.
+
+### HasCloud
+
+`func (o *ConnectV1PresignedUrl) HasCloud() bool`
+
+HasCloud returns a boolean if a field has been set.
 
 ### GetUploadId
 
