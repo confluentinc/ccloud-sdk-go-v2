@@ -179,7 +179,6 @@ func (o *OAuthError) UnmarshalJSON(data []byte) (err error) {
 	varOAuthError := _OAuthError{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOAuthError)
 
 	if err != nil {

@@ -163,7 +163,6 @@ func (o *PartitionStatisticsFile) UnmarshalJSON(data []byte) (err error) {
 	varPartitionStatisticsFile := _PartitionStatisticsFile{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varPartitionStatisticsFile)
 
 	if err != nil {

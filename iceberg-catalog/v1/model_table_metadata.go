@@ -819,7 +819,6 @@ func (o *TableMetadata) UnmarshalJSON(data []byte) (err error) {
 	varTableMetadata := _TableMetadata{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varTableMetadata)
 
 	if err != nil {

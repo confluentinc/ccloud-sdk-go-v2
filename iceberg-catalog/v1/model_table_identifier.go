@@ -135,7 +135,6 @@ func (o *TableIdentifier) UnmarshalJSON(data []byte) (err error) {
 	varTableIdentifier := _TableIdentifier{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varTableIdentifier)
 
 	if err != nil {

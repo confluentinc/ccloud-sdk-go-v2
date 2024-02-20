@@ -284,7 +284,6 @@ func (o *OAuthTokenResponse) UnmarshalJSON(data []byte) (err error) {
 	varOAuthTokenResponse := _OAuthTokenResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOAuthTokenResponse)
 
 	if err != nil {

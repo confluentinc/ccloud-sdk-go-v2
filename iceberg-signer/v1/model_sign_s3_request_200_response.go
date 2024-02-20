@@ -135,7 +135,6 @@ func (o *SignS3Request200Response) UnmarshalJSON(data []byte) (err error) {
 	varSignS3Request200Response := _SignS3Request200Response{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSignS3Request200Response)
 
 	if err != nil {

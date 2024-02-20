@@ -191,7 +191,6 @@ func (o *SortField) UnmarshalJSON(data []byte) (err error) {
 	varSortField := _SortField{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSortField)
 
 	if err != nil {

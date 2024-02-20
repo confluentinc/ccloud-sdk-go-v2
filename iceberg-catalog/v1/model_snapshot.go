@@ -300,7 +300,6 @@ func (o *Snapshot) UnmarshalJSON(data []byte) (err error) {
 	varSnapshot := _Snapshot{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSnapshot)
 
 	if err != nil {

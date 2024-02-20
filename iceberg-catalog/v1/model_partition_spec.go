@@ -143,7 +143,6 @@ func (o *PartitionSpec) UnmarshalJSON(data []byte) (err error) {
 	varPartitionSpec := _PartitionSpec{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varPartitionSpec)
 
 	if err != nil {

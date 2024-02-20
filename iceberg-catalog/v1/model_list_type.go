@@ -191,7 +191,6 @@ func (o *ListType) UnmarshalJSON(data []byte) (err error) {
 	varListType := _ListType{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varListType)
 
 	if err != nil {

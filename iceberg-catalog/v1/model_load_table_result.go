@@ -180,7 +180,6 @@ func (o *LoadTableResult) UnmarshalJSON(data []byte) (err error) {
 	varLoadTableResult := _LoadTableResult{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varLoadTableResult)
 
 	if err != nil {

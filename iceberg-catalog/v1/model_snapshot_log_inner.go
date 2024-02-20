@@ -135,7 +135,6 @@ func (o *SnapshotLogInner) UnmarshalJSON(data []byte) (err error) {
 	varSnapshotLogInner := _SnapshotLogInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSnapshotLogInner)
 
 	if err != nil {

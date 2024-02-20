@@ -247,7 +247,6 @@ func (o *MapType) UnmarshalJSON(data []byte) (err error) {
 	varMapType := _MapType{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varMapType)
 
 	if err != nil {

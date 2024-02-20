@@ -207,7 +207,6 @@ func (o *Schema) UnmarshalJSON(data []byte) (err error) {
 	varSchema := _Schema{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSchema)
 
 	if err != nil {

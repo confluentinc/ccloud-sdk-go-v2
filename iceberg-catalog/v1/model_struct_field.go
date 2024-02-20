@@ -227,7 +227,6 @@ func (o *StructField) UnmarshalJSON(data []byte) (err error) {
 	varStructField := _StructField{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varStructField)
 
 	if err != nil {

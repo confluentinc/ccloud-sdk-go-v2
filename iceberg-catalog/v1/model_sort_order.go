@@ -135,7 +135,6 @@ func (o *SortOrder) UnmarshalJSON(data []byte) (err error) {
 	varSortOrder := _SortOrder{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSortOrder)
 
 	if err != nil {

@@ -227,7 +227,6 @@ func (o *BlobMetadata) UnmarshalJSON(data []byte) (err error) {
 	varBlobMetadata := _BlobMetadata{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varBlobMetadata)
 
 	if err != nil {

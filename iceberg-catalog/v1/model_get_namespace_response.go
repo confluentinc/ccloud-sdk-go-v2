@@ -145,7 +145,6 @@ func (o *GetNamespaceResponse) UnmarshalJSON(data []byte) (err error) {
 	varGetNamespaceResponse := _GetNamespaceResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetNamespaceResponse)
 
 	if err != nil {

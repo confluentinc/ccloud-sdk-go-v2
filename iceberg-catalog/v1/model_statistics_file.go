@@ -219,7 +219,6 @@ func (o *StatisticsFile) UnmarshalJSON(data []byte) (err error) {
 	varStatisticsFile := _StatisticsFile{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varStatisticsFile)
 
 	if err != nil {

@@ -135,7 +135,6 @@ func (o *StructType) UnmarshalJSON(data []byte) (err error) {
 	varStructType := _StructType{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varStructType)
 
 	if err != nil {

@@ -137,7 +137,6 @@ func (o *CatalogConfig) UnmarshalJSON(data []byte) (err error) {
 	varCatalogConfig := _CatalogConfig{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCatalogConfig)
 
 	if err != nil {

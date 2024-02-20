@@ -135,7 +135,6 @@ func (o *MetadataLogInner) UnmarshalJSON(data []byte) (err error) {
 	varMetadataLogInner := _MetadataLogInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varMetadataLogInner)
 
 	if err != nil {

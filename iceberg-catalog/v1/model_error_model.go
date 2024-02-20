@@ -202,7 +202,6 @@ func (o *ErrorModel) UnmarshalJSON(data []byte) (err error) {
 	varErrorModel := _ErrorModel{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varErrorModel)
 
 	if err != nil {

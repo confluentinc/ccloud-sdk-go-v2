@@ -107,7 +107,6 @@ func (o *IcebergErrorResponse) UnmarshalJSON(data []byte) (err error) {
 	varIcebergErrorResponse := _IcebergErrorResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varIcebergErrorResponse)
 
 	if err != nil {

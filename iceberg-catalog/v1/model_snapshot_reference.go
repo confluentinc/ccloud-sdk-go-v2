@@ -243,7 +243,6 @@ func (o *SnapshotReference) UnmarshalJSON(data []byte) (err error) {
 	varSnapshotReference := _SnapshotReference{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSnapshotReference)
 
 	if err != nil {
