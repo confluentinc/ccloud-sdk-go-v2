@@ -8,7 +8,8 @@ Name | Type | Description | Notes
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
-**ContentFormat** | Pointer to **string** | Archive format of Custom Connector Plugin. | [optional] 
+**ContentFormat** | Pointer to **string** | Archive format of the Custom Connector Plugin. | [optional] 
+**Cloud** | Pointer to **string** | Cloud provider where the Custom Connector Plugin archive is uploaded. | [optional] [default to "AWS"]
 
 ## Methods
 
@@ -153,6 +154,31 @@ SetContentFormat sets ContentFormat field to given value.
 `func (o *ConnectV1PresignedUrlRequest) HasContentFormat() bool`
 
 HasContentFormat returns a boolean if a field has been set.
+
+### GetCloud
+
+`func (o *ConnectV1PresignedUrlRequest) GetCloud() string`
+
+GetCloud returns the Cloud field if non-nil, zero value otherwise.
+
+### GetCloudOk
+
+`func (o *ConnectV1PresignedUrlRequest) GetCloudOk() (*string, bool)`
+
+GetCloudOk returns a tuple with the Cloud field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCloud
+
+`func (o *ConnectV1PresignedUrlRequest) SetCloud(v string)`
+
+SetCloud sets Cloud field to given value.
+
+### HasCloud
+
+`func (o *ConnectV1PresignedUrlRequest) HasCloud() bool`
+
+HasCloud returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

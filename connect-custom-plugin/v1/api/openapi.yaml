@@ -14,21 +14,32 @@ info:
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
+- description: Confluent Cloud staging
+  url: https://api.stag.cpdev.cloud
+- description: Confluent Cloud development
+  url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
-    [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-    `CustomConnectorPlugins` objects represent Custom Connector Plugins on Confluent Cloud.
-     The API allows you to list, create, read, update, and delete your Custom Connector Plugins.
+    CustomConnectorPlugins objects represent Custom Connector Plugins on Confluent Cloud.
+    The API allows you to list, create, read, update, and delete your Custom Connector Plugins.
+    Related guide:
+    [Custom Connector Plugin API](https://docs.confluent.io/cloud/current/connectors/connect-api-section.html).
 
 
     ## The Custom Connector Plugins Model
     <SchemaDefinition schemaRef="#/components/schemas/connect.v1.CustomConnectorPlugin" />
   name: Custom Connector Plugins (connect/v1)
 - description: |-
-    [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-    Request a presigned upload url for new Custom Connector Plugin.
+    Request a presigned upload URL for new Custom Connector Plugin. Note that
+    the URL policy expires in one hour. If the policy expires, you can request
+    a new presigned upload URL.
+
+    Related guide:
+    [Custom Connector Plugin API](https://docs.confluent.io/cloud/current/connectors/connect-api-section.html).
 
 
     ## The Presigned Urls Model
@@ -37,12 +48,23 @@ tags:
 paths:
   /connect/v1/custom-connector-plugins:
     get:
-      description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+      description: |
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all custom connector plugins.
+
+        If no `cloud` filter is specified, returns custom connector plugins from all clouds.
       operationId: listConnectV1CustomConnectorPlugins
       parameters:
+      - description: Filter the results by exact match for cloud.
+        example: AWS
+        explode: true
+        in: query
+        name: cloud
+        required: false
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
       - description: A pagination size for collection requests.
         explode: true
         in: query
@@ -245,14 +267,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://api.confluent.cloud/connect/v1/custom-connector-plugins \
+            --url 'https://api.confluent.cloud/connect/v1/custom-connector-plugins?cloud=AWS' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/connect/v1/custom-connector-plugins")
+            .url("https://api.confluent.cloud/connect/v1/custom-connector-plugins?cloud=AWS")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -260,7 +282,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/custom-connector-plugins\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/custom-connector-plugins?cloud=AWS\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -273,7 +295,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/connect/v1/custom-connector-plugins", headers=headers)
+          conn.request("GET", "/connect/v1/custom-connector-plugins?cloud=AWS", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -287,7 +309,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/connect/v1/custom-connector-plugins",
+            "path": "/connect/v1/custom-connector-plugins?cloud=AWS",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -312,7 +334,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/custom-connector-plugins");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/custom-connector-plugins?cloud=AWS");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -321,13 +343,13 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/connect/v1/custom-connector-plugins");
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/custom-connector-plugins?cloud=AWS");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create a custom connector plugin.
       operationId: createConnectV1CustomConnectorPlugin
@@ -595,13 +617,13 @@ paths:
             --url https://api.confluent.cloud/connect/v1/custom-connector-plugins \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"string","description":"string","documentation_link":"https://github.com/confluentinc/kafka-connect-datagen","connector_class":"io.confluent.kafka.connect.datagen.DatagenConnector","connector_type":"SOURCE","sensitive_config_properties":["passwords","keys","tokens"],"upload_source":{"location":"PRESIGNED_URL_LOCATION","upload_id":"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66"}}'
+            --data '{"display_name":"string","description":"string","documentation_link":"https://github.com/confluentinc/kafka-connect-datagen","connector_class":"io.confluent.kafka.connect.datagen.DatagenConnector","connector_type":"SOURCE","cloud":"AWS","sensitive_config_properties":["passwords","keys","tokens"],"upload_source":{"location":"PRESIGNED_URL_LOCATION","upload_id":"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66"}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/connect/v1/custom-connector-plugins")
             .post(body)
@@ -616,22 +638,22 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"string\\\"\
           ,\\\"description\\\":\\\"string\\\",\\\"documentation_link\\\":\\\"https://github.com/confluentinc/kafka-connect-datagen\\\
           \",\\\"connector_class\\\":\\\"io.confluent.kafka.connect.datagen.DatagenConnector\\\
-          \",\\\"connector_type\\\":\\\"SOURCE\\\",\\\"sensitive_config_properties\\\
-          \":[\\\"passwords\\\",\\\"keys\\\",\\\"tokens\\\"],\\\"upload_source\\\"\
-          :{\\\"location\\\":\\\"PRESIGNED_URL_LOCATION\\\",\\\"upload_id\\\":\\\"\
-          e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\\\"}}\")\n\n\treq, _ := http.NewRequest(\"\
-          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          \",\\\"connector_type\\\":\\\"SOURCE\\\",\\\"cloud\\\":\\\"AWS\\\",\\\"\
+          sensitive_config_properties\\\":[\\\"passwords\\\",\\\"keys\\\",\\\"tokens\\\
+          \"],\\\"upload_source\\\":{\\\"location\\\":\\\"PRESIGNED_URL_LOCATION\\\
+          \",\\\"upload_id\\\":\\\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\\\"}}\")\n\
+          \n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}"
+          payload = "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}"
 
           headers = {
               'content-type': "application/json",
@@ -678,6 +700,7 @@ paths:
             documentation_link: 'https://github.com/confluentinc/kafka-connect-datagen',
             connector_class: 'io.confluent.kafka.connect.datagen.DatagenConnector',
             connector_type: 'SOURCE',
+            cloud: 'AWS',
             sensitive_config_properties: ['passwords', 'keys', 'tokens'],
             upload_source: {
               location: 'PRESIGNED_URL_LOCATION',
@@ -697,7 +720,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -706,12 +729,12 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /connect/v1/custom-connector-plugins/{id}:
     delete:
       description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete a custom connector plugin.
       operationId: deleteConnectV1CustomConnectorPlugin
@@ -1001,7 +1024,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a custom connector plugin.
       operationId: getConnectV1CustomConnectorPlugin
@@ -1305,7 +1328,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update a custom connector plugin.
 
@@ -1464,6 +1487,36 @@ paths:
               schema:
                 type: string
               style: simple
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "409"
+                  code: resource_already_exists
+                  title: Resource Already exists
+                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                    exists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request is in conflict with the current server state
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Resource URI of conflicting resource
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/{object}/{id}
+                format: uri
+                type: string
+              style: simple
+          x-summary: Conflict
         "422":
           content:
             application/json:
@@ -1559,13 +1612,13 @@ paths:
             --url https://api.confluent.cloud/connect/v1/custom-connector-plugins/%7Bid%7D \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"string","description":"string","documentation_link":"https://github.com/confluentinc/kafka-connect-datagen","connector_class":"io.confluent.kafka.connect.datagen.DatagenConnector","connector_type":"SOURCE","sensitive_config_properties":["passwords","keys","tokens"],"upload_source":{"location":"PRESIGNED_URL_LOCATION","upload_id":"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66"}}'
+            --data '{"display_name":"string","description":"string","documentation_link":"https://github.com/confluentinc/kafka-connect-datagen","connector_class":"io.confluent.kafka.connect.datagen.DatagenConnector","connector_type":"SOURCE","cloud":"AWS","sensitive_config_properties":["passwords","keys","tokens"],"upload_source":{"location":"PRESIGNED_URL_LOCATION","upload_id":"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66"}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/connect/v1/custom-connector-plugins/%7Bid%7D")
             .patch(body)
@@ -1580,22 +1633,22 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"string\\\"\
           ,\\\"description\\\":\\\"string\\\",\\\"documentation_link\\\":\\\"https://github.com/confluentinc/kafka-connect-datagen\\\
           \",\\\"connector_class\\\":\\\"io.confluent.kafka.connect.datagen.DatagenConnector\\\
-          \",\\\"connector_type\\\":\\\"SOURCE\\\",\\\"sensitive_config_properties\\\
-          \":[\\\"passwords\\\",\\\"keys\\\",\\\"tokens\\\"],\\\"upload_source\\\"\
-          :{\\\"location\\\":\\\"PRESIGNED_URL_LOCATION\\\",\\\"upload_id\\\":\\\"\
-          e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\\\"}}\")\n\n\treq, _ := http.NewRequest(\"\
-          PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          \",\\\"connector_type\\\":\\\"SOURCE\\\",\\\"cloud\\\":\\\"AWS\\\",\\\"\
+          sensitive_config_properties\\\":[\\\"passwords\\\",\\\"keys\\\",\\\"tokens\\\
+          \"],\\\"upload_source\\\":{\\\"location\\\":\\\"PRESIGNED_URL_LOCATION\\\
+          \",\\\"upload_id\\\":\\\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\\\"}}\")\n\
+          \n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}"
+          payload = "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}"
 
           headers = {
               'content-type': "application/json",
@@ -1642,6 +1695,7 @@ paths:
             documentation_link: 'https://github.com/confluentinc/kafka-connect-datagen',
             connector_class: 'io.confluent.kafka.connect.datagen.DatagenConnector',
             connector_type: 'SOURCE',
+            cloud: 'AWS',
             sensitive_config_properties: ['passwords', 'keys', 'tokens'],
             upload_source: {
               location: 'PRESIGNED_URL_LOCATION',
@@ -1661,7 +1715,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1670,14 +1724,14 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /connect/v1/presigned-upload-url:
     post:
       description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-        Request a presigned upload url to upload Custom Connector Plugin archive.
+        Request a presigned upload URL to upload a Custom Connector Plugin archive.
       operationId: presigned-upload-urlConnectV1PresignedUrl
       requestBody:
         content:
@@ -1885,7 +1939,7 @@ paths:
               style: simple
       security:
       - cloud-api-key: []
-      summary: Request a presigned upload url for new Custom Connector Plugin.
+      summary: Request a presigned upload URL for a new Custom Connector Plugin.
       tags:
       - Presigned Urls (connect/v1)
       x-name: connect.v1.PresignedUrl
@@ -1896,13 +1950,13 @@ paths:
             --url https://api.confluent.cloud/connect/v1/presigned-upload-url \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"content_format":"ZIP"}'
+            --data '{"content_format":"ZIP","cloud":"AWS"}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"content_format\":\"ZIP\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"content_format\":\"ZIP\",\"cloud\":\"AWS\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/connect/v1/presigned-upload-url")
             .post(body)
@@ -1915,18 +1969,19 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/presigned-upload-url\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"content_format\\\":\\\"ZIP\\\"\
-          }\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          ,\\\"cloud\\\":\\\"AWS\\\"}\")\n\n\treq, _ := http.NewRequest(\"POST\",\
+          \ url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"content_format\":\"ZIP\"}"
+          payload = "{\"content_format\":\"ZIP\",\"cloud\":\"AWS\"}"
 
           headers = {
               'content-type': "application/json",
@@ -1967,7 +2022,7 @@ paths:
             });
           });
 
-          req.write(JSON.stringify({content_format: 'ZIP'}));
+          req.write(JSON.stringify({content_format: 'ZIP', cloud: 'AWS'}));
           req.end();
       - lang: C
         source: |-
@@ -1981,7 +2036,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"content_format\":\"ZIP\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"content_format\":\"ZIP\",\"cloud\":\"AWS\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1990,7 +2045,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"content_format\":\"ZIP\"}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"content_format\":\"ZIP\",\"cloud\":\"AWS\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
 components:
   responses:
@@ -2221,8 +2276,10 @@ components:
   schemas:
     connect.v1.CustomConnectorPlugin:
       description: |-
-        `CustomConnectorPlugins` objects represent Custom Connector Plugins on Confluent Cloud.
-         The API allows you to list, create, read, update, and delete your Custom Connector Plugins.
+        CustomConnectorPlugins objects represent Custom Connector Plugins on Confluent Cloud.
+        The API allows you to list, create, read, update, and delete your Custom Connector Plugins.
+        Related guide:
+        [Custom Connector Plugin API](https://docs.confluent.io/cloud/current/connectors/connect-api-section.html).
 
 
         ## The Custom Connector Plugins Model
@@ -2261,6 +2318,7 @@ components:
                 example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/custom-connector-plugin=ccp-12345
         display_name:
           description: Display name of Custom Connector Plugin.
+          maxLength: 60
           type: string
         content_format:
           description: Archive format of Custom Connector Plugin.
@@ -2272,15 +2330,20 @@ components:
           - JAR
         description:
           description: Description of Custom Connector Plugin.
+          maxLength: 256
           type: string
         documentation_link:
           description: Document link of Custom Connector Plugin.
           example: https://github.com/confluentinc/kafka-connect-datagen
+          maxLength: 512
+          pattern: ^$|^(http://|https://).+
           type: string
         connector_class:
           description: Java class or alias for connector. You can get connector class
             from connector documentation provided by developer.
           example: io.confluent.kafka.connect.datagen.DatagenConnector
+          maxLength: 150
+          pattern: ^(([a-zA-Z][a-zA-Z_$0-9]*(\.[a-zA-Z][a-zA-Z_$0-9]*)*)\.)?([a-zA-Z][a-zA-Z_$0-9]*)$
           type: string
           x-immutable: true
         connector_type:
@@ -2292,6 +2355,17 @@ components:
           - SOURCE
           - SINK
           x-immutable: true
+        cloud:
+          default: AWS
+          description: Cloud provider where the Custom Connector Plugin archive is
+            uploaded.
+          example: AWS
+          type: string
+          x-extensible-enum:
+          - AWS
+          - GCP
+          - AZURE
+          x-immutable: true
         sensitive_config_properties:
           description: A sensitive property is a connector configuration property
             that must be hidden after a user enters property value when setting up
@@ -2301,6 +2375,8 @@ components:
           - keys
           - tokens
           items:
+            maxLength: 150
+            pattern: ^[\w\+\.-]+$
             type: string
           type: array
         upload_source:
@@ -2317,7 +2393,12 @@ components:
       type: object
     connect.v1.PresignedUrl:
       description: |-
-        Request a presigned upload url for new Custom Connector Plugin.
+        Request a presigned upload URL for new Custom Connector Plugin. Note that
+        the URL policy expires in one hour. If the policy expires, you can request
+        a new presigned upload URL.
+
+        Related guide:
+        [Custom Connector Plugin API](https://docs.confluent.io/cloud/current/connectors/connect-api-section.html).
 
 
         ## The Presigned Urls Model
@@ -2337,27 +2418,37 @@ components:
           readOnly: true
           type: string
         content_format:
-          description: Content format of Custom Connector Plugin archive.
+          description: Content format of the Custom Connector Plugin archive.
           example: ZIP
           readOnly: true
           type: string
           x-extensible-enum:
           - ZIP
           - JAR
+        cloud:
+          description: Cloud provider where the Custom Connector Plugin archive is
+            uploaded.
+          example: AWS
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - AWS
+          - GCP
+          - AZURE
         upload_id:
           description: Unique identifier of this upload.
           example: e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66
           readOnly: true
           type: string
         upload_url:
-          description: Upload url for Custom Connector Plugin archive.
+          description: Upload URL for the Custom Connector Plugin archive.
           example: https://confluent-custom-connectors-stag-us-west-2.s3.dualstack.us-west-2.amazonaws.com/
           format: uri
           readOnly: true
           type: string
         upload_form_data:
-          description: Upload form data of Custom Connector Plugin. All values should
-            be strings.
+          description: Upload form data of the Custom Connector Plugin. All values
+            should be strings.
           example:
             bucket: confluent-custom-connectors-stag-us-west-2
             key: staging/custom-plugin/2f37f0b6-f8da-4e8b-bc5f-282ebb0511be/connect-e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66/plugin.zip
@@ -2372,7 +2463,7 @@ components:
       type: object
     connect.v1.PresignedUrlRequest:
       description: |
-        Request schema of presigned upload url.
+        Request schema of the presigned upload URL.
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -2406,36 +2497,51 @@ components:
               resource_name:
                 example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/presigned-url-request=pur-12345
         content_format:
-          description: Archive format of Custom Connector Plugin.
+          description: Archive format of the Custom Connector Plugin.
           example: ZIP
           type: string
           x-extensible-enum:
           - JAR
           - ZIP
+        cloud:
+          default: AWS
+          description: Cloud provider where the Custom Connector Plugin archive is
+            uploaded.
+          example: AWS
+          type: string
+          x-extensible-enum:
+          - AWS
+          - GCP
+          - AZURE
       type: object
     connect.v1.UploadSource.PresignedUrl:
-      description: Presigned url of uploaded Custom Connector Plugin archive.
+      description: Presigned URL of the uploaded Custom Connector Plugin archive.
       properties:
         location:
           description: |
-            Location of Custom Connector Plugin source.
+            Location of the Custom Connector Plugin source.
           example: PRESIGNED_URL_LOCATION
           type: string
           x-extensible-enum:
           - PRESIGNED_URL_LOCATION
         upload_id:
-          description: Upload id returned by `/presigned-upload-url` API. This field
-            returns empty string in all responses.
+          description: Upload ID returned by the `/presigned-upload-url` API. This
+            field returns an empty string in all responses.
           example: e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66
           type: string
       required:
       - location
       - upload_id
       type: object
+    SearchFilter:
+      description: Filter a collection by a string search
+      type: string
     connect.v1.CustomConnectorPluginList:
       description: |-
-        `CustomConnectorPlugins` objects represent Custom Connector Plugins on Confluent Cloud.
-         The API allows you to list, create, read, update, and delete your Custom Connector Plugins.
+        CustomConnectorPlugins objects represent Custom Connector Plugins on Confluent Cloud.
+        The API allows you to list, create, read, update, and delete your Custom Connector Plugins.
+        Related guide:
+        [Custom Connector Plugin API](https://docs.confluent.io/cloud/current/connectors/connect-api-section.html).
 
 
         ## The Custom Connector Plugins Model
@@ -2655,8 +2761,10 @@ components:
       type: object
     connect.v1.CustomConnectorPluginUpdate:
       description: |-
-        `CustomConnectorPlugins` objects represent Custom Connector Plugins on Confluent Cloud.
-         The API allows you to list, create, read, update, and delete your Custom Connector Plugins.
+        CustomConnectorPlugins objects represent Custom Connector Plugins on Confluent Cloud.
+        The API allows you to list, create, read, update, and delete your Custom Connector Plugins.
+        Related guide:
+        [Custom Connector Plugin API](https://docs.confluent.io/cloud/current/connectors/connect-api-section.html).
 
 
         ## The Custom Connector Plugins Model
@@ -2695,6 +2803,7 @@ components:
                 example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/custom-connector-plugin=ccp-12345
         display_name:
           description: Display name of Custom Connector Plugin.
+          maxLength: 60
           type: string
         content_format:
           description: Archive format of Custom Connector Plugin.
@@ -2706,10 +2815,13 @@ components:
           - JAR
         description:
           description: Description of Custom Connector Plugin.
+          maxLength: 256
           type: string
         documentation_link:
           description: Document link of Custom Connector Plugin.
           example: https://github.com/confluentinc/kafka-connect-datagen
+          maxLength: 512
+          pattern: ^$|^(http://|https://).+
           type: string
         sensitive_config_properties:
           description: A sensitive property is a connector configuration property
@@ -2720,6 +2832,8 @@ components:
           - keys
           - tokens
           items:
+            maxLength: 150
+            pattern: ^[\w\+\.-]+$
             type: string
           type: array
         upload_source:

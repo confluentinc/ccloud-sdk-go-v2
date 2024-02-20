@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **DocumentationLink** | Pointer to **string** | Document link of Custom Connector Plugin. | [optional] 
 **ConnectorClass** | Pointer to **string** | Java class or alias for connector. You can get connector class from connector documentation provided by developer. | [optional] 
 **ConnectorType** | Pointer to **string** | Custom Connector type.  | [optional] 
+**Cloud** | Pointer to **string** | Cloud provider where the Custom Connector Plugin archive is uploaded. | [optional] [default to "AWS"]
 **SensitiveConfigProperties** | Pointer to **[]string** | A sensitive property is a connector configuration property that must be hidden after a user enters property value when setting up connector. | [optional] 
 **UploadSource** | Pointer to [**ConnectV1CustomConnectorPluginUploadSourceOneOf**](ConnectV1CustomConnectorPluginUploadSourceOneOf.md) | [immutable] Upload source of Custom Connector Plugin. Only required in &#x60;create&#x60; request, will be ignored in &#x60;read&#x60;, &#x60;update&#x60; or &#x60;list&#x60;. | [optional] 
 
@@ -285,6 +286,31 @@ SetConnectorType sets ConnectorType field to given value.
 `func (o *ConnectV1CustomConnectorPlugin) HasConnectorType() bool`
 
 HasConnectorType returns a boolean if a field has been set.
+
+### GetCloud
+
+`func (o *ConnectV1CustomConnectorPlugin) GetCloud() string`
+
+GetCloud returns the Cloud field if non-nil, zero value otherwise.
+
+### GetCloudOk
+
+`func (o *ConnectV1CustomConnectorPlugin) GetCloudOk() (*string, bool)`
+
+GetCloudOk returns a tuple with the Cloud field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCloud
+
+`func (o *ConnectV1CustomConnectorPlugin) SetCloud(v string)`
+
+SetCloud sets Cloud field to given value.
+
+### HasCloud
+
+`func (o *ConnectV1CustomConnectorPlugin) HasCloud() bool`
+
+HasCloud returns a boolean if a field has been set.
 
 ### GetSensitiveConfigProperties
 
