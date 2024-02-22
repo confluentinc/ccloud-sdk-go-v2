@@ -59,6 +59,10 @@ func (o SnapshotReferences) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
+type AdditionalProperties struct {
+	Main SnapshotReference `json:"main"`
+}
+
 func (o *SnapshotReferences) UnmarshalJSON(data []byte) (err error) {
 	varSnapshotReferences := _SnapshotReferences{}
 
@@ -70,11 +74,15 @@ func (o *SnapshotReferences) UnmarshalJSON(data []byte) (err error) {
 
 	*o = SnapshotReferences(varSnapshotReferences)
 
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	var addProp AdditionalProperties
+	if err = json.Unmarshal(data, &addProp); err == nil {
+		sRMap, _ := addProp.Main.ToMap()
+		additionalProperties = map[string]interface{}{
+			"main": sRMap,
+		}
 	}
+	o.AdditionalProperties = additionalProperties
 
 	return err
 }
