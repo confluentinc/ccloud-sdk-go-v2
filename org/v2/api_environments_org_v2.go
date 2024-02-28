@@ -42,14 +42,14 @@ var (
 type EnvironmentsOrgV2Api interface {
 
 	/*
-		CreateOrgV2Environment Create an Environment
+			CreateOrgV2Environment Create an Environment
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to create an environment.
+		Make a request to create an environment.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiCreateOrgV2EnvironmentRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiCreateOrgV2EnvironmentRequest
 	*/
 	CreateOrgV2Environment(ctx _context.Context) ApiCreateOrgV2EnvironmentRequest
 
@@ -58,19 +58,19 @@ type EnvironmentsOrgV2Api interface {
 	CreateOrgV2EnvironmentExecute(r ApiCreateOrgV2EnvironmentRequest) (OrgV2Environment, *_nethttp.Response, error)
 
 	/*
-		DeleteOrgV2Environment Delete an Environment
+			DeleteOrgV2Environment Delete an Environment
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to delete an environment.
+		Make a request to delete an environment.
 
-	If successful, this request will also recursively delete all of the environment's associated resources,
-	including all Kafka clusters, connectors, etc.
+		If successful, this request will also recursively delete all of the environment's associated resources,
+		including all Kafka clusters, connectors, etc.
 
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the environment.
-		 @return ApiDeleteOrgV2EnvironmentRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the environment.
+			 @return ApiDeleteOrgV2EnvironmentRequest
 	*/
 	DeleteOrgV2Environment(ctx _context.Context, id string) ApiDeleteOrgV2EnvironmentRequest
 
@@ -78,15 +78,15 @@ type EnvironmentsOrgV2Api interface {
 	DeleteOrgV2EnvironmentExecute(r ApiDeleteOrgV2EnvironmentRequest) (*_nethttp.Response, error)
 
 	/*
-		GetOrgV2Environment Read an Environment
+			GetOrgV2Environment Read an Environment
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to read an environment.
+		Make a request to read an environment.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the environment.
-		 @return ApiGetOrgV2EnvironmentRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the environment.
+			 @return ApiGetOrgV2EnvironmentRequest
 	*/
 	GetOrgV2Environment(ctx _context.Context, id string) ApiGetOrgV2EnvironmentRequest
 
@@ -95,14 +95,14 @@ type EnvironmentsOrgV2Api interface {
 	GetOrgV2EnvironmentExecute(r ApiGetOrgV2EnvironmentRequest) (OrgV2Environment, *_nethttp.Response, error)
 
 	/*
-		ListOrgV2Environments List of Environments
+			ListOrgV2Environments List of Environments
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Retrieve a sorted, filtered, paginated list of all environments.
+		Retrieve a sorted, filtered, paginated list of all environments.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListOrgV2EnvironmentsRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiListOrgV2EnvironmentsRequest
 	*/
 	ListOrgV2Environments(ctx _context.Context) ApiListOrgV2EnvironmentsRequest
 
@@ -111,17 +111,17 @@ type EnvironmentsOrgV2Api interface {
 	ListOrgV2EnvironmentsExecute(r ApiListOrgV2EnvironmentsRequest) (OrgV2EnvironmentList, *_nethttp.Response, error)
 
 	/*
-		UpdateOrgV2Environment Update an Environment
+			UpdateOrgV2Environment Update an Environment
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to update an environment.
+		Make a request to update an environment.
 
 
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the environment.
-		 @return ApiUpdateOrgV2EnvironmentRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the environment.
+			 @return ApiUpdateOrgV2EnvironmentRequest
 	*/
 	UpdateOrgV2Environment(ctx _context.Context, id string) ApiUpdateOrgV2EnvironmentRequest
 
@@ -155,8 +155,8 @@ CreateOrgV2Environment Create an Environment
 
 Make a request to create an environment.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateOrgV2EnvironmentRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateOrgV2EnvironmentRequest
 */
 func (a *EnvironmentsOrgV2ApiService) CreateOrgV2Environment(ctx _context.Context) ApiCreateOrgV2EnvironmentRequest {
 	return ApiCreateOrgV2EnvironmentRequest{
@@ -166,8 +166,7 @@ func (a *EnvironmentsOrgV2ApiService) CreateOrgV2Environment(ctx _context.Contex
 }
 
 // Execute executes the request
-//
-//	@return OrgV2Environment
+//  @return OrgV2Environment
 func (a *EnvironmentsOrgV2ApiService) CreateOrgV2EnvironmentExecute(r ApiCreateOrgV2EnvironmentRequest) (OrgV2Environment, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -334,9 +333,10 @@ Make a request to delete an environment.
 If successful, this request will also recursively delete all of the environment's associated resources,
 including all Kafka clusters, connectors, etc.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the environment.
-	@return ApiDeleteOrgV2EnvironmentRequest
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the environment.
+ @return ApiDeleteOrgV2EnvironmentRequest
 */
 func (a *EnvironmentsOrgV2ApiService) DeleteOrgV2Environment(ctx _context.Context, id string) ApiDeleteOrgV2EnvironmentRequest {
 	return ApiDeleteOrgV2EnvironmentRequest{
@@ -479,9 +479,9 @@ GetOrgV2Environment Read an Environment
 
 Make a request to read an environment.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the environment.
-	@return ApiGetOrgV2EnvironmentRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the environment.
+ @return ApiGetOrgV2EnvironmentRequest
 */
 func (a *EnvironmentsOrgV2ApiService) GetOrgV2Environment(ctx _context.Context, id string) ApiGetOrgV2EnvironmentRequest {
 	return ApiGetOrgV2EnvironmentRequest{
@@ -492,8 +492,7 @@ func (a *EnvironmentsOrgV2ApiService) GetOrgV2Environment(ctx _context.Context, 
 }
 
 // Execute executes the request
-//
-//	@return OrgV2Environment
+//  @return OrgV2Environment
 func (a *EnvironmentsOrgV2ApiService) GetOrgV2EnvironmentExecute(r ApiGetOrgV2EnvironmentRequest) (OrgV2Environment, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -649,8 +648,8 @@ ListOrgV2Environments List of Environments
 
 Retrieve a sorted, filtered, paginated list of all environments.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListOrgV2EnvironmentsRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListOrgV2EnvironmentsRequest
 */
 func (a *EnvironmentsOrgV2ApiService) ListOrgV2Environments(ctx _context.Context) ApiListOrgV2EnvironmentsRequest {
 	return ApiListOrgV2EnvironmentsRequest{
@@ -660,8 +659,7 @@ func (a *EnvironmentsOrgV2ApiService) ListOrgV2Environments(ctx _context.Context
 }
 
 // Execute executes the request
-//
-//	@return OrgV2EnvironmentList
+//  @return OrgV2EnvironmentList
 func (a *EnvironmentsOrgV2ApiService) ListOrgV2EnvironmentsExecute(r ApiListOrgV2EnvironmentsRequest) (OrgV2EnvironmentList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -805,9 +803,11 @@ UpdateOrgV2Environment Update an Environment
 
 Make a request to update an environment.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the environment.
-	@return ApiUpdateOrgV2EnvironmentRequest
+
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the environment.
+ @return ApiUpdateOrgV2EnvironmentRequest
 */
 func (a *EnvironmentsOrgV2ApiService) UpdateOrgV2Environment(ctx _context.Context, id string) ApiUpdateOrgV2EnvironmentRequest {
 	return ApiUpdateOrgV2EnvironmentRequest{
@@ -818,8 +818,7 @@ func (a *EnvironmentsOrgV2ApiService) UpdateOrgV2Environment(ctx _context.Contex
 }
 
 // Execute executes the request
-//
-//	@return OrgV2Environment
+//  @return OrgV2Environment
 func (a *EnvironmentsOrgV2ApiService) UpdateOrgV2EnvironmentExecute(r ApiUpdateOrgV2EnvironmentRequest) (OrgV2Environment, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch

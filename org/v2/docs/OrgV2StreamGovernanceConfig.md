@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Package** | Pointer to **string** | Stream Governance Package. Supported values are ESSENTIALS and ADVANCED. Package comparison can be found [here](https://docs.confluent.io/cloud/current/stream-governance/packages.html#features-by-package-type).  | [optional] 
+**Package** | **string** | Stream Governance Package. Supported values are ESSENTIALS and ADVANCED. Package comparison can be found [here](https://docs.confluent.io/cloud/current/stream-governance/packages.html#features-by-package-type).  | 
 
 ## Methods
 
 ### NewOrgV2StreamGovernanceConfig
 
-`func NewOrgV2StreamGovernanceConfig() *OrgV2StreamGovernanceConfig`
+`func NewOrgV2StreamGovernanceConfig(package_ string, ) *OrgV2StreamGovernanceConfig`
 
 NewOrgV2StreamGovernanceConfig instantiates a new OrgV2StreamGovernanceConfig object
 This constructor will assign default values to properties that have it defined,
@@ -44,11 +44,6 @@ and a boolean to check if the value has been set.
 
 SetPackage sets Package field to given value.
 
-### HasPackage
-
-`func (o *OrgV2StreamGovernanceConfig) HasPackage() bool`
-
-HasPackage returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
