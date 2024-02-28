@@ -37,15 +37,16 @@ import (
 // OrgV2StreamGovernanceConfig Configurations pertaining to Stream Governance
 type OrgV2StreamGovernanceConfig struct {
 	// Stream Governance Package. Supported values are ESSENTIALS and ADVANCED. Package comparison can be found [here](https://docs.confluent.io/cloud/current/stream-governance/packages.html#features-by-package-type).
-	Package *string `json:"package,omitempty"`
+	Package string `json:"package,omitempty"`
 }
 
 // NewOrgV2StreamGovernanceConfig instantiates a new OrgV2StreamGovernanceConfig object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrgV2StreamGovernanceConfig() *OrgV2StreamGovernanceConfig {
+func NewOrgV2StreamGovernanceConfig(package_ string) *OrgV2StreamGovernanceConfig {
 	this := OrgV2StreamGovernanceConfig{}
+	this.Package = package_
 	return &this
 }
 
@@ -57,41 +58,33 @@ func NewOrgV2StreamGovernanceConfigWithDefaults() *OrgV2StreamGovernanceConfig {
 	return &this
 }
 
-// GetPackage returns the Package field value if set, zero value otherwise.
+// GetPackage returns the Package field value
 func (o *OrgV2StreamGovernanceConfig) GetPackage() string {
-	if o == nil || o.Package == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Package
+
+	return o.Package
 }
 
-// GetPackageOk returns a tuple with the Package field value if set, nil otherwise
+// GetPackageOk returns a tuple with the Package field value
 // and a boolean to check if the value has been set.
 func (o *OrgV2StreamGovernanceConfig) GetPackageOk() (*string, bool) {
-	if o == nil || o.Package == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Package, true
+	return &o.Package, true
 }
 
-// HasPackage returns a boolean if a field has been set.
-func (o *OrgV2StreamGovernanceConfig) HasPackage() bool {
-	if o != nil && o.Package != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPackage gets a reference to the given string and assigns it to the Package field.
+// SetPackage sets field value
 func (o *OrgV2StreamGovernanceConfig) SetPackage(v string) {
-	o.Package = &v
+	o.Package = v
 }
 
 // Redact resets all sensitive fields to their zero value.
 func (o *OrgV2StreamGovernanceConfig) Redact() {
-	o.recurseRedact(o.Package)
+	o.recurseRedact(&o.Package)
 }
 
 func (o *OrgV2StreamGovernanceConfig) recurseRedact(v interface{}) {
@@ -126,7 +119,7 @@ func (o OrgV2StreamGovernanceConfig) zeroField(v interface{}) {
 
 func (o OrgV2StreamGovernanceConfig) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Package != nil {
+	if true {
 		toSerialize["package"] = o.Package
 	}
 	buffer := &bytes.Buffer{}
