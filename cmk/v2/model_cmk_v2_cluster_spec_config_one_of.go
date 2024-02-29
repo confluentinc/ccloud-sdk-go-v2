@@ -33,10 +33,11 @@ import (
 
 // CmkV2ClusterSpecConfigOneOf - struct for CmkV2ClusterSpecConfigOneOf
 type CmkV2ClusterSpecConfigOneOf struct {
-	CmkV2Basic      *CmkV2Basic
-	CmkV2Dedicated  *CmkV2Dedicated
-	CmkV2Enterprise *CmkV2Enterprise
-	CmkV2Standard   *CmkV2Standard
+	CmkV2Basic             *CmkV2Basic
+	CmkV2Dedicated         *CmkV2Dedicated
+	CmkV2DedicatedKirkland *CmkV2DedicatedKirkland
+	CmkV2Enterprise        *CmkV2Enterprise
+	CmkV2Standard          *CmkV2Standard
 }
 
 // CmkV2BasicAsCmkV2ClusterSpecConfigOneOf is a convenience function that returns CmkV2Basic wrapped in CmkV2ClusterSpecConfigOneOf
@@ -47,6 +48,11 @@ func CmkV2BasicAsCmkV2ClusterSpecConfigOneOf(v *CmkV2Basic) CmkV2ClusterSpecConf
 // CmkV2DedicatedAsCmkV2ClusterSpecConfigOneOf is a convenience function that returns CmkV2Dedicated wrapped in CmkV2ClusterSpecConfigOneOf
 func CmkV2DedicatedAsCmkV2ClusterSpecConfigOneOf(v *CmkV2Dedicated) CmkV2ClusterSpecConfigOneOf {
 	return CmkV2ClusterSpecConfigOneOf{CmkV2Dedicated: v}
+}
+
+// CmkV2DedicatedKirklandAsCmkV2ClusterSpecConfigOneOf is a convenience function that returns CmkV2DedicatedKirkland wrapped in CmkV2ClusterSpecConfigOneOf
+func CmkV2DedicatedKirklandAsCmkV2ClusterSpecConfigOneOf(v *CmkV2DedicatedKirkland) CmkV2ClusterSpecConfigOneOf {
+	return CmkV2ClusterSpecConfigOneOf{CmkV2DedicatedKirkland: v}
 }
 
 // CmkV2EnterpriseAsCmkV2ClusterSpecConfigOneOf is a convenience function that returns CmkV2Enterprise wrapped in CmkV2ClusterSpecConfigOneOf
@@ -90,6 +96,18 @@ func (dst *CmkV2ClusterSpecConfigOneOf) UnmarshalJSON(data []byte) error {
 		} else {
 			dst.CmkV2Dedicated = nil
 			return fmt.Errorf("Failed to unmarshal CmkV2ClusterSpecConfigOneOf as CmkV2Dedicated: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'DedicatedKirkland'
+	if jsonDict["kind"] == "DedicatedKirkland" {
+		// try to unmarshal JSON data into CmkV2DedicatedKirkland
+		err = json.Unmarshal(data, &dst.CmkV2DedicatedKirkland)
+		if err == nil {
+			return nil // data stored in dst.CmkV2DedicatedKirkland, return on the first match
+		} else {
+			dst.CmkV2DedicatedKirkland = nil
+			return fmt.Errorf("Failed to unmarshal CmkV2ClusterSpecConfigOneOf as CmkV2DedicatedKirkland: %s", err.Error())
 		}
 	}
 
@@ -141,6 +159,18 @@ func (dst *CmkV2ClusterSpecConfigOneOf) UnmarshalJSON(data []byte) error {
 		}
 	}
 
+	// check if the discriminator value is 'cmk.v2.DedicatedKirkland'
+	if jsonDict["kind"] == "cmk.v2.DedicatedKirkland" {
+		// try to unmarshal JSON data into CmkV2DedicatedKirkland
+		err = json.Unmarshal(data, &dst.CmkV2DedicatedKirkland)
+		if err == nil {
+			return nil // data stored in dst.CmkV2DedicatedKirkland, return on the first match
+		} else {
+			dst.CmkV2DedicatedKirkland = nil
+			return fmt.Errorf("Failed to unmarshal CmkV2ClusterSpecConfigOneOf as CmkV2DedicatedKirkland: %s", err.Error())
+		}
+	}
+
 	// check if the discriminator value is 'cmk.v2.Enterprise'
 	if jsonDict["kind"] == "cmk.v2.Enterprise" {
 		// try to unmarshal JSON data into CmkV2Enterprise
@@ -186,6 +216,14 @@ func (src CmkV2ClusterSpecConfigOneOf) MarshalJSON() ([]byte, error) {
 		return buffer.Bytes(), err
 	}
 
+	if src.CmkV2DedicatedKirkland != nil {
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.CmkV2DedicatedKirkland)
+		return buffer.Bytes(), err
+	}
+
 	if src.CmkV2Enterprise != nil {
 		buffer := &bytes.Buffer{}
 		encoder := json.NewEncoder(buffer)
@@ -213,6 +251,10 @@ func (obj *CmkV2ClusterSpecConfigOneOf) GetActualInstance() interface{} {
 
 	if obj.CmkV2Dedicated != nil {
 		return obj.CmkV2Dedicated
+	}
+
+	if obj.CmkV2DedicatedKirkland != nil {
+		return obj.CmkV2DedicatedKirkland
 	}
 
 	if obj.CmkV2Enterprise != nil {
