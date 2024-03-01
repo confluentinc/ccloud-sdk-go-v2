@@ -34,7 +34,7 @@ import (
 	"reflect"
 )
 
-// NetworkingV1DnsRecordList DNS record objects are associated with Confluent Cloud networking resources. This API allows you to list, create, read, update, and delete your DNS records.  ## The Dns Records Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.DnsRecord\" />
+// NetworkingV1DnsRecordList DNS record objects are associated with Confluent Cloud networking resources. This API allows you to list, create, read, update, and delete your DNS records.  ## The DNS Records Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.DnsRecord\" />
 type NetworkingV1DnsRecordList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version,omitempty"`

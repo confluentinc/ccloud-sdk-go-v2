@@ -84,11 +84,11 @@ Class | Method | HTTP request | Description
 *AccessPointsNetworkingV1Api* | [**GetNetworkingV1AccessPoint**](docs/AccessPointsNetworkingV1Api.md#getnetworkingv1accesspoint) | **Get** /networking/v1/access-points/{id} | Read an Access Point
 *AccessPointsNetworkingV1Api* | [**ListNetworkingV1AccessPoints**](docs/AccessPointsNetworkingV1Api.md#listnetworkingv1accesspoints) | **Get** /networking/v1/access-points | List of Access Points
 *AccessPointsNetworkingV1Api* | [**UpdateNetworkingV1AccessPoint**](docs/AccessPointsNetworkingV1Api.md#updatenetworkingv1accesspoint) | **Patch** /networking/v1/access-points/{id} | Update an Access Point
-*DnsRecordsNetworkingV1Api* | [**CreateNetworkingV1DnsRecord**](docs/DnsRecordsNetworkingV1Api.md#createnetworkingv1dnsrecord) | **Post** /networking/v1/dns-records | Create a Dns Record
-*DnsRecordsNetworkingV1Api* | [**DeleteNetworkingV1DnsRecord**](docs/DnsRecordsNetworkingV1Api.md#deletenetworkingv1dnsrecord) | **Delete** /networking/v1/dns-records/{id} | Delete a Dns Record
-*DnsRecordsNetworkingV1Api* | [**GetNetworkingV1DnsRecord**](docs/DnsRecordsNetworkingV1Api.md#getnetworkingv1dnsrecord) | **Get** /networking/v1/dns-records/{id} | Read a Dns Record
-*DnsRecordsNetworkingV1Api* | [**ListNetworkingV1DnsRecords**](docs/DnsRecordsNetworkingV1Api.md#listnetworkingv1dnsrecords) | **Get** /networking/v1/dns-records | List of Dns Records
-*DnsRecordsNetworkingV1Api* | [**UpdateNetworkingV1DnsRecord**](docs/DnsRecordsNetworkingV1Api.md#updatenetworkingv1dnsrecord) | **Patch** /networking/v1/dns-records/{id} | Update a Dns Record
+*DNSRecordsNetworkingV1Api* | [**CreateNetworkingV1DnsRecord**](docs/DNSRecordsNetworkingV1Api.md#createnetworkingv1dnsrecord) | **Post** /networking/v1/dns-records | Create a DNS Record
+*DNSRecordsNetworkingV1Api* | [**DeleteNetworkingV1DnsRecord**](docs/DNSRecordsNetworkingV1Api.md#deletenetworkingv1dnsrecord) | **Delete** /networking/v1/dns-records/{id} | Delete a DNS Record
+*DNSRecordsNetworkingV1Api* | [**GetNetworkingV1DnsRecord**](docs/DNSRecordsNetworkingV1Api.md#getnetworkingv1dnsrecord) | **Get** /networking/v1/dns-records/{id} | Read a DNS Record
+*DNSRecordsNetworkingV1Api* | [**ListNetworkingV1DnsRecords**](docs/DNSRecordsNetworkingV1Api.md#listnetworkingv1dnsrecords) | **Get** /networking/v1/dns-records | List of DNS Records
+*DNSRecordsNetworkingV1Api* | [**UpdateNetworkingV1DnsRecord**](docs/DNSRecordsNetworkingV1Api.md#updatenetworkingv1dnsrecord) | **Patch** /networking/v1/dns-records/{id} | Update a DNS Record
 
 
 ## Documentation For Models

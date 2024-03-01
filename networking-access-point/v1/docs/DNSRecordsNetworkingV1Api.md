@@ -1,14 +1,14 @@
-# \DnsRecordsNetworkingV1Api
+# \DNSRecordsNetworkingV1Api
 
 All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateNetworkingV1DnsRecord**](DnsRecordsNetworkingV1Api.md#CreateNetworkingV1DnsRecord) | **Post** /networking/v1/dns-records | Create a Dns Record
-[**DeleteNetworkingV1DnsRecord**](DnsRecordsNetworkingV1Api.md#DeleteNetworkingV1DnsRecord) | **Delete** /networking/v1/dns-records/{id} | Delete a Dns Record
-[**GetNetworkingV1DnsRecord**](DnsRecordsNetworkingV1Api.md#GetNetworkingV1DnsRecord) | **Get** /networking/v1/dns-records/{id} | Read a Dns Record
-[**ListNetworkingV1DnsRecords**](DnsRecordsNetworkingV1Api.md#ListNetworkingV1DnsRecords) | **Get** /networking/v1/dns-records | List of Dns Records
-[**UpdateNetworkingV1DnsRecord**](DnsRecordsNetworkingV1Api.md#UpdateNetworkingV1DnsRecord) | **Patch** /networking/v1/dns-records/{id} | Update a Dns Record
+[**CreateNetworkingV1DnsRecord**](DNSRecordsNetworkingV1Api.md#CreateNetworkingV1DnsRecord) | **Post** /networking/v1/dns-records | Create a DNS Record
+[**DeleteNetworkingV1DnsRecord**](DNSRecordsNetworkingV1Api.md#DeleteNetworkingV1DnsRecord) | **Delete** /networking/v1/dns-records/{id} | Delete a DNS Record
+[**GetNetworkingV1DnsRecord**](DNSRecordsNetworkingV1Api.md#GetNetworkingV1DnsRecord) | **Get** /networking/v1/dns-records/{id} | Read a DNS Record
+[**ListNetworkingV1DnsRecords**](DNSRecordsNetworkingV1Api.md#ListNetworkingV1DnsRecords) | **Get** /networking/v1/dns-records | List of DNS Records
+[**UpdateNetworkingV1DnsRecord**](DNSRecordsNetworkingV1Api.md#UpdateNetworkingV1DnsRecord) | **Patch** /networking/v1/dns-records/{id} | Update a DNS Record
 
 
 
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 > NetworkingV1DnsRecord CreateNetworkingV1DnsRecord(ctx).NetworkingV1DnsRecord(networkingV1DnsRecord).Execute()
 
-Create a Dns Record
+Create a DNS Record
 
 
 
@@ -37,13 +37,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DnsRecordsNetworkingV1Api.CreateNetworkingV1DnsRecord(context.Background()).NetworkingV1DnsRecord(networkingV1DnsRecord).Execute()
+    resp, r, err := api_client.DNSRecordsNetworkingV1Api.CreateNetworkingV1DnsRecord(context.Background()).NetworkingV1DnsRecord(networkingV1DnsRecord).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DnsRecordsNetworkingV1Api.CreateNetworkingV1DnsRecord``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `DNSRecordsNetworkingV1Api.CreateNetworkingV1DnsRecord``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `CreateNetworkingV1DnsRecord`: NetworkingV1DnsRecord
-    fmt.Fprintf(os.Stdout, "Response from `DnsRecordsNetworkingV1Api.CreateNetworkingV1DnsRecord`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `DNSRecordsNetworkingV1Api.CreateNetworkingV1DnsRecord`: %v\n", resp)
 }
 ```
 
@@ -82,7 +82,7 @@ Name | Type | Description  | Notes
 
 > DeleteNetworkingV1DnsRecord(ctx, id).Environment(environment).Execute()
 
-Delete a Dns Record
+Delete a DNS Record
 
 
 
@@ -100,13 +100,13 @@ import (
 
 func main() {
     environment := "env-00000" // string | Scope the operation to the given environment.
-    id := "id_example" // string | The unique identifier for the dns record.
+    id := "id_example" // string | The unique identifier for the DNS record.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DnsRecordsNetworkingV1Api.DeleteNetworkingV1DnsRecord(context.Background(), id).Environment(environment).Execute()
+    resp, r, err := api_client.DNSRecordsNetworkingV1Api.DeleteNetworkingV1DnsRecord(context.Background(), id).Environment(environment).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DnsRecordsNetworkingV1Api.DeleteNetworkingV1DnsRecord``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `DNSRecordsNetworkingV1Api.DeleteNetworkingV1DnsRecord``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -118,7 +118,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the dns record. | 
+**id** | **string** | The unique identifier for the DNS record. | 
 
 ### Other Parameters
 
@@ -152,7 +152,7 @@ Name | Type | Description  | Notes
 
 > NetworkingV1DnsRecord GetNetworkingV1DnsRecord(ctx, id).Environment(environment).Execute()
 
-Read a Dns Record
+Read a DNS Record
 
 
 
@@ -170,17 +170,17 @@ import (
 
 func main() {
     environment := "env-00000" // string | Scope the operation to the given environment.
-    id := "id_example" // string | The unique identifier for the dns record.
+    id := "id_example" // string | The unique identifier for the DNS record.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DnsRecordsNetworkingV1Api.GetNetworkingV1DnsRecord(context.Background(), id).Environment(environment).Execute()
+    resp, r, err := api_client.DNSRecordsNetworkingV1Api.GetNetworkingV1DnsRecord(context.Background(), id).Environment(environment).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DnsRecordsNetworkingV1Api.GetNetworkingV1DnsRecord``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `DNSRecordsNetworkingV1Api.GetNetworkingV1DnsRecord``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `GetNetworkingV1DnsRecord`: NetworkingV1DnsRecord
-    fmt.Fprintf(os.Stdout, "Response from `DnsRecordsNetworkingV1Api.GetNetworkingV1DnsRecord`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `DNSRecordsNetworkingV1Api.GetNetworkingV1DnsRecord`: %v\n", resp)
 }
 ```
 
@@ -190,7 +190,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the dns record. | 
+**id** | **string** | The unique identifier for the DNS record. | 
 
 ### Other Parameters
 
@@ -224,7 +224,7 @@ Name | Type | Description  | Notes
 
 > NetworkingV1DnsRecordList ListNetworkingV1DnsRecords(ctx).Environment(environment).SpecDisplayName(specDisplayName).SpecFqdn(specFqdn).SpecGateway(specGateway).ResourceId(resourceId).PageSize(pageSize).PageToken(pageToken).Execute()
 
-List of Dns Records
+List of DNS Records
 
 
 
@@ -251,13 +251,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DnsRecordsNetworkingV1Api.ListNetworkingV1DnsRecords(context.Background()).Environment(environment).SpecDisplayName(specDisplayName).SpecFqdn(specFqdn).SpecGateway(specGateway).ResourceId(resourceId).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.DNSRecordsNetworkingV1Api.ListNetworkingV1DnsRecords(context.Background()).Environment(environment).SpecDisplayName(specDisplayName).SpecFqdn(specFqdn).SpecGateway(specGateway).ResourceId(resourceId).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DnsRecordsNetworkingV1Api.ListNetworkingV1DnsRecords``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `DNSRecordsNetworkingV1Api.ListNetworkingV1DnsRecords``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `ListNetworkingV1DnsRecords`: NetworkingV1DnsRecordList
-    fmt.Fprintf(os.Stdout, "Response from `DnsRecordsNetworkingV1Api.ListNetworkingV1DnsRecords`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `DNSRecordsNetworkingV1Api.ListNetworkingV1DnsRecords`: %v\n", resp)
 }
 ```
 
@@ -302,7 +302,7 @@ Name | Type | Description  | Notes
 
 > NetworkingV1DnsRecord UpdateNetworkingV1DnsRecord(ctx, id).NetworkingV1DnsRecordUpdate(networkingV1DnsRecordUpdate).Execute()
 
-Update a Dns Record
+Update a DNS Record
 
 
 
@@ -319,18 +319,18 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | The unique identifier for the dns record.
+    id := "id_example" // string | The unique identifier for the DNS record.
     networkingV1DnsRecordUpdate := *openapiclient.NewNetworkingV1DnsRecordUpdate() // NetworkingV1DnsRecordUpdate |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DnsRecordsNetworkingV1Api.UpdateNetworkingV1DnsRecord(context.Background(), id).NetworkingV1DnsRecordUpdate(networkingV1DnsRecordUpdate).Execute()
+    resp, r, err := api_client.DNSRecordsNetworkingV1Api.UpdateNetworkingV1DnsRecord(context.Background(), id).NetworkingV1DnsRecordUpdate(networkingV1DnsRecordUpdate).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DnsRecordsNetworkingV1Api.UpdateNetworkingV1DnsRecord``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `DNSRecordsNetworkingV1Api.UpdateNetworkingV1DnsRecord``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `UpdateNetworkingV1DnsRecord`: NetworkingV1DnsRecord
-    fmt.Fprintf(os.Stdout, "Response from `DnsRecordsNetworkingV1Api.UpdateNetworkingV1DnsRecord`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `DNSRecordsNetworkingV1Api.UpdateNetworkingV1DnsRecord`: %v\n", resp)
 }
 ```
 
@@ -340,7 +340,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The unique identifier for the dns record. | 
+**id** | **string** | The unique identifier for the DNS record. | 
 
 ### Other Parameters
 

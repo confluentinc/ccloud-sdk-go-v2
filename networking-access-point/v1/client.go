@@ -66,7 +66,7 @@ type APIClient struct {
 
 	AccessPointsNetworkingV1Api AccessPointsNetworkingV1Api
 
-	DnsRecordsNetworkingV1Api DnsRecordsNetworkingV1Api
+	DNSRecordsNetworkingV1Api DNSRecordsNetworkingV1Api
 }
 
 type service struct {
@@ -86,7 +86,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.AccessPointsNetworkingV1Api = (*AccessPointsNetworkingV1ApiService)(&c.common)
-	c.DnsRecordsNetworkingV1Api = (*DnsRecordsNetworkingV1ApiService)(&c.common)
+	c.DNSRecordsNetworkingV1Api = (*DNSRecordsNetworkingV1ApiService)(&c.common)
 
 	return c
 }
