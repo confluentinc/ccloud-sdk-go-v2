@@ -38,6 +38,8 @@ import (
 type NetworkingV1GatewaySpec struct {
 	// The name of the gateway
 	DisplayName *string `json:"display_name,omitempty"`
+	// Gateway type specific configuration
+	Config *NetworkingV1GatewaySpecConfigOneOf `json:"config,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
 }
@@ -91,6 +93,38 @@ func (o *NetworkingV1GatewaySpec) SetDisplayName(v string) {
 	o.DisplayName = &v
 }
 
+// GetConfig returns the Config field value if set, zero value otherwise.
+func (o *NetworkingV1GatewaySpec) GetConfig() NetworkingV1GatewaySpecConfigOneOf {
+	if o == nil || o.Config == nil {
+		var ret NetworkingV1GatewaySpecConfigOneOf
+		return ret
+	}
+	return *o.Config
+}
+
+// GetConfigOk returns a tuple with the Config field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1GatewaySpec) GetConfigOk() (*NetworkingV1GatewaySpecConfigOneOf, bool) {
+	if o == nil || o.Config == nil {
+		return nil, false
+	}
+	return o.Config, true
+}
+
+// HasConfig returns a boolean if a field has been set.
+func (o *NetworkingV1GatewaySpec) HasConfig() bool {
+	if o != nil && o.Config != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetConfig gets a reference to the given NetworkingV1GatewaySpecConfigOneOf and assigns it to the Config field.
+func (o *NetworkingV1GatewaySpec) SetConfig(v NetworkingV1GatewaySpecConfigOneOf) {
+	o.Config = &v
+}
+
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
 func (o *NetworkingV1GatewaySpec) GetEnvironment() ObjectReference {
 	if o == nil || o.Environment == nil {
@@ -126,6 +160,7 @@ func (o *NetworkingV1GatewaySpec) SetEnvironment(v ObjectReference) {
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1GatewaySpec) Redact() {
 	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.Config)
 	o.recurseRedact(o.Environment)
 }
 
@@ -163,6 +198,9 @@ func (o NetworkingV1GatewaySpec) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.DisplayName != nil {
 		toSerialize["display_name"] = o.DisplayName
+	}
+	if o.Config != nil {
+		toSerialize["config"] = o.Config
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment

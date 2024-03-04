@@ -34,16 +34,17 @@ import (
 	"reflect"
 )
 
-// NetworkingV1Gateway Group of networking resources for networking connectivity  ## The Gateways Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.Gateway\" />
+// NetworkingV1Gateway A gateway is a resource that defines network access to Confluent cloud resources.   ## The Gateways Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.Gateway\" />
 type NetworkingV1Gateway struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
 	Kind *string `json:"kind,omitempty"`
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
-	Id       *string                  `json:"id,omitempty"`
-	Metadata *ObjectMeta              `json:"metadata,omitempty"`
-	Spec     *NetworkingV1GatewaySpec `json:"spec,omitempty"`
+	Id       *string                    `json:"id,omitempty"`
+	Metadata *ObjectMeta                `json:"metadata,omitempty"`
+	Spec     *NetworkingV1GatewaySpec   `json:"spec,omitempty"`
+	Status   *NetworkingV1GatewayStatus `json:"status,omitempty"`
 }
 
 // NewNetworkingV1Gateway instantiates a new NetworkingV1Gateway object
@@ -223,6 +224,38 @@ func (o *NetworkingV1Gateway) SetSpec(v NetworkingV1GatewaySpec) {
 	o.Spec = &v
 }
 
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *NetworkingV1Gateway) GetStatus() NetworkingV1GatewayStatus {
+	if o == nil || o.Status == nil {
+		var ret NetworkingV1GatewayStatus
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1Gateway) GetStatusOk() (*NetworkingV1GatewayStatus, bool) {
+	if o == nil || o.Status == nil {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *NetworkingV1Gateway) HasStatus() bool {
+	if o != nil && o.Status != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given NetworkingV1GatewayStatus and assigns it to the Status field.
+func (o *NetworkingV1Gateway) SetStatus(v NetworkingV1GatewayStatus) {
+	o.Status = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1Gateway) Redact() {
 	o.recurseRedact(o.ApiVersion)
@@ -230,6 +263,7 @@ func (o *NetworkingV1Gateway) Redact() {
 	o.recurseRedact(o.Id)
 	o.recurseRedact(o.Metadata)
 	o.recurseRedact(o.Spec)
+	o.recurseRedact(o.Status)
 }
 
 func (o *NetworkingV1Gateway) recurseRedact(v interface{}) {
@@ -278,6 +312,9 @@ func (o NetworkingV1Gateway) MarshalJSON() ([]byte, error) {
 	}
 	if o.Spec != nil {
 		toSerialize["spec"] = o.Spec
+	}
+	if o.Status != nil {
+		toSerialize["status"] = o.Status
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

@@ -43,15 +43,15 @@ var (
 type NetworkLinkServiceAssociationsNetworkingV1Api interface {
 
 	/*
-		GetNetworkingV1NetworkLinkServiceAssociation Read a Network Link Service Association
+			GetNetworkingV1NetworkLinkServiceAssociation Read a Network Link Service Association
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to read a network link service association.
+		Make a request to read a network link service association.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the network link service association.
-		 @return ApiGetNetworkingV1NetworkLinkServiceAssociationRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the network link service association.
+			 @return ApiGetNetworkingV1NetworkLinkServiceAssociationRequest
 	*/
 	GetNetworkingV1NetworkLinkServiceAssociation(ctx _context.Context, id string) ApiGetNetworkingV1NetworkLinkServiceAssociationRequest
 
@@ -60,14 +60,14 @@ type NetworkLinkServiceAssociationsNetworkingV1Api interface {
 	GetNetworkingV1NetworkLinkServiceAssociationExecute(r ApiGetNetworkingV1NetworkLinkServiceAssociationRequest) (NetworkingV1NetworkLinkServiceAssociation, *_nethttp.Response, error)
 
 	/*
-		ListNetworkingV1NetworkLinkServiceAssociations List of Network Link Service Associations
+			ListNetworkingV1NetworkLinkServiceAssociations List of Network Link Service Associations
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Retrieve a sorted, filtered, paginated list of all network link service associations.
+		Retrieve a sorted, filtered, paginated list of all network link service associations.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListNetworkingV1NetworkLinkServiceAssociationsRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiListNetworkingV1NetworkLinkServiceAssociationsRequest
 	*/
 	ListNetworkingV1NetworkLinkServiceAssociations(ctx _context.Context) ApiListNetworkingV1NetworkLinkServiceAssociationsRequest
 
@@ -110,9 +110,9 @@ GetNetworkingV1NetworkLinkServiceAssociation Read a Network Link Service Associa
 
 Make a request to read a network link service association.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the network link service association.
-	@return ApiGetNetworkingV1NetworkLinkServiceAssociationRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier for the network link service association.
+ @return ApiGetNetworkingV1NetworkLinkServiceAssociationRequest
 */
 func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) GetNetworkingV1NetworkLinkServiceAssociation(ctx _context.Context, id string) ApiGetNetworkingV1NetworkLinkServiceAssociationRequest {
 	return ApiGetNetworkingV1NetworkLinkServiceAssociationRequest{
@@ -123,8 +123,7 @@ func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) GetNetworkingV1Ne
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1NetworkLinkServiceAssociation
+//  @return NetworkingV1NetworkLinkServiceAssociation
 func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) GetNetworkingV1NetworkLinkServiceAssociationExecute(r ApiGetNetworkingV1NetworkLinkServiceAssociationRequest) (NetworkingV1NetworkLinkServiceAssociation, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -309,8 +308,8 @@ ListNetworkingV1NetworkLinkServiceAssociations List of Network Link Service Asso
 
 Retrieve a sorted, filtered, paginated list of all network link service associations.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListNetworkingV1NetworkLinkServiceAssociationsRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListNetworkingV1NetworkLinkServiceAssociationsRequest
 */
 func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) ListNetworkingV1NetworkLinkServiceAssociations(ctx _context.Context) ApiListNetworkingV1NetworkLinkServiceAssociationsRequest {
 	return ApiListNetworkingV1NetworkLinkServiceAssociationsRequest{
@@ -320,8 +319,7 @@ func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) ListNetworkingV1N
 }
 
 // Execute executes the request
-//
-//	@return NetworkingV1NetworkLinkServiceAssociationList
+//  @return NetworkingV1NetworkLinkServiceAssociationList
 func (a *NetworkLinkServiceAssociationsNetworkingV1ApiService) ListNetworkingV1NetworkLinkServiceAssociationsExecute(r ApiListNetworkingV1NetworkLinkServiceAssociationsRequest) (NetworkingV1NetworkLinkServiceAssociationList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
