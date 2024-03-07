@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the DNS record. | [optional] 
-**Fqdn** | Pointer to **string** | The fully qualified domain name of the DNS record. | [optional] 
+**Domain** | Pointer to **string** | The fully qualified domain name of the DNS record. | [optional] 
 **Config** | Pointer to [**NetworkingV1DnsRecordSpecConfigOneOf**](NetworkingV1DnsRecordSpecConfigOneOf.md) | The config of the DNS record. | [optional] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 **Gateway** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The gateway to which this belongs. | [optional] 
@@ -54,30 +54,30 @@ SetDisplayName sets DisplayName field to given value.
 
 HasDisplayName returns a boolean if a field has been set.
 
-### GetFqdn
+### GetDomain
 
-`func (o *NetworkingV1DnsRecordSpec) GetFqdn() string`
+`func (o *NetworkingV1DnsRecordSpec) GetDomain() string`
 
-GetFqdn returns the Fqdn field if non-nil, zero value otherwise.
+GetDomain returns the Domain field if non-nil, zero value otherwise.
 
-### GetFqdnOk
+### GetDomainOk
 
-`func (o *NetworkingV1DnsRecordSpec) GetFqdnOk() (*string, bool)`
+`func (o *NetworkingV1DnsRecordSpec) GetDomainOk() (*string, bool)`
 
-GetFqdnOk returns a tuple with the Fqdn field if it's non-nil, zero value otherwise
+GetDomainOk returns a tuple with the Domain field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetFqdn
+### SetDomain
 
-`func (o *NetworkingV1DnsRecordSpec) SetFqdn(v string)`
+`func (o *NetworkingV1DnsRecordSpec) SetDomain(v string)`
 
-SetFqdn sets Fqdn field to given value.
+SetDomain sets Domain field to given value.
 
-### HasFqdn
+### HasDomain
 
-`func (o *NetworkingV1DnsRecordSpec) HasFqdn() bool`
+`func (o *NetworkingV1DnsRecordSpec) HasDomain() bool`
 
-HasFqdn returns a boolean if a field has been set.
+HasDomain returns a boolean if a field has been set.
 
 ### GetConfig
 

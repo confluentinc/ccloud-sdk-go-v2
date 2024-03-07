@@ -43,14 +43,14 @@ var (
 type AccessPointsNetworkingV1Api interface {
 
 	/*
-			CreateNetworkingV1AccessPoint Create an Access Point
+		CreateNetworkingV1AccessPoint Create an Access Point
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Make a request to create an access point.
+	Make a request to create an access point.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiCreateNetworkingV1AccessPointRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateNetworkingV1AccessPointRequest
 	*/
 	CreateNetworkingV1AccessPoint(ctx _context.Context) ApiCreateNetworkingV1AccessPointRequest
 
@@ -59,15 +59,15 @@ type AccessPointsNetworkingV1Api interface {
 	CreateNetworkingV1AccessPointExecute(r ApiCreateNetworkingV1AccessPointRequest) (NetworkingV1AccessPoint, *_nethttp.Response, error)
 
 	/*
-			DeleteNetworkingV1AccessPoint Delete an Access Point
+		DeleteNetworkingV1AccessPoint Delete an Access Point
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Make a request to delete an access point.
+	Make a request to delete an access point.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the access point.
-			 @return ApiDeleteNetworkingV1AccessPointRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the access point.
+		 @return ApiDeleteNetworkingV1AccessPointRequest
 	*/
 	DeleteNetworkingV1AccessPoint(ctx _context.Context, id string) ApiDeleteNetworkingV1AccessPointRequest
 
@@ -75,15 +75,15 @@ type AccessPointsNetworkingV1Api interface {
 	DeleteNetworkingV1AccessPointExecute(r ApiDeleteNetworkingV1AccessPointRequest) (*_nethttp.Response, error)
 
 	/*
-			GetNetworkingV1AccessPoint Read an Access Point
+		GetNetworkingV1AccessPoint Read an Access Point
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Make a request to read an access point.
+	Make a request to read an access point.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the access point.
-			 @return ApiGetNetworkingV1AccessPointRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the access point.
+		 @return ApiGetNetworkingV1AccessPointRequest
 	*/
 	GetNetworkingV1AccessPoint(ctx _context.Context, id string) ApiGetNetworkingV1AccessPointRequest
 
@@ -92,14 +92,14 @@ type AccessPointsNetworkingV1Api interface {
 	GetNetworkingV1AccessPointExecute(r ApiGetNetworkingV1AccessPointRequest) (NetworkingV1AccessPoint, *_nethttp.Response, error)
 
 	/*
-			ListNetworkingV1AccessPoints List of Access Points
+		ListNetworkingV1AccessPoints List of Access Points
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Retrieve a sorted, filtered, paginated list of all access points.
+	Retrieve a sorted, filtered, paginated list of all access points.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiListNetworkingV1AccessPointsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListNetworkingV1AccessPointsRequest
 	*/
 	ListNetworkingV1AccessPoints(ctx _context.Context) ApiListNetworkingV1AccessPointsRequest
 
@@ -108,17 +108,17 @@ type AccessPointsNetworkingV1Api interface {
 	ListNetworkingV1AccessPointsExecute(r ApiListNetworkingV1AccessPointsRequest) (NetworkingV1AccessPointList, *_nethttp.Response, error)
 
 	/*
-			UpdateNetworkingV1AccessPoint Update an Access Point
+		UpdateNetworkingV1AccessPoint Update an Access Point
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Make a request to update an access point.
+	Make a request to update an access point.
 
 
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the access point.
-			 @return ApiUpdateNetworkingV1AccessPointRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the access point.
+		 @return ApiUpdateNetworkingV1AccessPointRequest
 	*/
 	UpdateNetworkingV1AccessPoint(ctx _context.Context, id string) ApiUpdateNetworkingV1AccessPointRequest
 
@@ -630,6 +630,7 @@ type ApiListNetworkingV1AccessPointsRequest struct {
 	ApiService      AccessPointsNetworkingV1Api
 	environment     *string
 	specDisplayName *[]string
+	specGateway     *[]string
 	pageSize        *int32
 	pageToken       *string
 }
@@ -643,6 +644,12 @@ func (r ApiListNetworkingV1AccessPointsRequest) Environment(environment string) 
 // Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values.
 func (r ApiListNetworkingV1AccessPointsRequest) SpecDisplayName(specDisplayName []string) ApiListNetworkingV1AccessPointsRequest {
 	r.specDisplayName = &specDisplayName
+	return r
+}
+
+// Filter the results by exact match for spec.gateway. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1AccessPointsRequest) SpecGateway(specGateway []string) ApiListNetworkingV1AccessPointsRequest {
+	r.specGateway = &specGateway
 	return r
 }
 
@@ -718,6 +725,17 @@ func (a *AccessPointsNetworkingV1ApiService) ListNetworkingV1AccessPointsExecute
 		}
 	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
+	if r.specGateway != nil {
+		t := *r.specGateway
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.gateway", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.gateway", parameterToString(t, "multi"))
+		}
+	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}

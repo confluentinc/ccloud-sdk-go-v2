@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 
 ## ListNetworkingV1DnsRecords
 
-> NetworkingV1DnsRecordList ListNetworkingV1DnsRecords(ctx).Environment(environment).SpecDisplayName(specDisplayName).SpecFqdn(specFqdn).SpecGateway(specGateway).ResourceId(resourceId).PageSize(pageSize).PageToken(pageToken).Execute()
+> NetworkingV1DnsRecordList ListNetworkingV1DnsRecords(ctx).Environment(environment).SpecDisplayName(specDisplayName).SpecDomain(specDomain).SpecGateway(specGateway).ResourceId(resourceId).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of DNS Records
 
@@ -243,15 +243,15 @@ import (
 func main() {
     environment := "env-00000" // string | Filter the results by exact match for environment.
     specDisplayName := []string{"Inner_example"} // []string | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. (optional)
-    specFqdn := []string{"Inner_example"} // []string | Filter the results by exact match for spec.fqdn. Pass multiple times to see results matching any of the values. (optional)
-    specGateway := "gw-00000" // string | Filter the results by exact match for spec.gateway. (optional)
+    specDomain := []string{"Inner_example"} // []string | Filter the results by exact match for spec.domain. Pass multiple times to see results matching any of the values. (optional)
+    specGateway := []string{"Inner_example"} // []string | Filter the results by exact match for spec.gateway. Pass multiple times to see results matching any of the values. (optional)
     resourceId := []string{"Inner_example"} // []string | Filter the results by exact match for resource_id. Pass multiple times to see results matching any of the values. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DNSRecordsNetworkingV1Api.ListNetworkingV1DnsRecords(context.Background()).Environment(environment).SpecDisplayName(specDisplayName).SpecFqdn(specFqdn).SpecGateway(specGateway).ResourceId(resourceId).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.DNSRecordsNetworkingV1Api.ListNetworkingV1DnsRecords(context.Background()).Environment(environment).SpecDisplayName(specDisplayName).SpecDomain(specDomain).SpecGateway(specGateway).ResourceId(resourceId).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DNSRecordsNetworkingV1Api.ListNetworkingV1DnsRecords``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -274,8 +274,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **environment** | **string** | Filter the results by exact match for environment. | 
  **specDisplayName** | **[]string** | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. | 
- **specFqdn** | **[]string** | Filter the results by exact match for spec.fqdn. Pass multiple times to see results matching any of the values. | 
- **specGateway** | **string** | Filter the results by exact match for spec.gateway. | 
+ **specDomain** | **[]string** | Filter the results by exact match for spec.domain. Pass multiple times to see results matching any of the values. | 
+ **specGateway** | **[]string** | Filter the results by exact match for spec.gateway. Pass multiple times to see results matching any of the values. | 
  **resourceId** | **[]string** | Filter the results by exact match for resource_id. Pass multiple times to see results matching any of the values. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 

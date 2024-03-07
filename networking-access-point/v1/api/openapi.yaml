@@ -67,6 +67,18 @@ paths:
         schema:
           $ref: '#/components/schemas/SearchFilter'
         style: form
+      - description: Filter the results by exact match for spec.gateway. Pass multiple
+          times to see results matching any of the values.
+        example:
+        - gw-00000
+        - gw-00001
+        explode: true
+        in: query
+        name: spec.gateway
+        required: false
+        schema:
+          $ref: '#/components/schemas/MultipleSearchFilter'
+        style: form
       - description: A pagination size for collection requests.
         explode: true
         in: query
@@ -290,14 +302,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000&spec.gateway=gw-00000,gw-00001' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000&spec.gateway=gw-00000,gw-00001")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -305,7 +317,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000&spec.gateway=gw-00000,gw-00001\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -318,7 +330,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000", headers=headers)
+          conn.request("GET", "/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000&spec.gateway=gw-00000,gw-00001", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -332,7 +344,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000",
+            "path": "/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000&spec.gateway=gw-00000,gw-00001",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -357,7 +369,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000&spec.gateway=gw-00000,gw-00001");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -366,7 +378,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000&spec.gateway=gw-00000,gw-00001");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1881,14 +1893,14 @@ paths:
         schema:
           $ref: '#/components/schemas/MultipleSearchFilter'
         style: form
-      - description: Filter the results by exact match for spec.fqdn. Pass multiple
+      - description: Filter the results by exact match for spec.domain. Pass multiple
           times to see results matching any of the values.
         example:
         - example.com
         - example2.com
         explode: true
         in: query
-        name: spec.fqdn
+        name: spec.domain
         required: false
         schema:
           $ref: '#/components/schemas/MultipleSearchFilter'
@@ -1902,14 +1914,17 @@ paths:
         schema:
           $ref: '#/components/schemas/SearchFilter'
         style: form
-      - description: Filter the results by exact match for spec.gateway.
-        example: gw-00000
+      - description: Filter the results by exact match for spec.gateway. Pass multiple
+          times to see results matching any of the values.
+        example:
+        - gw-00000
+        - gw-00001
         explode: true
         in: query
         name: spec.gateway
         required: false
         schema:
-          $ref: '#/components/schemas/SearchFilter'
+          $ref: '#/components/schemas/MultipleSearchFilter'
         style: form
       - description: Filter the results by exact match for resource_id. Pass multiple
           times to see results matching any of the values.
@@ -2146,14 +2161,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/dns-records?spec.display_name=prod-dnsrec-1,prod-dnsrec-2&spec.fqdn=example.com,example2.com&environment=env-00000&spec.gateway=gw-00000&resource_id=ap-11111,ap-22222' \
+            --url 'https://api.confluent.cloud/networking/v1/dns-records?spec.display_name=prod-dnsrec-1,prod-dnsrec-2&spec.domain=example.com,example2.com&environment=env-00000&spec.gateway=gw-00000,gw-00001&resource_id=ap-11111,ap-22222' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/dns-records?spec.display_name=prod-dnsrec-1,prod-dnsrec-2&spec.fqdn=example.com,example2.com&environment=env-00000&spec.gateway=gw-00000&resource_id=ap-11111,ap-22222")
+            .url("https://api.confluent.cloud/networking/v1/dns-records?spec.display_name=prod-dnsrec-1,prod-dnsrec-2&spec.domain=example.com,example2.com&environment=env-00000&spec.gateway=gw-00000,gw-00001&resource_id=ap-11111,ap-22222")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -2161,7 +2176,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/dns-records?spec.display_name=prod-dnsrec-1,prod-dnsrec-2&spec.fqdn=example.com,example2.com&environment=env-00000&spec.gateway=gw-00000&resource_id=ap-11111,ap-22222\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/dns-records?spec.display_name=prod-dnsrec-1,prod-dnsrec-2&spec.domain=example.com,example2.com&environment=env-00000&spec.gateway=gw-00000,gw-00001&resource_id=ap-11111,ap-22222\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -2174,7 +2189,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/dns-records?spec.display_name=prod-dnsrec-1,prod-dnsrec-2&spec.fqdn=example.com,example2.com&environment=env-00000&spec.gateway=gw-00000&resource_id=ap-11111,ap-22222", headers=headers)
+          conn.request("GET", "/networking/v1/dns-records?spec.display_name=prod-dnsrec-1,prod-dnsrec-2&spec.domain=example.com,example2.com&environment=env-00000&spec.gateway=gw-00000,gw-00001&resource_id=ap-11111,ap-22222", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2188,7 +2203,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/dns-records?spec.display_name=prod-dnsrec-1,prod-dnsrec-2&spec.fqdn=example.com,example2.com&environment=env-00000&spec.gateway=gw-00000&resource_id=ap-11111,ap-22222",
+            "path": "/networking/v1/dns-records?spec.display_name=prod-dnsrec-1,prod-dnsrec-2&spec.domain=example.com,example2.com&environment=env-00000&spec.gateway=gw-00000,gw-00001&resource_id=ap-11111,ap-22222",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -2213,7 +2228,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/dns-records?spec.display_name=prod-dnsrec-1,prod-dnsrec-2&spec.fqdn=example.com,example2.com&environment=env-00000&spec.gateway=gw-00000&resource_id=ap-11111,ap-22222");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/dns-records?spec.display_name=prod-dnsrec-1,prod-dnsrec-2&spec.domain=example.com,example2.com&environment=env-00000&spec.gateway=gw-00000,gw-00001&resource_id=ap-11111,ap-22222");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -2222,7 +2237,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/dns-records?spec.display_name=prod-dnsrec-1,prod-dnsrec-2&spec.fqdn=example.com,example2.com&environment=env-00000&spec.gateway=gw-00000&resource_id=ap-11111,ap-22222");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/dns-records?spec.display_name=prod-dnsrec-1,prod-dnsrec-2&spec.domain=example.com,example2.com&environment=env-00000&spec.gateway=gw-00000,gw-00001&resource_id=ap-11111,ap-22222");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -2242,8 +2257,8 @@ paths:
                   spec:
                     required:
                     - config
+                    - domain
                     - environment
-                    - fqdn
                     - gateway
                     type: object
                 required:
@@ -2271,8 +2286,8 @@ paths:
                     spec:
                       required:
                       - config
+                      - domain
                       - environment
-                      - fqdn
                       - gateway
                       type: object
                   required:
@@ -2535,13 +2550,13 @@ paths:
             --url https://api.confluent.cloud/networking/v1/dns-records \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-dnsrec-1","fqdn":"example.com","config":{"kind":"PrivateLinkAccessPoint","resource_id":"ap-12345"},"environment":{"id":"env-00000","environment":"string"},"gateway":{"id":"gw-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"prod-dnsrec-1","domain":"example.com","config":{"kind":"PrivateLinkAccessPoint","resource_id":"ap-12345"},"environment":{"id":"env-00000","environment":"string"},"gateway":{"id":"gw-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-dnsrec-1\",\"fqdn\":\"example.com\",\"config\":{\"kind\":\"PrivateLinkAccessPoint\",\"resource_id\":\"ap-12345\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"gw-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-dnsrec-1\",\"domain\":\"example.com\",\"config\":{\"kind\":\"PrivateLinkAccessPoint\",\"resource_id\":\"ap-12345\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"gw-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/dns-records")
             .post(body)
@@ -2554,8 +2569,8 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/dns-records\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
-          :\\\"prod-dnsrec-1\\\",\\\"fqdn\\\":\\\"example.com\\\",\\\"config\\\":{\\\
-          \"kind\\\":\\\"PrivateLinkAccessPoint\\\",\\\"resource_id\\\":\\\"ap-12345\\\
+          :\\\"prod-dnsrec-1\\\",\\\"domain\\\":\\\"example.com\\\",\\\"config\\\"\
+          :{\\\"kind\\\":\\\"PrivateLinkAccessPoint\\\",\\\"resource_id\\\":\\\"ap-12345\\\
           \"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"environment\\\"\
           :\\\"string\\\"},\\\"gateway\\\":{\\\"id\\\":\\\"gw-00000\\\",\\\"environment\\\
           \":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
@@ -2569,7 +2584,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-dnsrec-1\",\"fqdn\":\"example.com\",\"config\":{\"kind\":\"PrivateLinkAccessPoint\",\"resource_id\":\"ap-12345\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"gw-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-dnsrec-1\",\"domain\":\"example.com\",\"config\":{\"kind\":\"PrivateLinkAccessPoint\",\"resource_id\":\"ap-12345\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"gw-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -2613,7 +2628,7 @@ paths:
           req.write(JSON.stringify({
             spec: {
               display_name: 'prod-dnsrec-1',
-              fqdn: 'example.com',
+              domain: 'example.com',
               config: {kind: 'PrivateLinkAccessPoint', resource_id: 'ap-12345'},
               environment: {id: 'env-00000', environment: 'string'},
               gateway: {id: 'gw-00000', environment: 'string'}
@@ -2632,7 +2647,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-dnsrec-1\",\"fqdn\":\"example.com\",\"config\":{\"kind\":\"PrivateLinkAccessPoint\",\"resource_id\":\"ap-12345\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"gw-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-dnsrec-1\",\"domain\":\"example.com\",\"config\":{\"kind\":\"PrivateLinkAccessPoint\",\"resource_id\":\"ap-12345\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"gw-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -2641,7 +2656,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-dnsrec-1\",\"fqdn\":\"example.com\",\"config\":{\"kind\":\"PrivateLinkAccessPoint\",\"resource_id\":\"ap-12345\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"gw-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-dnsrec-1\",\"domain\":\"example.com\",\"config\":{\"kind\":\"PrivateLinkAccessPoint\",\"resource_id\":\"ap-12345\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"gw-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Networking v1
   /networking/v1/dns-records/{id}:
@@ -2981,8 +2996,8 @@ paths:
                     spec:
                       required:
                       - config
+                      - domain
                       - environment
-                      - fqdn
                       - gateway
                       type: object
                   required:
@@ -3327,8 +3342,8 @@ paths:
                     spec:
                       required:
                       - config
+                      - domain
                       - environment
-                      - fqdn
                       - gateway
                       type: object
                   required:
@@ -3604,13 +3619,13 @@ paths:
             --url 'https://api.confluent.cloud/networking/v1/dns-records/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-dnsrec-1","fqdn":"example.com","config":{"kind":"PrivateLinkAccessPoint","resource_id":"ap-12345"},"environment":{"id":"env-00000","environment":"string"},"gateway":{"id":"string","environment":"string"}}}'
+            --data '{"spec":{"display_name":"prod-dnsrec-1","domain":"example.com","config":{"kind":"PrivateLinkAccessPoint","resource_id":"ap-12345"},"environment":{"id":"env-00000","environment":"string"},"gateway":{"id":"string","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-dnsrec-1\",\"fqdn\":\"example.com\",\"config\":{\"kind\":\"PrivateLinkAccessPoint\",\"resource_id\":\"ap-12345\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-dnsrec-1\",\"domain\":\"example.com\",\"config\":{\"kind\":\"PrivateLinkAccessPoint\",\"resource_id\":\"ap-12345\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/dns-records/{id}")
             .patch(body)
@@ -3623,8 +3638,8 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/dns-records/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
-          :\\\"prod-dnsrec-1\\\",\\\"fqdn\\\":\\\"example.com\\\",\\\"config\\\":{\\\
-          \"kind\\\":\\\"PrivateLinkAccessPoint\\\",\\\"resource_id\\\":\\\"ap-12345\\\
+          :\\\"prod-dnsrec-1\\\",\\\"domain\\\":\\\"example.com\\\",\\\"config\\\"\
+          :{\\\"kind\\\":\\\"PrivateLinkAccessPoint\\\",\\\"resource_id\\\":\\\"ap-12345\\\
           \"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"environment\\\"\
           :\\\"string\\\"},\\\"gateway\\\":{\\\"id\\\":\\\"string\\\",\\\"environment\\\
           \":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\
@@ -3638,7 +3653,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-dnsrec-1\",\"fqdn\":\"example.com\",\"config\":{\"kind\":\"PrivateLinkAccessPoint\",\"resource_id\":\"ap-12345\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"string\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-dnsrec-1\",\"domain\":\"example.com\",\"config\":{\"kind\":\"PrivateLinkAccessPoint\",\"resource_id\":\"ap-12345\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"string\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -3682,7 +3697,7 @@ paths:
           req.write(JSON.stringify({
             spec: {
               display_name: 'prod-dnsrec-1',
-              fqdn: 'example.com',
+              domain: 'example.com',
               config: {kind: 'PrivateLinkAccessPoint', resource_id: 'ap-12345'},
               environment: {id: 'env-00000', environment: 'string'},
               gateway: {id: 'string', environment: 'string'}
@@ -3701,7 +3716,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-dnsrec-1\",\"fqdn\":\"example.com\",\"config\":{\"kind\":\"PrivateLinkAccessPoint\",\"resource_id\":\"ap-12345\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-dnsrec-1\",\"domain\":\"example.com\",\"config\":{\"kind\":\"PrivateLinkAccessPoint\",\"resource_id\":\"ap-12345\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"string\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -3710,7 +3725,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-dnsrec-1\",\"fqdn\":\"example.com\",\"config\":{\"kind\":\"PrivateLinkAccessPoint\",\"resource_id\":\"ap-12345\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-dnsrec-1\",\"domain\":\"example.com\",\"config\":{\"kind\":\"PrivateLinkAccessPoint\",\"resource_id\":\"ap-12345\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Networking v1
 components:
@@ -4352,8 +4367,8 @@ components:
                 spec:
                   required:
                   - config
+                  - domain
                   - environment
-                  - fqdn
                   - gateway
                   type: object
               required:
@@ -4377,7 +4392,7 @@ components:
           description: The name of the DNS record.
           example: prod-dnsrec-1
           type: string
-        fqdn:
+        domain:
           description: The fully qualified domain name of the DNS record.
           example: example.com
           type: string

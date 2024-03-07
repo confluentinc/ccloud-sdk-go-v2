@@ -39,7 +39,7 @@ type NetworkingV1DnsRecordSpec struct {
 	// The name of the DNS record.
 	DisplayName *string `json:"display_name,omitempty"`
 	// The fully qualified domain name of the DNS record.
-	Fqdn *string `json:"fqdn,omitempty"`
+	Domain *string `json:"domain,omitempty"`
 	// The config of the DNS record.
 	Config *NetworkingV1DnsRecordSpecConfigOneOf `json:"config,omitempty"`
 	// The environment to which this belongs.
@@ -97,36 +97,36 @@ func (o *NetworkingV1DnsRecordSpec) SetDisplayName(v string) {
 	o.DisplayName = &v
 }
 
-// GetFqdn returns the Fqdn field value if set, zero value otherwise.
-func (o *NetworkingV1DnsRecordSpec) GetFqdn() string {
-	if o == nil || o.Fqdn == nil {
+// GetDomain returns the Domain field value if set, zero value otherwise.
+func (o *NetworkingV1DnsRecordSpec) GetDomain() string {
+	if o == nil || o.Domain == nil {
 		var ret string
 		return ret
 	}
-	return *o.Fqdn
+	return *o.Domain
 }
 
-// GetFqdnOk returns a tuple with the Fqdn field value if set, nil otherwise
+// GetDomainOk returns a tuple with the Domain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1DnsRecordSpec) GetFqdnOk() (*string, bool) {
-	if o == nil || o.Fqdn == nil {
+func (o *NetworkingV1DnsRecordSpec) GetDomainOk() (*string, bool) {
+	if o == nil || o.Domain == nil {
 		return nil, false
 	}
-	return o.Fqdn, true
+	return o.Domain, true
 }
 
-// HasFqdn returns a boolean if a field has been set.
-func (o *NetworkingV1DnsRecordSpec) HasFqdn() bool {
-	if o != nil && o.Fqdn != nil {
+// HasDomain returns a boolean if a field has been set.
+func (o *NetworkingV1DnsRecordSpec) HasDomain() bool {
+	if o != nil && o.Domain != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetFqdn gets a reference to the given string and assigns it to the Fqdn field.
-func (o *NetworkingV1DnsRecordSpec) SetFqdn(v string) {
-	o.Fqdn = &v
+// SetDomain gets a reference to the given string and assigns it to the Domain field.
+func (o *NetworkingV1DnsRecordSpec) SetDomain(v string) {
+	o.Domain = &v
 }
 
 // GetConfig returns the Config field value if set, zero value otherwise.
@@ -228,7 +228,7 @@ func (o *NetworkingV1DnsRecordSpec) SetGateway(v EnvScopedObjectReference) {
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1DnsRecordSpec) Redact() {
 	o.recurseRedact(o.DisplayName)
-	o.recurseRedact(o.Fqdn)
+	o.recurseRedact(o.Domain)
 	o.recurseRedact(o.Config)
 	o.recurseRedact(o.Environment)
 	o.recurseRedact(o.Gateway)
@@ -269,8 +269,8 @@ func (o NetworkingV1DnsRecordSpec) MarshalJSON() ([]byte, error) {
 	if o.DisplayName != nil {
 		toSerialize["display_name"] = o.DisplayName
 	}
-	if o.Fqdn != nil {
-		toSerialize["fqdn"] = o.Fqdn
+	if o.Domain != nil {
+		toSerialize["domain"] = o.Domain
 	}
 	if o.Config != nil {
 		toSerialize["config"] = o.Config

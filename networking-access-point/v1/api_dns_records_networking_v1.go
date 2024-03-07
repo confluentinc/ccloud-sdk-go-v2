@@ -43,14 +43,14 @@ var (
 type DNSRecordsNetworkingV1Api interface {
 
 	/*
-			CreateNetworkingV1DnsRecord Create a DNS Record
+		CreateNetworkingV1DnsRecord Create a DNS Record
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Make a request to create a DNS record.
+	Make a request to create a DNS record.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiCreateNetworkingV1DnsRecordRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateNetworkingV1DnsRecordRequest
 	*/
 	CreateNetworkingV1DnsRecord(ctx _context.Context) ApiCreateNetworkingV1DnsRecordRequest
 
@@ -59,15 +59,15 @@ type DNSRecordsNetworkingV1Api interface {
 	CreateNetworkingV1DnsRecordExecute(r ApiCreateNetworkingV1DnsRecordRequest) (NetworkingV1DnsRecord, *_nethttp.Response, error)
 
 	/*
-			DeleteNetworkingV1DnsRecord Delete a DNS Record
+		DeleteNetworkingV1DnsRecord Delete a DNS Record
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Make a request to delete a DNS record.
+	Make a request to delete a DNS record.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the DNS record.
-			 @return ApiDeleteNetworkingV1DnsRecordRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the DNS record.
+		 @return ApiDeleteNetworkingV1DnsRecordRequest
 	*/
 	DeleteNetworkingV1DnsRecord(ctx _context.Context, id string) ApiDeleteNetworkingV1DnsRecordRequest
 
@@ -75,15 +75,15 @@ type DNSRecordsNetworkingV1Api interface {
 	DeleteNetworkingV1DnsRecordExecute(r ApiDeleteNetworkingV1DnsRecordRequest) (*_nethttp.Response, error)
 
 	/*
-			GetNetworkingV1DnsRecord Read a DNS Record
+		GetNetworkingV1DnsRecord Read a DNS Record
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Make a request to read a DNS record.
+	Make a request to read a DNS record.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the DNS record.
-			 @return ApiGetNetworkingV1DnsRecordRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the DNS record.
+		 @return ApiGetNetworkingV1DnsRecordRequest
 	*/
 	GetNetworkingV1DnsRecord(ctx _context.Context, id string) ApiGetNetworkingV1DnsRecordRequest
 
@@ -92,14 +92,14 @@ type DNSRecordsNetworkingV1Api interface {
 	GetNetworkingV1DnsRecordExecute(r ApiGetNetworkingV1DnsRecordRequest) (NetworkingV1DnsRecord, *_nethttp.Response, error)
 
 	/*
-			ListNetworkingV1DnsRecords List of DNS Records
+		ListNetworkingV1DnsRecords List of DNS Records
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Retrieve a sorted, filtered, paginated list of all DNS records.
+	Retrieve a sorted, filtered, paginated list of all DNS records.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiListNetworkingV1DnsRecordsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListNetworkingV1DnsRecordsRequest
 	*/
 	ListNetworkingV1DnsRecords(ctx _context.Context) ApiListNetworkingV1DnsRecordsRequest
 
@@ -108,17 +108,17 @@ type DNSRecordsNetworkingV1Api interface {
 	ListNetworkingV1DnsRecordsExecute(r ApiListNetworkingV1DnsRecordsRequest) (NetworkingV1DnsRecordList, *_nethttp.Response, error)
 
 	/*
-			UpdateNetworkingV1DnsRecord Update a DNS Record
+		UpdateNetworkingV1DnsRecord Update a DNS Record
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Make a request to update a DNS record.
+	Make a request to update a DNS record.
 
 
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the DNS record.
-			 @return ApiUpdateNetworkingV1DnsRecordRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the DNS record.
+		 @return ApiUpdateNetworkingV1DnsRecordRequest
 	*/
 	UpdateNetworkingV1DnsRecord(ctx _context.Context, id string) ApiUpdateNetworkingV1DnsRecordRequest
 
@@ -630,8 +630,8 @@ type ApiListNetworkingV1DnsRecordsRequest struct {
 	ApiService      DNSRecordsNetworkingV1Api
 	environment     *string
 	specDisplayName *[]string
-	specFqdn        *[]string
-	specGateway     *string
+	specDomain      *[]string
+	specGateway     *[]string
 	resourceId      *[]string
 	pageSize        *int32
 	pageToken       *string
@@ -649,14 +649,14 @@ func (r ApiListNetworkingV1DnsRecordsRequest) SpecDisplayName(specDisplayName []
 	return r
 }
 
-// Filter the results by exact match for spec.fqdn. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1DnsRecordsRequest) SpecFqdn(specFqdn []string) ApiListNetworkingV1DnsRecordsRequest {
-	r.specFqdn = &specFqdn
+// Filter the results by exact match for spec.domain. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1DnsRecordsRequest) SpecDomain(specDomain []string) ApiListNetworkingV1DnsRecordsRequest {
+	r.specDomain = &specDomain
 	return r
 }
 
-// Filter the results by exact match for spec.gateway.
-func (r ApiListNetworkingV1DnsRecordsRequest) SpecGateway(specGateway string) ApiListNetworkingV1DnsRecordsRequest {
+// Filter the results by exact match for spec.gateway. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1DnsRecordsRequest) SpecGateway(specGateway []string) ApiListNetworkingV1DnsRecordsRequest {
 	r.specGateway = &specGateway
 	return r
 }
@@ -738,20 +738,28 @@ func (a *DNSRecordsNetworkingV1ApiService) ListNetworkingV1DnsRecordsExecute(r A
 			localVarQueryParams.Add("spec.display_name", parameterToString(t, "multi"))
 		}
 	}
-	if r.specFqdn != nil {
-		t := *r.specFqdn
+	if r.specDomain != nil {
+		t := *r.specDomain
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("spec.fqdn", parameterToString(s.Index(i), "multi"))
+				localVarQueryParams.Add("spec.domain", parameterToString(s.Index(i), "multi"))
 			}
 		} else {
-			localVarQueryParams.Add("spec.fqdn", parameterToString(t, "multi"))
+			localVarQueryParams.Add("spec.domain", parameterToString(t, "multi"))
 		}
 	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.specGateway != nil {
-		localVarQueryParams.Add("spec.gateway", parameterToString(*r.specGateway, ""))
+		t := *r.specGateway
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.gateway", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.gateway", parameterToString(t, "multi"))
+		}
 	}
 	if r.resourceId != nil {
 		t := *r.resourceId

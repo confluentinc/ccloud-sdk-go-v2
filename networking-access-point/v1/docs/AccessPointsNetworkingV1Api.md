@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 
 ## ListNetworkingV1AccessPoints
 
-> NetworkingV1AccessPointList ListNetworkingV1AccessPoints(ctx).Environment(environment).SpecDisplayName(specDisplayName).PageSize(pageSize).PageToken(pageToken).Execute()
+> NetworkingV1AccessPointList ListNetworkingV1AccessPoints(ctx).Environment(environment).SpecDisplayName(specDisplayName).SpecGateway(specGateway).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Access Points
 
@@ -243,12 +243,13 @@ import (
 func main() {
     environment := "env-00000" // string | Filter the results by exact match for environment.
     specDisplayName := []string{"Inner_example"} // []string | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. (optional)
+    specGateway := []string{"Inner_example"} // []string | Filter the results by exact match for spec.gateway. Pass multiple times to see results matching any of the values. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AccessPointsNetworkingV1Api.ListNetworkingV1AccessPoints(context.Background()).Environment(environment).SpecDisplayName(specDisplayName).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.AccessPointsNetworkingV1Api.ListNetworkingV1AccessPoints(context.Background()).Environment(environment).SpecDisplayName(specDisplayName).SpecGateway(specGateway).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AccessPointsNetworkingV1Api.ListNetworkingV1AccessPoints``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -271,6 +272,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **environment** | **string** | Filter the results by exact match for environment. | 
  **specDisplayName** | **[]string** | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. | 
+ **specGateway** | **[]string** | Filter the results by exact match for spec.gateway. Pass multiple times to see results matching any of the values. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 
