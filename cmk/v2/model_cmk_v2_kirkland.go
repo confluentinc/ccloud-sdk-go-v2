@@ -34,9 +34,9 @@ import (
 	"reflect"
 )
 
-// CmkV2DedicatedKirkland A dedicated kirkland cluster with its parameters.
-type CmkV2DedicatedKirkland struct {
-	// Dedicated Kirkland cluster type.
+// CmkV2Kirkland A kirkland cluster with its parameters.
+type CmkV2Kirkland struct {
+	// Kirkland cluster type.
 	Kind string `json:"kind,omitempty"`
 	// The id of the encryption key that is used to encrypt the data in the Kafka cluster. (e.g. for Amazon Web Services, the Amazon Resource Name of the key).
 	// Deprecated
@@ -45,26 +45,26 @@ type CmkV2DedicatedKirkland struct {
 	Zones *[]string `json:"zones,omitempty"`
 }
 
-// NewCmkV2DedicatedKirkland instantiates a new CmkV2DedicatedKirkland object
+// NewCmkV2Kirkland instantiates a new CmkV2Kirkland object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCmkV2DedicatedKirkland(kind string) *CmkV2DedicatedKirkland {
-	this := CmkV2DedicatedKirkland{}
+func NewCmkV2Kirkland(kind string) *CmkV2Kirkland {
+	this := CmkV2Kirkland{}
 	this.Kind = kind
 	return &this
 }
 
-// NewCmkV2DedicatedKirklandWithDefaults instantiates a new CmkV2DedicatedKirkland object
+// NewCmkV2KirklandWithDefaults instantiates a new CmkV2Kirkland object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCmkV2DedicatedKirklandWithDefaults() *CmkV2DedicatedKirkland {
-	this := CmkV2DedicatedKirkland{}
+func NewCmkV2KirklandWithDefaults() *CmkV2Kirkland {
+	this := CmkV2Kirkland{}
 	return &this
 }
 
 // GetKind returns the Kind field value
-func (o *CmkV2DedicatedKirkland) GetKind() string {
+func (o *CmkV2Kirkland) GetKind() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -75,7 +75,7 @@ func (o *CmkV2DedicatedKirkland) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *CmkV2DedicatedKirkland) GetKindOk() (*string, bool) {
+func (o *CmkV2Kirkland) GetKindOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -83,13 +83,13 @@ func (o *CmkV2DedicatedKirkland) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *CmkV2DedicatedKirkland) SetKind(v string) {
+func (o *CmkV2Kirkland) SetKind(v string) {
 	o.Kind = v
 }
 
 // GetEncryptionKey returns the EncryptionKey field value if set, zero value otherwise.
 // Deprecated
-func (o *CmkV2DedicatedKirkland) GetEncryptionKey() string {
+func (o *CmkV2Kirkland) GetEncryptionKey() string {
 	if o == nil || o.EncryptionKey == nil {
 		var ret string
 		return ret
@@ -100,7 +100,7 @@ func (o *CmkV2DedicatedKirkland) GetEncryptionKey() string {
 // GetEncryptionKeyOk returns a tuple with the EncryptionKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *CmkV2DedicatedKirkland) GetEncryptionKeyOk() (*string, bool) {
+func (o *CmkV2Kirkland) GetEncryptionKeyOk() (*string, bool) {
 	if o == nil || o.EncryptionKey == nil {
 		return nil, false
 	}
@@ -108,7 +108,7 @@ func (o *CmkV2DedicatedKirkland) GetEncryptionKeyOk() (*string, bool) {
 }
 
 // HasEncryptionKey returns a boolean if a field has been set.
-func (o *CmkV2DedicatedKirkland) HasEncryptionKey() bool {
+func (o *CmkV2Kirkland) HasEncryptionKey() bool {
 	if o != nil && o.EncryptionKey != nil {
 		return true
 	}
@@ -118,12 +118,12 @@ func (o *CmkV2DedicatedKirkland) HasEncryptionKey() bool {
 
 // SetEncryptionKey gets a reference to the given string and assigns it to the EncryptionKey field.
 // Deprecated
-func (o *CmkV2DedicatedKirkland) SetEncryptionKey(v string) {
+func (o *CmkV2Kirkland) SetEncryptionKey(v string) {
 	o.EncryptionKey = &v
 }
 
 // GetZones returns the Zones field value if set, zero value otherwise.
-func (o *CmkV2DedicatedKirkland) GetZones() []string {
+func (o *CmkV2Kirkland) GetZones() []string {
 	if o == nil || o.Zones == nil {
 		var ret []string
 		return ret
@@ -133,7 +133,7 @@ func (o *CmkV2DedicatedKirkland) GetZones() []string {
 
 // GetZonesOk returns a tuple with the Zones field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CmkV2DedicatedKirkland) GetZonesOk() (*[]string, bool) {
+func (o *CmkV2Kirkland) GetZonesOk() (*[]string, bool) {
 	if o == nil || o.Zones == nil {
 		return nil, false
 	}
@@ -141,7 +141,7 @@ func (o *CmkV2DedicatedKirkland) GetZonesOk() (*[]string, bool) {
 }
 
 // HasZones returns a boolean if a field has been set.
-func (o *CmkV2DedicatedKirkland) HasZones() bool {
+func (o *CmkV2Kirkland) HasZones() bool {
 	if o != nil && o.Zones != nil {
 		return true
 	}
@@ -150,18 +150,18 @@ func (o *CmkV2DedicatedKirkland) HasZones() bool {
 }
 
 // SetZones gets a reference to the given []string and assigns it to the Zones field.
-func (o *CmkV2DedicatedKirkland) SetZones(v []string) {
+func (o *CmkV2Kirkland) SetZones(v []string) {
 	o.Zones = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *CmkV2DedicatedKirkland) Redact() {
+func (o *CmkV2Kirkland) Redact() {
 	o.recurseRedact(&o.Kind)
 	o.recurseRedact(o.EncryptionKey)
 	o.recurseRedact(o.Zones)
 }
 
-func (o *CmkV2DedicatedKirkland) recurseRedact(v interface{}) {
+func (o *CmkV2Kirkland) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -186,12 +186,12 @@ func (o *CmkV2DedicatedKirkland) recurseRedact(v interface{}) {
 	}
 }
 
-func (o CmkV2DedicatedKirkland) zeroField(v interface{}) {
+func (o CmkV2Kirkland) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o CmkV2DedicatedKirkland) MarshalJSON() ([]byte, error) {
+func (o CmkV2Kirkland) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["kind"] = o.Kind
@@ -209,34 +209,34 @@ func (o CmkV2DedicatedKirkland) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableCmkV2DedicatedKirkland struct {
-	value *CmkV2DedicatedKirkland
+type NullableCmkV2Kirkland struct {
+	value *CmkV2Kirkland
 	isSet bool
 }
 
-func (v NullableCmkV2DedicatedKirkland) Get() *CmkV2DedicatedKirkland {
+func (v NullableCmkV2Kirkland) Get() *CmkV2Kirkland {
 	return v.value
 }
 
-func (v *NullableCmkV2DedicatedKirkland) Set(val *CmkV2DedicatedKirkland) {
+func (v *NullableCmkV2Kirkland) Set(val *CmkV2Kirkland) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCmkV2DedicatedKirkland) IsSet() bool {
+func (v NullableCmkV2Kirkland) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCmkV2DedicatedKirkland) Unset() {
+func (v *NullableCmkV2Kirkland) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCmkV2DedicatedKirkland(val *CmkV2DedicatedKirkland) *NullableCmkV2DedicatedKirkland {
-	return &NullableCmkV2DedicatedKirkland{value: val, isSet: true}
+func NewNullableCmkV2Kirkland(val *CmkV2Kirkland) *NullableCmkV2Kirkland {
+	return &NullableCmkV2Kirkland{value: val, isSet: true}
 }
 
-func (v NullableCmkV2DedicatedKirkland) MarshalJSON() ([]byte, error) {
+func (v NullableCmkV2Kirkland) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -244,7 +244,7 @@ func (v NullableCmkV2DedicatedKirkland) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableCmkV2DedicatedKirkland) UnmarshalJSON(src []byte) error {
+func (v *NullableCmkV2Kirkland) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -2332,15 +2332,15 @@ components:
       - cku
       - kind
       type: object
-    cmk.v2.DedicatedKirkland:
+    cmk.v2.Kirkland:
       description: |
-        A dedicated kirkland cluster with its parameters.
+        A kirkland cluster with its parameters.
       properties:
         kind:
           description: |
-            Dedicated Kirkland cluster type.
+            Kirkland cluster type.
           enum:
-          - DedicatedKirkland
+          - Kirkland
           type: string
         encryption_key:
           deprecated: true
@@ -2496,7 +2496,7 @@ components:
               Standard: '#/components/schemas/cmk.v2.Standard'
               Dedicated: '#/components/schemas/cmk.v2.Dedicated'
               Enterprise: '#/components/schemas/cmk.v2.Enterprise'
-              DedicatedKirkland: '#/components/schemas/cmk.v2.DedicatedKirkland'
+              Kirkland: '#/components/schemas/cmk.v2.Kirkland'
             propertyName: kind
           example:
             kind: Basic
@@ -2505,7 +2505,7 @@ components:
           - $ref: '#/components/schemas/cmk.v2.Standard'
           - $ref: '#/components/schemas/cmk.v2.Dedicated'
           - $ref: '#/components/schemas/cmk.v2.Enterprise'
-          - $ref: '#/components/schemas/cmk.v2.DedicatedKirkland'
+          - $ref: '#/components/schemas/cmk.v2.Kirkland'
           x-one-of-name: CmkV2ClusterSpecConfigOneOf
         kafka_bootstrap_endpoint:
           description: The bootstrap endpoint used by Kafka clients to connect to
@@ -2794,7 +2794,7 @@ components:
               Standard: '#/components/schemas/cmk.v2.Standard'
               Dedicated: '#/components/schemas/cmk.v2.Dedicated'
               Enterprise: '#/components/schemas/cmk.v2.Enterprise'
-              DedicatedKirkland: '#/components/schemas/cmk.v2.DedicatedKirkland'
+              Kirkland: '#/components/schemas/cmk.v2.Kirkland'
             propertyName: kind
           example:
             kind: Basic
@@ -2803,7 +2803,7 @@ components:
           - $ref: '#/components/schemas/cmk.v2.Standard'
           - $ref: '#/components/schemas/cmk.v2.Dedicated'
           - $ref: '#/components/schemas/cmk.v2.Enterprise'
-          - $ref: '#/components/schemas/cmk.v2.DedicatedKirkland'
+          - $ref: '#/components/schemas/cmk.v2.Kirkland'
           x-one-of-name: CmkV2ClusterSpecUpdateConfigOneOf
         environment:
           allOf:
