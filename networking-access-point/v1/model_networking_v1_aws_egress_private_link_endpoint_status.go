@@ -40,16 +40,19 @@ type NetworkingV1AwsEgressPrivateLinkEndpointStatus struct {
 	Kind string `json:"kind,omitempty"`
 	// Id of a VPC Endpoint (if any) that is connected to the VPC Endpoint service.
 	VpcEndpointId string `json:"vpc_endpoint_id,omitempty"`
+	// DNS name of a VPC Endpoint (if any) that is connected to the VPC Endpoint service.
+	VpcEndpointDnsName string `json:"vpc_endpoint_dns_name,omitempty"`
 }
 
 // NewNetworkingV1AwsEgressPrivateLinkEndpointStatus instantiates a new NetworkingV1AwsEgressPrivateLinkEndpointStatus object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1AwsEgressPrivateLinkEndpointStatus(kind string, vpcEndpointId string) *NetworkingV1AwsEgressPrivateLinkEndpointStatus {
+func NewNetworkingV1AwsEgressPrivateLinkEndpointStatus(kind string, vpcEndpointId string, vpcEndpointDnsName string) *NetworkingV1AwsEgressPrivateLinkEndpointStatus {
 	this := NetworkingV1AwsEgressPrivateLinkEndpointStatus{}
 	this.Kind = kind
 	this.VpcEndpointId = vpcEndpointId
+	this.VpcEndpointDnsName = vpcEndpointDnsName
 	return &this
 }
 
@@ -109,10 +112,35 @@ func (o *NetworkingV1AwsEgressPrivateLinkEndpointStatus) SetVpcEndpointId(v stri
 	o.VpcEndpointId = v
 }
 
+// GetVpcEndpointDnsName returns the VpcEndpointDnsName field value
+func (o *NetworkingV1AwsEgressPrivateLinkEndpointStatus) GetVpcEndpointDnsName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.VpcEndpointDnsName
+}
+
+// GetVpcEndpointDnsNameOk returns a tuple with the VpcEndpointDnsName field value
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1AwsEgressPrivateLinkEndpointStatus) GetVpcEndpointDnsNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.VpcEndpointDnsName, true
+}
+
+// SetVpcEndpointDnsName sets field value
+func (o *NetworkingV1AwsEgressPrivateLinkEndpointStatus) SetVpcEndpointDnsName(v string) {
+	o.VpcEndpointDnsName = v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1AwsEgressPrivateLinkEndpointStatus) Redact() {
 	o.recurseRedact(&o.Kind)
 	o.recurseRedact(&o.VpcEndpointId)
+	o.recurseRedact(&o.VpcEndpointDnsName)
 }
 
 func (o *NetworkingV1AwsEgressPrivateLinkEndpointStatus) recurseRedact(v interface{}) {
@@ -152,6 +180,9 @@ func (o NetworkingV1AwsEgressPrivateLinkEndpointStatus) MarshalJSON() ([]byte, e
 	}
 	if true {
 		toSerialize["vpc_endpoint_id"] = o.VpcEndpointId
+	}
+	if true {
+		toSerialize["vpc_endpoint_dns_name"] = o.VpcEndpointDnsName
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

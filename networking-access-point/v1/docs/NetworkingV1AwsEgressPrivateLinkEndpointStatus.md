@@ -6,12 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | AwsEgressPrivateLinkEndpointStatus kind. | 
 **VpcEndpointId** | **string** | Id of a VPC Endpoint (if any) that is connected to the VPC Endpoint service. | [readonly] 
+**VpcEndpointDnsName** | **string** | DNS name of a VPC Endpoint (if any) that is connected to the VPC Endpoint service. | [readonly] 
 
 ## Methods
 
 ### NewNetworkingV1AwsEgressPrivateLinkEndpointStatus
 
-`func NewNetworkingV1AwsEgressPrivateLinkEndpointStatus(kind string, vpcEndpointId string, ) *NetworkingV1AwsEgressPrivateLinkEndpointStatus`
+`func NewNetworkingV1AwsEgressPrivateLinkEndpointStatus(kind string, vpcEndpointId string, vpcEndpointDnsName string, ) *NetworkingV1AwsEgressPrivateLinkEndpointStatus`
 
 NewNetworkingV1AwsEgressPrivateLinkEndpointStatus instantiates a new NetworkingV1AwsEgressPrivateLinkEndpointStatus object
 This constructor will assign default values to properties that have it defined,
@@ -64,6 +65,26 @@ and a boolean to check if the value has been set.
 `func (o *NetworkingV1AwsEgressPrivateLinkEndpointStatus) SetVpcEndpointId(v string)`
 
 SetVpcEndpointId sets VpcEndpointId field to given value.
+
+
+### GetVpcEndpointDnsName
+
+`func (o *NetworkingV1AwsEgressPrivateLinkEndpointStatus) GetVpcEndpointDnsName() string`
+
+GetVpcEndpointDnsName returns the VpcEndpointDnsName field if non-nil, zero value otherwise.
+
+### GetVpcEndpointDnsNameOk
+
+`func (o *NetworkingV1AwsEgressPrivateLinkEndpointStatus) GetVpcEndpointDnsNameOk() (*string, bool)`
+
+GetVpcEndpointDnsNameOk returns a tuple with the VpcEndpointDnsName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVpcEndpointDnsName
+
+`func (o *NetworkingV1AwsEgressPrivateLinkEndpointStatus) SetVpcEndpointDnsName(v string)`
+
+SetVpcEndpointDnsName sets VpcEndpointDnsName field to given value.
 
 
 
