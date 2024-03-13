@@ -1926,14 +1926,14 @@ paths:
         schema:
           $ref: '#/components/schemas/MultipleSearchFilter'
         style: form
-      - description: Filter the results by exact match for resource_id. Pass multiple
+      - description: Filter the results by exact match for resource. Pass multiple
           times to see results matching any of the values.
         example:
         - ap-11111
         - ap-22222
         explode: true
         in: query
-        name: resource_id
+        name: resource
         required: false
         schema:
           $ref: '#/components/schemas/MultipleSearchFilter'
@@ -2161,14 +2161,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/dns-records?spec.display_name=prod-dnsrec-1%2Cprod-dnsrec-2&spec.domain=example.com%2Cexample2.com&environment=env-00000&spec.gateway=gw-00000%2Cgw-00001&resource_id=ap-11111%2Cap-22222' \
+            --url 'https://api.confluent.cloud/networking/v1/dns-records?spec.display_name=prod-dnsrec-1%2Cprod-dnsrec-2&spec.domain=example.com%2Cexample2.com&environment=env-00000&spec.gateway=gw-00000%2Cgw-00001&resource=ap-11111%2Cap-22222' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/dns-records?spec.display_name=prod-dnsrec-1%2Cprod-dnsrec-2&spec.domain=example.com%2Cexample2.com&environment=env-00000&spec.gateway=gw-00000%2Cgw-00001&resource_id=ap-11111%2Cap-22222")
+            .url("https://api.confluent.cloud/networking/v1/dns-records?spec.display_name=prod-dnsrec-1%2Cprod-dnsrec-2&spec.domain=example.com%2Cexample2.com&environment=env-00000&spec.gateway=gw-00000%2Cgw-00001&resource=ap-11111%2Cap-22222")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -2176,7 +2176,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/dns-records?spec.display_name=prod-dnsrec-1%2Cprod-dnsrec-2&spec.domain=example.com%2Cexample2.com&environment=env-00000&spec.gateway=gw-00000%2Cgw-00001&resource_id=ap-11111%2Cap-22222\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/dns-records?spec.display_name=prod-dnsrec-1%2Cprod-dnsrec-2&spec.domain=example.com%2Cexample2.com&environment=env-00000&spec.gateway=gw-00000%2Cgw-00001&resource=ap-11111%2Cap-22222\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -2189,7 +2189,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/dns-records?spec.display_name=prod-dnsrec-1%2Cprod-dnsrec-2&spec.domain=example.com%2Cexample2.com&environment=env-00000&spec.gateway=gw-00000%2Cgw-00001&resource_id=ap-11111%2Cap-22222", headers=headers)
+          conn.request("GET", "/networking/v1/dns-records?spec.display_name=prod-dnsrec-1%2Cprod-dnsrec-2&spec.domain=example.com%2Cexample2.com&environment=env-00000&spec.gateway=gw-00000%2Cgw-00001&resource=ap-11111%2Cap-22222", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2203,7 +2203,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/dns-records?spec.display_name=prod-dnsrec-1%2Cprod-dnsrec-2&spec.domain=example.com%2Cexample2.com&environment=env-00000&spec.gateway=gw-00000%2Cgw-00001&resource_id=ap-11111%2Cap-22222",
+            "path": "/networking/v1/dns-records?spec.display_name=prod-dnsrec-1%2Cprod-dnsrec-2&spec.domain=example.com%2Cexample2.com&environment=env-00000&spec.gateway=gw-00000%2Cgw-00001&resource=ap-11111%2Cap-22222",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -2228,7 +2228,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/dns-records?spec.display_name=prod-dnsrec-1%2Cprod-dnsrec-2&spec.domain=example.com%2Cexample2.com&environment=env-00000&spec.gateway=gw-00000%2Cgw-00001&resource_id=ap-11111%2Cap-22222");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/dns-records?spec.display_name=prod-dnsrec-1%2Cprod-dnsrec-2&spec.domain=example.com%2Cexample2.com&environment=env-00000&spec.gateway=gw-00000%2Cgw-00001&resource=ap-11111%2Cap-22222");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -2237,7 +2237,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/dns-records?spec.display_name=prod-dnsrec-1%2Cprod-dnsrec-2&spec.domain=example.com%2Cexample2.com&environment=env-00000&spec.gateway=gw-00000%2Cgw-00001&resource_id=ap-11111%2Cap-22222");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/dns-records?spec.display_name=prod-dnsrec-1%2Cprod-dnsrec-2&spec.domain=example.com%2Cexample2.com&environment=env-00000&spec.gateway=gw-00000%2Cgw-00001&resource=ap-11111%2Cap-22222");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -4039,11 +4039,9 @@ components:
           discriminator:
             mapping:
               AwsEgressPrivateLinkEndpointStatus: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpointStatus'
-              AzureEgressPrivateLinkEndpointStatus: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpointStatus'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpointStatus'
-          - $ref: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpointStatus'
           readOnly: true
           type: object
           x-one-of-name: NetworkingV1AccessPointStatusConfigOneOf
@@ -4152,23 +4150,6 @@ components:
       - kind
       - vpc_endpoint_service_name
       type: object
-    networking.v1.AzureEgressPrivateLinkEndpoint:
-      description: Azure Private Endpoint.
-      properties:
-        kind:
-          description: AzureEgressPrivateLinkEndpoint kind.
-          enum:
-          - AzureEgressPrivateLinkEndpoint
-          type: string
-        private_link_service_resource_id:
-          description: Resource id of the Azure PrivateLink service.
-          example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/s-abcde/providers/Microsoft.Network/privateLinkServices/pls-plt-abcdef-az3
-          minLength: 1
-          type: string
-      required:
-      - kind
-      - private_link_service_resource_id
-      type: object
     networking.v1.AwsEgressPrivateLinkEndpointStatus:
       description: Status of an AWS PrivateLink Endpoint.
       properties:
@@ -4194,24 +4175,6 @@ components:
       - vpc_endpoint_dns_name
       - vpc_endpoint_id
       title: AWS
-      type: object
-    networking.v1.AzureEgressPrivateLinkEndpointStatus:
-      description: Status of an Azure Private Endpoint.
-      properties:
-        kind:
-          description: AzureEgressPrivateLinkEndpointStatus kind.
-          enum:
-          - AzureEgressPrivateLinkEndpointStatus
-          type: string
-        private_endpoint_resource_id:
-          description: Resource Id of the Private Endpoint (if any) that is connected
-            to the PrivateLink service
-          example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testvpc/providers/Microsoft.Network/privateEndpoints/pe-plt-abcdef-az3
-          readOnly: true
-          type: string
-      required:
-      - kind
-      - private_endpoint_resource_id
       type: object
     networking.v1.PrivateLinkAccessPoint:
       description: DNS record that is associated with a PrivateLink access point.
@@ -4311,11 +4274,9 @@ components:
           discriminator:
             mapping:
               AwsEgressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpoint'
-              AzureEgressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpoint'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpoint'
-          - $ref: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpoint'
           type: object
           x-immutable: true
           x-one-of-name: NetworkingV1AccessPointSpecConfigOneOf

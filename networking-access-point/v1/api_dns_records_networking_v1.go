@@ -632,7 +632,7 @@ type ApiListNetworkingV1DnsRecordsRequest struct {
 	specDisplayName *[]string
 	specDomain      *[]string
 	specGateway     *[]string
-	resourceId      *[]string
+	resource        *[]string
 	pageSize        *int32
 	pageToken       *string
 }
@@ -661,9 +661,9 @@ func (r ApiListNetworkingV1DnsRecordsRequest) SpecGateway(specGateway []string) 
 	return r
 }
 
-// Filter the results by exact match for resource_id. Pass multiple times to see results matching any of the values.
-func (r ApiListNetworkingV1DnsRecordsRequest) ResourceId(resourceId []string) ApiListNetworkingV1DnsRecordsRequest {
-	r.resourceId = &resourceId
+// Filter the results by exact match for resource. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1DnsRecordsRequest) Resource(resource []string) ApiListNetworkingV1DnsRecordsRequest {
+	r.resource = &resource
 	return r
 }
 
@@ -761,15 +761,15 @@ func (a *DNSRecordsNetworkingV1ApiService) ListNetworkingV1DnsRecordsExecute(r A
 			localVarQueryParams.Add("spec.gateway", parameterToString(t, "multi"))
 		}
 	}
-	if r.resourceId != nil {
-		t := *r.resourceId
+	if r.resource != nil {
+		t := *r.resource
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("resource_id", parameterToString(s.Index(i), "multi"))
+				localVarQueryParams.Add("resource", parameterToString(s.Index(i), "multi"))
 			}
 		} else {
-			localVarQueryParams.Add("resource_id", parameterToString(t, "multi"))
+			localVarQueryParams.Add("resource", parameterToString(t, "multi"))
 		}
 	}
 	if r.pageSize != nil {
