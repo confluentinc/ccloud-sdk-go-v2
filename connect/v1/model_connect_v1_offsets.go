@@ -34,66 +34,33 @@ import (
 	"reflect"
 )
 
-// ConnectV1ConnectorError struct for ConnectV1ConnectorError
-type ConnectV1ConnectorError struct {
-	Error *ConnectV1ConnectorErrorError `json:"error,omitempty"`
+// ConnectV1Offsets Array of offsets which are categorised into partitions.
+type ConnectV1Offsets struct {
+	Items []map[string]interface{}
 }
 
-// NewConnectV1ConnectorError instantiates a new ConnectV1ConnectorError object
+// NewConnectV1Offsets instantiates a new ConnectV1Offsets object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConnectV1ConnectorError() *ConnectV1ConnectorError {
-	this := ConnectV1ConnectorError{}
+func NewConnectV1Offsets() *ConnectV1Offsets {
+	this := ConnectV1Offsets{}
 	return &this
 }
 
-// NewConnectV1ConnectorErrorWithDefaults instantiates a new ConnectV1ConnectorError object
+// NewConnectV1OffsetsWithDefaults instantiates a new ConnectV1Offsets object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewConnectV1ConnectorErrorWithDefaults() *ConnectV1ConnectorError {
-	this := ConnectV1ConnectorError{}
+func NewConnectV1OffsetsWithDefaults() *ConnectV1Offsets {
+	this := ConnectV1Offsets{}
 	return &this
-}
-
-// GetError returns the Error field value if set, zero value otherwise.
-func (o *ConnectV1ConnectorError) GetError() ConnectV1ConnectorErrorError {
-	if o == nil || o.Error == nil {
-		var ret ConnectV1ConnectorErrorError
-		return ret
-	}
-	return *o.Error
-}
-
-// GetErrorOk returns a tuple with the Error field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConnectV1ConnectorError) GetErrorOk() (*ConnectV1ConnectorErrorError, bool) {
-	if o == nil || o.Error == nil {
-		return nil, false
-	}
-	return o.Error, true
-}
-
-// HasError returns a boolean if a field has been set.
-func (o *ConnectV1ConnectorError) HasError() bool {
-	if o != nil && o.Error != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetError gets a reference to the given ConnectV1ConnectorErrorError and assigns it to the Error field.
-func (o *ConnectV1ConnectorError) SetError(v ConnectV1ConnectorErrorError) {
-	o.Error = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *ConnectV1ConnectorError) Redact() {
-	o.recurseRedact(o.Error)
+func (o *ConnectV1Offsets) Redact() {
 }
 
-func (o *ConnectV1ConnectorError) recurseRedact(v interface{}) {
+func (o *ConnectV1Offsets) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -118,15 +85,15 @@ func (o *ConnectV1ConnectorError) recurseRedact(v interface{}) {
 	}
 }
 
-func (o ConnectV1ConnectorError) zeroField(v interface{}) {
+func (o ConnectV1Offsets) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o ConnectV1ConnectorError) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Error != nil {
-		toSerialize["error"] = o.Error
+func (o ConnectV1Offsets) MarshalJSON() ([]byte, error) {
+	toSerialize := make([]interface{}, len(o.Items))
+	for i, item := range o.Items {
+		toSerialize[i] = item
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
@@ -135,34 +102,38 @@ func (o ConnectV1ConnectorError) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableConnectV1ConnectorError struct {
-	value *ConnectV1ConnectorError
+func (o *ConnectV1Offsets) UnmarshalJSON(bytes []byte) (err error) {
+	return json.Unmarshal(bytes, &o.Items)
+}
+
+type NullableConnectV1Offsets struct {
+	value *ConnectV1Offsets
 	isSet bool
 }
 
-func (v NullableConnectV1ConnectorError) Get() *ConnectV1ConnectorError {
+func (v NullableConnectV1Offsets) Get() *ConnectV1Offsets {
 	return v.value
 }
 
-func (v *NullableConnectV1ConnectorError) Set(val *ConnectV1ConnectorError) {
+func (v *NullableConnectV1Offsets) Set(val *ConnectV1Offsets) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableConnectV1ConnectorError) IsSet() bool {
+func (v NullableConnectV1Offsets) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableConnectV1ConnectorError) Unset() {
+func (v *NullableConnectV1Offsets) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableConnectV1ConnectorError(val *ConnectV1ConnectorError) *NullableConnectV1ConnectorError {
-	return &NullableConnectV1ConnectorError{value: val, isSet: true}
+func NewNullableConnectV1Offsets(val *ConnectV1Offsets) *NullableConnectV1Offsets {
+	return &NullableConnectV1Offsets{value: val, isSet: true}
 }
 
-func (v NullableConnectV1ConnectorError) MarshalJSON() ([]byte, error) {
+func (v NullableConnectV1Offsets) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -170,7 +141,7 @@ func (v NullableConnectV1ConnectorError) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableConnectV1ConnectorError) UnmarshalJSON(src []byte) error {
+func (v *NullableConnectV1Offsets) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -17,29 +17,34 @@ tags:
 - description: |-
     [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-    API for managing connectors.
+    API for Managed Connectors or Custom Connectors in Confluent Cloud.
 
-    The API allows you to list, create, get, update and delete your connectors.
+    The API allows you to list, create, get, update and delete a Managed Connector or Custom Connector in Confluent Cloud.
 
-    Connect metrics are available through [Metrics v2 API](https://api.telemetry.confluent.cloud/docs#tag/Version-2).
+    Connect metrics are available through the [Metrics v2 API](https://api.telemetry.confluent.cloud/docs#tag/Version-2).
 
-    Related guide: [Confluent Cloud API and Fully-Managed Connectors](https://docs.confluent.io/cloud/current/connectors/connect-api-section.html).
-  name: Connectors (v1)
+    Related guide: [Confluent Cloud API and Managed Connectors](https://docs.confluent.io/cloud/current/connectors/connect-api-section.html).
+  name: Connectors (connect/v1)
 - description: |-
     [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-    API for managing lifecycle of connectors. Operations currently supported are Pause and Resume.
-  name: Lifecycle (v1)
+    API for managing the lifecycle for a Managed Connector or Custom Connector in Confluent Cloud. Operations currently supported are Pause and Resume.
+  name: Lifecycle (connect/v1)
 - description: |-
     [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-    API for requesting the status of a connector or the tasks of a connector.
-  name: Status (v1)
+    API for requesting the status or the tasks for a Managed Connector or Custom Connector in Confluent Cloud.
+  name: Status (connect/v1)
 - description: |-
     [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-    API for managing connector plugins.
-  name: Plugins (v1)
+    API for Managed connectors in Confluent Cloud.
+  name: Managed Connector Plugins (connect/v1)
+- description: |-
+    [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
+    API for managing the offsets for a Managed Connector.
+  name: Offsets (connect/v1)
 paths:
   /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors:
     get:
@@ -122,10 +127,11 @@ paths:
                 $ref: '#/components/schemas/connect.v1.ConnectorError'
           description: Internal Server Error
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: List of Connectors
       tags:
-      - Connectors (v1)
+      - Connectors (connect/v1)
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -236,6 +242,87 @@ paths:
         style: simple
       requestBody:
         $ref: '#/components/requestBodies/inline_object'
+        content:
+          application/json:
+            example:
+              name: MyGcsLogsBucketConnector
+              config:
+                connector.class: GcsSink
+                data.format: BYTES
+                flush.size: "1000"
+                gcs.bucket.name: APILogsBucket
+                gcs.credentials.config: '****************'
+                kafka.api.key: '****************'
+                kafka.api.secret: '****************'
+                name: MyGcsLogsBucketConnector
+                tasks.max: "2"
+                time.interval: DAILY
+                topics: APILogsTopic
+            schema:
+              properties:
+                name:
+                  description: Name of the connector to create.
+                  type: string
+                config:
+                  additionalProperties:
+                    description: Other configuration parameters for the connector.
+                      All values should be strings. See the connector's docs for details.
+                    type: string
+                  description: Configuration parameters for the connector. All values
+                    should be strings.
+                  properties:
+                    connector.class:
+                      description: \[Required for Managed Connector, Ignored for Custom
+                        Connector\] The connector class name, e.g., BigQuerySink,
+                        GcsSink, etc.
+                      type: string
+                    name:
+                      description: Name or alias of the class (plugin) for this connector.
+                        For custom connector, it must be the same as the name of the
+                        connector to create.
+                      type: string
+                    kafka.api.key:
+                      description: The kafka cluster api key.
+                      type: string
+                    kafka.api.secret:
+                      description: The kafka cluster api secret key.
+                      type: string
+                      x-redact: true
+                    confluent.connector.type:
+                      default: MANAGED
+                      description: |
+                        \[Required for Custom Connector\] The connector type.
+                      example: CUSTOM
+                      type: string
+                      x-extensible-enum:
+                      - CUSTOM
+                      - MANAGED
+                    confluent.custom.plugin.id:
+                      description: |
+                        \[Required for Custom Connector\] The custom plugin id of custom connector, e.g., `ccp-lq5m06`
+                      example: ccp-lq5m06
+                      type: string
+                    confluent.custom.connection.endpoints:
+                      description: |
+                        \[Optional for Custom Connector\] Egress endpoint(s) for the connector to use when attaching to the sink or source data system.
+                      type: string
+                    confluent.custom.schema.registry.auto:
+                      default: "FALSE"
+                      description: |
+                        \[Optional for Custom Connector\] Automatically add the required schema registry properties in a custom connector config if schema registry is enabled.
+                      example: "FALSE"
+                      type: string
+                      x-extensible-enum:
+                      - "TRUE"
+                      - "FALSE"
+                  required:
+                  - connector.class
+                  - kafka.api.key
+                  - kafka.api.secret
+                  - name
+                  type: object
+                  x-redact: true
+              type: object
       responses:
         "201":
           content:
@@ -306,10 +393,11 @@ paths:
                 $ref: '#/components/schemas/inline_response_500'
           description: Internal Server Error
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Create a Connector
       tags:
-      - Connectors (v1)
+      - Connectors (connect/v1)
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -317,13 +405,13 @@ paths:
             --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"name":"string","config":{"connector.class":"string","name":"string","kafka.api.key":"string","kafka.api.secret":"string","property1":"string","property2":"string"}}'
+            --data '{"name":"string","config":{"connector.class":"string","name":"string","kafka.api.key":"string","kafka.api.secret":"string","confluent.connector.type":"CUSTOM","confluent.custom.plugin.id":"ccp-lq5m06","confluent.custom.connection.endpoints":"string","confluent.custom.schema.registry.auto":"FALSE","property1":"string","property2":"string"}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"property1\":\"string\",\"property2\":\"string\"}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors")
             .post(body)
@@ -338,8 +426,11 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"name\\\":\\\"string\\\",\\\"config\\\
           \":{\\\"connector.class\\\":\\\"string\\\",\\\"name\\\":\\\"string\\\",\\\
           \"kafka.api.key\\\":\\\"string\\\",\\\"kafka.api.secret\\\":\\\"string\\\
-          \",\\\"property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\"}}\"\
-          )\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          \",\\\"confluent.connector.type\\\":\\\"CUSTOM\\\",\\\"confluent.custom.plugin.id\\\
+          \":\\\"ccp-lq5m06\\\",\\\"confluent.custom.connection.endpoints\\\":\\\"\
+          string\\\",\\\"confluent.custom.schema.registry.auto\\\":\\\"FALSE\\\",\\\
+          \"property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\"}}\")\n\n\
+          \treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
           content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
           , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -350,7 +441,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"property1\":\"string\",\"property2\":\"string\"}}"
+          payload = "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"}}"
 
           headers = {
               'content-type': "application/json",
@@ -398,6 +489,10 @@ paths:
               name: 'string',
               'kafka.api.key': 'string',
               'kafka.api.secret': 'string',
+              'confluent.connector.type': 'CUSTOM',
+              'confluent.custom.plugin.id': 'ccp-lq5m06',
+              'confluent.custom.connection.endpoints': 'string',
+              'confluent.custom.schema.registry.auto': 'FALSE',
               property1: 'string',
               property2: 'string'
             }
@@ -415,7 +510,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"property1\":\"string\",\"property2\":\"string\"}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -424,7 +519,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"property1\":\"string\",\"property2\":\"string\"}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info,status,id:
     get:
@@ -494,9 +589,6 @@ paths:
                       tasks.max: "1"
                       time.interval: DAILY
                       topics: APILogsTopic
-                      tasks:
-                      - connector: MyGcsLogsBucketConnector
-                        task: 0
                       type: sink
                   status:
                     name: MyGcsLogsBucketConnector
@@ -529,9 +621,6 @@ paths:
                       tasks.max: "1"
                       time.interval: DAILY
                       topics: APILogsTopic
-                      tasks:
-                      - connector: MyS3BucketConnector
-                        task: 0
                       type: source
                   status:
                     name: MyS3BucketConnector
@@ -565,9 +654,6 @@ paths:
                       tasks.max: "1"
                       time.interval: DAILY
                       topics: APILogsTopic
-                      tasks:
-                      - connector: MyDatagenConnector
-                        task: 0
                       type: source
                   status:
                     name: MyDatagenConnector
@@ -625,22 +711,23 @@ paths:
                 $ref: '#/components/schemas/connect.v1.ConnectorError'
           description: Internal Server Error
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: List of Connectors with Expansions
       tags:
-      - Connectors (v1)
+      - Connectors (connect/v1)
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info%2Cstatus%2Cid' \
+            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info,status,id' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info%2Cstatus%2Cid")
+            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info,status,id")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -648,7 +735,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info%2Cstatus%2Cid\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info,status,id\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -661,7 +748,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info%2Cstatus%2Cid", headers=headers)
+          conn.request("GET", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info,status,id", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -675,7 +762,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info%2Cstatus%2Cid",
+            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info,status,id",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -700,7 +787,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info%2Cstatus%2Cid");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info,status,id");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -709,7 +796,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info%2Cstatus%2Cid");
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info,status,id");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -794,6 +881,7 @@ paths:
                     type: string
                   name:
                     description: Name or alias of the class (plugin) for this connector.
+                      For Custom Connector, it must be the same as connector_name.
                     type: string
                   kafka.endpoint:
                     description: The kafka cluster endpoint.
@@ -860,10 +948,11 @@ paths:
                 $ref: '#/components/schemas/connect.v1.ConnectorError'
           description: Internal Server Error
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Read a Connector Configuration
       tags:
-      - Connectors (v1)
+      - Connectors (connect/v1)
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1002,7 +1091,8 @@ paths:
               description: Configuration parameters for the connector.
               properties:
                 connector.class:
-                  description: The connector class name. E.g. BigQuerySink, GcsSink,
+                  description: \[Required for Managed Connector, Ignored for Custom
+                    Connector\] The connector class name. E.g. BigQuerySink, GcsSink,
                     etc.
                   type: string
                 name:
@@ -1015,6 +1105,33 @@ paths:
                   description: The kafka cluster api secret key.
                   type: string
                   x-redact: true
+                confluent.connector.type:
+                  default: MANAGED
+                  description: |
+                    \[Required for Custom Connector\] The connector type.
+                  example: CUSTOM
+                  type: string
+                  x-extensible-enum:
+                  - CUSTOM
+                  - MANAGED
+                confluent.custom.plugin.id:
+                  description: |
+                    \[Required for Custom Connector\] The custom plugin id of custom connector, e.g., `ccp-lq5m06`
+                  example: ccp-lq5m06
+                  type: string
+                confluent.custom.connection.endpoints:
+                  description: |
+                    \[Optional for Custom Connector\] Egress endpoint(s) for the connector to use when attaching to the sink or source data system.
+                  type: string
+                confluent.custom.schema.registry.auto:
+                  default: "FALSE"
+                  description: |
+                    \[Optional for Custom Connector\] Automatically add the required schema registry properties in a custom connector config if schema registry is enabled.
+                  example: "FALSE"
+                  type: string
+                  x-extensible-enum:
+                  - "TRUE"
+                  - "FALSE"
               required:
               - connector.class
               - kafka.api.key
@@ -1105,10 +1222,11 @@ paths:
                 $ref: '#/components/schemas/inline_response_500'
           description: Internal Server Error
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Create or Update a Connector Configuration
       tags:
-      - Connectors (v1)
+      - Connectors (connect/v1)
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1116,13 +1234,13 @@ paths:
             --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"connector.class":"string","name":"string","kafka.api.key":"string","kafka.api.secret":"string","property1":"string","property2":"string"}'
+            --data '{"connector.class":"string","name":"string","kafka.api.key":"string","kafka.api.secret":"string","confluent.connector.type":"CUSTOM","confluent.custom.plugin.id":"ccp-lq5m06","confluent.custom.connection.endpoints":"string","confluent.custom.schema.registry.auto":"FALSE","property1":"string","property2":"string"}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"property1\":\"string\",\"property2\":\"string\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config")
             .put(body)
@@ -1136,20 +1254,22 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"connector.class\\\":\\\"string\\\
           \",\\\"name\\\":\\\"string\\\",\\\"kafka.api.key\\\":\\\"string\\\",\\\"\
-          kafka.api.secret\\\":\\\"string\\\",\\\"property1\\\":\\\"string\\\",\\\"\
-          property2\\\":\\\"string\\\"}\")\n\n\treq, _ := http.NewRequest(\"PUT\"\
-          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          kafka.api.secret\\\":\\\"string\\\",\\\"confluent.connector.type\\\":\\\"\
+          CUSTOM\\\",\\\"confluent.custom.plugin.id\\\":\\\"ccp-lq5m06\\\",\\\"confluent.custom.connection.endpoints\\\
+          \":\\\"string\\\",\\\"confluent.custom.schema.registry.auto\\\":\\\"FALSE\\\
+          \",\\\"property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\"}\"\
+          )\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"property1\":\"string\",\"property2\":\"string\"}"
+          payload = "{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"}"
 
           headers = {
               'content-type': "application/json",
@@ -1195,6 +1315,10 @@ paths:
             name: 'string',
             'kafka.api.key': 'string',
             'kafka.api.secret': 'string',
+            'confluent.connector.type': 'CUSTOM',
+            'confluent.custom.plugin.id': 'ccp-lq5m06',
+            'confluent.custom.connection.endpoints': 'string',
+            'confluent.custom.schema.registry.auto': 'FALSE',
             property1: 'string',
             property2: 'string'
           }));
@@ -1211,7 +1335,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"property1\":\"string\",\"property2\":\"string\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1220,7 +1344,7 @@ paths:
           var request = new RestRequest(Method.PUT);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"property1\":\"string\",\"property2\":\"string\"}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}:
     delete:
@@ -1305,10 +1429,11 @@ paths:
                 $ref: '#/components/schemas/connect.v1.ConnectorError'
           description: Internal Server Error
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Delete a Connector
       tags:
-      - Connectors (v1)
+      - Connectors (connect/v1)
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1495,10 +1620,11 @@ paths:
                 $ref: '#/components/schemas/connect.v1.ConnectorError'
           description: Internal Server Error
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Read a Connector
       tags:
-      - Connectors (v1)
+      - Connectors (connect/v1)
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1660,10 +1786,11 @@ paths:
                 $ref: '#/components/schemas/connect.v1.ConnectorError'
           description: Internal Server Error
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Pause a Connector
       tags:
-      - Lifecycle (v1)
+      - Lifecycle (connect/v1)
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1825,10 +1952,11 @@ paths:
                 $ref: '#/components/schemas/connect.v1.ConnectorError'
           description: Internal Server Error
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Resume a Connector
       tags:
-      - Lifecycle (v1)
+      - Lifecycle (connect/v1)
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -2001,10 +2129,11 @@ paths:
                 $ref: '#/components/schemas/connect.v1.ConnectorError'
           description: Internal Server Error
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Read a Connector Status
       tags:
-      - Status (v1)
+      - Status (connect/v1)
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -2190,10 +2319,11 @@ paths:
                 $ref: '#/components/schemas/connect.v1.ConnectorError'
           description: Internal Server Error
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: List of Connector Tasks
       tags:
-      - Status (v1)
+      - Status (connect/v1)
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -2283,7 +2413,7 @@ paths:
       description: |-
         [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-        Return a list of connector plugins installed in the Kafka Connect cluster.
+        Return a list of Managed Connector plugins installed in the Kafka Connect cluster.
       operationId: listConnectv1ConnectorPlugins
       parameters:
       - description: The unique identifier of the environment this resource belongs
@@ -2367,10 +2497,11 @@ paths:
                 $ref: '#/components/schemas/connect.v1.ConnectorError'
           description: Internal Server Error
       security:
-      - api-key: []
-      summary: List of Connector Plugins
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
+      summary: List of Managed Connector plugins
       tags:
-      - Plugins (v1)
+      - Managed Connector Plugins (connect/v1)
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -2814,10 +2945,11 @@ paths:
                 $ref: '#/components/schemas/connect.v1.ConnectorError'
           description: Internal Server Error
       security:
-      - api-key: []
-      summary: Validate a Connector Plugin
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
+      summary: Validate a Managed Connector Plugin
       tags:
-      - Plugins (v1)
+      - Managed Connector Plugins (connect/v1)
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -2922,6 +3054,750 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"property1\":\"string\",\"property2\":\"string\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
+  /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets:
+    get:
+      description: "[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)\n\
+        \nGet the current offsets for the connector. The offsets provide information\
+        \ on the point in the source system, \nfrom which the connector is pulling\
+        \ in data. The offsets of a connector are continuously observed periodically\
+        \ and are queryable via this API."
+      operationId: getConnectv1ConnectorOffsets
+      parameters:
+      - description: The unique name of the connector.
+        explode: false
+        in: path
+        name: connector_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier of the environment this resource belongs
+          to.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the Kafka cluster.
+        explode: false
+        in: path
+        name: kafka_cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                sink:
+                  value:
+                    id: lcc-as341
+                    name: MysqlSinkConnector
+                    offsets:
+                    - partition:
+                        kafka_partition: 0
+                        kafka_topic: topic_A
+                      offset:
+                        kafka_offset: 20032323
+                    - partition:
+                        kafka_partition: 1
+                        kafka_topic: topic_B
+                      offset:
+                        kafka_offset: 20032322
+                    metadata:
+                      observed_at: 2024-02-20T15:14:19Z
+                source:
+                  value:
+                    id: lcc-21sdda
+                    name: MysqlSourceConnector
+                    offsets:
+                    - partition:
+                        protocol: 1
+                        table: sourcedb.sourcetable
+                      offset:
+                        timestamp_nanos: 0
+                        incrementing: 3
+                        timestamp: 1699142400000
+                    metadata:
+                      observed_at: 2024-02-20T15:14:19Z
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorOffsets'
+          description: Connector Offsets.
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 400
+                  message: Bad Request
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 401
+                  message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 403
+                  message: Forbidden
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 404
+                  message: resource not found
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Not Found
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 500
+                  message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Internal Server Error
+      security:
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
+      summary: Get a Connector Offsets
+      tags:
+      - Offsets (connect/v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+  /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request:
+    post:
+      description: |-
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
+        Request to alter the offsets of a connector. This supports the ability to PATCH/DELETE the offsets of a connector.
+        Note, you will see momentary downtime as this will internally stop the connector, while the offsets are being altered.
+        You can only make one alter offsets request at a time for a connector.
+      operationId: alterConnectv1ConnectorOffsetsRequest
+      parameters:
+      - description: The unique name of the connector.
+        explode: false
+        in: path
+        name: connector_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier of the environment this resource belongs
+          to.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the Kafka cluster.
+        explode: false
+        in: path
+        name: kafka_cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              patch sink:
+                value:
+                  type: PATCH
+                  offsets:
+                  - partition:
+                      kafka_partition: 0
+                      kafka_topic: topic_A
+                    offset:
+                      kafka_offset: 1000
+              patch source:
+                value:
+                  type: PATCH
+                  offsets:
+                  - partition:
+                      protocol: 1
+                      table: sourcedb.sourcetable
+                    offset:
+                      timestamp_nanos: 0
+                      incrementing: 3
+                      timestamp: 1699000000000
+              delete:
+                value:
+                  type: DELETE
+            schema:
+              $ref: '#/components/schemas/connect.v1.AlterOffsetRequest'
+      responses:
+        "202":
+          content:
+            application/json:
+              examples:
+                patch:
+                  value:
+                    id: lcc-sa32er
+                    name: MySinkConnector
+                    offsets:
+                    - partition:
+                        kafka_partition: 0
+                        kafka_topic: topic_A
+                      offset:
+                        kafka_offset: 1000
+                    requested_at: 2024-02-20T15:14:19Z
+                    type: PATCH
+                delete:
+                  value:
+                    id: lcc-234ds
+                    name: MySourceConnector
+                    offsets: []
+                    requested_at: 2024-02-20T15:14:19Z
+                    type: DELETE
+              schema:
+                $ref: '#/components/schemas/connect.v1.AlterOffsetRequestInfo'
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 400
+                  message: Bad Request
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 401
+                  message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 403
+                  message: Forbidden
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 404
+                  message: resource not found
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Not Found
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 500
+                  message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Internal Server Error
+      security:
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
+      summary: Request a Connector Offsets
+      tags:
+      - Offsets (connect/v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"type":"PATCH","offsets":[{"partition":{},"offset":{}}]}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"type\":\"PATCH\",\"offsets\":[{\"partition\":{},\"offset\":{}}]}");
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request")
+            .post(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"type\\\":\\\"PATCH\\\",\\\"offsets\\\
+          \":[{\\\"partition\\\":{},\\\"offset\\\":{}}]}\")\n\n\treq, _ := http.NewRequest(\"\
+          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          payload = "{\"type\":\"PATCH\",\"offsets\":[{\"partition\":{},\"offset\":{}}]}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("POST", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({type: 'PATCH', offsets: [{partition: {}, offset: {}}]}));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"type\":\"PATCH\",\"offsets\":[{\"partition\":{},\"offset\":{}}]}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request");
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"type\":\"PATCH\",\"offsets\":[{\"partition\":{},\"offset\":{}}]}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+  /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request/status:
+    get:
+      description: |-
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
+        Get the status of the previous alter offset request.
+      operationId: getConnectv1ConnectorOffsetsRequestStatus
+      parameters:
+      - description: The unique name of the connector.
+        explode: false
+        in: path
+        name: connector_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier of the environment this resource belongs
+          to.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the Kafka cluster.
+        explode: false
+        in: path
+        name: kafka_cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                sink - pending patch operation:
+                  value:
+                    request:
+                      id: lcc-sa32er
+                      name: MySinkConnector
+                      offsets:
+                      - partition:
+                          kafka_partition: 0
+                          kafka_topic: topic_A
+                        offset:
+                          kafka_offset: 1000
+                      requested_at: 2024-02-20T15:14:19Z
+                      type: PATCH
+                    status:
+                      phase: PENDING
+                    applied_at: null
+                source - applied patch operation:
+                  value:
+                    request:
+                      id: lcc-x1sdfs
+                      name: MySourceConnector
+                      offsets:
+                      - partition:
+                          protocol: 1
+                          table: sourcedb.sourcetable
+                        offset:
+                          timestamp_nanos: 0
+                          incrementing: 3
+                          timestamp: 1699000000000
+                      requested_at: 2024-02-20T15:14:19Z
+                      type: PATCH
+                    status:
+                      phase: APPLIED
+                      message: The Connect framework-managed offsets for this connector
+                        have been altered successfully. However, if this connector
+                        manages offsets externally, they will need to be altered manually
+                        in the system that the connector uses.
+                    previous_offsets:
+                    - partition:
+                        protocol: 1
+                        table: sourcedb.sourcetable
+                      offset:
+                        timestamp_nanos: 0
+                        incrementing: 2
+                        timestamp: 1698329479943
+                    applied_at: 2024-02-20T15:14:20+0000
+                delete:
+                  value:
+                    request:
+                      id: lcc-234ds
+                      name: MySourceConnector
+                      offsets: []
+                      requested_at: 2024-02-20T15:14:19Z
+                      type: DELETE
+                    status:
+                      phase: APPLIED
+                      message: The Connect framework-managed offsets for this connector
+                        have been reset successfully. However, if this connector manages
+                        offsets externally, they will need to be reset manually in
+                        the system that the connector uses.
+                    previous_offsets:
+                    - partition:
+                        protocol: 1
+                        table: sourcedb.sourcetable
+                      offset:
+                        timestamp_nanos: 0
+                        incrementing: 2
+                        timestamp: 1698329479943
+                    applied_at: 2024-02-20T15:14:20Z
+              schema:
+                $ref: '#/components/schemas/connect.v1.AlterOffsetStatus'
+          description: Connector Offsets Request Status.
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 400
+                  message: Bad Request
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 401
+                  message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 403
+                  message: Forbidden
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 404
+                  message: resource not found
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Not Found
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 500
+                  message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Internal Server Error
+      security:
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
+      summary: Get a Connector Offsets Request Status
+      tags:
+      - Offsets (connect/v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request/status' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request/status")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request/status\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request/status", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request/status",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request/status");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request/status");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
 components:
   requestBodies:
     inline_object:
@@ -2940,6 +3816,16 @@ components:
           schema:
             $ref: '#/components/schemas/connect.v1.ConnectorError'
       description: Unauthorized
+    connect.v1.ForbiddenError:
+      content:
+        application/json:
+          example:
+            error:
+              code: 403
+              message: Forbidden
+          schema:
+            $ref: '#/components/schemas/connect.v1.ConnectorError'
+      description: Forbidden
     connect.v1.AccountNotFoundError:
       content:
         application/json:
@@ -3190,7 +4076,7 @@ components:
         $ref: '#/components/schemas/connect.v1.ConnectorExpansion'
       type: object
     connect.v1.ConnectorExpansion:
-      description: List of active connectors with the expansions requested.
+      description: Name of connector
       properties:
         id:
           $ref: '#/components/schemas/connect_v1_ConnectorExpansion_id'
@@ -3198,6 +4084,135 @@ components:
           $ref: '#/components/schemas/connect_v1_ConnectorExpansion_info'
         status:
           $ref: '#/components/schemas/connect_v1_ConnectorExpansion_status'
+      type: object
+    connect.v1.Offsets:
+      description: Array of offsets which are categorised into partitions.
+      items:
+        properties:
+          partition:
+            additionalProperties: true
+            description: "The partition information. For sink connectors this is the\
+              \ kafka topic and \npartition. For source connectors this is depends\
+              \ on the partitions defined by the \nsource connector. For example,\
+              \ the table which this task is pulling data from in a\nJDBC based MySQL\
+              \ source connector."
+            type: object
+          offset:
+            additionalProperties: true
+            description: "The offset of the partition. For sink connectors this is\
+              \ the kafka offset. For \nsource connectors this is depends on the offset\
+              \ defined by the source connector. \nFor example, the timestamp and\
+              \ incrementing column info in a table, for a JDBC based \nMySQL source\
+              \ connector."
+            type: object
+        type: object
+      type: array
+    connect.v1.ConnectorOffsets:
+      description: Offsets for a connector
+      example:
+        metadata:
+          observed_at: 2024-02-20T15:14:19Z
+        name: name
+        id: id
+      properties:
+        name:
+          description: The name of the connector.
+          type: string
+        id:
+          description: The ID of the connector.
+          type: string
+        offsets:
+          $ref: '#/components/schemas/connect.v1.Offsets'
+        metadata:
+          $ref: '#/components/schemas/connect_v1_ConnectorOffsets_metadata'
+      type: object
+    connect.v1.AlterOffsetRequestType:
+      description: "The type of alter operation. PATCH will update the offset to the\
+        \ provided values.\nThe update will only happen for the partitions provided\
+        \ in the request. \nDELETE will delete the offset for the provided partitions\
+        \ and reset them back to the\nbase state. It is as if, a fresh new connector\
+        \ was created.\n\nFor sink connectors PATCH/DELETE will move the offsets to\
+        \ the provided point in the \ntopic partition. If the offset provided is not\
+        \ present in the topic partition it will\nby default reset to the earliest\
+        \ offset in the topic partition.\n\nFor source connectors, post PATCH/DELETE\
+        \ the connector will attempt to read from the \nposition defined in the altered\
+        \ offsets."
+      enum:
+      - PATCH
+      - DELETE
+      type: string
+    connect.v1.AlterOffsetRequest:
+      description: Request to alter the offset of a connector. The offsets parameter
+        is options for DELETE type.
+      properties:
+        type:
+          $ref: '#/components/schemas/connect.v1.AlterOffsetRequestType'
+        offsets:
+          $ref: '#/components/schemas/connect.v1.Offsets'
+      required:
+      - type
+      type: object
+    connect.v1.AlterOffsetRequestInfo:
+      description: The request made to alter offsets.
+      example:
+        name: name
+        id: id
+        requested_at: 2024-02-20T15:14:19Z
+      properties:
+        id:
+          description: The ID of the connector.
+          type: string
+        name:
+          description: The name of the connector.
+          type: string
+        offsets:
+          $ref: '#/components/schemas/connect.v1.Offsets'
+        requested_at:
+          description: The time at which the request was made. The time is in UTC,
+            ISO 8601 format.
+          example: 2024-02-20T15:14:19Z
+          format: date-time
+          readOnly: true
+          type: string
+        type:
+          $ref: '#/components/schemas/connect.v1.AlterOffsetRequestType'
+      required:
+      - id
+      - name
+      - requested_at
+      - type
+      type: object
+    connect.v1.AlterOffsetStatus:
+      description: "Status of the alter offset operation. The previous offsets in\
+        \ the response \nis the offsets that the connector last processed, before\
+        \ the offsets were altered,\nvia a patch or delete operation."
+      example:
+        request:
+          name: name
+          id: id
+          requested_at: 2024-02-20T15:14:19Z
+        applied_at: 2024-02-20T15:14:19Z
+        status:
+          phase: phase
+          message: message
+      properties:
+        request:
+          $ref: '#/components/schemas/connect.v1.AlterOffsetRequestInfo'
+        status:
+          $ref: '#/components/schemas/connect_v1_AlterOffsetStatus_status'
+        previous_offsets:
+          $ref: '#/components/schemas/connect.v1.Offsets'
+        applied_at:
+          description: The time at which the offsets were applied. The time is in
+            UTC, ISO 8601 format.
+          example: 2024-02-20T15:14:19Z
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+      required:
+      - request
+      - status
       type: object
     inline_object:
       properties:
@@ -3213,10 +4228,13 @@ components:
             be strings.
           properties:
             connector.class:
-              description: The connector class name. E.g. BigQuerySink, GcsSink, etc.
+              description: \[Required for Managed Connector, Ignored for Custom Connector\]
+                The connector class name, e.g., BigQuerySink, GcsSink, etc.
               type: string
             name:
               description: Name or alias of the class (plugin) for this connector.
+                For custom connector, it must be the same as the name of the connector
+                to create.
               type: string
             kafka.api.key:
               description: The kafka cluster api key.
@@ -3225,6 +4243,33 @@ components:
               description: The kafka cluster api secret key.
               type: string
               x-redact: true
+            confluent.connector.type:
+              default: MANAGED
+              description: |
+                \[Required for Custom Connector\] The connector type.
+              example: CUSTOM
+              type: string
+              x-extensible-enum:
+              - CUSTOM
+              - MANAGED
+            confluent.custom.plugin.id:
+              description: |
+                \[Required for Custom Connector\] The custom plugin id of custom connector, e.g., `ccp-lq5m06`
+              example: ccp-lq5m06
+              type: string
+            confluent.custom.connection.endpoints:
+              description: |
+                \[Optional for Custom Connector\] Egress endpoint(s) for the connector to use when attaching to the sink or source data system.
+              type: string
+            confluent.custom.schema.registry.auto:
+              default: "FALSE"
+              description: |
+                \[Optional for Custom Connector\] Automatically add the required schema registry properties in a custom connector config if schema registry is enabled.
+              example: "FALSE"
+              type: string
+              x-extensible-enum:
+              - "TRUE"
+              - "FALSE"
           required:
           - connector.class
           - kafka.api.key
@@ -3731,24 +4776,6 @@ components:
       - state
       - worker_id
       type: object
-    connect_v1_ConnectorExpansion_status_tasks:
-      properties:
-        id:
-          description: The ID of task.
-          type: integer
-        state:
-          description: The state of the task.
-          type: string
-        worker_id:
-          description: The worker ID of the task.
-          type: string
-        msg:
-          type: string
-      required:
-      - id
-      - state
-      - worker_id
-      type: object
     connect_v1_ConnectorExpansion_status:
       description: Status of the connector and its tasks.
       properties:
@@ -3766,16 +4793,59 @@ components:
         tasks:
           description: A map containing the task status.
           items:
-            $ref: '#/components/schemas/connect_v1_ConnectorExpansion_status_tasks'
+            $ref: '#/components/schemas/inline_response_200_1_tasks'
           type: array
       required:
       - connector
       - name
       - type
       type: object
+    connect_v1_ConnectorOffsets_metadata:
+      description: Metadata of the connector offset.
+      example:
+        observed_at: 2024-02-20T15:14:19Z
+      properties:
+        observed_at:
+          description: The time at which the offsets were observed. The time is in
+            UTC, ISO 8601 format.
+          example: 2024-02-20T15:14:19Z
+          format: date-time
+          readOnly: true
+          type: string
+      type: object
+    connect_v1_AlterOffsetStatus_status:
+      description: The response of the alter offsets operation.
+      example:
+        phase: phase
+        message: message
+      properties:
+        phase:
+          description: "The phase of the alter offset operation. \n\nPENDING: The\
+            \ offset alter operation is in progress.\n\nAPPLIED: The offset alter\
+            \ operation has been applied to the connector.\n\nFAILED:  The offset\
+            \ alter operation has failed to be applied to the connector."
+          type: string
+          x-extensible-enum:
+          - PENDING
+          - APPLIED
+          - FAILED
+        message:
+          description: An info message from the alter offset operation.
+          type: string
+      required:
+      - phase
+      type: object
   securitySchemes:
-    api-key:
-      description: Authenticate with API Keys using HTTP Basic Auth. Treat the API
-        Key ID as the username and API Key Secret as the password.
+    cloud-api-key:
+      description: Authenticate with Cloud API Keys using HTTP Basic Auth. Treat the
+        Cloud API Key ID as the username and Cloud API Key Secret as the password.
       scheme: basic
       type: http
+    confluent-sts-access-token:
+      description: Authenticate with Confluent API using this credentials (JSON Web
+        Tokens) following OAuth 2.0.
+      flows:
+        clientCredentials:
+          scopes: {}
+          tokenUrl: https://api.confluent.cloud/sts/v1/oauth2/token
+      type: oauth2

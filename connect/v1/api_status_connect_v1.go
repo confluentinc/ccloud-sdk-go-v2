@@ -39,100 +39,103 @@ var (
 	_ _context.Context
 )
 
-type PluginsV1Api interface {
+type StatusConnectV1Api interface {
 
 	/*
-	ListConnectv1ConnectorPlugins List of Connector Plugins
+		ListConnectv1ConnectorTasks List of Connector Tasks
 
-	[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Return a list of connector plugins installed in the Kafka Connect cluster.
+	Get a list of tasks currently running for the connector.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param environmentId The unique identifier of the environment this resource belongs to.
-	 @param kafkaClusterId The unique identifier for the Kafka cluster.
-	 @return ApiListConnectv1ConnectorPluginsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param connectorName The unique name of the connector.
+		 @param environmentId The unique identifier of the environment this resource belongs to.
+		 @param kafkaClusterId The unique identifier for the Kafka cluster.
+		 @return ApiListConnectv1ConnectorTasksRequest
 	*/
-	ListConnectv1ConnectorPlugins(ctx _context.Context, environmentId string, kafkaClusterId string) ApiListConnectv1ConnectorPluginsRequest
+	ListConnectv1ConnectorTasks(ctx _context.Context, connectorName string, environmentId string, kafkaClusterId string) ApiListConnectv1ConnectorTasksRequest
 
-	// ListConnectv1ConnectorPluginsExecute executes the request
-	//  @return []InlineResponse2002
-	ListConnectv1ConnectorPluginsExecute(r ApiListConnectv1ConnectorPluginsRequest) ([]InlineResponse2002, *_nethttp.Response, error)
+	// ListConnectv1ConnectorTasksExecute executes the request
+	//  @return ConnectV1Connectors
+	ListConnectv1ConnectorTasksExecute(r ApiListConnectv1ConnectorTasksRequest) (ConnectV1Connectors, *_nethttp.Response, error)
 
 	/*
-	ValidateConnectv1ConnectorPlugin Validate a Connector Plugin
+		ReadConnectv1ConnectorStatus Read a Connector Status
 
-	[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		Get current status of the connector. This includes whether it is running, failed, or paused. Also includes which worker it is assigned to, error information if it has failed, and the state of all its tasks.
 
-Validate the provided configuration values against the configuration definition. This API performs per config validation and returns suggested values and validation error messages.
-
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param pluginName The unique name of the connector plugin.
-	 @param environmentId The unique identifier of the environment this resource belongs to.
-	 @param kafkaClusterId The unique identifier for the Kafka cluster.
-	 @return ApiValidateConnectv1ConnectorPluginRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param connectorName The unique name of the connector.
+		 @param environmentId The unique identifier of the environment this resource belongs to.
+		 @param kafkaClusterId The unique identifier for the Kafka cluster.
+		 @return ApiReadConnectv1ConnectorStatusRequest
 	*/
-	ValidateConnectv1ConnectorPlugin(ctx _context.Context, pluginName string, environmentId string, kafkaClusterId string) ApiValidateConnectv1ConnectorPluginRequest
+	ReadConnectv1ConnectorStatus(ctx _context.Context, connectorName string, environmentId string, kafkaClusterId string) ApiReadConnectv1ConnectorStatusRequest
 
-	// ValidateConnectv1ConnectorPluginExecute executes the request
-	//  @return InlineResponse2003
-	ValidateConnectv1ConnectorPluginExecute(r ApiValidateConnectv1ConnectorPluginRequest) (InlineResponse2003, *_nethttp.Response, error)
+	// ReadConnectv1ConnectorStatusExecute executes the request
+	//  @return InlineResponse2001
+	ReadConnectv1ConnectorStatusExecute(r ApiReadConnectv1ConnectorStatusRequest) (InlineResponse2001, *_nethttp.Response, error)
 }
 
-// PluginsV1ApiService PluginsV1Api service
-type PluginsV1ApiService service
+// StatusConnectV1ApiService StatusConnectV1Api service
+type StatusConnectV1ApiService service
 
-type ApiListConnectv1ConnectorPluginsRequest struct {
-	ctx _context.Context
-	ApiService PluginsV1Api
-	environmentId string
+type ApiListConnectv1ConnectorTasksRequest struct {
+	ctx            _context.Context
+	ApiService     StatusConnectV1Api
+	connectorName  string
+	environmentId  string
 	kafkaClusterId string
 }
 
-
-func (r ApiListConnectv1ConnectorPluginsRequest) Execute() ([]InlineResponse2002, *_nethttp.Response, error) {
-	return r.ApiService.ListConnectv1ConnectorPluginsExecute(r)
+func (r ApiListConnectv1ConnectorTasksRequest) Execute() (ConnectV1Connectors, *_nethttp.Response, error) {
+	return r.ApiService.ListConnectv1ConnectorTasksExecute(r)
 }
 
 /*
-ListConnectv1ConnectorPlugins List of Connector Plugins
+ListConnectv1ConnectorTasks List of Connector Tasks
 
 [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Return a list of connector plugins installed in the Kafka Connect cluster.
+Get a list of tasks currently running for the connector.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param environmentId The unique identifier of the environment this resource belongs to.
- @param kafkaClusterId The unique identifier for the Kafka cluster.
- @return ApiListConnectv1ConnectorPluginsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param connectorName The unique name of the connector.
+	@param environmentId The unique identifier of the environment this resource belongs to.
+	@param kafkaClusterId The unique identifier for the Kafka cluster.
+	@return ApiListConnectv1ConnectorTasksRequest
 */
-func (a *PluginsV1ApiService) ListConnectv1ConnectorPlugins(ctx _context.Context, environmentId string, kafkaClusterId string) ApiListConnectv1ConnectorPluginsRequest {
-	return ApiListConnectv1ConnectorPluginsRequest{
-		ApiService: a,
-		ctx: ctx,
-		environmentId: environmentId,
+func (a *StatusConnectV1ApiService) ListConnectv1ConnectorTasks(ctx _context.Context, connectorName string, environmentId string, kafkaClusterId string) ApiListConnectv1ConnectorTasksRequest {
+	return ApiListConnectv1ConnectorTasksRequest{
+		ApiService:     a,
+		ctx:            ctx,
+		connectorName:  connectorName,
+		environmentId:  environmentId,
 		kafkaClusterId: kafkaClusterId,
 	}
 }
 
 // Execute executes the request
-//  @return []InlineResponse2002
-func (a *PluginsV1ApiService) ListConnectv1ConnectorPluginsExecute(r ApiListConnectv1ConnectorPluginsRequest) ([]InlineResponse2002, *_nethttp.Response, error) {
+//
+//	@return ConnectV1Connectors
+func (a *StatusConnectV1ApiService) ListConnectv1ConnectorTasksExecute(r ApiListConnectv1ConnectorTasksRequest) (ConnectV1Connectors, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []InlineResponse2002
+		localVarReturnValue  ConnectV1Connectors
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PluginsV1ApiService.ListConnectv1ConnectorPlugins")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StatusConnectV1ApiService.ListConnectv1ConnectorTasks")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins"
+	localVarPath := localBasePath + "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/tasks"
+	localVarPath = strings.Replace(localVarPath, "{"+"connector_name"+"}", _neturl.PathEscape(parameterToString(r.connectorName, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"environment_id"+"}", _neturl.PathEscape(parameterToString(r.environmentId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"kafka_cluster_id"+"}", _neturl.PathEscape(parameterToString(r.kafkaClusterId, "")), -1)
 
@@ -223,67 +226,59 @@ func (a *PluginsV1ApiService) ListConnectv1ConnectorPluginsExecute(r ApiListConn
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiValidateConnectv1ConnectorPluginRequest struct {
-	ctx _context.Context
-	ApiService PluginsV1Api
-	pluginName string
-	environmentId string
+type ApiReadConnectv1ConnectorStatusRequest struct {
+	ctx            _context.Context
+	ApiService     StatusConnectV1Api
+	connectorName  string
+	environmentId  string
 	kafkaClusterId string
-	requestBody *map[string]string
 }
 
-// Configuration parameters for the connector. All values should be strings.
-func (r ApiValidateConnectv1ConnectorPluginRequest) RequestBody(requestBody map[string]string) ApiValidateConnectv1ConnectorPluginRequest {
-	r.requestBody = &requestBody
-	return r
-}
-
-func (r ApiValidateConnectv1ConnectorPluginRequest) Execute() (InlineResponse2003, *_nethttp.Response, error) {
-	return r.ApiService.ValidateConnectv1ConnectorPluginExecute(r)
+func (r ApiReadConnectv1ConnectorStatusRequest) Execute() (InlineResponse2001, *_nethttp.Response, error) {
+	return r.ApiService.ReadConnectv1ConnectorStatusExecute(r)
 }
 
 /*
-ValidateConnectv1ConnectorPlugin Validate a Connector Plugin
+ReadConnectv1ConnectorStatus Read a Connector Status
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+Get current status of the connector. This includes whether it is running, failed, or paused. Also includes which worker it is assigned to, error information if it has failed, and the state of all its tasks.
 
-Validate the provided configuration values against the configuration definition. This API performs per config validation and returns suggested values and validation error messages.
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param pluginName The unique name of the connector plugin.
- @param environmentId The unique identifier of the environment this resource belongs to.
- @param kafkaClusterId The unique identifier for the Kafka cluster.
- @return ApiValidateConnectv1ConnectorPluginRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param connectorName The unique name of the connector.
+	@param environmentId The unique identifier of the environment this resource belongs to.
+	@param kafkaClusterId The unique identifier for the Kafka cluster.
+	@return ApiReadConnectv1ConnectorStatusRequest
 */
-func (a *PluginsV1ApiService) ValidateConnectv1ConnectorPlugin(ctx _context.Context, pluginName string, environmentId string, kafkaClusterId string) ApiValidateConnectv1ConnectorPluginRequest {
-	return ApiValidateConnectv1ConnectorPluginRequest{
-		ApiService: a,
-		ctx: ctx,
-		pluginName: pluginName,
-		environmentId: environmentId,
+func (a *StatusConnectV1ApiService) ReadConnectv1ConnectorStatus(ctx _context.Context, connectorName string, environmentId string, kafkaClusterId string) ApiReadConnectv1ConnectorStatusRequest {
+	return ApiReadConnectv1ConnectorStatusRequest{
+		ApiService:     a,
+		ctx:            ctx,
+		connectorName:  connectorName,
+		environmentId:  environmentId,
 		kafkaClusterId: kafkaClusterId,
 	}
 }
 
 // Execute executes the request
-//  @return InlineResponse2003
-func (a *PluginsV1ApiService) ValidateConnectv1ConnectorPluginExecute(r ApiValidateConnectv1ConnectorPluginRequest) (InlineResponse2003, *_nethttp.Response, error) {
+//
+//	@return InlineResponse2001
+func (a *StatusConnectV1ApiService) ReadConnectv1ConnectorStatusExecute(r ApiReadConnectv1ConnectorStatusRequest) (InlineResponse2001, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPut
+		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  InlineResponse2003
+		localVarReturnValue  InlineResponse2001
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PluginsV1ApiService.ValidateConnectv1ConnectorPlugin")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StatusConnectV1ApiService.ReadConnectv1ConnectorStatus")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate"
-	localVarPath = strings.Replace(localVarPath, "{"+"plugin_name"+"}", _neturl.PathEscape(parameterToString(r.pluginName, "")), -1)
+	localVarPath := localBasePath + "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/status"
+	localVarPath = strings.Replace(localVarPath, "{"+"connector_name"+"}", _neturl.PathEscape(parameterToString(r.connectorName, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"environment_id"+"}", _neturl.PathEscape(parameterToString(r.environmentId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"kafka_cluster_id"+"}", _neturl.PathEscape(parameterToString(r.kafkaClusterId, "")), -1)
 
@@ -292,7 +287,7 @@ func (a *PluginsV1ApiService) ValidateConnectv1ConnectorPluginExecute(r ApiValid
 	localVarFormParams := _neturl.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -308,8 +303,6 @@ func (a *PluginsV1ApiService) ValidateConnectv1ConnectorPluginExecute(r ApiValid
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.requestBody
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

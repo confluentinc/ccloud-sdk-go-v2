@@ -26,6 +26,7 @@ Contact: connect@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -226,41 +227,41 @@ func (o *InlineResponse2003Value) SetVisible(v bool) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *InlineResponse2003Value) Redact() {
-    o.recurseRedact(o.Name)
-    o.recurseRedact(o.Value)
-    o.recurseRedact(o.RecommendedValues)
-    o.recurseRedact(o.Errors)
-    o.recurseRedact(o.Visible)
+	o.recurseRedact(o.Name)
+	o.recurseRedact(o.Value)
+	o.recurseRedact(o.RecommendedValues)
+	o.recurseRedact(o.Errors)
+	o.recurseRedact(o.Visible)
 }
 
 func (o *InlineResponse2003Value) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o InlineResponse2003Value) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o InlineResponse2003Value) MarshalJSON() ([]byte, error) {
@@ -280,7 +281,11 @@ func (o InlineResponse2003Value) MarshalJSON() ([]byte, error) {
 	if o.Visible != nil {
 		toSerialize["visible"] = o.Visible
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableInlineResponse2003Value struct {
@@ -311,12 +316,14 @@ func NewNullableInlineResponse2003Value(val *InlineResponse2003Value) *NullableI
 }
 
 func (v NullableInlineResponse2003Value) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableInlineResponse2003Value) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

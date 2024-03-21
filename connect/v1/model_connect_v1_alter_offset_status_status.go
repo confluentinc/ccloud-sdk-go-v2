@@ -34,65 +34,58 @@ import (
 	"reflect"
 )
 
-// ConnectV1ConnectorErrorError Connector Error with error code and message.
-type ConnectV1ConnectorErrorError struct {
-	// Error code for the type of error
-	Code *int32 `json:"code,omitempty"`
-	// Human readable error message
+// ConnectV1AlterOffsetStatusStatus The response of the alter offsets operation.
+type ConnectV1AlterOffsetStatusStatus struct {
+	// The phase of the alter offset operation.   PENDING: The offset alter operation is in progress.  APPLIED: The offset alter operation has been applied to the connector.  FAILED:  The offset alter operation has failed to be applied to the connector.
+	Phase string `json:"phase,omitempty"`
+	// An info message from the alter offset operation.
 	Message *string `json:"message,omitempty"`
 }
 
-// NewConnectV1ConnectorErrorError instantiates a new ConnectV1ConnectorErrorError object
+// NewConnectV1AlterOffsetStatusStatus instantiates a new ConnectV1AlterOffsetStatusStatus object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConnectV1ConnectorErrorError() *ConnectV1ConnectorErrorError {
-	this := ConnectV1ConnectorErrorError{}
+func NewConnectV1AlterOffsetStatusStatus(phase string) *ConnectV1AlterOffsetStatusStatus {
+	this := ConnectV1AlterOffsetStatusStatus{}
+	this.Phase = phase
 	return &this
 }
 
-// NewConnectV1ConnectorErrorErrorWithDefaults instantiates a new ConnectV1ConnectorErrorError object
+// NewConnectV1AlterOffsetStatusStatusWithDefaults instantiates a new ConnectV1AlterOffsetStatusStatus object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewConnectV1ConnectorErrorErrorWithDefaults() *ConnectV1ConnectorErrorError {
-	this := ConnectV1ConnectorErrorError{}
+func NewConnectV1AlterOffsetStatusStatusWithDefaults() *ConnectV1AlterOffsetStatusStatus {
+	this := ConnectV1AlterOffsetStatusStatus{}
 	return &this
 }
 
-// GetCode returns the Code field value if set, zero value otherwise.
-func (o *ConnectV1ConnectorErrorError) GetCode() int32 {
-	if o == nil || o.Code == nil {
-		var ret int32
+// GetPhase returns the Phase field value
+func (o *ConnectV1AlterOffsetStatusStatus) GetPhase() string {
+	if o == nil {
+		var ret string
 		return ret
 	}
-	return *o.Code
+
+	return o.Phase
 }
 
-// GetCodeOk returns a tuple with the Code field value if set, nil otherwise
+// GetPhaseOk returns a tuple with the Phase field value
 // and a boolean to check if the value has been set.
-func (o *ConnectV1ConnectorErrorError) GetCodeOk() (*int32, bool) {
-	if o == nil || o.Code == nil {
+func (o *ConnectV1AlterOffsetStatusStatus) GetPhaseOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Code, true
+	return &o.Phase, true
 }
 
-// HasCode returns a boolean if a field has been set.
-func (o *ConnectV1ConnectorErrorError) HasCode() bool {
-	if o != nil && o.Code != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetCode gets a reference to the given int32 and assigns it to the Code field.
-func (o *ConnectV1ConnectorErrorError) SetCode(v int32) {
-	o.Code = &v
+// SetPhase sets field value
+func (o *ConnectV1AlterOffsetStatusStatus) SetPhase(v string) {
+	o.Phase = v
 }
 
 // GetMessage returns the Message field value if set, zero value otherwise.
-func (o *ConnectV1ConnectorErrorError) GetMessage() string {
+func (o *ConnectV1AlterOffsetStatusStatus) GetMessage() string {
 	if o == nil || o.Message == nil {
 		var ret string
 		return ret
@@ -102,7 +95,7 @@ func (o *ConnectV1ConnectorErrorError) GetMessage() string {
 
 // GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConnectV1ConnectorErrorError) GetMessageOk() (*string, bool) {
+func (o *ConnectV1AlterOffsetStatusStatus) GetMessageOk() (*string, bool) {
 	if o == nil || o.Message == nil {
 		return nil, false
 	}
@@ -110,7 +103,7 @@ func (o *ConnectV1ConnectorErrorError) GetMessageOk() (*string, bool) {
 }
 
 // HasMessage returns a boolean if a field has been set.
-func (o *ConnectV1ConnectorErrorError) HasMessage() bool {
+func (o *ConnectV1AlterOffsetStatusStatus) HasMessage() bool {
 	if o != nil && o.Message != nil {
 		return true
 	}
@@ -119,17 +112,17 @@ func (o *ConnectV1ConnectorErrorError) HasMessage() bool {
 }
 
 // SetMessage gets a reference to the given string and assigns it to the Message field.
-func (o *ConnectV1ConnectorErrorError) SetMessage(v string) {
+func (o *ConnectV1AlterOffsetStatusStatus) SetMessage(v string) {
 	o.Message = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *ConnectV1ConnectorErrorError) Redact() {
-	o.recurseRedact(o.Code)
+func (o *ConnectV1AlterOffsetStatusStatus) Redact() {
+	o.recurseRedact(&o.Phase)
 	o.recurseRedact(o.Message)
 }
 
-func (o *ConnectV1ConnectorErrorError) recurseRedact(v interface{}) {
+func (o *ConnectV1AlterOffsetStatusStatus) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -154,15 +147,15 @@ func (o *ConnectV1ConnectorErrorError) recurseRedact(v interface{}) {
 	}
 }
 
-func (o ConnectV1ConnectorErrorError) zeroField(v interface{}) {
+func (o ConnectV1AlterOffsetStatusStatus) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o ConnectV1ConnectorErrorError) MarshalJSON() ([]byte, error) {
+func (o ConnectV1AlterOffsetStatusStatus) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Code != nil {
-		toSerialize["code"] = o.Code
+	if true {
+		toSerialize["phase"] = o.Phase
 	}
 	if o.Message != nil {
 		toSerialize["message"] = o.Message
@@ -174,34 +167,34 @@ func (o ConnectV1ConnectorErrorError) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableConnectV1ConnectorErrorError struct {
-	value *ConnectV1ConnectorErrorError
+type NullableConnectV1AlterOffsetStatusStatus struct {
+	value *ConnectV1AlterOffsetStatusStatus
 	isSet bool
 }
 
-func (v NullableConnectV1ConnectorErrorError) Get() *ConnectV1ConnectorErrorError {
+func (v NullableConnectV1AlterOffsetStatusStatus) Get() *ConnectV1AlterOffsetStatusStatus {
 	return v.value
 }
 
-func (v *NullableConnectV1ConnectorErrorError) Set(val *ConnectV1ConnectorErrorError) {
+func (v *NullableConnectV1AlterOffsetStatusStatus) Set(val *ConnectV1AlterOffsetStatusStatus) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableConnectV1ConnectorErrorError) IsSet() bool {
+func (v NullableConnectV1AlterOffsetStatusStatus) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableConnectV1ConnectorErrorError) Unset() {
+func (v *NullableConnectV1AlterOffsetStatusStatus) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableConnectV1ConnectorErrorError(val *ConnectV1ConnectorErrorError) *NullableConnectV1ConnectorErrorError {
-	return &NullableConnectV1ConnectorErrorError{value: val, isSet: true}
+func NewNullableConnectV1AlterOffsetStatusStatus(val *ConnectV1AlterOffsetStatusStatus) *NullableConnectV1AlterOffsetStatusStatus {
+	return &NullableConnectV1AlterOffsetStatusStatus{value: val, isSet: true}
 }
 
-func (v NullableConnectV1ConnectorErrorError) MarshalJSON() ([]byte, error) {
+func (v NullableConnectV1AlterOffsetStatusStatus) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -209,7 +202,7 @@ func (v NullableConnectV1ConnectorErrorError) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableConnectV1ConnectorErrorError) UnmarshalJSON(src []byte) error {
+func (v *NullableConnectV1AlterOffsetStatusStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
