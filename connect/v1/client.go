@@ -64,13 +64,15 @@ type APIClient struct {
 
 	// API Services
 
-	ConnectorsV1Api ConnectorsV1Api
+	ConnectorsConnectV1Api ConnectorsConnectV1Api
 
-	LifecycleV1Api LifecycleV1Api
+	LifecycleConnectV1Api LifecycleConnectV1Api
 
-	PluginsV1Api PluginsV1Api
+	ManagedConnectorPluginsConnectV1Api ManagedConnectorPluginsConnectV1Api
 
-	StatusV1Api StatusV1Api
+	OffsetsConnectV1Api OffsetsConnectV1Api
+
+	StatusConnectV1Api StatusConnectV1Api
 }
 
 type service struct {
@@ -89,10 +91,11 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
-	c.ConnectorsV1Api = (*ConnectorsV1ApiService)(&c.common)
-	c.LifecycleV1Api = (*LifecycleV1ApiService)(&c.common)
-	c.PluginsV1Api = (*PluginsV1ApiService)(&c.common)
-	c.StatusV1Api = (*StatusV1ApiService)(&c.common)
+	c.ConnectorsConnectV1Api = (*ConnectorsConnectV1ApiService)(&c.common)
+	c.LifecycleConnectV1Api = (*LifecycleConnectV1ApiService)(&c.common)
+	c.ManagedConnectorPluginsConnectV1Api = (*ManagedConnectorPluginsConnectV1ApiService)(&c.common)
+	c.OffsetsConnectV1Api = (*OffsetsConnectV1ApiService)(&c.common)
+	c.StatusConnectV1Api = (*StatusConnectV1ApiService)(&c.common)
 
 	return c
 }

@@ -26,6 +26,7 @@ Contact: connect@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,9 +37,9 @@ import (
 // InlineResponse2001Connector The map containing connector status.
 type InlineResponse2001Connector struct {
 	// The state of the connector.
-	State string `json:"state"`
+	State string `json:"state,omitempty"`
 	// The worker ID of the connector.
-	WorkerId string `json:"worker_id"`
+	WorkerId string `json:"worker_id,omitempty"`
 	// The exception name in case of error.
 	Trace *string `json:"trace,omitempty"`
 }
@@ -75,7 +76,7 @@ func (o *InlineResponse2001Connector) GetState() string {
 // GetStateOk returns a tuple with the State field value
 // and a boolean to check if the value has been set.
 func (o *InlineResponse2001Connector) GetStateOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.State, true
@@ -99,7 +100,7 @@ func (o *InlineResponse2001Connector) GetWorkerId() string {
 // GetWorkerIdOk returns a tuple with the WorkerId field value
 // and a boolean to check if the value has been set.
 func (o *InlineResponse2001Connector) GetWorkerIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.WorkerId, true
@@ -144,39 +145,39 @@ func (o *InlineResponse2001Connector) SetTrace(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *InlineResponse2001Connector) Redact() {
-    o.recurseRedact(&o.State)
-    o.recurseRedact(&o.WorkerId)
-    o.recurseRedact(o.Trace)
+	o.recurseRedact(&o.State)
+	o.recurseRedact(&o.WorkerId)
+	o.recurseRedact(o.Trace)
 }
 
 func (o *InlineResponse2001Connector) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o InlineResponse2001Connector) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o InlineResponse2001Connector) MarshalJSON() ([]byte, error) {
@@ -190,7 +191,11 @@ func (o InlineResponse2001Connector) MarshalJSON() ([]byte, error) {
 	if o.Trace != nil {
 		toSerialize["trace"] = o.Trace
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableInlineResponse2001Connector struct {
@@ -221,12 +226,14 @@ func NewNullableInlineResponse2001Connector(val *InlineResponse2001Connector) *N
 }
 
 func (v NullableInlineResponse2001Connector) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableInlineResponse2001Connector) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -1,11 +1,11 @@
-# \PluginsV1Api
+# \ManagedConnectorPluginsConnectV1Api
 
 All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ListConnectv1ConnectorPlugins**](PluginsV1Api.md#ListConnectv1ConnectorPlugins) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins | List of Connector Plugins
-[**ValidateConnectv1ConnectorPlugin**](PluginsV1Api.md#ValidateConnectv1ConnectorPlugin) | **Put** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate | Validate a Connector Plugin
+[**ListConnectv1ConnectorPlugins**](ManagedConnectorPluginsConnectV1Api.md#ListConnectv1ConnectorPlugins) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins | List of Managed Connector plugins
+[**ValidateConnectv1ConnectorPlugin**](ManagedConnectorPluginsConnectV1Api.md#ValidateConnectv1ConnectorPlugin) | **Put** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate | Validate a Managed Connector Plugin
 
 
 
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 > []InlineResponse2002 ListConnectv1ConnectorPlugins(ctx, environmentId, kafkaClusterId).Execute()
 
-List of Connector Plugins
+List of Managed Connector plugins
 
 
 
@@ -35,13 +35,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PluginsV1Api.ListConnectv1ConnectorPlugins(context.Background(), environmentId, kafkaClusterId).Execute()
+    resp, r, err := api_client.ManagedConnectorPluginsConnectV1Api.ListConnectv1ConnectorPlugins(context.Background(), environmentId, kafkaClusterId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PluginsV1Api.ListConnectv1ConnectorPlugins``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ManagedConnectorPluginsConnectV1Api.ListConnectv1ConnectorPlugins``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `ListConnectv1ConnectorPlugins`: []InlineResponse2002
-    fmt.Fprintf(os.Stdout, "Response from `PluginsV1Api.ListConnectv1ConnectorPlugins`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `ManagedConnectorPluginsConnectV1Api.ListConnectv1ConnectorPlugins`: %v\n", resp)
 }
 ```
 
@@ -70,7 +70,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
@@ -84,9 +84,9 @@ Name | Type | Description  | Notes
 
 ## ValidateConnectv1ConnectorPlugin
 
-> InlineResponse2003 ValidateConnectv1ConnectorPlugin(ctx, pluginName, environmentId, kafkaClusterId).RequestBody(requestBody).Execute()
+> InlineResponse2003 ValidateConnectv1ConnectorPlugin(ctx, pluginName, environmentId, kafkaClusterId).ModelMap(modelMap).Execute()
 
-Validate a Connector Plugin
+Validate a Managed Connector Plugin
 
 
 
@@ -106,17 +106,17 @@ func main() {
     pluginName := "pluginName_example" // string | The unique name of the connector plugin.
     environmentId := "environmentId_example" // string | The unique identifier of the environment this resource belongs to.
     kafkaClusterId := "kafkaClusterId_example" // string | The unique identifier for the Kafka cluster.
-    requestBody := map[string]string{"key": "Inner_example"} // map[string]string | Configuration parameters for the connector. All values should be strings. (optional)
+    modelMap := TODO // ModelMap | Configuration parameters for the connector. All values should be strings. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PluginsV1Api.ValidateConnectv1ConnectorPlugin(context.Background(), pluginName, environmentId, kafkaClusterId).RequestBody(requestBody).Execute()
+    resp, r, err := api_client.ManagedConnectorPluginsConnectV1Api.ValidateConnectv1ConnectorPlugin(context.Background(), pluginName, environmentId, kafkaClusterId).ModelMap(modelMap).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PluginsV1Api.ValidateConnectv1ConnectorPlugin``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ManagedConnectorPluginsConnectV1Api.ValidateConnectv1ConnectorPlugin``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
     // response from `ValidateConnectv1ConnectorPlugin`: InlineResponse2003
-    fmt.Fprintf(os.Stdout, "Response from `PluginsV1Api.ValidateConnectv1ConnectorPlugin`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `ManagedConnectorPluginsConnectV1Api.ValidateConnectv1ConnectorPlugin`: %v\n", resp)
 }
 ```
 
@@ -140,7 +140,7 @@ Name | Type | Description  | Notes
 
 
 
- **requestBody** | **map[string]string** | Configuration parameters for the connector. All values should be strings. | 
+ **modelMap** | [**ModelMap**](ModelMap.md) | Configuration parameters for the connector. All values should be strings. | 
 
 ### Return type
 
@@ -148,7 +148,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
