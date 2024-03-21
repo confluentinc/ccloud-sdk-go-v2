@@ -1,4 +1,4 @@
-module github.com/confluentinc/ccloud-sdk-go-v2-internal/connect
+module github.com/confluentinc/ccloud-sdk-go-v2/connect
 
 go 1.16
 
