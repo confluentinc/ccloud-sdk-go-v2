@@ -26,6 +26,7 @@ Contact: connect@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,7 +37,7 @@ import (
 // InlineResponse2003Configs struct for InlineResponse2003Configs
 type InlineResponse2003Configs struct {
 	Definition *InlineResponse2003Definition `json:"definition,omitempty"`
-	Value *InlineResponse2003Value `json:"value,omitempty"`
+	Value      *InlineResponse2003Value      `json:"value,omitempty"`
 	// Map of metadata details about the connector configuration, such as type of input, etc.
 	Metadata *map[string]interface{} `json:"metadata,omitempty"`
 }
@@ -156,39 +157,39 @@ func (o *InlineResponse2003Configs) SetMetadata(v map[string]interface{}) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *InlineResponse2003Configs) Redact() {
-    o.recurseRedact(o.Definition)
-    o.recurseRedact(o.Value)
-    o.recurseRedact(o.Metadata)
+	o.recurseRedact(o.Definition)
+	o.recurseRedact(o.Value)
+	o.recurseRedact(o.Metadata)
 }
 
 func (o *InlineResponse2003Configs) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o InlineResponse2003Configs) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o InlineResponse2003Configs) MarshalJSON() ([]byte, error) {
@@ -202,7 +203,11 @@ func (o InlineResponse2003Configs) MarshalJSON() ([]byte, error) {
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableInlineResponse2003Configs struct {
@@ -233,12 +238,14 @@ func NewNullableInlineResponse2003Configs(val *InlineResponse2003Configs) *Nulla
 }
 
 func (v NullableInlineResponse2003Configs) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableInlineResponse2003Configs) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

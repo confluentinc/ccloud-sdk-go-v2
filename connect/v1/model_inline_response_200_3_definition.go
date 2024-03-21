@@ -26,6 +26,7 @@ Contact: connect@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -50,12 +51,12 @@ type InlineResponse2003Definition struct {
 	// The UI group to which the configuration belongs to
 	Group *string `json:"group,omitempty"`
 	// The width of a configuration value
-	Width *string `json:"width,omitempty"`
+	Width       *string `json:"width,omitempty"`
 	DisplayName *string `json:"display_name,omitempty"`
 	// Other configurations on which this configuration is dependent
 	Dependents *[]string `json:"dependents,omitempty"`
 	// The order of configuration in specified group
-	Order *int32 `json:"order,omitempty"`
+	Order *int32  `json:"order,omitempty"`
 	Alias *string `json:"alias,omitempty"`
 }
 
@@ -462,48 +463,48 @@ func (o *InlineResponse2003Definition) SetAlias(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *InlineResponse2003Definition) Redact() {
-    o.recurseRedact(o.Name)
-    o.recurseRedact(o.Type)
-    o.recurseRedact(o.Required)
-    o.recurseRedact(o.DefaultValue)
-    o.recurseRedact(o.Importance)
-    o.recurseRedact(o.Documentation)
-    o.recurseRedact(o.Group)
-    o.recurseRedact(o.Width)
-    o.recurseRedact(o.DisplayName)
-    o.recurseRedact(o.Dependents)
-    o.recurseRedact(o.Order)
-    o.recurseRedact(o.Alias)
+	o.recurseRedact(o.Name)
+	o.recurseRedact(o.Type)
+	o.recurseRedact(o.Required)
+	o.recurseRedact(o.DefaultValue)
+	o.recurseRedact(o.Importance)
+	o.recurseRedact(o.Documentation)
+	o.recurseRedact(o.Group)
+	o.recurseRedact(o.Width)
+	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.Dependents)
+	o.recurseRedact(o.Order)
+	o.recurseRedact(o.Alias)
 }
 
 func (o *InlineResponse2003Definition) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o InlineResponse2003Definition) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o InlineResponse2003Definition) MarshalJSON() ([]byte, error) {
@@ -544,7 +545,11 @@ func (o InlineResponse2003Definition) MarshalJSON() ([]byte, error) {
 	if o.Alias != nil {
 		toSerialize["alias"] = o.Alias
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableInlineResponse2003Definition struct {
@@ -575,12 +580,14 @@ func NewNullableInlineResponse2003Definition(val *InlineResponse2003Definition) 
 }
 
 func (v NullableInlineResponse2003Definition) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableInlineResponse2003Definition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

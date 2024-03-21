@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Name** | **string** | The name of the connector. | 
 **Type** | **string** | Type of connector, sink or source. | 
 **Connector** | [**ConnectV1ConnectorExpansionStatusConnector**](ConnectV1ConnectorExpansionStatusConnector.md) |  | 
-**Tasks** | Pointer to [**[]ConnectV1ConnectorExpansionStatusTasks**](ConnectV1ConnectorExpansionStatusTasks.md) | A map containing the task status. | [optional] 
+**Tasks** | Pointer to [**[]InlineResponse2001Tasks**](InlineResponse2001Tasks.md) | A map containing the task status. | [optional] 
 
 ## Methods
 
@@ -90,20 +90,20 @@ SetConnector sets Connector field to given value.
 
 ### GetTasks
 
-`func (o *ConnectV1ConnectorExpansionStatus) GetTasks() []ConnectV1ConnectorExpansionStatusTasks`
+`func (o *ConnectV1ConnectorExpansionStatus) GetTasks() []InlineResponse2001Tasks`
 
 GetTasks returns the Tasks field if non-nil, zero value otherwise.
 
 ### GetTasksOk
 
-`func (o *ConnectV1ConnectorExpansionStatus) GetTasksOk() (*[]ConnectV1ConnectorExpansionStatusTasks, bool)`
+`func (o *ConnectV1ConnectorExpansionStatus) GetTasksOk() (*[]InlineResponse2001Tasks, bool)`
 
 GetTasksOk returns a tuple with the Tasks field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTasks
 
-`func (o *ConnectV1ConnectorExpansionStatus) SetTasks(v []ConnectV1ConnectorExpansionStatusTasks)`
+`func (o *ConnectV1ConnectorExpansionStatus) SetTasks(v []InlineResponse2001Tasks)`
 
 SetTasks sets Tasks field to given value.
 

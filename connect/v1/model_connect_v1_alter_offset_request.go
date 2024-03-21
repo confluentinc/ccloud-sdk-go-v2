@@ -34,63 +34,34 @@ import (
 	"reflect"
 )
 
-// InlineResponse2002 struct for InlineResponse2002
-type InlineResponse2002 struct {
-	// The connector class name. E.g. BigQuerySink.
-	Class string `json:"class,omitempty"`
-	// Type of connector, sink or source.
-	Type string `json:"type,omitempty"`
-	// The version string for the connector available.
-	Version *string `json:"version,omitempty"`
+// ConnectV1AlterOffsetRequest Request to alter the offset of a connector. The offsets parameter is options for DELETE type.
+type ConnectV1AlterOffsetRequest struct {
+	Type    ConnectV1AlterOffsetRequestType `json:"type,omitempty"`
+	Offsets *ConnectV1Offsets               `json:"offsets,omitempty"`
 }
 
-// NewInlineResponse2002 instantiates a new InlineResponse2002 object
+// NewConnectV1AlterOffsetRequest instantiates a new ConnectV1AlterOffsetRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInlineResponse2002(class string, type_ string) *InlineResponse2002 {
-	this := InlineResponse2002{}
-	this.Class = class
+func NewConnectV1AlterOffsetRequest(type_ ConnectV1AlterOffsetRequestType) *ConnectV1AlterOffsetRequest {
+	this := ConnectV1AlterOffsetRequest{}
 	this.Type = type_
 	return &this
 }
 
-// NewInlineResponse2002WithDefaults instantiates a new InlineResponse2002 object
+// NewConnectV1AlterOffsetRequestWithDefaults instantiates a new ConnectV1AlterOffsetRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewInlineResponse2002WithDefaults() *InlineResponse2002 {
-	this := InlineResponse2002{}
+func NewConnectV1AlterOffsetRequestWithDefaults() *ConnectV1AlterOffsetRequest {
+	this := ConnectV1AlterOffsetRequest{}
 	return &this
 }
 
-// GetClass returns the Class field value
-func (o *InlineResponse2002) GetClass() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Class
-}
-
-// GetClassOk returns a tuple with the Class field value
-// and a boolean to check if the value has been set.
-func (o *InlineResponse2002) GetClassOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Class, true
-}
-
-// SetClass sets field value
-func (o *InlineResponse2002) SetClass(v string) {
-	o.Class = v
-}
-
 // GetType returns the Type field value
-func (o *InlineResponse2002) GetType() string {
+func (o *ConnectV1AlterOffsetRequest) GetType() ConnectV1AlterOffsetRequestType {
 	if o == nil {
-		var ret string
+		var ret ConnectV1AlterOffsetRequestType
 		return ret
 	}
 
@@ -99,7 +70,7 @@ func (o *InlineResponse2002) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *InlineResponse2002) GetTypeOk() (*string, bool) {
+func (o *ConnectV1AlterOffsetRequest) GetTypeOk() (*ConnectV1AlterOffsetRequestType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -107,50 +78,49 @@ func (o *InlineResponse2002) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *InlineResponse2002) SetType(v string) {
+func (o *ConnectV1AlterOffsetRequest) SetType(v ConnectV1AlterOffsetRequestType) {
 	o.Type = v
 }
 
-// GetVersion returns the Version field value if set, zero value otherwise.
-func (o *InlineResponse2002) GetVersion() string {
-	if o == nil || o.Version == nil {
-		var ret string
+// GetOffsets returns the Offsets field value if set, zero value otherwise.
+func (o *ConnectV1AlterOffsetRequest) GetOffsets() ConnectV1Offsets {
+	if o == nil || o.Offsets == nil {
+		var ret ConnectV1Offsets
 		return ret
 	}
-	return *o.Version
+	return *o.Offsets
 }
 
-// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
+// GetOffsetsOk returns a tuple with the Offsets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InlineResponse2002) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+func (o *ConnectV1AlterOffsetRequest) GetOffsetsOk() (*ConnectV1Offsets, bool) {
+	if o == nil || o.Offsets == nil {
 		return nil, false
 	}
-	return o.Version, true
+	return o.Offsets, true
 }
 
-// HasVersion returns a boolean if a field has been set.
-func (o *InlineResponse2002) HasVersion() bool {
-	if o != nil && o.Version != nil {
+// HasOffsets returns a boolean if a field has been set.
+func (o *ConnectV1AlterOffsetRequest) HasOffsets() bool {
+	if o != nil && o.Offsets != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetVersion gets a reference to the given string and assigns it to the Version field.
-func (o *InlineResponse2002) SetVersion(v string) {
-	o.Version = &v
+// SetOffsets gets a reference to the given ConnectV1Offsets and assigns it to the Offsets field.
+func (o *ConnectV1AlterOffsetRequest) SetOffsets(v ConnectV1Offsets) {
+	o.Offsets = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *InlineResponse2002) Redact() {
-	o.recurseRedact(&o.Class)
+func (o *ConnectV1AlterOffsetRequest) Redact() {
 	o.recurseRedact(&o.Type)
-	o.recurseRedact(o.Version)
+	o.recurseRedact(o.Offsets)
 }
 
-func (o *InlineResponse2002) recurseRedact(v interface{}) {
+func (o *ConnectV1AlterOffsetRequest) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -175,21 +145,18 @@ func (o *InlineResponse2002) recurseRedact(v interface{}) {
 	}
 }
 
-func (o InlineResponse2002) zeroField(v interface{}) {
+func (o ConnectV1AlterOffsetRequest) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o InlineResponse2002) MarshalJSON() ([]byte, error) {
+func (o ConnectV1AlterOffsetRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["class"] = o.Class
-	}
 	if true {
 		toSerialize["type"] = o.Type
 	}
-	if o.Version != nil {
-		toSerialize["version"] = o.Version
+	if o.Offsets != nil {
+		toSerialize["offsets"] = o.Offsets
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
@@ -198,34 +165,34 @@ func (o InlineResponse2002) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableInlineResponse2002 struct {
-	value *InlineResponse2002
+type NullableConnectV1AlterOffsetRequest struct {
+	value *ConnectV1AlterOffsetRequest
 	isSet bool
 }
 
-func (v NullableInlineResponse2002) Get() *InlineResponse2002 {
+func (v NullableConnectV1AlterOffsetRequest) Get() *ConnectV1AlterOffsetRequest {
 	return v.value
 }
 
-func (v *NullableInlineResponse2002) Set(val *InlineResponse2002) {
+func (v *NullableConnectV1AlterOffsetRequest) Set(val *ConnectV1AlterOffsetRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableInlineResponse2002) IsSet() bool {
+func (v NullableConnectV1AlterOffsetRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableInlineResponse2002) Unset() {
+func (v *NullableConnectV1AlterOffsetRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableInlineResponse2002(val *InlineResponse2002) *NullableInlineResponse2002 {
-	return &NullableInlineResponse2002{value: val, isSet: true}
+func NewNullableConnectV1AlterOffsetRequest(val *ConnectV1AlterOffsetRequest) *NullableConnectV1AlterOffsetRequest {
+	return &NullableConnectV1AlterOffsetRequest{value: val, isSet: true}
 }
 
-func (v NullableInlineResponse2002) MarshalJSON() ([]byte, error) {
+func (v NullableConnectV1AlterOffsetRequest) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -233,7 +200,7 @@ func (v NullableInlineResponse2002) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableInlineResponse2002) UnmarshalJSON(src []byte) error {
+func (v *NullableConnectV1AlterOffsetRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

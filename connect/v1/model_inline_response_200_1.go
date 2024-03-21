@@ -26,6 +26,7 @@ Contact: connect@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,10 +37,10 @@ import (
 // InlineResponse2001 struct for InlineResponse2001
 type InlineResponse2001 struct {
 	// The name of the connector.
-	Name string `json:"name"`
+	Name string `json:"name,omitempty"`
 	// Type of connector, sink or source.
-	Type string `json:"type"`
-	Connector InlineResponse2001Connector `json:"connector"`
+	Type      string                      `json:"type,omitempty"`
+	Connector InlineResponse2001Connector `json:"connector,omitempty"`
 	// The map containing the task status.
 	Tasks *[]InlineResponse2001Tasks `json:"tasks,omitempty"`
 }
@@ -77,7 +78,7 @@ func (o *InlineResponse2001) GetName() string {
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *InlineResponse2001) GetNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Name, true
@@ -101,7 +102,7 @@ func (o *InlineResponse2001) GetType() string {
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
 func (o *InlineResponse2001) GetTypeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Type, true
@@ -125,7 +126,7 @@ func (o *InlineResponse2001) GetConnector() InlineResponse2001Connector {
 // GetConnectorOk returns a tuple with the Connector field value
 // and a boolean to check if the value has been set.
 func (o *InlineResponse2001) GetConnectorOk() (*InlineResponse2001Connector, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Connector, true
@@ -170,40 +171,40 @@ func (o *InlineResponse2001) SetTasks(v []InlineResponse2001Tasks) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *InlineResponse2001) Redact() {
-    o.recurseRedact(&o.Name)
-    o.recurseRedact(&o.Type)
-    o.recurseRedact(&o.Connector)
-    o.recurseRedact(o.Tasks)
+	o.recurseRedact(&o.Name)
+	o.recurseRedact(&o.Type)
+	o.recurseRedact(&o.Connector)
+	o.recurseRedact(o.Tasks)
 }
 
 func (o *InlineResponse2001) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o InlineResponse2001) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o InlineResponse2001) MarshalJSON() ([]byte, error) {
@@ -220,7 +221,11 @@ func (o InlineResponse2001) MarshalJSON() ([]byte, error) {
 	if o.Tasks != nil {
 		toSerialize["tasks"] = o.Tasks
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableInlineResponse2001 struct {
@@ -251,12 +256,14 @@ func NewNullableInlineResponse2001(val *InlineResponse2001) *NullableInlineRespo
 }
 
 func (v NullableInlineResponse2001) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableInlineResponse2001) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -79,33 +79,45 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ConnectorsV1Api* | [**CreateConnectv1Connector**](docs/ConnectorsV1Api.md#createconnectv1connector) | **Post** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors | Create a Connector
-*ConnectorsV1Api* | [**CreateOrUpdateConnectv1ConnectorConfig**](docs/ConnectorsV1Api.md#createorupdateconnectv1connectorconfig) | **Put** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config | Create or Update a Connector Configuration
-*ConnectorsV1Api* | [**DeleteConnectv1Connector**](docs/ConnectorsV1Api.md#deleteconnectv1connector) | **Delete** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name} | Delete a Connector
-*ConnectorsV1Api* | [**GetConnectv1ConnectorConfig**](docs/ConnectorsV1Api.md#getconnectv1connectorconfig) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config | Read a Connector Configuration
-*ConnectorsV1Api* | [**ListConnectv1Connectors**](docs/ConnectorsV1Api.md#listconnectv1connectors) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors | List of Connectors
-*ConnectorsV1Api* | [**ListConnectv1ConnectorsWithExpansions**](docs/ConnectorsV1Api.md#listconnectv1connectorswithexpansions) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand&#x3D;info,status,id | List of Connectors with Expansions
-*ConnectorsV1Api* | [**ReadConnectv1Connector**](docs/ConnectorsV1Api.md#readconnectv1connector) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name} | Read a Connector
-*LifecycleV1Api* | [**PauseConnectv1Connector**](docs/LifecycleV1Api.md#pauseconnectv1connector) | **Put** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/pause | Pause a Connector
-*LifecycleV1Api* | [**ResumeConnectv1Connector**](docs/LifecycleV1Api.md#resumeconnectv1connector) | **Put** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/resume | Resume a Connector
-*PluginsV1Api* | [**ListConnectv1ConnectorPlugins**](docs/PluginsV1Api.md#listconnectv1connectorplugins) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins | List of Connector Plugins
-*PluginsV1Api* | [**ValidateConnectv1ConnectorPlugin**](docs/PluginsV1Api.md#validateconnectv1connectorplugin) | **Put** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate | Validate a Connector Plugin
-*StatusV1Api* | [**ListConnectv1ConnectorTasks**](docs/StatusV1Api.md#listconnectv1connectortasks) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/tasks | List of Connector Tasks
-*StatusV1Api* | [**ReadConnectv1ConnectorStatus**](docs/StatusV1Api.md#readconnectv1connectorstatus) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/status | Read a Connector Status
+*ConnectorsConnectV1Api* | [**CreateConnectv1Connector**](docs/ConnectorsConnectV1Api.md#createconnectv1connector) | **Post** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors | Create a Connector
+*ConnectorsConnectV1Api* | [**CreateOrUpdateConnectv1ConnectorConfig**](docs/ConnectorsConnectV1Api.md#createorupdateconnectv1connectorconfig) | **Put** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config | Create or Update a Connector Configuration
+*ConnectorsConnectV1Api* | [**DeleteConnectv1Connector**](docs/ConnectorsConnectV1Api.md#deleteconnectv1connector) | **Delete** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name} | Delete a Connector
+*ConnectorsConnectV1Api* | [**GetConnectv1ConnectorConfig**](docs/ConnectorsConnectV1Api.md#getconnectv1connectorconfig) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config | Read a Connector Configuration
+*ConnectorsConnectV1Api* | [**ListConnectv1Connectors**](docs/ConnectorsConnectV1Api.md#listconnectv1connectors) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors | List of Connectors
+*ConnectorsConnectV1Api* | [**ListConnectv1ConnectorsWithExpansions**](docs/ConnectorsConnectV1Api.md#listconnectv1connectorswithexpansions) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand&#x3D;info,status,id | List of Connectors with Expansions
+*ConnectorsConnectV1Api* | [**ReadConnectv1Connector**](docs/ConnectorsConnectV1Api.md#readconnectv1connector) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name} | Read a Connector
+*LifecycleConnectV1Api* | [**PauseConnectv1Connector**](docs/LifecycleConnectV1Api.md#pauseconnectv1connector) | **Put** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/pause | Pause a Connector
+*LifecycleConnectV1Api* | [**ResumeConnectv1Connector**](docs/LifecycleConnectV1Api.md#resumeconnectv1connector) | **Put** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/resume | Resume a Connector
+*ManagedConnectorPluginsConnectV1Api* | [**ListConnectv1ConnectorPlugins**](docs/ManagedConnectorPluginsConnectV1Api.md#listconnectv1connectorplugins) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins | List of Managed Connector plugins
+*ManagedConnectorPluginsConnectV1Api* | [**ValidateConnectv1ConnectorPlugin**](docs/ManagedConnectorPluginsConnectV1Api.md#validateconnectv1connectorplugin) | **Put** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate | Validate a Managed Connector Plugin
+*OffsetsConnectV1Api* | [**AlterConnectv1ConnectorOffsetsRequest**](docs/OffsetsConnectV1Api.md#alterconnectv1connectoroffsetsrequest) | **Post** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request | Request a Connector Offsets
+*OffsetsConnectV1Api* | [**GetConnectv1ConnectorOffsets**](docs/OffsetsConnectV1Api.md#getconnectv1connectoroffsets) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets | Get a Connector Offsets
+*OffsetsConnectV1Api* | [**GetConnectv1ConnectorOffsetsRequestStatus**](docs/OffsetsConnectV1Api.md#getconnectv1connectoroffsetsrequeststatus) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request/status | Get a Connector Offsets Request Status
+*StatusConnectV1Api* | [**ListConnectv1ConnectorTasks**](docs/StatusConnectV1Api.md#listconnectv1connectortasks) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/tasks | List of Connector Tasks
+*StatusConnectV1Api* | [**ReadConnectv1ConnectorStatus**](docs/StatusConnectV1Api.md#readconnectv1connectorstatus) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/status | Read a Connector Status
 
 
 ## Documentation For Models
 
+ - [ConnectV1AlterOffsetRequest](docs/ConnectV1AlterOffsetRequest.md)
+ - [ConnectV1AlterOffsetRequestInfo](docs/ConnectV1AlterOffsetRequestInfo.md)
+ - [ConnectV1AlterOffsetRequestType](docs/ConnectV1AlterOffsetRequestType.md)
+ - [ConnectV1AlterOffsetStatus](docs/ConnectV1AlterOffsetStatus.md)
+ - [ConnectV1AlterOffsetStatusStatus](docs/ConnectV1AlterOffsetStatusStatus.md)
  - [ConnectV1Connector](docs/ConnectV1Connector.md)
  - [ConnectV1ConnectorError](docs/ConnectV1ConnectorError.md)
  - [ConnectV1ConnectorErrorError](docs/ConnectV1ConnectorErrorError.md)
  - [ConnectV1ConnectorExpansion](docs/ConnectV1ConnectorExpansion.md)
  - [ConnectV1ConnectorExpansionId](docs/ConnectV1ConnectorExpansionId.md)
  - [ConnectV1ConnectorExpansionInfo](docs/ConnectV1ConnectorExpansionInfo.md)
+ - [ConnectV1ConnectorExpansionMap](docs/ConnectV1ConnectorExpansionMap.md)
  - [ConnectV1ConnectorExpansionStatus](docs/ConnectV1ConnectorExpansionStatus.md)
  - [ConnectV1ConnectorExpansionStatusConnector](docs/ConnectV1ConnectorExpansionStatusConnector.md)
- - [ConnectV1ConnectorExpansionStatusTasks](docs/ConnectV1ConnectorExpansionStatusTasks.md)
+ - [ConnectV1ConnectorOffsets](docs/ConnectV1ConnectorOffsets.md)
+ - [ConnectV1ConnectorOffsetsMetadata](docs/ConnectV1ConnectorOffsetsMetadata.md)
  - [ConnectV1ConnectorTasks](docs/ConnectV1ConnectorTasks.md)
+ - [ConnectV1Connectors](docs/ConnectV1Connectors.md)
+ - [ConnectV1Offsets](docs/ConnectV1Offsets.md)
  - [InlineObject](docs/InlineObject.md)
  - [InlineResponse200](docs/InlineResponse200.md)
  - [InlineResponse2001](docs/InlineResponse2001.md)
@@ -124,7 +136,7 @@ Class | Method | HTTP request | Description
 
 
 
-### api-key
+### cloud-api-key
 
 - **Type**: HTTP basic authentication
 
@@ -135,6 +147,34 @@ auth := context.WithValue(context.Background(), sw.ContextBasicAuth, sw.BasicAut
     UserName: "username",
     Password: "password",
 })
+r, err := client.Service.Operation(auth, args)
+```
+
+
+### confluent-sts-access-token
+
+
+- **Type**: OAuth
+- **Flow**: application
+- **Authorization URL**: 
+- **Scopes**: N/A
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextAccessToken, "ACCESSTOKENSTRING")
+r, err := client.Service.Operation(auth, args)
+```
+
+Or via OAuth2 module to automatically refresh tokens and perform user authentication.
+
+```golang
+import "golang.org/x/oauth2"
+
+/* Perform OAuth2 round trip request and obtain a token */
+
+tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
+auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
 r, err := client.Service.Operation(auth, args)
 ```
 

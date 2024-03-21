@@ -26,6 +26,7 @@ Contact: connect@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,9 +37,9 @@ import (
 // ConnectV1ConnectorTasks struct for ConnectV1ConnectorTasks
 type ConnectV1ConnectorTasks struct {
 	// The name of the connector the task belongs to
-	Connector string `json:"connector"`
+	Connector string `json:"connector,omitempty"`
 	// Task ID within the connector
-	Task int32 `json:"task"`
+	Task int32 `json:"task,omitempty"`
 }
 
 // NewConnectV1ConnectorTasks instantiates a new ConnectV1ConnectorTasks object
@@ -73,7 +74,7 @@ func (o *ConnectV1ConnectorTasks) GetConnector() string {
 // GetConnectorOk returns a tuple with the Connector field value
 // and a boolean to check if the value has been set.
 func (o *ConnectV1ConnectorTasks) GetConnectorOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Connector, true
@@ -97,7 +98,7 @@ func (o *ConnectV1ConnectorTasks) GetTask() int32 {
 // GetTaskOk returns a tuple with the Task field value
 // and a boolean to check if the value has been set.
 func (o *ConnectV1ConnectorTasks) GetTaskOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Task, true
@@ -110,38 +111,38 @@ func (o *ConnectV1ConnectorTasks) SetTask(v int32) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ConnectV1ConnectorTasks) Redact() {
-    o.recurseRedact(&o.Connector)
-    o.recurseRedact(&o.Task)
+	o.recurseRedact(&o.Connector)
+	o.recurseRedact(&o.Task)
 }
 
 func (o *ConnectV1ConnectorTasks) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ConnectV1ConnectorTasks) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ConnectV1ConnectorTasks) MarshalJSON() ([]byte, error) {
@@ -152,7 +153,11 @@ func (o ConnectV1ConnectorTasks) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["task"] = o.Task
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableConnectV1ConnectorTasks struct {
@@ -183,12 +188,14 @@ func NewNullableConnectV1ConnectorTasks(val *ConnectV1ConnectorTasks) *NullableC
 }
 
 func (v NullableConnectV1ConnectorTasks) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableConnectV1ConnectorTasks) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

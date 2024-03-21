@@ -26,6 +26,7 @@ Contact: connect@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -36,12 +37,12 @@ import (
 // ConnectV1ConnectorExpansionStatus Status of the connector and its tasks.
 type ConnectV1ConnectorExpansionStatus struct {
 	// The name of the connector.
-	Name string `json:"name"`
+	Name string `json:"name,omitempty"`
 	// Type of connector, sink or source.
-	Type string `json:"type"`
-	Connector ConnectV1ConnectorExpansionStatusConnector `json:"connector"`
+	Type      string                                     `json:"type,omitempty"`
+	Connector ConnectV1ConnectorExpansionStatusConnector `json:"connector,omitempty"`
 	// A map containing the task status.
-	Tasks *[]ConnectV1ConnectorExpansionStatusTasks `json:"tasks,omitempty"`
+	Tasks *[]InlineResponse2001Tasks `json:"tasks,omitempty"`
 }
 
 // NewConnectV1ConnectorExpansionStatus instantiates a new ConnectV1ConnectorExpansionStatus object
@@ -77,7 +78,7 @@ func (o *ConnectV1ConnectorExpansionStatus) GetName() string {
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *ConnectV1ConnectorExpansionStatus) GetNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Name, true
@@ -101,7 +102,7 @@ func (o *ConnectV1ConnectorExpansionStatus) GetType() string {
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
 func (o *ConnectV1ConnectorExpansionStatus) GetTypeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Type, true
@@ -125,7 +126,7 @@ func (o *ConnectV1ConnectorExpansionStatus) GetConnector() ConnectV1ConnectorExp
 // GetConnectorOk returns a tuple with the Connector field value
 // and a boolean to check if the value has been set.
 func (o *ConnectV1ConnectorExpansionStatus) GetConnectorOk() (*ConnectV1ConnectorExpansionStatusConnector, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Connector, true
@@ -137,9 +138,9 @@ func (o *ConnectV1ConnectorExpansionStatus) SetConnector(v ConnectV1ConnectorExp
 }
 
 // GetTasks returns the Tasks field value if set, zero value otherwise.
-func (o *ConnectV1ConnectorExpansionStatus) GetTasks() []ConnectV1ConnectorExpansionStatusTasks {
+func (o *ConnectV1ConnectorExpansionStatus) GetTasks() []InlineResponse2001Tasks {
 	if o == nil || o.Tasks == nil {
-		var ret []ConnectV1ConnectorExpansionStatusTasks
+		var ret []InlineResponse2001Tasks
 		return ret
 	}
 	return *o.Tasks
@@ -147,7 +148,7 @@ func (o *ConnectV1ConnectorExpansionStatus) GetTasks() []ConnectV1ConnectorExpan
 
 // GetTasksOk returns a tuple with the Tasks field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConnectV1ConnectorExpansionStatus) GetTasksOk() (*[]ConnectV1ConnectorExpansionStatusTasks, bool) {
+func (o *ConnectV1ConnectorExpansionStatus) GetTasksOk() (*[]InlineResponse2001Tasks, bool) {
 	if o == nil || o.Tasks == nil {
 		return nil, false
 	}
@@ -163,47 +164,47 @@ func (o *ConnectV1ConnectorExpansionStatus) HasTasks() bool {
 	return false
 }
 
-// SetTasks gets a reference to the given []ConnectV1ConnectorExpansionStatusTasks and assigns it to the Tasks field.
-func (o *ConnectV1ConnectorExpansionStatus) SetTasks(v []ConnectV1ConnectorExpansionStatusTasks) {
+// SetTasks gets a reference to the given []InlineResponse2001Tasks and assigns it to the Tasks field.
+func (o *ConnectV1ConnectorExpansionStatus) SetTasks(v []InlineResponse2001Tasks) {
 	o.Tasks = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ConnectV1ConnectorExpansionStatus) Redact() {
-    o.recurseRedact(&o.Name)
-    o.recurseRedact(&o.Type)
-    o.recurseRedact(&o.Connector)
-    o.recurseRedact(o.Tasks)
+	o.recurseRedact(&o.Name)
+	o.recurseRedact(&o.Type)
+	o.recurseRedact(&o.Connector)
+	o.recurseRedact(o.Tasks)
 }
 
 func (o *ConnectV1ConnectorExpansionStatus) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ConnectV1ConnectorExpansionStatus) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ConnectV1ConnectorExpansionStatus) MarshalJSON() ([]byte, error) {
@@ -220,7 +221,11 @@ func (o ConnectV1ConnectorExpansionStatus) MarshalJSON() ([]byte, error) {
 	if o.Tasks != nil {
 		toSerialize["tasks"] = o.Tasks
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableConnectV1ConnectorExpansionStatus struct {
@@ -251,12 +256,14 @@ func NewNullableConnectV1ConnectorExpansionStatus(val *ConnectV1ConnectorExpansi
 }
 
 func (v NullableConnectV1ConnectorExpansionStatus) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableConnectV1ConnectorExpansionStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
