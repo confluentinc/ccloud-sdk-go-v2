@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 ## ValidateConnectv1ConnectorPlugin
 
-> InlineResponse2003 ValidateConnectv1ConnectorPlugin(ctx, pluginName, environmentId, kafkaClusterId).ModelMap(modelMap).Execute()
+> InlineResponse2003 ValidateConnectv1ConnectorPlugin(ctx, pluginName, environmentId, kafkaClusterId).RequestBody(requestBody).Execute()
 
 Validate a Managed Connector Plugin
 
@@ -106,11 +106,11 @@ func main() {
     pluginName := "pluginName_example" // string | The unique name of the connector plugin.
     environmentId := "environmentId_example" // string | The unique identifier of the environment this resource belongs to.
     kafkaClusterId := "kafkaClusterId_example" // string | The unique identifier for the Kafka cluster.
-    modelMap := TODO // ModelMap | Configuration parameters for the connector. All values should be strings. (optional)
+    requestBody := map[string]string{"key": "Inner_example"} // map[string]string | Configuration parameters for the connector. All values should be strings. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ManagedConnectorPluginsConnectV1Api.ValidateConnectv1ConnectorPlugin(context.Background(), pluginName, environmentId, kafkaClusterId).ModelMap(modelMap).Execute()
+    resp, r, err := api_client.ManagedConnectorPluginsConnectV1Api.ValidateConnectv1ConnectorPlugin(context.Background(), pluginName, environmentId, kafkaClusterId).RequestBody(requestBody).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ManagedConnectorPluginsConnectV1Api.ValidateConnectv1ConnectorPlugin``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -140,7 +140,7 @@ Name | Type | Description  | Notes
 
 
 
- **modelMap** | [**ModelMap**](ModelMap.md) | Configuration parameters for the connector. All values should be strings. | 
+ **requestBody** | **map[string]string** | Configuration parameters for the connector. All values should be strings. | 
 
 ### Return type
 

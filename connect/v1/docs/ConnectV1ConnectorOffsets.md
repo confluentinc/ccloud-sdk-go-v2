@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** | The name of the connector. | [optional] 
 **Id** | Pointer to **string** | The ID of the connector. | [optional] 
-**Offsets** | Pointer to [**ConnectV1Offsets**](ConnectV1Offsets.md) |  | [optional] 
+**Offsets** | Pointer to **[]map[string]interface{}** | Array of offsets which are categorised into partitions. | [optional] 
 **Metadata** | Pointer to [**ConnectV1ConnectorOffsetsMetadata**](ConnectV1ConnectorOffsetsMetadata.md) |  | [optional] 
 
 ## Methods
@@ -80,20 +80,20 @@ HasId returns a boolean if a field has been set.
 
 ### GetOffsets
 
-`func (o *ConnectV1ConnectorOffsets) GetOffsets() ConnectV1Offsets`
+`func (o *ConnectV1ConnectorOffsets) GetOffsets() []map[string]interface{}`
 
 GetOffsets returns the Offsets field if non-nil, zero value otherwise.
 
 ### GetOffsetsOk
 
-`func (o *ConnectV1ConnectorOffsets) GetOffsetsOk() (*ConnectV1Offsets, bool)`
+`func (o *ConnectV1ConnectorOffsets) GetOffsetsOk() (*[]map[string]interface{}, bool)`
 
 GetOffsetsOk returns a tuple with the Offsets field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOffsets
 
-`func (o *ConnectV1ConnectorOffsets) SetOffsets(v ConnectV1Offsets)`
+`func (o *ConnectV1ConnectorOffsets) SetOffsets(v []map[string]interface{})`
 
 SetOffsets sets Offsets field to given value.
 

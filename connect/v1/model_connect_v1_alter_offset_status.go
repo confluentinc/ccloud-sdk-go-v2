@@ -37,9 +37,10 @@ import (
 
 // ConnectV1AlterOffsetStatus Status of the alter offset operation. The previous offsets in the response  is the offsets that the connector last processed, before the offsets were altered, via a patch or delete operation.
 type ConnectV1AlterOffsetStatus struct {
-	Request         ConnectV1AlterOffsetRequestInfo  `json:"request,omitempty"`
-	Status          ConnectV1AlterOffsetStatusStatus `json:"status,omitempty"`
-	PreviousOffsets *ConnectV1Offsets                `json:"previous_offsets,omitempty"`
+	Request ConnectV1AlterOffsetRequestInfo  `json:"request,omitempty"`
+	Status  ConnectV1AlterOffsetStatusStatus `json:"status,omitempty"`
+	// Array of offsets which are categorised into partitions.
+	PreviousOffsets *[]map[string]interface{} `json:"previous_offsets,omitempty"`
 	// The time at which the offsets were applied. The time is in UTC, ISO 8601 format.
 	AppliedAt NullableTime `json:"applied_at,omitempty"`
 }
@@ -112,9 +113,9 @@ func (o *ConnectV1AlterOffsetStatus) SetStatus(v ConnectV1AlterOffsetStatusStatu
 }
 
 // GetPreviousOffsets returns the PreviousOffsets field value if set, zero value otherwise.
-func (o *ConnectV1AlterOffsetStatus) GetPreviousOffsets() ConnectV1Offsets {
+func (o *ConnectV1AlterOffsetStatus) GetPreviousOffsets() []map[string]interface{} {
 	if o == nil || o.PreviousOffsets == nil {
-		var ret ConnectV1Offsets
+		var ret []map[string]interface{}
 		return ret
 	}
 	return *o.PreviousOffsets
@@ -122,7 +123,7 @@ func (o *ConnectV1AlterOffsetStatus) GetPreviousOffsets() ConnectV1Offsets {
 
 // GetPreviousOffsetsOk returns a tuple with the PreviousOffsets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConnectV1AlterOffsetStatus) GetPreviousOffsetsOk() (*ConnectV1Offsets, bool) {
+func (o *ConnectV1AlterOffsetStatus) GetPreviousOffsetsOk() (*[]map[string]interface{}, bool) {
 	if o == nil || o.PreviousOffsets == nil {
 		return nil, false
 	}
@@ -138,8 +139,8 @@ func (o *ConnectV1AlterOffsetStatus) HasPreviousOffsets() bool {
 	return false
 }
 
-// SetPreviousOffsets gets a reference to the given ConnectV1Offsets and assigns it to the PreviousOffsets field.
-func (o *ConnectV1AlterOffsetStatus) SetPreviousOffsets(v ConnectV1Offsets) {
+// SetPreviousOffsets gets a reference to the given []map[string]interface{} and assigns it to the PreviousOffsets field.
+func (o *ConnectV1AlterOffsetStatus) SetPreviousOffsets(v []map[string]interface{}) {
 	o.PreviousOffsets = &v
 }
 

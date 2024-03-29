@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## ListConnectv1ConnectorTasks
 
-> ConnectV1Connectors ListConnectv1ConnectorTasks(ctx, connectorName, environmentId, kafkaClusterId).Execute()
+> []map[string]interface{} ListConnectv1ConnectorTasks(ctx, connectorName, environmentId, kafkaClusterId).Execute()
 
 List of Connector Tasks
 
@@ -41,7 +41,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `StatusConnectV1Api.ListConnectv1ConnectorTasks``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListConnectv1ConnectorTasks`: ConnectV1Connectors
+    // response from `ListConnectv1ConnectorTasks`: []map[string]interface{}
     fmt.Fprintf(os.Stdout, "Response from `StatusConnectV1Api.ListConnectv1ConnectorTasks`: %v\n", resp)
 }
 ```
@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ConnectV1Connectors**](ConnectV1Connectors.md)
+**[]map[string]interface{}**
 
 ### Authorization
 

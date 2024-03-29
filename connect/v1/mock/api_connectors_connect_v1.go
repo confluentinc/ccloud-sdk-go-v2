@@ -48,7 +48,7 @@ type ConnectorsConnectV1Api struct {
 	ListConnectv1ConnectorsWithExpansionsFunc func(ctx context.Context, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorsWithExpansionsRequest
 
 	lockListConnectv1ConnectorsWithExpansionsExecute sync.Mutex
-	ListConnectv1ConnectorsWithExpansionsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorsWithExpansionsRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ConnectV1ConnectorExpansionMap, *net_http.Response, error)
+	ListConnectv1ConnectorsWithExpansionsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorsWithExpansionsRequest) (map[string]github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ConnectV1ConnectorExpansion, *net_http.Response, error)
 
 	lockReadConnectv1Connector sync.Mutex
 	ReadConnectv1ConnectorFunc func(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiReadConnectv1ConnectorRequest
@@ -584,7 +584,7 @@ func (m *ConnectorsConnectV1Api) ListConnectv1ConnectorsWithExpansionsCalls() []
 }
 
 // ListConnectv1ConnectorsWithExpansionsExecute mocks base method by wrapping the associated func.
-func (m *ConnectorsConnectV1Api) ListConnectv1ConnectorsWithExpansionsExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorsWithExpansionsRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ConnectV1ConnectorExpansionMap, *net_http.Response, error) {
+func (m *ConnectorsConnectV1Api) ListConnectv1ConnectorsWithExpansionsExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorsWithExpansionsRequest) (map[string]github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ConnectV1ConnectorExpansion, *net_http.Response, error) {
 	m.lockListConnectv1ConnectorsWithExpansionsExecute.Lock()
 	defer m.lockListConnectv1ConnectorsWithExpansionsExecute.Unlock()
 
