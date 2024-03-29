@@ -4112,6 +4112,9 @@ components:
       example:
         metadata:
           observed_at: 2024-02-20T15:14:19Z
+        offsets:
+        - '{}'
+        - '{}'
         name: name
         id: id
       properties:
@@ -4122,7 +4125,27 @@ components:
           description: The ID of the connector.
           type: string
         offsets:
-          $ref: '#/components/schemas/connect.v1.Offsets'
+          description: Array of offsets which are categorised into partitions.
+          items:
+            properties:
+              partition:
+                additionalProperties: true
+                description: "The partition information. For sink connectors this\
+                  \ is the kafka topic and \npartition. For source connectors this\
+                  \ is depends on the partitions defined by the \nsource connector.\
+                  \ For example, the table which this task is pulling data from in\
+                  \ a\nJDBC based MySQL source connector."
+                type: object
+              offset:
+                additionalProperties: true
+                description: "The offset of the partition. For sink connectors this\
+                  \ is the kafka offset. For \nsource connectors this is depends on\
+                  \ the offset defined by the source connector. \nFor example, the\
+                  \ timestamp and incrementing column info in a table, for a JDBC\
+                  \ based \nMySQL source connector."
+                type: object
+            type: object
+          type: array
         metadata:
           $ref: '#/components/schemas/connect_v1_ConnectorOffsets_metadata'
       type: object
@@ -4148,13 +4171,36 @@ components:
         type:
           $ref: '#/components/schemas/connect.v1.AlterOffsetRequestType'
         offsets:
-          $ref: '#/components/schemas/connect.v1.Offsets'
+          description: Array of offsets which are categorised into partitions.
+          items:
+            properties:
+              partition:
+                additionalProperties: true
+                description: "The partition information. For sink connectors this\
+                  \ is the kafka topic and \npartition. For source connectors this\
+                  \ is depends on the partitions defined by the \nsource connector.\
+                  \ For example, the table which this task is pulling data from in\
+                  \ a\nJDBC based MySQL source connector."
+                type: object
+              offset:
+                additionalProperties: true
+                description: "The offset of the partition. For sink connectors this\
+                  \ is the kafka offset. For \nsource connectors this is depends on\
+                  \ the offset defined by the source connector. \nFor example, the\
+                  \ timestamp and incrementing column info in a table, for a JDBC\
+                  \ based \nMySQL source connector."
+                type: object
+            type: object
+          type: array
       required:
       - type
       type: object
     connect.v1.AlterOffsetRequestInfo:
       description: The request made to alter offsets.
       example:
+        offsets:
+        - '{}'
+        - '{}'
         name: name
         id: id
         requested_at: 2024-02-20T15:14:19Z
@@ -4166,7 +4212,27 @@ components:
           description: The name of the connector.
           type: string
         offsets:
-          $ref: '#/components/schemas/connect.v1.Offsets'
+          description: Array of offsets which are categorised into partitions.
+          items:
+            properties:
+              partition:
+                additionalProperties: true
+                description: "The partition information. For sink connectors this\
+                  \ is the kafka topic and \npartition. For source connectors this\
+                  \ is depends on the partitions defined by the \nsource connector.\
+                  \ For example, the table which this task is pulling data from in\
+                  \ a\nJDBC based MySQL source connector."
+                type: object
+              offset:
+                additionalProperties: true
+                description: "The offset of the partition. For sink connectors this\
+                  \ is the kafka offset. For \nsource connectors this is depends on\
+                  \ the offset defined by the source connector. \nFor example, the\
+                  \ timestamp and incrementing column info in a table, for a JDBC\
+                  \ based \nMySQL source connector."
+                type: object
+            type: object
+          type: array
         requested_at:
           description: The time at which the request was made. The time is in UTC,
             ISO 8601 format.
@@ -4188,10 +4254,16 @@ components:
         \ the offsets were altered,\nvia a patch or delete operation."
       example:
         request:
+          offsets:
+          - '{}'
+          - '{}'
           name: name
           id: id
           requested_at: 2024-02-20T15:14:19Z
         applied_at: 2024-02-20T15:14:19Z
+        previous_offsets:
+        - '{}'
+        - '{}'
         status:
           phase: phase
           message: message
@@ -4201,7 +4273,27 @@ components:
         status:
           $ref: '#/components/schemas/connect_v1_AlterOffsetStatus_status'
         previous_offsets:
-          $ref: '#/components/schemas/connect.v1.Offsets'
+          description: Array of offsets which are categorised into partitions.
+          items:
+            properties:
+              partition:
+                additionalProperties: true
+                description: "The partition information. For sink connectors this\
+                  \ is the kafka topic and \npartition. For source connectors this\
+                  \ is depends on the partitions defined by the \nsource connector.\
+                  \ For example, the table which this task is pulling data from in\
+                  \ a\nJDBC based MySQL source connector."
+                type: object
+              offset:
+                additionalProperties: true
+                description: "The offset of the partition. For sink connectors this\
+                  \ is the kafka offset. For \nsource connectors this is depends on\
+                  \ the offset defined by the source connector. \nFor example, the\
+                  \ timestamp and incrementing column info in a table, for a JDBC\
+                  \ based \nMySQL source connector."
+                type: object
+            type: object
+          type: array
         applied_at:
           description: The time at which the offsets were applied. The time is in
             UTC, ISO 8601 format.

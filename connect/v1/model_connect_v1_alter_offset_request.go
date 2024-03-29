@@ -36,8 +36,9 @@ import (
 
 // ConnectV1AlterOffsetRequest Request to alter the offset of a connector. The offsets parameter is options for DELETE type.
 type ConnectV1AlterOffsetRequest struct {
-	Type    ConnectV1AlterOffsetRequestType `json:"type,omitempty"`
-	Offsets *ConnectV1Offsets               `json:"offsets,omitempty"`
+	Type ConnectV1AlterOffsetRequestType `json:"type,omitempty"`
+	// Array of offsets which are categorised into partitions.
+	Offsets *[]map[string]interface{} `json:"offsets,omitempty"`
 }
 
 // NewConnectV1AlterOffsetRequest instantiates a new ConnectV1AlterOffsetRequest object
@@ -83,9 +84,9 @@ func (o *ConnectV1AlterOffsetRequest) SetType(v ConnectV1AlterOffsetRequestType)
 }
 
 // GetOffsets returns the Offsets field value if set, zero value otherwise.
-func (o *ConnectV1AlterOffsetRequest) GetOffsets() ConnectV1Offsets {
+func (o *ConnectV1AlterOffsetRequest) GetOffsets() []map[string]interface{} {
 	if o == nil || o.Offsets == nil {
-		var ret ConnectV1Offsets
+		var ret []map[string]interface{}
 		return ret
 	}
 	return *o.Offsets
@@ -93,7 +94,7 @@ func (o *ConnectV1AlterOffsetRequest) GetOffsets() ConnectV1Offsets {
 
 // GetOffsetsOk returns a tuple with the Offsets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConnectV1AlterOffsetRequest) GetOffsetsOk() (*ConnectV1Offsets, bool) {
+func (o *ConnectV1AlterOffsetRequest) GetOffsetsOk() (*[]map[string]interface{}, bool) {
 	if o == nil || o.Offsets == nil {
 		return nil, false
 	}
@@ -109,8 +110,8 @@ func (o *ConnectV1AlterOffsetRequest) HasOffsets() bool {
 	return false
 }
 
-// SetOffsets gets a reference to the given ConnectV1Offsets and assigns it to the Offsets field.
-func (o *ConnectV1AlterOffsetRequest) SetOffsets(v ConnectV1Offsets) {
+// SetOffsets gets a reference to the given []map[string]interface{} and assigns it to the Offsets field.
+func (o *ConnectV1AlterOffsetRequest) SetOffsets(v []map[string]interface{}) {
 	o.Offsets = &v
 }
 

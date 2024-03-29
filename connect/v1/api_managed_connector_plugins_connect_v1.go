@@ -229,12 +229,12 @@ type ApiValidateConnectv1ConnectorPluginRequest struct {
 	pluginName     string
 	environmentId  string
 	kafkaClusterId string
-	modelMap       *map[string]string
+	requestBody    *map[string]string
 }
 
 // Configuration parameters for the connector. All values should be strings.
-func (r ApiValidateConnectv1ConnectorPluginRequest) ModelMap(modelMap map[string]string) ApiValidateConnectv1ConnectorPluginRequest {
-	r.modelMap = &modelMap
+func (r ApiValidateConnectv1ConnectorPluginRequest) RequestBody(requestBody map[string]string) ApiValidateConnectv1ConnectorPluginRequest {
+	r.requestBody = &requestBody
 	return r
 }
 
@@ -310,7 +310,7 @@ func (a *ManagedConnectorPluginsConnectV1ApiService) ValidateConnectv1ConnectorP
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.modelMap
+	localVarPostBody = r.requestBody
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

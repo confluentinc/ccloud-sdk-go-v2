@@ -91,7 +91,7 @@ Name | Type | Description  | Notes
 
 ## CreateOrUpdateConnectv1ConnectorConfig
 
-> ConnectV1Connector CreateOrUpdateConnectv1ConnectorConfig(ctx, connectorName, environmentId, kafkaClusterId).ModelMap(modelMap).Execute()
+> ConnectV1Connector CreateOrUpdateConnectv1ConnectorConfig(ctx, connectorName, environmentId, kafkaClusterId).RequestBody(requestBody).Execute()
 
 Create or Update a Connector Configuration
 
@@ -113,11 +113,11 @@ func main() {
     connectorName := "connectorName_example" // string | The unique name of the connector.
     environmentId := "environmentId_example" // string | The unique identifier of the environment this resource belongs to.
     kafkaClusterId := "kafkaClusterId_example" // string | The unique identifier for the Kafka cluster.
-    modelMap := TODO // ModelMap | Configuration parameters for the connector. All values should be strings. (optional)
+    requestBody := map[string]string{"key": "Inner_example"} // map[string]string | Configuration parameters for the connector. All values should be strings. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ConnectorsConnectV1Api.CreateOrUpdateConnectv1ConnectorConfig(context.Background(), connectorName, environmentId, kafkaClusterId).ModelMap(modelMap).Execute()
+    resp, r, err := api_client.ConnectorsConnectV1Api.CreateOrUpdateConnectv1ConnectorConfig(context.Background(), connectorName, environmentId, kafkaClusterId).RequestBody(requestBody).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConnectorsConnectV1Api.CreateOrUpdateConnectv1ConnectorConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 
 
 
- **modelMap** | [**ModelMap**](ModelMap.md) | Configuration parameters for the connector. All values should be strings. | 
+ **requestBody** | **map[string]string** | Configuration parameters for the connector. All values should be strings. | 
 
 ### Return type
 
@@ -394,7 +394,7 @@ Name | Type | Description  | Notes
 
 ## ListConnectv1ConnectorsWithExpansions
 
-> ConnectV1ConnectorExpansionMap ListConnectv1ConnectorsWithExpansions(ctx, environmentId, kafkaClusterId).Expand(expand).Execute()
+> map[string]ConnectV1ConnectorExpansion ListConnectv1ConnectorsWithExpansions(ctx, environmentId, kafkaClusterId).Expand(expand).Execute()
 
 List of Connectors with Expansions
 
@@ -424,7 +424,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ConnectorsConnectV1Api.ListConnectv1ConnectorsWithExpansions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListConnectv1ConnectorsWithExpansions`: ConnectV1ConnectorExpansionMap
+    // response from `ListConnectv1ConnectorsWithExpansions`: map[string]ConnectV1ConnectorExpansion
     fmt.Fprintf(os.Stdout, "Response from `ConnectorsConnectV1Api.ListConnectv1ConnectorsWithExpansions`: %v\n", resp)
 }
 ```
@@ -451,7 +451,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ConnectV1ConnectorExpansionMap**](ConnectV1ConnectorExpansionMap.md)
+[**map[string]ConnectV1ConnectorExpansion**](ConnectV1ConnectorExpansion.md)
 
 ### Authorization
 

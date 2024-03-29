@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | [**ConnectV1AlterOffsetRequestType**](ConnectV1AlterOffsetRequestType.md) |  | 
-**Offsets** | Pointer to [**ConnectV1Offsets**](ConnectV1Offsets.md) |  | [optional] 
+**Offsets** | Pointer to **[]map[string]interface{}** | Array of offsets which are categorised into partitions. | [optional] 
 
 ## Methods
 
@@ -48,20 +48,20 @@ SetType sets Type field to given value.
 
 ### GetOffsets
 
-`func (o *ConnectV1AlterOffsetRequest) GetOffsets() ConnectV1Offsets`
+`func (o *ConnectV1AlterOffsetRequest) GetOffsets() []map[string]interface{}`
 
 GetOffsets returns the Offsets field if non-nil, zero value otherwise.
 
 ### GetOffsetsOk
 
-`func (o *ConnectV1AlterOffsetRequest) GetOffsetsOk() (*ConnectV1Offsets, bool)`
+`func (o *ConnectV1AlterOffsetRequest) GetOffsetsOk() (*[]map[string]interface{}, bool)`
 
 GetOffsetsOk returns a tuple with the Offsets field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOffsets
 
-`func (o *ConnectV1AlterOffsetRequest) SetOffsets(v ConnectV1Offsets)`
+`func (o *ConnectV1AlterOffsetRequest) SetOffsets(v []map[string]interface{})`
 
 SetOffsets sets Offsets field to given value.
 

@@ -147,8 +147,8 @@ type ConnectorsConnectV1Api interface {
 	ListConnectv1ConnectorsWithExpansions(ctx _context.Context, environmentId string, kafkaClusterId string) ApiListConnectv1ConnectorsWithExpansionsRequest
 
 	// ListConnectv1ConnectorsWithExpansionsExecute executes the request
-	//  @return ConnectV1ConnectorExpansionMap
-	ListConnectv1ConnectorsWithExpansionsExecute(r ApiListConnectv1ConnectorsWithExpansionsRequest) (ConnectV1ConnectorExpansionMap, *_nethttp.Response, error)
+	//  @return map[string]ConnectV1ConnectorExpansion
+	ListConnectv1ConnectorsWithExpansionsExecute(r ApiListConnectv1ConnectorsWithExpansionsRequest) (map[string]ConnectV1ConnectorExpansion, *_nethttp.Response, error)
 
 	/*
 		ReadConnectv1Connector Read a Connector
@@ -328,12 +328,12 @@ type ApiCreateOrUpdateConnectv1ConnectorConfigRequest struct {
 	connectorName  string
 	environmentId  string
 	kafkaClusterId string
-	modelMap       *map[string]string
+	requestBody    *map[string]string
 }
 
 // Configuration parameters for the connector. All values should be strings.
-func (r ApiCreateOrUpdateConnectv1ConnectorConfigRequest) ModelMap(modelMap map[string]string) ApiCreateOrUpdateConnectv1ConnectorConfigRequest {
-	r.modelMap = &modelMap
+func (r ApiCreateOrUpdateConnectv1ConnectorConfigRequest) RequestBody(requestBody map[string]string) ApiCreateOrUpdateConnectv1ConnectorConfigRequest {
+	r.requestBody = &requestBody
 	return r
 }
 
@@ -407,7 +407,7 @@ func (a *ConnectorsConnectV1ApiService) CreateOrUpdateConnectv1ConnectorConfigEx
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.modelMap
+	localVarPostBody = r.requestBody
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -929,7 +929,7 @@ func (r ApiListConnectv1ConnectorsWithExpansionsRequest) Expand(expand string) A
 	return r
 }
 
-func (r ApiListConnectv1ConnectorsWithExpansionsRequest) Execute() (ConnectV1ConnectorExpansionMap, *_nethttp.Response, error) {
+func (r ApiListConnectv1ConnectorsWithExpansionsRequest) Execute() (map[string]ConnectV1ConnectorExpansion, *_nethttp.Response, error) {
 	return r.ApiService.ListConnectv1ConnectorsWithExpansionsExecute(r)
 }
 
@@ -956,15 +956,15 @@ func (a *ConnectorsConnectV1ApiService) ListConnectv1ConnectorsWithExpansions(ct
 
 // Execute executes the request
 //
-//	@return ConnectV1ConnectorExpansionMap
-func (a *ConnectorsConnectV1ApiService) ListConnectv1ConnectorsWithExpansionsExecute(r ApiListConnectv1ConnectorsWithExpansionsRequest) (ConnectV1ConnectorExpansionMap, *_nethttp.Response, error) {
+//	@return map[string]ConnectV1ConnectorExpansion
+func (a *ConnectorsConnectV1ApiService) ListConnectv1ConnectorsWithExpansionsExecute(r ApiListConnectv1ConnectorsWithExpansionsRequest) (map[string]ConnectV1ConnectorExpansion, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ConnectV1ConnectorExpansionMap
+		localVarReturnValue  map[string]ConnectV1ConnectorExpansion
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectorsConnectV1ApiService.ListConnectv1ConnectorsWithExpansions")
