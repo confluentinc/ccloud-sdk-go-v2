@@ -40,8 +40,9 @@ type ConnectV1AlterOffsetRequestInfo struct {
 	// The ID of the connector.
 	Id string `json:"id,omitempty"`
 	// The name of the connector.
-	Name    string            `json:"name,omitempty"`
-	Offsets *ConnectV1Offsets `json:"offsets,omitempty"`
+	Name string `json:"name,omitempty"`
+	// Array of offsets which are categorised into partitions.
+	Offsets *[]map[string]interface{} `json:"offsets,omitempty"`
 	// The time at which the request was made. The time is in UTC, ISO 8601 format.
 	RequestedAt time.Time                       `json:"requested_at,omitempty"`
 	Type        ConnectV1AlterOffsetRequestType `json:"type,omitempty"`
@@ -117,9 +118,9 @@ func (o *ConnectV1AlterOffsetRequestInfo) SetName(v string) {
 }
 
 // GetOffsets returns the Offsets field value if set, zero value otherwise.
-func (o *ConnectV1AlterOffsetRequestInfo) GetOffsets() ConnectV1Offsets {
+func (o *ConnectV1AlterOffsetRequestInfo) GetOffsets() []map[string]interface{} {
 	if o == nil || o.Offsets == nil {
-		var ret ConnectV1Offsets
+		var ret []map[string]interface{}
 		return ret
 	}
 	return *o.Offsets
@@ -127,7 +128,7 @@ func (o *ConnectV1AlterOffsetRequestInfo) GetOffsets() ConnectV1Offsets {
 
 // GetOffsetsOk returns a tuple with the Offsets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConnectV1AlterOffsetRequestInfo) GetOffsetsOk() (*ConnectV1Offsets, bool) {
+func (o *ConnectV1AlterOffsetRequestInfo) GetOffsetsOk() (*[]map[string]interface{}, bool) {
 	if o == nil || o.Offsets == nil {
 		return nil, false
 	}
@@ -143,8 +144,8 @@ func (o *ConnectV1AlterOffsetRequestInfo) HasOffsets() bool {
 	return false
 }
 
-// SetOffsets gets a reference to the given ConnectV1Offsets and assigns it to the Offsets field.
-func (o *ConnectV1AlterOffsetRequestInfo) SetOffsets(v ConnectV1Offsets) {
+// SetOffsets gets a reference to the given []map[string]interface{} and assigns it to the Offsets field.
+func (o *ConnectV1AlterOffsetRequestInfo) SetOffsets(v []map[string]interface{}) {
 	o.Offsets = &v
 }
 

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Request** | [**ConnectV1AlterOffsetRequestInfo**](ConnectV1AlterOffsetRequestInfo.md) |  | 
 **Status** | [**ConnectV1AlterOffsetStatusStatus**](ConnectV1AlterOffsetStatusStatus.md) |  | 
-**PreviousOffsets** | Pointer to [**ConnectV1Offsets**](ConnectV1Offsets.md) |  | [optional] 
+**PreviousOffsets** | Pointer to **[]map[string]interface{}** | Array of offsets which are categorised into partitions. | [optional] 
 **AppliedAt** | Pointer to **NullableTime** | The time at which the offsets were applied. The time is in UTC, ISO 8601 format. | [optional] [readonly] 
 
 ## Methods
@@ -70,20 +70,20 @@ SetStatus sets Status field to given value.
 
 ### GetPreviousOffsets
 
-`func (o *ConnectV1AlterOffsetStatus) GetPreviousOffsets() ConnectV1Offsets`
+`func (o *ConnectV1AlterOffsetStatus) GetPreviousOffsets() []map[string]interface{}`
 
 GetPreviousOffsets returns the PreviousOffsets field if non-nil, zero value otherwise.
 
 ### GetPreviousOffsetsOk
 
-`func (o *ConnectV1AlterOffsetStatus) GetPreviousOffsetsOk() (*ConnectV1Offsets, bool)`
+`func (o *ConnectV1AlterOffsetStatus) GetPreviousOffsetsOk() (*[]map[string]interface{}, bool)`
 
 GetPreviousOffsetsOk returns a tuple with the PreviousOffsets field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPreviousOffsets
 
-`func (o *ConnectV1AlterOffsetStatus) SetPreviousOffsets(v ConnectV1Offsets)`
+`func (o *ConnectV1AlterOffsetStatus) SetPreviousOffsets(v []map[string]interface{})`
 
 SetPreviousOffsets sets PreviousOffsets field to given value.
 

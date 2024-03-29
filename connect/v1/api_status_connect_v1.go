@@ -42,23 +42,23 @@ var (
 type StatusConnectV1Api interface {
 
 	/*
-		ListConnectv1ConnectorTasks List of Connector Tasks
+			ListConnectv1ConnectorTasks List of Connector Tasks
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Get a list of tasks currently running for the connector.
+		Get a list of tasks currently running for the connector.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param connectorName The unique name of the connector.
-		 @param environmentId The unique identifier of the environment this resource belongs to.
-		 @param kafkaClusterId The unique identifier for the Kafka cluster.
-		 @return ApiListConnectv1ConnectorTasksRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param connectorName The unique name of the connector.
+			 @param environmentId The unique identifier of the environment this resource belongs to.
+			 @param kafkaClusterId The unique identifier for the Kafka cluster.
+			 @return ApiListConnectv1ConnectorTasksRequest
 	*/
 	ListConnectv1ConnectorTasks(ctx _context.Context, connectorName string, environmentId string, kafkaClusterId string) ApiListConnectv1ConnectorTasksRequest
 
 	// ListConnectv1ConnectorTasksExecute executes the request
-	//  @return ConnectV1Connectors
-	ListConnectv1ConnectorTasksExecute(r ApiListConnectv1ConnectorTasksRequest) (ConnectV1Connectors, *_nethttp.Response, error)
+	//  @return []map[string]interface{}
+	ListConnectv1ConnectorTasksExecute(r ApiListConnectv1ConnectorTasksRequest) ([]map[string]interface{}, *_nethttp.Response, error)
 
 	/*
 		ReadConnectv1ConnectorStatus Read a Connector Status
@@ -89,7 +89,7 @@ type ApiListConnectv1ConnectorTasksRequest struct {
 	kafkaClusterId string
 }
 
-func (r ApiListConnectv1ConnectorTasksRequest) Execute() (ConnectV1Connectors, *_nethttp.Response, error) {
+func (r ApiListConnectv1ConnectorTasksRequest) Execute() ([]map[string]interface{}, *_nethttp.Response, error) {
 	return r.ApiService.ListConnectv1ConnectorTasksExecute(r)
 }
 
@@ -118,15 +118,15 @@ func (a *StatusConnectV1ApiService) ListConnectv1ConnectorTasks(ctx _context.Con
 
 // Execute executes the request
 //
-//	@return ConnectV1Connectors
-func (a *StatusConnectV1ApiService) ListConnectv1ConnectorTasksExecute(r ApiListConnectv1ConnectorTasksRequest) (ConnectV1Connectors, *_nethttp.Response, error) {
+//	@return []map[string]interface{}
+func (a *StatusConnectV1ApiService) ListConnectv1ConnectorTasksExecute(r ApiListConnectv1ConnectorTasksRequest) ([]map[string]interface{}, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ConnectV1Connectors
+		localVarReturnValue  []map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StatusConnectV1ApiService.ListConnectv1ConnectorTasks")

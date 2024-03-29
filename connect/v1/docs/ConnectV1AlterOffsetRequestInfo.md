@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | The ID of the connector. | 
 **Name** | **string** | The name of the connector. | 
-**Offsets** | Pointer to [**ConnectV1Offsets**](ConnectV1Offsets.md) |  | [optional] 
+**Offsets** | Pointer to **[]map[string]interface{}** | Array of offsets which are categorised into partitions. | [optional] 
 **RequestedAt** | **time.Time** | The time at which the request was made. The time is in UTC, ISO 8601 format. | [readonly] 
 **Type** | [**ConnectV1AlterOffsetRequestType**](ConnectV1AlterOffsetRequestType.md) |  | 
 
@@ -71,20 +71,20 @@ SetName sets Name field to given value.
 
 ### GetOffsets
 
-`func (o *ConnectV1AlterOffsetRequestInfo) GetOffsets() ConnectV1Offsets`
+`func (o *ConnectV1AlterOffsetRequestInfo) GetOffsets() []map[string]interface{}`
 
 GetOffsets returns the Offsets field if non-nil, zero value otherwise.
 
 ### GetOffsetsOk
 
-`func (o *ConnectV1AlterOffsetRequestInfo) GetOffsetsOk() (*ConnectV1Offsets, bool)`
+`func (o *ConnectV1AlterOffsetRequestInfo) GetOffsetsOk() (*[]map[string]interface{}, bool)`
 
 GetOffsetsOk returns a tuple with the Offsets field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOffsets
 
-`func (o *ConnectV1AlterOffsetRequestInfo) SetOffsets(v ConnectV1Offsets)`
+`func (o *ConnectV1AlterOffsetRequestInfo) SetOffsets(v []map[string]interface{})`
 
 SetOffsets sets Offsets field to given value.
 
