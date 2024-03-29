@@ -36,7 +36,7 @@ import (
 
 // NetworkingV1DnsRecordStatus The status of the Dns Record
 type NetworkingV1DnsRecordStatus struct {
-	// The lifecycle phase of the DNS record:    PROVISIONING: DNS record provisioning is in progress;    READY: DNS record is ready;    FAILED: DNS record is in a failed state;    DEPROVISIONING: DNS record deprovisioning is in progress;
+	// The lifecycle phase of the DNS record:    PROVISIONING: DNS record provisioning is in progress;    CREATED: DNS record is created. It will automatically become ready once a Kafka cluster is provisioned;    READY: DNS record is ready;    FAILED: DNS record is in a failed state;    DEPROVISIONING: DNS record deprovisioning is in progress;
 	Phase string `json:"phase,omitempty"`
 	// Error code if the DNS record is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`

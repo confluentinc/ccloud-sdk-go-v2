@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Phase** | **string** | The lifecycle phase of the DNS record:    PROVISIONING: DNS record provisioning is in progress;    READY: DNS record is ready;    FAILED: DNS record is in a failed state;    DEPROVISIONING: DNS record deprovisioning is in progress;  | [readonly] 
+**Phase** | **string** | The lifecycle phase of the DNS record:    PROVISIONING: DNS record provisioning is in progress;    CREATED: DNS record is created. It will automatically become ready once a Kafka cluster is provisioned;    READY: DNS record is ready;    FAILED: DNS record is in a failed state;    DEPROVISIONING: DNS record deprovisioning is in progress;  | [readonly] 
 **ErrorCode** | Pointer to **string** | Error code if the DNS record is in a failed state. May be used for programmatic error checking. | [optional] [readonly] 
 **ErrorMessage** | Pointer to **string** | Displayable error message if the DNS record is in a failed state. | [optional] [readonly] 
 
