@@ -36,7 +36,7 @@ import (
 
 // NetworkingV1DnsForwarderStatus The status of the Dns Forwarder
 type NetworkingV1DnsForwarderStatus struct {
-	// The lifecycle phase of the dns forwarder:    PROVISIONING: dns forwarder provisioning is in progress;    READY: dns forwarder is ready;    FAILED: dns forwarder is in a failed state;    DEPROVISIONING: dns forwarder deprovisioning is in progress;
+	// The lifecycle phase of the DNS forwarder:    PROVISIONING: DNS forwarder provisioning is in progress;    CREATED: DNS forwarder is created. It will automatically become ready once a Kafka cluster is provisioned;    READY: DNS forwarder is ready;    FAILED: DNS forwarder is in a failed state;    DEGRADED: DNS forwarder is in a degraded state, transitioning from 'READY' due to unreachable DNS resolvers;    DEPROVISIONING: DNS forwarder deprovisioning is in progress;
 	Phase string `json:"phase,omitempty"`
 	// Error code if dns forwarder is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`

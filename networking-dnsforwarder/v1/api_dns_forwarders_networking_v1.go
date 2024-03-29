@@ -151,8 +151,8 @@ CreateNetworkingV1DnsForwarder Create a DNS Forwarder
 
 Make a request to create a DNS forwarder.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateNetworkingV1DnsForwarderRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateNetworkingV1DnsForwarderRequest
 */
 func (a *DNSForwardersNetworkingV1ApiService) CreateNetworkingV1DnsForwarder(ctx _context.Context) ApiCreateNetworkingV1DnsForwarderRequest {
 	return ApiCreateNetworkingV1DnsForwarderRequest{
@@ -162,7 +162,8 @@ func (a *DNSForwardersNetworkingV1ApiService) CreateNetworkingV1DnsForwarder(ctx
 }
 
 // Execute executes the request
-//  @return NetworkingV1DnsForwarder
+//
+//	@return NetworkingV1DnsForwarder
 func (a *DNSForwardersNetworkingV1ApiService) CreateNetworkingV1DnsForwarderExecute(r ApiCreateNetworkingV1DnsForwarderRequest) (NetworkingV1DnsForwarder, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -323,9 +324,9 @@ DeleteNetworkingV1DnsForwarder Delete a DNS Forwarder
 
 Make a request to delete a DNS forwarder.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the DNS forwarder.
- @return ApiDeleteNetworkingV1DnsForwarderRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the DNS forwarder.
+	@return ApiDeleteNetworkingV1DnsForwarderRequest
 */
 func (a *DNSForwardersNetworkingV1ApiService) DeleteNetworkingV1DnsForwarder(ctx _context.Context, id string) ApiDeleteNetworkingV1DnsForwarderRequest {
 	return ApiDeleteNetworkingV1DnsForwarderRequest{
@@ -479,9 +480,9 @@ GetNetworkingV1DnsForwarder Read a DNS Forwarder
 
 Make a request to read a DNS forwarder.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the DNS forwarder.
- @return ApiGetNetworkingV1DnsForwarderRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the DNS forwarder.
+	@return ApiGetNetworkingV1DnsForwarderRequest
 */
 func (a *DNSForwardersNetworkingV1ApiService) GetNetworkingV1DnsForwarder(ctx _context.Context, id string) ApiGetNetworkingV1DnsForwarderRequest {
 	return ApiGetNetworkingV1DnsForwarderRequest{
@@ -492,7 +493,8 @@ func (a *DNSForwardersNetworkingV1ApiService) GetNetworkingV1DnsForwarder(ctx _c
 }
 
 // Execute executes the request
-//  @return NetworkingV1DnsForwarder
+//
+//	@return NetworkingV1DnsForwarder
 func (a *DNSForwardersNetworkingV1ApiService) GetNetworkingV1DnsForwarderExecute(r ApiGetNetworkingV1DnsForwarderRequest) (NetworkingV1DnsForwarder, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -659,8 +661,8 @@ ListNetworkingV1DnsForwarders List of DNS Forwarders
 
 Retrieve a sorted, filtered, paginated list of all DNS forwarders.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListNetworkingV1DnsForwardersRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListNetworkingV1DnsForwardersRequest
 */
 func (a *DNSForwardersNetworkingV1ApiService) ListNetworkingV1DnsForwarders(ctx _context.Context) ApiListNetworkingV1DnsForwardersRequest {
 	return ApiListNetworkingV1DnsForwardersRequest{
@@ -670,7 +672,8 @@ func (a *DNSForwardersNetworkingV1ApiService) ListNetworkingV1DnsForwarders(ctx 
 }
 
 // Execute executes the request
-//  @return NetworkingV1DnsForwarderList
+//
+//	@return NetworkingV1DnsForwarderList
 func (a *DNSForwardersNetworkingV1ApiService) ListNetworkingV1DnsForwardersExecute(r ApiListNetworkingV1DnsForwardersRequest) (NetworkingV1DnsForwarderList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -818,11 +821,9 @@ UpdateNetworkingV1DnsForwarder Update a DNS Forwarder
 
 Make a request to update a DNS forwarder.
 
-
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the DNS forwarder.
- @return ApiUpdateNetworkingV1DnsForwarderRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the DNS forwarder.
+	@return ApiUpdateNetworkingV1DnsForwarderRequest
 */
 func (a *DNSForwardersNetworkingV1ApiService) UpdateNetworkingV1DnsForwarder(ctx _context.Context, id string) ApiUpdateNetworkingV1DnsForwarderRequest {
 	return ApiUpdateNetworkingV1DnsForwarderRequest{
@@ -833,7 +834,8 @@ func (a *DNSForwardersNetworkingV1ApiService) UpdateNetworkingV1DnsForwarder(ctx
 }
 
 // Execute executes the request
-//  @return NetworkingV1DnsForwarder
+//
+//	@return NetworkingV1DnsForwarder
 func (a *DNSForwardersNetworkingV1ApiService) UpdateNetworkingV1DnsForwarderExecute(r ApiUpdateNetworkingV1DnsForwarderRequest) (NetworkingV1DnsForwarder, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch

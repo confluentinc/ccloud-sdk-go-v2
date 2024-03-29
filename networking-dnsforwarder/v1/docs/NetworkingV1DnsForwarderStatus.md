@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Phase** | **string** | The lifecycle phase of the dns forwarder:    PROVISIONING: dns forwarder provisioning is in progress;    READY: dns forwarder is ready;    FAILED: dns forwarder is in a failed state;    DEPROVISIONING: dns forwarder deprovisioning is in progress;  | [readonly] 
+**Phase** | **string** | The lifecycle phase of the DNS forwarder:    PROVISIONING: DNS forwarder provisioning is in progress;    CREATED: DNS forwarder is created. It will automatically become ready once a Kafka cluster is provisioned;    READY: DNS forwarder is ready;    FAILED: DNS forwarder is in a failed state;    DEGRADED: DNS forwarder is in a degraded state, transitioning from &#39;READY&#39; due to unreachable DNS resolvers;    DEPROVISIONING: DNS forwarder deprovisioning is in progress;  | [readonly] 
 **ErrorCode** | Pointer to **string** | Error code if dns forwarder is in a failed state. May be used for programmatic error checking. | [optional] [readonly] 
 **ErrorMessage** | Pointer to **string** | Displayable error message if dns forwarder is in a failed state | [optional] [readonly] 
 
