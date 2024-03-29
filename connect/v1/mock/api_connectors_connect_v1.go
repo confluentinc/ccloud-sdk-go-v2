@@ -9,52 +9,52 @@ import (
 	net_http "net/http"
 	sync "sync"
 
-	github_com_confluentinc_ccloud_sdk_go_v2_connect "github.com/confluentinc/ccloud-sdk-go-v2/connect"
+	github_com_confluentinc_ccloud_sdk_go_v2_connect_v1 "github.com/confluentinc/ccloud-sdk-go-v2/connect/v1"
 )
 
 // ConnectorsConnectV1Api is a mock of ConnectorsConnectV1Api interface
 type ConnectorsConnectV1Api struct {
 	lockCreateConnectv1Connector sync.Mutex
-	CreateConnectv1ConnectorFunc func(ctx context.Context, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiCreateConnectv1ConnectorRequest
+	CreateConnectv1ConnectorFunc func(ctx context.Context, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiCreateConnectv1ConnectorRequest
 
 	lockCreateConnectv1ConnectorExecute sync.Mutex
-	CreateConnectv1ConnectorExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiCreateConnectv1ConnectorRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect.ConnectV1Connector, *net_http.Response, error)
+	CreateConnectv1ConnectorExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiCreateConnectv1ConnectorRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ConnectV1Connector, *net_http.Response, error)
 
 	lockCreateOrUpdateConnectv1ConnectorConfig sync.Mutex
-	CreateOrUpdateConnectv1ConnectorConfigFunc func(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiCreateOrUpdateConnectv1ConnectorConfigRequest
+	CreateOrUpdateConnectv1ConnectorConfigFunc func(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiCreateOrUpdateConnectv1ConnectorConfigRequest
 
 	lockCreateOrUpdateConnectv1ConnectorConfigExecute sync.Mutex
-	CreateOrUpdateConnectv1ConnectorConfigExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiCreateOrUpdateConnectv1ConnectorConfigRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect.ConnectV1Connector, *net_http.Response, error)
+	CreateOrUpdateConnectv1ConnectorConfigExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiCreateOrUpdateConnectv1ConnectorConfigRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ConnectV1Connector, *net_http.Response, error)
 
 	lockDeleteConnectv1Connector sync.Mutex
-	DeleteConnectv1ConnectorFunc func(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiDeleteConnectv1ConnectorRequest
+	DeleteConnectv1ConnectorFunc func(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiDeleteConnectv1ConnectorRequest
 
 	lockDeleteConnectv1ConnectorExecute sync.Mutex
-	DeleteConnectv1ConnectorExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiDeleteConnectv1ConnectorRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect.InlineResponse200, *net_http.Response, error)
+	DeleteConnectv1ConnectorExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiDeleteConnectv1ConnectorRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.InlineResponse200, *net_http.Response, error)
 
 	lockGetConnectv1ConnectorConfig sync.Mutex
-	GetConnectv1ConnectorConfigFunc func(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiGetConnectv1ConnectorConfigRequest
+	GetConnectv1ConnectorConfigFunc func(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiGetConnectv1ConnectorConfigRequest
 
 	lockGetConnectv1ConnectorConfigExecute sync.Mutex
-	GetConnectv1ConnectorConfigExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiGetConnectv1ConnectorConfigRequest) (map[string]string, *net_http.Response, error)
+	GetConnectv1ConnectorConfigExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiGetConnectv1ConnectorConfigRequest) (map[string]string, *net_http.Response, error)
 
 	lockListConnectv1Connectors sync.Mutex
-	ListConnectv1ConnectorsFunc func(ctx context.Context, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiListConnectv1ConnectorsRequest
+	ListConnectv1ConnectorsFunc func(ctx context.Context, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorsRequest
 
 	lockListConnectv1ConnectorsExecute sync.Mutex
-	ListConnectv1ConnectorsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiListConnectv1ConnectorsRequest) ([]string, *net_http.Response, error)
+	ListConnectv1ConnectorsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorsRequest) ([]string, *net_http.Response, error)
 
 	lockListConnectv1ConnectorsWithExpansions sync.Mutex
-	ListConnectv1ConnectorsWithExpansionsFunc func(ctx context.Context, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiListConnectv1ConnectorsWithExpansionsRequest
+	ListConnectv1ConnectorsWithExpansionsFunc func(ctx context.Context, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorsWithExpansionsRequest
 
 	lockListConnectv1ConnectorsWithExpansionsExecute sync.Mutex
-	ListConnectv1ConnectorsWithExpansionsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiListConnectv1ConnectorsWithExpansionsRequest) (map[string]github_com_confluentinc_ccloud_sdk_go_v2_connect.ConnectV1ConnectorExpansion, *net_http.Response, error)
+	ListConnectv1ConnectorsWithExpansionsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorsWithExpansionsRequest) (map[string]github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ConnectV1ConnectorExpansion, *net_http.Response, error)
 
 	lockReadConnectv1Connector sync.Mutex
-	ReadConnectv1ConnectorFunc func(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiReadConnectv1ConnectorRequest
+	ReadConnectv1ConnectorFunc func(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiReadConnectv1ConnectorRequest
 
 	lockReadConnectv1ConnectorExecute sync.Mutex
-	ReadConnectv1ConnectorExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiReadConnectv1ConnectorRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect.ConnectV1Connector, *net_http.Response, error)
+	ReadConnectv1ConnectorExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiReadConnectv1ConnectorRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ConnectV1Connector, *net_http.Response, error)
 
 	calls struct {
 		CreateConnectv1Connector []struct {
@@ -63,7 +63,7 @@ type ConnectorsConnectV1Api struct {
 			KafkaClusterId string
 		}
 		CreateConnectv1ConnectorExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiCreateConnectv1ConnectorRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiCreateConnectv1ConnectorRequest
 		}
 		CreateOrUpdateConnectv1ConnectorConfig []struct {
 			Ctx            context.Context
@@ -72,7 +72,7 @@ type ConnectorsConnectV1Api struct {
 			KafkaClusterId string
 		}
 		CreateOrUpdateConnectv1ConnectorConfigExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiCreateOrUpdateConnectv1ConnectorConfigRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiCreateOrUpdateConnectv1ConnectorConfigRequest
 		}
 		DeleteConnectv1Connector []struct {
 			Ctx            context.Context
@@ -81,7 +81,7 @@ type ConnectorsConnectV1Api struct {
 			KafkaClusterId string
 		}
 		DeleteConnectv1ConnectorExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiDeleteConnectv1ConnectorRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiDeleteConnectv1ConnectorRequest
 		}
 		GetConnectv1ConnectorConfig []struct {
 			Ctx            context.Context
@@ -90,7 +90,7 @@ type ConnectorsConnectV1Api struct {
 			KafkaClusterId string
 		}
 		GetConnectv1ConnectorConfigExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiGetConnectv1ConnectorConfigRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiGetConnectv1ConnectorConfigRequest
 		}
 		ListConnectv1Connectors []struct {
 			Ctx            context.Context
@@ -98,7 +98,7 @@ type ConnectorsConnectV1Api struct {
 			KafkaClusterId string
 		}
 		ListConnectv1ConnectorsExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiListConnectv1ConnectorsRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorsRequest
 		}
 		ListConnectv1ConnectorsWithExpansions []struct {
 			Ctx            context.Context
@@ -106,7 +106,7 @@ type ConnectorsConnectV1Api struct {
 			KafkaClusterId string
 		}
 		ListConnectv1ConnectorsWithExpansionsExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiListConnectv1ConnectorsWithExpansionsRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorsWithExpansionsRequest
 		}
 		ReadConnectv1Connector []struct {
 			Ctx            context.Context
@@ -115,13 +115,13 @@ type ConnectorsConnectV1Api struct {
 			KafkaClusterId string
 		}
 		ReadConnectv1ConnectorExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiReadConnectv1ConnectorRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiReadConnectv1ConnectorRequest
 		}
 	}
 }
 
 // CreateConnectv1Connector mocks base method by wrapping the associated func.
-func (m *ConnectorsConnectV1Api) CreateConnectv1Connector(ctx context.Context, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiCreateConnectv1ConnectorRequest {
+func (m *ConnectorsConnectV1Api) CreateConnectv1Connector(ctx context.Context, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiCreateConnectv1ConnectorRequest {
 	m.lockCreateConnectv1Connector.Lock()
 	defer m.lockCreateConnectv1Connector.Unlock()
 
@@ -165,7 +165,7 @@ func (m *ConnectorsConnectV1Api) CreateConnectv1ConnectorCalls() []struct {
 }
 
 // CreateConnectv1ConnectorExecute mocks base method by wrapping the associated func.
-func (m *ConnectorsConnectV1Api) CreateConnectv1ConnectorExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiCreateConnectv1ConnectorRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect.ConnectV1Connector, *net_http.Response, error) {
+func (m *ConnectorsConnectV1Api) CreateConnectv1ConnectorExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiCreateConnectv1ConnectorRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ConnectV1Connector, *net_http.Response, error) {
 	m.lockCreateConnectv1ConnectorExecute.Lock()
 	defer m.lockCreateConnectv1ConnectorExecute.Unlock()
 
@@ -174,7 +174,7 @@ func (m *ConnectorsConnectV1Api) CreateConnectv1ConnectorExecute(r github_com_co
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiCreateConnectv1ConnectorRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiCreateConnectv1ConnectorRequest
 	}{
 		R: r,
 	}
@@ -194,7 +194,7 @@ func (m *ConnectorsConnectV1Api) CreateConnectv1ConnectorExecuteCalled() bool {
 
 // CreateConnectv1ConnectorExecuteCalls returns the calls made to CreateConnectv1ConnectorExecute.
 func (m *ConnectorsConnectV1Api) CreateConnectv1ConnectorExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiCreateConnectv1ConnectorRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiCreateConnectv1ConnectorRequest
 } {
 	m.lockCreateConnectv1ConnectorExecute.Lock()
 	defer m.lockCreateConnectv1ConnectorExecute.Unlock()
@@ -203,7 +203,7 @@ func (m *ConnectorsConnectV1Api) CreateConnectv1ConnectorExecuteCalls() []struct
 }
 
 // CreateOrUpdateConnectv1ConnectorConfig mocks base method by wrapping the associated func.
-func (m *ConnectorsConnectV1Api) CreateOrUpdateConnectv1ConnectorConfig(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiCreateOrUpdateConnectv1ConnectorConfigRequest {
+func (m *ConnectorsConnectV1Api) CreateOrUpdateConnectv1ConnectorConfig(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiCreateOrUpdateConnectv1ConnectorConfigRequest {
 	m.lockCreateOrUpdateConnectv1ConnectorConfig.Lock()
 	defer m.lockCreateOrUpdateConnectv1ConnectorConfig.Unlock()
 
@@ -250,7 +250,7 @@ func (m *ConnectorsConnectV1Api) CreateOrUpdateConnectv1ConnectorConfigCalls() [
 }
 
 // CreateOrUpdateConnectv1ConnectorConfigExecute mocks base method by wrapping the associated func.
-func (m *ConnectorsConnectV1Api) CreateOrUpdateConnectv1ConnectorConfigExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiCreateOrUpdateConnectv1ConnectorConfigRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect.ConnectV1Connector, *net_http.Response, error) {
+func (m *ConnectorsConnectV1Api) CreateOrUpdateConnectv1ConnectorConfigExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiCreateOrUpdateConnectv1ConnectorConfigRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ConnectV1Connector, *net_http.Response, error) {
 	m.lockCreateOrUpdateConnectv1ConnectorConfigExecute.Lock()
 	defer m.lockCreateOrUpdateConnectv1ConnectorConfigExecute.Unlock()
 
@@ -259,7 +259,7 @@ func (m *ConnectorsConnectV1Api) CreateOrUpdateConnectv1ConnectorConfigExecute(r
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiCreateOrUpdateConnectv1ConnectorConfigRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiCreateOrUpdateConnectv1ConnectorConfigRequest
 	}{
 		R: r,
 	}
@@ -279,7 +279,7 @@ func (m *ConnectorsConnectV1Api) CreateOrUpdateConnectv1ConnectorConfigExecuteCa
 
 // CreateOrUpdateConnectv1ConnectorConfigExecuteCalls returns the calls made to CreateOrUpdateConnectv1ConnectorConfigExecute.
 func (m *ConnectorsConnectV1Api) CreateOrUpdateConnectv1ConnectorConfigExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiCreateOrUpdateConnectv1ConnectorConfigRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiCreateOrUpdateConnectv1ConnectorConfigRequest
 } {
 	m.lockCreateOrUpdateConnectv1ConnectorConfigExecute.Lock()
 	defer m.lockCreateOrUpdateConnectv1ConnectorConfigExecute.Unlock()
@@ -288,7 +288,7 @@ func (m *ConnectorsConnectV1Api) CreateOrUpdateConnectv1ConnectorConfigExecuteCa
 }
 
 // DeleteConnectv1Connector mocks base method by wrapping the associated func.
-func (m *ConnectorsConnectV1Api) DeleteConnectv1Connector(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiDeleteConnectv1ConnectorRequest {
+func (m *ConnectorsConnectV1Api) DeleteConnectv1Connector(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiDeleteConnectv1ConnectorRequest {
 	m.lockDeleteConnectv1Connector.Lock()
 	defer m.lockDeleteConnectv1Connector.Unlock()
 
@@ -335,7 +335,7 @@ func (m *ConnectorsConnectV1Api) DeleteConnectv1ConnectorCalls() []struct {
 }
 
 // DeleteConnectv1ConnectorExecute mocks base method by wrapping the associated func.
-func (m *ConnectorsConnectV1Api) DeleteConnectv1ConnectorExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiDeleteConnectv1ConnectorRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect.InlineResponse200, *net_http.Response, error) {
+func (m *ConnectorsConnectV1Api) DeleteConnectv1ConnectorExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiDeleteConnectv1ConnectorRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.InlineResponse200, *net_http.Response, error) {
 	m.lockDeleteConnectv1ConnectorExecute.Lock()
 	defer m.lockDeleteConnectv1ConnectorExecute.Unlock()
 
@@ -344,7 +344,7 @@ func (m *ConnectorsConnectV1Api) DeleteConnectv1ConnectorExecute(r github_com_co
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiDeleteConnectv1ConnectorRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiDeleteConnectv1ConnectorRequest
 	}{
 		R: r,
 	}
@@ -364,7 +364,7 @@ func (m *ConnectorsConnectV1Api) DeleteConnectv1ConnectorExecuteCalled() bool {
 
 // DeleteConnectv1ConnectorExecuteCalls returns the calls made to DeleteConnectv1ConnectorExecute.
 func (m *ConnectorsConnectV1Api) DeleteConnectv1ConnectorExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiDeleteConnectv1ConnectorRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiDeleteConnectv1ConnectorRequest
 } {
 	m.lockDeleteConnectv1ConnectorExecute.Lock()
 	defer m.lockDeleteConnectv1ConnectorExecute.Unlock()
@@ -373,7 +373,7 @@ func (m *ConnectorsConnectV1Api) DeleteConnectv1ConnectorExecuteCalls() []struct
 }
 
 // GetConnectv1ConnectorConfig mocks base method by wrapping the associated func.
-func (m *ConnectorsConnectV1Api) GetConnectv1ConnectorConfig(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiGetConnectv1ConnectorConfigRequest {
+func (m *ConnectorsConnectV1Api) GetConnectv1ConnectorConfig(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiGetConnectv1ConnectorConfigRequest {
 	m.lockGetConnectv1ConnectorConfig.Lock()
 	defer m.lockGetConnectv1ConnectorConfig.Unlock()
 
@@ -420,7 +420,7 @@ func (m *ConnectorsConnectV1Api) GetConnectv1ConnectorConfigCalls() []struct {
 }
 
 // GetConnectv1ConnectorConfigExecute mocks base method by wrapping the associated func.
-func (m *ConnectorsConnectV1Api) GetConnectv1ConnectorConfigExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiGetConnectv1ConnectorConfigRequest) (map[string]string, *net_http.Response, error) {
+func (m *ConnectorsConnectV1Api) GetConnectv1ConnectorConfigExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiGetConnectv1ConnectorConfigRequest) (map[string]string, *net_http.Response, error) {
 	m.lockGetConnectv1ConnectorConfigExecute.Lock()
 	defer m.lockGetConnectv1ConnectorConfigExecute.Unlock()
 
@@ -429,7 +429,7 @@ func (m *ConnectorsConnectV1Api) GetConnectv1ConnectorConfigExecute(r github_com
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiGetConnectv1ConnectorConfigRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiGetConnectv1ConnectorConfigRequest
 	}{
 		R: r,
 	}
@@ -449,7 +449,7 @@ func (m *ConnectorsConnectV1Api) GetConnectv1ConnectorConfigExecuteCalled() bool
 
 // GetConnectv1ConnectorConfigExecuteCalls returns the calls made to GetConnectv1ConnectorConfigExecute.
 func (m *ConnectorsConnectV1Api) GetConnectv1ConnectorConfigExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiGetConnectv1ConnectorConfigRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiGetConnectv1ConnectorConfigRequest
 } {
 	m.lockGetConnectv1ConnectorConfigExecute.Lock()
 	defer m.lockGetConnectv1ConnectorConfigExecute.Unlock()
@@ -458,7 +458,7 @@ func (m *ConnectorsConnectV1Api) GetConnectv1ConnectorConfigExecuteCalls() []str
 }
 
 // ListConnectv1Connectors mocks base method by wrapping the associated func.
-func (m *ConnectorsConnectV1Api) ListConnectv1Connectors(ctx context.Context, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiListConnectv1ConnectorsRequest {
+func (m *ConnectorsConnectV1Api) ListConnectv1Connectors(ctx context.Context, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorsRequest {
 	m.lockListConnectv1Connectors.Lock()
 	defer m.lockListConnectv1Connectors.Unlock()
 
@@ -502,7 +502,7 @@ func (m *ConnectorsConnectV1Api) ListConnectv1ConnectorsCalls() []struct {
 }
 
 // ListConnectv1ConnectorsExecute mocks base method by wrapping the associated func.
-func (m *ConnectorsConnectV1Api) ListConnectv1ConnectorsExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiListConnectv1ConnectorsRequest) ([]string, *net_http.Response, error) {
+func (m *ConnectorsConnectV1Api) ListConnectv1ConnectorsExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorsRequest) ([]string, *net_http.Response, error) {
 	m.lockListConnectv1ConnectorsExecute.Lock()
 	defer m.lockListConnectv1ConnectorsExecute.Unlock()
 
@@ -511,7 +511,7 @@ func (m *ConnectorsConnectV1Api) ListConnectv1ConnectorsExecute(r github_com_con
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiListConnectv1ConnectorsRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorsRequest
 	}{
 		R: r,
 	}
@@ -531,7 +531,7 @@ func (m *ConnectorsConnectV1Api) ListConnectv1ConnectorsExecuteCalled() bool {
 
 // ListConnectv1ConnectorsExecuteCalls returns the calls made to ListConnectv1ConnectorsExecute.
 func (m *ConnectorsConnectV1Api) ListConnectv1ConnectorsExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiListConnectv1ConnectorsRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorsRequest
 } {
 	m.lockListConnectv1ConnectorsExecute.Lock()
 	defer m.lockListConnectv1ConnectorsExecute.Unlock()
@@ -540,7 +540,7 @@ func (m *ConnectorsConnectV1Api) ListConnectv1ConnectorsExecuteCalls() []struct 
 }
 
 // ListConnectv1ConnectorsWithExpansions mocks base method by wrapping the associated func.
-func (m *ConnectorsConnectV1Api) ListConnectv1ConnectorsWithExpansions(ctx context.Context, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiListConnectv1ConnectorsWithExpansionsRequest {
+func (m *ConnectorsConnectV1Api) ListConnectv1ConnectorsWithExpansions(ctx context.Context, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorsWithExpansionsRequest {
 	m.lockListConnectv1ConnectorsWithExpansions.Lock()
 	defer m.lockListConnectv1ConnectorsWithExpansions.Unlock()
 
@@ -584,7 +584,7 @@ func (m *ConnectorsConnectV1Api) ListConnectv1ConnectorsWithExpansionsCalls() []
 }
 
 // ListConnectv1ConnectorsWithExpansionsExecute mocks base method by wrapping the associated func.
-func (m *ConnectorsConnectV1Api) ListConnectv1ConnectorsWithExpansionsExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiListConnectv1ConnectorsWithExpansionsRequest) (map[string]github_com_confluentinc_ccloud_sdk_go_v2_connect.ConnectV1ConnectorExpansion, *net_http.Response, error) {
+func (m *ConnectorsConnectV1Api) ListConnectv1ConnectorsWithExpansionsExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorsWithExpansionsRequest) (map[string]github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ConnectV1ConnectorExpansion, *net_http.Response, error) {
 	m.lockListConnectv1ConnectorsWithExpansionsExecute.Lock()
 	defer m.lockListConnectv1ConnectorsWithExpansionsExecute.Unlock()
 
@@ -593,7 +593,7 @@ func (m *ConnectorsConnectV1Api) ListConnectv1ConnectorsWithExpansionsExecute(r 
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiListConnectv1ConnectorsWithExpansionsRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorsWithExpansionsRequest
 	}{
 		R: r,
 	}
@@ -613,7 +613,7 @@ func (m *ConnectorsConnectV1Api) ListConnectv1ConnectorsWithExpansionsExecuteCal
 
 // ListConnectv1ConnectorsWithExpansionsExecuteCalls returns the calls made to ListConnectv1ConnectorsWithExpansionsExecute.
 func (m *ConnectorsConnectV1Api) ListConnectv1ConnectorsWithExpansionsExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiListConnectv1ConnectorsWithExpansionsRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorsWithExpansionsRequest
 } {
 	m.lockListConnectv1ConnectorsWithExpansionsExecute.Lock()
 	defer m.lockListConnectv1ConnectorsWithExpansionsExecute.Unlock()
@@ -622,7 +622,7 @@ func (m *ConnectorsConnectV1Api) ListConnectv1ConnectorsWithExpansionsExecuteCal
 }
 
 // ReadConnectv1Connector mocks base method by wrapping the associated func.
-func (m *ConnectorsConnectV1Api) ReadConnectv1Connector(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiReadConnectv1ConnectorRequest {
+func (m *ConnectorsConnectV1Api) ReadConnectv1Connector(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiReadConnectv1ConnectorRequest {
 	m.lockReadConnectv1Connector.Lock()
 	defer m.lockReadConnectv1Connector.Unlock()
 
@@ -669,7 +669,7 @@ func (m *ConnectorsConnectV1Api) ReadConnectv1ConnectorCalls() []struct {
 }
 
 // ReadConnectv1ConnectorExecute mocks base method by wrapping the associated func.
-func (m *ConnectorsConnectV1Api) ReadConnectv1ConnectorExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiReadConnectv1ConnectorRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect.ConnectV1Connector, *net_http.Response, error) {
+func (m *ConnectorsConnectV1Api) ReadConnectv1ConnectorExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiReadConnectv1ConnectorRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ConnectV1Connector, *net_http.Response, error) {
 	m.lockReadConnectv1ConnectorExecute.Lock()
 	defer m.lockReadConnectv1ConnectorExecute.Unlock()
 
@@ -678,7 +678,7 @@ func (m *ConnectorsConnectV1Api) ReadConnectv1ConnectorExecute(r github_com_conf
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiReadConnectv1ConnectorRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiReadConnectv1ConnectorRequest
 	}{
 		R: r,
 	}
@@ -698,7 +698,7 @@ func (m *ConnectorsConnectV1Api) ReadConnectv1ConnectorExecuteCalled() bool {
 
 // ReadConnectv1ConnectorExecuteCalls returns the calls made to ReadConnectv1ConnectorExecute.
 func (m *ConnectorsConnectV1Api) ReadConnectv1ConnectorExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiReadConnectv1ConnectorRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiReadConnectv1ConnectorRequest
 } {
 	m.lockReadConnectv1ConnectorExecute.Lock()
 	defer m.lockReadConnectv1ConnectorExecute.Unlock()

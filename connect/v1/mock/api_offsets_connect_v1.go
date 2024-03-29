@@ -9,28 +9,28 @@ import (
 	net_http "net/http"
 	sync "sync"
 
-	github_com_confluentinc_ccloud_sdk_go_v2_connect "github.com/confluentinc/ccloud-sdk-go-v2/connect"
+	github_com_confluentinc_ccloud_sdk_go_v2_connect_v1 "github.com/confluentinc/ccloud-sdk-go-v2/connect/v1"
 )
 
 // OffsetsConnectV1Api is a mock of OffsetsConnectV1Api interface
 type OffsetsConnectV1Api struct {
 	lockAlterConnectv1ConnectorOffsetsRequest sync.Mutex
-	AlterConnectv1ConnectorOffsetsRequestFunc func(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiAlterConnectv1ConnectorOffsetsRequestRequest
+	AlterConnectv1ConnectorOffsetsRequestFunc func(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiAlterConnectv1ConnectorOffsetsRequestRequest
 
 	lockAlterConnectv1ConnectorOffsetsRequestExecute sync.Mutex
-	AlterConnectv1ConnectorOffsetsRequestExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiAlterConnectv1ConnectorOffsetsRequestRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect.ConnectV1AlterOffsetRequestInfo, *net_http.Response, error)
+	AlterConnectv1ConnectorOffsetsRequestExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiAlterConnectv1ConnectorOffsetsRequestRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ConnectV1AlterOffsetRequestInfo, *net_http.Response, error)
 
 	lockGetConnectv1ConnectorOffsets sync.Mutex
-	GetConnectv1ConnectorOffsetsFunc func(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiGetConnectv1ConnectorOffsetsRequest
+	GetConnectv1ConnectorOffsetsFunc func(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiGetConnectv1ConnectorOffsetsRequest
 
 	lockGetConnectv1ConnectorOffsetsExecute sync.Mutex
-	GetConnectv1ConnectorOffsetsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiGetConnectv1ConnectorOffsetsRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect.ConnectV1ConnectorOffsets, *net_http.Response, error)
+	GetConnectv1ConnectorOffsetsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiGetConnectv1ConnectorOffsetsRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ConnectV1ConnectorOffsets, *net_http.Response, error)
 
 	lockGetConnectv1ConnectorOffsetsRequestStatus sync.Mutex
-	GetConnectv1ConnectorOffsetsRequestStatusFunc func(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiGetConnectv1ConnectorOffsetsRequestStatusRequest
+	GetConnectv1ConnectorOffsetsRequestStatusFunc func(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiGetConnectv1ConnectorOffsetsRequestStatusRequest
 
 	lockGetConnectv1ConnectorOffsetsRequestStatusExecute sync.Mutex
-	GetConnectv1ConnectorOffsetsRequestStatusExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiGetConnectv1ConnectorOffsetsRequestStatusRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect.ConnectV1AlterOffsetStatus, *net_http.Response, error)
+	GetConnectv1ConnectorOffsetsRequestStatusExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiGetConnectv1ConnectorOffsetsRequestStatusRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ConnectV1AlterOffsetStatus, *net_http.Response, error)
 
 	calls struct {
 		AlterConnectv1ConnectorOffsetsRequest []struct {
@@ -40,7 +40,7 @@ type OffsetsConnectV1Api struct {
 			KafkaClusterId string
 		}
 		AlterConnectv1ConnectorOffsetsRequestExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiAlterConnectv1ConnectorOffsetsRequestRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiAlterConnectv1ConnectorOffsetsRequestRequest
 		}
 		GetConnectv1ConnectorOffsets []struct {
 			Ctx            context.Context
@@ -49,7 +49,7 @@ type OffsetsConnectV1Api struct {
 			KafkaClusterId string
 		}
 		GetConnectv1ConnectorOffsetsExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiGetConnectv1ConnectorOffsetsRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiGetConnectv1ConnectorOffsetsRequest
 		}
 		GetConnectv1ConnectorOffsetsRequestStatus []struct {
 			Ctx            context.Context
@@ -58,13 +58,13 @@ type OffsetsConnectV1Api struct {
 			KafkaClusterId string
 		}
 		GetConnectv1ConnectorOffsetsRequestStatusExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiGetConnectv1ConnectorOffsetsRequestStatusRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiGetConnectv1ConnectorOffsetsRequestStatusRequest
 		}
 	}
 }
 
 // AlterConnectv1ConnectorOffsetsRequest mocks base method by wrapping the associated func.
-func (m *OffsetsConnectV1Api) AlterConnectv1ConnectorOffsetsRequest(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiAlterConnectv1ConnectorOffsetsRequestRequest {
+func (m *OffsetsConnectV1Api) AlterConnectv1ConnectorOffsetsRequest(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiAlterConnectv1ConnectorOffsetsRequestRequest {
 	m.lockAlterConnectv1ConnectorOffsetsRequest.Lock()
 	defer m.lockAlterConnectv1ConnectorOffsetsRequest.Unlock()
 
@@ -111,7 +111,7 @@ func (m *OffsetsConnectV1Api) AlterConnectv1ConnectorOffsetsRequestCalls() []str
 }
 
 // AlterConnectv1ConnectorOffsetsRequestExecute mocks base method by wrapping the associated func.
-func (m *OffsetsConnectV1Api) AlterConnectv1ConnectorOffsetsRequestExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiAlterConnectv1ConnectorOffsetsRequestRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect.ConnectV1AlterOffsetRequestInfo, *net_http.Response, error) {
+func (m *OffsetsConnectV1Api) AlterConnectv1ConnectorOffsetsRequestExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiAlterConnectv1ConnectorOffsetsRequestRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ConnectV1AlterOffsetRequestInfo, *net_http.Response, error) {
 	m.lockAlterConnectv1ConnectorOffsetsRequestExecute.Lock()
 	defer m.lockAlterConnectv1ConnectorOffsetsRequestExecute.Unlock()
 
@@ -120,7 +120,7 @@ func (m *OffsetsConnectV1Api) AlterConnectv1ConnectorOffsetsRequestExecute(r git
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiAlterConnectv1ConnectorOffsetsRequestRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiAlterConnectv1ConnectorOffsetsRequestRequest
 	}{
 		R: r,
 	}
@@ -140,7 +140,7 @@ func (m *OffsetsConnectV1Api) AlterConnectv1ConnectorOffsetsRequestExecuteCalled
 
 // AlterConnectv1ConnectorOffsetsRequestExecuteCalls returns the calls made to AlterConnectv1ConnectorOffsetsRequestExecute.
 func (m *OffsetsConnectV1Api) AlterConnectv1ConnectorOffsetsRequestExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiAlterConnectv1ConnectorOffsetsRequestRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiAlterConnectv1ConnectorOffsetsRequestRequest
 } {
 	m.lockAlterConnectv1ConnectorOffsetsRequestExecute.Lock()
 	defer m.lockAlterConnectv1ConnectorOffsetsRequestExecute.Unlock()
@@ -149,7 +149,7 @@ func (m *OffsetsConnectV1Api) AlterConnectv1ConnectorOffsetsRequestExecuteCalls(
 }
 
 // GetConnectv1ConnectorOffsets mocks base method by wrapping the associated func.
-func (m *OffsetsConnectV1Api) GetConnectv1ConnectorOffsets(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiGetConnectv1ConnectorOffsetsRequest {
+func (m *OffsetsConnectV1Api) GetConnectv1ConnectorOffsets(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiGetConnectv1ConnectorOffsetsRequest {
 	m.lockGetConnectv1ConnectorOffsets.Lock()
 	defer m.lockGetConnectv1ConnectorOffsets.Unlock()
 
@@ -196,7 +196,7 @@ func (m *OffsetsConnectV1Api) GetConnectv1ConnectorOffsetsCalls() []struct {
 }
 
 // GetConnectv1ConnectorOffsetsExecute mocks base method by wrapping the associated func.
-func (m *OffsetsConnectV1Api) GetConnectv1ConnectorOffsetsExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiGetConnectv1ConnectorOffsetsRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect.ConnectV1ConnectorOffsets, *net_http.Response, error) {
+func (m *OffsetsConnectV1Api) GetConnectv1ConnectorOffsetsExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiGetConnectv1ConnectorOffsetsRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ConnectV1ConnectorOffsets, *net_http.Response, error) {
 	m.lockGetConnectv1ConnectorOffsetsExecute.Lock()
 	defer m.lockGetConnectv1ConnectorOffsetsExecute.Unlock()
 
@@ -205,7 +205,7 @@ func (m *OffsetsConnectV1Api) GetConnectv1ConnectorOffsetsExecute(r github_com_c
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiGetConnectv1ConnectorOffsetsRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiGetConnectv1ConnectorOffsetsRequest
 	}{
 		R: r,
 	}
@@ -225,7 +225,7 @@ func (m *OffsetsConnectV1Api) GetConnectv1ConnectorOffsetsExecuteCalled() bool {
 
 // GetConnectv1ConnectorOffsetsExecuteCalls returns the calls made to GetConnectv1ConnectorOffsetsExecute.
 func (m *OffsetsConnectV1Api) GetConnectv1ConnectorOffsetsExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiGetConnectv1ConnectorOffsetsRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiGetConnectv1ConnectorOffsetsRequest
 } {
 	m.lockGetConnectv1ConnectorOffsetsExecute.Lock()
 	defer m.lockGetConnectv1ConnectorOffsetsExecute.Unlock()
@@ -234,7 +234,7 @@ func (m *OffsetsConnectV1Api) GetConnectv1ConnectorOffsetsExecuteCalls() []struc
 }
 
 // GetConnectv1ConnectorOffsetsRequestStatus mocks base method by wrapping the associated func.
-func (m *OffsetsConnectV1Api) GetConnectv1ConnectorOffsetsRequestStatus(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiGetConnectv1ConnectorOffsetsRequestStatusRequest {
+func (m *OffsetsConnectV1Api) GetConnectv1ConnectorOffsetsRequestStatus(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiGetConnectv1ConnectorOffsetsRequestStatusRequest {
 	m.lockGetConnectv1ConnectorOffsetsRequestStatus.Lock()
 	defer m.lockGetConnectv1ConnectorOffsetsRequestStatus.Unlock()
 
@@ -281,7 +281,7 @@ func (m *OffsetsConnectV1Api) GetConnectv1ConnectorOffsetsRequestStatusCalls() [
 }
 
 // GetConnectv1ConnectorOffsetsRequestStatusExecute mocks base method by wrapping the associated func.
-func (m *OffsetsConnectV1Api) GetConnectv1ConnectorOffsetsRequestStatusExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiGetConnectv1ConnectorOffsetsRequestStatusRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect.ConnectV1AlterOffsetStatus, *net_http.Response, error) {
+func (m *OffsetsConnectV1Api) GetConnectv1ConnectorOffsetsRequestStatusExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiGetConnectv1ConnectorOffsetsRequestStatusRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ConnectV1AlterOffsetStatus, *net_http.Response, error) {
 	m.lockGetConnectv1ConnectorOffsetsRequestStatusExecute.Lock()
 	defer m.lockGetConnectv1ConnectorOffsetsRequestStatusExecute.Unlock()
 
@@ -290,7 +290,7 @@ func (m *OffsetsConnectV1Api) GetConnectv1ConnectorOffsetsRequestStatusExecute(r
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiGetConnectv1ConnectorOffsetsRequestStatusRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiGetConnectv1ConnectorOffsetsRequestStatusRequest
 	}{
 		R: r,
 	}
@@ -310,7 +310,7 @@ func (m *OffsetsConnectV1Api) GetConnectv1ConnectorOffsetsRequestStatusExecuteCa
 
 // GetConnectv1ConnectorOffsetsRequestStatusExecuteCalls returns the calls made to GetConnectv1ConnectorOffsetsRequestStatusExecute.
 func (m *OffsetsConnectV1Api) GetConnectv1ConnectorOffsetsRequestStatusExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiGetConnectv1ConnectorOffsetsRequestStatusRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiGetConnectv1ConnectorOffsetsRequestStatusRequest
 } {
 	m.lockGetConnectv1ConnectorOffsetsRequestStatusExecute.Lock()
 	defer m.lockGetConnectv1ConnectorOffsetsRequestStatusExecute.Unlock()
