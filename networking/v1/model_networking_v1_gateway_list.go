@@ -34,7 +34,7 @@ import (
 	"reflect"
 )
 
-// NetworkingV1GatewayList Group of networking resources for networking connectivity  ## The Gateways Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.Gateway\" />
+// NetworkingV1GatewayList A gateway is a resource that defines network access to Confluent cloud resources.   ## The Gateways Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.Gateway\" />
 type NetworkingV1GatewayList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version,omitempty"`

@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the gateway | [optional] 
+**Config** | Pointer to [**NetworkingV1GatewaySpecConfigOneOf**](NetworkingV1GatewaySpecConfigOneOf.md) | Gateway type specific configuration | [optional] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
@@ -50,6 +51,31 @@ SetDisplayName sets DisplayName field to given value.
 `func (o *NetworkingV1GatewaySpec) HasDisplayName() bool`
 
 HasDisplayName returns a boolean if a field has been set.
+
+### GetConfig
+
+`func (o *NetworkingV1GatewaySpec) GetConfig() NetworkingV1GatewaySpecConfigOneOf`
+
+GetConfig returns the Config field if non-nil, zero value otherwise.
+
+### GetConfigOk
+
+`func (o *NetworkingV1GatewaySpec) GetConfigOk() (*NetworkingV1GatewaySpecConfigOneOf, bool)`
+
+GetConfigOk returns a tuple with the Config field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfig
+
+`func (o *NetworkingV1GatewaySpec) SetConfig(v NetworkingV1GatewaySpecConfigOneOf)`
+
+SetConfig sets Config field to given value.
+
+### HasConfig
+
+`func (o *NetworkingV1GatewaySpec) HasConfig() bool`
+
+HasConfig returns a boolean if a field has been set.
 
 ### GetEnvironment
 
