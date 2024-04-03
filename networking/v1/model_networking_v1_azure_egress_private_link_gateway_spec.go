@@ -34,35 +34,35 @@ import (
 	"reflect"
 )
 
-// NetworkingV1PrivateLinkAccessPoint DNS record that is associated with a PrivateLink access point.
-type NetworkingV1PrivateLinkAccessPoint struct {
-	// PrivateLinkAccessPoint kind.
+// NetworkingV1AzureEgressPrivateLinkGatewaySpec Azure Egress Private Link Gateway details from Azure.
+type NetworkingV1AzureEgressPrivateLinkGatewaySpec struct {
+	// Azure Egress Private Link Gateway Spec kind type.
 	Kind string `json:"kind,omitempty"`
-	// ID of the target resource.
-	ResourceId string `json:"resource_id,omitempty"`
+	// Azure region of the Egress Private Link Gateway.
+	Region string `json:"region,omitempty"`
 }
 
-// NewNetworkingV1PrivateLinkAccessPoint instantiates a new NetworkingV1PrivateLinkAccessPoint object
+// NewNetworkingV1AzureEgressPrivateLinkGatewaySpec instantiates a new NetworkingV1AzureEgressPrivateLinkGatewaySpec object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1PrivateLinkAccessPoint(kind string, resourceId string) *NetworkingV1PrivateLinkAccessPoint {
-	this := NetworkingV1PrivateLinkAccessPoint{}
+func NewNetworkingV1AzureEgressPrivateLinkGatewaySpec(kind string, region string) *NetworkingV1AzureEgressPrivateLinkGatewaySpec {
+	this := NetworkingV1AzureEgressPrivateLinkGatewaySpec{}
 	this.Kind = kind
-	this.ResourceId = resourceId
+	this.Region = region
 	return &this
 }
 
-// NewNetworkingV1PrivateLinkAccessPointWithDefaults instantiates a new NetworkingV1PrivateLinkAccessPoint object
+// NewNetworkingV1AzureEgressPrivateLinkGatewaySpecWithDefaults instantiates a new NetworkingV1AzureEgressPrivateLinkGatewaySpec object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewNetworkingV1PrivateLinkAccessPointWithDefaults() *NetworkingV1PrivateLinkAccessPoint {
-	this := NetworkingV1PrivateLinkAccessPoint{}
+func NewNetworkingV1AzureEgressPrivateLinkGatewaySpecWithDefaults() *NetworkingV1AzureEgressPrivateLinkGatewaySpec {
+	this := NetworkingV1AzureEgressPrivateLinkGatewaySpec{}
 	return &this
 }
 
 // GetKind returns the Kind field value
-func (o *NetworkingV1PrivateLinkAccessPoint) GetKind() string {
+func (o *NetworkingV1AzureEgressPrivateLinkGatewaySpec) GetKind() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -73,7 +73,7 @@ func (o *NetworkingV1PrivateLinkAccessPoint) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1PrivateLinkAccessPoint) GetKindOk() (*string, bool) {
+func (o *NetworkingV1AzureEgressPrivateLinkGatewaySpec) GetKindOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -81,41 +81,41 @@ func (o *NetworkingV1PrivateLinkAccessPoint) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *NetworkingV1PrivateLinkAccessPoint) SetKind(v string) {
+func (o *NetworkingV1AzureEgressPrivateLinkGatewaySpec) SetKind(v string) {
 	o.Kind = v
 }
 
-// GetResourceId returns the ResourceId field value
-func (o *NetworkingV1PrivateLinkAccessPoint) GetResourceId() string {
+// GetRegion returns the Region field value
+func (o *NetworkingV1AzureEgressPrivateLinkGatewaySpec) GetRegion() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.ResourceId
+	return o.Region
 }
 
-// GetResourceIdOk returns a tuple with the ResourceId field value
+// GetRegionOk returns a tuple with the Region field value
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1PrivateLinkAccessPoint) GetResourceIdOk() (*string, bool) {
+func (o *NetworkingV1AzureEgressPrivateLinkGatewaySpec) GetRegionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ResourceId, true
+	return &o.Region, true
 }
 
-// SetResourceId sets field value
-func (o *NetworkingV1PrivateLinkAccessPoint) SetResourceId(v string) {
-	o.ResourceId = v
+// SetRegion sets field value
+func (o *NetworkingV1AzureEgressPrivateLinkGatewaySpec) SetRegion(v string) {
+	o.Region = v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *NetworkingV1PrivateLinkAccessPoint) Redact() {
+func (o *NetworkingV1AzureEgressPrivateLinkGatewaySpec) Redact() {
 	o.recurseRedact(&o.Kind)
-	o.recurseRedact(&o.ResourceId)
+	o.recurseRedact(&o.Region)
 }
 
-func (o *NetworkingV1PrivateLinkAccessPoint) recurseRedact(v interface{}) {
+func (o *NetworkingV1AzureEgressPrivateLinkGatewaySpec) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -140,18 +140,18 @@ func (o *NetworkingV1PrivateLinkAccessPoint) recurseRedact(v interface{}) {
 	}
 }
 
-func (o NetworkingV1PrivateLinkAccessPoint) zeroField(v interface{}) {
+func (o NetworkingV1AzureEgressPrivateLinkGatewaySpec) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o NetworkingV1PrivateLinkAccessPoint) MarshalJSON() ([]byte, error) {
+func (o NetworkingV1AzureEgressPrivateLinkGatewaySpec) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["kind"] = o.Kind
 	}
 	if true {
-		toSerialize["resource_id"] = o.ResourceId
+		toSerialize["region"] = o.Region
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
@@ -160,34 +160,34 @@ func (o NetworkingV1PrivateLinkAccessPoint) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableNetworkingV1PrivateLinkAccessPoint struct {
-	value *NetworkingV1PrivateLinkAccessPoint
+type NullableNetworkingV1AzureEgressPrivateLinkGatewaySpec struct {
+	value *NetworkingV1AzureEgressPrivateLinkGatewaySpec
 	isSet bool
 }
 
-func (v NullableNetworkingV1PrivateLinkAccessPoint) Get() *NetworkingV1PrivateLinkAccessPoint {
+func (v NullableNetworkingV1AzureEgressPrivateLinkGatewaySpec) Get() *NetworkingV1AzureEgressPrivateLinkGatewaySpec {
 	return v.value
 }
 
-func (v *NullableNetworkingV1PrivateLinkAccessPoint) Set(val *NetworkingV1PrivateLinkAccessPoint) {
+func (v *NullableNetworkingV1AzureEgressPrivateLinkGatewaySpec) Set(val *NetworkingV1AzureEgressPrivateLinkGatewaySpec) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableNetworkingV1PrivateLinkAccessPoint) IsSet() bool {
+func (v NullableNetworkingV1AzureEgressPrivateLinkGatewaySpec) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableNetworkingV1PrivateLinkAccessPoint) Unset() {
+func (v *NullableNetworkingV1AzureEgressPrivateLinkGatewaySpec) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableNetworkingV1PrivateLinkAccessPoint(val *NetworkingV1PrivateLinkAccessPoint) *NullableNetworkingV1PrivateLinkAccessPoint {
-	return &NullableNetworkingV1PrivateLinkAccessPoint{value: val, isSet: true}
+func NewNullableNetworkingV1AzureEgressPrivateLinkGatewaySpec(val *NetworkingV1AzureEgressPrivateLinkGatewaySpec) *NullableNetworkingV1AzureEgressPrivateLinkGatewaySpec {
+	return &NullableNetworkingV1AzureEgressPrivateLinkGatewaySpec{value: val, isSet: true}
 }
 
-func (v NullableNetworkingV1PrivateLinkAccessPoint) MarshalJSON() ([]byte, error) {
+func (v NullableNetworkingV1AzureEgressPrivateLinkGatewaySpec) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -195,7 +195,7 @@ func (v NullableNetworkingV1PrivateLinkAccessPoint) MarshalJSON() ([]byte, error
 	return buffer.Bytes(), err
 }
 
-func (v *NullableNetworkingV1PrivateLinkAccessPoint) UnmarshalJSON(src []byte) error {
+func (v *NullableNetworkingV1AzureEgressPrivateLinkGatewaySpec) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

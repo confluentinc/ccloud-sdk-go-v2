@@ -38,7 +38,7 @@ import (
 type NetworkingV1AwsEgressPrivateLinkEndpointStatus struct {
 	// AwsEgressPrivateLinkEndpointStatus kind.
 	Kind string `json:"kind,omitempty"`
-	// Id of a VPC Endpoint (if any) that is connected to the VPC Endpoint service.
+	// ID of a VPC Endpoint (if any) that is connected to the VPC Endpoint service.
 	VpcEndpointId string `json:"vpc_endpoint_id,omitempty"`
 	// DNS name of a VPC Endpoint (if any) that is connected to the VPC Endpoint service.
 	VpcEndpointDnsName string `json:"vpc_endpoint_dns_name,omitempty"`

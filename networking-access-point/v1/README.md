@@ -108,6 +108,8 @@ Class | Method | HTTP request | Description
  - [NetworkingV1AccessPointUpdate](docs/NetworkingV1AccessPointUpdate.md)
  - [NetworkingV1AwsEgressPrivateLinkEndpoint](docs/NetworkingV1AwsEgressPrivateLinkEndpoint.md)
  - [NetworkingV1AwsEgressPrivateLinkEndpointStatus](docs/NetworkingV1AwsEgressPrivateLinkEndpointStatus.md)
+ - [NetworkingV1AzureEgressPrivateLinkEndpoint](docs/NetworkingV1AzureEgressPrivateLinkEndpoint.md)
+ - [NetworkingV1AzureEgressPrivateLinkEndpointStatus](docs/NetworkingV1AzureEgressPrivateLinkEndpointStatus.md)
  - [NetworkingV1DnsRecord](docs/NetworkingV1DnsRecord.md)
  - [NetworkingV1DnsRecordList](docs/NetworkingV1DnsRecordList.md)
  - [NetworkingV1DnsRecordSpec](docs/NetworkingV1DnsRecordSpec.md)

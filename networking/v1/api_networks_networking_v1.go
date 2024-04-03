@@ -43,14 +43,14 @@ var (
 type NetworksNetworkingV1Api interface {
 
 	/*
-			CreateNetworkingV1Network Create a Network
+		CreateNetworkingV1Network Create a Network
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to create a network.
+	Make a request to create a network.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiCreateNetworkingV1NetworkRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateNetworkingV1NetworkRequest
 	*/
 	CreateNetworkingV1Network(ctx _context.Context) ApiCreateNetworkingV1NetworkRequest
 
@@ -59,15 +59,15 @@ type NetworksNetworkingV1Api interface {
 	CreateNetworkingV1NetworkExecute(r ApiCreateNetworkingV1NetworkRequest) (NetworkingV1Network, *_nethttp.Response, error)
 
 	/*
-			DeleteNetworkingV1Network Delete a Network
+		DeleteNetworkingV1Network Delete a Network
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to delete a network.
+	Make a request to delete a network.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the network.
-			 @return ApiDeleteNetworkingV1NetworkRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the network.
+		 @return ApiDeleteNetworkingV1NetworkRequest
 	*/
 	DeleteNetworkingV1Network(ctx _context.Context, id string) ApiDeleteNetworkingV1NetworkRequest
 
@@ -75,15 +75,15 @@ type NetworksNetworkingV1Api interface {
 	DeleteNetworkingV1NetworkExecute(r ApiDeleteNetworkingV1NetworkRequest) (*_nethttp.Response, error)
 
 	/*
-			GetNetworkingV1Network Read a Network
+		GetNetworkingV1Network Read a Network
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to read a network.
+	Make a request to read a network.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the network.
-			 @return ApiGetNetworkingV1NetworkRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the network.
+		 @return ApiGetNetworkingV1NetworkRequest
 	*/
 	GetNetworkingV1Network(ctx _context.Context, id string) ApiGetNetworkingV1NetworkRequest
 
@@ -92,14 +92,14 @@ type NetworksNetworkingV1Api interface {
 	GetNetworkingV1NetworkExecute(r ApiGetNetworkingV1NetworkRequest) (NetworkingV1Network, *_nethttp.Response, error)
 
 	/*
-			ListNetworkingV1Networks List of Networks
+		ListNetworkingV1Networks List of Networks
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Retrieve a sorted, filtered, paginated list of all networks.
+	Retrieve a sorted, filtered, paginated list of all networks.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiListNetworkingV1NetworksRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListNetworkingV1NetworksRequest
 	*/
 	ListNetworkingV1Networks(ctx _context.Context) ApiListNetworkingV1NetworksRequest
 
@@ -108,17 +108,17 @@ type NetworksNetworkingV1Api interface {
 	ListNetworkingV1NetworksExecute(r ApiListNetworkingV1NetworksRequest) (NetworkingV1NetworkList, *_nethttp.Response, error)
 
 	/*
-			UpdateNetworkingV1Network Update a Network
+		UpdateNetworkingV1Network Update a Network
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to update a network.
+	Make a request to update a network.
 
 
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the network.
-			 @return ApiUpdateNetworkingV1NetworkRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the network.
+		 @return ApiUpdateNetworkingV1NetworkRequest
 	*/
 	UpdateNetworkingV1Network(ctx _context.Context, id string) ApiUpdateNetworkingV1NetworkRequest
 
@@ -152,8 +152,8 @@ CreateNetworkingV1Network Create a Network
 
 Make a request to create a network.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateNetworkingV1NetworkRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateNetworkingV1NetworkRequest
 */
 func (a *NetworksNetworkingV1ApiService) CreateNetworkingV1Network(ctx _context.Context) ApiCreateNetworkingV1NetworkRequest {
 	return ApiCreateNetworkingV1NetworkRequest{
@@ -163,7 +163,8 @@ func (a *NetworksNetworkingV1ApiService) CreateNetworkingV1Network(ctx _context.
 }
 
 // Execute executes the request
-//  @return NetworkingV1Network
+//
+//	@return NetworkingV1Network
 func (a *NetworksNetworkingV1ApiService) CreateNetworkingV1NetworkExecute(r ApiCreateNetworkingV1NetworkRequest) (NetworkingV1Network, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -334,9 +335,9 @@ DeleteNetworkingV1Network Delete a Network
 
 Make a request to delete a network.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the network.
- @return ApiDeleteNetworkingV1NetworkRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the network.
+	@return ApiDeleteNetworkingV1NetworkRequest
 */
 func (a *NetworksNetworkingV1ApiService) DeleteNetworkingV1Network(ctx _context.Context, id string) ApiDeleteNetworkingV1NetworkRequest {
 	return ApiDeleteNetworkingV1NetworkRequest{
@@ -490,9 +491,9 @@ GetNetworkingV1Network Read a Network
 
 Make a request to read a network.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the network.
- @return ApiGetNetworkingV1NetworkRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the network.
+	@return ApiGetNetworkingV1NetworkRequest
 */
 func (a *NetworksNetworkingV1ApiService) GetNetworkingV1Network(ctx _context.Context, id string) ApiGetNetworkingV1NetworkRequest {
 	return ApiGetNetworkingV1NetworkRequest{
@@ -503,7 +504,8 @@ func (a *NetworksNetworkingV1ApiService) GetNetworkingV1Network(ctx _context.Con
 }
 
 // Execute executes the request
-//  @return NetworkingV1Network
+//
+//	@return NetworkingV1Network
 func (a *NetworksNetworkingV1ApiService) GetNetworkingV1NetworkExecute(r ApiGetNetworkingV1NetworkRequest) (NetworkingV1Network, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -712,8 +714,8 @@ ListNetworkingV1Networks List of Networks
 
 Retrieve a sorted, filtered, paginated list of all networks.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListNetworkingV1NetworksRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListNetworkingV1NetworksRequest
 */
 func (a *NetworksNetworkingV1ApiService) ListNetworkingV1Networks(ctx _context.Context) ApiListNetworkingV1NetworksRequest {
 	return ApiListNetworkingV1NetworksRequest{
@@ -723,7 +725,8 @@ func (a *NetworksNetworkingV1ApiService) ListNetworkingV1Networks(ctx _context.C
 }
 
 // Execute executes the request
-//  @return NetworkingV1NetworkList
+//
+//	@return NetworkingV1NetworkList
 func (a *NetworksNetworkingV1ApiService) ListNetworkingV1NetworksExecute(r ApiListNetworkingV1NetworksRequest) (NetworkingV1NetworkList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -937,11 +940,9 @@ UpdateNetworkingV1Network Update a Network
 
 Make a request to update a network.
 
-
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the network.
- @return ApiUpdateNetworkingV1NetworkRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the network.
+	@return ApiUpdateNetworkingV1NetworkRequest
 */
 func (a *NetworksNetworkingV1ApiService) UpdateNetworkingV1Network(ctx _context.Context, id string) ApiUpdateNetworkingV1NetworkRequest {
 	return ApiUpdateNetworkingV1NetworkRequest{
@@ -952,7 +953,8 @@ func (a *NetworksNetworkingV1ApiService) UpdateNetworkingV1Network(ctx _context.
 }
 
 // Execute executes the request
-//  @return NetworkingV1Network
+//
+//	@return NetworkingV1Network
 func (a *NetworksNetworkingV1ApiService) UpdateNetworkingV1NetworkExecute(r ApiUpdateNetworkingV1NetworkRequest) (NetworkingV1Network, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
