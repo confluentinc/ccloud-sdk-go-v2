@@ -40,6 +40,8 @@ type NetworkingV1AzureEgressPrivateLinkEndpointStatus struct {
 	Kind string `json:"kind,omitempty"`
 	// Resource ID of the Private Endpoint (if any) that is connected to the Private Link service.
 	PrivateEndpointResourceId string `json:"private_endpoint_resource_id,omitempty"`
+	// Resource domain of the Private Endpoint (if any) that is connected to the Private Link service.
+	PrivateEndpointResourceDomain *string `json:"private_endpoint_resource_domain,omitempty"`
 }
 
 // NewNetworkingV1AzureEgressPrivateLinkEndpointStatus instantiates a new NetworkingV1AzureEgressPrivateLinkEndpointStatus object
@@ -109,10 +111,43 @@ func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) SetPrivateEndpointRes
 	o.PrivateEndpointResourceId = v
 }
 
+// GetPrivateEndpointResourceDomain returns the PrivateEndpointResourceDomain field value if set, zero value otherwise.
+func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) GetPrivateEndpointResourceDomain() string {
+	if o == nil || o.PrivateEndpointResourceDomain == nil {
+		var ret string
+		return ret
+	}
+	return *o.PrivateEndpointResourceDomain
+}
+
+// GetPrivateEndpointResourceDomainOk returns a tuple with the PrivateEndpointResourceDomain field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) GetPrivateEndpointResourceDomainOk() (*string, bool) {
+	if o == nil || o.PrivateEndpointResourceDomain == nil {
+		return nil, false
+	}
+	return o.PrivateEndpointResourceDomain, true
+}
+
+// HasPrivateEndpointResourceDomain returns a boolean if a field has been set.
+func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) HasPrivateEndpointResourceDomain() bool {
+	if o != nil && o.PrivateEndpointResourceDomain != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPrivateEndpointResourceDomain gets a reference to the given string and assigns it to the PrivateEndpointResourceDomain field.
+func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) SetPrivateEndpointResourceDomain(v string) {
+	o.PrivateEndpointResourceDomain = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) Redact() {
 	o.recurseRedact(&o.Kind)
 	o.recurseRedact(&o.PrivateEndpointResourceId)
+	o.recurseRedact(o.PrivateEndpointResourceDomain)
 }
 
 func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) recurseRedact(v interface{}) {
@@ -152,6 +187,9 @@ func (o NetworkingV1AzureEgressPrivateLinkEndpointStatus) MarshalJSON() ([]byte,
 	}
 	if true {
 		toSerialize["private_endpoint_resource_id"] = o.PrivateEndpointResourceId
+	}
+	if o.PrivateEndpointResourceDomain != nil {
+		toSerialize["private_endpoint_resource_domain"] = o.PrivateEndpointResourceDomain
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

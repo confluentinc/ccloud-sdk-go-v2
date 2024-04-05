@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | AzureEgressPrivateLinkEndpointStatus kind. | 
 **PrivateEndpointResourceId** | **string** | Resource ID of the Private Endpoint (if any) that is connected to the Private Link service. | [readonly] 
+**PrivateEndpointResourceDomain** | Pointer to **string** | Resource domain of the Private Endpoint (if any) that is connected to the Private Link service. | [optional] [readonly] 
 
 ## Methods
 
@@ -65,6 +66,31 @@ and a boolean to check if the value has been set.
 
 SetPrivateEndpointResourceId sets PrivateEndpointResourceId field to given value.
 
+
+### GetPrivateEndpointResourceDomain
+
+`func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) GetPrivateEndpointResourceDomain() string`
+
+GetPrivateEndpointResourceDomain returns the PrivateEndpointResourceDomain field if non-nil, zero value otherwise.
+
+### GetPrivateEndpointResourceDomainOk
+
+`func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) GetPrivateEndpointResourceDomainOk() (*string, bool)`
+
+GetPrivateEndpointResourceDomainOk returns a tuple with the PrivateEndpointResourceDomain field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrivateEndpointResourceDomain
+
+`func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) SetPrivateEndpointResourceDomain(v string)`
+
+SetPrivateEndpointResourceDomain sets PrivateEndpointResourceDomain field to given value.
+
+### HasPrivateEndpointResourceDomain
+
+`func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) HasPrivateEndpointResourceDomain() bool`
+
+HasPrivateEndpointResourceDomain returns a boolean if a field has been set.
 
 
 ### AsNetworkingV1AccessPointStatusConfigOneOf
