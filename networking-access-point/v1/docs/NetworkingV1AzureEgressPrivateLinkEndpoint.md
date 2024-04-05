@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | AzureEgressPrivateLinkEndpoint kind. | 
 **PrivateLinkServiceResourceId** | **string** | Resource ID of the Azure Private Link service. | 
-**PrivateLinkSubresourceNames** | Pointer to **[]string** | Names of subresources which the Private Endpoint is able to connect to. | [optional] 
+**PrivateLinkSubresourceName** | Pointer to **string** | Name of the subresource for the Private Endpoint to connect to. | [optional] 
 
 ## Methods
 
@@ -67,30 +67,30 @@ and a boolean to check if the value has been set.
 SetPrivateLinkServiceResourceId sets PrivateLinkServiceResourceId field to given value.
 
 
-### GetPrivateLinkSubresourceNames
+### GetPrivateLinkSubresourceName
 
-`func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) GetPrivateLinkSubresourceNames() []string`
+`func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) GetPrivateLinkSubresourceName() string`
 
-GetPrivateLinkSubresourceNames returns the PrivateLinkSubresourceNames field if non-nil, zero value otherwise.
+GetPrivateLinkSubresourceName returns the PrivateLinkSubresourceName field if non-nil, zero value otherwise.
 
-### GetPrivateLinkSubresourceNamesOk
+### GetPrivateLinkSubresourceNameOk
 
-`func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) GetPrivateLinkSubresourceNamesOk() (*[]string, bool)`
+`func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) GetPrivateLinkSubresourceNameOk() (*string, bool)`
 
-GetPrivateLinkSubresourceNamesOk returns a tuple with the PrivateLinkSubresourceNames field if it's non-nil, zero value otherwise
+GetPrivateLinkSubresourceNameOk returns a tuple with the PrivateLinkSubresourceName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPrivateLinkSubresourceNames
+### SetPrivateLinkSubresourceName
 
-`func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) SetPrivateLinkSubresourceNames(v []string)`
+`func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) SetPrivateLinkSubresourceName(v string)`
 
-SetPrivateLinkSubresourceNames sets PrivateLinkSubresourceNames field to given value.
+SetPrivateLinkSubresourceName sets PrivateLinkSubresourceName field to given value.
 
-### HasPrivateLinkSubresourceNames
+### HasPrivateLinkSubresourceName
 
-`func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) HasPrivateLinkSubresourceNames() bool`
+`func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) HasPrivateLinkSubresourceName() bool`
 
-HasPrivateLinkSubresourceNames returns a boolean if a field has been set.
+HasPrivateLinkSubresourceName returns a boolean if a field has been set.
 
 
 ### AsNetworkingV1AccessPointSpecConfigOneOf

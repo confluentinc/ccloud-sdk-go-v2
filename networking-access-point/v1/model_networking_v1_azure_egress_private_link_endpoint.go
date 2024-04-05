@@ -40,8 +40,8 @@ type NetworkingV1AzureEgressPrivateLinkEndpoint struct {
 	Kind string `json:"kind,omitempty"`
 	// Resource ID of the Azure Private Link service.
 	PrivateLinkServiceResourceId string `json:"private_link_service_resource_id,omitempty"`
-	// Names of subresources which the Private Endpoint is able to connect to.
-	PrivateLinkSubresourceNames *[]string `json:"private_link_subresource_names,omitempty"`
+	// Name of the subresource for the Private Endpoint to connect to.
+	PrivateLinkSubresourceName *string `json:"private_link_subresource_name,omitempty"`
 }
 
 // NewNetworkingV1AzureEgressPrivateLinkEndpoint instantiates a new NetworkingV1AzureEgressPrivateLinkEndpoint object
@@ -111,43 +111,43 @@ func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) SetPrivateLinkServiceResour
 	o.PrivateLinkServiceResourceId = v
 }
 
-// GetPrivateLinkSubresourceNames returns the PrivateLinkSubresourceNames field value if set, zero value otherwise.
-func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) GetPrivateLinkSubresourceNames() []string {
-	if o == nil || o.PrivateLinkSubresourceNames == nil {
-		var ret []string
+// GetPrivateLinkSubresourceName returns the PrivateLinkSubresourceName field value if set, zero value otherwise.
+func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) GetPrivateLinkSubresourceName() string {
+	if o == nil || o.PrivateLinkSubresourceName == nil {
+		var ret string
 		return ret
 	}
-	return *o.PrivateLinkSubresourceNames
+	return *o.PrivateLinkSubresourceName
 }
 
-// GetPrivateLinkSubresourceNamesOk returns a tuple with the PrivateLinkSubresourceNames field value if set, nil otherwise
+// GetPrivateLinkSubresourceNameOk returns a tuple with the PrivateLinkSubresourceName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) GetPrivateLinkSubresourceNamesOk() (*[]string, bool) {
-	if o == nil || o.PrivateLinkSubresourceNames == nil {
+func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) GetPrivateLinkSubresourceNameOk() (*string, bool) {
+	if o == nil || o.PrivateLinkSubresourceName == nil {
 		return nil, false
 	}
-	return o.PrivateLinkSubresourceNames, true
+	return o.PrivateLinkSubresourceName, true
 }
 
-// HasPrivateLinkSubresourceNames returns a boolean if a field has been set.
-func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) HasPrivateLinkSubresourceNames() bool {
-	if o != nil && o.PrivateLinkSubresourceNames != nil {
+// HasPrivateLinkSubresourceName returns a boolean if a field has been set.
+func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) HasPrivateLinkSubresourceName() bool {
+	if o != nil && o.PrivateLinkSubresourceName != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetPrivateLinkSubresourceNames gets a reference to the given []string and assigns it to the PrivateLinkSubresourceNames field.
-func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) SetPrivateLinkSubresourceNames(v []string) {
-	o.PrivateLinkSubresourceNames = &v
+// SetPrivateLinkSubresourceName gets a reference to the given string and assigns it to the PrivateLinkSubresourceName field.
+func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) SetPrivateLinkSubresourceName(v string) {
+	o.PrivateLinkSubresourceName = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) Redact() {
 	o.recurseRedact(&o.Kind)
 	o.recurseRedact(&o.PrivateLinkServiceResourceId)
-	o.recurseRedact(o.PrivateLinkSubresourceNames)
+	o.recurseRedact(o.PrivateLinkSubresourceName)
 }
 
 func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) recurseRedact(v interface{}) {
@@ -188,8 +188,8 @@ func (o NetworkingV1AzureEgressPrivateLinkEndpoint) MarshalJSON() ([]byte, error
 	if true {
 		toSerialize["private_link_service_resource_id"] = o.PrivateLinkServiceResourceId
 	}
-	if o.PrivateLinkSubresourceNames != nil {
-		toSerialize["private_link_subresource_names"] = o.PrivateLinkSubresourceNames
+	if o.PrivateLinkSubresourceName != nil {
+		toSerialize["private_link_subresource_name"] = o.PrivateLinkSubresourceName
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
