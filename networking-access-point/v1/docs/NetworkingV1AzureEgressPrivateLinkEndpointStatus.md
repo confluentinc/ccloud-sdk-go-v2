@@ -6,13 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | AzureEgressPrivateLinkEndpointStatus kind. | 
 **PrivateEndpointResourceId** | **string** | Resource ID of the Private Endpoint (if any) that is connected to the Private Link service. | [readonly] 
-**PrivateEndpointResourceDomain** | Pointer to **string** | Resource domain of the Private Endpoint (if any) that is connected to the Private Link service. | [optional] [readonly] 
+**PrivateEndpointDomain** | Pointer to **string** | Domain of the Private Endpoint (if any) that is connected to the Private Link service. | [optional] [readonly] 
+**PrivateEndpointIpAddress** | **string** | IP address of the Private Endpoint (if any) that is connected to the Private Link service. | [readonly] 
 
 ## Methods
 
 ### NewNetworkingV1AzureEgressPrivateLinkEndpointStatus
 
-`func NewNetworkingV1AzureEgressPrivateLinkEndpointStatus(kind string, privateEndpointResourceId string, ) *NetworkingV1AzureEgressPrivateLinkEndpointStatus`
+`func NewNetworkingV1AzureEgressPrivateLinkEndpointStatus(kind string, privateEndpointResourceId string, privateEndpointIpAddress string, ) *NetworkingV1AzureEgressPrivateLinkEndpointStatus`
 
 NewNetworkingV1AzureEgressPrivateLinkEndpointStatus instantiates a new NetworkingV1AzureEgressPrivateLinkEndpointStatus object
 This constructor will assign default values to properties that have it defined,
@@ -67,30 +68,50 @@ and a boolean to check if the value has been set.
 SetPrivateEndpointResourceId sets PrivateEndpointResourceId field to given value.
 
 
-### GetPrivateEndpointResourceDomain
+### GetPrivateEndpointDomain
 
-`func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) GetPrivateEndpointResourceDomain() string`
+`func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) GetPrivateEndpointDomain() string`
 
-GetPrivateEndpointResourceDomain returns the PrivateEndpointResourceDomain field if non-nil, zero value otherwise.
+GetPrivateEndpointDomain returns the PrivateEndpointDomain field if non-nil, zero value otherwise.
 
-### GetPrivateEndpointResourceDomainOk
+### GetPrivateEndpointDomainOk
 
-`func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) GetPrivateEndpointResourceDomainOk() (*string, bool)`
+`func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) GetPrivateEndpointDomainOk() (*string, bool)`
 
-GetPrivateEndpointResourceDomainOk returns a tuple with the PrivateEndpointResourceDomain field if it's non-nil, zero value otherwise
+GetPrivateEndpointDomainOk returns a tuple with the PrivateEndpointDomain field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPrivateEndpointResourceDomain
+### SetPrivateEndpointDomain
 
-`func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) SetPrivateEndpointResourceDomain(v string)`
+`func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) SetPrivateEndpointDomain(v string)`
 
-SetPrivateEndpointResourceDomain sets PrivateEndpointResourceDomain field to given value.
+SetPrivateEndpointDomain sets PrivateEndpointDomain field to given value.
 
-### HasPrivateEndpointResourceDomain
+### HasPrivateEndpointDomain
 
-`func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) HasPrivateEndpointResourceDomain() bool`
+`func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) HasPrivateEndpointDomain() bool`
 
-HasPrivateEndpointResourceDomain returns a boolean if a field has been set.
+HasPrivateEndpointDomain returns a boolean if a field has been set.
+
+### GetPrivateEndpointIpAddress
+
+`func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) GetPrivateEndpointIpAddress() string`
+
+GetPrivateEndpointIpAddress returns the PrivateEndpointIpAddress field if non-nil, zero value otherwise.
+
+### GetPrivateEndpointIpAddressOk
+
+`func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) GetPrivateEndpointIpAddressOk() (*string, bool)`
+
+GetPrivateEndpointIpAddressOk returns a tuple with the PrivateEndpointIpAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrivateEndpointIpAddress
+
+`func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) SetPrivateEndpointIpAddress(v string)`
+
+SetPrivateEndpointIpAddress sets PrivateEndpointIpAddress field to given value.
+
 
 
 ### AsNetworkingV1AccessPointStatusConfigOneOf

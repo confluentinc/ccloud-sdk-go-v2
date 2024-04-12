@@ -40,18 +40,21 @@ type NetworkingV1AzureEgressPrivateLinkEndpointStatus struct {
 	Kind string `json:"kind,omitempty"`
 	// Resource ID of the Private Endpoint (if any) that is connected to the Private Link service.
 	PrivateEndpointResourceId string `json:"private_endpoint_resource_id,omitempty"`
-	// Resource domain of the Private Endpoint (if any) that is connected to the Private Link service.
-	PrivateEndpointResourceDomain *string `json:"private_endpoint_resource_domain,omitempty"`
+	// Domain of the Private Endpoint (if any) that is connected to the Private Link service.
+	PrivateEndpointDomain *string `json:"private_endpoint_domain,omitempty"`
+	// IP address of the Private Endpoint (if any) that is connected to the Private Link service.
+	PrivateEndpointIpAddress string `json:"private_endpoint_ip_address,omitempty"`
 }
 
 // NewNetworkingV1AzureEgressPrivateLinkEndpointStatus instantiates a new NetworkingV1AzureEgressPrivateLinkEndpointStatus object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1AzureEgressPrivateLinkEndpointStatus(kind string, privateEndpointResourceId string) *NetworkingV1AzureEgressPrivateLinkEndpointStatus {
+func NewNetworkingV1AzureEgressPrivateLinkEndpointStatus(kind string, privateEndpointResourceId string, privateEndpointIpAddress string) *NetworkingV1AzureEgressPrivateLinkEndpointStatus {
 	this := NetworkingV1AzureEgressPrivateLinkEndpointStatus{}
 	this.Kind = kind
 	this.PrivateEndpointResourceId = privateEndpointResourceId
+	this.PrivateEndpointIpAddress = privateEndpointIpAddress
 	return &this
 }
 
@@ -111,43 +114,68 @@ func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) SetPrivateEndpointRes
 	o.PrivateEndpointResourceId = v
 }
 
-// GetPrivateEndpointResourceDomain returns the PrivateEndpointResourceDomain field value if set, zero value otherwise.
-func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) GetPrivateEndpointResourceDomain() string {
-	if o == nil || o.PrivateEndpointResourceDomain == nil {
+// GetPrivateEndpointDomain returns the PrivateEndpointDomain field value if set, zero value otherwise.
+func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) GetPrivateEndpointDomain() string {
+	if o == nil || o.PrivateEndpointDomain == nil {
 		var ret string
 		return ret
 	}
-	return *o.PrivateEndpointResourceDomain
+	return *o.PrivateEndpointDomain
 }
 
-// GetPrivateEndpointResourceDomainOk returns a tuple with the PrivateEndpointResourceDomain field value if set, nil otherwise
+// GetPrivateEndpointDomainOk returns a tuple with the PrivateEndpointDomain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) GetPrivateEndpointResourceDomainOk() (*string, bool) {
-	if o == nil || o.PrivateEndpointResourceDomain == nil {
+func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) GetPrivateEndpointDomainOk() (*string, bool) {
+	if o == nil || o.PrivateEndpointDomain == nil {
 		return nil, false
 	}
-	return o.PrivateEndpointResourceDomain, true
+	return o.PrivateEndpointDomain, true
 }
 
-// HasPrivateEndpointResourceDomain returns a boolean if a field has been set.
-func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) HasPrivateEndpointResourceDomain() bool {
-	if o != nil && o.PrivateEndpointResourceDomain != nil {
+// HasPrivateEndpointDomain returns a boolean if a field has been set.
+func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) HasPrivateEndpointDomain() bool {
+	if o != nil && o.PrivateEndpointDomain != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetPrivateEndpointResourceDomain gets a reference to the given string and assigns it to the PrivateEndpointResourceDomain field.
-func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) SetPrivateEndpointResourceDomain(v string) {
-	o.PrivateEndpointResourceDomain = &v
+// SetPrivateEndpointDomain gets a reference to the given string and assigns it to the PrivateEndpointDomain field.
+func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) SetPrivateEndpointDomain(v string) {
+	o.PrivateEndpointDomain = &v
+}
+
+// GetPrivateEndpointIpAddress returns the PrivateEndpointIpAddress field value
+func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) GetPrivateEndpointIpAddress() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.PrivateEndpointIpAddress
+}
+
+// GetPrivateEndpointIpAddressOk returns a tuple with the PrivateEndpointIpAddress field value
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) GetPrivateEndpointIpAddressOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.PrivateEndpointIpAddress, true
+}
+
+// SetPrivateEndpointIpAddress sets field value
+func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) SetPrivateEndpointIpAddress(v string) {
+	o.PrivateEndpointIpAddress = v
 }
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) Redact() {
 	o.recurseRedact(&o.Kind)
 	o.recurseRedact(&o.PrivateEndpointResourceId)
-	o.recurseRedact(o.PrivateEndpointResourceDomain)
+	o.recurseRedact(o.PrivateEndpointDomain)
+	o.recurseRedact(&o.PrivateEndpointIpAddress)
 }
 
 func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) recurseRedact(v interface{}) {
@@ -188,8 +216,11 @@ func (o NetworkingV1AzureEgressPrivateLinkEndpointStatus) MarshalJSON() ([]byte,
 	if true {
 		toSerialize["private_endpoint_resource_id"] = o.PrivateEndpointResourceId
 	}
-	if o.PrivateEndpointResourceDomain != nil {
-		toSerialize["private_endpoint_resource_domain"] = o.PrivateEndpointResourceDomain
+	if o.PrivateEndpointDomain != nil {
+		toSerialize["private_endpoint_domain"] = o.PrivateEndpointDomain
+	}
+	if true {
+		toSerialize["private_endpoint_ip_address"] = o.PrivateEndpointIpAddress
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
