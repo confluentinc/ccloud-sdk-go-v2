@@ -45,7 +45,7 @@ type NetworkingV1DnsRecordSpec struct {
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
 	// The gateway to which this belongs.
-	Gateway *EnvScopedObjectReference `json:"gateway,omitempty"`
+	Gateway *TypedEnvScopedObjectReference `json:"gateway,omitempty"`
 }
 
 // NewNetworkingV1DnsRecordSpec instantiates a new NetworkingV1DnsRecordSpec object
@@ -194,9 +194,9 @@ func (o *NetworkingV1DnsRecordSpec) SetEnvironment(v ObjectReference) {
 }
 
 // GetGateway returns the Gateway field value if set, zero value otherwise.
-func (o *NetworkingV1DnsRecordSpec) GetGateway() EnvScopedObjectReference {
+func (o *NetworkingV1DnsRecordSpec) GetGateway() TypedEnvScopedObjectReference {
 	if o == nil || o.Gateway == nil {
-		var ret EnvScopedObjectReference
+		var ret TypedEnvScopedObjectReference
 		return ret
 	}
 	return *o.Gateway
@@ -204,7 +204,7 @@ func (o *NetworkingV1DnsRecordSpec) GetGateway() EnvScopedObjectReference {
 
 // GetGatewayOk returns a tuple with the Gateway field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1DnsRecordSpec) GetGatewayOk() (*EnvScopedObjectReference, bool) {
+func (o *NetworkingV1DnsRecordSpec) GetGatewayOk() (*TypedEnvScopedObjectReference, bool) {
 	if o == nil || o.Gateway == nil {
 		return nil, false
 	}
@@ -220,8 +220,8 @@ func (o *NetworkingV1DnsRecordSpec) HasGateway() bool {
 	return false
 }
 
-// SetGateway gets a reference to the given EnvScopedObjectReference and assigns it to the Gateway field.
-func (o *NetworkingV1DnsRecordSpec) SetGateway(v EnvScopedObjectReference) {
+// SetGateway gets a reference to the given TypedEnvScopedObjectReference and assigns it to the Gateway field.
+func (o *NetworkingV1DnsRecordSpec) SetGateway(v TypedEnvScopedObjectReference) {
 	o.Gateway = &v
 }
 

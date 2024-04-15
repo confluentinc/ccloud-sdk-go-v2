@@ -4436,7 +4436,7 @@ components:
           description: The environment to which this belongs.
         gateway:
           allOf:
-          - $ref: '#/components/schemas/EnvScopedObjectReference'
+          - $ref: '#/components/schemas/TypedEnvScopedObjectReference'
           description: The gateway to which this belongs.
           x-immutable: true
       type: object
@@ -4569,7 +4569,7 @@ components:
       - related
       - resource_name
       type: object
-    EnvScopedObjectReference:
+    TypedEnvScopedObjectReference:
       description: ObjectReference provides information for you to locate the referred
         object
       properties:
@@ -4592,6 +4592,16 @@ components:
         resource_name:
           description: CRN reference to the referred resource
           format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        api_version:
+          description: API group and version of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind of the referred resource
           minLength: 1
           readOnly: true
           type: string

@@ -93,7 +93,6 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
- - [EnvScopedObjectReference](docs/EnvScopedObjectReference.md)
  - [Error](docs/Error.md)
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
@@ -121,6 +120,7 @@ Class | Method | HTTP request | Description
  - [NetworkingV1PrivateLinkAccessPoint](docs/NetworkingV1PrivateLinkAccessPoint.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
+ - [TypedEnvScopedObjectReference](docs/TypedEnvScopedObjectReference.md)
 
 
 ## Documentation For Authorization
