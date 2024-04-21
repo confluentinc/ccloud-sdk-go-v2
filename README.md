@@ -2,7 +2,7 @@
 
 ## Compatibility
 
-There are *NO compatibility guarantees* for this repository. It is in direct support of the [Terraform Provider for Confluent Cloud](https://github.com/confluentinc/terraform-provider-confluentcloud/), so branches will be compatible with that repo.
+There are *NO compatibility guarantees* for this repository. It is in direct support of the [Terraform Provider for Confluent](https://github.com/confluentinc/terraform-provider-confluent) and the [Confluent CLI](https://github.com/confluentinc/cli), so branches will be compatible with those repos.
 
 ## Things you should *NOT* do
 
