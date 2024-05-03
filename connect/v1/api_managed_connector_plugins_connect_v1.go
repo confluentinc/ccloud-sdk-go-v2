@@ -39,52 +39,12 @@ var (
 	_ _context.Context
 )
 
-type ManagedConnectorPluginsConnectV1Api interface {
-
-	/*
-			ListConnectv1ConnectorPlugins List of Managed Connector plugins
-
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-		Return a list of Managed Connector plugins installed in the Kafka Connect cluster.
-
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param environmentId The unique identifier of the environment this resource belongs to.
-			 @param kafkaClusterId The unique identifier for the Kafka cluster.
-			 @return ApiListConnectv1ConnectorPluginsRequest
-	*/
-	ListConnectv1ConnectorPlugins(ctx _context.Context, environmentId string, kafkaClusterId string) ApiListConnectv1ConnectorPluginsRequest
-
-	// ListConnectv1ConnectorPluginsExecute executes the request
-	//  @return []InlineResponse2002
-	ListConnectv1ConnectorPluginsExecute(r ApiListConnectv1ConnectorPluginsRequest) ([]InlineResponse2002, *_nethttp.Response, error)
-
-	/*
-			ValidateConnectv1ConnectorPlugin Validate a Managed Connector Plugin
-
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-		Validate the provided configuration values against the configuration definition. This API performs per config validation and returns suggested values and validation error messages.
-
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param pluginName The unique name of the connector plugin.
-			 @param environmentId The unique identifier of the environment this resource belongs to.
-			 @param kafkaClusterId The unique identifier for the Kafka cluster.
-			 @return ApiValidateConnectv1ConnectorPluginRequest
-	*/
-	ValidateConnectv1ConnectorPlugin(ctx _context.Context, pluginName string, environmentId string, kafkaClusterId string) ApiValidateConnectv1ConnectorPluginRequest
-
-	// ValidateConnectv1ConnectorPluginExecute executes the request
-	//  @return InlineResponse2003
-	ValidateConnectv1ConnectorPluginExecute(r ApiValidateConnectv1ConnectorPluginRequest) (InlineResponse2003, *_nethttp.Response, error)
-}
-
 // ManagedConnectorPluginsConnectV1ApiService ManagedConnectorPluginsConnectV1Api service
 type ManagedConnectorPluginsConnectV1ApiService service
 
 type ApiListConnectv1ConnectorPluginsRequest struct {
 	ctx            _context.Context
-	ApiService     ManagedConnectorPluginsConnectV1Api
+	ApiService     *ManagedConnectorPluginsConnectV1ApiService
 	environmentId  string
 	kafkaClusterId string
 }
@@ -225,7 +185,7 @@ func (a *ManagedConnectorPluginsConnectV1ApiService) ListConnectv1ConnectorPlugi
 
 type ApiValidateConnectv1ConnectorPluginRequest struct {
 	ctx            _context.Context
-	ApiService     ManagedConnectorPluginsConnectV1Api
+	ApiService     *ManagedConnectorPluginsConnectV1ApiService
 	pluginName     string
 	environmentId  string
 	kafkaClusterId string

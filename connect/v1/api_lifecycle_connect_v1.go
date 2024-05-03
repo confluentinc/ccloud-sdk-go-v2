@@ -39,51 +39,12 @@ var (
 	_ _context.Context
 )
 
-type LifecycleConnectV1Api interface {
-
-	/*
-			PauseConnectv1Connector Pause a Connector
-
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-		Pause the connector and its tasks. Stops message processing until the connector is resumed. This call is asynchronous and the tasks will not transition to PAUSED state at the same time.
-
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param connectorName The unique name of the connector.
-			 @param environmentId The unique identifier of the environment this resource belongs to.
-			 @param kafkaClusterId The unique identifier for the Kafka cluster.
-			 @return ApiPauseConnectv1ConnectorRequest
-	*/
-	PauseConnectv1Connector(ctx _context.Context, connectorName string, environmentId string, kafkaClusterId string) ApiPauseConnectv1ConnectorRequest
-
-	// PauseConnectv1ConnectorExecute executes the request
-	PauseConnectv1ConnectorExecute(r ApiPauseConnectv1ConnectorRequest) (*_nethttp.Response, error)
-
-	/*
-			ResumeConnectv1Connector Resume a Connector
-
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-		Resume a paused connector or do nothing if the connector is not paused. This call is asynchronous and the tasks will not transition to RUNNING state at the same time.
-
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param connectorName The unique name of the connector.
-			 @param environmentId The unique identifier of the environment this resource belongs to.
-			 @param kafkaClusterId The unique identifier for the Kafka cluster.
-			 @return ApiResumeConnectv1ConnectorRequest
-	*/
-	ResumeConnectv1Connector(ctx _context.Context, connectorName string, environmentId string, kafkaClusterId string) ApiResumeConnectv1ConnectorRequest
-
-	// ResumeConnectv1ConnectorExecute executes the request
-	ResumeConnectv1ConnectorExecute(r ApiResumeConnectv1ConnectorRequest) (*_nethttp.Response, error)
-}
-
 // LifecycleConnectV1ApiService LifecycleConnectV1Api service
 type LifecycleConnectV1ApiService service
 
 type ApiPauseConnectv1ConnectorRequest struct {
 	ctx            _context.Context
-	ApiService     LifecycleConnectV1Api
+	ApiService     *LifecycleConnectV1ApiService
 	connectorName  string
 	environmentId  string
 	kafkaClusterId string
@@ -216,7 +177,7 @@ func (a *LifecycleConnectV1ApiService) PauseConnectv1ConnectorExecute(r ApiPause
 
 type ApiResumeConnectv1ConnectorRequest struct {
 	ctx            _context.Context
-	ApiService     LifecycleConnectV1Api
+	ApiService     *LifecycleConnectV1ApiService
 	connectorName  string
 	environmentId  string
 	kafkaClusterId string

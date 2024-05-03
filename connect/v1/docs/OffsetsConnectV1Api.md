@@ -4,9 +4,9 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AlterConnectv1ConnectorOffsetsRequest**](OffsetsConnectV1Api.md#AlterConnectv1ConnectorOffsetsRequest) | **Post** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request | Request a Connector Offsets
+[**AlterConnectv1ConnectorOffsetsRequest**](OffsetsConnectV1Api.md#AlterConnectv1ConnectorOffsetsRequest) | **Post** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request | Request to Alter the Connector Offsets
 [**GetConnectv1ConnectorOffsets**](OffsetsConnectV1Api.md#GetConnectv1ConnectorOffsets) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets | Get a Connector Offsets
-[**GetConnectv1ConnectorOffsetsRequestStatus**](OffsetsConnectV1Api.md#GetConnectv1ConnectorOffsetsRequestStatus) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request/status | Get a Connector Offsets Request Status
+[**GetConnectv1ConnectorOffsetsRequestStatus**](OffsetsConnectV1Api.md#GetConnectv1ConnectorOffsetsRequestStatus) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request/status | Get the Status of Altered Offset Request
 
 
 
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 > ConnectV1AlterOffsetRequestInfo AlterConnectv1ConnectorOffsetsRequest(ctx, connectorName, environmentId, kafkaClusterId).ConnectV1AlterOffsetRequest(connectV1AlterOffsetRequest).Execute()
 
-Request a Connector Offsets
+Request to Alter the Connector Offsets
 
 
 
@@ -168,7 +168,7 @@ Name | Type | Description  | Notes
 
 > ConnectV1AlterOffsetStatus GetConnectv1ConnectorOffsetsRequestStatus(ctx, connectorName, environmentId, kafkaClusterId).Execute()
 
-Get a Connector Offsets Request Status
+Get the Status of Altered Offset Request
 
 
 

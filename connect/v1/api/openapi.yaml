@@ -244,20 +244,52 @@ paths:
         $ref: '#/components/requestBodies/inline_object'
         content:
           application/json:
-            example:
-              name: MyGcsLogsBucketConnector
-              config:
-                connector.class: GcsSink
-                data.format: BYTES
-                flush.size: "1000"
-                gcs.bucket.name: APILogsBucket
-                gcs.credentials.config: '****************'
-                kafka.api.key: '****************'
-                kafka.api.secret: '****************'
-                name: MyGcsLogsBucketConnector
-                tasks.max: "2"
-                time.interval: DAILY
-                topics: APILogsTopic
+            examples:
+              sink:
+                value:
+                  name: MyGcsLogsBucketConnector
+                  config:
+                    connector.class: GcsSink
+                    data.format: BYTES
+                    flush.size: "1000"
+                    gcs.bucket.name: APILogsBucket
+                    gcs.credentials.config: '****************'
+                    kafka.api.key: '****************'
+                    kafka.api.secret: '****************'
+                    name: MyGcsLogsBucketConnector
+                    tasks.max: "2"
+                    time.interval: DAILY
+                    topics: APILogsTopic
+                  offsets:
+                  - partition:
+                      kafka_partition: 0
+                      kafka_topic: APILogsTopic
+                    offset:
+                      kafka_offset: 1000
+              source:
+                value:
+                  name: MySqlCdcSourceV2Connector_0
+                  config:
+                    connector.class: MySqlCdcSourceV2
+                    output.data.format: JSON
+                    flush.size: "1000"
+                    database.hostname: 12.34.567.98
+                    database.password: '****************'
+                    database.port: "1234"
+                    database.user: '****'
+                    kafka.api.key: '****************'
+                    kafka.api.secret: '****************'
+                    name: MySqlCdcSourceV2Connector_0
+                    tasks.max: "1"
+                    time.interval: DAILY
+                    topic.prefix: test
+                  offsets:
+                  - partition:
+                      server: test
+                    offset:
+                      file: mysql-bin.000123
+                      pos: 154
+                      ts_sec: 1712907333
             schema:
               properties:
                 name:
@@ -322,6 +354,28 @@ paths:
                   - name
                   type: object
                   x-redact: true
+                offsets:
+                  description: Array of offsets which are categorised into partitions.
+                  items:
+                    properties:
+                      partition:
+                        additionalProperties: true
+                        description: "The partition information. For sink connectors\
+                          \ this is the kafka topic and \npartition. For source connectors\
+                          \ this is depends on the partitions defined by the \nsource\
+                          \ connector. For example, the table which this task is pulling\
+                          \ data from in a\nJDBC based MySQL source connector."
+                        type: object
+                      offset:
+                        additionalProperties: true
+                        description: "The offset of the partition. For sink connectors\
+                          \ this is the kafka offset. For \nsource connectors this\
+                          \ is depends on the offset defined by the source connector.\
+                          \ \nFor example, the timestamp and incrementing column info\
+                          \ in a table, for a JDBC based \nMySQL source connector."
+                        type: object
+                    type: object
+                  type: array
               type: object
       responses:
         "201":
@@ -349,8 +403,14 @@ paths:
                 - connector: MyGcsLogsBucketConnector
                   task: 0
                 type: sink
+                offsets:
+                - partition:
+                    kafka_partition: 0
+                    kafka_topic: APILogsTopic
+                  offset:
+                    kafka_offset: 1000
               schema:
-                $ref: '#/components/schemas/connect.v1.Connector'
+                $ref: '#/components/schemas/connect.v1.ConnectorWithOffsets'
           description: Created
         "400":
           content:
@@ -405,13 +465,13 @@ paths:
             --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"name":"string","config":{"connector.class":"string","name":"string","kafka.api.key":"string","kafka.api.secret":"string","confluent.connector.type":"CUSTOM","confluent.custom.plugin.id":"ccp-lq5m06","confluent.custom.connection.endpoints":"string","confluent.custom.schema.registry.auto":"FALSE","property1":"string","property2":"string"}}'
+            --data '{"name":"string","config":{"connector.class":"string","name":"string","kafka.api.key":"string","kafka.api.secret":"string","confluent.connector.type":"CUSTOM","confluent.custom.plugin.id":"ccp-lq5m06","confluent.custom.connection.endpoints":"string","confluent.custom.schema.registry.auto":"FALSE","property1":"string","property2":"string"},"offsets":[{"partition":{},"offset":{}}]}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"},\"offsets\":[{\"partition\":{},\"offset\":{}}]}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors")
             .post(body)
@@ -429,19 +489,20 @@ paths:
           \",\\\"confluent.connector.type\\\":\\\"CUSTOM\\\",\\\"confluent.custom.plugin.id\\\
           \":\\\"ccp-lq5m06\\\",\\\"confluent.custom.connection.endpoints\\\":\\\"\
           string\\\",\\\"confluent.custom.schema.registry.auto\\\":\\\"FALSE\\\",\\\
-          \"property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\"}}\")\n\n\
-          \treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \"property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\"},\\\"offsets\\\
+          \":[{\\\"partition\\\":{},\\\"offset\\\":{}}]}\")\n\n\treq, _ := http.NewRequest(\"\
+          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"}}"
+          payload = "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"},\"offsets\":[{\"partition\":{},\"offset\":{}}]}"
 
           headers = {
               'content-type': "application/json",
@@ -495,7 +556,8 @@ paths:
               'confluent.custom.schema.registry.auto': 'FALSE',
               property1: 'string',
               property2: 'string'
-            }
+            },
+            offsets: [{partition: {}, offset: {}}]
           }));
           req.end();
       - lang: C
@@ -510,7 +572,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"},\"offsets\":[{\"partition\":{},\"offset\":{}}]}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -519,7 +581,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"},\"offsets\":[{\"partition\":{},\"offset\":{}}]}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info,status,id:
     get:
@@ -862,11 +924,6 @@ paths:
                 properties:
                   cloud.environment:
                     description: The cloud environment type.
-                    enum:
-                    - private
-                    - devel
-                    - stag
-                    - prod
                     type: string
                   cloud.provider:
                     description: The cloud service provider, e.g. aws, azure, etc.
@@ -1141,7 +1198,7 @@ paths:
         description: Configuration parameters for the connector. All values should
           be strings.
       responses:
-        "201":
+        "200":
           content:
             application/json:
               example:
@@ -3431,7 +3488,7 @@ paths:
       security:
       - cloud-api-key: []
       - confluent-sts-access-token: []
-      summary: Request a Connector Offsets
+      summary: Request to Alter the Connector Offsets
       tags:
       - Offsets (connect/v1)
       x-codeSamples:
@@ -3711,7 +3768,7 @@ paths:
       security:
       - cloud-api-key: []
       - confluent-sts-access-token: []
-      summary: Get a Connector Offsets Request Status
+      summary: Get the Status of Altered Offset Request
       tags:
       - Offsets (connect/v1)
       x-codeSamples:
@@ -3930,11 +3987,6 @@ components:
           properties:
             cloud.environment:
               description: The cloud environment type.
-              enum:
-              - private
-              - devel
-              - stag
-              - prod
               type: string
             cloud.provider:
               description: The cloud service provider, e.g. aws, azure, etc.
@@ -3987,6 +4039,121 @@ components:
       - config
       - name
       type: object
+    connect.v1.ConnectorWithOffsets:
+      example:
+        offsets:
+        - '{}'
+        - '{}'
+        name: name
+        type: sink
+        config:
+          key: config
+        tasks:
+        - task: 0
+          connector: connector
+        - task: 0
+          connector: connector
+      properties:
+        name:
+          description: Name of the connector
+          type: string
+        config:
+          additionalProperties:
+            type: string
+          description: |-
+            Configuration parameters for the connector. These configurations
+            are the minimum set of key-value pairs which can be used to
+            define how the connector connects Kafka to the external system.
+            Some of these key-value pairs are common to all the connectors, such as
+            connection parameters to Kafka, connector metadata, etc. The list
+            of common connector configurations is as follows
+            - cloud.environment
+            - cloud.provider
+            - connector.class
+            - kafka.api.key
+            - kafka.api.secret
+            - kafka.endpoint
+            - kafka.region
+            - name
+            A specific connector such as `GcsSink` would have additional
+            parameters such as `gcs.bucket.name`, `flush.size`, etc.
+          properties:
+            cloud.environment:
+              description: The cloud environment type.
+              type: string
+            cloud.provider:
+              description: The cloud service provider, e.g. aws, azure, etc.
+              type: string
+              x-extensible-enum:
+              - aws
+              - azure
+              - gcp
+            connector.class:
+              description: The connector class name. E.g. BigQuerySink, GcsSink, etc.
+              type: string
+            name:
+              description: Name or alias of the class (plugin) for this connector.
+              type: string
+            kafka.endpoint:
+              description: The Kafka cluster endpoint.
+              type: string
+            kafka.region:
+              description: The Kafka cluster region.
+              type: string
+            kafka.api.key:
+              description: The Kafka cluster API key.
+              type: string
+            kafka.api.secret:
+              description: The Kafka cluster API secret.
+              type: string
+              x-redact: true
+          required:
+          - cloud.environment
+          - cloud.provider
+          - connector.class
+          - kafka.api.key
+          - kafka.api.secret
+          - kafka.endpoint
+          - kafka.region
+          - name
+          type: object
+        tasks:
+          description: List of active tasks generated by the connector
+          items:
+            $ref: '#/components/schemas/connect_v1_Connector_tasks'
+          type: array
+        type:
+          description: Type of connector, sink or source
+          enum:
+          - sink
+          - source
+          type: string
+        offsets:
+          description: Array of offsets which are categorised into partitions.
+          items:
+            properties:
+              partition:
+                additionalProperties: true
+                description: "The partition information. For sink connectors this\
+                  \ is the kafka topic and \npartition. For source connectors this\
+                  \ is depends on the partitions defined by the \nsource connector.\
+                  \ For example, the table which this task is pulling data from in\
+                  \ a\nJDBC based MySQL source connector."
+                type: object
+              offset:
+                additionalProperties: true
+                description: "The offset of the partition. For sink connectors this\
+                  \ is the kafka offset. For \nsource connectors this is depends on\
+                  \ the offset defined by the source connector. \nFor example, the\
+                  \ timestamp and incrementing column info in a table, for a JDBC\
+                  \ based \nMySQL source connector."
+                type: object
+            type: object
+          type: array
+      required:
+      - config
+      - name
+      type: object
     connect.v1.Connectors:
       description: List of active task configs that have been created by the connector
       items:
@@ -4026,11 +4193,6 @@ components:
             properties:
               cloud.environment:
                 description: The cloud environment type.
-                enum:
-                - private
-                - devel
-                - stag
-                - prod
                 type: string
               cloud.provider:
                 description: The cloud service provider, e.g. aws, azure, etc.
@@ -4369,6 +4531,28 @@ components:
           - name
           type: object
           x-redact: true
+        offsets:
+          description: Array of offsets which are categorised into partitions.
+          items:
+            properties:
+              partition:
+                additionalProperties: true
+                description: "The partition information. For sink connectors this\
+                  \ is the kafka topic and \npartition. For source connectors this\
+                  \ is depends on the partitions defined by the \nsource connector.\
+                  \ For example, the table which this task is pulling data from in\
+                  \ a\nJDBC based MySQL source connector."
+                type: object
+              offset:
+                additionalProperties: true
+                description: "The offset of the partition. For sink connectors this\
+                  \ is the kafka offset. For \nsource connectors this is depends on\
+                  \ the offset defined by the source connector. \nFor example, the\
+                  \ timestamp and incrementing column info in a table, for a JDBC\
+                  \ based \nMySQL source connector."
+                type: object
+            type: object
+          type: array
       type: object
     inline_response_400:
       properties:
@@ -4801,11 +4985,6 @@ components:
           properties:
             cloud.environment:
               description: The cloud environment type.
-              enum:
-              - private
-              - devel
-              - stag
-              - prod
               type: string
             cloud.provider:
               description: The cloud service provider, e.g. aws, azure, etc.
@@ -4919,6 +5098,7 @@ components:
           type: string
           x-extensible-enum:
           - PENDING
+          - PENDING_VALIDATION
           - APPLIED
           - FAILED
         message:

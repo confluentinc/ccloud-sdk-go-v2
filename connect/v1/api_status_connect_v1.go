@@ -39,51 +39,12 @@ var (
 	_ _context.Context
 )
 
-type StatusConnectV1Api interface {
-
-	/*
-			ListConnectv1ConnectorTasks List of Connector Tasks
-
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-		Get a list of tasks currently running for the connector.
-
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param connectorName The unique name of the connector.
-			 @param environmentId The unique identifier of the environment this resource belongs to.
-			 @param kafkaClusterId The unique identifier for the Kafka cluster.
-			 @return ApiListConnectv1ConnectorTasksRequest
-	*/
-	ListConnectv1ConnectorTasks(ctx _context.Context, connectorName string, environmentId string, kafkaClusterId string) ApiListConnectv1ConnectorTasksRequest
-
-	// ListConnectv1ConnectorTasksExecute executes the request
-	//  @return []map[string]interface{}
-	ListConnectv1ConnectorTasksExecute(r ApiListConnectv1ConnectorTasksRequest) ([]map[string]interface{}, *_nethttp.Response, error)
-
-	/*
-		ReadConnectv1ConnectorStatus Read a Connector Status
-
-		Get current status of the connector. This includes whether it is running, failed, or paused. Also includes which worker it is assigned to, error information if it has failed, and the state of all its tasks.
-
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param connectorName The unique name of the connector.
-		 @param environmentId The unique identifier of the environment this resource belongs to.
-		 @param kafkaClusterId The unique identifier for the Kafka cluster.
-		 @return ApiReadConnectv1ConnectorStatusRequest
-	*/
-	ReadConnectv1ConnectorStatus(ctx _context.Context, connectorName string, environmentId string, kafkaClusterId string) ApiReadConnectv1ConnectorStatusRequest
-
-	// ReadConnectv1ConnectorStatusExecute executes the request
-	//  @return InlineResponse2001
-	ReadConnectv1ConnectorStatusExecute(r ApiReadConnectv1ConnectorStatusRequest) (InlineResponse2001, *_nethttp.Response, error)
-}
-
 // StatusConnectV1ApiService StatusConnectV1Api service
 type StatusConnectV1ApiService service
 
 type ApiListConnectv1ConnectorTasksRequest struct {
 	ctx            _context.Context
-	ApiService     StatusConnectV1Api
+	ApiService     *StatusConnectV1ApiService
 	connectorName  string
 	environmentId  string
 	kafkaClusterId string
@@ -228,7 +189,7 @@ func (a *StatusConnectV1ApiService) ListConnectv1ConnectorTasksExecute(r ApiList
 
 type ApiReadConnectv1ConnectorStatusRequest struct {
 	ctx            _context.Context
-	ApiService     StatusConnectV1Api
+	ApiService     *StatusConnectV1ApiService
 	connectorName  string
 	environmentId  string
 	kafkaClusterId string

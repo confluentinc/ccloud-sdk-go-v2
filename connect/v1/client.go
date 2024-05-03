@@ -64,15 +64,15 @@ type APIClient struct {
 
 	// API Services
 
-	ConnectorsConnectV1Api ConnectorsConnectV1Api
+	ConnectorsConnectV1Api *ConnectorsConnectV1ApiService
 
-	LifecycleConnectV1Api LifecycleConnectV1Api
+	LifecycleConnectV1Api *LifecycleConnectV1ApiService
 
-	ManagedConnectorPluginsConnectV1Api ManagedConnectorPluginsConnectV1Api
+	ManagedConnectorPluginsConnectV1Api *ManagedConnectorPluginsConnectV1ApiService
 
-	OffsetsConnectV1Api OffsetsConnectV1Api
+	OffsetsConnectV1Api *OffsetsConnectV1ApiService
 
-	StatusConnectV1Api StatusConnectV1Api
+	StatusConnectV1Api *StatusConnectV1ApiService
 }
 
 type service struct {
