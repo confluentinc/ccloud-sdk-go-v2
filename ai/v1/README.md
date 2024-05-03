@@ -140,7 +140,7 @@ Each of these functions takes a value of the given basic type and returns a poin
 * `PtrString`
 * `PtrTime`
 
-## Author
+## Author of this repo
 
 api-team@confluent.io
 
