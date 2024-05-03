@@ -1,0 +1,17 @@
+name: ccloud-sdk-go-v2-internal
+lang: go
+lang_version: unknown
+git:
+  enable: true
+github:
+  enable: true
+semaphore:
+  enable: true
+  pipeline_enable: false
+  branches:
+    - master
+    - /^v\d+\.\d+\.x$/
+make:
+  enable: true
+  enable_updates: true
+  update_makefile: false
