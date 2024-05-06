@@ -37,7 +37,7 @@ import (
 
 // SqlV1ScalingStatus Scaling status for this statement.
 type SqlV1ScalingStatus struct {
-	// OK: The statement runs at the right scale. PENDING_SCALE_DOWN: The statement requires less resources, and will be scaled down in the near future. PENDING_SCALE_UP: The statement requires more resources, and will be scaled up in the near future. POOL_EXHAUSTED: The statement requires more resources, but not enough resources are available.
+	// OK: The statement runs at the right scale.  PENDING_SCALE_DOWN: The statement requires less resources, and will be scaled down in the near future.  PENDING_SCALE_UP: The statement requires more resources, and will be scaled up in the near future.  POOL_EXHAUSTED: The statement requires more resources, but not enough resources are available.
 	ScalingState *string `json:"scaling_state,omitempty"`
 	// The last time the scaling status was updated.
 	LastUpdated *time.Time `json:"last_updated,omitempty"`

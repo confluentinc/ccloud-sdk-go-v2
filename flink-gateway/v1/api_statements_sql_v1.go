@@ -42,15 +42,16 @@ var (
 type StatementsSqlV1Api interface {
 
 	/*
-		CreateSqlv1Statement Create a Statement
+			CreateSqlv1Statement Create a Statement
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	Make a request to create a statement.
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param organizationId The unique identifier for the organization.
-		 @param environmentId The unique identifier for the environment.
-		 @return ApiCreateSqlv1StatementRequest
+		Make a request to create a statement.
+
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param organizationId The unique identifier for the organization.
+			 @param environmentId The unique identifier for the environment.
+			 @return ApiCreateSqlv1StatementRequest
 	*/
 	CreateSqlv1Statement(ctx _context.Context, organizationId string, environmentId string) ApiCreateSqlv1StatementRequest
 
@@ -59,16 +60,17 @@ type StatementsSqlV1Api interface {
 	CreateSqlv1StatementExecute(r ApiCreateSqlv1StatementRequest) (SqlV1Statement, *_nethttp.Response, error)
 
 	/*
-		DeleteSqlv1Statement Delete a Statement
+			DeleteSqlv1Statement Delete a Statement
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	Make a request to delete a statement.
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param organizationId The unique identifier for the organization.
-		 @param environmentId The unique identifier for the environment.
-		 @param statementName The unique identifier for the statement.
-		 @return ApiDeleteSqlv1StatementRequest
+		Make a request to delete a statement.
+
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param organizationId The unique identifier for the organization.
+			 @param environmentId The unique identifier for the environment.
+			 @param statementName The unique identifier for the statement.
+			 @return ApiDeleteSqlv1StatementRequest
 	*/
 	DeleteSqlv1Statement(ctx _context.Context, organizationId string, environmentId string, statementName string) ApiDeleteSqlv1StatementRequest
 
@@ -76,16 +78,17 @@ type StatementsSqlV1Api interface {
 	DeleteSqlv1StatementExecute(r ApiDeleteSqlv1StatementRequest) (*_nethttp.Response, error)
 
 	/*
-		GetSqlv1Statement Read a Statement
+			GetSqlv1Statement Read a Statement
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	Make a request to read a statement.
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param organizationId The unique identifier for the organization.
-		 @param environmentId The unique identifier for the environment.
-		 @param statementName The unique identifier for the statement.
-		 @return ApiGetSqlv1StatementRequest
+		Make a request to read a statement.
+
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param organizationId The unique identifier for the organization.
+			 @param environmentId The unique identifier for the environment.
+			 @param statementName The unique identifier for the statement.
+			 @return ApiGetSqlv1StatementRequest
 	*/
 	GetSqlv1Statement(ctx _context.Context, organizationId string, environmentId string, statementName string) ApiGetSqlv1StatementRequest
 
@@ -94,15 +97,16 @@ type StatementsSqlV1Api interface {
 	GetSqlv1StatementExecute(r ApiGetSqlv1StatementRequest) (SqlV1Statement, *_nethttp.Response, error)
 
 	/*
-		ListSqlv1Statements List of Statements
+			ListSqlv1Statements List of Statements
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	Retrieve a sorted, filtered, paginated list of all statements.
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param organizationId The unique identifier for the organization.
-		 @param environmentId The unique identifier for the environment.
-		 @return ApiListSqlv1StatementsRequest
+		Retrieve a sorted, filtered, paginated list of all statements.
+
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param organizationId The unique identifier for the organization.
+			 @param environmentId The unique identifier for the environment.
+			 @return ApiListSqlv1StatementsRequest
 	*/
 	ListSqlv1Statements(ctx _context.Context, organizationId string, environmentId string) ApiListSqlv1StatementsRequest
 
@@ -111,16 +115,19 @@ type StatementsSqlV1Api interface {
 	ListSqlv1StatementsExecute(r ApiListSqlv1StatementsRequest) (SqlV1StatementList, *_nethttp.Response, error)
 
 	/*
-		UpdateSqlv1Statement Update a Statement
+			UpdateSqlv1Statement Update a Statement
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	Make a request to update a statement.
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param organizationId The unique identifier for the organization.
-		 @param environmentId The unique identifier for the environment.
-		 @param statementName The unique identifier for the statement.
-		 @return ApiUpdateSqlv1StatementRequest
+		Make a request to update a statement.
+		The request will fail with a 409 Conflict error if the Statement has changed since it was fetched.
+		In this case, do a GET, reapply the modifications, and try the update again.
+
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param organizationId The unique identifier for the organization.
+			 @param environmentId The unique identifier for the environment.
+			 @param statementName The unique identifier for the statement.
+			 @return ApiUpdateSqlv1StatementRequest
 	*/
 	UpdateSqlv1Statement(ctx _context.Context, organizationId string, environmentId string, statementName string) ApiUpdateSqlv1StatementRequest
 
@@ -151,7 +158,8 @@ func (r ApiCreateSqlv1StatementRequest) Execute() (SqlV1Statement, *_nethttp.Res
 /*
 CreateSqlv1Statement Create a Statement
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
 Make a request to create a statement.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -324,7 +332,8 @@ func (r ApiDeleteSqlv1StatementRequest) Execute() (*_nethttp.Response, error) {
 /*
 DeleteSqlv1Statement Delete a Statement
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
 Make a request to delete a statement.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -476,7 +485,8 @@ func (r ApiGetSqlv1StatementRequest) Execute() (SqlV1Statement, *_nethttp.Respon
 /*
 GetSqlv1Statement Read a Statement
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
 Make a request to read a statement.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -660,7 +670,8 @@ func (r ApiListSqlv1StatementsRequest) Execute() (SqlV1StatementList, *_nethttp.
 /*
 ListSqlv1Statements List of Statements
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
 Retrieve a sorted, filtered, paginated list of all statements.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -836,8 +847,11 @@ func (r ApiUpdateSqlv1StatementRequest) Execute() (*_nethttp.Response, error) {
 /*
 UpdateSqlv1Statement Update a Statement
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
 Make a request to update a statement.
+The request will fail with a 409 Conflict error if the Statement has changed since it was fetched.
+In this case, do a GET, reapply the modifications, and try the update again.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param organizationId The unique identifier for the organization.

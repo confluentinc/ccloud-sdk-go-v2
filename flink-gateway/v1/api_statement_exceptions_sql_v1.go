@@ -42,16 +42,17 @@ var (
 type StatementExceptionsSqlV1Api interface {
 
 	/*
-		GetSqlv1StatementExceptions List of Statement Exceptions
+			GetSqlv1StatementExceptions List of Statement Exceptions
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	Retrieve a list of the 10 most recent statement exceptions.
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param organizationId The unique identifier for the organization.
-		 @param environmentId The unique identifier for the environment.
-		 @param statementName The unique identifier for the statement.
-		 @return ApiGetSqlv1StatementExceptionsRequest
+		Retrieve a list of the 10 most recent statement exceptions.
+
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param organizationId The unique identifier for the organization.
+			 @param environmentId The unique identifier for the environment.
+			 @param statementName The unique identifier for the statement.
+			 @return ApiGetSqlv1StatementExceptionsRequest
 	*/
 	GetSqlv1StatementExceptions(ctx _context.Context, organizationId string, environmentId string, statementName string) ApiGetSqlv1StatementExceptionsRequest
 
@@ -78,7 +79,8 @@ func (r ApiGetSqlv1StatementExceptionsRequest) Execute() (SqlV1StatementExceptio
 /*
 GetSqlv1StatementExceptions List of Statement Exceptions
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
 Retrieve a list of the 10 most recent statement exceptions.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
