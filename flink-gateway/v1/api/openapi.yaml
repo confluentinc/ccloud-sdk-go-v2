@@ -15,7 +15,7 @@ servers:
   url: https://flink.region.provider.confluent.cloud
 tags:
 - description: |-
-    [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `Statement` represents a core resource used to model SQL statements for execution.
     A statement generalizes DDL, DML, DQL, etc., but doesn’t attempt to handle session
@@ -25,7 +25,7 @@ tags:
     <SchemaDefinition schemaRef="#/components/schemas/sql.v1.Statement" />
   name: Statements (sql/v1)
 - description: |-
-    [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `StatementResult` represents a result of a `Statement` resource.
     The API allows you to read your statement's results.
@@ -33,7 +33,7 @@ tags:
     <SchemaDefinition schemaRef="#/components/schemas/sql.v1.StatementResult" />
   name: Statement Results (sql/v1)
 - description: |-
-    [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `StatementException` represents an exception of a `Statement` resource.
     The API allows you to read your statement's exceptions.
@@ -44,7 +44,8 @@ paths:
   /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results:
     get:
       description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
         Read Statement Result.
       operationId: getSqlv1StatementResult
       parameters:
@@ -327,7 +328,8 @@ paths:
   /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements:
     get:
       description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
         Retrieve a sorted, filtered, paginated list of all statements.
       operationId: listSqlv1Statements
       parameters:
@@ -606,7 +608,8 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
         Make a request to create a statement.
       operationId: createSqlv1Statement
       parameters:
@@ -637,7 +640,6 @@ paths:
                   spec:
                     required:
                     - compute_pool_id
-                    - principal
                     - statement
                     type: object
                 required:
@@ -849,13 +851,13 @@ paths:
             --url 'https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/statements' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"name":"sql123","organization_id":"7c60d51f-b44e-4682-87d6-449835ea4de6","environment_id":"string","spec":{"statement":"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;","properties":{"key1":"value1","key2":"value2"},"compute_pool_id":"fcp-00000","principal":"sa-abc123","stopped":true}}'
+            --data '{"name":"sql123","organization_id":"7c60d51f-b44e-4682-87d6-449835ea4de6","environment_id":"string","spec":{"statement":"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;","properties":{"sql.current-catalog":"my_environment","sql.current-database":"my_kafka_cluster"},"compute_pool_id":"fcp-00000","principal":"sa-abc123","stopped":false}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false}}");
           Request request = new Request.Builder()
             .url("https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/statements")
             .post(body)
@@ -870,13 +872,14 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"name\\\":\\\"sql123\\\",\\\"organization_id\\\
           \":\\\"7c60d51f-b44e-4682-87d6-449835ea4de6\\\",\\\"environment_id\\\":\\\
           \"string\\\",\\\"spec\\\":{\\\"statement\\\":\\\"SELECT * FROM TABLE WHERE\
-          \ VALUE1 = VALUE2;\\\",\\\"properties\\\":{\\\"key1\\\":\\\"value1\\\",\\\
-          \"key2\\\":\\\"value2\\\"},\\\"compute_pool_id\\\":\\\"fcp-00000\\\",\\\"\
-          principal\\\":\\\"sa-abc123\\\",\\\"stopped\\\":true}}\")\n\n\treq, _ :=\
-          \ http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
-          , \"application/json\")\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
-          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
-          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \ VALUE1 = VALUE2;\\\",\\\"properties\\\":{\\\"sql.current-catalog\\\":\\\
+          \"my_environment\\\",\\\"sql.current-database\\\":\\\"my_kafka_cluster\\\
+          \"},\\\"compute_pool_id\\\":\\\"fcp-00000\\\",\\\"principal\\\":\\\"sa-abc123\\\
+          \",\\\"stopped\\\":false}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url,\
+          \ payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\")\n\
+          \treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\t\
+          res, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -884,7 +887,7 @@ paths:
 
           conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
 
-          payload = "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true}}"
+          payload = "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false}}"
 
           headers = {
               'content-type': "application/json",
@@ -931,10 +934,13 @@ paths:
             environment_id: 'string',
             spec: {
               statement: 'SELECT * FROM TABLE WHERE VALUE1 = VALUE2;',
-              properties: {key1: 'value1', key2: 'value2'},
+              properties: {
+                'sql.current-catalog': 'my_environment',
+                'sql.current-database': 'my_kafka_cluster'
+              },
               compute_pool_id: 'fcp-00000',
               principal: 'sa-abc123',
-              stopped: true
+              stopped: false
             }
           }));
           req.end();
@@ -950,7 +956,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -959,13 +965,14 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: SQL API v1
   /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}:
     delete:
       description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
         Make a request to delete a statement.
       operationId: deleteSqlv1Statement
       parameters:
@@ -1219,7 +1226,8 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
         Make a request to read a statement.
       operationId: getSqlv1Statement
       parameters:
@@ -1492,8 +1500,11 @@ paths:
           IRestResponse response = client.Execute(request);
     put:
       description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
         Make a request to update a statement.
+        The request will fail with a 409 Conflict error if the Statement has changed since it was fetched.
+        In this case, do a GET, reapply the modifications, and try the update again.
       operationId: updateSqlv1Statement
       parameters:
       - description: The unique identifier for the organization.
@@ -1687,13 +1698,13 @@ paths:
             --url 'https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"name":"sql123","organization_id":"7c60d51f-b44e-4682-87d6-449835ea4de6","environment_id":"string","spec":{"statement":"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;","properties":{"key1":"value1","key2":"value2"},"compute_pool_id":"fcp-00000","principal":"sa-abc123","stopped":true},"metadata":{}}'
+            --data '{"name":"sql123","organization_id":"7c60d51f-b44e-4682-87d6-449835ea4de6","environment_id":"string","spec":{"statement":"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;","properties":{"sql.current-catalog":"my_environment","sql.current-database":"my_kafka_cluster"},"compute_pool_id":"fcp-00000","principal":"sa-abc123","stopped":false},"metadata":{}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true},\"metadata\":{}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false},\"metadata\":{}}");
           Request request = new Request.Builder()
             .url("https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}")
             .put(body)
@@ -1708,21 +1719,22 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"name\\\":\\\"sql123\\\",\\\"organization_id\\\
           \":\\\"7c60d51f-b44e-4682-87d6-449835ea4de6\\\",\\\"environment_id\\\":\\\
           \"string\\\",\\\"spec\\\":{\\\"statement\\\":\\\"SELECT * FROM TABLE WHERE\
-          \ VALUE1 = VALUE2;\\\",\\\"properties\\\":{\\\"key1\\\":\\\"value1\\\",\\\
-          \"key2\\\":\\\"value2\\\"},\\\"compute_pool_id\\\":\\\"fcp-00000\\\",\\\"\
-          principal\\\":\\\"sa-abc123\\\",\\\"stopped\\\":true},\\\"metadata\\\":{}}\"\
-          )\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \ VALUE1 = VALUE2;\\\",\\\"properties\\\":{\\\"sql.current-catalog\\\":\\\
+          \"my_environment\\\",\\\"sql.current-database\\\":\\\"my_kafka_cluster\\\
+          \"},\\\"compute_pool_id\\\":\\\"fcp-00000\\\",\\\"principal\\\":\\\"sa-abc123\\\
+          \",\\\"stopped\\\":false},\\\"metadata\\\":{}}\")\n\n\treq, _ := http.NewRequest(\"\
+          PUT\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
 
-          payload = "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true},\"metadata\":{}}"
+          payload = "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false},\"metadata\":{}}"
 
           headers = {
               'content-type': "application/json",
@@ -1769,10 +1781,13 @@ paths:
             environment_id: 'string',
             spec: {
               statement: 'SELECT * FROM TABLE WHERE VALUE1 = VALUE2;',
-              properties: {key1: 'value1', key2: 'value2'},
+              properties: {
+                'sql.current-catalog': 'my_environment',
+                'sql.current-database': 'my_kafka_cluster'
+              },
               compute_pool_id: 'fcp-00000',
               principal: 'sa-abc123',
-              stopped: true
+              stopped: false
             },
             metadata: {}
           }));
@@ -1789,7 +1804,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true},\"metadata\":{}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false},\"metadata\":{}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1798,13 +1813,14 @@ paths:
           var request = new RestRequest(Method.PUT);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true},\"metadata\":{}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false},\"metadata\":{}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: SQL API v1
   /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}/exceptions:
     get:
       description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
         Retrieve a list of the 10 most recent statement exceptions.
       operationId: getSqlv1StatementExceptions
       parameters:
@@ -2284,11 +2300,21 @@ components:
         metadata:
           allOf:
           - $ref: '#/components/schemas/ObjectMeta'
+          - properties:
+              self:
+                example: https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements/my-statement
+              uid:
+                example: 12345678-1234-1234-1234-123456789012
+              resource_version:
+                example: a23av
+              resource_name:
+                example: ""
         name:
           description: The user provided name of the resource, unique within this
             environment.
           example: sql123
-          maxLength: 255
+          maxLength: 100
+          pattern: '[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*'
           type: string
           x-immutable: true
         organization_id:
@@ -2311,12 +2337,19 @@ components:
         phase:
           description: |
             The lifecycle phase of the submitted SQL statement:
+
             PENDING: SQL statement is pending execution;
+
             RUNNING: SQL statement execution is in progress;
+
             COMPLETED: SQL statement is completed;
+
             DELETING: SQL statement deletion is in progress;
+
             FAILING: SQL statement is failing;
+
             FAILED: SQL statement execution has failed;
+
             STOPPED: SQL statement execution has successfully been stopped;
           example: RUNNING
           readOnly: true
@@ -2332,12 +2365,25 @@ components:
         scaling_status:
           $ref: '#/components/schemas/sql.v1.ScalingStatus'
         detail:
-          description: Description of a SQL statement phase.
-          example: 'COMPLETED: SQL statement is completed'
+          description: Details about the execution status of this statement.
+          example: Statement is running successfully
           readOnly: true
           type: string
         traits:
           $ref: '#/components/schemas/sql.v1.StatementTraits'
+        network_kind:
+          description: |
+            The networking type used by the submitted SQL statement:
+
+            PUBLIC: SQL statement is using public networking;
+
+            PRIVATE: SQL statement is using private networking;
+          example: PUBLIC
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - PUBLIC
+          - PRIVATE
       readOnly: true
       required:
       - phase
@@ -2408,6 +2454,17 @@ components:
         metadata:
           allOf:
           - $ref: '#/components/schemas/ListMeta'
+          - properties:
+              self:
+                example: https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements
+              first:
+                example: https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements
+              last:
+                example: ""
+              prev:
+                example: ""
+              next:
+                example: https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb
         data:
           description: A data property that contains an array of resource items. Each
             entry in the array is a separate resource.
@@ -2520,8 +2577,8 @@ components:
             type: string
           description: A map (key-value pairs) of statement properties.
           example:
-            key1: value1
-            key2: value2
+            sql.current-catalog: my_environment
+            sql.current-database: my_kafka_cluster
           maximum: 8192
           type: object
         compute_pool_id:
@@ -2537,6 +2594,7 @@ components:
           x-immutable: true
         stopped:
           description: Indicates whether the statement should be stopped.
+          example: false
           type: boolean
       type: object
       x-enable-listmeta: true
@@ -2616,8 +2674,11 @@ components:
         scaling_state:
           description: |
             OK: The statement runs at the right scale.
+
             PENDING_SCALE_DOWN: The statement requires less resources, and will be scaled down in the near future.
+
             PENDING_SCALE_UP: The statement requires more resources, and will be scaled up in the near future.
+
             POOL_EXHAUSTED: The statement requires more resources, but not enough resources are available.
           example: OK
           readOnly: true

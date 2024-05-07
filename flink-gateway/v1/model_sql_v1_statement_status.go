@@ -36,12 +36,14 @@ import (
 
 // SqlV1StatementStatus The status of the Statement
 type SqlV1StatementStatus struct {
-	// The lifecycle phase of the submitted SQL statement: PENDING: SQL statement is pending execution; RUNNING: SQL statement execution is in progress; COMPLETED: SQL statement is completed; DELETING: SQL statement deletion is in progress; FAILING: SQL statement is failing; FAILED: SQL statement execution has failed; STOPPED: SQL statement execution has successfully been stopped;
+	// The lifecycle phase of the submitted SQL statement:  PENDING: SQL statement is pending execution;  RUNNING: SQL statement execution is in progress;  COMPLETED: SQL statement is completed;  DELETING: SQL statement deletion is in progress;  FAILING: SQL statement is failing;  FAILED: SQL statement execution has failed;  STOPPED: SQL statement execution has successfully been stopped;
 	Phase         string              `json:"phase,omitempty"`
 	ScalingStatus *SqlV1ScalingStatus `json:"scaling_status,omitempty"`
-	// Description of a SQL statement phase.
+	// Details about the execution status of this statement.
 	Detail *string               `json:"detail,omitempty"`
 	Traits *SqlV1StatementTraits `json:"traits,omitempty"`
+	// The networking type used by the submitted SQL statement:  PUBLIC: SQL statement is using public networking;  PRIVATE: SQL statement is using private networking;
+	NetworkKind *string `json:"network_kind,omitempty"`
 }
 
 // NewSqlV1StatementStatus instantiates a new SqlV1StatementStatus object
@@ -182,12 +184,45 @@ func (o *SqlV1StatementStatus) SetTraits(v SqlV1StatementTraits) {
 	o.Traits = &v
 }
 
+// GetNetworkKind returns the NetworkKind field value if set, zero value otherwise.
+func (o *SqlV1StatementStatus) GetNetworkKind() string {
+	if o == nil || o.NetworkKind == nil {
+		var ret string
+		return ret
+	}
+	return *o.NetworkKind
+}
+
+// GetNetworkKindOk returns a tuple with the NetworkKind field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SqlV1StatementStatus) GetNetworkKindOk() (*string, bool) {
+	if o == nil || o.NetworkKind == nil {
+		return nil, false
+	}
+	return o.NetworkKind, true
+}
+
+// HasNetworkKind returns a boolean if a field has been set.
+func (o *SqlV1StatementStatus) HasNetworkKind() bool {
+	if o != nil && o.NetworkKind != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNetworkKind gets a reference to the given string and assigns it to the NetworkKind field.
+func (o *SqlV1StatementStatus) SetNetworkKind(v string) {
+	o.NetworkKind = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *SqlV1StatementStatus) Redact() {
 	o.recurseRedact(&o.Phase)
 	o.recurseRedact(o.ScalingStatus)
 	o.recurseRedact(o.Detail)
 	o.recurseRedact(o.Traits)
+	o.recurseRedact(o.NetworkKind)
 }
 
 func (o *SqlV1StatementStatus) recurseRedact(v interface{}) {
@@ -233,6 +268,9 @@ func (o SqlV1StatementStatus) MarshalJSON() ([]byte, error) {
 	}
 	if o.Traits != nil {
 		toSerialize["traits"] = o.Traits
+	}
+	if o.NetworkKind != nil {
+		toSerialize["network_kind"] = o.NetworkKind
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
