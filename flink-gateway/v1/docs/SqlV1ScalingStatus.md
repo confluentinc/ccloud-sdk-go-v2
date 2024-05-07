@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ScalingState** | Pointer to **string** | OK: The statement runs at the right scale. PENDING_SCALE_DOWN: The statement requires less resources, and will be scaled down in the near future. PENDING_SCALE_UP: The statement requires more resources, and will be scaled up in the near future. POOL_EXHAUSTED: The statement requires more resources, but not enough resources are available.  | [optional] [readonly] 
+**ScalingState** | Pointer to **string** | OK: The statement runs at the right scale.  PENDING_SCALE_DOWN: The statement requires less resources, and will be scaled down in the near future.  PENDING_SCALE_UP: The statement requires more resources, and will be scaled up in the near future.  POOL_EXHAUSTED: The statement requires more resources, but not enough resources are available.  | [optional] [readonly] 
 **LastUpdated** | Pointer to **time.Time** | The last time the scaling status was updated. | [optional] [readonly] 
 
 ## Methods
