@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | AwsEgressPrivateLinkEndpoint kind. | 
-**VpcEndpointServiceName** | **string** | Id of the VPC Endpoint service used for PrivateLink. | 
-**EnableHighAvailability** | Pointer to **bool** | resource is provisioned with high availability | [optional] 
+**VpcEndpointServiceName** | **string** | ID of the VPC Endpoint service used for PrivateLink. | 
+**EnableHighAvailability** | Pointer to **bool** | Whether a resource should be provisioned with high availability. Endpoints deployed with high availability have network interfaces deployed in multiple AZs. | [optional] 
 
 ## Methods
 

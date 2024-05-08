@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | PrivateLinkAccessPoint kind. | 
-**ResourceId** | **string** | Id of the target resource. | 
+**ResourceId** | **string** | ID of the target resource. | 
 
 ## Methods
 

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | AwsEgressPrivateLinkEndpointStatus kind. | 
-**VpcEndpointId** | **string** | Id of a VPC Endpoint (if any) that is connected to the VPC Endpoint service. | [readonly] 
+**VpcEndpointId** | **string** | ID of a VPC Endpoint (if any) that is connected to the VPC Endpoint service. | [readonly] 
 **VpcEndpointDnsName** | **string** | DNS name of a VPC Endpoint (if any) that is connected to the VPC Endpoint service. | [readonly] 
 
 ## Methods

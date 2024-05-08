@@ -34,8 +34,8 @@ import (
 	"reflect"
 )
 
-// EnvScopedObjectReference ObjectReference provides information for you to locate the referred object
-type EnvScopedObjectReference struct {
+// TypedEnvScopedObjectReference ObjectReference provides information for you to locate the referred object
+type TypedEnvScopedObjectReference struct {
 	// ID of the referred resource
 	Id string `json:"id,omitempty"`
 	// Environment of the referred resource, if env-scoped
@@ -44,30 +44,34 @@ type EnvScopedObjectReference struct {
 	Related string `json:"related,omitempty"`
 	// CRN reference to the referred resource
 	ResourceName string `json:"resource_name,omitempty"`
+	// API group and version of the referred resource
+	ApiVersion *string `json:"api_version,omitempty"`
+	// Kind of the referred resource
+	Kind *string `json:"kind,omitempty"`
 }
 
-// NewEnvScopedObjectReference instantiates a new EnvScopedObjectReference object
+// NewTypedEnvScopedObjectReference instantiates a new TypedEnvScopedObjectReference object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEnvScopedObjectReference(id string, related string, resourceName string) *EnvScopedObjectReference {
-	this := EnvScopedObjectReference{}
+func NewTypedEnvScopedObjectReference(id string, related string, resourceName string) *TypedEnvScopedObjectReference {
+	this := TypedEnvScopedObjectReference{}
 	this.Id = id
 	this.Related = related
 	this.ResourceName = resourceName
 	return &this
 }
 
-// NewEnvScopedObjectReferenceWithDefaults instantiates a new EnvScopedObjectReference object
+// NewTypedEnvScopedObjectReferenceWithDefaults instantiates a new TypedEnvScopedObjectReference object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewEnvScopedObjectReferenceWithDefaults() *EnvScopedObjectReference {
-	this := EnvScopedObjectReference{}
+func NewTypedEnvScopedObjectReferenceWithDefaults() *TypedEnvScopedObjectReference {
+	this := TypedEnvScopedObjectReference{}
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *EnvScopedObjectReference) GetId() string {
+func (o *TypedEnvScopedObjectReference) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -78,7 +82,7 @@ func (o *EnvScopedObjectReference) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *EnvScopedObjectReference) GetIdOk() (*string, bool) {
+func (o *TypedEnvScopedObjectReference) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -86,12 +90,12 @@ func (o *EnvScopedObjectReference) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *EnvScopedObjectReference) SetId(v string) {
+func (o *TypedEnvScopedObjectReference) SetId(v string) {
 	o.Id = v
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *EnvScopedObjectReference) GetEnvironment() string {
+func (o *TypedEnvScopedObjectReference) GetEnvironment() string {
 	if o == nil || o.Environment == nil {
 		var ret string
 		return ret
@@ -101,7 +105,7 @@ func (o *EnvScopedObjectReference) GetEnvironment() string {
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EnvScopedObjectReference) GetEnvironmentOk() (*string, bool) {
+func (o *TypedEnvScopedObjectReference) GetEnvironmentOk() (*string, bool) {
 	if o == nil || o.Environment == nil {
 		return nil, false
 	}
@@ -109,7 +113,7 @@ func (o *EnvScopedObjectReference) GetEnvironmentOk() (*string, bool) {
 }
 
 // HasEnvironment returns a boolean if a field has been set.
-func (o *EnvScopedObjectReference) HasEnvironment() bool {
+func (o *TypedEnvScopedObjectReference) HasEnvironment() bool {
 	if o != nil && o.Environment != nil {
 		return true
 	}
@@ -118,12 +122,12 @@ func (o *EnvScopedObjectReference) HasEnvironment() bool {
 }
 
 // SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *EnvScopedObjectReference) SetEnvironment(v string) {
+func (o *TypedEnvScopedObjectReference) SetEnvironment(v string) {
 	o.Environment = &v
 }
 
 // GetRelated returns the Related field value
-func (o *EnvScopedObjectReference) GetRelated() string {
+func (o *TypedEnvScopedObjectReference) GetRelated() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -134,7 +138,7 @@ func (o *EnvScopedObjectReference) GetRelated() string {
 
 // GetRelatedOk returns a tuple with the Related field value
 // and a boolean to check if the value has been set.
-func (o *EnvScopedObjectReference) GetRelatedOk() (*string, bool) {
+func (o *TypedEnvScopedObjectReference) GetRelatedOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -142,12 +146,12 @@ func (o *EnvScopedObjectReference) GetRelatedOk() (*string, bool) {
 }
 
 // SetRelated sets field value
-func (o *EnvScopedObjectReference) SetRelated(v string) {
+func (o *TypedEnvScopedObjectReference) SetRelated(v string) {
 	o.Related = v
 }
 
 // GetResourceName returns the ResourceName field value
-func (o *EnvScopedObjectReference) GetResourceName() string {
+func (o *TypedEnvScopedObjectReference) GetResourceName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -158,7 +162,7 @@ func (o *EnvScopedObjectReference) GetResourceName() string {
 
 // GetResourceNameOk returns a tuple with the ResourceName field value
 // and a boolean to check if the value has been set.
-func (o *EnvScopedObjectReference) GetResourceNameOk() (*string, bool) {
+func (o *TypedEnvScopedObjectReference) GetResourceNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -166,19 +170,85 @@ func (o *EnvScopedObjectReference) GetResourceNameOk() (*string, bool) {
 }
 
 // SetResourceName sets field value
-func (o *EnvScopedObjectReference) SetResourceName(v string) {
+func (o *TypedEnvScopedObjectReference) SetResourceName(v string) {
 	o.ResourceName = v
 }
 
+// GetApiVersion returns the ApiVersion field value if set, zero value otherwise.
+func (o *TypedEnvScopedObjectReference) GetApiVersion() string {
+	if o == nil || o.ApiVersion == nil {
+		var ret string
+		return ret
+	}
+	return *o.ApiVersion
+}
+
+// GetApiVersionOk returns a tuple with the ApiVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TypedEnvScopedObjectReference) GetApiVersionOk() (*string, bool) {
+	if o == nil || o.ApiVersion == nil {
+		return nil, false
+	}
+	return o.ApiVersion, true
+}
+
+// HasApiVersion returns a boolean if a field has been set.
+func (o *TypedEnvScopedObjectReference) HasApiVersion() bool {
+	if o != nil && o.ApiVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetApiVersion gets a reference to the given string and assigns it to the ApiVersion field.
+func (o *TypedEnvScopedObjectReference) SetApiVersion(v string) {
+	o.ApiVersion = &v
+}
+
+// GetKind returns the Kind field value if set, zero value otherwise.
+func (o *TypedEnvScopedObjectReference) GetKind() string {
+	if o == nil || o.Kind == nil {
+		var ret string
+		return ret
+	}
+	return *o.Kind
+}
+
+// GetKindOk returns a tuple with the Kind field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TypedEnvScopedObjectReference) GetKindOk() (*string, bool) {
+	if o == nil || o.Kind == nil {
+		return nil, false
+	}
+	return o.Kind, true
+}
+
+// HasKind returns a boolean if a field has been set.
+func (o *TypedEnvScopedObjectReference) HasKind() bool {
+	if o != nil && o.Kind != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetKind gets a reference to the given string and assigns it to the Kind field.
+func (o *TypedEnvScopedObjectReference) SetKind(v string) {
+	o.Kind = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
-func (o *EnvScopedObjectReference) Redact() {
+func (o *TypedEnvScopedObjectReference) Redact() {
 	o.recurseRedact(&o.Id)
 	o.recurseRedact(o.Environment)
 	o.recurseRedact(&o.Related)
 	o.recurseRedact(&o.ResourceName)
+	o.recurseRedact(o.ApiVersion)
+	o.recurseRedact(o.Kind)
 }
 
-func (o *EnvScopedObjectReference) recurseRedact(v interface{}) {
+func (o *TypedEnvScopedObjectReference) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -203,12 +273,12 @@ func (o *EnvScopedObjectReference) recurseRedact(v interface{}) {
 	}
 }
 
-func (o EnvScopedObjectReference) zeroField(v interface{}) {
+func (o TypedEnvScopedObjectReference) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o EnvScopedObjectReference) MarshalJSON() ([]byte, error) {
+func (o TypedEnvScopedObjectReference) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["id"] = o.Id
@@ -222,6 +292,12 @@ func (o EnvScopedObjectReference) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["resource_name"] = o.ResourceName
 	}
+	if o.ApiVersion != nil {
+		toSerialize["api_version"] = o.ApiVersion
+	}
+	if o.Kind != nil {
+		toSerialize["kind"] = o.Kind
+	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -229,34 +305,34 @@ func (o EnvScopedObjectReference) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableEnvScopedObjectReference struct {
-	value *EnvScopedObjectReference
+type NullableTypedEnvScopedObjectReference struct {
+	value *TypedEnvScopedObjectReference
 	isSet bool
 }
 
-func (v NullableEnvScopedObjectReference) Get() *EnvScopedObjectReference {
+func (v NullableTypedEnvScopedObjectReference) Get() *TypedEnvScopedObjectReference {
 	return v.value
 }
 
-func (v *NullableEnvScopedObjectReference) Set(val *EnvScopedObjectReference) {
+func (v *NullableTypedEnvScopedObjectReference) Set(val *TypedEnvScopedObjectReference) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableEnvScopedObjectReference) IsSet() bool {
+func (v NullableTypedEnvScopedObjectReference) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableEnvScopedObjectReference) Unset() {
+func (v *NullableTypedEnvScopedObjectReference) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableEnvScopedObjectReference(val *EnvScopedObjectReference) *NullableEnvScopedObjectReference {
-	return &NullableEnvScopedObjectReference{value: val, isSet: true}
+func NewNullableTypedEnvScopedObjectReference(val *TypedEnvScopedObjectReference) *NullableTypedEnvScopedObjectReference {
+	return &NullableTypedEnvScopedObjectReference{value: val, isSet: true}
 }
 
-func (v NullableEnvScopedObjectReference) MarshalJSON() ([]byte, error) {
+func (v NullableTypedEnvScopedObjectReference) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -264,7 +340,7 @@ func (v NullableEnvScopedObjectReference) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableEnvScopedObjectReference) UnmarshalJSON(src []byte) error {
+func (v *NullableTypedEnvScopedObjectReference) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

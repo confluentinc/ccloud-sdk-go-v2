@@ -14,10 +14,13 @@ info:
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
-
+- description: Confluent Cloud staging
+  url: https://api.stag.cpdev.cloud
+- description: Confluent Cloud development
+  url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     AccessPoint objects represent network connections in and out of Gateways.
     This API allows you to list, create, read, update, and delete your access points.
@@ -38,7 +41,7 @@ paths:
   /networking/v1/access-points:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all access points.
       operationId: listNetworkingV1AccessPoints
@@ -294,7 +297,6 @@ paths:
       summary: List of Access Points
       tags:
       - Access Points (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -381,7 +383,7 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create an access point.
       operationId: createNetworkingV1AccessPoint
@@ -678,7 +680,6 @@ paths:
       summary: Create an Access Point
       tags:
       - Access Points (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -798,11 +799,10 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-ap-egress-usw2\",\"config\":{\"kind\":\"AwsEgressPrivateLinkEndpoint\",\"vpc_endpoint_service_name\":\"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000\",\"enable_high_availability\":false},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"gw-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Networking v1
   /networking/v1/access-points/{id}:
     delete:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete an access point.
       operationId: deleteNetworkingV1AccessPoint
@@ -1016,7 +1016,6 @@ paths:
       summary: Delete an Access Point
       tags:
       - Access Points (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1103,7 +1102,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read an access point.
       operationId: getNetworkingV1AccessPoint
@@ -1351,7 +1350,6 @@ paths:
       summary: Read an Access Point
       tags:
       - Access Points (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1438,7 +1436,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update an access point.
 
@@ -1749,7 +1747,6 @@ paths:
       summary: Update an Access Point
       tags:
       - Access Points (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1869,7 +1866,6 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-ap-egress-usw2\",\"config\":{\"kind\":\"AwsEgressPrivateLinkEndpoint\",\"vpc_endpoint_service_name\":\"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000\",\"enable_high_availability\":false},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Networking v1
   /networking/v1/dns-records:
     get:
       description: |-
@@ -4036,9 +4032,11 @@ components:
           discriminator:
             mapping:
               AwsEgressPrivateLinkEndpointStatus: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpointStatus'
+              AzureEgressPrivateLinkEndpointStatus: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpointStatus'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpointStatus'
+          - $ref: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpointStatus'
           readOnly: true
           type: object
           x-one-of-name: NetworkingV1AccessPointStatusConfigOneOf
@@ -4137,18 +4135,42 @@ components:
           - AwsEgressPrivateLinkEndpoint
           type: string
         vpc_endpoint_service_name:
-          description: Id of the VPC Endpoint service used for PrivateLink.
+          description: ID of the VPC Endpoint service used for PrivateLink.
           example: com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000
           minLength: 1
           type: string
         enable_high_availability:
-          description: resource is provisioned with high availability
+          description: Whether a resource should be provisioned with high availability.
+            Endpoints deployed with high availability have network interfaces deployed
+            in multiple AZs.
           example: false
           type: boolean
           x-immutable: true
       required:
       - kind
       - vpc_endpoint_service_name
+      type: object
+    networking.v1.AzureEgressPrivateLinkEndpoint:
+      description: Azure Private Endpoint.
+      properties:
+        kind:
+          description: AzureEgressPrivateLinkEndpoint kind.
+          enum:
+          - AzureEgressPrivateLinkEndpoint
+          type: string
+        private_link_service_resource_id:
+          description: Resource ID of the Azure Private Link service.
+          example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/s-abcde/providers/Microsoft.Network/privateLinkServices/pls-plt-abcdef-az3
+          minLength: 1
+          type: string
+        private_link_subresource_name:
+          description: Name of the subresource for the Private Endpoint to connect
+            to.
+          example: sqlServer
+          type: string
+      required:
+      - kind
+      - private_link_service_resource_id
       type: object
     networking.v1.AwsEgressPrivateLinkEndpointStatus:
       description: Status of an AWS PrivateLink Endpoint.
@@ -4159,7 +4181,7 @@ components:
           - AwsEgressPrivateLinkEndpointStatus
           type: string
         vpc_endpoint_id:
-          description: Id of a VPC Endpoint (if any) that is connected to the VPC
+          description: ID of a VPC Endpoint (if any) that is connected to the VPC
             Endpoint service.
           example: vpce-00000000000000000
           readOnly: true
@@ -4176,6 +4198,37 @@ components:
       - vpc_endpoint_id
       title: AWS
       type: object
+    networking.v1.AzureEgressPrivateLinkEndpointStatus:
+      description: Status of an Azure Private Endpoint.
+      properties:
+        kind:
+          description: AzureEgressPrivateLinkEndpointStatus kind.
+          enum:
+          - AzureEgressPrivateLinkEndpointStatus
+          type: string
+        private_endpoint_resource_id:
+          description: Resource ID of the Private Endpoint (if any) that is connected
+            to the Private Link service.
+          example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testvpc/providers/Microsoft.Network/privateEndpoints/pe-plt-abcdef-az3
+          readOnly: true
+          type: string
+        private_endpoint_domain:
+          description: Domain of the Private Endpoint (if any) that is connected to
+            the Private Link service.
+          example: dbname.database.windows.net
+          readOnly: true
+          type: string
+        private_endpoint_ip_address:
+          description: IP address of the Private Endpoint (if any) that is connected
+            to the Private Link service.
+          example: 10.2.0.68
+          readOnly: true
+          type: string
+      required:
+      - kind
+      - private_endpoint_ip_address
+      - private_endpoint_resource_id
+      type: object
     networking.v1.PrivateLinkAccessPoint:
       description: DNS record that is associated with a PrivateLink access point.
       properties:
@@ -4185,7 +4238,7 @@ components:
           - PrivateLinkAccessPoint
           type: string
         resource_id:
-          description: Id of the target resource.
+          description: ID of the target resource.
           example: ap-12345
           minLength: 1
           type: string
@@ -4274,9 +4327,11 @@ components:
           discriminator:
             mapping:
               AwsEgressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpoint'
+              AzureEgressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpoint'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpoint'
+          - $ref: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpoint'
           type: object
           x-immutable: true
           x-one-of-name: NetworkingV1AccessPointSpecConfigOneOf
@@ -4381,7 +4436,7 @@ components:
           description: The environment to which this belongs.
         gateway:
           allOf:
-          - $ref: '#/components/schemas/EnvScopedObjectReference'
+          - $ref: '#/components/schemas/TypedEnvScopedObjectReference'
           description: The gateway to which this belongs.
           x-immutable: true
       type: object
@@ -4514,7 +4569,7 @@ components:
       - related
       - resource_name
       type: object
-    EnvScopedObjectReference:
+    TypedEnvScopedObjectReference:
       description: ObjectReference provides information for you to locate the referred
         object
       properties:
@@ -4537,6 +4592,16 @@ components:
         resource_name:
           description: CRN reference to the referred resource
           format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        api_version:
+          description: API group and version of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind of the referred resource
           minLength: 1
           readOnly: true
           type: string

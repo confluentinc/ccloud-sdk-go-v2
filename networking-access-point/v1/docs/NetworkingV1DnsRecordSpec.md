@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Domain** | Pointer to **string** | The fully qualified domain name of the DNS record. | [optional] 
 **Config** | Pointer to [**NetworkingV1DnsRecordSpecConfigOneOf**](NetworkingV1DnsRecordSpecConfigOneOf.md) | The config of the DNS record. | [optional] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
-**Gateway** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The gateway to which this belongs. | [optional] 
+**Gateway** | Pointer to [**TypedEnvScopedObjectReference**](TypedEnvScopedObjectReference.md) | The gateway to which this belongs. | [optional] 
 
 ## Methods
 
@@ -131,20 +131,20 @@ HasEnvironment returns a boolean if a field has been set.
 
 ### GetGateway
 
-`func (o *NetworkingV1DnsRecordSpec) GetGateway() EnvScopedObjectReference`
+`func (o *NetworkingV1DnsRecordSpec) GetGateway() TypedEnvScopedObjectReference`
 
 GetGateway returns the Gateway field if non-nil, zero value otherwise.
 
 ### GetGatewayOk
 
-`func (o *NetworkingV1DnsRecordSpec) GetGatewayOk() (*EnvScopedObjectReference, bool)`
+`func (o *NetworkingV1DnsRecordSpec) GetGatewayOk() (*TypedEnvScopedObjectReference, bool)`
 
 GetGatewayOk returns a tuple with the Gateway field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetGateway
 
-`func (o *NetworkingV1DnsRecordSpec) SetGateway(v EnvScopedObjectReference)`
+`func (o *NetworkingV1DnsRecordSpec) SetGateway(v TypedEnvScopedObjectReference)`
 
 SetGateway sets Gateway field to given value.
 
