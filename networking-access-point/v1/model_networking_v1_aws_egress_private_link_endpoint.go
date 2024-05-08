@@ -38,9 +38,9 @@ import (
 type NetworkingV1AwsEgressPrivateLinkEndpoint struct {
 	// AwsEgressPrivateLinkEndpoint kind.
 	Kind string `json:"kind,omitempty"`
-	// Id of the VPC Endpoint service used for PrivateLink.
+	// ID of the VPC Endpoint service used for PrivateLink.
 	VpcEndpointServiceName string `json:"vpc_endpoint_service_name,omitempty"`
-	// resource is provisioned with high availability
+	// Whether a resource should be provisioned with high availability. Endpoints deployed with high availability have network interfaces deployed in multiple AZs.
 	EnableHighAvailability *bool `json:"enable_high_availability,omitempty"`
 }
 

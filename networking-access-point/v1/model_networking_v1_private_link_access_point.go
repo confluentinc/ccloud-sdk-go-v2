@@ -38,7 +38,7 @@ import (
 type NetworkingV1PrivateLinkAccessPoint struct {
 	// PrivateLinkAccessPoint kind.
 	Kind string `json:"kind,omitempty"`
-	// Id of the target resource.
+	// ID of the target resource.
 	ResourceId string `json:"resource_id,omitempty"`
 }
 
