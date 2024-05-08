@@ -42,7 +42,7 @@ var (
 type OffsetsConnectV1Api interface {
 
 	/*
-		AlterConnectv1ConnectorOffsetsRequest Request a Connector Offsets
+		AlterConnectv1ConnectorOffsetsRequest Request to Alter the Connector Offsets
 
 		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
@@ -83,7 +83,7 @@ type OffsetsConnectV1Api interface {
 	GetConnectv1ConnectorOffsetsExecute(r ApiGetConnectv1ConnectorOffsetsRequest) (ConnectV1ConnectorOffsets, *_nethttp.Response, error)
 
 	/*
-		GetConnectv1ConnectorOffsetsRequestStatus Get a Connector Offsets Request Status
+		GetConnectv1ConnectorOffsetsRequestStatus Get the Status of Altered Offset Request
 
 		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
@@ -124,7 +124,7 @@ func (r ApiAlterConnectv1ConnectorOffsetsRequestRequest) Execute() (ConnectV1Alt
 }
 
 /*
-AlterConnectv1ConnectorOffsetsRequest Request a Connector Offsets
+AlterConnectv1ConnectorOffsetsRequest Request to Alter the Connector Offsets
 
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
@@ -459,7 +459,7 @@ func (r ApiGetConnectv1ConnectorOffsetsRequestStatusRequest) Execute() (ConnectV
 }
 
 /*
-GetConnectv1ConnectorOffsetsRequestStatus Get a Connector Offsets Request Status
+GetConnectv1ConnectorOffsetsRequestStatus Get the Status of Altered Offset Request
 
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 

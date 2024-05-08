@@ -56,8 +56,8 @@ type ConnectorsConnectV1Api interface {
 	CreateConnectv1Connector(ctx _context.Context, environmentId string, kafkaClusterId string) ApiCreateConnectv1ConnectorRequest
 
 	// CreateConnectv1ConnectorExecute executes the request
-	//  @return ConnectV1Connector
-	CreateConnectv1ConnectorExecute(r ApiCreateConnectv1ConnectorRequest) (ConnectV1Connector, *_nethttp.Response, error)
+	//  @return ConnectV1ConnectorWithOffsets
+	CreateConnectv1ConnectorExecute(r ApiCreateConnectv1ConnectorRequest) (ConnectV1ConnectorWithOffsets, *_nethttp.Response, error)
 
 	/*
 		CreateOrUpdateConnectv1ConnectorConfig Create or Update a Connector Configuration
@@ -186,7 +186,7 @@ func (r ApiCreateConnectv1ConnectorRequest) InlineObject(inlineObject InlineObje
 	return r
 }
 
-func (r ApiCreateConnectv1ConnectorRequest) Execute() (ConnectV1Connector, *_nethttp.Response, error) {
+func (r ApiCreateConnectv1ConnectorRequest) Execute() (ConnectV1ConnectorWithOffsets, *_nethttp.Response, error) {
 	return r.ApiService.CreateConnectv1ConnectorExecute(r)
 }
 
@@ -213,15 +213,15 @@ func (a *ConnectorsConnectV1ApiService) CreateConnectv1Connector(ctx _context.Co
 
 // Execute executes the request
 //
-//	@return ConnectV1Connector
-func (a *ConnectorsConnectV1ApiService) CreateConnectv1ConnectorExecute(r ApiCreateConnectv1ConnectorRequest) (ConnectV1Connector, *_nethttp.Response, error) {
+//	@return ConnectV1ConnectorWithOffsets
+func (a *ConnectorsConnectV1ApiService) CreateConnectv1ConnectorExecute(r ApiCreateConnectv1ConnectorRequest) (ConnectV1ConnectorWithOffsets, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ConnectV1Connector
+		localVarReturnValue  ConnectV1ConnectorWithOffsets
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectorsConnectV1ApiService.CreateConnectv1Connector")
