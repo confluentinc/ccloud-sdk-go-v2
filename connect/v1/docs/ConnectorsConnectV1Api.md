@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 ## CreateConnectv1Connector
 
-> ConnectV1Connector CreateConnectv1Connector(ctx, environmentId, kafkaClusterId).InlineObject(inlineObject).Execute()
+> ConnectV1ConnectorWithOffsets CreateConnectv1Connector(ctx, environmentId, kafkaClusterId).InlineObject(inlineObject).Execute()
 
 Create a Connector
 
@@ -46,7 +46,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ConnectorsConnectV1Api.CreateConnectv1Connector``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateConnectv1Connector`: ConnectV1Connector
+    // response from `CreateConnectv1Connector`: ConnectV1ConnectorWithOffsets
     fmt.Fprintf(os.Stdout, "Response from `ConnectorsConnectV1Api.CreateConnectv1Connector`: %v\n", resp)
 }
 ```
@@ -73,7 +73,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ConnectV1Connector**](ConnectV1Connector.md)
+[**ConnectV1ConnectorWithOffsets**](ConnectV1ConnectorWithOffsets.md)
 
 ### Authorization
 

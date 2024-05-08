@@ -90,9 +90,9 @@ Class | Method | HTTP request | Description
 *LifecycleConnectV1Api* | [**ResumeConnectv1Connector**](docs/LifecycleConnectV1Api.md#resumeconnectv1connector) | **Put** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/resume | Resume a Connector
 *ManagedConnectorPluginsConnectV1Api* | [**ListConnectv1ConnectorPlugins**](docs/ManagedConnectorPluginsConnectV1Api.md#listconnectv1connectorplugins) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins | List of Managed Connector plugins
 *ManagedConnectorPluginsConnectV1Api* | [**ValidateConnectv1ConnectorPlugin**](docs/ManagedConnectorPluginsConnectV1Api.md#validateconnectv1connectorplugin) | **Put** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate | Validate a Managed Connector Plugin
-*OffsetsConnectV1Api* | [**AlterConnectv1ConnectorOffsetsRequest**](docs/OffsetsConnectV1Api.md#alterconnectv1connectoroffsetsrequest) | **Post** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request | Request a Connector Offsets
+*OffsetsConnectV1Api* | [**AlterConnectv1ConnectorOffsetsRequest**](docs/OffsetsConnectV1Api.md#alterconnectv1connectoroffsetsrequest) | **Post** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request | Request to Alter the Connector Offsets
 *OffsetsConnectV1Api* | [**GetConnectv1ConnectorOffsets**](docs/OffsetsConnectV1Api.md#getconnectv1connectoroffsets) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets | Get a Connector Offsets
-*OffsetsConnectV1Api* | [**GetConnectv1ConnectorOffsetsRequestStatus**](docs/OffsetsConnectV1Api.md#getconnectv1connectoroffsetsrequeststatus) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request/status | Get a Connector Offsets Request Status
+*OffsetsConnectV1Api* | [**GetConnectv1ConnectorOffsetsRequestStatus**](docs/OffsetsConnectV1Api.md#getconnectv1connectoroffsetsrequeststatus) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request/status | Get the Status of Altered Offset Request
 *StatusConnectV1Api* | [**ListConnectv1ConnectorTasks**](docs/StatusConnectV1Api.md#listconnectv1connectortasks) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/tasks | List of Connector Tasks
 *StatusConnectV1Api* | [**ReadConnectv1ConnectorStatus**](docs/StatusConnectV1Api.md#readconnectv1connectorstatus) | **Get** /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/status | Read a Connector Status
 
@@ -115,6 +115,7 @@ Class | Method | HTTP request | Description
  - [ConnectV1ConnectorOffsets](docs/ConnectV1ConnectorOffsets.md)
  - [ConnectV1ConnectorOffsetsMetadata](docs/ConnectV1ConnectorOffsetsMetadata.md)
  - [ConnectV1ConnectorTasks](docs/ConnectV1ConnectorTasks.md)
+ - [ConnectV1ConnectorWithOffsets](docs/ConnectV1ConnectorWithOffsets.md)
  - [InlineObject](docs/InlineObject.md)
  - [InlineResponse200](docs/InlineResponse200.md)
  - [InlineResponse2001](docs/InlineResponse2001.md)

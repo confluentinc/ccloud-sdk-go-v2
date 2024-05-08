@@ -42,17 +42,17 @@ var (
 type StatusConnectV1Api interface {
 
 	/*
-			ListConnectv1ConnectorTasks List of Connector Tasks
+		ListConnectv1ConnectorTasks List of Connector Tasks
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Get a list of tasks currently running for the connector.
+	Get a list of tasks currently running for the connector.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param connectorName The unique name of the connector.
-			 @param environmentId The unique identifier of the environment this resource belongs to.
-			 @param kafkaClusterId The unique identifier for the Kafka cluster.
-			 @return ApiListConnectv1ConnectorTasksRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param connectorName The unique name of the connector.
+		 @param environmentId The unique identifier of the environment this resource belongs to.
+		 @param kafkaClusterId The unique identifier for the Kafka cluster.
+		 @return ApiListConnectv1ConnectorTasksRequest
 	*/
 	ListConnectv1ConnectorTasks(ctx _context.Context, connectorName string, environmentId string, kafkaClusterId string) ApiListConnectv1ConnectorTasksRequest
 

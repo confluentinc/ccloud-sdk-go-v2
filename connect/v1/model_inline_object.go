@@ -40,6 +40,8 @@ type InlineObject struct {
 	Name *string `json:"name,omitempty"`
 	// Configuration parameters for the connector. All values should be strings.
 	Config *map[string]string `json:"config,omitempty"`
+	// Array of offsets which are categorised into partitions.
+	Offsets *[]map[string]interface{} `json:"offsets,omitempty"`
 }
 
 // NewInlineObject instantiates a new InlineObject object
@@ -123,10 +125,43 @@ func (o *InlineObject) SetConfig(v map[string]string) {
 	o.Config = &v
 }
 
+// GetOffsets returns the Offsets field value if set, zero value otherwise.
+func (o *InlineObject) GetOffsets() []map[string]interface{} {
+	if o == nil || o.Offsets == nil {
+		var ret []map[string]interface{}
+		return ret
+	}
+	return *o.Offsets
+}
+
+// GetOffsetsOk returns a tuple with the Offsets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InlineObject) GetOffsetsOk() (*[]map[string]interface{}, bool) {
+	if o == nil || o.Offsets == nil {
+		return nil, false
+	}
+	return o.Offsets, true
+}
+
+// HasOffsets returns a boolean if a field has been set.
+func (o *InlineObject) HasOffsets() bool {
+	if o != nil && o.Offsets != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOffsets gets a reference to the given []map[string]interface{} and assigns it to the Offsets field.
+func (o *InlineObject) SetOffsets(v []map[string]interface{}) {
+	o.Offsets = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *InlineObject) Redact() {
 	o.recurseRedact(o.Name)
 	o.Config = nil
+	o.recurseRedact(o.Offsets)
 }
 
 func (o *InlineObject) recurseRedact(v interface{}) {
@@ -166,6 +201,9 @@ func (o InlineObject) MarshalJSON() ([]byte, error) {
 	}
 	if o.Config != nil {
 		toSerialize["config"] = o.Config
+	}
+	if o.Offsets != nil {
+		toSerialize["offsets"] = o.Offsets
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

@@ -42,22 +42,22 @@ var (
 type ConnectorsConnectV1Api interface {
 
 	/*
-			CreateConnectv1Connector Create a Connector
+		CreateConnectv1Connector Create a Connector
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Create a new connector. Returns the new connector information if successful.
+	Create a new connector. Returns the new connector information if successful.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param environmentId The unique identifier of the environment this resource belongs to.
-			 @param kafkaClusterId The unique identifier for the Kafka cluster.
-			 @return ApiCreateConnectv1ConnectorRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param environmentId The unique identifier of the environment this resource belongs to.
+		 @param kafkaClusterId The unique identifier for the Kafka cluster.
+		 @return ApiCreateConnectv1ConnectorRequest
 	*/
 	CreateConnectv1Connector(ctx _context.Context, environmentId string, kafkaClusterId string) ApiCreateConnectv1ConnectorRequest
 
 	// CreateConnectv1ConnectorExecute executes the request
-	//  @return ConnectV1Connector
-	CreateConnectv1ConnectorExecute(r ApiCreateConnectv1ConnectorRequest) (ConnectV1Connector, *_nethttp.Response, error)
+	//  @return ConnectV1ConnectorWithOffsets
+	CreateConnectv1ConnectorExecute(r ApiCreateConnectv1ConnectorRequest) (ConnectV1ConnectorWithOffsets, *_nethttp.Response, error)
 
 	/*
 		CreateOrUpdateConnectv1ConnectorConfig Create or Update a Connector Configuration
@@ -77,17 +77,17 @@ type ConnectorsConnectV1Api interface {
 	CreateOrUpdateConnectv1ConnectorConfigExecute(r ApiCreateOrUpdateConnectv1ConnectorConfigRequest) (ConnectV1Connector, *_nethttp.Response, error)
 
 	/*
-			DeleteConnectv1Connector Delete a Connector
+		DeleteConnectv1Connector Delete a Connector
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Delete a connector. Halts all tasks and deletes the connector configuration.
+	Delete a connector. Halts all tasks and deletes the connector configuration.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param connectorName The unique name of the connector.
-			 @param environmentId The unique identifier of the environment this resource belongs to.
-			 @param kafkaClusterId The unique identifier for the Kafka cluster.
-			 @return ApiDeleteConnectv1ConnectorRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param connectorName The unique name of the connector.
+		 @param environmentId The unique identifier of the environment this resource belongs to.
+		 @param kafkaClusterId The unique identifier for the Kafka cluster.
+		 @return ApiDeleteConnectv1ConnectorRequest
 	*/
 	DeleteConnectv1Connector(ctx _context.Context, connectorName string, environmentId string, kafkaClusterId string) ApiDeleteConnectv1ConnectorRequest
 
@@ -96,17 +96,17 @@ type ConnectorsConnectV1Api interface {
 	DeleteConnectv1ConnectorExecute(r ApiDeleteConnectv1ConnectorRequest) (InlineResponse200, *_nethttp.Response, error)
 
 	/*
-			GetConnectv1ConnectorConfig Read a Connector Configuration
+		GetConnectv1ConnectorConfig Read a Connector Configuration
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Get the configuration for the connector.
+	Get the configuration for the connector.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param connectorName The unique name of the connector.
-			 @param environmentId The unique identifier of the environment this resource belongs to.
-			 @param kafkaClusterId The unique identifier for the Kafka cluster.
-			 @return ApiGetConnectv1ConnectorConfigRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param connectorName The unique name of the connector.
+		 @param environmentId The unique identifier of the environment this resource belongs to.
+		 @param kafkaClusterId The unique identifier for the Kafka cluster.
+		 @return ApiGetConnectv1ConnectorConfigRequest
 	*/
 	GetConnectv1ConnectorConfig(ctx _context.Context, connectorName string, environmentId string, kafkaClusterId string) ApiGetConnectv1ConnectorConfigRequest
 
@@ -115,16 +115,16 @@ type ConnectorsConnectV1Api interface {
 	GetConnectv1ConnectorConfigExecute(r ApiGetConnectv1ConnectorConfigRequest) (map[string]string, *_nethttp.Response, error)
 
 	/*
-			ListConnectv1Connectors List of Connectors
+		ListConnectv1Connectors List of Connectors
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Retrieve a list of "names" of the active connectors. You can then make a [read request](#operation/readConnectv1Connector) for a specific connector by name.
+	Retrieve a list of "names" of the active connectors. You can then make a [read request](#operation/readConnectv1Connector) for a specific connector by name.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param environmentId The unique identifier of the environment this resource belongs to.
-			 @param kafkaClusterId The unique identifier for the Kafka cluster.
-			 @return ApiListConnectv1ConnectorsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param environmentId The unique identifier of the environment this resource belongs to.
+		 @param kafkaClusterId The unique identifier for the Kafka cluster.
+		 @return ApiListConnectv1ConnectorsRequest
 	*/
 	ListConnectv1Connectors(ctx _context.Context, environmentId string, kafkaClusterId string) ApiListConnectv1ConnectorsRequest
 
@@ -133,16 +133,16 @@ type ConnectorsConnectV1Api interface {
 	ListConnectv1ConnectorsExecute(r ApiListConnectv1ConnectorsRequest) ([]string, *_nethttp.Response, error)
 
 	/*
-			ListConnectv1ConnectorsWithExpansions List of Connectors with Expansions
+		ListConnectv1ConnectorsWithExpansions List of Connectors with Expansions
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Retrieve an object with the queried expansions of all connectors. Without `expand` query parameter, this list connector’s endpoint will return a [list of only the connector names](#operation/listConnectv1Connectors).
+	Retrieve an object with the queried expansions of all connectors. Without `expand` query parameter, this list connector’s endpoint will return a [list of only the connector names](#operation/listConnectv1Connectors).
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param environmentId The unique identifier of the environment this resource belongs to.
-			 @param kafkaClusterId The unique identifier for the Kafka cluster.
-			 @return ApiListConnectv1ConnectorsWithExpansionsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param environmentId The unique identifier of the environment this resource belongs to.
+		 @param kafkaClusterId The unique identifier for the Kafka cluster.
+		 @return ApiListConnectv1ConnectorsWithExpansionsRequest
 	*/
 	ListConnectv1ConnectorsWithExpansions(ctx _context.Context, environmentId string, kafkaClusterId string) ApiListConnectv1ConnectorsWithExpansionsRequest
 
@@ -151,17 +151,17 @@ type ConnectorsConnectV1Api interface {
 	ListConnectv1ConnectorsWithExpansionsExecute(r ApiListConnectv1ConnectorsWithExpansionsRequest) (map[string]ConnectV1ConnectorExpansion, *_nethttp.Response, error)
 
 	/*
-			ReadConnectv1Connector Read a Connector
+		ReadConnectv1Connector Read a Connector
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Get information about the connector.
+	Get information about the connector.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param connectorName The unique name of the connector.
-			 @param environmentId The unique identifier of the environment this resource belongs to.
-			 @param kafkaClusterId The unique identifier for the Kafka cluster.
-			 @return ApiReadConnectv1ConnectorRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param connectorName The unique name of the connector.
+		 @param environmentId The unique identifier of the environment this resource belongs to.
+		 @param kafkaClusterId The unique identifier for the Kafka cluster.
+		 @return ApiReadConnectv1ConnectorRequest
 	*/
 	ReadConnectv1Connector(ctx _context.Context, connectorName string, environmentId string, kafkaClusterId string) ApiReadConnectv1ConnectorRequest
 
@@ -186,7 +186,7 @@ func (r ApiCreateConnectv1ConnectorRequest) InlineObject(inlineObject InlineObje
 	return r
 }
 
-func (r ApiCreateConnectv1ConnectorRequest) Execute() (ConnectV1Connector, *_nethttp.Response, error) {
+func (r ApiCreateConnectv1ConnectorRequest) Execute() (ConnectV1ConnectorWithOffsets, *_nethttp.Response, error) {
 	return r.ApiService.CreateConnectv1ConnectorExecute(r)
 }
 
@@ -213,15 +213,15 @@ func (a *ConnectorsConnectV1ApiService) CreateConnectv1Connector(ctx _context.Co
 
 // Execute executes the request
 //
-//	@return ConnectV1Connector
-func (a *ConnectorsConnectV1ApiService) CreateConnectv1ConnectorExecute(r ApiCreateConnectv1ConnectorRequest) (ConnectV1Connector, *_nethttp.Response, error) {
+//	@return ConnectV1ConnectorWithOffsets
+func (a *ConnectorsConnectV1ApiService) CreateConnectv1ConnectorExecute(r ApiCreateConnectv1ConnectorRequest) (ConnectV1ConnectorWithOffsets, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ConnectV1Connector
+		localVarReturnValue  ConnectV1ConnectorWithOffsets
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectorsConnectV1ApiService.CreateConnectv1Connector")
