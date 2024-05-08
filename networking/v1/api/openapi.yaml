@@ -255,9 +255,9 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           type: integer
-          x-max-page-items: 500
+          x-max-page-items: 1000
         style: form
       - description: An opaque pagination token for collection requests.
         explode: true
@@ -2138,9 +2138,9 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           type: integer
-          x-max-page-items: 500
+          x-max-page-items: 1000
         style: form
       - description: An opaque pagination token for collection requests.
         explode: true
@@ -4024,9 +4024,9 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           type: integer
-          x-max-page-items: 500
+          x-max-page-items: 1000
         style: form
       - description: An opaque pagination token for collection requests.
         explode: true
@@ -5912,9 +5912,9 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           type: integer
-          x-max-page-items: 500
+          x-max-page-items: 1000
         style: form
       - description: An opaque pagination token for collection requests.
         explode: true
@@ -7783,9 +7783,9 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           type: integer
-          x-max-page-items: 500
+          x-max-page-items: 1000
         style: form
       - description: An opaque pagination token for collection requests.
         explode: true
@@ -9665,9 +9665,9 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           type: integer
-          x-max-page-items: 500
+          x-max-page-items: 1000
         style: form
       - description: An opaque pagination token for collection requests.
         explode: true
@@ -11547,9 +11547,9 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           type: integer
-          x-max-page-items: 500
+          x-max-page-items: 1000
         style: form
       - description: An opaque pagination token for collection requests.
         explode: true
@@ -12211,9 +12211,9 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           type: integer
-          x-max-page-items: 500
+          x-max-page-items: 1000
         style: form
       - description: An opaque pagination token for collection requests.
         explode: true
@@ -13879,9 +13879,11 @@ components:
           discriminator:
             mapping:
               AwsEgressPrivateLinkGatewayStatus: '#/components/schemas/networking.v1.AwsEgressPrivateLinkGatewayStatus'
+              AzureEgressPrivateLinkGatewayStatus: '#/components/schemas/networking.v1.AzureEgressPrivateLinkGatewayStatus'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking.v1.AwsEgressPrivateLinkGatewayStatus'
+          - $ref: '#/components/schemas/networking.v1.AzureEgressPrivateLinkGatewayStatus'
           readOnly: true
           type: object
           x-one-of-name: NetworkingV1GatewayStatusCloudGatewayOneOf
@@ -14368,6 +14370,21 @@ components:
       - kind
       - region
       type: object
+    networking.v1.AzureEgressPrivateLinkGatewaySpec:
+      description: Azure Egress Private Link Gateway details from Azure.
+      properties:
+        kind:
+          description: Azure Egress Private Link Gateway Spec kind type.
+          enum:
+          - AzureEgressPrivateLinkGatewaySpec
+          type: string
+        region:
+          description: Azure region of the Egress Private Link Gateway.
+          type: string
+      required:
+      - kind
+      - region
+      type: object
     networking.v1.AwsEgressPrivateLinkGatewayStatus:
       description: AWS Egress Private Link Gateway details from AWS.
       properties:
@@ -14379,6 +14396,23 @@ components:
         principal_arn:
           description: The principal ARN used by the AWS Egress Private Link Gateway.
           example: arn:aws:iam::123456789012:cc-tenant-1-role
+          readOnly: true
+          type: string
+      required:
+      - kind
+      type: object
+    networking.v1.AzureEgressPrivateLinkGatewayStatus:
+      description: Azure Egress Private Link Gateway details from Azure.
+      properties:
+        kind:
+          description: Azure Egress Private Link Gateway Status kind type.
+          enum:
+          - AzureEgressPrivateLinkGatewayStatus
+          type: string
+        subscription:
+          description: The Azure Subscription ID associated with the Confluent Cloud
+            VPC.
+          example: 00000000-0000-0000-0000-000000000000
           readOnly: true
           type: string
       required:
@@ -15255,11 +15289,13 @@ components:
               AwsPeeringGatewaySpec: '#/components/schemas/networking.v1.AwsPeeringGatewaySpec'
               AwsEgressPrivateLinkGatewaySpec: '#/components/schemas/networking.v1.AwsEgressPrivateLinkGatewaySpec'
               AzurePeeringGatewaySpec: '#/components/schemas/networking.v1.AzurePeeringGatewaySpec'
+              AzureEgressPrivateLinkGatewaySpec: '#/components/schemas/networking.v1.AzureEgressPrivateLinkGatewaySpec'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking.v1.AwsPeeringGatewaySpec'
           - $ref: '#/components/schemas/networking.v1.AwsEgressPrivateLinkGatewaySpec'
           - $ref: '#/components/schemas/networking.v1.AzurePeeringGatewaySpec'
+          - $ref: '#/components/schemas/networking.v1.AzureEgressPrivateLinkGatewaySpec'
           type: object
           x-one-of-name: NetworkingV1GatewaySpecConfigOneOf
         environment:
