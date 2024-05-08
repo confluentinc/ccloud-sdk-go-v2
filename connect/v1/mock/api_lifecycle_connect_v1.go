@@ -9,22 +9,22 @@ import (
 	net_http "net/http"
 	sync "sync"
 
-	github_com_confluentinc_ccloud_sdk_go_v2_connect_v1 "github.com/confluentinc/ccloud-sdk-go-v2/connect/v1"
+	github_com_confluentinc_ccloud_sdk_go_v2_connect "github.com/confluentinc/ccloud-sdk-go-v2/connect"
 )
 
 // LifecycleConnectV1Api is a mock of LifecycleConnectV1Api interface
 type LifecycleConnectV1Api struct {
 	lockPauseConnectv1Connector sync.Mutex
-	PauseConnectv1ConnectorFunc func(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiPauseConnectv1ConnectorRequest
+	PauseConnectv1ConnectorFunc func(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiPauseConnectv1ConnectorRequest
 
 	lockPauseConnectv1ConnectorExecute sync.Mutex
-	PauseConnectv1ConnectorExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiPauseConnectv1ConnectorRequest) (*net_http.Response, error)
+	PauseConnectv1ConnectorExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiPauseConnectv1ConnectorRequest) (*net_http.Response, error)
 
 	lockResumeConnectv1Connector sync.Mutex
-	ResumeConnectv1ConnectorFunc func(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiResumeConnectv1ConnectorRequest
+	ResumeConnectv1ConnectorFunc func(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiResumeConnectv1ConnectorRequest
 
 	lockResumeConnectv1ConnectorExecute sync.Mutex
-	ResumeConnectv1ConnectorExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiResumeConnectv1ConnectorRequest) (*net_http.Response, error)
+	ResumeConnectv1ConnectorExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiResumeConnectv1ConnectorRequest) (*net_http.Response, error)
 
 	calls struct {
 		PauseConnectv1Connector []struct {
@@ -34,7 +34,7 @@ type LifecycleConnectV1Api struct {
 			KafkaClusterId string
 		}
 		PauseConnectv1ConnectorExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiPauseConnectv1ConnectorRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiPauseConnectv1ConnectorRequest
 		}
 		ResumeConnectv1Connector []struct {
 			Ctx            context.Context
@@ -43,13 +43,13 @@ type LifecycleConnectV1Api struct {
 			KafkaClusterId string
 		}
 		ResumeConnectv1ConnectorExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiResumeConnectv1ConnectorRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiResumeConnectv1ConnectorRequest
 		}
 	}
 }
 
 // PauseConnectv1Connector mocks base method by wrapping the associated func.
-func (m *LifecycleConnectV1Api) PauseConnectv1Connector(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiPauseConnectv1ConnectorRequest {
+func (m *LifecycleConnectV1Api) PauseConnectv1Connector(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiPauseConnectv1ConnectorRequest {
 	m.lockPauseConnectv1Connector.Lock()
 	defer m.lockPauseConnectv1Connector.Unlock()
 
@@ -96,7 +96,7 @@ func (m *LifecycleConnectV1Api) PauseConnectv1ConnectorCalls() []struct {
 }
 
 // PauseConnectv1ConnectorExecute mocks base method by wrapping the associated func.
-func (m *LifecycleConnectV1Api) PauseConnectv1ConnectorExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiPauseConnectv1ConnectorRequest) (*net_http.Response, error) {
+func (m *LifecycleConnectV1Api) PauseConnectv1ConnectorExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiPauseConnectv1ConnectorRequest) (*net_http.Response, error) {
 	m.lockPauseConnectv1ConnectorExecute.Lock()
 	defer m.lockPauseConnectv1ConnectorExecute.Unlock()
 
@@ -105,7 +105,7 @@ func (m *LifecycleConnectV1Api) PauseConnectv1ConnectorExecute(r github_com_conf
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiPauseConnectv1ConnectorRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiPauseConnectv1ConnectorRequest
 	}{
 		R: r,
 	}
@@ -125,7 +125,7 @@ func (m *LifecycleConnectV1Api) PauseConnectv1ConnectorExecuteCalled() bool {
 
 // PauseConnectv1ConnectorExecuteCalls returns the calls made to PauseConnectv1ConnectorExecute.
 func (m *LifecycleConnectV1Api) PauseConnectv1ConnectorExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiPauseConnectv1ConnectorRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiPauseConnectv1ConnectorRequest
 } {
 	m.lockPauseConnectv1ConnectorExecute.Lock()
 	defer m.lockPauseConnectv1ConnectorExecute.Unlock()
@@ -134,7 +134,7 @@ func (m *LifecycleConnectV1Api) PauseConnectv1ConnectorExecuteCalls() []struct {
 }
 
 // ResumeConnectv1Connector mocks base method by wrapping the associated func.
-func (m *LifecycleConnectV1Api) ResumeConnectv1Connector(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiResumeConnectv1ConnectorRequest {
+func (m *LifecycleConnectV1Api) ResumeConnectv1Connector(ctx context.Context, connectorName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiResumeConnectv1ConnectorRequest {
 	m.lockResumeConnectv1Connector.Lock()
 	defer m.lockResumeConnectv1Connector.Unlock()
 
@@ -181,7 +181,7 @@ func (m *LifecycleConnectV1Api) ResumeConnectv1ConnectorCalls() []struct {
 }
 
 // ResumeConnectv1ConnectorExecute mocks base method by wrapping the associated func.
-func (m *LifecycleConnectV1Api) ResumeConnectv1ConnectorExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiResumeConnectv1ConnectorRequest) (*net_http.Response, error) {
+func (m *LifecycleConnectV1Api) ResumeConnectv1ConnectorExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiResumeConnectv1ConnectorRequest) (*net_http.Response, error) {
 	m.lockResumeConnectv1ConnectorExecute.Lock()
 	defer m.lockResumeConnectv1ConnectorExecute.Unlock()
 
@@ -190,7 +190,7 @@ func (m *LifecycleConnectV1Api) ResumeConnectv1ConnectorExecute(r github_com_con
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiResumeConnectv1ConnectorRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiResumeConnectv1ConnectorRequest
 	}{
 		R: r,
 	}
@@ -210,7 +210,7 @@ func (m *LifecycleConnectV1Api) ResumeConnectv1ConnectorExecuteCalled() bool {
 
 // ResumeConnectv1ConnectorExecuteCalls returns the calls made to ResumeConnectv1ConnectorExecute.
 func (m *LifecycleConnectV1Api) ResumeConnectv1ConnectorExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiResumeConnectv1ConnectorRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiResumeConnectv1ConnectorRequest
 } {
 	m.lockResumeConnectv1ConnectorExecute.Lock()
 	defer m.lockResumeConnectv1ConnectorExecute.Unlock()

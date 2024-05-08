@@ -42,16 +42,16 @@ var (
 type ManagedConnectorPluginsConnectV1Api interface {
 
 	/*
-			ListConnectv1ConnectorPlugins List of Managed Connector plugins
+		ListConnectv1ConnectorPlugins List of Managed Connector plugins
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Return a list of Managed Connector plugins installed in the Kafka Connect cluster.
+	Return a list of Managed Connector plugins installed in the Kafka Connect cluster.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param environmentId The unique identifier of the environment this resource belongs to.
-			 @param kafkaClusterId The unique identifier for the Kafka cluster.
-			 @return ApiListConnectv1ConnectorPluginsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param environmentId The unique identifier of the environment this resource belongs to.
+		 @param kafkaClusterId The unique identifier for the Kafka cluster.
+		 @return ApiListConnectv1ConnectorPluginsRequest
 	*/
 	ListConnectv1ConnectorPlugins(ctx _context.Context, environmentId string, kafkaClusterId string) ApiListConnectv1ConnectorPluginsRequest
 
@@ -60,17 +60,17 @@ type ManagedConnectorPluginsConnectV1Api interface {
 	ListConnectv1ConnectorPluginsExecute(r ApiListConnectv1ConnectorPluginsRequest) ([]InlineResponse2002, *_nethttp.Response, error)
 
 	/*
-			ValidateConnectv1ConnectorPlugin Validate a Managed Connector Plugin
+		ValidateConnectv1ConnectorPlugin Validate a Managed Connector Plugin
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Validate the provided configuration values against the configuration definition. This API performs per config validation and returns suggested values and validation error messages.
+	Validate the provided configuration values against the configuration definition. This API performs per config validation and returns suggested values and validation error messages.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param pluginName The unique name of the connector plugin.
-			 @param environmentId The unique identifier of the environment this resource belongs to.
-			 @param kafkaClusterId The unique identifier for the Kafka cluster.
-			 @return ApiValidateConnectv1ConnectorPluginRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param pluginName The unique name of the connector plugin.
+		 @param environmentId The unique identifier of the environment this resource belongs to.
+		 @param kafkaClusterId The unique identifier for the Kafka cluster.
+		 @return ApiValidateConnectv1ConnectorPluginRequest
 	*/
 	ValidateConnectv1ConnectorPlugin(ctx _context.Context, pluginName string, environmentId string, kafkaClusterId string) ApiValidateConnectv1ConnectorPluginRequest
 

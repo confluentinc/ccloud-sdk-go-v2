@@ -136,14 +136,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors' \
+            --url https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors")
+            .url("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -151,7 +151,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -164,7 +164,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors", headers=headers)
+          conn.request("GET", "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -178,7 +178,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors",
+            "path": "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -203,7 +203,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -212,7 +212,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors");
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -244,20 +244,52 @@ paths:
         $ref: '#/components/requestBodies/inline_object'
         content:
           application/json:
-            example:
-              name: MyGcsLogsBucketConnector
-              config:
-                connector.class: GcsSink
-                data.format: BYTES
-                flush.size: "1000"
-                gcs.bucket.name: APILogsBucket
-                gcs.credentials.config: '****************'
-                kafka.api.key: '****************'
-                kafka.api.secret: '****************'
-                name: MyGcsLogsBucketConnector
-                tasks.max: "2"
-                time.interval: DAILY
-                topics: APILogsTopic
+            examples:
+              sink:
+                value:
+                  name: MyGcsLogsBucketConnector
+                  config:
+                    connector.class: GcsSink
+                    data.format: BYTES
+                    flush.size: "1000"
+                    gcs.bucket.name: APILogsBucket
+                    gcs.credentials.config: '****************'
+                    kafka.api.key: '****************'
+                    kafka.api.secret: '****************'
+                    name: MyGcsLogsBucketConnector
+                    tasks.max: "2"
+                    time.interval: DAILY
+                    topics: APILogsTopic
+                  offsets:
+                  - partition:
+                      kafka_partition: 0
+                      kafka_topic: APILogsTopic
+                    offset:
+                      kafka_offset: 1000
+              source:
+                value:
+                  name: MySqlCdcSourceV2Connector_0
+                  config:
+                    connector.class: MySqlCdcSourceV2
+                    output.data.format: JSON
+                    flush.size: "1000"
+                    database.hostname: 12.34.567.98
+                    database.password: '****************'
+                    database.port: "1234"
+                    database.user: '****'
+                    kafka.api.key: '****************'
+                    kafka.api.secret: '****************'
+                    name: MySqlCdcSourceV2Connector_0
+                    tasks.max: "1"
+                    time.interval: DAILY
+                    topic.prefix: test
+                  offsets:
+                  - partition:
+                      server: test
+                    offset:
+                      file: mysql-bin.000123
+                      pos: 154
+                      ts_sec: 1712907333
             schema:
               properties:
                 name:
@@ -322,6 +354,28 @@ paths:
                   - name
                   type: object
                   x-redact: true
+                offsets:
+                  description: Array of offsets which are categorised into partitions.
+                  items:
+                    properties:
+                      partition:
+                        additionalProperties: true
+                        description: "The partition information. For sink connectors\
+                          \ this is the kafka topic and \npartition. For source connectors\
+                          \ this is depends on the partitions defined by the \nsource\
+                          \ connector. For example, the table which this task is pulling\
+                          \ data from in a\nJDBC based MySQL source connector."
+                        type: object
+                      offset:
+                        additionalProperties: true
+                        description: "The offset of the partition. For sink connectors\
+                          \ this is the kafka offset. For \nsource connectors this\
+                          \ is depends on the offset defined by the source connector.\
+                          \ \nFor example, the timestamp and incrementing column info\
+                          \ in a table, for a JDBC based \nMySQL source connector."
+                        type: object
+                    type: object
+                  type: array
               type: object
       responses:
         "201":
@@ -349,8 +403,14 @@ paths:
                 - connector: MyGcsLogsBucketConnector
                   task: 0
                 type: sink
+                offsets:
+                - partition:
+                    kafka_partition: 0
+                    kafka_topic: APILogsTopic
+                  offset:
+                    kafka_offset: 1000
               schema:
-                $ref: '#/components/schemas/connect.v1.Connector'
+                $ref: '#/components/schemas/connect.v1.ConnectorWithOffsets'
           description: Created
         "400":
           content:
@@ -402,53 +462,54 @@ paths:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors' \
+            --url https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"name":"string","config":{"connector.class":"string","name":"string","kafka.api.key":"string","kafka.api.secret":"string","confluent.connector.type":"CUSTOM","confluent.custom.plugin.id":"ccp-lq5m06","confluent.custom.connection.endpoints":"string","confluent.custom.schema.registry.auto":"FALSE","property1":"string","property2":"string"}}'
+            --data '{"name":"string","config":{"connector.class":"string","name":"string","kafka.api.key":"string","kafka.api.secret":"string","confluent.connector.type":"CUSTOM","confluent.custom.plugin.id":"ccp-lq5m06","confluent.custom.connection.endpoints":"string","confluent.custom.schema.registry.auto":"FALSE","property1":"string","property2":"string"},"offsets":[{"partition":{},"offset":{}}]}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"},\"offsets\":[{\"partition\":{},\"offset\":{}}]}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors")
+            .url("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors")
             .post(body)
-            .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"name\\\":\\\"string\\\",\\\"config\\\
           \":{\\\"connector.class\\\":\\\"string\\\",\\\"name\\\":\\\"string\\\",\\\
           \"kafka.api.key\\\":\\\"string\\\",\\\"kafka.api.secret\\\":\\\"string\\\
           \",\\\"confluent.connector.type\\\":\\\"CUSTOM\\\",\\\"confluent.custom.plugin.id\\\
           \":\\\"ccp-lq5m06\\\",\\\"confluent.custom.connection.endpoints\\\":\\\"\
           string\\\",\\\"confluent.custom.schema.registry.auto\\\":\\\"FALSE\\\",\\\
-          \"property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\"}}\")\n\n\
-          \treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \"property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\"},\\\"offsets\\\
+          \":[{\\\"partition\\\":{},\\\"offset\\\":{}}]}\")\n\n\treq, _ := http.NewRequest(\"\
+          POST\", url, payload)\n\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _\
+          \ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ :=\
+          \ ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"}}"
+          payload = "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"},\"offsets\":[{\"partition\":{},\"offset\":{}}]}"
 
           headers = {
-              'content-type': "application/json",
-              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
               }
 
-          conn.request("POST", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors", payload, headers)
+          conn.request("POST", "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -462,10 +523,10 @@ paths:
             "method": "POST",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors",
+            "path": "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors",
             "headers": {
-              "content-type": "application/json",
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -495,7 +556,8 @@ paths:
               'confluent.custom.schema.registry.auto': 'FALSE',
               property1: 'string',
               property2: 'string'
-            }
+            },
+            offsets: [{partition: {}, offset: {}}]
           }));
           req.end();
       - lang: C
@@ -503,23 +565,23 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors");
 
           struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"},\"offsets\":[{\"partition\":{},\"offset\":{}}]}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors");
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors");
           var request = new RestRequest(Method.POST);
-          request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"}}", ParameterType.RequestBody);
+          request.AddHeader("content-type", "application/json");
+          request.AddParameter("application/json", "{\"name\":\"string\",\"config\":{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"},\"offsets\":[{\"partition\":{},\"offset\":{}}]}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info,status,id:
     get:
@@ -720,14 +782,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info,status,id' \
+            --url 'https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors?expand=info%2Cstatus%2Cid' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info,status,id")
+            .url("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors?expand=info%2Cstatus%2Cid")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -735,7 +797,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info,status,id\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors?expand=info%2Cstatus%2Cid\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -748,7 +810,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info,status,id", headers=headers)
+          conn.request("GET", "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors?expand=info%2Cstatus%2Cid", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -762,7 +824,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info,status,id",
+            "path": "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors?expand=info%2Cstatus%2Cid",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -787,7 +849,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info,status,id");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors?expand=info%2Cstatus%2Cid");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -796,7 +858,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info,status,id");
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors?expand=info%2Cstatus%2Cid");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -862,11 +924,6 @@ paths:
                 properties:
                   cloud.environment:
                     description: The cloud environment type.
-                    enum:
-                    - private
-                    - devel
-                    - stag
-                    - prod
                     type: string
                   cloud.provider:
                     description: The cloud service provider, e.g. aws, azure, etc.
@@ -957,14 +1014,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config' \
+            --url https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/config \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config")
+            .url("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/config")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -972,7 +1029,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/config\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -985,7 +1042,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config", headers=headers)
+          conn.request("GET", "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/config", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -999,7 +1056,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config",
+            "path": "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/config",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1024,7 +1081,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/config");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1033,7 +1090,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config");
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/config");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1141,7 +1198,7 @@ paths:
         description: Configuration parameters for the connector. All values should
           be strings.
       responses:
-        "201":
+        "200":
           content:
             application/json:
               example:
@@ -1231,7 +1288,7 @@ paths:
       - lang: Shell
         source: |-
           curl --request PUT \
-            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config' \
+            --url https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/config \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"connector.class":"string","name":"string","kafka.api.key":"string","kafka.api.secret":"string","confluent.connector.type":"CUSTOM","confluent.custom.plugin.id":"ccp-lq5m06","confluent.custom.connection.endpoints":"string","confluent.custom.schema.registry.auto":"FALSE","property1":"string","property2":"string"}'
@@ -1242,16 +1299,16 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config")
+            .url("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/config")
             .put(body)
-            .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/config\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"connector.class\\\":\\\"string\\\
           \",\\\"name\\\":\\\"string\\\",\\\"kafka.api.key\\\":\\\"string\\\",\\\"\
           kafka.api.secret\\\":\\\"string\\\",\\\"confluent.connector.type\\\":\\\"\
@@ -1259,10 +1316,10 @@ paths:
           \":\\\"string\\\",\\\"confluent.custom.schema.registry.auto\\\":\\\"FALSE\\\
           \",\\\"property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\"}\"\
           )\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\"\
+          , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
+          defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
+          \tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
@@ -1272,11 +1329,11 @@ paths:
           payload = "{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"}"
 
           headers = {
-              'content-type': "application/json",
-              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
               }
 
-          conn.request("PUT", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config", payload, headers)
+          conn.request("PUT", "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/config", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1290,10 +1347,10 @@ paths:
             "method": "PUT",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config",
+            "path": "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/config",
             "headers": {
-              "content-type": "application/json",
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -1328,11 +1385,11 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PUT");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/config");
 
           struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"}");
@@ -1340,10 +1397,10 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config");
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/config");
           var request = new RestRequest(Method.PUT);
-          request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddHeader("content-type", "application/json");
           request.AddParameter("application/json", "{\"connector.class\":\"string\",\"name\":\"string\",\"kafka.api.key\":\"string\",\"kafka.api.secret\":\"string\",\"confluent.connector.type\":\"CUSTOM\",\"confluent.custom.plugin.id\":\"ccp-lq5m06\",\"confluent.custom.connection.endpoints\":\"string\",\"confluent.custom.schema.registry.auto\":\"FALSE\",\"property1\":\"string\",\"property2\":\"string\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}:
@@ -1438,14 +1495,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}' \
+            --url https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}")
+            .url("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1453,7 +1510,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1466,7 +1523,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}", headers=headers)
+          conn.request("DELETE", "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1480,7 +1537,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}",
+            "path": "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1505,7 +1562,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1514,7 +1571,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}");
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1629,14 +1686,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}' \
+            --url https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}")
+            .url("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1644,7 +1701,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1657,7 +1714,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}", headers=headers)
+          conn.request("GET", "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1671,7 +1728,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}",
+            "path": "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1696,7 +1753,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1705,7 +1762,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}");
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1795,14 +1852,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request PUT \
-            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/pause' \
+            --url https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/pause \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/pause")
+            .url("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/pause")
             .put(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1810,7 +1867,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/pause\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/pause\"\
           \n\n\treq, _ := http.NewRequest(\"PUT\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1823,7 +1880,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("PUT", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/pause", headers=headers)
+          conn.request("PUT", "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/pause", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1837,7 +1894,7 @@ paths:
             "method": "PUT",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/pause",
+            "path": "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/pause",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1862,7 +1919,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PUT");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/pause");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/pause");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1871,7 +1928,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/pause");
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/pause");
           var request = new RestRequest(Method.PUT);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1961,14 +2018,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request PUT \
-            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/resume' \
+            --url https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/resume \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/resume")
+            .url("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/resume")
             .put(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1976,7 +2033,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/resume\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/resume\"\
           \n\n\treq, _ := http.NewRequest(\"PUT\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1989,7 +2046,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("PUT", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/resume", headers=headers)
+          conn.request("PUT", "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/resume", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2003,7 +2060,7 @@ paths:
             "method": "PUT",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/resume",
+            "path": "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/resume",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -2028,7 +2085,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PUT");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/resume");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/resume");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -2037,7 +2094,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/resume");
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/resume");
           var request = new RestRequest(Method.PUT);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -2138,14 +2195,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/status' \
+            --url https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/status \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/status")
+            .url("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/status")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -2153,7 +2210,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/status\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/status\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -2166,7 +2223,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/status", headers=headers)
+          conn.request("GET", "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/status", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2180,7 +2237,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/status",
+            "path": "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/status",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -2205,7 +2262,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/status");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/status");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -2214,7 +2271,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/status");
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/status");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -2328,14 +2385,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/tasks' \
+            --url https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/tasks \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/tasks")
+            .url("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/tasks")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -2343,7 +2400,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/tasks\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/tasks\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -2356,7 +2413,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/tasks", headers=headers)
+          conn.request("GET", "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/tasks", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2370,7 +2427,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/tasks",
+            "path": "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/tasks",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -2395,7 +2452,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/tasks");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/tasks");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -2404,7 +2461,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/tasks");
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/tasks");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -2506,14 +2563,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins' \
+            --url https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connector-plugins \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins")
+            .url("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connector-plugins")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -2521,7 +2578,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connector-plugins\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -2534,7 +2591,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins", headers=headers)
+          conn.request("GET", "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connector-plugins", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2548,7 +2605,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins",
+            "path": "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connector-plugins",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -2573,7 +2630,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connector-plugins");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -2582,7 +2639,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins");
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connector-plugins");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -2954,7 +3011,7 @@ paths:
       - lang: Shell
         source: |-
           curl --request PUT \
-            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate' \
+            --url https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connector-plugins/%7Bplugin_name%7D/config/validate \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"property1":"string","property2":"string"}'
@@ -2965,22 +3022,22 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"property1\":\"string\",\"property2\":\"string\"}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate")
+            .url("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connector-plugins/%7Bplugin_name%7D/config/validate")
             .put(body)
-            .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connector-plugins/%7Bplugin_name%7D/config/validate\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"property1\\\":\\\"string\\\",\\\
           \"property2\\\":\\\"string\\\"}\")\n\n\treq, _ := http.NewRequest(\"PUT\"\
-          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          , url, payload)\n\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _\
+          \ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ :=\
+          \ ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -2991,11 +3048,11 @@ paths:
           payload = "{\"property1\":\"string\",\"property2\":\"string\"}"
 
           headers = {
-              'content-type': "application/json",
-              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
               }
 
-          conn.request("PUT", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate", payload, headers)
+          conn.request("PUT", "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connector-plugins/%7Bplugin_name%7D/config/validate", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -3009,10 +3066,10 @@ paths:
             "method": "PUT",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate",
+            "path": "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connector-plugins/%7Bplugin_name%7D/config/validate",
             "headers": {
-              "content-type": "application/json",
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -3036,11 +3093,11 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PUT");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connector-plugins/%7Bplugin_name%7D/config/validate");
 
           struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"property1\":\"string\",\"property2\":\"string\"}");
@@ -3048,10 +3105,10 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate");
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connector-plugins/%7Bplugin_name%7D/config/validate");
           var request = new RestRequest(Method.PUT);
-          request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddHeader("content-type", "application/json");
           request.AddParameter("application/json", "{\"property1\":\"string\",\"property2\":\"string\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets:
@@ -3197,14 +3254,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets' \
+            --url https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/offsets \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets")
+            .url("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/offsets")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -3212,7 +3269,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/offsets\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -3225,7 +3282,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets", headers=headers)
+          conn.request("GET", "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/offsets", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -3239,7 +3296,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets",
+            "path": "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/offsets",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -3264,7 +3321,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/offsets");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -3273,7 +3330,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets");
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/offsets");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -3431,14 +3488,14 @@ paths:
       security:
       - cloud-api-key: []
       - confluent-sts-access-token: []
-      summary: Request a Connector Offsets
+      summary: Request to Alter the Connector Offsets
       tags:
       - Offsets (connect/v1)
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request' \
+            --url https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/offsets/request \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"type":"PATCH","offsets":[{"partition":{},"offset":{}}]}'
@@ -3449,22 +3506,22 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"type\":\"PATCH\",\"offsets\":[{\"partition\":{},\"offset\":{}}]}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request")
+            .url("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/offsets/request")
             .post(body)
-            .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/offsets/request\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"type\\\":\\\"PATCH\\\",\\\"offsets\\\
           \":[{\\\"partition\\\":{},\\\"offset\\\":{}}]}\")\n\n\treq, _ := http.NewRequest(\"\
-          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          POST\", url, payload)\n\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _\
+          \ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ :=\
+          \ ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -3475,11 +3532,11 @@ paths:
           payload = "{\"type\":\"PATCH\",\"offsets\":[{\"partition\":{},\"offset\":{}}]}"
 
           headers = {
-              'content-type': "application/json",
-              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
               }
 
-          conn.request("POST", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request", payload, headers)
+          conn.request("POST", "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/offsets/request", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -3493,10 +3550,10 @@ paths:
             "method": "POST",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request",
+            "path": "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/offsets/request",
             "headers": {
-              "content-type": "application/json",
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -3520,11 +3577,11 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/offsets/request");
 
           struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"type\":\"PATCH\",\"offsets\":[{\"partition\":{},\"offset\":{}}]}");
@@ -3532,10 +3589,10 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request");
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/offsets/request");
           var request = new RestRequest(Method.POST);
-          request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddHeader("content-type", "application/json");
           request.AddParameter("application/json", "{\"type\":\"PATCH\",\"offsets\":[{\"partition\":{},\"offset\":{}}]}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request/status:
@@ -3711,21 +3768,21 @@ paths:
       security:
       - cloud-api-key: []
       - confluent-sts-access-token: []
-      summary: Get a Connector Offsets Request Status
+      summary: Get the Status of Altered Offset Request
       tags:
       - Offsets (connect/v1)
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request/status' \
+            --url https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/offsets/request/status \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request/status")
+            .url("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/offsets/request/status")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -3733,7 +3790,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request/status\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/offsets/request/status\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -3746,7 +3803,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request/status", headers=headers)
+          conn.request("GET", "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/offsets/request/status", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -3760,7 +3817,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request/status",
+            "path": "/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/offsets/request/status",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -3785,7 +3842,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request/status");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/offsets/request/status");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -3794,7 +3851,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request/status");
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/environments/%7Benvironment_id%7D/clusters/%7Bkafka_cluster_id%7D/connectors/%7Bconnector_name%7D/offsets/request/status");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -3930,11 +3987,6 @@ components:
           properties:
             cloud.environment:
               description: The cloud environment type.
-              enum:
-              - private
-              - devel
-              - stag
-              - prod
               type: string
             cloud.provider:
               description: The cloud service provider, e.g. aws, azure, etc.
@@ -3987,6 +4039,121 @@ components:
       - config
       - name
       type: object
+    connect.v1.ConnectorWithOffsets:
+      example:
+        offsets:
+        - '{}'
+        - '{}'
+        name: name
+        type: sink
+        config:
+          key: config
+        tasks:
+        - task: 0
+          connector: connector
+        - task: 0
+          connector: connector
+      properties:
+        name:
+          description: Name of the connector
+          type: string
+        config:
+          additionalProperties:
+            type: string
+          description: |-
+            Configuration parameters for the connector. These configurations
+            are the minimum set of key-value pairs which can be used to
+            define how the connector connects Kafka to the external system.
+            Some of these key-value pairs are common to all the connectors, such as
+            connection parameters to Kafka, connector metadata, etc. The list
+            of common connector configurations is as follows
+            - cloud.environment
+            - cloud.provider
+            - connector.class
+            - kafka.api.key
+            - kafka.api.secret
+            - kafka.endpoint
+            - kafka.region
+            - name
+            A specific connector such as `GcsSink` would have additional
+            parameters such as `gcs.bucket.name`, `flush.size`, etc.
+          properties:
+            cloud.environment:
+              description: The cloud environment type.
+              type: string
+            cloud.provider:
+              description: The cloud service provider, e.g. aws, azure, etc.
+              type: string
+              x-extensible-enum:
+              - aws
+              - azure
+              - gcp
+            connector.class:
+              description: The connector class name. E.g. BigQuerySink, GcsSink, etc.
+              type: string
+            name:
+              description: Name or alias of the class (plugin) for this connector.
+              type: string
+            kafka.endpoint:
+              description: The Kafka cluster endpoint.
+              type: string
+            kafka.region:
+              description: The Kafka cluster region.
+              type: string
+            kafka.api.key:
+              description: The Kafka cluster API key.
+              type: string
+            kafka.api.secret:
+              description: The Kafka cluster API secret.
+              type: string
+              x-redact: true
+          required:
+          - cloud.environment
+          - cloud.provider
+          - connector.class
+          - kafka.api.key
+          - kafka.api.secret
+          - kafka.endpoint
+          - kafka.region
+          - name
+          type: object
+        tasks:
+          description: List of active tasks generated by the connector
+          items:
+            $ref: '#/components/schemas/connect_v1_Connector_tasks'
+          type: array
+        type:
+          description: Type of connector, sink or source
+          enum:
+          - sink
+          - source
+          type: string
+        offsets:
+          description: Array of offsets which are categorised into partitions.
+          items:
+            properties:
+              partition:
+                additionalProperties: true
+                description: "The partition information. For sink connectors this\
+                  \ is the kafka topic and \npartition. For source connectors this\
+                  \ is depends on the partitions defined by the \nsource connector.\
+                  \ For example, the table which this task is pulling data from in\
+                  \ a\nJDBC based MySQL source connector."
+                type: object
+              offset:
+                additionalProperties: true
+                description: "The offset of the partition. For sink connectors this\
+                  \ is the kafka offset. For \nsource connectors this is depends on\
+                  \ the offset defined by the source connector. \nFor example, the\
+                  \ timestamp and incrementing column info in a table, for a JDBC\
+                  \ based \nMySQL source connector."
+                type: object
+            type: object
+          type: array
+      required:
+      - config
+      - name
+      type: object
     connect.v1.Connectors:
       description: List of active task configs that have been created by the connector
       items:
@@ -4026,11 +4193,6 @@ components:
             properties:
               cloud.environment:
                 description: The cloud environment type.
-                enum:
-                - private
-                - devel
-                - stag
-                - prod
                 type: string
               cloud.provider:
                 description: The cloud service provider, e.g. aws, azure, etc.
@@ -4369,6 +4531,28 @@ components:
           - name
           type: object
           x-redact: true
+        offsets:
+          description: Array of offsets which are categorised into partitions.
+          items:
+            properties:
+              partition:
+                additionalProperties: true
+                description: "The partition information. For sink connectors this\
+                  \ is the kafka topic and \npartition. For source connectors this\
+                  \ is depends on the partitions defined by the \nsource connector.\
+                  \ For example, the table which this task is pulling data from in\
+                  \ a\nJDBC based MySQL source connector."
+                type: object
+              offset:
+                additionalProperties: true
+                description: "The offset of the partition. For sink connectors this\
+                  \ is the kafka offset. For \nsource connectors this is depends on\
+                  \ the offset defined by the source connector. \nFor example, the\
+                  \ timestamp and incrementing column info in a table, for a JDBC\
+                  \ based \nMySQL source connector."
+                type: object
+            type: object
+          type: array
       type: object
     inline_response_400:
       properties:
@@ -4801,11 +4985,6 @@ components:
           properties:
             cloud.environment:
               description: The cloud environment type.
-              enum:
-              - private
-              - devel
-              - stag
-              - prod
               type: string
             cloud.provider:
               description: The cloud service provider, e.g. aws, azure, etc.
@@ -4919,6 +5098,7 @@ components:
           type: string
           x-extensible-enum:
           - PENDING
+          - PENDING_VALIDATION
           - APPLIED
           - FAILED
         message:

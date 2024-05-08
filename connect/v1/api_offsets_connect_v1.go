@@ -42,19 +42,19 @@ var (
 type OffsetsConnectV1Api interface {
 
 	/*
-			AlterConnectv1ConnectorOffsetsRequest Request a Connector Offsets
+		AlterConnectv1ConnectorOffsetsRequest Request to Alter the Connector Offsets
 
-			[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-		Request to alter the offsets of a connector. This supports the ability to PATCH/DELETE the offsets of a connector.
-		Note, you will see momentary downtime as this will internally stop the connector, while the offsets are being altered.
-		You can only make one alter offsets request at a time for a connector.
+	Request to alter the offsets of a connector. This supports the ability to PATCH/DELETE the offsets of a connector.
+	Note, you will see momentary downtime as this will internally stop the connector, while the offsets are being altered.
+	You can only make one alter offsets request at a time for a connector.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param connectorName The unique name of the connector.
-			 @param environmentId The unique identifier of the environment this resource belongs to.
-			 @param kafkaClusterId The unique identifier for the Kafka cluster.
-			 @return ApiAlterConnectv1ConnectorOffsetsRequestRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param connectorName The unique name of the connector.
+		 @param environmentId The unique identifier of the environment this resource belongs to.
+		 @param kafkaClusterId The unique identifier for the Kafka cluster.
+		 @return ApiAlterConnectv1ConnectorOffsetsRequestRequest
 	*/
 	AlterConnectv1ConnectorOffsetsRequest(ctx _context.Context, connectorName string, environmentId string, kafkaClusterId string) ApiAlterConnectv1ConnectorOffsetsRequestRequest
 
@@ -63,18 +63,18 @@ type OffsetsConnectV1Api interface {
 	AlterConnectv1ConnectorOffsetsRequestExecute(r ApiAlterConnectv1ConnectorOffsetsRequestRequest) (ConnectV1AlterOffsetRequestInfo, *_nethttp.Response, error)
 
 	/*
-			GetConnectv1ConnectorOffsets Get a Connector Offsets
+		GetConnectv1ConnectorOffsets Get a Connector Offsets
 
-			[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-		Get the current offsets for the connector. The offsets provide information on the point in the source system,
-		from which the connector is pulling in data. The offsets of a connector are continuously observed periodically and are queryable via this API.
+	Get the current offsets for the connector. The offsets provide information on the point in the source system,
+	from which the connector is pulling in data. The offsets of a connector are continuously observed periodically and are queryable via this API.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param connectorName The unique name of the connector.
-			 @param environmentId The unique identifier of the environment this resource belongs to.
-			 @param kafkaClusterId The unique identifier for the Kafka cluster.
-			 @return ApiGetConnectv1ConnectorOffsetsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param connectorName The unique name of the connector.
+		 @param environmentId The unique identifier of the environment this resource belongs to.
+		 @param kafkaClusterId The unique identifier for the Kafka cluster.
+		 @return ApiGetConnectv1ConnectorOffsetsRequest
 	*/
 	GetConnectv1ConnectorOffsets(ctx _context.Context, connectorName string, environmentId string, kafkaClusterId string) ApiGetConnectv1ConnectorOffsetsRequest
 
@@ -83,17 +83,17 @@ type OffsetsConnectV1Api interface {
 	GetConnectv1ConnectorOffsetsExecute(r ApiGetConnectv1ConnectorOffsetsRequest) (ConnectV1ConnectorOffsets, *_nethttp.Response, error)
 
 	/*
-			GetConnectv1ConnectorOffsetsRequestStatus Get a Connector Offsets Request Status
+		GetConnectv1ConnectorOffsetsRequestStatus Get the Status of Altered Offset Request
 
-			[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-		Get the status of the previous alter offset request.
+	Get the status of the previous alter offset request.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param connectorName The unique name of the connector.
-			 @param environmentId The unique identifier of the environment this resource belongs to.
-			 @param kafkaClusterId The unique identifier for the Kafka cluster.
-			 @return ApiGetConnectv1ConnectorOffsetsRequestStatusRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param connectorName The unique name of the connector.
+		 @param environmentId The unique identifier of the environment this resource belongs to.
+		 @param kafkaClusterId The unique identifier for the Kafka cluster.
+		 @return ApiGetConnectv1ConnectorOffsetsRequestStatusRequest
 	*/
 	GetConnectv1ConnectorOffsetsRequestStatus(ctx _context.Context, connectorName string, environmentId string, kafkaClusterId string) ApiGetConnectv1ConnectorOffsetsRequestStatusRequest
 
@@ -124,7 +124,7 @@ func (r ApiAlterConnectv1ConnectorOffsetsRequestRequest) Execute() (ConnectV1Alt
 }
 
 /*
-AlterConnectv1ConnectorOffsetsRequest Request a Connector Offsets
+AlterConnectv1ConnectorOffsetsRequest Request to Alter the Connector Offsets
 
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
@@ -459,7 +459,7 @@ func (r ApiGetConnectv1ConnectorOffsetsRequestStatusRequest) Execute() (ConnectV
 }
 
 /*
-GetConnectv1ConnectorOffsetsRequestStatus Get a Connector Offsets Request Status
+GetConnectv1ConnectorOffsetsRequestStatus Get the Status of Altered Offset Request
 
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
