@@ -9,22 +9,22 @@ import (
 	net_http "net/http"
 	sync "sync"
 
-	github_com_confluentinc_ccloud_sdk_go_v2_connect "github.com/confluentinc/ccloud-sdk-go-v2/connect"
+	github_com_confluentinc_ccloud_sdk_go_v2_connect_v1 "github.com/confluentinc/ccloud-sdk-go-v2/connect/v1"
 )
 
 // ManagedConnectorPluginsConnectV1Api is a mock of ManagedConnectorPluginsConnectV1Api interface
 type ManagedConnectorPluginsConnectV1Api struct {
 	lockListConnectv1ConnectorPlugins sync.Mutex
-	ListConnectv1ConnectorPluginsFunc func(ctx context.Context, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiListConnectv1ConnectorPluginsRequest
+	ListConnectv1ConnectorPluginsFunc func(ctx context.Context, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorPluginsRequest
 
 	lockListConnectv1ConnectorPluginsExecute sync.Mutex
-	ListConnectv1ConnectorPluginsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiListConnectv1ConnectorPluginsRequest) ([]github_com_confluentinc_ccloud_sdk_go_v2_connect.InlineResponse2002, *net_http.Response, error)
+	ListConnectv1ConnectorPluginsExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorPluginsRequest) ([]github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.InlineResponse2002, *net_http.Response, error)
 
 	lockValidateConnectv1ConnectorPlugin sync.Mutex
-	ValidateConnectv1ConnectorPluginFunc func(ctx context.Context, pluginName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiValidateConnectv1ConnectorPluginRequest
+	ValidateConnectv1ConnectorPluginFunc func(ctx context.Context, pluginName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiValidateConnectv1ConnectorPluginRequest
 
 	lockValidateConnectv1ConnectorPluginExecute sync.Mutex
-	ValidateConnectv1ConnectorPluginExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiValidateConnectv1ConnectorPluginRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect.InlineResponse2003, *net_http.Response, error)
+	ValidateConnectv1ConnectorPluginExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiValidateConnectv1ConnectorPluginRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.InlineResponse2003, *net_http.Response, error)
 
 	calls struct {
 		ListConnectv1ConnectorPlugins []struct {
@@ -33,7 +33,7 @@ type ManagedConnectorPluginsConnectV1Api struct {
 			KafkaClusterId string
 		}
 		ListConnectv1ConnectorPluginsExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiListConnectv1ConnectorPluginsRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorPluginsRequest
 		}
 		ValidateConnectv1ConnectorPlugin []struct {
 			Ctx            context.Context
@@ -42,13 +42,13 @@ type ManagedConnectorPluginsConnectV1Api struct {
 			KafkaClusterId string
 		}
 		ValidateConnectv1ConnectorPluginExecute []struct {
-			R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiValidateConnectv1ConnectorPluginRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiValidateConnectv1ConnectorPluginRequest
 		}
 	}
 }
 
 // ListConnectv1ConnectorPlugins mocks base method by wrapping the associated func.
-func (m *ManagedConnectorPluginsConnectV1Api) ListConnectv1ConnectorPlugins(ctx context.Context, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiListConnectv1ConnectorPluginsRequest {
+func (m *ManagedConnectorPluginsConnectV1Api) ListConnectv1ConnectorPlugins(ctx context.Context, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorPluginsRequest {
 	m.lockListConnectv1ConnectorPlugins.Lock()
 	defer m.lockListConnectv1ConnectorPlugins.Unlock()
 
@@ -92,7 +92,7 @@ func (m *ManagedConnectorPluginsConnectV1Api) ListConnectv1ConnectorPluginsCalls
 }
 
 // ListConnectv1ConnectorPluginsExecute mocks base method by wrapping the associated func.
-func (m *ManagedConnectorPluginsConnectV1Api) ListConnectv1ConnectorPluginsExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiListConnectv1ConnectorPluginsRequest) ([]github_com_confluentinc_ccloud_sdk_go_v2_connect.InlineResponse2002, *net_http.Response, error) {
+func (m *ManagedConnectorPluginsConnectV1Api) ListConnectv1ConnectorPluginsExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorPluginsRequest) ([]github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.InlineResponse2002, *net_http.Response, error) {
 	m.lockListConnectv1ConnectorPluginsExecute.Lock()
 	defer m.lockListConnectv1ConnectorPluginsExecute.Unlock()
 
@@ -101,7 +101,7 @@ func (m *ManagedConnectorPluginsConnectV1Api) ListConnectv1ConnectorPluginsExecu
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiListConnectv1ConnectorPluginsRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorPluginsRequest
 	}{
 		R: r,
 	}
@@ -121,7 +121,7 @@ func (m *ManagedConnectorPluginsConnectV1Api) ListConnectv1ConnectorPluginsExecu
 
 // ListConnectv1ConnectorPluginsExecuteCalls returns the calls made to ListConnectv1ConnectorPluginsExecute.
 func (m *ManagedConnectorPluginsConnectV1Api) ListConnectv1ConnectorPluginsExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiListConnectv1ConnectorPluginsRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiListConnectv1ConnectorPluginsRequest
 } {
 	m.lockListConnectv1ConnectorPluginsExecute.Lock()
 	defer m.lockListConnectv1ConnectorPluginsExecute.Unlock()
@@ -130,7 +130,7 @@ func (m *ManagedConnectorPluginsConnectV1Api) ListConnectv1ConnectorPluginsExecu
 }
 
 // ValidateConnectv1ConnectorPlugin mocks base method by wrapping the associated func.
-func (m *ManagedConnectorPluginsConnectV1Api) ValidateConnectv1ConnectorPlugin(ctx context.Context, pluginName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiValidateConnectv1ConnectorPluginRequest {
+func (m *ManagedConnectorPluginsConnectV1Api) ValidateConnectv1ConnectorPlugin(ctx context.Context, pluginName, environmentId, kafkaClusterId string) github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiValidateConnectv1ConnectorPluginRequest {
 	m.lockValidateConnectv1ConnectorPlugin.Lock()
 	defer m.lockValidateConnectv1ConnectorPlugin.Unlock()
 
@@ -177,7 +177,7 @@ func (m *ManagedConnectorPluginsConnectV1Api) ValidateConnectv1ConnectorPluginCa
 }
 
 // ValidateConnectv1ConnectorPluginExecute mocks base method by wrapping the associated func.
-func (m *ManagedConnectorPluginsConnectV1Api) ValidateConnectv1ConnectorPluginExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiValidateConnectv1ConnectorPluginRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect.InlineResponse2003, *net_http.Response, error) {
+func (m *ManagedConnectorPluginsConnectV1Api) ValidateConnectv1ConnectorPluginExecute(r github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiValidateConnectv1ConnectorPluginRequest) (github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.InlineResponse2003, *net_http.Response, error) {
 	m.lockValidateConnectv1ConnectorPluginExecute.Lock()
 	defer m.lockValidateConnectv1ConnectorPluginExecute.Unlock()
 
@@ -186,7 +186,7 @@ func (m *ManagedConnectorPluginsConnectV1Api) ValidateConnectv1ConnectorPluginEx
 	}
 
 	call := struct {
-		R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiValidateConnectv1ConnectorPluginRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiValidateConnectv1ConnectorPluginRequest
 	}{
 		R: r,
 	}
@@ -206,7 +206,7 @@ func (m *ManagedConnectorPluginsConnectV1Api) ValidateConnectv1ConnectorPluginEx
 
 // ValidateConnectv1ConnectorPluginExecuteCalls returns the calls made to ValidateConnectv1ConnectorPluginExecute.
 func (m *ManagedConnectorPluginsConnectV1Api) ValidateConnectv1ConnectorPluginExecuteCalls() []struct {
-	R github_com_confluentinc_ccloud_sdk_go_v2_connect.ApiValidateConnectv1ConnectorPluginRequest
+	R github_com_confluentinc_ccloud_sdk_go_v2_connect_v1.ApiValidateConnectv1ConnectorPluginRequest
 } {
 	m.lockValidateConnectv1ConnectorPluginExecute.Lock()
 	defer m.lockValidateConnectv1ConnectorPluginExecute.Unlock()
