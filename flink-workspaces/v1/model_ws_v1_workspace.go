@@ -46,8 +46,9 @@ type WsV1Workspace struct {
 	// The environment in which the workspace exists.
 	EnvironmentId *string `json:"environment_id,omitempty"`
 	// The workspace name that is unique across the environment and region.
-	Name *string            `json:"name,omitempty"`
-	Spec *WsV1WorkspaceSpec `json:"spec,omitempty"`
+	Name   *string              `json:"name,omitempty"`
+	Spec   *WsV1WorkspaceSpec   `json:"spec,omitempty"`
+	Status *WsV1WorkspaceStatus `json:"status,omitempty"`
 }
 
 // NewWsV1Workspace instantiates a new WsV1Workspace object
@@ -291,6 +292,38 @@ func (o *WsV1Workspace) SetSpec(v WsV1WorkspaceSpec) {
 	o.Spec = &v
 }
 
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *WsV1Workspace) GetStatus() WsV1WorkspaceStatus {
+	if o == nil || o.Status == nil {
+		var ret WsV1WorkspaceStatus
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WsV1Workspace) GetStatusOk() (*WsV1WorkspaceStatus, bool) {
+	if o == nil || o.Status == nil {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *WsV1Workspace) HasStatus() bool {
+	if o != nil && o.Status != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given WsV1WorkspaceStatus and assigns it to the Status field.
+func (o *WsV1Workspace) SetStatus(v WsV1WorkspaceStatus) {
+	o.Status = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *WsV1Workspace) Redact() {
 	o.recurseRedact(o.ApiVersion)
@@ -300,6 +333,7 @@ func (o *WsV1Workspace) Redact() {
 	o.recurseRedact(o.EnvironmentId)
 	o.recurseRedact(o.Name)
 	o.recurseRedact(o.Spec)
+	o.recurseRedact(o.Status)
 }
 
 func (o *WsV1Workspace) recurseRedact(v interface{}) {
@@ -354,6 +388,9 @@ func (o WsV1Workspace) MarshalJSON() ([]byte, error) {
 	}
 	if o.Spec != nil {
 		toSerialize["spec"] = o.Spec
+	}
+	if o.Status != nil {
+		toSerialize["status"] = o.Status
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

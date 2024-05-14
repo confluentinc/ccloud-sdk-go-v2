@@ -107,6 +107,7 @@ Class | Method | HTTP request | Description
  - [WsV1Workspace](docs/WsV1Workspace.md)
  - [WsV1WorkspaceList](docs/WsV1WorkspaceList.md)
  - [WsV1WorkspaceSpec](docs/WsV1WorkspaceSpec.md)
+ - [WsV1WorkspaceStatus](docs/WsV1WorkspaceStatus.md)
 
 
 ## Documentation For Authorization

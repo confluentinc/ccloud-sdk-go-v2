@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **EnvironmentId** | Pointer to **string** | The environment in which the workspace exists. | [optional] [readonly] 
 **Name** | Pointer to **string** | The workspace name that is unique across the environment and region. | [optional] 
 **Spec** | Pointer to [**WsV1WorkspaceSpec**](WsV1WorkspaceSpec.md) |  | [optional] 
+**Status** | Pointer to [**WsV1WorkspaceStatus**](WsV1WorkspaceStatus.md) |  | [optional] 
 
 ## Methods
 
@@ -205,6 +206,31 @@ SetSpec sets Spec field to given value.
 `func (o *WsV1Workspace) HasSpec() bool`
 
 HasSpec returns a boolean if a field has been set.
+
+### GetStatus
+
+`func (o *WsV1Workspace) GetStatus() WsV1WorkspaceStatus`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *WsV1Workspace) GetStatusOk() (*WsV1WorkspaceStatus, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *WsV1Workspace) SetStatus(v WsV1WorkspaceStatus)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *WsV1Workspace) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -135,6 +135,9 @@ type WorkspacesWsV1Api interface {
 		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 	Make a request to update a workspace.
 
+	The request will fail with a 409 Conflict error if the Workspace has changed since it was fetched.
+	In this case, do a GET, reapply the modifications, and try the update again.
+
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param organizationId The unique identifier for the organization.
 		 @param environmentId The unique identifier for the environment.
@@ -174,10 +177,10 @@ CreateWsV1Workspace Create a Workspace
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 Make a request to create a workspace.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organizationId The unique identifier for the organization.
- @param environmentId The unique identifier for the environment.
- @return ApiCreateWsV1WorkspaceRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique identifier for the organization.
+	@param environmentId The unique identifier for the environment.
+	@return ApiCreateWsV1WorkspaceRequest
 */
 func (a *WorkspacesWsV1ApiService) CreateWsV1Workspace(ctx _context.Context, organizationId string, environmentId string) ApiCreateWsV1WorkspaceRequest {
 	return ApiCreateWsV1WorkspaceRequest{
@@ -189,7 +192,8 @@ func (a *WorkspacesWsV1ApiService) CreateWsV1Workspace(ctx _context.Context, org
 }
 
 // Execute executes the request
-//  @return WsV1Workspace
+//
+//	@return WsV1Workspace
 func (a *WorkspacesWsV1ApiService) CreateWsV1WorkspaceExecute(r ApiCreateWsV1WorkspaceRequest) (WsV1Workspace, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -346,11 +350,11 @@ DeleteWsV1Workspace Delete a Workspace
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 Make a request to delete a workspace.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organizationId The unique identifier for the organization.
- @param environmentId The unique identifier for the environment.
- @param name The workspace name that is unique across the environment and region.
- @return ApiDeleteWsV1WorkspaceRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique identifier for the organization.
+	@param environmentId The unique identifier for the environment.
+	@param name The workspace name that is unique across the environment and region.
+	@return ApiDeleteWsV1WorkspaceRequest
 */
 func (a *WorkspacesWsV1ApiService) DeleteWsV1Workspace(ctx _context.Context, organizationId string, environmentId string, name string) ApiDeleteWsV1WorkspaceRequest {
 	return ApiDeleteWsV1WorkspaceRequest{
@@ -498,11 +502,11 @@ GetWsV1Workspace Read a Workspace
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 Make a request to read a workspace.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organizationId The unique identifier for the organization.
- @param environmentId The unique identifier for the environment.
- @param name The workspace name that is unique across the environment and region.
- @return ApiGetWsV1WorkspaceRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique identifier for the organization.
+	@param environmentId The unique identifier for the environment.
+	@param name The workspace name that is unique across the environment and region.
+	@return ApiGetWsV1WorkspaceRequest
 */
 func (a *WorkspacesWsV1ApiService) GetWsV1Workspace(ctx _context.Context, organizationId string, environmentId string, name string) ApiGetWsV1WorkspaceRequest {
 	return ApiGetWsV1WorkspaceRequest{
@@ -515,7 +519,8 @@ func (a *WorkspacesWsV1ApiService) GetWsV1Workspace(ctx _context.Context, organi
 }
 
 // Execute executes the request
-//  @return WsV1Workspace
+//
+//	@return WsV1Workspace
 func (a *WorkspacesWsV1ApiService) GetWsV1WorkspaceExecute(r ApiGetWsV1WorkspaceRequest) (WsV1Workspace, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -682,10 +687,10 @@ ListWsV1Workspaces List of Workspaces
 
 Retrieve a sorted, filtered, paginated list of all workspaces.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organizationId The unique identifier for the organization.
- @param environmentId The unique identifier for the environment.
- @return ApiListWsV1WorkspacesRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique identifier for the organization.
+	@param environmentId The unique identifier for the environment.
+	@return ApiListWsV1WorkspacesRequest
 */
 func (a *WorkspacesWsV1ApiService) ListWsV1Workspaces(ctx _context.Context, organizationId string, environmentId string) ApiListWsV1WorkspacesRequest {
 	return ApiListWsV1WorkspacesRequest{
@@ -697,7 +702,8 @@ func (a *WorkspacesWsV1ApiService) ListWsV1Workspaces(ctx _context.Context, orga
 }
 
 // Execute executes the request
-//  @return WsV1WorkspaceList
+//
+//	@return WsV1WorkspaceList
 func (a *WorkspacesWsV1ApiService) ListWsV1WorkspacesExecute(r ApiListWsV1WorkspacesRequest) (WsV1WorkspaceList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -857,11 +863,11 @@ PatchWsV1Workspace Update a Workspace with patch request
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 Make a request to patch a workspace.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organizationId The unique identifier for the organization.
- @param environmentId The unique identifier for the environment.
- @param name The workspace name that is unique across the environment and region.
- @return ApiPatchWsV1WorkspaceRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique identifier for the organization.
+	@param environmentId The unique identifier for the environment.
+	@param name The workspace name that is unique across the environment and region.
+	@return ApiPatchWsV1WorkspaceRequest
 */
 func (a *WorkspacesWsV1ApiService) PatchWsV1Workspace(ctx _context.Context, organizationId string, environmentId string, name string) ApiPatchWsV1WorkspaceRequest {
 	return ApiPatchWsV1WorkspaceRequest{
@@ -874,7 +880,8 @@ func (a *WorkspacesWsV1ApiService) PatchWsV1Workspace(ctx _context.Context, orga
 }
 
 // Execute executes the request
-//  @return WsV1Workspace
+//
+//	@return WsV1Workspace
 func (a *WorkspacesWsV1ApiService) PatchWsV1WorkspaceExecute(r ApiPatchWsV1WorkspaceRequest) (WsV1Workspace, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
@@ -1048,11 +1055,14 @@ PutWsV1Workspace Update a Workspace
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 Make a request to update a workspace.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organizationId The unique identifier for the organization.
- @param environmentId The unique identifier for the environment.
- @param name The workspace name that is unique across the environment and region.
- @return ApiPutWsV1WorkspaceRequest
+The request will fail with a 409 Conflict error if the Workspace has changed since it was fetched.
+In this case, do a GET, reapply the modifications, and try the update again.
+
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique identifier for the organization.
+	@param environmentId The unique identifier for the environment.
+	@param name The workspace name that is unique across the environment and region.
+	@return ApiPutWsV1WorkspaceRequest
 */
 func (a *WorkspacesWsV1ApiService) PutWsV1Workspace(ctx _context.Context, organizationId string, environmentId string, name string) ApiPutWsV1WorkspaceRequest {
 	return ApiPutWsV1WorkspaceRequest{
@@ -1065,7 +1075,8 @@ func (a *WorkspacesWsV1ApiService) PutWsV1Workspace(ctx _context.Context, organi
 }
 
 // Execute executes the request
-//  @return WsV1Workspace
+//
+//	@return WsV1Workspace
 func (a *WorkspacesWsV1ApiService) PutWsV1WorkspaceExecute(r ApiPutWsV1WorkspaceRequest) (WsV1Workspace, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
