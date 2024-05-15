@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the Flink compute pool. | [optional] 
 **Cloud** | Pointer to **string** | The cloud service provider that runs the compute pool. | [optional] 
-**HttpEndpoint** | Pointer to **string** | The API endpoint of the Flink compute pool. | [optional] [readonly] 
 **Region** | Pointer to **string** | Flink compute pools in the region provided will be able to use this identity pool | [optional] 
 **MaxCfu** | Pointer to **int32** | Maximum number of Confluent Flink Units (CFUs) that the Flink compute pool should auto-scale to.  | [optional] 
 **Environment** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which this belongs. | [optional] 
@@ -80,31 +79,6 @@ SetCloud sets Cloud field to given value.
 `func (o *FcpmV2ComputePoolSpec) HasCloud() bool`
 
 HasCloud returns a boolean if a field has been set.
-
-### GetHttpEndpoint
-
-`func (o *FcpmV2ComputePoolSpec) GetHttpEndpoint() string`
-
-GetHttpEndpoint returns the HttpEndpoint field if non-nil, zero value otherwise.
-
-### GetHttpEndpointOk
-
-`func (o *FcpmV2ComputePoolSpec) GetHttpEndpointOk() (*string, bool)`
-
-GetHttpEndpointOk returns a tuple with the HttpEndpoint field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHttpEndpoint
-
-`func (o *FcpmV2ComputePoolSpec) SetHttpEndpoint(v string)`
-
-SetHttpEndpoint sets HttpEndpoint field to given value.
-
-### HasHttpEndpoint
-
-`func (o *FcpmV2ComputePoolSpec) HasHttpEndpoint() bool`
-
-HasHttpEndpoint returns a boolean if a field has been set.
 
 ### GetRegion
 

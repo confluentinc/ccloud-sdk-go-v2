@@ -44,7 +44,7 @@ type ComputePoolsFcpmV2Api interface {
 	/*
 		CreateFcpmV2ComputePool Create a Compute Pool
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to create a compute pool.
 
@@ -60,7 +60,7 @@ type ComputePoolsFcpmV2Api interface {
 	/*
 		DeleteFcpmV2ComputePool Delete a Compute Pool
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to delete a compute pool.
 
@@ -76,7 +76,7 @@ type ComputePoolsFcpmV2Api interface {
 	/*
 		GetFcpmV2ComputePool Read a Compute Pool
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to read a compute pool.
 
@@ -93,7 +93,7 @@ type ComputePoolsFcpmV2Api interface {
 	/*
 		ListFcpmV2ComputePools List of Compute Pools
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Retrieve a sorted, filtered, paginated list of all compute pools.
 
@@ -109,7 +109,7 @@ type ComputePoolsFcpmV2Api interface {
 	/*
 		UpdateFcpmV2ComputePool Update a Compute Pool
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to update a compute pool.
 
@@ -145,7 +145,7 @@ func (r ApiCreateFcpmV2ComputePoolRequest) Execute() (FcpmV2ComputePool, *_netht
 /*
 CreateFcpmV2ComputePool Create a Compute Pool
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create a compute pool.
 
@@ -318,7 +318,7 @@ func (r ApiDeleteFcpmV2ComputePoolRequest) Execute() (*_nethttp.Response, error)
 /*
 DeleteFcpmV2ComputePool Delete a Compute Pool
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete a compute pool.
 
@@ -474,7 +474,7 @@ func (r ApiGetFcpmV2ComputePoolRequest) Execute() (FcpmV2ComputePool, *_nethttp.
 /*
 GetFcpmV2ComputePool Read a Compute Pool
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a compute pool.
 
@@ -669,7 +669,7 @@ func (r ApiListFcpmV2ComputePoolsRequest) Execute() (FcpmV2ComputePoolList, *_ne
 /*
 ListFcpmV2ComputePools List of Compute Pools
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all compute pools.
 
@@ -835,7 +835,7 @@ func (r ApiUpdateFcpmV2ComputePoolRequest) Execute() (FcpmV2ComputePool, *_netht
 /*
 UpdateFcpmV2ComputePool Update a Compute Pool
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update a compute pool.
 

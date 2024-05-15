@@ -49,8 +49,10 @@ type FcpmV2Region struct {
 	Cloud *string `json:"cloud,omitempty"`
 	// The region name.
 	RegionName *string `json:"region_name,omitempty"`
-	// The regional API endpoint for flink compute pools.
+	// The regional API endpoint for Flink compute pools.
 	HttpEndpoint *string `json:"http_endpoint,omitempty"`
+	// The private regional API endpoint for Flink compute pools.
+	PrivateHttpEndpoint *string `json:"private_http_endpoint,omitempty"`
 }
 
 // NewFcpmV2Region instantiates a new FcpmV2Region object
@@ -326,6 +328,38 @@ func (o *FcpmV2Region) SetHttpEndpoint(v string) {
 	o.HttpEndpoint = &v
 }
 
+// GetPrivateHttpEndpoint returns the PrivateHttpEndpoint field value if set, zero value otherwise.
+func (o *FcpmV2Region) GetPrivateHttpEndpoint() string {
+	if o == nil || o.PrivateHttpEndpoint == nil {
+		var ret string
+		return ret
+	}
+	return *o.PrivateHttpEndpoint
+}
+
+// GetPrivateHttpEndpointOk returns a tuple with the PrivateHttpEndpoint field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FcpmV2Region) GetPrivateHttpEndpointOk() (*string, bool) {
+	if o == nil || o.PrivateHttpEndpoint == nil {
+		return nil, false
+	}
+	return o.PrivateHttpEndpoint, true
+}
+
+// HasPrivateHttpEndpoint returns a boolean if a field has been set.
+func (o *FcpmV2Region) HasPrivateHttpEndpoint() bool {
+	if o != nil && o.PrivateHttpEndpoint != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPrivateHttpEndpoint gets a reference to the given string and assigns it to the PrivateHttpEndpoint field.
+func (o *FcpmV2Region) SetPrivateHttpEndpoint(v string) {
+	o.PrivateHttpEndpoint = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *FcpmV2Region) Redact() {
 	o.recurseRedact(o.ApiVersion)
@@ -336,6 +370,7 @@ func (o *FcpmV2Region) Redact() {
 	o.recurseRedact(o.Cloud)
 	o.recurseRedact(o.RegionName)
 	o.recurseRedact(o.HttpEndpoint)
+	o.recurseRedact(o.PrivateHttpEndpoint)
 }
 
 func (o *FcpmV2Region) recurseRedact(v interface{}) {
@@ -393,6 +428,9 @@ func (o FcpmV2Region) MarshalJSON() ([]byte, error) {
 	}
 	if o.HttpEndpoint != nil {
 		toSerialize["http_endpoint"] = o.HttpEndpoint
+	}
+	if o.PrivateHttpEndpoint != nil {
+		toSerialize["private_http_endpoint"] = o.PrivateHttpEndpoint
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

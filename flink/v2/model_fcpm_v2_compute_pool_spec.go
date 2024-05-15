@@ -40,8 +40,6 @@ type FcpmV2ComputePoolSpec struct {
 	DisplayName *string `json:"display_name,omitempty"`
 	// The cloud service provider that runs the compute pool.
 	Cloud *string `json:"cloud,omitempty"`
-	// The API endpoint of the Flink compute pool.
-	HttpEndpoint *string `json:"http_endpoint,omitempty"`
 	// Flink compute pools in the region provided will be able to use this identity pool
 	Region *string `json:"region,omitempty"`
 	// Maximum number of Confluent Flink Units (CFUs) that the Flink compute pool should auto-scale to.
@@ -131,38 +129,6 @@ func (o *FcpmV2ComputePoolSpec) HasCloud() bool {
 // SetCloud gets a reference to the given string and assigns it to the Cloud field.
 func (o *FcpmV2ComputePoolSpec) SetCloud(v string) {
 	o.Cloud = &v
-}
-
-// GetHttpEndpoint returns the HttpEndpoint field value if set, zero value otherwise.
-func (o *FcpmV2ComputePoolSpec) GetHttpEndpoint() string {
-	if o == nil || o.HttpEndpoint == nil {
-		var ret string
-		return ret
-	}
-	return *o.HttpEndpoint
-}
-
-// GetHttpEndpointOk returns a tuple with the HttpEndpoint field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *FcpmV2ComputePoolSpec) GetHttpEndpointOk() (*string, bool) {
-	if o == nil || o.HttpEndpoint == nil {
-		return nil, false
-	}
-	return o.HttpEndpoint, true
-}
-
-// HasHttpEndpoint returns a boolean if a field has been set.
-func (o *FcpmV2ComputePoolSpec) HasHttpEndpoint() bool {
-	if o != nil && o.HttpEndpoint != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetHttpEndpoint gets a reference to the given string and assigns it to the HttpEndpoint field.
-func (o *FcpmV2ComputePoolSpec) SetHttpEndpoint(v string) {
-	o.HttpEndpoint = &v
 }
 
 // GetRegion returns the Region field value if set, zero value otherwise.
@@ -297,7 +263,6 @@ func (o *FcpmV2ComputePoolSpec) SetNetwork(v EnvScopedObjectReference) {
 func (o *FcpmV2ComputePoolSpec) Redact() {
 	o.recurseRedact(o.DisplayName)
 	o.recurseRedact(o.Cloud)
-	o.recurseRedact(o.HttpEndpoint)
 	o.recurseRedact(o.Region)
 	o.recurseRedact(o.MaxCfu)
 	o.recurseRedact(o.Environment)
@@ -341,9 +306,6 @@ func (o FcpmV2ComputePoolSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.Cloud != nil {
 		toSerialize["cloud"] = o.Cloud
-	}
-	if o.HttpEndpoint != nil {
-		toSerialize["http_endpoint"] = o.HttpEndpoint
 	}
 	if o.Region != nil {
 		toSerialize["region"] = o.Region
