@@ -11,7 +11,8 @@ Name | Type | Description | Notes
 **DisplayName** | Pointer to **string** | The display name. | [optional] [readonly] 
 **Cloud** | Pointer to **string** | The cloud service provider that hosts the region. | [optional] [readonly] 
 **RegionName** | Pointer to **string** | The region name. | [optional] [readonly] 
-**HttpEndpoint** | Pointer to **string** | The regional API endpoint for flink compute pools. | [optional] [readonly] 
+**HttpEndpoint** | Pointer to **string** | The regional API endpoint for Flink compute pools. | [optional] [readonly] 
+**PrivateHttpEndpoint** | Pointer to **string** | The private regional API endpoint for Flink compute pools. | [optional] [readonly] 
 
 ## Methods
 
@@ -231,6 +232,31 @@ SetHttpEndpoint sets HttpEndpoint field to given value.
 `func (o *FcpmV2Region) HasHttpEndpoint() bool`
 
 HasHttpEndpoint returns a boolean if a field has been set.
+
+### GetPrivateHttpEndpoint
+
+`func (o *FcpmV2Region) GetPrivateHttpEndpoint() string`
+
+GetPrivateHttpEndpoint returns the PrivateHttpEndpoint field if non-nil, zero value otherwise.
+
+### GetPrivateHttpEndpointOk
+
+`func (o *FcpmV2Region) GetPrivateHttpEndpointOk() (*string, bool)`
+
+GetPrivateHttpEndpointOk returns a tuple with the PrivateHttpEndpoint field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrivateHttpEndpoint
+
+`func (o *FcpmV2Region) SetPrivateHttpEndpoint(v string)`
+
+SetPrivateHttpEndpoint sets PrivateHttpEndpoint field to given value.
+
+### HasPrivateHttpEndpoint
+
+`func (o *FcpmV2Region) HasPrivateHttpEndpoint() bool`
+
+HasPrivateHttpEndpoint returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

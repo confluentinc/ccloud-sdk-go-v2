@@ -43,7 +43,7 @@ type RegionsFcpmV2Api interface {
 	/*
 		ListFcpmV2Regions List of Regions
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Retrieve a sorted, filtered, paginated list of all regions.
 
@@ -100,7 +100,7 @@ func (r ApiListFcpmV2RegionsRequest) Execute() (FcpmV2RegionList, *_nethttp.Resp
 /*
 ListFcpmV2Regions List of Regions
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all regions.
 
