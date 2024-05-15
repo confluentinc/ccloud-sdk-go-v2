@@ -20,7 +20,7 @@ servers:
   url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
-    [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     A Compute Pool represents a set of compute resources that is used to run your Queries.
     The resources (CPUs, memory,…) provided by a Compute Pool are shared between all Queries that use it.
@@ -30,7 +30,7 @@ tags:
     <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.ComputePool" />
   name: Compute Pools (fcpm/v2)
 - description: |-
-    [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `Region` objects represent cloud provider regions available when placing Flink compute pools.
     The API allows you to list Flink regions.
@@ -43,7 +43,7 @@ paths:
   /fcpm/v2/compute-pools:
     get:
       description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all compute pools.
       operationId: listFcpmV2ComputePools
@@ -289,6 +289,7 @@ paths:
               style: simple
       security:
       - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: List of Compute Pools
       tags:
       - Compute Pools (fcpm/v2)
@@ -378,7 +379,7 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create a compute pool.
       operationId: createFcpmV2ComputePool
@@ -675,6 +676,7 @@ paths:
               style: simple
       security:
       - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Create a Compute Pool
       tags:
       - Compute Pools (fcpm/v2)
@@ -796,7 +798,7 @@ paths:
   /fcpm/v2/compute-pools/{id}:
     delete:
       description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete a compute pool.
       operationId: deleteFcpmV2ComputePool
@@ -1006,6 +1008,7 @@ paths:
               style: simple
       security:
       - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Delete a Compute Pool
       tags:
       - Compute Pools (fcpm/v2)
@@ -1013,14 +1016,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/fcpm/v2/compute-pools/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/fcpm/v2/compute-pools/{id}?environment=env-00000")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1028,7 +1031,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pools/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1041,7 +1044,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("DELETE", "/fcpm/v2/compute-pools/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1055,7 +1058,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000",
+            "path": "/fcpm/v2/compute-pools/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1080,7 +1083,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/compute-pools/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1089,13 +1092,13 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/compute-pools/{id}?environment=env-00000");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a compute pool.
       operationId: getFcpmV2ComputePool
@@ -1341,6 +1344,7 @@ paths:
               style: simple
       security:
       - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Read a Compute Pool
       tags:
       - Compute Pools (fcpm/v2)
@@ -1348,14 +1352,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/fcpm/v2/compute-pools/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/fcpm/v2/compute-pools/{id}?environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1363,7 +1367,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pools/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1376,7 +1380,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("GET", "/fcpm/v2/compute-pools/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1390,7 +1394,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000",
+            "path": "/fcpm/v2/compute-pools/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1415,7 +1419,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/compute-pools/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1424,13 +1428,13 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/compute-pools/{id}?environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     patch:
       description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update a compute pool.
       operationId: updateFcpmV2ComputePool
@@ -1738,6 +1742,7 @@ paths:
               style: simple
       security:
       - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Update a Compute Pool
       tags:
       - Compute Pools (fcpm/v2)
@@ -1745,7 +1750,7 @@ paths:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D \
+            --url 'https://api.confluent.cloud/fcpm/v2/compute-pools/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"spec":{"display_name":"flink_compute_pool_0","cloud":"AWS","region":"us-west-1","max_cfu":5,"environment":{"id":"env-00000"},"network":{"id":"string","environment":"string"}}}'
@@ -1756,7 +1761,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":5,\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D")
+            .url("https://api.confluent.cloud/fcpm/v2/compute-pools/{id}")
             .patch(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -1765,7 +1770,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pools/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"flink_compute_pool_0\\\",\\\"cloud\\\":\\\"AWS\\\",\\\"region\\\":\\\
           \"us-west-1\\\",\\\"max_cfu\\\":5,\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
@@ -1788,7 +1793,7 @@ paths:
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/fcpm/v2/compute-pools/%7Bid%7D", payload, headers)
+          conn.request("PATCH", "/fcpm/v2/compute-pools/{id}", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1802,7 +1807,7 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/fcpm/v2/compute-pools/%7Bid%7D",
+            "path": "/fcpm/v2/compute-pools/{id}",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -1838,7 +1843,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/compute-pools/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -1850,7 +1855,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/compute-pools/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/compute-pools/{id}");
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
@@ -1859,7 +1864,7 @@ paths:
   /fcpm/v2/regions:
     get:
       description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all regions.
       operationId: listFcpmV2Regions
@@ -2077,6 +2082,7 @@ paths:
               style: simple
       security:
       - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: List of Regions
       tags:
       - Regions (fcpm/v2)
@@ -2524,7 +2530,13 @@ components:
           type: string
           x-immutable: true
         http_endpoint:
-          description: The regional API endpoint for flink compute pools.
+          description: The regional API endpoint for Flink compute pools.
+          format: uri
+          readOnly: true
+          type: string
+          x-immutable: true
+        private_http_endpoint:
+          description: The private regional API endpoint for Flink compute pools.
           format: uri
           readOnly: true
           type: string
@@ -3021,3 +3033,11 @@ components:
         Cloud API Key ID as the username and Cloud API Key Secret as the password.
       scheme: basic
       type: http
+    confluent-sts-access-token:
+      description: Authenticate with Confluent API using this credentials (JSON Web
+        Tokens) following OAuth 2.0.
+      flows:
+        clientCredentials:
+          scopes: {}
+          tokenUrl: https://api.confluent.cloud/sts/v1/oauth2/token
+      type: oauth2

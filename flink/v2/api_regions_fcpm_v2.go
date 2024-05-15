@@ -43,7 +43,7 @@ type RegionsFcpmV2Api interface {
 	/*
 		ListFcpmV2Regions List of Regions
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Retrieve a sorted, filtered, paginated list of all regions.
 
@@ -100,12 +100,12 @@ func (r ApiListFcpmV2RegionsRequest) Execute() (FcpmV2RegionList, *_nethttp.Resp
 /*
 ListFcpmV2Regions List of Regions
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all regions.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListFcpmV2RegionsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListFcpmV2RegionsRequest
 */
 func (a *RegionsFcpmV2ApiService) ListFcpmV2Regions(ctx _context.Context) ApiListFcpmV2RegionsRequest {
 	return ApiListFcpmV2RegionsRequest{
@@ -115,7 +115,8 @@ func (a *RegionsFcpmV2ApiService) ListFcpmV2Regions(ctx _context.Context) ApiLis
 }
 
 // Execute executes the request
-//  @return FcpmV2RegionList
+//
+//	@return FcpmV2RegionList
 func (a *RegionsFcpmV2ApiService) ListFcpmV2RegionsExecute(r ApiListFcpmV2RegionsRequest) (FcpmV2RegionList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet

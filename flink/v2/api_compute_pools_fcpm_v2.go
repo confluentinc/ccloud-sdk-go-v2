@@ -44,7 +44,7 @@ type ComputePoolsFcpmV2Api interface {
 	/*
 		CreateFcpmV2ComputePool Create a Compute Pool
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to create a compute pool.
 
@@ -60,7 +60,7 @@ type ComputePoolsFcpmV2Api interface {
 	/*
 		DeleteFcpmV2ComputePool Delete a Compute Pool
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to delete a compute pool.
 
@@ -76,7 +76,7 @@ type ComputePoolsFcpmV2Api interface {
 	/*
 		GetFcpmV2ComputePool Read a Compute Pool
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to read a compute pool.
 
@@ -93,7 +93,7 @@ type ComputePoolsFcpmV2Api interface {
 	/*
 		ListFcpmV2ComputePools List of Compute Pools
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Retrieve a sorted, filtered, paginated list of all compute pools.
 
@@ -109,7 +109,7 @@ type ComputePoolsFcpmV2Api interface {
 	/*
 		UpdateFcpmV2ComputePool Update a Compute Pool
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to update a compute pool.
 
@@ -145,12 +145,12 @@ func (r ApiCreateFcpmV2ComputePoolRequest) Execute() (FcpmV2ComputePool, *_netht
 /*
 CreateFcpmV2ComputePool Create a Compute Pool
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create a compute pool.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFcpmV2ComputePoolRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFcpmV2ComputePoolRequest
 */
 func (a *ComputePoolsFcpmV2ApiService) CreateFcpmV2ComputePool(ctx _context.Context) ApiCreateFcpmV2ComputePoolRequest {
 	return ApiCreateFcpmV2ComputePoolRequest{
@@ -160,7 +160,8 @@ func (a *ComputePoolsFcpmV2ApiService) CreateFcpmV2ComputePool(ctx _context.Cont
 }
 
 // Execute executes the request
-//  @return FcpmV2ComputePool
+//
+//	@return FcpmV2ComputePool
 func (a *ComputePoolsFcpmV2ApiService) CreateFcpmV2ComputePoolExecute(r ApiCreateFcpmV2ComputePoolRequest) (FcpmV2ComputePool, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -317,13 +318,13 @@ func (r ApiDeleteFcpmV2ComputePoolRequest) Execute() (*_nethttp.Response, error)
 /*
 DeleteFcpmV2ComputePool Delete a Compute Pool
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete a compute pool.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the compute pool.
- @return ApiDeleteFcpmV2ComputePoolRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the compute pool.
+	@return ApiDeleteFcpmV2ComputePoolRequest
 */
 func (a *ComputePoolsFcpmV2ApiService) DeleteFcpmV2ComputePool(ctx _context.Context, id string) ApiDeleteFcpmV2ComputePoolRequest {
 	return ApiDeleteFcpmV2ComputePoolRequest{
@@ -473,13 +474,13 @@ func (r ApiGetFcpmV2ComputePoolRequest) Execute() (FcpmV2ComputePool, *_nethttp.
 /*
 GetFcpmV2ComputePool Read a Compute Pool
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a compute pool.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the compute pool.
- @return ApiGetFcpmV2ComputePoolRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the compute pool.
+	@return ApiGetFcpmV2ComputePoolRequest
 */
 func (a *ComputePoolsFcpmV2ApiService) GetFcpmV2ComputePool(ctx _context.Context, id string) ApiGetFcpmV2ComputePoolRequest {
 	return ApiGetFcpmV2ComputePoolRequest{
@@ -490,7 +491,8 @@ func (a *ComputePoolsFcpmV2ApiService) GetFcpmV2ComputePool(ctx _context.Context
 }
 
 // Execute executes the request
-//  @return FcpmV2ComputePool
+//
+//	@return FcpmV2ComputePool
 func (a *ComputePoolsFcpmV2ApiService) GetFcpmV2ComputePoolExecute(r ApiGetFcpmV2ComputePoolRequest) (FcpmV2ComputePool, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -667,12 +669,12 @@ func (r ApiListFcpmV2ComputePoolsRequest) Execute() (FcpmV2ComputePoolList, *_ne
 /*
 ListFcpmV2ComputePools List of Compute Pools
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all compute pools.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListFcpmV2ComputePoolsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListFcpmV2ComputePoolsRequest
 */
 func (a *ComputePoolsFcpmV2ApiService) ListFcpmV2ComputePools(ctx _context.Context) ApiListFcpmV2ComputePoolsRequest {
 	return ApiListFcpmV2ComputePoolsRequest{
@@ -682,7 +684,8 @@ func (a *ComputePoolsFcpmV2ApiService) ListFcpmV2ComputePools(ctx _context.Conte
 }
 
 // Execute executes the request
-//  @return FcpmV2ComputePoolList
+//
+//	@return FcpmV2ComputePoolList
 func (a *ComputePoolsFcpmV2ApiService) ListFcpmV2ComputePoolsExecute(r ApiListFcpmV2ComputePoolsRequest) (FcpmV2ComputePoolList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -832,13 +835,13 @@ func (r ApiUpdateFcpmV2ComputePoolRequest) Execute() (FcpmV2ComputePool, *_netht
 /*
 UpdateFcpmV2ComputePool Update a Compute Pool
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update a compute pool.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the compute pool.
- @return ApiUpdateFcpmV2ComputePoolRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the compute pool.
+	@return ApiUpdateFcpmV2ComputePoolRequest
 */
 func (a *ComputePoolsFcpmV2ApiService) UpdateFcpmV2ComputePool(ctx _context.Context, id string) ApiUpdateFcpmV2ComputePoolRequest {
 	return ApiUpdateFcpmV2ComputePoolRequest{
@@ -849,7 +852,8 @@ func (a *ComputePoolsFcpmV2ApiService) UpdateFcpmV2ComputePool(ctx _context.Cont
 }
 
 // Execute executes the request
-//  @return FcpmV2ComputePool
+//
+//	@return FcpmV2ComputePool
 func (a *ComputePoolsFcpmV2ApiService) UpdateFcpmV2ComputePoolExecute(r ApiUpdateFcpmV2ComputePoolRequest) (FcpmV2ComputePool, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
