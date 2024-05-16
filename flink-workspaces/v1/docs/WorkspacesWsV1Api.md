@@ -240,7 +240,7 @@ Name | Type | Description  | Notes
 
 ## ListWsV1Workspaces
 
-> WsV1WorkspaceList ListWsV1Workspaces(ctx, organizationId, environmentId).SpecComputePool(specComputePool).PageSize(pageSize).PageToken(pageToken).Execute()
+> WsV1WorkspaceList ListWsV1Workspaces(ctx, organizationId, environmentId).SpecComputePool(specComputePool).All(all).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Workspaces
 
@@ -262,12 +262,13 @@ func main() {
     organizationId := TODO // string | The unique identifier for the organization.
     environmentId := "environmentId_example" // string | The unique identifier for the environment.
     specComputePool := "lfcp-00000" // string | Filter the results by exact match for spec.compute_pool.id. (optional)
+    all := true // bool | If true **and** the requester has either OrgAdmin or EnvAdmin roles, then return all workspaces in the environment. Otherwise return only those created by the caller (default). (optional) (default to false)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.WorkspacesWsV1Api.ListWsV1Workspaces(context.Background(), organizationId, environmentId).SpecComputePool(specComputePool).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.WorkspacesWsV1Api.ListWsV1Workspaces(context.Background(), organizationId, environmentId).SpecComputePool(specComputePool).All(all).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `WorkspacesWsV1Api.ListWsV1Workspaces``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -296,6 +297,7 @@ Name | Type | Description  | Notes
 
 
  **specComputePool** | **string** | Filter the results by exact match for spec.compute_pool.id. | 
+ **all** | **bool** | If true **and** the requester has either OrgAdmin or EnvAdmin roles, then return all workspaces in the environment. Otherwise return only those created by the caller (default). | [default to false]
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 

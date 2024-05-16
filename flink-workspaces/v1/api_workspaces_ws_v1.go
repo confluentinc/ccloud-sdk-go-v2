@@ -98,7 +98,9 @@ type WorkspacesWsV1Api interface {
 
 		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-	Retrieve a sorted, filtered, paginated list of all workspaces.
+	Retrieve a sorted, filtered, paginated list of workspaces.
+
+	By default, only workspaces created by the caller will be returned. See the `all` query parameter for more details.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param organizationId The unique identifier for the organization.
@@ -654,6 +656,7 @@ type ApiListWsV1WorkspacesRequest struct {
 	organizationId  string
 	environmentId   string
 	specComputePool *string
+	all             *bool
 	pageSize        *int32
 	pageToken       *string
 }
@@ -661,6 +664,12 @@ type ApiListWsV1WorkspacesRequest struct {
 // Filter the results by exact match for spec.compute_pool.id.
 func (r ApiListWsV1WorkspacesRequest) SpecComputePool(specComputePool string) ApiListWsV1WorkspacesRequest {
 	r.specComputePool = &specComputePool
+	return r
+}
+
+// If true **and** the requester has either OrgAdmin or EnvAdmin roles, then return all workspaces in the environment. Otherwise return only those created by the caller (default).
+func (r ApiListWsV1WorkspacesRequest) All(all bool) ApiListWsV1WorkspacesRequest {
+	r.all = &all
 	return r
 }
 
@@ -685,7 +694,9 @@ ListWsV1Workspaces List of Workspaces
 
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-Retrieve a sorted, filtered, paginated list of all workspaces.
+Retrieve a sorted, filtered, paginated list of workspaces.
+
+By default, only workspaces created by the caller will be returned. See the `all` query parameter for more details.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param organizationId The unique identifier for the organization.
@@ -729,6 +740,9 @@ func (a *WorkspacesWsV1ApiService) ListWsV1WorkspacesExecute(r ApiListWsV1Worksp
 
 	if r.specComputePool != nil {
 		localVarQueryParams.Add("spec.compute_pool", parameterToString(*r.specComputePool, ""))
+	}
+	if r.all != nil {
+		localVarQueryParams.Add("all", parameterToString(*r.all, ""))
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
