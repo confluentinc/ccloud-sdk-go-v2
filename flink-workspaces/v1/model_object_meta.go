@@ -43,6 +43,8 @@ type ObjectMeta struct {
 	Uid *string `json:"uid,omitempty"`
 	// The system-generated opaque version used for optimistic locking and client-side detection of changes. A client should include this version in an update request, instructing the update to fail if the workspace has since been modified (i.e., the workspace resource has a different version).
 	ResourceVersion *string `json:"resource_version,omitempty"`
+	// The system-generated and managed principal ID of the user who created the workspace.
+	CreatedBy *string `json:"created_by,omitempty"`
 	// The date and time at which this object was created. It is represented in RFC3339 format and is in UTC.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// The date and time at which this object was last updated. It is represented in RFC3339 format and is in UTC.
@@ -155,6 +157,38 @@ func (o *ObjectMeta) SetResourceVersion(v string) {
 	o.ResourceVersion = &v
 }
 
+// GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
+func (o *ObjectMeta) GetCreatedBy() string {
+	if o == nil || o.CreatedBy == nil {
+		var ret string
+		return ret
+	}
+	return *o.CreatedBy
+}
+
+// GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ObjectMeta) GetCreatedByOk() (*string, bool) {
+	if o == nil || o.CreatedBy == nil {
+		return nil, false
+	}
+	return o.CreatedBy, true
+}
+
+// HasCreatedBy returns a boolean if a field has been set.
+func (o *ObjectMeta) HasCreatedBy() bool {
+	if o != nil && o.CreatedBy != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedBy gets a reference to the given string and assigns it to the CreatedBy field.
+func (o *ObjectMeta) SetCreatedBy(v string) {
+	o.CreatedBy = &v
+}
+
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *ObjectMeta) GetCreatedAt() time.Time {
 	if o == nil || o.CreatedAt == nil {
@@ -224,6 +258,7 @@ func (o *ObjectMeta) Redact() {
 	o.recurseRedact(&o.Self)
 	o.recurseRedact(o.Uid)
 	o.recurseRedact(o.ResourceVersion)
+	o.recurseRedact(o.CreatedBy)
 	o.recurseRedact(o.CreatedAt)
 	o.recurseRedact(o.UpdatedAt)
 }
@@ -268,6 +303,9 @@ func (o ObjectMeta) MarshalJSON() ([]byte, error) {
 	}
 	if o.ResourceVersion != nil {
 		toSerialize["resource_version"] = o.ResourceVersion
+	}
+	if o.CreatedBy != nil {
+		toSerialize["created_by"] = o.CreatedBy
 	}
 	if o.CreatedAt != nil {
 		toSerialize["created_at"] = o.CreatedAt

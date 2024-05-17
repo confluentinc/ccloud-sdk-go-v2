@@ -2434,6 +2434,12 @@ components:
           example: YOp5OKKb6w6sm3IfizBj
           readOnly: true
           type: string
+        created_by:
+          description: The system-generated and managed principal ID of the user who
+            created the workspace.
+          example: u-abc123
+          readOnly: true
+          type: string
         created_at:
           description: The date and time at which this object was created. It is represented
             in RFC3339 format and is in UTC.

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Self** | **string** | Self is a Uniform Resource Locator (URL) at which an object can be addressed. This URL encodes the service location, API version, and other particulars necessary to locate the resource at a point in time | [readonly] 
 **Uid** | Pointer to **string** | The system-generated identifier of the resource that is unique across space and time. | [optional] [readonly] 
 **ResourceVersion** | Pointer to **string** | The system-generated opaque version used for optimistic locking and client-side detection of changes. A client should include this version in an update request, instructing the update to fail if the workspace has since been modified (i.e., the workspace resource has a different version). | [optional] [readonly] 
+**CreatedBy** | Pointer to **string** | The system-generated and managed principal ID of the user who created the workspace. | [optional] [readonly] 
 **CreatedAt** | Pointer to **time.Time** | The date and time at which this object was created. It is represented in RFC3339 format and is in UTC. | [optional] [readonly] 
 **UpdatedAt** | Pointer to **time.Time** | The date and time at which this object was last updated. It is represented in RFC3339 format and is in UTC. | [optional] [readonly] 
 
@@ -98,6 +99,31 @@ SetResourceVersion sets ResourceVersion field to given value.
 `func (o *ObjectMeta) HasResourceVersion() bool`
 
 HasResourceVersion returns a boolean if a field has been set.
+
+### GetCreatedBy
+
+`func (o *ObjectMeta) GetCreatedBy() string`
+
+GetCreatedBy returns the CreatedBy field if non-nil, zero value otherwise.
+
+### GetCreatedByOk
+
+`func (o *ObjectMeta) GetCreatedByOk() (*string, bool)`
+
+GetCreatedByOk returns a tuple with the CreatedBy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedBy
+
+`func (o *ObjectMeta) SetCreatedBy(v string)`
+
+SetCreatedBy sets CreatedBy field to given value.
+
+### HasCreatedBy
+
+`func (o *ObjectMeta) HasCreatedBy() bool`
+
+HasCreatedBy returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
