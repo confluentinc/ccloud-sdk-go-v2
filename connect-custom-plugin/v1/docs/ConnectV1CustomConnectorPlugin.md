@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **Cloud** | Pointer to **string** | Cloud provider where the Custom Connector Plugin archive is uploaded. | [optional] [default to "AWS"]
 **SensitiveConfigProperties** | Pointer to **[]string** | A sensitive property is a connector configuration property that must be hidden after a user enters property value when setting up connector. | [optional] 
 **UploadSource** | Pointer to [**ConnectV1CustomConnectorPluginUploadSourceOneOf**](ConnectV1CustomConnectorPluginUploadSourceOneOf.md) | [immutable] Upload source of Custom Connector Plugin. Only required in &#x60;create&#x60; request, will be ignored in &#x60;read&#x60;, &#x60;update&#x60; or &#x60;list&#x60;. | [optional] 
+**RuntimeLanguage** | Pointer to **string** | Runtime language of Custom Connector Plugin. | [optional] [default to "JAVA"]
 
 ## Methods
 
@@ -361,6 +362,31 @@ SetUploadSource sets UploadSource field to given value.
 `func (o *ConnectV1CustomConnectorPlugin) HasUploadSource() bool`
 
 HasUploadSource returns a boolean if a field has been set.
+
+### GetRuntimeLanguage
+
+`func (o *ConnectV1CustomConnectorPlugin) GetRuntimeLanguage() string`
+
+GetRuntimeLanguage returns the RuntimeLanguage field if non-nil, zero value otherwise.
+
+### GetRuntimeLanguageOk
+
+`func (o *ConnectV1CustomConnectorPlugin) GetRuntimeLanguageOk() (*string, bool)`
+
+GetRuntimeLanguageOk returns a tuple with the RuntimeLanguage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRuntimeLanguage
+
+`func (o *ConnectV1CustomConnectorPlugin) SetRuntimeLanguage(v string)`
+
+SetRuntimeLanguage sets RuntimeLanguage field to given value.
+
+### HasRuntimeLanguage
+
+`func (o *ConnectV1CustomConnectorPlugin) HasRuntimeLanguage() bool`
+
+HasRuntimeLanguage returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
