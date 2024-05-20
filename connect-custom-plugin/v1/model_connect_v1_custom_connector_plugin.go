@@ -61,6 +61,8 @@ type ConnectV1CustomConnectorPlugin struct {
 	SensitiveConfigProperties *[]string `json:"sensitive_config_properties,omitempty"`
 	// [immutable] Upload source of Custom Connector Plugin. Only required in `create` request, will be ignored in `read`, `update` or `list`.
 	UploadSource *ConnectV1CustomConnectorPluginUploadSourceOneOf `json:"upload_source,omitempty"`
+	// Runtime language of Custom Connector Plugin.
+	RuntimeLanguage *string `json:"runtime_language,omitempty"`
 }
 
 // NewConnectV1CustomConnectorPlugin instantiates a new ConnectV1CustomConnectorPlugin object
@@ -71,6 +73,8 @@ func NewConnectV1CustomConnectorPlugin() *ConnectV1CustomConnectorPlugin {
 	this := ConnectV1CustomConnectorPlugin{}
 	var cloud string = "AWS"
 	this.Cloud = &cloud
+	var runtimeLanguage string = "JAVA"
+	this.RuntimeLanguage = &runtimeLanguage
 	return &this
 }
 
@@ -81,6 +85,8 @@ func NewConnectV1CustomConnectorPluginWithDefaults() *ConnectV1CustomConnectorPl
 	this := ConnectV1CustomConnectorPlugin{}
 	var cloud string = "AWS"
 	this.Cloud = &cloud
+	var runtimeLanguage string = "JAVA"
+	this.RuntimeLanguage = &runtimeLanguage
 	return &this
 }
 
@@ -500,6 +506,38 @@ func (o *ConnectV1CustomConnectorPlugin) SetUploadSource(v ConnectV1CustomConnec
 	o.UploadSource = &v
 }
 
+// GetRuntimeLanguage returns the RuntimeLanguage field value if set, zero value otherwise.
+func (o *ConnectV1CustomConnectorPlugin) GetRuntimeLanguage() string {
+	if o == nil || o.RuntimeLanguage == nil {
+		var ret string
+		return ret
+	}
+	return *o.RuntimeLanguage
+}
+
+// GetRuntimeLanguageOk returns a tuple with the RuntimeLanguage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectV1CustomConnectorPlugin) GetRuntimeLanguageOk() (*string, bool) {
+	if o == nil || o.RuntimeLanguage == nil {
+		return nil, false
+	}
+	return o.RuntimeLanguage, true
+}
+
+// HasRuntimeLanguage returns a boolean if a field has been set.
+func (o *ConnectV1CustomConnectorPlugin) HasRuntimeLanguage() bool {
+	if o != nil && o.RuntimeLanguage != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRuntimeLanguage gets a reference to the given string and assigns it to the RuntimeLanguage field.
+func (o *ConnectV1CustomConnectorPlugin) SetRuntimeLanguage(v string) {
+	o.RuntimeLanguage = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *ConnectV1CustomConnectorPlugin) Redact() {
 	o.recurseRedact(o.ApiVersion)
@@ -515,6 +553,7 @@ func (o *ConnectV1CustomConnectorPlugin) Redact() {
 	o.recurseRedact(o.Cloud)
 	o.recurseRedact(o.SensitiveConfigProperties)
 	o.recurseRedact(o.UploadSource)
+	o.recurseRedact(o.RuntimeLanguage)
 }
 
 func (o *ConnectV1CustomConnectorPlugin) recurseRedact(v interface{}) {
@@ -587,6 +626,9 @@ func (o ConnectV1CustomConnectorPlugin) MarshalJSON() ([]byte, error) {
 	}
 	if o.UploadSource != nil {
 		toSerialize["upload_source"] = o.UploadSource
+	}
+	if o.RuntimeLanguage != nil {
+		toSerialize["runtime_language"] = o.RuntimeLanguage
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

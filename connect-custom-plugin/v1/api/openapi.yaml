@@ -260,6 +260,7 @@ paths:
               style: simple
       security:
       - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: List of Custom Connector Plugins
       tags:
       - Custom Connector Plugins (connect/v1)
@@ -607,6 +608,7 @@ paths:
               style: simple
       security:
       - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Create a Custom Connector Plugin
       tags:
       - Custom Connector Plugins (connect/v1)
@@ -617,13 +619,13 @@ paths:
             --url https://api.confluent.cloud/connect/v1/custom-connector-plugins \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"string","description":"string","documentation_link":"https://github.com/confluentinc/kafka-connect-datagen","connector_class":"io.confluent.kafka.connect.datagen.DatagenConnector","connector_type":"SOURCE","cloud":"AWS","sensitive_config_properties":["passwords","keys","tokens"],"upload_source":{"location":"PRESIGNED_URL_LOCATION","upload_id":"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66"}}'
+            --data '{"display_name":"string","description":"string","documentation_link":"https://github.com/confluentinc/kafka-connect-datagen","connector_class":"io.confluent.kafka.connect.datagen.DatagenConnector","connector_type":"SOURCE","cloud":"AWS","sensitive_config_properties":["passwords","keys","tokens"],"upload_source":{"location":"PRESIGNED_URL_LOCATION","upload_id":"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66"},"runtime_language":"JAVA"}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/connect/v1/custom-connector-plugins")
             .post(body)
@@ -641,19 +643,20 @@ paths:
           \",\\\"connector_type\\\":\\\"SOURCE\\\",\\\"cloud\\\":\\\"AWS\\\",\\\"\
           sensitive_config_properties\\\":[\\\"passwords\\\",\\\"keys\\\",\\\"tokens\\\
           \"],\\\"upload_source\\\":{\\\"location\\\":\\\"PRESIGNED_URL_LOCATION\\\
-          \",\\\"upload_id\\\":\\\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\\\"}}\")\n\
-          \n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \",\\\"upload_id\\\":\\\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\\\"},\\\"\
+          runtime_language\\\":\\\"JAVA\\\"}\")\n\n\treq, _ := http.NewRequest(\"\
+          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}"
+          payload = "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\"}"
 
           headers = {
               'content-type': "application/json",
@@ -705,7 +708,8 @@ paths:
             upload_source: {
               location: 'PRESIGNED_URL_LOCATION',
               upload_id: 'e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66'
-            }
+            },
+            runtime_language: 'JAVA'
           }));
           req.end();
       - lang: C
@@ -720,7 +724,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -729,7 +733,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /connect/v1/custom-connector-plugins/{id}:
     delete:
@@ -935,6 +939,7 @@ paths:
               style: simple
       security:
       - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Delete a Custom Connector Plugin
       tags:
       - Custom Connector Plugins (connect/v1)
@@ -942,14 +947,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url https://api.confluent.cloud/connect/v1/custom-connector-plugins/%7Bid%7D \
+            --url 'https://api.confluent.cloud/connect/v1/custom-connector-plugins/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/connect/v1/custom-connector-plugins/%7Bid%7D")
+            .url("https://api.confluent.cloud/connect/v1/custom-connector-plugins/{id}")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -957,7 +962,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/custom-connector-plugins/%7Bid%7D\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/custom-connector-plugins/{id}\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -970,7 +975,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/connect/v1/custom-connector-plugins/%7Bid%7D", headers=headers)
+          conn.request("DELETE", "/connect/v1/custom-connector-plugins/{id}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -984,7 +989,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/connect/v1/custom-connector-plugins/%7Bid%7D",
+            "path": "/connect/v1/custom-connector-plugins/{id}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1009,7 +1014,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/custom-connector-plugins/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/custom-connector-plugins/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1018,7 +1023,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/connect/v1/custom-connector-plugins/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/custom-connector-plugins/{id}");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1239,6 +1244,7 @@ paths:
               style: simple
       security:
       - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Read a Custom Connector Plugin
       tags:
       - Custom Connector Plugins (connect/v1)
@@ -1246,14 +1252,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://api.confluent.cloud/connect/v1/custom-connector-plugins/%7Bid%7D \
+            --url 'https://api.confluent.cloud/connect/v1/custom-connector-plugins/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/connect/v1/custom-connector-plugins/%7Bid%7D")
+            .url("https://api.confluent.cloud/connect/v1/custom-connector-plugins/{id}")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1261,7 +1267,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/custom-connector-plugins/%7Bid%7D\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/custom-connector-plugins/{id}\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1274,7 +1280,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/connect/v1/custom-connector-plugins/%7Bid%7D", headers=headers)
+          conn.request("GET", "/connect/v1/custom-connector-plugins/{id}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1288,7 +1294,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/connect/v1/custom-connector-plugins/%7Bid%7D",
+            "path": "/connect/v1/custom-connector-plugins/{id}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1313,7 +1319,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/custom-connector-plugins/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/custom-connector-plugins/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1322,7 +1328,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/connect/v1/custom-connector-plugins/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/custom-connector-plugins/{id}");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1602,6 +1608,7 @@ paths:
               style: simple
       security:
       - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Update a Custom Connector Plugin
       tags:
       - Custom Connector Plugins (connect/v1)
@@ -1609,18 +1616,18 @@ paths:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url https://api.confluent.cloud/connect/v1/custom-connector-plugins/%7Bid%7D \
+            --url 'https://api.confluent.cloud/connect/v1/custom-connector-plugins/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"string","description":"string","documentation_link":"https://github.com/confluentinc/kafka-connect-datagen","connector_class":"io.confluent.kafka.connect.datagen.DatagenConnector","connector_type":"SOURCE","cloud":"AWS","sensitive_config_properties":["passwords","keys","tokens"],"upload_source":{"location":"PRESIGNED_URL_LOCATION","upload_id":"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66"}}'
+            --data '{"display_name":"string","description":"string","documentation_link":"https://github.com/confluentinc/kafka-connect-datagen","connector_class":"io.confluent.kafka.connect.datagen.DatagenConnector","connector_type":"SOURCE","cloud":"AWS","sensitive_config_properties":["passwords","keys","tokens"],"upload_source":{"location":"PRESIGNED_URL_LOCATION","upload_id":"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66"},"runtime_language":"JAVA"}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\"}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/connect/v1/custom-connector-plugins/%7Bid%7D")
+            .url("https://api.confluent.cloud/connect/v1/custom-connector-plugins/{id}")
             .patch(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -1629,33 +1636,34 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/custom-connector-plugins/%7Bid%7D\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/custom-connector-plugins/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"string\\\"\
           ,\\\"description\\\":\\\"string\\\",\\\"documentation_link\\\":\\\"https://github.com/confluentinc/kafka-connect-datagen\\\
           \",\\\"connector_class\\\":\\\"io.confluent.kafka.connect.datagen.DatagenConnector\\\
           \",\\\"connector_type\\\":\\\"SOURCE\\\",\\\"cloud\\\":\\\"AWS\\\",\\\"\
           sensitive_config_properties\\\":[\\\"passwords\\\",\\\"keys\\\",\\\"tokens\\\
           \"],\\\"upload_source\\\":{\\\"location\\\":\\\"PRESIGNED_URL_LOCATION\\\
-          \",\\\"upload_id\\\":\\\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\\\"}}\")\n\
-          \n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \",\\\"upload_id\\\":\\\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\\\"},\\\"\
+          runtime_language\\\":\\\"JAVA\\\"}\")\n\n\treq, _ := http.NewRequest(\"\
+          PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}"
+          payload = "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\"}"
 
           headers = {
               'content-type': "application/json",
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/connect/v1/custom-connector-plugins/%7Bid%7D", payload, headers)
+          conn.request("PATCH", "/connect/v1/custom-connector-plugins/{id}", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1669,7 +1677,7 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/connect/v1/custom-connector-plugins/%7Bid%7D",
+            "path": "/connect/v1/custom-connector-plugins/{id}",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -1700,7 +1708,8 @@ paths:
             upload_source: {
               location: 'PRESIGNED_URL_LOCATION',
               upload_id: 'e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66'
-            }
+            },
+            runtime_language: 'JAVA'
           }));
           req.end();
       - lang: C
@@ -1708,23 +1717,23 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/custom-connector-plugins/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/custom-connector-plugins/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/connect/v1/custom-connector-plugins/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/custom-connector-plugins/{id}");
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /connect/v1/presigned-upload-url:
     post:
@@ -2390,6 +2399,15 @@ components:
           - $ref: '#/components/schemas/connect.v1.UploadSource.PresignedUrl'
           type: object
           x-one-of-name: ConnectV1CustomConnectorPluginUploadSourceOneOf
+        runtime_language:
+          default: JAVA
+          description: Runtime language of Custom Connector Plugin.
+          example: JAVA
+          type: string
+          x-extensible-enum:
+          - JAVA
+          - PYTHON
+          x-immutable: true
       type: object
     connect.v1.PresignedUrl:
       description: |-
@@ -2868,3 +2886,11 @@ components:
         Cloud API Key ID as the username and Cloud API Key Secret as the password.
       scheme: basic
       type: http
+    confluent-sts-access-token:
+      description: Authenticate with Confluent API using this credentials (JSON Web
+        Tokens) following OAuth 2.0.
+      flows:
+        clientCredentials:
+          scopes: {}
+          tokenUrl: https://api.confluent.cloud/sts/v1/oauth2/token
+      type: oauth2
