@@ -47,6 +47,8 @@ type ConnectV1PresignedUrlRequest struct {
 	ContentFormat *string `json:"content_format,omitempty"`
 	// Cloud provider where the Custom Connector Plugin archive is uploaded.
 	Cloud *string `json:"cloud,omitempty"`
+	// Runtime language of Custom Connector Plugin.
+	RuntimeLanguage *string `json:"runtime_language,omitempty"`
 }
 
 // NewConnectV1PresignedUrlRequest instantiates a new ConnectV1PresignedUrlRequest object
@@ -57,6 +59,8 @@ func NewConnectV1PresignedUrlRequest() *ConnectV1PresignedUrlRequest {
 	this := ConnectV1PresignedUrlRequest{}
 	var cloud string = "AWS"
 	this.Cloud = &cloud
+	var runtimeLanguage string = "JAVA"
+	this.RuntimeLanguage = &runtimeLanguage
 	return &this
 }
 
@@ -67,6 +71,8 @@ func NewConnectV1PresignedUrlRequestWithDefaults() *ConnectV1PresignedUrlRequest
 	this := ConnectV1PresignedUrlRequest{}
 	var cloud string = "AWS"
 	this.Cloud = &cloud
+	var runtimeLanguage string = "JAVA"
+	this.RuntimeLanguage = &runtimeLanguage
 	return &this
 }
 
@@ -262,6 +268,38 @@ func (o *ConnectV1PresignedUrlRequest) SetCloud(v string) {
 	o.Cloud = &v
 }
 
+// GetRuntimeLanguage returns the RuntimeLanguage field value if set, zero value otherwise.
+func (o *ConnectV1PresignedUrlRequest) GetRuntimeLanguage() string {
+	if o == nil || o.RuntimeLanguage == nil {
+		var ret string
+		return ret
+	}
+	return *o.RuntimeLanguage
+}
+
+// GetRuntimeLanguageOk returns a tuple with the RuntimeLanguage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectV1PresignedUrlRequest) GetRuntimeLanguageOk() (*string, bool) {
+	if o == nil || o.RuntimeLanguage == nil {
+		return nil, false
+	}
+	return o.RuntimeLanguage, true
+}
+
+// HasRuntimeLanguage returns a boolean if a field has been set.
+func (o *ConnectV1PresignedUrlRequest) HasRuntimeLanguage() bool {
+	if o != nil && o.RuntimeLanguage != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRuntimeLanguage gets a reference to the given string and assigns it to the RuntimeLanguage field.
+func (o *ConnectV1PresignedUrlRequest) SetRuntimeLanguage(v string) {
+	o.RuntimeLanguage = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *ConnectV1PresignedUrlRequest) Redact() {
 	o.recurseRedact(o.ApiVersion)
@@ -270,6 +308,7 @@ func (o *ConnectV1PresignedUrlRequest) Redact() {
 	o.recurseRedact(o.Metadata)
 	o.recurseRedact(o.ContentFormat)
 	o.recurseRedact(o.Cloud)
+	o.recurseRedact(o.RuntimeLanguage)
 }
 
 func (o *ConnectV1PresignedUrlRequest) recurseRedact(v interface{}) {
@@ -321,6 +360,9 @@ func (o ConnectV1PresignedUrlRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.Cloud != nil {
 		toSerialize["cloud"] = o.Cloud
+	}
+	if o.RuntimeLanguage != nil {
+		toSerialize["runtime_language"] = o.RuntimeLanguage
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
