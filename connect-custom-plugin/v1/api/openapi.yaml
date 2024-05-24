@@ -1959,13 +1959,13 @@ paths:
             --url https://api.confluent.cloud/connect/v1/presigned-upload-url \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"content_format":"ZIP","cloud":"AWS","runtime_language":"JAVA"}'
+            --data '{"content_format":"ZIP","cloud":"AWS"}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"content_format\":\"ZIP\",\"cloud\":\"AWS\",\"runtime_language\":\"JAVA\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"content_format\":\"ZIP\",\"cloud\":\"AWS\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/connect/v1/presigned-upload-url")
             .post(body)
@@ -1978,19 +1978,19 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/presigned-upload-url\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"content_format\\\":\\\"ZIP\\\"\
-          ,\\\"cloud\\\":\\\"AWS\\\",\\\"runtime_language\\\":\\\"JAVA\\\"}\")\n\n\
-          \treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          ,\\\"cloud\\\":\\\"AWS\\\"}\")\n\n\treq, _ := http.NewRequest(\"POST\",\
+          \ url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"content_format\":\"ZIP\",\"cloud\":\"AWS\",\"runtime_language\":\"JAVA\"}"
+          payload = "{\"content_format\":\"ZIP\",\"cloud\":\"AWS\"}"
 
           headers = {
               'content-type': "application/json",
@@ -2031,7 +2031,7 @@ paths:
             });
           });
 
-          req.write(JSON.stringify({content_format: 'ZIP', cloud: 'AWS', runtime_language: 'JAVA'}));
+          req.write(JSON.stringify({content_format: 'ZIP', cloud: 'AWS'}));
           req.end();
       - lang: C
         source: |-
@@ -2045,7 +2045,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"content_format\":\"ZIP\",\"cloud\":\"AWS\",\"runtime_language\":\"JAVA\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"content_format\":\"ZIP\",\"cloud\":\"AWS\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -2054,7 +2054,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"content_format\":\"ZIP\",\"cloud\":\"AWS\",\"runtime_language\":\"JAVA\"}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"content_format\":\"ZIP\",\"cloud\":\"AWS\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
 components:
   responses:
@@ -2453,14 +2453,6 @@ components:
           - AWS
           - GCP
           - AZURE
-        runtime_language:
-          description: Runtime language of Custom Connector Plugin.
-          example: JAVA
-          readOnly: true
-          type: string
-          x-extensible-enum:
-          - JAVA
-          - PYTHON
         upload_id:
           description: Unique identifier of this upload.
           example: e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66
@@ -2539,14 +2531,6 @@ components:
           - AWS
           - GCP
           - AZURE
-        runtime_language:
-          default: JAVA
-          description: Runtime language of Custom Connector Plugin.
-          example: JAVA
-          type: string
-          x-extensible-enum:
-          - JAVA
-          - PYTHON
       type: object
     connect.v1.UploadSource.PresignedUrl:
       description: Presigned URL of the uploaded Custom Connector Plugin archive.

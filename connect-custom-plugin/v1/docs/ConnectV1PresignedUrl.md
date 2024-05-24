@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **ContentFormat** | Pointer to **string** | Content format of the Custom Connector Plugin archive. | [optional] [readonly] 
 **Cloud** | Pointer to **string** | Cloud provider where the Custom Connector Plugin archive is uploaded. | [optional] [readonly] 
-**RuntimeLanguage** | Pointer to **string** | Runtime language of Custom Connector Plugin. | [optional] [readonly] 
 **UploadId** | Pointer to **string** | Unique identifier of this upload. | [optional] [readonly] 
 **UploadUrl** | Pointer to **string** | Upload URL for the Custom Connector Plugin archive. | [optional] [readonly] 
 **UploadFormData** | Pointer to **map[string]interface{}** | Upload form data of the Custom Connector Plugin. All values should be strings. | [optional] [readonly] 
@@ -131,31 +130,6 @@ SetCloud sets Cloud field to given value.
 `func (o *ConnectV1PresignedUrl) HasCloud() bool`
 
 HasCloud returns a boolean if a field has been set.
-
-### GetRuntimeLanguage
-
-`func (o *ConnectV1PresignedUrl) GetRuntimeLanguage() string`
-
-GetRuntimeLanguage returns the RuntimeLanguage field if non-nil, zero value otherwise.
-
-### GetRuntimeLanguageOk
-
-`func (o *ConnectV1PresignedUrl) GetRuntimeLanguageOk() (*string, bool)`
-
-GetRuntimeLanguageOk returns a tuple with the RuntimeLanguage field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRuntimeLanguage
-
-`func (o *ConnectV1PresignedUrl) SetRuntimeLanguage(v string)`
-
-SetRuntimeLanguage sets RuntimeLanguage field to given value.
-
-### HasRuntimeLanguage
-
-`func (o *ConnectV1PresignedUrl) HasRuntimeLanguage() bool`
-
-HasRuntimeLanguage returns a boolean if a field has been set.
 
 ### GetUploadId
 
