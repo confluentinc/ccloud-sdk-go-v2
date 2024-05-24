@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
 **ContentFormat** | Pointer to **string** | Archive format of the Custom Connector Plugin. | [optional] 
 **Cloud** | Pointer to **string** | Cloud provider where the Custom Connector Plugin archive is uploaded. | [optional] [default to "AWS"]
-**RuntimeLanguage** | Pointer to **string** | Runtime language of Custom Connector Plugin. | [optional] [default to "JAVA"]
 
 ## Methods
 
@@ -180,31 +179,6 @@ SetCloud sets Cloud field to given value.
 `func (o *ConnectV1PresignedUrlRequest) HasCloud() bool`
 
 HasCloud returns a boolean if a field has been set.
-
-### GetRuntimeLanguage
-
-`func (o *ConnectV1PresignedUrlRequest) GetRuntimeLanguage() string`
-
-GetRuntimeLanguage returns the RuntimeLanguage field if non-nil, zero value otherwise.
-
-### GetRuntimeLanguageOk
-
-`func (o *ConnectV1PresignedUrlRequest) GetRuntimeLanguageOk() (*string, bool)`
-
-GetRuntimeLanguageOk returns a tuple with the RuntimeLanguage field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRuntimeLanguage
-
-`func (o *ConnectV1PresignedUrlRequest) SetRuntimeLanguage(v string)`
-
-SetRuntimeLanguage sets RuntimeLanguage field to given value.
-
-### HasRuntimeLanguage
-
-`func (o *ConnectV1PresignedUrlRequest) HasRuntimeLanguage() bool`
-
-HasRuntimeLanguage returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
