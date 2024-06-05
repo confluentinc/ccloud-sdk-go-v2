@@ -11,6 +11,7 @@ blocks:
         - name: "git tag"
           commands:
             - checkout
+            - git fetch
             - git checkout master
             - git tag $TAG
             - git push origin $TAG
