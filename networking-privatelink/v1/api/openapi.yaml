@@ -1928,7 +1928,7 @@ paths:
         explode: true
         in: query
         name: spec.private_link_attachment
-        required: true
+        required: false
         schema:
           $ref: '#/components/schemas/SearchFilter'
         style: form
@@ -4119,6 +4119,10 @@ components:
               FAILED: PrivateLink attachment connection is in a failed state;
 
               DEPROVISIONING: PrivateLink attachment connection deprovisioning is in progress;
+
+              DISCONNECTED:|
+                PrivateLink attachment connection is in a disconnected state. This means the
+                private endpoint associated with this PrivateLink attachment connection has been deleted;
           example: READY
           readOnly: true
           type: string
@@ -4127,6 +4131,7 @@ components:
           - READY
           - FAILED
           - DEPROVISIONING
+          - DISCONNECTED
         error_code:
           description: Error code if PrivateLink attachment connection is in a failed
             state. May be used for programmatic error checking.

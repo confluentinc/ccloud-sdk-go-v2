@@ -242,10 +242,10 @@ import (
 
 func main() {
     environment := "env-00000" // string | Filter the results by exact match for environment.
-    specDisplayName := []string{"Inner_example"} // []string | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. (optional)
-    specCloud := []string{"Inner_example"} // []string | Filter the results by exact match for spec.cloud. Pass multiple times to see results matching any of the values. (optional)
-    specRegion := []string{"Inner_example"} // []string | Filter the results by exact match for spec.region. Pass multiple times to see results matching any of the values. (optional)
-    statusPhase := []string{"Inner_example"} // []string | Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values. (optional)
+    specDisplayName := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. (optional)
+    specCloud := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for spec.cloud. Pass multiple times to see results matching any of the values. (optional)
+    specRegion :=  // MultipleSearchFilter | Filter the results by exact match for spec.region. Pass multiple times to see results matching any of the values. (optional)
+    statusPhase :=  // MultipleSearchFilter | Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
@@ -273,10 +273,10 @@ Other parameters are passed through a pointer to a apiListNetworkingV1PrivateLin
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **environment** | **string** | Filter the results by exact match for environment. | 
- **specDisplayName** | **[]string** | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. | 
- **specCloud** | **[]string** | Filter the results by exact match for spec.cloud. Pass multiple times to see results matching any of the values. | 
- **specRegion** | **[]string** | Filter the results by exact match for spec.region. Pass multiple times to see results matching any of the values. | 
- **statusPhase** | **[]string** | Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values. | 
+ **specDisplayName** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. | 
+ **specCloud** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for spec.cloud. Pass multiple times to see results matching any of the values. | 
+ **specRegion** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for spec.region. Pass multiple times to see results matching any of the values. | 
+ **statusPhase** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 
