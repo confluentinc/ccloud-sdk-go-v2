@@ -38,7 +38,7 @@ import (
 type CmkV2ClusterSpecUpdate struct {
 	// The name of the cluster.
 	DisplayName *string `json:"display_name,omitempty"`
-	// The availability zone configuration of the cluster Note: The availability zone can be updated from Single to Multi-Zone for Basic and Standard clusters but cannot be downgraded from Multi-Zone to Single Zone.
+	// The availability zone configuration of the cluster
 	Availability *string `json:"availability,omitempty"`
 	// The configuration of the Kafka cluster.  Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.
 	Config *CmkV2ClusterSpecUpdateConfigOneOf `json:"config,omitempty"`
